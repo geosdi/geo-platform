@@ -21,10 +21,12 @@
     <inherits name="com.google.gwt.inject.Inject"/>
     
     <inherits name='org.gwtopenmaps.openlayers.OpenLayers' />
+    
+    <!-- ADDING GEOPLATFORM GOOGLE ANALYTICS SUPPORT -->
+    <inherits name='org.geosdi.geoplatform.gui.GPGoogleAnalyticsSupport' />
 	
     <source path="client" />
     <source path="shared" />
-    <source path="googleanalytics" />
 	
     <source path="configuration" />
     <source path="configuration/mvc" />

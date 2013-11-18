@@ -105,8 +105,6 @@ class FeatureAttributeRow implements IDateSelectedHandler {
         }
 
         conditionAttributeField.setFieldLabel(this.attributeDTO.getName());
-
-//        conditionAttributeField.setWidth(80);
     }
 
     @Override

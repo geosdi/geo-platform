@@ -36,19 +36,16 @@
 package org.geosdi.geoplatform.gui.client.widget.map.store;
 
 import com.extjs.gxt.ui.client.Registry;
+import com.google.gwt.user.client.History;
 import java.util.Iterator;
-import org.geosdi.geoplatform.gui.client.config.analytics.GoogleAnalyticsGinInjector;
 import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
 import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
-import org.geosdi.geoplatform.gui.googleanalytics.dispatcher.GPAnalyticsDispatcher;
-import org.geosdi.geoplatform.gui.googleanalytics.request.GPGoogleModuleRequest;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.geosdi.geoplatform.gui.impl.map.store.GPMapLayersStore;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.GPVectorBean;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
-import org.geosdi.geoplatform.gui.puregwt.googleanalytics.event.GPGoogleNavigationEvent;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.layers.event.CleanLegendEvent;
 import org.geosdi.geoplatform.gui.puregwt.layers.event.DisplayLegendEvent;
@@ -66,12 +63,6 @@ import org.gwtopenmaps.openlayers.client.layer.WMSParams;
  */
 public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
 
-    static {
-        analyticsDispatcher = GoogleAnalyticsGinInjector.MainInjector.getInstance().getAnalyticsDispatcher();
-    }
-
-    static final GPAnalyticsDispatcher analyticsDispatcher;
-    //
     private MapLayerBuilder layerBuilder;
     final private DisplayLegendEvent displayLegendEvent = new DisplayLegendEvent();
     final private HideLegendEvent hideLegendEvent = new HideLegendEvent();
@@ -140,7 +131,8 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
 
     @Override
     public void displayRaster(GPRasterBean rasterBean) {
-        IGPAccountDetail accountDetail = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
+        IGPAccountDetail accountDetail = Registry.get(
+                UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
         displayLegendEvent.setLayerBean(rasterBean);
         LayerHandlerManager.fireEvent(displayLegendEvent);
         if (containsLayer(rasterBean)) {
@@ -151,7 +143,8 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
                 layer.setZIndex(rasterBean.getzIndex());
                 layer.setIsVisible(true);
                 layer.redraw(true);
-                analyticsDispatcher.dispatchEvent(new GPGoogleNavigationEvent(new GPGoogleModuleRequest("#" + accountDetail.getUsername() + "-" + rasterBean.getName() + "-VISIBLE")));
+                History.newItem("#" + accountDetail.getUsername() + "-"
+                        + rasterBean.getName() + "-VISIBLE");
             }
         } else {
             WMS layer = (WMS) this.layerBuilder.buildLayer(rasterBean);
@@ -159,17 +152,20 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
             this.mapWidget.getMap().addLayer(layer);
             layer.setZIndex(rasterBean.getzIndex());
             layer.redraw(true);
-            analyticsDispatcher.dispatchEvent(new GPGoogleNavigationEvent(new GPGoogleModuleRequest("#" + accountDetail.getUsername() + "-" + rasterBean.getName() + "-ADDED")));
+            History.newItem("#" + accountDetail.getUsername() + "-"
+                    + rasterBean.getName() + "-ADDED");
         }
     }
 
     @Override
     public void hideLayer(GPLayerBean layerBean) {
-        IGPAccountDetail accountDetail = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
+        IGPAccountDetail accountDetail = Registry.get(
+                UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
         Layer layer = getLayer(layerBean);
         if (layer != null) {
             layer.setIsVisible(false);
-            analyticsDispatcher.dispatchEvent(new GPGoogleNavigationEvent(new GPGoogleModuleRequest("#" + accountDetail.getUsername() + "-" + layerBean.getName() + "-NOT-VISIBLE")));
+            History.newItem("#" + accountDetail.getUsername() + "-"
+                    + layerBean.getName() + "-NOT-VISIBLE");
         }
         this.hideLegendEvent.setLayerBean(layerBean);
         LayerHandlerManager.fireEvent(this.hideLegendEvent);
@@ -184,11 +180,13 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
      */
     @Override
     public void removeLayer(GPLayerBean layerBean) {
-        IGPAccountDetail accountDetail = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
+        IGPAccountDetail accountDetail = Registry.get(
+                UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
         Layer layer = getLayer(layerBean);
         if (layer != null) {
             this.mapWidget.getMap().removeLayer(layer);
-            analyticsDispatcher.dispatchEvent(new GPGoogleNavigationEvent(new GPGoogleModuleRequest("#" + accountDetail.getUsername() + "-" + layerBean.getName() + "-REMOVED")));
+            History.newItem("#" + accountDetail.getUsername() + "-"
+                    + layerBean.getName() + "-REMOVED");
         }
         this.layers.remove(layerBean);
         this.hideLegendEvent.setLayerBean(layerBean);
@@ -276,4 +274,5 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
             this.layerBuilder.generateBoundsTransformationFromMap(layer);
         }
     }
+
 }

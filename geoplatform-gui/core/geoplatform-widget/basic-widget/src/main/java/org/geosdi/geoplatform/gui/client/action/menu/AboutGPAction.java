@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.action.menu;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
+import com.google.gwt.user.client.History;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.widget.about.GPAboutWidget;
@@ -57,6 +58,7 @@ public class AboutGPAction extends MenuBaseAction {
 
     @Override
     public void componentSelected(MenuEvent ce) {
+        History.newItem("#About");
         this.aboutWidget.show();
     }
 

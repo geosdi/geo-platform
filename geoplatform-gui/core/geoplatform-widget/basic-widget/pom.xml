@@ -56,6 +56,33 @@
             <artifactId>geoplatform-resources</artifactId>
         </dependency>
         
+        <!-- GEOPLATFORM GOOGLE ANALYTICS SUPPORT -->
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-googleanalytics-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-googleanalytics-api</artifactId>
+            <classifier>sources</classifier>
+            <version>${project.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-googleanalytics-impl</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-googleanalytics-impl</artifactId>
+            <classifier>sources</classifier>
+            <version>${project.version}</version>
+        </dependency>
+        
         <!-- GIN -->
         <dependency>
             <groupId>com.google.gwt.inject</groupId>

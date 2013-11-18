@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.configuration.resources;
 
-import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.HeadElement;
 import com.google.gwt.dom.client.ScriptElement;
 
@@ -71,20 +70,6 @@ public class GeoPlatformJSInjector extends GPAbstractInjector {
         ScriptElement element = createScriptElement();
         element.setText(javascript);
         head.appendChild(element);
-    }
-
-    private static ScriptElement createScriptElement() {
-        ScriptElement script = Document.get().createScriptElement();
-        script.setAttribute(
-                ScriptKeywordEnum.SCRIPT_LANGUAGE.getValue().getKey(),
-                ScriptKeywordEnum.SCRIPT_LANGUAGE.getValue().getValue());
-        script.setAttribute(
-                ScriptKeywordEnum.SCRIPT_TYPE.getValue().getKey(),
-                ScriptKeywordEnum.SCRIPT_TYPE.getValue().getValue());
-        script.setAttribute(
-                ScriptKeywordEnum.SCRIPT_CHARSET.getValue().getKey(),
-                ScriptKeywordEnum.SCRIPT_CHARSET.getValue().getValue());
-        return script;
     }
 
 }

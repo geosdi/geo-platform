@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.configuration.resources;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.HeadElement;
+import com.google.gwt.dom.client.ScriptElement;
 
 /**
  *
@@ -59,6 +60,20 @@ class GPAbstractInjector {
         }
 
         return GPAbstractInjector.head;
+    }
+
+    protected static ScriptElement createScriptElement() {
+        ScriptElement script = Document.get().createScriptElement();
+        script.setAttribute(
+                ScriptKeywordEnum.SCRIPT_LANGUAGE.getValue().getKey(),
+                ScriptKeywordEnum.SCRIPT_LANGUAGE.getValue().getValue());
+        script.setAttribute(
+                ScriptKeywordEnum.SCRIPT_TYPE.getValue().getKey(),
+                ScriptKeywordEnum.SCRIPT_TYPE.getValue().getValue());
+        script.setAttribute(
+                ScriptKeywordEnum.SCRIPT_CHARSET.getValue().getKey(),
+                ScriptKeywordEnum.SCRIPT_CHARSET.getValue().getValue());
+        return script;
     }
 
 }

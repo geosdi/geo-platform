@@ -43,13 +43,15 @@ import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
 import org.geosdi.geoplatform.gui.client.i18n.BasicWidgetMessages;
 import org.geosdi.geoplatform.gui.client.widget.security.GPLoginAccessManager;
 import org.geosdi.geoplatform.gui.client.widget.security.SecurityLoginChainOfResponsibility;
+import org.geosdi.geoplatform.gui.googleanalytics.config.GPGoogleAnalyticsGinConfigurator;
 import org.geosdi.geoplatform.gui.model.message.CommandActionMediator;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-@GinModules(value = {BasicGinConfigurator.class})
+@GinModules(value = {BasicGinConfigurator.class,
+    GPGoogleAnalyticsGinConfigurator.class})
 public interface BasicGinInjector extends Ginjector {
 
     public static class MainInjector {
@@ -66,6 +68,7 @@ public interface BasicGinInjector extends Ginjector {
 
             return instance;
         }
+
     }
 
     public ToolbarActionRegistar getToolbarActionRegistar();
@@ -79,4 +82,5 @@ public interface BasicGinInjector extends Ginjector {
     public GPLoginAccessManager getLoginAccessManager();
 
     public BasicWidgetMessages getBasicWidgetMessages();
+
 }

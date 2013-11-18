@@ -56,18 +56,28 @@ public class EPSGLayerData extends GeoPlatformBeanModel {
     public static final String PUBLISH_ACTION = "publishAction";
     private static final long serialVersionUID = 3153334351994515962L;
 
+    private String fileName;
     private transient List<LayerPublishAction> layerPublishActions;
 
     public EPSGLayerData() {
     }
 
     public EPSGLayerData(String featureName, String epsgCode, String styleName,
-            boolean isShape, boolean isPresent) {
+            boolean isShape, boolean isPresent, String fileName) {
         this.setFeatureName(featureName);
         this.setEpsgCode(epsgCode);
         this.setStyleName(styleName);
         this.setIsShape(isShape);
         this.setIsPresent(isPresent);
+        this.fileName = fileName;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 
     public String getEpsgCode() {

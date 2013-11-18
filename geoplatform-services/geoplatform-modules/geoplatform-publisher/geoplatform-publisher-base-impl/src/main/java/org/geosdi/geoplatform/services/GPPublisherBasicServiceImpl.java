@@ -85,6 +85,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
     class LayerInfo {
 
         String name;
+        String fileName;
         boolean isShp;
         String epsg;
         String sld;
@@ -371,7 +372,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
      */
     private List<LayerInfo> getInfoFromCompressedFile(String userName, File file,
             String tempUserDir, String tempUserZipDir, String tempUserTifDir) {
-        logger.info("Call to getInfoFromCompressedShape");
+        logger.debug("Call to getInfoFromCompressedShape");
         System.setProperty("org.geotools.referencing.forceXY", "true");
         List<String> shpEntryNameList = Lists.<String>newArrayList();
         List<String> tifEntryNameList = Lists.<String>newArrayList();
@@ -451,12 +452,12 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
             int lastIndex = elementEntry.getName().lastIndexOf('/');
             int endNamePos = elementEntry.getName().lastIndexOf('.');
             String prjEntryName = elementEntry.getName().substring(lastIndex + 1, endNamePos).toLowerCase();
-            logger.info("elementEntryName: " + prjEntryName);
+            logger.debug("elementEntryName: " + prjEntryName);
             if (this.isDuplicatedName(prjEntryName, tifEntryNameList)) {//geotiff sld
-                logger.info("in geotiff");
+                logger.debug("in geotiff");
                 PublishUtility.extractEntryToFile(elementEntry, zipSrc, tempUserTifDir);
             } else {//shp sld
-                logger.info("in shp");
+                logger.debug("in shp");
                 PublishUtility.extractEntryToFile(elementEntry, zipSrc, tempUserDir);
             }
         }
@@ -481,26 +482,29 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
             info.isShp = false;
             String origName = tifFileName.substring(0, tifFileName.lastIndexOf(
                     "."));
-            info.name = userName + "_" + origName;
+            String idName = userName + "_" + origName;
+            info.name = new String(idName);
+            File oldGeotifFile = new File(tempUserTifDir, tifFileName);
             //
-            RESTCoverage coverage = this.restReader.getCoverage(userName, info.name, info.name);
+            RESTCoverage coverage = this.restReader.getCoverage(userName, idName, idName);
+            File newGeoTifFile;
             if (coverage != null) {
                 info.isPresent = Boolean.TRUE;
-                info.name += System.currentTimeMillis();
+                idName += System.currentTimeMillis();;
+                info.fileName = idName;
             }
+            newGeoTifFile = PublishUtility.copyFile(oldGeotifFile,
+                    tempUserTifDir, idName + ".tif", true);
             //
-            File oldGeotifFile = new File(tempUserTifDir, tifFileName);
-            File newGeoTifFile = PublishUtility.copyFile(oldGeotifFile,
-                    tempUserTifDir, info.name + ".tif", true);
             oldGeotifFile.delete();
             info.epsg = "EPSG:" + this.getCRSFromGeotiff(newGeoTifFile);
             String SLDFileName = origName + ".sld";
             File fileSLD = new File(tempUserTifDir, SLDFileName);
             if (fileSLD.exists()) {
                 File filePublished = PublishUtility.copyFile(fileSLD,
-                        tempUserTifDir, info.name + ".sld", true);
+                        tempUserTifDir, idName + ".sld", true);
                 fileSLD.delete();
-                info.sld = this.publishSLD(filePublished, info.name);
+                info.sld = this.publishSLD(filePublished, idName);
             } else {
                 info.sld = "default_raster";
             }
@@ -508,14 +512,14 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
             File fileTFW = new File(tempUserTifDir, TFWFileName);
             if (fileTFW.exists()) {
                 PublishUtility.copyFile(fileTFW,
-                        tempUserTifDir, info.name + ".tfw", true);
+                        tempUserTifDir, idName + ".tfw", true);
                 fileTFW.delete();
             }
             String PRJFileName = origName + ".prj";
             File filePRJ = new File(tempUserTifDir, PRJFileName);
             if (filePRJ.exists()) {
                 PublishUtility.copyFile(filePRJ,
-                        tempUserTifDir, info.name + ".prj", true);
+                        tempUserTifDir, idName + ".prj", true);
                 filePRJ.delete();
             }
             infoTifList.add(info);
@@ -674,13 +678,6 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
         if (layerStoreName != null && dataStoreName.equals(layerStoreName)) {
             result = Boolean.TRUE;
         }
-//        RESTDataStoreList workspaceDataStores = restReader.getDatastores(
-//                workspace);
-//        for (int i = 0; i < workspaceDataStores.size(); i++) {
-//            if (workspaceDataStores.get(i).getName().equals(dataStoreName)) {
-////                restReader.getLayer(layerName). Datastore(workspace, dataStoreName).;
-//            }
-//        }
         return result;
     }
 
@@ -692,16 +689,32 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
      * @return check whether the dataStore exists in the workspace
      */
     public boolean existsDataStore(String workspace, String dataStoreName) {
-        RESTDataStoreList workspaceDataStores = restReader.getDatastores(
-                workspace);
-        if (workspaceDataStores != null) {
-            for (int i = 0; i < workspaceDataStores.size(); i++) {
-                if (workspaceDataStores.get(i).getName().equals(dataStoreName)) {
-                    return true;
-                }
-            }
+        boolean result = false;
+        RESTDataStore restDataStores = restReader.getDatastore(
+                workspace, dataStoreName);
+        logger.debug("*** existsDataStore restDataStores value: " + restDataStores);
+        if (restDataStores != null) {
+            result = true;
         }
-        return false;
+        return result;
+    }
+
+    /**
+     * ************
+     *
+     * @param workspace
+     * @param csStoreName
+     * @return check whether the coverageStore exists in the workspace
+     */
+    public boolean existsCoverageStore(String workspace, String csStoreName) {
+        boolean result = false;
+        RESTCoverageStore restCoverageStores = restReader.getCoverageStore(
+                workspace, csStoreName);
+        logger.debug("*** existsCoverageStore restCoverageStores value: " + restCoverageStores);
+        if (restCoverageStores != null) {
+            result = true;
+        }
+        return result;
     }
 
     /**
@@ -755,35 +768,32 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
     //in two different workspaces (verify!)
     //It is not possible to publish different layers on the same "storeName"
     @Override
-    public InfoPreview analyzeTIFInPreview(String username, File file, boolean overwrite) throws ResourceNotFoundFault {
+    public InfoPreview analyzeTIFInPreview(String userName, File file, boolean overwrite) throws ResourceNotFoundFault {
         logger.info("Call to analyzeTIFInPreview");
-        InfoPreview infoPreview;
-        String userWorkspace = getWorkspace(username);
+        String userWorkspace = getWorkspace(userName);
         String epsg = "EPSG:" + this.getCRSFromGeotiff(file);
         String sld = "default_raster";
-//        String dataStoreName = username + "_" + PublishUtility.tifDirName;
-        String fileName = username + "_" + file.getName().substring(0,
+        String fileName = userName + "_" + file.getName().substring(0,
                 file.getName().lastIndexOf("."));
-        File fileInTifDir = null;
-        //TODO: Se il layer esiste ma è richiesto di fare overwrite bisogna sovrascriverlo: cancellare ed aggiungere il file
-        if (!existsDataStore(userWorkspace, fileName)) {
-            String pathInTifDir = this.geoportalDir + username + System.getProperty("file.separator")
-                    + PublishUtility.TIF_DIR_NAME + System.getProperty("file.separator");
-            fileInTifDir = PublishUtility.copyFile(file, pathInTifDir,
-                    fileName + ".tif", overwrite);
-            if (fileInTifDir == null) {
-                infoPreview = new InfoPreview(fileName,
-                        "The file " + fileInTifDir + " already exists, you must overwrite it");
-                return infoPreview;
-            }
-            infoPreview = new InfoPreview(RESTURL, userWorkspace, fileName,
-                    0d, 0d, 0d, 0d, epsg, sld, Boolean.FALSE, Boolean.FALSE);
-        } else {
-            infoPreview = getTIFURLByLayerName(username, fileName);
-            infoPreview.setMessage(
-                    "The data store " + fileName + " in " + userWorkspace + " already exists");
+
+        InfoPreview infoPreview = new InfoPreview(RESTURL, userWorkspace, new String(fileName),
+                0d, 0d, 0d, 0d, epsg, sld, Boolean.FALSE, Boolean.FALSE);
+
+        String pathInTifDir = this.geoportalDir + userName + System.getProperty("file.separator")
+                + PublishUtility.TIF_DIR_NAME + System.getProperty("file.separator");
+        if (existsCoverageStore(userWorkspace, fileName)) {
+            logger.debug("********** analyzeTIFInPreview existsCoverageStore(userWorkspace, fileName): "
+                    + userWorkspace + " - " + fileName);
+            infoPreview.setMessage("The data store " + fileName + " in " + userWorkspace
+                    + " already exists");
+            fileName = fileName + System.currentTimeMillis();
+            infoPreview.setFileName(fileName);
+            infoPreview.setIsPresent(Boolean.TRUE);
         }
+        File fileInTifDir = PublishUtility.copyFile(file, pathInTifDir,
+                fileName + ".tif", overwrite);
         this.addTifCleanerJob(userWorkspace, fileName, fileInTifDir.getAbsolutePath());
+        logger.debug("********** analyzeTIFInPreview: Info preview to return: " + infoPreview);
         return infoPreview;
     }
 
@@ -862,19 +872,32 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
         String userWorkspace = getWorkspace(userName);
         List<InfoPreview> infoPreviewList = Lists.<InfoPreview>newArrayList();
         for (InfoPreview infoPreview : previewLayerList) {
-            if (infoPreview.getLayerPublishAction() != null
-                    && infoPreview.getLayerPublishAction().equals(LayerPublishAction.RENAME)) {
-                if (this.restReader.getLayer(userWorkspace, userName + "_shp_" + infoPreview.getNewName()) != null
-                        || this.restReader.getLayer(userWorkspace, userName + "_" + infoPreview.getNewName()) != null) {
-                    throw new ResourceNotFoundFault("A layer named: " + infoPreview.getNewName() + " already exists");
-                }
-                boolean result = PublishUtility.manageRename(userName, infoPreview, tempUserDir);
-                //Pubblicare lo stile se ho duplicato il tif
-                if (result && !infoPreview.isIsShape()) {
-                    String SLDFileName = infoPreview.getDataStoreName() + ".sld";
-                    File fileSLD = new File(tempUserTifDir, SLDFileName);
-                    if (fileSLD.exists()) {
-                        infoPreview.setStyleName(this.publishSLD(fileSLD, infoPreview.getDataStoreName()));
+            if (infoPreview.getLayerPublishAction() != null) {
+                if (infoPreview.isIsShape()) {
+                    if (this.restReader.getLayer(userWorkspace, userName + "_shp_" + infoPreview.getNewName()) != null) {
+                        throw new ResourceNotFoundFault("A layer named: " + infoPreview.getNewName() + " already exists");
+                    }
+                    if (infoPreview.getLayerPublishAction().equals(LayerPublishAction.RENAME)) {
+                        PublishUtility.manageRename(userName, infoPreview, tempUserDir);
+                    }
+                } else {
+                    if (this.restReader.getLayer(userWorkspace, userName + "_" + infoPreview.getNewName()) != null) {
+                        throw new ResourceNotFoundFault("A layer named: " + infoPreview.getNewName() + " already exists");
+                    }
+                    boolean result = PublishUtility.manageRename(userName, infoPreview, tempUserDir);
+                    //Pubblicare lo stile se ho duplicato il tif
+                    if (result) {
+                        String SLDFileName = infoPreview.getDataStoreName() + ".sld";
+                        File fileSLD = new File(tempUserTifDir, SLDFileName);
+                        if (fileSLD.exists()) {
+                            infoPreview.setStyleName(this.publishSLD(fileSLD, infoPreview.getDataStoreName()));
+                        }
+                        String coverageStoreName = new String(infoPreview.getDataStoreName());
+                        logger.debug("********** processEPSGResult Before removing coverage store: " + coverageStoreName);
+                        if (restReader.getCoverage(userWorkspace, coverageStoreName, coverageStoreName) != null) {
+                            logger.debug("********** processEPSGResult removing coverage store: " + coverageStoreName);
+                            restPublisher.removeCoverageStore(userWorkspace, coverageStoreName, Boolean.TRUE);
+                        }
                     }
                 }
             }
@@ -939,6 +962,14 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
                 File fileInTifDir = new File(tempUserTifDir, info.name + ".tif");
                 infoPreview = new InfoPreview(RESTURL, userWorkspace, info.name,
                         0d, 0d, 0d, 0d, info.epsg, info.sld, Boolean.FALSE, info.isPresent);
+                /**
+                 * Solo per i tiff è possibile avere già un nuome nuovo in fase
+                 * di preview visto che vengono immediatamente posizionati nella
+                 * cartella utente in cui potrebbe già essere presente un tif
+                 * con lo stesso nome e per evitare collisioni si assegna un
+                 * suffisso al nome del file tif e dei suoi associati sul disco
+                 */
+                infoPreview.setFileName(info.fileName);
                 this.addTifCleanerJob(userWorkspace, info.name, fileInTifDir.getAbsolutePath());
             }
             infoPreviewList.add(infoPreview);
@@ -950,9 +981,9 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
             File fileInTifDir, String fileName, String epsg, String sld) {
         InfoPreview infoPreview;
         GeoTiffOverviews.overviewTiff(overviewsConfiguration, fileInTifDir.getAbsolutePath());
-        if (restReader.getCoverage(userWorkspace, fileName, fileName) != null) {
-            restPublisher.removeCoverageStore(userWorkspace, fileName, Boolean.TRUE);
-        }
+//        if (restReader.getCoverage(userWorkspace, fileName, fileName) != null) {
+//            restPublisher.removeCoverageStore(userWorkspace, fileName, Boolean.TRUE);
+//        }
         try {
 //                logger.info(
 //                        "\n INFO: STYLE TO PUBLISH " + info.sld + " NAME :" + info.name);
@@ -978,7 +1009,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
                         + " into the " + userWorkspace + " workspace");
             }
         } catch (Exception ex) {
-            logger.info("Some problems occured when publishing " + fileName
+            logger.error("Some problems occured when publishing " + fileName
                     + " into the " + userWorkspace + " workspace");
             ex.printStackTrace();
             infoPreview = new InfoPreview(fileName,
@@ -1024,7 +1055,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
                         "Some problems occured when publishing " + info.name + " into the " + userWorkspace + " workspace");
             }
         } catch (Exception ex) {
-            logger.info("Some problems occured when publishing " + info.name + " into the " + userWorkspace + " workspace");
+            logger.error("Some problems occured when publishing " + info.name + " into the " + userWorkspace + " workspace");
             ex.printStackTrace();
             infoPreview = new InfoPreview(info.name,
                     "Some problems occured when publishing " + info.name + " into the " + userWorkspace + " workspace");

@@ -167,6 +167,7 @@ public class PublisherService implements IPublisherService {
             if (previewLayer.getPublishAction() != null) {
                 infoPreview.setLayerPublishAction(LayerPublishAction.valueOf(previewLayer.getPublishAction()));
                 infoPreview.setNewName(previewLayer.getNewName());
+                infoPreview.setFileName(previewLayer.getFileName());
             }
             infoPreviewList.add(infoPreview);
             logger.info("Layer preview transformed: " + infoPreview.toString());

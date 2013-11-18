@@ -68,6 +68,7 @@ public class PreviewLayer implements GPLayerBean, Serializable {
     private double upperX;
     private double upperY;
     private String message;
+    private String fileName;
     private String styleName;
     private boolean isShape;
     private boolean isPresent;
@@ -103,6 +104,14 @@ public class PreviewLayer implements GPLayerBean, Serializable {
         this.styleName = styleName;
         this.isShape = isShape;
         this.isPresent = isPresent;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 
     public boolean isIsShape() {

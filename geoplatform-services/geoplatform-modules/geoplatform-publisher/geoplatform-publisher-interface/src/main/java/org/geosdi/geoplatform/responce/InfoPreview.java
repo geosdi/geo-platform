@@ -60,6 +60,7 @@ public class InfoPreview {
     //
     private LayerPublishAction layerPublishAction;
     private String newName = "";
+    private String fileName = "";
 
     
     public InfoPreview(String url, String workspace, String layerName,
@@ -204,6 +205,14 @@ public class InfoPreview {
         this.newName = newName;
     }
 
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
     @Override
     public String toString() {
         return "InfoPreview{" + "dataSource=" + dataSource + ", workspace="
@@ -211,6 +220,7 @@ public class InfoPreview {
                 + ", lowerY=" + lowerY + ", upperX=" + upperX + ", upperY="
                 + upperY + ", crs=" + crs + ", isShape=" + isShape
                 + ", isPresent=" + isPresent + ", newName=" + newName
+                + ", fileName=" + fileName
                 + ", layerPublishAction=" + layerPublishAction 
                 + ", message=" + message + ", styleName=" + styleName + '}';
     }

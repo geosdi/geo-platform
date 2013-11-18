@@ -214,40 +214,50 @@ public class PublishUtility {
         String tempUserTifDir = PublishUtility.createDir(tempUserDir + PublishUtility.TIF_DIR_NAME);
         LayerPublishAction layerPublishAction = infoPreview.getLayerPublishAction();
         String newName = userName + "_" + infoPreview.getNewName();
+
         if (layerPublishAction != null && layerPublishAction.equals(LayerPublishAction.RENAME)
                 && newName != null && !newName.equalsIgnoreCase(infoPreview.getDataStoreName())) {
-            String origName = infoPreview.getDataStoreName();
-            String fileName = tempUserTifDir + origName + ".tif";
+            //Rinominare il file nuovo con il nuovo nome
+
+        } else if (layerPublishAction != null && layerPublishAction.equals(LayerPublishAction.OVERRIDE)) {
+            //Cancellare il vecchio file e rinominare il file nuovo con il vecchio nome
+            logger.debug("renameTif in Override operation");
+            String fileName = tempUserTifDir + infoPreview.getDataStoreName() + ".tif";
             File previousFile = new File(fileName);
-            previousFile.renameTo(new File(tempUserTifDir + newName + ".tif"));
             previousFile.delete();
-            //
-            String SLDFileName = origName + ".sld";
-            File fileSLD = new File(tempUserTifDir, SLDFileName);
-            if (fileSLD.exists()) {
-                File filePublished = PublishUtility.copyFile(fileSLD,
-                        tempUserTifDir, newName + ".sld", true);
-                fileSLD.delete();
-            }
-            //
-            String TFWFileName = origName + ".tfw";
-            File fileTFW = new File(tempUserTifDir, TFWFileName);
-            if (fileTFW.exists()) {
-                PublishUtility.copyFile(fileTFW,
-                        tempUserTifDir, newName + ".tfw", true);
-                fileTFW.delete();
-            }
-            String PRJFileName = origName + ".prj";
-            File filePRJ = new File(tempUserTifDir, PRJFileName);
-            if (filePRJ.exists()) {
-                PublishUtility.copyFile(filePRJ,
-                        tempUserTifDir, newName + ".prj", true);
-                filePRJ.delete();
-            }
-            infoPreview.setDataStoreName(newName);
-            result = Boolean.TRUE;
-            logger.debug("Tif renamed: " + result);
+            newName = infoPreview.getDataStoreName();
+            logger.debug("renameTif after Override operation: " + newName);
         }
+        String origName = infoPreview.getFileName();
+        String fileName = tempUserTifDir + origName + ".tif";
+        File previousFile = new File(fileName);
+        previousFile.renameTo(new File(tempUserTifDir + newName + ".tif"));
+        //
+        String SLDFileName = origName + ".sld";
+        File fileSLD = new File(tempUserTifDir, SLDFileName);
+        if (fileSLD.exists()) {
+            File filePublished = PublishUtility.copyFile(fileSLD,
+                    tempUserTifDir, newName + ".sld", true);
+            fileSLD.delete();
+        }
+        //
+        String TFWFileName = origName + ".tfw";
+        File fileTFW = new File(tempUserTifDir, TFWFileName);
+        if (fileTFW.exists()) {
+            PublishUtility.copyFile(fileTFW,
+                    tempUserTifDir, newName + ".tfw", true);
+            fileTFW.delete();
+        }
+        String PRJFileName = origName + ".prj";
+        File filePRJ = new File(tempUserTifDir, PRJFileName);
+        if (filePRJ.exists()) {
+            PublishUtility.copyFile(filePRJ,
+                    tempUserTifDir, newName + ".prj", true);
+            filePRJ.delete();
+        }
+        infoPreview.setDataStoreName(newName);
+        result = Boolean.TRUE;
+        logger.debug("Tif renamed: " + result);
         return result;
     }
 
@@ -377,7 +387,7 @@ public class PublishUtility {
             }
             out.close();
         } catch (Exception ex) {
-            logger.info("Exception compressing: " + zipFileName + " - " + ex);
+            logger.error("Exception compressing: " + zipFileName + " - " + ex);
             return null;
         }
         return out;

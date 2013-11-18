@@ -88,7 +88,8 @@ public class EPSGTablePanel extends GeoPlatformContentPanel {
         for (PreviewLayer previewLayer : epsgLayerList) {
             EPSGLayerData epsgLayerData = new EPSGLayerData(previewLayer.
                     getTitle(), previewLayer.getCrs(), previewLayer.getStyleName(),
-                    previewLayer.isIsShape(), previewLayer.isIsPresent());
+                    previewLayer.isIsShape(), previewLayer.isIsPresent(),
+                    previewLayer.getFileName());
             this.store.add(epsgLayerData);
         }
         this.manageProcessEPSGButton();
@@ -209,7 +210,7 @@ public class EPSGTablePanel extends GeoPlatformContentPanel {
 
                                             @Override
                                             public void onCommandFailure(Throwable exception) {
-                                                GeoPlatformMessage.errorMessage("Publisher Error", 
+                                                GeoPlatformMessage.errorMessage("Publisher Error",
                                                         exception.getMessage());//TODO:i18n
                                                 System.out.println("EPSGTablePanel Exception: " + exception.toString());
                                                 System.out.println("Stack Trace Exception: " + exception.getStackTrace());

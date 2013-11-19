@@ -100,7 +100,11 @@ public class CasEraseFeatureCommand implements
             return new EraseFeatureResponse(result);
 
         } catch (Exception ex) {
-            throw new GeoPlatformException(ex.getMessage());
+            logger.error("####################CasEraseFeatureCommand "
+                    + "error : {}", ex.getMessage());
+            throw new GeoPlatformException(ex.getMessage().contains(
+                    "unexpected element (uri:\"\", local:\"html\")")
+                    ? "Unauthorized Service" : ex.getMessage());
         }
     }
 

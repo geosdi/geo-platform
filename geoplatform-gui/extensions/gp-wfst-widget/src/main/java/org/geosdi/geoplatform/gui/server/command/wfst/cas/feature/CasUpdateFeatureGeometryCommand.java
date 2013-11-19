@@ -99,14 +99,18 @@ public class CasUpdateFeatureGeometryCommand implements
 
             boolean result = this.gpCasTransactionService.transactionUpdate(url,
                     request.getTypeName(), request.getFid(), Arrays.asList(
-                            request.buildGeometryAttribute()));
+                    request.buildGeometryAttribute()));
 
             logger.debug("#################### Found {} ", result);
 
             return new UpdateFeatureGeometryResponse(result);
 
         } catch (Exception ex) {
-            throw new GeoPlatformException(ex.getMessage());
+            logger.error("####################CasUpdateFeatureGeometryCommand "
+                    + "error : {}", ex.getMessage());
+            throw new GeoPlatformException(ex.getMessage().contains(
+                    "unexpected element (uri:\"\", local:\"html\")")
+                    ? "Unauthorized Service" : ex.getMessage());
         }
     }
 

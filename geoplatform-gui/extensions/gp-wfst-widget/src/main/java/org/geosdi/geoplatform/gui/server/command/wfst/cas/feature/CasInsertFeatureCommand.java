@@ -96,7 +96,11 @@ public class CasInsertFeatureCommand implements
             return new InsertFeatureResponse(result);
 
         } catch (Exception ex) {
-            throw new GeoPlatformException(ex.getMessage());
+            logger.error("####################CasInsertFeatureCommand "
+                    + "error : {}", ex.getMessage());
+            throw new GeoPlatformException(ex.getMessage().contains(
+                    "unexpected element (uri:\"\", local:\"html\")")
+                    ? "Unauthorized Service" : ex.getMessage());
         }
     }
 

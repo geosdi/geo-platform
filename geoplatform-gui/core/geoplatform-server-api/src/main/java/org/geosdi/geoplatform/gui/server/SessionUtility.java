@@ -48,7 +48,7 @@ import org.springframework.stereotype.Service;
 @Service("sessionUtility")
 public class SessionUtility {
 
-    private static final int SESSIONE_EXPIRATION = 1800;
+    private static final int SESSIONE_EXPIRATION = 86400;
 
     public enum SessionProperty {
 

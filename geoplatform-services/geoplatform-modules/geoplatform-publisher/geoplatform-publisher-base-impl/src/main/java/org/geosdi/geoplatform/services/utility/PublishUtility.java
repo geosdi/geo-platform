@@ -86,6 +86,10 @@ public class PublishUtility {
         return file.delete();
     }
 
+    public static boolean deleteDir(String directory) {
+        return deleteDir(new File(directory));
+    }
+
     public static boolean deleteDir(File directory) {
         if (directory.isDirectory()) {
             String[] children = directory.list();
@@ -194,8 +198,7 @@ public class PublishUtility {
                 try {
                     zipSrc.close();
                     //Cancella cartella rename
-                    File renameDir = new File(renameDirPath);
-                    PublishUtility.deleteDir(renameDir);
+                    PublishUtility.deleteDir(renameDirPath);
                     logger.debug("********* ManageRename succesfully removed rename dir");
                 } catch (IOException ex) {
                 }

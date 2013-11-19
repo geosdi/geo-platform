@@ -48,30 +48,19 @@ public class GPLayerProgressBar extends GeoPlatformProgressBar implements
         LayersProgressBarEventHandler {
 
     public GPLayerProgressBar() {
+        super(LayerModuleConstants.INSTANCE.GPLayerProgressBar_titleText(), Boolean.TRUE);
         LayerHandlerManager.addHandler(LayersProgressBarEventHandler.TYPE, this);
     }
 
     @Override
     public void showProgressBar(String message) {
-        super.createProgressBar(LayerModuleConstants.INSTANCE.GPLayerProgressBar_titleText(),
-                message, LayerModuleConstants.INSTANCE.GPLayerProgressBar_progressText());
 //        System.out.println("Show progressbar");
-        super.show();
+        super.show(message);
     }
 
     @Override
     public void closeProgressBar() {
 //        System.out.println("Close progressbar");
-        super.close();
-    }
-
-    @Override
-    public void updateProgressBarText(String message) {
-        if (super.initialized == false) {
-            super.createProgressBar(LayerModuleConstants.INSTANCE.GPLayerProgressBar_titleText(), 
-                    message, LayerModuleConstants.INSTANCE.GPLayerProgressBar_progressText());
-        } else {
-            super.updateText(message);
-        }
+        super.hide();
     }
 }

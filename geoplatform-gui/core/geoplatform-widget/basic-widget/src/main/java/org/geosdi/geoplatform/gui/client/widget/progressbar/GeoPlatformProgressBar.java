@@ -35,27 +35,66 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.progressbar;
 
-import com.extjs.gxt.ui.client.widget.MessageBox;
-import com.extjs.gxt.ui.client.widget.MessageBox.MessageBoxType;
+import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
+import com.extjs.gxt.ui.client.widget.ProgressBar;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GeoPlatformProgressBar extends MessageBox {
+public abstract class GeoPlatformProgressBar extends GeoPlatformWindow {
 
-    protected boolean initialized;
+    private final ProgressBar pb = new ProgressBar();
 
-    public void createProgressBar(String title, String msg, String progressText) {
-        if (!initialized) {
-            super.setTitleHtml(title);
-            super.setMessage(msg);
-            super.setType(MessageBoxType.WAIT);
-            super.setProgressHtml(progressText);
-            super.setButtons("");
-            this.initialized = true;
-        }
+    private final String progressBarTitle;
+
+    public GeoPlatformProgressBar(String progressBarTitle, Boolean lazy) {
+        super(lazy);
+        this.progressBarTitle = progressBarTitle;
+    }
+
+    @Override
+    public void addComponent() {
+        super.add(pb);
+    }
+
+    @Override
+    public void initSize() {
+        super.setSize(300, 60);
+    }
+
+    public final void updateProgressBarText(String message) {
+        this.pb.updateText(message);
+    }
+
+    @Override
+    public final void show() {
+        super.show();
+        pb.auto();
+    }
+
+    public final void show(String message) {
+        this.show();
+        this.pb.updateText(message);
+    }
+
+    @Override
+    public final void hide() {
+        this.pb.reset();
+        super.hide();
+    }
+
+    @Override
+    public void setWindowProperties() {
+        super.setHeadingHtml(progressBarTitle);
+        super.setClosable(false);
+        super.setModal(true);
+
+        super.setResizable(false);
+        super.setPlain(true);
+        super.setFocusWidget(pb);
+        super.setMinHeight(60);
     }
 
 }

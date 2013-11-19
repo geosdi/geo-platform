@@ -35,9 +35,13 @@
  */
 package org.geosdi.geoplatform.services.utility;
 
+import com.google.common.collect.Maps;
 import it.geosolutions.geoserver.rest.encoder.datastore.GSPostGISDatastoreEncoder;
 import it.geosolutions.geoserver.rest.manager.GeoServerRESTStoreManager;
+import java.io.Serializable;
+import java.util.Map;
 import javax.annotation.Resource;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -46,7 +50,7 @@ import org.springframework.stereotype.Service;
  * @email nazzareno.sileno@geosdi.org
  */
 @Service("postGISUtility")
-public class PostGISUtility {
+public class PostGISUtility implements InitializingBean {
 
     @Resource(name = "sharedRestStoreManager")
     private GeoServerRESTStoreManager restStoreManager;
@@ -67,6 +71,8 @@ public class PostGISUtility {
     private @Value("configurator{password_db_postgis_datastore_publisher}")
     String passwordDBPostgisDatastore;
 
+    private Map<String, Serializable> outputDataStoreMap;
+
     public GeoServerRESTStoreManager generateEncoder(String storeName, String workspace) {
 //        RESTDataStore store = reader.getDatastore(workspace, storeName);
 //        System.out.println("************ Store Retrieved: ");
@@ -77,8 +83,7 @@ public class PostGISUtility {
          * try { manager = new GeoServerRESTStoreManager( new URL(geoserverUrl),
          * geoserverUser, geoserverPassword); } catch (MalformedURLException ex)
          * { Logger.getLogger(PostGISUtility.class.getName()).log(Level.SEVERE,
-         * null, ex);
-        }
+         * null, ex); }
          */
         GSPostGISDatastoreEncoder encoder = new GSPostGISDatastoreEncoder(storeName);
         encoder.setEnabled(true);
@@ -100,6 +105,22 @@ public class PostGISUtility {
         restStoreManager.create(workspace, encoder);
 //        }
         return restStoreManager;
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        this.outputDataStoreMap = Maps.<String, Serializable>newHashMap();
+        outputDataStoreMap.put("dbtype", "postgis");
+        outputDataStoreMap.put("host", this.hostPostgisDatastore);
+        outputDataStoreMap.put("port", this.portPostgisDatastore);
+        outputDataStoreMap.put("schema", "public");
+        outputDataStoreMap.put("database", this.dbNamePostgisDatastore);
+        outputDataStoreMap.put("user", this.userNameDBPostgisDatastore);
+        outputDataStoreMap.put("passwd", this.passwordDBPostgisDatastore);
+    }
+
+    public Map<String, Serializable> getOutputDataStoreMap() {
+        return outputDataStoreMap;
     }
 
 //    public GSPostGISDatastoreEncoder generateEncoder(String storeName) {

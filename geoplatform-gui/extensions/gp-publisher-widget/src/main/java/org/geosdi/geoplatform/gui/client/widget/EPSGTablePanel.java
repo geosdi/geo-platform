@@ -58,6 +58,7 @@ import org.geosdi.geoplatform.gui.client.i18n.PublisherWidgetConstants;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.model.EPSGLayerData;
 import org.geosdi.geoplatform.gui.client.model.PreviewLayer;
+import org.geosdi.geoplatform.gui.client.widget.progressbar.PublisherProgressBar;
 import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
 import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
@@ -190,6 +191,7 @@ public class EPSGTablePanel extends GeoPlatformContentPanel {
                 new SelectionListener<ButtonEvent>() {
                     @Override
                     public void componentSelected(ButtonEvent ce) {
+                        PublisherProgressBar.getInstance().show("Processing data");//TODO: i18n
                         store.commitChanges();
                         processEPSGRequest.setPreviewLayerList(store.getModels());
                         ClientCommandDispatcher.getInstance().execute(
@@ -204,12 +206,14 @@ public class EPSGTablePanel extends GeoPlatformContentPanel {
                                     @Override
                                     public void onCommandSuccess(
                                             ProcessEPSGResultResponse response) {
+                                                PublisherProgressBar.getInstance().hide();
                                                 event.setResult(response.getResult());
                                                 GPHandlerManager.fireEvent(event);
                                             }
 
                                             @Override
                                             public void onCommandFailure(Throwable exception) {
+                                                PublisherProgressBar.getInstance().hide();
                                                 GeoPlatformMessage.errorMessage("Publisher Error",
                                                         exception.getMessage());//TODO:i18n
                                                 System.out.println("EPSGTablePanel Exception: " + exception.toString());

@@ -33,19 +33,23 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.wfs.dispatcher;
-
-import org.geosdi.geoplatform.gui.client.widget.progressbar.GeoPlatformProgressBar;
+package org.geosdi.geoplatform.gui.client.widget.progressbar;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class WFSDispatcherProgressBar extends GeoPlatformProgressBar {
+public class PublisherProgressBar extends GeoPlatformProgressBar {
 
-    public WFSDispatcherProgressBar() {
-        super("WFS Progress Bar", Boolean.TRUE);
+    private static final PublisherProgressBar instance = new PublisherProgressBar();
+
+    public static PublisherProgressBar getInstance() {
+        return instance;
+    }
+
+    private PublisherProgressBar() {
+        super("Publisher Progress Bar", Boolean.TRUE);//TODO: i18n
     }
 
 }

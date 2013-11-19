@@ -54,6 +54,7 @@ import org.geosdi.geoplatform.responce.InfoPreview;
 import org.geosdi.geoplatform.responce.LayerAttribute;
 import org.geosdi.geoplatform.services.geotiff.GeoTiffOverviews;
 import org.geosdi.geoplatform.services.geotiff.GeoTiffOverviewsConfiguration;
+import org.geosdi.geoplatform.services.utility.Ds2dsConfiguration;
 import org.geosdi.geoplatform.services.utility.PostGISUtility;
 import org.geosdi.geoplatform.services.utility.PublishUtility;
 import org.geotools.coverage.grid.GridCoverage2D;
@@ -110,6 +111,11 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
     //
     @Autowired
     private PostGISUtility postGISUtility;
+    //
+    @Autowired
+    private ShapeAppender shapeAppender;
+    @Autowired
+    private Ds2dsConfiguration ds2dsConfiguration;
 
     public GPPublisherBasicServiceImpl(String RESTURL, String RESTUSER, String RESTPW,
             String geoportalDir) {
@@ -425,7 +431,8 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
             this.putEntryInTheRightDir(prjEntryList, zipSrc, tempUserTifDir, tempUserDir, tifEntryNameList);
             // fine decompressione
         } catch (Exception e) {
-            logger.error("ERRORE : " + e);
+            logger.error("ERROR: " + e);
+            throw new IllegalArgumentException("ERROR: " + e);
         } finally {
             try {
                 zipSrc.close();
@@ -874,14 +881,19 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
         for (InfoPreview infoPreview : previewLayerList) {
             if (infoPreview.getLayerPublishAction() != null) {
                 if (infoPreview.isIsShape()) {
-                    if (this.restReader.getLayer(userWorkspace, userName + "_shp_" + infoPreview.getNewName()) != null) {
+                    if (infoPreview.getNewName() != null && !infoPreview.getNewName().isEmpty()
+                            && this.restReader.getLayer(userWorkspace, userName + "_shp_" + infoPreview.getNewName()) != null) {
                         throw new ResourceNotFoundFault("A layer named: " + infoPreview.getNewName() + " already exists");
                     }
                     if (infoPreview.getLayerPublishAction().equals(LayerPublishAction.RENAME)) {
                         PublishUtility.manageRename(userName, infoPreview, tempUserDir);
+                    } else if (infoPreview.getLayerPublishAction().equals(LayerPublishAction.OVERRIDE)) {
+                        ds2dsConfiguration.setForcePurgeAllData(Boolean.TRUE);
+                        this.shapeAppender.importFile(tempUserDir, new File(infoPreview.getFileName()));
                     }
                 } else {
-                    if (this.restReader.getLayer(userWorkspace, userName + "_" + infoPreview.getNewName()) != null) {
+                    if (infoPreview.getNewName() != null && !infoPreview.getNewName().isEmpty()
+                            && this.restReader.getLayer(userWorkspace, userName + "_" + infoPreview.getNewName()) != null) {
                         throw new ResourceNotFoundFault("A layer named: " + infoPreview.getNewName() + " already exists");
                     }
                     boolean result = PublishUtility.manageRename(userName, infoPreview, tempUserDir);
@@ -905,10 +917,18 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
             info.epsg = infoPreview.getCrs();
             info.name = infoPreview.getDataStoreName();
             info.sld = infoPreview.getStyleName();
-            if (infoPreview.isIsShape()) {
+            if (infoPreview.isIsShape() && infoPreview.getLayerPublishAction() != null
+                    && infoPreview.getLayerPublishAction().equals(LayerPublishAction.APPEND)) {
+                logger.info("***** processEPSGResult: Executing shape append for zip file: " + infoPreview.getFileName());
+                ds2dsConfiguration.setForcePurgeAllData(Boolean.FALSE);
+                ds2dsConfiguration.setPurgeData(Boolean.FALSE);
+                this.shapeAppender.importFile(tempUserDir, new File(infoPreview.getFileName()));
+                infoPreview = getSHPURLByDataStoreName(userWorkspace, infoPreview.getDataStoreName());
+                infoPreview.setUrl(infoPreview.getUrl() + "/wms");
+            } else if (infoPreview.isIsShape()) {
                 info.isShp = Boolean.TRUE;
                 infoPreview = this.publishShpInPreview(userWorkspace, info, tempUserZipDir);
-            } else {
+            } else if (!infoPreview.isIsShape()) {
                 info.isShp = Boolean.FALSE;
                 File fileInTifDir = new File(tempUserTifDir, info.name + ".tif");
                 infoPreview = this.publishTifInPreview(userName, userWorkspace,
@@ -957,6 +977,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
                 infoPreview = new InfoPreview(RESTURL, userWorkspace, info.name,
                         0d, 0d, 0d, 0d, info.epsg, info.sld, Boolean.TRUE, info.isPresent);
                 File fileShp = new File(tempUserZipDir, info.name + ".zip");
+                infoPreview.setFileName(fileShp.getAbsolutePath());
                 this.addShpCleanerJob(userWorkspace, info.name, fileShp.getAbsolutePath());
             } else {
                 File fileInTifDir = new File(tempUserTifDir, info.name + ".tif");
@@ -1033,7 +1054,6 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
         } else {
             postGISUtility.generateEncoder(datatStoreName, userWorkspace);
         }
-//        restPublisher.createPostGISDatastore(userName, encoder);
 
         // create the <layername>.zip file
         String fileName = tempUserZipDir + info.name + ".zip";
@@ -1044,7 +1064,6 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
         try {
             logger.info("INFO EPSG: " + info.epsg);
             boolean published = restPublisher.publishShp(userWorkspace, datatStoreName, info.name, tempFile, info.epsg, info.sld);
-//            boolean published = restPublisher.publishDBLayer(userWorkspace, datatStoreName, info.name, tempFile, info.epsg, info.sld);
             if (published) {
                 logger.info(info.name + " correctly published in the " + userWorkspace + " workspace " + info.name);
                 infoPreview = getSHPURLByDataStoreName(userWorkspace, info.name);

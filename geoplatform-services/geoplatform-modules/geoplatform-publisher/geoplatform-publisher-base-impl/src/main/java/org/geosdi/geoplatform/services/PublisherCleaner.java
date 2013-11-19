@@ -53,8 +53,8 @@ public class PublisherCleaner {
 
     @PreDestroy
     public void destroy() {
-        PublishUtility.deleteDir(new File(PublishUtility.TMPDIR + "zip"));
-        PublishUtility.deleteDir(new File(PublishUtility.TMPDIR + "shp"));
+        PublishUtility.deleteDir(PublishUtility.TMPDIR + "zip");
+        PublishUtility.deleteDir(PublishUtility.TMPDIR + "shp");
         logger.info("-------------------> DESTROY STARTUP-GEO-PLATFORM SERVICE");
     }
 }

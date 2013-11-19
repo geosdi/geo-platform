@@ -48,6 +48,7 @@ import org.geosdi.geoplatform.gui.client.event.AbstractUploadEvent;
 import org.geosdi.geoplatform.gui.client.i18n.BasicWidgetConstants;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
+import org.geosdi.geoplatform.gui.client.widget.progressbar.GeoPlatformProgressBar;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
@@ -64,6 +65,7 @@ public class GPFileUploader {
     private Button buttonSubmit;
     private String htmlResult;
     private AbstractUploadEvent uploadEvent;
+    private UploaderProgressBar uploaderProgressBar;
 
     public GPFileUploader(String uploadAction, AbstractUploadEvent uploadEvent, GPExtensions... extensions) {
         this.createUploadComponent(uploadAction, extensions);
@@ -76,6 +78,7 @@ public class GPFileUploader {
 
     private void createUploadComponent(String uploadAction,
             final GPExtensions... extensions) {
+        uploaderProgressBar = new UploaderProgressBar();
         formPanel = new FormPanel();
         formPanel.setAction(GWT.getModuleBaseURL() + uploadAction);
         formPanel.setEncoding(FormPanel.ENCODING_MULTIPART);
@@ -90,16 +93,17 @@ public class GPFileUploader {
 
         buttonSubmit = new Button(ButtonsConstants.INSTANCE.submitText(),
                 new SelectionListener<ButtonEvent>() {
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                formPanel.submit();
-                if ((fileUpload.getFilename() != null)
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                        uploaderProgressBar.show("Uploading...");
+                        formPanel.submit();
+                        if ((fileUpload.getFilename() != null)
                         && isValidExtensions(fileUpload.getFilename(), extensions)) {
-                    LayoutManager.getInstance().getStatusMap().setBusy(
-                            BasicWidgetConstants.INSTANCE.GPFileUploader_uploadInProgressText());
-                }
-            }
-        });
+                            LayoutManager.getInstance().getStatusMap().setBusy(
+                                    BasicWidgetConstants.INSTANCE.GPFileUploader_uploadInProgressText());
+                        }
+                    }
+                });
         panel.add(getButtonSubmit());
 
         // Add an event handler to the form.
@@ -160,6 +164,7 @@ public class GPFileUploader {
                     LayoutManager.getInstance().getStatusMap().setStatus(
                             BasicWidgetConstants.INSTANCE.GPFileUploader_failedStatusText(), EnumSearchStatus.STATUS_NO_SEARCH.toString());
                 }
+                uploaderProgressBar.hide();
             }
         });
     }
@@ -179,4 +184,13 @@ public class GPFileUploader {
     public Button getButtonSubmit() {
         return buttonSubmit;
     }
+
+    class UploaderProgressBar extends GeoPlatformProgressBar {
+
+        protected UploaderProgressBar() {
+            super("Uploader Progress Bar", Boolean.TRUE);//TODO: i18n
+        }
+
+    }
+
 }

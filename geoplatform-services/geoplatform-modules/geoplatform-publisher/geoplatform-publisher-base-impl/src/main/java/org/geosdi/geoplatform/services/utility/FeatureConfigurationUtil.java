@@ -38,6 +38,7 @@ public class FeatureConfigurationUtil {
     private final static Logger LOGGER = LoggerFactory.getLogger(FeatureConfigurationUtil.class);
 
     /**
+     * @param config
      * @return the datastore, or null if none found or exception encountered
      */
     public static DataStore createDataStore(FeatureConfiguration config) {

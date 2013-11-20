@@ -21,6 +21,7 @@
  */
 package org.geosdi.geoplatform.services.utility;
 
+import com.google.common.collect.Maps;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
@@ -47,7 +48,7 @@ public class FeatureConfiguration implements Cloneable {
 
     // feature type (schema) name
     private String typeName;
-	// feature coordinate system (EPSG code): if not defined it will be read from
+    // feature coordinate system (EPSG code): if not defined it will be read from
     // the input feature 
     private String crs;
 
@@ -80,7 +81,7 @@ public class FeatureConfiguration implements Cloneable {
      */
     public Map<String, Serializable> getDataStore() {
         if (this.dataStore == null) {
-            this.dataStore = new HashMap<String, Serializable>();
+            this.dataStore = Maps.<String, Serializable>newHashMap();
         }
         return dataStore;
     }
@@ -156,7 +157,7 @@ public class FeatureConfiguration implements Cloneable {
 //        	fc.crs = this.crs;
 //        	fc.coordinateReferenceSystem = this.coordinateReferenceSystem;
             if (this.dataStore != null) {
-                fc.dataStore = new HashMap<String, Serializable>();
+                fc.dataStore = Maps.<String, Serializable>newHashMap();
                 for (Map.Entry<String, Serializable> entry : dataStore.entrySet()) {
                     fc.dataStore.put(entry.getKey(), entry.getValue());
                 }

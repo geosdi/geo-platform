@@ -35,15 +35,14 @@
  */
 package org.geosdi.geoplatform.services;
 
-import ch.qos.logback.core.joran.spi.ActionException;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.zip.ZipEntry;
@@ -249,33 +248,6 @@ public class ShapeAppender {
         }
     }
 
-//    /**
-//     * Builds the output event, with information about the imported data.
-//     *
-//     * @param outputEvents
-//     * @param schema
-//     * @return
-//     * @throws FileNotFoundException
-//     * @throws ActionException
-//     */
-//    protected EventObject buildOutputEvent() throws FileNotFoundException, ResourceNotFoundFault {
-//        updateTask("Building output event");
-//        FileOutputStream outStream = null;
-//        try {
-//            String tempDir = System.getProperty("java.io.tmpdir");  
-//            File outputDir = new File(tempDir);
-//            File outputFile = new File(outputDir.getAbsolutePath(), "output.xml");
-//
-//            outStream = new FileOutputStream(outputFile);
-//            configuration.getOutputFeature().toXML(outStream);
-//            updateTask("Output event built");
-//            return new FileSystemEvent(outputFile, FileSystemEventType.FILE_ADDED);
-//        } catch (Exception e) {
-//            throw new ResourceNotFoundFault("Error writing output event");
-//        } finally {
-//            IOUtils.closeQuietly(outStream);
-//        }
-//    }
     /**
      * Creates an iterator on the source features
      *
@@ -333,7 +305,7 @@ public class ShapeAppender {
                 try {
                     cx = jdbcDS.getDataSource().getConnection();
                     PrimaryKey pk = pkFinder.getPrimaryKey(jdbcDS, jdbcDS.getDatabaseSchema(), schema.getTypeName(), cx);
-                    List<PrimaryKeyColumn> pkc = new ArrayList<PrimaryKeyColumn>();
+                    List<PrimaryKeyColumn> pkc = Lists.<PrimaryKeyColumn>newArrayList();
                     pks = pk.getColumns();
                     for (PrimaryKeyColumn el : pks) {
                         if (el instanceof NonIncrementingPrimaryKeyColumn) {
@@ -421,7 +393,7 @@ public class ShapeAppender {
      * @return
      */
     protected Map<String, String> compareSchemas(SimpleFeatureType destSchema, SimpleFeatureType schema) {
-        Map<String, String> diffs = new HashMap<String, String>();
+        Map<String, String> diffs = Maps.<String, String>newHashMap();
         for (AttributeDescriptor ad : destSchema.getAttributeDescriptors()) {
             String attribute = ad.getLocalName();
             if (schema.getDescriptor(attribute) == null) {
@@ -559,7 +531,7 @@ public class ShapeAppender {
         if (configuration.isProjectOnMappings()) {
             return configuration.getAttributeMappings().keySet();
         } else {
-            List<String> attributes = new ArrayList<String>();
+            List<String> attributes = Lists.<String>newArrayList();
             for (AttributeDescriptor attr : sourceSchema.getAttributeDescriptors()) {
                 attributes.add(getAttributeMapping(attr.getLocalName()));
             }
@@ -688,7 +660,7 @@ public class ShapeAppender {
      *
      * @return
      * @throws IOException
-     * @throws ActionException
+     * @throws ResourceNotFoundFault
      */
     protected DataStore createOutputDataStore() throws IOException, ResourceNotFoundFault {
         logger.debug("Connecting to output DataStore");

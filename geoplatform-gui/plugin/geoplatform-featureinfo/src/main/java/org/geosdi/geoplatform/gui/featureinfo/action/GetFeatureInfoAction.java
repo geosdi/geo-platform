@@ -40,15 +40,19 @@ import com.extjs.gxt.ui.client.widget.button.ToggleButton;
 import org.geosdi.geoplatform.gui.action.toggle.MapToggleAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.i18n.FeatureInfoModuleConstants;
+import org.geosdi.geoplatform.gui.configuration.action.event.ToggleEnableHandler;
 import org.geosdi.geoplatform.gui.featureinfo.widget.GPFeatureInfoWidget;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
+import org.geosdi.geoplatform.gui.puregwt.togglebutton.GPToggleButtonHandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.togglebutton.GPToggleButtonHandlerManager.GPToggleButtonKeySource;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  *
  */
-public class GetFeatureInfoAction extends MapToggleAction {
+public class GetFeatureInfoAction extends MapToggleAction implements
+        ToggleEnableHandler {
 
     private GPFeatureInfoWidget featureWidget;
 
@@ -56,6 +60,10 @@ public class GetFeatureInfoAction extends MapToggleAction {
         super(mapWidget, BasicWidgetResources.ICONS.info(),
                 FeatureInfoModuleConstants.INSTANCE.GetFeatureInfoAction_tooltipText());
         this.featureWidget = new GPFeatureInfoWidget(mapWidget);
+
+        GPToggleButtonHandlerManager.addHandlerToSource(TYPE,
+                GPToggleButtonKeySource.GET_FEATURE_INFO,
+                this);
     }
 
     /**
@@ -90,6 +98,15 @@ public class GetFeatureInfoAction extends MapToggleAction {
         this.mapWidget.deactivateInfo();
     }
 
+    @Override
+    public void onToggle(boolean toggle) {
+        ToggleButton toggleButton = ((ToggleButton) super.getButton());
+        toggleButton.toggle(toggle);
+
+        ButtonEvent buttonEvent = new ButtonEvent(toggleButton);
+        componentSelected(buttonEvent);
+    }
+
     private void deactivateAllMapControl() {
         if (mapWidget.isFeatureOperationEnable()) {
             mapWidget.deactivateFeatureOperation();
@@ -99,4 +116,5 @@ public class GetFeatureInfoAction extends MapToggleAction {
             mapWidget.deactivateModifyFeature();
         }
     }
+
 }

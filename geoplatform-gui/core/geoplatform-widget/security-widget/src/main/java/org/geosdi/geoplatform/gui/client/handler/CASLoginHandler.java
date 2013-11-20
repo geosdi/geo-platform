@@ -39,7 +39,7 @@ import org.geosdi.geoplatform.gui.client.command.login.cas.CASLoginRequest;
 import org.geosdi.geoplatform.gui.client.command.login.cas.CASLoginResponse;
 import org.geosdi.geoplatform.gui.client.config.BasicGinInjector;
 import org.geosdi.geoplatform.gui.client.config.SecurityGinInjector;
-import org.geosdi.geoplatform.gui.client.widget.security.ILoginHandler;
+import org.geosdi.geoplatform.gui.client.widget.security.AbstractLoginHandler;
 import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
 import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 
@@ -47,7 +47,7 @@ import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class CASLoginHandler extends ILoginHandler {
+public class CASLoginHandler extends AbstractLoginHandler {
 
     @Override
     public void doLogin() {

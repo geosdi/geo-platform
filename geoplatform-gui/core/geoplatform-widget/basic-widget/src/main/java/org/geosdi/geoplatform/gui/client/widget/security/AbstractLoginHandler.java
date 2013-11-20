@@ -39,11 +39,11 @@ package org.geosdi.geoplatform.gui.client.widget.security;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public abstract class ILoginHandler {
+public abstract class AbstractLoginHandler {
 
-    protected ILoginHandler nextHandler;
+    protected AbstractLoginHandler nextHandler;
 
-    public void setNextHandler(ILoginHandler nextHandler) {
+    public void setNextHandler(AbstractLoginHandler nextHandler) {
         this.nextHandler = nextHandler;
     }
 

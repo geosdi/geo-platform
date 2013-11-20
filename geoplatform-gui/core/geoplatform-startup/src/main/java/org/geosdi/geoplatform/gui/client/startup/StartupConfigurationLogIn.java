@@ -42,7 +42,7 @@ import org.geosdi.geoplatform.gui.client.config.BasicGinInjector;
 import org.geosdi.geoplatform.gui.client.handler.SSOLoginHandler;
 import org.geosdi.geoplatform.gui.client.i18n.StartupStrategyModuleConstants;
 import org.geosdi.geoplatform.gui.client.model.security.XMPPLoginDetails;
-import org.geosdi.geoplatform.gui.client.widget.security.ILoginHandler;
+import org.geosdi.geoplatform.gui.client.widget.security.AbstractLoginHandler;
 import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
 import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
@@ -60,8 +60,8 @@ public class StartupConfigurationLogIn implements IStartupConfigurationStrategy 
     @Override
     public void initGeoPlatformConfiguration() {
         BasicGinInjector injector = BasicGinInjector.MainInjector.getInstance();
-        ILoginHandler cASLoginHandler = new SSOLoginHandler();
-        injector.getSecurityLoginChainOfResponsibility().setLoginHandler(cASLoginHandler);
+        AbstractLoginHandler loginHandler = new SSOLoginHandler();
+        injector.getSecurityLoginChainOfResponsibility().setLoginHandler(loginHandler);
         injector.getLoginAccessManager().doLogin(GeoPlatformEvents.INIT_GEO_PLATFORM,
                 StartupStrategyModuleConstants.INSTANCE.StartupConfigurationLogIn_basicLoginMessageText());
         XMPPGetDataLoginRequest xMPPCASGetDataLoginRequest = new XMPPGetDataLoginRequest();

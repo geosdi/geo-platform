@@ -40,7 +40,7 @@ import org.geosdi.geoplatform.gui.client.command.login.sso.SSOLoginRequest;
 import org.geosdi.geoplatform.gui.client.command.login.sso.SSOLoginResponse;
 import org.geosdi.geoplatform.gui.client.config.BasicGinInjector;
 import org.geosdi.geoplatform.gui.client.config.SecurityGinInjector;
-import org.geosdi.geoplatform.gui.client.widget.security.ILoginHandler;
+import org.geosdi.geoplatform.gui.client.widget.security.AbstractLoginHandler;
 import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
 import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
@@ -49,7 +49,7 @@ import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class SSOLoginHandler extends ILoginHandler {
+public class SSOLoginHandler extends AbstractLoginHandler {
 
     @Override
     public void doLogin() {

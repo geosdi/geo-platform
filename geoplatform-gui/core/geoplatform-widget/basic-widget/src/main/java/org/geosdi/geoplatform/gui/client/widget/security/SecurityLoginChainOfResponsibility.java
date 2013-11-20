@@ -44,9 +44,9 @@ import javax.inject.Singleton;
 @Singleton
 public class SecurityLoginChainOfResponsibility {
 
-    private ILoginHandler loginHandler;
+    private AbstractLoginHandler loginHandler;
 
-    public void setLoginHandler(ILoginHandler loginHandler) {
+    public void setLoginHandler(AbstractLoginHandler loginHandler) {
         this.loginHandler = loginHandler;
     }
 

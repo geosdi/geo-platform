@@ -49,8 +49,7 @@ import org.geosdi.geoplatform.gui.configuration.action.event.HasActionEnableHand
  * @email giuseppe.lascaleia@geosdi.org
  */
 public abstract class GeoPlatformAction<X extends ComponentEvent>
-        extends SelectionListener<X>
-        implements HasActionEnableHandler {
+        extends SelectionListener<X> implements HasActionEnableHandler {
 
     protected String id;
     protected boolean enabled;
@@ -86,8 +85,10 @@ public abstract class GeoPlatformAction<X extends ComponentEvent>
     }
 
     @Override
-    public HandlerRegistration addActionEnableHandler(ActionEnableHandler actionHandler) {
-        return this.handlerManager.addHandler(ActionEnableEvent.TYPE, actionHandler);
+    public HandlerRegistration addActionEnableHandler(
+            ActionEnableHandler actionHandler) {
+        return this.handlerManager.addHandler(ActionEnableEvent.TYPE,
+                actionHandler);
     }
 
     /**
@@ -98,4 +99,5 @@ public abstract class GeoPlatformAction<X extends ComponentEvent>
      */
     @Override
     public abstract void componentSelected(X e);
+
 }

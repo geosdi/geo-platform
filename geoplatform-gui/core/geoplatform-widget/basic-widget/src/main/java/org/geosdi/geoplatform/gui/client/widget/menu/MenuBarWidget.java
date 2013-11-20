@@ -91,4 +91,5 @@ public class MenuBarWidget {
     public MenuBar getBar() {
         return bar;
     }
+
 }

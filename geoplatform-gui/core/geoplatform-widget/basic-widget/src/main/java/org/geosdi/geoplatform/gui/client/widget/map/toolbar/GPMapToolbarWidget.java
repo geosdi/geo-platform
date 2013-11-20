@@ -87,17 +87,17 @@ import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
  */
 public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
         implements IGeoPlatformToolbar {
-    
+
     protected GeoPlatformMap geoPlatformMap;
     private List<WidgetGenericTool<IGeoPlatformToolbar>> tools;
-    
+
     public GPMapToolbarWidget(GeoPlatformMap geoPlatformMap,
             List<WidgetGenericTool<IGeoPlatformToolbar>> tools) {
         this.geoPlatformMap = geoPlatformMap;
         setTools(tools);
         initialize();
     }
-    
+
     @Override
     public void initialize() {
         for (WidgetGenericTool<IGeoPlatformToolbar> tool : tools) {
@@ -123,11 +123,11 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
     public void addApplicationButton(ToolbarActionTool tool) {
         ToolbarApplicationAction action = (ToolbarApplicationAction) this.getAction(
                 tool.getId());
-        
+
         final Button button = new Button();
         button.setText(action.getButtonName());
         this.prepareButton(button, action, tool);
-        
+
         this.toolBar.add(button);
     }
 
@@ -139,11 +139,11 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
     @Override
     public void addMapButton(ToolbarActionTool tool) {
         ToolbarMapAction action = (ToolbarMapAction) this.getAction(tool.getId());
-        
+
         final GeoPlatformButton button = new GeoPlatformButton();
         button.setAction(action);
         this.prepareButton(button, action, tool);
-        
+
         this.toolBar.add(button);
     }
 
@@ -155,11 +155,11 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
     @Override
     public void addMapToggleButton(ToolbarActionTool tool) {
         ToolbarMapAction action = (ToolbarMapAction) this.getAction(tool.getId());
-        
+
         final GeoPlatformToggleButton button = new GeoPlatformToggleButton();
         button.setAction(action);
         this.prepareButton(button, action, tool);
-        
+
         this.toolBar.add(button);
     }
 
@@ -172,11 +172,11 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
     public void addIconInToolbar(IconInToolbar tool) {
         GPIconWidgetComponent gpWidgetIcon = new GPIconWidgetComponent(
                 this.toolBar);
-        
+
         Image image = BasicWidgetResources.ICONS.googleWhite().createImage();
         WidgetComponent widgetComponent = gpWidgetIcon.createWidgetComponent(
                 image, tool.getText());
-        
+
         this.toolBar.add(widgetComponent);
     }
 
@@ -192,11 +192,11 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
                 + GPAccountLogged.getInstance().getOrganization());
         buttonItem.setIcon(BasicWidgetResources.ICONS.logged_user());
         buttonItem.setId(tool.getId());
-        
+
         Menu menu = new Menu();
         MenuUtility.getIstance().buildTools(menu, tool.getTools());
         buttonItem.setMenu(menu);
-        
+
         this.toolBar.add(buttonItem);
     }
 
@@ -208,15 +208,15 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
     @Override
     public void addMenuButton(MenuClientTool tool) {
         ToolbarAction action = this.getAction(tool.getId());
-        
+
         Button button = new Button();
         button.setId(tool.getId());
 //        button.setText(action.getButtonName());
         button.setIcon(action.getImage());
         button.setEnabled(tool.isEnabled());
-        
+
         button.setMenu(this.createMenu(tool.getActionTools()));
-        
+
         toolBar.add(button);
     }
 
@@ -236,13 +236,13 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
     @Override
     public void addMapToogleButton(ToolbarActionEditorTool tool) {
         ToolbarMapAction action = (ToolbarMapAction) this.getAction(tool.getId());
-        
+
         final GeoPlatformToggleButton button = new GeoPlatformToggleButton();
         button.setAction(action);
         this.prepareButton(button, action, tool);
-        
+
         ((IOpenEditorMapAction) action).setActionTools(tool.getTools());
-        
+
         this.toolBar.add(button);
     }
 
@@ -258,7 +258,7 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
         for (ToolbarActionTool actionTool : actionTools) {
             MenuBaseAction action = (MenuBaseAction) menuRegistar.get(
                     actionTool.getId());
-            
+
             MenuItem item = new MenuItem(action.getTitle());
             item.addSelectionListener(action);
             item.setIcon(action.getImage());
@@ -296,14 +296,16 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
         button.setToolTip(action.getTooltip());
         button.setIcon(action.getImage());
         button.addSelectionListener(action);
-        
+
         action.addActionEnableHandler(new ActionEnableHandler() {
+
             @Override
             public void onActionEnabled(ActionEnableEvent event) {
                 button.setEnabled(event.isEnabled());
             }
+
         });
-        
+
         action.setEnabled(tool.isEnabled());
     }
 
@@ -321,4 +323,5 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
         Collections.sort(tools);
         this.tools = tools;
     }
+
 }

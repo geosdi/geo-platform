@@ -55,6 +55,7 @@ import org.geosdi.geoplatform.responce.LayerAttribute;
 import org.geosdi.geoplatform.services.geotiff.GeoTiffOverviews;
 import org.geosdi.geoplatform.services.geotiff.GeoTiffOverviewsConfiguration;
 import org.geosdi.geoplatform.services.utility.Ds2dsConfiguration;
+import org.geosdi.geoplatform.services.utility.FeatureConfiguration;
 import org.geosdi.geoplatform.services.utility.PostGISUtility;
 import org.geosdi.geoplatform.services.utility.PublishUtility;
 import org.geotools.coverage.grid.GridCoverage2D;
@@ -347,6 +348,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
     /**
      * ***********************
      *
+     * @param userName
      * @return @throws ResourceNotFoundFault this methods returns the list of
      * the datastores in the user workspace. For each datastore the info to find
      * the PNG is also specified
@@ -887,9 +889,6 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
                     }
                     if (infoPreview.getLayerPublishAction().equals(LayerPublishAction.RENAME)) {
                         PublishUtility.manageRename(userName, infoPreview, tempUserDir);
-                    } else if (infoPreview.getLayerPublishAction().equals(LayerPublishAction.OVERRIDE)) {
-                        ds2dsConfiguration.setForcePurgeAllData(Boolean.TRUE);
-                        this.shapeAppender.importFile(tempUserDir, new File(infoPreview.getFileName()));
                     }
                 } else {
                     if (infoPreview.getNewName() != null && !infoPreview.getNewName().isEmpty()
@@ -920,12 +919,31 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
             if (infoPreview.isIsShape() && infoPreview.getLayerPublishAction() != null
                     && infoPreview.getLayerPublishAction().equals(LayerPublishAction.APPEND)) {
                 logger.info("***** processEPSGResult: Executing shape append for zip file: " + infoPreview.getFileName());
+                //Settiamo una nuova source feature per evitare di usare quella vecchia
+                //che punta al precedente file shp
+                ds2dsConfiguration.setSourceFeature(new FeatureConfiguration());
                 ds2dsConfiguration.setForcePurgeAllData(Boolean.FALSE);
                 ds2dsConfiguration.setPurgeData(Boolean.FALSE);
                 this.shapeAppender.importFile(tempUserDir, new File(infoPreview.getFileName()));
                 infoPreview = getSHPURLByDataStoreName(userWorkspace, infoPreview.getDataStoreName());
-                infoPreview.setUrl(infoPreview.getUrl() + "/wms");
+//                infoPreview.setLayerPublishAction(LayerPublishAction.APPEND);
+                if (infoPreview.getUrl().indexOf("/wms") == -1) {
+                    infoPreview.setUrl(infoPreview.getUrl() + "/wms");
+                }
+            } else if (infoPreview.isIsShape() && infoPreview.getLayerPublishAction() != null
+                    && infoPreview.getLayerPublishAction().equals(LayerPublishAction.OVERRIDE)) {
+                //Settiamo una nuova source feature per evitare di usare quella vecchia
+                //che punta al precedente file shp
+                ds2dsConfiguration.setSourceFeature(new FeatureConfiguration());
+                ds2dsConfiguration.setForcePurgeAllData(Boolean.TRUE);
+                this.shapeAppender.importFile(tempUserDir, new File(infoPreview.getFileName()));
+                infoPreview = getSHPURLByDataStoreName(userWorkspace, infoPreview.getDataStoreName());
+//                        infoPreview.setLayerPublishAction(LayerPublishAction.OVERRIDE);
+                if (infoPreview.getUrl().indexOf("/wms") == -1) {
+                    infoPreview.setUrl(infoPreview.getUrl() + "/wms");
+                }
             } else if (infoPreview.isIsShape()) {
+                logger.info("***** processEPSGResult: Executing shape publish zip file: " + infoPreview.getFileName());
                 info.isShp = Boolean.TRUE;
                 infoPreview = this.publishShpInPreview(userWorkspace, info, tempUserZipDir);
             } else if (!infoPreview.isIsShape()) {

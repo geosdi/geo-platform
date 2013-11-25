@@ -37,10 +37,6 @@ package org.geosdi.geoplatform.gui.client.mvc;
 
 import com.extjs.gxt.ui.client.mvc.AppEvent;
 import org.geosdi.geoplatform.gui.client.RoutingEvents;
-import org.geosdi.geoplatform.gui.client.service.GeocodingRemote;
-import org.geosdi.geoplatform.gui.client.service.GeocodingRemoteAsync;
-import org.geosdi.geoplatform.gui.client.service.RoutingRemote;
-import org.geosdi.geoplatform.gui.client.service.RoutingRemoteAsync;
 import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformController;
 
 /**
@@ -50,9 +46,6 @@ import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformController;
  *
  */
 public class RoutingController extends GeoPlatformController {
-
-    private RoutingRemoteAsync routingService = RoutingRemote.Util.getInstance();
-    private GeocodingRemoteAsync geocodingService = GeocodingRemote.Util.getInstance();
 
     /**
      * @Construct
@@ -83,19 +76,5 @@ public class RoutingController extends GeoPlatformController {
     @Override
     public void handleEvent(AppEvent event) {
         super.handleEvent(event);
-    }
-
-    /**
-     * @return the routingService
-     */
-    public RoutingRemoteAsync getRoutingService() {
-        return routingService;
-    }
-
-    /**
-     * @return the geocodingService
-     */
-    public GeocodingRemoteAsync getGeocodingService() {
-        return geocodingService;
     }
 }

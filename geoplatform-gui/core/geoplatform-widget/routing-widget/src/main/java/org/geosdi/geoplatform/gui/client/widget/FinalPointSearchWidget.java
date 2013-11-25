@@ -39,7 +39,6 @@ import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
 import com.extjs.gxt.ui.client.widget.tips.ToolTipConfig;
 import org.geosdi.geoplatform.gui.client.i18n.RoutingModuleConstants;
 import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
-import org.geosdi.geoplatform.gui.client.mvc.RoutingController;
 import org.geosdi.geoplatform.gui.puregwt.routing.RoutingHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.routing.event.FinalRoutingPointEvent;
 import org.geosdi.geoplatform.gui.puregwt.routing.event.RemoveFinalRoutingPointEvent;
@@ -52,14 +51,6 @@ import org.geosdi.geoplatform.gui.puregwt.routing.event.RemoveFinalRoutingPointE
 public class FinalPointSearchWidget extends StartPointSearchRouting {
 
     private FinalRoutingPointEvent event;
-
-    /**
-     * @param controller
-     */
-    public FinalPointSearchWidget(RoutingController controller) {
-        super(controller);
-        this.event = new FinalRoutingPointEvent();
-    }
 
     /**
      * (non-Javadoc)

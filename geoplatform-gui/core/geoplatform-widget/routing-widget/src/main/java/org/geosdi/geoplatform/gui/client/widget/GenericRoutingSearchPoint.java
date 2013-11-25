@@ -38,15 +38,16 @@ package org.geosdi.geoplatform.gui.client.widget;
 import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.KeyListener;
 import com.google.gwt.event.dom.client.KeyCodes;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import java.util.ArrayList;
+import org.geosdi.geoplatform.gui.client.command.FindLocationsByAddressRequest;
+import org.geosdi.geoplatform.gui.client.command.FindLocationsResponse;
 import org.geosdi.geoplatform.gui.client.i18n.RoutingModuleConstants;
 import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
 import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
 import org.geosdi.geoplatform.gui.client.model.GeocodingKeyValue;
-import org.geosdi.geoplatform.gui.client.mvc.RoutingController;
 import org.geosdi.geoplatform.gui.client.widget.search.ComboSearchWidget;
 import org.geosdi.geoplatform.gui.client.widget.search.routing.GPComboBox;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommandExecutor;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.puregwt.routing.event.CleanComboEventHandler;
 
@@ -58,17 +59,7 @@ import org.geosdi.geoplatform.gui.puregwt.routing.event.CleanComboEventHandler;
 public abstract class GenericRoutingSearchPoint extends ComboSearchWidget<GeocodingBean>
         implements CleanComboEventHandler {
 
-    private RoutingController controller;
-
-    /**
-     * @Constructor
-     *
-     * @param controller
-     *
-     */
-    public GenericRoutingSearchPoint(RoutingController controller) {
-        this.controller = controller;
-    }
+    private FindLocationsByAddressRequest request = new FindLocationsByAddressRequest();
 
     /**
      * (non-Javadoc)
@@ -86,6 +77,7 @@ public abstract class GenericRoutingSearchPoint extends ComboSearchWidget<Geocod
         this.combo.setWidth(200);
 
         this.combo.addKeyListener(new KeyListener() {
+
             @Override
             public void componentKeyPress(ComponentEvent event) {
                 if ((event.getKeyCode() == KeyCodes.KEY_ENTER)
@@ -94,6 +86,7 @@ public abstract class GenericRoutingSearchPoint extends ComboSearchWidget<Geocod
                     dispatchRequest();
                 }
             }
+
         });
     }
 
@@ -105,16 +98,25 @@ public abstract class GenericRoutingSearchPoint extends ComboSearchWidget<Geocod
         loadImage(TypeImage.IMAGE_LOADING, true);
         this.clearStore();
 
-        this.controller.getGeocodingService().findLocations(combo.getRawValue(),
-                new AsyncCallback<ArrayList<GeocodingBean>>() {
-            @Override
-            public void onSuccess(ArrayList<GeocodingBean> result) {
+        this.request.setAddress(combo.getRawValue());
 
-                if (result.size() > 0) {
-                    GeoPlatformMessage.infoMessage(RoutingModuleConstants.INSTANCE.geocodingServiceText(),
+        GPClientCommandExecutor.executeCommand(
+                new GPClientCommand<FindLocationsResponse>() {
+
+            private static final long serialVersionUID = -7919006248337641101L;
+
+            {
+                super.setCommandRequest(request);
+            }
+
+            @Override
+            public void onCommandSuccess(FindLocationsResponse response) {
+                if (response.getResult().size() > 0) {
+                    GeoPlatformMessage.infoMessage(
+                            RoutingModuleConstants.INSTANCE.geocodingServiceText(),
                             WindowsConstants.INSTANCE.resultsLoadedWithSuccessText());
                     loadImage(TypeImage.IMAGE_RESULT_FOUND, true);
-                    fillStore(result);
+                    fillStore(response.getResult());
                     expand();
                 } else {
                     GeoPlatformMessage.alertMessage(
@@ -123,16 +125,17 @@ public abstract class GenericRoutingSearchPoint extends ComboSearchWidget<Geocod
                     loadImage(TypeImage.IMAGE_RESULT_NOT_FOUND, true);
                     clearStore();
                 }
-
             }
 
             @Override
-            public void onFailure(Throwable caught) {
-                GeoPlatformMessage.errorMessage(RoutingModuleConstants.INSTANCE.geocodingServiceText(),
+            public void onCommandFailure(Throwable exception) {
+                GeoPlatformMessage.errorMessage(
+                        RoutingModuleConstants.INSTANCE.geocodingServiceText(),
                         WindowsConstants.INSTANCE.errorDispatchingRequestBodyText());
                 loadImage(TypeImage.IMAGE_SERVICE_ERROR, true);
                 clearStore();
             }
+
         });
     }
 
@@ -163,4 +166,5 @@ public abstract class GenericRoutingSearchPoint extends ComboSearchWidget<Geocod
     public GPComboBox<GeocodingBean> getComboBox() {
         return combo;
     }
+
 }

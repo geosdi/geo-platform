@@ -47,6 +47,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
+@Deprecated
 public class RoutingRemoteImpl extends GPAutoInjectingRemoteServiceServlet
         implements RoutingRemote {
 

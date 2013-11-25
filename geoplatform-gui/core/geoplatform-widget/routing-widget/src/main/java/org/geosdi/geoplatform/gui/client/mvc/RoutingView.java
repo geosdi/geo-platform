@@ -62,8 +62,7 @@ public class RoutingView extends GeoPlatformView {
 
     public RoutingView(Controller controller) {
         super(controller);
-        this.routingManagement = new RoutingManagementWidget(
-                (RoutingController) controller);
+        this.routingManagement = new RoutingManagementWidget();
     }
 
     /**

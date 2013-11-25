@@ -43,6 +43,7 @@ import org.geosdi.geoplatform.gui.client.model.RoutingBean;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
+@Deprecated
 public interface RoutingRemoteAsync {
 
     public void findDirections(double xStart, double yStart, double xStop,

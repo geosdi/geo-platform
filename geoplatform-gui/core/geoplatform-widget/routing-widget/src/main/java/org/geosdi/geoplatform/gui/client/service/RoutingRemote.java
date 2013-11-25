@@ -46,6 +46,7 @@ import org.geosdi.geoplatform.gui.global.GeoPlatformException;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
+@Deprecated
 @RemoteServiceRelativePath("RoutingRemote")
 public interface RoutingRemote extends RemoteService {
 

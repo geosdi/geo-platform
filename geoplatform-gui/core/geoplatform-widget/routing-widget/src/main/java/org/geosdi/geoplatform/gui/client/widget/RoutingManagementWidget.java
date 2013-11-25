@@ -43,7 +43,6 @@ import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import org.geosdi.geoplatform.gui.client.i18n.RoutingModuleConstants;
-import org.geosdi.geoplatform.gui.client.mvc.RoutingController;
 
 /**
  *
@@ -57,15 +56,12 @@ public class RoutingManagementWidget extends ContentPanel {
     private RoutingSearchWidget pointsWidget;
     private RoutingGridWidget routingGridWidget;
 
-    /**
-     *
-     * @param controller
-     */
-    public RoutingManagementWidget(RoutingController controller) {
+   
+    public RoutingManagementWidget() {
         setHeadingHtml(RoutingModuleConstants.INSTANCE.RoutingManagementWidget_headingText());
         setLayout(new FitLayout());
 
-        this.initWidget(controller);
+        this.initWidget();
 
         addWidgetListener(new WidgetListener() {
             @Override
@@ -82,7 +78,7 @@ public class RoutingManagementWidget extends ContentPanel {
         setScrollMode(Scroll.AUTOY);
     }
 
-    private void initWidget(RoutingController controller) {
+    private void initWidget() {
         formPanel = new FormPanel();
         formPanel.setHeaderVisible(false);
         formPanel.setFrame(true);
@@ -90,7 +86,7 @@ public class RoutingManagementWidget extends ContentPanel {
 
         setLayoutOnChange(true);
 
-        this.pointsWidget = new RoutingSearchWidget(controller);
+        this.pointsWidget = new RoutingSearchWidget();
 
         this.formPanel.add(this.pointsWidget.getFieldSet());
 

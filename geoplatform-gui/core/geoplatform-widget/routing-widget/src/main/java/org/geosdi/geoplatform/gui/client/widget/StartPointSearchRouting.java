@@ -39,7 +39,6 @@ import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
 import com.extjs.gxt.ui.client.widget.tips.ToolTipConfig;
 import org.geosdi.geoplatform.gui.client.i18n.RoutingModuleConstants;
 import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
-import org.geosdi.geoplatform.gui.client.mvc.RoutingController;
 import org.geosdi.geoplatform.gui.puregwt.routing.RoutingHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.routing.event.RemoveStartRoutingPointEvent;
 import org.geosdi.geoplatform.gui.puregwt.routing.event.StartRoutingPointEvent;
@@ -52,16 +51,6 @@ import org.geosdi.geoplatform.gui.puregwt.routing.event.StartRoutingPointEvent;
 public class StartPointSearchRouting extends GenericRoutingSearchPoint {
 
     private StartRoutingPointEvent event;
-
-    /**
-     *
-     * @param controller
-     *
-     */
-    public StartPointSearchRouting(RoutingController controller) {
-        super(controller);
-        this.event = new StartRoutingPointEvent();
-    }
 
     /**
      * (non-Javadoc)

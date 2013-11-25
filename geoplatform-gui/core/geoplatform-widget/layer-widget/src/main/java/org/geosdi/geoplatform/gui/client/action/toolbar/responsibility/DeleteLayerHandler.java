@@ -36,14 +36,17 @@
 package org.geosdi.geoplatform.gui.client.action.toolbar.responsibility;
 
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import com.google.gwt.user.client.rpc.AsyncCallback;
+import org.geosdi.geoplatform.gui.client.command.memento.toolbar.DeleteTreeElementRequest;
+import org.geosdi.geoplatform.gui.client.command.memento.toolbar.DeleteTreeElementResponse;
 import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.model.memento.puregwt.event.PeekCacheEvent;
 import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveRemove;
-import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommandExecutor;
+import org.geosdi.geoplatform.gui.configuration.composite.GPTreeCompositeType;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
@@ -62,9 +65,11 @@ import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 public class DeleteLayerHandler extends DeleteRequestHandler {
 
     private PeekCacheEvent peekCacheEvent = new PeekCacheEvent();
+    private final DeleteTreeElementRequest deleteLayerRequest = new DeleteTreeElementRequest();
 
     public DeleteLayerHandler(TreePanel theTree) {
         super(theTree);
+        this.deleteLayerRequest.setElementType(GPTreeCompositeType.LEAF);
     }
 
     @Override
@@ -93,23 +98,20 @@ public class DeleteLayerHandler extends DeleteRequestHandler {
         //Warning: this conversion remove the associated mementoLayerOriginalProperties also,
         // in this way it is possible to preserv the safety of saving operations.
         memento.convertMementoToWs();
-        LayerRemote.Util.getInstance().saveDeletedLayerAndTreeModifications(
-                memento, new AsyncCallback<Boolean>() {
-            @Override
-            public void onFailure(Throwable caught) {
-                if (caught.getCause() instanceof GPSessionTimeout) {
-                    GPHandlerManager.fireEvent(new GPLoginEvent(peekCacheEvent));
-                } else {
-                    LayerHandlerManager.fireEvent(new DisplayLayersProgressBarEvent(
-                            false));
-                    GeoPlatformMessage.errorMessage(LayerModuleConstants.INSTANCE.
-                            errorSaveDeleteOperationTitleText(),
-                            LayerModuleConstants.INSTANCE.DeleteLayerHandler_errorSaveDeleteBodyText());
-                }
+
+        this.deleteLayerRequest.setMemento(memento);
+
+        GPClientCommandExecutor.executeCommand(
+                new GPClientCommand<DeleteTreeElementResponse>() {
+
+            private static final long serialVersionUID = -3466943239598533624L;
+
+            {
+                super.setCommandRequest(deleteLayerRequest);
             }
 
             @Override
-            public void onSuccess(Boolean result) {
+            public void onCommandSuccess(DeleteTreeElementResponse response) {
                 IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
                 mementoSave.remove(memento);
                 LayoutManager.getInstance().getStatusMap().setStatus(
@@ -117,6 +119,23 @@ public class DeleteLayerHandler extends DeleteRequestHandler {
                         EnumSearchStatus.STATUS_SEARCH.toString());
                 LayerHandlerManager.fireEvent(peekCacheEvent);
             }
+
+            @Override
+            public void onCommandFailure(Throwable exception) {
+                if (exception.getCause() instanceof GPSessionTimeout) {
+                    GPHandlerManager.fireEvent(new GPLoginEvent(peekCacheEvent));
+                } else {
+                    LayerHandlerManager.fireEvent(
+                            new DisplayLayersProgressBarEvent(
+                            false));
+                    GeoPlatformMessage.errorMessage(
+                            LayerModuleConstants.INSTANCE.
+                            errorSaveDeleteOperationTitleText(),
+                            LayerModuleConstants.INSTANCE.DeleteLayerHandler_errorSaveDeleteBodyText());
+                }
+            }
+
         });
     }
+
 }

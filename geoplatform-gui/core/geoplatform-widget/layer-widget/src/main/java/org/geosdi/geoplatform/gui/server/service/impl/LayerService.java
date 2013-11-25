@@ -371,6 +371,7 @@ public class LayerService implements ILayerService {
     }
 
     @Override
+    @Deprecated
     public boolean saveDeletedFolderAndTreeModifications(
             MementoSaveRemove memento,
             HttpServletRequest httpServletRequest) throws GeoPlatformException {
@@ -393,6 +394,7 @@ public class LayerService implements ILayerService {
     }
 
     @Override
+    @Deprecated
     public boolean saveDeletedLayerAndTreeModifications(
             MementoSaveRemove memento,
             HttpServletRequest httpServletRequest) throws GeoPlatformException {

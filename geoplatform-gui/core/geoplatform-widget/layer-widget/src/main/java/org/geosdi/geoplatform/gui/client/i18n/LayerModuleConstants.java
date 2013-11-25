@@ -502,27 +502,6 @@ public interface LayerModuleConstants extends Constants {
     String GPClientProject_sharedLabelText();
 
     /**
-     * start GPDNDListener
-     */
-    @DefaultStringValue("Layer Drag&Drop operation saved successfully.")
-    String GPDNDListener_statusSaveLayerDDSuccessText();
-
-    @DefaultStringValue("Save Layer Drag&Drop Operation Error")
-    String GPDNDListener_saveLayerDDErrorTitleText();
-
-    @DefaultStringValue("Problems on saving the new tree state after layer drag&drop operation")
-    String GPDNDListener_saveLayerDDErrorBodyText();
-
-    @DefaultStringValue("Folder Drag&Drop operation saved successfully.")
-    String GPDNDListener_statusSaveFolderDDSuccessText();
-
-    @DefaultStringValue("Save Folder Drag&Drop Operation Error")
-    String GPDNDListener_saveFolderDDErrorTitleText();
-
-    @DefaultStringValue("Problems on saving the new tree state after folder drag&drop operation")
-    String GPDNDListener_saveFolderDDErrorBodyText();
-
-    /**
      * start RefreshTimeComboBuilder
      */
     @DefaultStringValue("Refresh Time")

@@ -36,15 +36,18 @@
 package org.geosdi.geoplatform.gui.client.action.toolbar.responsibility;
 
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import com.google.gwt.user.client.rpc.AsyncCallback;
+import org.geosdi.geoplatform.gui.client.command.memento.toolbar.DeleteTreeElementRequest;
+import org.geosdi.geoplatform.gui.client.command.memento.toolbar.DeleteTreeElementResponse;
 import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.memento.puregwt.event.PeekCacheEvent;
 import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveRemove;
-import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommandExecutor;
+import org.geosdi.geoplatform.gui.configuration.composite.GPTreeCompositeType;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
@@ -62,9 +65,11 @@ import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 public class DeleteFolderHandler extends DeleteRequestHandler {
 
     private PeekCacheEvent peekCacheEvent = new PeekCacheEvent();
+    private final DeleteTreeElementRequest deleteFolderRequest = new DeleteTreeElementRequest();
 
     public DeleteFolderHandler(TreePanel theTree) {
         super(theTree);
+        this.deleteFolderRequest.setElementType(GPTreeCompositeType.COMPOSITE);
     }
 
     @Override
@@ -91,11 +96,31 @@ public class DeleteFolderHandler extends DeleteRequestHandler {
     @Override
     public void executeSave(final MementoSaveRemove memento) {
         memento.convertMementoToWs();
-        LayerRemote.Util.getInstance().saveDeletedFolderAndTreeModifications(
-                memento, new AsyncCallback<Boolean>() {
+
+        this.deleteFolderRequest.setMemento(memento);
+
+        GPClientCommandExecutor.executeCommand(
+                new GPClientCommand<DeleteTreeElementResponse>() {
+
+            private static final long serialVersionUID = -3466943239598533624L;
+
+            {
+                super.setCommandRequest(deleteFolderRequest);
+            }
+
             @Override
-            public void onFailure(Throwable caught) {
-                if (caught.getCause() instanceof GPSessionTimeout) {
+            public void onCommandSuccess(DeleteTreeElementResponse response) {
+                IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
+                mementoSave.remove(memento);
+                LayoutManager.getInstance().getStatusMap().setStatus(
+                        LayerModuleConstants.INSTANCE.DeleteFolderHandler_statusSaveDeleteSuccessText(),
+                        EnumSearchStatus.STATUS_SEARCH.toString());
+                LayerHandlerManager.fireEvent(peekCacheEvent);
+            }
+
+            @Override
+            public void onCommandFailure(Throwable exception) {
+                if (exception.getCause() instanceof GPSessionTimeout) {
                     GPHandlerManager.fireEvent(new GPLoginEvent(peekCacheEvent));
                 } else {
                     LayerHandlerManager.fireEvent(
@@ -107,15 +132,7 @@ public class DeleteFolderHandler extends DeleteRequestHandler {
                 }
             }
 
-            @Override
-            public void onSuccess(Boolean result) {
-                IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
-                mementoSave.remove(memento);
-                LayoutManager.getInstance().getStatusMap().setStatus(
-                        LayerModuleConstants.INSTANCE.DeleteFolderHandler_statusSaveDeleteSuccessText(),
-                        EnumSearchStatus.STATUS_SEARCH.toString());
-                LayerHandlerManager.fireEvent(peekCacheEvent);
-            }
         });
     }
+
 }

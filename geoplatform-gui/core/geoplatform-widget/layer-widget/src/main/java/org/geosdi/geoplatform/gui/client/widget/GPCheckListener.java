@@ -37,8 +37,9 @@ package org.geosdi.geoplatform.gui.client.widget;
 
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.TreePanelEvent;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.action.ISave;
+import org.geosdi.geoplatform.gui.client.command.memento.check.SaveCheckFolderAndTreeRequest;
+import org.geosdi.geoplatform.gui.client.command.memento.check.SaveCheckFolderAndTreeResponse;
 import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
@@ -48,8 +49,9 @@ import org.geosdi.geoplatform.gui.client.model.memento.puregwt.event.PeekCacheEv
 import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.AbstractMementoOriginalProperties;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDisplayHide;
-import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommandExecutor;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
@@ -68,6 +70,7 @@ public class GPCheckListener implements
 
     private VisitorDisplayHide visitorDisplay;
     private PeekCacheEvent peekCacheEvent = new PeekCacheEvent();
+    private final SaveCheckFolderAndTreeRequest saveCheckRequest = new SaveCheckFolderAndTreeRequest();
 
     public GPCheckListener(VisitorDisplayHide visitor) {
         this.visitorDisplay = visitor;
@@ -92,12 +95,33 @@ public class GPCheckListener implements
     @Override
     public void executeSave(final MementoSaveCheck memento) {
         memento.convertMementoToWs();
+
+        this.saveCheckRequest.setMemento(memento);
+
         if (memento.getRefBaseElement() instanceof FolderTreeNode) {
-            LayerRemote.Util.getInstance().saveCheckStatusFolderAndTreeModifications(
-                    memento, new AsyncCallback<Boolean>() {
+            GPClientCommandExecutor.executeCommand(
+                    new GPClientCommand<SaveCheckFolderAndTreeResponse>() {
+
+                private static final long serialVersionUID = 7946923494302192588L;
+
+                {
+                    super.setCommandRequest(saveCheckRequest);
+                }
+
                 @Override
-                public void onFailure(Throwable caught) {
-                    if (caught.getCause() instanceof GPSessionTimeout) {
+                public void onCommandSuccess(
+                        SaveCheckFolderAndTreeResponse response) {
+                    IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
+                    mementoSave.remove(memento);
+                    LayoutManager.getInstance().getStatusMap().setStatus(
+                            LayerModuleConstants.INSTANCE.GPCheckListener_statusSaveCheckSuccessText(),
+                            EnumSearchStatus.STATUS_SEARCH.toString());
+                    LayerHandlerManager.fireEvent(peekCacheEvent);
+                }
+
+                @Override
+                public void onCommandFailure(Throwable exception) {
+                    if (exception.getCause() instanceof GPSessionTimeout) {
                         GPHandlerManager.fireEvent(new GPLoginEvent(
                                 peekCacheEvent));
                     } else {
@@ -109,16 +133,8 @@ public class GPCheckListener implements
                     }
                 }
 
-                @Override
-                public void onSuccess(Boolean result) {
-                    IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
-                    mementoSave.remove(memento);
-                    LayoutManager.getInstance().getStatusMap().setStatus(
-                            LayerModuleConstants.INSTANCE.GPCheckListener_statusSaveCheckSuccessText(),
-                            EnumSearchStatus.STATUS_SEARCH.toString());
-                    LayerHandlerManager.fireEvent(peekCacheEvent);
-                }
             });
         }
     }
+
 }

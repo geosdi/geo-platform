@@ -7,26 +7,15 @@ import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.store.Store;
 import com.extjs.gxt.ui.client.store.TreeStore;
 import com.extjs.gxt.ui.client.store.TreeStoreEvent;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.action.ISave;
+import org.geosdi.geoplatform.gui.client.command.memento.dnd.chain.GPSaveTreeElementManager;
+import org.geosdi.geoplatform.gui.client.command.memento.dnd.chain.SaveTreeElementManager;
 import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
-import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.model.tree.LayerEvents;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveDragDrop;
-import org.geosdi.geoplatform.gui.client.model.memento.puregwt.event.PeekCacheEvent;
 import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDisplayHide;
-import org.geosdi.geoplatform.gui.client.service.LayerRemote;
-import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
-import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
-import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
-import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
-import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
-import org.geosdi.geoplatform.gui.model.GPLayerBean;
-import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
-import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
-import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayersProgressBarEvent;
 
 public class GPDNDListener implements Listener<TreeStoreEvent<GPBeanTreeModel>>,
         ISave<MementoSaveDragDrop> {
@@ -38,7 +27,7 @@ public class GPDNDListener implements Listener<TreeStoreEvent<GPBeanTreeModel>>,
     private int newIndex;
     private boolean isActiveDrop = false;
     private boolean isFolderDrop = false;
-    private PeekCacheEvent peekCacheEvent = new PeekCacheEvent();
+    private GPSaveTreeElementManager saveTreeElement = new SaveTreeElementManager();
 
     public GPDNDListener(VisitorDisplayHide visitorDisplayHide) {
         this.checkerVisitor = visitorDisplayHide;
@@ -92,64 +81,7 @@ public class GPDNDListener implements Listener<TreeStoreEvent<GPBeanTreeModel>>,
 
     @Override
     public void executeSave(final MementoSaveDragDrop memento) {
-        //Warning: The following conversion is absolutely necessary!
-        memento.convertMementoToWs();
-        if (memento.getRefBaseElement() instanceof FolderTreeNode) {
-            LayerRemote.Util.getInstance().saveDragAndDropFolderAndTreeModifications(
-                    memento,
-                    new AsyncCallback<Boolean>() {
-                @Override
-                public void onFailure(Throwable caught) {
-                    if (caught.getCause() instanceof GPSessionTimeout) {
-                        GPHandlerManager.fireEvent(new GPLoginEvent(
-                                peekCacheEvent));
-                    } else {
-                        LayerHandlerManager.fireEvent(
-                                new DisplayLayersProgressBarEvent(false));
-                        GeoPlatformMessage.errorMessage(
-                                LayerModuleConstants.INSTANCE.GPDNDListener_saveFolderDDErrorTitleText(),
-                                LayerModuleConstants.INSTANCE.GPDNDListener_saveFolderDDErrorBodyText());
-                    }
-                }
-
-                @Override
-                public void onSuccess(Boolean result) {
-                    IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
-                    mementoSave.remove(memento);
-                    LayoutManager.getInstance().getStatusMap().setStatus(
-                            LayerModuleConstants.INSTANCE.GPDNDListener_statusSaveFolderDDSuccessText(),
-                            EnumSearchStatus.STATUS_SEARCH.toString());
-                    LayerHandlerManager.fireEvent(peekCacheEvent);
-                }
-            });
-        } else if (memento.getRefBaseElement() instanceof GPLayerBean) {
-            LayerRemote.Util.getInstance().saveDragAndDropLayerAndTreeModifications(
-                    memento,
-                    new AsyncCallback<Boolean>() {
-                @Override
-                public void onFailure(Throwable caught) {
-                    if (caught.getCause() instanceof GPSessionTimeout) {
-                        GPHandlerManager.fireEvent(new GPLoginEvent(
-                                peekCacheEvent));
-                    } else {
-                        LayerHandlerManager.fireEvent(
-                                new DisplayLayersProgressBarEvent(false));
-                        GeoPlatformMessage.errorMessage(
-                                LayerModuleConstants.INSTANCE.GPDNDListener_saveLayerDDErrorTitleText(),
-                                LayerModuleConstants.INSTANCE.GPDNDListener_saveLayerDDErrorBodyText());
-                    }
-                }
-
-                @Override
-                public void onSuccess(Boolean result) {
-                    IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
-                    mementoSave.remove(memento);
-                    LayoutManager.getInstance().getStatusMap().setStatus(
-                            LayerModuleConstants.INSTANCE.GPDNDListener_statusSaveLayerDDSuccessText(),
-                            EnumSearchStatus.STATUS_SEARCH.toString());
-                    LayerHandlerManager.fireEvent(peekCacheEvent);
-                }
-            });
-        }
+        this.saveTreeElement.bind(memento);
     }
+
 }

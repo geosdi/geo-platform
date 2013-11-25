@@ -43,14 +43,14 @@ import com.extjs.gxt.ui.client.mvc.AppEvent;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class GeocodingController extends GeoPlatformController {
 
     public GeocodingController() {
         super.registerEventTypes(GeocodingEvents.INIT_GEOCODING_WIDGET,
-                                 GeocodingEvents.SHOW_GEOCODING_WIDGET,
-                                 GeocodingEvents.HIDE_GEOCODING_WIDGET);
+                GeocodingEvents.SHOW_GEOCODING_WIDGET,
+                GeocodingEvents.HIDE_GEOCODING_WIDGET);
     }
 
     /**
@@ -66,10 +66,12 @@ public class GeocodingController extends GeoPlatformController {
     /**
      * (non-Javadoc)
      *
-     * @see org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformController#handleEvent(com.extjs.gxt.ui.client.mvc.AppEvent)
+     * @see
+     * org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformController#handleEvent(com.extjs.gxt.ui.client.mvc.AppEvent)
      */
     @Override
     public void handleEvent(AppEvent event) {
         super.handleEvent(event);
     }
+
 }

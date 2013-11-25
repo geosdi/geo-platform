@@ -33,21 +33,46 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget;
+package org.geosdi.geoplatform.gui.client.command;
 
-import org.geosdi.geoplatform.gui.client.command.FindLocationsByLonLatRequest;
-import org.geosdi.geoplatform.gui.client.widget.map.ReverseGeoCoderProvider;
-import org.geosdi.geoplatform.gui.client.widget.map.ReverseGeocodingDispatch;
+import org.geosdi.geoplatform.gui.command.api.GPCommandRequest;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GeoCoderDispatcher implements ReverseGeocodingDispatch {
+public class FindLocationsByAddressRequest implements GPCommandRequest {
 
-    protected final FindLocationsByLonLatRequest request = new FindLocationsByLonLatRequest();
+    private static final long serialVersionUID = 381352003001334713L;
+    //
+    private String address;
 
-    protected abstract ReverseGeoCoderProvider getProvider();
+    public FindLocationsByAddressRequest() {
+    }
+
+    /**
+     * @param tgeAddress the place to set
+     */
+    public void setAddress(String tgeAddress) {
+        this.address = tgeAddress;
+    }
+
+    /**
+     * @return the address
+     */
+    public String getAddress() {
+        return address;
+    }
+
+    @Override
+    public String getCommandName() {
+        return "command.FindLocationsByAddressCommand";
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getName() + "{" + "address = " + address + '}';
+    }
 
 }

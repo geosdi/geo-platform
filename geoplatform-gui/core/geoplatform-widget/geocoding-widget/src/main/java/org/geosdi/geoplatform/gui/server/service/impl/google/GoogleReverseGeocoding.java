@@ -52,13 +52,14 @@ import org.geosdi.geoplatform.oxm.jaxb.GPJaxbMarshaller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 /**
- * @author giuseppe
  *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-@Service("googleReverseGeocoding")
+@Component("googleReverseGeocoding")
 public class GoogleReverseGeocoding implements IReverseGeocoding {
 
     // URL prefix to the reverse geocoder

@@ -58,12 +58,14 @@ public class GeocoderManagementWidget extends ContentPanel {
     private IGPGeocoderPluginManager geocoderPluginManager;
 
     public GeocoderManagementWidget() {
-        setHeadingHtml(GeocodingModuleConstants.INSTANCE.GeocoderManagementWidget_headingText());
+        setHeadingHtml(
+                GeocodingModuleConstants.INSTANCE.GeocoderManagementWidget_headingText());
         setLayout(new FitLayout());
 
         setLayoutOnChange(true);
 
         addWidgetListener(new WidgetListener() {
+
             @Override
             public void widgetResized(ComponentEvent ce) {
                 if ((getHeight() > 0)
@@ -72,6 +74,7 @@ public class GeocoderManagementWidget extends ContentPanel {
                 }
 
             }
+
         });
 
         setScrollMode(Scroll.AUTOY);
@@ -83,7 +86,8 @@ public class GeocoderManagementWidget extends ContentPanel {
      * @param geocoderType
      */
     public void buildGeocoderManagementWidget(GeocoderPluginType geocoderType) {
-        this.geocoderPluginManager = GeoPlatformGeocoderFactory.getDefaultPluginManager(geocoderType);
+        this.geocoderPluginManager = GeoPlatformGeocoderFactory.getDefaultPluginManager(
+                geocoderType);
 
         this.geocoderPluginManager.buildPlugins();
 
@@ -92,4 +96,5 @@ public class GeocoderManagementWidget extends ContentPanel {
             this.initialized = true;
         }
     }
+
 }

@@ -50,9 +50,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * @author giuseppe
- * 
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
+@Deprecated
 public class GeocodingRemoteImpl extends GPAutoInjectingRemoteServiceServlet
         implements GeocodingRemote {
 

@@ -33,21 +33,39 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget;
+package org.geosdi.geoplatform.gui.client.command;
 
-import org.geosdi.geoplatform.gui.client.command.FindLocationsByLonLatRequest;
-import org.geosdi.geoplatform.gui.client.widget.map.ReverseGeoCoderProvider;
-import org.geosdi.geoplatform.gui.client.widget.map.ReverseGeocodingDispatch;
+import java.util.ArrayList;
+import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
+import org.geosdi.geoplatform.gui.command.api.GPCommandResponse;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GeoCoderDispatcher implements ReverseGeocodingDispatch {
+public class FindLocationsResponse implements
+        GPCommandResponse<ArrayList<GeocodingBean>> {
 
-    protected final FindLocationsByLonLatRequest request = new FindLocationsByLonLatRequest();
+    private static final long serialVersionUID = 5892276835314610984L;
+    //
+    private ArrayList<GeocodingBean> result;
 
-    protected abstract ReverseGeoCoderProvider getProvider();
+    public FindLocationsResponse() {
+    }
+
+    public FindLocationsResponse(ArrayList<GeocodingBean> result) {
+        this.result = result;
+    }
+
+    @Override
+    public ArrayList<GeocodingBean> getResult() {
+        return this.result;
+    }
+
+    @Override
+    public String toString() {
+        return "FindLocationsByPlaceResponse{" + "result = " + result + '}';
+    }
 
 }

@@ -33,21 +33,78 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget;
+package org.geosdi.geoplatform.gui.client.command;
 
-import org.geosdi.geoplatform.gui.client.command.FindLocationsByLonLatRequest;
 import org.geosdi.geoplatform.gui.client.widget.map.ReverseGeoCoderProvider;
-import org.geosdi.geoplatform.gui.client.widget.map.ReverseGeocodingDispatch;
+import org.geosdi.geoplatform.gui.command.api.GPCommandRequest;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GeoCoderDispatcher implements ReverseGeocodingDispatch {
+public class FindLocationsByLonLatRequest implements GPCommandRequest {
 
-    protected final FindLocationsByLonLatRequest request = new FindLocationsByLonLatRequest();
+    private static final long serialVersionUID = -7350797398494118700L;
+    //
+    private Double lon;
+    private Double lat;
+    private ReverseGeoCoderProvider provider;
 
-    protected abstract ReverseGeoCoderProvider getProvider();
+    public FindLocationsByLonLatRequest() {
+    }
+
+    /**
+     * @return the lon
+     */
+    public Double getLon() {
+        return lon;
+    }
+
+    /**
+     * @param lon the lon to set
+     */
+    public void setLon(Double lon) {
+        this.lon = lon;
+    }
+
+    /**
+     * @return the lat
+     */
+    public Double getLat() {
+        return lat;
+    }
+
+    /**
+     * @param lat the lat to set
+     */
+    public void setLat(Double lat) {
+        this.lat = lat;
+    }
+
+    /**
+     * @return the provider
+     */
+    public ReverseGeoCoderProvider getProvider() {
+        return provider;
+    }
+
+    /**
+     * @param theProvider the provider to set
+     */
+    public void setProvider(ReverseGeoCoderProvider theProvider) {
+        this.provider = theProvider;
+    }
+
+    @Override
+    public String getCommandName() {
+        return "command.FindLocationsByLonLatCommand";
+    }
+
+    @Override
+    public String toString() {
+        return "FindLocationsByLonLatRequest{" + "lon = " + lon + ", lat = "
+                + lat + ", provider = " + provider + '}';
+    }
 
 }

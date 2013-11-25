@@ -35,6 +35,9 @@
  */
 package org.geosdi.geoplatform.gui.client.plugin;
 
+import com.extjs.gxt.ui.client.event.BaseEvent;
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.widget.TabItem;
 import org.geosdi.geoplatform.gui.client.i18n.GeocodingModuleConstants;
 import org.geosdi.geoplatform.gui.client.widget.GeocodingGridWidget;
@@ -55,12 +58,23 @@ public class GPGoogleGeocoderPlugin extends GPAdvancedGeocoderPlugin {
         super.tabItem = new TabItem(GeocodingModuleConstants.INSTANCE.
                 GPGoogleGeocoderPlugin_tabTitleText());
         this.gridWidget = new GeocodingGridWidget();
-        this.gridWidget.setFieldsSetWith(305);
         super.tabItem.add(gridWidget.getWidget());
+
+        this.gridWidget.getGrid().addListener(Events.BeforeRender,
+                new Listener<BaseEvent>() {
+
+            @Override
+            public void handleEvent(BaseEvent be) {
+                gridWidget.getGrid().setHeight(510);
+                gridWidget.setFieldsSetWith(315);
+            }
+
+        });
     }
 
     @Override
     public void widgetResized(int dimension) {
-        gridWidget.widgetResized(dimension - 200);
+        gridWidget.widgetResized(dimension - 220);
     }
+
 }

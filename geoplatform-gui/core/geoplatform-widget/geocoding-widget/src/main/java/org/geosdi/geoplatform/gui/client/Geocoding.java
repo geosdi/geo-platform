@@ -84,36 +84,44 @@ public class Geocoding implements EntryPoint {
         MenuActionRegistar menuRegistar = BasicGinInjector.MainInjector.getInstance().getMenuActionRegistar();
         menuRegistar.put("geocoding",
                 new MenuActionCreator() {
-                    @Override
-                    public MenuAction createAction() {
-                        return new GeocodingMenuAction();
-                    }
-                });
+
+            @Override
+            public MenuAction createAction() {
+                return new GeocodingMenuAction();
+            }
+
+        });
 
         ToolbarActionRegistar toolbarRegistar = BasicGinInjector.MainInjector.getInstance().getToolbarActionRegistar();
         toolbarRegistar.put("googleReverseGeocoding",
                 new ToolbarActionCreator() {
-                    @Override
-                    public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
-                        return new GoogleReverseGeocodingAction(mapWidget);
-                    }
-                });
+
+            @Override
+            public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
+                return new GoogleReverseGeocodingAction(mapWidget);
+            }
+
+        });
 
         toolbarRegistar.put("yahooReverseGeocoding",
                 new ToolbarActionCreator() {
-                    @Override
-                    public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
-                        return new YahooReverseGeocodingAction(mapWidget);
-                    }
-                });
+
+            @Override
+            public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
+                return new YahooReverseGeocodingAction(mapWidget);
+            }
+
+        });
     }
 
     /**
      * Add GeoCoder Member to Member Manager
      */
     private void addGeoCoderMember() {
-        IGPMemberOptionManager memberManager = GeoPlatformMemberFactory.getDefaultMemberManager(GPMemberOptionType.SIMPLE_PROPERTIES);
+        IGPMemberOptionManager memberManager = GeoPlatformMemberFactory.getDefaultMemberManager(
+                GPMemberOptionType.SIMPLE_PROPERTIES);
 
         memberManager.addMember(new UserOptionsMemberGeocoding());
     }
+
 }

@@ -35,15 +35,16 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.google;
 
-import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
 import org.geosdi.geoplatform.gui.client.widget.map.ReverseGeocodingWidget;
 
 import org.gwtopenmaps.openlayers.client.LonLat;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
+import org.geosdi.geoplatform.gui.client.command.FindLocationResponse;
 import org.geosdi.geoplatform.gui.client.i18n.GeocodingModuleConstants;
 import org.geosdi.geoplatform.gui.client.widget.GeoCoderDispatcher;
 import org.geosdi.geoplatform.gui.client.widget.map.ReverseGeoCoderProvider;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommandExecutor;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -62,18 +63,36 @@ public class GoogleDispatcher extends GeoCoderDispatcher {
     public void processRequest(final ReverseGeocodingWidget widget) {
         LonLat lonlat = widget.getLonlat();
 
-        this.geocodingService.findLocation(lonlat.lat(), lonlat.lon(),
-                ReverseGeoCoderProvider.GOOGLE,
-                new AsyncCallback<GeocodingBean>() {
-            @Override
-            public void onFailure(Throwable caught) {
-                widget.onRequestFailure(GeocodingModuleConstants.INSTANCE.GoogleDispatcher_requestFailureText());
+        request.setLat(lonlat.lat());
+        request.setLon(lonlat.lon());
+        request.setProvider(getProvider());
+
+        GPClientCommandExecutor.executeCommand(
+                new GPClientCommand<FindLocationResponse>() {
+
+            private static final long serialVersionUID = 8402427536833067095L;
+
+            {
+                super.setCommandRequest(request);
             }
 
             @Override
-            public void onSuccess(GeocodingBean result) {
-                widget.onRequestSuccess(result);
+            public void onCommandSuccess(FindLocationResponse response) {
+                widget.onRequestSuccess(response.getResult());
             }
+
+            @Override
+            public void onCommandFailure(Throwable exception) {
+                widget.onRequestFailure(
+                        GeocodingModuleConstants.INSTANCE.GoogleDispatcher_requestFailureText());
+            }
+
         });
     }
+
+    @Override
+    protected ReverseGeoCoderProvider getProvider() {
+        return ReverseGeoCoderProvider.GOOGLE;
+    }
+
 }

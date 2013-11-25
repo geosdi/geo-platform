@@ -51,7 +51,7 @@ import org.geosdi.geoplatform.oxm.jaxb.GPJaxbMarshaller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 /**
  *
@@ -59,7 +59,7 @@ import org.springframework.stereotype.Service;
  * @email michele.santomauro@geosdi.org
  *
  */
-@Service("yahooGeocodingService")
+@Component("yahooGeocodingService")
 public class YahooGeocodingService implements IGeocodingService {
 
     // URL prefix to the geocoder

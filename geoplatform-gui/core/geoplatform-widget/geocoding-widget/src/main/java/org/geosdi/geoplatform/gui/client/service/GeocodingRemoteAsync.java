@@ -43,18 +43,23 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.client.widget.map.ReverseGeoCoderProvider;
 
 /**
- * @author giuseppe
- * 
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public interface GeocodingRemoteAsync {
 
+    @Deprecated
     public void findLocations(String text,
             AsyncCallback<ArrayList<GeocodingBean>> callback);
 
+    @Deprecated
     public void findLocations(String text, String geocodingService,
             AsyncCallback<ArrayList<GeocodingBean>> callback);
 
+    @Deprecated
     public void findLocation(double lat, double lon,
             ReverseGeoCoderProvider provider,
             AsyncCallback<GeocodingBean> callback);
+
 }

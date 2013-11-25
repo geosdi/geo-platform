@@ -50,20 +50,22 @@ import org.geosdi.geoplatform.oxm.jaxb.GPJaxbMarshaller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 /**
- * @author giuseppe
  *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-@Service("googleGeocodingService")
+@Component("googleGeocodingService")
 public class GoogleGeocodingService implements
         IGeocodingService {
 
     // URL prefix to the geocoder
     private static final String GEOCODER_REQUEST_PREFIX_FOR_XML = "http://maps.google.com/maps/api/geocode/xml";
     //
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private static final Logger logger = LoggerFactory.getLogger(
+            GoogleGeocodingService.class);
     //
     @Autowired
     private GPJaxbMarshaller geocoderGoogleJaxbMarshaller;
@@ -80,23 +82,28 @@ public class GoogleGeocodingService implements
     public ArrayList<GeocodingBean> findLocations(String address)
             throws IOException {
         this.beans = new ArrayList<GeocodingBean>();
-
+        
+        logger.debug("\n\n@@@@@@@@@@@@@@@@@@@@Process Request for {}",
+                GEOCODER_REQUEST_PREFIX_FOR_XML);
+        
         URL url = new URL(GEOCODER_REQUEST_PREFIX_FOR_XML + "?address="
                 + URLEncoder.encode(address, "UTF-8") + "&language=it&sensor=false");
-
+        
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-
+        
         GPGoogleGeocodeRoot oxmBean = (GPGoogleGeocodeRoot) this.geocoderGoogleJaxbMarshaller.
                 unmarshal(conn.getInputStream());
-
+        
         if (oxmBean.getStatus().equals(
                 ResponseStatus.EnumResponseStatus.STATUS_OK.getValue())) {
             for (GPGoogleResult result : oxmBean.getResultList()) {
                 beans.add(new GoogleGeocodeBean(result));
             }
         }
-
+        
+        logger.debug("\n\n@@@@@@@@@@@@@@@@@@@@@Found : {}", beans);
+        
         return beans;
     }
-
+    
 }

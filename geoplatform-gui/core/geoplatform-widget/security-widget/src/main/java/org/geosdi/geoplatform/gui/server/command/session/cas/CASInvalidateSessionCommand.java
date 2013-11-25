@@ -64,6 +64,8 @@ public class CASInvalidateSessionCommand implements
             BasicLoginCommand.class);
     private @Value("casProp{cas_logout_url}")
     String casLogoutURL;
+    private @Value("casProp{service_url}")
+    String service_url;
     //
     @Autowired
     private ISecurityService securityService;
@@ -75,10 +77,10 @@ public class CASInvalidateSessionCommand implements
         logger.debug("##################### Executing {} Command", this.
                 getClass().getSimpleName());
 
-        this.securityService.invalidateSession(httpServletRequest);
+        String logoutURL = casLogoutURL + "?service=" + service_url;
 
         logger.debug("#################### CAS Session Invalidate.");
 
-        return new CASInvalidateSessionResponse(casLogoutURL);
+        return new CASInvalidateSessionResponse(logoutURL);
     }
 }

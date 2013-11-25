@@ -33,16 +33,15 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.server.command.memento.basic;
+package org.geosdi.geoplatform.gui.server.command.memento.dnd;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.google.common.base.Preconditions;
 import javax.servlet.http.HttpServletRequest;
-import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
-import org.geosdi.geoplatform.gui.client.command.memento.basic.SaveAddedLayersAndTreeModificationsRequest;
-import org.geosdi.geoplatform.gui.client.command.memento.basic.SaveAddedLayersAndTreeModificationsResponse;
+import org.geosdi.geoplatform.gui.client.command.memento.dnd.SaveDragAndDropRequest;
+import org.geosdi.geoplatform.gui.client.command.memento.dnd.SaveDragAndDropResponse;
+import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveDragDrop;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.SessionUtility;
@@ -58,61 +57,75 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 /**
- * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email nazzareno.sileno@geosdi.org
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-@Lazy(true)
-@Component(value = "command.memento.basic.SaveAddedLayersAndTreeModificationsCommand")
-public class SaveAddedLayersAndTreeModificationsCommand implements
-        GPCommand<SaveAddedLayersAndTreeModificationsRequest, SaveAddedLayersAndTreeModificationsResponse> {
+@Lazy
+@Component(value = "command.memento.dnd.SaveDragAndDropCommand")
+public class SaveDragAndDropCommand implements
+        GPCommand<SaveDragAndDropRequest, SaveDragAndDropResponse> {
 
     private static final Logger logger = LoggerFactory.getLogger(
-            SaveAddedLayersAndTreeModificationsCommand.class);
-    //
-    @Autowired
-    private SessionUtility sessionUtility;
+            SaveDragAndDropCommand.class);
     //
     @Autowired
     private DTOMementoConverter dtoMementoConverter;
-    //
+    @Autowired
+    private SessionUtility sessionUtility;
     private GeoPlatformService geoPlatformServiceClient;
 
     @Override
-    public SaveAddedLayersAndTreeModificationsResponse execute(SaveAddedLayersAndTreeModificationsRequest request,
+    public SaveDragAndDropResponse execute(SaveDragAndDropRequest request,
             HttpServletRequest httpServletRequest) {
 
         logger.debug("##################### Executing {} Command", this.
                 getClass().getSimpleName());
+
+        MementoSaveDragDrop memento = request.getMemento();
+
+        Preconditions.checkNotNull(memento, "The MementoSaveDragDrop must not "
+                + "be null.");
 
         try {
             this.sessionUtility.getLoggedAccount(httpServletRequest);
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }
-        List<GPLayer> layersList = this.dtoMementoConverter.convertMementoLayers(
-                request.getMementoSaveAddedLayers().getAddedLayers());
-        GPWebServiceMapData map = this.dtoMementoConverter.convertDescendantMap(
-                request.getMementoSaveAddedLayers().getWsDescendantMap());
 
-        ArrayList<Long> idSavedLayers = null;
-        try {
-            Long projectId = this.sessionUtility.getDefaultProject(httpServletRequest);
-            Long parentFolderId = layersList.get(0).getFolder().getId();
-            idSavedLayers = this.geoPlatformServiceClient.saveAddedLayersAndTreeModifications(
-                    projectId, parentFolderId, layersList, map);
-        } catch (ResourceNotFoundFault ex) {
-            logger.error("Failed to save layers on LayerService: " + ex);
-            throw new GeoPlatformException(ex);
-        } catch (IllegalParameterFault ex) {
-            logger.error("Failed to save layers on LayerService: " + ex);
-            throw new GeoPlatformException(ex);
-        } catch (GPSessionTimeout timeout) {
-            throw new GeoPlatformException(timeout);
+        GPWebServiceMapData map = this.dtoMementoConverter.convertDescendantMap(
+                memento.getWsDescendantMap());
+
+        boolean result = false;
+
+        switch (request.getElementType()) {
+            case COMPOSITE:
+                try {
+                    result = this.geoPlatformServiceClient.saveDragAndDropFolderAndTreeModifications(
+                            memento.getIdBaseElement(), memento.getIdNewParent(),
+                            memento.getNewZIndex(), map);
+                } catch (ResourceNotFoundFault ex) {
+                    logger.error("Failed to save Folder drag&drop : " + ex);
+                    throw new GeoPlatformException(ex);
+                }
+                break;
+            case LEAF:
+                try {
+                    result = this.geoPlatformServiceClient.saveDragAndDropLayerAndTreeModifications(
+                            memento.getIdBaseElement(), memento.getIdNewParent(),
+                            memento.getNewZIndex(), map);
+                } catch (ResourceNotFoundFault ex) {
+                    logger.error("Failed to save Layer drag&drop : " + ex);
+                    throw new GeoPlatformException(ex);
+                } catch (IllegalParameterFault ilg) {
+                    logger.error("Error on SaveDragAndDropCommand: " + ilg);
+                    throw new GeoPlatformException("Parameter incorrect "
+                            + "on saveDragAndDropLayerAndTreeModifications");
+                }
+                break;
         }
 
-        logger.debug("#################### After sending project notification");
-
-        return new SaveAddedLayersAndTreeModificationsResponse(idSavedLayers);
+        return new SaveDragAndDropResponse(result);
     }
 
     /**
@@ -123,4 +136,5 @@ public class SaveAddedLayersAndTreeModificationsCommand implements
             @Qualifier("geoPlatformServiceClient") GeoPlatformService geoPlatformServiceClient) {
         this.geoPlatformServiceClient = geoPlatformServiceClient;
     }
+
 }

@@ -33,16 +33,14 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.server.command.memento.basic;
+package org.geosdi.geoplatform.gui.server.command.memento.toolbar;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.google.common.base.Preconditions;
 import javax.servlet.http.HttpServletRequest;
-import org.geosdi.geoplatform.core.model.GPLayer;
-import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
-import org.geosdi.geoplatform.gui.client.command.memento.basic.SaveAddedLayersAndTreeModificationsRequest;
-import org.geosdi.geoplatform.gui.client.command.memento.basic.SaveAddedLayersAndTreeModificationsResponse;
+import org.geosdi.geoplatform.gui.client.command.memento.toolbar.DeleteTreeElementRequest;
+import org.geosdi.geoplatform.gui.client.command.memento.toolbar.DeleteTreeElementResponse;
+import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveRemove;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.SessionUtility;
@@ -58,61 +56,70 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 /**
- * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email nazzareno.sileno@geosdi.org
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-@Lazy(true)
-@Component(value = "command.memento.basic.SaveAddedLayersAndTreeModificationsCommand")
-public class SaveAddedLayersAndTreeModificationsCommand implements
-        GPCommand<SaveAddedLayersAndTreeModificationsRequest, SaveAddedLayersAndTreeModificationsResponse> {
+@Lazy
+@Component(value = "command.memento.toolbar.DeleteTreeElementCommand")
+public class DeleteTreeElementCommand implements
+        GPCommand<DeleteTreeElementRequest, DeleteTreeElementResponse> {
 
     private static final Logger logger = LoggerFactory.getLogger(
-            SaveAddedLayersAndTreeModificationsCommand.class);
+            DeleteTreeElementCommand.class);
     //
     @Autowired
     private SessionUtility sessionUtility;
-    //
     @Autowired
     private DTOMementoConverter dtoMementoConverter;
-    //
     private GeoPlatformService geoPlatformServiceClient;
 
     @Override
-    public SaveAddedLayersAndTreeModificationsResponse execute(SaveAddedLayersAndTreeModificationsRequest request,
+    public DeleteTreeElementResponse execute(DeleteTreeElementRequest request,
             HttpServletRequest httpServletRequest) {
 
         logger.debug("##################### Executing {} Command", this.
                 getClass().getSimpleName());
+
+        MementoSaveRemove memento = request.getMemento();
+
+        Preconditions.checkNotNull(memento, "The MementoSaveRemove must not be "
+                + "null.");
 
         try {
             this.sessionUtility.getLoggedAccount(httpServletRequest);
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }
-        List<GPLayer> layersList = this.dtoMementoConverter.convertMementoLayers(
-                request.getMementoSaveAddedLayers().getAddedLayers());
         GPWebServiceMapData map = this.dtoMementoConverter.convertDescendantMap(
-                request.getMementoSaveAddedLayers().getWsDescendantMap());
+                memento.getWsDescendantMap());
 
-        ArrayList<Long> idSavedLayers = null;
-        try {
-            Long projectId = this.sessionUtility.getDefaultProject(httpServletRequest);
-            Long parentFolderId = layersList.get(0).getFolder().getId();
-            idSavedLayers = this.geoPlatformServiceClient.saveAddedLayersAndTreeModifications(
-                    projectId, parentFolderId, layersList, map);
-        } catch (ResourceNotFoundFault ex) {
-            logger.error("Failed to save layers on LayerService: " + ex);
-            throw new GeoPlatformException(ex);
-        } catch (IllegalParameterFault ex) {
-            logger.error("Failed to save layers on LayerService: " + ex);
-            throw new GeoPlatformException(ex);
-        } catch (GPSessionTimeout timeout) {
-            throw new GeoPlatformException(timeout);
+        boolean result = false;
+
+        switch (request.getElementType()) {
+            case COMPOSITE:
+                try {
+                    result = this.geoPlatformServiceClient.saveDeletedFolderAndTreeModifications(
+                            memento.getIdBaseElement(), map);
+
+                } catch (ResourceNotFoundFault ex) {
+                    logger.error("Failed to Delete Folder Element : " + ex);
+                    throw new GeoPlatformException(ex);
+                }
+                break;
+            case LEAF:
+                try {
+                    result = this.geoPlatformServiceClient.saveDeletedLayerAndTreeModifications(
+                            memento.getIdBaseElement(), map);
+
+                } catch (ResourceNotFoundFault ex) {
+                    logger.error("Failed to Delete Layer Element : " + ex);
+                    throw new GeoPlatformException(ex);
+                }
+                break;
         }
 
-        logger.debug("#################### After sending project notification");
-
-        return new SaveAddedLayersAndTreeModificationsResponse(idSavedLayers);
+        return new DeleteTreeElementResponse(result);
     }
 
     /**
@@ -123,4 +130,5 @@ public class SaveAddedLayersAndTreeModificationsCommand implements
             @Qualifier("geoPlatformServiceClient") GeoPlatformService geoPlatformServiceClient) {
         this.geoPlatformServiceClient = geoPlatformServiceClient;
     }
+
 }

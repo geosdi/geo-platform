@@ -53,13 +53,14 @@ public interface MementoPersistenceConstants extends Constants {
      */
     @DefaultStringValue("Problems on saving the new layer properties")
     String SaveLayersPropertiesAction_errorSaveLayerPropertiesBodyText();
-    
+
     @DefaultStringValue("Save Layer Properties Error")
     String SaveLayersPropertiesAction_errorSaveLayerPropertiesTitleText();
-    
-    @DefaultStringValue("Save Layer Properties Operation completed successfully.")
+
+    @DefaultStringValue(
+            "Save Layer Properties Operation completed successfully.")
     String SaveLayersPropertiesAction_statusSaveLayerSuccessText();
-    
+
     /**
      * start SaveFoldersPropertiesAction
      */
@@ -68,16 +69,17 @@ public interface MementoPersistenceConstants extends Constants {
 
     @DefaultStringValue("Problems on saving the new folder properties")
     String SaveFoldersPropertiesAction_errorSaveFolderBodyText();
-    
-    @DefaultStringValue("Save Folder Properties Operation completed successfully.")
+
+    @DefaultStringValue(
+            "Save Folder Properties Operation completed successfully.")
     String SaveFoldersPropertiesAction_statusSaveSuccessText();
-    
+
     /**
      * start MementoSaveOperations
      */
     @DefaultStringValue("Save Layers Error")
     String MementoSaveOperations_errorSavingfLayersTitleText();
-    
+
     /**
      * start MementoSaveCacheManager
      */
@@ -90,4 +92,28 @@ public interface MementoPersistenceConstants extends Constants {
 
     @DefaultStringValue("Unsaved Operations on Tree.")
     String MementoSaveCacheManager_statusUnsavedOperationsText();
+
+    @DefaultStringValue("Save Folder Drag&Drop Operation Error")
+    String GPDNDListener_saveFolderDDErrorTitleText();
+
+    @DefaultStringValue(
+            "Problems on saving the new tree state after folder drag&drop operation")
+    String GPDNDListener_saveFolderDDErrorBodyText();
+
+    @DefaultStringValue("Folder Drag&Drop operation saved successfully.")
+    String GPDNDListener_statusSaveFolderDDSuccessText();
+
+    /**
+     * start GPDNDListener
+     */
+    @DefaultStringValue("Layer Drag&Drop operation saved successfully.")
+    String GPDNDListener_statusSaveLayerDDSuccessText();
+
+    @DefaultStringValue("Save Layer Drag&Drop Operation Error")
+    String GPDNDListener_saveLayerDDErrorTitleText();
+
+    @DefaultStringValue(
+            "Problems on saving the new tree state after layer drag&drop operation")
+    String GPDNDListener_saveLayerDDErrorBodyText();
+
 }

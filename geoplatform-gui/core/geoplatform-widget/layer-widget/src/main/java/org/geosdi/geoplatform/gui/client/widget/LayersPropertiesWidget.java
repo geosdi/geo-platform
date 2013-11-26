@@ -78,11 +78,13 @@ public class LayersPropertiesWidget extends GeoPlatformWindow
 
         Button close = new Button(ButtonsConstants.INSTANCE.closeText(),
                 new SelectionListener<ButtonEvent>() {
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                hide();
-            }
-        });
+
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                        hide();
+                    }
+
+                });
 
         super.addButton(close);
     }
@@ -95,7 +97,8 @@ public class LayersPropertiesWidget extends GeoPlatformWindow
 
     @Override
     public void setWindowProperties() {
-        setHeadingHtml(LayerModuleConstants.INSTANCE.LayersPropertiesWidget_headingText());
+        setHeadingHtml(
+                LayerModuleConstants.INSTANCE.LayersPropertiesWidget_headingText());
         setModal(true);
         setResizable(false);
         setLayout(new FlowLayout());
@@ -103,18 +106,28 @@ public class LayersPropertiesWidget extends GeoPlatformWindow
         setCollapsible(true);
 
         addWindowListener(new WindowListener() {
+
             @Override
             public void windowShow(WindowEvent we) {
-                layersTabWidget.buildWidget();
                 layersTabWidget.bind(model);
             }
+
         });
+    }
+    
+    @Override
+    public void show() {
+        if(this.model == null) {
+            throw new IllegalArgumentException("Don't call this method, but call"
+                    + " bindLayer(GPLayerBean model)");
+        }
+        super.show();
     }
 
     @Override
     public void bindLayer(GPLayerBean model) {
         this.model = model;
-        super.show();
+        this.show();
     }
 
     @Override
@@ -129,7 +142,14 @@ public class LayersPropertiesWidget extends GeoPlatformWindow
      *
      */
     public void addHandlers() {
-        WidgetPropertiesHandlerManager.addHandler(GPTreeBindingLayerHandler.TYPE, this);
+        WidgetPropertiesHandlerManager.addHandler(GPTreeBindingLayerHandler.TYPE,
+                this);
         WidgetPropertiesHandlerManager.addHandler(GPWidgetSizeHandler.TYPE, this);
     }
+    
+    @Override
+    public void reset() {
+        this.model = null;
+    }
+
 }

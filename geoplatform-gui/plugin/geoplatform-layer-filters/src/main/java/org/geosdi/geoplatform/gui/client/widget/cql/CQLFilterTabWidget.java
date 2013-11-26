@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.cql;
 
-import com.google.gwt.user.client.Element;
 import org.geosdi.geoplatform.gui.client.i18n.LayerFiltersModuleConstants;
 import org.geosdi.geoplatform.gui.client.widget.tab.GeoPlatformTabWidget;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
@@ -50,7 +49,7 @@ public class CQLFilterTabWidget extends GeoPlatformTabWidget implements ICQLFilt
     public final static short TAB_WIDGET_WIDTH = CQLFilterWidget.WIDGET_WIDTH - 15;
     public final static short TAB_WIDGET_HEIGHT = CQLFilterWidget.WIDGET_HEIGHT - 97;
     public final static short TAB_FIELDSET_WIDTH = 350;
-    private GPTreePanel<GPBeanTreeModel> treePanel;
+    private final GPTreePanel<GPBeanTreeModel> treePanel;
     private CQLFilterAdvancedTab advancedTab;
     private CQLFilterBasicTab basicTab;
 
@@ -76,12 +75,6 @@ public class CQLFilterTabWidget extends GeoPlatformTabWidget implements ICQLFilt
         super.setAnimScroll(true);
         super.setTabScroll(true);
         super.setCloseContextMenu(Boolean.FALSE);
-    }
-
-    @Override
-    protected void onRender(Element target, int index) {
-        super.onRender(target, index);
-        super.buildWidget();
     }
 
     @Override

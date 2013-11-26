@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.client.widget;
 
-import com.google.gwt.user.client.Element;
 import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.config.UserModuleInjector;
 import org.geosdi.geoplatform.gui.client.widget.tab.GeoPlatformTabWidget;
@@ -77,12 +76,6 @@ public class UserPropertiesTabWidget extends GeoPlatformTabWidget {
     protected void onAttach() {
         super.onAttach();
         super.setSelection(UserModuleInjector.MainInjector.getInstance().getUserPropertiesWidget());
-    }
-
-    @Override
-    protected void onRender(Element target, int index) {
-        super.onRender(target, index);
-        super.buildWidget();
     }
 
     @Override

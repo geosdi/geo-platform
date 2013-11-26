@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.components.tab;
 
-import com.google.gwt.user.client.Element;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.widget.tab.GeoPlatformTabWidget;
@@ -48,8 +47,8 @@ import org.geosdi.geoplatform.gui.client.widget.tab.GeoPlatformTabWidget;
 @Singleton
 public class GPCatalogTabWidget extends GeoPlatformTabWidget {
 
-    private SearchTabItem searchItem;
-    private MetadataTabItem metadataItem;
+    private final SearchTabItem searchItem;
+    private final MetadataTabItem metadataItem;
 
     @Inject
     public GPCatalogTabWidget(SearchTabItem theSearchItem, MetadataTabItem theMetadataItem) {
@@ -75,12 +74,6 @@ public class GPCatalogTabWidget extends GeoPlatformTabWidget {
 
     @Override
     public void createTabItems() {
-    }
-
-    @Override
-    protected void onRender(Element target, int index) {
-        super.onRender(target, index);
-        super.buildWidget();
     }
 
     @Override

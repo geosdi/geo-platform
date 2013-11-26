@@ -69,11 +69,11 @@ public abstract class AbstractTreeMenuStrategy implements GPTreeMenuStrategy {
     static {
         registar = TreeMenuGinInjector.MainInjector.getInstance().getTreeMenuActionRegistar();
     }
-    private static TreeMenuActionRegistar registar;
+    private static final TreeMenuActionRegistar registar;
     //
-    private Map<StoreCompositeKey, Menu> menuRegistar = Maps.<StoreCompositeKey, Menu>newHashMap();
+    private final Map<StoreCompositeKey, Menu> menuRegistar = Maps.<StoreCompositeKey, Menu>newHashMap();
     private final TreePanel treePanel;
-    private MenuActionBinder menuActionBinder;
+    private final MenuActionBinder menuActionBinder;
 
     public AbstractTreeMenuStrategy(TreePanel theTreePanel) {
         this.treePanel = theTreePanel;

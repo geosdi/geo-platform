@@ -143,6 +143,7 @@ public class CSWCatalogServerTest extends CSWCatalogTest {
     }
 
     @Test(expected = IllegalParameterFault.class)
+    @Ignore(value = "Server is DOWN")
     public void testSaveServerCatalogVersionException() throws Exception {
         cswService.saveServerCSW("NSDI",
                                  "http://catalogocentrale.nsdi.it/geonetwork/srv/en/csw",

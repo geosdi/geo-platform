@@ -50,15 +50,18 @@ import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
  * @email giuseppe.lascaleia@geosdi.org
  *
  */
-public class RasterTreeNode extends AbstractRasterTreeModel implements GPRasterBean {
+public class RasterTreeNode extends AbstractRasterTreeModel implements
+        GPRasterBean {
 
     private static final long serialVersionUID = 8265365333381641340L;
 
     public enum GPRasterKeyValue {
 
-        OPACITY(LayerModuleConstants.INSTANCE.RasterTreeNode_opacityText());
+        OPACITY(LayerModuleConstants.INSTANCE.RasterTreeNode_opacityText()),
+        MAX_SCALE(LayerModuleConstants.INSTANCE.RasterTreeNode_maxScaleText()),
+        MIN_SCALE(LayerModuleConstants.INSTANCE.RasterTreeNode_minScaleText());
         //
-        private String value;
+        private final String value;
 
         GPRasterKeyValue(String theValue) {
             this.value = theValue;
@@ -68,17 +71,21 @@ public class RasterTreeNode extends AbstractRasterTreeModel implements GPRasterB
         public String toString() {
             return this.value;
         }
+
     }
+
     //
     private float opacity = 1.0f;
+    private Float maxScale;
+    private Float minScale;
 
     public RasterTreeNode() {
     }
 
     /**
+     * @param layer
      * @Constructor
      *
-     * @param label
      */
     public RasterTreeNode(ClientRasterInfo layer) {
         super(layer);
@@ -86,6 +93,8 @@ public class RasterTreeNode extends AbstractRasterTreeModel implements GPRasterB
         this.setAlias(layer.getAlias());
         this.setStyles(layer.getStyles());
         this.setOpacity(layer.getOpacity());
+        this.setMaxScale(layer.getMaxScale());
+        this.setMinScale(layer.getMinScale());
     }
 
     /**
@@ -115,10 +124,35 @@ public class RasterTreeNode extends AbstractRasterTreeModel implements GPRasterB
     }
 
     /**
-     * (non-Javadoc)
-     *
-     * @see org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel#getIcon()
+     * @return the maxScale
      */
+    public Float getMaxScale() {
+        return maxScale;
+    }
+
+    /**
+     * @param maxScale the maxScale to set
+     */
+    public final void setMaxScale(Float maxScale) {
+        this.maxScale = maxScale;
+        super.set(GPRasterKeyValue.MAX_SCALE.toString(), this.maxScale);
+    }
+
+    /**
+     * @return the minScale
+     */
+    public Float getMinScale() {
+        return minScale;
+    }
+
+    /**
+     * @param minScale the minScale to set
+     */
+    public final void setMinScale(Float minScale) {
+        this.minScale = minScale;
+        super.set(GPRasterKeyValue.MIN_SCALE.toString(), this.minScale);
+    }
+
     @Override
     public AbstractImagePrototype getIcon() {
         return this.getState().getIcon();
@@ -126,10 +160,8 @@ public class RasterTreeNode extends AbstractRasterTreeModel implements GPRasterB
 
     @Override
     public IGPLayerTreeState getState() {
-        if (super.state == null) {
-            super.state = LayerStateEnum.RASTER_NO_OP.getValue();
-        }
-        return super.state;
+        return super.state = (super.state == null)
+                ? LayerStateEnum.RASTER_NO_OP.getValue() : super.state;
     }
 
     @Override
@@ -167,6 +199,9 @@ public class RasterTreeNode extends AbstractRasterTreeModel implements GPRasterB
     @Override
     public String toString() {
         return "RasterTreeNode {" + super.toString()
-                + ", opacity = " + opacity + "}";
+                + ", opacity = " + opacity
+                + ", maxScale = " + maxScale
+                + ", minScale = " + minScale + "}";
     }
+
 }

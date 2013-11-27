@@ -485,6 +485,12 @@ public interface LayerModuleConstants extends Constants {
      */
     @DefaultStringValue("opacity")
     String RasterTreeNode_opacityText();
+    
+    @DefaultStringValue("max scale")
+    String RasterTreeNode_maxScaleText();
+    
+    @DefaultStringValue("min scale")
+    String RasterTreeNode_minScaleText();
 
     /**
      * start GPRootTreeNode

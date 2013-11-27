@@ -81,16 +81,16 @@ import org.springframework.stereotype.Component;
  */
 @Component(value = "dtoLayerConverter")
 public class DTOLayerConverter {
-
+    
     private GeoServerRESTReader sharedRestReader;
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
+    
     @Autowired
     public void setRestReader(
             @Qualifier(value = "sharedRestReader") GeoServerRESTReader sharedRestReader) {
         this.sharedRestReader = sharedRestReader;
     }
-
+    
     public ArrayList<GPFolderClientInfo> convertOnlyFolders(
             Collection<FolderDTO> folders) {
         ArrayList<GPFolderClientInfo> foldersClient = Lists.<GPFolderClientInfo>newArrayList();
@@ -102,7 +102,7 @@ public class DTOLayerConverter {
         }
         return foldersClient;
     }
-
+    
     private List<IGPFolderElements> convertFolderElements(
             List<IElementDTO> folderElements) {
         List<IGPFolderElements> clientFolderElements = Lists.<IGPFolderElements>newArrayList();
@@ -112,7 +112,7 @@ public class DTOLayerConverter {
         }
         return clientFolderElements;
     }
-
+    
     public ArrayList<IGPFolderElements> convertFolderElements(
             TreeFolderElements folderElements) {
         ArrayList<IGPFolderElements> clientFolderElements = Lists.<IGPFolderElements>newArrayList();
@@ -124,7 +124,7 @@ public class DTOLayerConverter {
         }
         return clientFolderElements;
     }
-
+    
     private IGPFolderElements convertElement(IElementDTO element) {
         IGPFolderElements folderElement = null;
         if (element instanceof RasterLayerDTO) {
@@ -137,12 +137,14 @@ public class DTOLayerConverter {
         }
         return folderElement;
     }
-
+    
     private ClientRasterInfo convertRasterElement(RasterLayerDTO rasterDTO) {
         ClientRasterInfo raster = new ClientRasterInfo();
         this.convertToLayerElementFromLayerDTO(raster, rasterDTO);
         raster.setLayerType(GPLayerType.WMS);
         raster.setOpacity(rasterDTO.getOpacity());
+        raster.setMaxScale(rasterDTO.getMaxScale());
+        raster.setMinScale(rasterDTO.getMinScale());
         ArrayList<GPStyleStringBeanModel> styles = Lists.<GPStyleStringBeanModel>newArrayList();
         GPStyleStringBeanModel style;
         for (String styleString : rasterDTO.getStyleList()) {
@@ -153,7 +155,7 @@ public class DTOLayerConverter {
         raster.setStyles(styles);
         return raster;
     }
-
+    
     private ClientVectorInfo convertVectorElement(VectorLayerDTO vectorDTO) {
         ClientVectorInfo vector = new ClientVectorInfo();
         this.convertToLayerElementFromLayerDTO(vector, vectorDTO);
@@ -161,7 +163,7 @@ public class DTOLayerConverter {
         vector.setFeatureType(vectorDTO.getName());
         return vector;
     }
-
+    
     private void convertToLayerElementFromLayerDTO(GPLayerClientInfo layer,
             ShortLayerDTO layerDTO) {
         layer.setAbstractText(layerDTO.getAbstractText());
@@ -183,12 +185,12 @@ public class DTOLayerConverter {
                 if ((dimension != null) && (!dimension.contains("<h2>"))) {
                     List<String> dimensionList = Lists.<String>newArrayList(
                             dimension.split(","));
-
+                    
                     String[] timeFilterSplitted = layerDTO.getTimeFilter().split(
                             "/");
                     int startDimensionPosition = Integer.parseInt(
                             timeFilterSplitted[0]);
-
+                    
                     String variableTimeFilter = dimensionList.get(
                             dimensionList.size() - startDimensionPosition - 1);
                     if (timeFilterSplitted.length > 1) {
@@ -201,10 +203,10 @@ public class DTOLayerConverter {
                     String layerAlias;
                     if (layerDTO.getAlias() != null
                             && layerDTO.getAlias().indexOf(
-                            LayerTimeFilterWidget.LAYER_TIME_DELIMITER) != -1) {
+                                    LayerTimeFilterWidget.LAYER_TIME_DELIMITER) != -1) {
                         layerAlias = layerDTO.getAlias().substring(0,
                                 layerDTO.getAlias().indexOf(
-                                LayerTimeFilterWidget.LAYER_TIME_DELIMITER));
+                                        LayerTimeFilterWidget.LAYER_TIME_DELIMITER));
                     } else {
                         layerAlias = layerDTO.getTitle();
                     }
@@ -221,7 +223,7 @@ public class DTOLayerConverter {
         }
         // layer.setzIndex(layerDTO.getPosition());
     }
-
+    
     private GPFolderClientInfo convertFolderElement(FolderDTO folderDTO) {
         GPFolderClientInfo folder = new GPFolderClientInfo();
         folder.setLabel(folderDTO.getName());
@@ -234,12 +236,12 @@ public class DTOLayerConverter {
                 folderDTO.getElementList()));
         return folder;
     }
-
+    
     private BBoxClientInfo convertBbox(GPBBox gpBbox) {
         return new BBoxClientInfo(gpBbox.getMinX(), gpBbox.getMinY(),
                 gpBbox.getMaxX(), gpBbox.getMaxY());
     }
-
+    
     private void setVectorLayerType(ClientVectorInfo vector,
             GPLayerType layerType) {
         switch (layerType) {
@@ -265,7 +267,7 @@ public class DTOLayerConverter {
                 System.out.println("### No Layer Type ###");
         }
     }
-
+    
     public GPFolder convertMementoFolder(MementoFolder memento) {
         GPFolder gpFolder = new GPFolder();
         gpFolder.setId(memento.getIdBaseElement());
@@ -283,14 +285,14 @@ public class DTOLayerConverter {
          */
         return gpFolder;
     }
-
+    
     public GPProject convertToGProject(GPClientProject clientProject) {
         GPProject project = new GPProject();
         project.setName(clientProject.getName());
         project.setShared(clientProject.isShared());
         return project;
     }
-
+    
     public AccountProjectPropertiesDTO convertToAccountProjectPropertiesDTO(
             Long accountID,
             GPClientProject project) {
@@ -303,7 +305,7 @@ public class DTOLayerConverter {
         dto.setShared(project.isShared());
         return dto;
     }
-
+    
     public GPClientProject convertToGPClientProject(ProjectDTO projectDTO) {
         GPClientProject clientProject = new GPClientProject();
         clientProject.setId(projectDTO.getId());
@@ -323,14 +325,14 @@ public class DTOLayerConverter {
                 projectDTO.getRootFolders()));
         return clientProject;
     }
-
+    
     public GPClientProject convertToGPCLientProject(ProjectDTO projectDTO,
             String imageURL) {
         GPClientProject clientProject = this.convertToGPClientProject(projectDTO);
         clientProject.setImage(imageURL);
         return clientProject;
     }
-
+    
     public List<GPSimpleUser> convertToGPSimpleUser(
             List<ShortAccountDTO> shortAccountList) {
         List<GPSimpleUser> listSimpleUser = Lists.<GPSimpleUser>newArrayList();
@@ -342,7 +344,7 @@ public class DTOLayerConverter {
         }
         return listSimpleUser;
     }
-
+    
     private GPSimpleUser convertToGPSimpleUser(UserDTO userDTO) {
         GPSimpleUser user = new GPSimpleUser();
         user.setId(userDTO.getId());
@@ -352,5 +354,5 @@ public class DTOLayerConverter {
         user.setEmail(userDTO.getEmailAddress());
         return user;
     }
-
+    
 }

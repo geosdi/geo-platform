@@ -49,11 +49,15 @@ import org.geosdi.geoplatform.core.model.GPRasterLayer;
  */
 @XmlRootElement(name = "RasterLayerDTO")
 public class RasterLayerDTO extends ShortLayerDTO {
-
+    
     private GPLayerInfo layerInfo;
     //
     private float opacity;
-    //    
+    //
+    private Float maxScale;
+    //
+    private Float minScale;
+    //
     @XmlElementWrapper(name = "styleList")
     @XmlElement(name = "style")
     private List<String> styleList;
@@ -77,6 +81,8 @@ public class RasterLayerDTO extends ShortLayerDTO {
         this.layerInfo = rasterLayer.getLayerInfo();
         this.opacity = rasterLayer.getOpacity();
         this.styleList = rasterLayer.getStyles();
+        this.maxScale = rasterLayer.getMaxScale();
+        this.minScale = rasterLayer.getMinScale();
     }
     //</editor-fold>
 
@@ -89,8 +95,7 @@ public class RasterLayerDTO extends ShortLayerDTO {
     }
 
     /**
-     * @param layerInfo
-     *            the layerInfo to set
+     * @param layerInfo the layerInfo to set
      */
     public void setLayerInfo(GPLayerInfo layerInfo) {
         this.layerInfo = layerInfo;
@@ -104,14 +109,42 @@ public class RasterLayerDTO extends ShortLayerDTO {
     }
 
     /**
-     * @param opacity
-     *              the opacity to set
+     * @param opacity the opacity to set
      */
     public void setOpacity(float opacity) {
         if (opacity < 0.0f || opacity > 1.0f) {
-            throw new IllegalArgumentException("The opacity must be between 0.0 and 1.0");
+            throw new IllegalArgumentException(
+                    "The opacity must be between 0.0 and 1.0");
         }
         this.opacity = opacity;
+    }
+
+    /**
+     * @return the maxScale
+     */
+    public Float getMaxScale() {
+        return maxScale;
+    }
+
+    /**
+     * @param maxScale the maxScale to set
+     */
+    public void setMaxScale(Float maxScale) {
+        this.maxScale = maxScale;
+    }
+
+    /**
+     * @return the minScale
+     */
+    public Float getMinScale() {
+        return minScale;
+    }
+
+    /**
+     * @param minScale the minScale to set
+     */
+    public void setMinScale(Float minScale) {
+        this.minScale = minScale;
     }
 
     /**
@@ -122,8 +155,7 @@ public class RasterLayerDTO extends ShortLayerDTO {
     }
 
     /**
-     * @param styleList
-     *          the styleList to set
+     * @param styleList the styleList to set
      */
     public void setStyleList(List<String> styleList) {
         this.styleList = styleList;
@@ -137,37 +169,42 @@ public class RasterLayerDTO extends ShortLayerDTO {
     }
 
     /**
-     * @param subLayerList
-     *          the subLayerList to set
+     * @param subLayerList the subLayerList to set
      */
     public void setSubLayerList(List<RasterLayerDTO> subLayerList) {
         this.subLayerList = subLayerList;
     }
     //</editor-fold>
 
+    public static GPRasterLayer convertToGPRasterLayer(GPProject project,
+            GPFolder parent, RasterLayerDTO rasterDTO) {
+        
+        GPRasterLayer raster = new GPRasterLayer();
+        ShortLayerDTO.convertToGPLayer(project, parent, raster, rasterDTO);
+        
+        raster.setLayerInfo(rasterDTO.getLayerInfo());
+        raster.setOpacity(rasterDTO.getOpacity());
+        raster.setStyles(rasterDTO.getStyleList());
+        raster.setMaxScale(rasterDTO.getMaxScale());
+        raster.setMinScale(rasterDTO.getMinScale());
+        
+        return raster;
+    }
+
     /**
      * (non-Javadoc)
-     * 
+     *
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
-        return "RasterLayerDTO [" + super.toString() + ", " + layerInfo
-                + ", opacity=" + opacity
-                + ", styleList=" + styleList
-                + ", subLayerList=" + subLayerList + "]";
+        return "RasterLayerDTO [" + super.toString()
+                + ", layerInfo = " + layerInfo
+                + ", opacity = " + opacity
+                + ", maxScale = " + maxScale
+                + ", minScale = " + minScale
+                + ", styleList = " + styleList
+                + ", subLayerList = " + subLayerList + "]";
     }
-
-    public static GPRasterLayer convertToGPRasterLayer(GPProject project, GPFolder parent,
-            RasterLayerDTO rasterDTO) {
-        
-        GPRasterLayer raster = new GPRasterLayer();
-        ShortLayerDTO.convertToGPLayer(project, parent, raster, rasterDTO);
-
-        raster.setLayerInfo(rasterDTO.getLayerInfo());
-        raster.setOpacity(rasterDTO.getOpacity());
-        raster.setStyles(rasterDTO.getStyleList());
-
-        return raster;
-    }
+    
 }

@@ -72,7 +72,7 @@ public class GPLayerInfoBinding extends GeoPlatformBindingWidget<GPLayerBean> {
     private TextField<String> aliasField;
     private TextField<String> serverField;
     //
-    private GPTreeLabelEvent labelEvent = new TreeChangeLabelEvent();
+    private final GPTreeLabelEvent labelEvent = new TreeChangeLabelEvent();
 
     @Override
     public FormPanel createFormPanel() {
@@ -86,10 +86,12 @@ public class GPLayerInfoBinding extends GeoPlatformBindingWidget<GPLayerBean> {
                 GPLayerInfoBinding_titleLabelText());
 
         titleField.addListener(Events.Change, new Listener<FieldEvent>() {
+
             @Override
             public void handleEvent(FieldEvent be) {
                 titleField.setValue((String) be.getOldValue());
             }
+
         });
 
         fp.add(titleField);
@@ -101,10 +103,12 @@ public class GPLayerInfoBinding extends GeoPlatformBindingWidget<GPLayerBean> {
                 GPLayerInfoBinding_abstractLabelText());
 
         abstractField.addListener(Events.Change, new Listener<FieldEvent>() {
+
             @Override
             public void handleEvent(FieldEvent be) {
                 abstractField.setValue((String) be.getOldValue());
             }
+
         });
 
         fp.add(abstractField);
@@ -115,15 +119,18 @@ public class GPLayerInfoBinding extends GeoPlatformBindingWidget<GPLayerBean> {
                 GPLayerInfoBinding_aliasLabelText());
         aliasField.setFireChangeEventOnSetValue(true);
         aliasField.addKeyListener(new KeyListener() {
+
             @Override
             public void componentKeyDown(ComponentEvent event) {
                 super.componentKeyDown(event);
                 if (event.getKeyCode() == KeyCodes.KEY_ENTER
                         && !aliasField.getValue().isEmpty()) {
                     getModel().setAlias(aliasField.getValue());
-                    LayerHandlerManager.fireEvent(new ReloadLegendEvent(getModel()));
+                    LayerHandlerManager.fireEvent(new ReloadLegendEvent(
+                            getModel()));
                 }
             }
+
         });
 
         fp.add(aliasField);
@@ -135,10 +142,12 @@ public class GPLayerInfoBinding extends GeoPlatformBindingWidget<GPLayerBean> {
                 GPLayerInfoBinding_serverLabelText());
 
         serverField.addListener(Events.Change, new Listener<FieldEvent>() {
+
             @Override
             public void handleEvent(FieldEvent be) {
                 serverField.setValue((String) be.getOldValue());
             }
+
         });
 
         fp.add(serverField);
@@ -148,8 +157,9 @@ public class GPLayerInfoBinding extends GeoPlatformBindingWidget<GPLayerBean> {
 
     @Override
     public void addFieldsBinding() {
-        this.formBinding.addFieldBinding(new GPLayerAliasFieldBinding(aliasField,
-                GPLayerKeyValue.ALIAS.toString()));
+        this.formBinding.addFieldBinding(
+                new GPLayerAliasFieldBinding(aliasField,
+                        GPLayerKeyValue.ALIAS.toString()));
     }
 
     /**
@@ -169,7 +179,8 @@ public class GPLayerInfoBinding extends GeoPlatformBindingWidget<GPLayerBean> {
         public void setModelProperty(Object val) {
             //Copying the value on memento before changes
             IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
-            AbstractMementoOriginalProperties memento = mementoSave.copyOriginalProperties((GPLayerTreeModel) model);
+            AbstractMementoOriginalProperties memento = mementoSave.copyOriginalProperties(
+                    (GPLayerTreeModel) model);
             ((GPLayerBean) model).setAlias(val != null ? (String) val : "");
             mementoSave.putOriginalPropertiesInCache(memento);
             WidgetPropertiesHandlerManager.fireEvent(labelEvent);
@@ -178,5 +189,7 @@ public class GPLayerInfoBinding extends GeoPlatformBindingWidget<GPLayerBean> {
         @Override
         public void setRecordProperty(Record r, Object val) {
         }
+
     }
+
 }

@@ -398,6 +398,8 @@ class LayerServiceImpl {
             try {
                 GPRasterLayer raster = (GPRasterLayer) layer;
                 raster.setOpacity(layerProperties.getOpacity());
+                raster.setMaxScale(layerProperties.getMaxScale());
+                raster.setMinScale(layerProperties.getMinScale());
                 raster.setStyles(layerProperties.getStyleList());
                 raster.setCqlFilter(layerProperties.getCqlFilter());
                 raster.setTimeFilter(layerProperties.getTimeFilter());

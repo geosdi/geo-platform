@@ -201,7 +201,7 @@ public class UploadServlet extends HttpServlet {
                 previewList = this.gpPublisherUploader.
                         analyzeZIPEPSG(sessionID, username, uploadedFile);
             } catch (ResourceNotFoundFault ex) {
-                logger.info("Error on uploading shape: " + ex);
+                logger.error("Error on uploading shape: " + ex);
                 throw new GeoPlatformException("Error on uploading shape.");
             }
         } else if (extension.equalsIgnoreCase(GPExtensions.TIF.toString())
@@ -212,7 +212,7 @@ public class UploadServlet extends HttpServlet {
                         analyzeTIFInPreview(
                         username, uploadedFile, true));
             } catch (ResourceNotFoundFault ex) {
-                logger.info("Error on uploading shape: " + ex);
+                logger.error("Error on uploading shape: " + ex);
                 throw new GeoPlatformException("Error on uploading shape.");
             }
         }

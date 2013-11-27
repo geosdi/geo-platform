@@ -38,11 +38,19 @@ package org.geosdi.geoplatform.gui.model;
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public interface GPRasterBean extends GPLayerBean {
-    
+
     public void setOpacity(float opacity);
-    
+
     public float getOpacity();
+
+    public Float getMaxScale();
+
+    public void setMaxScale(Float maxScale);
+
+    public Float getMinScale();
+
+    public void setMinScale(Float minScale);
 }

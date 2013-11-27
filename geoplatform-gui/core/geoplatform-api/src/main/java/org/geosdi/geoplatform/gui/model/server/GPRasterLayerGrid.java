@@ -46,6 +46,8 @@ public class GPRasterLayerGrid extends GPLayerGrid implements GPRasterBean {
 
     private static final long serialVersionUID = -421196804918413910L;
     //
+    private Float minScale;
+    private Float maxScale;
     private float opacity = 1.0f;
 
     /**
@@ -62,6 +64,26 @@ public class GPRasterLayerGrid extends GPLayerGrid implements GPRasterBean {
     @Override
     public void setOpacity(float opacity) {
         this.opacity = opacity;
+    }
+
+    @Override
+    public Float getMinScale() {
+        return minScale;
+    }
+
+    @Override
+    public void setMinScale(Float minScale) {
+        this.minScale = minScale;
+    }
+
+    @Override
+    public Float getMaxScale() {
+        return maxScale;
+    }
+
+    @Override
+    public void setMaxScale(Float maxScale) {
+        this.maxScale = maxScale;
     }
 
     @Override

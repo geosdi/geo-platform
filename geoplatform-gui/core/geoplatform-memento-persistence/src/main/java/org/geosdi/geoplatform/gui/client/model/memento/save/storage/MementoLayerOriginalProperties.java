@@ -50,6 +50,8 @@ public class MementoLayerOriginalProperties extends AbstractMementoOriginalPrope
 
     private static final long serialVersionUID = 2399513531544205577L;
     private float opacity;
+    private Float minScale;
+    private Float maxScale;
     private String cqlFilter;
     private String timeFilter;
     private ArrayList<GPStyleStringBeanModel> styleList;
@@ -70,6 +72,8 @@ public class MementoLayerOriginalProperties extends AbstractMementoOriginalPrope
             opacity = ((AbstractRasterTreeModel) super.getRefBaseElement()).getOpacity();
             cqlFilter = ((AbstractRasterTreeModel) super.getRefBaseElement()).getCqlFilter();
             timeFilter = ((AbstractRasterTreeModel) super.getRefBaseElement()).getTimeFilter();
+            maxScale = ((AbstractRasterTreeModel) super.getRefBaseElement()).getMaxScale();
+            minScale = ((AbstractRasterTreeModel) super.getRefBaseElement()).getMinScale();
         }
     }
 
@@ -85,6 +89,22 @@ public class MementoLayerOriginalProperties extends AbstractMementoOriginalPrope
      */
     public void setOpacity(float opacity) {
         this.opacity = opacity;
+    }
+
+    public Float getMinScale() {
+        return minScale;
+    }
+
+    public void setMinScale(Float minScale) {
+        this.minScale = minScale;
+    }
+
+    public Float getMaxScale() {
+        return maxScale;
+    }
+
+    public void setMaxScale(Float maxScale) {
+        this.maxScale = maxScale;
     }
 
     /**
@@ -129,6 +149,8 @@ public class MementoLayerOriginalProperties extends AbstractMementoOriginalPrope
     private boolean isRasterChanged() {
         return (super.getRefBaseElement() instanceof AbstractRasterTreeModel
                 && ((AbstractRasterTreeModel) super.getRefBaseElement()).getOpacity() != this.getOpacity()
+                || ((AbstractRasterTreeModel) super.getRefBaseElement()).getMaxScale() != this.getMaxScale()
+                || ((AbstractRasterTreeModel) super.getRefBaseElement()).getMinScale() != this.getMinScale()
                 || !((AbstractRasterTreeModel) super.getRefBaseElement()).getStyles().equals(this.getStyleList())
                 || !cqlFilter.equalsIgnoreCase(super.getRefBaseElement().getCqlFilter())
                 || !timeFilter.equalsIgnoreCase(super.getRefBaseElement().getTimeFilter()));
@@ -154,6 +176,8 @@ public class MementoLayerOriginalProperties extends AbstractMementoOriginalPrope
                 this.setStyleList(raster.getStyles());
                 this.setCqlFilter(raster.getCqlFilter());
                 this.setTimeFilter(raster.getTimeFilter());
+                this.setMaxScale(raster.getMaxScale());
+                this.setMinScale(raster.getMinScale());
 //                System.out.println("Opacity setted: " + memento.getOpacity());
             }
             super.setRefBaseElement(layer);

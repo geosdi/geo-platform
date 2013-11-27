@@ -116,6 +116,8 @@ public class DTOMementoConverter {
         dto.setOpacity(memento.getOpacity());
         dto.setCqlFilter(memento.getCqlFilter());
         dto.setTimeFilter(memento.getTimeFilter());
+        dto.setMaxScale(memento.getMaxScale());
+        dto.setMinScale(memento.getMinScale());
         List<String> styleList = Lists.<String>newArrayList();
         if (memento.getStyleList() != null) {
             for (GPStyleStringBeanModel beanModel : memento.getStyleList()) {

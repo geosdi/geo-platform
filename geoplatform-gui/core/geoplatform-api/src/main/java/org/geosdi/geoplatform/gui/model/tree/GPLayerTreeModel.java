@@ -81,7 +81,7 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel
     private String crs;
     private BBoxClientInfo bbox;
     private GPLayerType layerType;
-    private ArrayList<GPStyleStringBeanModel> styles = Lists.newArrayList();
+    private ArrayList<GPStyleStringBeanModel> styles = Lists.<GPStyleStringBeanModel>newArrayList();
     private String cqlFilter;
     private String timeFilter;
     private String variableTimeFilter;

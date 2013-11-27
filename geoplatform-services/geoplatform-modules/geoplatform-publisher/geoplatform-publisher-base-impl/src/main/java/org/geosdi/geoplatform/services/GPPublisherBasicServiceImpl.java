@@ -89,7 +89,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
         String name;
         String fileName;
         boolean isShp;
-        String epsg;
+        String epsg = "";
         String sld;
         boolean isPresent;
     }

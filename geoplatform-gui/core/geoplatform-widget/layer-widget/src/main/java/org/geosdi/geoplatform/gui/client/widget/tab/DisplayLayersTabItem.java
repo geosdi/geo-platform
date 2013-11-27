@@ -64,10 +64,6 @@ public class DisplayLayersTabItem extends GenericTabItem<GPLayerBean> {
         this.bindingWidget.bindModel(model);
     }
 
-    /**
-     * 
-     * @param size 
-     */
     public void updateWindowSize() {
         event.setSize(super.getTabPanel().getHeight());
         WidgetPropertiesHandlerManager.fireEvent(event);

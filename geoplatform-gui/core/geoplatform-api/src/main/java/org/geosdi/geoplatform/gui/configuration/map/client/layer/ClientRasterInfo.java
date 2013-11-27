@@ -42,7 +42,7 @@ import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitorClient;
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public class ClientRasterInfo extends GPLayerClientInfo {
 
@@ -52,8 +52,10 @@ public class ClientRasterInfo extends GPLayerClientInfo {
     private static final long serialVersionUID = 3956898488739664952L;
     //
     private float opacity = 1.0f;
+    private Float maxScale;
+    private Float minScale;
     private ArrayList<GPStyleStringBeanModel> styles;
-    
+
     /**
      * @return the styles
      */
@@ -76,8 +78,35 @@ public class ClientRasterInfo extends GPLayerClientInfo {
     }
 
     /**
-     * @param styles
-     *            the styles to set
+     * @return the maxScale
+     */
+    public Float getMaxScale() {
+        return maxScale;
+    }
+
+    /**
+     * @param maxScale the maxScale to set
+     */
+    public void setMaxScale(Float maxScale) {
+        this.maxScale = maxScale;
+    }
+
+    /**
+     * @return the minScale
+     */
+    public Float getMinScale() {
+        return minScale;
+    }
+
+    /**
+     * @param minScale the minScale to set
+     */
+    public void setMinScale(Float minScale) {
+        this.minScale = minScale;
+    }
+
+    /**
+     * @param styles the styles to set
      */
     public void setStyles(ArrayList<GPStyleStringBeanModel> styles) {
         this.styles = styles;
@@ -88,17 +117,17 @@ public class ClientRasterInfo extends GPLayerClientInfo {
         visitor.visitRaster(this);
     }
 
-    /**
-     * (non-Javadoc)
-     *
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString() {
-        return "ClientRasterInfo [layerName = " + super.getLayerName() +
-                ", getDataSource() = " + getDataSource()
-                + ", getCrs() = " + getCrs() + ", getBbox() = " + getBbox()
-                + ", getLayerType() = " + getLayerType() + ", getOpacity() =  "
-                + getOpacity() + ", getzIndex() = " + getzIndex() + "]";
+        return "ClientRasterInfo [layerName = " + super.getLayerName()
+                + ", dataSource = " + getDataSource()
+                + ", crs = " + getCrs()
+                + ", bbox = " + getBbox()
+                + ", layerType = " + getLayerType()
+                + ", opacity =  " + getOpacity()
+                + ", maxScale =  " + getMaxScale()
+                + ", minScale =  " + getMinScale()
+                + ", getzIndex() = " + getzIndex() + "]";
     }
+
 }

@@ -53,7 +53,7 @@ import org.hibernate.annotations.OnDeleteAction;
 
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI
- * 
+ *
  */
 @XmlRootElement(name = "RasterLayer")
 @Entity(name = "RasterLayer")
@@ -74,6 +74,12 @@ public class GPRasterLayer extends GPLayer {
     //
     @Embedded
     private GPLayerInfo layerInfo;
+    //
+    @Column(name = "max_scale")
+    private Float maxScale;
+    //
+    @Column(name = "min_scale")
+    private Float minScale;
     //
     @ManyToOne(optional = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -96,12 +102,12 @@ public class GPRasterLayer extends GPLayer {
     }
 
     /**
-     * @param opacity
-     *              the opacity to set
+     * @param opacity the opacity to set
      */
     public void setOpacity(float opacity) {
         if (opacity < 0.0f || opacity > 1.0f) {
-            throw new IllegalArgumentException("The opacity must be between 0.0 and 1.0");
+            throw new IllegalArgumentException(
+                    "The opacity must be between 0.0 and 1.0");
         }
         this.opacity = opacity;
     }
@@ -117,8 +123,7 @@ public class GPRasterLayer extends GPLayer {
     }
 
     /**
-     * @param styles
-     *            the styles to set
+     * @param styles the styles to set
      */
     public void setStyles(List<String> styles) {
         if (styles == null || styles.isEmpty()) {
@@ -142,11 +147,38 @@ public class GPRasterLayer extends GPLayer {
     }
 
     /**
-     * @param layerInfo
-     *            the layerInfo to set
+     * @param layerInfo the layerInfo to set
      */
     public void setLayerInfo(GPLayerInfo layerInfo) {
         this.layerInfo = layerInfo;
+    }
+
+    /**
+     * @return the maxScale
+     */
+    public Float getMaxScale() {
+        return maxScale;
+    }
+
+    /**
+     * @param maxScale the maxScale to set
+     */
+    public void setMaxScale(Float maxScale) {
+        this.maxScale = maxScale;
+    }
+
+    /**
+     * @return the minScale
+     */
+    public Float getMinScale() {
+        return minScale;
+    }
+
+    /**
+     * @param minScale the minScale to set
+     */
+    public void setMinScale(Float minScale) {
+        this.minScale = minScale;
     }
 
     /**
@@ -158,8 +190,7 @@ public class GPRasterLayer extends GPLayer {
     }
 
     /**
-     * @param folder
-     *          the folder to set
+     * @param folder the folder to set
      */
     @Override
     public void setFolder(GPFolder folder) {
@@ -175,26 +206,24 @@ public class GPRasterLayer extends GPLayer {
     }
 
     /**
-     * @param project
-     *            the project to set
+     * @param project the project to set
      */
     @Override
     public void setProject(GPProject project) {
         this.project = project;
     }
 
-    /**
-     * (non-Javadoc)
-     *
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString() {
-        StringBuilder str = new StringBuilder(this.getClass().getSimpleName()).append(" {");
+        StringBuilder str = new StringBuilder(this.getClass().getSimpleName()).append(
+                " {");
         str.append(super.toString());
-        str.append(", opacity=").append(opacity);
-        str.append(", styles=").append(styles);
-        str.append(", layerInfo=").append(layerInfo);
+        str.append(", opacity = ").append(opacity);
+        str.append(", styles = ").append(styles);
+        str.append(", layerInfo = ").append(layerInfo);
+        str.append(", maxScale = ").append(maxScale);
+        str.append(", minScale = ").append(minScale);
         return str.append("}").toString();
     }
+
 }

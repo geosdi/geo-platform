@@ -73,7 +73,7 @@ public class GPLayerDisplayBinding extends GeoPlatformBindingWidget<GPRasterBean
     private Slider slider;
     private GPSliderField sliderField;
     private GPRasterOpacityFieldBinding opacityFieldBinding;
-    private OpacityLayerMapEvent opacityEvent = new OpacityLayerMapEvent();
+    private final OpacityLayerMapEvent opacityEvent = new OpacityLayerMapEvent();
 
     @Override
     public FormPanel createFormPanel() {
@@ -89,12 +89,15 @@ public class GPLayerDisplayBinding extends GeoPlatformBindingWidget<GPRasterBean
                 GPLayerDisplayBinding_opacityHeadingText());
         opacityFieldSet.setCollapsible(true);
 
-        opacityFieldSet.addListener(Events.Collapse, new Listener<ComponentEvent>() {
-            @Override
-            public void handleEvent(ComponentEvent be) {
-                ((DisplayLayersTabItem) opacityFieldSet.getParent().getParent()).updateWindowSize();
-            }
-        });
+        opacityFieldSet.addListener(Events.Collapse,
+                new Listener<ComponentEvent>() {
+
+                    @Override
+                    public void handleEvent(ComponentEvent be) {
+                        ((DisplayLayersTabItem) opacityFieldSet.getParent().getParent()).updateWindowSize();
+                    }
+
+                });
 
         sliderField = new GPSliderField(this.slider);
         sliderField.setName(GPRasterKeyValue.OPACITY.toString());
@@ -129,10 +132,12 @@ public class GPLayerDisplayBinding extends GeoPlatformBindingWidget<GPRasterBean
                 GPLayerDisplayBinding_sliderMessageText());
 
         slider.addListener(Events.Change, new Listener<SliderEvent>() {
+
             @Override
             public void handleEvent(SliderEvent be) {
                 opacityFieldBinding.setModelProperty(be.getNewValue());
             }
+
         });
 
         slider.setData("text", LayerModuleConstants.INSTANCE.
@@ -146,18 +151,24 @@ public class GPLayerDisplayBinding extends GeoPlatformBindingWidget<GPRasterBean
      */
     private ComponentPlugin createSliderPlugin() {
         ComponentPlugin plugin = new ComponentPlugin() {
+
             @Override
             public void init(Component component) {
-                component.addListener(Events.Render, new Listener<ComponentEvent>() {
-                    @Override
-                    public void handleEvent(ComponentEvent be) {
-                        El elem = sliderField.el();
-                        // should style in external CSS  rather than directly  
-                        elem.appendChild(XDOM.create("<div style='color: #615f5f;padding: 1 0 2 0px;'>"
-                                + slider.getData("text") + "</div>"));
-                    }
-                });
+                component.addListener(Events.Render,
+                        new Listener<ComponentEvent>() {
+
+                            @Override
+                            public void handleEvent(ComponentEvent be) {
+                                El elem = sliderField.el();
+                                // should style in external CSS  rather than directly  
+                                elem.appendChild(XDOM.create(
+                                                "<div style='color: #615f5f;padding: 1 0 2 0px;'>"
+                                                + slider.getData("text") + "</div>"));
+                            }
+
+                        });
             }
+
         };
 
         return plugin;
@@ -185,7 +196,8 @@ public class GPLayerDisplayBinding extends GeoPlatformBindingWidget<GPRasterBean
             ((GPRasterBean) GPLayerDisplayBinding.this.getModel()).
                     setOpacity(((Integer) val).floatValue() / 100);
             mementoSave.putOriginalPropertiesInCache(memento);
-            opacityEvent.setLayerBean((GPRasterBean) GPLayerDisplayBinding.this.getModel());
+            opacityEvent.setLayerBean(
+                    (GPRasterBean) GPLayerDisplayBinding.this.getModel());
             GPHandlerManager.fireEvent(opacityEvent);
         }
 
@@ -198,12 +210,15 @@ public class GPLayerDisplayBinding extends GeoPlatformBindingWidget<GPRasterBean
          */
         @Override//From model to view
         public void updateField(boolean updateOriginalValue) {
-            Float opacity = new Float(((GPRasterBean) GPLayerDisplayBinding.this.getModel()).getOpacity() * 100);
+            Float opacity = new Float(
+                    ((GPRasterBean) GPLayerDisplayBinding.this.getModel()).getOpacity() * 100);
             ((SliderField) field).setValue(opacity.intValue());
         }
 
         @Override
         public void setRecordProperty(Record r, Object val) {
         }
+
     }
+
 }

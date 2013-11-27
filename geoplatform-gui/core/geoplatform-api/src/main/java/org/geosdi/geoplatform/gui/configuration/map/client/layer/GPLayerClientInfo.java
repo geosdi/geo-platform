@@ -48,6 +48,7 @@ public abstract class GPLayerClientInfo implements Serializable,
         Comparable<IGPFolderElements>, IGPFolderElements {
 
     private static final long serialVersionUID = 2098509654335891064L;
+    //
     private Long id;
     private String layerName;
     private String alias;

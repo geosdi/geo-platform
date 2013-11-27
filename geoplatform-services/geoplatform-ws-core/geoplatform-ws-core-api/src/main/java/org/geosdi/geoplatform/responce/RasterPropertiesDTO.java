@@ -50,6 +50,10 @@ public class RasterPropertiesDTO extends ShortLayerPropertiesDTO {
     //
     private Float opacity;
     //
+    private Float maxScale;
+    //
+    private Float minScale;
+    //
     @XmlElementWrapper(name = "styleList")
     @XmlElement(name = "style")
     private List<String> styleList;
@@ -60,6 +64,8 @@ public class RasterPropertiesDTO extends ShortLayerPropertiesDTO {
     public RasterPropertiesDTO(GPRasterLayer layer) {
         super(layer);
         this.opacity = layer.getOpacity();
+        this.maxScale = layer.getMaxScale();
+        this.minScale = layer.getMinScale();
         this.styleList = layer.getStyles();
     }
 
@@ -75,9 +81,38 @@ public class RasterPropertiesDTO extends ShortLayerPropertiesDTO {
      */
     public void setOpacity(float opacity) {
         if (opacity < 0.0f || opacity > 1.0f) {
-            throw new IllegalArgumentException("The opacity must be between 0.0 and 1.0");
+            throw new IllegalArgumentException(
+                    "The opacity must be between 0.0 and 1.0");
         }
         this.opacity = opacity;
+    }
+
+    /**
+     * @return the maxScale
+     */
+    public Float getMaxScale() {
+        return maxScale;
+    }
+
+    /**
+     * @param maxScale the maxScale to set
+     */
+    public void setMaxScale(Float maxScale) {
+        this.maxScale = maxScale;
+    }
+
+    /**
+     * @return the minScale
+     */
+    public Float getMinScale() {
+        return minScale;
+    }
+
+    /**
+     * @param minScale the minScale to set
+     */
+    public void setMinScale(Float minScale) {
+        this.minScale = minScale;
     }
 
     /**
@@ -102,7 +137,10 @@ public class RasterPropertiesDTO extends ShortLayerPropertiesDTO {
     @Override
     public String toString() {
         return "ShortRasterPropertiesDTO {" + super.toString()
-                + ", opacity=" + opacity
-                + ", styles=" + styleList + "}";
+                + ", opacity = " + opacity
+                + ", maxScale = " + maxScale
+                + ", minScale = " + minScale
+                + ", styles = " + styleList + "}";
     }
+
 }

@@ -116,7 +116,7 @@ public class LayersPropertiesWidget extends GeoPlatformWindow
     }
     
     @Override
-    public void show() {
+    public final void show() {
         if(this.model == null) {
             throw new IllegalArgumentException("Don't call this method, but call"
                     + " bindLayer(GPLayerBean model)");

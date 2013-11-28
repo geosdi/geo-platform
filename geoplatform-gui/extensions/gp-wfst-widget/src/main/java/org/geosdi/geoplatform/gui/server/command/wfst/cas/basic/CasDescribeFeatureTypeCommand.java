@@ -97,7 +97,11 @@ public class CasDescribeFeatureTypeCommand implements
             return new DescribeFeatureTypeResponse(result);
 
         } catch (Exception ex) {
-            throw new GeoPlatformException(ex.getMessage());
+            logger.error("####################CasDescribeFeatureTypeCommand "
+                    + "error : {}", ex.getMessage());
+            throw new GeoPlatformException(ex.getMessage().contains(
+                    "unexpected element (uri:\"\", local:\"html\")")
+                    ? "Unauthorized Service" : ex.getMessage());
         }
     }
 

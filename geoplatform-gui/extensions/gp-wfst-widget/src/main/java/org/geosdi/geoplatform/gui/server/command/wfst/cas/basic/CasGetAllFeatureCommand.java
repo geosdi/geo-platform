@@ -102,7 +102,11 @@ public class CasGetAllFeatureCommand implements
             return new GetAllFeatureResponse(result);
 
         } catch (Exception ex) {
-            throw new GeoPlatformException(ex.getMessage());
+            logger.error("####################CasGetAllFeatureCommand "
+                    + "error : {}", ex.getMessage());
+            throw new GeoPlatformException(ex.getMessage().contains(
+                    "unexpected element (uri:\"\", local:\"html\")")
+                    ? "Unauthorized Service" : ex.getMessage());
         }
     }
 

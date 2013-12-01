@@ -178,21 +178,6 @@ public interface MapModuleConstants extends Constants {
     String LineRequestHandler_confirmFeatureChangesBodyText();
 
     /**
-     * start GotoXYWidget
-     */
-    @DefaultStringValue("X")
-    String GotoXYWidget_xFieldLabelText();
-
-    @DefaultStringValue("Y")
-    String GotoXYWidget_yFieldLabelText();
-
-    @DefaultStringValue("Find Position")
-    String GotoXYWidget_headingText();
-
-    @DefaultStringValue("Goto X - Y")
-    String GotoXYWidget_fieldSetHeadingText();
-
-    /**
      * start GenericFeatureOperation
      */
     @DefaultStringValue("Delete Feature")

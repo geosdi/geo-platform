@@ -48,7 +48,7 @@ import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
  */
 public class GotoXYAction extends ToolbarMapAction {
 
-    private GotoXYWidget gotoXYWidget;
+    private final GotoXYWidget gotoXYWidget;
 
     public GotoXYAction(GeoPlatformMap theMapWidget) {
         super(BasicWidgetResources.ICONS.gotoXY(), 

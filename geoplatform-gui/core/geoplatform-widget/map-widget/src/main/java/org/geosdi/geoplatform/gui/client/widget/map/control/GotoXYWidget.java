@@ -40,20 +40,21 @@ import org.gwtopenmaps.openlayers.client.LonLat;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class GotoXYWidget extends GeoPlatformFormWidget<PointRepresentation> implements
-        IGeoPlatformForm {
+public class GotoXYWidget extends GeoPlatformFormWidget<PointRepresentation>
+        implements IGeoPlatformForm {
 
     private NumberField xNumberField;
     private NumberField yNumberField;
     private Button find;
     private Button close;
-    private GeocodingVectorMarker geocoderMarker = new GeocodingVectorMarker();
-    private GeoPlatformMap mapWidget;
+    private final GeocodingVectorMarker geocoderMarker;
+    private final GeoPlatformMap mapWidget;
     private GPEPSGContentPanel epsgPanel;
 
     public GotoXYWidget(Boolean lazy, GeoPlatformMap mapWidget) {
         super(lazy);
         this.mapWidget = mapWidget;
+        this.geocoderMarker = new GeocodingVectorMarker(this.mapWidget.getMap());
     }
 
     /*
@@ -65,24 +66,22 @@ public class GotoXYWidget extends GeoPlatformFormWidget<PointRepresentation> imp
     @Override
     public void execute() {
         String epsgCode = this.epsgPanel.getEpsgTextField().getValue();
-        LonLat center = new LonLat(xNumberField.getValue().doubleValue(), yNumberField.getValue().doubleValue());
+        LonLat center = new LonLat(xNumberField.getValue().doubleValue(),
+                yNumberField.getValue().doubleValue());
         if (!epsgCode.equals(this.mapWidget.getMap().getProjection())) {
             center.transform(epsgCode, this.mapWidget.getMap().getProjection());
         }
-//        this.geocoderMarker.setProvider(provider);
-        this.geocoderMarker.addMarker(center, this.mapWidget.getMap());
-//        GPToolbarActionHandlerManager.fireEvent(new UpdateModelAndButtonEvent(bean));
-//        org.gwtopenmaps.openlayers.client.MapWidget. //
-        //        inject();
-        //        Dispatcher.forwardEvent(GeoPortalEvents.SAVE_AOE_LINE, this.entity);
 
+        this.geocoderMarker.addMarker(center);
     }
 
     @Override
     public void addComponentToForm() {
-        super.setHeadingHtml(MapModuleConstants.INSTANCE.GotoXYWidget_headingText());
+        super.setHeadingHtml(
+                MapModuleConstants.INSTANCE.GotoXYWidget_headingText());
         fieldSet = new FieldSet();
-        fieldSet.setHeadingHtml(MapModuleConstants.INSTANCE.GotoXYWidget_fieldSetHeadingText());
+        fieldSet.setHeadingHtml(
+                MapModuleConstants.INSTANCE.GotoXYWidget_fieldSetHeadingText());
         FormLayout layout = new FormLayout();
         layout.setLabelWidth(80);
         fieldSet.setLayout(layout);
@@ -104,21 +103,25 @@ public class GotoXYWidget extends GeoPlatformFormWidget<PointRepresentation> imp
         formPanel.getButtonBar().add(new FillToolItem());
         this.find = new Button(ButtonsConstants.INSTANCE.findText(),
                 new SelectionListener<ButtonEvent>() {
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                if (formPanel.isValid()) {
-                    execute();
-                }
-            }
-        });
+
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                        if (formPanel.isValid()) {
+                            execute();
+                        }
+                    }
+
+                });
         formPanel.addButton(this.find);
         this.close = new Button(ButtonsConstants.INSTANCE.closeText(),
                 new SelectionListener<ButtonEvent>() {
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                GotoXYWidget.this.hide(GotoXYWidget.this.close);
-            }
-        });
+
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                        GotoXYWidget.this.hide(GotoXYWidget.this.close);
+                    }
+
+                });
         formPanel.addButton(this.close);
     }
 
@@ -163,12 +166,13 @@ public class GotoXYWidget extends GeoPlatformFormWidget<PointRepresentation> imp
 
     private void registerMark() {
         this.mapWidget.getMap().addLayer(geocoderMarker.getMarkerLayer());
-        this.geocoderMarker.addControl(this.mapWidget.getMap());
+        this.geocoderMarker.addControl();
     }
 
     private void unregisterMarker() {
-        this.geocoderMarker.removeControl(this.mapWidget.getMap());
+        this.geocoderMarker.removeControl();
         this.geocoderMarker.removeMarker();
         this.mapWidget.getMap().removeLayer(this.geocoderMarker.getMarkerLayer());
     }
+
 }

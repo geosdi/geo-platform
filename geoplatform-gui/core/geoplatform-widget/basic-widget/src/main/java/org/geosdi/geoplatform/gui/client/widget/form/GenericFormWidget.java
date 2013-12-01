@@ -69,6 +69,11 @@ public abstract class GenericFormWidget
             init();
         }
     }
+    
+    @Override
+    protected void beforeRender() {
+        this.init();
+    }
 
     /**
      * Init the Widget

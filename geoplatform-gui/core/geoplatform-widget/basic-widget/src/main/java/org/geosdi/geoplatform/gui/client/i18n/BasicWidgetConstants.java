@@ -195,4 +195,19 @@ public interface BasicWidgetConstants extends Constants {
 
     @DefaultStringValue("Uploaded File Succesfully")
     String GPFileUploader_successStatusText();
+    
+    /**
+     * start GotoXYWidget
+     */
+    @DefaultStringValue("X")
+    String GotoXYWidget_xFieldLabelText();
+
+    @DefaultStringValue("Y")
+    String GotoXYWidget_yFieldLabelText();
+
+    @DefaultStringValue("Find Position")
+    String GotoXYWidget_headingText();
+
+    @DefaultStringValue("Goto X - Y")
+    String GotoXYWidget_fieldSetHeadingText();
 }

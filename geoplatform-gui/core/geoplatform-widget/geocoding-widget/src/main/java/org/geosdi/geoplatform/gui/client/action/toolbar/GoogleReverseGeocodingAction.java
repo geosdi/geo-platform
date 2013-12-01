@@ -49,7 +49,7 @@ import org.geosdi.geoplatform.gui.puregwt.geocoding.GPGeocodingHandlerManager;
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public class GoogleReverseGeocodingAction extends ReverseGeocodingAction
         implements ReverseGeocodingToggleEventHandler {
@@ -58,7 +58,8 @@ public class GoogleReverseGeocodingAction extends ReverseGeocodingAction
         super(theMapWidget, GeocodingResources.ICONS.reverseGeocoding(),
                 GeocodingModuleConstants.INSTANCE.GoogleReverseGeocodingAction_tooltipText());
 
-        GPGeocodingHandlerManager.addHandler(ReverseGeocodingToggleEvent.TYPE, this);
+        GPGeocodingHandlerManager.addHandler(ReverseGeocodingToggleEvent.TYPE,
+                this);
     }
 
     @Override
@@ -71,7 +72,8 @@ public class GoogleReverseGeocodingAction extends ReverseGeocodingAction
     }
 
     @Override
-    public ReverseGeocodingWidget createWidget(GeoPlatformMap mapWidget) {
+    protected final ReverseGeocodingWidget createWidget(GeoPlatformMap mapWidget) {
         return new ReverseGeoCoderGoogleWidget(mapWidget);
     }
+
 }

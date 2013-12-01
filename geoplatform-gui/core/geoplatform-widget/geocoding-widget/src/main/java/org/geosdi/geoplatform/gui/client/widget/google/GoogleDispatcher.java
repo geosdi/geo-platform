@@ -53,12 +53,6 @@ import org.geosdi.geoplatform.gui.command.api.GPClientCommandExecutor;
  */
 public class GoogleDispatcher extends GeoCoderDispatcher {
 
-    /**
-     * (non-Javadoc)
-     *
-     * @see
-     * org.geosdi.geoplatform.gui.client.widget.map.event.ReverseGeocodingDispatchHandler#processRequest(org.geosdi.geoplatform.gui.client.widget.map.ReverseGeocodingWidget)
-     */
     @Override
     public void processRequest(final ReverseGeocodingWidget widget) {
         LonLat lonlat = widget.getLonlat();
@@ -70,24 +64,24 @@ public class GoogleDispatcher extends GeoCoderDispatcher {
         GPClientCommandExecutor.executeCommand(
                 new GPClientCommand<FindLocationResponse>() {
 
-            private static final long serialVersionUID = 8402427536833067095L;
+                    private static final long serialVersionUID = 8402427536833067095L;
 
-            {
-                super.setCommandRequest(request);
-            }
+                    {
+                        super.setCommandRequest(request);
+                    }
 
-            @Override
-            public void onCommandSuccess(FindLocationResponse response) {
-                widget.onRequestSuccess(response.getResult());
-            }
+                    @Override
+                    public void onCommandSuccess(FindLocationResponse response) {
+                        widget.onRequestSuccess(response.getResult());
+                    }
 
-            @Override
-            public void onCommandFailure(Throwable exception) {
-                widget.onRequestFailure(
-                        GeocodingModuleConstants.INSTANCE.GoogleDispatcher_requestFailureText());
-            }
+                    @Override
+                    public void onCommandFailure(Throwable exception) {
+                        widget.onRequestFailure(
+                                GeocodingModuleConstants.INSTANCE.GoogleDispatcher_requestFailureText());
+                    }
 
-        });
+                });
     }
 
     @Override

@@ -85,8 +85,8 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
     private ComboBox<GPGeocodingServiceBean> geocodingServiceCombo;
     private FieldSet searchFieldSet;
     private FieldSet locations;
-    private GeocodingPerformOperation operation = new GeocodingPerformOperation();
-    private GPGeocodingRemoveMarkerEvent event = new GPGeocodingRemoveMarkerEvent();
+    private final GeocodingPerformOperation operation = new GeocodingPerformOperation();
+    private final GPGeocodingRemoveMarkerEvent event = new GPGeocodingRemoveMarkerEvent();
 
     public GeocodingGridWidget() {
         super(false);

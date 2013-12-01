@@ -111,6 +111,6 @@ public abstract class ReverseGeocodingAction extends MapToggleAction {
         }
     }
 
-    public abstract ReverseGeocodingWidget createWidget(
+    protected abstract ReverseGeocodingWidget createWidget(
             GeoPlatformMap theMapWidget);
 }

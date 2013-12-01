@@ -35,26 +35,22 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.map.marker;
 
+import org.gwtopenmaps.openlayers.client.Map;
 import org.gwtopenmaps.openlayers.client.layer.Layer;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public abstract class GPGenericMarkerLayer
         implements IGPMarkerLayer {
 
     protected Layer markerLayer;
-    protected String layerName;
-    
-    public GPGenericMarkerLayer(String theLayerName) {
-        this.layerName = theLayerName;
-        buildMarkerLayer();
-        buildIconMarker();
-    }
+    protected final Map map;
 
-    public GPGenericMarkerLayer() {
+    public GPGenericMarkerLayer(Map theMap) {
+        this.map = theMap;
         buildMarkerLayer();
         buildIconMarker();
     }
@@ -65,4 +61,5 @@ public abstract class GPGenericMarkerLayer
     public Layer getMarkerLayer() {
         return markerLayer;
     }
+
 }

@@ -45,12 +45,16 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class GeocodingVectorMarker extends GPVectorMarkerLayer {
 
     private Object provider;
-    private ReverseGeocodingUpdateLocationEvent updateEvent = new ReverseGeocodingUpdateLocationEvent();
+    private final ReverseGeocodingUpdateLocationEvent updateEvent = new ReverseGeocodingUpdateLocationEvent();
+
+    public GeocodingVectorMarker(Map theMap) {
+        super(theMap);
+    }
 
     @Override
     public void setIconStyle() {
@@ -65,7 +69,7 @@ public class GeocodingVectorMarker extends GPVectorMarkerLayer {
     }
 
     @Override
-    public void addMarker(LonLat lonlat, Map map) {
+    public void addMarker(LonLat lonlat) {
         map.setCenter(lonlat, 16);
         super.drawFeature(lonlat);
     }
@@ -82,4 +86,5 @@ public class GeocodingVectorMarker extends GPVectorMarkerLayer {
     public void setProvider(Object provider) {
         this.provider = provider;
     }
+
 }

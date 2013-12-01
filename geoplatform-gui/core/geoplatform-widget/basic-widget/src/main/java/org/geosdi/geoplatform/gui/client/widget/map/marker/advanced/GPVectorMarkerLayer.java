@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.gui.client.widget.map.marker.advanced;
 
 import org.geosdi.geoplatform.gui.client.widget.map.marker.GPGenericMarkerLayer;
-import org.geosdi.geoplatform.gui.factory.map.GPApplicationMap;
 import org.gwtopenmaps.openlayers.client.LonLat;
 import org.gwtopenmaps.openlayers.client.Map;
 import org.gwtopenmaps.openlayers.client.Pixel;
@@ -51,7 +50,7 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public abstract class GPVectorMarkerLayer extends GPGenericMarkerLayer {
 
@@ -60,16 +59,8 @@ public abstract class GPVectorMarkerLayer extends GPGenericMarkerLayer {
     protected DragFeature dragControl;
     private boolean activeControl;
 
-    public GPVectorMarkerLayer(String layerName) {
-        super(layerName);
-        this.createControl();
-    }
-
-    /**
-     * 
-     */
-    public GPVectorMarkerLayer() {
-        super();
+    public GPVectorMarkerLayer(Map theMap) {
+        super(theMap);
         this.createControl();
     }
 
@@ -101,7 +92,7 @@ public abstract class GPVectorMarkerLayer extends GPGenericMarkerLayer {
 
     /**
      * Remove VectoreFeature as a Marker from Markers Vector Layer
-     * 
+     *
      */
     @Override
     public void removeMarker() {
@@ -112,9 +103,9 @@ public abstract class GPVectorMarkerLayer extends GPGenericMarkerLayer {
 
     /**
      * Activate Drag Control on VectoreFeature as a Marker
-     * 
+     *
      */
-    public void addControl(Map map) {
+    public void addControl() {
         map.addControl(dragControl);
         dragControl.activate();
         this.activeControl = true;
@@ -122,9 +113,9 @@ public abstract class GPVectorMarkerLayer extends GPGenericMarkerLayer {
 
     /**
      * Deactivate Drag Control on VectoreFeature as a Marker
-     * 
+     *
      */
-    public void removeControl(Map map) {
+    public void removeControl() {
         if (this.activeControl) {
             this.dragControl.deactivate();
             this.activeControl = false;
@@ -141,13 +132,15 @@ public abstract class GPVectorMarkerLayer extends GPGenericMarkerLayer {
 
             @Override
             public void onDragEvent(VectorFeature vectorFeature, Pixel pixel) {
-                LonLat ll = GPApplicationMap.getInstance().getApplicationMap().getMap().getLonLatFromPixel(pixel);
+                LonLat ll = map.getLonLatFromPixel(pixel);
 
                 featureDragged(ll);
             }
+
         });
 
-        this.dragControl = new DragFeature((Vector) markerLayer, dragFeatureOptions);
+        this.dragControl = new DragFeature((Vector) markerLayer,
+                dragFeatureOptions);
     }
 
     public abstract void featureDragged(LonLat ll);
@@ -165,4 +158,5 @@ public abstract class GPVectorMarkerLayer extends GPGenericMarkerLayer {
     public Style getStyle() {
         return style;
     }
+
 }

@@ -49,9 +49,13 @@ import com.google.gwt.core.client.GWT;
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public class GeocodingMarker extends GeoPlatformMarkerLayer {
+
+    public GeocodingMarker(Map theMap) {
+        super(theMap);
+    }
 
     @Override
     public void buildMarkerLayer() {
@@ -74,15 +78,15 @@ public class GeocodingMarker extends GeoPlatformMarkerLayer {
     }
 
     /**
-     * 
-     * @param lonlat
-     *            LonLat to build the marker and add to the markerLayer
+     *
+     * @param lonlat LonLat to build the marker and add to the markerLayer
      */
     @Override
-    public void addMarker(LonLat lonlat, Map map) {
+    public void addMarker(LonLat lonlat) {
         ((Markers) this.markerLayer).clearMarkers();
         map.setCenter(lonlat, 16);
         this.marker = new Marker(lonlat, this.iconMarker);
         ((Markers) this.markerLayer).addMarker(this.marker);
     }
+
 }

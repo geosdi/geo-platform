@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.gui.client.widget.map;
 import org.geosdi.geoplatform.gui.client.widget.map.event.geocoding.GeocodingEventHandler;
 import org.geosdi.geoplatform.gui.client.widget.map.feature.GeocodingVectorFeature;
 import org.geosdi.geoplatform.gui.client.widget.map.marker.advanced.GeocodingVectorMarker;
-import org.geosdi.geoplatform.gui.client.widget.map.popup.PopupMapWidget;
 import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.geosdi.geoplatform.gui.model.IGeoPlatformLocation;
@@ -58,17 +57,17 @@ import org.gwtopenmaps.openlayers.client.geometry.MultiPolygon;
  */
 public class GPGeocodingWidget implements GeocodingEventHandler {
 
-    private GeoPlatformMap mapWidget;
-    private PopupMapWidget popupWidget = new PopupMapWidget("GP-GeoCoder-Popup");
+    private final GeoPlatformMap mapWidget;
     private VectorFeature vectorFeature;
     /**
      * TODO : Think a way to have this in configuration *
      */
-    private GeocodingVectorMarker geocoderMarker = new GeocodingVectorMarker(); //new GeocodingMarker();
-    private GeocodingVectorFeature geocoderFeature = new GeocodingVectorFeature();
+    private final GeocodingVectorMarker geocoderMarker;
+    private final GeocodingVectorFeature geocoderFeature = new GeocodingVectorFeature();
 
     public GPGeocodingWidget(GeoPlatformMap theMapWidget) {
         this.mapWidget = theMapWidget;
+        this.geocoderMarker = new GeocodingVectorMarker(this.mapWidget.getMap());
         GPGeocodingHandlerManager.addHandler(GeocodingEventHandler.TYPE, this);
     }
 
@@ -76,16 +75,17 @@ public class GPGeocodingWidget implements GeocodingEventHandler {
     public void register() {
         this.mapWidget.getMap().addLayer(geocoderMarker.getMarkerLayer());
         this.mapWidget.getMap().addLayer(geocoderFeature.geFeatureLayer());
-        this.geocoderMarker.addControl(this.mapWidget.getMap());
+        this.geocoderMarker.addControl();
     }
 
     @Override
     public void unregister() {
-        this.geocoderMarker.removeControl(this.mapWidget.getMap());
+        this.geocoderMarker.removeControl();
         this.geocoderMarker.removeMarker();
         this.geocoderFeature.removeFeature();
         this.mapWidget.getMap().removeLayer(this.geocoderMarker.getMarkerLayer());
-        this.mapWidget.getMap().removePopup(popupWidget.getPopup());
+        this.mapWidget.getMap().removeLayer(
+                this.geocoderFeature.geFeatureLayer());
     }
 
     @Override
@@ -93,25 +93,27 @@ public class GPGeocodingWidget implements GeocodingEventHandler {
             GPCoordinateReferenceSystem crs, Object provider) {
         LonLat center = new LonLat(bean.getLon(), bean.getLat());
 
-        if (this.mapWidget.getMap().getProjection().equals(GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode())) {
-            center.transform(crs.getCode(), GPCoordinateReferenceSystem.EPSG_GOOGLE.getCode());
+        if (this.mapWidget.getMap().getProjection().equals(
+                GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode())) {
+            center.transform(crs.getCode(),
+                    GPCoordinateReferenceSystem.EPSG_GOOGLE.getCode());
         }
 
         this.geocoderMarker.setProvider(provider);
-        this.geocoderMarker.addMarker(center, this.mapWidget.getMap());
-        GPToolbarActionHandlerManager.fireEvent(new UpdateModelAndButtonEvent(bean));
+        this.geocoderMarker.addMarker(center);
+        GPToolbarActionHandlerManager.fireEvent(new UpdateModelAndButtonEvent(
+                bean));
     }
 
     @Override
     public void onRegisterGeocodingFeature(IGeoPlatformLocation bean,
             GPCoordinateReferenceSystem crs, Object provider) {
 
-
         this.geocoderMarker.removeMarker();
 
         this.mapWidget.getMap().addLayer(this.geocoderFeature.geFeatureLayer());
-        MultiPolygon geom = MultiPolygon.narrowToMultiPolygon(Geometry.fromWKT(bean.getWkt()).getJSObject());
-
+        MultiPolygon geom = MultiPolygon.narrowToMultiPolygon(Geometry.fromWKT(
+                bean.getWkt()).getJSObject());
 
         if (this.mapWidget.getMap().getProjection().equals(
                 GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode())) {
@@ -126,17 +128,10 @@ public class GPGeocodingWidget implements GeocodingEventHandler {
         this.geocoderFeature.addFeature(vectorFeature, this.mapWidget.getMap());
     }
 
-    final void clearFeature() {
-        this.mapWidget.getMap().removeLayer(this.geocoderFeature.geFeatureLayer());
-        geocoderFeature = new GeocodingVectorFeature();
-//        this.mapWidget.getMap().addLayer(this.geocoderFeature.geFeatureLayer());
-    }
-
     @Override
     public void removeMarker() {
         this.geocoderFeature.removeFeature();
         this.geocoderMarker.removeMarker();
-        this.clearFeature();
     }
 
     @Override
@@ -147,4 +142,5 @@ public class GPGeocodingWidget implements GeocodingEventHandler {
             unregister();
         }
     }
+
 }

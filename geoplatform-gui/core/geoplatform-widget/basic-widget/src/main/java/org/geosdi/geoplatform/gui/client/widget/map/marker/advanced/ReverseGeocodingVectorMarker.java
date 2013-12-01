@@ -45,40 +45,44 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class ReverseGeocodingVectorMarker extends GPVectorMarkerLayer {
-    
-    private Object provider;
-    private ReverseGeocodingUpdateLocationEvent updateEvent = new ReverseGeocodingUpdateLocationEvent();
-    
-    public ReverseGeocodingVectorMarker(String theLayerName, Object theProvider) {
-        super(theLayerName);
+
+    private final Object provider;
+    private final String layerName;
+    private final ReverseGeocodingUpdateLocationEvent updateEvent = new ReverseGeocodingUpdateLocationEvent();
+
+    public ReverseGeocodingVectorMarker(Map theMap, String theLayerName,
+            Object theProvider) {
+        super(theMap);
+        this.layerName = theLayerName;
         this.provider = theProvider;
     }
-    
+
     @Override
     public void setIconStyle() {
         style.setExternalGraphic(GWT.getModuleBaseURL()
                 + "/gp-images/vector_marker.png");
     }
-    
+
     @Override
     public void buildMarkerLayer() {
 //        this.markerLayer = new Vector("GPReverseGeocoding-Marker-Vector-Layer");
         this.markerLayer = new Vector(this.layerName);
         this.markerLayer.setZIndex(980);
     }
-    
+
     @Override
-    public void addMarker(LonLat lonlat, Map map) {
+    public void addMarker(LonLat lonlat) {
         super.drawFeature(lonlat);
         //map.setCenter(lonlat, 16);
     }
-    
+
     @Override
     public void featureDragged(LonLat ll) {
         updateEvent.setLonLat(ll);
         GPGeocodingHandlerManager.fireEventFromSource(updateEvent, provider);
     }
+
 }

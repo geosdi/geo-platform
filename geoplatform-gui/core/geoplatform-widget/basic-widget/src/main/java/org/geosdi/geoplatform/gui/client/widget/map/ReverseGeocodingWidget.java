@@ -58,7 +58,8 @@ import org.gwtopenmaps.openlayers.client.event.MapClickListener;
  * @email michele.santomauro@geosdi.org
  *
  */
-public abstract class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
+public abstract class ReverseGeocodingWidget implements
+        ReverseGeocodingEventHandler {
 
     protected GeoPlatformMap mapWidget;
     protected ReverseGeocodingDispatch dispatcher;
@@ -66,7 +67,8 @@ public abstract class ReverseGeocodingWidget implements ReverseGeocodingEventHan
      * TODO : Think a way to have this in configuration *
      */
     private ReverseGeocodingVectorMarker rGMarker; //new ReverseGeocodingMarker();
-    private PopupMapWidget popupWidget = new PopupMapWidget("GP-Reverse-GeoCoder-Popup");
+    private PopupMapWidget popupWidget = new PopupMapWidget(
+            "GP-Reverse-GeoCoder-Popup");
     private MapClickListener listener;
     private LonLat lonlat;
     private boolean busy;
@@ -80,8 +82,10 @@ public abstract class ReverseGeocodingWidget implements ReverseGeocodingEventHan
     public ReverseGeocodingWidget(GeoPlatformMap theMapWidget, String layerName,
             GPGeoCoderProvider source) {
         this.mapWidget = theMapWidget;
-        this.rGMarker = new ReverseGeocodingVectorMarker(layerName, source.getProvider());
-        GPGeocodingHandlerManager.addHandlerToSource(ReverseGeocodingEventHandler.TYPE,
+        this.rGMarker = new ReverseGeocodingVectorMarker(this.mapWidget.getMap(),
+                layerName, source.getProvider());
+        GPGeocodingHandlerManager.addHandlerToSource(
+                ReverseGeocodingEventHandler.TYPE,
                 source.getProvider(), this);
         this.dispatcher = this.createDispatcher();
         this.createListener();
@@ -100,14 +104,14 @@ public abstract class ReverseGeocodingWidget implements ReverseGeocodingEventHan
     public final void register() {
         registerChild();
         this.mapWidget.getMap().addLayer(this.rGMarker.getMarkerLayer());
-        this.rGMarker.addControl(this.mapWidget.getMap());
+        this.rGMarker.addControl();
         this.mapWidget.getMap().addMapClickListener(listener);
     }
 
     @Override
     public final void unregister() {
         unregisterChild();
-        this.rGMarker.removeControl(this.mapWidget.getMap());
+        this.rGMarker.removeControl();
         this.clearWidgetStatus();
     }
 
@@ -135,11 +139,14 @@ public abstract class ReverseGeocodingWidget implements ReverseGeocodingEventHan
      */
     public void onRequestSuccess(IGeoPlatformLocation theBean) {
         this.mapWidget.getMap().removePopup(this.popupWidget.getPopup());
-        if (!theBean.getDescription().equalsIgnoreCase(PopupTemplate.ZERO_RESULTS.toString())) {
-            this.popupWidget.setContentHTML(PopupTemplate.IMAGE_RESULT_FOUND.toString()
+        if (!theBean.getDescription().equalsIgnoreCase(
+                PopupTemplate.ZERO_RESULTS.toString())) {
+            this.popupWidget.setContentHTML(
+                    PopupTemplate.IMAGE_RESULT_FOUND.toString()
                     + "<br />" + theBean.getDescription());
         } else {
-            this.popupWidget.setContentHTML(PopupTemplate.IMAGE_RESULT_NOT_FOUND.toString()
+            this.popupWidget.setContentHTML(
+                    PopupTemplate.IMAGE_RESULT_NOT_FOUND.toString()
                     + "<br /> "
                     + PopupTemplate.ZERO_RESULTS.toString());
         }
@@ -155,7 +162,8 @@ public abstract class ReverseGeocodingWidget implements ReverseGeocodingEventHan
      * @param message
      */
     public void onRequestFailure(String message) {
-        this.popupWidget.setContentHTML(PopupTemplate.IMAGE_SERVICE_ERROR.toString() + "<br />" + message);
+        this.popupWidget.setContentHTML(
+                PopupTemplate.IMAGE_SERVICE_ERROR.toString() + "<br />" + message);
         this.mapWidget.getMap().addPopupExclusive(this.popupWidget.getPopup());
         this.busy = false;
     }
@@ -194,11 +202,13 @@ public abstract class ReverseGeocodingWidget implements ReverseGeocodingEventHan
 
     private void createListener() {
         this.listener = new MapClickListener() {
+
             @Override
             public void onClick(MapClickEvent mapClickEvent) {
                 lonlat = mapClickEvent.getLonLat();
                 addMarker();
             }
+
         };
     }
 
@@ -216,7 +226,7 @@ public abstract class ReverseGeocodingWidget implements ReverseGeocodingEventHan
      * Send Request to Reverse Geocoding Service
      */
     private void sendRequest() {
-        this.rGMarker.addMarker(this.lonlat, this.mapWidget.getMap());
+        this.rGMarker.addMarker(this.lonlat);
         addPopupAndFireEvent();
     }
 
@@ -247,7 +257,8 @@ public abstract class ReverseGeocodingWidget implements ReverseGeocodingEventHan
         this.mapWidget.getMap().addPopup(popupWidget.getPopup());
 
         if (dispatcher == null) {
-            throw new NullPointerException("Dispatcher can't be null. Istantiate it.");
+            throw new NullPointerException(
+                    "Dispatcher can't be null. Istantiate it.");
         }
 
         this.dispatcher.processRequest(this);
@@ -261,7 +272,8 @@ public abstract class ReverseGeocodingWidget implements ReverseGeocodingEventHan
 
         if (GPApplicationMap.getInstance().getApplicationMap().getMap().getProjection().equals(
                 GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode())) {
-            lt.transform(GPCoordinateReferenceSystem.EPSG_GOOGLE.getCode(), GPCoordinateReferenceSystem.WGS_84.getCode());
+            lt.transform(GPCoordinateReferenceSystem.EPSG_GOOGLE.getCode(),
+                    GPCoordinateReferenceSystem.WGS_84.getCode());
         } else {
             //nothing to do  
         }
@@ -275,4 +287,5 @@ public abstract class ReverseGeocodingWidget implements ReverseGeocodingEventHan
     public PopupMapWidget getPopupWidget() {
         return popupWidget;
     }
+
 }

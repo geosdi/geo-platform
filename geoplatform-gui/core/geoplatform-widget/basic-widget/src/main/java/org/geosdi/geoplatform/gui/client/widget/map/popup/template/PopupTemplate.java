@@ -55,7 +55,7 @@ public enum PopupTemplate {
     ZERO_RESULTS("ZERO_RESULTS"),
     IMAGE_SERVICE_ERROR("<img src=" + GWT.getModuleName() + "/gp-images/error.png />");
     //
-    private String value;
+    private final String value;
 
     PopupTemplate(String theValue) {
         this.value = theValue;

@@ -36,19 +36,24 @@
 package org.geosdi.geoplatform.gui.client.widget.map.marker;
 
 import org.gwtopenmaps.openlayers.client.Icon;
+import org.gwtopenmaps.openlayers.client.Map;
 import org.gwtopenmaps.openlayers.client.Marker;
 import org.gwtopenmaps.openlayers.client.layer.Markers;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public abstract class GeoPlatformMarkerLayer
         extends GPGenericMarkerLayer {
 
     protected Marker marker;
     protected Icon iconMarker;
+
+    public GeoPlatformMarkerLayer(Map theMap) {
+        super(theMap);
+    }
 
     /**
      * Remove Marker from Marker Layer
@@ -73,4 +78,5 @@ public abstract class GeoPlatformMarkerLayer
     public Icon getIconMarker() {
         return iconMarker;
     }
+
 }

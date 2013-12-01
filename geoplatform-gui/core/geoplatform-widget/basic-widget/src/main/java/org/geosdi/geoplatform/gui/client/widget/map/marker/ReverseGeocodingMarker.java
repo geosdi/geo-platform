@@ -49,12 +49,12 @@ import com.google.gwt.core.client.GWT;
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public class ReverseGeocodingMarker extends GeoPlatformMarkerLayer {
 
-    public ReverseGeocodingMarker() {
-        super();
+    public ReverseGeocodingMarker(Map theMap) {
+        super(theMap);
     }
 
     @Override
@@ -78,13 +78,14 @@ public class ReverseGeocodingMarker extends GeoPlatformMarkerLayer {
 
     /**
      * Add a Marker to the Marker Layer
-     * 
+     *
      * @param lonlat
      */
     @Override
-    public void addMarker(LonLat lonlat, Map map) {
+    public void addMarker(LonLat lonlat) {
         ((Markers) this.markerLayer).clearMarkers();
         this.marker = new Marker(lonlat, this.iconMarker);
         ((Markers) this.markerLayer).addMarker(this.marker);
     }
+
 }

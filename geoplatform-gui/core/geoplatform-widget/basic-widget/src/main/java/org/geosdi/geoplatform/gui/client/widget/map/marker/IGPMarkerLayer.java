@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.gui.client.widget.map.marker;
 
 import org.gwtopenmaps.openlayers.client.LonLat;
-import org.gwtopenmaps.openlayers.client.Map;
 
 /**
  *
@@ -49,7 +48,7 @@ public interface IGPMarkerLayer {
 
     void buildIconMarker();
 
-    void addMarker(LonLat lonlat, Map map);
+    void addMarker(LonLat lonlat);
 
     void removeMarker();
 }

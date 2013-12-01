@@ -42,11 +42,11 @@ import org.gwtopenmaps.openlayers.client.popup.Popup;
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public class PopupMapWidget {
 
-    private Popup popup;
+    private final Popup popup;
 
     public PopupMapWidget(String identifier) {
         this.popup = new Popup(identifier, null, new Size(150, 50),
@@ -56,7 +56,7 @@ public class PopupMapWidget {
 
     /**
      * Set HTML Content in the Popup
-     * 
+     *
      * @param contentHTML
      */
     public void setContentHTML(String contentHTML) {
@@ -65,7 +65,7 @@ public class PopupMapWidget {
 
     /**
      * Set LonLat Popup Property
-     * 
+     *
      * @param lonlat
      */
     public void setLonLat(LonLat lonlat) {
@@ -78,4 +78,9 @@ public class PopupMapWidget {
     public Popup getPopup() {
         return popup;
     }
+
+    public Boolean isPopupVisible() {
+        return this.popup.isVisible();
+    }
+
 }

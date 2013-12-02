@@ -51,9 +51,10 @@ public class GotoXYAction extends ToolbarMapAction {
     private final GotoXYWidget gotoXYWidget;
 
     public GotoXYAction(GeoPlatformMap theMapWidget) {
-        super(BasicWidgetResources.ICONS.gotoXY(), 
+        super(BasicWidgetResources.ICONS.gotoXY(),
                 MapModuleConstants.INSTANCE.GotoXYAction_tooltipText());
-        this.gotoXYWidget = new GotoXYWidget(Boolean.TRUE, theMapWidget);
+        this.gotoXYWidget = new GotoXYWidget(Boolean.TRUE,
+                theMapWidget.getMapWidget(), "GotoXY-Marker-Vector-Layer");
     }
 
     /**
@@ -66,4 +67,5 @@ public class GotoXYAction extends ToolbarMapAction {
     public void componentSelected(ButtonEvent ce) {
         gotoXYWidget.show();
     }
+
 }

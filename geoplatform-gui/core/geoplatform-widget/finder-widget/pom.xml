@@ -107,8 +107,6 @@
         <dependency>
             <groupId>com.google.gwt.inject</groupId>
             <artifactId>gin</artifactId>
-            <version>1.5.0</version>
-            <scope>compile</scope>
         </dependency>
 
         <!-- SPRING -->

@@ -67,8 +67,6 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel>
             GPTreeProperties theTreeProperties,
             GPTreeMenuAutomator theMenuAutomator) {
         super(theStore.get(), theThree.get());
-        //Assigning a dynamic context menu to the tree
-//        TreeContextMenuFactory.setTreePanel(super.tree);
 
         this.treeProperties = theTreeProperties;
         this.menuAutomator = theMenuAutomator;

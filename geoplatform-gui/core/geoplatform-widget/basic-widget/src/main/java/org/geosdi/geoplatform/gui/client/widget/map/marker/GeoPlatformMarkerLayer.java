@@ -51,8 +51,8 @@ public abstract class GeoPlatformMarkerLayer
     protected Marker marker;
     protected Icon iconMarker;
 
-    public GeoPlatformMarkerLayer(Map theMap) {
-        super(theMap);
+    public GeoPlatformMarkerLayer(Map theMap, String theMarkerLayerName) {
+        super(theMap, theMarkerLayerName);
     }
 
     /**

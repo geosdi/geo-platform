@@ -35,6 +35,7 @@ import org.geosdi.geoplatform.gui.client.widget.form.IGeoPlatformForm;
 import org.geosdi.geoplatform.gui.client.widget.map.marker.advanced.GeocodingVectorMarker;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.gwtopenmaps.openlayers.client.LonLat;
+import org.gwtopenmaps.openlayers.client.MapWidget;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -48,13 +49,15 @@ public class GotoXYWidget extends GeoPlatformFormWidget<PointRepresentation>
     private Button find;
     private Button close;
     private final GeocodingVectorMarker geocoderMarker;
-    private final GeoPlatformMap mapWidget;
+    private final MapWidget mapWidget;
     private GPEPSGContentPanel epsgPanel;
 
-    public GotoXYWidget(Boolean lazy, GeoPlatformMap mapWidget) {
+    public GotoXYWidget(Boolean lazy, MapWidget theMapWidget,
+            String markerLayerName) {
         super(lazy);
-        this.mapWidget = mapWidget;
-        this.geocoderMarker = new GeocodingVectorMarker(this.mapWidget.getMap());
+        this.mapWidget = theMapWidget;
+        this.geocoderMarker = new GeocodingVectorMarker(this.mapWidget.getMap(),
+                markerLayerName);
     }
 
     /*

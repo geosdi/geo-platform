@@ -53,8 +53,8 @@ import com.google.gwt.core.client.GWT;
  */
 public class GeocodingMarker extends GeoPlatformMarkerLayer {
 
-    public GeocodingMarker(Map theMap) {
-        super(theMap);
+    public GeocodingMarker(Map theMap, String theMarkerLayerName) {
+        super(theMap, theMarkerLayerName);
     }
 
     @Override
@@ -64,7 +64,7 @@ public class GeocodingMarker extends GeoPlatformMarkerLayer {
         options.setMaxZoomLevel(18);
         options.setDisplayInLayerSwitcher(false);
 
-        this.markerLayer = new Markers("GP-Geocoding-Markers-Layer", options);
+        this.markerLayer = new Markers(this.markerLayerName, options);
     }
 
     @Override

@@ -46,11 +46,13 @@ import org.gwtopenmaps.openlayers.client.layer.Layer;
 public abstract class GPGenericMarkerLayer
         implements IGPMarkerLayer {
 
+    protected final String markerLayerName;
     protected Layer markerLayer;
     protected final Map map;
 
-    public GPGenericMarkerLayer(Map theMap) {
+    public GPGenericMarkerLayer(Map theMap, String theMarkerLayerName) {
         this.map = theMap;
+        this.markerLayerName = theMarkerLayerName;
         buildMarkerLayer();
         buildIconMarker();
     }

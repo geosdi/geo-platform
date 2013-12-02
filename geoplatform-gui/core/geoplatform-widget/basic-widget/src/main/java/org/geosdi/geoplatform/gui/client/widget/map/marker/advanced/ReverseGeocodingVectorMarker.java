@@ -50,13 +50,11 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
 public class ReverseGeocodingVectorMarker extends GPVectorMarkerLayer {
 
     private final Object provider;
-    private final String layerName;
     private final ReverseGeocodingUpdateLocationEvent updateEvent = new ReverseGeocodingUpdateLocationEvent();
 
-    public ReverseGeocodingVectorMarker(Map theMap, String theLayerName,
+    public ReverseGeocodingVectorMarker(Map theMap, String theMarkerLayerName,
             Object theProvider) {
-        super(theMap);
-        this.layerName = theLayerName;
+        super(theMap, theMarkerLayerName);
         this.provider = theProvider;
     }
 
@@ -68,8 +66,7 @@ public class ReverseGeocodingVectorMarker extends GPVectorMarkerLayer {
 
     @Override
     public void buildMarkerLayer() {
-//        this.markerLayer = new Vector("GPReverseGeocoding-Marker-Vector-Layer");
-        this.markerLayer = new Vector(this.layerName);
+        this.markerLayer = new Vector(this.markerLayerName);
         this.markerLayer.setZIndex(980);
     }
 

@@ -70,15 +70,19 @@ public class GPEPSGContentPanel extends GeoPlatformContentPanel {
     public void addComponent() {
         epsgTextField = new TextField<String>();
         epsgTextField.setAllowBlank(false);
-        epsgTextField.setFieldLabel(BasicWidgetConstants.INSTANCE.GPEPSGContentPanel_EPSGTextFieldLabelText());
+        epsgTextField.setFieldLabel(
+                BasicWidgetConstants.INSTANCE.GPEPSGContentPanel_EPSGTextFieldLabelText());
 
         this.storeEPSG = new ListStore<EPSGTemplate>();
         this.storeEPSG.add(EPSGUtility.getCommonEPSG());
 
         this.comboEPSG = new ComboBox<EPSGTemplate>();
-        this.comboEPSG.setFieldLabel(BasicWidgetConstants.INSTANCE.GPEPSGContentPanel_EPSGComboFieldLabelText());
-        this.comboEPSG.setEmptyText(BasicWidgetConstants.INSTANCE.EPSGUtility_chooseEPSGText());
-        this.comboEPSG.setDisplayField(EPSGTemplate.EPSGEnum.EPSG_DESCRIPTION.getValue());
+        this.comboEPSG.setFieldLabel(
+                BasicWidgetConstants.INSTANCE.GPEPSGContentPanel_EPSGComboFieldLabelText());
+        this.comboEPSG.setEmptyText(
+                BasicWidgetConstants.INSTANCE.EPSGUtility_chooseEPSGText());
+        this.comboEPSG.setDisplayField(
+                EPSGTemplate.EPSGEnum.EPSG_DESCRIPTION.getValue());
         this.comboEPSG.setEditable(false);
         this.comboEPSG.setAllowBlank(true);
         this.comboEPSG.setForceSelection(true);
@@ -88,25 +92,30 @@ public class GPEPSGContentPanel extends GeoPlatformContentPanel {
         this.comboEPSG.setStore(this.storeEPSG);
 
         this.comboEpsgListener = new SelectionChangedListener<EPSGTemplate>() {
+
             @Override
             public void selectionChanged(SelectionChangedEvent<EPSGTemplate> se) {
                 if (se.getSelectedItem() != null) {
                     epsgTextField.setValue(se.getSelectedItem().getEpsg());
                 }
             }
+
         };
 
         super.add(this.comboEPSG, new FormData("100%"));
 
         epsgTextField = new TextField<String>();
         epsgTextField.setAllowBlank(false);
-        epsgTextField.setFieldLabel(BasicWidgetConstants.INSTANCE.GPEPSGContentPanel_EPSGTextFieldLabelText());
+        epsgTextField.setFieldLabel(
+                BasicWidgetConstants.INSTANCE.GPEPSGContentPanel_EPSGTextFieldLabelText());
 
         KeyListener keyListener = new KeyListener() {
+
             @Override
             public void componentKeyUp(ComponentEvent event) {
                 comboEPSG.reset();
             }
+
         };
 
         epsgTextField.addKeyListener(keyListener);
@@ -162,4 +171,5 @@ public class GPEPSGContentPanel extends GeoPlatformContentPanel {
         super.setHeaderVisible(Boolean.FALSE);
         super.setLayout(new FormLayout());
     }
+
 }

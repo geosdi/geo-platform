@@ -52,8 +52,8 @@ public class GeocodingVectorMarker extends GPVectorMarkerLayer {
     private Object provider;
     private final ReverseGeocodingUpdateLocationEvent updateEvent = new ReverseGeocodingUpdateLocationEvent();
 
-    public GeocodingVectorMarker(Map theMap) {
-        super(theMap);
+    public GeocodingVectorMarker(Map theMap, String theMarkerLayerName) {
+        super(theMap, theMarkerLayerName);
     }
 
     @Override
@@ -64,7 +64,7 @@ public class GeocodingVectorMarker extends GPVectorMarkerLayer {
 
     @Override
     public void buildMarkerLayer() {
-        this.markerLayer = new Vector("GPGeocoding-Marker-Vector-Layer");
+        this.markerLayer = new Vector(super.markerLayerName);
         this.markerLayer.setZIndex(982);
     }
 

@@ -53,8 +53,8 @@ import com.google.gwt.core.client.GWT;
  */
 public class ReverseGeocodingMarker extends GeoPlatformMarkerLayer {
 
-    public ReverseGeocodingMarker(Map theMap) {
-        super(theMap);
+    public ReverseGeocodingMarker(Map theMap, String theMarkerLayerName) {
+        super(theMap, theMarkerLayerName);
     }
 
     @Override
@@ -64,7 +64,7 @@ public class ReverseGeocodingMarker extends GeoPlatformMarkerLayer {
         options.setMaxZoomLevel(18);
         options.setDisplayInLayerSwitcher(true);
 
-        this.markerLayer = new Markers("GPReverseGeocoding-Marker-Layer",
+        this.markerLayer = new Markers(this.markerLayerName,
                 options);
     }
 

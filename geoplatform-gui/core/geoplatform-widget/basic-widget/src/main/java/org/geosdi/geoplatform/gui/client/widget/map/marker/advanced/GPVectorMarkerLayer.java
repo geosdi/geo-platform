@@ -59,8 +59,8 @@ public abstract class GPVectorMarkerLayer extends GPGenericMarkerLayer {
     protected DragFeature dragControl;
     private boolean activeControl;
 
-    public GPVectorMarkerLayer(Map theMap) {
-        super(theMap);
+    public GPVectorMarkerLayer(Map theMap, String theMarkerLayerName) {
+        super(theMap, theMarkerLayerName);
         this.createControl();
     }
 

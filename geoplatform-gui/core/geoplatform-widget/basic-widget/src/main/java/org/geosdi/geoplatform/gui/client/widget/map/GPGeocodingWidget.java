@@ -67,7 +67,8 @@ public class GPGeocodingWidget implements GeocodingEventHandler {
 
     public GPGeocodingWidget(GeoPlatformMap theMapWidget) {
         this.mapWidget = theMapWidget;
-        this.geocoderMarker = new GeocodingVectorMarker(this.mapWidget.getMap());
+        this.geocoderMarker = new GeocodingVectorMarker(this.mapWidget.getMap(),
+                "GPGeocoding-Marker-Vector-Layer");
         GPGeocodingHandlerManager.addHandler(GeocodingEventHandler.TYPE, this);
     }
 

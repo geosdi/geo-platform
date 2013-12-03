@@ -184,17 +184,17 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
         geocodingServiceCombo.addListener(Events.Select,
                 new Listener<FieldEvent>() {
 
-            @Override
-            public void handleEvent(FieldEvent fe) {
-                if (search.getValue() != null) {
-                    ComboBox<GPGeocodingServiceBean> comboBox = (ComboBox<GPGeocodingServiceBean>) fe.getComponent();
-                    GPGeocodingServiceBean selectedBean = comboBox.getValue();
-                    String selectedGeocodingService = selectedBean.getGeocodingService();
-                    operation.onBeginGeocodingSearch(search.getValue());
-                }
-            }
+                    @Override
+                    public void handleEvent(FieldEvent fe) {
+                        if (search.getValue() != null) {
+                            ComboBox<GPGeocodingServiceBean> comboBox = (ComboBox<GPGeocodingServiceBean>) fe.getComponent();
+                            GPGeocodingServiceBean selectedBean = comboBox.getValue();
+                            String selectedGeocodingService = selectedBean.getGeocodingService();
+                            operation.onBeginGeocodingSearch(search.getValue());
+                        }
+                    }
 
-        });
+                });
 
         geocodingServiceCombo.setValue(new GPGeocodingServiceBean(
                 ReverseGeoCoderProvider.GOOGLE));
@@ -210,15 +210,30 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
 
         grid.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
+        grid.addListener(Events.CellClick, new Listener<BaseEvent>() {
+
+            @Override
+            public void handleEvent(BaseEvent be) {
+                GPGeocodingHandlerManager.fireEvent(
+                        new RegisterGeocodingLocationEvent(
+                                grid.getSelectionModel().getSelectedItem(),
+                                GPCoordinateReferenceSystem.WGS_84,
+                                geocodingServiceCombo.getValue().getProvider(),
+                                false));
+            }
+
+        });
+
         grid.addListener(Events.CellDoubleClick, new Listener<BaseEvent>() {
 
             @Override
             public void handleEvent(BaseEvent be) {
                 GPGeocodingHandlerManager.fireEvent(
                         new RegisterGeocodingLocationEvent(
-                        grid.getSelectionModel().getSelectedItem(),
-                        GPCoordinateReferenceSystem.WGS_84,
-                        geocodingServiceCombo.getValue().getProvider()));
+                                grid.getSelectionModel().getSelectedItem(),
+                                GPCoordinateReferenceSystem.WGS_84,
+                                geocodingServiceCombo.getValue().getProvider(),
+                                true));
             }
 
         });
@@ -369,35 +384,36 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
             GPClientCommandExecutor.executeCommand(
                     new GPClientCommand<FindLocationsResponse>() {
 
-                private static final long serialVersionUID = -7919006248337641101L;
+                        private static final long serialVersionUID = -7919006248337641101L;
 
-                {
-                    super.setCommandRequest(request);
-                }
+                        {
+                            super.setCommandRequest(request);
+                        }
 
-                @Override
-                public void onCommandSuccess(FindLocationsResponse response) {
-                    ArrayList<GeocodingBean> beans = response.getResult();
-                    gridWidget.unMaskGrid();
-                    if (beans != null && beans.size() > 0) {
-                        gridWidget.fillStore(beans);
-                    } else {
-                        GeoPlatformMessage.alertMessage(
-                                GeocodingModuleConstants.INSTANCE.GeocodingGridWidget_messageTitleText(),
-                                GeocodingModuleConstants.INSTANCE.GeocodingGridWidget_noResultBodyText());
-                    }
-                }
+                        @Override
+                        public void onCommandSuccess(
+                                FindLocationsResponse response) {
+                                    ArrayList<GeocodingBean> beans = response.getResult();
+                                    gridWidget.unMaskGrid();
+                                    if (beans != null && beans.size() > 0) {
+                                        gridWidget.fillStore(beans);
+                                    } else {
+                                        GeoPlatformMessage.alertMessage(
+                                                GeocodingModuleConstants.INSTANCE.GeocodingGridWidget_messageTitleText(),
+                                                GeocodingModuleConstants.INSTANCE.GeocodingGridWidget_noResultBodyText());
+                                    }
+                                }
 
-                @Override
-                public void onCommandFailure(Throwable exception) {
-                    gridWidget.unMaskGrid();
-                    grid.getView().refresh(false);
-                    GeoPlatformMessage.errorMessage(
-                            GeocodingModuleConstants.INSTANCE.GeocodingGridWidget_messageTitleText(),
-                            GeocodingModuleConstants.INSTANCE.GeocodingGridWidget_failureFindLocationBodyText());
-                }
+                                @Override
+                                public void onCommandFailure(Throwable exception) {
+                                    gridWidget.unMaskGrid();
+                                    grid.getView().refresh(false);
+                                    GeoPlatformMessage.errorMessage(
+                                            GeocodingModuleConstants.INSTANCE.GeocodingGridWidget_messageTitleText(),
+                                            GeocodingModuleConstants.INSTANCE.GeocodingGridWidget_failureFindLocationBodyText());
+                                }
 
-            });
+                    });
         }
 
         @Override

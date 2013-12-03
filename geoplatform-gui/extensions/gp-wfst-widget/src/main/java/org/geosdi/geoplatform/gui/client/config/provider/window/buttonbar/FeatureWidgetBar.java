@@ -33,40 +33,33 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator;
+package org.geosdi.geoplatform.gui.client.config.provider.window.buttonbar;
 
-import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.colleague.WFSMapControlColleague;
-import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.colleague.WFSColleagueKey;
-import com.google.common.collect.Maps;
-import java.util.Map;
+import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.widget.button.ButtonBar;
+import javax.inject.Inject;
+import javax.inject.Provider;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class WFSAbstractMapMediator implements WFSMapMediator {
+public class FeatureWidgetBar implements Provider<ButtonBar> {
 
-    protected final Map<WFSColleagueKey, WFSMapControlColleague> wfsColleagueRegistry = Maps.newEnumMap(
-            WFSColleagueKey.class);
+    private final Button wfsGoToXYButton;
 
-    final boolean isWFSColleagueRegistered(WFSColleagueKey controlKey) {
-        return this.wfsColleagueRegistry.containsKey(controlKey);
+    @Inject
+    public FeatureWidgetBar(Button theWFSGoToXYButton) {
+        this.wfsGoToXYButton = theWFSGoToXYButton;
     }
 
     @Override
-    public final WFSMapControlColleague getWFSColleague(WFSColleagueKey controlKey) {
-        return isWFSColleagueRegistered(controlKey)
-                ? this.wfsColleagueRegistry.get(
-                controlKey) : null;
-    }
+    public ButtonBar get() {
+        final ButtonBar featureWidgetBar = new ButtonBar();
+        featureWidgetBar.add(wfsGoToXYButton);
 
-    @Override
-    public final void resetWFSColleague(WFSColleagueKey controlKey) {
-        WFSMapControlColleague colleague = this.getWFSColleague(controlKey);
-        if (colleague != null) {
-            colleague.resetColleague();
-        }
+        return featureWidgetBar;
     }
 
 }

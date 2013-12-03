@@ -55,7 +55,7 @@ public class FeatureMapWidget extends GeoPlatformContentPanel
     private MapWidget mapWidget;
     @Inject
     private IFeatureMapInitializer featureMapInitializer;
-    private GPEventBus bus;
+    private final GPEventBus bus;
     private HandlerRegistration handlerRegistration;
 
     @Inject

@@ -77,14 +77,12 @@ public class GeocodingMarker extends GeoPlatformMarkerLayer {
         this.iconMarker.setZIndex(950);
     }
 
-    /**
-     *
-     * @param lonlat LonLat to build the marker and add to the markerLayer
-     */
     @Override
-    public void addMarker(LonLat lonlat) {
+    public void addMarker(LonLat lonlat, boolean isSetCenter) {
         ((Markers) this.markerLayer).clearMarkers();
-        map.setCenter(lonlat, 16);
+        if (isSetCenter) {
+            map.setCenter(lonlat, 16);
+        }
         this.marker = new Marker(lonlat, this.iconMarker);
         ((Markers) this.markerLayer).addMarker(this.marker);
     }

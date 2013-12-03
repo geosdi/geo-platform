@@ -77,7 +77,7 @@ public class FeatureMapInitializer implements IFeatureMapInitializer {
     private ILayerSchemaBinder layerSchemaBinder;
     @Inject
     private InjectGetFeatureModelEvent injectGetFeatureModelEvent;
-    private GPEventBus bus;
+    private final GPEventBus bus;
     private Layer wms;
 
     @Inject

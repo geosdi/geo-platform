@@ -226,7 +226,7 @@ public abstract class ReverseGeocodingWidget implements
      * Send Request to Reverse Geocoding Service
      */
     private void sendRequest() {
-        this.rGMarker.addMarker(this.lonlat);
+        this.rGMarker.addMarker(this.lonlat, true);
         addPopupAndFireEvent();
     }
 

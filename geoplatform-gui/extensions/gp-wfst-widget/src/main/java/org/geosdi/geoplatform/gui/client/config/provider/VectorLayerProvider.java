@@ -48,7 +48,7 @@ import org.gwtopenmaps.openlayers.client.layer.VectorOptions;
  */
 public class VectorLayerProvider implements Provider<Vector> {
 
-    private Style style;
+    private final Style style;
 
     @Inject
     public VectorLayerProvider(Style theStyle) {

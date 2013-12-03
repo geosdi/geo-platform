@@ -43,6 +43,7 @@ import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.util.Margins;
 import com.extjs.gxt.ui.client.widget.SplitBar;
 import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.widget.button.ButtonBar;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
 import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
@@ -82,10 +83,12 @@ public class FeatureWidget extends GeoPlatformWindow
     @Inject
     private EditingToolBarDialog editToolbarDialog;
     @Inject
+    private ButtonBar featureWidgetBar;
+    @Inject
     private ILayerSchemaBinder layerSchemaBinder;
-    private Button saveButton;
-    private Button resetButton;
-    private GPEventBus bus;
+    private final Button saveButton;
+    private final Button resetButton;
+    private final GPEventBus bus;
     
     @Inject
     public FeatureWidget(GPEventBus theBus, @ResetButton Button theResetButton,
@@ -105,6 +108,8 @@ public class FeatureWidget extends GeoPlatformWindow
         this.addAttributesWidget();
         this.createStatusBar();
         this.createEditingBar();
+        
+        super.setTopComponent(this.featureWidgetBar);
     }
     
     @Override
@@ -173,13 +178,13 @@ public class FeatureWidget extends GeoPlatformWindow
         Button close = new Button(ButtonsConstants.INSTANCE.closeText(),
                 BasicWidgetResources.ICONS.cancel(),
                 new SelectionListener<ButtonEvent>() {
-            
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                hide();
-            }
-            
-        });
+                    
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                        hide();
+                    }
+                    
+                });
         super.addButton(close);
     }
     

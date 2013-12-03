@@ -62,10 +62,14 @@ public interface LayerMapChangedHandler extends EventHandler {
     public void onChangeStyle(GPRasterBean layerBean, String newStyle);
 
     public void onChangeCqlFilter(GPLayerTreeModel layerBean);
-    
+
     public void onChangeTimeFilter(GPLayerTreeModel layerBean);
 
     public void changeOpacity(GPRasterBean layerBean);
+
+    public void changeMaxScale(GPRasterBean layerBean, Float maxScale);
+
+    public void changeMinScale(GPRasterBean layerBean, Float minScale);
 
     public void onChangeBaseLayer(Projection projection);
 

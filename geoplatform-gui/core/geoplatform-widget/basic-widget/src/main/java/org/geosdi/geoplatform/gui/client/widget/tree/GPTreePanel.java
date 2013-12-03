@@ -36,10 +36,16 @@
 package org.geosdi.geoplatform.gui.client.widget.tree;
 
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.geosdi.geoplatform.gui.client.widget.map.event.LayerRangeEvent;
+import org.geosdi.geoplatform.gui.client.widget.map.event.LayerRangeEventHandler;
 import org.geosdi.geoplatform.gui.client.widget.tree.decorator.GPTreeCheckDecorator;
 import org.geosdi.geoplatform.gui.client.widget.tree.decorator.GPTreeIconDecorator;
 import org.geosdi.geoplatform.gui.client.widget.tree.decorator.GPTreeLabelDecorator;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -47,10 +53,13 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
  */
 public class GPTreePanel<T extends GPBeanTreeModel> extends TreePanel<T>
         implements GPTreeLabelDecorator<T>, GPTreeIconDecorator<T>,
-        GPTreeCheckDecorator<T> {
+        GPTreeCheckDecorator<T>, LayerRangeEventHandler {
+
+    private final static Logger logger = Logger.getLogger("");
 
     public GPTreePanel(GPTreeStore<T> store) {
         super(store);
+        LayerHandlerManager.addHandler(LayerRangeEvent.TYPE, this);
     }
 
     /**
@@ -95,6 +104,28 @@ public class GPTreePanel<T extends GPBeanTreeModel> extends TreePanel<T>
             TreeNode node = findNode(model);
             if (node != null && node.getElement() != null) {
                 setChecked(node.getModel(), isChecked(model));
+            }
+        }
+    }
+
+    @Override
+    public void inRange(GPLayerBean layerBean) {
+        this.changeTextElementStyle(layerBean, "black");
+    }
+
+    @Override
+    public void outRange(GPLayerBean layerBean) {
+        this.changeTextElementStyle(layerBean, "gray");
+    }
+
+    private void changeTextElementStyle(GPLayerBean layerBean, String textColor) {
+        if (rendered) {
+            logger.log(Level.FINEST, "inRange: " + layerBean);
+            T layerElement = this.store.findModel((T) layerBean);
+            TreeNode node = findNode(layerElement);
+            if (node != null && node.getElement() != null) {
+                view.getTextElement(node).getStyle().setColor(textColor);
+                logger.log(Level.FINEST, "Changed Style to layer: " + node);
             }
         }
     }

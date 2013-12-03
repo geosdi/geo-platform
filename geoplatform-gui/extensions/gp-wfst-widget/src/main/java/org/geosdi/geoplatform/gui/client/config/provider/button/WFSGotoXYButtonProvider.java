@@ -33,40 +33,52 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator;
+package org.geosdi.geoplatform.gui.client.config.provider.button;
 
-import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.colleague.WFSMapControlColleague;
-import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.colleague.WFSColleagueKey;
-import com.google.common.collect.Maps;
-import java.util.Map;
+import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.event.SelectionListener;
+import com.extjs.gxt.ui.client.widget.button.Button;
+import javax.inject.Inject;
+import javax.inject.Provider;
+import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.i18n.BasicWidgetConstants;
+import org.geosdi.geoplatform.gui.client.widget.map.control.GotoXYWidget;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class WFSAbstractMapMediator implements WFSMapMediator {
+public class WFSGotoXYButtonProvider implements Provider<Button> {
 
-    protected final Map<WFSColleagueKey, WFSMapControlColleague> wfsColleagueRegistry = Maps.newEnumMap(
-            WFSColleagueKey.class);
+    private final GotoXYWidget wfsGoToXYWidget;
 
-    final boolean isWFSColleagueRegistered(WFSColleagueKey controlKey) {
-        return this.wfsColleagueRegistry.containsKey(controlKey);
+    @Inject
+    public WFSGotoXYButtonProvider(GotoXYWidget wfsGoToXYWidget) {
+        this.wfsGoToXYWidget = wfsGoToXYWidget;
     }
 
     @Override
-    public final WFSMapControlColleague getWFSColleague(WFSColleagueKey controlKey) {
-        return isWFSColleagueRegistered(controlKey)
-                ? this.wfsColleagueRegistry.get(
-                controlKey) : null;
-    }
+    public Button get() {
+        return new Button() {
 
-    @Override
-    public final void resetWFSColleague(WFSColleagueKey controlKey) {
-        WFSMapControlColleague colleague = this.getWFSColleague(controlKey);
-        if (colleague != null) {
-            colleague.resetColleague();
-        }
+            {
+                super.setId("WFS_T_GOTO_XY_BUTTON");
+                super.setIcon(BasicWidgetResources.ICONS.gotoXY());
+                super.setToolTip(BasicWidgetConstants.INSTANCE.
+                        GotoXYAction_tooltipText());
+                super.addSelectionListener(
+                        new SelectionListener<ButtonEvent>() {
+
+                            @Override
+                            public void componentSelected(ButtonEvent ce) {
+                                wfsGoToXYWidget.show();
+                            }
+
+                        });
+            }
+
+        };
     }
 
 }

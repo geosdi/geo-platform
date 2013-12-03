@@ -50,6 +50,7 @@ import org.geosdi.geoplatform.gui.client.config.annotation.RotateFeatureToggleBu
 import org.geosdi.geoplatform.gui.client.config.annotation.SaveButton;
 import org.geosdi.geoplatform.gui.client.config.provider.button.ResetButtonProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.button.SaveButtonProvider;
+import org.geosdi.geoplatform.gui.client.config.provider.button.WFSGotoXYButtonProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.togglebutton.DragFeatureToggleButtonProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.togglebutton.EditFeatureToggleButtonProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.togglebutton.EraseFeatureToggleButtonProvider;
@@ -92,6 +93,9 @@ public class FeatureInjectorButtonProvider extends AbstractGinModule {
         
         bind(ToggleButton.class).annotatedWith(EraseFeatureToggleButton.class).toProvider(
                 EraseFeatureToggleButtonProvider.class).in(Singleton.class);
+        
+        bind(Button.class).toProvider(WFSGotoXYButtonProvider.class).in(
+                Singleton.class);
     }
-
+    
 }

@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.config;
 
+import com.extjs.gxt.ui.client.widget.button.ButtonBar;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.google.gwt.inject.client.AbstractGinModule;
 import javax.inject.Singleton;
@@ -62,7 +63,10 @@ import org.geosdi.geoplatform.gui.client.config.provider.UpdateFeatureGeometryRe
 import org.geosdi.geoplatform.gui.client.config.provider.VectorLayerProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.VectorStyleProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.WFSDispatcherProgressBarProvider;
+import org.geosdi.geoplatform.gui.client.config.provider.WFSGotoXYWigetProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.layout.BorderLayoutProvider;
+import org.geosdi.geoplatform.gui.client.config.provider.window.buttonbar.FeatureWidgetBar;
+import org.geosdi.geoplatform.gui.client.widget.map.control.GotoXYWidget;
 import org.geosdi.geoplatform.gui.client.widget.wfs.dispatcher.DescribeFeatureDispatcher;
 import org.geosdi.geoplatform.gui.client.widget.wfs.dispatcher.GPDescribeFeatureDispatcher;
 import org.geosdi.geoplatform.gui.client.widget.wfs.dispatcher.WFSDispatcherProgressBar;
@@ -79,63 +83,69 @@ import org.gwtopenmaps.openlayers.client.protocol.WFSProtocolCRUDOptions;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class FeatureInjectorProvider extends AbstractGinModule {
-    
+
     @Override
     protected void configure() {
         bind(MapWidget.class).toProvider(MapWidgetProvider.class)
                 .in(Singleton.class);
-        
+
         bind(LayerTypeHandlerManager.class).toProvider(
                 LayerTypeHandlerManagerProvider.class).in(Singleton.class);
-        
+
         bind(DescribeFeatureTypeHandler.class).toProvider(
                 DescribeFeatureTypeHandlerProvider.class).in(Singleton.class);
-        
+
         bind(RasterTypeHandler.class).toProvider(RasterTypeHandlerProvider.class).in(
                 Singleton.class);
-        
+
         bind(DescribeFeatureDispatcher.class).to(
                 GPDescribeFeatureDispatcher.class).in(Singleton.class);
-        
+
         bind(LayerSchemaParserHandler.class).to(ConcreteLayerSchemaHandler.class).in(
                 Singleton.class);
-        
+
         bind(LayerSchemaHandlerManager.class).toProvider(
                 LayerSchemaHandlerManagerProvider.class).in(Singleton.class);
-        
+
         bind(Style.class).toProvider(VectorStyleProvider.class).in(
                 Singleton.class);
         bind(Vector.class).toProvider(VectorLayerProvider.class).in(
                 Singleton.class);
-        
+
         bind(FeatureSelectListener.class).toProvider(
                 FeatureSelectListenerProvider.class).in(
                         Singleton.class);
-        
+
         bind(FeatureUnSelectListener.class).toProvider(
                 FeatureUnSelectListenerProvider.class).in(
                         Singleton.class);
-        
+
         bind(LonLat.class).toProvider(FeatureLonLatItalyProvider.class).in(
                 Singleton.class);
-        
+
         bind(BorderLayout.class).toProvider(BorderLayoutProvider.class).in(
                 Singleton.class);
-        
+
         bind(WFSDispatcherProgressBar.class).toProvider(
                 WFSDispatcherProgressBarProvider.class).in(Singleton.class);
-        
+
         bind(UpdateFeatureGeometryRequest.class).toProvider(
                 UpdateFeatureGeometryRequestProvider.class).in(Singleton.class);
-        
+
         bind(InsertFeatureRequest.class).toProvider(
                 InsertFeatureRequestProvider.class).in(Singleton.class);
-        
+
         bind(EraseFeatureRequest.class).toProvider(
                 EraseFeatureRequestProvider.class).in(Singleton.class);
-        
+
         bind(WFSProtocolCRUDOptions.class).toProvider(
                 FeatureProtocolCRUDOptionsProvider.class).in(Singleton.class);
+
+        bind(GotoXYWidget.class).toProvider(WFSGotoXYWigetProvider.class).in(
+                Singleton.class);
+
+        bind(ButtonBar.class).toProvider(FeatureWidgetBar.class).in(
+                Singleton.class);
     }
-    
+
 }

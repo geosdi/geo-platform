@@ -33,40 +33,31 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator;
+package org.geosdi.geoplatform.gui.client.config.provider;
 
-import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.colleague.WFSMapControlColleague;
-import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.colleague.WFSColleagueKey;
-import com.google.common.collect.Maps;
-import java.util.Map;
+import javax.inject.Inject;
+import javax.inject.Provider;
+import org.geosdi.geoplatform.gui.client.widget.map.control.GotoXYWidget;
+import org.gwtopenmaps.openlayers.client.MapWidget;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class WFSAbstractMapMediator implements WFSMapMediator {
+public class WFSGotoXYWigetProvider implements Provider<GotoXYWidget> {
 
-    protected final Map<WFSColleagueKey, WFSMapControlColleague> wfsColleagueRegistry = Maps.newEnumMap(
-            WFSColleagueKey.class);
+    private final MapWidget mapWidet;
 
-    final boolean isWFSColleagueRegistered(WFSColleagueKey controlKey) {
-        return this.wfsColleagueRegistry.containsKey(controlKey);
+    @Inject
+    public WFSGotoXYWigetProvider(MapWidget theMapWidet) {
+        this.mapWidet = theMapWidet;
     }
 
     @Override
-    public final WFSMapControlColleague getWFSColleague(WFSColleagueKey controlKey) {
-        return isWFSColleagueRegistered(controlKey)
-                ? this.wfsColleagueRegistry.get(
-                controlKey) : null;
-    }
-
-    @Override
-    public final void resetWFSColleague(WFSColleagueKey controlKey) {
-        WFSMapControlColleague colleague = this.getWFSColleague(controlKey);
-        if (colleague != null) {
-            colleague.resetColleague();
-        }
+    public GotoXYWidget get() {
+        return new GotoXYWidget(Boolean.TRUE, mapWidet,
+                "WFS-Marker-Vector-Layer");
     }
 
 }

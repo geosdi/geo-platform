@@ -48,7 +48,7 @@ import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
  */
 public class EditToolbarBaseObserver implements WFSToolbarObserver {
 
-    private final Map<String, WFSToggleButton> forceResetButtons = Maps.newHashMap();
+    private final Map<String, WFSToggleButton> forceResetButtons = Maps.<String, WFSToggleButton>newHashMap();
     private WFSToggleButton buttonPressed;
     private WFSToggleButton lastButtonPressed;
 

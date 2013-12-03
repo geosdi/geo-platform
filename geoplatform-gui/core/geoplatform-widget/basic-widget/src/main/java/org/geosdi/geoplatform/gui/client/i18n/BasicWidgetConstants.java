@@ -210,4 +210,7 @@ public interface BasicWidgetConstants extends Constants {
 
     @DefaultStringValue("Goto X - Y")
     String GotoXYWidget_fieldSetHeadingText();
+    
+    @DefaultStringValue("Goto X - Y")
+    String GotoXYAction_tooltipText();
 }

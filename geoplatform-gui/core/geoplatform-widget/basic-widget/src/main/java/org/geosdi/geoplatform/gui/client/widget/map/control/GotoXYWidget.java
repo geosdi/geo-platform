@@ -50,7 +50,6 @@ import org.geosdi.geoplatform.gui.client.widget.SaveStatus;
 import org.geosdi.geoplatform.gui.client.widget.form.GeoPlatformFormWidget;
 import org.geosdi.geoplatform.gui.client.widget.form.IGeoPlatformForm;
 import org.geosdi.geoplatform.gui.client.widget.map.marker.advanced.GeocodingVectorMarker;
-import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.gwtopenmaps.openlayers.client.LonLat;
 import org.gwtopenmaps.openlayers.client.MapWidget;
 
@@ -166,28 +165,21 @@ public class GotoXYWidget extends GeoPlatformFormWidget<PointRepresentation>
         this.yNumberField.reset();
         this.saveStatus.clearStatus("");
         this.epsgPanel.reset();
+        this.unregisterMarker();
     }
 
     @Override
-    public void show() {
+    public final void show() {
         this.registerMark();
         super.show();
     }
 
-    @Override
-    public void hide(Button buttonPressed) {
-        super.hide(buttonPressed);
-        if (buttonPressed != null) {
-            this.unregisterMarker();
-        }
-    }
-
-    private void registerMark() {
+    final void registerMark() {
         this.mapWidget.getMap().addLayer(geocoderMarker.getMarkerLayer());
         this.geocoderMarker.addControl();
     }
 
-    private void unregisterMarker() {
+    final void unregisterMarker() {
         this.geocoderMarker.removeControl();
         this.geocoderMarker.removeMarker();
         this.mapWidget.getMap().removeLayer(this.geocoderMarker.getMarkerLayer());

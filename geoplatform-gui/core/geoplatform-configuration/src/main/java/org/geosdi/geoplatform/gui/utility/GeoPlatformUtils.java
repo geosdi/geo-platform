@@ -81,4 +81,11 @@ public class GeoPlatformUtils {
         return map == null ? Collections.EMPTY_MAP : map;
     }
 
+    public static boolean isNotEmpty(final String string) {
+        if (string == null || string.isEmpty()) {
+            return false;
+        }
+        return true;
+    }
+
 }

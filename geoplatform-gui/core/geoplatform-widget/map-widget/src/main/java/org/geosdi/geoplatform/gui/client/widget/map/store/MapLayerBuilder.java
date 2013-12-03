@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.widget.map.store;
 
 import com.extjs.gxt.ui.client.Registry;
 import org.geosdi.geoplatform.gui.client.widget.viewport.ViewportUtility;
+import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
 import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
 import org.geosdi.geoplatform.gui.global.enumeration.GlobalRegistryEnum;
@@ -96,12 +97,25 @@ public class MapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean> {
         if (bbox != null) {
             wmsOption.setMaxExtent(bbox);
         }
-        
+
         wmsOption.setIsBaseLayer(Boolean.FALSE);
         wmsOption.setDisplayInLayerSwitcher(Boolean.FALSE);
         wmsOption.setDisplayOutsideMaxExtent(Boolean.TRUE);
         wmsOption.setBuffer(0);
         wmsOption.setRatio(1);
+
+        if (super.mapWidget.getMap().getProjection().equals(GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode())) {
+            wmsOption.setProjection(GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode());
+        } else if (super.mapWidget.getMap().getProjection().equals(GPCoordinateReferenceSystem.WGS_84.getCode())) {
+            wmsOption.setProjection(GPCoordinateReferenceSystem.WGS_84.getCode());
+        }
+
+        if (rasterBean.getMaxScale() != null) {
+            wmsOption.setMaxScale(rasterBean.getMaxScale());
+        }
+        if (rasterBean.getMinScale() != null) {
+            wmsOption.setMinScale(rasterBean.getMinScale());
+        }
 
         WMS layer = new WMS(rasterBean.getLabel(), rasterBean.getDataSource(),
                 wmsParams, wmsOption);

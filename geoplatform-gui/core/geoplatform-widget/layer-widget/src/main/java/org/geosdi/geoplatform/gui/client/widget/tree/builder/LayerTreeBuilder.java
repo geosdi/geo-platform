@@ -73,6 +73,7 @@ import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
+import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
 import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
 /**
@@ -198,7 +199,7 @@ public class LayerTreeBuilder implements GPCompositeBuilder {
     private void insertElementsOfTheRootFolders(
             List<GPFolderClientInfo> folderClientList) {
         int i = 0;
-        for (GPFolderClientInfo folderElement : folderClientList) {
+        for (GPFolderClientInfo folderElement : GeoPlatformUtils.safeList(folderClientList)) {
             this.insertElementsOnTree((FolderTreeNode) this.root.getChild(i),
                     folderElement);
             i++;
@@ -214,7 +215,7 @@ public class LayerTreeBuilder implements GPCompositeBuilder {
                 tree.setExpanded(parentFolder, Boolean.TRUE);
             }
             int i = 0;
-            for (IGPFolderElements folderElement : folderClientInfo.getFolderElements()) {
+            for (IGPFolderElements folderElement : GeoPlatformUtils.safeList(folderClientInfo.getFolderElements())) {
                 if (folderElement instanceof GPFolderClientInfo) {
                     this.insertElementsOnTree(
                             (FolderTreeNode) parentFolder.getChild(i),

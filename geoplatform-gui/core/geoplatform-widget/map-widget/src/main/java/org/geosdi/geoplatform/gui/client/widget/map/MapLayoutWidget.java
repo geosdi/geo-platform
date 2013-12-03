@@ -40,12 +40,15 @@ import com.extjs.gxt.ui.client.Registry;
 import com.google.common.collect.Lists;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.geosdi.geoplatform.gui.client.event.IChangeBaseLayerHandler;
 import org.geosdi.geoplatform.gui.client.i18n.MapModuleConstants;
 import org.geosdi.geoplatform.gui.client.widget.MapToolbar;
 import org.geosdi.geoplatform.gui.client.widget.baselayer.factory.GPMapBaseLayerFactory;
 import org.geosdi.geoplatform.gui.client.widget.baselayer.model.GPBaseLayer;
 import org.geosdi.geoplatform.gui.client.widget.map.control.history.NavigationHistoryControl;
+import org.geosdi.geoplatform.gui.client.widget.map.event.LayerRangeEvent;
 import org.geosdi.geoplatform.gui.client.widget.map.routing.GPRoutingManagerWidget;
 import org.geosdi.geoplatform.gui.client.widget.scale.GPScaleWidget;
 import org.geosdi.geoplatform.gui.client.widget.viewport.ViewportUtility;
@@ -61,10 +64,13 @@ import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.geosdi.geoplatform.gui.impl.map.event.ChangeBaseLayerMapEvent;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.featureinfo.event.FeatureInfoAddModifyLayer;
 import org.geosdi.geoplatform.gui.puregwt.featureinfo.event.FeatureInfoRemoveLayer;
 import org.geosdi.geoplatform.gui.puregwt.featureinfo.event.GPFeatureInfoEvent;
+import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
+import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
 import org.gwtopenmaps.openlayers.client.*;
 import org.gwtopenmaps.openlayers.client.control.*;
 import org.gwtopenmaps.openlayers.client.event.MapLayerAddedListener;
@@ -79,6 +85,8 @@ import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 import org.gwtopenmaps.openlayers.client.handler.PathHandler;
 import org.gwtopenmaps.openlayers.client.handler.PolygonHandler;
 import org.gwtopenmaps.openlayers.client.layer.Layer;
+import org.gwtopenmaps.openlayers.client.layer.WMS;
+import org.gwtopenmaps.openlayers.client.layer.WMSOptions;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -87,6 +95,7 @@ import org.gwtopenmaps.openlayers.client.layer.Layer;
  */
 public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler {
 
+    private final static Logger logger = Logger.getLogger("");
     public final static int NUM_ZOOM_LEVEL = 30;
     private MapWidget mapWidget;
     private MapOptions mapOptions;
@@ -183,8 +192,26 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
         baseLayer.getGwtOlBaseLayer().setZIndex(-1);
         this.mapControl = new MapControlManager(this.map);
 
+        this.map.addControl(new Scale());
+
+        this.map.addMapLayerChangedListener(new MapLayerChangedListener() {
+
+            private LayerRangeEvent layerRangeEvent;
+
+            @Override
+            public void onLayerChanged(
+                    MapLayerChangedListener.MapLayerChangedEvent eventObject) {
+//                    if (!layer.isAlwaysInRange()) {
+                GPLayerBean layerBean = mapModel.getLayersStore().getLayer(eventObject.getLayer());
+                layerRangeEvent = new LayerRangeEvent(layerBean, eventObject.getLayer().isInRange());
+                LayerHandlerManager.fireEvent(layerRangeEvent);
+                logger.log(Level.INFO, "Called onLayer Changed: " + eventObject.getLayer().getId());
+//                }
+            }
+
+        });
+
         this.map.setOptions(this.mapOptions);
-//        System.out.println("Map Projection " + this.map.getProjection());
         this.featureInfoLayerAddedListener = new MapLayerAddedListener() {
 
             @Override
@@ -605,6 +632,18 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
         return this.map.getScaleForZoom(zoom, units);
     }
 
+    private void switchWMSOptionProjection(GPCoordinateReferenceSystem crs) {
+        for (Layer layer : GeoPlatformUtils.safeList(
+                this.mapModel.getLayersStore().getLayers())) {
+            if (layer instanceof WMS) {
+                WMS wmsLayer = (WMS) layer;
+                WMSOptions options = wmsLayer.getOptions();
+                options.setProjection(crs.getCode());
+                wmsLayer.addOptions(options);
+            }
+        }
+    }
+
     @Override
     public void changeBaseLayer(GPBaseLayer gpBaseLayer) {
         if (!gpBaseLayer.getGwtOlBaseLayer().getName().equals(
@@ -623,6 +662,7 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
                         GPCoordinateReferenceSystem.EPSG_GOOGLE.getCode()),
                         new Projection(
                                 GPCoordinateReferenceSystem.WGS_84.getCode()));
+                switchWMSOptionProjection(GPCoordinateReferenceSystem.WGS_84);
                 projectionChanged = Boolean.TRUE;
             } else if (gpBaseLayer.getProjection().getProjectionCode().equals(
                     GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode())
@@ -633,6 +673,7 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
                         GPCoordinateReferenceSystem.WGS_84.getCode()),
                         new Projection(
                                 GPCoordinateReferenceSystem.EPSG_GOOGLE.getCode()));
+                switchWMSOptionProjection(GPCoordinateReferenceSystem.GOOGLE_MERCATOR);
                 projectionChanged = Boolean.TRUE;
             }
             Layer newBaseLayer = gpBaseLayer.getGwtOlBaseLayer();

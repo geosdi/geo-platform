@@ -38,6 +38,9 @@ package org.geosdi.geoplatform.gui.client.widget.map.store;
 import com.extjs.gxt.ui.client.Registry;
 import com.google.gwt.user.client.History;
 import java.util.Iterator;
+import java.util.Map.Entry;
+import java.util.logging.Logger;
+import org.geosdi.geoplatform.gui.client.widget.map.event.LayerRangeEvent;
 import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
 import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
@@ -54,6 +57,7 @@ import org.geosdi.geoplatform.gui.puregwt.layers.event.ReloadLegendEvent;
 import org.gwtopenmaps.openlayers.client.Projection;
 import org.gwtopenmaps.openlayers.client.layer.Layer;
 import org.gwtopenmaps.openlayers.client.layer.WMS;
+import org.gwtopenmaps.openlayers.client.layer.WMSOptions;
 import org.gwtopenmaps.openlayers.client.layer.WMSParams;
 
 /**
@@ -63,6 +67,7 @@ import org.gwtopenmaps.openlayers.client.layer.WMSParams;
  */
 public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
 
+    private final static Logger logger = Logger.getLogger("");
     private MapLayerBuilder layerBuilder;
     final private DisplayLegendEvent displayLegendEvent = new DisplayLegendEvent();
     final private HideLegendEvent hideLegendEvent = new HideLegendEvent();
@@ -77,6 +82,17 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
     @Override
     public boolean containsLayer(GPLayerBean key) {
         return this.layers.containsKey(key);
+    }
+
+    public GPLayerBean getLayer(Layer value) {
+        GPLayerBean layerToReturn = null;
+        for (Entry<GPLayerBean, Layer> layer : this.layers.entrySet()) {
+            if (layer.getValue().getId().equals(value.getId())) {
+                layerToReturn = layer.getKey();
+                break;
+            }
+        }
+        return layerToReturn;
     }
 
     @Override
@@ -249,6 +265,49 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
         Layer layer = getLayer(layerBean);
         if ((layer != null) && (layer.isVisible())) {
             layer.setOpacity(layerBean.getOpacity());
+        }
+    }
+
+    @Override
+    public void changeMaxScale(GPRasterBean layerBean, Float maxScale) {
+        WMS layer = (WMS) this.layers.get(layerBean);
+        if ((layer != null) && (layer.isVisible())) {
+            WMSOptions options = layer.getOptions();
+            if (maxScale == null) {
+                options.unsetMaxScale();
+            } else {
+                options.setMaxScale(maxScale);
+            }
+            layer.addOptions(options);
+            layer.calculateInRange();
+            layer.redraw();
+            this.reloadLegendEvent.setLayerBean(layerBean);
+            LayerHandlerManager.fireEvent(this.reloadLegendEvent);
+            this.updateLayerLabel(layerBean, layer.isInRange());
+        }
+    }
+
+    private void updateLayerLabel(GPLayerBean layerBean, boolean inRange) {
+        LayerRangeEvent layerRangeEvent = new LayerRangeEvent(layerBean, inRange);
+        LayerHandlerManager.fireEvent(layerRangeEvent);
+    }
+
+    @Override
+    public void changeMinScale(GPRasterBean layerBean, Float minScale) {
+        WMS layer = (WMS) this.layers.get(layerBean);
+        if ((layer != null) && (layer.isVisible())) {
+            WMSOptions options = layer.getOptions();
+            if (minScale == null) {
+                options.unsetMinScale();
+            } else {
+                options.setMinScale(minScale);
+            }
+            layer.addOptions(options);
+            layer.calculateInRange();
+            layer.redraw();
+            this.reloadLegendEvent.setLayerBean(layerBean);
+            LayerHandlerManager.fireEvent(this.reloadLegendEvent);
+            this.updateLayerLabel(layerBean, layer.isInRange());
         }
     }
 

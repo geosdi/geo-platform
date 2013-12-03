@@ -257,12 +257,6 @@ public interface MapModuleConstants extends Constants {
     String MeasureAction_tooltipText();
 
     /**
-     * start GotoXYAction
-     */
-    @DefaultStringValue("Goto X - Y")
-    String GotoXYAction_tooltipText();
-
-    /**
      * start ChangeBaseLayerAction
      */
     @DefaultStringValue("Select Base Layer")

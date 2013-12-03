@@ -91,7 +91,8 @@ public class GPGeocodingWidget implements GeocodingEventHandler {
 
     @Override
     public void onRegisterGeocodingLocation(IGeoPlatformLocation bean,
-            GPCoordinateReferenceSystem crs, Object provider) {
+            GPCoordinateReferenceSystem crs, Object provider,
+            boolean isSetCenter) {
         LonLat center = new LonLat(bean.getLon(), bean.getLat());
 
         if (this.mapWidget.getMap().getProjection().equals(
@@ -101,7 +102,7 @@ public class GPGeocodingWidget implements GeocodingEventHandler {
         }
 
         this.geocoderMarker.setProvider(provider);
-        this.geocoderMarker.addMarker(center);
+        this.geocoderMarker.addMarker(center, isSetCenter);
         GPToolbarActionHandlerManager.fireEvent(new UpdateModelAndButtonEvent(
                 bean));
     }

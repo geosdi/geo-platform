@@ -91,7 +91,7 @@ public class GotoXYWidget extends GeoPlatformFormWidget<PointRepresentation>
             center.transform(epsgCode, this.mapWidget.getMap().getProjection());
         }
 
-        this.geocoderMarker.addMarker(center);
+        this.geocoderMarker.addMarker(center, true);
     }
 
     @Override

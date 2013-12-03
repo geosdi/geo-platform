@@ -71,7 +71,7 @@ public class ReverseGeocodingVectorMarker extends GPVectorMarkerLayer {
     }
 
     @Override
-    public void addMarker(LonLat lonlat) {
+    public void addMarker(LonLat lonlat, boolean isSetCenter) {
         super.drawFeature(lonlat);
         //map.setCenter(lonlat, 16);
     }

@@ -48,16 +48,18 @@ import org.geosdi.geoplatform.gui.model.IGeoPlatformLocation;
  */
 public class RegisterGeocodingLocationEvent extends GwtEvent<GeocodingEventHandler> {
 
-    private IGeoPlatformLocation bean;
-    private GPCoordinateReferenceSystem crs;
-    private GPGeoCoderProvider provider;
+    private final IGeoPlatformLocation bean;
+    private final GPCoordinateReferenceSystem crs;
+    private final GPGeoCoderProvider provider;
+    private final boolean isSetCenter;
 
     public RegisterGeocodingLocationEvent(IGeoPlatformLocation theBean,
             GPCoordinateReferenceSystem theCRS,
-            GPGeoCoderProvider theProvider) {
+            GPGeoCoderProvider theProvider, boolean isSetCenter) {
         this.bean = theBean;
         this.crs = theCRS;
         this.provider = theProvider;
+        this.isSetCenter = isSetCenter;
     }
 
     @Override
@@ -67,6 +69,8 @@ public class RegisterGeocodingLocationEvent extends GwtEvent<GeocodingEventHandl
 
     @Override
     protected void dispatch(GeocodingEventHandler handler) {
-        handler.onRegisterGeocodingLocation(bean, crs, provider.getProvider());
+        handler.onRegisterGeocodingLocation(bean, crs, provider.getProvider(),
+                isSetCenter);
     }
+
 }

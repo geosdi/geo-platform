@@ -43,15 +43,17 @@ import org.geosdi.geoplatform.gui.model.IGeoPlatformLocation;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public interface GeocodingEventHandler extends GPGeocodingMarkerHandler {
 
     Type<GeocodingEventHandler> TYPE = new Type<GeocodingEventHandler>();
 
     void onRegisterGeocodingLocation(IGeoPlatformLocation bean,
-            GPCoordinateReferenceSystem crs, Object provider);
-    
+            GPCoordinateReferenceSystem crs, Object provider,
+            boolean isSetCenter);
+
     void onRegisterGeocodingFeature(IGeoPlatformLocation bean,
             GPCoordinateReferenceSystem crs, Object provider);
+
 }

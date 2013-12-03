@@ -82,7 +82,7 @@ public class ReverseGeocodingMarker extends GeoPlatformMarkerLayer {
      * @param lonlat
      */
     @Override
-    public void addMarker(LonLat lonlat) {
+    public void addMarker(LonLat lonlat, boolean isSetCenter) {
         ((Markers) this.markerLayer).clearMarkers();
         this.marker = new Marker(lonlat, this.iconMarker);
         ((Markers) this.markerLayer).addMarker(this.marker);

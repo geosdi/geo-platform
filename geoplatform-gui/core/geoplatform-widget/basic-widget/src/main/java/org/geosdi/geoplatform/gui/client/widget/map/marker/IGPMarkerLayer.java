@@ -48,7 +48,7 @@ public interface IGPMarkerLayer {
 
     void buildIconMarker();
 
-    void addMarker(LonLat lonlat);
+    void addMarker(LonLat lonlat, boolean isSetCenter);
 
     void removeMarker();
 }

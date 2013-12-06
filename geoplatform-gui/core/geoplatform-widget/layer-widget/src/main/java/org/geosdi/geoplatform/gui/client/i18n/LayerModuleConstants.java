@@ -532,12 +532,6 @@ public interface LayerModuleConstants extends Constants {
     String LoadKmlFromUrlTreeAction_tooltipText();
 
     /**
-     * start DeleteElementTreeAction
-     */
-    @DefaultStringValue("Add WFS")
-    String DeleteElementTreeAction_tooltipText();
-
-    /**
      * start AddVectorTreeAction
      */
     @DefaultStringValue("Add WFS")

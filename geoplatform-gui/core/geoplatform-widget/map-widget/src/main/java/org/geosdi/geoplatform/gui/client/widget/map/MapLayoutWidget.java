@@ -205,7 +205,7 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
                 GPLayerBean layerBean = mapModel.getLayersStore().getLayer(eventObject.getLayer());
                 layerRangeEvent = new LayerRangeEvent(layerBean, eventObject.getLayer().isInRange());
                 LayerHandlerManager.fireEvent(layerRangeEvent);
-                logger.log(Level.INFO, "Called onLayer Changed: " + eventObject.getLayer().getId());
+                logger.log(Level.FINE, "Called onLayer Changed: " + eventObject.getLayer().getId());
 //                }
             }
 

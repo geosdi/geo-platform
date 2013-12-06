@@ -124,7 +124,8 @@ public class LayerWidgetUI implements EntryPoint {
 //        TreeToolbarPluginManager.addToolBarPlugin(new GetMapTreeToolbarPlugin());
 
         AddLayerPluginManager.addWindowPlugin(new AddRasterLayerPlugin());
-        AddLayerPluginManager.addWindowPlugin(new AddVectorLayerPlugin());
+        //TODO: Enable when platform support WFS
+//        AddLayerPluginManager.addWindowPlugin(new AddVectorLayerPlugin());
         AddLayerPluginManager.addWindowPlugin(new GetMapLayerPlugin());
     }
 }

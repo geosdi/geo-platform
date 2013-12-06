@@ -54,6 +54,7 @@ import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.plugin.tree.addlayer.AddLayerPluginManager;
 import org.geosdi.geoplatform.gui.plugin.tree.addlayer.IAddLayerPlugin;
+import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -92,24 +93,24 @@ public class AddLayerWidget extends GeoPlatformWindow {
 
         listView.getSelectionModel().addSelectionChangedListener(
                 new SelectionChangedListener<IAddLayerPlugin>() {
-            @Override
-            public void selectionChanged(SelectionChangedEvent<IAddLayerPlugin> se) {
-                if (se.getSelectedItem() != null) {
-                    if (se.getSelectedItem().getAction(tree).isEnabled()) {
-                        ButtonEvent be = new ButtonEvent(null);
-                        be.setType(Events.Select);
-                        se.getSelectedItem().getAction(tree).handleEvent(be);
-                        hide();
-                    } else {
-                        GeoPlatformMessage.errorMessage(
-                                LayerModuleConstants.INSTANCE.
-                                AddLayerWidget_errorDisabledFunctionText(),
-                                se.getSelectedItem().getMessageToEnable());
+                    @Override
+                    public void selectionChanged(SelectionChangedEvent<IAddLayerPlugin> se) {
+                        if (se.getSelectedItem() != null) {
+                            if (se.getSelectedItem().getAction(tree).isEnabled()) {
+                                ButtonEvent be = new ButtonEvent(null);
+                                be.setType(Events.Select);
+                                se.getSelectedItem().getAction(tree).handleEvent(be);
+                                hide();
+                            } else {
+                                GeoPlatformMessage.errorMessage(
+                                        LayerModuleConstants.INSTANCE.
+                                        AddLayerWidget_errorDisabledFunctionText(),
+                                        se.getSelectedItem().getMessageToEnable());
+                            }
+                        }
+                        listView.getSelectionModel().deselectAll();
                     }
-                }
-                listView.getSelectionModel().deselectAll();
-            }
-        });
+                });
 
         setListViewProperties();
 
@@ -126,7 +127,7 @@ public class AddLayerWidget extends GeoPlatformWindow {
 
         listView.setTemplate(sb.toString());
 
-        listView.setSize(750, 228);
+        listView.setSize(600, 228);
     }
 
     @Override
@@ -139,12 +140,13 @@ public class AddLayerWidget extends GeoPlatformWindow {
 
     @Override
     public void initSize() {
-        setSize(750, 232);
+        setSize(600, 232);
     }
 
     @Override
     public void addComponent() {
-        for (IAddLayerPlugin plugin : AddLayerPluginManager.getWindowPlugins()) {
+        for (IAddLayerPlugin plugin : GeoPlatformUtils.safeList(
+                AddLayerPluginManager.getWindowPlugins())) {
             plugin.initPlugin(tree);
             this.store.add(plugin);
         }

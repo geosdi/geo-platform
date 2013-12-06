@@ -127,7 +127,8 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
         search = new TextField<String>();
         search.setFieldLabel(
                 GeocodingModuleConstants.INSTANCE.GeocodingGridWidget_searchFieldLabelText());
-
+        search.setEmptyText(
+                GeocodingModuleConstants.INSTANCE.GeocodingGridWidget_searchFieldEmptyText());
         search.addKeyListener(new KeyListener() {
 
             @Override
@@ -169,7 +170,8 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
 
         geocodingServiceCombo = new ComboBox<GPGeocodingServiceBean>();
         geocodingServiceCombo.setId("geocodingServiceSelector");
-        geocodingServiceCombo.setFieldLabel("Name");
+        geocodingServiceCombo.setFieldLabel(
+        GeocodingModuleConstants.INSTANCE.GeocodingGridWidget_providerText());
         geocodingServiceCombo.setDisplayField(
                 GPGeocodingSeviceKeyValue.GEOCODINGSERVICE.getValue());
         geocodingServiceCombo.setToolTip("Geocoding service selector");

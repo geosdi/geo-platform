@@ -50,6 +50,12 @@ public interface GeocodingModuleConstants extends Constants {
     /**
      * start GeocodingGridWidget
      */
+    @DefaultStringValue("Please, insert the address and the location")
+    String GeocodingGridWidget_searchFieldEmptyText();
+    
+    @DefaultStringValue("Provider")
+    String GeocodingGridWidget_providerText();
+    
     @DefaultStringValue("Locations")
     String GeocodingGridWidget_locationsFieldHeadingText();
 

@@ -39,6 +39,7 @@ import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.event.shared.HandlerRegistration;
+import java.util.logging.Logger;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableEvent;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableHandler;
 import org.geosdi.geoplatform.gui.configuration.action.event.HasActionEnableHandler;
@@ -51,6 +52,7 @@ import org.geosdi.geoplatform.gui.configuration.action.event.HasActionEnableHand
 public abstract class GeoPlatformAction<X extends ComponentEvent>
         extends SelectionListener<X> implements HasActionEnableHandler {
 
+    protected final static Logger logger = Logger.getLogger("");
     protected String id;
     protected boolean enabled;
     protected HandlerManager handlerManager = new HandlerManager(this);

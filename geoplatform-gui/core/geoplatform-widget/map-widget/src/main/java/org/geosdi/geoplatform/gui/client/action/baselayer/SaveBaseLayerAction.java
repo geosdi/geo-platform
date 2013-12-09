@@ -75,7 +75,7 @@ public class SaveBaseLayerAction extends GeoPlatformSecureAction<ComponentEvent>
                 LayoutManager.getInstance().getStatusMap().setStatus(
                         MapModuleConstants.INSTANCE.SaveBaseLayerAction_statusErrorSavingText(),
                         SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
-                System.out.println("Error saving the new base layer: " + caught.toString()
+                logger.warning("Error saving the new base layer: " + caught.toString()
                         + " data: " + caught.getMessage());
             }
 

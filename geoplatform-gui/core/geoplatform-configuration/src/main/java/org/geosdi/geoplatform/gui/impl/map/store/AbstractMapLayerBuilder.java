@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.impl.map.store;
 
+import java.util.logging.Logger;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.GPVectorBean;
@@ -44,11 +45,12 @@ import org.gwtopenmaps.openlayers.client.layer.Layer;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public abstract class AbstractMapLayerBuilder<T extends GPLayerBean> implements
         GPMapLayerBuilder {
 
+    protected final static Logger logger = Logger.getLogger("");
     protected MapWidget mapWidget;
 
     public AbstractMapLayerBuilder(MapWidget theMapWidget) {

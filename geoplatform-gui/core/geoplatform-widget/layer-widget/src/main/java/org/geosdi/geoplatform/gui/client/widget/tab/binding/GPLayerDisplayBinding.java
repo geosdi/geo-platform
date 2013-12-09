@@ -58,7 +58,6 @@ import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.google.gwt.i18n.client.NumberFormat;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
@@ -83,8 +82,6 @@ import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class GPLayerDisplayBinding extends GeoPlatformBindingWidget<GPRasterBean> {
-
-    private final static Logger logger = Logger.getLogger("");
 
     private NumberField maxScale;
     private NumberField minScale;
@@ -120,7 +117,8 @@ public class GPLayerDisplayBinding extends GeoPlatformBindingWidget<GPRasterBean
             }
         };
         this.maxScale.setPropertyEditorType(Float.class);
-        this.maxScale.setFieldLabel("Max Scale 1");//TODO: i18n
+        this.maxScale.setFieldLabel(LayerModuleConstants.INSTANCE.
+                GPLayerDisplayBinding_maxScaleNumberFieldText());
 
         this.minScale = new NumberField() {
 
@@ -136,15 +134,20 @@ public class GPLayerDisplayBinding extends GeoPlatformBindingWidget<GPRasterBean
             }
         };
         this.minScale.setPropertyEditorType(Float.class);
-        this.minScale.setFieldLabel("Min Scale 1");//TODO: i18n
-        //TODO: i18n button text
-        Button removeScale = new Button("Remove Limits", BasicWidgetResources.ICONS.delete(),
+        this.minScale.setFieldLabel(LayerModuleConstants.INSTANCE.
+                GPLayerDisplayBinding_minScaleNumberFieldText());
+        Button removeScale = new Button(LayerModuleConstants.INSTANCE.
+                GPLayerDisplayBinding_removeLimitsButtonText(),
+                BasicWidgetResources.ICONS.delete(),
                 new SelectionListener<ButtonEvent>() {
 
                     @Override
                     public void componentSelected(ButtonEvent ce) {
                         GeoPlatformMessage.confirmMessage(
-                                "Remove Scale Limit", "Are you sure you want to remove the scale limits?",
+                                LayerModuleConstants.INSTANCE.
+                                GPLayerDisplayBinding_removeLimitsMessageTitleText(),
+                                LayerModuleConstants.INSTANCE.
+                                GPLayerDisplayBinding_removeLimitsMessageBodyText(),
                                 new Listener<MessageBoxEvent>() {
                                     @Override
                                     public void handleEvent(MessageBoxEvent be) {
@@ -158,7 +161,8 @@ public class GPLayerDisplayBinding extends GeoPlatformBindingWidget<GPRasterBean
 
         final FieldSet scaleFieldSet = new FieldSet();
         scaleFieldSet.setLayout(new FormLayout());
-        scaleFieldSet.setHeadingHtml("Limit by Scale");//TODO: i18n
+        scaleFieldSet.setHeadingHtml(LayerModuleConstants.INSTANCE.
+                GPLayerDisplayBinding_limitsByScaleFieldText());
         scaleFieldSet.add(maxScale);
         scaleFieldSet.add(minScale);
         scaleFieldSet.add(removeScale);

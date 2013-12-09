@@ -45,8 +45,8 @@ import com.google.gwt.i18n.client.Constants.DefaultStringValue;
  */
 public interface LayerModuleConstants extends Constants {
 
-    public static final LayerModuleConstants INSTANCE =
-            GWT.create(LayerModuleConstants.class);
+    public static final LayerModuleConstants INSTANCE
+            = GWT.create(LayerModuleConstants.class);
 
     @DefaultStringValue("Save Delete Operation Error")
     String errorSaveDeleteOperationTitleText();
@@ -125,7 +125,7 @@ public interface LayerModuleConstants extends Constants {
      */
     @DefaultStringValue("Time Filter Message")
     String LayerTimeFilterWidget_timeFilterMessageTitleText();
-    
+
     @DefaultStringValue("Time Filter Warning")
     String LayerTimeFilterWidget_timeFilterWarningTitleText();
 
@@ -222,8 +222,26 @@ public interface LayerModuleConstants extends Constants {
     /**
      * start GPLayerDisplayBinding
      */
+    @DefaultStringValue("Limit by Scale")
+    String GPLayerDisplayBinding_limitsByScaleFieldText();
+    
+    @DefaultStringValue("Remove Scale Limit")
+    String GPLayerDisplayBinding_removeLimitsMessageTitleText();
+    
+    @DefaultStringValue("Are you sure you want to remove the scale limits?")
+    String GPLayerDisplayBinding_removeLimitsMessageBodyText();
+    
+    @DefaultStringValue("Remove Limits")
+    String GPLayerDisplayBinding_removeLimitsButtonText();
+    
     @DefaultStringValue("Opacity")
     String GPLayerDisplayBinding_sliderMessageText();
+
+    @DefaultStringValue("Min Scale 1")
+    String GPLayerDisplayBinding_minScaleNumberFieldText();
+
+    @DefaultStringValue("Max Scale 1")
+    String GPLayerDisplayBinding_maxScaleNumberFieldText();
 
     @DefaultStringValue("Layer Opacity")
     String GPLayerDisplayBinding_opacityHeadingText();
@@ -485,10 +503,10 @@ public interface LayerModuleConstants extends Constants {
      */
     @DefaultStringValue("opacity")
     String RasterTreeNode_opacityText();
-    
+
     @DefaultStringValue("max scale")
     String RasterTreeNode_maxScaleText();
-    
+
     @DefaultStringValue("min scale")
     String RasterTreeNode_minScaleText();
 

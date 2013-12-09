@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.widget.map.store;
 
 import com.extjs.gxt.ui.client.Registry;
+import java.util.logging.Level;
 import org.geosdi.geoplatform.gui.client.widget.viewport.ViewportUtility;
 import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
@@ -109,11 +110,12 @@ public class MapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean> {
         } else if (super.mapWidget.getMap().getProjection().equals(GPCoordinateReferenceSystem.WGS_84.getCode())) {
             wmsOption.setProjection(GPCoordinateReferenceSystem.WGS_84.getCode());
         }
-
         if (rasterBean.getMaxScale() != null) {
+            logger.log(Level.FINE, "buildRaster Max Scale: " + rasterBean.getMaxScale());
             wmsOption.setMaxScale(rasterBean.getMaxScale());
         }
         if (rasterBean.getMinScale() != null) {
+            logger.log(Level.FINE, "buildRaster Min Scale: " + rasterBean.getMinScale());
             wmsOption.setMinScale(rasterBean.getMinScale());
         }
 

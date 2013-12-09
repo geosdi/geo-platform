@@ -151,7 +151,6 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
             set3857MapOptions();
 
         }
-
     }
 
     private void set4326MapOptions() {
@@ -168,12 +167,31 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
         this.mapOptions.setMaxResolution(156543.0339F);
     }
 
+    public void initMapScaleSupport() {
+        logger.log(Level.FINE, "************** Initialized Map Scale Support");
+        this.map.addControl(new ScaleLine());
+        this.map.addControl(new Scale());
+        this.map.addMapLayerChangedListener(new MapLayerChangedListener() {
+
+            private LayerRangeEvent layerRangeEvent;
+
+            @Override
+            public void onLayerChanged(
+                    MapLayerChangedListener.MapLayerChangedEvent eventObject) {
+                GPLayerBean layerBean = mapModel.getLayersStore().getLayer(eventObject.getLayer());
+                layerRangeEvent = new LayerRangeEvent(layerBean, eventObject.getLayer().isInRange());
+                LayerHandlerManager.fireEvent(layerRangeEvent);
+                logger.log(Level.INFO, "Called onLayer Changed: " + eventObject.getLayer().getId());
+            }
+
+        });
+    }
+
     private void initMapWidget() {
         this.mapWidget = new MapWidget("100%", "100%", mapOptions);
         this.map = mapWidget.getMap();
         this.mapWidget.getElement().getFirstChildElement().getStyle().setZIndex(
                 0);
-        this.map.addControl(new ScaleLine());
         this.map.addControl(new MousePosition());
         this.addMeasureControl();
         this.addMeasureAreaControl();
@@ -192,24 +210,7 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
         baseLayer.getGwtOlBaseLayer().setZIndex(-1);
         this.mapControl = new MapControlManager(this.map);
 
-        this.map.addControl(new Scale());
-
-        this.map.addMapLayerChangedListener(new MapLayerChangedListener() {
-
-            private LayerRangeEvent layerRangeEvent;
-
-            @Override
-            public void onLayerChanged(
-                    MapLayerChangedListener.MapLayerChangedEvent eventObject) {
-//                    if (!layer.isAlwaysInRange()) {
-                GPLayerBean layerBean = mapModel.getLayersStore().getLayer(eventObject.getLayer());
-                layerRangeEvent = new LayerRangeEvent(layerBean, eventObject.getLayer().isInRange());
-                LayerHandlerManager.fireEvent(layerRangeEvent);
-                logger.log(Level.FINE, "Called onLayer Changed: " + eventObject.getLayer().getId());
-//                }
-            }
-
-        });
+        this.initMapScaleSupport();
 
         this.map.setOptions(this.mapOptions);
         this.featureInfoLayerAddedListener = new MapLayerAddedListener() {

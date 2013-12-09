@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.client.widget;
 import com.extjs.gxt.ui.client.event.WindowEvent;
 import com.extjs.gxt.ui.client.event.WindowListener;
 import com.extjs.gxt.ui.client.widget.Window;
+import java.util.logging.Logger;
 
 /**
  *
@@ -46,6 +47,7 @@ import com.extjs.gxt.ui.client.widget.Window;
  */
 public abstract class GeoPlatformWindow extends Window {
 
+    protected final static Logger logger = Logger.getLogger("");
     private boolean initialized;
 
     public GeoPlatformWindow(boolean lazy) {

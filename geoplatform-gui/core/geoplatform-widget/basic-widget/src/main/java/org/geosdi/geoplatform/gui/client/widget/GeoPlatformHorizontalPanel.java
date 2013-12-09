@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.widget;
 
 import com.extjs.gxt.ui.client.widget.HorizontalPanel;
+import java.util.logging.Logger;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -43,6 +44,7 @@ import com.extjs.gxt.ui.client.widget.HorizontalPanel;
  */
 public abstract class GeoPlatformHorizontalPanel extends HorizontalPanel {
 
+    protected final static Logger logger = Logger.getLogger("");
     private boolean initialized;
 
     public GeoPlatformHorizontalPanel(boolean lazy) {

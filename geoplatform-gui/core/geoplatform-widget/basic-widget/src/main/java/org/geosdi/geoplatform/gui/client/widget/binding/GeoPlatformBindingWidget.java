@@ -38,14 +38,16 @@ package org.geosdi.geoplatform.gui.client.widget.binding;
 import com.extjs.gxt.ui.client.binding.FormBinding;
 import com.extjs.gxt.ui.client.data.ModelData;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public abstract class GeoPlatformBindingWidget<M extends ModelData> {
 
+    protected final static Logger logger = Logger.getLogger("");
     private FormPanel formPanel;
     protected FormBinding formBinding;
     private M model;
@@ -58,9 +60,8 @@ public abstract class GeoPlatformBindingWidget<M extends ModelData> {
     }
 
     /**
-     * 
-     * @param model
-     *            M object to bind
+     *
+     * @param model M object to bind
      */
     public void bindModel(M model) {
         this.model = model;
@@ -86,7 +87,7 @@ public abstract class GeoPlatformBindingWidget<M extends ModelData> {
 
     /**
      * Add Bindings Manually
-     * 
+     *
      */
     public abstract void addFieldsBinding();
 }

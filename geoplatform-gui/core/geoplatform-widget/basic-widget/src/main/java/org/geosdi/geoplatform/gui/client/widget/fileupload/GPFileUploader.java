@@ -188,7 +188,8 @@ public class GPFileUploader {
     class UploaderProgressBar extends GeoPlatformProgressBar {
 
         protected UploaderProgressBar() {
-            super("Uploader Progress Bar", Boolean.TRUE);//TODO: i18n
+            super(BasicWidgetConstants.INSTANCE.GPFileUploader_progressBarText(),
+                    Boolean.TRUE);
         }
 
     }

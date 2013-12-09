@@ -178,6 +178,9 @@ public interface BasicWidgetConstants extends Constants {
     /**
      * Start GPFileUploader
      */
+    @DefaultStringValue("Uploader Progress Bar")
+    String GPFileUploader_progressBarText();
+    
     @DefaultStringValue("Upload in progress...")
     String GPFileUploader_uploadInProgressText();
 

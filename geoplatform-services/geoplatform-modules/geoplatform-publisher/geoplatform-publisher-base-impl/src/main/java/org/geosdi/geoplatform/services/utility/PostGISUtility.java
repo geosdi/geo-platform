@@ -64,6 +64,12 @@ public class PostGISUtility implements InitializingBean {
     String hostPostgisDatastore;
     private @Value("configurator{port_postgis_datastore_publisher}")
     int portPostgisDatastore;
+    private @Value("configurator{min_connections_postgis_datastore_publisher}")
+    int minConnectionsPostgisDatastore;
+    private @Value("configurator{max_connections_postgis_datastore_publisher}")
+    int maxConnectionsPostgisDatastore;
+    private @Value("configurator{timeout_connections_postgis_datastore_publisher}")
+    int timeoutConnectionsPostgisDatastore;
     private @Value("configurator{db_name_postgis_datastore_publisher}")
     String dbNamePostgisDatastore;
     private @Value("configurator{username_db_postgis_datastore_publisher}")
@@ -94,10 +100,10 @@ public class PostGISUtility implements InitializingBean {
         encoder.setUser(userNameDBPostgisDatastore);
         encoder.setPassword(passwordDBPostgisDatastore);
         encoder.setExposePrimaryKeys(Boolean.FALSE);
-        encoder.setMaxConnections(20);
-        encoder.setMinConnections(1);
+        encoder.setMaxConnections(maxConnectionsPostgisDatastore);
+        encoder.setMinConnections(minConnectionsPostgisDatastore);
+        encoder.setConnectionTimeout(timeoutConnectionsPostgisDatastore);
         encoder.setFetchSize(1000);
-        encoder.setConnectionTimeout(20);
         encoder.setValidateConnections(Boolean.TRUE);
         encoder.setLooseBBox(Boolean.TRUE);
         encoder.setPreparedStatements(false);

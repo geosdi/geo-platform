@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.progressbar;
 
+import org.geosdi.geoplatform.gui.client.i18n.PublisherWidgetConstants;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -49,7 +51,8 @@ public class PublisherProgressBar extends GeoPlatformProgressBar {
     }
 
     private PublisherProgressBar() {
-        super("Publisher Progress Bar", Boolean.TRUE);//TODO: i18n
+        super(PublisherWidgetConstants.INSTANCE.PublisherProgressBar_progressBarText(),
+                Boolean.TRUE);
     }
 
 }

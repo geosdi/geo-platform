@@ -45,8 +45,8 @@ import com.google.gwt.i18n.client.Constants.DefaultStringValue;
  */
 public interface PublisherWidgetConstants extends Constants {
 
-    public static final PublisherWidgetConstants INSTANCE =
-            GWT.create(PublisherWidgetConstants.class);
+    public static final PublisherWidgetConstants INSTANCE
+            = GWT.create(PublisherWidgetConstants.class);
 
     @DefaultStringValue("Error Publishing")
     String errorPublishingText();
@@ -54,6 +54,12 @@ public interface PublisherWidgetConstants extends Constants {
     @DefaultStringValue("Error Publishing previewed shape.")
     String statusErrorShapePublishingText();
 
+    /**
+     * start PublisherProgressBar
+     */
+    @DefaultStringValue("Publisher Progress Bar")
+    String PublisherProgressBar_progressBarText();
+    
     /**
      * start UploadKmlWidget
      */
@@ -120,6 +126,15 @@ public interface PublisherWidgetConstants extends Constants {
     /**
      * start EPSGTablePanel
      */
+    @DefaultStringValue("Processing Data")
+    String EPSGTablePanel_processingDataProgressBarText();
+    
+    @DefaultStringValue("New Name")
+    String EPSGTablePanel_columnNewNameText();
+
+    @DefaultStringValue("Publish Action")
+    String EPSGTablePanel_columnPublishActionText();
+
     @DefaultStringValue("Feature EPSG Code Analisys")
     String EPSGTablePanel_headingText();
 

@@ -50,6 +50,7 @@ import com.extjs.gxt.ui.client.widget.grid.*;
 import com.google.common.collect.Lists;
 import com.google.gwt.core.client.GWT;
 import java.util.List;
+import java.util.logging.Level;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.command.publish.basic.ProcessEPSGResultRequest;
 import org.geosdi.geoplatform.gui.client.command.publish.basic.ProcessEPSGResultResponse;
@@ -58,6 +59,7 @@ import org.geosdi.geoplatform.gui.client.i18n.PublisherWidgetConstants;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.model.EPSGLayerData;
 import org.geosdi.geoplatform.gui.client.model.PreviewLayer;
+import static org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel.logger;
 import org.geosdi.geoplatform.gui.client.widget.progressbar.PublisherProgressBar;
 import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
 import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
@@ -111,7 +113,7 @@ public class EPSGTablePanel extends GeoPlatformContentPanel {
         configs.add(epsgColumnConfig);
 
         ColumnConfig newNameColumnConfig = new ColumnConfig(EPSGLayerData.NEW_NAME,
-                "New Name", 120);//ToDo: i18n
+                PublisherWidgetConstants.INSTANCE.EPSGTablePanel_columnNewNameText(), 120);
         newNameTextField.setEmptyText(PublisherWidgetConstants.INSTANCE.EPSGTablePanel_epsgTextFieldEmptyText());
         newNameTextField.setEnabled(Boolean.FALSE);
         newNameTextField.setAllowBlank(Boolean.TRUE);
@@ -119,7 +121,7 @@ public class EPSGTablePanel extends GeoPlatformContentPanel {
         newNameColumnConfig.setEditor(newNameCellEditor);
 
         ColumnConfig publishColumnConfig = new ColumnConfig(EPSGLayerData.PUBLISH_ACTION,
-                "Publish Action", 100);//ToDo: i18n
+                PublisherWidgetConstants.INSTANCE.EPSGTablePanel_columnPublishActionText(), 100);
         GridCellRenderer<EPSGLayerData> renderer = new GridCellRenderer<EPSGLayerData>() {
 
             private boolean init = false;
@@ -191,7 +193,9 @@ public class EPSGTablePanel extends GeoPlatformContentPanel {
                 new SelectionListener<ButtonEvent>() {
                     @Override
                     public void componentSelected(ButtonEvent ce) {
-                        PublisherProgressBar.getInstance().show("Processing data");//TODO: i18n
+                        PublisherProgressBar.getInstance().show(
+                                PublisherWidgetConstants.INSTANCE.
+                                EPSGTablePanel_processingDataProgressBarText());
                         store.commitChanges();
                         processEPSGRequest.setPreviewLayerList(store.getModels());
                         ClientCommandDispatcher.getInstance().execute(
@@ -214,11 +218,12 @@ public class EPSGTablePanel extends GeoPlatformContentPanel {
                                             @Override
                                             public void onCommandFailure(Throwable exception) {
                                                 PublisherProgressBar.getInstance().hide();
-                                                GeoPlatformMessage.errorMessage("Publisher Error",
-                                                        exception.getMessage());//TODO:i18n
-                                                System.out.println("EPSGTablePanel Exception: " + exception.toString());
-                                                System.out.println("Stack Trace Exception: " + exception.getStackTrace());
-                                                System.out.println("Message Exception: " + exception.getMessage());
+                                                GeoPlatformMessage.errorMessage(
+                                                        PublisherWidgetConstants.INSTANCE.errorPublishingText(),
+                                                        exception.getMessage());
+                                                logger.log(Level.WARNING, "EPSGTablePanel Exception: " + exception.toString());
+                                                logger.log(Level.WARNING, "Stack Trace Exception: " + exception.getStackTrace());
+                                                logger.log(Level.WARNING, "Message Exception: " + exception.getMessage());
                                                 exception.printStackTrace();
                                             }
                                 });

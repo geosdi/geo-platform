@@ -77,7 +77,8 @@ import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
 import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
 /**
- * <p>This Class build the LayerTreeWidget doing RPC Call on Server</p>
+ * <p>
+ * This Class build the LayerTreeWidget doing RPC Call on Server</p>
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -116,33 +117,33 @@ public class LayerTreeBuilder implements GPCompositeBuilder {
 
             ClientCommandDispatcher.getInstance().execute(
                     new GPClientCommand<LoadDefaultProjectElementsResponse>() {
-                private static final long serialVersionUID = 3109256773218160485L;
+                        private static final long serialVersionUID = 3109256773218160485L;
 
-                {
-                    super.setCommandRequest(loadDefaultProjectElementsRequest);
-                }
+                        {
+                            super.setCommandRequest(loadDefaultProjectElementsRequest);
+                        }
 
-                @Override
-                public void onCommandSuccess(LoadDefaultProjectElementsResponse response) {
-                    onBuildSuccess(response.getResult());
-                }
+                        @Override
+                        public void onCommandSuccess(LoadDefaultProjectElementsResponse response) {
+                            onBuildSuccess(response.getResult());
+                        }
 
-                @Override
-                public void onCommandFailure(Throwable caught) {
-                    if (caught.getCause() instanceof GPSessionTimeout) {
-                        GPHandlerManager.fireEvent(new GPLoginEvent(buildEvent));
-                    } else {
-                        GeoPlatformMessage.errorMessage(LayerModuleConstants.INSTANCE.errorLoadingTitleText(),
-                                WindowsConstants.INSTANCE.errorMakingConnectionBodyText());
-                        LayoutManager.getInstance().getStatusMap().setStatus(
-                                LayerModuleConstants.INSTANCE.statusErrorLoadingTreeElementsText(),
-                                SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
-                        System.out.println(
-                                "Error loading tree elements: " + caught.toString()
-                                + " data: " + caught.getMessage());
-                    }
-                }
-            });
+                        @Override
+                        public void onCommandFailure(Throwable caught) {
+                            if (caught.getCause() instanceof GPSessionTimeout) {
+                                GPHandlerManager.fireEvent(new GPLoginEvent(buildEvent));
+                            } else {
+                                GeoPlatformMessage.errorMessage(LayerModuleConstants.INSTANCE.errorLoadingTitleText(),
+                                        WindowsConstants.INSTANCE.errorMakingConnectionBodyText());
+                                LayoutManager.getInstance().getStatusMap().setStatus(
+                                        LayerModuleConstants.INSTANCE.statusErrorLoadingTreeElementsText(),
+                                        SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
+                                System.out.println(
+                                        "Error loading tree elements: " + caught.toString()
+                                        + " data: " + caught.getMessage());
+                            }
+                        }
+                    });
         }
     }
 

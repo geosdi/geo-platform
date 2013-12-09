@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.tree;
 
+import com.extjs.gxt.ui.client.data.ModelData;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,8 +45,10 @@ import org.geosdi.geoplatform.gui.client.widget.tree.decorator.GPTreeCheckDecora
 import org.geosdi.geoplatform.gui.client.widget.tree.decorator.GPTreeIconDecorator;
 import org.geosdi.geoplatform.gui.client.widget.tree.decorator.GPTreeLabelDecorator;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
+import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -119,14 +122,32 @@ public class GPTreePanel<T extends GPBeanTreeModel> extends TreePanel<T>
     }
 
     private void changeTextElementStyle(GPLayerBean layerBean, String textColor) {
-        if (rendered) {
-            logger.log(Level.FINEST, "inRange: " + layerBean);
-            T layerElement = this.store.findModel((T) layerBean);
-            TreeNode node = findNode(layerElement);
-            if (node != null && node.getElement() != null) {
-                view.getTextElement(node).getStyle().setColor(textColor);
-                logger.log(Level.FINEST, "Changed Style to layer: " + node);
+        logger.log(Level.FINEST, "inRange: " + layerBean);
+        T layerElement = this.store.findModel((T) layerBean);
+        TreeNode node = findNode(layerElement);
+        if (node != null) {
+            view.getTextElement(node).getStyle().setColor(textColor);
+            logger.log(Level.FINEST, "Changed Style to layer: " + node.toString());
+        }
+    }
+
+    @Override
+    protected void onExpand(T model, TreeNode node, boolean deep) {
+        super.onExpand(model, node, deep);
+        //This code is usefull to ripristinate the layer label style for max - min scale
+        if (node != null && !node.isLeaf()) {
+            for (ModelData child : GeoPlatformUtils.safeList(model.getChildren())) {
+                if (child instanceof GPRasterBean && super.isChecked((T) child)) {
+                    this.activeRasterMinMaxScaleLabel((GPRasterBean) child);
+                }
             }
         }
     }
+
+    private void activeRasterMinMaxScaleLabel(GPRasterBean rasterBean) {
+        if (rasterBean.getMaxScale() != null || rasterBean.getMinScale() != null) {
+            this.outRange(rasterBean);
+        }
+    }
+
 }

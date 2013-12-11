@@ -54,6 +54,7 @@ import org.geosdi.geoplatform.gui.puregwt.layers.event.CleanLegendEvent;
 import org.geosdi.geoplatform.gui.puregwt.layers.event.DisplayLegendEvent;
 import org.geosdi.geoplatform.gui.puregwt.layers.event.HideLegendEvent;
 import org.geosdi.geoplatform.gui.puregwt.layers.event.ReloadLegendEvent;
+import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
 import org.gwtopenmaps.openlayers.client.Projection;
 import org.gwtopenmaps.openlayers.client.layer.Layer;
 import org.gwtopenmaps.openlayers.client.layer.WMS;
@@ -86,7 +87,8 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
 
     public GPLayerBean getLayer(Layer value) {
         GPLayerBean layerToReturn = null;
-        for (Entry<GPLayerBean, Layer> layer : this.layers.entrySet()) {
+        for (Entry<GPLayerBean, Layer> layer : GeoPlatformUtils.safeCollection(
+                this.layers.entrySet())) {
             if (layer.getValue().getId().equals(value.getId())) {
                 layerToReturn = layer.getKey();
                 break;

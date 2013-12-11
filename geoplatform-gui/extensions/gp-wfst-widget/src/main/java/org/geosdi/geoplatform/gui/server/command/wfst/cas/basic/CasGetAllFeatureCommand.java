@@ -94,6 +94,8 @@ public class CasGetAllFeatureCommand implements
             LayerSchemaDTO layerSchema = this.gpCasDescribeFeatureService.describeFeatureType(
                     url, request.getTypeName());
 
+            WFSCasUtility.appendProxyTicketToURL(layerSchema.getScope(), casAssertion);
+
             FeatureCollectionDTO result = this.gpCasGetFeatureService.getFeature(
                     layerSchema, request.getMaxFeatures());
 

@@ -181,10 +181,10 @@
         </repository>
         
         <!-- GWTQUERY-UI PLUGIN -->
-        <!-- repository>
+        <repository>
             <id>gwtquery-ui-repository</id>
             <url>http://gwtquery-ui.googlecode.com/svn/mavenrepo</url>
-        </repository-->
+        </repository>
     </repositories>
 
     <modules>

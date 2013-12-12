@@ -42,26 +42,19 @@ import java.util.List;
 import java.util.Map;
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import org.geosdi.geoplatform.gui.action.ISave;
-import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
 import org.geosdi.geoplatform.gui.client.configuration.getmap.choise.encoder.GetMapUrlEncoder;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
-import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
-import org.geosdi.geoplatform.gui.client.model.memento.save.MementoSaveBuilder;
-import org.geosdi.geoplatform.gui.client.model.memento.save.MementoSaveOperations;
-import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedLayers;
-import org.geosdi.geoplatform.gui.client.model.visitor.VisitorAddElement;
 import org.geosdi.geoplatform.gui.client.puregwt.getmap.event.WmsGetMapHideWidgetEvent;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.form.LoadWmsGetMapFromUrlWidget;
-import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
-import org.geosdi.geoplatform.gui.client.widget.tree.panel.GinTreePanel;
+import org.geosdi.geoplatform.gui.client.widget.tree.store.puregwt.event.AddLayersFromWmsGetMapEvent;
 import org.geosdi.geoplatform.gui.configuration.choice.mediator.colleague.executor.ChoiseColleagueExecutor;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
+import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.regex.GetMap;
 import org.geosdi.geoplatform.gui.shared.GPLayerType;
 
@@ -71,43 +64,25 @@ import org.geosdi.geoplatform.gui.shared.GPLayerType;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Singleton
-public class GetMapKvpColleagueExecutor implements ChoiseColleagueExecutor,
-        ISave<MementoSaveAddedLayers> {
+public class GetMapKvpColleagueExecutor implements ChoiseColleagueExecutor {
 
     @Inject
     private WmsGetMapHideWidgetEvent hideEvent;
     @Inject
     private GetMapUrlEncoder urlEncoder;
-    final VisitorAddElement addVisitor = new VisitorAddElement();
-    private GPBeanTreeModel parentDestination;
-    final GPTreePanel<GPBeanTreeModel> tree;
+    @Inject
+    private AddLayersFromWmsGetMapEvent event;
     private final Map<String, String> fieldMap = Maps.<String, String>newHashMap();
 
-    @Inject
-    public GetMapKvpColleagueExecutor(GinTreePanel theThree) {
-        this.tree = theThree.get();
+    public GetMapKvpColleagueExecutor() {
     }
 
     @Override
     public void executeColleague() {
-        this.parentDestination = this.tree.getSelectionModel().getSelectedItem();
+        this.retrieveDataFromQueryString();
+        this.event.setLayers(this.createRasterList());
 
-        this.retrieveDataFromQueryString(); // Set the fieldMap
-
-        List<GPBeanTreeModel> rasterList = this.createRasterList();
-
-        this.tree.getStore().insert(parentDestination, rasterList, 0, true);
-
-        this.addVisitor.insertLayerElements(rasterList, parentDestination);
-
-        MementoSaveAddedLayers mementoSaveLayer = new MementoSaveAddedLayers(
-                this);
-        mementoSaveLayer.setAddedLayers(
-                MementoSaveBuilder.generateMementoLayerList(rasterList));
-        mementoSaveLayer.setDescendantMap(
-                this.addVisitor.getFolderDescendantMap());
-        IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
-        mementoSave.add(mementoSaveLayer);
+        LayerHandlerManager.fireEvent(event);
 
         LoadWmsGetMapFromUrlWidget.fireWmsGetMapFromUrlEvent(hideEvent);
 
@@ -115,13 +90,6 @@ public class GetMapKvpColleagueExecutor implements ChoiseColleagueExecutor,
                 LayerModuleConstants.INSTANCE.
                 LoadWmsGetMapFromUrlWidget_statusAddedWMSSuccessText(),
                 SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
-    }
-
-    @Override
-    public void executeSave(MementoSaveAddedLayers memento) {
-        MementoSaveOperations.mementoSaveAddedLayer(memento,
-                LayerModuleConstants.INSTANCE.LoadWmsGetMapFromUrlWidget_mementoSuccessMessageText(),
-                LayerModuleConstants.INSTANCE.LoadWmsGetMapFromUrlWidget_mementoFailMessageText());
     }
 
     private void retrieveDataFromQueryString() {

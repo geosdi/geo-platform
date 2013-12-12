@@ -58,11 +58,11 @@ import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 public class WmsGetMapDispatcher implements IWmsGetMapDispatcher {
 
     @Inject
-    private WmsGetMapCorrectStatusEvent enableStatusEvent;
+    private WmsGetMapCorrectStatusEvent correctStatusEvent;
     @Inject
     private WmsGetMapExecuteEvent executeEvent;
     @Inject
-    private WmsGetMapIncorrectStatusEvent disableStatusEvent;
+    private WmsGetMapIncorrectStatusEvent incorrectStatusEvent;
     private final CheckWmsGetMapUrlRequest request = new CheckWmsGetMapUrlRequest();
 
     @Override
@@ -83,21 +83,21 @@ public class WmsGetMapDispatcher implements IWmsGetMapDispatcher {
                             CheckWmsGetMapUrlResponse response) {
                         if (response.getResult()) {
                             LoadWmsGetMapFromUrlWidget.fireWmsGetMapFromUrlEvent(
-                                    enableStatusEvent);
+                                    correctStatusEvent);
                             if (runExecute) { // Iff the enter key is pressed
                                 LoadWmsGetMapFromUrlWidget.fireWmsGetMapFromUrlEvent(
                                         executeEvent);
                             }
                         } else {
                             LoadWmsGetMapFromUrlWidget.fireWmsGetMapFromUrlEvent(
-                                    disableStatusEvent);
+                                    incorrectStatusEvent);
                         }
                     }
 
                     @Override
                     public void onCommandFailure(Throwable exception) {
                         LoadWmsGetMapFromUrlWidget.fireWmsGetMapFromUrlEvent(
-                                enableStatusEvent);
+                                incorrectStatusEvent);
                         GeoPlatformMessage.errorMessage(
                                 LayerModuleConstants.INSTANCE.errorCheckingURLTitleText(),
                                 WindowsConstants.INSTANCE.errorMakingConnectionBodyText());

@@ -144,8 +144,8 @@ public class SimpleUrlTextFields extends LayoutContainer {
         String result = "";
         if (!GeoPlatformUtils.isNotEmpty(urlTextField.getValue())) {
             result = "The URL is empty";
-        } else if (!urlTextField.getValue().startsWith("http") && 
-                !urlTextField.getValue().startsWith("https")) {
+        } else if (!urlTextField.getValue().startsWith("http")
+                && !urlTextField.getValue().startsWith("https")) {
             result = "The URL does not start with http or https";
         } else if (!GeoPlatformUtils.isNotEmpty(layerTextField.getValue())) {
             result = "The Layer Name is empty";

@@ -43,6 +43,8 @@ import org.geosdi.geoplatform.gui.client.configuration.getmap.choise.handler.Get
 import org.geosdi.geoplatform.gui.client.configuration.getmap.choise.mediator.GetMapChoiseMediator;
 import org.geosdi.geoplatform.gui.client.configuration.getmap.choise.mediator.colleague.executor.GetMapSimpleColleagueExecutor;
 import org.geosdi.geoplatform.gui.client.configuration.getmap.choise.widget.simple.GetMapSimpleFieldSet;
+import org.geosdi.geoplatform.gui.client.puregwt.getmap.event.DecreaseWidgetHeightEvent;
+import org.geosdi.geoplatform.gui.client.widget.form.LoadWmsGetMapFromUrlWidget;
 
 /**
  *
@@ -51,6 +53,7 @@ import org.geosdi.geoplatform.gui.client.configuration.getmap.choise.widget.simp
  */
 public class GetMapSimpleColleague extends GetMapChoiseColleague<FieldSet> {
 
+    private final DecreaseWidgetHeightEvent decreaseHeight = new DecreaseWidgetHeightEvent();
     private final GetMapSimpleHandler handler;
     private RadioButton simple;
 
@@ -97,6 +100,8 @@ public class GetMapSimpleColleague extends GetMapChoiseColleague<FieldSet> {
     @Override
     public void resetColleague() {
         this.simple.setValue(Boolean.FALSE, true);
+        LoadWmsGetMapFromUrlWidget.fireWmsGetMapFromUrlEvent(decreaseHeight);
+        this.choiseWidget.reset();
     }
 
 }

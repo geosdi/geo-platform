@@ -45,9 +45,16 @@ import org.geosdi.geoplatform.gui.client.puregwt.getmap.handler.WmsGetMapFromUrl
  */
 public class WmsGetMapIncorrectStatusEvent extends WmsGetMapFromUrlEvent {
 
+    private String statusMessage;
+
     @Override
     protected void dispatch(WmsGetMapFromUrlHandler handler) {
-        handler.incorrectStatus();
+        handler.incorrectStatus(statusMessage);
+        statusMessage = null;
+    }
+
+    public void setStatusMessage(String statusMessage) {
+        this.statusMessage = statusMessage;
     }
 
 }

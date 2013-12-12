@@ -60,7 +60,7 @@ public class GetMapKvpFieldSet extends FieldSet {
         this.urlText = theUrlText;
 
         super.setHeadingHtml(LayerModuleConstants.INSTANCE.
-                LoadWmsGetMapFromUrlWidget_fieldSetHeadingText());
+                GetMapKvpFieldSet_fieldSetHeadingText());
 
         FormLayout layout = new FormLayout();
         layout.setLabelWidth(40);

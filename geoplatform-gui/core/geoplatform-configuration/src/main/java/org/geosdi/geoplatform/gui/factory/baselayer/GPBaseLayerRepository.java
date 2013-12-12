@@ -104,48 +104,48 @@ class GPBaseLayerRepository {
         baseLayerMap.put(BaseLayerValue.OPEN_STREET_MAP,
                 new GPBaseLayerCreator() {
 
-            @Override
-            public Layer createBaseLayer() {
-                return createOSMBaseLayer();
-            }
+                    @Override
+                    public Layer createBaseLayer() {
+                        return createOSMBaseLayer();
+                    }
 
-        });
+                });
         baseLayerMap.put(BaseLayerValue.GOOGLE_NORMAL,
                 new GPBaseLayerCreator() {
 
-            @Override
-            public Layer createBaseLayer() {
-                return createGoogleNormalBaseLayer();
-            }
+                    @Override
+                    public Layer createBaseLayer() {
+                        return createGoogleNormalBaseLayer();
+                    }
 
-        });
+                });
         baseLayerMap.put(BaseLayerValue.GOOGLE_SATELLITE,
                 new GPBaseLayerCreator() {
 
-            @Override
-            public Layer createBaseLayer() {
-                return createGoogleSatelliteBaseLayer();
-            }
+                    @Override
+                    public Layer createBaseLayer() {
+                        return createGoogleSatelliteBaseLayer();
+                    }
 
-        });
+                });
         baseLayerMap.put(BaseLayerValue.GOOGLE_HYBRID,
                 new GPBaseLayerCreator() {
 
-            @Override
-            public Layer createBaseLayer() {
-                return createGoogleHybridBaseLayer();
-            }
+                    @Override
+                    public Layer createBaseLayer() {
+                        return createGoogleHybridBaseLayer();
+                    }
 
-        });
+                });
         baseLayerMap.put(BaseLayerValue.BING_ROAD_LAYER,
                 new GPBaseLayerCreator() {
 
-            @Override
-            public Layer createBaseLayer() {
-                return createBingRoadBaseLayer();
-            }
+                    @Override
+                    public Layer createBaseLayer() {
+                        return createBingRoadBaseLayer();
+                    }
 
-        });
+                });
         baseLayerMap.put(BaseLayerValue.BING_HYBRID, new GPBaseLayerCreator() {
 
             @Override
@@ -181,22 +181,22 @@ class GPBaseLayerRepository {
         baseLayerMap.put(BaseLayerValue.GEOSDI_NULL_BASE,
                 new GPBaseLayerCreator() {
 
-            @Override
-            public Layer createBaseLayer() {
-                return createGeoSdiNullMapBaseLayer();
-            }
+                    @Override
+                    public Layer createBaseLayer() {
+                        return createGeoSdiNullMapBaseLayer();
+                    }
 
-        });
-        
+                });
+
         baseLayerMap.put(BaseLayerValue.EMPTY,
                 new GPBaseLayerCreator() {
 
-            @Override
-            public Layer createBaseLayer() {
-                return createGeoSdiEmptyMapBaseLayer();
-            }
+                    @Override
+                    public Layer createBaseLayer() {
+                        return createGeoSdiEmptyMapBaseLayer();
+                    }
 
-        });
+                });
     }
 
     private Layer createOSMBaseLayer() {
@@ -283,7 +283,6 @@ class GPBaseLayerRepository {
         Layer satellite = new GoogleV3("Google Satellite", opSatellite);
         satellite.setIsBaseLayer(Boolean.TRUE);
 
-
         return satellite;
     }
 
@@ -335,9 +334,9 @@ class GPBaseLayerRepository {
 
         return aerial;
     }
-    
+
     private Layer createGeoSdiEmptyMapBaseLayer() {
-         //And now lets create an EmptyLayer and add it to the map.
+        //And now lets create an EmptyLayer and add it to the map.
         EmptyLayer.Options emptyLayerOptions = new EmptyLayer.Options();
         emptyLayerOptions.setAttribution("EmptyLayer (c) geoSDI"); //lets set some copyright msg as attribution
         emptyLayerOptions.setIsBaseLayer(true); //make it a baselayer.
@@ -345,5 +344,5 @@ class GPBaseLayerRepository {
         EmptyLayer emptyLayer = new EmptyLayer("Empty layer", emptyLayerOptions);
         return emptyLayer;
     }
-    
+
 }

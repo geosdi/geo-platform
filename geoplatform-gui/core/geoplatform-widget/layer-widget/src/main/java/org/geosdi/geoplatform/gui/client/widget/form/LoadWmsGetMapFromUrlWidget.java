@@ -54,6 +54,7 @@ import org.geosdi.geoplatform.gui.client.widget.tree.form.GPTreeFormWidget;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBusImpl;
+import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
 
 /**
  *
@@ -168,11 +169,14 @@ public class LoadWmsGetMapFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
     }
 
     @Override
-    public void incorrectStatus() {
+    public void incorrectStatus(String statusMessage) {
         save.disable();
+        if (!GeoPlatformUtils.isNotEmpty(statusMessage)) {
+            statusMessage = WmsUrlStatus.EnumWmsUrlStatus.STATUS_MESSAGE_NOT_CHECKED.getValue();
+        }
         setStatus(
                 WmsUrlStatus.EnumWmsUrlStatus.STATUS_NO_CHECKED.getValue(),
-                WmsUrlStatus.EnumWmsUrlStatus.STATUS_MESSAGE_NOT_CHECKED.getValue());
+                statusMessage);
     }
 
     @Override

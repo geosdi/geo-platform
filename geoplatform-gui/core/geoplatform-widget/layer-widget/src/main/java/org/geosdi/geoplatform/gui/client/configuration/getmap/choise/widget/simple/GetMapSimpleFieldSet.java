@@ -33,70 +33,52 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.configuration.getmap.choise.mediator.colleague;
+package org.geosdi.geoplatform.gui.client.configuration.getmap.choise.widget.simple;
 
+import org.geosdi.geoplatform.gui.client.configuration.getmap.choise.widget.kvp.*;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
-import com.google.gwt.i18n.client.HasDirection;
-import com.google.gwt.user.client.ui.RadioButton;
+import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import javax.inject.Inject;
-import org.geosdi.geoplatform.gui.client.configuration.getmap.choise.handler.GetMapSimpleHandler;
-import org.geosdi.geoplatform.gui.client.configuration.getmap.choise.mediator.GetMapChoiseMediator;
-import org.geosdi.geoplatform.gui.client.configuration.getmap.choise.mediator.colleague.executor.GetMapSimpleColleagueExecutor;
-import org.geosdi.geoplatform.gui.client.configuration.getmap.choise.widget.simple.GetMapSimpleFieldSet;
+import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
+import org.geosdi.geoplatform.gui.client.puregwt.getmap.event.ComponentPluginResetEvent;
+import org.geosdi.geoplatform.gui.client.puregwt.getmap.event.IncreaseWidgetHeightEvent;
+import org.geosdi.geoplatform.gui.client.widget.form.LoadWmsGetMapFromUrlWidget;
 
 /**
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public class GetMapSimpleColleague extends GetMapChoiseColleague<FieldSet> {
-
-    private final GetMapSimpleHandler handler;
-    private RadioButton simple;
+public class GetMapSimpleFieldSet extends FieldSet {
 
     @Inject
-    private GetMapSimpleFieldSet choiseWidget;
-    @Inject
-    private GetMapSimpleColleagueExecutor colleagueExecutor;
+    private ComponentPluginResetEvent resetPluginEvent;
+    private final IncreaseWidgetHeightEvent increaseHeight = new IncreaseWidgetHeightEvent();
+    private final SimpleUrlTextFields urlTextFields;
 
     @Inject
-    public GetMapSimpleColleague(GetMapChoiseMediator choiseMediator,
-            GetMapSimpleHandler theHandler) {
-        choiseMediator.registerChoiseColleague(this);
-        this.handler = theHandler;
+    public GetMapSimpleFieldSet(SimpleUrlTextFields theUrlText) {
+        this.urlTextFields = theUrlText;
+
+        super.setHeadingHtml(LayerModuleConstants.INSTANCE.
+                GetMapSimpleFieldSet_fieldSetHeadingText());
+
+        FormLayout layout = new FormLayout();
+        layout.setLabelWidth(40);
+        super.setLayout(layout);
+
+        super.add(urlTextFields);
     }
 
     @Override
-    public RadioButton getChoiseButton() {
-        return this.simple = ((simple == null)
-                ? new RadioButton("GET_MAP_CHOISE", "Simple",
-                        HasDirection.Direction.LTR) {
-
-                    {
-                        super.addValueChangeHandler(handler);
-                    }
-
-                } : this.simple);
+    protected void onAttach() {
+        super.onAttach();
+        this.increaseHeight.setHeight(getHeight() + 200);
+        LoadWmsGetMapFromUrlWidget.fireWmsGetMapFromUrlEvent(increaseHeight);
     }
 
-    @Override
-    public FieldSet getChoiseWidget() {
-        return this.choiseWidget;
-    }
-
-    @Override
-    public GetMapColleagueKey getChoiseColleagueKey() {
-        return GetMapColleagueKey.GET_MAP_SIMPLE;
-    }
-
-    @Override
-    public void executeColleague() {
-        colleagueExecutor.executeColleague();
-    }
-
-    @Override
-    public void resetColleague() {
-        this.simple.setValue(Boolean.FALSE, true);
+    public void reset() {
+        this.urlTextFields.resetFields();
+        KvpUrlNotificationPlugin.fireComponentPluginEvent(resetPluginEvent);
     }
 
 }

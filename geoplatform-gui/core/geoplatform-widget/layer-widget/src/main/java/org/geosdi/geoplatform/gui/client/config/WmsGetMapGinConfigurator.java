@@ -46,6 +46,8 @@ import org.geosdi.geoplatform.gui.client.configuration.getmap.choise.widget.kvp.
 import org.geosdi.geoplatform.gui.client.configuration.getmap.choise.widget.kvp.KvpUrlNotificationPlugin;
 import org.geosdi.geoplatform.gui.client.configuration.getmap.choise.widget.kvp.KvpUrlTextField;
 import org.geosdi.geoplatform.gui.client.configuration.getmap.choise.widget.kvp.responsibility.KvpHostTypeHandler;
+import org.geosdi.geoplatform.gui.client.configuration.getmap.choise.widget.simple.GetMapSimpleFieldSet;
+import org.geosdi.geoplatform.gui.client.configuration.getmap.choise.widget.simple.SimpleUrlTextFields;
 
 /**
  *
@@ -64,10 +66,13 @@ public class WmsGetMapGinConfigurator extends AbstractGinModule {
                 Singleton.class);
 
         bind(GetMapKvpFieldSet.class).in(Singleton.class);
+        bind(GetMapSimpleFieldSet.class).in(Singleton.class);
 
         bind(KvpUrlTextField.class).in(Singleton.class);
+        bind(SimpleUrlTextFields.class).in(Singleton.class);
+
         bind(KvpUrlNotificationPlugin.class).in(Singleton.class);
-        
+
         requestStaticInjection(KvpHostTypeHandler.class);
     }
 

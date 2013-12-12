@@ -224,16 +224,16 @@ public interface LayerModuleConstants extends Constants {
      */
     @DefaultStringValue("Limit by Scale")
     String GPLayerDisplayBinding_limitsByScaleFieldText();
-    
+
     @DefaultStringValue("Remove Scale Limit")
     String GPLayerDisplayBinding_removeLimitsMessageTitleText();
-    
+
     @DefaultStringValue("Are you sure you want to remove the scale limits?")
     String GPLayerDisplayBinding_removeLimitsMessageBodyText();
-    
+
     @DefaultStringValue("Remove Limits")
     String GPLayerDisplayBinding_removeLimitsButtonText();
-    
+
     @DefaultStringValue("Opacity")
     String GPLayerDisplayBinding_sliderMessageText();
 
@@ -372,8 +372,20 @@ public interface LayerModuleConstants extends Constants {
     @DefaultStringValue("Add WMS from GetMap direct URL")
     String LoadWmsGetMapFromUrlWidget_headingText();
 
-    @DefaultStringValue("WMS GetMap URL")
-    String LoadWmsGetMapFromUrlWidget_fieldSetHeadingText();
+    /**
+     * start GetMapKvpFieldSet
+     */
+    @DefaultStringValue("WMS GetMap from Kvp URL")
+    String GetMapKvpFieldSet_fieldSetHeadingText();
+
+    /**
+     * start GetMapSimpleFieldSet
+     */
+    @DefaultStringValue("WMS GetMap from simple URL")
+    String GetMapSimpleFieldSet_fieldSetHeadingText();
+
+    @DefaultStringValue("Layer Name")
+    String GetMapSimpleFieldSet_layerNameText();
 
     /**
      * start LoadKmlFromUrlWidget

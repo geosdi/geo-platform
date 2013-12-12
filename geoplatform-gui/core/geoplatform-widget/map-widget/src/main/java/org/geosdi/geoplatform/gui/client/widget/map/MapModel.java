@@ -43,6 +43,7 @@ import org.geosdi.geoplatform.gui.impl.map.event.LayerMapChangedHandler;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 
 import com.google.gwt.event.shared.HandlerRegistration;
+import org.geosdi.geoplatform.gui.impl.map.store.IMapLayersStore;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -51,35 +52,19 @@ import com.google.gwt.event.shared.HandlerRegistration;
  */
 public class MapModel extends GPMapModel implements HasLayerChangedHandler {
 
-    private MapLayersStore layersStore;
-
     public MapModel(GeoPlatformMap theMapWidget) {
         super(theMapWidget);
-        createStores();
     }
 
-    private void createStores() {
-        this.layersStore = new MapLayersStore(this.mapWidget);
-    }
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see
-     * org.geosdi.geoplatform.gui.client.widget.map.event.HasLayerChangedHandler
-     * #addLayerChangedHandler(org.geosdi.geoplatform.gui.impl.map.event.
-     * LayerChangedHandler)
-     */
     @Override
     public HandlerRegistration addLayerChangedHandler() {
         return GPHandlerManager.addHandler(LayerMapChangedHandler.TYPE,
                 this.layersStore);
     }
 
-    /**
-     * @return the layersStore
-     */
-    public MapLayersStore getLayersStore() {
-        return layersStore;
+    @Override
+    protected final IMapLayersStore createStore() {
+        return new MapLayersStore(this.mapWidget);
     }
+
 }

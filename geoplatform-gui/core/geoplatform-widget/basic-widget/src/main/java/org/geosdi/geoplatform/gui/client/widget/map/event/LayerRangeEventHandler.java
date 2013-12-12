@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.widget.map.event;
 
 import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 
 /**
@@ -43,6 +44,8 @@ import org.geosdi.geoplatform.gui.model.GPLayerBean;
  * @email nazzareno.sileno@geosdi.org
  */
 public interface LayerRangeEventHandler extends EventHandler {
+    
+    static GwtEvent.Type<LayerRangeEventHandler> TYPE = new GwtEvent.Type<LayerRangeEventHandler>();
 
     public void inRange(GPLayerBean layerBean);
 

@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.tree.store;
 
-import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.model.GPModelKeyProvider;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreeStore;
@@ -50,7 +49,6 @@ public class GinTreeStore implements GinTreeStoreBuilder {
 
     private GPTreeStore store;
 
-    @Inject
     public GinTreeStore() {
     }
 

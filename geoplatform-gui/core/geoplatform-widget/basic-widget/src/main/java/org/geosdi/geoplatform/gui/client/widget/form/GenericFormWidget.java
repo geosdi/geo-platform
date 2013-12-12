@@ -47,11 +47,11 @@ import org.geosdi.geoplatform.gui.client.widget.StatusWidget;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
- * 
+ * @email giuseppe.lascaleia@geosdi.org
+ *
  */
-public abstract class GenericFormWidget
-        extends Window implements IGeoPlatformForm {
+public abstract class GenericFormWidget extends Window implements
+        IGeoPlatformForm {
 
     protected FormPanel formPanel;
     protected FieldSet fieldSet;
@@ -59,8 +59,8 @@ public abstract class GenericFormWidget
     private boolean initialized;
 
     /**
-     * Param lazy specifies whether the component should be initialized
-     * at creation
+     * Param lazy specifies whether the component should be initialized at
+     * creation
      *
      * @param lazy
      */
@@ -69,7 +69,7 @@ public abstract class GenericFormWidget
             init();
         }
     }
-    
+
     @Override
     protected void beforeRender() {
         this.init();
@@ -78,7 +78,7 @@ public abstract class GenericFormWidget
     /**
      * Init the Widget
      */
-    public void init() {
+    protected final void init() {
         if (!initialized) {
             this.initializeWindow();
             this.initializeFormPanel();
@@ -97,6 +97,7 @@ public abstract class GenericFormWidget
             public void windowHide(WindowEvent we) {
                 reset();
             }
+
         });
 
         setLayout(new FitLayout());
@@ -137,5 +138,12 @@ public abstract class GenericFormWidget
      */
     public boolean isInitialized() {
         return initialized;
+    }
+
+    /**
+     * @return the formPanel
+     */
+    public FormPanel getFormPanel() {
+        return formPanel;
     }
 }

@@ -58,7 +58,7 @@ public abstract class GPDynamicFormBinding<T extends GeoPlatformBeanModel>
 
     private void bind() {
         if (isInitialized()) {
-            this.formBinding = new FormBinding(formPanel);
+            this.formBinding = new FormBinding(getFormPanel());
             addFieldsBinding();
             this.formBinding.autoBind();
         }

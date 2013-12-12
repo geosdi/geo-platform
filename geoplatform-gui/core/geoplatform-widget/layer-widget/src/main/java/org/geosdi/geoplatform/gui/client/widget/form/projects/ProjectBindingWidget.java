@@ -121,7 +121,7 @@ public class ProjectBindingWidget extends GPDynamicFormBinding<GPClientProject> 
         checkGroup.setFieldLabel(LayerModuleConstants.INSTANCE.ProjectBindingWidget_checkBoxGroupLabelText());
         checkGroup.add(this.projectDefaultCheck);
         fieldSet.add(checkGroup);
-        this.formPanel.add(fieldSet);
+        this.getFormPanel().add(fieldSet);
         this.addButtons();
     }
 
@@ -133,8 +133,8 @@ public class ProjectBindingWidget extends GPDynamicFormBinding<GPClientProject> 
 
     @Override
     public void initSizeFormPanel() {
-        super.formPanel.setHeaderVisible(Boolean.FALSE);
-        super.formPanel.setSize(420, 200);
+        super.getFormPanel().setHeaderVisible(Boolean.FALSE);
+        super.getFormPanel().setSize(420, 200);
     }
 
     @Override
@@ -187,11 +187,11 @@ public class ProjectBindingWidget extends GPDynamicFormBinding<GPClientProject> 
     }
 
     private void addButtons() {
-        formPanel.setButtonAlign(HorizontalAlignment.RIGHT);
+        getFormPanel().setButtonAlign(HorizontalAlignment.RIGHT);
         this.save = new GPSecureButton(ButtonsConstants.INSTANCE.saveText(), BasicWidgetResources.ICONS.save(),
                 new AddProjectAction(GPTrustedLevel.HIGH, this));
-        formPanel.addButton(save);
-        buttonBinding = new FormButtonBinding(formPanel);
+        getFormPanel().addButton(save);
+        buttonBinding = new FormButtonBinding(getFormPanel());
         buttonBinding.addButton(save);
         this.cancel = new Button(ButtonsConstants.INSTANCE.cancelText(), BasicWidgetResources.ICONS.cancel(),
                 new SelectionListener<ButtonEvent>() {
@@ -202,7 +202,7 @@ public class ProjectBindingWidget extends GPDynamicFormBinding<GPClientProject> 
             }
         });
 
-        formPanel.addButton(cancel);
+        getFormPanel().addButton(cancel);
     }
 
     private void insertProject() {

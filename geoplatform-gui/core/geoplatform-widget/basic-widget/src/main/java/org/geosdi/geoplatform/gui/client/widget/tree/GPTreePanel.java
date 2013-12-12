@@ -39,7 +39,6 @@ import com.extjs.gxt.ui.client.data.ModelData;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.geosdi.geoplatform.gui.client.widget.map.event.LayerRangeEvent;
 import org.geosdi.geoplatform.gui.client.widget.map.event.LayerRangeEventHandler;
 import org.geosdi.geoplatform.gui.client.widget.tree.decorator.GPTreeCheckDecorator;
 import org.geosdi.geoplatform.gui.client.widget.tree.decorator.GPTreeIconDecorator;
@@ -62,7 +61,7 @@ public class GPTreePanel<T extends GPBeanTreeModel> extends TreePanel<T>
 
     public GPTreePanel(GPTreeStore<T> store) {
         super(store);
-        LayerHandlerManager.addHandler(LayerRangeEvent.TYPE, this);
+        LayerHandlerManager.addHandler(TYPE, this);
     }
 
     /**
@@ -127,7 +126,8 @@ public class GPTreePanel<T extends GPBeanTreeModel> extends TreePanel<T>
         TreeNode node = findNode(layerElement);
         if (node != null) {
             view.getTextElement(node).getStyle().setColor(textColor);
-            logger.log(Level.FINEST, "Changed Style to layer: " + node.toString());
+            logger.log(Level.FINEST,
+                    "Changed Style to layer: " + node.toString());
         }
     }
 

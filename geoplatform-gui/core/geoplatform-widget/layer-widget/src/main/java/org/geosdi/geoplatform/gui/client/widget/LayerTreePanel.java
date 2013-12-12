@@ -48,8 +48,8 @@ import org.geosdi.geoplatform.gui.client.widget.toolbar.LayerTreeToolbar;
  */
 public class LayerTreePanel extends GeoPlatformContentPanel {
 
-    private LayerTreeWidget layerTree;
-    private LayerTreeToolbar treeToolbar;
+    private final LayerTreeWidget layerTree;
+    private final LayerTreeToolbar treeToolbar;
 
     @Inject
     public LayerTreePanel(LayerTreeWidget theLayerTree,

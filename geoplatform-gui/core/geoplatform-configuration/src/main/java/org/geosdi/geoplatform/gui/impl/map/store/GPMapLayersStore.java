@@ -40,7 +40,6 @@ import com.google.common.collect.Maps;
 import java.util.List;
 import java.util.Map;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
-import org.geosdi.geoplatform.gui.impl.map.event.LayerMapChangedHandler;
 import org.geosdi.geoplatform.gui.impl.tree.DisplayLayersManager;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.gwtopenmaps.openlayers.client.layer.Layer;
@@ -51,11 +50,11 @@ import org.gwtopenmaps.openlayers.client.layer.Layer;
  *
  */
 public abstract class GPMapLayersStore<K extends GPLayerBean, T extends Layer>
-        implements IMapLayersStore<T>, LayerMapChangedHandler {
+        implements IMapLayersStore<T> {
 
     protected GeoPlatformMap mapWidget;
     protected Map<K, T> layers = Maps.<K, T>newHashMap();
-    private DisplayLayersManager displayLayers;
+    private final DisplayLayersManager displayLayers;
 
     /**
      * @Constructor
@@ -79,6 +78,7 @@ public abstract class GPMapLayersStore<K extends GPLayerBean, T extends Layer>
      *
      * @return List<T>
      */
+    @Override
     public List<T> getLayers() {
         return Lists.<T>newArrayList(this.layers.values());
     }

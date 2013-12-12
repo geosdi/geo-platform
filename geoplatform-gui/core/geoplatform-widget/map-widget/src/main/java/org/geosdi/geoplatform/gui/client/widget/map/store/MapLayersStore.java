@@ -39,7 +39,6 @@ import com.extjs.gxt.ui.client.Registry;
 import com.google.gwt.user.client.History;
 import java.util.Iterator;
 import java.util.Map.Entry;
-import java.util.logging.Logger;
 import org.geosdi.geoplatform.gui.client.widget.map.event.LayerRangeEvent;
 import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
 import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
@@ -67,13 +66,12 @@ import org.gwtopenmaps.openlayers.client.layer.WMSParams;
  *
  */
 public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
-
-    private final static Logger logger = Logger.getLogger("");
-    private MapLayerBuilder layerBuilder;
-    final private DisplayLegendEvent displayLegendEvent = new DisplayLegendEvent();
-    final private HideLegendEvent hideLegendEvent = new HideLegendEvent();
-    final private ReloadLegendEvent reloadLegendEvent = new ReloadLegendEvent();
-    private CleanLegendEvent cleanLegend = new CleanLegendEvent();
+    
+    private final MapLayerBuilder layerBuilder;
+    private final DisplayLegendEvent displayLegendEvent = new DisplayLegendEvent();
+    private final HideLegendEvent hideLegendEvent = new HideLegendEvent();
+    private final ReloadLegendEvent reloadLegendEvent = new ReloadLegendEvent();
+    private final CleanLegendEvent cleanLegend = new CleanLegendEvent();
 
     public MapLayersStore(GeoPlatformMap theMapWidget) {
         super(theMapWidget);
@@ -85,6 +83,7 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
         return this.layers.containsKey(key);
     }
 
+    @Override
     public GPLayerBean getLayer(Layer value) {
         GPLayerBean layerToReturn = null;
         for (Entry<GPLayerBean, Layer> layer : GeoPlatformUtils.safeCollection(

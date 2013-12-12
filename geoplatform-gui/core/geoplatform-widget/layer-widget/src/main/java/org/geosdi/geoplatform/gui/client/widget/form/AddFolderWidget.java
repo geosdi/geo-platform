@@ -87,7 +87,6 @@ import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayers
 public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
         implements ISave<MementoSaveAddedFolder> {
 
-    private TreePanel<GPBeanTreeModel> tree;
     private TextField<String> folderText;
     private Button save;
     private Button cancel;
@@ -102,8 +101,7 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
      *
      */
     public AddFolderWidget(TreePanel<GPBeanTreeModel> theTree) {
-        super(true);
-        this.tree = theTree;
+        super(theTree, true);
         this.addVisitor = new VisitorAddElement();
         this.expander = new GPLayerExpander(theTree, this);
     }
@@ -153,42 +151,42 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
 
         this.fieldSet.add(this.folderText);
 
-        this.formPanel.add(this.fieldSet);
+        this.getFormPanel().add(this.fieldSet);
 
         this.saveStatus = new SaveStatus();
         this.saveStatus.setAutoWidth(true);
 
-        this.formPanel.getButtonBar().add(this.saveStatus);
+        this.getFormPanel().getButtonBar().add(this.saveStatus);
 
-        formPanel.setButtonAlign(HorizontalAlignment.RIGHT);
+        getFormPanel().setButtonAlign(HorizontalAlignment.RIGHT);
 
         save = new Button(ButtonsConstants.INSTANCE.createText(),
                 LayerResources.ICONS.addFolder(),
                 new SelectionListener<ButtonEvent>() {
 
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                execute();
-            }
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                        execute();
+                    }
 
-        });
+                });
 
         save.setEnabled(false);
 
-        this.formPanel.addButton(save);
+        this.getFormPanel().addButton(save);
 
         this.cancel = new Button(ButtonsConstants.INSTANCE.cancelText(),
                 BasicWidgetResources.ICONS.cancel(),
                 new SelectionListener<ButtonEvent>() {
 
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                clearComponents();
-            }
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                        clearComponents();
+                    }
 
-        });
+                });
 
-        this.formPanel.addButton(cancel);
+        this.getFormPanel().addButton(cancel);
 
         setFocusWidget(this.folderText);
     }
@@ -202,8 +200,8 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
 
     @Override
     public void initSizeFormPanel() {
-        this.formPanel.setHeaderVisible(false);
-        this.formPanel.setSize(280, 120);
+        this.getFormPanel().setHeaderVisible(false);
+        this.getFormPanel().setSize(280, 120);
     }
 
     @Override
@@ -255,13 +253,6 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
         super.hide();
     }
 
-    /**
-     * @return the tree
-     */
-    public TreePanel<GPBeanTreeModel> getTree() {
-        return tree;
-    }
-
     @Override
     public void executeSave(final MementoSaveAddedFolder memento) {
         //Warning: The following conversion is absolutely necessary!
@@ -272,43 +263,47 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
         GPClientCommandExecutor.executeCommand(
                 new GPClientCommand<SaveAddedFolderAndTreeModificationsResponse>() {
 
-            private static final long serialVersionUID = -2132391639495165283L;
+                    private static final long serialVersionUID = -2132391639495165283L;
 
-            {
-                super.setCommandRequest(request);
-            }
+                    {
+                        super.setCommandRequest(request);
+                    }
 
-            @Override
-            public void onCommandSuccess(
-                    SaveAddedFolderAndTreeModificationsResponse response) {
-                IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
-                mementoSave.remove(memento);
-                LayoutManager.getInstance().getStatusMap().setStatus(
-                        LayerModuleConstants.INSTANCE.AddFolderWidget_statusSaveFolderSuccessText(),
-                        EnumSearchStatus.STATUS_SEARCH.toString());
-                MementoFolder mementoAdded = memento.getAddedFolder();
-                mementoAdded.getRefBaseElement().setId(response.getResult());
-                mementoAdded.getRefBaseElement().setLoaded(true);
-                LayerHandlerManager.fireEvent(peekCacheEvent);
-            }
+                    @Override
+                    public void onCommandSuccess(
+                            SaveAddedFolderAndTreeModificationsResponse response) {
+                                IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
+                                mementoSave.remove(memento);
+                                LayoutManager.getInstance().getStatusMap().setStatus(
+                                        LayerModuleConstants.INSTANCE.AddFolderWidget_statusSaveFolderSuccessText(),
+                                        EnumSearchStatus.STATUS_SEARCH.toString());
+                                MementoFolder mementoAdded = memento.getAddedFolder();
+                                mementoAdded.getRefBaseElement().setId(
+                                        response.getResult());
+                                mementoAdded.getRefBaseElement().setLoaded(true);
+                                LayerHandlerManager.fireEvent(peekCacheEvent);
+                            }
 
-            @Override
-            public void onCommandFailure(Throwable exception) {
-                if (exception.getCause() instanceof GPSessionTimeout) {
-                    GPHandlerManager.fireEvent(new GPLoginEvent(peekCacheEvent));
-                } else {
-                    LayerHandlerManager.fireEvent(
-                            new DisplayLayersProgressBarEvent(false));
-                    setStatus(EnumSaveStatus.STATUS_SAVE_ERROR.getValue(),
-                            SaveStatusConstants.INSTANCE.STATUS_MESSAGE_SAVE_ERROR().toString());
-                    GeoPlatformMessage.errorMessage(
-                            LayerModuleConstants.INSTANCE.
-                            AddFolderWidget_saveFolderErrorTitleText(),
-                            LayerModuleConstants.INSTANCE.AddFolderWidget_saveFolderErrorBodyText());
-                }
-            }
+                            @Override
+                            public void onCommandFailure(Throwable exception) {
+                                if (exception.getCause() instanceof GPSessionTimeout) {
+                                    GPHandlerManager.fireEvent(new GPLoginEvent(
+                                                    peekCacheEvent));
+                                } else {
+                                    LayerHandlerManager.fireEvent(
+                                            new DisplayLayersProgressBarEvent(
+                                                    false));
+                                    setStatus(
+                                            EnumSaveStatus.STATUS_SAVE_ERROR.getValue(),
+                                            SaveStatusConstants.INSTANCE.STATUS_MESSAGE_SAVE_ERROR().toString());
+                                    GeoPlatformMessage.errorMessage(
+                                            LayerModuleConstants.INSTANCE.
+                                            AddFolderWidget_saveFolderErrorTitleText(),
+                                            LayerModuleConstants.INSTANCE.AddFolderWidget_saveFolderErrorBodyText());
+                                }
+                            }
 
-        });
+                });
     }
 
 }

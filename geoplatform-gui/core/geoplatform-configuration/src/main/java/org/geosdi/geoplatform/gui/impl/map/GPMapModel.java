@@ -35,16 +35,30 @@
  */
 package org.geosdi.geoplatform.gui.impl.map;
 
+import org.geosdi.geoplatform.gui.impl.map.store.IMapLayersStore;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public abstract class GPMapModel {
 
     protected GeoPlatformMap mapWidget;
+    protected IMapLayersStore layersStore;
 
     public GPMapModel(GeoPlatformMap theMapWidget) {
         this.mapWidget = theMapWidget;
+        this.layersStore = createStore();
     }
+
+    protected abstract IMapLayersStore createStore();
+
+    /**
+     * @return the layersStore
+     */
+    public IMapLayersStore getLayersStore() {
+        return layersStore;
+    }
+
 }

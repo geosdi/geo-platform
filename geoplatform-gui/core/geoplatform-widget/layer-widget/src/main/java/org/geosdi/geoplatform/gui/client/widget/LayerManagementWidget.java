@@ -61,7 +61,7 @@ public class LayerManagementWidget extends GeoPlatformContentPanel {
     public LayerManagementWidget(LayerTreePanel theLayerTreePanel,
             GPLegendPanel theLegendPanel) {
         super(true);
-
+        
         this.layerTreePanel = theLayerTreePanel;
         this.legendPanel = theLegendPanel;
     }

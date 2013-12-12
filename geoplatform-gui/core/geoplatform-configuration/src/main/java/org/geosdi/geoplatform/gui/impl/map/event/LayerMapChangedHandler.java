@@ -51,27 +51,28 @@ public interface LayerMapChangedHandler extends EventHandler {
 
     Type<LayerMapChangedHandler> TYPE = new Type<LayerMapChangedHandler>();
 
-    public void onDisplayLayer(GPLayerBean layerBean);
+    void onDisplayLayer(GPLayerBean layerBean);
 
-    public void onHideLayer(GPLayerBean layerBean);
+    void onHideLayer(GPLayerBean layerBean);
 
-    public void onReloadLayer(GPLayerBean layerBean);
+    void onReloadLayer(GPLayerBean layerBean);
 
-    public void onRemoveLayer(GPLayerBean layerBean);
+    void onRemoveLayer(GPLayerBean layerBean);
 
-    public void onChangeStyle(GPRasterBean layerBean, String newStyle);
+    void onChangeStyle(GPRasterBean layerBean, String newStyle);
 
-    public void onChangeCqlFilter(GPLayerTreeModel layerBean);
+    void onChangeCqlFilter(GPLayerTreeModel layerBean);
 
-    public void onChangeTimeFilter(GPLayerTreeModel layerBean);
+    void onChangeTimeFilter(GPLayerTreeModel layerBean);
 
-    public void changeOpacity(GPRasterBean layerBean);
+    void changeOpacity(GPRasterBean layerBean);
 
-    public void changeMaxScale(GPRasterBean layerBean, Float maxScale);
+    void changeMaxScale(GPRasterBean layerBean, Float maxScale);
 
-    public void changeMinScale(GPRasterBean layerBean, Float minScale);
+    void changeMinScale(GPRasterBean layerBean, Float minScale);
 
-    public void onChangeBaseLayer(Projection projection);
+    void onChangeBaseLayer(Projection projection);
 
-    public void resetStore();
+    void resetStore();
+
 }

@@ -80,7 +80,7 @@ public class MementoSaveBuilder {
     }
 
     public static List<AbstractMementoLayer> generateMementoLayerList(
-            List<GPBeanTreeModel> layers) {
+            List<? extends GPBeanTreeModel> layers) {
         List<AbstractMementoLayer> mementoLayerList = Lists.<AbstractMementoLayer>newArrayList();
         for (GPBeanTreeModel beanModel : layers) {
             GPLayerTreeModel layer = null;

@@ -4,7 +4,7 @@
  *  http://geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2012 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2013 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -33,29 +33,20 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.configutation.tree.tools;
+package org.geosdi.geoplatform.gui.client.puregwt.getmap.event;
 
-import com.extjs.gxt.ui.client.widget.form.ComboBox;
-import com.extjs.gxt.ui.client.widget.menu.Menu;
-import org.geosdi.geoplatform.gui.configuration.AdapterMenuClientTool;
-import org.geosdi.geoplatform.gui.configuration.composite.menu.strategy.GPTreeMenuStrategy;
+import org.geosdi.geoplatform.gui.client.puregwt.getmap.handler.WmsGetMapFromUrlHandler;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class RefreshTimeClientTool extends AdapterMenuClientTool<ComboBox, GPTreeMenuStrategy> {
-
-    private static final long serialVersionUID = 5905822656524314136L;
+public class WmsGetMapResetEvent extends WmsGetMapFromUrlHandler.WmsGetMapFromUrlEvent {
 
     @Override
-    protected final ComboBox buildWidget(GPTreeMenuStrategy menuCreator) {
-        return new RefreshTimeComboBuilder().build(menuCreator.getTree());
+    protected void dispatch(WmsGetMapFromUrlHandler handler) {
+        handler.reset();
     }
 
-    @Override
-    protected void create(GPTreeMenuStrategy menuCreator, Menu menu) {
-        menuCreator.addWidget(this.buildWidget(menuCreator), menu);
-    }
 }

@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.impl.map.store;
 
+import java.util.List;
+import org.geosdi.geoplatform.gui.impl.map.event.LayerMapChangedHandler;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.GPVectorBean;
@@ -43,23 +45,26 @@ import org.gwtopenmaps.openlayers.client.layer.Layer;
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
-public interface IMapLayersStore<T extends Layer> {
+public interface IMapLayersStore<T extends Layer> extends LayerMapChangedHandler {
 
     boolean containsLayer(GPLayerBean key);
 
     T getLayer(GPLayerBean key);
 
+    GPLayerBean getLayer(T value);
+
     void displayVector(GPVectorBean vectorBean);
 
     void displayRaster(GPRasterBean rasterBean);
-    
+
     void reloadLayer(GPLayerBean layer);
 
     void hideLayer(GPLayerBean layerBean);
 
     void removeLayer(GPLayerBean layerBean);
-    
-    void resetStore();
+
+    List<T> getLayers();
+
 }

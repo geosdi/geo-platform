@@ -205,7 +205,6 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
                     BaseLayerValue.GOOGLE_SATELLITE);
         }
 
-//        System.out.println("Base layer projection: " + baseLayer.getProjection().getProjectionCode());
         this.map.addLayer(baseLayer.getGwtOlBaseLayer());
         baseLayer.getGwtOlBaseLayer().setZIndex(-1);
         this.mapControl = new MapControlManager(this.map);
@@ -634,7 +633,7 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
     }
 
     private void switchWMSOptionProjection(GPCoordinateReferenceSystem crs) {
-        for (Layer layer : GeoPlatformUtils.safeList(
+        for (Object layer : GeoPlatformUtils.safeList(
                 this.mapModel.getLayersStore().getLayers())) {
             if (layer instanceof WMS) {
                 WMS wmsLayer = (WMS) layer;
@@ -674,7 +673,8 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
                         GPCoordinateReferenceSystem.WGS_84.getCode()),
                         new Projection(
                                 GPCoordinateReferenceSystem.EPSG_GOOGLE.getCode()));
-                switchWMSOptionProjection(GPCoordinateReferenceSystem.GOOGLE_MERCATOR);
+                switchWMSOptionProjection(
+                        GPCoordinateReferenceSystem.GOOGLE_MERCATOR);
                 projectionChanged = Boolean.TRUE;
             }
             Layer newBaseLayer = gpBaseLayer.getGwtOlBaseLayer();

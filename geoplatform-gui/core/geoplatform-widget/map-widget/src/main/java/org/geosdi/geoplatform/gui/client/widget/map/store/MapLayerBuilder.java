@@ -65,13 +65,6 @@ public class MapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean> {
         super(theMapWidget);
     }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see
-     * org.geosdi.geoplatform.gui.impl.map.store.GPLayerBuilder#buildRaster(
-     * org.geosdi.geoplatform.gui.model.GPRasterBean)
-     */
     @Override
     public WMS buildRaster(GPRasterBean rasterBean) {
         WMSParams wmsParams = new WMSParams();
@@ -138,13 +131,6 @@ public class MapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean> {
         return bounds;
     }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see
-     * org.geosdi.geoplatform.gui.impl.map.store.GPLayerBuilder#buildVector(
-     * org.geosdi.geoplatform.gui.model.GPVectorBean)
-     */
     @Override
     public WMS buildVector(GPVectorBean vectorBean) {
         WMSParams wmsParams = new WMSParams();

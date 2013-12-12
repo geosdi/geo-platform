@@ -44,11 +44,11 @@ import org.geosdi.geoplatform.gui.client.widget.form.LoadWmsGetMapFromUrlWidget;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email  nazzareno.sileno@geosdi.org
+ * @email nazzareno.sileno@geosdi.org
  */
 public class LoadWmsGetMapFromUrlTreeAction extends ToolbarLayerTreeAction {
 
-    private LoadWmsGetMapFromUrlWidget getMapWidget;
+    private final LoadWmsGetMapFromUrlWidget getMapWidget;
 
     public LoadWmsGetMapFromUrlTreeAction(TreePanel theTree) {
         super(theTree, LayerResources.ICONS.loadWmsGetMapFromUrl(),
@@ -60,4 +60,5 @@ public class LoadWmsGetMapFromUrlTreeAction extends ToolbarLayerTreeAction {
     public void componentSelected(ButtonEvent ce) {
         this.getMapWidget.showForm();
     }
+
 }

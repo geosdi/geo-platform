@@ -114,24 +114,24 @@ public class GotoXYWidget extends GeoPlatformFormWidget<PointRepresentation>
         this.yNumberField.setFieldLabel(BasicWidgetConstants.INSTANCE.
                 GotoXYWidget_yFieldLabelText());
         fieldSet.add(this.yNumberField);
-        this.formPanel.add(fieldSet);
+        this.getFormPanel().add(fieldSet);
         saveStatus = new SaveStatus();
         saveStatus.setAutoWidth(true);
-        formPanel.setButtonAlign(HorizontalAlignment.LEFT);
-        formPanel.getButtonBar().add(saveStatus);
-        formPanel.getButtonBar().add(new FillToolItem());
+        getFormPanel().setButtonAlign(HorizontalAlignment.LEFT);
+        getFormPanel().getButtonBar().add(saveStatus);
+        getFormPanel().getButtonBar().add(new FillToolItem());
         this.find = new Button(ButtonsConstants.INSTANCE.findText(),
                 new SelectionListener<ButtonEvent>() {
 
                     @Override
                     public void componentSelected(ButtonEvent ce) {
-                        if (formPanel.isValid()) {
+                        if (getFormPanel().isValid()) {
                             execute();
                         }
                     }
 
                 });
-        formPanel.addButton(this.find);
+        getFormPanel().addButton(this.find);
         this.close = new Button(ButtonsConstants.INSTANCE.closeText(),
                 new SelectionListener<ButtonEvent>() {
 
@@ -141,7 +141,7 @@ public class GotoXYWidget extends GeoPlatformFormWidget<PointRepresentation>
                     }
 
                 });
-        formPanel.addButton(this.close);
+        getFormPanel().addButton(this.close);
     }
 
     @Override
@@ -151,8 +151,8 @@ public class GotoXYWidget extends GeoPlatformFormWidget<PointRepresentation>
 
     @Override
     public void initSizeFormPanel() {
-        formPanel.setHeaderVisible(false);
-        formPanel.setSize(380, 250);
+        getFormPanel().setHeaderVisible(false);
+        getFormPanel().setSize(380, 250);
     }
 
     /**

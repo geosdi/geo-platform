@@ -255,7 +255,7 @@
                             <property name="secure" value="false" />
                             <property name="order" value="8" />
                         </bean>
-                        <bean class="org.geosdi.geoplatform.gui.client.configutation.tree.tools.RefreshTimeClientTool">
+                        <bean class="org.geosdi.geoplatform.gui.client.configuration.tree.tools.RefreshTimeClientTool">
                             <property name="id" value="REFRESH_TIME" />
                             <property name="enabled" value="true" />
                             <property name="secure" value="false" />

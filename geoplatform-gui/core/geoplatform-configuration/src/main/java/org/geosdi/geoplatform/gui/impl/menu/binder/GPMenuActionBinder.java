@@ -115,13 +115,15 @@ public class GPMenuActionBinder implements MenuActionBinder {
             action.addMenuActionChangeCheckHandler(
                     new MenuActionChangeCheckHandler() {
 
-                @Override
-                public void onActionCheckChange(MenuActionChangeCheckEvent event) {
-                    item.setChecked(event.isCheck());
-                    item.fireEvent(Events.Select, new MenuEvent(menu, item));
-                }
+                        @Override
+                        public void onActionCheckChange(
+                                MenuActionChangeCheckEvent event) {
+                                    item.setChecked(event.isCheck());
+                                    item.fireEvent(Events.Select, new MenuEvent(
+                                                    menu, item));
+                                }
 
-            });
+                    });
 
             action.setChecked(tool.isChecked());
             action.setEnabled(tool.isEnabled());

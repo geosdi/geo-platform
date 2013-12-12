@@ -43,7 +43,7 @@ public enum AddLayerPluginKey {
 
     NAME("name"), IMAGE("image"), TOOLTIP("tooltip");
     //
-    private String value;
+    private final String value;
 
     AddLayerPluginKey(String theValue) {
         this.value = theValue;

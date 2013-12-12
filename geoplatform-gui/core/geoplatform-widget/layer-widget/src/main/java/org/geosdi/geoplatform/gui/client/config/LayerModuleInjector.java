@@ -38,6 +38,9 @@ package org.geosdi.geoplatform.gui.client.config;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.inject.client.GinModules;
 import com.google.gwt.inject.client.Ginjector;
+import org.geosdi.geoplatform.gui.client.action.menu.CopyLayerAction;
+import org.geosdi.geoplatform.gui.client.action.menu.PasteLayerAction;
+import org.geosdi.geoplatform.gui.client.action.menu.ShareProjectMenuAction;
 import org.geosdi.geoplatform.gui.client.action.menu.project.LoadMenuProjects;
 import org.geosdi.geoplatform.gui.client.widget.LayerManagementWidget;
 import org.geosdi.geoplatform.gui.client.widget.LayerTreePanel;
@@ -45,14 +48,17 @@ import org.geosdi.geoplatform.gui.client.widget.LayerTreePanel;
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
 @GinModules(value = {LayerModuleGinConfigurator.class,
-    LayerTreeGinConfigurator.class})
+    LayerTreeGinConfigurator.class, LayerTreeGinProviderConfigurator.class})
 public interface LayerModuleInjector extends Ginjector {
 
     public static class MainInjector {
 
-        private static LayerModuleInjector instance = GWT.create(
+        private static final LayerModuleInjector instance = GWT.create(
                 LayerModuleInjector.class);
 
         private MainInjector() {
@@ -61,6 +67,7 @@ public interface LayerModuleInjector extends Ginjector {
         public static LayerModuleInjector getInstance() {
             return instance;
         }
+
     }
 
     public LoadMenuProjects getLoadMenuProject();
@@ -68,4 +75,11 @@ public interface LayerModuleInjector extends Ginjector {
     public LayerManagementWidget getLayerManagementWidget();
 
     public LayerTreePanel getLayerTreePanel();
+
+    public ShareProjectMenuAction getShareProjectMenuAction();
+
+    public PasteLayerAction getPasteLayerAction();
+
+    public CopyLayerAction getCopyLayerAction();
+
 }

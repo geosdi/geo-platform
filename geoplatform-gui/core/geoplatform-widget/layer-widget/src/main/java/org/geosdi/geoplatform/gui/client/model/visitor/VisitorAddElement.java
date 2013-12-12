@@ -85,7 +85,7 @@ public class VisitorAddElement extends AbstractVisitTree implements IVisitor {
         this.updateNumberOfDescendants(parentDestination);
     }
 
-    public void insertLayerElements(List<GPBeanTreeModel> listNewElements,
+    public void insertLayerElements(List<? extends GPBeanTreeModel> listNewElements,
             GPBeanTreeModel parentDestination) {
         GPBeanTreeModel gPLayerBean = null;
         for (int i = 0; i < listNewElements.size(); i++) {

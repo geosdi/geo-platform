@@ -50,6 +50,7 @@ import org.geosdi.geoplatform.gui.plugin.tree.addlayer.AbstractAddLayerPlugin;
 public class GetMapLayerPlugin extends AbstractAddLayerPlugin<ToolbarLayerTreeAction> {
 
     private static final long serialVersionUID = 6581566056517576269L;
+    //
     private ToolbarLayerTreeAction action;
 
     @Override

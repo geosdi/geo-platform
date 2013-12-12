@@ -22,12 +22,12 @@
             <name>geoSDI Repository</name>
             <url>http://repo.geosdi.org</url>
         </repository>
-        <repository>
+        <!--repository>
             <id>gwt-maven</id>
             <url>
                 http://gwt-maven.googlecode.com/svn/trunk/mavenrepo/
             </url>
-        </repository>     
+        </repository-->     
     </repositories>
     
     <dependencyManagement>

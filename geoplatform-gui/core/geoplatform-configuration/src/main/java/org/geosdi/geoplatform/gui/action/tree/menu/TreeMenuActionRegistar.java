@@ -69,7 +69,8 @@ public final class TreeMenuActionRegistar
         TreeMenuActionCreator toolActionCreator = super.registry.get(key);
 
         if (toolActionCreator == null) {
-            return null;
+            throw new IllegalStateException("Unable to find TreeMenuActionCreator "
+                    + "for Key : " + key);
         }
 
         MenuAction action = toolActionCreator.createAction(treePanel);

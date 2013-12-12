@@ -35,26 +35,24 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.tree.form;
 
+import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.client.widget.form.GenericFormWidget;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public abstract class GPTreeFormWidget<T extends GPBeanTreeModel>
         extends GenericFormWidget {
 
     protected T entity;
+    protected final TreePanel<GPBeanTreeModel> tree;
 
-    /**
-     * @Constructor
-     *
-     * @param lazy
-     */
-    public GPTreeFormWidget(boolean lazy) {
+    public GPTreeFormWidget(TreePanel<GPBeanTreeModel> theTree, boolean lazy) {
         super(lazy);
+        this.tree = theTree;
     }
 
     /**
@@ -63,4 +61,12 @@ public abstract class GPTreeFormWidget<T extends GPBeanTreeModel>
     public T getEntity() {
         return entity;
     }
+
+    /**
+     * @return the tree
+     */
+    public TreePanel<GPBeanTreeModel> getTree() {
+        return tree;
+    }
+
 }

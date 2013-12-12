@@ -49,7 +49,8 @@ import org.geosdi.geoplatform.gui.client.widget.tree.store.GinTreeStore;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 /**
- * <p>This Class has been created for Gin integration in Layer Module</p>
+ * <p>
+ * This Class has been created for Gin integration in Layer Module</p>
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -68,31 +69,38 @@ public class GinTreePanel implements GinTreePanelBuilder {
     @Override
     public GPTreePanel get() {
         return tree = (tree == null) ? new GPTreePanel(store) {
+
             {
                 super.setIconProvider(
                         new ModelIconProvider<GPBeanTreeModel>() {
-                    @Override
-                    public AbstractImagePrototype getIcon(
-                            GPBeanTreeModel model) {
-                        return model.getIcon();
-                    }
-                });
+
+                            @Override
+                            public AbstractImagePrototype getIcon(
+                                    GPBeanTreeModel model) {
+                                        return model.getIcon();
+                                    }
+
+                        });
 
                 super.setLabelProvider(
                         new ModelStringProvider<GPBeanTreeModel>() {
-                    @Override
-                    public String getStringValue(
-                            GPBeanTreeModel model,
-                            String property) {
-                        return model.getLabel();
-                    }
-                });
+
+                            @Override
+                            public String getStringValue(
+                                    GPBeanTreeModel model,
+                                    String property) {
+                                        return model.getLabel();
+                                    }
+
+                        });
             }
 
             @Override
             protected boolean hasChildren(ModelData model) {
                 return model instanceof FolderTreeNode || model instanceof GPRootTreeNode;
             }
+
         } : tree;
     }
+
 }

@@ -4,7 +4,7 @@
  *  http://geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2012 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2013 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -33,55 +33,36 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.configutation.tree.tools;
+package org.geosdi.geoplatform.gui.client.command.getmap;
 
-import com.extjs.gxt.ui.client.data.ModelData;
-import com.extjs.gxt.ui.client.store.ListStore;
-import com.extjs.gxt.ui.client.widget.form.ComboBox;
-import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import org.geosdi.geoplatform.gui.client.action.menu.RefreshLayerAction;
-import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
-import org.geosdi.geoplatform.gui.client.model.LayerRefreshTimeValue;
-import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
-import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import org.geosdi.geoplatform.gui.command.api.GPCommandResponse;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class RefreshTimeComboBuilder {
+public class CheckWmsGetMapUrlResponse implements GPCommandResponse<Boolean> {
 
-    private final ComboBox combo;
+    private static final long serialVersionUID = -3026802034803607233L;
+    //
+    private Boolean result;
 
-    public RefreshTimeComboBuilder() {
-        this.combo = new ComboBox() {
-            @Override
-            protected void onSelect(ModelData model, int index) {
-                super.onSelect(model, index);
-                combo.clearSelections();
-                if (combo.getParent() != null && combo.getParent().getParent() != null) {
-                    combo.getParent().getParent().setVisible(false);
-                }
-            }
-        };
+    public CheckWmsGetMapUrlResponse() {
     }
 
-    protected ComboBox build(TreePanel tree) {
-        combo.setEmptyText(LayerModuleConstants.INSTANCE.RefreshTimeComboBuilder_comboEmptyText());
-        ListStore<LayerRefreshTimeValue> store = new ListStore<LayerRefreshTimeValue>();
-        store.add(LayerRefreshTimeValue.getLayerRefreshTimeList());
-        combo.setStore(store);
-        combo.setEditable(Boolean.FALSE);
-        combo.setForceSelection(Boolean.TRUE);
-        combo.setTypeAhead(Boolean.FALSE);
-        combo.setUseQueryCache(Boolean.FALSE);
-        combo.setDisplayField(
-                LayerRefreshTimeValue.REFRESH_TIME_KEY);
-
-        combo.addSelectionChangedListener(new RefreshLayerAction(
-                (GPTreePanel<GPBeanTreeModel>) tree));
-
-        return combo;
+    public CheckWmsGetMapUrlResponse(Boolean theResult) {
+        this.result = theResult;
     }
+
+    @Override
+    public Boolean getResult() {
+        return this.result;
+    }
+
+    @Override
+    public String toString() {
+        return "CheckWmsGetMapUrlResponse{ " + "result = " + result + '}';
+    }
+
 }

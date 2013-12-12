@@ -60,7 +60,6 @@ import org.geosdi.geoplatform.gui.client.i18n.kml.KMLErrorMessageConstants;
 import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedLayers;
 import org.geosdi.geoplatform.gui.client.model.memento.save.MementoSaveOperations;
-import org.geosdi.geoplatform.gui.client.model.visitor.VisitorAddElement;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.expander.GPLayerExpander;
 import org.geosdi.geoplatform.gui.client.widget.fileupload.GPExtensions;
@@ -80,20 +79,18 @@ import org.geosdi.geoplatform.gui.regex.GPRegEx;
 public class LoadKmlFromUrlWidget extends GPTreeFormWidget<GPLayerTreeModel>
         implements ISave<MementoSaveAddedLayers> {
 
-    private TreePanel<GPBeanTreeModel> tree;
     private TextField<String> urlText;
     private Button buttonAdd;
-    private VisitorAddElement addVisitor;
+//    private final VisitorAddElement addVisitor;
     private GPBeanTreeModel parentDestination;
-    private GPLayerExpander expander;
+    private final GPLayerExpander expander;
     //
     private String urlEncoding = "";
     private String suggestion = "";
 
     public LoadKmlFromUrlWidget(TreePanel<GPBeanTreeModel> theTree) {
-        super(true);
-        tree = theTree;
-        addVisitor = new VisitorAddElement();
+        super(theTree, true);
+//        addVisitor = new VisitorAddElement();
         expander = new GPLayerExpander(theTree, this);
     }
 
@@ -112,8 +109,8 @@ public class LoadKmlFromUrlWidget extends GPTreeFormWidget<GPLayerTreeModel>
 
     @Override
     public void initSizeFormPanel() {
-        super.formPanel.setHeaderVisible(false);
-        super.formPanel.setSize(280, 120);
+        super.getFormPanel().setHeaderVisible(false);
+        super.getFormPanel().setSize(280, 120);
     }
 
     @Override
@@ -133,14 +130,14 @@ public class LoadKmlFromUrlWidget extends GPTreeFormWidget<GPLayerTreeModel>
 
         super.fieldSet.add(urlText);
 
-        super.formPanel.add(super.fieldSet);
+        super.getFormPanel().add(super.fieldSet);
 
         super.saveStatus = new KmlUrlStatus();
         super.saveStatus.setAutoWidth(true);
 
-        super.formPanel.getButtonBar().add(super.saveStatus);
+        super.getFormPanel().getButtonBar().add(super.saveStatus);
 
-        super.formPanel.setButtonAlign(HorizontalAlignment.RIGHT);
+        super.getFormPanel().setButtonAlign(HorizontalAlignment.RIGHT);
 
         buttonAdd = new Button(ButtonsConstants.INSTANCE.addText(),
                 LayerResources.ICONS.addRasterLayer(),
@@ -153,7 +150,7 @@ public class LoadKmlFromUrlWidget extends GPTreeFormWidget<GPLayerTreeModel>
 
         buttonAdd.setEnabled(false);
 
-        super.formPanel.addButton(buttonAdd);
+        super.getFormPanel().addButton(buttonAdd);
 
         Button buttonCancel = new Button(ButtonsConstants.INSTANCE.cancelText(),
                 BasicWidgetResources.ICONS.cancel(),
@@ -164,7 +161,7 @@ public class LoadKmlFromUrlWidget extends GPTreeFormWidget<GPLayerTreeModel>
             }
         });
 
-        super.formPanel.addButton(buttonCancel);
+        super.getFormPanel().addButton(buttonCancel);
 
         setFocusWidget(urlText);
     }
@@ -226,18 +223,11 @@ public class LoadKmlFromUrlWidget extends GPTreeFormWidget<GPLayerTreeModel>
         super.setFocusWidget(urlText);
     }
 
-    /**
-     * @return the tree
-     */
-    public TreePanel<GPBeanTreeModel> getTree() {
-        return tree;
-    }
-
     @Override
     public void execute() {
         super.saveStatus.setBusy(LayerModuleConstants.INSTANCE.
                 LoadKmlFromUrlWidget_statusAddingKMLText());
-        parentDestination = this.getTree().getSelectionModel().getSelectedItem();
+        this.parentDestination = this.getTree().getSelectionModel().getSelectedItem();
 //        assert (this.getTree().isExpanded(parentDestination)) : "AddFolderWidget on execute: the parent folder must be expanded before the add operation";    \
 
 //        List<GPBeanTreeModel> rasterList = this.createRasterList();

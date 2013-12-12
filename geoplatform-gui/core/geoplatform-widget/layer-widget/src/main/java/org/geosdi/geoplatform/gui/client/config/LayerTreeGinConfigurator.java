@@ -39,25 +39,13 @@ import com.google.gwt.inject.client.AbstractGinModule;
 import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.config.annotation.MultiSelection;
 import org.geosdi.geoplatform.gui.client.config.annotation.SingleSelection;
-import org.geosdi.geoplatform.gui.client.config.provider.DropTargetProvider;
-import org.geosdi.geoplatform.gui.client.config.provider.GPLayerTreeDecoratorProvider;
-import org.geosdi.geoplatform.gui.client.config.provider.GPRootTreeNodeProvider;
-import org.geosdi.geoplatform.gui.client.config.provider.GPTreeHandlerManagerProvider;
-import org.geosdi.geoplatform.gui.client.config.provider.GPTreeStoreWidgetProvider;
-import org.geosdi.geoplatform.gui.client.config.provider.LayerTreeBasicMenuProvider;
-import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
 import org.geosdi.geoplatform.gui.client.widget.GPLegendPanel;
-import org.geosdi.geoplatform.gui.client.widget.GPTreePanelDropTarget;
 import org.geosdi.geoplatform.gui.client.widget.LayerTreePanel;
 import org.geosdi.geoplatform.gui.client.widget.LayerTreeWidget;
-import org.geosdi.geoplatform.gui.client.widget.decorator.GPLayerTreeDecorator;
-import org.geosdi.geoplatform.gui.client.widget.store.GPTreeStoreWidget;
 import org.geosdi.geoplatform.gui.client.widget.toolbar.LayerTreeToolbar;
 import org.geosdi.geoplatform.gui.client.widget.tree.menu.store.keybuilder.MultiSelectionCompositeKeyBuilder;
 import org.geosdi.geoplatform.gui.client.widget.tree.menu.store.keybuilder.SelectionCompositeKeyBuilder;
 import org.geosdi.geoplatform.gui.client.widget.tree.menu.store.keybuilder.SingleSelectionCompositeKeyBuilder;
-import org.geosdi.geoplatform.gui.client.widget.tree.properties.basic.menu.LayerTreeBasicMenu;
-import org.geosdi.geoplatform.gui.client.widget.tree.properties.handler.GPTreeHandlerManager;
 import org.geosdi.geoplatform.gui.impl.tree.menu.store.TreeMenuStoreRepository;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBusImpl;
@@ -77,29 +65,15 @@ public class LayerTreeGinConfigurator extends AbstractGinModule {
         bind(LayerTreePanel.class).in(Singleton.class);
         bind(LayerTreeWidget.class).in(Singleton.class);
         bind(LayerTreeToolbar.class).in(Singleton.class);
+
         bind(LegendLayerHandler.class).to(GPLegendPanel.class).in(
                 Singleton.class);
-
-        bind(GPTreeStoreWidget.class).toProvider(GPTreeStoreWidgetProvider.class);
-
-        bind(GPLayerTreeDecorator.class).toProvider(
-                GPLayerTreeDecoratorProvider.class);
-
-        bind(GPRootTreeNode.class).toProvider(GPRootTreeNodeProvider.class);
-
-        bind(GPTreePanelDropTarget.class).toProvider(DropTargetProvider.class);
-
-        bind(GPTreeHandlerManager.class).toProvider(
-                GPTreeHandlerManagerProvider.class);
-
-        bind(LayerTreeBasicMenu.class).toProvider(
-                LayerTreeBasicMenuProvider.class).in(Singleton.class);
 
         bind(TreeMenuStoreRepository.class).in(Singleton.class);
 
         bind(SelectionCompositeKeyBuilder.class).annotatedWith(
                 SingleSelection.class).to(
-                SingleSelectionCompositeKeyBuilder.class);
+                        SingleSelectionCompositeKeyBuilder.class);
 
         bind(SelectionCompositeKeyBuilder.class).annotatedWith(
                 MultiSelection.class).to(MultiSelectionCompositeKeyBuilder.class);

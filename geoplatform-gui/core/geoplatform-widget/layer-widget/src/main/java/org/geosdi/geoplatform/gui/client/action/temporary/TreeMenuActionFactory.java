@@ -36,17 +36,13 @@
 package org.geosdi.geoplatform.gui.client.action.temporary;
 
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.action.menu.MenuAction;
 import org.geosdi.geoplatform.gui.action.tree.menu.TreeMenuActionCreator;
 import org.geosdi.geoplatform.gui.action.tree.menu.TreeMenuActionRegistar;
 import org.geosdi.geoplatform.gui.client.action.menu.AddFolderMenuAction;
-import org.geosdi.geoplatform.gui.client.action.menu.CopyLayerAction;
 import org.geosdi.geoplatform.gui.client.action.menu.CreateFolderViewportAction;
 import org.geosdi.geoplatform.gui.client.action.menu.CreateLayerViewportAction;
 import org.geosdi.geoplatform.gui.client.action.menu.DeleteElementsMenuAction;
-import org.geosdi.geoplatform.gui.client.action.menu.PasteLayerAction;
-import org.geosdi.geoplatform.gui.client.action.menu.ShareProjectMenuAction;
 import org.geosdi.geoplatform.gui.client.action.menu.ShowFolderRenameAction;
 import org.geosdi.geoplatform.gui.client.action.menu.ShowLayerPropertiesAction;
 import org.geosdi.geoplatform.gui.client.action.menu.ZoomToLayerExtentAction;
@@ -63,6 +59,7 @@ import org.geosdi.geoplatform.gui.client.action.menu.export.ExportoToTIFF;
 import org.geosdi.geoplatform.gui.client.action.menu.legend.GetLegendGraphicsBox;
 import org.geosdi.geoplatform.gui.client.action.menu.time.AddModifyTimeFilterAction;
 import org.geosdi.geoplatform.gui.client.action.menu.time.RemoveTimeFilterAction;
+import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.impl.tree.menu.config.TreeMenuGinInjector;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
@@ -80,12 +77,12 @@ public class TreeMenuActionFactory {
 
     private static final TreeMenuActionRegistar registar;
     //
-    @Inject
-    static ShareProjectMenuAction shareProjectMenuAction;
-    @Inject
-    static PasteLayerAction pasteLayerAction;
-    @Inject
-    static CopyLayerAction copyLayerAction;
+//    @Inject
+//    static final ShareProjectMenuAction shareProjectMenuAction;
+//    @Inject
+//    static final PasteLayerAction pasteLayerAction;
+//    @Inject
+//    static final CopyLayerAction copyLayerAction;
 
     public static void buildTreeMenuActions() {
         buildRootMenuActions();
@@ -109,7 +106,7 @@ public class TreeMenuActionFactory {
 
             @Override
             public MenuAction createAction(TreePanel treePanel) {
-                return shareProjectMenuAction;
+                return LayerModuleInjector.MainInjector.getInstance().getShareProjectMenuAction();
             }
 
         });
@@ -120,7 +117,7 @@ public class TreeMenuActionFactory {
 
             @Override
             public MenuAction createAction(TreePanel treePanel) {
-                return pasteLayerAction;
+                return LayerModuleInjector.MainInjector.getInstance().getPasteLayerAction();
             }
 
         });
@@ -288,7 +285,7 @@ public class TreeMenuActionFactory {
 
             @Override
             public MenuAction createAction(TreePanel treePanel) {
-                return copyLayerAction;
+                return LayerModuleInjector.MainInjector.getInstance().getCopyLayerAction();
             }
 
         });
@@ -325,7 +322,7 @@ public class TreeMenuActionFactory {
 
             @Override
             public MenuAction createAction(TreePanel treePanel) {
-                return copyLayerAction;
+                return LayerModuleInjector.MainInjector.getInstance().getCopyLayerAction();
             }
 
         });

@@ -51,11 +51,10 @@ public class LayerRangeEvent extends GwtEvent<LayerRangeEventHandler> {
         this.inRange = inRange;
         this.layerBean = layerBean;
     }
-    public static Type<LayerRangeEventHandler> TYPE = new Type<LayerRangeEventHandler>();
 
     @Override
     public Type<LayerRangeEventHandler> getAssociatedType() {
-        return TYPE;
+        return LayerRangeEventHandler.TYPE;
     }
 
     @Override

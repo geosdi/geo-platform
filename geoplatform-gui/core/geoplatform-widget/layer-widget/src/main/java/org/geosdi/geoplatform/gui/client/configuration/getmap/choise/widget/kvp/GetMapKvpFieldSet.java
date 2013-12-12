@@ -72,7 +72,7 @@ public class GetMapKvpFieldSet extends FieldSet {
     @Override
     protected void onAttach() {
         super.onAttach();
-        this.increaseHeight.setHeight(getHeight() + 180);
+        this.increaseHeight.setHeight(getHeight() + 200);
         LoadWmsGetMapFromUrlWidget.fireWmsGetMapFromUrlEvent(increaseHeight);
     }
 

@@ -202,7 +202,6 @@ public class LoadWmsGetMapFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
     @Override
     public void hideWidget() {
         super.hide();
-        System.out.println("CODICE ESEGUITO CHIUSURA############## FINESTRA");
     }
 
     @Override

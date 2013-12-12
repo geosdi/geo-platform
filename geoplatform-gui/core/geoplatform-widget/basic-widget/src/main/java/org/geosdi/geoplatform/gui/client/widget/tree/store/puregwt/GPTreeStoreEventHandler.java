@@ -42,6 +42,7 @@ import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.GPShortLayerBean;
 import org.geosdi.geoplatform.gui.model.GPVectorBean;
+import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 /**
  * TODO One single method for source?
@@ -84,4 +85,10 @@ public interface GPTreeStoreEventHandler extends EventHandler {
      * LAYERS_FROM_CATALOG
      */
     public void addRasterLayersFromCatalog(List<? extends GPShortLayerBean> layers);
+    
+    /**
+     * LAYERS_FROM_GET_MAP
+     */
+    
+    void addLayersFromWmsGetMap(List<GPBeanTreeModel> layers);
 }

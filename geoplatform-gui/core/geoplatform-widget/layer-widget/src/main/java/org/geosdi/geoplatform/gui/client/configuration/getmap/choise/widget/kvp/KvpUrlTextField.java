@@ -112,7 +112,6 @@ public class KvpUrlTextField extends TextField<String> {
     }
 
     private Boolean checkUrl() {
-        Boolean status = this.kvpUrlManagerHandler.checkKvpUrl(this.getValue());
         return this.kvpUrlManagerHandler.checkKvpUrl(this.getValue());
     }
 

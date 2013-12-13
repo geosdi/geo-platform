@@ -37,42 +37,31 @@ package org.geosdi.geoplatform.gui.client.action.menu;
 
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.common.collect.Lists;
-import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import java.util.List;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.action.menu.expander.GPMenuFolderExpander;
-import org.geosdi.geoplatform.gui.client.puregwt.menu.handler.PasteLayerMenuHandler;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
-import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class PasteLayerBaseAction extends MenuBaseAction implements
-        PasteLayerMenuHandler {
+public abstract class PasteLayerBaseAction extends MenuBaseAction {
 
     protected final TreePanel<GPBeanTreeModel> tree;
     protected final GPMenuFolderExpander folderExpander;
-    protected final GPEventBus bus;
     protected List<GPLayerBean> layersToCopy = Lists.<GPLayerBean>newArrayList();
 
     public PasteLayerBaseAction(String title, AbstractImagePrototype image,
-            TreePanel<GPBeanTreeModel> theTree, GPEventBus theBus) {
+            TreePanel<GPBeanTreeModel> theTree) {
         super(title, image);
-
         this.tree = theTree;
-        this.bus = theBus;
         this.folderExpander = new GPMenuFolderExpander(tree, this);
     }
 
     protected abstract void executePaste();
-
-    protected HandlerRegistration addPasteLayerMenuHandler() {
-        return this.bus.addHandler(PasteLayerMenuHandler.TYPE, this);
-    }
 
 }

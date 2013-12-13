@@ -42,12 +42,11 @@ import java.util.List;
 import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.LayerResources;
+import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
-import org.geosdi.geoplatform.gui.client.puregwt.menu.event.PasteLayerMenuEvent;
 import org.geosdi.geoplatform.gui.client.widget.tree.panel.GinTreePanel;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
-import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -56,13 +55,11 @@ import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 public class CopyLayerAction extends MenuBaseAction {
 
     private final TreePanel<GPBeanTreeModel> tree;
-    private final GPEventBus bus;
 
     @Inject
-    public CopyLayerAction(GinTreePanel ginTreePanel, GPEventBus theBus) {
+    public CopyLayerAction(GinTreePanel ginTreePanel) {
         super("CopyLayer", LayerResources.ICONS.copy());
         this.tree = ginTreePanel.get();
-        this.bus = theBus;
     }
 
     @Override
@@ -77,6 +74,10 @@ public class CopyLayerAction extends MenuBaseAction {
             }
         }
 
-        this.bus.fireEvent(new PasteLayerMenuEvent(selectedLayers));
+        PasteLayerAction pasteLayerAction = LayerModuleInjector.MainInjector.getInstance().getPasteLayerAction();
+        pasteLayerAction.layersToCopy.clear();
+        pasteLayerAction.layersToCopy.addAll(selectedLayers);
+        pasteLayerAction.setMustBeEnabled(Boolean.TRUE);
+        pasteLayerAction.setEnabled(Boolean.TRUE);
     }
 }

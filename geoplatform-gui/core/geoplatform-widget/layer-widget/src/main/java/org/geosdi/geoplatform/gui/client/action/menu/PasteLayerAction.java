@@ -36,16 +36,12 @@
 package org.geosdi.geoplatform.gui.client.action.menu;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
-import com.google.gwt.event.shared.HandlerRegistration;
-import java.util.List;
 import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.widget.tree.panel.GinTreePanel;
 import org.geosdi.geoplatform.gui.client.widget.tree.store.puregwt.event.AddLayersFromCopyMenuEvent;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
-import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
-import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 
 /**
@@ -54,14 +50,9 @@ import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
  */
 public class PasteLayerAction extends PasteLayerBaseAction {
 
-    private HandlerRegistration handlerRegistration;
-
     @Inject
-    public PasteLayerAction(GinTreePanel ginTreePanel, GPEventBus theBus) {
-        super("PasteLayers", LayerResources.ICONS.paste(), ginTreePanel.get(),
-                theBus);
-
-        this.handlerRegistration = super.addPasteLayerMenuHandler();
+    public PasteLayerAction(GinTreePanel ginTreePanel) {
+        super("PasteLayers", LayerResources.ICONS.paste(), ginTreePanel.get());
     }
 
     @Override
@@ -82,14 +73,6 @@ public class PasteLayerAction extends PasteLayerBaseAction {
     protected void executePaste() {
         LayerHandlerManager.fireEvent(new AddLayersFromCopyMenuEvent(
                 layersToCopy));
-    }
-
-    @Override
-    public void bindLayersToCopy(List<GPLayerTreeModel> layersToCopy) {
-        this.layersToCopy.clear();
-        this.layersToCopy.addAll(layersToCopy);
-
-        super.setMustBeEnabled(true);
     }
 
 }

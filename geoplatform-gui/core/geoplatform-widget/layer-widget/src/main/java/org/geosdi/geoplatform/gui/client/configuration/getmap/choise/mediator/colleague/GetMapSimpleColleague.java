@@ -54,6 +54,7 @@ import org.geosdi.geoplatform.gui.client.widget.form.LoadWmsGetMapFromUrlWidget;
 public class GetMapSimpleColleague extends GetMapChoiseColleague<FieldSet> {
 
     private final DecreaseWidgetHeightEvent decreaseHeight = new DecreaseWidgetHeightEvent();
+
     private final GetMapSimpleHandler handler;
     private RadioButton simple;
 
@@ -102,6 +103,7 @@ public class GetMapSimpleColleague extends GetMapChoiseColleague<FieldSet> {
         this.simple.setValue(Boolean.FALSE, true);
         LoadWmsGetMapFromUrlWidget.fireWmsGetMapFromUrlEvent(decreaseHeight);
         this.choiseWidget.reset();
+
     }
 
 }

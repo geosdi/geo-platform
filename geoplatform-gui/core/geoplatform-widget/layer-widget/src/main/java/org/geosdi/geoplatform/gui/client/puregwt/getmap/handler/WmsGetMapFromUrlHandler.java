@@ -50,7 +50,7 @@ public interface WmsGetMapFromUrlHandler extends EventHandler {
     void correctStatus();
 
     void incorrectStatus(String statusMessage);
-    
+   
     void disableStatus();
 
     void reset();

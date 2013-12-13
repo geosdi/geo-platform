@@ -84,6 +84,7 @@ public class WmsGetMapDispatcher implements IWmsGetMapDispatcher {
                         if (response.getResult()) {
                             LoadWmsGetMapFromUrlWidget.fireWmsGetMapFromUrlEvent(
                                     correctStatusEvent);
+
                             if (runExecute) { // Iff the enter key is pressed
                                 LoadWmsGetMapFromUrlWidget.fireWmsGetMapFromUrlEvent(
                                         executeEvent);
@@ -91,6 +92,7 @@ public class WmsGetMapDispatcher implements IWmsGetMapDispatcher {
                         } else {
                             LoadWmsGetMapFromUrlWidget.fireWmsGetMapFromUrlEvent(
                                     incorrectStatusEvent);
+
                         }
                     }
 
@@ -98,6 +100,7 @@ public class WmsGetMapDispatcher implements IWmsGetMapDispatcher {
                     public void onCommandFailure(Throwable exception) {
                         LoadWmsGetMapFromUrlWidget.fireWmsGetMapFromUrlEvent(
                                 incorrectStatusEvent);
+
                         GeoPlatformMessage.errorMessage(
                                 LayerModuleConstants.INSTANCE.errorCheckingURLTitleText(),
                                 WindowsConstants.INSTANCE.errorMakingConnectionBodyText());

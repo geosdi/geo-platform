@@ -52,7 +52,8 @@ public class GetMapKvpFieldSet extends FieldSet {
 
     @Inject
     private ComponentPluginResetEvent resetPluginEvent;
-    private final IncreaseWidgetHeightEvent increaseHeight = new IncreaseWidgetHeightEvent();
+    @Inject
+    private IncreaseWidgetHeightEvent increaseHeight;
     private final KvpUrlTextField urlText;
 
     @Inject

@@ -72,39 +72,48 @@ public class GPTreeMenuLoader implements TreeMenuLoader {
     @Override
     public void loadMenu() {
         this.tree.addListener(Events.Render, new Listener() {
+
             @Override
             public void handleEvent(BaseEvent be) {
                 ClientCommandDispatcher.getInstance().execute(
                         new GPClientCommand<GetCompositeMenuResponse>() {
-                    private static final long serialVersionUID = 2887781730841655720L;
 
-                    {
-                        super.setCommandRequest(new GetCompositeMenuRequest());
-                    }
+                            private static final long serialVersionUID = 2887781730841655720L;
 
-                    @Override
-                    public void onCommandSuccess(
-                            GetCompositeMenuResponse response) {
-                        storeRepository.setMenuCompositeStore(
-                                response.getResult());
-                        bus.fireEvent(new GPTreeMenuActivatorEvent());
-                    }
+                            {
+                                super.setCommandRequest(
+                                        new GetCompositeMenuRequest());
+                            }
 
-                    @Override
-                    public void onCommandFailure(Throwable exception) {
-                        /**
-                         * For now a sout to print the exception. We don't
-                         * notify to user the error, the Application must use
-                         * the base TreeMenu prepared with Menu Item for
-                         * GeoPlatform Info.
-                         *
-                         */
-                        System.out.println("TreeLayer Dynamic Menu "
-                                + "Loading Error : " + exception);
-                    }
-                });
+                            @Override
+                            public void onCommandSuccess(
+                                    GetCompositeMenuResponse response) {
+                                storeRepository.setMenuCompositeStore(
+                                        response.getResult());
+                                bus.fireEvent(
+                                        new GPTreeMenuActivatorEvent());
+                            }
+
+                            @Override
+                            public void onCommandFailure(
+                                    Throwable exception) {
+                                /**
+                                 * For now a sout to print the exception. We
+                                 * don't notify to user the error, the
+                                 * Application must use the base TreeMenu
+                                 * prepared with Menu Item for GeoPlatform Info.
+                                 *
+                                 */
+                                System.out.println(
+                                        "TreeLayer Dynamic Menu "
+                                        + "Loading Error : " + exception);
+                            }
+
+                        });
 
             }
+
         });
     }
+
 }

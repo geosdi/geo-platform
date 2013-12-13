@@ -79,6 +79,7 @@ public class GPTreeMenuActivator implements TreeMenuActivator {
     @Override
     public void activeTreeContextMenu() {
         tree.addListener(Events.OnContextMenu, new Listener() {
+
             @Override
             public void handleEvent(BaseEvent be) {
                 Menu menu = selectionManager.bindSelection(
@@ -86,6 +87,8 @@ public class GPTreeMenuActivator implements TreeMenuActivator {
                 tree.setContextMenu((menu != null) ? menu
                         : treeBasicMenu.getBasicMenu());
             }
+
         });
     }
+
 }

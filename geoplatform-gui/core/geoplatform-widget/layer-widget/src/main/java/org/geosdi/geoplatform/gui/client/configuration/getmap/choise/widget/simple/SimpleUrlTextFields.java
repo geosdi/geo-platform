@@ -84,7 +84,20 @@ public class SimpleUrlTextFields extends LayoutContainer {
         }
 
     };
-    private final TextField<String> layerTextField = new TextField<String>();
+    private final TextField<String> layerTextField = new TextField<String>() {
+
+        @Override
+        public void onBrowserEvent(Event event) {
+            super.onBrowserEvent(event);
+            switch (event.getTypeInt()) {
+                case Event.ONPASTE:
+                    event.stopPropagation();
+                    fireDelayed();
+                    break;
+            }
+        }
+
+    };
 
     @Inject
     public SimpleUrlTextFields(KvpUrlNotificationPlugin theNotificationPlugin) {
@@ -99,9 +112,10 @@ public class SimpleUrlTextFields extends LayoutContainer {
         super.setWidth(240);
 
         urlTextField.setFieldLabel(LayerModuleConstants.INSTANCE.urlLabelText());
-        layerTextField.setFieldLabel(LayerModuleConstants.INSTANCE.GetMapSimpleFieldSet_layerNameText());
+        layerTextField.setFieldLabel(LayerModuleConstants.INSTANCE.SimpleUrlTextFields_layerNameText());
 
         urlTextField.sinkEvents(Event.ONPASTE);
+        layerTextField.sinkEvents(Event.ONPASTE);
 
         KeyListener keyListener = new KeyListener() {
 
@@ -143,12 +157,12 @@ public class SimpleUrlTextFields extends LayoutContainer {
     private String checkUrl() {
         String result = "";
         if (!GeoPlatformUtils.isNotEmpty(urlTextField.getValue())) {
-            result = "The URL is empty";
+            result = LayerModuleConstants.INSTANCE.SimpleUrlTextFields_checkURLEmptyText();
         } else if (!urlTextField.getValue().startsWith("http")
                 && !urlTextField.getValue().startsWith("https")) {
-            result = "The URL does not start with http or https";
+            result = LayerModuleConstants.INSTANCE.SimpleUrlTextFields_checkURLProtocolText();
         } else if (!GeoPlatformUtils.isNotEmpty(layerTextField.getValue())) {
-            result = "The Layer Name is empty";
+            result = LayerModuleConstants.INSTANCE.SimpleUrlTextFields_checkLayerNameText();
         }
         return result;
     }

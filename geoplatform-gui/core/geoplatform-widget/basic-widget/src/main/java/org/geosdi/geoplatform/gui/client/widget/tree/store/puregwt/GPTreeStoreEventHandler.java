@@ -45,14 +45,11 @@ import org.geosdi.geoplatform.gui.model.GPVectorBean;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 /**
- * TODO One single method for source?
- *          addLayersFromCapabilities
- *          addLayersFromPublisher
- *          addLayersFromCopyMenu
- *          addLayersFromCatalog
+ * TODO One single method for source? addLayersFromCapabilities
+ * addLayersFromPublisher addLayersFromCopyMenu addLayersFromCatalog
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public interface GPTreeStoreEventHandler extends EventHandler {
 
@@ -75,20 +72,17 @@ public interface GPTreeStoreEventHandler extends EventHandler {
     /**
      * LAYERS_FROM_COPY_MENU
      */
-    public void addRasterLayersFromCopyMenu(List<GPRasterBean> layers);
-
-    public void addVectorLayersFromCopyMenu(List<GPVectorBean> layers);
-    
     public void addLayersFromCopyMenu(List<? extends GPLayerBean> layers);
 
     /**
      * LAYERS_FROM_CATALOG
      */
-    public void addRasterLayersFromCatalog(List<? extends GPShortLayerBean> layers);
-    
+    public void addRasterLayersFromCatalog(
+            List<? extends GPShortLayerBean> layers);
+
     /**
      * LAYERS_FROM_GET_MAP
      */
-    
     void addLayersFromWmsGetMap(List<GPBeanTreeModel> layers);
+
 }

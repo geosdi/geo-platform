@@ -52,7 +52,6 @@ public abstract class GenericTreeStoreWidget implements GPTreeStoreHandler {
 
     public GenericTreeStoreWidget(GPTreePanel<GPBeanTreeModel> theTree) {
         this.tree = theTree;
-
     }
 
     @Override

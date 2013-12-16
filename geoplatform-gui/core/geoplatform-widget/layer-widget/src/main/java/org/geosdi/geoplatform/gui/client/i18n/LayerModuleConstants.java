@@ -379,13 +379,25 @@ public interface LayerModuleConstants extends Constants {
     String GetMapKvpFieldSet_fieldSetHeadingText();
 
     /**
+     * start SimpleUrlTextFields
+     */
+    @DefaultStringValue("Layer Name")
+    String SimpleUrlTextFields_layerNameText();
+
+    @DefaultStringValue("The URL is empty")
+    String SimpleUrlTextFields_checkURLEmptyText();
+
+    @DefaultStringValue("The URL does not start with http or https")
+    String SimpleUrlTextFields_checkURLProtocolText();
+
+    @DefaultStringValue("The Layer Name is empty")
+    String SimpleUrlTextFields_checkLayerNameText();
+
+    /**
      * start GetMapSimpleFieldSet
      */
     @DefaultStringValue("WMS GetMap from simple URL")
     String GetMapSimpleFieldSet_fieldSetHeadingText();
-
-    @DefaultStringValue("Layer Name")
-    String GetMapSimpleFieldSet_layerNameText();
 
     /**
      * start LoadKmlFromUrlWidget

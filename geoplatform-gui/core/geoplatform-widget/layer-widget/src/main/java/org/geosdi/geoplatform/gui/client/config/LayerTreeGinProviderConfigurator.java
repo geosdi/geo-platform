@@ -41,12 +41,20 @@ import org.geosdi.geoplatform.gui.client.config.provider.DropTargetProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.GPLayerTreeDecoratorProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.GPRootTreeNodeProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.GPTreeHandlerManagerProvider;
-import org.geosdi.geoplatform.gui.client.config.provider.GPTreeStoreWidgetProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.LayerTreeBasicMenuProvider;
+import org.geosdi.geoplatform.gui.client.config.provider.store.executor.CatalogExecutorProvider;
+import org.geosdi.geoplatform.gui.client.config.provider.store.executor.LayerMenuExecutorProvider;
+import org.geosdi.geoplatform.gui.client.config.provider.store.executor.PublisherExecutorProvider;
+import org.geosdi.geoplatform.gui.client.config.provider.store.executor.WmsCapabilitiesExecutorProvider;
+import org.geosdi.geoplatform.gui.client.config.provider.store.executor.WmsGetMapExecutorProvider;
 import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
 import org.geosdi.geoplatform.gui.client.widget.GPTreePanelDropTarget;
 import org.geosdi.geoplatform.gui.client.widget.decorator.GPLayerTreeDecorator;
-import org.geosdi.geoplatform.gui.client.widget.store.GPTreeStoreWidget;
+import org.geosdi.geoplatform.gui.client.widget.store.executor.capabilities.WmsCapabilitiesExecutor;
+import org.geosdi.geoplatform.gui.client.widget.store.executor.catalog.CatalogExecutor;
+import org.geosdi.geoplatform.gui.client.widget.store.executor.getmap.WmsGetMapExecutor;
+import org.geosdi.geoplatform.gui.client.widget.store.executor.menu.LayerMenuExecutor;
+import org.geosdi.geoplatform.gui.client.widget.store.executor.publisher.PublisherExecutor;
 import org.geosdi.geoplatform.gui.client.widget.tree.properties.basic.menu.LayerTreeBasicMenu;
 import org.geosdi.geoplatform.gui.client.widget.tree.properties.handler.GPTreeHandlerManager;
 
@@ -59,7 +67,19 @@ public class LayerTreeGinProviderConfigurator extends AbstractGinModule {
     
     @Override
     protected void configure() {
-        bind(GPTreeStoreWidget.class).toProvider(GPTreeStoreWidgetProvider.class).in(
+        bind(WmsCapabilitiesExecutor.class).toProvider(
+                WmsCapabilitiesExecutorProvider.class).in(Singleton.class);
+        
+        bind(CatalogExecutor.class).toProvider(CatalogExecutorProvider.class).in(
+                Singleton.class);
+        
+        bind(WmsGetMapExecutor.class).toProvider(WmsGetMapExecutorProvider.class).in(
+                Singleton.class);
+        
+        bind(LayerMenuExecutor.class).toProvider(LayerMenuExecutorProvider.class).in(
+                Singleton.class);
+        
+        bind(PublisherExecutor.class).toProvider(PublisherExecutorProvider.class).in(
                 Singleton.class);
         
         bind(GPLayerTreeDecorator.class).toProvider(

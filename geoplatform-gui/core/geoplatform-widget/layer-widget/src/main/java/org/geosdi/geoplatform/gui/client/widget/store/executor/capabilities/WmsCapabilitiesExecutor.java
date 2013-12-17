@@ -33,17 +33,42 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.store;
+package org.geosdi.geoplatform.gui.client.widget.store.executor.capabilities;
+
+import java.util.List;
+import org.geosdi.geoplatform.gui.client.widget.store.executor.LayerTreeStoreExecutor;
+import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
+import org.geosdi.geoplatform.gui.client.widget.tree.store.GPTreeStoreOperations;
+import org.geosdi.geoplatform.gui.model.GPRasterBean;
+import org.geosdi.geoplatform.gui.model.GPVectorBean;
+import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import org.geosdi.geoplatform.gui.puregwt.grid.event.DeselectGridElementEvent;
+import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public enum GPTreeStoreOperations {
+public class WmsCapabilitiesExecutor extends LayerTreeStoreExecutor implements
+        IWmsCapabilitiesExecutor {
 
-    LAYERS_FROM_WMS_CAPABILITIES,
-    LAYERS_FROM_PUBLISHER,
-    LAYERS_FROM_COPY_MENU,
-    LAYERS_FROM_CATALOG;
+    private final DeselectGridElementEvent deselectGridElement = new DeselectGridElementEvent();
+
+    public WmsCapabilitiesExecutor(GPTreePanel<GPBeanTreeModel> thetree) {
+        super(thetree);
+    }
+
+    @Override
+    public void addRasterLayersFromCapabilities(List<GPRasterBean> layers) {
+        super.addRasterLayers(layers,
+                GPTreeStoreOperations.LAYERS_FROM_WMS_CAPABILITIES);
+        LayerHandlerManager.fireEvent(deselectGridElement);
+    }
+
+    @Override
+    public void addVectorLayersFromCapabilities(List<GPVectorBean> layers) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
 }

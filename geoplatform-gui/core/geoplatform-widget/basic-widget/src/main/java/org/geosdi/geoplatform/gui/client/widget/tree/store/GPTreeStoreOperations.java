@@ -4,7 +4,7 @@
  *  http://geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2012 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2013 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -33,29 +33,17 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.config.provider;
-
-import javax.inject.Inject;
-import javax.inject.Provider;
-import org.geosdi.geoplatform.gui.client.widget.store.GPTreeStoreWidget;
-import org.geosdi.geoplatform.gui.client.widget.tree.panel.GinTreePanel;
+package org.geosdi.geoplatform.gui.client.widget.tree.store;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPTreeStoreWidgetProvider implements Provider<GPTreeStoreWidget> {
+public enum GPTreeStoreOperations {
 
-    private GinTreePanel tree;
-
-    @Inject
-    public GPTreeStoreWidgetProvider(GinTreePanel theTree) {
-        this.tree = theTree;
-    }
-
-    @Override
-    public GPTreeStoreWidget get() {
-        return new GPTreeStoreWidget(tree.get());
-    }
+    LAYERS_FROM_WMS_CAPABILITIES,
+    LAYERS_FROM_PUBLISHER,
+    LAYERS_FROM_COPY_MENU,
+    LAYERS_FROM_CATALOG;
 }

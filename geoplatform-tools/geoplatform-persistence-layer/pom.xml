@@ -57,7 +57,7 @@
             <!-- =========================================================== -->
             <dependency>
                 <groupId>org.hibernate.javax.persistence</groupId>
-                <artifactId>hibernate-jpa-2.0-api</artifactId>
+                <artifactId>hibernate-jpa-2.1-api</artifactId>
                 <version>${hibernate-persistence-version}</version>
             </dependency>
             
@@ -108,10 +108,10 @@
     </modules>
     
     <properties>      
-        <hibernate-version>4.2.7.Final</hibernate-version>
-        <hibernate-persistence-version>1.0.1.Final</hibernate-persistence-version>
-        <hibernate-commons-annotations-version>4.0.2.Final</hibernate-commons-annotations-version>
-        <spring-data-jpa-version>1.3.2.RELEASE</spring-data-jpa-version>
+        <hibernate-version>4.3.0.Final</hibernate-version>
+        <hibernate-persistence-version>1.0.0.Final</hibernate-persistence-version>
+        <hibernate-commons-annotations-version>4.0.4.Final</hibernate-commons-annotations-version>
+        <spring-data-jpa-version>1.4.3.RELEASE</spring-data-jpa-version>
     </properties>
     
 </project>

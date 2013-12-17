@@ -1633,7 +1633,7 @@
         <netbeans.hint.license>geo-platform</netbeans.hint.license>
         <jaxws-version>2.2.11</jaxws-version>
         <cxf-version>2.7.7</cxf-version>
-        <spring-version>3.2.5.RELEASE</spring-version>
+        <spring-version>4.0.0.RELEASE</spring-version>
         
         <activemq-version>5.8.0</activemq-version>
 
@@ -1645,7 +1645,7 @@
         <slf4j-version>1.7.5</slf4j-version>
 
         <spring-support>2.0.8</spring-support>
-        <spring-security-version>3.1.4.RELEASE</spring-security-version>
+        <spring-security-version>3.2.0.RELEASE</spring-security-version>
         <aspectj-version>1.7.1.RELEASE</aspectj-version>
         <ubl-version>2.0</ubl-version>
         <jetty-version>7.6.8.v20121106</jetty-version>

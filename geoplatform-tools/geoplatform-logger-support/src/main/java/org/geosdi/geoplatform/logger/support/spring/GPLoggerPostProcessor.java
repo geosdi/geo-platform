@@ -33,54 +33,56 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.proxy;
+package org.geosdi.geoplatform.logger.support.spring;
 
-import org.geosdi.geoplatform.configurator.httpclient.proxy.HttpClientProxyConfiguration;
+import java.lang.reflect.Field;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ImportResource;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.util.ReflectionUtils;
+import org.springframework.util.ReflectionUtils.FieldCallback;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:applicationContext-Test.xml",
-    "classpath:applicationContextScan-Test.xml",
-    "classpath:applicationContext-Logger.xml"})
-public class CSWProxyConfigurationTest {
+public class GPLoggerPostProcessor implements BeanPostProcessor {
 
-    @GeoPlatformLog
-    private static Logger logger;
-    //
-    @Autowired
-    private HttpClientProxyConfiguration cswProxyConnectionConfiguration;
+    @Override
+    public Object postProcessBeforeInitialization(final Object o, String string)
+            throws BeansException {
 
-    @Test
-    public void testCSWProxyConfigutation() {
-        Assert.assertNotNull(cswProxyConnectionConfiguration);
+        ReflectionUtils.doWithFields(o.getClass(), new FieldCallback() {
 
-        logger.info("PROXY CONFIGURATiON TO USE ######################### {}",
-                cswProxyConnectionConfiguration);
+            @Override
+            public void doWith(Field field) throws IllegalArgumentException,
+                    IllegalAccessException {
 
-        Assert.assertEquals(false, cswProxyConnectionConfiguration.isUseProxy());
-        Assert.assertEquals(false,
-                cswProxyConnectionConfiguration.isUseCredentialProvider());
+                ReflectionUtils.makeAccessible(field);
 
-        Assert.assertEquals(false,
-                cswProxyConnectionConfiguration.matchServerURL("http://url1"));
+                if (field.getAnnotation(GeoPlatformLog.class) != null) {
 
-        Assert.assertEquals(false,
-                cswProxyConnectionConfiguration.matchServerURL(
-                        "http://www.google.it"));
+                    GeoPlatformLog logAnnotation = field.getAnnotation(
+                            GeoPlatformLog.class);
+
+                    Logger logger = LoggerFactory.getLogger(o.getClass());
+
+                    field.set(o, logger);
+                }
+            }
+
+        });
+
+        return o;
+    }
+
+    @Override
+    public Object postProcessAfterInitialization(Object o, String string) throws
+            BeansException {
+        return o;
     }
 
 }

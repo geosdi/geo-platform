@@ -44,6 +44,7 @@ import java.util.List;
 import javax.xml.bind.JAXBElement;
 import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequest;
 import org.geosdi.geoplatform.connector.server.security.BasicPreemptiveSecurityConnector;
+import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
 import org.geosdi.geoplatform.xml.csw.ConstraintLanguage;
 import org.geosdi.geoplatform.xml.csw.ConstraintLanguageVersion;
 import org.geosdi.geoplatform.xml.csw.OutputSchema;
@@ -54,8 +55,8 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -66,10 +67,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:applicationContext-Test.xml"})
+@ContextConfiguration(locations = {"classpath:applicationContext-Test.xml",
+    "classpath:applicationContext-Logger.xml"})
 public class CatalogGetRecordsTest {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    @GeoPlatformLog
+    private static Logger logger;
     /**
      * geoSDI Catalog.
      */
@@ -153,7 +156,8 @@ public class CatalogGetRecordsTest {
     @Ignore("Catalog is down")
     @Test
     public void testCQLTemporalFilterGeomatys() throws Exception {
-        URL url = new URL("http://demo.geomatys.com/mdweb-cnes-labs/WS/csw/default");
+        URL url = new URL(
+                "http://demo.geomatys.com/mdweb-cnes-labs/WS/csw/default");
         GPCatalogConnectorStore serverConnector = GPCSWConnectorBuilder.newConnector().
                 withServerUrl(url).build();
 
@@ -197,9 +201,11 @@ public class CatalogGetRecordsTest {
     @Ignore("Require to add the SNIPC certificate into default keystore")
     @Test
     public void testSecureGetRecords() throws Exception {
-        GPCatalogConnectorStore serverConnector = GPCSWConnectorBuilder.newConnector().withServerUrl(new URL(
-                snipcUrl)).withClientSecurity(new BasicPreemptiveSecurityConnector(
-                snipcUsername, snipcPassword)).build();
+        GPCatalogConnectorStore serverConnector = GPCSWConnectorBuilder.newConnector().withServerUrl(
+                new URL(
+                        snipcUrl)).withClientSecurity(
+                        new BasicPreemptiveSecurityConnector(
+                                snipcUsername, snipcPassword)).build();
 
         CatalogGetRecordsRequest<GetRecordsResponseType> request = serverConnector.createGetRecordsRequest();
 
@@ -229,4 +235,5 @@ public class CatalogGetRecordsTest {
                     (RecordType) (metadata.get(0).getValue()));
         }
     }
+
 }

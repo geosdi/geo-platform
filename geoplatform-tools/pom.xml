@@ -20,6 +20,7 @@
         <module>geoplatform-oxm</module>
         <module>geoplatform-xml-utilities</module>
         <module>geoplatform-connectors</module>
+        <module>geoplatform-logger-support</module>
         <module>geoplatform-persistence-layer</module>
         <module>geoplatform-gml-parser</module>
         <module>geoplatform-cas-aop</module>

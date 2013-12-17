@@ -42,6 +42,7 @@ import java.util.List;
 import org.geosdi.geoplatform.connector.api.capabilities.model.csw.CatalogCapabilities;
 import org.geosdi.geoplatform.connector.server.request.CatalogGetCapabilitiesRequest;
 import org.geosdi.geoplatform.connector.server.security.BasicPreemptiveSecurityConnector;
+import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
 import org.geosdi.geoplatform.xml.csw.v202.CapabilitiesType;
 import org.geosdi.geoplatform.xml.ows.v100.DomainType;
 import org.geosdi.geoplatform.xml.ows.v100.Operation;
@@ -49,10 +50,8 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.ImportResource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -62,11 +61,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ImportResource(value = {"classpath:applicationContext-jasypt.xml"})
-@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
+@ContextConfiguration(locations = {"classpath:applicationContext.xml",
+    "classpath:applicationContext-Logger.xml"})
 public class CatalogCapabilitiesTest {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    @GeoPlatformLog
+    private Logger logger;
     /**
      * SNIPC Catalog.
      */
@@ -151,7 +151,6 @@ public class CatalogCapabilitiesTest {
                     "CATALOG CAPABILITIES ESRI @@@@@@@@@@@"
                     + "@@@@@@@@@@@@@@@@@@@@@@@ " + catalogGetCapabilities);
 
-
         } catch (MalformedURLException ex) {
             logger.error("MalformedURLException @@@@@@@@@@@@@@ " + ex);
         } catch (IOException es) {
@@ -171,7 +170,7 @@ public class CatalogCapabilitiesTest {
 
         CapabilitiesType response = request.getResponse();
         logger.info("CSW GET_CAPABILITIES VERSION @@@@@@@@@@@@@@@@@@@@@@@ {}",
-                    response.getVersion());
+                response.getVersion());
 
         List<Operation> operationList = response.getOperationsMetadata().getOperation();
         for (Operation operation : operationList) {
@@ -197,8 +196,8 @@ public class CatalogCapabilitiesTest {
     public void testSecureGetCapabilities() throws Exception {
         GPCatalogConnectorStore serverConnector = GPCSWConnectorBuilder.newConnector().
                 withServerUrl(new URL(snipcUrl)).withClientSecurity(
-                new BasicPreemptiveSecurityConnector(snipcUsername,
-                                                     snipcPassword)).build();
+                        new BasicPreemptiveSecurityConnector(snipcUsername,
+                                snipcPassword)).build();
 
         CatalogGetCapabilitiesRequest<CapabilitiesType> request = serverConnector.createGetCapabilitiesRequest();
 
@@ -208,4 +207,5 @@ public class CatalogCapabilitiesTest {
                 "CSW SECURE GET_CAPABILITIES VERSION @@@@@@@@@@@@@@@@@@@@@@@ {}",
                 response.getVersion());
     }
+
 }

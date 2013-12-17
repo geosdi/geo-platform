@@ -43,6 +43,7 @@ import org.geosdi.geoplatform.connector.server.request.CatalogGetCapabilitiesReq
 import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordByIdRequest;
 import org.geosdi.geoplatform.connector.server.security.BasicPreemptiveSecurityConnector;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
+import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
 import org.geosdi.geoplatform.xml.csw.OutputSchema;
 import org.geosdi.geoplatform.xml.csw.v202.AbstractRecordType;
 import org.geosdi.geoplatform.xml.csw.v202.CapabilitiesType;
@@ -57,7 +58,6 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -68,10 +68,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
+@ContextConfiguration(locations = {"classpath:applicationContext.xml",
+    "classpath:applicationContext-Logger.xml"})
 public class CatalogGetRecordByIdTest {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    @GeoPlatformLog
+    private static Logger logger;
     //
     private GPCatalogConnectorStore serverConnector;
     /**
@@ -102,8 +104,8 @@ public class CatalogGetRecordByIdTest {
 
     @Test
     public void testTypeSummary() throws Exception {
-        CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request =
-                this.serverConnector.createGetRecordByIdRequest();
+        CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request
+                = this.serverConnector.createGetRecordByIdRequest();
 
         request.setId("7e418dac-3764-4290-b8ac-47c9ac2a12af");
 
@@ -123,8 +125,8 @@ public class CatalogGetRecordByIdTest {
 
     @Test
     public void testTypeFull() throws Exception {
-        CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request =
-                this.serverConnector.createGetRecordByIdRequest();
+        CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request
+                = this.serverConnector.createGetRecordByIdRequest();
 
         request.setId("7e418dac-3764-4290-b8ac-47c9ac2a12af");
 
@@ -144,8 +146,8 @@ public class CatalogGetRecordByIdTest {
 
     @Test
     public void testDoubleRequest() throws Exception {
-        CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request =
-                this.serverConnector.createGetRecordByIdRequest();
+        CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request
+                = this.serverConnector.createGetRecordByIdRequest();
 
         request.setId("7e418dac-3764-4290-b8ac-47c9ac2a12af",
                 "r_friuli:m8726-cc-i1286");
@@ -167,8 +169,8 @@ public class CatalogGetRecordByIdTest {
 
     @Test
     public void testOutputGmd() throws Exception {
-        CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request =
-                this.serverConnector.createGetRecordByIdRequest();
+        CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request
+                = this.serverConnector.createGetRecordByIdRequest();
 
         request.setId("7e418dac-3764-4290-b8ac-47c9ac2a12af");
         request.setElementSetType(ElementSetType.FULL.value());
@@ -195,8 +197,8 @@ public class CatalogGetRecordByIdTest {
         GPCatalogConnectorStore connector = GPCSWConnectorBuilder.newConnector().
                 withServerUrl(url).build();
 
-        CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request =
-                connector.createGetRecordByIdRequest();
+        CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request
+                = connector.createGetRecordByIdRequest();
 
         request.setId("{D499D5B8-13A5-43B2-B4FA-9FD2AA519F90}");
         request.setElementSetType(ElementSetType.FULL.value());
@@ -223,8 +225,8 @@ public class CatalogGetRecordByIdTest {
         GPCatalogConnectorStore connector = GPCSWConnectorBuilder.newConnector().
                 withServerUrl(url).build();
 
-        CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request =
-                connector.createGetRecordByIdRequest();
+        CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request
+                = connector.createGetRecordByIdRequest();
 
         request.setId("{D499D5B8-13A5-43B2-B4FA-9FD2AA519F90}");
         request.setElementSetType(ElementSetType.FULL.value());
@@ -247,8 +249,8 @@ public class CatalogGetRecordByIdTest {
                 withClientSecurity(securityConnector).
                 build();
 
-        CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request =
-                this.serverConnector.createGetRecordByIdRequest();
+        CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request
+                = this.serverConnector.createGetRecordByIdRequest();
 
         request.setId("PCM:901:20101021:112931");
         request.setElementSetType(ElementSetType.FULL.toString());
@@ -268,8 +270,9 @@ public class CatalogGetRecordByIdTest {
     }
 
     /**
-     * <p> SNIPC catalogue is ambiguous so we can't know the OUTPUT SCHEMA and
-     * the returned Object. For ISO - 19110 the Obeject is
+     * <p>
+     * SNIPC catalogue is ambiguous so we can't know the OUTPUT SCHEMA and the
+     * returned Object. For ISO - 19110 the Obeject is
      * {@link FCFeatureCatalogueType}. For ISO - 19139 the Object is
      * {@link MDMetadataType} </p>
      *
@@ -285,15 +288,14 @@ public class CatalogGetRecordByIdTest {
                 withClientSecurity(securityConnector).
                 build();
 
-        CatalogGetCapabilitiesRequest<CapabilitiesType> requestGetCap =
-                this.serverConnector.createGetCapabilitiesRequest();
+        CatalogGetCapabilitiesRequest<CapabilitiesType> requestGetCap
+                = this.serverConnector.createGetCapabilitiesRequest();
 
         logger.info("GetCapabilities SNIPC @@@@@@@@@@@@@@@@@@@"
                 + "@@@@@ " + requestGetCap.getResponse());
 
-
-        CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request =
-                this.serverConnector.createGetRecordByIdRequest();
+        CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request
+                = this.serverConnector.createGetRecordByIdRequest();
 
         request.setId("{3DEE88CB-A0DB-4794-941A-FD8119621A2F}");
         request.setElementSetType(ElementSetType.FULL.toString());
@@ -307,7 +309,6 @@ public class CatalogGetRecordByIdTest {
 
         String snipcGetRecordById = "target/snipcGetRecordById.xml";
 
-
         FileOutputStream fos = null;
 
         try {
@@ -319,4 +320,5 @@ public class CatalogGetRecordByIdTest {
             }
         }
     }
+
 }

@@ -36,24 +36,27 @@
 package org.geosdi.geoplatform.gui;
 
 import org.geosdi.geoplatform.gui.global.GeoPlatformInfo;
+import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
 import static org.junit.Assert.assertNotNull;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
- * @author giuseppe
  *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"applicationContext-Test.xml"})
+@ContextConfiguration(locations = {"applicationContext-Test.xml",
+    "classpath:applicationContext-Logger.xml"})
 public class GeoPlatformInfoTest {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    @GeoPlatformLog
+    private static Logger logger;
     //
     @Autowired
     private GeoPlatformInfo geoPlatformInfo;
@@ -65,4 +68,5 @@ public class GeoPlatformInfoTest {
         logger.info("GeoPlatformInfo ********************************* {}",
                 this.geoPlatformInfo.toString());
     }
+
 }

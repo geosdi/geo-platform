@@ -59,6 +59,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.geosdi.geoplatform.connector.jaxb.CSWConnectorJAXBContext;
 import org.geosdi.geoplatform.connector.jaxb.GPConnectorJAXBContext;
 import org.geosdi.geoplatform.connector.jaxb.JAXBContextConnectorRepository;
+import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
 import org.geosdi.geoplatform.xml.csw.v202.CapabilitiesType;
 import org.junit.Assert;
 import org.junit.Before;
@@ -66,6 +67,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -75,10 +77,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
+@ContextConfiguration(locations = {"classpath:applicationContext.xml",
+    "classpath:applicationContext-Logger.xml"})
 public class CatalogContextTest {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    @GeoPlatformLog
+    private static Logger logger;
     //
     private final static String CSW_HOST = "catalog.geosdi.org";
     private final static String CSW_PATH = "/geonetwork/srv/en/csw";
@@ -105,7 +109,6 @@ public class CatalogContextTest {
 
             this.entity = response.getEntity();
 
-
         } catch (URISyntaxException ex) {
             logger.error(
                     "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ " + ex.getMessage());
@@ -130,14 +133,13 @@ public class CatalogContextTest {
                 InputStream content = entity.getContent();
 
                 CapabilitiesType cap = ((JAXBElement<CapabilitiesType>) m.unmarshal(
-                                        content)).getValue();
+                        content)).getValue();
 
                 logger.info(
                         "CSW GET_CAPABILITIES VERSION @@@@@@@@@@@@@@@@@@@@@@@ " + cap.getVersion());
 
                 logger.info(
                         "CSW SERVICE IDENTIFICATION @@@@@@@@@@ " + cap.getServiceIdentification());
-
 
                 String cswFile = "target/csw.xml";
 
@@ -160,4 +162,5 @@ public class CatalogContextTest {
                     "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ " + ex.getMessage());
         }
     }
+
 }

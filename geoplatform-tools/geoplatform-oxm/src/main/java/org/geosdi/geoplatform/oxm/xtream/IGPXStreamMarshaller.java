@@ -36,25 +36,14 @@
 package org.geosdi.geoplatform.oxm.xtream;
 
 import com.thoughtworks.xstream.XStream;
-import org.geosdi.geoplatform.GPGenericMarshaller;
-import org.springframework.oxm.xstream.XStreamMarshaller;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPXStreamMarshaller extends GPGenericMarshaller<XStreamMarshaller>
-        implements IGPXStreamMarshaller {
+public interface IGPXStreamMarshaller {
 
-    @Override
-    public void setMarshaller(XStreamMarshaller theMarshaller) {
-        this.marshaller = theMarshaller;
-    }
-
-    @Override
-    public XStream getXStream() {
-        return (this.marshaller != null) ? this.marshaller.getXStream() : null;
-    }
+    XStream getXStream();
 
 }

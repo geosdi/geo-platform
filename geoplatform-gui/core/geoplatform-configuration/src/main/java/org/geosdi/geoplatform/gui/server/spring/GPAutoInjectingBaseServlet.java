@@ -33,28 +33,34 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.oxm.xtream;
+package org.geosdi.geoplatform.gui.server.spring;
 
-import com.thoughtworks.xstream.XStream;
-import org.geosdi.geoplatform.GPGenericMarshaller;
-import org.springframework.oxm.xstream.XStreamMarshaller;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPXStreamMarshaller extends GPGenericMarshaller<XStreamMarshaller>
-        implements IGPXStreamMarshaller {
+public class GPAutoInjectingBaseServlet extends HttpServlet {
+
+    private static final long serialVersionUID = 8092470293199110596L;
+    //
+
+    protected AutowireCapableBeanFactory springBeanFactory;
 
     @Override
-    public void setMarshaller(XStreamMarshaller theMarshaller) {
-        this.marshaller = theMarshaller;
-    }
-
-    @Override
-    public XStream getXStream() {
-        return (this.marshaller != null) ? this.marshaller.getXStream() : null;
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        WebApplicationContext ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(
+                config.getServletContext());
+        this.springBeanFactory = ctx.getAutowireCapableBeanFactory();
+        springBeanFactory.autowireBean(this);
     }
 
 }

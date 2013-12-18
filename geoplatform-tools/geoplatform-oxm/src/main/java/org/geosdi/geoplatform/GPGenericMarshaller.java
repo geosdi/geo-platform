@@ -70,7 +70,8 @@ public abstract class GPGenericMarshaller<M extends AbstractMarshaller>
 
     @Override
     public void marshal(Object jaxbElement, File output) throws IOException {
-        this.marshaller.marshal(jaxbElement, new StreamResult(new FileOutputStream(output)));
+        this.marshaller.marshal(jaxbElement, new StreamResult(
+                new FileOutputStream(output)));
     }
 
     @Override
@@ -107,7 +108,8 @@ public abstract class GPGenericMarshaller<M extends AbstractMarshaller>
 
     @Override
     public Object unmarshal(java.io.File f) throws IOException {
-        return this.marshaller.unmarshal(new StreamSource(new FileInputStream(f)));
+        return this.marshaller.unmarshal(
+                new StreamSource(new FileInputStream(f)));
     }
 
     @Override
@@ -136,6 +138,10 @@ public abstract class GPGenericMarshaller<M extends AbstractMarshaller>
     }
 
     public abstract void setMarshaller(M theMarshaller);
+    
+    public M getMarshaller() {
+        return this.marshaller;
+    }
 
     @Override
     public void afterPropertiesSet() throws Exception {

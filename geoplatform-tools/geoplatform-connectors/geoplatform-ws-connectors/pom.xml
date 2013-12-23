@@ -17,6 +17,7 @@
     
     <modules>
         <module>geoplatform-ws-api-connector</module>
+        <module>geoplatform-ws-impl-connector</module>
         <module>geoplatform-ws-basic-connector</module>
         <module>geoplatform-ws-geonetwork-connector</module>
         <module>geoplatform-ws-csw-connector</module>

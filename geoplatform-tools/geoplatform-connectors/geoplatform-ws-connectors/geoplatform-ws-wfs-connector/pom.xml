@@ -17,9 +17,10 @@
     <dependencies>
         <dependency>
             <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-ws-api-connector</artifactId>
+            <artifactId>geoplatform-ws-impl-connector</artifactId>
             <version>${project.version}</version>
         </dependency>
+        
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-wfs-api</artifactId>

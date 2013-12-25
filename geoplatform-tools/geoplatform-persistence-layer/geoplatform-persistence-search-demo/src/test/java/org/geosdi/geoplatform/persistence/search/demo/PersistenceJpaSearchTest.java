@@ -40,7 +40,6 @@ import org.geosdi.geoplatform.persistence.search.demo.dao.jpa.search.ICarSeachDA
 import org.geosdi.geoplatform.persistence.search.demo.model.CarSearch;
 import org.junit.After;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -73,7 +72,6 @@ public class PersistenceJpaSearchTest {
     }
 
     @Test
-    @Ignore(value = "Waiting for Hib Search 4.5.0")
     public void testSearchLucene() throws Exception {
         insert();
 

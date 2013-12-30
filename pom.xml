@@ -616,8 +616,8 @@
             <!-- =========================================================== -->
             
             <dependency>
-                <groupId>commons-pool</groupId>
-                <artifactId>commons-pool</artifactId>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-pool2</artifactId>
                 <version>${commons-pool-version}</version>
             </dependency>
             
@@ -1676,7 +1676,7 @@
         
         <ehcache-version>2.6.3</ehcache-version>
         
-        <commons-pool-version>1.6</commons-pool-version>
+        <commons-pool-version>2.0</commons-pool-version>
         
         <geonetwork-version>1.0-SNAPSHOT</geonetwork-version>
         

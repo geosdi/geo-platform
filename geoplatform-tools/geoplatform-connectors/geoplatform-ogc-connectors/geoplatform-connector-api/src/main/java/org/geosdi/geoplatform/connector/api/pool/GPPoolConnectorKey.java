@@ -101,7 +101,7 @@ public class GPPoolConnectorKey {
     public int hashCode() {
         int hash = 5;
         hash = 47 * hash + (this.serverUrl != null ? this.serverUrl.hashCode()
-                            : 0);
+                : 0);
         return hash;
     }
 
@@ -114,8 +114,7 @@ public class GPPoolConnectorKey {
             return false;
         }
         final GPPoolConnectorKey other = (GPPoolConnectorKey) obj;
-        if (this.serverUrl != other.serverUrl && (this.serverUrl == null || !this.serverUrl.equals(
-                                                  other.serverUrl))) {
+        if (this.serverUrl != other.serverUrl && (this.serverUrl == null || !this.serverUrl.equals(other.serverUrl))) {
             return false;
         }
         return true;
@@ -128,4 +127,5 @@ public class GPPoolConnectorKey {
                 + ", proxyConfiguration = " + proxyConfiguration
                 + ", version = " + version + '}';
     }
+
 }

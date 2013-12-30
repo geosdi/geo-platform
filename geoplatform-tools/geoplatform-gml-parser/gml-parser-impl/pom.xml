@@ -23,7 +23,21 @@
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>gml-parser-api</artifactId>
-            <version>1.7-SNAPSHOT</version>
+            <version>${project.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.vividsolutions</groupId>
+            <artifactId>jts</artifactId>
+        </dependency>
+        
+        <!-- =========================================================== -->
+        <!-- ===================== COMMONS-POOL ======================== -->
+        <!-- =========================================================== -->
+        
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
         </dependency>
         
         <dependency>

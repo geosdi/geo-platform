@@ -40,7 +40,6 @@ import org.geosdi.geoplatform.connector.GPWFSConnectorStore;
 import org.geosdi.geoplatform.connector.WFSVersion;
 import org.geosdi.geoplatform.connector.api.pool.GPPoolConnectorFactory;
 import org.geosdi.geoplatform.connector.api.pool.GPPoolConnectorKey;
-import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 
 /**
  *
@@ -50,7 +49,7 @@ import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 public class GPWFSConnectorFactory extends GPPoolConnectorFactory<GPPoolConnectorKey, GPWFSConnectorStore> {
 
     @Override
-    public GPWFSConnectorStore makeObject(GPPoolConnectorKey key) throws Exception {
+    public GPWFSConnectorStore create(GPPoolConnectorKey key) throws Exception {
         Preconditions.checkNotNull(key, "The GPPoolConnectorKey "
                 + "must not be null");
 

@@ -35,23 +35,23 @@
  */
 package org.geosdi.geoplatform.connector.api.pool;
 
-import org.apache.commons.pool.impl.GenericKeyedObjectPool;
+import org.apache.commons.pool2.impl.GenericKeyedObjectPoolConfig;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPPoolConnectorConfig extends GenericKeyedObjectPool.Config {
+public class GPPoolConnectorConfig extends GenericKeyedObjectPoolConfig {
 
     {
-        maxIdle = 10;
-        maxActive = 10;
-        maxTotal = GPPoolConnectorCapacity.MEDIUM.getValue();
-        minIdle = 1;
-        whenExhaustedAction = GenericKeyedObjectPool.WHEN_EXHAUSTED_GROW;
-        timeBetweenEvictionRunsMillis = 1000L * 60L * 10L;
-        numTestsPerEvictionRun = 25;
-        minEvictableIdleTimeMillis = 1000L * 60L * 5L;
+        super.setMaxIdlePerKey(10);
+        super.setMaxTotal(10);
+        super.setMinIdlePerKey(1);
+        super.setJmxEnabled(Boolean.FALSE);
+        super.setTimeBetweenEvictionRunsMillis(1000L * 60L * 10L);
+        super.setNumTestsPerEvictionRun(25);
+        super.setMinEvictableIdleTimeMillis(1000L * 60L * 5L);
     }
+
 }

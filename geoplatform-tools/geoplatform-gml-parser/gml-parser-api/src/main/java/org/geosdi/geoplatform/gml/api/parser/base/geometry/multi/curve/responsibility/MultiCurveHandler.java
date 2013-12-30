@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.base.geometry.multi.curve.responsibility;
 
-import com.sun.org.apache.bcel.internal.generic.BREAKPOINT;
 import com.vividsolutions.jts.geom.LineString;
 import java.util.List;
 import org.geosdi.geoplatform.gml.api.AbstractCurve;

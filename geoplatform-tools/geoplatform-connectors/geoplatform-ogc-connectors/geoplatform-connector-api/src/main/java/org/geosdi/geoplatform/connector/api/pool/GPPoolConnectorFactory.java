@@ -35,7 +35,9 @@
  */
 package org.geosdi.geoplatform.connector.api.pool;
 
-import org.apache.commons.pool.BaseKeyedPoolableObjectFactory;
+import org.apache.commons.pool2.BaseKeyedPooledObjectFactory;
+import org.apache.commons.pool2.PooledObject;
+import org.apache.commons.pool2.impl.DefaultPooledObject;
 import org.geosdi.geoplatform.connector.api.GeoPlatformConnector;
 
 /**
@@ -44,11 +46,16 @@ import org.geosdi.geoplatform.connector.api.GeoPlatformConnector;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public abstract class GPPoolConnectorFactory<K extends GPPoolConnectorKey, C extends GeoPlatformConnector>
-        extends BaseKeyedPoolableObjectFactory<K, C> {
+        extends BaseKeyedPooledObjectFactory<K, C> {
 
     @Override
-    public void destroyObject(K key,
-            C obj) throws Exception {
-        obj.dispose();
+    public PooledObject<C> wrap(C value) {
+        return new DefaultPooledObject<C>(value);
     }
+
+    @Override
+    public void destroyObject(K key, PooledObject<C> p) throws Exception {
+        p.getObject().dispose();
+    }
+
 }

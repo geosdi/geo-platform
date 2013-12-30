@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.connector.pool.builder;
 
 import com.google.common.base.Preconditions;
-import org.apache.commons.pool.impl.GenericKeyedObjectPool;
+import org.apache.commons.pool2.impl.GenericKeyedObjectPool;
 import org.geosdi.geoplatform.connector.GPWFSConnectorStore;
 import org.geosdi.geoplatform.connector.api.AbstractConnectorBuilder;
 import org.geosdi.geoplatform.connector.api.pool.GPPoolConnectorConfig;

@@ -22,6 +22,28 @@
             <version>${project.version}</version>
         </dependency>
         
+        <!-- =========================================================== -->
+        <!-- ===================== COMMONS-POOL ======================== -->
+        <!-- =========================================================== -->
+        
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
+        </dependency>
+        
+        <!-- =========================================================== -->
+        <!-- ================== APACHE HTTPCOMPONENTS ================== -->
+        <!-- =========================================================== -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+        </dependency>
+        
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-csw-binding</artifactId>
@@ -118,7 +140,7 @@
         </plugins>
 
         <!-- TODO: the resources stuff hardcodes paths to source + test directories, 
-     			we should be able to use some properties here -->
+        we should be able to use some properties here -->
         <resources>
             <resource>
                 <directory>${basedir}/src/main/java</directory>

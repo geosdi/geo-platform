@@ -46,25 +46,24 @@ import org.geosdi.geoplatform.connector.api.pool.GPPoolConnectorKey;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPCSWConnectorFactory
-        extends GPPoolConnectorFactory<GPPoolConnectorKey, GPCatalogConnectorStore> {
+public class GPCSWConnectorFactory extends GPPoolConnectorFactory<GPPoolConnectorKey, GPCatalogConnectorStore> {
 
     @Override
-    public GPCatalogConnectorStore makeObject(GPPoolConnectorKey key)
+    public GPCatalogConnectorStore create(GPPoolConnectorKey key)
             throws Exception {
-
         Preconditions.checkNotNull(key, "The GPPoolConnectorKey "
                 + "must not be null");
 
         GPCatalogVersion v = GPCatalogVersion.fromString(key.getVersion());
 
         GPCatalogConnectorStore cswConnector = key.getProxyConfiguration() != null
-                                               ? new GPCatalogConnectorStore(
-                key.getServerUrl(), key.getSecurityConnector(),
-                key.getProxyConfiguration(), v)
-                                               : new GPCatalogConnectorStore(
-                key.getServerUrl(), key.getSecurityConnector(), v);
+                ? new GPCatalogConnectorStore(
+                        key.getServerUrl(), key.getSecurityConnector(),
+                        key.getProxyConfiguration(), v)
+                : new GPCatalogConnectorStore(
+                        key.getServerUrl(), key.getSecurityConnector(), v);
 
         return cswConnector;
     }
+
 }

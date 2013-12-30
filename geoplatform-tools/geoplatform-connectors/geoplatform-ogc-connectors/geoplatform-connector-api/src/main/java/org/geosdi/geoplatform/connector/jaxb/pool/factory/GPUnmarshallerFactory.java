@@ -37,15 +37,16 @@ package org.geosdi.geoplatform.connector.jaxb.pool.factory;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
-import org.apache.commons.pool.BasePoolableObjectFactory;
+import org.apache.commons.pool2.BasePooledObjectFactory;
+import org.apache.commons.pool2.PooledObject;
+import org.apache.commons.pool2.impl.DefaultPooledObject;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPUnmarshallerFactory
-        extends BasePoolableObjectFactory<Unmarshaller> {
+public class GPUnmarshallerFactory extends BasePooledObjectFactory<Unmarshaller> {
 
     private final JAXBContext jaxbContext;
 
@@ -54,7 +55,13 @@ public class GPUnmarshallerFactory
     }
 
     @Override
-    public Unmarshaller makeObject() throws Exception {
+    public Unmarshaller create() throws Exception {
         return jaxbContext.createUnmarshaller();
     }
+
+    @Override
+    public PooledObject<Unmarshaller> wrap(Unmarshaller obj) {
+        return new DefaultPooledObject(obj);
+    }
+
 }

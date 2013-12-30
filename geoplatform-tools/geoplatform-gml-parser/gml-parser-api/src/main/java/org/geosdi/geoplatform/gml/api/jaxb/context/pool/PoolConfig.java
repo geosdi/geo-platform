@@ -35,22 +35,22 @@
  */
 package org.geosdi.geoplatform.gml.api.jaxb.context.pool;
 
-import org.apache.commons.pool.impl.GenericObjectPool;
+import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class PoolConfig extends GenericObjectPool.Config {
+public class PoolConfig extends GenericObjectPoolConfig {
 
     {
-        maxIdle = 3;
-        maxActive = 20;
-        minIdle = 1;
-        whenExhaustedAction = GenericObjectPool.WHEN_EXHAUSTED_GROW;
-        timeBetweenEvictionRunsMillis = 1000L * 60L * 10L;
-        numTestsPerEvictionRun = 10;
-        minEvictableIdleTimeMillis = 1000L * 60L * 5L;
+        super.setMaxIdle(3);
+        super.setMaxTotal(20);
+        super.setMinIdle(1);
+        super.setTimeBetweenEvictionRunsMillis(1000L * 60L * 10L);
+        super.setNumTestsPerEvictionRun(10);
+        super.setMinEvictableIdleTimeMillis(1000L * 60L * 5L);
     }
+
 }

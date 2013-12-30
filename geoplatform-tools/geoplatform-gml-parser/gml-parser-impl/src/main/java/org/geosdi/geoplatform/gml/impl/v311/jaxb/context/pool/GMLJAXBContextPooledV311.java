@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.gml.impl.v311.jaxb.context.pool;
 
 import javax.xml.bind.JAXBContext;
-import org.apache.commons.pool.impl.GenericObjectPool;
+import org.apache.commons.pool2.impl.GenericObjectPool;
 import org.geosdi.geoplatform.gml.api.jaxb.context.GMLMarshaller;
 import org.geosdi.geoplatform.gml.api.jaxb.context.pool.GMLJAXBContextPooled;
 import org.geosdi.geoplatform.gml.api.jaxb.context.pool.PoolConfig;

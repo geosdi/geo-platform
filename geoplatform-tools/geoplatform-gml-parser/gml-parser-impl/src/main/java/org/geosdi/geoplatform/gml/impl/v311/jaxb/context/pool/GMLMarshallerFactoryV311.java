@@ -37,7 +37,9 @@ package org.geosdi.geoplatform.gml.impl.v311.jaxb.context.pool;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
-import org.apache.commons.pool.BasePoolableObjectFactory;
+import org.apache.commons.pool2.BasePooledObjectFactory;
+import org.apache.commons.pool2.PooledObject;
+import org.apache.commons.pool2.impl.DefaultPooledObject;
 import org.geosdi.geoplatform.gml.api.jaxb.context.GMLMarshaller;
 import org.geosdi.geoplatform.gml.impl.v311.jaxb.context.GMLMarshallerV311;
 
@@ -47,7 +49,7 @@ import org.geosdi.geoplatform.gml.impl.v311.jaxb.context.GMLMarshallerV311;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class GMLMarshallerFactoryV311
-        extends BasePoolableObjectFactory<GMLMarshaller> {
+        extends BasePooledObjectFactory<GMLMarshaller> {
 
     private final JAXBContext jaxbContext;
 
@@ -56,10 +58,16 @@ public class GMLMarshallerFactoryV311
     }
 
     @Override
-    public GMLMarshaller makeObject() throws Exception {
+    public GMLMarshaller create() throws Exception {
         Marshaller marshaller = jaxbContext.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
         return new GMLMarshallerV311(marshaller);
     }
+
+    @Override
+    public PooledObject<GMLMarshaller> wrap(GMLMarshaller obj) {
+        return new DefaultPooledObject<GMLMarshaller>(obj);
+    }
+
 }

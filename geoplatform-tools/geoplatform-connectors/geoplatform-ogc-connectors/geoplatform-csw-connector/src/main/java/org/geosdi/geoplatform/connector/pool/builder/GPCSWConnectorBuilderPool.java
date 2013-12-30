@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.connector.pool.builder;
 
 import com.google.common.base.Preconditions;
-import org.apache.commons.pool.impl.GenericKeyedObjectPool;
+import org.apache.commons.pool2.impl.GenericKeyedObjectPool;
 import org.geosdi.geoplatform.connector.GPCatalogConnectorStore;
 import org.geosdi.geoplatform.connector.api.AbstractConnectorBuilder;
 import org.geosdi.geoplatform.connector.api.pool.GPPoolConnectorConfig;
@@ -48,13 +48,13 @@ import org.geosdi.geoplatform.connector.pool.factory.GPCSWConnectorFactory;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPCSWConnectorBuilderPool
-        extends AbstractConnectorBuilder<GPCSWConnectorBuilderPool, GPCatalogConnectorStore> {
+public class GPCSWConnectorBuilderPool extends AbstractConnectorBuilder<GPCSWConnectorBuilderPool, GPCatalogConnectorStore> {
 
     static {
         catalogConnectoPool = new GenericKeyedObjectPool<GPPoolConnectorKey, GPCatalogConnectorStore>(
                 new GPCSWConnectorFactory(), new GPPoolConnectorConfig());
     }
+
     //
     private static GenericKeyedObjectPool<GPPoolConnectorKey, GPCatalogConnectorStore> catalogConnectoPool;
 
@@ -68,10 +68,10 @@ public class GPCSWConnectorBuilderPool
                 + "not be null.");
 
         GPPoolConnectorKey keyConnector = super.proxyConfiguration != null
-                                          ? new GPPoolConnectorKey(
-                serverUrl, securityConnector, proxyConfiguration, version)
-                                          : new GPPoolConnectorKey(
-                serverUrl, securityConnector, version);
+                ? new GPPoolConnectorKey(
+                        serverUrl, securityConnector, proxyConfiguration, version)
+                : new GPPoolConnectorKey(
+                        serverUrl, securityConnector, version);
 
         GPCatalogConnectorStore catalogStore = catalogConnectoPool.borrowObject(
                 keyConnector);
@@ -80,4 +80,5 @@ public class GPCSWConnectorBuilderPool
 
         return catalogStore;
     }
+
 }

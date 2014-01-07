@@ -1364,6 +1364,36 @@
                         </execution>
                     </executions>
                 </plugin>
+                
+                <plugin>
+                    <groupId>com.mycila.maven-license-plugin</groupId>
+                    <artifactId>maven-license-plugin</artifactId>
+                    <version>1.10.b1</version>
+                    <configuration>
+                        <header>etc/header.txt</header>
+                        <aggregate>true</aggregate>
+                        <headerDefinitions>
+                            <headerDefinition>etc/geoPlatformDefinition.xml</headerDefinition>
+                        </headerDefinitions>
+                        <strictCheck>true</strictCheck>
+                        <includes>
+                            <include>**/java/**</include>
+                            <include>**/test/**</include>
+                        </includes>
+                        <excludes>
+                            <exclude>**/target/**</exclude>
+                            <exclude>**/public/**</exclude>
+                            <exclude>**/site/**</exclude>
+                        </excludes>
+                        <useDefaultExcludes>true</useDefaultExcludes>
+                        <useDefaultMapping>true</useDefaultMapping>
+                        <properties>
+                            <year>2014</year>
+                            <email>giuseppe.lascaleia@geosdi.org</email>
+                        </properties>
+                        <encoding>UTF-8</encoding>
+                    </configuration>
+                </plugin>
             
                 <plugin>
                     <artifactId>maven-failsafe-plugin</artifactId>

@@ -113,6 +113,7 @@ public class GPFileUploader {
                 // This event is fired just before the form is submitted. We can
                 // take this opportunity to perform validation
                 if (!isValidExtensions(fileUpload.getFilename(), extensions)) {
+                    uploaderProgressBar.hide();
                     LayoutManager.getInstance().getStatusMap().setStatus(
                             BasicWidgetConstants.INSTANCE.GPFileUploader_failedStatusText(),
                             EnumSearchStatus.STATUS_NO_SEARCH.toString());

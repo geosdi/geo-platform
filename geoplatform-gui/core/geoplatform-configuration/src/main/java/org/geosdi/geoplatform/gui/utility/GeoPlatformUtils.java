@@ -88,4 +88,18 @@ public class GeoPlatformUtils {
         return true;
     }
 
+    public static boolean isNotEmpty(final Object[] obj) {
+        if (obj == null || obj.length == 0) {
+            return false;
+        }
+        return true;
+    }
+
+    public static <T> boolean isNotEmpty(final List<T> objList) {
+        if (objList == null || objList.isEmpty()) {
+            return false;
+        }
+        return true;
+    }
+
 }

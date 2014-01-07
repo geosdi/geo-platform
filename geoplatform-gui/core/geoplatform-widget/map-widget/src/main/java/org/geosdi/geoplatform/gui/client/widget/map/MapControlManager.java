@@ -46,12 +46,14 @@ import org.geosdi.geoplatform.gui.client.widget.map.style.VectorFeatureStyle;
 import org.geosdi.geoplatform.gui.client.widget.viewport.ViewportUtility;
 import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
+import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
 import org.gwtopenmaps.openlayers.client.Bounds;
 import org.gwtopenmaps.openlayers.client.Map;
 import org.gwtopenmaps.openlayers.client.Projection;
 import org.gwtopenmaps.openlayers.client.control.DrawFeature;
 import org.gwtopenmaps.openlayers.client.control.ModifyFeature;
 import org.gwtopenmaps.openlayers.client.control.SelectFeature;
+import org.gwtopenmaps.openlayers.client.feature.Feature;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 import org.gwtopenmaps.openlayers.client.geometry.Geometry;
 import org.gwtopenmaps.openlayers.client.geometry.MultiPolygon;
@@ -164,9 +166,17 @@ public class MapControlManager {
     }
 
     /**
-     * Erase all Features added to Vector Layer
+     * Erase all Features and the corrispective popups added to the Vector Layer
      */
     public void eraseFeatures() {
+        Feature[] features = this.vector.getFeatures();
+        if (GeoPlatformUtils.isNotEmpty(features)) {
+            for (Feature feature : this.vector.getFeatures()) {
+                if (feature.getPopup() != null) {
+                    feature.resetPopup();
+                }
+            }
+        }
         this.vector.destroyFeatures();
     }
 
@@ -215,8 +225,8 @@ public class MapControlManager {
     public DrawFeature getDrawFeatureControl() {
         return this.drawFeature.getControl();
     }
-    
-     public DrawFeature getDrawCircleFeatureControl() {
+
+    public DrawFeature getDrawCircleFeatureControl() {
         return this.drawCircle.getControl();
     }
 

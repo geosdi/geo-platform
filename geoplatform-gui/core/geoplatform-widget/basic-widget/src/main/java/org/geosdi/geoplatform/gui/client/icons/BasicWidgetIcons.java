@@ -71,6 +71,9 @@ public interface BasicWidgetIcons extends ImageBundle {
     @Resource("gotoXY.png")
     AbstractImagePrototype gotoXY();
 
+    @Resource("track_marker.png")
+    AbstractImagePrototype trackMarker();
+
     @Resource("delete.png")
     AbstractImagePrototype delete();
 

@@ -84,4 +84,8 @@ public abstract class AbstractXMPPEvent<T extends EventHandler> extends GwtEvent
     public final void setMessageAttribute(final String attributeName, final String attributeValue) {
         attributes.put(attributeName, attributeValue);
     }
+
+    public void setAttributes(Map<String, String> attributes) {
+        this.attributes = attributes;
+    }
 }

@@ -69,17 +69,17 @@ import org.geosdi.geoplatform.gui.puregwt.xmpp.event.AbstractXMPPEvent;
  * @email nazzareno.sileno@geosdi.org
  */
 public class GPXMPPClient {
-
+    
     private Logger logger = Logger.getLogger("");
-
+    
     public void userXMPPLogin(String username, String password, String hostXmppServer) {
         logger.info("Executing xmpp code for: " + hostXmppServer);
         final XMPPSessionGinjector ginjector = GWT.create(XMPPSessionGinjector.class);
         final XmppSession sessionXmpp = ginjector.getXmppSession();
-
+        
         final XmppBoshConnection connection = ginjector.getXmppBoshConnection();
         connection.setSettings(new ConnectionSettings("http-bind", hostXmppServer));
-
+        
         XmppURI xmppURI = XmppURI.uri(username + '@' + hostXmppServer);
         sessionXmpp.login(xmppURI, password);
 
@@ -121,7 +121,7 @@ public class GPXMPPClient {
                 logger.info(XMPPModuleConstants.INSTANCE.GPXMPPClient_xmppConnectionInfoText()
                         + "\n "
                         + XMPPModuleMessages.INSTANCE.presenceReceivedFromMessage(
-                        presence.getFromAsString(), presence.toString()));
+                                presence.getFromAsString(), presence.toString()));
 //                GeoPlatformMessage.infoMessage(XMPPModuleConstants.INSTANCE.
 //                        GPXMPPClient_xmppConnectionInfoText(),
 //                        XMPPModuleMessages.INSTANCE.presenceReceivedFromMessage(
@@ -139,9 +139,9 @@ public class GPXMPPClient {
                 Message message = event.getMessage();
 //                message.getAttribute(null);
                 logger.info("Message received: " + message.getSubject());
-
+                
                 XmppRoster roster = ginjector.getRoster();
-
+                
                 Collection<RosterItem> items = roster.getItems();
                 logger.info("**** ROSTER ALL ITEMS: " + items.size());
                 for (RosterItem rosterItem : items) {
@@ -150,16 +150,17 @@ public class GPXMPPClient {
                         System.out.println("### AVAILABLE ### " + rosterItem.getJID() + " [" + rosterItem.getName() + "]");
                     }
                 }
-
+                
                 if (message.getSubject() != null && message.getBody() != null) {
                     AbstractXMPPEvent xmppEvent = XMPPEventRepository.getXMPPEventForSubject(message.getSubject());
                     if (xmppEvent != null) {
                         xmppEvent.setMessageBody(message.getBody());
+                        xmppEvent.setAttributes(message.getAttributes());
                         XMPPHandlerManager.fireEvent(xmppEvent);
                         logger.fine("Message fired");
                     }
                 }
-
+                
                 String subject = message.getSubject() == null
                         ? XMPPModuleConstants.INSTANCE.GPXMPPClient_newMessageText()
                         : message.getSubject();
@@ -167,7 +168,7 @@ public class GPXMPPClient {
                 logger.info(subject + "\n " + message.getBody());
             }
         });
-
+        
         final ChatManager chatManager = ginjector.getChatManager();
 
 //        xmppURI = XmppURI.uri("service@" + hostXmppServer);

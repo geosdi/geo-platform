@@ -37,6 +37,8 @@ package org.geosdi.geoplatform.gui.configuration.choice.mediator;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import java.util.Collections;
 import java.util.List;
@@ -55,6 +57,7 @@ public abstract class AbstractChoiseMediator<W extends Widget, K extends ChoiseC
     protected final Map<K, V> choiseColleagueRegistry = Maps.<K, V>newHashMap();
     protected W widget;
     protected V defaultColleague;
+    protected HorizontalPanel hp;
 
     @Override
     public final V getChoiseColleague(K key) {
@@ -89,6 +92,27 @@ public abstract class AbstractChoiseMediator<W extends Widget, K extends ChoiseC
         if (defaultColleague != null) {
             defaultColleague.resetColleague();
         }
+    }
+
+    @Override
+    public final HorizontalPanel getGroupChoiseWidget() {
+        if (choiseColleagueRegistry.isEmpty()) {
+            throw new IllegalStateException("The Choise Registry is Empty.");
+        }
+
+        return this.hp = (hp == null) ? buildHorizontalPanel() : hp;
+    }
+
+    final HorizontalPanel buildHorizontalPanel() {
+        HorizontalPanel panel = new HorizontalPanel();
+        panel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+        panel.setSpacing(16);
+        for (Map.Entry<K, V> entry : choiseColleagueRegistry.entrySet()) {
+            V getMapChoiseColleague = entry.getValue();
+            panel.add(getMapChoiseColleague.getChoiseButton());
+        }
+
+        return panel;
     }
 
 }

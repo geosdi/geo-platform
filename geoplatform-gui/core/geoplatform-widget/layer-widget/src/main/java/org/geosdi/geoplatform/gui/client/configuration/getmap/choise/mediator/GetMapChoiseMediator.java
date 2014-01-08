@@ -35,9 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.client.configuration.getmap.choise.mediator;
 
-import com.google.gwt.user.client.ui.HasHorizontalAlignment;
-import com.google.gwt.user.client.ui.HorizontalPanel;
-import java.util.Map;
 import org.geosdi.geoplatform.gui.client.configuration.getmap.choise.mediator.colleague.GetMapChoiseColleague;
 import org.geosdi.geoplatform.gui.client.configuration.getmap.choise.mediator.colleague.GetMapColleagueKey;
 import org.geosdi.geoplatform.gui.client.widget.tree.form.GPTreeFormWidget;
@@ -50,8 +47,6 @@ import org.geosdi.geoplatform.gui.configuration.choice.mediator.colleague.Choise
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class GetMapChoiseMediator extends AbstractChoiseMediator<GPTreeFormWidget, GetMapColleagueKey, GetMapChoiseColleague> {
-
-    private HorizontalPanel hp;
 
     @Override
     public void registerChoiseColleague(GetMapChoiseColleague choiseColleague) {
@@ -94,27 +89,6 @@ public class GetMapChoiseMediator extends AbstractChoiseMediator<GPTreeFormWidge
         }
 
         super.widget.getFormPanel().remove(colleague.getChoiseWidget());
-    }
-
-    @Override
-    public HorizontalPanel getGroupChoiseWidget() {
-        if (choiseColleagueRegistry.isEmpty()) {
-            throw new IllegalStateException("The Choise Registry is Empty.");
-        }
-
-        return this.hp = (hp == null) ? buildHorizontalPanel() : hp;
-    }
-
-    final HorizontalPanel buildHorizontalPanel() {
-        HorizontalPanel panel = new HorizontalPanel();
-        panel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        panel.setSpacing(16);
-        for (Map.Entry<GetMapColleagueKey, GetMapChoiseColleague> entry : choiseColleagueRegistry.entrySet()) {
-            GetMapChoiseColleague getMapChoiseColleague = entry.getValue();
-            panel.add(getMapChoiseColleague.getChoiseButton());
-        }
-
-        return panel;
     }
 
 }

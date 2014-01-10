@@ -147,17 +147,18 @@ public class GPXMPPClient {
                 for (RosterItem rosterItem : items) {
 //                    System.out.println("*** " + rosterItem.toString() + " [" + rosterItem.getName() + "]");
                     if (rosterItem.isAvailable()) {
-                        System.out.println("### AVAILABLE ### " + rosterItem.getJID() + " [" + rosterItem.getName() + "]");
+                        logger.severe("### AVAILABLE ### " + rosterItem.getJID() + " [" + rosterItem.getName() + "]");
                     }
                 }
                 
                 if (message.getSubject() != null && message.getBody() != null) {
                     AbstractXMPPEvent xmppEvent = XMPPEventRepository.getXMPPEventForSubject(message.getSubject());
+                    logger.info("XMPP Event found: " + xmppEvent);
                     if (xmppEvent != null) {
                         xmppEvent.setMessageBody(message.getBody());
                         xmppEvent.setAttributes(message.getAttributes());
                         XMPPHandlerManager.fireEvent(xmppEvent);
-                        logger.fine("Message fired");
+                        logger.info("Message fired");
                     }
                 }
                 

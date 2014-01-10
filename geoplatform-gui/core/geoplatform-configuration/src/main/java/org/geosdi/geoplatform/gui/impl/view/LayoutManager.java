@@ -1,42 +1,41 @@
 /**
  *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
+ * geo-platform Rich webgis framework http://geo-platform.org
+ * ====================================================================
  *
- *   Copyright (C) 2008-2014 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2014 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version. This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details. You should have received a copy of the GNU General Public License
+ * along with this program. If not, see http://www.gnu.org/licenses/
  *
- *   ====================================================================
+ * ====================================================================
  *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
+ * Linking this library statically or dynamically with other modules is making a
+ * combined work based on this library. Thus, the terms and conditions of the
+ * GNU General Public License cover the whole combination.
  *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * As a special exception, the copyright holders of this library give you
+ * permission to link this library with independent modules to produce an
+ * executable, regardless of the license terms of these independent modules, and
+ * to copy and distribute the resulting executable under terms of your choice,
+ * provided that you also meet, for each linked independent module, the terms
+ * and conditions of the license of that module. An independent module is a
+ * module which is not derived from or based on this library. If you modify this
+ * library, you may extend this exception to your version of the library, but
+ * you are not obligated to do so. If you do not wish to do so, delete this
+ * exception statement from your version.
  */
 package org.geosdi.geoplatform.gui.impl.view;
 
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.widget.Component;
+import com.extjs.gxt.ui.client.widget.TabItem;
 import com.google.gwt.user.client.ui.Widget;
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.event.ScaleVisibleEvent;
@@ -46,7 +45,7 @@ import org.gwtopenmaps.openlayers.client.MapWidget;
 
 /**
  * @author giuseppe
- * 
+ *
  */
 public class LayoutManager extends GeoPlatformLayoutManager {
 
@@ -57,7 +56,7 @@ public class LayoutManager extends GeoPlatformLayoutManager {
 
     /**
      * Build Singleton Instace
-     * 
+     *
      * @return Instance Reference
      */
     public static LayoutManager getInstance() {
@@ -66,8 +65,8 @@ public class LayoutManager extends GeoPlatformLayoutManager {
 
     /**
      * Add a generic Widget to Center
-     * 
-     * @param w 
+     *
+     * @param w
      */
     public static void addComponentToCenter(Widget w) {
         getInstance().center.removeAll();
@@ -75,13 +74,12 @@ public class LayoutManager extends GeoPlatformLayoutManager {
         getInstance().center.layout();
         MapHandlerManager.fireEvent(new ScaleVisibleEvent(
                 w instanceof MapWidget ? true : false));
-
     }
 
     /**
      * Add a generic Widget to West
-     * 
-     * @param w 
+     *
+     * @param w
      */
     public static void addComponentToWest(Widget w) {
         getInstance().west.add(w);
@@ -90,16 +88,16 @@ public class LayoutManager extends GeoPlatformLayoutManager {
 
     /**
      * Remove a generic widget from West
-     * 
-     * @param w 
+     *
+     * @param w
      */
     public static void removeComponentFromWest(Widget w) {
         getInstance().west.remove(w);
         getInstance().west.layout();
     }
-    
+
     /**
-     * 
+     *
      */
     public static boolean isWidgetPresentOnWest(Widget w) {
         return getInstance().west.getItems().contains(w);
@@ -107,8 +105,8 @@ public class LayoutManager extends GeoPlatformLayoutManager {
 
     /**
      * Add a generic Widget to East
-     * 
-     * @param w 
+     *
+     * @param w
      */
     public static void addComponentToEast(Widget w) {
         getInstance().east.add(w);
@@ -117,8 +115,8 @@ public class LayoutManager extends GeoPlatformLayoutManager {
 
     /**
      * Add a generic Widget to North
-     * 
-     * @param w 
+     *
+     * @param w
      */
     public static void addComponentToNorth(Widget w) {
         getInstance().north.add(w);
@@ -127,17 +125,16 @@ public class LayoutManager extends GeoPlatformLayoutManager {
 
     /**
      * Add a generic Widget to South
-     * 
-     * @param w 
+     *
+     * @param w
      */
-    public static void addComponentToSouth(Widget w) {
-        getInstance().south.add(w);
-        getInstance().south.layout();
+    public static void addComponentToSouth(TabItem w) {
+        getInstance().southTabPanel.add(w);
     }
 
     /**
      * Show or Hide West panel
-     * 
+     *
      * @param visible
      */
     public static void manageWest(boolean visible) {
@@ -150,6 +147,20 @@ public class LayoutManager extends GeoPlatformLayoutManager {
     }
 
     /**
+     * Show or Hide South panel
+     *
+     * @param visible
+     */
+    public static void manageSouth(boolean visible) {
+        if (visible) {
+            getInstance().south.show();
+        } else {
+            getInstance().south.hide();
+        }
+        Dispatcher.forwardEvent(GeoPlatformEvents.UPDATE_CENTER);
+    }
+
+    /**
      * Layout West Panel
      */
     public static void layoutWest() {
@@ -157,8 +168,15 @@ public class LayoutManager extends GeoPlatformLayoutManager {
     }
 
     /**
+     * Layout South Panel
+     */
+    public static void layoutSouth() {
+        getInstance().south.layout();
+    }
+
+    /**
      * Check the Visibility of West Panel
-     * 
+     *
      * @return boolean
      */
     public static boolean isWestVisible() {
@@ -167,7 +185,7 @@ public class LayoutManager extends GeoPlatformLayoutManager {
 
     /**
      * Check If always one Widget is visible on West
-     * 
+     *
      * @return boolean
      */
     public static boolean isOneWidgetVisibleAtWest() {
@@ -181,7 +199,7 @@ public class LayoutManager extends GeoPlatformLayoutManager {
 
     /**
      * Reset North Component Border Layout Size
-     * 
+     *
      */
     public static void normalizeNorthPanel() {
         if ((getInstance().north.getItemCount() == 0)

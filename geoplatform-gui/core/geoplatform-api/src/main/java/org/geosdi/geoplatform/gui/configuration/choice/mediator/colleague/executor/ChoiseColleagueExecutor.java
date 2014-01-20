@@ -42,6 +42,6 @@ package org.geosdi.geoplatform.gui.configuration.choice.mediator.colleague.execu
  */
 public interface ChoiseColleagueExecutor {
 
-    void executeColleague();
+    <E> void executeColleague(E param);
 
 }

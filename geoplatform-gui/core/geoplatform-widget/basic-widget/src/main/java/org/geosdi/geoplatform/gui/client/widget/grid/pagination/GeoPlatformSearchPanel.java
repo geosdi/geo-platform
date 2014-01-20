@@ -133,14 +133,17 @@ public abstract class GeoPlatformSearchPanel<C extends Widget, T extends GeoPlat
         formPanel.setFrame(true);
         formPanel.setLayout(new FlowLayout());
         FieldSet searchFieldSet = new FieldSet();
-        searchFieldSet.setHeadingHtml(BasicWidgetConstants.INSTANCE.GeoPlatformSearchPanel_headingText());
+        searchFieldSet.setHeadingHtml(
+                BasicWidgetConstants.INSTANCE.GeoPlatformSearchPanel_headingText());
         FormLayout layout = new FormLayout();
         layout.setLabelWidth(80);
         searchFieldSet.setLayout(layout);
         search = new TextField<String>();
         search.setLabelStyle("width:100px");
-        search.setFieldLabel(BasicWidgetConstants.INSTANCE.GeoPlatformSearchPanel_searchFieldLabelText());
+        search.setFieldLabel(
+                BasicWidgetConstants.INSTANCE.GeoPlatformSearchPanel_searchFieldLabelText());
         search.addKeyListener(new KeyListener() {
+
             @Override
             public void componentKeyUp(ComponentEvent event) {
                 if (((event.getKeyCode() == KeyCodes.KEY_BACKSPACE)
@@ -157,6 +160,7 @@ public abstract class GeoPlatformSearchPanel<C extends Widget, T extends GeoPlat
                     loader.load(0, 25);
                 }
             }
+
         });
         BorderLayoutData data = new BorderLayoutData(LayoutRegion.CENTER);
         data.setMargins(new Margins(5, 5, 5, 5));
@@ -164,7 +168,8 @@ public abstract class GeoPlatformSearchPanel<C extends Widget, T extends GeoPlat
         formPanel.add(searchFieldSet);
         initWidget();
         if (widget == null) {
-            throw new NullPointerException("Widget must be not null (create widget into initWidget method).");
+            throw new NullPointerException(
+                    "Widget must be not null (create widget into initWidget method).");
         }
         formPanel.add(widget);
         this.searchStatus = new SearchStatus();
@@ -172,21 +177,27 @@ public abstract class GeoPlatformSearchPanel<C extends Widget, T extends GeoPlat
         formPanel.getButtonBar().add(this.searchStatus);
         formPanel.getButtonBar().add(new LabelToolItem("    "));
         formPanel.setButtonAlign(HorizontalAlignment.RIGHT);
-        selectButton = new Button(ButtonsConstants.INSTANCE.selectText(), new SelectionListener<ButtonEvent>() {
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                executeSelect();
-            }
-        });
+        selectButton = new Button(ButtonsConstants.INSTANCE.selectText(),
+                new SelectionListener<ButtonEvent>() {
+
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                        executeSelect();
+                    }
+
+                });
         selectButton.setIcon(BasicWidgetResources.ICONS.select());
         selectButton.disable();
         formPanel.addButton(this.selectButton);
-        cancelButton = new Button(ButtonsConstants.INSTANCE.cancelText(), new SelectionListener<ButtonEvent>() {
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                executeCancel();
-            }
-        });
+        cancelButton = new Button(ButtonsConstants.INSTANCE.cancelText(),
+                new SelectionListener<ButtonEvent>() {
+
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                        executeCancel();
+                    }
+
+                });
         cancelButton.setIcon(BasicWidgetResources.ICONS.cancel());
         formPanel.addButton(cancelButton);
         formPanel.setBottomComponent(this.toolBar);
@@ -247,9 +258,11 @@ public abstract class GeoPlatformSearchPanel<C extends Widget, T extends GeoPlat
 
     private void setUpLoadListener() {
         loader.addLoadListener(new LoadListener() {
+
             @Override
             public void loaderBeforeLoad(LoadEvent le) {
-                searchStatus.setBusy(BasicWidgetConstants.INSTANCE.GeoPlatformSearchPanel_connectionBusyStatusText());
+                searchStatus.setBusy(
+                        BasicWidgetConstants.INSTANCE.GeoPlatformSearchPanel_connectionBusyStatusText());
                 if (selectButton.isEnabled()) {
                     selectButton.disable();
                 }
@@ -274,6 +287,7 @@ public abstract class GeoPlatformSearchPanel<C extends Widget, T extends GeoPlat
                             SearchStatusConstants.INSTANCE.STATUS_MESSAGE_SEARCH_ERROR());
                 }
             }
+
         });
     }
 
@@ -290,4 +304,5 @@ public abstract class GeoPlatformSearchPanel<C extends Widget, T extends GeoPlat
     public int getPageSize() {
         return pageSize;
     }
+
 }

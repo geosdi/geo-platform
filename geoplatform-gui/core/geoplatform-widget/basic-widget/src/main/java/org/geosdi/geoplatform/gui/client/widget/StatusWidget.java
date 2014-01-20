@@ -38,8 +38,9 @@ package org.geosdi.geoplatform.gui.client.widget;
 import com.extjs.gxt.ui.client.widget.Status;
 
 /**
- * @author giuseppe
- * 
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public abstract class StatusWidget extends Status {
 
@@ -58,4 +59,5 @@ public abstract class StatusWidget extends Status {
         setIconStyle("x-loading-status");
         setText(text);
     }
+
 }

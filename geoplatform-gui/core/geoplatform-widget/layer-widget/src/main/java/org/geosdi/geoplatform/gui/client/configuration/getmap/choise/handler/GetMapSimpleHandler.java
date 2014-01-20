@@ -35,33 +35,24 @@
  */
 package org.geosdi.geoplatform.gui.client.configuration.getmap.choise.handler;
 
-import com.google.gwt.event.logical.shared.ValueChangeEvent;
-import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import org.geosdi.geoplatform.gui.client.configuration.getmap.choise.mediator.GetMapChoiseMediator;
 import org.geosdi.geoplatform.gui.client.configuration.getmap.choise.mediator.colleague.GetMapColleagueKey;
+import org.geosdi.geoplatform.gui.configuration.choice.mediator.handler.ChoiseChangeHandler;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GetMapSimpleHandler implements ValueChangeHandler<Boolean> {
-
-    private final GetMapChoiseMediator choiseMediator;
+public class GetMapSimpleHandler extends ChoiseChangeHandler<GetMapColleagueKey> {
 
     public GetMapSimpleHandler(GetMapChoiseMediator theChoiseMediator) {
-        this.choiseMediator = theChoiseMediator;
+        super(theChoiseMediator);
     }
 
     @Override
-    public void onValueChange(ValueChangeEvent<Boolean> event) {
-        if (event.getValue()) {
-            this.choiseMediator.displayChoiseWidget(
-                    GetMapColleagueKey.GET_MAP_SIMPLE);
-        } else {
-            this.choiseMediator.hideChoiseWidget(
-                    GetMapColleagueKey.GET_MAP_SIMPLE);
-        }
+    protected GetMapColleagueKey getChoiseColleagueKey() {
+        return GetMapColleagueKey.GET_MAP_SIMPLE;
     }
 
 }

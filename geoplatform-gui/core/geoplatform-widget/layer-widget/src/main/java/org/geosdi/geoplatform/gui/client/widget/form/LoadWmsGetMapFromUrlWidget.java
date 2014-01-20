@@ -142,13 +142,13 @@ public class LoadWmsGetMapFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
         this.saveStatus.setBusy(LayerModuleConstants.INSTANCE.
                 LoadWmsGetMapFromUrlWidget_statusAddingWMSText());
 
-        choiseMediator.executeColleague();
+        choiseMediator.executeColleague(null);
     }
 
     @Override
     public void reset() {
         disableStatus();
-        choiseMediator.resetColleague();
+        choiseMediator.resetColleague(null);
     }
 
     public void showForm() {

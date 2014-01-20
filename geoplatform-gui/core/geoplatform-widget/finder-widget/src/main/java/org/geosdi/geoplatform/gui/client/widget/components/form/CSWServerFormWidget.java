@@ -47,7 +47,7 @@ import org.geosdi.geoplatform.gui.client.i18n.CatalogFinderConstants;
 import org.geosdi.geoplatform.gui.client.i18n.CatalogFinderMessages;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.i18n.status.SaveStatusConstants;
-import org.geosdi.geoplatform.gui.client.puregwt.event.CatalogStatusBarEvent;
+import org.geosdi.geoplatform.gui.client.puregwt.event.StatusWidgetEvent;
 import org.geosdi.geoplatform.gui.client.widget.SaveStatus;
 import org.geosdi.geoplatform.gui.client.widget.SaveStatus.EnumSaveStatus;
 import org.geosdi.geoplatform.gui.client.widget.components.filters.container.CSWServerPaginationContainer;
@@ -68,13 +68,13 @@ import org.geosdi.geoplatform.gui.server.gwt.GPCatalogFinderRemoteImpl;
 public class CSWServerFormWidget
         extends GeoPlatformFormWidget<GPServerBeanModel> {
 
-    private CSWServerPaginationContainer catalogWindget;
+    private final CSWServerPaginationContainer catalogWindget;
     private FormButtonBinding formButtonBinding; // Monitors the valid state of a form and enabled / disabled all buttons
     private TextField<String> urlField;
     private TextField<String> aliasField;
     private Button saveButton;
     private String urlEncoding;
-    private GPEventBus bus;
+    private final GPEventBus bus;
 
     public CSWServerFormWidget(CSWServerPaginationContainer catalogWindget,
             GPEventBus bus) {
@@ -213,7 +213,7 @@ public class CSWServerFormWidget
                         "\n*** Error on saving server: " + caught.getMessage()); // TODO logger
                 setStatus(EnumSaveStatus.STATUS_SAVE_ERROR.getValue(),
                         SaveStatusConstants.INSTANCE.STATUS_MESSAGE_SAVE_ERROR());
-                bus.fireEvent(new CatalogStatusBarEvent(
+                bus.fireEvent(new StatusWidgetEvent(
                         CatalogFinderConstants.INSTANCE.CSWServerFormWidget_eventErrorSavingServerText(),
                         GPCatalogStatusBarType.STATUS_ERROR));
             }
@@ -230,13 +230,13 @@ public class CSWServerFormWidget
                 if (aliasValue.equals(server.getAlias())) {
                     setStatus(EnumSaveStatus.STATUS_SAVE.getValue(),
                             SaveStatusConstants.INSTANCE.STATUS_MESSAGE_SAVE());
-                    bus.fireEvent(new CatalogStatusBarEvent(
+                    bus.fireEvent(new StatusWidgetEvent(
                             CatalogFinderConstants.INSTANCE.CSWServerFormWidget_eventCorrectlySavedServerText(),
                             GPCatalogStatusBarType.STATUS_OK));
                 } else {
                     setStatus(EnumSaveStatus.STATUS_NOT_SAVE.getValue(),
                             SaveStatusConstants.INSTANCE.STATUS_MESSAGE_NOT_SAVE());
-                    bus.fireEvent(new CatalogStatusBarEvent(CatalogFinderMessages.
+                    bus.fireEvent(new StatusWidgetEvent(CatalogFinderMessages.
                             INSTANCE.CSWServerFormWidget_alertExistServerMessage(server.getAlias()),
                             GPCatalogStatusBarType.STATUS_NOT_OK));
                 }

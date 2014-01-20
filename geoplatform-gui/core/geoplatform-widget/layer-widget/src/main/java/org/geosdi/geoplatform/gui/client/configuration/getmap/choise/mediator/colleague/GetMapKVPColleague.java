@@ -91,12 +91,12 @@ public class GetMapKVPColleague extends GetMapChoiseColleague<FieldSet> {
     }
 
     @Override
-    public void executeColleague() {
-        this.kvpExecutor.executeColleague();
+    public <E> void executeColleague(E param) {
+        this.kvpExecutor.executeColleague(param);
     }
 
     @Override
-    public void resetColleague() {
+    public <R> void resetColleague(R param) {
         this.kvp.setValue(Boolean.FALSE, true);
         LoadWmsGetMapFromUrlWidget.fireWmsGetMapFromUrlEvent(decreaseHeight);
         this.choiseWidget.reset();

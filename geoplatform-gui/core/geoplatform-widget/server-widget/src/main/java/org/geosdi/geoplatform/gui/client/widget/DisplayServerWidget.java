@@ -119,14 +119,18 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
 
     private void createComponents() {
         StoreSorter<GPServerBeanModel> storeSorter = new StoreSorter<GPServerBeanModel>() {
+
             @Override
-            public int compare(Store<GPServerBeanModel> store, GPServerBeanModel m1,
+            public int compare(Store<GPServerBeanModel> store,
+                    GPServerBeanModel m1,
                     GPServerBeanModel m2, String property) {
                 if (m1.getAlias() != null && m2.getAlias() != null) {
-                    return m1.getAlias().toLowerCase().compareTo(m2.getAlias().toLowerCase());
+                    return m1.getAlias().toLowerCase().compareTo(
+                            m2.getAlias().toLowerCase());
                 }
                 return 0;
             }
+
         };
         this.store.setStoreSorter(storeSorter);
         this.comboServer = new ComboBox<GPServerBeanModel>();
@@ -142,58 +146,68 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
         comboServer.setTypeAhead(true);
         comboServer.setTriggerAction(TriggerAction.ALL);
 
-        this.comboServer.addSelectionChangedListener(new SelectionChangedListener<GPServerBeanModel>() {
-            @Override
-            public void selectionChanged(
-                    SelectionChangedEvent<GPServerBeanModel> se) {
-                changeSelection(se.getSelectedItem());
-            }
-        });
+        this.comboServer.addSelectionChangedListener(
+                new SelectionChangedListener<GPServerBeanModel>() {
+
+                    @Override
+                    public void selectionChanged(
+                            SelectionChangedEvent<GPServerBeanModel> se) {
+                                changeSelection(se.getSelectedItem());
+                            }
+
+                });
 
         this.manageServersButton = new Button(ServerModuleConstants.INSTANCE.
                 DisplayServerWidget_manageServerButtonText(),
                 ServerWidgetResources.ICONS.addServer(),
                 new SelectionListener<ButtonEvent>() {
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                manageServersWidget.show();
-            }
-        });
+
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                        manageServersWidget.show();
+                    }
+
+                });
         this.activateManageServersButton();
     }
 
     @Override
     public void activateManageServersButton() {
-        ServerRemoteImpl.Util.getInstance().getUserAuthorities(new AsyncCallback<List<String>>() {
-            @Override
-            public void onFailure(Throwable caught) {
-                if (caught.getCause() instanceof GPSessionTimeout) {
-                    GPHandlerManager.fireEvent(new GPLoginEvent(
-                            new DisplayGetCapabilitiesEvent()));
-                } else {
-                    manageServersButton.setEnabled(false);
-                    GeoPlatformMessage.errorMessage(WindowsConstants.INSTANCE.errorTitleText(),
-                            WindowsConstants.INSTANCE.errorMakingConnectionBodyText());
-                    LayoutManager.getInstance().getStatusMap().setStatus(
-                            ServerModuleConstants.INSTANCE.DisplayServerWidget_statusErrorOpeningWindowText(),
-                            EnumSearchStatus.STATUS_NO_SEARCH.toString());
-                    System.out.println("Error opening Get Capabilities window: " + caught.toString()
-                            + " data: " + caught.getMessage());
-                }
-            }
+        ServerRemoteImpl.Util.getInstance().getUserAuthorities(
+                new AsyncCallback<List<String>>() {
 
-            @Override
-            public void onSuccess(List<String> result) {
-                manageServersButton.disable();
-                for (String role : result) {
-                    System.out.println("Role: " + role);
-                    if (role.equals(GPRole.ADMIN.getRole())) { // TODO SecureButton
-                        manageServersButton.enable();
-                        return;
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        if (caught.getCause() instanceof GPSessionTimeout) {
+                            GPHandlerManager.fireEvent(new GPLoginEvent(
+                                            new DisplayGetCapabilitiesEvent()));
+                        } else {
+                            manageServersButton.setEnabled(false);
+                            GeoPlatformMessage.errorMessage(
+                                    WindowsConstants.INSTANCE.errorTitleText(),
+                                    WindowsConstants.INSTANCE.errorMakingConnectionBodyText());
+                            LayoutManager.getInstance().getStatusMap().setStatus(
+                                    ServerModuleConstants.INSTANCE.DisplayServerWidget_statusErrorOpeningWindowText(),
+                                    EnumSearchStatus.STATUS_NO_SEARCH.toString());
+                            System.out.println(
+                                    "Error opening Get Capabilities window: " + caught.toString()
+                                    + " data: " + caught.getMessage());
+                        }
                     }
-                }
-            }
-        });
+
+                    @Override
+                    public void onSuccess(List<String> result) {
+                        manageServersButton.disable();
+                        for (String role : result) {
+                            System.out.println("Role: " + role);
+                            if (role.equals(GPRole.ADMIN.getRole())) { // TODO SecureButton
+                                manageServersButton.enable();
+                                return;
+                            }
+                        }
+                    }
+
+                });
     }
 
     private void createToolBar() {
@@ -234,7 +248,8 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
      * Load All Server from WS
      */
     public void loadServers() {
-        this.searchStatus.setBusy(ServerModuleConstants.INSTANCE.loadingServersText());
+        this.searchStatus.setBusy(
+                ServerModuleConstants.INSTANCE.loadingServersText());
         this.store.removeAll();
         this.comboServer.clear();
         this.gridWidget.cleanStore();
@@ -242,31 +257,37 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
         GeoPlatformOGCRemote.Util.getInstance().loadServers(
                 GPAccountLogged.getInstance().getOrganization(),
                 new AsyncCallback<ArrayList<GPServerBeanModel>>() {
-            @Override
-            public void onFailure(Throwable caught) {
-                setSearchStatus(EnumSearchStatus.STATUS_SEARCH_ERROR,
-                        SearchStatusConstants.INSTANCE.STATUS_MESSAGE_SEARCH_ERROR());
-                GeoPlatformMessage.errorMessage(ServerModuleConstants.INSTANCE.
-                        serverServiceText(),
-                        ServerModuleConstants.INSTANCE.errorLoadingServerBodyText());
-            }
 
-            @Override
-            public void onSuccess(ArrayList<GPServerBeanModel> result) {
-                if (result.isEmpty()) {
-                    setSearchStatus(EnumSearchStatus.STATUS_NO_SEARCH,
-                            SearchStatusConstants.INSTANCE.STATUS_MESSAGE_NOT_SEARCH());
-                    GeoPlatformMessage.alertMessage(ServerModuleConstants.INSTANCE.
-                            serverServiceText(), ServerModuleConstants.INSTANCE.
-                            DisplayServerWidget_alerThereAreNoServerText());
-                } else {
-                    setSearchStatus(EnumSearchStatus.STATUS_SEARCH,
-                            EnumSearchServer.STATUS_MESSAGE_LOAD.toString());
-                    store.add(result);
-                    store.sort(GPServerKeyValue.ALIAS.getValue(), Style.SortDir.ASC);
-                }
-            }
-        });
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        setSearchStatus(EnumSearchStatus.STATUS_SEARCH_ERROR,
+                                SearchStatusConstants.INSTANCE.STATUS_MESSAGE_SEARCH_ERROR());
+                        GeoPlatformMessage.errorMessage(
+                                ServerModuleConstants.INSTANCE.
+                                serverServiceText(),
+                                ServerModuleConstants.INSTANCE.errorLoadingServerBodyText());
+                    }
+
+                    @Override
+                    public void onSuccess(ArrayList<GPServerBeanModel> result) {
+                        if (result.isEmpty()) {
+                            setSearchStatus(EnumSearchStatus.STATUS_NO_SEARCH,
+                                    SearchStatusConstants.INSTANCE.STATUS_MESSAGE_NOT_SEARCH());
+                            GeoPlatformMessage.alertMessage(
+                                    ServerModuleConstants.INSTANCE.
+                                    serverServiceText(),
+                                    ServerModuleConstants.INSTANCE.
+                                    DisplayServerWidget_alerThereAreNoServerText());
+                        } else {
+                            setSearchStatus(EnumSearchStatus.STATUS_SEARCH,
+                                    EnumSearchServer.STATUS_MESSAGE_LOAD.toString());
+                            store.add(result);
+                            store.sort(GPServerKeyValue.ALIAS.getValue(),
+                                    Style.SortDir.ASC);
+                        }
+                    }
+
+                });
     }
 
     public void resetComponents() {
@@ -281,7 +302,8 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
      */
     private void changeSelection(GPServerBeanModel selected) {
         this.gridWidget.cleanComponentForSelection();
-        LayoutManager.getInstance().getStatusMap().setBusy(WindowsConstants.INSTANCE.loadingLayersText());
+        LayoutManager.getInstance().getStatusMap().setBusy(
+                WindowsConstants.INSTANCE.loadingLayersText());
         if (selected != null) {
             this.gridWidget.maskGrid();
         }
@@ -357,54 +379,64 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
 
         @Override
         public void loadCapabilitiesFromWS() {
-            final BasicCapabilitiesRequest capabilitiesRequest = GWT.create(BasicCapabilitiesRequest.class);
+            final BasicCapabilitiesRequest capabilitiesRequest = GWT.create(
+                    BasicCapabilitiesRequest.class);
             capabilitiesRequest.setIdServer(selectedServer.getId());
             capabilitiesRequest.setServerUrl(selectedServer.getUrlServer());
 //            final BasicCapabilitiesRequest capabilitiesRequest = new BasicCapabilitiesRequest(
 //                    selectedServer.getUrlServer(), selectedServer.getId());
             ClientCommandDispatcher.getInstance().execute(
                     new GPClientCommand<BasicCapabilitiesResponse>() {
-                private static final long serialVersionUID = -5938478884870425893L;
 
-                {
-                    super.setCommandRequest(capabilitiesRequest);
-                }
+                        private static final long serialVersionUID = -5938478884870425893L;
 
-                @Override
-                public void onCommandSuccess(BasicCapabilitiesResponse response) {
-                    selectedServer.setLayers(response.getResult());
-                    fillGrid(response.getResult());
-                }
+                        {
+                            super.setCommandRequest(capabilitiesRequest);
+                        }
 
-                @Override
-                public void onCommandFailure(Throwable exception) {
-                    gridWidget.unMaskGrid();
-                    LayoutManager.getInstance().getStatusMap().clearStatus(
-                            "");
+                        @Override
+                        public void onCommandSuccess(
+                                BasicCapabilitiesResponse response) {
+                                    selectedServer.setLayers(
+                                            response.getResult());
+                                    fillGrid(response.getResult());
+                                }
 
-                    if (selectedServer.getUrlServer().contains(
-                            EnumOAuth2.GEB_STRING.getValue())) {
-                        GeoPlatformMessage.infoMessage(ServerModuleConstants.INSTANCE.
-                                googleSignOnRequiredTitleText(),
-                                ServerModuleConstants.INSTANCE.
-                                googleSignOnRequiredBodyText());
-                        OAuth2HandlerManager.fireEvent(new GPOAuth2GEBLoginEvent(
-                                EnumOAuth2.LOAD_CAPABILITIES.getValue()));
-                    } else {
-                        GeoPlatformMessage.errorMessage(ServerModuleConstants.INSTANCE.
-                                serverServiceText(),
-                                exception.getMessage());
-                        LayoutManager.getInstance().getStatusMap().setStatus(
-                                ServerModuleMessages.INSTANCE.DisplayServerWidget_serverErrorMessage(
-                                exception.getMessage()),
-                                EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
-                    }
-                }
-            });
+                                @Override
+                                public void onCommandFailure(Throwable exception) {
+                                    gridWidget.unMaskGrid();
+                                    LayoutManager.getInstance().getStatusMap().clearStatus(
+                                            "");
+
+                                    if (selectedServer.getUrlServer().contains(
+                                            EnumOAuth2.GEB_STRING.getValue())) {
+                                        GeoPlatformMessage.infoMessage(
+                                                ServerModuleConstants.INSTANCE.
+                                                googleSignOnRequiredTitleText(),
+                                                ServerModuleConstants.INSTANCE.
+                                                googleSignOnRequiredBodyText());
+                                        OAuth2HandlerManager.fireEvent(
+                                                new GPOAuth2GEBLoginEvent(
+                                                        EnumOAuth2.LOAD_CAPABILITIES.getValue()));
+                                    } else {
+                                        GeoPlatformMessage.errorMessage(
+                                                ServerModuleConstants.INSTANCE.
+                                                serverServiceText(),
+                                                exception.getMessage());
+                                        LayoutManager.getInstance().getStatusMap().setStatus(
+                                                ServerModuleMessages.INSTANCE.DisplayServerWidget_serverErrorMessage(
+                                                        exception.getMessage()),
+                                                EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
+                                    }
+                                }
+
+                    });
         }
+
     }
 
     public ListStore<GPServerBeanModel> getStore() {
         return this.store;
     }
+
 }

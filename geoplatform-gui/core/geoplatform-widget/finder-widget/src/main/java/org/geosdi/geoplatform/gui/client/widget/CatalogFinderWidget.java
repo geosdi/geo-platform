@@ -61,22 +61,22 @@ import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 @Singleton
 public class CatalogFinderWidget extends GeoPlatformWindow {
 
-    private FiltersFinderWidget filtersWidget;
-    private MainViewFinderWidget mainViewWidget;
-    private GPCatalogStatusBar catalogStatusBar;
-    private GPEventBus bus;
+    private final FiltersFinderWidget filtersWidget;
+    private final MainViewFinderWidget mainViewWidget;
+    private final GPCatalogStatusBar catalogStatusBar;
+    private final GPEventBus bus;
     private TreePanel<GPBeanTreeModel> tree;
-    private LoadFirstServersEvent loadFirstServers = new LoadFirstServersEvent();
+    private final LoadFirstServersEvent loadFirstServers = new LoadFirstServersEvent();
 
     @Inject
-    public CatalogFinderWidget(FiltersFinderWidget filtersWidget,
-            MainViewFinderWidget mainViewWidget,
-            GPCatalogStatusBar catalogStatusBar, GPEventBus bus) {
+    public CatalogFinderWidget(FiltersFinderWidget theFiltersWidget,
+            MainViewFinderWidget theMainViewWidget,
+            GPCatalogStatusBar theCatalogStatusBar, GPEventBus theBus) {
         super(true);
-        this.filtersWidget = filtersWidget;
-        this.mainViewWidget = mainViewWidget;
-        this.bus = bus;
-        this.catalogStatusBar = catalogStatusBar;
+        this.filtersWidget = theFiltersWidget;
+        this.mainViewWidget = theMainViewWidget;
+        this.bus = theBus;
+        this.catalogStatusBar = theCatalogStatusBar;
     }
 
     @Override

@@ -94,12 +94,12 @@ public class GetMapSimpleColleague extends GetMapChoiseColleague<FieldSet> {
     }
 
     @Override
-    public void executeColleague() {
-        colleagueExecutor.executeColleague();
+    public <E> void executeColleague(E param) {
+        colleagueExecutor.executeColleague(param);
     }
 
     @Override
-    public void resetColleague() {
+    public <R> void resetColleague(R param) {
         this.simple.setValue(Boolean.FALSE, true);
         LoadWmsGetMapFromUrlWidget.fireWmsGetMapFromUrlEvent(decreaseHeight);
         this.choiseWidget.reset();

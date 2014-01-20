@@ -80,7 +80,7 @@ public class GetMapKvpColleagueExecutor implements ChoiseColleagueExecutor {
     }
 
     @Override
-    public void executeColleague() {
+    public <E> void executeColleague(E param) {
         this.retrieveDataFromQueryString();
         this.event.setLayers(this.createRasterList());
 

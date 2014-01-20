@@ -55,7 +55,7 @@ import org.geosdi.geoplatform.gui.client.action.menu.ShowFullMetadataAction;
 import org.geosdi.geoplatform.gui.client.i18n.CatalogFinderConstants;
 import org.geosdi.geoplatform.gui.client.model.AbstractRecord.RecordKeyValue;
 import org.geosdi.geoplatform.gui.client.model.FullRecord;
-import org.geosdi.geoplatform.gui.client.puregwt.event.CatalogStatusBarEvent;
+import org.geosdi.geoplatform.gui.client.puregwt.event.StatusWidgetEvent;
 import org.geosdi.geoplatform.gui.client.service.GPCatalogFinderRemote;
 import org.geosdi.geoplatform.gui.client.widget.statusbar.GPCatalogStatusBar.GPCatalogStatusBarType;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
@@ -196,11 +196,11 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
         BasePagingLoadResult result = (BasePagingLoadResult) le.getData();
 
         if (result.getTotalLength() == 0) {
-            getBus().fireEvent(new CatalogStatusBarEvent(
+            getBus().fireEvent(new StatusWidgetEvent(
                     CatalogFinderConstants.INSTANCE.RecordsContainer_eventNoRecordsLoaderText(),
                     GPCatalogStatusBarType.STATUS_NOT_OK));
         } else {
-            getBus().fireEvent(new CatalogStatusBarEvent(
+            getBus().fireEvent(new StatusWidgetEvent(
                     CatalogFinderConstants.INSTANCE.RecordsContainer_eventRecordsCorrectlyLoaderText(),
                     GPCatalogStatusBarType.STATUS_OK));
         }
@@ -214,7 +214,7 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
         GeoPlatformMessage.errorMessage(
                 CatalogFinderConstants.INSTANCE.RecordsContainer_errorServiceDownTitleText(),
                 CatalogFinderConstants.INSTANCE.RecordsContainer_errorServiceDownBodyText());
-        getBus().fireEvent(new CatalogStatusBarEvent(
+        getBus().fireEvent(new StatusWidgetEvent(
                 CatalogFinderConstants.INSTANCE.RecordsContainer_errorServiceDownBodyText(),
                 GPCatalogStatusBarType.STATUS_ERROR));
 

@@ -51,8 +51,8 @@ public interface ChoiseColleague<W extends Widget> {
 
     W getChoiseWidget();
 
-    void executeColleague();
-    
-    void resetColleague();
+    <E> void executeColleague(E param);
+
+    <R> void resetColleague(R param);
 
 }

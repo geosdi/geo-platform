@@ -81,16 +81,16 @@ public abstract class AbstractChoiseMediator<W extends Widget, K extends ChoiseC
     }
 
     @Override
-    public void executeColleague() {
+    public <E> void executeColleague(E param) {
         if (defaultColleague != null) {
-            this.defaultColleague.executeColleague();
+            this.defaultColleague.executeColleague(param);
         }
     }
 
     @Override
-    public void resetColleague() {
+    public <R> void resetColleague(R param) {
         if (defaultColleague != null) {
-            defaultColleague.resetColleague();
+            defaultColleague.resetColleague(param);
         }
     }
 

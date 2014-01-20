@@ -61,8 +61,8 @@ public interface ChoiseMediator<K extends ChoiseColleagueKey, V extends ChoiseCo
 
     void hideChoiseWidget(K key);
 
-    void executeColleague();
+    <E> void executeColleague(E param);
 
-    void resetColleague();
+    <R> void resetColleague(R param);
 
 }

@@ -44,7 +44,7 @@ import org.geosdi.geoplatform.gui.client.CatalogFinderWidgetResources;
 import org.geosdi.geoplatform.gui.client.i18n.CatalogFinderConstants;
 import org.geosdi.geoplatform.gui.client.i18n.CatalogFinderMessages;
 import org.geosdi.geoplatform.gui.client.model.FullRecord;
-import org.geosdi.geoplatform.gui.client.puregwt.event.CatalogStatusBarEvent;
+import org.geosdi.geoplatform.gui.client.puregwt.event.StatusWidgetEvent;
 import org.geosdi.geoplatform.gui.client.service.GPCatalogFinderRemote;
 import org.geosdi.geoplatform.gui.client.widget.components.search.pagination.RecordsContainer;
 import org.geosdi.geoplatform.gui.client.widget.statusbar.GPCatalogStatusBar.GPCatalogStatusBarType;
@@ -79,7 +79,7 @@ public class ShowFullMetadataAction extends MenuBaseAction {
         }
 
         this.rc.getBus().fireEvent(
-                new CatalogStatusBarEvent(CatalogFinderMessages.INSTANCE.
+                new StatusWidgetEvent(CatalogFinderMessages.INSTANCE.
                 ShowFullMetadataAction_loadingStatusBarMessage(record.getTitle()),
                 GPCatalogStatusBarType.STATUS_LOADING));
 
@@ -93,7 +93,7 @@ public class ShowFullMetadataAction extends MenuBaseAction {
             public void onFailure(Throwable caught) {
                 System.out.println("Error @@@@@@@@@@@@@@@@ " + caught);
                 rc.getBus().fireEvent(
-                        new CatalogStatusBarEvent(
+                        new StatusWidgetEvent(
                         CatalogFinderConstants.INSTANCE.
                         ShowFullMetadataAction_errorRecordRequestText(),
                         GPCatalogStatusBarType.STATUS_ERROR));
@@ -106,7 +106,7 @@ public class ShowFullMetadataAction extends MenuBaseAction {
                         CatalogFinderConstants.INSTANCE.ShowFullMetadataAction_windowText(),
                         "");
                 rc.getBus().fireEvent(
-                        new CatalogStatusBarEvent(
+                        new StatusWidgetEvent(
                         CatalogFinderConstants.INSTANCE.
                         ShowFullMetadataAction_recordRequestExecutedText(),
                         GPCatalogStatusBarType.STATUS_OK));

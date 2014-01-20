@@ -35,10 +35,11 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.statusbar;
 
+import com.google.gwt.event.shared.HandlerRegistration;
 import javax.inject.Inject;
-import org.geosdi.geoplatform.gui.client.puregwt.handler.CatalogStatusBarHandler;
 import org.geosdi.geoplatform.gui.client.widget.StatusWidget;
-import org.geosdi.geoplatform.gui.client.widget.components.GPCatalogFinderComponent;
+import org.geosdi.geoplatform.gui.client.widget.status.StatusHandler;
+import org.geosdi.geoplatform.gui.client.widget.status.StatusWidgetType;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
 /**
@@ -46,19 +47,14 @@ import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class GPCatalogStatusBar extends StatusWidget
-        implements CatalogStatusBarHandler, GPCatalogFinderComponent {
+        implements StatusHandler {
 
-    private GPEventBus bus;
+    private final GPEventBus bus;
 
     @Inject
     public GPCatalogStatusBar(GPEventBus bus) {
         this.bus = bus;
-        this.bus.addHandler(CatalogStatusBarHandler.TYPE, this);
-    }
-
-    @Override
-    public void setStatus(String text, GPCatalogStatusBarType iconStyle) {
-        super.setStatus(text, iconStyle.getValue());
+        addStatusHandler();
     }
 
     @Override
@@ -66,7 +62,17 @@ public class GPCatalogStatusBar extends StatusWidget
         super.clearStatus("");
     }
 
-    public enum GPCatalogStatusBarType {
+    @Override
+    public final HandlerRegistration addStatusHandler() {
+        return this.bus.addHandler(TYPE, this);
+    }
+
+    @Override
+    public void setStatus(String text, StatusWidgetType iconStyle) {
+        super.setStatus(text, iconStyle.getValue());
+    }
+
+    public enum GPCatalogStatusBarType implements StatusWidgetType {
 
         STATUS_OK("x-status-ok"),
         STATUS_NOT_OK("x-status-not-ok"),
@@ -79,8 +85,10 @@ public class GPCatalogStatusBar extends StatusWidget
             this.value = value;
         }
 
+        @Override
         public String getValue() {
             return value;
         }
+
     }
 }

@@ -56,6 +56,7 @@ public class RefreshTimeComboBuilder {
 
     public RefreshTimeComboBuilder() {
         this.combo = new ComboBox() {
+
             @Override
             protected void onSelect(ModelData model, int index) {
                 super.onSelect(model, index);
@@ -64,11 +65,13 @@ public class RefreshTimeComboBuilder {
                     combo.getParent().getParent().setVisible(false);
                 }
             }
+
         };
     }
 
     protected ComboBox build(TreePanel tree) {
-        combo.setEmptyText(LayerModuleConstants.INSTANCE.RefreshTimeComboBuilder_comboEmptyText());
+        combo.setEmptyText(LayerModuleConstants.INSTANCE.
+                RefreshTimeComboBuilder_comboEmptyText());
         ListStore<LayerRefreshTimeValue> store = new ListStore<LayerRefreshTimeValue>();
         store.add(LayerRefreshTimeValue.getLayerRefreshTimeList());
         combo.setStore(store);
@@ -84,4 +87,5 @@ public class RefreshTimeComboBuilder {
 
         return combo;
     }
+
 }

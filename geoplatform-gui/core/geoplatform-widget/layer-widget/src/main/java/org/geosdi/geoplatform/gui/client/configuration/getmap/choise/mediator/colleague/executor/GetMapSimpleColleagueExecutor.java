@@ -39,7 +39,6 @@ import com.google.common.collect.Lists;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import org.geosdi.geoplatform.gui.client.configuration.getmap.choise.encoder.GetMapUrlEncoder;
 import org.geosdi.geoplatform.gui.client.configuration.getmap.choise.widget.simple.SimpleUrlTextFields;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
@@ -65,8 +64,6 @@ public class GetMapSimpleColleagueExecutor implements ChoiseColleagueExecutor {
     @Inject
     private WmsGetMapHideWidgetEvent hideEvent;
     @Inject
-    private GetMapUrlEncoder urlEncoder;
-    @Inject
     private AddLayersFromWmsGetMapEvent event;
     @Inject
     private SimpleUrlTextFields simpleUrlTextFields;
@@ -75,7 +72,7 @@ public class GetMapSimpleColleagueExecutor implements ChoiseColleagueExecutor {
     }
 
     @Override
-    public void executeColleague() {
+    public <E> void executeColleague(E param) {
         this.event.setLayers(this.createRasterList());
 
         LayerHandlerManager.fireEvent(event);

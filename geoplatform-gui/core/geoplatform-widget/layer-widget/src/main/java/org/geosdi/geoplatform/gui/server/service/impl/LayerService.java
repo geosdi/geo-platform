@@ -98,7 +98,8 @@ import org.springframework.stereotype.Service;
 @Service("layerService")
 public class LayerService implements ILayerService {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private static final Logger logger = LoggerFactory.getLogger(
+            LayerService.class);
     //
     private GeoPlatformService geoPlatformServiceClient;
     //
@@ -295,7 +296,6 @@ public class LayerService implements ILayerService {
         Long projectId;
 
 //        folder.setProject(project);
-
         Long savedFolderId = null;
         try {
             projectId = this.sessionUtility.getDefaultProject(httpServletRequest);
@@ -537,7 +537,8 @@ public class LayerService implements ILayerService {
     }
 
     @Override
-    public boolean checkWmsGetMapUrl(String urlString) throws GeoPlatformException {
+    public boolean checkWmsGetMapUrl(String urlString) throws
+            GeoPlatformException {
         try {
             URL url = new URL(urlString);
             URLConnection myURLConnection = url.openConnection();
@@ -735,7 +736,8 @@ public class LayerService implements ILayerService {
 
     @Override
     public void setLayerRefreshTime(String emiteResource, String layerUUID,
-            int secondToRefresh, HttpServletRequest httpServletRequest) throws GeoPlatformException {
+            int secondToRefresh, HttpServletRequest httpServletRequest) throws
+            GeoPlatformException {
         try {
             GPAccount account = this.sessionUtility.getLoggedAccount(
                     httpServletRequest);
@@ -783,7 +785,8 @@ public class LayerService implements ILayerService {
 
     @Override
     public ArrayList<GPSimpleUser> getOrganizationUsersToShareProject(
-            long projectId, HttpServletRequest httpServletRequest) throws GeoPlatformException {
+            long projectId, HttpServletRequest httpServletRequest) throws
+            GeoPlatformException {
         ArrayList<GPSimpleUser> simpleUserList = null;
         try {
             this.sessionUtility.getLoggedAccount(httpServletRequest);
@@ -803,7 +806,8 @@ public class LayerService implements ILayerService {
 
     @Override
     public ArrayList<GPSimpleUser> getAccountsFromSharedProject(
-            long idSharedProject, HttpServletRequest httpServletRequest) throws GeoPlatformException {
+            long idSharedProject, HttpServletRequest httpServletRequest) throws
+            GeoPlatformException {
         ArrayList<GPSimpleUser> simpleUserList = null;
         try {
             this.sessionUtility.getLoggedAccount(httpServletRequest);
@@ -896,7 +900,8 @@ public class LayerService implements ILayerService {
     }
 
     @Override
-    public List<GPLayerAttributes> describeFeatureType(String layerName) throws GeoPlatformException {
+    public List<GPLayerAttributes> describeFeatureType(String layerName) throws
+            GeoPlatformException {
         List<GPLayerAttributes> attributeList = Lists.<GPLayerAttributes>newArrayList();
         try {
             List<LayerAttribute> result = this.geoPlatformPublishClient.describeFeatureType(

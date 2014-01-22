@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.puregwt.handler;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
+import org.geosdi.geoplatform.gui.client.puregwt.event.ResetStatusWidgetEvent;
 import org.geosdi.geoplatform.gui.client.widget.status.StatusWidgetType;
 
 /**
@@ -45,6 +46,8 @@ import org.geosdi.geoplatform.gui.client.widget.status.StatusWidgetType;
  * @email  giuseppe.lascaleia@geosdi.org
  */
 public interface StatusWidgetHandler extends EventHandler {
+    
+    static final ResetStatusWidgetEvent RESET_STATUS_WIDGET_EVENT = new ResetStatusWidgetEvent();
 
     GwtEvent.Type<StatusWidgetHandler> TYPE = new GwtEvent.Type<StatusWidgetHandler>();
 

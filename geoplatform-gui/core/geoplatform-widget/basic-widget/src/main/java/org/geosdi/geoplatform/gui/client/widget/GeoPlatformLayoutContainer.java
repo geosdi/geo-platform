@@ -76,6 +76,9 @@ public abstract class GeoPlatformLayoutContainer extends LayoutContainer {
     public boolean isInitialized() {
         return initialized;
     }
+    
+    public void reset(){
+    }
 
     @Override
     public String toString() {

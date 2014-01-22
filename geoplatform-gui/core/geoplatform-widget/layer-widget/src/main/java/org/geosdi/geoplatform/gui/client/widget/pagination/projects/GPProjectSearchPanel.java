@@ -177,8 +177,7 @@ public class GPProjectSearchPanel extends GPListViewSearchPanel<GPClientProject>
 
                     @Override
                     public void onCommandSuccess(SearchProjectsResponse response) {
-                        loader.fireEvent(Loader.Load, new LoadEvent(loader,
-                                loadConfig, response.getResult()));
+                        callback.onSuccess(response.getResult());
                     }
 
                     @Override

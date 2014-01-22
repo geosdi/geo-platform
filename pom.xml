@@ -47,9 +47,8 @@
         <!-- geoSDI Repository -->
         <!--.................................. -->
         <repository>
-            <uniqueVersion>false</uniqueVersion>
             <id>geosdi</id>
-            <url>ftp://repo.geosdi.org/</url>
+            <url>scp://repo.geosdi.org/home/maven</url>
         </repository>
     </distributionManagement>
  
@@ -1491,8 +1490,8 @@
         <extensions>
             <extension>
                 <groupId>org.apache.maven.wagon</groupId>
-                <artifactId>wagon-ftp</artifactId>
-                <version>2.5</version>
+                <artifactId>wagon-ssh</artifactId>
+                <version>2.6</version>
             </extension>
         </extensions>
 

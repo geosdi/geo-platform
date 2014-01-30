@@ -63,6 +63,7 @@ import org.geosdi.geoplatform.gui.client.widget.tree.store.GinTreeStore;
 import org.geosdi.geoplatform.gui.client.widget.tree.visitor.GinVisitorDisplayHide;
 import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
 import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
+import org.geosdi.geoplatform.gui.command.api.GPCommandRequest;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
@@ -78,7 +79,9 @@ import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
 /**
  * <p>
- * This Class build the LayerTreeWidget doing RPC Call on Server</p>
+ *      This Class build the LayerTreeWidget doing {@link GPCommandRequest} 
+ *      Command on Server
+ * </p>
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -86,11 +89,12 @@ import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 @Singleton
 public class LayerTreeBuilder implements GPCompositeBuilder {
 
-    private GPBuildTreeEvent buildEvent = new GPBuildTreeEvent();
-    private GPTreeStore store;
-    private GPRootTreeNode root;
-    private VisitorDisplayHide visitorDisplay;
-    private GPTreePanel tree;
+    private final GPBuildTreeEvent buildEvent = new GPBuildTreeEvent();
+    private final GPTreeStore store;
+    private final GPRootTreeNode root;
+    private final VisitorDisplayHide visitorDisplay;
+    private final GPTreePanel tree;
+    private final LoadDefaultProjectElementsRequest loadDefaultProjectElementsRequest = new LoadDefaultProjectElementsRequest();
     private boolean initialized;
 
     @Inject
@@ -112,11 +116,9 @@ public class LayerTreeBuilder implements GPCompositeBuilder {
             LayoutManager.getInstance().getStatusMap().setBusy(
                     LayerModuleConstants.INSTANCE.statusLoadingTreeElementsText());
 
-            final LoadDefaultProjectElementsRequest loadDefaultProjectElementsRequest = GWT.
-                    <LoadDefaultProjectElementsRequest>create(LoadDefaultProjectElementsRequest.class);
-
             ClientCommandDispatcher.getInstance().execute(
                     new GPClientCommand<LoadDefaultProjectElementsResponse>() {
+
                         private static final long serialVersionUID = 3109256773218160485L;
 
                         {
@@ -143,14 +145,13 @@ public class LayerTreeBuilder implements GPCompositeBuilder {
                                         + " data: " + caught.getMessage());
                             }
                         }
+
                     });
         }
     }
 
     protected final void onBuildSuccess(GPClientProject clientProject) {
-        Registry.register(
-                UserSessionEnum.CURRENT_PROJECT_ON_TREE.name(),
-                clientProject);
+        Registry.register(UserSessionEnum.CURRENT_PROJECT_ON_TREE.name(), clientProject);
         root.setLabel(clientProject.getName());
         root.modelConverter(clientProject.getRootFolders());
         store.add(root, Boolean.TRUE);
@@ -226,4 +227,5 @@ public class LayerTreeBuilder implements GPCompositeBuilder {
             }
         }
     }
+
 }

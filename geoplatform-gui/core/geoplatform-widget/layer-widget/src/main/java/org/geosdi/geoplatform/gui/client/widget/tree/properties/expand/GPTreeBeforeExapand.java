@@ -39,7 +39,7 @@ import com.extjs.gxt.ui.client.data.ModelData;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.TreePanelEvent;
-import com.google.gwt.core.client.GWT;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.command.layer.basic.LoadFolderElementsRequest;
@@ -70,6 +70,7 @@ public class GPTreeBeforeExapand implements TreeBeforeExpand {
 
     private final GPTreePanel tree;
     private final LayerTreeBuilder treeBuilder;
+    private final LoadFolderElementsRequest loadFolderElementsRequest = new LoadFolderElementsRequest();
 
     @Inject
     public GPTreeBeforeExapand(GinTreePanel theTree,
@@ -82,58 +83,58 @@ public class GPTreeBeforeExapand implements TreeBeforeExpand {
     public void beforeExpand() {
         tree.addListener(Events.BeforeExpand,
                 new Listener<TreePanelEvent<ModelData>>() {
-            @Override
-            public void handleEvent(TreePanelEvent<ModelData> be) {
-                if ((be.getItem() instanceof FolderTreeNode)
+
+                    @Override
+                    public void handleEvent(TreePanelEvent<ModelData> be) {
+                        if ((be.getItem() instanceof FolderTreeNode)
                         && (!((FolderTreeNode) be.getItem()).isLoaded())
                         && (((FolderTreeNode) be.getItem()).getId() != null)) {
-                    final FolderTreeNode parentFolder = (FolderTreeNode) be.getItem();
-                    parentFolder.setLoading(Boolean.TRUE);
-                    LayoutManager.getInstance().getStatusMap().setBusy(
-                            LayerModuleConstants.INSTANCE.statusLoadingTreeElementsText());
+                            final FolderTreeNode parentFolder = (FolderTreeNode) be.getItem();
+                            parentFolder.setLoading(Boolean.TRUE);
+                            LayoutManager.getInstance().getStatusMap().setBusy(
+                                    LayerModuleConstants.INSTANCE.statusLoadingTreeElementsText());
 
-                    final LoadFolderElementsRequest loadFolderElementsRequest = GWT.
-                            <LoadFolderElementsRequest>create(LoadFolderElementsRequest.class);
+                            loadFolderElementsRequest.setFolderID(parentFolder.getId());
 
-                    loadFolderElementsRequest.setFolderID(parentFolder.getId());
-                    
-                    ClientCommandDispatcher.getInstance().execute(
-                            new GPClientCommand<LoadFolderElementsResponse>() {
-                        private static final long serialVersionUID = 3109256773218160485L;
+                            ClientCommandDispatcher.getInstance().execute(new GPClientCommand<LoadFolderElementsResponse>() {
 
-                        {
-                            super.setCommandRequest(loadFolderElementsRequest);
+                                private static final long serialVersionUID = 3109256773218160485L;
+
+                                {
+                                    super.setCommandRequest(loadFolderElementsRequest);
+                                }
+
+                                @Override
+                                public void onCommandSuccess(LoadFolderElementsResponse response) {
+                                    treeBuilder.insertElementsOnTree(
+                                            parentFolder, response.getResult());
+                                    LayoutManager.getInstance().getStatusMap().setStatus(
+                                            LayerModuleConstants.INSTANCE.statusSuccessLoadingTreeElementsText(),
+                                            SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
+                                }
+
+                                @Override
+                                public void onCommandFailure(Throwable caught) {
+                                    if (caught.getCause() instanceof GPSessionTimeout) {
+                                        GPHandlerManager.fireEvent(new GPLoginEvent(
+                                                        new GPExpandTreeNodeEvent(parentFolder)));
+                                    } else {
+                                        parentFolder.setLoading(Boolean.FALSE);
+                                        GeoPlatformMessage.errorMessage(LayerModuleConstants.INSTANCE.errorLoadingTitleText(),
+                                                WindowsConstants.INSTANCE.errorMakingConnectionBodyText());
+                                        LayoutManager.getInstance().getStatusMap().setStatus(
+                                                LayerModuleConstants.INSTANCE.statusErrorLoadingTreeElementsText(),
+                                                SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
+                                        System.out.println("Error loading tree elements: " + caught.toString()
+                                                + " data: " + caught.getMessage());
+                                    }
+                                }
+
+                            });
                         }
+                    }
 
-                        @Override
-                        public void onCommandSuccess(LoadFolderElementsResponse response) {
-                            treeBuilder.insertElementsOnTree(
-                                    parentFolder, response.getResult());
-                            LayoutManager.getInstance().getStatusMap().setStatus(
-                                    LayerModuleConstants.INSTANCE.statusSuccessLoadingTreeElementsText(),
-                                    SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
-                        }
-
-                        @Override
-                        public void onCommandFailure(Throwable caught) {
-                            if (caught.getCause() instanceof GPSessionTimeout) {
-                                GPHandlerManager.fireEvent(new GPLoginEvent(
-                                        new GPExpandTreeNodeEvent(parentFolder)));
-                            } else {
-                                parentFolder.setLoading(Boolean.FALSE);
-                                GeoPlatformMessage.errorMessage(LayerModuleConstants.INSTANCE.errorLoadingTitleText(),
-                                        WindowsConstants.INSTANCE.errorMakingConnectionBodyText());
-                                LayoutManager.getInstance().getStatusMap().setStatus(
-                                        LayerModuleConstants.INSTANCE.statusErrorLoadingTreeElementsText(),
-                                        SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
-                                System.out.println(
-                                        "Error loading tree elements: " + caught.toString()
-                                        + " data: " + caught.getMessage());
-                            }
-                        }
-                    });
-                }
-            }
-        });
+                });
     }
+
 }

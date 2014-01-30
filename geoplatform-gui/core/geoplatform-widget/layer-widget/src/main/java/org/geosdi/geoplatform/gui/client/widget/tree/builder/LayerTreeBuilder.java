@@ -157,9 +157,7 @@ public class LayerTreeBuilder implements GPCompositeBuilder {
     }
 
     protected final void onBuildSuccess(GPClientProject clientProject) {
-        Registry.register(
-                UserSessionEnum.CURRENT_PROJECT_ON_TREE.name(),
-                clientProject);
+        Registry.register(UserSessionEnum.CURRENT_PROJECT_ON_TREE.name(), clientProject);
         root.setLabel(clientProject.getName());
         root.modelConverter(clientProject.getRootFolders());
         store.add(root, Boolean.TRUE);

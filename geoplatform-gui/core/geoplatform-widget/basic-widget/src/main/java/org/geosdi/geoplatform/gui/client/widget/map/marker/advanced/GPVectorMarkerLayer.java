@@ -73,8 +73,8 @@ public abstract class GPVectorMarkerLayer extends GPGenericMarkerLayer {
         style.setFontSize("13px");
         style.setFontWeight("bold");
         style.setLabelAlign("cb");
-        style.setGraphicSize(20, 20);
-        style.setGraphicOffset(0, -17);
+        style.setGraphicSize(25, 41);
+        style.setGraphicOffset(0, -41);
     }
 
     protected void drawFeature(LonLat lonlat) {

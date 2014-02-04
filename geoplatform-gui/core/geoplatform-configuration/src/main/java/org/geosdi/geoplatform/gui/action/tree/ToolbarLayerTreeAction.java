@@ -48,10 +48,10 @@ public abstract class ToolbarLayerTreeAction extends ToolbarAction {
 
     protected TreePanel tree;
 
-    public ToolbarLayerTreeAction(TreePanel theTree,
-                                  AbstractImagePrototype image,
-                                  String tooltip) {
+    public ToolbarLayerTreeAction(TreePanel theTree, AbstractImagePrototype image,
+            String tooltip) {
         super(image, tooltip);
         this.tree = theTree;
     }
+
 }

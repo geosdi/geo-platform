@@ -94,12 +94,6 @@
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-memento-persistence</artifactId>
             <version>${project.version}</version>
-        </dependency>       
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-memento-persistence</artifactId>
-            <classifier>sources</classifier>
-            <version>${project.version}</version>
         </dependency>
         
         <dependency>

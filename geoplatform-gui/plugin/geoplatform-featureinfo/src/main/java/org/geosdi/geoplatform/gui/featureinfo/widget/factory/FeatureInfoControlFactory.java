@@ -55,10 +55,13 @@ import org.gwtopenmaps.openlayers.client.layer.WMSParams;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class FeatureInfoControlFactory {
+    
+    FeatureInfoControlFactory() {
+    }
 
     /**
      *
-     * @param urlServer
+     * @param layer
      * @return
      */
     public static WMSGetFeatureInfo createControl(Layer layer) {
@@ -90,4 +93,5 @@ public class FeatureInfoControlFactory {
         options.setQueryVisible(true);
         return new WMSGetFeatureInfo(options);
     }
+    
 }

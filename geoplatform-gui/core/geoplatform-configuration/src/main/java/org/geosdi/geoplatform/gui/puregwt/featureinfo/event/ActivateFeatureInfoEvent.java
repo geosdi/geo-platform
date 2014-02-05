@@ -33,28 +33,34 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.puregwt.featureinfo;
+package org.geosdi.geoplatform.gui.puregwt.featureinfo.event;
 
-import com.google.gwt.event.shared.EventHandler;
-import com.google.gwt.event.shared.GwtEvent.Type;
-import org.gwtopenmaps.openlayers.client.layer.Layer;
+import org.geosdi.geoplatform.gui.puregwt.featureinfo.GPFeatureInfoHandler;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPFeatureInfoHandler extends EventHandler {
+public class ActivateFeatureInfoEvent extends GPFeatureInfoEvent {
 
-    Type<GPFeatureInfoHandler> TYPE = new Type<GPFeatureInfoHandler>();
+    private boolean activate;
 
-    public void activateHandler();
+    public ActivateFeatureInfoEvent(boolean activate) {
+        this.activate = activate;
+    }
 
-    public void deactivateHandler();
+    public void setActivate(boolean activate) {
+        this.activate = activate;
+    }
 
-    public void showInfoWidget();
+    @Override
+    protected void dispatch(GPFeatureInfoHandler handler) {
+        if (activate) {
+            handler.activateHandler();
+        } else {
+            handler.deactivateHandler();
+        }
+    }
 
-    public void addLayer(Layer layer);
-
-    public void removeLayer(Layer layer);
 }

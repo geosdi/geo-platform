@@ -35,8 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.puregwt.featureinfo.event;
 
-import com.google.gwt.event.shared.GwtEvent;
-import com.google.gwt.event.shared.GwtEvent.Type;
 import org.geosdi.geoplatform.gui.puregwt.featureinfo.GPFeatureInfoHandler;
 
 /**
@@ -44,15 +42,11 @@ import org.geosdi.geoplatform.gui.puregwt.featureinfo.GPFeatureInfoHandler;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class FeatureInfoShowWidgetEvent extends GwtEvent<GPFeatureInfoHandler> {
-
-    @Override
-    public Type<GPFeatureInfoHandler> getAssociatedType() {
-        return GPFeatureInfoHandler.TYPE;
-    }
+public class FeatureInfoShowWidgetEvent extends GPFeatureInfoEvent {
 
     @Override
     protected void dispatch(GPFeatureInfoHandler handler) {
         handler.showInfoWidget();
     }
+
 }

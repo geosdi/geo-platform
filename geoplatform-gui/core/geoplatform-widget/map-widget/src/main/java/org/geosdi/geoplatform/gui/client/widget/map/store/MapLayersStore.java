@@ -37,9 +37,9 @@ package org.geosdi.geoplatform.gui.client.widget.map.store;
 
 import com.extjs.gxt.ui.client.Registry;
 import com.google.gwt.user.client.History;
-import java.util.Iterator;
 import java.util.Map.Entry;
 import org.geosdi.geoplatform.gui.client.widget.map.event.LayerRangeEvent;
+import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
 import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
 import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
@@ -48,6 +48,8 @@ import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.GPVectorBean;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
+import org.geosdi.geoplatform.gui.puregwt.featureinfo.event.FeatureInfoAddLayer;
+import org.geosdi.geoplatform.gui.puregwt.featureinfo.event.FeatureInfoRemoveLayer;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.layers.event.CleanLegendEvent;
 import org.geosdi.geoplatform.gui.puregwt.layers.event.DisplayLegendEvent;
@@ -66,12 +68,14 @@ import org.gwtopenmaps.openlayers.client.layer.WMSParams;
  *
  */
 public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
-    
+
     private final MapLayerBuilder layerBuilder;
     private final DisplayLegendEvent displayLegendEvent = new DisplayLegendEvent();
     private final HideLegendEvent hideLegendEvent = new HideLegendEvent();
     private final ReloadLegendEvent reloadLegendEvent = new ReloadLegendEvent();
     private final CleanLegendEvent cleanLegend = new CleanLegendEvent();
+    private final FeatureInfoAddLayer featureInfoAddLayer = new FeatureInfoAddLayer();
+    private final FeatureInfoRemoveLayer featureInfoRemoveLayer = new FeatureInfoRemoveLayer();
 
     public MapLayersStore(GeoPlatformMap theMapWidget) {
         super(theMapWidget);
@@ -152,8 +156,9 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
                 UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
         displayLegendEvent.setLayerBean(rasterBean);
         LayerHandlerManager.fireEvent(displayLegendEvent);
+        WMS layer = null;
         if (containsLayer(rasterBean)) {
-            WMS layer = (WMS) this.layers.get(rasterBean);
+            layer = (WMS) this.layers.get(rasterBean);
             if (!layer.isVisible() || Integer.parseInt(
                     layer.getZIndex().toString())
                     != rasterBean.getzIndex()) {
@@ -164,7 +169,7 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
                         + rasterBean.getName() + "-VISIBLE");
             }
         } else {
-            WMS layer = (WMS) this.layerBuilder.buildLayer(rasterBean);
+            layer = (WMS) this.layerBuilder.buildLayer(rasterBean);
             this.layers.put(rasterBean, layer);
             this.mapWidget.getMap().addLayer(layer);
             layer.setZIndex(rasterBean.getzIndex());
@@ -172,6 +177,8 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
             History.newItem("#" + accountDetail.getUsername() + "-"
                     + rasterBean.getName() + "-ADDED");
         }
+        featureInfoAddLayer.setLayer(layer);
+        MapHandlerManager.fireEvent(featureInfoAddLayer);
     }
 
     @Override
@@ -183,6 +190,8 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
             layer.setIsVisible(false);
             History.newItem("#" + accountDetail.getUsername() + "-"
                     + layerBean.getName() + "-NOT-VISIBLE");
+            featureInfoRemoveLayer.setLayer(layer);
+            MapHandlerManager.fireEvent(featureInfoRemoveLayer);
         }
         this.hideLegendEvent.setLayerBean(layerBean);
         LayerHandlerManager.fireEvent(this.hideLegendEvent);
@@ -204,6 +213,8 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
             this.mapWidget.getMap().removeLayer(layer);
             History.newItem("#" + accountDetail.getUsername() + "-"
                     + layerBean.getName() + "-REMOVED");
+            featureInfoRemoveLayer.setLayer(layer);
+            MapHandlerManager.fireEvent(featureInfoRemoveLayer);
         }
         this.layers.remove(layerBean);
         this.hideLegendEvent.setLayerBean(layerBean);
@@ -314,8 +325,7 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
 
     @Override
     public void resetStore() {
-        for (Iterator<Layer> it = layers.values().iterator(); it.hasNext();) {
-            Layer layer = it.next();
+        for (Layer layer : layers.values()) {
             this.mapWidget.getMap().removeLayer(layer);
         }
         this.layers.clear();

@@ -48,13 +48,13 @@ public interface GPFeatureInfoHandler extends EventHandler {
 
     Type<GPFeatureInfoHandler> TYPE = new Type<GPFeatureInfoHandler>();
 
-    public void activateHandler();
+    void activateHandler();
 
-    public void deactivateHandler();
+    void deactivateHandler();
 
-    public void showInfoWidget();
+    void showInfoWidget();
 
-    public void addLayer(Layer layer);
+    void addLayer(Layer layer);
 
-    public void removeLayer(Layer layer);
+    void removeLayer(Layer layer);
 }

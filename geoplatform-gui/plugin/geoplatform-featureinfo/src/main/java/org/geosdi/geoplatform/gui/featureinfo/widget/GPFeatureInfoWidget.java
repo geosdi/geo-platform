@@ -108,7 +108,9 @@ public class GPFeatureInfoWidget extends GeoPlatformWindow implements
             IGPFeatureInfoElement element = FeatureInfoFlyWeight.getInstance().get(layer);
             Map map = this.mapWidget.getMap();
             map.addControl(element.getElementControl());
-            element.getElementControl().activate();
+            if (this.featureCaller.isActivated()) {
+                element.getElementControl().activate();
+            }
         }
     }
 

@@ -45,6 +45,8 @@ public interface FeatureInfoCaller {
     void activateFeatureInfoControl();
 
     void deactivateFeatureInfoControl();
+    
+    void cleanFeatureInfoCache();
 
     boolean isLoaded();
 

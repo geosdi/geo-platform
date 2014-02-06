@@ -74,7 +74,6 @@ public class GPFeatureInfoCaller implements FeatureInfoCaller {
             map.removeControl(featureInfoElement.getElementControl());
             featureInfoElement.getElementControl().deactivate();
         }
-        FeatureInfoFlyWeight.getInstance().cleanCache();
         this.activated = Boolean.FALSE;
     }
 
@@ -93,6 +92,11 @@ public class GPFeatureInfoCaller implements FeatureInfoCaller {
     @Override
     public boolean isActivated() {
         return activated;
+    }
+
+    @Override
+    public void cleanFeatureInfoCache() {
+        FeatureInfoFlyWeight.getInstance().cleanCache();
     }
 
 }

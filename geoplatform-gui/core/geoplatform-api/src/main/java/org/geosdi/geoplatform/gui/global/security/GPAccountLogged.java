@@ -44,7 +44,7 @@ package org.geosdi.geoplatform.gui.global.security;
  */
 public final class GPAccountLogged {
 
-    private static GPAccountLogged INSTANCE = new GPAccountLogged();
+    private static final GPAccountLogged INSTANCE = new GPAccountLogged();
     private IGPAccountDetail accountDetail;
 
     private GPAccountLogged() {
@@ -86,4 +86,10 @@ public final class GPAccountLogged {
         assert (accountDetail != null) : "accountDetail must not be null.";
         return accountDetail.hasComponentPermission(componentID);
     }
+
+    public String getAutorithy() {
+        assert (accountDetail != null) : "accountDetail must not be null.";
+        return this.accountDetail.getAuthority();
+    }
+
 }

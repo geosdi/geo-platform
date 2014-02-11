@@ -33,25 +33,34 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.action.tree;
+package org.geosdi.geoplatform.gui.puregwt.featureinfo.event;
 
-import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import org.geosdi.geoplatform.gui.action.ToolbarAction;
+import org.geosdi.geoplatform.gui.puregwt.featureinfo.GPFeatureInfoHandler;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class ToolbarLayerTreeAction extends ToolbarAction {
+public class ActivateFeatureInfoEvent extends GPFeatureInfoEvent {
 
-    protected TreePanel tree;
+    private boolean activate;
 
-    public ToolbarLayerTreeAction(TreePanel theTree, AbstractImagePrototype image,
-            String tooltip) {
-        super(image, tooltip);
-        this.tree = theTree;
+    public ActivateFeatureInfoEvent(boolean activate) {
+        this.activate = activate;
+    }
+
+    public void setActivate(boolean activate) {
+        this.activate = activate;
+    }
+
+    @Override
+    protected void dispatch(GPFeatureInfoHandler handler) {
+        if (activate) {
+            handler.activateHandler();
+        } else {
+            handler.deactivateHandler();
+        }
     }
 
 }

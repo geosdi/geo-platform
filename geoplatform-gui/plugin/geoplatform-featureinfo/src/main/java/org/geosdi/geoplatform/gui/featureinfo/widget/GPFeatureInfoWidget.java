@@ -37,12 +37,10 @@ package org.geosdi.geoplatform.gui.featureinfo.widget;
 
 import com.extjs.gxt.ui.client.Style.Scroll;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
-import java.util.List;
 import org.geosdi.geoplatform.gui.client.i18n.FeatureInfoModuleConstants;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
-import org.geosdi.geoplatform.gui.factory.map.GPApplicationMap;
 import org.geosdi.geoplatform.gui.featureinfo.cache.FeatureInfoFlyWeight;
 import org.geosdi.geoplatform.gui.featureinfo.cache.IGPFeatureInfoElement;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
@@ -56,11 +54,12 @@ import org.gwtopenmaps.openlayers.client.layer.Layer;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPFeatureInfoWidget extends GeoPlatformWindow implements GPFeatureInfoHandler {
+public class GPFeatureInfoWidget extends GeoPlatformWindow implements
+        GPFeatureInfoHandler {
 
     private ContentPanel mainPanel;
-    private GPFeatureInfoCaller featureCaller;
-    private GeoPlatformMap mapWidget;
+    private final FeatureInfoCaller featureCaller;
+    private final GeoPlatformMap mapWidget;
 
     public GPFeatureInfoWidget(GeoPlatformMap theMapWidget) {
         super(false);
@@ -94,34 +93,31 @@ public class GPFeatureInfoWidget extends GeoPlatformWindow implements GPFeatureI
 
     @Override
     public void removeLayer(Layer layer) {
-//        System.out.println("On remove layer: " + layer);
         if (FeatureInfoFlyWeight.getInstance().contains(layer)) {
-            Map map = GPApplicationMap.getInstance().getApplicationMap().getMap();
+            Map map = this.mapWidget.getMap();
             IGPFeatureInfoElement featureInfoElement = FeatureInfoFlyWeight.getInstance().get(layer);
             featureInfoElement.getElementControl().deactivate();
             map.removeControl(featureInfoElement.getElementControl());
             FeatureInfoFlyWeight.getInstance().remove(layer);
-//            System.out.println("layer removed");
         }
     }
 
     @Override
-    public void addModifyLayer(Layer layer) {
-//        System.out.println("On addModifyLayer: " + layer);
-        this.removeLayer(layer);
-        if (layer.isVisible()) {
+    public void addLayer(Layer layer) {
+        if (!FeatureInfoFlyWeight.getInstance().contains(layer)) {
             IGPFeatureInfoElement element = FeatureInfoFlyWeight.getInstance().get(layer);
-            Map map = GPApplicationMap.getInstance().getApplicationMap().getMap();
+            Map map = this.mapWidget.getMap();
             map.addControl(element.getElementControl());
-            element.getElementControl().activate();
-//            System.out.println("Added layer");
+            if (this.featureCaller.isActivated()) {
+                element.getElementControl().activate();
+            }
         }
     }
 
     @Override
-    public void activateHandler(List<Layer> layerList) {
+    public void activateHandler() {
 //        System.out.println("On activate handler");
-        this.featureCaller.load(layerList);
+        this.featureCaller.activateFeatureInfoControl();
     }
 
     @Override
@@ -134,6 +130,10 @@ public class GPFeatureInfoWidget extends GeoPlatformWindow implements GPFeatureI
         this.mainPanel.removeAll();
     }
 
+    /**
+     *@TODO Think a way to have more control when no Layers are on the map, to show
+     *      a message.
+     **/
     @Override
     public void showInfoWidget() {
 //        System.out.println("Showing the info widget");
@@ -143,7 +143,6 @@ public class GPFeatureInfoWidget extends GeoPlatformWindow implements GPFeatureI
                 this.mainPanel.add(featureInfoElement.getElementPanel());
             }
         }
-        this.mainPanel.layout();
         if (this.mainPanel.getItemCount() > 0) {
             super.show();
         } else {
@@ -152,4 +151,11 @@ public class GPFeatureInfoWidget extends GeoPlatformWindow implements GPFeatureI
                     FeatureInfoModuleConstants.INSTANCE.GPFeatureInfoWidget_alertNoLayerBodyText());
         }
     }
+
+    @Override
+    protected void afterShow() {
+        super.afterShow();
+        super.layout(Boolean.TRUE);
+    }
+
 }

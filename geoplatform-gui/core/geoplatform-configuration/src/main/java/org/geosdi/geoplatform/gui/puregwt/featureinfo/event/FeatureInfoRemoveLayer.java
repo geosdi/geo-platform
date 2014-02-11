@@ -35,26 +35,13 @@
  */
 package org.geosdi.geoplatform.gui.puregwt.featureinfo.event;
 
-import com.google.gwt.event.shared.GwtEvent;
 import org.geosdi.geoplatform.gui.puregwt.featureinfo.GPFeatureInfoHandler;
-import org.gwtopenmaps.openlayers.client.layer.Layer;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class FeatureInfoRemoveLayer extends GwtEvent<GPFeatureInfoHandler> {
-    
-    private Layer layer;
-    
-    public FeatureInfoRemoveLayer(Layer layer) {
-        this.layer = layer;
-    }
-    
-    @Override
-    public Type<GPFeatureInfoHandler> getAssociatedType() {
-        return GPFeatureInfoHandler.TYPE;
-    }
+public class FeatureInfoRemoveLayer extends FeatureInfoCrudEvent {
     
     @Override
     protected void dispatch(GPFeatureInfoHandler handler) {

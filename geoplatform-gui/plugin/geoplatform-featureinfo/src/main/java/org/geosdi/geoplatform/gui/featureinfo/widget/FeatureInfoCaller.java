@@ -33,21 +33,23 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.puregwt.featureinfo.event;
-
-import com.google.gwt.event.shared.GwtEvent;
-import org.geosdi.geoplatform.gui.puregwt.featureinfo.GPFeatureInfoHandler;
+package org.geosdi.geoplatform.gui.featureinfo.widget;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public abstract class GPFeatureInfoEvent extends GwtEvent<GPFeatureInfoHandler> {
+public interface FeatureInfoCaller {
 
-    @Override
-    public Type<GPFeatureInfoHandler> getAssociatedType() {
-        return GPFeatureInfoHandler.TYPE;
-    }
+    void activateFeatureInfoControl();
+
+    void deactivateFeatureInfoControl();
+    
+    void cleanFeatureInfoCache();
+
+    boolean isLoaded();
+
+    boolean isActivated();
 
 }

@@ -41,6 +41,7 @@ import com.google.common.collect.Maps;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import java.util.Collection;
 import java.util.Map;
+import java.util.logging.Logger;
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
 import org.geosdi.geoplatform.gui.featureinfo.widget.factory.FeatureInfoControlFactory;
 import org.geosdi.geoplatform.gui.featureinfo.widget.factory.FeatureInfoPanelFactory;
@@ -48,8 +49,6 @@ import org.geosdi.geoplatform.gui.puregwt.featureinfo.event.FeatureInfoShowWidge
 import org.gwtopenmaps.openlayers.client.control.WMSGetFeatureInfo;
 import org.gwtopenmaps.openlayers.client.event.GetFeatureInfoListener;
 import org.gwtopenmaps.openlayers.client.event.GetFeatureInfoListener.GetFeatureInfoEvent;
-import org.gwtopenmaps.openlayers.client.event.NoGetFeatureInfoListener;
-import org.gwtopenmaps.openlayers.client.event.NoGetFeatureInfoListener.NoGetFeatureInfoEvent;
 import org.gwtopenmaps.openlayers.client.layer.Layer;
 
 /**
@@ -59,9 +58,11 @@ import org.gwtopenmaps.openlayers.client.layer.Layer;
  */
 public class FeatureInfoFlyWeight {
 
-    private static FeatureInfoFlyWeight instance = new FeatureInfoFlyWeight();
-    private Map<String, IGPFeatureInfoElement> cache = Maps.<String, IGPFeatureInfoElement>newHashMap();
-    private FeatureInfoShowWidgetEvent event = new FeatureInfoShowWidgetEvent();
+    private final static Logger logger = Logger.getLogger("");
+    private static final FeatureInfoFlyWeight instance = new FeatureInfoFlyWeight();
+    //
+    private final Map<String, IGPFeatureInfoElement> cache = Maps.<String, IGPFeatureInfoElement>newHashMap();
+    private final FeatureInfoShowWidgetEvent event = new FeatureInfoShowWidgetEvent();
     private int count = 0;
 
     private FeatureInfoFlyWeight() {
@@ -72,6 +73,7 @@ public class FeatureInfoFlyWeight {
     }
 
     private void checkLastElement() {
+        logger.fine("@@@@@@@@@@@@@@@@@@Cache Dimension : " + cache.size());
         if (++count == cache.size()) {
             MapHandlerManager.fireEvent(event);
             count = 0;
@@ -107,13 +109,13 @@ public class FeatureInfoFlyWeight {
 
     private class GPFeatureInfoElement implements IGPFeatureInfoElement {
 
-        private Layer layer;
+        private final Layer layer;
         private WMSGetFeatureInfo infoControl;
         private ContentPanel infoPanel;
         private boolean isActive;
 
-        public GPFeatureInfoElement(Layer layer) {
-            this.layer = layer;
+        public GPFeatureInfoElement(Layer theLayer) {
+            this.layer = theLayer;
             this.createComponents();
         }
 
@@ -142,6 +144,7 @@ public class FeatureInfoFlyWeight {
 
         private void addFeatureListener() {
             this.infoControl.addGetFeatureListener(new GetFeatureInfoListener() {
+
                 @Override
                 public void onGetFeatureInfo(GetFeatureInfoEvent eventObject) {
                     infoPanel.removeAll();
@@ -149,16 +152,10 @@ public class FeatureInfoFlyWeight {
                     isActive = true;
                     checkLastElement();
                 }
+
             });
 
-            this.infoControl.addNoGetFeatureListener(new NoGetFeatureInfoListener() {
-                @Override
-                public void onNoGetFeatureInfo(NoGetFeatureInfoEvent eventObject) {
-                    infoPanel.removeAll();
-                    isActive = false;
-                    checkLastElement();
-                }
-            });
         }
+
     }
 }

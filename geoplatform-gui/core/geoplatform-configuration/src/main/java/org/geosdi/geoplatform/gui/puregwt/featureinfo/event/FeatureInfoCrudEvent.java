@@ -35,19 +35,22 @@
  */
 package org.geosdi.geoplatform.gui.puregwt.featureinfo.event;
 
-import com.google.gwt.event.shared.GwtEvent;
-import org.geosdi.geoplatform.gui.puregwt.featureinfo.GPFeatureInfoHandler;
+import org.gwtopenmaps.openlayers.client.layer.Layer;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public abstract class GPFeatureInfoEvent extends GwtEvent<GPFeatureInfoHandler> {
+public abstract class FeatureInfoCrudEvent extends GPFeatureInfoEvent {
 
-    @Override
-    public Type<GPFeatureInfoHandler> getAssociatedType() {
-        return GPFeatureInfoHandler.TYPE;
+    protected Layer layer;
+
+    /**
+     * @param theLayer the layer to set
+     */
+    public void setLayer(Layer theLayer) {
+        this.layer = theLayer;
     }
 
 }

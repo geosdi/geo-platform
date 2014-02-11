@@ -52,7 +52,7 @@ public abstract class WidgetGenericTool<C> extends GenericTool {
      * Check the permission of the user logged and call the method for creation.
      * If the permission was not found the tool will not be created.
      *
-     * @param toolbar
+     * @param container
      */
     public void buildTool(C container) {
         Boolean permission = GPAccountLogged.getInstance().
@@ -66,7 +66,7 @@ public abstract class WidgetGenericTool<C> extends GenericTool {
     /**
      * Each component will be added into Container itself
      *
-     * @param C container
+     * @param container
      */
     protected abstract void create(C container);
 }

@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.gui.puregwt.featureinfo;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
-import java.util.List;
 import org.gwtopenmaps.openlayers.client.layer.Layer;
 
 /**
@@ -49,13 +48,13 @@ public interface GPFeatureInfoHandler extends EventHandler {
 
     Type<GPFeatureInfoHandler> TYPE = new Type<GPFeatureInfoHandler>();
 
-    public void activateHandler(List<Layer> layerList);
+    public void activateHandler();
 
     public void deactivateHandler();
 
     public void showInfoWidget();
 
-    public void addModifyLayer(Layer layer);
+    public void addLayer(Layer layer);
 
     public void removeLayer(Layer layer);
 }

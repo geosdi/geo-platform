@@ -35,39 +35,30 @@
  */
 package org.geosdi.geoplatform.gui.featureinfo.widget;
 
-import java.util.List;
 import org.geosdi.geoplatform.gui.featureinfo.cache.FeatureInfoFlyWeight;
 import org.geosdi.geoplatform.gui.featureinfo.cache.IGPFeatureInfoElement;
 import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
 import org.gwtopenmaps.openlayers.client.Map;
-import org.gwtopenmaps.openlayers.client.layer.Layer;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPFeatureInfoCaller {
+public class GPFeatureInfoCaller implements FeatureInfoCaller {
 
     private boolean loaded;
     private boolean activated;
-    private Map map;
+    private final Map map;
 
     public GPFeatureInfoCaller(Map theMap) {
         this.map = theMap;
     }
 
-    public void load(List<Layer> layerList) {
-        for (Layer layer : GeoPlatformUtils.safeList(layerList)) {
-            IGPFeatureInfoElement element = FeatureInfoFlyWeight.getInstance().get(layer);
-            map.addControl(element.getElementControl());
-        }
-        activateFeatureInfoControl();
-    }
-
+    @Override
     public void activateFeatureInfoControl() {
-        for (IGPFeatureInfoElement featureInfoElement :
-                GeoPlatformUtils.safeCollection(FeatureInfoFlyWeight.getInstance().getCollection())) {
+        for (IGPFeatureInfoElement featureInfoElement
+                : GeoPlatformUtils.safeCollection(FeatureInfoFlyWeight.getInstance().getCollection())) {
             featureInfoElement.getElementControl().activate();
         }
         this.activated = Boolean.TRUE;
@@ -76,13 +67,13 @@ public class GPFeatureInfoCaller {
     /**
      *
      */
+    @Override
     public void deactivateFeatureInfoControl() {
-        for (IGPFeatureInfoElement featureInfoElement :
-                GeoPlatformUtils.safeCollection(FeatureInfoFlyWeight.getInstance().getCollection())) {
+        for (IGPFeatureInfoElement featureInfoElement
+                : GeoPlatformUtils.safeCollection(FeatureInfoFlyWeight.getInstance().getCollection())) {
             map.removeControl(featureInfoElement.getElementControl());
             featureInfoElement.getElementControl().deactivate();
         }
-        FeatureInfoFlyWeight.getInstance().cleanCache();
         this.activated = Boolean.FALSE;
     }
 
@@ -90,6 +81,7 @@ public class GPFeatureInfoCaller {
      *
      * @return boolean
      */
+    @Override
     public boolean isLoaded() {
         return loaded;
     }
@@ -97,7 +89,14 @@ public class GPFeatureInfoCaller {
     /**
      * @return the visible
      */
+    @Override
     public boolean isActivated() {
         return activated;
     }
+
+    @Override
+    public void cleanFeatureInfoCache() {
+        FeatureInfoFlyWeight.getInstance().cleanCache();
+    }
+
 }

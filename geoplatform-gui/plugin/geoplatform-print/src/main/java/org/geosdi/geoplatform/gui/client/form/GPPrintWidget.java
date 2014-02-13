@@ -361,7 +361,7 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
 
     public String buildLayersOrderList(GPLayerBean layer) {
         String style = "";
-        if (layer.getStyles().get(0) != null) {
+        if (layer.getStyles() != null && layer.getStyles().get(0) != null) {
             style = layer.getStyles().get(0).getStyleString();
         }
 

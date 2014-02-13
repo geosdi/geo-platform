@@ -306,9 +306,13 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
 
         String dataSourceT = dataSource;
 
+        String style = this.getStyleFromLayer(layer);
+
         String imageURL = URL.encodeComponent(
                 dataSourceT + "?REQUEST=GetLegendGraphic"
-                + "&VERSION=1.0.0&FORMAT=image/png&LAYER=" + layer.getName() + "&STYLE=" + layer.getStyles().get(0).getStyleString() + "&scale=5000&service=WMS");
+                + "&VERSION=1.0.0&FORMAT=image/png&LAYER=" + layer.getName()
+                + "&STYLE=" + style
+                + "&scale=5000&service=WMS");
 
         return imageURL;
 
@@ -359,11 +363,16 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
         }
     }
 
-    public String buildLayersOrderList(GPLayerBean layer) {
+    private String getStyleFromLayer(GPLayerBean layer) {
         String style = "";
-        if (layer.getStyles() != null && layer.getStyles().get(0) != null) {
+        if (layer.getStyles() != null && !layer.getStyles().isEmpty()) {
             style = layer.getStyles().get(0).getStyleString();
         }
+        return style;
+    }
+
+    public String buildLayersOrderList(GPLayerBean layer) {
+        String style = this.getStyleFromLayer(layer);
 
         String layerJson = ",{\n"
                 + "            \"baseURL\": \"" + layer.getDataSource() + "\",\n"

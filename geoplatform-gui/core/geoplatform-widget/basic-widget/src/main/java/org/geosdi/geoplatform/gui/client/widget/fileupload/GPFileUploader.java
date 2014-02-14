@@ -64,7 +64,7 @@ public class GPFileUploader {
     private FileUpload fileUpload;
     private Button buttonSubmit;
     private String htmlResult;
-    private AbstractUploadEvent uploadEvent;
+    private final AbstractUploadEvent uploadEvent;
     private UploaderProgressBar uploaderProgressBar;
 
     public GPFileUploader(String uploadAction, AbstractUploadEvent uploadEvent, GPExtensions... extensions) {
@@ -93,6 +93,7 @@ public class GPFileUploader {
 
         buttonSubmit = new Button(ButtonsConstants.INSTANCE.submitText(),
                 new SelectionListener<ButtonEvent>() {
+
                     @Override
                     public void componentSelected(ButtonEvent ce) {
                         uploaderProgressBar.show("Uploading...");
@@ -103,11 +104,13 @@ public class GPFileUploader {
                                     BasicWidgetConstants.INSTANCE.GPFileUploader_uploadInProgressText());
                         }
                     }
+
                 });
-        panel.add(getButtonSubmit());
+        panel.add(buttonSubmit);
 
         // Add an event handler to the form.
         formPanel.addSubmitHandler(new FormPanel.SubmitHandler() {
+
             @Override
             public void onSubmit(SubmitEvent event) {
                 // This event is fired just before the form is submitted. We can
@@ -123,9 +126,11 @@ public class GPFileUploader {
                     formPanel.reset();
                 }
             }
+
         });
 
         formPanel.addSubmitCompleteHandler(new FormPanel.SubmitCompleteHandler() {
+
             @Override
             public void onSubmitComplete(SubmitCompleteEvent event) {
                 // When the form submission is successfully completed,
@@ -167,6 +172,7 @@ public class GPFileUploader {
                 }
                 uploaderProgressBar.hide();
             }
+
         });
     }
 

@@ -174,7 +174,7 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
             String specJson = "";
 
             specJson = "{\"layout\":\"" + comboTemplate.getValue().getTemplate() + "\""
-                    + ",\"srs\":\"EPSG:900913\",\"units\": \"m\",\"geodetic\":true,\"outputFilename\":\"gp-map\", \"outputFormat\":\"pdf\",";
+                    + ",\"srs\":\"EPSG:3857\",\"units\": \"m\",\"geodetic\":true,\"outputFilename\":\"gp-map\", \"outputFormat\":\"pdf\",";
 
 //            String layers = "{\"title\":\"" + title.getValue() + "\",\"pages\":[{\"center\":["
 //                    + center.lon() + ","

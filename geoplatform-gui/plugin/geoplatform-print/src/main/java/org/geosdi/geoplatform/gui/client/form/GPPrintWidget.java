@@ -311,7 +311,8 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
 
         String imageURL = URL.encodeComponent(
                 dataSourceT + "?REQUEST=GetLegendGraphic"
-                + "&VERSION=1.0.0&FORMAT=image/png&LAYER=" + layer.getName()
+                + "&VERSION=1.0.0&FORMAT=image/png&LAYER=" + 
+                        URL.encode(layer.getName())
                 + "&STYLE=" + style
                 + "&scale=5000&service=WMS");
 

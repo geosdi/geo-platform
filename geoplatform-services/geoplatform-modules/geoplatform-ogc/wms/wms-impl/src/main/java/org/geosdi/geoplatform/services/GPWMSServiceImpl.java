@@ -206,6 +206,9 @@ public class GPWMSServiceImpl implements GPWMSService {
                     || additionalBounds.containsKey(EPSG_3857)) {
                 CRSEnvelope env = additionalBounds
                         .get(EPSG_GOOGLE);
+                if(env == null) {
+                    env = additionalBounds.get(EPSG_3857);
+                }
                 raster.setBbox(this.createBbox(env));
                 raster.setSrs(env.getEPSGCode());
             } else {
@@ -257,35 +260,7 @@ public class GPWMSServiceImpl implements GPWMSService {
         return shortServers;
     }
 
-    // private GeoPlatformServer createWMSServerFromService(
-    // GeoPlatformServer server, Service service) {
-    // server.setName(service.getName());
-    // server.setTitle(service.getTitle());
-    // server.setAbstractServer(service.get_abstract());
-    // ResponsibleParty party = service.getContactInformation();
-    // if (party != null) {
-    // Contact contact = party.getContactInfo();
-    // if (contact != null) {
-    // InternationalString is = contact.getContactInstructions();
-    // if (is != null) {
-    // server.setContactPerson(is.toString());
-    // }
-    // }
-    // InternationalString is = party.getOrganisationName();
-    // if (is != null) {
-    // server.setContactOrganization(is.toString());
-    // }
-    // }
-    // return server;
-    // }
     private List<String> createStyleList(List<StyleImpl> stylesImpl) {
-        // List<StyleDTO> stylesDTO = new
-        // ArrayList<StyleDTO>(stylesImpl.size());
-        // for (StyleImpl style : stylesImpl) {
-        // StyleDTO styleDTO = new StyleDTO(style);
-        // stylesDTO.add(styleDTO);
-        // logger.trace("\n*** CONVERTED StyleDTO:\n{}\n***", styleDTO);
-        // }
         List<String> styleList = new ArrayList<String>(stylesImpl.size());
         for (StyleImpl style : stylesImpl) {
             styleList.add(style.getName());
@@ -294,8 +269,8 @@ public class GPWMSServiceImpl implements GPWMSService {
     }
 
     private GPBBox createBbox(CRSEnvelope env) {
-        return new GPBBox(env.getMinX(), env.getMinY(), env.getMaxX(),
-                env.getMaxY());
+        return ((env != null) ? new GPBBox(env.getMinX(), env.getMinY(), env.getMaxX(),
+                env.getMaxY()) : new GPBBox(-179, -89, 179, 89));
     }
 
     private String getUrlServer(String urlServer) {
@@ -339,4 +314,5 @@ public class GPWMSServiceImpl implements GPWMSService {
     public void setServerDao(GPServerDAO serverDao) {
         this.serverDao = serverDao;
     }
+
 }

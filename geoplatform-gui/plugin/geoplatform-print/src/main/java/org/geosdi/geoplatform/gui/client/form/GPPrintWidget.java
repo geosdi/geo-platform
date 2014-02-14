@@ -60,6 +60,7 @@ import com.google.gwt.http.client.Response;
 import com.google.gwt.http.client.URL;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.RootPanel;
+import java.net.URLEncoder;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -367,7 +368,7 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
     private String getStyleFromLayer(GPLayerBean layer) {
         String style = "";
         if (layer.getStyles() != null && !layer.getStyles().isEmpty()) {
-            style = layer.getStyles().get(0).getStyleString();
+            style = URL.encode(layer.getStyles().get(0).getStyleString());
         }
         return style;
     }

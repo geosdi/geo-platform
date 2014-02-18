@@ -92,4 +92,9 @@ public final class GPAccountLogged {
         return this.accountDetail.getAuthority();
     }
 
+    public Long getAccountDetailID() {
+        assert (accountDetail != null) : "accountDetail must not be null.";
+        return this.accountDetail.getId();
+    }
+
 }

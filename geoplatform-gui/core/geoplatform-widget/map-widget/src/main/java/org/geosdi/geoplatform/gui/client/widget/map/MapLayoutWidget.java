@@ -467,6 +467,7 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
         return this.mapControl.getFeaturesNumber();
     }
 
+    @Override
     public void drawFeature(VectorFeature feature) {
         this.mapControl.drawFeature(feature);
     }

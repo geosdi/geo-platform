@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.impl.map;
 
+import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -42,30 +44,32 @@ package org.geosdi.geoplatform.gui.impl.map;
  */
 public interface GeoPlatformEditor {
 
-    public void activateDrawPointFeature();
+    void activateDrawPointFeature();
 
-    public void deactivateDrawPointFeature();
+    void deactivateDrawPointFeature();
 
-    public void activateDrawLineFeature();
+    void activateDrawLineFeature();
 
-    public void deactivateDrawLineFeature();
+    void deactivateDrawLineFeature();
 
-    public void activateDrawFeature();
+    void activateDrawFeature();
 
-    public void deactivateDrawFeature();
+    void deactivateDrawFeature();
 
-    public boolean isFeatureOperationEnable();
+    boolean isFeatureOperationEnable();
 
-    public void deactivateFeatureOperation();
+    void deactivateFeatureOperation();
 
-    public void activateModifyFeature();
+    void activateModifyFeature();
 
-    public void deactivateModifyFeature();
+    void deactivateModifyFeature();
 
-    public boolean isModifyFeatureEnable();
+    boolean isModifyFeatureEnable();
 
-    public void activateDrawCircleFeature();
+    void activateDrawCircleFeature();
 
-    public void deactivateDrawCircleFeature();
+    void deactivateDrawCircleFeature();
+
+    void drawFeature(VectorFeature feature);
 
 }

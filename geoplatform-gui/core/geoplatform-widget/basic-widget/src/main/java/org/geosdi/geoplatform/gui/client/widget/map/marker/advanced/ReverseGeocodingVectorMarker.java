@@ -61,7 +61,7 @@ public class ReverseGeocodingVectorMarker extends GPVectorMarkerLayer {
     @Override
     public void setIconStyle() {
         style.setExternalGraphic(GWT.getModuleBaseURL()
-                + "/gp-images/vector_marker.png");
+                + "/gp-images/marker-icon-green.png");
     }
 
     @Override

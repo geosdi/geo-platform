@@ -57,7 +57,6 @@ public abstract class GPVectorMarkerLayer extends GPGenericMarkerLayer {
     protected VectorFeature feature;
     protected Style style;
     protected DragFeature dragControl;
-    private boolean activeControl;
 
     public GPVectorMarkerLayer(Map theMap, String theMarkerLayerName) {
         super(theMap, theMarkerLayerName);
@@ -108,7 +107,6 @@ public abstract class GPVectorMarkerLayer extends GPGenericMarkerLayer {
     public void addControl() {
         map.addControl(dragControl);
         dragControl.activate();
-        this.activeControl = true;
     }
 
     /**
@@ -116,10 +114,7 @@ public abstract class GPVectorMarkerLayer extends GPGenericMarkerLayer {
      *
      */
     public void removeControl() {
-        if (this.activeControl) {
-            this.dragControl.deactivate();
-            this.activeControl = false;
-        }
+        this.dragControl.deactivate();
         map.removeControl(dragControl);
     }
 
@@ -157,6 +152,10 @@ public abstract class GPVectorMarkerLayer extends GPGenericMarkerLayer {
      */
     public Style getStyle() {
         return style;
+    }
+
+    public boolean isDragControlActive() {
+        return this.dragControl.isActive();
     }
 
 }

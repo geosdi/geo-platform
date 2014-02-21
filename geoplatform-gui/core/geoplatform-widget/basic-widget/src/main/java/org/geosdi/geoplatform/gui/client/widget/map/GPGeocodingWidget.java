@@ -59,6 +59,7 @@ public class GPGeocodingWidget implements GeocodingEventHandler {
 
     private final GeoPlatformMap mapWidget;
     private VectorFeature vectorFeature;
+    private boolean activated;
     /**
      * TODO : Think a way to have this in configuration *
      */
@@ -74,8 +75,11 @@ public class GPGeocodingWidget implements GeocodingEventHandler {
 
     @Override
     public void register() {
-        this.mapWidget.getMap().addLayer(geocoderMarker.getMarkerLayer());
-        this.mapWidget.getMap().addLayer(geocoderFeature.geFeatureLayer());
+        if (!activated) {
+            this.mapWidget.getMap().addLayer(geocoderMarker.getMarkerLayer());
+            this.mapWidget.getMap().addLayer(geocoderFeature.geFeatureLayer());
+            this.activated = true;
+        }
         this.geocoderMarker.addControl();
     }
 
@@ -84,9 +88,9 @@ public class GPGeocodingWidget implements GeocodingEventHandler {
         this.geocoderMarker.removeControl();
         this.geocoderMarker.removeMarker();
         this.geocoderFeature.removeFeature();
-        this.mapWidget.getMap().removeLayer(this.geocoderMarker.getMarkerLayer());
-        this.mapWidget.getMap().removeLayer(
-                this.geocoderFeature.geFeatureLayer());
+//        this.mapWidget.getMap().removeLayer(this.geocoderMarker.getMarkerLayer());
+//        this.mapWidget.getMap().removeLayer(
+//                this.geocoderFeature.geFeatureLayer());
     }
 
     @Override

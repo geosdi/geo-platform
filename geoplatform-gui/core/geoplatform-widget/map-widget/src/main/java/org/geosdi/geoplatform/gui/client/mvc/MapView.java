@@ -44,7 +44,7 @@ import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import org.geosdi.geoplatform.gui.client.MapRegistryEnum;
 import org.geosdi.geoplatform.gui.client.MapWidgetEvents;
 import org.geosdi.geoplatform.gui.client.widget.MapToolbar;
-import org.geosdi.geoplatform.gui.client.widget.map.GPGeocodingWidget;
+import org.geosdi.geoplatform.gui.client.widget.map.GPGeocodingEventHandler;
 import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
 import org.geosdi.geoplatform.gui.client.widget.scale.GPMapToolsWidget;
 import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformView;
@@ -61,7 +61,7 @@ import org.gwtopenmaps.openlayers.client.layer.Layer;
 public class MapView extends GeoPlatformView {
 
     private MapLayoutWidget mapLayout;
-    private GPGeocodingWidget geocoderWidget;
+    private GPGeocodingEventHandler geocoderWidget;
     private MapToolbar buttonBar;
     private GPMapToolsWidget mapToolsWidget;
 
@@ -77,7 +77,7 @@ public class MapView extends GeoPlatformView {
         /**
          * TODO : Think a way to have this component in Geocoding Module *
          */
-        this.geocoderWidget = new GPGeocodingWidget(this.mapLayout);
+        this.geocoderWidget = new GPGeocodingEventHandler(this.mapLayout);
         /**
          * ****************************************************************
          */

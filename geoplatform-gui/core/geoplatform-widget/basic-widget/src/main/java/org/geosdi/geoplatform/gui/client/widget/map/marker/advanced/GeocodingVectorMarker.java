@@ -34,6 +34,7 @@
 package org.geosdi.geoplatform.gui.client.widget.map.marker.advanced;
 
 import com.google.gwt.core.client.GWT;
+import org.geosdi.geoplatform.gui.client.widget.map.event.reversegeocoding.RemovePopupEvent;
 import org.geosdi.geoplatform.gui.client.widget.map.event.reversegeocoding.ReverseGeocodingUpdateLocationEvent;
 import org.geosdi.geoplatform.gui.puregwt.geocoding.GPGeocodingHandlerManager;
 import org.gwtopenmaps.openlayers.client.LonLat;
@@ -49,6 +50,7 @@ public class GeocodingVectorMarker extends GPVectorMarkerLayer {
 
     private Object provider;
     private final ReverseGeocodingUpdateLocationEvent updateEvent = new ReverseGeocodingUpdateLocationEvent();
+    private final RemovePopupEvent removePopup = new RemovePopupEvent();
 
     public GeocodingVectorMarker(Map theMap, String theMarkerLayerName) {
         super(theMap, theMarkerLayerName);
@@ -72,6 +74,12 @@ public class GeocodingVectorMarker extends GPVectorMarkerLayer {
             map.setCenter(lonlat, 14);
         }
         super.drawFeature(lonlat);
+    }
+
+    @Override
+    public void removeMarker() {
+        super.removeMarker();
+        GPGeocodingHandlerManager.fireEventFromSource(removePopup, provider);
     }
 
     @Override

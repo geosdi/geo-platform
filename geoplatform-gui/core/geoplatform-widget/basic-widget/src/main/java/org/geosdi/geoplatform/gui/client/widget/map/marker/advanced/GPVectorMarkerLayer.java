@@ -97,7 +97,7 @@ public abstract class GPVectorMarkerLayer extends GPGenericMarkerLayer {
     public void removeMarker() {
         if (this.feature != null) {
             ((Vector) this.markerLayer).removeFeature(feature);
-        }
+        }   
     }
 
     /**

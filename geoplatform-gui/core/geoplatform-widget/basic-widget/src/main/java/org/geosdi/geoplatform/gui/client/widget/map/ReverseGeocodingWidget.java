@@ -63,11 +63,12 @@ public abstract class ReverseGeocodingWidget implements
 
     protected GeoPlatformMap mapWidget;
     protected ReverseGeocodingDispatch dispatcher;
+    private boolean activated;
     /**
      * TODO : Think a way to have this in configuration *
      */
-    private ReverseGeocodingVectorMarker rGMarker; //new ReverseGeocodingMarker();
-    private PopupMapWidget popupWidget = new PopupMapWidget(
+    private final ReverseGeocodingVectorMarker rGMarker; //new ReverseGeocodingMarker();
+    private final PopupMapWidget popupWidget = new PopupMapWidget(
             "GP-Reverse-GeoCoder-Popup");
     private MapClickListener listener;
     private LonLat lonlat;
@@ -103,7 +104,10 @@ public abstract class ReverseGeocodingWidget implements
     @Override
     public final void register() {
         registerChild();
-        this.mapWidget.getMap().addLayer(this.rGMarker.getMarkerLayer());
+        if (!activated) {
+            this.mapWidget.getMap().addLayer(this.rGMarker.getMarkerLayer());
+            this.activated = true;
+        }
         this.rGMarker.addControl();
         this.mapWidget.getMap().addMapClickListener(listener);
     }
@@ -128,8 +132,8 @@ public abstract class ReverseGeocodingWidget implements
      */
     public void clearWidgetStatus() {
         this.removeMapElements();
-        this.mapWidget.getMap().removeLayer(this.rGMarker.getMarkerLayer(),
-                false);
+//        this.mapWidget.getMap().removeLayer(this.rGMarker.getMarkerLayer(),
+//                false);
         this.mapWidget.getMap().removeMapClickListener(listener);
     }
 
@@ -195,8 +199,15 @@ public abstract class ReverseGeocodingWidget implements
      */
     public abstract void displayErrorMessage();
 
+    @Override
+    public void removePopup() {
+        if (this.popupWidget.isPopupVisible()) {
+            this.mapWidget.getMap().removePopup(this.popupWidget.getPopup());
+        }
+    }
+
     private void removeMapElements() {
-        this.mapWidget.getMap().removePopup(this.popupWidget.getPopup());
+        removePopup();
         this.rGMarker.removeMarker();
     }
 

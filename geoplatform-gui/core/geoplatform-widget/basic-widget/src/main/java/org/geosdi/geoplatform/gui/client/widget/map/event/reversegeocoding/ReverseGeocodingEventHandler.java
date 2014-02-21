@@ -47,11 +47,15 @@ import org.gwtopenmaps.openlayers.client.LonLat;
  * @email michele.santomauro@geosdi.org
  * 
  */
-public interface ReverseGeocodingEventHandler extends GenericGeocodingEventHandler {
+public interface ReverseGeocodingEventHandler extends
+        GenericGeocodingEventHandler {
 
     Type<ReverseGeocodingEventHandler> TYPE = new Type<ReverseGeocodingEventHandler>();
 
-    public void onAddMarkerByLatLon(LonLat theLonLat);
+    void onAddMarkerByLatLon(LonLat theLonLat);
 
-    public void onUpdateReverseGeocoding(LonLat ll);
+    void onUpdateReverseGeocoding(LonLat ll);
+
+    void removePopup();
+
 }

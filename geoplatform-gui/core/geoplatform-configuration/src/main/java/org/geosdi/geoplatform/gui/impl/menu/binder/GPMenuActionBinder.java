@@ -80,7 +80,7 @@ public class GPMenuActionBinder implements MenuActionBinder {
             GPMenuItem tool, final Menu menu) {
         final MenuItem item = new MenuItem(tool.getText());
         item.setItemId(tool.getId());
-
+        
         if (action != null) {
             action.setId(tool.getId());
             if (action instanceof MenuBaseAction) {

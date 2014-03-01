@@ -71,7 +71,7 @@ public abstract class AbstractCompositeStore implements GPMenuCompositeStore {
         Preconditions.checkNotNull(clientTools, "The Client Tools must not "
                 + "be null.");
 
-        CompositeStoreSorter sorter = new CompositeStoreSorter() {
+        new CompositeStoreSorter() {
 
             @Override
             public void sort() {
@@ -82,9 +82,7 @@ public abstract class AbstractCompositeStore implements GPMenuCompositeStore {
                 }
             }
 
-        };
-
-        sorter.sort();
+        }.sort();
     }
 
     @Override

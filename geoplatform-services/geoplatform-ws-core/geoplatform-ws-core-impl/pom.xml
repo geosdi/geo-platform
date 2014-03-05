@@ -16,13 +16,6 @@
     <name>Geo-Platform :: == WS Core Implementation</name>
 
     <dependencies>
-        
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-cas-jms-consumer</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
         <!-- APACHE COMMONS -->
         <dependency>
             <groupId>commons-lang</groupId>

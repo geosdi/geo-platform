@@ -51,6 +51,18 @@
                     <groupId>org.geotools</groupId>
                     <artifactId>gt-epsg-hsql</artifactId>
                 </exclusion>
+                <exclusion>
+                    <groupId>org.geotools</groupId>
+                    <artifactId>gt-render</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.geotools</groupId>
+                    <artifactId>gt-coverage</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.geotools</groupId>
+                    <artifactId>gt-cql</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
 

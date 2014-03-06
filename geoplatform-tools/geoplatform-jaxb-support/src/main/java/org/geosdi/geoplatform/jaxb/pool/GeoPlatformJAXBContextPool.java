@@ -42,7 +42,6 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import org.apache.commons.pool.impl.GenericObjectPool;
-import org.geosdi.geoplatform.connector.jaxb.pool.GeoPlatformJAXBConfig;
 import org.geosdi.geoplatform.jaxb.GPBaseJAXBContext;
 import org.geosdi.geoplatform.jaxb.pool.factory.GPMarshallerFactory;
 import org.geosdi.geoplatform.jaxb.pool.factory.GPUnmarshallerFactory;

@@ -37,15 +37,16 @@ package org.geosdi.geoplatform.jaxb.pool.factory;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
-import org.apache.commons.pool.BasePoolableObjectFactory;
+import org.apache.commons.pool2.BasePooledObjectFactory;
+import org.apache.commons.pool2.PooledObject;
+import org.apache.commons.pool2.impl.DefaultPooledObject;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPMarshallerFactory
-        extends BasePoolableObjectFactory<Marshaller> {
+public class GPMarshallerFactory extends BasePooledObjectFactory<Marshaller> {
 
     private final JAXBContext jaxbContext;
 
@@ -54,7 +55,7 @@ public class GPMarshallerFactory
     }
 
     @Override
-    public Marshaller makeObject() throws Exception {
+    public Marshaller create() throws Exception {
         Marshaller marshaller = this.jaxbContext.createMarshaller();
 
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
@@ -62,4 +63,10 @@ public class GPMarshallerFactory
 
         return marshaller;
     }
+
+    @Override
+    public PooledObject<Marshaller> wrap(Marshaller obj) {
+        return new DefaultPooledObject(obj);
+    }
+
 }

@@ -33,25 +33,24 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.jaxb.pool;
+package org.geosdi.geoplatform.jaxb.pool;
 
-import org.apache.commons.pool.impl.GenericObjectPool;
+import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GeoPlatformJAXBConfig
-        extends GenericObjectPool.Config {
+public class GeoPlatformJAXBConfig extends GenericObjectPoolConfig {
 
     {
-        maxIdle = 6;
-        maxActive = 40;
-        minIdle = 1;
-        whenExhaustedAction = GenericObjectPool.WHEN_EXHAUSTED_GROW;
-        timeBetweenEvictionRunsMillis = 1000L * 60L * 10L;
-        numTestsPerEvictionRun = 10;
-        minEvictableIdleTimeMillis = 1000L * 60L * 5L;
+        super.setMaxIdle(6);
+        super.setMaxTotal(40);
+        super.setMinIdle(1);
+        super.setTimeBetweenEvictionRunsMillis(1000L * 60L * 10L);
+        super.setNumTestsPerEvictionRun(10);
+        super.setMinEvictableIdleTimeMillis(1000L * 60L * 5L);
     }
+
 }

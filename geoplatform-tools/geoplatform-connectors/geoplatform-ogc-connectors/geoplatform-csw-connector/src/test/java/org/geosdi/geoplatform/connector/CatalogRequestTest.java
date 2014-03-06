@@ -48,8 +48,8 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.Marshaller;
 import javax.xml.namespace.QName;
 import org.geosdi.geoplatform.connector.jaxb.CSWConnectorJAXBContext;
-import org.geosdi.geoplatform.connector.jaxb.GPConnectorJAXBContext;
 import org.geosdi.geoplatform.connector.jaxb.JAXBContextConnectorRepository;
+import org.geosdi.geoplatform.jaxb.GPBaseJAXBContext;
 import org.geosdi.geoplatform.xml.csw.v202.ElementSetNameType;
 import org.geosdi.geoplatform.xml.csw.v202.ElementSetType;
 import org.geosdi.geoplatform.xml.csw.v202.GetRecordsType;
@@ -85,7 +85,7 @@ public class CatalogRequestTest {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
-    private final GPConnectorJAXBContext cswContext = JAXBContextConnectorRepository.getProvider(
+    private final GPBaseJAXBContext cswContext = JAXBContextConnectorRepository.getProvider(
             CSWConnectorJAXBContext.CSW_CONTEXT_KEY);
     private org.geosdi.geoplatform.xml.filter.v110.ObjectFactory filterFactory;
     private org.geosdi.geoplatform.xml.gml.v311.ObjectFactory gmlFactory;

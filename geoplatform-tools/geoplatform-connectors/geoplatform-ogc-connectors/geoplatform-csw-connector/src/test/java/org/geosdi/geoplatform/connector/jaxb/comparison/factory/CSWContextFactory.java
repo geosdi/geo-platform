@@ -38,8 +38,8 @@ package org.geosdi.geoplatform.connector.jaxb.comparison.factory;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import org.geosdi.geoplatform.connector.jaxb.CSWJAXBContext;
-import org.geosdi.geoplatform.connector.jaxb.GPConnectorJAXBContext;
 import org.geosdi.geoplatform.connector.jaxb.pool.CSWJAXBContextPool;
+import org.geosdi.geoplatform.jaxb.GPBaseJAXBContext;
 import org.geosdi.geoplatform.xml.csw.CSWContextServiceProvider;
 import org.slf4j.LoggerFactory;
 
@@ -68,7 +68,7 @@ public class CSWContextFactory {
     //
     private static JAXBContext jaxbContext;
 
-    public static GPConnectorJAXBContext createCSWContext(CSWContextType type)
+    public static GPBaseJAXBContext createCSWContext(CSWContextType type)
             throws Exception {
 
         switch (type) {

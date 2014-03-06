@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.connector.jaxb;
 
+import org.geosdi.geoplatform.jaxb.GPBaseJAXBContext;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -43,20 +45,20 @@ package org.geosdi.geoplatform.connector.jaxb;
 public final class JAXBContextConnectorRepository {
 
     static {
-        INSTANCE = new GeoPlatformJAXBContextRepository();
+        INSTANCE = new ConnectorJAXBContextRepository();
     }
     //
-    private static final GeoPlatformJAXBContextRepository INSTANCE;
+    private static final ConnectorJAXBContextRepository INSTANCE;
 
     private JAXBContextConnectorRepository() {
     }
 
-    public static void registerProvider(GeoPlatformJAXBContextRepository.GeoPlatformJAXBContextKey key,
+    public static void registerProvider(ConnectorJAXBContextRepository.GeoPlatformJAXBContextKey key,
             Object provider) {
         INSTANCE.registerProvider(key, provider);
     }
 
-    public static GPConnectorJAXBContext getProvider(GeoPlatformJAXBContextRepository.GeoPlatformJAXBContextKey key) {
+    public static GPBaseJAXBContext getProvider(ConnectorJAXBContextRepository.GeoPlatformJAXBContextKey key) {
         return INSTANCE.getProvider(key);
     }
 }

@@ -44,7 +44,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import javax.xml.bind.JAXBElement;
-import org.geosdi.geoplatform.connector.jaxb.GPConnectorJAXBContext;
+import org.geosdi.geoplatform.jaxb.GPBaseJAXBContext;
 import org.geosdi.geoplatform.xml.csw.v202.GetRecordsType;
 import org.junit.BeforeClass;
 import org.slf4j.Logger;
@@ -72,7 +72,7 @@ public abstract class AbstractCSWComparisonTest {
         return 150;
     }
 
-    protected long executeMultiThreadsTasks(GPConnectorJAXBContext jaxbContext)
+    protected long executeMultiThreadsTasks(GPBaseJAXBContext jaxbContext)
             throws Exception {
         long time = 0;
 
@@ -102,7 +102,7 @@ public abstract class AbstractCSWComparisonTest {
         return time;
     }
 
-    private long executeSingleTask(GPConnectorJAXBContext jaxbContext) throws Exception {
+    private long executeSingleTask(GPBaseJAXBContext jaxbContext) throws Exception {
         long start = System.currentTimeMillis();
 
         synchronized (this) {
@@ -116,9 +116,9 @@ public abstract class AbstractCSWComparisonTest {
     private class GMLSextanteTask
             implements Callable<Long> {
 
-        private GPConnectorJAXBContext jaxbContext;
+        private GPBaseJAXBContext jaxbContext;
 
-        public GMLSextanteTask(GPConnectorJAXBContext theJaxbContext) {
+        public GMLSextanteTask(GPBaseJAXBContext theJaxbContext) {
             this.jaxbContext = theJaxbContext;
         }
 

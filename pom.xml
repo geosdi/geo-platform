@@ -1662,13 +1662,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <netbeans.hint.license>geo-platform</netbeans.hint.license>
         <jaxws-version>2.2.11</jaxws-version>
-<<<<<<< HEAD
+
         <cxf-version>2.7.10</cxf-version>
-        <spring-version>4.0.0.RELEASE</spring-version>
-=======
-        <cxf-version>2.7.7</cxf-version>
         <spring-version>4.0.2.RELEASE</spring-version>
->>>>>>> 229824d... Upgrade Spring and Spring Security Versions
         
         <activemq-version>5.8.0</activemq-version>
 

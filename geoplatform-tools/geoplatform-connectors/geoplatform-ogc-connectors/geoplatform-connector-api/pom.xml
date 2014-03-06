@@ -22,18 +22,9 @@
         </dependency>
         
         <dependency>
-            <groupId>net.jcip</groupId>
-            <artifactId>jcip-annotations</artifactId>
-            <version>1.0</version>
-        </dependency>
-        
-        <!-- =========================================================== -->
-        <!-- ===================== COMMONS-POOL ======================== -->
-        <!-- =========================================================== -->
-        
-        <dependency>
-            <groupId>commons-pool</groupId>
-            <artifactId>commons-pool</artifactId>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-jaxb-support</artifactId>
+            <version>${project.version}</version>
         </dependency>
         
         <!-- =========================================================== -->
@@ -43,18 +34,6 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-        </dependency>
-        
-        <!-- =========================================================== -->
-        <!-- ============================ JAXB ========================== -->
-        <!-- =========================================================== -->
-        <dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.xml.bind</groupId>
-            <artifactId>jaxb-impl</artifactId>
         </dependency>
         
         <!-- =========================================================== -->

@@ -40,15 +40,15 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import org.geosdi.geoplatform.connector.jaxb.GeoPlatformJAXBContextRepository.GeoPlatformJAXBContextKey;
+import org.geosdi.geoplatform.jaxb.GeoPlatformJAXBContext;
+import org.geosdi.geoplatform.jaxb.repository.GeoPlatformJAXBContextRepository.GeoPlatformJAXBContextKey;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class CSWJAXBContext
-        extends GeoPlatformJAXBContext {
+public class CSWJAXBContext extends GeoPlatformJAXBContext {
 
     public CSWJAXBContext(Class... classToBeBound) throws JAXBException {
         super(classToBeBound);

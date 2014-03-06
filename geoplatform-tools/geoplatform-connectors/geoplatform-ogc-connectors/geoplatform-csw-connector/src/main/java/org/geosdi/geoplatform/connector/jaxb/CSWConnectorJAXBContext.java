@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.connector.jaxb;
 
 import javax.xml.bind.JAXBException;
 import org.geosdi.geoplatform.connector.jaxb.CSWJAXBContext.CSWJAXBContextKey;
-import org.geosdi.geoplatform.connector.jaxb.provider.GeoPlatformJAXBContextProvider;
+import org.geosdi.geoplatform.jaxb.provider.GeoPlatformJAXBContextProvider;
 import org.geosdi.geoplatform.xml.csw.CSWContextServiceProvider;
 import org.slf4j.LoggerFactory;
 
@@ -46,8 +46,7 @@ import org.slf4j.LoggerFactory;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public final class CSWConnectorJAXBContext implements
-        GeoPlatformJAXBContextProvider {
+public final class CSWConnectorJAXBContext implements GeoPlatformJAXBContextProvider {
 
     static {
         try {

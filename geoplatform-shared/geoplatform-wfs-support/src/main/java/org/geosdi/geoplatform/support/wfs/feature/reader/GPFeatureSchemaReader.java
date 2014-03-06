@@ -43,12 +43,12 @@ import java.util.List;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.namespace.QName;
-import org.geosdi.geoplatform.connector.jaxb.GPConnectorJAXBContext;
 import org.geosdi.geoplatform.connector.jaxb.JAXBContextConnectorRepository;
 import org.geosdi.geoplatform.connector.jaxb.WFSConnectorJAXBContext;
 import org.geosdi.geoplatform.connector.wfs.responce.AttributeDTO;
 import org.geosdi.geoplatform.connector.wfs.responce.GeometryAttributeDTO;
 import org.geosdi.geoplatform.connector.wfs.responce.LayerSchemaDTO;
+import org.geosdi.geoplatform.jaxb.GPBaseJAXBContext;
 import org.geosdi.geoplatform.support.wfs.feature.geometry.GeometryBinding;
 import org.geosdi.geoplatform.xml.xsd.v2001.ComplexContent;
 import org.geosdi.geoplatform.xml.xsd.v2001.Element;
@@ -69,7 +69,7 @@ public class GPFeatureSchemaReader implements FeatureSchemaReader {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
-    private static final GPConnectorJAXBContext wfsContext;
+    private static final GPBaseJAXBContext wfsContext;
 
     static {
         wfsContext = JAXBContextConnectorRepository.getProvider(

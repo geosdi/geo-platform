@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.connector.jaxb;
 
 import javax.xml.bind.JAXBException;
 import org.geosdi.geoplatform.connector.jaxb.WFSJAXBContext.WFSJAXBContextKey;
-import org.geosdi.geoplatform.connector.jaxb.provider.GeoPlatformJAXBContextProvider;
+import org.geosdi.geoplatform.jaxb.provider.GeoPlatformJAXBContextProvider;
 import org.geosdi.geoplatform.xml.wfs.WFSContextServiceProvider;
 import org.slf4j.LoggerFactory;
 

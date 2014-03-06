@@ -36,17 +36,15 @@
 package org.geosdi.geoplatform.connector.server.request;
 
 import java.io.StringWriter;
-import java.io.UnsupportedEncodingException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import org.apache.http.HttpEntity;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
-import org.geosdi.geoplatform.connector.jaxb.GPConnectorJAXBContext;
 import org.geosdi.geoplatform.connector.jaxb.JAXBContextConnectorRepository;
 import org.geosdi.geoplatform.connector.jaxb.WFSConnectorJAXBContext;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.exception.IllegalParameterFault;
+import org.geosdi.geoplatform.jaxb.GPBaseJAXBContext;
 
 /**
  *
@@ -59,7 +57,7 @@ public abstract class WFSRequest<T> extends GPPostConnectorRequest<T> {
                 WFSConnectorJAXBContext.WFS_CONTEXT_KEY);
     }
     //
-    private static final GPConnectorJAXBContext wfsContext;
+    private static final GPBaseJAXBContext wfsContext;
 
     public WFSRequest(GPServerConnector server) {
         super(server);

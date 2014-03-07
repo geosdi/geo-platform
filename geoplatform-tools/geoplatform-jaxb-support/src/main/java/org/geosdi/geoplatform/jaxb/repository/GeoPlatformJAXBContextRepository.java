@@ -47,7 +47,7 @@ import org.geosdi.geoplatform.jaxb.GPBaseJAXBContext;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public abstract class GeoPlatformJAXBContextRepository {
+public abstract class GeoPlatformJAXBContextRepository implements JAXBContextRepository {
 
     private final Map<GeoPlatformJAXBContextKey, Object> values = Maps.<GeoPlatformJAXBContextKey, Object>newHashMap();
 
@@ -60,6 +60,7 @@ public abstract class GeoPlatformJAXBContextRepository {
      * @param key see also {@link GeoPlatformJAXBContextKey}
      * @param provider {@link Object}
      */
+    @Override
     public void registerProvider(GeoPlatformJAXBContextKey key,
             Object provider) {
         if (!key.isCompatibleValue(provider)) {
@@ -81,6 +82,7 @@ public abstract class GeoPlatformJAXBContextRepository {
      *
      * @return GPConnectorJAXBContext Provider registered for Key
      */
+    @Override
     public <P extends GPBaseJAXBContext> P getProvider(
             GeoPlatformJAXBContextKey key) {
         if (key == null) {
@@ -93,8 +95,6 @@ public abstract class GeoPlatformJAXBContextRepository {
                     key));
         }
     }
-
-    protected abstract <P extends GPBaseJAXBContext> P lookUpJAXBContext(GeoPlatformJAXBContextKey key);
 
     public abstract static class GeoPlatformJAXBContextKey
             extends RenderingHints.Key {

@@ -33,40 +33,54 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.configurator.crypt;
+package org.geosdi.geoplatform.jasypt.support;
+
+import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
+import org.jasypt.encryption.pbe.config.PBEConfig;
 
 /**
+ * @author Michele Santomauro - CNR IMAA geoSDI Group
+ * @email michele.santomauro@geosdi.org
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPEncryptorConfigurator {
+public class BasePooledPBEStringEncryptorDecorator implements
+        GPEncryptorConfigurator {
+
+    private PooledPBEStringEncryptor pooledPBEStringEncryptor;
+    private PBEConfig pbeConfig;
+
+    @Override
+    public PooledPBEStringEncryptor pooledPBEStringEncryptor() {
+        this.pooledPBEStringEncryptor = new PooledPBEStringEncryptor();
+        this.pooledPBEStringEncryptor.setConfig(pbeConfig);
+        return this.pooledPBEStringEncryptor;
+    }
+
+    @Override
+    public String encrypt(String plainText) {
+        return this.pooledPBEStringEncryptor.encrypt(plainText);
+    }
+
+    @Override
+    public String decrypt(String encryptedText) {
+        return this.pooledPBEStringEncryptor.decrypt(encryptedText);
+    }
+
+    @Override
+    public boolean matches(String encryptedText, String plainText) {
+        String originalPlainPassword = this.pooledPBEStringEncryptor.decrypt(
+                encryptedText);
+
+        return originalPlainPassword.equals(plainText);
+    }
 
     /**
-     * Encrypt plainText using the Algoritm configured for JASYPT
-     *
-     * @param plainText
-     *
-     * @return String encrypted
+     * @param pbeConfig the pbeConfig to set
      */
-    String encrypt(String plainText);
+    public void setPbeConfig(PBEConfig pbeConfig) {
+        this.pbeConfig = pbeConfig;
+    }
 
-    /**
-     * Decrypt encryptedText using the Algoritm configured for JASYPT
-     *
-     * @param encryptedText
-     *
-     * @return The original String
-     */
-    String decrypt(String encryptedText);
-
-    /**
-     * Method to match String encrypted with the original String
-     *
-     * @param encryptedText
-     * @param plainText
-     *
-     * @return Boolean
-     */
-    boolean matches(String encryptedText, String plainText);
 }

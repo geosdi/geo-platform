@@ -33,8 +33,9 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.configurator.crypt;
+package org.geosdi.geoplatform.jasypt.support;
 
+import net.jcip.annotations.Immutable;
 import org.jasypt.digest.PooledStringDigester;
 import org.jasypt.digest.config.StringDigesterConfig;
 import org.springframework.beans.factory.InitializingBean;
@@ -44,6 +45,7 @@ import org.springframework.beans.factory.InitializingBean;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@Immutable
 public class GPPooledDigester implements GPDigesterConfigurator,
         InitializingBean {
 
@@ -75,4 +77,5 @@ public class GPPooledDigester implements GPDigesterConfigurator,
     public void afterPropertiesSet() throws Exception {
         this.digester.setConfig(config);
     }
+
 }

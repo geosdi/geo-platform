@@ -26,6 +26,7 @@
         <module>geoplatform-cas-aop</module>
         <module>geoplatform-wfs-cas-support</module>
         <module>geoplatform-jaxb-support</module>
+        <module>geoplatform-jasypt-support</module>
     </modules>
 
 </project>

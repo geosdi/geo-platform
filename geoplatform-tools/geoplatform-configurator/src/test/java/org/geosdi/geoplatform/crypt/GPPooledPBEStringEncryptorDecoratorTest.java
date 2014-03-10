@@ -60,7 +60,7 @@ public class GPPooledPBEStringEncryptorDecoratorTest {
     @Autowired
     private GPPooledPBEStringEncryptorDecorator pooledPBEStringEncryptorDecorator;
     //
-    private String plainText = "anonymous";
+    private final String plainText = "anonymous";
 
     @Test
     public void testEncryptedStringMatch1() {

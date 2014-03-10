@@ -36,34 +36,26 @@
       wish to do so, delete this exception statement from your version.
 
 -->
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans 
-            http://www.springframework.org/schema/beans/spring-beans-3.2.xsd"
-       default-autowire="byName">
+
+<configuration debug="true">
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="ch.qos.logback.classic.PatternLayout">
+                <Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>
+            </layout>
+        </encoder>
+    </appender>
+
+    <logger name="org.jasypt" level="info" additivity="false">
+        <appender-ref ref="STDOUT" />
+    </logger>
+
+    <root>
+        <level value="info" />
+        <appender-ref ref="STDOUT" />
+    </root>
     
-    <bean id="gpDigesterSHA1" class="org.geosdi.geoplatform.configurator.crypt.GPPooledDigester">
-        <property name="config" ref="digesterConfigSHA1" />
-    </bean>
-    
-    <bean id="digesterConfigSHA1" class="org.jasypt.digest.config.SimpleStringDigesterConfig">
-        <property name="algorithm" value="SHA-1" />
-        <property name="poolSize" value="2" /> <!--  This would be a good value for a 2-core system -->
-        <property name="saltSizeBytes" value="0" />
-        <property name="iterations" value="1" />
-        <property name="stringOutputType" value="hexadecimal" />
-    </bean>
-    
-    <bean id="gpDigesterMD5" class="org.geosdi.geoplatform.configurator.crypt.GPPooledDigester">
-        <property name="config" ref="digesterConfigMD5" />
-    </bean>
-    
-    <bean id="digesterConfigMD5" class="org.jasypt.digest.config.SimpleStringDigesterConfig">
-        <property name="algorithm" value="MD5" />
-        <property name="poolSize" value="2" /> <!--  This would be a good value for a 2-core system -->
-        <property name="saltSizeBytes" value="0" />
-        <property name="iterations" value="1" />
-        <property name="stringOutputType" value="hexadecimal" />
-    </bean>
-    
-</beans>
+    <logger name="org.geosdi.geoplatform.crypt.GPPooledPBEStringEncryptorDecoratorTest" level="info"/>
+
+</configuration>

@@ -33,23 +33,44 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.configurator.crypt;
+package org.geosdi.geoplatform.jasypt.support;
 
-import org.geosdi.geoplatform.jasypt.support.BasePooledPBEStringEncryptorDecorator;
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
-import org.springframework.context.annotation.Bean;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPPooledPBEStringEncryptorDecorator extends BasePooledPBEStringEncryptorDecorator {
+public interface GPEncryptorConfigurator {
 
-    @Bean(name = "pooledPBEStringEncryptor")
-    @Override
-    public PooledPBEStringEncryptor pooledPBEStringEncryptor() {
-        return super.pooledPBEStringEncryptor();
-    }
+    /**
+     * Encrypt plainText using the Algoritm configured for JASYPT
+     *
+     * @param plainText
+     *
+     * @return String encrypted
+     */
+    String encrypt(String plainText);
 
+    /**
+     * Decrypt encryptedText using the Algoritm configured for JASYPT
+     *
+     * @param encryptedText
+     *
+     * @return The original String
+     */
+    String decrypt(String encryptedText);
+
+    /**
+     * Method to match String encrypted with the original String
+     *
+     * @param encryptedText
+     * @param plainText
+     *
+     * @return Boolean
+     */
+    boolean matches(String encryptedText, String plainText);
+    
+    PooledPBEStringEncryptor pooledPBEStringEncryptor();
 }

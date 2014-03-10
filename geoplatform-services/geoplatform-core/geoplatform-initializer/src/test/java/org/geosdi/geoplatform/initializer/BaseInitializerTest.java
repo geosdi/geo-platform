@@ -40,9 +40,6 @@ import com.google.common.collect.Maps;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.MultiPolygon;
 import com.vividsolutions.jts.io.WKTReader;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
@@ -71,10 +68,7 @@ import org.geosdi.geoplatform.gui.shared.GPMessageCommandType;
 import org.geosdi.geoplatform.gui.shared.GPRole;
 import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 import org.geotools.data.ows.Layer;
-import org.geotools.data.ows.WMSCapabilities;
-import org.geotools.data.wms.WebMapServer;
 import org.geotools.geometry.jts.JTSFactoryFinder;
-import org.geotools.ows.ServiceException;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -84,7 +78,6 @@ import org.springframework.expression.ParseException;
 import org.springframework.security.acls.domain.BasePermission;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.xml.sax.SAXException;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -171,10 +164,7 @@ public abstract class BaseInitializerTest {
     private AclSid user;
     private AclSid viewer;
     //
-    private URL url = null;
     private static final String gsAccountUsername = "gsuser";
-    private static final String urlWMSGetCapabilities =
-            "http://imaa.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities";
 
     protected void removeAll() {
 //        this.removeAllStyles();
@@ -393,7 +383,7 @@ public abstract class BaseInitializerTest {
 
     private GeoPlatformServer createServer1WMS() {
         GeoPlatformServer server = new GeoPlatformServer();
-        server.setServerUrl("http://imaa.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities");
+        server.setServerUrl("http://150.146.160.50/geoserver/wms");
         server.setName("imaa.geosdi.org");
         server.setAliasName("geoSdi on IMAA");
         server.setServerType(GPCapabilityType.WMS);
@@ -749,34 +739,6 @@ public abstract class BaseInitializerTest {
         vector.setLayerType(GPLayerType.MULTIPOLYGON);
         vector.setChecked(true);
         return vector;
-    }
-
-    // Load imaa Layers
-    private List<Layer> loadLayersFromServer() {
-        try {
-            url = new URL(urlWMSGetCapabilities);
-        } catch (MalformedURLException e) {
-            logger.error("Error: {}", e);
-        }
-
-        List<Layer> layers = null;
-        try {
-            WebMapServer wms = new WebMapServer(url);
-
-            WMSCapabilities capabilities = wms.getCapabilities();
-
-            layers = capabilities.getLayerList();
-        } catch (IOException e) {
-            //There was an error communicating with the server
-            //For example, the server is down
-        } catch (ServiceException e) {
-            //The server returned a ServiceException (unusual in this case)
-        } catch (SAXException e) {
-            //Unable to parse the response from the server
-            //For example, the capabilities it returned was not valid
-        }
-
-        return layers;
     }
 
     private List<GPRasterLayer> loadRasterLayer(List<Layer> layers,

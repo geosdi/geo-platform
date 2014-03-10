@@ -45,7 +45,7 @@ import org.geosdi.geoplatform.request.RequestByID;
 import org.geosdi.geoplatform.responce.ServerDTO;
 
 /**
- * Public interface to define the service operations mapped via REST using CXT
+ * Public interface to define the service operations mapped via REST using CXF
  * framework.
  *
  * @author Francesco Izzi - CNR IMAA geoSDI Group

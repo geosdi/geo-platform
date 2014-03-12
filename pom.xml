@@ -1676,7 +1676,7 @@
         <slf4j-version>1.7.6</slf4j-version>
 
         <spring-support>2.0.8</spring-support>
-        <spring-security-version>3.2.1.RELEASE</spring-security-version>
+        <spring-security-version>3.2.2.RELEASE</spring-security-version>
         <aspectj-version>1.7.1.RELEASE</aspectj-version>
         <ubl-version>2.0</ubl-version>
         <jetty-version>7.6.8.v20121106</jetty-version>

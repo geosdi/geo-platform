@@ -51,7 +51,7 @@ import org.geosdi.geoplatform.gui.client.widget.form.GPProjectManagementWidget;
 @Singleton
 public class LoadMenuProjects extends MenuBaseAction {
 
-    private GPProjectManagementWidget searchWidget;
+    private final GPProjectManagementWidget searchWidget;
 
     @Inject
     public LoadMenuProjects(GPProjectManagementWidget searchWidget) {

@@ -96,6 +96,11 @@ public class GPFeatureInfoCaller implements FeatureInfoCaller {
 
     @Override
     public void cleanFeatureInfoCache() {
+        for (IGPFeatureInfoElement featureInfoElement
+                : GeoPlatformUtils.safeCollection(FeatureInfoFlyWeight.getInstance().getCollection())) {
+            map.removeControl(featureInfoElement.getElementControl());
+            featureInfoElement.getElementControl().deactivate();
+        }
         FeatureInfoFlyWeight.getInstance().cleanCache();
     }
 

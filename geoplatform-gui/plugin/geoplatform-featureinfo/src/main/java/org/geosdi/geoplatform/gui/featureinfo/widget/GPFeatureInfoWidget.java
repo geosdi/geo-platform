@@ -126,6 +126,11 @@ public class GPFeatureInfoWidget extends GeoPlatformWindow implements
     }
 
     @Override
+    public void cleanFeatureInfoCache() {
+        this.featureCaller.cleanFeatureInfoCache();
+    }
+
+    @Override
     public void reset() {
         this.mainPanel.removeAll();
     }

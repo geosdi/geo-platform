@@ -53,8 +53,11 @@ public interface GPFeatureInfoHandler extends EventHandler {
     public void deactivateHandler();
 
     public void showInfoWidget();
+    
+    void cleanFeatureInfoCache();
 
     public void addLayer(Layer layer);
 
     public void removeLayer(Layer layer);
+
 }

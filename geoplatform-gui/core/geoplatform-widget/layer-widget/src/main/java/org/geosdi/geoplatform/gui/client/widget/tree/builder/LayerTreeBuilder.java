@@ -65,6 +65,7 @@ import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
 import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
+import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
 import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
@@ -72,6 +73,7 @@ import org.geosdi.geoplatform.gui.impl.map.event.ResetMapStoreEvent;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.featureinfo.event.CleanFeatureInfoCacheEvent;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
 import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
@@ -86,11 +88,13 @@ import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 @Singleton
 public class LayerTreeBuilder implements GPCompositeBuilder {
 
-    private GPBuildTreeEvent buildEvent = new GPBuildTreeEvent();
-    private GPTreeStore store;
-    private GPRootTreeNode root;
-    private VisitorDisplayHide visitorDisplay;
-    private GPTreePanel tree;
+    private final GPBuildTreeEvent buildEvent = new GPBuildTreeEvent();
+    private final GPTreeStore store;
+    private final GPRootTreeNode root;
+    private final VisitorDisplayHide visitorDisplay;
+    private final GPTreePanel tree;
+    private final LoadDefaultProjectElementsRequest loadDefaultProjectElementsRequest = new LoadDefaultProjectElementsRequest();
+    private final CleanFeatureInfoCacheEvent clearFeatureInfoEvent = new CleanFeatureInfoCacheEvent();
     private boolean initialized;
 
     @Inject
@@ -112,11 +116,9 @@ public class LayerTreeBuilder implements GPCompositeBuilder {
             LayoutManager.getInstance().getStatusMap().setBusy(
                     LayerModuleConstants.INSTANCE.statusLoadingTreeElementsText());
 
-            final LoadDefaultProjectElementsRequest loadDefaultProjectElementsRequest = GWT.
-                    <LoadDefaultProjectElementsRequest>create(LoadDefaultProjectElementsRequest.class);
-
             ClientCommandDispatcher.getInstance().execute(
                     new GPClientCommand<LoadDefaultProjectElementsResponse>() {
+
                         private static final long serialVersionUID = 3109256773218160485L;
 
                         {
@@ -143,6 +145,7 @@ public class LayerTreeBuilder implements GPCompositeBuilder {
                                         + " data: " + caught.getMessage());
                             }
                         }
+
                     });
         }
     }
@@ -172,6 +175,7 @@ public class LayerTreeBuilder implements GPCompositeBuilder {
         IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
         mementoSave.clear();
         GPHandlerManager.fireEvent(new ResetMapStoreEvent());
+        MapHandlerManager.fireEvent(this.clearFeatureInfoEvent);
         this.root.removeAll();
         this.store.removeAll();
         this.buildTree();
@@ -226,4 +230,5 @@ public class LayerTreeBuilder implements GPCompositeBuilder {
             }
         }
     }
+
 }

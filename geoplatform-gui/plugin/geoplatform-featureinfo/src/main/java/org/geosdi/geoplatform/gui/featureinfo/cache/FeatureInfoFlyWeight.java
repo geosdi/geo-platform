@@ -56,7 +56,7 @@ import org.gwtopenmaps.openlayers.client.layer.Layer;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class FeatureInfoFlyWeight {
+public class FeatureInfoFlyWeight implements GPFeatureInfoFlyWeight {
 
     private final static Logger logger = Logger.getLogger("");
     private static final FeatureInfoFlyWeight instance = new FeatureInfoFlyWeight();
@@ -80,6 +80,7 @@ public class FeatureInfoFlyWeight {
         }
     }
 
+    @Override
     public IGPFeatureInfoElement get(Layer layer) {
         IGPFeatureInfoElement element;
         if (this.cache.containsKey(layer.getId())) {
@@ -91,18 +92,23 @@ public class FeatureInfoFlyWeight {
         return element;
     }
 
+    @Override
     public void cleanCache() {
         this.cache.clear();
+        this.count = 0;
     }
 
+    @Override
     public void remove(Layer layer) {
         this.cache.remove(layer.getId());
     }
 
+    @Override
     public Collection<IGPFeatureInfoElement> getCollection() {
         return this.cache.values();
     }
 
+    @Override
     public boolean contains(Layer layer) {
         return this.cache.containsKey(layer.getId());
     }

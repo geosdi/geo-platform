@@ -54,7 +54,7 @@ import org.geosdi.geoplatform.gui.puregwt.togglebutton.GPToggleButtonHandlerMana
 public class GetFeatureInfoAction extends MapToggleAction implements
         ToggleEnableHandler {
 
-    private GPFeatureInfoWidget featureWidget;
+    private final GPFeatureInfoWidget featureWidget;
 
     public GetFeatureInfoAction(GeoPlatformMap mapWidget) {
         super(mapWidget, BasicWidgetResources.ICONS.info(),

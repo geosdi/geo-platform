@@ -5,7 +5,7 @@
             http://www.springframework.org/schema/beans/spring-beans-3.2.xsd"
        default-autowire="byName">
     
-    <bean id="gpDigesterSHA1" class="org.geosdi.geoplatform.configurator.crypt.GPPooledDigester">
+    <bean id="gpDigesterSHA1" class="org.geosdi.geoplatform.jasypt.support.GPPooledDigester">
         <property name="config" ref="digesterConfig" />
     </bean>
     

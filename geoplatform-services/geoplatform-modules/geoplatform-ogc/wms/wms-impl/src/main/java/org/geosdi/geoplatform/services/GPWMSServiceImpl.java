@@ -1,37 +1,35 @@
-/*
- *  geo-platform
- *  Rich webgis framework
- *  http://geo-platform.org
+/**
+ *
+ * geo-platform Rich webgis framework http://geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2013 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2014 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
- * This program is free software: you can redistribute it and/or modify it
- * under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version. This program is distributed in the
- * hope that it will be useful, but WITHOUT ANY WARRANTY; without
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR
- * A PARTICULAR PURPOSE. See the GNU General Public License
- * for more details. You should have received a copy of the GNU General
- * Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version. This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details. You should have received a copy of the GNU General Public License
+ * along with this program. If not, see http://www.gnu.org/licenses/
  *
  * ====================================================================
  *
- * Linking this library statically or dynamically with other modules is
- * making a combined work based on this library. Thus, the terms and
- * conditions of the GNU General Public License cover the whole combination.
+ * Linking this library statically or dynamically with other modules is making a
+ * combined work based on this library. Thus, the terms and conditions of the
+ * GNU General Public License cover the whole combination.
  *
- * As a special exception, the copyright holders of this library give you permission
- * to link this library with independent modules to produce an executable, regardless
- * of the license terms of these independent modules, and to copy and distribute
- * the resulting executable under terms of your choice, provided that you also meet,
- * for each linked independent module, the terms and conditions of the license of
- * that module. An independent module is a module which is not derived from or
- * based on this library. If you modify this library, you may extend this exception
- * to your version of the library, but you are not obligated to do so. If you do not
- * wish to do so, delete this exception statement from your version.
- *
+ * As a special exception, the copyright holders of this library give you
+ * permission to link this library with independent modules to produce an
+ * executable, regardless of the license terms of these independent modules, and
+ * to copy and distribute the resulting executable under terms of your choice,
+ * provided that you also meet, for each linked independent module, the terms
+ * and conditions of the license of that module. An independent module is a
+ * module which is not derived from or based on this library. If you modify this
+ * library, you may extend this exception to your version of the library, but
+ * you are not obligated to do so. If you do not wish to do so, delete this
+ * exception statement from your version.
  */
 package org.geosdi.geoplatform.services;
 
@@ -206,6 +204,9 @@ public class GPWMSServiceImpl implements GPWMSService {
                     || additionalBounds.containsKey(EPSG_3857)) {
                 CRSEnvelope env = additionalBounds
                         .get(EPSG_GOOGLE);
+                if (env == null) {
+                    env = additionalBounds.get(EPSG_3857);
+                }
                 raster.setBbox(this.createBbox(env));
                 raster.setSrs(env.getEPSGCode());
             } else {
@@ -257,35 +258,7 @@ public class GPWMSServiceImpl implements GPWMSService {
         return shortServers;
     }
 
-    // private GeoPlatformServer createWMSServerFromService(
-    // GeoPlatformServer server, Service service) {
-    // server.setName(service.getName());
-    // server.setTitle(service.getTitle());
-    // server.setAbstractServer(service.get_abstract());
-    // ResponsibleParty party = service.getContactInformation();
-    // if (party != null) {
-    // Contact contact = party.getContactInfo();
-    // if (contact != null) {
-    // InternationalString is = contact.getContactInstructions();
-    // if (is != null) {
-    // server.setContactPerson(is.toString());
-    // }
-    // }
-    // InternationalString is = party.getOrganisationName();
-    // if (is != null) {
-    // server.setContactOrganization(is.toString());
-    // }
-    // }
-    // return server;
-    // }
     private List<String> createStyleList(List<StyleImpl> stylesImpl) {
-        // List<StyleDTO> stylesDTO = new
-        // ArrayList<StyleDTO>(stylesImpl.size());
-        // for (StyleImpl style : stylesImpl) {
-        // StyleDTO styleDTO = new StyleDTO(style);
-        // stylesDTO.add(styleDTO);
-        // logger.trace("\n*** CONVERTED StyleDTO:\n{}\n***", styleDTO);
-        // }
         List<String> styleList = new ArrayList<String>(stylesImpl.size());
         for (StyleImpl style : stylesImpl) {
             styleList.add(style.getName());
@@ -294,8 +267,8 @@ public class GPWMSServiceImpl implements GPWMSService {
     }
 
     private GPBBox createBbox(CRSEnvelope env) {
-        return new GPBBox(env.getMinX(), env.getMinY(), env.getMaxX(),
-                env.getMaxY());
+        return ((env != null) ? new GPBBox(env.getMinX(), env.getMinY(), env.getMaxX(),
+                env.getMaxY()) : new GPBBox(-179, -89, 179, 89));
     }
 
     private String getUrlServer(String urlServer) {
@@ -305,7 +278,8 @@ public class GPWMSServiceImpl implements GPWMSService {
         } else if (urlServer.contains("mapserv.exe")
                 || urlServer.contains("mapserver")
                 || urlServer.contains("mapserv")
-                || urlServer.contains("usertoken")) {
+                || urlServer.contains("usertoken")
+                || urlServer.contains("map")) {
             index = urlServer.indexOf("&");
         } else {
             index = urlServer.indexOf("?");
@@ -339,4 +313,5 @@ public class GPWMSServiceImpl implements GPWMSService {
     public void setServerDao(GPServerDAO serverDao) {
         this.serverDao = serverDao;
     }
+
 }

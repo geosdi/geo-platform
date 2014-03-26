@@ -1,37 +1,35 @@
-/*
- *  geo-platform
- *  Rich webgis framework
- *  http://geo-platform.org
+/**
+ *
+ * geo-platform Rich webgis framework http://geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2013 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2014 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
- * This program is free software: you can redistribute it and/or modify it
- * under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version. This program is distributed in the
- * hope that it will be useful, but WITHOUT ANY WARRANTY; without
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR
- * A PARTICULAR PURPOSE. See the GNU General Public License
- * for more details. You should have received a copy of the GNU General
- * Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version. This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details. You should have received a copy of the GNU General Public License
+ * along with this program. If not, see http://www.gnu.org/licenses/
  *
  * ====================================================================
  *
- * Linking this library statically or dynamically with other modules is
- * making a combined work based on this library. Thus, the terms and
- * conditions of the GNU General Public License cover the whole combination.
+ * Linking this library statically or dynamically with other modules is making a
+ * combined work based on this library. Thus, the terms and conditions of the
+ * GNU General Public License cover the whole combination.
  *
- * As a special exception, the copyright holders of this library give you permission
- * to link this library with independent modules to produce an executable, regardless
- * of the license terms of these independent modules, and to copy and distribute
- * the resulting executable under terms of your choice, provided that you also meet,
- * for each linked independent module, the terms and conditions of the license of
- * that module. An independent module is a module which is not derived from or
- * based on this library. If you modify this library, you may extend this exception
- * to your version of the library, but you are not obligated to do so. If you do not
- * wish to do so, delete this exception statement from your version.
- *
+ * As a special exception, the copyright holders of this library give you
+ * permission to link this library with independent modules to produce an
+ * executable, regardless of the license terms of these independent modules, and
+ * to copy and distribute the resulting executable under terms of your choice,
+ * provided that you also meet, for each linked independent module, the terms
+ * and conditions of the license of that module. An independent module is a
+ * module which is not derived from or based on this library. If you modify this
+ * library, you may extend this exception to your version of the library, but
+ * you are not obligated to do so. If you do not wish to do so, delete this
+ * exception statement from your version.
  */
 package org.geosdi.geoplatform.gui.client.form;
 
@@ -62,6 +60,7 @@ import com.google.gwt.http.client.Response;
 import com.google.gwt.http.client.URL;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.RootPanel;
+import java.net.URLEncoder;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -69,6 +68,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.PrintResources;
+import static org.geosdi.geoplatform.gui.client.form.GPPrintWidget.PRINT_VECTOR_NAME;
 import org.geosdi.geoplatform.gui.client.form.binding.GPComboBoxFieldBinding;
 import org.geosdi.geoplatform.gui.client.form.binding.MapCommentFieldBinding;
 import org.geosdi.geoplatform.gui.client.form.binding.MapTitleFieldBinding;
@@ -104,9 +104,7 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
 public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
 
     public final static String PRINT_VECTOR_NAME = "VectorPrintExtent";
-
     private final static Logger logger = Logger.getLogger("");
-    
     private ListStore<DPI> storeDPI;
     private ListStore<PrintTemplate> storeTemplate;
     private ListStore<Scale> storeScale;
@@ -177,7 +175,7 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
             String specJson = "";
 
             specJson = "{\"layout\":\"" + comboTemplate.getValue().getTemplate() + "\""
-                    + ",\"srs\":\"EPSG:900913\",\"units\": \"m\",\"geodetic\":true,\"outputFilename\":\"gp-map\", \"outputFormat\":\"pdf\",";
+                    + ",\"srs\":\"EPSG:3857\",\"units\": \"m\",\"geodetic\":true,\"outputFilename\":\"gp-map\", \"outputFormat\":\"pdf\",";
 
 //            String layers = "{\"title\":\"" + title.getValue() + "\",\"pages\":[{\"center\":["
 //                    + center.lon() + ","
@@ -310,9 +308,14 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
 
         String dataSourceT = dataSource;
 
+        String style = this.getStyleFromLayer(layer);
+
         String imageURL = URL.encodeComponent(
                 dataSourceT + "?REQUEST=GetLegendGraphic"
-                + "&VERSION=1.0.0&FORMAT=image/png&LAYER=" + layer.getName() + "&scale=5000&service=WMS");
+                + "&VERSION=1.0.0&FORMAT=image/png&LAYER=" + 
+                        URL.encode(layer.getName())
+                + "&STYLE=" + style
+                + "&scale=5000&service=WMS");
 
         return imageURL;
 
@@ -363,7 +366,16 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
         }
     }
 
+    private String getStyleFromLayer(GPLayerBean layer) {
+        String style = "";
+        if (layer.getStyles() != null && !layer.getStyles().isEmpty()) {
+            style = URL.encode(layer.getStyles().get(0).getStyleString());
+        }
+        return style;
+    }
+
     public String buildLayersOrderList(GPLayerBean layer) {
+        String style = this.getStyleFromLayer(layer);
 
         String layerJson = ",{\n"
                 + "            \"baseURL\": \"" + layer.getDataSource() + "\",\n"
@@ -375,7 +387,7 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
                 + "            ],\n"
                 + "            \"format\": \"image/png\",\n"
                 + "            \"styles\": [\n"
-                + "                \"\"\n"
+                + "                \"" + style + "\"\n"
                 + "            ],\n"
                 + "            \"customParams\": {\n"
                 + "                \"TRANSPARENT\": \"TRUE\"\n"

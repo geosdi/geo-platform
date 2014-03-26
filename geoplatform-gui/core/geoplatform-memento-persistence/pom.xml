@@ -6,12 +6,12 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>core</artifactId>
-        <version>1.6-SNAPSHOT</version>
+        <version>1.7-SNAPSHOT</version>
     </parent>
   
     <groupId>org.geosdi</groupId>
     <artifactId>geoplatform-memento-persistence</artifactId>
-    <version>1.6-SNAPSHOT</version>
+    <version>1.7-SNAPSHOT</version>
     
     <name>Geo-Platform :: == Memento Persistence</name>
 

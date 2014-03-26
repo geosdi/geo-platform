@@ -5,18 +5,19 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>geoplatform-connectors</artifactId>
-        <version>1.6-SNAPSHOT</version>
+        <version>1.7-SNAPSHOT</version>
     </parent>
 
     <groupId>org.geosdi</groupId>
     <artifactId>geoplatform-ws-connectors</artifactId>
-    <version>1.6-SNAPSHOT</version>
+    <version>1.7-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Geo-Platform :: == WS Connectors Module</name>
     
     <modules>
         <module>geoplatform-ws-api-connector</module>
+        <module>geoplatform-ws-impl-connector</module>
         <module>geoplatform-ws-basic-connector</module>
         <module>geoplatform-ws-geonetwork-connector</module>
         <module>geoplatform-ws-csw-connector</module>

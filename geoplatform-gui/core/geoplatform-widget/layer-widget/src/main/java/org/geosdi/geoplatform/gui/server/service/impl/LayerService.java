@@ -1,37 +1,37 @@
-/*
- *  geo-platform
- *  Rich webgis framework
- *  http://geo-platform.org
- * ====================================================================
+/**
  *
- * Copyright (C) 2008-2013 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ *    geo-platform
+ *    Rich webgis framework
+ *    http://geo-platform.org
+ *   ====================================================================
  *
- * This program is free software: you can redistribute it and/or modify it
- * under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version. This program is distributed in the
- * hope that it will be useful, but WITHOUT ANY WARRANTY; without
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR
- * A PARTICULAR PURPOSE. See the GNU General Public License
- * for more details. You should have received a copy of the GNU General
- * Public License along with this program. If not, see http://www.gnu.org/licenses/
+ *   Copyright (C) 2008-2014 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
- * ====================================================================
+ *   This program is free software: you can redistribute it and/or modify it
+ *   under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation, either version 3 of the License, or
+ *   (at your option) any later version. This program is distributed in the
+ *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ *   A PARTICULAR PURPOSE. See the GNU General Public License
+ *   for more details. You should have received a copy of the GNU General
+ *   Public License along with this program. If not, see http://www.gnu.org/licenses/
  *
- * Linking this library statically or dynamically with other modules is
- * making a combined work based on this library. Thus, the terms and
- * conditions of the GNU General Public License cover the whole combination.
+ *   ====================================================================
  *
- * As a special exception, the copyright holders of this library give you permission
- * to link this library with independent modules to produce an executable, regardless
- * of the license terms of these independent modules, and to copy and distribute
- * the resulting executable under terms of your choice, provided that you also meet,
- * for each linked independent module, the terms and conditions of the license of
- * that module. An independent module is a module which is not derived from or
- * based on this library. If you modify this library, you may extend this exception
- * to your version of the library, but you are not obligated to do so. If you do not
- * wish to do so, delete this exception statement from your version.
+ *   Linking this library statically or dynamically with other modules is
+ *   making a combined work based on this library. Thus, the terms and
+ *   conditions of the GNU General Public License cover the whole combination.
  *
+ *   As a special exception, the copyright holders of this library give you permission
+ *   to link this library with independent modules to produce an executable, regardless
+ *   of the license terms of these independent modules, and to copy and distribute
+ *   the resulting executable under terms of your choice, provided that you also meet,
+ *   for each linked independent module, the terms and conditions of the license of
+ *   that module. An independent module is a module which is not derived from or
+ *   based on this library. If you modify this library, you may extend this exception
+ *   to your version of the library, but you are not obligated to do so. If you do not
+ *   wish to do so, delete this exception statement from your version.
  */
 package org.geosdi.geoplatform.gui.server.service.impl;
 
@@ -98,7 +98,8 @@ import org.springframework.stereotype.Service;
 @Service("layerService")
 public class LayerService implements ILayerService {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private static final Logger logger = LoggerFactory.getLogger(
+            LayerService.class);
     //
     private GeoPlatformService geoPlatformServiceClient;
     //
@@ -295,7 +296,6 @@ public class LayerService implements ILayerService {
         Long projectId;
 
 //        folder.setProject(project);
-
         Long savedFolderId = null;
         try {
             projectId = this.sessionUtility.getDefaultProject(httpServletRequest);
@@ -537,7 +537,8 @@ public class LayerService implements ILayerService {
     }
 
     @Override
-    public boolean checkWmsGetMapUrl(String urlString) throws GeoPlatformException {
+    public boolean checkWmsGetMapUrl(String urlString) throws
+            GeoPlatformException {
         try {
             URL url = new URL(urlString);
             URLConnection myURLConnection = url.openConnection();
@@ -735,7 +736,8 @@ public class LayerService implements ILayerService {
 
     @Override
     public void setLayerRefreshTime(String emiteResource, String layerUUID,
-            int secondToRefresh, HttpServletRequest httpServletRequest) throws GeoPlatformException {
+            int secondToRefresh, HttpServletRequest httpServletRequest) throws
+            GeoPlatformException {
         try {
             GPAccount account = this.sessionUtility.getLoggedAccount(
                     httpServletRequest);
@@ -783,7 +785,8 @@ public class LayerService implements ILayerService {
 
     @Override
     public ArrayList<GPSimpleUser> getOrganizationUsersToShareProject(
-            long projectId, HttpServletRequest httpServletRequest) throws GeoPlatformException {
+            long projectId, HttpServletRequest httpServletRequest) throws
+            GeoPlatformException {
         ArrayList<GPSimpleUser> simpleUserList = null;
         try {
             this.sessionUtility.getLoggedAccount(httpServletRequest);
@@ -803,7 +806,8 @@ public class LayerService implements ILayerService {
 
     @Override
     public ArrayList<GPSimpleUser> getAccountsFromSharedProject(
-            long idSharedProject, HttpServletRequest httpServletRequest) throws GeoPlatformException {
+            long idSharedProject, HttpServletRequest httpServletRequest) throws
+            GeoPlatformException {
         ArrayList<GPSimpleUser> simpleUserList = null;
         try {
             this.sessionUtility.getLoggedAccount(httpServletRequest);
@@ -896,7 +900,8 @@ public class LayerService implements ILayerService {
     }
 
     @Override
-    public List<GPLayerAttributes> describeFeatureType(String layerName) throws GeoPlatformException {
+    public List<GPLayerAttributes> describeFeatureType(String layerName) throws
+            GeoPlatformException {
         List<GPLayerAttributes> attributeList = Lists.<GPLayerAttributes>newArrayList();
         try {
             List<LayerAttribute> result = this.geoPlatformPublishClient.describeFeatureType(

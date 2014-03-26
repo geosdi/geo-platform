@@ -1,43 +1,40 @@
-/*
- *  geo-platform
- *  Rich webgis framework
- *  http://geo-platform.org
+/**
+ *
+ * geo-platform Rich webgis framework http://geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2013 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2014 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
- * This program is free software: you can redistribute it and/or modify it 
- * under the terms of the GNU General Public License as published by 
- * the Free Software Foundation, either version 3 of the License, or 
- * (at your option) any later version. This program is distributed in the 
- * hope that it will be useful, but WITHOUT ANY WARRANTY; without 
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR 
- * A PARTICULAR PURPOSE. See the GNU General Public License 
- * for more details. You should have received a copy of the GNU General 
- * Public License along with this program. If not, see http://www.gnu.org/licenses/ 
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version. This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details. You should have received a copy of the GNU General Public License
+ * along with this program. If not, see http://www.gnu.org/licenses/
  *
  * ====================================================================
  *
- * Linking this library statically or dynamically with other modules is 
- * making a combined work based on this library. Thus, the terms and 
- * conditions of the GNU General Public License cover the whole combination. 
- * 
- * As a special exception, the copyright holders of this library give you permission 
- * to link this library with independent modules to produce an executable, regardless 
- * of the license terms of these independent modules, and to copy and distribute 
- * the resulting executable under terms of your choice, provided that you also meet, 
- * for each linked independent module, the terms and conditions of the license of 
- * that module. An independent module is a module which is not derived from or 
- * based on this library. If you modify this library, you may extend this exception 
- * to your version of the library, but you are not obligated to do so. If you do not 
- * wish to do so, delete this exception statement from your version. 
+ * Linking this library statically or dynamically with other modules is making a
+ * combined work based on this library. Thus, the terms and conditions of the
+ * GNU General Public License cover the whole combination.
  *
+ * As a special exception, the copyright holders of this library give you
+ * permission to link this library with independent modules to produce an
+ * executable, regardless of the license terms of these independent modules, and
+ * to copy and distribute the resulting executable under terms of your choice,
+ * provided that you also meet, for each linked independent module, the terms
+ * and conditions of the license of that module. An independent module is a
+ * module which is not derived from or based on this library. If you modify this
+ * library, you may extend this exception to your version of the library, but
+ * you are not obligated to do so. If you do not wish to do so, delete this
+ * exception statement from your version.
  */
 package org.geosdi.geoplatform.gui.client.widget.map;
 
 import com.extjs.gxt.ui.client.Registry;
 
-import com.google.common.collect.Lists;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import java.util.logging.Level;
@@ -66,19 +63,12 @@ import org.geosdi.geoplatform.gui.impl.map.event.ChangeBaseLayerMapEvent;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
-import org.geosdi.geoplatform.gui.puregwt.featureinfo.event.FeatureInfoAddModifyLayer;
-import org.geosdi.geoplatform.gui.puregwt.featureinfo.event.FeatureInfoRemoveLayer;
-import org.geosdi.geoplatform.gui.puregwt.featureinfo.event.GPFeatureInfoEvent;
+import org.geosdi.geoplatform.gui.puregwt.featureinfo.event.ActivateFeatureInfoEvent;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
 import org.gwtopenmaps.openlayers.client.*;
 import org.gwtopenmaps.openlayers.client.control.*;
-import org.gwtopenmaps.openlayers.client.event.MapLayerAddedListener;
-import org.gwtopenmaps.openlayers.client.event.MapLayerAddedListener.MapLayerAddedEvent;
 import org.gwtopenmaps.openlayers.client.event.MapLayerChangedListener;
-import org.gwtopenmaps.openlayers.client.event.MapLayerChangedListener.MapLayerChangedEvent;
-import org.gwtopenmaps.openlayers.client.event.MapLayerRemovedListener;
-import org.gwtopenmaps.openlayers.client.event.MapLayerRemovedListener.MapLayerRemovedEvent;
 import org.gwtopenmaps.openlayers.client.event.MeasureEvent;
 import org.gwtopenmaps.openlayers.client.event.MeasureListener;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
@@ -110,9 +100,6 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
     private boolean measureActive;
     private boolean measureAreaActive;
     private ChangeBaseLayerMapEvent changeBaseLayerMapEvent;
-    private MapLayerAddedListener featureInfoLayerAddedListener;
-    private MapLayerChangedListener featureInfoLayerChangedListener;
-    private MapLayerRemovedListener featureInfoLayerRemovedListener;
 
     public MapLayoutWidget() {
         super();
@@ -212,33 +199,6 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
         this.initMapScaleSupport();
 
         this.map.setOptions(this.mapOptions);
-        this.featureInfoLayerAddedListener = new MapLayerAddedListener() {
-
-            @Override
-            public void onLayerAdded(MapLayerAddedEvent eventObject) {
-                MapHandlerManager.fireEvent(new FeatureInfoAddModifyLayer(
-                        eventObject.getLayer()));
-            }
-
-        };
-        this.featureInfoLayerRemovedListener = new MapLayerRemovedListener() {
-
-            @Override
-            public void onLayerRemoved(MapLayerRemovedEvent eventObject) {
-                MapHandlerManager.fireEvent(new FeatureInfoRemoveLayer(
-                        eventObject.getLayer()));
-            }
-
-        };
-        this.featureInfoLayerChangedListener = new MapLayerChangedListener() {
-
-            @Override
-            public void onLayerChanged(MapLayerChangedEvent eventObject) {
-                MapHandlerManager.fireEvent(new FeatureInfoAddModifyLayer(
-                        eventObject.getLayer()));
-            }
-
-        };
     }
 
     public void addMeasureControl() {
@@ -282,22 +242,13 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
     @Override
     public void activateInfo() {
         this.infoActive = Boolean.TRUE;
-//        System.out.println("Activate info");
-        this.map.addMapLayerAddedListener(this.featureInfoLayerAddedListener);
-        this.map.addMapLayerChangedListener(this.featureInfoLayerChangedListener);
-        this.map.addMapLayerRemovedListener(this.featureInfoLayerRemovedListener);
-        MapHandlerManager.fireEvent(new GPFeatureInfoEvent(infoActive,
-                Lists.<Layer>newArrayList(map.getLayers())));
+        MapHandlerManager.fireEvent(new ActivateFeatureInfoEvent(infoActive));
     }
 
     @Override
     public void deactivateInfo() {
         this.infoActive = Boolean.FALSE;
-//        System.out.println("De-Activate info");
-        this.map.removeListener(this.featureInfoLayerAddedListener);
-        this.map.removeListener(this.featureInfoLayerChangedListener);
-        this.map.removeListener(this.featureInfoLayerRemovedListener);
-        MapHandlerManager.fireEvent(new GPFeatureInfoEvent(infoActive));
+        MapHandlerManager.fireEvent(new ActivateFeatureInfoEvent(infoActive));
     }
 
     @Override
@@ -514,6 +465,7 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
         return this.mapControl.getFeaturesNumber();
     }
 
+    @Override
     public void drawFeature(VectorFeature feature) {
         this.mapControl.drawFeature(feature);
     }
@@ -596,11 +548,11 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
      */
     @Override
     public void zoomToMaxExtend(BBoxClientInfo bbox, String crs) {
-        System.out.println("BboxClientInfo" + bbox);
-        System.out.println("CRS" + crs);
+        logger.log(Level.OFF, "BboxClientInfo" + bbox);
+        logger.log(Level.OFF, "CRS" + crs);
         Bounds b = ViewportUtility.generateBoundsFromBBOX(bbox);
         if (!map.getProjection().equals(crs)) {
-            System.out.println(">> Changed projection from: " + crs
+            logger.log(Level.OFF, ">> Changed projection from: " + crs
                     + ", to: " + map.getProjection());
             if (map.getProjection().equals(
                     GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode())) {

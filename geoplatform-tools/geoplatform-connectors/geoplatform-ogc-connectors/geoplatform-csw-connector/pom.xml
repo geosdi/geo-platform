@@ -5,12 +5,12 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>geoplatform-ogc-connectors</artifactId>
-        <version>1.6-SNAPSHOT</version>
+        <version>1.7-SNAPSHOT</version>
     </parent>
 
     <groupId>org.geosdi</groupId>
     <artifactId>geoplatform-csw-connector</artifactId>
-    <version>1.6-SNAPSHOT</version>
+    <version>1.7-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Geo-Platform :: == CSW Connector Module</name>
@@ -20,6 +20,28 @@
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-connector-api</artifactId>
             <version>${project.version}</version>
+        </dependency>
+        
+        <!-- =========================================================== -->
+        <!-- ===================== COMMONS-POOL ======================== -->
+        <!-- =========================================================== -->
+        
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
+        </dependency>
+        
+        <!-- =========================================================== -->
+        <!-- ================== APACHE HTTPCOMPONENTS ================== -->
+        <!-- =========================================================== -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
         </dependency>
         
         <dependency>
@@ -118,7 +140,7 @@
         </plugins>
 
         <!-- TODO: the resources stuff hardcodes paths to source + test directories, 
-     			we should be able to use some properties here -->
+        we should be able to use some properties here -->
         <resources>
             <resource>
                 <directory>${basedir}/src/main/java</directory>

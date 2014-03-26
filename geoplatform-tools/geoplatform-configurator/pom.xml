@@ -5,12 +5,12 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>geoplatform-tools</artifactId>
-        <version>1.6-SNAPSHOT</version>
+        <version>1.7-SNAPSHOT</version>
     </parent>
 
     <groupId>org.geosdi</groupId>
     <artifactId>geoplatform-configurator</artifactId>
-    <version>1.6-SNAPSHOT</version>
+    <version>1.7-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Geo-Platform :: == Configurator Module</name>
@@ -59,6 +59,12 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-expression</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplarform-bootstrap-config</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
@@ -116,14 +122,11 @@
             </exclusions>
         </dependency>
 
-        <!-- JASYPT -->
+        <!-- GEOPLATFORM JASYPT SUPPORT-->
         <dependency>
-            <groupId>org.jasypt</groupId>
-            <artifactId>jasypt</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.jasypt</groupId>
-            <artifactId>jasypt-spring31</artifactId>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-jasypt-support</artifactId>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 
@@ -135,7 +138,7 @@
         </plugins>
 
         <!-- TODO: the resources stuff hardcodes paths to source + test directories,
-     			we should be able to use some properties here -->
+        we should be able to use some properties here -->
         <resources>
             <resource>
                 <directory>${basedir}/src/main/java</directory>

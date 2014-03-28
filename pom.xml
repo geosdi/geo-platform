@@ -1662,10 +1662,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <netbeans.hint.license>geo-platform</netbeans.hint.license>
         <jaxws-version>2.2.11</jaxws-version>
-
-        <cxf-version>2.7.10</cxf-version>
-        <spring-version>4.0.2.RELEASE</spring-version>
         
+        <cxf-version>2.7.10</cxf-version>
+ 
+        <spring-version>4.0.3.RELEASE</spring-version>
         <activemq-version>5.8.0</activemq-version>
 
         <httpcomponents-core-version>4.3.2</httpcomponents-core-version>
@@ -1676,7 +1676,7 @@
         <slf4j-version>1.7.6</slf4j-version>
 
         <spring-support>2.0.8</spring-support>
-        <spring-security-version>3.2.2.RELEASE</spring-security-version>
+        <spring-security-version>3.2.3.RELEASE</spring-security-version>
         <aspectj-version>1.7.1.RELEASE</aspectj-version>
         <ubl-version>2.0</ubl-version>
         <jetty-version>7.6.8.v20121106</jetty-version>

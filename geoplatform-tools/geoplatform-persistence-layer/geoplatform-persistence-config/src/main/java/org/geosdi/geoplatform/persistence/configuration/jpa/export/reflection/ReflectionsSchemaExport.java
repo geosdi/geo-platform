@@ -41,6 +41,7 @@ import java.util.Set;
 import javax.persistence.Entity;
 import org.geosdi.geoplatform.persistence.configuration.properties.GPPersistenceConnector;
 import org.reflections.Reflections;
+import org.reflections.util.ConfigurationBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -53,17 +54,12 @@ public class ReflectionsSchemaExport implements GPReflectionsSchemaExport {
     @Autowired
     private GPPersistenceConnector gpPersistenceConnector;
     private Set<Class<?>> annotatedClasses;
+    private Object[] reflectionsConf;
 
     @Override
     public void scanPackages() {
         this.annotatedClasses = new HashSet<Class<?>>();
-        for (String packageToScan : gpPersistenceConnector.getPackagesToScan()) {
-            loadAnnotatedClasses(packageToScan);
-        }
-    }
-
-    private void loadAnnotatedClasses(String packageToScan) {
-        Reflections ref = new Reflections(packageToScan);
+        Reflections ref = new Reflections(ConfigurationBuilder.build(reflectionsConf));
         this.annotatedClasses.addAll(ref.getTypesAnnotatedWith(Entity.class));
     }
 
@@ -73,6 +69,11 @@ public class ReflectionsSchemaExport implements GPReflectionsSchemaExport {
     @Override
     public Set<Class<?>> getAnnotatedClasses() {
         return Collections.unmodifiableSet(annotatedClasses);
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        this.reflectionsConf = gpPersistenceConnector.getPackagesToScan();
     }
 
 }

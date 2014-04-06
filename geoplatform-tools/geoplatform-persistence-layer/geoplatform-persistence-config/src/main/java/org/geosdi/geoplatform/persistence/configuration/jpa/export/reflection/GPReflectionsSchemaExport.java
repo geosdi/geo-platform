@@ -36,13 +36,14 @@
 package org.geosdi.geoplatform.persistence.configuration.jpa.export.reflection;
 
 import java.util.Set;
+import org.springframework.beans.factory.InitializingBean;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPReflectionsSchemaExport {
+public interface GPReflectionsSchemaExport extends InitializingBean {
 
     void scanPackages();
 

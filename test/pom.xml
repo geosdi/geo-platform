@@ -16,7 +16,7 @@
     <name>Geo-Platform :: == All Tests Module</name>
 
     <repositories>
-		<!-- geoSDI -->
+        <!-- geoSDI -->
         <repository>
             <id>geosdi</id>
             <name>geoSDI Repository</name>
@@ -26,6 +26,17 @@
     
     <build>
         <defaultGoal>test</defaultGoal>
+        
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+        
     </build>
     
     <modules>
@@ -33,20 +44,5 @@
         <module>geoplatform-ui-test</module>
         <module>geoplatform-test-utils</module>
     </modules>
-    
-<!--    <profiles>
-        <profile>
-            <id>test.services</id>
-            <modules>
-                <module>geoplatform-services-test</module>
-            </modules>
-        </profile>
-        <profile>
-            <id>test.ui</id>
-            <modules>
-                <module>geoplatform-ui-test</module>
-            </modules>
-        </profile>
-    </profiles>-->
 
 </project>

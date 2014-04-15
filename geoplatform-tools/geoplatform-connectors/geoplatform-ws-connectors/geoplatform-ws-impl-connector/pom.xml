@@ -39,6 +39,12 @@
             <version>${project.version}</version>
         </dependency>
         
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplarform-bootstrap-config</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        
         <!-- ============================================================== -->
         <!-- ============================= CXF ============================ -->
         <!-- ============================================================== -->
@@ -170,6 +176,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>

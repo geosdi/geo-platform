@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.proxy;
 
-import org.geosdi.geoplatform.configurator.httpclient.proxy.GPProxyConnectionParamaters;
+import org.geosdi.geoplatform.support.httpclient.proxy.GPProxyConnectionParamaters;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 

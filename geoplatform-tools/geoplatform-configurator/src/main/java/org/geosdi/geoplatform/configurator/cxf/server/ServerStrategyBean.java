@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.configurator.cxf.server;
 
-import org.geosdi.geoplatform.configurator.cxf.InterceptorStrategyBean;
+import org.geosdi.geoplatform.support.cxf.server.GPServerStrategyBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -45,7 +45,7 @@ import org.springframework.stereotype.Component;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Component(value = "serverStrategyBean")
-public class ServerStrategyBean implements InterceptorStrategyBean {
+public class ServerStrategyBean implements GPServerStrategyBean {
 
     @Value(value = "configurator{webservice_server_logging}")
     private String loggingStrategy;
@@ -105,6 +105,7 @@ public class ServerStrategyBean implements InterceptorStrategyBean {
     /**
      * @return the serverPrivateKeyPropertiesFile
      */
+    @Override
     public String getServerPrivateKeyPropertiesFile() {
         return serverPrivateKeyPropertiesFile;
     }
@@ -112,6 +113,7 @@ public class ServerStrategyBean implements InterceptorStrategyBean {
     /**
      * @return the clientPublicKeyPropertiesFile
      */
+    @Override
     public String getClientPublicKeyPropertiesFile() {
         return clientPublicKeyPropertiesFile;
     }

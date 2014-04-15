@@ -38,7 +38,7 @@ package org.geosdi.geoplatform.connector.proxy;
 import java.net.URL;
 import java.util.HashSet;
 import java.util.StringTokenizer;
-import org.geosdi.geoplatform.configurator.httpclient.proxy.GPNoProxyHostsMatcher;
+import org.geosdi.geoplatform.support.httpclient.proxy.GPNoProxyHostsMatcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;

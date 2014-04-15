@@ -35,15 +35,13 @@
  */
 package org.geosdi.geoplatform.connector.proxy;
 
-import org.geosdi.geoplatform.configurator.httpclient.proxy.HttpClientProxyConfiguration;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
+import org.geosdi.geoplatform.support.httpclient.proxy.HttpClientProxyConfiguration;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ImportResource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 

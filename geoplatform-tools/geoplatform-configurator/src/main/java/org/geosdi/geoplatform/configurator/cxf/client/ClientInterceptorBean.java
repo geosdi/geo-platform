@@ -40,6 +40,7 @@ import org.apache.cxf.interceptor.LoggingInInterceptor;
 import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor;
 import org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor;
+import org.geosdi.geoplatform.support.cxf.client.ClientInterceptorStrategyFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -48,16 +49,15 @@ import org.springframework.context.annotation.Configuration;
  * @email michele.santomauro@geosdi.org
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
+ * 
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
 @Configuration
 public class ClientInterceptorBean {
 
     @Resource(name = "clientInterceptorStrategyFactory")
     private ClientInterceptorStrategyFactory factory;
-
-    public void setFactory(ClientInterceptorStrategyFactory factory) {
-        this.factory = factory;
-    }
 
     @Bean
     public LoggingInInterceptor clientLoggingInInterceptorBean() {

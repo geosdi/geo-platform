@@ -73,11 +73,6 @@
         
         <dependency>
             <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-configurator</artifactId>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-oxm</artifactId>
         </dependency>
         
@@ -118,12 +113,20 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
+            <scope>test</scope>
         </dependency>
 
         <!-- SCOPE TEST -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-configurator</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
     

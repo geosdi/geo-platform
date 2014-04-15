@@ -36,13 +36,13 @@
 package org.geosdi.geoplatform.connector;
 
 import java.net.URL;
-import org.geosdi.geoplatform.configurator.httpclient.proxy.HttpClientProxyConfiguration;
 import org.geosdi.geoplatform.connector.api.GPConnectorStore;
 import org.geosdi.geoplatform.connector.server.GPCatalogServerConnector;
 import org.geosdi.geoplatform.connector.server.request.CatalogGetCapabilitiesRequest;
 import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordByIdRequest;
 import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequest;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
+import org.geosdi.geoplatform.support.httpclient.proxy.HttpClientProxyConfiguration;
 
 /**
  *

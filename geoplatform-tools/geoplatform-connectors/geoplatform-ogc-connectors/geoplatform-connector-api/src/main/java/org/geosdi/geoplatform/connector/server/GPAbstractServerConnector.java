@@ -44,9 +44,9 @@ import org.apache.http.client.CredentialsProvider;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.geosdi.geoplatform.configurator.httpclient.proxy.HttpClientProxyConfiguration;
 import org.geosdi.geoplatform.connector.server.handler.ConnectorHttpRequestRetryHandler;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
+import org.geosdi.geoplatform.support.httpclient.proxy.HttpClientProxyConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

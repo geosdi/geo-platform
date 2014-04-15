@@ -23,6 +23,18 @@
     <dependencies>
         <dependency>
             <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-cxf-api-support</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-cxf-client-support</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-ws-api-connector</artifactId>
             <version>${project.version}</version>
         </dependency>

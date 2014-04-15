@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.connector.server;
 
 import java.net.URL;
-import org.geosdi.geoplatform.configurator.httpclient.proxy.HttpClientProxyConfiguration;
 import org.geosdi.geoplatform.connector.CatalogVersionException;
 import org.geosdi.geoplatform.connector.GPCatalogVersion;
 import org.geosdi.geoplatform.connector.server.request.CatalogGetCapabilitiesRequest;
@@ -46,6 +45,7 @@ import org.geosdi.geoplatform.connector.server.request.v202.CatalogGetCapabiliti
 import org.geosdi.geoplatform.connector.server.request.v202.CatalogGetRecordByIdV202;
 import org.geosdi.geoplatform.connector.server.request.v202.CatalogGetRecordsV202;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
+import org.geosdi.geoplatform.support.httpclient.proxy.HttpClientProxyConfiguration;
 
 /**
  *

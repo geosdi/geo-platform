@@ -36,10 +36,10 @@
 package org.geosdi.geoplatform.connector.proxy;
 
 import javax.annotation.Resource;
-import org.geosdi.geoplatform.configurator.httpclient.proxy.GPNoProxyHostsMatcher;
-import org.geosdi.geoplatform.configurator.httpclient.proxy.GPProxyConnectionParamaters;
-import org.geosdi.geoplatform.configurator.httpclient.proxy.GPProxyCredentialProvider;
-import org.geosdi.geoplatform.configurator.httpclient.proxy.HttpClientProxyConfiguration;
+import org.geosdi.geoplatform.support.httpclient.proxy.GPNoProxyHostsMatcher;
+import org.geosdi.geoplatform.support.httpclient.proxy.GPProxyConnectionParamaters;
+import org.geosdi.geoplatform.support.httpclient.proxy.GPProxyCredentialProvider;
+import org.geosdi.geoplatform.support.httpclient.proxy.HttpClientProxyConfiguration;
 import org.springframework.stereotype.Component;
 
 /**

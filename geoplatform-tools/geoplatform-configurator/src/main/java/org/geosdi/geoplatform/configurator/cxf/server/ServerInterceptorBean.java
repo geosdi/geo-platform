@@ -40,6 +40,7 @@ import org.apache.cxf.interceptor.LoggingInInterceptor;
 import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor;
 import org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor;
+import org.geosdi.geoplatform.support.cxf.server.ServerInterceptorStrategyFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -54,10 +55,6 @@ public class ServerInterceptorBean {
 
     @Resource(name = "serverInterceptorStrategyFactory")
     private ServerInterceptorStrategyFactory factory;
-
-    public void setFactory(ServerInterceptorStrategyFactory factory) {
-        this.factory = factory;
-    }
 
     @Bean
     public LoggingInInterceptor serverLoggingInInterceptorBean() {

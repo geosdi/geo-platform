@@ -19,11 +19,18 @@
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-configurator</artifactId>
+            <scope>test</scope>
         </dependency>
         
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-jaxb-support</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-httpclient-support</artifactId>
             <version>${project.version}</version>
         </dependency>
         

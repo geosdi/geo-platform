@@ -190,6 +190,7 @@
     <modules>
         <module>geoplatform-services</module>
         <module>geoplatform-gui</module>
+        <module>geoplatform-support</module>
         <module>geoplatform-tools</module>
         <module>geoplatform-xml-binding</module>
         <module>geoplatform-shared</module>
@@ -1678,7 +1679,7 @@
         <spring-security-version>3.2.3.RELEASE</spring-security-version>
         <aspectj-version>1.7.1.RELEASE</aspectj-version>
         <ubl-version>2.0</ubl-version>
-        <jetty-version>7.6.8.v20121106</jetty-version>
+        <jetty-version>8.1.14.v20131031</jetty-version>
 
         <postgresql-version>9.2-1003-jdbc4</postgresql-version>
         <postgis-jdbc-version>1.5.2</postgis-jdbc-version>

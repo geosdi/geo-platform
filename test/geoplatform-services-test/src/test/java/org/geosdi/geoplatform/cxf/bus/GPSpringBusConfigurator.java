@@ -40,7 +40,7 @@ import org.apache.cxf.Bus;
 import org.apache.cxf.bus.spring.SpringBusFactory;
 import org.apache.cxf.interceptor.LoggingInInterceptor;
 import org.apache.cxf.interceptor.LoggingOutInterceptor;
-import org.geosdi.geoplatform.configurator.cxf.server.ServerInterceptorStrategyFactory;
+import org.geosdi.geoplatform.support.cxf.server.ServerInterceptorStrategyFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

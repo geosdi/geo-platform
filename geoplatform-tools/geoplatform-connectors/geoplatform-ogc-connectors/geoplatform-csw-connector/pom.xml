@@ -51,11 +51,6 @@
         
         <dependency>
             <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-configurator</artifactId>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-oxm</artifactId>
         </dependency>
         
@@ -96,12 +91,20 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
+            <scope>test</scope>
         </dependency>
 
         <!-- SCOPE TEST -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-configurator</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
     
@@ -118,7 +121,7 @@
         </plugins>
 
         <!-- TODO: the resources stuff hardcodes paths to source + test directories, 
-     			we should be able to use some properties here -->
+        we should be able to use some properties here -->
         <resources>
             <resource>
                 <directory>${basedir}/src/main/java</directory>

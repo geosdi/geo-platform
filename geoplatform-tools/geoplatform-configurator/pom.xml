@@ -16,6 +16,25 @@
     <name>Geo-Platform :: == Configurator Module</name>
 
     <dependencies>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-cxf-api-support</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-cxf-client-support</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-cxf-server-support</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
 
         <!-- logging dependencies, delegate all to slf4j and use logback -->
         <dependency>
@@ -108,18 +127,6 @@
             <groupId>org.apache.ws.security</groupId>
             <artifactId>wss4j</artifactId>
             <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-bindings-soap</artifactId>
-            <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.apache.geronimo.specs</groupId>
-                    <artifactId>geronimo-javamail_1.4_spec</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <!-- GEOPLATFORM JASYPT SUPPORT-->

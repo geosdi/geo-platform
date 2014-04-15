@@ -166,13 +166,6 @@
             <artifactId>spring-expression</artifactId>
         </dependency>
         
-        <!-- ============================================================== -->
-        <!-- ================== GEOPLATFORM CONFIGURATOR ================== -->
-        <!-- ============================================================== -->
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-configurator</artifactId>
-        </dependency>
         
         <dependency>
             <groupId>junit</groupId>

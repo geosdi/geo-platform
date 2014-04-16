@@ -21,13 +21,42 @@
     </properties>
 
     <dependencies>
+        
+        <!-- =========================================================== -->
+        <!-- ========================= SPRING ========================== -->
+        <!-- =========================================================== -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+        </dependency>
           
         <!-- =========================================================== -->
-        <!-- ======================== GUAVA =========================== -->
+        <!-- ========================= GUAVA =========================== -->
         <!-- =========================================================== -->
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
+        </dependency>
+        
+        <!-- logging dependencies, delegate all to slf4j and use logback -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>log4j-over-slf4j</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
         </dependency>
         
         <!-- CXF -->
@@ -42,6 +71,12 @@
             <artifactId>cxf-rt-ws-security</artifactId>
             <scope>provided</scope>
         </dependency>
+        
+        <dependency> 
+            <groupId>org.apache.cxf</groupId> 
+            <artifactId>cxf-rt-frontend-jaxrs</artifactId> 
+            <scope>provided</scope>
+        </dependency> 
 
         <dependency>
             <groupId>org.apache.ws.security</groupId>

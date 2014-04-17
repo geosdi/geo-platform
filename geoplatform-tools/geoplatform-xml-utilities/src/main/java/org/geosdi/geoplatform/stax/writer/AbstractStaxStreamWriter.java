@@ -58,8 +58,8 @@ public abstract class AbstractStaxStreamWriter<T extends Object> implements
             AbstractStaxStreamWriter.class);
     //
     protected XMLStreamWriter writer;
-    private StreamWriterBuildHandler streamBuilder = new StringBuildHandler();
-    private XmlStreamWriterBuilder xmlStreamBuilder = XmlStreamWriterBuilder.newInstance();
+    private final StreamWriterBuildHandler streamBuilder = new StringBuildHandler();
+    private final XmlStreamWriterBuilder xmlStreamBuilder = XmlStreamWriterBuilder.newInstance();
     private OutputStream stream;
 
     @Override

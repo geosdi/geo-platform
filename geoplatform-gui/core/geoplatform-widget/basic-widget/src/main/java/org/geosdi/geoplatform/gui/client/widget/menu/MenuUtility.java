@@ -64,9 +64,9 @@ import org.geosdi.geoplatform.gui.impl.menu.binder.MenuActionBinder;
  */
 public class MenuUtility implements IGeoPlatformMenubar {
 
-    private static MenuUtility INSTANCE = new MenuUtility();
-    private MenuActionBinder menuActionBinder;
-    private MenuActionRegistar menuRegistar = BasicGinInjector.MainInjector.getInstance().getMenuActionRegistar();
+    private static final MenuUtility INSTANCE = new MenuUtility();
+    private final MenuActionBinder menuActionBinder;
+    private final MenuActionRegistar menuRegistar = BasicGinInjector.MainInjector.getInstance().getMenuActionRegistar();
 
     private MenuUtility() {
         this.menuActionBinder = new GPMenuActionBinder(this);

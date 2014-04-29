@@ -48,8 +48,8 @@ import org.geosdi.geoplatform.gui.configuration.menubar.MenuBarCategory;
  */
 public class MenuBarWidget {
 
-    private MenuBar bar;
-    private IMenuBarContainerTool menuBarContainerTool;
+    private final MenuBar bar;
+    private final IMenuBarContainerTool menuBarContainerTool;
 
     public MenuBarWidget(IMenuBarContainerTool menuBarContainerTool) {
         this.bar = new MenuBar();

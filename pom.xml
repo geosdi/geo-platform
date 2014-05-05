@@ -1697,7 +1697,7 @@
         <gwtVersion>2.5.1</gwtVersion>
         <gxtVersion>2.3.0-gwt22</gxtVersion>
         
-        <gwtOpenlayersVersion>1.0-SNAPSHOT</gwtOpenlayersVersion>
+        <gwtOpenlayersVersion>1.1-SNAPSHOT</gwtOpenlayersVersion>
         
         <cas-version>3.2.1</cas-version>
         

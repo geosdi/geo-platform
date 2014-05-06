@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.2.xsd"
+       default-autowire="byName">
+
+    <context:annotation-config />
+
+    <bean name="admin"
+          class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarCategory">
+        <property name="text" value="Admin" />
+        <property name="enabled" value="true" />
+        <property name="order" value="10" />
+        <property name="tools">
+            <list>
+                <ref bean="system" />
+                <ref bean="user" />
+                <ref bean="project" />
+                <ref bean="startUp" />
+                <ref bean="logout" />
+                <ref bean="about" />
+            </list>
+        </property>
+    </bean>
+    
+    <bean name="system"
+          class="org.geosdi.geoplatform.gui.configuration.menubar.GroupMenuClientTool">
+        <property name="text" value="Admin" />
+        <property name="enabled" value="true" />
+        <property name="order" value="10" />
+        <property name="tools">
+            <list>
+                <bean name="organizationManager"
+                      class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+                    <property name="id" value="organizationManager" />
+                    <property name="text" value="Organization Manager" />
+                    <property name="enabled" value="true" />
+                    <property name="order" value="10" />
+                </bean>
+                <bean name="rolesManager"
+                      class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+                    <property name="id" value="rolesManager" />
+                    <property name="text" value="Roles Manager" />
+                    <property name="enabled" value="true" />
+                    <property name="order" value="20" />
+                </bean>
+                <bean name="userManager"
+                      class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+                    <property name="id" value="userManager" />
+                    <property name="text" value="User Manager" />
+                    <property name="enabled" value="true" />
+                    <property name="order" value="30" />
+                </bean>
+                <bean name="ingestData"
+                      class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+                    <property name="id" value="ingestData" />
+                    <property name="text" value="Ingest Data" />
+                    <property name="enabled" value="true" />
+                    <property name="order" value="40" />
+                </bean>
+            </list>
+        </property>
+    </bean>
+    
+    <bean name="user"
+          class="org.geosdi.geoplatform.gui.configuration.menubar.GroupMenuClientTool">
+        <property name="text" value="User" />
+        <property name="enabled" value="true" />
+        <property name="order" value="20" />
+        <property name="tools">
+            <list>
+                <bean name="myAccountManager"
+                      class="org.geosdi.geoplatform.gui.configuration.menubar.GroupMenuClientTool">
+                    <property name="id" value="myAccountManager" />
+                    <property name="text" value="My Account Manager" />
+                    <property name="enabled" value="true" />
+                    <property name="order" value="10" />
+                    <property name="tools">
+                        <list>
+                            <bean name="userAccount"
+                                  class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+                                <property name="id" value="userAccount" />
+                                <property name="text" value="User Account" />
+                                <property name="enabled" value="true" />
+                                <property name="order" value="10" />
+                            </bean>
+                            <bean name="view"
+                                  class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+                                <property name="id" value="view" />
+                                <property name="text" value="View" />
+                                <property name="enabled" value="true" />
+                                <property name="order" value="20" />
+                            </bean>
+                            <bean name="disk"
+                                  class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+                                <property name="id" value="disk" />
+                                <property name="text" value="Disk" />
+                                <property name="enabled" value="true" />
+                                <property name="order" value="30" />
+                            </bean>
+                            <bean name="geocoding"
+                                  class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+                                <property name="id" value="geocoding" />
+                                <property name="text" value="Geocoding" />
+                                <property name="enabled" value="true" />
+                                <property name="order" value="40" />
+                            </bean>
+                            <bean name="widget"
+                                  class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+                                <property name="id" value="widget" />
+                                <property name="text" value="Widget" />
+                                <property name="enabled" value="true" />
+                                <property name="order" value="50" />
+                            </bean>
+                        </list>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+    
+    <bean name="project"
+          class="org.geosdi.geoplatform.gui.configuration.menubar.GroupMenuClientTool">
+        <property name="text" value="Project" />
+        <property name="enabled" value="true" />
+        <property name="order" value="30" />
+        <property name="tools">
+            <list>
+                <bean name="add"
+                      class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+                    <property name="id" value="add" />
+                    <property name="text" value="Add" />
+                    <property name="enabled" value="true" />
+                    <property name="order" value="10" />
+                </bean>
+                <bean name="edit"
+                      class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+                    <property name="id" value="edit" />
+                    <property name="text" value="Edit" />
+                    <property name="enabled" value="true" />
+                    <property name="order" value="20" />
+                </bean>
+                <bean name="delete"
+                      class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+                    <property name="id" value="delete" />
+                    <property name="text" value="Delete" />
+                    <property name="enabled" value="true" />
+                    <property name="order" value="30" />
+                </bean>
+                <bean name="share"
+                      class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+                    <property name="id" value="share" />
+                    <property name="text" value="Share" />
+                    <property name="enabled" value="true" />
+                    <property name="order" value="40" />
+                </bean>
+                <bean name="setDefault"
+                      class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+                    <property name="id" value="setDefault" />
+                    <property name="text" value="Set Default" />
+                    <property name="enabled" value="true" />
+                    <property name="order" value="50" />
+                </bean>
+                <bean name="viewportSetUp"
+                      class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+                    <property name="id" value="viewportSetUp" />
+                    <property name="text" value="Viewport Set Up" />
+                    <property name="enabled" value="true" />
+                    <property name="order" value="60" />
+                </bean>
+                <bean name="baseMapSetUp"
+                      class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+                    <property name="id" value="baseMapSetUp" />
+                    <property name="text" value="Base Map Set Up" />
+                    <property name="enabled" value="true" />
+                    <property name="order" value="70" />
+                </bean>
+            </list>
+        </property>
+    </bean>
+    
+    <bean name="startUp"
+          class="org.geosdi.geoplatform.gui.configuration.menubar.GroupMenuClientTool">
+        <property name="text" value="Start Up" />
+        <property name="enabled" value="true" />
+        <property name="order" value="40" />
+        <property name="tools">
+            <list>
+                <bean name="viewPort"
+                      class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+                    <property name="id" value="viewPort" />
+                    <property name="text" value="Viewport" />
+                    <property name="enabled" value="true" />
+                    <property name="order" value="10" />
+                </bean>
+                <bean name="treeViewExpansion"
+                      class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+                    <property name="id" value="treeViewExpansion" />
+                    <property name="text" value="Tree View Expansion" />
+                    <property name="enabled" value="true" />
+                    <property name="order" value="20" />
+                </bean>
+                <bean name="notification"
+                      class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+                    <property name="id" value="notification" />
+                    <property name="text" value="Notification" />
+                    <property name="enabled" value="true" />
+                    <property name="order" value="30" />
+                </bean>
+                <bean name="baseMap"
+                      class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+                    <property name="id" value="baseMap" />
+                    <property name="text" value="BaseMap" />
+                    <property name="enabled" value="true" />
+                    <property name="order" value="40" />
+                </bean>
+            </list>
+        </property>
+    </bean>
+    
+    <bean name="logout"
+          class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+        <property name="text" value="LogOut" />
+        <property name="enabled" value="true" />
+        <property name="order" value="50" />
+    </bean>
+    
+    <bean name="about"
+          class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+        <property name="text" value="About" />
+        <property name="enabled" value="true" />
+        <property name="order" value="60" />
+    </bean>
+
+</beans>

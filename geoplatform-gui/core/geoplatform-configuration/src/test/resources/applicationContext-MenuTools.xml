@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.2.xsd"
+       default-autowire="byName">
+
+    <context:annotation-config />
+
+    <bean name="tools"
+          class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarCategory">
+        <property name="text" value="Scenario" />
+        <property name="enabled" value="true" />
+        <property name="order" value="30" />
+        <property name="tools">
+            <list>
+                <ref bean="editTools" />
+                <ref bean="aoiTools" />
+                <ref bean="geocodingTools" />
+                <ref bean="exportTools" />
+                <ref bean="geofenceTools" />
+            </list>
+        </property>
+    </bean>
+    
+    <bean name="editTools"
+          class="org.geosdi.geoplatform.gui.configuration.menubar.GroupMenuClientTool">
+        <property name="text" value="Edit" />
+        <property name="enabled" value="true" />
+        <property name="order" value="10" />
+        <property name="tools">
+            <list>
+                <bean name="layerTools"
+                      class="org.geosdi.geoplatform.gui.configuration.menubar.GroupMenuClientTool">
+                    <property name="id" value="layerTools" />
+                    <property name="text" value="Import Tree" />
+                    <property name="enabled" value="true" />
+                    <property name="order" value="10" />
+                    <property name="tools">
+                        <list>
+                            <bean name="editWFS"
+                                  class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+                                <property name="id" value="editWFS" />
+                                <property name="text" value="Edit WFS" />
+                                <property name="enabled" value="true" />
+                                <property name="order" value="10" />
+                            </bean>
+                            <bean name="editSLD"
+                                  class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+                                <property name="id" value="editSLD" />
+                                <property name="text" value="Edit SLD" />
+                                <property name="enabled" value="true" />
+                                <property name="order" value="20" />
+                            </bean>
+                        </list>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+    
+    <bean name="aoiTools"
+          class="org.geosdi.geoplatform.gui.configuration.menubar.GroupMenuClientTool">
+        <property name="text" value="AOI" />
+        <property name="enabled" value="true" />
+        <property name="order" value="20" />
+        <property name="tools">
+            <list>
+                <bean name="drawPolygon"
+                      class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+                    <property name="id" value="drawPolygon" />
+                    <property name="text" value="Draw Polygon" />
+                    <property name="enabled" value="true" />
+                    <property name="order" value="10" />
+                </bean>
+                <bean name="drawLine"
+                      class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+                    <property name="id" value="drawLine" />
+                    <property name="text" value="Draw Line" />
+                    <property name="enabled" value="true" />
+                    <property name="order" value="20" />
+                </bean>
+                <bean name="drawPoint"
+                      class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+                    <property name="id" value="drawPoint" />
+                    <property name="text" value="Draw Point" />
+                    <property name="enabled" value="true" />
+                    <property name="order" value="30" />
+                </bean>
+                <bean name="reshape"
+                      class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+                    <property name="id" value="reshape" />
+                    <property name="text" value="Reshape" />
+                    <property name="enabled" value="true" />
+                    <property name="order" value="40" />
+                </bean>
+                <bean name="rotate"
+                      class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+                    <property name="id" value="rotate" />
+                    <property name="text" value="Rotate" />
+                    <property name="enabled" value="true" />
+                    <property name="order" value="50" />
+                </bean>
+                <bean name="drag"
+                      class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+                    <property name="id" value="drag" />
+                    <property name="text" value="Drag" />
+                    <property name="enabled" value="true" />
+                    <property name="order" value="60" />
+                </bean>
+                <bean name="resize"
+                      class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+                    <property name="id" value="resize" />
+                    <property name="text" value="Resize" />
+                    <property name="enabled" value="true" />
+                    <property name="order" value="70" />
+                </bean>
+                <bean name="deleteFeature"
+                      class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+                    <property name="id" value="deleteFeature" />
+                    <property name="text" value="Delete Feature" />
+                    <property name="enabled" value="true" />
+                    <property name="order" value="80" />
+                </bean>
+                <bean name="clear"
+                      class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+                    <property name="id" value="clear" />
+                    <property name="text" value="Clear" />
+                    <property name="enabled" value="true" />
+                    <property name="order" value="90" />
+                </bean>
+            </list>
+        </property>
+    </bean>
+    
+    <bean name="geocodingTools"
+          class="org.geosdi.geoplatform.gui.configuration.menubar.GroupMenuClientTool">
+        <property name="text" value="Geocoding" />
+        <property name="enabled" value="true" />
+        <property name="order" value="30" />
+        <property name="tools">
+            <list>
+                <bean name="google"
+                      class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+                    <property name="id" value="google" />
+                    <property name="text" value="Google" />
+                    <property name="enabled" value="true" />
+                    <property name="order" value="10" />
+                </bean>
+                <bean name="toponimi"
+                      class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+                    <property name="id" value="toponimi" />
+                    <property name="text" value="Toponimi" />
+                    <property name="enabled" value="true" />
+                    <property name="order" value="20" />
+                </bean>
+                <bean name="fiumi"
+                      class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+                    <property name="id" value="fiumi" />
+                    <property name="text" value="Fiumi" />
+                    <property name="enabled" value="true" />
+                    <property name="order" value="30" />
+                </bean>
+            </list>
+        </property>
+    </bean>
+    
+    <bean name="exportTools"
+          class="org.geosdi.geoplatform.gui.configuration.menubar.GroupMenuClientTool">
+        <property name="text" value="Export" />
+        <property name="enabled" value="true" />
+        <property name="order" value="40" />
+        <property name="tools">
+            <list>
+                <bean name="kml"
+                      class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+                    <property name="id" value="kml" />
+                    <property name="text" value="KML" />
+                    <property name="enabled" value="true" />
+                    <property name="order" value="10" />
+                </bean>
+                <bean name="pdf"
+                      class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+                    <property name="id" value="pdf" />
+                    <property name="text" value="PDF" />
+                    <property name="enabled" value="true" />
+                    <property name="order" value="20" />
+                </bean>
+                <bean name="tiff"
+                      class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+                    <property name="id" value="tiff" />
+                    <property name="text" value="TIFF" />
+                    <property name="enabled" value="true" />
+                    <property name="order" value="30" />
+                </bean>
+                <bean name="shp"
+                      class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+                    <property name="id" value="shp" />
+                    <property name="text" value="SHP" />
+                    <property name="enabled" value="true" />
+                    <property name="order" value="40" />
+                </bean>
+                <bean name="gml"
+                      class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+                    <property name="id" value="gml" />
+                    <property name="text" value="GML" />
+                    <property name="enabled" value="true" />
+                    <property name="order" value="50" />
+                </bean>
+                <bean name="csv"
+                       class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+                    <property name="id" value="csv" />
+                    <property name="text" value="CSV" />
+                    <property name="enabled" value="true" />
+                    <property name="order" value="60" />
+                </bean>
+                <bean name="geoJson"
+                       class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+                    <property name="id" value="geoJson" />
+                    <property name="text" value="GeoJson" />
+                    <property name="enabled" value="true" />
+                    <property name="order" value="70" />
+                </bean>
+                <bean name="rss"
+                       class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+                    <property name="id" value="rss" />
+                    <property name="text" value="RSS" />
+                    <property name="enabled" value="true" />
+                    <property name="order" value="80" />
+                </bean>
+            </list>
+        </property>
+    </bean>
+    
+    <bean name="geofenceTools"
+          class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+        <property name="text" value="GeoFence" />
+        <property name="enabled" value="true" />
+        <property name="order" value="50" />
+    </bean>
+
+</beans>

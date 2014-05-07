@@ -82,7 +82,7 @@ public class MenuBarWidget {
      */
     public void addCategory(MenuBarCategory category,
             Menu menu) {
-        MenuUtility.getIstance().buildTools(menu, category.getTools());
+        GPMenuBarBuilder.getIstance().buildTools(menu, category.getTools());
     }
 
     /**

@@ -59,21 +59,23 @@ import org.geosdi.geoplatform.gui.impl.menu.binder.GPMenuActionBinder;
 import org.geosdi.geoplatform.gui.impl.menu.binder.MenuActionBinder;
 
 /**
+ * @TODO Think a way to build with Gin
+ * 
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class MenuUtility implements IGeoPlatformMenubar {
+public class GPMenuBarBuilder implements IGeoPlatformMenubar {
 
-    private static final MenuUtility INSTANCE = new MenuUtility();
+    private static final GPMenuBarBuilder INSTANCE = new GPMenuBarBuilder();
     private final MenuActionBinder menuActionBinder;
     private final MenuActionRegistar menuRegistar = BasicGinInjector.MainInjector.getInstance().getMenuActionRegistar();
 
-    private MenuUtility() {
+    private GPMenuBarBuilder() {
         this.menuActionBinder = new GPMenuActionBinder(this);
     }
 
-    public static MenuUtility getIstance() {
-        return MenuUtility.INSTANCE;
+    public static GPMenuBarBuilder getIstance() {
+        return GPMenuBarBuilder.INSTANCE;
     }
 
     /**

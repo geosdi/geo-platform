@@ -1,0 +1,13 @@
+<html>
+<body>
+    <h3>Hi all</h3>
+    <div>
+        The <b>geoSDI Team</b> is pleased to inform you 
+        of the new module for sending mails.
+    </div>
+    <br/><br/>
+    <div>
+        Please, follow us on <a href="https://github.com/geosdi/geo-platform">github</a>.
+    </div>
+</body>
+</html>

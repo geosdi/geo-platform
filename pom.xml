@@ -697,7 +697,7 @@
             <dependency>
                 <groupId>commons-codec</groupId>
                 <artifactId>commons-codec</artifactId>
-                <version>1.7</version>
+                <version>1.9</version>
                 <scope>runtime</scope> 
             </dependency>
             
@@ -861,9 +861,9 @@
             </dependency>
 
             <dependency>
-                <groupId>javax.mail</groupId>
-                <artifactId>mail</artifactId>
-                <version>1.4.5</version>
+                <groupId>com.sun.mail</groupId>
+                <artifactId>javax.mail</artifactId>
+                <version>1.5.0</version>
             </dependency>
 
             <!-- =========================================================== -->
@@ -1666,11 +1666,11 @@
         
         <cxf-version>2.7.10</cxf-version>
  
-        <spring-version>4.0.3.RELEASE</spring-version>
+        <spring-version>4.0.4.RELEASE</spring-version>
         <activemq-version>5.8.0</activemq-version>
 
         <httpcomponents-core-version>4.3.2</httpcomponents-core-version>
-        <httpcomponents-client-version>4.3.2</httpcomponents-client-version>
+        <httpcomponents-client-version>4.3.3</httpcomponents-client-version>
 
         <jibx-version>1.2.4.5</jibx-version>
 

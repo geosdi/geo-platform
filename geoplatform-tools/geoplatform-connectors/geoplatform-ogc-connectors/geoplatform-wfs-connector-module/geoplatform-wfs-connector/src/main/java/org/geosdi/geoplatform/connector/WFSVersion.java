@@ -43,7 +43,7 @@ public enum WFSVersion {
 
     V110("1.1.0");
     //
-    private String version;
+    private final String version;
 
     WFSVersion(String version) {
         this.version = version;

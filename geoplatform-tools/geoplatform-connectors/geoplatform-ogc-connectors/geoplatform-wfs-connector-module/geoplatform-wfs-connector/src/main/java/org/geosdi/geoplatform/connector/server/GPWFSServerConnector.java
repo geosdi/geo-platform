@@ -57,7 +57,7 @@ public class GPWFSServerConnector extends GPAbstractServerConnector {
     private WFSVersion version;
 
     /**
-     * <p>Create an Instance of {@link WFSServerConnector} with the server URL
+     * <p>Create an Instance of {@link GPWFSServerConnector} with the server URL
      * and the specific version.</p>
      *
      * @param urlServer the String that represent WFS server URL
@@ -68,7 +68,7 @@ public class GPWFSServerConnector extends GPAbstractServerConnector {
     }
 
     /**
-     * <p>Create an instance of {@link WFSServerConnector} with the server URL,
+     * <p>Create an instance of {@link GPWFSServerConnector} with the server URL,
      * {@link GPSecurityConnector} for security and version.</p>
      *
      * @param urlServer the String that represent WFS server URL
@@ -82,7 +82,7 @@ public class GPWFSServerConnector extends GPAbstractServerConnector {
     }
 
     /**
-     * <p>Create an instance of {@link WFSServerConnector} with the {@link URL}
+     * <p>Create an instance of {@link GPWFSServerConnector} with the {@link URL}
      * server UR:, {@link GPSecurityConnector} security context and
      * {@link WFSVersion} WFS version.</p>
      *

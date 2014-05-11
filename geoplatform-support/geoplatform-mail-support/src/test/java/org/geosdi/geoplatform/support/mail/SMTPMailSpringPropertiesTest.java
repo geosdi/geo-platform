@@ -45,6 +45,7 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -104,6 +105,7 @@ public class SMTPMailSpringPropertiesTest {
     }
 
     @Test
+    @Ignore(value = "Too Mails from Hudson / Jenkins")
     public void sendMail() throws InterruptedException {
         this.gpMailSpringSender.send(new MimeMessagePreparator() {
 

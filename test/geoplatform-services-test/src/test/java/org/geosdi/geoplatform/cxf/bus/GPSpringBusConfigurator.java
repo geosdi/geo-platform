@@ -74,7 +74,7 @@ public class GPSpringBusConfigurator implements Disposable {
     @Override
     public void dispose() {
         if (this.bus != null) {
-            this.bus.shutdown(false);
+            this.bus.shutdown(Boolean.FALSE);
         }
     }
 }

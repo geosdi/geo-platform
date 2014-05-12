@@ -54,8 +54,8 @@ import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 @Singleton
 public class LayerManagementWidget extends GeoPlatformContentPanel {
 
-    private LayerTreePanel layerTreePanel;
-    private GPLegendPanel legendPanel;
+    private final LayerTreePanel layerTreePanel;
+    private final GPLegendPanel legendPanel;
 
     @Inject
     public LayerManagementWidget(LayerTreePanel theLayerTreePanel,

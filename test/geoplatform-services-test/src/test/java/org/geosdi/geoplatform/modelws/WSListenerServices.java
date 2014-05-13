@@ -35,8 +35,8 @@
  */
 package org.geosdi.geoplatform.modelws;
 
-import java.util.concurrent.TimeUnit;
 import javax.xml.ws.Endpoint;
+import org.apache.cxf.jaxws22.EndpointImpl;
 import org.geosdi.geoplatform.connectors.ws.basic.GPBasicWSClientTestConnector;
 import org.geosdi.geoplatform.cxf.bus.GPSpringBusConfigurator;
 import org.geosdi.geoplatform.services.GeoPlatformService;
@@ -57,9 +57,10 @@ import org.springframework.test.context.TestExecutionListener;
  */
 public class WSListenerServices implements TestExecutionListener {
 
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     private GeoPlatformService gpWSClient;
+    private EndpointImpl gpWSClientImpl;
 
     @Override
     public void beforeTestClass(TestContext testContext) throws Exception {
@@ -79,7 +80,7 @@ public class WSListenerServices implements TestExecutionListener {
         appContext.getBean(GPSpringBusConfigurator.class).createBus();
 
         String wsServerAddress = wsClientConnector.getAddress();
-        Endpoint.publish(wsServerAddress, geoPlatformService);
+        this.gpWSClientImpl = (EndpointImpl) Endpoint.publish(wsServerAddress, geoPlatformService);
 
         logger.info("\n\t@@@ Server ready... @@@");
     }
@@ -103,8 +104,6 @@ public class WSListenerServices implements TestExecutionListener {
     @Override
     public void afterTestClass(TestContext testContext) throws Exception {
         logger.info("\n\t@@@ WSListenerServices.afterTestClass @@@");
-
-        // Wait to be sure that the endpoint was shutdown properly
-        Thread.sleep(TimeUnit.SECONDS.toMillis(5));
+        this.gpWSClientImpl.stop();
     }
 }

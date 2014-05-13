@@ -45,6 +45,7 @@
     </build>
     
     <modules>
+        <module>geoplatform-spring-dependency</module>
         <module>geoplatform-cxf-dependency</module>
     </modules>
 

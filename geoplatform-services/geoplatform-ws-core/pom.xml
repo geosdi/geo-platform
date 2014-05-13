@@ -14,6 +14,18 @@
     <packaging>pom</packaging>
 
     <name>Geo-Platform :: == All Core Web Services</name>
+    
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.geosdi</groupId>
+                <artifactId>geoplatform-cxf-dependency</artifactId>
+                <type>pom</type>
+                <scope>import</scope>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
   
     <modules>
         <module>geoplatform-ws-core-api</module>

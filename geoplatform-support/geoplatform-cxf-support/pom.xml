@@ -15,6 +15,18 @@
 
     <name>Geo-Platform :: == CXF Module Support</name>
     
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.geosdi</groupId>
+                <artifactId>geoplatform-cxf-dependency</artifactId>
+                <type>pom</type>
+                <scope>import</scope>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    
     <modules>
         <module>geoplatform-cxf-api-support</module>
         <module>geoplatform-cxf-client-support</module>

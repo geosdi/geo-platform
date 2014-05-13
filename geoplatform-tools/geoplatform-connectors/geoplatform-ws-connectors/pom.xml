@@ -15,6 +15,18 @@
 
     <name>Geo-Platform :: == WS Connectors Module</name>
     
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.geosdi</groupId>
+                <artifactId>geoplatform-cxf-dependency</artifactId>
+                <type>pom</type>
+                <scope>import</scope>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    
     <modules>
         <module>geoplatform-ws-api-connector</module>
         <module>geoplatform-ws-impl-connector</module>
@@ -24,7 +36,7 @@
         <module>geoplatform-ws-publish-connector</module>
         <module>geoplatform-ws-tracking-connector</module>
         <module>geoplatform-ws-wfs-connector</module>
-	<module>geoplatform-ws-wms-connector</module>
+        <module>geoplatform-ws-wms-connector</module>
     </modules>
 
 </project>

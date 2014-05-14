@@ -1439,7 +1439,7 @@
 
         <slf4j-version>1.7.6</slf4j-version>
 
-        <aspectj-version>1.7.1.RELEASE</aspectj-version>
+        <aspectj-version>1.8.0</aspectj-version>
         <ubl-version>2.0</ubl-version>
         <jetty-version>8.1.14.v20131031</jetty-version>
 

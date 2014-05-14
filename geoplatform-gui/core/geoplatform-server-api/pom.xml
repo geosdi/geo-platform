@@ -102,6 +102,12 @@
             <artifactId>geoplatform-configurator</artifactId>
         </dependency>
         
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-cxf-server-support</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        
         <!-- CAS -->
         <dependency>
             <groupId>org.jasig.cas.client</groupId>

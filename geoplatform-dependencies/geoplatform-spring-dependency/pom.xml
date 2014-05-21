@@ -141,7 +141,7 @@
     </dependencyManagement>
     
     <properties>
-        <spring-version>4.0.4.RELEASE</spring-version>
+        <spring-version>4.0.5.RELEASE</spring-version>
         <spring-support>2.0.8</spring-support>
         <spring-security-version>3.2.3.RELEASE</spring-security-version>
     </properties>

@@ -39,7 +39,6 @@ import java.util.Arrays;
 import java.util.List;
 import javax.xml.bind.JAXBElement;
 import org.geosdi.geoplatform.connector.server.request.WFSTransactionRequest;
-import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.xml.filter.v110.AbstractIdType;
 import org.geosdi.geoplatform.xml.filter.v110.FeatureIdType;
 import org.geosdi.geoplatform.xml.filter.v110.FilterType;

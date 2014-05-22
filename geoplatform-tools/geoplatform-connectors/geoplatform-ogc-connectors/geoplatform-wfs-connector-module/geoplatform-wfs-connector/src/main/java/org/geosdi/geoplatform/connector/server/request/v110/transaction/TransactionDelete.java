@@ -40,7 +40,6 @@ import javax.xml.bind.JAXBElement;
 import org.geosdi.geoplatform.connector.server.request.ITransactionOperationStrategy;
 import org.geosdi.geoplatform.connector.server.request.WFSTransactionRequest;
 import org.geosdi.geoplatform.xml.filter.v110.AbstractIdType;
-import org.geosdi.geoplatform.xml.filter.v110.FeatureIdType;
 import org.geosdi.geoplatform.xml.filter.v110.FilterType;
 import org.geosdi.geoplatform.xml.filter.v110.GmlObjectIdType;
 import org.geosdi.geoplatform.xml.wfs.v110.DeleteElementType;

@@ -60,7 +60,7 @@ public class ThreadPoolTaskExecutorConfig implements GPAsyncConfigurer {
     @Override
     @Bean(name = "gpThreadPoolTaskExecutor")
     public Executor createAsyncExecutor(@Qualifier(value = "gpTaskExecutorProp") TaskExecutorProperties gpTaskExecutorProp) {
-        logger.debug("\n\n######################################## Initializing "
+        logger.debug("\n\n########################################Initializing "
                 + "GeoPlatform ThreadPoolTaskExecutor with Properties \n {}\n\n",
                 gpTaskExecutorProp);
 

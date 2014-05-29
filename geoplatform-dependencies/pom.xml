@@ -45,6 +45,7 @@
     </build>
     
     <modules>
+        <module>geoplatform-slf4j-dependency</module>
         <module>geoplatform-spring-dependency</module>
         <module>geoplatform-cxf-dependency</module>
     </modules>

@@ -33,14 +33,13 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.support.async;
+package org.geosdi.geoplatform.support.async.mail;
 
 import java.util.concurrent.Future;
 import javax.annotation.Resource;
 import javax.mail.internet.MimeMessage;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
-import org.geosdi.geoplatform.support.async.loader.GPMailAsyncLoader;
-import org.geosdi.geoplatform.support.async.mail.GPMailAsyncSender;
+import org.geosdi.geoplatform.support.async.mail.loader.GPMailAsyncLoader;
 import org.geosdi.geoplatform.support.mail.configuration.detail.GPMailDetail;
 import org.junit.AfterClass;
 import org.junit.Assert;

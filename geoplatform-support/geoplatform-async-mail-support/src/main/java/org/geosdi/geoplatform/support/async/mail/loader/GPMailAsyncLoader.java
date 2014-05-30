@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.support.async.loader;
+package org.geosdi.geoplatform.support.async.mail.loader;
 
 import org.geosdi.geoplatform.support.mail.loader.GPMailLoader;
 import org.springframework.context.annotation.ComponentScan;

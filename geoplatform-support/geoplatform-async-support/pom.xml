@@ -16,7 +16,6 @@
     <description>
         This Module gives the possibility to perform operations 
         asynchronously using Spring with the Annotation @Async.
-        In this module is present an example to Send Emails asynchronously.
     </description>
 
     <name>Geo-Platform :: == Spring Async Module Support</name>
@@ -56,16 +55,6 @@
             <groupId>net.jcip</groupId>
             <artifactId>jcip-annotations</artifactId>
             <version>1.0</version>
-        </dependency>
-        
-        <!-- =========================================================== -->
-        <!-- ================= GEOPLATFORM MAIL SUPPORT ================ -->
-        <!-- =========================================================== -->
-        
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-mail-support</artifactId>
-            <version>${project.version}</version>
         </dependency>
         
         <!-- =========================================================== -->

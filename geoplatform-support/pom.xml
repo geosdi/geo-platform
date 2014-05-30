@@ -20,6 +20,9 @@
         <module>geoplatform-httpclient-support</module>
         <module>geoplatform-mail-support</module>
         <module>geoplatform-async-support</module>
+        <module>geoplatform-async-mail-support</module>
+        <module>geoplatform-xmpp-support</module>
+        <module>geoplatform-xmpp-async-support</module>
     </modules>
 
 </project>

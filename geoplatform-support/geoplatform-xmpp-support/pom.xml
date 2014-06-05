@@ -18,9 +18,82 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <smack.version>4.0.0-rc2</smack.version>
     </properties>
 
     <dependencies>
+        <!-- =========================================================== -->
+        <!-- =========================== SPRING ======================== -->
+        <!-- =========================================================== -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+        </dependency>
+       
+        <!-- =========================================================== -->
+        <!-- ================ GEOPLATFORM LOGGER SUPPORT =============== -->
+        <!-- =========================================================== -->
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-logger-support</artifactId>
+            <version>${project.version}</version>
+        </dependency>  
+        
+        <!-- =========================================================== -->
+        <!-- ================ GEOPLATFORM JASYPT SUPPORT =============== -->
+        <!-- =========================================================== -->
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-jasypt-support</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        
+        <!-- =========================================================== -->
+        <!-- ================== IGNITE REALTIME SMACK ================== -->
+        <!-- =========================================================== -->
+        <dependency>
+            <groupId>org.igniterealtime.smack</groupId>
+            <artifactId>smack-core</artifactId>
+            <version>${smack.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.igniterealtime.smack</groupId>
+            <artifactId>smack-tcp</artifactId>
+            <version>${smack.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

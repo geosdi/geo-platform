@@ -50,7 +50,7 @@ import org.springframework.context.annotation.Configuration;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Configuration
-public class GPMailPlaceholderConfig {
+class GPMailPlaceholderConfig {
 
     private static final PlaceholderMailResourcesLoader placeholderResourcesLoader = new PlaceholderMailResourcesLoader();
 

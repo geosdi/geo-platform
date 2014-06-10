@@ -82,7 +82,9 @@ public class GPXMPPAuth implements XMPPBaseAuth {
             return false;
         }
         final GPXMPPAuth other = (GPXMPPAuth) obj;
-        return true;
+        return !((this.xmppUserName == null)
+                ? (other.xmppUserName != null)
+                : !this.xmppUserName.equals(other.xmppUserName));
     }
 
     @Override

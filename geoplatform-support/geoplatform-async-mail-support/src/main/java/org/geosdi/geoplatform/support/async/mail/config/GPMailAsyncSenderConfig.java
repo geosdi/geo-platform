@@ -49,7 +49,7 @@ import org.springframework.mail.javamail.JavaMailSender;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Configuration
-public class GPMailAsyncSenderConfig {
+class GPMailAsyncSenderConfig {
 
     @Bean(name = "gpMailAsyncSender")
     @Autowired

@@ -51,7 +51,7 @@ import org.springframework.ui.velocity.VelocityEngineFactory;
  */
 @Configuration
 @Profile(value = "GPMailVelocitySupport")
-public class GPSpringVelocityEngineConfig {
+class GPSpringVelocityEngineConfig {
 
     @Bean(name = "gpSpringVelocityEngine")
     public VelocityEngine gpVelocityEngine()

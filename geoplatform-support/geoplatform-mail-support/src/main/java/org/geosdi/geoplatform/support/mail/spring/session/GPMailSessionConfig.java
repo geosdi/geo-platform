@@ -51,7 +51,7 @@ import org.springframework.context.annotation.Configuration;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Configuration
-public class GPMailSessionConfig {
+class GPMailSessionConfig {
 
     @Bean(name = "gpMailSpringSession")
     @Autowired

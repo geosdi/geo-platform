@@ -50,7 +50,7 @@ import org.springframework.context.annotation.Configuration;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Configuration
-public class GPXmppPlaceholderConfig {
+class GPXmppPlaceholderConfig {
 
     private static final PlaceholderXmppResourcesLoader placeholderResourcesLoader = new PlaceholderXmppResourcesLoader();
 

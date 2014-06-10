@@ -50,7 +50,7 @@ import org.springframework.context.annotation.Lazy;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Configuration
-public class SMTPMailSpringPropertiesConfig {
+class SMTPMailSpringPropertiesConfig {
 
     @Bean(name = "gpJavaMailProperties")
     @Autowired

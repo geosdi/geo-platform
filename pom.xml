@@ -195,6 +195,15 @@
                 <module>geoplatform-dependencies</module>
             </modules>
         </profile>
+        <profile>
+            <id>experimental</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <modules>
+                <module>geoplatform-experimental</module>
+            </modules>
+        </profile>
     </profiles>
 
     <developers>

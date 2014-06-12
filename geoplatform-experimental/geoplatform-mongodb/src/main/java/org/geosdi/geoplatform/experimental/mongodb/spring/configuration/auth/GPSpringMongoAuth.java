@@ -33,11 +33,12 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.experimental.mongodb.spring.configutation.auth;
+package org.geosdi.geoplatform.experimental.mongodb.spring.configuration.auth;
 
 import javax.inject.Named;
 import net.jcip.annotations.Immutable;
 import org.geosdi.geoplatform.experimental.mongodb.configuration.auth.MongoAuth;
+import org.geosdi.geoplatform.experimental.mongodb.spring.annotation.GPMongoProp;
 import org.springframework.beans.factory.annotation.Value;
 
 /**
@@ -46,6 +47,7 @@ import org.springframework.beans.factory.annotation.Value;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Immutable
+@GPMongoProp
 @Named(value = "gpSpringMongoAuth")
 public class GPSpringMongoAuth implements MongoAuth {
 

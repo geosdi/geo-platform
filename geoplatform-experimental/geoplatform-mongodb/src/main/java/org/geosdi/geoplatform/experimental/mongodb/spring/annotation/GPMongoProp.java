@@ -33,76 +33,21 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.experimental.mongodb.configuration.auth;
+package org.geosdi.geoplatform.experimental.mongodb.spring.annotation;
 
-import org.springframework.util.StringUtils;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPMongoAuth implements MongoBaseAuth {
-
-    private String mongoUserName;
-    private String mongoPassword;
-
-    @Override
-    public void setMongoUserName(String theMongoUserName) {
-        this.mongoUserName = theMongoUserName;
-    }
-
-    @Override
-    public String getMongoUserName() {
-        return this.mongoUserName;
-    }
-
-    @Override
-    public void setMongoPassword(String theMongoPassword) {
-        this.mongoPassword = theMongoPassword;
-    }
-
-    @Override
-    public String getMongoPassword() {
-        return this.mongoPassword;
-    }
-
-    @Override
-    public Boolean isMongoAuthEnabled() {
-        return (StringUtils.hasText(mongoUserName)
-                && StringUtils.hasText(mongoPassword));
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 29 * hash + (this.mongoUserName != null 
-                ? this.mongoUserName.hashCode() : 0);
-        
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final GPMongoAuth other = (GPMongoAuth) obj;
-
-        return !((this.mongoUserName == null)
-                ? (other.mongoUserName != null)
-                : !this.mongoUserName.equals(other.mongoUserName));
-    }
-
-    @Override
-    public String toString() {
-        return getClass().getSimpleName() + "{ "
-                + "mongoUserName = " + mongoUserName
-                + ", mongoPassword = " + mongoPassword
-                + '}';
-    }
-
+@Retention(value = RetentionPolicy.RUNTIME)
+@Target(value = {ElementType.TYPE, ElementType.METHOD})
+@Documented
+public @interface GPMongoProp {
 }

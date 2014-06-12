@@ -33,45 +33,21 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.experimental.mongodb.configuration.properties;
+package org.geosdi.geoplatform.experimental.mongodb.spring.annotation;
+
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public enum DefaultMongoProperties {
-
-    MONGO_HOST(0) {
-
-                @Override
-                public String mongoProp() {
-                    return "localhost";
-                }
-
-            },
-    MONGO_PORT(1) {
-
-                @Override
-                public Integer mongoProp() {
-                    return 27017;
-                }
-
-            };
-
-    protected final int value;
-
-    private DefaultMongoProperties(int value) {
-        this.value = value;
-    }
-
-    public abstract <T extends Object> T mongoProp();
-
-    /**
-     * @return the value
-     */
-    public int getValue() {
-        return value;
-    }
-
+@Retention(value = RetentionPolicy.RUNTIME)
+@Target(value = {ElementType.TYPE, ElementType.METHOD})
+@Documented
+public @interface GPMongoConfig {
 }

@@ -35,8 +35,10 @@
  */
 package org.geosdi.geoplatform.experimental.mongodb.loader;
 
+import org.geosdi.geoplatform.experimental.mongodb.spring.annotation.GPMongoConfig;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.FilterType;
 
 /**
  *
@@ -45,6 +47,9 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @ComponentScan(value = {"org.geosdi.geoplatform.logger.support.spring.config",
-    "org.geosdi.geoplatform.experimental.mongodb.spring"})
+    "org.geosdi.geoplatform.experimental.mongodb.spring"},
+        excludeFilters = {
+            @ComponentScan.Filter(type = FilterType.ANNOTATION,
+                    value = {GPMongoConfig.class})})
 public class GPMongoPropertiesLoader {
 }

@@ -35,9 +35,9 @@
  */
 package org.geosdi.geoplatform.experimental.mongodb.configuration.properties;
 
-import com.google.common.base.Preconditions;
 import org.geosdi.geoplatform.experimental.mongodb.configuration.auth.MongoAuth;
 import org.springframework.data.authentication.UserCredentials;
+import org.springframework.util.StringUtils;
 
 /**
  *
@@ -102,16 +102,16 @@ public class GPMongoProperties implements MongoBaseProperties {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        Preconditions.checkState(((this.mongoDatabaseName != null)
-                && !(this.mongoDatabaseName.isEmpty())), "The Mongo Database Name "
-                + "must not be null or an empty String.");
+        if(!StringUtils.hasText(mongoDatabaseName)) {
+            this.mongoDatabaseName = MongoPropertiesEnum.MONGO_DBNAME.mongoProp();
+        }
 
-        if ((this.mongoHost == null) || (this.mongoHost.isEmpty())) {
-            this.mongoHost = DefaultMongoProperties.MONGO_HOST.mongoProp();
+        if (!StringUtils.hasText(mongoHost)) {
+            this.mongoHost = MongoPropertiesEnum.MONGO_HOST.mongoProp();
         }
 
         if ((this.mongoPort == null) || (this.mongoPort <= 0)) {
-            this.mongoPort = DefaultMongoProperties.MONGO_PORT.mongoProp();
+            this.mongoPort = MongoPropertiesEnum.MONGO_PORT.mongoProp();
         }
     }
 

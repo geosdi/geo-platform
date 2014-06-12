@@ -33,76 +33,21 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.experimental.mongodb.configuration.auth;
+package org.geosdi.geoplatform.experimental.mongodb.loader;
 
-import org.springframework.util.StringUtils;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ImportResource;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPMongoAuth implements MongoBaseAuth {
-
-    private String mongoUserName;
-    private String mongoPassword;
-
-    @Override
-    public void setMongoUserName(String theMongoUserName) {
-        this.mongoUserName = theMongoUserName;
-    }
-
-    @Override
-    public String getMongoUserName() {
-        return this.mongoUserName;
-    }
-
-    @Override
-    public void setMongoPassword(String theMongoPassword) {
-        this.mongoPassword = theMongoPassword;
-    }
-
-    @Override
-    public String getMongoPassword() {
-        return this.mongoPassword;
-    }
-
-    @Override
-    public Boolean isMongoAuthEnabled() {
-        return (StringUtils.hasText(mongoUserName)
-                && StringUtils.hasText(mongoPassword));
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 29 * hash + (this.mongoUserName != null 
-                ? this.mongoUserName.hashCode() : 0);
-        
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final GPMongoAuth other = (GPMongoAuth) obj;
-
-        return !((this.mongoUserName == null)
-                ? (other.mongoUserName != null)
-                : !this.mongoUserName.equals(other.mongoUserName));
-    }
-
-    @Override
-    public String toString() {
-        return getClass().getSimpleName() + "{ "
-                + "mongoUserName = " + mongoUserName
-                + ", mongoPassword = " + mongoPassword
-                + '}';
-    }
-
+@Configuration
+@ComponentScan(value = {"org.geosdi.geoplatform.logger.support.spring.config",
+    "org.geosdi.geoplatform.experimental.mongodb.spring"})
+@ImportResource(value = {"classpath:mongoRepositories.xml",
+    "classpath*:mongoRepositories.xml"})
+public class GPMongoConfigLoader {
 }

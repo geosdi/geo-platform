@@ -33,76 +33,80 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.experimental.mongodb.configuration.auth;
+package org.geosdi.geoplatform.experimental.mongodb.model;
 
-import org.springframework.util.StringUtils;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.GeoSpatialIndexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPMongoAuth implements MongoBaseAuth {
+@Document(collection = "collectionTest")
+public class Address {
 
-    private String mongoUserName;
-    private String mongoPassword;
+    @Id
+    protected String id;
+    protected String name;
+    @GeoSpatialIndexed(name = "locationIndex")
+    protected double[] location;
 
-    @Override
-    public void setMongoUserName(String theMongoUserName) {
-        this.mongoUserName = theMongoUserName;
+    public Address() {
     }
 
-    @Override
-    public String getMongoUserName() {
-        return this.mongoUserName;
+    public Address(String name, double x, double y) {
+        this.name = name;
+        this.location = new double[]{x, y};
     }
 
-    @Override
-    public void setMongoPassword(String theMongoPassword) {
-        this.mongoPassword = theMongoPassword;
+    /**
+     * @return the id
+     */
+    public String getId() {
+        return id;
     }
 
-    @Override
-    public String getMongoPassword() {
-        return this.mongoPassword;
+    /**
+     * @param id the id to set
+     */
+    public void setId(String id) {
+        this.id = id;
     }
 
-    @Override
-    public Boolean isMongoAuthEnabled() {
-        return (StringUtils.hasText(mongoUserName)
-                && StringUtils.hasText(mongoPassword));
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 29 * hash + (this.mongoUserName != null 
-                ? this.mongoUserName.hashCode() : 0);
-        
-        return hash;
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final GPMongoAuth other = (GPMongoAuth) obj;
+    /**
+     * @return the location
+     */
+    public double[] getLocation() {
+        return location;
+    }
 
-        return !((this.mongoUserName == null)
-                ? (other.mongoUserName != null)
-                : !this.mongoUserName.equals(other.mongoUserName));
+    /**
+     * @param location the location to set
+     */
+    public void setLocation(double[] location) {
+        this.location = location;
     }
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "{ "
-                + "mongoUserName = " + mongoUserName
-                + ", mongoPassword = " + mongoPassword
-                + '}';
+        return "Address{ " + "id = " + id
+                + ", name = " + name + ", location = " + location + '}';
     }
 
 }

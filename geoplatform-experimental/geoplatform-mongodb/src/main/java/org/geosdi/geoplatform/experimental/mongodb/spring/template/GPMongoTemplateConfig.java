@@ -33,76 +33,44 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.experimental.mongodb.configuration.auth;
+package org.geosdi.geoplatform.experimental.mongodb.spring.template;
 
-import org.springframework.util.StringUtils;
+import org.geosdi.geoplatform.experimental.mongodb.spring.annotation.GPMongoConfig;
+import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
+import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Required;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.mongodb.MongoDbFactory;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.WriteResultChecking;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPMongoAuth implements MongoBaseAuth {
+@GPMongoConfig
+@Configuration
+class GPMongoTemplateConfig {
 
-    private String mongoUserName;
-    private String mongoPassword;
+    @GeoPlatformLog
+    static Logger logger;
 
-    @Override
-    public void setMongoUserName(String theMongoUserName) {
-        this.mongoUserName = theMongoUserName;
-    }
+    @Bean(name = "mongoTemplate")
+    @Required
+    public static MongoTemplate gpMongoTemplate(@Qualifier(
+            value = "gpSpringMongoDBFactory") MongoDbFactory gpSpringMongoDBFactory) {
 
-    @Override
-    public String getMongoUserName() {
-        return this.mongoUserName;
-    }
+        logger.debug("###################### GeoPlatform Experimental ::== "
+                + "Initializing Mongo Template.\n");
 
-    @Override
-    public void setMongoPassword(String theMongoPassword) {
-        this.mongoPassword = theMongoPassword;
-    }
+        MongoTemplate mongoTemplate = new MongoTemplate(gpSpringMongoDBFactory);
+        mongoTemplate.setWriteResultChecking(WriteResultChecking.LOG);
 
-    @Override
-    public String getMongoPassword() {
-        return this.mongoPassword;
-    }
-
-    @Override
-    public Boolean isMongoAuthEnabled() {
-        return (StringUtils.hasText(mongoUserName)
-                && StringUtils.hasText(mongoPassword));
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 29 * hash + (this.mongoUserName != null 
-                ? this.mongoUserName.hashCode() : 0);
-        
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final GPMongoAuth other = (GPMongoAuth) obj;
-
-        return !((this.mongoUserName == null)
-                ? (other.mongoUserName != null)
-                : !this.mongoUserName.equals(other.mongoUserName));
-    }
-
-    @Override
-    public String toString() {
-        return getClass().getSimpleName() + "{ "
-                + "mongoUserName = " + mongoUserName
-                + ", mongoPassword = " + mongoPassword
-                + '}';
+        return mongoTemplate;
     }
 
 }

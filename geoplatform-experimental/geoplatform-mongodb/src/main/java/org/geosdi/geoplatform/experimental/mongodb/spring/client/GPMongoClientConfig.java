@@ -33,76 +33,41 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.experimental.mongodb.configuration.auth;
+package org.geosdi.geoplatform.experimental.mongodb.spring.client;
 
-import org.springframework.util.StringUtils;
+import com.mongodb.MongoClient;
+import java.net.UnknownHostException;
+import org.geosdi.geoplatform.experimental.mongodb.configuration.properties.MongoProperties;
+import org.geosdi.geoplatform.experimental.mongodb.spring.annotation.GPMongoConfig;
+import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
+import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPMongoAuth implements MongoBaseAuth {
+@GPMongoConfig
+@Configuration
+class GPMongoClientConfig {
 
-    private String mongoUserName;
-    private String mongoPassword;
+    @GeoPlatformLog
+    static Logger logger;
 
-    @Override
-    public void setMongoUserName(String theMongoUserName) {
-        this.mongoUserName = theMongoUserName;
-    }
+    @Bean(name = "gpSpringMongoClient")
+    @Autowired
+    public MongoClient gpMongoClient(@Qualifier(value = "gpSpringMongoProp") MongoProperties gpSpringMongoProp)
+            throws UnknownHostException {
 
-    @Override
-    public String getMongoUserName() {
-        return this.mongoUserName;
-    }
+        logger.debug("###################### GeoPlatform Experimental Version "
+                + "::== Building MongoClient.\n");
 
-    @Override
-    public void setMongoPassword(String theMongoPassword) {
-        this.mongoPassword = theMongoPassword;
-    }
-
-    @Override
-    public String getMongoPassword() {
-        return this.mongoPassword;
-    }
-
-    @Override
-    public Boolean isMongoAuthEnabled() {
-        return (StringUtils.hasText(mongoUserName)
-                && StringUtils.hasText(mongoPassword));
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 29 * hash + (this.mongoUserName != null 
-                ? this.mongoUserName.hashCode() : 0);
-        
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final GPMongoAuth other = (GPMongoAuth) obj;
-
-        return !((this.mongoUserName == null)
-                ? (other.mongoUserName != null)
-                : !this.mongoUserName.equals(other.mongoUserName));
-    }
-
-    @Override
-    public String toString() {
-        return getClass().getSimpleName() + "{ "
-                + "mongoUserName = " + mongoUserName
-                + ", mongoPassword = " + mongoPassword
-                + '}';
+        return new MongoClient(gpSpringMongoProp.getMongoHost(),
+                gpSpringMongoProp.getMongoPort());
     }
 
 }

@@ -33,76 +33,27 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.experimental.mongodb.configuration.auth;
+package org.geosdi.geoplatform.experimental.mongodb.repositories;
 
-import org.springframework.util.StringUtils;
+import java.util.List;
+import org.geosdi.geoplatform.experimental.mongodb.model.Address;
+import org.springframework.data.geo.Box;
+import org.springframework.data.geo.Circle;
+import org.springframework.data.geo.Distance;
+import org.springframework.data.geo.Point;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPMongoAuth implements MongoBaseAuth {
+public interface AddressRepository extends MongoRepository<Address, String> {
 
-    private String mongoUserName;
-    private String mongoPassword;
+    List<Address> findByLocationWithin(Circle circle);
 
-    @Override
-    public void setMongoUserName(String theMongoUserName) {
-        this.mongoUserName = theMongoUserName;
-    }
+    List<Address> findByLocationWithin(Box box);
 
-    @Override
-    public String getMongoUserName() {
-        return this.mongoUserName;
-    }
-
-    @Override
-    public void setMongoPassword(String theMongoPassword) {
-        this.mongoPassword = theMongoPassword;
-    }
-
-    @Override
-    public String getMongoPassword() {
-        return this.mongoPassword;
-    }
-
-    @Override
-    public Boolean isMongoAuthEnabled() {
-        return (StringUtils.hasText(mongoUserName)
-                && StringUtils.hasText(mongoPassword));
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 29 * hash + (this.mongoUserName != null 
-                ? this.mongoUserName.hashCode() : 0);
-        
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final GPMongoAuth other = (GPMongoAuth) obj;
-
-        return !((this.mongoUserName == null)
-                ? (other.mongoUserName != null)
-                : !this.mongoUserName.equals(other.mongoUserName));
-    }
-
-    @Override
-    public String toString() {
-        return getClass().getSimpleName() + "{ "
-                + "mongoUserName = " + mongoUserName
-                + ", mongoPassword = " + mongoPassword
-                + '}';
-    }
+    List<Address> findByLocationNear(Point point, Distance dist);
 
 }

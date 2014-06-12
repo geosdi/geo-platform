@@ -33,17 +33,18 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.experimental.mongodb.spring.configutation.properties;
+package org.geosdi.geoplatform.experimental.mongodb.spring.configuration.properties;
 
-import com.google.common.base.Preconditions;
 import javax.annotation.Resource;
 import javax.inject.Named;
 import net.jcip.annotations.Immutable;
 import org.geosdi.geoplatform.experimental.mongodb.configuration.auth.MongoAuth;
-import org.geosdi.geoplatform.experimental.mongodb.configuration.properties.DefaultMongoProperties;
+import org.geosdi.geoplatform.experimental.mongodb.configuration.properties.MongoPropertiesEnum;
 import org.geosdi.geoplatform.experimental.mongodb.configuration.properties.MongoProperties;
+import org.geosdi.geoplatform.experimental.mongodb.spring.annotation.GPMongoProp;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.authentication.UserCredentials;
+import org.springframework.util.StringUtils;
 
 /**
  *
@@ -51,6 +52,7 @@ import org.springframework.data.authentication.UserCredentials;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Immutable
+@GPMongoProp
 @Named(value = "gpSpringMongoProp")
 public class GPSpringMongoProperties implements MongoProperties {
 
@@ -66,19 +68,21 @@ public class GPSpringMongoProperties implements MongoProperties {
 
     @Override
     public String getMongoHost() {
-        return this.mongoHost = ((this.mongoHost != null) && !(this.mongoHost.isEmpty()))
-                ? this.mongoHost : (String) DefaultMongoProperties.MONGO_HOST.mongoProp();
+        return this.mongoHost = (StringUtils.hasText(this.mongoHost))
+                ? this.mongoHost : (String) MongoPropertiesEnum.MONGO_HOST.mongoProp();
     }
 
     @Override
     public Integer getMongoPort() {
         return this.mongoPort = (this.mongoPort != null)
-                ? this.mongoPort : (Integer) DefaultMongoProperties.MONGO_PORT.mongoProp();
+                ? this.mongoPort : (Integer) MongoPropertiesEnum.MONGO_PORT.mongoProp();
     }
 
     @Override
     public String getMongoDatabaseName() {
-        return this.mongoDatabaseName;
+        return this.mongoDatabaseName = (StringUtils.hasText(this.mongoDatabaseName))
+                ? this.mongoDatabaseName
+                : (String) MongoPropertiesEnum.MONGO_DBNAME.mongoProp();
     }
 
     @Override
@@ -93,10 +97,6 @@ public class GPSpringMongoProperties implements MongoProperties {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        Preconditions.checkState(((this.mongoDatabaseName != null)
-                && !(this.mongoDatabaseName.isEmpty())), "The Mongo Database Name "
-                + "must not be null or an empty String.");
-
         this.userCredentials = this.mongoAuth.isMongoAuthEnabled()
                 ? new UserCredentials(mongoAuth.getMongoUserName(),
                         mongoAuth.getMongoPassword()) : UserCredentials.NO_CREDENTIALS;
@@ -106,7 +106,7 @@ public class GPSpringMongoProperties implements MongoProperties {
     public String toString() {
         return "GPSpringMongoProperties{ " + "mongoHost = " + getMongoHost()
                 + ", mongoPort = " + getMongoPort()
-                + ", mongoDatabaseName = " + mongoDatabaseName
+                + ", mongoDatabaseName = " + getMongoDatabaseName()
                 + ", userCredentials = " + userCredentials + '}';
     }
 

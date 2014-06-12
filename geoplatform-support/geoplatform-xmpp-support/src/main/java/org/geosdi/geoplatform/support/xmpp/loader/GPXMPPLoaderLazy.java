@@ -35,8 +35,7 @@
  */
 package org.geosdi.geoplatform.support.xmpp.loader;
 
-import org.geosdi.geoplatform.support.xmpp.spring.connection.config.XMPPConnectionConfig;
-import org.geosdi.geoplatform.support.xmpp.spring.connection.config.GPXMPPConnectionManagerConfig;
+import org.geosdi.geoplatform.support.xmpp.spring.annotation.GPXMPPConnection;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
@@ -51,7 +50,7 @@ import org.springframework.context.annotation.FilterType;
         basePackages = {"org.geosdi.geoplatform.logger.support.spring.config",
             "org.geosdi.geoplatform.support.xmpp.spring"},
         excludeFilters = {
-            @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE,
-                    value = {XMPPConnectionConfig.class, GPXMPPConnectionManagerConfig.class})})
+            @ComponentScan.Filter(type = FilterType.ANNOTATION,
+                    value = {GPXMPPConnection.class})})
 public class GPXMPPLoaderLazy {
 }

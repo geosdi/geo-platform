@@ -33,35 +33,21 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.support.xmpp.spring.connection.config;
+package org.geosdi.geoplatform.support.xmpp.spring.annotation;
 
-import org.geosdi.geoplatform.support.xmpp.configuration.auth.XMPPAuth;
-import org.geosdi.geoplatform.support.xmpp.spring.annotation.GPXMPPConnection;
-import org.geosdi.geoplatform.support.xmpp.spring.connection.manager.GPXMPPConnectionManager;
-import org.geosdi.geoplatform.support.xmpp.spring.connection.manager.XMPPConnectionManager;
-import org.jivesoftware.smack.ConnectionConfiguration;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @email  giuseppe.lascaleia@geosdi.org
  */
-@GPXMPPConnection
-@Configuration
-class GPXMPPConnectionManagerConfig {
-
-    @Bean(name = "gpXMPPConnectionManager",
-            initMethod = "initXMPPConnectionManager")
-    @Autowired
-    public XMPPConnectionManager xmppConnectionManager(@Qualifier(
-            value = "xmppConnectionConfiguration") ConnectionConfiguration xmppConnectionConfiguration, @Qualifier(
-                    value = "gpSpringXMPPAuth") XMPPAuth gpSpringXMPPAuth) {
-
-        return new GPXMPPConnectionManager(xmppConnectionConfiguration, gpSpringXMPPAuth);
-    }
-
+@Retention(value = RetentionPolicy.RUNTIME)
+@Target(value = {ElementType.TYPE, ElementType.METHOD})
+@Documented
+public @interface GPXMPPConnection {
 }

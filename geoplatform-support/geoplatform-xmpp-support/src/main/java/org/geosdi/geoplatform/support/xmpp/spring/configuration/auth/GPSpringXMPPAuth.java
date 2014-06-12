@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.support.xmpp.spring.configuration.auth;
 import javax.inject.Named;
 import net.jcip.annotations.Immutable;
 import org.geosdi.geoplatform.support.xmpp.configuration.auth.XMPPAuth;
+import org.geosdi.geoplatform.support.xmpp.spring.annotation.GPXMPPProp;
 import org.springframework.beans.factory.annotation.Value;
 
 /**
@@ -46,6 +47,7 @@ import org.springframework.beans.factory.annotation.Value;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Immutable
+@GPXMPPProp
 @Named(value = "gpSpringXMPPAuth")
 public class GPSpringXMPPAuth implements XMPPAuth {
 

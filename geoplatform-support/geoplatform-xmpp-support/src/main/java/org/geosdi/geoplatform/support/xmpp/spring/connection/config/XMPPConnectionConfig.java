@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.support.xmpp.spring.connection.config;
 
 import org.geosdi.geoplatform.support.xmpp.configuration.properties.XMPPProperties;
+import org.geosdi.geoplatform.support.xmpp.spring.annotation.GPXMPPConnection;
 import org.geosdi.geoplatform.support.xmpp.spring.connection.builder.XMPPConnectionConfigurationBuilder;
 import org.jivesoftware.smack.ConnectionConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +50,8 @@ import org.springframework.context.annotation.Configuration;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Configuration
-public class XMPPConnectionConfig {
+@GPXMPPConnection
+class XMPPConnectionConfig {
 
     @Bean(name = "xmppConnectionConfiguration")
     @Autowired

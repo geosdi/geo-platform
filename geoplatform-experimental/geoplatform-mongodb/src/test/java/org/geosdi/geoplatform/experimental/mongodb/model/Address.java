@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.experimental.mongodb.model;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.geo.Point;
 import org.springframework.data.mongodb.core.index.GeoSpatialIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -51,14 +52,14 @@ public class Address {
     protected String id;
     protected String name;
     @GeoSpatialIndexed(name = "locationIndex")
-    protected double[] location;
+    protected Point location;
 
     public Address() {
     }
 
     public Address(String name, double x, double y) {
         this.name = name;
-        this.location = new double[]{x, y};
+        this.location = new Point(x, y);
     }
 
     /**
@@ -92,21 +93,22 @@ public class Address {
     /**
      * @return the location
      */
-    public double[] getLocation() {
+    public Point getLocation() {
         return location;
     }
 
     /**
      * @param location the location to set
      */
-    public void setLocation(double[] location) {
+    public void setLocation(Point location) {
         this.location = location;
     }
 
     @Override
     public String toString() {
         return "Address{ " + "id = " + id
-                + ", name = " + name + ", location = " + location + '}';
+                + ", name = " + name
+                + ", location = " + location + '}';
     }
 
 }

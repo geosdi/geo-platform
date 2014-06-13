@@ -35,7 +35,14 @@
  */
 package org.geosdi.geoplatform.experimental.mongodb.template;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import javax.annotation.Resource;
 import org.geosdi.geoplatform.experimental.mongodb.loader.GPMongoConfigLoader;
 import org.geosdi.geoplatform.experimental.mongodb.model.Address;
@@ -46,6 +53,7 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -115,6 +123,9 @@ public class GPMongoConfigTest {
                 Metrics.KILOMETERS));
 
         Assert.assertEquals(1, addresses.size());
+
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ shouldFindSelf Found "
+                + ": {}\n\n", addresses);
     }
 
     @Test
@@ -122,6 +133,9 @@ public class GPMongoConfigTest {
         List<Address> addresses = addressRepo.findByLocationWithin(new Circle(0, 0, 0.75));
 
         Assert.assertEquals(3, addresses.size());
+
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ shouldFindAroundOrigin() Found "
+                + ": {}\n\n", addresses);
     }
 
     @Test
@@ -130,11 +144,64 @@ public class GPMongoConfigTest {
                 new Point(1, 1)));
 
         Assert.assertEquals(2, addresses.size());
+
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ shouldFindWithinBox() Found "
+                + ": {}\n\n", addresses);
     }
-    
+
+    @Test
+    @Ignore(value = "MASSIVE TEST")
+    public void insertMassiveAddressTest() throws Exception {
+        long time = 0;
+
+        ExecutorService executor = Executors.newFixedThreadPool(100);
+
+        List<Callable<Long>> tasks = new ArrayList<Callable<Long>>(100);
+
+        for (int i = 0; i < 100; i++) {
+            tasks.add(new MongoInsertMassiveAddress());
+        }
+
+        List<Future<Long>> results = executor.invokeAll(tasks);
+        executor.shutdown();
+
+        boolean flag = executor.awaitTermination(10, TimeUnit.MINUTES);
+
+        if (flag) {
+            for (Future<Long> future : results) {
+                time += future.get();
+            }
+        } else {
+            throw new InterruptedException("Some Threads are not executed.");
+        }
+
+        logger.info("\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ insertMassiveAddressTest "
+                + ": Executed {} threads in {} Minutes \n", 10,
+                TimeUnit.SECONDS.toMinutes(time));
+    }
+
     @After
     public void tearDown() {
         addressRepo.deleteAll();
+    }
+
+    private class MongoInsertMassiveAddress implements Callable<Long> {
+
+        @Override
+        public Long call() throws Exception {
+            long start = System.currentTimeMillis();
+            List<Address> addresses = new ArrayList<Address>(10000);
+            for (int i = 0; i < 10000; i++) {
+                Address a = new Address("Address" + UUID.randomUUID(),
+                        Math.random(), Math.random());
+                addresses.add(a);
+            }
+            
+            addressRepo.save(addresses);
+
+            return System.currentTimeMillis() - start;
+        }
+
     }
 
 }

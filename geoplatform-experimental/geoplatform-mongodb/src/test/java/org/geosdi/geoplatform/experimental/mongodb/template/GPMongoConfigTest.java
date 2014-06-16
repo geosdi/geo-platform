@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.experimental.mongodb.template;
 
-import com.mongodb.MongoServerSelectionException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -118,7 +117,7 @@ public class GPMongoConfigTest {
         addressRepo.save(new Address("Dusseldorf", 6.810036, 51.224088));
     }
 
-    @Test(expected = MongoServerSelectionException.class)
+    @Test
     public void shouldFindSelf() {
         List<Address> addresses = addressRepo.findByLocationNear(DUS, new Distance(1,
                 Metrics.KILOMETERS));
@@ -129,7 +128,7 @@ public class GPMongoConfigTest {
                 + ": {}\n\n", addresses);
     }
 
-    @Test(expected = MongoServerSelectionException.class)
+    @Test
     public void shouldFindAroundOrigin() {
         List<Address> addresses = addressRepo.findByLocationWithin(new Circle(0, 0, 0.75));
 
@@ -139,7 +138,7 @@ public class GPMongoConfigTest {
                 + ": {}\n\n", addresses);
     }
 
-    @Test(expected = MongoServerSelectionException.class)
+    @Test
     public void shouldFindWithinBox() {
         List<Address> addresses = addressRepo.findByLocationWithin(new Box(new Point(0.25, 0.25),
                 new Point(1, 1)));
@@ -150,7 +149,7 @@ public class GPMongoConfigTest {
                 + ": {}\n\n", addresses);
     }
 
-    @Test(expected = MongoServerSelectionException.class)
+    @Test
     @Ignore(value = "MASSIVE TEST")
     public void insertMassiveAddressTest() throws Exception {
         long time = 0;

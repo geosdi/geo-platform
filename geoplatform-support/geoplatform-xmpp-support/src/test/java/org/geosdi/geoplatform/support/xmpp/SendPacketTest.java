@@ -70,6 +70,7 @@ public class SendPacketTest {
     //
     static final String GP_XMPP_KEY = "GP_XMPP_FILE_PROP";
     static final String SENDER = "JnFAHibv/ZxmDtQGXHMghKpQLxSOiGjYcAfhDNRNUh8=";
+    static final String MESSAGE = " is building geo-platform.";
     //
     @Resource(name = "gpXMPPConnectionManager")
     private XMPPConnectionManager gpXMPPConnectionManager;
@@ -93,7 +94,9 @@ public class SendPacketTest {
         this.message = new Message(this.gpXmppPooledPBEStringEncryptor.
                 decrypt(SENDER), Message.Type.normal);
         this.message.setSubject("Example XMPP Message");
-        this.message.setBody("Someone is building geo-platform.");
+        String user = System.getProperty("user.name");
+        this.message.setBody((user != null) ? user + MESSAGE : "Someone"
+                + MESSAGE);
     }
 
     @Test

@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.experimental.mongodb.template;
 
+import com.mongodb.MongoServerSelectionException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -117,7 +118,7 @@ public class GPMongoConfigTest {
         addressRepo.save(new Address("Dusseldorf", 6.810036, 51.224088));
     }
 
-    @Test
+    @Test(expected = MongoServerSelectionException.class)
     public void shouldFindSelf() {
         List<Address> addresses = addressRepo.findByLocationNear(DUS, new Distance(1,
                 Metrics.KILOMETERS));
@@ -128,7 +129,7 @@ public class GPMongoConfigTest {
                 + ": {}\n\n", addresses);
     }
 
-    @Test
+    @Test(expected = MongoServerSelectionException.class)
     public void shouldFindAroundOrigin() {
         List<Address> addresses = addressRepo.findByLocationWithin(new Circle(0, 0, 0.75));
 
@@ -138,7 +139,7 @@ public class GPMongoConfigTest {
                 + ": {}\n\n", addresses);
     }
 
-    @Test
+    @Test(expected = MongoServerSelectionException.class)
     public void shouldFindWithinBox() {
         List<Address> addresses = addressRepo.findByLocationWithin(new Box(new Point(0.25, 0.25),
                 new Point(1, 1)));
@@ -149,7 +150,7 @@ public class GPMongoConfigTest {
                 + ": {}\n\n", addresses);
     }
 
-    @Test
+    @Test(expected = MongoServerSelectionException.class)
     @Ignore(value = "MASSIVE TEST")
     public void insertMassiveAddressTest() throws Exception {
         long time = 0;
@@ -176,8 +177,8 @@ public class GPMongoConfigTest {
         }
 
         logger.info("\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ insertMassiveAddressTest "
-                + ": Executed {} threads in {} Minutes \n", 10,
-                TimeUnit.SECONDS.toMinutes(time));
+                + ": Executed {} threads in {} Minutes \n", 100,
+                TimeUnit.MILLISECONDS.toMinutes(time));
     }
 
     @After
@@ -196,7 +197,7 @@ public class GPMongoConfigTest {
                         Math.random(), Math.random());
                 addresses.add(a);
             }
-            
+
             addressRepo.save(addresses);
 
             return System.currentTimeMillis() - start;

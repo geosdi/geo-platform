@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.experimental.mongodb.template;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.Callable;
@@ -107,14 +108,11 @@ public class GPMongoConfigTest {
         Assert.assertNotNull("Address Repo must not be NULL",
                 addressRepo);
 
-        addressRepo.save(new Address("A", 0.001, -0.002));
-        addressRepo.save(new Address("B", 1, 1));
-        addressRepo.save(new Address("C", 0.5, 0.5));
-        addressRepo.save(new Address("D", -0.5, -0.5));
-
-        addressRepo.save(new Address("Berlin", 13.405838, 52.531261));
-        addressRepo.save(new Address("Cologne", 6.921272, 50.960157));
-        addressRepo.save(new Address("Dusseldorf", 6.810036, 51.224088));
+        addressRepo.save(Arrays.asList(new Address[]{new Address("A", 0.001, -0.002),
+            new Address("B", 1, 1), new Address("C", 0.5, 0.5),
+            new Address("D", -0.5, -0.5), new Address("Berlin", 13.405838, 52.531261),
+            new Address("Cologne", 6.921272, 50.960157),
+            new Address("Dusseldorf", 6.810036, 51.224088)}));
     }
 
     @Test

@@ -49,10 +49,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Address {
 
     @Id
-    protected String id;
-    protected String name;
+    private String id;
+    private String name;
     @GeoSpatialIndexed(name = "locationIndex")
-    protected Point location;
+    private Point location;
 
     public Address() {
     }

@@ -13,7 +13,7 @@
     <version>1.7-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>Geo-Platform :: == MogoDB Module</name>
+    <name>Geo-Platform :: == MongoDB Module</name>
     <url>http://maven.apache.org</url>
 
     <properties>

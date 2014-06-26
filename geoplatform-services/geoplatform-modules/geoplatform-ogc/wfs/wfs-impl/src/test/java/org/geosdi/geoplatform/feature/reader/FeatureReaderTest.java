@@ -69,10 +69,10 @@ public class FeatureReaderTest {
     private final static Logger logger = LoggerFactory.getLogger(
             FeatureReaderTest.class);
     private static String pathFile;
-    private FeatureSchemaReader featureReaderXSD = new GPFeatureSchemaReader();
+    private final FeatureSchemaReader featureReaderXSD = new GPFeatureSchemaReader();
     //
-    private String fileDFT, fileGF;
-    private int numAttributes, numFeatures;
+    private final String fileDFT, fileGF;
+    private final int numAttributes, numFeatures;
 
     static {
         try {

@@ -55,12 +55,12 @@ public class FeatureReaderNetworkTest {
     private final static Logger logger = LoggerFactory.getLogger(
             FeatureReaderNetworkTest.class);
     //
-    private FeatureSchemaReader featureReaderXSD = new GPFeatureSchemaReader();
+    private final FeatureSchemaReader featureReaderXSD = new GPFeatureSchemaReader();
 
     @Test
     public void readRestrictedAllNet() throws Exception {
         List<LayerSchemaDTO> schemas = featureReaderXSD.read(new URL(
-                "http://150.146.160.92/geoserver/wfs"
+                "http://150.145.141.92/geoserver/wfs"
                 + "?service=wfs"
                 + "&version=1.1.0"
                 + "&request=DescribeFeatureType"
@@ -78,7 +78,7 @@ public class FeatureReaderNetworkTest {
     @Test
     public void readTigerRoadsAllNet() throws Exception {
         List<LayerSchemaDTO> schemas = featureReaderXSD.read(
-                new URL("http://150.146.160.92/geoserver/wfs?service=wfs"
+                new URL("http://150.145.141.92/geoserver/wfs?service=wfs"
                 + "&version=1.1.0"
                 + "&request=DescribeFeatureType"
                 + "&typeName=tiger:tiger_roads"
@@ -96,7 +96,7 @@ public class FeatureReaderNetworkTest {
     @Test
     public void readStatesAllNet() throws Exception {
         List<LayerSchemaDTO> schemas = featureReaderXSD.read(new URL(
-                "http://150.146.160.92/geoserver/wfs"
+                "http://150.145.141.92/geoserver/wfs"
                 + "?servicewfs"
                 + "&version=1.1.0"
                 + "&request=DescribeFeatureType"

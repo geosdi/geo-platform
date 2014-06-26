@@ -60,7 +60,7 @@ public class WFSTransactionInsertTest {
     private static final Logger logger = LoggerFactory.getLogger(
             WFSTransactionInsertTest.class);
     //
-    private static final String wfsURL = "http://150.146.160.92/geoserver/wfs";
+    private static final String wfsURL = "http://150.145.141.92/geoserver/wfs";
     private static GPWFSConnectorStore serverConnector;
     private final static QName TASMANIA_ROADS = new QName(
             "http://www.openplans.org/topp",

@@ -383,7 +383,7 @@ public abstract class BaseInitializerTest {
 
     private GeoPlatformServer createServer1WMS() {
         GeoPlatformServer server = new GeoPlatformServer();
-        server.setServerUrl("http://150.146.160.50/geoserver/wms");
+        server.setServerUrl("http://150.145.141.50/geoserver/wms");
         server.setName("imaa.geosdi.org");
         server.setAliasName("geoSdi on IMAA");
         server.setServerType(GPCapabilityType.WMS);

@@ -57,8 +57,8 @@ public class WFSTestConfigurator {
     protected static final QName statesName = new QName("topp:states");
     protected static final QName sfRoads = new QName("sf:roads");
     //
-    private final String wfsURL = "http://150.146.160.92/geoserver/wfs";
-    private final String wfsSecureURL = "http://150.146.160.180/geoserver/wfs";
+    private final String wfsURL = "http://150.145.141.92/geoserver/wfs";
+    private final String wfsSecureURL = "http://150.145.141.180/geoserver/wfs";
     protected GPWFSConnectorStore serverConnector;
     protected GPWFSConnectorStore secureServerConnector;
 

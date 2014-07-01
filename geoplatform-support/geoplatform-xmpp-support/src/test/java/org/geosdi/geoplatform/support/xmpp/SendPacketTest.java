@@ -104,6 +104,8 @@ public class SendPacketTest {
             XMPPException, SmackException, IOException, InterruptedException {
         this.gpXMPPConnectionManager.login();
         this.gpXMPPConnectionManager.sendPacket(message);
+        
+        Thread.sleep(3000);
     }
 
 }

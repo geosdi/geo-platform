@@ -180,7 +180,7 @@ public class GPMongoConfigTest {
 
     @After
     public void tearDown() {
-        addressRepo.deleteAll();
+        this.mongoTemplate.dropCollection(Address.class);
     }
 
     private class MongoInsertMassiveAddress implements Callable<Long> {

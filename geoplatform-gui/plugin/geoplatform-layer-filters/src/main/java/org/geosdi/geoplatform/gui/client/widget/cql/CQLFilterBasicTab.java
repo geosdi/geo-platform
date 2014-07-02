@@ -48,7 +48,7 @@ import org.geosdi.geoplatform.gui.client.widget.cql.combobox.LogicalOperator.Log
 import org.geosdi.geoplatform.gui.client.widget.tab.GeoPlatformTabItem;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
-import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
+import org.geosdi.geoplatform.gui.shared.util.GPSharedUtils;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -148,7 +148,7 @@ public class CQLFilterBasicTab extends GeoPlatformTabItem implements ICQLFilterT
     public String getCQLFilterExpression() {
         String filterExpression = "";
         boolean firstIteration = true;
-        for (CQLFilterBasicRow basicRow : GeoPlatformUtils.safeList(this.filterList)) {
+        for (CQLFilterBasicRow basicRow : GPSharedUtils.safeList(this.filterList)) {
             if (!firstIteration) {
                 filterExpression += " "
                         + basicRow.getLogicalOperatorComboBox().getValue().get(LogicalOperatorKeyValue.KEY_NAME.toString())

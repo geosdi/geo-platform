@@ -36,11 +36,8 @@ package org.geosdi.geoplatform.gui.client.widget.tree.builder;
 import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.data.ModelData;
 import com.google.common.collect.Lists;
-import com.google.gwt.core.client.GWT;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.command.layer.basic.LoadDefaultProjectElementsRequest;
@@ -75,14 +72,14 @@ import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.featureinfo.event.CleanFeatureInfoCacheEvent;
+import org.geosdi.geoplatform.gui.shared.util.GPSharedUtils;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
-import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
 import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
 /**
  * <p>
- *      This Class build the LayerTreeWidget doing {@link GPCommandRequest} 
- *      Command on Server
+ * This Class build the LayerTreeWidget doing {@link GPCommandRequest} Command
+ * on Server
  * </p>
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -90,7 +87,7 @@ import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
  */
 @Singleton
 public class LayerTreeBuilder implements GPCompositeBuilder {
-    
+
     private final GPBuildTreeEvent buildEvent = new GPBuildTreeEvent();
     private final GPTreeStore store;
     private final GPRootTreeNode root;
@@ -99,7 +96,7 @@ public class LayerTreeBuilder implements GPCompositeBuilder {
     private final LoadDefaultProjectElementsRequest loadDefaultProjectElementsRequest = new LoadDefaultProjectElementsRequest();
     private final CleanFeatureInfoCacheEvent clearFeatureInfoEvent = new CleanFeatureInfoCacheEvent();
     private boolean initialized;
-    
+
     @Inject
     public LayerTreeBuilder(GinTreeStore theStore,
             GPRootTreeNode theRoot,
@@ -110,29 +107,29 @@ public class LayerTreeBuilder implements GPCompositeBuilder {
         this.visitorDisplay = theVisitorDisplay.get();
         this.tree = theTree.get();
     }
-    
+
     @Override
     public void buildTree() {
         if (!initialized) {
             Registry.register(UserSessionEnum.TREE_LOADED.name(), initialized);
-            
+
             LayoutManager.getInstance().getStatusMap().setBusy(
                     LayerModuleConstants.INSTANCE.statusLoadingTreeElementsText());
-            
+
             ClientCommandDispatcher.getInstance().execute(
                     new GPClientCommand<LoadDefaultProjectElementsResponse>() {
-                        
+
                         private static final long serialVersionUID = 3109256773218160485L;
-                        
+
                         {
                             super.setCommandRequest(loadDefaultProjectElementsRequest);
                         }
-                        
+
                         @Override
                         public void onCommandSuccess(LoadDefaultProjectElementsResponse response) {
                             onBuildSuccess(response.getResult());
                         }
-                        
+
                         @Override
                         public void onCommandFailure(Throwable caught) {
                             if (caught.getCause() instanceof GPSessionTimeout) {
@@ -145,11 +142,11 @@ public class LayerTreeBuilder implements GPCompositeBuilder {
                                         SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
                             }
                         }
-                        
+
                     });
         }
     }
-    
+
     protected final void onBuildSuccess(GPClientProject clientProject) {
         Registry.register(UserSessionEnum.CURRENT_PROJECT_ON_TREE.name(), clientProject);
         root.setLabel(clientProject.getName());
@@ -166,7 +163,7 @@ public class LayerTreeBuilder implements GPCompositeBuilder {
         Registry.register(UserSessionEnum.TREE_LOADED.name(),
                 initialized);
     }
-    
+
     @Override
     public void rebuildTree() {
         this.initialized = Boolean.FALSE;
@@ -178,7 +175,7 @@ public class LayerTreeBuilder implements GPCompositeBuilder {
         this.store.removeAll();
         this.buildTree();
     }
-    
+
     public void insertElementsOnTree(FolderTreeNode parentFolder,
             List<IGPFolderElements> folderElements) {
         final VisitorPosition visitorPosition = new VisitorPosition();
@@ -190,7 +187,7 @@ public class LayerTreeBuilder implements GPCompositeBuilder {
             element.accept(visitorPosition);
             childrenList.add(element);
         }
-        
+
         tree.getStore().insert(parentFolder, childrenList, 0, Boolean.TRUE);
         visitorDisplay.enableCheckedComponent(parentFolder);
         parentFolder.setLoading(Boolean.FALSE);
@@ -198,17 +195,17 @@ public class LayerTreeBuilder implements GPCompositeBuilder {
         tree.refreshIcon(parentFolder);
         tree.fireEvent(GeoPlatformEvents.GP_NODE_EXPANDED);
     }
-    
+
     private void insertElementsOfTheRootFolders(
             List<GPFolderClientInfo> folderClientList) {
         int i = 0;
-        for (GPFolderClientInfo folderElement : GeoPlatformUtils.safeList(folderClientList)) {
+        for (GPFolderClientInfo folderElement : GPSharedUtils.safeList(folderClientList)) {
             this.insertElementsOnTree((FolderTreeNode) this.root.getChild(i),
                     folderElement);
             i++;
         }
     }
-    
+
     private void insertElementsOnTree(FolderTreeNode parentFolder,
             GPFolderClientInfo folderClientInfo) {
         if (!folderClientInfo.getFolderElements().isEmpty()) {
@@ -218,7 +215,7 @@ public class LayerTreeBuilder implements GPCompositeBuilder {
                 tree.setExpanded(parentFolder, Boolean.TRUE);
             }
             int i = 0;
-            for (IGPFolderElements folderElement : GeoPlatformUtils.safeList(folderClientInfo.getFolderElements())) {
+            for (IGPFolderElements folderElement : GPSharedUtils.safeList(folderClientInfo.getFolderElements())) {
                 if (folderElement instanceof GPFolderClientInfo) {
                     this.insertElementsOnTree(
                             (FolderTreeNode) parentFolder.getChild(i),
@@ -228,5 +225,5 @@ public class LayerTreeBuilder implements GPCompositeBuilder {
             }
         }
     }
-    
+
 }

@@ -45,7 +45,7 @@ import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
-import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
+import org.geosdi.geoplatform.gui.shared.util.GPSharedUtils;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -134,7 +134,7 @@ public class GPTreePanel<T extends GPBeanTreeModel> extends TreePanel<T>
         super.onExpand(model, node, deep);
         //This code is usefull to ripristinate the layer label style for max - min scale
         if (node != null && !node.isLeaf()) {
-            for (ModelData child : GeoPlatformUtils.safeList(model.getChildren())) {
+            for (ModelData child : GPSharedUtils.safeList(model.getChildren())) {
                 if (child instanceof GPRasterBean && super.isChecked((T) child)) {
                     this.activeRasterMinMaxScaleLabel((GPRasterBean) child);
                 }

@@ -17,7 +17,7 @@ import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.configuration.action.event.ToggleEnableEvent;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.puregwt.togglebutton.GPToggleButtonHandlerManager;
-import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
+import org.geosdi.geoplatform.gui.shared.util.GPSharedUtils;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -31,7 +31,7 @@ public class AnonymousLoginHandler extends AbstractLoginHandler {
     public void doLogin() {
         String userName = Window.Location.getParameter("project");
         String password = Window.Location.getParameter("key");
-        if (GeoPlatformUtils.isNotEmpty(userName) && GeoPlatformUtils.isNotEmpty(password)) {
+        if (GPSharedUtils.isNotEmpty(userName) && GPSharedUtils.isNotEmpty(password)) {
             ClientCommandDispatcher.getInstance().execute(
                     new GPClientCommand<BasicLoginResponse>(new BasicLoginRequest(
                                     userName, password)) {

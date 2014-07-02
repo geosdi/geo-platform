@@ -46,7 +46,7 @@ import org.geosdi.geoplatform.gui.client.widget.tree.store.GPTreeStoreOperations
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
-import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
+import org.geosdi.geoplatform.gui.shared.util.GPSharedUtils;
 
 /**
  *
@@ -145,7 +145,7 @@ public abstract class LayerTreeStoreExecutor extends BaseTreeStoreExecutor {
 
     private void putMementoLayersDuplicationInCacheToSave(List<AbstractMementoOriginalProperties> duplicatedMementoList) {
         IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
-        for (AbstractMementoOriginalProperties memento : GeoPlatformUtils.safeList(duplicatedMementoList)) {
+        for (AbstractMementoOriginalProperties memento : GPSharedUtils.safeList(duplicatedMementoList)) {
             mementoSave.putOriginalPropertiesInCache(memento);
         }
     }

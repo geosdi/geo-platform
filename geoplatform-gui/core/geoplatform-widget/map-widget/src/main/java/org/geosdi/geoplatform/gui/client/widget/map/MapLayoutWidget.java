@@ -65,7 +65,7 @@ import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.featureinfo.event.ActivateFeatureInfoEvent;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
-import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
+import org.geosdi.geoplatform.gui.shared.util.GPSharedUtils;
 import org.gwtopenmaps.openlayers.client.*;
 import org.gwtopenmaps.openlayers.client.control.*;
 import org.gwtopenmaps.openlayers.client.event.MapLayerChangedListener;
@@ -585,7 +585,7 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
     }
 
     private void switchWMSOptionProjection(GPCoordinateReferenceSystem crs) {
-        for (Object layer : GeoPlatformUtils.safeList(
+        for (Object layer : GPSharedUtils.safeList(
                 this.mapModel.getLayersStore().getLayers())) {
             if (layer instanceof WMS) {
                 WMS wmsLayer = (WMS) layer;

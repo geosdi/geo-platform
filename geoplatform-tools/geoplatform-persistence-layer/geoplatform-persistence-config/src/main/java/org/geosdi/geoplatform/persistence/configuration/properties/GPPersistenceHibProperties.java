@@ -56,7 +56,7 @@ public class GPPersistenceHibProperties {
     private String hibHbm2ddlAuto;
     @Value("persistence{db_generateStatistics:@null}")
     private Boolean hibGenerateStatistics;
-    @Value("persistence{db_defaultSchema}")
+    @Value("persistence{db_defaultSchema:@null}")
     private String hibDefaultSchema;
 
     /**

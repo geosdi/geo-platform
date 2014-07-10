@@ -38,14 +38,13 @@ package org.geosdi.geoplatform.experimental.mongodb.spring.template;
 import org.geosdi.geoplatform.experimental.mongodb.spring.annotation.GPMongoConfig;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.MongoDbFactory;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.WriteResultChecking;
-import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 /**
  *
@@ -60,8 +59,8 @@ class GPMongoTemplateConfig {
     static Logger logger;
 
     @Bean(name = "mongoTemplate")
-    @Required
-    public static MongoTemplate gpMongoTemplate(@Qualifier(
+    @Autowired
+    public MongoTemplate gpMongoTemplate(@Qualifier(
             value = "gpSpringMongoDBFactory") MongoDbFactory gpSpringMongoDBFactory) {
 
         logger.debug("###################### GeoPlatform Experimental ::== "

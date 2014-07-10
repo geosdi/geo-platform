@@ -36,6 +36,7 @@ package org.geosdi.geoplatform.gui.impl.view;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.widget.Component;
 import com.extjs.gxt.ui.client.widget.TabItem;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.Widget;
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.event.ScaleVisibleEvent;
@@ -49,7 +50,7 @@ import org.gwtopenmaps.openlayers.client.MapWidget;
  */
 public class LayoutManager extends GeoPlatformLayoutManager {
 
-    private static LayoutManager instance = new LayoutManager();
+    private static LayoutManager instance = GWT.create(LayoutManager.class);
 
     private LayoutManager() {
     }
@@ -147,6 +148,20 @@ public class LayoutManager extends GeoPlatformLayoutManager {
     }
 
     /**
+     * Show or Hide East panel
+     *
+     * @param visible
+     */
+    public static void manageEast(boolean visible) {
+        if (visible) {
+            getInstance().east.show();
+        } else {
+            getInstance().east.hide();
+        }
+        Dispatcher.forwardEvent(GeoPlatformEvents.UPDATE_CENTER);
+    }
+
+    /**
      * Show or Hide South panel
      *
      * @param visible
@@ -181,6 +196,15 @@ public class LayoutManager extends GeoPlatformLayoutManager {
      */
     public static boolean isWestVisible() {
         return getInstance().west.isVisible();
+    }
+
+    /**
+     * Check the Visibility of East Panel
+     *
+     * @return boolean
+     */
+    public static boolean isEastVisible() {
+        return getInstance().east.isVisible();
     }
 
     /**

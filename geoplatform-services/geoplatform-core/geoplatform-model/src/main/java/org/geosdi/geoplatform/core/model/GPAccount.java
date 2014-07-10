@@ -107,7 +107,7 @@ public abstract class GPAccount implements Serializable {
     private GPOrganization organization;
     // TODO REF Move to AccountOption entity
     @Column(name = "load_expanded_folders")
-    private boolean loadExpandedFolders = false;
+    private boolean loadExpandedFolders = true;
 
     public abstract String getNaturalID();
 

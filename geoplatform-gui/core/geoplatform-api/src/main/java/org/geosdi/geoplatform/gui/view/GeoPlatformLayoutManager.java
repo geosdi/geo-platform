@@ -223,6 +223,14 @@ public abstract class GeoPlatformLayoutManager {
     }
 
     /**
+     *
+     * @return the west
+     */
+    public ContentPanel getWest() {
+        return west;
+    }
+
+    /**
      * @return the north If North is null GeoPlatform set North Size to 50 for
      * default
      *

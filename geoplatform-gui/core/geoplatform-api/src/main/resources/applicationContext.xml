@@ -9,6 +9,8 @@
        default-autowire="byName">
 
     <context:annotation-config />
+    
+    <import resource="applicationContext-layout.xml" />
 
     <bean id="geoPlatformInfo" class="org.geosdi.geoplatform.gui.global.GeoPlatformInfo">
         <property name="version">

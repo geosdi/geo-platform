@@ -35,6 +35,7 @@ package org.geosdi.geoplatform.gui.impl.view;
 
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.widget.Component;
+import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.TabItem;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.Widget;
@@ -88,20 +89,82 @@ public class LayoutManager extends GeoPlatformLayoutManager {
     }
 
     /**
+     * Add a generic Widget to panel
+     *
+     * @param panel
+     * @param w
+     */
+    public static void addComponentToPanel(int panel, Widget w) {
+        switch (panel) {
+            case 0:
+                addComponentToWest(w);
+                break;
+            case 1:
+                addComponentToEast(w);
+                break;
+        }
+    }
+
+    /**
      * Remove a generic widget from West
      *
      * @param w
      */
     public static void removeComponentFromWest(Widget w) {
-        getInstance().west.remove(w);
-        getInstance().west.layout();
+        removeComponentFromPanel(getInstance().west, w);
     }
 
     /**
+     * Remove a generic widget from East
      *
+     * @param w
      */
+    public static void removeComponentFromEast(Widget w) {
+        removeComponentFromPanel(getInstance().east, w);
+    }
+
+    /**
+     * Remove a generic widget from Panel
+     *
+     * @param w
+     */
+    public static void removeComponentFromPanel(ContentPanel cp, Widget w) {
+        cp.remove(w);
+        cp.layout();
+    }
+
+    /**
+     * Remove a generic widget from Panel
+     *
+     * @param w
+     */
+    public static void removeComponentFromPanel(int panel, Widget w) {
+        switch (panel) {
+            case 0:
+                removeComponentFromWest(w);
+                break;
+            case 1:
+                removeComponentFromEast(w);
+                break;
+        }
+    }
+
     public static boolean isWidgetPresentOnWest(Widget w) {
         return getInstance().west.getItems().contains(w);
+    }
+
+    public static boolean isWidgetPresentOnEast(Widget w) {
+        return getInstance().east.getItems().contains(w);
+    }
+
+    public static boolean isWidgetPresentOnPanel(int panel, Widget w) {
+        switch (panel) {
+            case 0:
+                return isWidgetPresentOnWest(w);
+            case 1:
+                return isWidgetPresentOnEast(w);
+        }
+        throw new IllegalArgumentException("The panel code passed is not valid: " + panel);
     }
 
     /**
@@ -134,17 +197,43 @@ public class LayoutManager extends GeoPlatformLayoutManager {
     }
 
     /**
+     * Show or Hide a panel
+     *
+     * @param panel
+     * @param visible
+     */
+    public static void managePanel(int panel, boolean visible) {
+        switch (panel) {
+            case 0:
+                manageWest(visible);
+                break;
+            case 1:
+                manageEast(visible);
+                break;
+        }
+    }
+
+    /**
+     * Show or Hide West panel
+     *
+     * @param visible
+     */
+    public static void managePanel(ContentPanel cp, boolean visible) {
+        if (visible) {
+            cp.show();
+        } else {
+            cp.hide();
+        }
+        Dispatcher.forwardEvent(GeoPlatformEvents.UPDATE_CENTER);
+    }
+
+    /**
      * Show or Hide West panel
      *
      * @param visible
      */
     public static void manageWest(boolean visible) {
-        if (visible) {
-            getInstance().west.show();
-        } else {
-            getInstance().west.hide();
-        }
-        Dispatcher.forwardEvent(GeoPlatformEvents.UPDATE_CENTER);
+        managePanel(getInstance().west, visible);
     }
 
     /**
@@ -153,12 +242,7 @@ public class LayoutManager extends GeoPlatformLayoutManager {
      * @param visible
      */
     public static void manageEast(boolean visible) {
-        if (visible) {
-            getInstance().east.show();
-        } else {
-            getInstance().east.hide();
-        }
-        Dispatcher.forwardEvent(GeoPlatformEvents.UPDATE_CENTER);
+        managePanel(getInstance().east, visible);
     }
 
     /**
@@ -199,6 +283,22 @@ public class LayoutManager extends GeoPlatformLayoutManager {
     }
 
     /**
+     * Check the Visibility of the Panel
+     *
+     * @param panel
+     * @return boolean
+     */
+    public static boolean isPanelVisible(int panel) {
+        switch (panel) {
+            case 0:
+                return isWestVisible();
+            case 1:
+                return isEastVisible();
+        }
+        throw new IllegalArgumentException("The panel code passed is not valid: " + panel);
+    }
+
+    /**
      * Check the Visibility of East Panel
      *
      * @return boolean
@@ -213,12 +313,41 @@ public class LayoutManager extends GeoPlatformLayoutManager {
      * @return boolean
      */
     public static boolean isOneWidgetVisibleAtWest() {
-        for (Component c : getInstance().west.getItems()) {
+        return isOneWidgetVisibleAtPanel(instance.west);
+    }
+
+    /**
+     * Check If always one Widget is visible on East
+     *
+     * @return boolean
+     */
+    public static boolean isOneWidgetVisibleAtEast() {
+        return isOneWidgetVisibleAtPanel(instance.east);
+    }
+
+    private static boolean isOneWidgetVisibleAtPanel(ContentPanel cp) {
+        for (Component c : cp.getItems()) {
             if (c.isVisible()) {
                 return true;
             }
         }
         return false;
+    }
+
+    /**
+     * Check If always one Widget is visible on Panel
+     *
+     * @param panel
+     * @return boolean
+     */
+    public static boolean isOneWidgetVisibleAtPanel(int panel) {
+        switch (panel) {
+            case 0:
+                return isOneWidgetVisibleAtWest();
+            case 1:
+                return isOneWidgetVisibleAtEast();
+        }
+        throw new IllegalArgumentException("The panel code passed is not valid: " + panel);
     }
 
     /**

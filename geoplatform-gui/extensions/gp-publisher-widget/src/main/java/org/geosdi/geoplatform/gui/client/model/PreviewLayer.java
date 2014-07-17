@@ -71,7 +71,7 @@ public class PreviewLayer implements GPLayerBean, Serializable {
     private String fileName;
     private String styleName;
     private boolean isShape;
-    private boolean isPresent;
+    private boolean alreadyExists;
     @Transient
     private Long id;
     @Transient
@@ -92,7 +92,7 @@ public class PreviewLayer implements GPLayerBean, Serializable {
 
     public PreviewLayer(String label, String title, String name, String abstractText,
             String dataSource, String crs, BBoxClientInfo bbox, GPLayerType layerType,
-            String styleName, boolean isShape, boolean isPresent) {
+            String styleName, boolean isShape, boolean alreadyExists) {
         this.label = label;
         this.title = title;
         this.name = name;
@@ -103,7 +103,7 @@ public class PreviewLayer implements GPLayerBean, Serializable {
         this.layerType = layerType;
         this.styleName = styleName;
         this.isShape = isShape;
-        this.isPresent = isPresent;
+        this.alreadyExists = alreadyExists;
     }
 
     public String getFileName() {
@@ -122,12 +122,12 @@ public class PreviewLayer implements GPLayerBean, Serializable {
         this.isShape = isShape;
     }
 
-    public boolean isIsPresent() {
-        return isPresent;
+    public boolean isAlreadyExists() {
+        return alreadyExists;
     }
 
-    public void setIsPresent(boolean isPresent) {
-        this.isPresent = isPresent;
+    public void setAlreadyExists(boolean alreadyExists) {
+        this.alreadyExists = alreadyExists;
     }
 
     /**

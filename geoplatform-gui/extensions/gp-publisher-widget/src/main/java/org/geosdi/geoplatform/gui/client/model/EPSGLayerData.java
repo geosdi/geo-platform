@@ -1,37 +1,35 @@
 /**
  *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
+ * geo-platform Rich webgis framework http://geo-platform.org
+ * ====================================================================
  *
- *   Copyright (C) 2008-2014 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2014 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version. This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details. You should have received a copy of the GNU General Public License
+ * along with this program. If not, see http://www.gnu.org/licenses/
  *
- *   ====================================================================
+ * ====================================================================
  *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
+ * Linking this library statically or dynamically with other modules is making a
+ * combined work based on this library. Thus, the terms and conditions of the
+ * GNU General Public License cover the whole combination.
  *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * As a special exception, the copyright holders of this library give you
+ * permission to link this library with independent modules to produce an
+ * executable, regardless of the license terms of these independent modules, and
+ * to copy and distribute the resulting executable under terms of your choice,
+ * provided that you also meet, for each linked independent module, the terms
+ * and conditions of the license of that module. An independent module is a
+ * module which is not derived from or based on this library. If you modify this
+ * library, you may extend this exception to your version of the library, but
+ * you are not obligated to do so. If you do not wish to do so, delete this
+ * exception statement from your version.
  */
 package org.geosdi.geoplatform.gui.client.model;
 
@@ -50,7 +48,7 @@ public class EPSGLayerData extends GeoPlatformBeanModel {
     public static final String NEW_NAME = "newName";
     public static final String CRS = "crs";
     public static final String IS_SHAPE = "isShape";
-    public static final String IS_PRESENT = "isPresent";
+    public static final String ALREADY_EXISTS = "alreadyExists";
     public static final String STYLE_NAME = "styleName";
 //    public static final String PUBLISH_ACTION_LIST = "publishActionList";
     public static final String PUBLISH_ACTION = "publishAction";
@@ -63,12 +61,12 @@ public class EPSGLayerData extends GeoPlatformBeanModel {
     }
 
     public EPSGLayerData(String featureName, String epsgCode, String styleName,
-            boolean isShape, boolean isPresent, String fileName) {
+            boolean isShape, boolean alreadyExists, String fileName) {
         this.setFeatureName(featureName);
         this.setEpsgCode(epsgCode);
         this.setStyleName(styleName);
         this.setIsShape(isShape);
-        this.setIsPresent(isPresent);
+        this.setAlreadyExists(alreadyExists);
         this.fileName = fileName;
     }
 
@@ -104,13 +102,13 @@ public class EPSGLayerData extends GeoPlatformBeanModel {
         super.set(EPSGLayerData.IS_SHAPE, isShape);
     }
 
-    public Boolean isIsPresent() {
-        return super.get(EPSGLayerData.IS_PRESENT);
+    public Boolean isAlreadyExists() {
+        return super.get(EPSGLayerData.ALREADY_EXISTS);
     }
 
-    public final void setIsPresent(boolean isPresent) {
-        super.set(EPSGLayerData.IS_PRESENT, isPresent);
-        if (isPresent) {
+    public final void setAlreadyExists(boolean alreadyExists) {
+        super.set(EPSGLayerData.ALREADY_EXISTS, alreadyExists);
+        if (alreadyExists) {
             List<LayerPublishAction> publishActionList = Lists.
                     <LayerPublishAction>newArrayList(LayerPublishAction.RENAME,
                             LayerPublishAction.OVERRIDE);
@@ -148,4 +146,32 @@ public class EPSGLayerData extends GeoPlatformBeanModel {
     public String getNewName() {
         return super.get(EPSGLayerData.NEW_NAME);
     }
+
+    public void setNewName(String newName) {
+        super.set(EPSGLayerData.NEW_NAME, newName);
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final EPSGLayerData other = (EPSGLayerData) obj;
+        if ((this.fileName == null) ? (other.fileName != null) : !this.fileName.equals(other.fileName)) {
+            return false;
+        }
+        if (this.layerPublishActions != other.layerPublishActions && (this.layerPublishActions == null || !this.layerPublishActions.equals(other.layerPublishActions))) {
+            return false;
+        }
+        return true;
+    }
+
 }

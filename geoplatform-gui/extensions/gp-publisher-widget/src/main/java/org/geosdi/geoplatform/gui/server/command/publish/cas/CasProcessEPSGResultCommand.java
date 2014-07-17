@@ -110,7 +110,7 @@ public class CasProcessEPSGResultCommand implements
                     previewLayer.getFeatureName(),
                     0d, 0d, 0d, 0d, previewLayer.getEpsgCode(),
                     previewLayer.getStyleName(), previewLayer.isIsShape(),
-                    previewLayer.isIsPresent());
+                    previewLayer.isAlreadyExists());
             if (previewLayer.getPublishAction() != null) {
                 infoPreview.setLayerPublishAction(LayerPublishAction.valueOf(previewLayer.getPublishAction()));
                 infoPreview.setNewName(previewLayer.getNewName());

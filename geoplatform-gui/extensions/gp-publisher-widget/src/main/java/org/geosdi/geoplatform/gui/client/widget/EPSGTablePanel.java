@@ -1,56 +1,56 @@
 /**
  *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
+ * geo-platform Rich webgis framework http://geo-platform.org
+ * ====================================================================
  *
- *   Copyright (C) 2008-2014 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2014 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version. This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details. You should have received a copy of the GNU General Public License
+ * along with this program. If not, see http://www.gnu.org/licenses/
  *
- *   ====================================================================
+ * ====================================================================
  *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
+ * Linking this library statically or dynamically with other modules is making a
+ * combined work based on this library. Thus, the terms and conditions of the
+ * GNU General Public License cover the whole combination.
  *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * As a special exception, the copyright holders of this library give you
+ * permission to link this library with independent modules to produce an
+ * executable, regardless of the license terms of these independent modules, and
+ * to copy and distribute the resulting executable under terms of your choice,
+ * provided that you also meet, for each linked independent module, the terms
+ * and conditions of the license of that module. An independent module is a
+ * module which is not derived from or based on this library. If you modify this
+ * library, you may extend this exception to your version of the library, but
+ * you are not obligated to do so. If you do not wish to do so, delete this
+ * exception statement from your version.
  */
 package org.geosdi.geoplatform.gui.client.widget;
 
 import com.extjs.gxt.ui.client.Style;
-import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.event.Events;
-import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
+import com.extjs.gxt.ui.client.event.SelectionChangedListener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.store.StoreEvent;
 import com.extjs.gxt.ui.client.store.StoreListener;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.SimpleComboBox;
+import com.extjs.gxt.ui.client.widget.form.SimpleComboValue;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.grid.*;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.gwt.core.client.GWT;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.command.publish.basic.ProcessEPSGResultRequest;
@@ -68,6 +68,7 @@ import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.shared.publisher.LayerPublishAction;
+import org.geosdi.geoplatform.gui.shared.util.GPSharedUtils;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -81,7 +82,8 @@ public class EPSGTablePanel extends GeoPlatformContentPanel {
             BasicWidgetResources.ICONS.done());
     private ProcessEPSGResultRequest processEPSGRequest = GWT.
             <ProcessEPSGResultRequest>create(ProcessEPSGResultRequest.class);
-    private TextField<String> newNameTextField = new TextField<String>();
+
+    private Map<String, SimpleComboBox<String>> comboBoxMap = Maps.<String, SimpleComboBox<String>>newHashMap();
 
     public EPSGTablePanel() {
         super(Boolean.TRUE);
@@ -89,10 +91,10 @@ public class EPSGTablePanel extends GeoPlatformContentPanel {
 
     public void populateStore(List<PreviewLayer> epsgLayerList) {
         this.store.removeAll();
-        for (PreviewLayer previewLayer : epsgLayerList) {
+        for (PreviewLayer previewLayer : GPSharedUtils.safeList(epsgLayerList)) {
             EPSGLayerData epsgLayerData = new EPSGLayerData(previewLayer.
                     getTitle(), previewLayer.getCrs(), previewLayer.getStyleName(),
-                    previewLayer.isIsShape(), previewLayer.isIsPresent(),
+                    previewLayer.isIsShape(), previewLayer.isAlreadyExists(),
                     previewLayer.getFileName());
             this.store.add(epsgLayerData);
         }
@@ -115,8 +117,8 @@ public class EPSGTablePanel extends GeoPlatformContentPanel {
 
         ColumnConfig newNameColumnConfig = new ColumnConfig(EPSGLayerData.NEW_NAME,
                 PublisherWidgetConstants.INSTANCE.EPSGTablePanel_columnNewNameText(), 120);
+        TextField<String> newNameTextField = new TextField<String>();
         newNameTextField.setEmptyText(PublisherWidgetConstants.INSTANCE.EPSGTablePanel_epsgTextFieldEmptyText());
-        newNameTextField.setEnabled(Boolean.FALSE);
         newNameTextField.setAllowBlank(Boolean.TRUE);
         final CellEditor newNameCellEditor = new CellEditor(newNameTextField);
         newNameColumnConfig.setEditor(newNameCellEditor);
@@ -125,40 +127,34 @@ public class EPSGTablePanel extends GeoPlatformContentPanel {
                 PublisherWidgetConstants.INSTANCE.EPSGTablePanel_columnPublishActionText(), 100);
         GridCellRenderer<EPSGLayerData> renderer = new GridCellRenderer<EPSGLayerData>() {
 
-            private boolean init = false;
-            private SimpleComboBox<String> publishActionComboBox;
-            private EPSGLayerData model;
-
             @Override
             public Object render(final EPSGLayerData model, String property,
-                    ColumnData config, int rowIndex, int colIndex,
-                    final ListStore<EPSGLayerData> store, Grid<EPSGLayerData> grid) {
-                if (!init || (this.model != null && !this.model.equals(model))) {
-                    this.publishActionComboBox = new SimpleComboBox<String>();
-                    newNameTextField.setAllowBlank(Boolean.TRUE);
-                    newNameTextField.setEnabled(Boolean.FALSE);
+                    ColumnData config, int rowIndex, final int colIndex,
+                    final ListStore<EPSGLayerData> store, final Grid<EPSGLayerData> grid) {
+                SimpleComboBox<String> publishActionComboBox;
+
+                Object publishActionCBObj = comboBoxMap.get("" + model.hashCode());
+                if (publishActionCBObj == null) {
+                    publishActionComboBox = new SimpleComboBox<String>();
                     publishActionComboBox.setEditable(Boolean.FALSE);
                     publishActionComboBox.setWidth(grid.getColumnModel().getColumnWidth(colIndex) - 5);
                     List<LayerPublishAction> l = model.getPublishActions();
                     if (l != null) {
-                        for (LayerPublishAction publishAction : l) {
+                        for (LayerPublishAction publishAction : GPSharedUtils.safeList(l)) {
                             publishActionComboBox.add(publishAction.toString());
                         }
                         publishActionComboBox.setAllowBlank(Boolean.FALSE);
-                        publishActionComboBox.addListener(Events.Select, new Listener<BaseEvent>() {
+                        publishActionComboBox.addSelectionChangedListener(new SelectionChangedListener<SimpleComboValue<String>>() {
 
                             @Override
-                            public void handleEvent(BaseEvent be) {
-                                if (publishActionComboBox.isValid()) {
-                                    model.setPublishAction(publishActionComboBox.getValue().getValue());
-                                    String publishAction = publishActionComboBox.getValue().getValue();
-                                    if (LayerPublishAction.valueOf(publishAction).equals(LayerPublishAction.RENAME)) {
-                                        newNameTextField.setEnabled(Boolean.TRUE);
-                                        newNameTextField.setAllowBlank(Boolean.FALSE);
-                                    } else {
-                                        store.getRecord(model).reject(Boolean.FALSE);
-                                        newNameTextField.setAllowBlank(Boolean.TRUE);
-                                        newNameTextField.setEnabled(Boolean.FALSE);
+                            public void selectionChanged(SelectionChangedEvent<SimpleComboValue<String>> se) {
+                                SimpleComboValue<String> selectedItem = se.getSelectedItem();
+                                if (selectedItem != null) {
+                                    String publishAction = selectedItem.getValue();
+                                    model.setPublishAction(publishAction);
+                                    if (!LayerPublishAction.valueOf(publishAction).equals(LayerPublishAction.RENAME)) {
+                                        model.setNewName("");
+                                        store.update(model);
                                     }
                                 } else {
                                     model.setPublishAction(null);
@@ -166,9 +162,12 @@ public class EPSGTablePanel extends GeoPlatformContentPanel {
                                 manageProcessEPSGButton();
                             }
                         });
+                    } else {
+                        publishActionComboBox.setEnabled(Boolean.FALSE);
                     }
-                    init = true;
-                    this.model = model;
+                    comboBoxMap.put("" + model.hashCode(), publishActionComboBox);
+                } else {
+                    publishActionComboBox = (SimpleComboBox<String>) publishActionCBObj;
                 }
                 return publishActionComboBox;
             }
@@ -214,6 +213,7 @@ public class EPSGTablePanel extends GeoPlatformContentPanel {
                                                 PublisherProgressBar.getInstance().hide();
                                                 event.setResult(response.getResult());
                                                 GPHandlerManager.fireEvent(event);
+                                                comboBoxMap.clear();
                                             }
 
                                             @Override
@@ -242,16 +242,17 @@ public class EPSGTablePanel extends GeoPlatformContentPanel {
 
     private boolean isAllEPSGNotNull() {
         boolean result = Boolean.TRUE;
-        for (EPSGLayerData epsgLayerData : store.getModels()) {
+        for (EPSGLayerData epsgLayerData : GPSharedUtils.safeList(store.getModels())) {
             String epsgCode = epsgLayerData.getEpsgCode();
             String test = "";
             if (epsgCode.length() > 5) {
                 test = epsgCode.substring(0, 5);
             }
-            if (epsgCode == null || epsgCode.isEmpty()
-                    || !test.equalsIgnoreCase("EPSG:")
-                    || (epsgLayerData.getPublishAction() == null && epsgLayerData.isIsPresent())
-                    || !this.newNameTextField.isValid()) {
+            if (!GPSharedUtils.isNotEmpty(epsgCode) || !test.equalsIgnoreCase("EPSG:")
+                    || (epsgLayerData.getPublishAction() == null && epsgLayerData.isAlreadyExists())
+                    || (GPSharedUtils.isNotEmpty(epsgLayerData.getPublishAction())
+                    && LayerPublishAction.valueOf(epsgLayerData.getPublishAction()).equals(LayerPublishAction.RENAME)
+                    && !GPSharedUtils.isNotEmpty(epsgLayerData.getNewName()))) {
                 result = Boolean.FALSE;
                 break;
             }

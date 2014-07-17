@@ -54,7 +54,7 @@ public class InfoPreview {
     private double upperY = 0.0d;
     private String crs = "";
     private boolean isShape;
-    private boolean isPresent;
+    private boolean alreadyExists;
     private String message = "ok";
     private String styleName;
     //
@@ -65,7 +65,7 @@ public class InfoPreview {
     
     public InfoPreview(String url, String workspace, String layerName,
             double minX, double minY, double maxX, double maxY, String crs,
-            String styleName, boolean isShape, boolean isPresent) {
+            String styleName, boolean isShape, boolean alreadyExists) {
         this.dataSource = url;
         this.workspace = workspace;
         this.title = layerName;
@@ -76,7 +76,7 @@ public class InfoPreview {
         this.crs = crs;
         this.isShape = isShape;
         this.styleName = styleName;
-        this.isPresent = isPresent;
+        this.alreadyExists = alreadyExists;
     }
 
     public InfoPreview() {
@@ -127,12 +127,12 @@ public class InfoPreview {
         this.isShape = isShape;
     }
 
-    public boolean isIsPresent() {
-        return isPresent;
+    public boolean isAlreadyExists() {
+        return alreadyExists;
     }
 
-    public void setIsPresent(boolean isPresent) {
-        this.isPresent = isPresent;
+    public void setAlreadyExists(boolean alreadyExists) {
+        this.alreadyExists = alreadyExists;
     }
 
     public double getMaxX() {
@@ -219,7 +219,7 @@ public class InfoPreview {
                 + workspace + ", title=" + title + ", lowerX=" + lowerX
                 + ", lowerY=" + lowerY + ", upperX=" + upperX + ", upperY="
                 + upperY + ", crs=" + crs + ", isShape=" + isShape
-                + ", isPresent=" + isPresent + ", newName=" + newName
+                + ", alreadyExists=" + alreadyExists + ", newName=" + newName
                 + ", fileName=" + fileName
                 + ", layerPublishAction=" + layerPublishAction 
                 + ", message=" + message + ", styleName=" + styleName + '}';

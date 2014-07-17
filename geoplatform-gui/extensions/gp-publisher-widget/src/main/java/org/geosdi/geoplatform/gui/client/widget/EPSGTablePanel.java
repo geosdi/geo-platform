@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget;
 
+import com.extjs.gxt.ui.client.Style;
 import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.Events;
@@ -271,6 +272,7 @@ public class EPSGTablePanel extends GeoPlatformContentPanel {
 
     @Override
     public void setPanelProperties() {
+        super.setScrollMode(Style.Scroll.AUTOY);
         super.setHeadingHtml(PublisherWidgetConstants.INSTANCE.EPSGTablePanel_headingText());
         this.store.addStoreListener(new StoreListener<EPSGLayerData>() {
             @Override

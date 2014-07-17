@@ -18,7 +18,9 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring-data-mongodb-version>1.5.0.RELEASE</spring-data-mongodb-version>
+        <spring-data-mongodb-version>1.5.1.RELEASE</spring-data-mongodb-version>
+        <hibernate-validator-version>5.1.1.Final</hibernate-validator-version>
+        <javax-el-version>3.0.0</javax-el-version>
     </properties>
 
     <dependencies>
@@ -80,6 +82,21 @@
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-mongodb</artifactId>
             <version>${spring-data-mongodb-version}</version>
+        </dependency>
+           
+        <!-- =========================================================== -->
+        <!-- ===================== HIBERNATE VALIDATOR ================= -->
+        <!-- =========================================================== -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>${hibernate-validator-version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>javax.el</groupId>
+            <artifactId>javax.el-api</artifactId>
+            <version>${javax-el-version}</version>
         </dependency>
         
         <!-- =========================================================== -->

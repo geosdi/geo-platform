@@ -33,87 +33,39 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.experimental.mongodb.model;
+package org.geosdi.geoplatform.experimental.mongodb.spring.validate;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.geo.Point;
-import org.springframework.data.mongodb.core.index.GeoSpatialIndexed;
-import org.springframework.data.mongodb.core.mapping.Document;
+import javax.validation.Validator;
+import org.geosdi.geoplatform.experimental.mongodb.spring.annotation.GPMongoValidate;
+import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
+import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.mongodb.core.mapping.event.ValidatingMongoEventListener;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Document(collection = "collectionTest")
-public class Address {
+@GPMongoValidate
+@Configuration
+class ValidatingMongoEventListenerConfig {
 
-    @Id
-    private String id;
-    @NotNull
-    @Min(value = 4,
-            message = "The Field Name must contains almost 4 characters.")
-    private String name;
-    @GeoSpatialIndexed(name = "locationIndex")
-    private Point location;
+    @GeoPlatformLog
+    static Logger logger;
 
-    public Address() {
-    }
+    @Bean
+    @Autowired
+    public ValidatingMongoEventListener gpValidatingMongoEventListener(@Qualifier(
+            value = "gpMongoValidator") Validator gpMongoValidator) {
+        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Initializing "
+                + "ValidatingMongoEventListener for GeoPlatform Mongo "
+                + "Extensions.\n");
 
-    public Address(String name, double x, double y) {
-        this.name = name;
-        this.location = new Point(x, y);
-    }
-
-    /**
-     * @return the id
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    /**
-     * @return the name
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * @param name the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * @return the location
-     */
-    public Point getLocation() {
-        return location;
-    }
-
-    /**
-     * @param location the location to set
-     */
-    public void setLocation(Point location) {
-        this.location = location;
-    }
-
-    @Override
-    public String toString() {
-        return "Address{ " + "id = " + id
-                + ", name = " + name
-                + ", location = " + location + '}';
+        return new ValidatingMongoEventListener(gpMongoValidator);
     }
 
 }

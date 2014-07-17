@@ -33,87 +33,21 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.experimental.mongodb.model;
+package org.geosdi.geoplatform.experimental.mongodb.spring.annotation;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.geo.Point;
-import org.springframework.data.mongodb.core.index.GeoSpatialIndexed;
-import org.springframework.data.mongodb.core.mapping.Document;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+import org.springframework.context.annotation.Profile;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Document(collection = "collectionTest")
-public class Address {
-
-    @Id
-    private String id;
-    @NotNull
-    @Min(value = 4,
-            message = "The Field Name must contains almost 4 characters.")
-    private String name;
-    @GeoSpatialIndexed(name = "locationIndex")
-    private Point location;
-
-    public Address() {
-    }
-
-    public Address(String name, double x, double y) {
-        this.name = name;
-        this.location = new Point(x, y);
-    }
-
-    /**
-     * @return the id
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    /**
-     * @return the name
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * @param name the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * @return the location
-     */
-    public Point getLocation() {
-        return location;
-    }
-
-    /**
-     * @param location the location to set
-     */
-    public void setLocation(Point location) {
-        this.location = location;
-    }
-
-    @Override
-    public String toString() {
-        return "Address{ " + "id = " + id
-                + ", name = " + name
-                + ", location = " + location + '}';
-    }
-
+@Retention(value = RetentionPolicy.RUNTIME)
+@Target(value = {ElementType.TYPE, ElementType.METHOD})
+@Profile(value = {"mongo_validate"})
+public @interface GPMongoValidate {
 }

@@ -19,12 +19,14 @@
         <appender-ref ref="STDOUT" />
     </logger>
     
-    <logger name="org.springframework.data" level="debug" additivity="false">
+    <logger name="org.springframework.data" level="info" additivity="false">
         <appender-ref ref="STDOUT" />
     </logger>
     
     <logger name="org.geosdi.geoplatform.experimental.mongodb.spring.client.GPMongoClientConfig" level="debug"/>
     <logger name="org.geosdi.geoplatform.experimental.mongodb.spring.factory.GPMongoDBFactoryConfig" level="debug"/>
     <logger name="org.geosdi.geoplatform.experimental.mongodb.spring.template.GPMongoTemplateConfig" level="debug"/>
+    <logger name="org.geosdi.geoplatform.experimental.mongodb.spring.validate.GPMongoValidatorConfig" level="debug"/>
+    <logger name="org.geosdi.geoplatform.experimental.mongodb.spring.validate.ValidatingMongoEventListenerConfig" level="debug"/>
 
 </configuration>

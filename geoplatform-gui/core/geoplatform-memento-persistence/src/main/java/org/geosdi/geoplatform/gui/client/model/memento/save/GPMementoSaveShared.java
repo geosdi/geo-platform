@@ -64,14 +64,18 @@ public class GPMementoSaveShared extends GPCache<IMemento<ISave>> implements
 
     private static final long serialVersionUID = -5458269761345444182L;
     //
-    private PeekCacheEvent peekCacheEvent;
+    private final PeekCacheEvent peekCacheEvent;
     private ObservableGPLayerSaveCache observable;
+    private boolean isAddedToXMPPHandler;
 
     public GPMementoSaveShared(ObservableGPLayerSaveCache observable, PeekCacheEvent peekCacheEvent) {
         this.observable = observable;
         this.peekCacheEvent = peekCacheEvent;
         this.observable.notifyObservers(LayerEvents.SAVE_CACHE_EMPTY);
-        XMPPHandlerManager.addHandler(TYPE, this);
+        if (!isAddedToXMPPHandler) {
+            XMPPHandlerManager.addHandler(TYPE, this);
+            this.isAddedToXMPPHandler = Boolean.TRUE;
+        }
     }
 
     @Override

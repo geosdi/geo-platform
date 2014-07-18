@@ -584,6 +584,8 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
             code = CRS.lookupEpsgCode(coordinateReferenceSystem, true);
         } catch (FactoryException e) {
             logger.error("Failed to retrieve EPSG code: " + e);
+        } catch (NullPointerException npe) {
+            logger.error("Failed to retrieve EPSG code: " + npe);
         }
         return code;
     }

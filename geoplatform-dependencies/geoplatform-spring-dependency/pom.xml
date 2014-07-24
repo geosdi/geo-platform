@@ -103,12 +103,6 @@
             </dependency>
             
             <dependency>
-                <groupId>xalan</groupId>
-                <artifactId>serializer</artifactId>
-                <version>${xalan-serializer-version}</version>
-            </dependency>
-
-            <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-web</artifactId>
                 <version>${spring-version}</version>
@@ -155,7 +149,6 @@
     <properties>
         <spring-version>4.0.6.RELEASE</spring-version>
         <spring-support>2.0.8</spring-support>
-        <xalan-serializer-version>2.7.1</xalan-serializer-version>
         <spring-security-version>3.2.4.RELEASE</spring-security-version>
     </properties>
 

@@ -31,29 +31,20 @@
  * you are not obligated to do so. If you do not wish to do so, delete this
  * exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.client.startup;
+package org.geosdi.geoplatform.gui.client.command.login.xmpp;
 
-import org.geosdi.geoplatform.gui.client.config.BasicGinInjector;
-import org.geosdi.geoplatform.gui.client.handler.SSOLoginHandler;
-import org.geosdi.geoplatform.gui.client.i18n.StartupStrategyModuleConstants;
-import org.geosdi.geoplatform.gui.client.widget.security.AbstractLoginHandler;
-import org.geosdi.geoplatform.gui.configuration.startup.IStartupConfigurationStrategy;
-import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
+import org.geosdi.geoplatform.gui.command.api.GPCommandRequest;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class StartupConfigurationLogIn implements IStartupConfigurationStrategy {
+public class XMPPGetDataLoginFromHeaderRequest implements GPCommandRequest {
 
-    private static final long serialVersionUID = -4521004364754154783L;
+    private static final long serialVersionUID = -6434996345908209113L;
 
     @Override
-    public void initGeoPlatformConfiguration() {
-        BasicGinInjector injector = BasicGinInjector.MainInjector.getInstance();
-        AbstractLoginHandler loginHandler = new SSOLoginHandler();
-        injector.getSecurityLoginChainOfResponsibility().setLoginHandler(loginHandler);
-        injector.getLoginAccessManager().doLogin(GeoPlatformEvents.INIT_GEO_PLATFORM,
-                StartupStrategyModuleConstants.INSTANCE.StartupConfigurationLogIn_basicLoginMessageText());
+    public String getCommandName() {
+        return "command.login.XMPPGetDataLoginFromHeaderCommand";
     }
 }

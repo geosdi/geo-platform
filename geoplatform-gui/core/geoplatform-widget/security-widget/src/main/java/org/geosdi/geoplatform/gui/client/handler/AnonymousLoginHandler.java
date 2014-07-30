@@ -7,10 +7,15 @@ package org.geosdi.geoplatform.gui.client.handler;
 import com.google.gwt.user.client.Window;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.geosdi.geoplatform.gui.client.GPXMPPClient;
 import org.geosdi.geoplatform.gui.client.command.login.basic.BasicLoginRequest;
 import org.geosdi.geoplatform.gui.client.command.login.basic.BasicLoginResponse;
+import org.geosdi.geoplatform.gui.client.command.login.xmpp.XMPPGetDataLoginRequest;
+import org.geosdi.geoplatform.gui.client.command.login.xmpp.XMPPGetDataLoginResponse;
 import org.geosdi.geoplatform.gui.client.config.BasicGinInjector;
 import org.geosdi.geoplatform.gui.client.config.SecurityGinInjector;
+import org.geosdi.geoplatform.gui.client.i18n.SecurityModuleConstants;
+import org.geosdi.geoplatform.gui.client.model.security.XMPPLoginDetails;
 import org.geosdi.geoplatform.gui.client.widget.security.AbstractLoginHandler;
 import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
 import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
@@ -42,6 +47,7 @@ public class AnonymousLoginHandler extends AbstractLoginHandler {
                                         public void onCommandSuccess(BasicLoginResponse response) {
                                             logger.log(Level.FINE, "Autorithy retrieved: " + response.getResult().getAuthority());
                                             if (response.getResult().getAuthority().equalsIgnoreCase("Viewer")) {
+                                                executeXMPPLogin(response.getResult().getUsername());
                                                 SecurityGinInjector.MainInjector.getInstance().
                                                 getPostLoginOperations().
                                                 executeLoginOperations(response.getResult());
@@ -69,6 +75,37 @@ public class AnonymousLoginHandler extends AbstractLoginHandler {
         } else {
             this.printFailure();
         }
+    }
+
+    private void executeXMPPLogin(String username) {
+        logger.log(Level.FINE, "ExecuteXMPPLogin: " + username);
+        XMPPGetDataLoginRequest xMPPCASGetDataLoginRequest = new XMPPGetDataLoginRequest();
+        xMPPCASGetDataLoginRequest.setUserNameToRetrieve(username);
+        ClientCommandDispatcher.getInstance().execute(
+                new GPClientCommand<XMPPGetDataLoginResponse>(xMPPCASGetDataLoginRequest) {
+
+                    private static final long serialVersionUID = -1178797454775088815L;
+
+                    @Override
+                    public void onCommandSuccess(XMPPGetDataLoginResponse response) {
+                        logger.log(Level.FINE, "ExecuteXMPPLogin onCommandSuccess: " + response);
+                        if (response != null && response.getResult() != null) {
+                            XMPPLoginDetails xMPPLoginDetails = response.getResult();
+                            GPXMPPClient xMPPClient = new GPXMPPClient();
+                            xMPPClient.userXMPPLogin(xMPPLoginDetails.getUsername(),
+                                    xMPPLoginDetails.getPassword(), xMPPLoginDetails.getHostXmppServer());
+                        }
+                    }
+
+                    @Override
+                    public void onCommandFailure(Throwable exception) {
+                        GeoPlatformMessage.infoMessage(
+                                SecurityModuleConstants.INSTANCE.XMPPConnectionErrorTitleText(),
+                                SecurityModuleConstants.INSTANCE.XMPPConnectionErrorBodyText()
+                                + exception.getMessage());
+                        logger.log(Level.WARNING, "executeXMPPLogin command faillure: " + exception);
+                    }
+                });
     }
 
     private void printFailure() {

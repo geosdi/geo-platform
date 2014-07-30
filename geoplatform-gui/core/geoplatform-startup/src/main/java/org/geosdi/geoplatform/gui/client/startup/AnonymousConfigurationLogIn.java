@@ -35,17 +35,10 @@
  */
 package org.geosdi.geoplatform.gui.client.startup;
 
-import org.geosdi.geoplatform.gui.client.GPXMPPClient;
-import org.geosdi.geoplatform.gui.client.command.login.xmpp.XMPPGetDataLoginRequest;
-import org.geosdi.geoplatform.gui.client.command.login.xmpp.XMPPGetDataLoginResponse;
 import org.geosdi.geoplatform.gui.client.config.BasicGinInjector;
 import org.geosdi.geoplatform.gui.client.handler.AnonymousLoginHandler;
 import org.geosdi.geoplatform.gui.client.i18n.StartupStrategyModuleConstants;
-import org.geosdi.geoplatform.gui.client.model.security.XMPPLoginDetails;
 import org.geosdi.geoplatform.gui.client.widget.security.AbstractLoginHandler;
-import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
-import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
-import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.configuration.startup.IStartupConfigurationStrategy;
 import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
@@ -64,29 +57,5 @@ public class AnonymousConfigurationLogIn implements IStartupConfigurationStrateg
         injector.getSecurityLoginChainOfResponsibility().setLoginHandler(anonymousLoginHandler);
         injector.getLoginAccessManager().doLogin(GeoPlatformEvents.INIT_GEO_PLATFORM,
                 StartupStrategyModuleConstants.INSTANCE.StartupConfigurationLogIn_basicLoginMessageText());
-        XMPPGetDataLoginRequest xMPPCASGetDataLoginRequest = new XMPPGetDataLoginRequest();
-        ClientCommandDispatcher.getInstance().execute(
-                new GPClientCommand<XMPPGetDataLoginResponse>(xMPPCASGetDataLoginRequest) {
-
-                    private static final long serialVersionUID = -1178797454775088815L;
-
-                    @Override
-                    public void onCommandSuccess(XMPPGetDataLoginResponse response) {
-                        if (response != null && response.getResult() != null) {
-                            XMPPLoginDetails xMPPLoginDetails = response.getResult();
-                            GPXMPPClient xMPPClient = new GPXMPPClient();
-                            xMPPClient.userXMPPLogin(xMPPLoginDetails.getUsername(),
-                                    xMPPLoginDetails.getPassword(), xMPPLoginDetails.getHostXmppServer());
-                        }
-                    }
-
-                    @Override
-                    public void onCommandFailure(Throwable exception) {
-                        GeoPlatformMessage.infoMessage(
-                                StartupStrategyModuleConstants.INSTANCE.XMPPConnectionErrorTitleText(),
-                                StartupStrategyModuleConstants.INSTANCE.XMPPConnectionErrorBodyText()
-                                + exception.getMessage());
-                    }
-                });
     }
 }

@@ -37,7 +37,7 @@ import org.geosdi.geoplatform.gui.server.command.login.sso.*;
 import com.google.common.base.Preconditions;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
-import org.geosdi.geoplatform.gui.client.command.login.xmpp.XMPPGetDataLoginRequest;
+import org.geosdi.geoplatform.gui.client.command.login.xmpp.XMPPGetDataLoginFromHeaderRequest;
 import org.geosdi.geoplatform.gui.client.command.login.xmpp.XMPPGetDataLoginResponse;
 import org.geosdi.geoplatform.gui.client.model.security.XMPPLoginDetails;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;
@@ -53,9 +53,9 @@ import org.springframework.stereotype.Component;
  * @email nazzareno.sileno@geosdi.org
  */
 @Lazy(true)
-@Component(value = "command.login.XMPPGetDataLoginCommand")
-public class XMPPGetDataLoginCommand implements
-        GPCommand<XMPPGetDataLoginRequest, XMPPGetDataLoginResponse> {
+@Component(value = "command.login.XMPPGetDataLoginFromHeaderCommand")
+public class XMPPGetDataLoginFromHeaderCommand implements
+        GPCommand<XMPPGetDataLoginFromHeaderRequest, XMPPGetDataLoginResponse> {
 
     private static final Logger logger = LoggerFactory.getLogger(
             SSOLoginCommand.class);
@@ -64,16 +64,16 @@ public class XMPPGetDataLoginCommand implements
     private ISecurityService securityService;
 
     @Override
-    public XMPPGetDataLoginResponse execute(XMPPGetDataLoginRequest request,
+    public XMPPGetDataLoginResponse execute(XMPPGetDataLoginFromHeaderRequest request,
             HttpServletRequest httpServletRequest) {
 
         XMPPGetDataLoginResponse xMPPGetDataLoginResponse = null;
 
-        String usernameToRetrieve = request.getUserNameToRetrieve();
-        logger.info("XMPP username to retrieve: " + usernameToRetrieve);
-        if (usernameToRetrieve != null) {
+        String ivUser = httpServletRequest.getHeader("iv-user");
+        logger.info("XMPP username retrieved from header: " + ivUser);
+        if (ivUser != null) {
             XMPPLoginDetails xMPPLoginDetails = this.securityService.xmppGetDataLogin(
-                    usernameToRetrieve, httpServletRequest);
+                    ivUser, httpServletRequest);
             xMPPGetDataLoginResponse = new XMPPGetDataLoginResponse(xMPPLoginDetails);
         }
 

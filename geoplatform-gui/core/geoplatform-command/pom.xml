@@ -72,7 +72,6 @@
     </dependencies>
     
     <build>
-
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -90,6 +89,7 @@
             <resource>
                 <directory>${basedir}/src/main/java</directory>
                 <includes>
+                    <include>**/*.java</include>
                     <include>**/*.txt</include>
                     <include>**/*.sql</include>
                     <include>**/*.html</include>

@@ -136,10 +136,11 @@ public class LayerManagementWidget extends GeoPlatformContentPanel {
             @Override
             public void widgetResized(ComponentEvent ce) {
                 if (getHeight() > 0) {
-                    layerTreePanel.setHeight(getHeight());
+                    layerTreePanel.setHeight(getHeight() - 220);
                     if (LayerBeanLayoutFactory.getLayerBeanLayout().getLayerTreePosition()
                             != LayerBeanLayoutFactory.getLayerBeanLayout().getLegendPosition()) {
                         legendPanel.setHeight(getHeight());
+                        layerTreePanel.setHeight(getHeight() - 40);
                     }
                 }
             }

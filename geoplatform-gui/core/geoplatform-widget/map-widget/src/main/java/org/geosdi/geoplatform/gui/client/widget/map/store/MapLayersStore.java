@@ -35,6 +35,7 @@ package org.geosdi.geoplatform.gui.client.widget.map.store;
 
 import com.extjs.gxt.ui.client.Registry;
 import com.google.gwt.user.client.History;
+import com.google.gwt.user.client.Timer;
 import java.util.Map.Entry;
 import org.geosdi.geoplatform.gui.client.widget.map.event.LayerRangeEvent;
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
@@ -132,13 +133,19 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
         displayLegendEvent.setLayerBean(vectorBean);
         LayerHandlerManager.fireEvent(displayLegendEvent);
         if (containsLayer(vectorBean)) {
-            WMS layer = (WMS) this.layers.get(vectorBean);
+            final WMS layer = (WMS) this.layers.get(vectorBean);
             if (!layer.isVisible() || Integer.parseInt(
                     layer.getZIndex().toString())
                     != vectorBean.getzIndex()) {
                 layer.setZIndex(vectorBean.getzIndex());
-                layer.setIsVisible(true);
-                //layer.redraw();
+                Timer timer = new Timer() {
+                    @Override
+                    public void run() {
+                        layer.setIsVisible(true);
+                        layer.redraw(true);
+                    }
+                };
+                timer.schedule(500);
             }
         } else {
             WMS layer = (WMS) this.layerBuilder.buildLayer(vectorBean);
@@ -154,15 +161,21 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
                 UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
         displayLegendEvent.setLayerBean(rasterBean);
         LayerHandlerManager.fireEvent(displayLegendEvent);
-        WMS layer = null;
+        final WMS layer;
         if (containsLayer(rasterBean)) {
             layer = (WMS) this.layers.get(rasterBean);
             if (!layer.isVisible() || Integer.parseInt(
                     layer.getZIndex().toString())
                     != rasterBean.getzIndex()) {
                 layer.setZIndex(rasterBean.getzIndex());
-                layer.setIsVisible(true);
-                layer.redraw(true);
+                Timer timer = new Timer() {
+                    @Override
+                    public void run() {
+                        layer.setIsVisible(true);
+                        layer.redraw(true);
+                    }
+                };
+                timer.schedule(500);
                 History.newItem("#" + accountDetail.getUsername() + "-"
                         + rasterBean.getName() + "-VISIBLE");
             }
@@ -183,9 +196,15 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
     public void hideLayer(GPLayerBean layerBean) {
         IGPAccountDetail accountDetail = Registry.get(
                 UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
-        Layer layer = getLayer(layerBean);
+        final Layer layer = getLayer(layerBean);
         if (layer != null) {
-            layer.setIsVisible(false);
+            Timer timer = new Timer() {
+                @Override
+                public void run() {
+                    layer.setIsVisible(false);
+                }
+            };
+            timer.schedule(500);
             History.newItem("#" + accountDetail.getUsername() + "-"
                     + layerBean.getName() + "-NOT-VISIBLE");
             featureInfoRemoveLayer.setLayer(layer);

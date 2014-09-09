@@ -1,37 +1,35 @@
 /**
  *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
+ * geo-platform Rich webgis framework http://geo-platform.org
+ * ====================================================================
  *
- *   Copyright (C) 2008-2014 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2014 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version. This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details. You should have received a copy of the GNU General Public License
+ * along with this program. If not, see http://www.gnu.org/licenses/
  *
- *   ====================================================================
+ * ====================================================================
  *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
+ * Linking this library statically or dynamically with other modules is making a
+ * combined work based on this library. Thus, the terms and conditions of the
+ * GNU General Public License cover the whole combination.
  *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * As a special exception, the copyright holders of this library give you
+ * permission to link this library with independent modules to produce an
+ * executable, regardless of the license terms of these independent modules, and
+ * to copy and distribute the resulting executable under terms of your choice,
+ * provided that you also meet, for each linked independent module, the terms
+ * and conditions of the license of that module. An independent module is a
+ * module which is not derived from or based on this library. If you modify this
+ * library, you may extend this exception to your version of the library, but
+ * you are not obligated to do so. If you do not wish to do so, delete this
+ * exception statement from your version.
  */
 package org.geosdi.geoplatform.gui.client.widget.baselayer.factory.adapater;
 
@@ -47,36 +45,42 @@ import org.geosdi.geoplatform.gui.global.enumeration.BaseLayerValue;
 public class GPBaseLayerIconAdapter {
 
     protected static AbstractImagePrototype adaptBaseLayerIcon(BaseLayerValue key) {
+        AbstractImagePrototype baseLayerIcon;
         switch (key) {
             case OPEN_STREET_MAP:
-                return Resources.IMAGES.osm();
-
+                baseLayerIcon = Resources.IMAGES.osm();
+                break;
+            case MAP_QUEST_OSM:
+                baseLayerIcon = Resources.IMAGES.mapQuestOSM();
+                break;
             case GOOGLE_NORMAL:
-                return Resources.IMAGES.googleNormal();
+                baseLayerIcon = Resources.IMAGES.googleNormal();
+                break;
 
             case GOOGLE_HYBRID:
-                return Resources.IMAGES.googleHybrid();
-
+                baseLayerIcon = Resources.IMAGES.googleHybrid();
+                break;
             case BING_ROAD_LAYER:
-                return Resources.IMAGES.bingRoad();
-
+                baseLayerIcon = Resources.IMAGES.bingRoad();
+                break;
             case BING_HYBRID:
-                return Resources.IMAGES.bingHybrid();
-
+                baseLayerIcon = Resources.IMAGES.bingHybrid();
+                break;
             case BING_AERIAL:
-                return Resources.IMAGES.bingAerial();
-
+                baseLayerIcon = Resources.IMAGES.bingAerial();
+                break;
             case METACARTA:
-                return Resources.IMAGES.metacartaVmap();
-
+                baseLayerIcon = Resources.IMAGES.metacartaVmap();
+                break;
             case GEOSDI_BASE:
-                return Resources.IMAGES.DPC();
-
+                baseLayerIcon = Resources.IMAGES.DPC();
+                break;
             case GEOSDI_NULL_BASE:
-                return Resources.IMAGES.blank();
-
+                baseLayerIcon = Resources.IMAGES.blank();
+                break;
             default:
-                return Resources.IMAGES.googleSatellite();
+                baseLayerIcon = Resources.IMAGES.googleSatellite();
         }
+        return baseLayerIcon;
     }
 }

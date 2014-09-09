@@ -6,12 +6,12 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>plugin</artifactId>
-        <version>1.6-SNAPSHOT</version>
+        <version>1.7-SNAPSHOT</version>
     </parent>
     
     <groupId>org.geosdi</groupId>
     <artifactId>geoplatform-maplite</artifactId>
-    <version>1.6-SNAPSHOT</version>
+    <version>1.7-SNAPSHOT</version>
     <packaging>jar</packaging>
     
     <name>Geo-Platform :: == MapLite Plugin Module</name>

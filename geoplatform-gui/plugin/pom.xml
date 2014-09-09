@@ -46,7 +46,8 @@
         <module>geoplatform-gwtquery</module>
         <module>geoplatform-layer-filters</module>
         <module>geoplatform-googleanalytics-support</module>
-    </modules>
+    <module>geoplatform-maplite</module>
+  </modules>
 
 
 </project>

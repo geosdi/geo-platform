@@ -44,7 +44,7 @@ import java.util.List;
  */
 public class TreeToolbarPluginManager {
     
-    private static List<ITreeToolbarPlugin> toolbarPlugin = Lists.newArrayList();
+    private static List<ITreeToolbarPlugin> toolbarPlugin = Lists.<ITreeToolbarPlugin>newArrayList();
 
     /**
      * @return the toolbarPlugin

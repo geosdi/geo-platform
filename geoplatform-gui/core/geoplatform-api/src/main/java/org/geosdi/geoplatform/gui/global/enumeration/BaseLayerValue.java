@@ -42,6 +42,7 @@ package org.geosdi.geoplatform.gui.global.enumeration;
 public enum BaseLayerValue {
 
     OPEN_STREET_MAP,
+    MAP_QUEST_OSM,
     GOOGLE_NORMAL,
     GOOGLE_SATELLITE,
     GOOGLE_HYBRID,

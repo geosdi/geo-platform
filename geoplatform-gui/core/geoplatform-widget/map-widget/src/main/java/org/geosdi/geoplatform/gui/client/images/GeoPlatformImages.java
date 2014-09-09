@@ -71,6 +71,9 @@ public interface GeoPlatformImages extends ImageBundle {
 
     @Resource("OSM.png")
     AbstractImagePrototype osm();
+    
+    @Resource("mapQuestOSM.png")
+    AbstractImagePrototype mapQuestOSM();
 
     @Resource("metacartaVmap.png")
     AbstractImagePrototype metacartaVmap();

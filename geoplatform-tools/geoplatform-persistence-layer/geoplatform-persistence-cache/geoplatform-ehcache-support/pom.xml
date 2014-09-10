@@ -20,8 +20,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <hibernate-ehcache-version>4.3.0.Final</hibernate-ehcache-version>
-        <ehcache-version>2.7.2</ehcache-version>
+        <hibernate-ehcache-version>4.3.6.Final</hibernate-ehcache-version>
+        <ehcache-version>2.8.2</ehcache-version>
     </properties>
     
     <repositories>
@@ -70,12 +70,6 @@
         <dependency>
             <groupId>net.sf.ehcache</groupId>
             <artifactId>ehcache</artifactId>
-            <version>${ehcache-version}</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>net.sf.ehcache.internal</groupId>
-            <artifactId>ehcache-core</artifactId>
             <version>${ehcache-version}</version>
         </dependency>
         

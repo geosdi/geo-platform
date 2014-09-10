@@ -38,8 +38,6 @@ package org.geosdi.geoplatform.persistence.configuration.jpa;
 import javax.sql.DataSource;
 import org.geosdi.geoplatform.persistence.configuration.basic.strategy.PropertiesStrategyManager;
 import org.geosdi.geoplatform.persistence.configuration.properties.GPPersistenceConnector;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -63,8 +61,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 public class GPPersistenceJpaConfig {
     
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    //
     @Autowired
     private GPPersistenceConnector gpPersistenceConnector;
     //
@@ -77,7 +73,7 @@ public class GPPersistenceJpaConfig {
     @Autowired
     private PropertiesStrategyManager hibPropStrategyManager;
     
-    @Bean
+    @Bean(name = "entityManagerFactory")
     public LocalContainerEntityManagerFactoryBean gpEntityManagerFactory() {
         final LocalContainerEntityManagerFactoryBean gpFactoryBean = new LocalContainerEntityManagerFactoryBean();
         gpFactoryBean.setDataSource(this.persitenceDataSource);

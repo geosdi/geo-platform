@@ -106,9 +106,4 @@ public class GPMapLiteExportProjectWidget extends GeoPlatformWindow {
         super.setResizable(Boolean.FALSE);
     }
 
-    @Override
-    public void show() {
-        super.show();
-    }
-
 }

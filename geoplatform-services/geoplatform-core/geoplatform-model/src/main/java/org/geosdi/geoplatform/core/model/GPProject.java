@@ -56,7 +56,7 @@ import org.hibernate.annotations.Index;
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-@XmlRootElement(name = "Project")
+@XmlRootElement(name = "GPProject")
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity(name = "Project")
 @Table(name = "gp_project")

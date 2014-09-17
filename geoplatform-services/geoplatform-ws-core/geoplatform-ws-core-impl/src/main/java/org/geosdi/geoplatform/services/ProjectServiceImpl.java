@@ -436,7 +436,6 @@ class ProjectServiceImpl {
     public List<GPAccountProject> getAccountProjectsByAccountID(Long accountID) {
         List<GPAccountProject> accountProjectsList = accountProjectDao.findByAccountID(accountID);
         EntityCorrectness.checkAccountProjectListLog(accountProjectsList); // TODO assert
-
         return accountProjectsList;
     }
 

@@ -69,6 +69,18 @@ class GPBaseLayerRepository {
     private EnumMap<BaseLayerValue, GPBaseLayerCreator> baseLayerMap = Maps.
             <BaseLayerValue, GPBaseLayerCreator>newEnumMap(BaseLayerValue.class);
     private static GPBaseLayerRepository instance;
+    public final static double[] baseMapResolutions = {156543.03390625d, 78271.516953125d,
+        39135.7584765625d, 19567.87923828125d, 9783.939619140625d,
+        4891.9698095703125d, 2445.9849047851562d, 1222.9924523925781d,
+        611.4962261962891d, 305.74811309814453d, 152.87405654907226d,
+        76.43702827453613d, 38.218514137268066d, 19.109257068634033d,
+        9.554628534317017d, 4.777314267158508d, 2.388657133579254d,
+        1.194328566789627d, 0.5971642833948135d, 0.29858214169740677d,
+        0.14929107084870338d, 0.07464553542435169d, 0.037322767712175846d,
+        0.018661383856087923d, 0.009330691928043961d,
+        0.004665345964021981d, 0.0023326729820109904d,
+        0.0011663364910054952d, 5.831682455027476E-4d,
+        2.915841227513738E-4d, 1.457920613756869E-4d};
 
     private GPBaseLayerRepository() {
         lookupBaseLayers();
@@ -210,6 +222,7 @@ class GPBaseLayerRepository {
         OSMOptions osmOption = new OSMOptions();
         osmOption.setProjection(
                 GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode());
+        osmOption.setResolutions(baseMapResolutions);
         Layer osm = OSM.Mapnik("OpenStreetMap", osmOption);
 //        Layer osm = OSM.THIS("OpenStreetMap", OpenLayers.getProxyHost()
 //                + "http://tile.openstreetmap.org/${z}/${x}/${y}.png", osmOption);
@@ -223,6 +236,7 @@ class GPBaseLayerRepository {
         wmsParams.setLayers("Mappa_di_Base");
         wmsParams.setStyles("");
         WMSOptions wmsLayerParams = new WMSOptions();
+        wmsLayerParams.setResolutions(baseMapResolutions);
         wmsLayerParams.setProjection(
                 GPCoordinateReferenceSystem.WGS_84.getCode());
         wmsLayerParams.setTileSize(new Size(256, 256));
@@ -239,6 +253,7 @@ class GPBaseLayerRepository {
         defaultMapOptions.setIsBaseLayer(true);
         defaultMapOptions.crossOriginFix();
         defaultMapOptions.setTileSize(new Size(256, 256));
+        defaultMapOptions.setResolutions(baseMapResolutions);
         Layer mapQuestOSMBaseLayer = OSM.THIS("MapQuest OSM", OpenLayers.getProxyHost()
                 + "http://otile1.mqcdn.com/tiles/1.0.0/osm/${z}/${x}/${y}.png",
                 defaultMapOptions);
@@ -252,6 +267,7 @@ class GPBaseLayerRepository {
         wmsParams.setLayers("StratiDiBase:nullMap");
         wmsParams.setStyles("");
         WMSOptions wmsLayerParams = new WMSOptions();
+        wmsLayerParams.setResolutions(baseMapResolutions);
         wmsLayerParams.setProjection(
                 GPCoordinateReferenceSystem.WGS_84.getCode());
         wmsLayerParams.setTileSize(new Size(256, 256));
@@ -269,6 +285,7 @@ class GPBaseLayerRepository {
         wmsParams.setLayers("basic");
         wmsParams.setStyles("");
         WMSOptions wmsLayerParams = new WMSOptions();
+        wmsLayerParams.setResolutions(baseMapResolutions);
         wmsLayerParams.setProjection(
                 GPCoordinateReferenceSystem.WGS_84.getCode());
         wmsLayerParams.setTileSize(new Size(256, 256));
@@ -287,6 +304,7 @@ class GPBaseLayerRepository {
         option.setTransitionEffect(TransitionEffect.RESIZE);
         option.setProjection(
                 GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode());
+        option.setResolutions(baseMapResolutions);
         Layer google = new GoogleV3("Google Normal", option);
         google.setIsBaseLayer(Boolean.TRUE);
 
@@ -300,6 +318,7 @@ class GPBaseLayerRepository {
         opSatellite.setTransitionEffect(TransitionEffect.RESIZE);
         opSatellite.setProjection(
                 GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode());
+        opSatellite.setResolutions(baseMapResolutions);
         Layer satellite = new GoogleV3("Google Satellite", opSatellite);
         satellite.setIsBaseLayer(Boolean.TRUE);
 
@@ -313,6 +332,7 @@ class GPBaseLayerRepository {
         opHybrid.setTransitionEffect(TransitionEffect.RESIZE);
         opHybrid.setProjection(
                 GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode());
+        opHybrid.setResolutions(baseMapResolutions);
         Layer hybrid = new GoogleV3("Google Hybrid", opHybrid);
         hybrid.setIsBaseLayer(Boolean.TRUE);
 
@@ -325,6 +345,7 @@ class GPBaseLayerRepository {
         bingOption.setProtocol(ProtocolType.HTTPS);
         bingOption.setProjection(
                 GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode());
+        bingOption.setResolutions(baseMapResolutions);
         Bing road = new Bing(bingOption);
         road.setIsBaseLayer(Boolean.TRUE);
 
@@ -337,6 +358,7 @@ class GPBaseLayerRepository {
         bingOption.setProtocol(ProtocolType.HTTPS);
         bingOption.setProjection(
                 GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode());
+        bingOption.setResolutions(baseMapResolutions);
         Bing hybrid = new Bing(bingOption);
         hybrid.setIsBaseLayer(Boolean.TRUE);
 
@@ -349,6 +371,7 @@ class GPBaseLayerRepository {
         bingOption.setProtocol(ProtocolType.HTTPS);
         bingOption.setProjection(
                 GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode());
+        bingOption.setResolutions(baseMapResolutions);
         Bing aerial = new Bing(bingOption);
         aerial.setIsBaseLayer(Boolean.TRUE);
 
@@ -361,6 +384,7 @@ class GPBaseLayerRepository {
         emptyLayerOptions.setAttribution("EmptyLayer (c) geoSDI"); //lets set some copyright msg as attribution
         emptyLayerOptions.setIsBaseLayer(true); //make it a baselayer.
         emptyLayerOptions.setProjection(GPCoordinateReferenceSystem.WGS_84.getCode());
+        emptyLayerOptions.setResolutions(baseMapResolutions);
         EmptyLayer emptyLayer = new EmptyLayer("Empty layer", emptyLayerOptions);
         return emptyLayer;
     }

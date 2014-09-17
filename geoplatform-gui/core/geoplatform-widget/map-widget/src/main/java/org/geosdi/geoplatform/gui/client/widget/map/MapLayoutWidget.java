@@ -86,7 +86,7 @@ import org.gwtopenmaps.openlayers.client.layer.WMSOptions;
 public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler {
 
     private final static Logger logger = Logger.getLogger("");
-    public final static int NUM_ZOOM_LEVEL = 30;
+    public final static int NUM_ZOOM_LEVEL = 31;
     private MapWidget mapWidget;
     private MapOptions mapOptions;
     private MapControlManager mapControl;

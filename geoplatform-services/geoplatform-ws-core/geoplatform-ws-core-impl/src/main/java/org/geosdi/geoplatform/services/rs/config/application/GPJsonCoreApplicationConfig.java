@@ -54,7 +54,7 @@ class GPJsonCoreApplicationConfig {
     }
 
     @ApplicationPath(value = "/jsonCore")
-    public class GPJsonCoreApplication extends Application {
+    final class GPJsonCoreApplication extends Application {
     }
 
 }

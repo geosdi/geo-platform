@@ -92,6 +92,8 @@
     
     <logger name="org.geosdi.geoplatform.feature.reader.WFSGetFeatureStaxReader" level="info"/>
     
+    <logger name="org.geosdi.geoplatform.responce.factory.AccountDTOFactory" level="debug"/>
+    
     <!-- DAOs -->
     <logger name="org.geosdi.geoplatform.core.dao.impl.GPFolderDAOImpl" level="info"/>
     <logger name="org.geosdi.geoplatform.core.dao.impl.GPLayerDAOImpl" level="info"/>

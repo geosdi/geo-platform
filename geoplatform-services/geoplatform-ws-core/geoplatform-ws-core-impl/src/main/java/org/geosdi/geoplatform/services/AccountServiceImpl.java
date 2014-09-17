@@ -59,7 +59,9 @@ import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.ApplicationDTO;
 import org.geosdi.geoplatform.responce.ShortAccountDTO;
+import org.geosdi.geoplatform.responce.ShortAccountDTOContainer;
 import org.geosdi.geoplatform.responce.UserDTO;
+import org.geosdi.geoplatform.responce.factory.AccountDTOFactory;
 import org.geosdi.geoplatform.services.development.EntityCorrectness;
 
 /**
@@ -457,16 +459,17 @@ class AccountServiceImpl {
             userList.add((GPUser) account);
         }
 
-        return UserDTO.convertToUserDTOList(userList);
+        return AccountDTOFactory.buildUserDTOList(userList);
     }
 
     /**
      * @see GeoPlatformService#getAllAccounts()
      */
-    public List<ShortAccountDTO> getAllAccounts() {
+    public ShortAccountDTOContainer getAllAccounts() {
         List<GPAccount> accountList = accountDao.findAll();
         EntityCorrectness.checkAccountListLog(accountList); // TODO assert
-        return ShortAccountDTO.convertToShortAccountDTOList(accountList);
+        return new ShortAccountDTOContainer(AccountDTOFactory
+                .buildShortAccountDTOList(accountList));
     }
 
     /**
@@ -496,7 +499,7 @@ class AccountServiceImpl {
             Filter fAppId = Filter.ilike("appID", request.getNameLike());
             searchCriteria.addFilterOr(fUsername, fAppId);
         }
-        return Long.valueOf(accountDao.count(searchCriteria));
+        return (long) accountDao.count(searchCriteria);
     }
 
     /**

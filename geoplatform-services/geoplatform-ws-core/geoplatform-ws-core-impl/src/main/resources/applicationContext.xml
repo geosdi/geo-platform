@@ -15,6 +15,8 @@
        default-autowire="byName">
     
     <context:annotation-config />
+    
+    <context:component-scan base-package="org.geosdi.geoplatform.services.rs.config" />
 
     <!--===================================================================== -->
     <!-- Services -->

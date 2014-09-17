@@ -252,6 +252,20 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
     }
 
     @Override
+    public void onChangeSingleTileRequest(GPRasterBean layerBean,
+            boolean singleTileRequest) {
+        WMS layer = (WMS) this.layers.get(layerBean);
+        if (layer != null && layer.isSingleTile() != singleTileRequest) {
+            boolean isVisible = layer.isVisible();
+            this.removeLayer(layerBean);
+            layer.destroy();
+            if (isVisible) {
+                this.displayRaster(layerBean);
+            }
+        }
+    }
+
+    @Override
     public void onChangeCqlFilter(GPLayerTreeModel layerBean) {
         WMS layer = (WMS) this.layers.get(layerBean);
         if ((layer != null) && (layer.isVisible())) {
@@ -309,7 +323,7 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
             }
             layer.addOptions(options);
             layer.calculateInRange();
-            layer.redraw();
+            layer.redraw(true);
             this.reloadLegendEvent.setLayerBean(layerBean);
             LayerHandlerManager.fireEvent(this.reloadLegendEvent);
             this.updateLayerLabel(layerBean, layer.isInRange());
@@ -333,7 +347,7 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
             }
             layer.addOptions(options);
             layer.calculateInRange();
-            layer.redraw();
+            layer.redraw(true);
             this.reloadLegendEvent.setLayerBean(layerBean);
             LayerHandlerManager.fireEvent(this.reloadLegendEvent);
             this.updateLayerLabel(layerBean, layer.isInRange());

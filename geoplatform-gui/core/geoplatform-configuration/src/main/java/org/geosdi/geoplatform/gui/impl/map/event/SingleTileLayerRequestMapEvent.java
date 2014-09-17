@@ -31,28 +31,51 @@
  * you are not obligated to do so. If you do not wish to do so, delete this
  * exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.model;
+package org.geosdi.geoplatform.gui.impl.map.event;
+
+import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.event.shared.GwtEvent.Type;
+import org.geosdi.geoplatform.gui.model.GPRasterBean;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- *
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public interface GPRasterBean extends GPLayerBean {
+public class SingleTileLayerRequestMapEvent extends GwtEvent<LayerMapChangedHandler> {
 
-    void setSingleTileRequest(boolean singleTileRequest);
+    private GPRasterBean layerBean;
+    private boolean singleTileRequest;
 
-    boolean isSingleTileRequest();
+    /**
+     * @return the layerBean
+     */
+    public GPRasterBean getLayerBean() {
+        return layerBean;
+    }
 
-    void setOpacity(float opacity);
+    @Override
+    public Type<LayerMapChangedHandler> getAssociatedType() {
+        return LayerMapChangedHandler.TYPE;
+    }
 
-    float getOpacity();
+    @Override
+    protected void dispatch(LayerMapChangedHandler handler) {
+        handler.onChangeSingleTileRequest(layerBean, singleTileRequest);
+    }
 
-    Float getMaxScale();
+    /**
+     * @param layerBean the layerBean to set
+     */
+    public void setLayerBean(GPRasterBean layerBean) {
+        this.layerBean = layerBean;
+    }
 
-    void setMaxScale(Float maxScale);
+    public boolean isSingleTileRequest() {
+        return singleTileRequest;
+    }
 
-    Float getMinScale();
+    public void setSingleTileRequest(boolean singleTileRequest) {
+        this.singleTileRequest = singleTileRequest;
+    }
 
-    void setMinScale(Float minScale);
 }

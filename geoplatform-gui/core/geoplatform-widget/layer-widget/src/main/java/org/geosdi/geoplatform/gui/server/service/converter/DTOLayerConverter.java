@@ -1,37 +1,35 @@
 /**
  *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
+ * geo-platform Rich webgis framework http://geo-platform.org
+ * ====================================================================
  *
- *   Copyright (C) 2008-2014 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2014 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version. This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details. You should have received a copy of the GNU General Public License
+ * along with this program. If not, see http://www.gnu.org/licenses/
  *
- *   ====================================================================
+ * ====================================================================
  *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
+ * Linking this library statically or dynamically with other modules is making a
+ * combined work based on this library. Thus, the terms and conditions of the
+ * GNU General Public License cover the whole combination.
  *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * As a special exception, the copyright holders of this library give you
+ * permission to link this library with independent modules to produce an
+ * executable, regardless of the license terms of these independent modules, and
+ * to copy and distribute the resulting executable under terms of your choice,
+ * provided that you also meet, for each linked independent module, the terms
+ * and conditions of the license of that module. An independent module is a
+ * module which is not derived from or based on this library. If you modify this
+ * library, you may extend this exception to your version of the library, but
+ * you are not obligated to do so. If you do not wish to do so, delete this
+ * exception statement from your version.
  */
 package org.geosdi.geoplatform.gui.server.service.converter;
 
@@ -81,16 +79,16 @@ import org.springframework.stereotype.Component;
  */
 @Component(value = "dtoLayerConverter")
 public class DTOLayerConverter {
-    
+
     private GeoServerRESTReader sharedRestReader;
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    
+
     @Autowired
     public void setRestReader(
             @Qualifier(value = "sharedRestReader") GeoServerRESTReader sharedRestReader) {
         this.sharedRestReader = sharedRestReader;
     }
-    
+
     public ArrayList<GPFolderClientInfo> convertOnlyFolders(
             Collection<FolderDTO> folders) {
         ArrayList<GPFolderClientInfo> foldersClient = Lists.<GPFolderClientInfo>newArrayList();
@@ -102,7 +100,7 @@ public class DTOLayerConverter {
         }
         return foldersClient;
     }
-    
+
     private List<IGPFolderElements> convertFolderElements(
             List<IElementDTO> folderElements) {
         List<IGPFolderElements> clientFolderElements = Lists.<IGPFolderElements>newArrayList();
@@ -112,7 +110,7 @@ public class DTOLayerConverter {
         }
         return clientFolderElements;
     }
-    
+
     public ArrayList<IGPFolderElements> convertFolderElements(
             TreeFolderElements folderElements) {
         ArrayList<IGPFolderElements> clientFolderElements = Lists.<IGPFolderElements>newArrayList();
@@ -124,7 +122,7 @@ public class DTOLayerConverter {
         }
         return clientFolderElements;
     }
-    
+
     private IGPFolderElements convertElement(IElementDTO element) {
         IGPFolderElements folderElement = null;
         if (element instanceof RasterLayerDTO) {
@@ -137,7 +135,7 @@ public class DTOLayerConverter {
         }
         return folderElement;
     }
-    
+
     private ClientRasterInfo convertRasterElement(RasterLayerDTO rasterDTO) {
         ClientRasterInfo raster = new ClientRasterInfo();
         this.convertToLayerElementFromLayerDTO(raster, rasterDTO);
@@ -155,7 +153,7 @@ public class DTOLayerConverter {
         raster.setStyles(styles);
         return raster;
     }
-    
+
     private ClientVectorInfo convertVectorElement(VectorLayerDTO vectorDTO) {
         ClientVectorInfo vector = new ClientVectorInfo();
         this.convertToLayerElementFromLayerDTO(vector, vectorDTO);
@@ -163,7 +161,7 @@ public class DTOLayerConverter {
         vector.setFeatureType(vectorDTO.getName());
         return vector;
     }
-    
+
     private void convertToLayerElementFromLayerDTO(GPLayerClientInfo layer,
             ShortLayerDTO layerDTO) {
         layer.setAbstractText(layerDTO.getAbstractText());
@@ -176,6 +174,7 @@ public class DTOLayerConverter {
         layer.setTitle(layerDTO.getTitle());
         layer.setAlias(layerDTO.getAlias());
         layer.setCqlFilter(layerDTO.getCqlFilter());
+        layer.setSingleTileRequest(layerDTO.isSingleTileRequest());
         if ((layerDTO.getTimeFilter() != null) && !(layerDTO.getTimeFilter().equals(
                 ""))) {
             layer.setTimeFilter(layerDTO.getTimeFilter());
@@ -185,12 +184,12 @@ public class DTOLayerConverter {
                 if ((dimension != null) && (!dimension.contains("<h2>"))) {
                     List<String> dimensionList = Lists.<String>newArrayList(
                             dimension.split(","));
-                    
+
                     String[] timeFilterSplitted = layerDTO.getTimeFilter().split(
                             "/");
                     int startDimensionPosition = Integer.parseInt(
                             timeFilterSplitted[0]);
-                    
+
                     String variableTimeFilter = dimensionList.get(
                             dimensionList.size() - startDimensionPosition - 1);
                     if (timeFilterSplitted.length > 1) {
@@ -223,7 +222,7 @@ public class DTOLayerConverter {
         }
         // layer.setzIndex(layerDTO.getPosition());
     }
-    
+
     private GPFolderClientInfo convertFolderElement(FolderDTO folderDTO) {
         GPFolderClientInfo folder = new GPFolderClientInfo();
         folder.setLabel(folderDTO.getName());
@@ -236,12 +235,12 @@ public class DTOLayerConverter {
                 folderDTO.getElementList()));
         return folder;
     }
-    
+
     private BBoxClientInfo convertBbox(GPBBox gpBbox) {
         return new BBoxClientInfo(gpBbox.getMinX(), gpBbox.getMinY(),
                 gpBbox.getMaxX(), gpBbox.getMaxY());
     }
-    
+
     private void setVectorLayerType(ClientVectorInfo vector,
             GPLayerType layerType) {
         switch (layerType) {
@@ -267,7 +266,7 @@ public class DTOLayerConverter {
                 System.out.println("### No Layer Type ###");
         }
     }
-    
+
     public GPFolder convertMementoFolder(MementoFolder memento) {
         GPFolder gpFolder = new GPFolder();
         gpFolder.setId(memento.getIdBaseElement());
@@ -285,14 +284,14 @@ public class DTOLayerConverter {
          */
         return gpFolder;
     }
-    
+
     public GPProject convertToGProject(GPClientProject clientProject) {
         GPProject project = new GPProject();
         project.setName(clientProject.getName());
         project.setShared(clientProject.isShared());
         return project;
     }
-    
+
     public AccountProjectPropertiesDTO convertToAccountProjectPropertiesDTO(
             Long accountID,
             GPClientProject project) {
@@ -305,7 +304,7 @@ public class DTOLayerConverter {
         dto.setShared(project.isShared());
         return dto;
     }
-    
+
     public GPClientProject convertToGPClientProject(ProjectDTO projectDTO) {
         GPClientProject clientProject = new GPClientProject();
         clientProject.setId(projectDTO.getId());
@@ -325,14 +324,14 @@ public class DTOLayerConverter {
                 projectDTO.getRootFolders()));
         return clientProject;
     }
-    
+
     public GPClientProject convertToGPCLientProject(ProjectDTO projectDTO,
             String imageURL) {
         GPClientProject clientProject = this.convertToGPClientProject(projectDTO);
         clientProject.setImage(imageURL);
         return clientProject;
     }
-    
+
     public List<GPSimpleUser> convertToGPSimpleUser(
             List<ShortAccountDTO> shortAccountList) {
         List<GPSimpleUser> listSimpleUser = Lists.<GPSimpleUser>newArrayList();
@@ -344,7 +343,7 @@ public class DTOLayerConverter {
         }
         return listSimpleUser;
     }
-    
+
     private GPSimpleUser convertToGPSimpleUser(UserDTO userDTO) {
         GPSimpleUser user = new GPSimpleUser();
         user.setId(userDTO.getId());
@@ -354,5 +353,5 @@ public class DTOLayerConverter {
         user.setEmail(userDTO.getEmailAddress());
         return user;
     }
-    
+
 }

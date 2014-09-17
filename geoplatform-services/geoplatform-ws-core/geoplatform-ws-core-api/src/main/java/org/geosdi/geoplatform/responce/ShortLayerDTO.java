@@ -1,41 +1,39 @@
 /**
  *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
+ * geo-platform Rich webgis framework http://geo-platform.org
+ * ====================================================================
  *
- *   Copyright (C) 2008-2014 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2014 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version. This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details. You should have received a copy of the GNU General Public License
+ * along with this program. If not, see http://www.gnu.org/licenses/
  *
- *   ====================================================================
+ * ====================================================================
  *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
+ * Linking this library statically or dynamically with other modules is making a
+ * combined work based on this library. Thus, the terms and conditions of the
+ * GNU General Public License cover the whole combination.
  *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * As a special exception, the copyright holders of this library give you
+ * permission to link this library with independent modules to produce an
+ * executable, regardless of the license terms of these independent modules, and
+ * to copy and distribute the resulting executable under terms of your choice,
+ * provided that you also meet, for each linked independent module, the terms
+ * and conditions of the license of that module. An independent module is a
+ * module which is not derived from or based on this library. If you modify this
+ * library, you may extend this exception to your version of the library, but
+ * you are not obligated to do so. If you do not wish to do so, delete this
+ * exception statement from your version.
  */
 package org.geosdi.geoplatform.responce;
 
-import java.util.ArrayList;
+import com.google.common.collect.Lists;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -46,6 +44,7 @@ import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.gui.shared.GPLayerType;
+import org.geosdi.geoplatform.gui.shared.util.GPSharedUtils;
 
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI
@@ -54,7 +53,7 @@ import org.geosdi.geoplatform.gui.shared.GPLayerType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(propOrder = {"id", "name", "position", "shared", "checked", "title",
     "alias", "urlServer", "srs", "abstractText", "layerType", "bbox", "cached",
-    "cqlFilter", "timeFilter"})
+    "cqlFilter", "timeFilter", "singleTileRequest"})
 @XmlSeeAlso(value = {RasterLayerDTO.class, VectorLayerDTO.class})
 public class ShortLayerDTO extends AbstractElementDTO {
 
@@ -68,6 +67,7 @@ public class ShortLayerDTO extends AbstractElementDTO {
     private Boolean cached;
     private String cqlFilter;
     private String timeFilter;
+    private boolean singleTileRequest;
 
     //<editor-fold defaultstate="collapsed" desc="Constructor method">
     /**
@@ -93,6 +93,7 @@ public class ShortLayerDTO extends AbstractElementDTO {
         this.cached = layer.isCached();
         this.cqlFilter = layer.getCqlFilter();
         this.timeFilter = layer.getTimeFilter();
+        this.singleTileRequest = layer.isSingleTileRequest();
     }
     //</editor-fold>
 
@@ -105,8 +106,7 @@ public class ShortLayerDTO extends AbstractElementDTO {
     }
 
     /**
-     * @param title
-     * the title to set
+     * @param title the title to set
      */
     public void setTitle(String title) {
         this.title = title;
@@ -120,8 +120,7 @@ public class ShortLayerDTO extends AbstractElementDTO {
     }
 
     /**
-     * @param alias
-     * the alias to set
+     * @param alias the alias to set
      */
     public void setAlias(String alias) {
         this.alias = alias;
@@ -135,8 +134,7 @@ public class ShortLayerDTO extends AbstractElementDTO {
     }
 
     /**
-     * @param urlServer
-     * the urlServer to set
+     * @param urlServer the urlServer to set
      */
     public void setUrlServer(String urlServer) {
         this.urlServer = urlServer;
@@ -150,8 +148,7 @@ public class ShortLayerDTO extends AbstractElementDTO {
     }
 
     /**
-     * @param srs
-     * the srs to set
+     * @param srs the srs to set
      */
     public void setSrs(String srs) {
         this.srs = srs;
@@ -181,8 +178,7 @@ public class ShortLayerDTO extends AbstractElementDTO {
     }
 
     /**
-     * @param abstractText
-     * the abstractText to set
+     * @param abstractText the abstractText to set
      */
     public void setAbstractText(String abstractText) {
         this.abstractText = abstractText;
@@ -196,8 +192,7 @@ public class ShortLayerDTO extends AbstractElementDTO {
     }
 
     /**
-     * @param layerType
-     * the layerType to set
+     * @param layerType the layerType to set
      */
     public void setLayerType(GPLayerType layerType) {
         this.layerType = layerType;
@@ -225,17 +220,25 @@ public class ShortLayerDTO extends AbstractElementDTO {
     }
 
     /**
-     * @param cached
-     * the cached to set
+     * @param cached the cached to set
      */
     public void setCached(Boolean cached) {
         this.cached = cached;
+    }
+
+    public boolean isSingleTileRequest() {
+        return singleTileRequest;
+    }
+
+    public void setSingleTileRequest(boolean singleTileRequest) {
+        this.singleTileRequest = singleTileRequest;
     }
     //</editor-fold>
 
     /**
      * (non-Javadoc)
      *
+     * @return 
      * @see java.lang.Object#toString()
      */
     @Override
@@ -250,14 +253,15 @@ public class ShortLayerDTO extends AbstractElementDTO {
                 + ", timeFilter=" + timeFilter
                 + ", layerType=" + layerType
                 + ", " + bbox
-                + ", cached=" + cached;
+                + ", cached=" + cached
+                + ", singleTileRequest=" + singleTileRequest;
         return s;
     }
 
     public static List<ShortLayerDTO> convertToShortLayerDTOList(List<GPLayer> layers) {
-        List<ShortLayerDTO> layersDTO = new ArrayList<ShortLayerDTO>(layers.size());
+        List<ShortLayerDTO> layersDTO = Lists.<ShortLayerDTO>newArrayListWithCapacity(layers.size());
 
-        for (GPLayer layer : layers) {
+        for (GPLayer layer : GPSharedUtils.safeList(layers)) {
             layersDTO.add(new ShortLayerDTO(layer));
         }
 
@@ -287,6 +291,7 @@ public class ShortLayerDTO extends AbstractElementDTO {
         layer.setBbox(layerDTO.getBbox());
         layer.setCqlFilter(layerDTO.getCqlFilter());
         layer.setTimeFilter(layerDTO.getTimeFilter());
+        layer.setSingleTileRequest(layerDTO.isSingleTileRequest());
         if (layerDTO.isCached() != null) {
             layer.setCached(layerDTO.isCached());
         }

@@ -1,37 +1,35 @@
 /**
  *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
+ * geo-platform Rich webgis framework http://geo-platform.org
+ * ====================================================================
  *
- *   Copyright (C) 2008-2014 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2014 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version. This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details. You should have received a copy of the GNU General Public License
+ * along with this program. If not, see http://www.gnu.org/licenses/
  *
- *   ====================================================================
+ * ====================================================================
  *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
+ * Linking this library statically or dynamically with other modules is making a
+ * combined work based on this library. Thus, the terms and conditions of the
+ * GNU General Public License cover the whole combination.
  *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * As a special exception, the copyright holders of this library give you
+ * permission to link this library with independent modules to produce an
+ * executable, regardless of the license terms of these independent modules, and
+ * to copy and distribute the resulting executable under terms of your choice,
+ * provided that you also meet, for each linked independent module, the terms
+ * and conditions of the license of that module. An independent module is a
+ * module which is not derived from or based on this library. If you modify this
+ * library, you may extend this exception to your version of the library, but
+ * you are not obligated to do so. If you do not wish to do so, delete this
+ * exception statement from your version.
  */
 package org.geosdi.geoplatform.gui.client.widget.tab.binding;
 
@@ -44,12 +42,15 @@ import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.event.SliderEvent;
+import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.store.Record;
 import com.extjs.gxt.ui.client.widget.Component;
 import com.extjs.gxt.ui.client.widget.ComponentPlugin;
 import com.extjs.gxt.ui.client.widget.Dialog;
 import com.extjs.gxt.ui.client.widget.Slider;
 import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.widget.form.ComboBox;
+import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.NumberField;
@@ -61,6 +62,7 @@ import java.util.logging.Level;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
+import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode.GPRasterKeyValue;
 import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.AbstractMementoOriginalProperties;
@@ -72,6 +74,8 @@ import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.map.event.MaxScaleLayerMapEvent;
 import org.geosdi.geoplatform.gui.impl.map.event.MinScaleLayerMapEvent;
 import org.geosdi.geoplatform.gui.impl.map.event.OpacityLayerMapEvent;
+import org.geosdi.geoplatform.gui.impl.map.event.SingleTileLayerRequestMapEvent;
+import org.geosdi.geoplatform.gui.model.GPBooleanBeanModel;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
@@ -93,6 +97,9 @@ public class GPLayerDisplayBinding extends GeoPlatformBindingWidget<GPRasterBean
     private final OpacityLayerMapEvent opacityEvent = new OpacityLayerMapEvent();
     private final MaxScaleLayerMapEvent maxScaleEvent = new MaxScaleLayerMapEvent();
     private final MinScaleLayerMapEvent minScaleEvent = new MinScaleLayerMapEvent();
+    private ComboBox<GPBooleanBeanModel> singleTileComboBox;
+    private ListStore<GPBooleanBeanModel> singleTileComboBoxStore;
+    private GPRasterComboSingleTileRequestBinding singleTileRequestBinding;
 
     @Override
     public FormPanel createFormPanel() {
@@ -189,10 +196,42 @@ public class GPLayerDisplayBinding extends GeoPlatformBindingWidget<GPRasterBean
 
         opacityFieldSet.add(sliderField);
 
+        final FieldSet singleTileFieldSet = new FieldSet();
+        singleTileFieldSet.setHeadingHtml(LayerModuleConstants.INSTANCE.
+                GPLayerDisplayBinding_singleTileRequestHeadingText());
+
+        this.singleTileComboBox = new ComboBox<GPBooleanBeanModel>() {
+            @Override
+            protected void onSelect(GPBooleanBeanModel model, int index) {
+                super.onSelect(model, index);
+                singleTileRequestBinding.updateModel();
+            }
+        };
+        this.singleTileComboBoxStore = new ListStore<GPBooleanBeanModel>();
+        this.singleTileComboBoxStore.add(GPBooleanBeanModel.getBooleanInstances());
+        this.singleTileComboBox.setStore(this.singleTileComboBoxStore);
+        this.singleTileComboBox.setWidth(200);
+//        this.singleTileComboBox.setEmptyText();
+        this.singleTileComboBox.setTypeAhead(true);
+        this.singleTileComboBox.setTriggerAction(ComboBox.TriggerAction.ALL);
+        this.singleTileComboBox.setDisplayField(GPBooleanBeanModel.GPBooleanKeyValue.Boolean.getValue());
+        singleTileFieldSet.add(this.singleTileComboBox);
+
         fp.add(scaleFieldSet);
         fp.add(opacityFieldSet);
+        fp.add(singleTileFieldSet);
+
+        this.singleTileRequestBinding = new GPRasterComboSingleTileRequestBinding(
+                this.singleTileComboBox, GPBooleanBeanModel.GPBooleanKeyValue.Boolean.getValue());
 
         return fp;
+    }
+
+    @Override
+    public void bindModel(GPRasterBean model) {
+        super.bindModel(model);
+        RasterTreeNode raster = (RasterTreeNode) model;
+        this.singleTileComboBox.setValue(GPBooleanBeanModel.getBooleanInstance(raster.isSingleTileRequest()));
     }
 
     private void removeScaleLimits() {
@@ -228,6 +267,7 @@ public class GPLayerDisplayBinding extends GeoPlatformBindingWidget<GPRasterBean
         this.formBinding.addFieldBinding(this.opacityFieldBinding);
         this.formBinding.addFieldBinding(this.maxScaleFieldBinding);
         this.formBinding.addFieldBinding(this.minScaleFieldBinding);
+        this.formBinding.addFieldBinding(this.singleTileRequestBinding);
     }
 
     /**
@@ -385,6 +425,46 @@ public class GPLayerDisplayBinding extends GeoPlatformBindingWidget<GPRasterBean
         public void setRecordProperty(Record r, Object val) {
         }
 
+    }
+
+    private class GPRasterComboSingleTileRequestBinding extends GPFieldBinding {
+
+        //TODO: creare evento update richiesta single tile
+        private SingleTileLayerRequestMapEvent singleTileLayerRequestMapEvent
+                = new SingleTileLayerRequestMapEvent();
+
+        public GPRasterComboSingleTileRequestBinding(Field field, String property) {
+            super(field, property);
+        }
+
+        @Override //From model to view
+        public void updateField(boolean updateOriginalValue) {
+//            System.out.println("Updating view");
+            RasterTreeNode raster = ((RasterTreeNode) model);
+            singleTileComboBox.setValue(GPBooleanBeanModel.getBooleanInstance(raster.isSingleTileRequest()));
+        }
+
+        @Override //From view to model
+        public void setModelProperty(Object val) {
+//            System.out.println("Updating model");
+            if (val != null && val instanceof GPBooleanBeanModel) {
+                GPBooleanBeanModel booleanString = (GPBooleanBeanModel) val;
+                RasterTreeNode raster = (RasterTreeNode) model;
+                if (booleanString.getBooleanValue() != raster.isSingleTileRequest()) {
+                    IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
+                    AbstractMementoOriginalProperties memento = mementoSave.copyOriginalProperties(raster);
+                    raster.setSingleTileRequest(booleanString.getBooleanValue());
+                    mementoSave.putOriginalPropertiesInCache(memento);
+                    singleTileLayerRequestMapEvent.setSingleTileRequest(booleanString.getBooleanValue());
+                    singleTileLayerRequestMapEvent.setLayerBean(raster);
+                    GPHandlerManager.fireEvent(singleTileLayerRequestMapEvent);
+                }
+            }
+        }
+
+        @Override
+        public void setRecordProperty(Record r, Object val) {
+        }
     }
 
 }

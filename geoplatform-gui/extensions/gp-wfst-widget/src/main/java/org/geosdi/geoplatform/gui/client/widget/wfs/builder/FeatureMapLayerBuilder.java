@@ -87,6 +87,7 @@ public class FeatureMapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean>
         WMS layer = new WMS(rasterBean.getLabel(), rasterBean.getDataSource(),
                 wmsParams, wmsOption);
 
+        layer.setSingleTile(rasterBean.isSingleTileRequest());
         layer.setOpacity(rasterBean.getOpacity());
 
         return layer;

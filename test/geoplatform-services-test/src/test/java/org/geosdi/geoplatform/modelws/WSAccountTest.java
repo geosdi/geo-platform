@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.modelws;
 
-import java.util.Iterator;
 import java.util.List;
 import org.geosdi.geoplatform.core.model.GPAuthority;
 import org.geosdi.geoplatform.core.model.GPOrganization;
@@ -61,11 +60,10 @@ public class WSAccountTest extends ServiceTest {
 
     @Test
     public void testAllAccounts() {
-        List<ShortAccountDTO> accountList = gpWSClient.getAllAccounts();
+        List<ShortAccountDTO> accountList = gpWSClient.getAllAccounts().getAccounts();
         Assert.assertNotNull(accountList);
         logger.info("\n*** Number of Accounts into DB: {} ***", accountList.size());
-        for (Iterator<ShortAccountDTO> it = accountList.iterator(); it.hasNext();) {
-            ShortAccountDTO account = it.next();
+        for (ShortAccountDTO account : accountList) {
             if (account instanceof UserDTO) {
                 logger.info("\n*** User into DB:\n{}\n***", (UserDTO) account);
             } else if (account instanceof ApplicationDTO) {

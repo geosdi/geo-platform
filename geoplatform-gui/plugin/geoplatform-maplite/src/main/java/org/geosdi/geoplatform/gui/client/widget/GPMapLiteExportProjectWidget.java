@@ -34,9 +34,11 @@
 package org.geosdi.geoplatform.gui.client.widget;
 
 import com.extjs.gxt.ui.client.Registry;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Anchor;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import org.geosdi.geoplatform.gui.client.i18n.MapLiteModuleConstants;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
@@ -55,6 +57,7 @@ public class GPMapLiteExportProjectWidget extends GeoPlatformWindow {
     private final short ABOUT_WIDTH = 300;
     private final short ABOUT_HEIGHT = 150;
 
+    private HTMLPanel sharePanel;
     private Anchor mapLiteAnchor;
 
     public GPMapLiteExportProjectWidget() {
@@ -63,37 +66,59 @@ public class GPMapLiteExportProjectWidget extends GeoPlatformWindow {
 
     @Override
     public void addComponent() {
+        String shareJSScriptPath = GWT.getModuleBaseURL() + "share42/share42.js";
+//        ScriptInjector.fromUrl("share42/share42.js").setCallback(new Callback<Void, Exception>() {
+//
+//            @Override
+//            public void onFailure(Exception reason) {
+//                logger.warning("Error trying to inject script to share social url");
+//            }
+//
+//            @Override
+//            public void onSuccess(Void result) {
+//                logger.info("Succesfully injected script to share social url");
+//            }
+//        }).inject();
         mapLiteAnchor = new Anchor(MapLiteModuleConstants.INSTANCE.GPMapLiteExportProjectWidget_linkText());
         mapLiteAnchor.addClickHandler(new ClickHandler() {
 
             @Override
             public void onClick(ClickEvent event) {
-                IGPAccountDetail accountDetail = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
-                GPClientProject clientProject = (GPClientProject) Registry.get(UserSessionEnum.CURRENT_PROJECT_ON_TREE.name());
-                StringBuilder mapLiteURL = new StringBuilder();
-                mapLiteURL.append(MapLiteModuleConstants.INSTANCE.MAP_LITE_APPLICATION_URL());
-                mapLiteURL.append("?mapID=");
-                //2800-1600&x=34.39&y=31.42&zoom=11
-                mapLiteURL.append(clientProject.getId());
-                mapLiteURL.append("-");
-                mapLiteURL.append(accountDetail.getId());
-                mapLiteURL.append("&x=");
-                Map map = GPApplicationMap.getInstance().getApplicationMap().getMap();
-                LonLat lonLat = map.getCenter();
-                lonLat.transform(map.getProjection(), GPCoordinateReferenceSystem.WGS_84.getCode());
-                mapLiteURL.append(lonLat.lon());
-                mapLiteURL.append("&y=");
-                mapLiteURL.append(lonLat.lat());
-                mapLiteURL.append("&zoom=");
-                mapLiteURL.append(GPApplicationMap.getInstance().getApplicationMap().getMap().getZoom());
-                mapLiteURL.append("&baseMap=");
-                mapLiteURL.append(accountDetail.getBaseLayer());
-                mapLiteAnchor.setHref(mapLiteURL.toString());
+                mapLiteAnchor.setHref(generateMapLiteURL());
             }
 
         });
         mapLiteAnchor.setTarget("_blank");
-        super.add(mapLiteAnchor);
+//        super.add(mapLiteAnchor);
+        System.out.println("**** http://localhost/share42/share42.js Script path: " + shareJSScriptPath);
+        sharePanel = new HTMLPanel("<div class=\"share42init\" data-tile=\"Map Lite\" data-url=\"" + generateMapLiteURL() + "\">Hello</div>");
+        //                + "<script type=\"text/javascript\" src=\"" + shareJSScriptPath + "\"></script>");
+        super.add(sharePanel);
+        System.out.println("Added panel html");
+    }
+
+    private String generateMapLiteURL() {
+        IGPAccountDetail accountDetail = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
+        GPClientProject clientProject = (GPClientProject) Registry.get(UserSessionEnum.CURRENT_PROJECT_ON_TREE.name());
+        StringBuilder mapLiteURL = new StringBuilder();
+        mapLiteURL.append(MapLiteModuleConstants.INSTANCE.MAP_LITE_APPLICATION_URL());
+        mapLiteURL.append("?mapID=");
+        //2800-1600&x=34.39&y=31.42&zoom=11
+        mapLiteURL.append(clientProject.getId());
+        mapLiteURL.append("-");
+        mapLiteURL.append(accountDetail.getId());
+        mapLiteURL.append("&x=");
+        Map map = GPApplicationMap.getInstance().getApplicationMap().getMap();
+        LonLat lonLat = map.getCenter();
+        lonLat.transform(map.getProjection(), GPCoordinateReferenceSystem.WGS_84.getCode());
+        mapLiteURL.append(lonLat.lon());
+        mapLiteURL.append("&y=");
+        mapLiteURL.append(lonLat.lat());
+        mapLiteURL.append("&zoom=");
+        mapLiteURL.append(GPApplicationMap.getInstance().getApplicationMap().getMap().getZoom());
+//        mapLiteURL.append("&baseMap=");
+//        mapLiteURL.append(accountDetail.getBaseLayer());
+        return mapLiteURL.toString();
     }
 
     @Override
@@ -106,6 +131,19 @@ public class GPMapLiteExportProjectWidget extends GeoPlatformWindow {
         super.setHeadingText("Map Lite Link");
         super.setBodyStyle("background-color:white");
         super.setResizable(Boolean.FALSE);
+    }
+
+    @Override
+    public void show() {
+        super.show();
+//        if (sharePanel != null) {
+//            super.remove(sharePanel);
+//        }
+//        String shareJSScriptPath = GWT.getModuleBaseURL() + "share42/share42.js";
+//        System.out.println("**** http://localhost/share42/share42.js Script path: " + shareJSScriptPath);
+//        sharePanel = new HTMLPanel("<div class=\"share42init\" data-tile=\"Map Lite\" data-url=\"" + generateMapLiteURL() + "\">Hello</div>\n"
+//                + "<script type=\"text/javascript\" src=\"" + shareJSScriptPath + "\"></script>");
+//        super.add(sharePanel);
     }
 
 }

@@ -16,6 +16,10 @@
     <name>Geo-Platform :: == Binding ISO19139 XML Module</name>
 
     <dependencies>
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-core</artifactId>
+        </dependency>
         
         <dependency>
             <groupId>com.sun.xml.bind</groupId>

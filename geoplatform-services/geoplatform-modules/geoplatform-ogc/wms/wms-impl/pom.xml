@@ -196,7 +196,7 @@
         </dependency>
     </dependencies>    
 	
-    <build>
+     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -204,7 +204,6 @@
                 <version>2.4</version>
                 <configuration>
                     <archive>
-                        <index>true</index>
                         <manifest>
                             <addClasspath>true</addClasspath>
                         </manifest>

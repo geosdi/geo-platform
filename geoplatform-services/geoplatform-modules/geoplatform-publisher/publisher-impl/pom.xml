@@ -51,7 +51,7 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
         </dependency>
-            <!-- LOGGER -->
+        <!-- LOGGER -->
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
@@ -123,7 +123,6 @@
                 <version>2.4</version>
                 <configuration>
                     <archive>
-                        <index>true</index>
                         <manifest>
                             <addClasspath>true</addClasspath>
                         </manifest>
@@ -139,4 +138,3 @@
     </build>
     
 </project>
->>>>>>> edd4891... FIXED ALL TESTS for GeoPlatform Publisher Modules

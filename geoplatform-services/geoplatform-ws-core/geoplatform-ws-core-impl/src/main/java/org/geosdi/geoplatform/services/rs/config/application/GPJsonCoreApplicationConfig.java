@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.services.rs.config.application;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
+import org.geosdi.geoplatform.configurator.bootstrap.cxf.Rest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -45,6 +46,7 @@ import org.springframework.context.annotation.Configuration;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@Rest
 @Configuration
 class GPJsonCoreApplicationConfig {
 

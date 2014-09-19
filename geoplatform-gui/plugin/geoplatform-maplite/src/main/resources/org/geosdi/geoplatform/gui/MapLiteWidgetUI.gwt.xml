@@ -3,8 +3,6 @@
 <module>
     <source path="client" />
     
-    <entry-point class="org.geosdi.geoplatform.gui.client.MapLiteWidgetUI" />
-    
-    <script src="share42/share42.js"></script>
+    <entry-point class="org.geosdi.geoplatform.gui.client.MapLiteWidgetUI" />   
     
 </module>

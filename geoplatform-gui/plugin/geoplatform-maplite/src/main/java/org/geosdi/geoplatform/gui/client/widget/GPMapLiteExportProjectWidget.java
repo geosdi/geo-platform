@@ -39,6 +39,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.HTMLPanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import org.geosdi.geoplatform.gui.client.i18n.MapLiteModuleConstants;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
@@ -55,10 +56,12 @@ import org.gwtopenmaps.openlayers.client.Map;
 public class GPMapLiteExportProjectWidget extends GeoPlatformWindow {
 
     private final short ABOUT_WIDTH = 300;
-    private final short ABOUT_HEIGHT = 150;
+    private final short ABOUT_HEIGHT = 180;
 
+    private final String shareJSScriptPath = GWT.getModuleBaseURL() + "share42/share42.js";
     private HTMLPanel sharePanel;
     private Anchor mapLiteAnchor;
+    private VerticalPanel vp;
 
     public GPMapLiteExportProjectWidget() {
         super(true);
@@ -66,19 +69,6 @@ public class GPMapLiteExportProjectWidget extends GeoPlatformWindow {
 
     @Override
     public void addComponent() {
-        String shareJSScriptPath = GWT.getModuleBaseURL() + "share42/share42.js";
-//        ScriptInjector.fromUrl("share42/share42.js").setCallback(new Callback<Void, Exception>() {
-//
-//            @Override
-//            public void onFailure(Exception reason) {
-//                logger.warning("Error trying to inject script to share social url");
-//            }
-//
-//            @Override
-//            public void onSuccess(Void result) {
-//                logger.info("Succesfully injected script to share social url");
-//            }
-//        }).inject();
         mapLiteAnchor = new Anchor(MapLiteModuleConstants.INSTANCE.GPMapLiteExportProjectWidget_linkText());
         mapLiteAnchor.addClickHandler(new ClickHandler() {
 
@@ -89,11 +79,13 @@ public class GPMapLiteExportProjectWidget extends GeoPlatformWindow {
 
         });
         mapLiteAnchor.setTarget("_blank");
-//        super.add(mapLiteAnchor);
-        System.out.println("**** http://localhost/share42/share42.js Script path: " + shareJSScriptPath);
-        sharePanel = new HTMLPanel("<div class=\"share42init\" data-tile=\"Map Lite\" data-url=\"" + generateMapLiteURL() + "\">Hello</div>");
-        //                + "<script type=\"text/javascript\" src=\"" + shareJSScriptPath + "\"></script>");
-        super.add(sharePanel);
+        vp = new VerticalPanel();
+        vp.setSpacing(5);
+        vp.add(mapLiteAnchor);
+        sharePanel = new HTMLPanel("<div class=\"share42init\" data-tile=\"Map Lite\" data-url=\"" + generateMapLiteURL() + "\">Hello</div>"
+                + "<script type=\"text/javascript\" src=\"" + shareJSScriptPath + "\"></script>");
+        vp.add(sharePanel);
+        super.add(vp);
         System.out.println("Added panel html");
     }
 
@@ -115,7 +107,7 @@ public class GPMapLiteExportProjectWidget extends GeoPlatformWindow {
         mapLiteURL.append("&y=");
         mapLiteURL.append(lonLat.lat());
         mapLiteURL.append("&zoom=");
-        mapLiteURL.append(GPApplicationMap.getInstance().getApplicationMap().getMap().getZoom());
+        mapLiteURL.append(map.getZoom());
 //        mapLiteURL.append("&baseMap=");
 //        mapLiteURL.append(accountDetail.getBaseLayer());
         return mapLiteURL.toString();
@@ -136,14 +128,15 @@ public class GPMapLiteExportProjectWidget extends GeoPlatformWindow {
     @Override
     public void show() {
         super.show();
-//        if (sharePanel != null) {
-//            super.remove(sharePanel);
-//        }
-//        String shareJSScriptPath = GWT.getModuleBaseURL() + "share42/share42.js";
-//        System.out.println("**** http://localhost/share42/share42.js Script path: " + shareJSScriptPath);
-//        sharePanel = new HTMLPanel("<div class=\"share42init\" data-tile=\"Map Lite\" data-url=\"" + generateMapLiteURL() + "\">Hello</div>\n"
-//                + "<script type=\"text/javascript\" src=\"" + shareJSScriptPath + "\"></script>");
-//        super.add(sharePanel);
+        vp.remove(sharePanel);
+        sharePanel = new HTMLPanel("<div class=\"share42init\" data-tile=\"Map Lite\" data-url=\"" + generateMapLiteURL() + "\">Hello</div>"
+                + "<script type=\"text/javascript\" src=\"" + shareJSScriptPath + "\"></script>");
+        vp.add(sharePanel);
+        updateSocialLinks();
     }
+
+    private static native void updateSocialLinks() /*-{
+     $wnd.share42();
+     }-*/;
 
 }

@@ -82,11 +82,10 @@ public class GPMapLiteExportProjectWidget extends GeoPlatformWindow {
         vp = new VerticalPanel();
         vp.setSpacing(5);
         vp.add(mapLiteAnchor);
-        sharePanel = new HTMLPanel("<div class=\"share42init\" data-tile=\"Map Lite\" data-url=\"" + generateMapLiteURL() + "\">Hello</div>"
+        sharePanel = new HTMLPanel("<div class=\"share42init\" data-tile=\"Map Lite\" data-url=\"" + generateMapLiteURL() + "\"></div>"
                 + "<script type=\"text/javascript\" src=\"" + shareJSScriptPath + "\"></script>");
         vp.add(sharePanel);
         super.add(vp);
-        System.out.println("Added panel html");
     }
 
     private String generateMapLiteURL() {
@@ -95,7 +94,6 @@ public class GPMapLiteExportProjectWidget extends GeoPlatformWindow {
         StringBuilder mapLiteURL = new StringBuilder();
         mapLiteURL.append(MapLiteModuleConstants.INSTANCE.MAP_LITE_APPLICATION_URL());
         mapLiteURL.append("?mapID=");
-        //2800-1600&x=34.39&y=31.42&zoom=11
         mapLiteURL.append(clientProject.getId());
         mapLiteURL.append("-");
         mapLiteURL.append(accountDetail.getId());
@@ -129,7 +127,7 @@ public class GPMapLiteExportProjectWidget extends GeoPlatformWindow {
     public void show() {
         super.show();
         vp.remove(sharePanel);
-        sharePanel = new HTMLPanel("<div class=\"share42init\" data-tile=\"Map Lite\" data-url=\"" + generateMapLiteURL() + "\">Hello</div>"
+        sharePanel = new HTMLPanel("<div class=\"share42init\" data-tile=\"Map Lite\" data-url=\"" + generateMapLiteURL() + "\"></div>"
                 + "<script type=\"text/javascript\" src=\"" + shareJSScriptPath + "\"></script>");
         vp.add(sharePanel);
         updateSocialLinks();

@@ -84,7 +84,7 @@ public class CatalogContextTest {
     private final static String CSW_HOST = "catalog.geosdi.org";
     private final static String CSW_PATH = "/geonetwork/srv/en/csw";
     //
-    private GPBaseJAXBContext cswContext = JAXBContextConnectorRepository.getProvider(
+    private final GPBaseJAXBContext cswContext = JAXBContextConnectorRepository.getProvider(
             CSWConnectorJAXBContext.CSW_CONTEXT_KEY);
     private HttpEntity entity;
 

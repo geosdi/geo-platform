@@ -16,6 +16,11 @@
     <name>Geo-Platform :: == Binding W3C XSD XML Module</name>
 
     <dependencies>
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-core</artifactId>
+        </dependency>
+        
         <dependency>            
             <groupId>com.sun.xml.bind</groupId>            
             <artifactId>jaxb-impl</artifactId>        

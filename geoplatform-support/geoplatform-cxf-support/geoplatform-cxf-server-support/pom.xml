@@ -30,7 +30,7 @@
         <!-- CXF -->
         <dependency>
             <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-api</artifactId>
+            <artifactId>cxf-core</artifactId>
         </dependency>
 
         <dependency>
@@ -39,8 +39,8 @@
         </dependency>
 
         <dependency>
-            <groupId>org.apache.ws.security</groupId>
-            <artifactId>wss4j</artifactId>
+            <groupId>org.apache.wss4j</groupId>
+            <artifactId>wss4j-ws-security-common</artifactId>
         </dependency>
     </dependencies>
 </project>

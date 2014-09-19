@@ -41,7 +41,7 @@ import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.apache.cxf.message.Message;
 import org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor;
 import org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor;
-import org.apache.ws.security.handler.WSHandlerConstants;
+import org.apache.wss4j.dom.handler.WSHandlerConstants;
 import org.geosdi.geoplatform.support.cxf.api.InterceptorStrategyBean;
 import org.geosdi.geoplatform.support.cxf.api.LoggingWebServiceType;
 import org.geosdi.geoplatform.support.cxf.api.SecurityWebServiceType;

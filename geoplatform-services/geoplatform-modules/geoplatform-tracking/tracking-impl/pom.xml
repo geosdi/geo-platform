@@ -192,8 +192,8 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
         </dependency>
-    </dependencies>    
-	
+    </dependencies>   
+    
     <build>
         <plugins>
             <plugin>
@@ -202,7 +202,6 @@
                 <version>2.4</version>
                 <configuration>
                     <archive>
-                        <index>true</index>
                         <manifest>
                             <addClasspath>true</addClasspath>
                         </manifest>
@@ -215,6 +214,6 @@
                 </configuration>
             </plugin>
         </plugins>
-    </build>
+    </build> 
 	
 </project>

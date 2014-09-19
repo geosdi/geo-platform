@@ -36,6 +36,11 @@
             <groupId>org.geosdi</groupId>
             <artifactId>ows-1.0.0</artifactId>
         </dependency>
+        
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-core</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>com.sun.xml.bind</groupId>

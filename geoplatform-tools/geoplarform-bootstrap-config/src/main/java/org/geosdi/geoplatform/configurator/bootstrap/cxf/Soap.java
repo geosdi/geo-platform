@@ -33,31 +33,21 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.services.rs.config.provider;
+package org.geosdi.geoplatform.configurator.bootstrap.cxf;
 
-import org.apache.cxf.jaxrs.provider.json.JSONProvider;
-import org.geosdi.geoplatform.configurator.bootstrap.cxf.Rest;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+import org.springframework.context.annotation.Profile;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Rest
-@Configuration
-class GPJsonCoreProviderConfig {
-
-    @Bean
-    public JSONProvider gpJsonCoreProvider() {
-        return new JSONProvider() {
-
-            {
-                super.setSerializeAsArray(Boolean.TRUE);
-            }
-
-        };
-
-    }
+@Retention(value = RetentionPolicy.RUNTIME)
+@Target(value = {ElementType.TYPE, ElementType.METHOD})
+@Profile("soap")
+public @interface Soap {
 }

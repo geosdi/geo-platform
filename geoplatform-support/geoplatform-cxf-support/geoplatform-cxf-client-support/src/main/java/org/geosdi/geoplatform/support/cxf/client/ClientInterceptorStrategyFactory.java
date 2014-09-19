@@ -37,8 +37,8 @@ import java.util.HashMap;
 import java.util.Map;
 import org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor;
 import org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor;
-import org.apache.ws.security.WSConstants;
-import org.apache.ws.security.handler.WSHandlerConstants;
+import org.apache.wss4j.dom.WSConstants;
+import org.apache.wss4j.dom.handler.WSHandlerConstants;
 import org.geosdi.geoplatform.support.cxf.api.interceptor.factory.strategy.AbstractInterceptorStrategyFactory;
 
 /**

@@ -34,6 +34,8 @@
 package org.geosdi.geoplatform.gui.client.widget.map.store;
 
 import com.extjs.gxt.ui.client.Registry;
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Timer;
 import java.util.Map.Entry;
@@ -138,14 +140,13 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
                     layer.getZIndex().toString())
                     != vectorBean.getzIndex()) {
                 layer.setZIndex(vectorBean.getzIndex());
-                Timer timer = new Timer() {
+                Scheduler.get().scheduleDeferred(new Command() {
                     @Override
-                    public void run() {
+                    public void execute() {
                         layer.setIsVisible(true);
                         layer.redraw(true);
                     }
-                };
-                timer.schedule(500);
+                });
             }
         } else {
             WMS layer = (WMS) this.layerBuilder.buildLayer(vectorBean);
@@ -168,14 +169,13 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
                     layer.getZIndex().toString())
                     != rasterBean.getzIndex()) {
                 layer.setZIndex(rasterBean.getzIndex());
-                Timer timer = new Timer() {
+                Scheduler.get().scheduleDeferred(new Command() {
                     @Override
-                    public void run() {
+                    public void execute() {
                         layer.setIsVisible(true);
                         layer.redraw(true);
                     }
-                };
-                timer.schedule(500);
+                });
                 History.newItem("#" + accountDetail.getUsername() + "-"
                         + rasterBean.getName() + "-VISIBLE");
             }
@@ -198,13 +198,12 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
                 UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
         final Layer layer = getLayer(layerBean);
         if (layer != null) {
-            Timer timer = new Timer() {
+            Scheduler.get().scheduleDeferred(new Command() {
                 @Override
-                public void run() {
+                public void execute() {
                     layer.setIsVisible(false);
                 }
-            };
-            timer.schedule(500);
+            });
             History.newItem("#" + accountDetail.getUsername() + "-"
                     + layerBean.getName() + "-NOT-VISIBLE");
             featureInfoRemoveLayer.setLayer(layer);

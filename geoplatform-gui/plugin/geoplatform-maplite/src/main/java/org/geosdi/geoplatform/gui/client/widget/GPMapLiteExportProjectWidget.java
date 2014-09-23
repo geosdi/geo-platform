@@ -34,9 +34,12 @@
 package org.geosdi.geoplatform.gui.client.widget;
 
 import com.extjs.gxt.ui.client.Registry;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Anchor;
+import com.google.gwt.user.client.ui.HTMLPanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import org.geosdi.geoplatform.gui.client.i18n.MapLiteModuleConstants;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
@@ -53,9 +56,12 @@ import org.gwtopenmaps.openlayers.client.Map;
 public class GPMapLiteExportProjectWidget extends GeoPlatformWindow {
 
     private final short ABOUT_WIDTH = 300;
-    private final short ABOUT_HEIGHT = 150;
+    private final short ABOUT_HEIGHT = 180;
 
+    private final String shareJSScriptPath = GWT.getModuleBaseURL() + "share42/share42.js";
+    private HTMLPanel sharePanel;
     private Anchor mapLiteAnchor;
+    private VerticalPanel vp;
 
     public GPMapLiteExportProjectWidget() {
         super(true);
@@ -68,32 +74,41 @@ public class GPMapLiteExportProjectWidget extends GeoPlatformWindow {
 
             @Override
             public void onClick(ClickEvent event) {
-                IGPAccountDetail accountDetail = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
-                GPClientProject clientProject = (GPClientProject) Registry.get(UserSessionEnum.CURRENT_PROJECT_ON_TREE.name());
-                StringBuilder mapLiteURL = new StringBuilder();
-                mapLiteURL.append(MapLiteModuleConstants.INSTANCE.MAP_LITE_APPLICATION_URL());
-                mapLiteURL.append("?mapID=");
-                //2800-1600&x=34.39&y=31.42&zoom=11
-                mapLiteURL.append(clientProject.getId());
-                mapLiteURL.append("-");
-                mapLiteURL.append(accountDetail.getId());
-                mapLiteURL.append("&x=");
-                Map map = GPApplicationMap.getInstance().getApplicationMap().getMap();
-                LonLat lonLat = map.getCenter();
-                lonLat.transform(map.getProjection(), GPCoordinateReferenceSystem.WGS_84.getCode());
-                mapLiteURL.append(lonLat.lon());
-                mapLiteURL.append("&y=");
-                mapLiteURL.append(lonLat.lat());
-                mapLiteURL.append("&zoom=");
-                mapLiteURL.append(GPApplicationMap.getInstance().getApplicationMap().getMap().getZoom());
-                mapLiteURL.append("&baseMap=");
-                mapLiteURL.append(accountDetail.getBaseLayer());
-                mapLiteAnchor.setHref(mapLiteURL.toString());
+                mapLiteAnchor.setHref(generateMapLiteURL());
             }
 
         });
         mapLiteAnchor.setTarget("_blank");
-        super.add(mapLiteAnchor);
+        vp = new VerticalPanel();
+        vp.setSpacing(5);
+        vp.add(mapLiteAnchor);
+        sharePanel = new HTMLPanel("<div class=\"share42init\" data-tile=\"Map Lite\" data-url=\"" + generateMapLiteURL() + "\"></div>"
+                + "<script type=\"text/javascript\" src=\"" + shareJSScriptPath + "\"></script>");
+        vp.add(sharePanel);
+        super.add(vp);
+    }
+
+    private String generateMapLiteURL() {
+        IGPAccountDetail accountDetail = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
+        GPClientProject clientProject = (GPClientProject) Registry.get(UserSessionEnum.CURRENT_PROJECT_ON_TREE.name());
+        StringBuilder mapLiteURL = new StringBuilder();
+        mapLiteURL.append(MapLiteModuleConstants.INSTANCE.MAP_LITE_APPLICATION_URL());
+        mapLiteURL.append("?mapID=");
+        mapLiteURL.append(clientProject.getId());
+        mapLiteURL.append("-");
+        mapLiteURL.append(accountDetail.getId());
+        mapLiteURL.append("&x=");
+        Map map = GPApplicationMap.getInstance().getApplicationMap().getMap();
+        LonLat lonLat = map.getCenter();
+        lonLat.transform(map.getProjection(), GPCoordinateReferenceSystem.WGS_84.getCode());
+        mapLiteURL.append(lonLat.lon());
+        mapLiteURL.append("&y=");
+        mapLiteURL.append(lonLat.lat());
+        mapLiteURL.append("&zoom=");
+        mapLiteURL.append(map.getZoom());
+//        mapLiteURL.append("&baseMap=");
+//        mapLiteURL.append(accountDetail.getBaseLayer());
+        return mapLiteURL.toString();
     }
 
     @Override
@@ -107,5 +122,19 @@ public class GPMapLiteExportProjectWidget extends GeoPlatformWindow {
         super.setBodyStyle("background-color:white");
         super.setResizable(Boolean.FALSE);
     }
+
+    @Override
+    public void show() {
+        super.show();
+        vp.remove(sharePanel);
+        sharePanel = new HTMLPanel("<div class=\"share42init\" data-tile=\"Map Lite\" data-url=\"" + generateMapLiteURL() + "\"></div>"
+                + "<script type=\"text/javascript\" src=\"" + shareJSScriptPath + "\"></script>");
+        vp.add(sharePanel);
+        updateSocialLinks();
+    }
+
+    private static native void updateSocialLinks() /*-{
+     $wnd.share42();
+     }-*/;
 
 }

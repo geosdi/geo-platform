@@ -70,7 +70,7 @@ public class FeatureInfoControlFactory {
         if (authKeyValue != null && !authKeyValue.equals("")) {
             param.setParameter(GlobalRegistryEnum.AUTH_KEY.getValue(), authKeyValue);
         }
-        WMS wms = WMS.narrowToWMS(layer.getJSObject());
+        WMS wms = WMS.narrowToLayer(layer.getJSObject());
         WMSParams params = wms.getParams();
         List<String> propertyNameList = Lists.<String>newArrayList(params.getJSObject().getPropertyNames().split(","));
         List<String> propertyValueList = Lists.<String>newArrayList(params.getJSObject().getPropertyValues().split(","));

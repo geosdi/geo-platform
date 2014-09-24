@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+            http://www.springframework.org/schema/beans/spring-beans-3.2.xsd"
+       default-autowire="byName">
+    
+    <bean id="gpDigesterSHA1" class="org.geosdi.geoplatform.jasypt.support.GPPooledDigester">
+        <property name="config" ref="digesterConfig" />
+    </bean>
+    
+    <bean id="digesterConfig" class="org.jasypt.digest.config.SimpleStringDigesterConfig">
+        <property name="algorithm" value="SHA-1" />
+        <property name="poolSize" value="2" /> <!--  This would be a good value for a 2-core system -->
+        <property name="saltSizeBytes" value="0" />
+        <property name="iterations" value="1" />
+        <property name="stringOutputType" value="hexadecimal" />
+    </bean>
+
+</beans>

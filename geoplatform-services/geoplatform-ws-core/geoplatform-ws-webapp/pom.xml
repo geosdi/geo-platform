@@ -313,7 +313,7 @@
         
         <dependency>
             <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-cxf-server-support</artifactId>
+            <artifactId>geoplatform-cxf-server-configurator</artifactId>
             <version>${project.version}</version>
         </dependency>
 

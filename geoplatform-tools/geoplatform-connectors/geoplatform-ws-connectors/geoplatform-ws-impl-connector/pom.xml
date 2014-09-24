@@ -21,15 +21,10 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-cxf-api-support</artifactId>
-            <version>${project.version}</version>
-        </dependency>
         
         <dependency>
             <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-cxf-client-support</artifactId>
+            <artifactId>geoplatform-cxf-client-configurator</artifactId>
             <version>${project.version}</version>
         </dependency>
         

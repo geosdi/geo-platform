@@ -18,7 +18,7 @@
     <dependencies>
         <dependency>
             <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-configurator</artifactId>
+            <artifactId>geoplatform-base-configurator</artifactId>
             <scope>test</scope>
         </dependency>
         

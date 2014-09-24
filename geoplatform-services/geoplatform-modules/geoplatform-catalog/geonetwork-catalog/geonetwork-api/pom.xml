@@ -23,11 +23,6 @@
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-model</artifactId>
         </dependency>
-       
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-configurator</artifactId>
-        </dependency>
         
         <!-- GEONETWORK -->
         <dependency>

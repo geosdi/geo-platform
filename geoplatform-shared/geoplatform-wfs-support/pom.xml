@@ -39,7 +39,7 @@
 
         <dependency>
             <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-configurator</artifactId>
+            <artifactId>geoplatform-base-configurator</artifactId>
         </dependency>
         
         <!-- =========================================================== -->

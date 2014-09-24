@@ -38,7 +38,6 @@
             <artifactId>commons-collections</artifactId>
         </dependency>
 
-        <!-- GEOPLATFORM WS -->
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-model</artifactId>
@@ -52,7 +51,7 @@
         
         <dependency>
             <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-configurator</artifactId>
+            <artifactId>geoplatform-base-configurator</artifactId>
         </dependency>
         
         <dependency>
@@ -176,10 +175,10 @@
             <artifactId>h2</artifactId>
         </dependency>
         
-        <dependency>
+        <!--dependency>
             <groupId>org.hibernatespatial</groupId>
             <artifactId>hibernate-spatial-h2-geodb</artifactId>
-        </dependency>
+        </dependency -->
 
         <!-- POSTGRES - POSTGIS -->
         <dependency>

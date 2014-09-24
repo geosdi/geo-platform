@@ -38,11 +38,6 @@
             <artifactId>geoplatform-wfs-support</artifactId>
             <version>${project.version}</version>
         </dependency>
-
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-configurator</artifactId>
-        </dependency>
         
         <!-- =========================================================== -->
         <!-- ======================== GUAVA =========================== -->

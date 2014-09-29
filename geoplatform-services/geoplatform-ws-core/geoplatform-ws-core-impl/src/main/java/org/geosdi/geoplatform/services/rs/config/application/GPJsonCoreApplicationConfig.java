@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.services.rs.config.application;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 import org.geosdi.geoplatform.configurator.bootstrap.cxf.Rest;
+import org.geosdi.geoplatform.services.rs.path.GPServiceRSPathConfig;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -55,7 +56,7 @@ class GPJsonCoreApplicationConfig {
         return new GPJsonCoreApplication();
     }
 
-    @ApplicationPath(value = "/jsonCore")
+    @ApplicationPath(value = GPServiceRSPathConfig.GP_CORE_SERVICE_RS_PATH)
     final class GPJsonCoreApplication extends Application {
     }
 

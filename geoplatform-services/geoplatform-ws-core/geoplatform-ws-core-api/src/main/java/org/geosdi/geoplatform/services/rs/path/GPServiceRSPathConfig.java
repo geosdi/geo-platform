@@ -40,9 +40,11 @@ package org.geosdi.geoplatform.services.rs.path;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPServiceRSPathConfig {
+public final class GPServiceRSPathConfig {
 
-    public static final String DEFAULT_GPSERVICE_PATH = "/";
+    public static final String DEFAULT_RS_SERVICE_PATH = "/";
+
+    public static final String GP_CORE_SERVICE_RS_PATH = "/jsonCore";
     /**
      * ACCOUNTS PATH *
      */
@@ -57,5 +59,15 @@ public class GPServiceRSPathConfig {
     private static final String ACCOUNT_PROJECTS = "/accountprojects/";
     public static final String GET_ACCOUNT_PROJECTS_BY_ACCOUNT_ID = ACCOUNT_PROJECTS
             + "{accountID}";
+
+    /**
+     * WMS CAPABILITIES PATH
+     */
+    public static final String WMS_SERVICE_RS_PATH = "/jsonWMS";
+    public static final String GET_WMS_SERVER_BY_URL = "/server";
+    public static final String GET_WMS_CAPABILITIES = "/capabilities";
+
+    private GPServiceRSPathConfig() {
+    }
 
 }

@@ -269,7 +269,7 @@
             <groupId>org.apache.ws.xmlschema</groupId>
             <artifactId>xmlschema-core</artifactId>
         </dependency>
-        
+         
         <dependency>
             <groupId>org.opensaml</groupId>
             <artifactId>opensaml</artifactId>
@@ -287,6 +287,11 @@
         <dependency>
             <groupId>wsdl4j</groupId>
             <artifactId>wsdl4j</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-rs-service-description</artifactId>
         </dependency>
         
         <dependency>

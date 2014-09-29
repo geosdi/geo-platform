@@ -99,7 +99,7 @@ import org.geosdi.geoplatform.services.rs.path.GPServiceRSPathConfig;
  * @author Francesco Izzi - CNR IMAA - geoSDI
  * @author Nazzareno Sileno - CNR IMAA - geoSDI
  */
-@Path(value = GPServiceRSPathConfig.DEFAULT_GPSERVICE_PATH)
+@Path(value = GPServiceRSPathConfig.DEFAULT_RS_SERVICE_PATH)
 @Consumes(value = {MediaType.APPLICATION_JSON})
 @Produces(value = {MediaType.APPLICATION_JSON})
 @WebService(name = "GeoPlatformService",

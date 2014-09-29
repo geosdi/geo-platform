@@ -104,6 +104,12 @@
             <groupId>com.sun.mail</groupId>
             <artifactId>javax.mail</artifactId>
         </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-cxf-server-configurator</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
     </dependencies>
     

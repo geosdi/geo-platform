@@ -40,7 +40,7 @@
         </dependency>
         
         <!-- =========================================================== -->
-        <!-- ======================== GUAVA =========================== -->
+        <!-- ======================== GUAVA ============================ -->
         <!-- =========================================================== -->
             
         <dependency>
@@ -107,6 +107,12 @@
         <dependency>
             <groupId>com.vividsolutions</groupId>
             <artifactId>jts</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-cxf-server-configurator</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <!-- SCOPE TEST -->

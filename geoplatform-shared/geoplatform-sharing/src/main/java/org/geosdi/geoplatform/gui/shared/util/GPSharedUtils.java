@@ -46,6 +46,10 @@ import java.util.Map;
  */
 public class GPSharedUtils {
 
+    //This code cannot be used on GWT source files
+//    public static <T> T[] safeArray(T[] array, Class<T[]> type) {
+//        return array == null ? type.cast(Array.newInstance(type.getComponentType(), 0)) : array;
+//    }
     public static <T> List<T> safeList(List<T> list) {
         return list == null ? Collections.EMPTY_LIST : list;
     }

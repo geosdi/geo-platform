@@ -1361,7 +1361,7 @@
         <httpcomponents-core-version>4.3.2</httpcomponents-core-version>
         <httpcomponents-client-version>4.3.5</httpcomponents-client-version>
 
-        <jibx-version>1.2.4.5</jibx-version>
+        <jibx-version>1.2.5</jibx-version>
 
         <aspectj-version>1.8.0</aspectj-version>
         <ubl-version>2.0</ubl-version>

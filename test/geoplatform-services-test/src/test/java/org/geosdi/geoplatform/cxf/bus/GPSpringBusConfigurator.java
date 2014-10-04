@@ -40,6 +40,7 @@ import org.apache.cxf.Bus;
 import org.apache.cxf.bus.spring.SpringBusFactory;
 import org.apache.cxf.interceptor.LoggingInInterceptor;
 import org.apache.cxf.interceptor.LoggingOutInterceptor;
+import org.geosdi.geoplatform.configurator.bootstrap.Develop;
 import org.geosdi.geoplatform.support.cxf.server.ServerInterceptorStrategyFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -50,6 +51,7 @@ import org.springframework.stereotype.Component;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Component(value = "gpSpringBusConf")
+@Develop
 public class GPSpringBusConfigurator implements Disposable {
 
     @Autowired
@@ -63,10 +65,10 @@ public class GPSpringBusConfigurator implements Disposable {
         bus.getInInterceptors().add(new LoggingInInterceptor());
         bus.getOutInterceptors().add(new LoggingOutInterceptor());
 
-        bus.getInInterceptors().add(
-                factory.getSecurityInInterceptor());
-        bus.getOutInterceptors().add(
-                factory.getSecurityOutInterceptor());
+//        bus.getInInterceptors().add(
+//                factory.getSecurityInInterceptor());
+//        bus.getOutInterceptors().add(
+//                factory.getSecurityOutInterceptor());
 
         SpringBusFactory.setDefaultBus(bus);
     }

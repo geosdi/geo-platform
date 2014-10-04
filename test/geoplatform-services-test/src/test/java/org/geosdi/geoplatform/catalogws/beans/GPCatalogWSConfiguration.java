@@ -49,19 +49,15 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @Develop
-public class GPCatalogWSConfiguration {
+class GPCatalogWSConfiguration {
 
     @Bean
     public GPGeonetworkClientTestConnector gpCatalogWSClient() {
-        GPGeonetworkClientTestConnector catalogWS = new GPGeonetworkClientTestConnector();
-
-        return catalogWS;
+        return new GPGeonetworkClientTestConnector();
     }
 
     @Bean
     public GPCatalogFinderService gpCatalogFinderService() {
-        GPCatalogFinderService gpCatalogFinderService = new GPCatalogFinderServiceImpl();
-
-        return gpCatalogFinderService;
+        return new GPCatalogFinderServiceImpl();
     }
 }

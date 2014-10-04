@@ -46,7 +46,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @Develop
-public class GPCatalogWSEndPointConfiguration {
+class GPCatalogWSEndPointConfiguration {
 
     @Bean
     public GPCatalogEndPointImpl gpCatalogEndPointImpl() {

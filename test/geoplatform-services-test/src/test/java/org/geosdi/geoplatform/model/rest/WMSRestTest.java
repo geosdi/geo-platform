@@ -33,21 +33,51 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.configurator.bootstrap.cxf;
+package org.geosdi.geoplatform.model.rest;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-import org.springframework.context.annotation.Profile;
+import java.text.ParseException;
+import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.model.soap.ServiceWMSTest;
+import static org.geosdi.geoplatform.model.soap.ServiceWMSTest.serverUrlGeoSDI;
+import org.geosdi.geoplatform.request.RequestByID;
+import org.geosdi.geoplatform.responce.ServerDTO;
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Retention(value = RetentionPolicy.RUNTIME)
-@Target(value = {ElementType.TYPE, ElementType.METHOD})
-@Profile(value = {"soap"})
-public @interface Soap {
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:applicationContext-Test.xml",
+    "classpath*:applicationContext.xml"})
+@TestExecutionListeners(value = {RSListenerWMSService.class})
+@ActiveProfiles(profiles = {"dev"})
+public class WMSRestTest extends ServiceWMSTest {
+
+    @Test
+    public void testRSWMSClient() {
+        Assert.assertNotNull(gpWMSClient);
+    }
+
+    @Test
+    public void testRestGetCapabilities() throws ParseException, ResourceNotFoundFault {
+        ServerDTO serverDTO = gpWMSClient.getShortServer(serverUrlGeoSDI);
+        Assert.assertNotNull(serverDTO);
+
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@ SERVER_DTO @@@@@@@@@@@@@@@@@@\n{}",
+                serverDTO);
+
+        serverDTO = gpWMSClient.getCapabilities(serverDTO.getServerUrl(),
+                new RequestByID(serverDTO.getId()), null, null);
+        logger.debug("\n*** NUMBER OF LAYERS FOR geoSDI Server {} ***",
+                serverDTO.getLayerList().size());
+    }
+
 }

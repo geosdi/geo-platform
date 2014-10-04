@@ -33,21 +33,28 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.configurator.bootstrap.cxf;
+package org.geosdi.geoplatform.connectors.ws.wms.soap;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-import org.springframework.context.annotation.Profile;
+import org.geosdi.geoplatform.connectors.ws.soap.SoapClientConnector;
+import org.geosdi.geoplatform.services.GPWMSService;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Retention(value = RetentionPolicy.RUNTIME)
-@Target(value = {ElementType.TYPE, ElementType.METHOD})
-@Profile(value = {"soap"})
-public @interface Soap {
+abstract class AbstractWMSClientConnector
+        extends SoapClientConnector<GPWMSService> {
+    
+    String address;
+    
+    public AbstractWMSClientConnector() {
+        super(GPWMSService.class);
+    }
+    
+    @Override
+    public String getAddress() {
+        return this.address;
+    }
+
 }

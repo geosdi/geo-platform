@@ -33,21 +33,34 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.configurator.bootstrap.cxf;
+package org.geosdi.geoplatform.connectors.ws.wms.rest;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-import org.springframework.context.annotation.Profile;
+import org.apache.cxf.jaxrs.provider.json.JSONProvider;
+import org.geosdi.geoplatform.connectors.ws.rest.RestClientConnector;
+import org.geosdi.geoplatform.services.GPWMSService;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Retention(value = RetentionPolicy.RUNTIME)
-@Target(value = {ElementType.TYPE, ElementType.METHOD})
-@Profile(value = {"soap"})
-public @interface Soap {
+abstract class AbstractWMSRestClientConnector
+        extends RestClientConnector<GPWMSService> {
+
+    String address;
+
+    public AbstractWMSRestClientConnector() {
+        super(GPWMSService.class);
+    }
+
+    @Override
+    protected <T> JSONProvider<T> createJSONProvider() {
+        return new JSONProvider();
+    }
+
+    @Override
+    public String getAddress() {
+        return this.address;
+    }
+
 }

@@ -33,32 +33,48 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connectors.ws.wms;
+package org.geosdi.geoplatform.model.soap;
 
-import org.geosdi.geoplatform.connectors.ws.soap.SoapClientConnector;
-import org.geosdi.geoplatform.services.GPWMSService;
-import org.springframework.beans.factory.annotation.Value;
+import java.text.ParseException;
+import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.request.RequestByID;
+import org.geosdi.geoplatform.responce.ServerDTO;
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
+ * @author Francesco Izzi - CNR IMAA - geoSDI
  *
- * @author fizzi
  */
-public class GPWMSClientTestConnector extends SoapClientConnector<GPWMSService> {
-
-    private @Value("configurator{webservice_test_wms_endpoint_address}")
-    String address;
-
-    public GPWMSClientTestConnector() {
-        super(GPWMSService.class);
-    }
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:applicationContext-Test.xml",
+    "classpath*:applicationContext.xml"})
+@TestExecutionListeners(value = {WSListenerWMSServices.class})
+@ActiveProfiles(profiles = {"dev"})
+public class CXFWMSTest extends ServiceWMSTest {
 
     @Override
-    public String getAddress() {
-        return this.address;
+    public void setUp() throws Exception {       
     }
 
-    @Override
-    public void setAddress(String theAddress) {
-        this.address = theAddress;
+    @Test
+    public void testFixture() {
+        Assert.assertNotNull(gpWMSClient);
+    }
+
+    @Test
+    public void testGetCapabilities() throws ParseException, ResourceNotFoundFault {
+        ServerDTO serverDTO = gpWMSClient.getShortServer(serverUrlGeoSDI);
+        logger.info("^^^^^^^^^^^^^^^^^^^^^^^^^ SERVER___DTO ^^^^^^^^^^^^^^^^^^\n{}", serverDTO);
+        Assert.assertNotNull(serverDTO);
+
+        serverDTO = gpWMSClient.getCapabilities(serverDTO.getServerUrl(),
+                new RequestByID(serverDTO.getId()), null, null);
+        logger.debug("\n*** NUMBER OF LAYERS FOR DPC {} ***", serverDTO.getLayerList().size());
     }
 }

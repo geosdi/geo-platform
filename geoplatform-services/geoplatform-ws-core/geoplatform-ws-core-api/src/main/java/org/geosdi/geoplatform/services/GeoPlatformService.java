@@ -41,6 +41,7 @@ import javax.jws.WebResult;
 import javax.jws.WebService;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -118,7 +119,7 @@ public interface GeoPlatformService {
      * @throws IllegalParameterFault if Organization is not valid
      * @deprecated only for test purpose
      */
-    @Put
+    @Post
     @Deprecated
     Long insertOrganization(
             @WebParam(name = "organization") GPOrganization organization)
@@ -153,7 +154,9 @@ public interface GeoPlatformService {
      * @throws IllegalParameterFault if the account not have an Organization or
      * there is a duplicate Account
      */
-    @Put
+    @Post
+    @POST
+    @Path(value = GPServiceRSPathConfig.INSERT_ACCOUNT)
     Long insertAccount(@WebParam(name = "account") GPAccount account,
             @WebParam(name = "sendEmail") boolean sendEmail)
             throws IllegalParameterFault;

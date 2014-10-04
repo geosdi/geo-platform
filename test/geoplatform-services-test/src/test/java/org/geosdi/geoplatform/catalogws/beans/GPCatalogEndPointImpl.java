@@ -72,18 +72,17 @@ public class GPCatalogEndPointImpl {
 
     @PostConstruct
     public void init() {
-        Object implementor = gpCatalogFinderService;
         SpringBusFactory bf = new SpringBusFactory();
         bus = bf.createBus();
 
         bus.getInInterceptors().add(new LoggingInInterceptor());
         bus.getOutInterceptors().add(new LoggingOutInterceptor());
-
-        bus.getInInterceptors().add(serverInterceptorStrategyFactory.getSecurityInInterceptor());
-        bus.getOutInterceptors().add(serverInterceptorStrategyFactory.getSecurityOutInterceptor());
+//
+//        bus.getInInterceptors().add(serverInterceptorStrategyFactory.getSecurityInInterceptor());
+//        bus.getOutInterceptors().add(serverInterceptorStrategyFactory.getSecurityOutInterceptor());
 
         SpringBusFactory.setDefaultBus(bus);
-        endpoint = Endpoint.create(implementor);
+        endpoint = Endpoint.create(gpCatalogFinderService);
 
         logger.info("\n\t@@@ Catalog Finder End Point Created @@@");
     }

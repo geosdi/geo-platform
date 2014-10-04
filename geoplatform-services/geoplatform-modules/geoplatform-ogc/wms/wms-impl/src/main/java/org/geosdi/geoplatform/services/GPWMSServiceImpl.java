@@ -41,7 +41,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import javax.jws.WebService;
 import org.geosdi.geoplatform.core.dao.GPServerDAO;
 import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPLayerInfo;
@@ -59,7 +58,6 @@ import org.geotools.ows.ServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@WebService(endpointInterface = "org.geosdi.geoplatform.services.GPWMSService")
 public class GPWMSServiceImpl implements GPWMSService {
 
     private final static String EPSG_4326 = "EPSG:4326";
@@ -75,7 +73,8 @@ public class GPWMSServiceImpl implements GPWMSService {
     }
 
     @Override
-    public ServerDTO getCapabilities(String serverUrl, RequestByID request, String token,
+    public ServerDTO getCapabilities(String serverUrl, RequestByID request,
+            String token,
             String authkey) throws ResourceNotFoundFault {
         GeoPlatformServer server = serverDao.find(request.getId());
         if (server == null) {

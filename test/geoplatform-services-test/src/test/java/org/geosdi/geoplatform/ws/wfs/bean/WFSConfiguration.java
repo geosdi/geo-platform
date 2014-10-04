@@ -47,7 +47,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @Develop
-public class WFSConfiguration {
+class WFSConfiguration {
 
     private @Value("configurator{default_wfs_datasource}")
     String addressDatastore;
@@ -59,7 +59,6 @@ public class WFSConfiguration {
 
     @Bean
     public GPWFSClientTestConnector wfsClient() {
-        GPWFSClientTestConnector wfsClient = new GPWFSClientTestConnector();
-        return wfsClient;
+       return new GPWFSClientTestConnector();
     }
 }

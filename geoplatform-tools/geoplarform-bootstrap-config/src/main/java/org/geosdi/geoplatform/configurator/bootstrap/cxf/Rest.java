@@ -48,6 +48,6 @@ import org.springframework.context.annotation.Profile;
  */
 @Retention(value = RetentionPolicy.RUNTIME)
 @Target(value = {ElementType.TYPE, ElementType.METHOD})
-@Profile("rest")
+@Profile(value = {"rest"})
 public @interface Rest {
 }

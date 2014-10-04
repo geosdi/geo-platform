@@ -167,7 +167,7 @@ public class ServerDTO implements Serializable {
      */
     @Override
     public String toString() {
-        return "ServerDTO{" + "id=" + id.longValue()
+        return "ServerDTO{" + "id=" + id
                 + ", serverUrl=" + serverUrl
                 + ", alias=" + alias
                 + ", name=" + name

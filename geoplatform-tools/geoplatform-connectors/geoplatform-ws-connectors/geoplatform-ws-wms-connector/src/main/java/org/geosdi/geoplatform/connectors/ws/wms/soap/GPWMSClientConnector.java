@@ -33,44 +33,27 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.modelws;
+package org.geosdi.geoplatform.connectors.ws.wms.soap;
 
+import org.geosdi.geoplatform.configurator.bootstrap.Production;
+import org.geosdi.geoplatform.connectors.ws.soap.SoapClientConnector;
 import org.geosdi.geoplatform.services.GPWMSService;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestExecutionListeners;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
 
 /**
- * @author Francesco Izzi - CNR IMAA - geoSDI
- * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
+ *
+ * @author Francesco Izzi - geoSDI
+ * @email francesco.izzi@geosdi.org
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:applicationContext-Test.xml",
-    "classpath*:applicationContext.xml"})
-@TestExecutionListeners(value = {WSListenerWMSServices.class})
-@ActiveProfiles(profiles = {"dev"})
-public abstract class ServiceWMSTest {
+@Component(value = "gpWMSClientConnector")
+@Production
+public class GPWMSClientConnector extends AbstractWMSClientConnector {
 
-    protected Logger logger = LoggerFactory.getLogger(this.getClass());
-    //
-    protected GPWMSService gpWMSClient;
-
-    public void setGpWMSClient(GPWMSService gpWMSClient) {
-        this.gpWMSClient = gpWMSClient;
-    }
-
-    @Before
-    public void setUp() throws Exception {
-    }
-
-    @After
-    public void tearDown() {
-        logger.trace("\n\t@@@ {}.tearDown @@@", this.getClass().getSimpleName());
+    @Override
+    @Value("configurator{webservice_wms_endpoint_address}")
+    public void setAddress(String theAddress) {
+        this.address = theAddress;
     }
 }

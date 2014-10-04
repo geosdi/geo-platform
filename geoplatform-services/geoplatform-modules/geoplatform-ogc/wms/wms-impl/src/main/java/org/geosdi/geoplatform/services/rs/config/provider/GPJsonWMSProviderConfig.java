@@ -51,13 +51,7 @@ class GPJsonWMSProviderConfig {
 
     @Bean
     public JSONProvider gpJsonWMSProvider() {
-        return new JSONProvider() {
-
-            {
-                super.setSerializeAsArray(Boolean.TRUE);
-            }
-
-        };
+        return new JSONProvider();
 
     }
 }

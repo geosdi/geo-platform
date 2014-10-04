@@ -33,7 +33,7 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.modelws;
+package org.geosdi.geoplatform.model.soap;
 
 import java.util.Collection;
 import org.geosdi.geoplatform.core.model.GPCapabilityType;
@@ -44,11 +44,21 @@ import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.responce.ServerDTO;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI
  *
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:applicationContext-Test.xml",
+    "classpath*:applicationContext.xml"})
+@TestExecutionListeners(value = {WSListenerServices.class})
+@ActiveProfiles(profiles = {"dev"})
 public class CXFServiceTest extends ServiceTest {
 
 //    private GeoPlatformWSClientEncrypted gpWSClientEncrypted;

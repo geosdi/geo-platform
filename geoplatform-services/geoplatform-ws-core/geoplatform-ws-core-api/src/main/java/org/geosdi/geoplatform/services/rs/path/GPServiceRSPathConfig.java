@@ -52,6 +52,7 @@ public final class GPServiceRSPathConfig {
     public static final String GET_ALL_ACCOUNTS = ACCOUNTS_PATH + "getAllAccounts";
     public static final String GET_USER_DETAIL_BY_ID = ACCOUNTS_PATH
             + "getUserDetail/{userID}";
+    public static final String INSERT_ACCOUNT = ACCOUNTS_PATH + "insertAccount";
 
     /**
      * ACCOUNT PROJECTS PATH *
@@ -64,8 +65,8 @@ public final class GPServiceRSPathConfig {
      * WMS CAPABILITIES PATH
      */
     public static final String WMS_SERVICE_RS_PATH = "/jsonWMS";
-    public static final String GET_WMS_SERVER_BY_URL = "/server";
-    public static final String GET_WMS_CAPABILITIES = "/capabilities";
+    public static final String GET_WMS_SERVER_BY_URL = "/getServerByUrl";
+    public static final String GET_WMS_CAPABILITIES = "/getCapabilities";
 
     private GPServiceRSPathConfig() {
     }

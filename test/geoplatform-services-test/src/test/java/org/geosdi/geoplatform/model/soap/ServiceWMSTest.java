@@ -33,43 +33,36 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.modelws;
+package org.geosdi.geoplatform.model.soap;
 
-import java.text.ParseException;
-import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
-import org.geosdi.geoplatform.request.RequestByID;
-import org.geosdi.geoplatform.responce.ServerDTO;
-import org.junit.Assert;
-import org.junit.Test;
+import org.geosdi.geoplatform.services.GPWMSService;
+import org.junit.After;
+import org.junit.Before;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI
- *
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class CXFWMSTest extends ServiceWMSTest {
+public abstract class ServiceWMSTest {
+    
+    public static final String serverUrlGeoSDI = "http://150.145.141.50/geoserver/wms";
 
-//    private GeoPlatformWSClientEncrypted gpWSClientEncrypted;
-    // Servers
-    private final String serverUrlGeoSDI = "http://150.145.141.50/geoserver/wms";
+    protected static final Logger logger = LoggerFactory.getLogger(ServiceWMSTest.class);
+    //
+    protected GPWMSService gpWMSClient;
 
-    @Override
+    public void setGpWMSClient(GPWMSService gpWMSClient) {
+        this.gpWMSClient = gpWMSClient;
+    }
+
+    @Before
     public void setUp() throws Exception {
-        
     }
 
-    @Test
-    public void testFixture() {
-        Assert.assertNotNull(gpWMSClient);
-    }
-
-    @Test
-    public void testGetCapabilities() throws ParseException, ResourceNotFoundFault {
-        ServerDTO serverDTO = gpWMSClient.getShortServer(serverUrlGeoSDI);
-        logger.info("^^^^^^^^^^^^^^^^^^^^^^^^^ SERVER___DTO ^^^^^^^^^^^^^^^^^^\n{}", serverDTO);
-        Assert.assertNotNull(serverDTO);
-
-        serverDTO = gpWMSClient.getCapabilities(serverDTO.getServerUrl(),
-                new RequestByID(serverDTO.getId()), null, null);
-        logger.debug("\n*** NUMBER OF LAYERS FOR DPC {} ***", serverDTO.getLayerList().size());
+    @After
+    public void tearDown() {
+        logger.trace("\n\t@@@ {}.tearDown @@@", this.getClass().getSimpleName());
     }
 }

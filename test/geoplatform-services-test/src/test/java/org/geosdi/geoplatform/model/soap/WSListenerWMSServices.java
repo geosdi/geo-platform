@@ -31,11 +31,11 @@
  * you are not obligated to do so. If you do not wish to do so, delete this
  * exception statement from your version.
  */
-package org.geosdi.geoplatform.modelws;
+package org.geosdi.geoplatform.model.soap;
 
 import javax.xml.ws.Endpoint;
 import org.apache.cxf.jaxws22.EndpointImpl;
-import org.geosdi.geoplatform.connectors.ws.wms.GPWMSClientTestConnector;
+import org.geosdi.geoplatform.connectors.ws.wms.soap.GPWMSClientTestConnector;
 import org.geosdi.geoplatform.cxf.bus.GPSpringBusConfigurator;
 import org.geosdi.geoplatform.services.GPWMSService;
 import org.junit.Assert;
@@ -53,9 +53,9 @@ import org.springframework.test.context.TestExecutionListener;
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email michele.santomauro@geosdi.org
  */
-public class WSListenerWMSServices implements TestExecutionListener {
+class WSListenerWMSServices implements TestExecutionListener {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private static final Logger logger = LoggerFactory.getLogger(WSListenerWMSServices.class);
     //
     private GPWMSService gpWMSClient;
     private EndpointImpl gpWSClientImpl;
@@ -67,7 +67,7 @@ public class WSListenerWMSServices implements TestExecutionListener {
         ApplicationContext appContext = testContext.getApplicationContext();
 
         GPWMSClientTestConnector wmsClientConnector = (GPWMSClientTestConnector) appContext.getBean("gpWMSClient");
-        Assert.assertNotNull("geoPlatformWMSWSClient is NULL", wmsClientConnector);
+        Assert.assertNotNull("wmsClientConnector is NULL", wmsClientConnector);
         gpWMSClient = wmsClientConnector.getEndpointService();
 
         GPWMSService geoPlatformWMSService = (GPWMSService) appContext.getBean("wmsService");

@@ -33,21 +33,29 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.configurator.bootstrap.cxf;
+package org.geosdi.geoplatform.connectors.ws.wms.rest;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-import org.springframework.context.annotation.Profile;
+import javax.annotation.Resource;
+import org.geosdi.geoplatform.configurator.bootstrap.cxf.Rest;
+import org.geosdi.geoplatform.services.GPWMSService;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Retention(value = RetentionPolicy.RUNTIME)
-@Target(value = {ElementType.TYPE, ElementType.METHOD})
-@Profile(value = {"soap"})
-public @interface Soap {
+@Configuration
+@Rest
+class WMSRestClientConnectorConfig {
+    
+    @Resource
+    private GPWMSRestClientConnector gpWMSRestClientConnector;
+    
+    @Bean
+    public GPWMSService gpWMSRestServiceClient() {
+        return this.gpWMSRestClientConnector.getEndpointService();
+    }
+
 }

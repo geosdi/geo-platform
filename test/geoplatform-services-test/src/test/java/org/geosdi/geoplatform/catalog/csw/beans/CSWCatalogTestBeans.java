@@ -46,7 +46,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @Develop
-public class CSWCatalogTestBeans {
+class CSWCatalogTestBeans {
 
     @Bean
     public GPCSWClientTestConnector cswClient() {

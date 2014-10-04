@@ -33,7 +33,7 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.modelws;
+package org.geosdi.geoplatform.model.soap;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -59,12 +59,22 @@ import org.geosdi.geoplatform.responce.VectorLayerDTO;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.security.acls.domain.BasePermission;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:applicationContext-Test.xml",
+    "classpath*:applicationContext.xml"})
+@TestExecutionListeners(value = {WSListenerServices.class})
+@ActiveProfiles(profiles = {"dev"})
 public class WSProjectTest extends ServiceTest {
 
     Map<String, Object> fixture = new HashMap<String, Object>();
@@ -88,10 +98,10 @@ public class WSProjectTest extends ServiceTest {
     private GPFolder folder3B;
     private GPFolder folder3C;
     // Layer
-    private String titleRaster = "T-raster-";
-    private String nameRaster = "N-raster-";
-    private String titleVector = "T-vector-";
-    private String nameVector = "N-vector-";
+    private final String titleRaster = "T-raster-";
+    private final String nameRaster = "N-raster-";
+    private final String titleVector = "T-vector-";
+    private final String nameVector = "N-vector-";
     GPRasterLayer rasterRootFolderA;
     GPRasterLayer rasterFolder1B;
     GPRasterLayer rasterFolder2C;

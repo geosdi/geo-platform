@@ -33,7 +33,7 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connectors.ws.wms;
+package org.geosdi.geoplatform.connectors.ws.wms.soap;
 
 import javax.annotation.Resource;
 import org.geosdi.geoplatform.configurator.bootstrap.Production;
@@ -48,7 +48,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @Production
-public class WMSClientConnectorConfiguration {
+class WMSClientConnectorConfiguration {
     
     @Resource
     private GPWMSClientConnector gpWMSClientConnector;

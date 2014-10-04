@@ -65,7 +65,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ActiveProfiles(profiles = {"dev"})
 public class GPCatalogWSTest {
 
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    static final Logger logger = LoggerFactory.getLogger(GPCatalogWSTest.class);
     //
     @Autowired
     private GPGeonetworkClientTestConnector gpCatalogWSClient;

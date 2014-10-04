@@ -33,37 +33,21 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connectors.ws.wms;
+package org.geosdi.geoplatform.connectors.ws.wms.soap;
 
-import org.geosdi.geoplatform.configurator.bootstrap.Production;
-import org.geosdi.geoplatform.connectors.ws.soap.SoapClientConnector;
-import org.geosdi.geoplatform.services.GPWMSService;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
-
 
 /**
  *
- * @author Francesco Izzi - geoSDI
- * @email francesco.izzi@geosdi.org
+ * @author fizzi
+ * 
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-@Component(value = "gpWMSClientConnector")
-@Production
-public class GPWMSClientConnector extends SoapClientConnector<GPWMSService> {
-
-    private @Value("configurator{webservice_wms_endpoint_address}")
-    String address;
-
-    public GPWMSClientConnector() {
-        super(GPWMSService.class);
-    }
+public class GPWMSClientTestConnector extends AbstractWMSClientConnector {
 
     @Override
-    public String getAddress() {
-        return this.address;
-    }
-
-    @Override
+    @Value("configurator{webservice_test_wms_endpoint_address}")
     public void setAddress(String theAddress) {
         this.address = theAddress;
     }

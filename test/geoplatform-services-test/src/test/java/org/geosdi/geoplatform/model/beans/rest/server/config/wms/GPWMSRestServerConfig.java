@@ -33,21 +33,53 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.configurator.bootstrap.cxf;
+package org.geosdi.geoplatform.model.beans.rest.server.config.wms;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-import org.springframework.context.annotation.Profile;
+import java.util.Arrays;
+import org.apache.cxf.endpoint.Server;
+import org.apache.cxf.interceptor.Interceptor;
+import org.apache.cxf.interceptor.LoggingInInterceptor;
+import org.apache.cxf.interceptor.LoggingOutInterceptor;
+import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
+import org.apache.cxf.jaxrs.provider.json.JSONProvider;
+import org.apache.cxf.message.Message;
+import org.geosdi.geoplatform.configurator.bootstrap.Develop;
+import org.geosdi.geoplatform.services.GPWMSServiceImpl;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Required;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Retention(value = RetentionPolicy.RUNTIME)
-@Target(value = {ElementType.TYPE, ElementType.METHOD})
-@Profile(value = {"soap"})
-public @interface Soap {
+@Configuration
+@Develop
+class GPWMSRestServerConfig {
+
+    @Bean(name = "gpWMSRestServer")
+    @Required
+    public static Server gpWMSRestServer(
+            @Qualifier(value = "wmsService") GPWMSServiceImpl wmsService,
+            @Value("configurator{webservice_rs_test_wms_endpoint_address}") String wmsRestAddress,
+            @Qualifier(value = "serverLoggingInInterceptorBean") LoggingInInterceptor serverLogInInterceptor,
+            @Qualifier(value = "serverLoggingOutInterceptorBean") LoggingOutInterceptor serverLogOutInterceptor) {
+
+        JAXRSServerFactoryBean factory = new JAXRSServerFactoryBean();
+        factory.setServiceBean(wmsService);
+        factory.setAddress(wmsRestAddress);
+        factory.setProvider(new JSONProvider());
+        factory.setInInterceptors(Arrays.<Interceptor<? extends Message>>asList(
+                serverLogInInterceptor)
+        );
+        factory.setOutInterceptors(
+                Arrays.<Interceptor<? extends Message>>asList(
+                        serverLogOutInterceptor));
+        
+        return factory.create();
+    }
+
 }

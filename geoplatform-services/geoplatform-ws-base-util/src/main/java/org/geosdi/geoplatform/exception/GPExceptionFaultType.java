@@ -33,31 +33,17 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.responce.factory;
-
-import org.geosdi.geoplatform.core.model.GPUser;
-import org.geosdi.geoplatform.responce.UserDTO;
+package org.geosdi.geoplatform.exception;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class UserDTOStrategy implements AccountDTOStrategy<GPUser> {
+public enum GPExceptionFaultType {
 
-    @Override
-    public UserDTO create(GPUser account) {
-        return new UserDTO(account);
-    }
-
-    @Override
-    public Boolean isValid() {
-        return Boolean.TRUE;
-    }
-
-    @Override
-    public Class<GPUser> forClass() {
-        return GPUser.class;
-    }
+    IllegalParameterFault,
+    ResourceNotFoundFault,
+    ServerInternalFault;
 
 }

@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.model.beans.rest;
 
 import org.geosdi.geoplatform.configurator.bootstrap.Develop;
+import org.geosdi.geoplatform.connectors.ws.basic.rest.GPBasicRestClientTestConnector;
 import org.geosdi.geoplatform.connectors.ws.wms.rest.GPWMSRestClientTestConnector;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -48,10 +49,15 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @Develop
 class GPRestTestClientBeans {
-    
+
     @Bean
     public GPWMSRestClientTestConnector gpWMSRestClient() {
         return new GPWMSRestClientTestConnector();
+    }
+
+    @Bean
+    public GPBasicRestClientTestConnector gpBasicRestClient() {
+        return new GPBasicRestClientTestConnector();
     }
 
 }

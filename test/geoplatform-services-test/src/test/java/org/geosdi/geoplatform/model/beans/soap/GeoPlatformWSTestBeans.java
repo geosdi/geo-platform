@@ -34,7 +34,7 @@
 package org.geosdi.geoplatform.model.beans.soap;
 
 import org.geosdi.geoplatform.configurator.bootstrap.Develop;
-import org.geosdi.geoplatform.connectors.ws.basic.GPBasicWSClientTestConnector;
+import org.geosdi.geoplatform.connectors.ws.basic.soap.GPBasicWSClientTestConnector;
 import org.geosdi.geoplatform.connectors.ws.wms.soap.GPWMSClientTestConnector;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

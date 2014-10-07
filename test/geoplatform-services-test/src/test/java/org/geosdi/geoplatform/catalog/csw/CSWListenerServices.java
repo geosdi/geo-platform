@@ -37,7 +37,7 @@ import javax.xml.ws.Endpoint;
 import org.apache.cxf.jaxws22.EndpointImpl;
 import org.geosdi.geoplatform.connector.security.GeosdiCatalogBeanProvider;
 import org.geosdi.geoplatform.connector.security.SnipcCatalogBeanProvider;
-import org.geosdi.geoplatform.connectors.ws.basic.GPBasicWSClientTestConnector;
+import org.geosdi.geoplatform.connectors.ws.basic.soap.GPBasicWSClientTestConnector;
 import org.geosdi.geoplatform.connectors.ws.csw.GPCSWClientTestConnector;
 import org.geosdi.geoplatform.cxf.bus.GPSpringBusConfigurator;
 import org.geosdi.geoplatform.services.GeoPlatformCSWService;

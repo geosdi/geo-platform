@@ -33,31 +33,28 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.responce.factory;
+package org.geosdi.geoplatform.connectors.ws.basic.rest;
 
 import org.geosdi.geoplatform.core.model.GPUser;
-import org.geosdi.geoplatform.responce.UserDTO;
+import org.springframework.beans.factory.annotation.Value;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class UserDTOStrategy implements AccountDTOStrategy<GPUser> {
+public class GPBasicRestClientTestConnector
+        extends BasicRestClientConnector {
 
     @Override
-    public UserDTO create(GPUser account) {
-        return new UserDTO(account);
+    @Value("configurator{webservice_rs_test_endpoint_address}")
+    public void setAddress(String theAddress) {
+        this.address = theAddress;
     }
 
     @Override
-    public Boolean isValid() {
-        return Boolean.TRUE;
-    }
-
-    @Override
-    public Class<GPUser> forClass() {
-        return GPUser.class;
+    protected Class<?>[] getExtraClasses() {
+        return new Class<?>[]{GPUser.class};
     }
 
 }

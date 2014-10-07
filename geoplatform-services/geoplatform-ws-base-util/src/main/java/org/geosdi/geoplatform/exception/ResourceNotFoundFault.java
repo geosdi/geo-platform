@@ -44,7 +44,7 @@ import javax.xml.ws.WebFault;
  */
 @WebFault(name = "ResourceNotFoundFault",
           faultBean = "org.geosdi.exception.ResourceNotFoundFault")
-public class ResourceNotFoundFault extends Exception {
+public class ResourceNotFoundFault extends GPExceptionFault {
 
     private static final long serialVersionUID = 4100712158220027390L;
     //
@@ -77,5 +77,10 @@ public class ResourceNotFoundFault extends Exception {
     @Override
     public String getMessage() {
         return super.getMessage();
+    }
+
+    @Override
+    public GPExceptionFaultType getExceptionType() {
+        return GPExceptionFaultType.ResourceNotFoundFault;
     }
 }

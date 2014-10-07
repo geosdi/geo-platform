@@ -81,7 +81,7 @@ public final class AccountDTOFactory {
         Preconditions.checkNotNull(accounts, "The List of Accounts "
                 + "must not be null.");
 
-        List<ShortAccountDTO> accountsDTO = new ArrayList<ShortAccountDTO>(
+        List<ShortAccountDTO> accountsDTO = new ArrayList<>(
                 accounts.size());
 
         for (GPAccount account : accounts) {

@@ -33,31 +33,74 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.responce.factory;
+package org.geosdi.geoplatform.exception.rs;
 
-import org.geosdi.geoplatform.core.model.GPUser;
-import org.geosdi.geoplatform.responce.UserDTO;
+import java.io.Serializable;
+import javax.xml.bind.annotation.XmlRootElement;
+import org.geosdi.geoplatform.exception.GPExceptionFaultType;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class UserDTOStrategy implements AccountDTOStrategy<GPUser> {
+@XmlRootElement
+public class GPRestExceptionMessage implements Serializable {
 
-    @Override
-    public UserDTO create(GPUser account) {
-        return new UserDTO(account);
+    private static final long serialVersionUID = -8447193762518149838L;
+
+    private GPExceptionFaultType faultType;
+    private String message;
+    private Long id;
+
+    public GPRestExceptionMessage() {
+    }
+
+    public GPRestExceptionMessage(GPExceptionFaultType theFaultType,
+            String theMessage) {
+        this(theFaultType, theMessage, null);
+    }
+
+    public GPRestExceptionMessage(GPExceptionFaultType faultType,
+            String message, Long id) {
+        this.faultType = faultType;
+        this.message = message;
+        this.id = id;
+    }
+
+    /**
+     * @return the faultType
+     */
+    public GPExceptionFaultType getFaultType() {
+        return faultType;
+    }
+
+    /**
+     * @param faultType the faultType to set
+     */
+    public void setFaultType(
+            GPExceptionFaultType faultType) {
+        this.faultType = faultType;
+    }
+
+    /**
+     * @return the message
+     */
+    public String getMessage() {
+        return message;
+    }
+
+    /**
+     * @param message the message to set
+     */
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     @Override
-    public Boolean isValid() {
-        return Boolean.TRUE;
-    }
-
-    @Override
-    public Class<GPUser> forClass() {
-        return GPUser.class;
+    public String toString() {
+        return getClass().getSimpleName() + " {" + "faultType = " + faultType
+                + ", message = " + message + ", id = " + id + '}';
     }
 
 }

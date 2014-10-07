@@ -770,7 +770,7 @@ public class LayerService implements ILayerService {
             GPAccount account = this.sessionUtility.getLoggedAccount(
                     httpServletRequest);
             List<ShortAccountDTO> accounts = this.geoPlatformServiceClient.getAccounts(
-                    account.getOrganization().getName());
+                    account.getOrganization().getName()).getAccounts();
             simpleUserList = Lists.newArrayList(
                     this.dtoLayerConverter.convertToGPSimpleUser(accounts));
         } catch (GPSessionTimeout timeout) {

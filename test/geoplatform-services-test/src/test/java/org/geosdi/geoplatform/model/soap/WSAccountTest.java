@@ -1,37 +1,35 @@
 /**
  *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
+ * geo-platform Rich webgis framework http://geo-platform.org
+ * ====================================================================
  *
- *   Copyright (C) 2008-2014 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2014 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version. This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details. You should have received a copy of the GNU General Public License
+ * along with this program. If not, see http://www.gnu.org/licenses/
  *
- *   ====================================================================
+ * ====================================================================
  *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
+ * Linking this library statically or dynamically with other modules is making a
+ * combined work based on this library. Thus, the terms and conditions of the
+ * GNU General Public License cover the whole combination.
  *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * As a special exception, the copyright holders of this library give you
+ * permission to link this library with independent modules to produce an
+ * executable, regardless of the license terms of these independent modules, and
+ * to copy and distribute the resulting executable under terms of your choice,
+ * provided that you also meet, for each linked independent module, the terms
+ * and conditions of the license of that module. An independent module is a
+ * module which is not derived from or based on this library. If you modify this
+ * library, you may extend this exception to your version of the library, but
+ * you are not obligated to do so. If you do not wish to do so, delete this
+ * exception statement from your version.
  */
 package org.geosdi.geoplatform.model.soap;
 
@@ -43,6 +41,7 @@ import org.geosdi.geoplatform.exception.AccountLoginFault;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.shared.GPRole;
+import org.geosdi.geoplatform.request.InsertAccountRequest;
 import org.geosdi.geoplatform.request.LikePatternType;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.ApplicationDTO;
@@ -64,20 +63,22 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:applicationContext-Test.xml",
     "classpath*:applicationContext.xml"})
-@TestExecutionListeners(value = {WSListenerServices.class})
+@TestExecutionListeners(value = {WSListenerBasicServices.class})
 @ActiveProfiles(profiles = {"dev"})
-public class WSAccountTest extends ServiceTest {
+public class WSAccountTest extends BaseSoapServiceTest {
 
     @Test
     public void testAllAccounts() {
         List<ShortAccountDTO> accountList = gpWSClient.getAllAccounts().getAccounts();
         Assert.assertNotNull(accountList);
-        logger.info("\n*** Number of Accounts into DB: {} ***", accountList.size());
+        logger.info("\n*** Number of Accounts into DB: {} ***",
+                accountList.size());
         for (ShortAccountDTO account : accountList) {
             if (account instanceof UserDTO) {
                 logger.info("\n*** User into DB:\n{}\n***", (UserDTO) account);
             } else if (account instanceof ApplicationDTO) {
-                logger.info("\n*** Application into DB:\n{}\n***", (ApplicationDTO) account);
+                logger.info("\n*** Application into DB:\n{}\n***",
+                        (ApplicationDTO) account);
             }
         }
     }
@@ -85,11 +86,12 @@ public class WSAccountTest extends ServiceTest {
     @Test
     public void testAllOrganizationAccounts() throws Exception {
         // Initial test
-        List<ShortAccountDTO> accountList = gpWSClient.getAccounts(organizationNameTest);
+        List<ShortAccountDTO> accountList = gpWSClient.getAccounts(
+                organizationNameTest).getAccounts();
         Assert.assertNotNull(accountList);
         int numAccounts = accountList.size();
         logger.info("\n*** Number of Accounts for Organization \"{}\": {} ***",
-                    organizationNameTest, numAccounts);
+                organizationNameTest, numAccounts);
         for (ShortAccountDTO account : accountList) {
             Assert.assertEquals(organizationNameTest, account.getOrganization());
         }
@@ -98,12 +100,14 @@ public class WSAccountTest extends ServiceTest {
         this.createAndInsertUser("to_search", organizationTest, GPRole.USER);
 
         // Insert the other Organization and a User for it
-        GPOrganization otherOrganization = new GPOrganization("other_organization_ws_test");
-        Long otherOrganizationID = gpWSClient.insertOrganization(otherOrganization);
+        GPOrganization otherOrganization = new GPOrganization(
+                "other_organization_ws_test");
+        Long otherOrganizationID = gpWSClient.insertOrganization(
+                otherOrganization);
         this.createAndInsertUser("none_search", otherOrganization, GPRole.USER);
 
         // Final test
-        accountList = gpWSClient.getAccounts(organizationNameTest);
+        accountList = gpWSClient.getAccounts(organizationNameTest).getAccounts();
         Assert.assertNotNull(accountList);
         Assert.assertEquals(numAccounts + 1, accountList.size());
         for (ShortAccountDTO account : accountList) {
@@ -131,23 +135,27 @@ public class WSAccountTest extends ServiceTest {
         // Get UserDTO from Id
         UserDTO userDTOFromWS = gpWSClient.getShortUser(idUserTest);
         Assert.assertNotNull(userDTOFromWS);
-        Assert.assertEquals("Error found UserDTO from Id", idUserTest, userDTOFromWS.getId().longValue());
+        Assert.assertEquals("Error found UserDTO from Id", idUserTest,
+                userDTOFromWS.getId().longValue());
         // Get GPUser from Id
         GPUser userFromWS = gpWSClient.getUserDetail(idUserTest);
         Assert.assertNotNull(userFromWS);
-        Assert.assertEquals("Error found GPUser from Id", idUserTest, userFromWS.getId().longValue());
+        Assert.assertEquals("Error found GPUser from Id", idUserTest,
+                userFromWS.getId().longValue());
 
         // Get User from Username
         // Get UserDTO from Username
         userDTOFromWS = gpWSClient.getShortUserByUsername(
                 new SearchRequest(usernameTest, LikePatternType.CONTENT_EQUALS));
         Assert.assertNotNull(userDTOFromWS);
-        Assert.assertEquals("Error found UserDTO from Username", idUserTest, userDTOFromWS.getId().longValue());
+        Assert.assertEquals("Error found UserDTO from Username", idUserTest,
+                userDTOFromWS.getId().longValue());
         // Get GPUser from Username
         userFromWS = gpWSClient.getUserDetailByUsername(
                 new SearchRequest(usernameTest, LikePatternType.CONTENT_EQUALS));
         Assert.assertNotNull(userFromWS);
-        Assert.assertEquals("Error found GPUser from Username", idUserTest, userFromWS.getId().longValue());
+        Assert.assertEquals("Error found GPUser from Username", idUserTest,
+                userFromWS.getId().longValue());
     }
 
     @Test(expected = IllegalParameterFault.class)
@@ -157,35 +165,46 @@ public class WSAccountTest extends ServiceTest {
 
     @Test
     public void testInsertUserWithSingleRole() throws ResourceNotFoundFault {
-        List<GPAuthority> authorities = gpWSClient.getAuthoritiesDetail(usernameTest);
+        List<GPAuthority> authorities = gpWSClient.getAuthoritiesDetail(
+                usernameTest);
         Assert.assertNotNull("Authorities null", authorities);
-        Assert.assertEquals("Number of Authorities of " + usernameTest, 1, authorities.size());
+        Assert.assertEquals("Number of Authorities of " + usernameTest, 1,
+                authorities.size());
 
         GPAuthority authority = authorities.get(0);
         Assert.assertNotNull(authority);
-        Assert.assertEquals("Authority string", GPRole.USER.getRole(), authority.getAuthority());
-        Assert.assertEquals("Authority level", super.getTrustedLevelByRole(GPRole.USER), authority.getTrustedLevel());
-        Assert.assertEquals("Authority username", usernameTest, authority.getAccountNaturalID());
+        Assert.assertEquals("Authority string", GPRole.USER.getRole(),
+                authority.getAuthority());
+        Assert.assertEquals("Authority level", super.getTrustedLevelByRole(
+                GPRole.USER), authority.getTrustedLevel());
+        Assert.assertEquals("Authority username", usernameTest,
+                authority.getAccountNaturalID());
     }
 
     @Test
-    public void testInsertUserWithMultiRole() throws IllegalParameterFault, ResourceNotFoundFault {
+    public void testInsertUserWithMultiRole() throws IllegalParameterFault,
+            ResourceNotFoundFault {
         String usernameMultiRole = "user-multi-role";
-        Long idUser = super.createAndInsertUser(usernameMultiRole, organizationTest, GPRole.ADMIN, GPRole.VIEWER);
+        Long idUser = super.createAndInsertUser(usernameMultiRole,
+                organizationTest, GPRole.ADMIN, GPRole.VIEWER);
 
         try {
-            List<GPAuthority> authorities = gpWSClient.getAuthoritiesDetail(usernameMultiRole);
+            List<GPAuthority> authorities = gpWSClient.getAuthoritiesDetail(
+                    usernameMultiRole);
             Assert.assertNotNull(authorities);
-            Assert.assertEquals("Number of Authorities of " + usernameMultiRole, 2, authorities.size());
+            Assert.assertEquals("Number of Authorities of " + usernameMultiRole,
+                    2, authorities.size());
 
             boolean isAdmin = false;
             boolean isViewer = false;
             for (GPAuthority authority : authorities) {
                 Assert.assertNotNull(authority);
-                Assert.assertEquals("Authority email", usernameMultiRole, authority.getAccountNaturalID());
+                Assert.assertEquals("Authority email", usernameMultiRole,
+                        authority.getAccountNaturalID());
                 if (GPRole.ADMIN.getRole().equals(authority.getAuthority())) {
                     isAdmin = true;
-                } else if (GPRole.VIEWER.getRole().equals(authority.getAuthority())) {
+                } else if (GPRole.VIEWER.getRole().equals(
+                        authority.getAuthority())) {
                     isViewer = true;
                 }
             }
@@ -200,27 +219,33 @@ public class WSAccountTest extends ServiceTest {
 
     @Test
     public void testInsertDuplicateUserWRTUsername() {
-        GPUser user = super.createUser(usernameTest, organizationTest, GPRole.USER);
+        GPUser user = super.createUser(usernameTest, organizationTest,
+                GPRole.USER);
         try {
-            gpWSClient.insertAccount(user, false);
+            gpWSClient.insertAccount(new InsertAccountRequest(user,
+                    Boolean.FALSE));
             Assert.fail("User already exist wrt username");
         } catch (IllegalParameterFault ex) {
             if (!ex.getMessage().toLowerCase().contains("username")) { // Must be fail for other reasons
-                Assert.fail("Not fail for User already exist wrt username, but for: " + ex.getMessage());
+                Assert.fail(
+                        "Not fail for User already exist wrt username, but for: " + ex.getMessage());
             }
         }
     }
 
     @Test
     public void testInsertDuplicateUserWRTEmail() {
-        GPUser user = super.createUser("duplicate-email", organizationTest, GPRole.USER);
+        GPUser user = super.createUser("duplicate-email", organizationTest,
+                GPRole.USER);
         user.setEmailAddress(super.userTest.getEmailAddress());
         try {
-            gpWSClient.insertAccount(user, false);
+            gpWSClient.insertAccount(new InsertAccountRequest(user,
+                    Boolean.FALSE));
             Assert.fail("User already exist wrt email");
         } catch (IllegalParameterFault ex) {
             if (!ex.getMessage().toLowerCase().contains("email")) { // Must be fail for other reasons
-                Assert.fail("Not fail for User already exist wrt email, but for: " + ex.getMessage());
+                Assert.fail(
+                        "Not fail for User already exist wrt email, but for: " + ex.getMessage());
             }
         }
     }
@@ -228,28 +253,32 @@ public class WSAccountTest extends ServiceTest {
     @Test
     public void testInsertIncorrectUserWRTUOrganization() {
         GPUser user = super.createUser("no-organization",
-                                       new GPOrganization("organization-inexistent"), GPRole.USER);
+                new GPOrganization("organization-inexistent"), GPRole.USER);
 
         try {
-            gpWSClient.insertAccount(user, false);
+            gpWSClient.insertAccount(new InsertAccountRequest(user,
+                    Boolean.FALSE));
             Assert.fail("User incorrect wrt organization");
         } catch (IllegalParameterFault ex) {
             if (!ex.getMessage().toLowerCase().contains("organization")) { // Must be fail for other reasons
-                Assert.fail("Not fail for User incorrect wrt organization, but for: " + ex.getMessage());
+                Assert.fail(
+                        "Not fail for User incorrect wrt organization, but for: " + ex.getMessage());
             }
         }
     }
 
     @Test
     public void testAuthorizationCorrectUsername() throws Exception {
-        GPUser user = gpWSClient.getUserDetailByUsernameAndPassword(usernameTest, passwordTest);
+        GPUser user = gpWSClient.getUserDetailByUsernameAndPassword(usernameTest,
+                passwordTest);
         Assert.assertNotNull("User is null", user);
         Assert.assertEquals(usernameTest, user.getUsername());
     }
 
     @Test
     public void testAuthorizationCorrectEmail() throws Exception {
-        GPUser user = gpWSClient.getUserDetailByUsernameAndPassword(emailTest, passwordTest);
+        GPUser user = gpWSClient.getUserDetailByUsernameAndPassword(emailTest,
+                passwordTest);
         Assert.assertNotNull("User is null", user);
         Assert.assertEquals(emailTest, user.getEmailAddress());
     }
@@ -257,7 +286,8 @@ public class WSAccountTest extends ServiceTest {
     @Test(expected = ResourceNotFoundFault.class)
     public void testAuthorizationIncorrectUsername() throws Exception {
         String wrongUsername = usernameTest + "_";
-        gpWSClient.getUserDetailByUsernameAndPassword(wrongUsername, passwordTest);
+        gpWSClient.getUserDetailByUsernameAndPassword(wrongUsername,
+                passwordTest);
     }
 
     @Test(expected = ResourceNotFoundFault.class)
@@ -269,12 +299,14 @@ public class WSAccountTest extends ServiceTest {
     @Test(expected = IllegalParameterFault.class)
     public void testAuthorizationIncorrectPassword() throws Exception {
         String wrongPassword = passwordTest + "_";
-        gpWSClient.getUserDetailByUsernameAndPassword(usernameTest, wrongPassword);
+        gpWSClient.getUserDetailByUsernameAndPassword(usernameTest,
+                wrongPassword);
     }
 
     @Test(expected = AccountLoginFault.class)
     public void testLoginFaultUserDisabled()
-            throws ResourceNotFoundFault, IllegalParameterFault, AccountLoginFault {
+            throws ResourceNotFoundFault, IllegalParameterFault,
+            AccountLoginFault {
         // Set disabled user
         userTest.setEnabled(false);
         gpWSClient.updateUser(userTest);
@@ -285,7 +317,8 @@ public class WSAccountTest extends ServiceTest {
 
     @Test(expected = AccountLoginFault.class)
     public void testLoginFaultUserExpired()
-            throws ResourceNotFoundFault, IllegalParameterFault, AccountLoginFault {
+            throws ResourceNotFoundFault, IllegalParameterFault,
+            AccountLoginFault {
         // Set temporary user
         gpWSClient.forceTemporaryAccount(idUserTest);
 
@@ -300,7 +333,7 @@ public class WSAccountTest extends ServiceTest {
     public void testUserErrorTemporarySetting()
             throws ResourceNotFoundFault, IllegalParameterFault {
         Assert.assertFalse("UserTest should be a standard account",
-                           userTest.isAccountTemporary());
+                userTest.isAccountTemporary());
 
         // Set the standard user to temporary (wrongly)
         userTest.setAccountTemporary(true);

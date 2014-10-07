@@ -62,9 +62,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:applicationContext-Test.xml",
     "classpath*:applicationContext.xml"})
-@TestExecutionListeners(value = {WSListenerServices.class})
+@TestExecutionListeners(value = {WSListenerBasicServices.class})
 @ActiveProfiles(profiles = {"dev"})
-public class WSMessageTest extends ServiceTest {
+public class WSMessageTest extends BaseSoapServiceTest {
 
     private Long firstRecipientID;
     private Long latterRecipientID;

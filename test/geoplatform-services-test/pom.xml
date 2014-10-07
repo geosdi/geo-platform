@@ -31,6 +31,12 @@
             <scope>runtime</scope>
         </dependency>
         
+<!--        <dependency>
+            <groupId>org.codehaus.jettison</groupId>
+            <artifactId>jettison</artifactId>
+            <scope>test</scope>
+        </dependency>-->
+        
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-cxf-server-support</artifactId>

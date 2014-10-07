@@ -37,35 +37,30 @@ package org.geosdi.geoplatform.model.rest;
 
 import org.apache.cxf.endpoint.Server;
 import org.geosdi.geoplatform.connectors.ws.wms.rest.GPWMSRestClientTestConnector;
+import org.geosdi.geoplatform.model.BaseGPListenerServices;
 import org.geosdi.geoplatform.model.soap.ServiceWMSTest;
 import org.geosdi.geoplatform.services.GPWMSService;
 import org.junit.Assert;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.TestContext;
-import org.springframework.test.context.TestExecutionListener;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-class RSListenerWMSService implements TestExecutionListener {
+class RSListenerWMSService extends BaseGPListenerServices {
 
-    private static final Logger logger = LoggerFactory.getLogger(RSListenerWMSService.class);
-    //
     private GPWMSService gpWMSClient;
     private Server gpWMSRestServer;
 
     @Override
     public void beforeTestClass(TestContext tc) throws Exception {
-        logger.info("\n\t@@@ WSListenerWMSServices.beforeTestClass @@@");
+        super.beforeTestClass(tc);
 
-        ApplicationContext appContext = tc.getApplicationContext();
-
-        GPWMSRestClientTestConnector wmsRestClientConnector = (GPWMSRestClientTestConnector) appContext.getBean("gpWMSRestClient");
-        Assert.assertNotNull("wmsRestClientConnector is NULL", wmsRestClientConnector);
+        GPWMSRestClientTestConnector wmsRestClientConnector = (GPWMSRestClientTestConnector) appContext.getBean(
+                "gpWMSRestClient");
+        Assert.assertNotNull("wmsRestClientConnector is NULL",
+                wmsRestClientConnector);
         gpWMSClient = wmsRestClientConnector.getEndpointService();
 
         this.gpWMSRestServer = (Server) appContext.getBean("gpWMSRestServer");
@@ -82,14 +77,6 @@ class RSListenerWMSService implements TestExecutionListener {
 
         ServiceWMSTest testInstance = (ServiceWMSTest) tc.getTestInstance();
         testInstance.setGpWMSClient(gpWMSClient);
-    }
-
-    @Override
-    public void beforeTestMethod(TestContext tc) throws Exception {
-    }
-
-    @Override
-    public void afterTestMethod(TestContext tc) throws Exception {
     }
 
     @Override

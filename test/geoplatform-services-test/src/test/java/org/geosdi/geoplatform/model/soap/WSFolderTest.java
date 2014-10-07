@@ -62,9 +62,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:applicationContext-Test.xml",
     "classpath*:applicationContext.xml"})
-@TestExecutionListeners(value = {WSListenerServices.class})
+@TestExecutionListeners(value = {WSListenerBasicServices.class})
 @ActiveProfiles(profiles = {"dev"})
-public class WSFolderTest extends ServiceTest {
+public class WSFolderTest extends BaseSoapServiceTest {
 
     private static final String nameFolder1 = "folder1";
     private static final String nameFolder2 = "folder2";

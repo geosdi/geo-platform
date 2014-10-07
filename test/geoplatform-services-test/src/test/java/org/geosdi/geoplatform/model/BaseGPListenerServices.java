@@ -33,31 +33,40 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.responce.factory;
+package org.geosdi.geoplatform.model;
 
-import org.geosdi.geoplatform.core.model.GPUser;
-import org.geosdi.geoplatform.responce.UserDTO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.test.context.TestContext;
+import org.springframework.test.context.TestExecutionListener;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class UserDTOStrategy implements AccountDTOStrategy<GPUser> {
+public abstract class BaseGPListenerServices implements TestExecutionListener {
+
+    protected final Logger logger = LoggerFactory.getLogger(this.getClass());
+    //
+    protected ApplicationContext appContext;
+   
 
     @Override
-    public UserDTO create(GPUser account) {
-        return new UserDTO(account);
+    public void beforeTestClass(TestContext testContext) throws Exception {
+        logger.info("\n\t@@@ " + getClass().getSimpleName()
+                + ".beforeTestClass @@@");
+
+        appContext = testContext.getApplicationContext();
     }
 
     @Override
-    public Boolean isValid() {
-        return Boolean.TRUE;
+    public void beforeTestMethod(TestContext testContext) throws Exception {
     }
 
     @Override
-    public Class<GPUser> forClass() {
-        return GPUser.class;
+    public void afterTestMethod(TestContext testContext) throws Exception {
     }
 
 }

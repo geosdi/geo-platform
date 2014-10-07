@@ -33,31 +33,42 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.responce.factory;
+package org.geosdi.geoplatform.connectors.ws.basic.rest;
 
-import org.geosdi.geoplatform.core.model.GPUser;
-import org.geosdi.geoplatform.responce.UserDTO;
+import org.apache.cxf.jaxrs.provider.json.JSONProvider;
+import org.geosdi.geoplatform.connectors.ws.rest.RestClientConnector;
+import org.geosdi.geoplatform.services.GeoPlatformService;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class UserDTOStrategy implements AccountDTOStrategy<GPUser> {
+abstract class BasicRestClientConnector
+        extends RestClientConnector<GeoPlatformService> {
 
-    @Override
-    public UserDTO create(GPUser account) {
-        return new UserDTO(account);
+    String address;
+
+    public BasicRestClientConnector() {
+        super(GeoPlatformService.class);
     }
 
     @Override
-    public Boolean isValid() {
-        return Boolean.TRUE;
+    protected <T> JSONProvider<T> createJSONProvider() {
+        return new JSONProvider() {
+
+            {
+                if ((getExtraClasses() != null)
+                        && (getExtraClasses().length > 0)) {
+                    super.setExtraClass(getExtraClasses());
+                }
+            }
+        };
     }
 
     @Override
-    public Class<GPUser> forClass() {
-        return GPUser.class;
+    public String getAddress() {
+        return this.address;
     }
 
 }

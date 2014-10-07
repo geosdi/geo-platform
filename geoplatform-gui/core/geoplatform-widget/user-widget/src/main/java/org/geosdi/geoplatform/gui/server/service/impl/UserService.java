@@ -1,37 +1,35 @@
 /**
  *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
+ * geo-platform Rich webgis framework http://geo-platform.org
+ * ====================================================================
  *
- *   Copyright (C) 2008-2014 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2014 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version. This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details. You should have received a copy of the GNU General Public License
+ * along with this program. If not, see http://www.gnu.org/licenses/
  *
- *   ====================================================================
+ * ====================================================================
  *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
+ * Linking this library statically or dynamically with other modules is making a
+ * combined work based on this library. Thus, the terms and conditions of the
+ * GNU General Public License cover the whole combination.
  *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * As a special exception, the copyright holders of this library give you
+ * permission to link this library with independent modules to produce an
+ * executable, regardless of the license terms of these independent modules, and
+ * to copy and distribute the resulting executable under terms of your choice,
+ * provided that you also meet, for each linked independent module, the terms
+ * and conditions of the license of that module. An independent module is a
+ * module which is not derived from or based on this library. If you modify this
+ * library, you may extend this exception to your version of the library, but
+ * you are not obligated to do so. If you do not wish to do so, delete this
+ * exception statement from your version.
  */
 package org.geosdi.geoplatform.gui.server.service.impl;
 
@@ -54,6 +52,7 @@ import org.geosdi.geoplatform.gui.server.IUserService;
 import org.geosdi.geoplatform.gui.server.SessionUtility;
 import org.geosdi.geoplatform.gui.server.service.converter.DTOUserConverter;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
+import org.geosdi.geoplatform.request.InsertAccountRequest;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.UserDTO;
@@ -82,13 +81,16 @@ public class UserService implements IUserService {
     private DTOUserConverter dtoUserConverter;
 
     @Override
-    public PagingLoadResult<GPUserManageDetail> searchUsers(PagingLoadConfig config,
-            String searchText, String organization, HttpServletRequest httpServletRequest) {
+    public PagingLoadResult<GPUserManageDetail> searchUsers(
+            PagingLoadConfig config,
+            String searchText, String organization,
+            HttpServletRequest httpServletRequest) {
         GPUser user = this.getCheckLoggedUser(httpServletRequest);
 
         SearchRequest srq = new SearchRequest(searchText);
 
-        Long usersCount = this.geoPlatformServiceClient.getUsersCount(organization, srq);
+        Long usersCount = this.geoPlatformServiceClient.getUsersCount(
+                organization, srq);
 
         int start = config.getOffset();
         int page = start == 0 ? start : start / config.getLimit();
@@ -98,7 +100,8 @@ public class UserService implements IUserService {
 
         List<UserDTO> userList = null;
         try {
-            userList = this.geoPlatformServiceClient.searchUsers(user.getId(), psr);
+            userList = this.geoPlatformServiceClient.searchUsers(user.getId(),
+                    psr);
             if (userList == null) {
                 throw new GeoPlatformException("There are no results");
             }
@@ -108,7 +111,8 @@ public class UserService implements IUserService {
 
         List<GPUserManageDetail> searchUsers = new ArrayList<GPUserManageDetail>();
         for (UserDTO userDTO : userList) {
-            GPUserManageDetail userDetail = this.dtoUserConverter.convertToGPUserManageDetail(userDTO);
+            GPUserManageDetail userDetail = this.dtoUserConverter.convertToGPUserManageDetail(
+                    userDTO);
             searchUsers.add(userDetail);
         }
 
@@ -120,7 +124,8 @@ public class UserService implements IUserService {
     public Long insertUser(IGPUserManageDetail userDetail, String organization,
             HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
-        return this.insertUser(userDetail, organization, httpServletRequest, Boolean.TRUE);
+        return this.insertUser(userDetail, organization, httpServletRequest,
+                Boolean.TRUE);
     }
 
     @Override
@@ -130,13 +135,15 @@ public class UserService implements IUserService {
         if (checkUserSession) {
             this.getCheckLoggedUser(httpServletRequest);
         }
-        logger.debug("\nUser to INSERT (of the organization \"{}\"):\n{}", organization, userDetail);
+        logger.debug("\nUser to INSERT (of the organization \"{}\"):\n{}",
+                organization, userDetail);
         Long iserId = null;
         try {
             GPUser user = this.dtoUserConverter.convertToGPUser(userDetail);
             user.setOrganization(new GPOrganization(organization));
 
-            iserId = geoPlatformServiceClient.insertAccount(user, true);
+            iserId = geoPlatformServiceClient.insertAccount(
+                    new InsertAccountRequest(user, Boolean.TRUE));
         } catch (IllegalParameterFault ipf) {
             throw new GeoPlatformException(ipf.getMessage());
         }
@@ -144,7 +151,8 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public Long updateUser(IGPUserManageDetail userDetail, HttpServletRequest httpServletRequest)
+    public Long updateUser(IGPUserManageDetail userDetail,
+            HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
         this.getCheckLoggedUser(httpServletRequest);
 
@@ -163,13 +171,15 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public Long updateUserTreeOptions(IGPTreeOptions userTreeOptions, HttpServletRequest httpServletRequest)
+    public Long updateUserTreeOptions(IGPTreeOptions userTreeOptions,
+            HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
         GPUser gPUser = this.getCheckLoggedUser(httpServletRequest);
         logger.debug("\nUserTreeOptions to UPDATE:\n{}", userTreeOptions);
         Long accountProjectID = null;
         try {
-            gPUser.setLoadExpandedFolders(userTreeOptions.isLoadExpandedFolders());
+            gPUser.setLoadExpandedFolders(
+                    userTreeOptions.isLoadExpandedFolders());
             accountProjectID = geoPlatformServiceClient.updateUser(gPUser);
         } catch (IllegalParameterFault ipf) {
             throw new GeoPlatformException(ipf.getMessage());
@@ -199,7 +209,8 @@ public class UserService implements IUserService {
             userID = geoPlatformServiceClient.updateOwnUser(userDTO,
                     currentPlainPassword, newPlainPassword);
 
-            sessionUtility.storeLoggedAccount(this.dtoUserConverter.convertToGPUser(userDetail),
+            sessionUtility.storeLoggedAccount(
+                    this.dtoUserConverter.convertToGPUser(userDetail),
                     httpServletRequest);
         } catch (IllegalParameterFault ipf) {
             throw new GeoPlatformException(ipf.getMessage());
@@ -238,10 +249,12 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public ArrayList<String> getAllRoles(String organization, HttpServletRequest httpServletRequest) {
+    public ArrayList<String> getAllRoles(String organization,
+            HttpServletRequest httpServletRequest) {
         ArrayList<String> roles = null;
         try {
-            roles = (ArrayList<String>) geoPlatformServiceClient.getAllRoles(organization);
+            roles = (ArrayList<String>) geoPlatformServiceClient.getAllRoles(
+                    organization);
         } catch (ResourceNotFoundFault ex) {
             logger.error(this.getClass().getSimpleName(), ex.getMessage());
         }
@@ -249,22 +262,26 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public ArrayList<String> getAllGuiComponentIDs(HttpServletRequest httpServletRequest) {
+    public ArrayList<String> getAllGuiComponentIDs(
+            HttpServletRequest httpServletRequest) {
         return (ArrayList<String>) geoPlatformServiceClient.getAllGuiComponentIDs();
     }
 
     @Override
-    public HashMap<String, Boolean> getRolePermission(String role, String organization,
+    public HashMap<String, Boolean> getRolePermission(String role,
+            String organization,
             HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
         HashMap<String, Boolean> permissionMap;
 
         try {
-            GuiComponentsPermissionMapData rolePermission = geoPlatformServiceClient.getRolePermission(role, organization);
+            GuiComponentsPermissionMapData rolePermission = geoPlatformServiceClient.getRolePermission(
+                    role, organization);
             permissionMap = (HashMap<String, Boolean>) rolePermission.getPermissionMap();
         } catch (ResourceNotFoundFault ex) {
             logger.error(this.getClass().getSimpleName(), ex.getMessage());
-            throw new GeoPlatformException("Unable to find \"" + role + "\" role");
+            throw new GeoPlatformException(
+                    "Unable to find \"" + role + "\" role");
         }
 
         return permissionMap;
@@ -278,21 +295,25 @@ public class UserService implements IUserService {
         GuiComponentsPermissionMapData rolePermission = new GuiComponentsPermissionMapData();
         rolePermission.setPermissionMap(permissionMap);
         try {
-            return geoPlatformServiceClient.updateRolePermission(role, organization, rolePermission);
+            return geoPlatformServiceClient.updateRolePermission(role,
+                    organization, rolePermission);
         } catch (ResourceNotFoundFault ex) {
             logger.error(this.getClass().getSimpleName(), ex.getMessage());
-            throw new GeoPlatformException("Unable to find \"" + role + "\" role");
+            throw new GeoPlatformException(
+                    "Unable to find \"" + role + "\" role");
         }
     }
 
     @Override
-    public boolean saveRole(String role, String organization, HttpServletRequest httpServletRequest)
+    public boolean saveRole(String role, String organization,
+            HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
         try {
             return geoPlatformServiceClient.saveRole(role, organization);
         } catch (IllegalParameterFault ex) {
             logger.error(this.getClass().getSimpleName(), ex.getMessage());
-            throw new GeoPlatformException("Error on saving the new role \"" + role + "\"");
+            throw new GeoPlatformException(
+                    "Error on saving the new role \"" + role + "\"");
         }
     }
 

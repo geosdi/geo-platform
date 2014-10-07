@@ -33,31 +33,44 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.responce.factory;
+package org.geosdi.geoplatform.model.rest;
 
+import org.geosdi.geoplatform.core.model.GPOrganization;
 import org.geosdi.geoplatform.core.model.GPUser;
-import org.geosdi.geoplatform.responce.UserDTO;
+import org.geosdi.geoplatform.exception.IllegalParameterFault;
+import org.geosdi.geoplatform.gui.shared.GPRole;
+import org.geosdi.geoplatform.model.ServiceTest;
+import org.geosdi.geoplatform.request.LikePatternType;
+import org.geosdi.geoplatform.request.SearchRequest;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class UserDTOStrategy implements AccountDTOStrategy<GPUser> {
+abstract class BasicRestServiceTest extends ServiceTest {
+
+    protected static final String organizationNameRSTest = "geoSDI_rs_test";
+    // Users
+    protected static final String usernameTest = "user_test_rs";
+    protected static final String passwordTest = usernameTest;
+    protected static final String emailTest = usernameTest + "@" + domainNameTest;
+    protected GPUser userTest;
 
     @Override
-    public UserDTO create(GPUser account) {
-        return new UserDTO(account);
+    public void setUp() throws Exception {
+        super.setUp();
+        // Insert User
+        idUserTest = this.createAndInsertUser(usernameTest, organizationTest,
+                GPRole.USER);
+        userTest = gpWSClient.getUserDetailByUsername(
+                new SearchRequest(usernameTest, LikePatternType.CONTENT_EQUALS));
     }
 
     @Override
-    public Boolean isValid() {
-        return Boolean.TRUE;
-    }
-
-    @Override
-    public Class<GPUser> forClass() {
-        return GPUser.class;
+    protected void setUpOrganization() throws IllegalParameterFault {
+        organizationTest = new GPOrganization(organizationNameRSTest);
+        organizationTest.setId(gpWSClient.insertOrganization(organizationTest));
     }
 
 }

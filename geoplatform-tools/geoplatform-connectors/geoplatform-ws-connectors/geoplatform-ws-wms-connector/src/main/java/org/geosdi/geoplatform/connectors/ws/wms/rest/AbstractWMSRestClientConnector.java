@@ -63,4 +63,9 @@ abstract class AbstractWMSRestClientConnector
         return this.address;
     }
 
+    @Override
+    protected Class<?>[] getExtraClasses() {
+        return null;
+    }
+
 }

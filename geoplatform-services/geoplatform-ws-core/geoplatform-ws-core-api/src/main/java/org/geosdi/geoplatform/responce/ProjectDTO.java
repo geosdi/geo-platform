@@ -44,6 +44,7 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPProject;
+import org.geosdi.geoplatform.responce.factory.AccountDTOFactory;
 
 /**
  *
@@ -104,7 +105,7 @@ public class ProjectDTO {
      */
     public ProjectDTO(GPProject project, GPAccount owner) {
         this(project);
-        this.owner = ShortAccountDTO.convertToShortAccountDTO(owner);
+        this.owner = AccountDTOFactory.buildAccountDTO(owner);
     }
 
     /**

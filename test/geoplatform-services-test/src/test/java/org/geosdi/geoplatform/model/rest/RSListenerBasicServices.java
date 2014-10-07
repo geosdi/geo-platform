@@ -33,31 +33,56 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.responce.factory;
+package org.geosdi.geoplatform.model.rest;
 
-import org.geosdi.geoplatform.core.model.GPUser;
-import org.geosdi.geoplatform.responce.UserDTO;
+import org.apache.cxf.endpoint.Server;
+import org.geosdi.geoplatform.connectors.ws.basic.rest.GPBasicRestClientTestConnector;
+import org.geosdi.geoplatform.model.BaseGPListenerServices;
+import org.geosdi.geoplatform.model.ServiceTest;
+import org.geosdi.geoplatform.services.GeoPlatformService;
+import org.junit.Assert;
+import org.springframework.test.context.TestContext;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class UserDTOStrategy implements AccountDTOStrategy<GPUser> {
+class RSListenerBasicServices extends BaseGPListenerServices {
+
+    private GeoPlatformService gpRSClient;
+    private Server gpBasicRestServer;
 
     @Override
-    public UserDTO create(GPUser account) {
-        return new UserDTO(account);
+    public void beforeTestClass(TestContext tc) throws Exception {
+        super.beforeTestClass(tc);
+
+        GPBasicRestClientTestConnector gpBasicRestClient = (GPBasicRestClientTestConnector) appContext.getBean(
+                "gpBasicRestClient");
+        Assert.assertNotNull("gpBasicRestClient is NULL",
+                gpBasicRestClient);
+        gpRSClient = gpBasicRestClient.getEndpointService();
+
+        this.gpBasicRestServer = (Server) appContext.getBean("gpBasicRestServer");
+        Assert.assertNotNull("gpBasicRestServer is NULL", gpBasicRestServer);
+
+        this.gpBasicRestServer.start();
+
+        logger.info("\n\t@@@ Server ready... @@@");
     }
 
     @Override
-    public Boolean isValid() {
-        return Boolean.TRUE;
+    public void prepareTestInstance(TestContext tc) throws Exception {
+        logger.info("\n\t@@@ RSListenerWMSService.prepareTestInstance @@@");
+
+        ServiceTest testInstance = (ServiceTest) tc.getTestInstance();
+        testInstance.setGeoplatformServiceClient(gpRSClient);
     }
 
     @Override
-    public Class<GPUser> forClass() {
-        return GPUser.class;
+    public void afterTestClass(TestContext tc) throws Exception {
+        logger.info("\n\t@@@ RSListenerWMSService.afterTestClass @@@");
+        this.gpBasicRestServer.stop();
     }
 
 }

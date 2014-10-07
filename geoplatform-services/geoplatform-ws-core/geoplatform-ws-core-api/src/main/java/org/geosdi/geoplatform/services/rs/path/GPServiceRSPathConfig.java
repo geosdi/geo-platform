@@ -46,13 +46,43 @@ public final class GPServiceRSPathConfig {
 
     public static final String GP_CORE_SERVICE_RS_PATH = "/jsonCore";
     /**
-     * ACCOUNTS PATH *
+     * ORGANIZATIONS PATH
+     */
+    private static final String ORGANIZATION_BASE_PATH = "/organizations/";
+    public static final String INSERT_ORGANIZATION_PATH = ORGANIZATION_BASE_PATH
+            + "insertOrganization";
+    public static final String DELETE_ORGANIZATION_PATH = ORGANIZATION_BASE_PATH
+            + "deleteOrganization/{organizationID}";
+    /**
+     * ACCOUNTS PATH
      */
     private static final String ACCOUNTS_PATH = "/accounts/";
+    public static final String GET_ALL_ORGANIZATION_ACCOUNTS = ACCOUNTS_PATH
+            + "getAllOrganizationAccount/{organization}";
     public static final String GET_ALL_ACCOUNTS = ACCOUNTS_PATH + "getAllAccounts";
     public static final String GET_USER_DETAIL_BY_ID = ACCOUNTS_PATH
             + "getUserDetail/{userID}";
-    public static final String INSERT_ACCOUNT = ACCOUNTS_PATH + "insertAccount";
+    public static final String GET_USER_DETAIL = ACCOUNTS_PATH
+            + "getUserDetail";
+    public static final String GET_USER_DETAIL_BY_USERNAME_AND_PASSWORD = GET_USER_DETAIL
+            + "/{username}/{plainPassword}";
+    public static final String GET_ACCOUNTS_COUNT = ACCOUNTS_PATH
+            + "getAccountsCount";
+    public static final String GET_SHORT_USER_BY_ID = ACCOUNTS_PATH
+            + "getShortUser/{userID}";
+    public static final String GET_SHORT_USER_BY_USERNAME = ACCOUNTS_PATH
+            + "getShortUserByUsername";
+    public static final String INSERT_ACCOUNT_PATH = ACCOUNTS_PATH + "insertAccount";
+    public static final String UPDATE_USER_PATH = ACCOUNTS_PATH + "updateUser";
+    public static final String DELETE_ACCOUNT_PATH = ACCOUNTS_PATH
+            + "deleteAccount/{accountID}";
+
+    /**
+     * AUTHORITIES PATH
+     */
+    private static final String AUTHORITIES_PATH = "/authorities/";
+    public static final String GET_AUTHORITIES_BY_ACCOUNT_NATURAL_ID = AUTHORITIES_PATH
+            + "getAuthoritiesByAccountNaturalID/{accountNaturalID}";
 
     /**
      * ACCOUNT PROJECTS PATH *

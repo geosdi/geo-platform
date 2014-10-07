@@ -33,31 +33,42 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.responce.factory;
+package org.geosdi.geoplatform.exception.rs.mapper;
 
-import org.geosdi.geoplatform.core.model.GPUser;
-import org.geosdi.geoplatform.responce.UserDTO;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.ext.ExceptionMapper;
+import javax.ws.rs.ext.Provider;
+import org.geosdi.geoplatform.exception.GPExceptionFault;
+import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.exception.rs.GPRestExceptionMessage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class UserDTOStrategy implements AccountDTOStrategy<GPUser> {
+@Provider
+@Produces(MediaType.APPLICATION_JSON)
+public class GPExceptionFaultMapper implements
+        ExceptionMapper<GPExceptionFault> {
+
+    private static final Logger logger = LoggerFactory.getLogger(
+            GPExceptionFaultMapper.class);
 
     @Override
-    public UserDTO create(GPUser account) {
-        return new UserDTO(account);
-    }
+    public Response toResponse(GPExceptionFault exception) {
+        logger.warn("\n\n@@@@@@@@@@@@@@@@@@@@@ {GPExceptionFault "
+                + ": " + exception + "}\n");
 
-    @Override
-    public Boolean isValid() {
-        return Boolean.TRUE;
-    }
-
-    @Override
-    public Class<GPUser> forClass() {
-        return GPUser.class;
+        return Response.serverError().entity(new GPRestExceptionMessage(
+                exception.getExceptionType(), exception.getMessage(),
+                (exception instanceof ResourceNotFoundFault)
+                        ? ((ResourceNotFoundFault) exception).getId()
+                        : null)).build();
     }
 
 }

@@ -1,40 +1,39 @@
 /**
  *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
+ * geo-platform Rich webgis framework http://geo-platform.org
+ * ====================================================================
  *
- *   Copyright (C) 2008-2014 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2014 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version. This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details. You should have received a copy of the GNU General Public License
+ * along with this program. If not, see http://www.gnu.org/licenses/
  *
- *   ====================================================================
+ * ====================================================================
  *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
+ * Linking this library statically or dynamically with other modules is making a
+ * combined work based on this library. Thus, the terms and conditions of the
+ * GNU General Public License cover the whole combination.
  *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * As a special exception, the copyright holders of this library give you
+ * permission to link this library with independent modules to produce an
+ * executable, regardless of the license terms of these independent modules, and
+ * to copy and distribute the resulting executable under terms of your choice,
+ * provided that you also meet, for each linked independent module, the terms
+ * and conditions of the license of that module. An independent module is a
+ * module which is not derived from or based on this library. If you modify this
+ * library, you may extend this exception to your version of the library, but
+ * you are not obligated to do so. If you do not wish to do so, delete this
+ * exception statement from your version.
  */
 package org.geosdi.geoplatform.services;
 
+import com.google.common.base.Preconditions;
 import com.googlecode.genericdao.search.Filter;
 import com.googlecode.genericdao.search.Search;
 import java.util.ArrayList;
@@ -55,14 +54,16 @@ import org.geosdi.geoplatform.exception.AccountLoginFault.LoginFaultType;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.jasypt.support.GPDigesterConfigurator;
+import org.geosdi.geoplatform.request.InsertAccountRequest;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.ApplicationDTO;
-import org.geosdi.geoplatform.responce.ShortAccountDTO;
 import org.geosdi.geoplatform.responce.ShortAccountDTOContainer;
 import org.geosdi.geoplatform.responce.UserDTO;
 import org.geosdi.geoplatform.responce.factory.AccountDTOFactory;
 import org.geosdi.geoplatform.services.development.EntityCorrectness;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Account service delegate.
@@ -72,7 +73,7 @@ import org.geosdi.geoplatform.services.development.EntityCorrectness;
  */
 class AccountServiceImpl {
 
-//    private static final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private static final Logger logger = LoggerFactory.getLogger(AccountServiceImpl.class);
     // DAO
     private GPAccountDAO accountDao;
     private GPAccountProjectDAO accountProjectDao;
@@ -140,18 +141,27 @@ class AccountServiceImpl {
      * GeoPlatformService#insertAccount(org.geosdi.geoplatform.core.model.GPAccount,
      * boolean)
      */
-    public Long insertAccount(GPAccount account, boolean sendEmail)
+    public Long insertAccount(InsertAccountRequest insertAccountRequest)
             throws IllegalParameterFault {
+        Preconditions.checkNotNull(insertAccountRequest,
+                "The InsertAccountRequest "
+                + "must not be null");
+        
+        GPAccount account = insertAccountRequest.getAccount();
+        boolean sendEmail = insertAccountRequest.isSendEmail();
+        
         EntityCorrectness.checkAccountAndAuthority(account); // TODO assert
 
-        GPOrganization org = organizationDao.findByName(account.getOrganization().getName());
+        GPOrganization org = organizationDao.findByName(
+                account.getOrganization().getName());
         if (org == null) {
-            throw new IllegalParameterFault("Account to save have an organization that does not exist");
+            throw new IllegalParameterFault(
+                    "Account to save have an organization that does not exist");
         }
         account.setOrganization(org);
-
+        
         this.checkDuplicateAccount(account);
-
+        
         String plainPassword = "";
         if (account instanceof GPUser) {
             GPUser user = (GPUser) account;
@@ -162,21 +172,22 @@ class AccountServiceImpl {
         // TODO Set to false, and after user confirmation email enabling user account
 //        account.setEnabled(true); // Always insert account as enabled
         accountDao.persist(account);
-
+        
         List<GPAuthority> authorities = account.getGPAuthorities();
         for (GPAuthority authority : authorities) {
             authority.setAccount(account);
             authority.setAccountNaturalID(account.getNaturalID());
         }
-        authorityDao.persist(authorities.toArray(new GPAuthority[authorities.size()]));
-
+        authorityDao.persist(authorities.toArray(
+                new GPAuthority[authorities.size()]));
+        
         if (sendEmail && account instanceof GPUser) {
             GPUser user = (GPUser) account;
-
+            
             GPUser clonedUser = this.cloneUser(user, plainPassword);
             schedulerService.sendEmailRegistration(clonedUser);
         }
-
+        
         return account.getId();
     }
 
@@ -206,9 +217,10 @@ class AccountServiceImpl {
             orig.setPassword(this.gpDigester.digest(password));
         }
         this.updateAccount(orig, user);
-
-        this.updateAccountAuthorities(orig.getUsername(), user.getGPAuthorities());
-
+        
+        this.updateAccountAuthorities(orig.getUsername(),
+                user.getGPAuthorities());
+        
         accountDao.merge(orig);
         return orig.getId();
     }
@@ -231,7 +243,8 @@ class AccountServiceImpl {
         boolean passwordChanged = false;
         if (newPlainPassword != null) {
             // Check password
-            if (!this.gpDigester.matches(orig.getPassword(), currentPlainPassword)) {
+            if (!this.gpDigester.matches(orig.getPassword(),
+                    currentPlainPassword)) {
                 throw new IllegalParameterFault("Current password was incorrect");
             }
             passwordChanged = true;
@@ -251,12 +264,13 @@ class AccountServiceImpl {
         if (name != null) {
             orig.setName(name);
         }
-
+        
         accountDao.merge(orig);
 
         // Send an email for modification
         if (passwordChanged || emailChanged) {
-            schedulerService.sendEmailModification(orig, previousEmail, newPlainPassword);
+            schedulerService.sendEmailModification(orig, previousEmail,
+                    newPlainPassword);
         }
         return orig.getId();
     }
@@ -268,16 +282,19 @@ class AccountServiceImpl {
     public Long updateApplication(GPAccount application)
             throws ResourceNotFoundFault, IllegalParameterFault {
         if (application.getId() == null) {
-            throw new IllegalArgumentException("Application \"ID\" must be NOT NULL");
+            throw new IllegalArgumentException(
+                    "Application \"ID\" must be NOT NULL");
         }
-        GPApplication orig = (GPApplication) this.getAccountById(application.getId());
+        GPApplication orig = (GPApplication) this.getAccountById(
+                application.getId());
         EntityCorrectness.checkAccountLog(orig); // TODO assert
 
         // Set the values (except appID and property not managed)
         this.updateAccount(orig, application);
-
-        this.updateAccountAuthorities(orig.getAppID(), application.getGPAuthorities());
-
+        
+        this.updateAccountAuthorities(orig.getAppID(),
+                application.getGPAuthorities());
+        
         accountDao.merge(orig);
         return orig.getId();
     }
@@ -293,7 +310,8 @@ class AccountServiceImpl {
 //      (All Authority will be removed on cascading removing GPAccount)   
 //      authorityDao.removeAllUserAuthorities(account.getAccountNaturalID());
 //
-        List<GPAccountProject> accountProjectList = accountProjectDao.findByOwnerAccountID(accountID);
+        List<GPAccountProject> accountProjectList = accountProjectDao.findByOwnerAccountID(
+                accountID);
         for (GPAccountProject accountProject : accountProjectList) {
             // Remove all AccountProject that reference (also of other accounts) by cascading            
             if (!projectDao.remove(accountProject.getProject())) {
@@ -318,8 +336,10 @@ class AccountServiceImpl {
     /**
      * @see GeoPlatformService#getApplicationDetail(java.lang.Long)
      */
-    public GPApplication getApplicationDetail(Long applicationID) throws ResourceNotFoundFault {
-        GPApplication application = (GPApplication) this.getAccountById(applicationID);
+    public GPApplication getApplicationDetail(Long applicationID) throws
+            ResourceNotFoundFault {
+        GPApplication application = (GPApplication) this.getAccountById(
+                applicationID);
         EntityCorrectness.checkAccountLog(application); // TODO assert
         return application;
     }
@@ -336,8 +356,10 @@ class AccountServiceImpl {
     /**
      * @see GeoPlatformService#getShortApplication(java.lang.Long)
      */
-    public ApplicationDTO getShortApplication(Long applicationID) throws ResourceNotFoundFault {
-        GPApplication application = (GPApplication) this.getAccountById(applicationID);
+    public ApplicationDTO getShortApplication(Long applicationID) throws
+            ResourceNotFoundFault {
+        GPApplication application = (GPApplication) this.getAccountById(
+                applicationID);
         EntityCorrectness.checkAccountLog(application); // TODO assert
         return new ApplicationDTO(application);
     }
@@ -359,6 +381,9 @@ class AccountServiceImpl {
      */
     public GPUser getUserDetailByUsername(SearchRequest request)
             throws ResourceNotFoundFault {
+        logger.debug("\n\n@@@@@@@@@@@@@@@@@ SearchRequest : {} "
+                + "@@@@@@@@@@@@@@@@@@\n\n", request);
+        
         GPUser user = this.getUserByUsername(request.getNameLike());
         // Set authorities
         user.setGPAuthorities(this.getGPAuthorities(user.getNaturalID()));
@@ -371,13 +396,16 @@ class AccountServiceImpl {
      * GeoPlatformService#getUserDetailByUsernameAndPassword(java.lang.String,
      * java.lang.String)
      */
-    public GPUser getUserDetailByUsernameAndPassword(String username, String plainPassword)
-            throws ResourceNotFoundFault, IllegalParameterFault, AccountLoginFault {
+    public GPUser getUserDetailByUsernameAndPassword(String username,
+            String plainPassword)
+            throws ResourceNotFoundFault, IllegalParameterFault,
+            AccountLoginFault {
         GPUser user = accountDao.findByUsername(username);
         if (user == null) {
             user = accountDao.findByEmail(username);
             if (user == null) {
-                throw new ResourceNotFoundFault("User not found (username or email=" + username + ")");
+                throw new ResourceNotFoundFault(
+                        "User not found (username or email=" + username + ")");
             }
         }
         EntityCorrectness.checkAccountLog(user); // TODO assert
@@ -386,7 +414,8 @@ class AccountServiceImpl {
             throw new AccountLoginFault(LoginFaultType.ACCOUNT_EXPIRED, username);
         }
         if (!user.isEnabled()) {
-            throw new AccountLoginFault(LoginFaultType.ACCOUNT_DISABLED, username);
+            throw new AccountLoginFault(LoginFaultType.ACCOUNT_DISABLED,
+                    username);
         }
 
         // Check password
@@ -396,7 +425,7 @@ class AccountServiceImpl {
 
         // Set authorities
         user.setGPAuthorities(this.getGPAuthorities(user.getNaturalID()));
-
+        
         return user;
     }
 
@@ -414,7 +443,7 @@ class AccountServiceImpl {
         if (!application.isEnabled()) {
             throw new AccountLoginFault(LoginFaultType.ACCOUNT_DISABLED, appID);
         }
-
+        
         return application;
     }
 
@@ -424,7 +453,8 @@ class AccountServiceImpl {
      */
     public ApplicationDTO getShortApplicationByAppID(SearchRequest request)
             throws ResourceNotFoundFault {
-        GPApplication application = this.getApplicationByAppId(request.getNameLike());
+        GPApplication application = this.getApplicationByAppId(
+                request.getNameLike());
         EntityCorrectness.checkAccountLog(application); // TODO assert
         return new ApplicationDTO(application);
     }
@@ -444,21 +474,23 @@ class AccountServiceImpl {
         searchCriteria.setPage(request.getPage());
         searchCriteria.addFilterNotEmpty("username");
         searchCriteria.addSortAsc("username");
-        searchCriteria.addFilterEqual("organization.name", user.getOrganization().getName());
-
+        searchCriteria.addFilterEqual("organization.name",
+                user.getOrganization().getName());
+        
         String like = request.getNameLike();
         if (like != null) {
             searchCriteria.addFilterILike("username", like);
         }
-
+        
         List<GPAccount> accountList = accountDao.search(searchCriteria);
         List<GPUser> userList = new ArrayList<GPUser>(accountList.size());
         for (GPAccount account : accountList) {
-            account.setGPAuthorities(this.getGPAuthorities(account.getNaturalID()));
+            account.setGPAuthorities(this.getGPAuthorities(
+                    account.getNaturalID()));
             EntityCorrectness.checkAccountAndAuthorityLog(account); // TODO assert
             userList.add((GPUser) account);
         }
-
+        
         return AccountDTOFactory.buildUserDTOList(userList);
     }
 
@@ -475,16 +507,19 @@ class AccountServiceImpl {
     /**
      * @see GeoPlatformService#getAccounts(java.lang.String)
      */
-    public List<ShortAccountDTO> getAccounts(String organization)
+    public ShortAccountDTOContainer getAccounts(String organization)
             throws ResourceNotFoundFault {
         GPOrganization org = organizationDao.findByName(organization);
         if (org == null) {
-            throw new ResourceNotFoundFault("Organization \"" + organization + "\" not found.");
+            throw new ResourceNotFoundFault(
+                    "Organization \"" + organization + "\" not found.");
         }
-
+        
         List<GPAccount> accountList = accountDao.findByOrganization(organization);
         EntityCorrectness.checkAccountListLog(accountList); // TODO assert
-        return ShortAccountDTO.convertToShortAccountDTOList(accountList);
+        
+        return new ShortAccountDTOContainer(AccountDTOFactory
+                .buildShortAccountDTOList(accountList));
     }
 
     /**
@@ -493,7 +528,7 @@ class AccountServiceImpl {
      */
     public Long getAccountsCount(SearchRequest request) {
         Search searchCriteria = new Search(GPAccount.class);
-
+        
         if (request != null && request.getNameLike() != null) {
             Filter fUsername = Filter.ilike("username", request.getNameLike());
             Filter fAppId = Filter.ilike("appID", request.getNameLike());
@@ -510,7 +545,7 @@ class AccountServiceImpl {
         Search searchCriteria = new Search(GPAccount.class);
         searchCriteria.addFilterNotEmpty("username");
         searchCriteria.addFilterEqual("organization.name", organization);
-
+        
         if (request != null && request.getNameLike() != null) {
             searchCriteria.addFilterILike("username", request.getNameLike());
         }
@@ -520,7 +555,8 @@ class AccountServiceImpl {
     /**
      * @see GeoPlatformService#getAuthorities(java.lang.Long)
      */
-    public List<String> getAuthorities(Long accountNaturalID) throws ResourceNotFoundFault {
+    public List<String> getAuthorities(Long accountNaturalID) throws
+            ResourceNotFoundFault {
         GPAccount account = this.getAccountById(accountNaturalID);
         EntityCorrectness.checkAccountLog(account); // TODO assert
         List<String> authorities = this.getAuthorities(account.getNaturalID());
@@ -530,7 +566,8 @@ class AccountServiceImpl {
     /**
      * @see GeoPlatformService#getAuthoritiesDetail(java.lang.String)
      */
-    public List<GPAuthority> getAuthoritiesDetail(String accountNaturalID) throws ResourceNotFoundFault {
+    public List<GPAuthority> getAuthoritiesDetail(String accountNaturalID)
+            throws ResourceNotFoundFault {
         return this.getGPAuthorities(accountNaturalID);
     }
 
@@ -558,7 +595,7 @@ class AccountServiceImpl {
             throw new IllegalParameterFault(
                     "The account must be temporary (ID = " + accountID + ")");
         }
-
+        
         account.setAccountNonExpired(false);
         accountDao.merge(account);
     }
@@ -575,25 +612,29 @@ class AccountServiceImpl {
         clonedUser.setEnabled(user.isEnabled());
         clonedUser.setAccountTemporary(user.isAccountTemporary());
         clonedUser.setPassword(plainPassword);
-
+        
         return clonedUser;
     }
-
-    private List<String> getAuthorities(String accountNaturalID) throws ResourceNotFoundFault {
+    
+    private List<String> getAuthorities(String accountNaturalID) throws
+            ResourceNotFoundFault {
         List<GPAuthority> authorities = this.getGPAuthorities(accountNaturalID);
         return this.convertAuthorities(authorities);
     }
-
-    private List<GPAuthority> getGPAuthorities(String accountNaturalID) throws ResourceNotFoundFault {
-        List<GPAuthority> authorities = authorityDao.findShortByAccountNaturalID(accountNaturalID);
+    
+    private List<GPAuthority> getGPAuthorities(String accountNaturalID) throws
+            ResourceNotFoundFault {
+        List<GPAuthority> authorities = authorityDao.findShortByAccountNaturalID(
+                accountNaturalID);
         if (authorities.isEmpty()) {
-            throw new ResourceNotFoundFault("Account (naturalID=" + accountNaturalID + ") has no authority");
+            throw new ResourceNotFoundFault(
+                    "Account (naturalID=" + accountNaturalID + ") has no authority");
         }
         EntityCorrectness.checkAuthorityLog(authorities);
-
+        
         return authorities;
     }
-
+    
     private List<String> convertAuthorities(List<GPAuthority> authorities) {
         List<String> authorityName = new ArrayList<String>(authorities.size());
         for (GPAuthority authority : authorities) {
@@ -601,39 +642,45 @@ class AccountServiceImpl {
         }
         return authorityName;
     }
-
-    private GPAccount getAccountById(Long accountID) throws ResourceNotFoundFault {
+    
+    private GPAccount getAccountById(Long accountID) throws
+            ResourceNotFoundFault {
         GPAccount account = accountDao.find(accountID);
         if (account == null) {
             throw new ResourceNotFoundFault("Account not found", accountID);
         }
         return account;
     }
-
-    private GPUser getUserByUsername(String username) throws ResourceNotFoundFault {
+    
+    private GPUser getUserByUsername(String username) throws
+            ResourceNotFoundFault {
         GPUser user = accountDao.findByUsername(username);
         if (user == null) {
-            throw new ResourceNotFoundFault("User not found (username=" + username + ")");
+            throw new ResourceNotFoundFault(
+                    "User not found (username=" + username + ")");
         }
         return user;
     }
-
-    private GPApplication getApplicationByAppId(String appID) throws ResourceNotFoundFault {
+    
+    private GPApplication getApplicationByAppId(String appID) throws
+            ResourceNotFoundFault {
         GPApplication application = accountDao.findByAppID(appID);
         if (application == null) {
-            throw new ResourceNotFoundFault("Application not found (appID=" + appID + ")");
+            throw new ResourceNotFoundFault(
+                    "Application not found (appID=" + appID + ")");
         }
         return application;
     }
-
-    private void checkDuplicateAccount(GPAccount account) throws IllegalParameterFault {
+    
+    private void checkDuplicateAccount(GPAccount account) throws
+            IllegalParameterFault {
         if (account instanceof GPUser) { // User
             GPUser user = (GPUser) account;
             if (accountDao.findByUsername(user.getUsername()) != null) {
                 throw new IllegalParameterFault("User with username \""
                         + user.getUsername() + "\" already exists");
             }
-
+            
             if (accountDao.findByEmail(user.getEmailAddress()) != null) {
                 throw new IllegalParameterFault("User with email \""
                         + user.getEmailAddress() + "\" already exists");
@@ -646,18 +693,22 @@ class AccountServiceImpl {
             }
         }
     }
-
-    private void updateAccountAuthorities(String accountNaturalID, List<GPAuthority> authorities) {
+    
+    private void updateAccountAuthorities(String accountNaturalID,
+            List<GPAuthority> authorities) {
         if (authorities != null && !authorities.isEmpty()) {
             if (authorities.size() > 1) {
-                throw new UnsupportedOperationException("Not supported the update of multi-authorities: new authorities have more than one authority");
+                throw new UnsupportedOperationException(
+                        "Not supported the update of multi-authorities: new authorities have more than one authority");
             }
-
-            List<GPAuthority> origAuthorities = authorityDao.findByAccountNaturalID(accountNaturalID);
+            
+            List<GPAuthority> origAuthorities = authorityDao.findByAccountNaturalID(
+                    accountNaturalID);
             if (origAuthorities.size() > 1) {
-                throw new UnsupportedOperationException("Not supported the update of multi-authorities: persisted authorities have more than one authority");
+                throw new UnsupportedOperationException(
+                        "Not supported the update of multi-authorities: persisted authorities have more than one authority");
             }
-
+            
             GPAuthority authority = authorities.get(0);
             GPAuthority origAuthority = origAuthorities.get(0);
             if (!authority.getAuthority().equals(origAuthority.getAuthority())
@@ -676,9 +727,10 @@ class AccountServiceImpl {
             throws IllegalParameterFault {
         accountToUpdate.setEnabled(account.isEnabled());
         accountToUpdate.setLoadExpandedFolders(account.isLoadExpandedFolders());
-
+        
         if (!accountToUpdate.isAccountTemporary() && account.isAccountTemporary()) {
-            throw new IllegalParameterFault("A standard account cannot be changed to temporary account");
+            throw new IllegalParameterFault(
+                    "A standard account cannot be changed to temporary account");
         }
         accountToUpdate.setAccountTemporary(account.isAccountTemporary());
     }

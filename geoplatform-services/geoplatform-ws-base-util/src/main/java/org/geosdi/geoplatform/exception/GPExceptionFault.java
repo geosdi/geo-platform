@@ -33,31 +33,28 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.responce.factory;
-
-import org.geosdi.geoplatform.core.model.GPUser;
-import org.geosdi.geoplatform.responce.UserDTO;
+package org.geosdi.geoplatform.exception;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class UserDTOStrategy implements AccountDTOStrategy<GPUser> {
+public abstract class GPExceptionFault extends Exception {
 
-    @Override
-    public UserDTO create(GPUser account) {
-        return new UserDTO(account);
+    private static final long serialVersionUID = 9125280996002302152L;
+
+    public GPExceptionFault() {
     }
 
-    @Override
-    public Boolean isValid() {
-        return Boolean.TRUE;
+    public GPExceptionFault(String message) {
+        super(message);
     }
 
-    @Override
-    public Class<GPUser> forClass() {
-        return GPUser.class;
+    public GPExceptionFault(String message, Throwable cause) {
+        super(message, cause);
     }
+
+    public abstract GPExceptionFaultType getExceptionType();
 
 }

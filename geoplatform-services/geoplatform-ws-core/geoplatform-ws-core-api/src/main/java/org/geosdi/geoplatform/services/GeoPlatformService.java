@@ -40,11 +40,14 @@ import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import org.codehaus.jra.Delete;
 import org.codehaus.jra.Get;
@@ -72,6 +75,7 @@ import org.geosdi.geoplatform.exception.AccountLoginFault;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.shared.GPLayerType;
+import org.geosdi.geoplatform.request.InsertAccountRequest;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.RequestByAccountProjectIDs;
 import org.geosdi.geoplatform.request.RequestByID;
@@ -120,6 +124,8 @@ public interface GeoPlatformService {
      * @deprecated only for test purpose
      */
     @Post
+    @Path(value = GPServiceRSPathConfig.INSERT_ORGANIZATION_PATH)
+    @POST
     @Deprecated
     Long insertOrganization(
             @WebParam(name = "organization") GPOrganization organization)
@@ -134,9 +140,12 @@ public interface GeoPlatformService {
      * @deprecated only for test purpose
      */
     @Delete
+    @Path(value = GPServiceRSPathConfig.DELETE_ORGANIZATION_PATH)
+    @DELETE
     @Deprecated
     boolean deleteOrganization(
-            @WebParam(name = "organizationID") Long organizationID)
+            @WebParam(name = "organizationID")
+            @PathParam(value = "organizationID") Long organizationID)
             throws ResourceNotFoundFault;
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Account (User and Application)">
@@ -147,18 +156,17 @@ public interface GeoPlatformService {
     /**
      * Insert an Account (User or Application).
      *
-     * @param account the Account to insert
-     * @param sendEmail the flag for send to new User a registration email (not
-     * for Applications)
+     * @param insertAccountRequest
+     *
      * @return the Account ID
      * @throws IllegalParameterFault if the account not have an Organization or
      * there is a duplicate Account
      */
     @Post
     @POST
-    @Path(value = GPServiceRSPathConfig.INSERT_ACCOUNT)
-    Long insertAccount(@WebParam(name = "account") GPAccount account,
-            @WebParam(name = "sendEmail") boolean sendEmail)
+    @Path(value = GPServiceRSPathConfig.INSERT_ACCOUNT_PATH)
+    Long insertAccount(
+            @WebParam(name = "InsertAccountRequest") InsertAccountRequest insertAccountRequest)
             throws IllegalParameterFault;
 
     @Post
@@ -175,7 +183,9 @@ public interface GeoPlatformService {
      * @throws IllegalParameterFault if User ID is null or update a standard
      * User to a temporary User
      */
-    @Post
+    @PUT
+    @Path(value = GPServiceRSPathConfig.UPDATE_USER_PATH)
+    @Put
     Long updateUser(@WebParam(name = "User") GPUser user)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
@@ -191,7 +201,7 @@ public interface GeoPlatformService {
      * @throws IllegalParameterFault if User ID is null or the
      * currentPlainPassword is wrong
      */
-    @Post
+    @Put
     Long updateOwnUser(
             @WebParam(name = "User") UserDTO user,
             @WebParam(name = "currentPlainPassword") String currentPlainPassword,
@@ -220,8 +230,11 @@ public interface GeoPlatformService {
      * @return true if the Account was deleted
      * @throws ResourceNotFoundFault if Account not found
      */
+    @DELETE
+    @Path(value = GPServiceRSPathConfig.DELETE_ACCOUNT_PATH)
     @Delete
-    boolean deleteAccount(@WebParam(name = "accountID") Long accountID)
+    boolean deleteAccount(@WebParam(name = "accountID")
+            @PathParam(value = "accountID") Long accountID)
             throws ResourceNotFoundFault;
 
     /**
@@ -247,8 +260,10 @@ public interface GeoPlatformService {
      * @throws ResourceNotFoundFault if User not found
      */
     @Get
+    @GET
+    @Path(value = GPServiceRSPathConfig.GET_USER_DETAIL)
     @WebResult(name = "user")
-    GPUser getUserDetailByUsername(SearchRequest request)
+    GPUser getUserDetailByUsername(@QueryParam("") SearchRequest request)
             throws ResourceNotFoundFault;
 
     /**
@@ -262,10 +277,14 @@ public interface GeoPlatformService {
      * @throws AccountLoginFault if User is disabled or expired
      */
     @Get
+    @GET
+    @Path(value = GPServiceRSPathConfig.GET_USER_DETAIL_BY_USERNAME_AND_PASSWORD)
     @WebResult(name = "user")
     GPUser getUserDetailByUsernameAndPassword(
-            @WebParam(name = "username") String username,
-            @WebParam(name = "plainPassword") String plainPassword)
+            @WebParam(name = "username")
+            @PathParam(value = "username") String username,
+            @WebParam(name = "plainPassword")
+            @PathParam(value = "plainPassword") String plainPassword)
             throws ResourceNotFoundFault, IllegalParameterFault,
             AccountLoginFault;
 
@@ -303,20 +322,26 @@ public interface GeoPlatformService {
      * @throws ResourceNotFoundFault if User not found
      */
     @Get
+    @GET
+    @Path(value = GPServiceRSPathConfig.GET_SHORT_USER_BY_ID)
     @WebResult(name = "user")
-    UserDTO getShortUser(@WebParam(name = "userID") Long userID)
+    UserDTO getShortUser(@WebParam(name = "userID")
+            @PathParam(value = "userID") Long userID)
             throws ResourceNotFoundFault;
 
     /**
      * Retrieve a User by username.
      *
-     * @param the request that wrap the username
+     * @param request
+     *
      * @return the User to retrieve
      * @throws ResourceNotFoundFault if User not found
      */
     @Get
+    @GET
+    @Path(value = GPServiceRSPathConfig.GET_SHORT_USER_BY_USERNAME)
     @WebResult(name = "user")
-    UserDTO getShortUserByUsername(SearchRequest request)
+    UserDTO getShortUserByUsername(@QueryParam("") SearchRequest request)
             throws ResourceNotFoundFault;
 
     /**
@@ -379,9 +404,12 @@ public interface GeoPlatformService {
      * @throws ResourceNotFoundFault if Organization not found
      */
     @Get
+    @GET
+    @Path(value = GPServiceRSPathConfig.GET_ALL_ORGANIZATION_ACCOUNTS)
     @WebResult(name = "account")
-    List<ShortAccountDTO> getAccounts(
-            @WebParam(name = "organization") String organization)
+    ShortAccountDTOContainer getAccounts(
+            @WebParam(name = "organization")
+            @PathParam(value = "organization") String organization)
             throws ResourceNotFoundFault;
 
     /**
@@ -392,8 +420,10 @@ public interface GeoPlatformService {
      * @return the number of Accounts found
      */
     @Get
+    @GET
+    @Path(value = GPServiceRSPathConfig.GET_ACCOUNTS_COUNT)
     @WebResult(name = "count")
-    Long getAccountsCount(SearchRequest request);
+    Long getAccountsCount(@QueryParam("") SearchRequest request);
 
     /**
      * Retrieve the number of Users of an Organization founded by search
@@ -431,9 +461,12 @@ public interface GeoPlatformService {
      * Authorities
      */
     @Get
+    @GET
+    @Path(value = GPServiceRSPathConfig.GET_AUTHORITIES_BY_ACCOUNT_NATURAL_ID)
     @WebResult(name = "authority")
     List<GPAuthority> getAuthoritiesDetail(
-            @WebParam(name = "accountNaturalID") String accountNaturalID)
+            @WebParam(name = "accountNaturalID")
+            @PathParam(value = "accountNaturalID") String accountNaturalID)
             throws ResourceNotFoundFault;
 
     /**

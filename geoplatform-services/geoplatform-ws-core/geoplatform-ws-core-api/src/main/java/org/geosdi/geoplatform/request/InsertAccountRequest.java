@@ -33,31 +33,67 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.responce.factory;
+package org.geosdi.geoplatform.request;
 
-import org.geosdi.geoplatform.core.model.GPUser;
-import org.geosdi.geoplatform.responce.UserDTO;
+import java.io.Serializable;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAnyElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import org.geosdi.geoplatform.core.model.GPAccount;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class UserDTOStrategy implements AccountDTOStrategy<GPUser> {
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
+public class InsertAccountRequest implements Serializable {
 
-    @Override
-    public UserDTO create(GPUser account) {
-        return new UserDTO(account);
+    private static final long serialVersionUID = 1646506363613851665L;
+    //
+    @XmlAnyElement(lax = true)
+    private GPAccount account;
+    private boolean sendEmail;
+
+    /**
+     * For Jaxb
+     */
+    public InsertAccountRequest() {
     }
 
-    @Override
-    public Boolean isValid() {
-        return Boolean.TRUE;
+    public InsertAccountRequest(GPAccount theAccount, boolean theSendEmail) {
+        this.account = theAccount;
+        this.sendEmail = theSendEmail;
     }
 
-    @Override
-    public Class<GPUser> forClass() {
-        return GPUser.class;
+    /**
+     * @return the account
+     */
+    public GPAccount getAccount() {
+        return account;
+    }
+
+    /**
+     * @param account the account to set
+     */
+    public void setAccount(GPAccount account) {
+        this.account = account;
+    }
+
+    /**
+     * @return the sendEmail
+     */
+    public boolean isSendEmail() {
+        return sendEmail;
+    }
+
+    /**
+     * @param sendEmail the sendEmail to set
+     */
+    public void setSendEmail(boolean sendEmail) {
+        this.sendEmail = sendEmail;
     }
 
 }

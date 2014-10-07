@@ -31,53 +31,29 @@
  * you are not obligated to do so. If you do not wish to do so, delete this
  * exception statement from your version.
  */
-package org.geosdi.geoplatform.connectors.ws.rest;
+package org.geosdi.geoplatform.connectors.ws.basic.soap;
 
-import java.util.Arrays;
-import org.apache.cxf.jaxrs.client.JAXRSClientFactory;
-import org.apache.cxf.jaxrs.provider.json.JSONProvider;
-import org.geosdi.geoplatform.connectors.ws.GPAbstractWSClientConnector;
+import javax.annotation.Resource;
+import org.geosdi.geoplatform.configurator.bootstrap.Production;
+import org.geosdi.geoplatform.services.GeoPlatformService;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
- * <p>
- * Abstract class that represents the template for the implementation of all
- * clients REST ws. The parameter E is the generic endpoints </p>
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class RestClientConnector<E> extends GPAbstractWSClientConnector<E> {
+@Configuration
+@Production
+class BasicWSClientConnectorConfiguration {
 
-    private JSONProvider<? extends Object> jsonProvider;
+    @Resource(name = "gpBasicWSClientConnector")
+    private GPBasicWSClientConnector gpBasicWSClientConnector;
 
-    public RestClientConnector(Class<E> theServiceClass) {
-        super(theServiceClass);
+    @Bean
+    public GeoPlatformService geoPlatformServiceClient() {
+        return this.gpBasicWSClientConnector.getEndpointService();
     }
-
-    @Override
-    protected void create() {
-        if (serviceClass == null) {
-            throw new IllegalArgumentException(
-                    "The Parameter Service Class can't be null.");
-        }
-
-        if (getAddress() == null) {
-            throw new IllegalArgumentException(
-                    "The Parameter Address can't be null.");
-        }
-
-        this.jsonProvider = createJSONProvider();
-
-        if (this.jsonProvider == null) {
-            throw new IllegalArgumentException("The Provider cannot be null.");
-        }
-
-        this.endpointService = JAXRSClientFactory.create(getAddress(),
-                serviceClass, Arrays.<JSONProvider>asList(jsonProvider));
-    }
-
-    protected abstract <T extends Object> JSONProvider<T> createJSONProvider();
-
-    protected abstract Class<?>[] getExtraClasses();
 
 }

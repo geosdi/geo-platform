@@ -33,31 +33,28 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.responce.factory;
+package org.geosdi.geoplatform.connectors.ws.basic.soap;
 
-import org.geosdi.geoplatform.core.model.GPUser;
-import org.geosdi.geoplatform.responce.UserDTO;
+import org.geosdi.geoplatform.connectors.ws.soap.SoapClientConnector;
+import org.geosdi.geoplatform.services.GeoPlatformService;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class UserDTOStrategy implements AccountDTOStrategy<GPUser> {
+abstract class BasicWSClientConnector
+        extends SoapClientConnector<GeoPlatformService> {
 
-    @Override
-    public UserDTO create(GPUser account) {
-        return new UserDTO(account);
+    String address;
+
+    public BasicWSClientConnector() {
+        super(GeoPlatformService.class);
     }
 
     @Override
-    public Boolean isValid() {
-        return Boolean.TRUE;
-    }
-
-    @Override
-    public Class<GPUser> forClass() {
-        return GPUser.class;
+    public String getAddress() {
+        return this.address;
     }
 
 }

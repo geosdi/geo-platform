@@ -51,6 +51,7 @@ import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.shared.GPLayerType;
 import org.geosdi.geoplatform.jasypt.support.GPDigesterConfigurator;
+import org.geosdi.geoplatform.request.InsertAccountRequest;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.RequestByAccountProjectIDs;
 import org.geosdi.geoplatform.request.RequestByID;
@@ -339,10 +340,9 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     // === Account
     // =========================================================================
     @Override
-    public Long insertAccount(GPAccount account,
-            boolean sendEmail)
+    public Long insertAccount(InsertAccountRequest insertAccountRequest)
             throws IllegalParameterFault {
-        return accountServiceDelegate.insertAccount(account, sendEmail);
+        return accountServiceDelegate.insertAccount(insertAccountRequest);
     }
 
     @Override
@@ -441,7 +441,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public List<ShortAccountDTO> getAccounts(String organization)
+    public ShortAccountDTOContainer getAccounts(String organization)
             throws ResourceNotFoundFault {
         return accountServiceDelegate.getAccounts(organization);
     }

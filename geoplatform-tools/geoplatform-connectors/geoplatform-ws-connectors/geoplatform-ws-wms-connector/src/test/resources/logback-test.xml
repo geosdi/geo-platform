@@ -18,8 +18,5 @@
     <logger name="org.springframework" level="info" additivity="false">
         <appender-ref ref="STDOUT" />
     </logger>
-    
-    <logger name="org.geosdi.geoplatform.support.async.spring.config.ThreadPoolTaskExecutorConfig" level="debug"/>
-    <logger name="org.geosdi.geoplatform.support.async.spring.placeholder.GPAsyncPlaceholderConfig" level="debug"/>
 
 </configuration>

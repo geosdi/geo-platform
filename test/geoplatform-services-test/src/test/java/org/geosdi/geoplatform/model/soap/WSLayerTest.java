@@ -70,9 +70,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:applicationContext-Test.xml",
     "classpath*:applicationContext.xml"})
-@TestExecutionListeners(value = {WSListenerServices.class})
+@TestExecutionListeners(value = {WSListenerBasicServices.class})
 @ActiveProfiles(profiles = {"dev"})
-public class WSLayerTest extends ServiceTest {
+public class WSLayerTest extends BaseSoapServiceTest {
 
     private static final String urlServer = "http://www.geosdi.org/test";
     private static final String newUrlServer = "http://www.geosdi.org/newtest";

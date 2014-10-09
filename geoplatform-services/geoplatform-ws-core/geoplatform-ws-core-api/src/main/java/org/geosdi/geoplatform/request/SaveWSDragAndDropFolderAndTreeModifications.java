@@ -33,28 +33,84 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connectors.ws.basic.rest;
+package org.geosdi.geoplatform.request;
 
-import org.geosdi.geoplatform.core.model.GPAccount;
-import org.springframework.beans.factory.annotation.Value;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPBasicRestClientTestConnector
-        extends BasicRestClientConnector {
+@XmlRootElement
+@XmlType(propOrder = {"folderMovedID", "newParentID",
+    "newPosition", "descendantsMapData"})
+@XmlAccessorType(XmlAccessType.FIELD)
+public class SaveWSDragAndDropFolderAndTreeModifications
+        extends WSFolderAndTreeModificationRequest {
 
-    @Override
-    @Value("configurator{webservice_rs_test_endpoint_address}")
-    public void setAddress(String theAddress) {
-        this.address = theAddress;
+    private static final long serialVersionUID = 9201263180218998178L;
+    //
+    private Long folderMovedID;
+    private Long newParentID;
+    private int newPosition;
+
+    public SaveWSDragAndDropFolderAndTreeModifications() {
     }
 
-    @Override
-    protected Class<?>[] getExtraClasses() {
-        return new Class<?>[]{GPAccount.class};
+    public SaveWSDragAndDropFolderAndTreeModifications(Long theFolderMovedID,
+            Long theNewParentID, int theNewPosition,
+            GPWebServiceMapData theDescendantsMapData) {
+        super(theDescendantsMapData);
+        this.folderMovedID = theFolderMovedID;
+        this.newParentID = theNewParentID;
+        this.newPosition = theNewPosition;
+    }
+
+    /**
+     * @return the folderMovedID
+     */
+    public Long getFolderMovedID() {
+        return folderMovedID;
+    }
+
+    /**
+     * @param folderMovedID the folderMovedID to set
+     */
+    public void setFolderMovedID(Long folderMovedID) {
+        this.folderMovedID = folderMovedID;
+    }
+
+    /**
+     * @return the newParentID
+     */
+    public Long getNewParentID() {
+        return newParentID;
+    }
+
+    /**
+     * @param newParentID the newParentID to set
+     */
+    public void setNewParentID(Long newParentID) {
+        this.newParentID = newParentID;
+    }
+
+    /**
+     * @return the newPosition
+     */
+    public int getNewPosition() {
+        return newPosition;
+    }
+
+    /**
+     * @param newPosition the newPosition to set
+     */
+    public void setNewPosition(int newPosition) {
+        this.newPosition = newPosition;
     }
 
 }

@@ -54,6 +54,7 @@ import org.geosdi.geoplatform.gui.shared.GPLayerType;
 import org.geosdi.geoplatform.gui.shared.GPRole;
 import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 import org.geosdi.geoplatform.request.InsertAccountRequest;
+import org.geosdi.geoplatform.request.InsertFolderRequest;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.junit.After;
 import org.junit.Assert;
@@ -243,7 +244,8 @@ public abstract class ServiceTest {
             IllegalParameterFault {
         GPFolder folder = this.createFolder(folderName, project, position,
                 parent);
-        return gpWSClient.insertFolder(project.getId(), folder);
+        return gpWSClient.insertFolder(new InsertFolderRequest(project.getId(),
+                folder));
     }
 
     protected long createAndInsertFolder(String folderName, GPProject project,
@@ -252,7 +254,8 @@ public abstract class ServiceTest {
         GPFolder folder = this.createFolder(folderName, project, position,
                 parent);
         folder.setNumberOfDescendants(numberOfDescendants);
-        return gpWSClient.insertFolder(project.getId(), folder);
+        return gpWSClient.insertFolder(new InsertFolderRequest(project.getId(),
+                folder));
     }
 
     protected GPProject createProject(String name, boolean shared,

@@ -33,42 +33,28 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connectors.ws.basic.rest;
+package org.geosdi.geoplatform.responce.collection;
 
-import org.apache.cxf.jaxrs.provider.json.JSONProvider;
-import org.geosdi.geoplatform.connectors.ws.rest.RestClientConnector;
-import org.geosdi.geoplatform.services.GeoPlatformService;
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.List;
+import org.geosdi.geoplatform.core.model.GPLayer;
+import org.geosdi.geoplatform.responce.FolderDTO;
+import org.geosdi.geoplatform.responce.ShortLayerDTO;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-abstract class BasicRestClientConnector
-        extends RestClientConnector<GeoPlatformService> {
-    
-    String address;
-    
-    public BasicRestClientConnector() {
-        super(GeoPlatformService.class);
-    }
-    
-    @Override
-    protected <T> JSONProvider<T> createJSONProvider() {
-        return new JSONProvider() {
-            
-            {
-                if ((getExtraClasses() != null)
-                        && (getExtraClasses().length > 0)) {
-                    super.setExtraClass(getExtraClasses());
-                }
-            }
-        };
-    }
-    
-    @Override
-    public String getAddress() {
-        return this.address;
-    }
-    
+public interface ITreeFolderElementsStore extends Serializable {
+
+    TreeFolderElements getFolderElements();
+
+    void addFolderCollection(List<FolderDTO> folders);
+
+    void addLayerCollection(Collection<GPLayer> layerList);
+
+    void addLayerCollection(List<ShortLayerDTO> layers);
+
 }

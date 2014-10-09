@@ -44,21 +44,11 @@ import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.responce.ServerDTO;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestExecutionListeners;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI
  *
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:applicationContext-Test.xml",
-    "classpath*:applicationContext.xml"})
-@TestExecutionListeners(value = {WSListenerBasicServices.class})
-@ActiveProfiles(profiles = {"dev"})
 public class CXFServiceTest extends BaseSoapServiceTest {
 
 //    private GeoPlatformWSClientEncrypted gpWSClientEncrypted;

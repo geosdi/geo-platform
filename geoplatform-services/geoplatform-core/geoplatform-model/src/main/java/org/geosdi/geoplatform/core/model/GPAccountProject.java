@@ -45,6 +45,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -76,6 +77,7 @@ public class GPAccountProject implements Serializable {
             sequenceName = "GP_ACCOUNT_PROJECT_SEQ")
     private Long id;
     //
+    @XmlAnyElement(lax = true)
     @ManyToOne(optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @Index(name = "ACCOUNT_ID_INDEX")

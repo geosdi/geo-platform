@@ -83,13 +83,55 @@ public final class GPServiceRSPathConfig {
     private static final String AUTHORITIES_PATH = "/authorities/";
     public static final String GET_AUTHORITIES_BY_ACCOUNT_NATURAL_ID = AUTHORITIES_PATH
             + "getAuthoritiesByAccountNaturalID/{accountNaturalID}";
+    
+    /**
+     * PROJECTS PATH
+     */
+    private static final String PROJECTS_PATH = "/projects/";
+    public static final String INSERT_PROJECT_PATH = PROJECTS_PATH 
+            + "insertProject";
+    public static final String UPDATE_PROJECT_PATH = PROJECTS_PATH
+            + "updateProject";
+    public static final String GET_PROJECT_DETAIL_PATH = PROJECTS_PATH 
+            + "getProjectDetail/{projectID}";
 
     /**
      * ACCOUNT PROJECTS PATH *
      */
-    private static final String ACCOUNT_PROJECTS = "/accountprojects/";
-    public static final String GET_ACCOUNT_PROJECTS_BY_ACCOUNT_ID = ACCOUNT_PROJECTS
+    private static final String ACCOUNT_PROJECTS_PATH = "/accountprojects/";
+    public static final String GET_ACCOUNT_PROJECTS_BY_ACCOUNT_ID = ACCOUNT_PROJECTS_PATH
             + "{accountID}";
+    public static final String INSERT_ACCOUNT_PROJECT_PATH = ACCOUNT_PROJECTS_PATH
+            + "insertAccountProject";
+    
+    /**
+     * FOLDERS PATH
+     */
+    private static final String FOLDERS_PATH = "/folders/";
+    public static final String INSERT_FOLDER_PATH = FOLDERS_PATH 
+            + "insertFolder";
+    public static final String UPDATE_FOLDER_PATH = FOLDERS_PATH 
+            + "updateFolder";
+    public static final String DELETE_FOLDER_PATH = FOLDERS_PATH 
+            + "deleteFolder/{folderID}";
+    public static final String GET_CHILDREN_FOLDERS_PATH = FOLDERS_PATH
+            + "getChildrenFolders/{folderID}";
+    public static final String SAVE_ADDED_FOLDER_AND_TREE_MODICATIONS_PATH = FOLDERS_PATH
+            + "saveAddedFolderAndTreeModifications";
+    public static final String SAVE_DELETED_FOLDER_AND_TREE_MODIFICATIONS_PATH = FOLDERS_PATH
+            + "saveDeletedFolderAndTreeModifications";
+    public static final String SAVE_DD_FOLDER_AND_TREE_MODIFICATIONS_PATH = FOLDERS_PATH
+            + "saveDragAndDropFolderAndTreeModifications";
+    public static final String GET_FOLDER_DETAIL_PATH = FOLDERS_PATH 
+            + "getFolderDetail/{folderID}";
+    public static final String GET_SHORT_FOLDER_PATH = FOLDERS_PATH 
+            + "getShortFolder/{folderID}";
+    public static final String GET_NUMBER_OF_ELEMENTS_PROJECT_PATH = FOLDERS_PATH
+            + "getNumberOfElementsProject/{projectID}";
+    public static final String GET_PROJECT_WITH_ROOT_FOLDERS_PATH = FOLDERS_PATH
+            + "getProjectWithRootFolders/{projectID}/{accountID}";
+    public static final String GET_CHILDREN_ELEMENTS_PATH = FOLDERS_PATH 
+            + "getChildrenElements/{folderID}";
 
     /**
      * WMS CAPABILITIES PATH

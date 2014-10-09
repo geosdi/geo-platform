@@ -76,9 +76,13 @@ import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.shared.GPLayerType;
 import org.geosdi.geoplatform.request.InsertAccountRequest;
+import org.geosdi.geoplatform.request.InsertFolderRequest;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.RequestByAccountProjectIDs;
 import org.geosdi.geoplatform.request.RequestByID;
+import org.geosdi.geoplatform.request.SaveWSAddedFolderAndTreeModificationsRequest;
+import org.geosdi.geoplatform.request.SaveWSDeletedFolderAndTreeModifications;
+import org.geosdi.geoplatform.request.SaveWSDragAndDropFolderAndTreeModifications;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.AccountProjectPropertiesDTO;
 import org.geosdi.geoplatform.responce.ApplicationDTO;
@@ -93,7 +97,7 @@ import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.geosdi.geoplatform.responce.UserDTO;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
-import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
+import org.geosdi.geoplatform.responce.collection.TreeFolderElementsStore;
 import org.geosdi.geoplatform.services.rs.path.GPServiceRSPathConfig;
 
 /**
@@ -503,7 +507,9 @@ public interface GeoPlatformService {
      * @return the AccountProject ID
      * @throws IllegalParameterFault if AccountProject is not valid
      */
-    @Put
+    @Post
+    @POST
+    @Path(value = GPServiceRSPathConfig.INSERT_ACCOUNT_PROJECT_PATH)
     Long insertAccountProject(
             @WebParam(name = "accountProject") GPAccountProject accountProject)
             throws IllegalParameterFault;
@@ -803,7 +809,9 @@ public interface GeoPlatformService {
      * @see #saveProject(java.lang.String,
      * org.geosdi.geoplatform.core.model.GPProject, boolean)
      */
-    @Put
+    @Post
+    @Path(value = GPServiceRSPathConfig.INSERT_PROJECT_PATH)
+    @POST
     @Deprecated
     Long insertProject(@WebParam(name = "project") GPProject project)
             throws IllegalParameterFault;
@@ -816,7 +824,9 @@ public interface GeoPlatformService {
      * @throws ResourceNotFoundFault if the Project not found
      * @throws IllegalParameterFault if the Project is not valid
      */
-    @Post
+    @Put
+    @PUT
+    @Path(value = GPServiceRSPathConfig.UPDATE_PROJECT_PATH)
     Long updateProject(@WebParam(name = "project") GPProject project)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
@@ -839,8 +849,11 @@ public interface GeoPlatformService {
      * @throws ResourceNotFoundFault if the Project not found
      */
     @Get
+    @GET
+    @Path(value = GPServiceRSPathConfig.GET_PROJECT_DETAIL_PATH)
     @WebResult(name = "project")
-    GPProject getProjectDetail(@WebParam(name = "projectID") Long projectID)
+    GPProject getProjectDetail(@WebParam(name = "projectID")
+            @PathParam(value = "projectID") Long projectID)
             throws ResourceNotFoundFault;
 
     /**
@@ -851,8 +864,11 @@ public interface GeoPlatformService {
      * @throws ResourceNotFoundFault if Project not found
      */
     @Get
+    @GET
+    @Path(value = GPServiceRSPathConfig.GET_NUMBER_OF_ELEMENTS_PROJECT_PATH)
     @WebResult(name = "project")
-    int getNumberOfElementsProject(@WebParam(name = "projectID") Long projectID)
+    int getNumberOfElementsProject(@WebParam(name = "projectID")
+            @PathParam(value = "projectID") Long projectID)
             throws ResourceNotFoundFault;
 
     /**
@@ -916,8 +932,8 @@ public interface GeoPlatformService {
     /**
      * Insert a Folder into a Project.
      *
-     * @param projectID the Project ID
-     * @param folder the Folder to insert
+     * @param insertFolderRequest
+     *
      * @return the Folder ID
      * @throws ResourceNotFoundFault if Project not found
      * @throws IllegalParameterFault if Folder is not valid
@@ -926,10 +942,12 @@ public interface GeoPlatformService {
      * org.geosdi.geoplatform.core.model.GPFolder,
      * org.geosdi.geoplatform.responce.collection.GPWebServiceMapData)
      */
-    @Put
+    @Post
+    @POST
+    @Path(value = GPServiceRSPathConfig.INSERT_FOLDER_PATH)
     @Deprecated
-    Long insertFolder(@WebParam(name = "projectID") Long projectID,
-            @WebParam(name = "folder") GPFolder folder)
+    Long insertFolder(
+            @WebParam(name = "insertFolderRequest") InsertFolderRequest insertFolderRequest)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
     /**
@@ -943,7 +961,9 @@ public interface GeoPlatformService {
      * @see #saveFolderProperties(java.lang.Long, java.lang.String, boolean,
      * boolean)
      */
-    @Post
+    @Put
+    @PUT
+    @Path(value = GPServiceRSPathConfig.UPDATE_FOLDER_PATH)
     @Deprecated
     Long updateFolder(@WebParam(name = "folder") GPFolder folder)
             throws ResourceNotFoundFault, IllegalParameterFault;
@@ -959,8 +979,11 @@ public interface GeoPlatformService {
      * org.geosdi.geoplatform.responce.collection.GPWebServiceMapData)
      */
     @Delete
+    @DELETE
+    @Path(value = GPServiceRSPathConfig.DELETE_FOLDER_PATH)
     @Deprecated
-    boolean deleteFolder(@WebParam(name = "folderID") Long folderID)
+    boolean deleteFolder(@WebParam(name = "folderID")
+            @PathParam(value = "folderID") Long folderID)
             throws ResourceNotFoundFault;
 
     /**
@@ -984,38 +1007,33 @@ public interface GeoPlatformService {
     /**
      * Insert a Folder, moreover manage Folder ancestors and positions on tree.
      *
-     * @param projectID the Project ID
-     * @param parentID the Folder parent ID
-     * @param folder the Folder to insert
-     * @param descendantsMapData the map of descendants (key = ancestor Folder
-     * ID, value = number of its descendants)
+     * @param sftModificationRequest
      * @return the Folder ID
      * @throws ResourceNotFoundFault if Project or parent Folder not found
      * @throws IllegalParameterFault if the map of descendants is empty for a
      * folder sibling, or if the Folder is not valid
      */
     @Put
-    Long saveAddedFolderAndTreeModifications(
-            @WebParam(name = "projectID") Long projectID,
-            @WebParam(name = "parentID") Long parentID,
-            @WebParam(name = "folder") GPFolder folder,
-            @WebParam(name = "descendantsMap") GPWebServiceMapData descendantsMapData)
+    @PUT
+    @Path(value = GPServiceRSPathConfig.SAVE_ADDED_FOLDER_AND_TREE_MODICATIONS_PATH)
+    Long saveAddedFolderAndTreeModifications(@WebParam(
+            name = "sftModificationRequest") SaveWSAddedFolderAndTreeModificationsRequest sftModificationRequest)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
     /**
      * Delete a Folder by ID, moreover manage Folder ancestors and positions on
      * tree.
      *
-     * @param folderID the Folder ID
-     * @param descendantsMapData the map of descendants (key = ancestor Folder
-     * ID, value = number of its descendants)
+     * @param sdfModificationRequest
+     *
      * @return true if the Folder was deleted
      * @throws ResourceNotFoundFault if Folder not found
      */
-    @Delete
+    @Put
+    @PUT
+    @Path(value = GPServiceRSPathConfig.SAVE_DELETED_FOLDER_AND_TREE_MODIFICATIONS_PATH)
     boolean saveDeletedFolderAndTreeModifications(
-            @WebParam(name = "folderID") Long folderID,
-            @WebParam(name = "descendantsMapData") GPWebServiceMapData descendantsMapData)
+            @WebParam(name = "sdfModificationRequest") SaveWSDeletedFolderAndTreeModifications sdfModificationRequest)
             throws ResourceNotFoundFault;
 
     /**
@@ -1036,21 +1054,16 @@ public interface GeoPlatformService {
      * Shift a Folder to a new position with a new parent Folder, and manage
      * positions on tree.
      *
-     * @param idFolderMoved the Folder ID to move
-     * @param newParentID the new Folder parent ID, set conventionally 0 if
-     * idFolderMoved is refer to a folder of root
-     * @param newPosition the new position of Folder
-     * @param descendantsMapData the map of descendants (key = ancestors Folder
-     * ID, value = number of its descendants)
+     * @param sddfTreeModificationRequest
+     *
      * @return true if the Folder wad shifted
      * @throws ResourceNotFoundFault if Folder or parent Folder not found
      */
     @Put
+    @PUT
+    @Path(value = GPServiceRSPathConfig.SAVE_DD_FOLDER_AND_TREE_MODIFICATIONS_PATH)
     boolean saveDragAndDropFolderAndTreeModifications(
-            @WebParam(name = "folderMovedID") Long folderMovedID,
-            @WebParam(name = "newParentID") Long newParentID,
-            @WebParam(name = "newPosition") int newPosition,
-            @WebParam(name = "descendantsMapData") GPWebServiceMapData descendantsMapData)
+            @WebParam(name = "sddfTreeModificationRequest") SaveWSDragAndDropFolderAndTreeModifications sddfTreeModificationRequest)
             throws ResourceNotFoundFault;
 
     /**
@@ -1061,8 +1074,11 @@ public interface GeoPlatformService {
      * @throws ResourceNotFoundFault if Folder not found
      */
     @Get
+    @GET
+    @Path(value = GPServiceRSPathConfig.GET_SHORT_FOLDER_PATH)
     @WebResult(name = "folder")
-    FolderDTO getShortFolder(@WebParam(name = "folderID") Long folderID)
+    FolderDTO getShortFolder(@WebParam(name = "folderID")
+            @PathParam(value = "folderID") Long folderID)
             throws ResourceNotFoundFault;
 
     /**
@@ -1073,8 +1089,11 @@ public interface GeoPlatformService {
      * @throws ResourceNotFoundFault if Folder not found
      */
     @Get
+    @GET
+    @Path(value = GPServiceRSPathConfig.GET_FOLDER_DETAIL_PATH)
     @WebResult(name = "folder")
-    GPFolder getFolderDetail(@WebParam(name = "folderID") Long folderID)
+    GPFolder getFolderDetail(@WebParam(name = "folderID")
+            @PathParam(value = "folderID") Long folderID)
             throws ResourceNotFoundFault;
 
     /**
@@ -1124,9 +1143,11 @@ public interface GeoPlatformService {
      * @return the list of children Folder
      */
     @Get
+    @GET
+    @Path(value = GPServiceRSPathConfig.GET_CHILDREN_FOLDERS_PATH)
     @WebResult(name = "folder")
-    List<FolderDTO> getChildrenFolders(
-            @WebParam(name = "folderID") Long folderID);
+    List<FolderDTO> getChildrenFolders(@WebParam(name = "folderID")
+            @PathParam(value = "folderID") Long folderID);
 
     /**
      * Retrieve the children elements (Folders and Layers) of a Folder.
@@ -1135,9 +1156,11 @@ public interface GeoPlatformService {
      * @return the tree of children elements (Folders and Layers)
      */
     @Get
+    @GET
+    @Path(value = GPServiceRSPathConfig.GET_CHILDREN_ELEMENTS_PATH)
     @WebResult(name = "childrenElement")
-    TreeFolderElements getChildrenElements(
-            @WebParam(name = "folderID") Long folderID);
+    TreeFolderElementsStore getChildrenElements(@WebParam(name = "folderID")
+            @PathParam(value = "folderID") Long folderID);
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Folder / Project">
 
@@ -1152,10 +1175,13 @@ public interface GeoPlatformService {
      * @throws ResourceNotFoundFault if Project not found
      */
     @Get
+    @GET
+    @Path(value = GPServiceRSPathConfig.GET_PROJECT_WITH_ROOT_FOLDERS_PATH)
     @WebResult(name = "project")
-    ProjectDTO getProjectWithRootFolders(
-            @WebParam(name = "projectID") Long projectID,
-            @WebParam(name = "accountID") Long accountID)
+    ProjectDTO getProjectWithRootFolders(@WebParam(name = "projectID")
+            @PathParam(value = "projectID") Long projectID,
+            @WebParam(name = "accountID")
+            @PathParam(value = "accountID") Long accountID)
             throws ResourceNotFoundFault;
 
     /**

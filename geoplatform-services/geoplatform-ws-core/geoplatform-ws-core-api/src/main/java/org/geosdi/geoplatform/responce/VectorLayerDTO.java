@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.responce;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPProject;
@@ -44,6 +46,7 @@ import org.geosdi.geoplatform.core.model.GPVectorLayer;
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 @XmlRootElement(name = "VectorLayerDTO")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class VectorLayerDTO extends ShortLayerDTO {
 
     //<editor-fold defaultstate="collapsed" desc="Constructor method">

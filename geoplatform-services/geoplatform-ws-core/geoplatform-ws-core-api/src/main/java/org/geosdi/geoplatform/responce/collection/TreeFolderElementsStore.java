@@ -33,42 +33,67 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connectors.ws.basic.rest;
+package org.geosdi.geoplatform.responce.collection;
 
-import org.apache.cxf.jaxrs.provider.json.JSONProvider;
-import org.geosdi.geoplatform.connectors.ws.rest.RestClientConnector;
-import org.geosdi.geoplatform.services.GeoPlatformService;
+import java.util.Collection;
+import java.util.List;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import org.geosdi.geoplatform.core.model.GPLayer;
+import org.geosdi.geoplatform.responce.FolderDTO;
+import org.geosdi.geoplatform.responce.ShortLayerDTO;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-abstract class BasicRestClientConnector
-        extends RestClientConnector<GeoPlatformService> {
-    
-    String address;
-    
-    public BasicRestClientConnector() {
-        super(GeoPlatformService.class);
+@XmlRootElement
+public class TreeFolderElementsStore implements ITreeFolderElementsStore {
+
+    private static final long serialVersionUID = -8985769926116698122L;
+    //
+    private TreeFolderElements folderElements = new TreeFolderElements();
+
+    public TreeFolderElementsStore() {
     }
-    
+
+    /**
+     * @return the folderElements
+     */
+    @XmlElementWrapper(name = "folderElements")
+    @XmlElement(name = "element")
     @Override
-    protected <T> JSONProvider<T> createJSONProvider() {
-        return new JSONProvider() {
-            
-            {
-                if ((getExtraClasses() != null)
-                        && (getExtraClasses().length > 0)) {
-                    super.setExtraClass(getExtraClasses());
-                }
-            }
-        };
+    public TreeFolderElements getFolderElements() {
+        return folderElements;
     }
-    
+
+    /**
+     * @param folderElements the folderElements to set
+     */
+    public void setFolderElements(TreeFolderElements folderElements) {
+        this.folderElements = folderElements;
+    }
+
     @Override
-    public String getAddress() {
-        return this.address;
+    public void addFolderCollection(List<FolderDTO> folders) {
+        this.folderElements.addFolderCollection(folders);
     }
-    
+
+    @Override
+    public void addLayerCollection(Collection<GPLayer> layerList) {
+        this.folderElements.addLayerCollection(layerList);
+    }
+
+    @Override
+    public void addLayerCollection(List<ShortLayerDTO> layers) {
+        this.folderElements.addLayerCollection(layers);
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + " {" + "folderElements = "
+                + folderElements + '}';
+    }
 }

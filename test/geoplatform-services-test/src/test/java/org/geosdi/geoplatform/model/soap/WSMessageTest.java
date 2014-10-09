@@ -49,21 +49,11 @@ import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.MessageDTO;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestExecutionListeners;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:applicationContext-Test.xml",
-    "classpath*:applicationContext.xml"})
-@TestExecutionListeners(value = {WSListenerBasicServices.class})
-@ActiveProfiles(profiles = {"dev"})
 public class WSMessageTest extends BaseSoapServiceTest {
 
     private Long firstRecipientID;

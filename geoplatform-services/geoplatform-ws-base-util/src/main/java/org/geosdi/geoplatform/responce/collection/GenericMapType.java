@@ -46,14 +46,14 @@ import java.util.Map;
  */
 public class GenericMapType<K, V> {
 
-    private List<GenericEntryType<K, V>> entry = new ArrayList<GenericEntryType<K, V>>();
+    private List<GenericEntryType<K, V>> entry = new ArrayList<>();
 
     public GenericMapType() {
     }
 
     public GenericMapType(Map<K, V> map) {
         for (Map.Entry<K, V> e : map.entrySet()) {
-            entry.add(new GenericEntryType<K, V>(e));
+            entry.add(new GenericEntryType<>(e));
         }
     }
 

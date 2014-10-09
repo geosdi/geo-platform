@@ -1,37 +1,35 @@
 /**
  *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
+ * geo-platform Rich webgis framework http://geo-platform.org
+ * ====================================================================
  *
- *   Copyright (C) 2008-2014 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2014 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version. This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details. You should have received a copy of the GNU General Public License
+ * along with this program. If not, see http://www.gnu.org/licenses/
  *
- *   ====================================================================
+ * ====================================================================
  *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
+ * Linking this library statically or dynamically with other modules is making a
+ * combined work based on this library. Thus, the terms and conditions of the
+ * GNU General Public License cover the whole combination.
  *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * As a special exception, the copyright holders of this library give you
+ * permission to link this library with independent modules to produce an
+ * executable, regardless of the license terms of these independent modules, and
+ * to copy and distribute the resulting executable under terms of your choice,
+ * provided that you also meet, for each linked independent module, the terms
+ * and conditions of the license of that module. An independent module is a
+ * module which is not derived from or based on this library. If you modify this
+ * library, you may extend this exception to your version of the library, but
+ * you are not obligated to do so. If you do not wish to do so, delete this
+ * exception statement from your version.
  */
 package org.geosdi.geoplatform.services;
 
@@ -52,9 +50,13 @@ import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.shared.GPLayerType;
 import org.geosdi.geoplatform.jasypt.support.GPDigesterConfigurator;
 import org.geosdi.geoplatform.request.InsertAccountRequest;
+import org.geosdi.geoplatform.request.InsertFolderRequest;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.RequestByAccountProjectIDs;
 import org.geosdi.geoplatform.request.RequestByID;
+import org.geosdi.geoplatform.request.SaveWSAddedFolderAndTreeModificationsRequest;
+import org.geosdi.geoplatform.request.SaveWSDeletedFolderAndTreeModifications;
+import org.geosdi.geoplatform.request.SaveWSDragAndDropFolderAndTreeModifications;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.AccountProjectPropertiesDTO;
 import org.geosdi.geoplatform.responce.ApplicationDTO;
@@ -69,7 +71,7 @@ import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.geosdi.geoplatform.responce.UserDTO;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
-import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
+import org.geosdi.geoplatform.responce.collection.TreeFolderElementsStore;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -325,12 +327,14 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     // === Organization
     // =========================================================================
     @Override
-    public Long insertOrganization(GPOrganization organization) throws IllegalParameterFault {
+    public Long insertOrganization(GPOrganization organization) throws
+            IllegalParameterFault {
         return organizationServiceDelegate.insertOrganization(organization);
     }
 
     @Override
-    public boolean deleteOrganization(Long organizationID) throws ResourceNotFoundFault {
+    public boolean deleteOrganization(Long organizationID) throws
+            ResourceNotFoundFault {
         return organizationServiceDelegate.deleteOrganization(organizationID);
     }
     //</editor-fold>
@@ -346,8 +350,10 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public void sendCASNewUserNotification(List<String> emailRecipient, String userNameToNotify) throws IllegalParameterFault {
-        this.schedulerServiceDelegate.sendCASNewUserNotification(emailRecipient, userNameToNotify);
+    public void sendCASNewUserNotification(List<String> emailRecipient,
+            String userNameToNotify) throws IllegalParameterFault {
+        this.schedulerServiceDelegate.sendCASNewUserNotification(emailRecipient,
+                userNameToNotify);
     }
 
     @Override
@@ -357,7 +363,8 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public Long updateApplication(GPApplication application) throws ResourceNotFoundFault,
+    public Long updateApplication(GPApplication application) throws
+            ResourceNotFoundFault,
             IllegalParameterFault {
         return accountServiceDelegate.updateApplication(application);
     }
@@ -390,13 +397,15 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     @Override
     public GPUser getUserDetailByUsernameAndPassword(String username,
             String plainPassword)
-            throws ResourceNotFoundFault, IllegalParameterFault, AccountLoginFault {
+            throws ResourceNotFoundFault, IllegalParameterFault,
+            AccountLoginFault {
         return accountServiceDelegate.getUserDetailByUsernameAndPassword(
                 username, plainPassword);
     }
 
     @Override
-    public GPApplication getApplicationDetail(Long applicationID) throws ResourceNotFoundFault {
+    public GPApplication getApplicationDetail(Long applicationID) throws
+            ResourceNotFoundFault {
         return accountServiceDelegate.getApplicationDetail(applicationID);
     }
 
@@ -418,7 +427,8 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public ApplicationDTO getShortApplication(Long applicationID) throws ResourceNotFoundFault {
+    public ApplicationDTO getShortApplication(Long applicationID) throws
+            ResourceNotFoundFault {
         return accountServiceDelegate.getShortApplication(applicationID);
     }
 
@@ -487,7 +497,8 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     // === AccountProject
     // =========================================================================
     @Override
-    public Long insertAccountProject(GPAccountProject accountProject) throws IllegalParameterFault {
+    public Long insertAccountProject(GPAccountProject accountProject) throws
+            IllegalParameterFault {
         return projectServiceDelegate.insertAccountProject(accountProject);
     }
 
@@ -498,12 +509,14 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public boolean deleteAccountProject(Long accountProjectID) throws ResourceNotFoundFault {
+    public boolean deleteAccountProject(Long accountProjectID) throws
+            ResourceNotFoundFault {
         return projectServiceDelegate.deleteAccountProject(accountProjectID);
     }
 
     @Override
-    public GPAccountProject getAccountProject(Long accountProjectID) throws ResourceNotFoundFault {
+    public GPAccountProject getAccountProject(Long accountProjectID) throws
+            ResourceNotFoundFault {
         return projectServiceDelegate.getAccountProject(accountProjectID);
     }
 
@@ -534,7 +547,8 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public GPAccountProject getDefaultAccountProject(Long accountID) throws ResourceNotFoundFault {
+    public GPAccountProject getDefaultAccountProject(Long accountID) throws
+            ResourceNotFoundFault {
         return projectServiceDelegate.getDefaultAccountProject(accountID);
     }
 
@@ -558,17 +572,20 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public GPAccount getProjectOwner(Long projectID) throws ResourceNotFoundFault {
+    public GPAccount getProjectOwner(Long projectID) throws
+            ResourceNotFoundFault {
         return projectServiceDelegate.getProjectOwner(projectID);
     }
 
     @Override
-    public GPProject getDefaultProject(Long accountID) throws ResourceNotFoundFault {
+    public GPProject getDefaultProject(Long accountID) throws
+            ResourceNotFoundFault {
         return projectServiceDelegate.getDefaultProject(accountID);
     }
 
     @Override
-    public ProjectDTO getDefaultProjectDTO(Long accountID) throws ResourceNotFoundFault {
+    public ProjectDTO getDefaultProjectDTO(Long accountID) throws
+            ResourceNotFoundFault {
         return projectServiceDelegate.getDefaultProjectDTO(accountID);
     }
 
@@ -637,12 +654,14 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public GPProject getProjectDetail(Long projectID) throws ResourceNotFoundFault {
+    public GPProject getProjectDetail(Long projectID) throws
+            ResourceNotFoundFault {
         return projectServiceDelegate.getProjectDetail(projectID);
     }
 
     @Override
-    public int getNumberOfElementsProject(Long projectID) throws ResourceNotFoundFault {
+    public int getNumberOfElementsProject(Long projectID) throws
+            ResourceNotFoundFault {
         return projectServiceDelegate.getNumberOfElementsProject(projectID);
     }
 
@@ -711,10 +730,9 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     // === Folder
     // =========================================================================
     @Override
-    public Long insertFolder(Long projectID,
-            GPFolder folder)
+    public Long insertFolder(InsertFolderRequest insertFolderRequest)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        return folderServiceDelegate.insertFolder(projectID, folder);
+        return folderServiceDelegate.insertFolder(insertFolderRequest);
     }
 
     @Override
@@ -739,21 +757,19 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public Long saveAddedFolderAndTreeModifications(Long projectID,
-            Long parentID,
-            GPFolder folder,
-            GPWebServiceMapData descendantsMapData)
+    public Long saveAddedFolderAndTreeModifications(
+            SaveWSAddedFolderAndTreeModificationsRequest sftModificationRequest)
             throws ResourceNotFoundFault, IllegalParameterFault {
         return folderServiceDelegate.saveAddedFolderAndTreeModifications(
-                projectID, parentID, folder, descendantsMapData);
+                sftModificationRequest);
     }
 
     @Override
-    public boolean saveDeletedFolderAndTreeModifications(Long folderID,
-            GPWebServiceMapData descendantsMapData)
+    public boolean saveDeletedFolderAndTreeModifications(
+            SaveWSDeletedFolderAndTreeModifications sdfModificationRequest)
             throws ResourceNotFoundFault {
         return folderServiceDelegate.saveDeletedFolderAndTreeModifications(
-                folderID, descendantsMapData);
+                sdfModificationRequest);
     }
 
     @Override
@@ -765,13 +781,11 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public boolean saveDragAndDropFolderAndTreeModifications(Long folderMovedID,
-            Long newParentID,
-            int newPosition,
-            GPWebServiceMapData descendantsMapData)
+    public boolean saveDragAndDropFolderAndTreeModifications(
+            SaveWSDragAndDropFolderAndTreeModifications sddfTreeModificationRequest)
             throws ResourceNotFoundFault {
         return folderServiceDelegate.saveDragAndDropFolderModifications(
-                folderMovedID, newParentID, newPosition, descendantsMapData);
+                sddfTreeModificationRequest);
     }
 
     @Override
@@ -810,7 +824,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public TreeFolderElements getChildrenElements(Long folderID) {
+    public TreeFolderElementsStore getChildrenElements(Long folderID) {
         return folderServiceDelegate.getChildrenElements(folderID);
     }
     //</editor-fold>
@@ -982,7 +996,8 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
 //    }
 
     @Override
-    public ShortLayerDTO getShortLayer(Long layerID) throws ResourceNotFoundFault {
+    public ShortLayerDTO getShortLayer(Long layerID) throws
+            ResourceNotFoundFault {
         return layerServiceDelegate.getShortLayer(layerID);
     }
 
@@ -1003,7 +1018,8 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     // === ACL
     // =========================================================================    
     @Override
-    public List<String> getAllRoles(String organization) throws ResourceNotFoundFault {
+    public List<String> getAllRoles(String organization) throws
+            ResourceNotFoundFault {
         return aclServiceDelegate.getAllRoles(organization);
     }
 
@@ -1074,12 +1090,14 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public ServerDTO getShortServer(String serverUrl) throws ResourceNotFoundFault {
+    public ServerDTO getShortServer(String serverUrl) throws
+            ResourceNotFoundFault {
         return serverServiceDelegate.getShortServer(serverUrl);
     }
 
     @Override
-    public List<ServerDTO> getAllServers(String organizationName) throws ResourceNotFoundFault {
+    public List<ServerDTO> getAllServers(String organizationName) throws
+            ResourceNotFoundFault {
         return serverServiceDelegate.getServers(organizationName);
     }
 
@@ -1105,12 +1123,14 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     // === Message
     // =========================================================================
     @Override
-    public Long insertMessage(GPMessage message) throws ResourceNotFoundFault, IllegalParameterFault {
+    public Long insertMessage(GPMessage message) throws ResourceNotFoundFault,
+            IllegalParameterFault {
         return messageServiceDelegate.insertMessage(message);
     }
 
     @Override
-    public boolean insertMultiMessage(MessageDTO messageDTO) throws ResourceNotFoundFault {
+    public boolean insertMultiMessage(MessageDTO messageDTO) throws
+            ResourceNotFoundFault {
         return messageServiceDelegate.insertMultiMessage(messageDTO);
     }
 
@@ -1120,27 +1140,32 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public GPMessage getMessageDetail(Long messageID) throws ResourceNotFoundFault {
+    public GPMessage getMessageDetail(Long messageID) throws
+            ResourceNotFoundFault {
         return messageServiceDelegate.getMessageDetail(messageID);
     }
 
     @Override
-    public List<GPMessage> getAllMessagesByRecipient(Long recipientID) throws ResourceNotFoundFault {
+    public List<GPMessage> getAllMessagesByRecipient(Long recipientID) throws
+            ResourceNotFoundFault {
         return messageServiceDelegate.getAllMessagesByRecipient(recipientID);
     }
 
     @Override
-    public List<GPMessage> getUnreadMessagesByRecipient(Long recipientID) throws ResourceNotFoundFault {
+    public List<GPMessage> getUnreadMessagesByRecipient(Long recipientID) throws
+            ResourceNotFoundFault {
         return messageServiceDelegate.getUnreadMessagesByRecipient(recipientID);
     }
 
     @Override
-    public boolean markMessageAsRead(Long recipientID) throws ResourceNotFoundFault {
+    public boolean markMessageAsRead(Long recipientID) throws
+            ResourceNotFoundFault {
         return messageServiceDelegate.markMessageAsRead(recipientID);
     }
 
     @Override
-    public boolean markAllMessagesAsReadByRecipient(Long recipientID) throws ResourceNotFoundFault {
+    public boolean markAllMessagesAsReadByRecipient(Long recipientID) throws
+            ResourceNotFoundFault {
         return messageServiceDelegate.markAllMessagesAsReadByRecipient(
                 recipientID);
     }

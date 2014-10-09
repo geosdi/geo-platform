@@ -1,37 +1,35 @@
 /**
  *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
+ * geo-platform Rich webgis framework http://geo-platform.org
+ * ====================================================================
  *
- *   Copyright (C) 2008-2014 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2014 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version. This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details. You should have received a copy of the GNU General Public License
+ * along with this program. If not, see http://www.gnu.org/licenses/
  *
- *   ====================================================================
+ * ====================================================================
  *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
+ * Linking this library statically or dynamically with other modules is making a
+ * combined work based on this library. Thus, the terms and conditions of the
+ * GNU General Public License cover the whole combination.
  *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * As a special exception, the copyright holders of this library give you
+ * permission to link this library with independent modules to produce an
+ * executable, regardless of the license terms of these independent modules, and
+ * to copy and distribute the resulting executable under terms of your choice,
+ * provided that you also meet, for each linked independent module, the terms
+ * and conditions of the license of that module. An independent module is a
+ * module which is not derived from or based on this library. If you modify this
+ * library, you may extend this exception to your version of the library, but
+ * you are not obligated to do so. If you do not wish to do so, delete this
+ * exception statement from your version.
  */
 package org.geosdi.geoplatform.services;
 
@@ -45,12 +43,16 @@ import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.request.InsertFolderRequest;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.RequestByID;
+import org.geosdi.geoplatform.request.SaveWSAddedFolderAndTreeModificationsRequest;
+import org.geosdi.geoplatform.request.SaveWSDeletedFolderAndTreeModifications;
+import org.geosdi.geoplatform.request.SaveWSDragAndDropFolderAndTreeModifications;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
-import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
+import org.geosdi.geoplatform.responce.collection.TreeFolderElementsStore;
 import org.geosdi.geoplatform.services.development.EntityCorrectness;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,8 +64,9 @@ import org.slf4j.LoggerFactory;
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 class FolderServiceImpl {
-
-    private static final Logger logger = LoggerFactory.getLogger(FolderServiceImpl.class);
+    
+    private static final Logger logger = LoggerFactory.getLogger(
+            FolderServiceImpl.class);
     // DAO
     private GPFolderDAO folderDao;
     private GPLayerDAO layerDao;
@@ -100,8 +103,21 @@ class FolderServiceImpl {
      * @see GeoPlatformService#insertFolder(java.lang.Long,
      * org.geosdi.geoplatform.core.model.GPFolder)
      */
-    public Long insertFolder(Long projectID, GPFolder folder)
+    public Long insertFolder(InsertFolderRequest insertFolderRequest)
             throws ResourceNotFoundFault, IllegalParameterFault {
+        Long projectID = insertFolderRequest.getProjectID();
+        GPFolder folder = insertFolderRequest.getFolder();
+        
+        if (projectID == null) {
+            throw new IllegalParameterFault("The projectID must not be null.");
+        }
+        
+        if (folder == null) {
+            throw new IllegalParameterFault(
+                    "The GPFolder passed in Request must "
+                    + "not be null.");
+        }
+        
         GPProject project = projectDao.find(projectID);
         if (project == null) {
             throw new ResourceNotFoundFault("Project not found", projectID);
@@ -135,7 +151,7 @@ class FolderServiceImpl {
         orig.setExpanded(folder.isExpanded());
         orig.setShared(folder.isShared());
         orig.setParent(folder.getParent());
-
+        
         EntityCorrectness.checkFolder(orig); // TODO assert
 
         folderDao.merge(orig);
@@ -169,13 +185,14 @@ class FolderServiceImpl {
         EntityCorrectness.checkFolderLog(folder); // TODO assert
 
         if (name == null || name.trim().length() == 0) {
-            throw new IllegalParameterFault("Folder \"name\" cannot be null or empty");
+            throw new IllegalParameterFault(
+                    "Folder \"name\" cannot be null or empty");
         }
-
+        
         folder.setName(name);
         folder.setChecked(checked);
         folder.setExpanded(expanded);
-
+        
         folderDao.merge(folder);
         return folder.getId();
     }
@@ -186,24 +203,34 @@ class FolderServiceImpl {
      * java.lang.Long, org.geosdi.geoplatform.core.model.GPFolder,
      * org.geosdi.geoplatform.responce.collection.GPWebServiceMapData)
      */
-    public Long saveAddedFolderAndTreeModifications(Long projectId, Long parentId,
-            GPFolder folder, GPWebServiceMapData descendantsMapData)
+    public Long saveAddedFolderAndTreeModifications(
+            SaveWSAddedFolderAndTreeModificationsRequest sftModificationRequest)
             throws ResourceNotFoundFault, IllegalParameterFault {
+        Long projectId = sftModificationRequest.getProjectID();
+        Long parentId = sftModificationRequest.getParentID();
+        GPFolder folder = sftModificationRequest.getFolder();
+        GPWebServiceMapData descendantsMapData = sftModificationRequest.getDescendantsMapData();
+        
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@SERVER SIDE @@@@@@@@@@@@@@ {}",
+                descendantsMapData);
+        
         GPProject project = projectDao.find(projectId);
         if (project == null) {
             throw new ResourceNotFoundFault("Project not found", projectId);
         }
         EntityCorrectness.checkProjectLog(project); // TODO assert
         folder.setProject(project);
-
+        
         if (parentId != null) {
             if (descendantsMapData.getDescendantsMap().isEmpty()) { // TODO assert
-                throw new IllegalParameterFault("descendantsMapData must have one or more entries if the folder has a parent");
+                throw new IllegalParameterFault(
+                        "descendantsMapData must have one or more entries if the folder has a parent");
             }
-
+            
             GPFolder parentFolder = folderDao.find(parentId);
             if (parentFolder == null) {
-                throw new ResourceNotFoundFault("Folder parent not found", parentId);
+                throw new ResourceNotFoundFault("Folder parent not found",
+                        parentId);
             }
             EntityCorrectness.checkFolderLog(parentFolder); // TODO assert
             folder.setParent(parentFolder);
@@ -215,22 +242,22 @@ class FolderServiceImpl {
         // Shift positions
         folderDao.updatePositionsLowerBound(projectId, newPosition, increment);
         layerDao.updatePositionsLowerBound(projectId, newPosition, increment);
-
+        
         folderDao.persist(folder);
-
-        folderDao.updateAncestorsDescendants(descendantsMapData.getDescendantsMap());
+        
+        folderDao.updateAncestorsDescendants(
+                descendantsMapData.getDescendantsMap());
         this.updateNumberOfElements(project, increment);
-
+        
         return folder.getId();
     }
-
-    /**
-     * @see
-     * GeoPlatformService#saveDeletedFolderAndTreeModifications(java.lang.Long,
-     * org.geosdi.geoplatform.responce.collection.GPWebServiceMapData)
-     */
-    public boolean saveDeletedFolderAndTreeModifications(Long folderID, GPWebServiceMapData descendantsMapData)
+    
+    public boolean saveDeletedFolderAndTreeModifications(
+            SaveWSDeletedFolderAndTreeModifications sdfModificationRequest)
             throws ResourceNotFoundFault {
+        Long folderID = sdfModificationRequest.getFolderID();
+        GPWebServiceMapData descendantsMapData = sdfModificationRequest.getDescendantsMapData();
+        
         GPFolder folder = folderDao.find(folderID);
         if (folder == null) {
             throw new ResourceNotFoundFault("Folder not found", folderID);
@@ -239,17 +266,20 @@ class FolderServiceImpl {
 
         int oldPosition = folder.getPosition();
         int decrement = -(folder.getNumberOfDescendants() + 1);
-
+        
         boolean result = folderDao.remove(folder);
-
+        
         GPProject project = folder.getProject();
         // Shift positions (shift must be done only after removing folder)
-        folderDao.updatePositionsLowerBound(project.getId(), oldPosition, decrement);
-        layerDao.updatePositionsLowerBound(project.getId(), oldPosition, decrement);
-
-        folderDao.updateAncestorsDescendants(descendantsMapData.getDescendantsMap());
+        folderDao.updatePositionsLowerBound(project.getId(), oldPosition,
+                decrement);
+        layerDao.updatePositionsLowerBound(project.getId(), oldPosition,
+                decrement);
+        
+        folderDao.updateAncestorsDescendants(
+                descendantsMapData.getDescendantsMap());
         this.updateNumberOfElements(project, decrement);
-
+        
         return result;
     }
 
@@ -258,7 +288,8 @@ class FolderServiceImpl {
      * GeoPlatformService#saveCheckStatusFolderAndTreeModifications(java.lang.Long,
      * boolean)
      */
-    public boolean saveCheckStatusFolderAndTreeModifications(Long folderID, boolean checked)
+    public boolean saveCheckStatusFolderAndTreeModifications(Long folderID,
+            boolean checked)
             throws ResourceNotFoundFault {
         GPFolder folder = folderDao.find(folderID);
         if (folder == null) {
@@ -268,15 +299,15 @@ class FolderServiceImpl {
 
         return folderDao.persistCheckStatusFolder(folderID, checked);
     }
-
-    /**
-     * @see
-     * GeoPlatformService#saveDragAndDropFolderAndTreeModifications(java.lang.Long,
-     * java.lang.Long, int,
-     * org.geosdi.geoplatform.responce.collection.GPWebServiceMapData)
-     */
-    public boolean saveDragAndDropFolderModifications(Long folderMovedID, Long newParentID,
-            int newPosition, GPWebServiceMapData descendantsMapData) throws ResourceNotFoundFault {
+    
+    public boolean saveDragAndDropFolderModifications(
+            SaveWSDragAndDropFolderAndTreeModifications sddfTreeModificationRequest)
+            throws ResourceNotFoundFault {
+        Long folderMovedID = sddfTreeModificationRequest.getFolderMovedID();
+        Long newParentID = sddfTreeModificationRequest.getNewParentID();
+        int newPosition = sddfTreeModificationRequest.getNewPosition();
+        GPWebServiceMapData descendantsMapData = sddfTreeModificationRequest.getDescendantsMapData();
+        
         GPFolder folderMoved = folderDao.find(folderMovedID);
         if (folderMoved == null) {
             throw new ResourceNotFoundFault("Folder not found", folderMovedID);
@@ -288,7 +319,8 @@ class FolderServiceImpl {
             logger.trace("*** Folder will have a Parent");
             GPFolder folderParent = folderDao.find(newParentID);
             if (folderParent == null) {
-                throw new ResourceNotFoundFault("New Parent not found", newParentID);
+                throw new ResourceNotFoundFault("New Parent not found",
+                        newParentID);
             }
             EntityCorrectness.checkFolderLog(folderParent); // TODO assert
             folderMoved.setParent(folderParent);
@@ -296,7 +328,7 @@ class FolderServiceImpl {
             logger.trace("*** Folder will be a root folder");
             folderMoved.setParent(null);
         }
-
+        
         int startFirstRange = 0, endFirstRange = 0;
         if (folderMoved.getPosition() < newPosition) {
             logger.trace("*** Drag & Drop to top");
@@ -310,21 +342,21 @@ class FolderServiceImpl {
         int startSecondRange = folderMoved.getPosition();
         int endSecondRange = folderMoved.getPosition() - folderMoved.getNumberOfDescendants();
         int shiftValue = folderMoved.getNumberOfDescendants() + 1;
-
+        
         Search search = new Search();
         search.addFilterGreaterOrEqual("position", endFirstRange).
                 addFilterLessOrEqual("position", startFirstRange);
         search.addFilterEqual("project.id", folderMoved.getProject().getId());
         List<GPFolder> matchingFoldersFirstRange = folderDao.search(search);
         List<GPLayer> matchingLayersFirstRange = layerDao.search(search);
-
+        
         search.clear();
         search.addFilterGreaterOrEqual("position", endSecondRange).
                 addFilterLessOrEqual("position", startSecondRange);
         search.addFilterEqual("project.id", folderMoved.getProject().getId());
         List<GPFolder> matchingFoldersSecondRange = folderDao.search(search);
         List<GPLayer> matchingLayersSecondRange = layerDao.search(search);
-
+        
         logger.trace("Range: " + startFirstRange + " - " + endFirstRange + " - "
                 + startSecondRange + " - " + endSecondRange + " - ");
 //        System.out.println("### matchingFoldersFirstRange.size(): " + matchingFoldersFirstRange.size());
@@ -337,28 +369,38 @@ class FolderServiceImpl {
 //        System.out.println("### endSecondRange: " + endSecondRange);
 //        System.out.println("### shiftValue: " + shiftValue);
 //        System.out.println("### moveValue: " + moveValue);
-
         if (folderMoved.getPosition() < newPosition) {// Drag & Drop to top
-            this.executeFoldersModifications(matchingFoldersFirstRange, -shiftValue);
-            this.executeLayersModifications(matchingLayersFirstRange, -shiftValue);
-            this.executeFoldersModifications(matchingFoldersSecondRange, moveValue);
+            this.executeFoldersModifications(matchingFoldersFirstRange,
+                    -shiftValue);
+            this.executeLayersModifications(matchingLayersFirstRange,
+                    -shiftValue);
+            this.executeFoldersModifications(matchingFoldersSecondRange,
+                    moveValue);
             this.executeLayersModifications(matchingLayersSecondRange, moveValue);
         } else if (folderMoved.getPosition() > newPosition) {// Drag & Drop to bottom
-            this.executeFoldersModifications(matchingFoldersFirstRange, shiftValue);
+            this.executeFoldersModifications(matchingFoldersFirstRange,
+                    shiftValue);
             this.executeLayersModifications(matchingLayersFirstRange, shiftValue);
-            this.executeFoldersModifications(matchingFoldersSecondRange, -moveValue);
-            this.executeLayersModifications(matchingLayersSecondRange, -moveValue);
+            this.executeFoldersModifications(matchingFoldersSecondRange,
+                    -moveValue);
+            this.executeLayersModifications(matchingLayersSecondRange,
+                    -moveValue);
         }
-
-        folderDao.merge(matchingFoldersFirstRange.toArray(new GPFolder[matchingFoldersFirstRange.size()]));
-        folderDao.merge(matchingFoldersSecondRange.toArray(new GPFolder[matchingFoldersSecondRange.size()]));
-        layerDao.merge(matchingLayersFirstRange.toArray(new GPLayer[matchingLayersFirstRange.size()]));
-        layerDao.merge(matchingLayersSecondRange.toArray(new GPLayer[matchingLayersSecondRange.size()]));
+        
+        folderDao.merge(matchingFoldersFirstRange.toArray(
+                new GPFolder[matchingFoldersFirstRange.size()]));
+        folderDao.merge(matchingFoldersSecondRange.toArray(
+                new GPFolder[matchingFoldersSecondRange.size()]));
+        layerDao.merge(matchingLayersFirstRange.toArray(
+                new GPLayer[matchingLayersFirstRange.size()]));
+        layerDao.merge(matchingLayersSecondRange.toArray(
+                new GPLayer[matchingLayersSecondRange.size()]));
         folderMoved.setPosition(newPosition);
         folderDao.merge(folderMoved);
-
-        folderDao.updateAncestorsDescendants(descendantsMapData.getDescendantsMap());
-
+        
+        folderDao.updateAncestorsDescendants(
+                descendantsMapData.getDescendantsMap());
+        
         return true;
     }
 
@@ -393,12 +435,12 @@ class FolderServiceImpl {
         searchCriteria.setMaxResults(searchRequest.getNum());
         searchCriteria.setPage(searchRequest.getPage());
         searchCriteria.addSortAsc("name");
-
+        
         String like = searchRequest.getNameLike();
         if (like != null) {
             searchCriteria.addFilterILike("name", like);
         }
-
+        
         List<GPFolder> foundFolder = folderDao.search(searchCriteria);
         return FolderDTO.convertToFolderDTOList(foundFolder);
     }
@@ -420,7 +462,7 @@ class FolderServiceImpl {
         if (searchRequest != null && searchRequest.getNameLike() != null) {
             searchCriteria.addFilterILike("name", searchRequest.getNameLike());
         }
-
+        
         return folderDao.count(searchCriteria);
     }
 
@@ -434,7 +476,7 @@ class FolderServiceImpl {
         searchCriteria.setPage(request.getPage());
         searchCriteria.addSortAsc("name");
         searchCriteria.addFilterEqual("parent.id", request.getId());
-
+        
         List<GPFolder> foundFolder = folderDao.search(searchCriteria);
         return FolderDTO.convertToFolderDTOList(foundFolder);
     }
@@ -446,7 +488,7 @@ class FolderServiceImpl {
         Search searchCriteria = new Search(GPFolder.class);
         searchCriteria.addSortAsc("name");
         searchCriteria.addFilterEqual("parent.id", folderID);
-
+        
         List<GPFolder> foundFolder = folderDao.search(searchCriteria);
         return FolderDTO.convertToFolderDTOList(foundFolder);
     }
@@ -454,19 +496,19 @@ class FolderServiceImpl {
     /**
      * @see GeoPlatformService#getChildrenElements(java.lang.Long)
      */
-    public TreeFolderElements getChildrenElements(Long folderID) {
-        TreeFolderElements tree = new TreeFolderElements();
-
+    public TreeFolderElementsStore getChildrenElements(Long folderID) {
+        TreeFolderElementsStore tree = new TreeFolderElementsStore();
+        
         Search searchCriteria = new Search(GPFolder.class);
         searchCriteria.addFilterEqual("parent.id", folderID);
         List<GPFolder> foundFolder = folderDao.search(searchCriteria);
         tree.addFolderCollection(FolderDTO.convertToFolderDTOList(foundFolder));
-
+        
         searchCriteria = new Search(GPLayer.class);
         searchCriteria.addFilterEqual("folder.id", folderID);
         List<GPLayer> foundLayer = layerDao.search(searchCriteria);
         tree.addLayerCollection(foundLayer);
-
+        
         return tree;
     }
     //</editor-fold>
@@ -479,14 +521,14 @@ class FolderServiceImpl {
             layer.setPosition(layer.getPosition() + value);
         }
     }
-
+    
     private void executeFoldersModifications(List<GPFolder> elements, int value) {
         for (GPFolder folder : elements) {
             EntityCorrectness.checkFolderLog(folder); // TODO assert
             folder.setPosition(folder.getPosition() + value);
         }
     }
-
+    
     private void updateNumberOfElements(GPProject project, int delta) {
         project.deltaToNumberOfElements(delta);
         projectDao.merge(project);

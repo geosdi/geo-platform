@@ -35,19 +35,36 @@
  */
 package org.geosdi.geoplatform.model.rest;
 
+import java.util.ArrayList;
+import java.util.Date;
+import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPOrganization;
+import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.gui.shared.GPRole;
 import org.geosdi.geoplatform.model.ServiceTest;
 import org.geosdi.geoplatform.request.LikePatternType;
 import org.geosdi.geoplatform.request.SearchRequest;
+import org.junit.runner.RunWith;
+import org.springframework.security.acls.domain.BasePermission;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
+ * 
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:applicationContext-Test.xml",
+    "classpath*:applicationContext.xml"})
+@TestExecutionListeners(value = {RSListenerBasicServices.class})
+@ActiveProfiles(profiles = {"dev"})
 abstract class BasicRestServiceTest extends ServiceTest {
 
     protected static final String organizationNameRSTest = "geoSDI_rs_test";
@@ -56,6 +73,16 @@ abstract class BasicRestServiceTest extends ServiceTest {
     protected static final String passwordTest = usernameTest;
     protected static final String emailTest = usernameTest + "@" + domainNameTest;
     protected GPUser userTest;
+     // Projects
+    protected GPProject projectTest;
+    protected long idProjectTest = -1;
+    // Folders
+    protected static final String nameRootFolderA = "rootFolderA";
+    protected static final String nameRootFolderB = "rootFolderB";
+    protected GPFolder rootFolderA;
+    protected GPFolder rootFolderB;
+    protected long idRootFolderA = -1;
+    protected long idRootFolderB = -1;
 
     @Override
     public void setUp() throws Exception {
@@ -65,6 +92,26 @@ abstract class BasicRestServiceTest extends ServiceTest {
                 GPRole.USER);
         userTest = gpWSClient.getUserDetailByUsername(
                 new SearchRequest(usernameTest, LikePatternType.CONTENT_EQUALS));
+        // Insert Project
+        idProjectTest = this.createAndInsertProject("project_test_rs", false, 2,
+                new Date(System.currentTimeMillis()));
+        projectTest = gpWSClient.getProjectDetail(idProjectTest);
+        // Insert the Account as the owner of Project
+        this.createAndInsertAccountProject(userTest, projectTest,
+                BasePermission.ADMINISTRATION);
+
+        // Create root folders for the user
+        idRootFolderA = this.createAndInsertFolder(nameRootFolderA, projectTest,
+                2, null);
+        rootFolderA = gpWSClient.getFolderDetail(idRootFolderA);
+
+        idRootFolderB = this.createAndInsertFolder(nameRootFolderB, projectTest,
+                1, null);
+        rootFolderB = gpWSClient.getFolderDetail(idRootFolderB);
+
+        // Set the list of keywords (for raster layer)
+        layerInfoKeywords = new ArrayList<>();
+        layerInfoKeywords.add("keyword_test_rs");
     }
 
     @Override

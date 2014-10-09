@@ -33,42 +33,62 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connectors.ws.basic.rest;
+package org.geosdi.geoplatform.request;
 
-import org.apache.cxf.jaxrs.provider.json.JSONProvider;
-import org.geosdi.geoplatform.connectors.ws.rest.RestClientConnector;
-import org.geosdi.geoplatform.services.GeoPlatformService;
+import java.io.Serializable;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import org.geosdi.geoplatform.core.model.GPFolder;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-abstract class BasicRestClientConnector
-        extends RestClientConnector<GeoPlatformService> {
-    
-    String address;
-    
-    public BasicRestClientConnector() {
-        super(GeoPlatformService.class);
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
+public class InsertFolderRequest implements Serializable {
+
+    private static final long serialVersionUID = 8717170107547461430L;
+    //
+    private Long projectID;
+    private GPFolder folder;
+
+    public InsertFolderRequest() {
     }
-    
-    @Override
-    protected <T> JSONProvider<T> createJSONProvider() {
-        return new JSONProvider() {
-            
-            {
-                if ((getExtraClasses() != null)
-                        && (getExtraClasses().length > 0)) {
-                    super.setExtraClass(getExtraClasses());
-                }
-            }
-        };
+
+    public InsertFolderRequest(Long theProjectID, GPFolder theFolder) {
+        this.projectID = theProjectID;
+        this.folder = theFolder;
     }
-    
-    @Override
-    public String getAddress() {
-        return this.address;
+
+    /**
+     * @return the projectID
+     */
+    public Long getProjectID() {
+        return projectID;
     }
-    
+
+    /**
+     * @param projectID the projectID to set
+     */
+    public void setProjectID(Long projectID) {
+        this.projectID = projectID;
+    }
+
+    /**
+     * @return the folder
+     */
+    public GPFolder getFolder() {
+        return folder;
+    }
+
+    /**
+     * @param folder the folder to set
+     */
+    public void setFolder(GPFolder folder) {
+        this.folder = folder;
+    }
+
 }

@@ -33,42 +33,49 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connectors.ws.basic.rest;
+package org.geosdi.geoplatform.request;
 
-import org.apache.cxf.jaxrs.provider.json.JSONProvider;
-import org.geosdi.geoplatform.connectors.ws.rest.RestClientConnector;
-import org.geosdi.geoplatform.services.GeoPlatformService;
+import java.io.Serializable;
+import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlTransient;
+import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-abstract class BasicRestClientConnector
-        extends RestClientConnector<GeoPlatformService> {
-    
-    String address;
-    
-    public BasicRestClientConnector() {
-        super(GeoPlatformService.class);
+@XmlTransient
+@XmlSeeAlso(value = {SaveWSAddedFolderAndTreeModificationsRequest.class,
+    SaveWSDeletedFolderAndTreeModifications.class,
+    SaveWSDragAndDropFolderAndTreeModifications.class})
+public abstract class WSFolderAndTreeModificationRequest implements Serializable {
+
+    private static final long serialVersionUID = -8088596700267312684L;
+    //
+    private GPWebServiceMapData descendantsMapData;
+
+    public WSFolderAndTreeModificationRequest() {
     }
-    
-    @Override
-    protected <T> JSONProvider<T> createJSONProvider() {
-        return new JSONProvider() {
-            
-            {
-                if ((getExtraClasses() != null)
-                        && (getExtraClasses().length > 0)) {
-                    super.setExtraClass(getExtraClasses());
-                }
-            }
-        };
+
+    public WSFolderAndTreeModificationRequest(
+            GPWebServiceMapData theDescendantsMapData) {
+        this.descendantsMapData = theDescendantsMapData;
     }
-    
-    @Override
-    public String getAddress() {
-        return this.address;
+
+    /**
+     * @return the descendantsMapData
+     */
+    public GPWebServiceMapData getDescendantsMapData() {
+        return descendantsMapData;
     }
-    
+
+    /**
+     * @param descendantsMapData the descendantsMapData to set
+     */
+    public void setDescendantsMapData(
+            GPWebServiceMapData descendantsMapData) {
+        this.descendantsMapData = descendantsMapData;
+    }
+
 }

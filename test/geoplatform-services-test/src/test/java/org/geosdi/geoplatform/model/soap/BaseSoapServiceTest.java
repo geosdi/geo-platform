@@ -46,13 +46,23 @@ import org.geosdi.geoplatform.gui.shared.GPRole;
 import org.geosdi.geoplatform.model.ServiceTest;
 import org.geosdi.geoplatform.request.LikePatternType;
 import org.geosdi.geoplatform.request.SearchRequest;
+import org.junit.runner.RunWith;
 import org.springframework.security.acls.domain.BasePermission;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:applicationContext-Test.xml",
+    "classpath*:applicationContext.xml"})
+@TestExecutionListeners(value = {WSListenerBasicServices.class})
+@ActiveProfiles(profiles = {"dev"})
 abstract class BaseSoapServiceTest extends ServiceTest {
 
     protected static final String organizationNameTest = "geoSDI_ws_test";

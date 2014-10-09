@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.connectors.ws.basic.rest;
 
 import org.geosdi.geoplatform.core.model.GPAccount;
+import org.geosdi.geoplatform.core.model.GPLayer;
 import org.springframework.beans.factory.annotation.Value;
 
 /**
@@ -54,7 +55,7 @@ public class GPBasicRestClientTestConnector
 
     @Override
     protected Class<?>[] getExtraClasses() {
-        return new Class<?>[]{GPAccount.class};
+        return new Class<?>[]{GPAccount.class, GPLayer.class};
     }
 
 }

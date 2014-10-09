@@ -45,7 +45,7 @@ import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.SessionUtility;
 import org.geosdi.geoplatform.gui.server.converter.DTOMementoConverter;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
-import org.geosdi.geoplatform.request.SaveWSDragAndDropFolderAndTreeModifications;
+import org.geosdi.geoplatform.request.folder.WSDDFolderAndTreeModifications;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.slf4j.Logger;
@@ -100,8 +100,7 @@ public class SaveDragAndDropCommand implements
         switch (request.getElementType()) {
             case COMPOSITE:
                 try {
-                    result = this.geoPlatformServiceClient.saveDragAndDropFolderAndTreeModifications(
-                            new SaveWSDragAndDropFolderAndTreeModifications(
+                    result = this.geoPlatformServiceClient.saveDragAndDropFolderAndTreeModifications(new WSDDFolderAndTreeModifications(
                                     memento.getIdBaseElement(),
                                     memento.getIdNewParent(),
                                     memento.getNewZIndex(), map));

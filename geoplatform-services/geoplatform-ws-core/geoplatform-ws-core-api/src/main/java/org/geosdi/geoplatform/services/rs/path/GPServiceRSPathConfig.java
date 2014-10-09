@@ -83,16 +83,16 @@ public final class GPServiceRSPathConfig {
     private static final String AUTHORITIES_PATH = "/authorities/";
     public static final String GET_AUTHORITIES_BY_ACCOUNT_NATURAL_ID = AUTHORITIES_PATH
             + "getAuthoritiesByAccountNaturalID/{accountNaturalID}";
-    
+
     /**
      * PROJECTS PATH
      */
     private static final String PROJECTS_PATH = "/projects/";
-    public static final String INSERT_PROJECT_PATH = PROJECTS_PATH 
+    public static final String INSERT_PROJECT_PATH = PROJECTS_PATH
             + "insertProject";
     public static final String UPDATE_PROJECT_PATH = PROJECTS_PATH
             + "updateProject";
-    public static final String GET_PROJECT_DETAIL_PATH = PROJECTS_PATH 
+    public static final String GET_PROJECT_DETAIL_PATH = PROJECTS_PATH
             + "getProjectDetail/{projectID}";
 
     /**
@@ -103,16 +103,16 @@ public final class GPServiceRSPathConfig {
             + "{accountID}";
     public static final String INSERT_ACCOUNT_PROJECT_PATH = ACCOUNT_PROJECTS_PATH
             + "insertAccountProject";
-    
+
     /**
      * FOLDERS PATH
      */
     private static final String FOLDERS_PATH = "/folders/";
-    public static final String INSERT_FOLDER_PATH = FOLDERS_PATH 
+    public static final String INSERT_FOLDER_PATH = FOLDERS_PATH
             + "insertFolder";
-    public static final String UPDATE_FOLDER_PATH = FOLDERS_PATH 
+    public static final String UPDATE_FOLDER_PATH = FOLDERS_PATH
             + "updateFolder";
-    public static final String DELETE_FOLDER_PATH = FOLDERS_PATH 
+    public static final String DELETE_FOLDER_PATH = FOLDERS_PATH
             + "deleteFolder/{folderID}";
     public static final String GET_CHILDREN_FOLDERS_PATH = FOLDERS_PATH
             + "getChildrenFolders/{folderID}";
@@ -122,16 +122,32 @@ public final class GPServiceRSPathConfig {
             + "saveDeletedFolderAndTreeModifications";
     public static final String SAVE_DD_FOLDER_AND_TREE_MODIFICATIONS_PATH = FOLDERS_PATH
             + "saveDragAndDropFolderAndTreeModifications";
-    public static final String GET_FOLDER_DETAIL_PATH = FOLDERS_PATH 
+    public static final String GET_FOLDER_DETAIL_PATH = FOLDERS_PATH
             + "getFolderDetail/{folderID}";
-    public static final String GET_SHORT_FOLDER_PATH = FOLDERS_PATH 
+    public static final String GET_SHORT_FOLDER_PATH = FOLDERS_PATH
             + "getShortFolder/{folderID}";
     public static final String GET_NUMBER_OF_ELEMENTS_PROJECT_PATH = FOLDERS_PATH
             + "getNumberOfElementsProject/{projectID}";
     public static final String GET_PROJECT_WITH_ROOT_FOLDERS_PATH = FOLDERS_PATH
             + "getProjectWithRootFolders/{projectID}/{accountID}";
-    public static final String GET_CHILDREN_ELEMENTS_PATH = FOLDERS_PATH 
+    public static final String GET_CHILDREN_ELEMENTS_PATH = FOLDERS_PATH
             + "getChildrenElements/{folderID}";
+
+    /**
+     * LAYERS PATH
+     */
+    private static final String LAYERS_PATH = "/layers/";
+    public static final String INSERT_LAYER_PATH = LAYERS_PATH + "insertLayer";
+    public static final String GET_RASTER_LAYER_PATH = LAYERS_PATH
+            + "getRasterLayer/{layerID}";
+    public static final String GET_VECTOR_LAYER_PATH = LAYERS_PATH
+            + "getVectorLayer/{layerID}";
+    public static final String ADD_LAYERS_AND_TREE_MODIFICATIONS_PATH = LAYERS_PATH
+            + "addLayersAndTreeModifications";
+    public static final String GET_SHORT_LAYER_PATH = LAYERS_PATH 
+            + "getShortLayer/{layerID}";
+    public static final String UPDATE_RASTER_LAYER_PARH = LAYERS_PATH
+            + "updateRasterLayer";
 
     /**
      * WMS CAPABILITIES PATH

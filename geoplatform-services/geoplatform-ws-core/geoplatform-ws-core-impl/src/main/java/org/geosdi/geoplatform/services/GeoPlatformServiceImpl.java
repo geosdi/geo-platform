@@ -50,17 +50,20 @@ import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.shared.GPLayerType;
 import org.geosdi.geoplatform.jasypt.support.GPDigesterConfigurator;
 import org.geosdi.geoplatform.request.InsertAccountRequest;
-import org.geosdi.geoplatform.request.InsertFolderRequest;
+import org.geosdi.geoplatform.request.folder.InsertFolderRequest;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.RequestByAccountProjectIDs;
 import org.geosdi.geoplatform.request.RequestByID;
-import org.geosdi.geoplatform.request.SaveWSAddedFolderAndTreeModificationsRequest;
-import org.geosdi.geoplatform.request.SaveWSDeletedFolderAndTreeModifications;
-import org.geosdi.geoplatform.request.SaveWSDragAndDropFolderAndTreeModifications;
+import org.geosdi.geoplatform.request.folder.WSAddFolderAndTreeModificationsRequest;
+import org.geosdi.geoplatform.request.folder.WSDeleteFolderAndTreeModifications;
+import org.geosdi.geoplatform.request.folder.WSDDFolderAndTreeModifications;
 import org.geosdi.geoplatform.request.SearchRequest;
+import org.geosdi.geoplatform.request.layer.InsertLayerRequest;
+import org.geosdi.geoplatform.request.layer.WSAddLayersAndTreeModificationsRequest;
 import org.geosdi.geoplatform.responce.AccountProjectPropertiesDTO;
 import org.geosdi.geoplatform.responce.ApplicationDTO;
 import org.geosdi.geoplatform.responce.FolderDTO;
+import org.geosdi.geoplatform.responce.collection.LongListStore;
 import org.geosdi.geoplatform.responce.MessageDTO;
 import org.geosdi.geoplatform.responce.ProjectDTO;
 import org.geosdi.geoplatform.responce.RasterPropertiesDTO;
@@ -758,7 +761,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
 
     @Override
     public Long saveAddedFolderAndTreeModifications(
-            SaveWSAddedFolderAndTreeModificationsRequest sftModificationRequest)
+            WSAddFolderAndTreeModificationsRequest sftModificationRequest)
             throws ResourceNotFoundFault, IllegalParameterFault {
         return folderServiceDelegate.saveAddedFolderAndTreeModifications(
                 sftModificationRequest);
@@ -766,7 +769,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
 
     @Override
     public boolean saveDeletedFolderAndTreeModifications(
-            SaveWSDeletedFolderAndTreeModifications sdfModificationRequest)
+            WSDeleteFolderAndTreeModifications sdfModificationRequest)
             throws ResourceNotFoundFault {
         return folderServiceDelegate.saveDeletedFolderAndTreeModifications(
                 sdfModificationRequest);
@@ -782,7 +785,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
 
     @Override
     public boolean saveDragAndDropFolderAndTreeModifications(
-            SaveWSDragAndDropFolderAndTreeModifications sddfTreeModificationRequest)
+            WSDDFolderAndTreeModifications sddfTreeModificationRequest)
             throws ResourceNotFoundFault {
         return folderServiceDelegate.saveDragAndDropFolderModifications(
                 sddfTreeModificationRequest);
@@ -864,8 +867,8 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     // === Layer
     // =========================================================================
     @Override
-    public Long insertLayer(GPLayer layer) throws IllegalParameterFault {
-        return layerServiceDelegate.insertLayer(layer);
+    public Long insertLayer(InsertLayerRequest layerRequest) throws IllegalParameterFault {
+        return layerServiceDelegate.insertLayer(layerRequest);
     }
 
     @Override
@@ -899,13 +902,11 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public ArrayList<Long> saveAddedLayersAndTreeModifications(Long projectID,
-            Long parentID,
-            List<GPLayer> layers,
-            GPWebServiceMapData descendantsMapData)
+    public LongListStore saveAddedLayersAndTreeModifications(
+            WSAddLayersAndTreeModificationsRequest addLayersRequest)
             throws ResourceNotFoundFault, IllegalParameterFault {
         return layerServiceDelegate.saveAddedLayersAndTreeModifications(
-                projectID, parentID, layers, descendantsMapData);
+                addLayersRequest);
     }
 
     @Override

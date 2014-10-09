@@ -33,32 +33,62 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connectors.ws.basic.rest;
+package org.geosdi.geoplatform.request.folder;
 
-import org.geosdi.geoplatform.configurator.bootstrap.cxf.Rest;
-import org.geosdi.geoplatform.core.model.GPLayer;
-import org.geosdi.geoplatform.core.model.GPUser;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import java.io.Serializable;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import org.geosdi.geoplatform.core.model.GPFolder;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Component(value = "gpBasicRestClientConnector")
-@Rest
-public class GPBasicRestClientConnector extends BasicRestClientConnector {
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
+public class InsertFolderRequest implements Serializable {
 
-    @Override
-    @Value("configurator{webservice_rs_wms_endpoint_address}")
-    public void setAddress(String theAddress) {
-        this.address = theAddress;
+    private static final long serialVersionUID = 8717170107547461430L;
+    //
+    private Long projectID;
+    private GPFolder folder;
+
+    public InsertFolderRequest() {
     }
 
-    @Override
-    protected Class<?>[] getExtraClasses() {
-        return new Class<?>[]{GPUser.class, GPLayer.class};
+    public InsertFolderRequest(Long theProjectID, GPFolder theFolder) {
+        this.projectID = theProjectID;
+        this.folder = theFolder;
+    }
+
+    /**
+     * @return the projectID
+     */
+    public Long getProjectID() {
+        return projectID;
+    }
+
+    /**
+     * @param projectID the projectID to set
+     */
+    public void setProjectID(Long projectID) {
+        this.projectID = projectID;
+    }
+
+    /**
+     * @return the folder
+     */
+    public GPFolder getFolder() {
+        return folder;
+    }
+
+    /**
+     * @param folder the folder to set
+     */
+    public void setFolder(GPFolder folder) {
+        this.folder = folder;
     }
 
 }

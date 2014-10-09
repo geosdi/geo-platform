@@ -43,12 +43,12 @@ import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
-import org.geosdi.geoplatform.request.InsertFolderRequest;
+import org.geosdi.geoplatform.request.folder.InsertFolderRequest;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.RequestByID;
-import org.geosdi.geoplatform.request.SaveWSAddedFolderAndTreeModificationsRequest;
-import org.geosdi.geoplatform.request.SaveWSDeletedFolderAndTreeModifications;
-import org.geosdi.geoplatform.request.SaveWSDragAndDropFolderAndTreeModifications;
+import org.geosdi.geoplatform.request.folder.WSAddFolderAndTreeModificationsRequest;
+import org.geosdi.geoplatform.request.folder.WSDeleteFolderAndTreeModifications;
+import org.geosdi.geoplatform.request.folder.WSDDFolderAndTreeModifications;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
@@ -204,7 +204,7 @@ class FolderServiceImpl {
      * org.geosdi.geoplatform.responce.collection.GPWebServiceMapData)
      */
     public Long saveAddedFolderAndTreeModifications(
-            SaveWSAddedFolderAndTreeModificationsRequest sftModificationRequest)
+            WSAddFolderAndTreeModificationsRequest sftModificationRequest)
             throws ResourceNotFoundFault, IllegalParameterFault {
         Long projectId = sftModificationRequest.getProjectID();
         Long parentId = sftModificationRequest.getParentID();
@@ -253,7 +253,7 @@ class FolderServiceImpl {
     }
     
     public boolean saveDeletedFolderAndTreeModifications(
-            SaveWSDeletedFolderAndTreeModifications sdfModificationRequest)
+            WSDeleteFolderAndTreeModifications sdfModificationRequest)
             throws ResourceNotFoundFault {
         Long folderID = sdfModificationRequest.getFolderID();
         GPWebServiceMapData descendantsMapData = sdfModificationRequest.getDescendantsMapData();
@@ -301,7 +301,7 @@ class FolderServiceImpl {
     }
     
     public boolean saveDragAndDropFolderModifications(
-            SaveWSDragAndDropFolderAndTreeModifications sddfTreeModificationRequest)
+            WSDDFolderAndTreeModifications sddfTreeModificationRequest)
             throws ResourceNotFoundFault {
         Long folderMovedID = sddfTreeModificationRequest.getFolderMovedID();
         Long newParentID = sddfTreeModificationRequest.getNewParentID();

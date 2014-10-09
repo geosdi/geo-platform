@@ -54,7 +54,8 @@ import org.geosdi.geoplatform.gui.shared.GPLayerType;
 import org.geosdi.geoplatform.gui.shared.GPRole;
 import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 import org.geosdi.geoplatform.request.InsertAccountRequest;
-import org.geosdi.geoplatform.request.InsertFolderRequest;
+import org.geosdi.geoplatform.request.folder.InsertFolderRequest;
+import org.geosdi.geoplatform.request.layer.InsertLayerRequest;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.junit.After;
 import org.junit.Assert;
@@ -292,7 +293,7 @@ public abstract class ServiceTest {
         rasterLayer.setLayerInfo(layerInfo);
 
         rasterLayer.setLayerType(GPLayerType.WMS);
-        return gpWSClient.insertLayer(rasterLayer);
+        return gpWSClient.insertLayer(new InsertLayerRequest(rasterLayer));
     }
 
     protected long createAndInsertVectorLayer(GPFolder folder, String title,
@@ -304,7 +305,7 @@ public abstract class ServiceTest {
                 position, srs, urlServer);
 
         vectorLayer.setLayerType(GPLayerType.POLYGON);
-        return gpWSClient.insertLayer(vectorLayer);
+        return gpWSClient.insertLayer(new InsertLayerRequest(vectorLayer));
     }
 
     protected void createLayer(GPLayer layer, GPFolder folder, String title,

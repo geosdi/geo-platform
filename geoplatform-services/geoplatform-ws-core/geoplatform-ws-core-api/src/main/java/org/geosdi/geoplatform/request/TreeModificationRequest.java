@@ -35,10 +35,13 @@
  */
 package org.geosdi.geoplatform.request;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import org.geosdi.geoplatform.request.folder.WSDeleteFolderAndTreeModifications;
+import org.geosdi.geoplatform.request.folder.WSAddFolderAndTreeModificationsRequest;
+import org.geosdi.geoplatform.request.folder.WSDDFolderAndTreeModifications;
+import java.io.Serializable;
+import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlTransient;
+import org.geosdi.geoplatform.request.layer.WSAddLayersAndTreeModificationsRequest;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 
 /**
@@ -46,71 +49,38 @@ import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@XmlRootElement
-@XmlType(propOrder = {"folderMovedID", "newParentID",
-    "newPosition", "descendantsMapData"})
-@XmlAccessorType(XmlAccessType.FIELD)
-public class SaveWSDragAndDropFolderAndTreeModifications
-        extends WSFolderAndTreeModificationRequest {
+@XmlTransient
+@XmlSeeAlso(value = {WSAddFolderAndTreeModificationsRequest.class,
+    WSDeleteFolderAndTreeModifications.class,
+    WSDDFolderAndTreeModifications.class,
+    WSAddLayersAndTreeModificationsRequest.class})
+public abstract class TreeModificationRequest implements Serializable {
 
-    private static final long serialVersionUID = 9201263180218998178L;
+    private static final long serialVersionUID = -8088596700267312684L;
     //
-    private Long folderMovedID;
-    private Long newParentID;
-    private int newPosition;
+    private GPWebServiceMapData descendantsMapData;
 
-    public SaveWSDragAndDropFolderAndTreeModifications() {
+    public TreeModificationRequest() {
     }
 
-    public SaveWSDragAndDropFolderAndTreeModifications(Long theFolderMovedID,
-            Long theNewParentID, int theNewPosition,
+    public TreeModificationRequest(
             GPWebServiceMapData theDescendantsMapData) {
-        super(theDescendantsMapData);
-        this.folderMovedID = theFolderMovedID;
-        this.newParentID = theNewParentID;
-        this.newPosition = theNewPosition;
+        this.descendantsMapData = theDescendantsMapData;
     }
 
     /**
-     * @return the folderMovedID
+     * @return the descendantsMapData
      */
-    public Long getFolderMovedID() {
-        return folderMovedID;
+    public GPWebServiceMapData getDescendantsMapData() {
+        return descendantsMapData;
     }
 
     /**
-     * @param folderMovedID the folderMovedID to set
+     * @param descendantsMapData the descendantsMapData to set
      */
-    public void setFolderMovedID(Long folderMovedID) {
-        this.folderMovedID = folderMovedID;
-    }
-
-    /**
-     * @return the newParentID
-     */
-    public Long getNewParentID() {
-        return newParentID;
-    }
-
-    /**
-     * @param newParentID the newParentID to set
-     */
-    public void setNewParentID(Long newParentID) {
-        this.newParentID = newParentID;
-    }
-
-    /**
-     * @return the newPosition
-     */
-    public int getNewPosition() {
-        return newPosition;
-    }
-
-    /**
-     * @param newPosition the newPosition to set
-     */
-    public void setNewPosition(int newPosition) {
-        this.newPosition = newPosition;
+    public void setDescendantsMapData(
+            GPWebServiceMapData descendantsMapData) {
+        this.descendantsMapData = descendantsMapData;
     }
 
 }

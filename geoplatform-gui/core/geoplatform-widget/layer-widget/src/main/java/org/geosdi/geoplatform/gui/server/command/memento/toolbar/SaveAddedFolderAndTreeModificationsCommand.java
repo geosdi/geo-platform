@@ -47,7 +47,7 @@ import org.geosdi.geoplatform.gui.server.SessionUtility;
 import org.geosdi.geoplatform.gui.server.converter.DTOMementoConverter;
 import org.geosdi.geoplatform.gui.server.service.converter.DTOLayerConverter;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
-import org.geosdi.geoplatform.request.SaveWSAddedFolderAndTreeModificationsRequest;
+import org.geosdi.geoplatform.request.folder.WSAddFolderAndTreeModificationsRequest;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.slf4j.Logger;
@@ -109,8 +109,7 @@ public class SaveAddedFolderAndTreeModificationsCommand implements
         try {
             Long projectId = this.sessionUtility.getDefaultProject(
                     httpServletRequest);
-            Long idSavedFolder = this.geoPlatformServiceClient.saveAddedFolderAndTreeModifications(
-                    new SaveWSAddedFolderAndTreeModificationsRequest(
+            Long idSavedFolder = this.geoPlatformServiceClient.saveAddedFolderAndTreeModifications(new WSAddFolderAndTreeModificationsRequest(
                             projectId,
                             memento.getAddedFolder().getIdParent(), gpFolder,
                             map));

@@ -76,17 +76,20 @@ import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.shared.GPLayerType;
 import org.geosdi.geoplatform.request.InsertAccountRequest;
-import org.geosdi.geoplatform.request.InsertFolderRequest;
+import org.geosdi.geoplatform.request.folder.InsertFolderRequest;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.RequestByAccountProjectIDs;
 import org.geosdi.geoplatform.request.RequestByID;
-import org.geosdi.geoplatform.request.SaveWSAddedFolderAndTreeModificationsRequest;
-import org.geosdi.geoplatform.request.SaveWSDeletedFolderAndTreeModifications;
-import org.geosdi.geoplatform.request.SaveWSDragAndDropFolderAndTreeModifications;
+import org.geosdi.geoplatform.request.folder.WSAddFolderAndTreeModificationsRequest;
+import org.geosdi.geoplatform.request.folder.WSDeleteFolderAndTreeModifications;
+import org.geosdi.geoplatform.request.folder.WSDDFolderAndTreeModifications;
 import org.geosdi.geoplatform.request.SearchRequest;
+import org.geosdi.geoplatform.request.layer.InsertLayerRequest;
+import org.geosdi.geoplatform.request.layer.WSAddLayersAndTreeModificationsRequest;
 import org.geosdi.geoplatform.responce.AccountProjectPropertiesDTO;
 import org.geosdi.geoplatform.responce.ApplicationDTO;
 import org.geosdi.geoplatform.responce.FolderDTO;
+import org.geosdi.geoplatform.responce.collection.LongListStore;
 import org.geosdi.geoplatform.responce.MessageDTO;
 import org.geosdi.geoplatform.responce.ProjectDTO;
 import org.geosdi.geoplatform.responce.RasterPropertiesDTO;
@@ -1017,7 +1020,7 @@ public interface GeoPlatformService {
     @PUT
     @Path(value = GPServiceRSPathConfig.SAVE_ADDED_FOLDER_AND_TREE_MODICATIONS_PATH)
     Long saveAddedFolderAndTreeModifications(@WebParam(
-            name = "sftModificationRequest") SaveWSAddedFolderAndTreeModificationsRequest sftModificationRequest)
+            name = "sftModificationRequest") WSAddFolderAndTreeModificationsRequest sftModificationRequest)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
     /**
@@ -1033,7 +1036,7 @@ public interface GeoPlatformService {
     @PUT
     @Path(value = GPServiceRSPathConfig.SAVE_DELETED_FOLDER_AND_TREE_MODIFICATIONS_PATH)
     boolean saveDeletedFolderAndTreeModifications(
-            @WebParam(name = "sdfModificationRequest") SaveWSDeletedFolderAndTreeModifications sdfModificationRequest)
+            @WebParam(name = "sdfModificationRequest") WSDeleteFolderAndTreeModifications sdfModificationRequest)
             throws ResourceNotFoundFault;
 
     /**
@@ -1063,7 +1066,7 @@ public interface GeoPlatformService {
     @PUT
     @Path(value = GPServiceRSPathConfig.SAVE_DD_FOLDER_AND_TREE_MODIFICATIONS_PATH)
     boolean saveDragAndDropFolderAndTreeModifications(
-            @WebParam(name = "sddfTreeModificationRequest") SaveWSDragAndDropFolderAndTreeModifications sddfTreeModificationRequest)
+            @WebParam(name = "sddfTreeModificationRequest") WSDDFolderAndTreeModifications sddfTreeModificationRequest)
             throws ResourceNotFoundFault;
 
     /**
@@ -1238,17 +1241,15 @@ public interface GeoPlatformService {
     /**
      * Insert a Layer.
      *
-     * @param layer the Layer to insert
-     * @return the Layer ID
-     * @throws IllegalParameterFault if Layer is not valid
-     * @deprecated only for test purpose
-     * @see #saveAddedLayerAndTreeModifications(java.lang.Long, java.lang.Long,
-     * org.geosdi.geoplatform.core.model.GPLayer,
-     * org.geosdi.geoplatform.responce.collection.GPWebServiceMapData)
+     * @param layerRequest
+     * @return Long
+     * @throws org.geosdi.geoplatform.exception.IllegalParameterFault
      */
-    @Put
+    @Post
+    @POST
+    @Path(value = GPServiceRSPathConfig.INSERT_LAYER_PATH)
     @Deprecated
-    Long insertLayer(@WebParam(name = "layer") GPLayer layer)
+    Long insertLayer(@WebParam(name = "layerRequest") InsertLayerRequest layerRequest)
             throws IllegalParameterFault;
 
     /**
@@ -1262,7 +1263,9 @@ public interface GeoPlatformService {
      * @see
      * #saveLayerProperties(org.geosdi.geoplatform.responce.RasterPropertiesDTO)
      */
-    @Post
+    @Put
+    @PUT
+    @Path(value = GPServiceRSPathConfig.UPDATE_RASTER_LAYER_PARH)
     @Deprecated
     Long updateRasterLayer(@WebParam(name = "layer") GPRasterLayer layer)
             throws ResourceNotFoundFault, IllegalParameterFault;
@@ -1320,22 +1323,18 @@ public interface GeoPlatformService {
      * Insert a Layer list, moreover manage Folder ancestors and positions on
      * tree.
      *
-     * @param projectID the Project ID
-     * @param parentFolderID the parent Folder ID
-     * @param layers the Layer list to insert
-     * @param descendantsMapData the map of descendants (key = ancestor Folder
-     * ID, value = number of its descendants)
+     * @param addLayersRequest
+     * 
      * @return the Layer list ID
      * @throws ResourceNotFoundFault if Project or parent Folder not found
      * @throws IllegalParameterFault if Layer or Layer list are not valid
      */
-    @Put
+    @Post
+    @POST
+    @Path(value = GPServiceRSPathConfig.ADD_LAYERS_AND_TREE_MODIFICATIONS_PATH)
     @WebResult(name = "layerID")
-    ArrayList<Long> saveAddedLayersAndTreeModifications(
-            @WebParam(name = "projectID") Long projectID,
-            @WebParam(name = "parentFolderID") Long parentFolderID,
-            @WebParam(name = "layers") List<GPLayer> layers,
-            @WebParam(name = "descendantsMapData") GPWebServiceMapData descendantsMapData)
+    LongListStore saveAddedLayersAndTreeModifications(
+            @WebParam(name = "addLayersRequest") WSAddLayersAndTreeModificationsRequest addLayersRequest)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
     /**
@@ -1441,8 +1440,11 @@ public interface GeoPlatformService {
      * @throws ResourceNotFoundFault if raster Layer not found
      */
     @Get
+    @GET
+    @Path(value = GPServiceRSPathConfig.GET_RASTER_LAYER_PATH)
     @WebResult(name = "rasterLayer")
-    GPRasterLayer getRasterLayer(@WebParam(name = "layerID") Long layerID)
+    GPRasterLayer getRasterLayer(@WebParam(name = "layerID")
+            @PathParam(value = "layerID") Long layerID)
             throws ResourceNotFoundFault;
 
     /**
@@ -1453,8 +1455,11 @@ public interface GeoPlatformService {
      * @throws ResourceNotFoundFault if vector Layer not found
      */
     @Get
+    @GET
+    @Path(value = GPServiceRSPathConfig.GET_VECTOR_LAYER_PATH)
     @WebResult(name = "vectorLayer")
-    GPVectorLayer getVectorLayer(@WebParam(name = "layerID") Long layerID)
+    GPVectorLayer getVectorLayer(@WebParam(name = "layerID")
+            @PathParam(value = "layerID") Long layerID)
             throws ResourceNotFoundFault;
 
     /**
@@ -1465,8 +1470,11 @@ public interface GeoPlatformService {
      * @throws ResourceNotFoundFault if Layer not found
      */
     @Get
+    @GET
+    @Path(value = GPServiceRSPathConfig.GET_SHORT_LAYER_PATH)
     @WebResult(name = "shortLayerDTO")
-    ShortLayerDTO getShortLayer(@WebParam(name = "layerID") Long layerID)
+    ShortLayerDTO getShortLayer(@WebParam(name = "layerID")
+            @PathParam(value = "layerID") Long layerID)
             throws ResourceNotFoundFault;
 
     /**

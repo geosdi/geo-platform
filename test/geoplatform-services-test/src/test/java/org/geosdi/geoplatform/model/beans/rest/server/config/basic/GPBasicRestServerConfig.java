@@ -48,6 +48,7 @@ import org.apache.cxf.jaxrs.provider.json.JSONProvider;
 import org.apache.cxf.message.Message;
 import org.geosdi.geoplatform.configurator.bootstrap.Develop;
 import org.geosdi.geoplatform.core.model.GPAccount;
+import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.exception.rs.mapper.GPExceptionFaultMapper;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -64,7 +65,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @Develop
 class GPBasicRestServerConfig {
-    
+
     @Bean(name = "gpBasicRestServer")
     @Required
     public static Server gpBasicRestServer(@Qualifier(
@@ -72,32 +73,33 @@ class GPBasicRestServerConfig {
             @Value("configurator{webservice_rs_test_endpoint_address}") String basicRestAddress,
             @Qualifier(value = "serverLoggingInInterceptorBean") LoggingInInterceptor serverLogInInterceptor,
             @Qualifier(value = "serverLoggingOutInterceptorBean") LoggingOutInterceptor serverLogOutInterceptor) {
-        
+
         JAXRSServerFactoryBean factory = new JAXRSServerFactoryBean();
         factory.setServiceBean(geoPlatformService);
         factory.setAddress(basicRestAddress);
         factory.setProviders(Arrays.asList(new Object[]{new JSONProvider() {
-            
+
             {
-                super.setExtraClass(new Class<?>[]{GPAccount.class});
+                super.setExtraClass(new Class<?>[]{GPAccount.class,
+                    GPLayer.class});
             }
-            
+
         }, new GPExceptionFaultMapper()}));
-        
+
         Map<Object, Object> extensionMappings = new HashMap<>();
         extensionMappings.put("xml", MediaType.APPLICATION_XML);
         extensionMappings.put("json", MediaType.APPLICATION_JSON);
-        
+
         factory.setExtensionMappings(extensionMappings);
-        
+
         factory.setInInterceptors(Arrays.<Interceptor<? extends Message>>asList(
                 serverLogInInterceptor)
         );
         factory.setOutInterceptors(
                 Arrays.<Interceptor<? extends Message>>asList(
                         serverLogOutInterceptor));
-        
+
         return factory.create();
     }
-    
+
 }

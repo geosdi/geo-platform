@@ -69,11 +69,11 @@ import org.geosdi.geoplatform.gui.server.converter.DTOMementoConverter;
 import org.geosdi.geoplatform.gui.server.service.converter.DTOLayerConverter;
 import org.geosdi.geoplatform.gui.shared.GPMessageCommandType;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
-import org.geosdi.geoplatform.request.InsertFolderRequest;
+import org.geosdi.geoplatform.request.folder.InsertFolderRequest;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
-import org.geosdi.geoplatform.request.SaveWSAddedFolderAndTreeModificationsRequest;
-import org.geosdi.geoplatform.request.SaveWSDeletedFolderAndTreeModifications;
-import org.geosdi.geoplatform.request.SaveWSDragAndDropFolderAndTreeModifications;
+import org.geosdi.geoplatform.request.folder.WSAddFolderAndTreeModificationsRequest;
+import org.geosdi.geoplatform.request.folder.WSDeleteFolderAndTreeModifications;
+import org.geosdi.geoplatform.request.folder.WSDDFolderAndTreeModifications;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.AccountProjectPropertiesDTO;
 import org.geosdi.geoplatform.responce.FolderDTO;
@@ -357,8 +357,7 @@ public class LayerService implements ILayerService {
         try {
             Long projectId = this.sessionUtility.getDefaultProject(
                     httpServletRequest);
-            idSavedFolder = this.geoPlatformServiceClient.saveAddedFolderAndTreeModifications(
-                    new SaveWSAddedFolderAndTreeModificationsRequest(projectId,
+            idSavedFolder = this.geoPlatformServiceClient.saveAddedFolderAndTreeModifications(new WSAddFolderAndTreeModificationsRequest(projectId,
                             memento.getAddedFolder().getIdParent(), gpFolder,
                             map));
         } catch (ResourceNotFoundFault ex) {
@@ -389,8 +388,7 @@ public class LayerService implements ILayerService {
                 memento.getWsDescendantMap());
         boolean result = false;
         try {
-            result = this.geoPlatformServiceClient.saveDeletedFolderAndTreeModifications(
-                    new SaveWSDeletedFolderAndTreeModifications(
+            result = this.geoPlatformServiceClient.saveDeletedFolderAndTreeModifications(new WSDeleteFolderAndTreeModifications(
                             memento.getIdBaseElement(), map));
         } catch (ResourceNotFoundFault ex) {
             this.logger.error("Failed to delete folder on LayerService: " + ex);
@@ -464,8 +462,7 @@ public class LayerService implements ILayerService {
             throw new GeoPlatformException(timeout);
         }
         try {
-            result = this.geoPlatformServiceClient.saveDragAndDropFolderAndTreeModifications(
-                    new SaveWSDragAndDropFolderAndTreeModifications(
+            result = this.geoPlatformServiceClient.saveDragAndDropFolderAndTreeModifications(new WSDDFolderAndTreeModifications(
                             memento.getIdBaseElement(), memento.getIdNewParent(),
                             memento.getNewZIndex(), map));
         } catch (ResourceNotFoundFault ex) {

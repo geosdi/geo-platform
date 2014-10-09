@@ -33,12 +33,12 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.request;
+package org.geosdi.geoplatform.request.folder;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import org.geosdi.geoplatform.core.model.GPFolder;
+import org.geosdi.geoplatform.request.TreeModificationRequest;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 
 /**
@@ -47,36 +47,76 @@ import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @XmlRootElement
-@XmlType(propOrder = {"folderID", "descendantsMapData"})
-@XmlAccessorType(XmlAccessType.FIELD)
-public class SaveWSDeletedFolderAndTreeModifications
-        extends WSFolderAndTreeModificationRequest {
+@XmlType(propOrder = {"projectID", "parentID",
+    "folder", "descendantsMapData"})
+public class WSAddFolderAndTreeModificationsRequest
+        extends TreeModificationRequest {
 
-    private static final long serialVersionUID = 7677459385594481220L;
+    private static final long serialVersionUID = 9033003359326516301L;
     //
-    private Long folderID;
+    private Long projectID;
+    private Long parentID;
+    private GPFolder folder;
 
-    public SaveWSDeletedFolderAndTreeModifications() {
+    public WSAddFolderAndTreeModificationsRequest() {
     }
 
-    public SaveWSDeletedFolderAndTreeModifications(Long folderID,
+    public WSAddFolderAndTreeModificationsRequest(Long theProjectID,
+            Long theParentID, GPFolder theFolder,
             GPWebServiceMapData theDescendantsMapData) {
         super(theDescendantsMapData);
-        this.folderID = folderID;
+        this.projectID = theProjectID;
+        this.parentID = theParentID;
+        this.folder = theFolder;
     }
 
     /**
-     * @return the folderID
+     * @return the projectID
      */
-    public Long getFolderID() {
-        return folderID;
+    public Long getProjectID() {
+        return projectID;
     }
 
     /**
-     * @param folderID the folderID to set
+     * @param projectID the projectID to set
      */
-    public void setFolderID(Long folderID) {
-        this.folderID = folderID;
+    public void setProjectID(Long projectID) {
+        this.projectID = projectID;
+    }
+
+    /**
+     * @return the parentID
+     */
+    public Long getParentID() {
+        return parentID;
+    }
+
+    /**
+     * @param parentID the parentID to set
+     */
+    public void setParentID(Long parentID) {
+        this.parentID = parentID;
+    }
+
+    /**
+     * @return the folder
+     */
+    public GPFolder getFolder() {
+        return folder;
+    }
+
+    /**
+     * @param folder the folder to set
+     */
+    public void setFolder(GPFolder folder) {
+        this.folder = folder;
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + " {" + "projectID = " + projectID
+                + ", parentID = " + parentID
+                + ", folder = " + folder + '}';
     }
 
 }

@@ -46,13 +46,13 @@ import org.geosdi.geoplatform.core.model.GPVectorLayer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.shared.GPLayerType;
+import org.geosdi.geoplatform.request.layer.WSAddLayersAndTreeModificationsRequest;
 import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.ProjectDTO;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -86,7 +86,7 @@ public class WSLayerTest extends BaseSoapServiceTest {
     // Vector Layer 3
     private static final String titleVector3 = "vector_3";
 
-    @Before
+    @Override
     public void setUp() throws Exception {
         super.setUp();
 
@@ -126,8 +126,8 @@ public class WSLayerTest extends BaseSoapServiceTest {
     }
 
     @Test
-    public void testAddLayers()
-            throws IllegalParameterFault, ResourceNotFoundFault {
+    public void testAddLayers() throws IllegalParameterFault,
+            ResourceNotFoundFault {
         List<Long> idList = this.addLayer3();
 
         this.checkState(new int[]{8, 5, 4, 3, 2, 1}, new int[]{4, 2},
@@ -455,8 +455,9 @@ public class WSLayerTest extends BaseSoapServiceTest {
         ArrayList<GPLayer> arrayList = new ArrayList<GPLayer>();
         try {
             List<Long> longList = gpWSClient.saveAddedLayersAndTreeModifications(
-                    projectTest.getId(), rootFolderA.getId(), arrayList,
-                    descendantsMapData);
+                    new WSAddLayersAndTreeModificationsRequest(
+                            projectTest.getId(), rootFolderA.getId(), arrayList,
+                            descendantsMapData)).getElements();
             Assert.fail("Test must fail because list of layers is empty");
         } catch (IllegalParameterFault ex) {
             this.checkInitialState("correctess on AddLayers");
@@ -496,7 +497,7 @@ public class WSLayerTest extends BaseSoapServiceTest {
                 list.contains(newUrlServer));
     }
 
-    private List<Long> addLayer3() throws IllegalParameterFault,
+    private ArrayList<Long> addLayer3() throws IllegalParameterFault,
             ResourceNotFoundFault {
         // "rootFolderA" ---> "rasterLayer3"
         GPRasterLayer rasterLayer3 = new GPRasterLayer();
@@ -521,9 +522,9 @@ public class WSLayerTest extends BaseSoapServiceTest {
         GPWebServiceMapData descendantsMapData = new GPWebServiceMapData();
         descendantsMapData.setDescendantsMap(map);
 
-        return gpWSClient.saveAddedLayersAndTreeModifications(
-                projectTest.getId(),
-                rootFolderA.getId(), arrayList, descendantsMapData);
+        return (ArrayList<Long>) gpWSClient.saveAddedLayersAndTreeModifications(
+                new WSAddLayersAndTreeModificationsRequest(projectTest.getId(),
+                        rootFolderA.getId(), arrayList, descendantsMapData)).getElements();
     }
 
     private void checkInitialState(String info)

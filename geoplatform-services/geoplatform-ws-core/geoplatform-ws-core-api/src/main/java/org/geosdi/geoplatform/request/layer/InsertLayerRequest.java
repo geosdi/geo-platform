@@ -33,13 +33,14 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.request;
+package org.geosdi.geoplatform.request.layer;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.geosdi.geoplatform.core.model.GPFolder;
+import org.geosdi.geoplatform.core.model.GPLayer;
 
 /**
  *
@@ -48,47 +49,32 @@ import org.geosdi.geoplatform.core.model.GPFolder;
  */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class InsertFolderRequest implements Serializable {
+public class InsertLayerRequest implements Serializable {
 
-    private static final long serialVersionUID = 8717170107547461430L;
+    private static final long serialVersionUID = -9130645421726097545L;
     //
-    private Long projectID;
-    private GPFolder folder;
+    @XmlAnyElement(lax = true)
+    private GPLayer layer;
 
-    public InsertFolderRequest() {
+    public InsertLayerRequest() {
     }
 
-    public InsertFolderRequest(Long theProjectID, GPFolder theFolder) {
-        this.projectID = theProjectID;
-        this.folder = theFolder;
-    }
-
-    /**
-     * @return the projectID
-     */
-    public Long getProjectID() {
-        return projectID;
+    public InsertLayerRequest(GPLayer theLayer) {
+        this.layer = theLayer;
     }
 
     /**
-     * @param projectID the projectID to set
+     * @return the layer
      */
-    public void setProjectID(Long projectID) {
-        this.projectID = projectID;
+    public GPLayer getLayer() {
+        return layer;
     }
 
     /**
-     * @return the folder
+     * @param layer the layer to set
      */
-    public GPFolder getFolder() {
-        return folder;
-    }
-
-    /**
-     * @param folder the folder to set
-     */
-    public void setFolder(GPFolder folder) {
-        this.folder = folder;
+    public void setLayer(GPLayer layer) {
+        this.layer = layer;
     }
 
 }

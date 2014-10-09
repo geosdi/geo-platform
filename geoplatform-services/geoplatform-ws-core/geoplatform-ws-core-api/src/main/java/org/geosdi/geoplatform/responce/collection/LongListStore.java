@@ -33,49 +33,56 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.request;
+package org.geosdi.geoplatform.responce.collection;
 
 import java.io.Serializable;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlTransient;
-import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
+import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@XmlTransient
-@XmlSeeAlso(value = {SaveWSAddedFolderAndTreeModificationsRequest.class,
-    SaveWSDeletedFolderAndTreeModifications.class,
-    SaveWSDragAndDropFolderAndTreeModifications.class})
-public abstract class WSFolderAndTreeModificationRequest implements Serializable {
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
+public class LongListStore implements Serializable {
 
-    private static final long serialVersionUID = -8088596700267312684L;
-    //
-    private GPWebServiceMapData descendantsMapData;
+    private static final long serialVersionUID = -617617882127872872L;
 
-    public WSFolderAndTreeModificationRequest() {
+    @XmlElementWrapper(name = "elements")
+    @XmlElement(name = "element")
+    private List<Long> elements;
+
+    public LongListStore() {
     }
 
-    public WSFolderAndTreeModificationRequest(
-            GPWebServiceMapData theDescendantsMapData) {
-        this.descendantsMapData = theDescendantsMapData;
-    }
-
-    /**
-     * @return the descendantsMapData
-     */
-    public GPWebServiceMapData getDescendantsMapData() {
-        return descendantsMapData;
+    public LongListStore(List<Long> elements) {
+        this.elements = elements;
     }
 
     /**
-     * @param descendantsMapData the descendantsMapData to set
+     * @return the elements
      */
-    public void setDescendantsMapData(
-            GPWebServiceMapData descendantsMapData) {
-        this.descendantsMapData = descendantsMapData;
+    public List<Long> getElements() {
+        return elements;
+    }
+
+    /**
+     * @param elements the elements to set
+     */
+    public void setElements(List<Long> elements) {
+        this.elements = elements;
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + " {" + "elements = "
+                + elements + '}';
     }
 
 }

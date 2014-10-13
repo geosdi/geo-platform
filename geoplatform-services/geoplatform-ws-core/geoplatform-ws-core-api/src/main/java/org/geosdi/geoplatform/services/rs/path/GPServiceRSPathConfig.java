@@ -94,6 +94,10 @@ public final class GPServiceRSPathConfig {
             + "updateProject";
     public static final String GET_PROJECT_DETAIL_PATH = PROJECTS_PATH
             + "getProjectDetail/{projectID}";
+    public static final String EXPORT_PROJECT_PATH = PROJECTS_PATH
+            + "exportProject/{projectID}";
+    public static final String IMPORT_PROJECT_PATH = PROJECTS_PATH
+            + "importProject";
 
     /**
      * ACCOUNT PROJECTS PATH *
@@ -103,6 +107,16 @@ public final class GPServiceRSPathConfig {
             + "{accountID}";
     public static final String INSERT_ACCOUNT_PROJECT_PATH = ACCOUNT_PROJECTS_PATH
             + "insertAccountProject";
+    public static final String GET_ACCOUNTS_BY_PROJECT_ID_PATH = ACCOUNT_PROJECTS_PATH
+            + "getAccountsByProject/{projectID}";
+    public static final String GET_ACCOUNTS_TO_SHARE_BY_PROJECT_ID = ACCOUNT_PROJECTS_PATH
+            + "getAccountsToShare/{projectID}";
+    public static final String GET_PROJECT_OWNER_PATH = ACCOUNT_PROJECTS_PATH
+            + "getProjectOwner/{projectID}";
+    public static final String SET_PROJECT_OWNER_PATH = ACCOUNT_PROJECTS_PATH
+            + "setProjectOwner";
+    public static final String UPDATE_ACCOUNTS_PROJECT_SHARING_PATH = ACCOUNT_PROJECTS_PATH
+            + "updateAccountsProjectSharing";
 
     /**
      * FOLDERS PATH
@@ -130,6 +144,8 @@ public final class GPServiceRSPathConfig {
             + "getNumberOfElementsProject/{projectID}";
     public static final String GET_PROJECT_WITH_ROOT_FOLDERS_PATH = FOLDERS_PATH
             + "getProjectWithRootFolders/{projectID}/{accountID}";
+    public static final String GET_PROJECT_WITH_EXPANDED_FOLDERS_PATH = FOLDERS_PATH
+            + "getProjectWithExpandedFolders/{projectID}/{accountID}";
     public static final String GET_CHILDREN_ELEMENTS_PATH = FOLDERS_PATH
             + "getChildrenElements/{folderID}";
 
@@ -144,10 +160,33 @@ public final class GPServiceRSPathConfig {
             + "getVectorLayer/{layerID}";
     public static final String ADD_LAYERS_AND_TREE_MODIFICATIONS_PATH = LAYERS_PATH
             + "addLayersAndTreeModifications";
-    public static final String GET_SHORT_LAYER_PATH = LAYERS_PATH 
+    public static final String GET_SHORT_LAYER_PATH = LAYERS_PATH
             + "getShortLayer/{layerID}";
     public static final String UPDATE_RASTER_LAYER_PARH = LAYERS_PATH
             + "updateRasterLayer";
+
+    /**
+     * MESSAGES PATH
+     */
+    private static final String MESSAGES_PATH = "/messages/";
+    public static final String INSERT_MESSAGE_PATH = MESSAGES_PATH
+            + "insertMessage";
+    public static final String GET_MESSAGE_DETAIL_PATH = MESSAGES_PATH
+            + "getMessageDetail/{messageID}";
+    public static final String INSERT_MULTI_MESSAGE_PATH = MESSAGES_PATH
+            + "insertMultiMessage";
+    public static final String GET_ALL_MESSAGES_BY_RECIPIENT_PATH = MESSAGES_PATH
+            + "getAllMessagesByRecipient/{recipientID}";
+    public static final String DELETE_MESSAGE_PATH = MESSAGES_PATH
+            + "deleteMessage/{messageID}";
+    public static final String MARK_MESSAGE_AS_READ_PATH = MESSAGES_PATH
+            + "markMessageAsRead/{messageID}";
+    public static final String GET_UNREAD_MESSAGES_BY_RECIPIENT_PATH = MESSAGES_PATH
+            + "getUnreadMessagesByRecipient/{recipientID}";
+    public static final String MARK_ALL_MESSAGES_AS_READ_BY_RECIPIENT_PATH = MESSAGES_PATH
+            + "markAllMessagesAsReadByRecipient/{recipientID}";
+    public static final String MARK_MESSAGES_AS_READ_BY_DATE_PATH = MESSAGES_PATH
+            + "markMessagesAsReadByDate";
 
     /**
      * WMS CAPABILITIES PATH

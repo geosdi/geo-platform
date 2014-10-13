@@ -295,7 +295,7 @@ public class WSLayerTest extends BaseSoapServiceTest {
 
         Assert.assertEquals("totalElementsOfProject after added",
                 totalElementsOfProject + 1,
-                gpWSClient.getNumberOfElementsProject(idProjectTest));
+                gpWSClient.getNumberOfElementsProject(idProjectTest).intValue());
 
         this.checkState(new int[]{7, 6, 5, 4, 2, 1}, new int[]{2, 3},
                 "before removing");
@@ -308,7 +308,7 @@ public class WSLayerTest extends BaseSoapServiceTest {
 
         Assert.assertEquals("totalElementsOfProject after deleted",
                 totalElementsOfProject, gpWSClient.getNumberOfElementsProject(
-                        idProjectTest));
+                        idProjectTest).intValue());
 
         this.checkInitialState("after removing");
     }

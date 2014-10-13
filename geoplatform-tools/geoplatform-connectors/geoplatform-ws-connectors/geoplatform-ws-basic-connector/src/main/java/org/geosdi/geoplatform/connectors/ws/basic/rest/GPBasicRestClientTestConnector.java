@@ -44,8 +44,7 @@ import org.springframework.beans.factory.annotation.Value;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPBasicRestClientTestConnector
-        extends BasicRestClientConnector {
+public class GPBasicRestClientTestConnector extends BasicRestClientConnector {
 
     @Override
     @Value("configurator{webservice_rs_test_endpoint_address}")
@@ -57,5 +56,4 @@ public class GPBasicRestClientTestConnector
     protected Class<?>[] getExtraClasses() {
         return new Class<?>[]{GPAccount.class, GPLayer.class};
     }
-
 }

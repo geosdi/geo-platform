@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.connectors.ws.basic.rest;
 
-import org.apache.cxf.jaxrs.provider.json.JSONProvider;
 import org.geosdi.geoplatform.connectors.ws.rest.RestClientConnector;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 
@@ -51,19 +50,6 @@ abstract class BasicRestClientConnector
     
     public BasicRestClientConnector() {
         super(GeoPlatformService.class);
-    }
-    
-    @Override
-    protected <T> JSONProvider<T> createJSONProvider() {
-        return new JSONProvider() {
-            
-            {
-                if ((getExtraClasses() != null)
-                        && (getExtraClasses().length > 0)) {
-                    super.setExtraClass(getExtraClasses());
-                }
-            }
-        };
     }
     
     @Override

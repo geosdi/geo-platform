@@ -52,6 +52,7 @@ import org.geosdi.geoplatform.jasypt.support.GPDigesterConfigurator;
 import org.geosdi.geoplatform.request.InsertAccountRequest;
 import org.geosdi.geoplatform.request.folder.InsertFolderRequest;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
+import org.geosdi.geoplatform.request.PutAccountsProjectRequest;
 import org.geosdi.geoplatform.request.RequestByAccountProjectIDs;
 import org.geosdi.geoplatform.request.RequestByID;
 import org.geosdi.geoplatform.request.folder.WSAddFolderAndTreeModificationsRequest;
@@ -60,6 +61,8 @@ import org.geosdi.geoplatform.request.folder.WSDDFolderAndTreeModifications;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.request.layer.InsertLayerRequest;
 import org.geosdi.geoplatform.request.layer.WSAddLayersAndTreeModificationsRequest;
+import org.geosdi.geoplatform.request.message.MarkMessageReadByDateRequest;
+import org.geosdi.geoplatform.request.project.ImportProjectRequest;
 import org.geosdi.geoplatform.responce.AccountProjectPropertiesDTO;
 import org.geosdi.geoplatform.responce.ApplicationDTO;
 import org.geosdi.geoplatform.responce.FolderDTO;
@@ -68,7 +71,6 @@ import org.geosdi.geoplatform.responce.MessageDTO;
 import org.geosdi.geoplatform.responce.ProjectDTO;
 import org.geosdi.geoplatform.responce.RasterPropertiesDTO;
 import org.geosdi.geoplatform.responce.ServerDTO;
-import org.geosdi.geoplatform.responce.ShortAccountDTO;
 import org.geosdi.geoplatform.responce.ShortAccountDTOContainer;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.geosdi.geoplatform.responce.UserDTO;
@@ -336,7 +338,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public boolean deleteOrganization(Long organizationID) throws
+    public Boolean deleteOrganization(Long organizationID) throws
             ResourceNotFoundFault {
         return organizationServiceDelegate.deleteOrganization(organizationID);
     }
@@ -382,7 +384,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public boolean deleteAccount(Long accountID) throws ResourceNotFoundFault {
+    public Boolean deleteAccount(Long accountID) throws ResourceNotFoundFault {
         return accountServiceDelegate.deleteAccount(accountID);
     }
 
@@ -563,7 +565,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public boolean setProjectOwner(RequestByAccountProjectIDs request)
+    public Boolean setProjectOwner(RequestByAccountProjectIDs request)
             throws ResourceNotFoundFault {
         return projectServiceDelegate.setProjectOwner(request, false);
     }
@@ -575,7 +577,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public GPAccount getProjectOwner(Long projectID) throws
+    public GPAccountProject getProjectOwner(Long projectID) throws
             ResourceNotFoundFault {
         return projectServiceDelegate.getProjectOwner(projectID);
     }
@@ -607,23 +609,22 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public List<ShortAccountDTO> getAccountsByProjectID(Long projectID)
+    public ShortAccountDTOContainer getAccountsByProjectID(Long projectID)
             throws ResourceNotFoundFault {
         return projectServiceDelegate.getAccountsBySharedProjectID(projectID);
     }
 
     @Override
-    public List<ShortAccountDTO> getAccountsToShareByProjectID(Long projectID)
+    public ShortAccountDTOContainer getAccountsToShareByProjectID(Long projectID)
             throws ResourceNotFoundFault {
         return projectServiceDelegate.getAccountsToShareByProjectID(projectID);
     }
 
     @Override
-    public boolean updateAccountsProjectSharing(Long projectID,
-            List<Long> accountIDsProject)
-            throws ResourceNotFoundFault {
-        return projectServiceDelegate.updateAccountsProjectSharing(projectID,
-                accountIDsProject);
+    public Boolean updateAccountsProjectSharing(
+            PutAccountsProjectRequest apRequest)
+            throws ResourceNotFoundFault, IllegalParameterFault {
+        return projectServiceDelegate.updateAccountsProjectSharing(apRequest);
     }
     //</editor-fold>
 
@@ -663,7 +664,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public int getNumberOfElementsProject(Long projectID) throws
+    public Integer getNumberOfElementsProject(Long projectID) throws
             ResourceNotFoundFault {
         return projectServiceDelegate.getNumberOfElementsProject(projectID);
     }
@@ -745,7 +746,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public boolean deleteFolder(Long folderID) throws ResourceNotFoundFault {
+    public Boolean deleteFolder(Long folderID) throws ResourceNotFoundFault {
         return folderServiceDelegate.deleteFolder(folderID);
     }
 
@@ -768,7 +769,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public boolean saveDeletedFolderAndTreeModifications(
+    public Boolean saveDeletedFolderAndTreeModifications(
             WSDeleteFolderAndTreeModifications sdfModificationRequest)
             throws ResourceNotFoundFault {
         return folderServiceDelegate.saveDeletedFolderAndTreeModifications(
@@ -784,7 +785,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public boolean saveDragAndDropFolderAndTreeModifications(
+    public Boolean saveDragAndDropFolderAndTreeModifications(
             WSDDFolderAndTreeModifications sddfTreeModificationRequest)
             throws ResourceNotFoundFault {
         return folderServiceDelegate.saveDragAndDropFolderModifications(
@@ -855,10 +856,9 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public Long importProject(ProjectDTO projectDTO,
-            Long userID)
+    public Long importProject(ImportProjectRequest impRequest)
             throws IllegalParameterFault, ResourceNotFoundFault {
-        return projectServiceDelegate.importProject(projectDTO, userID);
+        return projectServiceDelegate.importProject(impRequest);
     }
     //</editor-fold>
 
@@ -867,7 +867,8 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     // === Layer
     // =========================================================================
     @Override
-    public Long insertLayer(InsertLayerRequest layerRequest) throws IllegalParameterFault {
+    public Long insertLayer(InsertLayerRequest layerRequest) throws
+            IllegalParameterFault {
         return layerServiceDelegate.insertLayer(layerRequest);
     }
 
@@ -1130,13 +1131,13 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public boolean insertMultiMessage(MessageDTO messageDTO) throws
+    public Boolean insertMultiMessage(MessageDTO messageDTO) throws
             ResourceNotFoundFault {
         return messageServiceDelegate.insertMultiMessage(messageDTO);
     }
 
     @Override
-    public boolean deleteMessage(Long messageID) throws ResourceNotFoundFault {
+    public Boolean deleteMessage(Long messageID) throws ResourceNotFoundFault {
         return messageServiceDelegate.deleteMessage(messageID);
     }
 
@@ -1159,24 +1160,23 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public boolean markMessageAsRead(Long recipientID) throws
+    public Boolean markMessageAsRead(Long recipientID) throws
             ResourceNotFoundFault {
         return messageServiceDelegate.markMessageAsRead(recipientID);
     }
 
     @Override
-    public boolean markAllMessagesAsReadByRecipient(Long recipientID) throws
+    public Boolean markAllMessagesAsReadByRecipient(Long recipientID) throws
             ResourceNotFoundFault {
         return messageServiceDelegate.markAllMessagesAsReadByRecipient(
                 recipientID);
     }
 
     @Override
-    public boolean markMessagesAsReadByDate(Long recipientID,
-            Date toDate)
+    public Boolean markMessagesAsReadByDate(
+            MarkMessageReadByDateRequest markMessageAsReadByDateReq)
             throws ResourceNotFoundFault {
-        return messageServiceDelegate.markMessagesAsReadByDate(recipientID,
-                toDate);
+        return messageServiceDelegate.markMessagesAsReadByDate(markMessageAsReadByDateReq);
     }
     // </editor-fold>
 

@@ -33,24 +33,14 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.services.rs.config.provider;
+package org.geosdi.geoplatform.support.cxf.rs.provider.jettyson;
 
 import org.apache.cxf.jaxrs.provider.json.JSONProvider;
-import org.geosdi.geoplatform.configurator.bootstrap.cxf.Rest;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Rest
-@Configuration
-class GPJsonCoreProviderConfig {
-
-    @Bean
-    public JSONProvider gpJsonCoreProvider() {
-        return new JSONProvider();
-    }
+public class GPJSONProvider<T extends Object> extends JSONProvider<T> {
 }

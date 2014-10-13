@@ -34,7 +34,6 @@
 package org.geosdi.geoplatform.services;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
@@ -53,7 +52,6 @@ import org.codehaus.jra.Delete;
 import org.codehaus.jra.Get;
 import org.codehaus.jra.Post;
 import org.codehaus.jra.Put;
-import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPAccountProject;
 import org.geosdi.geoplatform.core.model.GPApplication;
 import org.geosdi.geoplatform.core.model.GPAuthority;
@@ -78,6 +76,7 @@ import org.geosdi.geoplatform.gui.shared.GPLayerType;
 import org.geosdi.geoplatform.request.InsertAccountRequest;
 import org.geosdi.geoplatform.request.folder.InsertFolderRequest;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
+import org.geosdi.geoplatform.request.PutAccountsProjectRequest;
 import org.geosdi.geoplatform.request.RequestByAccountProjectIDs;
 import org.geosdi.geoplatform.request.RequestByID;
 import org.geosdi.geoplatform.request.folder.WSAddFolderAndTreeModificationsRequest;
@@ -86,6 +85,8 @@ import org.geosdi.geoplatform.request.folder.WSDDFolderAndTreeModifications;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.request.layer.InsertLayerRequest;
 import org.geosdi.geoplatform.request.layer.WSAddLayersAndTreeModificationsRequest;
+import org.geosdi.geoplatform.request.message.MarkMessageReadByDateRequest;
+import org.geosdi.geoplatform.request.project.ImportProjectRequest;
 import org.geosdi.geoplatform.responce.AccountProjectPropertiesDTO;
 import org.geosdi.geoplatform.responce.ApplicationDTO;
 import org.geosdi.geoplatform.responce.FolderDTO;
@@ -94,7 +95,6 @@ import org.geosdi.geoplatform.responce.MessageDTO;
 import org.geosdi.geoplatform.responce.ProjectDTO;
 import org.geosdi.geoplatform.responce.RasterPropertiesDTO;
 import org.geosdi.geoplatform.responce.ServerDTO;
-import org.geosdi.geoplatform.responce.ShortAccountDTO;
 import org.geosdi.geoplatform.responce.ShortAccountDTOContainer;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.geosdi.geoplatform.responce.UserDTO;
@@ -150,7 +150,7 @@ public interface GeoPlatformService {
     @Path(value = GPServiceRSPathConfig.DELETE_ORGANIZATION_PATH)
     @DELETE
     @Deprecated
-    boolean deleteOrganization(
+    Boolean deleteOrganization(
             @WebParam(name = "organizationID")
             @PathParam(value = "organizationID") Long organizationID)
             throws ResourceNotFoundFault;
@@ -240,7 +240,7 @@ public interface GeoPlatformService {
     @DELETE
     @Path(value = GPServiceRSPathConfig.DELETE_ACCOUNT_PATH)
     @Delete
-    boolean deleteAccount(@WebParam(name = "accountID")
+    Boolean deleteAccount(@WebParam(name = "accountID")
             @PathParam(value = "accountID") Long accountID)
             throws ResourceNotFoundFault;
 
@@ -651,9 +651,12 @@ public interface GeoPlatformService {
      * @return the Account owner
      * @throws ResourceNotFoundFault if Project not found
      */
-    @Post
+    @Get
+    @GET
+    @Path(value = GPServiceRSPathConfig.GET_PROJECT_OWNER_PATH)
     @WebResult(name = "projectOwner")
-    GPAccount getProjectOwner(@WebParam(name = "projectID") Long projectID)
+    GPAccountProject getProjectOwner(@WebParam(name = "projectID")
+            @PathParam(value = "projectID") Long projectID)
             throws ResourceNotFoundFault;
 
     /**
@@ -663,8 +666,10 @@ public interface GeoPlatformService {
      * @return true if the Account owner was changed
      * @throws ResourceNotFoundFault if Project or Account not found
      */
-    @Post
-    boolean setProjectOwner(RequestByAccountProjectIDs request)
+    @Put
+    @PUT
+    @Path(value = GPServiceRSPathConfig.SET_PROJECT_OWNER_PATH)
+    Boolean setProjectOwner(RequestByAccountProjectIDs request)
             throws ResourceNotFoundFault;
 
     /**
@@ -742,9 +747,12 @@ public interface GeoPlatformService {
      * @throws ResourceNotFoundFault if Project not found
      */
     @Get
+    @GET
+    @Path(value = GPServiceRSPathConfig.GET_ACCOUNTS_BY_PROJECT_ID_PATH)
     @WebResult(name = "account")
-    List<ShortAccountDTO> getAccountsByProjectID(
-            @WebParam(name = "projectID") Long projectID)
+    ShortAccountDTOContainer getAccountsByProjectID(
+            @WebParam(name = "projectID")
+            @PathParam(value = "projectID") Long projectID)
             throws ResourceNotFoundFault;
 
     /**
@@ -755,28 +763,31 @@ public interface GeoPlatformService {
      * @throws ResourceNotFoundFault if Project not found
      */
     @Get
+    @GET
+    @Path(value = GPServiceRSPathConfig.GET_ACCOUNTS_TO_SHARE_BY_PROJECT_ID)
     @WebResult(name = "account")
-    List<ShortAccountDTO> getAccountsToShareByProjectID(
-            @WebParam(name = "projectID") Long projectID)
+    ShortAccountDTOContainer getAccountsToShareByProjectID(
+            @WebParam(name = "projectID")
+            @PathParam(value = "projectID") Long projectID)
             throws ResourceNotFoundFault;
 
     /**
      * Update all at once the relations of sharing for a Project. The Account
      * owner ID relation must be present, otherwise the Project will be unshare.
      *
-     * @param projectID the Project ID
-     * @param accountIDsProject the Account IDs which will be updated the
-     * relation of sharing
+     * @param apRequest {@link PutAccountsProjectRequest}
+     *
      * @return true if the relations of sharing are updated
      * @throws ResourceNotFoundFault if Project not found or an Account not
      * found
+     * @throws org.geosdi.geoplatform.exception.IllegalParameterFault
      */
-    @Post
+    @Put
+    @PUT
+    @Path(value = GPServiceRSPathConfig.UPDATE_ACCOUNTS_PROJECT_SHARING_PATH)
     @WebResult(name = "account")
-    boolean updateAccountsProjectSharing(
-            @WebParam(name = "projectID") Long projectID,
-            @WebParam(name = "accountIDsProject") List<Long> accountIDsProject)
-            throws ResourceNotFoundFault;
+    Boolean updateAccountsProjectSharing(PutAccountsProjectRequest apRequest)
+            throws ResourceNotFoundFault, IllegalParameterFault;
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Project">
     // ==========================================================================
@@ -870,7 +881,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.GET_NUMBER_OF_ELEMENTS_PROJECT_PATH)
     @WebResult(name = "project")
-    int getNumberOfElementsProject(@WebParam(name = "projectID")
+    Integer getNumberOfElementsProject(@WebParam(name = "projectID")
             @PathParam(value = "projectID") Long projectID)
             throws ResourceNotFoundFault;
 
@@ -985,7 +996,7 @@ public interface GeoPlatformService {
     @DELETE
     @Path(value = GPServiceRSPathConfig.DELETE_FOLDER_PATH)
     @Deprecated
-    boolean deleteFolder(@WebParam(name = "folderID")
+    Boolean deleteFolder(@WebParam(name = "folderID")
             @PathParam(value = "folderID") Long folderID)
             throws ResourceNotFoundFault;
 
@@ -1035,7 +1046,7 @@ public interface GeoPlatformService {
     @Put
     @PUT
     @Path(value = GPServiceRSPathConfig.SAVE_DELETED_FOLDER_AND_TREE_MODIFICATIONS_PATH)
-    boolean saveDeletedFolderAndTreeModifications(
+    Boolean saveDeletedFolderAndTreeModifications(
             @WebParam(name = "sdfModificationRequest") WSDeleteFolderAndTreeModifications sdfModificationRequest)
             throws ResourceNotFoundFault;
 
@@ -1065,7 +1076,7 @@ public interface GeoPlatformService {
     @Put
     @PUT
     @Path(value = GPServiceRSPathConfig.SAVE_DD_FOLDER_AND_TREE_MODIFICATIONS_PATH)
-    boolean saveDragAndDropFolderAndTreeModifications(
+    Boolean saveDragAndDropFolderAndTreeModifications(
             @WebParam(name = "sddfTreeModificationRequest") WSDDFolderAndTreeModifications sddfTreeModificationRequest)
             throws ResourceNotFoundFault;
 
@@ -1188,22 +1199,30 @@ public interface GeoPlatformService {
             throws ResourceNotFoundFault;
 
     /**
+     * <p>
      * Retrieve a Project. Retrieve also the root folders (top-level folders)
      * with content (sub-folders and layers), so all expanded folders (at any
      * level) in cascade.
      * <p/>
+     * <p>
      * Return the Account owner only if the Account that load the project is not
      * the Account owner.
+     * </p>
      *
      * @param projectID the Project ID
+     * @param accountID
      * @return the Project to retrieve
      * @throws ResourceNotFoundFault if Project not found
      */
     @Get
+    @GET
+    @Path(value = GPServiceRSPathConfig.GET_PROJECT_WITH_EXPANDED_FOLDERS_PATH)
     @WebResult(name = "project")
     ProjectDTO getProjectWithExpandedFolders(
-            @WebParam(name = "projectID") Long projectID,
-            @WebParam(name = "accountID") Long accountID)
+            @WebParam(name = "projectID")
+            @PathParam(value = "projectID") Long projectID,
+            @WebParam(name = "accountID")
+            @PathParam(value = "accountID") Long accountID)
             throws ResourceNotFoundFault;
 
     /**
@@ -1214,23 +1233,28 @@ public interface GeoPlatformService {
      * @throws ResourceNotFoundFault if Project not found
      */
     @Get
+    @GET
+    @Path(value = GPServiceRSPathConfig.EXPORT_PROJECT_PATH)
     @WebResult(name = "project")
-    ProjectDTO exportProject(@WebParam(name = "projectID") Long projectID)
+    ProjectDTO exportProject(@WebParam(name = "projectID")
+            @PathParam(value = "projectID") Long projectID)
             throws ResourceNotFoundFault;
 
     /**
      * Import a Project with its contents (folders and layers) for an Account
      * owner.
      *
-     * @param projectDTO the Project to import
-     * @param accountID the Account owner ID of the Project
+     * @param impRequest
+     *
      * @return the Project ID
      * @throws IllegalParameterFault if Project and its contents is not valid
      * @throws ResourceNotFoundFault if Account not found
      */
-    @Put
-    Long importProject(@WebParam(name = "projectDTO") ProjectDTO projectDTO,
-            @WebParam(name = "accountID") Long accountID)
+    @Post
+    @POST
+    @Path(value = GPServiceRSPathConfig.IMPORT_PROJECT_PATH)
+    Long importProject(
+            @WebParam(name = "impRequest") ImportProjectRequest impRequest)
             throws IllegalParameterFault, ResourceNotFoundFault;
 
     // </editor-fold>
@@ -1249,7 +1273,8 @@ public interface GeoPlatformService {
     @POST
     @Path(value = GPServiceRSPathConfig.INSERT_LAYER_PATH)
     @Deprecated
-    Long insertLayer(@WebParam(name = "layerRequest") InsertLayerRequest layerRequest)
+    Long insertLayer(
+            @WebParam(name = "layerRequest") InsertLayerRequest layerRequest)
             throws IllegalParameterFault;
 
     /**
@@ -1324,7 +1349,7 @@ public interface GeoPlatformService {
      * tree.
      *
      * @param addLayersRequest
-     * 
+     *
      * @return the Layer list ID
      * @throws ResourceNotFoundFault if Project or parent Folder not found
      * @throws IllegalParameterFault if Layer or Layer list are not valid
@@ -1730,7 +1755,9 @@ public interface GeoPlatformService {
      * found
      * @throws IllegalParameterFault if Message is not valid
      */
-    @Put
+    @Post
+    @POST
+    @Path(value = GPServiceRSPathConfig.INSERT_MESSAGE_PATH)
     Long insertMessage(@WebParam(name = "message") GPMessage message)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
@@ -1743,8 +1770,10 @@ public interface GeoPlatformService {
      * @throws ResourceNotFoundFault if Account sender or one Account recipient
      * not found
      */
-    @Put
-    boolean insertMultiMessage(
+    @Post
+    @POST
+    @Path(value = GPServiceRSPathConfig.INSERT_MULTI_MESSAGE_PATH)
+    Boolean insertMultiMessage(
             @WebParam(name = "messageDTO") MessageDTO messageDTO)
             throws ResourceNotFoundFault;
 
@@ -1756,7 +1785,10 @@ public interface GeoPlatformService {
      * @throws ResourceNotFoundFault if Message not found
      */
     @Delete
-    boolean deleteMessage(@WebParam(name = "messageID") Long messageID)
+    @DELETE
+    @Path(value = GPServiceRSPathConfig.DELETE_MESSAGE_PATH)
+    Boolean deleteMessage(@WebParam(name = "messageID")
+            @PathParam(value = "messageID") Long messageID)
             throws ResourceNotFoundFault;
 
     /**
@@ -1767,7 +1799,10 @@ public interface GeoPlatformService {
      * @throws ResourceNotFoundFault if Message not found
      */
     @Get
-    GPMessage getMessageDetail(@WebParam(name = "messageID") Long messageID)
+    @GET
+    @Path(value = GPServiceRSPathConfig.GET_MESSAGE_DETAIL_PATH)
+    GPMessage getMessageDetail(@WebParam(name = "messageID")
+            @PathParam(value = "messageID") Long messageID)
             throws ResourceNotFoundFault;
 
     /**
@@ -1779,9 +1814,12 @@ public interface GeoPlatformService {
      * @throws ResourceNotFoundFault if Account recipient not found
      */
     @Get
+    @GET
+    @Path(value = GPServiceRSPathConfig.GET_ALL_MESSAGES_BY_RECIPIENT_PATH)
     @WebResult(name = "message")
     List<GPMessage> getAllMessagesByRecipient(
-            @WebParam(name = "recipientID") Long recipientID)
+            @WebParam(name = "recipientID")
+            @PathParam(value = "recipientID") Long recipientID)
             throws ResourceNotFoundFault;
 
     /**
@@ -1793,9 +1831,12 @@ public interface GeoPlatformService {
      * @throws ResourceNotFoundFault if Account recipient not found
      */
     @Get
+    @GET
+    @Path(value = GPServiceRSPathConfig.GET_UNREAD_MESSAGES_BY_RECIPIENT_PATH)
     @WebResult(name = "message")
     List<GPMessage> getUnreadMessagesByRecipient(
-            @WebParam(name = "recipientID") Long recipientID)
+            @WebParam(name = "recipientID")
+            @PathParam(value = "recipientID") Long recipientID)
             throws ResourceNotFoundFault;
 
     /**
@@ -1805,7 +1846,11 @@ public interface GeoPlatformService {
      * @return true if the Message was marked
      * @throws ResourceNotFoundFault if Message not found
      */
-    boolean markMessageAsRead(@WebParam(name = "messageID") Long messageID)
+    @Put
+    @PUT
+    @Path(value = GPServiceRSPathConfig.MARK_MESSAGE_AS_READ_PATH)
+    Boolean markMessageAsRead(@WebParam(name = "messageID")
+            @PathParam(value = "messageID") Long messageID)
             throws ResourceNotFoundFault;
 
     /**
@@ -1815,23 +1860,26 @@ public interface GeoPlatformService {
      * @return true if the Messages was marked
      * @throws ResourceNotFoundFault if Account recipient not found
      */
-    @Post
-    boolean markAllMessagesAsReadByRecipient(
-            @WebParam(name = "recipientID") Long recipientID)
+    @Put
+    @PUT
+    @Path(value = GPServiceRSPathConfig.MARK_ALL_MESSAGES_AS_READ_BY_RECIPIENT_PATH)
+    Boolean markAllMessagesAsReadByRecipient(
+            @WebParam(name = "recipientID")
+            @PathParam(value = "recipientID") Long recipientID)
             throws ResourceNotFoundFault;
 
     /**
      * Mark all unread Messages, until a date, of an Account recipient as read.
      *
-     * @param recipientID the Account recipient ID
-     * @param toDate the date to search unread Messages until this date
+     * @param markMessageAsReadByDateReq
      * @return true if the Messages was marked
      * @throws ResourceNotFoundFault if Account recipient not found
      */
-    @Post
-    boolean markMessagesAsReadByDate(
-            @WebParam(name = "recipientID") Long recipientID,
-            @WebParam(name = "toDate") Date toDate)
+    @Put
+    @PUT
+    @Path(value = GPServiceRSPathConfig.MARK_MESSAGES_AS_READ_BY_DATE_PATH)
+    Boolean markMessagesAsReadByDate(
+            @WebParam(name = "markMessageAsReadByDateReq") MarkMessageReadByDateRequest markMessageAsReadByDateReq)
             throws ResourceNotFoundFault;
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Access Info">

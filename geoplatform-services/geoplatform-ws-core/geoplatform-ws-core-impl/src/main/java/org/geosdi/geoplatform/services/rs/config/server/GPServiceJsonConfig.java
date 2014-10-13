@@ -42,12 +42,17 @@ import org.apache.cxf.interceptor.Interceptor;
 import org.apache.cxf.interceptor.LoggingInInterceptor;
 import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
-import org.apache.cxf.jaxrs.provider.json.JSONProvider;
 import org.apache.cxf.message.Message;
 import org.geosdi.geoplatform.configurator.bootstrap.cxf.Rest;
+import org.geosdi.geoplatform.core.model.GPAccount;
+import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.services.GeoPlatformService;
+import org.geosdi.geoplatform.support.cxf.rs.provider.configurator.GPRestProviderType;
+import org.geosdi.geoplatform.support.cxf.rs.provider.factory.GPRestProviderFactory;
+import org.geosdi.geoplatform.support.cxf.rs.provider.jettyson.GPJSONProvider;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Required;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -65,7 +70,7 @@ class GPServiceJsonConfig {
     public static JAXRSServerFactoryBean geoplatformServiceJSON(@Qualifier(
             value = "geoPlatformService") GeoPlatformService geoPlatformService,
             @Qualifier(value = "gpJsonCoreApplication") Application gpJsonCoreApplication,
-            @Qualifier(value = "gpJsonCoreProvider") JSONProvider gpJsonCoreProvider,
+            @Value("configurator{cxf_rest_provider_type}") GPRestProviderType providerType,
             @Qualifier(value = "serverLoggingInInterceptorBean") LoggingInInterceptor serverLogInInterceptor,
             @Qualifier(value = "serverLoggingOutInterceptorBean") LoggingOutInterceptor serverLogOutInterceptor) {
 
@@ -73,7 +78,7 @@ class GPServiceJsonConfig {
                 gpJsonCoreApplication, JAXRSServerFactoryBean.class);
         factory.setServiceBean(geoPlatformService);
         factory.setAddress(factory.getAddress());
-        factory.setProvider(gpJsonCoreProvider);
+        factory.setProvider(createProvider(providerType));
         factory.setInInterceptors(Arrays.<Interceptor<? extends Message>>asList(
                 serverLogInInterceptor)
         );
@@ -82,6 +87,16 @@ class GPServiceJsonConfig {
                         serverLogOutInterceptor));
 
         return factory;
+    }
+
+    private static Object createProvider(GPRestProviderType providerType) {
+        Object provider = GPRestProviderFactory.createProvider(providerType);
+        if (provider instanceof GPJSONProvider) {
+            ((GPJSONProvider) provider).setExtraClass(
+                    new Class<?>[]{GPAccount.class,
+                        GPLayer.class});
+        }
+        return provider;
     }
 
 }

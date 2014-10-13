@@ -47,7 +47,9 @@ import org.geosdi.geoplatform.core.model.GPVectorLayer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.shared.GPRole;
+import org.geosdi.geoplatform.request.PutAccountsProjectRequest;
 import org.geosdi.geoplatform.request.RequestByAccountProjectIDs;
+import org.geosdi.geoplatform.request.project.ImportProjectRequest;
 import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.IElementDTO;
 import org.geosdi.geoplatform.responce.ProjectDTO;
@@ -317,7 +319,8 @@ public class WSProjectTest extends BaseSoapServiceTest {
 
         projectDTO.setId(null); // Entity passed must not containd an ID, otherwise Hibernate throws PersistentObjectException
         // Import ProjectDTO
-        Long projectID = gpWSClient.importProject(projectDTO, super.idUserTest);
+        Long projectID = gpWSClient.importProject(new ImportProjectRequest(
+                projectDTO, super.idUserTest));
         // Check imported Project
         Assert.assertTrue("Check importProject", projectID > 0);
         logger.debug("*** ID project imported: {} ***", projectID);
@@ -490,8 +493,8 @@ public class WSProjectTest extends BaseSoapServiceTest {
 
         // Initial test
         List<ShortAccountDTO> accountsToShare = gpWSClient.getAccountsByProjectID(
-                idProjectTest);
-        Assert.assertNotNull(accountsToShare);
+                idProjectTest).getAccounts();
+        Assert.assertNotEquals(accountsToShare.isEmpty(), Boolean.TRUE);
         Assert.assertEquals(1, accountsToShare.size());
         Assert.assertEquals(idUserTest,
                 accountsToShare.get(0).getId().longValue());
@@ -512,8 +515,9 @@ public class WSProjectTest extends BaseSoapServiceTest {
                 BasePermission.READ);
 
         // Final test
-        accountsToShare = gpWSClient.getAccountsByProjectID(idProjectTest);
-        Assert.assertNotNull(accountsToShare);
+        accountsToShare = gpWSClient.getAccountsByProjectID(idProjectTest)
+                .getAccounts();
+        Assert.assertNotEquals(accountsToShare.isEmpty(), Boolean.TRUE);
         Assert.assertEquals(3, accountsToShare.size());
     }
 
@@ -526,8 +530,8 @@ public class WSProjectTest extends BaseSoapServiceTest {
 
         // Initial test
         List<ShortAccountDTO> accountsToShare = gpWSClient.getAccountsToShareByProjectID(
-                idProjectTest);
-        Assert.assertNull(accountsToShare);
+                idProjectTest).getAccounts();
+        Assert.assertEquals(accountsToShare.isEmpty(), Boolean.TRUE);
 
         // Insert a User to which the Project is shared as viewer
         Long newUserID = this.createAndInsertUser("user_to_share_project",
@@ -543,8 +547,9 @@ public class WSProjectTest extends BaseSoapServiceTest {
                 organizationTest, GPRole.VIEWER);
 
         // Final test
-        accountsToShare = gpWSClient.getAccountsToShareByProjectID(idProjectTest);
-        Assert.assertNotNull(accountsToShare);
+        accountsToShare = gpWSClient.getAccountsToShareByProjectID(idProjectTest)
+                .getAccounts();
+        Assert.assertNotEquals(accountsToShare.isEmpty(), Boolean.TRUE);
         Assert.assertEquals(2, accountsToShare.size());
     }
 
@@ -563,7 +568,7 @@ public class WSProjectTest extends BaseSoapServiceTest {
                 BasePermission.READ);
 
         // Initial test
-        GPAccount owner = gpWSClient.getProjectOwner(idProjectTest);
+        GPAccount owner = gpWSClient.getProjectOwner(idProjectTest).getAccount();
         Assert.assertNotNull(owner);
         Assert.assertEquals(userTest, owner);
 
@@ -574,7 +579,7 @@ public class WSProjectTest extends BaseSoapServiceTest {
         Assert.assertTrue(result);
 
         // Final test
-        owner = gpWSClient.getProjectOwner(idProjectTest);
+        owner = gpWSClient.getProjectOwner(idProjectTest).getAccount();
         Assert.assertNotNull(owner);
         Assert.assertEquals(newOwnerID, owner.getId());
     }
@@ -582,7 +587,7 @@ public class WSProjectTest extends BaseSoapServiceTest {
     @Test
     public void testProjectNewOwner() throws Exception {
         // Initial test
-        GPAccount owner = gpWSClient.getProjectOwner(idProjectTest);
+        GPAccount owner = gpWSClient.getProjectOwner(idProjectTest).getAccount();
         Assert.assertNotNull(owner);
         Assert.assertEquals(userTest, owner);
 
@@ -596,7 +601,7 @@ public class WSProjectTest extends BaseSoapServiceTest {
         Assert.assertTrue(result);
 
         // Final test
-        owner = gpWSClient.getProjectOwner(idProjectTest);
+        owner = gpWSClient.getProjectOwner(idProjectTest).getAccount();
         Assert.assertNotNull(owner);
         Assert.assertEquals(newOwnerID, owner.getId());
     }
@@ -608,8 +613,8 @@ public class WSProjectTest extends BaseSoapServiceTest {
         Assert.assertFalse(project.isShared());
 
         List<ShortAccountDTO> accountsToShare = gpWSClient.getAccountsByProjectID(
-                idProjectTest);
-        Assert.assertNotNull(accountsToShare);
+                idProjectTest).getAccounts();
+        Assert.assertNotEquals(accountsToShare.isEmpty(), Boolean.TRUE);
         Assert.assertEquals(1, accountsToShare.size());
         Assert.assertEquals(idUserTest,
                 accountsToShare.get(0).getId().longValue());
@@ -619,14 +624,16 @@ public class WSProjectTest extends BaseSoapServiceTest {
                 organizationTest, GPRole.USER);
 
         // Test add user for sharing
-        boolean result = gpWSClient.updateAccountsProjectSharing(idProjectTest,
-                Arrays.asList(idUserTest, newUserID));
+        boolean result = gpWSClient.updateAccountsProjectSharing(
+                new PutAccountsProjectRequest(idProjectTest,
+                        Arrays.asList(idUserTest, newUserID)));
         Assert.assertTrue(result);
 
         project = gpWSClient.getProjectDetail(idProjectTest);
         Assert.assertTrue(project.isShared());
 
-        accountsToShare = gpWSClient.getAccountsByProjectID(idProjectTest);
+        accountsToShare = gpWSClient.getAccountsByProjectID(idProjectTest)
+                .getAccounts();
         Assert.assertNotNull(accountsToShare);
         Assert.assertEquals(2, accountsToShare.size());
         boolean check = false;
@@ -657,7 +664,7 @@ public class WSProjectTest extends BaseSoapServiceTest {
         Assert.assertTrue(project.isShared());
 
         List<ShortAccountDTO> accountsToShare = gpWSClient.getAccountsByProjectID(
-                idProjectTest);
+                idProjectTest).getAccounts();
         Assert.assertNotNull(accountsToShare);
         Assert.assertEquals(2, accountsToShare.size());
         Assert.assertEquals(2, accountsToShare.size());
@@ -671,14 +678,16 @@ public class WSProjectTest extends BaseSoapServiceTest {
         Assert.assertTrue(check);
 
         // Test delete user for sharing
-        boolean result = gpWSClient.updateAccountsProjectSharing(idProjectTest,
-                Arrays.asList(idUserTest));
+        boolean result = gpWSClient.updateAccountsProjectSharing(
+                new PutAccountsProjectRequest(idProjectTest,
+                        Arrays.asList(idUserTest)));
         Assert.assertTrue(result);
 
         project = gpWSClient.getProjectDetail(idProjectTest);
         Assert.assertFalse(project.isShared());
 
-        accountsToShare = gpWSClient.getAccountsByProjectID(idProjectTest);
+        accountsToShare = gpWSClient.getAccountsByProjectID(idProjectTest)
+                .getAccounts();
         Assert.assertNotNull(accountsToShare);
         Assert.assertEquals(1, accountsToShare.size());
         Assert.assertEquals(idUserTest,
@@ -705,7 +714,7 @@ public class WSProjectTest extends BaseSoapServiceTest {
         Assert.assertTrue(project.isShared());
 
         List<ShortAccountDTO> accountsToShare = gpWSClient.getAccountsByProjectID(
-                idProjectTest);
+                idProjectTest).getAccounts();
         Assert.assertNotNull(accountsToShare);
         Assert.assertEquals(2, accountsToShare.size());
         Assert.assertEquals(2, accountsToShare.size());
@@ -719,14 +728,16 @@ public class WSProjectTest extends BaseSoapServiceTest {
         Assert.assertTrue(checkFirst);
 
         // Test add latter user for sharing
-        boolean result = gpWSClient.updateAccountsProjectSharing(idProjectTest,
-                Arrays.asList(idUserTest, firstUserID, latterUserID));
+        boolean result = gpWSClient.updateAccountsProjectSharing(
+                new PutAccountsProjectRequest(idProjectTest,
+                        Arrays.asList(idUserTest, firstUserID, latterUserID)));
         Assert.assertTrue(result);
 
         project = gpWSClient.getProjectDetail(idProjectTest);
         Assert.assertTrue(project.isShared());
 
-        accountsToShare = gpWSClient.getAccountsByProjectID(idProjectTest);
+        accountsToShare = gpWSClient.getAccountsByProjectID(idProjectTest)
+                .getAccounts();
         Assert.assertNotNull(accountsToShare);
         Assert.assertEquals(3, accountsToShare.size());
         checkFirst = false;
@@ -743,14 +754,16 @@ public class WSProjectTest extends BaseSoapServiceTest {
         Assert.assertTrue(checkLatter);
 
         // Test delete first user for sharing
-        result = gpWSClient.updateAccountsProjectSharing(idProjectTest,
-                Arrays.asList(idUserTest, latterUserID));
+        result = gpWSClient.updateAccountsProjectSharing(
+                new PutAccountsProjectRequest(idProjectTest,
+                        Arrays.asList(idUserTest, latterUserID)));
         Assert.assertTrue(result);
 
         project = gpWSClient.getProjectDetail(idProjectTest);
         Assert.assertTrue(project.isShared());
 
-        accountsToShare = gpWSClient.getAccountsByProjectID(idProjectTest);
+        accountsToShare = gpWSClient.getAccountsByProjectID(idProjectTest)
+                .getAccounts();
         Assert.assertNotNull(accountsToShare);
         Assert.assertEquals(2, accountsToShare.size());
         checkLatter = false;
@@ -770,21 +783,23 @@ public class WSProjectTest extends BaseSoapServiceTest {
         Assert.assertFalse(project.isShared());
 
         List<ShortAccountDTO> accountsToShare = gpWSClient.getAccountsByProjectID(
-                idProjectTest);
+                idProjectTest).getAccounts();
         Assert.assertNotNull(accountsToShare);
         Assert.assertEquals(1, accountsToShare.size());
         Assert.assertEquals(idUserTest,
                 accountsToShare.get(0).getId().longValue());
 
         // Test pass owner
-        boolean result = gpWSClient.updateAccountsProjectSharing(idProjectTest,
-                Arrays.asList(idUserTest));
+        boolean result = gpWSClient.updateAccountsProjectSharing(
+                new PutAccountsProjectRequest(idProjectTest,
+                        Arrays.asList(idUserTest)));
         Assert.assertTrue(result);
 
         project = gpWSClient.getProjectDetail(idProjectTest);
         Assert.assertFalse(project.isShared());
 
-        accountsToShare = gpWSClient.getAccountsByProjectID(idProjectTest);
+        accountsToShare = gpWSClient.getAccountsByProjectID(idProjectTest)
+                .getAccounts();
         Assert.assertNotNull(accountsToShare);
         Assert.assertEquals(1, accountsToShare.size());
         Assert.assertEquals(idUserTest,

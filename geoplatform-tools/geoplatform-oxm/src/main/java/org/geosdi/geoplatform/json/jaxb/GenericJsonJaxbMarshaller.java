@@ -39,7 +39,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Writer;
-import java.net.URL;
 import javax.xml.transform.stream.StreamSource;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;

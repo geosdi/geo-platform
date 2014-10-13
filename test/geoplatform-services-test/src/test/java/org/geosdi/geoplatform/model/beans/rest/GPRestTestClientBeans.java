@@ -54,7 +54,7 @@ class GPRestTestClientBeans {
     public GPWMSRestClientTestConnector gpWMSRestClient() {
         return new GPWMSRestClientTestConnector();
     }
-
+    
     @Bean
     public GPBasicRestClientTestConnector gpBasicRestClient() {
         return new GPBasicRestClientTestConnector();

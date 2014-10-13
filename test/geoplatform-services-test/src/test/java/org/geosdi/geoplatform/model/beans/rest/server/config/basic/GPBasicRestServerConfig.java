@@ -44,13 +44,15 @@ import org.apache.cxf.interceptor.Interceptor;
 import org.apache.cxf.interceptor.LoggingInInterceptor;
 import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
-import org.apache.cxf.jaxrs.provider.json.JSONProvider;
 import org.apache.cxf.message.Message;
 import org.geosdi.geoplatform.configurator.bootstrap.Develop;
 import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.exception.rs.mapper.GPExceptionFaultMapper;
 import org.geosdi.geoplatform.services.GeoPlatformService;
+import org.geosdi.geoplatform.support.cxf.rs.provider.configurator.GPRestProviderType;
+import org.geosdi.geoplatform.support.cxf.rs.provider.factory.GPRestProviderFactory;
+import org.geosdi.geoplatform.support.cxf.rs.provider.jettyson.GPJSONProvider;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.beans.factory.annotation.Value;
@@ -71,20 +73,17 @@ class GPBasicRestServerConfig {
     public static Server gpBasicRestServer(@Qualifier(
             value = "geoPlatformService") GeoPlatformService geoPlatformService,
             @Value("configurator{webservice_rs_test_endpoint_address}") String basicRestAddress,
+            @Value("configurator{cxf_rest_provider_type}") GPRestProviderType providerType,
             @Qualifier(value = "serverLoggingInInterceptorBean") LoggingInInterceptor serverLogInInterceptor,
             @Qualifier(value = "serverLoggingOutInterceptorBean") LoggingOutInterceptor serverLogOutInterceptor) {
 
         JAXRSServerFactoryBean factory = new JAXRSServerFactoryBean();
         factory.setServiceBean(geoPlatformService);
         factory.setAddress(basicRestAddress);
-        factory.setProviders(Arrays.asList(new Object[]{new JSONProvider() {
 
-            {
-                super.setExtraClass(new Class<?>[]{GPAccount.class,
-                    GPLayer.class});
-            }
-
-        }, new GPExceptionFaultMapper()}));
+        factory.setProviders(Arrays.asList(
+                new Object[]{createProvider(providerType),
+                    new GPExceptionFaultMapper()}));
 
         Map<Object, Object> extensionMappings = new HashMap<>();
         extensionMappings.put("xml", MediaType.APPLICATION_XML);
@@ -100,6 +99,16 @@ class GPBasicRestServerConfig {
                         serverLogOutInterceptor));
 
         return factory.create();
+    }
+
+    private static Object createProvider(GPRestProviderType providerType) {
+        Object provider = GPRestProviderFactory.createProvider(providerType);
+        if (provider instanceof GPJSONProvider) {
+            ((GPJSONProvider) provider).setExtraClass(
+                    new Class<?>[]{GPAccount.class,
+                        GPLayer.class});
+        }
+        return provider;
     }
 
 }

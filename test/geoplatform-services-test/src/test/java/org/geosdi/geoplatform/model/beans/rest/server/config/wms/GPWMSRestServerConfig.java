@@ -41,10 +41,11 @@ import org.apache.cxf.interceptor.Interceptor;
 import org.apache.cxf.interceptor.LoggingInInterceptor;
 import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
-import org.apache.cxf.jaxrs.provider.json.JSONProvider;
 import org.apache.cxf.message.Message;
 import org.geosdi.geoplatform.configurator.bootstrap.Develop;
 import org.geosdi.geoplatform.services.GPWMSService;
+import org.geosdi.geoplatform.support.cxf.rs.provider.configurator.GPRestProviderType;
+import org.geosdi.geoplatform.support.cxf.rs.provider.factory.GPRestProviderFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.beans.factory.annotation.Value;
@@ -65,20 +66,23 @@ class GPWMSRestServerConfig {
     public static Server gpWMSRestServer(
             @Qualifier(value = "wmsService") GPWMSService wmsService,
             @Value("configurator{webservice_rs_test_wms_endpoint_address}") String wmsRestAddress,
+            @Value("configurator{cxf_rest_provider_type}") GPRestProviderType providerType,
             @Qualifier(value = "serverLoggingInInterceptorBean") LoggingInInterceptor serverLogInInterceptor,
             @Qualifier(value = "serverLoggingOutInterceptorBean") LoggingOutInterceptor serverLogOutInterceptor) {
 
         JAXRSServerFactoryBean factory = new JAXRSServerFactoryBean();
         factory.setServiceBean(wmsService);
         factory.setAddress(wmsRestAddress);
-        factory.setProvider(new JSONProvider());
+
+        factory.setProvider(GPRestProviderFactory.createProvider(providerType));
+
         factory.setInInterceptors(Arrays.<Interceptor<? extends Message>>asList(
                 serverLogInInterceptor)
         );
         factory.setOutInterceptors(
                 Arrays.<Interceptor<? extends Message>>asList(
                         serverLogOutInterceptor));
-        
+
         return factory.create();
     }
 

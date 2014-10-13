@@ -65,6 +65,12 @@
         
         <dependency>
             <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-cxf-rs-provider-support</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-ws-util</artifactId>
         </dependency>
         

@@ -42,12 +42,14 @@ import org.apache.cxf.interceptor.Interceptor;
 import org.apache.cxf.interceptor.LoggingInInterceptor;
 import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
-import org.apache.cxf.jaxrs.provider.json.JSONProvider;
 import org.apache.cxf.message.Message;
 import org.geosdi.geoplatform.configurator.bootstrap.cxf.Rest;
 import org.geosdi.geoplatform.services.GPWMSService;
+import org.geosdi.geoplatform.support.cxf.rs.provider.configurator.GPRestProviderType;
+import org.geosdi.geoplatform.support.cxf.rs.provider.factory.GPRestProviderFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Required;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -62,8 +64,10 @@ class GPWMSServiceJsonConfig {
 
     @Bean(initMethod = "create")
     @Required
-    public static JAXRSServerFactoryBean gpWMSServiceJson(@Qualifier(value = "wmsService") GPWMSService wmsService, @Qualifier(value = "gpJsonWMSApplication") Application gpJsonWMSApplication,
-            @Qualifier(value = "gpJsonWMSProvider") JSONProvider gpJsonWMSProvider,
+    public static JAXRSServerFactoryBean gpWMSServiceJson(@Qualifier(
+            value = "wmsService") GPWMSService wmsService, @Qualifier(
+                    value = "gpJsonWMSApplication") Application gpJsonWMSApplication,
+            @Value("configurator{cxf_rest_provider_type}") GPRestProviderType providerType,
             @Qualifier(value = "serverLoggingInInterceptorBean") LoggingInInterceptor serverLogInInterceptor,
             @Qualifier(value = "serverLoggingOutInterceptorBean") LoggingOutInterceptor serverLogOutInterceptor) {
 
@@ -71,7 +75,9 @@ class GPWMSServiceJsonConfig {
                 gpJsonWMSApplication, JAXRSServerFactoryBean.class);
         factory.setServiceBean(wmsService);
         factory.setAddress(factory.getAddress());
-        factory.setProvider(gpJsonWMSProvider);
+
+        factory.setProvider(GPRestProviderFactory.createProvider(providerType));
+
         factory.setInInterceptors(Arrays.<Interceptor<? extends Message>>asList(
                 serverLogInInterceptor)
         );

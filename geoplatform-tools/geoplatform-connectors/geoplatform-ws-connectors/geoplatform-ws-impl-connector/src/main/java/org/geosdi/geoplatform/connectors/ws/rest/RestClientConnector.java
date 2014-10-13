@@ -35,8 +35,11 @@ package org.geosdi.geoplatform.connectors.ws.rest;
 
 import java.util.Arrays;
 import org.apache.cxf.jaxrs.client.JAXRSClientFactory;
-import org.apache.cxf.jaxrs.provider.json.JSONProvider;
 import org.geosdi.geoplatform.connectors.ws.GPAbstractWSClientConnector;
+import org.geosdi.geoplatform.support.cxf.rs.provider.configurator.GPRestProviderType;
+import org.geosdi.geoplatform.support.cxf.rs.provider.factory.GPRestProviderFactory;
+import org.geosdi.geoplatform.support.cxf.rs.provider.jettyson.GPJSONProvider;
+import org.springframework.beans.factory.annotation.Value;
 
 /**
  * <p>
@@ -47,37 +50,51 @@ import org.geosdi.geoplatform.connectors.ws.GPAbstractWSClientConnector;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public abstract class RestClientConnector<E> extends GPAbstractWSClientConnector<E> {
-
-    private JSONProvider<? extends Object> jsonProvider;
-
+    
+    private GPRestProviderType providerType;
+    private Object basicRestProvider;
+    
     public RestClientConnector(Class<E> theServiceClass) {
         super(theServiceClass);
     }
-
+    
     @Override
     protected void create() {
         if (serviceClass == null) {
             throw new IllegalArgumentException(
                     "The Parameter Service Class can't be null.");
         }
-
+        
         if (getAddress() == null) {
             throw new IllegalArgumentException(
                     "The Parameter Address can't be null.");
         }
-
-        this.jsonProvider = createJSONProvider();
-
-        if (this.jsonProvider == null) {
+        
+        this.basicRestProvider = GPRestProviderFactory.createProvider(
+                providerType);
+        
+        if (this.basicRestProvider == null) {
             throw new IllegalArgumentException("The Provider cannot be null.");
         }
-
+        
+        if ((this.basicRestProvider instanceof GPJSONProvider)
+                && ((getExtraClasses() != null) && (getExtraClasses().length > 0))) {
+            ((GPJSONProvider) this.basicRestProvider).setExtraClass(
+                    getExtraClasses());
+        }
+        
         this.endpointService = JAXRSClientFactory.create(getAddress(),
-                serviceClass, Arrays.<JSONProvider>asList(jsonProvider));
+                serviceClass, Arrays.<Object>asList(basicRestProvider));
     }
 
-    protected abstract <T extends Object> JSONProvider<T> createJSONProvider();
-
+    /**
+     * @param providerType the providerType to set
+     */
+    @Value("configurator{cxf_rest_provider_type}")
+    public void setProviderType(GPRestProviderType providerType) {
+        this.providerType = providerType;
+    }
+    
     protected abstract Class<?>[] getExtraClasses();
-
+    
 }

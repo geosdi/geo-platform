@@ -302,14 +302,10 @@ class AccountServiceImpl {
     /**
      * @see GeoPlatformService#deleteAccount(java.lang.Long)
      */
-    public boolean deleteAccount(Long accountID) throws ResourceNotFoundFault {
+    public Boolean deleteAccount(Long accountID) throws ResourceNotFoundFault {
         GPAccount account = this.getAccountById(accountID);
         EntityCorrectness.checkAccountLog(account); // TODO assert
 
-//      Unnecessary Operation 
-//      (All Authority will be removed on cascading removing GPAccount)   
-//      authorityDao.removeAllUserAuthorities(account.getAccountNaturalID());
-//
         List<GPAccountProject> accountProjectList = accountProjectDao.findByOwnerAccountID(
                 accountID);
         for (GPAccountProject accountProject : accountProjectList) {

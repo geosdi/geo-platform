@@ -169,10 +169,10 @@ public class RSFolderTest extends BasicRestServiceTest {
     @Test
     public void testDeleteFolderRest() throws ResourceNotFoundFault {
         // Assert number of folders of ProjectTest before delete
-        int totalFolders = gpWSClient.getNumberOfElementsProject(idProjectTest);
+        Integer totalFolders = gpWSClient.getNumberOfElementsProject(idProjectTest);
         Assert.assertEquals(
                 "Number of all folders of ProjectTest before deleted",
-                7, totalFolders); // SetUp() added 2+5 folders
+                7, totalFolders.intValue()); // SetUp() added 2+5 folders
         //
         ProjectDTO projectWithRootFolders = gpWSClient.getProjectWithRootFolders(
                 idProjectTest, super.idUserTest);
@@ -247,29 +247,31 @@ public class RSFolderTest extends BasicRestServiceTest {
         GPWebServiceMapData descendantsMapData = new GPWebServiceMapData();
         descendantsMapData.setDescendantsMap(map); // Set an empty map
 
-        int totalElementsOfProject = gpWSClient.getNumberOfElementsProject(
+        Integer totalElementsOfProject = gpWSClient.getNumberOfElementsProject(
                 idProjectTest);
         Assert.assertEquals("Initial totalElementsOfProject",
-                7, totalElementsOfProject);  // SetUp() added 2+5 folders
+                7, totalElementsOfProject.intValue());  // SetUp() added 2+5 folders
 
         String nameFolderToTest = "folderToTest";
         GPFolder folderToTest = super.createFolder(nameFolderToTest, projectTest,
                 1, null);
 
         // Adding new folder to project's root            
-        long idFolderToTest = gpWSClient.saveAddedFolderAndTreeModifications(new WSAddFolderAndTreeModificationsRequest(
+        long idFolderToTest = gpWSClient.saveAddedFolderAndTreeModifications(
+                new WSAddFolderAndTreeModificationsRequest(
                         projectTest.getId(), null, folderToTest,
                         descendantsMapData));
 
         Assert.assertEquals("totalElementsOfProject after added",
                 totalElementsOfProject + 1,
-                gpWSClient.getNumberOfElementsProject(idProjectTest));
+                gpWSClient.getNumberOfElementsProject(idProjectTest).intValue());
 
         this.checkStateRest(new int[]{8, 7, 6, 5, 4, 3, 2}, new int[]{2, 3},
                 "before removing");
 
         // Removing folder from user's root
-        boolean checkDelete = gpWSClient.saveDeletedFolderAndTreeModifications(new WSDeleteFolderAndTreeModifications(idFolderToTest,
+        boolean checkDelete = gpWSClient.saveDeletedFolderAndTreeModifications(
+                new WSDeleteFolderAndTreeModifications(idFolderToTest,
                         descendantsMapData));
         Assert.assertTrue("Delete NOT done for \"" + nameFolderToTest + "\"",
                 checkDelete);
@@ -288,10 +290,10 @@ public class RSFolderTest extends BasicRestServiceTest {
         GPWebServiceMapData descendantsMapData = new GPWebServiceMapData();
         descendantsMapData.setDescendantsMap(map);
 
-        int totalElementsOfProject = gpWSClient.getNumberOfElementsProject(
+        Integer totalElementsOfProject = gpWSClient.getNumberOfElementsProject(
                 idProjectTest);
         Assert.assertEquals("Initial totalElementsOfProject",
-                7, totalElementsOfProject);  // SetUp() added 2+5 folders
+                7, totalElementsOfProject.intValue());  // SetUp() added 2+5 folders
 
         List<FolderDTO> childrenFolders = gpWSClient.getChildrenFolders(
                 idRootFolderB);
@@ -305,15 +307,16 @@ public class RSFolderTest extends BasicRestServiceTest {
 
         // Adding new folder to user's root folder B
         map.put(idRootFolderB, 4);
-        
-        long idFolderToTest = gpWSClient.saveAddedFolderAndTreeModifications(new WSAddFolderAndTreeModificationsRequest(
+
+        Long idFolderToTest = gpWSClient.saveAddedFolderAndTreeModifications(
+                new WSAddFolderAndTreeModificationsRequest(
                         projectTest.getId(),
                         rootFolderB.getId(), folderToTest,
                         descendantsMapData));
 
         Assert.assertEquals("totalElementsOfProject after added",
                 totalElementsOfProject + 1,
-                gpWSClient.getNumberOfElementsProject(idProjectTest));
+                gpWSClient.getNumberOfElementsProject(idProjectTest).intValue());
 
         this.checkStateRest(new int[]{8, 7, 6, 5, 4, 2, 1}, new int[]{2, 4},
                 "before removing");
@@ -321,14 +324,15 @@ public class RSFolderTest extends BasicRestServiceTest {
         // Removing folder from user's root folder B
         map.clear();
         map.put(idRootFolderB, 3);
-        boolean checkDelete = gpWSClient.saveDeletedFolderAndTreeModifications(new WSDeleteFolderAndTreeModifications(idFolderToTest,
+        Boolean checkDelete = gpWSClient.saveDeletedFolderAndTreeModifications(
+                new WSDeleteFolderAndTreeModifications(idFolderToTest,
                         descendantsMapData));
         Assert.assertTrue("Delete NOT done for \"" + nameFolderToTest + "\"",
                 checkDelete);
 
         Assert.assertEquals("totalElementsOfProject after deleted",
-                totalElementsOfProject, gpWSClient.getNumberOfElementsProject(
-                        idProjectTest));
+                totalElementsOfProject.intValue(), gpWSClient.getNumberOfElementsProject(
+                        idProjectTest).intValue());
 
         this.checkInitialStateRest("after removing");
     }
@@ -341,7 +345,8 @@ public class RSFolderTest extends BasicRestServiceTest {
         descendantsMapData.setDescendantsMap(map);
 
         // Move folder 5 between folder 3 and folder 4 (oldPosition < new Position)
-        boolean checkDD = gpWSClient.saveDragAndDropFolderAndTreeModifications(new WSDDFolderAndTreeModifications(idFolder5,
+        Boolean checkDD = gpWSClient.saveDragAndDropFolderAndTreeModifications(
+                new WSDDFolderAndTreeModifications(idFolder5,
                         super.idRootFolderB, 2, descendantsMapData));
         Assert.assertTrue("Folder 5 doesn't moved to position 2", checkDD);
 
@@ -349,7 +354,8 @@ public class RSFolderTest extends BasicRestServiceTest {
                 "after DD I on same parent");
 
         // Move folder 5 after folder 4, in initial position (oldPosition > new Position)
-        checkDD = gpWSClient.saveDragAndDropFolderAndTreeModifications(new WSDDFolderAndTreeModifications(idFolder5,
+        checkDD = gpWSClient.saveDragAndDropFolderAndTreeModifications(
+                new WSDDFolderAndTreeModifications(idFolder5,
                         super.idRootFolderB, 1, descendantsMapData));
         Assert.assertTrue("Folder 5 doesn't moved to position 1", checkDD);
 
@@ -367,7 +373,8 @@ public class RSFolderTest extends BasicRestServiceTest {
         map.put(super.idRootFolderA, 3);
         map.put(super.idRootFolderB, 2);
         // Move folder 4 between folder 1 and folder 2 (oldPosition < new Position)
-        boolean checkDD = gpWSClient.saveDragAndDropFolderAndTreeModifications(new WSDDFolderAndTreeModifications(idFolder4,
+        Boolean checkDD = gpWSClient.saveDragAndDropFolderAndTreeModifications(
+                new WSDDFolderAndTreeModifications(idFolder4,
                         super.idRootFolderA, 5, descendantsMapData));
         Assert.assertTrue("Folder 4 doesn't moved to position 5", checkDD);
 
@@ -378,7 +385,8 @@ public class RSFolderTest extends BasicRestServiceTest {
         map.clear();
         map.put(super.idRootFolderA, 2);
         map.put(super.idRootFolderB, 3);
-        checkDD = gpWSClient.saveDragAndDropFolderAndTreeModifications(new WSDDFolderAndTreeModifications(idFolder4,
+        checkDD = gpWSClient.saveDragAndDropFolderAndTreeModifications(
+                new WSDDFolderAndTreeModifications(idFolder4,
                         super.idRootFolderB, 2, descendantsMapData));
         Assert.assertTrue("Folder 4 doesn't moved to position 2", checkDD);
 
@@ -393,7 +401,8 @@ public class RSFolderTest extends BasicRestServiceTest {
         descendantsMapData.setDescendantsMap(map);
 
         // Move folder B before folder A (oldPosition < new Position)
-        boolean checkDD = gpWSClient.saveDragAndDropFolderAndTreeModifications(new WSDDFolderAndTreeModifications(
+        Boolean checkDD = gpWSClient.saveDragAndDropFolderAndTreeModifications(
+                new WSDDFolderAndTreeModifications(
                         super.idRootFolderB, null, 7, descendantsMapData));
         Assert.assertTrue("Folder B doesn't moved to position 7", checkDD);
 
@@ -401,7 +410,8 @@ public class RSFolderTest extends BasicRestServiceTest {
                 "after DD I on root parent");
 
         // Move folder B after folder A, in initial position (oldPosition > new Position)
-        checkDD = gpWSClient.saveDragAndDropFolderAndTreeModifications(new WSDDFolderAndTreeModifications(
+        checkDD = gpWSClient.saveDragAndDropFolderAndTreeModifications(
+                new WSDDFolderAndTreeModifications(
                         super.idRootFolderB, null, 4, descendantsMapData));
         Assert.assertTrue("Folder 4 doesn't moved to position 4", checkDD);
 
@@ -417,7 +427,8 @@ public class RSFolderTest extends BasicRestServiceTest {
 
         map.put(idRootFolderA, 6);
         // Move Folder B after Folder 1 (oldPosition < new Position)
-        boolean checkDD = gpWSClient.saveDragAndDropFolderAndTreeModifications(new WSDDFolderAndTreeModifications(
+        Boolean checkDD = gpWSClient.saveDragAndDropFolderAndTreeModifications(
+                new WSDDFolderAndTreeModifications(
                         super.idRootFolderB, super.idRootFolderA, 6,
                         descendantsMapData));
         Assert.assertTrue("Folder B doesn't moved to position 6", checkDD);
@@ -436,7 +447,8 @@ public class RSFolderTest extends BasicRestServiceTest {
         map.clear();
         map.put(idRootFolderA, 2);
         // Move folder B in initial position (oldPosition > new Position)
-        checkDD = gpWSClient.saveDragAndDropFolderAndTreeModifications(new WSDDFolderAndTreeModifications(
+        checkDD = gpWSClient.saveDragAndDropFolderAndTreeModifications(
+                new WSDDFolderAndTreeModifications(
                         super.idRootFolderB, null, 4, descendantsMapData));
         Assert.assertTrue("Folder B doesn't moved to position 4", checkDD);
 
@@ -453,7 +465,8 @@ public class RSFolderTest extends BasicRestServiceTest {
 
         map.put(idRootFolderB, 6);
         // Move Folder A after Folder 3 (oldPosition > new Position)
-        boolean checkDD = gpWSClient.saveDragAndDropFolderAndTreeModifications(new WSDDFolderAndTreeModifications(
+        Boolean checkDD = gpWSClient.saveDragAndDropFolderAndTreeModifications(
+                new WSDDFolderAndTreeModifications(
                         super.idRootFolderA, super.idRootFolderB, 5,
                         descendantsMapData));
         Assert.assertTrue("Folder A doesn't moved to position 5", checkDD);
@@ -473,7 +486,8 @@ public class RSFolderTest extends BasicRestServiceTest {
         map.clear();
         map.put(idRootFolderB, 3);
         // Move folder A in initial position (oldPosition < new Position)
-        checkDD = gpWSClient.saveDragAndDropFolderAndTreeModifications(new WSDDFolderAndTreeModifications(
+        checkDD = gpWSClient.saveDragAndDropFolderAndTreeModifications(
+                new WSDDFolderAndTreeModifications(
                         super.idRootFolderA, null, 7, descendantsMapData));
         Assert.assertTrue("Folder B doesn't moved to position 7", checkDD);
 

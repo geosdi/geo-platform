@@ -71,6 +71,7 @@ import org.geosdi.geoplatform.gui.shared.GPMessageCommandType;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 import org.geosdi.geoplatform.request.folder.InsertFolderRequest;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
+import org.geosdi.geoplatform.request.PutAccountsProjectRequest;
 import org.geosdi.geoplatform.request.folder.WSAddFolderAndTreeModificationsRequest;
 import org.geosdi.geoplatform.request.folder.WSDeleteFolderAndTreeModifications;
 import org.geosdi.geoplatform.request.folder.WSDDFolderAndTreeModifications;
@@ -357,7 +358,8 @@ public class LayerService implements ILayerService {
         try {
             Long projectId = this.sessionUtility.getDefaultProject(
                     httpServletRequest);
-            idSavedFolder = this.geoPlatformServiceClient.saveAddedFolderAndTreeModifications(new WSAddFolderAndTreeModificationsRequest(projectId,
+            idSavedFolder = this.geoPlatformServiceClient.saveAddedFolderAndTreeModifications(
+                    new WSAddFolderAndTreeModificationsRequest(projectId,
                             memento.getAddedFolder().getIdParent(), gpFolder,
                             map));
         } catch (ResourceNotFoundFault ex) {
@@ -388,7 +390,8 @@ public class LayerService implements ILayerService {
                 memento.getWsDescendantMap());
         boolean result = false;
         try {
-            result = this.geoPlatformServiceClient.saveDeletedFolderAndTreeModifications(new WSDeleteFolderAndTreeModifications(
+            result = this.geoPlatformServiceClient.saveDeletedFolderAndTreeModifications(
+                    new WSDeleteFolderAndTreeModifications(
                             memento.getIdBaseElement(), map));
         } catch (ResourceNotFoundFault ex) {
             this.logger.error("Failed to delete folder on LayerService: " + ex);
@@ -462,7 +465,8 @@ public class LayerService implements ILayerService {
             throw new GeoPlatformException(timeout);
         }
         try {
-            result = this.geoPlatformServiceClient.saveDragAndDropFolderAndTreeModifications(new WSDDFolderAndTreeModifications(
+            result = this.geoPlatformServiceClient.saveDragAndDropFolderAndTreeModifications(
+                    new WSDDFolderAndTreeModifications(
                             memento.getIdBaseElement(), memento.getIdNewParent(),
                             memento.getNewZIndex(), map));
         } catch (ResourceNotFoundFault ex) {
@@ -795,7 +799,7 @@ public class LayerService implements ILayerService {
         try {
             this.sessionUtility.getLoggedAccount(httpServletRequest);
             List<ShortAccountDTO> accounts = this.geoPlatformServiceClient.getAccountsToShareByProjectID(
-                    projectId);
+                    projectId).getAccounts();
             simpleUserList = Lists.newArrayList(
                     this.dtoLayerConverter.convertToGPSimpleUser(accounts));
         } catch (GPSessionTimeout timeout) {
@@ -816,7 +820,7 @@ public class LayerService implements ILayerService {
         try {
             this.sessionUtility.getLoggedAccount(httpServletRequest);
             List<ShortAccountDTO> accounts = this.geoPlatformServiceClient.getAccountsByProjectID(
-                    idSharedProject);
+                    idSharedProject).getAccounts();
             simpleUserList = Lists.newArrayList(
                     this.dtoLayerConverter.convertToGPSimpleUser(accounts));
         } catch (GPSessionTimeout timeout) {
@@ -838,7 +842,8 @@ public class LayerService implements ILayerService {
             GPAccount account = this.sessionUtility.getLoggedAccount(
                     httpServletRequest);
             result = this.geoPlatformServiceClient.updateAccountsProjectSharing(
-                    idSharedProject, accountIDsProject);
+                    new PutAccountsProjectRequest(idSharedProject,
+                            accountIDsProject));
             if (result) {
                 MessageDTO message = new MessageDTO();
                 message.setCommands(Lists.newArrayList(
@@ -863,9 +868,10 @@ public class LayerService implements ILayerService {
             }
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
-        } catch (ResourceNotFoundFault rnf) {
-            logger.error(
-                    "Failed to save Shared project to Accounts for Shared Project with id: " + idSharedProject + "on SecurityService: " + rnf);
+        } catch (ResourceNotFoundFault | IllegalParameterFault rnf) {
+            logger.error("Failed to save Shared project to Accounts for Shared "
+                    + "Project with id: " + idSharedProject
+                    + "on SecurityService: " + rnf);
             throw new GeoPlatformException(rnf);
         }
         return result;

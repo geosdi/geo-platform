@@ -31,6 +31,7 @@
         <module>geoplatform-cxf-api-support</module>
         <module>geoplatform-cxf-client-support</module>
         <module>geoplatform-cxf-server-support</module>
+        <module>geoplatform-cxf-rs-provider-support</module>
     </modules>
 
 </project>

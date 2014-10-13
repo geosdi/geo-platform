@@ -48,6 +48,7 @@
         <module>geoplatform-slf4j-dependency</module>
         <module>geoplatform-spring-dependency</module>
         <module>geoplatform-cxf-dependency</module>
+        <module>geoplatform-jackson-dependency</module>
     </modules>
 
 </project>

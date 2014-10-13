@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.connectors.ws.wms.rest;
 
-import org.apache.cxf.jaxrs.provider.json.JSONProvider;
 import org.geosdi.geoplatform.connectors.ws.rest.RestClientConnector;
 import org.geosdi.geoplatform.services.GPWMSService;
 
@@ -51,11 +50,6 @@ abstract class AbstractWMSRestClientConnector
 
     public AbstractWMSRestClientConnector() {
         super(GPWMSService.class);
-    }
-
-    @Override
-    protected <T> JSONProvider<T> createJSONProvider() {
-        return new JSONProvider();
     }
 
     @Override

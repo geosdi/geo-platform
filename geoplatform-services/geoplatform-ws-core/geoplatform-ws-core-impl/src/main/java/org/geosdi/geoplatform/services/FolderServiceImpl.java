@@ -161,7 +161,7 @@ class FolderServiceImpl {
     /**
      * @see GeoPlatformService#deleteFolder(java.lang.Long)
      */
-    public boolean deleteFolder(Long folderID) throws ResourceNotFoundFault {
+    public Boolean deleteFolder(Long folderID) throws ResourceNotFoundFault {
         GPFolder folder = folderDao.find(folderID);
         if (folder == null) {
             throw new ResourceNotFoundFault("Folder not found", folderID);
@@ -252,7 +252,7 @@ class FolderServiceImpl {
         return folder.getId();
     }
     
-    public boolean saveDeletedFolderAndTreeModifications(
+    public Boolean saveDeletedFolderAndTreeModifications(
             WSDeleteFolderAndTreeModifications sdfModificationRequest)
             throws ResourceNotFoundFault {
         Long folderID = sdfModificationRequest.getFolderID();
@@ -300,7 +300,7 @@ class FolderServiceImpl {
         return folderDao.persistCheckStatusFolder(folderID, checked);
     }
     
-    public boolean saveDragAndDropFolderModifications(
+    public Boolean saveDragAndDropFolderModifications(
             WSDDFolderAndTreeModifications sddfTreeModificationRequest)
             throws ResourceNotFoundFault {
         Long folderMovedID = sddfTreeModificationRequest.getFolderMovedID();
@@ -401,7 +401,7 @@ class FolderServiceImpl {
         folderDao.updateAncestorsDescendants(
                 descendantsMapData.getDescendantsMap());
         
-        return true;
+        return Boolean.TRUE;
     }
 
     /**

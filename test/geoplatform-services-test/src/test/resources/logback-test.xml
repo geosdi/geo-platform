@@ -94,6 +94,8 @@
     
     <logger name="org.geosdi.geoplatform.responce.factory.AccountDTOFactory" level="debug"/>
     
+    <logger name="org.geosdi.geoplatform.support.cxf.rs.provider.factory.GPRestProviderFactory" level="debug"/>
+    
     <!-- DAOs -->
     <logger name="org.geosdi.geoplatform.core.dao.impl.GPFolderDAOImpl" level="info"/>
     <logger name="org.geosdi.geoplatform.core.dao.impl.GPLayerDAOImpl" level="info"/>

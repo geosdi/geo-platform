@@ -48,6 +48,7 @@ import org.geosdi.geoplatform.exception.rs.GPRestExceptionMessage;
 import org.geosdi.geoplatform.gui.shared.GPRole;
 import org.geosdi.geoplatform.request.InsertAccountRequest;
 import org.geosdi.geoplatform.request.LikePatternType;
+import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.ApplicationDTO;
 import org.geosdi.geoplatform.responce.ShortAccountDTO;
@@ -59,7 +60,7 @@ import org.junit.Test;
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class RSAccountTest extends BasicRestServiceTest {
@@ -270,7 +271,7 @@ public class RSAccountTest extends BasicRestServiceTest {
             GPRestExceptionMessage exMess = ex.getResponse().readEntity(
                     GPRestExceptionMessage.class);
             logger.debug("\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}\n", exMess);
-            
+
             if (!exMess.getMessage().toLowerCase().contains("organization")) { // Must be fail for other reasons
                 Assert.fail(
                         "Not fail for User incorrect wrt organization, but for: " + ex.getMessage());
@@ -324,6 +325,61 @@ public class RSAccountTest extends BasicRestServiceTest {
 
         // Must be throws AccountLoginFault because the user is disabled
         gpWSClient.getUserDetailByUsernameAndPassword(usernameTest, passwordTest);
+    }
+
+    @Test
+    public void searchUsersTestRest() throws Exception {
+        String usernameMultiRole = "user-test1-rs";
+        Long idUser = super.createAndInsertUser(usernameMultiRole,
+                organizationTest, GPRole.ADMIN, GPRole.VIEWER);
+
+        try {
+            insertMassiveUsers("-rs");
+            List<UserDTO> users = gpWSClient.searchUsers(idUser,
+                    new PaginatedSearchRequest(25, 0));
+
+            Assert.assertEquals(25, users.size());
+
+            Assert.assertEquals(6, gpWSClient.searchUsers(idUser,
+                    new PaginatedSearchRequest(25, 1)).size());
+
+            Long userCount = gpWSClient.getUsersCount(organizationTest.getName(),
+                    null);
+
+            Assert.assertEquals(32, userCount.intValue());
+        } finally {
+            Boolean check = gpWSClient.deleteAccount(idUser);
+            Assert.assertTrue(check);
+        }
+    }
+
+    @Test
+    public void getAuthoritiesTestRest() throws Exception {
+        String usernameMultiRole = "user-auth-rs";
+        Long idUser = super.createAndInsertUser(usernameMultiRole,
+                organizationTest, GPRole.ADMIN, GPRole.VIEWER);
+
+        List<String> authorities = gpWSClient.getAuthorities(idUser);
+        Assert.assertEquals(2, authorities.size());
+
+        logger.debug("\n@@@@@@@@@@@@@@@@@@@@@@Authorities : {}", authorities);
+    }
+
+    @Test
+    public void forceTemporaryAccountTestRest() throws Exception {
+        String usernameTmp = "user-tmp-rs";
+        Long idUser = super.createAndInsertUser(usernameTmp,
+                organizationTest, GPRole.ADMIN, GPRole.VIEWER);
+
+        gpWSClient.forceTemporaryAccount(idUser);
+
+        GPUser tmpUser = gpWSClient.getUserDetail(idUser);
+        Assert.assertEquals(Boolean.TRUE, tmpUser.isAccountTemporary());
+
+        gpWSClient.forceExpiredTemporaryAccount(idUser);
+        tmpUser = gpWSClient.getUserDetail(idUser);
+
+        Assert.assertEquals(Boolean.FALSE, tmpUser.isAccountNonExpired());
     }
 
 }

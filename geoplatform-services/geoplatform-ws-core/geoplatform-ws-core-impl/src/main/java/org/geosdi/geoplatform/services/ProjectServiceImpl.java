@@ -45,13 +45,11 @@ import org.geosdi.geoplatform.core.dao.GPLayerDAO;
 import org.geosdi.geoplatform.core.dao.GPProjectDAO;
 import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPAccountProject;
-import org.geosdi.geoplatform.core.model.GPApplication;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPOrganization;
 import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.core.model.GPRasterLayer;
-import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.core.model.GPVectorLayer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
@@ -82,7 +80,7 @@ import org.springframework.security.acls.domain.BasePermission;
  * @email michele.santomauro@geosdi.org
  */
 class ProjectServiceImpl {
-    
+
     private static final Logger logger = LoggerFactory.getLogger(
             ProjectServiceImpl.class);
     // DAO
@@ -176,10 +174,10 @@ class ProjectServiceImpl {
                 accountProjectDao.merge(oldDefault);
             }
         }
-        
+
         projectDao.persist(project);
         accountProjectDao.persist(accountProject);
-        
+
         return project.getId();
     }
 
@@ -209,9 +207,9 @@ class ProjectServiceImpl {
         origProject.setName(project.getName());
         origProject.setNumberOfElements(project.getNumberOfElements());
         origProject.setShared(project.isShared());
-        
+
         projectDao.merge(origProject);
-        
+
         return origProject.getId();
     }
 
@@ -242,7 +240,7 @@ class ProjectServiceImpl {
     public Integer getNumberOfElementsProject(Long projectID) throws
             ResourceNotFoundFault {
         GPProject project = this.getProjectDetail(projectID);
-        
+
         return project.getNumberOfElements();
     }
 
@@ -253,7 +251,7 @@ class ProjectServiceImpl {
         GPProject project = this.getProjectByID(projectID);
         EntityCorrectness.checkProjectLog(project); // TODO assert
         project.setShared(true);
-        
+
         projectDao.merge(project);
     }
 
@@ -292,7 +290,7 @@ class ProjectServiceImpl {
         }
         accountProjectDao.merge(accounts.toArray(
                 new GPAccountProject[accounts.size()]));
-        
+
         if (!exist) {
             GPAccountProject ownerProject = new GPAccountProject();
             ownerProject.setAccount(owner);
@@ -301,7 +299,7 @@ class ProjectServiceImpl {
                     BasePermission.ADMINISTRATION.getMask());
             accountProjectDao.persist(ownerProject);
         }
-        
+
         return Boolean.TRUE;
     }
 
@@ -316,8 +314,8 @@ class ProjectServiceImpl {
 //        return this.retrieveProjectOwner(projectID);
         GPAccountProject accountOwner = accountProjectDao.findOwnerByProjectID(
                 projectID);
-        EntityCorrectness.checkAccountProjectLog(accountOwner); 
-        
+        EntityCorrectness.checkAccountProjectLog(accountOwner);
+
         return accountOwner;
     }
 
@@ -334,7 +332,7 @@ class ProjectServiceImpl {
         if (defaultAccountProject == null) {
             return null;
         }
-        
+
         GPProject project = defaultAccountProject.getProject();
         EntityCorrectness.checkProjectLog(project); // TODO assert
 
@@ -350,18 +348,18 @@ class ProjectServiceImpl {
         if (project == null) {
             return null;
         }
-        
+
         ProjectDTO projectDTO;
         if (project.isShared()) {
             GPAccountProject ownerProject = accountProjectDao.findOwnerByProjectID(
                     project.getId());
             GPAccount owner = ownerProject.getAccount();
-            
+
             projectDTO = new ProjectDTO(project, true, owner);
         } else {
             projectDTO = new ProjectDTO(project, true);
         }
-        
+
         return projectDTO;
     }
 
@@ -397,7 +395,7 @@ class ProjectServiceImpl {
     public Long insertAccountProject(GPAccountProject accountProject) throws
             IllegalParameterFault {
         EntityCorrectness.checkAccountProject(accountProject);
-        
+
         accountProjectDao.persist(accountProject);
         return accountProject.getId();
     }
@@ -410,35 +408,35 @@ class ProjectServiceImpl {
             throws ResourceNotFoundFault, IllegalParameterFault {
         EntityCorrectness.checkAccountProject(accountProject); // TODO assert
 
-        GPAccountProject orig = this.getAccountProjectByID(
-                accountProject.getId());
-        EntityCorrectness.checkAccountProjectLog(orig); // TODO assert
+//        GPAccountProject orig = this.getAccountProjectByID(
+//                accountProject.getId());
+//        EntityCorrectness.checkAccountProjectLog(orig); // TODO assert
 
         // Update all properties (except the account and project reference)
-        orig.setPermissionMask(accountProject.getPermissionMask());
-        orig.setBaseLayer(accountProject.getBaseLayer());
-        
-        GPAccount account = accountProject.getAccount();
-        EntityCorrectness.checkAccount(account); // TODO assert
-        if (account instanceof GPUser) {
-            this.accountServiceDelegate.updateUser((GPUser) account);
-        } else if (account instanceof GPApplication) {
-            this.accountServiceDelegate.updateApplication(
-                    (GPApplication) account);
-        }
-        GPProject project = accountProject.getProject();
-        EntityCorrectness.checkProject(project); // TODO assert
-        this.updateProject(project);
-        
-        accountProjectDao.merge(orig);
-        
-        return orig.getId();
+//        orig.setPermissionMask(accountProject.getPermissionMask());
+//        orig.setBaseLayer(accountProject.getBaseLayer());
+//        orig.setDefaultProject(accountProject.isDefaultProject());
+//        
+//        GPAccount account = accountProject.getAccount();
+//        EntityCorrectness.checkAccount(account); // TODO assert
+//        if (account instanceof GPUser) {
+//            this.accountServiceDelegate.updateUser((GPUser) account);
+//        } else if (account instanceof GPApplication) {
+//            this.accountServiceDelegate.updateApplication(
+//                    (GPApplication) account);
+//        }
+//        GPProject project = accountProject.getProject();
+//        EntityCorrectness.checkProject(project); // TODO assert
+//        this.updateProject(project);
+        accountProjectDao.merge(accountProject);
+
+        return accountProject.getId();
     }
 
     /**
      * @see GeoPlatformService#deleteAccountProject(java.lang.Long)
      */
-    public boolean deleteAccountProject(Long accountProjectID)
+    public Boolean deleteAccountProject(Long accountProjectID)
             throws ResourceNotFoundFault {
         GPAccountProject accountProject = this.getAccountProjectByID(
                 accountProjectID);
@@ -513,7 +511,7 @@ class ProjectServiceImpl {
         if (request != null && request.getNameLike() != null) {
             searchCriteria.addFilterILike("project.name", request.getNameLike());
         }
-        
+
         return Long.valueOf(accountProjectDao.count(searchCriteria));
     }
 
@@ -544,13 +542,13 @@ class ProjectServiceImpl {
         if (request != null) {
             searchCriteria.setMaxResults(request.getNum());
             searchCriteria.setPage(request.getPage());
-            
+
             if (request.getNameLike() != null) {
                 searchCriteria.addFilterILike("project.name",
                         request.getNameLike());
             }
         }
-        
+
         List<GPAccountProject> accountProjectList = accountProjectDao.search(
                 searchCriteria);
         EntityCorrectness.checkAccountProjectListLog(accountProjectList); // TODO assert
@@ -573,7 +571,7 @@ class ProjectServiceImpl {
             }
             projectDTOList.add(projectDTO);
         }
-        
+
         return projectDTOList;
     }
 
@@ -593,7 +591,7 @@ class ProjectServiceImpl {
         project.setName(projectName);
         project.setShared(accountProjectProperties.isShared());
         projectDao.merge(project);
-        
+
         if (accountProjectProperties.isDefaultProject()) {
             GPAccount account = this.getAccountByID(
                     accountProjectProperties.getAccountID());
@@ -604,7 +602,7 @@ class ProjectServiceImpl {
         }
         return true;
     }
-    
+
     public ShortAccountDTOContainer getAccountsBySharedProjectID(Long projectID)
             throws ResourceNotFoundFault {
         GPProject project = this.getProjectByID(projectID);
@@ -612,14 +610,14 @@ class ProjectServiceImpl {
 
         List<GPAccountProject> accountProjectList = accountProjectDao.findByProjectID(
                 projectID);
-        
+
         List<GPAccount> accountList = new ArrayList<GPAccount>(
                 accountProjectList.size());
         for (GPAccountProject accountProject : accountProjectList) {
             GPAccount account = accountProject.getAccount();
             accountList.add(account);
         }
-        
+
         return new ShortAccountDTOContainer(AccountDTOFactory
                 .buildShortAccountDTOList(accountList));
     }
@@ -650,12 +648,12 @@ class ProjectServiceImpl {
         for (GPAccountProject accountProject : accountProjects) {
             accounts.remove(accountProject.getAccount());
         }
-        
+
         return new ShortAccountDTOContainer(
                 AccountDTOFactory.buildShortAccountDTOList(
                         accounts));
     }
-    
+
     public Boolean updateAccountsProjectSharing(
             PutAccountsProjectRequest apRequest)
             throws ResourceNotFoundFault, IllegalParameterFault {
@@ -666,7 +664,7 @@ class ProjectServiceImpl {
         }
         Long projectID = apRequest.getProjectID();
         List<Long> accountIDsProject = apRequest.getAccountIDsProject();
-        
+
         GPProject project = this.getProjectByID(projectID);
         EntityCorrectness.checkProjectLog(project); // TODO assert
 
@@ -674,7 +672,7 @@ class ProjectServiceImpl {
             logger.trace("\n*** There aren't relations of sharing to update");
             return Boolean.FALSE;
         }
-        
+
         Long ownerID = accountProjectDao.findOwnerByProjectID(projectID).getAccount().getId();
 
         // The Account owner relation's project will not be managed
@@ -685,9 +683,9 @@ class ProjectServiceImpl {
             this.unshareProject(project);
             return Boolean.TRUE;
         }
-        
+
         logger.debug("\n*** Update all relations of sharing");
-        
+
         List<GPAccountProject> accountProjectList = accountProjectDao.findNotOwnersByProjectID(
                 projectID);
         Map<Long, GPAccountProject> sharingMap = new HashMap<Long, GPAccountProject>(
@@ -695,13 +693,13 @@ class ProjectServiceImpl {
         for (GPAccountProject accountProject : accountProjectList) {
             sharingMap.put(accountProject.getAccount().getId(), accountProject);
         }
-        
+
         for (Long accountID : accountIDsProject) {
             GPAccountProject accountProject = sharingMap.remove(accountID);
             // Create a new relation of sharing
             if (accountProject == null) {
                 GPAccount newAccount = this.getAccountByID(accountID);
-                
+
                 GPAccountProject newAccountProject = new GPAccountProject();
                 newAccountProject.setAccountAndProject(newAccount, project);
                 newAccountProject.setPermissionMask(
@@ -720,12 +718,12 @@ class ProjectServiceImpl {
                     e.getValue().getAccount().getNaturalID());
             accountProjectDao.remove(e.getValue());
         }
-        
+
         if (!project.isShared() && !accountIDsProject.isEmpty()) {
             project.setShared(true);
             projectDao.merge(project);
         }
-        
+
         return Boolean.TRUE;
     }
     //</editor-fold>
@@ -745,11 +743,11 @@ class ProjectServiceImpl {
         // Root Folders
         List<GPFolder> rootFolders = folderDao.searchRootFolders(projectID);
         logger.debug("\n*** rootFolders:\n{}", rootFolders);
-        
+
         List<FolderDTO> rootFoldersDTO = FolderDTO.convertToFolderDTOList(
                 rootFolders);
         projectDTO.setRootFolders(rootFoldersDTO);
-        
+
         return projectDTO;
     }
 
@@ -765,13 +763,13 @@ class ProjectServiceImpl {
         // Root Folders
         List<GPFolder> rootFolders = folderDao.searchRootFolders(projectID);
         logger.debug("\n*** rootFolders:\n{}", rootFolders);
-        
+
         List<FolderDTO> rootFoldersDTO = FolderDTO.convertToFolderDTOList(
                 rootFolders);
         projectDTO.setRootFolders(rootFoldersDTO);
-        
+
         this.fillProjectExpandedFolders(projectID, rootFoldersDTO);
-        
+
         return projectDTO;
     }
 
@@ -786,11 +784,11 @@ class ProjectServiceImpl {
         // Root Folders
         List<GPFolder> rootFolders = folderDao.searchRootFolders(projectID);
         logger.debug("\n*** rootFolders:\n{}", rootFolders);
-        
+
         List<FolderDTO> rootFoldersDTO = FolderDTO.convertToFolderDTOList(
                 rootFolders);
         projectDTO.setRootFolders(rootFoldersDTO);
-        
+
         Map<Long, FolderDTO> mapProjectFolders = new HashMap<Long, FolderDTO>();
         for (FolderDTO rootFolder : rootFoldersDTO) {
             mapProjectFolders.put(rootFolder.getId(), rootFolder);
@@ -801,7 +799,7 @@ class ProjectServiceImpl {
         searchCriteria.addFilterEqual("project.id", projectID);
         searchCriteria.addFilterNotNull("parent.id");
         List<GPFolder> subFolders = folderDao.search(searchCriteria);
-        
+
         Map<String, GPFolder> subFoldersMap = new HashMap<String, GPFolder>(
                 subFolders.size());
         for (GPFolder folder : subFolders) {
@@ -809,7 +807,7 @@ class ProjectServiceImpl {
             logger.debug("\n*** key: {}\n*** subFolder ***\n{}", key, folder);
             subFoldersMap.put(key, folder);
         }
-        
+
         mapProjectFolders = this.fillProjectFolders(rootFoldersDTO,
                 subFoldersMap, mapProjectFolders);
 
@@ -817,14 +815,14 @@ class ProjectServiceImpl {
         searchCriteria = new Search(GPLayer.class);
         searchCriteria.addFilterEqual("project.id", projectID);
         List<GPLayer> subLayers = layerDao.search(searchCriteria);
-        
+
         for (GPLayer layer : subLayers) {
             FolderDTO parent = mapProjectFolders.get(layer.getFolder().getId());
             if (parent == null) { // TODO assert: only for test purpose
                 throw new ResourceNotFoundFault("Parent folder not found",
                         layer.getFolder().getId());
             }
-            
+
             ShortLayerDTO layerDTO;
             if (layer instanceof GPRasterLayer) {
                 layerDTO = new RasterLayerDTO((GPRasterLayer) layer);
@@ -833,10 +831,10 @@ class ProjectServiceImpl {
             }
             parent.addLayer(layerDTO);
         }
-        
+
         return projectDTO;
     }
-    
+
     public Long importProject(ImportProjectRequest impRequest)
             throws IllegalParameterFault, ResourceNotFoundFault {
         if (impRequest == null) {
@@ -845,52 +843,52 @@ class ProjectServiceImpl {
         }
         Long accountID = impRequest.getAccountID();
         ProjectDTO projectDTO = impRequest.getProjectDTO();
-        
+
         GPAccount account = this.getAccountByID(accountID);
         EntityCorrectness.checkAccountLog(account); // TODO assert
 
         GPProject project = ProjectDTO.convertToGPProject(projectDTO);
         projectDao.persist(project);
-        
+
         List<FolderDTO> rootFolders = projectDTO.getRootFolders();
         if (rootFolders == null) { // TODO assert
             throw new IllegalParameterFault("Project have not root folders");
         }
-        
+
         int numberOfElements = 0;
         position = 0;
         for (int i = rootFolders.size() - 1; i >= 0; i--) {
             FolderDTO folderDTO = rootFolders.get(i);
             GPFolder folder = FolderDTO.convertToGPFolder(project, null,
                     folderDTO);
-            
+
             List<IElementDTO> childs = folderDTO.getElementList();
             int numberOfDescendants = this.persistElementList(project, folder,
                     childs);
-            
+
             logger.trace("\n\n*** Folder {} - Desc = {} ***\n\n",
                     folder.getName(), numberOfDescendants);
             folder.setNumberOfDescendants(numberOfDescendants);
-            
+
             folder.setPosition(++position);
             logger.trace("*** Folder {} - pos = {}", folder.getName(),
                     folder.getPosition());
-            
+
             EntityCorrectness.checkFolder(folder); // TODO assert
             folderDao.persist(folder);
-            
+
             numberOfElements += numberOfDescendants + 1;
         }
-        
+
         logger.trace("\n\n *** numberOfElements = {} ***\n\n", numberOfElements);
         project.setNumberOfElements(numberOfElements);
         EntityCorrectness.checkProject(project); // TODO assert
         projectDao.merge(project);
-        
+
         GPAccountProject accountProject = new GPAccountProject();
         accountProject.setAccountAndProject(account, project);
         accountProjectDao.persist(accountProject);
-        
+
         return project.getId();
     }
     //</editor-fold>
@@ -906,7 +904,7 @@ class ProjectServiceImpl {
         }
         return project;
     }
-    
+
     private GPAccount getAccountByID(Long accountID) throws
             ResourceNotFoundFault {
         GPAccount account = accountDao.find(accountID);
@@ -915,7 +913,7 @@ class ProjectServiceImpl {
         }
         return account;
     }
-    
+
     private GPAccountProject getAccountProjectByID(Long accountProjectID)
             throws ResourceNotFoundFault {
         GPAccountProject accountProject = accountProjectDao.find(
@@ -926,11 +924,11 @@ class ProjectServiceImpl {
         }
         return accountProject;
     }
-    
+
     private String createParentChildKey(GPFolder parent, GPFolder child) {
         return parent.getId() + ":" + child.getId();
     }
-    
+
     private Map<Long, FolderDTO> fillProjectFolders(List<FolderDTO> folders,
             Map<String, GPFolder> mapRemaining, Map<Long, FolderDTO> mapAll) {
         logger.debug("\n*** fillFolderList - Map size: {}", mapRemaining.size());
@@ -950,15 +948,15 @@ class ProjectServiceImpl {
                     this.fillProjectFolders(childsDTO, mapRemaining, mapAll);
                 }
             }
-            
+
         }
         return mapAll;
     }
-    
+
     private List<GPFolder> getChilds(Long parentID, Map<String, GPFolder> map) {
         List<GPFolder> childs = new ArrayList<GPFolder>();
         List<String> childsKeyHit = new ArrayList<String>();
-        
+
         for (Map.Entry<String, GPFolder> entry : map.entrySet()) {
             String key = entry.getKey();
             if (key.startsWith(parentID.toString())) {
@@ -973,41 +971,41 @@ class ProjectServiceImpl {
         for (String key : childsKeyHit) {
             map.remove(key);
         }
-        
+
         return childs;
     }
-    
+
     private int persistElementList(GPProject project, GPFolder parent,
             List<IElementDTO> elementList) throws IllegalParameterFault {
         int numberOfDescendants = 0;
-        
+
         for (int i = elementList.size() - 1; i >= 0; i--) {
             IElementDTO element = elementList.get(i);
-            
+
             if (element instanceof FolderDTO) { // Folder
                 FolderDTO folderDTO = (FolderDTO) element;
                 GPFolder folder = FolderDTO.convertToGPFolder(project, parent,
                         folderDTO);
-                
+
                 List<IElementDTO> childs = folderDTO.getElementList();
-                
+
                 int descendantsIth = this.persistElementList(project, folder,
                         childs);
-                
+
                 logger.trace("\n\n*** FOLDER\t{} ***\n\n", folder.getName());
                 logger.trace("\n\n*** Desc = {} + DescIth = {} ***\n",
                         numberOfDescendants, descendantsIth);
                 folder.setNumberOfDescendants(descendantsIth);
-                
+
                 folder.setPosition(++position);
                 logger.trace("*** DescIth {} - pos = {}", folder.getName(),
                         folder.getPosition());
-                
+
                 EntityCorrectness.checkFolder(folder); // TODO assert
                 folderDao.persist(folder);
-                
+
                 numberOfDescendants += descendantsIth + 1;
-                
+
             } else { // Layer
                 GPLayer layer;
                 if (element instanceof RasterLayerDTO) {
@@ -1019,14 +1017,14 @@ class ProjectServiceImpl {
                             parent,
                             (VectorLayerDTO) element);
                 }
-                
+
                 layer.setPosition(++position);
                 logger.trace("*** Layer {} - pos = {}", layer.getTitle(),
                         layer.getPosition());
-                
+
                 EntityCorrectness.checkLayer(layer); // TODO assert
                 layerDao.persist(layer);
-                
+
                 numberOfDescendants++;
             }
         }
@@ -1034,11 +1032,11 @@ class ProjectServiceImpl {
                 parent.getName(), numberOfDescendants);
         return numberOfDescendants;
     }
-    
+
     private void fillProjectExpandedFolders(Long projectID,
             List<FolderDTO> folders) {
         logger.debug("\n*** fillExpandedFolder - size: {}", folders.size());
-        
+
         List<FolderDTO> childsDTO;
         for (FolderDTO folder : folders) {
             logger.debug("\n*** fillExpandedFolder - folder: {}", folder);
@@ -1048,7 +1046,7 @@ class ProjectServiceImpl {
                 searchCriteria.addFilterEqual("project.id", projectID);
                 searchCriteria.addFilterEqual("folder.id", folder.getId());
                 List<GPLayer> subLayers = layerDao.search(searchCriteria);
-                
+
                 for (GPLayer layer : subLayers) {
                     ShortLayerDTO layerDTO;
                     if (layer instanceof GPRasterLayer) {
@@ -1067,28 +1065,28 @@ class ProjectServiceImpl {
                 if (childs.size() > 0) {
                     childsDTO = FolderDTO.convertToFolderDTOList(childs);
                     folder.addFolders(childsDTO);
-                    
+
                     this.fillProjectExpandedFolders(projectID, childsDTO);
                 }
             }
         }
     }
-    
+
     private void unshareProject(GPProject project) {
         if (project.isShared()) {
             logger.debug("\n*** Delete all relations of sharing");
-            
+
             List<GPAccountProject> accountProjectList = accountProjectDao.findNotOwnersByProjectID(
                     project.getId());
             for (GPAccountProject accountProject : accountProjectList) {
                 accountProjectDao.remove(accountProject);
             }
-            
+
             project.setShared(false);
             projectDao.merge(project);
         }
     }
-    
+
     private GPAccount retrieveProjectOwner(Long projectID) {
         GPAccountProject accountOwner = accountProjectDao.findOwnerByProjectID(
                 projectID);
@@ -1099,22 +1097,22 @@ class ProjectServiceImpl {
 
         return owner;
     }
-    
+
     private ProjectDTO retrieveProjectDTO(Long projectID, Long accountID)
             throws ResourceNotFoundFault {
         GPProject project = this.getProjectByID(projectID);
         EntityCorrectness.checkProjectLog(project); // TODO assert
         logger.trace("\n*** The project to retrieve is {}", project.getName());
-        
+
         GPAccount account = this.getAccountByID(accountID);
         EntityCorrectness.checkAccountLog(account); // TODO assert
         logger.trace("\n*** The account that retrieve the project is {}",
                 account.getNaturalID());
-        
+
         GPAccount owner = this.retrieveProjectOwner(projectID);
         logger.trace("\n*** The account owner of the project is {}",
                 owner.getNaturalID());
-        
+
         ProjectDTO projectDTO;
         if (accountID.equals(owner.getId())) {
             projectDTO = new ProjectDTO(project);

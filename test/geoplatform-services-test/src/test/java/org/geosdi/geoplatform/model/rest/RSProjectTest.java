@@ -36,10 +36,12 @@
 package org.geosdi.geoplatform.model.rest;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.geosdi.geoplatform.core.model.GPAccount;
+import org.geosdi.geoplatform.core.model.GPAccountProject;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPProject;
@@ -787,6 +789,40 @@ public class RSProjectTest extends BasicRestServiceTest {
         Assert.assertEquals(1, accountsToShare.size());
         Assert.assertEquals(idUserTest,
                 accountsToShare.get(0).getId().longValue());
+    }
+
+    @Test
+    public void updateAccountProjectTestRest() throws Exception {
+        String username = "new-user-rs";
+        Long idUser = super.createAndInsertUser(username,
+                organizationTest, GPRole.ADMIN, GPRole.VIEWER);
+
+        GPUser user = gpWSClient.getUserDetail(idUser);
+
+        long idProject = super.createAndInsertProject("_newproject_test_rs",
+                false, 6,
+                new Date(System.currentTimeMillis()));
+
+        GPProject project = gpWSClient.getProjectDetail(idProject);
+
+        Long idAccountProject = super.createAndInsertAccountProject(user,
+                project,
+                BasePermission.ADMINISTRATION);
+
+        GPAccountProject accountProject = gpWSClient.getAccountProject(
+                idAccountProject);
+
+        accountProject.setDefaultProject(Boolean.TRUE);
+
+        idAccountProject = gpWSClient.updateAccountProject(accountProject);
+
+        accountProject = gpWSClient.getAccountProject(
+                idAccountProject);
+
+        Assert.assertEquals(Boolean.TRUE, accountProject.isDefaultProject());
+        
+        Assert.assertEquals(Boolean.TRUE, gpWSClient.deleteAccountProject(
+                idAccountProject));
     }
 
     private void assertLayerRest(String msg, GPLayer layer,

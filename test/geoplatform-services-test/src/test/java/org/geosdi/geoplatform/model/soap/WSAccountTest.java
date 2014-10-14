@@ -43,6 +43,7 @@ import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.shared.GPRole;
 import org.geosdi.geoplatform.request.InsertAccountRequest;
 import org.geosdi.geoplatform.request.LikePatternType;
+import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.ApplicationDTO;
 import org.geosdi.geoplatform.responce.ShortAccountDTO;
@@ -330,5 +331,26 @@ public class WSAccountTest extends BaseSoapServiceTest {
 
         // Must be throws IllegalParameterFault because the standard user will be temporary
         gpWSClient.updateUser(userTest);
+    }
+
+    @Test
+    public void searchUsersTest() throws Exception {
+        String usernameMultiRole = "user-test1-ws";
+        Long idUser = super.createAndInsertUser(usernameMultiRole,
+                organizationTest, GPRole.ADMIN, GPRole.VIEWER);
+
+        try {
+            insertMassiveUsers("-ws");
+            List<UserDTO> users = gpWSClient.searchUsers(idUser,
+                    new PaginatedSearchRequest(25, 0));
+
+            Assert.assertEquals(25, users.size());
+
+            Assert.assertEquals(6, gpWSClient.searchUsers(idUser,
+                    new PaginatedSearchRequest(25, 1)).size());
+        } finally {
+            Boolean check = gpWSClient.deleteAccount(idUser);
+            Assert.assertTrue(check);
+        }
     }
 }

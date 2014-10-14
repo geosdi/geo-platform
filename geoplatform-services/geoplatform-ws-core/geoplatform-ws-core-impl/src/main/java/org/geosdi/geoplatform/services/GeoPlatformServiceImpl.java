@@ -34,7 +34,6 @@
 package org.geosdi.geoplatform.services;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.jws.WebService;
 import org.geosdi.geoplatform.core.acl.dao.AclClassDAO;
@@ -514,7 +513,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public boolean deleteAccountProject(Long accountProjectID) throws
+    public Boolean deleteAccountProject(Long accountProjectID) throws
             ResourceNotFoundFault {
         return projectServiceDelegate.deleteAccountProject(accountProjectID);
     }

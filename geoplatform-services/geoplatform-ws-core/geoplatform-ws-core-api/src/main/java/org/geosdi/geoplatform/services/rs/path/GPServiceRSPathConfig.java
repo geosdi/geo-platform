@@ -76,6 +76,13 @@ public final class GPServiceRSPathConfig {
     public static final String UPDATE_USER_PATH = ACCOUNTS_PATH + "updateUser";
     public static final String DELETE_ACCOUNT_PATH = ACCOUNTS_PATH
             + "deleteAccount/{accountID}";
+    public static final String SEARCH_USERS_PATH = ACCOUNTS_PATH + "searchUsers";
+    public static final String GET_USERS_COUNT_PATH = ACCOUNTS_PATH 
+            + "getUsersCount";
+    public static final String FORCE_TEMPORARY_ACCOUNT_PATH = ACCOUNTS_PATH
+            + "forceTemporaryAccount/{accountID}";
+    public static final String FORCE_EXPIRED_TEMPORARY_ACCOUNT_PATH = ACCOUNTS_PATH
+            + "forceExpiredTemporaryAccount/{accountID}";
 
     /**
      * AUTHORITIES PATH
@@ -83,6 +90,8 @@ public final class GPServiceRSPathConfig {
     private static final String AUTHORITIES_PATH = "/authorities/";
     public static final String GET_AUTHORITIES_BY_ACCOUNT_NATURAL_ID = AUTHORITIES_PATH
             + "getAuthoritiesByAccountNaturalID/{accountNaturalID}";
+    public static final String GET_AUTHORITIES_PATH = AUTHORITIES_PATH 
+            + "getAuthorities/{accountID}";
 
     /**
      * PROJECTS PATH
@@ -117,6 +126,12 @@ public final class GPServiceRSPathConfig {
             + "setProjectOwner";
     public static final String UPDATE_ACCOUNTS_PROJECT_SHARING_PATH = ACCOUNT_PROJECTS_PATH
             + "updateAccountsProjectSharing";
+    public static final String UPDATE_ACCOUNT_PROJECT_PATH = ACCOUNT_PROJECTS_PATH
+            + "updateAccountProject";
+    public static final String DELETE_ACCOUNT_PROJECT_PATH = ACCOUNT_PROJECTS_PATH
+            + "deleteAccountProject/{accountProjectID}";
+    public static final String GET_ACCOUNT_PROJECT_PATH = ACCOUNT_PROJECTS_PATH
+            + "getAccountProject/{accountProjectID}";
 
     /**
      * FOLDERS PATH

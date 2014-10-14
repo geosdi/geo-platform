@@ -388,9 +388,13 @@ public interface GeoPlatformService {
      * have Authorities
      */
     @Get
+    @GET
+    @Path(value = GPServiceRSPathConfig.SEARCH_USERS_PATH)
     @WebResult(name = "user")
-    List<UserDTO> searchUsers(@WebParam(name = "userID") Long userID,
-            PaginatedSearchRequest request) throws ResourceNotFoundFault;
+    List<UserDTO> searchUsers(@WebParam(name = "userID")
+            @QueryParam(value = "userID") Long userID,
+            @QueryParam("") PaginatedSearchRequest request)
+            throws ResourceNotFoundFault;
 
     /**
      * Retrieve all Accounts.
@@ -441,9 +445,12 @@ public interface GeoPlatformService {
      * @return the number of Users found
      */
     @Get
+    @GET
+    @Path(value = GPServiceRSPathConfig.GET_USERS_COUNT_PATH)
     @WebResult(name = "count")
-    Long getUsersCount(@WebParam(name = "organization") String organization,
-            SearchRequest request);
+    Long getUsersCount(@WebParam(name = "organization")
+            @QueryParam(value = "organization") String organization,
+            @QueryParam("") SearchRequest request);
 
     /**
      * Retrieve the Authorities of an Account.
@@ -454,8 +461,11 @@ public interface GeoPlatformService {
      * Authorities
      */
     @Get
+    @GET
+    @Path(value = GPServiceRSPathConfig.GET_AUTHORITIES_PATH)
     @WebResult(name = "authority")
-    List<String> getAuthorities(@WebParam(name = "accountID") Long accountID)
+    List<String> getAuthorities(@WebParam(name = "accountID")
+            @PathParam(value = "accountID") Long accountID)
             throws ResourceNotFoundFault;
 
     /**
@@ -482,8 +492,11 @@ public interface GeoPlatformService {
      * @param accountID the Account ID
      * @throws ResourceNotFoundFault if Account not found
      */
-    @Post
-    void forceTemporaryAccount(@WebParam(name = "accountID") Long accountID)
+    @Put
+    @PUT
+    @Path(value = GPServiceRSPathConfig.FORCE_TEMPORARY_ACCOUNT_PATH)
+    void forceTemporaryAccount(@WebParam(name = "accountID")
+            @PathParam(value = "accountID") Long accountID)
             throws ResourceNotFoundFault;
 
     /**
@@ -493,9 +506,12 @@ public interface GeoPlatformService {
      * @throws ResourceNotFoundFault if Account not found
      * @throws IllegalParameterFault if Account is not temporary
      */
-    @Post
+    @Put
+    @PUT
+    @Path(value = GPServiceRSPathConfig.FORCE_EXPIRED_TEMPORARY_ACCOUNT_PATH)
     void forceExpiredTemporaryAccount(
-            @WebParam(name = "accountID") Long accountID)
+            @WebParam(name = "accountID")
+            @PathParam(value = "accountID") Long accountID)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
     // </editor-fold>
@@ -527,7 +543,9 @@ public interface GeoPlatformService {
      * @throws IllegalParameterFault if AccountProject, Account or Project are
      * not valid
      */
-    @Post
+    @Put
+    @PUT
+    @Path(value = GPServiceRSPathConfig.UPDATE_ACCOUNT_PROJECT_PATH)
     Long updateAccountProject(
             @WebParam(name = "accountProject") GPAccountProject accountProject)
             throws ResourceNotFoundFault, IllegalParameterFault;
@@ -539,9 +557,12 @@ public interface GeoPlatformService {
      * @return true id the AccountProject was deleted
      * @throws ResourceNotFoundFault if AccountProject not found
      */
-    @Delete
-    boolean deleteAccountProject(
-            @WebParam(name = "accountProjectID") Long accountProjectID)
+    @Put
+    @PUT
+    @Path(value = GPServiceRSPathConfig.DELETE_ACCOUNT_PROJECT_PATH)
+    Boolean deleteAccountProject(
+            @WebParam(name = "accountProjectID")
+            @PathParam(value = "accountProjectID") Long accountProjectID)
             throws ResourceNotFoundFault;
 
     /**
@@ -552,9 +573,12 @@ public interface GeoPlatformService {
      * @throws ResourceNotFoundFault if AccountProject not found
      */
     @Get
+    @GET
+    @Path(value = GPServiceRSPathConfig.GET_ACCOUNT_PROJECT_PATH)
     @WebResult(name = "accountProject")
     GPAccountProject getAccountProject(
-            @WebParam(name = "accountProjectID") Long accountProjectID)
+            @WebParam(name = "accountProjectID")
+            @PathParam(value = "accountProjectID") Long accountProjectID)
             throws ResourceNotFoundFault;
 
     /**

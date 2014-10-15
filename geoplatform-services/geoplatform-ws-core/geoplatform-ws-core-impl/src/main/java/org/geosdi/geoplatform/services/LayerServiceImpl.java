@@ -51,7 +51,10 @@ import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.shared.GPLayerType;
 import org.geosdi.geoplatform.request.layer.InsertLayerRequest;
+import org.geosdi.geoplatform.request.layer.WSAddLayerAndTreeModificationsRequest;
 import org.geosdi.geoplatform.request.layer.WSAddLayersAndTreeModificationsRequest;
+import org.geosdi.geoplatform.request.layer.WSDDLayerAndTreeModificationsRequest;
+import org.geosdi.geoplatform.request.layer.WSDeleteLayerAndTreeModificationsRequest;
 import org.geosdi.geoplatform.responce.collection.LongListStore;
 import org.geosdi.geoplatform.responce.RasterPropertiesDTO;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
@@ -105,12 +108,14 @@ class LayerServiceImpl {
     }
     //</editor-fold>
 
-    public Long insertLayer(InsertLayerRequest layerRequest) throws IllegalParameterFault {
-        if(layerRequest == null) {
-            throw new IllegalParameterFault("The InsertLayerRequest must not be "
+    public Long insertLayer(InsertLayerRequest layerRequest) throws
+            IllegalParameterFault {
+        if (layerRequest == null) {
+            throw new IllegalParameterFault(
+                    "The InsertLayerRequest must not be "
                     + "null.");
         }
-        
+
         GPLayer layer = layerRequest.getLayer();
         EntityCorrectness.checkLayer(layer); // TODO assert
 
@@ -155,22 +160,26 @@ class LayerServiceImpl {
     /**
      * @see GeoPlatformService#deleteLayer(java.lang.Long)
      */
-    public boolean deleteLayer(Long layerID) throws ResourceNotFoundFault {
+    public Boolean deleteLayer(Long layerID) throws ResourceNotFoundFault {
         GPLayer layer = this.getLayerDetail(layerID);
 
         // data on ancillary tables should be deleted by cascading
         return layerDao.remove(layer);
     }
 
-    /**
-     * @see
-     * GeoPlatformService#saveAddedLayerAndTreeModifications(java.lang.Long,
-     * java.lang.Long, org.geosdi.geoplatform.core.model.GPLayer,
-     * org.geosdi.geoplatform.responce.collection.GPWebServiceMapData)
-     */
-    public Long saveAddedLayerAndTreeModifications(Long projectID, Long parentID,
-            GPLayer layer, GPWebServiceMapData descendantsMapData)
+    public Long saveAddedLayerAndTreeModifications(
+            WSAddLayerAndTreeModificationsRequest addLayerRequest)
             throws ResourceNotFoundFault, IllegalParameterFault {
+        if (addLayerRequest == null) {
+            throw new IllegalParameterFault(
+                    "The WSAddLayerAndTreeModificationsRequest "
+                    + "must not be null.");
+        }
+        Long projectID = addLayerRequest.getProjectID();
+        Long parentID = addLayerRequest.getParentFolderID();
+        GPLayer layer = addLayerRequest.getLayer();
+        GPWebServiceMapData descendantsMapData = addLayerRequest.getDescendantsMapData();
+
         GPProject project = projectDao.find(projectID);
         if (project == null) {
             throw new ResourceNotFoundFault("Project not found", projectID);
@@ -252,14 +261,17 @@ class LayerServiceImpl {
         return new LongListStore(IDsList);
     }
 
-    /**
-     * @see
-     * GeoPlatformService#saveDeletedLayerAndTreeModifications(java.lang.Long,
-     * org.geosdi.geoplatform.responce.collection.GPWebServiceMapData)
-     */
-    public boolean saveDeletedLayerAndTreeModifications(Long layerID,
-            GPWebServiceMapData descendantsMapData)
+    public Boolean saveDeletedLayerAndTreeModifications(
+            WSDeleteLayerAndTreeModificationsRequest deleteLayerRequest)
             throws ResourceNotFoundFault {
+        if (deleteLayerRequest == null) {
+            throw new IllegalArgumentException(
+                    "The WSDeleteLayerAndTreeModificationsRequest "
+                    + "must not be null.");
+        }
+        Long layerID = deleteLayerRequest.getLayerID();
+        GPWebServiceMapData descendantsMapData = deleteLayerRequest.getDescendantsMapData();
+
         GPLayer layer = this.getLayerDetail(layerID);
 
         int oldPosition = layer.getPosition();
@@ -285,9 +297,8 @@ class LayerServiceImpl {
      * GeoPlatformService#saveCheckStatusLayerAndTreeModifications(java.lang.Long,
      * boolean)
      */
-    public boolean saveCheckStatusLayerAndTreeModifications(Long layerID,
-            boolean checked)
-            throws ResourceNotFoundFault {
+    public Boolean saveCheckStatusLayerAndTreeModifications(Long layerID,
+            boolean checked) throws ResourceNotFoundFault {
         GPLayer layer = this.getLayerDetail(layerID);
 
         boolean checkSave = layerDao.persistCheckStatusLayer(layerID, checked);
@@ -333,16 +344,19 @@ class LayerServiceImpl {
         return true;
     }
 
-    /**
-     * @see
-     * GeoPlatformService#saveDragAndDropLayerAndTreeModifications(java.lang.Long,
-     * java.lang.Long, int,
-     * org.geosdi.geoplatform.responce.collection.GPWebServiceMapData)
-     */
-    public boolean saveDragAndDropLayerModifications(Long layerMovedID,
-            Long newParentID, int newPosition,
-            GPWebServiceMapData descendantsMapData)
+    public Boolean saveDragAndDropLayerModifications(
+            WSDDLayerAndTreeModificationsRequest ddLayerReq)
             throws ResourceNotFoundFault, IllegalParameterFault {
+        if (ddLayerReq == null) {
+            throw new IllegalParameterFault(
+                    "The WSDDLayerAndTreeModificationsRequest "
+                    + "must not be null.");
+        }
+        Long layerMovedID = ddLayerReq.getLayerMovedID();
+        Long newParentID = ddLayerReq.getNewParentID();
+        int newPosition = ddLayerReq.getNewPosition();
+        GPWebServiceMapData descendantsMapData = ddLayerReq.getDescendantsMapData();
+
         GPLayer layerMoved = this.getLayerDetail(layerMovedID);
 
         if (newParentID == null) {
@@ -403,7 +417,7 @@ class LayerServiceImpl {
      * @see
      * GeoPlatformService#saveLayerProperties(org.geosdi.geoplatform.responce.RasterPropertiesDTO)
      */
-    public boolean saveLayerProperties(RasterPropertiesDTO layerProperties)
+    public Boolean saveLayerProperties(RasterPropertiesDTO layerProperties)
             throws ResourceNotFoundFault, IllegalParameterFault {
         Long layerID = layerProperties.getId();
 

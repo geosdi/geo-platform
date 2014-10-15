@@ -33,60 +33,69 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.request;
+package org.geosdi.geoplatform.request.viewport;
 
-import org.geosdi.geoplatform.request.folder.WSDeleteFolderAndTreeModifications;
-import org.geosdi.geoplatform.request.folder.WSAddFolderAndTreeModificationsRequest;
-import org.geosdi.geoplatform.request.folder.WSDDFolderAndTreeModifications;
 import java.io.Serializable;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlTransient;
-import org.geosdi.geoplatform.request.layer.WSAddLayerAndTreeModificationsRequest;
-import org.geosdi.geoplatform.request.layer.WSAddLayersAndTreeModificationsRequest;
-import org.geosdi.geoplatform.request.layer.WSDDLayerAndTreeModificationsRequest;
-import org.geosdi.geoplatform.request.layer.WSDeleteLayerAndTreeModificationsRequest;
-import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import org.geosdi.geoplatform.core.model.GPViewport;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@XmlTransient
-@XmlSeeAlso(value = {WSAddFolderAndTreeModificationsRequest.class,
-    WSDeleteFolderAndTreeModifications.class,
-    WSDDFolderAndTreeModifications.class,
-    WSAddLayersAndTreeModificationsRequest.class,
-    WSAddLayerAndTreeModificationsRequest.class,
-    WSDeleteLayerAndTreeModificationsRequest.class,
-    WSDDLayerAndTreeModificationsRequest.class})
-public abstract class TreeModificationRequest implements Serializable {
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
+public class InsertViewportRequest implements Serializable {
 
-    private static final long serialVersionUID = -8088596700267312684L;
+    private static final long serialVersionUID = 8131271311416084393L;
     //
-    private GPWebServiceMapData descendantsMapData;
+    private Long accountProjectID;
+    private GPViewport viewport;
 
-    public TreeModificationRequest() {
+    public InsertViewportRequest() {
     }
 
-    public TreeModificationRequest(
-            GPWebServiceMapData theDescendantsMapData) {
-        this.descendantsMapData = theDescendantsMapData;
-    }
-
-    /**
-     * @return the descendantsMapData
-     */
-    public GPWebServiceMapData getDescendantsMapData() {
-        return descendantsMapData;
+    public InsertViewportRequest(Long theAccountProjectID,
+            GPViewport theViewport) {
+        this.accountProjectID = theAccountProjectID;
+        this.viewport = theViewport;
     }
 
     /**
-     * @param descendantsMapData the descendantsMapData to set
+     * @return the accountProjectID
      */
-    public void setDescendantsMapData(
-            GPWebServiceMapData descendantsMapData) {
-        this.descendantsMapData = descendantsMapData;
+    public Long getAccountProjectID() {
+        return accountProjectID;
+    }
+
+    /**
+     * @param accountProjectID the accountProjectID to set
+     */
+    public void setAccountProjectID(Long accountProjectID) {
+        this.accountProjectID = accountProjectID;
+    }
+
+    /**
+     * @return the viewport
+     */
+    public GPViewport getViewport() {
+        return viewport;
+    }
+
+    /**
+     * @param viewport the viewport to set
+     */
+    public void setViewport(GPViewport viewport) {
+        this.viewport = viewport;
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + " {" + "accountProjectID = "
+                + accountProjectID + ", viewport = " + viewport + '}';
     }
 
 }

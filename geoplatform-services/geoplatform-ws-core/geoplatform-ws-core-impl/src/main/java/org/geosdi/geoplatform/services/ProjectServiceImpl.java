@@ -58,6 +58,7 @@ import org.geosdi.geoplatform.request.PutAccountsProjectRequest;
 import org.geosdi.geoplatform.request.RequestByAccountProjectIDs;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.request.project.ImportProjectRequest;
+import org.geosdi.geoplatform.request.project.SaveProjectRequest;
 import org.geosdi.geoplatform.responce.AccountProjectPropertiesDTO;
 import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.IElementDTO;
@@ -147,9 +148,16 @@ class ProjectServiceImpl {
      * @see GeoPlatformService#saveProject(java.lang.String,
      * org.geosdi.geoplatform.core.model.GPProject, boolean)
      */
-    public Long saveProject(String accountNaturalID, GPProject project,
-            boolean defaultProject)
+    public Long saveProject(SaveProjectRequest saveProjectRequest)
             throws ResourceNotFoundFault, IllegalParameterFault {
+        if(saveProjectRequest == null) {
+            throw new IllegalParameterFault("The SaveProjetRequest must not "
+                    + "be null.");
+        }
+        String accountNaturalID = saveProjectRequest.getAccountNaturalID();
+        GPProject project = saveProjectRequest.getProject();
+        boolean defaultProject = saveProjectRequest.isDefaultProject();
+        
         EntityCorrectness.checkProject(project); // TODO assert
 
         GPAccount account = accountDao.findByNaturalID(accountNaturalID);
@@ -216,7 +224,7 @@ class ProjectServiceImpl {
     /**
      * @see GeoPlatformService#deleteProject(java.lang.Long)
      */
-    public boolean deleteProject(Long projectID) throws ResourceNotFoundFault {
+    public Boolean deleteProject(Long projectID) throws ResourceNotFoundFault {
         GPProject project = this.getProjectByID(projectID);
         EntityCorrectness.checkProjectLog(project); // TODO assert
 
@@ -442,7 +450,7 @@ class ProjectServiceImpl {
                 accountProjectID);
         EntityCorrectness.checkAccountProjectLog(accountProject); // TODO assert
 
-        return projectDao.removeById(accountProjectID);
+        return accountProjectDao.removeById(accountProjectID);
     }
 
     /**
@@ -579,7 +587,7 @@ class ProjectServiceImpl {
      * @see
      * GeoPlatformService#saveAccountProjectProperties(org.geosdi.geoplatform.responce.AccountProjectPropertiesDTO)
      */
-    public boolean saveAccountProjectProperties(
+    public Boolean saveAccountProjectProperties(
             AccountProjectPropertiesDTO accountProjectProperties)
             throws ResourceNotFoundFault, IllegalParameterFault {
         GPProject project = this.getProjectByID(
@@ -600,7 +608,7 @@ class ProjectServiceImpl {
             accountProjectDao.forceAsDefaultProject(account.getId(),
                     project.getId());
         }
-        return true;
+        return Boolean.TRUE;
     }
 
     public ShortAccountDTOContainer getAccountsBySharedProjectID(Long projectID)

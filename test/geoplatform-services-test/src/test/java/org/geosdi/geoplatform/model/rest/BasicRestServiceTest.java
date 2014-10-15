@@ -46,6 +46,7 @@ import org.geosdi.geoplatform.gui.shared.GPRole;
 import org.geosdi.geoplatform.model.ServiceTest;
 import org.geosdi.geoplatform.request.LikePatternType;
 import org.geosdi.geoplatform.request.SearchRequest;
+import org.junit.Assert;
 import org.junit.runner.RunWith;
 import org.springframework.security.acls.domain.BasePermission;
 import org.springframework.test.context.ActiveProfiles;
@@ -57,7 +58,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -73,7 +74,7 @@ abstract class BasicRestServiceTest extends ServiceTest {
     protected static final String passwordTest = usernameTest;
     protected static final String emailTest = usernameTest + "@" + domainNameTest;
     protected GPUser userTest;
-     // Projects
+    // Projects
     protected GPProject projectTest;
     protected long idProjectTest = -1;
     // Folders
@@ -118,6 +119,18 @@ abstract class BasicRestServiceTest extends ServiceTest {
     protected void setUpOrganization() throws IllegalParameterFault {
         organizationTest = new GPOrganization(organizationNameRSTest);
         organizationTest.setId(gpWSClient.insertOrganization(organizationTest));
+    }
+
+    @Override
+    public void tearDown() {
+        try {
+            Assert.assertEquals(Boolean.TRUE, gpWSClient.deleteProject(
+                    idProjectTest));
+        } catch (Exception ex) {
+            logger.error("\n@@@@@@@@@@@@@@@@@ERROR@@@@@@@@@@@@@@@@@@@@@@@@ " + ex);
+        }
+        
+        super.tearDown();
     }
 
 }

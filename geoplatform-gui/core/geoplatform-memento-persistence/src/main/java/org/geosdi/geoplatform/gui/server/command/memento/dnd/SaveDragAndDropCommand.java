@@ -46,6 +46,7 @@ import org.geosdi.geoplatform.gui.server.SessionUtility;
 import org.geosdi.geoplatform.gui.server.converter.DTOMementoConverter;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 import org.geosdi.geoplatform.request.folder.WSDDFolderAndTreeModifications;
+import org.geosdi.geoplatform.request.layer.WSDDLayerAndTreeModificationsRequest;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.slf4j.Logger;
@@ -100,7 +101,8 @@ public class SaveDragAndDropCommand implements
         switch (request.getElementType()) {
             case COMPOSITE:
                 try {
-                    result = this.geoPlatformServiceClient.saveDragAndDropFolderAndTreeModifications(new WSDDFolderAndTreeModifications(
+                    result = this.geoPlatformServiceClient.saveDragAndDropFolderAndTreeModifications(
+                            new WSDDFolderAndTreeModifications(
                                     memento.getIdBaseElement(),
                                     memento.getIdNewParent(),
                                     memento.getNewZIndex(), map));
@@ -112,8 +114,10 @@ public class SaveDragAndDropCommand implements
             case LEAF:
                 try {
                     result = this.geoPlatformServiceClient.saveDragAndDropLayerAndTreeModifications(
-                            memento.getIdBaseElement(), memento.getIdNewParent(),
-                            memento.getNewZIndex(), map);
+                            new WSDDLayerAndTreeModificationsRequest(
+                                    memento.getIdBaseElement(),
+                                    memento.getIdNewParent(),
+                                    memento.getNewZIndex(), map));
                 } catch (ResourceNotFoundFault ex) {
                     logger.error("Failed to save Layer drag&drop : " + ex);
                     throw new GeoPlatformException(ex);

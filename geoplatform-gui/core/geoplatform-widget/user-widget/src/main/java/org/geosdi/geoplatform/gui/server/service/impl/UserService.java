@@ -55,6 +55,8 @@ import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 import org.geosdi.geoplatform.request.InsertAccountRequest;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.SearchRequest;
+import org.geosdi.geoplatform.request.organization.WSPutRolePermissionRequest;
+import org.geosdi.geoplatform.request.organization.WSSaveRoleRequest;
 import org.geosdi.geoplatform.responce.UserDTO;
 import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
 import org.geosdi.geoplatform.services.GeoPlatformService;
@@ -295,8 +297,9 @@ public class UserService implements IUserService {
         GuiComponentsPermissionMapData rolePermission = new GuiComponentsPermissionMapData();
         rolePermission.setPermissionMap(permissionMap);
         try {
-            return geoPlatformServiceClient.updateRolePermission(role,
-                    organization, rolePermission);
+            return geoPlatformServiceClient.updateRolePermission(
+                    new WSPutRolePermissionRequest(rolePermission, role,
+                            organization));
         } catch (ResourceNotFoundFault ex) {
             logger.error(this.getClass().getSimpleName(), ex.getMessage());
             throw new GeoPlatformException(
@@ -309,7 +312,8 @@ public class UserService implements IUserService {
             HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
         try {
-            return geoPlatformServiceClient.saveRole(role, organization);
+            return geoPlatformServiceClient.saveRole(new WSSaveRoleRequest(role,
+                    organization));
         } catch (IllegalParameterFault ex) {
             logger.error(this.getClass().getSimpleName(), ex.getMessage());
             throw new GeoPlatformException(

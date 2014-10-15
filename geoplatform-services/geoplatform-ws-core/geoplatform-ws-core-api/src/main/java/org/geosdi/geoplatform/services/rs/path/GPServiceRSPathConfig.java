@@ -53,36 +53,47 @@ public final class GPServiceRSPathConfig {
             + "insertOrganization";
     public static final String DELETE_ORGANIZATION_PATH = ORGANIZATION_BASE_PATH
             + "deleteOrganization/{organizationID}";
+    public static final String GET_ALL_ROLES_PATH = ORGANIZATION_BASE_PATH +
+            "getAllRoles/{organization}";
+    public static final String GET_ROLE_PERMISSION_PATH = ORGANIZATION_BASE_PATH
+            + "getRolePermission";
+    public static final String UPDATE_ROLE_PERMISSION_PATH = ORGANIZATION_BASE_PATH
+            + "updateRolePermission";
+    public static final String SAVE_ROLE_PATH = ORGANIZATION_BASE_PATH 
+            + "saveRole";
+    
     /**
      * ACCOUNTS PATH
      */
     private static final String ACCOUNTS_PATH = "/accounts/";
-    public static final String GET_ALL_ORGANIZATION_ACCOUNTS = ACCOUNTS_PATH
+    public static final String GET_ALL_ORGANIZATION_ACCOUNTS_PATH = ACCOUNTS_PATH
             + "getAllOrganizationAccount/{organization}";
-    public static final String GET_ALL_ACCOUNTS = ACCOUNTS_PATH + "getAllAccounts";
-    public static final String GET_USER_DETAIL_BY_ID = ACCOUNTS_PATH
+    public static final String GET_ALL_ACCOUNTS_PATH = ACCOUNTS_PATH + "getAllAccounts";
+    public static final String GET_USER_DETAIL_BY_ID_PATH = ACCOUNTS_PATH
             + "getUserDetail/{userID}";
-    public static final String GET_USER_DETAIL = ACCOUNTS_PATH
+    public static final String GET_USER_DETAIL_PATH = ACCOUNTS_PATH
             + "getUserDetail";
-    public static final String GET_USER_DETAIL_BY_USERNAME_AND_PASSWORD = GET_USER_DETAIL
+    public static final String GET_USER_DETAIL_BY_USERNAME_AND_PASSWORD_PATH = GET_USER_DETAIL_PATH
             + "/{username}/{plainPassword}";
-    public static final String GET_ACCOUNTS_COUNT = ACCOUNTS_PATH
+    public static final String GET_ACCOUNTS_COUNT_PATH = ACCOUNTS_PATH
             + "getAccountsCount";
-    public static final String GET_SHORT_USER_BY_ID = ACCOUNTS_PATH
+    public static final String GET_SHORT_USER_BY_ID_PATH = ACCOUNTS_PATH
             + "getShortUser/{userID}";
-    public static final String GET_SHORT_USER_BY_USERNAME = ACCOUNTS_PATH
+    public static final String GET_SHORT_USER_BY_USERNAME_PATH = ACCOUNTS_PATH
             + "getShortUserByUsername";
     public static final String INSERT_ACCOUNT_PATH = ACCOUNTS_PATH + "insertAccount";
     public static final String UPDATE_USER_PATH = ACCOUNTS_PATH + "updateUser";
     public static final String DELETE_ACCOUNT_PATH = ACCOUNTS_PATH
-            + "deleteAccount/{accountID}";
+            + "deleteAccount";
     public static final String SEARCH_USERS_PATH = ACCOUNTS_PATH + "searchUsers";
-    public static final String GET_USERS_COUNT_PATH = ACCOUNTS_PATH 
+    public static final String GET_USERS_COUNT_PATH = ACCOUNTS_PATH
             + "getUsersCount";
     public static final String FORCE_TEMPORARY_ACCOUNT_PATH = ACCOUNTS_PATH
             + "forceTemporaryAccount/{accountID}";
     public static final String FORCE_EXPIRED_TEMPORARY_ACCOUNT_PATH = ACCOUNTS_PATH
             + "forceExpiredTemporaryAccount/{accountID}";
+    public static final String GET_ACCOUNT_PERMISSIONS_PATH = ACCOUNTS_PATH +
+            "getAccountPermission/{accountID}";
 
     /**
      * AUTHORITIES PATH
@@ -90,7 +101,7 @@ public final class GPServiceRSPathConfig {
     private static final String AUTHORITIES_PATH = "/authorities/";
     public static final String GET_AUTHORITIES_BY_ACCOUNT_NATURAL_ID = AUTHORITIES_PATH
             + "getAuthoritiesByAccountNaturalID/{accountNaturalID}";
-    public static final String GET_AUTHORITIES_PATH = AUTHORITIES_PATH 
+    public static final String GET_AUTHORITIES_PATH = AUTHORITIES_PATH
             + "getAuthorities/{accountID}";
 
     /**
@@ -107,6 +118,20 @@ public final class GPServiceRSPathConfig {
             + "exportProject/{projectID}";
     public static final String IMPORT_PROJECT_PATH = PROJECTS_PATH
             + "importProject";
+    public static final String DELETE_PROJECT_PATH = PROJECTS_PATH
+            + "deleteProject/{projectID}";
+    public static final String GET_DEFAULT_PROJECT_PATH = PROJECTS_PATH
+            + "getDefaultProject/{accountID}";
+    public static final String GET_DEFAULT_PROJECT_DTO_PATH = PROJECTS_PATH
+            + "getDefaultProjectDTO/{accountID}";
+    public static final String UPDATE_DEFAULT_PROJECT_PATH = PROJECTS_PATH
+            + "updateDefaultProject";
+    public static final String SAVE_ACCOUNT_PROJECT_PROPERTIES_PATH = PROJECTS_PATH
+            + "saveAccountProjectProperties";
+    public static final String SAVE_PROJECT_PATH = PROJECTS_PATH
+            + "saveProject";
+    public static final String SET_PROJECT_SHARED_PATH = PROJECTS_PATH
+            + "setProjectShared";
 
     /**
      * ACCOUNT PROJECTS PATH *
@@ -118,7 +143,7 @@ public final class GPServiceRSPathConfig {
             + "insertAccountProject";
     public static final String GET_ACCOUNTS_BY_PROJECT_ID_PATH = ACCOUNT_PROJECTS_PATH
             + "getAccountsByProject/{projectID}";
-    public static final String GET_ACCOUNTS_TO_SHARE_BY_PROJECT_ID = ACCOUNT_PROJECTS_PATH
+    public static final String GET_ACCOUNTS_TO_SHARE_BY_PROJECT_ID_PATH = ACCOUNT_PROJECTS_PATH
             + "getAccountsToShare/{projectID}";
     public static final String GET_PROJECT_OWNER_PATH = ACCOUNT_PROJECTS_PATH
             + "getProjectOwner/{projectID}";
@@ -132,6 +157,16 @@ public final class GPServiceRSPathConfig {
             + "deleteAccountProject/{accountProjectID}";
     public static final String GET_ACCOUNT_PROJECT_PATH = ACCOUNT_PROJECTS_PATH
             + "getAccountProject/{accountProjectID}";
+    public static final String GET_ACCOUNT_PROJECTS_BY_PROJECT_ID_PATH = ACCOUNT_PROJECTS_PATH
+            + "getAccountProjectsByProjectID/{projectID}";
+    public static final String GET_ACCOUNT_PROJECT_BY_ACCOUNT_AND_PROJECT_IDS_PATH = ACCOUNT_PROJECTS_PATH
+            + "getAccountProjectByAccountAndProjectIDs/{accountID}/{projectID}";
+    public static final String GET_ACCOUNT_PROJECTS_COUNT_PATH = ACCOUNT_PROJECTS_PATH
+            + "getAccountProjectsCount";
+    public static final String GET_DEFAULT_ACCOUNT_PROJECT_PATH = ACCOUNT_PROJECTS_PATH
+            + "getDefaultAccountProject/{accountID}";
+    public static final String SEARCH_ACCOUNT_PROJECTS_PATH = ACCOUNT_PROJECTS_PATH
+            + "searchAccountProjects";
 
     /**
      * FOLDERS PATH
@@ -175,10 +210,33 @@ public final class GPServiceRSPathConfig {
             + "getVectorLayer/{layerID}";
     public static final String ADD_LAYERS_AND_TREE_MODIFICATIONS_PATH = LAYERS_PATH
             + "addLayersAndTreeModifications";
+    public static final String ADD_LAYER_AND_TREE_MODIFICATIONS_PATH = LAYERS_PATH
+            + "saveAddedLayerAndTreeModifications";
+    public static final String DELETE_LAYER_AND_TREE_MODIFICATIONS_PATH = LAYERS_PATH
+            + "saveDeletedLayerAndTreeModifications";
+    public static final String SAVE_CHECK_STATUS_LAYER_AND_TREE_MODIFICATION_PATH = LAYERS_PATH
+            + "saveCheckStatusLayerAndTreeModifications";
+    public static final String SAVE_DD_LAYER_AND_TREE_MODIFICATIONS_PATH = LAYERS_PATH
+            + "saveDragAndDropLayerAndTreeModifications";
+    public static final String SAVE_LAYERS_PROPERTIES_PATH = LAYERS_PATH
+            + "saveLayerProperties";
     public static final String GET_SHORT_LAYER_PATH = LAYERS_PATH
             + "getShortLayer/{layerID}";
     public static final String UPDATE_RASTER_LAYER_PARH = LAYERS_PATH
             + "updateRasterLayer";
+    public static final String UPDATE_VECTOR_LAYER_PATH = LAYERS_PATH
+            + "updateVectorLayer";
+    public static final String DELETE_LAYER_PATH = LAYERS_PATH + "deleteLayer";
+    public static final String GET_LAYERS_PATH = LAYERS_PATH
+            + "getLayers/{projectID}";
+    public static final String GET_LAYER_BBOX_PATH = LAYERS_PATH +
+            "getBBox/{layerID}";
+    public static final String GET_LAYER_INFO_PATH = LAYERS_PATH +
+            "getLayerInfo/{layerID}";
+    public static final String GET_LAYER_TYPE_PATH = LAYERS_PATH + 
+            "getLayerType/{layerID}";
+    public static final String GET_LAYERS_DATA_SOURCE_BY_PROJECT_ID_PATH = LAYERS_PATH
+            + "getLayersDataSourceByProjectID/{projectID}";
 
     /**
      * MESSAGES PATH
@@ -202,6 +260,45 @@ public final class GPServiceRSPathConfig {
             + "markAllMessagesAsReadByRecipient/{recipientID}";
     public static final String MARK_MESSAGES_AS_READ_BY_DATE_PATH = MESSAGES_PATH
             + "markMessagesAsReadByDate";
+
+    /**
+     * VIEPORTS PATH
+     */
+    private static final String VIEPORTS_PATH = "/vieports/";
+    public static final String GET_DEFAULT_VIEWPORT_PATH = VIEPORTS_PATH
+            + "getDefaultViewport/{accountProjectID}";
+    public static final String GET_ACCOUNT_PROJECT_VIEPORTS_PATH = VIEPORTS_PATH
+            + "getAccountProjectViewports/{accountProjectID}";
+    public static final String INSERT_VIEWPORT_PATH = VIEPORTS_PATH
+            + "insertViewport";
+    public static final String UPDATE_VIEWPORT_PATH = VIEPORTS_PATH
+            + "updateViewport";
+    public static final String DELETE_VIEWPORT_PATH = VIEPORTS_PATH
+            + "deleteViewport";
+    public static final String SAVE_OR_UPDATE_VIEWPORT_LIST_PATH = VIEPORTS_PATH
+            + "saveOrUpdateViewportList";
+    public static final String REPLACE_VIEWPORT_LIST_PATH = VIEPORTS_PATH
+            + "replaceViewportList";
+    
+    /**
+     * SERVERS PATH
+     */
+    private static final String SERVERS_PATH = "/servers/";
+    public static final String INSERT_SERVER_PATH = SERVERS_PATH + 
+            "insertServer";
+    public static final String UPDATE_SERVER_PATH = SERVERS_PATH +
+            "updateServer";
+    public static final String DELETE_SERVER_PATH = SERVERS_PATH +
+            "deleteServer";
+    public static final String GET_ALL_SERVERS_PATH = SERVERS_PATH + 
+            "getAllServers/{organizazionName}";
+    public static final String GET_SERVER_DETAIL_PATH = SERVERS_PATH
+            + "getServerDetail/{serverID}";
+    public static final String GET_SHORT_SERVER_PATH = SERVERS_PATH +
+            "getShortServer";
+    public static final String GET_SERVER_DETAIL_BY_URL_PATH = SERVERS_PATH +
+            "getServerDetailByUrl";
+    public static final String SAVE_SERVER_PATH = SERVERS_PATH + "saveServer";
 
     /**
      * WMS CAPABILITIES PATH

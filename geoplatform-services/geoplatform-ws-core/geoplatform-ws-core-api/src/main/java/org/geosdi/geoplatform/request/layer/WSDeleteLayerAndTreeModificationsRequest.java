@@ -33,18 +33,12 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.request;
+package org.geosdi.geoplatform.request.layer;
 
-import org.geosdi.geoplatform.request.folder.WSDeleteFolderAndTreeModifications;
-import org.geosdi.geoplatform.request.folder.WSAddFolderAndTreeModificationsRequest;
-import org.geosdi.geoplatform.request.folder.WSDDFolderAndTreeModifications;
-import java.io.Serializable;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlTransient;
-import org.geosdi.geoplatform.request.layer.WSAddLayerAndTreeModificationsRequest;
-import org.geosdi.geoplatform.request.layer.WSAddLayersAndTreeModificationsRequest;
-import org.geosdi.geoplatform.request.layer.WSDDLayerAndTreeModificationsRequest;
-import org.geosdi.geoplatform.request.layer.WSDeleteLayerAndTreeModificationsRequest;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import org.geosdi.geoplatform.request.TreeModificationRequest;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 
 /**
@@ -52,41 +46,35 @@ import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@XmlTransient
-@XmlSeeAlso(value = {WSAddFolderAndTreeModificationsRequest.class,
-    WSDeleteFolderAndTreeModifications.class,
-    WSDDFolderAndTreeModifications.class,
-    WSAddLayersAndTreeModificationsRequest.class,
-    WSAddLayerAndTreeModificationsRequest.class,
-    WSDeleteLayerAndTreeModificationsRequest.class,
-    WSDDLayerAndTreeModificationsRequest.class})
-public abstract class TreeModificationRequest implements Serializable {
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
+public class WSDeleteLayerAndTreeModificationsRequest extends TreeModificationRequest {
 
-    private static final long serialVersionUID = -8088596700267312684L;
+    private static final long serialVersionUID = 4146368967215506201L;
     //
-    private GPWebServiceMapData descendantsMapData;
+    private Long layerID;
 
-    public TreeModificationRequest() {
+    public WSDeleteLayerAndTreeModificationsRequest() {
     }
 
-    public TreeModificationRequest(
+    public WSDeleteLayerAndTreeModificationsRequest(Long theLayerID,
             GPWebServiceMapData theDescendantsMapData) {
-        this.descendantsMapData = theDescendantsMapData;
+        super(theDescendantsMapData);
+        this.layerID = theLayerID;
     }
 
     /**
-     * @return the descendantsMapData
+     * @return the layerID
      */
-    public GPWebServiceMapData getDescendantsMapData() {
-        return descendantsMapData;
+    public Long getLayerID() {
+        return layerID;
     }
 
     /**
-     * @param descendantsMapData the descendantsMapData to set
+     * @param layerID the layerID to set
      */
-    public void setDescendantsMapData(
-            GPWebServiceMapData descendantsMapData) {
-        this.descendantsMapData = descendantsMapData;
+    public void setLayerID(Long layerID) {
+        this.layerID = layerID;
     }
 
 }

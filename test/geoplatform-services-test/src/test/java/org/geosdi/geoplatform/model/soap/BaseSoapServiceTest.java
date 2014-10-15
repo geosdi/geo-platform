@@ -46,6 +46,7 @@ import org.geosdi.geoplatform.gui.shared.GPRole;
 import org.geosdi.geoplatform.model.ServiceTest;
 import org.geosdi.geoplatform.request.LikePatternType;
 import org.geosdi.geoplatform.request.SearchRequest;
+import org.junit.Assert;
 import org.junit.runner.RunWith;
 import org.springframework.security.acls.domain.BasePermission;
 import org.springframework.test.context.ActiveProfiles;
@@ -116,6 +117,18 @@ abstract class BaseSoapServiceTest extends ServiceTest {
     protected void setUpOrganization() throws IllegalParameterFault {
         organizationTest = new GPOrganization(organizationNameTest);
         organizationTest.setId(gpWSClient.insertOrganization(organizationTest));
+    }
+
+    @Override
+    public void tearDown() {
+        try {
+            Assert.assertEquals(Boolean.TRUE, gpWSClient.deleteProject(
+                    idProjectTest));
+        } catch (Exception ex) {
+            logger.error("ERROR @@@@@@@@@@@@@@@@@@@@@@@@ " + ex);
+        }
+
+        super.tearDown();
     }
 
 }

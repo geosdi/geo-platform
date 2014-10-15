@@ -46,7 +46,10 @@ import org.geosdi.geoplatform.core.model.GPVectorLayer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.shared.GPLayerType;
+import org.geosdi.geoplatform.request.layer.WSAddLayerAndTreeModificationsRequest;
 import org.geosdi.geoplatform.request.layer.WSAddLayersAndTreeModificationsRequest;
+import org.geosdi.geoplatform.request.layer.WSDDLayerAndTreeModificationsRequest;
+import org.geosdi.geoplatform.request.layer.WSDeleteLayerAndTreeModificationsRequest;
 import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.ProjectDTO;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
@@ -290,8 +293,8 @@ public class WSLayerTest extends BaseSoapServiceTest {
 
         // Adding new layer to user's root folder B
         long idLayerToTest = gpWSClient.saveAddedLayerAndTreeModifications(
-                projectTest.getId(),
-                rootFolderB.getId(), layerToTest, descendantsMapData);
+                new WSAddLayerAndTreeModificationsRequest(projectTest.getId(),
+                        rootFolderB.getId(), layerToTest, descendantsMapData));
 
         Assert.assertEquals("totalElementsOfProject after added",
                 totalElementsOfProject + 1,
@@ -303,8 +306,9 @@ public class WSLayerTest extends BaseSoapServiceTest {
         // Removing layer from user's root
         map.clear();
         map.put(idRootFolderB, 2);
-        gpWSClient.saveDeletedLayerAndTreeModifications(idLayerToTest,
-                descendantsMapData);
+        gpWSClient.saveDeletedLayerAndTreeModifications(
+                new WSDeleteLayerAndTreeModificationsRequest(idLayerToTest,
+                        descendantsMapData));
 
         Assert.assertEquals("totalElementsOfProject after deleted",
                 totalElementsOfProject, gpWSClient.getNumberOfElementsProject(
@@ -323,7 +327,8 @@ public class WSLayerTest extends BaseSoapServiceTest {
 
         // Move vector 2 before raster 2 (oldPosition < new Position)
         boolean checkDD = gpWSClient.saveDragAndDropLayerAndTreeModifications(
-                idVector2, idRootFolderB, 2, descendantsMapData);
+                new WSDDLayerAndTreeModificationsRequest(idVector2,
+                        idRootFolderB, 2, descendantsMapData));
         Assert.assertTrue("Drag and Drop successful", checkDD);
 
         this.checkState(new int[]{6, 5, 4, 3, 1, 2}, new int[]{2, 2},
@@ -331,7 +336,8 @@ public class WSLayerTest extends BaseSoapServiceTest {
 
         // Move vector 2 after raster 2, in initial position (oldPosition > new Position)
         checkDD = gpWSClient.saveDragAndDropLayerAndTreeModifications(
-                idVector2, idRootFolderB, 1, descendantsMapData);
+                new WSDDLayerAndTreeModificationsRequest(idVector2,
+                        idRootFolderB, 1, descendantsMapData));
         Assert.assertTrue("Vector 2 doesn't moved to position 1", checkDD);
 
         this.checkInitialState("after DD II on same parent");
@@ -349,7 +355,8 @@ public class WSLayerTest extends BaseSoapServiceTest {
         map.put(idRootFolderB, 1);
         // Move vector 2 before vector 1 (oldPosition < new Position)
         boolean checkDD = gpWSClient.saveDragAndDropLayerAndTreeModifications(
-                idVector2, idRootFolderA, 4, descendantsMapData);
+                new WSDDLayerAndTreeModificationsRequest(idVector2,
+                        idRootFolderA, 4, descendantsMapData));
         Assert.assertTrue("Drag and Drop successful", checkDD);
 
         this.checkState(new int[]{6, 5, 3, 2, 1, 4}, new int[]{3, 1},
@@ -363,7 +370,8 @@ public class WSLayerTest extends BaseSoapServiceTest {
         map.put(idRootFolderB, 2);
         // Move vector 2 after raster 2, in initial position (oldPosition > new Position)
         checkDD = gpWSClient.saveDragAndDropLayerAndTreeModifications(
-                idVector2, idRootFolderB, 1, descendantsMapData);
+                new WSDDLayerAndTreeModificationsRequest(idVector2,
+                        idRootFolderB, 1, descendantsMapData));
         Assert.assertTrue("Vector 2 doesn't moved to position 1", checkDD);
 
         this.checkInitialState("after DD II on different parent");
@@ -381,8 +389,10 @@ public class WSLayerTest extends BaseSoapServiceTest {
             GPRasterLayer raster = new GPRasterLayer();
             super.createLayer(raster, rootFolderA, null, "", "",
                     5, spatialReferenceSystem, urlServer); // Title must be NOT NULL
-            gpWSClient.saveAddedLayerAndTreeModifications(projectTest.getId(),
-                    rootFolderA.getId(), raster, descendantsMapData);
+            gpWSClient.saveAddedLayerAndTreeModifications(
+                    new WSAddLayerAndTreeModificationsRequest(
+                            projectTest.getId(),
+                            rootFolderA.getId(), raster, descendantsMapData));
             Assert.fail("Add layer must fail because title value is null");
         } catch (Exception e) {
             this.checkInitialState("transaction test");
@@ -405,8 +415,10 @@ public class WSLayerTest extends BaseSoapServiceTest {
             GPRasterLayer raster = new GPRasterLayer();
             super.createLayer(raster, rootFolderA, null, "", "",
                     5, spatialReferenceSystem, urlServer); // Title must be NOT NULL
-            gpWSClient.saveAddedLayerAndTreeModifications(projectTest.getId(),
-                    rootFolderA.getId(), raster, descendantsMapData);
+            gpWSClient.saveAddedLayerAndTreeModifications(
+                    new WSAddLayerAndTreeModificationsRequest(
+                            projectTest.getId(),
+                            rootFolderA.getId(), raster, descendantsMapData));
             Assert.fail("Add layer must fail because title value is null");
         } catch (IllegalParameterFault e) {
             try {

@@ -1,37 +1,35 @@
 /**
  *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
+ * geo-platform Rich webgis framework http://geo-platform.org
+ * ====================================================================
  *
- *   Copyright (C) 2008-2014 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2014 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version. This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details. You should have received a copy of the GNU General Public License
+ * along with this program. If not, see http://www.gnu.org/licenses/
  *
- *   ====================================================================
+ * ====================================================================
  *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
+ * Linking this library statically or dynamically with other modules is making a
+ * combined work based on this library. Thus, the terms and conditions of the
+ * GNU General Public License cover the whole combination.
  *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * As a special exception, the copyright holders of this library give you
+ * permission to link this library with independent modules to produce an
+ * executable, regardless of the license terms of these independent modules, and
+ * to copy and distribute the resulting executable under terms of your choice,
+ * provided that you also meet, for each linked independent module, the terms
+ * and conditions of the license of that module. An independent module is a
+ * module which is not derived from or based on this library. If you modify this
+ * library, you may extend this exception to your version of the library, but
+ * you are not obligated to do so. If you do not wish to do so, delete this
+ * exception statement from your version.
  */
 package org.geosdi.geoplatform.gui.server.service.impl;
 
@@ -51,6 +49,7 @@ import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.SessionUtility;
 import org.geosdi.geoplatform.gui.server.service.IMapService;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
+import org.geosdi.geoplatform.request.viewport.ManageViewportRequest;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -85,7 +84,8 @@ public class MapService implements IMapService {
 //        return responce;
 //    }
     @Override
-    public void saveBaseLayer(String baseLayer, HttpServletRequest httpServletRequest) throws GeoPlatformException {
+    public void saveBaseLayer(String baseLayer,
+            HttpServletRequest httpServletRequest) throws GeoPlatformException {
         GPAccount account;
         Long projectID;
         try {
@@ -96,7 +96,8 @@ public class MapService implements IMapService {
         }
         try {
             GPAccountProject accountProject = this.geoPlatformServiceClient.
-                    getAccountProjectByAccountAndProjectIDs(account.getId(), projectID);
+                    getAccountProjectByAccountAndProjectIDs(account.getId(),
+                            projectID);
             accountProject.setBaseLayer(baseLayer);
             this.geoPlatformServiceClient.updateAccountProject(accountProject);
         } catch (ResourceNotFoundFault rnff) {
@@ -109,7 +110,8 @@ public class MapService implements IMapService {
     }
 
     @Override
-    public List<GPClientViewport> loadViewportElements(HttpServletRequest httpServletRequest) throws GeoPlatformException {
+    public List<GPClientViewport> loadViewportElements(
+            HttpServletRequest httpServletRequest) throws GeoPlatformException {
         GPAccount account;
         Long projectID;
         try {
@@ -122,8 +124,10 @@ public class MapService implements IMapService {
         ArrayList<GPViewport> viewportListElements = null;
         try {
             GPAccountProject accountProject = this.geoPlatformServiceClient
-                    .getAccountProjectByAccountAndProjectIDs(account.getId(), projectID);
-            viewportListElements = this.geoPlatformServiceClient.getAccountProjectViewports(accountProject.getId());
+                    .getAccountProjectByAccountAndProjectIDs(account.getId(),
+                            projectID);
+            viewportListElements = this.geoPlatformServiceClient.getAccountProjectViewports(
+                    accountProject.getId());
         } catch (ResourceNotFoundFault rnff) {
             logger.error("Error on MapService: " + rnff);
             throw new GeoPlatformException(rnff);
@@ -132,7 +136,8 @@ public class MapService implements IMapService {
     }
 
     @Override
-    public void replaceViewportList(List<GPClientViewport> viewportList, HttpServletRequest httpServletRequest) throws GeoPlatformException {
+    public void replaceViewportList(List<GPClientViewport> viewportList,
+            HttpServletRequest httpServletRequest) throws GeoPlatformException {
         GPAccount account;
         Long projectID;
         try {
@@ -143,19 +148,19 @@ public class MapService implements IMapService {
         }
         try {
             GPAccountProject accountProject = this.geoPlatformServiceClient.
-                    getAccountProjectByAccountAndProjectIDs(account.getId(), projectID);
-            this.geoPlatformServiceClient.replaceViewportList(accountProject.getId(),
-                    convertClientViewportToDTO(viewportList));
-        } catch (ResourceNotFoundFault rnff) {
+                    getAccountProjectByAccountAndProjectIDs(account.getId(),
+                            projectID);
+            this.geoPlatformServiceClient.replaceViewportList(
+                    new ManageViewportRequest(accountProject.getId(),
+                            convertClientViewportToDTO(viewportList)));
+        } catch (ResourceNotFoundFault | IllegalParameterFault rnff) {
             logger.error("Error on MapService: " + rnff);
             throw new GeoPlatformException(rnff);
-        } catch (IllegalParameterFault ipf) {
-            logger.error("Error on MapService: " + ipf);
-            throw new GeoPlatformException(ipf);
         }
     }
 
-    private List<GPClientViewport> convertServerViewportToDTO(ArrayList<GPViewport> viewportList) {
+    private List<GPClientViewport> convertServerViewportToDTO(
+            ArrayList<GPViewport> viewportList) {
         List<GPClientViewport> clientViewportList = Lists.<GPClientViewport>newArrayList();
         GPClientViewport clientViewport;
         GPBBox serverBBOX;
@@ -163,17 +168,20 @@ public class MapService implements IMapService {
         if (viewportList != null) {
             for (GPViewport viewport : viewportList) {
                 serverBBOX = viewport.getBbox();
-                clientBBOX = new BBoxClientInfo(serverBBOX.getMinX(), serverBBOX.getMinY(),
+                clientBBOX = new BBoxClientInfo(serverBBOX.getMinX(),
+                        serverBBOX.getMinY(),
                         serverBBOX.getMaxX(), serverBBOX.getMaxY());
                 clientViewport = new GPClientViewport(viewport.getName(),
-                        viewport.getDescription(), clientBBOX, viewport.getZoomLevel(), viewport.isIsDefault());
+                        viewport.getDescription(), clientBBOX,
+                        viewport.getZoomLevel(), viewport.isIsDefault());
                 clientViewportList.add(clientViewport);
             }
         }
         return clientViewportList;
     }
 
-    private ArrayList<GPViewport> convertClientViewportToDTO(List<GPClientViewport> viewportList) {
+    private ArrayList<GPViewport> convertClientViewportToDTO(
+            List<GPClientViewport> viewportList) {
         ArrayList<GPViewport> serverViewportList = Lists.<GPViewport>newArrayList();
         GPViewport serverViewport;
         GPBBox serverBBOX;
@@ -181,10 +189,13 @@ public class MapService implements IMapService {
         if (viewportList != null) {
             for (GPClientViewport viewport : viewportList) {
                 clientBBOX = viewport.getBbox();
-                serverBBOX = new GPBBox(clientBBOX.getLowerLeftX(), clientBBOX.getLowerLeftY(),
+                serverBBOX = new GPBBox(clientBBOX.getLowerLeftX(),
+                        clientBBOX.getLowerLeftY(),
                         clientBBOX.getUpperRightX(), clientBBOX.getUpperRightY());
-                serverViewport = new GPViewport(viewport.getName(), viewport.getDescription(),
-                        viewport.getZoomLevel(), serverBBOX, viewport.isDefault());
+                serverViewport = new GPViewport(viewport.getName(),
+                        viewport.getDescription(),
+                        viewport.getZoomLevel(), serverBBOX,
+                        viewport.isDefault());
                 serverViewportList.add(serverViewport);
             }
         }

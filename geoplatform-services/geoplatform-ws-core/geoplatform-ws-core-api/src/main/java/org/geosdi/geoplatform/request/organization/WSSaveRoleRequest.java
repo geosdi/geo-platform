@@ -33,60 +33,67 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.request;
+package org.geosdi.geoplatform.request.organization;
 
-import org.geosdi.geoplatform.request.folder.WSDeleteFolderAndTreeModifications;
-import org.geosdi.geoplatform.request.folder.WSAddFolderAndTreeModificationsRequest;
-import org.geosdi.geoplatform.request.folder.WSDDFolderAndTreeModifications;
 import java.io.Serializable;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlTransient;
-import org.geosdi.geoplatform.request.layer.WSAddLayerAndTreeModificationsRequest;
-import org.geosdi.geoplatform.request.layer.WSAddLayersAndTreeModificationsRequest;
-import org.geosdi.geoplatform.request.layer.WSDDLayerAndTreeModificationsRequest;
-import org.geosdi.geoplatform.request.layer.WSDeleteLayerAndTreeModificationsRequest;
-import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@XmlTransient
-@XmlSeeAlso(value = {WSAddFolderAndTreeModificationsRequest.class,
-    WSDeleteFolderAndTreeModifications.class,
-    WSDDFolderAndTreeModifications.class,
-    WSAddLayersAndTreeModificationsRequest.class,
-    WSAddLayerAndTreeModificationsRequest.class,
-    WSDeleteLayerAndTreeModificationsRequest.class,
-    WSDDLayerAndTreeModificationsRequest.class})
-public abstract class TreeModificationRequest implements Serializable {
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
+public class WSSaveRoleRequest implements Serializable {
 
-    private static final long serialVersionUID = -8088596700267312684L;
+    private static final long serialVersionUID = 4147572986463938067L;
     //
-    private GPWebServiceMapData descendantsMapData;
+    private String role;
+    private String organization;
 
-    public TreeModificationRequest() {
+    public WSSaveRoleRequest() {
     }
 
-    public TreeModificationRequest(
-            GPWebServiceMapData theDescendantsMapData) {
-        this.descendantsMapData = theDescendantsMapData;
-    }
-
-    /**
-     * @return the descendantsMapData
-     */
-    public GPWebServiceMapData getDescendantsMapData() {
-        return descendantsMapData;
+    public WSSaveRoleRequest(String theRole, String theOrganization) {
+        this.role = theRole;
+        this.organization = theOrganization;
     }
 
     /**
-     * @param descendantsMapData the descendantsMapData to set
+     * @return the role
      */
-    public void setDescendantsMapData(
-            GPWebServiceMapData descendantsMapData) {
-        this.descendantsMapData = descendantsMapData;
+    public String getRole() {
+        return role;
+    }
+
+    /**
+     * @param role the role to set
+     */
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    /**
+     * @return the organization
+     */
+    public String getOrganization() {
+        return organization;
+    }
+
+    /**
+     * @param organization the organization to set
+     */
+    public void setOrganization(String organization) {
+        this.organization = organization;
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + " {" + "role = " + role
+                + ", organization = " + organization + '}';
     }
 
 }

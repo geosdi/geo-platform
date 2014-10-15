@@ -1,37 +1,35 @@
 /**
  *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
+ * geo-platform Rich webgis framework http://geo-platform.org
+ * ====================================================================
  *
- *   Copyright (C) 2008-2014 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2014 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version. This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details. You should have received a copy of the GNU General Public License
+ * along with this program. If not, see http://www.gnu.org/licenses/
  *
- *   ====================================================================
+ * ====================================================================
  *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
+ * Linking this library statically or dynamically with other modules is making a
+ * combined work based on this library. Thus, the terms and conditions of the
+ * GNU General Public License cover the whole combination.
  *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * As a special exception, the copyright holders of this library give you
+ * permission to link this library with independent modules to produce an
+ * executable, regardless of the license terms of these independent modules, and
+ * to copy and distribute the resulting executable under terms of your choice,
+ * provided that you also meet, for each linked independent module, the terms
+ * and conditions of the license of that module. An independent module is a
+ * module which is not derived from or based on this library. If you modify this
+ * library, you may extend this exception to your version of the library, but
+ * you are not obligated to do so. If you do not wish to do so, delete this
+ * exception statement from your version.
  */
 package org.geosdi.geoplatform.gui.server.service.impl;
 
@@ -58,6 +56,7 @@ import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 import org.geosdi.geoplatform.request.LikePatternType;
 import org.geosdi.geoplatform.request.SearchRequest;
+import org.geosdi.geoplatform.request.project.SaveProjectRequest;
 import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.jasig.cas.client.util.AbstractCasFilter;
@@ -103,22 +102,26 @@ public class SecurityService implements ISecurityService {
     private UserService userService;
 
     @Override
-    public IGPAccountDetail userLogin(String username, String password, HttpServletRequest httpServletRequest)
+    public IGPAccountDetail userLogin(String username, String password,
+            HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
         GPUser user;
         try {
             user = geoPlatformServiceClient.getUserDetailByUsernameAndPassword(
                     username, password);
-            return this.executeLoginOnGPAccount(user, geoPlatformServiceClient.getAccountPermission(user.getId()),
+            return this.executeLoginOnGPAccount(user,
+                    geoPlatformServiceClient.getAccountPermission(user.getId()),
                     httpServletRequest);
         } catch (ResourceNotFoundFault ex) {
             logger.error("SecurityService",
                     "Unable to find user with username or email: " + username
                     + " Error: " + ex);
-            throw new GeoPlatformException("Unable to find user with username or email: "
+            throw new GeoPlatformException(
+                    "Unable to find user with username or email: "
                     + username);
         } catch (SOAPFaultException ex) {
-            logger.error("Error on SecurityService: " + ex + " password incorrect");
+            logger.error(
+                    "Error on SecurityService: " + ex + " password incorrect");
             throw new GeoPlatformException("Password incorrect");
         } catch (IllegalParameterFault ex) {
             logger.error("Error on SecurityService: " + ex);
@@ -131,22 +134,26 @@ public class SecurityService implements ISecurityService {
     }
 
     @Override
-    public XMPPLoginDetails xmppGetDataLogin(String userName, HttpServletRequest httpServletRequest)
+    public XMPPLoginDetails xmppGetDataLogin(String userName,
+            HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
         XMPPLoginDetails xMPPLoginDetails = null;
         if (userName != null) {
             GPUser user;
             try {
                 user = geoPlatformServiceClient.getUserDetailByUsername(
-                        new SearchRequest(userName, LikePatternType.CONTENT_EQUALS));
+                        new SearchRequest(userName,
+                                LikePatternType.CONTENT_EQUALS));
                 xMPPLoginDetails = new XMPPLoginDetails();
                 xMPPLoginDetails.setUsername(user.getUsername());
                 xMPPLoginDetails.setPassword(user.getPassword());
                 xMPPLoginDetails.setHostXmppServer(this.hostXmppServer);
             } catch (ResourceNotFoundFault ex) {
-                logger.error("SecurityService", "Unable to find user with username: "
+                logger.error("SecurityService",
+                        "Unable to find user with username: "
                         + userName + " Error: " + ex);
-                throw new GeoPlatformException("Unable to find user with username: "
+                throw new GeoPlatformException(
+                        "Unable to find user with username: "
                         + userName);
             }
         }
@@ -162,16 +169,21 @@ public class SecurityService implements ISecurityService {
         if (ivUser != null) {
             GPUser user;
             try {
-                user = geoPlatformServiceClient.getUserDetailByUsername(new SearchRequest(ivUser, LikePatternType.CONTENT_EQUALS));
+                user = geoPlatformServiceClient.getUserDetailByUsername(
+                        new SearchRequest(ivUser, LikePatternType.CONTENT_EQUALS));
                 accountDetail = this.executeLoginOnGPAccount(user,
-                        geoPlatformServiceClient.getAccountPermission(user.getId()), httpServletRequest);
+                        geoPlatformServiceClient.getAccountPermission(
+                                user.getId()), httpServletRequest);
             } catch (ResourceNotFoundFault ex) {
-                logger.error("SecurityService", "Unable to find user with username or email: " + ivUser
+                logger.error("SecurityService",
+                        "Unable to find user with username or email: " + ivUser
                         + " Error: " + ex);
-                throw new GeoPlatformException("Unable to find user with username or email: "
+                throw new GeoPlatformException(
+                        "Unable to find user with username or email: "
                         + ivUser);
             } catch (SOAPFaultException ex) {
-                logger.error("Error on SecurityService: " + ex + " password incorrect");
+                logger.error(
+                        "Error on SecurityService: " + ex + " password incorrect");
                 throw new GeoPlatformException("Password incorrect");
             }
         }
@@ -189,36 +201,48 @@ public class SecurityService implements ISecurityService {
             String casUserName = casAssertion.getPrincipal().getName();
             GPUser user;
             try {
-                user = geoPlatformServiceClient.getUserDetailByUsername(new SearchRequest(casUserName, LikePatternType.CONTENT_EQUALS));
+                user = geoPlatformServiceClient.getUserDetailByUsername(
+                        new SearchRequest(casUserName,
+                                LikePatternType.CONTENT_EQUALS));
                 geoPlatformServiceClient.getAccountPermission(user.getId());
                 accountDetail = this.executeLoginOnGPAccount(user,
-                        geoPlatformServiceClient.getAccountPermission(user.getId()), httpServletRequest);
+                        geoPlatformServiceClient.getAccountPermission(
+                                user.getId()), httpServletRequest);
             } catch (ResourceNotFoundFault ex) {
-                logger.info("SecurityService", "Unable to find user with username or email: " + casUserName
+                logger.info("SecurityService",
+                        "Unable to find user with username or email: " + casUserName
                         + " Error: " + ex);
-                accountDetail = this.createNewCASUser(casUserName, httpServletRequest);
+                accountDetail = this.createNewCASUser(casUserName,
+                        httpServletRequest);
             } catch (SOAPFaultException ex) {
-                logger.error("Error on SecurityService: " + ex + " password incorrect");
+                logger.error(
+                        "Error on SecurityService: " + ex + " password incorrect");
                 throw new GeoPlatformException("Password incorrect");
             }
         }
         return accountDetail;
     }
 
-    private IGPAccountDetail createNewCASUser(String casUserName, HttpServletRequest httpServletRequest) {
+    private IGPAccountDetail createNewCASUser(String casUserName,
+            HttpServletRequest httpServletRequest) {
         IGPUserManageDetail newCASAccount = this.fillNewCASAccount(casUserName);
-        logger.info("A new user from CAS login will be created with username: " + casUserName);
-        userService.insertUser(newCASAccount, this.casOrganization, httpServletRequest,
+        logger.info(
+                "A new user from CAS login will be created with username: " + casUserName);
+        userService.insertUser(newCASAccount, this.casOrganization,
+                httpServletRequest,
                 Boolean.FALSE);
         StringTokenizer tokenizer = new StringTokenizer(this.casAdminEmails, ";");
-        List<String> emailList = Lists.<String>newArrayListWithExpectedSize(tokenizer.countTokens());
+        List<String> emailList = Lists.<String>newArrayListWithExpectedSize(
+                tokenizer.countTokens());
         while (tokenizer.hasMoreElements()) {
             emailList.add(tokenizer.nextToken());
         }
         try {
-            geoPlatformServiceClient.sendCASNewUserNotification(emailList, casUserName);
+            geoPlatformServiceClient.sendCASNewUserNotification(emailList,
+                    casUserName);
         } catch (IllegalParameterFault ex) {
-            logger.error("SecurityService", "Unable to send email to: " + this.casAdminEmails
+            logger.error("SecurityService",
+                    "Unable to send email to: " + this.casAdminEmails
                     + " after new cas user creation. Error: " + ex);
         }
         return this.casLogin(httpServletRequest);
@@ -244,7 +268,8 @@ public class SecurityService implements ISecurityService {
             HttpServletRequest httpServletRequest)
             throws ResourceNotFoundFault, SOAPFaultException {
         System.out.println("Account id: " + account.getId());
-        GPAccountProject accountProject = geoPlatformServiceClient.getDefaultAccountProject(account.getId());
+        GPAccountProject accountProject = geoPlatformServiceClient.getDefaultAccountProject(
+                account.getId());
         System.out.println("Account project: ");
         System.out.println(accountProject);
         GPProject project;
@@ -256,12 +281,17 @@ public class SecurityService implements ISecurityService {
             project.setId(this.saveDefaultProject(account, project));
         } else {
             project = accountProject.getProject();
-            viewport = geoPlatformServiceClient.getDefaultViewport(accountProject.getId());
+            viewport = geoPlatformServiceClient.getDefaultViewport(
+                    accountProject.getId());
         }
-        this.sessionUtility.storeLoggedAccountAndDefaultProject(account, project.getId(), httpServletRequest);
-        List<GPMessage> unreadMessages = geoPlatformServiceClient.getUnreadMessagesByRecipient(account.getId());
-        IGPAccountDetail userDetail = this.dtoConverter.convertAccountToDTO(account, accountProject, viewport, unreadMessages);
-        userDetail.setComponentPermission(guiComponentPermission.getPermissionMap());
+        this.sessionUtility.storeLoggedAccountAndDefaultProject(account,
+                project.getId(), httpServletRequest);
+        List<GPMessage> unreadMessages = geoPlatformServiceClient.getUnreadMessagesByRecipient(
+                account.getId());
+        IGPAccountDetail userDetail = this.dtoConverter.convertAccountToDTO(
+                account, accountProject, viewport, unreadMessages);
+        userDetail.setComponentPermission(
+                guiComponentPermission.getPermissionMap());
         return userDetail;
     }
 
@@ -273,13 +303,15 @@ public class SecurityService implements ISecurityService {
         try {
             application = geoPlatformServiceClient.getApplication(appID);
             return this.executeLoginOnGPAccount(application,
-                    geoPlatformServiceClient.getApplicationPermission(application.getAppID()),
+                    geoPlatformServiceClient.getApplicationPermission(
+                            application.getAppID()),
                     httpServletRequest);
         } catch (ResourceNotFoundFault ex) {
             logger.error("SecurityService",
                     "Unable to find application with appID: " + appID
                     + " Error: " + ex);
-            throw new GeoPlatformException("Unable to find application with appID: "
+            throw new GeoPlatformException(
+                    "Unable to find application with appID: "
                     + appID);
         } catch (AccountLoginFault ex) {
             logger.error("Error on SecurityService: " + ex);
@@ -288,7 +320,8 @@ public class SecurityService implements ISecurityService {
         }
     }
 
-    public GPAccount loginFromSessionServer(HttpServletRequest httpServletRequest)
+    public GPAccount loginFromSessionServer(
+            HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
         GPAccount account = null;
         try {
@@ -320,8 +353,8 @@ public class SecurityService implements ISecurityService {
         Long idProject = null;
         try {
             idProject = this.geoPlatformServiceClient.saveProject(
-                    account.getNaturalID(),
-                    project, true);
+                    new SaveProjectRequest(account.getNaturalID(),
+                            project, Boolean.TRUE));
         } catch (ResourceNotFoundFault rnf) {
             this.logger.error(
                     "Failed to save project on SecurityService: " + rnf);

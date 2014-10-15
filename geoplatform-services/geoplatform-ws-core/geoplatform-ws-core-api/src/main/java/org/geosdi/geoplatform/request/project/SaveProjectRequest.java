@@ -33,60 +33,88 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.request;
+package org.geosdi.geoplatform.request.project;
 
-import org.geosdi.geoplatform.request.folder.WSDeleteFolderAndTreeModifications;
-import org.geosdi.geoplatform.request.folder.WSAddFolderAndTreeModificationsRequest;
-import org.geosdi.geoplatform.request.folder.WSDDFolderAndTreeModifications;
 import java.io.Serializable;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlTransient;
-import org.geosdi.geoplatform.request.layer.WSAddLayerAndTreeModificationsRequest;
-import org.geosdi.geoplatform.request.layer.WSAddLayersAndTreeModificationsRequest;
-import org.geosdi.geoplatform.request.layer.WSDDLayerAndTreeModificationsRequest;
-import org.geosdi.geoplatform.request.layer.WSDeleteLayerAndTreeModificationsRequest;
-import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import org.geosdi.geoplatform.core.model.GPProject;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@XmlTransient
-@XmlSeeAlso(value = {WSAddFolderAndTreeModificationsRequest.class,
-    WSDeleteFolderAndTreeModifications.class,
-    WSDDFolderAndTreeModifications.class,
-    WSAddLayersAndTreeModificationsRequest.class,
-    WSAddLayerAndTreeModificationsRequest.class,
-    WSDeleteLayerAndTreeModificationsRequest.class,
-    WSDDLayerAndTreeModificationsRequest.class})
-public abstract class TreeModificationRequest implements Serializable {
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
+public class SaveProjectRequest implements Serializable {
 
-    private static final long serialVersionUID = -8088596700267312684L;
+    private static final long serialVersionUID = 7865892877630380192L;
     //
-    private GPWebServiceMapData descendantsMapData;
+    private String accountNaturalID;
+    private GPProject project;
+    private boolean defaultProject;
 
-    public TreeModificationRequest() {
+    /**
+     * Only FOR JAXB
+     */
+    public SaveProjectRequest() {
     }
 
-    public TreeModificationRequest(
-            GPWebServiceMapData theDescendantsMapData) {
-        this.descendantsMapData = theDescendantsMapData;
+    public SaveProjectRequest(String theAccountNaturalID, GPProject theProject,
+            boolean theDefaultProject) {
+        this.accountNaturalID = theAccountNaturalID;
+        this.project = theProject;
+        this.defaultProject = theDefaultProject;
     }
 
     /**
-     * @return the descendantsMapData
+     * @return the accountNaturalID
      */
-    public GPWebServiceMapData getDescendantsMapData() {
-        return descendantsMapData;
+    public String getAccountNaturalID() {
+        return accountNaturalID;
     }
 
     /**
-     * @param descendantsMapData the descendantsMapData to set
+     * @param accountNaturalID the accountNaturalID to set
      */
-    public void setDescendantsMapData(
-            GPWebServiceMapData descendantsMapData) {
-        this.descendantsMapData = descendantsMapData;
+    public void setAccountNaturalID(String accountNaturalID) {
+        this.accountNaturalID = accountNaturalID;
     }
 
+    /**
+     * @return the project
+     */
+    public GPProject getProject() {
+        return project;
+    }
+
+    /**
+     * @param project the project to set
+     */
+    public void setProject(GPProject project) {
+        this.project = project;
+    }
+
+    /**
+     * @return the defaultProject
+     */
+    public boolean isDefaultProject() {
+        return defaultProject;
+    }
+
+    /**
+     * @param defaultProject the defaultProject to set
+     */
+    public void setDefaultProject(boolean defaultProject) {
+        this.defaultProject = defaultProject;
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + " {" + "accountNaturalID = "
+                + accountNaturalID + ", project = " + project
+                + ", defaultProject = " + defaultProject + '}';
+    }
 }

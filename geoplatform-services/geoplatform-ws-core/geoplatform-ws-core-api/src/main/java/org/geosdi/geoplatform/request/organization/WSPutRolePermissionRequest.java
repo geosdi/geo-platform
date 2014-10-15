@@ -33,60 +33,50 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.request;
+package org.geosdi.geoplatform.request.organization;
 
-import org.geosdi.geoplatform.request.folder.WSDeleteFolderAndTreeModifications;
-import org.geosdi.geoplatform.request.folder.WSAddFolderAndTreeModificationsRequest;
-import org.geosdi.geoplatform.request.folder.WSDDFolderAndTreeModifications;
-import java.io.Serializable;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlTransient;
-import org.geosdi.geoplatform.request.layer.WSAddLayerAndTreeModificationsRequest;
-import org.geosdi.geoplatform.request.layer.WSAddLayersAndTreeModificationsRequest;
-import org.geosdi.geoplatform.request.layer.WSDDLayerAndTreeModificationsRequest;
-import org.geosdi.geoplatform.request.layer.WSDeleteLayerAndTreeModificationsRequest;
-import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
+import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@XmlTransient
-@XmlSeeAlso(value = {WSAddFolderAndTreeModificationsRequest.class,
-    WSDeleteFolderAndTreeModifications.class,
-    WSDDFolderAndTreeModifications.class,
-    WSAddLayersAndTreeModificationsRequest.class,
-    WSAddLayerAndTreeModificationsRequest.class,
-    WSDeleteLayerAndTreeModificationsRequest.class,
-    WSDDLayerAndTreeModificationsRequest.class})
-public abstract class TreeModificationRequest implements Serializable {
+public class WSPutRolePermissionRequest extends WSSaveRoleRequest {
 
-    private static final long serialVersionUID = -8088596700267312684L;
+    private static final long serialVersionUID = -8328323040237186701L;
     //
-    private GPWebServiceMapData descendantsMapData;
+    private GuiComponentsPermissionMapData mapComponentPermission;
 
-    public TreeModificationRequest() {
+    public WSPutRolePermissionRequest() {
     }
 
-    public TreeModificationRequest(
-            GPWebServiceMapData theDescendantsMapData) {
-        this.descendantsMapData = theDescendantsMapData;
-    }
-
-    /**
-     * @return the descendantsMapData
-     */
-    public GPWebServiceMapData getDescendantsMapData() {
-        return descendantsMapData;
+    public WSPutRolePermissionRequest(
+            GuiComponentsPermissionMapData mapComponentPermission,
+            String theRole, String theOrganization) {
+        super(theRole, theOrganization);
+        this.mapComponentPermission = mapComponentPermission;
     }
 
     /**
-     * @param descendantsMapData the descendantsMapData to set
+     * @return the mapComponentPermission
      */
-    public void setDescendantsMapData(
-            GPWebServiceMapData descendantsMapData) {
-        this.descendantsMapData = descendantsMapData;
+    public GuiComponentsPermissionMapData getMapComponentPermission() {
+        return mapComponentPermission;
+    }
+
+    /**
+     * @param theMapComponentPermission the mapComponentPermission to set
+     */
+    public void setMapComponentPermission(
+            GuiComponentsPermissionMapData theMapComponentPermission) {
+        this.mapComponentPermission = theMapComponentPermission;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + " {" + "mapComponentPermission = "
+                + mapComponentPermission + '}';
     }
 
 }

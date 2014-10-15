@@ -76,6 +76,9 @@ import org.geosdi.geoplatform.request.folder.WSAddFolderAndTreeModificationsRequ
 import org.geosdi.geoplatform.request.folder.WSDeleteFolderAndTreeModifications;
 import org.geosdi.geoplatform.request.folder.WSDDFolderAndTreeModifications;
 import org.geosdi.geoplatform.request.SearchRequest;
+import org.geosdi.geoplatform.request.layer.WSDDLayerAndTreeModificationsRequest;
+import org.geosdi.geoplatform.request.layer.WSDeleteLayerAndTreeModificationsRequest;
+import org.geosdi.geoplatform.request.project.SaveProjectRequest;
 import org.geosdi.geoplatform.responce.AccountProjectPropertiesDTO;
 import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.LayerAttribute;
@@ -415,7 +418,8 @@ public class LayerService implements ILayerService {
         boolean result = false;
         try {
             result = this.geoPlatformServiceClient.saveDeletedLayerAndTreeModifications(
-                    memento.getIdBaseElement(), map);
+                    new WSDeleteLayerAndTreeModificationsRequest(
+                            memento.getIdBaseElement(), map));
         } catch (ResourceNotFoundFault ex) {
             this.logger.error("Failed to delete layer on LayerService: " + ex);
             throw new GeoPlatformException(ex);
@@ -437,8 +441,9 @@ public class LayerService implements ILayerService {
         }
         try {
             result = this.geoPlatformServiceClient.saveDragAndDropLayerAndTreeModifications(
-                    memento.getIdBaseElement(), memento.getIdNewParent(),
-                    memento.getNewZIndex(), map);
+                    new WSDDLayerAndTreeModificationsRequest(
+                            memento.getIdBaseElement(), memento.getIdNewParent(),
+                            memento.getNewZIndex(), map));
         } catch (ResourceNotFoundFault ex) {
             this.logger.error(
                     "Failed to save layer drag&drop on LayerService: " + ex);
@@ -680,9 +685,9 @@ public class LayerService implements ILayerService {
             GPAccount account = this.sessionUtility.getLoggedAccount(
                     httpServletRequest);
             projectId = this.geoPlatformServiceClient.saveProject(
-                    account.getNaturalID(),
-                    this.dtoLayerConverter.convertToGProject(project),
-                    project.isDefaultProject());
+                    new SaveProjectRequest(account.getNaturalID(),
+                            this.dtoLayerConverter.convertToGProject(project),
+                            project.isDefaultProject()));
 
             this.sessionUtility.storeLoggedAccountAndDefaultProject(account,
                     projectId, httpServletRequest);

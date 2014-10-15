@@ -37,8 +37,6 @@ package org.geosdi.geoplatform.support.cxf.rs.provider;
 
 import org.geosdi.geoplatform.support.cxf.rs.provider.configurator.GPRestProviderType;
 import org.geosdi.geoplatform.support.cxf.rs.provider.factory.GPRestProviderFactory;
-import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;

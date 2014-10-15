@@ -820,9 +820,55 @@ public class RSProjectTest extends BasicRestServiceTest {
                 idAccountProject);
 
         Assert.assertEquals(Boolean.TRUE, accountProject.isDefaultProject());
-        
-        Assert.assertEquals(Boolean.TRUE, gpWSClient.deleteAccountProject(
-                idAccountProject));
+        Assert.assertEquals(Boolean.TRUE, gpWSClient.deleteAccount(idUser));
+    }
+
+    @Test
+    public void retrieveAccountProjectsTestRest() throws Exception {
+        String username = "first-user-rs";
+        Long idUser = super.createAndInsertUser(username,
+                organizationTest, GPRole.ADMIN, GPRole.VIEWER);
+
+        GPUser user = gpWSClient.getUserDetail(idUser);
+
+        String username1 = "second-user-rs";
+        Long idUser1 = super.createAndInsertUser(username1,
+                organizationTest, GPRole.ADMIN);
+
+        GPUser user1 = gpWSClient.getUserDetail(idUser1);
+
+        long idProject = super.createAndInsertProject("first_project_test_rs",
+                false, 116, new Date(System.currentTimeMillis()));
+
+        GPProject project = gpWSClient.getProjectDetail(idProject);
+
+        long idProject1 = super.createAndInsertProject("second_project_test_rs",
+                false, 11, new Date(System.currentTimeMillis()));
+
+        GPProject project1 = gpWSClient.getProjectDetail(idProject1);
+
+        super.createAndInsertAccountProject(user,
+                project, BasePermission.ADMINISTRATION);
+
+        super.createAndInsertAccountProject(user1,
+                project, BasePermission.ADMINISTRATION);
+
+        super.createAndInsertAccountProject(user,
+                project1, BasePermission.ADMINISTRATION);
+
+        Assert.assertEquals(2, gpWSClient.getAccountProjectsByProjectID(
+                idProject).size());
+
+        Assert.assertEquals(116,
+                gpWSClient.getAccountProjectByAccountAndProjectIDs(idUser,
+                        idProject).getProject().getNumberOfElements());
+
+        Assert.assertEquals(2, gpWSClient.getAccountProjectsCount(idUser,
+                null).intValue());
+
+        Assert.assertEquals(Boolean.TRUE, gpWSClient.deleteAccount(idUser));
+        Assert.assertEquals(Boolean.TRUE, gpWSClient.deleteAccount(
+                idUser1));
     }
 
     private void assertLayerRest(String msg, GPLayer layer,

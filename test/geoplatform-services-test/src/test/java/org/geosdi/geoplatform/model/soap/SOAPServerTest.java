@@ -36,7 +36,6 @@ package org.geosdi.geoplatform.model.soap;
 import java.util.Collection;
 import org.geosdi.geoplatform.core.model.GPCapabilityType;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
-import org.geosdi.geoplatform.core.model.GPOrganization;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.server.WSSaveServerRequest;
@@ -48,18 +47,7 @@ import org.junit.Test;
  * @author Francesco Izzi - CNR IMAA - geoSDI
  *
  */
-public class CXFServiceTest extends BaseSoapServiceTest {
-
-//    private GeoPlatformWSClientEncrypted gpWSClientEncrypted;
-    // Servers
-    private final String serverUrlTest = "http://map.serverNameTest.foo";
-    private long idServerTest = -1;
-    private final String serverUrlGeoSDI = "http://imaa.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities";
-    private long idServerGeoSDI = -1;
-//    private final String serverUrlTelespazio = "http://maps.telespazio.it/dpc/dpc-wms?service=wms&version=1.1.1&request=GetCapabilities";
-//    private long idServerTelespazio = -1;
-//    private GPOrganization organizationTest;
-//    private long idOrganizationTest;
+public class SOAPServerTest extends BaseSoapServiceTest {
 
     @Override
     public void setUp() throws Exception {
@@ -175,54 +163,5 @@ public class CXFServiceTest extends BaseSoapServiceTest {
                 serverEx.getId());
         // Delete server
         gpWSClient.deleteServer(serverEx.getId());
-    }
-
-    /**
-     * Create and insert (with assert) a Server.
-     */
-    private long createAndInsertServer(String serverUrl,
-            GPCapabilityType serverType, GPOrganization organization) {
-        GeoPlatformServer server = this.createServer(serverUrl, serverType,
-                organization);
-        logger.debug("\n*** GeoPlatformServer to INSERT:\n{}\n***", server);
-        long idServer = gpWSClient.insertServer(server);
-        logger.debug("\n*** Id ASSIGNED at the Server in the DB: {} ***",
-                idServer);
-        Assert.assertTrue("Id ASSIGNED at the Server in the DB", idServer > 0);
-        return idServer;
-    }
-
-    private GeoPlatformServer createServer(String serverUrl,
-            GPCapabilityType serverType, GPOrganization organization) {
-        // Create field's value from Regex on Server URL
-        String serverName = serverUrl.replaceAll(
-                "http://(\\w+)\\.([^\\.]+)\\.(\\w+)", "$1.$2.$3");
-        logger.trace("\n*** serverName: {} ***", serverName);
-        String labelServer = serverName.replaceAll("(\\w+)\\.([^\\.]+)\\.(\\w+)",
-                "$2");
-        logger.trace("\n*** labelServer: {} ***", labelServer);
-        // Create Server
-        GeoPlatformServer server = new GeoPlatformServer();
-        server.setServerUrl(serverUrl);
-        server.setName(serverName);
-        server.setTitle(labelServer);
-        server.setAbstractServer("Abstract of " + labelServer);
-        server.setServerType(serverType);
-        server.setOrganization(organization);
-        return server;
-    }
-
-    /**
-     * Delete (with assert) a Server.
-     */
-    private void deleteServer(long idServer) {
-        try {
-            boolean check = gpWSClient.deleteServer(idServer);
-            Assert.assertTrue(
-                    "Server with id = " + idServer + " has not been eliminated",
-                    check);
-        } catch (Exception e) {
-            Assert.fail("Error while deleting Server with Id: " + idServer);
-        }
     }
 }

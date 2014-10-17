@@ -41,6 +41,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import javax.ws.rs.InternalServerErrorException;
+import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPLayerInfo;
 import org.geosdi.geoplatform.core.model.GPRasterLayer;
@@ -299,6 +300,18 @@ public class RSLayerTest extends BasicRestServiceTest {
         long idLayerToTest = gpWSClient.saveAddedLayerAndTreeModifications(
                 new WSAddLayerAndTreeModificationsRequest(projectTest.getId(),
                         rootFolderB.getId(), layerToTest, descendantsMapData));
+
+        GPBBox bbox = gpWSClient.getBBox(idLayerToTest);
+        logger.debug("\n@@@@@@@@@@@@@@@@@@@@@@@@ LAYER_BBOX : {}@@@@@@@@"
+                + "@@@@@@@\n", bbox);
+
+        GPLayerInfo li = gpWSClient.getLayerInfo(idLayerToTest);
+        logger.debug("\n@@@@@@@@@@@@@@@@@@@@@@@ LAYER_INFO : {}@@@@@@@@@"
+                + "@@@@@@@\n", li);
+        
+        GPLayerType layerType = gpWSClient.getLayerType(idLayerToTest);
+        logger.debug("\n@@@@@@@@@@@@@@@@@@@@@@@ LAYER_TYPE : {}@@@@@@@@@"
+                + "@@@@@@@\n", layerType);
 
         Assert.assertEquals("totalElementsOfProject after added",
                 totalElementsOfProject + 1,

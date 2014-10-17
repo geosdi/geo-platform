@@ -40,6 +40,7 @@ import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPAccountProject;
 import org.geosdi.geoplatform.core.model.GPAuthority;
 import org.geosdi.geoplatform.core.model.GPBBox;
+import org.geosdi.geoplatform.core.model.GPCapabilityType;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPLayerInfo;
@@ -48,6 +49,7 @@ import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.core.model.GPRasterLayer;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.core.model.GPVectorLayer;
+import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.shared.GPLayerType;
@@ -80,6 +82,11 @@ public abstract class ServiceTest {
     //
     protected List<String> layerInfoKeywords;
     protected long idUserTest = -1;
+    //
+    protected final String serverUrlTest = "http://map.serverNameTest.foo";
+    protected long idServerTest = -1;
+    protected final String serverUrlGeoSDI = "http://imaa.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities";
+    protected long idServerGeoSDI = -1;
 
     /**
      * The listener will inject this dependency.
@@ -309,8 +316,8 @@ public abstract class ServiceTest {
     }
 
     protected void createLayer(GPLayer layer, GPFolder folder, String title,
-            String name,
-            String abstractText, int position, String srs, String urlServer) {
+            String name, String abstractText, int position, String srs,
+            String urlServer) {
         layer.setFolder(folder);
         layer.setProject(folder.getProject());
 
@@ -326,98 +333,66 @@ public abstract class ServiceTest {
     }
 
     protected void insertMassiveUsers(String suffix) throws Exception {
-        String userName1 = "user1" + suffix;
-        String userName2 = "user2" + suffix;
-        String userName3 = "user3" + suffix;
-        String userName4 = "user4" + suffix;
-        String userName5 = "user5" + suffix;
-        String userName6 = "user6" + suffix;
-        String userName7 = "user7" + suffix;
-        String userName8 = "user8" + suffix;
-        String userName9 = "user9" + suffix;
-        String userName10 = "user10" + suffix;
-        String userName11 = "user11" + suffix;
-        String userName12 = "user12" + suffix;
-        String userName13 = "user13" + suffix;
-        String userName14 = "user14" + suffix;
-        String userName15 = "user15" + suffix;
-        String userName16 = "user16" + suffix;
-        String userName17 = "user17" + suffix;
-        String userName18 = "user18" + suffix;
-        String userName19 = "user19" + suffix;
-        String userName20 = "user20" + suffix;
-        String userName21 = "user21" + suffix;
-        String userName22 = "user22" + suffix;
-        String userName23 = "user23" + suffix;
-        String userName24 = "user24" + suffix;
-        String userName25 = "user25" + suffix;
-        String userName26 = "user26" + suffix;
-        String userName27 = "user27" + suffix;
-        String userName28 = "user28" + suffix;
-        String userName29 = "user29" + suffix;
-        String userName30 = "user30" + suffix;
+        for (int i = 0; i < 30; i++) {
+            createAndInsertUser("user" + i + "-" + suffix, organizationTest,
+                    GPRole.VIEWER);
+        }
+    }
 
-        createAndInsertUser(userName1,
-                organizationTest, GPRole.VIEWER);
-        createAndInsertUser(userName2,
-                organizationTest, GPRole.VIEWER);
-        createAndInsertUser(userName3,
-                organizationTest, GPRole.VIEWER);
-        createAndInsertUser(userName4,
-                organizationTest, GPRole.VIEWER);
-        createAndInsertUser(userName5,
-                organizationTest, GPRole.VIEWER);
-        createAndInsertUser(userName6,
-                organizationTest, GPRole.VIEWER);
-        createAndInsertUser(userName7,
-                organizationTest, GPRole.VIEWER);
-        createAndInsertUser(userName8,
-                organizationTest, GPRole.VIEWER);
-        createAndInsertUser(userName9,
-                organizationTest, GPRole.VIEWER);
-        createAndInsertUser(userName10,
-                organizationTest, GPRole.VIEWER);
+    /**
+     * Create and insert (with assert) a Server.
+     *
+     * @param serverUrl
+     * @param serverType
+     * @param organization
+     *
+     * @return serverID
+     */
+    protected long createAndInsertServer(String serverUrl,
+            GPCapabilityType serverType, GPOrganization organization) {
+        GeoPlatformServer server = this.createServer(serverUrl, serverType,
+                organization);
+        logger.debug("\n*** GeoPlatformServer to INSERT:\n{}\n***", server);
+        long idServer = gpWSClient.insertServer(server);
+        logger.debug("\n*** Id ASSIGNED at the Server in the DB: {} ***",
+                idServer);
+        Assert.assertTrue("Id ASSIGNED at the Server in the DB", idServer > 0);
+        return idServer;
+    }
 
-        createAndInsertUser(userName11,
-                organizationTest, GPRole.VIEWER);
-        createAndInsertUser(userName12,
-                organizationTest, GPRole.VIEWER);
-        createAndInsertUser(userName13,
-                organizationTest, GPRole.VIEWER);
-        createAndInsertUser(userName14,
-                organizationTest, GPRole.VIEWER);
-        createAndInsertUser(userName15,
-                organizationTest, GPRole.VIEWER);
-        createAndInsertUser(userName16,
-                organizationTest, GPRole.VIEWER);
-        createAndInsertUser(userName17,
-                organizationTest, GPRole.VIEWER);
-        createAndInsertUser(userName18,
-                organizationTest, GPRole.VIEWER);
-        createAndInsertUser(userName19,
-                organizationTest, GPRole.VIEWER);
-        createAndInsertUser(userName20,
-                organizationTest, GPRole.VIEWER);
+    protected GeoPlatformServer createServer(String serverUrl,
+            GPCapabilityType serverType, GPOrganization organization) {
+        // Create field's value from Regex on Server URL
+        String serverName = serverUrl.replaceAll(
+                "http://(\\w+)\\.([^\\.]+)\\.(\\w+)", "$1.$2.$3");
+        logger.trace("\n*** serverName: {} ***", serverName);
+        String labelServer = serverName.replaceAll("(\\w+)\\.([^\\.]+)\\.(\\w+)",
+                "$2");
+        logger.trace("\n*** labelServer: {} ***", labelServer);
+        // Create Server
+        GeoPlatformServer server = new GeoPlatformServer();
+        server.setServerUrl(serverUrl);
+        server.setName(serverName);
+        server.setTitle(labelServer);
+        server.setAbstractServer("Abstract of " + labelServer);
+        server.setServerType(serverType);
+        server.setOrganization(organization);
+        return server;
+    }
 
-        createAndInsertUser(userName21,
-                organizationTest, GPRole.VIEWER);
-        createAndInsertUser(userName22,
-                organizationTest, GPRole.VIEWER);
-        createAndInsertUser(userName23,
-                organizationTest, GPRole.VIEWER);
-        createAndInsertUser(userName24,
-                organizationTest, GPRole.VIEWER);
-        createAndInsertUser(userName25,
-                organizationTest, GPRole.VIEWER);
-        createAndInsertUser(userName26,
-                organizationTest, GPRole.VIEWER);
-        createAndInsertUser(userName27,
-                organizationTest, GPRole.VIEWER);
-        createAndInsertUser(userName28,
-                organizationTest, GPRole.VIEWER);
-        createAndInsertUser(userName29,
-                organizationTest, GPRole.VIEWER);
-        createAndInsertUser(userName30,
-                organizationTest, GPRole.VIEWER);
+    /**
+     * Delete (with assert) a Server.
+     *
+     * @param idServer
+     */
+    protected void deleteServer(long idServer) {
+        try {
+            boolean check = gpWSClient.deleteServer(idServer);
+            Assert.assertTrue(
+                    "Server with id = " + idServer + " has not been eliminated",
+                    check);
+        } catch (Exception e) {
+            Assert.fail("Error while deleting Server with Id: " + idServer);
+        }
     }
 }

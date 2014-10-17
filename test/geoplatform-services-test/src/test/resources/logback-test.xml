@@ -65,15 +65,8 @@
     </root>
     
     <!-- Tests -->
-    <logger name="org.geosdi.geoplatform.model.ServiceTest" level="trace"/>
-    
-    <logger name="org.geosdi.geoplatform.model.soap.CXFServiceTest" level="info"/>
-    <logger name="org.geosdi.geoplatform.model.soap.WSLayerTest" level="info"/>
-    <logger name="org.geosdi.geoplatform.model.soap.WSFolderTest" level="info"/>
-    <logger name="org.geosdi.geoplatform.model.soap.WSProjectTest" level="info"/>
-    <logger name="org.geosdi.geoplatform.model.soap.WSAccountTest" level="info"/>
-    
-    <logger name="org.geosdi.geoplatform.catalog.csw.CSWCatalogTest" level="info"/>
+    <logger name="org.geosdi.geoplatform.model.ServiceTest" level="debug"/>
+    <logger name="org.geosdi.geoplatform.model.rest.RSServerTest" level="debug"/>
 
     <!-- Services -->
     <logger name="org.geosdi.geoplatform.services.AclServiceImpl" level="info"/>

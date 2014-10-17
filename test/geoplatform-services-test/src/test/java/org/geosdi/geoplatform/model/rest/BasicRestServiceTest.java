@@ -124,12 +124,15 @@ abstract class BasicRestServiceTest extends ServiceTest {
     @Override
     public void tearDown() {
         try {
-            Assert.assertEquals(Boolean.TRUE, gpWSClient.deleteProject(
-                    idProjectTest));
+            if (idProjectTest != -1) {
+                Assert.assertEquals(Boolean.TRUE, gpWSClient.deleteProject(
+                        idProjectTest));
+            }
         } catch (Exception ex) {
-            logger.error("\n@@@@@@@@@@@@@@@@@ERROR@@@@@@@@@@@@@@@@@@@@@@@@ " + ex);
+            logger.error(
+                    "\n@@@@@@@@@@@@@@@@@ERROR@@@@@@@@@@@@@@@@@@@@@@@@ " + ex);
         }
-        
+
         super.tearDown();
     }
 

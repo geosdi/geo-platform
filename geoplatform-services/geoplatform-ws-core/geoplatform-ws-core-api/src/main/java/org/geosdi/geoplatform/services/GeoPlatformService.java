@@ -959,7 +959,8 @@ public interface GeoPlatformService {
     @Put
     @PUT
     @Path(value = GPServiceRSPathConfig.SET_PROJECT_SHARED_PATH)
-    void setProjectShared(@WebParam(name = "projectID") Long projectID)
+    void setProjectShared(@WebParam(name = "projectID")
+            @QueryParam(value = "projectID") Long projectID)
             throws ResourceNotFoundFault;
 
     // </editor-fold>

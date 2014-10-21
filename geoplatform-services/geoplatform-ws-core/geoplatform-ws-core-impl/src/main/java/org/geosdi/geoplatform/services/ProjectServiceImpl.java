@@ -598,8 +598,12 @@ class ProjectServiceImpl {
 
         String projectName = accountProjectProperties.getProjectName();
         EntityCorrectness.ckeckString(projectName, "project name"); // TODO assert
+        Integer version = accountProjectProperties.getProjectVersion();
+        EntityCorrectness.checkInteger(version, "version");
         project.setName(projectName);
+        project.setVersion(version);
         project.setShared(accountProjectProperties.isShared());
+        
         projectDao.merge(project);
 
         if (accountProjectProperties.isDefaultProject()) {

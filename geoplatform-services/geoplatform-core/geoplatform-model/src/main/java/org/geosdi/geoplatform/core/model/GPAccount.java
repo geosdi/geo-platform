@@ -42,6 +42,8 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlTransient;
 import org.hibernate.annotations.OnDelete;
@@ -227,6 +229,8 @@ public abstract class GPAccount implements Serializable {
     /**
      * @return the gpAuthorities
      */
+    @XmlElementWrapper(name = "authorities")
+    @XmlElement(name = "authority")
     public List<GPAuthority> getGPAuthorities() {
         return authorities;
     }

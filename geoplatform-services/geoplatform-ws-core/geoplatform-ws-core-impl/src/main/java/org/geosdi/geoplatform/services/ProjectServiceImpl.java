@@ -67,6 +67,7 @@ import org.geosdi.geoplatform.responce.RasterLayerDTO;
 import org.geosdi.geoplatform.responce.ShortAccountDTOContainer;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.geosdi.geoplatform.responce.VectorLayerDTO;
+import org.geosdi.geoplatform.responce.WSGetAccountProjectsResponse;
 import org.geosdi.geoplatform.responce.factory.AccountDTOFactory;
 import org.geosdi.geoplatform.services.development.EntityCorrectness;
 import org.slf4j.Logger;
@@ -150,14 +151,14 @@ class ProjectServiceImpl {
      */
     public Long saveProject(SaveProjectRequest saveProjectRequest)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        if(saveProjectRequest == null) {
+        if (saveProjectRequest == null) {
             throw new IllegalParameterFault("The SaveProjetRequest must not "
                     + "be null.");
         }
         String accountNaturalID = saveProjectRequest.getAccountNaturalID();
         GPProject project = saveProjectRequest.getProject();
         boolean defaultProject = saveProjectRequest.isDefaultProject();
-        
+
         EntityCorrectness.checkProject(project); // TODO assert
 
         GPAccount account = accountDao.findByNaturalID(accountNaturalID);
@@ -419,7 +420,6 @@ class ProjectServiceImpl {
 //        GPAccountProject orig = this.getAccountProjectByID(
 //                accountProject.getId());
 //        EntityCorrectness.checkAccountProjectLog(orig); // TODO assert
-
         // Update all properties (except the account and project reference)
 //        orig.setPermissionMask(accountProject.getPermissionMask());
 //        orig.setBaseLayer(accountProject.getBaseLayer());
@@ -468,22 +468,24 @@ class ProjectServiceImpl {
     /**
      * @see GeoPlatformService#getAccountProjectsByAccountID(java.lang.Long)
      */
-    public List<GPAccountProject> getAccountProjectsByAccountID(Long accountID) {
+    public WSGetAccountProjectsResponse getAccountProjectsByAccountID(
+            Long accountID) {
         List<GPAccountProject> accountProjectsList = accountProjectDao.findByAccountID(
                 accountID);
         EntityCorrectness.checkAccountProjectListLog(accountProjectsList); // TODO assert
-        return accountProjectsList;
+        return new WSGetAccountProjectsResponse(accountProjectsList);
     }
 
     /**
      * @see GeoPlatformService#getAccountProjectsByProjectID(java.lang.Long)
      */
-    public List<GPAccountProject> getAccountProjectsByProjectID(Long projectID) {
+    public WSGetAccountProjectsResponse getAccountProjectsByProjectID(
+            Long projectID) {
         List<GPAccountProject> accountProjectsList = accountProjectDao.findByProjectID(
                 projectID);
         EntityCorrectness.checkAccountProjectListLog(accountProjectsList); // TODO assert
 
-        return accountProjectsList;
+        return new WSGetAccountProjectsResponse(accountProjectsList);
     }
 
     /**

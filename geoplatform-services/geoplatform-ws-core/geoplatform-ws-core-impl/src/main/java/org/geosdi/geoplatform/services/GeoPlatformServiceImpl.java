@@ -83,6 +83,7 @@ import org.geosdi.geoplatform.responce.ServerDTO;
 import org.geosdi.geoplatform.responce.ShortAccountDTOContainer;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.geosdi.geoplatform.responce.UserDTO;
+import org.geosdi.geoplatform.responce.WSGetAccountProjectsResponse;
 import org.geosdi.geoplatform.responce.authority.GetAuthorityResponse;
 import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElementsStore;
@@ -535,12 +536,12 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public List<GPAccountProject> getAccountProjectsByAccountID(Long accountID) {
+    public WSGetAccountProjectsResponse getAccountProjectsByAccountID(Long accountID) {
         return projectServiceDelegate.getAccountProjectsByAccountID(accountID);
     }
 
     @Override
-    public List<GPAccountProject> getAccountProjectsByProjectID(Long projectID) {
+    public WSGetAccountProjectsResponse getAccountProjectsByProjectID(Long projectID) {
         return projectServiceDelegate.getAccountProjectsByProjectID(projectID);
     }
 

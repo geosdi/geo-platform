@@ -857,7 +857,7 @@ public class RSProjectTest extends BasicRestServiceTest {
                 project1, BasePermission.ADMINISTRATION);
 
         Assert.assertEquals(2, gpWSClient.getAccountProjectsByProjectID(
-                idProject).size());
+                idProject).getAccountProjects().size());
 
         Assert.assertEquals(116,
                 gpWSClient.getAccountProjectByAccountAndProjectIDs(idUser,

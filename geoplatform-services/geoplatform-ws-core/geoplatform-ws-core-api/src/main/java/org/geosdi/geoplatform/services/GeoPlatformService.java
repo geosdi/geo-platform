@@ -108,6 +108,7 @@ import org.geosdi.geoplatform.responce.ServerDTO;
 import org.geosdi.geoplatform.responce.ShortAccountDTOContainer;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.geosdi.geoplatform.responce.UserDTO;
+import org.geosdi.geoplatform.responce.WSGetAccountProjectsResponse;
 import org.geosdi.geoplatform.responce.authority.GetAuthorityResponse;
 import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElementsStore;
@@ -601,7 +602,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.GET_ACCOUNT_PROJECTS_BY_ACCOUNT_ID)
     @WebResult(name = "accountProject")
-    List<GPAccountProject> getAccountProjectsByAccountID(@PathParam(
+    WSGetAccountProjectsResponse getAccountProjectsByAccountID(@PathParam(
             value = "accountID")
             @WebParam(name = "accountID") Long accountID);
 
@@ -615,7 +616,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.GET_ACCOUNT_PROJECTS_BY_PROJECT_ID_PATH)
     @WebResult(name = "accountProject")
-    List<GPAccountProject> getAccountProjectsByProjectID(
+    WSGetAccountProjectsResponse getAccountProjectsByProjectID(
             @WebParam(name = "projectID")
             @PathParam(value = "projectID") Long projectID);
 

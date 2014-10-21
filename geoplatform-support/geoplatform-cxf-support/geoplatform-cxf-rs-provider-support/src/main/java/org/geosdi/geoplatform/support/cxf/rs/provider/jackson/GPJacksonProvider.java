@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.support.cxf.rs.provider.jackson;
 
 import com.fasterxml.jackson.databind.AnnotationIntrospector;
 import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -62,13 +63,13 @@ public class GPJacksonProvider extends JacksonJaxbJsonProvider {
                 Boolean.FALSE);
         mapper.configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES,
                 Boolean.FALSE);
-        mapper.configure(DeserializationFeature.USE_JAVA_ARRAY_FOR_JSON_ARRAY,
-                Boolean.TRUE);
         mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY,
                 Boolean.TRUE);
         mapper.configure(SerializationFeature.WRAP_ROOT_VALUE,
                 Boolean.TRUE);
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
+        mapper.configure(MapperFeature.USE_WRAPPER_NAME_AS_PROPERTY_NAME,
+                Boolean.TRUE);
 
         mapper.enableDefaultTyping(); // default to using DefaultTyping.OBJECT_AND_NON_CONCRETE
         AnnotationIntrospector primary = new JaxbAnnotationIntrospector(

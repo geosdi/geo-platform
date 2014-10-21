@@ -33,18 +33,16 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.responce.collection;
+package org.geosdi.geoplatform.responce;
 
-import java.util.Collection;
+import java.io.Serializable;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.geosdi.geoplatform.core.model.GPLayer;
-import org.geosdi.geoplatform.responce.FolderDTO;
-import org.geosdi.geoplatform.responce.ShortLayerDTO;
+import org.geosdi.geoplatform.core.model.GPAccountProject;
 
 /**
  *
@@ -53,50 +51,41 @@ import org.geosdi.geoplatform.responce.ShortLayerDTO;
  */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class TreeFolderElementsStore implements ITreeFolderElementsStore {
+public class WSGetAccountProjectsResponse implements Serializable {
 
-    private static final long serialVersionUID = -8985769926116698122L;
+    private static final long serialVersionUID = -3960259940516147516L;
     //
-    @XmlElementWrapper(name = "folderElements")
-    @XmlElement(name = "folderElement")
-    private TreeFolderElements folderElements = new TreeFolderElements();
+    @XmlElementWrapper(name = "accountProjects")
+    @XmlElement(name = "accountProject")
+    private List<GPAccountProject> accountProjects;
 
-    public TreeFolderElementsStore() {
+    public WSGetAccountProjectsResponse() {
+    }
+
+    public WSGetAccountProjectsResponse(
+            List<GPAccountProject> theAccountProjects) {
+        this.accountProjects = theAccountProjects;
     }
 
     /**
-     * @return the folderElements
+     * @return the accountProjects
      */
-    @Override
-    public TreeFolderElements getFolderElements() {
-        return folderElements;
+    public List<GPAccountProject> getAccountProjects() {
+        return accountProjects;
     }
 
     /**
-     * @param folderElements the folderElements to set
+     * @param accountProjects the accountProjects to set
      */
-    public void setFolderElements(TreeFolderElements folderElements) {
-        this.folderElements = folderElements;
-    }
-
-    @Override
-    public void addFolderCollection(List<FolderDTO> folders) {
-        this.folderElements.addFolderCollection(folders);
-    }
-
-    @Override
-    public void addLayerCollection(Collection<GPLayer> layerList) {
-        this.folderElements.addLayerCollection(layerList);
-    }
-
-    @Override
-    public void addLayerCollection(List<ShortLayerDTO> layers) {
-        this.folderElements.addLayerCollection(layers);
+    public void setAccountProjects(
+            List<GPAccountProject> accountProjects) {
+        this.accountProjects = accountProjects;
     }
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + " {" + "folderElements = "
-                + folderElements + '}';
+        return getClass().getSimpleName() + " {" + "accountProjects = "
+                + accountProjects + '}';
     }
+
 }

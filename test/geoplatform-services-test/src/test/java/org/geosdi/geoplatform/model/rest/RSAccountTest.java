@@ -359,7 +359,7 @@ public class RSAccountTest extends BasicRestServiceTest {
         Long idUser = super.createAndInsertUser(usernameMultiRole,
                 organizationTest, GPRole.ADMIN, GPRole.VIEWER);
 
-        List<String> authorities = gpWSClient.getAuthorities(idUser);
+        List<String> authorities = gpWSClient.getAuthorities(idUser).getAuthorities();
         Assert.assertEquals(2, authorities.size());
 
         logger.debug("\n@@@@@@@@@@@@@@@@@@@@@@Authorities : {}", authorities);

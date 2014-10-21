@@ -62,7 +62,7 @@
             <artifactId>logback-classic</artifactId>
         </dependency>
         
-         <dependency>
+        <dependency>
             <groupId>org.codehaus.jettison</groupId>
             <artifactId>jettison</artifactId>
         </dependency>

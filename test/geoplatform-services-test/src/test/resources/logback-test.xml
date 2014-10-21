@@ -65,7 +65,8 @@
     </root>
     
     <!-- Tests -->
-    <logger name="org.geosdi.geoplatform.model.ServiceTest" level="debug"/>
+    <logger name="org.geosdi.geoplatform.model.ServiceTest" level="trace"/>
+    <logger name="org.geosdi.geoplatform.model.rest.RSFolderTest" level="trace"/>
     <logger name="org.geosdi.geoplatform.model.rest.RSServerTest" level="debug"/>
 
     <!-- Services -->

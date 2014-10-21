@@ -99,6 +99,7 @@ import org.geosdi.geoplatform.request.viewport.ManageViewportRequest;
 import org.geosdi.geoplatform.responce.AccountProjectPropertiesDTO;
 import org.geosdi.geoplatform.responce.ApplicationDTO;
 import org.geosdi.geoplatform.responce.FolderDTO;
+import org.geosdi.geoplatform.responce.GetDataSourceResponse;
 import org.geosdi.geoplatform.responce.collection.LongListStore;
 import org.geosdi.geoplatform.responce.MessageDTO;
 import org.geosdi.geoplatform.responce.ProjectDTO;
@@ -107,6 +108,7 @@ import org.geosdi.geoplatform.responce.ServerDTO;
 import org.geosdi.geoplatform.responce.ShortAccountDTOContainer;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.geosdi.geoplatform.responce.UserDTO;
+import org.geosdi.geoplatform.responce.authority.GetAuthorityResponse;
 import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElementsStore;
 import org.geosdi.geoplatform.services.rs.path.GPServiceRSPathConfig;
@@ -276,7 +278,7 @@ public interface GeoPlatformService {
      */
     @Get
     @GET
-    @Path(value = GPServiceRSPathConfig.GET_USER_DETAIL_PATH)
+    @Path(value = GPServiceRSPathConfig.GET_USER_DETAIL_BY_USERNAME_PATH)
     @WebResult(name = "user")
     GPUser getUserDetailByUsername(@QueryParam("") SearchRequest request)
             throws ResourceNotFoundFault;
@@ -297,9 +299,9 @@ public interface GeoPlatformService {
     @WebResult(name = "user")
     GPUser getUserDetailByUsernameAndPassword(
             @WebParam(name = "username")
-            @PathParam(value = "username") String username,
+            @QueryParam(value = "username") String username,
             @WebParam(name = "plainPassword")
-            @PathParam(value = "plainPassword") String plainPassword)
+            @QueryParam(value = "plainPassword") String plainPassword)
             throws ResourceNotFoundFault, IllegalParameterFault,
             AccountLoginFault;
 
@@ -472,7 +474,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.GET_AUTHORITIES_PATH)
     @WebResult(name = "authority")
-    List<String> getAuthorities(@WebParam(name = "accountID")
+    GetAuthorityResponse getAuthorities(@WebParam(name = "accountID")
             @PathParam(value = "accountID") Long accountID)
             throws ResourceNotFoundFault;
 
@@ -1074,7 +1076,7 @@ public interface GeoPlatformService {
     @Path(value = GPServiceRSPathConfig.DELETE_FOLDER_PATH)
     @Deprecated
     Boolean deleteFolder(@WebParam(name = "folderID")
-            @PathParam(value = "folderID") Long folderID)
+            @QueryParam(value = "folderID") Long folderID)
             throws ResourceNotFoundFault;
 
     /**
@@ -1089,10 +1091,16 @@ public interface GeoPlatformService {
      * @throws IllegalParameterFault
      */
     @Post
-    Long saveFolderProperties(@WebParam(name = "folderID") Long folderID,
-            @WebParam(name = "folderName") String folderName,
-            @WebParam(name = "checked") boolean checked,
-            @WebParam(name = "expanded") boolean expanded)
+    @POST
+    @Path(value = GPServiceRSPathConfig.SAVE_FOLDER_PROPERTIES_PATH)
+    Long saveFolderProperties(@WebParam(name = "folderID")
+            @QueryParam(value = "folderID") Long folderID,
+            @WebParam(name = "folderName")
+            @QueryParam(value = "folderName") String folderName,
+            @WebParam(name = "checked")
+            @QueryParam(value = "checked") boolean checked,
+            @WebParam(name = "expanded")
+            @QueryParam(value = "expanded") boolean expanded)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
     /**
@@ -1676,7 +1684,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.GET_LAYERS_DATA_SOURCE_BY_PROJECT_ID_PATH)
     @WebResult(name = "layerDataSource")
-    ArrayList<String> getLayersDataSourceByProjectID(
+    GetDataSourceResponse getLayersDataSourceByProjectID(
             @WebParam(name = "projectID")
             @PathParam(value = "projectID") Long projectID)
             throws ResourceNotFoundFault;

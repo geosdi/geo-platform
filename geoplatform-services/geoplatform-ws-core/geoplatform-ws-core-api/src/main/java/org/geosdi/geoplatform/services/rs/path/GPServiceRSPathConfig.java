@@ -71,10 +71,12 @@ public final class GPServiceRSPathConfig {
     public static final String GET_ALL_ACCOUNTS_PATH = ACCOUNTS_PATH + "getAllAccounts";
     public static final String GET_USER_DETAIL_BY_ID_PATH = ACCOUNTS_PATH
             + "getUserDetail/{userID}";
-    public static final String GET_USER_DETAIL_PATH = ACCOUNTS_PATH
-            + "getUserDetail";
+    private static final String GET_USER_DETAIL_PATH = ACCOUNTS_PATH
+            + "getUserDetail/";
+    public static final String GET_USER_DETAIL_BY_USERNAME_PATH = GET_USER_DETAIL_PATH +
+            "getUserDetailByUsername";
     public static final String GET_USER_DETAIL_BY_USERNAME_AND_PASSWORD_PATH = GET_USER_DETAIL_PATH
-            + "/{username}/{plainPassword}";
+            + "getUserDetailByUsernameAndPassword";
     public static final String GET_ACCOUNTS_COUNT_PATH = ACCOUNTS_PATH
             + "getAccountsCount";
     public static final String GET_SHORT_USER_BY_ID_PATH = ACCOUNTS_PATH
@@ -138,7 +140,7 @@ public final class GPServiceRSPathConfig {
      */
     private static final String ACCOUNT_PROJECTS_PATH = "/accountprojects/";
     public static final String GET_ACCOUNT_PROJECTS_BY_ACCOUNT_ID = ACCOUNT_PROJECTS_PATH
-            + "{accountID}";
+            + "getAccountProjectsByAccountID/{accountID}";
     public static final String INSERT_ACCOUNT_PROJECT_PATH = ACCOUNT_PROJECTS_PATH
             + "insertAccountProject";
     public static final String GET_ACCOUNTS_BY_PROJECT_ID_PATH = ACCOUNT_PROJECTS_PATH
@@ -177,7 +179,7 @@ public final class GPServiceRSPathConfig {
     public static final String UPDATE_FOLDER_PATH = FOLDERS_PATH
             + "updateFolder";
     public static final String DELETE_FOLDER_PATH = FOLDERS_PATH
-            + "deleteFolder/{folderID}";
+            + "deleteFolder";
     public static final String GET_CHILDREN_FOLDERS_PATH = FOLDERS_PATH
             + "getChildrenFolders/{folderID}";
     public static final String SAVE_ADDED_FOLDER_AND_TREE_MODICATIONS_PATH = FOLDERS_PATH
@@ -198,6 +200,8 @@ public final class GPServiceRSPathConfig {
             + "getProjectWithExpandedFolders/{projectID}/{accountID}";
     public static final String GET_CHILDREN_ELEMENTS_PATH = FOLDERS_PATH
             + "getChildrenElements/{folderID}";
+    public static final String SAVE_FOLDER_PROPERTIES_PATH = FOLDERS_PATH +
+            "saveFolderProperties";
 
     /**
      * LAYERS PATH

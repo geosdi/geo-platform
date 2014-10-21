@@ -55,6 +55,7 @@ import org.geosdi.geoplatform.request.layer.WSAddLayerAndTreeModificationsReques
 import org.geosdi.geoplatform.request.layer.WSAddLayersAndTreeModificationsRequest;
 import org.geosdi.geoplatform.request.layer.WSDDLayerAndTreeModificationsRequest;
 import org.geosdi.geoplatform.request.layer.WSDeleteLayerAndTreeModificationsRequest;
+import org.geosdi.geoplatform.responce.GetDataSourceResponse;
 import org.geosdi.geoplatform.responce.collection.LongListStore;
 import org.geosdi.geoplatform.responce.RasterPropertiesDTO;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
@@ -558,7 +559,8 @@ class LayerServiceImpl {
     /**
      * @see GeoPlatformService#getLayerType(java.lang.Long)
      */
-    public GPLayerType getLayerType(Long layerID) throws ResourceNotFoundFault {
+    public GPLayerType getLayerType(Long layerID) throws
+            ResourceNotFoundFault {
         GPLayer layer = this.getLayerDetail(layerID);
         GPLayerType layerType = layer.getLayerType();
         return layerType;
@@ -567,14 +569,15 @@ class LayerServiceImpl {
     /**
      * @see GeoPlatformService#getLayersDataSourceByProjectID(java.lang.Long)
      */
-    public ArrayList<String> getLayersDataSourceByProjectID(Long projectID)
+    public GetDataSourceResponse getLayersDataSourceByProjectID(Long projectID)
             throws ResourceNotFoundFault {
         GPProject project = projectDao.find(projectID);
         if (project == null) {
             throw new ResourceNotFoundFault("Project not found", projectID);
         }
 
-        return layerDao.findDistinctDataSourceByProjectId(projectID);
+        return new GetDataSourceResponse(layerDao
+                .findDistinctDataSourceByProjectId(projectID));
     }
 
     /**

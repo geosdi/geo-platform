@@ -169,7 +169,8 @@ public class RSFolderTest extends BasicRestServiceTest {
     @Test
     public void testDeleteFolderRest() throws ResourceNotFoundFault {
         // Assert number of folders of ProjectTest before delete
-        Integer totalFolders = gpWSClient.getNumberOfElementsProject(idProjectTest);
+        Integer totalFolders = gpWSClient.getNumberOfElementsProject(
+                idProjectTest);
         Assert.assertEquals(
                 "Number of all folders of ProjectTest before deleted",
                 7, totalFolders.intValue()); // SetUp() added 2+5 folders
@@ -209,7 +210,8 @@ public class RSFolderTest extends BasicRestServiceTest {
         // Assert on the structure of the subfolders of "rootFolderA"
         TreeFolderElements childrenRootFolderA = gpWSClient.getChildrenElements(
                 idRootFolderA).getFolderElements();
-        logger.trace("\n*** childrenRootFolderA:\n{}\n***", childrenRootFolderA);
+        logger.trace("\nECCOLO****************************** childrenRootFolderA:\n"
+                + "{}\n***", childrenRootFolderA);
         Assert.assertNotNull("Check childrenRootFolderA not null",
                 childrenRootFolderA);
         Assert.assertEquals("Check size of childrenRootFolderA", 2,
@@ -331,7 +333,8 @@ public class RSFolderTest extends BasicRestServiceTest {
                 checkDelete);
 
         Assert.assertEquals("totalElementsOfProject after deleted",
-                totalElementsOfProject.intValue(), gpWSClient.getNumberOfElementsProject(
+                totalElementsOfProject.intValue(),
+                gpWSClient.getNumberOfElementsProject(
                         idProjectTest).intValue());
 
         this.checkInitialStateRest("after removing");

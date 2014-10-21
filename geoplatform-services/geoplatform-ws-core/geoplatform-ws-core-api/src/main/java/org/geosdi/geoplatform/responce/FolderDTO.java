@@ -58,9 +58,9 @@ public class FolderDTO extends AbstractElementDTO {
     private Boolean expanded;
     private Integer numberOfDescendants;
     //
-    @XmlElementWrapper(name = "elementList")
-    @XmlElement(name = "element")
-    private List<IElementDTO> elementList;
+    @XmlElementWrapper(name = "folderElements")
+    @XmlElement(name = "folderElement")
+    private List<IElementDTO> elementList = new ArrayList<IElementDTO>();
 
     /**
      * Default constructor. NOTE: elementList is NULL.
@@ -78,7 +78,6 @@ public class FolderDTO extends AbstractElementDTO {
                 folder.isShared(), folder.isChecked());
         this.expanded = folder.isExpanded();
         this.numberOfDescendants = folder.getNumberOfDescendants();
-        this.elementList = new ArrayList<IElementDTO>();
     }
 
     /**

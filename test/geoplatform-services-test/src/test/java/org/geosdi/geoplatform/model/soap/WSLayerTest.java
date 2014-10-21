@@ -499,7 +499,7 @@ public class WSLayerTest extends BaseSoapServiceTest {
         this.addLayer3();
 
         List<String> list = gpWSClient.getLayersDataSourceByProjectID(
-                idProjectTest);
+                idProjectTest).getDataSources();
 
         Assert.assertEquals("Number of elements of server's url", 2, list.size());
         Assert.assertTrue("List does not contain 'http://www.geosdi.org/test'",

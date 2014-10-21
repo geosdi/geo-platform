@@ -33,6 +33,9 @@
  */
 package org.geosdi.geoplatform.core.model;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
@@ -49,6 +52,13 @@ import org.springframework.security.core.GrantedAuthority;
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
+@JsonTypeInfo(  
+    use = JsonTypeInfo.Id.NAME,  
+    include = JsonTypeInfo.As.PROPERTY,  
+    property = "type")  
+@JsonSubTypes({  
+    @Type(value = GPUser.class, name = "GPUser"),  
+    @Type(value = GPApplication.class, name = "GPApplication") })  
 @XmlTransient
 @XmlSeeAlso(value = {GPUser.class, GPApplication.class})
 @Entity(name = "Account")

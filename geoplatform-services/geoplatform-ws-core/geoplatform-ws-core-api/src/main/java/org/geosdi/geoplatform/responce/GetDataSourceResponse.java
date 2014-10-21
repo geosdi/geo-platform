@@ -33,18 +33,15 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.responce.collection;
+package org.geosdi.geoplatform.responce;
 
-import java.util.Collection;
-import java.util.List;
+import java.io.Serializable;
+import java.util.ArrayList;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.geosdi.geoplatform.core.model.GPLayer;
-import org.geosdi.geoplatform.responce.FolderDTO;
-import org.geosdi.geoplatform.responce.ShortLayerDTO;
 
 /**
  *
@@ -53,49 +50,39 @@ import org.geosdi.geoplatform.responce.ShortLayerDTO;
  */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class TreeFolderElementsStore implements ITreeFolderElementsStore {
+public class GetDataSourceResponse implements Serializable {
 
-    private static final long serialVersionUID = -8985769926116698122L;
+    private static final long serialVersionUID = -1139547469822111882L;
     //
-    @XmlElement(name = "folderElements")
-    private TreeFolderElements folderElements = new TreeFolderElements();
+    @XmlElementWrapper(name = "servers")
+    @XmlElement(name = "server")
+    private ArrayList<String> dataSources;
 
-    public TreeFolderElementsStore() {
+    public GetDataSourceResponse() {
+    }
+
+    public GetDataSourceResponse(ArrayList<String> dataSources) {
+        this.dataSources = dataSources;
     }
 
     /**
-     * @return the folderElements
+     * @return the dataSources
      */
-    @Override
-    public TreeFolderElements getFolderElements() {
-        return folderElements;
+    public ArrayList<String> getDataSources() {
+        return dataSources;
     }
 
     /**
-     * @param folderElements the folderElements to set
+     * @param dataSources the dataSources to set
      */
-    public void setFolderElements(TreeFolderElements folderElements) {
-        this.folderElements = folderElements;
-    }
-
-    @Override
-    public void addFolderCollection(List<FolderDTO> folders) {
-        this.folderElements.addFolderCollection(folders);
-    }
-
-    @Override
-    public void addLayerCollection(Collection<GPLayer> layerList) {
-        this.folderElements.addLayerCollection(layerList);
-    }
-
-    @Override
-    public void addLayerCollection(List<ShortLayerDTO> layers) {
-        this.folderElements.addLayerCollection(layers);
+    public void setDataSources(ArrayList<String> dataSources) {
+        this.dataSources = dataSources;
     }
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + " {" + "folderElements = "
-                + folderElements + '}';
+        return getClass().getSimpleName() + " {" + "dataSources = "
+                + dataSources + '}';
     }
+
 }

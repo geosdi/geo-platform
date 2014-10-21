@@ -74,6 +74,7 @@ import org.geosdi.geoplatform.request.viewport.ManageViewportRequest;
 import org.geosdi.geoplatform.responce.AccountProjectPropertiesDTO;
 import org.geosdi.geoplatform.responce.ApplicationDTO;
 import org.geosdi.geoplatform.responce.FolderDTO;
+import org.geosdi.geoplatform.responce.GetDataSourceResponse;
 import org.geosdi.geoplatform.responce.collection.LongListStore;
 import org.geosdi.geoplatform.responce.MessageDTO;
 import org.geosdi.geoplatform.responce.ProjectDTO;
@@ -82,6 +83,7 @@ import org.geosdi.geoplatform.responce.ServerDTO;
 import org.geosdi.geoplatform.responce.ShortAccountDTOContainer;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.geosdi.geoplatform.responce.UserDTO;
+import org.geosdi.geoplatform.responce.authority.GetAuthorityResponse;
 import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElementsStore;
 import org.springframework.transaction.annotation.Transactional;
@@ -480,7 +482,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public List<String> getAuthorities(Long accountID)
+    public GetAuthorityResponse getAuthorities(Long accountID)
             throws ResourceNotFoundFault {
         return accountServiceDelegate.getAuthorities(accountID);
     }
@@ -1000,7 +1002,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public ArrayList<String> getLayersDataSourceByProjectID(Long projectID)
+    public GetDataSourceResponse getLayersDataSourceByProjectID(Long projectID)
             throws ResourceNotFoundFault {
         return layerServiceDelegate.getLayersDataSourceByProjectID(projectID);
     }

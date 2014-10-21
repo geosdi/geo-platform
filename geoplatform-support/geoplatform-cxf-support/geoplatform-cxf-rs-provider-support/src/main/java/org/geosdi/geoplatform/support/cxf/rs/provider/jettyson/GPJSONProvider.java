@@ -41,6 +41,8 @@ import org.apache.cxf.jaxrs.provider.json.JSONProvider;
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
+ *
+ * @param <T>
  */
 public class GPJSONProvider<T extends Object> extends JSONProvider<T> {
 }

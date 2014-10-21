@@ -33,6 +33,8 @@
  */
 package org.geosdi.geoplatform.core.model;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -55,6 +57,13 @@ import org.hibernate.annotations.Index;
  * @author Francesco Izzi - geoSDI
  *
  */
+@JsonTypeInfo(  
+    use = JsonTypeInfo.Id.NAME,  
+    include = JsonTypeInfo.As.PROPERTY,  
+    property = "type")  
+@JsonSubTypes({  
+    @JsonSubTypes.Type(value = GPRasterLayer.class, name = "GPRaster"),  
+    @JsonSubTypes.Type(value = GPVectorLayer.class, name = "GPVector") }) 
 @XmlTransient
 @XmlSeeAlso(value = {GPRasterLayer.class, GPVectorLayer.class})
 @Entity(name = "GPLayer")

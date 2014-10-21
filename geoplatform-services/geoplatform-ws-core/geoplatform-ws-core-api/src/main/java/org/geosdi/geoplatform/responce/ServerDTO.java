@@ -37,8 +37,8 @@ import java.io.Serializable;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
@@ -50,7 +50,8 @@ import org.geosdi.geoplatform.core.model.GeoPlatformServer;
  */
 @XmlRootElement(name = "ServerDTO")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(propOrder = {"id", "serverUrl", "name", "alias", "layerList", "organization"})
+@XmlType(
+        propOrder = {"id", "serverUrl", "name", "alias", "layerList", "organization"})
 public class ServerDTO implements Serializable {
 
     private static final long serialVersionUID = -1916994804312224037L;
@@ -61,8 +62,10 @@ public class ServerDTO implements Serializable {
     private String alias;
     private String organization;
     //
-    @XmlElementWrapper(name = "layerList")
-    @XmlElement(name = "layer")
+    @XmlElementRefs(value = {
+        @XmlElementRef(name = "rasterLayerDTO",
+                type = RasterLayerDTO.class),
+        @XmlElementRef(name = "vectorLayerDTO", type = VectorLayerDTO.class)})
     private List<? extends ShortLayerDTO> layerList;
 
     public ServerDTO() {

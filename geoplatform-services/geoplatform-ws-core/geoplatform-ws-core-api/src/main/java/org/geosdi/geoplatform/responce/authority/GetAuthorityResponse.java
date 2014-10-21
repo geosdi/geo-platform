@@ -33,18 +33,15 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.responce.collection;
+package org.geosdi.geoplatform.responce.authority;
 
-import java.util.Collection;
+import java.io.Serializable;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.geosdi.geoplatform.core.model.GPLayer;
-import org.geosdi.geoplatform.responce.FolderDTO;
-import org.geosdi.geoplatform.responce.ShortLayerDTO;
 
 /**
  *
@@ -53,49 +50,33 @@ import org.geosdi.geoplatform.responce.ShortLayerDTO;
  */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class TreeFolderElementsStore implements ITreeFolderElementsStore {
+public class GetAuthorityResponse implements Serializable {
 
-    private static final long serialVersionUID = -8985769926116698122L;
+    private static final long serialVersionUID = -5074543346590256810L;
     //
-    @XmlElement(name = "folderElements")
-    private TreeFolderElements folderElements = new TreeFolderElements();
+    @XmlElementWrapper(name = "authorities")
+    @XmlElement(name = "authority")
+    private List<String> authorities;
 
-    public TreeFolderElementsStore() {
+    public GetAuthorityResponse() {
+    }
+
+    public GetAuthorityResponse(List<String> authorities) {
+        this.authorities = authorities;
     }
 
     /**
-     * @return the folderElements
+     * @return the authorities
      */
-    @Override
-    public TreeFolderElements getFolderElements() {
-        return folderElements;
+    public List<String> getAuthorities() {
+        return authorities;
     }
 
     /**
-     * @param folderElements the folderElements to set
+     * @param authorities the authorities to set
      */
-    public void setFolderElements(TreeFolderElements folderElements) {
-        this.folderElements = folderElements;
+    public void setAuthorities(List<String> authorities) {
+        this.authorities = authorities;
     }
 
-    @Override
-    public void addFolderCollection(List<FolderDTO> folders) {
-        this.folderElements.addFolderCollection(folders);
-    }
-
-    @Override
-    public void addLayerCollection(Collection<GPLayer> layerList) {
-        this.folderElements.addLayerCollection(layerList);
-    }
-
-    @Override
-    public void addLayerCollection(List<ShortLayerDTO> layers) {
-        this.folderElements.addLayerCollection(layers);
-    }
-
-    @Override
-    public String toString() {
-        return getClass().getSimpleName() + " {" + "folderElements = "
-                + folderElements + '}';
-    }
 }

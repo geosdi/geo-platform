@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.connectors.ws.basic.rest;
 
 import javax.annotation.Resource;
 import org.geosdi.geoplatform.configurator.bootstrap.Production;
+import org.geosdi.geoplatform.configurator.bootstrap.cxf.Rest;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -48,6 +49,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @Production
+@Rest
 class BasicRestClientConnectorConfig {
 
     @Resource(name = "gpBasicRestClientConnector")

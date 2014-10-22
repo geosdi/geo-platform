@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.connectors.ws.basic.rest;
 
+import org.geosdi.geoplatform.configurator.bootstrap.Production;
 import org.geosdi.geoplatform.configurator.bootstrap.cxf.Rest;
 import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPUser;
@@ -47,6 +48,7 @@ import org.springframework.stereotype.Component;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Component(value = "gpBasicRestClientConnector")
+@Production
 @Rest
 public class GPBasicRestClientConnector extends BasicRestClientConnector {
 

@@ -277,6 +277,8 @@ public final class GPServiceRSPathConfig {
             + "insertViewport";
     public static final String UPDATE_VIEWPORT_PATH = VIEPORTS_PATH
             + "updateViewport";
+    public static final String GET_VIEWPORT_BY_ID_PATH = VIEPORTS_PATH +
+            "getViewportById";
     public static final String DELETE_VIEWPORT_PATH = VIEPORTS_PATH
             + "deleteViewport";
     public static final String SAVE_OR_UPDATE_VIEWPORT_LIST_PATH = VIEPORTS_PATH

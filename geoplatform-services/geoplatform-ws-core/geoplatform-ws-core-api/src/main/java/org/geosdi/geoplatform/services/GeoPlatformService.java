@@ -33,7 +33,6 @@
  */
 package org.geosdi.geoplatform.services;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
@@ -112,6 +111,7 @@ import org.geosdi.geoplatform.responce.WSGetAccountProjectsResponse;
 import org.geosdi.geoplatform.responce.authority.GetAuthorityResponse;
 import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElementsStore;
+import org.geosdi.geoplatform.responce.viewport.WSGetViewportResponse;
 import org.geosdi.geoplatform.services.rs.path.GPServiceRSPathConfig;
 
 /**
@@ -979,8 +979,8 @@ public interface GeoPlatformService {
     @Get
     @GET
     @Path(value = GPServiceRSPathConfig.GET_ACCOUNT_PROJECT_VIEPORTS_PATH)
-    @WebResult(name = "viewport")
-    ArrayList<GPViewport> getAccountProjectViewports(@WebParam(
+    @WebResult(name = "wsGetVieportResponse")
+    WSGetViewportResponse getAccountProjectViewports(@WebParam(
             name = "accountProjectID")
             @PathParam(value = "accountProjectID") Long accountProjectID)
             throws ResourceNotFoundFault;
@@ -996,6 +996,14 @@ public interface GeoPlatformService {
     @PUT
     @Path(value = GPServiceRSPathConfig.UPDATE_VIEWPORT_PATH)
     Long updateViewport(@WebParam(name = "viewport") GPViewport viewport)
+            throws ResourceNotFoundFault, IllegalParameterFault;
+
+    @Get
+    @GET
+    @Path(value = GPServiceRSPathConfig.GET_VIEWPORT_BY_ID_PATH)
+    @WebResult(name = "viewport")
+    GPViewport getViewportById(@WebParam(name = "idViewport")
+            @QueryParam(value = "idViewport") Long idViewport)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
     @Delete

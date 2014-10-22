@@ -84,6 +84,7 @@ abstract class BasicRestServiceTest extends ServiceTest {
     protected GPFolder rootFolderB;
     protected long idRootFolderA = -1;
     protected long idRootFolderB = -1;
+    protected long idAccountProject = -1;
 
     @Override
     public void setUp() throws Exception {
@@ -98,8 +99,8 @@ abstract class BasicRestServiceTest extends ServiceTest {
                 new Date(System.currentTimeMillis()));
         projectTest = gpWSClient.getProjectDetail(idProjectTest);
         // Insert the Account as the owner of Project
-        this.createAndInsertAccountProject(userTest, projectTest,
-                BasePermission.ADMINISTRATION);
+        this.idAccountProject = this.createAndInsertAccountProject(userTest,
+                projectTest, BasePermission.ADMINISTRATION);
 
         // Create root folders for the user
         idRootFolderA = this.createAndInsertFolder(nameRootFolderA, projectTest,

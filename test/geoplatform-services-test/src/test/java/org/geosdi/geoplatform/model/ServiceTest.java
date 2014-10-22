@@ -34,6 +34,7 @@
 package org.geosdi.geoplatform.model;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import org.geosdi.geoplatform.core.model.GPAccount;
@@ -49,6 +50,7 @@ import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.core.model.GPRasterLayer;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.core.model.GPVectorLayer;
+import org.geosdi.geoplatform.core.model.GPViewport;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
@@ -394,5 +396,16 @@ public abstract class ServiceTest {
         } catch (Exception e) {
             Assert.fail("Error while deleting Server with Id: " + idServer);
         }
+    }
+
+    protected Collection<GPViewport> createMassiveViewports() {
+        List<GPViewport> viewports = new ArrayList<>();
+        for (int i = 0; i < 80; i++) {
+            viewports.add(new GPViewport("Viewport" + i + "-Rest",
+                    "This is a Generic Viewport", i,
+                    new GPBBox(i, i, i, i),
+                    (i == 0) ? Boolean.TRUE : Boolean.FALSE));
+        }
+        return viewports;
     }
 }

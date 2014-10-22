@@ -35,6 +35,7 @@ package org.geosdi.geoplatform.gui.server.service.impl;
 
 import com.google.common.collect.Lists;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.core.model.GPAccount;
@@ -121,18 +122,18 @@ public class MapService implements IMapService {
             throw new GeoPlatformException(timeout);
         }
 
-        ArrayList<GPViewport> viewportListElements = null;
+        Collection<GPViewport> viewportCollectionElements = null;
         try {
             GPAccountProject accountProject = this.geoPlatformServiceClient
                     .getAccountProjectByAccountAndProjectIDs(account.getId(),
                             projectID);
-            viewportListElements = this.geoPlatformServiceClient.getAccountProjectViewports(
-                    accountProject.getId());
+            viewportCollectionElements = this.geoPlatformServiceClient.getAccountProjectViewports(
+                    accountProject.getId()).getViewports();
         } catch (ResourceNotFoundFault rnff) {
             logger.error("Error on MapService: " + rnff);
             throw new GeoPlatformException(rnff);
         }
-        return this.convertServerViewportToDTO(viewportListElements);
+        return this.convertServerViewportToDTO(viewportCollectionElements);
     }
 
     @Override
@@ -160,13 +161,13 @@ public class MapService implements IMapService {
     }
 
     private List<GPClientViewport> convertServerViewportToDTO(
-            ArrayList<GPViewport> viewportList) {
+            Collection<GPViewport> viewportCollection) {
         List<GPClientViewport> clientViewportList = Lists.<GPClientViewport>newArrayList();
         GPClientViewport clientViewport;
         GPBBox serverBBOX;
         BBoxClientInfo clientBBOX;
-        if (viewportList != null) {
-            for (GPViewport viewport : viewportList) {
+        if (viewportCollection != null) {
+            for (GPViewport viewport : viewportCollection) {
                 serverBBOX = viewport.getBbox();
                 clientBBOX = new BBoxClientInfo(serverBBOX.getMinX(),
                         serverBBOX.getMinY(),

@@ -33,7 +33,6 @@
  */
 package org.geosdi.geoplatform.services;
 
-import com.google.common.collect.Lists;
 import java.util.ArrayList;
 import java.util.List;
 import org.geosdi.geoplatform.core.dao.GPAccountProjectDAO;
@@ -44,6 +43,7 @@ import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.viewport.InsertViewportRequest;
 import org.geosdi.geoplatform.request.viewport.ManageViewportRequest;
+import org.geosdi.geoplatform.responce.viewport.WSGetViewportResponse;
 import org.geosdi.geoplatform.services.development.EntityCorrectness;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -107,7 +107,7 @@ class ViewportServiceImpl {
     /**
      * @see GeoPlatformService#getAccountProjectViewports(java.lang.Long)
      */
-    public ArrayList<GPViewport> getAccountProjectViewports(
+    public WSGetViewportResponse getAccountProjectViewports(
             Long accountProjectID) throws ResourceNotFoundFault {
         List<GPViewport> viewportList = viewportDao.findByAccountProjectID(
                 accountProjectID);
@@ -116,7 +116,24 @@ class ViewportServiceImpl {
                     "Viewport not found using the accountProject id",
                     accountProjectID);
         }
-        return Lists.newArrayList(viewportList);
+        return new WSGetViewportResponse(viewportList);
+    }
+
+    public GPViewport getViewportById(Long idViewport) throws
+            IllegalParameterFault, ResourceNotFoundFault {
+        if (idViewport == null) {
+            throw new IllegalParameterFault(
+                    "The GPViewport ID must not be null.");
+        }
+
+        GPViewport viewport = this.viewportDao.find(idViewport);
+
+        if (viewport == null) {
+            throw new ResourceNotFoundFault("The GPViewport with ID "
+                    + idViewport + " is not present in DB.");
+        }
+
+        return viewport;
     }
 
     /**
@@ -169,14 +186,14 @@ class ViewportServiceImpl {
      */
     public void saveOrUpdateViewportList(ManageViewportRequest request)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        if(request == null) {
+        if (request == null) {
             throw new IllegalParameterFault("The ManageViewportRequest "
                     + "must not be null.");
         }
-        
+
         Long accountProjectID = request.getAccountProjectID();
         ArrayList<GPViewport> viewportList = request.getViewportList();
-        
+
         GPAccountProject accountProject = this.accountProjectDao.find(
                 accountProjectID);
         if (accountProject == null) {
@@ -200,13 +217,13 @@ class ViewportServiceImpl {
 
     public void replaceViewportList(ManageViewportRequest request)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        if(request == null) {
+        if (request == null) {
             throw new IllegalParameterFault("The ManageViewportRequest must "
                     + "not be null.");
         }
         Long accountProjectID = request.getAccountProjectID();
         ArrayList<GPViewport> viewportList = request.getViewportList();
-        
+
         GPAccountProject accountProject = this.accountProjectDao.find(
                 accountProjectID);
         if (accountProject == null) {

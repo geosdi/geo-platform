@@ -148,8 +148,8 @@ public class RSServerTest extends BasicRestServiceTest {
                 serverGeoSDI.getId(), "geoSDI", serverUrlGeoSDI,
                 organizationTest.getName()));
         Assert.assertNotNull("ServerDTO geoSDI is NULL", serverDTO);
-        Assert.assertEquals("ServerDTO geoSDI alias is wrong",
-                serverDTO.getAlias(), "geoSDI");
+        Assert.assertEquals("ServerDTO geoSDI alias is wrong", "geoSDI",
+                serverDTO.getAlias());
 
         // Server is NOT into DB
         String serverUrlEx = "http://iws.erdas.com/ecwp/ecw_wms.dll?request=GetCapabilities";

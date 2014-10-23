@@ -74,8 +74,8 @@ import org.springframework.security.acls.model.Permission;
  */
 public abstract class ServiceTest {
 
-    protected static final Logger logger = LoggerFactory.getLogger(
-            ServiceTest.class);
+    protected final Logger logger = LoggerFactory.getLogger(
+            this.getClass());
     //
     protected GeoPlatformService gpWSClient;
     // Organization

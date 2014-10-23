@@ -86,7 +86,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:applicationContext-TEST.xml",
+@ContextConfiguration(locations = {"classpath:applicationContext-Initializer-Test.xml",
     "classpath:applicationContext.xml"})
 public abstract class BaseInitializerTest {
 

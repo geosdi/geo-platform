@@ -256,7 +256,7 @@ public class UserService implements IUserService {
         ArrayList<String> roles = null;
         try {
             roles = (ArrayList<String>) geoPlatformServiceClient.getAllRoles(
-                    organization);
+                    organization).getRoles();
         } catch (ResourceNotFoundFault ex) {
             logger.error(this.getClass().getSimpleName(), ex.getMessage());
         }

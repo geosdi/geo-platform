@@ -86,6 +86,7 @@ import org.geosdi.geoplatform.responce.WSGetAccountProjectsResponse;
 import org.geosdi.geoplatform.responce.authority.GetAuthorityResponse;
 import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElementsStore;
+import org.geosdi.geoplatform.responce.role.WSGetRoleResponse;
 import org.geosdi.geoplatform.responce.viewport.WSGetViewportResponse;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -1021,7 +1022,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     // === ACL
     // =========================================================================    
     @Override
-    public List<String> getAllRoles(String organization) throws
+    public WSGetRoleResponse getAllRoles(String organization) throws
             ResourceNotFoundFault {
         return aclServiceDelegate.getAllRoles(organization);
     }

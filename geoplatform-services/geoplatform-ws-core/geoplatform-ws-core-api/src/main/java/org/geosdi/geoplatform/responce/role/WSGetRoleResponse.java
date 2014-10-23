@@ -33,55 +33,70 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.request.organization;
+package org.geosdi.geoplatform.responce.role;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
 
 /**
+ * <p>
+ * Returns all Organization Roles
+ * </p>
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class WSPutRolePermissionRequest extends WSSaveRoleRequest {
+public class WSGetRoleResponse implements GPGetRoleResponse {
 
-    private static final long serialVersionUID = -8328323040237186701L;
+    private static final long serialVersionUID = 1247947284126469114L;
     //
-    private GuiComponentsPermissionMapData mapComponentPermission;
+    @XmlElementWrapper(name = "roles")
+    @XmlElement(name = "role", type = String.class)
+    private List<String> roles;
 
-    public WSPutRolePermissionRequest() {
+    /**
+     * Only for JAXB
+     */
+    public WSGetRoleResponse() {
     }
 
-    public WSPutRolePermissionRequest(
-            GuiComponentsPermissionMapData mapComponentPermission,
-            String theRole, String theOrganization) {
-        super(theRole, theOrganization);
-        this.mapComponentPermission = mapComponentPermission;
+    public WSGetRoleResponse(List<String> theRoles) {
+        this.roles = theRoles;
     }
 
     /**
-     * @return the mapComponentPermission
+     * @return the roles
      */
-    public GuiComponentsPermissionMapData getMapComponentPermission() {
-        return mapComponentPermission;
+    @Override
+    public List<String> getRoles() {
+        return roles;
     }
 
     /**
-     * @param theMapComponentPermission the mapComponentPermission to set
+     * @param roles the roles to set
      */
-    public void setMapComponentPermission(
-            GuiComponentsPermissionMapData theMapComponentPermission) {
-        this.mapComponentPermission = theMapComponentPermission;
+    @Override
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
+    }
+
+    @Override
+    public void addRole(String role) {
+        if (this.roles == null) {
+            this.roles = new ArrayList<>();
+        }
+        this.roles.add(role);
     }
 
     @Override
     public String toString() {
-        return super.toString() + " {" + "mapComponentPermission = "
-                + mapComponentPermission + '}';
+        return getClass().getSimpleName() + " {" + "roles = " + roles + '}';
     }
-
 }

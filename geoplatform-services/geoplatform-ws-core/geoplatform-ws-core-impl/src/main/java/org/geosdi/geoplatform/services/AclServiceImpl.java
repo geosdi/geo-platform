@@ -33,7 +33,6 @@
  */
 package org.geosdi.geoplatform.services;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -60,6 +59,7 @@ import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.organization.WSPutRolePermissionRequest;
 import org.geosdi.geoplatform.request.organization.WSSaveRoleRequest;
 import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
+import org.geosdi.geoplatform.responce.role.WSGetRoleResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.acls.model.Permission;
@@ -145,15 +145,16 @@ class AclServiceImpl {
     /**
      * @see GeoPlatformService#getAllRoles()
      */
-    public List<String> getAllRoles(String organization) throws
+    public WSGetRoleResponse getAllRoles(String organization) throws
             ResourceNotFoundFault {
         List<AclSid> sids = sidDao.findByPrincipal(false, organization);
 
-        List<String> roles = new ArrayList<String>(sids.size());
+        WSGetRoleResponse getRoles = new WSGetRoleResponse();
+
         for (AclSid sid : sids) {
-            roles.add(sid.getSid());
+            getRoles.addRole(sid.getSid());
         }
-        return roles;
+        return getRoles;
     }
 
     /**
@@ -299,13 +300,13 @@ class AclServiceImpl {
 
     public Boolean saveRole(WSSaveRoleRequest saveRoleReq) throws
             IllegalParameterFault {
-        if(saveRoleReq == null) {
+        if (saveRoleReq == null) {
             throw new IllegalParameterFault("The WSSaveRoleRequest must not "
                     + "be null.");
         }
         String organization = saveRoleReq.getOrganization();
         String role = saveRoleReq.getRole();
-        
+
         AclSid sid = sidDao.findBySid(role, false, organization);
         if (sid != null) {
             throw new IllegalParameterFault(

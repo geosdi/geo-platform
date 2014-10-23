@@ -111,6 +111,8 @@ import org.geosdi.geoplatform.responce.WSGetAccountProjectsResponse;
 import org.geosdi.geoplatform.responce.authority.GetAuthorityResponse;
 import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElementsStore;
+import org.geosdi.geoplatform.responce.role.GPGetRoleResponse;
+import org.geosdi.geoplatform.responce.role.WSGetRoleResponse;
 import org.geosdi.geoplatform.responce.viewport.WSGetViewportResponse;
 import org.geosdi.geoplatform.services.rs.path.GPServiceRSPathConfig;
 
@@ -1705,17 +1707,19 @@ public interface GeoPlatformService {
     // === ACL
     // ==========================================================================
     /**
-     * Retrieve all Roles wrt an organization.
+     * Retrieve all Organization Roles.
      *
      * @param organization organization name
      *
-     * @return List of all Roles
+     * @return {@link GPGetRoleResponse} GetRoleResponse with all Roles
+     *
+     * @throws org.geosdi.geoplatform.exception.ResourceNotFoundFault
      */
     @Get
     @GET
     @Path(value = GPServiceRSPathConfig.GET_ALL_ROLES_PATH)
     @WebResult(name = "role")
-    List<String> getAllRoles(
+    WSGetRoleResponse getAllRoles(
             @WebParam(name = "organization")
             @PathParam(value = "organization") String organization)
             throws ResourceNotFoundFault;

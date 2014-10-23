@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.model.rest;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import org.geosdi.geoplatform.core.model.GPAccountProject;
 import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPViewport;
@@ -147,14 +148,48 @@ public class RSViewportTest extends BasicRestServiceTest {
                                         15, 15, 22, 30), Boolean.TRUE)));
 
         Assert.assertNotNull(idViewport);
-        
+
         GPViewport viewport = gpWSClient.getViewportById(idViewport);
         Assert.assertNotNull(viewport);
-        
-        logger.trace("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@VIEWPORT_FOUND : {}"
-                + "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n\n");
-        
+
+        logger.trace("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@VIEWPORT_FOUND :"
+                + " {}\n\n", viewport);
+
         Assert.assertTrue(gpWSClient.deleteViewport(idViewport));
+    }
+
+    @Test
+    public void replaceViewportListTestRest() throws Exception {
+        Collection<GPViewport> viewports = super.createMassiveViewports();
+
+        gpWSClient.saveOrUpdateViewportList(new ManageViewportRequest(
+                idAccountProject, new ArrayList<>(viewports)));
+
+        Assert.assertEquals(80, gpWSClient.getAccountProjectViewports(
+                idAccountProject).getViewports().size());
+
+        gpWSClient.replaceViewportList(new ManageViewportRequest(
+                idAccountProject, new ArrayList<>(
+                        createViewportListToReplace())));
+
+        Collection<GPViewport> viewportsReplacedFound = gpWSClient.getAccountProjectViewports(
+                idAccountProject).getViewports();
+
+        Assert.assertEquals(20, viewportsReplacedFound.size());
+
+        logger.trace("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ COLLECTION_"
+                + "VIEWPORT_REPLACED : {}", viewportsReplacedFound);
+    }
+
+    Collection<GPViewport> createViewportListToReplace() {
+        List<GPViewport> viewports = new ArrayList<>();
+        for (int i = 0; i < 20; i++) {
+            viewports.add(new GPViewport("Viewport_To_Replace" + i + "-Rest",
+                    "This is a Generic Viewport to Replace", i,
+                    new GPBBox(i, i, i, i),
+                    (i == 0) ? Boolean.TRUE : Boolean.FALSE));
+        }
+        return viewports;
     }
 
 }

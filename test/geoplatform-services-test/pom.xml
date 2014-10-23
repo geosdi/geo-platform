@@ -224,16 +224,24 @@
             <artifactId>logback-classic</artifactId>
         </dependency>
         
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-initializer</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        
         <!-- SCOPE TEST -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
+            <scope>test</scope>
         </dependency>
 
         <!-- JUnit -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>

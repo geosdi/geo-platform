@@ -33,55 +33,22 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.request.organization;
+package org.geosdi.geoplatform.responce.role;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
-import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@XmlRootElement
-@XmlAccessorType(XmlAccessType.FIELD)
-public class WSPutRolePermissionRequest extends WSSaveRoleRequest {
+public interface GPGetRoleResponse extends Serializable {
 
-    private static final long serialVersionUID = -8328323040237186701L;
-    //
-    private GuiComponentsPermissionMapData mapComponentPermission;
+    List<String> getRoles();
 
-    public WSPutRolePermissionRequest() {
-    }
+    void setRoles(List<String> roles);
 
-    public WSPutRolePermissionRequest(
-            GuiComponentsPermissionMapData mapComponentPermission,
-            String theRole, String theOrganization) {
-        super(theRole, theOrganization);
-        this.mapComponentPermission = mapComponentPermission;
-    }
-
-    /**
-     * @return the mapComponentPermission
-     */
-    public GuiComponentsPermissionMapData getMapComponentPermission() {
-        return mapComponentPermission;
-    }
-
-    /**
-     * @param theMapComponentPermission the mapComponentPermission to set
-     */
-    public void setMapComponentPermission(
-            GuiComponentsPermissionMapData theMapComponentPermission) {
-        this.mapComponentPermission = theMapComponentPermission;
-    }
-
-    @Override
-    public String toString() {
-        return super.toString() + " {" + "mapComponentPermission = "
-                + mapComponentPermission + '}';
-    }
+    void addRole(String role);
 
 }

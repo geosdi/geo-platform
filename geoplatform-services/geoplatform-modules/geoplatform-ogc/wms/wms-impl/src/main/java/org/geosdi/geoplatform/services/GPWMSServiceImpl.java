@@ -74,8 +74,7 @@ public class GPWMSServiceImpl implements GPWMSService {
 
     @Override
     public ServerDTO getCapabilities(String serverUrl, RequestByID request,
-            String token,
-            String authkey) throws ResourceNotFoundFault {
+            String token, String authkey) throws ResourceNotFoundFault {
         GeoPlatformServer server = serverDao.find(request.getId());
         if (server == null) {
             throw new ResourceNotFoundFault("Server has been deleted",
@@ -266,7 +265,8 @@ public class GPWMSServiceImpl implements GPWMSService {
     }
 
     private GPBBox createBbox(CRSEnvelope env) {
-        return ((env != null) ? new GPBBox(env.getMinX(), env.getMinY(), env.getMaxX(),
+        return ((env != null) ? new GPBBox(env.getMinX(), env.getMinY(),
+                env.getMaxX(),
                 env.getMaxY()) : new GPBBox(-179, -89, 179, 89));
     }
 

@@ -36,8 +36,6 @@
 package org.geosdi.geoplatform.connectors.ws.wms.soap;
 
 import org.geosdi.geoplatform.configurator.bootstrap.Production;
-import org.geosdi.geoplatform.connectors.ws.soap.SoapClientConnector;
-import org.geosdi.geoplatform.services.GPWMSService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 

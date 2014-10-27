@@ -36,9 +36,9 @@
 package org.geosdi.geoplatform.gui.server.uploader;
 
 import java.io.File;
-import java.util.List;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.responce.InfoPreview;
+import org.geosdi.geoplatform.responce.InfoPreviewStore;
 
 /**
  *
@@ -47,7 +47,7 @@ import org.geosdi.geoplatform.responce.InfoPreview;
  */
 public interface IPublisherUploader {
 
-    List<InfoPreview> analyzeZIPEPSG(String sessionID, String userName,
+    InfoPreviewStore analyzeZIPEPSG(String sessionID, String userName,
             File file) throws ResourceNotFoundFault;
 
     InfoPreview analyzeTIFInPreview(String sessionID, File file,

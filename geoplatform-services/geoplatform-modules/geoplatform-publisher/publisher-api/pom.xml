@@ -28,24 +28,6 @@
             <artifactId>geoplatform-ws-util</artifactId>
         </dependency>
         
-<!--        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-api</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-configuration</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>basic-widget</artifactId>
-            <version>${project.version}</version>
-        </dependency>-->
-        
         <!-- APACHE COMMONS -->
         <dependency>
             <groupId>commons-lang</groupId>
@@ -106,12 +88,27 @@
             <groupId>javax.xml.ws</groupId>
             <artifactId>jaxws-api</artifactId>
         </dependency>
-        <!-- <dependency> <groupId>org.apache.cxf</groupId> <artifactId>cxf-rt-frontend-jaxrs</artifactId> 
-        </dependency> -->
+        
+        <dependency> 
+            <groupId>org.apache.cxf</groupId> 
+            <artifactId>cxf-rt-frontend-jaxrs</artifactId> 
+        </dependency>
+       
         <dependency>
             <groupId>org.codehaus.jra</groupId>
             <artifactId>jra</artifactId>
         </dependency>
 
     </dependencies>
+    
+    <build>
+        <plugins>
+            <!-- Attach sources ============================================ -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+            </plugin>
+
+        </plugins>
+    </build>
 </project>

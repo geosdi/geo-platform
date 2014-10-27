@@ -266,24 +266,24 @@ public final class GPServiceRSPathConfig {
             + "markMessagesAsReadByDate";
 
     /**
-     * VIEPORTS PATH
+     * VIEWPORTS PATH
      */
-    private static final String VIEPORTS_PATH = "/vieports/";
-    public static final String GET_DEFAULT_VIEWPORT_PATH = VIEPORTS_PATH
+    private static final String VIEWPORTS_PATH = "/viewports/";
+    public static final String GET_DEFAULT_VIEWPORT_PATH = VIEWPORTS_PATH
             + "getDefaultViewport/{accountProjectID}";
-    public static final String GET_ACCOUNT_PROJECT_VIEPORTS_PATH = VIEPORTS_PATH
+    public static final String GET_ACCOUNT_PROJECT_VIEWPORTS_PATH = VIEWPORTS_PATH
             + "getAccountProjectViewports/{accountProjectID}";
-    public static final String INSERT_VIEWPORT_PATH = VIEPORTS_PATH
+    public static final String INSERT_VIEWPORT_PATH = VIEWPORTS_PATH
             + "insertViewport";
-    public static final String UPDATE_VIEWPORT_PATH = VIEPORTS_PATH
+    public static final String UPDATE_VIEWPORT_PATH = VIEWPORTS_PATH
             + "updateViewport";
-    public static final String GET_VIEWPORT_BY_ID_PATH = VIEPORTS_PATH +
+    public static final String GET_VIEWPORT_BY_ID_PATH = VIEWPORTS_PATH +
             "getViewportById";
-    public static final String DELETE_VIEWPORT_PATH = VIEPORTS_PATH
+    public static final String DELETE_VIEWPORT_PATH = VIEWPORTS_PATH
             + "deleteViewport";
-    public static final String SAVE_OR_UPDATE_VIEWPORT_LIST_PATH = VIEPORTS_PATH
+    public static final String SAVE_OR_UPDATE_VIEWPORT_LIST_PATH = VIEWPORTS_PATH
             + "saveOrUpdateViewportList";
-    public static final String REPLACE_VIEWPORT_LIST_PATH = VIEPORTS_PATH
+    public static final String REPLACE_VIEWPORT_LIST_PATH = VIEWPORTS_PATH
             + "replaceViewportList";
     
     /**

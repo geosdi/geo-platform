@@ -980,7 +980,7 @@ public interface GeoPlatformService {
 
     @Get
     @GET
-    @Path(value = GPServiceRSPathConfig.GET_ACCOUNT_PROJECT_VIEPORTS_PATH)
+    @Path(value = GPServiceRSPathConfig.GET_ACCOUNT_PROJECT_VIEWPORTS_PATH)
     @WebResult(name = "wsGetVieportResponse")
     WSGetViewportResponse getAccountProjectViewports(@WebParam(
             name = "accountProjectID")

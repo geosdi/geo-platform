@@ -72,6 +72,8 @@ import org.geosdi.geoplatform.gui.server.utility.PublisherFileUtils;
 import org.geosdi.geoplatform.gui.shared.publisher.LayerPublishAction;
 import org.geosdi.geoplatform.gui.utility.GPReloadURLException;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
+import org.geosdi.geoplatform.request.ProcessEPSGResultRequest;
+import org.geosdi.geoplatform.request.PublishAllRequest;
 import org.geosdi.geoplatform.responce.InfoPreview;
 import org.geosdi.geoplatform.services.GPPublisherService;
 import org.slf4j.LoggerFactory;
@@ -145,8 +147,9 @@ public class PublisherService implements IPublisherService {
         List<InfoPreview> resultList = null;
         try {
             resultList = geoPlatformPublishClient.processEPSGResult(
-                    account.getNaturalID(), this.trasformPreviewLayerList(
-                            previewLayerList)).getInfoPreviews();
+                    new ProcessEPSGResultRequest(account.getNaturalID(),
+                            this.trasformPreviewLayerList(
+                                    previewLayerList))).getInfoPreviews();
         } catch (ResourceNotFoundFault ex) {
             logger.error("Error on publish shape: " + ex);
             throw new GeoPlatformException(
@@ -187,9 +190,9 @@ public class PublisherService implements IPublisherService {
         }
         String result = null;
         try {
-            geoPlatformPublishClient.publishAll(
+            geoPlatformPublishClient.publishAll(new PublishAllRequest(
                     httpServletRequest.getSession().getId(), "previews",
-                    "dataTest", layerList);
+                    "dataTest", layerList));
 
             if (reloadCluster) {
                 HttpResponse response = httpclient.execute(targetHost, httpget,

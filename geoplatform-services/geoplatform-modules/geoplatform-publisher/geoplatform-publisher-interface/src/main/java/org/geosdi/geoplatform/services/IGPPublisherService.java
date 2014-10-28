@@ -37,9 +37,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.List;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.request.ProcessEPSGResultRequest;
+import org.geosdi.geoplatform.request.PublishAllRequest;
 import org.geosdi.geoplatform.responce.InfoPreview;
 import org.geosdi.geoplatform.responce.InfoPreviewStore;
-import org.geosdi.geoplatform.responce.LayerAttribute;
+import org.geosdi.geoplatform.responce.LayerAttributeStore;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -50,14 +52,13 @@ public interface IGPPublisherService {
     InfoPreviewStore analyzeZIPEPSG(String sessionID, String userName, File file)
             throws ResourceNotFoundFault;
 
-    InfoPreviewStore processEPSGResult(String userName,
-            List<InfoPreview> previewLayerList)
+    InfoPreviewStore processEPSGResult(ProcessEPSGResultRequest request)
             throws ResourceNotFoundFault;
 
     String loadStyle(String layerDatasource, String styleName)
             throws ResourceNotFoundFault;
 
-    List<LayerAttribute> describeFeatureType(String layerName)
+    LayerAttributeStore describeFeatureType(String layerName)
             throws ResourceNotFoundFault;
 
     Boolean publishStyle(String styleToPublish)
@@ -66,11 +67,10 @@ public interface IGPPublisherService {
     Boolean putStyle(String styleToPublish, String styleName)
             throws ResourceNotFoundFault;
 
-    public boolean existsStyle(String styleName);
+    public Boolean existsStyle(String styleName);
 
     InfoPreview analyzeTIFInPreview(String sessionID, File file,
-            boolean overwrite)
-            throws ResourceNotFoundFault;
+            Boolean overwrite) throws ResourceNotFoundFault;
 
     InfoPreviewStore getPreviewDataStores(String userName) throws
             ResourceNotFoundFault;
@@ -79,8 +79,7 @@ public interface IGPPublisherService {
             String layerName)
             throws ResourceNotFoundFault, FileNotFoundException;
 
-    Boolean publishAll(String sessionID, String workspace, String dataStoreName,
-            List<String> layerNames) throws ResourceNotFoundFault,
+    Boolean publishAll(PublishAllRequest publishRequest) throws ResourceNotFoundFault,
             FileNotFoundException;
 
     Boolean publishAllofPreview(String sessionID, String workspace,

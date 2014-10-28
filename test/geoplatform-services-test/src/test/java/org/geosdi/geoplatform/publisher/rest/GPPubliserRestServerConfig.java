@@ -33,47 +33,58 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.services.rs.path;
+package org.geosdi.geoplatform.publisher.rest;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import javax.ws.rs.core.MediaType;
+import org.apache.cxf.endpoint.Server;
+import org.apache.cxf.interceptor.Interceptor;
+import org.apache.cxf.interceptor.LoggingInInterceptor;
+import org.apache.cxf.interceptor.LoggingOutInterceptor;
+import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
+import org.apache.cxf.message.Message;
+import org.geosdi.geoplatform.exception.rs.mapper.GPExceptionFaultMapper;
+import org.geosdi.geoplatform.services.GPPublisherService;
+import org.geosdi.geoplatform.support.cxf.rs.provider.configurator.GPRestProviderType;
+import static org.geosdi.geoplatform.support.cxf.rs.provider.factory.GPRestProviderFactory.createProvider;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public final class GPPublisherRSPathConfig {
+class GPPubliserRestServerConfig {
 
-    public static final String DEFAULT_PUBLISHER_RS_SERVICE_PATH = "/";
+    public static Server gpPublisherRestServer(
+            GPPublisherService publisherService,
+            String publisherRestAddress, GPRestProviderType providerType,
+            LoggingInInterceptor serverLogInInterceptor,
+            LoggingOutInterceptor serverLogOutInterceptor) {
 
-    public static final String GP_PUBLISHER_SERVICE_RS_PATH = "/jsonPublisher";
+        JAXRSServerFactoryBean factory = new JAXRSServerFactoryBean();
+        factory.setServiceBean(publisherService);
+        factory.setAddress(publisherRestAddress);
 
-    /**
-     * PREVIEW PATH
-     */
-    private static final String PREVIEW_BASE_PATH = "/preview/";
-    public static final String ANALAYZE_ZIP_EPSG_PATH = PREVIEW_BASE_PATH 
-            + "analyzeZIPEPSG";
-    public static final String PROCESS_EPSG_RESULT_PATH = PREVIEW_BASE_PATH +
-            "processEPSGResult";
-    public static final String LOAD_STYLE_PATH = PREVIEW_BASE_PATH +
-            "loadStyle";
-    public static final String DESCRIBE_FEATURE_TYPE_PATH = PREVIEW_BASE_PATH +
-            "describeFeatureType";
-    public static final String PUBLISH_STYLE_PATH = PREVIEW_BASE_PATH +
-            "publishStyle";
-    public static final String PUT_STYLE_PATH = PREVIEW_BASE_PATH + "putStyle";
-    public static final String EXISTS_STYLE_PATH = PREVIEW_BASE_PATH +
-            "existsStyle";
-    public static final String ANALYZE_TIF_IN_PREVIEW_PATH = PREVIEW_BASE_PATH
-            + "analyzeTIFInPreview";
-    public static final String GET_PREVIEW_DATA_STORES_PATH = PREVIEW_BASE_PATH 
-            + "getPreviewDataStores";
-    public static final String PUBLISH_PATH = PREVIEW_BASE_PATH + "publish";
-    public static final String PUBLISH_ALL_PATH = PREVIEW_BASE_PATH +
-            "publishAll";
-    public static final String PUBLISH_ALL_OF_PREVIEW_PATH = PREVIEW_BASE_PATH +
-            "publishAllofPreview";
+        factory.setProviders(Arrays.asList(
+                new Object[]{createProvider(providerType),
+                    new GPExceptionFaultMapper()}));
 
-    private GPPublisherRSPathConfig() {
+        Map<Object, Object> extensionMappings = new HashMap<>();
+        extensionMappings.put("xml", MediaType.APPLICATION_XML);
+        extensionMappings.put("json", MediaType.APPLICATION_JSON);
+
+        factory.setExtensionMappings(extensionMappings);
+
+        factory.setInInterceptors(Arrays.<Interceptor<? extends Message>>asList(
+                serverLogInInterceptor)
+        );
+        factory.setOutInterceptors(
+                Arrays.<Interceptor<? extends Message>>asList(
+                        serverLogOutInterceptor));
+
+        return factory.create();
     }
 
 }

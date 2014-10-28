@@ -35,22 +35,28 @@ package org.geosdi.geoplatform.services;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.List;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import org.apache.cxf.jaxrs.ext.multipart.Multipart;
 import org.codehaus.jra.Get;
 import org.codehaus.jra.HttpResource;
+import org.codehaus.jra.Post;
+import org.codehaus.jra.Put;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.request.ProcessEPSGResultRequest;
+import org.geosdi.geoplatform.request.PublishAllRequest;
 import org.geosdi.geoplatform.responce.InfoPreview;
 import org.geosdi.geoplatform.responce.InfoPreviewStore;
-import org.geosdi.geoplatform.responce.LayerAttribute;
+import org.geosdi.geoplatform.responce.LayerAttributeStore;
 import org.geosdi.geoplatform.services.rs.path.GPPublisherRSPathConfig;
 
 /**
@@ -67,8 +73,8 @@ import org.geosdi.geoplatform.services.rs.path.GPPublisherRSPathConfig;
         targetNamespace = "http://services.geo-platform.org/")
 public interface GPPublisherService extends IGPPublisherService {
 
-    @Get
-    @GET
+    @Post
+    @POST
     @Path(value = GPPublisherRSPathConfig.ANALAYZE_ZIP_EPSG_PATH)
     @Consumes(value = {MediaType.MULTIPART_FORM_DATA})
     @HttpResource(location = "/preview/analyzeZIPEPSG")
@@ -80,78 +86,108 @@ public interface GPPublisherService extends IGPPublisherService {
             @WebParam(name = "username")
             @Multipart(value = "userName") String userName,
             @WebParam(name = "fileName")
-            @Multipart(value = "fileName") File file)
+            @Multipart(value = "fileName",
+                    type = MediaType.APPLICATION_OCTET_STREAM) File file)
             throws ResourceNotFoundFault;
 
-    @Get
+    @Post
+    @POST
+    @Path(value = GPPublisherRSPathConfig.PROCESS_EPSG_RESULT_PATH)
     @HttpResource(location = "/preview/processEPSGResult")
     @WebResult(name = "Result")
     @Override
     InfoPreviewStore processEPSGResult(
-            @WebParam(name = "username") String userName,
-            @WebParam(name = "previewLayerList") List<InfoPreview> previewLayerList)
+            @WebParam(name = "request") ProcessEPSGResultRequest request)
             throws ResourceNotFoundFault;
 
     @Get
+    @GET
+    @Path(value = GPPublisherRSPathConfig.LOAD_STYLE_PATH)
     @HttpResource(location = "/preview/loadStyle")
     @WebResult(name = "Result")
     @Override
     String loadStyle(
-            @WebParam(name = "layerDatasource") String layerDatasource,
-            @WebParam(name = "styleName") String styleName)
+            @WebParam(name = "layerDatasource")
+            @QueryParam(value = "layerDatasource") String layerDatasource,
+            @WebParam(name = "styleName")
+            @QueryParam(value = "styleName") String styleName)
             throws ResourceNotFoundFault;
 
     @Get
+    @GET
+    @Path(value = GPPublisherRSPathConfig.DESCRIBE_FEATURE_TYPE_PATH)
     @HttpResource(location = "/preview/loadStyle")
     @WebResult(name = "Result")
     @Override
-    List<LayerAttribute> describeFeatureType(
-            @WebParam(name = "layerName") String layerName)
+    LayerAttributeStore describeFeatureType(
+            @WebParam(name = "layerName")
+            @QueryParam(value = "layerName") String layerName)
             throws ResourceNotFoundFault;
 
-    @Get
+    @Post
+    @POST
+    @Path(value = GPPublisherRSPathConfig.PUBLISH_STYLE_PATH)
     @HttpResource(location = "/preview/publishStyle")
     @WebResult(name = "Result")
     @Override
     Boolean publishStyle(
-            @WebParam(name = "styleToPublish") String styleToPublish)
+            @WebParam(name = "styleToPublish")
+            @QueryParam(value = "styleToPublish") String styleToPublish)
             throws ResourceNotFoundFault;
 
-    @Get
+    @Put
+    @PUT
+    @Path(value = GPPublisherRSPathConfig.PUT_STYLE_PATH)
     @HttpResource(location = "/preview/putStyle")
     @WebResult(name = "Result")
     @Override
     Boolean putStyle(
-            @WebParam(name = "styleToPublish") String styleToPublish,
-            @WebParam(name = "styleName") String styleName)
+            @WebParam(name = "styleToPublish")
+            @QueryParam(value = "styleToPublish") String styleToPublish,
+            @WebParam(name = "styleName")
+            @QueryParam(value = "styleName") String styleName)
             throws ResourceNotFoundFault;
 
     @Get
+    @GET
+    @Path(value = GPPublisherRSPathConfig.EXISTS_STYLE_PATH)
     @HttpResource(location = "/preview/existsStyle")
     @WebResult(name = "Result")
     @Override
-    public boolean existsStyle(
-            @WebParam(name = "styleName") String styleName);
+    public Boolean existsStyle(
+            @WebParam(name = "styleName")
+            @QueryParam(value = "styleName") String styleName);
 
-    @Get
+    @Post
+    @POST
+    @Path(value = GPPublisherRSPathConfig.ANALYZE_TIF_IN_PREVIEW_PATH)
     @HttpResource(location = "/preview/uploadZipInPreview")
     @WebResult(name = "Result")
     @Override
     InfoPreview analyzeTIFInPreview(
-            @WebParam(name = "username") String sessionID,
-            @WebParam(name = "fileName") File file,
-            @WebParam(name = "overwrite") boolean overwrite)
+            @WebParam(name = "sessionID")
+            @Multipart(value = "sessionID") String sessionID,
+            @WebParam(name = "fileName")
+            @Multipart(value = "fileName",
+                    type = MediaType.APPLICATION_OCTET_STREAM) File file,
+            @WebParam(name = "overwrite")
+            @Multipart(value = "overwrite") Boolean overwrite)
             throws ResourceNotFoundFault;
 
     @Get
+    @GET
+    @Path(value = GPPublisherRSPathConfig.GET_PREVIEW_DATA_STORES_PATH)
     @HttpResource(location = "/preview/getPreviewDataStores")
     @WebResult(name = "Result")
     @Override
     InfoPreviewStore getPreviewDataStores(
-            @WebParam(name = "userName") String userName)
+            @WebParam(name = "userName")
+            @QueryParam(value = "userName") String userName)
             throws ResourceNotFoundFault;
 
-    @Get
+    @Post
+    @POST
+    @Path(value = GPPublisherRSPathConfig.PUBLISH_PATH)
     @HttpResource(location = "/preview/publish")
     @WebResult(name = "Result")
     @Override
@@ -161,17 +197,19 @@ public interface GPPublisherService extends IGPPublisherService {
             @WebParam(name = "layerName") String layerName)
             throws ResourceNotFoundFault, FileNotFoundException;
 
-    @Get
+    @Post
+    @POST
+    @Path(value = GPPublisherRSPathConfig.PUBLISH_ALL_PATH)
     @HttpResource(location = "/preview/publishAll")
     @WebResult(name = "Result")
     @Override
-    Boolean publishAll(@WebParam(name = "sessionID") String sessionID,
-            @WebParam(name = "workspace") String workspace,
-            @WebParam(name = "dataStoreName") String dataStoreName,
-            @WebParam(name = "layerName") List<String> layerNames)
+    Boolean publishAll(
+            @WebParam(name = "publishRequest") PublishAllRequest publishRequest)
             throws ResourceNotFoundFault, FileNotFoundException;
 
-    @Get
+    @Post
+    @POST
+    @Path(value = GPPublisherRSPathConfig.PUBLISH_ALL_OF_PREVIEW_PATH)
     @HttpResource(location = "/preview/publishAllofPreview")
     @WebResult(name = "Result")
     @Override

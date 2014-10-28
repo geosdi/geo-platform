@@ -49,6 +49,7 @@ import org.geosdi.geoplatform.gui.server.SessionUtility;
 import org.geosdi.geoplatform.gui.server.utility.PublisherFileUtils;
 import org.geosdi.geoplatform.gui.shared.publisher.LayerPublishAction;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
+import org.geosdi.geoplatform.request.ProcessEPSGResultRequest;
 import org.geosdi.geoplatform.responce.InfoPreview;
 import org.geosdi.geoplatform.services.GPPublisherBasicServiceImpl;
 import org.slf4j.Logger;
@@ -90,8 +91,9 @@ public class CasProcessEPSGResultCommand implements
         List<EPSGLayerData> previewLayerList = request.getPreviewLayerList();
         try {
             resultList = casPublisherService.processEPSGResult(
-                    account.getNaturalID(), this.trasformPreviewLayerList(
-                            previewLayerList)).getInfoPreviews();
+                    new ProcessEPSGResultRequest(account.getNaturalID(),
+                            this.trasformPreviewLayerList(
+                                    previewLayerList))).getInfoPreviews();
         } catch (ResourceNotFoundFault ex) {
             logger.error("Error on publish shape: " + ex);
             throw new GeoPlatformException("Error on publish shape.");

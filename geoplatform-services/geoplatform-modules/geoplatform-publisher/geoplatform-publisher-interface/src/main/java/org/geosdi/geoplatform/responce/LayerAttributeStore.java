@@ -33,47 +33,56 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.services.rs.path;
+package org.geosdi.geoplatform.responce;
+
+import java.io.Serializable;
+import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public final class GPPublisherRSPathConfig {
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
+public class LayerAttributeStore implements Serializable {
 
-    public static final String DEFAULT_PUBLISHER_RS_SERVICE_PATH = "/";
+    private static final long serialVersionUID = 4302935972814087852L;
+    //
+    @XmlElementWrapper(name = "layerAttributes")
+    @XmlElement(name = "layerAttribute")
+    private List<LayerAttribute> layerAttributes;
 
-    public static final String GP_PUBLISHER_SERVICE_RS_PATH = "/jsonPublisher";
+    public LayerAttributeStore() {
+    }
+
+    public LayerAttributeStore(List<LayerAttribute> theLayerAttributes) {
+        this.layerAttributes = theLayerAttributes;
+    }
 
     /**
-     * PREVIEW PATH
+     * @return the layerAttributes
      */
-    private static final String PREVIEW_BASE_PATH = "/preview/";
-    public static final String ANALAYZE_ZIP_EPSG_PATH = PREVIEW_BASE_PATH 
-            + "analyzeZIPEPSG";
-    public static final String PROCESS_EPSG_RESULT_PATH = PREVIEW_BASE_PATH +
-            "processEPSGResult";
-    public static final String LOAD_STYLE_PATH = PREVIEW_BASE_PATH +
-            "loadStyle";
-    public static final String DESCRIBE_FEATURE_TYPE_PATH = PREVIEW_BASE_PATH +
-            "describeFeatureType";
-    public static final String PUBLISH_STYLE_PATH = PREVIEW_BASE_PATH +
-            "publishStyle";
-    public static final String PUT_STYLE_PATH = PREVIEW_BASE_PATH + "putStyle";
-    public static final String EXISTS_STYLE_PATH = PREVIEW_BASE_PATH +
-            "existsStyle";
-    public static final String ANALYZE_TIF_IN_PREVIEW_PATH = PREVIEW_BASE_PATH
-            + "analyzeTIFInPreview";
-    public static final String GET_PREVIEW_DATA_STORES_PATH = PREVIEW_BASE_PATH 
-            + "getPreviewDataStores";
-    public static final String PUBLISH_PATH = PREVIEW_BASE_PATH + "publish";
-    public static final String PUBLISH_ALL_PATH = PREVIEW_BASE_PATH +
-            "publishAll";
-    public static final String PUBLISH_ALL_OF_PREVIEW_PATH = PREVIEW_BASE_PATH +
-            "publishAllofPreview";
+    public List<LayerAttribute> getLayerAttributes() {
+        return layerAttributes;
+    }
 
-    private GPPublisherRSPathConfig() {
+    /**
+     * @param layerAttributes the layerAttributes to set
+     */
+    public void setLayerAttributes(List<LayerAttribute> layerAttributes) {
+        this.layerAttributes = layerAttributes;
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + " {" + "layerAttributes = "
+                + layerAttributes + '}';
     }
 
 }

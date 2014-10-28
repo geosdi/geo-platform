@@ -920,7 +920,7 @@ public class LayerService implements ILayerService {
         List<GPLayerAttributes> attributeList = Lists.<GPLayerAttributes>newArrayList();
         try {
             List<LayerAttribute> result = this.geoPlatformPublishClient.describeFeatureType(
-                    layerName);
+                    layerName).getLayerAttributes();
             for (LayerAttribute layerAttribute : result) {
                 GPLayerAttributes gpLayerAttributes = new GPLayerAttributes();
                 gpLayerAttributes.setAttributeType(layerAttribute.getType());

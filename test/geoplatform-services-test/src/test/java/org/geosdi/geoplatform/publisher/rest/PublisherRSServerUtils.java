@@ -33,47 +33,19 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.services.rs.path;
+package org.geosdi.geoplatform.publisher.rest;
+
+import org.apache.cxf.endpoint.Server;
+import org.geosdi.geoplatform.services.GPPublisherService;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public final class GPPublisherRSPathConfig {
+class PublisherRSServerUtils {
 
-    public static final String DEFAULT_PUBLISHER_RS_SERVICE_PATH = "/";
-
-    public static final String GP_PUBLISHER_SERVICE_RS_PATH = "/jsonPublisher";
-
-    /**
-     * PREVIEW PATH
-     */
-    private static final String PREVIEW_BASE_PATH = "/preview/";
-    public static final String ANALAYZE_ZIP_EPSG_PATH = PREVIEW_BASE_PATH 
-            + "analyzeZIPEPSG";
-    public static final String PROCESS_EPSG_RESULT_PATH = PREVIEW_BASE_PATH +
-            "processEPSGResult";
-    public static final String LOAD_STYLE_PATH = PREVIEW_BASE_PATH +
-            "loadStyle";
-    public static final String DESCRIBE_FEATURE_TYPE_PATH = PREVIEW_BASE_PATH +
-            "describeFeatureType";
-    public static final String PUBLISH_STYLE_PATH = PREVIEW_BASE_PATH +
-            "publishStyle";
-    public static final String PUT_STYLE_PATH = PREVIEW_BASE_PATH + "putStyle";
-    public static final String EXISTS_STYLE_PATH = PREVIEW_BASE_PATH +
-            "existsStyle";
-    public static final String ANALYZE_TIF_IN_PREVIEW_PATH = PREVIEW_BASE_PATH
-            + "analyzeTIFInPreview";
-    public static final String GET_PREVIEW_DATA_STORES_PATH = PREVIEW_BASE_PATH 
-            + "getPreviewDataStores";
-    public static final String PUBLISH_PATH = PREVIEW_BASE_PATH + "publish";
-    public static final String PUBLISH_ALL_PATH = PREVIEW_BASE_PATH +
-            "publishAll";
-    public static final String PUBLISH_ALL_OF_PREVIEW_PATH = PREVIEW_BASE_PATH +
-            "publishAllofPreview";
-
-    private GPPublisherRSPathConfig() {
-    }
+    static Server server;
+    static GPPublisherService gpPublisherClient;
 
 }

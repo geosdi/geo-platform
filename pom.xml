@@ -91,7 +91,7 @@
         </repository>
 
         <!-- OSGEO -->
-         <repository>
+        <repository>
             <id>maven2-repository.dev.java.net</id>
             <name>Java.net repository</name>
             <url>http://download.java.net/maven/2</url>
@@ -1040,6 +1040,17 @@
                 <groupId>javax.inject</groupId>
                 <artifactId>javax.inject</artifactId>
                 <version>1</version>
+            </dependency>
+            
+            <!-- =========================================================== -->
+            <!-- ======================== MOKITO =========================== -->
+            <!-- =========================================================== -->
+            
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-core</artifactId>
+                <version>1.9.5</version>
+                <scope>test</scope>
             </dependency>
             
         </dependencies>

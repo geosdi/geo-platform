@@ -34,11 +34,14 @@
 package org.geosdi.geoplatform.services;
 
 import java.io.File;
-import javax.jws.WebParam;
+import java.io.FileNotFoundException;
 import javax.jws.WebService;
-import org.apache.cxf.jaxrs.ext.multipart.Multipart;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.request.ProcessEPSGResultRequest;
+import org.geosdi.geoplatform.request.PublishAllRequest;
+import org.geosdi.geoplatform.responce.InfoPreview;
 import org.geosdi.geoplatform.responce.InfoPreviewStore;
+import org.geosdi.geoplatform.responce.LayerAttributeStore;
 
 @WebService(
         endpointInterface = "org.geosdi.geoplatform.services.GPPublisherService")
@@ -55,6 +58,73 @@ public class GPPublisherServiceImpl extends GPPublisherBasicServiceImpl
             String userName, File file)
             throws ResourceNotFoundFault {
         return super.analyzeZIPEPSG(sessionID, userName, file);
+    }
+
+    @Override
+    public InfoPreviewStore processEPSGResult(ProcessEPSGResultRequest request)
+            throws ResourceNotFoundFault {
+        return super.processEPSGResult(request);
+    }
+
+    @Override
+    public String loadStyle(String layerDatasource, String styleName) throws
+            ResourceNotFoundFault {
+        return super.loadStyle(layerDatasource, styleName);
+    }
+
+    @Override
+    public LayerAttributeStore describeFeatureType(String layerName) throws
+            ResourceNotFoundFault {
+        return super.describeFeatureType(layerName);
+    }
+
+    @Override
+    public Boolean publishStyle(String styleToPublish) throws
+            ResourceNotFoundFault {
+        return super.publishStyle(styleToPublish);
+    }
+
+    @Override
+    public Boolean putStyle(String styleToPublish, String styleName) throws
+            ResourceNotFoundFault {
+        return super.putStyle(styleToPublish, styleName);
+    }
+
+    @Override
+    public Boolean existsStyle(String styleName) {
+        return super.existsStyle(styleName);
+    }
+
+    @Override
+    public InfoPreview analyzeTIFInPreview(String userName, File file,
+            Boolean overwrite) throws ResourceNotFoundFault {
+        return super.analyzeTIFInPreview(userName, file, overwrite);
+    }
+
+    @Override
+    public InfoPreviewStore getPreviewDataStores(String userName) throws
+            ResourceNotFoundFault {
+        return super.getPreviewDataStores(userName);
+    }
+
+    @Override
+    public Boolean publish(String sessionID, String workspace,
+            String dataStoreName, String layerName) throws ResourceNotFoundFault,
+            FileNotFoundException {
+        return super.publish(sessionID, workspace, dataStoreName, layerName);
+    }
+
+    @Override
+    public Boolean publishAll(PublishAllRequest publishRequest) throws
+            ResourceNotFoundFault, FileNotFoundException {
+        return super.publishAll(publishRequest);
+    }
+
+    @Override
+    public Boolean publishAllofPreview(String sessionID, String workspace,
+            String dataStoreName) throws ResourceNotFoundFault,
+            FileNotFoundException {
+        return super.publishAllofPreview(sessionID, workspace, dataStoreName);
     }
 
 }

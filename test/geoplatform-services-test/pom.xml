@@ -70,6 +70,13 @@
             <version>${project.version}</version>
             <scope>runtime</scope>
         </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-ws-publish-connector</artifactId>
+            <version>${project.version}</version>
+            <scope>runtime</scope>
+        </dependency>
 
         <dependency>
             <groupId>org.geosdi</groupId>
@@ -124,6 +131,19 @@
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geonetwork-catalog-impl</artifactId>
+        </dependency>
+        
+        <!-- =============================================================== -->
+        <!-- =================== GEOPLATFORM PUBLISHER ===================== -->
+        <!-- =============================================================== -->
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-publisher-api</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-publisher-impl</artifactId>
         </dependency>
         
         <!-- =============================================================== -->
@@ -241,6 +261,12 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
             <scope>test</scope>
         </dependency>
 

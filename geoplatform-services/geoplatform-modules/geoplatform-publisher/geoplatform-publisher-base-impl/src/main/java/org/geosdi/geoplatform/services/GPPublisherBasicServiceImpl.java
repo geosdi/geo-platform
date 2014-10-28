@@ -48,9 +48,12 @@ import java.util.zip.ZipFile;
 import javax.annotation.Resource;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.shared.publisher.LayerPublishAction;
+import org.geosdi.geoplatform.request.ProcessEPSGResultRequest;
+import org.geosdi.geoplatform.request.PublishAllRequest;
 import org.geosdi.geoplatform.responce.InfoPreview;
 import org.geosdi.geoplatform.responce.InfoPreviewStore;
 import org.geosdi.geoplatform.responce.LayerAttribute;
+import org.geosdi.geoplatform.responce.LayerAttributeStore;
 import org.geosdi.geoplatform.services.geotiff.GeoTiffOverviews;
 import org.geosdi.geoplatform.services.geotiff.GeoTiffOverviewsConfiguration;
 import org.geosdi.geoplatform.services.utility.Ds2dsConfiguration;
@@ -197,7 +200,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
     }
 
     @Override
-    public List<LayerAttribute> describeFeatureType(String layerName) throws
+    public LayerAttributeStore describeFeatureType(String layerName) throws
             ResourceNotFoundFault {
         RESTLayer restLayer = this.restReader.getLayer(layerName);
         List<LayerAttribute> result = Lists.<LayerAttribute>newArrayList();
@@ -206,7 +209,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
                     att.getBinding());
             result.add(layerAttribute);
         }
-        return result;
+        return new LayerAttributeStore(result);
     }
 
     /**
@@ -235,11 +238,10 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
     }
 
     @Override
-    public Boolean publishAll(String sessionID, String workspace,
-            String dataStoreName,
-            List<String> layerNames) throws ResourceNotFoundFault,
+    public Boolean publishAll(PublishAllRequest publishRequest) throws
+            ResourceNotFoundFault,
             FileNotFoundException {
-        for (String name : layerNames) {
+        for (String name : publishRequest.getLayerNames()) {
             this.unscheduleJob(name);
         }
         return Boolean.TRUE;
@@ -691,14 +693,14 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
      * @return check whether the style styleName exists
      */
     @Override
-    public boolean existsStyle(String styleName) {
+    public Boolean existsStyle(String styleName) {
         RESTStyleList styleList = restReader.getStyles();
         for (int i = 0; i < styleList.size(); i++) {
             if (styleList.get(i).getName().equalsIgnoreCase(styleName)) {
-                return true;
+                return Boolean.TRUE;
             }
         }
-        return false;
+        return Boolean.FALSE;
     }
 
     /**
@@ -816,7 +818,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
     //It is not possible to publish different layers on the same "storeName"
     @Override
     public InfoPreview analyzeTIFInPreview(String userName, File file,
-            boolean overwrite) throws ResourceNotFoundFault {
+            Boolean overwrite) throws ResourceNotFoundFault {
         logger.info("Call to analyzeTIFInPreview");
         String userWorkspace = getWorkspace(userName);
         String epsg = "EPSG:" + this.getCRSFromGeotiff(file);
@@ -923,9 +925,12 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
     }
 
     @Override
-    public InfoPreviewStore processEPSGResult(String userName,
-            List<InfoPreview> previewLayerList)
+    public InfoPreviewStore processEPSGResult(ProcessEPSGResultRequest request)
             throws ResourceNotFoundFault {
+        /* TODO CHECK All Possible NPE */
+        String userName = request.getUserName();
+        List<InfoPreview> previewLayerList = request.getPreviews();
+
         String tempUserDir = PublishUtility.createDir(
                 this.geoportalDir + userName);
         String tempUserZipDir = PublishUtility.createDir(

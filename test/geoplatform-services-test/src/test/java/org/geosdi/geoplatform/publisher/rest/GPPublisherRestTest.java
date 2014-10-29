@@ -37,6 +37,9 @@ package org.geosdi.geoplatform.publisher.rest;
 
 import java.io.File;
 import org.geosdi.geoplatform.request.ProcessEPSGResultRequest;
+import org.geosdi.geoplatform.request.PublishLayerRequest;
+import org.geosdi.geoplatform.request.PublishRequest;
+import org.geosdi.geoplatform.responce.InfoPreview;
 
 import org.geosdi.geoplatform.responce.InfoPreviewStore;
 import org.geosdi.geoplatform.responce.LayerAttributeStore;
@@ -120,13 +123,66 @@ public class GPPublisherRestTest extends PublisherRestTest {
         Assert.assertTrue(PublisherRSServerUtils.gpPublisherClient.putStyle(
                 "STYLE_MOCK_TEST", "STYLE_NAME_MOCK"));
     }
-    
+
     @Test
     public void existsStyleTestRest() throws Exception {
         super.mockExistsStyle();
-        
+
         Assert.assertTrue(PublisherRSServerUtils.gpPublisherClient.existsStyle(
                 "STYLE_MOCK_MOCKITO_TEST"));
+    }
+
+    @Test
+    public void analyzeTIFInPreviewTestRest() throws Exception {
+        super.mockAnalyzeTIFInPreview();
+
+        InfoPreview preview = PublisherRSServerUtils.gpPublisherClient.analyzeTIFInPreview(
+                "jdshfjsdfhsjfh", new File(
+                        new File(".").getCanonicalPath() + File.separator
+                        + "src/test/resources/logback-test.xml"), Boolean.TRUE);
+
+        Assert.assertNotNull(preview);
+        Assert.assertEquals("DATA_STORE_MOCK_MOKITO",
+                preview.getDataStoreName());
+        Assert.assertEquals("MESSAGE_MOCK_MOKITO",
+                preview.getMessage());
+
+        logger.debug("\n\t@@@@@@@@@@@@@@@@@@@@@@@@@ analyzeTIFInPreview : "
+                + "{}\n\n", preview);
+    }
+
+    @Test
+    public void getPreviewDataStoresTestRest() throws Exception {
+        super.mockGetPreviewDataStores();
+
+        InfoPreviewStore previewStore = PublisherRSServerUtils.gpPublisherClient.getPreviewDataStores(
+                "USER_MOCK_MOKITO");
+
+        Assert.assertNotNull(previewStore);
+        Assert.assertEquals(15, previewStore.getInfoPreviews().size());
+
+        logger.debug("\n\t@@@@@@@@@@@@@@@@@@@@@@@@@ getPreviewDataStores : "
+                + "{}\n\n", previewStore);
+    }
+
+    @Test
+    public void publishTestRest() throws Exception {
+        super.mockPublish();
+
+        Assert.assertTrue(PublisherRSServerUtils.gpPublisherClient.publish(
+                new PublishLayerRequest("7"
+                        + "364736sdfdsufhiuf", "WORKSPACE_MOCK",
+                        "DATA_STORE_MOCK", "LAYER_NAME_MOCK")));
+    }
+
+    @Test
+    public void publishAllofPreviewTestRest() throws Exception {
+        super.mockPublishAllofPreview();
+
+        Assert.assertTrue(
+                PublisherRSServerUtils.gpPublisherClient.publishAllofPreview(
+                        new PublishRequest("487538hghghewrwr",
+                                "WORKSPACE_MOCK_TEST", "DATA_STORE_MOCK_TEST")));
     }
 
 }

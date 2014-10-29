@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.request;
 
-import java.io.Serializable;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -50,68 +49,21 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class PublishAllRequest implements Serializable {
+public class PublishLayersRequest extends PublishRequest {
 
     private static final long serialVersionUID = -4220372985206008478L;
     //
-    private String sessionID;
-    private String workspace;
-    private String dataStoreName;
     @XmlElementWrapper(name = "layerNames")
     @XmlElement(name = "layerName")
     private List<String> layerNames;
 
-    public PublishAllRequest() {
+    public PublishLayersRequest() {
     }
 
-    public PublishAllRequest(String theSessionID, String theWorkspace,
+    public PublishLayersRequest(String theSessionID, String theWorkspace,
             String theDataStoreName, List<String> theLayerNames) {
-        this.sessionID = theSessionID;
-        this.workspace = theWorkspace;
-        this.dataStoreName = theDataStoreName;
+        super(theSessionID, theWorkspace, theDataStoreName);
         this.layerNames = theLayerNames;
-    }
-
-    /**
-     * @return the sessionID
-     */
-    public String getSessionID() {
-        return sessionID;
-    }
-
-    /**
-     * @param sessionID the sessionID to set
-     */
-    public void setSessionID(String sessionID) {
-        this.sessionID = sessionID;
-    }
-
-    /**
-     * @return the workspace
-     */
-    public String getWorkspace() {
-        return workspace;
-    }
-
-    /**
-     * @param workspace the workspace to set
-     */
-    public void setWorkspace(String workspace) {
-        this.workspace = workspace;
-    }
-
-    /**
-     * @return the dataStoreName
-     */
-    public String getDataStoreName() {
-        return dataStoreName;
-    }
-
-    /**
-     * @param dataStoreName the dataStoreName to set
-     */
-    public void setDataStoreName(String dataStoreName) {
-        this.dataStoreName = dataStoreName;
     }
 
     /**
@@ -127,13 +79,4 @@ public class PublishAllRequest implements Serializable {
     public void setLayerNames(List<String> layerNames) {
         this.layerNames = layerNames;
     }
-
-    @Override
-    public String toString() {
-        return getClass().getSimpleName() + " {" + "sessionID = " + sessionID
-                + ", workspace = " + workspace
-                + ", dataStoreName = " + dataStoreName
-                + ", layerNames = " + layerNames + '}';
-    }
-
 }

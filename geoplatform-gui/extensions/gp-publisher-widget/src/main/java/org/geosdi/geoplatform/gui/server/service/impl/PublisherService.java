@@ -73,7 +73,7 @@ import org.geosdi.geoplatform.gui.shared.publisher.LayerPublishAction;
 import org.geosdi.geoplatform.gui.utility.GPReloadURLException;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 import org.geosdi.geoplatform.request.ProcessEPSGResultRequest;
-import org.geosdi.geoplatform.request.PublishAllRequest;
+import org.geosdi.geoplatform.request.PublishLayersRequest;
 import org.geosdi.geoplatform.responce.InfoPreview;
 import org.geosdi.geoplatform.services.GPPublisherService;
 import org.slf4j.LoggerFactory;
@@ -190,7 +190,7 @@ public class PublisherService implements IPublisherService {
         }
         String result = null;
         try {
-            geoPlatformPublishClient.publishAll(new PublishAllRequest(
+            geoPlatformPublishClient.publishAll(new PublishLayersRequest(
                     httpServletRequest.getSession().getId(), "previews",
                     "dataTest", layerList));
 

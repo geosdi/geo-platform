@@ -49,7 +49,9 @@ import javax.annotation.Resource;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.shared.publisher.LayerPublishAction;
 import org.geosdi.geoplatform.request.ProcessEPSGResultRequest;
-import org.geosdi.geoplatform.request.PublishAllRequest;
+import org.geosdi.geoplatform.request.PublishLayerRequest;
+import org.geosdi.geoplatform.request.PublishLayersRequest;
+import org.geosdi.geoplatform.request.PublishRequest;
 import org.geosdi.geoplatform.responce.InfoPreview;
 import org.geosdi.geoplatform.responce.InfoPreviewStore;
 import org.geosdi.geoplatform.responce.LayerAttribute;
@@ -218,27 +220,27 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
      * System.getProperty("file.separator") + "geoportal"+
      * System.getProperty("file.separator") + "shp";
      *
-     * @param workspace
-     * @param dataStoreName
-     * @param layerName
+     * @param publishRequest
      * @return
      * @throws ResourceNotFoundFault
      * @throws FileNotFoundException this service publishes the layer
-     * <layerName> we loaded in the previews workspace into the DB datastore
-     * identified by the <dataStoreName> and published into the <workspace>
+     * <publishRequest.getLayerName()> we loaded in the previews workspace into
+     * the DB datastore identified by the <publishRequest.getDataStoreName()>
+     * and published into the <publishRequest.getWorkspace()>
      * workspace
      */
     @Override
-    public Boolean publish(String sessionID, String workspace,
-            String dataStoreName, String layerName) throws ResourceNotFoundFault,
+    public Boolean publish(PublishLayerRequest publishRequest) throws
+            ResourceNotFoundFault,
             FileNotFoundException {
-        logger.info(
-                "\n Start to publish " + layerName + " in " + workspace + ":" + dataStoreName);
-        return this.unscheduleJob(layerName);
+        logger.info("\n Start to publish "
+                + publishRequest.getLayerName() + " in "
+                + publishRequest.getWorkspace() + ":" + publishRequest.getDataStoreName());
+        return this.unscheduleJob(publishRequest.getLayerName());
     }
 
     @Override
-    public Boolean publishAll(PublishAllRequest publishRequest) throws
+    public Boolean publishAll(PublishLayersRequest publishRequest) throws
             ResourceNotFoundFault,
             FileNotFoundException {
         for (String name : publishRequest.getLayerNames()) {
@@ -248,9 +250,8 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
     }
 
     @Override
-    public Boolean publishAllofPreview(String sessionID, String workspace,
-            String dataStoreName) throws ResourceNotFoundFault,
-            FileNotFoundException {
+    public Boolean publishAllofPreview(PublishRequest publishRequest) throws
+            ResourceNotFoundFault, FileNotFoundException {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

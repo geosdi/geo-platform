@@ -44,6 +44,8 @@ import org.apache.cxf.interceptor.LoggingInInterceptor;
 import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.geosdi.geoplatform.connectors.ws.publish.rest.GPPublisherRestClientTestConnector;
 import org.geosdi.geoplatform.request.ProcessEPSGResultRequest;
+import org.geosdi.geoplatform.request.PublishLayerRequest;
+import org.geosdi.geoplatform.request.PublishRequest;
 import org.geosdi.geoplatform.responce.InfoPreview;
 import org.geosdi.geoplatform.responce.InfoPreviewStore;
 import org.geosdi.geoplatform.responce.LayerAttribute;
@@ -56,7 +58,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import static org.mockito.Matchers.any;
-import org.mockito.Mockito;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -93,7 +95,7 @@ public abstract class PublisherRestTest {
 
     @BeforeClass
     public static void beforeClass() {
-        publisherService = Mockito.mock(GPPublisherServiceImpl.class);
+        publisherService = mock(GPPublisherServiceImpl.class);
     }
 
     @Before
@@ -118,6 +120,29 @@ public abstract class PublisherRestTest {
         PublisherRSServerUtils.server.stop();
         logger.debug("\n\n\t@@@@@@@@@@@@@@@@@@@@@ Stop GP_PUBLISHER_REST Server"
                 + " @@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n\n");
+    }
+
+    final void mockPublishAllofPreview() throws Exception {
+        when(publisherService.publishAllofPreview(any(PublishRequest.class)))
+                .thenReturn(Boolean.TRUE);
+    }
+
+    final void mockPublish() throws Exception {
+        when(publisherService.publish(any(PublishLayerRequest.class))).thenReturn(
+                Boolean.TRUE);
+    }
+
+    final void mockGetPreviewDataStores() throws Exception {
+        when(publisherService.getPreviewDataStores(any(String.class))).thenReturn(
+                createInfoPreviewStore(15));
+    }
+
+    final void mockAnalyzeTIFInPreview() throws Exception {
+        when(publisherService.analyzeTIFInPreview(any(String.class), any(
+                File.class),
+                any(Boolean.class))).thenReturn(new InfoPreview(
+                                "DATA_STORE_MOCK_MOKITO",
+                                "MESSAGE_MOCK_MOKITO"));
     }
 
     final void mockExistsStyle() throws Exception {

@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.model.rest;
 
+import java.util.HashMap;
 import java.util.List;
 import org.geosdi.geoplatform.gui.shared.GPRole;
 import org.geosdi.geoplatform.initializer.GuiComponentIDs;
@@ -50,67 +51,69 @@ import org.junit.Test;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class RSRolePermissionTest extends BasicRestServiceTest {
-
+    
     @Override
     public void setUp() throws Exception {
         super.setUp();
-
+        
         saveRolesRest();
     }
-
+    
     @Test
     public void updateRolePermissionTestRest() throws Exception {
         GuiComponentsPermissionMapData userMapData = new GuiComponentsPermissionMapData();
-        userMapData.setPermissionMap(GuiComponentIDs.MAP_USER);
-
+        userMapData.setPermissionMap(new HashMap<>(
+                GuiComponentIDs.MAP_USER));
+        
         Assert.assertTrue(gpWSClient.updateRolePermission(
                 new WSPutRolePermissionRequest(userMapData,
                         GPRole.USER.getRole(), organizationNameRSTest)));
-
+        
         GuiComponentsPermissionMapData wsUserMapData = gpWSClient.getRolePermission(
                 GPRole.USER.getRole(), organizationNameRSTest);
-
+        
         logger.trace("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@RETRIEVE GuiComponents for"
                 + " USER_ROLE : {}\n\n", wsUserMapData);
-
+        
         Assert.assertEquals(50, wsUserMapData.getPermissionMap().size());
-
+        
         GuiComponentsPermissionMapData viewerMapData = new GuiComponentsPermissionMapData();
-        viewerMapData.setPermissionMap(GuiComponentIDs.MAP_VIEWER);
-
+        viewerMapData.setPermissionMap(new HashMap<String, Boolean>(
+                GuiComponentIDs.MAP_VIEWER));
+        
         Assert.assertTrue(gpWSClient.updateRolePermission(
                 new WSPutRolePermissionRequest(viewerMapData,
                         GPRole.VIEWER.getRole(), organizationNameRSTest)));
-
+        
         GuiComponentsPermissionMapData wsViewerMapData = gpWSClient.getRolePermission(
                 GPRole.VIEWER.getRole(), organizationNameRSTest);
-
+        
         logger.trace("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@RETRIEVE GuiComponents for"
                 + " VIEWER_ROLE : {}\n\n", wsViewerMapData);
-
+        
         Assert.assertEquals(49, wsViewerMapData.getPermissionMap().size());
     }
-
+    
     @Test
     public void getAllRolesTestRest() throws Exception {
         List<String> roles = gpWSClient.getAllRoles(organizationNameRSTest)
                 .getRoles();
         logger.trace("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ROLES_FOUND for {} ,"
                 + "are : {}\n\n", organizationNameRSTest, roles);
-
+        
         Assert.assertEquals(3, roles.size());
     }
-
+    
     @Test
     public void getRolePermissionTestRest() throws Exception {
         GuiComponentsPermissionMapData wsAdminMapData = gpWSClient.getRolePermission(
                 GPRole.ADMIN.getRole(), organizationNameRSTest);
-
+        
         logger.trace("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@RETRIEVE GuiComponents for"
                 + " ADMIN_ROLE : {}\n\n", wsAdminMapData);
         Assert.assertEquals(0, wsAdminMapData.getPermissionMap().size());
     }
-
+    
     final void saveRolesRest() throws Exception {
         Assert.assertTrue(gpWSClient.saveRole(new WSSaveRoleRequest(
                 GPRole.ADMIN.getRole(), organizationNameRSTest)));
@@ -119,5 +122,5 @@ public class RSRolePermissionTest extends BasicRestServiceTest {
         Assert.assertTrue(gpWSClient.saveRole(new WSSaveRoleRequest(
                 GPRole.VIEWER.getRole(), organizationNameRSTest)));
     }
-
+    
 }

@@ -35,10 +35,11 @@ package org.geosdi.geoplatform.services;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.List;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.ProcessEPSGResultRequest;
-import org.geosdi.geoplatform.request.PublishAllRequest;
+import org.geosdi.geoplatform.request.PublishLayerRequest;
+import org.geosdi.geoplatform.request.PublishLayersRequest;
+import org.geosdi.geoplatform.request.PublishRequest;
 import org.geosdi.geoplatform.responce.InfoPreview;
 import org.geosdi.geoplatform.responce.InfoPreviewStore;
 import org.geosdi.geoplatform.responce.LayerAttributeStore;
@@ -75,14 +76,13 @@ public interface IGPPublisherService {
     InfoPreviewStore getPreviewDataStores(String userName) throws
             ResourceNotFoundFault;
 
-    Boolean publish(String sessionID, String workspace, String dataStoreName,
-            String layerName)
+    Boolean publish(PublishLayerRequest publishRequest)
             throws ResourceNotFoundFault, FileNotFoundException;
 
-    Boolean publishAll(PublishAllRequest publishRequest) throws ResourceNotFoundFault,
+    Boolean publishAll(PublishLayersRequest publishRequest) throws
+            ResourceNotFoundFault,
             FileNotFoundException;
 
-    Boolean publishAllofPreview(String sessionID, String workspace,
-            String dataStoreName)
+    Boolean publishAllofPreview(PublishRequest publishRequest)
             throws ResourceNotFoundFault, FileNotFoundException;
 }

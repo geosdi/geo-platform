@@ -58,7 +58,7 @@ import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.SessionUtility;
 import org.geosdi.geoplatform.gui.utility.GPReloadURLException;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
-import org.geosdi.geoplatform.request.PublishAllRequest;
+import org.geosdi.geoplatform.request.PublishLayersRequest;
 import org.geosdi.geoplatform.services.GPPublisherBasicServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -119,7 +119,7 @@ public class CasPublishLayerPreviewCommand implements
         String result = null;
         try {
             List<String> layerList = request.getLayerList();
-            casPublisherService.publishAll(new PublishAllRequest(
+            casPublisherService.publishAll(new PublishLayersRequest(
                     httpServletRequest.getSession().getId(), "previews",
                     "dataTest", layerList));
             boolean reloadCluster = request.isReloadCluster();

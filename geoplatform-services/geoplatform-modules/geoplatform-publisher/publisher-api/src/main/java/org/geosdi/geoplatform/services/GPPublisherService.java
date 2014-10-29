@@ -53,7 +53,9 @@ import org.codehaus.jra.Post;
 import org.codehaus.jra.Put;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.ProcessEPSGResultRequest;
-import org.geosdi.geoplatform.request.PublishAllRequest;
+import org.geosdi.geoplatform.request.PublishLayerRequest;
+import org.geosdi.geoplatform.request.PublishLayersRequest;
+import org.geosdi.geoplatform.request.PublishRequest;
 import org.geosdi.geoplatform.responce.InfoPreview;
 import org.geosdi.geoplatform.responce.InfoPreviewStore;
 import org.geosdi.geoplatform.responce.LayerAttributeStore;
@@ -161,6 +163,7 @@ public interface GPPublisherService extends IGPPublisherService {
     @Post
     @POST
     @Path(value = GPPublisherRSPathConfig.ANALYZE_TIF_IN_PREVIEW_PATH)
+    @Consumes(value = {MediaType.MULTIPART_FORM_DATA})
     @HttpResource(location = "/preview/uploadZipInPreview")
     @WebResult(name = "Result")
     @Override
@@ -191,10 +194,8 @@ public interface GPPublisherService extends IGPPublisherService {
     @HttpResource(location = "/preview/publish")
     @WebResult(name = "Result")
     @Override
-    Boolean publish(@WebParam(name = "sessionID") String sessionID,
-            @WebParam(name = "workspace") String workspace,
-            @WebParam(name = "dataStoreName") String dataStoreName,
-            @WebParam(name = "layerName") String layerName)
+    Boolean publish(
+            @WebParam(name = "publishRequest") PublishLayerRequest publishRequest)
             throws ResourceNotFoundFault, FileNotFoundException;
 
     @Post
@@ -204,7 +205,7 @@ public interface GPPublisherService extends IGPPublisherService {
     @WebResult(name = "Result")
     @Override
     Boolean publishAll(
-            @WebParam(name = "publishRequest") PublishAllRequest publishRequest)
+            @WebParam(name = "publishRequest") PublishLayersRequest publishRequest)
             throws ResourceNotFoundFault, FileNotFoundException;
 
     @Post
@@ -213,8 +214,7 @@ public interface GPPublisherService extends IGPPublisherService {
     @HttpResource(location = "/preview/publishAllofPreview")
     @WebResult(name = "Result")
     @Override
-    Boolean publishAllofPreview(@WebParam(name = "sessionID") String sessionID,
-            @WebParam(name = "workspace") String workspace,
-            @WebParam(name = "dataStoreName") String dataStoreName)
+    Boolean publishAllofPreview(
+            @WebParam(name = "publishRequest") PublishRequest publishRequest)
             throws ResourceNotFoundFault, FileNotFoundException;
 }

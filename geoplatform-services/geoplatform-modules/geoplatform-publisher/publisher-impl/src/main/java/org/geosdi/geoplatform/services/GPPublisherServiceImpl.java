@@ -38,7 +38,9 @@ import java.io.FileNotFoundException;
 import javax.jws.WebService;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.ProcessEPSGResultRequest;
-import org.geosdi.geoplatform.request.PublishAllRequest;
+import org.geosdi.geoplatform.request.PublishLayerRequest;
+import org.geosdi.geoplatform.request.PublishLayersRequest;
+import org.geosdi.geoplatform.request.PublishRequest;
 import org.geosdi.geoplatform.responce.InfoPreview;
 import org.geosdi.geoplatform.responce.InfoPreviewStore;
 import org.geosdi.geoplatform.responce.LayerAttributeStore;
@@ -108,23 +110,21 @@ public class GPPublisherServiceImpl extends GPPublisherBasicServiceImpl
     }
 
     @Override
-    public Boolean publish(String sessionID, String workspace,
-            String dataStoreName, String layerName) throws ResourceNotFoundFault,
-            FileNotFoundException {
-        return super.publish(sessionID, workspace, dataStoreName, layerName);
+    public Boolean publish(PublishLayerRequest publishRequest) throws
+            ResourceNotFoundFault, FileNotFoundException {
+        return super.publish(publishRequest);
     }
 
     @Override
-    public Boolean publishAll(PublishAllRequest publishRequest) throws
+    public Boolean publishAll(PublishLayersRequest publishRequest) throws
             ResourceNotFoundFault, FileNotFoundException {
         return super.publishAll(publishRequest);
     }
 
     @Override
-    public Boolean publishAllofPreview(String sessionID, String workspace,
-            String dataStoreName) throws ResourceNotFoundFault,
-            FileNotFoundException {
-        return super.publishAllofPreview(sessionID, workspace, dataStoreName);
+    public Boolean publishAllofPreview(PublishRequest publishRequest) throws
+            ResourceNotFoundFault, FileNotFoundException {
+        return super.publishAllofPreview(publishRequest);
     }
 
 }

@@ -236,7 +236,7 @@ class GPBaseLayerRepository {
         wmsParams.setLayers("Mappa_di_Base");
         wmsParams.setStyles("");
         WMSOptions wmsLayerParams = new WMSOptions();
-        wmsLayerParams.setResolutions(baseMapResolutions);
+//        wmsLayerParams.setResolutions(baseMapResolutions);
         wmsLayerParams.setProjection(
                 GPCoordinateReferenceSystem.WGS_84.getCode());
         wmsLayerParams.setTileSize(new Size(256, 256));
@@ -267,7 +267,7 @@ class GPBaseLayerRepository {
         wmsParams.setLayers("StratiDiBase:nullMap");
         wmsParams.setStyles("");
         WMSOptions wmsLayerParams = new WMSOptions();
-        wmsLayerParams.setResolutions(baseMapResolutions);
+//        wmsLayerParams.setResolutions(baseMapResolutions);
         wmsLayerParams.setProjection(
                 GPCoordinateReferenceSystem.WGS_84.getCode());
         wmsLayerParams.setTileSize(new Size(256, 256));
@@ -285,7 +285,7 @@ class GPBaseLayerRepository {
         wmsParams.setLayers("basic");
         wmsParams.setStyles("");
         WMSOptions wmsLayerParams = new WMSOptions();
-        wmsLayerParams.setResolutions(baseMapResolutions);
+//        wmsLayerParams.setResolutions(baseMapResolutions);
         wmsLayerParams.setProjection(
                 GPCoordinateReferenceSystem.WGS_84.getCode());
         wmsLayerParams.setTileSize(new Size(256, 256));
@@ -384,7 +384,7 @@ class GPBaseLayerRepository {
         emptyLayerOptions.setAttribution("EmptyLayer (c) geoSDI"); //lets set some copyright msg as attribution
         emptyLayerOptions.setIsBaseLayer(true); //make it a baselayer.
         emptyLayerOptions.setProjection(GPCoordinateReferenceSystem.WGS_84.getCode());
-        emptyLayerOptions.setResolutions(baseMapResolutions);
+//        emptyLayerOptions.setResolutions(baseMapResolutions);
         EmptyLayer emptyLayer = new EmptyLayer("Empty layer", emptyLayerOptions);
         return emptyLayer;
     }

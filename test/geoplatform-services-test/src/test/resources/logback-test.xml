@@ -70,8 +70,7 @@
     <logger name="org.geosdi.geoplatform.model.rest.RSServerTest" level="debug"/>
     <logger name="org.geosdi.geoplatform.model.rest.RSViewportTest" level="trace"/>
     <logger name="org.geosdi.geoplatform.model.rest.RSRoleTest" level="trace"/>
-    <logger name="org.geosdi.geoplatform.publisher.rest.PublisherRestTest" level="debug"/>
-    <logger name="org.geosdi.geoplatform.publisher.rest.GPPublisherRestTest" level="debug"/>
+    <logger name="org.geosdi.geoplatform.publisher.PublisherBaseTest" level="debug"/>
 
     <!-- Services -->
     <logger name="org.geosdi.geoplatform.services.AclServiceImpl" level="info"/>

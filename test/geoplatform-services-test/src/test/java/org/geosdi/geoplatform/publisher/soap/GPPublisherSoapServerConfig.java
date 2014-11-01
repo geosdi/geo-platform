@@ -33,46 +33,42 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.request;
+package org.geosdi.geoplatform.publisher.soap;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Arrays;
+import org.apache.cxf.endpoint.Server;
+import org.apache.cxf.interceptor.Interceptor;
+import org.apache.cxf.interceptor.LoggingInInterceptor;
+import org.apache.cxf.interceptor.LoggingOutInterceptor;
+import org.apache.cxf.jaxws.JaxWsServerFactoryBean;
+import org.apache.cxf.message.Message;
+import org.geosdi.geoplatform.services.GPPublisherService;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@XmlRootElement
-@XmlAccessorType(XmlAccessType.FIELD)
-public class PublishLayerRequest extends PublishRequest {
+class GPPublisherSoapServerConfig {
 
-    private static final long serialVersionUID = 486823699888551437L;
-    //
-    private String layerName;
+    public static Server gpPublisherSoapServer(
+            GPPublisherService publisherService,
+            String publisherSoapAddress,
+            LoggingInInterceptor serverLogInInterceptor,
+            LoggingOutInterceptor serverLogOutInterceptor) {
 
-    public PublishLayerRequest() {
-    }
+        JaxWsServerFactoryBean factory = new JaxWsServerFactoryBean();
+        factory.setServiceBean(publisherService);
+        factory.setAddress(publisherSoapAddress);
 
-    public PublishLayerRequest(String theSessionID,
-            String theWorkspace, String theDataStoreName, String layerName) {
-        super(theSessionID, theWorkspace, theDataStoreName);
-        this.layerName = layerName;
-    }
+        factory.setInInterceptors(Arrays.<Interceptor<? extends Message>>asList(
+                serverLogInInterceptor)
+        );
+        factory.setOutInterceptors(
+                Arrays.<Interceptor<? extends Message>>asList(
+                        serverLogOutInterceptor));
 
-    /**
-     * @return the layerName
-     */
-    public String getLayerName() {
-        return layerName;
-    }
-
-    /**
-     * @param layerName the layerName to set
-     */
-    public void setLayerName(String layerName) {
-        this.layerName = layerName;
+        return factory.create();
     }
 
 }

@@ -33,25 +33,19 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.publisher.rest.beans;
+package org.geosdi.geoplatform.publisher.soap;
 
-import org.geosdi.geoplatform.configurator.bootstrap.Develop;
-import org.geosdi.geoplatform.connectors.ws.publish.rest.GPPublisherRestClientTestConnector;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.apache.cxf.endpoint.Server;
+import org.geosdi.geoplatform.services.GPPublisherService;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Configuration
-@Develop
-class GPPublisherBeansConfig {
+class PublisherSoapServerUtils {
 
-    @Bean
-    public GPPublisherRestClientTestConnector gpPublisherRestClient() {
-        return new GPPublisherRestClientTestConnector();
-    }
+    static Server server;
+    static GPPublisherService gpPublisherClient;
 
 }

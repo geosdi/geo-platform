@@ -33,18 +33,17 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.publisher.rest;
+package org.geosdi.geoplatform.publisher.soap;
 
 import java.io.File;
 import java.util.concurrent.atomic.AtomicBoolean;
 import javax.annotation.Resource;
-import org.geosdi.geoplatform.connectors.ws.publish.rest.GPPublisherRestClientTestConnector;
+import org.geosdi.geoplatform.connectors.ws.publish.soap.GPPublisherClientTestConnector;
 import org.geosdi.geoplatform.publisher.PublisherBaseTest;
 import org.geosdi.geoplatform.request.ProcessEPSGResultRequest;
 import org.geosdi.geoplatform.request.PublishLayerRequest;
 import org.geosdi.geoplatform.request.PublishRequest;
 import org.geosdi.geoplatform.responce.InfoPreview;
-import org.geosdi.geoplatform.support.cxf.rs.provider.configurator.GPRestProviderType;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -61,17 +60,15 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:appContext-PublisherRestTest.xml"})
+@ContextConfiguration(locations = {"classpath:appContext-PublisherSoapTest.xml"})
 @ActiveProfiles(profiles = {"dev"})
-public abstract class PublisherRestTest extends PublisherBaseTest {
+public abstract class PublisherSoapTest extends PublisherBaseTest {
 
     private static final AtomicBoolean flag = new AtomicBoolean(Boolean.FALSE);
-    @Value("configurator{webservice_rs_test_publisher_endpoint_address}")
-    private String basicRestAddress;
-    @Value("configurator{cxf_rest_provider_type}")
-    private GPRestProviderType providerType;
-    @Resource(name = "gpPublisherRestClient")
-    private GPPublisherRestClientTestConnector gpPublisherRestClient;
+    @Value("configurator{webservice_test_publisher_endpoint_address}")
+    private String basicSoapAddress;
+    @Resource(name = "gpPublisherSOAPClient")
+    private GPPublisherClientTestConnector gpPublisherSOAPClient;
 
     @Before
     public void setUp() {
@@ -79,40 +76,40 @@ public abstract class PublisherRestTest extends PublisherBaseTest {
             logger.debug(
                     "\n\t@@@@@@@@@@@@@@@@@@@@ SetUp {} @@@@@@@@@@@@@@@@@@@@\n",
                     getClass().getSimpleName());
-            PublisherRSServerUtils.gpPublisherClient = gpPublisherRestClient.getEndpointService();
-            PublisherRSServerUtils.server = GPPublisherRestServerConfig.gpPublisherRestServer(
-                    publisherService, basicRestAddress, providerType,
-                    serverLogInInterceptor, serverLogOutInterceptor);
-            PublisherRSServerUtils.server.start();
+            PublisherSoapServerUtils.gpPublisherClient = gpPublisherSOAPClient.getEndpointService();
+            PublisherSoapServerUtils.server = GPPublisherSoapServerConfig.gpPublisherSoapServer(
+                    publisherService, basicSoapAddress, serverLogInInterceptor,
+                    serverLogOutInterceptor);
+            PublisherSoapServerUtils.server.start();
             logger.debug(
-                    "\n\n\t@@@@@@@@@@@@@@@@@@@@@ Start GP_PUBLISHER_REST Server"
+                    "\n\n\t@@@@@@@@@@@@@@@@@@@@@ Start GP_PUBLISHER_SOAP Server"
                     + " @@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n\n");
         }
     }
 
     @AfterClass
     public static void afterClass() throws Exception {
-        PublisherRSServerUtils.server.stop();
-        logger.debug("\n\n\t@@@@@@@@@@@@@@@@@@@@@ Stop GP_PUBLISHER_REST Server"
+        PublisherSoapServerUtils.server.stop();
+        logger.debug("\n\n\t@@@@@@@@@@@@@@@@@@@@@ Stop GP_PUBLISHER_SOAP Server"
                 + " @@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n\n");
     }
 
     @Override
     protected final void mockPublishAllofPreview() throws Exception {
         when(publisherService.publishAllofPreview(any(PublishRequest.class)))
-                .thenReturn(Boolean.TRUE);
+                .thenReturn(Boolean.FALSE);
     }
 
     @Override
     protected final void mockPublish() throws Exception {
         when(publisherService.publish(any(PublishLayerRequest.class))).thenReturn(
-                Boolean.TRUE);
+                Boolean.FALSE);
     }
 
     @Override
     protected final void mockGetPreviewDataStores() throws Exception {
         when(publisherService.getPreviewDataStores(any(String.class))).thenReturn(
-                createInfoPreviewStore(15));
+                createInfoPreviewStore(25));
     }
 
     @Override
@@ -120,51 +117,52 @@ public abstract class PublisherRestTest extends PublisherBaseTest {
         when(publisherService.analyzeTIFInPreview(any(String.class), any(
                 File.class),
                 any(Boolean.class))).thenReturn(new InfoPreview(
-                                "DATA_STORE_MOCK_MOKITO",
-                                "MESSAGE_MOCK_MOKITO"));
+                                "DATA_STORE_MOCK_MOKITO_SOAP",
+                                "MESSAGE_MOCK_MOKITO_SOAP"));
     }
 
     @Override
     protected final void mockExistsStyle() throws Exception {
         when(publisherService.existsStyle(any(String.class))).thenReturn(
-                Boolean.TRUE);
+                Boolean.FALSE);
     }
 
     @Override
     protected final void mockPutStyle() throws Exception {
         when(publisherService.putStyle(any(String.class), any(String.class))).thenReturn(
-                Boolean.TRUE);
+                Boolean.FALSE);
     }
 
     @Override
     protected final void mockPublishStyle() throws Exception {
         when(publisherService.publishStyle(any(String.class))).thenReturn(
-                Boolean.TRUE);
+                Boolean.FALSE);
     }
 
     @Override
     protected final void mockDescribeFeatureType() throws Exception {
         when(publisherService.describeFeatureType(any(String.class))).thenReturn(
-                createLayerAttributeStore(40));
+                createLayerAttributeStore(20));
     }
 
     @Override
     protected final void mockLoadStyle() throws Exception {
         when(publisherService.loadStyle(any(String.class), any(String.class))).thenReturn(
-                "MOCK_STYLE_TEST_LOADED");
+                "MOCK_STYLE_TEST_LOADED_SOAP");
     }
 
     @Override
     protected final void mockProcessEPSGResult() throws Exception {
         when(publisherService.processEPSGResult(any(
                 ProcessEPSGResultRequest.class))).thenReturn(
-                        createInfoPreviewStore(37));
+                        createInfoPreviewStore(17));
     }
 
     @Override
     protected final void mockAnalyzeZIPEPSG() throws Exception {
         when(publisherService.analyzeZIPEPSG(any(String.class),
                 any(String.class), any(File.class)))
-                .thenReturn(createInfoPreviewStore(80));
+                .thenReturn(createInfoPreviewStore(60));
     }
+
 }

@@ -33,46 +33,58 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.request;
+package org.geosdi.geoplatform.publisher.rest;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import javax.ws.rs.core.MediaType;
+import org.apache.cxf.endpoint.Server;
+import org.apache.cxf.interceptor.Interceptor;
+import org.apache.cxf.interceptor.LoggingInInterceptor;
+import org.apache.cxf.interceptor.LoggingOutInterceptor;
+import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
+import org.apache.cxf.message.Message;
+import org.geosdi.geoplatform.exception.rs.mapper.GPExceptionFaultMapper;
+import org.geosdi.geoplatform.services.GPPublisherService;
+import org.geosdi.geoplatform.support.cxf.rs.provider.configurator.GPRestProviderType;
+import static org.geosdi.geoplatform.support.cxf.rs.provider.factory.GPRestProviderFactory.createProvider;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@XmlRootElement
-@XmlAccessorType(XmlAccessType.FIELD)
-public class PublishLayerRequest extends PublishRequest {
+class GPPublisherRestServerConfig {
 
-    private static final long serialVersionUID = 486823699888551437L;
-    //
-    private String layerName;
+    public static Server gpPublisherRestServer(
+            GPPublisherService publisherService,
+            String publisherRestAddress, GPRestProviderType providerType,
+            LoggingInInterceptor serverLogInInterceptor,
+            LoggingOutInterceptor serverLogOutInterceptor) {
 
-    public PublishLayerRequest() {
-    }
+        JAXRSServerFactoryBean factory = new JAXRSServerFactoryBean();
+        factory.setServiceBean(publisherService);
+        factory.setAddress(publisherRestAddress);
 
-    public PublishLayerRequest(String theSessionID,
-            String theWorkspace, String theDataStoreName, String layerName) {
-        super(theSessionID, theWorkspace, theDataStoreName);
-        this.layerName = layerName;
-    }
+        factory.setProviders(Arrays.asList(
+                new Object[]{createProvider(providerType),
+                    new GPExceptionFaultMapper()}));
 
-    /**
-     * @return the layerName
-     */
-    public String getLayerName() {
-        return layerName;
-    }
+        Map<Object, Object> extensionMappings = new HashMap<>();
+        extensionMappings.put("xml", MediaType.APPLICATION_XML);
+        extensionMappings.put("json", MediaType.APPLICATION_JSON);
 
-    /**
-     * @param layerName the layerName to set
-     */
-    public void setLayerName(String layerName) {
-        this.layerName = layerName;
+        factory.setExtensionMappings(extensionMappings);
+
+        factory.setInInterceptors(Arrays.<Interceptor<? extends Message>>asList(
+                serverLogInInterceptor)
+        );
+        factory.setOutInterceptors(
+                Arrays.<Interceptor<? extends Message>>asList(
+                        serverLogOutInterceptor));
+
+        return factory.create();
     }
 
 }

@@ -33,46 +33,25 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.request;
+package org.geosdi.geoplatform.publisher.rest.beans;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
+import org.geosdi.geoplatform.configurator.bootstrap.Develop;
+import org.geosdi.geoplatform.connectors.ws.publish.rest.GPPublisherRestClientTestConnector;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@XmlRootElement
-@XmlAccessorType(XmlAccessType.FIELD)
-public class PublishLayerRequest extends PublishRequest {
+@Configuration
+@Develop
+class GPPublisherRestBeansConfig {
 
-    private static final long serialVersionUID = 486823699888551437L;
-    //
-    private String layerName;
-
-    public PublishLayerRequest() {
-    }
-
-    public PublishLayerRequest(String theSessionID,
-            String theWorkspace, String theDataStoreName, String layerName) {
-        super(theSessionID, theWorkspace, theDataStoreName);
-        this.layerName = layerName;
-    }
-
-    /**
-     * @return the layerName
-     */
-    public String getLayerName() {
-        return layerName;
-    }
-
-    /**
-     * @param layerName the layerName to set
-     */
-    public void setLayerName(String layerName) {
-        this.layerName = layerName;
+    @Bean
+    public GPPublisherRestClientTestConnector gpPublisherRestClient() {
+        return new GPPublisherRestClientTestConnector();
     }
 
 }

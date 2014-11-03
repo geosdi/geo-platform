@@ -182,18 +182,11 @@
                 <version>${xmlsec-version}</version>
             </dependency>
             
-            <dependency>
-                <groupId>javax.ws.rs</groupId>
-                <artifactId>javax.ws.rs-api</artifactId>
-                <version>${javax.ws.rs-api-version}</version>
-            </dependency>
-            
         </dependencies>
     </dependencyManagement>
     
     <properties>
         <jaxws-version>2.2.11</jaxws-version>
-        <javax.ws.rs-api-version>2.0</javax.ws.rs-api-version>  
         <cxf-version>3.0.2</cxf-version>
         <xmlsec-version>2.0.2</xmlsec-version>
         <wss4j-version>2.0.2</wss4j-version>

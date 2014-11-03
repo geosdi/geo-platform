@@ -393,6 +393,15 @@
                 <version>${project.version}</version>
             </dependency>
             
+            <!-- =========================================================== -->
+            <!-- ========================== REST =========================== -->
+            <!-- =========================================================== -->
+            
+            <dependency>
+                <groupId>javax.ws.rs</groupId>
+                <artifactId>javax.ws.rs-api</artifactId>
+                <version>${javax.ws.rs-api-version}</version>
+            </dependency>
             
             <!-- =========================================================== -->
             <!-- ======================= ACTIVE MQ ========================= -->
@@ -1377,6 +1386,8 @@
         <activemq-version>5.8.0</activemq-version>
         
         <jettison>1.3.6</jettison>
+        
+        <javax.ws.rs-api-version>2.0</javax.ws.rs-api-version>  
 
         <httpcomponents-core-version>4.3.2</httpcomponents-core-version>
         <httpcomponents-client-version>4.3.5</httpcomponents-client-version>

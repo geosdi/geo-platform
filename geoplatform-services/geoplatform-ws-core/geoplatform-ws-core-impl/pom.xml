@@ -25,31 +25,10 @@
             <artifactId>commons-collections</artifactId>
         </dependency>
 
-        <!-- GEOPLATFORM WS -->
         <dependency>
             <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-model</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>cglib</groupId>
-                    <artifactId>cglib</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-dao</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>cglib</groupId>
-                    <artifactId>cglib</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>xerces</groupId>
-                    <artifactId>xercesImpl</artifactId>
-                </exclusion>
-            </exclusions>
+            <artifactId>geoplatform-core-delegate</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
@@ -73,49 +52,24 @@
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-ws-util</artifactId>
         </dependency>
-        
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-scheduler-api</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>dom4j</groupId>
-            <artifactId>dom4j</artifactId>
-        </dependency>
-
-        <!-- logging dependencies, delegate all to slf4j and use logback -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-        </dependency>
 
         <!-- SPRING -->
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-jmx</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
-            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
-            <scope>provided</scope>
         </dependency>
         
         <dependency>
@@ -125,46 +79,6 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-acl</artifactId>
-        </dependency>
-
-        <!-- HIBERNATE-GENERIC-DAO -->
-        <dependency>
-            <groupId>com.googlecode.genericdao</groupId>
-            <artifactId>dao</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-api</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>com.googlecode.genericdao</groupId>
-            <artifactId>search-hibernate</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.googlecode.genericdao</groupId>
-            <artifactId>search-jpa-hibernate</artifactId>
-        </dependency>
-
-        <!-- HIBERNATE-SPATIAL -->
-        <dependency>
-            <groupId>org.hibernatespatial</groupId>
-            <artifactId>hibernate-spatial-postgis</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-api</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <!-- CGLIB -->
-        <dependency>
-            <groupId>cglib</groupId>
-            <artifactId>cglib-nodep</artifactId>
         </dependency>
 
         <dependency>
@@ -205,12 +119,6 @@
         <dependency> 
             <groupId>org.apache.cxf</groupId> 
             <artifactId>cxf-rt-rs-extension-providers</artifactId> 
-        </dependency>
-                
-        <!-- LOGGER -->
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
         </dependency>
         
         <dependency>

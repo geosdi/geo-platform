@@ -52,22 +52,11 @@
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-sharing</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-model</artifactId>
-        </dependency>
         
         <dependency>
-            <groupId>net.jcip</groupId>
-            <artifactId>jcip-annotations</artifactId>
-            <version>1.0</version>
-        </dependency>
-
-        <!-- GUAVA -->
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-services-core-api</artifactId>
+            <version>${project.version}</version>
         </dependency>
         
         <!-- GEOTOOLS -->

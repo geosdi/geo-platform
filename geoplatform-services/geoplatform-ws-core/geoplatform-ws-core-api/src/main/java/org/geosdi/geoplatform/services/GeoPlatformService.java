@@ -114,6 +114,7 @@ import org.geosdi.geoplatform.responce.collection.TreeFolderElementsStore;
 import org.geosdi.geoplatform.responce.role.GPGetRoleResponse;
 import org.geosdi.geoplatform.responce.role.WSGetRoleResponse;
 import org.geosdi.geoplatform.responce.viewport.WSGetViewportResponse;
+import org.geosdi.geoplatform.services.core.api.GPCoreServiceApi;
 import org.geosdi.geoplatform.services.rs.path.GPServiceRSPathConfig;
 
 /**
@@ -129,7 +130,7 @@ import org.geosdi.geoplatform.services.rs.path.GPServiceRSPathConfig;
 @Produces(value = {MediaType.APPLICATION_JSON})
 @WebService(name = "GeoPlatformService",
         targetNamespace = "http://services.geo-platform.org/")
-public interface GeoPlatformService {
+public interface GeoPlatformService extends GPCoreServiceApi {
 
     // <editor-fold defaultstate="collapsed" desc="Organization">
     // ==========================================================================
@@ -147,6 +148,7 @@ public interface GeoPlatformService {
     @Path(value = GPServiceRSPathConfig.INSERT_ORGANIZATION_PATH)
     @POST
     @Deprecated
+    @Override
     Long insertOrganization(
             @WebParam(name = "organization") GPOrganization organization)
             throws IllegalParameterFault;
@@ -163,6 +165,7 @@ public interface GeoPlatformService {
     @Path(value = GPServiceRSPathConfig.DELETE_ORGANIZATION_PATH)
     @DELETE
     @Deprecated
+    @Override
     Boolean deleteOrganization(
             @WebParam(name = "organizationID")
             @PathParam(value = "organizationID") Long organizationID)
@@ -185,6 +188,7 @@ public interface GeoPlatformService {
     @Post
     @POST
     @Path(value = GPServiceRSPathConfig.INSERT_ACCOUNT_PATH)
+    @Override
     Long insertAccount(
             @WebParam(name = "InsertAccountRequest") InsertAccountRequest insertAccountRequest)
             throws IllegalParameterFault;
@@ -206,6 +210,7 @@ public interface GeoPlatformService {
     @PUT
     @Path(value = GPServiceRSPathConfig.UPDATE_USER_PATH)
     @Put
+    @Override
     Long updateUser(@WebParam(name = "User") GPUser user)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
@@ -253,6 +258,7 @@ public interface GeoPlatformService {
     @DELETE
     @Path(value = GPServiceRSPathConfig.DELETE_ACCOUNT_PATH)
     @Delete
+    @Override
     Boolean deleteAccount(@WebParam(name = "accountID")
             @QueryParam(value = "accountID") Long accountID)
             throws ResourceNotFoundFault;
@@ -268,6 +274,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.GET_USER_DETAIL_BY_ID_PATH)
     @WebResult(name = "user")
+    @Override
     GPUser getUserDetail(@WebParam(name = "userID")
             @PathParam(value = "userID") Long userID)
             throws ResourceNotFoundFault;
@@ -283,6 +290,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.GET_USER_DETAIL_BY_USERNAME_PATH)
     @WebResult(name = "user")
+    @Override
     GPUser getUserDetailByUsername(@QueryParam("") SearchRequest request)
             throws ResourceNotFoundFault;
 
@@ -300,6 +308,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.GET_USER_DETAIL_BY_USERNAME_AND_PASSWORD_PATH)
     @WebResult(name = "user")
+    @Override
     GPUser getUserDetailByUsernameAndPassword(
             @WebParam(name = "username")
             @QueryParam(value = "username") String username,
@@ -345,6 +354,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.GET_SHORT_USER_BY_ID_PATH)
     @WebResult(name = "user")
+    @Override
     UserDTO getShortUser(@WebParam(name = "userID")
             @PathParam(value = "userID") Long userID)
             throws ResourceNotFoundFault;
@@ -361,6 +371,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.GET_SHORT_USER_BY_USERNAME_PATH)
     @WebResult(name = "user")
+    @Override
     UserDTO getShortUserByUsername(@QueryParam("") SearchRequest request)
             throws ResourceNotFoundFault;
 
@@ -404,6 +415,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.SEARCH_USERS_PATH)
     @WebResult(name = "user")
+    @Override
     List<UserDTO> searchUsers(@WebParam(name = "userID")
             @QueryParam(value = "userID") Long userID,
             @QueryParam("") PaginatedSearchRequest request)
@@ -418,6 +430,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.GET_ALL_ACCOUNTS_PATH)
     @WebResult(name = "account")
+    @Override
     ShortAccountDTOContainer getAllAccounts();
 
     /**
@@ -431,6 +444,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.GET_ALL_ORGANIZATION_ACCOUNTS_PATH)
     @WebResult(name = "account")
+    @Override
     ShortAccountDTOContainer getAccounts(
             @WebParam(name = "organization")
             @PathParam(value = "organization") String organization)
@@ -447,6 +461,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.GET_ACCOUNTS_COUNT_PATH)
     @WebResult(name = "count")
+    @Override
     Long getAccountsCount(@QueryParam("") SearchRequest request);
 
     /**
@@ -461,6 +476,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.GET_USERS_COUNT_PATH)
     @WebResult(name = "count")
+    @Override
     Long getUsersCount(@WebParam(name = "organization")
             @QueryParam(value = "organization") String organization,
             @QueryParam("") SearchRequest request);
@@ -477,6 +493,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.GET_AUTHORITIES_PATH)
     @WebResult(name = "authority")
+    @Override
     GetAuthorityResponse getAuthorities(@WebParam(name = "accountID")
             @PathParam(value = "accountID") Long accountID)
             throws ResourceNotFoundFault;
@@ -494,6 +511,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.GET_AUTHORITIES_BY_ACCOUNT_NATURAL_ID)
     @WebResult(name = "authority")
+    @Override
     List<GPAuthority> getAuthoritiesDetail(
             @WebParam(name = "accountNaturalID")
             @PathParam(value = "accountNaturalID") String accountNaturalID)
@@ -508,6 +526,7 @@ public interface GeoPlatformService {
     @Put
     @PUT
     @Path(value = GPServiceRSPathConfig.FORCE_TEMPORARY_ACCOUNT_PATH)
+    @Override
     void forceTemporaryAccount(@WebParam(name = "accountID")
             @PathParam(value = "accountID") Long accountID)
             throws ResourceNotFoundFault;
@@ -522,6 +541,7 @@ public interface GeoPlatformService {
     @Put
     @PUT
     @Path(value = GPServiceRSPathConfig.FORCE_EXPIRED_TEMPORARY_ACCOUNT_PATH)
+    @Override
     void forceExpiredTemporaryAccount(
             @WebParam(name = "accountID")
             @PathParam(value = "accountID") Long accountID)
@@ -542,6 +562,7 @@ public interface GeoPlatformService {
     @Post
     @POST
     @Path(value = GPServiceRSPathConfig.INSERT_ACCOUNT_PROJECT_PATH)
+    @Override
     Long insertAccountProject(
             @WebParam(name = "accountProject") GPAccountProject accountProject)
             throws IllegalParameterFault;
@@ -559,6 +580,7 @@ public interface GeoPlatformService {
     @Put
     @PUT
     @Path(value = GPServiceRSPathConfig.UPDATE_ACCOUNT_PROJECT_PATH)
+    @Override
     Long updateAccountProject(
             @WebParam(name = "accountProject") GPAccountProject accountProject)
             throws ResourceNotFoundFault, IllegalParameterFault;
@@ -573,6 +595,7 @@ public interface GeoPlatformService {
     @Delete
     @DELETE
     @Path(value = GPServiceRSPathConfig.DELETE_ACCOUNT_PROJECT_PATH)
+    @Override
     Boolean deleteAccountProject(
             @WebParam(name = "accountProjectID")
             @PathParam(value = "accountProjectID") Long accountProjectID)
@@ -589,6 +612,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.GET_ACCOUNT_PROJECT_PATH)
     @WebResult(name = "accountProject")
+    @Override
     GPAccountProject getAccountProject(
             @WebParam(name = "accountProjectID")
             @PathParam(value = "accountProjectID") Long accountProjectID)
@@ -604,6 +628,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.GET_ACCOUNT_PROJECTS_BY_ACCOUNT_ID)
     @WebResult(name = "accountProject")
+    @Override
     WSGetAccountProjectsResponse getAccountProjectsByAccountID(@PathParam(
             value = "accountID")
             @WebParam(name = "accountID") Long accountID);
@@ -618,6 +643,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.GET_ACCOUNT_PROJECTS_BY_PROJECT_ID_PATH)
     @WebResult(name = "accountProject")
+    @Override
     WSGetAccountProjectsResponse getAccountProjectsByProjectID(
             @WebParam(name = "projectID")
             @PathParam(value = "projectID") Long projectID);
@@ -634,6 +660,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.GET_ACCOUNT_PROJECT_BY_ACCOUNT_AND_PROJECT_IDS_PATH)
     @WebResult(name = "accountProject")
+    @Override
     GPAccountProject getAccountProjectByAccountAndProjectIDs(
             @WebParam(name = "accountID")
             @PathParam(value = "accountID") Long accountID,
@@ -654,6 +681,7 @@ public interface GeoPlatformService {
     @Get
     @GET
     @Path(value = GPServiceRSPathConfig.GET_ACCOUNT_PROJECTS_COUNT_PATH)
+    @Override
     Long getAccountProjectsCount(@WebParam(name = "accountID")
             @QueryParam(value = "accountID") Long accountID,
             @QueryParam("") SearchRequest request) throws ResourceNotFoundFault;
@@ -670,6 +698,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.GET_DEFAULT_ACCOUNT_PROJECT_PATH)
     @WebResult(name = "defaultAccountProject")
+    @Override
     GPAccountProject getDefaultAccountProject(
             @WebParam(name = "accountID")
             @PathParam(value = "accountID") Long accountID)
@@ -692,6 +721,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.SEARCH_ACCOUNT_PROJECTS_PATH)
     @WebResult(name = "project")
+    @Override
     List<ProjectDTO> searchAccountProjects(
             @WebParam(name = "accountID")
             @QueryParam(value = "accountID") Long accountID,
@@ -709,6 +739,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.GET_PROJECT_OWNER_PATH)
     @WebResult(name = "projectOwner")
+    @Override
     GPAccountProject getProjectOwner(@WebParam(name = "projectID")
             @PathParam(value = "projectID") Long projectID)
             throws ResourceNotFoundFault;
@@ -723,6 +754,7 @@ public interface GeoPlatformService {
     @Put
     @PUT
     @Path(value = GPServiceRSPathConfig.SET_PROJECT_OWNER_PATH)
+    @Override
     Boolean setProjectOwner(RequestByAccountProjectIDs request)
             throws ResourceNotFoundFault;
 
@@ -749,6 +781,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.GET_DEFAULT_PROJECT_PATH)
     @WebResult(name = "defaultProject")
+    @Override
     GPProject getDefaultProject(@WebParam(name = "accountID")
             @PathParam(value = "accountID") Long accountID)
             throws ResourceNotFoundFault;
@@ -766,6 +799,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.GET_DEFAULT_PROJECT_DTO_PATH)
     @WebResult(name = "defaultProjectDTO")
+    @Override
     ProjectDTO getDefaultProjectDTO(@WebParam(name = "accountID")
             @PathParam(value = "accountID") Long accountID)
             throws ResourceNotFoundFault;
@@ -800,6 +834,7 @@ public interface GeoPlatformService {
     @Put
     @PUT
     @Path(value = GPServiceRSPathConfig.SAVE_ACCOUNT_PROJECT_PROPERTIES_PATH)
+    @Override
     Boolean saveAccountProjectProperties(
             @WebParam(name = "accountProjectProperties") AccountProjectPropertiesDTO accountProjectProperties)
             throws ResourceNotFoundFault, IllegalParameterFault;
@@ -816,6 +851,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.GET_ACCOUNTS_BY_PROJECT_ID_PATH)
     @WebResult(name = "account")
+    @Override
     ShortAccountDTOContainer getAccountsByProjectID(
             @WebParam(name = "projectID")
             @PathParam(value = "projectID") Long projectID)
@@ -832,6 +868,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.GET_ACCOUNTS_TO_SHARE_BY_PROJECT_ID_PATH)
     @WebResult(name = "account")
+    @Override
     ShortAccountDTOContainer getAccountsToShareByProjectID(
             @WebParam(name = "projectID")
             @PathParam(value = "projectID") Long projectID)
@@ -852,6 +889,7 @@ public interface GeoPlatformService {
     @PUT
     @Path(value = GPServiceRSPathConfig.UPDATE_ACCOUNTS_PROJECT_SHARING_PATH)
     @WebResult(name = "account")
+    @Override
     Boolean updateAccountsProjectSharing(PutAccountsProjectRequest apRequest)
             throws ResourceNotFoundFault, IllegalParameterFault;
     // </editor-fold>
@@ -872,6 +910,7 @@ public interface GeoPlatformService {
     @Post
     @POST
     @Path(value = GPServiceRSPathConfig.SAVE_PROJECT_PATH)
+    @Override
     Long saveProject(
             @WebParam(name = "saveProjectRequest") SaveProjectRequest saveProjectRequest)
             throws ResourceNotFoundFault, IllegalParameterFault;
@@ -890,6 +929,7 @@ public interface GeoPlatformService {
     @Path(value = GPServiceRSPathConfig.INSERT_PROJECT_PATH)
     @POST
     @Deprecated
+    @Override
     Long insertProject(@WebParam(name = "project") GPProject project)
             throws IllegalParameterFault;
 
@@ -904,6 +944,7 @@ public interface GeoPlatformService {
     @Put
     @PUT
     @Path(value = GPServiceRSPathConfig.UPDATE_PROJECT_PATH)
+    @Override
     Long updateProject(@WebParam(name = "project") GPProject project)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
@@ -917,6 +958,7 @@ public interface GeoPlatformService {
     @Delete
     @DELETE
     @Path(value = GPServiceRSPathConfig.DELETE_PROJECT_PATH)
+    @Override
     Boolean deleteProject(@WebParam(name = "projectID")
             @PathParam(value = "projectID") Long projectID)
             throws ResourceNotFoundFault;
@@ -932,6 +974,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.GET_PROJECT_DETAIL_PATH)
     @WebResult(name = "project")
+    @Override
     GPProject getProjectDetail(@WebParam(name = "projectID")
             @PathParam(value = "projectID") Long projectID)
             throws ResourceNotFoundFault;
@@ -947,6 +990,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.GET_NUMBER_OF_ELEMENTS_PROJECT_PATH)
     @WebResult(name = "project")
+    @Override
     Integer getNumberOfElementsProject(@WebParam(name = "projectID")
             @PathParam(value = "projectID") Long projectID)
             throws ResourceNotFoundFault;
@@ -961,6 +1005,7 @@ public interface GeoPlatformService {
     @Put
     @PUT
     @Path(value = GPServiceRSPathConfig.SET_PROJECT_SHARED_PATH)
+    @Override
     void setProjectShared(@WebParam(name = "projectID")
             @QueryParam(value = "projectID") Long projectID)
             throws ResourceNotFoundFault;
@@ -974,6 +1019,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.GET_DEFAULT_VIEWPORT_PATH)
     @WebResult(name = "viewport")
+    @Override
     GPViewport getDefaultViewport(@WebParam(name = "accountProjectID")
             @PathParam(value = "accountProjectID") Long accountProjectID)
             throws ResourceNotFoundFault;
@@ -982,6 +1028,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.GET_ACCOUNT_PROJECT_VIEWPORTS_PATH)
     @WebResult(name = "wsGetVieportResponse")
+    @Override
     WSGetViewportResponse getAccountProjectViewports(@WebParam(
             name = "accountProjectID")
             @PathParam(value = "accountProjectID") Long accountProjectID)
@@ -990,6 +1037,7 @@ public interface GeoPlatformService {
     @Post
     @POST
     @Path(value = GPServiceRSPathConfig.INSERT_VIEWPORT_PATH)
+    @Override
     Long insertViewport(
             @WebParam(name = "insertViewportReq") InsertViewportRequest insertViewportReq)
             throws ResourceNotFoundFault, IllegalParameterFault;
@@ -997,6 +1045,7 @@ public interface GeoPlatformService {
     @Put
     @PUT
     @Path(value = GPServiceRSPathConfig.UPDATE_VIEWPORT_PATH)
+    @Override
     Long updateViewport(@WebParam(name = "viewport") GPViewport viewport)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
@@ -1004,6 +1053,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.GET_VIEWPORT_BY_ID_PATH)
     @WebResult(name = "viewport")
+    @Override
     GPViewport getViewportById(@WebParam(name = "idViewport")
             @QueryParam(value = "idViewport") Long idViewport)
             throws ResourceNotFoundFault, IllegalParameterFault;
@@ -1011,6 +1061,7 @@ public interface GeoPlatformService {
     @Delete
     @DELETE
     @Path(value = GPServiceRSPathConfig.DELETE_VIEWPORT_PATH)
+    @Override
     Boolean deleteViewport(@WebParam(name = "viewportID")
             @QueryParam(value = "viewportID") Long viewportID)
             throws ResourceNotFoundFault;
@@ -1018,6 +1069,7 @@ public interface GeoPlatformService {
     @Put
     @PUT
     @Path(value = GPServiceRSPathConfig.SAVE_OR_UPDATE_VIEWPORT_LIST_PATH)
+    @Override
     void saveOrUpdateViewportList(
             @WebParam(name = "request") ManageViewportRequest request)
             throws ResourceNotFoundFault, IllegalParameterFault;
@@ -1025,6 +1077,7 @@ public interface GeoPlatformService {
     @Put
     @PUT
     @Path(value = GPServiceRSPathConfig.REPLACE_VIEWPORT_LIST_PATH)
+    @Override
     void replaceViewportList(
             @WebParam(name = "request") ManageViewportRequest request)
             throws ResourceNotFoundFault, IllegalParameterFault;
@@ -1051,6 +1104,7 @@ public interface GeoPlatformService {
     @POST
     @Path(value = GPServiceRSPathConfig.INSERT_FOLDER_PATH)
     @Deprecated
+    @Override
     Long insertFolder(
             @WebParam(name = "insertFolderRequest") InsertFolderRequest insertFolderRequest)
             throws ResourceNotFoundFault, IllegalParameterFault;
@@ -1070,6 +1124,7 @@ public interface GeoPlatformService {
     @PUT
     @Path(value = GPServiceRSPathConfig.UPDATE_FOLDER_PATH)
     @Deprecated
+    @Override
     Long updateFolder(@WebParam(name = "folder") GPFolder folder)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
@@ -1087,6 +1142,7 @@ public interface GeoPlatformService {
     @DELETE
     @Path(value = GPServiceRSPathConfig.DELETE_FOLDER_PATH)
     @Deprecated
+    @Override
     Boolean deleteFolder(@WebParam(name = "folderID")
             @QueryParam(value = "folderID") Long folderID)
             throws ResourceNotFoundFault;
@@ -1105,6 +1161,7 @@ public interface GeoPlatformService {
     @Post
     @POST
     @Path(value = GPServiceRSPathConfig.SAVE_FOLDER_PROPERTIES_PATH)
+    @Override
     Long saveFolderProperties(@WebParam(name = "folderID")
             @QueryParam(value = "folderID") Long folderID,
             @WebParam(name = "folderName")
@@ -1127,6 +1184,7 @@ public interface GeoPlatformService {
     @Put
     @PUT
     @Path(value = GPServiceRSPathConfig.SAVE_ADDED_FOLDER_AND_TREE_MODICATIONS_PATH)
+    @Override
     Long saveAddedFolderAndTreeModifications(@WebParam(
             name = "sftModificationRequest") WSAddFolderAndTreeModificationsRequest sftModificationRequest)
             throws ResourceNotFoundFault, IllegalParameterFault;
@@ -1143,6 +1201,7 @@ public interface GeoPlatformService {
     @Put
     @PUT
     @Path(value = GPServiceRSPathConfig.SAVE_DELETED_FOLDER_AND_TREE_MODIFICATIONS_PATH)
+    @Override
     Boolean saveDeletedFolderAndTreeModifications(
             @WebParam(name = "sdfModificationRequest") WSDeleteFolderAndTreeModifications sdfModificationRequest)
             throws ResourceNotFoundFault;
@@ -1173,6 +1232,7 @@ public interface GeoPlatformService {
     @Put
     @PUT
     @Path(value = GPServiceRSPathConfig.SAVE_DD_FOLDER_AND_TREE_MODIFICATIONS_PATH)
+    @Override
     Boolean saveDragAndDropFolderAndTreeModifications(
             @WebParam(name = "sddfTreeModificationRequest") WSDDFolderAndTreeModifications sddfTreeModificationRequest)
             throws ResourceNotFoundFault;
@@ -1188,6 +1248,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.GET_SHORT_FOLDER_PATH)
     @WebResult(name = "folder")
+    @Override
     FolderDTO getShortFolder(@WebParam(name = "folderID")
             @PathParam(value = "folderID") Long folderID)
             throws ResourceNotFoundFault;
@@ -1203,6 +1264,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.GET_FOLDER_DETAIL_PATH)
     @WebResult(name = "folder")
+    @Override
     GPFolder getFolderDetail(@WebParam(name = "folderID")
             @PathParam(value = "folderID") Long folderID)
             throws ResourceNotFoundFault;
@@ -1257,6 +1319,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.GET_CHILDREN_FOLDERS_PATH)
     @WebResult(name = "folder")
+    @Override
     List<FolderDTO> getChildrenFolders(@WebParam(name = "folderID")
             @PathParam(value = "folderID") Long folderID);
 
@@ -1270,6 +1333,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.GET_CHILDREN_ELEMENTS_PATH)
     @WebResult(name = "childrenElement")
+    @Override
     TreeFolderElementsStore getChildrenElements(@WebParam(name = "folderID")
             @PathParam(value = "folderID") Long folderID);
     // </editor-fold>
@@ -1289,6 +1353,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.GET_PROJECT_WITH_ROOT_FOLDERS_PATH)
     @WebResult(name = "project")
+    @Override
     ProjectDTO getProjectWithRootFolders(@WebParam(name = "projectID")
             @PathParam(value = "projectID") Long projectID,
             @WebParam(name = "accountID")
@@ -1315,6 +1380,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.GET_PROJECT_WITH_EXPANDED_FOLDERS_PATH)
     @WebResult(name = "project")
+    @Override
     ProjectDTO getProjectWithExpandedFolders(
             @WebParam(name = "projectID")
             @PathParam(value = "projectID") Long projectID,
@@ -1333,6 +1399,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.EXPORT_PROJECT_PATH)
     @WebResult(name = "project")
+    @Override
     ProjectDTO exportProject(@WebParam(name = "projectID")
             @PathParam(value = "projectID") Long projectID)
             throws ResourceNotFoundFault;
@@ -1350,6 +1417,7 @@ public interface GeoPlatformService {
     @Post
     @POST
     @Path(value = GPServiceRSPathConfig.IMPORT_PROJECT_PATH)
+    @Override
     Long importProject(
             @WebParam(name = "impRequest") ImportProjectRequest impRequest)
             throws IllegalParameterFault, ResourceNotFoundFault;
@@ -1370,6 +1438,7 @@ public interface GeoPlatformService {
     @POST
     @Path(value = GPServiceRSPathConfig.INSERT_LAYER_PATH)
     @Deprecated
+    @Override
     Long insertLayer(
             @WebParam(name = "layerRequest") InsertLayerRequest layerRequest)
             throws IllegalParameterFault;
@@ -1389,6 +1458,7 @@ public interface GeoPlatformService {
     @PUT
     @Path(value = GPServiceRSPathConfig.UPDATE_RASTER_LAYER_PARH)
     @Deprecated
+    @Override
     Long updateRasterLayer(@WebParam(name = "layer") GPRasterLayer layer)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
@@ -1405,6 +1475,7 @@ public interface GeoPlatformService {
     @PUT
     @Path(value = GPServiceRSPathConfig.UPDATE_VECTOR_LAYER_PATH)
     @Deprecated
+    @Override
     Long updateVectorLayer(@WebParam(name = "layer") GPVectorLayer layer)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
@@ -1422,6 +1493,7 @@ public interface GeoPlatformService {
     @DELETE
     @Path(value = GPServiceRSPathConfig.DELETE_LAYER_PATH)
     @Deprecated
+    @Override
     Boolean deleteLayer(@WebParam(name = "layerID")
             @QueryParam(value = "layerID") Long layerID)
             throws ResourceNotFoundFault;
@@ -1438,6 +1510,7 @@ public interface GeoPlatformService {
     @Post
     @POST
     @Path(value = GPServiceRSPathConfig.ADD_LAYER_AND_TREE_MODIFICATIONS_PATH)
+    @Override
     Long saveAddedLayerAndTreeModifications(
             @WebParam(name = "addLayerRequest") WSAddLayerAndTreeModificationsRequest addLayerRequest)
             throws ResourceNotFoundFault, IllegalParameterFault;
@@ -1456,6 +1529,7 @@ public interface GeoPlatformService {
     @POST
     @Path(value = GPServiceRSPathConfig.ADD_LAYERS_AND_TREE_MODIFICATIONS_PATH)
     @WebResult(name = "layerID")
+    @Override
     LongListStore saveAddedLayersAndTreeModifications(
             @WebParam(name = "addLayersRequest") WSAddLayersAndTreeModificationsRequest addLayersRequest)
             throws ResourceNotFoundFault, IllegalParameterFault;
@@ -1472,6 +1546,7 @@ public interface GeoPlatformService {
     @Put
     @PUT
     @Path(value = GPServiceRSPathConfig.DELETE_LAYER_AND_TREE_MODIFICATIONS_PATH)
+    @Override
     Boolean saveDeletedLayerAndTreeModifications(
             @WebParam(name = "deleteLayerRequest") WSDeleteLayerAndTreeModificationsRequest deleteLayerRequest)
             throws ResourceNotFoundFault;
@@ -1487,6 +1562,7 @@ public interface GeoPlatformService {
     @Put
     @PUT
     @Path(value = GPServiceRSPathConfig.SAVE_CHECK_STATUS_LAYER_AND_TREE_MODIFICATION_PATH)
+    @Override
     Boolean saveCheckStatusLayerAndTreeModifications(
             @WebParam(name = "layerID")
             @QueryParam(value = "layerID") Long layerID,
@@ -1525,6 +1601,7 @@ public interface GeoPlatformService {
     @Put
     @PUT
     @Path(value = GPServiceRSPathConfig.SAVE_DD_LAYER_AND_TREE_MODIFICATIONS_PATH)
+    @Override
     Boolean saveDragAndDropLayerAndTreeModifications(
             @WebParam(name = "ddLayerReq") WSDDLayerAndTreeModificationsRequest ddLayerReq)
             throws ResourceNotFoundFault, IllegalParameterFault;
@@ -1541,6 +1618,7 @@ public interface GeoPlatformService {
     @Put
     @PUT
     @Path(value = GPServiceRSPathConfig.SAVE_LAYERS_PROPERTIES_PATH)
+    @Override
     Boolean saveLayerProperties(
             @WebParam(name = "layerProperties") RasterPropertiesDTO layerProperties)
             throws ResourceNotFoundFault, IllegalParameterFault;
@@ -1568,6 +1646,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.GET_RASTER_LAYER_PATH)
     @WebResult(name = "rasterLayer")
+    @Override
     GPRasterLayer getRasterLayer(@WebParam(name = "layerID")
             @PathParam(value = "layerID") Long layerID)
             throws ResourceNotFoundFault;
@@ -1583,6 +1662,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.GET_VECTOR_LAYER_PATH)
     @WebResult(name = "vectorLayer")
+    @Override
     GPVectorLayer getVectorLayer(@WebParam(name = "layerID")
             @PathParam(value = "layerID") Long layerID)
             throws ResourceNotFoundFault;
@@ -1612,6 +1692,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.GET_LAYERS_PATH)
     @WebResult(name = "layer")
+    @Override
     List<ShortLayerDTO> getLayers(@WebParam(name = "projectID")
             @PathParam(value = "projectID") Long projectID);
 
@@ -1626,6 +1707,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.GET_LAYER_BBOX_PATH)
     @WebResult(name = "bBox")
+    @Override
     GPBBox getBBox(@WebParam(name = "layerID")
             @PathParam(value = "layerID") Long layerID)
             throws ResourceNotFoundFault;
@@ -1641,6 +1723,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.GET_LAYER_INFO_PATH)
     @WebResult(name = "layerInfo")
+    @Override
     GPLayerInfo getLayerInfo(@WebParam(name = "layerID")
             @PathParam(value = "layerID") Long layerID)
             throws ResourceNotFoundFault;
@@ -1681,6 +1764,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.GET_LAYER_TYPE_PATH)
     @WebResult(name = "layerType")
+    @Override
     GPLayerType getLayerType(@WebParam(name = "layerID")
             @PathParam(value = "layerID") Long layerID)
             throws ResourceNotFoundFault;
@@ -1696,6 +1780,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.GET_LAYERS_DATA_SOURCE_BY_PROJECT_ID_PATH)
     @WebResult(name = "layerDataSource")
+    @Override
     GetDataSourceResponse getLayersDataSourceByProjectID(
             @WebParam(name = "projectID")
             @PathParam(value = "projectID") Long projectID)
@@ -1719,6 +1804,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.GET_ALL_ROLES_PATH)
     @WebResult(name = "role")
+    @Override
     WSGetRoleResponse getAllRoles(
             @WebParam(name = "organization")
             @PathParam(value = "organization") String organization)
@@ -1765,6 +1851,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.GET_ACCOUNT_PERMISSIONS_PATH)
     @WebResult(name = "guiComponentsPermissionMapData")
+    @Override
     GuiComponentsPermissionMapData getAccountPermission(
             @WebParam(name = "accountID")
             @PathParam(value = "accountID") Long accountID)
@@ -1784,6 +1871,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.GET_ROLE_PERMISSION_PATH)
     @WebResult(name = "guiComponentsPermissionMapData")
+    @Override
     GuiComponentsPermissionMapData getRolePermission(
             @WebParam(name = "role")
             @QueryParam(value = "role") String role,
@@ -1802,6 +1890,7 @@ public interface GeoPlatformService {
     @Put
     @PUT
     @Path(value = GPServiceRSPathConfig.UPDATE_ROLE_PERMISSION_PATH)
+    @Override
     Boolean updateRolePermission(
             @WebParam(name = "putRolePermissionReq") WSPutRolePermissionRequest putRolePermissionReq)
             throws ResourceNotFoundFault;
@@ -1817,6 +1906,7 @@ public interface GeoPlatformService {
     @Post
     @POST
     @Path(value = GPServiceRSPathConfig.SAVE_ROLE_PATH)
+    @Override
     Boolean saveRole(
             @WebParam(name = "saveRoleReq") WSSaveRoleRequest saveRoleReq)
             throws IllegalParameterFault;
@@ -1829,17 +1919,20 @@ public interface GeoPlatformService {
     @Post
     @POST
     @Path(value = GPServiceRSPathConfig.INSERT_SERVER_PATH)
+    @Override
     Long insertServer(@WebParam(name = "server") GeoPlatformServer server);
 
     @Put
     @PUT
     @Path(value = GPServiceRSPathConfig.UPDATE_SERVER_PATH)
+    @Override
     Long updateServer(@WebParam(name = "server") GeoPlatformServer server)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
     @Delete
     @DELETE
     @Path(value = GPServiceRSPathConfig.DELETE_SERVER_PATH)
+    @Override
     Boolean deleteServer(@WebParam(name = "serverID")
             @QueryParam(value = "serverID") Long serverID)
             throws ResourceNotFoundFault;
@@ -1848,6 +1941,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.GET_ALL_SERVERS_PATH)
     @WebResult(name = "server")
+    @Override
     List<ServerDTO> getAllServers(
             @WebParam(name = "organizazionName")
             @PathParam(value = "organizazionName") String organizazionName)
@@ -1857,6 +1951,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.GET_SERVER_DETAIL_PATH)
     @WebResult(name = "server")
+    @Override
     GeoPlatformServer getServerDetail(@WebParam(name = "serverID")
             @PathParam(value = "serverID") Long serverID)
             throws ResourceNotFoundFault;
@@ -1865,6 +1960,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.GET_SHORT_SERVER_PATH)
     @WebResult(name = "server")
+    @Override
     ServerDTO getShortServer(@WebParam(name = "serverUrl")
             @QueryParam(value = "serverUrl") String serverUrl)
             throws ResourceNotFoundFault;
@@ -1873,6 +1969,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.GET_SERVER_DETAIL_BY_URL_PATH)
     @WebResult(name = "server")
+    @Override
     GeoPlatformServer getServerDetailByUrl(
             @WebParam(name = "serverUrl")
             @QueryParam(value = "serverUrl") String serverUrl)
@@ -1881,6 +1978,7 @@ public interface GeoPlatformService {
     @Put
     @PUT
     @Path(value = GPServiceRSPathConfig.SAVE_SERVER_PATH)
+    @Override
     ServerDTO saveServer(
             @WebParam(name = "saveServerReq") WSSaveServerRequest saveServerReq)
             throws IllegalParameterFault;
@@ -1902,6 +2000,7 @@ public interface GeoPlatformService {
     @Post
     @POST
     @Path(value = GPServiceRSPathConfig.INSERT_MESSAGE_PATH)
+    @Override
     Long insertMessage(@WebParam(name = "message") GPMessage message)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
@@ -1917,6 +2016,7 @@ public interface GeoPlatformService {
     @Post
     @POST
     @Path(value = GPServiceRSPathConfig.INSERT_MULTI_MESSAGE_PATH)
+    @Override
     Boolean insertMultiMessage(
             @WebParam(name = "messageDTO") MessageDTO messageDTO)
             throws ResourceNotFoundFault;
@@ -1931,6 +2031,7 @@ public interface GeoPlatformService {
     @Delete
     @DELETE
     @Path(value = GPServiceRSPathConfig.DELETE_MESSAGE_PATH)
+    @Override
     Boolean deleteMessage(@WebParam(name = "messageID")
             @PathParam(value = "messageID") Long messageID)
             throws ResourceNotFoundFault;
@@ -1945,6 +2046,7 @@ public interface GeoPlatformService {
     @Get
     @GET
     @Path(value = GPServiceRSPathConfig.GET_MESSAGE_DETAIL_PATH)
+    @Override
     GPMessage getMessageDetail(@WebParam(name = "messageID")
             @PathParam(value = "messageID") Long messageID)
             throws ResourceNotFoundFault;
@@ -1961,6 +2063,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.GET_ALL_MESSAGES_BY_RECIPIENT_PATH)
     @WebResult(name = "message")
+    @Override
     List<GPMessage> getAllMessagesByRecipient(
             @WebParam(name = "recipientID")
             @PathParam(value = "recipientID") Long recipientID)
@@ -1978,6 +2081,7 @@ public interface GeoPlatformService {
     @GET
     @Path(value = GPServiceRSPathConfig.GET_UNREAD_MESSAGES_BY_RECIPIENT_PATH)
     @WebResult(name = "message")
+    @Override
     List<GPMessage> getUnreadMessagesByRecipient(
             @WebParam(name = "recipientID")
             @PathParam(value = "recipientID") Long recipientID)
@@ -1993,6 +2097,7 @@ public interface GeoPlatformService {
     @Put
     @PUT
     @Path(value = GPServiceRSPathConfig.MARK_MESSAGE_AS_READ_PATH)
+    @Override
     Boolean markMessageAsRead(@WebParam(name = "messageID")
             @PathParam(value = "messageID") Long messageID)
             throws ResourceNotFoundFault;
@@ -2007,6 +2112,7 @@ public interface GeoPlatformService {
     @Put
     @PUT
     @Path(value = GPServiceRSPathConfig.MARK_ALL_MESSAGES_AS_READ_BY_RECIPIENT_PATH)
+    @Override
     Boolean markAllMessagesAsReadByRecipient(
             @WebParam(name = "recipientID")
             @PathParam(value = "recipientID") Long recipientID)
@@ -2022,6 +2128,7 @@ public interface GeoPlatformService {
     @Put
     @PUT
     @Path(value = GPServiceRSPathConfig.MARK_MESSAGES_AS_READ_BY_DATE_PATH)
+    @Override
     Boolean markMessagesAsReadByDate(
             @WebParam(name = "markMessageAsReadByDateReq") MarkMessageReadByDateRequest markMessageAsReadByDateReq)
             throws ResourceNotFoundFault;

@@ -17,10 +17,10 @@
 
     <dependencies>
         
-<!-- GEOPLATFORM WS -->
         <dependency>
             <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-model</artifactId>
+            <artifactId>geoplatform-services-scheduler-api</artifactId>
+            <version>${project.version}</version>
         </dependency>        
         
 <!-- SPRING -->

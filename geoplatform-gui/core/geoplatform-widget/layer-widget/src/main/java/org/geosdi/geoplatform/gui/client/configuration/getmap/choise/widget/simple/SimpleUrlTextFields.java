@@ -37,7 +37,6 @@ import org.geosdi.geoplatform.gui.client.configuration.getmap.choise.widget.kvp.
 import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.KeyListener;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
-import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.google.gwt.event.dom.client.KeyCodes;
@@ -50,6 +49,7 @@ import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.puregwt.getmap.event.WmsGetMapDisableStatusEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.getmap.event.WmsGetMapIncorrectStatusEvent;
 import org.geosdi.geoplatform.gui.client.widget.form.LoadWmsGetMapFromUrlWidget;
+import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextField;
 import org.geosdi.geoplatform.gui.shared.util.GPSharedUtils;
 
 /**
@@ -68,7 +68,7 @@ public class SimpleUrlTextFields extends LayoutContainer {
     private WmsGetMapDisableStatusEvent disableStatusEvent;
     private final NotificationPlugin notificationPlugin;
     //
-    private final TextField<String> urlTextField = new TextField<String>() {
+    private final GPSecureStringTextField urlTextField = new GPSecureStringTextField() {
 
         @Override
         public void onBrowserEvent(Event event) {
@@ -82,7 +82,7 @@ public class SimpleUrlTextFields extends LayoutContainer {
         }
 
     };
-    private final TextField<String> layerTextField = new TextField<String>() {
+    private final GPSecureStringTextField layerTextField = new GPSecureStringTextField() {
 
         @Override
         public void onBrowserEvent(Event event) {

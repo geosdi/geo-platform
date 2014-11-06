@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget;
 
+import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextField;
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.Style.LayoutRegion;
 import com.extjs.gxt.ui.client.event.BaseEvent;
@@ -50,7 +51,6 @@ import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.FormPanel.LabelAlign;
-import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.form.Validator;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
@@ -93,7 +93,7 @@ public class GPKmlWidget extends GeoPlatformWindow
     private GPKmlPreviewEvent publishShapePreviewEvent = new GPKmlPreviewEvent();
 //    private List<PreviewLayer> layerList = new ArrayList<PreviewLayer>(); // KMLPreviewLayer
     //
-    private TextField<String> urlText;
+    private GPSecureStringTextField urlText;
     private Button buttonPreview;
     //
     private String urlEncoding;
@@ -239,7 +239,7 @@ public class GPKmlWidget extends GeoPlatformWindow
         layout.setDefaultWidth(510);
         southPanel.setLayout(layout);
 
-        urlText = new TextField<String>();
+        urlText = new GPSecureStringTextField();
         urlText.setFieldLabel(PublisherWidgetConstants.INSTANCE.GPKmlWidget_urlLabelText());
         urlText.setValidator(new Validator() {
             @Override

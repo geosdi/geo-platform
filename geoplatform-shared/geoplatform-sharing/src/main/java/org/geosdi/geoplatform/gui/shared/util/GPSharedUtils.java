@@ -58,6 +58,13 @@ public class GPSharedUtils {
         return map == null ? Collections.EMPTY_MAP : map;
     }
 
+    public static boolean isEmpty(final String string) {
+        if (string == null || string.isEmpty()) {
+            return true;
+        }
+        return false;
+    }
+    
     public static boolean isNotEmpty(final String string) {
         if (string == null || string.isEmpty()) {
             return false;

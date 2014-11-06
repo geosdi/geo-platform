@@ -33,6 +33,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget;
 
+import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextField;
 import com.extjs.gxt.ui.client.Style;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
@@ -44,7 +45,6 @@ import com.extjs.gxt.ui.client.store.StoreListener;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.SimpleComboBox;
 import com.extjs.gxt.ui.client.widget.form.SimpleComboValue;
-import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.grid.*;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -109,7 +109,7 @@ public class EPSGTablePanel extends GeoPlatformContentPanel {
         configs.add(featureNameColumnConfig);
         ColumnConfig epsgColumnConfig = new ColumnConfig(EPSGLayerData.CRS,
                 PublisherWidgetConstants.INSTANCE.EPSGTablePanel_columnEPSGCodeText(), 80);
-        TextField<String> epsgTextField = new TextField<String>();
+        GPSecureStringTextField epsgTextField = new GPSecureStringTextField();
         epsgTextField.setEmptyText(PublisherWidgetConstants.INSTANCE.EPSGTablePanel_epsgTextFieldEmptyText());
         epsgTextField.setAllowBlank(Boolean.FALSE);
         epsgColumnConfig.setEditor(new CellEditor(epsgTextField));
@@ -117,7 +117,7 @@ public class EPSGTablePanel extends GeoPlatformContentPanel {
 
         ColumnConfig newNameColumnConfig = new ColumnConfig(EPSGLayerData.NEW_NAME,
                 PublisherWidgetConstants.INSTANCE.EPSGTablePanel_columnNewNameText(), 120);
-        TextField<String> newNameTextField = new TextField<String>();
+        GPSecureStringTextField newNameTextField = new GPSecureStringTextField();
         newNameTextField.setEmptyText(PublisherWidgetConstants.INSTANCE.EPSGTablePanel_epsgTextFieldEmptyText());
         newNameTextField.setAllowBlank(Boolean.TRUE);
         final CellEditor newNameCellEditor = new CellEditor(newNameTextField);

@@ -46,8 +46,6 @@ import com.extjs.gxt.ui.client.widget.form.CheckBox;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
-import com.extjs.gxt.ui.client.widget.form.TextArea;
-import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.common.collect.Lists;
@@ -60,7 +58,6 @@ import com.google.gwt.http.client.Response;
 import com.google.gwt.http.client.URL;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.RootPanel;
-import java.net.URLEncoder;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -83,7 +80,9 @@ import org.geosdi.geoplatform.gui.client.model.PrintTemplate;
 import org.geosdi.geoplatform.gui.client.model.Scale;
 import org.geosdi.geoplatform.gui.client.utility.LayerComparable;
 import org.geosdi.geoplatform.gui.client.utility.PrintUtility;
+import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextField;
 import org.geosdi.geoplatform.gui.client.widget.form.binding.GPDynamicFormBinding;
+import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextArea;
 import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
 import org.geosdi.geoplatform.gui.factory.map.GPApplicationMap;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
@@ -113,9 +112,9 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
     private ComboBox<Scale> comboScale;
     private ComboBox<Scale> scaleCombo;
     private CheckBox checkPrintBaseMap;
-    private TextField<String> title;
-    private TextField<String> mapTitle;
-    private TextArea comments;
+    private GPSecureStringTextField title;
+    private GPSecureStringTextField mapTitle;
+    private GPSecureStringTextArea comments;
     private Button print;
     private Button cancel;
     private TreePanel tree;
@@ -312,8 +311,8 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
 
         String imageURL = URL.encodeComponent(
                 dataSourceT + "?REQUEST=GetLegendGraphic"
-                + "&VERSION=1.0.0&FORMAT=image/png&LAYER=" + 
-                        URL.encode(layer.getName())
+                + "&VERSION=1.0.0&FORMAT=image/png&LAYER="
+                + URL.encode(layer.getName())
                 + "&STYLE=" + style
                 + "&scale=5000&service=WMS");
 
@@ -458,20 +457,20 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
         layout.setLabelPad(5);
         fieldSet.setLayout(layout);
 
-        title = new TextField<String>();
+        title = new GPSecureStringTextField();
         title.setAllowBlank(false);
         title.setName(GPPrintEnumBean.GPPRINT_TITLE.toString());
         title.setFieldLabel(PrintModuleConstants.INSTANCE.GPPrintWidget_titleLabelText());
 
         fieldSet.add(title);
 
-        mapTitle = new TextField<String>();
+        mapTitle = new GPSecureStringTextField();
         mapTitle.setName(GPPrintEnumBean.GPPRINT_MAP_TITLE.toString());
         mapTitle.setFieldLabel(PrintModuleConstants.INSTANCE.GPPrintWidget_mapTitleLabelText());
 
         fieldSet.add(mapTitle);
 
-        comments = new TextArea();
+        comments = new GPSecureStringTextArea();
         comments.setName(GPPrintEnumBean.GPPRINT_COMMENTS.toString());
         comments.setPreventScrollbars(true);
         comments.setFieldLabel(PrintModuleConstants.INSTANCE.GPPrintWidget_commentsLabelText());

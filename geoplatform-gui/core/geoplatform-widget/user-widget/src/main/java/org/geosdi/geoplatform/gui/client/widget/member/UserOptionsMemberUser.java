@@ -1,37 +1,35 @@
 /**
  *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
+ * geo-platform Rich webgis framework http://geo-platform.org
+ * ====================================================================
  *
- *   Copyright (C) 2008-2014 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2014 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version. This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details. You should have received a copy of the GNU General Public License
+ * along with this program. If not, see http://www.gnu.org/licenses/
  *
- *   ====================================================================
+ * ====================================================================
  *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
+ * Linking this library statically or dynamically with other modules is making a
+ * combined work based on this library. Thus, the terms and conditions of the
+ * GNU General Public License cover the whole combination.
  *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * As a special exception, the copyright holders of this library give you
+ * permission to link this library with independent modules to produce an
+ * executable, regardless of the license terms of these independent modules, and
+ * to copy and distribute the resulting executable under terms of your choice,
+ * provided that you also meet, for each linked independent module, the terms
+ * and conditions of the license of that module. An independent module is a
+ * module which is not derived from or based on this library. If you modify this
+ * library, you may extend this exception to your version of the library, but
+ * you are not obligated to do so. If you do not wish to do so, delete this
+ * exception statement from your version.
  */
 package org.geosdi.geoplatform.gui.client.widget.member;
 
@@ -44,7 +42,6 @@ import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
-import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.form.Validator;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.layout.VBoxLayoutData;
@@ -53,28 +50,25 @@ import org.geosdi.geoplatform.gui.client.i18n.UserModuleConstants;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
 import org.geosdi.geoplatform.gui.client.widget.users.member.UserOptionsMember;
+import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextField;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.regex.GPRegEx;
 import org.geosdi.geoplatform.gui.server.gwt.UserRemoteImpl;
 import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
-/**
- *
- * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
- */
 public class UserOptionsMemberUser extends UserOptionsMember {
 
     private FormPanel formPanel;
     //
-    private TextField<String> usernameField;
-    private TextField<String> roleField;
-    private TextField<String> nameField;
+    private GPSecureStringTextField usernameField;
+    private GPSecureStringTextField roleField;
+    private GPSecureStringTextField nameField;
     //
-    private TextField<String> emailField;
+    private GPSecureStringTextField emailField;
     //
-    private TextField<String> oldPasswordField;
-    private TextField<String> newPasswordField;
-    private TextField<String> newRePasswordField;
+    private GPSecureStringTextField oldPasswordField;
+    private GPSecureStringTextField newPasswordField;
+    private GPSecureStringTextField newRePasswordField;
     //
     private String newName;
     private String newEmail;
@@ -111,20 +105,20 @@ public class UserOptionsMemberUser extends UserOptionsMember {
         userFieldSet.setSize(400, 110);
         userFieldSet.setLayout(this.getFormLayoutTemplate());
 
-        usernameField = new TextField<String>();
+        usernameField = new GPSecureStringTextField();
         usernameField.setFieldLabel(UserModuleConstants.INSTANCE.usernameFieldText());
         usernameField.setEnabled(false);
 
         userFieldSet.add(usernameField);
 
-        roleField = new TextField<String>();
+        roleField = new GPSecureStringTextField();
         roleField.setFieldLabel(UserModuleConstants.INSTANCE.
                 userRoleLabelText());
         roleField.setEnabled(false);
 
         userFieldSet.add(roleField);
 
-        nameField = new TextField<String>();
+        nameField = new GPSecureStringTextField();
         nameField.setFieldLabel(UserModuleConstants.INSTANCE.nameFieldText());
         nameField.setToolTip(UserModuleConstants.INSTANCE.
                 UserOptionsMemberUser_nameFieldTooltipText());
@@ -146,7 +140,7 @@ public class UserOptionsMemberUser extends UserOptionsMember {
         emailResultSet.setExpanded(false);
         emailResultSet.setLayout(this.getFormLayoutTemplate());
 
-        emailField = new TextField<String>();
+        emailField = new GPSecureStringTextField();
         emailField.setFieldLabel(UserModuleConstants.INSTANCE.emailFieldText());
         emailField.setToolTip(UserModuleConstants.INSTANCE.
                 UserOptionsMemberUser_emailFieldTooltipText());
@@ -157,13 +151,13 @@ public class UserOptionsMemberUser extends UserOptionsMember {
 
         emailResultSet.addListener(Events.Collapse,
                 new Listener<FieldSetEvent>() {
-            @Override
-            public void handleEvent(FieldSetEvent be) {
-                updateEmail(null, true);
+                    @Override
+                    public void handleEvent(FieldSetEvent be) {
+                        updateEmail(null, true);
 
-                emailField.setValue(user.getEmail());
-            }
-        });
+                        emailField.setValue(user.getEmail());
+                    }
+                });
 
         return emailResultSet;
     }
@@ -177,7 +171,7 @@ public class UserOptionsMemberUser extends UserOptionsMember {
         passwordFieldSet.setExpanded(false);
         passwordFieldSet.setLayout(this.getFormLayoutTemplate());
 
-        oldPasswordField = new TextField<String>();
+        oldPasswordField = new GPSecureStringTextField();
         oldPasswordField.setFieldLabel(UserModuleConstants.INSTANCE.
                 UserOptionsMemberUser_oldPasswordLabelText());
         oldPasswordField.setToolTip(UserModuleConstants.INSTANCE.
@@ -188,7 +182,7 @@ public class UserOptionsMemberUser extends UserOptionsMember {
         oldPasswordField.setValidator(this.validatorPassword());
         passwordFieldSet.add(oldPasswordField);
 
-        newPasswordField = new TextField<String>();
+        newPasswordField = new GPSecureStringTextField();
         newPasswordField.setFieldLabel(ButtonsConstants.INSTANCE.newText());
         newPasswordField.setToolTip(UserModuleConstants.INSTANCE.
                 UserOptionsMemberUser_newPasswordTooltipText());
@@ -199,7 +193,7 @@ public class UserOptionsMemberUser extends UserOptionsMember {
         newPasswordField.setEnabled(false);
         passwordFieldSet.add(newPasswordField);
 
-        newRePasswordField = new TextField<String>();
+        newRePasswordField = new GPSecureStringTextField();
         newRePasswordField.setFieldLabel(UserModuleConstants.INSTANCE.
                 UserOptionsMemberUser_newRePasswordLabelText());
         newRePasswordField.setToolTip(UserModuleConstants.INSTANCE.
@@ -213,25 +207,25 @@ public class UserOptionsMemberUser extends UserOptionsMember {
 
         passwordFieldSet.addListener(Events.Collapse,
                 new Listener<FieldSetEvent>() {
-            @Override
-            public void handleEvent(FieldSetEvent be) {
-                updatePassword(null, true);
+                    @Override
+                    public void handleEvent(FieldSetEvent be) {
+                        updatePassword(null, true);
 
-                oldPasswordField.reset();
-                newPasswordField.reset();
-                newRePasswordField.reset();
+                        oldPasswordField.reset();
+                        newPasswordField.reset();
+                        newRePasswordField.reset();
 
-                newPasswordField.setEnabled(false);
-                newRePasswordField.setEnabled(false);
-            }
-        });
+                        newPasswordField.setEnabled(false);
+                        newRePasswordField.setEnabled(false);
+                    }
+                });
         passwordFieldSet.addListener(Events.Expand,
                 new Listener<FieldSetEvent>() {
-            @Override
-            public void handleEvent(FieldSetEvent be) {
-                updatePassword(null, false);
-            }
-        });
+                    @Override
+                    public void handleEvent(FieldSetEvent be) {
+                        updatePassword(null, false);
+                    }
+                });
 
         return passwordFieldSet;
     }
@@ -245,21 +239,21 @@ public class UserOptionsMemberUser extends UserOptionsMember {
         UserRemoteImpl.Util.getInstance().updateOwnUser(user,
                 currentPlainPassword, newPlainPassword,
                 new AsyncCallback<Long>() {
-            @Override
-            public void onFailure(Throwable caught) {
-                GeoPlatformMessage.errorMessage(WindowsConstants.INSTANCE.errorTitleText(),
-                        caught.getMessage());
-            }
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        GeoPlatformMessage.errorMessage(WindowsConstants.INSTANCE.errorTitleText(),
+                                caught.getMessage());
+                    }
 
-            @Override
-            public void onSuccess(Long result) {
-                saveButton.disable();
+                    @Override
+                    public void onSuccess(Long result) {
+                        saveButton.disable();
 
-                GeoPlatformMessage.infoMessage(UserModuleConstants.INSTANCE.
-                        infoUserSuccesfullyModifiedText(),
-                        "<ul><li>" + user.getUsername() + "</li></ul>");
-            }
-        });
+                        GeoPlatformMessage.infoMessage(UserModuleConstants.INSTANCE.
+                                infoUserSuccesfullyModifiedText(),
+                                "<ul><li>" + user.getUsername() + "</li></ul>");
+                    }
+                });
     }
 
     private FormLayout getFormLayoutTemplate() {

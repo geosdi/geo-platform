@@ -40,7 +40,6 @@ import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
-import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
@@ -63,6 +62,7 @@ import org.geosdi.geoplatform.gui.client.widget.map.event.geocoding.RegisterGeoc
 import org.geosdi.geoplatform.gui.client.widget.map.marker.puregwt.event.GPGeocodingRemoveMarkerEvent;
 import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.command.api.GPClientCommandExecutor;
+import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextField;
 import org.geosdi.geoplatform.gui.configuration.geocoding.plugin.IGPGeocoderPlugin;
 import org.geosdi.geoplatform.gui.configuration.grid.IGeoPlatformGrid;
 import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
@@ -79,7 +79,7 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
         implements IGPGeocoderPlugin<FormPanel> {
 
     private FormPanel formPanel;
-    private TextField<String> search;
+    private GPSecureStringTextField search;
     private ComboBox<GPGeocodingServiceBean> geocodingServiceCombo;
     private FieldSet searchFieldSet;
     private FieldSet locations;
@@ -133,7 +133,7 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
     }
 
     private void addSearchTextField() {
-        search = new TextField<String>();
+        search = new GPSecureStringTextField();
         search.setFieldLabel(
                 GeocodingModuleConstants.INSTANCE.GeocodingGridWidget_searchFieldLabelText());
         search.setEmptyText(

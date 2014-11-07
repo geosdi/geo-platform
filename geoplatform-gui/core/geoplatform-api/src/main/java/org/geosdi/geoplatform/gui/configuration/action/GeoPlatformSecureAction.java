@@ -48,7 +48,7 @@ import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 public abstract class GeoPlatformSecureAction<X extends ComponentEvent>
         extends GeoPlatformAction<X> {
 
-    private GPTrustedLevel trustedLevel;
+    private final GPTrustedLevel trustedLevel;
 
     public GeoPlatformSecureAction(GPTrustedLevel trustedLevel) {
         this.trustedLevel = trustedLevel;

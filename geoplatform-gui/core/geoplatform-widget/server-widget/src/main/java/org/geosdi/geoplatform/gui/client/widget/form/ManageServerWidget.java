@@ -1,37 +1,35 @@
 /**
  *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
+ * geo-platform Rich webgis framework http://geo-platform.org
+ * ====================================================================
  *
- *   Copyright (C) 2008-2014 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2014 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version. This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details. You should have received a copy of the GNU General Public License
+ * along with this program. If not, see http://www.gnu.org/licenses/
  *
- *   ====================================================================
+ * ====================================================================
  *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
+ * Linking this library statically or dynamically with other modules is making a
+ * combined work based on this library. Thus, the terms and conditions of the
+ * GNU General Public License cover the whole combination.
  *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * As a special exception, the copyright holders of this library give you
+ * permission to link this library with independent modules to produce an
+ * executable, regardless of the license terms of these independent modules, and
+ * to copy and distribute the resulting executable under terms of your choice,
+ * provided that you also meet, for each linked independent module, the terms
+ * and conditions of the license of that module. An independent module is a
+ * module which is not derived from or based on this library. If you modify this
+ * library, you may extend this exception to your version of the library, but
+ * you are not obligated to do so. If you do not wish to do so, delete this
+ * exception statement from your version.
  */
 package org.geosdi.geoplatform.gui.client.widget.form;
 
@@ -57,8 +55,11 @@ import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.common.collect.Lists;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.rpc.HasRpcToken;
+import com.google.gwt.user.client.rpc.RpcTokenException;
+import com.google.gwt.user.client.rpc.XsrfToken;
+import com.google.gwt.user.client.rpc.XsrfTokenServiceAsync;
 import com.google.gwt.user.client.ui.Widget;
-import java.util.ArrayList;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.ServerWidgetResources;
 import org.geosdi.geoplatform.gui.client.i18n.ServerModuleConstants;
@@ -74,7 +75,9 @@ import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
 import org.geosdi.geoplatform.gui.puregwt.oauth2.IGPOAuth2AddServerHandler;
 import org.geosdi.geoplatform.gui.puregwt.oauth2.OAuth2HandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.oauth2.event.GPOAuth2GEBLoginEvent;
+import org.geosdi.geoplatform.gui.service.gwt.xsrf.GPXsrfTokenService;
 import org.geosdi.geoplatform.gui.service.server.GeoPlatformOGCRemote;
+import org.geosdi.geoplatform.gui.service.server.GeoPlatformOGCRemoteAsync;
 import org.geosdi.geoplatform.gui.utility.oauth2.EnumOAuth2;
 
 /**
@@ -83,11 +86,15 @@ import org.geosdi.geoplatform.gui.utility.oauth2.EnumOAuth2;
  */
 public class ManageServerWidget extends Window {
 
+    private static final XsrfTokenServiceAsync xsrf = GPXsrfTokenService.Util.getInstance();
+    private static final GeoPlatformOGCRemoteAsync geoPlatformOGCRemote = GeoPlatformOGCRemote.Util.getInstance();
+    //
     private boolean initialized;
-    private PerformOperation operation = new PerformOperation();
+    private final PerformOperation operation = new PerformOperation();
     private ListStore<GPServerBeanModel> store = new ListStore<GPServerBeanModel>();
-    private Button deleteServerButton = new Button(ServerModuleConstants.INSTANCE.ManageServerWidget_deleteButtonText());
-    private DisplayServerWidget displayServerWidget;
+    private final Button deleteServerButton = new Button(
+            ServerModuleConstants.INSTANCE.ManageServerWidget_deleteButtonText());
+    private final DisplayServerWidget displayServerWidget;
     private GPCheckColumnConfig checkColumn;
     private StoreFilterField<GPServerBeanModel> serverFilter;
 
@@ -100,33 +107,9 @@ public class ManageServerWidget extends Window {
         }
     }
 
-    private void loadServers() {
-        this.mask(ServerModuleConstants.INSTANCE.loadingServersText());
-        LayoutManager.getInstance().getStatusMap().setBusy(
-                WindowsConstants.INSTANCE.loadingLayersText());
-
-        GeoPlatformOGCRemote.Util.getInstance().loadServers(
-                GPAccountLogged.getInstance().getOrganization(),
-                new AsyncCallback<ArrayList<GPServerBeanModel>>() {
-            @Override
-            public void onFailure(Throwable caught) {
-                ManageServerWidget.this.unmask();
-                GeoPlatformMessage.errorMessage(ServerModuleConstants.INSTANCE.
-                        serverServiceText(), ServerModuleConstants.INSTANCE.
-                        errorLoadingServerBodyText());
-            }
-
-            @Override
-            public void onSuccess(ArrayList<GPServerBeanModel> result) {
-                ManageServerWidget.this.unmask();
-                store.removeAll();
-                store.add(result);
-            }
-        });
-    }
-
     private Widget createServerFilter() {
         this.serverFilter = new StoreFilterField<GPServerBeanModel>() {
+
             @Override
             protected boolean doSelect(Store<GPServerBeanModel> store,
                     GPServerBeanModel parent,
@@ -187,6 +170,7 @@ public class ManageServerWidget extends Window {
         final Grid<GPServerBeanModel> grid = new Grid<GPServerBeanModel>(store,
                 columnModel);
         RowEditor<GPServerBeanModel> rowEditor = new RowEditor<GPServerBeanModel>() {
+
             @Override
             protected void onEnter(ComponentEvent ce) {
                 System.out.println("Selected null: ");
@@ -224,68 +208,74 @@ public class ManageServerWidget extends Window {
                 addServerText());
         addServerButton.addSelectionListener(
                 new SelectionListener<ButtonEvent>() {
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                GPServerBeanModel server = new GPServerBeanModel();
+
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                        GPServerBeanModel server = new GPServerBeanModel();
 //                server.setUrlServer("http://");
-                rowEditor.stopEditing(false);
-                store.insert(server, 0);
-                Record record = store.getRecord(server);
-                record.set("alias", ServerModuleConstants.INSTANCE.
-                        ManageServerWidget_newServerText());
-                record.set("urlServer", "");
-                store.update(server);
-                rowEditor.startEditing(store.indexOf(server), true);
-            }
-        });
+                        rowEditor.stopEditing(false);
+                        store.insert(server, 0);
+                        Record record = store.getRecord(server);
+                        record.set("alias", ServerModuleConstants.INSTANCE.
+                                ManageServerWidget_newServerText());
+                        record.set("urlServer", "");
+                        store.update(server);
+                        rowEditor.startEditing(store.indexOf(server), true);
+                    }
+                });
         toolBar.add(addServerButton);
         deleteServerButton.setEnabled(false);
         deleteServerButton.addSelectionListener(
                 new SelectionListener<ButtonEvent>() {
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                rowEditor.stopEditing(true);
-                List<GPServerBeanModel> serverList = store.getModels();
-                int i = 0;
-                for (GPServerBeanModel gPServerBeanModel : serverList) {
-                    String check = checkColumn.getCheckState(gPServerBeanModel,
-                            "delete", i, 0);
-                    if (check.equals("-on")) {
-                        operation.deleteServer(gPServerBeanModel);
+
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                        rowEditor.stopEditing(true);
+                        List<GPServerBeanModel> serverList = store.getModels();
+                        int i = 0;
+                        for (GPServerBeanModel gPServerBeanModel : serverList) {
+                            String check = checkColumn.getCheckState(
+                                    gPServerBeanModel,
+                                    "delete", i, 0);
+                            if (check.equals("-on")) {
+                                operation.deleteServer(gPServerBeanModel);
+                            }
+                            i++;
+                        }
+                        checkColumn.manageDeleteButton();
                     }
-                    i++;
-                }
-                checkColumn.manageDeleteButton();
-            }
-        });
+                });
         toolBar.add(deleteServerButton);
         super.setTopComponent(toolBar);
         super.setButtonAlign(HorizontalAlignment.RIGHT);
         super.addButton(new Button(ButtonsConstants.INSTANCE.resetText(),
                 new SelectionListener<ButtonEvent>() {
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                rowEditor.stopEditing(true);
-                store.rejectChanges();
-                serverFilter.clear();
-                checkColumn.manageDeleteButton();
-            }
-        }));
+
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                        rowEditor.stopEditing(true);
+                        store.rejectChanges();
+                        serverFilter.clear();
+                        checkColumn.manageDeleteButton();
+                    }
+                }));
         super.addButton(new Button(ButtonsConstants.INSTANCE.saveText(),
                 new SelectionListener<ButtonEvent>() {
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                rowEditor.stopEditing(true);
-                List<Record> modifiedElements = store.getModifiedRecords();
-                if (!modifiedElements.isEmpty()) {
-                    operation.setModifiedElementsNumber(modifiedElements.size());
-                    mask(ServerModuleConstants.INSTANCE.savingServerText());
-                    for (Record record : modifiedElements) {
-                        operation.callSaveRecord(record);
+
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                        rowEditor.stopEditing(true);
+                        List<Record> modifiedElements = store.getModifiedRecords();
+                        if (!modifiedElements.isEmpty()) {
+                            operation.setModifiedElementsNumber(
+                                    modifiedElements.size());
+                            mask(ServerModuleConstants.INSTANCE.savingServerText());
+                            for (Record record : modifiedElements) {
+                                operation.callSaveRecord(record);
+                            }
+                        }
                     }
-                }
-            }
-        }));
+                }));
     }
 
     @Override
@@ -294,14 +284,16 @@ public class ManageServerWidget extends Window {
             super.hide(buttonPressed);
             this.displayServerWidget.loadServers();
         } else {
-            GeoPlatformMessage.alertMessage(WindowsConstants.INSTANCE.warningTitleText(),
+            GeoPlatformMessage.alertMessage(
+                    WindowsConstants.INSTANCE.warningTitleText(),
                     WindowsConstants.INSTANCE.unsavedChangesToSaveOrResetText());
         }
     }
 
     public void initSize() {
         super.setModal(true);
-        super.setHeadingHtml(ServerModuleConstants.INSTANCE.ManageServerWidget_headingText());
+        super.setHeadingHtml(
+                ServerModuleConstants.INSTANCE.ManageServerWidget_headingText());
         super.setBorders(false);
         super.setSize(600, 325);
     }
@@ -341,30 +333,56 @@ public class ManageServerWidget extends Window {
 
         private void deleteServer(final GPServerBeanModel server) {
             if (server.getId() != null) {
-                GeoPlatformOGCRemote.Util.getInstance().deleteServer(
-                        server.getId(), new AsyncCallback<Boolean>() {
+                xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
+
                     @Override
                     public void onFailure(Throwable caught) {
-                        GeoPlatformMessage.errorMessage(
-                                ServerModuleConstants.INSTANCE.ManageServerWidget_errorDeletingTitleText(),
-                                ServerModuleMessages.INSTANCE.ManageServerWidget_errorDeletingBodyMessage(
-                                caught.getMessage(), server.get("urlServer").toString()));
-                        LayoutManager.getInstance().getStatusMap().setStatus(
-                                ServerModuleMessages.INSTANCE.
-                                ManageServerWidget_deleteServerErrorMessage(caught.getMessage()),
-                                EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
+                        try {
+                            throw caught;
+                        } catch (RpcTokenException e) {
+                            // Can be thrown for several reasons:
+                            //   - duplicate session cookie, which may be a sign of a cookie
+                            //     overwrite attack
+                            //   - XSRF token cannot be generated because session cookie isn't
+                            //     present
+                        } catch (Throwable e) {
+                            // unexpected
+                        }
                     }
 
                     @Override
-                    public void onSuccess(Boolean result) {
-                        store.remove(server);
-                        checkColumn.manageDeleteButton();
-                        LayoutManager.getInstance().getStatusMap().setStatus(
-                                ServerModuleConstants.INSTANCE.
-                                ManageServerWidget_statusServerDeletedSuccesfullyText(),
-                                EnumSearchStatus.STATUS_SEARCH.toString());
-                        //TODO: refresh the displayServerWidget
-                        //displayServerWidget.addServer(server);
+                    public void onSuccess(XsrfToken token) {
+                        ((HasRpcToken) geoPlatformOGCRemote).setRpcToken(token);
+                        geoPlatformOGCRemote.deleteServer(server.getId(),
+                                new AsyncCallback<Boolean>() {
+
+                                    @Override
+                                    public void onFailure(Throwable caught) {
+                                        GeoPlatformMessage.errorMessage(
+                                                ServerModuleConstants.INSTANCE.ManageServerWidget_errorDeletingTitleText(),
+                                                ServerModuleMessages.INSTANCE.ManageServerWidget_errorDeletingBodyMessage(
+                                                        caught.getMessage(),
+                                                        server.get(
+                                                                "urlServer").toString()));
+                                        LayoutManager.getInstance().getStatusMap().setStatus(
+                                                ServerModuleMessages.INSTANCE.
+                                                ManageServerWidget_deleteServerErrorMessage(
+                                                        caught.getMessage()),
+                                                EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
+                                    }
+
+                                    @Override
+                                    public void onSuccess(Boolean result) {
+                                        store.remove(server);
+                                        checkColumn.manageDeleteButton();
+                                        LayoutManager.getInstance().getStatusMap().setStatus(
+                                                ServerModuleConstants.INSTANCE.
+                                                ManageServerWidget_statusServerDeletedSuccesfullyText(),
+                                                EnumSearchStatus.STATUS_SEARCH.toString());
+                                        //TODO: refresh the displayServerWidget
+                                        //displayServerWidget.addServer(server);
+                                    }
+                                });
                     }
                 });
             } else {
@@ -376,44 +394,70 @@ public class ManageServerWidget extends Window {
         public void updateInsertServer() {
             final GPServerBeanModel server = (GPServerBeanModel) record.getModel();
 
-            GeoPlatformOGCRemote.Util.getInstance().saveServer(
-                    server.getId(), record.get("alias").toString(),
-                    record.get("urlServer").toString().trim(),
-                    GPAccountLogged.getInstance().getOrganization(),
-                    new AsyncCallback<GPServerBeanModel>() {
+            xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
+
                 @Override
                 public void onFailure(Throwable caught) {
-                    verifyEndOperation();
-                    if (server.getUrlServer().contains(
-                            EnumOAuth2.GEB_STRING.getValue())) {
-                        GeoPlatformMessage.infoMessage(ServerModuleConstants.INSTANCE.
-                                googleSignOnRequiredTitleText(),
-                                ServerModuleConstants.INSTANCE.
-                                googleSignOnRequiredBodyText());
-                        OAuth2HandlerManager.fireEvent(
-                                new GPOAuth2GEBLoginEvent(
-                                EnumOAuth2.ADD_SERVER.getValue()));
-                    } else {
-                        GeoPlatformMessage.errorMessage(
-                                ServerModuleConstants.INSTANCE.
-                                ManageServerWidget_errorSavingTitleText(),
-                                caught.getMessage());
-                        LayoutManager.getInstance().getStatusMap().setStatus(
-                                ServerModuleMessages.INSTANCE.
-                                AddServerWidget_saveServerErrorMessage(caught.getMessage()),
-                                EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
+                    try {
+                        throw caught;
+                    } catch (RpcTokenException e) {
+                        // Can be thrown for several reasons:
+                        //   - duplicate session cookie, which may be a sign of a cookie
+                        //     overwrite attack
+                        //   - XSRF token cannot be generated because session cookie isn't
+                        //     present
+                    } catch (Throwable e) {
+                        // unexpected
                     }
                 }
 
                 @Override
-                public void onSuccess(GPServerBeanModel serverSaved) {
-                    verifyEndOperation();
-                    store.remove(server);
-                    store.insert(serverSaved, 0);
-                    LayoutManager.getInstance().getStatusMap().setStatus(
-                            ServerModuleConstants.INSTANCE.
-                            ManageServerWidget_serverAddedSuccesfullyText(),
-                            EnumSearchStatus.STATUS_SEARCH.toString());
+                public void onSuccess(XsrfToken token) {
+                    ((HasRpcToken) geoPlatformOGCRemote).setRpcToken(token);
+                    geoPlatformOGCRemote.saveServer(server.getId(),
+                            record.get("alias").toString(),
+                            record.get("urlServer").toString().trim(),
+                            GPAccountLogged.getInstance().getOrganization(),
+                            new AsyncCallback<GPServerBeanModel>() {
+
+                                @Override
+                                public void onFailure(Throwable caught) {
+                                    verifyEndOperation();
+                                    if (server.getUrlServer().contains(
+                                            EnumOAuth2.GEB_STRING.getValue())) {
+                                        GeoPlatformMessage.infoMessage(
+                                                ServerModuleConstants.INSTANCE.
+                                                googleSignOnRequiredTitleText(),
+                                                ServerModuleConstants.INSTANCE.
+                                                googleSignOnRequiredBodyText());
+                                        OAuth2HandlerManager.fireEvent(
+                                                new GPOAuth2GEBLoginEvent(
+                                                        EnumOAuth2.ADD_SERVER.getValue()));
+                                    } else {
+                                        GeoPlatformMessage.errorMessage(
+                                                ServerModuleConstants.INSTANCE.
+                                                ManageServerWidget_errorSavingTitleText(),
+                                                caught.getMessage());
+                                        LayoutManager.getInstance().getStatusMap().setStatus(
+                                                ServerModuleMessages.INSTANCE.
+                                                AddServerWidget_saveServerErrorMessage(
+                                                        caught.getMessage()),
+                                                EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
+                                    }
+                                }
+
+                                @Override
+                                public void onSuccess(
+                                        GPServerBeanModel serverSaved) {
+                                            verifyEndOperation();
+                                            store.remove(server);
+                                            store.insert(serverSaved, 0);
+                                            LayoutManager.getInstance().getStatusMap().setStatus(
+                                                    ServerModuleConstants.INSTANCE.
+                                                    ManageServerWidget_serverAddedSuccesfullyText(),
+                                                    EnumSearchStatus.STATUS_SEARCH.toString());
+                                        }
+                            });
                 }
             });
         }

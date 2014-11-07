@@ -38,14 +38,14 @@ package org.geosdi.geoplatform.gui.server.gwt;
 import org.geosdi.geoplatform.gui.client.service.NotificationRemote;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.INotificationService;
-import org.geosdi.geoplatform.gui.server.spring.GPAutoInjectingRemoteServiceServlet;
+import org.geosdi.geoplatform.gui.server.spring.xsrf.GPAutoInjectingXsrfTokenServiceServlet;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class NotificationRemoteImpl extends GPAutoInjectingRemoteServiceServlet
+public class NotificationRemoteImpl extends GPAutoInjectingXsrfTokenServiceServlet
         implements NotificationRemote {
 
     private static final long serialVersionUID = -4258013654393915375L;

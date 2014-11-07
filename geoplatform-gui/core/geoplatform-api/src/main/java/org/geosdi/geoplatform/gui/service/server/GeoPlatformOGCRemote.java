@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.service.server;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+import com.google.gwt.user.server.rpc.XsrfProtect;
 import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.model.server.GPLayerGrid;
@@ -49,6 +50,7 @@ import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
  *
  */
 @RemoteServiceRelativePath("GeoPlatformOGCRemote")
+@XsrfProtect
 public interface GeoPlatformOGCRemote extends RemoteService {
 
     public static class Util {

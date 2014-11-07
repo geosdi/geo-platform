@@ -41,10 +41,8 @@ import org.geosdi.geoplatform.gui.command.api.GPCommandRequest;
 import org.geosdi.geoplatform.gui.command.api.GPCommandResponse;
 import org.geosdi.geoplatform.gui.command.server.CommandDispatcher;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
-import org.geosdi.geoplatform.gui.server.spring.GPAutoInjectingRemoteServiceServlet;
+import org.geosdi.geoplatform.gui.server.spring.xsrf.GPAutoInjectingXsrfTokenServiceServlet;
 import org.geosdi.geoplatform.gui.service.GeoPlatformService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -52,15 +50,13 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GeoPlatformServiceImpl extends GPAutoInjectingRemoteServiceServlet
+public class GeoPlatformServiceImpl extends GPAutoInjectingXsrfTokenServiceServlet
         implements GeoPlatformService {
 
     private static final long serialVersionUID = 8142113535798430418L;
     //
     static ThreadLocal<HttpServletRequest> perThreadRequest =
             new ThreadLocal<HttpServletRequest>();
-    //
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
 
     @Override

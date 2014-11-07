@@ -1,37 +1,35 @@
 /**
  *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
+ * geo-platform Rich webgis framework http://geo-platform.org
+ * ====================================================================
  *
- *   Copyright (C) 2008-2014 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2014 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version. This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details. You should have received a copy of the GNU General Public License
+ * along with this program. If not, see http://www.gnu.org/licenses/
  *
- *   ====================================================================
+ * ====================================================================
  *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
+ * Linking this library statically or dynamically with other modules is making a
+ * combined work based on this library. Thus, the terms and conditions of the
+ * GNU General Public License cover the whole combination.
  *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * As a special exception, the copyright holders of this library give you
+ * permission to link this library with independent modules to produce an
+ * executable, regardless of the license terms of these independent modules, and
+ * to copy and distribute the resulting executable under terms of your choice,
+ * provided that you also meet, for each linked independent module, the terms
+ * and conditions of the license of that module. An independent module is a
+ * module which is not derived from or based on this library. If you modify this
+ * library, you may extend this exception to your version of the library, but
+ * you are not obligated to do so. If you do not wish to do so, delete this
+ * exception statement from your version.
  */
 package org.geosdi.geoplatform.gui.client.widget;
 
@@ -51,6 +49,10 @@ import com.extjs.gxt.ui.client.widget.toolbar.SeparatorToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.rpc.HasRpcToken;
+import com.google.gwt.user.client.rpc.RpcTokenException;
+import com.google.gwt.user.client.rpc.XsrfToken;
+import com.google.gwt.user.client.rpc.XsrfTokenServiceAsync;
 import java.util.ArrayList;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.ServerWidgetResources;
@@ -60,6 +62,8 @@ import org.geosdi.geoplatform.gui.client.i18n.ServerModuleConstants;
 import org.geosdi.geoplatform.gui.client.i18n.ServerModuleMessages;
 import org.geosdi.geoplatform.gui.client.i18n.status.SearchStatusConstants;
 import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
+import org.geosdi.geoplatform.gui.client.service.ServerRemote;
+import org.geosdi.geoplatform.gui.client.service.ServerRemoteAsync;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.form.ManageServerWidget;
 import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
@@ -78,8 +82,9 @@ import org.geosdi.geoplatform.gui.puregwt.oauth2.IGPOAuth2CapabilitiesHandler;
 import org.geosdi.geoplatform.gui.puregwt.oauth2.OAuth2HandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.oauth2.event.GPOAuth2GEBLoginEvent;
 import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
-import org.geosdi.geoplatform.gui.server.gwt.ServerRemoteImpl;
+import org.geosdi.geoplatform.gui.service.gwt.xsrf.GPXsrfTokenService;
 import org.geosdi.geoplatform.gui.service.server.GeoPlatformOGCRemote;
+import org.geosdi.geoplatform.gui.service.server.GeoPlatformOGCRemoteAsync;
 import org.geosdi.geoplatform.gui.shared.GPRole;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 import org.geosdi.geoplatform.gui.utility.oauth2.EnumOAuth2;
@@ -91,14 +96,18 @@ import org.geosdi.geoplatform.gui.utility.oauth2.EnumOAuth2;
  */
 public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
 
+    private static final XsrfTokenServiceAsync xsrf = GPXsrfTokenService.Util.getInstance();
+    private static final ServerRemoteAsync serverRemote = ServerRemote.Util.getInstance();
+    private static final GeoPlatformOGCRemoteAsync geoPlatformOGCRemote = GeoPlatformOGCRemote.Util.getInstance();
+    //
     private ToolBar toolbar;
     private ComboBox<GPServerBeanModel> comboServer;
-    private ListStore<GPServerBeanModel> store = new ListStore<GPServerBeanModel>();
+    private final ListStore<GPServerBeanModel> store = new ListStore<GPServerBeanModel>();
     private SearchStatus searchStatus;
     private Button manageServersButton;
-    private GridLayersWidget gridWidget;
-    private ManageServerWidget manageServersWidget;
-    private PerformGetcapabilities loadCapabilities;
+    private final GridLayersWidget gridWidget;
+    private final ManageServerWidget manageServersWidget;
+    private final PerformGetcapabilities loadCapabilities;
 
     /**
      * @Constructor @param theGridWidget
@@ -173,41 +182,63 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
 
     @Override
     public void activateManageServersButton() {
-        ServerRemoteImpl.Util.getInstance().getUserAuthorities(
-                new AsyncCallback<List<String>>() {
+        xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
 
-                    @Override
-                    public void onFailure(Throwable caught) {
-                        if (caught.getCause() instanceof GPSessionTimeout) {
-                            GPHandlerManager.fireEvent(new GPLoginEvent(
-                                            new DisplayGetCapabilitiesEvent()));
-                        } else {
-                            manageServersButton.setEnabled(false);
-                            GeoPlatformMessage.errorMessage(
-                                    WindowsConstants.INSTANCE.errorTitleText(),
-                                    WindowsConstants.INSTANCE.errorMakingConnectionBodyText());
-                            LayoutManager.getInstance().getStatusMap().setStatus(
-                                    ServerModuleConstants.INSTANCE.DisplayServerWidget_statusErrorOpeningWindowText(),
-                                    EnumSearchStatus.STATUS_NO_SEARCH.toString());
-                            System.out.println(
-                                    "Error opening Get Capabilities window: " + caught.toString()
-                                    + " data: " + caught.getMessage());
-                        }
-                    }
+            @Override
+            public void onFailure(Throwable caught) {
+                try {
+                    throw caught;
+                } catch (RpcTokenException e) {
+                    // Can be thrown for several reasons:
+                    //   - duplicate session cookie, which may be a sign of a cookie
+                    //     overwrite attack
+                    //   - XSRF token cannot be generated because session cookie isn't
+                    //     present
+                } catch (Throwable e) {
+                    // unexpected
+                }
+            }
 
-                    @Override
-                    public void onSuccess(List<String> result) {
-                        manageServersButton.disable();
-                        for (String role : result) {
-                            System.out.println("Role: " + role);
-                            if (role.equals(GPRole.ADMIN.getRole())) { // TODO SecureButton
-                                manageServersButton.enable();
-                                return;
+            @Override
+            public void onSuccess(XsrfToken token) {
+                ((HasRpcToken) serverRemote).setRpcToken(token);
+                serverRemote.getUserAuthorities(
+                        new AsyncCallback<List<String>>() {
+
+                            @Override
+                            public void onFailure(Throwable caught) {
+                                if (caught.getCause() instanceof GPSessionTimeout) {
+                                    GPHandlerManager.fireEvent(new GPLoginEvent(
+                                                    new DisplayGetCapabilitiesEvent()));
+                                } else {
+                                    manageServersButton.setEnabled(false);
+                                    GeoPlatformMessage.errorMessage(
+                                            WindowsConstants.INSTANCE.errorTitleText(),
+                                            WindowsConstants.INSTANCE.errorMakingConnectionBodyText());
+                                    LayoutManager.getInstance().getStatusMap().setStatus(
+                                            ServerModuleConstants.INSTANCE.DisplayServerWidget_statusErrorOpeningWindowText(),
+                                            EnumSearchStatus.STATUS_NO_SEARCH.toString());
+                                    System.out.println(
+                                            "Error opening Get Capabilities window: " + caught.toString()
+                                            + " data: " + caught.getMessage());
+                                }
                             }
-                        }
-                    }
 
-                });
+                            @Override
+                            public void onSuccess(List<String> result) {
+                                manageServersButton.disable();
+                                for (String role : result) {
+                                    System.out.println("Role: " + role);
+                                    if (role.equals(GPRole.ADMIN.getRole())) { // TODO SecureButton
+                                        manageServersButton.enable();
+                                        return;
+                                    }
+                                }
+                            }
+
+                        });
+            }
+        });
     }
 
     private void createToolBar() {
@@ -254,40 +285,57 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
         this.comboServer.clear();
         this.gridWidget.cleanStore();
 
-        GeoPlatformOGCRemote.Util.getInstance().loadServers(
-                GPAccountLogged.getInstance().getOrganization(),
-                new AsyncCallback<ArrayList<GPServerBeanModel>>() {
+        xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
 
-                    @Override
-                    public void onFailure(Throwable caught) {
-                        setSearchStatus(EnumSearchStatus.STATUS_SEARCH_ERROR,
-                                SearchStatusConstants.INSTANCE.STATUS_MESSAGE_SEARCH_ERROR());
-                        GeoPlatformMessage.errorMessage(
-                                ServerModuleConstants.INSTANCE.
-                                serverServiceText(),
-                                ServerModuleConstants.INSTANCE.errorLoadingServerBodyText());
-                    }
+            @Override
+            public void onFailure(Throwable caught) {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
 
-                    @Override
-                    public void onSuccess(ArrayList<GPServerBeanModel> result) {
-                        if (result.isEmpty()) {
-                            setSearchStatus(EnumSearchStatus.STATUS_NO_SEARCH,
-                                    SearchStatusConstants.INSTANCE.STATUS_MESSAGE_NOT_SEARCH());
-                            GeoPlatformMessage.alertMessage(
-                                    ServerModuleConstants.INSTANCE.
-                                    serverServiceText(),
-                                    ServerModuleConstants.INSTANCE.
-                                    DisplayServerWidget_alerThereAreNoServerText());
-                        } else {
-                            setSearchStatus(EnumSearchStatus.STATUS_SEARCH,
-                                    EnumSearchServer.STATUS_MESSAGE_LOAD.toString());
-                            store.add(result);
-                            store.sort(GPServerKeyValue.ALIAS.getValue(),
-                                    Style.SortDir.ASC);
-                        }
-                    }
+            @Override
+            public void onSuccess(XsrfToken token) {
+                ((HasRpcToken) geoPlatformOGCRemote).setRpcToken(token);
+                geoPlatformOGCRemote.loadServers(
+                        GPAccountLogged.getInstance().getOrganization(),
+                        new AsyncCallback<ArrayList<GPServerBeanModel>>() {
 
-                });
+                            @Override
+                            public void onFailure(Throwable caught) {
+                                setSearchStatus(
+                                        EnumSearchStatus.STATUS_SEARCH_ERROR,
+                                        SearchStatusConstants.INSTANCE.STATUS_MESSAGE_SEARCH_ERROR());
+                                GeoPlatformMessage.errorMessage(
+                                        ServerModuleConstants.INSTANCE.
+                                        serverServiceText(),
+                                        ServerModuleConstants.INSTANCE.errorLoadingServerBodyText());
+                            }
+
+                            @Override
+                            public void onSuccess(
+                                    ArrayList<GPServerBeanModel> result) {
+                                        if (result.isEmpty()) {
+                                            setSearchStatus(
+                                                    EnumSearchStatus.STATUS_NO_SEARCH,
+                                                    SearchStatusConstants.INSTANCE.STATUS_MESSAGE_NOT_SEARCH());
+                                            GeoPlatformMessage.alertMessage(
+                                                    ServerModuleConstants.INSTANCE.
+                                                    serverServiceText(),
+                                                    ServerModuleConstants.INSTANCE.
+                                                    DisplayServerWidget_alerThereAreNoServerText());
+                                        } else {
+                                            setSearchStatus(
+                                                    EnumSearchStatus.STATUS_SEARCH,
+                                                    EnumSearchServer.STATUS_MESSAGE_LOAD.toString());
+                                            store.add(result);
+                                            store.sort(
+                                                    GPServerKeyValue.ALIAS.getValue(),
+                                                    Style.SortDir.ASC);
+                                        }
+                                    }
+
+                        });
+            }
+        });
     }
 
     public void resetComponents() {

@@ -40,6 +40,7 @@ import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+import com.google.gwt.user.server.rpc.XsrfProtect;
 import java.util.ArrayList;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
@@ -49,7 +50,6 @@ import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveDrag
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveRemove;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoLayerOriginalProperties;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerAttributes;
@@ -60,11 +60,12 @@ import org.geosdi.geoplatform.gui.model.user.GPSimpleUser;
  * @email nazzareno.sileno@geosdi.org
  */
 @RemoteServiceRelativePath("LayerRemote")
+@XsrfProtect
 public interface LayerRemote extends RemoteService {
 
     public static class Util {
 
-        private static LayerRemoteAsync instance = (LayerRemoteAsync) GWT.create(
+        private static final LayerRemoteAsync instance = (LayerRemoteAsync) GWT.create(
                 LayerRemote.class);
 
         public static LayerRemoteAsync getInstance() {

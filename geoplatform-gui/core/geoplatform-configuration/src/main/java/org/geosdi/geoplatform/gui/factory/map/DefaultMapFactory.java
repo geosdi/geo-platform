@@ -78,7 +78,7 @@ public class DefaultMapFactory implements GeoPlatformMapFactory {
     public MapWidget createMap(String width, String height, Layer gwtOlBaseLayer) {
         MapOptions defaultMapOptions = new MapOptions();
 
-        defaultMapOptions.setNumZoomLevels(25);
+        defaultMapOptions.setNumZoomLevels(30);
 
         defaultMapOptions.setProjection(GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode());
         defaultMapOptions.setDisplayProjection(new Projection(GPCoordinateReferenceSystem.WGS_84.getCode()));

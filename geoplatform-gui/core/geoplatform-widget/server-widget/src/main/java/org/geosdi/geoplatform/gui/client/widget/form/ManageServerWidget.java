@@ -44,7 +44,6 @@ import com.extjs.gxt.ui.client.widget.Window;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.CheckBox;
 import com.extjs.gxt.ui.client.widget.form.StoreFilterField;
-import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.grid.CellEditor;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
@@ -67,6 +66,7 @@ import org.geosdi.geoplatform.gui.client.i18n.ServerModuleMessages;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
 import org.geosdi.geoplatform.gui.client.widget.DisplayServerWidget;
+import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextField;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.global.security.GPAccountLogged;
@@ -142,7 +142,7 @@ public class ManageServerWidget extends Window {
                 serverAliasText());
         aliasColumn.setWidth(220);
 
-        TextField<String> aliasTextfield = new TextField<String>();
+        GPSecureStringTextField aliasTextfield = new GPSecureStringTextField();
         aliasTextfield.setAllowBlank(false);
         aliasColumn.setEditor(new CellEditor(aliasTextfield));
         configs.add(aliasColumn);
@@ -153,7 +153,7 @@ public class ManageServerWidget extends Window {
                 serverURLText());
         urlColumn.setWidth(400);
 
-        TextField<String> urlTextfield = new TextField<String>();
+        GPSecureStringTextField urlTextfield = new GPSecureStringTextField();
         urlTextfield.setAllowBlank(false);
 //        urlTextfield.setEmptyText("http://");
         urlColumn.setEditor(new CellEditor(urlTextfield));
@@ -234,8 +234,8 @@ public class ManageServerWidget extends Window {
                         List<GPServerBeanModel> serverList = store.getModels();
                         int i = 0;
                         for (GPServerBeanModel gPServerBeanModel : serverList) {
-                            String check = checkColumn.getCheckState(
-                                    gPServerBeanModel,
+
+                            String check = checkColumn.getCheckState(gPServerBeanModel,
                                     "delete", i, 0);
                             if (check.equals("-on")) {
                                 operation.deleteServer(gPServerBeanModel);

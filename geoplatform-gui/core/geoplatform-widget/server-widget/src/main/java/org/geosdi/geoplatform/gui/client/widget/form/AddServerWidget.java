@@ -43,7 +43,6 @@ import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
-import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -58,6 +57,7 @@ import org.geosdi.geoplatform.gui.client.i18n.ServerModuleMessages;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.widget.DisplayServerWidget;
 import org.geosdi.geoplatform.gui.client.widget.EnumSearchServer;
+import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextField;
 import org.geosdi.geoplatform.gui.client.widget.SaveStatus;
 import org.geosdi.geoplatform.gui.client.widget.SaveStatus.EnumSaveStatus;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
@@ -80,8 +80,8 @@ public class AddServerWidget extends GeoPlatformFormWidget<GPServerBeanModel> {
     private static final GeoPlatformOGCRemoteAsync geoPlatformOGCRemote = GeoPlatformOGCRemote.Util.getInstance();
     //
     private final DisplayServerWidget displayServerWidget;
-    private TextField<String> serverUrlTextField;
-    private TextField<String> serverNameTextField;
+    private GPSecureStringTextField serverUrlTextField;
+    private GPSecureStringTextField serverNameTextField;
     private Button save;
     private Button cancel;
     private final PerformOperation performSaveServer;
@@ -103,8 +103,8 @@ public class AddServerWidget extends GeoPlatformFormWidget<GPServerBeanModel> {
         layout.setLabelWidth(70);
         fieldSet.setLayout(layout);
 
-        this.serverUrlTextField = new TextField<String>();
-        this.serverNameTextField = new TextField<String>();
+        this.serverUrlTextField = new GPSecureStringTextField();
+        this.serverNameTextField = new GPSecureStringTextField();
         this.serverUrlTextField.setFieldLabel(ServerModuleConstants.INSTANCE.
                 AddServerWidget_serverAddressText());
         this.serverNameTextField.setFieldLabel(ServerModuleConstants.INSTANCE.
@@ -294,7 +294,7 @@ public class AddServerWidget extends GeoPlatformFormWidget<GPServerBeanModel> {
                     try {
                         throw caught;
                     } catch (RpcTokenException e) {
-                    // Can be thrown for several reasons:
+                        // Can be thrown for several reasons:
                         //   - duplicate session cookie, which may be a sign of a cookie
                         //     overwrite attack
                         //   - XSRF token cannot be generated because session cookie isn't

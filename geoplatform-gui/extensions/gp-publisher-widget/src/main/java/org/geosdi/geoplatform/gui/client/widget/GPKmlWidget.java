@@ -33,6 +33,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget;
 
+import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextField;
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.Style.LayoutRegion;
 import com.extjs.gxt.ui.client.event.BaseEvent;
@@ -48,7 +49,6 @@ import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.FormPanel.LabelAlign;
-import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.form.Validator;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
@@ -80,7 +80,6 @@ import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
 import org.geosdi.geoplatform.gui.regex.GPRegEx;
-import org.geosdi.geoplatform.gui.server.gwt.PublisherRemoteImpl;
 import org.geosdi.geoplatform.gui.service.gwt.xsrf.GPXsrfTokenService;
 import org.gwtopenmaps.openlayers.client.Bounds;
 
@@ -101,7 +100,7 @@ public class GPKmlWidget extends GeoPlatformWindow
     private final GPKmlPreviewEvent publishShapePreviewEvent = new GPKmlPreviewEvent();
 //    private List<PreviewLayer> layerList = new ArrayList<PreviewLayer>(); // KMLPreviewLayer
     //
-    private TextField<String> urlText;
+    private GPSecureStringTextField urlText;
     private Button buttonPreview;
     //
     private String urlEncoding;
@@ -250,9 +249,8 @@ public class GPKmlWidget extends GeoPlatformWindow
         layout.setDefaultWidth(510);
         southPanel.setLayout(layout);
 
-        urlText = new TextField<String>();
-        urlText.setFieldLabel(
-                PublisherWidgetConstants.INSTANCE.GPKmlWidget_urlLabelText());
+        urlText = new GPSecureStringTextField();
+        urlText.setFieldLabel(PublisherWidgetConstants.INSTANCE.GPKmlWidget_urlLabelText());
         urlText.setValidator(new Validator() {
 
             @Override

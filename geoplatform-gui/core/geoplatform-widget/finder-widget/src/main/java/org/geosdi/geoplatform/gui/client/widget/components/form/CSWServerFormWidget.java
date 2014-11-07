@@ -57,12 +57,12 @@ import org.geosdi.geoplatform.gui.client.widget.SaveStatus.EnumSaveStatus;
 import org.geosdi.geoplatform.gui.client.widget.components.filters.container.CSWServerPaginationContainer;
 import org.geosdi.geoplatform.gui.client.widget.form.GeoPlatformFormWidget;
 import org.geosdi.geoplatform.gui.client.widget.statusbar.GPCatalogStatusBar.GPCatalogStatusBarType;
+import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextField;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.global.security.GPAccountLogged;
 import org.geosdi.geoplatform.gui.model.server.GPCSWServerBeanModel;
 import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
-import org.geosdi.geoplatform.gui.server.gwt.GPCatalogFinderRemoteImpl;
 import org.geosdi.geoplatform.gui.service.gwt.xsrf.GPXsrfTokenService;
 
 /**
@@ -78,8 +78,8 @@ public class CSWServerFormWidget
     //
     private final CSWServerPaginationContainer catalogWindget;
     private FormButtonBinding formButtonBinding; // Monitors the valid state of a form and enabled / disabled all buttons
-    private TextField<String> urlField;
-    private TextField<String> aliasField;
+    private GPSecureStringTextField urlField;
+    private GPSecureStringTextField aliasField;
     private Button saveButton;
     private String urlEncoding;
     private final GPEventBus bus;
@@ -139,7 +139,7 @@ public class CSWServerFormWidget
         layout.setDefaultWidth(250);
         fieldSet.setLayout(layout);
 
-        aliasField = new TextField<String>();
+        aliasField = new GPSecureStringTextField();
         aliasField.setFieldLabel(
                 CatalogFinderConstants.INSTANCE.CSWServerFormWidget_aliasFieldLabelText());
         aliasField.setEmptyText(
@@ -149,13 +149,14 @@ public class CSWServerFormWidget
         aliasField.setAllowBlank(false);
         aliasField.setAutoValidate(true);
 
-        urlField = new TextField<String>();
+        urlField = new GPSecureStringTextField();
         urlField.setFieldLabel(
                 CatalogFinderConstants.INSTANCE.CSWServerFormWidget_urlFieldLabelText());
         urlField.setEmptyText(
                 CatalogFinderConstants.INSTANCE.CSWServerFormWidget_urlEmptyText());
         urlField.setToolTip(
                 CatalogFinderConstants.INSTANCE.CSWServerFormWidget_urlTooltipText());
+
         urlField.setAllowBlank(false);
         urlField.setAutoValidate(true);
         urlField.setValidator(new Validator() {

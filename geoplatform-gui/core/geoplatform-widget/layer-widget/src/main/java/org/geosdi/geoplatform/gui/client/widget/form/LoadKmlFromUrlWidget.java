@@ -43,7 +43,6 @@ import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
-import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.event.dom.client.KeyCodes;
@@ -69,25 +68,21 @@ import org.geosdi.geoplatform.gui.client.widget.expander.GPLayerExpander;
 import org.geosdi.geoplatform.gui.client.widget.fileupload.GPExtensions;
 import org.geosdi.geoplatform.gui.client.widget.form.KmlUrlStatus.EnumKmlUrlStatus;
 import org.geosdi.geoplatform.gui.client.widget.tree.form.GPTreeFormWidget;
+import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextField;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
-import org.geosdi.geoplatform.gui.server.gwt.LayerRemoteImpl;
 import org.geosdi.geoplatform.gui.regex.GPRegEx;
 import org.geosdi.geoplatform.gui.service.gwt.xsrf.GPXsrfTokenService;
 
-/**
- *
- * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
- */
 public class LoadKmlFromUrlWidget extends GPTreeFormWidget<GPLayerTreeModel>
         implements ISave<MementoSaveAddedLayers> {
 
     private static final XsrfTokenServiceAsync xsrf = GPXsrfTokenService.Util.getInstance();
     private static final LayerRemoteAsync layerRemote = LayerRemote.Util.getInstance();
     //
-    private TextField<String> urlText;
+    private GPSecureStringTextField urlText;
     private Button buttonAdd;
 //    private final VisitorAddElement addVisitor;
     private GPBeanTreeModel parentDestination;
@@ -132,7 +127,7 @@ public class LoadKmlFromUrlWidget extends GPTreeFormWidget<GPLayerTreeModel>
         layout.setLabelWidth(40);
         super.fieldSet.setLayout(layout);
 
-        urlText = new TextField<String>();
+        urlText = new GPSecureStringTextField();
         urlText.setFieldLabel(LayerModuleConstants.INSTANCE.urlLabelText());
 
         this.addListenerToUrlText();

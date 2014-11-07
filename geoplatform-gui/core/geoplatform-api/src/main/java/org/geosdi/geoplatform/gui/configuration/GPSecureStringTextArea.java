@@ -33,61 +33,19 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.shared.util;
+package org.geosdi.geoplatform.gui.configuration;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import com.extjs.gxt.ui.client.widget.form.TextArea;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class GPSharedUtils {
+public class GPSecureStringTextArea extends TextArea {
 
-    //This code cannot be used on GWT source files
-//    public static <T> T[] safeArray(T[] array, Class<T[]> type) {
-//        return array == null ? type.cast(Array.newInstance(type.getComponentType(), 0)) : array;
-//    }
-    public static <T> List<T> safeList(List<T> list) {
-        return list == null ? Collections.EMPTY_LIST : list;
-    }
-
-    public static <T> Collection<T> safeCollection(Collection<T> collection) {
-        return collection == null ? Collections.EMPTY_SET : collection;
-    }
-
-    public static <TK, TV> Map<TK, TV> safeMap(Map<TK, TV> map) {
-        return map == null ? Collections.EMPTY_MAP : map;
-    }
-
-    public static boolean isEmpty(final String string) {
-        if (string == null || string.isEmpty()) {
-            return true;
-        }
-        return false;
-    }
-    
-    public static boolean isNotEmpty(final String string) {
-        if (string == null || string.isEmpty()) {
-            return false;
-        }
-        return true;
-    }
-
-    public static boolean isNotEmpty(final Object[] obj) {
-        if (obj == null || obj.length == 0) {
-            return false;
-        }
-        return true;
-    }
-
-    public static <T> boolean isNotEmpty(final List<T> objList) {
-        if (objList == null || objList.isEmpty()) {
-            return false;
-        }
-        return true;
+    @Override
+    public String getValue() {
+        return GPSecureStringTextField.sanitizeString(super.getValue());
     }
 
 }

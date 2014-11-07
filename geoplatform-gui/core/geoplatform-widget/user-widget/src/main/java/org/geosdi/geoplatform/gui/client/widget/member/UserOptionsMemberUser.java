@@ -42,7 +42,6 @@ import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
-import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.form.Validator;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.layout.VBoxLayoutData;
@@ -57,16 +56,12 @@ import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
 import org.geosdi.geoplatform.gui.client.service.UserRemote;
 import org.geosdi.geoplatform.gui.client.service.UserRemoteAsync;
 import org.geosdi.geoplatform.gui.client.widget.users.member.UserOptionsMember;
+import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextField;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.regex.GPRegEx;
-import org.geosdi.geoplatform.gui.server.gwt.UserRemoteImpl;
 import org.geosdi.geoplatform.gui.service.gwt.xsrf.GPXsrfTokenService;
 import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
-/**
- *
- * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
- */
 public class UserOptionsMemberUser extends UserOptionsMember {
 
     private static final XsrfTokenServiceAsync xsrf = GPXsrfTokenService.Util.getInstance();
@@ -74,15 +69,15 @@ public class UserOptionsMemberUser extends UserOptionsMember {
     //
     private FormPanel formPanel;
     //
-    private TextField<String> usernameField;
-    private TextField<String> roleField;
-    private TextField<String> nameField;
+    private GPSecureStringTextField usernameField;
+    private GPSecureStringTextField roleField;
+    private GPSecureStringTextField nameField;
     //
-    private TextField<String> emailField;
+    private GPSecureStringTextField emailField;
     //
-    private TextField<String> oldPasswordField;
-    private TextField<String> newPasswordField;
-    private TextField<String> newRePasswordField;
+    private GPSecureStringTextField oldPasswordField;
+    private GPSecureStringTextField newPasswordField;
+    private GPSecureStringTextField newRePasswordField;
     //
     private String newName;
     private String newEmail;
@@ -119,21 +114,21 @@ public class UserOptionsMemberUser extends UserOptionsMember {
         userFieldSet.setSize(400, 110);
         userFieldSet.setLayout(this.getFormLayoutTemplate());
 
-        usernameField = new TextField<String>();
+        usernameField = new GPSecureStringTextField();
         usernameField.setFieldLabel(
                 UserModuleConstants.INSTANCE.usernameFieldText());
         usernameField.setEnabled(false);
 
         userFieldSet.add(usernameField);
 
-        roleField = new TextField<String>();
+        roleField = new GPSecureStringTextField();
         roleField.setFieldLabel(UserModuleConstants.INSTANCE.
                 userRoleLabelText());
         roleField.setEnabled(false);
 
         userFieldSet.add(roleField);
 
-        nameField = new TextField<String>();
+        nameField = new GPSecureStringTextField();
         nameField.setFieldLabel(UserModuleConstants.INSTANCE.nameFieldText());
         nameField.setToolTip(UserModuleConstants.INSTANCE.
                 UserOptionsMemberUser_nameFieldTooltipText());
@@ -155,7 +150,7 @@ public class UserOptionsMemberUser extends UserOptionsMember {
         emailResultSet.setExpanded(false);
         emailResultSet.setLayout(this.getFormLayoutTemplate());
 
-        emailField = new TextField<String>();
+        emailField = new GPSecureStringTextField();
         emailField.setFieldLabel(UserModuleConstants.INSTANCE.emailFieldText());
         emailField.setToolTip(UserModuleConstants.INSTANCE.
                 UserOptionsMemberUser_emailFieldTooltipText());
@@ -187,7 +182,7 @@ public class UserOptionsMemberUser extends UserOptionsMember {
         passwordFieldSet.setExpanded(false);
         passwordFieldSet.setLayout(this.getFormLayoutTemplate());
 
-        oldPasswordField = new TextField<String>();
+        oldPasswordField = new GPSecureStringTextField();
         oldPasswordField.setFieldLabel(UserModuleConstants.INSTANCE.
                 UserOptionsMemberUser_oldPasswordLabelText());
         oldPasswordField.setToolTip(UserModuleConstants.INSTANCE.
@@ -198,7 +193,7 @@ public class UserOptionsMemberUser extends UserOptionsMember {
         oldPasswordField.setValidator(this.validatorPassword());
         passwordFieldSet.add(oldPasswordField);
 
-        newPasswordField = new TextField<String>();
+        newPasswordField = new GPSecureStringTextField();
         newPasswordField.setFieldLabel(ButtonsConstants.INSTANCE.newText());
         newPasswordField.setToolTip(UserModuleConstants.INSTANCE.
                 UserOptionsMemberUser_newPasswordTooltipText());
@@ -209,7 +204,7 @@ public class UserOptionsMemberUser extends UserOptionsMember {
         newPasswordField.setEnabled(false);
         passwordFieldSet.add(newPasswordField);
 
-        newRePasswordField = new TextField<String>();
+        newRePasswordField = new GPSecureStringTextField();
         newRePasswordField.setFieldLabel(UserModuleConstants.INSTANCE.
                 UserOptionsMemberUser_newRePasswordLabelText());
         newRePasswordField.setToolTip(UserModuleConstants.INSTANCE.

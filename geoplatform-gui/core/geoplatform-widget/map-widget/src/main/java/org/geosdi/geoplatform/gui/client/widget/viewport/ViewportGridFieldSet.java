@@ -1,37 +1,35 @@
 /**
  *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
+ * geo-platform Rich webgis framework http://geo-platform.org
+ * ====================================================================
  *
- *   Copyright (C) 2008-2014 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2014 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version. This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details. You should have received a copy of the GNU General Public License
+ * along with this program. If not, see http://www.gnu.org/licenses/
  *
- *   ====================================================================
+ * ====================================================================
  *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
+ * Linking this library statically or dynamically with other modules is making a
+ * combined work based on this library. Thus, the terms and conditions of the
+ * GNU General Public License cover the whole combination.
  *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * As a special exception, the copyright holders of this library give you
+ * permission to link this library with independent modules to produce an
+ * executable, regardless of the license terms of these independent modules, and
+ * to copy and distribute the resulting executable under terms of your choice,
+ * provided that you also meet, for each linked independent module, the terms
+ * and conditions of the license of that module. An independent module is a
+ * module which is not derived from or based on this library. If you modify this
+ * library, you may extend this exception to your version of the library, but
+ * you are not obligated to do so. If you do not wish to do so, delete this
+ * exception statement from your version.
  */
 package org.geosdi.geoplatform.gui.client.widget.viewport;
 
@@ -46,7 +44,6 @@ import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.button.ButtonBar;
 import com.extjs.gxt.ui.client.widget.form.NumberField;
 import com.extjs.gxt.ui.client.widget.form.StoreFilterField;
-import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.grid.*;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
@@ -61,6 +58,7 @@ import org.geosdi.geoplatform.gui.client.i18n.MapModuleConstants;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.widget.fieldset.GPFieldSet;
 import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
+import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextField;
 import org.geosdi.geoplatform.gui.configuration.map.client.GPClientViewport;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.global.enumeration.ViewportEnum;
@@ -103,87 +101,87 @@ public class ViewportGridFieldSet extends GPFieldSet {
         Button addEntryButton = new Button(MapModuleConstants.INSTANCE.
                 ViewportGridFieldSet_buttonAddViewportText(),
                 BasicWidgetResources.ICONS.done(), new SelectionListener<ButtonEvent>() {
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                ViewportGridFieldSet.this.store.add(ViewportUtility.generateViewportFromMap(map));
-                viewportGrid.startEditing(store.getCount() - 1, 1);
-                ViewportGridFieldSet.this.saveButton.enable();
-            }
-        });
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                        ViewportGridFieldSet.this.store.add(ViewportUtility.generateViewportFromMap(map));
+                        viewportGrid.startEditing(store.getCount() - 1, 1);
+                        ViewportGridFieldSet.this.saveButton.enable();
+                    }
+                });
         buttonBar.add(addEntryButton);
 
         this.deleteViewportButton = new Button(MapModuleConstants.INSTANCE.
                 ViewportGridFieldSet_buttonDeleteViewportText(),
                 BasicWidgetResources.ICONS.delete(), new SelectionListener<ButtonEvent>() {
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                final List<GPClientViewport> viewportList = viewportGrid.getSelectionModel().getSelectedItems();
-                if (viewportList != null) {
-                    GeoPlatformMessage.confirmMessage(MapModuleConstants.INSTANCE.
-                            ViewportGridFieldSet_confirmDeleteViewportTitleText(),
-                            MapModuleConstants.INSTANCE.
-                            ViewportGridFieldSet_confirmDeleteViewportBodyText(),
-                            new Listener<MessageBoxEvent>() {
-                        @Override
-                        public void handleEvent(MessageBoxEvent be) {
-                            if (Dialog.YES.equals(be.getButtonClicked().getItemId())) {
-                                for (GPClientViewport viewport : viewportList) {
-                                    store.remove(viewport);
-                                    ViewportGridFieldSet.this.saveButton.enable();
-                                }
-                            }
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                        final List<GPClientViewport> viewportList = viewportGrid.getSelectionModel().getSelectedItems();
+                        if (viewportList != null) {
+                            GeoPlatformMessage.confirmMessage(MapModuleConstants.INSTANCE.
+                                    ViewportGridFieldSet_confirmDeleteViewportTitleText(),
+                                    MapModuleConstants.INSTANCE.
+                                    ViewportGridFieldSet_confirmDeleteViewportBodyText(),
+                                    new Listener<MessageBoxEvent>() {
+                                        @Override
+                                        public void handleEvent(MessageBoxEvent be) {
+                                            if (Dialog.YES.equals(be.getButtonClicked().getItemId())) {
+                                                for (GPClientViewport viewport : viewportList) {
+                                                    store.remove(viewport);
+                                                    ViewportGridFieldSet.this.saveButton.enable();
+                                                }
+                                            }
+                                        }
+                                    });
                         }
-                    });
-                }
-            }
-        });
+                    }
+                });
         deleteViewportButton.setEnabled(Boolean.FALSE);
         buttonBar.add(deleteViewportButton);
 
         this.gotoViewportButton = new Button(MapModuleConstants.INSTANCE.
                 ViewportGridFieldSet_buttonGoToViewportText(),
                 BasicWidgetResources.ICONS.gotoXY(), new SelectionListener<ButtonEvent>() {
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                final List<GPClientViewport> viewportList = viewportGrid.getSelectionModel().getSelectedItems();
-                if (viewportList != null && viewportList.size() == 1) {
-                    ViewportUtility.gotoViewportLocation(map, viewportList.get(0));
-                } else {
-                    GeoPlatformMessage.alertMessage(MapModuleConstants.INSTANCE.
-                            ViewportGridFieldSet_singleSelectionAlertTitleText(),
-                            MapModuleConstants.INSTANCE.
-                            ViewportGridFieldSet_singleSelectionAlertBodyText());
-                }
-            }
-        });
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                        final List<GPClientViewport> viewportList = viewportGrid.getSelectionModel().getSelectedItems();
+                        if (viewportList != null && viewportList.size() == 1) {
+                            ViewportUtility.gotoViewportLocation(map, viewportList.get(0));
+                        } else {
+                            GeoPlatformMessage.alertMessage(MapModuleConstants.INSTANCE.
+                                    ViewportGridFieldSet_singleSelectionAlertTitleText(),
+                                    MapModuleConstants.INSTANCE.
+                                    ViewportGridFieldSet_singleSelectionAlertBodyText());
+                        }
+                    }
+                });
         gotoViewportButton.setEnabled(Boolean.FALSE);
         buttonBar.add(gotoViewportButton);
 
         this.setDefaultViewportButton = new Button(ButtonsConstants.INSTANCE.setDefautlText(),
                 BasicWidgetResources.ICONS.select(),
                 new SelectionListener<ButtonEvent>() {
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                final List<GPClientViewport> viewportList = viewportGrid.getSelectionModel().getSelectedItems();
-                if (viewportList != null && viewportList.size() == 1) {
-                    GPClientViewport selectedViewport = viewportList.get(0);
-                    for (GPClientViewport viewport : ViewportGridFieldSet.this.store.getModels()) {
-                        if (viewport.isDefault()) {
-                            viewport.set(ViewportEnum.IS_DEFAULT.toString(), Boolean.FALSE);
-                            store.update(viewport);
-                        } else if (selectedViewport.equals(viewport)) {
-                            viewport.set(ViewportEnum.IS_DEFAULT.toString(), Boolean.TRUE);
-                            store.update(viewport);
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                        final List<GPClientViewport> viewportList = viewportGrid.getSelectionModel().getSelectedItems();
+                        if (viewportList != null && viewportList.size() == 1) {
+                            GPClientViewport selectedViewport = viewportList.get(0);
+                            for (GPClientViewport viewport : ViewportGridFieldSet.this.store.getModels()) {
+                                if (viewport.isDefault()) {
+                                    viewport.set(ViewportEnum.IS_DEFAULT.toString(), Boolean.FALSE);
+                                    store.update(viewport);
+                                } else if (selectedViewport.equals(viewport)) {
+                                    viewport.set(ViewportEnum.IS_DEFAULT.toString(), Boolean.TRUE);
+                                    store.update(viewport);
+                                }
+                            }
+                        } else {
+                            GeoPlatformMessage.alertMessage(MapModuleConstants.INSTANCE.
+                                    ViewportGridFieldSet_setDefaultViewportAlertTitleText(),
+                                    MapModuleConstants.INSTANCE.
+                                    ViewportGridFieldSet_singleSelectionAlertBodyText());
                         }
                     }
-                } else {
-                    GeoPlatformMessage.alertMessage(MapModuleConstants.INSTANCE.
-                            ViewportGridFieldSet_setDefaultViewportAlertTitleText(),
-                            MapModuleConstants.INSTANCE.
-                            ViewportGridFieldSet_singleSelectionAlertBodyText());
-                }
-            }
-        });
+                });
         setDefaultViewportButton.setEnabled(Boolean.FALSE);
         buttonBar.add(setDefaultViewportButton);
         SaveViewportAction saveViewportAction = new SaveViewportAction(GPTrustedLevel.LOW, this.store);
@@ -238,13 +236,13 @@ public class ViewportGridFieldSet extends GPFieldSet {
                 ViewportGridFieldSet_nameColumnText();
         ColumnConfig nameColumnConfig = new ColumnConfig(ViewportEnum.NAME.toString(),
                 idNameColumn, 80);
-        nameColumnConfig.setEditor(new CellEditor(new TextField<String>()));
+        nameColumnConfig.setEditor(new CellEditor(new GPSecureStringTextField()));
         configs.add(nameColumnConfig);
         final String idDescriptionColumn = MapModuleConstants.INSTANCE.
                 ViewportGridFieldSet_descriptionColumnText();
         ColumnConfig descriptionColumnConfig = new ColumnConfig(ViewportEnum.DESCRIPTION.toString(),
                 idDescriptionColumn, 80);
-        descriptionColumnConfig.setEditor(new CellEditor(new TextField<String>()));
+        descriptionColumnConfig.setEditor(new CellEditor(new GPSecureStringTextField()));
         configs.add(descriptionColumnConfig);
         ColumnConfig minXColumnConfig = new ColumnConfig(ViewportEnum.LOWER_LEFT_X.toString(),
                 MapModuleConstants.INSTANCE.ViewportGridFieldSet_minXColumnText(), 70);

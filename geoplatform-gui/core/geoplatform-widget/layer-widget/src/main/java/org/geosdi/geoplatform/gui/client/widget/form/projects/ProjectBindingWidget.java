@@ -43,7 +43,6 @@ import com.extjs.gxt.ui.client.widget.form.CheckBox;
 import com.extjs.gxt.ui.client.widget.form.CheckBoxGroup;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.FormButtonBinding;
-import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.HasRpcToken;
@@ -66,6 +65,7 @@ import org.geosdi.geoplatform.gui.client.widget.form.projects.binding.ProjectDef
 import org.geosdi.geoplatform.gui.client.widget.form.projects.binding.ProjectNameFieldBinding;
 import org.geosdi.geoplatform.gui.client.widget.grid.pagination.listview.GPListViewSearchPanel;
 import org.geosdi.geoplatform.gui.client.widget.pagination.projects.GPProjectSearchPanel;
+import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextField;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
 import org.geosdi.geoplatform.gui.service.gwt.xsrf.GPXsrfTokenService;
@@ -81,7 +81,7 @@ public class ProjectBindingWidget extends GPDynamicFormBinding<GPClientProject> 
     private static final LayerRemoteAsync layerRemote = LayerRemote.Util.getInstance();
     //
     private final GPListViewSearchPanel<GPClientProject> searchWidget;
-    private TextField<String> projectFieldName;
+    private GPSecureStringTextField projectFieldName;
     private CheckBox projectDefaultCheck;
     private GPSecureButton save;
     private Button cancel;
@@ -119,7 +119,7 @@ public class ProjectBindingWidget extends GPDynamicFormBinding<GPClientProject> 
         layout.setLabelWidth(120);
         layout.setLabelPad(5);
         fieldSet.setLayout(layout);
-        this.projectFieldName = new TextField<String>();
+        this.projectFieldName = new GPSecureStringTextField();
         this.projectFieldName.setAllowBlank(false);
         this.projectFieldName.setEmptyText(
                 LayerModuleConstants.INSTANCE.ProjectBindingWidget_projectFieldNameEmptyText());
@@ -263,12 +263,14 @@ public class ProjectBindingWidget extends GPDynamicFormBinding<GPClientProject> 
                             changeDefaultProject();
                         }
                         searchWidget.getStore().commitChanges();
+
                         GeoPlatformMessage.infoMessage(
                                 LayerModuleConstants.INSTANCE.ProjectBindingWidget_addProjectSuccessText(),
                                 "<ul><li>" + entity.getName() + "</li></ul>");
                         if (entity.isDefaultProject()) {
                             TimeoutHandlerManager.fireEvent(
                                     ((GPProjectSearchPanel) searchWidget).getDefaultProjectEvent());
+
                         }
                         hide();
                     }
@@ -323,6 +325,7 @@ public class ProjectBindingWidget extends GPDynamicFormBinding<GPClientProject> 
                         if (entity.isDefaultProject()) {
                             TimeoutHandlerManager.fireEvent(
                                     ((GPProjectSearchPanel) searchWidget).getDefaultProjectEvent());
+
                         }
 
                         hide();

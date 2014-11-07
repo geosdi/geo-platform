@@ -39,7 +39,6 @@ import com.extjs.gxt.ui.client.event.*;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
-import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.grid.*;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
@@ -62,6 +61,7 @@ import org.geosdi.geoplatform.gui.client.service.GPCatalogFinderRemote;
 import org.geosdi.geoplatform.gui.client.service.GPCatalogFinderRemoteAsync;
 import org.geosdi.geoplatform.gui.client.widget.components.form.CSWServerFormWidget;
 import org.geosdi.geoplatform.gui.client.widget.statusbar.GPCatalogStatusBar.GPCatalogStatusBarType;
+import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextField;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableEvent;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.global.security.GPAccountLogged;
@@ -92,7 +92,7 @@ public class CSWServerPaginationContainer
     //
     private final CSWServerFormWidget serverForm;
     private CheckBoxSelectionModel<GPCSWServerBeanModel> sm;
-    private TextField<String> searchField;
+    private GPSecureStringTextField searchField;
     private Button deleteServerButton;
 
     @Inject
@@ -123,7 +123,7 @@ public class CSWServerPaginationContainer
     }
 
     private void createSearchComponent() {
-        searchField = new TextField<String>();
+        searchField = new GPSecureStringTextField();
         searchField.setFieldLabel(
                 CatalogFinderConstants.INSTANCE.CSWServerPaginationContainer_searchFieltLabelText());
 

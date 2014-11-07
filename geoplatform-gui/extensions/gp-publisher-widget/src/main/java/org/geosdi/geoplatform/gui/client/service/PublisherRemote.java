@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.client.service;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+import com.google.gwt.user.server.rpc.XsrfProtect;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.model.EPSGLayerData;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
@@ -47,11 +48,12 @@ import org.geosdi.geoplatform.gui.global.GeoPlatformException;
  * @email nazzareno.sileno@geosdi.org
  */
 @RemoteServiceRelativePath("PublisherRemote")
+@XsrfProtect
 public interface PublisherRemote extends RemoteService {
 
     public static class Util {
 
-        private static PublisherRemoteAsync instance =
+        private static final PublisherRemoteAsync instance =
                 (PublisherRemoteAsync) GWT.create(PublisherRemote.class);
 
         public static PublisherRemoteAsync getInstance() {

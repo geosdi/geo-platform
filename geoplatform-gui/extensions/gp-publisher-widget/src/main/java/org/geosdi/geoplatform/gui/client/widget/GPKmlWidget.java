@@ -1,37 +1,35 @@
 /**
  *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
+ * geo-platform Rich webgis framework http://geo-platform.org
+ * ====================================================================
  *
- *   Copyright (C) 2008-2014 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2014 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version. This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details. You should have received a copy of the GNU General Public License
+ * along with this program. If not, see http://www.gnu.org/licenses/
  *
- *   ====================================================================
+ * ====================================================================
  *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
+ * Linking this library statically or dynamically with other modules is making a
+ * combined work based on this library. Thus, the terms and conditions of the
+ * GNU General Public License cover the whole combination.
  *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * As a special exception, the copyright holders of this library give you
+ * permission to link this library with independent modules to produce an
+ * executable, regardless of the license terms of these independent modules, and
+ * to copy and distribute the resulting executable under terms of your choice,
+ * provided that you also meet, for each linked independent module, the terms
+ * and conditions of the license of that module. An independent module is a
+ * module which is not derived from or based on this library. If you modify this
+ * library, you may extend this exception to your version of the library, but
+ * you are not obligated to do so. If you do not wish to do so, delete this
+ * exception statement from your version.
  */
 package org.geosdi.geoplatform.gui.client.widget;
 
@@ -58,6 +56,10 @@ import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.http.client.URL;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.rpc.HasRpcToken;
+import com.google.gwt.user.client.rpc.RpcTokenException;
+import com.google.gwt.user.client.rpc.XsrfToken;
+import com.google.gwt.user.client.rpc.XsrfTokenServiceAsync;
 import com.google.gwt.user.client.ui.Image;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.PublisherResources;
@@ -68,6 +70,8 @@ import org.geosdi.geoplatform.gui.client.i18n.PublisherWidgetConstants;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.i18n.kml.KMLErrorMessageConstants;
 import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
+import org.geosdi.geoplatform.gui.client.service.PublisherRemote;
+import org.geosdi.geoplatform.gui.client.service.PublisherRemoteAsync;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
@@ -76,7 +80,7 @@ import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
 import org.geosdi.geoplatform.gui.regex.GPRegEx;
-import org.geosdi.geoplatform.gui.server.gwt.PublisherRemoteImpl;
+import org.geosdi.geoplatform.gui.service.gwt.xsrf.GPXsrfTokenService;
 import org.gwtopenmaps.openlayers.client.Bounds;
 
 /**
@@ -85,12 +89,15 @@ import org.gwtopenmaps.openlayers.client.Bounds;
 public class GPKmlWidget extends GeoPlatformWindow
         implements IUploadKMLPreviewHandler, IGPKmlPreviewHandler {
 
+    private static final XsrfTokenServiceAsync xsrf = GPXsrfTokenService.Util.getInstance();
+    private static final PublisherRemoteAsync publisherRemote = PublisherRemote.Util.getInstance();
+    //
     private ContentPanel centralPanel;
     private PreviewWidget previewWidget;
     private FieldSet southPanel;
     private Image centralImage;
     private Bounds bounds;
-    private GPKmlPreviewEvent publishShapePreviewEvent = new GPKmlPreviewEvent();
+    private final GPKmlPreviewEvent publishShapePreviewEvent = new GPKmlPreviewEvent();
 //    private List<PreviewLayer> layerList = new ArrayList<PreviewLayer>(); // KMLPreviewLayer
     //
     private GPSecureStringTextField urlText;
@@ -121,7 +128,8 @@ public class GPKmlWidget extends GeoPlatformWindow
 
     @Override
     public void setWindowProperties() {
-        super.setHeadingHtml(PublisherWidgetConstants.INSTANCE.GPKmlWidget_headingText());
+        super.setHeadingHtml(
+                PublisherWidgetConstants.INSTANCE.GPKmlWidget_headingText());
         super.setResizable(false);
         super.setLayout(new BorderLayout());
         super.setModal(false);
@@ -146,7 +154,8 @@ public class GPKmlWidget extends GeoPlatformWindow
 
     @Override
     public void showKMLPreview(String jsonString) {
-        System.out.println("%%% Method showLayerPreview() must be implemented...");
+        System.out.println(
+                "%%% Method showLayerPreview() must be implemented...");
 //        StringBuilder layerProblems = new StringBuilder();
 //        PreviewLayerList previewLayers = PreviewLayerList.JSON.read(jsonString);
 //        for (PreviewLayer previewLayer : previewLayers.getPreviewLayers()) {
@@ -231,7 +240,8 @@ public class GPKmlWidget extends GeoPlatformWindow
 
     private void addSouthPanel() {
         southPanel = new FieldSet();
-        southPanel.setHeadingHtml(PublisherWidgetConstants.INSTANCE.GPKmlWidget_southPanelHeadingText());
+        southPanel.setHeadingHtml(
+                PublisherWidgetConstants.INSTANCE.GPKmlWidget_southPanelHeadingText());
 
         FormLayout layout = new FormLayout();
         layout.setLabelAlign(LabelAlign.TOP);
@@ -242,6 +252,7 @@ public class GPKmlWidget extends GeoPlatformWindow
         urlText = new GPSecureStringTextField();
         urlText.setFieldLabel(PublisherWidgetConstants.INSTANCE.GPKmlWidget_urlLabelText());
         urlText.setValidator(new Validator() {
+
             @Override
             public String validate(Field<?> field, String value) {
                 if (checkUrl()) {
@@ -253,7 +264,8 @@ public class GPKmlWidget extends GeoPlatformWindow
         this.addListenerToUrlText();
         southPanel.add(urlText);
 
-        BorderLayoutData southData = new BorderLayoutData(LayoutRegion.SOUTH, 100);
+        BorderLayoutData southData = new BorderLayoutData(LayoutRegion.SOUTH,
+                100);
         southData.setMargins(new Margins(5, 20, 5, 20));
         super.add(southPanel, southData);
 
@@ -264,16 +276,18 @@ public class GPKmlWidget extends GeoPlatformWindow
         buttonPreview = new Button(ButtonsConstants.INSTANCE.previewText(),
                 PublisherResources.ICONS.previewKML(), // GEarth
                 new SelectionListener<ButtonEvent>() {
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                execute();
-            }
-        });
+
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                        execute();
+                    }
+                });
         buttonPreview.setEnabled(false);
 
         Button buttonCancel = new Button(ButtonsConstants.INSTANCE.cancelText(),
                 BasicWidgetResources.ICONS.cancel());
         buttonCancel.addSelectionListener(new SelectionListener<ButtonEvent>() {
+
             @Override
             public void componentSelected(ButtonEvent ce) {
                 clearComponents();
@@ -288,6 +302,7 @@ public class GPKmlWidget extends GeoPlatformWindow
 
     private void addListenerToUrlText() {
         urlText.addListener(Events.OnPaste, new Listener() {
+
             @Override
             public void handleEvent(BaseEvent be) {
                 if (checkUrl()) {
@@ -301,6 +316,7 @@ public class GPKmlWidget extends GeoPlatformWindow
         });
 
         urlText.addKeyListener(new KeyListener() {
+
             @Override
             public void componentKeyUp(ComponentEvent event) {
                 if (urlText.getValue() == null) {
@@ -368,45 +384,72 @@ public class GPKmlWidget extends GeoPlatformWindow
     }
 
     private void verifyUrl(final boolean runExecute) {
-        PublisherRemoteImpl.Util.getInstance().kmlPreview(urlEncoding, new AsyncCallback<Boolean>() {
+        xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
+
             @Override
             public void onFailure(Throwable caught) {
-                if (caught.getCause() instanceof GPSessionTimeout) {
-                    GPHandlerManager.fireEvent(new GPLoginEvent(publishShapePreviewEvent));
-                } else {
-                    GeoPlatformMessage.errorMessage(
-                            PublisherWidgetConstants.INSTANCE.GPKmlWidget_errorCheckingKMLURLText(),
-                            WindowsConstants.INSTANCE.errorMakingConnectionBodyText());
-                    LayoutManager.getInstance().getStatusMap().setStatus(
-                            PublisherWidgetConstants.INSTANCE.GPKmlWidget_statusErrorPreviewText(),
-                            EnumSearchStatus.STATUS_NO_SEARCH.toString());
-                    System.out.println("Error checking the KML URL: " + caught.toString()
-                            + " data: " + caught.getMessage());
+                try {
+                    throw caught;
+                } catch (RpcTokenException e) {
+                    // Can be thrown for several reasons:
+                    //   - duplicate session cookie, which may be a sign of a cookie
+                    //     overwrite attack
+                    //   - XSRF token cannot be generated because session cookie isn't
+                    //     present
+                } catch (Throwable e) {
+                    // unexpected
                 }
             }
 
             @Override
-            public void onSuccess(Boolean result) {
-                if (result == null) { // DEL
-                    buttonPreview.enable(); // DEL
-                    return; // DEL
-                } // DEL
+            public void onSuccess(XsrfToken token) {
+                ((HasRpcToken) publisherRemote).setRpcToken(token);
+                publisherRemote.kmlPreview(urlEncoding,
+                        new AsyncCallback<Boolean>() {
 
-                if (result) {
-                    buttonPreview.enable();
-                    if (runExecute) { // Iff the enter key is pressed
-                        execute();
-                    }
-                } else {
-                    buttonPreview.disable();
-                }
+                            @Override
+                            public void onFailure(Throwable caught) {
+                                if (caught.getCause() instanceof GPSessionTimeout) {
+                                    GPHandlerManager.fireEvent(new GPLoginEvent(
+                                                    publishShapePreviewEvent));
+                                } else {
+                                    GeoPlatformMessage.errorMessage(
+                                            PublisherWidgetConstants.INSTANCE.GPKmlWidget_errorCheckingKMLURLText(),
+                                            WindowsConstants.INSTANCE.errorMakingConnectionBodyText());
+                                    LayoutManager.getInstance().getStatusMap().setStatus(
+                                            PublisherWidgetConstants.INSTANCE.GPKmlWidget_statusErrorPreviewText(),
+                                            EnumSearchStatus.STATUS_NO_SEARCH.toString());
+                                    System.out.println(
+                                            "Error checking the KML URL: " + caught.toString()
+                                            + " data: " + caught.getMessage());
+                                }
+                            }
+
+                            @Override
+                            public void onSuccess(Boolean result) {
+                                if (result == null) { // DEL
+                                    buttonPreview.enable(); // DEL
+                                    return; // DEL
+                                } // DEL
+
+                                if (result) {
+                                    buttonPreview.enable();
+                                    if (runExecute) { // Iff the enter key is pressed
+                                        execute();
+                                    }
+                                } else {
+                                    buttonPreview.disable();
+                                }
+                            }
+                        });
             }
         });
     }
 
     private void execute() {
         System.out.println("%%% Method execute() must be implemented...");
-        GeoPlatformMessage.alertMessage(WindowsConstants.INSTANCE.warningTitleText(),
+        GeoPlatformMessage.alertMessage(
+                WindowsConstants.INSTANCE.warningTitleText(),
                 WindowsConstants.INSTANCE.functionNotYetImplementedText());
     }
 }

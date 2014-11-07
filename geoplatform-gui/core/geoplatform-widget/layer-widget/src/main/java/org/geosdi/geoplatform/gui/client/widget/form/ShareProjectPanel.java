@@ -1,37 +1,35 @@
 /**
  *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
+ * geo-platform Rich webgis framework http://geo-platform.org
+ * ====================================================================
  *
- *   Copyright (C) 2008-2014 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2014 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version. This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details. You should have received a copy of the GNU General Public License
+ * along with this program. If not, see http://www.gnu.org/licenses/
  *
- *   ====================================================================
+ * ====================================================================
  *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
+ * Linking this library statically or dynamically with other modules is making a
+ * combined work based on this library. Thus, the terms and conditions of the
+ * GNU General Public License cover the whole combination.
  *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * As a special exception, the copyright holders of this library give you
+ * permission to link this library with independent modules to produce an
+ * executable, regardless of the license terms of these independent modules, and
+ * to copy and distribute the resulting executable under terms of your choice,
+ * provided that you also meet, for each linked independent module, the terms
+ * and conditions of the license of that module. An independent module is a
+ * module which is not derived from or based on this library. If you modify this
+ * library, you may extend this exception to your version of the library, but
+ * you are not obligated to do so. If you do not wish to do so, delete this
+ * exception statement from your version.
  */
 package org.geosdi.geoplatform.gui.client.widget.form;
 
@@ -57,6 +55,10 @@ import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.layout.MarginData;
 import com.google.common.collect.Lists;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.rpc.HasRpcToken;
+import com.google.gwt.user.client.rpc.RpcTokenException;
+import com.google.gwt.user.client.rpc.XsrfToken;
+import com.google.gwt.user.client.rpc.XsrfTokenServiceAsync;
 import java.util.ArrayList;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
@@ -64,11 +66,13 @@ import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
+import org.geosdi.geoplatform.gui.client.service.LayerRemoteAsync;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
 import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
 import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 import org.geosdi.geoplatform.gui.model.user.GPSimpleUser;
 import org.geosdi.geoplatform.gui.model.user.GPSimpleUserKeyValue;
+import org.geosdi.geoplatform.gui.service.gwt.xsrf.GPXsrfTokenService;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -76,13 +80,16 @@ import org.geosdi.geoplatform.gui.model.user.GPSimpleUserKeyValue;
  */
 public class ShareProjectPanel extends GeoPlatformContentPanel {
 
+    private static final XsrfTokenServiceAsync xsrf = GPXsrfTokenService.Util.getInstance();
+    private static final LayerRemoteAsync layerRemote = LayerRemote.Util.getInstance();
     private final static String PROJECT_NAME_LABEL = LayerModuleConstants.INSTANCE.ShareProjectPanel_projectNameLabelText() + ": ";
     private final static String OWNER_LABEL = LayerModuleConstants.INSTANCE.ShareProjectPanel_ownerLabelText() + ": ";
     private final static String ORGANIZATION_LABEL = LayerModuleConstants.INSTANCE.ShareProjectPanel_organizationLabelText() + ": ";
+    //
     private ListStore<GPSimpleUser> fromStore;
     private ListStore<GPSimpleUser> toStore;
     private GPClientProject project;
-    private GPProjectManagementWidget projectManagementWidget;
+    private final GPProjectManagementWidget projectManagementWidget;
     private StoreFilterField<GPSimpleUser> toFilter;
     private StoreFilterField<GPSimpleUser> fromFilter;
     private Button saveButton;
@@ -107,7 +114,8 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
         VerticalPanel verticalPanel = new VerticalPanel();
         verticalPanel.setSpacing(10);
         FieldSet fieldSet = new FieldSet();
-        fieldSet.setHeadingHtml(LayerModuleConstants.INSTANCE.ShareProjectPanel_fieldSetHeadingText());
+        fieldSet.setHeadingHtml(
+                LayerModuleConstants.INSTANCE.ShareProjectPanel_fieldSetHeadingText());
         fieldSet.setWidth(GPProjectManagementWidget.COMPONENT_WIDTH - 25);
         this.projectNameLabel = new Label();
         this.projectNameLabel.setStyleAttribute("font-size", "13");
@@ -120,20 +128,24 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
         fieldSet.add(organizationLabel, new MarginData(10));
         verticalPanel.add(fieldSet);
         //
-        LayoutContainer labelListContainer = new LayoutContainer(new BorderLayout());
+        LayoutContainer labelListContainer = new LayoutContainer(
+                new BorderLayout());
         labelListContainer.setHeight(20);
         labelListContainer.setStyleAttribute("background-color", "white");
-        labelListContainer.setWidth(GPProjectManagementWidget.COMPONENT_WIDTH - 25);
+        labelListContainer.setWidth(
+                GPProjectManagementWidget.COMPONENT_WIDTH - 25);
         Label organizationUserLabel = new Label(LayerModuleConstants.INSTANCE.
                 ShareProjectPanel_organizationUserLabelText() + ":");
         organizationUserLabel.setStyleAttribute("font-size", "13");
         organizationUserLabel.setStyleAttribute("font-weight", "bold");
-        labelListContainer.add(organizationUserLabel, new BorderLayoutData(Style.LayoutRegion.WEST));
+        labelListContainer.add(organizationUserLabel, new BorderLayoutData(
+                Style.LayoutRegion.WEST));
         Label projectSharedUserLabel = new Label(LayerModuleConstants.INSTANCE.
                 ShareProjectPanel_projectSharedUserLabelText() + ":");
         projectSharedUserLabel.setStyleAttribute("font-size", "13");
         projectSharedUserLabel.setStyleAttribute("font-weight", "bold");
-        labelListContainer.add(projectSharedUserLabel, new BorderLayoutData(Style.LayoutRegion.EAST));
+        labelListContainer.add(projectSharedUserLabel, new BorderLayoutData(
+                Style.LayoutRegion.EAST));
         verticalPanel.add(labelListContainer);
         //
         final DualListField<GPSimpleUser> lists = new DualListField<GPSimpleUser>();
@@ -151,65 +163,104 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
         this.toStore = new ListStore<GPSimpleUser>();
         to.setStore(this.toStore);
         Button cancelButton = new Button(LayerModuleConstants.INSTANCE.
-                ShareProjectPanel_cancelButtonText(), BasicWidgetResources.ICONS.gear(),
+                ShareProjectPanel_cancelButtonText(),
+                BasicWidgetResources.ICONS.gear(),
                 new SelectionListener<ButtonEvent>() {
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                ShareProjectPanel.this.reset();
-                projectManagementWidget.showSearchProjectPanel();
-            }
-        });
-        super.addButton(cancelButton);
-        saveButton = new Button(ButtonsConstants.INSTANCE.saveText(), BasicWidgetResources.ICONS.save(),
-                new SelectionListener<ButtonEvent>() {
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                toStore.commitChanges();
-                List<Long> accountIDsProject = Lists.<Long>newArrayListWithCapacity(toStore.getModels().size());
-                IGPAccountDetail accountDetail = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
-                boolean test = false;
-                for (GPSimpleUser user : toStore.getModels()) {
-                    if (user.getId().equals(accountDetail.getId())) {
-                        test = true;
-                    }
-                    accountIDsProject.add(user.getId());
-                }
-                final boolean isShared = test;
-                ShareProjectPanel.this.reset();
-                LayerRemote.Util.getInstance().shareProjectToUsers(project.getId(),
-                        accountIDsProject, new AsyncCallback<Boolean>() {
-                    @Override
-                    public void onFailure(Throwable caught) {
-                        System.out.println("Error on saving user to share project");
-                    }
 
                     @Override
-                    public void onSuccess(Boolean result) {
-//                                System.out.println("Project is Shared: " + isShared);
-                        if (project.isDefaultProject()) {
-                            GPClientProject projInSession = Registry.get(UserSessionEnum.CURRENT_PROJECT_ON_TREE.name());
-                            if (isShared) {
-                                projInSession.setShared(Boolean.TRUE);
-                            } else {
-                                projInSession.setShared(Boolean.FALSE);
-                            }
-                        }
-                        project.setShared(Boolean.TRUE);
-                        loadData(project);
+                    public void componentSelected(ButtonEvent ce) {
+                        ShareProjectPanel.this.reset();
+                        projectManagementWidget.showSearchProjectPanel();
                     }
                 });
-            }
-        });
+        super.addButton(cancelButton);
+        saveButton = new Button(ButtonsConstants.INSTANCE.saveText(),
+                BasicWidgetResources.ICONS.save(),
+                new SelectionListener<ButtonEvent>() {
+
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                        toStore.commitChanges();
+                        final List<Long> accountIDsProject = Lists.<Long>newArrayListWithCapacity(
+                                toStore.getModels().size());
+                        IGPAccountDetail accountDetail = Registry.get(
+                                UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
+                        boolean test = false;
+                        for (GPSimpleUser user : toStore.getModels()) {
+                            if (user.getId().equals(accountDetail.getId())) {
+                                test = true;
+                            }
+                            accountIDsProject.add(user.getId());
+                        }
+                        final boolean isShared = test;
+                        ShareProjectPanel.this.reset();
+                        xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
+
+                            @Override
+                            public void onFailure(Throwable caught) {
+                                try {
+                                    throw caught;
+                                } catch (RpcTokenException e) {
+                                    // Can be thrown for several reasons:
+                                    //   - duplicate session cookie, which may be a sign of a cookie
+                                    //     overwrite attack
+                                    //   - XSRF token cannot be generated because session cookie isn't
+                                    //     present
+                                } catch (Throwable e) {
+                                    // unexpected
+                                }
+                            }
+
+                            @Override
+                            public void onSuccess(XsrfToken token) {
+                                ((HasRpcToken) layerRemote).setRpcToken(token);
+                                layerRemote.shareProjectToUsers(project.getId(),
+                                        accountIDsProject,
+                                        new AsyncCallback<Boolean>() {
+
+                                            @Override
+                                            public void onFailure(
+                                                    Throwable caught) {
+                                                        System.out.println(
+                                                                "Error on saving user to share project");
+                                                    }
+
+                                                    @Override
+                                                    public void onSuccess(
+                                                            Boolean result) {
+//                                System.out.println("Project is Shared: " + isShared);
+                                                                if (project.isDefaultProject()) {
+                                                                    GPClientProject projInSession = Registry.get(
+                                                                            UserSessionEnum.CURRENT_PROJECT_ON_TREE.name());
+                                                                    if (isShared) {
+                                                                        projInSession.setShared(
+                                                                                Boolean.TRUE);
+                                                                    } else {
+                                                                        projInSession.setShared(
+                                                                                Boolean.FALSE);
+                                                                    }
+                                                                }
+                                                                project.setShared(
+                                                                        Boolean.TRUE);
+                                                                loadData(project);
+                                                            }
+                                        });
+                            }
+                        });
+                    }
+                });
         super.addButton(saveButton);
         super.add(verticalPanel);
         super.add(lists, new FormData("98%"));
         LayoutContainer filterContainer = new LayoutContainer(new BorderLayout());
         this.fromFilter = this.createServerFilter(this.fromFilter, fromStore,
                 LayerModuleConstants.INSTANCE.ShareProjectPanel_fromFilterLabelText());
-        filterContainer.add(this.fromFilter, new BorderLayoutData(Style.LayoutRegion.WEST));
+        filterContainer.add(this.fromFilter, new BorderLayoutData(
+                Style.LayoutRegion.WEST));
         this.toFilter = this.createServerFilter(this.toFilter, toStore,
                 LayerModuleConstants.INSTANCE.ShareProjectPanel_toFilterLabelText());
-        filterContainer.add(this.toFilter, new BorderLayoutData(Style.LayoutRegion.EAST));
+        filterContainer.add(this.toFilter, new BorderLayoutData(
+                Style.LayoutRegion.EAST));
         filterContainer.setStyleAttribute("margin", "11px");
         super.add(filterContainer);
     }
@@ -220,11 +271,14 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
         this.toStore.removeAll();
     }
 
-    private StoreFilterField<GPSimpleUser> createServerFilter(StoreFilterField<GPSimpleUser> storeFilterField,
+    private StoreFilterField<GPSimpleUser> createServerFilter(
+            StoreFilterField<GPSimpleUser> storeFilterField,
             ListStore<GPSimpleUser> store, String filterLabel) {
         storeFilterField = new StoreFilterField<GPSimpleUser>() {
+
             @Override
-            protected boolean doSelect(Store<GPSimpleUser> store, GPSimpleUser parent,
+            protected boolean doSelect(Store<GPSimpleUser> store,
+                    GPSimpleUser parent,
                     GPSimpleUser record, String property, String filter) {
                 String name = record.getName().toString().toLowerCase();
                 if (name.contains(filter.toLowerCase())) {
@@ -240,36 +294,91 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
         return storeFilterField;
     }
 
-    public void loadData(GPClientProject project) {
+    public void loadData(GPClientProject theProject) {
         super.init();
         this.reset();
-        this.project = project;
-        LayerRemote.Util.getInstance().getOrganizationUsersToShareProject(project.getId(), new AsyncCallback<ArrayList<GPSimpleUser>>() {
+        this.project = theProject;
+        xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
+
             @Override
             public void onFailure(Throwable caught) {
-                System.out.println("Failled to load Organization Users to Share Project: " + caught);
+                try {
+                    throw caught;
+                } catch (RpcTokenException e) {
+                    // Can be thrown for several reasons:
+                    //   - duplicate session cookie, which may be a sign of a cookie
+                    //     overwrite attack
+                    //   - XSRF token cannot be generated because session cookie isn't
+                    //     present
+                } catch (Throwable e) {
+                    // unexpected
+                }
             }
 
             @Override
-            public void onSuccess(ArrayList<GPSimpleUser> result) {
-                fromStore.add(result);
+            public void onSuccess(XsrfToken token) {
+                ((HasRpcToken) layerRemote).setRpcToken(token);
+                layerRemote.getOrganizationUsersToShareProject(
+                        project.getId(),
+                        new AsyncCallback<ArrayList<GPSimpleUser>>() {
+
+                            @Override
+                            public void onFailure(Throwable caught) {
+                                System.out.println(
+                                        "Failled to load Organization Users to Share Project: " + caught);
+                            }
+
+                            @Override
+                            public void onSuccess(ArrayList<GPSimpleUser> result) {
+                                fromStore.add(result);
+                            }
+                        });
             }
         });
-        LayerRemote.Util.getInstance().getAccountsFromSharedProject(
-                project.getId(), new AsyncCallback<ArrayList<GPSimpleUser>>() {
+
+        xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
+
             @Override
             public void onFailure(Throwable caught) {
-                System.out.println("Failled to load Share Project's Accounts: " + caught);
+                try {
+                    throw caught;
+                } catch (RpcTokenException e) {
+                    // Can be thrown for several reasons:
+                    //   - duplicate session cookie, which may be a sign of a cookie
+                    //     overwrite attack
+                    //   - XSRF token cannot be generated because session cookie isn't
+                    //     present
+                } catch (Throwable e) {
+                    // unexpected
+                }
             }
 
             @Override
-            public void onSuccess(ArrayList<GPSimpleUser> result) {
-                toStore.add(result);
+            public void onSuccess(XsrfToken token) {
+                ((HasRpcToken) layerRemote).setRpcToken(token);
+                layerRemote.getAccountsFromSharedProject(
+                        project.getId(),
+                        new AsyncCallback<ArrayList<GPSimpleUser>>() {
+
+                            @Override
+                            public void onFailure(Throwable caught) {
+                                System.out.println(
+                                        "Failled to load Share Project's Accounts: " + caught);
+                            }
+
+                            @Override
+                            public void onSuccess(ArrayList<GPSimpleUser> result) {
+                                toStore.add(result);
+                            }
+                        });
             }
         });
+
         boolean enableMenu = false;
-        IGPAccountDetail accountInSession = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
-        if (project.getOwner() == null || project.getOwner().getId().equals(accountInSession.getId())) {
+        IGPAccountDetail accountInSession = Registry.get(
+                UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
+        if (theProject.getOwner() == null || theProject.getOwner().getId().equals(
+                accountInSession.getId())) {
             enableMenu = true;
         }
         saveButton.setEnabled(enableMenu);
@@ -277,14 +386,17 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
     }
 
     private void updateLabels() {
-        IGPAccountDetail accountDetail = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
-        this.projectNameLabel.setHtml(PROJECT_NAME_LABEL + this.project.getName());
+        IGPAccountDetail accountDetail = Registry.get(
+                UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
+        this.projectNameLabel.setHtml(
+                PROJECT_NAME_LABEL + this.project.getName());
         if (project.getOwner() != null) {
             this.ownerLabel.setHtml(OWNER_LABEL + project.getOwner().getName());
         } else {
             this.ownerLabel.setHtml(OWNER_LABEL + accountDetail.getName());
         }
-        this.organizationLabel.setHtml(ORGANIZATION_LABEL + accountDetail.getOrganization());
+        this.organizationLabel.setHtml(
+                ORGANIZATION_LABEL + accountDetail.getOrganization());
     }
 
     @Override

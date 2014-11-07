@@ -31,7 +31,7 @@
  * you are not obligated to do so. If you do not wish to do so, delete this
  * exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.client.configutation.history;
+package org.geosdi.geoplatform.gui.client.configuration.history;
 
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;

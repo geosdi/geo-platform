@@ -40,14 +40,14 @@ import org.geosdi.geoplatform.gui.client.service.MapRemote;
 import org.geosdi.geoplatform.gui.configuration.map.client.GPClientViewport;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.service.IMapService;
-import org.geosdi.geoplatform.gui.server.spring.GPAutoInjectingRemoteServiceServlet;
+import org.geosdi.geoplatform.gui.server.spring.xsrf.GPAutoInjectingXsrfTokenServiceServlet;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class MapRemoteImpl extends GPAutoInjectingRemoteServiceServlet
+public class MapRemoteImpl extends GPAutoInjectingXsrfTokenServiceServlet
         implements MapRemote {
 
     private static final long serialVersionUID = 5204638800999412388L;

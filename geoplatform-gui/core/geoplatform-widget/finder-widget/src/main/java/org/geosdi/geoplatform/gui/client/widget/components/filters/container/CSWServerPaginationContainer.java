@@ -45,6 +45,10 @@ import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.tips.QuickTip;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.rpc.HasRpcToken;
+import com.google.gwt.user.client.rpc.RpcTokenException;
+import com.google.gwt.user.client.rpc.XsrfToken;
+import com.google.gwt.user.client.rpc.XsrfTokenServiceAsync;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -53,6 +57,8 @@ import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.i18n.CatalogFinderConstants;
 import org.geosdi.geoplatform.gui.client.puregwt.event.StatusWidgetEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.handler.LoadFirstServersHandler;
+import org.geosdi.geoplatform.gui.client.service.GPCatalogFinderRemote;
+import org.geosdi.geoplatform.gui.client.service.GPCatalogFinderRemoteAsync;
 import org.geosdi.geoplatform.gui.client.widget.components.form.CSWServerFormWidget;
 import org.geosdi.geoplatform.gui.client.widget.statusbar.GPCatalogStatusBar.GPCatalogStatusBarType;
 import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextField;
@@ -65,6 +71,7 @@ import org.geosdi.geoplatform.gui.model.server.GPCSWServerBeanModel.GPCSWServerK
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
 import org.geosdi.geoplatform.gui.server.gwt.GPCatalogFinderRemoteImpl;
+import org.geosdi.geoplatform.gui.service.gwt.xsrf.GPXsrfTokenService;
 
 /**
  *
@@ -76,6 +83,9 @@ public class CSWServerPaginationContainer
         extends GridLayoutPaginationContainer<GPCSWServerBeanModel>
         implements LoadFirstServersHandler {
 
+    private static final XsrfTokenServiceAsync xsrf = GPXsrfTokenService.Util.getInstance();
+    private static final GPCatalogFinderRemoteAsync catalogFinderRemote = GPCatalogFinderRemote.Util.getInstance();
+    //
     private final CatalogFinderBean catalogFinder;
     private final GPEventBus bus;
     private final ActionEnableEvent enableEvent = new ActionEnableEvent(false);
@@ -258,13 +268,35 @@ public class CSWServerPaginationContainer
         super.proxy = new RpcProxy<PagingLoadResult<GPCSWServerBeanModel>>() {
 
             @Override
-            protected void load(Object loadConfig,
-                    AsyncCallback<PagingLoadResult<GPCSWServerBeanModel>> callback) {
-                String searchText = searchField.getValue() == null ? "" : searchField.getValue();
-                GPCatalogFinderRemoteImpl.Util.getInstance().searchCSWServers(
-                        (PagingLoadConfig) loadConfig, searchText,
-                        GPAccountLogged.getInstance().getOrganization(),
-                        callback);
+            protected void load(final Object loadConfig,
+                    final AsyncCallback<PagingLoadResult<GPCSWServerBeanModel>> callback) {
+                final String searchText = searchField.getValue() == null ? "" : searchField.getValue();
+                xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
+
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        try {
+                            throw caught;
+                        } catch (RpcTokenException e) {
+                            // Can be thrown for several reasons:
+                            //   - duplicate session cookie, which may be a sign of a cookie
+                            //     overwrite attack
+                            //   - XSRF token cannot be generated because session cookie isn't
+                            //     present
+                        } catch (Throwable e) {
+                            // unexpected
+                        }
+                    }
+
+                    @Override
+                    public void onSuccess(XsrfToken token) {
+                        ((HasRpcToken) catalogFinderRemote).setRpcToken(token);
+                        catalogFinderRemote.searchCSWServers(
+                                (PagingLoadConfig) loadConfig, searchText,
+                                GPAccountLogged.getInstance().getOrganization(),
+                                callback);
+                    }
+                });
             }
 
         };
@@ -318,32 +350,53 @@ public class CSWServerPaginationContainer
                 CatalogFinderConstants.INSTANCE.CSWServerPaginationContainer_gridDeletingMaskText());
 
         final GPCSWServerBeanModel selectedServer = sm.getSelectedItem();
-        GPCatalogFinderRemoteImpl.Util.getInstance().deleteServerCSW(
-                selectedServer.getId(),
-                new AsyncCallback<Boolean>() {
+        xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
 
-                    @Override
-                    public void onFailure(Throwable caught) {
-                        System.out.println(
-                                "\n*** Error on deleting server: " + caught.getMessage()); // TODO logger
-                        bus.fireEvent(new StatusWidgetEvent(
-                                        CatalogFinderConstants.INSTANCE.CSWServerPaginationContainer_eventErrorDeletingServerText(),
-                                        GPCatalogStatusBarType.STATUS_ERROR));
+            @Override
+            public void onFailure(Throwable caught) {
+                try {
+                    throw caught;
+                } catch (RpcTokenException e) {
+                    // Can be thrown for several reasons:
+                    //   - duplicate session cookie, which may be a sign of a cookie
+                    //     overwrite attack
+                    //   - XSRF token cannot be generated because session cookie isn't
+                    //     present
+                } catch (Throwable e) {
+                    // unexpected
+                }
+            }
 
-                        widget.unmask();
-                    }
+            @Override
+            public void onSuccess(XsrfToken token) {
+                ((HasRpcToken) catalogFinderRemote).setRpcToken(token);
+                catalogFinderRemote.deleteServerCSW(selectedServer.getId(),
+                        new AsyncCallback<Boolean>() {
 
-                    @Override
-                    public void onSuccess(Boolean result) {
-                        store.remove(selectedServer);
-                        bus.fireEvent(new StatusWidgetEvent(
-                                        CatalogFinderConstants.INSTANCE.CSWServerPaginationContainer_eventCorrectlyDeletedServerText(),
-                                        GPCatalogStatusBarType.STATUS_OK));
+                            @Override
+                            public void onFailure(Throwable caught) {
+                                System.out.println(
+                                        "\n*** Error on deleting server: " + caught.getMessage()); // TODO logger
+                                bus.fireEvent(new StatusWidgetEvent(
+                                                CatalogFinderConstants.INSTANCE.CSWServerPaginationContainer_eventErrorDeletingServerText(),
+                                                GPCatalogStatusBarType.STATUS_ERROR));
 
-                        widget.unmask();
-                    }
+                                widget.unmask();
+                            }
 
-                });
+                            @Override
+                            public void onSuccess(Boolean result) {
+                                store.remove(selectedServer);
+                                bus.fireEvent(new StatusWidgetEvent(
+                                                CatalogFinderConstants.INSTANCE.CSWServerPaginationContainer_eventCorrectlyDeletedServerText(),
+                                                GPCatalogStatusBarType.STATUS_OK));
+
+                                widget.unmask();
+                            }
+
+                        });
+            }
+        });
     }
 
     @Override

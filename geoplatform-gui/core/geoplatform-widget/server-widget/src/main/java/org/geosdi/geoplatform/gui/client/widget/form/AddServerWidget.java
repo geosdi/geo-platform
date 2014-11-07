@@ -46,6 +46,10 @@ import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.rpc.HasRpcToken;
+import com.google.gwt.user.client.rpc.RpcTokenException;
+import com.google.gwt.user.client.rpc.XsrfToken;
+import com.google.gwt.user.client.rpc.XsrfTokenServiceAsync;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.ServerWidgetResources;
 import org.geosdi.geoplatform.gui.client.i18n.ServerModuleConstants;
@@ -61,7 +65,9 @@ import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.global.security.GPAccountLogged;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
+import org.geosdi.geoplatform.gui.service.gwt.xsrf.GPXsrfTokenService;
 import org.geosdi.geoplatform.gui.service.server.GeoPlatformOGCRemote;
+import org.geosdi.geoplatform.gui.service.server.GeoPlatformOGCRemoteAsync;
 
 /**
  *
@@ -70,12 +76,15 @@ import org.geosdi.geoplatform.gui.service.server.GeoPlatformOGCRemote;
  */
 public class AddServerWidget extends GeoPlatformFormWidget<GPServerBeanModel> {
 
-    private DisplayServerWidget displayServerWidget;
+    private final DisplayServerWidget displayServerWidget;
     private GPSecureStringTextField serverUrlTextField;
     private GPSecureStringTextField serverNameTextField;
+    private static final XsrfTokenServiceAsync xsrf = GPXsrfTokenService.Util.getInstance();
+    private static final GeoPlatformOGCRemoteAsync geoPlatformOGCRemote = GeoPlatformOGCRemote.Util.getInstance();
+    //
     private Button save;
     private Button cancel;
-    private PerformOperation performSaveServer;
+    private final PerformOperation performSaveServer;
 
     public AddServerWidget(DisplayServerWidget theWidget) {
         super(true);
@@ -102,6 +111,7 @@ public class AddServerWidget extends GeoPlatformFormWidget<GPServerBeanModel> {
                 AddServerWidget_serverNameText());
 
         this.serverUrlTextField.addListener(Events.OnPaste, new Listener() {
+
             @Override
             public void handleEvent(BaseEvent be) {
                 if (serverNameTextField.isDirty()) {
@@ -110,6 +120,7 @@ public class AddServerWidget extends GeoPlatformFormWidget<GPServerBeanModel> {
             }
         });
         this.serverNameTextField.addListener(Events.OnPaste, new Listener() {
+
             @Override
             public void handleEvent(BaseEvent be) {
                 if (serverUrlTextField.isDirty()) {
@@ -119,6 +130,7 @@ public class AddServerWidget extends GeoPlatformFormWidget<GPServerBeanModel> {
         });
 
         this.serverUrlTextField.addKeyListener(new KeyListener() {
+
             @Override
             public void componentKeyUp(ComponentEvent event) {
                 if (serverUrlTextField.getValue() == null) {
@@ -146,6 +158,7 @@ public class AddServerWidget extends GeoPlatformFormWidget<GPServerBeanModel> {
             }
         });
         this.serverNameTextField.addKeyListener(new KeyListener() {
+
             @Override
             public void componentKeyUp(ComponentEvent event) {
                 if (serverNameTextField.getValue() == null) {
@@ -187,6 +200,7 @@ public class AddServerWidget extends GeoPlatformFormWidget<GPServerBeanModel> {
         save = new Button(ButtonsConstants.INSTANCE.saveText(),
                 ServerWidgetResources.ICONS.addServer(),
                 new SelectionListener<ButtonEvent>() {
+
                     @Override
                     public void componentSelected(ButtonEvent ce) {
                         execute();
@@ -200,6 +214,7 @@ public class AddServerWidget extends GeoPlatformFormWidget<GPServerBeanModel> {
         this.cancel = new Button(ButtonsConstants.INSTANCE.cancelText(),
                 BasicWidgetResources.ICONS.cancel(),
                 new SelectionListener<ButtonEvent>() {
+
                     @Override
                     public void componentSelected(ButtonEvent ce) {
                         clearComponents();
@@ -262,7 +277,8 @@ public class AddServerWidget extends GeoPlatformFormWidget<GPServerBeanModel> {
     private class PerformOperation {
 
         private void addServer() {
-            GPServerBeanModel server = displayServerWidget.containsServer(serverUrlTextField.getValue());
+            GPServerBeanModel server = displayServerWidget.containsServer(
+                    serverUrlTextField.getValue());
             if (server != null) {
                 notifyServerPresence(server);
             } else {
@@ -271,27 +287,52 @@ public class AddServerWidget extends GeoPlatformFormWidget<GPServerBeanModel> {
         }
 
         private void saveServer() {
-            GeoPlatformOGCRemote.Util.getInstance().saveServer(
-                    null, serverNameTextField.getValue().trim(),
-                    serverUrlTextField.getValue().trim(),
-                    GPAccountLogged.getInstance().getOrganization(),
-                    new AsyncCallback<GPServerBeanModel>() {
-                        @Override
-                        public void onFailure(Throwable caught) {
-                            setStatus(EnumSaveStatus.STATUS_NOT_SAVE.getValue(),
-                                    EnumSaveStatus.STATUS_MESSAGE_NOT_SAVE.getValue());
-                            LayoutManager.getInstance().getStatusMap().setStatus(
-                                    ServerModuleMessages.INSTANCE.
-                                    AddServerWidget_saveServerErrorMessage(caught.getMessage()),
-                                    EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
-                        }
+            xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
 
-                        @Override
-                        public void onSuccess(GPServerBeanModel server) {
-                            clearComponents();
-                            displayServerWidget.addServer(server);
-                        }
-                    });
+                @Override
+                public void onFailure(Throwable caught) {
+                    try {
+                        throw caught;
+                    } catch (RpcTokenException e) {
+                        // Can be thrown for several reasons:
+                        //   - duplicate session cookie, which may be a sign of a cookie
+                        //     overwrite attack
+                        //   - XSRF token cannot be generated because session cookie isn't
+                        //     present
+                    } catch (Throwable e) {
+                        // unexpected
+                    }
+                }
+
+                @Override
+                public void onSuccess(XsrfToken token) {
+                    ((HasRpcToken) geoPlatformOGCRemote).setRpcToken(token);
+                    geoPlatformOGCRemote.saveServer(null,
+                            serverNameTextField.getValue().trim(),
+                            serverUrlTextField.getValue().trim(),
+                            GPAccountLogged.getInstance().getOrganization(),
+                            new AsyncCallback<GPServerBeanModel>() {
+
+                                @Override
+                                public void onFailure(Throwable caught) {
+                                    setStatus(
+                                            EnumSaveStatus.STATUS_NOT_SAVE.getValue(),
+                                            EnumSaveStatus.STATUS_MESSAGE_NOT_SAVE.getValue());
+                                    LayoutManager.getInstance().getStatusMap().setStatus(
+                                            ServerModuleMessages.INSTANCE.
+                                            AddServerWidget_saveServerErrorMessage(
+                                                    caught.getMessage()),
+                                            EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
+                                }
+
+                                @Override
+                                public void onSuccess(GPServerBeanModel server) {
+                                    clearComponents();
+                                    displayServerWidget.addServer(server);
+                                }
+                            });
+                }
+            });
         }
 
         private void notifyServerPresence(GPServerBeanModel server) {

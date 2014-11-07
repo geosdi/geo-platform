@@ -45,6 +45,10 @@ import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.FormButtonBinding;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.rpc.HasRpcToken;
+import com.google.gwt.user.client.rpc.RpcTokenException;
+import com.google.gwt.user.client.rpc.XsrfToken;
+import com.google.gwt.user.client.rpc.XsrfTokenServiceAsync;
 import java.util.List;
 import org.geosdi.geoplatform.gui.action.button.GPSecureButton;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
@@ -55,6 +59,7 @@ import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProjectKey;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
+import org.geosdi.geoplatform.gui.client.service.LayerRemoteAsync;
 import org.geosdi.geoplatform.gui.client.widget.form.binding.GPDynamicFormBinding;
 import org.geosdi.geoplatform.gui.client.widget.form.projects.binding.ProjectDefaultFieldBinding;
 import org.geosdi.geoplatform.gui.client.widget.form.projects.binding.ProjectNameFieldBinding;
@@ -63,6 +68,7 @@ import org.geosdi.geoplatform.gui.client.widget.pagination.projects.GPProjectSea
 import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextField;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
+import org.geosdi.geoplatform.gui.service.gwt.xsrf.GPXsrfTokenService;
 import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 
 /**
@@ -71,8 +77,11 @@ import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
  */
 public class ProjectBindingWidget extends GPDynamicFormBinding<GPClientProject> {
 
-    private GPListViewSearchPanel<GPClientProject> searchWidget;
+    private final GPListViewSearchPanel<GPClientProject> searchWidget;
     private GPSecureStringTextField projectFieldName;
+    private static final XsrfTokenServiceAsync xsrf = GPXsrfTokenService.Util.getInstance();
+    private static final LayerRemoteAsync layerRemote = LayerRemote.Util.getInstance();
+    //
     private CheckBox projectDefaultCheck;
     private GPSecureButton save;
     private Button cancel;
@@ -82,6 +91,7 @@ public class ProjectBindingWidget extends GPDynamicFormBinding<GPClientProject> 
         super();
         this.searchWidget = theWidget;
         super.addWindowListener(new WindowListener() {
+
             @Override
             public void windowShow(WindowEvent we) {
                 manageComponents();
@@ -92,31 +102,39 @@ public class ProjectBindingWidget extends GPDynamicFormBinding<GPClientProject> 
     @Override
     public void addFieldsBinding() {
         this.formBinding.setStore(this.searchWidget.getStore());
-        super.formBinding.addFieldBinding(new ProjectNameFieldBinding(projectFieldName,
+        super.formBinding.addFieldBinding(new ProjectNameFieldBinding(
+                projectFieldName,
                 GPClientProjectKey.PROJECT_NAME.toString()));
-        super.formBinding.addFieldBinding(new ProjectDefaultFieldBinding(projectDefaultCheck,
+        super.formBinding.addFieldBinding(new ProjectDefaultFieldBinding(
+                projectDefaultCheck,
                 GPClientProjectKey.DEFAULT_PROJECT.toString()));
     }
 
     @Override
     public void addComponentToForm() {
         fieldSet = new FieldSet();
-        fieldSet.setHeadingHtml(LayerModuleConstants.INSTANCE.ProjectBindingWidget_fieldSetHeadingText());
+        fieldSet.setHeadingHtml(
+                LayerModuleConstants.INSTANCE.ProjectBindingWidget_fieldSetHeadingText());
         FormLayout layout = new FormLayout();
         layout.setLabelWidth(120);
         layout.setLabelPad(5);
         fieldSet.setLayout(layout);
         this.projectFieldName = new GPSecureStringTextField();
         this.projectFieldName.setAllowBlank(false);
-        this.projectFieldName.setEmptyText(LayerModuleConstants.INSTANCE.ProjectBindingWidget_projectFieldNameEmptyText());
+        this.projectFieldName.setEmptyText(
+                LayerModuleConstants.INSTANCE.ProjectBindingWidget_projectFieldNameEmptyText());
         this.projectFieldName.setName(GPClientProjectKey.PROJECT_NAME.name());
-        this.projectFieldName.setFieldLabel(LayerModuleConstants.INSTANCE.ProjectBindingWidget_projectFieldNameLabelText());
+        this.projectFieldName.setFieldLabel(
+                LayerModuleConstants.INSTANCE.ProjectBindingWidget_projectFieldNameLabelText());
         fieldSet.add(this.projectFieldName);
         this.projectDefaultCheck = new CheckBox();
-        this.projectDefaultCheck.setBoxLabel(LayerModuleConstants.INSTANCE.ProjectBindingWidget_projectDefaultCheckLabelText());
-        this.projectDefaultCheck.setName(GPClientProjectKey.DEFAULT_PROJECT.toString());
+        this.projectDefaultCheck.setBoxLabel(
+                LayerModuleConstants.INSTANCE.ProjectBindingWidget_projectDefaultCheckLabelText());
+        this.projectDefaultCheck.setName(
+                GPClientProjectKey.DEFAULT_PROJECT.toString());
         CheckBoxGroup checkGroup = new CheckBoxGroup();
-        checkGroup.setFieldLabel(LayerModuleConstants.INSTANCE.ProjectBindingWidget_checkBoxGroupLabelText());
+        checkGroup.setFieldLabel(
+                LayerModuleConstants.INSTANCE.ProjectBindingWidget_checkBoxGroupLabelText());
         checkGroup.add(this.projectDefaultCheck);
         fieldSet.add(checkGroup);
         this.getFormPanel().add(fieldSet);
@@ -125,7 +143,8 @@ public class ProjectBindingWidget extends GPDynamicFormBinding<GPClientProject> 
 
     @Override
     public void initSize() {
-        super.setHeadingHtml(LayerModuleConstants.INSTANCE.ProjectBindingWidget_headingText());
+        super.setHeadingHtml(
+                LayerModuleConstants.INSTANCE.ProjectBindingWidget_headingText());
         setSize(420, 200);
     }
 
@@ -186,13 +205,16 @@ public class ProjectBindingWidget extends GPDynamicFormBinding<GPClientProject> 
 
     private void addButtons() {
         getFormPanel().setButtonAlign(HorizontalAlignment.RIGHT);
-        this.save = new GPSecureButton(ButtonsConstants.INSTANCE.saveText(), BasicWidgetResources.ICONS.save(),
+        this.save = new GPSecureButton(ButtonsConstants.INSTANCE.saveText(),
+                BasicWidgetResources.ICONS.save(),
                 new AddProjectAction(GPTrustedLevel.HIGH, this));
         getFormPanel().addButton(save);
         buttonBinding = new FormButtonBinding(getFormPanel());
         buttonBinding.addButton(save);
-        this.cancel = new Button(ButtonsConstants.INSTANCE.cancelText(), BasicWidgetResources.ICONS.cancel(),
+        this.cancel = new Button(ButtonsConstants.INSTANCE.cancelText(),
+                BasicWidgetResources.ICONS.cancel(),
                 new SelectionListener<ButtonEvent>() {
+
                     @Override
                     public void componentSelected(ButtonEvent ce) {
                         storeRejectChanges();
@@ -204,11 +226,32 @@ public class ProjectBindingWidget extends GPDynamicFormBinding<GPClientProject> 
     }
 
     private void insertProject() {
-        LayerRemote.Util.getInstance().saveProject(entity,
-                new AsyncCallback<Long>() {
+        xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
+
+            @Override
+            public void onFailure(Throwable caught) {
+                try {
+                    throw caught;
+                } catch (RpcTokenException e) {
+                    // Can be thrown for several reasons:
+                    //   - duplicate session cookie, which may be a sign of a cookie
+                    //     overwrite attack
+                    //   - XSRF token cannot be generated because session cookie isn't
+                    //     present
+                } catch (Throwable e) {
+                    // unexpected
+                }
+            }
+
+            @Override
+            public void onSuccess(XsrfToken token) {
+                ((HasRpcToken) layerRemote).setRpcToken(token);
+                layerRemote.saveProject(entity, new AsyncCallback<Long>() {
+
                     @Override
                     public void onFailure(Throwable caught) {
-                        GeoPlatformMessage.errorMessage(LayerModuleConstants.INSTANCE.ProjectBindingWidget_addProjectErrorText(),
+                        GeoPlatformMessage.errorMessage(
+                                LayerModuleConstants.INSTANCE.ProjectBindingWidget_addProjectErrorText(),
                                 caught.getMessage());
                     }
 
@@ -220,22 +263,48 @@ public class ProjectBindingWidget extends GPDynamicFormBinding<GPClientProject> 
                             changeDefaultProject();
                         }
                         searchWidget.getStore().commitChanges();
-                        GeoPlatformMessage.infoMessage(LayerModuleConstants.INSTANCE.ProjectBindingWidget_addProjectSuccessText(),
+                        GeoPlatformMessage.infoMessage(
+                                LayerModuleConstants.INSTANCE.ProjectBindingWidget_addProjectSuccessText(),
                                 "<ul><li>" + entity.getName() + "</li></ul>");
                         if (entity.isDefaultProject()) {
-                            TimeoutHandlerManager.fireEvent(((GPProjectSearchPanel) searchWidget).getDefaultProjectEvent());
+                            TimeoutHandlerManager.fireEvent(
+                                    ((GPProjectSearchPanel) searchWidget).getDefaultProjectEvent());
+
                         }
                         hide();
                     }
                 });
+            }
+        });
     }
 
     private void updateProject() {
-        LayerRemote.Util.getInstance().updateProject(entity,
-                new AsyncCallback<Object>() {
+        xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
+
+            @Override
+            public void onFailure(Throwable caught) {
+                try {
+                    throw caught;
+                } catch (RpcTokenException e) {
+                    // Can be thrown for several reasons:
+                    //   - duplicate session cookie, which may be a sign of a cookie
+                    //     overwrite attack
+                    //   - XSRF token cannot be generated because session cookie isn't
+                    //     present
+                } catch (Throwable e) {
+                    // unexpected
+                }
+            }
+
+            @Override
+            public void onSuccess(XsrfToken token) {
+                ((HasRpcToken) layerRemote).setRpcToken(token);
+                layerRemote.updateProject(entity, new AsyncCallback<Object>() {
+
                     @Override
                     public void onFailure(Throwable caught) {
-                        GeoPlatformMessage.errorMessage(LayerModuleConstants.INSTANCE.
+                        GeoPlatformMessage.errorMessage(
+                                LayerModuleConstants.INSTANCE.
                                 ProjectBindingWidget_updateProjectErrorText(),
                                 caught.getMessage());
                     }
@@ -248,16 +317,22 @@ public class ProjectBindingWidget extends GPDynamicFormBinding<GPClientProject> 
                             changeDefaultProject();
                         }
                         searchWidget.getStore().commitChanges();
-                        GeoPlatformMessage.infoMessage(LayerModuleConstants.INSTANCE.
+
+                        GeoPlatformMessage.infoMessage(
+                                LayerModuleConstants.INSTANCE.
                                 ProjectBindingWidget_updateProjectSuccessText(),
                                 "<ul><li>" + entity.getName() + "</li></ul>");
                         if (entity.isDefaultProject()) {
-                            TimeoutHandlerManager.fireEvent(((GPProjectSearchPanel) searchWidget).getDefaultProjectEvent());
+                            TimeoutHandlerManager.fireEvent(
+                                    ((GPProjectSearchPanel) searchWidget).getDefaultProjectEvent());
                         }
 
                         hide();
                     }
-                });
+                }
+                );
+            }
+        });
     }
 
     private void changeDefaultProject() {

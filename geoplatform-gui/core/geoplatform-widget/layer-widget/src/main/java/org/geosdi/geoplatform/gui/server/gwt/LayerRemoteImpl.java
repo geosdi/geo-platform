@@ -47,20 +47,19 @@ import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveRemo
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoLayerOriginalProperties;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerAttributes;
 import org.geosdi.geoplatform.gui.model.user.GPSimpleUser;
 import org.geosdi.geoplatform.gui.server.ILayerService;
-import org.geosdi.geoplatform.gui.server.spring.GPAutoInjectingRemoteServiceServlet;
+import org.geosdi.geoplatform.gui.server.spring.xsrf.GPAutoInjectingXsrfTokenServiceServlet;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class LayerRemoteImpl extends GPAutoInjectingRemoteServiceServlet
+public class LayerRemoteImpl extends GPAutoInjectingXsrfTokenServiceServlet
         implements LayerRemote {
 
     private static final long serialVersionUID = -2177973379191108728L;

@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.client.service;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+import com.google.gwt.user.server.rpc.XsrfProtect;
 import java.util.List;
 import org.geosdi.geoplatform.gui.configuration.map.client.GPClientViewport;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
@@ -47,11 +48,12 @@ import org.geosdi.geoplatform.gui.global.GeoPlatformException;
  * @email nazzareno.sileno@geosdi.org
  */
 @RemoteServiceRelativePath("MapRemote")
+@XsrfProtect
 public interface MapRemote extends RemoteService {
 
     public static class Util {
 
-        private static MapRemoteAsync instance =
+        private static final MapRemoteAsync instance =
                 (MapRemoteAsync) GWT.create(MapRemote.class);
 
         public static MapRemoteAsync getInstance() {

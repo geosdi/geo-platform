@@ -38,7 +38,7 @@ package org.geosdi.geoplatform.gui.client.config;
 import com.google.gwt.inject.client.AbstractGinModule;
 import org.geosdi.geoplatform.gui.action.ToolbarActionRegistar;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
-import org.geosdi.geoplatform.gui.client.configutation.history.BaseHistoryManagement;
+import org.geosdi.geoplatform.gui.client.configuration.history.BaseHistoryManagement;
 import org.geosdi.geoplatform.gui.configuration.history.GPHistoryManagement;
 import org.geosdi.geoplatform.gui.puregwt.xmpp.event.RefreshLayerXMPPEvent;
 import org.geosdi.geoplatform.gui.puregwt.xmpp.event.ReloadTreeXMPPEvent;

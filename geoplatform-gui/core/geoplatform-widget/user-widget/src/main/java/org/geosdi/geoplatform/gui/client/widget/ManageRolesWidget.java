@@ -1,37 +1,35 @@
 /**
  *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
+ * geo-platform Rich webgis framework http://geo-platform.org
+ * ====================================================================
  *
- *   Copyright (C) 2008-2014 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2014 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version. This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details. You should have received a copy of the GNU General Public License
+ * along with this program. If not, see http://www.gnu.org/licenses/
  *
- *   ====================================================================
+ * ====================================================================
  *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
+ * Linking this library statically or dynamically with other modules is making a
+ * combined work based on this library. Thus, the terms and conditions of the
+ * GNU General Public License cover the whole combination.
  *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * As a special exception, the copyright holders of this library give you
+ * permission to link this library with independent modules to produce an
+ * executable, regardless of the license terms of these independent modules, and
+ * to copy and distribute the resulting executable under terms of your choice,
+ * provided that you also meet, for each linked independent module, the terms
+ * and conditions of the license of that module. An independent module is a
+ * module which is not derived from or based on this library. If you modify this
+ * library, you may extend this exception to your version of the library, but
+ * you are not obligated to do so. If you do not wish to do so, delete this
+ * exception statement from your version.
  */
 package org.geosdi.geoplatform.gui.client.widget;
 
@@ -73,6 +71,10 @@ import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.rpc.HasRpcToken;
+import com.google.gwt.user.client.rpc.RpcTokenException;
+import com.google.gwt.user.client.rpc.XsrfToken;
+import com.google.gwt.user.client.rpc.XsrfTokenServiceAsync;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -90,12 +92,15 @@ import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
 import org.geosdi.geoplatform.gui.client.model.GuiComponentDetail;
 import org.geosdi.geoplatform.gui.client.model.GuiComponentDetail.GuiComponentDetailKeyValue;
 import org.geosdi.geoplatform.gui.client.model.GuiPermission;
+import org.geosdi.geoplatform.gui.client.service.UserRemote;
+import org.geosdi.geoplatform.gui.client.service.UserRemoteAsync;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.grid.renderer.GPGridCellRenderer;
 import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformAction;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.global.security.GPAccountLogged;
 import org.geosdi.geoplatform.gui.server.gwt.UserRemoteImpl;
+import org.geosdi.geoplatform.gui.service.gwt.xsrf.GPXsrfTokenService;
 import org.geosdi.geoplatform.gui.shared.GPRole;
 
 /**
@@ -104,6 +109,9 @@ import org.geosdi.geoplatform.gui.shared.GPRole;
  */
 public class ManageRolesWidget extends GeoPlatformWindow {
 
+    private static final XsrfTokenServiceAsync xsrf = GPXsrfTokenService.Util.getInstance();
+    private static final UserRemoteAsync userRemote = UserRemote.Util.getInstance();
+    //
     private String role;
     private List<String> roles;
     private List<String> guiComponentIDs;
@@ -188,6 +196,7 @@ public class ManageRolesWidget extends GeoPlatformWindow {
         ToolBar toolbar = new ToolBar();
 
         rolesComboBox = new SimpleComboBox<String>() {
+
             @Override
             protected void onSelect(SimpleComboValue<String> model, int index) {
                 super.onSelect(model, index);
@@ -232,11 +241,12 @@ public class ManageRolesWidget extends GeoPlatformWindow {
         Button newRoleButton = new Button(UserModuleConstants.INSTANCE.
                 ManageRolesWidget_newRoleText(),
                 new SelectionListener<ButtonEvent>() {
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                createNewRole();
-            }
-        });
+
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                        createNewRole();
+                    }
+                });
         newRoleButton.setToolTip(new ToolTipConfig(newRoleButton.getHtml(),
                 UserModuleConstants.INSTANCE.
                 ManageRolesWidget_newRoleTooltipText()));
@@ -248,6 +258,7 @@ public class ManageRolesWidget extends GeoPlatformWindow {
     private void createStore() {
         store = new ListStore<GuiComponentDetail>();
         store.addStoreListener(new StoreListener<GuiComponentDetail>() {
+
             @Override
             public void storeClear(StoreEvent<GuiComponentDetail> se) {
                 disableGridButtons();
@@ -281,23 +292,25 @@ public class ManageRolesWidget extends GeoPlatformWindow {
         resetButton = new Button(ButtonsConstants.INSTANCE.resetText(),
                 BasicWidgetResources.ICONS.delete(),
                 new SelectionListener<ButtonEvent>() {
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                grid.stopEditing(true);
-                store.rejectChanges();
-                disableGridButtons();
-            }
-        });
+
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                        grid.stopEditing(true);
+                        store.rejectChanges();
+                        disableGridButtons();
+                    }
+                });
         super.addButton(resetButton);
 
         saveButton = new Button(ButtonsConstants.INSTANCE.saveText(),
                 BasicWidgetResources.ICONS.done(),
                 new SelectionListener<ButtonEvent>() {
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                savePermissions();
-            }
-        });
+
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                        savePermissions();
+                    }
+                });
         super.addButton(saveButton);
 
         this.disableGridButtons();
@@ -305,11 +318,12 @@ public class ManageRolesWidget extends GeoPlatformWindow {
         Button close = new Button(ButtonsConstants.INSTANCE.closeText(),
                 BasicWidgetResources.ICONS.cancel(),
                 new SelectionListener<ButtonEvent>() {
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                hide();
-            }
-        });
+
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                        hide();
+                    }
+                });
         super.addButton(close);
     }
 
@@ -318,12 +332,14 @@ public class ManageRolesWidget extends GeoPlatformWindow {
 
         ColumnConfig iconColumn = new ColumnConfig();
         iconColumn.setId("icon");
-        iconColumn.setHeaderHtml(UserModuleConstants.INSTANCE.ManageRolesWidget_iconText());
+        iconColumn.setHeaderHtml(
+                UserModuleConstants.INSTANCE.ManageRolesWidget_iconText());
         iconColumn.setWidth(35);
         iconColumn.setFixed(true);
         iconColumn.setResizable(false);
         iconColumn.setSortable(false);
         iconColumn.setRenderer(new GPGridCellRenderer<GuiComponentDetail>() {
+
             @Override
             public Object render(GuiComponentDetail model, String property,
                     ColumnData config, int rowIndex, int colIndex,
@@ -349,6 +365,7 @@ public class ManageRolesWidget extends GeoPlatformWindow {
         permissionComboBox.setTriggerAction(ComboBox.TriggerAction.ALL);
         permissionComboBox.add(Arrays.asList(GuiPermission.values()));
         CellEditor comboEditor = new CellEditor(permissionComboBox) {
+
             @Override
             public Object preProcessValue(Object value) {
                 if (value == null) {
@@ -366,6 +383,7 @@ public class ManageRolesWidget extends GeoPlatformWindow {
             }
         };
         GridCellRenderer<GuiComponentDetail> rendererPermission = new GridCellRenderer<GuiComponentDetail>() {
+
             @Override
             public Object render(GuiComponentDetail model, String property,
                     ColumnData config, int rowIndex, int colIndex,
@@ -392,45 +410,76 @@ public class ManageRolesWidget extends GeoPlatformWindow {
     private void loadPermissions() {
         mask(UserModuleMessages.INSTANCE.retrievingRolePermissionsMessage(role));
 
-        UserRemoteImpl.Util.getInstance().
-                getRolePermission(role,
-                GPAccountLogged.getInstance().getOrganization(),
-                new AsyncCallback<HashMap<String, Boolean>>() {
+        xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
+
             @Override
             public void onFailure(Throwable caught) {
-                setSearchStatus(EnumSearchStatus.STATUS_SEARCH_ERROR,
-                        UserModuleMessages.INSTANCE.errorRetrievingRolePermissionsMessage(role));
+                try {
+                    throw caught;
+                } catch (RpcTokenException e) {
+                    // Can be thrown for several reasons:
+                    //   - duplicate session cookie, which may be a sign of a cookie
+                    //     overwrite attack
+                    //   - XSRF token cannot be generated because session cookie isn't
+                    //     present
+                } catch (Throwable e) {
+                    // unexpected
+                }
             }
 
             @Override
-            public void onSuccess(HashMap<String, Boolean> result) {
-                grid.stopEditing(true);
-                ManageRolesWidget.this.store.removeAll();
+            public void onSuccess(XsrfToken token) {
+                ((HasRpcToken) userRemote).setRpcToken(token);
+                userRemote.getRolePermission(role,
+                        GPAccountLogged.getInstance().getOrganization(),
+                        new AsyncCallback<HashMap<String, Boolean>>() {
 
-                for (GuiComponentDetail gc : guiComponents) {
-                    Boolean booleanPermission = result.get(gc.getComponentId());
-                    gc.setPermission(
-                            GuiPermission.fromBoolean(booleanPermission));
+                            @Override
+                            public void onFailure(Throwable caught) {
+                                setSearchStatus(
+                                        EnumSearchStatus.STATUS_SEARCH_ERROR,
+                                        UserModuleMessages.INSTANCE.errorRetrievingRolePermissionsMessage(
+                                                role));
+                            }
 
-                    ManageRolesWidget.this.store.add(gc);
-                }
+                            @Override
+                            public void onSuccess(
+                                    HashMap<String, Boolean> result) {
+                                        grid.stopEditing(true);
+                                        ManageRolesWidget.this.store.removeAll();
 
-                // Iff for ADMIN role, we will remove MANAGE_ROLES
-                // i.e. MANAGE_ROLES will not be modified for a ADMIN role
-                if (role.equals(GPRole.ADMIN.getRole())) {
-                    for (GuiComponentDetail gc : guiComponents) {
-                        if (gc.getComponentId().equals("manageRoles")) {
-                            ManageRolesWidget.this.store.remove(gc);
-                            break;
-                        }
-                    }
-                }
+                                        for (GuiComponentDetail gc : guiComponents) {
+                                            Boolean booleanPermission = result.get(
+                                                    gc.getComponentId());
+                                            gc.setPermission(
+                                                    GuiPermission.fromBoolean(
+                                                            booleanPermission));
 
-                setSearchStatus(EnumSearchStatus.STATUS_SEARCH,
-                        UserModuleMessages.INSTANCE.
-                        rolePermissionsSuccesfullyRetrievedMessage(role));
-                enableModifyButtons();
-                ManageRolesWidget.this.unmask();
+                                            ManageRolesWidget.this.store.add(gc);
+                                        }
+
+                                        // Iff for ADMIN role, we will remove MANAGE_ROLES
+                                        // i.e. MANAGE_ROLES will not be modified for a ADMIN role
+                                        if (role.equals(GPRole.ADMIN.getRole())) {
+                                            for (GuiComponentDetail gc : guiComponents) {
+                                                if (gc.getComponentId().equals(
+                                                        "manageRoles")) {
+                                                    ManageRolesWidget.this.store.remove(
+                                                            gc);
+                                                    break;
+                                                }
+                                            }
+                                        }
+
+                                        setSearchStatus(
+                                                EnumSearchStatus.STATUS_SEARCH,
+                                                UserModuleMessages.INSTANCE.
+                                                rolePermissionsSuccesfullyRetrievedMessage(
+                                                        role));
+                                        enableModifyButtons();
+                                        ManageRolesWidget.this.unmask();
+                                    }
+                        });
             }
         });
     }
@@ -439,7 +488,8 @@ public class ManageRolesWidget extends GeoPlatformWindow {
         grid.stopEditing(true);
         List<Record> modifiedElements = store.getModifiedRecords();
 
-        HashMap<String, Boolean> permissionMap = Maps.<String, Boolean>newHashMapWithExpectedSize(modifiedElements.size());
+        final HashMap<String, Boolean> permissionMap = Maps.<String, Boolean>newHashMapWithExpectedSize(
+                modifiedElements.size());
         for (Record record : modifiedElements) {
             String componentId = record.get(
                     GuiComponentDetailKeyValue.COMPONENT_ID.toString()).toString();
@@ -449,23 +499,48 @@ public class ManageRolesWidget extends GeoPlatformWindow {
         }
 
         mask(UserModuleMessages.INSTANCE.savingRolePermissionsMessage(role));
-        UserRemoteImpl.Util.getInstance().updateRolePermission(role,
-                GPAccountLogged.getInstance().getOrganization(),
-                permissionMap,
-                new AsyncCallback<Boolean>() {
+        xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
+
             @Override
             public void onFailure(Throwable caught) {
-                setSearchStatus(EnumSearchStatus.STATUS_SEARCH_ERROR,
-                        UserModuleMessages.INSTANCE.errorSavingRolePermissionsMessage(role));
+                try {
+                    throw caught;
+                } catch (RpcTokenException e) {
+                    // Can be thrown for several reasons:
+                    //   - duplicate session cookie, which may be a sign of a cookie
+                    //     overwrite attack
+                    //   - XSRF token cannot be generated because session cookie isn't
+                    //     present
+                } catch (Throwable e) {
+                    // unexpected
+                }
             }
 
             @Override
-            public void onSuccess(Boolean result) {
-                store.commitChanges();
-                disableGridButtons();
-                setSearchStatus(EnumSearchStatus.STATUS_SEARCH,
-                        UserModuleMessages.INSTANCE.permissionsRoleSuccesfullySavedMessage(role));
-                unmask();
+            public void onSuccess(XsrfToken token) {
+                ((HasRpcToken) userRemote).setRpcToken(token);
+                userRemote.updateRolePermission(role,
+                        GPAccountLogged.getInstance().getOrganization(),
+                        permissionMap, new AsyncCallback<Boolean>() {
+
+                            @Override
+                            public void onFailure(Throwable caught) {
+                                setSearchStatus(
+                                        EnumSearchStatus.STATUS_SEARCH_ERROR,
+                                        UserModuleMessages.INSTANCE.errorSavingRolePermissionsMessage(
+                                                role));
+                            }
+
+                            @Override
+                            public void onSuccess(Boolean result) {
+                                store.commitChanges();
+                                disableGridButtons();
+                                setSearchStatus(EnumSearchStatus.STATUS_SEARCH,
+                                        UserModuleMessages.INSTANCE.permissionsRoleSuccesfullySavedMessage(
+                                                role));
+                                unmask();
+                            }
+                        });
             }
         });
     }
@@ -475,62 +550,93 @@ public class ManageRolesWidget extends GeoPlatformWindow {
                 ManageRolesWidget_newRoleText(), UserModuleConstants.INSTANCE.
                 ManageRolesWidget_enterNewRoleNameText(),
                 new Listener<MessageBoxEvent>() {
-            @Override
-            public void handleEvent(MessageBoxEvent be) {
-                if (Dialog.CANCEL.equals(be.getButtonClicked().getItemId())) {
-                    return;
-                }
 
-                String roleName = be.getValue().trim();
-                for (String r : roles) {
-                    if (r.equalsIgnoreCase(roleName)) {
-                        GeoPlatformMessage.errorMessage(WindowsConstants.INSTANCE.
-                                errorTitleText(),
-                                UserModuleConstants.INSTANCE.
-                                ManageRolesWidget_roleNameAlreadyExistsText());
-                        setSearchStatus(EnumSearchStatus.STATUS_NO_SEARCH,
-                                UserModuleMessages.INSTANCE.roleNameAlreadyExistsMessage(roleName));
-                        return;
+                    @Override
+                    public void handleEvent(MessageBoxEvent be) {
+                        if (Dialog.CANCEL.equals(
+                                be.getButtonClicked().getItemId())) {
+                            return;
+                        }
+
+                        String roleName = be.getValue().trim();
+                        for (String r : roles) {
+                            if (r.equalsIgnoreCase(roleName)) {
+                                GeoPlatformMessage.errorMessage(
+                                        WindowsConstants.INSTANCE.
+                                        errorTitleText(),
+                                        UserModuleConstants.INSTANCE.
+                                        ManageRolesWidget_roleNameAlreadyExistsText());
+                                setSearchStatus(
+                                        EnumSearchStatus.STATUS_NO_SEARCH,
+                                        UserModuleMessages.INSTANCE.roleNameAlreadyExistsMessage(
+                                                roleName));
+                                return;
+                            }
+                        }
+
+                        role = roleName;
+                        saveNewRole();
                     }
-                }
-
-                role = roleName;
-                saveNewRole();
-            }
-        });
+                });
     }
 
     private void saveNewRole() {
         mask(UserModuleMessages.INSTANCE.savingNewRoleMessage(role));
-        UserRemoteImpl.Util.getInstance().saveRole(role,
-                GPAccountLogged.getInstance().getOrganization(),
-                new AsyncCallback<Boolean>() {
+        xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
+
             @Override
             public void onFailure(Throwable caught) {
-                setSearchStatus(EnumSearchStatus.STATUS_SEARCH_ERROR,
-                        UserModuleMessages.INSTANCE.errorSavingNewRoleMessage(role));
+                try {
+                    throw caught;
+                } catch (RpcTokenException e) {
+                    // Can be thrown for several reasons:
+                    //   - duplicate session cookie, which may be a sign of a cookie
+                    //     overwrite attack
+                    //   - XSRF token cannot be generated because session cookie isn't
+                    //     present
+                } catch (Throwable e) {
+                    // unexpected
+                }
             }
 
             @Override
-            public void onSuccess(Boolean result) {
-                // Set default permission NONE for all permissions
-                store.removeAll();
-                for (GuiComponentDetail gc : guiComponents) {
-                    gc.setPermission(GuiPermission.NONE);
-                    store.add(gc);
-                }
+            public void onSuccess(XsrfToken token) {
+                ((HasRpcToken) userRemote).setRpcToken(token);
+                userRemote.saveRole(role,
+                        GPAccountLogged.getInstance().getOrganization(),
+                        new AsyncCallback<Boolean>() {
 
-                roles.add(role);
+                            @Override
+                            public void onFailure(Throwable caught) {
+                                setSearchStatus(
+                                        EnumSearchStatus.STATUS_SEARCH_ERROR,
+                                        UserModuleMessages.INSTANCE.errorSavingNewRoleMessage(
+                                                role));
+                            }
 
-                rolesComboBox.add(role);
-                rolesComboBox.setSimpleValue(role);
+                            @Override
+                            public void onSuccess(Boolean result) {
+                                // Set default permission NONE for all permissions
+                                store.removeAll();
+                                for (GuiComponentDetail gc : guiComponents) {
+                                    gc.setPermission(GuiPermission.NONE);
+                                    store.add(gc);
+                                }
 
-                addRoleMenuItem(role);
+                                roles.add(role);
 
-                setSearchStatus(EnumSearchStatus.STATUS_SEARCH,
-                        UserModuleMessages.INSTANCE.newRoleCreatedMessage(role));
-                enableModifyButtons();
-                unmask();
+                                rolesComboBox.add(role);
+                                rolesComboBox.setSimpleValue(role);
+
+                                addRoleMenuItem(role);
+
+                                setSearchStatus(EnumSearchStatus.STATUS_SEARCH,
+                                        UserModuleMessages.INSTANCE.newRoleCreatedMessage(
+                                                role));
+                                enableModifyButtons();
+                                unmask();
+                            }
+                        });
             }
         });
     }
@@ -540,7 +646,6 @@ public class ManageRolesWidget extends GeoPlatformWindow {
         gc.setComponentId(componentId);
 
 //        gc.setDescription(action.get....()); // TODO Manage description
-
         // TODO Manage icon
         MenuActionRegistar menuRegistar = BasicGinInjector.MainInjector.getInstance().getMenuActionRegistar();
         GeoPlatformAction action = menuRegistar.get(componentId);
@@ -566,6 +671,7 @@ public class ManageRolesWidget extends GeoPlatformWindow {
         for (final GuiPermission permission : GuiPermission.values()) {
             MenuItem permissionItem = new MenuItem(permission.toString());
             permissionItem.addSelectionListener(new SelectionListener() {
+
                 @Override
                 public void componentSelected(ComponentEvent ce) {
                     // Set selected permission for all permissions
@@ -577,7 +683,7 @@ public class ManageRolesWidget extends GeoPlatformWindow {
 
                     setSearchStatus(EnumSearchStatus.STATUS_SEARCH,
                             UserModuleMessages.INSTANCE.permissionsValueSettedMessage(
-                            permission.toString()));
+                                    permission.toString()));
                 }
             });
             permissionMenu.add(permissionItem);
@@ -597,37 +703,66 @@ public class ManageRolesWidget extends GeoPlatformWindow {
     private void addRoleMenuItem(final String roleItem) {
         MenuItem item = new MenuItem(roleItem);
         item.addSelectionListener(new SelectionListener() {
+
             @Override
             public void componentSelected(ComponentEvent ce) {
                 searchStatus.setBusy(UserModuleMessages.INSTANCE.
                         retrievingPermissionsRoleMessage(roleItem));
-                UserRemoteImpl.Util.getInstance().
-                        getRolePermission(roleItem,
-                        GPAccountLogged.getInstance().getOrganization(),
-                        new AsyncCallback<HashMap<String, Boolean>>() {
+                xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
+
                     @Override
                     public void onFailure(Throwable caught) {
-                        setSearchStatus(EnumSearchStatus.STATUS_SEARCH_ERROR,
-                                UserModuleMessages.INSTANCE.
-                                errorRetrievingRolePermissionsMessage(roleItem));
+                        try {
+                            throw caught;
+                        } catch (RpcTokenException e) {
+                            // Can be thrown for several reasons:
+                            //   - duplicate session cookie, which may be a sign of a cookie
+                            //     overwrite attack
+                            //   - XSRF token cannot be generated because session cookie isn't
+                            //     present
+                        } catch (Throwable e) {
+                            // unexpected
+                        }
                     }
 
                     @Override
-                    public void onSuccess(HashMap<String, Boolean> result) {
-                        grid.stopEditing(true);
+                    public void onSuccess(XsrfToken token) {
+                        ((HasRpcToken) userRemote).setRpcToken(token);
+                        userRemote.getRolePermission(roleItem,
+                                GPAccountLogged.getInstance().getOrganization(),
+                                new AsyncCallback<HashMap<String, Boolean>>() {
 
-                        // Copy permissions from selected role
-                        for (GuiComponentDetail gc : guiComponents) {
-                            Record r = store.getRecord(gc);
-                            Boolean booleanPermission = result.get(
-                                    gc.getComponentId());
-                            r.set(GuiComponentDetailKeyValue.PERMISSION.toString(),
-                                    GuiPermission.fromBoolean(booleanPermission));
-                        }
+                                    @Override
+                                    public void onFailure(Throwable caught) {
+                                        setSearchStatus(
+                                                EnumSearchStatus.STATUS_SEARCH_ERROR,
+                                                UserModuleMessages.INSTANCE.
+                                                errorRetrievingRolePermissionsMessage(
+                                                        roleItem));
+                                    }
 
-                        setSearchStatus(EnumSearchStatus.STATUS_SEARCH,
-                                UserModuleMessages.INSTANCE.permissionsRoleCopiedToMessage(
-                                roleItem, role));
+                                    @Override
+                                    public void onSuccess(
+                                            HashMap<String, Boolean> result) {
+                                                grid.stopEditing(true);
+
+                                                // Copy permissions from selected role
+                                                for (GuiComponentDetail gc : guiComponents) {
+                                                    Record r = store.getRecord(
+                                                            gc);
+                                                    Boolean booleanPermission = result.get(
+                                                            gc.getComponentId());
+                                                    r.set(GuiComponentDetailKeyValue.PERMISSION.toString(),
+                                                            GuiPermission.fromBoolean(
+                                                                    booleanPermission));
+                                                }
+
+                                                setSearchStatus(
+                                                        EnumSearchStatus.STATUS_SEARCH,
+                                                        UserModuleMessages.INSTANCE.permissionsRoleCopiedToMessage(
+                                                                roleItem, role));
+                                            }
+                                });
                     }
                 });
             }
@@ -685,16 +820,19 @@ public class ManageRolesWidget extends GeoPlatformWindow {
         if (store.getModifiedRecords().isEmpty()) {
             super.hide();
         } else {
-            GeoPlatformMessage.confirmMessage(WindowsConstants.INSTANCE.warningTitleText(),
+            GeoPlatformMessage.confirmMessage(
+                    WindowsConstants.INSTANCE.warningTitleText(),
                     UserModuleConstants.INSTANCE.ManageRolesWidget_unsavedPermissionsWarningText(),
                     new Listener<MessageBoxEvent>() {
-                @Override
-                public void handleEvent(MessageBoxEvent be) {
-                    if (Dialog.YES.equals(be.getButtonClicked().getItemId())) {
-                        ManageRolesWidget.super.hide();
-                    }
-                }
-            });
+
+                        @Override
+                        public void handleEvent(MessageBoxEvent be) {
+                            if (Dialog.YES.equals(
+                                    be.getButtonClicked().getItemId())) {
+                                ManageRolesWidget.super.hide();
+                            }
+                        }
+                    });
         }
     }
 

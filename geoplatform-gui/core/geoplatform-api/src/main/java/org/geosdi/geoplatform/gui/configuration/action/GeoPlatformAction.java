@@ -39,10 +39,12 @@ import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.rpc.XsrfTokenServiceAsync;
 import java.util.logging.Logger;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableEvent;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableHandler;
 import org.geosdi.geoplatform.gui.configuration.action.event.HasActionEnableHandler;
+import org.geosdi.geoplatform.gui.service.gwt.xsrf.GPXsrfTokenService;
 
 /**
  *
@@ -51,6 +53,12 @@ import org.geosdi.geoplatform.gui.configuration.action.event.HasActionEnableHand
  */
 public abstract class GeoPlatformAction<X extends ComponentEvent>
         extends SelectionListener<X> implements HasActionEnableHandler {
+    
+    static {
+        xsrf = GPXsrfTokenService.Util.getInstance();
+    }
+    
+    protected static final XsrfTokenServiceAsync xsrf;
 
     protected final static Logger logger = Logger.getLogger("");
     protected String id;

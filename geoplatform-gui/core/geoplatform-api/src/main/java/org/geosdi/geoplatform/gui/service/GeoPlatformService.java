@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.service;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+import com.google.gwt.user.server.rpc.XsrfProtect;
 import org.geosdi.geoplatform.gui.command.api.GPCommandRequest;
 import org.geosdi.geoplatform.gui.command.api.GPCommandResponse;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
@@ -49,6 +50,7 @@ import org.geosdi.geoplatform.gui.global.GeoPlatformException;
  * @since 1.5.1
  */
 @RemoteServiceRelativePath("GeoPlatformService")
+@XsrfProtect
 public interface GeoPlatformService extends RemoteService {
 
     public static class Util {
@@ -67,8 +69,10 @@ public interface GeoPlatformService extends RemoteService {
 
     /**
      *
-     * @param GPCommandRequest request
      *
+     * @param <Request>
+     * @param <Response>
+     * @param request
      * @return {@link GPCommandResponse} response
      *
      * @throws GeoPlatformException

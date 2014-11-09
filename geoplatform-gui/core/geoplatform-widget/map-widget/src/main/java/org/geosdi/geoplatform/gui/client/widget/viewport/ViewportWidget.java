@@ -36,18 +36,15 @@ package org.geosdi.geoplatform.gui.client.widget.viewport;
 import com.extjs.gxt.ui.client.Style;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.rpc.HasRpcToken;
-import com.google.gwt.user.client.rpc.RpcTokenException;
-import com.google.gwt.user.client.rpc.XsrfToken;
-import com.google.gwt.user.client.rpc.XsrfTokenServiceAsync;
 import java.util.List;
+import org.geosdi.geoplatform.gui.client.command.LoadViewportsRequest;
+import org.geosdi.geoplatform.gui.client.command.LoadViewportsResponse;
 import org.geosdi.geoplatform.gui.client.i18n.MapModuleConstants;
 import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
-import org.geosdi.geoplatform.gui.client.service.MapRemote;
-import org.geosdi.geoplatform.gui.client.service.MapRemoteAsync;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommandExecutor;
 import org.geosdi.geoplatform.gui.configuration.map.client.GPClientViewport;
 import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
@@ -56,7 +53,6 @@ import org.geosdi.geoplatform.gui.configuration.map.puregwt.event.CreateViewport
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
-import org.geosdi.geoplatform.gui.service.gwt.xsrf.GPXsrfTokenService;
 import org.gwtopenmaps.openlayers.client.Bounds;
 import org.gwtopenmaps.openlayers.client.Map;
 import org.gwtopenmaps.openlayers.client.Projection;
@@ -68,8 +64,6 @@ import org.gwtopenmaps.openlayers.client.Projection;
 public class ViewportWidget extends GeoPlatformWindow implements
         CreateViewportHandler {
 
-    private static final XsrfTokenServiceAsync xsrf = GPXsrfTokenService.Util.getInstance();
-    private static final MapRemoteAsync mapRemote = MapRemote.Util.getInstance();
     public static final short VIEWPORT_WIDGET_WIDTH = 690;
     public static final short VIEWPORT_WIDGET_HEIGHT = 430;
     //
@@ -77,6 +71,7 @@ public class ViewportWidget extends GeoPlatformWindow implements
     private final ViewportGridFieldSet viewportGridFieldSet;
     private final Map map;
     private GPClientViewport viewportToAdd;
+    private final LoadViewportsRequest loadViewports = new LoadViewportsRequest();
 
     public ViewportWidget(boolean lazy, Map map) {
         super(lazy);
@@ -121,55 +116,41 @@ public class ViewportWidget extends GeoPlatformWindow implements
         ViewportWidget.super.show();
         this.centralPanel.mask(
                 MapModuleConstants.INSTANCE.ViewportWidget_loadingMaskText());
-        xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
 
-            @Override
-            public void onFailure(Throwable caught) {
-                try {
-                    throw caught;
-                } catch (RpcTokenException e) {
-                    // Can be thrown for several reasons:
-                    //   - duplicate session cookie, which may be a sign of a cookie
-                    //     overwrite attack
-                    //   - XSRF token cannot be generated because session cookie isn't
-                    //     present
-                } catch (Throwable e) {
-                    // unexpected
-                }
-            }
+        GPClientCommandExecutor.executeCommand(
+                new GPClientCommand<LoadViewportsResponse>() {
 
-            @Override
-            public void onSuccess(XsrfToken token) {
-                ((HasRpcToken) mapRemote).setRpcToken(token);
-                mapRemote.loadViewportElements(
-                        new AsyncCallback<List<GPClientViewport>>() {
+                    private static final long serialVersionUID = -647700714070936543L;
 
-                            @Override
-                            public void onFailure(Throwable caught) {
-                                GeoPlatformMessage.errorMessage(
-                                        WindowsConstants.INSTANCE.errorLoadingTitleText(),
-                                        WindowsConstants.INSTANCE.errorMakingConnectionBodyText());
-                                LayoutManager.getInstance().getStatusMap().setStatus(
-                                        MapModuleConstants.INSTANCE.ViewportWidget_statusErrorLoadingText(),
-                                        SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
-                                System.out.println(
-                                        "Error saving loading the viewport elements: " + caught.toString()
-                                        + " data: " + caught.getMessage());
-                            }
+                    {
+                        super.setCommandRequest(loadViewports);
+                    }
 
-                            @Override
-                            public void onSuccess(List<GPClientViewport> result) {
-                                viewportGridFieldSet.setViewportListStore(result);
-                                ViewportWidget.this.centralPanel.unmask();
-                                if (viewportToAdd != null) {
-                                    viewportGridFieldSet.addViewportElement(
-                                            viewportToAdd);
-                                    viewportToAdd = null;
-                                }
-                            }
-                        });
-            }
-        });
+                    @Override
+                    public void onCommandSuccess(LoadViewportsResponse response) {
+                        viewportGridFieldSet.setViewportListStore(
+                                response.getResult());
+                        ViewportWidget.this.centralPanel.unmask();
+                        if (viewportToAdd != null) {
+                            viewportGridFieldSet.addViewportElement(
+                                    viewportToAdd);
+                            viewportToAdd = null;
+                        }
+                    }
+
+                    @Override
+                    public void onCommandFailure(Throwable caught) {
+                        GeoPlatformMessage.errorMessage(
+                                WindowsConstants.INSTANCE.errorLoadingTitleText(),
+                                WindowsConstants.INSTANCE.errorMakingConnectionBodyText());
+                        LayoutManager.getInstance().getStatusMap().setStatus(
+                                MapModuleConstants.INSTANCE.ViewportWidget_statusErrorLoadingText(),
+                                SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
+                        System.out.println(
+                                "Error saving loading the viewport elements: " + caught.toString()
+                                + " data: " + caught.getMessage());
+                    }
+                });
     }
 
     @Override

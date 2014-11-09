@@ -35,16 +35,14 @@ package org.geosdi.geoplatform.gui.client.action.baselayer;
 
 import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.event.ComponentEvent;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.rpc.HasRpcToken;
-import com.google.gwt.user.client.rpc.RpcTokenException;
-import com.google.gwt.user.client.rpc.XsrfToken;
+import org.geosdi.geoplatform.gui.client.command.SaveBaseLayerRequest;
+import org.geosdi.geoplatform.gui.client.command.GPMapModuleResponse;
 import org.geosdi.geoplatform.gui.client.i18n.MapModuleConstants;
 import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
-import org.geosdi.geoplatform.gui.client.service.MapRemote;
-import org.geosdi.geoplatform.gui.client.service.MapRemoteAsync;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.baselayer.BaseLayerWidget;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommandExecutor;
 import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformSecureAction;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
@@ -58,9 +56,8 @@ import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
  */
 public class SaveBaseLayerAction extends GeoPlatformSecureAction<ComponentEvent> {
 
-    private static final MapRemoteAsync mapRemote = MapRemote.Util.getInstance();
-    //
     private final BaseLayerWidget widget;
+    private final SaveBaseLayerRequest saveBaseLayerRequest = new SaveBaseLayerRequest();
 
     public SaveBaseLayerAction(GPTrustedLevel trustedLevel,
             BaseLayerWidget widget) {
@@ -72,54 +69,38 @@ public class SaveBaseLayerAction extends GeoPlatformSecureAction<ComponentEvent>
     public void componentSelected(ComponentEvent e) {
         IGPAccountDetail accountDetail = Registry.get(
                 UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
-        final String baseLayer = accountDetail.getBaseLayer();
+        String baseLayer = accountDetail.getBaseLayer();
+        saveBaseLayerRequest.setBaseLayer(baseLayer);
 
-        xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
+        GPClientCommandExecutor.executeCommand(new GPClientCommand<GPMapModuleResponse>() {
 
-            @Override
-            public void onFailure(Throwable caught) {
-                try {
-                    throw caught;
-                } catch (RpcTokenException e) {
-                    // Can be thrown for several reasons:
-                    //   - duplicate session cookie, which may be a sign of a cookie
-                    //     overwrite attack
-                    //   - XSRF token cannot be generated because session cookie isn't
-                    //     present
-                } catch (Throwable e) {
-                    // unexpected
-                }
-            }
+                    private static final long serialVersionUID = 97756360922051084L;
 
-            @Override
-            public void onSuccess(XsrfToken token) {
-                ((HasRpcToken) mapRemote).setRpcToken(token);
-                mapRemote.saveBaseLayer(baseLayer,
-                        new AsyncCallback<Object>() {
+                    {
+                        super.setCommandRequest(saveBaseLayerRequest);
+                    }
 
-                            @Override
-                            public void onFailure(Throwable caught) {
-                                GeoPlatformMessage.errorMessage(
-                                        WindowsConstants.INSTANCE.errorSavingTitleText(),
-                                        WindowsConstants.INSTANCE.errorMakingConnectionBodyText());
-                                LayoutManager.getInstance().getStatusMap().setStatus(
-                                        MapModuleConstants.INSTANCE.SaveBaseLayerAction_statusErrorSavingText(),
-                                        SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
-                                logger.warning(
-                                        "Error saving the new base layer: " + caught.toString()
-                                        + " data: " + caught.getMessage());
-                            }
+                    @Override
+                    public void onCommandSuccess(GPMapModuleResponse response) {
+                        widget.hide();
+                        LayoutManager.getInstance().getStatusMap().setStatus(
+                                MapModuleConstants.INSTANCE.SaveBaseLayerAction_statusSaveSuccesfullText(),
+                                SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
+                    }
 
-                            @Override
-                            public void onSuccess(Object result) {
-                                widget.hide();
-                                LayoutManager.getInstance().getStatusMap().setStatus(
-                                        MapModuleConstants.INSTANCE.SaveBaseLayerAction_statusSaveSuccesfullText(),
-                                        SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
-                            }
-                        });
-            }
-        });
+                    @Override
+                    public void onCommandFailure(Throwable caught) {
+                        GeoPlatformMessage.errorMessage(
+                                WindowsConstants.INSTANCE.errorSavingTitleText(),
+                                WindowsConstants.INSTANCE.errorMakingConnectionBodyText());
+                        LayoutManager.getInstance().getStatusMap().setStatus(
+                                MapModuleConstants.INSTANCE.SaveBaseLayerAction_statusErrorSavingText(),
+                                SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
+                        logger.warning(
+                                "Error saving the new base layer: " + caught.toString()
+                                + " data: " + caught.getMessage());
+                    }
+                });
 
     }
 }

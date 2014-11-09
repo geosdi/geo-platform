@@ -35,15 +35,13 @@ package org.geosdi.geoplatform.gui.client.action.viewport;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.store.ListStore;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.rpc.HasRpcToken;
-import com.google.gwt.user.client.rpc.RpcTokenException;
-import com.google.gwt.user.client.rpc.XsrfToken;
+import org.geosdi.geoplatform.gui.client.command.GPMapModuleResponse;
+import org.geosdi.geoplatform.gui.client.command.ReplaceViewportListRequest;
 import org.geosdi.geoplatform.gui.client.i18n.MapModuleConstants;
 import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
-import org.geosdi.geoplatform.gui.client.service.MapRemote;
-import org.geosdi.geoplatform.gui.client.service.MapRemoteAsync;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommandExecutor;
 import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformSecureAction;
 import org.geosdi.geoplatform.gui.configuration.map.client.GPClientViewport;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
@@ -57,9 +55,8 @@ import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
  */
 public class SaveViewportAction extends GeoPlatformSecureAction<ButtonEvent> {
 
-    private static final MapRemoteAsync mapRemote = MapRemote.Util.getInstance();
-    //
     private final ListStore<GPClientViewport> store;
+    private final ReplaceViewportListRequest replaceViewportRequest = new ReplaceViewportListRequest();
 
     public SaveViewportAction(GPTrustedLevel trustedLevel,
             ListStore<GPClientViewport> store) {
@@ -87,52 +84,39 @@ public class SaveViewportAction extends GeoPlatformSecureAction<ButtonEvent> {
     @Override
     public void componentSelected(ButtonEvent ce) {
         if (isStoreModelCorrect()) {
-            xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
+            replaceViewportRequest.setViewportList(store.getModels());
 
-                @Override
-                public void onFailure(Throwable caught) {
-                    try {
-                        throw caught;
-                    } catch (RpcTokenException e) {
-                    // Can be thrown for several reasons:
-                        //   - duplicate session cookie, which may be a sign of a cookie
-                        //     overwrite attack
-                        //   - XSRF token cannot be generated because session cookie isn't
-                        //     present
-                    } catch (Throwable e) {
-                        // unexpected
-                    }
-                }
+            GPClientCommandExecutor.executeCommand(
+                    new GPClientCommand<GPMapModuleResponse>() {
 
-                @Override
-                public void onSuccess(XsrfToken token) {
-                    ((HasRpcToken) mapRemote).setRpcToken(token);
-                    mapRemote.replaceViewportList(store.getModels(),
-                            new AsyncCallback<Object>() {
+                        private static final long serialVersionUID = -4031441118814889953L;
 
-                                @Override
-                                public void onFailure(Throwable caught) {
-                                    GeoPlatformMessage.errorMessage(
-                                            WindowsConstants.INSTANCE.errorSavingTitleText(),
-                                            WindowsConstants.INSTANCE.errorMakingConnectionBodyText());
-                                    LayoutManager.getInstance().getStatusMap().setStatus(
-                                            MapModuleConstants.INSTANCE.SaveViewportAction_statusErrorSavingText(),
-                                            SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
-                                    System.out.println(
-                                            "Error saving the viewport list: " + caught.toString()
-                                            + " data: " + caught.getMessage());
-                                }
+                        {
+                            super.setCommandRequest(replaceViewportRequest);
+                        }
 
-                                @Override
-                                public void onSuccess(Object result) {
-                                    store.commitChanges();
-                                    LayoutManager.getInstance().getStatusMap().setStatus(
-                                            MapModuleConstants.INSTANCE.SaveViewportAction_statusSaveSuccesfullText(),
-                                            SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
-                                }
-                            });
-                }
-            });
+                        @Override
+                        public void onCommandSuccess(
+                                GPMapModuleResponse response) {
+                            store.commitChanges();
+                            LayoutManager.getInstance().getStatusMap().setStatus(
+                                    MapModuleConstants.INSTANCE.SaveViewportAction_statusSaveSuccesfullText(),
+                                    SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
+                        }
+
+                        @Override
+                        public void onCommandFailure(Throwable caught) {
+                            GeoPlatformMessage.errorMessage(
+                                    WindowsConstants.INSTANCE.errorSavingTitleText(),
+                                    WindowsConstants.INSTANCE.errorMakingConnectionBodyText());
+                            LayoutManager.getInstance().getStatusMap().setStatus(
+                                    MapModuleConstants.INSTANCE.SaveViewportAction_statusErrorSavingText(),
+                                    SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
+                            System.out.println(
+                                    "Error saving the viewport list: " + caught.toString()
+                                    + " data: " + caught.getMessage());
+                        }
+                    });
         } else {
             GeoPlatformMessage.errorMessage(MapModuleConstants.INSTANCE.
                     SaveViewportAction_errorViewportTitleText(),

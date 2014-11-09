@@ -45,7 +45,7 @@ import org.springframework.context.annotation.Configuration;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Configuration
-public class CommandDispatcherConfig {
+class CommandDispatcherConfig {
 
     @Bean(name = "gpCommandDispatcher", destroyMethod = "destroy")
     public CommandDispatcher createCommandDispatcher() {

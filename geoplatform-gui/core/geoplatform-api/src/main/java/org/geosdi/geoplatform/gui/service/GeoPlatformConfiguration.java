@@ -46,6 +46,7 @@ import org.geosdi.geoplatform.gui.global.IGeoPlatformGlobal;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @RemoteServiceRelativePath("GeoPlatformConfiguration")
+@Deprecated
 public interface GeoPlatformConfiguration extends RemoteService {
 
     public static class Util {
@@ -62,6 +63,7 @@ public interface GeoPlatformConfiguration extends RemoteService {
         }
     }
 
+    @Deprecated
     public IGeoPlatformGlobal initGeoPlatformConfiguration();
 
     /**
@@ -72,5 +74,6 @@ public interface GeoPlatformConfiguration extends RemoteService {
      *
      * @return IGeoPlatformGlobal
      */
+    @Deprecated
     public IGeoPlatformGlobal initGPConfigurationForBeanName(String beanName);
 }

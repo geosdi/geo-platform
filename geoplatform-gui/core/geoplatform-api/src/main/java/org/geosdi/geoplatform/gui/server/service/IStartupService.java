@@ -31,61 +31,19 @@
  * you are not obligated to do so. If you do not wish to do so, delete this
  * exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.server.service.impl;
+package org.geosdi.geoplatform.gui.server.service;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import javax.annotation.Resource;
-import org.geosdi.geoplatform.gui.global.CopyrightInfo;
 import org.geosdi.geoplatform.gui.global.IGeoPlatformGlobal;
-import org.geosdi.geoplatform.gui.server.service.IStartupService;
-import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
 
 /**
- * @author giuseppe
  *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-@Service(value = "startupService")
-public class StartupService implements IStartupService {
+public interface IStartupService {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    //
-    @Resource
-    private IGeoPlatformGlobal geoPlatformGlobal;
+    IGeoPlatformGlobal initGeoPlatformConfiguration();
 
-    @PostConstruct
-    public void init() {
-        logger.info(
-                "------------------------------> INIT STARTUP-GEO-PLATFORM SERVICE");
-        logger.info(
-                this.geoPlatformGlobal.getGeoPlatformInfo().getVersion().getName()
-                + " - Version : "
-                + this.geoPlatformGlobal.getGeoPlatformInfo().getVersion().getVersion());
-
-        for (CopyrightInfo info : this.geoPlatformGlobal.getGeoPlatformInfo().getCopyrightInfo()) {
-            logger.info(info.toString());
-        }
-    }
-
-    @PreDestroy
-    public void destroy() {
-        logger.info("-------------------> DESTROY STARTUP-GEO-PLATFORM SERVICE");
-    }
-
-    @Override
-    public IGeoPlatformGlobal initGeoPlatformConfiguration() {
-        return geoPlatformGlobal;
-    }
-
-    @Override
     @Deprecated
-    public IGeoPlatformGlobal initGPConfigurationForBeanName(String beanName) {
-        assert (GeoPlatformContextUtil.getInstance().getBean(beanName) != null) : "The Bean is null.";
-
-        return (IGeoPlatformGlobal) GeoPlatformContextUtil.getInstance().getBean(
-                beanName);
-    }
+    IGeoPlatformGlobal initGPConfigurationForBeanName(String beanName);
 }

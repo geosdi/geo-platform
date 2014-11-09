@@ -46,6 +46,7 @@ import org.geosdi.geoplatform.gui.global.GeoPlatformException;
  */
 @RemoteServiceRelativePath("ServerRemote")
 @XsrfProtect
+@Deprecated
 public interface ServerRemote extends RemoteService {
 
     public static class Util {
@@ -58,5 +59,6 @@ public interface ServerRemote extends RemoteService {
         }
     }
 
-    public List<String> getUserAuthorities() throws GeoPlatformException;
+    @Deprecated
+    List<String> getUserAuthorities() throws GeoPlatformException;
 }

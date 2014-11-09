@@ -50,24 +50,23 @@ import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.HasRpcToken;
-import com.google.gwt.user.client.rpc.RpcTokenException;
 import com.google.gwt.user.client.rpc.XsrfToken;
 import com.google.gwt.user.client.rpc.XsrfTokenServiceAsync;
 import java.util.ArrayList;
-import java.util.List;
 import org.geosdi.geoplatform.gui.client.ServerWidgetResources;
+import org.geosdi.geoplatform.gui.client.command.GetUserAuthoritiesRequest;
+import org.geosdi.geoplatform.gui.client.command.GetUserAuthoritiesResponse;
 import org.geosdi.geoplatform.gui.client.event.timeout.DisplayGetCapabilitiesEvent;
 import org.geosdi.geoplatform.gui.client.event.timeout.IDisplayGetCapabilitiesHandler;
 import org.geosdi.geoplatform.gui.client.i18n.ServerModuleConstants;
 import org.geosdi.geoplatform.gui.client.i18n.ServerModuleMessages;
 import org.geosdi.geoplatform.gui.client.i18n.status.SearchStatusConstants;
 import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
-import org.geosdi.geoplatform.gui.client.service.ServerRemote;
-import org.geosdi.geoplatform.gui.client.service.ServerRemoteAsync;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.form.ManageServerWidget;
 import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
 import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommandExecutor;
 import org.geosdi.geoplatform.gui.command.capabilities.basic.BasicCapabilitiesRequest;
 import org.geosdi.geoplatform.gui.command.capabilities.basic.BasicCapabilitiesResponse;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
@@ -97,7 +96,6 @@ import org.geosdi.geoplatform.gui.utility.oauth2.EnumOAuth2;
 public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
 
     private static final XsrfTokenServiceAsync xsrf = GPXsrfTokenService.Util.getInstance();
-    private static final ServerRemoteAsync serverRemote = ServerRemote.Util.getInstance();
     private static final GeoPlatformOGCRemoteAsync geoPlatformOGCRemote = GeoPlatformOGCRemote.Util.getInstance();
     //
     private ToolBar toolbar;
@@ -108,6 +106,7 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
     private final GridLayersWidget gridWidget;
     private final ManageServerWidget manageServersWidget;
     private final PerformGetcapabilities loadCapabilities;
+    private final GetUserAuthoritiesRequest getAuthoritiesRequest = new GetUserAuthoritiesRequest();
 
     /**
      * @Constructor @param theGridWidget
@@ -182,63 +181,44 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
 
     @Override
     public void activateManageServersButton() {
-        xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
+        GPClientCommandExecutor.executeCommand(
+                new GPClientCommand<GetUserAuthoritiesResponse>() {
 
-            @Override
-            public void onFailure(Throwable caught) {
-                try {
-                    throw caught;
-                } catch (RpcTokenException e) {
-                    // Can be thrown for several reasons:
-                    //   - duplicate session cookie, which may be a sign of a cookie
-                    //     overwrite attack
-                    //   - XSRF token cannot be generated because session cookie isn't
-                    //     present
-                } catch (Throwable e) {
-                    // unexpected
-                }
-            }
+                    private static final long serialVersionUID = -2316524074209342256L;
 
-            @Override
-            public void onSuccess(XsrfToken token) {
-                ((HasRpcToken) serverRemote).setRpcToken(token);
-                serverRemote.getUserAuthorities(
-                        new AsyncCallback<List<String>>() {
+                    {
+                        super.setCommandRequest(getAuthoritiesRequest);
+                    }
 
-                            @Override
-                            public void onFailure(Throwable caught) {
-                                if (caught.getCause() instanceof GPSessionTimeout) {
-                                    GPHandlerManager.fireEvent(new GPLoginEvent(
-                                                    new DisplayGetCapabilitiesEvent()));
-                                } else {
-                                    manageServersButton.setEnabled(false);
-                                    GeoPlatformMessage.errorMessage(
-                                            WindowsConstants.INSTANCE.errorTitleText(),
-                                            WindowsConstants.INSTANCE.errorMakingConnectionBodyText());
-                                    LayoutManager.getInstance().getStatusMap().setStatus(
-                                            ServerModuleConstants.INSTANCE.DisplayServerWidget_statusErrorOpeningWindowText(),
-                                            EnumSearchStatus.STATUS_NO_SEARCH.toString());
-                                    System.out.println(
-                                            "Error opening Get Capabilities window: " + caught.toString()
-                                            + " data: " + caught.getMessage());
-                                }
+                    @Override
+                    public void onCommandSuccess(
+                            GetUserAuthoritiesResponse response) {
+                        manageServersButton.disable();
+                        for (String role : response.getResult()) {
+                            System.out.println("Role: " + role);
+                            if (role.equals(GPRole.ADMIN.getRole())) { // TODO SecureButton
+                                manageServersButton.enable();
+                                return;
                             }
+                        }
+                    }
 
-                            @Override
-                            public void onSuccess(List<String> result) {
-                                manageServersButton.disable();
-                                for (String role : result) {
-                                    System.out.println("Role: " + role);
-                                    if (role.equals(GPRole.ADMIN.getRole())) { // TODO SecureButton
-                                        manageServersButton.enable();
-                                        return;
-                                    }
-                                }
-                            }
-
-                        });
-            }
-        });
+                    @Override
+                    public void onCommandFailure(Throwable caught) {
+                        if (caught.getCause() instanceof GPSessionTimeout) {
+                            GPHandlerManager.fireEvent(new GPLoginEvent(
+                                    new DisplayGetCapabilitiesEvent()));
+                        } else {
+                            manageServersButton.setEnabled(false);
+                            GeoPlatformMessage.errorMessage(
+                                    WindowsConstants.INSTANCE.errorTitleText(),
+                                    WindowsConstants.INSTANCE.errorMakingConnectionBodyText());
+                            LayoutManager.getInstance().getStatusMap().setStatus(
+                                    ServerModuleConstants.INSTANCE.DisplayServerWidget_statusErrorOpeningWindowText(),
+                                    EnumSearchStatus.STATUS_NO_SEARCH.toString());
+                        }
+                    }
+                });
     }
 
     private void createToolBar() {

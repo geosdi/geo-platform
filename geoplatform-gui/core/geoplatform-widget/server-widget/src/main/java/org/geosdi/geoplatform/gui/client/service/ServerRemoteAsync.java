@@ -42,7 +42,9 @@ import java.util.List;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
+@Deprecated
 public interface ServerRemoteAsync {
 
+    @Deprecated
     public void getUserAuthorities(AsyncCallback<List<String>> callback);
 }

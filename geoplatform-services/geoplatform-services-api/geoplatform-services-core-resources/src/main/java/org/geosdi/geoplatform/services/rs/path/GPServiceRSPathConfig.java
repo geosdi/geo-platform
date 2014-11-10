@@ -53,15 +53,15 @@ public final class GPServiceRSPathConfig {
             + "insertOrganization";
     public static final String DELETE_ORGANIZATION_PATH = ORGANIZATION_BASE_PATH
             + "deleteOrganization/{organizationID}";
-    public static final String GET_ALL_ROLES_PATH = ORGANIZATION_BASE_PATH +
-            "getAllRoles/{organization}";
+    public static final String GET_ALL_ROLES_PATH = ORGANIZATION_BASE_PATH
+            + "getAllRoles/{organization}";
     public static final String GET_ROLE_PERMISSION_PATH = ORGANIZATION_BASE_PATH
             + "getRolePermission";
     public static final String UPDATE_ROLE_PERMISSION_PATH = ORGANIZATION_BASE_PATH
             + "updateRolePermission";
-    public static final String SAVE_ROLE_PATH = ORGANIZATION_BASE_PATH 
+    public static final String SAVE_ROLE_PATH = ORGANIZATION_BASE_PATH
             + "saveRole";
-    
+
     /**
      * ACCOUNTS PATH
      */
@@ -73,8 +73,8 @@ public final class GPServiceRSPathConfig {
             + "getUserDetail/{userID}";
     private static final String GET_USER_DETAIL_PATH = ACCOUNTS_PATH
             + "getUserDetail/";
-    public static final String GET_USER_DETAIL_BY_USERNAME_PATH = GET_USER_DETAIL_PATH +
-            "getUserDetailByUsername";
+    public static final String GET_USER_DETAIL_BY_USERNAME_PATH = GET_USER_DETAIL_PATH
+            + "getUserDetailByUsername";
     public static final String GET_USER_DETAIL_BY_USERNAME_AND_PASSWORD_PATH = GET_USER_DETAIL_PATH
             + "getUserDetailByUsernameAndPassword";
     public static final String GET_ACCOUNTS_COUNT_PATH = ACCOUNTS_PATH
@@ -94,8 +94,8 @@ public final class GPServiceRSPathConfig {
             + "forceTemporaryAccount/{accountID}";
     public static final String FORCE_EXPIRED_TEMPORARY_ACCOUNT_PATH = ACCOUNTS_PATH
             + "forceExpiredTemporaryAccount/{accountID}";
-    public static final String GET_ACCOUNT_PERMISSIONS_PATH = ACCOUNTS_PATH +
-            "getAccountPermission/{accountID}";
+    public static final String GET_ACCOUNT_PERMISSIONS_PATH = ACCOUNTS_PATH
+            + "getAccountPermission/{accountID}";
 
     /**
      * AUTHORITIES PATH
@@ -200,8 +200,8 @@ public final class GPServiceRSPathConfig {
             + "getProjectWithExpandedFolders/{projectID}/{accountID}";
     public static final String GET_CHILDREN_ELEMENTS_PATH = FOLDERS_PATH
             + "getChildrenElements/{folderID}";
-    public static final String SAVE_FOLDER_PROPERTIES_PATH = FOLDERS_PATH +
-            "saveFolderProperties";
+    public static final String SAVE_FOLDER_PROPERTIES_PATH = FOLDERS_PATH
+            + "saveFolderProperties";
 
     /**
      * LAYERS PATH
@@ -233,12 +233,12 @@ public final class GPServiceRSPathConfig {
     public static final String DELETE_LAYER_PATH = LAYERS_PATH + "deleteLayer";
     public static final String GET_LAYERS_PATH = LAYERS_PATH
             + "getLayers/{projectID}";
-    public static final String GET_LAYER_BBOX_PATH = LAYERS_PATH +
-            "getBBox/{layerID}";
-    public static final String GET_LAYER_INFO_PATH = LAYERS_PATH +
-            "getLayerInfo/{layerID}";
-    public static final String GET_LAYER_TYPE_PATH = LAYERS_PATH + 
-            "getLayerType/{layerID}";
+    public static final String GET_LAYER_BBOX_PATH = LAYERS_PATH
+            + "getBBox/{layerID}";
+    public static final String GET_LAYER_INFO_PATH = LAYERS_PATH
+            + "getLayerInfo/{layerID}";
+    public static final String GET_LAYER_TYPE_PATH = LAYERS_PATH
+            + "getLayerType/{layerID}";
     public static final String GET_LAYERS_DATA_SOURCE_BY_PROJECT_ID_PATH = LAYERS_PATH
             + "getLayersDataSourceByProjectID/{projectID}";
 
@@ -277,33 +277,33 @@ public final class GPServiceRSPathConfig {
             + "insertViewport";
     public static final String UPDATE_VIEWPORT_PATH = VIEWPORTS_PATH
             + "updateViewport";
-    public static final String GET_VIEWPORT_BY_ID_PATH = VIEWPORTS_PATH +
-            "getViewportById";
+    public static final String GET_VIEWPORT_BY_ID_PATH = VIEWPORTS_PATH
+            + "getViewportById";
     public static final String DELETE_VIEWPORT_PATH = VIEWPORTS_PATH
             + "deleteViewport";
     public static final String SAVE_OR_UPDATE_VIEWPORT_LIST_PATH = VIEWPORTS_PATH
             + "saveOrUpdateViewportList";
     public static final String REPLACE_VIEWPORT_LIST_PATH = VIEWPORTS_PATH
             + "replaceViewportList";
-    
+
     /**
      * SERVERS PATH
      */
     private static final String SERVERS_PATH = "/servers/";
-    public static final String INSERT_SERVER_PATH = SERVERS_PATH + 
-            "insertServer";
-    public static final String UPDATE_SERVER_PATH = SERVERS_PATH +
-            "updateServer";
-    public static final String DELETE_SERVER_PATH = SERVERS_PATH +
-            "deleteServer";
-    public static final String GET_ALL_SERVERS_PATH = SERVERS_PATH + 
-            "getAllServers/{organizazionName}";
+    public static final String INSERT_SERVER_PATH = SERVERS_PATH
+            + "insertServer";
+    public static final String UPDATE_SERVER_PATH = SERVERS_PATH
+            + "updateServer";
+    public static final String DELETE_SERVER_PATH = SERVERS_PATH
+            + "deleteServer";
+    public static final String GET_ALL_SERVERS_PATH = SERVERS_PATH
+            + "getAllServers/{organizazionName}";
     public static final String GET_SERVER_DETAIL_PATH = SERVERS_PATH
             + "getServerDetail/{serverID}";
-    public static final String GET_SHORT_SERVER_PATH = SERVERS_PATH +
-            "getShortServer";
-    public static final String GET_SERVER_DETAIL_BY_URL_PATH = SERVERS_PATH +
-            "getServerDetailByUrl";
+    public static final String GET_SHORT_SERVER_PATH = SERVERS_PATH
+            + "getShortServer";
+    public static final String GET_SERVER_DETAIL_BY_URL_PATH = SERVERS_PATH
+            + "getServerDetailByUrl";
     public static final String SAVE_SERVER_PATH = SERVERS_PATH + "saveServer";
 
     /**

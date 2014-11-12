@@ -915,7 +915,6 @@
                 <groupId>com.google.gwt</groupId>
                 <artifactId>gwt-servlet</artifactId>
                 <version>${gwtVersion}</version>
-                <scope>runtime</scope>
             </dependency>
             
             <dependency>

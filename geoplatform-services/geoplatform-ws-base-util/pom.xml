@@ -24,6 +24,7 @@
         <dependency>
             <groupId>javax.ws.rs</groupId>
             <artifactId>javax.ws.rs-api</artifactId>
+            <scope>provided</scope>
         </dependency>
         
         <!--  logging dependencies, delegate all to slf4j and use logback -->

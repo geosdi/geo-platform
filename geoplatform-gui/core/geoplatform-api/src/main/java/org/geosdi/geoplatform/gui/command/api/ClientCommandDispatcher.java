@@ -33,11 +33,13 @@
  */
 package org.geosdi.geoplatform.gui.command.api;
 
+import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.HasRpcToken;
 import com.google.gwt.user.client.rpc.RpcTokenException;
 import com.google.gwt.user.client.rpc.XsrfToken;
 import com.google.gwt.user.client.rpc.XsrfTokenServiceAsync;
+import java.util.Random;
 import org.geosdi.geoplatform.gui.service.GeoPlatformService;
 import org.geosdi.geoplatform.gui.service.GeoPlatformServiceAsync;
 import org.geosdi.geoplatform.gui.service.gwt.xsrf.GPXsrfTokenService;
@@ -50,6 +52,10 @@ import org.geosdi.geoplatform.gui.service.gwt.xsrf.GPXsrfTokenService;
  * @since 1.5.1
  */
 public final class ClientCommandDispatcher {
+
+    static {
+        Cookies.setCookie("JSESSIONID", Long.toString(new Random().nextLong()));
+    }
 
     private static final ClientCommandDispatcher instance = new ClientCommandDispatcher();
     //

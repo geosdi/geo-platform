@@ -45,6 +45,20 @@ public final class GPServiceRSPathConfig {
     public static final String DEFAULT_RS_SERVICE_PATH = "/";
 
     public static final String GP_CORE_SERVICE_RS_PATH = "/jsonCore";
+    public static final String GP_SECURE_CORE_SERVICE_RS_PATH = "/jsonSecureCore";
+
+    /**
+     * SECURE RESOURCES PATHS
+     */
+    public static final String GP_SECURE_ACCOUNTS_PATH = "/jsonSecureAccount";
+    public static final String GP_SECURE_ACL_PATH = "/jsonSecureAcl";
+    public static final String GP_SECURE_FOLDER_PATH = "/jsonSecureFolder";
+    public static final String GP_SECURE_LAYER_PATH = "/jsonSecureLayer";
+    public static final String GP_SECURE_MESSAGE_PATH = "/jsonSecureMessage";
+    public static final String GP_SECURE_ORGANIZATION_PATH = "/jsonSecureOrganization";
+    public static final String GP_SECURE_PROJECT_PATH = "/jsonSecureProject";
+    public static final String GP_SECURE_SERVER_PATH = "/jsonSecureServer";
+    public static final String GP_SECURE_VIEWPORT_PATH = "/jsonSecureViewport";
     /**
      * ORGANIZATIONS PATH
      */

@@ -65,7 +65,9 @@ import org.springframework.stereotype.Component;
 /**
  * Folder service delegate.
  *
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
+ * 
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 @Component(value = "gpFolderDelegate")
@@ -85,7 +87,6 @@ public class GPFolderDelegate implements FolderDelegate {
     // =========================================================================
     // === Folder
     // =========================================================================
-    
     @Override
     public Long insertFolder(InsertFolderRequest insertFolderRequest)
             throws ResourceNotFoundFault, IllegalParameterFault {

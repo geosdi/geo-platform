@@ -815,6 +815,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @Put
     @PUT
     @Path(value = GPServiceRSPathConfig.UPDATE_DEFAULT_PROJECT_PATH)
+    @Override
     GPProject updateDefaultProject(@WebParam(name = "accountID")
             @QueryParam(value = "accountID") Long accountID,
             @WebParam(name = "projectID")

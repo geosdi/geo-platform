@@ -72,5 +72,4 @@ public interface GPOrganizationResource {
     @Deprecated
     Boolean deleteOrganization(Long organizationID) throws Exception;
     // </editor-fold>
-
 }

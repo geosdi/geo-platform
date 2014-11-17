@@ -50,7 +50,11 @@ public class GPSecureStringTextField extends TextField<String> {
     }
 
     public static String sanitizeString(String stringToSanitize) {
-        return SimpleHtmlSanitizer.getInstance().sanitize(stringToSanitize).asString();
+        String returnValue = null;
+        if (stringToSanitize != null) {
+            returnValue = SimpleHtmlSanitizer.getInstance().sanitize(stringToSanitize).asString();
+        }
+        return returnValue;
     }
 
 }

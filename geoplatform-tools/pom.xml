@@ -16,7 +16,7 @@
     <name>Geo-Platform :: == Tools Module</name>
     
     <modules>
-        <module>geoplarform-bootstrap-config</module>
+        <module>geoplatform-bootstrap-config</module>
         <module>geoplatform-configurator</module>
         <module>geoplatform-oxm</module>
         <module>geoplatform-xml-utilities</module>

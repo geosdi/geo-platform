@@ -43,6 +43,7 @@ import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.Label;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.NumberField;
+import com.extjs.gxt.ui.client.widget.form.TextArea;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import org.geosdi.geoplatform.gui.client.i18n.LayerFiltersModuleConstants;
@@ -50,7 +51,6 @@ import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
 import org.geosdi.geoplatform.gui.client.widget.cql.combobox.CQLLayerAttributesComboBox;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
-import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextArea;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerAttributes;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerAttributes.GPAttributeKey;
@@ -68,7 +68,7 @@ public class BBOXCQLButton extends AdvancedCQLButton {
     private NumberField maxYField = new NumberField();
     private FormData formData;
 
-    public BBOXCQLButton(GPSecureStringTextArea textArea, GPTreePanel<GPBeanTreeModel> treePanel) {
+    public BBOXCQLButton(TextArea textArea, GPTreePanel<GPBeanTreeModel> treePanel) {
         super(textArea, LayerFiltersModuleConstants.INSTANCE.BBOXCQLButton_buttonText());
         this.treePanel = treePanel;
         super.setTitle(LayerFiltersModuleConstants.INSTANCE.BBOXCQLButton_titleText());

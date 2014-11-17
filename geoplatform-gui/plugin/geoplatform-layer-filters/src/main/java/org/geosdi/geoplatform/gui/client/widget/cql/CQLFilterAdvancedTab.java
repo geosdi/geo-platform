@@ -41,6 +41,7 @@ import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.HorizontalPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
+import com.extjs.gxt.ui.client.widget.form.TextArea;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import org.geosdi.geoplatform.gui.client.i18n.LayerFiltersModuleConstants;
 import org.geosdi.geoplatform.gui.client.widget.cql.button.BBOXCQLButton;
@@ -52,7 +53,6 @@ import org.geosdi.geoplatform.gui.client.widget.cql.combobox.CQLLogicalOperatorC
 import org.geosdi.geoplatform.gui.client.widget.cql.combobox.LogicalOperator;
 import org.geosdi.geoplatform.gui.client.widget.tab.GeoPlatformTabItem;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
-import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextArea;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerAttributes;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerAttributes.GPAttributeKey;
@@ -63,7 +63,7 @@ import org.geosdi.geoplatform.gui.model.tree.GPLayerAttributes.GPAttributeKey;
  */
 public class CQLFilterAdvancedTab extends GeoPlatformTabItem implements ICQLFilterTab {
 
-    private GPSecureStringTextArea filterGPSecureStringTextArea;
+    private TextArea filterTextArea;
     private GPTreePanel<GPBeanTreeModel> treePanel;
 
     public CQLFilterAdvancedTab(String title, GPTreePanel<GPBeanTreeModel> treePanel) {
@@ -81,7 +81,7 @@ public class CQLFilterAdvancedTab extends GeoPlatformTabItem implements ICQLFilt
     public void addComponents() {
         setSize(CQLFilterTabWidget.TAB_WIDGET_WIDTH,
                 CQLFilterTabWidget.TAB_WIDGET_HEIGHT);
-        this.filterGPSecureStringTextArea = new GPSecureStringTextArea();
+        this.filterTextArea = new TextArea();
         HorizontalPanel functionPanel = new HorizontalPanel();
         functionPanel.setSpacing(2);
         final CQLLayerAttributesComboBox attributesComboBox = new CQLLayerAttributesComboBox(this.treePanel);
@@ -241,11 +241,11 @@ public class CQLFilterAdvancedTab extends GeoPlatformTabItem implements ICQLFilt
 
         HorizontalPanel spatialPanel = new HorizontalPanel();
         spatialPanel.setSpacing(2);
-        BetweenCQLButton betweenCQLButton = new BetweenCQLButton(filterGPSecureStringTextArea);
+        BetweenCQLButton betweenCQLButton = new BetweenCQLButton(filterTextArea);
         spatialPanel.add(betweenCQLButton);
-        INCQLButton incqlb = new INCQLButton(filterGPSecureStringTextArea, this.treePanel);
+        INCQLButton incqlb = new INCQLButton(filterTextArea, this.treePanel);
         spatialPanel.add(incqlb);
-        BBOXCQLButton bboxcqlb = new BBOXCQLButton(filterGPSecureStringTextArea, this.treePanel);
+        BBOXCQLButton bboxcqlb = new BBOXCQLButton(filterTextArea, this.treePanel);
         spatialPanel.add(bboxcqlb);
         Button includeOperator = new Button("INCLUDE", new SelectionListener<ButtonEvent>() {
             @Override
@@ -263,43 +263,43 @@ public class CQLFilterAdvancedTab extends GeoPlatformTabItem implements ICQLFilt
         });
         excludeOperator.setTitle(LayerFiltersModuleConstants.INSTANCE.CQLFilterAdvancedTab_excludeOperatorTooltipText());
         spatialPanel.add(excludeOperator);
-        TimeCQLButton timeCQLButton = new TimeCQLButton(filterGPSecureStringTextArea);
+        TimeCQLButton timeCQLButton = new TimeCQLButton(filterTextArea);
         spatialPanel.add(timeCQLButton);
 
         super.add(symbolPanel);
         super.add(spatialPanel);
         super.add(functionPanel);
-        this.filterGPSecureStringTextArea.setSize(CQLFilterTabWidget.TAB_WIDGET_WIDTH,
+        this.filterTextArea.setSize(CQLFilterTabWidget.TAB_WIDGET_WIDTH,
                 CQLFilterTabWidget.TAB_WIDGET_HEIGHT - 80);
-        super.add(this.filterGPSecureStringTextArea, new FormData("98%"));
+        super.add(this.filterTextArea, new FormData("98%"));
     }
 
     private void insertTextIntoFilterArea(String text) {
-        String oldText = filterGPSecureStringTextArea.getValue();
+        String oldText = filterTextArea.getValue();
         StringBuilder newText = new StringBuilder();
         if (oldText != null && !oldText.isEmpty()) {
-            newText.append(oldText.substring(0, filterGPSecureStringTextArea.getCursorPos()));
+            newText.append(oldText.substring(0, filterTextArea.getCursorPos()));
             newText.append(text);
-            newText.append(oldText.substring(filterGPSecureStringTextArea.getCursorPos()));
+            newText.append(oldText.substring(filterTextArea.getCursorPos()));
         } else {
             newText.append(text);
         }
-        filterGPSecureStringTextArea.setValue(newText.toString());
+        filterTextArea.setValue(newText.toString());
     }
 
     @Override
     public String getCQLFilterExpression() {
-        return this.filterGPSecureStringTextArea.getValue();
+        return this.filterTextArea.getValue();
     }
 
     @Override
     public void setCQLValue(String cqlFilter) {
-        this.filterGPSecureStringTextArea.setValue(cqlFilter);
+        this.filterTextArea.setValue(cqlFilter);
     }
 
     @Override
     protected void onUnload() {
         super.onUnload();
-        this.filterGPSecureStringTextArea.clear();
+        this.filterTextArea.clear();
     }
 }

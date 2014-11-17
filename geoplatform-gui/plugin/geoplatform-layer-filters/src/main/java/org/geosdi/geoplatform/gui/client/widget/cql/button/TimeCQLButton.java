@@ -44,6 +44,7 @@ import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.DateField;
 import com.extjs.gxt.ui.client.widget.form.Radio;
 import com.extjs.gxt.ui.client.widget.form.RadioGroup;
+import com.extjs.gxt.ui.client.widget.form.TextArea;
 import com.extjs.gxt.ui.client.widget.form.TimeField;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
@@ -51,7 +52,6 @@ import com.google.gwt.i18n.client.DateTimeFormat;
 import org.geosdi.geoplatform.gui.client.i18n.LayerFiltersModuleConstants;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
-import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextArea;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -70,7 +70,7 @@ public class TimeCQLButton extends AdvancedCQLButton {
     private LayoutContainer timeContainer;
     private LayoutContainer periodContainer;
 
-    public TimeCQLButton(GPSecureStringTextArea textArea) {
+    public TimeCQLButton(TextArea textArea) {
         super(textArea, LayerFiltersModuleConstants.INSTANCE.TimeCQLButton_buttonText());
         super.setTitle(LayerFiltersModuleConstants.INSTANCE.TimeCQLButton_titleText());
     }

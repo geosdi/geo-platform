@@ -42,7 +42,7 @@
         
         <dependency>
             <groupId>org.geosdi</groupId>
-            <artifactId>geoplarform-bootstrap-config</artifactId>
+            <artifactId>geoplatform-bootstrap-config</artifactId>
             <version>${project.version}</version>
         </dependency>
         

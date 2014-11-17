@@ -35,8 +35,8 @@ package org.geosdi.geoplatform.gui.client.widget.cql.button;
 
 import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.widget.form.TextArea;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
-import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextArea;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -44,11 +44,11 @@ import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextArea;
  */
 public abstract class AdvancedCQLButton extends Button {
 
-    private GPSecureStringTextArea filterGPSecureStringTextArea;
+    private TextArea filterGPSecureStringTextArea;
     protected boolean initialized = false;
     protected GeoPlatformWindow window;
 
-    public AdvancedCQLButton(GPSecureStringTextArea textArea, String text) {
+    public AdvancedCQLButton(TextArea textArea, String text) {
         super(text);
         this.filterGPSecureStringTextArea = textArea;
     }

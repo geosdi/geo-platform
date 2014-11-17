@@ -40,12 +40,12 @@ import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.Label;
 import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.widget.form.TextArea;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import org.geosdi.geoplatform.gui.client.i18n.LayerFiltersModuleConstants;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
-import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextArea;
 import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextField;
 
 /**
@@ -59,7 +59,7 @@ public class BetweenCQLButton extends AdvancedCQLButton {
     private GPSecureStringTextField secondParameter = new GPSecureStringTextField();
     private FormData formData;
 
-    public BetweenCQLButton(GPSecureStringTextArea textArea) {
+    public BetweenCQLButton(TextArea textArea) {
         super(textArea, LayerFiltersModuleConstants.INSTANCE.BetweenCQLButton_buttonText());
         super.setTitle(LayerFiltersModuleConstants.INSTANCE.BetweenCQLButton_titleText());
     }

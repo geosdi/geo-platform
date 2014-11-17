@@ -45,6 +45,7 @@ import com.extjs.gxt.ui.client.widget.HorizontalPanel;
 import com.extjs.gxt.ui.client.widget.Label;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.widget.form.TextArea;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.google.common.collect.Lists;
@@ -56,7 +57,6 @@ import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
 import org.geosdi.geoplatform.gui.client.widget.cql.combobox.CQLLayerAttributesComboBox;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
-import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextArea;
 import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextField;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerAttributes;
@@ -77,7 +77,7 @@ public class INCQLButton extends AdvancedCQLButton {
     private Button insertButton;
     private FormData formData;
 
-    public INCQLButton(GPSecureStringTextArea textArea, GPTreePanel<GPBeanTreeModel> treePanel) {
+    public INCQLButton(TextArea textArea, GPTreePanel<GPBeanTreeModel> treePanel) {
         super(textArea, LayerFiltersModuleConstants.INSTANCE.INCQLButton_buttonText());
         this.treePanel = treePanel;
         super.setTitle(LayerFiltersModuleConstants.INSTANCE.INCQLButton_titleText());

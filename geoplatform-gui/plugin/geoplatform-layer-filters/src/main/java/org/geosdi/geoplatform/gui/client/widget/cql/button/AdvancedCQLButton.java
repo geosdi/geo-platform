@@ -44,13 +44,13 @@ import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
  */
 public abstract class AdvancedCQLButton extends Button {
 
-    private TextArea filterGPSecureStringTextArea;
+    private TextArea filterTextArea;
     protected boolean initialized = false;
     protected GeoPlatformWindow window;
 
     public AdvancedCQLButton(TextArea textArea, String text) {
         super(text);
-        this.filterGPSecureStringTextArea = textArea;
+        this.filterTextArea = textArea;
     }
 
     @Override
@@ -73,15 +73,15 @@ public abstract class AdvancedCQLButton extends Button {
     }
 
     protected void insertTextIntoFilterArea(String text) {
-        String oldText = filterGPSecureStringTextArea.getValue();
+        String oldText = filterTextArea.getValue();
         StringBuilder newText = new StringBuilder();
         if (oldText != null && !oldText.isEmpty()) {
-            newText.append(oldText.substring(0, filterGPSecureStringTextArea.getCursorPos()));
+            newText.append(oldText.substring(0, filterTextArea.getCursorPos()));
             newText.append(text);
-            newText.append(oldText.substring(filterGPSecureStringTextArea.getCursorPos()));
+            newText.append(oldText.substring(filterTextArea.getCursorPos()));
         } else {
             newText.append(text);
         }
-        filterGPSecureStringTextArea.setValue(newText.toString());
+        filterTextArea.setValue(newText.toString());
     }
 }

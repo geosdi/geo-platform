@@ -54,7 +54,7 @@ import org.geosdi.geoplatform.gui.service.gwt.xsrf.GPXsrfTokenService;
 public final class ClientCommandDispatcher {
 
     static {
-        Cookies.setCookie("JSESSIONID", Long.toString(new Random().nextLong()));
+        Cookies.setCookie("GEOSDI_COOKIE", Long.toString(new Random().nextLong()));
     }
 
     private static final ClientCommandDispatcher instance = new ClientCommandDispatcher();

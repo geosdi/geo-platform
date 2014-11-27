@@ -33,51 +33,30 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.support.cxf.rs.provider.factory;
+package org.geosdi.geoplatform.support.cxf.rs.provider.jackson;
 
-import org.geosdi.geoplatform.support.cxf.rs.provider.configurator.GPRestProviderType;
-import static org.geosdi.geoplatform.support.cxf.rs.provider.configurator.GPRestProviderType.JACKSON;
-import static org.geosdi.geoplatform.support.cxf.rs.provider.configurator.GPRestProviderType.JETTYSON;
-import org.geosdi.geoplatform.support.cxf.rs.provider.jackson.CXFJacksonProvider;
-import org.geosdi.geoplatform.support.cxf.rs.provider.jettyson.GPJSONProvider;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.fasterxml.jackson.databind.Module;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
+import javax.ws.rs.ext.Provider;
+import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public final class GPRestProviderFactory {
+@Provider
+abstract class CXFBaseJacksonProvider extends JacksonJaxbJsonProvider {
 
-    static final GPRestProviderType DEFAULT_TYPE = GPRestProviderType.JETTYSON;
+    private final GPJacksonSupport jacksonSupport = new GPJacksonSupport();
 
-    private static final Logger logger = LoggerFactory.getLogger(
-            GPRestProviderFactory.class);
-
-    private GPRestProviderFactory() {
+    protected CXFBaseJacksonProvider() {
+        _mapperConfig.setMapper(jacksonSupport.getDefaultMapper());
     }
 
-    public static Object createProvider(GPRestProviderType type) {
-        switch ((type != null) ? type : DEFAULT_TYPE) {
-            case JACKSON:
-                logger.debug("\n\n############################### RestProviderFactory "
-                        + "is building an instance of {}\n\n",
-                        CXFJacksonProvider.class);
-                return new CXFJacksonProvider();
+    abstract void registerModule(Module module);
 
-            case JETTYSON:
-                logger.debug("\n\n############################### "
-                        + "RestProviderFactory is building an instance of {}\n\n",
-                        GPJSONProvider.class);
-                return new GPJSONProvider<>();
-
-            default:
-                logger.debug("\n\n############################### "
-                        + "RestProviderFactory DEFAULT Provider instance of {}\n\n",
-                        GPJSONProvider.class);
-                return new GPJSONProvider<>();
-        }
-    }
+    abstract ObjectMapper getDefaultMapper();
 
 }

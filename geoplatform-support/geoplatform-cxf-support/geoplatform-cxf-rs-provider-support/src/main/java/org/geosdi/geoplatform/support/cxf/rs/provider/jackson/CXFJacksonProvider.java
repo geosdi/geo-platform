@@ -35,56 +35,23 @@
  */
 package org.geosdi.geoplatform.support.cxf.rs.provider.jackson;
 
-import com.fasterxml.jackson.databind.AnnotationIntrospector;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.databind.introspect.AnnotationIntrospectorPair;
-import com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector;
-import com.fasterxml.jackson.databind.type.TypeFactory;
-import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
-import com.fasterxml.jackson.module.jaxb.JaxbAnnotationIntrospector;
-import java.text.SimpleDateFormat;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPJacksonProvider extends JacksonJaxbJsonProvider {
+public class CXFJacksonProvider extends CXFBaseJacksonProvider {
 
-    public GPJacksonProvider() {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.configure(DeserializationFeature.UNWRAP_ROOT_VALUE,
-                Boolean.TRUE);
-        mapper.configure(DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES,
-                Boolean.FALSE);
-        mapper.configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES,
-                Boolean.FALSE);
-        mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY,
-                Boolean.TRUE);
-        mapper.configure(SerializationFeature.WRAP_ROOT_VALUE,
-                Boolean.TRUE);
-        mapper.enable(SerializationFeature.INDENT_OUTPUT);
-        mapper.configure(MapperFeature.USE_WRAPPER_NAME_AS_PROPERTY_NAME,
-                Boolean.TRUE);
-
-        mapper.enableDefaultTyping(); // default to using DefaultTyping.OBJECT_AND_NON_CONCRETE
-        AnnotationIntrospector primary = new JaxbAnnotationIntrospector(
-                TypeFactory.defaultInstance());
-        AnnotationIntrospector secondary = new JacksonAnnotationIntrospector();
-
-        mapper.setAnnotationIntrospector(new AnnotationIntrospectorPair(
-                primary, secondary));
-
-        mapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm a z"));
-        _mapperConfig.setMapper(mapper);
-    }
-
-    public void registerModule(Module module) {
+    @Override
+    public final void registerModule(Module module) {
         _mapperConfig.getDefaultMapper().registerModule(module);
     }
 
+    @Override
+    public final ObjectMapper getDefaultMapper() {
+        return _mapperConfig.getDefaultMapper();
+    }
 }

@@ -72,30 +72,16 @@
             <artifactId>cxf-rt-rs-extension-providers</artifactId> 
         </dependency>
         
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-core</artifactId>
-        </dependency>
-        
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-annotations</artifactId>
-        </dependency>
-        
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
+        <dependency> 
+            <groupId>org.geosdi</groupId> 
+            <artifactId>geoplatform-jackson-support</artifactId> 
+            <version>${project.version}</version>
         </dependency>
         
         <!-- JAX-RS provider -->
         <dependency>
             <groupId>com.fasterxml.jackson.jaxrs</groupId>
             <artifactId>jackson-jaxrs-json-provider</artifactId>
-        </dependency>
-        <!-- Support for JAX-B annotations as additional configuration -->
-        <dependency>
-            <groupId>com.fasterxml.jackson.module</groupId>
-            <artifactId>jackson-module-jaxb-annotations</artifactId>
         </dependency>
         
         <!-- SCOPE TEST -->

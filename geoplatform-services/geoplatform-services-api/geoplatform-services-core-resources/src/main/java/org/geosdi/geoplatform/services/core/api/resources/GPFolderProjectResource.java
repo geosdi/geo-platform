@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.services.core.api.resources;
 
 import org.geosdi.geoplatform.request.project.ImportProjectRequest;
-import org.geosdi.geoplatform.responce.ProjectDTO;
+import org.geosdi.geoplatform.response.ProjectDTO;
 
 /**
  *

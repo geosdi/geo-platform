@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.gui.client.puregwt.wfs.event;
 
 import com.google.gwt.event.shared.GwtEvent;
 import javax.inject.Inject;
-import org.geosdi.geoplatform.connector.wfs.responce.LayerSchemaDTO;
+import org.geosdi.geoplatform.connector.wfs.response.LayerSchemaDTO;
 import org.geosdi.geoplatform.gui.client.model.binder.ILayerSchemaBinder;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.WFSGetFeatureHandler;
 import org.geosdi.geoplatform.gui.impl.map.control.feature.GetFeatureModel;

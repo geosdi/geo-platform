@@ -47,7 +47,7 @@ import org.geosdi.geoplatform.gui.shared.GPRole;
 import org.geosdi.geoplatform.request.LikePatternType;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.request.message.MarkMessageReadByDateRequest;
-import org.geosdi.geoplatform.responce.MessageDTO;
+import org.geosdi.geoplatform.response.MessageDTO;
 import org.junit.Assert;
 import org.junit.Test;
 

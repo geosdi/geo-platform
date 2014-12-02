@@ -50,9 +50,9 @@ import org.geosdi.geoplatform.request.InsertAccountRequest;
 import org.geosdi.geoplatform.request.LikePatternType;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.SearchRequest;
-import org.geosdi.geoplatform.responce.ApplicationDTO;
-import org.geosdi.geoplatform.responce.ShortAccountDTO;
-import org.geosdi.geoplatform.responce.UserDTO;
+import org.geosdi.geoplatform.response.ApplicationDTO;
+import org.geosdi.geoplatform.response.ShortAccountDTO;
+import org.geosdi.geoplatform.response.UserDTO;
 import org.junit.Assert;
 import org.junit.Test;
 

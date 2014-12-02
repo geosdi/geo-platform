@@ -43,10 +43,10 @@ import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.folder.WSAddFolderAndTreeModificationsRequest;
 import org.geosdi.geoplatform.request.folder.WSDeleteFolderAndTreeModifications;
 import org.geosdi.geoplatform.request.folder.WSDDFolderAndTreeModifications;
-import org.geosdi.geoplatform.responce.FolderDTO;
-import org.geosdi.geoplatform.responce.ProjectDTO;
-import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
-import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
+import org.geosdi.geoplatform.response.FolderDTO;
+import org.geosdi.geoplatform.response.ProjectDTO;
+import org.geosdi.geoplatform.response.collection.GPWebServiceMapData;
+import org.geosdi.geoplatform.response.collection.TreeFolderElements;
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -46,10 +46,10 @@ import org.geosdi.geoplatform.request.layer.WSAddLayerAndTreeModificationsReques
 import org.geosdi.geoplatform.request.layer.WSAddLayersAndTreeModificationsRequest;
 import org.geosdi.geoplatform.request.layer.WSDDLayerAndTreeModificationsRequest;
 import org.geosdi.geoplatform.request.layer.WSDeleteLayerAndTreeModificationsRequest;
-import org.geosdi.geoplatform.responce.GetDataSourceResponse;
-import org.geosdi.geoplatform.responce.RasterPropertiesDTO;
-import org.geosdi.geoplatform.responce.ShortLayerDTO;
-import org.geosdi.geoplatform.responce.collection.LongListStore;
+import org.geosdi.geoplatform.response.GetDataSourceResponse;
+import org.geosdi.geoplatform.response.RasterPropertiesDTO;
+import org.geosdi.geoplatform.response.ShortLayerDTO;
+import org.geosdi.geoplatform.response.collection.LongListStore;
 
 /**
  *

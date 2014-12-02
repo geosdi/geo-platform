@@ -36,8 +36,8 @@
 package org.geosdi.geoplatform.services;
 
 import org.geosdi.geoplatform.core.model.GPAccount;
-import org.geosdi.geoplatform.responce.ShortAccountDTO;
-import org.geosdi.geoplatform.responce.factory.AccountDTOStrategy;
+import org.geosdi.geoplatform.response.ShortAccountDTO;
+import org.geosdi.geoplatform.response.factory.AccountDTOStrategy;
 
 /**
  *

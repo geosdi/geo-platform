@@ -35,9 +35,9 @@
  */
 package org.geosdi.geoplatform.support.wfs.services;
 
-import org.geosdi.geoplatform.connector.wfs.responce.FeatureCollectionDTO;
-import org.geosdi.geoplatform.connector.wfs.responce.FeatureDTO;
-import org.geosdi.geoplatform.connector.wfs.responce.LayerSchemaDTO;
+import org.geosdi.geoplatform.connector.wfs.response.FeatureCollectionDTO;
+import org.geosdi.geoplatform.connector.wfs.response.FeatureDTO;
+import org.geosdi.geoplatform.connector.wfs.response.LayerSchemaDTO;
 import org.geosdi.geoplatform.gui.shared.bean.BBox;
 
 /**

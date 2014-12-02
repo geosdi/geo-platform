@@ -43,10 +43,10 @@ import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.PutAccountsProjectRequest;
 import org.geosdi.geoplatform.request.RequestByAccountProjectIDs;
 import org.geosdi.geoplatform.request.SearchRequest;
-import org.geosdi.geoplatform.responce.AccountProjectPropertiesDTO;
-import org.geosdi.geoplatform.responce.ProjectDTO;
-import org.geosdi.geoplatform.responce.ShortAccountDTOContainer;
-import org.geosdi.geoplatform.responce.WSGetAccountProjectsResponse;
+import org.geosdi.geoplatform.response.AccountProjectPropertiesDTO;
+import org.geosdi.geoplatform.response.ProjectDTO;
+import org.geosdi.geoplatform.response.ShortAccountDTOContainer;
+import org.geosdi.geoplatform.response.WSGetAccountProjectsResponse;
 
 /**
  *

@@ -45,7 +45,7 @@ import org.geosdi.geoplatform.request.layer.WSAddLayerAndTreeModificationsReques
 import org.geosdi.geoplatform.request.layer.WSAddLayersAndTreeModificationsRequest;
 import org.geosdi.geoplatform.request.layer.WSDDLayerAndTreeModificationsRequest;
 import org.geosdi.geoplatform.request.layer.WSDeleteLayerAndTreeModificationsRequest;
-import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
+import org.geosdi.geoplatform.response.collection.GPWebServiceMapData;
 
 /**
  *

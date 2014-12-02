@@ -41,9 +41,9 @@ import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.request.InsertAccountRequest;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.SearchRequest;
-import org.geosdi.geoplatform.responce.ShortAccountDTOContainer;
-import org.geosdi.geoplatform.responce.UserDTO;
-import org.geosdi.geoplatform.responce.authority.GetAuthorityResponse;
+import org.geosdi.geoplatform.response.ShortAccountDTOContainer;
+import org.geosdi.geoplatform.response.UserDTO;
+import org.geosdi.geoplatform.response.authority.GetAuthorityResponse;
 
 /**
  *

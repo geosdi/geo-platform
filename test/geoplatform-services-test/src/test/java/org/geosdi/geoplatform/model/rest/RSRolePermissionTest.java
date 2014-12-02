@@ -41,7 +41,7 @@ import org.geosdi.geoplatform.gui.shared.GPRole;
 import org.geosdi.geoplatform.initializer.GuiComponentIDs;
 import org.geosdi.geoplatform.request.organization.WSPutRolePermissionRequest;
 import org.geosdi.geoplatform.request.organization.WSSaveRoleRequest;
-import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
+import org.geosdi.geoplatform.response.collection.GuiComponentsPermissionMapData;
 import org.junit.Assert;
 import org.junit.Test;
 

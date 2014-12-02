@@ -38,7 +38,7 @@ package org.geosdi.geoplatform.model.soap;
 import java.text.ParseException;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.RequestByID;
-import org.geosdi.geoplatform.responce.ServerDTO;
+import org.geosdi.geoplatform.response.ServerDTO;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

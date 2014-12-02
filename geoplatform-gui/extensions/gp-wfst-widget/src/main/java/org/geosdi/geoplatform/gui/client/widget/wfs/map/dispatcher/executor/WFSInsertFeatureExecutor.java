@@ -37,8 +37,8 @@ package org.geosdi.geoplatform.gui.client.widget.wfs.map.dispatcher.executor;
 
 import java.util.List;
 import javax.inject.Inject;
-import org.geosdi.geoplatform.connector.wfs.responce.AttributeDTO;
-import org.geosdi.geoplatform.connector.wfs.responce.GeometryAttributeDTO;
+import org.geosdi.geoplatform.connector.wfs.response.AttributeDTO;
+import org.geosdi.geoplatform.connector.wfs.response.GeometryAttributeDTO;
 import org.geosdi.geoplatform.gui.client.command.wfst.feature.InsertFeatureRequest;
 import org.geosdi.geoplatform.gui.client.command.wfst.feature.InsertFeatureResponse;
 import org.geosdi.geoplatform.gui.client.model.binder.IFeatureIdBinder;

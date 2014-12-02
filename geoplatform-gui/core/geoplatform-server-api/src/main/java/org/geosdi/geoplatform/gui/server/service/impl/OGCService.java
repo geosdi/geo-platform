@@ -49,7 +49,7 @@ import org.geosdi.geoplatform.gui.server.service.converter.DTOServerConverter;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 import org.geosdi.geoplatform.request.RequestByID;
 import org.geosdi.geoplatform.request.server.WSSaveServerRequest;
-import org.geosdi.geoplatform.responce.ServerDTO;
+import org.geosdi.geoplatform.response.ServerDTO;
 import org.geosdi.geoplatform.services.GPWMSService;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.slf4j.Logger;

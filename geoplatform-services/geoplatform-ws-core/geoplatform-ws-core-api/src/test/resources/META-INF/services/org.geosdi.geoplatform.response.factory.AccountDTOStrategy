@@ -1,0 +1,3 @@
+org.geosdi.geoplatform.response.factory.ApplicationDTOStrategy
+org.geosdi.geoplatform.response.factory.UserDTOStrategy
+org.geosdi.geoplatform.services.MockAccountStrategy

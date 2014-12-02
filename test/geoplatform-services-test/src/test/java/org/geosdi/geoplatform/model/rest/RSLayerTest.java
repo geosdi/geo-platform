@@ -54,11 +54,11 @@ import org.geosdi.geoplatform.request.layer.WSAddLayerAndTreeModificationsReques
 import org.geosdi.geoplatform.request.layer.WSAddLayersAndTreeModificationsRequest;
 import org.geosdi.geoplatform.request.layer.WSDDLayerAndTreeModificationsRequest;
 import org.geosdi.geoplatform.request.layer.WSDeleteLayerAndTreeModificationsRequest;
-import org.geosdi.geoplatform.responce.FolderDTO;
-import org.geosdi.geoplatform.responce.ProjectDTO;
-import org.geosdi.geoplatform.responce.ShortLayerDTO;
-import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
-import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
+import org.geosdi.geoplatform.response.FolderDTO;
+import org.geosdi.geoplatform.response.ProjectDTO;
+import org.geosdi.geoplatform.response.ShortLayerDTO;
+import org.geosdi.geoplatform.response.collection.GPWebServiceMapData;
+import org.geosdi.geoplatform.response.collection.TreeFolderElements;
 import org.junit.Assert;
 import org.junit.Test;
 

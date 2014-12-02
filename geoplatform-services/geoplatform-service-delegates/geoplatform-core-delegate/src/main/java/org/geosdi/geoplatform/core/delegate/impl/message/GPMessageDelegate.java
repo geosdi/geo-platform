@@ -45,7 +45,7 @@ import org.geosdi.geoplatform.core.model.GPMessage;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.message.MarkMessageReadByDateRequest;
-import org.geosdi.geoplatform.responce.MessageDTO;
+import org.geosdi.geoplatform.response.MessageDTO;
 import org.geosdi.geoplatform.services.development.EntityCorrectness;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

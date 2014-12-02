@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.support.wfs.services;
 
 import java.util.List;
-import org.geosdi.geoplatform.connector.wfs.responce.AttributeDTO;
+import org.geosdi.geoplatform.connector.wfs.response.AttributeDTO;
 
 /**
  *

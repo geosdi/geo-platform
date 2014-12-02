@@ -36,9 +36,9 @@
 package org.geosdi.geoplatform.gui.server;
 
 import java.util.List;
-import org.geosdi.geoplatform.connector.wfs.responce.AttributeDTO;
-import org.geosdi.geoplatform.connector.wfs.responce.FeatureCollectionDTO;
-import org.geosdi.geoplatform.connector.wfs.responce.LayerSchemaDTO;
+import org.geosdi.geoplatform.connector.wfs.response.AttributeDTO;
+import org.geosdi.geoplatform.connector.wfs.response.FeatureCollectionDTO;
+import org.geosdi.geoplatform.connector.wfs.response.LayerSchemaDTO;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 
 /**

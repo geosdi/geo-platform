@@ -47,6 +47,13 @@ import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.fasterxml.jackson.module.jaxb.JaxbAnnotationIntrospector;
 import java.text.SimpleDateFormat;
 import org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum;
+import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE;
+import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.FAIL_ON_IGNORED_PROPERTIES_DISABLE;
+import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.FAIL_ON_NULL_FOR_PRIMITIVES_DISABLE;
+import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.INDENT_OUTPUT_ENABLE;
+import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.UNWRAP_ROOT_VALUE_ENABLE;
+import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.USE_WRAPPER_NAME_AS_PROPERTY_NAME_ENABLE;
+import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.WRAP_ROOT_VALUE_ENABLE;
 
 /**
  *
@@ -58,30 +65,7 @@ public class GPJacksonSupport implements JacksonSupport {
     private final ObjectMapper mapper;
 
     public GPJacksonSupport() {
-        mapper = new ObjectMapper();
-        mapper.configure(DeserializationFeature.UNWRAP_ROOT_VALUE,
-                Boolean.TRUE);
-        mapper.configure(DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES,
-                Boolean.FALSE);
-        mapper.configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES,
-                Boolean.FALSE);
-        mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY,
-                Boolean.TRUE);
-        mapper.configure(SerializationFeature.WRAP_ROOT_VALUE,
-                Boolean.TRUE);
-        mapper.enable(SerializationFeature.INDENT_OUTPUT);
-        mapper.configure(MapperFeature.USE_WRAPPER_NAME_AS_PROPERTY_NAME,
-                Boolean.TRUE);
-
-        mapper.enableDefaultTyping(); // default to using DefaultTyping.OBJECT_AND_NON_CONCRETE
-        AnnotationIntrospector primary = new JaxbAnnotationIntrospector(
-                TypeFactory.defaultInstance());
-        AnnotationIntrospector secondary = new JacksonAnnotationIntrospector();
-
-        mapper.setAnnotationIntrospector(new AnnotationIntrospectorPair(
-                primary, secondary));
-
-        mapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm a z"));
+        this(defaultProp());
     }
 
     public GPJacksonSupport(GPJacksonSupportEnum... features) {
@@ -122,5 +106,15 @@ public class GPJacksonSupport implements JacksonSupport {
     @Override
     public String getProviderName() {
         return getClass().getSimpleName();
+    }
+
+    static GPJacksonSupportEnum[] defaultProp() {
+        return new GPJacksonSupportEnum[]{UNWRAP_ROOT_VALUE_ENABLE,
+            FAIL_ON_IGNORED_PROPERTIES_DISABLE,
+            FAIL_ON_NULL_FOR_PRIMITIVES_DISABLE,
+            ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
+            WRAP_ROOT_VALUE_ENABLE,
+            INDENT_OUTPUT_ENABLE,
+            USE_WRAPPER_NAME_AS_PROPERTY_NAME_ENABLE};
     }
 }

@@ -38,7 +38,7 @@ package org.geosdi.geoplatform.services.core.api.resources;
 import org.geosdi.geoplatform.core.model.GPViewport;
 import org.geosdi.geoplatform.request.viewport.InsertViewportRequest;
 import org.geosdi.geoplatform.request.viewport.ManageViewportRequest;
-import org.geosdi.geoplatform.responce.viewport.WSGetViewportResponse;
+import org.geosdi.geoplatform.response.viewport.WSGetViewportResponse;
 
 /**
  *

@@ -39,7 +39,7 @@ import java.util.List;
 import org.geosdi.geoplatform.core.model.GPMessage;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.message.MarkMessageReadByDateRequest;
-import org.geosdi.geoplatform.responce.MessageDTO;
+import org.geosdi.geoplatform.response.MessageDTO;
 
 /**
  *

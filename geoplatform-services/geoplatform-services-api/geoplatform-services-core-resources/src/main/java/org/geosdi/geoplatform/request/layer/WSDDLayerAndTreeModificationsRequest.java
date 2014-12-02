@@ -39,7 +39,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.geosdi.geoplatform.request.TreeModificationRequest;
-import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
+import org.geosdi.geoplatform.response.collection.GPWebServiceMapData;
 
 /**
  *

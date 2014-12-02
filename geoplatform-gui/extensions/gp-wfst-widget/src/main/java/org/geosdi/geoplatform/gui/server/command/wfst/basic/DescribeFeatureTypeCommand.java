@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.gui.server.command.wfst.basic;
 
 import javax.servlet.http.HttpServletRequest;
-import org.geosdi.geoplatform.connector.wfs.responce.LayerSchemaDTO;
+import org.geosdi.geoplatform.connector.wfs.response.LayerSchemaDTO;
 import org.geosdi.geoplatform.gui.client.command.wfst.basic.DescribeFeatureTypeRequest;
 import org.geosdi.geoplatform.gui.client.command.wfst.basic.DescribeFeatureTypeResponse;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;

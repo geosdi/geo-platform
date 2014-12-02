@@ -46,7 +46,7 @@ import org.codehaus.jra.Get;
 import org.codehaus.jra.HttpResource;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.RequestByID;
-import org.geosdi.geoplatform.responce.ServerDTO;
+import org.geosdi.geoplatform.response.ServerDTO;
 import org.geosdi.geoplatform.services.rs.path.GPServiceRSPathConfig;
 
 /**

@@ -37,8 +37,8 @@ package org.geosdi.geoplatform.services;
 
 import java.util.Set;
 import junit.framework.TestCase;
-import org.geosdi.geoplatform.responce.factory.AccountDTOStrategy;
-import org.geosdi.geoplatform.responce.factory.AccountStrategyFinder;
+import org.geosdi.geoplatform.response.factory.AccountDTOStrategy;
+import org.geosdi.geoplatform.response.factory.AccountStrategyFinder;
 import org.junit.Assert;
 import org.junit.Test;
 

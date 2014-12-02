@@ -43,7 +43,7 @@ import org.geosdi.geoplatform.gui.command.server.GPCommand;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.SessionUtility;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
-import org.geosdi.geoplatform.responce.collection.XmppAttributesMap;
+import org.geosdi.geoplatform.response.collection.XmppAttributesMap;
 import org.geosdi.geoplatform.services.GPTrackingService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

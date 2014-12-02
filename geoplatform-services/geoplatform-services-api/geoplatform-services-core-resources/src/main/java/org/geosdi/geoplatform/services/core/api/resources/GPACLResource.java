@@ -37,9 +37,9 @@ package org.geosdi.geoplatform.services.core.api.resources;
 
 import org.geosdi.geoplatform.request.organization.WSPutRolePermissionRequest;
 import org.geosdi.geoplatform.request.organization.WSSaveRoleRequest;
-import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
-import org.geosdi.geoplatform.responce.role.GPGetRoleResponse;
-import org.geosdi.geoplatform.responce.role.WSGetRoleResponse;
+import org.geosdi.geoplatform.response.collection.GuiComponentsPermissionMapData;
+import org.geosdi.geoplatform.response.role.GPGetRoleResponse;
+import org.geosdi.geoplatform.response.role.WSGetRoleResponse;
 
 /**
  *

@@ -49,8 +49,8 @@ import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoVector;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoLayerOriginalProperties;
 import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
 import org.geosdi.geoplatform.gui.shared.GPLayerType;
-import org.geosdi.geoplatform.responce.RasterPropertiesDTO;
-import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
+import org.geosdi.geoplatform.response.RasterPropertiesDTO;
+import org.geosdi.geoplatform.response.collection.GPWebServiceMapData;
 import org.springframework.stereotype.Component;
 
 /**

@@ -38,7 +38,7 @@ package org.geosdi.geoplatform.gui.client.puregwt.map.dispatcher;
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import java.util.List;
-import org.geosdi.geoplatform.connector.wfs.responce.AttributeDTO;
+import org.geosdi.geoplatform.connector.wfs.response.AttributeDTO;
 import org.geosdi.geoplatform.gui.client.puregwt.map.dispatcher.erase.EraseFeatureDispatcherEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.map.dispatcher.insert.InsertFeatureDispatcherEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.map.dispatcher.modify.event.ModifyFeatureDispatcherEvent;

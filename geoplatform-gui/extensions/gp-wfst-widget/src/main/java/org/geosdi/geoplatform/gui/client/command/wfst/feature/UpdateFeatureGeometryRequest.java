@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.command.wfst.feature;
 
-import org.geosdi.geoplatform.connector.wfs.responce.GeometryAttributeDTO;
+import org.geosdi.geoplatform.connector.wfs.response.GeometryAttributeDTO;
 import org.geosdi.geoplatform.gui.client.command.wfst.WFSTRequest;
 
 /**

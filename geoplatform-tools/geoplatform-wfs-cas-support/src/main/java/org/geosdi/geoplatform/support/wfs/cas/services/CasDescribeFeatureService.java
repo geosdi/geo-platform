@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.support.wfs.cas.services;
 
-import org.geosdi.geoplatform.connector.wfs.responce.LayerSchemaDTO;
+import org.geosdi.geoplatform.connector.wfs.response.LayerSchemaDTO;
 import org.geosdi.geoplatform.support.wfs.services.GPDescribeFeatureService;
 import org.springframework.context.annotation.Profile;
 

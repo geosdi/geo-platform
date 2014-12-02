@@ -48,7 +48,7 @@ import org.geosdi.geoplatform.core.model.GPAccountProject;
 import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.shared.XMPPSubjectEnum;
-import org.geosdi.geoplatform.responce.collection.XmppAttributesMap;
+import org.geosdi.geoplatform.response.collection.XmppAttributesMap;
 import org.geosdi.geoplatform.services.development.EntityCorrectness;
 import org.geosdi.geoplatform.services.development.EntityCorrectnessException;
 import org.jivesoftware.smack.ConnectionConfiguration;

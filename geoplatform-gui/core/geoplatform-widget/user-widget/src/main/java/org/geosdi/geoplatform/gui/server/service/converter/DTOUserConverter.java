@@ -42,7 +42,7 @@ import org.geosdi.geoplatform.core.model.GPAuthority;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
 import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
-import org.geosdi.geoplatform.responce.UserDTO;
+import org.geosdi.geoplatform.response.UserDTO;
 import org.springframework.stereotype.Component;
 
 /**

@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.schema;
 
 import javax.inject.Inject;
-import org.geosdi.geoplatform.connector.wfs.responce.LayerSchemaDTO;
+import org.geosdi.geoplatform.connector.wfs.response.LayerSchemaDTO;
 import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetMessages;
 import org.geosdi.geoplatform.gui.client.model.binder.ILayerSchemaBinder;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;

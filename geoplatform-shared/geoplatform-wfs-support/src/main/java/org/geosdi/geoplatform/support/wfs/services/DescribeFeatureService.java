@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.support.wfs.services;
 
-import org.geosdi.geoplatform.connector.wfs.responce.LayerSchemaDTO;
+import org.geosdi.geoplatform.connector.wfs.response.LayerSchemaDTO;
 
 /**
  *

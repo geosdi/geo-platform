@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.gui.client.util;
 
 import com.google.common.collect.Lists;
 import java.util.List;
-import org.geosdi.geoplatform.connector.wfs.responce.AttributeDTO;
+import org.geosdi.geoplatform.connector.wfs.response.AttributeDTO;
 import org.geosdi.geoplatform.gui.client.model.wfs.AttributeDetail;
 
 /**

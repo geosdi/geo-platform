@@ -38,7 +38,7 @@ package org.geosdi.geoplatform.request.organization;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
+import org.geosdi.geoplatform.response.collection.GuiComponentsPermissionMapData;
 
 /**
  *

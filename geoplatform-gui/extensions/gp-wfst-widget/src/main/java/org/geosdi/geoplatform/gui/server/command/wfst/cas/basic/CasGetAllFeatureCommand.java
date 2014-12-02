@@ -36,8 +36,8 @@
 package org.geosdi.geoplatform.gui.server.command.wfst.cas.basic;
 
 import javax.servlet.http.HttpServletRequest;
-import org.geosdi.geoplatform.connector.wfs.responce.FeatureCollectionDTO;
-import org.geosdi.geoplatform.connector.wfs.responce.LayerSchemaDTO;
+import org.geosdi.geoplatform.connector.wfs.response.FeatureCollectionDTO;
+import org.geosdi.geoplatform.connector.wfs.response.LayerSchemaDTO;
 import org.geosdi.geoplatform.gui.client.command.wfst.basic.GetAllFeatureResponse;
 import org.geosdi.geoplatform.gui.client.command.wfst.cas.basic.CasGetAllFeatureRequest;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;

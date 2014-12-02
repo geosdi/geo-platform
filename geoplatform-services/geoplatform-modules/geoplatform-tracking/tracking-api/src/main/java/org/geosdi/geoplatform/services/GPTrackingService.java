@@ -40,7 +40,7 @@ import javax.jws.WebService;
 import org.codehaus.jra.Post;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.shared.XMPPSubjectEnum;
-import org.geosdi.geoplatform.responce.collection.XmppAttributesMap;
+import org.geosdi.geoplatform.response.collection.XmppAttributesMap;
 
 /**
  * Public interface to define the service operations mapped via REST using CXT

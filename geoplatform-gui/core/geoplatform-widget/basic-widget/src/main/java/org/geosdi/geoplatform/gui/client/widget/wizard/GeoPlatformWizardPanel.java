@@ -58,8 +58,14 @@ public abstract class GeoPlatformWizardPanel extends GeoPlatformContentPanel {
 
     public abstract boolean isNextEnabled();
 
+    /**
+     * Usefull method to use for doing operations after next button pressed
+     */
     public abstract void onNextAction();
     
+    /**
+     * Usefull method to use for doing operations before wizard panel showing
+     */
     public abstract void onPreviewWizard();
 
     public final boolean isCommitAction() {

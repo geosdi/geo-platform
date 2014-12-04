@@ -114,10 +114,12 @@ public abstract class GeoPlatformWizard extends GeoPlatformWindow {
                     public void componentSelected(ButtonEvent ce) {
                         Component component = contentPanel.getItemByItemId(
                                 WIZARD_ID);
+                        logger.info("Wizard prev button Component: " + component);
                         if (component != null) {
                             GeoPlatformWizardPanel panel = (GeoPlatformWizardPanel) component;
                             int indexPrevElement = wizardPanelsStack.indexOf(
                                     panel);
+                            logger.info("Wizard indexPrevElement: " + indexPrevElement);
                             if (indexPrevElement > 0) {
                                 GeoPlatformWizardPanel panelToDispay = wizardPanelsStack.get(
                                         --indexPrevElement);
@@ -145,7 +147,9 @@ public abstract class GeoPlatformWizard extends GeoPlatformWindow {
                                 GeoPlatformWizardOptionPanel panel = (GeoPlatformWizardOptionPanel) component;
                                 panel.onNextAction();
                                 int currentPanelIndex = wizardPanelsStack.indexOf(panel);
-                                wizardPanelsStack = wizardPanelsStack.subList(0,  currentPanelIndex);
+                                wizardPanelsStack = wizardPanelsStack.subList(0, currentPanelIndex + 1);
+                                prepareWizardPanels(panel.getNextPanels().toArray(
+                                                new GeoPlatformWizardPanel[]{}));
                                 wizardPanelsStack.addAll(panel.getNextPanels());
                                 commitAction = panel.getCommitAction();
                             }
@@ -158,7 +162,8 @@ public abstract class GeoPlatformWizard extends GeoPlatformWindow {
                                 GeoPlatformWizardPanel panelToDispay = wizardPanelsStack.get(
                                         ++indexPrevElement);
                                 placeWizardPanel(panelToDispay);
-                                if (indexPrevElement == wizardPanelsStack.size() - 1) {
+                                if (indexPrevElement == wizardPanelsStack.size() - 1
+                                && !(panelToDispay instanceof GeoPlatformWizardOptionPanel)) {
                                     nextButton.disable();
                                 }
                                 previuosButton.enable();

@@ -49,6 +49,7 @@ public class SearchRequest implements Serializable {
     private static final long serialVersionUID = 4856415747627194903L;
 
     private String nameLike;
+    private LikePatternType likeType;
 
     public SearchRequest() {
     }
@@ -57,8 +58,9 @@ public class SearchRequest implements Serializable {
         this.nameLike = LikePatternType.CONTAINS.apply(nameLike);
     }
 
-    public SearchRequest(String nameLike, LikePatternType likeType) {
-        this.nameLike = likeType.apply(nameLike);
+    public SearchRequest(String nameLike, LikePatternType theLikeType) {
+        this.likeType = theLikeType;
+        this.nameLike = this.likeType.apply(nameLike);
     }
 
     /**
@@ -80,6 +82,14 @@ public class SearchRequest implements Serializable {
      */
     public void setNameLike(String nameLike) {
         this.nameLike = nameLike;
+    }
+
+    public void setLikeType(LikePatternType likeType) {
+        this.likeType = likeType;
+    }
+
+    public LikePatternType getLikeType() {
+        return this.likeType;
     }
 
     @Override

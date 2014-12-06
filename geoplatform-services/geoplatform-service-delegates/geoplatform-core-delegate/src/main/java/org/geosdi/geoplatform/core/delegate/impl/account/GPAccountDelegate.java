@@ -61,9 +61,10 @@ import org.geosdi.geoplatform.request.InsertAccountRequest;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.response.ApplicationDTO;
-import org.geosdi.geoplatform.response.ShortAccountDTO;
+import org.geosdi.geoplatform.response.SearchUsersResponse;
 import org.geosdi.geoplatform.response.ShortAccountDTOContainer;
 import org.geosdi.geoplatform.response.UserDTO;
+import org.geosdi.geoplatform.response.authority.GetAuthoritiesResponse;
 import org.geosdi.geoplatform.response.authority.GetAuthorityResponse;
 import org.geosdi.geoplatform.response.factory.AccountDTOFactory;
 import org.geosdi.geoplatform.scheduler.delegate.api.SchedulerDelegate;
@@ -385,7 +386,8 @@ public class GPAccountDelegate implements AccountDelegate {
     }
 
     @Override
-    public List<UserDTO> searchUsers(Long userID, PaginatedSearchRequest request)
+    public SearchUsersResponse searchUsers(Long userID,
+            PaginatedSearchRequest request)
             throws ResourceNotFoundFault {
         GPAccount user = this.getAccountById(userID);
         EntityCorrectness.checkAccountLog(user); // TODO assert
@@ -405,7 +407,7 @@ public class GPAccountDelegate implements AccountDelegate {
         }
 
         List<GPAccount> accountList = accountDao.search(searchCriteria);
-        List<GPUser> userList = new ArrayList<GPUser>(accountList.size());
+        List<GPUser> userList = new ArrayList<>(accountList.size());
         for (GPAccount account : accountList) {
             account.setGPAuthorities(this.getGPAuthorities(
                     account.getNaturalID()));
@@ -413,7 +415,8 @@ public class GPAccountDelegate implements AccountDelegate {
             userList.add((GPUser) account);
         }
 
-        return AccountDTOFactory.buildUserDTOList(userList);
+        return new SearchUsersResponse(AccountDTOFactory.buildUserDTOList(
+                userList));
     }
 
     @Override
@@ -474,9 +477,10 @@ public class GPAccountDelegate implements AccountDelegate {
     }
 
     @Override
-    public List<GPAuthority> getAuthoritiesDetail(String accountNaturalID)
+    public GetAuthoritiesResponse getAuthoritiesDetail(String accountNaturalID)
             throws ResourceNotFoundFault {
-        return this.getGPAuthorities(accountNaturalID);
+        return new GetAuthoritiesResponse(
+                this.getGPAuthorities(accountNaturalID));
     }
 
     @Override

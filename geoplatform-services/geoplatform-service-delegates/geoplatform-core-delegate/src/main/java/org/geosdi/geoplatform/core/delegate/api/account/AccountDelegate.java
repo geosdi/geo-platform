@@ -35,10 +35,8 @@
  */
 package org.geosdi.geoplatform.core.delegate.api.account;
 
-import java.util.List;
 import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPApplication;
-import org.geosdi.geoplatform.core.model.GPAuthority;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.AccountLoginFault;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
@@ -47,8 +45,10 @@ import org.geosdi.geoplatform.request.InsertAccountRequest;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.response.ApplicationDTO;
+import org.geosdi.geoplatform.response.SearchUsersResponse;
 import org.geosdi.geoplatform.response.ShortAccountDTOContainer;
 import org.geosdi.geoplatform.response.UserDTO;
+import org.geosdi.geoplatform.response.authority.GetAuthoritiesResponse;
 import org.geosdi.geoplatform.response.authority.GetAuthorityResponse;
 import org.geosdi.geoplatform.services.core.api.resources.GPAccountResource;
 
@@ -101,42 +101,42 @@ public interface AccountDelegate extends GPAccountResource {
     GPUser getUserDetailByUsernameAndPassword(String username,
             String plainPassword) throws ResourceNotFoundFault,
             IllegalParameterFault, AccountLoginFault;
-    
+
     GPApplication getApplication(String appID)
             throws ResourceNotFoundFault, AccountLoginFault;
-    
+
     ApplicationDTO getShortApplicationByAppID(SearchRequest request)
             throws ResourceNotFoundFault;
-    
+
     @Override
-    List<UserDTO> searchUsers(Long userID, PaginatedSearchRequest request)
+    SearchUsersResponse searchUsers(Long userID, PaginatedSearchRequest request)
             throws ResourceNotFoundFault;
-    
+
     @Override
     ShortAccountDTOContainer getAllAccounts();
-    
+
     @Override
     ShortAccountDTOContainer getAccounts(String organization)
             throws ResourceNotFoundFault;
-    
+
     @Override
     Long getAccountsCount(SearchRequest request);
-    
+
     @Override
     Long getUsersCount(String organization, SearchRequest request);
-    
+
     @Override
     GetAuthorityResponse getAuthorities(Long accountNaturalID) throws
             ResourceNotFoundFault;
-    
+
     @Override
-    List<GPAuthority> getAuthoritiesDetail(String accountNaturalID)
+    GetAuthoritiesResponse getAuthoritiesDetail(String accountNaturalID)
             throws ResourceNotFoundFault;
-    
+
     @Override
     void forceTemporaryAccount(Long accountID)
             throws ResourceNotFoundFault;
-    
+
     @Override
     void forceExpiredTemporaryAccount(Long accountID)
             throws ResourceNotFoundFault, IllegalParameterFault;

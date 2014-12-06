@@ -157,7 +157,7 @@ public class WSAccountTest extends BaseSoapServiceTest {
     @Test
     public void testInsertUserWithSingleRole() throws ResourceNotFoundFault {
         List<GPAuthority> authorities = gpWSClient.getAuthoritiesDetail(
-                usernameTest);
+                usernameTest).getAuthorities();
         Assert.assertNotNull("Authorities null", authorities);
         Assert.assertEquals("Number of Authorities of " + usernameTest, 1,
                 authorities.size());
@@ -181,7 +181,7 @@ public class WSAccountTest extends BaseSoapServiceTest {
 
         try {
             List<GPAuthority> authorities = gpWSClient.getAuthoritiesDetail(
-                    usernameMultiRole);
+                    usernameMultiRole).getAuthorities();
             Assert.assertNotNull(authorities);
             Assert.assertEquals("Number of Authorities of " + usernameMultiRole,
                     2, authorities.size());
@@ -342,12 +342,12 @@ public class WSAccountTest extends BaseSoapServiceTest {
         try {
             insertMassiveUsers("-ws");
             List<UserDTO> users = gpWSClient.searchUsers(idUser,
-                    new PaginatedSearchRequest(25, 0));
+                    new PaginatedSearchRequest(25, 0)).getUsers();
 
             Assert.assertEquals(25, users.size());
 
             Assert.assertEquals(6, gpWSClient.searchUsers(idUser,
-                    new PaginatedSearchRequest(25, 1)).size());
+                    new PaginatedSearchRequest(25, 1)).getUsers().size());
         } finally {
             Boolean check = gpWSClient.deleteAccount(idUser);
             Assert.assertTrue(check);

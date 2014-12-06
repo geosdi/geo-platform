@@ -35,14 +35,14 @@
  */
 package org.geosdi.geoplatform.services.core.api.resources;
 
-import java.util.List;
-import org.geosdi.geoplatform.core.model.GPAuthority;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.request.InsertAccountRequest;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.SearchRequest;
+import org.geosdi.geoplatform.response.SearchUsersResponse;
 import org.geosdi.geoplatform.response.ShortAccountDTOContainer;
 import org.geosdi.geoplatform.response.UserDTO;
+import org.geosdi.geoplatform.response.authority.GetAuthoritiesResponse;
 import org.geosdi.geoplatform.response.authority.GetAuthorityResponse;
 
 /**
@@ -153,7 +153,7 @@ public interface GPAccountResource {
      * @throws Exception if User not found or a searched User not have
      * Authorities
      */
-    List<UserDTO> searchUsers(Long userID, PaginatedSearchRequest request)
+    SearchUsersResponse searchUsers(Long userID, PaginatedSearchRequest request)
             throws Exception;
 
     /**
@@ -212,7 +212,7 @@ public interface GPAccountResource {
      * @throws Exception if Account not found or Account not have
      * Authorities
      */
-    List<GPAuthority> getAuthoritiesDetail(String accountNaturalID) throws
+    GetAuthoritiesResponse getAuthoritiesDetail(String accountNaturalID) throws
             Exception;
 
     /**

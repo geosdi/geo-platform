@@ -81,11 +81,13 @@ import org.geosdi.geoplatform.response.GetDataSourceResponse;
 import org.geosdi.geoplatform.response.MessageDTO;
 import org.geosdi.geoplatform.response.ProjectDTO;
 import org.geosdi.geoplatform.response.RasterPropertiesDTO;
+import org.geosdi.geoplatform.response.SearchUsersResponse;
 import org.geosdi.geoplatform.response.ServerDTO;
 import org.geosdi.geoplatform.response.ShortAccountDTOContainer;
 import org.geosdi.geoplatform.response.ShortLayerDTO;
 import org.geosdi.geoplatform.response.UserDTO;
 import org.geosdi.geoplatform.response.WSGetAccountProjectsResponse;
+import org.geosdi.geoplatform.response.authority.GetAuthoritiesResponse;
 import org.geosdi.geoplatform.response.authority.GetAuthorityResponse;
 import org.geosdi.geoplatform.response.collection.GuiComponentsPermissionMapData;
 import org.geosdi.geoplatform.response.collection.LongListStore;
@@ -250,9 +252,8 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public List<UserDTO> searchUsers(Long userID,
-            PaginatedSearchRequest request)
-            throws ResourceNotFoundFault {
+    public SearchUsersResponse searchUsers(Long userID,
+            PaginatedSearchRequest request) throws ResourceNotFoundFault {
         return gpAccountDelegate.searchUsers(userID, request);
     }
 
@@ -285,7 +286,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public List<GPAuthority> getAuthoritiesDetail(String accountNaturalID)
+    public GetAuthoritiesResponse getAuthoritiesDetail(String accountNaturalID)
             throws ResourceNotFoundFault {
         return gpAccountDelegate.getAuthoritiesDetail(accountNaturalID);
     }

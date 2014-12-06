@@ -166,7 +166,7 @@ public class RSAccountTest extends BasicRestServiceTest {
     @Test
     public void testInsertUserWithSingleRoleRest() throws ResourceNotFoundFault {
         List<GPAuthority> authorities = gpWSClient.getAuthoritiesDetail(
-                usernameTest);
+                usernameTest).getAuthorities();
         Assert.assertNotNull("Authorities null", authorities);
         Assert.assertEquals("Number of Authorities of " + usernameTest, 1,
                 authorities.size());
@@ -190,7 +190,7 @@ public class RSAccountTest extends BasicRestServiceTest {
 
         try {
             List<GPAuthority> authorities = gpWSClient.getAuthoritiesDetail(
-                    usernameMultiRole);
+                    usernameMultiRole).getAuthorities();
             Assert.assertNotNull(authorities);
             Assert.assertEquals("Number of Authorities of " + usernameMultiRole,
                     2, authorities.size());
@@ -336,12 +336,12 @@ public class RSAccountTest extends BasicRestServiceTest {
         try {
             insertMassiveUsers("-rs");
             List<UserDTO> users = gpWSClient.searchUsers(idUser,
-                    new PaginatedSearchRequest(25, 0));
+                    new PaginatedSearchRequest(25, 0)).getUsers();
 
             Assert.assertEquals(25, users.size());
 
             Assert.assertEquals(6, gpWSClient.searchUsers(idUser,
-                    new PaginatedSearchRequest(25, 1)).size());
+                    new PaginatedSearchRequest(25, 1)).getUsers().size());
 
             Long userCount = gpWSClient.getUsersCount(organizationTest.getName(),
                     null);

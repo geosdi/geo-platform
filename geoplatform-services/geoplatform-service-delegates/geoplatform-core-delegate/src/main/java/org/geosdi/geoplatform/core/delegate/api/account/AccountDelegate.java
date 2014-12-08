@@ -45,10 +45,10 @@ import org.geosdi.geoplatform.request.InsertAccountRequest;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.response.ApplicationDTO;
-import org.geosdi.geoplatform.response.SearchUsersResponse;
+import org.geosdi.geoplatform.response.SearchUsersResponseWS;
 import org.geosdi.geoplatform.response.ShortAccountDTOContainer;
 import org.geosdi.geoplatform.response.UserDTO;
-import org.geosdi.geoplatform.response.authority.GetAuthoritiesResponse;
+import org.geosdi.geoplatform.response.authority.GetAuthoritiesResponseWS;
 import org.geosdi.geoplatform.response.authority.GetAuthorityResponse;
 import org.geosdi.geoplatform.services.core.api.resources.GPAccountResource;
 
@@ -109,7 +109,7 @@ public interface AccountDelegate extends GPAccountResource {
             throws ResourceNotFoundFault;
 
     @Override
-    SearchUsersResponse searchUsers(Long userID, PaginatedSearchRequest request)
+    SearchUsersResponseWS searchUsers(Long userID, PaginatedSearchRequest request)
             throws ResourceNotFoundFault;
 
     @Override
@@ -130,7 +130,7 @@ public interface AccountDelegate extends GPAccountResource {
             ResourceNotFoundFault;
 
     @Override
-    GetAuthoritiesResponse getAuthoritiesDetail(String accountNaturalID)
+    GetAuthoritiesResponseWS getAuthoritiesDetail(String accountNaturalID)
             throws ResourceNotFoundFault;
 
     @Override

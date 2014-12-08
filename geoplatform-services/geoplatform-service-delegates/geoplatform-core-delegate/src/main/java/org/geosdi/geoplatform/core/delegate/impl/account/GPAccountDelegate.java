@@ -61,10 +61,10 @@ import org.geosdi.geoplatform.request.InsertAccountRequest;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.response.ApplicationDTO;
-import org.geosdi.geoplatform.response.SearchUsersResponse;
+import org.geosdi.geoplatform.response.SearchUsersResponseWS;
 import org.geosdi.geoplatform.response.ShortAccountDTOContainer;
 import org.geosdi.geoplatform.response.UserDTO;
-import org.geosdi.geoplatform.response.authority.GetAuthoritiesResponse;
+import org.geosdi.geoplatform.response.authority.GetAuthoritiesResponseWS;
 import org.geosdi.geoplatform.response.authority.GetAuthorityResponse;
 import org.geosdi.geoplatform.response.factory.AccountDTOFactory;
 import org.geosdi.geoplatform.scheduler.delegate.api.SchedulerDelegate;
@@ -386,7 +386,7 @@ public class GPAccountDelegate implements AccountDelegate {
     }
 
     @Override
-    public SearchUsersResponse searchUsers(Long userID,
+    public SearchUsersResponseWS searchUsers(Long userID,
             PaginatedSearchRequest request)
             throws ResourceNotFoundFault {
         GPAccount user = this.getAccountById(userID);
@@ -415,7 +415,7 @@ public class GPAccountDelegate implements AccountDelegate {
             userList.add((GPUser) account);
         }
 
-        return new SearchUsersResponse(AccountDTOFactory.buildUserDTOList(
+        return new SearchUsersResponseWS(AccountDTOFactory.buildUserDTOList(
                 userList));
     }
 
@@ -477,9 +477,9 @@ public class GPAccountDelegate implements AccountDelegate {
     }
 
     @Override
-    public GetAuthoritiesResponse getAuthoritiesDetail(String accountNaturalID)
+    public GetAuthoritiesResponseWS getAuthoritiesDetail(String accountNaturalID)
             throws ResourceNotFoundFault {
-        return new GetAuthoritiesResponse(
+        return new GetAuthoritiesResponseWS(
                 this.getGPAuthorities(accountNaturalID));
     }
 

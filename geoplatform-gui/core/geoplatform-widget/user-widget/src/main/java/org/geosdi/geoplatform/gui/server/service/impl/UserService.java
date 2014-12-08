@@ -103,7 +103,7 @@ public class UserService implements IUserService {
         List<UserDTO> userList = null;
         try {
             userList = this.geoPlatformServiceClient.searchUsers(user.getId(),
-                    psr).getUsers();
+                    psr).getSearchUsers();
             if (userList == null) {
                 throw new GeoPlatformException("There are no results");
             }

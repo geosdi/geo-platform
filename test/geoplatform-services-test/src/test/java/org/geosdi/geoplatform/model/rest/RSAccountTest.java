@@ -336,12 +336,12 @@ public class RSAccountTest extends BasicRestServiceTest {
         try {
             insertMassiveUsers("-rs");
             List<UserDTO> users = gpWSClient.searchUsers(idUser,
-                    new PaginatedSearchRequest(25, 0)).getUsers();
+                    new PaginatedSearchRequest(25, 0)).getSearchUsers();
 
             Assert.assertEquals(25, users.size());
 
             Assert.assertEquals(6, gpWSClient.searchUsers(idUser,
-                    new PaginatedSearchRequest(25, 1)).getUsers().size());
+                    new PaginatedSearchRequest(25, 1)).getSearchUsers().size());
 
             Long userCount = gpWSClient.getUsersCount(organizationTest.getName(),
                     null);

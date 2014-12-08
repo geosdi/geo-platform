@@ -101,13 +101,13 @@ import org.geosdi.geoplatform.response.GetDataSourceResponse;
 import org.geosdi.geoplatform.response.MessageDTO;
 import org.geosdi.geoplatform.response.ProjectDTO;
 import org.geosdi.geoplatform.response.RasterPropertiesDTO;
-import org.geosdi.geoplatform.response.SearchUsersResponse;
+import org.geosdi.geoplatform.response.SearchUsersResponseWS;
 import org.geosdi.geoplatform.response.ServerDTO;
 import org.geosdi.geoplatform.response.ShortAccountDTOContainer;
 import org.geosdi.geoplatform.response.ShortLayerDTO;
 import org.geosdi.geoplatform.response.UserDTO;
 import org.geosdi.geoplatform.response.WSGetAccountProjectsResponse;
-import org.geosdi.geoplatform.response.authority.GetAuthoritiesResponse;
+import org.geosdi.geoplatform.response.authority.GetAuthoritiesResponseWS;
 import org.geosdi.geoplatform.response.authority.GetAuthorityResponse;
 import org.geosdi.geoplatform.response.collection.GuiComponentsPermissionMapData;
 import org.geosdi.geoplatform.response.collection.LongListStore;
@@ -415,9 +415,9 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @Get
     @GET
     @Path(value = GPServiceRSPathConfig.SEARCH_USERS_PATH)
-    @WebResult(name = "user")
+    @WebResult(name = "searchUserResponse")
     @Override
-    SearchUsersResponse searchUsers(@WebParam(name = "userID")
+    SearchUsersResponseWS searchUsers(@WebParam(name = "userID")
             @QueryParam(value = "userID") Long userID,
             @QueryParam("") PaginatedSearchRequest request)
             throws ResourceNotFoundFault;
@@ -513,7 +513,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @Path(value = GPServiceRSPathConfig.GET_AUTHORITIES_BY_ACCOUNT_NATURAL_ID)
     @WebResult(name = "authority")
     @Override
-    GetAuthoritiesResponse getAuthoritiesDetail(
+    GetAuthoritiesResponseWS getAuthoritiesDetail(
             @WebParam(name = "accountNaturalID")
             @PathParam(value = "accountNaturalID") String accountNaturalID)
             throws ResourceNotFoundFault;

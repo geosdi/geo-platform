@@ -342,12 +342,12 @@ public class WSAccountTest extends BaseSoapServiceTest {
         try {
             insertMassiveUsers("-ws");
             List<UserDTO> users = gpWSClient.searchUsers(idUser,
-                    new PaginatedSearchRequest(25, 0)).getUsers();
+                    new PaginatedSearchRequest(25, 0)).getSearchUsers();
 
             Assert.assertEquals(25, users.size());
 
             Assert.assertEquals(6, gpWSClient.searchUsers(idUser,
-                    new PaginatedSearchRequest(25, 1)).getUsers().size());
+                    new PaginatedSearchRequest(25, 1)).getSearchUsers().size());
         } finally {
             Boolean check = gpWSClient.deleteAccount(idUser);
             Assert.assertTrue(check);

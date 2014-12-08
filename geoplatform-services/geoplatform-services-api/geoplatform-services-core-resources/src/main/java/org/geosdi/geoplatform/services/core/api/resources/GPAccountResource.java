@@ -39,10 +39,10 @@ import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.request.InsertAccountRequest;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.SearchRequest;
-import org.geosdi.geoplatform.response.SearchUsersResponse;
+import org.geosdi.geoplatform.response.SearchUsersResponseWS;
 import org.geosdi.geoplatform.response.ShortAccountDTOContainer;
 import org.geosdi.geoplatform.response.UserDTO;
-import org.geosdi.geoplatform.response.authority.GetAuthoritiesResponse;
+import org.geosdi.geoplatform.response.authority.GetAuthoritiesResponseWS;
 import org.geosdi.geoplatform.response.authority.GetAuthorityResponse;
 
 /**
@@ -102,7 +102,7 @@ public interface GPAccountResource {
      *
      * @param request the request that wrap the username
      * @return the User to retrieve
-     * 
+     *
      * @throws Exception if User not found
      */
     GPUser getUserDetailByUsername(SearchRequest request) throws Exception;
@@ -136,7 +136,7 @@ public interface GPAccountResource {
      * @param request
      *
      * @return the User to retrieve
-     * 
+     *
      * @throws Exception if User not found
      */
     UserDTO getShortUserByUsername(SearchRequest request) throws Exception;
@@ -153,7 +153,7 @@ public interface GPAccountResource {
      * @throws Exception if User not found or a searched User not have
      * Authorities
      */
-    SearchUsersResponse searchUsers(Long userID, PaginatedSearchRequest request)
+    SearchUsersResponseWS searchUsers(Long userID, PaginatedSearchRequest request)
             throws Exception;
 
     /**
@@ -208,18 +208,17 @@ public interface GPAccountResource {
      * @param accountNaturalID the username (for User) or the appID (for
      * Application)
      * @return the list of Authorities
-     * 
-     * @throws Exception if Account not found or Account not have
-     * Authorities
+     *
+     * @throws Exception if Account not found or Account not have Authorities
      */
-    GetAuthoritiesResponse getAuthoritiesDetail(String accountNaturalID) throws
+    GetAuthoritiesResponseWS getAuthoritiesDetail(String accountNaturalID) throws
             Exception;
 
     /**
      * Set an Account as temporary.
      *
      * @param accountID the Account ID
-     * 
+     *
      * @throws Exception if Account not found
      */
     void forceTemporaryAccount(Long accountID) throws Exception;

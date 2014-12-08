@@ -46,6 +46,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 import org.hibernate.annotations.Cache;
@@ -62,6 +64,7 @@ import org.springframework.security.core.GrantedAuthority;
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 @XmlRootElement(name = "Authority")
+@XmlAccessorType(XmlAccessType.FIELD)
 @Entity(name = "Authority")
 @Table(name = "gp_authority")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "authority")

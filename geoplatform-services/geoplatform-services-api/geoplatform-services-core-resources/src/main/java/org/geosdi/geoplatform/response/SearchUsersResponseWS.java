@@ -40,6 +40,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -47,34 +48,35 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@XmlRootElement(name = "SearchUsersResponse")
+@XmlRootElement(name = "SearchUsersResponseWS")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class SearchUsersResponse implements Serializable {
+public class SearchUsersResponseWS implements Serializable {
 
     private static final long serialVersionUID = 6977481032330716607L;
     //
-    @XmlElement(name = "users")
-    private List<UserDTO> users;
+    @XmlElementWrapper(name = "users")
+    @XmlElement(name = "user")
+    private List<UserDTO> searchUsers;
 
-    public SearchUsersResponse() {
+    public SearchUsersResponseWS() {
     }
 
-    public SearchUsersResponse(List<UserDTO> theUsers) {
-        this.users = theUsers;
+    public SearchUsersResponseWS(List<UserDTO> theUsers) {
+        this.searchUsers = theUsers;
     }
 
     /**
      * @return the users
      */
-    public List<UserDTO> getUsers() {
-        return users;
+    public List<UserDTO> getSearchUsers() {
+        return searchUsers;
     }
 
     /**
      * @param users the users to set
      */
-    public void setUsers(List<UserDTO> users) {
-        this.users = users;
+    public void setSearchUsers(List<UserDTO> users) {
+        this.searchUsers = users;
     }
 
 }

@@ -42,9 +42,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import org.geosdi.geoplatform.core.model.GPAccount;
-import org.geosdi.geoplatform.core.model.GPApplication;
 import org.geosdi.geoplatform.core.model.GPAuthority;
-import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 
 /**
@@ -56,8 +54,8 @@ import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
     include = JsonTypeInfo.As.PROPERTY,  
     property = "type")  
 @JsonSubTypes({  
-    @JsonSubTypes.Type(value = GPUser.class, name = "UserDTO"),  
-    @JsonSubTypes.Type(value = GPApplication.class, name = "ApplicationDTO") })  
+    @JsonSubTypes.Type(value = UserDTO.class, name = "UserDTO"),  
+    @JsonSubTypes.Type(value = ApplicationDTO.class, name = "ApplicationDTO") })  
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlSeeAlso(value = {UserDTO.class, ApplicationDTO.class})
 public abstract class ShortAccountDTO {

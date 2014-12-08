@@ -49,9 +49,9 @@ import org.geosdi.geoplatform.core.model.GPAuthority;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@XmlRootElement(name = "GetAuthoritiesResponse")
+@XmlRootElement(name = "GetAuthoritiesResponseWS")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class GetAuthoritiesResponse implements Serializable {
+public class GetAuthoritiesResponseWS implements Serializable {
 
     private static final long serialVersionUID = 855270165295086009L;
     //
@@ -59,10 +59,10 @@ public class GetAuthoritiesResponse implements Serializable {
     @XmlElement(name = "authority")
     private List<GPAuthority> authorities;
 
-    public GetAuthoritiesResponse() {
+    public GetAuthoritiesResponseWS() {
     }
 
-    public GetAuthoritiesResponse(List<GPAuthority> theAuthorities) {
+    public GetAuthoritiesResponseWS(List<GPAuthority> theAuthorities) {
         this.authorities = theAuthorities;
     }
 

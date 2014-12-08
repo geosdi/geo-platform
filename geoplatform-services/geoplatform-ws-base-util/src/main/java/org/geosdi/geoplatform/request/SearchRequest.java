@@ -88,6 +88,7 @@ public class SearchRequest implements Serializable {
         this.likeType = likeType;
     }
 
+    @XmlElement(required = false)
     public LikePatternType getLikeType() {
         return this.likeType;
     }

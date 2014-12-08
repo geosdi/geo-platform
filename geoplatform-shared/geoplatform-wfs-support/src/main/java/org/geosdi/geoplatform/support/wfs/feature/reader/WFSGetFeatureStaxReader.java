@@ -73,9 +73,9 @@ public class WFSGetFeatureStaxReader extends AbstractStaxStreamReader<FeatureCol
     //
     private static final GPJAXBContextBuilder jaxbContextBuilder;
     //
-    private LayerSchemaDTO layerSchema;
+    private final LayerSchemaDTO layerSchema;
     //
-    private GMLBaseSextanteParser sextanteParser = GMLBaseParametersRepo.getDefaultSextanteParser();
+    private final GMLBaseSextanteParser sextanteParser = GMLBaseParametersRepo.getDefaultSextanteParser();
 
     public WFSGetFeatureStaxReader(LayerSchemaDTO layerSchema) {
         this.layerSchema = layerSchema;

@@ -285,37 +285,54 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel
                                     @Override
                                     public void onCommandSuccess(
                                             GetAllFeatureResponse response) {
-                                                List<FeatureDetail> instances = Lists.<FeatureDetail>newArrayListWithCapacity(
-                                                        response.getResult().getFeatures().size());
-                                                for (FeatureDTO feature : GPSharedUtils.safeList(response.getResult().getFeatures())) {
-                                                    Map<String, String> attributes = feature.getAttributes().getAttributesMap();
-                                                    FeatureDetail featureDetail = new FeatureDetail(
-                                                            null,
-                                                            attributes);
-                                                    instances.add(featureDetail);
-                                                }
+                                        if (!response.getResult().isFeaturesLoaded()) {
+                                            String errorMessage = "Error on WFS GetFeature request";
 
-                                                FeatureInstancesEvent e = new FeatureInstancesEvent();
-                                                e.setInstances(instances);
-                                                bus.fireEvent(e);
-                                                queryEnabled(true);
+                                            GeoPlatformMessage.errorMessage(
+                                                    "GetFeture Service Error",
+                                                    errorMessage + " - " + response.getResult().getErrorMessage());
+
+                                            LayoutManager.getInstance().getStatusMap().setStatus(
+                                                    errorMessage + " for "
+                                                    + layerSchemaBinder.getLayerSchemaDTO().getTypeName()
+                                                    + " layer.",
+                                                    SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
+                                            queryEnabled(true);
+                                        } else {
+                                            List<FeatureDetail> instances = Lists.<FeatureDetail>newArrayListWithCapacity(
+                                                    response.getResult().getFeatures().size());
+                                            for (FeatureDTO feature : GPSharedUtils.safeList(
+                                                    response.getResult().getFeatures())) {
+                                                Map<String, String> attributes = feature.getAttributes().getAttributesMap();
+                                                FeatureDetail featureDetail = new FeatureDetail(
+                                                        null,
+                                                        attributes);
+                                                instances.add(
+                                                        featureDetail);
                                             }
 
-                                            @Override
-                                            public void onCommandFailure(
-                                                    Throwable exception) {
-                                                        String errorMessage = "Error on WFS GetFeature request";
+                                            FeatureInstancesEvent e = new FeatureInstancesEvent();
+                                            e.setInstances(instances);
+                                            bus.fireEvent(e);
+                                            queryEnabled(true);
+                                        }
+                                    }
 
-                                                        GeoPlatformMessage.errorMessage(
-                                                                "GetFeture Service Error",
-                                                                errorMessage + " - " + exception.getMessage());
+                                    @Override
+                                    public void onCommandFailure(
+                                            Throwable exception) {
+                                        String errorMessage = "Error on WFS GetFeature request";
 
-                                                        LayoutManager.getInstance().getStatusMap().setStatus(
-                                                                errorMessage + " for "
-                                                                + layerSchemaBinder.getLayerSchemaDTO().getTypeName()
-                                                                + " layer.",
-                                                                SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
-                                                    }
+                                        GeoPlatformMessage.errorMessage(
+                                                "GetFeture Service Error",
+                                                errorMessage + " - " + exception.getMessage());
+
+                                        LayoutManager.getInstance().getStatusMap().setStatus(
+                                                errorMessage + " for "
+                                                + layerSchemaBinder.getLayerSchemaDTO().getTypeName()
+                                                + " layer.",
+                                                SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
+                                    }
 
                                 });
                     }

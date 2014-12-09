@@ -68,7 +68,7 @@ public class WFSGetAllFeaturesRequestTest {
             WFSGetAllFeaturesRequestTest.class);
     //
     private static final QName simulation = new QName(
-            "symulation:symulation_shp_pse(wb)_schools_moe_2012");
+            "symulation:symulation_shp_pse_wb_schools_moe_2012");
     //
     private final String wfsURL = "http://geoserver.wfppal.org/geoserver/wfs";
     GPWFSConnectorStore serverConnector;
@@ -89,7 +89,7 @@ public class WFSGetAllFeaturesRequestTest {
         Schema response = request.getResponse();
 
         LayerSchemaDTO layerSchema = featureReaderXSD.getFeature(response,
-                "symulation_shp_pse(wb)_schools_moe_2012");
+                "symulation_shp_pse_wb_schools_moe_2012");
         if (layerSchema == null) {
             throw new IllegalStateException("The Layer Schema is null.");
         }

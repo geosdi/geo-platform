@@ -59,10 +59,10 @@
     <set-property name="gwt.logging.systemHandler" value="ENABLED" />
     <set-property name="gwt.logging.consoleHandler" value="ENABLED"/> 
     <!-- Disable the firebug handler as an example -->
-    <set-property name="gwt.logging.firebugHandler" value="DISABLED" />
+    <!--<set-property name="gwt.logging.firebugHandler" value="DISABLED" />-->
     <!-- Enable the simple remote handler -->
     <set-property name="gwt.logging.simpleRemoteHandler" value="DISABLED" />
-    <set-property name="gwt.logging.popupHandler" value="DISABLED" />
+    <!--<set-property name="gwt.logging.popupHandler" value="DISABLED" />-->
     <!--END Logging configuration-->
     
     <!-- TEMP FIX UNTIL GOING TO GWT 2.5 -->

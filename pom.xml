@@ -1415,8 +1415,8 @@
         <geoapi-version>2.3-M1</geoapi-version>
         <gt-version>11.2</gt-version>
 
-        <gwtVersion>2.5.1</gwtVersion>
-        <gxtVersion>2.3.0-gwt22</gxtVersion>
+        <gwtVersion>2.7.0</gwtVersion>
+        <gxtVersion>2.3.1a-gwt22</gxtVersion>
         
         <gwtOpenlayersVersion>1.1-SNAPSHOT</gwtOpenlayersVersion>
         

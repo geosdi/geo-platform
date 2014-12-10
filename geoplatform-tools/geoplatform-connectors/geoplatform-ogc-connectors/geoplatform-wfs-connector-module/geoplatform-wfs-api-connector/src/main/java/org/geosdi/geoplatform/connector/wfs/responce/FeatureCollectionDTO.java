@@ -85,7 +85,7 @@ public class FeatureCollectionDTO implements Serializable {
         if (features == null || features.isEmpty()) {
             return null;
         }
-        return new ArrayList<>(features);
+        return new ArrayList<FeatureDTO>(features);
     }
 
     public void setFeatures(List<FeatureDTO> features) {
@@ -94,7 +94,7 @@ public class FeatureCollectionDTO implements Serializable {
 
     public void addFeature(FeatureDTO feature) {
         if (features == null) {
-            features = new ArrayList<>();
+            features = new ArrayList<FeatureDTO>();
         }
         features.add(feature);
     }

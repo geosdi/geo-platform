@@ -60,7 +60,7 @@ public class FolderDTO extends AbstractElementDTO {
     //
     @XmlElementWrapper(name = "folderElements")
     @XmlElement(name = "folderElement")
-    private List<IElementDTO> elementList = new ArrayList<IElementDTO>();
+    private List<IElementDTO> elementList = new ArrayList<>();
 
     /**
      * Default constructor. NOTE: elementList is NULL.
@@ -131,16 +131,12 @@ public class FolderDTO extends AbstractElementDTO {
         Collections.sort(elementList);
     }
 
-    /**
-     * (non-Javadoc)
-     *
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString() {
         return "FolderDTO [" + super.toString()
                 + ", expanded=" + expanded
-                + ", numberOfDescendants=" + numberOfDescendants + "]";
+                + ", numberOfDescendants=" + numberOfDescendants
+                + "folderElements = " + elementList + "]";
     }
 
     public static List<FolderDTO> convertToFolderDTOList(List<GPFolder> folders) {

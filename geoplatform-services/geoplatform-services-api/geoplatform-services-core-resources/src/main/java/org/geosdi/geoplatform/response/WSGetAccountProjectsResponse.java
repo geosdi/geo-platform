@@ -77,8 +77,7 @@ public class WSGetAccountProjectsResponse implements Serializable {
     /**
      * @param accountProjects the accountProjects to set
      */
-    public void setAccountProjects(
-            List<GPAccountProject> accountProjects) {
+    public void setAccountProjects(List<GPAccountProject> accountProjects) {
         this.accountProjects = accountProjects;
     }
 

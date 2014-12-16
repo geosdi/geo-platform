@@ -1,0 +1,1557 @@
+{
+    "accountProjects": [{
+            "id": 2250,
+            "account": {
+                "type": "GPUser",
+                "id": 2850,
+                "enabled": true,
+                "creationDate": "2014-12-16T11:11:46.173+0100",
+                "accountTemporary": false,
+                "accountNonExpired": true,
+                "gsAccount": null,
+                "organization": {
+                    "id": 2750,
+                    "name": "geoSDI",
+                    "description": "geoSDI realizza e distribuisce i migliori sistemi software geospaziali web based utilizzando un approccio open source.",
+                    "url": "http://www.geosdi.org",
+                    "telephone": "+39.0971.427305",
+                    "address": "C.da S. Loja Tito Scalo (PZ) - Basilicata 85050 Italy"
+                },
+                "loadExpandedFolders": true,
+                "name": "Complete name of admin",
+                "username": "admin",
+                "password": "d033e22ae348aeb5660fc2140aec35850c4da997",
+                "emailAddress": "admin@geosdi.org",
+                "sendEmail": true,
+                "naturalID": "admin"
+            },
+            "project": {
+                "id": 2200,
+                "name": "admin_project",
+                "numberOfElements": 0,
+                "creationDate": "2014-12-16T11:11:46.398+0100",
+                "version": 1,
+                "shared": false
+            },
+            "permissionMask": 16,
+            "defaultProject": true,
+            "baseLayer": "GOOGLE_SATELLITE"
+        }, {
+            "id": 2255,
+            "account": {
+                "type": "GPUser",
+                "id": 2850,
+                "enabled": true,
+                "creationDate": "2014-12-16T11:11:46.173+0100",
+                "accountTemporary": false,
+                "accountNonExpired": true,
+                "gsAccount": null,
+                "organization": {
+                    "id": 2750,
+                    "name": "geoSDI",
+                    "description": "geoSDI realizza e distribuisce i migliori sistemi software geospaziali web based utilizzando un approccio open source.",
+                    "url": "http://www.geosdi.org",
+                    "telephone": "+39.0971.427305",
+                    "address": "C.da S. Loja Tito Scalo (PZ) - Basilicata 85050 Italy"
+                },
+                "loadExpandedFolders": true,
+                "name": "Complete name of admin",
+                "username": "admin",
+                "password": "d033e22ae348aeb5660fc2140aec35850c4da997",
+                "emailAddress": "admin@geosdi.org",
+                "sendEmail": true,
+                "naturalID": "admin"
+            },
+            "project": {
+                "id": 2204,
+                "name": "project_admin_k_1",
+                "numberOfElements": 1,
+                "creationDate": "2014-12-16T12:11:46.428+0100",
+                "version": 1,
+                "shared": false
+            },
+            "permissionMask": 16,
+            "defaultProject": false,
+            "baseLayer": "GOOGLE_SATELLITE"
+        }, {
+            "id": 2256,
+            "account": {
+                "type": "GPUser",
+                "id": 2850,
+                "enabled": true,
+                "creationDate": "2014-12-16T11:11:46.173+0100",
+                "accountTemporary": false,
+                "accountNonExpired": true,
+                "gsAccount": null,
+                "organization": {
+                    "id": 2750,
+                    "name": "geoSDI",
+                    "description": "geoSDI realizza e distribuisce i migliori sistemi software geospaziali web based utilizzando un approccio open source.",
+                    "url": "http://www.geosdi.org",
+                    "telephone": "+39.0971.427305",
+                    "address": "C.da S. Loja Tito Scalo (PZ) - Basilicata 85050 Italy"
+                },
+                "loadExpandedFolders": true,
+                "name": "Complete name of admin",
+                "username": "admin",
+                "password": "d033e22ae348aeb5660fc2140aec35850c4da997",
+                "emailAddress": "admin@geosdi.org",
+                "sendEmail": true,
+                "naturalID": "admin"
+            },
+            "project": {
+                "id": 2205,
+                "name": "project_admin_k_2",
+                "numberOfElements": 2,
+                "creationDate": "2014-12-16T13:11:46.433+0100",
+                "version": 1,
+                "shared": false
+            },
+            "permissionMask": 16,
+            "defaultProject": false,
+            "baseLayer": "GOOGLE_SATELLITE"
+        }, {
+            "id": 2257,
+            "account": {
+                "type": "GPUser",
+                "id": 2850,
+                "enabled": true,
+                "creationDate": "2014-12-16T11:11:46.173+0100",
+                "accountTemporary": false,
+                "accountNonExpired": true,
+                "gsAccount": null,
+                "organization": {
+                    "id": 2750,
+                    "name": "geoSDI",
+                    "description": "geoSDI realizza e distribuisce i migliori sistemi software geospaziali web based utilizzando un approccio open source.",
+                    "url": "http://www.geosdi.org",
+                    "telephone": "+39.0971.427305",
+                    "address": "C.da S. Loja Tito Scalo (PZ) - Basilicata 85050 Italy"
+                },
+                "loadExpandedFolders": true,
+                "name": "Complete name of admin",
+                "username": "admin",
+                "password": "d033e22ae348aeb5660fc2140aec35850c4da997",
+                "emailAddress": "admin@geosdi.org",
+                "sendEmail": true,
+                "naturalID": "admin"
+            },
+            "project": {
+                "id": 2206,
+                "name": "project_admin_k_3",
+                "numberOfElements": 3,
+                "creationDate": "2014-12-16T14:11:46.436+0100",
+                "version": 1,
+                "shared": false
+            },
+            "permissionMask": 16,
+            "defaultProject": false,
+            "baseLayer": "GOOGLE_SATELLITE"
+        }, {
+            "id": 2258,
+            "account": {
+                "type": "GPUser",
+                "id": 2850,
+                "enabled": true,
+                "creationDate": "2014-12-16T11:11:46.173+0100",
+                "accountTemporary": false,
+                "accountNonExpired": true,
+                "gsAccount": null,
+                "organization": {
+                    "id": 2750,
+                    "name": "geoSDI",
+                    "description": "geoSDI realizza e distribuisce i migliori sistemi software geospaziali web based utilizzando un approccio open source.",
+                    "url": "http://www.geosdi.org",
+                    "telephone": "+39.0971.427305",
+                    "address": "C.da S. Loja Tito Scalo (PZ) - Basilicata 85050 Italy"
+                },
+                "loadExpandedFolders": true,
+                "name": "Complete name of admin",
+                "username": "admin",
+                "password": "d033e22ae348aeb5660fc2140aec35850c4da997",
+                "emailAddress": "admin@geosdi.org",
+                "sendEmail": true,
+                "naturalID": "admin"
+            },
+            "project": {
+                "id": 2207,
+                "name": "project_admin_k_4",
+                "numberOfElements": 4,
+                "creationDate": "2014-12-16T15:11:46.440+0100",
+                "version": 1,
+                "shared": false
+            },
+            "permissionMask": 16,
+            "defaultProject": false,
+            "baseLayer": "GOOGLE_SATELLITE"
+        }, {
+            "id": 2259,
+            "account": {
+                "type": "GPUser",
+                "id": 2850,
+                "enabled": true,
+                "creationDate": "2014-12-16T11:11:46.173+0100",
+                "accountTemporary": false,
+                "accountNonExpired": true,
+                "gsAccount": null,
+                "organization": {
+                    "id": 2750,
+                    "name": "geoSDI",
+                    "description": "geoSDI realizza e distribuisce i migliori sistemi software geospaziali web based utilizzando un approccio open source.",
+                    "url": "http://www.geosdi.org",
+                    "telephone": "+39.0971.427305",
+                    "address": "C.da S. Loja Tito Scalo (PZ) - Basilicata 85050 Italy"
+                },
+                "loadExpandedFolders": true,
+                "name": "Complete name of admin",
+                "username": "admin",
+                "password": "d033e22ae348aeb5660fc2140aec35850c4da997",
+                "emailAddress": "admin@geosdi.org",
+                "sendEmail": true,
+                "naturalID": "admin"
+            },
+            "project": {
+                "id": 2208,
+                "name": "project_admin_k_5",
+                "numberOfElements": 5,
+                "creationDate": "2014-12-16T16:11:46.443+0100",
+                "version": 1,
+                "shared": false
+            },
+            "permissionMask": 16,
+            "defaultProject": false,
+            "baseLayer": "GOOGLE_SATELLITE"
+        }, {
+            "id": 2260,
+            "account": {
+                "type": "GPUser",
+                "id": 2850,
+                "enabled": true,
+                "creationDate": "2014-12-16T11:11:46.173+0100",
+                "accountTemporary": false,
+                "accountNonExpired": true,
+                "gsAccount": null,
+                "organization": {
+                    "id": 2750,
+                    "name": "geoSDI",
+                    "description": "geoSDI realizza e distribuisce i migliori sistemi software geospaziali web based utilizzando un approccio open source.",
+                    "url": "http://www.geosdi.org",
+                    "telephone": "+39.0971.427305",
+                    "address": "C.da S. Loja Tito Scalo (PZ) - Basilicata 85050 Italy"
+                },
+                "loadExpandedFolders": true,
+                "name": "Complete name of admin",
+                "username": "admin",
+                "password": "d033e22ae348aeb5660fc2140aec35850c4da997",
+                "emailAddress": "admin@geosdi.org",
+                "sendEmail": true,
+                "naturalID": "admin"
+            },
+            "project": {
+                "id": 2209,
+                "name": "project_admin_k_6",
+                "numberOfElements": 6,
+                "creationDate": "2014-12-16T17:11:46.446+0100",
+                "version": 1,
+                "shared": false
+            },
+            "permissionMask": 16,
+            "defaultProject": false,
+            "baseLayer": "GOOGLE_SATELLITE"
+        }, {
+            "id": 2261,
+            "account": {
+                "type": "GPUser",
+                "id": 2850,
+                "enabled": true,
+                "creationDate": "2014-12-16T11:11:46.173+0100",
+                "accountTemporary": false,
+                "accountNonExpired": true,
+                "gsAccount": null,
+                "organization": {
+                    "id": 2750,
+                    "name": "geoSDI",
+                    "description": "geoSDI realizza e distribuisce i migliori sistemi software geospaziali web based utilizzando un approccio open source.",
+                    "url": "http://www.geosdi.org",
+                    "telephone": "+39.0971.427305",
+                    "address": "C.da S. Loja Tito Scalo (PZ) - Basilicata 85050 Italy"
+                },
+                "loadExpandedFolders": true,
+                "name": "Complete name of admin",
+                "username": "admin",
+                "password": "d033e22ae348aeb5660fc2140aec35850c4da997",
+                "emailAddress": "admin@geosdi.org",
+                "sendEmail": true,
+                "naturalID": "admin"
+            },
+            "project": {
+                "id": 2210,
+                "name": "project_admin_k_7",
+                "numberOfElements": 7,
+                "creationDate": "2014-12-16T18:11:46.449+0100",
+                "version": 1,
+                "shared": false
+            },
+            "permissionMask": 16,
+            "defaultProject": false,
+            "baseLayer": "GOOGLE_SATELLITE"
+        }, {
+            "id": 2262,
+            "account": {
+                "type": "GPUser",
+                "id": 2850,
+                "enabled": true,
+                "creationDate": "2014-12-16T11:11:46.173+0100",
+                "accountTemporary": false,
+                "accountNonExpired": true,
+                "gsAccount": null,
+                "organization": {
+                    "id": 2750,
+                    "name": "geoSDI",
+                    "description": "geoSDI realizza e distribuisce i migliori sistemi software geospaziali web based utilizzando un approccio open source.",
+                    "url": "http://www.geosdi.org",
+                    "telephone": "+39.0971.427305",
+                    "address": "C.da S. Loja Tito Scalo (PZ) - Basilicata 85050 Italy"
+                },
+                "loadExpandedFolders": true,
+                "name": "Complete name of admin",
+                "username": "admin",
+                "password": "d033e22ae348aeb5660fc2140aec35850c4da997",
+                "emailAddress": "admin@geosdi.org",
+                "sendEmail": true,
+                "naturalID": "admin"
+            },
+            "project": {
+                "id": 2211,
+                "name": "project_admin_k_8",
+                "numberOfElements": 8,
+                "creationDate": "2014-12-16T19:11:46.452+0100",
+                "version": 1,
+                "shared": false
+            },
+            "permissionMask": 16,
+            "defaultProject": false,
+            "baseLayer": "GOOGLE_SATELLITE"
+        }, {
+            "id": 2263,
+            "account": {
+                "type": "GPUser",
+                "id": 2850,
+                "enabled": true,
+                "creationDate": "2014-12-16T11:11:46.173+0100",
+                "accountTemporary": false,
+                "accountNonExpired": true,
+                "gsAccount": null,
+                "organization": {
+                    "id": 2750,
+                    "name": "geoSDI",
+                    "description": "geoSDI realizza e distribuisce i migliori sistemi software geospaziali web based utilizzando un approccio open source.",
+                    "url": "http://www.geosdi.org",
+                    "telephone": "+39.0971.427305",
+                    "address": "C.da S. Loja Tito Scalo (PZ) - Basilicata 85050 Italy"
+                },
+                "loadExpandedFolders": true,
+                "name": "Complete name of admin",
+                "username": "admin",
+                "password": "d033e22ae348aeb5660fc2140aec35850c4da997",
+                "emailAddress": "admin@geosdi.org",
+                "sendEmail": true,
+                "naturalID": "admin"
+            },
+            "project": {
+                "id": 2212,
+                "name": "project_admin_k_9",
+                "numberOfElements": 9,
+                "creationDate": "2014-12-16T20:11:46.456+0100",
+                "version": 1,
+                "shared": false
+            },
+            "permissionMask": 16,
+            "defaultProject": false,
+            "baseLayer": "GOOGLE_SATELLITE"
+        }, {
+            "id": 2264,
+            "account": {
+                "type": "GPUser",
+                "id": 2850,
+                "enabled": true,
+                "creationDate": "2014-12-16T11:11:46.173+0100",
+                "accountTemporary": false,
+                "accountNonExpired": true,
+                "gsAccount": null,
+                "organization": {
+                    "id": 2750,
+                    "name": "geoSDI",
+                    "description": "geoSDI realizza e distribuisce i migliori sistemi software geospaziali web based utilizzando un approccio open source.",
+                    "url": "http://www.geosdi.org",
+                    "telephone": "+39.0971.427305",
+                    "address": "C.da S. Loja Tito Scalo (PZ) - Basilicata 85050 Italy"
+                },
+                "loadExpandedFolders": true,
+                "name": "Complete name of admin",
+                "username": "admin",
+                "password": "d033e22ae348aeb5660fc2140aec35850c4da997",
+                "emailAddress": "admin@geosdi.org",
+                "sendEmail": true,
+                "naturalID": "admin"
+            },
+            "project": {
+                "id": 2213,
+                "name": "project_admin_k_10",
+                "numberOfElements": 10,
+                "creationDate": "2014-12-16T21:11:46.460+0100",
+                "version": 1,
+                "shared": false
+            },
+            "permissionMask": 16,
+            "defaultProject": false,
+            "baseLayer": "GOOGLE_SATELLITE"
+        }, {
+            "id": 2265,
+            "account": {
+                "type": "GPUser",
+                "id": 2850,
+                "enabled": true,
+                "creationDate": "2014-12-16T11:11:46.173+0100",
+                "accountTemporary": false,
+                "accountNonExpired": true,
+                "gsAccount": null,
+                "organization": {
+                    "id": 2750,
+                    "name": "geoSDI",
+                    "description": "geoSDI realizza e distribuisce i migliori sistemi software geospaziali web based utilizzando un approccio open source.",
+                    "url": "http://www.geosdi.org",
+                    "telephone": "+39.0971.427305",
+                    "address": "C.da S. Loja Tito Scalo (PZ) - Basilicata 85050 Italy"
+                },
+                "loadExpandedFolders": true,
+                "name": "Complete name of admin",
+                "username": "admin",
+                "password": "d033e22ae348aeb5660fc2140aec35850c4da997",
+                "emailAddress": "admin@geosdi.org",
+                "sendEmail": true,
+                "naturalID": "admin"
+            },
+            "project": {
+                "id": 2214,
+                "name": "project_admin_k_11",
+                "numberOfElements": 11,
+                "creationDate": "2014-12-16T22:11:46.463+0100",
+                "version": 1,
+                "shared": false
+            },
+            "permissionMask": 16,
+            "defaultProject": false,
+            "baseLayer": "GOOGLE_SATELLITE"
+        }, {
+            "id": 2266,
+            "account": {
+                "type": "GPUser",
+                "id": 2850,
+                "enabled": true,
+                "creationDate": "2014-12-16T11:11:46.173+0100",
+                "accountTemporary": false,
+                "accountNonExpired": true,
+                "gsAccount": null,
+                "organization": {
+                    "id": 2750,
+                    "name": "geoSDI",
+                    "description": "geoSDI realizza e distribuisce i migliori sistemi software geospaziali web based utilizzando un approccio open source.",
+                    "url": "http://www.geosdi.org",
+                    "telephone": "+39.0971.427305",
+                    "address": "C.da S. Loja Tito Scalo (PZ) - Basilicata 85050 Italy"
+                },
+                "loadExpandedFolders": true,
+                "name": "Complete name of admin",
+                "username": "admin",
+                "password": "d033e22ae348aeb5660fc2140aec35850c4da997",
+                "emailAddress": "admin@geosdi.org",
+                "sendEmail": true,
+                "naturalID": "admin"
+            },
+            "project": {
+                "id": 2215,
+                "name": "project_admin_k_12",
+                "numberOfElements": 12,
+                "creationDate": "2014-12-16T23:11:46.466+0100",
+                "version": 1,
+                "shared": false
+            },
+            "permissionMask": 16,
+            "defaultProject": false,
+            "baseLayer": "GOOGLE_SATELLITE"
+        }, {
+            "id": 2267,
+            "account": {
+                "type": "GPUser",
+                "id": 2850,
+                "enabled": true,
+                "creationDate": "2014-12-16T11:11:46.173+0100",
+                "accountTemporary": false,
+                "accountNonExpired": true,
+                "gsAccount": null,
+                "organization": {
+                    "id": 2750,
+                    "name": "geoSDI",
+                    "description": "geoSDI realizza e distribuisce i migliori sistemi software geospaziali web based utilizzando un approccio open source.",
+                    "url": "http://www.geosdi.org",
+                    "telephone": "+39.0971.427305",
+                    "address": "C.da S. Loja Tito Scalo (PZ) - Basilicata 85050 Italy"
+                },
+                "loadExpandedFolders": true,
+                "name": "Complete name of admin",
+                "username": "admin",
+                "password": "d033e22ae348aeb5660fc2140aec35850c4da997",
+                "emailAddress": "admin@geosdi.org",
+                "sendEmail": true,
+                "naturalID": "admin"
+            },
+            "project": {
+                "id": 2216,
+                "name": "project_admin_k_13",
+                "numberOfElements": 13,
+                "creationDate": "2014-12-17T00:11:46.470+0100",
+                "version": 1,
+                "shared": false
+            },
+            "permissionMask": 16,
+            "defaultProject": false,
+            "baseLayer": "GOOGLE_SATELLITE"
+        }, {
+            "id": 2268,
+            "account": {
+                "type": "GPUser",
+                "id": 2850,
+                "enabled": true,
+                "creationDate": "2014-12-16T11:11:46.173+0100",
+                "accountTemporary": false,
+                "accountNonExpired": true,
+                "gsAccount": null,
+                "organization": {
+                    "id": 2750,
+                    "name": "geoSDI",
+                    "description": "geoSDI realizza e distribuisce i migliori sistemi software geospaziali web based utilizzando un approccio open source.",
+                    "url": "http://www.geosdi.org",
+                    "telephone": "+39.0971.427305",
+                    "address": "C.da S. Loja Tito Scalo (PZ) - Basilicata 85050 Italy"
+                },
+                "loadExpandedFolders": true,
+                "name": "Complete name of admin",
+                "username": "admin",
+                "password": "d033e22ae348aeb5660fc2140aec35850c4da997",
+                "emailAddress": "admin@geosdi.org",
+                "sendEmail": true,
+                "naturalID": "admin"
+            },
+            "project": {
+                "id": 2217,
+                "name": "project_admin_k_14",
+                "numberOfElements": 14,
+                "creationDate": "2014-12-17T01:11:46.473+0100",
+                "version": 1,
+                "shared": false
+            },
+            "permissionMask": 16,
+            "defaultProject": false,
+            "baseLayer": "GOOGLE_SATELLITE"
+        }, {
+            "id": 2269,
+            "account": {
+                "type": "GPUser",
+                "id": 2850,
+                "enabled": true,
+                "creationDate": "2014-12-16T11:11:46.173+0100",
+                "accountTemporary": false,
+                "accountNonExpired": true,
+                "gsAccount": null,
+                "organization": {
+                    "id": 2750,
+                    "name": "geoSDI",
+                    "description": "geoSDI realizza e distribuisce i migliori sistemi software geospaziali web based utilizzando un approccio open source.",
+                    "url": "http://www.geosdi.org",
+                    "telephone": "+39.0971.427305",
+                    "address": "C.da S. Loja Tito Scalo (PZ) - Basilicata 85050 Italy"
+                },
+                "loadExpandedFolders": true,
+                "name": "Complete name of admin",
+                "username": "admin",
+                "password": "d033e22ae348aeb5660fc2140aec35850c4da997",
+                "emailAddress": "admin@geosdi.org",
+                "sendEmail": true,
+                "naturalID": "admin"
+            },
+            "project": {
+                "id": 2218,
+                "name": "project_admin_k_15",
+                "numberOfElements": 15,
+                "creationDate": "2014-12-17T02:11:46.477+0100",
+                "version": 1,
+                "shared": false
+            },
+            "permissionMask": 16,
+            "defaultProject": false,
+            "baseLayer": "GOOGLE_SATELLITE"
+        }, {
+            "id": 2270,
+            "account": {
+                "type": "GPUser",
+                "id": 2850,
+                "enabled": true,
+                "creationDate": "2014-12-16T11:11:46.173+0100",
+                "accountTemporary": false,
+                "accountNonExpired": true,
+                "gsAccount": null,
+                "organization": {
+                    "id": 2750,
+                    "name": "geoSDI",
+                    "description": "geoSDI realizza e distribuisce i migliori sistemi software geospaziali web based utilizzando un approccio open source.",
+                    "url": "http://www.geosdi.org",
+                    "telephone": "+39.0971.427305",
+                    "address": "C.da S. Loja Tito Scalo (PZ) - Basilicata 85050 Italy"
+                },
+                "loadExpandedFolders": true,
+                "name": "Complete name of admin",
+                "username": "admin",
+                "password": "d033e22ae348aeb5660fc2140aec35850c4da997",
+                "emailAddress": "admin@geosdi.org",
+                "sendEmail": true,
+                "naturalID": "admin"
+            },
+            "project": {
+                "id": 2219,
+                "name": "project_admin_k_16",
+                "numberOfElements": 16,
+                "creationDate": "2014-12-17T03:11:46.482+0100",
+                "version": 1,
+                "shared": false
+            },
+            "permissionMask": 16,
+            "defaultProject": false,
+            "baseLayer": "GOOGLE_SATELLITE"
+        }, {
+            "id": 2271,
+            "account": {
+                "type": "GPUser",
+                "id": 2850,
+                "enabled": true,
+                "creationDate": "2014-12-16T11:11:46.173+0100",
+                "accountTemporary": false,
+                "accountNonExpired": true,
+                "gsAccount": null,
+                "organization": {
+                    "id": 2750,
+                    "name": "geoSDI",
+                    "description": "geoSDI realizza e distribuisce i migliori sistemi software geospaziali web based utilizzando un approccio open source.",
+                    "url": "http://www.geosdi.org",
+                    "telephone": "+39.0971.427305",
+                    "address": "C.da S. Loja Tito Scalo (PZ) - Basilicata 85050 Italy"
+                },
+                "loadExpandedFolders": true,
+                "name": "Complete name of admin",
+                "username": "admin",
+                "password": "d033e22ae348aeb5660fc2140aec35850c4da997",
+                "emailAddress": "admin@geosdi.org",
+                "sendEmail": true,
+                "naturalID": "admin"
+            },
+            "project": {
+                "id": 2220,
+                "name": "project_admin_k_17",
+                "numberOfElements": 17,
+                "creationDate": "2014-12-17T04:11:46.486+0100",
+                "version": 1,
+                "shared": false
+            },
+            "permissionMask": 16,
+            "defaultProject": false,
+            "baseLayer": "GOOGLE_SATELLITE"
+        }, {
+            "id": 2272,
+            "account": {
+                "type": "GPUser",
+                "id": 2850,
+                "enabled": true,
+                "creationDate": "2014-12-16T11:11:46.173+0100",
+                "accountTemporary": false,
+                "accountNonExpired": true,
+                "gsAccount": null,
+                "organization": {
+                    "id": 2750,
+                    "name": "geoSDI",
+                    "description": "geoSDI realizza e distribuisce i migliori sistemi software geospaziali web based utilizzando un approccio open source.",
+                    "url": "http://www.geosdi.org",
+                    "telephone": "+39.0971.427305",
+                    "address": "C.da S. Loja Tito Scalo (PZ) - Basilicata 85050 Italy"
+                },
+                "loadExpandedFolders": true,
+                "name": "Complete name of admin",
+                "username": "admin",
+                "password": "d033e22ae348aeb5660fc2140aec35850c4da997",
+                "emailAddress": "admin@geosdi.org",
+                "sendEmail": true,
+                "naturalID": "admin"
+            },
+            "project": {
+                "id": 2221,
+                "name": "project_admin_k_18",
+                "numberOfElements": 18,
+                "creationDate": "2014-12-17T05:11:46.490+0100",
+                "version": 1,
+                "shared": false
+            },
+            "permissionMask": 16,
+            "defaultProject": false,
+            "baseLayer": "GOOGLE_SATELLITE"
+        }, {
+            "id": 2273,
+            "account": {
+                "type": "GPUser",
+                "id": 2850,
+                "enabled": true,
+                "creationDate": "2014-12-16T11:11:46.173+0100",
+                "accountTemporary": false,
+                "accountNonExpired": true,
+                "gsAccount": null,
+                "organization": {
+                    "id": 2750,
+                    "name": "geoSDI",
+                    "description": "geoSDI realizza e distribuisce i migliori sistemi software geospaziali web based utilizzando un approccio open source.",
+                    "url": "http://www.geosdi.org",
+                    "telephone": "+39.0971.427305",
+                    "address": "C.da S. Loja Tito Scalo (PZ) - Basilicata 85050 Italy"
+                },
+                "loadExpandedFolders": true,
+                "name": "Complete name of admin",
+                "username": "admin",
+                "password": "d033e22ae348aeb5660fc2140aec35850c4da997",
+                "emailAddress": "admin@geosdi.org",
+                "sendEmail": true,
+                "naturalID": "admin"
+            },
+            "project": {
+                "id": 2222,
+                "name": "project_admin_k_19",
+                "numberOfElements": 19,
+                "creationDate": "2014-12-17T06:11:46.493+0100",
+                "version": 1,
+                "shared": false
+            },
+            "permissionMask": 16,
+            "defaultProject": false,
+            "baseLayer": "GOOGLE_SATELLITE"
+        }, {
+            "id": 2274,
+            "account": {
+                "type": "GPUser",
+                "id": 2850,
+                "enabled": true,
+                "creationDate": "2014-12-16T11:11:46.173+0100",
+                "accountTemporary": false,
+                "accountNonExpired": true,
+                "gsAccount": null,
+                "organization": {
+                    "id": 2750,
+                    "name": "geoSDI",
+                    "description": "geoSDI realizza e distribuisce i migliori sistemi software geospaziali web based utilizzando un approccio open source.",
+                    "url": "http://www.geosdi.org",
+                    "telephone": "+39.0971.427305",
+                    "address": "C.da S. Loja Tito Scalo (PZ) - Basilicata 85050 Italy"
+                },
+                "loadExpandedFolders": true,
+                "name": "Complete name of admin",
+                "username": "admin",
+                "password": "d033e22ae348aeb5660fc2140aec35850c4da997",
+                "emailAddress": "admin@geosdi.org",
+                "sendEmail": true,
+                "naturalID": "admin"
+            },
+            "project": {
+                "id": 2223,
+                "name": "project_admin_k_20",
+                "numberOfElements": 20,
+                "creationDate": "2014-12-17T07:11:46.496+0100",
+                "version": 1,
+                "shared": false
+            },
+            "permissionMask": 16,
+            "defaultProject": false,
+            "baseLayer": "GOOGLE_SATELLITE"
+        }, {
+            "id": 2275,
+            "account": {
+                "type": "GPUser",
+                "id": 2850,
+                "enabled": true,
+                "creationDate": "2014-12-16T11:11:46.173+0100",
+                "accountTemporary": false,
+                "accountNonExpired": true,
+                "gsAccount": null,
+                "organization": {
+                    "id": 2750,
+                    "name": "geoSDI",
+                    "description": "geoSDI realizza e distribuisce i migliori sistemi software geospaziali web based utilizzando un approccio open source.",
+                    "url": "http://www.geosdi.org",
+                    "telephone": "+39.0971.427305",
+                    "address": "C.da S. Loja Tito Scalo (PZ) - Basilicata 85050 Italy"
+                },
+                "loadExpandedFolders": true,
+                "name": "Complete name of admin",
+                "username": "admin",
+                "password": "d033e22ae348aeb5660fc2140aec35850c4da997",
+                "emailAddress": "admin@geosdi.org",
+                "sendEmail": true,
+                "naturalID": "admin"
+            },
+            "project": {
+                "id": 2224,
+                "name": "project_admin_k_21",
+                "numberOfElements": 21,
+                "creationDate": "2014-12-17T08:11:46.499+0100",
+                "version": 1,
+                "shared": false
+            },
+            "permissionMask": 16,
+            "defaultProject": false,
+            "baseLayer": "GOOGLE_SATELLITE"
+        }, {
+            "id": 2276,
+            "account": {
+                "type": "GPUser",
+                "id": 2850,
+                "enabled": true,
+                "creationDate": "2014-12-16T11:11:46.173+0100",
+                "accountTemporary": false,
+                "accountNonExpired": true,
+                "gsAccount": null,
+                "organization": {
+                    "id": 2750,
+                    "name": "geoSDI",
+                    "description": "geoSDI realizza e distribuisce i migliori sistemi software geospaziali web based utilizzando un approccio open source.",
+                    "url": "http://www.geosdi.org",
+                    "telephone": "+39.0971.427305",
+                    "address": "C.da S. Loja Tito Scalo (PZ) - Basilicata 85050 Italy"
+                },
+                "loadExpandedFolders": true,
+                "name": "Complete name of admin",
+                "username": "admin",
+                "password": "d033e22ae348aeb5660fc2140aec35850c4da997",
+                "emailAddress": "admin@geosdi.org",
+                "sendEmail": true,
+                "naturalID": "admin"
+            },
+            "project": {
+                "id": 2225,
+                "name": "project_admin_k_22",
+                "numberOfElements": 22,
+                "creationDate": "2014-12-17T09:11:46.502+0100",
+                "version": 1,
+                "shared": false
+            },
+            "permissionMask": 16,
+            "defaultProject": false,
+            "baseLayer": "GOOGLE_SATELLITE"
+        }, {
+            "id": 2277,
+            "account": {
+                "type": "GPUser",
+                "id": 2850,
+                "enabled": true,
+                "creationDate": "2014-12-16T11:11:46.173+0100",
+                "accountTemporary": false,
+                "accountNonExpired": true,
+                "gsAccount": null,
+                "organization": {
+                    "id": 2750,
+                    "name": "geoSDI",
+                    "description": "geoSDI realizza e distribuisce i migliori sistemi software geospaziali web based utilizzando un approccio open source.",
+                    "url": "http://www.geosdi.org",
+                    "telephone": "+39.0971.427305",
+                    "address": "C.da S. Loja Tito Scalo (PZ) - Basilicata 85050 Italy"
+                },
+                "loadExpandedFolders": true,
+                "name": "Complete name of admin",
+                "username": "admin",
+                "password": "d033e22ae348aeb5660fc2140aec35850c4da997",
+                "emailAddress": "admin@geosdi.org",
+                "sendEmail": true,
+                "naturalID": "admin"
+            },
+            "project": {
+                "id": 2226,
+                "name": "project_admin_k_23",
+                "numberOfElements": 23,
+                "creationDate": "2014-12-17T10:11:46.507+0100",
+                "version": 1,
+                "shared": false
+            },
+            "permissionMask": 16,
+            "defaultProject": false,
+            "baseLayer": "GOOGLE_SATELLITE"
+        }, {
+            "id": 2278,
+            "account": {
+                "type": "GPUser",
+                "id": 2850,
+                "enabled": true,
+                "creationDate": "2014-12-16T11:11:46.173+0100",
+                "accountTemporary": false,
+                "accountNonExpired": true,
+                "gsAccount": null,
+                "organization": {
+                    "id": 2750,
+                    "name": "geoSDI",
+                    "description": "geoSDI realizza e distribuisce i migliori sistemi software geospaziali web based utilizzando un approccio open source.",
+                    "url": "http://www.geosdi.org",
+                    "telephone": "+39.0971.427305",
+                    "address": "C.da S. Loja Tito Scalo (PZ) - Basilicata 85050 Italy"
+                },
+                "loadExpandedFolders": true,
+                "name": "Complete name of admin",
+                "username": "admin",
+                "password": "d033e22ae348aeb5660fc2140aec35850c4da997",
+                "emailAddress": "admin@geosdi.org",
+                "sendEmail": true,
+                "naturalID": "admin"
+            },
+            "project": {
+                "id": 2227,
+                "name": "project_admin_k_24",
+                "numberOfElements": 24,
+                "creationDate": "2014-12-17T11:11:46.511+0100",
+                "version": 1,
+                "shared": false
+            },
+            "permissionMask": 16,
+            "defaultProject": false,
+            "baseLayer": "GOOGLE_SATELLITE"
+        }, {
+            "id": 2279,
+            "account": {
+                "type": "GPUser",
+                "id": 2850,
+                "enabled": true,
+                "creationDate": "2014-12-16T11:11:46.173+0100",
+                "accountTemporary": false,
+                "accountNonExpired": true,
+                "gsAccount": null,
+                "organization": {
+                    "id": 2750,
+                    "name": "geoSDI",
+                    "description": "geoSDI realizza e distribuisce i migliori sistemi software geospaziali web based utilizzando un approccio open source.",
+                    "url": "http://www.geosdi.org",
+                    "telephone": "+39.0971.427305",
+                    "address": "C.da S. Loja Tito Scalo (PZ) - Basilicata 85050 Italy"
+                },
+                "loadExpandedFolders": true,
+                "name": "Complete name of admin",
+                "username": "admin",
+                "password": "d033e22ae348aeb5660fc2140aec35850c4da997",
+                "emailAddress": "admin@geosdi.org",
+                "sendEmail": true,
+                "naturalID": "admin"
+            },
+            "project": {
+                "id": 2228,
+                "name": "project_admin_k_25",
+                "numberOfElements": 25,
+                "creationDate": "2014-12-17T12:11:46.515+0100",
+                "version": 1,
+                "shared": false
+            },
+            "permissionMask": 16,
+            "defaultProject": false,
+            "baseLayer": "GOOGLE_SATELLITE"
+        }, {
+            "id": 2280,
+            "account": {
+                "type": "GPUser",
+                "id": 2850,
+                "enabled": true,
+                "creationDate": "2014-12-16T11:11:46.173+0100",
+                "accountTemporary": false,
+                "accountNonExpired": true,
+                "gsAccount": null,
+                "organization": {
+                    "id": 2750,
+                    "name": "geoSDI",
+                    "description": "geoSDI realizza e distribuisce i migliori sistemi software geospaziali web based utilizzando un approccio open source.",
+                    "url": "http://www.geosdi.org",
+                    "telephone": "+39.0971.427305",
+                    "address": "C.da S. Loja Tito Scalo (PZ) - Basilicata 85050 Italy"
+                },
+                "loadExpandedFolders": true,
+                "name": "Complete name of admin",
+                "username": "admin",
+                "password": "d033e22ae348aeb5660fc2140aec35850c4da997",
+                "emailAddress": "admin@geosdi.org",
+                "sendEmail": true,
+                "naturalID": "admin"
+            },
+            "project": {
+                "id": 2229,
+                "name": "project_admin_k_26",
+                "numberOfElements": 26,
+                "creationDate": "2014-12-17T13:11:46.518+0100",
+                "version": 1,
+                "shared": false
+            },
+            "permissionMask": 16,
+            "defaultProject": false,
+            "baseLayer": "GOOGLE_SATELLITE"
+        }, {
+            "id": 2281,
+            "account": {
+                "type": "GPUser",
+                "id": 2850,
+                "enabled": true,
+                "creationDate": "2014-12-16T11:11:46.173+0100",
+                "accountTemporary": false,
+                "accountNonExpired": true,
+                "gsAccount": null,
+                "organization": {
+                    "id": 2750,
+                    "name": "geoSDI",
+                    "description": "geoSDI realizza e distribuisce i migliori sistemi software geospaziali web based utilizzando un approccio open source.",
+                    "url": "http://www.geosdi.org",
+                    "telephone": "+39.0971.427305",
+                    "address": "C.da S. Loja Tito Scalo (PZ) - Basilicata 85050 Italy"
+                },
+                "loadExpandedFolders": true,
+                "name": "Complete name of admin",
+                "username": "admin",
+                "password": "d033e22ae348aeb5660fc2140aec35850c4da997",
+                "emailAddress": "admin@geosdi.org",
+                "sendEmail": true,
+                "naturalID": "admin"
+            },
+            "project": {
+                "id": 2230,
+                "name": "project_admin_k_27",
+                "numberOfElements": 27,
+                "creationDate": "2014-12-17T14:11:46.520+0100",
+                "version": 1,
+                "shared": false
+            },
+            "permissionMask": 16,
+            "defaultProject": false,
+            "baseLayer": "GOOGLE_SATELLITE"
+        }, {
+            "id": 2282,
+            "account": {
+                "type": "GPUser",
+                "id": 2850,
+                "enabled": true,
+                "creationDate": "2014-12-16T11:11:46.173+0100",
+                "accountTemporary": false,
+                "accountNonExpired": true,
+                "gsAccount": null,
+                "organization": {
+                    "id": 2750,
+                    "name": "geoSDI",
+                    "description": "geoSDI realizza e distribuisce i migliori sistemi software geospaziali web based utilizzando un approccio open source.",
+                    "url": "http://www.geosdi.org",
+                    "telephone": "+39.0971.427305",
+                    "address": "C.da S. Loja Tito Scalo (PZ) - Basilicata 85050 Italy"
+                },
+                "loadExpandedFolders": true,
+                "name": "Complete name of admin",
+                "username": "admin",
+                "password": "d033e22ae348aeb5660fc2140aec35850c4da997",
+                "emailAddress": "admin@geosdi.org",
+                "sendEmail": true,
+                "naturalID": "admin"
+            },
+            "project": {
+                "id": 2231,
+                "name": "project_admin_k_28",
+                "numberOfElements": 28,
+                "creationDate": "2014-12-17T15:11:46.523+0100",
+                "version": 1,
+                "shared": false
+            },
+            "permissionMask": 16,
+            "defaultProject": false,
+            "baseLayer": "GOOGLE_SATELLITE"
+        }, {
+            "id": 2283,
+            "account": {
+                "type": "GPUser",
+                "id": 2850,
+                "enabled": true,
+                "creationDate": "2014-12-16T11:11:46.173+0100",
+                "accountTemporary": false,
+                "accountNonExpired": true,
+                "gsAccount": null,
+                "organization": {
+                    "id": 2750,
+                    "name": "geoSDI",
+                    "description": "geoSDI realizza e distribuisce i migliori sistemi software geospaziali web based utilizzando un approccio open source.",
+                    "url": "http://www.geosdi.org",
+                    "telephone": "+39.0971.427305",
+                    "address": "C.da S. Loja Tito Scalo (PZ) - Basilicata 85050 Italy"
+                },
+                "loadExpandedFolders": true,
+                "name": "Complete name of admin",
+                "username": "admin",
+                "password": "d033e22ae348aeb5660fc2140aec35850c4da997",
+                "emailAddress": "admin@geosdi.org",
+                "sendEmail": true,
+                "naturalID": "admin"
+            },
+            "project": {
+                "id": 2232,
+                "name": "project_admin_k_29",
+                "numberOfElements": 29,
+                "creationDate": "2014-12-17T16:11:46.526+0100",
+                "version": 1,
+                "shared": false
+            },
+            "permissionMask": 16,
+            "defaultProject": false,
+            "baseLayer": "GOOGLE_SATELLITE"
+        }, {
+            "id": 2284,
+            "account": {
+                "type": "GPUser",
+                "id": 2850,
+                "enabled": true,
+                "creationDate": "2014-12-16T11:11:46.173+0100",
+                "accountTemporary": false,
+                "accountNonExpired": true,
+                "gsAccount": null,
+                "organization": {
+                    "id": 2750,
+                    "name": "geoSDI",
+                    "description": "geoSDI realizza e distribuisce i migliori sistemi software geospaziali web based utilizzando un approccio open source.",
+                    "url": "http://www.geosdi.org",
+                    "telephone": "+39.0971.427305",
+                    "address": "C.da S. Loja Tito Scalo (PZ) - Basilicata 85050 Italy"
+                },
+                "loadExpandedFolders": true,
+                "name": "Complete name of admin",
+                "username": "admin",
+                "password": "d033e22ae348aeb5660fc2140aec35850c4da997",
+                "emailAddress": "admin@geosdi.org",
+                "sendEmail": true,
+                "naturalID": "admin"
+            },
+            "project": {
+                "id": 2233,
+                "name": "project_admin_k_30",
+                "numberOfElements": 30,
+                "creationDate": "2014-12-17T17:11:46.529+0100",
+                "version": 1,
+                "shared": false
+            },
+            "permissionMask": 16,
+            "defaultProject": false,
+            "baseLayer": "GOOGLE_SATELLITE"
+        }, {
+            "id": 2285,
+            "account": {
+                "type": "GPUser",
+                "id": 2850,
+                "enabled": true,
+                "creationDate": "2014-12-16T11:11:46.173+0100",
+                "accountTemporary": false,
+                "accountNonExpired": true,
+                "gsAccount": null,
+                "organization": {
+                    "id": 2750,
+                    "name": "geoSDI",
+                    "description": "geoSDI realizza e distribuisce i migliori sistemi software geospaziali web based utilizzando un approccio open source.",
+                    "url": "http://www.geosdi.org",
+                    "telephone": "+39.0971.427305",
+                    "address": "C.da S. Loja Tito Scalo (PZ) - Basilicata 85050 Italy"
+                },
+                "loadExpandedFolders": true,
+                "name": "Complete name of admin",
+                "username": "admin",
+                "password": "d033e22ae348aeb5660fc2140aec35850c4da997",
+                "emailAddress": "admin@geosdi.org",
+                "sendEmail": true,
+                "naturalID": "admin"
+            },
+            "project": {
+                "id": 2234,
+                "name": "project_admin_k_31",
+                "numberOfElements": 31,
+                "creationDate": "2014-12-17T18:11:46.532+0100",
+                "version": 1,
+                "shared": false
+            },
+            "permissionMask": 16,
+            "defaultProject": false,
+            "baseLayer": "GOOGLE_SATELLITE"
+        }, {
+            "id": 2286,
+            "account": {
+                "type": "GPUser",
+                "id": 2850,
+                "enabled": true,
+                "creationDate": "2014-12-16T11:11:46.173+0100",
+                "accountTemporary": false,
+                "accountNonExpired": true,
+                "gsAccount": null,
+                "organization": {
+                    "id": 2750,
+                    "name": "geoSDI",
+                    "description": "geoSDI realizza e distribuisce i migliori sistemi software geospaziali web based utilizzando un approccio open source.",
+                    "url": "http://www.geosdi.org",
+                    "telephone": "+39.0971.427305",
+                    "address": "C.da S. Loja Tito Scalo (PZ) - Basilicata 85050 Italy"
+                },
+                "loadExpandedFolders": true,
+                "name": "Complete name of admin",
+                "username": "admin",
+                "password": "d033e22ae348aeb5660fc2140aec35850c4da997",
+                "emailAddress": "admin@geosdi.org",
+                "sendEmail": true,
+                "naturalID": "admin"
+            },
+            "project": {
+                "id": 2235,
+                "name": "project_admin_k_32",
+                "numberOfElements": 32,
+                "creationDate": "2014-12-17T19:11:46.534+0100",
+                "version": 1,
+                "shared": false
+            },
+            "permissionMask": 16,
+            "defaultProject": false,
+            "baseLayer": "GOOGLE_SATELLITE"
+        }, {
+            "id": 2287,
+            "account": {
+                "type": "GPUser",
+                "id": 2850,
+                "enabled": true,
+                "creationDate": "2014-12-16T11:11:46.173+0100",
+                "accountTemporary": false,
+                "accountNonExpired": true,
+                "gsAccount": null,
+                "organization": {
+                    "id": 2750,
+                    "name": "geoSDI",
+                    "description": "geoSDI realizza e distribuisce i migliori sistemi software geospaziali web based utilizzando un approccio open source.",
+                    "url": "http://www.geosdi.org",
+                    "telephone": "+39.0971.427305",
+                    "address": "C.da S. Loja Tito Scalo (PZ) - Basilicata 85050 Italy"
+                },
+                "loadExpandedFolders": true,
+                "name": "Complete name of admin",
+                "username": "admin",
+                "password": "d033e22ae348aeb5660fc2140aec35850c4da997",
+                "emailAddress": "admin@geosdi.org",
+                "sendEmail": true,
+                "naturalID": "admin"
+            },
+            "project": {
+                "id": 2236,
+                "name": "project_admin_k_33",
+                "numberOfElements": 33,
+                "creationDate": "2014-12-17T20:11:46.538+0100",
+                "version": 1,
+                "shared": false
+            },
+            "permissionMask": 16,
+            "defaultProject": false,
+            "baseLayer": "GOOGLE_SATELLITE"
+        }, {
+            "id": 2288,
+            "account": {
+                "type": "GPUser",
+                "id": 2850,
+                "enabled": true,
+                "creationDate": "2014-12-16T11:11:46.173+0100",
+                "accountTemporary": false,
+                "accountNonExpired": true,
+                "gsAccount": null,
+                "organization": {
+                    "id": 2750,
+                    "name": "geoSDI",
+                    "description": "geoSDI realizza e distribuisce i migliori sistemi software geospaziali web based utilizzando un approccio open source.",
+                    "url": "http://www.geosdi.org",
+                    "telephone": "+39.0971.427305",
+                    "address": "C.da S. Loja Tito Scalo (PZ) - Basilicata 85050 Italy"
+                },
+                "loadExpandedFolders": true,
+                "name": "Complete name of admin",
+                "username": "admin",
+                "password": "d033e22ae348aeb5660fc2140aec35850c4da997",
+                "emailAddress": "admin@geosdi.org",
+                "sendEmail": true,
+                "naturalID": "admin"
+            },
+            "project": {
+                "id": 2237,
+                "name": "project_admin_k_34",
+                "numberOfElements": 34,
+                "creationDate": "2014-12-17T21:11:46.542+0100",
+                "version": 1,
+                "shared": false
+            },
+            "permissionMask": 16,
+            "defaultProject": false,
+            "baseLayer": "GOOGLE_SATELLITE"
+        }, {
+            "id": 2289,
+            "account": {
+                "type": "GPUser",
+                "id": 2850,
+                "enabled": true,
+                "creationDate": "2014-12-16T11:11:46.173+0100",
+                "accountTemporary": false,
+                "accountNonExpired": true,
+                "gsAccount": null,
+                "organization": {
+                    "id": 2750,
+                    "name": "geoSDI",
+                    "description": "geoSDI realizza e distribuisce i migliori sistemi software geospaziali web based utilizzando un approccio open source.",
+                    "url": "http://www.geosdi.org",
+                    "telephone": "+39.0971.427305",
+                    "address": "C.da S. Loja Tito Scalo (PZ) - Basilicata 85050 Italy"
+                },
+                "loadExpandedFolders": true,
+                "name": "Complete name of admin",
+                "username": "admin",
+                "password": "d033e22ae348aeb5660fc2140aec35850c4da997",
+                "emailAddress": "admin@geosdi.org",
+                "sendEmail": true,
+                "naturalID": "admin"
+            },
+            "project": {
+                "id": 2238,
+                "name": "project_admin_k_35",
+                "numberOfElements": 35,
+                "creationDate": "2014-12-17T22:11:46.545+0100",
+                "version": 1,
+                "shared": false
+            },
+            "permissionMask": 16,
+            "defaultProject": false,
+            "baseLayer": "GOOGLE_SATELLITE"
+        }, {
+            "id": 2290,
+            "account": {
+                "type": "GPUser",
+                "id": 2850,
+                "enabled": true,
+                "creationDate": "2014-12-16T11:11:46.173+0100",
+                "accountTemporary": false,
+                "accountNonExpired": true,
+                "gsAccount": null,
+                "organization": {
+                    "id": 2750,
+                    "name": "geoSDI",
+                    "description": "geoSDI realizza e distribuisce i migliori sistemi software geospaziali web based utilizzando un approccio open source.",
+                    "url": "http://www.geosdi.org",
+                    "telephone": "+39.0971.427305",
+                    "address": "C.da S. Loja Tito Scalo (PZ) - Basilicata 85050 Italy"
+                },
+                "loadExpandedFolders": true,
+                "name": "Complete name of admin",
+                "username": "admin",
+                "password": "d033e22ae348aeb5660fc2140aec35850c4da997",
+                "emailAddress": "admin@geosdi.org",
+                "sendEmail": true,
+                "naturalID": "admin"
+            },
+            "project": {
+                "id": 2239,
+                "name": "project_admin_k_36",
+                "numberOfElements": 36,
+                "creationDate": "2014-12-17T23:11:46.548+0100",
+                "version": 1,
+                "shared": false
+            },
+            "permissionMask": 16,
+            "defaultProject": false,
+            "baseLayer": "GOOGLE_SATELLITE"
+        }, {
+            "id": 2291,
+            "account": {
+                "type": "GPUser",
+                "id": 2850,
+                "enabled": true,
+                "creationDate": "2014-12-16T11:11:46.173+0100",
+                "accountTemporary": false,
+                "accountNonExpired": true,
+                "gsAccount": null,
+                "organization": {
+                    "id": 2750,
+                    "name": "geoSDI",
+                    "description": "geoSDI realizza e distribuisce i migliori sistemi software geospaziali web based utilizzando un approccio open source.",
+                    "url": "http://www.geosdi.org",
+                    "telephone": "+39.0971.427305",
+                    "address": "C.da S. Loja Tito Scalo (PZ) - Basilicata 85050 Italy"
+                },
+                "loadExpandedFolders": true,
+                "name": "Complete name of admin",
+                "username": "admin",
+                "password": "d033e22ae348aeb5660fc2140aec35850c4da997",
+                "emailAddress": "admin@geosdi.org",
+                "sendEmail": true,
+                "naturalID": "admin"
+            },
+            "project": {
+                "id": 2240,
+                "name": "project_admin_k_37",
+                "numberOfElements": 37,
+                "creationDate": "2014-12-18T00:11:46.552+0100",
+                "version": 1,
+                "shared": false
+            },
+            "permissionMask": 16,
+            "defaultProject": false,
+            "baseLayer": "GOOGLE_SATELLITE"
+        }, {
+            "id": 2292,
+            "account": {
+                "type": "GPUser",
+                "id": 2850,
+                "enabled": true,
+                "creationDate": "2014-12-16T11:11:46.173+0100",
+                "accountTemporary": false,
+                "accountNonExpired": true,
+                "gsAccount": null,
+                "organization": {
+                    "id": 2750,
+                    "name": "geoSDI",
+                    "description": "geoSDI realizza e distribuisce i migliori sistemi software geospaziali web based utilizzando un approccio open source.",
+                    "url": "http://www.geosdi.org",
+                    "telephone": "+39.0971.427305",
+                    "address": "C.da S. Loja Tito Scalo (PZ) - Basilicata 85050 Italy"
+                },
+                "loadExpandedFolders": true,
+                "name": "Complete name of admin",
+                "username": "admin",
+                "password": "d033e22ae348aeb5660fc2140aec35850c4da997",
+                "emailAddress": "admin@geosdi.org",
+                "sendEmail": true,
+                "naturalID": "admin"
+            },
+            "project": {
+                "id": 2241,
+                "name": "project_admin_k_38",
+                "numberOfElements": 38,
+                "creationDate": "2014-12-18T01:11:46.555+0100",
+                "version": 1,
+                "shared": false
+            },
+            "permissionMask": 16,
+            "defaultProject": false,
+            "baseLayer": "GOOGLE_SATELLITE"
+        }, {
+            "id": 2293,
+            "account": {
+                "type": "GPUser",
+                "id": 2850,
+                "enabled": true,
+                "creationDate": "2014-12-16T11:11:46.173+0100",
+                "accountTemporary": false,
+                "accountNonExpired": true,
+                "gsAccount": null,
+                "organization": {
+                    "id": 2750,
+                    "name": "geoSDI",
+                    "description": "geoSDI realizza e distribuisce i migliori sistemi software geospaziali web based utilizzando un approccio open source.",
+                    "url": "http://www.geosdi.org",
+                    "telephone": "+39.0971.427305",
+                    "address": "C.da S. Loja Tito Scalo (PZ) - Basilicata 85050 Italy"
+                },
+                "loadExpandedFolders": true,
+                "name": "Complete name of admin",
+                "username": "admin",
+                "password": "d033e22ae348aeb5660fc2140aec35850c4da997",
+                "emailAddress": "admin@geosdi.org",
+                "sendEmail": true,
+                "naturalID": "admin"
+            },
+            "project": {
+                "id": 2242,
+                "name": "project_admin_k_39",
+                "numberOfElements": 39,
+                "creationDate": "2014-12-18T02:11:46.558+0100",
+                "version": 1,
+                "shared": false
+            },
+            "permissionMask": 16,
+            "defaultProject": false,
+            "baseLayer": "GOOGLE_SATELLITE"
+        }, {
+            "id": 2294,
+            "account": {
+                "type": "GPUser",
+                "id": 2850,
+                "enabled": true,
+                "creationDate": "2014-12-16T11:11:46.173+0100",
+                "accountTemporary": false,
+                "accountNonExpired": true,
+                "gsAccount": null,
+                "organization": {
+                    "id": 2750,
+                    "name": "geoSDI",
+                    "description": "geoSDI realizza e distribuisce i migliori sistemi software geospaziali web based utilizzando un approccio open source.",
+                    "url": "http://www.geosdi.org",
+                    "telephone": "+39.0971.427305",
+                    "address": "C.da S. Loja Tito Scalo (PZ) - Basilicata 85050 Italy"
+                },
+                "loadExpandedFolders": true,
+                "name": "Complete name of admin",
+                "username": "admin",
+                "password": "d033e22ae348aeb5660fc2140aec35850c4da997",
+                "emailAddress": "admin@geosdi.org",
+                "sendEmail": true,
+                "naturalID": "admin"
+            },
+            "project": {
+                "id": 2243,
+                "name": "project_admin_k_40",
+                "numberOfElements": 40,
+                "creationDate": "2014-12-18T03:11:46.561+0100",
+                "version": 1,
+                "shared": false
+            },
+            "permissionMask": 16,
+            "defaultProject": false,
+            "baseLayer": "GOOGLE_SATELLITE"
+        }, {
+            "id": 2295,
+            "account": {
+                "type": "GPUser",
+                "id": 2850,
+                "enabled": true,
+                "creationDate": "2014-12-16T11:11:46.173+0100",
+                "accountTemporary": false,
+                "accountNonExpired": true,
+                "gsAccount": null,
+                "organization": {
+                    "id": 2750,
+                    "name": "geoSDI",
+                    "description": "geoSDI realizza e distribuisce i migliori sistemi software geospaziali web based utilizzando un approccio open source.",
+                    "url": "http://www.geosdi.org",
+                    "telephone": "+39.0971.427305",
+                    "address": "C.da S. Loja Tito Scalo (PZ) - Basilicata 85050 Italy"
+                },
+                "loadExpandedFolders": true,
+                "name": "Complete name of admin",
+                "username": "admin",
+                "password": "d033e22ae348aeb5660fc2140aec35850c4da997",
+                "emailAddress": "admin@geosdi.org",
+                "sendEmail": true,
+                "naturalID": "admin"
+            },
+            "project": {
+                "id": 2244,
+                "name": "project_admin_k_41",
+                "numberOfElements": 41,
+                "creationDate": "2014-12-18T04:11:46.563+0100",
+                "version": 1,
+                "shared": false
+            },
+            "permissionMask": 16,
+            "defaultProject": false,
+            "baseLayer": "GOOGLE_SATELLITE"
+        }]
+}

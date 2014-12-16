@@ -33,14 +33,13 @@
  */
 package org.geosdi.geoplatform.response;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.Lists;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPProject;
@@ -58,12 +57,11 @@ public class FolderDTO extends AbstractElementDTO {
     private Boolean expanded;
     private Integer numberOfDescendants;
     //
-    @XmlElementWrapper(name = "folderElements")
-    @XmlElement(name = "folderElement")
-    private List<IElementDTO> elementList = new ArrayList<>();
+    @JsonProperty(value = "folderElements")
+    private List<IElementDTO> folderElements = new ArrayList<>();
 
     /**
-     * Default constructor. NOTE: elementList is NULL.
+     * Default constructor. FOR JAXB
      */
     public FolderDTO() {
     }
@@ -112,31 +110,37 @@ public class FolderDTO extends AbstractElementDTO {
      * @return the elementList
      */
     public List<IElementDTO> getElementList() {
-        return elementList;
+        return folderElements;
     }
 
     /**
      * @param folders to add of elementList
      */
     public void addFolders(List<FolderDTO> folders) {
-        elementList.addAll(folders);
-        Collections.sort(elementList);
+        folderElements.addAll(folders);
+        Collections.sort(folderElements);
     }
 
     /**
      * @param layer to add of elementList
      */
     public void addLayer(ShortLayerDTO layer) {
-        elementList.add(layer);
-        Collections.sort(elementList);
+        folderElements.add(layer);
+        Collections.sort(folderElements);
     }
 
+    /**
+     * (non-Javadoc)
+     *
+     * @return
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString() {
         return "FolderDTO [" + super.toString()
-                + ", expanded=" + expanded
-                + ", numberOfDescendants=" + numberOfDescendants
-                + "folderElements = " + elementList + "]";
+                + ", expanded = " + expanded
+                + ", numberOfDescendants = " + numberOfDescendants
+                + ", folderElements = " + folderElements + "]";
     }
 
     public static List<FolderDTO> convertToFolderDTOList(List<GPFolder> folders) {

@@ -1,0 +1,138 @@
+{
+    "accounts": [{
+            "userDTO": {
+                "id": 6050,
+                "organization": "geoSDI_rs_test",
+                "enabled": true,
+                "temporary": false,
+                "expired": false,
+                "creationDate": "2014-11-05T19:16:21.049+0100",
+                "roles": null,
+                "trustedLevel": null,
+                "name": "Complete name of user_test_rs",
+                "username": "user_test_rs",
+                "emailAddress": "user_test_rs@geosdi-test.org",
+                "sendEmail": false
+            }
+        }, {
+            "userDTO": {
+                "id": 3800,
+                "organization": "geoSDI",
+                "enabled": true,
+                "temporary": false,
+                "expired": false,
+                "creationDate": "2014-10-31T09:45:32.038+0100",
+                "roles": null,
+                "trustedLevel": null,
+                "name": "Complete name of admin",
+                "username": "admin",
+                "emailAddress": "admin@geosdi.org",
+                "sendEmail": true
+            }
+        }, {
+            "userDTO": {
+                "id": 3801,
+                "organization": "geoSDI",
+                "enabled": true,
+                "temporary": false,
+                "expired": false,
+                "creationDate": "2014-10-31T09:45:32.110+0100",
+                "roles": null,
+                "trustedLevel": null,
+                "name": "Complete name of user",
+                "username": "user",
+                "emailAddress": "user@geosdi.org",
+                "sendEmail": true
+            }
+        }, {
+            "userDTO": {
+                "id": 3802,
+                "organization": "geoSDI",
+                "enabled": true,
+                "temporary": false,
+                "expired": false,
+                "creationDate": "2014-10-31T09:45:32.117+0100",
+                "roles": null,
+                "trustedLevel": null,
+                "name": "Complete name of viewer",
+                "username": "viewer",
+                "emailAddress": "viewer@geosdi.org",
+                "sendEmail": true
+            }
+        }, {
+            "userDTO": {
+                "id": 3803,
+                "organization": "geoSDI",
+                "enabled": true,
+                "temporary": false,
+                "expired": false,
+                "creationDate": "2014-10-31T09:45:32.122+0100",
+                "roles": null,
+                "trustedLevel": null,
+                "name": "Complete name of service",
+                "username": "service",
+                "emailAddress": "service@geosdi.org",
+                "sendEmail": true
+            }
+        }, {
+            "userDTO": {
+                "id": 3805,
+                "organization": "geoSDI",
+                "enabled": true,
+                "temporary": false,
+                "expired": false,
+                "creationDate": "2014-10-31T09:45:32.131+0100",
+                "roles": null,
+                "trustedLevel": null,
+                "name": "Complete name of super_user_test_acl",
+                "username": "super_user_test_acl",
+                "emailAddress": "super_user_test_acl@geosdi.org",
+                "sendEmail": true
+            }
+        }, {
+            "userDTO": {
+                "id": 3806,
+                "organization": "geoSDI",
+                "enabled": true,
+                "temporary": false,
+                "expired": false,
+                "creationDate": "2014-10-31T09:45:32.138+0100",
+                "roles": null,
+                "trustedLevel": null,
+                "name": "Complete name of admin_acl_test",
+                "username": "admin_acl_test",
+                "emailAddress": "admin_acl_test@geosdi.org",
+                "sendEmail": true
+            }
+        }, {
+            "userDTO": {
+                "id": 3807,
+                "organization": "geoSDI",
+                "enabled": true,
+                "temporary": false,
+                "expired": false,
+                "creationDate": "2014-10-31T09:45:32.142+0100",
+                "roles": null,
+                "trustedLevel": null,
+                "name": "Complete name of user_acl_test",
+                "username": "user_acl_test",
+                "emailAddress": "user_acl_test@geosdi.org",
+                "sendEmail": true
+            }
+        }, {
+            "userDTO": {
+                "id": 3804,
+                "organization": "geoSDI",
+                "enabled": true,
+                "temporary": false,
+                "expired": false,
+                "creationDate": "2014-10-31T09:45:32.127+0100",
+                "roles": null,
+                "trustedLevel": null,
+                "name": "Complete name of gsuser",
+                "username": "gsuser",
+                "emailAddress": "gsuser@geosdi.org",
+                "sendEmail": true
+            }
+        }]
+}

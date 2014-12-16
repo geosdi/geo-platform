@@ -13,5 +13,4 @@
     
     <import resource="applicationContext-jasypt.xml" />
     
-    <context:component-scan base-package="org.geosdi.geoplatform.support.cxf.rs.provider.configurator" />
 </beans>

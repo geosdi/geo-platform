@@ -90,7 +90,7 @@ public class GPJacksonSupport implements JacksonSupport {
         mapper.setAnnotationIntrospector(new AnnotationIntrospectorPair(
                 primary, secondary));
 
-        mapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm a z"));
+        mapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ"));
     }
 
     @Override
@@ -108,7 +108,7 @@ public class GPJacksonSupport implements JacksonSupport {
         return getClass().getSimpleName();
     }
 
-    static GPJacksonSupportEnum[] defaultProp() {
+    public static GPJacksonSupportEnum[] defaultProp() {
         return new GPJacksonSupportEnum[]{UNWRAP_ROOT_VALUE_ENABLE,
             FAIL_ON_IGNORED_PROPERTIES_DISABLE,
             FAIL_ON_NULL_FOR_PRIMITIVES_DISABLE,

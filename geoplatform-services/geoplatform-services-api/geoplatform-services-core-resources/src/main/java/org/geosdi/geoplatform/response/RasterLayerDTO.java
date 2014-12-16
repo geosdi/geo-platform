@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.response;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -63,6 +64,7 @@ public class RasterLayerDTO extends ShortLayerDTO {
     //
     @XmlElementWrapper(name = "styleList")
     @XmlElement(name = "style")
+    @JsonProperty(value = "styleList")
     private List<String> styleList;
     //
     @XmlElementWrapper(name = "subLayerList")

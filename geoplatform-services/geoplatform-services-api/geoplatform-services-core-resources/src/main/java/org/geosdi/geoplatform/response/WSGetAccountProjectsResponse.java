@@ -35,12 +35,12 @@
  */
 package org.geosdi.geoplatform.response;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import java.io.Serializable;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.geosdi.geoplatform.core.model.GPAccountProject;
 
@@ -49,14 +49,14 @@ import org.geosdi.geoplatform.core.model.GPAccountProject;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@XmlRootElement
+@JsonRootName(value = "WSGetAccountProjectsResponse")
+@XmlRootElement(name = "WSGetAccountProjectsResponse")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class WSGetAccountProjectsResponse implements Serializable {
 
     private static final long serialVersionUID = -3960259940516147516L;
     //
-    @XmlElementWrapper(name = "accountProjects")
-    @XmlElement(name = "accountProject")
+    @JsonProperty(value = "accountProjects")
     private List<GPAccountProject> accountProjects;
 
     public WSGetAccountProjectsResponse() {

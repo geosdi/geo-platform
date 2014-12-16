@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.response;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.Lists;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -65,6 +66,7 @@ public class ProjectDTO {
     //
     @XmlElementWrapper(name = "rootFolders")
     @XmlElement(name = "folder")
+    @JsonProperty(value = "rootFolders")
     private List<FolderDTO> rootFolders;
 
     /**

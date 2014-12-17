@@ -145,7 +145,7 @@ public class RSMessageTest extends BasicRestServiceTest {
 
         // Test first
         List<GPMessage> firstAllMessages = gpWSClient.getAllMessagesByRecipient(
-                firstRecipientID);
+                firstRecipientID).getMessages();
         Assert.assertNotNull(firstAllMessages);
         Assert.assertEquals(1, firstAllMessages.size());
         GPMessage firstMessage = firstAllMessages.get(0);
@@ -155,7 +155,7 @@ public class RSMessageTest extends BasicRestServiceTest {
 
         // Test latter
         List<GPMessage> latterAllMessages = gpWSClient.getAllMessagesByRecipient(
-                latterRecipientID);
+                latterRecipientID).getMessages();
         Assert.assertNotNull(latterAllMessages);
         Assert.assertEquals(1, latterAllMessages.size());
         GPMessage latterMessage = latterAllMessages.get(0);
@@ -196,7 +196,7 @@ public class RSMessageTest extends BasicRestServiceTest {
 
         // Test all messages
         List<GPMessage> allMessages = gpWSClient.getAllMessagesByRecipient(
-                firstRecipientID);
+                firstRecipientID).getMessages();
         Assert.assertNotNull(allMessages);
         Assert.assertEquals(3, allMessages.size());
         Assert.assertNotNull(allMessages.get(0));
@@ -212,7 +212,7 @@ public class RSMessageTest extends BasicRestServiceTest {
 
         // Test unread messages
         List<GPMessage> unreadMessages = gpWSClient.getUnreadMessagesByRecipient(
-                firstRecipientID);
+                firstRecipientID).getMessages();
         Assert.assertNotNull(unreadMessages);
         Assert.assertEquals(2, unreadMessages.size());
         Assert.assertNotNull(unreadMessages.get(0));
@@ -229,7 +229,7 @@ public class RSMessageTest extends BasicRestServiceTest {
 
         // Test unread messages intial
         List<GPMessage> unreadMessages = gpWSClient.getUnreadMessagesByRecipient(
-                firstRecipientID);
+                firstRecipientID).getMessages();
         Assert.assertNotNull(unreadMessages);
         Assert.assertEquals(2, unreadMessages.size());
 
@@ -240,7 +240,7 @@ public class RSMessageTest extends BasicRestServiceTest {
 
         // Test unread messages final
         unreadMessages = gpWSClient.getUnreadMessagesByRecipient(
-                firstRecipientID);
+                firstRecipientID).getMessages();
         Assert.assertEquals(0, unreadMessages.size());
     }
 
@@ -250,7 +250,7 @@ public class RSMessageTest extends BasicRestServiceTest {
 
         // Test unread messages intial
         List<GPMessage> unreadMessages = gpWSClient.getUnreadMessagesByRecipient(
-                firstRecipientID);
+                firstRecipientID).getMessages();
         Assert.assertNotNull(unreadMessages);
         Assert.assertEquals(2, unreadMessages.size());
 
@@ -263,7 +263,7 @@ public class RSMessageTest extends BasicRestServiceTest {
 
         // Test unread messages final
         unreadMessages = gpWSClient.getUnreadMessagesByRecipient(
-                firstRecipientID);
+                firstRecipientID).getMessages();
         Assert.assertNotNull(unreadMessages);
         Assert.assertEquals(1, unreadMessages.size());
     }

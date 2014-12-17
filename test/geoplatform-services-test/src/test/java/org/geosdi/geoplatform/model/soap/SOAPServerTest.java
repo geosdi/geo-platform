@@ -107,7 +107,7 @@ public class SOAPServerTest extends BaseSoapServiceTest {
     public void testGetAllServer() throws ResourceNotFoundFault {
         // Number of Servers
         Collection<ServerDTO> servers = gpWSClient.getAllServers(
-                organizationNameTest);
+                organizationNameTest).getServers();
         Assert.assertNotNull(servers);
         int totalServers = servers.size();
         Assert.assertTrue("Number of Servers stored into database",
@@ -120,7 +120,7 @@ public class SOAPServerTest extends BaseSoapServiceTest {
         // Assert of number of Servers
         Assert.assertEquals(
                 "Total numebr of Servers is wrong after inserted new Server",
-                gpWSClient.getAllServers(organizationNameTest).size(),
+                gpWSClient.getAllServers(organizationNameTest).getServers().size(),
                 totalServers + 1);
 
         // Delete new Server
@@ -129,7 +129,7 @@ public class SOAPServerTest extends BaseSoapServiceTest {
         // Assert of number of Servers
         Assert.assertEquals(
                 "Total numebr of Servers is wrong after deleted new Server",
-                gpWSClient.getAllServers(organizationNameTest).size(),
+                gpWSClient.getAllServers(organizationNameTest).getServers().size(),
                 totalServers);
     }
 

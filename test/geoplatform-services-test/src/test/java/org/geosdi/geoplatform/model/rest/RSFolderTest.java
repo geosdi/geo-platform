@@ -298,7 +298,7 @@ public class RSFolderTest extends BasicRestServiceTest {
                 7, totalElementsOfProject.intValue());  // SetUp() added 2+5 folders
 
         List<FolderDTO> childrenFolders = gpWSClient.getChildrenFolders(
-                idRootFolderB);
+                idRootFolderB).getChildren();
         Assert.assertEquals(
                 "Before adding new folder - Number of subfolders of root folder B ",
                 3, childrenFolders.size());

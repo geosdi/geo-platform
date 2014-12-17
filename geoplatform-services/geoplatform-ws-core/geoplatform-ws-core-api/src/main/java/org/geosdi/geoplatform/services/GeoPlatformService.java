@@ -103,15 +103,19 @@ import org.geosdi.geoplatform.response.ProjectDTO;
 import org.geosdi.geoplatform.response.RasterPropertiesDTO;
 import org.geosdi.geoplatform.response.SearchUsersResponseWS;
 import org.geosdi.geoplatform.response.ServerDTO;
+import org.geosdi.geoplatform.response.ServerDTOContainer;
 import org.geosdi.geoplatform.response.ShortAccountDTOContainer;
 import org.geosdi.geoplatform.response.ShortLayerDTO;
+import org.geosdi.geoplatform.response.ShortLayerDTOContainer;
 import org.geosdi.geoplatform.response.UserDTO;
 import org.geosdi.geoplatform.response.WSGetAccountProjectsResponse;
 import org.geosdi.geoplatform.response.authority.GetAuthoritiesResponseWS;
 import org.geosdi.geoplatform.response.authority.GetAuthorityResponse;
+import org.geosdi.geoplatform.response.collection.ChildrenFolderStore;
 import org.geosdi.geoplatform.response.collection.GuiComponentsPermissionMapData;
 import org.geosdi.geoplatform.response.collection.LongListStore;
 import org.geosdi.geoplatform.response.collection.TreeFolderElementsStore;
+import org.geosdi.geoplatform.response.message.GetMessageResponse;
 import org.geosdi.geoplatform.response.role.GPGetRoleResponse;
 import org.geosdi.geoplatform.response.role.WSGetRoleResponse;
 import org.geosdi.geoplatform.response.viewport.WSGetViewportResponse;
@@ -1322,7 +1326,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @Path(value = GPServiceRSPathConfig.GET_CHILDREN_FOLDERS_PATH)
     @WebResult(name = "folder")
     @Override
-    List<FolderDTO> getChildrenFolders(@WebParam(name = "folderID")
+    ChildrenFolderStore getChildrenFolders(@WebParam(name = "folderID")
             @PathParam(value = "folderID") Long folderID);
 
     /**
@@ -1695,7 +1699,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @Path(value = GPServiceRSPathConfig.GET_LAYERS_PATH)
     @WebResult(name = "layer")
     @Override
-    List<ShortLayerDTO> getLayers(@WebParam(name = "projectID")
+    ShortLayerDTOContainer getLayers(@WebParam(name = "projectID")
             @PathParam(value = "projectID") Long projectID);
 
     /**
@@ -1944,7 +1948,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @Path(value = GPServiceRSPathConfig.GET_ALL_SERVERS_PATH)
     @WebResult(name = "server")
     @Override
-    List<ServerDTO> getAllServers(
+    ServerDTOContainer getAllServers(
             @WebParam(name = "organizazionName")
             @PathParam(value = "organizazionName") String organizazionName)
             throws ResourceNotFoundFault;
@@ -2066,7 +2070,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @Path(value = GPServiceRSPathConfig.GET_ALL_MESSAGES_BY_RECIPIENT_PATH)
     @WebResult(name = "message")
     @Override
-    List<GPMessage> getAllMessagesByRecipient(
+    GetMessageResponse getAllMessagesByRecipient(
             @WebParam(name = "recipientID")
             @PathParam(value = "recipientID") Long recipientID)
             throws ResourceNotFoundFault;
@@ -2084,7 +2088,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @Path(value = GPServiceRSPathConfig.GET_UNREAD_MESSAGES_BY_RECIPIENT_PATH)
     @WebResult(name = "message")
     @Override
-    List<GPMessage> getUnreadMessagesByRecipient(
+    GetMessageResponse getUnreadMessagesByRecipient(
             @WebParam(name = "recipientID")
             @PathParam(value = "recipientID") Long recipientID)
             throws ResourceNotFoundFault;

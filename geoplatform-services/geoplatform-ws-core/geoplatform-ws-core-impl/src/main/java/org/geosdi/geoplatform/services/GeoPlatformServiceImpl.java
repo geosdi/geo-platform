@@ -83,15 +83,19 @@ import org.geosdi.geoplatform.response.ProjectDTO;
 import org.geosdi.geoplatform.response.RasterPropertiesDTO;
 import org.geosdi.geoplatform.response.SearchUsersResponseWS;
 import org.geosdi.geoplatform.response.ServerDTO;
+import org.geosdi.geoplatform.response.ServerDTOContainer;
 import org.geosdi.geoplatform.response.ShortAccountDTOContainer;
 import org.geosdi.geoplatform.response.ShortLayerDTO;
+import org.geosdi.geoplatform.response.ShortLayerDTOContainer;
 import org.geosdi.geoplatform.response.UserDTO;
 import org.geosdi.geoplatform.response.WSGetAccountProjectsResponse;
 import org.geosdi.geoplatform.response.authority.GetAuthoritiesResponseWS;
 import org.geosdi.geoplatform.response.authority.GetAuthorityResponse;
+import org.geosdi.geoplatform.response.collection.ChildrenFolderStore;
 import org.geosdi.geoplatform.response.collection.GuiComponentsPermissionMapData;
 import org.geosdi.geoplatform.response.collection.LongListStore;
 import org.geosdi.geoplatform.response.collection.TreeFolderElementsStore;
+import org.geosdi.geoplatform.response.message.GetMessageResponse;
 import org.geosdi.geoplatform.response.role.WSGetRoleResponse;
 import org.geosdi.geoplatform.response.viewport.WSGetViewportResponse;
 import org.geosdi.geoplatform.scheduler.delegate.api.SchedulerDelegate;
@@ -628,7 +632,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public List<FolderDTO> getChildrenFolders(Long folderID) {
+    public ChildrenFolderStore getChildrenFolders(Long folderID) {
         return gpFolderDelegate.getChildrenFolders(folderID);
     }
 
@@ -767,7 +771,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public List<ShortLayerDTO> getLayers(Long projectID) {
+    public ShortLayerDTOContainer getLayers(Long projectID) {
         return gpLayerDelegate.getLayers(projectID);
     }
 
@@ -880,7 +884,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public List<ServerDTO> getAllServers(String organizationName) throws
+    public ServerDTOContainer getAllServers(String organizationName) throws
             ResourceNotFoundFault {
         return gpServerDelegate.getAllServers(organizationName);
     }
@@ -926,14 +930,14 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public List<GPMessage> getAllMessagesByRecipient(Long recipientID) throws
+    public GetMessageResponse getAllMessagesByRecipient(Long recipientID) throws
             ResourceNotFoundFault {
         return gpMessageDelegate.getAllMessagesByRecipient(recipientID);
     }
 
     @Override
-    public List<GPMessage> getUnreadMessagesByRecipient(Long recipientID) throws
-            ResourceNotFoundFault {
+    public GetMessageResponse getUnreadMessagesByRecipient(Long recipientID)
+            throws ResourceNotFoundFault {
         return gpMessageDelegate.getUnreadMessagesByRecipient(recipientID);
     }
 

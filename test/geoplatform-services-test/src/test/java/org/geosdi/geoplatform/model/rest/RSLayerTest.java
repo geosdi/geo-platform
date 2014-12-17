@@ -209,7 +209,7 @@ public class RSLayerTest extends BasicRestServiceTest {
     public void testDeleteLayerRest() throws ResourceNotFoundFault {
         // Assert total number of folders stored into DB before delete            
         List<ShortLayerDTO> allLayersBeforeDelete = gpWSClient.getLayers(
-                idProjectTest);
+                idProjectTest).getLayers();
         int totalLayers = allLayersBeforeDelete.size();
         Assert.assertTrue("assertEquals totalLayers", totalLayers == 4); // SetUp() added 4 layers
 
@@ -262,7 +262,7 @@ public class RSLayerTest extends BasicRestServiceTest {
 
         // Assert total number of layers stored into DB after delete
         List<ShortLayerDTO> allLayersAfterDelete = gpWSClient.getLayers(
-                idProjectTest);
+                idProjectTest).getLayers();
         Assert.assertEquals("assertEquals allLayersAfterDelete.getList().size()",
                 allLayersAfterDelete.size(), totalLayers - 1);
 

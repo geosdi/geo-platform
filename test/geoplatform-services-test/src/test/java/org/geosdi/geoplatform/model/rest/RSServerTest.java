@@ -110,7 +110,7 @@ public class RSServerTest extends BasicRestServiceTest {
     public void testGetAllServerRest() throws ResourceNotFoundFault {
         // Number of Servers
         Collection<ServerDTO> servers = gpWSClient.getAllServers(
-                organizationNameRSTest);
+                organizationNameRSTest).getServers();
         Assert.assertNotNull(servers);
         int totalServers = servers.size();
         Assert.assertTrue("Number of Servers stored into database",
@@ -124,7 +124,7 @@ public class RSServerTest extends BasicRestServiceTest {
         // Assert of number of Servers
         Assert.assertEquals(
                 "Total numebr of Servers is wrong after inserted new Server",
-                gpWSClient.getAllServers(organizationNameRSTest).size(),
+                gpWSClient.getAllServers(organizationNameRSTest).getServers().size(),
                 totalServers + 1);
 
         // Delete new Server
@@ -133,7 +133,7 @@ public class RSServerTest extends BasicRestServiceTest {
         // Assert of number of Servers
         Assert.assertEquals(
                 "Total numebr of Servers is wrong after deleted new Server",
-                gpWSClient.getAllServers(organizationNameRSTest).size(),
+                gpWSClient.getAllServers(organizationNameRSTest).getServers().size(),
                 totalServers);
     }
 

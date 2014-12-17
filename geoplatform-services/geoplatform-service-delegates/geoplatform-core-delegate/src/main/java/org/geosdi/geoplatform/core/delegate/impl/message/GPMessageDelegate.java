@@ -46,6 +46,7 @@ import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.message.MarkMessageReadByDateRequest;
 import org.geosdi.geoplatform.response.MessageDTO;
+import org.geosdi.geoplatform.response.message.GetMessageResponse;
 import org.geosdi.geoplatform.services.development.EntityCorrectness;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -125,7 +126,7 @@ public class GPMessageDelegate implements MessageDelegate {
     }
 
     @Override
-    public List<GPMessage> getAllMessagesByRecipient(Long recipientID)
+    public GetMessageResponse getAllMessagesByRecipient(Long recipientID)
             throws ResourceNotFoundFault {
         GPAccount recipient = this.getAccountById(recipientID);
         EntityCorrectness.checkAccountLog(recipient); // TODO assert
@@ -134,11 +135,11 @@ public class GPMessageDelegate implements MessageDelegate {
                 recipientID);
         EntityCorrectness.checkMessageListLog(allMessages); // TODO assert
 
-        return allMessages;
+        return new GetMessageResponse(allMessages);
     }
 
     @Override
-    public List<GPMessage> getUnreadMessagesByRecipient(Long recipientID)
+    public GetMessageResponse getUnreadMessagesByRecipient(Long recipientID)
             throws ResourceNotFoundFault {
         GPAccount recipient = this.getAccountById(recipientID);
         EntityCorrectness.checkAccountLog(recipient); // TODO assert
@@ -147,7 +148,7 @@ public class GPMessageDelegate implements MessageDelegate {
                 recipientID);
         EntityCorrectness.checkMessageListLog(unreadMessages); // TODO assert
 
-        return unreadMessages;
+        return new GetMessageResponse(unreadMessages);
     }
 
     @Override

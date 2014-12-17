@@ -35,12 +35,12 @@
  */
 package org.geosdi.geoplatform.core.delegate.api.message;
 
-import java.util.List;
 import org.geosdi.geoplatform.core.model.GPMessage;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.message.MarkMessageReadByDateRequest;
 import org.geosdi.geoplatform.response.MessageDTO;
+import org.geosdi.geoplatform.response.message.GetMessageResponse;
 import org.geosdi.geoplatform.services.core.api.resources.GPMessageResource;
 
 /**
@@ -64,11 +64,11 @@ public interface MessageDelegate extends GPMessageResource {
     GPMessage getMessageDetail(Long messageID) throws ResourceNotFoundFault;
 
     @Override
-    List<GPMessage> getAllMessagesByRecipient(Long recipientID)
+    GetMessageResponse getAllMessagesByRecipient(Long recipientID)
             throws ResourceNotFoundFault;
 
     @Override
-    List<GPMessage> getUnreadMessagesByRecipient(Long recipientID)
+    GetMessageResponse getUnreadMessagesByRecipient(Long recipientID)
             throws ResourceNotFoundFault;
 
     @Override

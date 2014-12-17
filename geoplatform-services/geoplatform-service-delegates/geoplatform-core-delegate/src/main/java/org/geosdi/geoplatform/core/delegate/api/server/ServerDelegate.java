@@ -35,12 +35,12 @@
  */
 package org.geosdi.geoplatform.core.delegate.api.server;
 
-import java.util.List;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.server.WSSaveServerRequest;
 import org.geosdi.geoplatform.response.ServerDTO;
+import org.geosdi.geoplatform.response.ServerDTOContainer;
 import org.geosdi.geoplatform.services.core.api.resources.GPServerResource;
 
 /**
@@ -63,18 +63,18 @@ public interface ServerDelegate extends GPServerResource {
     @Override
     GeoPlatformServer getServerDetail(Long idServer) throws
             ResourceNotFoundFault;
-    
+
     @Override
     ServerDTO getShortServer(String serverUrl) throws ResourceNotFoundFault;
-    
+
     @Override
-    List<ServerDTO> getAllServers(String organizationName) throws
+    ServerDTOContainer getAllServers(String organizationName) throws
             ResourceNotFoundFault;
-    
+
     @Override
     GeoPlatformServer getServerDetailByUrl(String serverUrl)
             throws ResourceNotFoundFault;
-    
+
     @Override
     ServerDTO saveServer(WSSaveServerRequest saveServerReq)
             throws IllegalParameterFault;

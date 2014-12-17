@@ -47,6 +47,7 @@ import org.geosdi.geoplatform.request.folder.WSAddFolderAndTreeModificationsRequ
 import org.geosdi.geoplatform.request.folder.WSDDFolderAndTreeModifications;
 import org.geosdi.geoplatform.request.folder.WSDeleteFolderAndTreeModifications;
 import org.geosdi.geoplatform.response.FolderDTO;
+import org.geosdi.geoplatform.response.collection.ChildrenFolderStore;
 import org.geosdi.geoplatform.response.collection.TreeFolderElementsStore;
 import org.geosdi.geoplatform.services.core.api.resources.GPFolderResource;
 
@@ -106,7 +107,7 @@ public interface FolderDelegate extends GPFolderResource {
     List<FolderDTO> getChildrenFoldersByRequest(RequestByID request);
 
     @Override
-    List<FolderDTO> getChildrenFolders(Long folderID);
+    ChildrenFolderStore getChildrenFolders(Long folderID);
     
     @Override
     TreeFolderElementsStore getChildrenElements(Long folderID);

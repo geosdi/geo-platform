@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.core.delegate.api.layer;
 
-import java.util.List;
 import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPLayerInfo;
@@ -52,6 +51,7 @@ import org.geosdi.geoplatform.request.layer.WSDeleteLayerAndTreeModificationsReq
 import org.geosdi.geoplatform.response.GetDataSourceResponse;
 import org.geosdi.geoplatform.response.RasterPropertiesDTO;
 import org.geosdi.geoplatform.response.ShortLayerDTO;
+import org.geosdi.geoplatform.response.ShortLayerDTOContainer;
 import org.geosdi.geoplatform.response.collection.LongListStore;
 import org.geosdi.geoplatform.services.core.api.resources.GPLayerResource;
 
@@ -123,7 +123,7 @@ public interface LayerDelegate extends GPLayerResource {
             ResourceNotFoundFault;
     
     @Override
-    List<ShortLayerDTO> getLayers(Long projectID);
+    ShortLayerDTOContainer getLayers(Long projectID);
     
     @Override
     GPBBox getBBox(Long layerID) throws ResourceNotFoundFault;

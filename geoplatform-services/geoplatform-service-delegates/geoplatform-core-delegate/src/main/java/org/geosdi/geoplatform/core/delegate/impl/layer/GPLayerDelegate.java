@@ -60,6 +60,7 @@ import org.geosdi.geoplatform.request.layer.WSDeleteLayerAndTreeModificationsReq
 import org.geosdi.geoplatform.response.GetDataSourceResponse;
 import org.geosdi.geoplatform.response.RasterPropertiesDTO;
 import org.geosdi.geoplatform.response.ShortLayerDTO;
+import org.geosdi.geoplatform.response.ShortLayerDTOContainer;
 import org.geosdi.geoplatform.response.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.response.collection.LongListStore;
 import org.geosdi.geoplatform.services.development.EntityCorrectness;
@@ -449,7 +450,7 @@ public class GPLayerDelegate implements LayerDelegate {
     }
 
     @Override
-    public List<ShortLayerDTO> getLayers(Long projectID) {
+    public ShortLayerDTOContainer getLayers(Long projectID) {
         Search searchCriteria = new Search(GPLayer.class);
 
         searchCriteria.addSortAsc("title");
@@ -459,7 +460,8 @@ public class GPLayerDelegate implements LayerDelegate {
 
         EntityCorrectness.checkLayerCompleteListLog(foundLayer); // TODO assert
 
-        return ShortLayerDTO.convertToShortLayerDTOList(foundLayer);
+        return new ShortLayerDTOContainer(ShortLayerDTO
+                .convertToShortLayerDTOList(foundLayer));
     }
 
     @Override

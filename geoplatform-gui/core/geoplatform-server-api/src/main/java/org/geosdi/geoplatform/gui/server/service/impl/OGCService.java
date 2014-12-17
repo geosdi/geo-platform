@@ -83,7 +83,8 @@ public class OGCService implements IOGCService {
             throws GeoPlatformException {
         try {
             return dtoServerConverter.convertServer(
-                    geoPlatformServiceClient.getAllServers(organizationName));
+                    geoPlatformServiceClient.getAllServers(organizationName)
+                    .getServers());
         } catch (ResourceNotFoundFault ex) {
             logger.error("OGCService Error : " + ex);
             throw new GeoPlatformException(ex);

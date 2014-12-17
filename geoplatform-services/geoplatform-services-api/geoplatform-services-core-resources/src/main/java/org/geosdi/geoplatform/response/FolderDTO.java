@@ -57,8 +57,8 @@ public class FolderDTO extends AbstractElementDTO {
     private Boolean expanded;
     private Integer numberOfDescendants;
     //
-    @JsonProperty(value = "folderElements")
-    private List<IElementDTO> folderElements = new ArrayList<>();
+    @JsonProperty(value = "elementList")
+    private List<IElementDTO> elementList = new ArrayList<>();
 
     /**
      * Default constructor. FOR JAXB
@@ -110,23 +110,23 @@ public class FolderDTO extends AbstractElementDTO {
      * @return the elementList
      */
     public List<IElementDTO> getElementList() {
-        return folderElements;
+        return elementList;
     }
 
     /**
      * @param folders to add of elementList
      */
     public void addFolders(List<FolderDTO> folders) {
-        folderElements.addAll(folders);
-        Collections.sort(folderElements);
+        elementList.addAll(folders);
+        Collections.sort(elementList);
     }
 
     /**
      * @param layer to add of elementList
      */
     public void addLayer(ShortLayerDTO layer) {
-        folderElements.add(layer);
-        Collections.sort(folderElements);
+        elementList.add(layer);
+        Collections.sort(elementList);
     }
 
     /**
@@ -140,7 +140,7 @@ public class FolderDTO extends AbstractElementDTO {
         return "FolderDTO [" + super.toString()
                 + ", expanded = " + expanded
                 + ", numberOfDescendants = " + numberOfDescendants
-                + ", folderElements = " + folderElements + "]";
+                + ", folderElements = " + elementList + "]";
     }
 
     public static List<FolderDTO> convertToFolderDTOList(List<GPFolder> folders) {

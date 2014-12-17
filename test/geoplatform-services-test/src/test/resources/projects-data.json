@@ -15,7 +15,7 @@
             "checked": false,
             "expanded": false,
             "numberOfDescendants": 13,
-            "folderElements": [{
+            "elementList": [{
                     "type": "RasterLayerDTO",
                     "id": 4550,
                     "name": "N-raster-rs-rootFolderA",
@@ -55,7 +55,7 @@
                     "checked": false,
                     "expanded": false,
                     "numberOfDescendants": 8,
-                    "folderElements": [{
+                    "elementList": [{
                             "type": "FolderDTO",
                             "id": 11305,
                             "name": "folder2A_rs",
@@ -64,7 +64,7 @@
                             "checked": false,
                             "expanded": false,
                             "numberOfDescendants": 4,
-                            "folderElements": [{
+                            "elementList": [{
                                     "type": "FolderDTO",
                                     "id": 11308,
                                     "name": "folder3A_rs",
@@ -73,7 +73,7 @@
                                     "checked": false,
                                     "expanded": false,
                                     "numberOfDescendants": 1,
-                                    "folderElements": [{
+                                    "elementList": [{
                                             "type": "VectorLayerDTO",
                                             "id": 4553,
                                             "name": "N-vector-rs-folder3A_rs",
@@ -106,7 +106,7 @@
                                     "checked": false,
                                     "expanded": false,
                                     "numberOfDescendants": 0,
-                                    "folderElements": []
+                                    "elementList": []
                                 }, {
                                     "type": "FolderDTO",
                                     "id": 11310,
@@ -116,7 +116,7 @@
                                     "checked": false,
                                     "expanded": false,
                                     "numberOfDescendants": 0,
-                                    "folderElements": []
+                                    "elementList": []
                                 }]
                         }, {
                             "type": "FolderDTO",
@@ -127,7 +127,7 @@
                             "checked": false,
                             "expanded": false,
                             "numberOfDescendants": 0,
-                            "folderElements": []
+                            "elementList": []
                         }, {
                             "type": "FolderDTO",
                             "id": 11307,
@@ -137,7 +137,7 @@
                             "checked": false,
                             "expanded": false,
                             "numberOfDescendants": 1,
-                            "folderElements": [{
+                            "elementList": [{
                                     "type": "RasterLayerDTO",
                                     "id": 4552,
                                     "name": "N-raster-rs-folder2C_rs",
@@ -179,7 +179,7 @@
                     "checked": false,
                     "expanded": false,
                     "numberOfDescendants": 1,
-                    "folderElements": [{
+                    "elementList": [{
                             "type": "RasterLayerDTO",
                             "id": 4551,
                             "name": "N-raster-rs-folder1B_rs",
@@ -220,7 +220,7 @@
                     "checked": false,
                     "expanded": false,
                     "numberOfDescendants": 0,
-                    "folderElements": []
+                    "elementList": []
                 }]
         }, {
             "type": "FolderDTO",
@@ -231,7 +231,7 @@
             "checked": false,
             "expanded": false,
             "numberOfDescendants": 1,
-            "folderElements": [{
+            "elementList": [{
                     "type": "VectorLayerDTO",
                     "id": 4554,
                     "name": "N-vector-rs-rootFolderB",

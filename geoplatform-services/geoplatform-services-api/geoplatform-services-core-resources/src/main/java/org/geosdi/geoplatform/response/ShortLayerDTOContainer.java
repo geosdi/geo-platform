@@ -39,8 +39,8 @@ import java.io.Serializable;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlElementRefs;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -54,9 +54,8 @@ public class ShortLayerDTOContainer implements Serializable {
 
     private static final long serialVersionUID = 5712220534289414131L;
     //
-    @XmlElementRefs(value = {
-        @XmlElementRef(name = "rasterDTO", type = RasterLayerDTO.class),
-        @XmlElementRef(name = "vectorDTO", type = VectorLayerDTO.class)})
+    @XmlElementWrapper(name = "layers")
+    @XmlElement(name = "layer")
     private List<ShortLayerDTO> layers;
 
     public ShortLayerDTOContainer() {

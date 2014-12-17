@@ -1384,7 +1384,7 @@
  
         <activemq-version>5.8.0</activemq-version>
         
-        <jettison>1.3.6</jettison>
+        <jettison>1.3.7</jettison>
         
         <javax.ws.rs-api-version>2.0</javax.ws.rs-api-version>  
 

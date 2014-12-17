@@ -236,7 +236,7 @@ public class WSMessageTest extends BaseSoapServiceTest {
         // Test unread messages final
         unreadMessages = gpWSClient.getUnreadMessagesByRecipient(
                 firstRecipientID).getMessages();
-        Assert.assertNull(unreadMessages);
+        Assert.assertEquals(Boolean.TRUE, unreadMessages.isEmpty());
     }
 
     @Test

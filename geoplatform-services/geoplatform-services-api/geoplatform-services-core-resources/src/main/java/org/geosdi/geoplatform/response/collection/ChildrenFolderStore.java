@@ -33,39 +33,56 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.services.core.api.resources;
+package org.geosdi.geoplatform.response.collection;
 
-import org.geosdi.geoplatform.core.model.GeoPlatformServer;
-import org.geosdi.geoplatform.request.server.WSSaveServerRequest;
-import org.geosdi.geoplatform.response.ServerDTO;
-import org.geosdi.geoplatform.response.ServerDTOContainer;
+import java.io.Serializable;
+import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import org.geosdi.geoplatform.response.FolderDTO;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPServerResource {
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
+public class ChildrenFolderStore implements Serializable {
 
-    // <editor-fold defaultstate="collapsed" desc="Server">
-    // ==========================================================================
-    // === Server
-    // ==========================================================================
-    Long insertServer(GeoPlatformServer server);
+    private static final long serialVersionUID = -4080109892967727878L;
+    //
+    @XmlElementWrapper(name = "children")
+    @XmlElement(name = "child")
+    private List<FolderDTO> children;
 
-    Long updateServer(GeoPlatformServer server) throws Exception;
-    
-    Boolean deleteServer(Long serverID) throws Exception;
+    public ChildrenFolderStore() {
+    }
 
-    ServerDTOContainer getAllServers(String organizazionName)
-            throws Exception;
+    public ChildrenFolderStore(List<FolderDTO> theChildren) {
+        this.children = theChildren;
+    }
 
-    GeoPlatformServer getServerDetail(Long serverID) throws Exception;
+    /**
+     * @return the children
+     */
+    public List<FolderDTO> getChildren() {
+        return children;
+    }
 
-    ServerDTO getShortServer(String serverUrl) throws Exception;
+    /**
+     * @param children the children to set
+     */
+    public void setChildren(List<FolderDTO> children) {
+        this.children = children;
+    }
 
-    GeoPlatformServer getServerDetailByUrl(String serverUrl) throws Exception;
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + " {" + "children = " + children + '}';
+    }
 
-    ServerDTO saveServer(WSSaveServerRequest saveServerReq) throws Exception;
-    // </editor-fold>
 }

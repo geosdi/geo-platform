@@ -33,39 +33,56 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.services.core.api.resources;
+package org.geosdi.geoplatform.response;
 
-import org.geosdi.geoplatform.core.model.GeoPlatformServer;
-import org.geosdi.geoplatform.request.server.WSSaveServerRequest;
-import org.geosdi.geoplatform.response.ServerDTO;
-import org.geosdi.geoplatform.response.ServerDTOContainer;
+import java.io.Serializable;
+import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.XmlElementRefs;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPServerResource {
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
+public class ShortLayerDTOContainer implements Serializable {
 
-    // <editor-fold defaultstate="collapsed" desc="Server">
-    // ==========================================================================
-    // === Server
-    // ==========================================================================
-    Long insertServer(GeoPlatformServer server);
+    private static final long serialVersionUID = 5712220534289414131L;
+    //
+    @XmlElementRefs(value = {
+        @XmlElementRef(name = "rasterDTO", type = RasterLayerDTO.class),
+        @XmlElementRef(name = "vectorDTO", type = VectorLayerDTO.class)})
+    private List<ShortLayerDTO> layers;
 
-    Long updateServer(GeoPlatformServer server) throws Exception;
-    
-    Boolean deleteServer(Long serverID) throws Exception;
+    public ShortLayerDTOContainer() {
+    }
 
-    ServerDTOContainer getAllServers(String organizazionName)
-            throws Exception;
+    public ShortLayerDTOContainer(List<ShortLayerDTO> theLayers) {
+        this.layers = theLayers;
+    }
 
-    GeoPlatformServer getServerDetail(Long serverID) throws Exception;
+    /**
+     * @return the layers
+     */
+    public List<ShortLayerDTO> getLayers() {
+        return layers;
+    }
 
-    ServerDTO getShortServer(String serverUrl) throws Exception;
+    /**
+     * @param layers the layers to set
+     */
+    public void setLayers(List<ShortLayerDTO> layers) {
+        this.layers = layers;
+    }
 
-    GeoPlatformServer getServerDetailByUrl(String serverUrl) throws Exception;
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + " {" + "layers = " + layers + '}';
+    }
 
-    ServerDTO saveServer(WSSaveServerRequest saveServerReq) throws Exception;
-    // </editor-fold>
 }

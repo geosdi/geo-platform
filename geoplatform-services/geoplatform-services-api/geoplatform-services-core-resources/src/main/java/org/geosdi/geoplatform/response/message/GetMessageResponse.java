@@ -33,39 +33,55 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.services.core.api.resources;
+package org.geosdi.geoplatform.response.message;
 
-import org.geosdi.geoplatform.core.model.GeoPlatformServer;
-import org.geosdi.geoplatform.request.server.WSSaveServerRequest;
-import org.geosdi.geoplatform.response.ServerDTO;
-import org.geosdi.geoplatform.response.ServerDTOContainer;
+import java.io.Serializable;
+import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import org.geosdi.geoplatform.core.model.GPMessage;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPServerResource {
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
+public class GetMessageResponse implements Serializable {
 
-    // <editor-fold defaultstate="collapsed" desc="Server">
-    // ==========================================================================
-    // === Server
-    // ==========================================================================
-    Long insertServer(GeoPlatformServer server);
+    private static final long serialVersionUID = -4519072068977321273L;
+    //
+    @XmlElementWrapper(name = "messages")
+    @XmlElement(name = "message")
+    private List<GPMessage> messages;
 
-    Long updateServer(GeoPlatformServer server) throws Exception;
-    
-    Boolean deleteServer(Long serverID) throws Exception;
+    public GetMessageResponse() {
+    }
 
-    ServerDTOContainer getAllServers(String organizazionName)
-            throws Exception;
+    public GetMessageResponse(List<GPMessage> theMessages) {
+        this.messages = theMessages;
+    }
 
-    GeoPlatformServer getServerDetail(Long serverID) throws Exception;
+    /**
+     * @return the messages
+     */
+    public List<GPMessage> getMessages() {
+        return messages;
+    }
 
-    ServerDTO getShortServer(String serverUrl) throws Exception;
+    /**
+     * @param messages the messages to set
+     */
+    public void setMessages(List<GPMessage> messages) {
+        this.messages = messages;
+    }
 
-    GeoPlatformServer getServerDetailByUrl(String serverUrl) throws Exception;
-
-    ServerDTO saveServer(WSSaveServerRequest saveServerReq) throws Exception;
-    // </editor-fold>
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + " {" + "messages = " + messages + '}';
+    }
 }

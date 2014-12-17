@@ -35,13 +35,13 @@
  */
 package org.geosdi.geoplatform.services.core.api.resources;
 
-import java.util.List;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.request.folder.InsertFolderRequest;
 import org.geosdi.geoplatform.request.folder.WSAddFolderAndTreeModificationsRequest;
 import org.geosdi.geoplatform.request.folder.WSDDFolderAndTreeModifications;
 import org.geosdi.geoplatform.request.folder.WSDeleteFolderAndTreeModifications;
 import org.geosdi.geoplatform.response.FolderDTO;
+import org.geosdi.geoplatform.response.collection.ChildrenFolderStore;
 import org.geosdi.geoplatform.response.collection.TreeFolderElementsStore;
 
 /**
@@ -180,7 +180,7 @@ public interface GPFolderResource {
      * @param folderID the Folder ID
      * @return the list of children Folder
      */
-    List<FolderDTO> getChildrenFolders(Long folderID);
+    ChildrenFolderStore getChildrenFolders(Long folderID);
 
     /**
      * Retrieve the children elements (Folders and Layers) of a Folder.

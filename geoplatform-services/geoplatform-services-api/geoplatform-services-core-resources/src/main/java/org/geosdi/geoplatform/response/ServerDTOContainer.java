@@ -33,39 +33,55 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.services.core.api.resources;
+package org.geosdi.geoplatform.response;
 
-import org.geosdi.geoplatform.core.model.GeoPlatformServer;
-import org.geosdi.geoplatform.request.server.WSSaveServerRequest;
-import org.geosdi.geoplatform.response.ServerDTO;
-import org.geosdi.geoplatform.response.ServerDTOContainer;
+import java.io.Serializable;
+import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPServerResource {
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
+public class ServerDTOContainer implements Serializable {
 
-    // <editor-fold defaultstate="collapsed" desc="Server">
-    // ==========================================================================
-    // === Server
-    // ==========================================================================
-    Long insertServer(GeoPlatformServer server);
+    private static final long serialVersionUID = 7715101508392023872L;
+    //
+    @XmlElementWrapper(name = "servers")
+    @XmlElement(name = "serverDTO")
+    private List<ServerDTO> servers;
 
-    Long updateServer(GeoPlatformServer server) throws Exception;
-    
-    Boolean deleteServer(Long serverID) throws Exception;
+    public ServerDTOContainer() {
+    }
 
-    ServerDTOContainer getAllServers(String organizazionName)
-            throws Exception;
+    public ServerDTOContainer(List<ServerDTO> theServers) {
+        this.servers = theServers;
+    }
 
-    GeoPlatformServer getServerDetail(Long serverID) throws Exception;
+    /**
+     * @return the servers
+     */
+    public List<ServerDTO> getServers() {
+        return servers;
+    }
 
-    ServerDTO getShortServer(String serverUrl) throws Exception;
+    /**
+     * @param theServers the servers to set
+     */
+    public void setServers(List<ServerDTO> theServers) {
+        this.servers = theServers;
+    }
 
-    GeoPlatformServer getServerDetailByUrl(String serverUrl) throws Exception;
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + " {" + "servers = " + servers + '}';
+    }
 
-    ServerDTO saveServer(WSSaveServerRequest saveServerReq) throws Exception;
-    // </editor-fold>
 }

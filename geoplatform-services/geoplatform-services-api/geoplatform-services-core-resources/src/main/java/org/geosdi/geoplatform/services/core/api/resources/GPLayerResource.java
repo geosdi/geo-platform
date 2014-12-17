@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.services.core.api.resources;
 
-import java.util.List;
 import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPLayerInfo;
 import org.geosdi.geoplatform.core.model.GPRasterLayer;
@@ -49,6 +48,7 @@ import org.geosdi.geoplatform.request.layer.WSDeleteLayerAndTreeModificationsReq
 import org.geosdi.geoplatform.response.GetDataSourceResponse;
 import org.geosdi.geoplatform.response.RasterPropertiesDTO;
 import org.geosdi.geoplatform.response.ShortLayerDTO;
+import org.geosdi.geoplatform.response.ShortLayerDTOContainer;
 import org.geosdi.geoplatform.response.collection.LongListStore;
 
 /**
@@ -227,7 +227,7 @@ public interface GPLayerResource {
      * @param projectID the Project ID
      * @return the list of Layers
      */
-    List<ShortLayerDTO> getLayers(Long projectID);
+    ShortLayerDTOContainer getLayers(Long projectID);
 
     /**
      * Retrieve the Bounding Box of a Layer.

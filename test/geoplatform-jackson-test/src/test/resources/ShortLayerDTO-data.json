@@ -1,0 +1,26 @@
+{
+    "ShortLayerDTO": {
+        "type": "ShortLayerDTO",
+        "id": 8301,
+        "name": "name_vector_1_rs",
+        "position": 4,
+        "shared": false,
+        "checked": false,
+        "title": "vector_1_rs",
+        "alias": null,
+        "urlServer": "http://www.geosdi.org/test_rs",
+        "srs": "Geographic coordinate system",
+        "abstractText": "abstract_vector_1_rs",
+        "layerType": "POLYGON",
+        "bbox": {
+            "minX": 10.0,
+            "minY": 10.0,
+            "maxX": 20.0,
+            "maxY": 20.0
+        },
+        "cached": false,
+        "cqlFilter": null,
+        "timeFilter": null,
+        "singleTileRequest": false
+    }
+}

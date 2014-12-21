@@ -1,0 +1,36 @@
+{
+    "InsertAccountRequest": {
+        "account": {
+            "type": "GPUser",
+            "id": null,
+            "enabled": true,
+            "creationDate": "2014-12-19T12:35:03.660+0100",
+            "accountTemporary": false,
+            "accountNonExpired": true,
+            "gsAccount": null,
+            "organization": {
+                "id": 6850,
+                "name": "geoSDI_rs_test",
+                "description": null,
+                "url": null,
+                "telephone": null,
+                "address": null
+            },
+            "loadExpandedFolders": true,
+            "name": "Complete name of user_test_rs",
+            "username": "user_test_rs",
+            "password": "user_test_rs",
+            "emailAddress": "user_test_rs@geosdi-test.org",
+            "sendEmail": false,
+            "naturalID": "user_test_rs",
+            "authority": [{
+                    "id": null,
+                    "authority": "User",
+                    "trustedLevel": "RESTRICT",
+                    "accountNaturalID": null,
+                    "account": null
+                }]
+        },
+        "sendEmail": false
+    }
+}

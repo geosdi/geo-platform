@@ -1,0 +1,40 @@
+{
+    "InsertFolderRequest": {
+        "projectID": 5900,
+        "folder": {
+            "id": null,
+            "name": "folder5",
+            "parent": {
+                "id": 15351,
+                "name": "rootFolderB",
+                "parent": null,
+                "project": {
+                    "id": 5900,
+                    "name": "project_test_rs",
+                    "numberOfElements": 2,
+                    "creationDate": "2014-12-19T17:36:41.914+0100",
+                    "version": 1,
+                    "shared": false
+                },
+                "numberOfDescendants": 0,
+                "position": 1,
+                "checked": false,
+                "shared": false,
+                "expanded": false
+            },
+            "project": {
+                "id": 5900,
+                "name": "project_test_rs",
+                "numberOfElements": 2,
+                "creationDate": "2014-12-19T17:36:41.914+0100",
+                "version": 1,
+                "shared": false
+            },
+            "numberOfDescendants": 0,
+            "position": 1,
+            "checked": false,
+            "shared": false,
+            "expanded": false
+        }
+    }
+}

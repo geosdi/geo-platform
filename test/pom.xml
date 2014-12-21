@@ -43,6 +43,7 @@
         <module>geoplatform-services-test</module>
         <module>geoplatform-ui-test</module>
         <module>geoplatform-test-utils</module>
+        <module>geoplatform-jackson-test</module>
     </modules>
 
 </project>

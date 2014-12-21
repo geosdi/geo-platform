@@ -1,0 +1,47 @@
+{
+    "GPAccountProject": {
+        "id": null,
+        "account": {
+            "type": "GPUser",
+            "id": 8550,
+            "enabled": true,
+            "creationDate": "2014-12-19T12:35:03.660+0100",
+            "accountTemporary": false,
+            "accountNonExpired": true,
+            "gsAccount": null,
+            "organization": {
+                "id": 6850,
+                "name": "geoSDI_rs_test",
+                "description": null,
+                "url": null,
+                "telephone": null,
+                "address": null
+            },
+            "loadExpandedFolders": true,
+            "name": "Complete name of user_test_rs",
+            "username": "user_test_rs",
+            "password": "555f5541828cc38dcc7b8eb60333a8a903666b7f",
+            "emailAddress": "user_test_rs@geosdi-test.org",
+            "sendEmail": false,
+            "naturalID": "user_test_rs",
+            "authority": [{
+                    "id": 8600,
+                    "authority": "User",
+                    "trustedLevel": "RESTRICT",
+                    "accountNaturalID": "user_test_rs",
+                    "account": null
+                }]
+        },
+        "project": {
+            "id": 5700,
+            "name": "project_test_rs",
+            "numberOfElements": 2,
+            "creationDate": "2014-12-19T12:35:04.107+0100",
+            "version": 1,
+            "shared": false
+        },
+        "permissionMask": 16,
+        "defaultProject": false,
+        "baseLayer": "GOOGLE_SATELLITE"
+    }
+}

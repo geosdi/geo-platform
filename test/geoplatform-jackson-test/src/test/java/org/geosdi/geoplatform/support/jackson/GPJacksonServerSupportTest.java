@@ -33,30 +33,57 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.support.cxf.rs.provider.jackson;
+package org.geosdi.geoplatform.support.jackson;
 
-import com.fasterxml.jackson.databind.Module;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
-import javax.ws.rs.ext.Provider;
-import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
+import org.geosdi.geoplatform.core.model.GeoPlatformServer;
+import org.geosdi.geoplatform.response.ServerDTO;
+import org.geosdi.geoplatform.response.ServerDTOContainer;
+import static org.geosdi.geoplatform.support.jackson.GPBaseJacksonSupportTest.jacksonSupport;
+import org.junit.Test;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Provider
-abstract class CXFBaseJacksonProvider extends JacksonJaxbJsonProvider {
-
-    protected CXFBaseJacksonProvider() {
-        super(new GPJacksonSupport().getDefaultMapper(), BASIC_ANNOTATIONS);
+public class GPJacksonServerSupportTest extends GPBaseJacksonSupportTest {
+    
+    @Test
+    public void serverDataMappingTest() throws Exception {
+        GeoPlatformServer server = jacksonSupport.getDefaultMapper().readValue(
+                Thread.currentThread().getContextClassLoader().getResourceAsStream(
+                        SERVER_DATA_JSON),
+                GeoPlatformServer.class);
+        
+        logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@SERVER_DATA_MAPPING"
+                + " : {}\n\n", server);
+        
+        super.marshall(server);
     }
-
-    abstract void registerModule(Module module);
-
-    abstract ObjectMapper getDefaultMapper();
-
-    abstract ObjectMapper getConfiguredMapper();
-
+    
+    @Test
+    public void serverDTODataMappingTest() throws Exception {
+        ServerDTO serverDTO = jacksonSupport.getDefaultMapper().readValue(
+                Thread.currentThread().getContextClassLoader().getResourceAsStream(
+                        SERVER_DTO_DATA_JSON),
+                ServerDTO.class);
+        
+        logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@SERVER_DTO_DATA_MAPPING"
+                + " : {}\n\n", serverDTO);
+        
+        super.marshall(serverDTO);
+    }
+    
+    @Test
+    public void serverDTOContainerDataMappingTest() throws Exception {
+        ServerDTOContainer serverDTOContainer = jacksonSupport.getDefaultMapper().readValue(
+                Thread.currentThread().getContextClassLoader().getResourceAsStream(
+                        SERVER_DTO_CONTAINER_DATA_JSON),
+                ServerDTOContainer.class);
+        
+        logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@SERVER_DTO_CONTAINER_DATA_MAPPING"
+                + " : {}\n\n", serverDTOContainer);
+        
+        super.marshall(serverDTOContainer);
+    }
 }

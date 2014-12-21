@@ -1,0 +1,61 @@
+{
+    "GetMessageResponse": {
+        "message": [{
+                "id": 1501,
+                "recipient": {
+                    "type": "GPUser",
+                    "id": 9752,
+                    "enabled": true,
+                    "creationDate": "2014-12-20T18:21:22.856+0100",
+                    "accountTemporary": false,
+                    "accountNonExpired": true,
+                    "gsAccount": null,
+                    "organization": {
+                        "id": 7950,
+                        "name": "geoSDI_rs_test",
+                        "description": null,
+                        "url": null,
+                        "telephone": null,
+                        "address": null
+                    },
+                    "loadExpandedFolders": true,
+                    "name": "Complete name of latter_recipient_RS",
+                    "username": "latter_recipient_RS",
+                    "password": "669cfbd24ca988db92e7d6d4725de39738212eea",
+                    "emailAddress": "latter_recipient_RS@geosdi-test.org",
+                    "sendEmail": false,
+                    "naturalID": "latter_recipient_RS"
+                },
+                "sender": {
+                    "type": "GPUser",
+                    "id": 9750,
+                    "enabled": true,
+                    "creationDate": "2014-12-20T18:21:22.587+0100",
+                    "accountTemporary": false,
+                    "accountNonExpired": true,
+                    "gsAccount": null,
+                    "organization": {
+                        "id": 7950,
+                        "name": "geoSDI_rs_test",
+                        "description": null,
+                        "url": null,
+                        "telephone": null,
+                        "address": null
+                    },
+                    "loadExpandedFolders": true,
+                    "name": "Complete name of user_test_rs",
+                    "username": "user_test_rs",
+                    "password": "555f5541828cc38dcc7b8eb60333a8a903666b7f",
+                    "emailAddress": "user_test_rs@geosdi-test.org",
+                    "sendEmail": false,
+                    "naturalID": "user_test_rs"
+                },
+                "creationDate": "2014-12-20T18:21:22.871+0100",
+                "subject": "Foo subject REST",
+                "text": "Foo message REST.",
+                "isRead": false,
+                "commands": "NONE",
+                "commandsProperties": null
+            }]
+    }
+}

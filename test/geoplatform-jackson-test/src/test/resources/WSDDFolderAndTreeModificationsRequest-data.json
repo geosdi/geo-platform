@@ -1,0 +1,13 @@
+{
+    "WSDDFolderAndTreeModifications": {
+        "folderMovedID": 15505,
+        "newParentID": 15501,
+        "newPosition": 2,
+        "descendantsMapData": {
+            "descendantsMap": {
+                "15500": 2,
+                "15501": 3
+            }
+        }
+    }
+}

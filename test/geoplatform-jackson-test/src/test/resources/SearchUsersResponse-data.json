@@ -1,0 +1,89 @@
+{
+    "SearchUsersResponseWS": {
+        "user": [{
+                "type": "UserDTO",
+                "id": 8657,
+                "organization": "geoSDI_rs_test",
+                "enabled": true,
+                "temporary": false,
+                "expired": false,
+                "creationDate": "2014-12-19T16:48:12.725+0100",
+                "roles": ["Viewer"],
+                "trustedLevel": "NONE",
+                "name": "Complete name of user5--rs",
+                "username": "user5--rs",
+                "emailAddress": "user5--rs@geosdi-test.org",
+                "sendEmail": false
+            }, {
+                "type": "UserDTO",
+                "id": 8658,
+                "organization": "geoSDI_rs_test",
+                "enabled": true,
+                "temporary": false,
+                "expired": false,
+                "creationDate": "2014-12-19T16:48:12.738+0100",
+                "roles": ["Viewer"],
+                "trustedLevel": "NONE",
+                "name": "Complete name of user6--rs",
+                "username": "user6--rs",
+                "emailAddress": "user6--rs@geosdi-test.org",
+                "sendEmail": false
+            }, {
+                "type": "UserDTO",
+                "id": 8659,
+                "organization": "geoSDI_rs_test",
+                "enabled": true,
+                "temporary": false,
+                "expired": false,
+                "creationDate": "2014-12-19T16:48:12.752+0100",
+                "roles": ["Viewer"],
+                "trustedLevel": "NONE",
+                "name": "Complete name of user7--rs",
+                "username": "user7--rs",
+                "emailAddress": "user7--rs@geosdi-test.org",
+                "sendEmail": false
+            }, {
+                "type": "UserDTO",
+                "id": 8660,
+                "organization": "geoSDI_rs_test",
+                "enabled": true,
+                "temporary": false,
+                "expired": false,
+                "creationDate": "2014-12-19T16:48:12.768+0100",
+                "roles": ["Viewer"],
+                "trustedLevel": "NONE",
+                "name": "Complete name of user8--rs",
+                "username": "user8--rs",
+                "emailAddress": "user8--rs@geosdi-test.org",
+                "sendEmail": false
+            }, {
+                "type": "UserDTO",
+                "id": 8661,
+                "organization": "geoSDI_rs_test",
+                "enabled": true,
+                "temporary": false,
+                "expired": false,
+                "creationDate": "2014-12-19T16:48:12.781+0100",
+                "roles": ["Viewer"],
+                "trustedLevel": "NONE",
+                "name": "Complete name of user9--rs",
+                "username": "user9--rs",
+                "emailAddress": "user9--rs@geosdi-test.org",
+                "sendEmail": false
+            }, {
+                "type": "UserDTO",
+                "id": 8650,
+                "organization": "geoSDI_rs_test",
+                "enabled": true,
+                "temporary": false,
+                "expired": false,
+                "creationDate": "2014-12-19T16:48:12.284+0100",
+                "roles": ["User"],
+                "trustedLevel": "RESTRICT",
+                "name": "Complete name of user_test_rs",
+                "username": "user_test_rs",
+                "emailAddress": "user_test_rs@geosdi-test.org",
+                "sendEmail": false
+            }]
+    }
+}

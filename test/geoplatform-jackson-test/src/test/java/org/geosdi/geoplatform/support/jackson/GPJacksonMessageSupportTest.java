@@ -33,30 +33,55 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.support.cxf.rs.provider.jackson;
+package org.geosdi.geoplatform.support.jackson;
 
-import com.fasterxml.jackson.databind.Module;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
-import javax.ws.rs.ext.Provider;
-import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
+import org.geosdi.geoplatform.core.model.GPMessage;
+import org.geosdi.geoplatform.response.MessageDTO;
+import org.geosdi.geoplatform.response.message.GetMessageResponse;
+import static org.geosdi.geoplatform.support.jackson.GPBaseJacksonSupportTest.jacksonSupport;
+import org.junit.Test;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Provider
-abstract class CXFBaseJacksonProvider extends JacksonJaxbJsonProvider {
+public class GPJacksonMessageSupportTest extends GPBaseJacksonSupportTest {
 
-    protected CXFBaseJacksonProvider() {
-        super(new GPJacksonSupport().getDefaultMapper(), BASIC_ANNOTATIONS);
+    @Test
+    public void messageDataMapperTest() throws Exception {
+        GPMessage message = jacksonSupport.getDefaultMapper().readValue(
+                Thread.currentThread().getContextClassLoader().getResourceAsStream(
+                        MESSAGE_DATA_JSON), GPMessage.class);
+
+        logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@MESSAGE_DATA_MAPPING"
+                + " : {}\n\n", message);
+        
+        super.marshall(message);
     }
 
-    abstract void registerModule(Module module);
+    @Test
+    public void messageDTODataMapperTest() throws Exception {
+        MessageDTO messageDTO = jacksonSupport.getDefaultMapper().readValue(
+                Thread.currentThread().getContextClassLoader().getResourceAsStream(
+                        MESSAGE_DTO_DATA_JSON), MessageDTO.class);
 
-    abstract ObjectMapper getDefaultMapper();
+        logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@MESSAGE_DTO_DATA_MAPPING"
+                + " : {}\n\n", messageDTO);
+        
+        super.marshall(messageDTO);
+    }
 
-    abstract ObjectMapper getConfiguredMapper();
+    @Test
+    public void getMessageResponseDataMapperTest() throws Exception {
+        GetMessageResponse getMessageReponse = jacksonSupport.getDefaultMapper().readValue(
+                Thread.currentThread().getContextClassLoader().getResourceAsStream(
+                        GET_MESSAGE_RESPONSE_DATA_JSON),
+                GetMessageResponse.class);
 
+        logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@GET_MESSAGE_RESPONSE_DATA_MAPPING"
+                + " : {}\n\n", getMessageReponse);
+        
+        super.marshall(getMessageReponse);
+    }
 }

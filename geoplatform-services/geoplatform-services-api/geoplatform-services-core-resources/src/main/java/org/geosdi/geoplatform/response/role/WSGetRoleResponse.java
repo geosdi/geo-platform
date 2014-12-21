@@ -35,12 +35,11 @@
  */
 package org.geosdi.geoplatform.response.role;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -57,8 +56,9 @@ public class WSGetRoleResponse implements GPGetRoleResponse {
 
     private static final long serialVersionUID = 1247947284126469114L;
     //
-    @XmlElementWrapper(name = "roles")
-    @XmlElement(name = "role", type = String.class)
+//    @XmlElementWrapper(name = "roles")
+//    @XmlElement(name = "role", type = String.class)
+    @JsonProperty(value = "roles")
     private List<String> roles;
 
     /**

@@ -1,0 +1,13 @@
+{
+    "WSDDLayerAndTreeModificationsRequest": {
+        "descendantsMapData": {
+            "descendantsMap": {
+                "16450": 2,
+                "16451": 2
+            }
+        },
+        "layerMovedID": 8453,
+        "newParentID": 16451,
+        "newPosition": 1
+    }
+}

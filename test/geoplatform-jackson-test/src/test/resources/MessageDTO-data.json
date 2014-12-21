@@ -1,0 +1,13 @@
+{
+    "MessageDTO": {
+        "id": null,
+        "senderID": 9750,
+        "recipientID": [9751, 9752],
+        "creationDate": "2014-12-20T18:21:22.871+0100",
+        "subject": "Foo subject REST",
+        "text": "Foo message REST.",
+        "read": false,
+        "command": ["NONE"],
+        "commandsProperties": null
+    }
+}

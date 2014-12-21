@@ -54,4 +54,9 @@ public class CXFJacksonProvider extends CXFBaseJacksonProvider {
     public final ObjectMapper getDefaultMapper() {
         return _mapperConfig.getDefaultMapper();
     }
+
+    @Override
+    public ObjectMapper getConfiguredMapper() {
+        return _mapperConfig.getConfiguredMapper();
+    }
 }

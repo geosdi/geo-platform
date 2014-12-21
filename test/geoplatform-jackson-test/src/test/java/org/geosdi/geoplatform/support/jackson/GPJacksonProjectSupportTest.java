@@ -33,30 +33,56 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.support.cxf.rs.provider.jackson;
+package org.geosdi.geoplatform.support.jackson;
 
-import com.fasterxml.jackson.databind.Module;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
-import javax.ws.rs.ext.Provider;
-import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
+import org.geosdi.geoplatform.core.model.GPProject;
+import org.geosdi.geoplatform.response.ProjectDTO;
+import org.geosdi.geoplatform.response.WSGetAccountProjectsResponse;
+import static org.geosdi.geoplatform.support.jackson.GPBaseJacksonSupportTest.jacksonSupport;
+import org.junit.Test;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Provider
-abstract class CXFBaseJacksonProvider extends JacksonJaxbJsonProvider {
+public class GPJacksonProjectSupportTest extends GPBaseJacksonSupportTest {
 
-    protected CXFBaseJacksonProvider() {
-        super(new GPJacksonSupport().getDefaultMapper(), BASIC_ANNOTATIONS);
+    @Test
+    public void projectsDataMapperTest() throws Exception {
+        ProjectDTO projectDTO = jacksonSupport.getDefaultMapper().readValue(
+                Thread.currentThread().getContextClassLoader().getResourceAsStream(
+                        PROJECTS_DATA_JSON), ProjectDTO.class);
+
+        logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@PROJECTS_DATA_MAPPING"
+                + " : {}\n\n", projectDTO);
+        
+        super.marshall(projectDTO);
     }
 
-    abstract void registerModule(Module module);
+    @Test
+    public void getAllProjectsDataMapperTest() throws Exception {
+        WSGetAccountProjectsResponse response = jacksonSupport.getDefaultMapper().readValue(
+                Thread.currentThread().getContextClassLoader().getResourceAsStream(
+                        GET_ALL_PROJECTS_DATA_JSON),
+                WSGetAccountProjectsResponse.class);
 
-    abstract ObjectMapper getDefaultMapper();
+        logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+                + "GET_ALL_PROJECTS_DATA_MAPPING : {}\n\n", response);
+        
+        super.marshall(response);
+    }
 
-    abstract ObjectMapper getConfiguredMapper();
+    @Test
+    public void projectDataMapperTest() throws Exception {
+        GPProject project = jacksonSupport.getDefaultMapper().readValue(
+                Thread.currentThread().getContextClassLoader().getResourceAsStream(
+                        PROJECT_DATA_JSON), GPProject.class);
+
+        logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@PROJECT_DATA_MAPPING"
+                + " : {}\n\n", project);
+        
+        super.marshall(project);
+    }
 
 }

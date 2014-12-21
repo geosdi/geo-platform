@@ -1,0 +1,35 @@
+{
+    "ChildrenFolderStore": {
+        "child": [{
+                "type": "FolderDTO",
+                "id": 15454,
+                "name": "folder3",
+                "position": 3,
+                "shared": false,
+                "checked": false,
+                "expanded": false,
+                "numberOfDescendants": 0,
+                "elementList": []
+            }, {
+                "type": "FolderDTO",
+                "id": 15455,
+                "name": "folder4",
+                "position": 2,
+                "shared": false,
+                "checked": false,
+                "expanded": false,
+                "numberOfDescendants": 0,
+                "elementList": []
+            }, {
+                "type": "FolderDTO",
+                "id": 15456,
+                "name": "folder5",
+                "position": 1,
+                "shared": false,
+                "checked": false,
+                "expanded": false,
+                "numberOfDescendants": 0,
+                "elementList": []
+            }]
+    }
+}

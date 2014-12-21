@@ -1,0 +1,19 @@
+{
+    "Server": {
+        "id": null,
+        "serverUrl": "http://imaa.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities",
+        "name": "imaa.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities",
+        "aliasName": null,
+        "title": "geosdi/geoserver/wms?service=wms&version=1&request=GetCapabilities",
+        "abstractServer": "Abstract of geosdi/geoserver/wms?service=wms&version=1&request=GetCapabilities",
+        "serverType": "WMS",
+        "organization": {
+            "id": 8200,
+            "name": "geoSDI_rs_test",
+            "description": null,
+            "url": null,
+            "telephone": null,
+            "address": null
+        }
+    }
+}

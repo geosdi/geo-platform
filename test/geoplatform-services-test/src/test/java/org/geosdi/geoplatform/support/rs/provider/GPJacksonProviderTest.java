@@ -70,7 +70,7 @@ public class GPJacksonProviderTest {
 
     @Test
     public void accountsDataMapperTest() throws Exception {
-        ShortAccountDTOContainer accountContainer = jacksonProvider.getDefaultMapper().readValue(
+        ShortAccountDTOContainer accountContainer = jacksonProvider.getConfiguredMapper().readValue(
                 Thread.currentThread().getContextClassLoader().getResourceAsStream(
                         ACCOUNTS_DATA_JSON), ShortAccountDTOContainer.class);
 
@@ -80,7 +80,7 @@ public class GPJacksonProviderTest {
 
     @Test
     public void projectsDataMapperTest() throws Exception {
-        ProjectDTO projectDTO = jacksonProvider.getDefaultMapper().readValue(
+        ProjectDTO projectDTO = jacksonProvider.getConfiguredMapper().readValue(
                 Thread.currentThread().getContextClassLoader().getResourceAsStream(
                         PROJECTS_DATA_JSON), ProjectDTO.class);
 
@@ -90,7 +90,7 @@ public class GPJacksonProviderTest {
 
     @Test
     public void getAllProjectsDataMapperTest() throws Exception {
-        WSGetAccountProjectsResponse response = jacksonProvider.getDefaultMapper().readValue(
+        WSGetAccountProjectsResponse response = jacksonProvider.getConfiguredMapper().readValue(
                 Thread.currentThread().getContextClassLoader().getResourceAsStream(
                         GET_ALL_PROJECTS_DATA_JSON),
                 WSGetAccountProjectsResponse.class);

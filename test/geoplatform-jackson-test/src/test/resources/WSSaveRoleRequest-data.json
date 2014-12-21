@@ -1,0 +1,6 @@
+{
+    "WSSaveRoleRequest": {
+        "role": "Viewer",
+        "organization": "geoSDI_rs_test"
+    }
+}

@@ -1,0 +1,10 @@
+{
+    "WSDeleteLayerAndTreeModificationsRequest": {
+        "descendantsMapData": {
+            "descendantsMap": {
+                "16401": 2
+            }
+        },
+        "layerID": 8404
+    }
+}

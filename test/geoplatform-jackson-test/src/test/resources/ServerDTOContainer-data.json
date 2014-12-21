@@ -1,0 +1,33 @@
+{
+    "ServerDTOContainer": {
+        "serverDTO": [{
+                "id": 2150,
+                "serverUrl": "http://map.serverNameTest.foo",
+                "name": "map.serverNameTest.foo",
+                "alias": null,
+                "layerList": null,
+                "organization": null
+            }, {
+                "id": 1200,
+                "serverUrl": "http://150.145.141.50/geoserver/wms",
+                "name": "imaa.geosdi.org",
+                "alias": "geoSdi on IMAA",
+                "layerList": null,
+                "organization": null
+            }, {
+                "id": 1201,
+                "serverUrl": "http://dpc.geosdi.org/geoserver/wms",
+                "name": "dpc.geosdi.org",
+                "alias": "DPC on geosdi",
+                "layerList": null,
+                "organization": null
+            }, {
+                "id": 2151,
+                "serverUrl": "http://imaa.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities",
+                "name": "imaa.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities",
+                "alias": null,
+                "layerList": null,
+                "organization": null
+            }]
+    }
+}

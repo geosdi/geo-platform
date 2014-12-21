@@ -1,0 +1,11 @@
+{
+    "GetAuthoritiesResponseWS": {
+        "authority": [{
+                "id": 8650,
+                "authority": "User",
+                "trustedLevel": "RESTRICT",
+                "accountNaturalID": "user_test_rs",
+                "account": null
+            }]
+    }
+}

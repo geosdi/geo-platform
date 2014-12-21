@@ -1,0 +1,10 @@
+{
+    "ServerDTO": {
+        "id": 2100,
+        "serverUrl": "http://map.serverNameTest.foo",
+        "name": "map.serverNameTest.foo",
+        "alias": null,
+        "layerList": null,
+        "organization": null
+    }
+}

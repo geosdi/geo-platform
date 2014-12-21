@@ -1,0 +1,5 @@
+{
+    "WSGetRoleResponse": {
+        "roles": ["Admin", "User", "Viewer"]
+    }
+}

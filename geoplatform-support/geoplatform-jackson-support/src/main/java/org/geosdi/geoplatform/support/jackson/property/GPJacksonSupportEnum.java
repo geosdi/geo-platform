@@ -99,6 +99,32 @@ public enum GPJacksonSupportEnum implements JacksonSupportConfigFeature {
                 }
 
             },
+    FAIL_ON_UNKNOW_PROPERTIES_ENABLE() {
+
+                @Override
+                public Boolean getValue() {
+                    return Boolean.TRUE;
+                }
+
+                @Override
+                public DeserializationFeature getFeature() {
+                    return DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES;
+                }
+
+            },
+    FAIL_ON_UNKNOW_PROPERTIES_DISABLE() {
+
+                @Override
+                public Boolean getValue() {
+                    return Boolean.FALSE;
+                }
+
+                @Override
+                public DeserializationFeature getFeature() {
+                    return DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES;
+                }
+
+            },
     FAIL_ON_NULL_FOR_PRIMITIVES_ENABLE() {
 
                 @Override

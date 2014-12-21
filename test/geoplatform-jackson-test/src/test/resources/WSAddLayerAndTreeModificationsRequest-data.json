@@ -1,0 +1,69 @@
+{
+    "WSAddLayerAndTreeModificationsRequest": {
+        "descendantsMapData": {
+            "descendantsMap": {
+                "16401": 3
+            }
+        },
+        "projectID": 6400,
+        "parentFolderID": 16401,
+        "layer": {
+            "type": "GPRaster",
+            "id": null,
+            "title": "layerToTest",
+            "name": "name_layerToTest",
+            "alias": null,
+            "abstractText": "abstract_layerToTest",
+            "urlServer": "http://www.geosdi.org/test_rs",
+            "srs": "Geographic coordinate system",
+            "cqlFilter": null,
+            "timeFilter": null,
+            "bbox": {
+                "minX": 10.0,
+                "minY": 10.0,
+                "maxX": 20.0,
+                "maxY": 20.0
+            },
+            "layerType": "WMS",
+            "position": 3,
+            "checked": false,
+            "shared": false,
+            "cached": false,
+            "singleTileRequest": false,
+            "opacity": 1.0,
+            "styles": [],
+            "layerInfo": {
+                "queryable": false,
+                "keywords": "keyword_test_rs"
+            },
+            "maxScale": null,
+            "minScale": null,
+            "folder": {
+                "id": 16401,
+                "name": "rootFolderB",
+                "parent": null,
+                "project": {
+                    "id": 6400,
+                    "name": "project_test_rs",
+                    "numberOfElements": 2,
+                    "creationDate": "2014-12-20T09:55:57.488+0100",
+                    "version": 1,
+                    "shared": false
+                },
+                "numberOfDescendants": 2,
+                "position": 3,
+                "checked": false,
+                "shared": false,
+                "expanded": false
+            },
+            "project": {
+                "id": 6400,
+                "name": "project_test_rs",
+                "numberOfElements": 2,
+                "creationDate": "2014-12-20T09:55:57.488+0100",
+                "version": 1,
+                "shared": false
+            }
+        }
+    }
+}

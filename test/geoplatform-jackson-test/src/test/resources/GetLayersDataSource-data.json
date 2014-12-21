@@ -1,0 +1,5 @@
+{
+    "GetDataSourceResponse": {
+        "server": ["http://www.geosdi.org/newtest_rs", "http://www.geosdi.org/test_rs"]
+    }
+}

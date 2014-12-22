@@ -88,6 +88,12 @@ public class GPProject implements Serializable {
     //
     @Column
     private boolean shared = false;
+    //
+    @Column(name = "project_description", columnDefinition = "Text")
+    private String description;
+    //
+    @Column(name = "image_project_path")
+    private String imagePath;
 
     /**
      * @return the id
@@ -181,6 +187,34 @@ public class GPProject implements Serializable {
     }
 
     /**
+     * @return the description
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * @param description the description to set
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    /**
+     * @return the imagePath
+     */
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    /**
+     * @param imagePath the imagePath to set
+     */
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    /**
      * (non-Javadoc)
      *
      * @see java.lang.Object#toString()
@@ -195,6 +229,8 @@ public class GPProject implements Serializable {
         str.append(", creationDate=").append(creationDate);
         str.append(", version=").append(version);
         str.append(", shared=").append(shared);
+        str.append(", description=").append(description);
+        str.append(", imagePath=").append(imagePath);
         return str.append('}').toString();
     }
 }

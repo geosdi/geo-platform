@@ -45,6 +45,7 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -90,7 +91,7 @@ public abstract class GPAbstractJpaDAO<T extends Object, ID extends Serializable
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(ID id) {
         T entity = this.find(id);
 
         if (entity == null) {
@@ -116,7 +117,7 @@ public abstract class GPAbstractJpaDAO<T extends Object, ID extends Serializable
     }
 
     @Override
-    public T find(Long id) throws GPDAOException {
+    public T find(ID id) throws GPDAOException {
         Preconditions.checkArgument(id != null);
 
         try {
@@ -172,6 +173,12 @@ public abstract class GPAbstractJpaDAO<T extends Object, ID extends Serializable
                 persistentClass);
 
         return q.executeUpdate();
+    }
+
+    @Override
+    public Number count() {
+        return (Number) getSession().createCriteria(persistentClass)
+                .setProjection(Projections.rowCount()).uniqueResult();
     }
 
     protected Class< T> getPersistentClass() {

@@ -55,7 +55,7 @@ import org.geosdi.geoplatform.gml.impl.v311.jts.sextante.responsibility.JTSSexta
 public class JTSSextanteParserV311 extends JTSSextanteParser {
 
     private AbstractGMLObjectFactory gmlFactory;
-    private JTSSextantePointHandler sextantePointHandler = new JTSSextantePointHandler();
+    private final JTSSextantePointHandler sextantePointHandler = new JTSSextantePointHandler();
 
     @Override
     public AbstractGeometry parseGeometry(Geometry jtsGeometry) throws ParserException {

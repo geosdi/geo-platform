@@ -54,8 +54,8 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
  */
 public class GMLBasePolygonParser extends AbstractGMLBaseParser<Polygon, PolygonProperty, com.vividsolutions.jts.geom.Polygon> {
 
-    private GMLBaseLinearRingParser linearRingParser;
-    private PolygonBuilder polygonBuilder;
+    private final GMLBaseLinearRingParser linearRingParser;
+    private final PolygonBuilder polygonBuilder;
 
     public GMLBasePolygonParser(GMLBaseLinearRingParser theLinearRingParser,
             GeometryFactory theGeometryFactory,

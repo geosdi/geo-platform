@@ -50,9 +50,9 @@ class JTSLinearRingParserParameter implements
         ParameterValue<JTSLinearRingParser> {
 
     private JTSLinearRingParser jtsLinearRingParser;
-    private ParameterValue<AbstractGMLObjectFactory> objectFactoryParameter;
-    private ParameterValue<DefaultJTSSRSParser> srsParameter;
-    private ParameterValue<JTSCoordinateParser> coordinateParameter;
+    private final ParameterValue<AbstractGMLObjectFactory> objectFactoryParameter;
+    private final ParameterValue<DefaultJTSSRSParser> srsParameter;
+    private final ParameterValue<JTSCoordinateParser> coordinateParameter;
 
     public JTSLinearRingParserParameter(
             ParameterValue<AbstractGMLObjectFactory> theObjectFactoryParameter,

@@ -50,9 +50,9 @@ class JTSMultiLineParserParameter implements
         ParameterValue<JTSMultiLineStringParser> {
 
     private JTSMultiLineStringParser jtsMultiLineParser;
-    private ParameterValue<AbstractGMLObjectFactory> objectFactoryParameter;
-    private ParameterValue<DefaultJTSSRSParser> srsParameter;
-    private ParameterValue<JTSLineStringParser> lineStringParameter;
+    private final ParameterValue<AbstractGMLObjectFactory> objectFactoryParameter;
+    private final ParameterValue<DefaultJTSSRSParser> srsParameter;
+    private final ParameterValue<JTSLineStringParser> lineStringParameter;
 
     public JTSMultiLineParserParameter(
             ParameterValue<AbstractGMLObjectFactory> theObjectFactoryParameter,

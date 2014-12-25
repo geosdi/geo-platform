@@ -49,9 +49,9 @@ import org.geosdi.geoplatform.gml.api.parser.base.geometry.point.GMLBasePointPar
 class PointParserParameter implements ParameterValue<GMLBasePointParser> {
 
     private GMLBasePointParser pointParser;
-    private ParameterValue<GeometryFactory> geometryParameter;
-    private ParameterValue<DefaultSRSBaseParser> srsParameter;
-    private ParameterValue<CoordinateBaseParser> coordinateParameter;
+    private final ParameterValue<GeometryFactory> geometryParameter;
+    private final ParameterValue<DefaultSRSBaseParser> srsParameter;
+    private final ParameterValue<CoordinateBaseParser> coordinateParameter;
 
     public PointParserParameter(ParameterValue<GeometryFactory> theGeometryParameter,
             ParameterValue<DefaultSRSBaseParser> theSrsParameter,

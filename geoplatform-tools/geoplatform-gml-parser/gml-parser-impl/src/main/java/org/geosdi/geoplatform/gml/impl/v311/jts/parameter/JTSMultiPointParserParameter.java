@@ -50,9 +50,9 @@ class JTSMultiPointParserParameter implements
         ParameterValue<JTSMultiPointParser> {
 
     private JTSMultiPointParser jtsMultiPointParser;
-    private ParameterValue<AbstractGMLObjectFactory> objectFactoryParameter;
-    private ParameterValue<DefaultJTSSRSParser> srsParameter;
-    private ParameterValue<JTSPointParser> pointParameter;
+    private final ParameterValue<AbstractGMLObjectFactory> objectFactoryParameter;
+    private final ParameterValue<DefaultJTSSRSParser> srsParameter;
+    private final ParameterValue<JTSPointParser> pointParameter;
 
     public JTSMultiPointParserParameter(
             ParameterValue<AbstractGMLObjectFactory> theObjectFactoryParameter,

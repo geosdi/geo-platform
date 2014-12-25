@@ -50,9 +50,9 @@ class JTSMultiGeometryParserParameter implements
         ParameterValue<JTSMultiGeometryParser> {
 
     private JTSMultiGeometryParser jtsMultiGeometryParser;
-    private ParameterValue<AbstractGMLObjectFactory> objectFactoryParameter;
-    private ParameterValue<DefaultJTSSRSParser> srsParameter;
-    private ParameterValue<JTSSextanteParserV311> jtsSextanteParameter;
+    private final ParameterValue<AbstractGMLObjectFactory> objectFactoryParameter;
+    private final ParameterValue<DefaultJTSSRSParser> srsParameter;
+    private final ParameterValue<JTSSextanteParserV311> jtsSextanteParameter;
 
     public JTSMultiGeometryParserParameter(
             ParameterValue<AbstractGMLObjectFactory> theObjectFactoryParameter,

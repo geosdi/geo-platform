@@ -53,8 +53,8 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
  */
 public class GMLBasePointParser extends AbstractGMLBaseParser<Point, PointProperty, com.vividsolutions.jts.geom.Point> {
 
-    private CoordinateBaseParser coordinateParser;
-    private BasePointGeometryHandler directPos = new DirectPositionGeometryHandler();
+    private final CoordinateBaseParser coordinateParser;
+    private final BasePointGeometryHandler directPos = new DirectPositionGeometryHandler();
 
     public GMLBasePointParser(GeometryFactory theGeometryFactory,
             AbstractGMLBaseSRSParser theSrsParser,

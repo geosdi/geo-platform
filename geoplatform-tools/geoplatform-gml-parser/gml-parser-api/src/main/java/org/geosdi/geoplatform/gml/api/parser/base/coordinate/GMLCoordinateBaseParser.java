@@ -60,13 +60,13 @@ public class GMLCoordinateBaseParser implements CoordinateBaseParser {
 
         switch (count) {
             case 2:
-                double x2 = value.get(0).doubleValue();
-                double y2 = value.get(1).doubleValue();
+                double x2 = value.get(0);
+                double y2 = value.get(1);
                 return new Coordinate(x2, y2);
             case 3:
-                double x3 = value.get(0).doubleValue();
-                double y3 = value.get(1).doubleValue();
-                double z3 = value.get(2).doubleValue();
+                double x3 = value.get(0);
+                double y3 = value.get(1);
+                double z3 = value.get(2);
                 return new Coordinate(x3, y3, z3);
             default:
                 throw new ParserException("Direct position type "

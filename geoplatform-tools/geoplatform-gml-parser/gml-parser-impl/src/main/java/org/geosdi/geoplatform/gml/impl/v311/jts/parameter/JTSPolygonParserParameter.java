@@ -49,9 +49,9 @@ import org.geosdi.geoplatform.gml.api.parser.jts.geometry.polygon.JTSPolygonPars
 class JTSPolygonParserParameter implements ParameterValue<JTSPolygonParser> {
 
     private JTSPolygonParser jtsPolygonParser;
-    private ParameterValue<AbstractGMLObjectFactory> objectFactoryParameter;
-    private ParameterValue<DefaultJTSSRSParser> srsParameter;
-    private ParameterValue<JTSLinearRingParser> linearRingParameter;
+    private final ParameterValue<AbstractGMLObjectFactory> objectFactoryParameter;
+    private final ParameterValue<DefaultJTSSRSParser> srsParameter;
+    private final ParameterValue<JTSLinearRingParser> linearRingParameter;
 
     public JTSPolygonParserParameter(
             ParameterValue<AbstractGMLObjectFactory> theObjectFactoryParameter,

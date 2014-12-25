@@ -48,7 +48,7 @@ class JTSCoordinateParserParameter implements
         ParameterValue<JTSCoordinateParser> {
 
     private JTSCoordinateParser jtsCoordinateParser;
-    private ParameterValue<? extends GMLObjectFactory> objectFactoryParameter;
+    private final ParameterValue<? extends GMLObjectFactory> objectFactoryParameter;
 
     public JTSCoordinateParserParameter(
             ParameterValue<? extends GMLObjectFactory> theObjectFactoryParameter) {

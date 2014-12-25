@@ -58,9 +58,9 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
  */
 public class GMLBaseMultiSurfaceParser extends AbstractGMLBaseParser<MultiSurface, MultiSurfaceProperty, MultiPolygon> {
 
-    private GMLBasePolygonParser polygonParser;
-    private SurfaceMemberBuilder surfaceMember = new SurfaceMember();
-    private SurfaceMemberBuilder surfaceMembers = new SurfaceMembers();
+    private final GMLBasePolygonParser polygonParser;
+    private final SurfaceMemberBuilder surfaceMember = new SurfaceMember();
+    private final SurfaceMemberBuilder surfaceMembers = new SurfaceMembers();
 
     public GMLBaseMultiSurfaceParser(GeometryFactory theGeometryFactory,
             AbstractGMLBaseSRSParser theSrsParser,

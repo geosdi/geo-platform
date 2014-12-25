@@ -60,13 +60,13 @@ import org.geosdi.geoplatform.gml.impl.v311.jts.sextante.JTSSextanteParserV311;
  */
 public final class JTSParametersRepo {
 
-    private static JTSParametersRepo instance = new JTSParametersRepo();
+    private static final JTSParametersRepo instance = new JTSParametersRepo();
 
     static {
         lookUpAllParameters();
     }
     //
-    private Map<JTSParameterEnum, ParameterValue<?>> parameters;
+    private final Map<JTSParameterEnum, ParameterValue<?>> parameters;
 
     private JTSParametersRepo() {
         parameters = Maps.newEnumMap(JTSParameterEnum.class);

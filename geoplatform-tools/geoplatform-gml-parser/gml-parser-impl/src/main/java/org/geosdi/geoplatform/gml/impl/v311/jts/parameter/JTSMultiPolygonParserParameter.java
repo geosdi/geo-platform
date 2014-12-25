@@ -50,9 +50,9 @@ class JTSMultiPolygonParserParameter implements
         ParameterValue<JTSMultiPolygonParser> {
 
     private JTSMultiPolygonParser jtsMultiPolygonParser;
-    private ParameterValue<AbstractGMLObjectFactory> objectFactoryParameter;
-    private ParameterValue<DefaultJTSSRSParser> srsParameter;
-    private ParameterValue<JTSPolygonParser> polygonParameter;
+    private final ParameterValue<AbstractGMLObjectFactory> objectFactoryParameter;
+    private final ParameterValue<DefaultJTSSRSParser> srsParameter;
+    private final ParameterValue<JTSPolygonParser> polygonParameter;
 
     public JTSMultiPolygonParserParameter(
             ParameterValue<AbstractGMLObjectFactory> theObjectFactoryParameter,

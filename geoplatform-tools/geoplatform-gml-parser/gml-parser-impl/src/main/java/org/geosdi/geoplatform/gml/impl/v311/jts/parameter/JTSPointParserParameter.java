@@ -49,9 +49,9 @@ import org.geosdi.geoplatform.gml.api.parser.jts.geometry.point.JTSPointParser;
 class JTSPointParserParameter implements ParameterValue<JTSPointParser> {
 
     private JTSPointParser jtsPointParser;
-    private ParameterValue<AbstractGMLObjectFactory> objectFactoryParameter;
-    private ParameterValue<? extends AbstractJTSSRSParser> srsParameter;
-    private ParameterValue<JTSCoordinateParser> coordinateParameter;
+    private final ParameterValue<AbstractGMLObjectFactory> objectFactoryParameter;
+    private final ParameterValue<? extends AbstractJTSSRSParser> srsParameter;
+    private final ParameterValue<JTSCoordinateParser> coordinateParameter;
 
     public JTSPointParserParameter(
             ParameterValue<AbstractGMLObjectFactory> theObjectFactoryParameter,

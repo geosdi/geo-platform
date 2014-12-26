@@ -48,7 +48,7 @@ import org.springframework.context.annotation.Profile;
  */
 @Configuration
 @Profile("jpa")
-public class JpaSchemaExportConfig {
+class JpaSchemaExportConfig {
 
     @Bean(initMethod = "scanPackages")
     @Profile("jpa")

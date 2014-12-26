@@ -53,6 +53,8 @@ public abstract class PersistenceSchemaExport implements InitializingBean {
     //
     @Value(value = "#{systemProperties['user.home']}")
     private String userHome;
+    @Value(value = "#{systemProperties['gpSchemaExport']}")
+    private String generateSchema;
     protected SchemaExport schema;
 
     @Override
@@ -61,34 +63,38 @@ public abstract class PersistenceSchemaExport implements InitializingBean {
     }
 
     protected final void exportSchema() {
-        String schemaExportDirPath = this.userHome + File.separator
-                + SCHEMA_EXPORT_DIR_NAME;
+        if ((this.generateSchema != null) && (this.generateSchema.equalsIgnoreCase(
+                "generate"))) {
+            String schemaExportDirPath = this.userHome + File.separator
+                    + SCHEMA_EXPORT_DIR_NAME;
 
-        File dirPath = new File(schemaExportDirPath);
+            File dirPath = new File(schemaExportDirPath);
 
-        boolean success = false;
+            boolean success = false;
 
-        if (!dirPath.exists()) {
-            success = dirPath.mkdirs();
+            if (!dirPath.exists()) {
+                success = dirPath.mkdirs();
 
-            if (!success) {
-                throw new SecurityException("It was not possible to create "
-                        + "the schema.sql in the User Home Directory.");
+                if (!success) {
+                    throw new SecurityException("It was not possible to create "
+                            + "the schema.sql in the User Home Directory.");
+                }
             }
+
+            String schemaExportFilePath = schemaExportDirPath + File.separator
+                    + "schema.sql";
+
+            schema.setOutputFile(schemaExportFilePath);
+
+            logger.info(
+                    "\n\n@@@@@@@@@@@@@@@@@@@@@@@@GeoPlatform-PersistenceLayer "
+                    + ": schema database generated at path {}\n\n",
+                    schemaExportFilePath);
+
+            schema.setFormat(true);
+            schema.setDelimiter(";");
+            schema.create(true, false);
         }
-
-        String schemaExportFilePath = schemaExportDirPath + File.separator
-                + "schema.sql";
-
-        schema.setOutputFile(schemaExportFilePath);
-
-        logger.debug("\n\n@@@@@@@@@@@@@@@@@@@@@@@@GeoPlatform-PersistenceLayer "
-                + ": schema database generated at path {}\n\n",
-                schemaExportFilePath);
-
-        schema.setFormat(true);
-        schema.setDelimiter(";");
-        schema.create(true, false);
     }
 
     protected abstract void createSchema();

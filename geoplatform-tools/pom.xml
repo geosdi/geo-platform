@@ -28,6 +28,7 @@
         <module>geoplatform-wfs-cas-support</module>
         <module>geoplatform-jaxb-support</module>
         <module>geoplatform-jasypt-support</module>
+        <module>geoplatform-jaxb-spatial-adapter</module>
     </modules>
 
 </project>

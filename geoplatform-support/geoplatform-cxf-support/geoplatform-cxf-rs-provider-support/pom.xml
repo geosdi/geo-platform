@@ -33,11 +33,6 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-base-configurator</artifactId>
-        </dependency>
-        
         <!-- SPRING -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -94,6 +89,12 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-base-configurator</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>

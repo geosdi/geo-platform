@@ -90,7 +90,7 @@ public abstract class RestClientConnector<E> extends GPAbstractWSClientConnector
     /**
      * @param providerType the providerType to set
      */
-    @Value("configurator{cxf_rest_provider_type}")
+    @Value("configurator{cxf_rest_provider_type:@null}")
     public void setProviderType(GPRestProviderType providerType) {
         this.providerType = providerType;
     }

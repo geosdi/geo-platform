@@ -47,7 +47,7 @@ import org.springframework.beans.factory.annotation.Value;
 public class GPBasicRestClientTestConnector extends BasicRestClientConnector {
 
     @Override
-    @Value("configurator{webservice_rs_test_endpoint_address}")
+    @Value("configurator{webservice_rs_test_endpoint_address:@null}")
     public void setAddress(String theAddress) {
         this.address = theAddress;
     }

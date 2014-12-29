@@ -45,16 +45,15 @@ import org.geosdi.geoplatform.services.GeoPlatformService;
  */
 abstract class BasicRestClientConnector
         extends RestClientConnector<GeoPlatformService> {
-    
+
     String address;
-    
+
     public BasicRestClientConnector() {
         super(GeoPlatformService.class);
     }
-    
+
     @Override
     public String getAddress() {
         return this.address;
     }
-    
 }

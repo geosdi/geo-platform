@@ -24,7 +24,7 @@
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-base-configurator</artifactId>
-            <scope>provided</scope>
+            <!--<scope>provided</scope>-->
         </dependency>
         
         <dependency>

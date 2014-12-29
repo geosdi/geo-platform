@@ -58,7 +58,7 @@ public class GPBasicWSClientConnector extends BasicWSClientConnector {
     }
 
     @Override
-    @Value("configurator{webservice_endpoint_address}")
+    @Value("configurator{webservice_endpoint_address:@null}")
     public void setAddress(String theAddress) {
         this.address = theAddress;
     }

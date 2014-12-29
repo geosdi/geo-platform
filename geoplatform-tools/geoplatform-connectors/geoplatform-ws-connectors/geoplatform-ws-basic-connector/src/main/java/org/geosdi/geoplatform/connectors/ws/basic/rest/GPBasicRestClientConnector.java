@@ -53,7 +53,7 @@ import org.springframework.stereotype.Component;
 public class GPBasicRestClientConnector extends BasicRestClientConnector {
 
     @Override
-    @Value("configurator{webservice_rs_wms_endpoint_address}")
+    @Value("configurator{webservice_rs_wms_endpoint_address:@null}")
     public void setAddress(String theAddress) {
         this.address = theAddress;
     }

@@ -50,7 +50,7 @@ import org.slf4j.LoggerFactory;
  */
 public final class GPRestProviderFactory {
 
-    static final GPRestProviderType DEFAULT_TYPE = GPRestProviderType.JETTYSON;
+    static final GPRestProviderType DEFAULT_TYPE = GPRestProviderType.JACKSON;
 
     private static final Logger logger = LoggerFactory.getLogger(
             GPRestProviderFactory.class);

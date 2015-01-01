@@ -65,4 +65,6 @@ public interface CXFServer extends DisposableBean {
      */
     void stop() throws Exception;
 
+    boolean isStarted();
+
 }

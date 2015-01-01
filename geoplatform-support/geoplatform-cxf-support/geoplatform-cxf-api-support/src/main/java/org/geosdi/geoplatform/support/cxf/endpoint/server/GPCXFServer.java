@@ -49,7 +49,8 @@ import org.slf4j.LoggerFactory;
  */
 public abstract class GPCXFServer<E> implements CXFServer {
 
-    protected static final Logger logger = LoggerFactory.getLogger(GPCXFServer.class);
+    protected static final Logger logger = LoggerFactory.getLogger(
+            GPCXFServer.class);
     //
     protected Server server;
     protected final Class<E> endpointClass;
@@ -81,4 +82,8 @@ public abstract class GPCXFServer<E> implements CXFServer {
         this.server = sf.create();
     }
 
+    @Override
+    public final boolean isStarted() {
+        return this.server.isStarted();
+    }
 }

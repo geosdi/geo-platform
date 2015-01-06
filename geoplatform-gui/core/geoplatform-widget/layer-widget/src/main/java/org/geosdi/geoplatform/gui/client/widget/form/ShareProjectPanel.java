@@ -64,12 +64,18 @@ import com.google.gwt.user.client.rpc.XsrfTokenServiceAsync;
 import java.util.ArrayList;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.command.share.GetUsersToShareProjectRequest;
+import org.geosdi.geoplatform.gui.client.command.share.GetUsersToShareProjectResponse;
+import org.geosdi.geoplatform.gui.client.command.share.ShareProjectRequest;
+import org.geosdi.geoplatform.gui.client.command.share.ShareProjectResponse;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.service.LayerRemoteAsync;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommandExecutor;
 import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
 import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 import org.geosdi.geoplatform.gui.model.user.GPSimpleUser;
@@ -87,6 +93,8 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
     private final static String PROJECT_NAME_LABEL = LayerModuleConstants.INSTANCE.ShareProjectPanel_projectNameLabelText() + ": ";
     private final static String OWNER_LABEL = LayerModuleConstants.INSTANCE.ShareProjectPanel_ownerLabelText() + ": ";
     private final static String ORGANIZATION_LABEL = LayerModuleConstants.INSTANCE.ShareProjectPanel_organizationLabelText() + ": ";
+    private static final ShareProjectRequest shareProjectReq = new ShareProjectRequest();
+    private static final GetUsersToShareProjectRequest getUsersToShare = new GetUsersToShareProjectRequest();
     //
     private ListStore<GPSimpleUser> fromStore;
     private ListStore<GPSimpleUser> toStore;
@@ -183,7 +191,7 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
                     @Override
                     public void componentSelected(ButtonEvent ce) {
                         toStore.commitChanges();
-                        final List<Long> accountIDsProject = Lists.<Long>newArrayListWithCapacity(
+                        List<Long> accountIDsProject = Lists.<Long>newArrayListWithCapacity(
                                 toStore.getModels().size());
                         IGPAccountDetail accountDetail = Registry.get(
                                 UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
@@ -196,59 +204,45 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
                         }
                         final boolean isShared = test;
                         ShareProjectPanel.this.reset();
-                        xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
 
-                            @Override
-                            public void onFailure(Throwable caught) {
-                                try {
-                                    throw caught;
-                                } catch (RpcTokenException e) {
-                                    // Can be thrown for several reasons:
-                                    //   - duplicate session cookie, which may be a sign of a cookie
-                                    //     overwrite attack
-                                    //   - XSRF token cannot be generated because session cookie isn't
-                                    //     present
-                                } catch (Throwable e) {
-                                    // unexpected
-                                }
-                            }
+                        shareProjectReq.setIdSharedProject(project.getId());
+                        shareProjectReq.setAccountIDsProject(accountIDsProject);
 
-                            @Override
-                            public void onSuccess(XsrfToken token) {
-                                ((HasRpcToken) layerRemote).setRpcToken(token);
-                                layerRemote.shareProjectToUsers(project.getId(),
-                                        accountIDsProject,
-                                        new AsyncCallback<Boolean>() {
+                        GPClientCommandExecutor.executeCommand(
+                                new GPClientCommand<ShareProjectResponse>() {
+
+                                    private static final long serialVersionUID = 1596346272632793993L;
+
+                                    {
+                                        super.setCommandRequest(shareProjectReq);
+                                    }
+
+                                    @Override
+                                    public void onCommandSuccess(
+                                            ShareProjectResponse response) {
+                                                if (project.isDefaultProject()) {
+                                                    GPClientProject projInSession = Registry.get(
+                                                            UserSessionEnum.CURRENT_PROJECT_ON_TREE.name());
+                                                    if (isShared) {
+                                                        projInSession.setShared(
+                                                                Boolean.TRUE);
+                                                    } else {
+                                                        projInSession.setShared(
+                                                                Boolean.FALSE);
+                                                    }
+                                                }
+                                                project.setShared(
+                                                        Boolean.TRUE);
+                                                loadData(project);
+                                            }
 
                                             @Override
-                                            public void onFailure(
-                                                    Throwable caught) {
+                                            public void onCommandFailure(
+                                                    Throwable exception) {
                                                         System.out.println(
                                                                 "Error on saving user to share project");
                                                     }
-
-                                                    @Override
-                                                    public void onSuccess(
-                                                            Boolean result) {
-//                                System.out.println("Project is Shared: " + isShared);
-                                                                if (project.isDefaultProject()) {
-                                                                    GPClientProject projInSession = Registry.get(
-                                                                            UserSessionEnum.CURRENT_PROJECT_ON_TREE.name());
-                                                                    if (isShared) {
-                                                                        projInSession.setShared(
-                                                                                Boolean.TRUE);
-                                                                    } else {
-                                                                        projInSession.setShared(
-                                                                                Boolean.FALSE);
-                                                                    }
-                                                                }
-                                                                project.setShared(
-                                                                        Boolean.TRUE);
-                                                                loadData(project);
-                                                            }
-                                        });
-                            }
-                        });
+                                });
                     }
                 });
         super.addButton(saveButton);
@@ -300,43 +294,31 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
         super.init();
         this.reset();
         this.project = theProject;
-        xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
 
-            @Override
-            public void onFailure(Throwable caught) {
-                try {
-                    throw caught;
-                } catch (RpcTokenException e) {
-                    // Can be thrown for several reasons:
-                    //   - duplicate session cookie, which may be a sign of a cookie
-                    //     overwrite attack
-                    //   - XSRF token cannot be generated because session cookie isn't
-                    //     present
-                } catch (Throwable e) {
-                    // unexpected
-                }
-            }
+        getUsersToShare.setProjectId(this.project.getId());
 
-            @Override
-            public void onSuccess(XsrfToken token) {
-                ((HasRpcToken) layerRemote).setRpcToken(token);
-                layerRemote.getOrganizationUsersToShareProject(
-                        project.getId(),
-                        new AsyncCallback<ArrayList<GPSimpleUser>>() {
+        GPClientCommandExecutor.executeCommand(
+                new GPClientCommand<GetUsersToShareProjectResponse>() {
 
-                            @Override
-                            public void onFailure(Throwable caught) {
-                                System.out.println(
-                                        "Failled to load Organization Users to Share Project: " + caught);
-                            }
+                    private static final long serialVersionUID = 8650649319305683871L;
 
-                            @Override
-                            public void onSuccess(ArrayList<GPSimpleUser> result) {
-                                fromStore.add(result);
-                            }
-                        });
-            }
-        });
+                    {
+                        super.setCommandRequest(shareProjectReq);
+                    }
+
+                    @Override
+                    public void onCommandSuccess(
+                            GetUsersToShareProjectResponse response) {
+                        fromStore.add(response.getResult());
+                    }
+
+                    @Override
+                    public void onCommandFailure(Throwable exception) {
+                        System.out.println(
+                                "Failled to load Organization Users to Share Project: "
+                                + exception);
+                    }
+                });
 
         xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
 

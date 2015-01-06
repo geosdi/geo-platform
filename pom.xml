@@ -1426,7 +1426,7 @@
         
         <ehcache-version>2.6.3</ehcache-version>
         
-        <commons-pool-version>2.0</commons-pool-version>
+        <commons-pool-version>2.3</commons-pool-version>
         
         <geonetwork-version>1.0-SNAPSHOT</geonetwork-version>
         

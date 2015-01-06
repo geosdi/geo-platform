@@ -73,11 +73,14 @@ public interface LayerRemote extends RemoteService {
         }
     }
 
+    @Deprecated
     GPClientProject loadDefaultProject() throws GeoPlatformException;
 
+    @Deprecated
     boolean shareProjectToUsers(long idSharedProject,
             List<Long> accountIDsProject) throws GeoPlatformException;
 
+    @Deprecated
     ArrayList<GPSimpleUser> getOrganizationUsersToShareProject(long projectId)
             throws GeoPlatformException;
 

@@ -16,6 +16,12 @@
             classpath*:applicationContext-Service.xml
         </param-value>
     </context-param>
+    
+    <!-- Activate @Rest Spring Profile -->
+    <context-param>
+        <param-name>spring.profiles.active</param-name>
+        <param-value>rest</param-value>
+    </context-param>
   
     <!-- CXF Servlet -->
     <servlet>

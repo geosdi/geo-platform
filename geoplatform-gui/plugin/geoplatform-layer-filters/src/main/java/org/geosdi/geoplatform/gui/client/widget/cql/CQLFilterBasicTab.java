@@ -76,7 +76,7 @@ public class CQLFilterBasicTab extends GeoPlatformTabItem implements ICQLFilterT
     public void addComponents() {
         setSize(CQLFilterTabWidget.TAB_WIDGET_WIDTH,
                 CQLFilterTabWidget.TAB_WIDGET_HEIGHT);
-        this.filterList = Lists.newArrayList();
+        this.filterList = Lists.<CQLFilterBasicRow>newArrayList();
         this.expressionsPanel = new VerticalPanel();
         this.expressionsPanel.setSpacing(10);
         super.add(this.expressionsPanel);

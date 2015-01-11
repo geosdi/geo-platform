@@ -60,7 +60,7 @@ public interface IUserService {
             throws GeoPlatformException;
 
     Long insertUser(IGPUserManageDetail userDetail, String organization,
-            HttpServletRequest httpServletRequest, boolean checkUserSession)
+            HttpServletRequest httpServletRequest, boolean checkUserSession, boolean sendEmail)
             throws GeoPlatformException;
 
     Long updateUserTreeOptions(IGPTreeOptions userTreeOptions,

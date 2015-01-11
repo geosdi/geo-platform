@@ -129,12 +129,13 @@ public class UserService implements IUserService {
             HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
         return this.insertUser(userDetail, organization, httpServletRequest,
-                Boolean.TRUE);
+                Boolean.TRUE, Boolean.TRUE);
     }
 
     @Override
     public Long insertUser(IGPUserManageDetail userDetail, String organization,
-            HttpServletRequest httpServletRequest, boolean checkUserSession)
+            HttpServletRequest httpServletRequest, boolean checkUserSession, 
+            boolean sendEmail)
             throws GeoPlatformException {
         if (checkUserSession) {
             this.getCheckLoggedUser(httpServletRequest);
@@ -147,7 +148,7 @@ public class UserService implements IUserService {
             user.setOrganization(new GPOrganization(organization));
 
             iserId = geoPlatformServiceClient.insertAccount(
-                    new InsertAccountRequest(user, Boolean.TRUE));
+                    new InsertAccountRequest(user, sendEmail));
         } catch (IllegalParameterFault ipf) {
             throw new GeoPlatformException(ipf.getMessage());
         }

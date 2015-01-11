@@ -73,6 +73,13 @@ public class UserRemoteImpl extends GPAutoInjectingXsrfTokenServiceServlet
     }
 
     @Override
+    public Long insertUser(IGPUserManageDetail userDetail, String organization,
+            boolean checkUserSession, boolean sendEmail) throws GeoPlatformException {
+        return userService.insertUser(userDetail, organization, 
+                super.getThreadLocalRequest(), checkUserSession, sendEmail);
+    }
+
+    @Override
     public Long updateUser(IGPUserManageDetail userDetail)
             throws GeoPlatformException {
         return userService.updateUser(userDetail, super.getThreadLocalRequest());

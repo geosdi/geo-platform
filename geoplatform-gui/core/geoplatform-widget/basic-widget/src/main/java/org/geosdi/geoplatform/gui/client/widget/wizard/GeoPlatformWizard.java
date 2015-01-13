@@ -221,8 +221,10 @@ public abstract class GeoPlatformWizard extends GeoPlatformWindow {
         if (component != null) {
             GeoPlatformWizardPanel panel = (GeoPlatformWizardPanel) component;
             contentPanel.remove(panel);
-            logger.log(Level.FINEST,
+            logger.log(Level.INFO,
                     "Removed wizardScreen: on GeoPlatformWizard");
+        } else {
+            logger.log(Level.WARNING, "Component to remove not found on wizardScreen GeoPlatformWizard");
         }
     }
 

@@ -5,7 +5,7 @@
  *    http://geo-platform.org
  *   ====================================================================
  *
- *   Copyright (C) 2008-2014 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ *   Copyright (C) 2008-2015 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  *   This program is free software: you can redistribute it and/or modify it
  *   under the terms of the GNU General Public License as published by
@@ -45,6 +45,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -87,7 +88,7 @@ public abstract class GPAbstractHibernateDAO<T extends Object, ID extends Serial
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(ID id) {
         T entity = find(id);
 
         getCurrentSession().delete(entity);
@@ -108,7 +109,7 @@ public abstract class GPAbstractHibernateDAO<T extends Object, ID extends Serial
     }
 
     @Override
-    public T find(Long id) throws GPDAOException {
+    public T find(ID id) throws GPDAOException {
         Preconditions.checkArgument(id != null);
 
         try {
@@ -140,7 +141,8 @@ public abstract class GPAbstractHibernateDAO<T extends Object, ID extends Serial
     }
 
     @Override
-    public List<T> findAll(int start, int end, Criterion... criterion) throws GPDAOException {
+    public List<T> findAll(int start, int end, Criterion... criterion) throws
+            GPDAOException {
         try {
             Criteria crit = getCurrentSession().createCriteria(persistentClass);
             for (Criterion criterionElement : criterion) {
@@ -159,6 +161,12 @@ public abstract class GPAbstractHibernateDAO<T extends Object, ID extends Serial
     public int removeAll() {
         return getCurrentSession().createSQLQuery("delete from "
                 + persistentClass.getSimpleName()).executeUpdate();
+    }
+
+    @Override
+    public Number count() {
+        return (Number) getCurrentSession().createCriteria(persistentClass)
+                .setProjection(Projections.rowCount()).uniqueResult();
     }
 
     protected Session getCurrentSession() {

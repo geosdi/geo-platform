@@ -5,7 +5,7 @@
  *    http://geo-platform.org
  *   ====================================================================
  *
- *   Copyright (C) 2008-2014 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ *   Copyright (C) 2008-2015 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  *   This program is free software: you can redistribute it and/or modify it
  *   under the terms of the GNU General Public License as published by
@@ -49,9 +49,9 @@ import org.hibernate.criterion.Criterion;
 public interface GPBaseDAO<T extends Object, ID extends Serializable>
         extends GPGenericDAO<T> {
 
-    void delete(Long id);
+    void delete(ID id);
 
-    T find(Long id) throws GPDAOException;
+    T find(ID id) throws GPDAOException;
 
     List<T> findAll();
 
@@ -62,4 +62,6 @@ public interface GPBaseDAO<T extends Object, ID extends Serializable>
             int end, Criterion... criterion) throws GPDAOException;
 
     List<T> findByCriteria(Criterion... criterion) throws GPDAOException;
+
+    Number count();
 }

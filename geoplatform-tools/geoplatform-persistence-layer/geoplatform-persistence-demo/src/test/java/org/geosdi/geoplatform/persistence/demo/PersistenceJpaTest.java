@@ -5,7 +5,7 @@
  *    http://geo-platform.org
  *   ====================================================================
  *
- *   Copyright (C) 2008-2014 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ *   Copyright (C) 2008-2015 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  *   This program is free software: you can redistribute it and/or modify it
  *   under the terms of the GNU General Public License as published by
@@ -85,6 +85,8 @@ public class PersistenceJpaTest {
 
     @Test
     public void testJpaProfile() throws Exception {
+        Assert.assertEquals(100, this.jpaCarDAO.count().intValue());
+
         logger.info("FOUND PART @@@@@@@@@@@@@@@@@@@@@@@@@@: "
                 + this.jpaCarPartDAO.findByPartName(PART_NAME + 0).getPartName());
 

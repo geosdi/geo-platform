@@ -5,7 +5,7 @@
  *    http://geo-platform.org
  *   ====================================================================
  *
- *   Copyright (C) 2008-2014 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ *   Copyright (C) 2008-2015 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  *   This program is free software: you can redistribute it and/or modify it
  *   under the terms of the GNU General Public License as published by
@@ -35,8 +35,12 @@
  */
 package org.geosdi.geoplatform.persistence.configuration.export;
 
+import java.io.File;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Value;
 
 /**
  *
@@ -45,15 +49,44 @@ import org.springframework.beans.factory.InitializingBean;
  */
 public abstract class PersistenceSchemaExport implements InitializingBean {
 
+    protected static final Logger logger = LoggerFactory.getLogger(
+            PersistenceSchemaExport.class);
+    private static final String SCHEMA_EXPORT_DIR_NAME = "GPPersistenceLayer";
+    //
+    @Value(value = "#{systemProperties['user.home']}")
+    private String userHome;
     protected SchemaExport schema;
 
     @Override
-    public void afterPropertiesSet() throws Exception {
+    public final void afterPropertiesSet() throws Exception {
         this.createSchema();
     }
 
-    protected void exportSchema() {
-        schema.setOutputFile("target/schema.sql");
+    protected final void exportSchema() {
+        String schemaExportDirPath = this.userHome + File.separator
+                + SCHEMA_EXPORT_DIR_NAME;
+
+        File dirPath = new File(schemaExportDirPath);
+
+        boolean success = false;
+
+        if (!dirPath.exists()) {
+            success = dirPath.mkdirs();
+
+            if (!success) {
+                throw new SecurityException("It was not possible to create "
+                        + "the schema.sql in the User Home Directory.");
+            }
+        }
+
+        String schemaExportFilePath = schemaExportDirPath + File.separator
+                + "schema.sql";
+
+        schema.setOutputFile(schemaExportFilePath);
+
+        logger.debug("\n\n@@@@@@@@@@@@@@@@@@@@@@@@GeoPlatform-PersistenceLayer "
+                + ": schema database generated at path {}\n\n",
+                schemaExportFilePath);
 
         schema.setFormat(true);
         schema.setDelimiter(";");

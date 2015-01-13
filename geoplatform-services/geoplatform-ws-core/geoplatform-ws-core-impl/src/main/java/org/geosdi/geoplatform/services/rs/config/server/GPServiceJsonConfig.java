@@ -47,6 +47,7 @@ import org.apache.cxf.message.Message;
 import org.geosdi.geoplatform.configurator.bootstrap.cxf.Rest;
 import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPLayer;
+import org.geosdi.geoplatform.exception.rs.mapper.GPExceptionFaultMapper;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.geosdi.geoplatform.support.cxf.rs.provider.configurator.GPRestProviderType;
 import org.geosdi.geoplatform.support.cxf.rs.provider.factory.GPRestProviderFactory;
@@ -79,6 +80,10 @@ class GPServiceJsonConfig {
                 gpJsonCoreApplication, JAXRSServerFactoryBean.class);
         factory.setServiceBean(geoPlatformService);
         factory.setAddress(factory.getAddress());
+
+        factory.setProviders(Arrays.asList(
+                new Object[]{createProvider(providerType),
+                    new GPExceptionFaultMapper()}));
 
         Map<Object, Object> extensionMappings = new HashMap<>();
         extensionMappings.put("xml", MediaType.APPLICATION_XML);

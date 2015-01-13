@@ -109,7 +109,6 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
     private ComboBox<DPI> comboDPI;
     private ComboBox<PrintTemplate> comboTemplate;
     private ComboBox<Scale> comboScale;
-    private ComboBox<Scale> scaleCombo;
     private CheckBox checkPrintBaseMap;
     private GPSecureStringTextField title;
     private GPSecureStringTextField mapTitle;

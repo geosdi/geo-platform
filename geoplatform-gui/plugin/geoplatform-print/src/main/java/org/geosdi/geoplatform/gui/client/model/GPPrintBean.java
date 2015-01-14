@@ -65,16 +65,15 @@ public class GPPrintBean extends GeoPlatformBeanModel {
     private DPI dpi;
 
     public GPPrintBean() {
-        super.set(GPPrintEnumBean.GPPRINT_COMMENTS.toString(), "");
-        super.set(GPPrintEnumBean.GPPRINT_MAP_TITLE.toString(), "");
-        super.set(GPPrintEnumBean.GPPRINT_TITLE.toString(), "");
+        this.setComments("-");
+        this.setMapTitle("-");
     }
 
     public String getComments() {
         return comments;
     }
 
-    public void setComments(String comments) {
+    public final void setComments(String comments) {
         this.comments = comments;
         set(GPPrintEnumBean.GPPRINT_COMMENTS.toString(), this.comments);
     }
@@ -92,7 +91,7 @@ public class GPPrintBean extends GeoPlatformBeanModel {
         return mapTitle;
     }
 
-    public void setMapTitle(String mapTitle) {
+    public final void setMapTitle(String mapTitle) {
         this.mapTitle = mapTitle;
         set(GPPrintEnumBean.GPPRINT_MAP_TITLE.toString(), this.mapTitle);
     }
@@ -115,8 +114,8 @@ public class GPPrintBean extends GeoPlatformBeanModel {
 
     public void reset() {
         this.setTitle(null);
-        this.setMapTitle(null);
-        this.setComments(null);
+        this.setMapTitle("-");
+        this.setComments("-");
         this.setDpi(null);
     }
 }

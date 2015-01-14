@@ -3,8 +3,8 @@
  * geo-platform Rich webgis framework http://geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2015 geoSDI Group (CNR IMAA - Potenza - ITALY).
->>>>>>> 53486af... Fixed log issues and removing null print on map
+ * Copyright (C) 2008-2015 geoSDI Group (CNR IMAA - Potenza - ITALY). Copyright
+ * (C) 2008-2015 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software

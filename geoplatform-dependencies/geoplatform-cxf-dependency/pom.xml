@@ -141,6 +141,15 @@
                 <version>2.1.0</version>
             </dependency>
             
+            <!-- =========================================================== -->
+            <!-- ======================= JAX-RS: CORS =====================  -->
+            <!-- =========================================================== -->
+            <dependency>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-rt-rs-security-cors</artifactId>
+                <version>${cxf-version}</version>
+            </dependency>
+            
             <dependency>
                 <groupId>org.opensaml</groupId>
                 <artifactId>opensaml</artifactId>

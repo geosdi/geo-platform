@@ -44,6 +44,7 @@ import org.apache.cxf.interceptor.LoggingInInterceptor;
 import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
 import org.apache.cxf.message.Message;
+import org.apache.cxf.rs.security.cors.CrossOriginResourceSharingFilter;
 import org.geosdi.geoplatform.configurator.bootstrap.cxf.Rest;
 import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPLayer;
@@ -73,6 +74,7 @@ class GPServiceJsonConfig {
             value = "geoPlatformService") GeoPlatformService geoPlatformService,
             @Qualifier(value = "gpJsonCoreApplication") Application gpJsonCoreApplication,
             @Value("configurator{cxf_rest_provider_type}") GPRestProviderType providerType,
+            @Qualifier(value = "gpCrossResourceSharingFilter") CrossOriginResourceSharingFilter gpCrossResourceSharingFilter,
             @Qualifier(value = "serverLoggingInInterceptorBean") LoggingInInterceptor serverLogInInterceptor,
             @Qualifier(value = "serverLoggingOutInterceptorBean") LoggingOutInterceptor serverLogOutInterceptor) {
 
@@ -83,7 +85,8 @@ class GPServiceJsonConfig {
 
         factory.setProviders(Arrays.asList(
                 new Object[]{createProvider(providerType),
-                    new GPExceptionFaultMapper()}));
+                    new GPExceptionFaultMapper(),
+                    gpCrossResourceSharingFilter}));
 
         Map<Object, Object> extensionMappings = new HashMap<>();
         extensionMappings.put("xml", MediaType.APPLICATION_XML);

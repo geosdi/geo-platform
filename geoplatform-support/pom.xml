@@ -23,6 +23,8 @@
         <module>geoplatform-async-mail-support</module>
         <module>geoplatform-xmpp-support</module>
         <module>geoplatform-xmpp-async-support</module>
+        <module>geoplatform-jackson-support</module>
+        <module>geoplatform-google-maps-services-support</module>
     </modules>
 
 </project>

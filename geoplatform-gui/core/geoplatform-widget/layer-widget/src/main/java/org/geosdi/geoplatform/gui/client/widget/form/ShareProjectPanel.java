@@ -303,7 +303,7 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
                     private static final long serialVersionUID = 8650649319305683871L;
 
                     {
-                        super.setCommandRequest(shareProjectReq);
+                        super.setCommandRequest(getUsersToShare);
                     }
 
                     @Override

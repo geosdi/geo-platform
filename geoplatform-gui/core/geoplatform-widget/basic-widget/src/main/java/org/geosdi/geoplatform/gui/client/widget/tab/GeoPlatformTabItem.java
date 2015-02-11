@@ -54,15 +54,33 @@ public abstract class GeoPlatformTabItem extends TabItem
     protected final static Logger logger = Logger.getLogger("");
     protected GeoPlatformBindingWidget bindingWidget;
     protected GPWidgetSizeEvent event = new GPWidgetSizeEvent();
+    private boolean initialized;
 
-    public GeoPlatformTabItem(String title) {
+    public GeoPlatformTabItem(String title, boolean lazy) {
         super(title);
+        if (!lazy) {
+            this.init();
+        } 
     }
 
     @Override
+    protected void beforeRender() {
+        super.beforeRender();
+    }
+    
+    @Override
     public final void init() {
-        addComponents();
-        setWidgetProperties();
+        if (!initialized) {
+            addComponents();
+            setWidgetProperties();
+            this.initialized = true;
+        }
+    }
+
+    @Override
+    protected void onAttach() {
+        super.onAttach();
+        this.init();
     }
 
     @Override
@@ -70,7 +88,7 @@ public abstract class GeoPlatformTabItem extends TabItem
 
     public abstract void addComponents();
 
-    private void setWidgetProperties() {
+    protected void setWidgetProperties() {
         super.addListener(Events.Select, new Listener<ComponentEvent>() {
 
             @Override
@@ -83,5 +101,13 @@ public abstract class GeoPlatformTabItem extends TabItem
     }
 
     public void reset() {
+    }
+
+    /**
+     *
+     * @return Component State for Initialization of All Components
+     */
+    public boolean isInitialized() {
+        return initialized;
     }
 }

@@ -44,8 +44,8 @@ import org.geosdi.geoplatform.gui.client.widget.tab.GeoPlatformTabItem;
  */
 public abstract class GenericTabItem<M> extends GeoPlatformTabItem {
 
-    public GenericTabItem(String title) {
-        super(title);
+    public GenericTabItem(String title, boolean lazy) {
+        super(title, lazy);
     }
     
     public abstract void bindModel(M model);

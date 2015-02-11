@@ -62,9 +62,8 @@ public class CQLFilterBasicTab extends GeoPlatformTabItem implements ICQLFilterT
     private Button addExpressionButton;
 
     public CQLFilterBasicTab(String title, GPTreePanel<GPBeanTreeModel> treePanel) {
-        super(title);
+        super(title, Boolean.TRUE);
         this.treePanel = treePanel;
-        this.subclassCallToInit();
     }
 
     @Override

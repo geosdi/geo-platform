@@ -69,9 +69,8 @@ public class CQLFilterAdvancedTab extends GeoPlatformTabItem implements ICQLFilt
     private GPTreePanel<GPBeanTreeModel> treePanel;
 
     public CQLFilterAdvancedTab(String title, GPTreePanel<GPBeanTreeModel> treePanel) {
-        super(title);
+        super(title, Boolean.TRUE);
         this.treePanel = treePanel;
-        this.subclassCallToInit();
     }
 
     @Override

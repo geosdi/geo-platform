@@ -101,7 +101,7 @@ public class UserPropertiesWidget extends GeoPlatformTabItem
 
     public UserPropertiesWidget() {
         super(UserModuleConstants.INSTANCE.UserPropertiesWidget_headingText(),
-                Boolean.TRUE);
+                Boolean.FALSE);
 //        super.setSize(340, 350);
         TimeoutHandlerManager.addHandler(IManageInsertUserHandler.TYPE, this);
         TimeoutHandlerManager.addHandler(IManageUpdateUserHandler.TYPE, this);

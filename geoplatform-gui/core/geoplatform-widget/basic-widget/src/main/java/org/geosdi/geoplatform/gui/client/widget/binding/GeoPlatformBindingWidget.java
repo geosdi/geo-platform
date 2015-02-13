@@ -82,6 +82,9 @@ public abstract class GeoPlatformBindingWidget<M extends ModelData> {
     public FormPanel getWidget() {
         return this.formPanel;
     }
+    
+    public void reset() {
+    }
 
     public abstract FormPanel createFormPanel();
 

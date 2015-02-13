@@ -84,6 +84,11 @@ public abstract class GeoPlatformProgressBar extends GeoPlatformWindow {
         this.pb.reset();
         super.hide();
     }
+    
+    public final void hide(String message) {
+        this.updateProgressBarText(message);
+        hide();
+    }
 
     @Override
     public void setWindowProperties() {

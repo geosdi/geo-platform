@@ -53,6 +53,7 @@ import com.extjs.gxt.ui.client.widget.toolbar.LabelToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.user.client.ui.Widget;
+import java.util.logging.Logger;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.i18n.BasicWidgetConstants;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
@@ -70,6 +71,8 @@ import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 public abstract class GeoPlatformSearchWindow<C extends Widget, T extends GeoPlatformBeanModel>
         extends Window {
 
+    protected final static Logger logger = Logger.getLogger("");
+    //
     private VerticalPanel vp;
     protected FormPanel formPanel;
     protected ListStore<T> store;

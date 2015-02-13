@@ -1391,8 +1391,8 @@
         
         <javax.ws.rs-api-version>2.0</javax.ws.rs-api-version>  
 
-        <httpcomponents-core-version>4.3.3</httpcomponents-core-version>
-        <httpcomponents-client-version>4.3.6</httpcomponents-client-version>
+        <httpcomponents-core-version>4.4</httpcomponents-core-version>
+        <httpcomponents-client-version>4.4</httpcomponents-client-version>
 
         <jibx-version>1.2.5</jibx-version>
 

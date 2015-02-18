@@ -56,18 +56,22 @@ public abstract class GeoPlatformTabItem extends TabItem
     protected GPWidgetSizeEvent event = new GPWidgetSizeEvent();
     private boolean initialized;
 
+    public GeoPlatformTabItem(String text) {
+        this(text, Boolean.FALSE);
+    }
+
     public GeoPlatformTabItem(String title, boolean lazy) {
         super(title);
         if (!lazy) {
             this.init();
-        } 
+        }
     }
 
     @Override
     protected void beforeRender() {
         super.beforeRender();
     }
-    
+
     @Override
     public final void init() {
         if (!initialized) {

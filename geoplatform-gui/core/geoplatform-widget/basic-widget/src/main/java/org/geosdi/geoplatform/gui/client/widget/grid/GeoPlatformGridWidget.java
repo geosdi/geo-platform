@@ -115,6 +115,16 @@ public abstract class GeoPlatformGridWidget<T extends ModelData>
         return grid;
     }
 
+    @Override
+    public void fillStore(List<T> models) {
+        this.store.add(models);
+    }
+
+    @Override
+    public void cleanUpTheStore() {
+        this.store.removeAll();
+    }
+
     /**
      * @return the initialized
      */

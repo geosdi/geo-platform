@@ -42,7 +42,6 @@ import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.command.memento.basic.SendSharedProjectNotificationRequest;
 import org.geosdi.geoplatform.gui.client.command.memento.basic.SendSharedProjectNotificationResponse;
 import org.geosdi.geoplatform.gui.client.model.memento.puregwt.event.PeekCacheEvent;
-import org.geosdi.geoplatform.gui.client.model.memento.save.bean.AbstractMementoSave;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.AbstractMementoOriginalProperties;
 import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
 import org.geosdi.geoplatform.gui.command.api.GPClientCommand;

@@ -108,8 +108,8 @@ public class GPMapLiteExportProjectWidget extends GeoPlatformWindow {
         mapLiteURL.append(lonLat.lat());
         mapLiteURL.append("&zoom=");
         mapLiteURL.append(map.getZoom());
-//        mapLiteURL.append("&baseMap=");
-//        mapLiteURL.append(accountDetail.getBaseLayer());
+        mapLiteURL.append("&baseMap=");
+        mapLiteURL.append(accountDetail.getBaseLayer());
         return mapLiteURL.toString();
     }
 

@@ -51,9 +51,9 @@ import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
  */
 class FeatureAttributeRow implements IDateSelectedHandler {
 
-    private AttributeDTO attributeDTO;
+    private final AttributeDTO attributeDTO;
     private GPSecureStringTextField conditionAttributeField;
-    private TimeInputWidget timeInputWidget;
+    private final TimeInputWidget timeInputWidget;
 
     protected FeatureAttributeRow(AttributeDTO attributeDTO, GPEventBus bus) {
         this.timeInputWidget = new TimeInputWidget(bus);

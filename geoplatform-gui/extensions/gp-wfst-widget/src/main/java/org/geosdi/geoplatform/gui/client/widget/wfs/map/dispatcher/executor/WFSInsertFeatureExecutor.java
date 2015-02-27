@@ -127,7 +127,7 @@ public class WFSInsertFeatureExecutor extends WFSDispatcherExecutor implements
         GeometryAttributeDTO geom = new GeometryAttributeDTO();
         geom.setName(layerSchemaBinder.getGeometryName());
         geom.setValue(editorSource.buildWktGeometry());
-        geom.setSrid(new Integer(900913));
+        geom.setSrid(900913);
 
         return geom;
     }

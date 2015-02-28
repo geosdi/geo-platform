@@ -50,6 +50,7 @@
         <module>geoplatform-cxf-dependency</module>
         <module>geoplatform-jackson-dependency</module>
         <module>geoplatform-dropwizard-dependency</module>
+        <module>geoplatform-swagger-dependency</module>
     </modules>
 
 </project>

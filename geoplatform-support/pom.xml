@@ -25,6 +25,7 @@
         <module>geoplatform-xmpp-async-support</module>
         <module>geoplatform-jackson-support</module>
         <module>geoplatform-google-maps-services-support</module>
+        <module>geoplatform-swagger-support</module>
     </modules>
 
 </project>

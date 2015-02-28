@@ -33,6 +33,10 @@
  */
 package org.geosdi.geoplatform.services;
 
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiParam;
+import com.wordnik.swagger.annotations.ApiResponse;
 import java.util.List;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
@@ -145,6 +149,8 @@ import org.geosdi.geoplatform.services.rs.path.GPServiceRSPathConfig;
         }
 )
 @Path(value = GPServiceRSPathConfig.DEFAULT_RS_SERVICE_PATH)
+@Api(value = GPServiceRSPathConfig.DEFAULT_RS_SERVICE_PATH,
+        description = "Base GeoPlatform REST Service Core")
 @Consumes(value = {MediaType.APPLICATION_JSON})
 @Produces(value = {MediaType.APPLICATION_JSON})
 @WebService(name = "GeoPlatformService",
@@ -291,11 +297,17 @@ public interface GeoPlatformService extends GPCoreServiceApi {
      */
     @Get
     @GET
+    @ApiOperation(value = "Find an User by userID",
+            notes = "Search a User with the specific userID ",
+            response = GPUser.class)
+    @ApiResponse(code = 404, message = "User Not Found")
     @Path(value = GPServiceRSPathConfig.GET_USER_DETAIL_BY_ID_PATH)
     @WebResult(name = "user")
     @Override
     GPUser getUserDetail(@WebParam(name = "userID")
-            @PathParam(value = "userID") Long userID)
+            @PathParam(value = "userID")
+            @ApiParam(name = "userID", value = "The ID of user to fetch",
+                    required = true) Long userID)
             throws ResourceNotFoundFault;
 
     /**
@@ -307,10 +319,17 @@ public interface GeoPlatformService extends GPCoreServiceApi {
      */
     @Get
     @GET
+    @ApiOperation(value = "Find an User by UserName",
+            notes = "Search a User with the specific UserName ",
+            response = GPUser.class)
+    @ApiResponse(code = 404, message = "User Not Found")
     @Path(value = GPServiceRSPathConfig.GET_USER_DETAIL_BY_USERNAME_PATH)
     @WebResult(name = "user")
     @Override
-    GPUser getUserDetailByUsername(@QueryParam("") SearchRequest request)
+    GPUser getUserDetailByUsername(@QueryParam("") @ApiParam(
+            name = "searchRequest",
+            value = "The SearchRequest to use to find User by UserName",
+            required = true) SearchRequest request)
             throws ResourceNotFoundFault;
 
     /**

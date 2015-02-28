@@ -113,5 +113,4 @@ class GPServiceJsonConfig {
         }
         return provider;
     }
-
 }

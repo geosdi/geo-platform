@@ -914,6 +914,12 @@
                 <artifactId>gt-epsg-wkt</artifactId>
                 <version>${gt-version}</version>
             </dependency>
+            
+            <dependency>
+                <groupId>org.moxieapps.gwt</groupId>
+                <artifactId>org.moxieapps.gwt.uploader</artifactId>
+                <version>1.1.0</version>
+            </dependency>
 
             <!-- GWT -->
             <dependency>

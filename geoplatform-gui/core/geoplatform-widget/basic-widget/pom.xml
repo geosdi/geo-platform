@@ -21,6 +21,11 @@
             <artifactId>gwt-user</artifactId>
             <scope>provided</scope>
         </dependency>
+        
+        <dependency>
+            <groupId>org.moxieapps.gwt</groupId>
+            <artifactId>org.moxieapps.gwt.uploader</artifactId>
+        </dependency>
 
         <!-- GXT -->
         <dependency>

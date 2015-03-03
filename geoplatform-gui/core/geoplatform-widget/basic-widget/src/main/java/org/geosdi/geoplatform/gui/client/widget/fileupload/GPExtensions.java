@@ -41,5 +41,6 @@ package org.geosdi.geoplatform.gui.client.widget.fileupload;
  */
 public enum GPExtensions {
 
-    ZIP, JAR, PNG, JPEG, DBF, SHX, PRJ, SHP, KML, GP, TIF, TIFF, XML, SLD, JSON;
+    ZIP, JAR, PNG, JPEG, DBF, SHX, PRJ, SHP, KML, GP, TIF, TIFF, XML, SLD, JSON,
+    PDF, DOC;
 }

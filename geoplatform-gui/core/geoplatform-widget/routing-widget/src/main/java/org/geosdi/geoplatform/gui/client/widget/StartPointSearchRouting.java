@@ -50,7 +50,7 @@ import org.geosdi.geoplatform.gui.puregwt.routing.event.StartRoutingPointEvent;
  */
 public class StartPointSearchRouting extends GenericRoutingSearchPoint {
 
-    private StartRoutingPointEvent event;
+    private final StartRoutingPointEvent event = new StartRoutingPointEvent();
 
     /**
      * (non-Javadoc)

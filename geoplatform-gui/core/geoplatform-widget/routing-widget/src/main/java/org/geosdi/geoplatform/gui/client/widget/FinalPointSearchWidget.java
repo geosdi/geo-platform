@@ -50,7 +50,7 @@ import org.geosdi.geoplatform.gui.puregwt.routing.event.RemoveFinalRoutingPointE
  */
 public class FinalPointSearchWidget extends StartPointSearchRouting {
 
-    private FinalRoutingPointEvent event;
+    private final FinalRoutingPointEvent event = new FinalRoutingPointEvent();
 
     /**
      * (non-Javadoc)

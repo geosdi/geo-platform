@@ -59,7 +59,7 @@ import org.geosdi.geoplatform.gui.puregwt.routing.event.CleanComboEventHandler;
 public abstract class GenericRoutingSearchPoint extends ComboSearchWidget<GeocodingBean>
         implements CleanComboEventHandler {
 
-    private FindLocationsByAddressRequest request = new FindLocationsByAddressRequest();
+    private final FindLocationsByAddressRequest request = new FindLocationsByAddressRequest();
 
     /**
      * (non-Javadoc)

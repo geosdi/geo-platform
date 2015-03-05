@@ -63,7 +63,8 @@ public abstract class GPMoxieUploader<Is extends IsWidget> implements
 
     @Override
     public Is createUploaderWidget() {
-        return (isInitialized()) ? this.widget : setUpUploaderWidget();
+        return this.widget = ((isInitialized()) 
+                ? this.widget : setUpUploaderWidget());
     }
 
     @Override

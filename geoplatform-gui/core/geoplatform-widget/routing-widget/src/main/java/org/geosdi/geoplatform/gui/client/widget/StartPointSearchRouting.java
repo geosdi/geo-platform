@@ -62,7 +62,7 @@ public class StartPointSearchRouting extends GenericRoutingSearchPoint {
     public void setComboToolTip() {
         ToolTipConfig config = new ToolTipConfig();
         config.setTitle(RoutingModuleConstants.INSTANCE.usageText());
-        config.setText(RoutingModuleConstants.INSTANCE.usageInstructionsText());
+        config.setText(RoutingModuleConstants.INSTANCE.usageStartInstructionsText());
         config.setTrackMouse(true);
         this.combo.setToolTip(config);
     }

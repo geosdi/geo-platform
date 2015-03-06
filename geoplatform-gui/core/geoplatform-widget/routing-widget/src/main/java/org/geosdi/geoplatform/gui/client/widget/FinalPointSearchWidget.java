@@ -62,7 +62,7 @@ public class FinalPointSearchWidget extends StartPointSearchRouting {
     public void setComboToolTip() {
         ToolTipConfig config = new ToolTipConfig();
         config.setTitle(RoutingModuleConstants.INSTANCE.usageText());
-        config.setText(RoutingModuleConstants.INSTANCE.usageInstructionsText());
+        config.setText(RoutingModuleConstants.INSTANCE.usageEndInstructionsText());
         config.setTrackMouse(true);
         this.combo.setToolTip(config);
     }

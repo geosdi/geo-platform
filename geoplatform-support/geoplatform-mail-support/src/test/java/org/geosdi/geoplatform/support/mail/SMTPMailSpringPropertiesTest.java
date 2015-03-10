@@ -113,7 +113,7 @@ public class SMTPMailSpringPropertiesTest {
             public void prepare(MimeMessage mimeMessage) throws Exception {
                 MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
                 message.setSubject("Notification");
-                message.setTo("core@geosdi.org");
+                message.setTo("core@geosdi.com");
                 String text = VelocityEngineUtils.mergeTemplateIntoString(
                         gpSpringVelocityEngine, "template/"
                         + "geoPlatformMailSupport.html.vm",

@@ -105,7 +105,7 @@ public class SMTPMailSpringPropertiesTest {
     }
 
     @Test
-    @Ignore(value = "Too Mails from Hudson / Jenkins")
+//    @Ignore(value = "Too Mails from Hudson / Jenkins")
     public void sendMail() throws InterruptedException {
         this.gpMailSpringSender.send(new MimeMessagePreparator() {
 
@@ -113,7 +113,7 @@ public class SMTPMailSpringPropertiesTest {
             public void prepare(MimeMessage mimeMessage) throws Exception {
                 MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
                 message.setSubject("Notification");
-                message.setTo("core@geosdi.org");
+                message.setTo("glascaleia@gmail.com");
                 String text = VelocityEngineUtils.mergeTemplateIntoString(
                         gpSpringVelocityEngine, "template/"
                         + "geoPlatformMailSupport.html.vm",

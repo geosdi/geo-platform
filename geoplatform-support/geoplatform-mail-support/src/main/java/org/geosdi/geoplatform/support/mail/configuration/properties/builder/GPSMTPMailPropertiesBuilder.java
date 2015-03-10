@@ -69,25 +69,25 @@ public class GPSMTPMailPropertiesBuilder {
             private static final long serialVersionUID = 3109256773218160485L;
 
             {
-                super.put(JavaMailProp.MAIL_SOCKET_FACTORY_CLASS.getValue(),
+                super.setProperty(JavaMailProp.MAIL_SOCKET_FACTORY_CLASS.toString(),
                         smtpMailProp.getSocketFactoryClass());
-                super.put(JavaMailProp.MAIL_HOST.getValue(),
+                super.setProperty(JavaMailProp.MAIL_HOST.toString(),
                         smtpMailProp.getHost());
-                super.put(JavaMailProp.MAIL_PORT.getValue(),
-                        smtpMailProp.getPort());
-                super.put(JavaMailProp.MAIL_SMTP_SSL_ENABLE.getValue(),
-                        smtpMailProp.isSmtpSslEnable());
-                super.put(JavaMailProp.MAIL_DEBUG.getValue(),
-                        smtpMailProp.isDebugEnable());
-                super.put(JavaMailProp.MAIL_SMTP_STARTTLS_ENABLE.getValue(),
-                        smtpMailProp.isSmtpStarttlsEnable());
-                super.put(JavaMailProp.MAIL_TRANSPORT_PROTOCOL.getValue(),
+                super.setProperty(JavaMailProp.MAIL_PORT.toString(),
+                        smtpMailProp.getPort().toString());
+                super.setProperty(JavaMailProp.MAIL_SMTP_SSL_ENABLE.toString(),
+                        smtpMailProp.isSmtpSslEnable().toString());
+                super.setProperty(JavaMailProp.MAIL_DEBUG.toString(),
+                        smtpMailProp.isDebugEnable().toString());
+                super.setProperty(JavaMailProp.MAIL_SMTP_STARTTLS_ENABLE.toString(),
+                        smtpMailProp.isSmtpStarttlsEnable().toString());
+                super.setProperty(JavaMailProp.MAIL_TRANSPORT_PROTOCOL.toString(),
                         smtpMailProp.getTransportProtocol());
-                super.put(JavaMailProp.MAIL_SMTP_AUTH.getValue(),
-                        smtpMailProp.isSmtpAuth());
-                super.put(JavaMailProp.MAIL_USER.getValue(),
+                super.setProperty(JavaMailProp.MAIL_SMTP_AUTH.toString(),
+                        smtpMailProp.isSmtpAuth().toString());
+                super.setProperty(JavaMailProp.MAIL_USER.toString(),
                         smtpMailProp.getUser());
-                super.put(JavaMailProp.MAIL_PASSWORD.getValue(),
+                super.setProperty(JavaMailProp.MAIL_PASSWORD.toString(),
                         smtpMailProp.getPassword());
             }
 

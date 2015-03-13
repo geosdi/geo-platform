@@ -50,7 +50,7 @@ public class CXFWMSTest extends ServiceWMSTest {
 
 //    private GeoPlatformWSClientEncrypted gpWSClientEncrypted;
     // Servers
-    private final String serverUrlGeoSDI = "http://147.163.135.54/geoserver/wms";
+    private final String serverUrlGeoSDI = "http://150.145.141.124/geoserver/wms";
 
     @Override
     public void setUp() throws Exception {

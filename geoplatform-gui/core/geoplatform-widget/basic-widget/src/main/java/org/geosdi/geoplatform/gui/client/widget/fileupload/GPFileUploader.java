@@ -42,7 +42,8 @@ import com.google.gwt.user.client.ui.FileUpload;
 import com.google.gwt.user.client.ui.FormPanel;
 import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteEvent;
 import com.google.gwt.user.client.ui.FormPanel.SubmitEvent;
-import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.Hidden;
+import java.util.logging.Logger;
 import org.geosdi.geoplatform.gui.client.event.AbstractUploadEvent;
 import org.geosdi.geoplatform.gui.client.i18n.BasicWidgetConstants;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
@@ -59,12 +60,15 @@ import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
  */
 public class GPFileUploader {
 
+    protected final static Logger logger = Logger.getLogger("");
+
     private FormPanel formPanel = new FormPanel();
     private FileUpload fileUpload;
     private Button buttonSubmit;
     private String htmlResult;
     private final AbstractUploadEvent uploadEvent;
     private UploaderProgressBar uploaderProgressBar;
+    private VerticalPanel verticalPanel;
 
     public GPFileUploader(String uploadAction, AbstractUploadEvent uploadEvent,
             GPExtensions... extensions) {
@@ -81,15 +85,15 @@ public class GPFileUploader {
         uploaderProgressBar = new UploaderProgressBar();
         formPanel = new FormPanel();
         formPanel.setAction(GWT.getModuleBaseURL() + uploadAction);
-        formPanel.setEncoding(FormPanel.ENCODING_URLENCODED);
+        formPanel.setEncoding(FormPanel.ENCODING_MULTIPART);
         formPanel.setMethod(FormPanel.METHOD_POST);
 
-        VerticalPanel panel = new VerticalPanel();
-        formPanel.setWidget(panel);
+        this.verticalPanel = new VerticalPanel();
+        formPanel.setWidget(verticalPanel);
 
         fileUpload = new FileUpload();
         fileUpload.setName("uploadFormElement");
-        panel.add(fileUpload);
+        verticalPanel.add(fileUpload);
 
         buttonSubmit = new Button(ButtonsConstants.INSTANCE.submitText(),
                 new SelectionListener<ButtonEvent>() {
@@ -107,7 +111,7 @@ public class GPFileUploader {
                     }
 
                 });
-        panel.add(buttonSubmit);
+        verticalPanel.add(buttonSubmit);
 
         // Add an event handler to the form.
         formPanel.addSubmitHandler(new FormPanel.SubmitHandler() {
@@ -136,7 +140,7 @@ public class GPFileUploader {
 
                     @Override
                     public void onSubmitComplete(SubmitCompleteEvent event) {
-                // When the form submission is successfully completed,
+                        // When the form submission is successfully completed,
                         // this event is fired. Assuming the service returned a
                         // response of type text/html, we can get the result text here 
                         // (see the FormPanel documentation for further explanation)
@@ -156,7 +160,7 @@ public class GPFileUploader {
 //                        System.out.println("HTMLResult: " + htmlResult);
                                 uploadEvent.setResult(htmlResult);
                                 GPHandlerManager.fireEvent(uploadEvent);
-                        //done.enable();
+                                //done.enable();
                                 //mapPreviewWidget.drawAoiOnMap(wkt);
                                 LayoutManager.getInstance().getStatusMap().setStatus(
                                         BasicWidgetConstants.INSTANCE.GPFileUploader_successStatusText(),
@@ -178,6 +182,11 @@ public class GPFileUploader {
                     }
 
                 });
+    }
+
+    public void addParamToServletURL(String key, String value) {
+        Hidden queryParameter = new Hidden(key, value);
+        this.verticalPanel.add(queryParameter);
     }
 
     public boolean isValidExtensions(String fileName, GPExtensions... extensions) {

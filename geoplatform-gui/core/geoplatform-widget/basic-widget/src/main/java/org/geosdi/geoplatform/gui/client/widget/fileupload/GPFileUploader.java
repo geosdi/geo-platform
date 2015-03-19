@@ -69,6 +69,7 @@ public class GPFileUploader {
     private final AbstractUploadEvent uploadEvent;
     private UploaderProgressBar uploaderProgressBar;
     private VerticalPanel verticalPanel;
+    private Hidden queryParameter;
 
     public GPFileUploader(String uploadAction, AbstractUploadEvent uploadEvent,
             GPExtensions... extensions) {
@@ -89,6 +90,11 @@ public class GPFileUploader {
         formPanel.setMethod(FormPanel.METHOD_POST);
 
         this.verticalPanel = new VerticalPanel();
+
+        this.queryParameter = new Hidden();
+
+        this.verticalPanel.add(queryParameter);
+
         formPanel.setWidget(verticalPanel);
 
         fileUpload = new FileUpload();
@@ -185,8 +191,8 @@ public class GPFileUploader {
     }
 
     public void addParamToServletURL(String key, String value) {
-        Hidden queryParameter = new Hidden(key, value);
-        this.verticalPanel.add(queryParameter);
+        this.queryParameter.setName(key);
+        this.queryParameter.setValue(value);
     }
 
     public boolean isValidExtensions(String fileName, GPExtensions... extensions) {

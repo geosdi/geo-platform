@@ -48,9 +48,9 @@ import org.geosdi.geoplatform.responce.InfoPreviewStore;
 public interface IPublisherUploader {
 
     InfoPreviewStore analyzeZIPEPSG(String sessionID, String userName,
-            File file) throws ResourceNotFoundFault;
+            File file, String workspace) throws ResourceNotFoundFault;
 
     InfoPreview analyzeTIFInPreview(String sessionID, File file,
-            boolean overwrite) throws ResourceNotFoundFault;
+            boolean overwrite, String workspace) throws ResourceNotFoundFault;
 
 }

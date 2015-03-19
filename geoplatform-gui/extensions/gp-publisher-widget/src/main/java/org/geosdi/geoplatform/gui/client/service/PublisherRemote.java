@@ -63,12 +63,12 @@ public interface PublisherRemote extends RemoteService {
     }
 
     @Deprecated
-    public String processEPSGResult(List<EPSGLayerData> previewLayerList) throws
-            GeoPlatformException;
+    public String processEPSGResult(List<EPSGLayerData> previewLayerList,
+            String workspace) throws GeoPlatformException;
 
     @Deprecated
     public String publishLayerPreview(List<String> layerList,
-            boolean reloadCluster) throws GeoPlatformException;
+            String workspace) throws GeoPlatformException;
 
     public void kmlPreview(String url) throws GeoPlatformException;
 

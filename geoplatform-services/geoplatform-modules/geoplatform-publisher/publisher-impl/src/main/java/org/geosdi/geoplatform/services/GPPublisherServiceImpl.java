@@ -59,9 +59,9 @@ public class GPPublisherServiceImpl extends GPPublisherBasicServiceImpl
 
     @Override
     public InfoPreviewStore analyzeZIPEPSG(String sessionID,
-            String userName, File file)
+            String userName, File file, String workspace)
             throws ResourceNotFoundFault {
-        return super.analyzeZIPEPSG(sessionID, userName, file);
+        return super.analyzeZIPEPSG(sessionID, userName, file, workspace);
     }
 
     @Override
@@ -101,14 +101,14 @@ public class GPPublisherServiceImpl extends GPPublisherBasicServiceImpl
 
     @Override
     public InfoPreview analyzeTIFInPreview(String userName, File file,
-            Boolean overwrite) throws ResourceNotFoundFault {
-        return super.analyzeTIFInPreview(userName, file, overwrite);
+            Boolean overwrite, String workspace) throws ResourceNotFoundFault {
+        return super.analyzeTIFInPreview(userName, file, overwrite, workspace);
     }
 
     @Override
-    public InfoPreviewStore getPreviewDataStores(String userName) throws
+    public InfoPreviewStore getPreviewDataStores(String workspace) throws
             ResourceNotFoundFault {
-        return super.getPreviewDataStores(userName);
+        return super.getPreviewDataStores(workspace);
     }
 
     @Override

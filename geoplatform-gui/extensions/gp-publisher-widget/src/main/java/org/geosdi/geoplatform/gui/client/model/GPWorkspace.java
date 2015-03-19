@@ -31,25 +31,41 @@
  * you are not obligated to do so. If you do not wish to do so, delete this
  * exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.client.service;
+package org.geosdi.geoplatform.gui.client.model;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import java.util.List;
-import org.geosdi.geoplatform.gui.client.model.EPSGLayerData;
+import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public interface PublisherRemoteAsync {
+public class GPWorkspace extends GeoPlatformBeanModel {
 
-    @Deprecated
-    public void processEPSGResult(List<EPSGLayerData> previewLayerList,
-            String workspace, AsyncCallback<String> callback);
+    private static final long serialVersionUID = 8038053416812761594L;
 
-    @Deprecated
-    public void publishLayerPreview(List<String> layerList, String workspace,
-            AsyncCallback<String> callback);
+    public enum GPWorkspaceKey {
 
-    public void kmlPreview(String url, AsyncCallback<Boolean> callback);
+        WORKSPACE_NAME;
+    }
+
+    public GPWorkspace() {
+    }
+
+    public GPWorkspace(String workspaceName) {
+        this.setWorkspaceName(workspaceName);
+    }
+
+    public void setWorkspaceName(String workspaceName) {
+        super.set(GPWorkspaceKey.WORKSPACE_NAME.name(), workspaceName);
+    }
+
+    public String getWorkspaceName() {
+        return super.get(GPWorkspaceKey.WORKSPACE_NAME.name());
+    }
+
+    @Override
+    public String toString() {
+        return "GPWorkspace{" + "workspace name: " + this.getWorkspaceName() + '}';
+    }
+
 }

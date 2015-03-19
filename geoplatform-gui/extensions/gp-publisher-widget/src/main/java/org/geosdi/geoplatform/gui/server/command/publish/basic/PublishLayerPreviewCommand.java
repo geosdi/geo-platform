@@ -72,7 +72,7 @@ public class PublishLayerPreviewCommand implements
 
         String result = this.publisherService.publishLayerPreview(
                 httpServletRequest, request.getLayerList(), request.
-                isReloadCluster());
+                getWorkspace());
 
         logger.debug("#################### Found {} ", result);
 

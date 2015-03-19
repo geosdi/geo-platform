@@ -22,4 +22,9 @@
         <when-property-is name="security.geoserver" value="gs_cas"/>
     </replace-with>
 
+    <replace-with class="org.geosdi.geoplatform.gui.client.command.publish.cas.CasGetWorkspaceListRequest">
+        <when-type-is class="org.geosdi.geoplatform.gui.client.command.publish.basic.GetWorkspaceListRequest"/>
+        <when-property-is name="security.geoserver" value="gs_cas"/>
+    </replace-with>
+
 </module>

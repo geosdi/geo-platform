@@ -59,20 +59,20 @@ public class GPPublisherUploader implements IPublisherUploader {
 
     @Override
     public InfoPreviewStore analyzeZIPEPSG(String sessionID, String userName,
-            File file) throws ResourceNotFoundFault {
+            File file, String workspace) throws ResourceNotFoundFault {
 
         return (casPublisherService != null) ? casPublisherService.
-                analyzeZIPEPSG(sessionID, userName, file) : geoPlatformPublishClient.
-                analyzeZIPEPSG(sessionID, userName, file);
+                analyzeZIPEPSG(sessionID, userName, file, workspace) : 
+                geoPlatformPublishClient.analyzeZIPEPSG(sessionID, userName, file, workspace);
     }
 
     @Override
     public InfoPreview analyzeTIFInPreview(String sessionID, File file,
-            boolean overwrite) throws ResourceNotFoundFault {
+            boolean overwrite, String workspace) throws ResourceNotFoundFault {
 
         return (casPublisherService != null) ? casPublisherService.
-                analyzeTIFInPreview(sessionID, file, overwrite) : geoPlatformPublishClient.
-                analyzeTIFInPreview(sessionID, file, overwrite);
+                analyzeTIFInPreview(sessionID, file, overwrite, workspace) : 
+                geoPlatformPublishClient.analyzeTIFInPreview(sessionID, file, overwrite, workspace);
     }
 
     /**

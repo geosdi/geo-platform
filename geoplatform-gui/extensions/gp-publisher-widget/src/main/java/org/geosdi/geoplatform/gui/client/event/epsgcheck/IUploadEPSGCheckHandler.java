@@ -46,5 +46,5 @@ public interface IUploadEPSGCheckHandler extends EventHandler {
 
     Type<IUploadEPSGCheckHandler> TYPE = new Type<IUploadEPSGCheckHandler>();
 
-    public void showEPSGTable(String jsonString);
+    public void showEPSGTable(String jsonString, String workspace);
 }

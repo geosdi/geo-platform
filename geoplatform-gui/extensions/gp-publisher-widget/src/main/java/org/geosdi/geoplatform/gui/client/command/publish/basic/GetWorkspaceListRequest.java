@@ -33,61 +33,27 @@
  */
 package org.geosdi.geoplatform.gui.client.command.publish.basic;
 
-import java.util.List;
-import org.geosdi.geoplatform.gui.client.model.EPSGLayerData;
 import org.geosdi.geoplatform.gui.command.api.GPCommandRequest;
 
 /**
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public class ProcessEPSGResultRequest implements GPCommandRequest {
+public class GetWorkspaceListRequest implements GPCommandRequest {
 
     private static final long serialVersionUID = 2775585167487746885L;
     //
-    private List<EPSGLayerData> previewLayerList;
-    private String workspace;
 
-    public ProcessEPSGResultRequest() {
-    }
-
-    public ProcessEPSGResultRequest(List<EPSGLayerData> thePreviewLayerList,
-            String workspace) {
-        this.previewLayerList = thePreviewLayerList;
-        this.workspace = workspace;
-    }
-
-    /**
-     * @return the previewLayerList
-     */
-    public List<EPSGLayerData> getPreviewLayerList() {
-        return previewLayerList;
-    }
-
-    /**
-     * @param previewLayerList the previewLayerList to set
-     */
-    public void setPreviewLayerList(List<EPSGLayerData> previewLayerList) {
-        this.previewLayerList = previewLayerList;
-    }
-
-    public String getWorkspace() {
-        return workspace;
-    }
-
-    public void setWorkspace(String workspace) {
-        this.workspace = workspace;
+    public GetWorkspaceListRequest() {
     }
 
     @Override
     public String getCommandName() {
-        return "command.publish.basic.ProcessEPSGResultCommand";
+        return "command.publish.basic.GetWorkspaceListCommand";
     }
 
     @Override
     public String toString() {
-        return this.getClass().getName() + " { " + "previewLayerList = "
-                + previewLayerList + '}';
+        return "GetWorkspaceListRequest{" + '}';
     }
 }

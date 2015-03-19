@@ -33,47 +33,61 @@
  */
 package org.geosdi.geoplatform.gui.server.command.publish.basic;
 
+import com.google.common.collect.Lists;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import org.geosdi.geoplatform.gui.client.command.publish.basic.ProcessEPSGResultRequest;
-import org.geosdi.geoplatform.gui.client.command.publish.basic.ProcessEPSGResultResponse;
+import org.geosdi.geoplatform.gui.client.command.publish.basic.GetWorkspaceListRequest;
+import org.geosdi.geoplatform.gui.client.command.publish.basic.GetWorkspaceListResponse;
+import org.geosdi.geoplatform.gui.client.model.GPWorkspace;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;
-import org.geosdi.geoplatform.gui.server.service.IPublisherService;
+import org.geosdi.geoplatform.gui.shared.util.GPSharedUtils;
+import org.geosdi.geoplatform.services.GPPublisherService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 /**
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
 @Lazy(true)
-@Component(value = "command.publish.basic.ProcessEPSGResultCommand")
-public class ProcessEPSGResultCommand implements
-        GPCommand<ProcessEPSGResultRequest, ProcessEPSGResultResponse> {
+@Component(value = "command.publish.basic.GetWorkspaceListCommand")
+public class GetWorkspaceListCommand implements
+        GPCommand<GetWorkspaceListRequest, GetWorkspaceListResponse> {
 
-    private static final Logger logger = LoggerFactory.getLogger(
-            ProcessEPSGResultCommand.class);
-    //
-    @Autowired
-    private IPublisherService publisherService;
+    private static final Logger logger = LoggerFactory.getLogger(GetWorkspaceListCommand.class);
+
+    private GPPublisherService geoPlatformPublishClient;
 
     @Override
-    public ProcessEPSGResultResponse execute(ProcessEPSGResultRequest request,
+    public GetWorkspaceListResponse execute(GetWorkspaceListRequest request,
             HttpServletRequest httpServletRequest) {
 
         logger.info("##################### Executing {} Command", this.
                 getClass().getSimpleName());
 
-        String result = this.publisherService.processEPSGResult(
-                httpServletRequest, request.getPreviewLayerList(),
-                request.getWorkspace());
+        List<String> results = this.geoPlatformPublishClient.getWorkspaceNames();
+        logger.info("#################### Found {} ", results);
+        ArrayList<GPWorkspace> workspaceResult = Lists.<GPWorkspace>newArrayList();
+        for (String result : GPSharedUtils.safeList(results)) {
+            workspaceResult.add(new GPWorkspace(result));
+        }
 
-        logger.info("#################### Found {} ", result);
+        return new GetWorkspaceListResponse(workspaceResult);
+    }
 
-        return new ProcessEPSGResultResponse(result);
+    /**
+     *
+     * @param geoPlatformPublishClient
+     */
+    @Autowired
+    public void setGeoPlatformPublishClient(
+            @Qualifier("geoPlatformPublishClient") GPPublisherService geoPlatformPublishClient) {
+        this.geoPlatformPublishClient = geoPlatformPublishClient;
     }
 
 }

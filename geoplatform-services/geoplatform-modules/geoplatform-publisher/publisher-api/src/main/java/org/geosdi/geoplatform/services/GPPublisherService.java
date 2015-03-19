@@ -1,42 +1,41 @@
 /**
  *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
+ * geo-platform Rich webgis framework http://geo-platform.org
+ * ====================================================================
  *
- *   Copyright (C) 2008-2015 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2015 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version. This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details. You should have received a copy of the GNU General Public License
+ * along with this program. If not, see http://www.gnu.org/licenses/
  *
- *   ====================================================================
+ * ====================================================================
  *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
+ * Linking this library statically or dynamically with other modules is making a
+ * combined work based on this library. Thus, the terms and conditions of the
+ * GNU General Public License cover the whole combination.
  *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * As a special exception, the copyright holders of this library give you
+ * permission to link this library with independent modules to produce an
+ * executable, regardless of the license terms of these independent modules, and
+ * to copy and distribute the resulting executable under terms of your choice,
+ * provided that you also meet, for each linked independent module, the terms
+ * and conditions of the license of that module. An independent module is a
+ * module which is not derived from or based on this library. If you modify this
+ * library, you may extend this exception to your version of the library, but
+ * you are not obligated to do so. If you do not wish to do so, delete this
+ * exception statement from your version.
  */
 package org.geosdi.geoplatform.services;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.List;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
@@ -91,7 +90,9 @@ public interface GPPublisherService extends IGPPublisherService {
             @Multipart(value = "userName") String userName,
             @WebParam(name = "fileName")
             @Multipart(value = "fileName",
-                    type = MediaType.APPLICATION_OCTET_STREAM) File file)
+                    type = MediaType.APPLICATION_OCTET_STREAM) File file,
+            @WebParam(name = "workspace")
+            @Multipart(value = "workspace") String workspace)
             throws ResourceNotFoundFault;
 
     @Post
@@ -162,6 +163,14 @@ public interface GPPublisherService extends IGPPublisherService {
             @WebParam(name = "styleName")
             @QueryParam(value = "styleName") String styleName);
 
+    @Get
+    @GET
+    @Path(value = GPPublisherRSPathConfig.GET_WORKSPACE_NAMES_PATH)
+    @HttpResource(location = "/preview/getWorkspaces")
+    @WebResult(name = "Result")
+    @Override
+    public List<String> getWorkspaceNames();
+
     @Post
     @POST
     @Path(value = GPPublisherRSPathConfig.ANALYZE_TIF_IN_PREVIEW_PATH)
@@ -176,7 +185,9 @@ public interface GPPublisherService extends IGPPublisherService {
             @Multipart(value = "fileName",
                     type = MediaType.APPLICATION_OCTET_STREAM) File file,
             @WebParam(name = "overwrite")
-            @Multipart(value = "overwrite") Boolean overwrite)
+            @Multipart(value = "overwrite") Boolean overwrite,
+            @WebParam(name = "workspace")
+            @QueryParam(value = "workspace") String workspace)
             throws ResourceNotFoundFault;
 
     @Get
@@ -186,8 +197,8 @@ public interface GPPublisherService extends IGPPublisherService {
     @WebResult(name = "Result")
     @Override
     InfoPreviewStore getPreviewDataStores(
-            @WebParam(name = "userName")
-            @QueryParam(value = "userName") String userName)
+            @WebParam(name = "workspace")
+            @QueryParam(value = "workspace") String workspace)
             throws ResourceNotFoundFault;
 
     @Post

@@ -33,75 +33,51 @@
  */
 package org.geosdi.geoplatform.gui.server.command.publish.cas;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import com.google.common.collect.Lists;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
-import org.geosdi.geoplatform.gui.client.command.publish.basic.PublishLayerPreviewResponse;
-import org.geosdi.geoplatform.gui.client.command.publish.cas.CasPublishLayerPreviewRequest;
+import org.geosdi.geoplatform.gui.client.command.publish.basic.GetWorkspaceListResponse;
+import org.geosdi.geoplatform.gui.client.command.publish.cas.CasGetWorkspaceListRequest;
+import org.geosdi.geoplatform.gui.client.model.GPWorkspace;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;
-import org.geosdi.geoplatform.gui.global.GeoPlatformException;
-import org.geosdi.geoplatform.gui.server.SessionUtility;
-import org.geosdi.geoplatform.gui.utility.GPReloadURLException;
-import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
-import org.geosdi.geoplatform.request.PublishLayersRequest;
+import org.geosdi.geoplatform.gui.shared.util.GPSharedUtils;
 import org.geosdi.geoplatform.services.GPPublisherBasicServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 /**
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
 @Lazy(true)
-@Component(value = "command.publish.cas.CasPublishLayerPreviewCommand")
-@Profile(value = "gs_cas")
-public class CasPublishLayerPreviewCommand implements
-        GPCommand<CasPublishLayerPreviewRequest, PublishLayerPreviewResponse> {
+@Component(value = "command.publish.cas.GetWorkspaceListCommand")
+public class CasGetWorkspaceListCommand implements
+        GPCommand<CasGetWorkspaceListRequest, GetWorkspaceListResponse> {
 
-    private static final Logger logger = LoggerFactory.getLogger(
-            CasPublishLayerPreviewCommand.class);
+    private static final Logger logger = LoggerFactory.getLogger(CasGetWorkspaceListCommand.class);
+
     private GPPublisherBasicServiceImpl casPublisherService;
-    @Autowired
-    private SessionUtility sessionUtility;
-    //
 
     @Override
-    public PublishLayerPreviewResponse execute(
-            CasPublishLayerPreviewRequest request,
+    public GetWorkspaceListResponse execute(CasGetWorkspaceListRequest request,
             HttpServletRequest httpServletRequest) {
-        try {
-            sessionUtility.getLoggedAccount(httpServletRequest);
-        } catch (GPSessionTimeout timeout) {
-            throw new GeoPlatformException(timeout);
-        }
-        String result = null;
-        try {
-            List<String> layerList = request.getLayerList();
-            casPublisherService.publishAll(new PublishLayersRequest(
-                    httpServletRequest.getSession().getId(), "previews",
-                    "dataTest", layerList));
-        } catch (ResourceNotFoundFault ex) {
-            logger.error("Error on publish shape: " + ex);
-            throw new GeoPlatformException("Error on publish shape.");
-        } catch (FileNotFoundException ex) {
-            logger.error("Error on publish shape: " + ex);
-            throw new GeoPlatformException("Error on publish shape.");
-        } catch (IOException e) {
-            logger.error("Error on reloading cluster: " + e);
-            throw new GeoPlatformException(new GPReloadURLException(
-                    "Error on reloading cluster."));
-        }
-        return new PublishLayerPreviewResponse(result);
 
+        logger.info("##################### Executing {} Command", this.
+                getClass().getSimpleName());
+
+        List<String> results = this.casPublisherService.getWorkspaceNames();
+        logger.info("#################### Found {} ", results);
+        ArrayList<GPWorkspace> workspaceResult = Lists.<GPWorkspace>newArrayList();
+        for (String result : GPSharedUtils.safeList(results)) {
+            workspaceResult.add(new GPWorkspace(result));
+        }
+
+        return new GetWorkspaceListResponse(workspaceResult);
     }
 
     /**
@@ -113,4 +89,5 @@ public class CasPublishLayerPreviewCommand implements
 //        System.out.println("*************** Setting publisher service: " + );
         this.casPublisherService = casPublisherService;
     }
+
 }

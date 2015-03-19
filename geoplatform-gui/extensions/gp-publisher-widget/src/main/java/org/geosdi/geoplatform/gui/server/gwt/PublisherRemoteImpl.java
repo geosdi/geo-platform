@@ -58,17 +58,17 @@ public class PublisherRemoteImpl extends GPAutoInjectingXsrfTokenServiceServlet
     @Override
     @Deprecated
     public String publishLayerPreview(List<String> layerList,
-            boolean reloadCluster) throws GeoPlatformException {
+            String workspace) throws GeoPlatformException {
         return publisherService.publishLayerPreview(super.
-                getThreadLocalRequest(), layerList, reloadCluster);
+                getThreadLocalRequest(), layerList, workspace);
     }
 
     @Override
     @Deprecated
-    public String processEPSGResult(List<EPSGLayerData> previewLayerList) throws
-            GeoPlatformException {
+    public String processEPSGResult(List<EPSGLayerData> previewLayerList,
+            String workspace) throws GeoPlatformException {
         return publisherService.processEPSGResult(super.getThreadLocalRequest(),
-                previewLayerList);
+                previewLayerList, workspace);
     }
 
     @Override

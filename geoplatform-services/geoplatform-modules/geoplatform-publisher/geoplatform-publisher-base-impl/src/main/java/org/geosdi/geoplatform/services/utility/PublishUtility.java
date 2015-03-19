@@ -1,37 +1,35 @@
 /**
  *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
+ * geo-platform Rich webgis framework http://geo-platform.org
+ * ====================================================================
  *
- *   Copyright (C) 2008-2015 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2015 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version. This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details. You should have received a copy of the GNU General Public License
+ * along with this program. If not, see http://www.gnu.org/licenses/
  *
- *   ====================================================================
+ * ====================================================================
  *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
+ * Linking this library statically or dynamically with other modules is making a
+ * combined work based on this library. Thus, the terms and conditions of the
+ * GNU General Public License cover the whole combination.
  *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * As a special exception, the copyright holders of this library give you
+ * permission to link this library with independent modules to produce an
+ * executable, regardless of the license terms of these independent modules, and
+ * to copy and distribute the resulting executable under terms of your choice,
+ * provided that you also meet, for each linked independent module, the terms
+ * and conditions of the license of that module. An independent module is a
+ * module which is not derived from or based on this library. If you modify this
+ * library, you may extend this exception to your version of the library, but
+ * you are not obligated to do so. If you do not wish to do so, delete this
+ * exception statement from your version.
  */
 package org.geosdi.geoplatform.services.utility;
 
@@ -211,6 +209,72 @@ public class PublishUtility {
         return result;
     }
 
+    /**
+     * Scompatta il contenuto, rimuovi il vecchio prj, aggiunti il nuovo e salva
+     * tutto
+     *
+     * @param userName
+     * @param infoPreview
+     * @param tempUserDir
+     * @param prjFile
+     * @return
+     * @throws ResourceNotFoundFault
+     */
+    private static boolean writePrjInZipShp(String userName, InfoPreview infoPreview,
+            String tempUserDir, String prjFile) throws ResourceNotFoundFault {
+        String tempUserZipDir = PublishUtility.createDir(tempUserDir + PublishUtility.ZIP_DIR_NAME);
+        boolean result = false;
+        String fileName = tempUserZipDir + infoPreview.getDataStoreName() + ".zip";
+        File existingZipFile = new File(fileName);
+        ZipFile zipSrc = null;
+        String operationDirPath = tempUserZipDir + "rewrite" + System.getProperty("file.separator");
+        BufferedWriter writer = null;
+        try {
+            PublishUtility.createDir(operationDirPath);
+            logger.info("********* ManagePRJRewrite operationDirPath: " + operationDirPath);
+            //Decomprime il contenuto dello zip nella cartella rename
+            zipSrc = new ZipFile(existingZipFile);
+            Enumeration<? extends ZipEntry> entries = zipSrc.entries();
+            while (entries.hasMoreElements()) {
+                ZipEntry entry = entries.nextElement();
+                PublishUtility.extractEntryToFile(entry, zipSrc, operationDirPath);
+            }
+            logger.info("********* ManageRename element unzipped");
+
+            //Dopo l'estrazione rimuovere prj ed aggiungere il nuovo poi creare zip
+            File newPRJFile = new File(operationDirPath, infoPreview.getDataStoreName() + ".prj");
+            newPRJFile.delete();
+
+            newPRJFile.createNewFile();
+
+            writer = new BufferedWriter(new FileWriter(newPRJFile));
+            writer.write(prjFile);
+
+            //Cancella lo zip precedente
+            existingZipFile.delete();
+            //Salvare zip file in: tempUserZipDir
+            compressFiles(tempUserZipDir, operationDirPath, infoPreview.getDataStoreName() + ".zip",
+                    infoPreview.getDataStoreName(), infoPreview.getDataStoreName());
+            logger.debug("********* ManageRename after compress file");
+            logger.debug("********* ManageRename after delete previous file");
+            result = Boolean.TRUE;
+        } catch (IOException | ResourceNotFoundFault e) {
+            logger.error("ERRORE : " + e);
+            throw new ResourceNotFoundFault(e.getMessage());
+        } finally {
+            try {
+                zipSrc.close();
+                writer.close();
+                //Cancella cartella rename
+                PublishUtility.deleteDir(operationDirPath);
+                logger.debug("********* ManageRename succesfully removed rename dir");
+            } catch (IOException ex) {
+            }
+        }
+        logger.debug("Shape Zip renamed: " + result);
+        return result;
+    }
+
     private static boolean renameTif(String userName, InfoPreview infoPreview,
             String tempUserDir) throws ResourceNotFoundFault {
         boolean result = false;
@@ -271,6 +335,15 @@ public class PublishUtility {
             result = renameZipShp(userName, infoPreview, tempUserDir);
         } else {
             result = renameTif(userName, infoPreview, tempUserDir);
+        }
+        return result;
+    }
+
+    public static boolean managePrjRewrite(String userName, InfoPreview infoPreview,
+            String tempUserDir, String prjWKT) throws ResourceNotFoundFault {
+        boolean result = false;
+        if (infoPreview.isIsShape()) {
+            result = writePrjInZipShp(userName, infoPreview, tempUserDir, prjWKT);
         }
         return result;
     }
@@ -358,7 +431,7 @@ public class PublishUtility {
                     tempUserZipDir + zipFileName));
             File shpFile = new File(tempUserDir + origName + ".shp");
             File dbfFile = new File(tempUserDir + origName + ".dbf");
-            File shxFile = new File(tempUserDir + origName + ".shx");
+            File shxFile = new File(tempUserDir + origName + ".shx");//sbn&&sbx&&CPG
             File prjFile = new File(tempUserDir + origName + ".prj");
 
             File shpDestFile = shpFile;

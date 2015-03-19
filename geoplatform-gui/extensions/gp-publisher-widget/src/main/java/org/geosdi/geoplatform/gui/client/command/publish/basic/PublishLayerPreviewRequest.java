@@ -48,15 +48,15 @@ public class PublishLayerPreviewRequest implements GPCommandRequest {
     private static final long serialVersionUID = 4621468693963550655L;
     //
     private List<String> layerList;
-    private boolean reloadCluster;
+    private String workspace;
 
     public PublishLayerPreviewRequest() {
     }
 
     public PublishLayerPreviewRequest(List<String> theLayerList,
-            boolean theReloadCluster) {
+            String workspace) {
         this.layerList = theLayerList;
-        this.reloadCluster = theReloadCluster;
+        this.workspace = workspace;
     }
 
     /**
@@ -74,24 +74,18 @@ public class PublishLayerPreviewRequest implements GPCommandRequest {
         this.layerList = layerList;
     }
 
-    /**
-     * @return the reloadCluster
-     */
-    public boolean isReloadCluster() {
-        return reloadCluster;
+    public String getWorkspace() {
+        return workspace;
     }
 
-    /**
-     * @param reloadCluster the reloadCluster to set
-     */
-    public void setReloadCluster(boolean reloadCluster) {
-        this.reloadCluster = reloadCluster;
+    public void setWorkspace(String workspace) {
+        this.workspace = workspace;
     }
 
     @Override
     public String toString() {
         return this.getClass().getName() + " {" + "layerList = "
-                + layerList + ", reloadCluster = " + reloadCluster + '}';
+                + layerList + ", workspace = " + workspace + '}';
     }
 
     @Override

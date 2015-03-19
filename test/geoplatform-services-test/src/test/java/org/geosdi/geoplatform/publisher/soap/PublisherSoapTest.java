@@ -116,7 +116,7 @@ public abstract class PublisherSoapTest extends PublisherBaseTest {
     protected final void mockAnalyzeTIFInPreview() throws Exception {
         when(publisherService.analyzeTIFInPreview(any(String.class), any(
                 File.class),
-                any(Boolean.class))).thenReturn(new InfoPreview(
+                any(Boolean.class), any(String.class))).thenReturn(new InfoPreview(
                                 "DATA_STORE_MOCK_MOKITO_SOAP",
                                 "MESSAGE_MOCK_MOKITO_SOAP"));
     }
@@ -161,7 +161,7 @@ public abstract class PublisherSoapTest extends PublisherBaseTest {
     @Override
     protected final void mockAnalyzeZIPEPSG() throws Exception {
         when(publisherService.analyzeZIPEPSG(any(String.class),
-                any(String.class), any(File.class)))
+                any(String.class), any(File.class), any(String.class)))
                 .thenReturn(createInfoPreviewStore(60));
     }
 

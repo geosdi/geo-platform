@@ -60,7 +60,7 @@ public class GPPublisherSoapTest extends PublisherSoapTest {
                 "http://localhost:8282/geoplatform-service/",
                 "geoSDI", new File(
                         new File(".").getCanonicalPath() + File.separator
-                        + "src/test/resources/logback-test.xml"));
+                        + "src/test/resources/logback-test.xml"), null);
 
         Assert.assertEquals(60, previewStore.getInfoPreviews().size());
 
@@ -140,7 +140,7 @@ public class GPPublisherSoapTest extends PublisherSoapTest {
         InfoPreview preview = PublisherSoapServerUtils.gpPublisherClient.analyzeTIFInPreview(
                 "jdshfjsdfhsjfh", new File(
                         new File(".").getCanonicalPath() + File.separator
-                        + "src/test/resources/logback-test.xml"), Boolean.TRUE);
+                        + "src/test/resources/logback-test.xml"), Boolean.TRUE, null);
 
         Assert.assertNotNull(preview);
         Assert.assertEquals("DATA_STORE_MOCK_MOKITO_SOAP",

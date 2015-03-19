@@ -61,7 +61,7 @@ public class GPPublisherRestTest extends PublisherRestTest {
                 "http://localhost:8282/geoplatform-service/",
                 "geoSDI", new File(
                         new File(".").getCanonicalPath() + File.separator
-                        + "src/test/resources/logback-test.xml"));
+                        + "src/test/resources/logback-test.xml"), null);
 
         Assert.assertEquals(80, previewStore.getInfoPreviews().size());
 
@@ -139,7 +139,7 @@ public class GPPublisherRestTest extends PublisherRestTest {
         InfoPreview preview = PublisherRSServerUtils.gpPublisherClient.analyzeTIFInPreview(
                 "jdshfjsdfhsjfh", new File(
                         new File(".").getCanonicalPath() + File.separator
-                        + "src/test/resources/logback-test.xml"), Boolean.TRUE);
+                        + "src/test/resources/logback-test.xml"), Boolean.TRUE, null);
 
         Assert.assertNotNull(preview);
         Assert.assertEquals("DATA_STORE_MOCK_MOKITO",

@@ -1111,7 +1111,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
         // decompress the zip file in the <tmp>/shp directory, read info and create <layername>.zip files for each layer in <tmp>/zip
         // and decompress the geotiff files in user/tiff direcotry
         List<LayerInfo> infoShapeList = getInfoFromCompressedFile(userName, file,
-                tempUserDir, tempUserZipDir, tempUserTifDir, workspace);
+                tempUserDir, tempUserZipDir, tempUserTifDir, userWorkspace);
         if (infoShapeList.isEmpty()) {
             throw new ResourceNotFoundFault(
                     "The ZIP archive does not contain shp or geotiff files");

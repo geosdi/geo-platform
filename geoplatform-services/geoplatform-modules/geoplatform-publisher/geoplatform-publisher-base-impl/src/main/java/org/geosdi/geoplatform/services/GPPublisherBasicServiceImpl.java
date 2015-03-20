@@ -107,6 +107,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
     //
     @Resource(name = "sharedRestReader")
     private GeoServerRESTReader restReader;
+    //
     private String geoportalDir = "";
     //
     @Autowired
@@ -540,7 +541,8 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
             LayerInfo info = new LayerInfo();
             info.isShp = false;
             String origName = PublishUtility.extractFileName(tifFileName);
-            String idName = userName + "_" + origName;
+            String idName = PublishUtility.removeSpecialCharactersFromString(userName)
+                    + "_" + origName;
             info.name = new String(idName);
             File oldGeotifFile = new File(tempUserTifDir, tifFileName);
             //
@@ -593,7 +595,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
         if (existsStyle(layerName)) {
             restPublisher.removeStyle(layerName);
         }
-        boolean returnPS = restPublisher.publishStyle(fileSLD, layerName);
+        boolean returnPS = restPublisher.publishStyle(fileSLD, layerName, true);
         logger.info("\n INFO: PUBLISH STYLE RESULT " + returnPS);
         return layerName;
     }
@@ -662,7 +664,8 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
             LayerInfo info = new LayerInfo();
             info.isShp = true;
             String origName = shpFileName.substring(0, shpFileName.length() - 4);
-            info.name = userName + "_shp_" + origName;
+            info.name = PublishUtility.removeSpecialCharactersFromString(userName)
+                    + "_shp_" + origName;
             //
             RESTLayer layer = this.restReader.getLayer(workspace, info.name);
             if (layer != null) {
@@ -828,7 +831,8 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
         String fileName = PublishUtility.extractFileName(file.getName());
         fileName = PublishUtility.removeSpecialCharactersFromString(fileName);
 
-        fileName = userName + "_" + fileName;
+        fileName = PublishUtility.removeSpecialCharactersFromString(userName)
+                + "_" + fileName;
         logger.info("TIF File Name: " + fileName);
 
         InfoPreview infoPreview = new InfoPreview(RESTURL, userWorkspace,
@@ -1022,18 +1026,14 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
                 //che punta al precedente file shp
                 ds2dsConfiguration.setSourceFeature(new FeatureConfiguration());
                 ds2dsConfiguration.setForcePurgeAllData(Boolean.TRUE);
-                logger.info("Override START: 2");
                 this.shapeAppender.importFile(tempUserDir, new File(
                         infoPreview.getFileName()));
-                logger.info("Override START: 3");
                 infoPreview = getSHPURLByDataStoreName(userWorkspace,
                         infoPreview.getDataStoreName());
-                logger.info("Override START: 4");
 //                        infoPreview.setLayerPublishAction(LayerPublishAction.OVERRIDE);
                 if (infoPreview.getUrl().indexOf("/wms") == -1) {
                     infoPreview.setUrl(infoPreview.getUrl() + "/wms");
                 }
-                logger.info("Override END: ");
             } else if (infoPreview.isIsShape()) {
                 logger.info(
                         "***** processEPSGResult: Executing shape publish zip file: " + infoPreview.getFileName());

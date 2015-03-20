@@ -55,21 +55,19 @@ public class EPSGLayerData extends GeoPlatformBeanModel {
     private static final long serialVersionUID = 3153334351994515962L;
 
     private String fileName;
-    private boolean epsgNotFound = false;
     private transient List<LayerPublishAction> layerPublishActions;
 
     public EPSGLayerData() {
     }
 
     public EPSGLayerData(String featureName, String epsgCode, String styleName,
-            boolean isShape, boolean alreadyExists, String fileName, boolean epsgNotFound) {
+            boolean isShape, boolean alreadyExists, String fileName) {
         this.setFeatureName(featureName);
         this.setEpsgCode(epsgCode);
         this.setStyleName(styleName);
         this.setIsShape(isShape);
         this.setAlreadyExists(alreadyExists);
         this.fileName = fileName;
-        this.epsgNotFound = epsgNotFound;
     }
 
     public String getFileName() {
@@ -127,14 +125,6 @@ public class EPSGLayerData extends GeoPlatformBeanModel {
 
     public final void setStyleName(String styleName) {
         super.set(EPSGLayerData.STYLE_NAME, styleName);
-    }
-
-    public boolean isEpsgNotFound() {
-        return epsgNotFound;
-    }
-
-    public void setEpsgNotFound(boolean epsgNotFound) {
-        this.epsgNotFound = epsgNotFound;
     }
 
     public void setPublishActions(List<LayerPublishAction> layerPublishActions) {

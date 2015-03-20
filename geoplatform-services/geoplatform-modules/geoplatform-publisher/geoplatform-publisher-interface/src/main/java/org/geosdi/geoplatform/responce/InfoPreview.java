@@ -59,7 +59,6 @@ public class InfoPreview {
     private LayerPublishAction layerPublishAction;
     private String newName = "";
     private String fileName = "";
-    private boolean epsgNotFound = false;
 
     public InfoPreview(String url, String workspace, String layerName,
             double minX, double minY, double maxX, double maxY, String crs,
@@ -131,14 +130,6 @@ public class InfoPreview {
 
     public void setAlreadyExists(boolean alreadyExists) {
         this.alreadyExists = alreadyExists;
-    }
-
-    public boolean isEpsgNotFound() {
-        return epsgNotFound;
-    }
-
-    public void setEpsgNotFound(boolean epsgNotFound) {
-        this.epsgNotFound = epsgNotFound;
     }
 
     public double getMaxX() {
@@ -226,7 +217,7 @@ public class InfoPreview {
                 + ", lowerY=" + lowerY + ", upperX=" + upperX + ", upperY="
                 + upperY + ", crs=" + crs + ", isShape=" + isShape
                 + ", alreadyExists=" + alreadyExists + ", newName=" + newName
-                + ", fileName=" + fileName + ", epsgNotFound=" + epsgNotFound
+                + ", fileName=" + fileName
                 + ", layerPublishAction=" + layerPublishAction
                 + ", message=" + message + ", styleName=" + styleName + '}';
     }

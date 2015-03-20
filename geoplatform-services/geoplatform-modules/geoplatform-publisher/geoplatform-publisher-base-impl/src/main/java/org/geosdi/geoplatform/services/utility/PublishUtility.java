@@ -35,6 +35,8 @@ package org.geosdi.geoplatform.services.utility;
 
 import java.io.*;
 import java.util.Enumeration;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
@@ -209,72 +211,6 @@ public class PublishUtility {
         return result;
     }
 
-    /**
-     * Scompatta il contenuto, rimuovi il vecchio prj, aggiunti il nuovo e salva
-     * tutto
-     *
-     * @param userName
-     * @param infoPreview
-     * @param tempUserDir
-     * @param prjFile
-     * @return
-     * @throws ResourceNotFoundFault
-     */
-    private static boolean writePrjInZipShp(String userName, InfoPreview infoPreview,
-            String tempUserDir, String prjFile) throws ResourceNotFoundFault {
-        String tempUserZipDir = PublishUtility.createDir(tempUserDir + PublishUtility.ZIP_DIR_NAME);
-        boolean result = false;
-        String fileName = tempUserZipDir + infoPreview.getDataStoreName() + ".zip";
-        File existingZipFile = new File(fileName);
-        ZipFile zipSrc = null;
-        String operationDirPath = tempUserZipDir + "rewrite" + System.getProperty("file.separator");
-        BufferedWriter writer = null;
-        try {
-            PublishUtility.createDir(operationDirPath);
-            logger.info("********* ManagePRJRewrite operationDirPath: " + operationDirPath);
-            //Decomprime il contenuto dello zip nella cartella rename
-            zipSrc = new ZipFile(existingZipFile);
-            Enumeration<? extends ZipEntry> entries = zipSrc.entries();
-            while (entries.hasMoreElements()) {
-                ZipEntry entry = entries.nextElement();
-                PublishUtility.extractEntryToFile(entry, zipSrc, operationDirPath);
-            }
-            logger.info("********* ManageRename element unzipped");
-
-            //Dopo l'estrazione rimuovere prj ed aggiungere il nuovo poi creare zip
-            File newPRJFile = new File(operationDirPath, infoPreview.getDataStoreName() + ".prj");
-            newPRJFile.delete();
-
-            newPRJFile.createNewFile();
-
-            writer = new BufferedWriter(new FileWriter(newPRJFile));
-            writer.write(prjFile);
-
-            //Cancella lo zip precedente
-            existingZipFile.delete();
-            //Salvare zip file in: tempUserZipDir
-            compressFiles(tempUserZipDir, operationDirPath, infoPreview.getDataStoreName() + ".zip",
-                    infoPreview.getDataStoreName(), infoPreview.getDataStoreName());
-            logger.debug("********* ManageRename after compress file");
-            logger.debug("********* ManageRename after delete previous file");
-            result = Boolean.TRUE;
-        } catch (IOException | ResourceNotFoundFault e) {
-            logger.error("ERRORE : " + e);
-            throw new ResourceNotFoundFault(e.getMessage());
-        } finally {
-            try {
-                zipSrc.close();
-                writer.close();
-                //Cancella cartella rename
-                PublishUtility.deleteDir(operationDirPath);
-                logger.debug("********* ManageRename succesfully removed rename dir");
-            } catch (IOException ex) {
-            }
-        }
-        logger.debug("Shape Zip renamed: " + result);
-        return result;
-    }
-
     private static boolean renameTif(String userName, InfoPreview infoPreview,
             String tempUserDir) throws ResourceNotFoundFault {
         boolean result = false;
@@ -339,15 +275,6 @@ public class PublishUtility {
         return result;
     }
 
-    public static boolean managePrjRewrite(String userName, InfoPreview infoPreview,
-            String tempUserDir, String prjWKT) throws ResourceNotFoundFault {
-        boolean result = false;
-        if (infoPreview.isIsShape()) {
-            result = writePrjInZipShp(userName, infoPreview, tempUserDir, prjWKT);
-        }
-        return result;
-    }
-
 //    public static void copyTifFiles(String origName, String tempUserTifDir,
 //            String userName, LayerInfo info) {
 //        String SLDFileName = origName + ".sld";
@@ -386,6 +313,32 @@ public class PublishUtility {
         return fileToReturn;
     }
 
+    /**
+     * Method usefull to remove special characters from the passed string to
+     * clean
+     *
+     * @param stringToClean
+     * @return
+     */
+    public static String removeSpecialCharactersFromString(String stringToClean) {
+        Pattern pt = Pattern.compile("[^a-zA-Z0-9_]");
+        Matcher match = pt.matcher(stringToClean);
+        while (match.find()) {
+            String s = match.group();
+            stringToClean = stringToClean.replaceAll("\\" + s, "");
+        }
+        return stringToClean;
+    }
+
+    public static String extractFileExtension(String fileName) {
+        return fileName.substring(fileName.length() - 3);
+    }
+
+    public static String extractFileName(String fileName) {
+        return fileName.substring(0, fileName.lastIndexOf(
+                    "."));
+    }
+
     public static void extractEntryToFile(ZipEntry entry, ZipFile zipSrc,
             String tempUserDir) throws ResourceNotFoundFault {
         String entryName;
@@ -395,8 +348,13 @@ public class PublishUtility {
             zipinputstream = zipSrc.getInputStream(entry);
             int lastIndex = entry.getName().lastIndexOf('/');
             entryName = entry.getName().substring(lastIndex + 1).toLowerCase();
+            String fileName = entryName.toLowerCase();
+            String fileExtension = extractFileExtension(fileName);
+            fileName = extractFileName(fileName);
+            entryName = removeSpecialCharactersFromString(fileName) + "."
+                    + fileExtension;
             logger.info("INFO: Found file " + entryName);
-            fileoutputstream = new FileOutputStream(tempUserDir + entryName.toLowerCase());
+            fileoutputstream = new FileOutputStream(tempUserDir + entryName);
             byte[] buf = new byte[1024];
             int n;
             while ((n = zipinputstream.read(buf, 0, 1024)) > -1) {

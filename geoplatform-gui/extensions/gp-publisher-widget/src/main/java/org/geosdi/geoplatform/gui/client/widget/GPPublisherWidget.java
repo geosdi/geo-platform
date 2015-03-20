@@ -276,7 +276,7 @@ public class GPPublisherWidget extends GeoPlatformWindow
                             }
 
                             publishLayerRequest.setLayerList(layersName);
-                            logger.info("Selected workspace: " + workspaceSimpleComboBox.getSelectedText());
+                            logger.severe("Selected workspace: " + workspaceSimpleComboBox.getSelectedText());
                             publishLayerRequest.setWorkspace(workspaceSimpleComboBox.getSelectedText());
 
                             ClientCommandDispatcher.getInstance().execute(

@@ -43,8 +43,6 @@ import it.geosolutions.geoserver.rest.encoder.GSResourceEncoder;
 import it.geosolutions.geoserver.rest.encoder.coverage.GSCoverageEncoder;
 import java.io.*;
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import javax.annotation.Resource;
@@ -322,9 +320,6 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
                     featureType.getMaxX(), featureType.getMaxY(),
                     epsgCode, layer.getDefaultStyle(), Boolean.FALSE,
                     Boolean.TRUE);
-            //Setting the boolean property EPSG found or not found on InfoPreview
-            //usefull to retrieve the state after user interaction
-            info.setEpsgNotFound(GPSharedUtils.isEmpty(epsgCode));
         } catch (Exception e) {
             final String error = "The layer " + layerName + " is published in the " + userWorkspace + " workspace, but the server cannot provide info. " + e;
             logger.error(error);
@@ -370,9 +365,6 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
                     featureType.getMaxX(), featureType.getMaxY(),
                     epsgCode, layer.getDefaultStyle(), Boolean.TRUE,
                     Boolean.TRUE);
-            //Setting the boolean property EPSG found or not found on InfoPreview
-            //usefull to retrieve the state after user interaction
-            infoPreview.setEpsgNotFound(GPSharedUtils.isEmpty(epsgCode));
         } catch (Exception e) {
             final String error = "The layer " + layerName + " is published in the " + userWorkspace + " workspace, but the server cannot provide info. " + e;
             logger.error(error);
@@ -539,10 +531,15 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
             String userName, String tempUserTifDir, String workspace) {
         List<LayerInfo> infoTifList = Lists.<LayerInfo>newArrayList();
         for (String tifFileName : tifEntryNameList) {
+            String fileExtension = PublishUtility.extractFileExtension(tifFileName);
+            String fileName = PublishUtility.extractFileName(tifFileName);
+            tifFileName = PublishUtility.removeSpecialCharactersFromString(fileName)
+                    + "." + fileExtension;
+            logger.info("TIF File Name: " + tifFileName);
+
             LayerInfo info = new LayerInfo();
             info.isShp = false;
-            String origName = tifFileName.substring(0, tifFileName.lastIndexOf(
-                    "."));
+            String origName = PublishUtility.extractFileName(tifFileName);
             String idName = userName + "_" + origName;
             info.name = new String(idName);
             File oldGeotifFile = new File(tempUserTifDir, tifFileName);
@@ -656,6 +653,11 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
         List<LayerInfo> infoShapeList = Lists.<LayerInfo>newArrayList();
         for (String shpFileName : shpEntryNameList) {
             // start analizing shape
+            String fileExtension = PublishUtility.extractFileExtension(shpFileName);
+            String fileName = PublishUtility.extractFileName(shpFileName);
+            shpFileName = PublishUtility.removeSpecialCharactersFromString(fileName)
+                    + "." + fileExtension;
+
             logger.info("Extracting info from " + shpFileName);
             LayerInfo info = new LayerInfo();
             info.isShp = true;
@@ -737,20 +739,6 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
     public boolean existsLayerInWorkspace(String workspace, String dataStoreName,
             String layerName) {
         return restReader.existsLayer(workspace, layerName, true);
-//        return restReader.existsFeatureType(workspace, dataStoreName, layerName, true);
-//        boolean result = Boolean.FALSE;
-//        String layerStoreName = null;
-//        RESTLayer layer = restReader.getLayer(workspace, layerName);
-//        if (layer != null) {
-//            RESTFeatureType restft = restReader.getFeatureType(layer);
-//            if (restft != null) {
-//                layerStoreName = restft.getName();
-//            }
-//        }
-//        if (layerStoreName != null && dataStoreName.equals(layerStoreName)) {
-//            result = Boolean.TRUE;
-//        }
-//        return result;
     }
 
     /**
@@ -797,14 +785,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
     private String getWorkspace(String userName) {
         List<String> workspaces = restReader.getWorkspaceNames();
         String userWorkspace = userName;
-        //Code usefull to remove special characters
-        Pattern pt = Pattern.compile("[^a-zA-Z0-9]");
-        Matcher match = pt.matcher(userWorkspace);
-        while (match.find()) {
-            String s = match.group();
-            userWorkspace = userWorkspace.replaceAll("\\" + s, "");
-        }
-        
+        userWorkspace = PublishUtility.removeSpecialCharactersFromString(userWorkspace);
         if (!workspaces.contains(userWorkspace)) {
             restPublisher.createWorkspace(userWorkspace);
         }
@@ -843,8 +824,12 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
         }
         String epsg = "EPSG:" + this.getCRSFromGeotiff(file);
         String sld = "default_raster";
-        String fileName = userName + "_" + file.getName().substring(0,
-                file.getName().lastIndexOf("."));
+
+        String fileName = PublishUtility.extractFileName(file.getName());
+        fileName = PublishUtility.removeSpecialCharactersFromString(fileName);
+
+        fileName = userName + "_" + fileName;
+        logger.info("TIF File Name: " + fileName);
 
         InfoPreview infoPreview = new InfoPreview(RESTURL, userWorkspace,
                 new String(fileName),
@@ -865,9 +850,6 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
             infoPreview.setFileName(fileName);
             infoPreview.setAlreadyExists(Boolean.TRUE);
         }
-        //Setting the boolean property EPSG found or not found on InfoPreview
-        //usefull to retrieve the state after user interaction
-        infoPreview.setEpsgNotFound(GPSharedUtils.isEmpty(epsg));
         File fileInTifDir = PublishUtility.copyFile(file, pathInTifDir,
                 fileName + ".tif", overwrite);
         this.addTifCleanerJob(userWorkspace, fileName,
@@ -1012,12 +994,6 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
             }
             LayerInfo info = new LayerInfo();
 
-            //infoPreview.getCrs()
-            //Verificare se l'epsg era stato trovato e/o se era diverso
-//            if (infoPreview.isEpsgNotFound()) {
-            this.generateNewPRJ(userName, infoPreview, tempUserDir);
-//            }
-
             info.epsg = infoPreview.getCrs();
             info.name = infoPreview.getDataStoreName();
             info.sld = infoPreview.getStyleName();
@@ -1046,14 +1022,18 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
                 //che punta al precedente file shp
                 ds2dsConfiguration.setSourceFeature(new FeatureConfiguration());
                 ds2dsConfiguration.setForcePurgeAllData(Boolean.TRUE);
+                logger.info("Override START: 2");
                 this.shapeAppender.importFile(tempUserDir, new File(
                         infoPreview.getFileName()));
+                logger.info("Override START: 3");
                 infoPreview = getSHPURLByDataStoreName(userWorkspace,
                         infoPreview.getDataStoreName());
+                logger.info("Override START: 4");
 //                        infoPreview.setLayerPublishAction(LayerPublishAction.OVERRIDE);
                 if (infoPreview.getUrl().indexOf("/wms") == -1) {
                     infoPreview.setUrl(infoPreview.getUrl() + "/wms");
                 }
+                logger.info("Override END: ");
             } else if (infoPreview.isIsShape()) {
                 logger.info(
                         "***** processEPSGResult: Executing shape publish zip file: " + infoPreview.getFileName());
@@ -1069,16 +1049,6 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
             infoPreviewList.add(infoPreview);
         }
         return new InfoPreviewStore(infoPreviewList);
-    }
-
-    private void generateNewPRJ(String userName, InfoPreview infoPreview, String tempUserDir) {
-        //Verificare se l'epsg era stato trovato e/o se era diverso
-        try {
-            CoordinateReferenceSystem newCRS = CRS.decode(infoPreview.getCrs());
-            PublishUtility.managePrjRewrite(userName, infoPreview, tempUserDir, newCRS.toWKT());
-        } catch (FactoryException | ResourceNotFoundFault rdc) {
-            logger.error("Error decoding the CRS: " + rdc);
-        }
     }
 
     /**
@@ -1144,9 +1114,6 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
                 this.addTifCleanerJob(userWorkspace, info.name,
                         fileInTifDir.getAbsolutePath());
             }
-            //Setting the boolean property EPSG found or not found on InfoPreview
-            //usefull to retrieve the state after user interaction
-            infoPreview.setEpsgNotFound(GPSharedUtils.isEmpty(info.epsg));
             infoPreviewList.add(infoPreview);
         }
         return new InfoPreviewStore(infoPreviewList);

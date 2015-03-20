@@ -118,7 +118,6 @@ public class CasProcessEPSGResultCommand implements
                 infoPreview.setNewName(previewLayer.getNewName());
                 infoPreview.setFileName(previewLayer.getFileName());
             }
-            infoPreview.setEpsgNotFound(previewLayer.isEpsgNotFound());
             infoPreviewList.add(infoPreview);
             logger.info("Layer preview transformed: " + infoPreview.toString());
         }

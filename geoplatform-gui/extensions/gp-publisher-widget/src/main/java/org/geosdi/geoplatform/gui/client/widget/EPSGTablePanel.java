@@ -101,7 +101,7 @@ public class EPSGTablePanel extends GeoPlatformContentPanel {
             EPSGLayerData epsgLayerData = new EPSGLayerData(previewLayer.
                     getTitle(), previewLayer.getCrs(), previewLayer.getStyleName(),
                     previewLayer.isIsShape(), previewLayer.isAlreadyExists(),
-                    previewLayer.getFileName(), previewLayer.isEpsgNotFound());
+                    previewLayer.getFileName());
             this.store.add(epsgLayerData);
         }
         this.manageProcessEPSGButton();

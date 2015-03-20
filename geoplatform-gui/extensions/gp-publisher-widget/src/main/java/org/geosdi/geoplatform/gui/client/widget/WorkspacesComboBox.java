@@ -114,6 +114,7 @@ public class WorkspacesComboBox extends ComboBox<GPWorkspace> {
         super.setDisplayField(GPWorkspace.GPWorkspaceKey.WORKSPACE_NAME.name());
         super.setEditable(false);
         super.setBorders(false);
+        super.setUseQueryCache(false);
 //        this.setValueField(GPLayerAttributes.GPAttributeKey.ATTRIBUTE_VALUE.toString());
     }
 }

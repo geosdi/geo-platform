@@ -92,7 +92,7 @@ public interface GPPublisherService extends IGPPublisherService {
             @Multipart(value = "fileName",
                     type = MediaType.APPLICATION_OCTET_STREAM) File file,
             @WebParam(name = "workspace")
-            @Multipart(value = "workspace") String workspace)
+            @Multipart(value = "workspace", required = false) String workspace)
             throws ResourceNotFoundFault;
 
     @Post

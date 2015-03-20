@@ -61,7 +61,7 @@ public class GPPublisherRestTest extends PublisherRestTest {
                 "http://localhost:8282/geoplatform-service/",
                 "geoSDI", new File(
                         new File(".").getCanonicalPath() + File.separator
-                        + "src/test/resources/logback-test.xml"), "");
+                        + "src/test/resources/logback-test.xml"), null);
 
         Assert.assertEquals(80, previewStore.getInfoPreviews().size());
 

@@ -442,7 +442,8 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
                 int lastIndex = entryName.lastIndexOf('/');
                 entryName = entryName.substring(lastIndex + 1).toLowerCase();
                 destinationDir = tempUserDir;
-                if (entryName.equals("")) {
+                if (GPSharedUtils.isEmpty(entryName) || entryName.startsWith(".")
+                        || entryName.equalsIgnoreCase("__MACOSX")) {
                     continue;
                 } else if (entryName.endsWith(".tif") || entryName.endsWith(
                         ".tiff")) {

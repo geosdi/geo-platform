@@ -334,12 +334,15 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
     /**
      * *****************************
      *
-     * @param layerName
-     * @return
-     * @throws ResourceNotFoundFault get the URL to the PNG if the layer
-     * dataStoreName
+     * @param workspace the wk to use
+     * @param layerName the layerName to retrieve
+     * @param styleName the style name to set or if null will be setted the
+     * default one
+     * @return the builded InfoPreview
+     * @throws ResourceNotFoundFault
      */
-    private InfoPreview getSHPURLByDataStoreName(String workspace, String layerName)
+    private InfoPreview buildSHPInfoPreviewFromExistingWK(String workspace,
+            String layerName, String styleName)
             throws ResourceNotFoundFault, IllegalArgumentException {
         String userWorkspace = workspace;
         if (userWorkspace == null) {
@@ -363,9 +366,9 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
             }
             infoPreview = new InfoPreview(RESTURL, userWorkspace, layerName,
                     featureType.getMinX(), featureType.getMinY(),
-                    featureType.getMaxX(), featureType.getMaxY(),
-                    epsgCode, layer.getDefaultStyle(), Boolean.TRUE,
-                    Boolean.TRUE);
+                    featureType.getMaxX(), featureType.getMaxY(), epsgCode,
+                    GPSharedUtils.isEmpty(styleName) ? layer.getDefaultStyle() : styleName,
+                    Boolean.TRUE, Boolean.TRUE);
         } catch (Exception e) {
             final String error = "The layer " + layerName + " is published in the " + userWorkspace + " workspace, but the server cannot provide info. " + e;
             logger.error(error);
@@ -397,7 +400,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
         for (NameLinkElem element : list) {
             try {
                 String name = element.getName();
-                InfoPreview item = getSHPURLByDataStoreName(userWorkspace, name);
+                InfoPreview item = this.buildSHPInfoPreviewFromExistingWK(userWorkspace, name, null);
                 listPreviews.add(item);
             } catch (IllegalArgumentException ex) {
                 throw new ResourceNotFoundFault(ex.getMessage());
@@ -594,10 +597,11 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
         logger.info(
                 "\n INFO: FOUND STYLE FILE. TRYING TO PUBLISH WITH " + layerName + " NAME");
         if (existsStyle(layerName)) {
-            restPublisher.removeStyle(layerName);
+            restPublisher.updateStyle(fileSLD, layerName);
+        } else {
+            boolean returnPS = restPublisher.publishStyle(fileSLD, layerName, true);
+            logger.info("\n INFO: PUBLISH STYLE RESULT " + returnPS);
         }
-        boolean returnPS = restPublisher.publishStyle(fileSLD, layerName, true);
-        logger.info("\n INFO: PUBLISH STYLE RESULT " + returnPS);
         return layerName;
     }
 
@@ -1014,8 +1018,8 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
                 ds2dsConfiguration.setPurgeData(Boolean.FALSE);
                 this.shapeAppender.importFile(tempUserDir, new File(
                         infoPreview.getFileName()));
-                infoPreview = getSHPURLByDataStoreName(userWorkspace,
-                        infoPreview.getDataStoreName());
+                infoPreview = this.buildSHPInfoPreviewFromExistingWK(userWorkspace,
+                        infoPreview.getDataStoreName(), info.sld);
 //                infoPreview.setLayerPublishAction(LayerPublishAction.APPEND);
                 if (infoPreview.getUrl().indexOf("/wms") == -1) {
                     infoPreview.setUrl(infoPreview.getUrl() + "/wms");
@@ -1029,8 +1033,8 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
                 ds2dsConfiguration.setForcePurgeAllData(Boolean.TRUE);
                 this.shapeAppender.importFile(tempUserDir, new File(
                         infoPreview.getFileName()));
-                infoPreview = getSHPURLByDataStoreName(userWorkspace,
-                        infoPreview.getDataStoreName());
+                infoPreview = this.buildSHPInfoPreviewFromExistingWK(
+                        userWorkspace, infoPreview.getDataStoreName(), info.sld);
 //                        infoPreview.setLayerPublishAction(LayerPublishAction.OVERRIDE);
                 if (infoPreview.getUrl().indexOf("/wms") == -1) {
                     infoPreview.setUrl(infoPreview.getUrl() + "/wms");
@@ -1150,7 +1154,8 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
             } else {
                 logger.info(
                         "Some problems occured when publishing " + fileInTifDir
-                        + " into the " + userWorkspace + " workspace: may be the layer is already published in a db");
+                        + " into the " + userWorkspace
+                        + " workspace: may be the layer is already published in a db");
                 infoPreview = new InfoPreview(fileName,
                         "Some problems occured when publishing " + fileInTifDir
                         + " into the " + userWorkspace + " workspace");
@@ -1196,20 +1201,27 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
                     datatStoreName, info.name, tempFile, info.epsg, info.sld);
             if (published) {
                 logger.info(
-                        info.name + " correctly published in the " + userWorkspace + " workspace " + info.name);
-                infoPreview = getSHPURLByDataStoreName(userWorkspace, info.name);
+                        info.name + " correctly published in the "
+                        + userWorkspace + " workspace " + info.name);
+                infoPreview = this.buildSHPInfoPreviewFromExistingWK(
+                        userWorkspace, info.name, info.sld);
             } else {
                 logger.info(
-                        "Some problems occured when publishing " + info.name + " into the " + userWorkspace + " workspace: may be the layer is already published in a db");
+                        "Some problems occured when publishing " + info.name
+                        + " into the " + userWorkspace
+                        + " workspace: may be the layer is already published in a db");
                 infoPreview = new InfoPreview(info.name,
-                        "Some problems occured when publishing " + info.name + " into the " + userWorkspace + " workspace");
+                        "Some problems occured when publishing " + info.name
+                        + " into the " + userWorkspace + " workspace");
             }
         } catch (Exception ex) {
             logger.error(
-                    "Some problems occured when publishing " + info.name + " into the " + userWorkspace + " workspace");
+                    "Some problems occured when publishing " + info.name
+                    + " into the " + userWorkspace + " workspace");
             ex.printStackTrace();
             infoPreview = new InfoPreview(info.name,
-                    "Some problems occured when publishing " + info.name + " into the " + userWorkspace + " workspace");
+                    "Some problems occured when publishing " + info.name
+                    + " into the " + userWorkspace + " workspace");
         } finally {
             tempFile.delete();
         }

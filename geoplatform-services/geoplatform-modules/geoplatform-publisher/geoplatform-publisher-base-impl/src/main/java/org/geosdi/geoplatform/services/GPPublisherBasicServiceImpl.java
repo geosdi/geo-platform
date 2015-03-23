@@ -571,7 +571,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
                 fileSLD.delete();
                 info.sld = this.publishSLD(filePublished, idName);
             } else {
-                info.sld = "default_raster";
+                info.sld = "raster";
             }
             String TFWFileName = origName + ".tfw";
             File fileTFW = new File(tempUserTifDir, TFWFileName);
@@ -685,11 +685,11 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
             if (fileSLD.exists()) {
                 info.sld = this.publishSLD(fileSLD, info.name);
             } else if (geomType.equals("MultiPolygon")) {
-                info.sld = "default_polygon";
+                info.sld = "polygon";
             } else if (geomType.equals("MultiLineString")) {
-                info.sld = "default_polyline";
+                info.sld = "line";
             } else if (geomType.equals("Point")) {
-                info.sld = "default_point";
+                info.sld = "point";
             } else {
                 info.sld = info.name;
             }
@@ -831,7 +831,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
             userWorkspace = this.getWorkspace(workspace);
         }
         String epsg = "EPSG:" + this.getCRSFromGeotiff(file);
-        String sld = "default_raster";
+        String sld = "raster";
 
         String fileName = PublishUtility.extractFileName(file.getName());
         fileName = PublishUtility.removeSpecialCharactersFromString(fileName);

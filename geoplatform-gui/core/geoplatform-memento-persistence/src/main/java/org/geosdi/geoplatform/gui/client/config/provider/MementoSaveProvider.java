@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.config.provider;
 
 import com.extjs.gxt.ui.client.Registry;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.inject.Provider;
 import javax.inject.Singleton;
@@ -55,8 +56,10 @@ import org.geosdi.geoplatform.gui.shared.GPRole;
  * @email nazzareno.sileno@geosdi.org
  */
 @Singleton
-public class IMementoSaveProvider implements Provider<IMementoSave> {
+public class MementoSaveProvider implements Provider<IMementoSave> {
 
+    private final static Logger logger = Logger.getLogger("");
+    
     private IMementoSave mementoSave;
     private boolean savedShareStatus;
     private ObservableGPLayerSaveCache observable;
@@ -64,7 +67,7 @@ public class IMementoSaveProvider implements Provider<IMementoSave> {
     private long projID;
 
     @Inject
-    public IMementoSaveProvider(ObservableGPLayerSaveCache observable, PeekCacheEvent peekCacheEvent) {
+    public MementoSaveProvider(ObservableGPLayerSaveCache observable, PeekCacheEvent peekCacheEvent) {
         this.observable = observable;
         this.peekCacheEvent = peekCacheEvent;
     }
@@ -80,18 +83,24 @@ public class IMementoSaveProvider implements Provider<IMementoSave> {
 //            System.out.println("Client proj shared: " + clientProject.isShared());
 //            System.out.println("Client proj id: " + clientProject.getId());
 //        }
+        logger.info("Getting the IMementoSave from Provider");
         if (this.mementoSave == null || clientProject == null || this.projID != clientProject.getId()
                 || this.savedShareStatus != clientProject.isShared()) {
             if (clientProject == null) {
+                logger.info("clientProject == null");
                 this.mementoSave = new GPMementoSaveCache(observable);
             } else {
+                logger.info("ELSE");
                 this.savedShareStatus = clientProject.isShared();
                 IGPAccountDetail accountInSession = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
                 if (GPRole.VIEWER.toString().equalsIgnoreCase(accountInSession.getAuthority())) {
+                    logger.info("GPRole.VIEWER");
                     this.mementoSave = new GPMementoSaveDummy();
                 } else if (clientProject.isShared()) {
+                    logger.info("clientProject.isShared()");
                     this.mementoSave = new GPMementoSaveShared(observable, peekCacheEvent);
                 } else {
+                    logger.info("new GPMementoSaveCache(observable);");
                     this.mementoSave = new GPMementoSaveCache(observable);
                 }
                 this.projID = clientProject.getId();

@@ -63,14 +63,12 @@ public class MementoSaveCacheManager implements GPSaveCacheHandler {
         GPHandlerManager.addHandler(TYPE, this);
     }
 
-//    public void processCache(GwtEvent event, MessageBox messageBox) {
     @Override
     public void processCache(final GwtEvent event) {
         IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
         if (mementoSave.isEmpty()) {
             SaveCacheHandlerManager.fireEvent(event);
         } else {
-//            messageBox.show();
             LayoutManager.getInstance().getStatusMap().setStatus(
                     MementoPersistenceConstants.INSTANCE.MementoSaveCacheManager_statusUnsavedOperationsText(),
                     EnumSearchStatus.STATUS_NO_SEARCH.toString());

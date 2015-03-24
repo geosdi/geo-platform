@@ -80,7 +80,7 @@ public class SaveTreeAction extends ToolbarLayerTreeAction
         this.savePlugin = savePlugin;
         Boolean permission = GPAccountLogged.getInstance().
                 hasComponentPermission(savePlugin.getId());
-        if (permission) { // Observ only if there are the pemission to true
+        if (permission) { // Observ only if the pemission is true
             IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
             mementoSave.getObservable().addObserver(this);
         }

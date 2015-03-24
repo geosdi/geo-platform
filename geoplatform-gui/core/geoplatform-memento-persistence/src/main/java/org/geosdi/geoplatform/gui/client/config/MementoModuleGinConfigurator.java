@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.gui.client.config;
 
 import com.google.gwt.inject.client.AbstractGinModule;
-import org.geosdi.geoplatform.gui.client.config.provider.IMementoSaveProvider;
+import org.geosdi.geoplatform.gui.client.config.provider.MementoSaveProvider;
 import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
 import org.geosdi.geoplatform.gui.client.model.memento.save.MementoSaveCacheManager;
 
@@ -49,6 +49,6 @@ public class MementoModuleGinConfigurator extends AbstractGinModule {
     @Override
     protected void configure() {
         bind(MementoSaveCacheManager.class).asEagerSingleton();
-        bind(IMementoSave.class).toProvider(IMementoSaveProvider.class);
+        bind(IMementoSave.class).toProvider(MementoSaveProvider.class);
     }
 }

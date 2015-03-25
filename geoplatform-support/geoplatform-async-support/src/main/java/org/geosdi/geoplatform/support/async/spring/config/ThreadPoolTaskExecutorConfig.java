@@ -68,6 +68,7 @@ public class ThreadPoolTaskExecutorConfig implements GPAsyncConfigurer {
         executor.setCorePoolSize(gpTaskExecutorProp.getCorePoolSize());
         executor.setMaxPoolSize(gpTaskExecutorProp.getMaxPoolSize());
         executor.setQueueCapacity(gpTaskExecutorProp.getQueueCapacity());
+        executor.setWaitForTasksToCompleteOnShutdown(gpTaskExecutorProp.getWaitForTasksToCompleteOnShutdown());
         executor.setThreadNamePrefix(gpTaskExecutorProp.getThreadNamePrefix());
 
         return executor;

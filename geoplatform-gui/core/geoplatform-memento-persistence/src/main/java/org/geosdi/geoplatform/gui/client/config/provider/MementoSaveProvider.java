@@ -83,25 +83,24 @@ public class MementoSaveProvider implements Provider<IMementoSave> {
 //            System.out.println("Client proj shared: " + clientProject.isShared());
 //            System.out.println("Client proj id: " + clientProject.getId());
 //        }
-        logger.info("Getting the IMementoSave from Provider");
+        logger.warning("Getting the IMementoSave from Provider");
         if (this.mementoSave == null || clientProject == null || this.projID != clientProject.getId()
                 || this.savedShareStatus != clientProject.isShared()) {
             if (clientProject == null) {
-                logger.info("clientProject == null");
                 this.mementoSave = new GPMementoSaveCache(observable);
             } else {
-                logger.info("ELSE");
                 this.savedShareStatus = clientProject.isShared();
                 IGPAccountDetail accountInSession = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
-                if (GPRole.VIEWER.toString().equalsIgnoreCase(accountInSession.getAuthority())) {
-                    logger.info("GPRole.VIEWER");
+                if (GPRole.VIEWER.toString().equalsIgnoreCase(accountInSession.getAuthority()) ||
+                        (clientProject.isShared() && !clientProject.getOwner().getId().equals(accountInSession.getId()))) {
                     this.mementoSave = new GPMementoSaveDummy();
+                    logger.warning("Returning GPMementoSaveDummy");
                 } else if (clientProject.isShared()) {
-                    logger.info("clientProject.isShared()");
                     this.mementoSave = new GPMementoSaveShared(observable, peekCacheEvent);
+                    logger.warning("returning GPMementoSaveShared");
                 } else {
-                    logger.info("new GPMementoSaveCache(observable);");
                     this.mementoSave = new GPMementoSaveCache(observable);
+                    logger.warning("returning GPMementoSaveCache(observable);");
                 }
                 this.projID = clientProject.getId();
             }

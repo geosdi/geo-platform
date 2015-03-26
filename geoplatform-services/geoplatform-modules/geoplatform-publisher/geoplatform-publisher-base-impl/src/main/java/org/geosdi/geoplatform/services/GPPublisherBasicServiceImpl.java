@@ -597,7 +597,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
         logger.info(
                 "\n INFO: FOUND STYLE FILE. TRYING TO PUBLISH WITH " + layerName + " NAME");
         if (existsStyle(layerName)) {
-            restPublisher.updateStyle(fileSLD, layerName);
+            restPublisher.updateStyle(fileSLD, layerName, true);
         } else {
             boolean returnPS = restPublisher.publishStyle(fileSLD, layerName, true);
             logger.info("\n INFO: PUBLISH STYLE RESULT " + returnPS);

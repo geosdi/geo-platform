@@ -166,14 +166,7 @@ public class CSWServerPaginationContainer
         super.panel.setButtonAlign(Style.HorizontalAlignment.CENTER);
         Button newServerButton = new Button(CatalogFinderConstants.INSTANCE.
                 CSWServerPaginationContainer_newServerButtonText(),
-                new SelectionListener<ButtonEvent>() {
-
-                    @Override
-                    public void componentSelected(ButtonEvent ce) {
-                        serverForm.showForm();
-                    }
-
-                });
+                new DeleteServerAction(GPTrustedLevel.HIGH, this));
         newServerButton.setIcon(BasicWidgetResources.ICONS.done());
         newServerButton.setToolTip(CatalogFinderConstants.INSTANCE.
                 CSWServerPaginationContainer_newServerButtonTooltipText());

@@ -55,6 +55,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.action.button.GPSecureButton;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.action.server.AddServerAction;
 import org.geosdi.geoplatform.gui.client.action.server.DeleteServerAction;
 import org.geosdi.geoplatform.gui.client.i18n.CatalogFinderConstants;
 import org.geosdi.geoplatform.gui.client.puregwt.event.StatusWidgetEvent;
@@ -166,7 +167,7 @@ public class CSWServerPaginationContainer
         super.panel.setButtonAlign(Style.HorizontalAlignment.CENTER);
         Button newServerButton = new Button(CatalogFinderConstants.INSTANCE.
                 CSWServerPaginationContainer_newServerButtonText(),
-                new DeleteServerAction(GPTrustedLevel.HIGH, this));
+                new AddServerAction(GPTrustedLevel.HIGH, this.serverForm));
         newServerButton.setIcon(BasicWidgetResources.ICONS.done());
         newServerButton.setToolTip(CatalogFinderConstants.INSTANCE.
                 CSWServerPaginationContainer_newServerButtonTooltipText());

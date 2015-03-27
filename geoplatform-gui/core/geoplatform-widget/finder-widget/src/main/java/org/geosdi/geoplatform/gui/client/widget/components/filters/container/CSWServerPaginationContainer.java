@@ -43,13 +43,13 @@ import com.extjs.gxt.ui.client.widget.grid.*;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.tips.QuickTip;
+import com.google.common.collect.Lists;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.HasRpcToken;
 import com.google.gwt.user.client.rpc.RpcTokenException;
 import com.google.gwt.user.client.rpc.XsrfToken;
 import com.google.gwt.user.client.rpc.XsrfTokenServiceAsync;
-import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -165,7 +165,7 @@ public class CSWServerPaginationContainer
 
     private void createButtons() {
         super.panel.setButtonAlign(Style.HorizontalAlignment.CENTER);
-        Button newServerButton = new Button(CatalogFinderConstants.INSTANCE.
+        GPSecureButton newServerButton = new GPSecureButton(CatalogFinderConstants.INSTANCE.
                 CSWServerPaginationContainer_newServerButtonText(),
                 new AddServerAction(GPTrustedLevel.HIGH, this.serverForm));
         newServerButton.setIcon(BasicWidgetResources.ICONS.done());
@@ -186,7 +186,7 @@ public class CSWServerPaginationContainer
 
     @Override
     public ColumnModel prepareColumnModel() {
-        List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
+        List<ColumnConfig> configs = Lists.<ColumnConfig>newArrayList();
 
         ColumnConfig aliasColumn = new ColumnConfig();
         aliasColumn.setId(GPCSWServerKeyValue.ALIAS.toString());

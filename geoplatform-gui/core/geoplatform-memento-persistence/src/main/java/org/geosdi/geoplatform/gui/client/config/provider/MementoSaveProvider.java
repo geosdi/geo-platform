@@ -81,7 +81,7 @@ public class MementoSaveProvider implements Provider<IMementoSave> {
 //            System.out.println("Client proj shared: " + clientProject.isShared());
 //            System.out.println("Client proj id: " + clientProject.getId());
 //        }
-        logger.warning("Getting the IMementoSave from Provider");
+        logger.severe("Getting the IMementoSave from Provider");
         if (this.mementoSave == null || clientProject == null || this.projID != clientProject.getId()
                 || this.savedShareStatus != clientProject.isShared()) {
             if (clientProject == null) {
@@ -93,13 +93,13 @@ public class MementoSaveProvider implements Provider<IMementoSave> {
                         || (clientProject.isShared() && clientProject.getOwner() != null
                         && !clientProject.getOwner().getId().equals(accountInSession.getId()))) {
                     this.mementoSave = new GPMementoSaveDummy();
-                    logger.warning("Returning GPMementoSaveDummy");
+                    logger.severe("Returning GPMementoSaveDummy");
                 } else if (clientProject.isShared()) {
                     this.mementoSave = new GPMementoSaveShared(observable, peekCacheEvent);
-                    logger.warning("returning GPMementoSaveShared");
+                    logger.severe("returning GPMementoSaveShared");
                 } else {
                     this.mementoSave = new GPMementoSaveCache(observable);
-                    logger.warning("returning GPMementoSaveCache(observable);");
+                    logger.severe("returning GPMementoSaveCache(observable);");
                 }
                 this.projID = clientProject.getId();
             }

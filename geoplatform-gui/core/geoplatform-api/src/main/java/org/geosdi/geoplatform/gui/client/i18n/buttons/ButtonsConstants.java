@@ -83,6 +83,9 @@ public interface ButtonsConstants extends Constants {
     @DefaultStringValue("Save")
     String saveText();
 
+    @DefaultStringValue("Override")
+    String overrideText();
+
     @DefaultStringValue("Search")
     String searchText();
 
@@ -100,6 +103,9 @@ public interface ButtonsConstants extends Constants {
 
     @DefaultStringValue("Verify")
     String verifyText();
+
+    @DefaultStringValue("Indent")
+    String indentText();
 
     @DefaultStringValue("Create")
     String createText();

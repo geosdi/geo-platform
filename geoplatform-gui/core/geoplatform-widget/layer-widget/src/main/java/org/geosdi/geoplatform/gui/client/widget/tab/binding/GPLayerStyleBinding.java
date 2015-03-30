@@ -51,7 +51,7 @@ import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.AbstractMementoOriginalProperties;
 import org.geosdi.geoplatform.gui.client.widget.binding.GeoPlatformBindingWidget;
 import org.geosdi.geoplatform.gui.client.widget.form.binding.GPFieldBinding;
-import org.geosdi.geoplatform.gui.impl.map.event.StyleLayerMapEvent;
+import org.geosdi.geoplatform.gui.impl.map.event.LayerMapStyleRefreshEvent;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel.GPStyleStringKeyValue;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
@@ -118,7 +118,7 @@ public class GPLayerStyleBinding extends GeoPlatformBindingWidget<GPLayerBean> {
 
     private class GPRasterComboStyleBinding extends GPFieldBinding {
 
-        private StyleLayerMapEvent styleEvent = new StyleLayerMapEvent();
+        private LayerMapStyleRefreshEvent styleEvent = new LayerMapStyleRefreshEvent();
 
         public GPRasterComboStyleBinding(Field field, String property) {
             super(field, property);

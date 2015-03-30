@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.client;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.action.menu.MenuAction;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionCreator;
@@ -65,6 +66,8 @@ import org.geosdi.geoplatform.gui.plugin.tree.toolbar.TreeToolbarPluginManager;
  *
  */
 public class LayerWidgetUI implements EntryPoint {
+    
+    protected final static Logger logger = Logger.getLogger("");
 
     @Inject
     static LoadMenuProjects loadMenuProjects;

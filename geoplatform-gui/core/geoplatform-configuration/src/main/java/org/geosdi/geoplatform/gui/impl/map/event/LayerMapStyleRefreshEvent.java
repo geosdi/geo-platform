@@ -40,11 +40,10 @@ import com.google.gwt.event.shared.GwtEvent.Type;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
 
 /**
- *
- * @author Francesco Izzi - CNR IMAA geoSDI Group
- * @mail francesco.izzi@geosdi.org
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public class StyleLayerMapEvent extends GwtEvent<LayerMapChangedHandler> {
+public class LayerMapStyleRefreshEvent extends GwtEvent<LayerMapChangedHandler> {
     
      private GPRasterBean layerBean;
      private String style;

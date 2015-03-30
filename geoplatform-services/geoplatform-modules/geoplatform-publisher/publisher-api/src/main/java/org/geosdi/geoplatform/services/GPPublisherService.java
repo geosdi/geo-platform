@@ -137,16 +137,18 @@ public interface GPPublisherService extends IGPPublisherService {
     @Override
     Boolean publishStyle(
             @WebParam(name = "styleToPublish")
-            @QueryParam(value = "styleToPublish") String styleToPublish)
+            @QueryParam(value = "styleToPublish") String styleToPublish,
+            @WebParam(name = "styleName")
+            @QueryParam(value = "styleName") String styleName)
             throws ResourceNotFoundFault;
 
     @Put
     @PUT
-    @Path(value = GPPublisherRSPathConfig.PUT_STYLE_PATH)
-    @HttpResource(location = "/preview/putStyle")
+    @Path(value = GPPublisherRSPathConfig.UPDATE_STYLE_PATH)
+    @HttpResource(location = "/preview/updateStyle")
     @WebResult(name = "Result")
     @Override
-    Boolean putStyle(
+    Boolean updateStyle(
             @WebParam(name = "styleToPublish")
             @QueryParam(value = "styleToPublish") String styleToPublish,
             @WebParam(name = "styleName")

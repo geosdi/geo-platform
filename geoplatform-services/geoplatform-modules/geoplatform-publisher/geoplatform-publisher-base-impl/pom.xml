@@ -29,6 +29,13 @@
             <version>${project.version}</version>
         </dependency>
         
+        <!--Dependency to check style validity-->
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>sld-validator</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        
         <!-- APACHE COMMONS -->
         <dependency>
             <groupId>commons-lang</groupId>

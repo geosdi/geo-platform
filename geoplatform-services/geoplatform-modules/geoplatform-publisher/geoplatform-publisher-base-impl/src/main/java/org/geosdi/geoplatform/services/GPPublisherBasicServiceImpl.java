@@ -63,6 +63,7 @@ import org.geosdi.geoplatform.services.utility.Ds2dsConfiguration;
 import org.geosdi.geoplatform.services.utility.FeatureConfiguration;
 import org.geosdi.geoplatform.services.utility.PostGISUtility;
 import org.geosdi.geoplatform.services.utility.PublishUtility;
+import org.geosdi.geoplatform.sld.validator.SLDHandler;
 import org.geotools.coverage.grid.GridCoverage2D;
 import org.geotools.data.DataSourceException;
 import org.geotools.data.FileDataStore;
@@ -175,13 +176,21 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
     }
 
     @Override
-    public Boolean publishStyle(String styleToPublish) throws
+    public Boolean publishStyle(String styleToPublish, String styleName) throws
             ResourceNotFoundFault {
-        return restPublisher.publishStyle(styleToPublish);
+        boolean result = false;
+        if (this.styleIsValid(styleToPublish)) {
+            if (styleName != null) {
+                result = restPublisher.publishStyle(styleToPublish, styleName, true);
+            } else {
+                result = restPublisher.publishStyle(styleToPublish);
+            }
+        }
+        return result;
     }
 
     @Override
-    public Boolean putStyle(String styleToPublish, String styleName) throws
+    public Boolean updateStyle(String styleToPublish, String styleName) throws
             ResourceNotFoundFault {
         return restPublisher.updateStyle(styleToPublish, styleName);
     }
@@ -418,7 +427,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
      */
     private List<LayerInfo> getInfoFromCompressedFile(String userName, File file,
             String tempUserDir, String tempUserZipDir, String tempUserTifDir,
-            String workspace) {
+            String workspace) throws ResourceNotFoundFault {
         logger.debug("Call to getInfoFromCompressedShape");
         System.setProperty("org.geotools.referencing.forceXY", "true");
         List<String> shpEntryNameList = Lists.<String>newArrayList();
@@ -533,7 +542,8 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
     }
 
     private List<LayerInfo> analyzeTifList(List<String> tifEntryNameList,
-            String userName, String tempUserTifDir, String workspace) {
+            String userName, String tempUserTifDir, String workspace)
+            throws ResourceNotFoundFault {
         List<LayerInfo> infoTifList = Lists.<LayerInfo>newArrayList();
         for (String tifFileName : tifEntryNameList) {
             String fileExtension = PublishUtility.extractFileExtension(tifFileName);
@@ -592,17 +602,32 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
         return infoTifList;
     }
 
-    private String publishSLD(File fileSLD, String layerName) {
+    private String publishSLD(File fileSLD, String layerName) throws ResourceNotFoundFault {
         reload();
         logger.info(
                 "\n INFO: FOUND STYLE FILE. TRYING TO PUBLISH WITH " + layerName + " NAME");
-        if (existsStyle(layerName)) {
-            restPublisher.updateStyle(fileSLD, layerName, true);
-        } else {
-            boolean returnPS = restPublisher.publishStyle(fileSLD, layerName, true);
-            logger.info("\n INFO: PUBLISH STYLE RESULT " + returnPS);
+        if (styleIsValid(fileSLD)) {
+            if (existsStyle(layerName)) {
+                restPublisher.updateStyle(fileSLD, layerName, true);
+            } else {
+                boolean returnPS = restPublisher.publishStyle(fileSLD, layerName, true);
+                logger.info("\n INFO: PUBLISH STYLE RESULT " + returnPS);
+            }
         }
         return layerName;
+    }
+
+    public boolean styleIsValid(Object style) throws ResourceNotFoundFault {
+        try {
+            SLDHandler sLDHandler = new SLDHandler();
+            List<Exception> exceptions = sLDHandler.validate(style, null, null);
+            if (GPSharedUtils.isNotEmpty(exceptions)) {
+                throw new ResourceNotFoundFault(exceptions.toString());
+            }
+        } catch (IOException ex) {
+            throw new ResourceNotFoundFault(ex.getMessage());
+        }
+        return true;
     }
 
     private SimpleFeatureSource getFeatureSource(File file) {
@@ -656,7 +681,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
 
     private List<LayerInfo> analyzeShpList(List<String> shpEntryNameList,
             String userName, String tempUserDir, String tempUserZipDir,
-            String workspace) {
+            String workspace) throws ResourceNotFoundFault {
         List<LayerInfo> infoShapeList = Lists.<LayerInfo>newArrayList();
         for (String shpFileName : shpEntryNameList) {
             // start analizing shape

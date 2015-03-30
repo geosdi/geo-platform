@@ -64,10 +64,18 @@ public interface IGPPublisherService {
     LayerAttributeStore describeFeatureType(String layerName)
             throws ResourceNotFoundFault;
 
-    Boolean publishStyle(String styleToPublish)
+    /**
+     * 
+     * @param styleToPublish
+     * @param styleName the style name is optional, if it is null then we assume
+     * that the style to publish must contain a proper name and we will use it
+     * @return
+     * @throws ResourceNotFoundFault 
+     */
+    Boolean publishStyle(String styleToPublish, String styleName)
             throws ResourceNotFoundFault;
 
-    Boolean putStyle(String styleToPublish, String styleName)
+    Boolean updateStyle(String styleToPublish, String styleName)
             throws ResourceNotFoundFault;
 
     Boolean existsStyle(String styleName);

@@ -60,7 +60,7 @@ public final class GPPublisherRSPathConfig {
             "describeFeatureType";
     public static final String PUBLISH_STYLE_PATH = PREVIEW_BASE_PATH +
             "publishStyle";
-    public static final String PUT_STYLE_PATH = PREVIEW_BASE_PATH + "putStyle";
+    public static final String UPDATE_STYLE_PATH = PREVIEW_BASE_PATH + "updateStyle";
     public static final String EXISTS_STYLE_PATH = PREVIEW_BASE_PATH +
             "existsStyle";
     public static final String GET_WORKSPACE_NAMES_PATH = PREVIEW_BASE_PATH +

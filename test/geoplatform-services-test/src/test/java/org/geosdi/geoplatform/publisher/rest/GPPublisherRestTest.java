@@ -120,7 +120,7 @@ public class GPPublisherRestTest extends PublisherRestTest {
     public void putStyleTestRest() throws Exception {
         super.mockPutStyle();
 
-        Assert.assertTrue(PublisherRSServerUtils.gpPublisherClient.putStyle(
+        Assert.assertTrue(PublisherRSServerUtils.gpPublisherClient.updateStyle(
                 "STYLE_MOCK_TEST", "STYLE_NAME_MOCK"));
     }
 

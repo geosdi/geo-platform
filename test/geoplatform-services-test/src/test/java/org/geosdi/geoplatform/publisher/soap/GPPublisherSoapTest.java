@@ -120,7 +120,7 @@ public class GPPublisherSoapTest extends PublisherSoapTest {
     public void putStyleTestSoap() throws Exception {
         super.mockPutStyle();
 
-        Assert.assertFalse(PublisherSoapServerUtils.gpPublisherClient.putStyle(
+        Assert.assertFalse(PublisherSoapServerUtils.gpPublisherClient.updateStyle(
                 "STYLE_MOCK_TEST_SOAP", "STYLE_NAME_MOCK_SOAP"));
     }
 

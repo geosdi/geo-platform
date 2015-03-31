@@ -54,7 +54,7 @@
     left: 0px;
     right: 0px;
     top: 0px;
-    bottom: 0px;  
+    bottom: 0px;
 }
 
 .loadBar {
@@ -77,16 +77,6 @@
     height: 100%;
     z-index: 1;
     background: #606060;
-}
-
-.runBarFiller {
-    left: 1px;
-    right: 1px;
-    top: 1px;
-    bottom: 1px;
-    position: absolute;
-    background: url('http://www.geosdi.org/images/gp-image/7uo1osj.gif') repeat-x;
-
 }
 
 .label {

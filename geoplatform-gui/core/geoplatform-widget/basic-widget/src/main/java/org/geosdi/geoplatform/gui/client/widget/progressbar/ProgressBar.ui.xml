@@ -39,20 +39,37 @@
     xmlns:ui='urn:ui:com.google.gwt.uibinder'
     xmlns:g='urn:import:com.google.gwt.user.client.ui'>
   
-  <ui:style src='ProgressBar.css'/>
-
-  <g:HTMLPanel addStyleNames="{style.barContent}">
-    <g:FlowPanel addStyleNames='{style.outer}'>
-      <g:FlowPanel ui:field='runBar' styleName='{style.runBar}'>
-        <g:FlowPanel styleName='{style.runBarFiller}'/>
-      </g:FlowPanel>
-      <g:FlowPanel styleName='{style.loadBarHolder}'>
-        <g:FlowPanel ui:field='loadBar' styleName='{style.loadBar}'>
-          <g:FlowPanel styleName='{style.loadBarFiller}'/>
+    <ui:image field='progress_bar' src='progress-bar.gif' />
+    
+    <ui:style src='ProgressBar.css'/>
+    
+    <ui:style field='embeddedStyle'>
+        @sprite .runBarFiller {
+        left: 1px;
+        right: 1px;
+        top: 1px;
+        bottom: 1px;
+        height: 10px!important;
+        position: absolute;
+        gwt-image: 'progress_bar';
+        background-repeat: repeat-x;
+        display:block; 
+        width: auto;
+        }
+    </ui:style>
+    
+    <g:HTMLPanel addStyleNames="{style.barContent}">
+        <g:FlowPanel addStyleNames='{style.outer}'>
+            <g:FlowPanel ui:field='runBar' styleName='{style.runBar}'>
+                <g:FlowPanel styleName='{embeddedStyle.runBarFiller}'/>
+            </g:FlowPanel>
+            <g:FlowPanel styleName='{style.loadBarHolder}'>
+                <g:FlowPanel ui:field='loadBar' styleName='{style.loadBar}'>
+                    <g:FlowPanel styleName='{style.loadBarFiller}'/>
+                </g:FlowPanel>
+            </g:FlowPanel>
+            <g:Label ui:field='label' styleName='{style.label}'/>
         </g:FlowPanel>
-      </g:FlowPanel>
-      <g:Label ui:field='label' styleName='{style.label}'/>
-    </g:FlowPanel>
-  </g:HTMLPanel>
+    </g:HTMLPanel>
 
 </ui:UiBinder>

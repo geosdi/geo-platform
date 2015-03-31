@@ -88,7 +88,7 @@ public class AccountDetailDummy implements IGPAccountDetail {
 
     @Override
     public GPTrustedLevel getTrustedLevel() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return GPTrustedLevel.NONE;
     }
 
     @Override

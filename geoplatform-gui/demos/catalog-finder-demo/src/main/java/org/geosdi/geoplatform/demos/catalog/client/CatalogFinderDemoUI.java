@@ -35,9 +35,11 @@
  */
 package org.geosdi.geoplatform.demos.catalog.client;
 
+import com.extjs.gxt.ui.client.Registry;
 import com.google.gwt.core.client.EntryPoint;
 import org.geosdi.geoplatform.gui.client.config.CatalogFinderInjector;
 import org.geosdi.geoplatform.gui.client.widget.CatalogFinderWidget;
+import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
 import org.geosdi.geoplatform.gui.global.security.GPAccountLogged;
 import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 
@@ -52,6 +54,7 @@ public class CatalogFinderDemoUI implements EntryPoint {
     public void onModuleLoad() {
         // Required for retrieve organization name in the save catalog server operation
         IGPAccountDetail account = new AccountDetailDummy();
+        Registry.register(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name(), account);
         GPAccountLogged.getInstance().setAccountDetail(account);
         
         CatalogFinderInjector injector = CatalogFinderInjector.MainInjector.getInstance();

@@ -37,7 +37,6 @@ import com.extjs.gxt.ui.client.Style;
 import com.extjs.gxt.ui.client.data.*;
 import com.extjs.gxt.ui.client.event.*;
 import com.extjs.gxt.ui.client.store.ListStore;
-import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.grid.*;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
@@ -96,7 +95,7 @@ public class CSWServerPaginationContainer
     private final CSWServerFormWidget serverForm;
     private CheckBoxSelectionModel<GPCSWServerBeanModel> sm;
     private GPSecureStringTextField searchField;
-    private Button deleteServerButton;
+    private GPSecureButton deleteServerButton;
 
     @Inject
     public CSWServerPaginationContainer(CatalogFinderBean theCatalogFinder,
@@ -229,14 +228,13 @@ public class CSWServerPaginationContainer
                                 GPCSWServerBeanModel selectedServer = se.getSelectedItem();
                                 if (selectedServer == null) {
                                     deleteServerButton.disable();
+                                    enableEvent.setEnabled(Boolean.FALSE);
                                 } else {
                                     deleteServerButton.enable();
                                     catalogFinder.setServerID(
                                             selectedServer.getId());
+                                    enableEvent.setEnabled(Boolean.TRUE);
                                 }
-
-                                enableEvent.setEnabled(
-                                        deleteServerButton.isEnabled());
                                 bus.fireEvent(enableEvent);
                             }
 

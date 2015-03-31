@@ -16,6 +16,11 @@
         <param-value>prod</param-value>
     </context-param>
     
+    <context-param>
+        <param-name>gwt.xsrf.session_cookie_name</param-name>
+        <param-value>GEOSDI_COOKIE</param-value>
+    </context-param>
+    
     <servlet>
         <servlet-name>GeoPlatformConfiguration</servlet-name>
         <servlet-class>org.geosdi.geoplatform.gui.server.gwt.GeoPlatformConfigurationImpl</servlet-class>
@@ -24,6 +29,18 @@
     <servlet-mapping>
         <servlet-name>GeoPlatformConfiguration</servlet-name>
         <url-pattern>/catalog_finder_demo/GeoPlatformConfiguration</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>xsrf</servlet-name>
+        <servlet-class>
+            com.google.gwt.user.server.rpc.XsrfTokenServiceServlet
+        </servlet-class>
+        <load-on-startup>0</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>xsrf</servlet-name>
+        <url-pattern>/catalog_finder_demo/xsrf</url-pattern>
     </servlet-mapping>
 
     <!-- spring context loader -->

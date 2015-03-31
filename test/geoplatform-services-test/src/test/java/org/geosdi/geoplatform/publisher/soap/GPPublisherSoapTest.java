@@ -113,7 +113,7 @@ public class GPPublisherSoapTest extends PublisherSoapTest {
 
         Assert.assertFalse(
                 PublisherSoapServerUtils.gpPublisherClient.publishStyle(
-                        "STYLE_MOCK_MOCKITO_SOAP"));
+                        "STYLE_MOCK_MOCKITO_SOAP", "STYLE_MOCK_MOCKITO"));
     }
 
     @Test

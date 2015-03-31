@@ -1436,7 +1436,7 @@
         
         <geonetwork-version>1.0-SNAPSHOT</geonetwork-version>
         
-        <geoserver-manager-version>1.7.x-enhanced</geoserver-manager-version>
+        <geoserver-manager-version>1.7.x-enhanced-SNAPSHOT</geoserver-manager-version>
     </properties>
     
 </project>

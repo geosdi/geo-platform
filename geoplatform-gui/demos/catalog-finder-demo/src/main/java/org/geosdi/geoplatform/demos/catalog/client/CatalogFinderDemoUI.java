@@ -39,6 +39,7 @@ import com.extjs.gxt.ui.client.Registry;
 import com.google.gwt.core.client.EntryPoint;
 import org.geosdi.geoplatform.gui.client.config.CatalogFinderInjector;
 import org.geosdi.geoplatform.gui.client.widget.CatalogFinderWidget;
+import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
 import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
 import org.geosdi.geoplatform.gui.global.security.GPAccountLogged;
 import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
@@ -49,6 +50,13 @@ import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class CatalogFinderDemoUI implements EntryPoint {
+    
+    /**
+     * This only for XSRF COOKIE
+     */
+    static {
+        ClientCommandDispatcher.getInstance();
+    }
 
     @Override
     public void onModuleLoad() {

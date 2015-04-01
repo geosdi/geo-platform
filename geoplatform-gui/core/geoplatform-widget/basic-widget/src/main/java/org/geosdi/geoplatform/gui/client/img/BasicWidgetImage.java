@@ -50,9 +50,6 @@ public interface BasicWidgetImage extends ClientBundle {
     @Source("loader.gif")
     ImageResource loader();
 
-    @Source("marker_54x80.png")
-    ImageResource marker_54x80();
-
     @Source("android_small.png")
     ImageResource androidSmall();
 }

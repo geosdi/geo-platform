@@ -397,15 +397,6 @@ input[type=submit].geoSDI-Button {
     margin: 0 0 1.2em;
     position: relative;
 }
-.geoSDISignin-box h2 strong {
-    display: inline-block;
-    position: absolute;
-    right: 0;
-    top: 1px;
-    height: 80px;
-    width: 54px;
-    background: transparent url('http://www.geosdi.org/images/gp-image/marker_54x80.png') no-repeat;
-}
 .geoSDISignin-box label {
     display: block;
     margin: 0 0 1.5em;

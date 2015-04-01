@@ -38,7 +38,24 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
              xmlns:g="urn:import:com.google.gwt.user.client.ui">
+    
+    <ui:image field='marker_54x80' src='marker_54x80.png' />
+    
     <ui:style src="GPLoginUi.css" />
+    
+    <ui:style field='embeddedStyle'>
+        @sprite .marker {
+        gwt-image: 'marker_54x80';
+        background-repeat: no-repeat;
+        display: inline-block;
+        position: absolute;
+        right: 0;
+        top: 1px;
+        height: 80px;
+        width: 54px;
+        }
+    </ui:style>
+    
     <ui:with field='resources' type='org.geosdi.geoplatform.gui.client.img.BasicWidgetImage'/>
     <ui:with field='basicWidgetConstants' type='org.geosdi.geoplatform.gui.client.i18n.BasicWidgetConstants'/>
 	
@@ -47,7 +64,7 @@
             <div class="{style.geoSDISignin-box}">
                 <h2>
                     <ui:text from='{basicWidgetConstants.GPAdvancedSecurityWidget_geoSDIAccessText}'/>
-                    <strong></strong>
+                    <strong class='{embeddedStyle.marker}'></strong>
                 </h2>
     
                 <strong class="{style.geoSDIEmail-label}">

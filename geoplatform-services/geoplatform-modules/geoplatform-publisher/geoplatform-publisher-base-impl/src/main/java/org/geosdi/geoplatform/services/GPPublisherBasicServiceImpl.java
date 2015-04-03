@@ -192,7 +192,8 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
     @Override
     public Boolean updateStyle(String styleToPublish, String styleName) throws
             ResourceNotFoundFault {
-        return restPublisher.updateStyle(styleToPublish, styleName);
+        this.styleIsValid(styleToPublish);
+        return restPublisher.updateStyle(styleToPublish, styleName, true);
     }
 
     @Override

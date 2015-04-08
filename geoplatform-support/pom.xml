@@ -26,6 +26,7 @@
         <module>geoplatform-jackson-support</module>
         <module>geoplatform-google-maps-services-support</module>
         <module>geoplatform-swagger-support</module>
+        <module>geoplatform-quartz-support</module>
     </modules>
 
 </project>

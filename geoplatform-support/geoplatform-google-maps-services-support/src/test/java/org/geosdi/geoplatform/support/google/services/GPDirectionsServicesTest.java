@@ -92,8 +92,6 @@ public class GPDirectionsServicesTest extends GPBaseConfigTest {
 
         DirectionsStep[] steps = routes[0].legs[0].steps;
 
-        Assert.assertEquals(40, steps.length);
-
         logger.info("@@@@@@@@@@@@@@@@@@@@FOUND {} STEPS\n", steps.length);
 
         for (DirectionsStep step : steps) {

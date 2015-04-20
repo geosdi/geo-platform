@@ -71,6 +71,7 @@ class GPSwaggerContextConfig {
                 super.setResourcePackage(
                         gpSwaggerConfiguration.getResourcePackage());
                 super.setVersion(gpSwaggerConfiguration.getVersion());
+                super.setHost(gpSwaggerConfiguration.getHost());
                 super.setBasePath(gpSwaggerConfiguration.getBasePath());
                 super.setTitle(gpSwaggerConfiguration.getTitle());
                 super.setDescription(gpSwaggerConfiguration.getDescription());

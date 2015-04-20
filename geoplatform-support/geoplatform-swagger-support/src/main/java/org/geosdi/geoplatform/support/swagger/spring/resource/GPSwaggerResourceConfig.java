@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.support.swagger.spring.resource;
 
-import com.wordnik.swagger.jaxrs.listing.ApiListingResourceJSON;
+import com.wordnik.swagger.jaxrs.listing.ApiListingResource;
 import org.geosdi.geoplatform.configurator.bootstrap.cxf.Rest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -50,7 +50,7 @@ import org.springframework.context.annotation.Configuration;
 class GPSwaggerResourceConfig {
 
     @Bean
-    public ApiListingResourceJSON gpSwaggerApiListingResource() {
-        return new ApiListingResourceJSON();
+    public ApiListingResource gpSwaggerApiListingResource() {
+        return new ApiListingResource();
     }
 }

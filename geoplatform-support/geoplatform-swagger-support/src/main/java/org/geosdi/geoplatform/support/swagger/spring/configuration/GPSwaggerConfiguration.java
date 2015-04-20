@@ -55,6 +55,8 @@ public class GPSwaggerConfiguration implements SwaggerConfiguration {
     private String resourcePackage;
     @Value(value = "gpSwaggerConfigurator{gp.swagger.version:@null}")
     private String version;
+    @Value(value = "gpSwaggerConfigurator{gp.swagger.host:@null}")
+    private String host;
     @Value(value = "gpSwaggerConfigurator{gp.swagger.basePath:@null}")
     private String basePath;
     @Value(value = "gpSwaggerConfigurator{gp.swagger.title:@null}")
@@ -76,6 +78,14 @@ public class GPSwaggerConfiguration implements SwaggerConfiguration {
     @Override
     public String getVersion() {
         return this.version = ((this.version != null) ? this.version : "1.0.0");
+    }
+
+    /**
+     * @return the host
+     */
+    @Override
+    public String getHost() {
+        return this.host;
     }
 
     @Override
@@ -121,6 +131,10 @@ public class GPSwaggerConfiguration implements SwaggerConfiguration {
                 && !(this.resourcePackage.isEmpty()), "The Resource Package "
                 + "parameter must not be null or an Empty String.");
 
+        Preconditions.checkArgument((this.host != null)
+                && !(this.host.isEmpty()), "The Host "
+                + "parameter must not be null or an Empty String.");
+
         Preconditions.checkArgument((this.basePath != null)
                 && !(this.basePath.isEmpty()), "The Base Path "
                 + "parameter must not be null or an Empty String.");
@@ -139,6 +153,7 @@ public class GPSwaggerConfiguration implements SwaggerConfiguration {
         return getClass().getSimpleName() + " {"
                 + "resourcePackage = " + resourcePackage
                 + ", version = " + getVersion()
+                + ", host = " + host
                 + ", basePath = " + basePath
                 + ", title = " + title
                 + ", description = " + getDescription()

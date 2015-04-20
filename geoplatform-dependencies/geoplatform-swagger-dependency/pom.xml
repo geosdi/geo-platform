@@ -23,13 +23,13 @@
            
             <dependency>
                 <groupId>com.wordnik</groupId>
-                <artifactId>swagger-core_2.10</artifactId>
+                <artifactId>swagger-core</artifactId>
                 <version>${swagger.version}</version>
             </dependency>
            
             <dependency>
                 <groupId>com.wordnik</groupId>
-                <artifactId>swagger-jaxrs_2.10</artifactId>
+                <artifactId>swagger-jaxrs</artifactId>
                 <version>${swagger.version}</version>
             </dependency>
             
@@ -37,7 +37,7 @@
     </dependencyManagement>
     
     <properties>
-        <swagger.version>1.3.12</swagger.version>
+        <swagger.version>1.5.1-M2</swagger.version>
     </properties>
 
 </project>

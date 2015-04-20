@@ -49,6 +49,8 @@ public interface SwaggerConfiguration extends InitializingBean {
     String getVersion();
 
     String getBasePath();
+    
+    String getHost();
 
     String getTitle();
 

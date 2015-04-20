@@ -157,12 +157,12 @@
         <!-- =========================================================== -->
         <dependency>
             <groupId>com.wordnik</groupId>
-            <artifactId>swagger-core_2.10</artifactId>
+            <artifactId>swagger-core</artifactId>
         </dependency>
         
         <dependency>
             <groupId>com.wordnik</groupId>
-            <artifactId>swagger-jaxrs_2.10</artifactId>
+            <artifactId>swagger-jaxrs</artifactId>
         </dependency>
         
         <dependency>

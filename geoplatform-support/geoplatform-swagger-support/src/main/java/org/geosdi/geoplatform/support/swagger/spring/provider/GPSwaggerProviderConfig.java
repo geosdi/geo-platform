@@ -35,8 +35,7 @@
  */
 package org.geosdi.geoplatform.support.swagger.spring.provider;
 
-import com.wordnik.swagger.jaxrs.listing.ApiDeclarationProvider;
-import com.wordnik.swagger.jaxrs.listing.ResourceListingProvider;
+import com.wordnik.swagger.jaxrs.listing.SwaggerSerializers;
 import org.geosdi.geoplatform.configurator.bootstrap.cxf.Rest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -51,12 +50,7 @@ import org.springframework.context.annotation.Configuration;
 class GPSwaggerProviderConfig {
 
     @Bean(name = "gpSwaggerResourceWriter")
-    public ResourceListingProvider gpSwaggerResourceWriter() {
-        return new ResourceListingProvider();
-    }
-
-    @Bean(name = "gpSwaggerApiWriter")
-    public ApiDeclarationProvider gpSwaggerApiDeclarationProvider() {
-        return new ApiDeclarationProvider();
+    public SwaggerSerializers gpSwaggerResourceWriter() {
+        return new SwaggerSerializers();
     }
 }

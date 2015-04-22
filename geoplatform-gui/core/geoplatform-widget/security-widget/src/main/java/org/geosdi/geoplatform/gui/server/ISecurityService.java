@@ -46,7 +46,7 @@ import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
  */
 public interface ISecurityService {
 
-    IGPAccountDetail userLogin(String userName, String password,
+    IGPAccountDetail userLogin(String userName, String password, Long projectID,
             HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 

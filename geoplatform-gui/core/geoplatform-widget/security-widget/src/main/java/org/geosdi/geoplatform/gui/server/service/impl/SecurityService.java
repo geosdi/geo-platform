@@ -102,7 +102,7 @@ public class SecurityService implements ISecurityService {
     private UserService userService;
 
     @Override
-    public IGPAccountDetail userLogin(String username, String password,
+    public IGPAccountDetail userLogin(String username, String password, Long projectID,
             HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
         GPUser user;
@@ -111,7 +111,7 @@ public class SecurityService implements ISecurityService {
                     username, password);
             return this.executeLoginOnGPAccount(user,
                     geoPlatformServiceClient.getAccountPermission(user.getId()),
-                    httpServletRequest);
+                    projectID, httpServletRequest);
         } catch (ResourceNotFoundFault ex) {
             logger.error("SecurityService",
                     "Unable to find user with username or email: " + username
@@ -173,7 +173,7 @@ public class SecurityService implements ISecurityService {
                         new SearchRequest(ivUser, LikePatternType.CONTENT_EQUALS));
                 accountDetail = this.executeLoginOnGPAccount(user,
                         geoPlatformServiceClient.getAccountPermission(
-                                user.getId()), httpServletRequest);
+                                user.getId()), null, httpServletRequest);
             } catch (ResourceNotFoundFault ex) {
                 logger.error("SecurityService",
                         "Unable to find user with username or email: " + ivUser
@@ -207,7 +207,7 @@ public class SecurityService implements ISecurityService {
                 geoPlatformServiceClient.getAccountPermission(user.getId());
                 accountDetail = this.executeLoginOnGPAccount(user,
                         geoPlatformServiceClient.getAccountPermission(
-                                user.getId()), httpServletRequest);
+                                user.getId()), null, httpServletRequest);
             } catch (ResourceNotFoundFault ex) {
                 logger.info("SecurityService",
                         "Unable to find user with username or email: " + casUserName
@@ -263,14 +263,19 @@ public class SecurityService implements ISecurityService {
     }
 
     private IGPAccountDetail executeLoginOnGPAccount(GPAccount account,
-            GuiComponentsPermissionMapData guiComponentPermission,
+            GuiComponentsPermissionMapData guiComponentPermission, Long projectID,
             HttpServletRequest httpServletRequest)
             throws ResourceNotFoundFault, SOAPFaultException {
-        System.out.println("Account id: " + account.getId());
-        GPAccountProject accountProject = geoPlatformServiceClient.getDefaultAccountProject(
-                account.getId());
-        System.out.println("Account project: ");
-        System.out.println(accountProject);
+        logger.info("Account id: " + account.getId());
+        GPAccountProject accountProject = null;
+        if (projectID == null) {
+            accountProject = geoPlatformServiceClient.getDefaultAccountProject(
+                    account.getId());
+        } else {
+            accountProject = geoPlatformServiceClient.
+                    getAccountProjectByAccountAndProjectIDs(account.getId(), projectID);
+        }
+        logger.info("Account project: " + accountProject);
         GPProject project;
         GPViewport viewport = null;
         if (accountProject == null) {
@@ -303,7 +308,7 @@ public class SecurityService implements ISecurityService {
             application = geoPlatformServiceClient.getApplication(appID);
             return this.executeLoginOnGPAccount(application,
                     geoPlatformServiceClient.getApplicationPermission(
-                            application.getAppID()),
+                            application.getAppID()), null,
                     httpServletRequest);
         } catch (ResourceNotFoundFault ex) {
             logger.error("SecurityService",

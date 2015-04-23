@@ -44,12 +44,14 @@ import org.geosdi.geoplatform.gui.client.model.EPSGLayerData;
 public interface PublisherRemoteAsync {
 
     @Deprecated
-    public void processEPSGResult(List<EPSGLayerData> previewLayerList,
+    void processEPSGResult(List<EPSGLayerData> previewLayerList,
             String workspace, AsyncCallback<String> callback);
 
     @Deprecated
-    public void publishLayerPreview(List<String> layerList, String workspace,
+    void publishLayerPreview(List<String> layerList, String workspace,
             AsyncCallback<String> callback);
 
-    public void kmlPreview(String url, AsyncCallback<Boolean> callback);
+    void kmlPreview(String url, AsyncCallback<Boolean> callback);
+
+    void createWorkspace(String workspaceName, AsyncCallback<Boolean> callback);
 }

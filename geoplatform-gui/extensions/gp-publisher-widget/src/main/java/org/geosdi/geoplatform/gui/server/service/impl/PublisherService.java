@@ -147,6 +147,25 @@ public class PublisherService implements IPublisherService {
     }
 
     @Override
+    public boolean createWorkspace(String workspaceName,
+            HttpServletRequest httpServletRequest) throws GeoPlatformException {
+        try {
+            sessionUtility.getLoggedAccount(httpServletRequest);
+        } catch (GPSessionTimeout timeout) {
+            throw new GeoPlatformException(timeout);
+        }
+        boolean result = false;
+        try {
+            result = geoPlatformPublishClient.createWorkspace(workspaceName);
+
+        } catch (ResourceNotFoundFault ex) {
+            logger.error("Error on creating workspace: " + ex);
+            throw new GeoPlatformException(ex);
+        }
+        return result;
+    }
+
+    @Override
     public void kmlPreview(HttpServletRequest httpServletRequest, String url)
             throws GeoPlatformException {
         // TODO

@@ -68,6 +68,9 @@ public interface WindowsConstants extends Constants {
     @DefaultStringValue("Results loaded with success")
     String resultsLoadedWithSuccessText();
 
+    @DefaultStringValue("Operation completed with success")
+    String operationCompletedWithSuccessText();
+
     @DefaultStringValue("No Results found")
     String noResultsFoundText();
 

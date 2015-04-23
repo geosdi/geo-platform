@@ -57,6 +57,7 @@ import com.google.common.collect.Lists;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.Image;
 import java.util.List;
+import org.geosdi.geoplatform.gui.action.button.GPSecureButton;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.command.publish.basic.PublishLayerPreviewRequest;
 import org.geosdi.geoplatform.gui.client.command.publish.basic.PublishLayerPreviewResponse;
@@ -79,6 +80,7 @@ import org.geosdi.geoplatform.gui.client.widget.fileupload.GPFileUploader;
 import org.geosdi.geoplatform.gui.client.widget.tree.store.puregwt.event.AddRasterFromPublisherEvent;
 import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
 import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
+import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformSecureAction;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
@@ -87,6 +89,7 @@ import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
 import org.geosdi.geoplatform.gui.shared.GPLayerType;
+import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 import org.geosdi.geoplatform.gui.shared.util.GPSharedUtils;
 import org.geosdi.geoplatform.gui.utility.GPReloadURLException;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
@@ -411,7 +414,22 @@ public class GPPublisherWidget extends GeoPlatformWindow
         this.workspaceSimpleComboBox.setFieldLabel(
                 PublisherWidgetConstants.INSTANCE.GPPublisherWidget_chooseWorkspaceComboBoxText());
         workSpaceSelectionPanel.add(workspaceSimpleComboBox, new FormData("99%"));
-        southPanel.add(workSpaceSelectionPanel, new RowData(-1, 1, new Margins(4)));
+        final AddWorkspaceWidget addWorkspaceWidget = new AddWorkspaceWidget(true);
+        GPSecureButton addWorkSpaceButton = new GPSecureButton("",
+                BasicWidgetResources.ICONS.done(),
+                new GeoPlatformSecureAction<ButtonEvent>(GPTrustedLevel.FULL) {
+
+                    @Override
+                    public void componentSelected(ButtonEvent e) {
+                        addWorkspaceWidget.showForm();
+                    }
+                });
+        workSpaceSelectionPanel.setPadding(0);
+        addWorkSpaceButton.setSize(22, 20);
+        addWorkSpaceButton.setToolTip(PublisherWidgetConstants.INSTANCE.
+                GPPublisherWidget_addWorkspaceButtonTooltip());
+        southPanel.add(workSpaceSelectionPanel, new RowData(-1, 1, new Margins(14, 0, 14, 10)));
+        southPanel.add(addWorkSpaceButton, new RowData(22, 1, new Margins(13, 0, 28, 0)));
         southPanel.add(uploadPanel, new RowData(1, 1, new Margins(4)));
         southPanel.setHeadingHtml(PublisherWidgetConstants.INSTANCE.
                 GPPublisherWidget_southPanelHeadingText());

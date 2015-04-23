@@ -419,6 +419,15 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
         return new InfoPreviewStore(listPreviews);
     }
 
+    @Override
+    public Boolean createWorkspace(String workspaceName) throws ResourceNotFoundFault {
+        boolean exists = this.restReader.existsWorkspace(workspaceName, true);
+        if (exists) {
+            throw new ResourceNotFoundFault("The workspace: " + workspaceName + " already exists");
+        }
+        return restPublisher.createWorkspace(workspaceName);
+    }
+
     /**
      * ************
      *

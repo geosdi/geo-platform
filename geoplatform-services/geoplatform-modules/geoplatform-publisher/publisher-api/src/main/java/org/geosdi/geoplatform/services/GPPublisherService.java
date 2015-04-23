@@ -203,6 +203,17 @@ public interface GPPublisherService extends IGPPublisherService {
             @QueryParam(value = "workspace") String workspace)
             throws ResourceNotFoundFault;
 
+    @Get
+    @GET
+    @Path(value = GPPublisherRSPathConfig.CREATE_WORKSPACE_PATH)
+    @HttpResource(location = "/preview/createWorkspace")
+    @WebResult(name = "Result")
+    @Override
+    Boolean createWorkspace(
+            @WebParam(name = "workspaceName")
+            @QueryParam(value = "workspaceName") String workspaceName)
+            throws ResourceNotFoundFault;
+
     @Post
     @POST
     @Path(value = GPPublisherRSPathConfig.PUBLISH_PATH)

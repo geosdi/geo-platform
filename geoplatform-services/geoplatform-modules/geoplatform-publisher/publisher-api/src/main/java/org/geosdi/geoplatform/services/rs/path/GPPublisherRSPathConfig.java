@@ -65,6 +65,8 @@ public final class GPPublisherRSPathConfig {
             "existsStyle";
     public static final String GET_WORKSPACE_NAMES_PATH = PREVIEW_BASE_PATH +
             "getWorkspaceNames";
+    public static final String CREATE_WORKSPACE_PATH = PREVIEW_BASE_PATH +
+            "createWorkspace";
     public static final String ANALYZE_TIF_IN_PREVIEW_PATH = PREVIEW_BASE_PATH
             + "analyzeTIFInPreview";
     public static final String GET_PREVIEW_DATA_STORES_PATH = PREVIEW_BASE_PATH 

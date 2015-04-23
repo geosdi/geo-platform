@@ -53,6 +53,18 @@ public interface PublisherWidgetConstants extends Constants {
     String statusErrorShapePublishingText();
 
     /**
+     * start AddWorkspaceWidget
+     */
+    @DefaultStringValue("Workspace Creation")
+    String AddWorkspaceWidget_fieldSetHeadingText();
+
+    @DefaultStringValue("Workspace Name")
+    String AddWorkspaceWidget_workspaceNameText();
+    
+    @DefaultStringValue("Name")
+    String AddWorkspaceWidget_nameText();
+
+    /**
      * start PublisherProgressBar
      */
     @DefaultStringValue("Publisher Progress Bar")
@@ -99,6 +111,9 @@ public interface PublisherWidgetConstants extends Constants {
 
     @DefaultStringValue("Select a file to show in preview")
     String GPPublisherWidget_uploadMessageText();
+
+    @DefaultStringValue("Add workspace")
+    String GPPublisherWidget_addWorkspaceButtonTooltip();
 
     /**
      * Start LayerAttributesComboBox

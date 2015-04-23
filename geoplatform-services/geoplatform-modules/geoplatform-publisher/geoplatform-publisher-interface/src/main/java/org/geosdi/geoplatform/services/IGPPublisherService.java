@@ -65,12 +65,12 @@ public interface IGPPublisherService {
             throws ResourceNotFoundFault;
 
     /**
-     * 
+     *
      * @param styleToPublish
      * @param styleName the style name is optional, if it is null then we assume
      * that the style to publish must contain a proper name and we will use it
      * @return
-     * @throws ResourceNotFoundFault 
+     * @throws ResourceNotFoundFault
      */
     Boolean publishStyle(String styleToPublish, String styleName)
             throws ResourceNotFoundFault;
@@ -86,6 +86,9 @@ public interface IGPPublisherService {
             Boolean overwrite, String workspace) throws ResourceNotFoundFault;
 
     InfoPreviewStore getPreviewDataStores(String workspace) throws
+            ResourceNotFoundFault;
+
+    Boolean createWorkspace(String workspaceName) throws
             ResourceNotFoundFault;
 
     Boolean publish(PublishLayerRequest publishRequest)

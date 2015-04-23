@@ -44,12 +44,15 @@ import org.geosdi.geoplatform.gui.global.GeoPlatformException;
  */
 public interface IPublisherService {
 
-    public String publishLayerPreview(HttpServletRequest httpServletRequest,
+    String publishLayerPreview(HttpServletRequest httpServletRequest,
             List<String> layerList, String workspace) throws GeoPlatformException;
 
-    public String processEPSGResult(HttpServletRequest httpServletRequest,
+    String processEPSGResult(HttpServletRequest httpServletRequest,
             List<EPSGLayerData> previewLayerList, String workspace) throws GeoPlatformException;
 
-    public void kmlPreview(HttpServletRequest httpServletRequest, String url)
+    void kmlPreview(HttpServletRequest httpServletRequest, String url)
+            throws GeoPlatformException;
+
+    boolean createWorkspace(String workspaceName, HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 }

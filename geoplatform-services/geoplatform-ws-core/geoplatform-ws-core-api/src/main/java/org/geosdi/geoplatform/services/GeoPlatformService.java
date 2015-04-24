@@ -565,8 +565,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @PUT
     @Path(value = GPServiceRSPathConfig.FORCE_TEMPORARY_ACCOUNT_PATH)
     @Override
-    void forceTemporaryAccount(@WebParam(name = "accountID")
-            @PathParam(value = "accountID") Long accountID)
+    void forceTemporaryAccount(@WebParam(name = "accountID") Long accountID)
             throws ResourceNotFoundFault;
 
     /**
@@ -581,8 +580,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @Path(value = GPServiceRSPathConfig.FORCE_EXPIRED_TEMPORARY_ACCOUNT_PATH)
     @Override
     void forceExpiredTemporaryAccount(
-            @WebParam(name = "accountID")
-            @PathParam(value = "accountID") Long accountID)
+            @WebParam(name = "accountID") Long accountID)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
     // </editor-fold>
@@ -2142,8 +2140,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @PUT
     @Path(value = GPServiceRSPathConfig.MARK_MESSAGE_AS_READ_PATH)
     @Override
-    Boolean markMessageAsRead(@WebParam(name = "messageID")
-            @PathParam(value = "messageID") Long messageID)
+    Boolean markMessageAsRead(@WebParam(name = "messageID") Long messageID)
             throws ResourceNotFoundFault;
 
     /**
@@ -2158,8 +2155,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @Path(value = GPServiceRSPathConfig.MARK_ALL_MESSAGES_AS_READ_BY_RECIPIENT_PATH)
     @Override
     Boolean markAllMessagesAsReadByRecipient(
-            @WebParam(name = "recipientID")
-            @PathParam(value = "recipientID") Long recipientID)
+            @WebParam(name = "recipientID") Long recipientID)
             throws ResourceNotFoundFault;
 
     /**

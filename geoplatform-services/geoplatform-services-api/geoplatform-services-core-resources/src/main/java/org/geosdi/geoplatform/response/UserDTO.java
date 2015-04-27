@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.response;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.geosdi.geoplatform.core.model.GPUser;
 
@@ -43,6 +45,7 @@ import org.geosdi.geoplatform.core.model.GPUser;
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 @XmlRootElement(name = "UserDTO")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class UserDTO extends ShortAccountDTO {
 
     private String name;

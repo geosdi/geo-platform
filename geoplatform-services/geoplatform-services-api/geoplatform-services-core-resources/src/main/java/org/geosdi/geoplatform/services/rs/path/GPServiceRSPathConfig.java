@@ -105,9 +105,9 @@ public final class GPServiceRSPathConfig {
     public static final String GET_USERS_COUNT_PATH = ACCOUNTS_PATH
             + "getUsersCount";
     public static final String FORCE_TEMPORARY_ACCOUNT_PATH = ACCOUNTS_PATH
-            + "forceTemporaryAccount/{accountID}";
+            + "forceTemporaryAccount";
     public static final String FORCE_EXPIRED_TEMPORARY_ACCOUNT_PATH = ACCOUNTS_PATH
-            + "forceExpiredTemporaryAccount/{accountID}";
+            + "forceExpiredTemporaryAccount";
     public static final String GET_ACCOUNT_PERMISSIONS_PATH = ACCOUNTS_PATH
             + "getAccountPermission/{accountID}";
 
@@ -271,11 +271,11 @@ public final class GPServiceRSPathConfig {
     public static final String DELETE_MESSAGE_PATH = MESSAGES_PATH
             + "deleteMessage/{messageID}";
     public static final String MARK_MESSAGE_AS_READ_PATH = MESSAGES_PATH
-            + "markMessageAsRead/{messageID}";
+            + "markMessageAsRead";
     public static final String GET_UNREAD_MESSAGES_BY_RECIPIENT_PATH = MESSAGES_PATH
             + "getUnreadMessagesByRecipient/{recipientID}";
     public static final String MARK_ALL_MESSAGES_AS_READ_BY_RECIPIENT_PATH = MESSAGES_PATH
-            + "markAllMessagesAsReadByRecipient/{recipientID}";
+            + "markAllMessagesAsReadByRecipient";
     public static final String MARK_MESSAGES_AS_READ_BY_DATE_PATH = MESSAGES_PATH
             + "markMessagesAsReadByDate";
 

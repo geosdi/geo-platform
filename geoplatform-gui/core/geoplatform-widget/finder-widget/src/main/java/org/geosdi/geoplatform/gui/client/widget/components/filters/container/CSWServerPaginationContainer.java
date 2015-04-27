@@ -166,7 +166,7 @@ public class CSWServerPaginationContainer
         super.panel.setButtonAlign(Style.HorizontalAlignment.CENTER);
         GPSecureButton newServerButton = new GPSecureButton(CatalogFinderConstants.INSTANCE.
                 CSWServerPaginationContainer_newServerButtonText(),
-                new AddServerAction(GPTrustedLevel.HIGH, this.serverForm));
+                new AddServerAction(GPTrustedLevel.NONE, this.serverForm));
         newServerButton.setIcon(BasicWidgetResources.ICONS.done());
         newServerButton.setToolTip(CatalogFinderConstants.INSTANCE.
                 CSWServerPaginationContainer_newServerButtonTooltipText());

@@ -78,7 +78,10 @@ public class FeatureInfoControlFactory {
         List<String> propertyValueList = Lists.<String>newArrayList(params.getJSObject().getPropertyValues().split(","));
         int i = 0;
         for (String propertyName : GPSharedUtils.safeList(propertyNameList)) {
-            String propertyValue = propertyValueList.get(i);
+            String propertyValue = null;
+            if (i < propertyValueList.size()) {
+                propertyValue = propertyValueList.get(i);
+            }
             if (propertyName != null && !propertyName.isEmpty() && !propertyName.equalsIgnoreCase("REQUEST")
                     && propertyValue != null && !propertyValue.isEmpty() && !propertyValue.equalsIgnoreCase("null")) {
                 param.setParameter(propertyName, propertyValue);

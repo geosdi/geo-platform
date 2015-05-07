@@ -57,7 +57,7 @@ public class MapWidgetProvider implements Provider<MapWidget> {
 
     @Override
     public MapWidget get() {
-        return this.mapFactory.createMap("665", "410",
+        return this.mapFactory.createMap("100%", "100%",
                 GPBaseLayerFactory.getBaseLayer(BaseLayerValue.OPEN_STREET_MAP));
     }
 }

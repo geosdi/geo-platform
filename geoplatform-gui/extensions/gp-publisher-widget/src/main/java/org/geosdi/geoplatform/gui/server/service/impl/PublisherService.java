@@ -89,7 +89,7 @@ public class PublisherService implements IPublisherService {
                             this.trasformPreviewLayerList(
                                     previewLayerList), workspace)).getInfoPreviews();
         } catch (ResourceNotFoundFault ex) {
-            logger.error("Error on publish shape: " + ex);
+            logger.error("Error on publish shape: " + ex.getMessage());
             throw new GeoPlatformException(
                     "Error on publish shape: " + ex.getMessage());
         }
@@ -133,7 +133,7 @@ public class PublisherService implements IPublisherService {
                     "dataTest", layerList));
 
         } catch (ResourceNotFoundFault ex) {
-            logger.error("Error on publish shape: " + ex);
+            logger.error("Error on publish shape: " + ex.getMessage());
             throw new GeoPlatformException("Error on publish shape.");
         } catch (FileNotFoundException ex) {
             logger.error("Error on publish shape: " + ex);
@@ -160,7 +160,7 @@ public class PublisherService implements IPublisherService {
 
         } catch (ResourceNotFoundFault ex) {
             logger.error("Error on creating workspace: " + ex);
-            throw new GeoPlatformException(ex);
+            throw new GeoPlatformException(ex.getMessage());
         }
         return result;
     }

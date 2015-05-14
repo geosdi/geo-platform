@@ -43,6 +43,5 @@ import org.geosdi.geoplatform.gui.model.memento.IMemento;
  */
 public interface ISave<T extends IMemento> {
 
-    
     void executeSave(T memento);
 }

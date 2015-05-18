@@ -53,7 +53,7 @@ class GPMailSessionConfig {
 
     @Bean(name = "gpMailSpringSession")
     @Autowired
-    public Session gpMailSpringSession(
+    public static Session gpMailSpringSession(
             @Qualifier(value = "gpJavaMailProperties") final Properties gpJavaMailProperties) {
         return Session.getInstance(gpJavaMailProperties, new Authenticator() {
 

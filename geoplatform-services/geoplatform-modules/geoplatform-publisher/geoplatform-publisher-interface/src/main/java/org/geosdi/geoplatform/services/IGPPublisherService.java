@@ -72,10 +72,10 @@ public interface IGPPublisherService {
      * @return
      * @throws ResourceNotFoundFault
      */
-    Boolean publishStyle(String styleToPublish, String styleName)
+    Boolean publishStyle(String styleToPublish, String styleName, boolean validate)
             throws ResourceNotFoundFault;
 
-    Boolean updateStyle(String styleToPublish, String styleName)
+    Boolean updateStyle(String styleToPublish, String styleName, boolean validate)
             throws ResourceNotFoundFault;
 
     Boolean existsStyle(String styleName);

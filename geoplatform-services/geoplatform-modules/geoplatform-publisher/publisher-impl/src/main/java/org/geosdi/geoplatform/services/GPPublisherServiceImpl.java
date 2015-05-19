@@ -81,15 +81,15 @@ public class GPPublisherServiceImpl extends GPPublisherBasicServiceImpl
     }
 
     @Override
-    public Boolean publishStyle(String styleToPublish, String styleName) throws
-            ResourceNotFoundFault {
-        return super.publishStyle(styleToPublish, styleName);
+    public Boolean publishStyle(String styleToPublish, String styleName, 
+            boolean validate) throws ResourceNotFoundFault {
+        return super.publishStyle(styleToPublish, styleName, validate);
     }
 
     @Override
-    public Boolean updateStyle(String styleToPublish, String styleName) throws
-            ResourceNotFoundFault {
-        return super.updateStyle(styleToPublish, styleName);
+    public Boolean updateStyle(String styleToPublish, String styleName, 
+            boolean validate) throws ResourceNotFoundFault {
+        return super.updateStyle(styleToPublish, styleName, validate);
     }
 
     @Override

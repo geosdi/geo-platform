@@ -176,23 +176,26 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
     }
 
     @Override
-    public Boolean publishStyle(String styleToPublish, String styleName) throws
-            ResourceNotFoundFault {
+    public Boolean publishStyle(String styleToPublish, String styleName,
+            boolean validate) throws ResourceNotFoundFault {
         boolean result = false;
-        if (this.styleIsValid(styleToPublish)) {
-            if (styleName != null) {
-                result = restPublisher.publishStyle(styleToPublish, styleName, true);
-            } else {
-                result = restPublisher.publishStyle(styleToPublish);
-            }
+        if (validate) {
+            this.styleIsValid(styleToPublish);
+        }
+        if (styleName != null) {
+            result = restPublisher.publishStyle(styleToPublish, styleName, true);
+        } else {
+            result = restPublisher.publishStyle(styleToPublish);
         }
         return result;
     }
 
     @Override
-    public Boolean updateStyle(String styleToPublish, String styleName) throws
-            ResourceNotFoundFault {
-        this.styleIsValid(styleToPublish);
+    public Boolean updateStyle(String styleToPublish, String styleName,
+            boolean validate) throws ResourceNotFoundFault {
+        if (validate) {
+            this.styleIsValid(styleToPublish);
+        }
         return restPublisher.updateStyle(styleToPublish, styleName, true);
     }
 

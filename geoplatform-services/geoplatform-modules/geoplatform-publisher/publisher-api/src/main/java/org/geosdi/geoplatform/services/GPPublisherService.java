@@ -139,7 +139,9 @@ public interface GPPublisherService extends IGPPublisherService {
             @WebParam(name = "styleToPublish")
             @QueryParam(value = "styleToPublish") String styleToPublish,
             @WebParam(name = "styleName")
-            @QueryParam(value = "styleName") String styleName)
+            @QueryParam(value = "styleName") String styleName,
+            @WebParam(name = "validate")
+            @QueryParam(value = "validate") boolean validate)
             throws ResourceNotFoundFault;
 
     @Put
@@ -152,7 +154,9 @@ public interface GPPublisherService extends IGPPublisherService {
             @WebParam(name = "styleToPublish")
             @QueryParam(value = "styleToPublish") String styleToPublish,
             @WebParam(name = "styleName")
-            @QueryParam(value = "styleName") String styleName)
+            @QueryParam(value = "styleName") String styleName,
+            @WebParam(name = "validate")
+            @QueryParam(value = "validate") boolean validate)
             throws ResourceNotFoundFault;
 
     @Get

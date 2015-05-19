@@ -18,5 +18,7 @@
     <logger name="org.springframework" level="info" additivity="false">
         <appender-ref ref="STDOUT" />
     </logger>
+    
+    <logger name="org.geosdi.geoplatform.support.mail.spring.velocity.GPSpringVelocityEngineConfig" level="debug"/>
 
 </configuration>

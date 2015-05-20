@@ -113,7 +113,7 @@ public class GPPublisherRestTest extends PublisherRestTest {
         super.mockPublishStyle();
 
         Assert.assertTrue(PublisherRSServerUtils.gpPublisherClient.publishStyle(
-                "STYLE_MOCK_MOCKITO", "STYLE_MOCK_MOCKITO"));
+                "STYLE_MOCK_MOCKITO", "STYLE_MOCK_MOCKITO", Boolean.FALSE));
     }
 
     @Test
@@ -121,7 +121,7 @@ public class GPPublisherRestTest extends PublisherRestTest {
         super.mockPutStyle();
 
         Assert.assertTrue(PublisherRSServerUtils.gpPublisherClient.updateStyle(
-                "STYLE_MOCK_TEST", "STYLE_NAME_MOCK"));
+                "STYLE_MOCK_TEST", "STYLE_NAME_MOCK", Boolean.TRUE));
     }
 
     @Test

@@ -129,14 +129,14 @@ public abstract class PublisherSoapTest extends PublisherBaseTest {
 
     @Override
     protected final void mockPutStyle() throws Exception {
-        when(publisherService.updateStyle(any(String.class), any(String.class))).thenReturn(
-                Boolean.FALSE);
+        when(publisherService.updateStyle(any(String.class), any(String.class),
+                any(Boolean.class))).thenReturn(Boolean.FALSE);
     }
 
     @Override
     protected final void mockPublishStyle() throws Exception {
         when(publisherService.publishStyle(any(String.class),
-                any(String.class))).thenReturn(Boolean.FALSE);
+                any(String.class), any(Boolean.class))).thenReturn(Boolean.FALSE);
     }
 
     @Override

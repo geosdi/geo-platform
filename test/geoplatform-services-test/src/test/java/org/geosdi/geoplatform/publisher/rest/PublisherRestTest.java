@@ -132,13 +132,13 @@ public abstract class PublisherRestTest extends PublisherBaseTest {
 
     @Override
     protected final void mockPutStyle() throws Exception {
-        when(publisherService.updateStyle(any(String.class), any(String.class))).thenReturn(
+        when(publisherService.updateStyle(any(String.class), any(String.class), any(Boolean.class))).thenReturn(
                 Boolean.TRUE);
     }
 
     @Override
     protected final void mockPublishStyle() throws Exception {
-        when(publisherService.publishStyle(any(String.class), any(String.class))).thenReturn(
+        when(publisherService.publishStyle(any(String.class), any(String.class), any(Boolean.class))).thenReturn(
                 Boolean.TRUE);
     }
 

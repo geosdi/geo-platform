@@ -113,7 +113,7 @@ public class GPPublisherSoapTest extends PublisherSoapTest {
 
         Assert.assertFalse(
                 PublisherSoapServerUtils.gpPublisherClient.publishStyle(
-                        "STYLE_MOCK_MOCKITO_SOAP", "STYLE_MOCK_MOCKITO"));
+                        "STYLE_MOCK_MOCKITO_SOAP", "STYLE_MOCK_MOCKITO", Boolean.FALSE));
     }
 
     @Test
@@ -121,7 +121,7 @@ public class GPPublisherSoapTest extends PublisherSoapTest {
         super.mockPutStyle();
 
         Assert.assertFalse(PublisherSoapServerUtils.gpPublisherClient.updateStyle(
-                "STYLE_MOCK_TEST_SOAP", "STYLE_NAME_MOCK_SOAP"));
+                "STYLE_MOCK_TEST_SOAP", "STYLE_NAME_MOCK_SOAP", Boolean.FALSE));
     }
 
     @Test

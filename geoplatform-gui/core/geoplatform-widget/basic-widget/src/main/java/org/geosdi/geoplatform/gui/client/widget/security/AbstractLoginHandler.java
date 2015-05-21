@@ -35,11 +35,15 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.security;
 
+import java.util.logging.Logger;
+
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
 public abstract class AbstractLoginHandler {
+    
+    protected final static Logger logger = Logger.getLogger("");
 
     protected AbstractLoginHandler nextHandler;
 

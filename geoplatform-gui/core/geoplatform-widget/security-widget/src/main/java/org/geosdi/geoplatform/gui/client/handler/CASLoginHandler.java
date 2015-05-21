@@ -74,13 +74,13 @@ public class CASLoginHandler extends AbstractLoginHandler {
                     CASLoginHandler.super.nextHandler.doLogin();
                 } else {
                     //TODO: Manage cas problem on login
-                    System.out.println("Error login on CAS");
+                    logger.warning("Login error using CAS");
                 }
             }
 
             @Override
             public void onCommandFailure(Throwable exception) {
-                System.out.println("Error login on CAS: " + exception.
+                logger.warning("Login error with CAS: " + exception.
                         getMessage());
             }
 

@@ -269,15 +269,6 @@
             <groupId>org.apache.ws.xmlschema</groupId>
             <artifactId>xmlschema-core</artifactId>
         </dependency>
-         
-        <dependency>
-            <groupId>org.opensaml</groupId>
-            <artifactId>opensaml</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.opensaml</groupId>
-            <artifactId>xmltooling</artifactId>
-        </dependency>
         
         <dependency>
             <groupId>org.apache.cxf</groupId>

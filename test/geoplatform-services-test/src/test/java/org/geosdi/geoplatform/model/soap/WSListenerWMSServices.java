@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.model.soap;
 
 import javax.xml.ws.Endpoint;
-import org.apache.cxf.jaxws22.EndpointImpl;
+import org.apache.cxf.jaxws.EndpointImpl;
 import org.geosdi.geoplatform.connectors.ws.wms.soap.GPWMSClientTestConnector;
 import org.geosdi.geoplatform.cxf.bus.GPSpringBusConfigurator;
 import org.geosdi.geoplatform.model.BaseGPListenerServices;

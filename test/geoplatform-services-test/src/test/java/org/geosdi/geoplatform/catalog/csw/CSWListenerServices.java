@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.catalog.csw;
 
 import javax.xml.ws.Endpoint;
-import org.apache.cxf.jaxws22.EndpointImpl;
+import org.apache.cxf.jaxws.EndpointImpl;
 import org.geosdi.geoplatform.connector.security.GeosdiCatalogBeanProvider;
 import org.geosdi.geoplatform.connector.security.SnipcCatalogBeanProvider;
 import org.geosdi.geoplatform.connectors.ws.basic.soap.GPBasicWSClientTestConnector;

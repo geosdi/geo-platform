@@ -319,13 +319,13 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
                                 if (isNewUser) {
                                     userDetail = new GPUserManageDetail();
                                     Registry.register(
-                                            UserSessionEnum.USER_NAME_TO_SEARCH.name(),
-                                            "");
+                                            UserSessionEnum.SEARCHED_USER.name(),
+                                            null);
                                 } else {
                                     userDetail = widget.getSelectionModel().getSelectedItem();
                                     Registry.register(
-                                            UserSessionEnum.USER_NAME_TO_SEARCH.name(),
-                                            userDetail.getUsername());
+                                            UserSessionEnum.SEARCHED_USER.name(),
+                                            userDetail);
                                 }
                                 userPropertiesWidget.setData(userDetail, result);
                                 userPropertiesManagerWidget.show();

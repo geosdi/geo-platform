@@ -138,6 +138,7 @@
                 <groupId>org.mortbay.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
                 <configuration>
+                    <contextXml>${basedir}/war/WEB-INF/jetty-context.xml</contextXml>
                     <webAppSourceDirectory>${basedir}/war</webAppSourceDirectory>
                     <webAppConfig>
                         <contextPath>/</contextPath>

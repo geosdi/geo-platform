@@ -35,25 +35,24 @@
  */
 package org.geosdi.geoplatform.gui.client.icons;
 
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import com.google.gwt.user.client.ui.ImageBundle;
+import com.google.gwt.resources.client.ClientBundle;
+import com.google.gwt.resources.client.ImageResource;
 
 /**
- *
- * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-@SuppressWarnings("deprecation")
-public interface CatalogFinderWidgetIcons extends ImageBundle {
+public interface CatalogFinderWidgetIcons extends ClientBundle {
 
-    @Resource("catalog_finder.png")
-    AbstractImagePrototype catalogFinder();
+    @Source("catalog_finder.png")
+    ImageResource catalogFinder();
 
-    @Resource("compass.png")
-    AbstractImagePrototype compass();
+    @Source("compass.png")
+    ImageResource compass();
 
-    @Resource(value = "addLayer.png")
-    AbstractImagePrototype addLayer();
+    @Source(value = "addLayer.png")
+    ImageResource addLayer();
 
-    @Resource(value = "metadata.png")
-    AbstractImagePrototype metadata();
+    @Source(value = "metadata.png")
+    ImageResource metadata();
 }

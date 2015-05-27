@@ -205,7 +205,7 @@ public class CatalogBBoxComponent implements GPCatalogFinderComponent,
         table.getCellFormatter().setHorizontalAlignment(1, 3,
                 HasHorizontalAlignment.ALIGN_CENTER);
 
-        Image compass = CatalogFinderWidgetResources.ICONS.compass().createImage();
+        Image compass = new Image(CatalogFinderWidgetResources.ICONS.compass());
 
         table.setWidget(1, 3, compass);
 

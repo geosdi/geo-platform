@@ -44,6 +44,7 @@ import com.google.gwt.user.client.rpc.HasRpcToken;
 import com.google.gwt.user.client.rpc.RpcTokenException;
 import com.google.gwt.user.client.rpc.XsrfToken;
 import com.google.gwt.user.client.rpc.XsrfTokenServiceAsync;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.i18n.CatalogFinderConstants;
 import org.geosdi.geoplatform.gui.client.i18n.CatalogFinderMessages;
@@ -103,7 +104,7 @@ public class CSWServerFormWidget
         super.formPanel.setButtonAlign(HorizontalAlignment.RIGHT);
 
         saveButton = new Button(ButtonsConstants.INSTANCE.saveText(),
-                BasicWidgetResources.ICONS.done(),
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.done()),
                 new SelectionListener<ButtonEvent>() {
 
                     @Override
@@ -115,7 +116,7 @@ public class CSWServerFormWidget
         super.formPanel.addButton(saveButton);
 
         Button cancelButton = new Button(ButtonsConstants.INSTANCE.cancelText(),
-                BasicWidgetResources.ICONS.cancel(),
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.cancel()),
                 new SelectionListener<ButtonEvent>() {
 
                     @Override

@@ -35,16 +35,15 @@
  */
 package org.geosdi.geoplatform.gui.client.icons;
 
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import com.google.gwt.user.client.ui.ImageBundle;
+import com.google.gwt.resources.client.ClientBundle;
+import com.google.gwt.resources.client.ImageResource;
 
 /**
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public interface PrintIcons extends ImageBundle {
+public interface PrintIcons extends ClientBundle {
     
-    @Resource("printer.png")
-    AbstractImagePrototype print();
+    @Source("printer.png")
+    ImageResource print();
 }

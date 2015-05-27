@@ -48,7 +48,7 @@ public class RasterState implements IGPLayerTreeState {
 
     @Override
     public AbstractImagePrototype getIcon() {
-        return BasicWidgetResources.ICONS.raster();
+        return AbstractImagePrototype.create(BasicWidgetResources.ICONS.raster());
     }
 
     @Override

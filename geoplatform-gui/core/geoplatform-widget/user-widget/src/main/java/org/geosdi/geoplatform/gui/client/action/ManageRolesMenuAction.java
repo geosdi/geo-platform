@@ -39,6 +39,7 @@ import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.HasRpcToken;
 import com.google.gwt.user.client.rpc.XsrfToken;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
@@ -48,7 +49,6 @@ import org.geosdi.geoplatform.gui.client.service.UserRemoteAsync;
 import org.geosdi.geoplatform.gui.client.widget.ManageRolesWidget;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.global.security.GPAccountLogged;
-import org.geosdi.geoplatform.gui.server.gwt.UserRemoteImpl;
 
 /**
  *
@@ -62,7 +62,7 @@ public class ManageRolesMenuAction extends MenuBaseAction {
 
     public ManageRolesMenuAction() {
         super(UserModuleConstants.INSTANCE.ManageRolesMenuAction_titleText(),
-                BasicWidgetResources.ICONS.role());
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.role()));
     }
 
     @Override

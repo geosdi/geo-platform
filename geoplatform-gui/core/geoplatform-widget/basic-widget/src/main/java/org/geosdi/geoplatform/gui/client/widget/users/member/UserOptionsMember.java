@@ -46,6 +46,7 @@ import com.extjs.gxt.ui.client.widget.button.ToggleButton;
 import com.extjs.gxt.ui.client.widget.layout.BoxLayout.BoxLayoutPack;
 import com.extjs.gxt.ui.client.widget.layout.VBoxLayout;
 import com.extjs.gxt.ui.client.widget.layout.VBoxLayout.VBoxLayoutAlign;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.configuration.users.options.member.GeoPlatformOptionsMember;
@@ -87,7 +88,8 @@ public abstract class UserOptionsMember implements GeoPlatformOptionsMember {
     }
 
     private void createSaveButton() {
-        saveButton = new Button(ButtonsConstants.INSTANCE.saveText(), BasicWidgetResources.ICONS.done(),
+        saveButton = new Button(ButtonsConstants.INSTANCE.saveText(), 
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.done()),
                 new SelectionListener<ButtonEvent>() {
 
             @Override

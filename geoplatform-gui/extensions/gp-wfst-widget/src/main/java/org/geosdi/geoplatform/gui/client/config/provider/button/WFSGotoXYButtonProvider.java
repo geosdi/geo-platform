@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.client.config.provider.button;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.button.Button;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import javax.inject.Inject;
 import javax.inject.Provider;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
@@ -64,7 +65,8 @@ public class WFSGotoXYButtonProvider implements Provider<Button> {
 
             {
                 super.setId("WFS_T_GOTO_XY_BUTTON");
-                super.setIcon(BasicWidgetResources.ICONS.gotoXY());
+                super.setIcon(
+                        AbstractImagePrototype.create(BasicWidgetResources.ICONS.gotoXY()));
                 super.setToolTip(BasicWidgetConstants.INSTANCE.
                         GotoXYAction_tooltipText());
                 super.addSelectionListener(

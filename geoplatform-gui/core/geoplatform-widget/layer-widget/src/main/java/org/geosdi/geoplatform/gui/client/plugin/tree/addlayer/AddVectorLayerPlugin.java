@@ -69,7 +69,7 @@ public class AddVectorLayerPlugin extends AbstractAddLayerPlugin<ToolbarLayerTre
 
     @Override
     public void initPlugin(TreePanel treePanel) {
-        this.setImage(LayerResources.ICONS.mappAdd().getHTML());
+        this.setImage(LayerResources.ICONS.mappAdd().getSafeUri().asString());
         this.setTooltip(LayerModuleConstants.INSTANCE.AddVectorLayerPlugin_tooltipText());
         action = new AddVectorTreeAction(treePanel);
         action.setEnabled(true);

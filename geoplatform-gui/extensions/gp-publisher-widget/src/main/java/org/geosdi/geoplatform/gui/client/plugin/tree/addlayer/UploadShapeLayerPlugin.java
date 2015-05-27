@@ -70,7 +70,7 @@ public class UploadShapeLayerPlugin extends AbstractAddLayerPlugin<ToolbarLayerT
 
     @Override
     public void initPlugin(TreePanel treePanel) {
-        this.setImage(PublisherResources.ICONS.fromShape().getHTML());
+        this.setImage(PublisherResources.ICONS.fromShape().getSafeUri().asString());
         this.setTooltip(PublisherWidgetConstants.INSTANCE.UploadShapeLayerPlugin_tooltipText());
         action = new UploadShapeAction(treePanel);
         this.setName(action.getTooltip());

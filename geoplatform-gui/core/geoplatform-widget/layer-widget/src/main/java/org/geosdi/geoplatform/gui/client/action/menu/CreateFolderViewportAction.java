@@ -43,6 +43,7 @@ import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 import com.extjs.gxt.ui.client.widget.Dialog;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.common.collect.Lists;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import java.util.List;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
@@ -68,7 +69,8 @@ public class CreateFolderViewportAction extends MenuBaseAction {
     private CreateViewportEvent createViewportEvent = new CreateViewportEvent();
 
     public CreateFolderViewportAction(final TreePanel treePanel) {
-        super("CreateViewport", BasicWidgetResources.ICONS.viewport());
+        super("CreateViewport", 
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.viewport()));
         this.treePanel = treePanel;
         this.executor = new Listener() {
             @Override

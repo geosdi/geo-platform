@@ -1,168 +1,164 @@
 /**
  *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
+ * geo-platform Rich webgis framework http://geo-platform.org
+ * ====================================================================
  *
- *   Copyright (C) 2008-2015 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2015 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version. This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details. You should have received a copy of the GNU General Public License
+ * along with this program. If not, see http://www.gnu.org/licenses/
  *
- *   ====================================================================
+ * ====================================================================
  *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
+ * Linking this library statically or dynamically with other modules is making a
+ * combined work based on this library. Thus, the terms and conditions of the
+ * GNU General Public License cover the whole combination.
  *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * As a special exception, the copyright holders of this library give you
+ * permission to link this library with independent modules to produce an
+ * executable, regardless of the license terms of these independent modules, and
+ * to copy and distribute the resulting executable under terms of your choice,
+ * provided that you also meet, for each linked independent module, the terms
+ * and conditions of the license of that module. An independent module is a
+ * module which is not derived from or based on this library. If you modify this
+ * library, you may extend this exception to your version of the library, but
+ * you are not obligated to do so. If you do not wish to do so, delete this
+ * exception statement from your version.
  */
 package org.geosdi.geoplatform.gui.client.icons;
 
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import com.google.gwt.user.client.ui.ImageBundle;
+import com.google.gwt.resources.client.ClientBundle;
+import com.google.gwt.resources.client.ImageResource;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- *
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-@SuppressWarnings("deprecation")
-public interface LayerIcons extends ImageBundle {
+public interface LayerIcons extends ClientBundle {
 
-    @Resource("skip_forward.png")
-    AbstractImagePrototype forwardTime();
+    @Source("skip_forward.png")
+    ImageResource forwardTime();
 
-    @Resource("skip_backward.png")
-    AbstractImagePrototype backwardTime();
+    @Source("skip_backward.png")
+    ImageResource backwardTime();
 
-    @Resource("play.png")
-    AbstractImagePrototype playTime();
-    
-    @Resource("pause.png")
-    AbstractImagePrototype pauseTime();
-    
-    @Resource("shuffle_time.png")
-    AbstractImagePrototype shuffleTime();
+    @Source("play.png")
+    ImageResource playTime();
 
-    @Resource("layer_folder.png")
-    AbstractImagePrototype layerFolder();
+    @Source("pause.png")
+    ImageResource pauseTime();
 
-    @Resource("line.png")
-    AbstractImagePrototype line();
+    @Source("shuffle_time.png")
+    ImageResource shuffleTime();
 
-    @Resource("point.png")
-    AbstractImagePrototype point();
+    @Source("layer_folder.png")
+    ImageResource layerFolder();
 
-    @Resource("copy.png")
-    AbstractImagePrototype copy();
+    @Source("line.png")
+    ImageResource line();
 
-    @Resource("paste.png")
-    AbstractImagePrototype paste();
+    @Source("point.png")
+    ImageResource point();
 
-    @Resource("shape.png")
-    AbstractImagePrototype shape();
+    @Source("copy.png")
+    ImageResource copy();
 
-    @Resource("gp.png")
-    AbstractImagePrototype geoPlatform();
+    @Source("paste.png")
+    ImageResource paste();
 
-    @Resource("addFolder.png")
-    AbstractImagePrototype addFolder();
+    @Source("shape.png")
+    ImageResource shape();
 
-    @Resource("addRaster.png")
-    AbstractImagePrototype addRasterLayer();
+    @Source("gp.png")
+    ImageResource geoPlatform();
 
-    @Resource("addVector.png")
-    AbstractImagePrototype addVectorLayer();
+    @Source("addFolder.png")
+    ImageResource addFolder();
 
-    @Resource("zoom.png")
-    AbstractImagePrototype zoomToMaxExtend();
+    @Source("addRaster.png")
+    ImageResource addRasterLayer();
 
-    @Resource("kml.png")
-    AbstractImagePrototype exportToKML();
+    @Source("addVector.png")
+    ImageResource addVectorLayer();
 
-    @Resource("tag.png")
-    AbstractImagePrototype exportToGML();
+    @Source("zoom.png")
+    ImageResource zoomToMaxExtend();
 
-    @Resource("CSV.png")
-    AbstractImagePrototype exportToCSV();
+    @Source("kml.png")
+    ImageResource exportToKML();
 
-    @Resource("json.png")
-    AbstractImagePrototype exportToJSON();
+    @Source("tag.png")
+    ImageResource exportToGML();
 
-    @Resource("rss.png")
-    AbstractImagePrototype exportToRSS();
+    @Source("CSV.png")
+    ImageResource exportToCSV();
 
-    @Resource("pdf.png")
-    AbstractImagePrototype exportToPDF();
+    @Source("json.png")
+    ImageResource exportToJSON();
 
-    @Resource("raster.png")
-    AbstractImagePrototype exportToTIFF();
+    @Source("rss.png")
+    ImageResource exportToRSS();
 
-    @Resource("shape-zip.png")
-    AbstractImagePrototype exportToShpZip();
+    @Source("pdf.png")
+    ImageResource exportToPDF();
 
-    @Resource("layer-properties.png")
-    AbstractImagePrototype layerProperties();
+    @Source("raster.png")
+    ImageResource exportToTIFF();
 
-    @Resource("parse-url.png")
-    AbstractImagePrototype loadWmsGetMapFromUrl();
+    @Source("shape-zip.png")
+    ImageResource exportToShpZip();
 
-    @Resource("google_earth.png")
-    AbstractImagePrototype loadKmlFromURL();
+    @Source("layer-properties.png")
+    ImageResource layerProperties();
 
-    @Resource("editFolder.png")
-    AbstractImagePrototype editFolder();
+    @Source("parse-url.png")
+    ImageResource loadWmsGetMapFromUrl();
 
-    @Resource("GPProject.png")
-    AbstractImagePrototype gpProject();
+    @Source("google_earth.png")
+    ImageResource loadKmlFromURL();
 
-    @Resource("addLayers.png")
-    AbstractImagePrototype addLayers();
+    @Source("editFolder.png")
+    ImageResource editFolder();
 
-    @Resource("map_add.png")
-    AbstractImagePrototype mappAdd();
+    @Source("GPProject.png")
+    ImageResource gpProject();
 
-    @Resource("project_add.png")
-    AbstractImagePrototype projectAdd();
+    @Source("addLayers.png")
+    ImageResource addLayers();
 
-    @Resource("project_delete.png")
-    AbstractImagePrototype projectDelete();
+    @Source("map_add.png")
+    ImageResource mappAdd();
 
-    @Resource("arrow_refresh.png")
-    AbstractImagePrototype arrowRefresh();
+    @Source("project_add.png")
+    ImageResource projectAdd();
 
-    @Resource("filter.png")
-    AbstractImagePrototype cqlFilter();
+    @Source("project_delete.png")
+    ImageResource projectDelete();
 
-    @Resource("filter_delete.png")
-    AbstractImagePrototype cqlFilterDelete();
+    @Source("arrow_refresh.png")
+    ImageResource arrowRefresh();
 
-    @Resource("filter_layer.png")
-    AbstractImagePrototype cqlFilterLayerIcon();
+    @Source("filter.png")
+    ImageResource cqlFilter();
 
-    @Resource("time_filter.png")
-    AbstractImagePrototype timeFilterLayerIcon();
+    @Source("filter_delete.png")
+    ImageResource cqlFilterDelete();
 
-    @Resource("refresh_layer_cql.png")
-    AbstractImagePrototype refreshCqlLayerIcon();
+    @Source("filter_layer.png")
+    ImageResource cqlFilterLayerIcon();
 
-    @Resource("refresh_layer.png")
-    AbstractImagePrototype refreshLayerIcon();
+    @Source("time_filter.png")
+    ImageResource timeFilterLayerIcon();
+
+    @Source("refresh_layer_cql.png")
+    ImageResource refreshCqlLayerIcon();
+
+    @Source("refresh_layer.png")
+    ImageResource refreshLayerIcon();
 }

@@ -46,6 +46,7 @@ import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.client.i18n.MapModuleConstants;
 
 /**
@@ -60,8 +61,8 @@ public class ZoomNextAction extends ToolbarMapAction
     private HandlerRegistration handlerRegistration;
 
     public ZoomNextAction(GeoPlatformMap theMapWidget) {
-        super(Resources.ICONS.zoomNext(), MapModuleConstants.INSTANCE.
-                ZoomNextAction_tooltipText());
+        super(AbstractImagePrototype.create(Resources.ICONS.zoomNext()), 
+                MapModuleConstants.INSTANCE.ZoomNextAction_tooltipText());
         this.mapWidget = theMapWidget;
         this.addHandler();
     }

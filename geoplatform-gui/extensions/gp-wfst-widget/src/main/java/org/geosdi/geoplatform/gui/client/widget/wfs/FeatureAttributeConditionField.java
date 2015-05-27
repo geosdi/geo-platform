@@ -49,6 +49,7 @@ import com.extjs.gxt.ui.client.widget.form.SimpleComboBox;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import java.util.List;
 import org.geosdi.geoplatform.connector.wfs.response.AttributeDTO;
 import org.geosdi.geoplatform.connector.wfs.response.QueryRestrictionDTO;
@@ -199,7 +200,7 @@ public class FeatureAttributeConditionField extends MultiField implements
 
         });
         button.setToolTip("Delete Condition");
-        button.setIcon(BasicWidgetResources.ICONS.delete());
+        button.setIcon(AbstractImagePrototype.create(BasicWidgetResources.ICONS.delete()));
         button.setAutoWidth(true);
 
         return button;

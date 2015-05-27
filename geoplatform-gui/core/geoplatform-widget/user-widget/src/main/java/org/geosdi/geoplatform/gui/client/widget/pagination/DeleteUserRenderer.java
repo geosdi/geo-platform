@@ -49,12 +49,12 @@ import com.google.gwt.user.client.rpc.HasRpcToken;
 import com.google.gwt.user.client.rpc.RpcTokenException;
 import com.google.gwt.user.client.rpc.XsrfToken;
 import com.google.gwt.user.client.rpc.XsrfTokenServiceAsync;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.event.timeout.IManageDeleteUserHandler;
 import org.geosdi.geoplatform.gui.client.event.timeout.ManageDeleteUserEvent;
 import org.geosdi.geoplatform.gui.client.i18n.UserModuleConstants;
 import org.geosdi.geoplatform.gui.client.i18n.UserModuleMessages;
-import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
 import org.geosdi.geoplatform.gui.client.service.UserRemote;
@@ -64,7 +64,6 @@ import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
-import org.geosdi.geoplatform.gui.server.gwt.UserRemoteImpl;
 import org.geosdi.geoplatform.gui.service.gwt.xsrf.GPXsrfTokenService;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 
@@ -113,7 +112,8 @@ public class DeleteUserRenderer extends GPGridCellRenderer<GPUserManageDetail>
         });
         button.setToolTip(
                 UserModuleConstants.INSTANCE.DeleteUserRenderer_deleteUserTitleText());
-        button.setIcon(BasicWidgetResources.ICONS.delete());
+        button.setIcon(
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.delete()));
         button.setAutoWidth(true);
 
         return button;

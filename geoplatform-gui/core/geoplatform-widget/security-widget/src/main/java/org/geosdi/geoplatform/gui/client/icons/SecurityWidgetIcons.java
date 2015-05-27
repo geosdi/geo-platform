@@ -35,11 +35,11 @@
  */
 package org.geosdi.geoplatform.gui.client.icons;
 
-import com.google.gwt.user.client.ui.ImageBundle;
+import com.google.gwt.resources.client.ClientBundle;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public interface SecurityWidgetIcons extends ImageBundle {
+public interface SecurityWidgetIcons extends ClientBundle {
 }

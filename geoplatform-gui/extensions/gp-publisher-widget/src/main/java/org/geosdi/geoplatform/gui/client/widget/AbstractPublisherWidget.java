@@ -54,6 +54,7 @@ import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.extjs.gxt.ui.client.widget.layout.RowData;
 import com.extjs.gxt.ui.client.widget.layout.RowLayout;
 import com.google.common.collect.Lists;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.Image;
 import java.util.List;
 import org.geosdi.geoplatform.gui.action.button.GPSecureButton;
@@ -249,7 +250,7 @@ public abstract class AbstractPublisherWidget extends GeoPlatformWindow
         this.addSouthPanel();
         super.addButton(this.getFinalizePublishButton());
         Button resetButton = new Button(ButtonsConstants.INSTANCE.resetText(),
-                BasicWidgetResources.ICONS.cancel());
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.cancel()));
         resetButton.addSelectionListener(
                 new SelectionListener<ButtonEvent>() {
                     @Override
@@ -268,8 +269,7 @@ public abstract class AbstractPublisherWidget extends GeoPlatformWindow
         centralPanel.setHeaderVisible(false);
         BorderLayoutData centerData = new BorderLayoutData(Style.LayoutRegion.CENTER);
         centerData.setMargins(new Margins(5, 5, 0, 5));
-        centralImage = BasicWidgetResources.ICONS.geo_platform_logo().
-                createImage();
+        centralImage = new Image(BasicWidgetResources.ICONS.geo_platform_logo());
         centralPanel.add(centralImage);
         super.add(centralPanel, centerData);
     }
@@ -313,7 +313,7 @@ public abstract class AbstractPublisherWidget extends GeoPlatformWindow
         workSpaceSelectionPanel.add(workspaceSimpleComboBox, new FormData("99%"));
         final AddWorkspaceWidget addWorkspaceWidget = new AddWorkspaceWidget(true);
         this.addWorkSpaceButton = new GPSecureButton("",
-                BasicWidgetResources.ICONS.done(),
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.done()),
                 new GeoPlatformSecureAction<ButtonEvent>(GPTrustedLevel.FULL) {
 
                     @Override

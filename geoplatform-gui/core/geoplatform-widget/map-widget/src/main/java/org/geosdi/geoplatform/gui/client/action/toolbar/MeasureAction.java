@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.action.toolbar;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.widget.button.ToggleButton;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.toggle.MapToggleAction;
 import org.geosdi.geoplatform.gui.client.Resources;
 import org.geosdi.geoplatform.gui.client.i18n.MapModuleConstants;
@@ -49,7 +50,7 @@ import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 public class MeasureAction extends MapToggleAction {
 
     public MeasureAction(GeoPlatformMap mapWidget) {
-        super(mapWidget, Resources.ICONS.measure(),
+        super(mapWidget, AbstractImagePrototype.create(Resources.ICONS.measure()),
                 MapModuleConstants.INSTANCE.MeasureAction_tooltipText());
     }
 

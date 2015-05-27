@@ -49,7 +49,7 @@ public class RasterCQLTimeState implements IGPLayerTreeState {
 
     @Override
     public AbstractImagePrototype getIcon() {
-        return LayerResources.ICONS.refreshCqlLayerIcon();
+        return AbstractImagePrototype.create(LayerResources.ICONS.refreshCqlLayerIcon());
     }
 
     @Override

@@ -35,21 +35,19 @@
  */
 package org.geosdi.geoplatform.gui.client.icons;
 
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import com.google.gwt.user.client.ui.ImageBundle;
+import com.google.gwt.resources.client.ClientBundle;
+import com.google.gwt.resources.client.ImageResource;
 
 /**
- * @author Michele Santomauro - CNR IMAA geoSDI Group
- * @email  michele.santomauro@geosdi.org
- *
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-@SuppressWarnings("deprecation")
-public interface OAuth2Icons extends ImageBundle {
+public interface OAuth2Icons extends ClientBundle {
 
-    @Resource("google_white.png")
-    AbstractImagePrototype googleSignOnWhite();
+    @Source("google_white.png")
+    ImageResource googleSignOnWhite();
 
-    @Resource("google_green.png")
-    AbstractImagePrototype googleSignOnGreen();
+    @Source("google_green.png")
+    ImageResource googleSignOnGreen();
     
 }

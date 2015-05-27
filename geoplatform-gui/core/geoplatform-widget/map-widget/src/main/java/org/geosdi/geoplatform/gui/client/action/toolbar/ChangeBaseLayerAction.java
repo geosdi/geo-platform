@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.action.toolbar;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.ToolbarMapAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.i18n.MapModuleConstants;
@@ -51,7 +52,8 @@ public class ChangeBaseLayerAction extends ToolbarMapAction {
     private BaseLayerWidget baseLayerWidget;
 
     public ChangeBaseLayerAction(GeoPlatformMap theMapWidget) {
-        super(BasicWidgetResources.ICONS.baseLayer(), MapModuleConstants.INSTANCE.ChangeBaseLayerAction_tooltipText());
+        super(AbstractImagePrototype.create(BasicWidgetResources.ICONS.baseLayer()), 
+                MapModuleConstants.INSTANCE.ChangeBaseLayerAction_tooltipText());
         this.baseLayerWidget = new BaseLayerWidget(Boolean.TRUE);
     }
 

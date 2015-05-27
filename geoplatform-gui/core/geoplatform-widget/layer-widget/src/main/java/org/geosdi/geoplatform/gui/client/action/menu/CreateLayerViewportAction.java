@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.client.action.menu;
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.common.collect.Lists;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import java.util.List;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
@@ -57,7 +58,8 @@ public class CreateLayerViewportAction extends MenuBaseAction {
     private CreateViewportEvent createViewportEvent = new CreateViewportEvent();
 
     public CreateLayerViewportAction(final TreePanel treePanel) {
-        super("CreateLayerViewport", BasicWidgetResources.ICONS.viewport());
+        super("CreateLayerViewport", 
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.viewport()));
         this.treePanel = treePanel;
     }
 

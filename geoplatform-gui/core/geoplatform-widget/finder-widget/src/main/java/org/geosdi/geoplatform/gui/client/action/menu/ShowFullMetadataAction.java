@@ -42,6 +42,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.HasRpcToken;
 import com.google.gwt.user.client.rpc.RpcTokenException;
 import com.google.gwt.user.client.rpc.XsrfToken;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.CatalogFinderWidgetResources;
 import org.geosdi.geoplatform.gui.client.i18n.CatalogFinderConstants;
@@ -68,8 +69,9 @@ public class ShowFullMetadataAction extends MenuBaseAction {
 
     public ShowFullMetadataAction(RecordsContainer rc) {
         super(CatalogFinderConstants.INSTANCE.
-                ShowFullMetadataAction_titleActionText(),
-                CatalogFinderWidgetResources.ICONS.metadata());
+                ShowFullMetadataAction_titleActionText(), 
+                AbstractImagePrototype.create(
+                        CatalogFinderWidgetResources.ICONS.metadata()));
 
         this.rc = rc;
     }

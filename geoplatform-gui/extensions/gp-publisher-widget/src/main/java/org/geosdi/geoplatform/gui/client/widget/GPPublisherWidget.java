@@ -39,6 +39,7 @@ import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.common.collect.Lists;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.command.publish.basic.PublishLayerPreviewRequest;
@@ -85,7 +86,7 @@ public class GPPublisherWidget extends AbstractPublisherWidget {
     public Button getFinalizePublishButton() {
         if (super.finishButton == null) {
             super.finishButton = new Button(ButtonsConstants.INSTANCE.addOnTreeText(),
-                    BasicWidgetResources.ICONS.done());
+                    AbstractImagePrototype.create(BasicWidgetResources.ICONS.done()));
             super.finishButton.addSelectionListener(
                     new SelectionListener<ButtonEvent>() {
                         @Override

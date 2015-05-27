@@ -45,6 +45,7 @@ import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.event.dom.client.KeyCodes;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.LayerResources;
@@ -161,7 +162,7 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
         getFormPanel().setButtonAlign(HorizontalAlignment.RIGHT);
 
         save = new Button(ButtonsConstants.INSTANCE.createText(),
-                LayerResources.ICONS.addFolder(),
+                AbstractImagePrototype.create(LayerResources.ICONS.addFolder()),
                 new SelectionListener<ButtonEvent>() {
 
                     @Override
@@ -176,7 +177,7 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
         this.getFormPanel().addButton(save);
 
         this.cancel = new Button(ButtonsConstants.INSTANCE.cancelText(),
-                BasicWidgetResources.ICONS.cancel(),
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.cancel()),
                 new SelectionListener<ButtonEvent>() {
 
                     @Override

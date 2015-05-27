@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.action.menu.cqlfilter;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.LayerFiltersResources;
 import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
@@ -58,7 +59,8 @@ public class RemoveCQLFilterAction extends MenuBaseAction {
     private final CQLFilterLayerMapEvent cqlFilterLayerMapEvent = new CQLFilterLayerMapEvent();
 
     public RemoveCQLFilterAction(GPTreePanel<GPBeanTreeModel> treePanel) {
-        super("RemoveCQLFilter", LayerFiltersResources.ICONS.cqlFilterDelete());
+        super("RemoveCQLFilter", AbstractImagePrototype.create(
+                LayerFiltersResources.ICONS.cqlFilterDelete()));
         this.treePanel = treePanel;
     }
 

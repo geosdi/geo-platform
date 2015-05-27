@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.action.menu;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
@@ -53,7 +54,7 @@ public class AddFolderMenuAction extends MenuBaseAction {
 
     public AddFolderMenuAction(TreePanel theTreePanel) {
         super(LayerModuleConstants.INSTANCE.AddFolderMenuAction_titleText(),
-                LayerResources.ICONS.addFolder());
+                AbstractImagePrototype.create(LayerResources.ICONS.addFolder()));
         treePanel = theTreePanel;
         addFolder = new AddFolderWidget(treePanel);
     }

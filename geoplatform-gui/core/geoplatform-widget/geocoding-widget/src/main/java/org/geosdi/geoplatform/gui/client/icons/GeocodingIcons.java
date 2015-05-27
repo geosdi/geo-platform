@@ -35,22 +35,21 @@
  */
 package org.geosdi.geoplatform.gui.client.icons;
 
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import com.google.gwt.user.client.ui.ImageBundle;
+import com.google.gwt.resources.client.ClientBundle;
+import com.google.gwt.resources.client.ImageResource;
 
 /**
- * @author giuseppe
- * 
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-@SuppressWarnings("deprecation")
-public interface GeocodingIcons extends ImageBundle {
+public interface GeocodingIcons extends ClientBundle {
 
-    @Resource("Maps-icon.png")
-    AbstractImagePrototype geocoding();
+    @Source("Maps-icon.png")
+    ImageResource geocoding();
 
-    @Resource("google_icon.png")
-    AbstractImagePrototype reverseGeocoding();
+    @Source("google_icon.png")
+    ImageResource reverseGeocoding();
 
-    @Resource("yahoo.png")
-    AbstractImagePrototype yahooReverseGeocoding();
+    @Source("yahoo.png")
+    ImageResource yahooReverseGeocoding();
 }

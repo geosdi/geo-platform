@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.action.menu;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseSecureAction;
@@ -69,7 +70,7 @@ public class ShareProjectMenuAction extends MenuBaseSecureAction {
     public ShareProjectMenuAction(
             GPProjectManagementWidget projectManagementWidget) {
         super(GPTrustedLevel.HIGH, LayerModuleConstants.INSTANCE.ShareProjectMenuAction_titleText(),
-                LayerResources.ICONS.arrowRefresh());
+                AbstractImagePrototype.create(LayerResources.ICONS.arrowRefresh()));
         this.projectManagementWidget = projectManagementWidget;
     }
 

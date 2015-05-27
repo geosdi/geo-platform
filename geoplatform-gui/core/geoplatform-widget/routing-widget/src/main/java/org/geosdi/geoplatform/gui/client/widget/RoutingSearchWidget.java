@@ -43,6 +43,7 @@ import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.layout.MarginData;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.Image;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.command.FindDirectionsByCoordRequest;
@@ -120,7 +121,7 @@ public class RoutingSearchWidget implements HasCleanEvent {
         buttonPanel.setSpacing(5);
 
         this.traceRoute = new Button(ButtonsConstants.INSTANCE.routeText(),
-                BasicWidgetResources.ICONS.routing(),
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.routing()),
                 new SelectionListener<ButtonEvent>() {
 
             @Override
@@ -143,7 +144,7 @@ public class RoutingSearchWidget implements HasCleanEvent {
         buttonPanel.add(this.traceRoute);
 
         this.clear = new Button(ButtonsConstants.INSTANCE.clearText(),
-                BasicWidgetResources.ICONS.erase(),
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.erase()),
                 new SelectionListener<ButtonEvent>() {
 
             @Override

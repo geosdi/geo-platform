@@ -52,6 +52,7 @@ import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.LabelToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
 import com.google.gwt.event.dom.client.KeyCodes;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.Widget;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.i18n.BasicWidgetConstants;
@@ -186,7 +187,8 @@ public abstract class GeoPlatformSearchPanel<C extends Widget, T extends GeoPlat
                     }
 
                 });
-        selectButton.setIcon(BasicWidgetResources.ICONS.select());
+        selectButton.setIcon(
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.select()));
         selectButton.disable();
         formPanel.addButton(this.selectButton);
         cancelButton = new Button(ButtonsConstants.INSTANCE.cancelText(),
@@ -198,7 +200,8 @@ public abstract class GeoPlatformSearchPanel<C extends Widget, T extends GeoPlat
                     }
 
                 });
-        cancelButton.setIcon(BasicWidgetResources.ICONS.cancel());
+        cancelButton.setIcon(AbstractImagePrototype.create(
+                BasicWidgetResources.ICONS.cancel()));
         formPanel.addButton(cancelButton);
         formPanel.setBottomComponent(this.toolBar);
         vp.add(formPanel);

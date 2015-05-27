@@ -47,6 +47,7 @@ import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.ListView;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.button.GPSecureButton;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.action.baselayer.SaveBaseLayerAction;
@@ -85,10 +86,12 @@ public class BaseLayerWidget extends GeoPlatformWindow {
         this.store.add(GPMapBaseLayerFactory.getBaseLayerList());
         GeoPlatformSecureAction saveBaseLayerAction = new SaveBaseLayerAction(GPTrustedLevel.LOW, this);
         this.saveButton = new GPSecureButton(ButtonsConstants.INSTANCE.saveText(),
-                BasicWidgetResources.ICONS.save(), saveBaseLayerAction);
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.save()), 
+                saveBaseLayerAction);
         this.saveButton.disable();
         Button applyButton = new Button(ButtonsConstants.INSTANCE.applyCloseText(),
-                BasicWidgetResources.ICONS.done(), new SelectionListener<ButtonEvent>() {
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.done()), 
+                new SelectionListener<ButtonEvent>() {
             @Override
             public void componentSelected(ButtonEvent ce) {
                 BaseLayerWidget.super.hide();

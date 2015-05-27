@@ -48,6 +48,7 @@ import com.google.gwt.user.client.rpc.HasRpcToken;
 import com.google.gwt.user.client.rpc.RpcTokenException;
 import com.google.gwt.user.client.rpc.XsrfToken;
 import com.google.gwt.user.client.rpc.XsrfTokenServiceAsync;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.button.GPSecureButton;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.LayerResources;
@@ -119,19 +120,19 @@ public class GPProjectSearchPanel extends GPListViewSearchPanel<GPClientProject>
         GPProjectAction action = new GPProjectAction(GPTrustedLevel.HIGH, this);
         GPSecureButton addProjectButton = new GPSecureButton(
                 ButtonsConstants.INSTANCE.addText(),
-                LayerResources.ICONS.projectAdd(),
+                AbstractImagePrototype.create(LayerResources.ICONS.projectAdd()),
                 action);
         super.addButton(1, addProjectButton);
         addProjectButton.disable();
         this.editButton = new GPSecureButton(
                 ButtonsConstants.INSTANCE.editText(),
-                BasicWidgetResources.ICONS.edit(),
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.edit()),
                 action);
         this.editButton.disable();
         super.addButton(2, this.editButton);
         this.deleteButton = new GPSecureButton(
                 ButtonsConstants.INSTANCE.deleteText(),
-                LayerResources.ICONS.projectDelete(),
+                AbstractImagePrototype.create(LayerResources.ICONS.projectDelete()),
                 new DeleteProjectAction(GPTrustedLevel.FULL, this));
         this.deleteButton.disable();
         super.addButton(3, this.deleteButton);
@@ -139,7 +140,8 @@ public class GPProjectSearchPanel extends GPListViewSearchPanel<GPClientProject>
                 GPTrustedLevel.HIGH, this);
         this.shareButton = new GPSecureButton(
                 ButtonsConstants.INSTANCE.shareText(),
-                LayerResources.ICONS.arrowRefresh(), shareProjectAction);
+                AbstractImagePrototype.create(LayerResources.ICONS.arrowRefresh()),
+                shareProjectAction);
         this.shareButton.disable();
         super.addButton(4, this.shareButton);
     }
@@ -195,7 +197,7 @@ public class GPProjectSearchPanel extends GPListViewSearchPanel<GPClientProject>
                 searchProjectsRequest.setConfig((PagingLoadConfig) loadConfig);
                 searchProjectsRequest.setSearchText(searchText);
                 searchProjectsRequest.setImageURL(
-                        LayerResources.ICONS.gpProject().getHTML());
+                        LayerResources.ICONS.gpProject().getSafeUri().asString());
 
                 ClientCommandDispatcher.getInstance().execute(
                         new GPClientCommand<SearchProjectsResponse>() {

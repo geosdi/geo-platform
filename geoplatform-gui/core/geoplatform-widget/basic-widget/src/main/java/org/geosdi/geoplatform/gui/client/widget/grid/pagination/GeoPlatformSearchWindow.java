@@ -48,6 +48,7 @@ import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.LabelToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
 import com.google.gwt.event.dom.client.KeyCodes;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.Widget;
 import java.util.logging.Logger;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
@@ -222,7 +223,8 @@ public abstract class GeoPlatformSearchWindow<C extends Widget, T extends GeoPla
 
                 });
 
-        selectButton.setIcon(BasicWidgetResources.ICONS.select());
+        selectButton.setIcon(AbstractImagePrototype.create(
+                BasicWidgetResources.ICONS.select()));
         selectButton.disable();
 
         formPanel.addButton(this.selectButton);
@@ -237,7 +239,8 @@ public abstract class GeoPlatformSearchWindow<C extends Widget, T extends GeoPla
 
                 });
 
-        closeButton.setIcon(BasicWidgetResources.ICONS.cancel());
+        closeButton.setIcon(AbstractImagePrototype.create(
+                BasicWidgetResources.ICONS.cancel()));
 
         formPanel.addButton(closeButton);
 

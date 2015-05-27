@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.client.config.provider.button;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.button.Button;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import javax.inject.Inject;
 import javax.inject.Provider;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
@@ -62,7 +63,7 @@ public class ResetButtonProvider implements Provider<Button> {
     @Override
     public Button get() {
         return new Button(ButtonsConstants.INSTANCE.resetText(),
-                BasicWidgetResources.ICONS.delete(),
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.delete()),
                 new SelectionListener<ButtonEvent>() {
 
             @Override

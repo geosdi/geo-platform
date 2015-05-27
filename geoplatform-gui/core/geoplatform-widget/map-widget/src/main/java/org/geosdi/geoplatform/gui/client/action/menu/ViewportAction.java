@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.action.menu;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.i18n.MapModuleConstants;
@@ -52,7 +53,7 @@ public class ViewportAction extends MenuBaseAction {
 
     public ViewportAction(Map map) {
         super(MapModuleConstants.INSTANCE.ViewportAction_titleText(), 
-                BasicWidgetResources.ICONS.viewport());
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.viewport()));
         this.viewportWidget = new ViewportWidget(Boolean.TRUE, map);
     }
 

@@ -35,62 +35,60 @@
  */
 package org.geosdi.geoplatform.gui.client.icons;
 
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import com.google.gwt.user.client.ui.ImageBundle;
+import com.google.gwt.resources.client.ClientBundle;
+import com.google.gwt.resources.client.ImageResource;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- *
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-@SuppressWarnings("deprecation")
-public interface GeoPlatformIcons extends ImageBundle {
+public interface GeoPlatformIcons extends ClientBundle {
 
-    @Resource("zoom-in.png")
-    AbstractImagePrototype zoomIn();
+    @Source("zoom-in.png")
+    ImageResource zoomIn();
 
-    @Resource("zoom-out.png")
-    AbstractImagePrototype zoomOut();
+    @Source("zoom-out.png")
+    ImageResource zoomOut();
 
-    @Resource("draw-feature.png")
-    AbstractImagePrototype drawFeature();
+    @Source("draw-feature.png")
+    ImageResource drawFeature();
 
-    @Resource("rotate.png")
-    AbstractImagePrototype rotate();
+    @Source("rotate.png")
+    ImageResource rotate();
 
-    @Resource("drag.png")
-    AbstractImagePrototype drag();
+    @Source("drag.png")
+    ImageResource drag();
 
-    @Resource("resize.png")
-    AbstractImagePrototype resize();
+    @Source("resize.png")
+    ImageResource resize();
 
-    @Resource("shape.png")
-    AbstractImagePrototype shape();
+    @Source("shape.png")
+    ImageResource shape();
 
-    @Resource("gp-icon-16x16.png")
-    AbstractImagePrototype geoPortalInfo();
+    @Source("gp-icon-16x16.png")
+    ImageResource geoPortalInfo();
 
-    @Resource("draw-point.png")
-    AbstractImagePrototype drawPointFeature();
+    @Source("draw-point.png")
+    ImageResource drawPointFeature();
 
-    @Resource("draw-line.png")
-    AbstractImagePrototype drawLineFeature();
+    @Source("draw-line.png")
+    ImageResource drawLineFeature();
 
-    @Resource("clear-map.png")
-    AbstractImagePrototype clearMap();
+    @Source("clear-map.png")
+    ImageResource clearMap();
 
-    @Resource("zoom-last.png")
-    AbstractImagePrototype zoomPrevious();
+    @Source("zoom-last.png")
+    ImageResource zoomPrevious();
 
-    @Resource("zoom-next.png")
-    AbstractImagePrototype zoomNext();
+    @Source("zoom-next.png")
+    ImageResource zoomNext();
 
-    @Resource("ruler.png")
-    AbstractImagePrototype measure();
+    @Source("ruler.png")
+    ImageResource measure();
 
-    @Resource("ruler_square.png")
-    AbstractImagePrototype measureArea();
+    @Source("ruler_square.png")
+    ImageResource measureArea();
 
-    @Resource("editor-aoe.png")
-    AbstractImagePrototype editorAOE();
+    @Source("editor-aoe.png")
+    ImageResource editorAOE();
 }

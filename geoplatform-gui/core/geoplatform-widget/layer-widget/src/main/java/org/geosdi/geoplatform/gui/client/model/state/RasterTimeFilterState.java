@@ -49,7 +49,7 @@ public class RasterTimeFilterState implements IGPLayerTreeState {
 
     @Override
     public AbstractImagePrototype getIcon() {
-        return LayerResources.ICONS.point();
+        return AbstractImagePrototype.create(LayerResources.ICONS.point());
     }
 
     @Override

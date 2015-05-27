@@ -51,6 +51,7 @@ import com.extjs.gxt.ui.client.widget.form.TextArea;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.google.common.collect.Lists;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.i18n.LayerFiltersModuleConstants;
@@ -132,7 +133,8 @@ public class INCQLButton extends AdvancedCQLButton {
                 add(parameterPanel, formData);
                 Button addExpressionButton = new Button(LayerFiltersModuleConstants.INSTANCE.
                         INCQLButton_windowAddParameterButtonText());
-                addExpressionButton.setIcon(BasicWidgetResources.ICONS.done());
+                addExpressionButton.setIcon(
+                        AbstractImagePrototype.create(BasicWidgetResources.ICONS.done()));
                 addExpressionButton.setToolTip(LayerFiltersModuleConstants.INSTANCE.
                         INCQLButton_windowExpressionTooltipText());
                 addExpressionButton.addSelectionListener(new SelectionListener<ButtonEvent>() {
@@ -204,7 +206,8 @@ public class INCQLButton extends AdvancedCQLButton {
     private Button generateDeleteButton(final GPSecureStringTextField parameterField,
             final HorizontalPanel fieldRow) {
         Button cancelFilterButton = new Button();
-        cancelFilterButton.setIcon(BasicWidgetResources.ICONS.delete());
+        cancelFilterButton.setIcon(
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.delete()));
         cancelFilterButton.setToolTip(LayerFiltersModuleConstants.INSTANCE.INCQLButton_removeParameterLabelText());
         cancelFilterButton.addSelectionListener(new SelectionListener<ButtonEvent>() {
             @Override

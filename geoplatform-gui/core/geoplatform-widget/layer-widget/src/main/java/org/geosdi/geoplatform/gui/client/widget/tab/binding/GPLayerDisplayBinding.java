@@ -60,6 +60,7 @@ import com.extjs.gxt.ui.client.widget.form.SliderField;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.google.gwt.i18n.client.NumberFormat;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import java.util.logging.Level;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
@@ -147,7 +148,7 @@ public class GPLayerDisplayBinding extends GeoPlatformBindingWidget<GPRasterBean
                 GPLayerDisplayBinding_minScaleNumberFieldText());
         Button removeScale = new Button(LayerModuleConstants.INSTANCE.
                 GPLayerDisplayBinding_removeLimitsButtonText(),
-                BasicWidgetResources.ICONS.delete(),
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.delete()),
                 new SelectionListener<ButtonEvent>() {
 
                     @Override

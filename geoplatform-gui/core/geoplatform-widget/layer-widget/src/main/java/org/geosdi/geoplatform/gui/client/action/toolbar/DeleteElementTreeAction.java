@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.action.toolbar;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.action.toolbar.responsibility.DeleteRequestManager;
@@ -52,7 +53,7 @@ public class DeleteElementTreeAction extends ToolbarLayerTreeAction {
     private DeleteRequestManager deleteManager;
 
     public DeleteElementTreeAction(TreePanel theTree) {
-        super(theTree, BasicWidgetResources.ICONS.delete(),
+        super(theTree, AbstractImagePrototype.create(BasicWidgetResources.ICONS.delete()),
                 LayerModuleConstants.INSTANCE.deleteSelectedElementsText());
         this.deleteManager = new DeleteRequestManager(theTree);
     }

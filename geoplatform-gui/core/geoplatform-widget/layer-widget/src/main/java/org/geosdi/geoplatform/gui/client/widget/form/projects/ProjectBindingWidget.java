@@ -51,6 +51,7 @@ import com.google.gwt.user.client.rpc.HasRpcToken;
 import com.google.gwt.user.client.rpc.RpcTokenException;
 import com.google.gwt.user.client.rpc.XsrfToken;
 import com.google.gwt.user.client.rpc.XsrfTokenServiceAsync;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import java.util.List;
 import org.geosdi.geoplatform.gui.action.button.GPSecureButton;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
@@ -174,7 +175,7 @@ public class ProjectBindingWidget extends GPDynamicFormBinding<GPClientProject> 
         if (useNewEntity) {
             this.entity = new GPClientProject();
             this.entity.setNumberOfElements(0);
-            this.entity.setImage(LayerResources.ICONS.gpProject().getHTML());
+            this.entity.setImage(LayerResources.ICONS.gpProject().getSafeUri().asString());
         } else {
             this.entity = this.searchWidget.getSelectionModel().getSelectedItem();
         }
@@ -208,13 +209,13 @@ public class ProjectBindingWidget extends GPDynamicFormBinding<GPClientProject> 
     private void addButtons() {
         getFormPanel().setButtonAlign(HorizontalAlignment.RIGHT);
         this.save = new GPSecureButton(ButtonsConstants.INSTANCE.saveText(),
-                BasicWidgetResources.ICONS.save(),
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.save()),
                 new AddProjectAction(GPTrustedLevel.HIGH, this));
         getFormPanel().addButton(save);
         buttonBinding = new FormButtonBinding(getFormPanel());
         buttonBinding.addButton(save);
         this.cancel = new Button(ButtonsConstants.INSTANCE.cancelText(),
-                BasicWidgetResources.ICONS.cancel(),
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.cancel()),
                 new SelectionListener<ButtonEvent>() {
 
                     @Override

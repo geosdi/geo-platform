@@ -44,6 +44,7 @@ import com.extjs.gxt.ui.client.widget.Dialog;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.google.gwt.event.dom.client.KeyCodes;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.i18n.BasicWidgetConstants;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
@@ -73,7 +74,7 @@ public abstract class GPSecurityWidget extends Dialog {
 
         setButtonAlign(HorizontalAlignment.LEFT);
         setButtons("");
-        setIcon(BasicWidgetResources.ICONS.search());
+        setIcon(AbstractImagePrototype.create(BasicWidgetResources.ICONS.search()));
         setHeadingText(BasicWidgetConstants.INSTANCE.GPSecurityWidget_headingText());
         setModal(true);
         setBodyBorder(true);
@@ -117,7 +118,8 @@ public abstract class GPSecurityWidget extends Dialog {
 
         addStatusComponent();
 
-        reset = new Button(ButtonsConstants.INSTANCE.resetText(), BasicWidgetResources.ICONS.cancel());
+        reset = new Button(ButtonsConstants.INSTANCE.resetText(), 
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.cancel()));
         reset.addSelectionListener(new SelectionListener<ButtonEvent>() {
             @Override
             public void componentSelected(ButtonEvent ce) {
@@ -125,7 +127,8 @@ public abstract class GPSecurityWidget extends Dialog {
             }
         });
 
-        login = new Button(ButtonsConstants.INSTANCE.loginText(), BasicWidgetResources.ICONS.login());
+        login = new Button(ButtonsConstants.INSTANCE.loginText(), 
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.login()));
         login.disable();
         login.addSelectionListener(new SelectionListener<ButtonEvent>() {
             @Override

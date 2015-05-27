@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.action.toolbar;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
@@ -52,7 +53,7 @@ public class AddRasterTreeAction extends ToolbarLayerTreeAction {
     private GPCapabilitiesWidget serverWidget;
 
     public AddRasterTreeAction(TreePanel theTree) {
-        super(theTree, LayerResources.ICONS.addRasterLayer(), 
+        super(theTree, AbstractImagePrototype.create(LayerResources.ICONS.addRasterLayer()), 
                 LayerModuleConstants.INSTANCE.AddRasterTreeAction_tooltipText());
         this.serverWidget = new GPCapabilitiesWidget(true, theTree);
     }

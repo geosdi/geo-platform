@@ -59,6 +59,7 @@ import com.google.gwt.http.client.RequestException;
 import com.google.gwt.http.client.Response;
 import com.google.gwt.http.client.URL;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.RootPanel;
 import java.util.Collections;
 import java.util.Iterator;
@@ -655,7 +656,7 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
         formPanel.setButtonAlign(HorizontalAlignment.RIGHT);
 
         print = new Button(ButtonsConstants.INSTANCE.printText(),
-                PrintResources.ICONS.print(),
+                AbstractImagePrototype.create(PrintResources.ICONS.print()),
                 new SelectionListener<ButtonEvent>() {
                     @Override
                     public void componentSelected(ButtonEvent ce) {
@@ -666,7 +667,7 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
         this.formPanel.addButton(print);
 
         this.cancel = new Button(ButtonsConstants.INSTANCE.cancelText(),
-                BasicWidgetResources.ICONS.cancel(),
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.cancel()),
                 new SelectionListener<ButtonEvent>() {
                     @Override
                     public void componentSelected(ButtonEvent ce) {

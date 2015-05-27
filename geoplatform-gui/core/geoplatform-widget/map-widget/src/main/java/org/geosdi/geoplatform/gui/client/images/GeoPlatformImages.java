@@ -35,46 +35,45 @@
  */
 package org.geosdi.geoplatform.gui.client.images;
 
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import com.google.gwt.user.client.ui.ImageBundle;
+import com.google.gwt.resources.client.ClientBundle;
+import com.google.gwt.resources.client.ImageResource;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-@SuppressWarnings("deprecation")
-public interface GeoPlatformImages extends ImageBundle {
+public interface GeoPlatformImages extends ClientBundle {
 
-    @Resource("BingAerial.png")
-    AbstractImagePrototype bingAerial();
+    @Source("BingAerial.png")
+    ImageResource bingAerial();
 
-    @Resource("BingHybrid.png")
-    AbstractImagePrototype bingHybrid();
+    @Source("BingHybrid.png")
+    ImageResource bingHybrid();
 
-    @Resource("BingRoad.png")
-    AbstractImagePrototype bingRoad();
+    @Source("BingRoad.png")
+    ImageResource bingRoad();
 
-    @Resource("Blank.png")
-    AbstractImagePrototype blank();
+    @Source("Blank.png")
+    ImageResource blank();
 
-    @Resource("DPC.png")
-    AbstractImagePrototype DPC();
+    @Source("DPC.png")
+    ImageResource DPC();
 
-    @Resource("GoogleHybrid.png")
-    AbstractImagePrototype googleHybrid();
+    @Source("GoogleHybrid.png")
+    ImageResource googleHybrid();
 
-    @Resource("GoogleNormal.png")
-    AbstractImagePrototype googleNormal();
+    @Source("GoogleNormal.png")
+    ImageResource googleNormal();
 
-    @Resource("GoogleSatellite.png")
-    AbstractImagePrototype googleSatellite();
+    @Source("GoogleSatellite.png")
+    ImageResource googleSatellite();
 
-    @Resource("OSM.png")
-    AbstractImagePrototype osm();
+    @Source("OSM.png")
+    ImageResource osm();
     
-    @Resource("mapQuestOSM.png")
-    AbstractImagePrototype mapQuestOSM();
+    @Source("mapQuestOSM.png")
+    ImageResource mapQuestOSM();
 
-    @Resource("metacartaVmap.png")
-    AbstractImagePrototype metacartaVmap();
+    @Source("metacartaVmap.png")
+    ImageResource metacartaVmap();
 }

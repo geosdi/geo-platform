@@ -42,6 +42,7 @@ import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.layout.MarginData;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.config.WmsGetMapInjector;
@@ -97,7 +98,7 @@ public class LoadWmsGetMapFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
         this.formPanel.setButtonAlign(HorizontalAlignment.RIGHT);
 
         this.save = new Button(ButtonsConstants.INSTANCE.addText(),
-                LayerResources.ICONS.addRasterLayer(),
+                AbstractImagePrototype.create(LayerResources.ICONS.addRasterLayer()),
                 new SelectionListener<ButtonEvent>() {
 
                     @Override
@@ -111,7 +112,7 @@ public class LoadWmsGetMapFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
         this.formPanel.addButton(save);
 
         this.cancel = new Button(ButtonsConstants.INSTANCE.cancelText(),
-                BasicWidgetResources.ICONS.cancel(),
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.cancel()),
                 new SelectionListener<ButtonEvent>() {
 
                     @Override

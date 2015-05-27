@@ -68,7 +68,7 @@ public class GPIconWidgetComponent extends GPAbstractWidgetComponent
         int index = toolbar.indexOf(component);
         toolbar.remove(component);
 
-        Image icon = BasicWidgetResources.ICONS.googleGreen().createImage();
+        Image icon = new Image(BasicWidgetResources.ICONS.googleGreen());
         toolbar.insert(createWidgetComponent(icon, tooltip), index);
     }
 
@@ -78,7 +78,7 @@ public class GPIconWidgetComponent extends GPAbstractWidgetComponent
         int index = toolbar.indexOf(component);
         toolbar.remove(component);
 
-        Image icon = BasicWidgetResources.ICONS.googleWhite().createImage();
+        Image icon = new Image(BasicWidgetResources.ICONS.googleWhite());
         toolbar.insert(createWidgetComponent(icon, tooltip), index);
     }
 }

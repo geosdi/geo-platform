@@ -47,6 +47,7 @@ import com.extjs.gxt.ui.client.widget.button.ButtonBar;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
 import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.config.annotation.ResetButton;
@@ -116,7 +117,7 @@ public class FeatureWidget extends GeoPlatformWindow
     public void initSize() {
         super.setSize(1000, 650);
         super.setHeadingHtml("GeoPlatform WFS-T Widget");
-        super.setIcon(BasicWidgetResources.ICONS.vector());
+        super.setIcon(AbstractImagePrototype.create(BasicWidgetResources.ICONS.vector()));
     }
     
     @Override
@@ -176,7 +177,7 @@ public class FeatureWidget extends GeoPlatformWindow
         this.disableButtons();
         
         Button close = new Button(ButtonsConstants.INSTANCE.closeText(),
-                BasicWidgetResources.ICONS.cancel(),
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.cancel()),
                 new SelectionListener<ButtonEvent>() {
                     
                     @Override

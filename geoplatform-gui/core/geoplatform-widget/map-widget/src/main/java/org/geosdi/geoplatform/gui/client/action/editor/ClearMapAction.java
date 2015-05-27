@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.action.editor;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.EditorMapAction;
 import org.geosdi.geoplatform.gui.client.Resources;
 import org.geosdi.geoplatform.gui.client.i18n.MapModuleConstants;
@@ -52,7 +53,8 @@ public class ClearMapAction extends EditorMapAction {
     private GeoPlatformMap mapWidget;
 
     public ClearMapAction(GeoPlatformMap theMapWidget) {
-        super(Resources.ICONS.clearMap(), MapModuleConstants.INSTANCE.ClearMapAction_tooltipText());
+        super(AbstractImagePrototype.create(Resources.ICONS.clearMap()), 
+                MapModuleConstants.INSTANCE.ClearMapAction_tooltipText());
         this.mapWidget = theMapWidget;
     }
 

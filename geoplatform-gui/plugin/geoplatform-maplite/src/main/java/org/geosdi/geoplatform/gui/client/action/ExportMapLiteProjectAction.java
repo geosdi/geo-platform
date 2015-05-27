@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.action;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
 import org.geosdi.geoplatform.gui.client.MapLiteResources;
 import org.geosdi.geoplatform.gui.client.i18n.MapLiteModuleConstants;
@@ -51,7 +52,8 @@ public class ExportMapLiteProjectAction extends ToolbarLayerTreeAction {
     private GPMapLiteExportProjectWidget showLinkWidget;
 
     public ExportMapLiteProjectAction(TreePanel theTree) {
-        super(theTree, MapLiteResources.ICONS.exportMaplite(),
+        super(theTree, AbstractImagePrototype.create(
+                MapLiteResources.ICONS.exportMaplite()),
                 MapLiteModuleConstants.INSTANCE.ExportMapLiteProjectAction_tooltipText());
         this.showLinkWidget = new GPMapLiteExportProjectWidget();
     }

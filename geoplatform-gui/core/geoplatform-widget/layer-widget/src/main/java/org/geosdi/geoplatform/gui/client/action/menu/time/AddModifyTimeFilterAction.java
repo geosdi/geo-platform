@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.gui.client.action.menu.time;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
@@ -55,7 +55,8 @@ public class AddModifyTimeFilterAction extends MenuBaseAction {
     private LayerTimeFilterWidget timeFilterWidget;
 
     public AddModifyTimeFilterAction(GPTreePanel<GPBeanTreeModel> treePanel) {
-        super("AddModifyCQLFilter", LayerResources.ICONS.cqlFilter());
+        super("AddModifyCQLFilter", AbstractImagePrototype.create(
+                LayerResources.ICONS.cqlFilter()));
         this.treePanel = treePanel;
         this.timeFilterWidget = new LayerTimeFilterWidget(Boolean.TRUE,
                 treePanel);

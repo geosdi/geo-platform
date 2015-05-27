@@ -43,6 +43,7 @@ import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.i18n.PublisherWidgetConstants;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
@@ -121,7 +122,7 @@ public class AddWorkspaceWidget extends GenericFormWidget {
         getFormPanel().setButtonAlign(HorizontalAlignment.RIGHT);
 
         save = new Button(ButtonsConstants.INSTANCE.createText(),
-                BasicWidgetResources.ICONS.done(),
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.done()),
                 new SelectionListener<ButtonEvent>() {
 
                     @Override
@@ -136,7 +137,7 @@ public class AddWorkspaceWidget extends GenericFormWidget {
         this.getFormPanel().addButton(save);
 
         this.cancel = new Button(ButtonsConstants.INSTANCE.cancelText(),
-                BasicWidgetResources.ICONS.cancel(),
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.cancel()),
                 new SelectionListener<ButtonEvent>() {
 
                     @Override

@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.client.action.menu.export;
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
@@ -53,7 +54,8 @@ public class ExportoToTIFF extends MenuBaseAction {
     private TreePanel treePanel;
 
     public ExportoToTIFF(TreePanel treePanel) {
-        super("ExportToTIFF", LayerResources.ICONS.exportToTIFF());
+        super("ExportToTIFF", AbstractImagePrototype.create(
+                LayerResources.ICONS.exportToTIFF()));
         this.treePanel = treePanel;
     }
 

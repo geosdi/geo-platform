@@ -39,6 +39,7 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.EventType;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
@@ -71,7 +72,8 @@ public class SaveTreeAction extends ToolbarLayerTreeAction
     private SaveTreeToolbarPlugin savePlugin;
 
     public SaveTreeAction(TreePanel theTree, SaveTreeToolbarPlugin savePlugin) {
-        super(theTree, BasicWidgetResources.ICONS.save(),
+        super(theTree, 
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.save()),
                 LayerModuleConstants.INSTANCE.SaveTreeAction_tooltipText());
         displayEvent.setMessage(LayerModuleConstants.INSTANCE.savingOperationsText());
         TimeoutHandlerManager.addHandler(GPPeekCacheEventHandler.TYPE, this);

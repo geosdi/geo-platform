@@ -42,6 +42,7 @@ import com.extjs.gxt.ui.client.widget.form.FormButtonBinding;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.google.common.collect.Lists;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import java.util.List;
 import org.geosdi.geoplatform.connector.wfs.response.AttributeDTO;
 import org.geosdi.geoplatform.connector.wfs.response.LayerSchemaDTO;
@@ -122,7 +123,7 @@ class FeatureAttributesWindow extends GeoPlatformWindow implements
         this.attributesFormPanel.setHeaderVisible(false);
 
         Button saveButton = new Button(ButtonsConstants.INSTANCE.saveText(),
-                BasicWidgetResources.ICONS.save(),
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.save()),
                 new SelectionListener<ButtonEvent>() {
 
                     @Override
@@ -133,7 +134,7 @@ class FeatureAttributesWindow extends GeoPlatformWindow implements
                 });
 
         Button resetButton = new Button(ButtonsConstants.INSTANCE.resetText(),
-                BasicWidgetResources.ICONS.reset(),
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.reset()),
                 new SelectionListener<ButtonEvent>() {
 
                     @Override

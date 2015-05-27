@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.action.menu;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
@@ -55,7 +56,8 @@ public class ZoomToLayerExtentAction extends MenuBaseAction {
     private ZoomToExtendsEvent zoomToExtendsEvent = new ZoomToExtendsEvent();
 
     public ZoomToLayerExtentAction(TreePanel treePanel) {
-        super("ZoomToLayerExtent", LayerResources.ICONS.zoomToMaxExtend());
+        super("ZoomToLayerExtent", AbstractImagePrototype.create(
+                LayerResources.ICONS.zoomToMaxExtend()));
         this.treePanel = treePanel;
     }
 

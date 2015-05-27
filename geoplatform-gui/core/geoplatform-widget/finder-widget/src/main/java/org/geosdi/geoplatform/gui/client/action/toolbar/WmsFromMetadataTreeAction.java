@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.action.toolbar;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.config.CatalogFinderInjector;
@@ -58,7 +59,7 @@ public class WmsFromMetadataTreeAction extends ToolbarLayerTreeAction {
     private CatalogFinderWidget wmsMetadataWidget;
 
     public WmsFromMetadataTreeAction(TreePanel treePanel) {
-        super(treePanel, BasicWidgetResources.ICONS.reset(),
+        super(treePanel, AbstractImagePrototype.create(BasicWidgetResources.ICONS.reset()),
                 CatalogFinderConstants.INSTANCE.WmsFromMetadataTreeAction_tooltipText());
         this.wmsMetadataWidget = injector.getCatalogFinderWidget();
         this.wmsMetadataWidget.setTree(tree);

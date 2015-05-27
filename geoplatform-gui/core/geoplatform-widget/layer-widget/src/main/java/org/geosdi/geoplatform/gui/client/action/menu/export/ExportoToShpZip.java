@@ -39,6 +39,7 @@ import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.extjs.gxt.ui.client.widget.Info;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
@@ -56,7 +57,8 @@ public class ExportoToShpZip extends MenuBaseAction {
     private TreePanel treePanel;
 
     public ExportoToShpZip(TreePanel treePanel) {
-        super("ExportToShpZip", LayerResources.ICONS.exportToShpZip());
+        super("ExportToShpZip", AbstractImagePrototype.create(
+                LayerResources.ICONS.exportToShpZip()));
         this.treePanel = treePanel;
     }
 

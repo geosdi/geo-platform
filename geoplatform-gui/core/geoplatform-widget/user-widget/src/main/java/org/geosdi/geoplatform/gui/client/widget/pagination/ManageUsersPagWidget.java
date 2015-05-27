@@ -58,6 +58,7 @@ import com.google.gwt.user.client.rpc.HasRpcToken;
 import com.google.gwt.user.client.rpc.RpcTokenException;
 import com.google.gwt.user.client.rpc.XsrfToken;
 import com.google.gwt.user.client.rpc.XsrfTokenServiceAsync;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -77,7 +78,6 @@ import org.geosdi.geoplatform.gui.client.widget.grid.pagination.grid.GPGridSearc
 import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
 import org.geosdi.geoplatform.gui.global.security.GPAccountLogged;
 import org.geosdi.geoplatform.gui.model.user.GPSimpleUserKeyValue;
-import org.geosdi.geoplatform.gui.server.gwt.UserRemoteImpl;
 import org.geosdi.geoplatform.gui.service.gwt.xsrf.GPXsrfTokenService;
 
 /**
@@ -119,7 +119,7 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
         this.userPropertiesWidget.setStore(super.store);
         super.addButton(1, new Button(UserModuleConstants.INSTANCE.
                 ManageUsersPagWidget_addUserText(),
-                BasicWidgetResources.ICONS.logged_user(),
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.logged_user()),
                 new SelectionListener<ButtonEvent>() {
 
                     @Override

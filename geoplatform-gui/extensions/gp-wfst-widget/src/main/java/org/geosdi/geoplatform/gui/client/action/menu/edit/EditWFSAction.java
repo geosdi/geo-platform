@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.action.menu.edit;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.LayerTypeHandlerManager;
@@ -58,7 +59,7 @@ public class EditWFSAction extends MenuBaseAction {
 
     public EditWFSAction(TreePanel<GPBeanTreeModel> treePanel) {
         super(WFSTWidgetConstants.INSTANCE.EditWFSAction_titleText(), 
-                BasicWidgetResources.ICONS.vector());
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.vector()));
         this.treePanel = treePanel;
         this.layerTypeHandlerManager = FeatureInjector.MainInjector.getInstance().getLayerTypeHandlerManager();
     }

@@ -41,6 +41,7 @@ import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.extjs.gxt.ui.client.widget.menu.MenuItem;
 import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.SeparatorToolItem;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.Image;
 import java.util.Collections;
 import java.util.List;
@@ -178,7 +179,7 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
         GPIconWidgetComponent gpWidgetIcon = new GPIconWidgetComponent(
                 this.toolBar);
         
-        Image image = BasicWidgetResources.ICONS.googleWhite().createImage();
+        Image image = new Image(BasicWidgetResources.ICONS.googleWhite());
         WidgetComponent widgetComponent = gpWidgetIcon.createWidgetComponent(
                 image, tool.getText());
         
@@ -195,7 +196,7 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
         Button buttonItem = new Button(
                 GPAccountLogged.getInstance().getName() + " @ "
                 + GPAccountLogged.getInstance().getOrganization());
-        buttonItem.setIcon(BasicWidgetResources.ICONS.logged_user());
+        buttonItem.setIcon(AbstractImagePrototype.create(BasicWidgetResources.ICONS.logged_user()));
         buttonItem.setId(tool.getId());
         
         Menu menu = new Menu();

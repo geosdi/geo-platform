@@ -54,6 +54,7 @@ import com.google.gwt.user.client.rpc.HasRpcToken;
 import com.google.gwt.user.client.rpc.RpcTokenException;
 import com.google.gwt.user.client.rpc.XsrfToken;
 import com.google.gwt.user.client.rpc.XsrfTokenServiceAsync;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.LayerResources;
@@ -146,7 +147,7 @@ public class LoadKmlFromUrlWidget extends GPTreeFormWidget<GPLayerTreeModel>
         super.getFormPanel().setButtonAlign(HorizontalAlignment.RIGHT);
 
         buttonAdd = new Button(ButtonsConstants.INSTANCE.addText(),
-                LayerResources.ICONS.addRasterLayer(),
+                AbstractImagePrototype.create(LayerResources.ICONS.addRasterLayer()),
                 new SelectionListener<ButtonEvent>() {
 
                     @Override
@@ -160,7 +161,7 @@ public class LoadKmlFromUrlWidget extends GPTreeFormWidget<GPLayerTreeModel>
         super.getFormPanel().addButton(buttonAdd);
 
         Button buttonCancel = new Button(ButtonsConstants.INSTANCE.cancelText(),
-                BasicWidgetResources.ICONS.cancel(),
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.cancel()),
                 new SelectionListener<ButtonEvent>() {
 
                     @Override

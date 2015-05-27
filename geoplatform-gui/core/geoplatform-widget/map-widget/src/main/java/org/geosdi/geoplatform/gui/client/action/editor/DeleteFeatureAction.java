@@ -37,11 +37,10 @@ package org.geosdi.geoplatform.gui.client.action.editor;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.widget.button.ToggleButton;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.i18n.MapModuleConstants;
-import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
 import org.geosdi.geoplatform.gui.client.widget.map.control.crud.OperationType;
-import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 
 /**
@@ -52,7 +51,7 @@ import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 public class DeleteFeatureAction extends EditorFeatureAction {
 
     public DeleteFeatureAction(GeoPlatformMap theMapWidget) {
-        super(theMapWidget, BasicWidgetResources.ICONS.erase(),
+        super(theMapWidget, AbstractImagePrototype.create(BasicWidgetResources.ICONS.erase()),
                 MapModuleConstants.INSTANCE.DeleteFeatureAction_tooltipText());
     }
 

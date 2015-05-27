@@ -49,7 +49,7 @@ public class RasterRefreshState implements IGPLayerTreeState {
 
     @Override
     public AbstractImagePrototype getIcon() {
-        return LayerResources.ICONS.refreshLayerIcon();
+        return AbstractImagePrototype.create(LayerResources.ICONS.refreshLayerIcon());
     }
 
     @Override

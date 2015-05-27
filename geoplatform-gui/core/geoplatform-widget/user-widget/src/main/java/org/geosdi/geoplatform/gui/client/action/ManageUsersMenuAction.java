@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.action;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.google.gwt.user.client.History;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.config.UserModuleInjector;
@@ -48,7 +49,8 @@ import org.geosdi.geoplatform.gui.client.config.UserModuleInjector;
 public class ManageUsersMenuAction extends MenuBaseAction {
     
     public ManageUsersMenuAction() {
-        super("Manage Users", BasicWidgetResources.ICONS.logged_user());
+        super("Manage Users", 
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.logged_user()));
     }
     
     @Override

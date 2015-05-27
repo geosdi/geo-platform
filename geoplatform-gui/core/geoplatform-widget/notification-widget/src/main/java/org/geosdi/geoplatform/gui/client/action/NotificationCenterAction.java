@@ -41,6 +41,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.HasRpcToken;
 import com.google.gwt.user.client.rpc.RpcTokenException;
 import com.google.gwt.user.client.rpc.XsrfToken;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import java.util.List;
 import org.geosdi.geoplatform.gui.action.ToolbarMapAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
@@ -71,7 +72,7 @@ public class NotificationCenterAction extends ToolbarMapAction {
 
     public NotificationCenterAction(
             NotificationPopupPanel notificationPopupPanel) {
-        super(BasicWidgetResources.ICONS.info(),
+        super(AbstractImagePrototype.create(BasicWidgetResources.ICONS.info()),
                 NotificationModuleConstants.INSTANCE.NotificationCenterAction_tooltipText());
         this.notificationPopupPanel = notificationPopupPanel;
     }

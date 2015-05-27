@@ -41,6 +41,7 @@ import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.widget.Dialog;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.command.session.InvalidateSessionRequest;
@@ -59,7 +60,7 @@ public class UserLogout extends MenuBaseAction {
 
     public UserLogout() {
         super(SecurityModuleConstants.INSTANCE.UserLogout_tileText(),
-                BasicWidgetResources.ICONS.logout());
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.logout()));
     }
 
     @Override

@@ -51,6 +51,7 @@ import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.google.common.collect.Lists;
 import com.google.gwt.i18n.client.NumberFormat;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.Widget;
 import java.util.List;
 import org.geosdi.geoplatform.gui.action.button.GPSecureButton;
@@ -102,7 +103,8 @@ public class ViewportGridFieldSet extends GPFieldSet {
 
         Button addEntryButton = new Button(MapModuleConstants.INSTANCE.
                 ViewportGridFieldSet_buttonAddViewportText(),
-                BasicWidgetResources.ICONS.done(), new SelectionListener<ButtonEvent>() {
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.done()), 
+                new SelectionListener<ButtonEvent>() {
                     @Override
                     public void componentSelected(ButtonEvent ce) {
                         ViewportGridFieldSet.this.store.add(ViewportUtility.generateViewportFromMap(map));
@@ -114,7 +116,8 @@ public class ViewportGridFieldSet extends GPFieldSet {
 
         this.deleteViewportButton = new Button(MapModuleConstants.INSTANCE.
                 ViewportGridFieldSet_buttonDeleteViewportText(),
-                BasicWidgetResources.ICONS.delete(), new SelectionListener<ButtonEvent>() {
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.delete()), 
+                new SelectionListener<ButtonEvent>() {
                     @Override
                     public void componentSelected(ButtonEvent ce) {
                         final List<GPClientViewport> viewportList = viewportGrid.getSelectionModel().getSelectedItems();
@@ -142,7 +145,8 @@ public class ViewportGridFieldSet extends GPFieldSet {
 
         this.gotoViewportButton = new Button(MapModuleConstants.INSTANCE.
                 ViewportGridFieldSet_buttonGoToViewportText(),
-                BasicWidgetResources.ICONS.gotoXY(), new SelectionListener<ButtonEvent>() {
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.gotoXY()), 
+                new SelectionListener<ButtonEvent>() {
                     @Override
                     public void componentSelected(ButtonEvent ce) {
                         final List<GPClientViewport> viewportList = viewportGrid.getSelectionModel().getSelectedItems();
@@ -160,7 +164,7 @@ public class ViewportGridFieldSet extends GPFieldSet {
         buttonBar.add(gotoViewportButton);
 
         this.setDefaultViewportButton = new Button(ButtonsConstants.INSTANCE.setDefautlText(),
-                BasicWidgetResources.ICONS.select(),
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.select()),
                 new SelectionListener<ButtonEvent>() {
                     @Override
                     public void componentSelected(ButtonEvent ce) {
@@ -188,7 +192,8 @@ public class ViewportGridFieldSet extends GPFieldSet {
         buttonBar.add(setDefaultViewportButton);
         SaveViewportAction saveViewportAction = new SaveViewportAction(GPTrustedLevel.LOW, this.store);
         this.saveButton = new GPSecureButton(ButtonsConstants.INSTANCE.saveText(),
-                BasicWidgetResources.ICONS.save(), saveViewportAction);
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.save()), 
+                saveViewportAction);
         buttonBar.add(this.saveButton);
         this.add(buttonBar, new FormData("100%"));
     }

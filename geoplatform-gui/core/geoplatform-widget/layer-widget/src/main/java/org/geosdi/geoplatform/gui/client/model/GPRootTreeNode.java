@@ -96,7 +96,7 @@ public class GPRootTreeNode extends AbstractRootTreeNode {
      */
     @Override
     public AbstractImagePrototype getIcon() {
-        return LayerResources.ICONS.geoPlatform();
+        return AbstractImagePrototype.create(LayerResources.ICONS.geoPlatform());
     }
 
     @Override

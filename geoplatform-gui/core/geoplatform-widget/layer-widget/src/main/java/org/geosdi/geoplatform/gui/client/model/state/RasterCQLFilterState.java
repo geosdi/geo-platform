@@ -49,7 +49,7 @@ public class RasterCQLFilterState implements IGPLayerTreeState {
 
     @Override
     public AbstractImagePrototype getIcon() {
-        return LayerResources.ICONS.cqlFilterLayerIcon();
+        return AbstractImagePrototype.create(LayerResources.ICONS.cqlFilterLayerIcon());
     }
 
     @Override

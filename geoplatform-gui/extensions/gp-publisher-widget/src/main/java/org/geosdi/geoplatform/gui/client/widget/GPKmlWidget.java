@@ -62,6 +62,7 @@ import com.google.gwt.user.client.rpc.HasRpcToken;
 import com.google.gwt.user.client.rpc.RpcTokenException;
 import com.google.gwt.user.client.rpc.XsrfToken;
 import com.google.gwt.user.client.rpc.XsrfTokenServiceAsync;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.Image;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.PublisherResources;
@@ -235,7 +236,7 @@ public class GPKmlWidget extends GeoPlatformWindow
         centralPanel.setHeaderVisible(false);
         BorderLayoutData centerData = new BorderLayoutData(LayoutRegion.CENTER);
         centerData.setMargins(new Margins(5, 5, 0, 5));
-        centralImage = BasicWidgetResources.ICONS.geo_platform_logo().createImage();
+        centralImage = new Image(BasicWidgetResources.ICONS.geo_platform_logo());
         centralPanel.add(centralImage);
         super.add(centralPanel, centerData);
     }
@@ -276,7 +277,7 @@ public class GPKmlWidget extends GeoPlatformWindow
 
     private void addFooterButton() {
         buttonPreview = new Button(ButtonsConstants.INSTANCE.previewText(),
-                PublisherResources.ICONS.previewKML(), // GEarth
+                AbstractImagePrototype.create(PublisherResources.ICONS.previewKML()), // GEarth
                 new SelectionListener<ButtonEvent>() {
 
                     @Override
@@ -287,7 +288,7 @@ public class GPKmlWidget extends GeoPlatformWindow
         buttonPreview.setEnabled(false);
 
         Button buttonCancel = new Button(ButtonsConstants.INSTANCE.cancelText(),
-                BasicWidgetResources.ICONS.cancel());
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.cancel()));
         buttonCancel.addSelectionListener(new SelectionListener<ButtonEvent>() {
 
             @Override

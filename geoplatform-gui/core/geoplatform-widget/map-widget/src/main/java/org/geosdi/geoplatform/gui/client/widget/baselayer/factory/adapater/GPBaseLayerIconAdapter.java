@@ -50,38 +50,38 @@ public class GPBaseLayerIconAdapter {
         AbstractImagePrototype baseLayerIcon;
         switch (key) {
             case OPEN_STREET_MAP:
-                baseLayerIcon = Resources.IMAGES.osm();
+                baseLayerIcon = AbstractImagePrototype.create(Resources.IMAGES.osm());
                 break;
             case MAP_QUEST_OSM:
-                baseLayerIcon = Resources.IMAGES.mapQuestOSM();
+                baseLayerIcon = AbstractImagePrototype.create(Resources.IMAGES.mapQuestOSM());
                 break;
             case GOOGLE_NORMAL:
-                baseLayerIcon = Resources.IMAGES.googleNormal();
+                baseLayerIcon = AbstractImagePrototype.create(Resources.IMAGES.googleNormal());
                 break;
 
             case GOOGLE_HYBRID:
-                baseLayerIcon = Resources.IMAGES.googleHybrid();
+                baseLayerIcon = AbstractImagePrototype.create(Resources.IMAGES.googleHybrid());
                 break;
             case BING_ROAD_LAYER:
-                baseLayerIcon = Resources.IMAGES.bingRoad();
+                baseLayerIcon = AbstractImagePrototype.create(Resources.IMAGES.bingRoad());
                 break;
             case BING_HYBRID:
-                baseLayerIcon = Resources.IMAGES.bingHybrid();
+                baseLayerIcon = AbstractImagePrototype.create(Resources.IMAGES.bingHybrid());
                 break;
             case BING_AERIAL:
-                baseLayerIcon = Resources.IMAGES.bingAerial();
+                baseLayerIcon = AbstractImagePrototype.create(Resources.IMAGES.bingAerial());
                 break;
             case METACARTA:
-                baseLayerIcon = Resources.IMAGES.metacartaVmap();
+                baseLayerIcon = AbstractImagePrototype.create(Resources.IMAGES.metacartaVmap());
                 break;
             case GEOSDI_BASE:
-                baseLayerIcon = Resources.IMAGES.DPC();
+                baseLayerIcon = AbstractImagePrototype.create(Resources.IMAGES.DPC());
                 break;
             case GEOSDI_NULL_BASE:
-                baseLayerIcon = Resources.IMAGES.blank();
+                baseLayerIcon = AbstractImagePrototype.create(Resources.IMAGES.blank());
                 break;
             default:
-                baseLayerIcon = Resources.IMAGES.googleSatellite();
+                baseLayerIcon = AbstractImagePrototype.create(Resources.IMAGES.googleSatellite());
         }
         return baseLayerIcon;
     }

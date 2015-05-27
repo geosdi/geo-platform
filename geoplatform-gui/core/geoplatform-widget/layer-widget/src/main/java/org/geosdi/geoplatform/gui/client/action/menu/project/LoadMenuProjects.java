@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.action.menu.project;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
@@ -56,7 +57,7 @@ public class LoadMenuProjects extends MenuBaseAction {
     @Inject
     public LoadMenuProjects(GPProjectManagementWidget searchWidget) {
         super(LayerModuleConstants.INSTANCE.LoadMenuProjects_titleText(),
-                BasicWidgetResources.ICONS.manageProjects());
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.manageProjects()));
         this.searchWidget = searchWidget;
     }
 

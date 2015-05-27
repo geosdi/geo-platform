@@ -41,6 +41,7 @@ import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.common.collect.Lists;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.event.kml.UploadKmlEvent;
@@ -119,7 +120,7 @@ public class UploadKmlWidget extends GeoPlatformWindow {
 
     private void addFooterButton() {
         buttonAdd = new Button(ButtonsConstants.INSTANCE.addText(),
-                BasicWidgetResources.ICONS.done());
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.done()));
         buttonAdd.addSelectionListener(new SelectionListener<ButtonEvent>() {
             @Override
             public void componentSelected(ButtonEvent ce) {
@@ -166,7 +167,7 @@ public class UploadKmlWidget extends GeoPlatformWindow {
         buttonAdd.disable();
         super.addButton(this.buttonAdd);
         Button resetButton = new Button(ButtonsConstants.INSTANCE.resetText(),
-                BasicWidgetResources.ICONS.cancel());
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.cancel()));
         resetButton.addSelectionListener(new SelectionListener<ButtonEvent>() {
             @Override
             public void componentSelected(ButtonEvent ce) {

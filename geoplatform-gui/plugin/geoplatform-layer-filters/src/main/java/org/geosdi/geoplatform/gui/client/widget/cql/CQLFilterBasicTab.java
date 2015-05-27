@@ -41,6 +41,7 @@ import com.extjs.gxt.ui.client.widget.VerticalPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.AdapterField;
 import com.google.common.collect.Lists;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.i18n.LayerFiltersModuleConstants;
@@ -81,7 +82,7 @@ public class CQLFilterBasicTab extends GeoPlatformTabItem implements ICQLFilterT
         super.add(this.expressionsPanel);
         //
         this.addExpressionButton = new Button(LayerFiltersModuleConstants.INSTANCE.CQLFilterBasicTab_addExpressionText());
-        addExpressionButton.setIcon(BasicWidgetResources.ICONS.done());
+        addExpressionButton.setIcon(AbstractImagePrototype.create(BasicWidgetResources.ICONS.done()));
         addExpressionButton.setToolTip(LayerFiltersModuleConstants.INSTANCE.CQLFilterBasicTab_addExpressionTooltipText());
         addExpressionButton.addSelectionListener(new SelectionListener<ButtonEvent>() {
             @Override
@@ -130,7 +131,8 @@ public class CQLFilterBasicTab extends GeoPlatformTabItem implements ICQLFilterT
 
     private Button generateDeleteButton(final CQLFilterBasicRow basicRow) {
         Button cancelFilterButton = new Button();
-        cancelFilterButton.setIcon(BasicWidgetResources.ICONS.delete());
+        cancelFilterButton.setIcon(
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.delete()));
         cancelFilterButton.setToolTip(LayerFiltersModuleConstants.INSTANCE.CQLFilterBasicTab_cancelFilterTooltipText());
         cancelFilterButton.addSelectionListener(new SelectionListener<ButtonEvent>() {
             @Override

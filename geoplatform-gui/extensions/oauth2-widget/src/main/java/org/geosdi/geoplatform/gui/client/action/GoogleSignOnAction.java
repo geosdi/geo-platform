@@ -40,6 +40,7 @@ import com.google.api.gwt.oauth2.client.Auth;
 import com.google.api.gwt.oauth2.client.AuthRequest;
 import com.google.api.gwt.oauth2.client.Callback;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.menu.OAuth2MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.OAuth2Resources;
 import org.geosdi.geoplatform.gui.client.i18n.OAuth2WidgetConstants;
@@ -69,7 +70,7 @@ public class GoogleSignOnAction extends OAuth2MenuBaseAction
 
     public GoogleSignOnAction() {
         super(OAuth2WidgetConstants.INSTANCE.GoogleSignOnAction_titleText(),
-                OAuth2Resources.ICONS.googleSignOnWhite());
+                AbstractImagePrototype.create(OAuth2Resources.ICONS.googleSignOnWhite()));
 
         OAuth2HandlerManager.addHandler(IGPOAuth2GEBLoginHandler.TYPE, this);
     }
@@ -92,7 +93,7 @@ public class GoogleSignOnAction extends OAuth2MenuBaseAction
             public void onSuccess(String token) {
                 googleLoginCallback(token);
 
-                setImage(OAuth2Resources.ICONS.googleSignOnGreen());
+                setImage(AbstractImagePrototype.create(OAuth2Resources.ICONS.googleSignOnGreen()));
                 setEnabled(false);
 
                 WidgetPropertiesHandlerManager.fireEvent(
@@ -111,7 +112,7 @@ public class GoogleSignOnAction extends OAuth2MenuBaseAction
 
             @Override
             public void onFailure(Throwable caught) {
-                setImage(OAuth2Resources.ICONS.googleSignOnWhite());
+                setImage(AbstractImagePrototype.create(OAuth2Resources.ICONS.googleSignOnWhite()));
                 setEnabled(true);
 
                 WidgetPropertiesHandlerManager.fireEvent(

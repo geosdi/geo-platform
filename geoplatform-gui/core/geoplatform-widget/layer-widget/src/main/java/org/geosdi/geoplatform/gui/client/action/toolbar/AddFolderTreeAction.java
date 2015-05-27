@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.action.toolbar;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
@@ -52,7 +53,8 @@ public class AddFolderTreeAction extends ToolbarLayerTreeAction {
     private AddFolderWidget addFolder; // TODO Inject a singleton instace with Gin
 
     public AddFolderTreeAction(TreePanel theTree) {
-        super(theTree, LayerResources.ICONS.addFolder(), 
+        super(theTree, AbstractImagePrototype.create(
+                LayerResources.ICONS.addFolder()), 
                 LayerModuleConstants.INSTANCE.AddFolderTreeAction_tooltipText());
         this.addFolder = new AddFolderWidget(theTree);
     }

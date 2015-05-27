@@ -49,6 +49,7 @@ import com.extjs.gxt.ui.client.widget.grid.*;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -79,7 +80,7 @@ public class EPSGTablePanel extends GeoPlatformContentPanel {
     private EditorGrid<EPSGLayerData> grid;
     private ListStore<EPSGLayerData> store = new ListStore<EPSGLayerData>();
     private Button processEPSGButton = new Button(ButtonsConstants.INSTANCE.nextText(),
-            BasicWidgetResources.ICONS.done());
+            AbstractImagePrototype.create(BasicWidgetResources.ICONS.done()));
     private ProcessEPSGResultRequest processEPSGRequest = GWT.
             <ProcessEPSGResultRequest>create(ProcessEPSGResultRequest.class);
 

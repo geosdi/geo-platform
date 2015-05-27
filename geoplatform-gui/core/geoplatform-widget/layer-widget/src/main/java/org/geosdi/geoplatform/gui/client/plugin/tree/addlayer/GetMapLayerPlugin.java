@@ -74,7 +74,7 @@ public class GetMapLayerPlugin extends AbstractAddLayerPlugin<ToolbarLayerTreeAc
 
     @Override
     public void initPlugin(TreePanel treePanel) {
-        this.setImage(LayerResources.ICONS.mappAdd().getHTML());
+        this.setImage(LayerResources.ICONS.mappAdd().getSafeUri().asString());
         this.setTooltip(LayerModuleConstants.INSTANCE.GetMapLayerPlugin_tooltipText());
         action = new LoadWmsGetMapFromUrlTreeAction(treePanel);
         this.setName(action.getTooltip());

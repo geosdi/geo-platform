@@ -69,7 +69,7 @@ public class AddCatalogFinderLayerPlugin extends AbstractAddLayerPlugin<ToolbarL
 
     @Override
     public void initPlugin(TreePanel treePanel) {
-        this.setImage(CatalogFinderWidgetResources.ICONS.catalogFinder().getHTML());
+        this.setImage(CatalogFinderWidgetResources.ICONS.catalogFinder().getSafeUri().asString());
         this.setTooltip(CatalogFinderConstants.INSTANCE.AddCatalogFinderLayerPlugin_tooltipText());
         action = new WmsFromMetadataTreeAction(treePanel);
         this.setName(action.getTooltip());

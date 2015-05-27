@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.action.menu;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.puregwt.binding.event.GPTreeBindingLayerEvent;
@@ -58,7 +59,8 @@ public class ShowLayerPropertiesAction extends MenuBaseAction {
     private LayersPropertiesWidget layersPropertiesWidget = new LayersPropertiesWidget();
 
     public ShowLayerPropertiesAction(TreePanel treePanel) {
-        super("LayerProperties", LayerResources.ICONS.layerProperties());
+        super("LayerProperties", AbstractImagePrototype.create(
+                LayerResources.ICONS.layerProperties()));
         this.treePanel = treePanel;
         this.layersPropertiesWidget.addHandlers();
     }

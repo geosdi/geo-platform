@@ -47,6 +47,7 @@ import com.google.gwt.user.client.rpc.HasRpcToken;
 import com.google.gwt.user.client.rpc.RpcTokenException;
 import com.google.gwt.user.client.rpc.XsrfToken;
 import com.google.gwt.user.client.rpc.XsrfTokenServiceAsync;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import java.util.Date;
 import java.util.List;
 import javax.inject.Singleton;
@@ -116,7 +117,7 @@ public class UserPropertiesWidget extends GeoPlatformTabItem
         this.centralPanel = new ContentPanel(new FlowLayout());
         this.centralPanel.setHeaderVisible(Boolean.FALSE);
         this.saveButton = new Button(ButtonsConstants.INSTANCE.saveText(),
-                BasicWidgetResources.ICONS.save(),
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.save()),
                 new SelectionListener<ButtonEvent>() {
 
                     @Override
@@ -136,7 +137,7 @@ public class UserPropertiesWidget extends GeoPlatformTabItem
         this.userPropertiesBinding = new UserPropertiesBinding(store, saveButton);
 
         Button closeButton = new Button(ButtonsConstants.INSTANCE.closeText(),
-                BasicWidgetResources.ICONS.cancel(),
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.cancel()),
                 new SelectionListener<ButtonEvent>() {
 
                     @Override

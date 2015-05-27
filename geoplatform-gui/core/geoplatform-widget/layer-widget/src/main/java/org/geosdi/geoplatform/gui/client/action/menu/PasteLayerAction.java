@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.action.menu;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
@@ -52,7 +53,8 @@ public class PasteLayerAction extends PasteLayerBaseAction {
 
     @Inject
     public PasteLayerAction(GinTreePanel ginTreePanel) {
-        super("PasteLayers", LayerResources.ICONS.paste(), ginTreePanel.get());
+        super("PasteLayers", AbstractImagePrototype.create(
+                LayerResources.ICONS.paste()), ginTreePanel.get());
     }
 
     @Override

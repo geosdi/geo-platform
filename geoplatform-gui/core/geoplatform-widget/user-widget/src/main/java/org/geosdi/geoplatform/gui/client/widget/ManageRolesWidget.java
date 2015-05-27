@@ -101,7 +101,6 @@ import org.geosdi.geoplatform.gui.client.widget.grid.renderer.GPGridCellRenderer
 import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformAction;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.global.security.GPAccountLogged;
-import org.geosdi.geoplatform.gui.server.gwt.UserRemoteImpl;
 import org.geosdi.geoplatform.gui.service.gwt.xsrf.GPXsrfTokenService;
 import org.geosdi.geoplatform.gui.shared.GPRole;
 
@@ -186,7 +185,8 @@ public class ManageRolesWidget extends GeoPlatformWindow {
         mainPanel = new ContentPanel();
         mainPanel.setHeadingHtml(UserModuleConstants.INSTANCE.
                 ManageRolesWidget_rolePermissionsText());
-        mainPanel.setIcon(BasicWidgetResources.ICONS.role());
+        mainPanel.setIcon(
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.role()));
         mainPanel.setFrame(true);
         mainPanel.setSize(585, 430);
         mainPanel.setLayout(new FitLayout());
@@ -292,7 +292,7 @@ public class ManageRolesWidget extends GeoPlatformWindow {
         super.setButtonAlign(Style.HorizontalAlignment.RIGHT);
 
         resetButton = new Button(ButtonsConstants.INSTANCE.resetText(),
-                BasicWidgetResources.ICONS.delete(),
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.delete()),
                 new SelectionListener<ButtonEvent>() {
 
                     @Override
@@ -305,7 +305,7 @@ public class ManageRolesWidget extends GeoPlatformWindow {
         super.addButton(resetButton);
 
         saveButton = new Button(ButtonsConstants.INSTANCE.saveText(),
-                BasicWidgetResources.ICONS.done(),
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.done()),
                 new SelectionListener<ButtonEvent>() {
 
                     @Override
@@ -318,7 +318,7 @@ public class ManageRolesWidget extends GeoPlatformWindow {
         this.disableGridButtons();
 
         Button close = new Button(ButtonsConstants.INSTANCE.closeText(),
-                BasicWidgetResources.ICONS.cancel(),
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.cancel()),
                 new SelectionListener<ButtonEvent>() {
 
                     @Override

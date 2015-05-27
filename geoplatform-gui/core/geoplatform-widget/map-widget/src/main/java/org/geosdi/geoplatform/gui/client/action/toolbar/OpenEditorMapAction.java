@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.action.toolbar;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.widget.button.ToggleButton;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import java.util.List;
 import org.geosdi.geoplatform.gui.action.IOpenEditorMapAction;
 import org.geosdi.geoplatform.gui.action.toggle.MapToggleAction;
@@ -60,7 +61,7 @@ public class OpenEditorMapAction extends MapToggleAction
     private List<EditorActionTool> actionTools;
 
     public OpenEditorMapAction(GeoPlatformMap theMapWidget) {
-        super(theMapWidget, Resources.ICONS.editorAOE(),
+        super(theMapWidget, AbstractImagePrototype.create(Resources.ICONS.editorAOE()),
               MapModuleConstants.INSTANCE.OpenEditorMapAction_tooltipText());
     }
 

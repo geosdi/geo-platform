@@ -52,6 +52,7 @@ import com.google.gwt.user.client.rpc.HasRpcToken;
 import com.google.gwt.user.client.rpc.RpcTokenException;
 import com.google.gwt.user.client.rpc.XsrfToken;
 import com.google.gwt.user.client.rpc.XsrfTokenServiceAsync;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.ServerWidgetResources;
 import org.geosdi.geoplatform.gui.client.i18n.ServerModuleConstants;
@@ -200,7 +201,7 @@ public class AddServerWidget extends GeoPlatformFormWidget<GPServerBeanModel> {
         formPanel.setButtonAlign(HorizontalAlignment.RIGHT);
 
         save = new Button(ButtonsConstants.INSTANCE.saveText(),
-                ServerWidgetResources.ICONS.addServer(),
+                AbstractImagePrototype.create(ServerWidgetResources.ICONS.addServer()),
                 new SelectionListener<ButtonEvent>() {
 
                     @Override
@@ -214,7 +215,7 @@ public class AddServerWidget extends GeoPlatformFormWidget<GPServerBeanModel> {
         this.formPanel.addButton(save);
 
         this.cancel = new Button(ButtonsConstants.INSTANCE.cancelText(),
-                BasicWidgetResources.ICONS.cancel(),
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.cancel()),
                 new SelectionListener<ButtonEvent>() {
 
                     @Override

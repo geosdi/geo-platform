@@ -35,27 +35,25 @@
  */
 package org.geosdi.geoplatform.gui.client.icons;
 
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import com.google.gwt.user.client.ui.ImageBundle;
+import com.google.gwt.resources.client.ClientBundle;
+import com.google.gwt.resources.client.ImageResource;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- *
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-@SuppressWarnings("deprecation")
-public interface LayerFiltersIcons extends ImageBundle {
+public interface LayerFiltersIcons extends ClientBundle {
 
-    @Resource("filter.png")
-    AbstractImagePrototype cqlFilter();
+    @Source("filter.png")
+    ImageResource cqlFilter();
 
-    @Resource("filter_delete.png")
-    AbstractImagePrototype cqlFilterDelete();
+    @Source("filter_delete.png")
+    ImageResource cqlFilterDelete();
 
-    @Resource("filter_layer.png")
-    AbstractImagePrototype cqlFilterLayerIcon();
+    @Source("filter_layer.png")
+    ImageResource cqlFilterLayerIcon();
 
-    @Resource("refresh_layer_cql.png")
-    AbstractImagePrototype refreshCqlLayerIcon();
+    @Source("refresh_layer_cql.png")
+    ImageResource refreshCqlLayerIcon();
 
 }

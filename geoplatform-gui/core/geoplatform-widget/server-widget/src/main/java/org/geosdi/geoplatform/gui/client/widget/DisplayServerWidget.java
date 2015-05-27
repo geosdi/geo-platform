@@ -54,6 +54,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.HasRpcToken;
 import com.google.gwt.user.client.rpc.XsrfToken;
 import com.google.gwt.user.client.rpc.XsrfTokenServiceAsync;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.client.ServerWidgetResources;
 import org.geosdi.geoplatform.gui.client.command.GetUserAuthoritiesRequest;
@@ -169,7 +170,7 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
 
         this.manageServersButton = new Button(ServerModuleConstants.INSTANCE.
                 DisplayServerWidget_manageServerButtonText(),
-                ServerWidgetResources.ICONS.addServer(),
+                AbstractImagePrototype.create(ServerWidgetResources.ICONS.addServer()),
                 new SelectionListener<ButtonEvent>() {
 
                     @Override

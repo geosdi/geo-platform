@@ -40,6 +40,7 @@ import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.Label;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.client.CatalogFinderWidgetResources;
 import org.geosdi.geoplatform.gui.client.i18n.CatalogFinderConstants;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
@@ -94,7 +95,7 @@ public class CatalogTreeLayerWidgetSupport implements GPTreeLayerWidgetSupport {
 
     private void createButtonComponent() {
         this.addLayersToTreeButton = new Button(ButtonsConstants.INSTANCE.addOnTreeText(),
-                CatalogFinderWidgetResources.ICONS.addLayer());
+                AbstractImagePrototype.create(CatalogFinderWidgetResources.ICONS.addLayer()));
         this.addLayersToTreeButton.setStyleAttribute("padding-top", "10px");
 
         this.addLayersToTreeButton.addSelectionListener(new SelectionListener<ButtonEvent>() {

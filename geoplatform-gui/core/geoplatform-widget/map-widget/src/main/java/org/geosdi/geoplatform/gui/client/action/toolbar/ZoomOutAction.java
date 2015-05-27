@@ -41,6 +41,7 @@ import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.gwtopenmaps.openlayers.client.LonLat;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.client.i18n.MapModuleConstants;
 
 /**
@@ -54,7 +55,7 @@ public class ZoomOutAction extends ToolbarMapAction {
     private int zoomFactor = 1;
 
     public ZoomOutAction(GeoPlatformMap mapWidget) {
-        super(Resources.ICONS.zoomOut(), 
+        super(AbstractImagePrototype.create(Resources.ICONS.zoomOut()), 
                 MapModuleConstants.INSTANCE.ZoomOutAction_tooltipText());
         this.mapWidget = mapWidget;
     }

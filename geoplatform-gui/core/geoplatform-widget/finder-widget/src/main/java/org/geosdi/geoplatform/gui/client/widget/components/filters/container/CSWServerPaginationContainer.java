@@ -49,6 +49,7 @@ import com.google.gwt.user.client.rpc.HasRpcToken;
 import com.google.gwt.user.client.rpc.RpcTokenException;
 import com.google.gwt.user.client.rpc.XsrfToken;
 import com.google.gwt.user.client.rpc.XsrfTokenServiceAsync;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -167,7 +168,8 @@ public class CSWServerPaginationContainer
         GPSecureButton newServerButton = new GPSecureButton(CatalogFinderConstants.INSTANCE.
                 CSWServerPaginationContainer_newServerButtonText(),
                 new AddServerAction(GPTrustedLevel.NONE, this.serverForm));
-        newServerButton.setIcon(BasicWidgetResources.ICONS.done());
+        newServerButton.setIcon(
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.done()));
         newServerButton.setToolTip(CatalogFinderConstants.INSTANCE.
                 CSWServerPaginationContainer_newServerButtonTooltipText());
         super.panel.addButton(newServerButton);
@@ -175,7 +177,8 @@ public class CSWServerPaginationContainer
         deleteServerButton = new GPSecureButton(CatalogFinderConstants.INSTANCE.
                 CSWServerPaginationContainer_deleteServerButtonText(),
                 new DeleteServerAction(GPTrustedLevel.HIGH, this));
-        deleteServerButton.setIcon(BasicWidgetResources.ICONS.delete());
+        deleteServerButton.setIcon(
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.delete()));
         deleteServerButton.setToolTip(CatalogFinderConstants.INSTANCE.
                 CSWServerPaginationContainer_deleteServerButtonTooltipText());
         super.panel.addButton(deleteServerButton);

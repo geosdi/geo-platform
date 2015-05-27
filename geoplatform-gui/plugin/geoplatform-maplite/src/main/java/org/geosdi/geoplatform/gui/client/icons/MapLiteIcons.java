@@ -35,15 +35,15 @@
  */
 package org.geosdi.geoplatform.gui.client.icons;
 
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import com.google.gwt.user.client.ui.ImageBundle;
+import com.google.gwt.resources.client.ClientBundle;
+import com.google.gwt.resources.client.ImageResource;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public interface MapLiteIcons extends ImageBundle {
+public interface MapLiteIcons extends ClientBundle {
 
-    @Resource("export_maplite.png")
-    AbstractImagePrototype exportMaplite();
+    @Source("export_maplite.png")
+    ImageResource exportMaplite();
 }

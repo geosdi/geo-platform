@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.featureinfo.action;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.widget.button.ToggleButton;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.toggle.MapToggleAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.i18n.FeatureInfoModuleConstants;
@@ -57,7 +58,7 @@ public class GetFeatureInfoAction extends MapToggleAction implements
     private final GPFeatureInfoWidget featureWidget;
 
     public GetFeatureInfoAction(GeoPlatformMap mapWidget) {
-        super(mapWidget, BasicWidgetResources.ICONS.info(),
+        super(mapWidget, AbstractImagePrototype.create(BasicWidgetResources.ICONS.info()),
                 FeatureInfoModuleConstants.INSTANCE.GetFeatureInfoAction_tooltipText());
         this.featureWidget = new GPFeatureInfoWidget(mapWidget);
 

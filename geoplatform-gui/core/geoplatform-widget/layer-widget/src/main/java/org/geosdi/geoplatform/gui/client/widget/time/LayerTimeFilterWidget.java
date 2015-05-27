@@ -64,6 +64,7 @@ import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.google.common.collect.Lists;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Timer;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.command.layer.basic.GetLayerDimensionRequest;
@@ -123,7 +124,7 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
     private Timer animationTimer;
     private SelectionListener<ButtonEvent> playSelectioListener;
     private ToggleButton playButton = new ToggleButton(ButtonsConstants.INSTANCE.playText(),
-            LayerResources.ICONS.playTime());
+            AbstractImagePrototype.create(LayerResources.ICONS.playTime()));
     private Slider slider;
     private CheckBox rangeCheckBox;
 
@@ -334,7 +335,8 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
 //                System.out.println("Play button status: ");
                 if (!playButton.isPressed()) {
                     playButton.setText(ButtonsConstants.INSTANCE.playText());
-                    playButton.setIcon(LayerResources.ICONS.playTime());
+                    playButton.setIcon(AbstractImagePrototype.create(
+                            LayerResources.ICONS.playTime()));
                     animationTimer.cancel();
                 } else {
                     Number startValueNumber = startFilterNumberField.getValue();
@@ -345,7 +347,8 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
                                 LayerTimeFilterWidget_timeFilterWarningBodyText());
                     } else {
                         slider.setValue(startStore.getModels().size() - startValueNumber.intValue() - 1);
-                        playButton.setIcon(LayerResources.ICONS.pauseTime());
+                        playButton.setIcon(AbstractImagePrototype.create(
+                                LayerResources.ICONS.pauseTime()));
                         playButton.setText(ButtonsConstants.INSTANCE.pauseText());
                         playTimeFilter();
                     }

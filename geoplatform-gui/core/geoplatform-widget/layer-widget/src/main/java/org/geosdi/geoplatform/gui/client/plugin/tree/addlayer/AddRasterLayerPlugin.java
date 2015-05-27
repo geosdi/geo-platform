@@ -69,7 +69,7 @@ public class AddRasterLayerPlugin extends AbstractAddLayerPlugin<ToolbarLayerTre
 
     @Override
     public void initPlugin(TreePanel treePanel) {
-        this.setImage(LayerResources.ICONS.mappAdd().getHTML());
+        this.setImage(LayerResources.ICONS.mappAdd().getSafeUri().asString());
         this.setTooltip(LayerModuleConstants.INSTANCE.AddRasterLayerPlugin_tooltipText());
         action = new AddRasterTreeAction(treePanel);
         action.setEnabled(true);

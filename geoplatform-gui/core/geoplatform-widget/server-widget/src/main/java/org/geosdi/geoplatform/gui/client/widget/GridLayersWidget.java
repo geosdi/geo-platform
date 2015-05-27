@@ -56,6 +56,7 @@ import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.common.collect.Lists;
 import com.google.gwt.regexp.shared.RegExp;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import java.util.ArrayList;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
@@ -123,7 +124,7 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
         this.formPanel.getButtonBar().add(new FillToolItem());
 
         this.done = new Button(ButtonsConstants.INSTANCE.doneText(),
-                BasicWidgetResources.ICONS.done());
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.done()));
 
         this.done.addSelectionListener(new SelectionListener<ButtonEvent>() {
             @Override

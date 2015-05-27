@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.action.toolbar;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
@@ -52,7 +53,7 @@ public class AddLayersTreeAction extends ToolbarLayerTreeAction {
     private AddLayerWidget widget;
 
     public AddLayersTreeAction(TreePanel theTree) {
-        super(theTree, LayerResources.ICONS.addLayers(), 
+        super(theTree, AbstractImagePrototype.create(LayerResources.ICONS.addLayers()), 
                 LayerModuleConstants.INSTANCE.AddLayersTreeAction_tooltipText());
         this.widget = new AddLayerWidget(theTree);
     }

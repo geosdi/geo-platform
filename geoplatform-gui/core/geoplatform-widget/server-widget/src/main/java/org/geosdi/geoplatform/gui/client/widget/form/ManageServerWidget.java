@@ -60,6 +60,7 @@ import com.google.gwt.user.client.rpc.HasRpcToken;
 import com.google.gwt.user.client.rpc.RpcTokenException;
 import com.google.gwt.user.client.rpc.XsrfToken;
 import com.google.gwt.user.client.rpc.XsrfTokenServiceAsync;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.Widget;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.ServerWidgetResources;
@@ -134,7 +135,8 @@ public class ManageServerWidget extends Window {
     }
 
     private void addComponentToForm() {
-        super.setIcon(ServerWidgetResources.ICONS.addServer());
+        super.setIcon(AbstractImagePrototype.create(
+                ServerWidgetResources.ICONS.addServer()));
         super.setLayout(new FormLayout());
         List<ColumnConfig> configs = Lists.<ColumnConfig>newArrayList();
 

@@ -54,6 +54,7 @@ import com.extjs.gxt.ui.client.widget.layout.VBoxLayoutData;
 import com.extjs.gxt.ui.client.widget.tips.ToolTipConfig;
 import com.google.common.collect.Lists;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import java.util.List;
 import java.util.Map;
 import javax.inject.Inject;
@@ -220,7 +221,7 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel
         formPanel.setButtonAlign(Style.HorizontalAlignment.LEFT);
 
         this.addConditionButton = new Button("Add Condition",
-                BasicWidgetResources.ICONS.done(),
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.done()),
                 new SelectionListener<ButtonEvent>() {
 
                     @Override
@@ -243,7 +244,7 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel
         formPanel.addButton(addConditionButton);
 
         this.resetConditionsButton = new Button("Reset Conditions",
-                BasicWidgetResources.ICONS.delete(),
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.delete()),
                 new SelectionListener<ButtonEvent>() {
 
                     @Override

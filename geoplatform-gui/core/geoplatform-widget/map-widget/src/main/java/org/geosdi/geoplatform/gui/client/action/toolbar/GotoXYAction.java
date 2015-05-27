@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.action.toolbar;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.ToolbarMapAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.i18n.BasicWidgetConstants;
@@ -51,7 +52,7 @@ public class GotoXYAction extends ToolbarMapAction {
     private final GotoXYWidget gotoXYWidget;
 
     public GotoXYAction(GeoPlatformMap theMapWidget) {
-        super(BasicWidgetResources.ICONS.gotoXY(),
+        super(AbstractImagePrototype.create(BasicWidgetResources.ICONS.gotoXY()),
                 BasicWidgetConstants.INSTANCE.GotoXYAction_tooltipText());
         this.gotoXYWidget = new GotoXYWidget(Boolean.TRUE,
                 theMapWidget.getMapWidget(), "GotoXY-Marker-Vector-Layer");

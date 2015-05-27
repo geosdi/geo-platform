@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.action;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
 import org.geosdi.geoplatform.gui.client.PrintResources;
 import org.geosdi.geoplatform.gui.client.form.GPPrintWidget;
@@ -52,7 +53,7 @@ public class PrintLayersAction extends ToolbarLayerTreeAction {
     private GPPrintWidget formPrint;
 
     public PrintLayersAction(TreePanel theTree) {
-        super(theTree, PrintResources.ICONS.print(),
+        super(theTree, AbstractImagePrototype.create(PrintResources.ICONS.print()),
                 PrintModuleConstants.INSTANCE.PrintLayersAction_tooltipText());
         this.formPrint = new GPPrintWidget(theTree);
     }

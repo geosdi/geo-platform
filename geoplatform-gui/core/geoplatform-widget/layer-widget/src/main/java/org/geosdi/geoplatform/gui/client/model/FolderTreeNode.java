@@ -43,7 +43,6 @@ import org.geosdi.geoplatform.gui.client.model.visitor.VisitorModelConverter;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
-import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.IGPNode;
 import org.geosdi.geoplatform.gui.model.tree.TreeStatusEnum;
 
@@ -96,7 +95,7 @@ public class FolderTreeNode extends AbstractFolderTreeNode implements IGPNode {
         if (this.isLoading()) {
             return GXT.IMAGES.icon_wait();
         }
-        return LayerResources.ICONS.layerFolder();
+        return AbstractImagePrototype.create(LayerResources.ICONS.layerFolder());
     }
 
     public boolean isLoading() {

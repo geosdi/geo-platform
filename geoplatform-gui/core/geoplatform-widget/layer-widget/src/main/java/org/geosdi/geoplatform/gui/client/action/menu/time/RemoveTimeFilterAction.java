@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.action.menu.time;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
@@ -63,7 +64,8 @@ public class RemoveTimeFilterAction extends MenuBaseAction {
     private final GPTreeLabelEvent labelEvent = new TreeChangeLabelEvent();
 
     public RemoveTimeFilterAction(GPTreePanel<GPBeanTreeModel> treePanel) {
-        super("RemoveTimeFilter", LayerResources.ICONS.cqlFilterDelete());
+        super("RemoveTimeFilter", AbstractImagePrototype.create(
+                LayerResources.ICONS.cqlFilterDelete()));
         this.treePanel = treePanel;
     }
 

@@ -62,6 +62,7 @@ import com.google.gwt.user.client.rpc.HasRpcToken;
 import com.google.gwt.user.client.rpc.RpcTokenException;
 import com.google.gwt.user.client.rpc.XsrfToken;
 import com.google.gwt.user.client.rpc.XsrfTokenServiceAsync;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import java.util.ArrayList;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
@@ -180,7 +181,7 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
         to.setStore(this.toStore);
         Button cancelButton = new Button(LayerModuleConstants.INSTANCE.
                 ShareProjectPanel_cancelButtonText(),
-                BasicWidgetResources.ICONS.gear(),
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.gear()),
                 new SelectionListener<ButtonEvent>() {
 
                     @Override
@@ -191,7 +192,7 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
                 });
         super.addButton(cancelButton);
         saveButton = new Button(ButtonsConstants.INSTANCE.saveText(),
-                BasicWidgetResources.ICONS.save(),
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.save()),
                 new SelectionListener<ButtonEvent>() {
 
                     @Override

@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.client.action.menu;
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.common.collect.Lists;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import java.util.List;
 import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
@@ -58,7 +59,8 @@ public class CopyLayerAction extends MenuBaseAction {
 
     @Inject
     public CopyLayerAction(GinTreePanel ginTreePanel) {
-        super("CopyLayer", LayerResources.ICONS.copy());
+        super("CopyLayer", AbstractImagePrototype.create(
+                LayerResources.ICONS.copy()));
         this.tree = ginTreePanel.get();
     }
 

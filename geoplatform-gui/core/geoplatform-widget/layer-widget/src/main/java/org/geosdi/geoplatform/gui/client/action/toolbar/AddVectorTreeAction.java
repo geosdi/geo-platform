@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.action.toolbar;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
@@ -50,7 +51,8 @@ import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 public class AddVectorTreeAction extends ToolbarLayerTreeAction {
 
     public AddVectorTreeAction(TreePanel theTree) {
-        super(theTree, LayerResources.ICONS.addVectorLayer(), LayerModuleConstants.
+        super(theTree, AbstractImagePrototype.create(
+                LayerResources.ICONS.addVectorLayer()), LayerModuleConstants.
                 INSTANCE.AddVectorTreeAction_tooltipText());
     }
 

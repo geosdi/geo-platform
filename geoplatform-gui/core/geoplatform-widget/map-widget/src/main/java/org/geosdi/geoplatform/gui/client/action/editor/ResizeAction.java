@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.action.editor;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.widget.button.ToggleButton;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.client.Resources;
 import org.geosdi.geoplatform.gui.client.action.toolbar.ModifyFeatureAction;
 import org.geosdi.geoplatform.gui.client.i18n.MapModuleConstants;
@@ -51,7 +52,7 @@ import org.gwtopenmaps.openlayers.client.control.ModifyFeature;
 public class ResizeAction extends ModifyFeatureAction {
 
     public ResizeAction(GeoPlatformMap mapWidget) {
-        super(mapWidget, Resources.ICONS.resize(),
+        super(mapWidget, AbstractImagePrototype.create(Resources.ICONS.resize()),
                 MapModuleConstants.INSTANCE.ResizeAction_tooltipText());
     }
 

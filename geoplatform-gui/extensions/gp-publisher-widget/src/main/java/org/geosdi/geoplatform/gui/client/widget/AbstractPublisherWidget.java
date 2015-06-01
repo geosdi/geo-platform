@@ -78,7 +78,6 @@ import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
 import org.geosdi.geoplatform.gui.shared.GPLayerType;
 import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
-import org.geosdi.geoplatform.gui.shared.util.GPSharedUtils;
 import org.gwtopenmaps.openlayers.client.Bounds;
 import org.gwtopenmaps.openlayers.client.Projection;
 import org.gwtopenmaps.openlayers.client.layer.WMS;
@@ -284,10 +283,16 @@ public abstract class AbstractPublisherWidget extends GeoPlatformWindow
                 GPWorkspace gpWorkspace = workspaceSimpleComboBox.getValue();
                 workspaceSimpleComboBox.disable();
                 logger.severe("Submit button selected: " + gpWorkspace);
-                if (gpWorkspace != null && GPSharedUtils.isNotEmpty(gpWorkspace.getWorkspaceName())) {
-                    epsgCheckEvent.setWorkspace(gpWorkspace.getWorkspaceName());
-                    logger.severe("Added param workspace to the servlet URL: " + gpWorkspace.getWorkspaceName());
-                    fileUploader.addParamToServletURL("workspace", gpWorkspace.getWorkspaceName());
+                String workspaceName = null;
+                if (gpWorkspace == null) {
+                    workspaceName = workspaceSimpleComboBox.getRawValue();
+                } else {
+                    workspaceName = gpWorkspace.getWorkspaceName();
+                }
+                if (workspaceName != null) {
+                    epsgCheckEvent.setWorkspace(workspaceName);
+                    logger.finest("Added param workspace to the servlet URL: " + workspaceName);
+                    fileUploader.addParamToServletURL("workspace", workspaceName);
                 }
             }
         });

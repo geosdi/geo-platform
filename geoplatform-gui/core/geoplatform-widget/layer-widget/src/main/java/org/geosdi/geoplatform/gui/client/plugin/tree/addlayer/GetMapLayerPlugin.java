@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.plugin.tree.addlayer;
 
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.action.toolbar.LoadWmsGetMapFromUrlTreeAction;
@@ -74,7 +75,7 @@ public class GetMapLayerPlugin extends AbstractAddLayerPlugin<ToolbarLayerTreeAc
 
     @Override
     public void initPlugin(TreePanel treePanel) {
-        this.setImage(LayerResources.ICONS.mappAdd().getSafeUri().asString());
+        this.setImage(AbstractImagePrototype.create(LayerResources.ICONS.mappAdd()).getHTML());
         this.setTooltip(LayerModuleConstants.INSTANCE.GetMapLayerPlugin_tooltipText());
         action = new LoadWmsGetMapFromUrlTreeAction(treePanel);
         this.setName(action.getTooltip());

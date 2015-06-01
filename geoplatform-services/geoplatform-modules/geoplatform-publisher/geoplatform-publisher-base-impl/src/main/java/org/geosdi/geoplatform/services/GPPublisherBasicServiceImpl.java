@@ -947,7 +947,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
         TriggerKey triggerKey = new TriggerKey(layerName,
                 PublisherScheduler.PUBLISHER_GROUP);
         GregorianCalendar calendar = new GregorianCalendar();
-        calendar.add(Calendar.MINUTE, 1);
+        calendar.add(Calendar.MINUTE, 30);
         Trigger trigger = TriggerBuilder.newTrigger().forJob(
                 this.scheduler.getCleanerJobShpDetail()).
                 withIdentity(triggerKey).

@@ -34,6 +34,7 @@
 package org.geosdi.geoplatform.gui.client.config.provider;
 
 import com.extjs.gxt.ui.client.Registry;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.inject.Provider;
@@ -81,7 +82,7 @@ public class MementoSaveProvider implements Provider<IMementoSave> {
 //            System.out.println("Client proj shared: " + clientProject.isShared());
 //            System.out.println("Client proj id: " + clientProject.getId());
 //        }
-        logger.severe("Getting the IMementoSave from Provider");
+        logger.log(Level.INFO, "Getting the IMementoSave from Provider");
         if (this.mementoSave == null || clientProject == null || this.projID != clientProject.getId()
                 || this.savedShareStatus != clientProject.isShared()) {
             if (clientProject == null) {
@@ -93,13 +94,13 @@ public class MementoSaveProvider implements Provider<IMementoSave> {
                         || (clientProject.isShared() && clientProject.getOwner() != null
                         && !clientProject.getOwner().getId().equals(accountInSession.getId()))) {
                     this.mementoSave = new GPMementoSaveDummy();
-                    logger.severe("Returning GPMementoSaveDummy");
+                    logger.log(Level.INFO, "Returning GPMementoSaveDummy");
                 } else if (clientProject.isShared()) {
                     this.mementoSave = new GPMementoSaveShared(observable, peekCacheEvent);
-                    logger.severe("returning GPMementoSaveShared");
+                    logger.log(Level.INFO, "returning GPMementoSaveShared");
                 } else {
                     this.mementoSave = new GPMementoSaveCache(observable);
-                    logger.severe("returning GPMementoSaveCache(observable);");
+                    logger.log(Level.INFO, "returning GPMementoSaveCache(observable);");
                 }
                 this.projID = clientProject.getId();
             }

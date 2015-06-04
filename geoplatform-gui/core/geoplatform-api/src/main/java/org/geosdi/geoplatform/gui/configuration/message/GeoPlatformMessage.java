@@ -54,6 +54,21 @@ import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 public class GeoPlatformMessage {
 
     /**
+     * Display a confirmation Message in the Application
+     *
+     * @param title
+     * @param message
+     */
+    public static void okMessage(String title, String message) {
+        MessageBox.info(title, message, new Listener<MessageBoxEvent>() {
+
+            @Override
+            public void handleEvent(MessageBoxEvent be) {
+            }
+        });
+    }
+    
+    /**
      * Display an Alert Message in the Application
      *
      * @param title

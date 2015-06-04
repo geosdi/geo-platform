@@ -10,7 +10,7 @@
 
     <groupId>org.geosdi</groupId>
     <artifactId>geoplatform-spring-dependency</artifactId>
-    <version>1.7-SNAPSHOT</version>
+    <version>1.7.x-gwt2.7.x-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Geo-Platform :: == Spring Dependencies Module</name>

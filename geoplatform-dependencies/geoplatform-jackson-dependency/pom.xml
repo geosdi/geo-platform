@@ -10,7 +10,7 @@
 
     <groupId>org.geosdi</groupId>
     <artifactId>geoplatform-jackson-dependency</artifactId>
-    <version>1.7-SNAPSHOT</version>
+    <version>1.7.x-gwt2.7.x-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Geo-Platform :: == JACKSON Dependencies Module</name>

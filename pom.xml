@@ -8,7 +8,7 @@
 
     <groupId>org.geosdi</groupId>
     <artifactId>geo-platform</artifactId>
-    <version>1.7-SNAPSHOT</version>
+    <version>1.7.x-gwt2.7.x-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Geo-Platform :: == GeoSDI Framework</name>
@@ -918,7 +918,7 @@
             <dependency>
                 <groupId>org.moxieapps.gwt</groupId>
                 <artifactId>org.moxieapps.gwt.uploader</artifactId>
-                <version>1.1.0</version>
+                <version>1.2.0</version>
             </dependency>
 
             <!-- GWT -->
@@ -1029,7 +1029,7 @@
             <dependency>
                 <groupId>com.google.gwt</groupId>
                 <artifactId>gwtquery-ui</artifactId>
-                <version>r146</version>
+                <version>r147</version>
                 <!--                <scope>provided</scope>-->
             </dependency>
             

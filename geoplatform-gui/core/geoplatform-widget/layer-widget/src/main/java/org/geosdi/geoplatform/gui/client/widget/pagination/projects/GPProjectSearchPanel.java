@@ -197,7 +197,7 @@ public class GPProjectSearchPanel extends GPListViewSearchPanel<GPClientProject>
                 searchProjectsRequest.setConfig((PagingLoadConfig) loadConfig);
                 searchProjectsRequest.setSearchText(searchText);
                 searchProjectsRequest.setImageURL(
-                        LayerResources.ICONS.gpProject().getSafeUri().asString());
+                        AbstractImagePrototype.create(LayerResources.ICONS.gpProject()).getHTML());
 
                 ClientCommandDispatcher.getInstance().execute(
                         new GPClientCommand<SearchProjectsResponse>() {

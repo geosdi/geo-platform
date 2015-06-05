@@ -78,6 +78,7 @@ import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
 import org.geosdi.geoplatform.gui.shared.GPLayerType;
 import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
+import org.geosdi.geoplatform.gui.shared.util.GPSharedUtils;
 import org.gwtopenmaps.openlayers.client.Bounds;
 import org.gwtopenmaps.openlayers.client.Projection;
 import org.gwtopenmaps.openlayers.client.layer.WMS;
@@ -282,9 +283,9 @@ public abstract class AbstractPublisherWidget extends GeoPlatformWindow
             public void handleEvent(BaseEvent be) {
                 GPWorkspace gpWorkspace = workspaceSimpleComboBox.getValue();
                 workspaceSimpleComboBox.disable();
-                logger.severe("Submit button selected: " + gpWorkspace);
                 String workspaceName = null;
-                if (gpWorkspace == null) {
+                if (gpWorkspace == null && GPSharedUtils.isNotEmpty(
+                        workspaceSimpleComboBox.getRawValue())) {
                     workspaceName = workspaceSimpleComboBox.getRawValue();
                 } else {
                     workspaceName = gpWorkspace.getWorkspaceName();

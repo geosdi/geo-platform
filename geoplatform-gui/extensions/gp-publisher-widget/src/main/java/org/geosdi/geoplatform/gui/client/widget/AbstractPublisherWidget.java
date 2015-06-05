@@ -281,17 +281,9 @@ public abstract class AbstractPublisherWidget extends GeoPlatformWindow
 
             @Override
             public void handleEvent(BaseEvent be) {
-                GPWorkspace gpWorkspace = workspaceSimpleComboBox.getValue();
                 workspaceSimpleComboBox.disable();
-                String workspaceName = null;
-                if (gpWorkspace != null && GPSharedUtils.isNotEmpty(
-                        gpWorkspace.getWorkspaceName())) {
-                    workspaceName = gpWorkspace.getWorkspaceName();
-                } else if (GPSharedUtils.isNotEmpty(
-                        workspaceSimpleComboBox.getRawValue())) {
-                    workspaceName = workspaceSimpleComboBox.getRawValue();
-                }
-                if (workspaceName != null) {
+                String workspaceName = getSelectedWorkspace();
+                if (GPSharedUtils.isNotEmpty(workspaceName)) {
                     epsgCheckEvent.setWorkspace(workspaceName);
                     logger.finest("Added param workspace to the servlet URL: " + workspaceName);
                     fileUploader.addParamToServletURL("workspace", workspaceName);
@@ -341,6 +333,19 @@ public abstract class AbstractPublisherWidget extends GeoPlatformWindow
                 100);
         southData.setMargins(new Margins(5, 20, 5, 20));
         super.add(southPanel, southData);
+    }
+
+    protected String getSelectedWorkspace() {
+        GPWorkspace gpWorkspace = workspaceSimpleComboBox.getValue();
+        String workspaceName = null;
+        if (gpWorkspace != null && GPSharedUtils.isNotEmpty(
+                gpWorkspace.getWorkspaceName())) {
+            workspaceName = gpWorkspace.getWorkspaceName();
+        } else if (GPSharedUtils.isNotEmpty(
+                workspaceSimpleComboBox.getRawValue())) {
+            workspaceName = workspaceSimpleComboBox.getRawValue();
+        }
+        return workspaceName;
     }
 
     @Override

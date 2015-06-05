@@ -33,6 +33,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget;
 
+import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.button.Button;
@@ -56,11 +57,14 @@ import org.geosdi.geoplatform.gui.client.widget.tree.store.puregwt.event.AddRast
 import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
 import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
+import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
+import org.geosdi.geoplatform.gui.shared.util.GPSharedUtils;
 import org.geosdi.geoplatform.gui.utility.GPReloadURLException;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 
@@ -99,8 +103,14 @@ public class GPPublisherWidget extends AbstractPublisherWidget {
                                 }
 
                                 publishLayerRequest.setLayerList(layersName);
-                                logger.severe("Selected workspace: " + workspaceSimpleComboBox.getSelectedText());
-                                publishLayerRequest.setWorkspace(workspaceSimpleComboBox.getSelectedText());
+                                String workspaceName = getSelectedWorkspace();
+                                if (GPSharedUtils.isEmpty(workspaceName)) {
+                                    IGPAccountDetail accountDetail = Registry.get(
+                                            UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
+                                    workspaceName = accountDetail.getUsername();
+                                }
+                                logger.info("**** Selected workspace: " + workspaceName);
+                                publishLayerRequest.setWorkspace(workspaceName);
 
                                 ClientCommandDispatcher.getInstance().execute(
                                         new GPClientCommand<PublishLayerPreviewResponse>() {

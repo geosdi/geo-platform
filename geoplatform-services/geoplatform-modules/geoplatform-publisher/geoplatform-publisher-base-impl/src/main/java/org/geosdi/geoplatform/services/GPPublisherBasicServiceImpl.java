@@ -909,10 +909,10 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
     private boolean unscheduleJob(String layerName, String workSpace) {
         boolean result = false;
         try {
-            TriggerKey key = new TriggerKey(layerName,
+            TriggerKey key = new TriggerKey(workSpace + ":" + layerName,
                     PublisherScheduler.PUBLISHER_GROUP);
             result = this.scheduler.getScheduler().unscheduleJob(key);
-            logger.info("Job for layer: " + layerName + " unscheduled: " + result);
+            logger.info("Job for layer: " + key.getName() + " unscheduled: " + result);
         } catch (SchedulerException ex) {
             logger.error("Error unscheduling publisher cleaner job: " + ex);
         }
@@ -921,7 +921,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
 
     private void addTifCleanerJob(String userWorkspace, String layerName,
             String filePath) {
-        TriggerKey triggerKey = new TriggerKey(layerName,
+        TriggerKey triggerKey = new TriggerKey(userWorkspace + ":" + layerName,
                 PublisherScheduler.PUBLISHER_GROUP);
         GregorianCalendar calendar = new GregorianCalendar();
         calendar.add(Calendar.MINUTE, 30);

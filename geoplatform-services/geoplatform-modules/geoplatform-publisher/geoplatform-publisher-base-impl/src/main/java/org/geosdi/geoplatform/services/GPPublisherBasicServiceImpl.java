@@ -251,7 +251,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
         logger.info("\n Start to publish "
                 + publishRequest.getLayerName() + " in "
                 + publishRequest.getWorkspace() + ":" + publishRequest.getDataStoreName());
-        return this.unscheduleJob(publishRequest.getLayerName());
+        return this.unscheduleJob(publishRequest.getLayerName(), publishRequest.getWorkspace());
     }
 
     @Override
@@ -259,7 +259,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
             ResourceNotFoundFault,
             FileNotFoundException {
         for (String name : publishRequest.getLayerNames()) {
-            this.unscheduleJob(name);
+            this.unscheduleJob(name, publishRequest.getWorkspace());
         }
         return Boolean.TRUE;
     }
@@ -906,7 +906,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
         return infoPreview;
     }
 
-    private boolean unscheduleJob(String layerName) {
+    private boolean unscheduleJob(String layerName, String workSpace) {
         boolean result = false;
         try {
             TriggerKey key = new TriggerKey(layerName,
@@ -944,7 +944,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
 
     private void addShpCleanerJob(String userWorkspace, String layerName,
             String filePath) {
-        TriggerKey triggerKey = new TriggerKey(layerName,
+        TriggerKey triggerKey = new TriggerKey(userWorkspace + ":" + layerName,
                 PublisherScheduler.PUBLISHER_GROUP);
         GregorianCalendar calendar = new GregorianCalendar();
         calendar.add(Calendar.MINUTE, 30);

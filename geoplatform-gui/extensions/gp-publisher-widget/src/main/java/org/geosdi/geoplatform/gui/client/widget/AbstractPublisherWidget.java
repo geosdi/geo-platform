@@ -284,7 +284,8 @@ public abstract class AbstractPublisherWidget extends GeoPlatformWindow
                 GPWorkspace gpWorkspace = workspaceSimpleComboBox.getValue();
                 workspaceSimpleComboBox.disable();
                 String workspaceName = null;
-                if (gpWorkspace != null) {
+                if (gpWorkspace != null && GPSharedUtils.isNotEmpty(
+                        gpWorkspace.getWorkspaceName())) {
                     workspaceName = gpWorkspace.getWorkspaceName();
                 } else if (GPSharedUtils.isNotEmpty(
                         workspaceSimpleComboBox.getRawValue())) {

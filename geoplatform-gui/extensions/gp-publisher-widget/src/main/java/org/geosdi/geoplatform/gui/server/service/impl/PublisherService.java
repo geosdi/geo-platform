@@ -129,7 +129,7 @@ public class PublisherService implements IPublisherService {
         String result = null;
         try {
             geoPlatformPublishClient.publishAll(new PublishLayersRequest(
-                    httpServletRequest.getSession().getId(), "previews",
+                    httpServletRequest.getSession().getId(), workspace,
                     "dataTest", layerList));
 
         } catch (ResourceNotFoundFault ex) {

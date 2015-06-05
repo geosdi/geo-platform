@@ -95,7 +95,7 @@ public class GPPublisherWidget extends AbstractPublisherWidget {
                                 //expander.checkNodeState();
                                 List<String> layersName = Lists.<String>newArrayList();
                                 for (PreviewLayer layer : layerList) {
-                                    layersName.add(layer.getName());
+                                    layersName.add(layer.getTitle());
                                 }
 
                                 publishLayerRequest.setLayerList(layersName);

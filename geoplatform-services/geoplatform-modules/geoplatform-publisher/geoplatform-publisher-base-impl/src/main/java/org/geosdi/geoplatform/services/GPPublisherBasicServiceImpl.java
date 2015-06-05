@@ -907,6 +907,10 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
     }
 
     private boolean unscheduleJob(String layerName, String workSpace) {
+        if (GPSharedUtils.isEmpty(workSpace) || GPSharedUtils.isEmpty(layerName)) {
+            throw new IllegalArgumentException("The workspace: " + workSpace
+                    + " or the layerName: " + layerName + " are null");
+        }
         boolean result = false;
         try {
             TriggerKey key = new TriggerKey(workSpace + ":" + layerName,
@@ -921,6 +925,10 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
 
     private void addTifCleanerJob(String userWorkspace, String layerName,
             String filePath) {
+        if (GPSharedUtils.isEmpty(userWorkspace) || GPSharedUtils.isEmpty(layerName)) {
+            throw new IllegalArgumentException("The workspace: " + userWorkspace
+                    + " or the layerName: " + layerName + " are null");
+        }
         TriggerKey triggerKey = new TriggerKey(userWorkspace + ":" + layerName,
                 PublisherScheduler.PUBLISHER_GROUP);
         GregorianCalendar calendar = new GregorianCalendar();
@@ -944,6 +952,10 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
 
     private void addShpCleanerJob(String userWorkspace, String layerName,
             String filePath) {
+        if (GPSharedUtils.isEmpty(userWorkspace) || GPSharedUtils.isEmpty(layerName)) {
+            throw new IllegalArgumentException("The workspace: " + userWorkspace
+                    + " or the layerName: " + layerName + " are null");
+        }
         TriggerKey triggerKey = new TriggerKey(userWorkspace + ":" + layerName,
                 PublisherScheduler.PUBLISHER_GROUP);
         GregorianCalendar calendar = new GregorianCalendar();

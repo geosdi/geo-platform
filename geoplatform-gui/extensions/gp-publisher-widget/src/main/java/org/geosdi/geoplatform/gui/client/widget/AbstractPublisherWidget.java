@@ -284,11 +284,11 @@ public abstract class AbstractPublisherWidget extends GeoPlatformWindow
                 GPWorkspace gpWorkspace = workspaceSimpleComboBox.getValue();
                 workspaceSimpleComboBox.disable();
                 String workspaceName = null;
-                if (gpWorkspace == null && GPSharedUtils.isNotEmpty(
+                if (gpWorkspace != null) {
+                    workspaceName = gpWorkspace.getWorkspaceName();
+                } else if (GPSharedUtils.isNotEmpty(
                         workspaceSimpleComboBox.getRawValue())) {
                     workspaceName = workspaceSimpleComboBox.getRawValue();
-                } else {
-                    workspaceName = gpWorkspace.getWorkspaceName();
                 }
                 if (workspaceName != null) {
                     epsgCheckEvent.setWorkspace(workspaceName);

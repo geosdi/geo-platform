@@ -912,7 +912,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
             TriggerKey key = new TriggerKey(layerName,
                     PublisherScheduler.PUBLISHER_GROUP);
             result = this.scheduler.getScheduler().unscheduleJob(key);
-            logger.debug("Job unscheduled: " + result);
+            logger.info("Job for layer: " + layerName + " unscheduled: " + result);
         } catch (SchedulerException ex) {
             logger.error("Error unscheduling publisher cleaner job: " + ex);
         }
@@ -968,8 +968,10 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
         try {
             if (this.scheduler.getScheduler().checkExists(triggerKey)) {
                 this.scheduler.getScheduler().rescheduleJob(triggerKey, trigger);
+                logger.info("Rescheduled job for published layer deletion: " + triggerKey.getName());
             } else {
                 this.scheduler.getScheduler().scheduleJob(trigger);
+                logger.info("Scheduled job for published layer deletion: " + triggerKey.getName());
             }
         } catch (SchedulerException ex) {
             logger.error("Error adding publisher cleaner job: " + ex);

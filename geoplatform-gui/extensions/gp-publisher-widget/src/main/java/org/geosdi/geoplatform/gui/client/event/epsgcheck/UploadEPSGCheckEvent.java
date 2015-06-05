@@ -67,4 +67,9 @@ public class UploadEPSGCheckEvent extends AbstractUploadEvent<IUploadEPSGCheckHa
     public void setWorkspace(String workspace) {
         this.workspace = workspace;
     }
+
+    public void reset() {
+        this.result = null;
+        this.workspace = null;
+    }
 }

@@ -53,6 +53,7 @@ import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
+import org.geosdi.geoplatform.gui.shared.util.GPSharedUtils;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -162,8 +163,8 @@ public class GPFileUploader {
                             htmlResult = htmlResult.replaceAll(
                                     "<pre style=\"word-wrap: break-word; white-space: pre-wrap;\">",
                                     "");
-                            if ((htmlResult != null) && !(htmlResult.equals(""))) {
-//                        System.out.println("HTMLResult: " + htmlResult);
+                            if (GPSharedUtils.isNotEmpty(htmlResult)) {
+//                                logger.info("HTMLResult: " + htmlResult);
                                 uploadEvent.setResult(htmlResult);
                                 GPHandlerManager.fireEvent(uploadEvent);
                                 //done.enable();

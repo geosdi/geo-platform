@@ -87,7 +87,7 @@ public class CasPublishLayerPreviewCommand implements
         try {
             List<String> layerList = request.getLayerList();
             casPublisherService.publishAll(new PublishLayersRequest(
-                    httpServletRequest.getSession().getId(), "previews",
+                    httpServletRequest.getSession().getId(), request.getWorkspace(),
                     "dataTest", layerList));
         } catch (ResourceNotFoundFault ex) {
             logger.error("Error on publish shape: " + ex);

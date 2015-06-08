@@ -123,6 +123,7 @@ public class GuiComponentIDs {
     public static final String PREVIEW_KML = "PREVIEW_KML";
     public static final String LAYER_STYLER = "LAYER_STYLER";
     public static final String MAP_LITE_EXPORTER = "EXPORT_MAPLITE_PROJECT";
+    public static final String OPEN_CATALOG_FINDER = "OPEN_CATALOG";
     /**
      * Collections of GuiComponent
      */
@@ -196,6 +197,7 @@ public class GuiComponentIDs {
         all.add(PREVIEW_KML);
         all.add(LAYER_STYLER);
         all.add(MAP_LITE_EXPORTER);
+        all.add(OPEN_CATALOG_FINDER);
         //
         LIST_ALL = Collections.<String>unmodifiableList(all);
         /**
@@ -255,6 +257,7 @@ public class GuiComponentIDs {
         mapUser.put(PREVIEW_KML, Boolean.TRUE);
         mapUser.put(LAYER_STYLER, Boolean.TRUE);
         mapUser.put(MAP_LITE_EXPORTER, Boolean.TRUE);
+        mapUser.put(OPEN_CATALOG_FINDER, Boolean.TRUE);
         //
         MAP_USER = Collections.<String, Boolean>unmodifiableMap(mapUser);
         /**
@@ -314,6 +317,7 @@ public class GuiComponentIDs {
         mapViewer.put(PREVIEW_KML, Boolean.TRUE);
         mapViewer.put(LAYER_STYLER, Boolean.TRUE);
         mapViewer.put(MAP_LITE_EXPORTER, Boolean.TRUE);
+        mapViewer.put(OPEN_CATALOG_FINDER, Boolean.TRUE);
         //
         MAP_VIEWER = Collections.<String, Boolean>unmodifiableMap(mapViewer);
     }

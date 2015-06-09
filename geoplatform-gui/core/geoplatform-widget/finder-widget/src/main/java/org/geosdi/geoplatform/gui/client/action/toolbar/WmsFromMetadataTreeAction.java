@@ -61,7 +61,7 @@ public class WmsFromMetadataTreeAction extends ToolbarLayerTreeAction {
 
     public WmsFromMetadataTreeAction(TreePanel treePanel) {
         super(treePanel, AbstractImagePrototype.create(
-                CatalogFinderWidgetResources.ICONS.catalogFinder()),
+                CatalogFinderWidgetResources.ICONS.metadata()),
                 CatalogFinderConstants.INSTANCE.AddCatalogFinderLayerPlugin_tooltipText());
         this.wmsMetadataWidget = injector.getCatalogFinderWidget();
         this.wmsMetadataWidget.setTree(tree);

@@ -75,7 +75,7 @@ public class RSRolePermissionTest extends BasicRestServiceTest {
         logger.trace("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@RETRIEVE GuiComponents for"
                 + " USER_ROLE : {}\n\n", wsUserMapData);
         
-        Assert.assertEquals(50, wsUserMapData.getPermissionMap().size());
+        Assert.assertEquals(51, wsUserMapData.getPermissionMap().size());
         
         GuiComponentsPermissionMapData viewerMapData = new GuiComponentsPermissionMapData();
         viewerMapData.setPermissionMap(new HashMap<String, Boolean>(
@@ -91,7 +91,7 @@ public class RSRolePermissionTest extends BasicRestServiceTest {
         logger.trace("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@RETRIEVE GuiComponents for"
                 + " VIEWER_ROLE : {}\n\n", wsViewerMapData);
         
-        Assert.assertEquals(49, wsViewerMapData.getPermissionMap().size());
+        Assert.assertEquals(50, wsViewerMapData.getPermissionMap().size());
     }
     
     @Test

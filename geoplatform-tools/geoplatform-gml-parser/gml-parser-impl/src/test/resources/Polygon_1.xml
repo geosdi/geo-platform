@@ -1,0 +1,7 @@
+<gml:Polygon xmlns:ns2="http://www.w3.org/1999/xlink" xmlns:ns4="http://www.w3.org/2001/SMIL20/Language" xmlns:ns3="http://www.w3.org/2001/SMIL20/" xmlns:gml="http://www.opengis.net/gml">
+    <gml:outerBoundaryIs>
+        <gml:LinearRing>
+            <gml:coordinates>0,0 100,0 100,100 0,100 0,0</gml:coordinates>
+        </gml:LinearRing>
+    </gml:outerBoundaryIs>
+</gml:Polygon>

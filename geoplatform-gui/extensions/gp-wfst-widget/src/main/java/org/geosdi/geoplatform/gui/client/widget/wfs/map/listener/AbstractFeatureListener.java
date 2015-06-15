@@ -45,14 +45,14 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class AbastractFeatureListener implements EventListener {
+public abstract class AbstractFeatureListener implements EventListener {
 
     protected Vector vectorLayer;
     //
     protected GPEventBus bus;
     protected FeatureInstancesEvent attributeValuesEvent = new FeatureInstancesEvent();
 
-    public AbastractFeatureListener(Vector theVectorLayer, GPEventBus bus) {
+    public AbstractFeatureListener(Vector theVectorLayer, GPEventBus bus) {
         this.vectorLayer = theVectorLayer;
         this.bus = bus;
     }

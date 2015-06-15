@@ -54,7 +54,7 @@ import org.gwtopenmaps.openlayers.client.util.Attributes;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class FeatureSelectListener extends AbastractFeatureListener implements
+public class FeatureSelectListener extends AbstractFeatureListener implements
         FeatureSelectedListener {
 
     private final IFeatureIdBinder fidBinder;

@@ -48,7 +48,7 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class FeatureUnSelectListener extends AbastractFeatureListener implements
+public class FeatureUnSelectListener extends AbstractFeatureListener implements
         FeatureUnselectedListener {
 
     private final IFeatureIdBinder fidBinder;

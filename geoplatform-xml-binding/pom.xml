@@ -20,7 +20,7 @@
         <module>geoplatform-feature-catalogue-binding</module>
         <module>geoplatform-filter-binding</module>
         <module>geoplatform-gml-binding</module>
-        <module>geoplatform-iso19139-binding</module>
+        <module>geoplatform-iso-binding</module>
         <module>geoplatform-ows-binding</module>
         <module>geoplatform-w3c-xsd-binding</module>
         <module>geoplatform-wfs-binding</module>
@@ -46,6 +46,12 @@
             <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>gml-3.1.1</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            
+            <dependency>
+                <groupId>org.geosdi</groupId>
+                <artifactId>gml-3.2.0</artifactId>
                 <version>${project.version}</version>
             </dependency>
             
@@ -81,7 +87,13 @@
             
             <dependency>
                 <groupId>org.geosdi</groupId>
-                <artifactId>geoplatform-iso19139-binding</artifactId>
+                <artifactId>geoplatform-iso19139-v20060504</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            
+            <dependency>
+                <groupId>org.geosdi</groupId>
+                <artifactId>geoplatform-iso19139-v20070417</artifactId>
                 <version>${project.version}</version>
             </dependency>
             

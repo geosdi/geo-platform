@@ -1,0 +1,114 @@
+<jaxb:bindings version="1.0" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" 
+               xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+               xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" 
+               jaxb:extensionBindingPrefixes="xjc">
+
+    <jaxb:bindings schemaLocation="gml/3.2.0/gml.xsd" 
+                       node="/xs:schema">
+        <jaxb:globalBindings
+            fixedAttributeAsConstantProperty="true"
+            typesafeEnumBase="xs:string"
+            typesafeEnumMemberName="generateName" 
+            generateIsSetMethod="true">
+            <xjc:noValidator />
+            <xjc:noValidatingUnmarshaller />
+        </jaxb:globalBindings>
+
+        <jaxb:schemaBindings>
+            <jaxb:package name="org.geosdi.geoplatform.xml.gml.v320"/>
+            <jaxb:nameXmlTransform>
+                <jaxb:elementName suffix="Element"/>
+            </jaxb:nameXmlTransform>
+        </jaxb:schemaBindings>
+    </jaxb:bindings>
+
+    <jaxb:bindings schemaLocation="gml/3.2.0/geometryPrimitives.xsd" node="/xs:schema">
+
+        <jaxb:bindings>
+            <jaxb:nameXmlTransform>
+                <jaxb:elementName suffix="Element"/>
+            </jaxb:nameXmlTransform>
+            <jaxb:bindings node="//xs:group[@name='PointGrid']/xs:sequence/xs:element[@name='rows']">
+                <jaxb:property name="Arows"/>
+            </jaxb:bindings>
+        </jaxb:bindings>
+    </jaxb:bindings>
+	
+    <jaxb:bindings schemaLocation="gml/3.2.0/datums.xsd" node="/xs:schema">
+        <jaxb:bindings>
+            <jaxb:bindings node="//xs:element[@name='secondDefiningParameter']">
+                <jaxb:class name="SecondDefiningParameterPropertyElement"/>
+            </jaxb:bindings>
+            <jaxb:bindings node="//xs:element[@name='ellipsoid']">
+                <jaxb:factoryMethod name="EllipsoidPropertyElement"/>
+            </jaxb:bindings>
+            <jaxb:bindings node="//xs:element[@name='primeMeridian']">
+                <jaxb:factoryMethod name="PrimeMeridianPropertyElement"/>
+            </jaxb:bindings>
+        </jaxb:bindings>
+    </jaxb:bindings>
+
+    <jaxb:bindings schemaLocation="gml/3.2.0/coordinateReferenceSystems.xsd" node="/xs:schema">
+        <jaxb:bindings>
+            <jaxb:bindings node="//xs:element[@name='imageDatum']">
+                <jaxb:factoryMethod name="ImageDatumPropertyElement"/>
+            </jaxb:bindings>
+            <jaxb:bindings node="//xs:element[@name='geodeticDatum']">
+                <jaxb:factoryMethod name="GeodeticDatumPropertyElement"/>
+            </jaxb:bindings>
+            <jaxb:bindings node="//xs:element[@name='temporalDatum']">
+                <jaxb:factoryMethod name="TemporalDatumPropertyElement"/>
+            </jaxb:bindings>
+            <jaxb:bindings node="//xs:element[@name='engineeringDatum']">
+                <jaxb:factoryMethod name="EngineeringDatumPropertyElement"/>
+            </jaxb:bindings>
+            <jaxb:bindings node="//xs:element[@name='verticalDatum']">
+                <jaxb:factoryMethod name="VerticalDatumPropertyElement"/>
+            </jaxb:bindings>
+            <jaxb:bindings node="//xs:element[@name='cartesianCS']">
+                <jaxb:factoryMethod name="CartesianCSPropertyElement"/>
+            </jaxb:bindings>
+            <jaxb:bindings node="//xs:element[@name='sphericalCS']">
+                <jaxb:factoryMethod name="SphericalCSPropertyElement"/>
+            </jaxb:bindings>
+            <jaxb:bindings node="//xs:element[@name='verticalCS']">
+                <jaxb:factoryMethod name="VerticalCSPropertyElement"/>
+            </jaxb:bindings>
+            <jaxb:bindings node="//xs:element[@name='ellipsoidalCS']">
+                <jaxb:factoryMethod name="EllipsoidalCSPropertyElement"/>
+            </jaxb:bindings>
+            <jaxb:bindings node="//xs:element[@name='affineCS']">
+                <jaxb:factoryMethod name="AffineCSPropertyElement"/>
+            </jaxb:bindings>
+            <jaxb:bindings node="//xs:element[@name='timeCS']">
+                <jaxb:factoryMethod name="TimeCSPropertyElement"/>
+            </jaxb:bindings>
+            <jaxb:bindings node="//xs:element[@name='conversion']">
+                <jaxb:factoryMethod name="ConversionPropertyElement"/>
+            </jaxb:bindings>
+        </jaxb:bindings>
+    </jaxb:bindings>
+	
+    <jaxb:bindings schemaLocation="gml/3.2.0/coordinateOperations.xsd" node="/xs:schema">
+        <jaxb:bindings>
+            <jaxb:bindings node="//xs:element[@name='coordinateOperationAccuracy']//xs:element[@ref='gmd:AbstractDQ_PositionalAccuracy']">
+                <xjc:dom/>
+            </jaxb:bindings>
+            <jaxb:bindings node="//xs:element[@name='parameterValue']">
+                <jaxb:factoryMethod name="ParameterValuePropertyElement"/>
+            </jaxb:bindings>
+            <jaxb:bindings node="//xs:element[@name='operationParameter']">
+                <jaxb:factoryMethod name="OperationParameterPropertyElement"/>
+            </jaxb:bindings>
+        </jaxb:bindings>
+    </jaxb:bindings>
+
+    <jaxb:bindings schemaLocation="gml/3.2.0/referenceSystems.xsd" node="/xs:schema">
+        <jaxb:bindings>
+            <jaxb:bindings node="//xs:element[@name='domainOfValidity']//xs:element[@ref='gmd:EX_Extent']">
+                <xjc:dom/>
+            </jaxb:bindings>
+        </jaxb:bindings>
+    </jaxb:bindings>
+
+</jaxb:bindings>

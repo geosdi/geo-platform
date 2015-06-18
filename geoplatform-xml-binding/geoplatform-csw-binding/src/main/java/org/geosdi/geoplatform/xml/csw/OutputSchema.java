@@ -45,7 +45,7 @@ public enum OutputSchema {
     GMD("http://www.isotc211.org/2005/gmd"), // Metadatas will be on the 'Any' list // TODO GMD list
     ORIGINAL("original"); // Metadata will be the response
     //
-    private String schema;
+    private final String schema;
 
     OutputSchema(String schema) {
         this.schema = schema;

@@ -81,6 +81,7 @@ public class WmsGetMapDispatcher implements IWmsGetMapDispatcher {
                     @Override
                     public void onCommandSuccess(
                             CheckWmsGetMapUrlResponse response) {
+                        System.out.println("ECCOLA : " + response);
                         if (response.getResult()) {
                             LoadWmsGetMapFromUrlWidget.fireWmsGetMapFromUrlEvent(
                                     correctStatusEvent);

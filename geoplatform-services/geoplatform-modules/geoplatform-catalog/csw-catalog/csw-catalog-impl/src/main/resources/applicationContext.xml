@@ -16,19 +16,15 @@
             http://cxf.apache.org/jaxws
             http://cxf.apache.org/schemas/jaxws.xsd"
        default-autowire="byName">
+    
+    <context:component-scan base-package="org.geosdi.geoplatform.services.delegate" />
 
     <!--===================================================================== -->
     <!-- Services -->
     <!--===================================================================== -->
     
     <bean id="cswService"
-          class="org.geosdi.geoplatform.services.GeoPlatformCSWServiceImpl">
-        <property name="serverDao" ref="serverDAO" />
-        <property name="organizationDao" ref="organizationDAO" />
-        <property name="catalogCapabilitiesBean" ref="catalogCapabilitiesBean" />
-        <property name="snipcProvider" ref="snipcCatalogBeanProvider" />
-        <property name="cswProxyConfiguration" ref="cswProxyConnectionConfiguration" />
-    </bean>
+          class="org.geosdi.geoplatform.services.GeoPlatformCSWServiceImpl"/>
 
     <!--===================================================================== -->
 

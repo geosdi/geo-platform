@@ -100,7 +100,7 @@ public class CSWContextServiceProvider {
     }
 
     private static Class[] getAllClasses() {
-        List<Class> allClasses = new ArrayList<Class>();
+        List<Class> allClasses = new ArrayList<>();
         allClasses.add(org.geosdi.geoplatform.xml.ows.v100.ObjectFactory.class);
 
         allClasses.add(

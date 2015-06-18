@@ -84,7 +84,7 @@ public class CatalogGetRecordsV202 extends CatalogGetRecords<GetRecordsResponseT
         QueryType query = new QueryType();
         request.setAbstractQuery(query);
 
-        List<QName> typNameList = new ArrayList<QName>();
+        List<QName> typNameList = new ArrayList<>();
         typNameList.add(typeName != null
                 ? typeName.getQName() : TypeName.RECORD_V202.getQName());
         query.setTypeNames(typNameList);

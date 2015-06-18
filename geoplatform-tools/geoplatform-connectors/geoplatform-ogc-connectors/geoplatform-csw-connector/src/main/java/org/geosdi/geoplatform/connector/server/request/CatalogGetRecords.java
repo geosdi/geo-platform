@@ -136,10 +136,10 @@ public abstract class CatalogGetRecords<T> extends CatalogCSWRequest<T>
     @Override
     public void setOutputSchema(OutputSchema outputSchema) {
         // TODO GMD list
-        if (outputSchema != OutputSchema.CSW_V202) {
-            throw new UnsupportedOperationException("GMD output schema is not supported yet. "
-                    + "Use CSW output schema.");
-        }
+//        if (outputSchema != OutputSchema.CSW_V202) {
+//            throw new UnsupportedOperationException("GMD output schema is not supported yet. "
+//                    + "Use CSW output schema.");
+//        }
         this.outputSchema = outputSchema;
     }
 

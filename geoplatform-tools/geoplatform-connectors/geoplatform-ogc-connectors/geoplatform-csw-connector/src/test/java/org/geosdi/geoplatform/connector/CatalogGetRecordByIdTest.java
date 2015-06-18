@@ -1,37 +1,35 @@
 /**
  *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
+ * geo-platform Rich webgis framework http://geo-platform.org
+ * ====================================================================
  *
- *   Copyright (C) 2008-2015 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2015 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version. This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details. You should have received a copy of the GNU General Public License
+ * along with this program. If not, see http://www.gnu.org/licenses/
  *
- *   ====================================================================
+ * ====================================================================
  *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
+ * Linking this library statically or dynamically with other modules is making a
+ * combined work based on this library. Thus, the terms and conditions of the
+ * GNU General Public License cover the whole combination.
  *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * As a special exception, the copyright holders of this library give you
+ * permission to link this library with independent modules to produce an
+ * executable, regardless of the license terms of these independent modules, and
+ * to copy and distribute the resulting executable under terms of your choice,
+ * provided that you also meet, for each linked independent module, the terms
+ * and conditions of the license of that module. An independent module is a
+ * module which is not derived from or based on this library. If you modify this
+ * library, you may extend this exception to your version of the library, but
+ * you are not obligated to do so. If you do not wish to do so, delete this
+ * exception statement from your version.
  */
 package org.geosdi.geoplatform.connector;
 
@@ -43,6 +41,7 @@ import org.geosdi.geoplatform.connector.server.request.CatalogGetCapabilitiesReq
 import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordByIdRequest;
 import org.geosdi.geoplatform.connector.server.security.BasicPreemptiveSecurityConnector;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
+import org.geosdi.geoplatform.gui.responce.OnlineResourceProtocolType;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
 import org.geosdi.geoplatform.xml.csw.OutputSchema;
 import org.geosdi.geoplatform.xml.csw.v202.AbstractRecordType;
@@ -131,7 +130,33 @@ public class CatalogGetRecordByIdTest {
         request.setId("7e418dac-3764-4290-b8ac-47c9ac2a12af");
 
         request.setOutputSchema(OutputSchema.GMD);
-        request.setElementSetType("full");
+        request.setElementSetType(ElementSetType.FULL.value());
+
+        GetRecordByIdResponseType response = request.getResponse();
+
+        Assert.assertEquals(false, response.isSetAbstractRecord());
+        Assert.assertEquals(true, response.isSetAny());
+
+        List<Object> any = response.getAny();
+
+        logger.info("FULL METADATA @@@@@@@@@@@@@@@@@@@@@@@@@@@ {}",
+                ((JAXBElement) any.get(0)).getValue());
+    }
+
+    @Test
+    public void testTypeFullIspra() throws Exception {
+        GPCatalogConnectorStore ispraServerConnector = GPCSWConnectorBuilder
+                .newConnector()
+                .withServerUrl(new URL("http://www.geoportale.isprambiente.it/"
+                                + "geoportale/csw/discovery"))
+                .build();
+        CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request
+                = ispraServerConnector.createGetRecordByIdRequest();
+
+        request.setId("ispra_rm:20150521:185000");
+
+        request.setOutputSchema(OutputSchema.GMD);
+        request.setElementSetType(ElementSetType.FULL.value());
 
         GetRecordByIdResponseType response = request.getResponse();
 

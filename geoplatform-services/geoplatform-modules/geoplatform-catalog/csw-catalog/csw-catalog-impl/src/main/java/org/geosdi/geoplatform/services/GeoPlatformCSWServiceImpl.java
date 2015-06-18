@@ -1,127 +1,68 @@
 /**
  *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
+ * geo-platform Rich webgis framework http://geo-platform.org
+ * ====================================================================
  *
- *   Copyright (C) 2008-2015 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2015 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version. This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details. You should have received a copy of the GNU General Public License
+ * along with this program. If not, see http://www.gnu.org/licenses/
  *
- *   ====================================================================
+ * ====================================================================
  *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
+ * Linking this library statically or dynamically with other modules is making a
+ * combined work based on this library. Thus, the terms and conditions of the
+ * GNU General Public License cover the whole combination.
  *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * As a special exception, the copyright holders of this library give you
+ * permission to link this library with independent modules to produce an
+ * executable, regardless of the license terms of these independent modules, and
+ * to copy and distribute the resulting executable under terms of your choice,
+ * provided that you also meet, for each linked independent module, the terms
+ * and conditions of the license of that module. An independent module is a
+ * module which is not derived from or based on this library. If you modify this
+ * library, you may extend this exception to your version of the library, but
+ * you are not obligated to do so. If you do not wish to do so, delete this
+ * exception statement from your version.
  */
 package org.geosdi.geoplatform.services;
 
 import java.util.List;
+import javax.annotation.Resource;
 import javax.jws.WebService;
-import org.geosdi.geoplatform.connector.CatalogGetCapabilitiesBean;
-import org.geosdi.geoplatform.connector.proxy.CSWProxyConnectionConfiguration;
-import org.geosdi.geoplatform.connector.security.SnipcCatalogBeanProvider;
-import org.geosdi.geoplatform.core.dao.GPOrganizationDAO;
-import org.geosdi.geoplatform.core.dao.GPServerDAO;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
-import org.geosdi.geoplatform.exception.ServerInternalFault;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.FullRecordDTO;
 import org.geosdi.geoplatform.responce.ServerCSWDTO;
 import org.geosdi.geoplatform.responce.SummaryRecordDTO;
+import org.geosdi.geoplatform.services.delegate.CSWDelegate;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email michele.santomauro@geosdi.org
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
 @Transactional // Give atomicity on WS methods
 @WebService(
-endpointInterface = "org.geosdi.geoplatform.services.GeoPlatformCSWService")
+        endpointInterface = "org.geosdi.geoplatform.services.GeoPlatformCSWService")
 public class GeoPlatformCSWServiceImpl implements GeoPlatformCSWService {
 
-    // Delegate
-    private CSWServiceImpl cswServiceDelegate;
-    // DAO
-    private GPServerDAO serverDao;
-    private GPOrganizationDAO organizationDao;
-    //
-    private CatalogGetCapabilitiesBean catalogCapabilitiesBean;
-    private SnipcCatalogBeanProvider snipcProvider;
-    private CSWProxyConnectionConfiguration cswProxyConfiguration;
-
-    /**
-     * @param cswServiceDelegate
-     */
-    public GeoPlatformCSWServiceImpl() {
-        this.cswServiceDelegate = new CSWServiceImpl();
-    }
-
-    /**
-     * @param serverDao the serverDao to set
-     */
-    public void setServerDao(GPServerDAO serverDao) {
-        this.serverDao = serverDao;
-        this.cswServiceDelegate.setServerDao(serverDao);
-    }
-
-    /**
-     * @param organizationDao the organizationDao to set
-     */
-    public void setOrganizationDao(GPOrganizationDAO organizationDao) {
-        this.organizationDao = organizationDao;
-        this.cswServiceDelegate.setOrganizationDao(organizationDao);
-    }
-
-    /**
-     * @param catalogCapabilitiesBean the catalogCapabilitiesBean to set
-     */
-    public void setCatalogCapabilitiesBean(
-            CatalogGetCapabilitiesBean catalogCapabilitiesBean) {
-        this.catalogCapabilitiesBean = catalogCapabilitiesBean;
-        this.cswServiceDelegate.setCatalogCapabilitiesBean(
-                catalogCapabilitiesBean);
-    }
-
-    /**
-     * @param snipcProvider the snipcProvider to set
-     */
-    public void setSnipcProvider(SnipcCatalogBeanProvider snipcProvider) {
-        this.snipcProvider = snipcProvider;
-        this.cswServiceDelegate.setSnipcProvider(snipcProvider);
-    }
-
-    /**
-     * @param cswProxyConfiguration the cswProxyConfiguration to set
-     */
-    public void setCswProxyConfiguration(CSWProxyConnectionConfiguration cswProxyConfiguration) {
-        this.cswProxyConfiguration = cswProxyConfiguration;
-        this.cswServiceDelegate.setCswProxyConfiguration(cswProxyConfiguration);
-    }
+    @Resource(name = "cswServiceDelegate")
+    private CSWDelegate cswServiceDelegate;
 
     @Override
     public Long insertServerCSW(GeoPlatformServer server) throws IllegalParameterFault {
@@ -170,7 +111,8 @@ public class GeoPlatformCSWServiceImpl implements GeoPlatformCSWService {
     }
 
     @Override
-    public List<ServerCSWDTO> searchCSWServers(PaginatedSearchRequest request, String organization) {
+    public List<ServerCSWDTO> searchCSWServers(PaginatedSearchRequest request,
+            String organization) {
         return cswServiceDelegate.searchCSWServers(request, organization);
     }
 
@@ -199,4 +141,5 @@ public class GeoPlatformCSWServiceImpl implements GeoPlatformCSWService {
             throws Exception {
         return cswServiceDelegate.getRecordById(serverID, identifier);
     }
+
 }

@@ -35,9 +35,7 @@ package org.geosdi.geoplatform.gui.client;
 
 import com.google.gwt.core.client.EntryPoint;
 import org.geosdi.geoplatform.gui.client.plugin.tree.addlayer.AddCatalogFinderLayerPlugin;
-import org.geosdi.geoplatform.gui.client.plugin.tree.toolbar.OpenCatalogToolbarPlugin;
 import org.geosdi.geoplatform.gui.plugin.tree.addlayer.AddLayerPluginManager;
-import org.geosdi.geoplatform.gui.plugin.tree.toolbar.TreeToolbarPluginManager;
 
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group

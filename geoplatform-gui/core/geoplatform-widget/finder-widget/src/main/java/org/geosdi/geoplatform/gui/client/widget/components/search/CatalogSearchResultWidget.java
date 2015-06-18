@@ -54,8 +54,8 @@ import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 public class CatalogSearchResultWidget extends LayoutContainer
         implements ActionTreePresenceHandler {
 
-    private RecordsContainer recordsContainer;
-    private GPEventBus bus;
+    private final RecordsContainer recordsContainer;
+    private final GPEventBus bus;
     private Label resultLabel;
     private TreePanel<GPBeanTreeModel> tree;
 

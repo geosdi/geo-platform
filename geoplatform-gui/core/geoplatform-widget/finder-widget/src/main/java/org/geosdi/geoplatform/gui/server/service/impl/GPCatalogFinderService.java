@@ -1,37 +1,35 @@
 /**
  *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
+ * geo-platform Rich webgis framework http://geo-platform.org
+ * ====================================================================
  *
- *   Copyright (C) 2008-2015 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2015 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version. This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details. You should have received a copy of the GNU General Public License
+ * along with this program. If not, see http://www.gnu.org/licenses/
  *
- *   ====================================================================
+ * ====================================================================
  *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
+ * Linking this library statically or dynamically with other modules is making a
+ * combined work based on this library. Thus, the terms and conditions of the
+ * GNU General Public License cover the whole combination.
  *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * As a special exception, the copyright holders of this library give you
+ * permission to link this library with independent modules to produce an
+ * executable, regardless of the license terms of these independent modules, and
+ * to copy and distribute the resulting executable under terms of your choice,
+ * provided that you also meet, for each linked independent module, the terms
+ * and conditions of the license of that module. An independent module is a
+ * module which is not derived from or based on this library. If you modify this
+ * library, you may extend this exception to your version of the library, but
+ * you are not obligated to do so. If you do not wish to do so, delete this
+ * exception statement from your version.
  */
 package org.geosdi.geoplatform.gui.server.service.impl;
 
@@ -117,7 +115,7 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
         SearchRequest srq = new SearchRequest(searchText);
 
         int serversCount = geoPlatformCSWClient.getCSWServersCount(srq,
-                                                                   organization);
+                organization);
 
         ArrayList<GPCSWServerBeanModel> searchServers;
         if (serversCount == 0) {
@@ -128,8 +126,8 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
             int page = start == 0 ? start : start / config.getLimit();
 
             PaginatedSearchRequest psr = new PaginatedSearchRequest(searchText,
-                                                                    config.getLimit(),
-                                                                    page);
+                    config.getLimit(),
+                    page);
 
             List<ServerCSWDTO> serverList = geoPlatformCSWClient.searchCSWServers(
                     psr, organization);
@@ -142,8 +140,8 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
         }
 
         return new BasePagingLoadResult<GPCSWServerBeanModel>(searchServers,
-                                                              config.getOffset(),
-                                                              serversCount);
+                config.getOffset(),
+                serversCount);
     }
 
     @Override
@@ -155,7 +153,7 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
         ServerCSWDTO serverCSW = null;
         try {
             serverCSW = geoPlatformCSWClient.saveServerCSW(alias, serverUrl,
-                                                           organization);
+                    organization);
         } catch (IllegalParameterFault ex) {
             logger.error(ex.getMessage());
             throw new GeoPlatformException(ex.getMessage());
@@ -215,8 +213,8 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
         }
 
         return new BasePagingLoadResult<SummaryRecord>(searchRecords,
-                                                       config.getOffset(),
-                                                       recordsCount);
+                config.getOffset(),
+                recordsCount);
     }
 
     @Override
@@ -261,13 +259,14 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
         }
 
         return new BasePagingLoadResult<FullRecord>(searchRecords,
-                                                    config.getOffset(),
-                                                    recordsCount);
+                config.getOffset(),
+                recordsCount);
     }
 
     @Override
-    public String getRecordById(Long serverID, String identifier, String moduleName,
-            HttpServletRequest httpServletRequest) throws Exception{
+    public String getRecordById(Long serverID, String identifier,
+            String moduleName,
+            HttpServletRequest httpServletRequest) throws Exception {
 
         try {
             String url = httpServletRequest.getSession().getServletContext()
@@ -275,7 +274,7 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
             logger.trace("PATH @@@@@@@@@@@@@@@@@@ {}", url);
 
             String response = geoPlatformCSWClient.getRecordById(serverID,
-                                                                 identifier);
+                    identifier);
             response = this.deAccent(response);
 
             String fileName = url + "/" + System.currentTimeMillis() + "-" + identifier + ".xml";
@@ -283,7 +282,7 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
             FileUtils.writeStringToFile(file, response);
 
             logger.debug("Name FILE Created  @@@@@@@@@@@@@@@@@@@@@@@@@@@ {}",
-                         file.getName());
+                    file.getName());
 
             return file.getName();
 
@@ -341,7 +340,7 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
 
     private FullRecord convertFullRecordDTO(FullRecordDTO fullRecordDTO) {
         FullRecord fullRecord = this.convertRecordDTO(new FullRecord(),
-                                                      fullRecordDTO);
+                fullRecordDTO);
 
         fullRecord.setBBox(this.convertBBoxDTO(fullRecordDTO.getBBox()));
         fullRecord.setCrs(fullRecordDTO.getCrs());
@@ -369,4 +368,5 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
         Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
         return pattern.matcher(nfdNormalizedString).replaceAll("'");
     }
+
 }

@@ -124,6 +124,8 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
     private ShapeAppender shapeAppender;
     @Autowired
     private Ds2dsConfiguration ds2dsConfiguration;
+    @Autowired
+    private SLDHandler sldHandler;
 
     public GPPublisherBasicServiceImpl(String RESTURL, String RESTUSER,
             String RESTPW,
@@ -632,8 +634,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
 
     public boolean styleIsValid(Object style) throws ResourceNotFoundFault {
         try {
-            SLDHandler sLDHandler = new SLDHandler();
-            List<Exception> exceptions = sLDHandler.validate(style, null, null);
+            List<Exception> exceptions = this.sldHandler.validate(style, null, null);
             if (GPSharedUtils.isNotEmpty(exceptions)) {
                 throw new ResourceNotFoundFault(exceptions.toString());
             }

@@ -222,7 +222,7 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
 
     /**
      *
-     * @param beans {@link ArrayList} of GeocodingBean to fill the Store
+     * @param beans {@link ArrayList} of GPLayerBean to fill the Store
      */
     public void fillStore(ArrayList<L> beans) {
         this.store.add(beans);

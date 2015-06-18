@@ -1,39 +1,37 @@
 /**
  *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
+ * geo-platform Rich webgis framework http://geo-platform.org
+ * ====================================================================
  *
- *   Copyright (C) 2008-2015 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2015 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version. This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details. You should have received a copy of the GNU General Public License
+ * along with this program. If not, see http://www.gnu.org/licenses/
  *
- *   ====================================================================
+ * ====================================================================
  *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
+ * Linking this library statically or dynamically with other modules is making a
+ * combined work based on this library. Thus, the terms and conditions of the
+ * GNU General Public License cover the whole combination.
  *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * As a special exception, the copyright holders of this library give you
+ * permission to link this library with independent modules to produce an
+ * executable, regardless of the license terms of these independent modules, and
+ * to copy and distribute the resulting executable under terms of your choice,
+ * provided that you also meet, for each linked independent module, the terms
+ * and conditions of the license of that module. An independent module is a
+ * module which is not derived from or based on this library. If you modify this
+ * library, you may extend this exception to your version of the library, but
+ * you are not obligated to do so. If you do not wish to do so, delete this
+ * exception statement from your version.
  */
-package org.geosdi.geoplatform.services;
+package org.geosdi.geoplatform.services.delegate;
 
 import com.google.common.collect.Lists;
 import com.googlecode.genericdao.search.Filter;
@@ -44,6 +42,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.Resource;
 import javax.xml.bind.JAXBElement;
 import org.geosdi.geoplatform.connector.CatalogGetCapabilitiesBean;
 import org.geosdi.geoplatform.connector.CatalogVersionException;
@@ -51,8 +50,9 @@ import org.geosdi.geoplatform.connector.GPCSWConnectorBuilder;
 import org.geosdi.geoplatform.connector.GPCatalogConnectorStore;
 import org.geosdi.geoplatform.connector.api.capabilities.model.csw.CatalogCapabilities;
 import org.geosdi.geoplatform.connector.proxy.CSWProxyConnectionConfiguration;
+import static org.geosdi.geoplatform.connector.schema.CSWOperationsWithOutputSchema.GET_RECORD_BY_ID;
+import org.geosdi.geoplatform.connector.schema.CSWOutputSchemaFinder;
 import org.geosdi.geoplatform.connector.security.SnipcCatalogBeanProvider;
-import org.geosdi.geoplatform.connector.server.request.CatalogGetCapabilitiesRequest;
 import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordByIdRequest;
 import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequest;
 import org.geosdi.geoplatform.connector.server.security.BasicPreemptiveSecurityConnector;
@@ -66,20 +66,20 @@ import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.exception.ServerInternalFault;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
-import org.geosdi.geoplatform.gui.responce.OnlineResourceProtocolType;
 import org.geosdi.geoplatform.gui.responce.URIDTO;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.FullRecordDTO;
 import org.geosdi.geoplatform.responce.ServerCSWDTO;
 import org.geosdi.geoplatform.responce.SummaryRecordDTO;
+import org.geosdi.geoplatform.services.BindingUtility;
+import org.geosdi.geoplatform.services.GeoPlatformCSWService;
 import org.geosdi.geoplatform.services.development.CSWEntityCorrectness;
 import org.geosdi.geoplatform.xml.csw.ConstraintLanguage;
 import org.geosdi.geoplatform.xml.csw.ConstraintLanguageVersion;
 import org.geosdi.geoplatform.xml.csw.OutputSchema;
 import org.geosdi.geoplatform.xml.csw.TypeName;
 import org.geosdi.geoplatform.xml.csw.v202.AbstractRecordType;
-import org.geosdi.geoplatform.xml.csw.v202.CapabilitiesType;
 import org.geosdi.geoplatform.xml.csw.v202.ElementSetType;
 import org.geosdi.geoplatform.xml.csw.v202.GetRecordByIdResponseType;
 import org.geosdi.geoplatform.xml.csw.v202.GetRecordsResponseType;
@@ -89,69 +89,42 @@ import org.geosdi.geoplatform.xml.csw.v202.SummaryRecordType;
 import org.geosdi.geoplatform.xml.csw.v202.dc.elements.SimpleLiteral;
 import org.geosdi.geoplatform.xml.csw.v202.dc.terms.URI;
 import org.geosdi.geoplatform.xml.ows.v100.BoundingBoxType;
-import org.geosdi.geoplatform.xml.ows.v100.DomainType;
-import org.geosdi.geoplatform.xml.ows.v100.Operation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email michele.santomauro@geosdi.org
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-class CSWServiceImpl {
+class CSWServiceDelegate implements CSWDelegate {
 
-    final private Logger logger = LoggerFactory.getLogger(CSWServiceImpl.class);
-    // DAO
+    private final static Logger logger = LoggerFactory.getLogger(CSWServiceDelegate.class);
+    //
+    @Resource(name = "gpCSWOutputSchemaFinder")
+    private CSWOutputSchemaFinder gpCSWOutputSchemaFinder;
+    @Autowired
     private GPServerDAO serverDao;
+    @Autowired
     private GPOrganizationDAO organizationDao;
     //
+    @Autowired
     private CatalogGetCapabilitiesBean catalogCapabilitiesBean;
+    @Autowired
     private SnipcCatalogBeanProvider snipcProvider;
+    @Autowired
     private CSWProxyConnectionConfiguration cswProxyConfiguration;
-
-    /**
-     * @param serverDao the serverDao to set
-     */
-    public void setServerDao(GPServerDAO serverDao) {
-        this.serverDao = serverDao;
-    }
-
-    /**
-     * @param organizationDao the organizationDao to set
-     */
-    public void setOrganizationDao(GPOrganizationDAO organizationDao) {
-        this.organizationDao = organizationDao;
-    }
-
-    /**
-     * @param catalogCapabilitiesBean the catalogCapabilitiesBean to set
-     */
-    public void setCatalogCapabilitiesBean(
-            CatalogGetCapabilitiesBean catalogCapabilitiesBean) {
-        this.catalogCapabilitiesBean = catalogCapabilitiesBean;
-    }
-
-    /**
-     * @param snipcProvider the snipcProvider to set
-     */
-    public void setSnipcProvider(SnipcCatalogBeanProvider snipcProvider) {
-        this.snipcProvider = snipcProvider;
-    }
-
-    /**
-     * @param cswProxyConfiguration the cswProxyConfiguration to set
-     */
-    public void setCswProxyConfiguration(
-            CSWProxyConnectionConfiguration cswProxyConfiguration) {
-        this.cswProxyConfiguration = cswProxyConfiguration;
-    }
 
     /**
      * @see
      * GeoPlatformCSWService#insertServerCSW(org.geosdi.geoplatform.core.model.GeoPlatformServer)
      */
-    Long insertServerCSW(GeoPlatformServer server) throws IllegalParameterFault {
+    @Override
+    public Long insertServerCSW(GeoPlatformServer server) throws IllegalParameterFault {
         CSWEntityCorrectness.checkCSWServer(server); // TODO assert
 
         /**
@@ -173,10 +146,9 @@ class CSWServiceImpl {
      * @see GeoPlatformCSWService#saveServerCSW(java.lang.String,
      * java.lang.String)
      */
-    ServerCSWDTO saveServerCSW(String alias,
-            String serverUrl,
-            String organization)
-            throws IllegalParameterFault {
+    @Override
+    public ServerCSWDTO saveServerCSW(String alias, String serverUrl,
+            String organization) throws IllegalParameterFault {
 
         serverUrl = this.deleteQueryStringFromURL(serverUrl);
         GeoPlatformServer server = serverDao.findByServerUrl(serverUrl);
@@ -225,7 +197,8 @@ class CSWServiceImpl {
     /**
      * @see GeoPlatformCSWService#deleteServerCSW(java.lang.Long)
      */
-    boolean deleteServerCSW(Long serverID) throws ResourceNotFoundFault {
+    @Override
+    public boolean deleteServerCSW(Long serverID) throws ResourceNotFoundFault {
         GeoPlatformServer server = serverDao.find(serverID);
         if (server == null) {
             throw new ResourceNotFoundFault("Server not found", serverID);
@@ -238,7 +211,8 @@ class CSWServiceImpl {
     /**
      * @see GeoPlatformCSWService#getAllCSWServers()
      */
-    List<ServerCSWDTO> getAllCSWServers(String organizationName) throws ResourceNotFoundFault {
+    @Override
+    public List<ServerCSWDTO> getAllCSWServers(String organizationName) throws ResourceNotFoundFault {
         GPOrganization organization = organizationDao.findByName(
                 organizationName);
 
@@ -255,7 +229,8 @@ class CSWServiceImpl {
     /**
      * @see GeoPlatformCSWService#getServerDetailCSW(java.lang.Long)
      */
-    GeoPlatformServer getServerDetailCSW(Long serverID)
+    @Override
+    public GeoPlatformServer getServerDetailCSW(Long serverID)
             throws ResourceNotFoundFault {
         GeoPlatformServer server = serverDao.find(serverID);
         if (server == null) {
@@ -269,7 +244,8 @@ class CSWServiceImpl {
     /**
      * @see GeoPlatformCSWService#getServerDetailCSWByUrl(java.lang.String)
      */
-    GeoPlatformServer getServerDetailCSWByUrl(String serverUrl)
+    @Override
+    public GeoPlatformServer getServerDetailCSWByUrl(String serverUrl)
             throws ResourceNotFoundFault {
         GeoPlatformServer server = serverDao.findByServerUrl(serverUrl);
         if (server == null) {
@@ -283,7 +259,8 @@ class CSWServiceImpl {
     /**
      * @see GeoPlatformCSWService#getShortServerCSW(java.lang.String)
      */
-    ServerCSWDTO getShortServerCSW(String serverUrl)
+    @Override
+    public ServerCSWDTO getShortServerCSW(String serverUrl)
             throws ResourceNotFoundFault {
         GeoPlatformServer server = serverDao.findByServerUrl(serverUrl);
         if (server == null) {
@@ -294,7 +271,8 @@ class CSWServiceImpl {
         return new ServerCSWDTO(server);
     }
 
-    int getCSWServersCount(SearchRequest request,
+    @Override
+    public int getCSWServersCount(SearchRequest request,
             String organization) {
         logger.trace("\n*** CSWServersCount: {} ***", request);
         Search searchCriteria = new Search(GeoPlatformServer.class);
@@ -311,7 +289,8 @@ class CSWServiceImpl {
         return serverDao.count(searchCriteria);
     }
 
-    List<ServerCSWDTO> searchCSWServers(PaginatedSearchRequest request,
+    @Override
+    public List<ServerCSWDTO> searchCSWServers(PaginatedSearchRequest request,
             String organization) {
         Search searchCriteria = new Search(GeoPlatformServer.class);
         searchCriteria.addFilterEqual("serverType", GPCapabilityType.CSW);
@@ -352,15 +331,16 @@ class CSWServiceImpl {
         return serverUrl;
     }
 
-    int getRecordsCount(CatalogFinderBean catalogFinder)
+    @Override
+    public int getRecordsCount(CatalogFinderBean catalogFinder)
             throws Exception {
         logger.trace("\n*** getRecordsCount ***\n{}", catalogFinder);
 
         GeoPlatformServer server = this.getCSWServerByID(
                 catalogFinder.getServerID());
 
-        CatalogGetRecordsRequest<GetRecordsResponseType> request =
-                this.createGetRecordsRequest(server.getServerUrl());
+        CatalogGetRecordsRequest<GetRecordsResponseType> request
+                = this.createGetRecordsRequest(server.getServerUrl());
 
         request.setTypeName(TypeName.RECORD_V202);
         request.setOutputSchema(OutputSchema.CSW_V202);
@@ -381,17 +361,16 @@ class CSWServiceImpl {
      *
      * TODO GMD list.
      */
-    List<SummaryRecordDTO> searchSummaryRecords(int num,
-            int start,
-            CatalogFinderBean catalogFinder)
-            throws Exception {
+    @Override
+    public List<SummaryRecordDTO> searchSummaryRecords(int num, int start,
+            CatalogFinderBean catalogFinder) throws Exception {
         logger.trace("\n*** searchSummaryRecords ***\n{}", catalogFinder);
 
         GeoPlatformServer server = this.getCSWServerByID(
                 catalogFinder.getServerID());
 
-        CatalogGetRecordsRequest<GetRecordsResponseType> request =
-                this.createGetRecordsRequest(server.getServerUrl());
+        CatalogGetRecordsRequest<GetRecordsResponseType> request
+                = this.createGetRecordsRequest(server.getServerUrl());
 
         request.setTypeName(TypeName.RECORD_V202);
         request.setOutputSchema(OutputSchema.CSW_V202);
@@ -422,8 +401,8 @@ class CSWServiceImpl {
                     + response.getSearchResults().getAbstractRecord().size());
         }
 
-        List<JAXBElement<? extends AbstractRecordType>> records =
-                response.getSearchResults().getAbstractRecord();
+        List<JAXBElement<? extends AbstractRecordType>> records
+                = response.getSearchResults().getAbstractRecord();
         logger.trace("\n*** Record list size: {} ***", records.size());
 
         List<SummaryRecordDTO> recordListDTO = new ArrayList<SummaryRecordDTO>(
@@ -444,8 +423,8 @@ class CSWServiceImpl {
      *
      * TODO GMD list.
      */
-    List<FullRecordDTO> searchFullRecords(int num,
-            int start,
+    @Override
+    public List<FullRecordDTO> searchFullRecords(int num, int start,
             CatalogFinderBean catalogFinder)
             throws Exception {
         logger.trace("\n*** searchFullRecords ***\n{}", catalogFinder);
@@ -453,8 +432,8 @@ class CSWServiceImpl {
         GeoPlatformServer server = this.getCSWServerByID(
                 catalogFinder.getServerID());
 
-        CatalogGetRecordsRequest<GetRecordsResponseType> request =
-                this.createGetRecordsRequest(server.getServerUrl());
+        CatalogGetRecordsRequest<GetRecordsResponseType> request
+                = this.createGetRecordsRequest(server.getServerUrl());
 
         request.setTypeName(TypeName.RECORD_V202);
         request.setOutputSchema(OutputSchema.CSW_V202);
@@ -485,8 +464,8 @@ class CSWServiceImpl {
                     + response.getSearchResults().getAbstractRecord().size());
         }
 
-        List<JAXBElement<? extends AbstractRecordType>> records =
-                response.getSearchResults().getAbstractRecord();
+        List<JAXBElement<? extends AbstractRecordType>> records
+                = response.getSearchResults().getAbstractRecord();
         logger.trace("\n*** Record list size: {} ***", records.size());
 
         List<FullRecordDTO> recordListDTO = Lists.<FullRecordDTO>newArrayListWithCapacity(
@@ -510,8 +489,7 @@ class CSWServiceImpl {
         return server;
     }
 
-    private SummaryRecordDTO convertSummaryRecords(
-            SummaryRecordType record,
+    private SummaryRecordDTO convertSummaryRecords(SummaryRecordType record,
             GeoPlatformServer server) {
 
         SummaryRecordDTO dto = new SummaryRecordDTO();
@@ -519,13 +497,13 @@ class CSWServiceImpl {
         dto.setCatalogURL(server.getServerUrl());
         dto.setIdentifier(
                 BindingUtility.convertJaxbLiteralListToString(
-                record.getIdentifier()));
+                        record.getIdentifier()));
         dto.setTitle(
                 BindingUtility.convertJaxbLiteralListToString(
-                record.getTitle()));
+                        record.getTitle()));
         dto.setAbstractText(
                 BindingUtility.convertLiteralListToString(
-                record.getAbstract()));
+                        record.getAbstract()));
         dto.setSubjects(
                 BindingUtility.convertLiteralListToList(record.getSubject()));
 
@@ -538,51 +516,50 @@ class CSWServiceImpl {
         FullRecordDTO dto = new FullRecordDTO();
         dto.setIdCatalog(server.getId());
         dto.setCatalogURL(server.getServerUrl());
+        logger.debug("\n\n############DCE_ELEMENTS_SIZE : {}\n\n",
+                record.getDCElement().size());
 
         for (JAXBElement<? extends SimpleLiteral> element : record.getDCElement()) {
             String localPartElement = element.getName().getLocalPart();
             List<String> contentElement = element.getValue().getContent();
 
+            logger.trace("\n\n###################LOCAL_PART_NAME : {} "
+                    + "- CONTENT_ELEMENT : {}\n\n", localPartElement,
+                    contentElement);
+
             if ("identifier".equals(localPartElement)) {
                 dto.setIdentifier(
                         BindingUtility.convertStringListToString(
-                        contentElement));
+                                contentElement));
             }
 
             if ("title".equals(localPartElement)) {
                 dto.setTitle(
                         BindingUtility.convertStringListToString(
-                        contentElement));
+                                contentElement));
             }
 
             if ("type".equals(localPartElement)) {
                 dto.setType(
                         BindingUtility.convertStringListToString(
-                        contentElement));
+                                contentElement));
             }
 
             if ("abstract".equals(localPartElement)) {
                 dto.setAbstractText(
                         BindingUtility.convertStringListToString(
-                        contentElement));
+                                contentElement));
             }
 
             if ("subject".equals(localPartElement)) {
                 dto.addSubject(
                         BindingUtility.convertStringListToString(
-                        contentElement));
+                                contentElement));
             }
 
             if ("URI".equals(localPartElement)) {
                 URI uri = (URI) element.getValue();
                 String protocol = uri.getProtocol();
-                /**
-                 * If the first element URI have a GetCapabilities protocol,
-                 * break the iteration.
-                 */
-                if (OnlineResourceProtocolType.isForGetCapabilities(protocol)) {
-                    break;
-                }
 
                 URIDTO uriDTO = new URIDTO();
                 uriDTO.setProtocol(protocol);
@@ -599,13 +576,11 @@ class CSWServiceImpl {
             dto.setCrs(BindingUtility.convertEncodedCRS(bBoxType.getCrs()));
         }
 
-
         return dto;
     }
 
     private CatalogGetRecordsRequest<GetRecordsResponseType> createGetRecordsRequest(
-            String serverUrl)
-            throws Exception {
+            String serverUrl) throws Exception {
 
         GPCatalogConnectorStore serverConnector = null;
         try {
@@ -627,8 +602,8 @@ class CSWServiceImpl {
             logger.error("### MalformedURLException: {}", ex.getMessage());
             throw new IllegalParameterFault("Malformed URL");
         }
-        CatalogGetRecordsRequest<GetRecordsResponseType> request =
-                serverConnector.createGetRecordsRequest();
+        CatalogGetRecordsRequest<GetRecordsResponseType> request
+                = serverConnector.createGetRecordsRequest();
 
         return request;
     }
@@ -648,8 +623,8 @@ class CSWServiceImpl {
         return response;
     }
 
-    public String getRecordById(Long serverID,
-            String identifier)
+    @Override
+    public String getRecordById(Long serverID, String identifier)
             throws Exception {
         logger.trace("\n*** GetRecordById ***\n");
 
@@ -658,11 +633,12 @@ class CSWServiceImpl {
         GPCatalogConnectorStore serverConnector = this.createServerConnector(
                 server.getServerUrl());
 
-        OutputSchema outputSchema = this.retrieveGetRecordByIdOutputSchema(
-                serverConnector);
+        OutputSchema outputSchema = this.gpCSWOutputSchemaFinder
+                .retrieveBestOutputSchemaForRequest(serverConnector,
+                        GET_RECORD_BY_ID.toString());
 
-        CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request =
-                serverConnector.createGetRecordByIdRequest();
+        CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request
+                = serverConnector.createGetRecordByIdRequest();
         request.setId(identifier);
         request.setElementSetType(ElementSetType.FULL.value());
         request.setOutputSchema(outputSchema);
@@ -698,82 +674,6 @@ class CSWServiceImpl {
         return serverConnector;
     }
 
-    /**
-     * Retrieve the best OutputSchema for GetRecordById request.
-     */
-    private OutputSchema retrieveGetRecordByIdOutputSchema(
-            GPCatalogConnectorStore serverConnector)
-            throws Exception {
-        List<String> schemas = this.retrieveGetRecordByIdOutputSchemas(
-                serverConnector);
-
-        OutputSchema outputSchema = null;
-        if (schemas.contains(OutputSchema.GMD.toString())) {
-            outputSchema = OutputSchema.GMD;
-        } else if (schemas.contains(OutputSchema.ORIGINAL.toString())) {
-            outputSchema = OutputSchema.ORIGINAL;
-        }
-
-        logger.debug("\n*** OutputSchema: {}", outputSchema);
-        return outputSchema;
-    }
-
-    /**
-     * Retrieve for a Catalog server the OutputSchema supported from
-     * GetRecordById operation. This information in present into GetCapabilities
-     * request.
-     */
-    private List<String> retrieveGetRecordByIdOutputSchemas(
-            GPCatalogConnectorStore serverConnector)
-            throws Exception {
-        List<String> schemas = null;
-        try {
-            CatalogGetCapabilitiesRequest<CapabilitiesType> request = serverConnector.createGetCapabilitiesRequest();
-
-            CapabilitiesType response = request.getResponse();
-
-            List<Operation> operationList = response.getOperationsMetadata().getOperation();
-            for (Operation operation : operationList) {
-
-                if ("GetRecordById".equals(operation.getName())) {
-                    List<DomainType> parameterList = operation.getParameter();
-                    schemas = new ArrayList<String>(parameterList.size());
-                    for (DomainType parameter : parameterList) {
-                        if ("outputSchema".equals(parameter.getName())) {
-                            for (String outputSchemaValue : parameter.getValue()) {
-                                logger.trace("\n*** outputSchema available: {}",
-                                        outputSchemaValue);
-                                schemas.add(outputSchemaValue.trim());
-                            }
-                            break;
-                        }
-                    }
-                    break;
-                }
-            }
-        } catch (IOException ex) {
-            logger.error("### IOException: {}", ex.getMessage());
-            throw new IllegalParameterFault("Error on parse response stream");
-        }
-
-        return schemas;
-    }
-//
-//    private GetRecordByIdResponseType createGetRecordByIdResponse(
-//            CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request)
-//            throws IllegalParameterFault, ServerInternalFault {
-//
-//        GetRecordByIdResponseType response = null;
-//        try {
-//            response = request.getResponse();
-//        } catch (IOException ex) {
-//            logger.error("### IOException: " + ex.getMessage());
-//            throw new IllegalParameterFault("Error on parse response stream");
-//        }
-//
-//        return response;
-//    }
-
     private String createGetRecordByIdResponseAsString(
             CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request)
             throws Exception {
@@ -804,4 +704,5 @@ class CSWServiceImpl {
 
         return responseXSL;
     }
+
 }

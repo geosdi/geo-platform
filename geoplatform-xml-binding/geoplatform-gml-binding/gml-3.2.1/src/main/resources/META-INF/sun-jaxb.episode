@@ -7,1064 +7,1064 @@ See <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a>
 Any modifications to this file will be lost upon recompilation of the source schema. 
 Generated on: 2012.04.18 at 11:58:17 AM CEST 
 
-  -->
-  <bindings scd="x-schema::tns" xmlns:tns="http://www.opengis.net/gml/3.2">
-    <schemaBindings map="false">
-      <package name="org.geosdi.geoplatform.xml.gml.v321"/>
-    </schemaBindings>
-    <bindings scd="~tns:AbstractGriddedSurfaceType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractGriddedSurfaceType"/>
+    -->
+    <bindings scd="x-schema::tns" xmlns:tns="http://www.opengis.net/gml/3.2">
+        <schemaBindings map="false">
+            <package name="org.geosdi.geoplatform.xml.gml.v321"/>
+        </schemaBindings>
+        <bindings scd="~tns:AbstractGriddedSurfaceType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractGriddedSurfaceType"/>
+        </bindings>
+        <bindings scd="~tns:TinType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.TinType"/>
+        </bindings>
+        <bindings scd="~tns:ClothoidType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.ClothoidType"/>
+        </bindings>
+        <bindings scd="~tns:ProcedurePropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.ProcedurePropertyType"/>
+        </bindings>
+        <bindings scd="~tns:OperationParameterType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.OperationParameterType"/>
+        </bindings>
+        <bindings scd="~tns:AbstractGeneralOperationParameterType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractGeneralOperationParameterType"/>
+        </bindings>
+        <bindings scd="~tns:DefinitionType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.DefinitionType"/>
+        </bindings>
+        <bindings scd="~tns:AbstractGMLType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractGMLType"/>
+        </bindings>
+        <bindings scd="~tns:ArcType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.ArcType"/>
+        </bindings>
+        <bindings scd="~tns:ArcStringType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.ArcStringType"/>
+        </bindings>
+        <bindings scd="~tns:AbstractCurveSegmentType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractCurveSegmentType"/>
+        </bindings>
+        <bindings scd="~tns:VerticalDatumPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.VerticalDatumPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:DynamicFeatureMemberType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.DynamicFeatureMemberType"/>
+        </bindings>
+        <bindings scd="~tns:AbstractCoverageType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractCoverageType"/>
+        </bindings>
+        <bindings scd="~tns:AbstractFeatureType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractFeatureType"/>
+        </bindings>
+        <bindings scd="~tns:GeodeticCRSType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.GeodeticCRSType"/>
+        </bindings>
+        <bindings scd="~tns:AbstractCRSType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractCRSType"/>
+        </bindings>
+        <bindings scd="~tns:AbstractGeometryType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractGeometryType"/>
+        </bindings>
+        <bindings scd="~tns:SurfaceType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.SurfaceType"/>
+        </bindings>
+        <bindings scd="~tns:AbstractSurfaceType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractSurfaceType"/>
+        </bindings>
+        <bindings scd="~tns:AbstractGeometricPrimitiveType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractGeometricPrimitiveType"/>
+        </bindings>
+        <bindings scd="~tns:AssociationRoleType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.AssociationRoleType"/>
+        </bindings>
+        <bindings scd="~tns:ShellType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.ShellType"/>
+        </bindings>
+        <bindings scd="~tns:AbstractTimeComplexType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractTimeComplexType"/>
+        </bindings>
+        <bindings scd="~tns:AbstractTimeObjectType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractTimeObjectType"/>
+        </bindings>
+        <bindings scd="~tns:PointType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.PointType"/>
+        </bindings>
+        <bindings scd="~tns:AbstractGeneralOperationParameterPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractGeneralOperationParameterPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:ValuePropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.ValuePropertyType"/>
+        </bindings>
+        <bindings scd="~tns:ConversionToPreferredUnitType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.ConversionToPreferredUnitType"/>
+        </bindings>
+        <bindings scd="~tns:InlinePropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.InlinePropertyType"/>
+        </bindings>
+        <bindings scd="~tns:ConversionPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.ConversionPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:EdgeType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.EdgeType"/>
+        </bindings>
+        <bindings scd="~tns:AbstractTopoPrimitiveType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractTopoPrimitiveType"/>
+        </bindings>
+        <bindings scd="~tns:AbstractTopologyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractTopologyType"/>
+        </bindings>
+        <bindings scd="tns:formulaCitation">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.FormulaCitationElement"/>
+        </bindings>
+        <bindings scd="~tns:AbstractGeneralParameterValueType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractGeneralParameterValueType"/>
+        </bindings>
+        <bindings scd="~tns:PolarCSPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.PolarCSPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:GeographicCRSType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.GeographicCRSType"/>
+        </bindings>
+        <bindings scd="~tns:NodeType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.NodeType"/>
+        </bindings>
+        <bindings scd="~tns:PassThroughOperationType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.PassThroughOperationType"/>
+        </bindings>
+        <bindings scd="~tns:AbstractCoordinateOperationType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractCoordinateOperationType"/>
+        </bindings>
+        <bindings scd="~tns:TimeCSType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.TimeCSType"/>
+        </bindings>
+        <bindings scd="~tns:AbstractCoordinateSystemType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractCoordinateSystemType"/>
+        </bindings>
+        <bindings scd="~tns:VerticalDatumType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.VerticalDatumType"/>
+        </bindings>
+        <bindings scd="~tns:AbstractDatumType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractDatumType"/>
+        </bindings>
+        <bindings scd="~tns:EllipsoidPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.EllipsoidPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:DatumPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.DatumPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:PointPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.PointPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:RingType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.RingType"/>
+        </bindings>
+        <bindings scd="~tns:AbstractRingType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractRingType"/>
+        </bindings>
+        <bindings scd="~tns:TopoVolumePropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.TopoVolumePropertyType"/>
+        </bindings>
+        <bindings scd="~tns:DirectedEdgePropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.DirectedEdgePropertyType"/>
+        </bindings>
+        <bindings scd="tns:coordinateOperationAccuracy">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.CoordinateOperationAccuracyElement"/>
+        </bindings>
+        <bindings scd="~tns:CoordinateSystemAxisType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.CoordinateSystemAxisType"/>
+        </bindings>
+        <bindings scd="~tns:CodeWithAuthorityType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.CodeWithAuthorityType"/>
+        </bindings>
+        <bindings scd="~tns:DerivedUnitType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.DerivedUnitType"/>
+        </bindings>
+        <bindings scd="~tns:UnitDefinitionType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.UnitDefinitionType"/>
+        </bindings>
+        <bindings scd="~tns:DMSAngleType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.DMSAngleType"/>
+        </bindings>
+        <bindings scd="~tns:SurfacePropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.SurfacePropertyType"/>
+        </bindings>
+        <bindings scd="~tns:CodeType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.CodeType"/>
+        </bindings>
+        <bindings scd="~tns:OrientableSurfaceType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.OrientableSurfaceType"/>
+        </bindings>
+        <bindings scd="~tns:CoordinateOperationPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.CoordinateOperationPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:MultiSurfacePropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.MultiSurfacePropertyType"/>
+        </bindings>
+        <bindings scd="~tns:SolidPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.SolidPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:GeodesicType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.GeodesicType"/>
+        </bindings>
+        <bindings scd="~tns:GeodesicStringType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.GeodesicStringType"/>
+        </bindings>
+        <bindings scd="~tns:HistoryPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.HistoryPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:PolygonType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.PolygonType"/>
+        </bindings>
+        <bindings scd="~tns:RectangleType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.RectangleType"/>
+        </bindings>
+        <bindings scd="~tns:AbstractSurfacePatchType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractSurfacePatchType"/>
+        </bindings>
+        <bindings scd="~tns:DerivationUnitTermType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.DerivationUnitTermType"/>
+        </bindings>
+        <bindings scd="~tns:ObliqueCartesianCSType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.ObliqueCartesianCSType"/>
+        </bindings>
+        <bindings scd="~tns:CompositeSurfaceType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.CompositeSurfaceType"/>
+        </bindings>
+        <bindings scd="~tns:OperationPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.OperationPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:QuantityExtentType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.QuantityExtentType"/>
+        </bindings>
+        <bindings scd="~tns:LineStringSegmentType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.LineStringSegmentType"/>
+        </bindings>
+        <bindings scd="~tns:ConventionalUnitType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.ConventionalUnitType"/>
+        </bindings>
+        <bindings scd="~tns:SurfaceArrayPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.SurfaceArrayPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:VerticalCSType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.VerticalCSType"/>
+        </bindings>
+        <bindings scd="~tns:GeometricComplexType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.GeometricComplexType"/>
+        </bindings>
+        <bindings scd="~tns:StringOrRefType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.StringOrRefType"/>
+        </bindings>
+        <bindings scd="~tns:VerticalCSPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.VerticalCSPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:SingleCRSPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.SingleCRSPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:SolidArrayPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.SolidArrayPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:CurvePropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.CurvePropertyType"/>
+        </bindings>
+        <bindings scd="~tns:CircleType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.CircleType"/>
+        </bindings>
+        <bindings scd="~tns:PrimeMeridianType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.PrimeMeridianType"/>
+        </bindings>
+        <bindings scd="~tns:DiscreteCoverageType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.DiscreteCoverageType"/>
+        </bindings>
+        <bindings scd="~tns:CoverageFunctionType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.CoverageFunctionType"/>
+        </bindings>
+        <bindings scd="~tns:TopoComplexPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.TopoComplexPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:PassThroughOperationPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.PassThroughOperationPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:CoordinateSystemAxisPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.CoordinateSystemAxisPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:TimePrimitivePropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.TimePrimitivePropertyType"/>
+        </bindings>
+        <bindings scd="~tns:MeasureType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.MeasureType"/>
+        </bindings>
+        <bindings scd="~tns:TemporalCRSType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.TemporalCRSType"/>
+        </bindings>
+        <bindings scd="~tns:CategoryExtentType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.CategoryExtentType"/>
+        </bindings>
+        <bindings scd="~tns:DomainSetType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.DomainSetType"/>
+        </bindings>
+        <bindings scd="~tns:RangeSetType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.RangeSetType"/>
+        </bindings>
+        <bindings scd="~tns:ArrayAssociationType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.ArrayAssociationType"/>
+        </bindings>
+        <bindings scd="~tns:CylindricalCSPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.CylindricalCSPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:AffineCSPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.AffineCSPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:PolygonPatchType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.PolygonPatchType"/>
+        </bindings>
+        <bindings scd="~tns:AbstractSolidType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractSolidType"/>
+        </bindings>
+        <bindings scd="~tns:AffinePlacementType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.AffinePlacementType"/>
+        </bindings>
+        <bindings scd="~tns:EllipsoidalCSPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.EllipsoidalCSPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:MeasureOrNilReasonListType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.MeasureOrNilReasonListType"/>
+        </bindings>
+        <bindings scd="~tns:ParameterValueType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.ParameterValueType"/>
+        </bindings>
+        <bindings scd="~tns:TemporalDatumPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.TemporalDatumPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:ConcatenatedOperationPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.ConcatenatedOperationPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:SurfacePatchArrayPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.SurfacePatchArrayPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:TransformationType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.TransformationType"/>
+        </bindings>
+        <bindings scd="~tns:AbstractGeneralTransformationType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractGeneralTransformationType"/>
+        </bindings>
+        <bindings scd="~tns:TimeClockType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.TimeClockType"/>
+        </bindings>
+        <bindings scd="~tns:TimeReferenceSystemType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.TimeReferenceSystemType"/>
+        </bindings>
+        <bindings scd="~tns:FeaturePropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.FeaturePropertyType"/>
+        </bindings>
+        <bindings scd="~tns:LinearCSType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.LinearCSType"/>
+        </bindings>
+        <bindings scd="~tns:MultiPointPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.MultiPointPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:TriangleType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.TriangleType"/>
+        </bindings>
+        <bindings scd="~tns:TopoSolidType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.TopoSolidType"/>
+        </bindings>
+        <bindings scd="~tns:GeocentricCRSPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.GeocentricCRSPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:SphericalCSType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.SphericalCSType"/>
+        </bindings>
+        <bindings scd="~tns:DictionaryEntryType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.DictionaryEntryType"/>
+        </bindings>
+        <bindings scd="~tns:ImageCRSType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.ImageCRSType"/>
+        </bindings>
+        <bindings scd="~tns:CoordinateSystemPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.CoordinateSystemPropertyType"/>
+        </bindings>
+        <bindings scd="tns:secondDefiningParameter">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.SecondDefiningParameterElement"/>
+        </bindings>
+        <bindings scd="tns:SecondDefiningParameter">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.SecondDefiningParameterUpperCase"/>
+        </bindings>
+        <bindings scd="~tns:GeometryArrayPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.GeometryArrayPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:LinearCSPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.LinearCSPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:DirectedObservationAtDistanceType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.DirectedObservationAtDistanceType"/>
+        </bindings>
+        <bindings scd="~tns:DirectedObservationType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.DirectedObservationType"/>
+        </bindings>
+        <bindings scd="~tns:ObservationType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.ObservationType"/>
+        </bindings>
+        <bindings scd="~tns:IndirectEntryType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.IndirectEntryType"/>
+        </bindings>
+        <bindings scd="~tns:BezierType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.BezierType"/>
+        </bindings>
+        <bindings scd="~tns:BSplineType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.BSplineType"/>
+        </bindings>
+        <bindings scd="~tns:OperationParameterPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.OperationParameterPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:CurveSegmentArrayPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.CurveSegmentArrayPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:TargetPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.TargetPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:SingleOperationPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.SingleOperationPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:AbstractTimeGeometricPrimitiveType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractTimeGeometricPrimitiveType"/>
+        </bindings>
+        <bindings scd="~tns:AbstractTimePrimitiveType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractTimePrimitiveType"/>
+        </bindings>
+        <bindings scd="~tns:CylinderType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.CylinderType"/>
+        </bindings>
+        <bindings scd="~tns:AbstractParametricCurveSurfaceType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractParametricCurveSurfaceType"/>
+        </bindings>
+        <bindings scd="~tns:VerticalCRSType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.VerticalCRSType"/>
+        </bindings>
+        <bindings scd="~tns:GridType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.GridType"/>
+        </bindings>
+        <bindings scd="~tns:TimeInstantType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.TimeInstantType"/>
+        </bindings>
+        <bindings scd="~tns:AbstractGeometricAggregateType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractGeometricAggregateType"/>
+        </bindings>
+        <bindings scd="~tns:ValueArrayPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.ValueArrayPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:OperationMethodPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.OperationMethodPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:CartesianCSPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.CartesianCSPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:AbstractRingPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractRingPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:FeatureCollectionType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.FeatureCollectionType"/>
+        </bindings>
+        <bindings scd="~tns:LocationPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.LocationPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:TemporalCSPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.TemporalCSPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:SphericalCSPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.SphericalCSPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:ObliqueCartesianCSPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.ObliqueCartesianCSPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:TimeCalendarType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.TimeCalendarType"/>
+        </bindings>
+        <bindings scd="~tns:RectifiedGridType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.RectifiedGridType"/>
+        </bindings>
+        <bindings scd="~tns:MultiGeometryPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.MultiGeometryPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:CoordinatesType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.CoordinatesType"/>
+        </bindings>
+        <bindings scd="~tns:MeasureListType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.MeasureListType"/>
+        </bindings>
+        <bindings scd="~tns:PrimeMeridianPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.PrimeMeridianPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:CRSPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.CRSPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:TopoPointPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.TopoPointPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:ConversionType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.ConversionType"/>
+        </bindings>
+        <bindings scd="~tns:AbstractGeneralConversionType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractGeneralConversionType"/>
+        </bindings>
+        <bindings scd="~tns:BagType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.BagType"/>
+        </bindings>
+        <bindings scd="~tns:TimeCalendarEraType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.TimeCalendarEraType"/>
+        </bindings>
+        <bindings scd="~tns:OffsetCurveType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.OffsetCurveType"/>
+        </bindings>
+        <bindings scd="~tns:GeographicCRSPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.GeographicCRSPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:PointArrayPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.PointArrayPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:AbstractFeatureCollectionType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractFeatureCollectionType"/>
+        </bindings>
+        <bindings scd="~tns:EngineeringDatumPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.EngineeringDatumPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:MultiCurveType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.MultiCurveType"/>
+        </bindings>
+        <bindings scd="~tns:EngineeringCRSType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.EngineeringCRSType"/>
+        </bindings>
+        <bindings scd="~tns:PriorityLocationPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.PriorityLocationPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:DirectedFacePropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.DirectedFacePropertyType"/>
+        </bindings>
+        <bindings scd="~tns:AbstractContinuousCoverageType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractContinuousCoverageType"/>
+        </bindings>
+        <bindings scd="~tns:GridFunctionType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.GridFunctionType"/>
+        </bindings>
+        <bindings scd="~tns:EllipsoidalCSType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.EllipsoidalCSType"/>
+        </bindings>
+        <bindings scd="~tns:CurveArrayPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.CurveArrayPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:GeocentricCRSType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.GeocentricCRSType"/>
+        </bindings>
+        <bindings scd="~tns:CartesianCSType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.CartesianCSType"/>
+        </bindings>
+        <bindings scd="~tns:ArrayType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.ArrayType"/>
+        </bindings>
+        <bindings scd="~tns:DirectPositionType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.DirectPositionType"/>
+        </bindings>
+        <bindings scd="~tns:AbstractTimeTopologyPrimitiveType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractTimeTopologyPrimitiveType"/>
+        </bindings>
+        <bindings scd="~tns:AbstractGeneralParameterValuePropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractGeneralParameterValuePropertyType"/>
+        </bindings>
+        <bindings scd="~tns:GenericMetaDataType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.GenericMetaDataType"/>
+        </bindings>
+        <bindings scd="~tns:AbstractMetaDataType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractMetaDataType"/>
+        </bindings>
+        <bindings scd="~tns:CodeOrNilReasonListType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.CodeOrNilReasonListType"/>
+        </bindings>
+        <bindings scd="~tns:TimePeriodType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.TimePeriodType"/>
+        </bindings>
+        <bindings scd="~tns:AbstractCurveType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractCurveType"/>
+        </bindings>
+        <bindings scd="~tns:ProjectedCRSPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.ProjectedCRSPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:TimeNodeType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.TimeNodeType"/>
+        </bindings>
+        <bindings scd="~tns:CurveType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.CurveType"/>
+        </bindings>
+        <bindings scd="~tns:MultiCurvePropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.MultiCurvePropertyType"/>
+        </bindings>
+        <bindings scd="~tns:VerticalCRSPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.VerticalCRSPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:TopoCurveType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.TopoCurveType"/>
+        </bindings>
+        <bindings scd="~tns:GeometryPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.GeometryPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:TimeCoordinateSystemType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.TimeCoordinateSystemType"/>
+        </bindings>
+        <bindings scd="~tns:GeneralConversionPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.GeneralConversionPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:DerivedCRSType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.DerivedCRSType"/>
+        </bindings>
+        <bindings scd="~tns:AbstractGeneralDerivedCRSType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractGeneralDerivedCRSType"/>
+        </bindings>
+        <bindings scd="~tns:AngleType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.AngleType"/>
+        </bindings>
+        <bindings scd="~tns:AbstractTimeSliceType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractTimeSliceType"/>
+        </bindings>
+        <bindings scd="~tns:ResultType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.ResultType"/>
+        </bindings>
+        <bindings scd="~tns:CubicSplineType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.CubicSplineType"/>
+        </bindings>
+        <bindings scd="~tns:TemporalCRSPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.TemporalCRSPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:TopoPrimitiveArrayAssociationType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.TopoPrimitiveArrayAssociationType"/>
+        </bindings>
+        <bindings scd="~tns:ProjectedCRSType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.ProjectedCRSType"/>
+        </bindings>
+        <bindings scd="~tns:MultiSurfaceType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.MultiSurfaceType"/>
+        </bindings>
+        <bindings scd="~tns:TimeOrdinalEraType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.TimeOrdinalEraType"/>
+        </bindings>
+        <bindings scd="~tns:DefinitionProxyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.DefinitionProxyType"/>
+        </bindings>
+        <bindings scd="~tns:EngineeringCRSPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.EngineeringCRSPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:FaceType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.FaceType"/>
+        </bindings>
+        <bindings scd="~tns:TopoCurvePropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.TopoCurvePropertyType"/>
+        </bindings>
+        <bindings scd="~tns:MultiSolidPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.MultiSolidPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:LinearRingType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.LinearRingType"/>
+        </bindings>
+        <bindings scd="~tns:DictionaryType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.DictionaryType"/>
+        </bindings>
+        <bindings scd="~tns:CylindricalCSType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.CylindricalCSType"/>
+        </bindings>
+        <bindings scd="~tns:UnitOfMeasureType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.UnitOfMeasureType"/>
+        </bindings>
+        <bindings scd="~tns:TimeCSPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.TimeCSPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:ParameterValueGroupType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.ParameterValueGroupType"/>
+        </bindings>
+        <bindings scd="~tns:ReferenceType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.ReferenceType"/>
+        </bindings>
+        <bindings scd="~tns:DynamicFeatureCollectionType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.DynamicFeatureCollectionType"/>
+        </bindings>
+        <bindings scd="~tns:DynamicFeatureType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.DynamicFeatureType"/>
+        </bindings>
+        <bindings scd="~tns:SolidType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.SolidType"/>
+        </bindings>
+        <bindings scd="~tns:OrientableCurveType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.OrientableCurveType"/>
+        </bindings>
+        <bindings scd="~tns:TopoComplexType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.TopoComplexType"/>
+        </bindings>
+        <bindings scd="~tns:MultiGeometryType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.MultiGeometryType"/>
+        </bindings>
+        <bindings scd="~tns:MappingRuleType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.MappingRuleType"/>
+        </bindings>
+        <bindings scd="~tns:DirectPositionListType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.DirectPositionListType"/>
+        </bindings>
+        <bindings scd="~tns:MetaDataPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.MetaDataPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:TimeIntervalLengthType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.TimeIntervalLengthType"/>
+        </bindings>
+        <bindings scd="~tns:TimeTopologyComplexType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.TimeTopologyComplexType"/>
+        </bindings>
+        <bindings scd="~tns:ArcByCenterPointType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.ArcByCenterPointType"/>
+        </bindings>
+        <bindings scd="~tns:UserDefinedCSPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.UserDefinedCSPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:MultiSolidType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.MultiSolidType"/>
+        </bindings>
+        <bindings scd="~tns:EngineeringDatumType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.EngineeringDatumType"/>
+        </bindings>
+        <bindings scd="tns:domainOfValidity">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.DomainOfValidityElement"/>
+        </bindings>
+        <bindings scd="~tns:TimePositionType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.TimePositionType"/>
+        </bindings>
+        <bindings scd="~tns:CompositeValueType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.CompositeValueType"/>
+        </bindings>
+        <bindings scd="~tns:ImageDatumType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.ImageDatumType"/>
+        </bindings>
+        <bindings scd="~tns:TopoSurfaceType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.TopoSurfaceType"/>
+        </bindings>
+        <bindings scd="~tns:ImageDatumPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.ImageDatumPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:ConeType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.ConeType"/>
+        </bindings>
+        <bindings scd="~tns:AffineCSType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.AffineCSType"/>
+        </bindings>
+        <bindings scd="~tns:MovingObjectStatusType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.MovingObjectStatusType"/>
+        </bindings>
+        <bindings scd="~tns:EllipsoidType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.EllipsoidType"/>
+        </bindings>
+        <bindings scd="~tns:ArcStringByBulgeType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.ArcStringByBulgeType"/>
+        </bindings>
+        <bindings scd="~tns:TransformationPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.TransformationPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:TemporalDatumType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.TemporalDatumType"/>
+        </bindings>
+        <bindings scd="~tns:TimeEdgeType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.TimeEdgeType"/>
+        </bindings>
+        <bindings scd="~tns:DirectedTopoSolidPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.DirectedTopoSolidPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:TemporalCSType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.TemporalCSType"/>
+        </bindings>
+        <bindings scd="~tns:ValueArrayType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.ValueArrayType"/>
+        </bindings>
+        <bindings scd="~tns:UserDefinedCSType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.UserDefinedCSType"/>
+        </bindings>
+        <bindings scd="~tns:GeodeticDatumPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.GeodeticDatumPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:GeneralTransformationPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.GeneralTransformationPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:GeodeticCRSPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.GeodeticCRSPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:CompositeSolidType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.CompositeSolidType"/>
+        </bindings>
+        <bindings scd="~tns:EnvelopeType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.EnvelopeType"/>
+        </bindings>
+        <bindings scd="~tns:LineStringType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.LineStringType"/>
+        </bindings>
+        <bindings scd="~tns:TimeOrdinalReferenceSystemType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.TimeOrdinalReferenceSystemType"/>
+        </bindings>
+        <bindings scd="~tns:TopoSurfacePropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.TopoSurfacePropertyType"/>
+        </bindings>
+        <bindings scd="~tns:BaseUnitType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.BaseUnitType"/>
+        </bindings>
+        <bindings scd="~tns:FeatureArrayPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.FeatureArrayPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:DerivedCRSPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.DerivedCRSPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:ConcatenatedOperationType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.ConcatenatedOperationType"/>
+        </bindings>
+        <bindings scd="~tns:CircleByCenterPointType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.CircleByCenterPointType"/>
+        </bindings>
+        <bindings scd="~tns:SphereType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.SphereType"/>
+        </bindings>
+        <bindings scd="~tns:TopoPointType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.TopoPointType"/>
+        </bindings>
+        <bindings scd="~tns:GeodeticDatumType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.GeodeticDatumType"/>
+        </bindings>
+        <bindings scd="~tns:OperationParameterGroupType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.OperationParameterGroupType"/>
+        </bindings>
+        <bindings scd="~tns:BoundingShapeType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.BoundingShapeType"/>
+        </bindings>
+        <bindings scd="~tns:CompositeCurveType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.CompositeCurveType"/>
+        </bindings>
+        <bindings scd="~tns:OperationMethodType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.OperationMethodType"/>
+        </bindings>
+        <bindings scd="~tns:DirectionPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.DirectionPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:VectorType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.VectorType"/>
+        </bindings>
+        <bindings scd="~tns:CompoundCRSType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.CompoundCRSType"/>
+        </bindings>
+        <bindings scd="~tns:DirectedNodePropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.DirectedNodePropertyType"/>
+        </bindings>
+        <bindings scd="~tns:TopoPrimitiveMemberType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.TopoPrimitiveMemberType"/>
+        </bindings>
+        <bindings scd="~tns:MultiPointType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.MultiPointType"/>
+        </bindings>
+        <bindings scd="~tns:DataBlockType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.DataBlockType"/>
+        </bindings>
+        <bindings scd="~tns:FileType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.FileType"/>
+        </bindings>
+        <bindings scd="~tns:ImageCRSPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.ImageCRSPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:DegreesType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.DegreesType"/>
+        </bindings>
+        <bindings scd="~tns:EnvelopeWithTimePeriodType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.EnvelopeWithTimePeriodType"/>
+        </bindings>
+        <bindings scd="~tns:PolarCSType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.PolarCSType"/>
+        </bindings>
+        <bindings scd="~tns:TopoVolumeType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.TopoVolumeType"/>
+        </bindings>
+        <bindings scd="~tns:ArcByBulgeType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.ArcByBulgeType"/>
+        </bindings>
+        <bindings scd="~tns:OperationParameterGroupPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.OperationParameterGroupPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:CompoundCRSPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.CompoundCRSPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:BooleanPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.BooleanPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:AngleChoiceType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.AngleChoiceType"/>
+        </bindings>
+        <bindings scd="~tns:TimeTopologyPrimitivePropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.TimeTopologyPrimitivePropertyType"/>
+        </bindings>
+        <bindings scd="~tns:GeometricPrimitivePropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.GeometricPrimitivePropertyType"/>
+        </bindings>
+        <bindings scd="~tns:TimeCalendarEraPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.TimeCalendarEraPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:TopoSolidPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.TopoSolidPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:NodePropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.NodePropertyType"/>
+        </bindings>
+        <bindings scd="~tns:NodeOrEdgePropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.NodeOrEdgePropertyType"/>
+        </bindings>
+        <bindings scd="~tns:GridLimitsType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.GridLimitsType"/>
+        </bindings>
+        <bindings scd="~tns:VolumeType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.VolumeType"/>
+        </bindings>
+        <bindings scd="~tns:RingPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.RingPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:GridLengthType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.GridLengthType"/>
+        </bindings>
+        <bindings scd="~tns:KnotType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.KnotType"/>
+        </bindings>
+        <bindings scd="~tns:TimeEdgePropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.TimeEdgePropertyType"/>
+        </bindings>
+        <bindings scd="~tns:CountPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.CountPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:CodeListType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.CodeListType"/>
+        </bindings>
+        <bindings scd="~tns:AbstractMemberType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractMemberType"/>
+        </bindings>
+        <bindings scd="~tns:ShellPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.ShellPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:LengthType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.LengthType"/>
+        </bindings>
+        <bindings scd="~tns:QuantityPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.QuantityPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:TimeInstantPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.TimeInstantPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:TemporalDatumBaseType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.TemporalDatumBaseType"/>
+        </bindings>
+        <bindings scd="~tns:AbstractMetadataPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractMetadataPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:FormulaType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.FormulaType"/>
+        </bindings>
+        <bindings scd="~tns:SpeedType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.SpeedType"/>
+        </bindings>
+        <bindings scd="~tns:ScaleType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.ScaleType"/>
+        </bindings>
+        <bindings scd="~tns:BoundedFeatureType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.BoundedFeatureType"/>
+        </bindings>
+        <bindings scd="~tns:DefinitionBaseType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.DefinitionBaseType"/>
+        </bindings>
+        <bindings scd="~tns:LineStringSegmentArrayPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.LineStringSegmentArrayPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:TimeNodePropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.TimeNodePropertyType"/>
+        </bindings>
+        <bindings scd="~tns:TimeCalendarPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.TimeCalendarPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:IdentifiedObjectType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.IdentifiedObjectType"/>
+        </bindings>
+        <bindings scd="~tns:TimePeriodPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.TimePeriodPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:FaceOrTopoSolidPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.FaceOrTopoSolidPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:CategoryPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.CategoryPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:DirectionVectorType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.DirectionVectorType"/>
+        </bindings>
+        <bindings scd="~tns:DirectionDescriptionType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.DirectionDescriptionType"/>
+        </bindings>
+        <bindings scd="~tns:TimeClockPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.TimeClockPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:GridEnvelopeType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.GridEnvelopeType"/>
+        </bindings>
+        <bindings scd="~tns:LinearRingPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.LinearRingPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:GeometricComplexPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.GeometricComplexPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:TimeOrdinalEraPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.TimeOrdinalEraPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:AbstractFeatureMemberType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractFeatureMemberType"/>
+        </bindings>
+        <bindings scd="~tns:AreaType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.AreaType"/>
+        </bindings>
+        <bindings scd="~tns:KnotPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.KnotPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:SequenceRuleType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.SequenceRuleType"/>
+        </bindings>
+        <bindings scd="~tns:TimeTopologyComplexPropertyType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.TimeTopologyComplexPropertyType"/>
+        </bindings>
+        <bindings scd="~tns:RelatedTimeType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.RelatedTimeType"/>
+        </bindings>
+        <bindings scd="~tns:TimeType">
+            <class ref="org.geosdi.geoplatform.xml.gml.v321.TimeType"/>
+        </bindings>
+        <bindings scd="~tns:TimeIndeterminateValueType">
+            <typesafeEnumClass ref="org.geosdi.geoplatform.xml.gml.v321.TimeIndeterminateValueType"/>
+        </bindings>
+        <bindings scd="~tns:SignType">
+            <typesafeEnumClass ref="org.geosdi.geoplatform.xml.gml.v321.SignType"/>
+        </bindings>
+        <bindings scd="~tns:SequenceRuleEnumeration">
+            <typesafeEnumClass ref="org.geosdi.geoplatform.xml.gml.v321.SequenceRuleEnumeration"/>
+        </bindings>
+        <bindings scd="~tns:IncrementOrder">
+            <typesafeEnumClass ref="org.geosdi.geoplatform.xml.gml.v321.IncrementOrder"/>
+        </bindings>
+        <bindings scd="~tns:SurfaceInterpolationType">
+            <typesafeEnumClass ref="org.geosdi.geoplatform.xml.gml.v321.SurfaceInterpolationType"/>
+        </bindings>
+        <bindings scd="~tns:CurveInterpolationType">
+            <typesafeEnumClass ref="org.geosdi.geoplatform.xml.gml.v321.CurveInterpolationType"/>
+        </bindings>
+        <bindings scd="~tns:SuccessionType">
+            <typesafeEnumClass ref="org.geosdi.geoplatform.xml.gml.v321.SuccessionType"/>
+        </bindings>
+        <bindings scd="~tns:CompassPointEnumeration">
+            <typesafeEnumClass ref="org.geosdi.geoplatform.xml.gml.v321.CompassPointEnumeration"/>
+        </bindings>
+        <bindings scd="~tns:AggregationType">
+            <typesafeEnumClass ref="org.geosdi.geoplatform.xml.gml.v321.AggregationType"/>
+        </bindings>
+        <bindings scd="~tns:KnotTypesType">
+            <typesafeEnumClass ref="org.geosdi.geoplatform.xml.gml.v321.KnotTypesType"/>
+        </bindings>
     </bindings>
-    <bindings scd="~tns:TinType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.TinType"/>
-    </bindings>
-    <bindings scd="~tns:ClothoidType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.ClothoidType"/>
-    </bindings>
-    <bindings scd="~tns:ProcedurePropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.ProcedurePropertyType"/>
-    </bindings>
-    <bindings scd="~tns:OperationParameterType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.OperationParameterType"/>
-    </bindings>
-    <bindings scd="~tns:AbstractGeneralOperationParameterType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractGeneralOperationParameterType"/>
-    </bindings>
-    <bindings scd="~tns:DefinitionType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.DefinitionType"/>
-    </bindings>
-    <bindings scd="~tns:AbstractGMLType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractGMLType"/>
-    </bindings>
-    <bindings scd="~tns:ArcType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.ArcType"/>
-    </bindings>
-    <bindings scd="~tns:ArcStringType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.ArcStringType"/>
-    </bindings>
-    <bindings scd="~tns:AbstractCurveSegmentType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractCurveSegmentType"/>
-    </bindings>
-    <bindings scd="~tns:VerticalDatumPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.VerticalDatumPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:DynamicFeatureMemberType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.DynamicFeatureMemberType"/>
-    </bindings>
-    <bindings scd="~tns:AbstractCoverageType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractCoverageType"/>
-    </bindings>
-    <bindings scd="~tns:AbstractFeatureType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractFeatureType"/>
-    </bindings>
-    <bindings scd="~tns:GeodeticCRSType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.GeodeticCRSType"/>
-    </bindings>
-    <bindings scd="~tns:AbstractCRSType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractCRSType"/>
-    </bindings>
-    <bindings scd="~tns:AbstractGeometryType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractGeometryType"/>
-    </bindings>
-    <bindings scd="~tns:SurfaceType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.SurfaceType"/>
-    </bindings>
-    <bindings scd="~tns:AbstractSurfaceType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractSurfaceType"/>
-    </bindings>
-    <bindings scd="~tns:AbstractGeometricPrimitiveType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractGeometricPrimitiveType"/>
-    </bindings>
-    <bindings scd="~tns:AssociationRoleType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.AssociationRoleType"/>
-    </bindings>
-    <bindings scd="~tns:ShellType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.ShellType"/>
-    </bindings>
-    <bindings scd="~tns:AbstractTimeComplexType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractTimeComplexType"/>
-    </bindings>
-    <bindings scd="~tns:AbstractTimeObjectType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractTimeObjectType"/>
-    </bindings>
-    <bindings scd="~tns:PointType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.PointType"/>
-    </bindings>
-    <bindings scd="~tns:AbstractGeneralOperationParameterPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractGeneralOperationParameterPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:ValuePropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.ValuePropertyType"/>
-    </bindings>
-    <bindings scd="~tns:ConversionToPreferredUnitType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.ConversionToPreferredUnitType"/>
-    </bindings>
-    <bindings scd="~tns:InlinePropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.InlinePropertyType"/>
-    </bindings>
-    <bindings scd="~tns:ConversionPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.ConversionPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:EdgeType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.EdgeType"/>
-    </bindings>
-    <bindings scd="~tns:AbstractTopoPrimitiveType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractTopoPrimitiveType"/>
-    </bindings>
-    <bindings scd="~tns:AbstractTopologyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractTopologyType"/>
-    </bindings>
-    <bindings scd="tns:formulaCitation">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.FormulaCitationElement"/>
-    </bindings>
-    <bindings scd="~tns:AbstractGeneralParameterValueType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractGeneralParameterValueType"/>
-    </bindings>
-    <bindings scd="~tns:PolarCSPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.PolarCSPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:GeographicCRSType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.GeographicCRSType"/>
-    </bindings>
-    <bindings scd="~tns:NodeType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.NodeType"/>
-    </bindings>
-    <bindings scd="~tns:PassThroughOperationType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.PassThroughOperationType"/>
-    </bindings>
-    <bindings scd="~tns:AbstractCoordinateOperationType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractCoordinateOperationType"/>
-    </bindings>
-    <bindings scd="~tns:TimeCSType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.TimeCSType"/>
-    </bindings>
-    <bindings scd="~tns:AbstractCoordinateSystemType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractCoordinateSystemType"/>
-    </bindings>
-    <bindings scd="~tns:VerticalDatumType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.VerticalDatumType"/>
-    </bindings>
-    <bindings scd="~tns:AbstractDatumType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractDatumType"/>
-    </bindings>
-    <bindings scd="~tns:EllipsoidPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.EllipsoidPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:DatumPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.DatumPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:PointPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.PointPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:RingType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.RingType"/>
-    </bindings>
-    <bindings scd="~tns:AbstractRingType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractRingType"/>
-    </bindings>
-    <bindings scd="~tns:TopoVolumePropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.TopoVolumePropertyType"/>
-    </bindings>
-    <bindings scd="~tns:DirectedEdgePropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.DirectedEdgePropertyType"/>
-    </bindings>
-    <bindings scd="tns:coordinateOperationAccuracy">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.CoordinateOperationAccuracyElement"/>
-    </bindings>
-    <bindings scd="~tns:CoordinateSystemAxisType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.CoordinateSystemAxisType"/>
-    </bindings>
-    <bindings scd="~tns:CodeWithAuthorityType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.CodeWithAuthorityType"/>
-    </bindings>
-    <bindings scd="~tns:DerivedUnitType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.DerivedUnitType"/>
-    </bindings>
-    <bindings scd="~tns:UnitDefinitionType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.UnitDefinitionType"/>
-    </bindings>
-    <bindings scd="~tns:DMSAngleType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.DMSAngleType"/>
-    </bindings>
-    <bindings scd="~tns:SurfacePropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.SurfacePropertyType"/>
-    </bindings>
-    <bindings scd="~tns:CodeType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.CodeType"/>
-    </bindings>
-    <bindings scd="~tns:OrientableSurfaceType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.OrientableSurfaceType"/>
-    </bindings>
-    <bindings scd="~tns:CoordinateOperationPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.CoordinateOperationPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:MultiSurfacePropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.MultiSurfacePropertyType"/>
-    </bindings>
-    <bindings scd="~tns:SolidPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.SolidPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:GeodesicType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.GeodesicType"/>
-    </bindings>
-    <bindings scd="~tns:GeodesicStringType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.GeodesicStringType"/>
-    </bindings>
-    <bindings scd="~tns:HistoryPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.HistoryPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:PolygonType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.PolygonType"/>
-    </bindings>
-    <bindings scd="~tns:RectangleType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.RectangleType"/>
-    </bindings>
-    <bindings scd="~tns:AbstractSurfacePatchType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractSurfacePatchType"/>
-    </bindings>
-    <bindings scd="~tns:DerivationUnitTermType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.DerivationUnitTermType"/>
-    </bindings>
-    <bindings scd="~tns:ObliqueCartesianCSType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.ObliqueCartesianCSType"/>
-    </bindings>
-    <bindings scd="~tns:CompositeSurfaceType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.CompositeSurfaceType"/>
-    </bindings>
-    <bindings scd="~tns:OperationPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.OperationPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:QuantityExtentType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.QuantityExtentType"/>
-    </bindings>
-    <bindings scd="~tns:LineStringSegmentType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.LineStringSegmentType"/>
-    </bindings>
-    <bindings scd="~tns:ConventionalUnitType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.ConventionalUnitType"/>
-    </bindings>
-    <bindings scd="~tns:SurfaceArrayPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.SurfaceArrayPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:VerticalCSType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.VerticalCSType"/>
-    </bindings>
-    <bindings scd="~tns:GeometricComplexType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.GeometricComplexType"/>
-    </bindings>
-    <bindings scd="~tns:StringOrRefType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.StringOrRefType"/>
-    </bindings>
-    <bindings scd="~tns:VerticalCSPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.VerticalCSPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:SingleCRSPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.SingleCRSPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:SolidArrayPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.SolidArrayPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:CurvePropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.CurvePropertyType"/>
-    </bindings>
-    <bindings scd="~tns:CircleType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.CircleType"/>
-    </bindings>
-    <bindings scd="~tns:PrimeMeridianType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.PrimeMeridianType"/>
-    </bindings>
-    <bindings scd="~tns:DiscreteCoverageType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.DiscreteCoverageType"/>
-    </bindings>
-    <bindings scd="~tns:CoverageFunctionType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.CoverageFunctionType"/>
-    </bindings>
-    <bindings scd="~tns:TopoComplexPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.TopoComplexPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:PassThroughOperationPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.PassThroughOperationPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:CoordinateSystemAxisPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.CoordinateSystemAxisPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:TimePrimitivePropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.TimePrimitivePropertyType"/>
-    </bindings>
-    <bindings scd="~tns:MeasureType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.MeasureType"/>
-    </bindings>
-    <bindings scd="~tns:TemporalCRSType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.TemporalCRSType"/>
-    </bindings>
-    <bindings scd="~tns:CategoryExtentType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.CategoryExtentType"/>
-    </bindings>
-    <bindings scd="~tns:DomainSetType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.DomainSetType"/>
-    </bindings>
-    <bindings scd="~tns:RangeSetType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.RangeSetType"/>
-    </bindings>
-    <bindings scd="~tns:ArrayAssociationType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.ArrayAssociationType"/>
-    </bindings>
-    <bindings scd="~tns:CylindricalCSPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.CylindricalCSPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:AffineCSPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.AffineCSPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:PolygonPatchType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.PolygonPatchType"/>
-    </bindings>
-    <bindings scd="~tns:AbstractSolidType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractSolidType"/>
-    </bindings>
-    <bindings scd="~tns:AffinePlacementType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.AffinePlacementType"/>
-    </bindings>
-    <bindings scd="~tns:EllipsoidalCSPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.EllipsoidalCSPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:MeasureOrNilReasonListType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.MeasureOrNilReasonListType"/>
-    </bindings>
-    <bindings scd="~tns:ParameterValueType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.ParameterValueType"/>
-    </bindings>
-    <bindings scd="~tns:TemporalDatumPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.TemporalDatumPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:ConcatenatedOperationPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.ConcatenatedOperationPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:SurfacePatchArrayPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.SurfacePatchArrayPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:TransformationType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.TransformationType"/>
-    </bindings>
-    <bindings scd="~tns:AbstractGeneralTransformationType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractGeneralTransformationType"/>
-    </bindings>
-    <bindings scd="~tns:TimeClockType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.TimeClockType"/>
-    </bindings>
-    <bindings scd="~tns:TimeReferenceSystemType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.TimeReferenceSystemType"/>
-    </bindings>
-    <bindings scd="~tns:FeaturePropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.FeaturePropertyType"/>
-    </bindings>
-    <bindings scd="~tns:LinearCSType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.LinearCSType"/>
-    </bindings>
-    <bindings scd="~tns:MultiPointPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.MultiPointPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:TriangleType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.TriangleType"/>
-    </bindings>
-    <bindings scd="~tns:TopoSolidType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.TopoSolidType"/>
-    </bindings>
-    <bindings scd="~tns:GeocentricCRSPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.GeocentricCRSPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:SphericalCSType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.SphericalCSType"/>
-    </bindings>
-    <bindings scd="~tns:DictionaryEntryType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.DictionaryEntryType"/>
-    </bindings>
-    <bindings scd="~tns:ImageCRSType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.ImageCRSType"/>
-    </bindings>
-    <bindings scd="~tns:CoordinateSystemPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.CoordinateSystemPropertyType"/>
-    </bindings>
-    <bindings scd="tns:secondDefiningParameter">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.SecondDefiningParameterElement"/>
-    </bindings>
-    <bindings scd="tns:SecondDefiningParameter">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.SecondDefiningParameterUpperCase"/>
-    </bindings>
-    <bindings scd="~tns:GeometryArrayPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.GeometryArrayPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:LinearCSPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.LinearCSPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:DirectedObservationAtDistanceType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.DirectedObservationAtDistanceType"/>
-    </bindings>
-    <bindings scd="~tns:DirectedObservationType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.DirectedObservationType"/>
-    </bindings>
-    <bindings scd="~tns:ObservationType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.ObservationType"/>
-    </bindings>
-    <bindings scd="~tns:IndirectEntryType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.IndirectEntryType"/>
-    </bindings>
-    <bindings scd="~tns:BezierType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.BezierType"/>
-    </bindings>
-    <bindings scd="~tns:BSplineType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.BSplineType"/>
-    </bindings>
-    <bindings scd="~tns:OperationParameterPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.OperationParameterPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:CurveSegmentArrayPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.CurveSegmentArrayPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:TargetPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.TargetPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:SingleOperationPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.SingleOperationPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:AbstractTimeGeometricPrimitiveType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractTimeGeometricPrimitiveType"/>
-    </bindings>
-    <bindings scd="~tns:AbstractTimePrimitiveType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractTimePrimitiveType"/>
-    </bindings>
-    <bindings scd="~tns:CylinderType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.CylinderType"/>
-    </bindings>
-    <bindings scd="~tns:AbstractParametricCurveSurfaceType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractParametricCurveSurfaceType"/>
-    </bindings>
-    <bindings scd="~tns:VerticalCRSType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.VerticalCRSType"/>
-    </bindings>
-    <bindings scd="~tns:GridType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.GridType"/>
-    </bindings>
-    <bindings scd="~tns:TimeInstantType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.TimeInstantType"/>
-    </bindings>
-    <bindings scd="~tns:AbstractGeometricAggregateType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractGeometricAggregateType"/>
-    </bindings>
-    <bindings scd="~tns:ValueArrayPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.ValueArrayPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:OperationMethodPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.OperationMethodPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:CartesianCSPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.CartesianCSPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:AbstractRingPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractRingPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:FeatureCollectionType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.FeatureCollectionType"/>
-    </bindings>
-    <bindings scd="~tns:LocationPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.LocationPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:TemporalCSPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.TemporalCSPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:SphericalCSPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.SphericalCSPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:ObliqueCartesianCSPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.ObliqueCartesianCSPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:TimeCalendarType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.TimeCalendarType"/>
-    </bindings>
-    <bindings scd="~tns:RectifiedGridType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.RectifiedGridType"/>
-    </bindings>
-    <bindings scd="~tns:MultiGeometryPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.MultiGeometryPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:CoordinatesType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.CoordinatesType"/>
-    </bindings>
-    <bindings scd="~tns:MeasureListType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.MeasureListType"/>
-    </bindings>
-    <bindings scd="~tns:PrimeMeridianPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.PrimeMeridianPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:CRSPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.CRSPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:TopoPointPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.TopoPointPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:ConversionType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.ConversionType"/>
-    </bindings>
-    <bindings scd="~tns:AbstractGeneralConversionType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractGeneralConversionType"/>
-    </bindings>
-    <bindings scd="~tns:BagType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.BagType"/>
-    </bindings>
-    <bindings scd="~tns:TimeCalendarEraType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.TimeCalendarEraType"/>
-    </bindings>
-    <bindings scd="~tns:OffsetCurveType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.OffsetCurveType"/>
-    </bindings>
-    <bindings scd="~tns:GeographicCRSPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.GeographicCRSPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:PointArrayPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.PointArrayPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:AbstractFeatureCollectionType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractFeatureCollectionType"/>
-    </bindings>
-    <bindings scd="~tns:EngineeringDatumPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.EngineeringDatumPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:MultiCurveType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.MultiCurveType"/>
-    </bindings>
-    <bindings scd="~tns:EngineeringCRSType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.EngineeringCRSType"/>
-    </bindings>
-    <bindings scd="~tns:PriorityLocationPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.PriorityLocationPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:DirectedFacePropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.DirectedFacePropertyType"/>
-    </bindings>
-    <bindings scd="~tns:AbstractContinuousCoverageType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractContinuousCoverageType"/>
-    </bindings>
-    <bindings scd="~tns:GridFunctionType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.GridFunctionType"/>
-    </bindings>
-    <bindings scd="~tns:EllipsoidalCSType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.EllipsoidalCSType"/>
-    </bindings>
-    <bindings scd="~tns:CurveArrayPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.CurveArrayPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:GeocentricCRSType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.GeocentricCRSType"/>
-    </bindings>
-    <bindings scd="~tns:CartesianCSType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.CartesianCSType"/>
-    </bindings>
-    <bindings scd="~tns:ArrayType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.ArrayType"/>
-    </bindings>
-    <bindings scd="~tns:DirectPositionType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.DirectPositionType"/>
-    </bindings>
-    <bindings scd="~tns:AbstractTimeTopologyPrimitiveType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractTimeTopologyPrimitiveType"/>
-    </bindings>
-    <bindings scd="~tns:AbstractGeneralParameterValuePropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractGeneralParameterValuePropertyType"/>
-    </bindings>
-    <bindings scd="~tns:GenericMetaDataType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.GenericMetaDataType"/>
-    </bindings>
-    <bindings scd="~tns:AbstractMetaDataType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractMetaDataType"/>
-    </bindings>
-    <bindings scd="~tns:CodeOrNilReasonListType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.CodeOrNilReasonListType"/>
-    </bindings>
-    <bindings scd="~tns:TimePeriodType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.TimePeriodType"/>
-    </bindings>
-    <bindings scd="~tns:AbstractCurveType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractCurveType"/>
-    </bindings>
-    <bindings scd="~tns:ProjectedCRSPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.ProjectedCRSPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:TimeNodeType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.TimeNodeType"/>
-    </bindings>
-    <bindings scd="~tns:CurveType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.CurveType"/>
-    </bindings>
-    <bindings scd="~tns:MultiCurvePropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.MultiCurvePropertyType"/>
-    </bindings>
-    <bindings scd="~tns:VerticalCRSPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.VerticalCRSPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:TopoCurveType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.TopoCurveType"/>
-    </bindings>
-    <bindings scd="~tns:GeometryPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.GeometryPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:TimeCoordinateSystemType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.TimeCoordinateSystemType"/>
-    </bindings>
-    <bindings scd="~tns:GeneralConversionPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.GeneralConversionPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:DerivedCRSType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.DerivedCRSType"/>
-    </bindings>
-    <bindings scd="~tns:AbstractGeneralDerivedCRSType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractGeneralDerivedCRSType"/>
-    </bindings>
-    <bindings scd="~tns:AngleType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.AngleType"/>
-    </bindings>
-    <bindings scd="~tns:AbstractTimeSliceType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractTimeSliceType"/>
-    </bindings>
-    <bindings scd="~tns:ResultType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.ResultType"/>
-    </bindings>
-    <bindings scd="~tns:CubicSplineType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.CubicSplineType"/>
-    </bindings>
-    <bindings scd="~tns:TemporalCRSPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.TemporalCRSPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:TopoPrimitiveArrayAssociationType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.TopoPrimitiveArrayAssociationType"/>
-    </bindings>
-    <bindings scd="~tns:ProjectedCRSType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.ProjectedCRSType"/>
-    </bindings>
-    <bindings scd="~tns:MultiSurfaceType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.MultiSurfaceType"/>
-    </bindings>
-    <bindings scd="~tns:TimeOrdinalEraType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.TimeOrdinalEraType"/>
-    </bindings>
-    <bindings scd="~tns:DefinitionProxyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.DefinitionProxyType"/>
-    </bindings>
-    <bindings scd="~tns:EngineeringCRSPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.EngineeringCRSPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:FaceType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.FaceType"/>
-    </bindings>
-    <bindings scd="~tns:TopoCurvePropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.TopoCurvePropertyType"/>
-    </bindings>
-    <bindings scd="~tns:MultiSolidPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.MultiSolidPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:LinearRingType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.LinearRingType"/>
-    </bindings>
-    <bindings scd="~tns:DictionaryType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.DictionaryType"/>
-    </bindings>
-    <bindings scd="~tns:CylindricalCSType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.CylindricalCSType"/>
-    </bindings>
-    <bindings scd="~tns:UnitOfMeasureType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.UnitOfMeasureType"/>
-    </bindings>
-    <bindings scd="~tns:TimeCSPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.TimeCSPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:ParameterValueGroupType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.ParameterValueGroupType"/>
-    </bindings>
-    <bindings scd="~tns:ReferenceType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.ReferenceType"/>
-    </bindings>
-    <bindings scd="~tns:DynamicFeatureCollectionType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.DynamicFeatureCollectionType"/>
-    </bindings>
-    <bindings scd="~tns:DynamicFeatureType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.DynamicFeatureType"/>
-    </bindings>
-    <bindings scd="~tns:SolidType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.SolidType"/>
-    </bindings>
-    <bindings scd="~tns:OrientableCurveType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.OrientableCurveType"/>
-    </bindings>
-    <bindings scd="~tns:TopoComplexType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.TopoComplexType"/>
-    </bindings>
-    <bindings scd="~tns:MultiGeometryType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.MultiGeometryType"/>
-    </bindings>
-    <bindings scd="~tns:MappingRuleType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.MappingRuleType"/>
-    </bindings>
-    <bindings scd="~tns:DirectPositionListType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.DirectPositionListType"/>
-    </bindings>
-    <bindings scd="~tns:MetaDataPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.MetaDataPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:TimeIntervalLengthType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.TimeIntervalLengthType"/>
-    </bindings>
-    <bindings scd="~tns:TimeTopologyComplexType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.TimeTopologyComplexType"/>
-    </bindings>
-    <bindings scd="~tns:ArcByCenterPointType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.ArcByCenterPointType"/>
-    </bindings>
-    <bindings scd="~tns:UserDefinedCSPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.UserDefinedCSPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:MultiSolidType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.MultiSolidType"/>
-    </bindings>
-    <bindings scd="~tns:EngineeringDatumType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.EngineeringDatumType"/>
-    </bindings>
-    <bindings scd="tns:domainOfValidity">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.DomainOfValidityElement"/>
-    </bindings>
-    <bindings scd="~tns:TimePositionType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.TimePositionType"/>
-    </bindings>
-    <bindings scd="~tns:CompositeValueType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.CompositeValueType"/>
-    </bindings>
-    <bindings scd="~tns:ImageDatumType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.ImageDatumType"/>
-    </bindings>
-    <bindings scd="~tns:TopoSurfaceType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.TopoSurfaceType"/>
-    </bindings>
-    <bindings scd="~tns:ImageDatumPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.ImageDatumPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:ConeType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.ConeType"/>
-    </bindings>
-    <bindings scd="~tns:AffineCSType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.AffineCSType"/>
-    </bindings>
-    <bindings scd="~tns:MovingObjectStatusType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.MovingObjectStatusType"/>
-    </bindings>
-    <bindings scd="~tns:EllipsoidType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.EllipsoidType"/>
-    </bindings>
-    <bindings scd="~tns:ArcStringByBulgeType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.ArcStringByBulgeType"/>
-    </bindings>
-    <bindings scd="~tns:TransformationPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.TransformationPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:TemporalDatumType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.TemporalDatumType"/>
-    </bindings>
-    <bindings scd="~tns:TimeEdgeType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.TimeEdgeType"/>
-    </bindings>
-    <bindings scd="~tns:DirectedTopoSolidPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.DirectedTopoSolidPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:TemporalCSType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.TemporalCSType"/>
-    </bindings>
-    <bindings scd="~tns:ValueArrayType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.ValueArrayType"/>
-    </bindings>
-    <bindings scd="~tns:UserDefinedCSType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.UserDefinedCSType"/>
-    </bindings>
-    <bindings scd="~tns:GeodeticDatumPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.GeodeticDatumPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:GeneralTransformationPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.GeneralTransformationPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:GeodeticCRSPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.GeodeticCRSPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:CompositeSolidType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.CompositeSolidType"/>
-    </bindings>
-    <bindings scd="~tns:EnvelopeType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.EnvelopeType"/>
-    </bindings>
-    <bindings scd="~tns:LineStringType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.LineStringType"/>
-    </bindings>
-    <bindings scd="~tns:TimeOrdinalReferenceSystemType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.TimeOrdinalReferenceSystemType"/>
-    </bindings>
-    <bindings scd="~tns:TopoSurfacePropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.TopoSurfacePropertyType"/>
-    </bindings>
-    <bindings scd="~tns:BaseUnitType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.BaseUnitType"/>
-    </bindings>
-    <bindings scd="~tns:FeatureArrayPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.FeatureArrayPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:DerivedCRSPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.DerivedCRSPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:ConcatenatedOperationType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.ConcatenatedOperationType"/>
-    </bindings>
-    <bindings scd="~tns:CircleByCenterPointType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.CircleByCenterPointType"/>
-    </bindings>
-    <bindings scd="~tns:SphereType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.SphereType"/>
-    </bindings>
-    <bindings scd="~tns:TopoPointType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.TopoPointType"/>
-    </bindings>
-    <bindings scd="~tns:GeodeticDatumType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.GeodeticDatumType"/>
-    </bindings>
-    <bindings scd="~tns:OperationParameterGroupType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.OperationParameterGroupType"/>
-    </bindings>
-    <bindings scd="~tns:BoundingShapeType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.BoundingShapeType"/>
-    </bindings>
-    <bindings scd="~tns:CompositeCurveType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.CompositeCurveType"/>
-    </bindings>
-    <bindings scd="~tns:OperationMethodType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.OperationMethodType"/>
-    </bindings>
-    <bindings scd="~tns:DirectionPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.DirectionPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:VectorType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.VectorType"/>
-    </bindings>
-    <bindings scd="~tns:CompoundCRSType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.CompoundCRSType"/>
-    </bindings>
-    <bindings scd="~tns:DirectedNodePropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.DirectedNodePropertyType"/>
-    </bindings>
-    <bindings scd="~tns:TopoPrimitiveMemberType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.TopoPrimitiveMemberType"/>
-    </bindings>
-    <bindings scd="~tns:MultiPointType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.MultiPointType"/>
-    </bindings>
-    <bindings scd="~tns:DataBlockType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.DataBlockType"/>
-    </bindings>
-    <bindings scd="~tns:FileType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.FileType"/>
-    </bindings>
-    <bindings scd="~tns:ImageCRSPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.ImageCRSPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:DegreesType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.DegreesType"/>
-    </bindings>
-    <bindings scd="~tns:EnvelopeWithTimePeriodType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.EnvelopeWithTimePeriodType"/>
-    </bindings>
-    <bindings scd="~tns:PolarCSType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.PolarCSType"/>
-    </bindings>
-    <bindings scd="~tns:TopoVolumeType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.TopoVolumeType"/>
-    </bindings>
-    <bindings scd="~tns:ArcByBulgeType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.ArcByBulgeType"/>
-    </bindings>
-    <bindings scd="~tns:OperationParameterGroupPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.OperationParameterGroupPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:CompoundCRSPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.CompoundCRSPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:BooleanPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.BooleanPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:AngleChoiceType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.AngleChoiceType"/>
-    </bindings>
-    <bindings scd="~tns:TimeTopologyPrimitivePropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.TimeTopologyPrimitivePropertyType"/>
-    </bindings>
-    <bindings scd="~tns:GeometricPrimitivePropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.GeometricPrimitivePropertyType"/>
-    </bindings>
-    <bindings scd="~tns:TimeCalendarEraPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.TimeCalendarEraPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:TopoSolidPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.TopoSolidPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:NodePropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.NodePropertyType"/>
-    </bindings>
-    <bindings scd="~tns:NodeOrEdgePropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.NodeOrEdgePropertyType"/>
-    </bindings>
-    <bindings scd="~tns:GridLimitsType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.GridLimitsType"/>
-    </bindings>
-    <bindings scd="~tns:VolumeType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.VolumeType"/>
-    </bindings>
-    <bindings scd="~tns:RingPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.RingPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:GridLengthType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.GridLengthType"/>
-    </bindings>
-    <bindings scd="~tns:KnotType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.KnotType"/>
-    </bindings>
-    <bindings scd="~tns:TimeEdgePropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.TimeEdgePropertyType"/>
-    </bindings>
-    <bindings scd="~tns:CountPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.CountPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:CodeListType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.CodeListType"/>
-    </bindings>
-    <bindings scd="~tns:AbstractMemberType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractMemberType"/>
-    </bindings>
-    <bindings scd="~tns:ShellPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.ShellPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:LengthType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.LengthType"/>
-    </bindings>
-    <bindings scd="~tns:QuantityPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.QuantityPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:TimeInstantPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.TimeInstantPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:TemporalDatumBaseType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.TemporalDatumBaseType"/>
-    </bindings>
-    <bindings scd="~tns:AbstractMetadataPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractMetadataPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:FormulaType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.FormulaType"/>
-    </bindings>
-    <bindings scd="~tns:SpeedType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.SpeedType"/>
-    </bindings>
-    <bindings scd="~tns:ScaleType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.ScaleType"/>
-    </bindings>
-    <bindings scd="~tns:BoundedFeatureType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.BoundedFeatureType"/>
-    </bindings>
-    <bindings scd="~tns:DefinitionBaseType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.DefinitionBaseType"/>
-    </bindings>
-    <bindings scd="~tns:LineStringSegmentArrayPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.LineStringSegmentArrayPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:TimeNodePropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.TimeNodePropertyType"/>
-    </bindings>
-    <bindings scd="~tns:TimeCalendarPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.TimeCalendarPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:IdentifiedObjectType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.IdentifiedObjectType"/>
-    </bindings>
-    <bindings scd="~tns:TimePeriodPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.TimePeriodPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:FaceOrTopoSolidPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.FaceOrTopoSolidPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:CategoryPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.CategoryPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:DirectionVectorType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.DirectionVectorType"/>
-    </bindings>
-    <bindings scd="~tns:DirectionDescriptionType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.DirectionDescriptionType"/>
-    </bindings>
-    <bindings scd="~tns:TimeClockPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.TimeClockPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:GridEnvelopeType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.GridEnvelopeType"/>
-    </bindings>
-    <bindings scd="~tns:LinearRingPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.LinearRingPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:GeometricComplexPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.GeometricComplexPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:TimeOrdinalEraPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.TimeOrdinalEraPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:AbstractFeatureMemberType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.AbstractFeatureMemberType"/>
-    </bindings>
-    <bindings scd="~tns:AreaType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.AreaType"/>
-    </bindings>
-    <bindings scd="~tns:KnotPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.KnotPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:SequenceRuleType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.SequenceRuleType"/>
-    </bindings>
-    <bindings scd="~tns:TimeTopologyComplexPropertyType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.TimeTopologyComplexPropertyType"/>
-    </bindings>
-    <bindings scd="~tns:RelatedTimeType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.RelatedTimeType"/>
-    </bindings>
-    <bindings scd="~tns:TimeType">
-      <class ref="org.geosdi.geoplatform.xml.gml.v321.TimeType"/>
-    </bindings>
-    <bindings scd="~tns:TimeIndeterminateValueType">
-      <typesafeEnumClass ref="org.geosdi.geoplatform.xml.gml.v321.TimeIndeterminateValueType"/>
-    </bindings>
-    <bindings scd="~tns:SignType">
-      <typesafeEnumClass ref="org.geosdi.geoplatform.xml.gml.v321.SignType"/>
-    </bindings>
-    <bindings scd="~tns:SequenceRuleEnumeration">
-      <typesafeEnumClass ref="org.geosdi.geoplatform.xml.gml.v321.SequenceRuleEnumeration"/>
-    </bindings>
-    <bindings scd="~tns:IncrementOrder">
-      <typesafeEnumClass ref="org.geosdi.geoplatform.xml.gml.v321.IncrementOrder"/>
-    </bindings>
-    <bindings scd="~tns:SurfaceInterpolationType">
-      <typesafeEnumClass ref="org.geosdi.geoplatform.xml.gml.v321.SurfaceInterpolationType"/>
-    </bindings>
-    <bindings scd="~tns:CurveInterpolationType">
-      <typesafeEnumClass ref="org.geosdi.geoplatform.xml.gml.v321.CurveInterpolationType"/>
-    </bindings>
-    <bindings scd="~tns:SuccessionType">
-      <typesafeEnumClass ref="org.geosdi.geoplatform.xml.gml.v321.SuccessionType"/>
-    </bindings>
-    <bindings scd="~tns:CompassPointEnumeration">
-      <typesafeEnumClass ref="org.geosdi.geoplatform.xml.gml.v321.CompassPointEnumeration"/>
-    </bindings>
-    <bindings scd="~tns:AggregationType">
-      <typesafeEnumClass ref="org.geosdi.geoplatform.xml.gml.v321.AggregationType"/>
-    </bindings>
-    <bindings scd="~tns:KnotTypesType">
-      <typesafeEnumClass ref="org.geosdi.geoplatform.xml.gml.v321.KnotTypesType"/>
-    </bindings>
-  </bindings>
 </bindings>
 

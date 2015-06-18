@@ -1,0 +1,78 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    
+    <parent>
+        <groupId>org.geosdi</groupId>
+        <artifactId>iso-19139</artifactId>
+        <version>1.7.x-gwt2.7.x-SNAPSHOT</version>
+    </parent>
+
+    <groupId>org.geosdi</groupId>
+    <artifactId>geoplatform-iso19139-v20060504</artifactId>
+    <version>1.7.x-gwt2.7.x-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>Geo-Platform :: == Binding ISO19139 (2006-05-04) XML Module</name>
+    <url>http://maven.apache.org</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-core</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>        
+        </dependency>
+        
+        <dependency>
+            <groupId>org.jvnet.jaxb2_commons</groupId>
+            <artifactId>jaxb2-basics-runtime</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>gml-3.2.0</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+    </dependencies>
+    
+    <build>
+        <plugins>
+            <!-- mvn jaxb2:generate -X -->
+            <plugin>
+                <groupId>org.jvnet.jaxb2.maven2</groupId>
+                <artifactId>maven-jaxb2-plugin</artifactId>
+
+                <configuration>
+                    <schemaIncludes>
+                        <value>iso/19139/*/gco/gco.xsd</value>
+                        <value>iso/19139/*/gmd/gmd.xsd</value>
+                        <value>iso/19139/*/gml/gml.xsd</value>
+                        <value>iso/19139/*/gmx/gmx.xsd</value>
+                        <value>iso/19139/*/gsr/gsr.xsd</value>
+                        <value>iso/19139/*/gss/gss.xsd</value>
+                        <value>iso/19139/*/gts/gts.xsd</value>
+                        <value>iso/19139/*/srv/srv.xsd</value>
+                    </schemaIncludes>
+                    <episodes>
+                        <episode>
+                            <groupId>org.geosdi</groupId>
+                            <artifactId>gml-3.2.0</artifactId>
+                        </episode>
+                    </episodes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build> 
+</project>

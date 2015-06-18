@@ -46,7 +46,7 @@ public enum TypeName {
     RECORD_V202(QNameConstant.QNAME_RECORD_V202),
     METADATA(QNameConstant.QNAME_METADATA);
     //
-    private QName qName;
+    private final QName qName;
 
     TypeName(QName qName) {
         this.qName = qName;

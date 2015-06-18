@@ -37,7 +37,7 @@
         
         <dependency>
             <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-iso19139-binding</artifactId>
+            <artifactId>geoplatform-iso19139-v20070417</artifactId>
         </dependency>
         
         <dependency>

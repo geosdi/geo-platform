@@ -18,6 +18,8 @@
             level="debug" /><!-- TODO info -->
             
     <logger name="org.geosdi.geoplatform.connector.schema.GPCSWOutputSchemaFinder"
-                    level="debug" />
+            level="debug" />
+    <logger name="org.geosdi.geoplatform.services.delegate.dc"
+            level="debug" />
 
 </configuration>

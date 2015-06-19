@@ -250,6 +250,15 @@ public enum OnlineResourceProtocolType {
     }
 
     /**
+     * 
+     * @param protocol
+     * @return 
+     */
+    public static Boolean isForWMSGetCapabilities(String protocol) {
+        return isForWMSGetCapabilities(fromValue(protocol));
+    }
+
+    /**
      * @see
      * OnlineResourceProtocolType#isForWMSGetMapRequest(org.geosdi.geoplatform.gui.responce.OnlineResourceProtocolType)
      *

@@ -51,14 +51,14 @@ import org.geosdi.geoplatform.connector.pool.factory.GPCSWConnectorFactory;
 public class GPCSWConnectorBuilderPool extends AbstractConnectorBuilder<GPCSWConnectorBuilderPool, GPCatalogConnectorStore> {
 
     static {
-        catalogConnectoPool = new GenericKeyedObjectPool<GPPoolConnectorKey, GPCatalogConnectorStore>(
+        catalogConnectoPool = new GenericKeyedObjectPool<>(
                 new GPCSWConnectorFactory(), new GPPoolConnectorConfig());
     }
 
     //
-    private static GenericKeyedObjectPool<GPPoolConnectorKey, GPCatalogConnectorStore> catalogConnectoPool;
+    private final static GenericKeyedObjectPool<GPPoolConnectorKey, GPCatalogConnectorStore> catalogConnectoPool;
 
-    public static GPCSWConnectorBuilderPool newInstance() {
+    public static GPCSWConnectorBuilderPool newConnector() {
         return new GPCSWConnectorBuilderPool();
     }
 

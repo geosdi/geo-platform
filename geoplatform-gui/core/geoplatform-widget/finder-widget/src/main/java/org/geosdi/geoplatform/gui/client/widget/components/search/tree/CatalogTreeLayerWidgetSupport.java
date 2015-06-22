@@ -31,19 +31,17 @@
  * you are not obligated to do so. If you do not wish to do so, delete this
  * exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.client.widget.components.search;
+package org.geosdi.geoplatform.gui.client.widget.components.search.tree;
 
-import org.geosdi.geoplatform.gui.client.widget.components.search.tree.GPTreeLayerWidgetSupport;
-import org.geosdi.geoplatform.gui.client.widget.components.search.tree.CatalogTreeLayerWidgetSupport;
+import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.Label;
-import com.extjs.gxt.ui.client.widget.LayoutContainer;
+import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import com.google.gwt.user.client.Element;
-import com.google.gwt.user.client.ui.HasHorizontalAlignment;
-import com.google.gwt.user.client.ui.HorizontalPanel;
-import javax.inject.Inject;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import org.geosdi.geoplatform.gui.client.CatalogFinderWidgetResources;
 import org.geosdi.geoplatform.gui.client.i18n.CatalogFinderConstants;
-import org.geosdi.geoplatform.gui.client.puregwt.handler.ActionTreePresenceHandler;
+import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.widget.components.search.pagination.RecordsContainer;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
@@ -53,67 +51,51 @@ import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class CatalogSearchResultWidget extends LayoutContainer
-        implements ActionTreePresenceHandler {
+public class CatalogTreeLayerWidgetSupport extends GPTreeLayerWidgetSupport.TreeLayerWidgetSupport {
 
-    private final RecordsContainer recordsContainer;
-    private final GPEventBus bus;
-    private Label resultLabel;
-    private TreePanel<GPBeanTreeModel> tree;
-
-    @Inject
-    public CatalogSearchResultWidget(RecordsContainer theRecordsContainer,
-            GPEventBus theBus) {
-        this.recordsContainer = theRecordsContainer;
-        this.bus = theBus;
-
-        this.addHandler();
-        this.addStyle();
+    public CatalogTreeLayerWidgetSupport(TreePanel<GPBeanTreeModel> theTree,
+            RecordsContainer recordsContainer, GPEventBus bus) {
+        super(theTree, recordsContainer, bus);
     }
 
     @Override
-    protected void onRender(Element parent, int index) {
-        super.onRender(parent, index);
-
-        this.resultLabel = new Label(CatalogFinderConstants.INSTANCE.CatalogSearchResultWidget_resultLabelText());
-        resultLabel.setStyleName("searchResult-Label");
-
-        add(resultLabel);
-        add(recordsContainer);
-
-        if (this.tree != null) {
-            this.addComponentsForTreePresence();
-        }
+    public void createLabelComponent() {
+        this.operationLabel = new Label(CatalogFinderConstants.INSTANCE.CatalogTreeLayerWidgetSupport_operationLabelText());
+        this.operationLabel.setStyleName("searchOperation-Label");
     }
 
     @Override
-    public void notifyTreePresence(TreePanel<GPBeanTreeModel> theTree) {
-        this.tree = theTree;
+    public void createLoadWMSGetCapabilitiesButton() {
+        this.loadWMSGetCapabilities = new Button(ButtonsConstants.INSTANCE.loadWMSGetCapabilitiesText());
+        this.loadWMSGetCapabilities.setStyleAttribute("padding-left", "10px");
+        this.loadWMSGetCapabilities.disable();
     }
 
-    private void addHandler() {
-        this.bus.addHandler(CatalogSearchResultWidget.TYPE, this);
+    @Override
+    public void createAddLayersTreeButton() {
+        this.addLayersToTreeButton = new Button(ButtonsConstants.INSTANCE.addOnTreeText(),
+                AbstractImagePrototype.create(CatalogFinderWidgetResources.ICONS.addLayer()));
+
+        this.addLayersToTreeButton.addSelectionListener(new SelectionListener<ButtonEvent>() {
+
+            @Override
+            public void componentSelected(ButtonEvent be) {
+                expander.executeActionRequest();
+            }
+
+        });
+
+        this.addLayersToTreeButton.disable();
     }
 
-    private void addStyle() {
-        super.setStyleName("searchResult-Widget");
+    @Override
+    public void enableAddOnTreeButton(boolean enable) {
+        this.addLayersToTreeButton.setEnabled(enable);
     }
 
-    private void addComponentsForTreePresence() {
-        GPTreeLayerWidgetSupport catalogTreeLayer = new CatalogTreeLayerWidgetSupport(
-                tree, recordsContainer, bus);
-
-        HorizontalPanel hp = new HorizontalPanel();
-        hp.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_LEFT);
-        hp.setStyleName("catalogTree-Button");
-
-        hp.add(catalogTreeLayer.getAddOnTreeButton());
-        hp.add(catalogTreeLayer.getLoadWMSCapabilitiesButton());
-
-        super.add(catalogTreeLayer.getLabel());
-        super.add(hp);
-
-        this.recordsContainer.setSelectionContainer(true);
+    @Override
+    public void enableWMSGetCapabilitiesButton(boolean enable) {
+        this.loadWMSGetCapabilities.setEnabled(enable);
     }
 
 }

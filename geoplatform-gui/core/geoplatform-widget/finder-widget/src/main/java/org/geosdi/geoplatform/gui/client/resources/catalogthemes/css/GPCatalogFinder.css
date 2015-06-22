@@ -51,7 +51,7 @@
 
 .searchResult-Label{
     color: #4169E1;
-    font: normal 14px tahoma, arial, helvetica, sans-serif;
+    font: normal 14px tahoma, arial, helvetica, sans-serif; 
     padding-top: 10px;
     padding-bottom: 10px;
 }
@@ -79,4 +79,8 @@
 .comboType-Label{
     background-color: white;
     font: normal 12px tahoma, arial, helvetica, sans-serif;
+}
+
+.catalogTree-Button{
+    padding-top: 10px;
 }

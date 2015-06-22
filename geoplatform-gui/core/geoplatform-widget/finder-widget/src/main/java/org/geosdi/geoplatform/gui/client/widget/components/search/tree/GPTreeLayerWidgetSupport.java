@@ -31,37 +31,76 @@
  * you are not obligated to do so. If you do not wish to do so, delete this
  * exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.client.puregwt.event;
+package org.geosdi.geoplatform.gui.client.widget.components.search.tree;
 
-import com.google.gwt.event.shared.GwtEvent;
+import com.extjs.gxt.ui.client.widget.Label;
+import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.client.puregwt.handler.CatalogTreeLayerHandler;
+import org.geosdi.geoplatform.gui.client.widget.components.search.pagination.RecordsContainer;
+import org.geosdi.geoplatform.gui.client.widget.expander.GPCatalogExpander;
+import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-abstract class CatalogTreeLayerEnableEvent extends GwtEvent<CatalogTreeLayerHandler> {
+public interface GPTreeLayerWidgetSupport extends CatalogTreeLayerHandler {
 
-    protected boolean enable;
+    Label getLabel();
 
-    public CatalogTreeLayerEnableEvent() {
-    }
+    Button getAddOnTreeButton();
 
-    public CatalogTreeLayerEnableEvent(boolean enable) {
-        this.enable = enable;
-    }
+    Button getLoadWMSCapabilitiesButton();
 
-    @Override
-    public Type<CatalogTreeLayerHandler> getAssociatedType() {
-        return CatalogTreeLayerHandler.TYPE;
-    }
+    void createLabelComponent();
+
+    void createLoadWMSGetCapabilitiesButton();
+
+    void createAddLayersTreeButton();
 
     /**
-     * @param enable the enable to set
+     * <p>
+     * Internal Class to manage all {@link GPTreeLayerWidgetSupport}
+     * Operations<p>
      */
-    public void setEnable(boolean enable) {
-        this.enable = enable;
+    static abstract class TreeLayerWidgetSupport implements GPTreeLayerWidgetSupport {
+
+        protected final TreePanel<GPBeanTreeModel> tree;
+        protected final GPCatalogExpander expander;
+        protected Label operationLabel;
+        protected Button addLayersToTreeButton;
+        protected Button loadWMSGetCapabilities;
+
+        public TreeLayerWidgetSupport(TreePanel<GPBeanTreeModel> theTree,
+                RecordsContainer recordsContainer, GPEventBus bus) {
+            tree = theTree;
+            expander = new GPCatalogExpander(tree, recordsContainer);
+
+            this.createLabelComponent();
+            this.createLoadWMSGetCapabilitiesButton();
+            this.createAddLayersTreeButton();
+
+            bus.addHandler(CatalogTreeLayerHandler.TYPE, this);
+        }
+
+        @Override
+        public Label getLabel() {
+            return this.operationLabel;
+        }
+
+        @Override
+        public Button getAddOnTreeButton() {
+            return this.addLayersToTreeButton;
+        }
+
+        @Override
+        public Button getLoadWMSCapabilitiesButton() {
+            return this.loadWMSGetCapabilities;
+        }
+
     }
 
 }

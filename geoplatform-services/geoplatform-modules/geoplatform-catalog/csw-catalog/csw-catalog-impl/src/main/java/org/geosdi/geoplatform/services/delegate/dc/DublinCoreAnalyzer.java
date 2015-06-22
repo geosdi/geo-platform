@@ -73,9 +73,8 @@ public interface DublinCoreAnalyzer {
         public void analyzeRecord(RecordType record, FullRecordDTO dto) {
             if (record.isSetBoundingBox()) {
                 BoundingBoxType bboxType = record.getBoundingBox().get(0).getValue();
-                dto.setBBox(new BBox(bboxType.getLowerCorner().get(0),
-                        bboxType.getLowerCorner().get(1), bboxType.getUpperCorner()
-                        .get(0), bboxType.getUpperCorner().get(1)));
+                dto.setBBox(BindingUtility.convertBBoxTypeToBBox(bboxType));
+                dto.setCrs(BindingUtility.convertEncodedCRS(bboxType.getCrs()));
             }
 
             for (JAXBElement<? extends SimpleLiteral> element : record.getDCElement()) {

@@ -81,17 +81,27 @@ public class FullRecord extends AbstractRecord implements GPShortLayerBean {
 
     public void setUriMap(Map<OnlineResourceProtocolType, URIDTO> uriMap) {
         this.uriMap = uriMap;
-        this.wmsLayer = new WMSShortLayerBean(uriMap);
+        if ((this.uriMap != null) && !(this.uriMap.isEmpty())) {
+            for (OnlineResourceProtocolType wmsProtocol : OnlineResourceProtocolType.LIST_WMS_GET_MAP_REQUEST) {
+                URIDTO uri = uriMap.get(wmsProtocol);
+                if (uri != null) {
+                    this.wmsLayer = new WMSShortLayerBean(uri);
+                    break;
+                }
+            }
+        }
+    }
+
+    public Boolean isPossibleAddOnTreeOperation() {
+        return (this.isForWMSGetCapabilities() || (this.isForWMSGetMapRequest()));
     }
 
     public boolean isForWMSGetMapRequest() {
-        return this.isForByProtocol(
-                OnlineResourceProtocolType.LIST_WMS_GET_MAP_REQUEST);
+        return this.isForByProtocol(OnlineResourceProtocolType.LIST_WMS_GET_MAP_REQUEST);
     }
 
     public boolean isForWMSGetCapabilities() {
-        return this.isForByProtocol(OnlineResourceProtocolType
-                .LIST_WMS_GET_CAPABILITIES);
+        return this.isForByProtocol(OnlineResourceProtocolType.LIST_WMS_GET_CAPABILITIES);
     }
 
     public boolean isForDownload() {
@@ -157,14 +167,8 @@ public class FullRecord extends AbstractRecord implements GPShortLayerBean {
         WMSShortLayerBean() {
         }
 
-        WMSShortLayerBean(Map<OnlineResourceProtocolType, URIDTO> uriMap) {
-            for (OnlineResourceProtocolType wmsProtocol : OnlineResourceProtocolType.LIST_WMS_GET_MAP_REQUEST) {
-                URIDTO uri = uriMap.get(wmsProtocol);
-                if (uri != null) {
-                    uriWMS = uri;
-                    return;
-                }
-            }
+        WMSShortLayerBean(URIDTO theUriWMS) {
+            this.uriWMS = theUriWMS;
         }
 
         public String getTitle() {

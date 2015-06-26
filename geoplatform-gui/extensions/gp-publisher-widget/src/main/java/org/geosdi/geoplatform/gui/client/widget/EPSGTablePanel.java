@@ -101,7 +101,7 @@ public class EPSGTablePanel extends GeoPlatformContentPanel {
         for (PreviewLayer previewLayer : GPSharedUtils.safeList(epsgLayerList)) {
             EPSGLayerData epsgLayerData = new EPSGLayerData(previewLayer.
                     getTitle(), previewLayer.getCrs(), previewLayer.getStyleName(),
-                    previewLayer.isIsShape(), previewLayer.isAlreadyExists(),
+                    previewLayer.isIsShape(), previewLayer.getAlreadyExists(),
                     previewLayer.getFileName());
             this.store.add(epsgLayerData);
         }
@@ -257,7 +257,7 @@ public class EPSGTablePanel extends GeoPlatformContentPanel {
                 test = epsgCode.substring(0, 5);
             }
             if (!GPSharedUtils.isNotEmpty(epsgCode) || !test.equalsIgnoreCase("EPSG:")
-                    || (epsgLayerData.getPublishAction() == null && epsgLayerData.isAlreadyExists())
+                    || (epsgLayerData.getPublishAction() == null && epsgLayerData.getAlreadyExists() != null)
                     || (GPSharedUtils.isNotEmpty(epsgLayerData.getPublishAction())
                     && LayerPublishAction.valueOf(epsgLayerData.getPublishAction()).equals(LayerPublishAction.RENAME)
                     && !GPSharedUtils.isNotEmpty(epsgLayerData.getNewName()))) {

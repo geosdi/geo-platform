@@ -33,7 +33,6 @@
  */
 package org.geosdi.geoplatform.gui.client.model;
 
-import com.google.common.collect.Lists;
 import java.util.List;
 import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 import org.geosdi.geoplatform.gui.shared.publisher.LayerPublishAction;
@@ -55,13 +54,13 @@ public class EPSGLayerData extends GeoPlatformBeanModel {
     private static final long serialVersionUID = 3153334351994515962L;
 
     private String fileName;
-    private transient List<LayerPublishAction> layerPublishActions;
+    private List<LayerPublishAction> layerPublishActions;
 
     public EPSGLayerData() {
     }
 
     public EPSGLayerData(String featureName, String epsgCode, String styleName,
-            boolean isShape, boolean alreadyExists, String fileName) {
+            boolean isShape, List<LayerPublishAction> alreadyExists, String fileName) {
         this.setFeatureName(featureName);
         this.setEpsgCode(epsgCode);
         this.setStyleName(styleName);
@@ -102,20 +101,14 @@ public class EPSGLayerData extends GeoPlatformBeanModel {
         super.set(EPSGLayerData.IS_SHAPE, isShape);
     }
 
-    public Boolean isAlreadyExists() {
+    public List<LayerPublishAction> getAlreadyExists() {
         return super.get(EPSGLayerData.ALREADY_EXISTS);
     }
 
-    public final void setAlreadyExists(boolean alreadyExists) {
+    public final void setAlreadyExists(List<LayerPublishAction> alreadyExists) {
         super.set(EPSGLayerData.ALREADY_EXISTS, alreadyExists);
-        if (alreadyExists) {
-            List<LayerPublishAction> publishActionList = Lists.
-                    <LayerPublishAction>newArrayList(LayerPublishAction.RENAME,
-                            LayerPublishAction.OVERRIDE);
-            if (isIsShape()) {
-                publishActionList.add(LayerPublishAction.APPEND);
-            }
-            this.setPublishActions(publishActionList);
+        if (alreadyExists != null) {
+            this.setPublishActions(alreadyExists);
         }
     }
 

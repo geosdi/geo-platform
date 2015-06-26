@@ -97,7 +97,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
         boolean isShp;
         String epsg = "";
         String sld;
-        boolean alreadyExists;
+        List<LayerPublishAction> alreadyExists;
     }
     private String RESTURL = "";
     private String RESTUSER = "";
@@ -335,7 +335,8 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
                     featureType.getMinX(), featureType.getMinY(),
                     featureType.getMaxX(), featureType.getMaxY(),
                     epsgCode, layer.getDefaultStyle(), Boolean.FALSE,
-                    Boolean.TRUE);
+                    Lists.<LayerPublishAction>newArrayList(
+                            LayerPublishAction.OVERRIDE, LayerPublishAction.RENAME));
         } catch (Exception e) {
             final String error = "The layer " + layerName + " is published in the " + userWorkspace + " workspace, but the server cannot provide info. " + e;
             logger.error(error);
@@ -383,7 +384,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
                     featureType.getMinX(), featureType.getMinY(),
                     featureType.getMaxX(), featureType.getMaxY(), epsgCode,
                     GPSharedUtils.isEmpty(styleName) ? layer.getDefaultStyle() : styleName,
-                    Boolean.TRUE, Boolean.TRUE);
+                    Boolean.TRUE, Lists.<LayerPublishAction>newArrayList(LayerPublishAction.values()));
         } catch (Exception e) {
             final String error = "The layer " + layerName + " is published in the " + userWorkspace + " workspace, but the server cannot provide info. " + e;
             logger.error(error);
@@ -575,15 +576,18 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
             info.name = new String(idName);
             File oldGeotifFile = new File(tempUserTifDir, tifFileName);
             //
-            RESTCoverage coverage = this.restReader.getCoverage(workspace, idName,
-                    idName);
-            File newGeoTifFile;
-            if (coverage != null) {
-                info.alreadyExists = Boolean.TRUE;
-                idName += System.currentTimeMillis();;
+            if (this.restReader.getCoverage(workspace, idName, idName) != null) {
+                info.alreadyExists = Lists.<LayerPublishAction>newArrayList(
+                        LayerPublishAction.OVERRIDE, LayerPublishAction.RENAME);
+                idName += System.currentTimeMillis();
+                info.fileName = idName;
+            } else if (this.restReader.getLayer(idName) != null
+                    && this.restReader.getCoverage(this.restReader.getLayer(idName)) != null) {//Verificare se il coverage cn quel nome esiste
+                info.alreadyExists = Lists.<LayerPublishAction>newArrayList(LayerPublishAction.RENAME);
+                idName += System.currentTimeMillis();
                 info.fileName = idName;
             }
-            newGeoTifFile = PublishUtility.copyFile(oldGeotifFile,
+            File newGeoTifFile = PublishUtility.copyFile(oldGeotifFile,
                     tempUserTifDir, idName + ".tif", true);
             //
             oldGeotifFile.delete();
@@ -710,10 +714,13 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
             String origName = shpFileName.substring(0, shpFileName.length() - 4);
             info.name = PublishUtility.removeSpecialCharactersFromString(userName)
                     + "_shp_" + origName;
-            //
-            RESTLayer layer = this.restReader.getLayer(workspace, info.name);
-            if (layer != null) {
-                info.alreadyExists = Boolean.TRUE;
+            //Test if layer already exists
+            if (this.restReader.getLayer(workspace, info.name) != null) {
+                info.alreadyExists = Lists.<LayerPublishAction>newArrayList(
+                        LayerPublishAction.values());
+            } else if (this.restReader.getLayer(info.name) != null) {//Verificare se il coverage cn quel nome esiste
+                info.alreadyExists = Lists.<LayerPublishAction>newArrayList(
+                        LayerPublishAction.RENAME);
             }
             //
             File shpFile = new File(tempUserDir + shpFileName);
@@ -881,7 +888,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
 
         InfoPreview infoPreview = new InfoPreview(RESTURL, userWorkspace,
                 new String(fileName),
-                0d, 0d, 0d, 0d, epsg, sld, Boolean.FALSE, Boolean.FALSE);
+                0d, 0d, 0d, 0d, epsg, sld, Boolean.FALSE, null);
 
         String pathInTifDir = this.geoportalDir + userName + System.getProperty(
                 "file.separator")
@@ -896,7 +903,8 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
                     + " already exists");
             fileName = fileName + System.currentTimeMillis();
             infoPreview.setFileName(fileName);
-            infoPreview.setAlreadyExists(Boolean.TRUE);
+            infoPreview.setAlreadyExists(Lists.<LayerPublishAction>newArrayList(
+                    LayerPublishAction.OVERRIDE, LayerPublishAction.RENAME));
         }
         File fileInTifDir = PublishUtility.copyFile(file, pathInTifDir,
                 fileName + ".tif", overwrite);
@@ -1013,8 +1021,9 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
             if (infoPreview.getLayerPublishAction() != null) {
                 if (infoPreview.isIsShape()) {
                     if (GPSharedUtils.isNotEmpty(infoPreview.getNewName())
-                            && this.restReader.getLayer(userWorkspace,
-                                    userName + "_shp_" + infoPreview.getNewName()) != null) {
+                            && this.restReader.getLayer(
+                                    PublishUtility.removeSpecialCharactersFromString(userName)
+                                    + "_shp_" + infoPreview.getNewName()) != null) {
                         throw new ResourceNotFoundFault(
                                 "A layer named: " + infoPreview.getNewName() + " already exists");
                     }
@@ -1026,7 +1035,9 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
                 } else {
                     if (GPSharedUtils.isNotEmpty(infoPreview.getNewName())
                             && this.restReader.getLayer(userWorkspace,
-                                    userName + "_" + infoPreview.getNewName()) != null) {
+                                    userName + "_" + infoPreview.getNewName()) != null
+                            && this.restReader.getCoverage(this.restReader.getLayer(userWorkspace,
+                                            userName + "_" + infoPreview.getNewName())) != null) {
                         throw new ResourceNotFoundFault(
                                 "A layer named: " + infoPreview.getNewName() + " already exists");
                     }

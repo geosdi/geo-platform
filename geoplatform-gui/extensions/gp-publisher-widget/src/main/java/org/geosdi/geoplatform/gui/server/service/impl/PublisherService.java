@@ -104,7 +104,7 @@ public class PublisherService implements IPublisherService {
             infoPreview = new InfoPreview(null, null,
                     previewLayer.getFeatureName(), 0d, 0d, 0d, 0d,
                     previewLayer.getEpsgCode(), previewLayer.getStyleName(),
-                    previewLayer.isIsShape(), previewLayer.isAlreadyExists());
+                    previewLayer.isIsShape(), previewLayer.getAlreadyExists());
             if (previewLayer.getPublishAction() != null) {
                 infoPreview.setLayerPublishAction(LayerPublishAction.valueOf(
                         previewLayer.getPublishAction()));

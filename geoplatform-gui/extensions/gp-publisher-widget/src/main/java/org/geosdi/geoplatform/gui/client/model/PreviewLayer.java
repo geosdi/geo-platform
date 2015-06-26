@@ -37,6 +37,7 @@ import com.google.gwt.core.client.GWT;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import javax.persistence.Transient;
 import name.pehl.piriti.json.client.JsonReader;
@@ -44,6 +45,7 @@ import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientIn
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
 import org.geosdi.geoplatform.gui.shared.GPLayerType;
+import org.geosdi.geoplatform.gui.shared.publisher.LayerPublishAction;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -69,7 +71,7 @@ public class PreviewLayer implements GPLayerBean, Serializable {
     private String fileName;
     private String styleName;
     private boolean isShape;
-    private boolean alreadyExists;
+    private List<LayerPublishAction> alreadyExists;
     @Transient
     private Long id;
     @Transient
@@ -90,7 +92,7 @@ public class PreviewLayer implements GPLayerBean, Serializable {
 
     public PreviewLayer(String label, String title, String name, String abstractText,
             String dataSource, String crs, BBoxClientInfo bbox, GPLayerType layerType,
-            String styleName, boolean isShape, boolean alreadyExists) {
+            String styleName, boolean isShape, List<LayerPublishAction> alreadyExists) {
         this.label = label;
         this.title = title;
         this.name = name;
@@ -120,11 +122,11 @@ public class PreviewLayer implements GPLayerBean, Serializable {
         this.isShape = isShape;
     }
 
-    public boolean isAlreadyExists() {
+    public List<LayerPublishAction> getAlreadyExists() {
         return alreadyExists;
     }
 
-    public void setAlreadyExists(boolean alreadyExists) {
+    public void setAlreadyExists(List<LayerPublishAction> alreadyExists) {
         this.alreadyExists = alreadyExists;
     }
 

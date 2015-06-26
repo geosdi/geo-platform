@@ -399,6 +399,8 @@ public class PublishUtility {
 
             File sldFile = new File(tempUserDir + origName + ".sld");
             File sldDestFile = sldFile;
+            File cpgFile = new File(tempUserDir + origName + ".cpg");
+            File cpgDestFile = cpgFile;
 
             if (destName != null) {
                 shpDestFile = new File(tempUserDir + destName + ".shp");
@@ -411,6 +413,8 @@ public class PublishUtility {
                 prjFile.renameTo(prjDestFile);
                 sldDestFile = new File(tempUserDir + destName + ".sld");
                 sldFile.renameTo(sldDestFile);
+                cpgDestFile = new File(tempUserDir + destName + ".cpg");
+                cpgFile.renameTo(cpgDestFile);
             }
             out = PublishUtility.compress(out, shpDestFile);
             out = PublishUtility.compress(out, dbfDestFile);
@@ -418,6 +422,9 @@ public class PublishUtility {
             out = PublishUtility.compress(out, prjDestFile);
             if (sldDestFile.exists()) {
                 out = PublishUtility.compress(out, sldDestFile);
+            }
+            if (cpgDestFile.exists()) {
+                out = PublishUtility.compress(out, cpgDestFile);
             }
             out.close();
         } catch (Exception ex) {

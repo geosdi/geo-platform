@@ -33,6 +33,7 @@
  */
 package org.geosdi.geoplatform.responce;
 
+import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.geosdi.geoplatform.gui.shared.publisher.LayerPublishAction;
 
@@ -52,7 +53,7 @@ public class InfoPreview {
     private double upperY = 0.0d;
     private String crs = "";
     private boolean isShape;
-    private boolean alreadyExists;
+    private List<LayerPublishAction> alreadyExists;
     private String message = "ok";
     private String styleName;
     //
@@ -62,7 +63,7 @@ public class InfoPreview {
 
     public InfoPreview(String url, String workspace, String layerName,
             double minX, double minY, double maxX, double maxY, String crs,
-            String styleName, boolean isShape, boolean alreadyExists) {
+            String styleName, boolean isShape, List<LayerPublishAction> alreadyExists) {
         this.dataSource = url;
         this.workspace = workspace;
         this.title = layerName;
@@ -124,11 +125,11 @@ public class InfoPreview {
         this.isShape = isShape;
     }
 
-    public boolean isAlreadyExists() {
+    public List<LayerPublishAction> getAlreadyExists() {
         return alreadyExists;
     }
 
-    public void setAlreadyExists(boolean alreadyExists) {
+    public void setAlreadyExists(List<LayerPublishAction> alreadyExists) {
         this.alreadyExists = alreadyExists;
     }
 

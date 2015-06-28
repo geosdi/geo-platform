@@ -40,6 +40,7 @@ import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.client.CatalogFinderWidgetResources;
+import org.geosdi.geoplatform.gui.client.action.wms.CatalogWMSCapabilitiesAction;
 import org.geosdi.geoplatform.gui.client.i18n.CatalogFinderConstants;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.widget.components.search.pagination.RecordsContainer;
@@ -66,7 +67,8 @@ public class CatalogTreeLayerWidgetSupport extends GPTreeLayerWidgetSupport.Tree
 
     @Override
     public void createLoadWMSGetCapabilitiesButton() {
-        this.loadWMSGetCapabilities = new Button(ButtonsConstants.INSTANCE.loadWMSGetCapabilitiesText());
+        this.loadWMSGetCapabilities = new Button(ButtonsConstants.INSTANCE
+                .loadWMSGetCapabilitiesText(), new CatalogWMSCapabilitiesAction(tree, bus));
         this.loadWMSGetCapabilities.setStyleAttribute("padding-left", "10px");
         this.loadWMSGetCapabilities.disable();
     }

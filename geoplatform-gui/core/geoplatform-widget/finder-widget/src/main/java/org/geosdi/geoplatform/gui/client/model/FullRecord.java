@@ -112,6 +112,16 @@ public class FullRecord extends AbstractRecord implements GPShortLayerBean {
         return this.isForByProtocol(OnlineResourceProtocolType.LIST_LINK);
     }
 
+    /**
+     *
+     * @return {@link URIDTO} dto
+     */
+    public URIDTO getURIDtoForWMSGetCapabilities() {
+        return (this.uriMap.containsKey(OnlineResourceProtocolType.OGC_WMS_1_1_1_HTTP_GET_CAPABILITIES)
+                ? uriMap.get(OnlineResourceProtocolType.OGC_WMS_1_1_1_HTTP_GET_CAPABILITIES)
+                : uriMap.get(OnlineResourceProtocolType.OGC_WMS_1_3_0_HTTP_GET_CAPABILITIES));
+    }
+
     private boolean isForByProtocol(
             List<OnlineResourceProtocolType> protocolList) {
         for (OnlineResourceProtocolType protocol : protocolList) {

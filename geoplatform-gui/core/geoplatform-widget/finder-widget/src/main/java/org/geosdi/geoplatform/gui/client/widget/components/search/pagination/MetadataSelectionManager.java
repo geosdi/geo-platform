@@ -42,6 +42,7 @@ import java.util.List;
 import org.geosdi.geoplatform.gui.client.model.FullRecord;
 import org.geosdi.geoplatform.gui.client.puregwt.event.EnableAddOnTreeButtonEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.event.EnableWMSGetCapabilitiesButtonEvent;
+import org.geosdi.geoplatform.gui.client.puregwt.event.wms.CatalogWMSEventHandler;
 import org.geosdi.geoplatform.gui.client.widget.components.search.tree.CatalogTreeLayerWidgetSupport;
 import org.geosdi.geoplatform.gui.client.widget.components.search.tooltip.CatalogRecordsToolTip;
 import org.geosdi.geoplatform.gui.client.widget.components.search.tooltip.GPCatalogRecordsToolTip;
@@ -110,16 +111,24 @@ public class MetadataSelectionManager implements CatalogMetadataSelectionManager
     @Override
     public void fireCatalogRecordToolTip(FullRecord record) {
         this.recordsToolTip.bindRecord(record);
+        this.fireCatalogTreeLayerHandler(record.isForWMSGetMapRequest());
+        this.enableLoadWMSGetCapabilities(record.isForWMSGetCapabilities());
     }
 
     @Override
     public void manageSelectionChanged(SelectionChangedEvent<FullRecord> se) {
+        clearRecordsExcludedList();
         this.fireCatalogTreeLayerHandler((!(se.getSelection().isEmpty())
                 && (se.getSelectedItem().isForWMSGetMapRequest())));
         this.fireLoadWMSGetCapabilities((!(se.getSelection().isEmpty())
-                && (se.getSelectedItem().isForWMSGetCapabilities())));
+                && (se.getSelectedItem().isForWMSGetCapabilities())),
+                se.getSelectedItem());
         this.fireCatalogRecordsToolTip(se.getSelection().isEmpty());
-        clearRecordsExcludedList();
+    }
+
+    protected void enableLoadWMSGetCapabilities(boolean enable) {
+        this.loadWMSGetCapabilitiesEvent.setEnable(enable);
+        bus.fireEvent(this.loadWMSGetCapabilitiesEvent);
     }
 
     /**
@@ -127,10 +136,14 @@ public class MetadataSelectionManager implements CatalogMetadataSelectionManager
      * Activate Button to load WMS GetCapabilities.</p>
      *
      * @param enable
+     * @param fullRecord
      */
-    protected void fireLoadWMSGetCapabilities(boolean enable) {
-        this.loadWMSGetCapabilitiesEvent.setEnable(enable);
-        bus.fireEvent(this.loadWMSGetCapabilitiesEvent);
+    protected void fireLoadWMSGetCapabilities(boolean enable,
+            FullRecord fullRecord) {
+        this.enableLoadWMSGetCapabilities(enable);
+        if (enable) {
+            bus.fireEvent(new CatalogWMSEventHandler(fullRecord));
+        }
     }
 
     /**

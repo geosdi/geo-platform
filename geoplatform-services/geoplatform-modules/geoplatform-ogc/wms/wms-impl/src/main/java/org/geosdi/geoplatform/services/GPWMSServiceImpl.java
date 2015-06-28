@@ -75,19 +75,23 @@ public class GPWMSServiceImpl implements GPWMSService {
     @Override
     public ServerDTO getCapabilities(String serverUrl, RequestByID request,
             String token, String authkey) throws ResourceNotFoundFault {
-        GeoPlatformServer server = serverDao.find(request.getId());
-        if (server == null) {
-            throw new ResourceNotFoundFault("Server has been deleted",
-                    request.getId());
+        ServerDTO serverDTO;
+        if (request.getId() != null) {
+            GeoPlatformServer server = serverDao.find(request.getId());
+            if (server == null) {
+                throw new ResourceNotFoundFault("Server has been deleted",
+                        request.getId());
+            }
+            serverDTO = new ServerDTO(server);
+        } else {
+            serverDTO = new ServerDTO();
+            serverDTO.setServerUrl(serverUrl);
         }
         WMSCapabilities wmsCapabilities = this.getWMSCapabilities(
                 serverUrl, token, authkey);
-        // server = this.createWMSServerFromService(server,
-        // wmsCapabilities.getService());
-        // serverDao.merge(server);
+
         List<RasterLayerDTO> layers = this.convertToLayerList(
                 wmsCapabilities.getLayer(), serverUrl);
-        ServerDTO serverDTO = new ServerDTO(server);
         serverDTO.setLayerList(layers);
 
         return serverDTO;
@@ -163,7 +167,8 @@ public class GPWMSServiceImpl implements GPWMSService {
         return shortLayers;
     }
 
-    private RasterLayerDTO getRasterAndSubRaster(Layer ancestorLayer, Layer layer, String urlServer) {
+    private RasterLayerDTO getRasterAndSubRaster(Layer ancestorLayer,
+            Layer layer, String urlServer) {
         RasterLayerDTO raster = this.convertLayerToRaster(ancestorLayer, layer, urlServer);
 
         List<Layer> subLayerList = layer.getLayerChildren();
@@ -181,7 +186,8 @@ public class GPWMSServiceImpl implements GPWMSService {
         return raster;
     }
 
-    private RasterLayerDTO convertLayerToRaster(Layer ancestorLayer, Layer layer, String urlServer) {
+    private RasterLayerDTO convertLayerToRaster(Layer ancestorLayer, Layer layer,
+            String urlServer) {
         RasterLayerDTO raster = new RasterLayerDTO();
 
         raster.setUrlServer(this.getUrlServer(urlServer));

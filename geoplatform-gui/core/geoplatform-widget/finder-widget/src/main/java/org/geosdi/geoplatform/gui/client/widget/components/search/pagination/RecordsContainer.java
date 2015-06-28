@@ -82,7 +82,7 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
     private static final XsrfTokenServiceAsync xsrf = GPXsrfTokenService.Util.getInstance();
     private static final GPCatalogFinderRemoteAsync catalogFinderRemote = GPCatalogFinderRemote.Util.getInstance();
     //
-    protected GPEventBus bus;
+    private final GPEventBus bus;
     private final CatalogFinderBean catalogFinder;
     private CheckBoxSelectionModel<FullRecord> selectionModel;
     private RowExpander rowExpander;

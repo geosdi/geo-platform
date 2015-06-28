@@ -69,6 +69,7 @@ public abstract class GPTreeExpanderNotifier<T extends TreeModel> {
 
     private void initListeners() {
         this.executor = new Listener() {
+            
             @Override
             public void handleEvent(BaseEvent be) {
                 execute();
@@ -77,6 +78,7 @@ public abstract class GPTreeExpanderNotifier<T extends TreeModel> {
         };
 
         this.message = new Listener<MessageBoxEvent>() {
+            
             @Override
             public void handleEvent(MessageBoxEvent be) {
                 if (be.getButtonClicked().getItemId().equalsIgnoreCase(Dialog.YES)) {

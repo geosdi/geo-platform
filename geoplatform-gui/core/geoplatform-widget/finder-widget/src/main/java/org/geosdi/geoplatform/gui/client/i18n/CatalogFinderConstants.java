@@ -338,4 +338,40 @@ public interface CatalogFinderConstants extends Constants {
     @DefaultStringValue("Full Metadata")//Metadata completo
     String ShowFullMetadataAction_windowText();
 
+    /**
+     * start CatalogGridLayersWidget
+     */
+    @DefaultStringValue("Filter in ignore case")
+    String CatalogGridLayersWidget_filterTooltipText();
+
+    @DefaultStringValue("Layer Name")
+    String CatalogGridLayersWidget_layerNameHeaderText();
+
+    @DefaultStringValue("Title")
+    String CatalogGridLayersWidget_titleHeaderText();
+
+    /**
+     * start CatalogWMSCapabilitiesExpander
+     */
+    @DefaultStringValue("Search Layers")
+    String CatalogWMSCapabilitiesExpander_progressBarSearchLayersText();
+
+    @DefaultStringValue("Add layer operation cancelled.")
+    String CatalogWMSCapabilitiesExpander_statusAddLayerOperationCancelledText();
+
+    /**
+     * start CatalogWMSCapabilitiesWidget
+     */
+    @DefaultStringValue("Catalog WMS Capabilities")
+    String CatalogWMSCapabilitiesWidget_headingText();
+    
+    @DefaultStringValue("Layers have been loaded correctly by the service")
+    String CatalogWMSCapabilitiesWidget_statusLayerLoadedCorrectlyText();
+    
+    @DefaultStringValue("Google sign on required")
+    String googleSignOnRequiredTitleText();
+
+    @DefaultStringValue("Is necessary to sign on Google account for access the Google Earth Builder functionality")
+    String googleSignOnRequiredBodyText();
+
 }

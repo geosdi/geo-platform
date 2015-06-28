@@ -73,17 +73,19 @@ public interface GPTreeLayerWidgetSupport extends CatalogTreeLayerHandler {
         protected Label operationLabel;
         protected Button addLayersToTreeButton;
         protected Button loadWMSGetCapabilities;
+        protected final GPEventBus bus;
 
         public TreeLayerWidgetSupport(TreePanel<GPBeanTreeModel> theTree,
-                RecordsContainer recordsContainer, GPEventBus bus) {
+                RecordsContainer recordsContainer, GPEventBus theBus) {
             tree = theTree;
             expander = new GPCatalogExpander(tree, recordsContainer);
+            this.bus = theBus;
 
             this.createLabelComponent();
             this.createLoadWMSGetCapabilitiesButton();
             this.createAddLayersTreeButton();
 
-            bus.addHandler(CatalogTreeLayerHandler.TYPE, this);
+            this.bus.addHandler(CatalogTreeLayerHandler.TYPE, this);
         }
 
         @Override

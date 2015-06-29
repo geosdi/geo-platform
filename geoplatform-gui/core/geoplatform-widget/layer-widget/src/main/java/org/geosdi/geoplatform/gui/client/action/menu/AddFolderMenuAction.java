@@ -49,8 +49,8 @@ import org.geosdi.geoplatform.gui.client.widget.form.AddFolderWidget;
  */
 public class AddFolderMenuAction extends MenuBaseAction {
 
-    private AddFolderWidget addFolder; // TODO Inject a singleton instace with Gin
-    private TreePanel treePanel;
+    private final AddFolderWidget addFolder; // TODO Inject a singleton instace with Gin
+    private final TreePanel treePanel;
 
     public AddFolderMenuAction(TreePanel theTreePanel) {
         super(LayerModuleConstants.INSTANCE.AddFolderMenuAction_titleText(),

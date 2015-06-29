@@ -45,7 +45,8 @@ public enum DCEsriScheme {
     UUID("urn:x-esri:specification:ServiceType:ArcIMS:Metadata:DocID"),
     FILE_IDENTIFIER("urn:x-esri:specification:ServiceType:ArcIMS:Metadata:FileID"),
     CONTENT_TYPE("urn:x-esri:specification:ServiceType:ArcIMS:Metadata:ContentType"),
-    RESOURCE_URL("urn:x-esri:specification:ServiceType:ArcIMS:Metadata:Server");
+    RESOURCE_URL("urn:x-esri:specification:ServiceType:ArcIMS:Metadata:Server"),
+    OGC_WMS("OGC:WMS");
 
     private final String scheme;
 

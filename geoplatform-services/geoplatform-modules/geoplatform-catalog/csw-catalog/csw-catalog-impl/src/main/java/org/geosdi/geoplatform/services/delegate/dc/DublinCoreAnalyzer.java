@@ -139,12 +139,14 @@ public interface DublinCoreAnalyzer {
                     if (value.isSetScheme()) {
                         String scheme = value.getScheme();
                         DCEsriScheme esriScheme = DCEsriScheme.fromValue(scheme);
-                        if ((esriScheme != null) && (esriScheme == DCEsriScheme.RESOURCE_URL)) {
+                        if ((esriScheme != null) && ((esriScheme == DCEsriScheme.RESOURCE_URL)
+                                || (esriScheme == DCEsriScheme.OGC_WMS))) {
                             for (String content : contentElement) {
-                                if (content.endsWith("?")) {
+                                if (content.contains("?")) {
+                                    int i = content.indexOf("?");
                                     URIDTO uriDTO = dto.getURIDtoForWMSGetCapabilities();
                                     if (uriDTO != null) {
-                                        uriDTO.setServiceURL(content);
+                                        uriDTO.setServiceURL(content.substring(0, i + 1));
                                     }
                                 }
                             }

@@ -48,9 +48,6 @@ import org.opengis.referencing.crs.CoordinateReferenceSystem;
 //import com.thoughtworks.xstream.XStream;
 /**
  * DAO for the input / output XML file used by the action.
- *
- * @author Mauro Bartolomeoli - mauro.bartolomeoli@geo-solutions.it
- *
  */
 public class FeatureConfiguration implements Cloneable {
 

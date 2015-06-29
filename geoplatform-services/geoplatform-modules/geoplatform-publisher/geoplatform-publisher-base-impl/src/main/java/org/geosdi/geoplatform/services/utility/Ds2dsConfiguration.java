@@ -47,9 +47,6 @@ import org.springframework.context.annotation.Configuration;
  * a source GeoTools DataStore to an output GeoTools DataStore.
  *
  * Both source and output features options can be configured.
- *
- * @author Mauro Bartolomeoli - mauro.bartolomeoli@geo-solutions.it
- *
  */
 @Configuration
 public class Ds2dsConfiguration {

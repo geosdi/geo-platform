@@ -42,7 +42,6 @@ import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.config.annotation.SingleSelection;
 import org.geosdi.geoplatform.gui.client.widget.tree.menu.store.keybuilder.SelectionCompositeKeyBuilder;
 import org.geosdi.geoplatform.gui.client.widget.tree.menu.strategy.SingleSelectionMenuStrategy;
-import org.geosdi.geoplatform.gui.configuration.composite.menu.store.SingleSelectionCompositeKey;
 import org.geosdi.geoplatform.gui.configuration.composite.menu.store.StoreCompositeKey;
 import org.geosdi.geoplatform.gui.impl.tree.menu.strategy.TreeMenuStrategyManager;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;

@@ -63,8 +63,8 @@ public interface CatalogFinderConstants extends Constants {
     @DefaultStringValue("Catalog Finder")
     String GPCatalogExpander_alertMessageTitleText();
 
-    @DefaultStringValue(
-            "You can put layers into folders only.\n Please select the correct node.")
+    @DefaultStringValue("You can put layers into folders only."
+            + "\n Please close window and select the correct node.")
     String GPCatalogExpander_alertMessageBodyText();
 
     /**
@@ -364,14 +364,15 @@ public interface CatalogFinderConstants extends Constants {
      */
     @DefaultStringValue("Catalog WMS Capabilities")
     String CatalogWMSCapabilitiesWidget_headingText();
-    
+
     @DefaultStringValue("Layers have been loaded correctly by the service")
     String CatalogWMSCapabilitiesWidget_statusLayerLoadedCorrectlyText();
-    
+
     @DefaultStringValue("Google sign on required")
     String googleSignOnRequiredTitleText();
 
-    @DefaultStringValue("Is necessary to sign on Google account for access the Google Earth Builder functionality")
+    @DefaultStringValue(
+            "Is necessary to sign on Google account for access the Google Earth Builder functionality")
     String googleSignOnRequiredBodyText();
 
 }

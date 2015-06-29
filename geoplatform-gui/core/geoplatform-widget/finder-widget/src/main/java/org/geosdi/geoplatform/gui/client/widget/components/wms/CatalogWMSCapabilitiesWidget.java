@@ -77,7 +77,7 @@ public class CatalogWMSCapabilitiesWidget extends GeoPlatformWindow
     @Override
     public void reset() {
         this.catalogGridLayers.resetComponents();
-        this.fullRecord = null;
+//        this.fullRecord = null;
     }
 
     @Override

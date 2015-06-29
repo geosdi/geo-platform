@@ -41,10 +41,6 @@ import org.geotools.data.DataStoreFinder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- *
- * @author ETj (etj at geo-solutions.it)
- */
 public class FeatureConfigurationUtil {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(FeatureConfigurationUtil.class);

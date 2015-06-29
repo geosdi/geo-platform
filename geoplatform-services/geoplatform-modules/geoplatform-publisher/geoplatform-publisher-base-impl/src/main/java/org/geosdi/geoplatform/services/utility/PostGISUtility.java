@@ -123,6 +123,7 @@ public class PostGISUtility implements InitializingBean {
         outputDataStoreMap.put("database", this.dbNamePostgisDatastore);
         outputDataStoreMap.put("user", this.userNameDBPostgisDatastore);
         outputDataStoreMap.put("passwd", this.passwordDBPostgisDatastore);
+        outputDataStoreMap.put("charset", "UTF-8");
     }
 
     public Map<String, Serializable> getOutputDataStoreMap() {

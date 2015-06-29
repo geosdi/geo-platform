@@ -46,6 +46,7 @@ import java.util.*;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import javax.annotation.Resource;
+import org.apache.commons.httpclient.NameValuePair;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.shared.publisher.LayerPublishAction;
 import org.geosdi.geoplatform.gui.shared.util.GPSharedUtils;
@@ -1261,8 +1262,13 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
                 "\n INFO: CREATE DATASTORE " + userWorkspace + " NAME: " + info.name);
         try {
             logger.info("INFO EPSG: " + info.epsg);
+            NameValuePair[] params = new NameValuePair[1];
+            NameValuePair nameValuePair = new NameValuePair("charset", "UTF-8");
+            params[0] = nameValuePair;
             boolean published = restPublisher.publishShp(userWorkspace,
-                    datatStoreName, info.name, tempFile, info.epsg, info.sld);
+                    datatStoreName, params, info.name,
+                    GeoServerRESTPublisher.UploadMethod.FILE,
+                    tempFile.toURI(), info.epsg, info.sld);
             if (published) {
                 logger.info(
                         info.name + " correctly published in the "

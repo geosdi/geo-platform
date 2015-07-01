@@ -23,7 +23,7 @@
             <version>${project.version}</version>
         </dependency>        
         
-<!-- SPRING -->
+        <!-- SPRING -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
@@ -44,12 +44,7 @@
             <artifactId>spring-expression</artifactId>
         </dependency>
         
-<!-- CXF -->
-        <dependency>
-            <groupId>javax.xml.ws</groupId>
-            <artifactId>jaxws-api</artifactId>
-        </dependency>
-        
+        <!-- CXF -->
         <dependency>
             <groupId>org.codehaus.jra</groupId>
             <artifactId>jra</artifactId>

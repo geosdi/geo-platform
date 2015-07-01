@@ -66,10 +66,6 @@
 
         <!-- CXF -->
         <dependency>
-            <groupId>javax.xml.ws</groupId>
-            <artifactId>jaxws-api</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.codehaus.jra</groupId>
             <artifactId>jra</artifactId>
         </dependency>

@@ -134,11 +134,6 @@
         </dependency>
 
         <!-- CXF -->
-        <dependency>
-            <groupId>javax.xml.ws</groupId>
-            <artifactId>jaxws-api</artifactId>
-        </dependency>
-        
         <dependency> 
             <groupId>org.apache.cxf</groupId> 
             <artifactId>cxf-rt-frontend-jaxrs</artifactId> 

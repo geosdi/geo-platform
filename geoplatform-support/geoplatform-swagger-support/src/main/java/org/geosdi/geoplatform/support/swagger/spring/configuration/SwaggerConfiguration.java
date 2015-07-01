@@ -63,5 +63,7 @@ public interface SwaggerConfiguration extends InitializingBean {
     String getLicenseUrl();
 
     Boolean isScan();
+    
+    String[] getSchemes();
 
 }

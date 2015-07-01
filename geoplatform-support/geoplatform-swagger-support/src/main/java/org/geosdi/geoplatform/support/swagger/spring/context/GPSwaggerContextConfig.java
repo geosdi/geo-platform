@@ -71,6 +71,7 @@ class GPSwaggerContextConfig {
                 super.setResourcePackage(
                         gpSwaggerConfiguration.getResourcePackage());
                 super.setVersion(gpSwaggerConfiguration.getVersion());
+                super.setSchemes(gpSwaggerConfiguration.getSchemes());
                 super.setHost(gpSwaggerConfiguration.getHost());
                 super.setBasePath(gpSwaggerConfiguration.getBasePath());
                 super.setTitle(gpSwaggerConfiguration.getTitle());
@@ -80,6 +81,8 @@ class GPSwaggerContextConfig {
                 super.setLicenseUrl(gpSwaggerConfiguration.getLicenseUrl());
                 super.setScan(gpSwaggerConfiguration.isScan());
             }
+
         };
     }    
+
 }

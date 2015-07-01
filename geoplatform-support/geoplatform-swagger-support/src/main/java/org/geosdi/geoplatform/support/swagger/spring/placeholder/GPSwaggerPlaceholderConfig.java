@@ -58,7 +58,7 @@ class GPSwaggerPlaceholderConfig {
     @Bean(name = "gpSwaggerPropertyConfigurer")
     @Required
     public static PropertySourcesPlaceholderConfigurer gpSwaggerPropertyConfigurer(
-            @Value("#{systemProperties['GP_DATA_DIR']}") String gpConfigDataDir,
+            @Value("#{systemProperties['GP_SWAGGER_DATA_DIR']}") String gpConfigDataDir,
             @Value("#{systemProperties['GP_SWAGGER_FILE_PROP']}") String gpSwaggerFileProp)
             throws MalformedURLException {
 

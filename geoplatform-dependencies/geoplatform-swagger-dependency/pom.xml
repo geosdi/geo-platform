@@ -37,7 +37,7 @@
     </dependencyManagement>
     
     <properties>
-        <swagger.version>1.5.1-M2</swagger.version>
+        <swagger.version>1.5.2-M2</swagger.version>
     </properties>
 
 </project>

@@ -45,7 +45,7 @@ import org.springframework.core.io.UrlResource;
  */
 class SwaggerResourcesLoader {
 
-    Resource[] loadResources(String gpConfigDataDir,
+    Resource[] loadResources(String gpSwaggerDataDir,
             String gpSwaggerFileProp) throws MalformedURLException {
 
         String fileToSearch = ((gpSwaggerFileProp != null)
@@ -58,7 +58,7 @@ class SwaggerResourcesLoader {
                                         : gpSwaggerFileProp + ".properties" : "gp-swagger.properties";
 
         Resource[] resources = new Resource[]{new ClassPathResource(fileToSearch),
-            new UrlResource("file:" + gpConfigDataDir
+            new UrlResource("file:" + gpSwaggerDataDir
             + "/" + fileToSearch)};
 
         return resources;

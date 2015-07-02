@@ -117,7 +117,12 @@
             <artifactId>geoplatform-cxf-server-configurator</artifactId>
             <version>${project.version}</version>
         </dependency>
-
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-swagger-support</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
     <build>

@@ -149,7 +149,7 @@ import org.geosdi.geoplatform.services.rs.path.GPServiceRSPathConfig;
         }
 )
 @Path(value = GPServiceRSPathConfig.DEFAULT_RS_SERVICE_PATH)
-@Api(value = GPServiceRSPathConfig.DEFAULT_RS_SERVICE_PATH,
+@Api(value = GPServiceRSPathConfig.GP_CORE_SERVICE_RS_PATH,
         description = "Base GeoPlatform REST Service Core")
 @Consumes(value = {MediaType.APPLICATION_JSON})
 @Produces(value = {MediaType.APPLICATION_JSON})
@@ -2200,4 +2200,5 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @WebResult(name = "gsUser")
     String getGSUserByAuthkey(@WebParam(name = "authkey") String authkey);
     // </editor-fold>
+
 }

@@ -13,6 +13,10 @@
 
     <name>Geo-Platform :: == WS WebApp</name>
     
+    <properties>
+        <swagger-ui-version>2.1.0</swagger-ui-version>
+    </properties>
+    
     <dependencies>        
         <dependency>
             <groupId>org.bouncycastle</groupId>
@@ -216,11 +220,19 @@
             <groupId>cglib</groupId>
             <artifactId>cglib-nodep</artifactId>
         </dependency>
+        
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <scope>provided</scope>
         </dependency>
+        <!--        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+            <scope>provided</scope>
+        </dependency>-->
+        
         <!-- =============================================================== -->
         <!-- JUnit -->
         <!-- =============================================================== -->
@@ -537,7 +549,7 @@
     </profiles>
     <build>
         <defaultGoal>jetty:run</defaultGoal>
-        <!-- Name of the generated WAR file -->
+        <!--Name of the generated WAR file--> 
         <finalName>geoplatform-service</finalName>
         <plugins>
             <plugin>
@@ -580,10 +592,106 @@
                     <stopKey>foo</stopKey>
                     <stopPort>9999</stopPort>
                     <webApp>
-                        <contextPath>/geoplatform-service</contextPath>
+                        <contextPath>/</contextPath>
                     </webApp>
                 </configuration>
             </plugin>
+            
+            <plugin>
+                <groupId>com.googlecode.maven-download-plugin</groupId>
+                <artifactId>download-maven-plugin</artifactId>
+                <version>1.2.1</version>
+                <executions>
+                    <execution>
+                        <id>swagger-ui</id>
+                        <goals>
+                            <goal>wget</goal>
+                        </goals>
+                        <configuration>
+                            <url>https://github.com/swagger-api/swagger-ui/archive/v${swagger-ui-version}.tar.gz</url>
+                            <unpack>true</unpack>
+                            <outputDirectory>${project.build.directory}</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.6</version>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>src/main/webapp</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.build.directory}/swagger-ui-${swagger-ui-version}/dist</directory>
+                                    <filtering>true</filtering>
+                                    <excludes>
+                                        <exclude>index.html</exclude>
+                                    </excludes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>remove-build-files</id>
+                        <phase>clean</phase>
+                        <configuration>
+                            <tasks>
+                                <delete dir="${basedir}/src/main/webapp/lib" />
+                                <delete dir="${basedir}/src/main/webapp/css" />
+                                <delete dir="${basedir}/src/main/webapp/fonts" />
+                                <delete dir="${basedir}/src/main/webapp/images" />
+                                <delete file="${basedir}/src/main/webapp/o2c.html" />
+                                <delete file="${basedir}/src/main/webapp/swagger-ui.js" />
+                                <delete file="${basedir}/src/main/webapp/swagger-ui.min.js" />
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            
+            <!--            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.6</version>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>target/${project.artifactId}-${project.version}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.build.directory}/swagger-ui-${swagger-ui-version}/dist</directory>
+                                    <filtering>true</filtering>
+                                    <excludes>
+                                        <exclude>index.html</exclude>
+                                    </excludes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>-->
         </plugins>
     </build>
 </project>

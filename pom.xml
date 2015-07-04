@@ -142,6 +142,7 @@
         <module>geoplatform-tools</module>
         <module>geoplatform-xml-binding</module>
         <module>geoplatform-shared</module>
+        <module>geoplatform-rest-documentation</module>
         <module>test</module>
     </modules>
     

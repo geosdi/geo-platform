@@ -1,19 +1,26 @@
-
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    
     <parent>
         <groupId>org.geosdi</groupId>
-        <artifactId>geoplatform-ws-core</artifactId>
+        <artifactId>geoplatform-rest-documentation</artifactId>
         <version>1.7-SNAPSHOT</version>
     </parent>
-    <groupId>org.geosdi</groupId>
-    <artifactId>geoplatform-ws-webapp</artifactId>
-    <version>1.7-SNAPSHOT</version>
-    <packaging>war</packaging>
-
-    <name>Geo-Platform :: == WS WebApp</name>
     
-    <dependencies>        
+    <groupId>org.geosdi</groupId>
+    <artifactId>geoplatform-rest-core-documentation</artifactId>
+    <packaging>war</packaging>
+    <version>1.7-SNAPSHOT</version>
+    
+    <name>Geo-Platform :: == Rest Core Documentation</name>
+    <url>http://maven.apache.org</url>
+    
+    <properties>
+        <swagger-ui-version>2.1.0</swagger-ui-version>
+    </properties>
+    
+    <dependencies>
         <dependency>
             <groupId>org.bouncycastle</groupId>
             <artifactId>bcprov-jdk16</artifactId>
@@ -54,17 +61,6 @@
             </exclusions>
         </dependency>
         
-        <!-- =============================================================== -->
-        <!-- GEOPLATFORM SCHEDULER -->
-        <!-- =============================================================== -->
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-scheduler-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-scheduler-impl</artifactId>
-        </dependency>
         <!-- =============================================================== -->
         <!-- GEOPLATFORM -->
         <!-- =============================================================== -->
@@ -317,236 +313,12 @@
             <artifactId>geoplatform-cxf-server-configurator</artifactId>
             <version>${project.version}</version>
         </dependency>
-
     </dependencies>
     
-    <!-- "mvn -Dfull" is equal to "mvn -P wms,wfs,csw,publisher,tracking,finder"  -->
-    <profiles>
-        <!-- =============================================================== -->
-        <!-- GEOPLATFORM WMS -->
-        <!-- =============================================================== -->
-        <profile>
-            <id>wms</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-                <property>
-                    <name>full</name>
-                </property>
-            </activation>
-            <dependencies>
-                <dependency>
-                    <groupId>org.geosdi</groupId>
-                    <artifactId>geoplatform-wms-api</artifactId>
-                    <exclusions>
-                        <exclusion>
-                            <groupId>cglib</groupId>
-                            <artifactId>cglib</artifactId>
-                        </exclusion>
-                    </exclusions>
-                </dependency>
-                <dependency>
-                    <groupId>org.geosdi</groupId>
-                    <artifactId>geoplatform-wms-impl</artifactId>
-                    <exclusions>
-                        <exclusion>
-                            <groupId>cglib</groupId>
-                            <artifactId>cglib</artifactId>
-                        </exclusion>
-                    </exclusions>
-                </dependency>
-            </dependencies>
-        </profile>
-        
-        <!-- =============================================================== -->
-        <!-- GEOPLATFORM WFS -->
-        <!-- =============================================================== -->
-        <profile>
-            <id>wfs</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-                <property>
-                    <name>full</name>
-                </property>
-            </activation>
-            <dependencies>
-                <dependency>
-                    <groupId>org.geosdi</groupId>
-                    <artifactId>geoplatform-wfs-api</artifactId>
-                    <exclusions>
-                        <exclusion>
-                            <groupId>cglib</groupId>
-                            <artifactId>cglib</artifactId>
-                        </exclusion>
-                    </exclusions>
-                </dependency>
-                <dependency>
-                    <groupId>org.geosdi</groupId>
-                    <artifactId>geoplatform-wfs-impl</artifactId>
-                    <exclusions>
-                        <exclusion>
-                            <groupId>cglib</groupId>
-                            <artifactId>cglib</artifactId>
-                        </exclusion>
-                    </exclusions>
-                </dependency>
-            </dependencies>
-        </profile>
-        
-        <!-- =============================================================== -->
-        <!-- GEOPLATFORM PUBLISHER -->
-        <!-- =============================================================== -->
-        <profile>
-            <id>publisher</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-                <property>
-                    <name>full</name>
-                </property>
-            </activation>
-            <dependencies>
-                <dependency>
-                    <groupId>org.geosdi</groupId>
-                    <artifactId>geoplatform-publisher-api</artifactId>
-                    <exclusions>
-                        <exclusion>
-                            <groupId>cglib</groupId>
-                            <artifactId>cglib</artifactId>
-                        </exclusion>
-                    </exclusions>
-                </dependency>
-                <dependency>
-                    <groupId>org.geosdi</groupId>
-                    <artifactId>geoplatform-publisher-impl</artifactId>
-                    <exclusions>
-                        <exclusion>
-                            <groupId>cglib</groupId>
-                            <artifactId>cglib</artifactId>
-                        </exclusion>
-                    </exclusions>
-                </dependency>
-            </dependencies>
-        </profile>
-        <!-- =============================================================== -->
-        <!-- GEOPLATFORM TRACKING -->
-        <!-- =============================================================== -->
-        <profile>
-            <id>tracking</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-                <property>
-                    <name>full</name>
-                </property>
-            </activation>
-            <dependencies>
-                <dependency>
-                    <groupId>org.geosdi</groupId>
-                    <artifactId>geoplatform-tracking-api</artifactId>
-                </dependency>
-                <dependency>
-                    <groupId>org.geosdi</groupId>
-                    <artifactId>geoplatform-tracking-impl</artifactId>
-                </dependency>
-            </dependencies>
-        </profile>
-        <!-- =============================================================== -->
-        <!-- GEOPLATFORM GEONETWORK FINDER -->
-        <!-- =============================================================== -->
-        <profile>
-            <id>finder</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-                <property>
-                    <name>full</name>
-                </property>
-            </activation>
-            <dependencies>
-                <dependency>
-                    <groupId>org.geosdi</groupId>
-                    <artifactId>geonetwork-catalog-api</artifactId>
-                </dependency>
-                <dependency>
-                    <groupId>org.geosdi</groupId>
-                    <artifactId>geonetwork-catalog-impl</artifactId>
-                </dependency>
-            </dependencies>
-        </profile>
-        <!-- =============================================================== -->
-        <!-- GEOPLATFORM CSW CATALOG FINDER -->
-        <!-- =============================================================== -->
-        <profile>
-            <id>csw</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-                <property>
-                    <name>full</name>
-                </property>
-            </activation>
-            <dependencies>
-                <dependency>
-                    <groupId>org.geosdi</groupId>
-                    <artifactId>csw-catalog-api</artifactId>
-                </dependency>
-                <dependency>
-                    <groupId>org.geosdi</groupId>
-                    <artifactId>csw-catalog-impl</artifactId>
-                </dependency>
-            </dependencies>
-        </profile>
-        
-        <!--================================================================= -->
-        <!-- Run cobertura on the sources of geoplatform-ws-core-impl -->
-        <!--================================================================= -->
-        <profile>
-            <id>cob</id>
-            <!-- <activation><activeByDefault /></activation> -->
-            <dependencies>
-                <!-- TODO Is it indispensable? -->
-                <!-- Include referenced classes -->
-                <dependency>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>cobertura-maven-plugin</artifactId>
-                    <version>2.5.1</version>
-                </dependency>
-            </dependencies>
-            <build>
-                <plugins>
-                    <!-- Extract geoplatform-ws-impl classes (already instrumented) -->
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-dependency-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>unpack_ws_impl</id>
-                                <phase>process-classes</phase>
-                                <goals>
-                                    <goal>unpack</goal>
-                                </goals>
-                                <configuration>
-                                    <artifactItems>
-                                        <artifactItem>
-                                            <groupId>org.geosdi</groupId>
-                                            <artifactId>geoplatform-ws-core-impl</artifactId>
-                                            <!-- <classifier>flowdata</classifier> -->
-                                            <type>jar</type>
-                                            <overWrite>true</overWrite>
-                                            <outputDirectory>${project.build.directory}/classes</outputDirectory>
-                                            <includes>**/*.class</includes>
-                                        </artifactItem>
-                                    </artifactItems>
-                                    <overWriteReleases>true</overWriteReleases>
-                                    <overWriteSnapshots>true</overWriteSnapshots>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
     <build>
         <defaultGoal>jetty:run</defaultGoal>
-        <!--Name of the generated WAR file--> 
-        <finalName>geoplatform-service</finalName>
+        <finalName>geoplatform-rest-core-documentation</finalName>
+        
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -592,7 +364,76 @@
                     </webApp>
                 </configuration>
             </plugin>
-       
+            
+            <plugin>
+                <groupId>com.googlecode.maven-download-plugin</groupId>
+                <artifactId>download-maven-plugin</artifactId>
+                <version>1.2.1</version>
+                <executions>
+                    <execution>
+                        <id>swagger-ui</id>
+                        <goals>
+                            <goal>wget</goal>
+                        </goals>
+                        <configuration>
+                            <url>https://github.com/swagger-api/swagger-ui/archive/v${swagger-ui-version}.tar.gz</url>
+                            <unpack>true</unpack>
+                            <outputDirectory>${project.build.directory}</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.6</version>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>src/main/webapp</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.build.directory}/swagger-ui-${swagger-ui-version}/dist</directory>
+                                    <filtering>true</filtering>
+                                    <excludes>
+                                        <exclude>index.html</exclude>
+                                    </excludes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>remove-build-files</id>
+                        <phase>clean</phase>
+                        <configuration>
+                            <tasks>
+                                <delete dir="${basedir}/src/main/webapp/lib" />
+                                <delete dir="${basedir}/src/main/webapp/css" />
+                                <delete dir="${basedir}/src/main/webapp/fonts" />
+                                <delete dir="${basedir}/src/main/webapp/images" />
+                                <delete file="${basedir}/src/main/webapp/o2c.html" />
+                                <delete file="${basedir}/src/main/webapp/swagger-ui.js" />
+                                <delete file="${basedir}/src/main/webapp/swagger-ui.min.js" />
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 </project>

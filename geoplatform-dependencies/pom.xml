@@ -51,6 +51,7 @@
         <module>geoplatform-jackson-dependency</module>
         <module>geoplatform-dropwizard-dependency</module>
         <module>geoplatform-swagger-dependency</module>
+        <module>geoplatform-httpclient-dependency</module>
     </modules>
 
 </project>

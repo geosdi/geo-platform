@@ -588,7 +588,7 @@
                     <stopKey>foo</stopKey>
                     <stopPort>9999</stopPort>
                     <webApp>
-                        <contextPath>/</contextPath>
+                        <contextPath>/geoplatform-service</contextPath>
                     </webApp>
                 </configuration>
             </plugin>

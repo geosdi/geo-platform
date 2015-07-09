@@ -61,7 +61,7 @@ class GPElasticSearchConnectorConfig {
     @Bean(name = "elastichSearchClient", destroyMethod = "close")
     @Required
     public static Client gpElasticSearchConnector(@Qualifier(
-            value = "elBaseWarningConfig") GPElasticSearchProperties gpBaseElasticSearchProperties) {
+            value = "gpBaseElasticSearchProperties") GPElasticSearchProperties gpBaseElasticSearchProperties) {
 
         logger.debug("\n\n@@@@@@@@@@@@@@@@@@INITIALIZING ELASTIC SEARCH WITH "
                 + "CONFIGURATION : {}\n", gpBaseElasticSearchProperties);

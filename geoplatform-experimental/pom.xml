@@ -17,6 +17,7 @@
     
     <modules>
         <module>geoplatform-mongodb</module>
+        <module>geoplatform-elastic-search-connector</module>
     </modules>
 
 </project>

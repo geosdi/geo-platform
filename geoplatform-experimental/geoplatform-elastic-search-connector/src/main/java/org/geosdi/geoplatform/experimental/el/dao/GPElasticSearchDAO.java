@@ -35,6 +35,10 @@
  */
 package org.geosdi.geoplatform.experimental.el.dao;
 
+import org.geosdi.geoplatform.experimental.el.index.GPIndexCreator;
+import org.geosdi.geoplatform.experimental.el.mapper.GPBaseMapper;
+import org.springframework.beans.factory.InitializingBean;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -44,17 +48,22 @@ package org.geosdi.geoplatform.experimental.el.dao;
  */
 public interface GPElasticSearchDAO<D extends Object> {
 
-    D persist(D entity);
+    D persist(D document);
 
-    void update(D entity);
+    void update(D document);
 
     void removeAll();
+
+    <Mapper extends GPBaseMapper<D>> void setMapper(Mapper theMapper);
+
+    <IC extends GPIndexCreator> void setIndexCreator(IC theIndexCreator);
 
     /**
      *
      * @param <D>
      */
-    interface GPElasticSearchBaseDAO<D extends Object> extends GPElasticSearchDAO<D> {
+    interface GPElasticSearchBaseDAO<D extends Object>
+            extends GPElasticSearchDAO<D>, InitializingBean {
 
         /**
          * <p>

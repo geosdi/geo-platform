@@ -33,39 +33,80 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.experimental.el.index;
+package org.geosdi.geoplatform.experimental.el.mapper;
 
-import org.elasticsearch.client.Client;
-import org.springframework.core.Ordered;
+import java.io.File;
+import java.io.InputStream;
+import java.io.Reader;
+import java.net.URL;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
+ *
+ * @param <D>
  */
-public interface GPIndexCreator extends Ordered {
-
-    void createIndex() throws Exception;
-
-    void deleteIndex() throws Exception;
-
-    boolean existIndex() throws Exception;
-
-    <IS extends GPIndexSettings> IS getIndexSettings();
-
-    Client client();
+public interface GPElasticSearchMapper<D extends Object> {
 
     /**
-     * <p>
-     * Index Settings Interface to define both IndexName and IndexType
-     * </p>
+     *
+     * @param url representing {@link URL} as String
+     *
+     * @return D
+     * @throws Exception
      */
-    interface GPIndexSettings {
+    D read(URL url) throws Exception;
 
-        String getIndexName();
+    /**
+     *
+     * @param file
+     *
+     * @return D
+     * @throws Exception
+     */
+    D read(File file) throws Exception;
 
-        String getIndexType();
+    /**
+     *
+     * @param in
+     *
+     * @return D
+     * @throws Exception
+     */
+    D read(InputStream in) throws Exception;
 
-    }
+    /**
+     *
+     * @param r
+     *
+     * @return D
+     * @throws Exception
+     */
+    D read(Reader r) throws Exception;
+    
+    /**
+     * 
+     * @param s
+     * 
+     * @return D
+     * @throws Exception 
+     */
+    D read(String s) throws Exception;
+
+    /**
+     *
+     * @param document
+     * 
+     * @return
+     * @throws Exception
+     */
+    String writeAsString(D document) throws Exception;
+
+    /**
+     * 
+     * @return {@link String} Mapper Name
+     */
+    String getMapperName();
 
 }

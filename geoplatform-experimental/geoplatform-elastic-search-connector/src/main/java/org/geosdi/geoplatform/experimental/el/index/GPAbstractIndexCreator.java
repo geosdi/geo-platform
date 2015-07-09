@@ -54,7 +54,20 @@ public abstract class GPAbstractIndexCreator implements GPIndexCreator,
     protected Logger logger;
     //
     @Resource(name = "elastichSearchClient")
-    Client elastichSearchClient;
+    private Client elastichSearchClient;
+
+    @Override
+    public synchronized void createIndex() throws Exception {
+        if (!existIndex()) {
+            logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@INDEX_NAME : {} doesn't "
+                    + "exist, so i will create it.\n", getIndexName());
+            this.elastichSearchClient.admin().indices()
+                    .prepareCreate(getIndexName()).get();
+        } else {
+            logger.debug("\n\n######################INDEX_NAME : {} "
+                    + "already exists.\n", getIndexName());
+        }
+    }
 
     @Override
     public synchronized void deleteIndex() throws Exception {
@@ -67,6 +80,11 @@ public abstract class GPAbstractIndexCreator implements GPIndexCreator,
             logger.debug("@@@@@@@@@@@@@@@@@@@@INDEX_NAME : {} doesn't exist.\n",
                     getIndexName());
         }
+    }
+
+    @Override
+    public Client client() {
+        return this.elastichSearchClient;
     }
 
     @Override

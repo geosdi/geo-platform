@@ -33,39 +33,62 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.experimental.el.index;
+package org.geosdi.geoplatform.experimental.el.mapper;
 
-import org.elasticsearch.client.Client;
-import org.springframework.core.Ordered;
+import com.google.common.base.Preconditions;
+import java.io.File;
+import java.io.InputStream;
+import java.io.Reader;
+import java.net.URL;
+import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
+ *
+ * @param <D>
  */
-public interface GPIndexCreator extends Ordered {
+public abstract class GPBaseMapper<D extends Object> implements GPElasticSearchMapper<D> {
 
-    void createIndex() throws Exception;
+    private final Class<D> documentClass;
+    private final GPJacksonSupport reader = new GPJacksonSupport();
 
-    void deleteIndex() throws Exception;
+    public GPBaseMapper(Class<D> theDocumentClass) {
+        Preconditions.checkNotNull(theDocumentClass,
+                "The Document Class must not be null");
+        this.documentClass = theDocumentClass;
+    }
 
-    boolean existIndex() throws Exception;
+    @Override
+    public D read(URL url) throws Exception {
+        return reader.getDefaultMapper().readValue(url, documentClass);
+    }
 
-    <IS extends GPIndexSettings> IS getIndexSettings();
+    @Override
+    public D read(File file) throws Exception {
+        return this.reader.getDefaultMapper().readValue(file, documentClass);
+    }
 
-    Client client();
+    @Override
+    public D read(InputStream in) throws Exception {
+        return reader.getDefaultMapper().readValue(in, documentClass);
+    }
 
-    /**
-     * <p>
-     * Index Settings Interface to define both IndexName and IndexType
-     * </p>
-     */
-    interface GPIndexSettings {
+    @Override
+    public D read(Reader r) throws Exception {
+        return this.reader.getDefaultMapper().readValue(r, documentClass);
+    }
 
-        String getIndexName();
+    @Override
+    public D read(String s) throws Exception {
+        return this.reader.getDefaultMapper().readValue(s, documentClass);
+    }
 
-        String getIndexType();
-
+    @Override
+    public String writeAsString(D document) throws Exception {
+        return this.reader.getDefaultMapper()
+                .writeValueAsString(document);
     }
 
 }

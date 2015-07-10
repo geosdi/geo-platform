@@ -48,11 +48,17 @@ import org.springframework.beans.factory.InitializingBean;
  */
 public interface GPElasticSearchDAO<D extends Object> {
 
-    D persist(D document);
+    /**
+     * 
+     * @param document
+     * @return D
+     * @throws Exception 
+     */
+    D persist(D document) throws Exception;
 
-    void update(D document);
+    void update(D document) throws Exception;
 
-    void removeAll();
+    void removeAll() throws Exception;
 
     <Mapper extends GPBaseMapper<D>> void setMapper(Mapper theMapper);
 
@@ -70,8 +76,9 @@ public interface GPElasticSearchDAO<D extends Object> {
          * Delete Document by ElasticSearch ID</p>
          *
          * @param id
+         * @throws java.lang.Exception
          */
-        void delete(String id);
+        void delete(String id) throws Exception;
 
         /**
          * <p>
@@ -90,8 +97,9 @@ public interface GPElasticSearchDAO<D extends Object> {
          * Return the number of Documents</p>
          *
          * @return {@link Long}
+         * @throws java.lang.Exception
          */
-        Long count();
+        Long count() throws Exception;
 
     }
 

@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.experimental.el.dao;
 
 import com.google.common.base.Preconditions;
 import org.elasticsearch.action.count.CountResponse;
+import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.index.query.QueryBuilders;
@@ -64,7 +65,19 @@ public abstract class AbstractElasticSearchDAO<D extends Object>
 
     @Override
     public void delete(String id) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Preconditions.checkArgument(((id != null) && !(id.isEmpty())),
+                "The ID must not be null or an Empty String");
+        DeleteResponse response = elastichSearchClient
+                .prepareDelete(getIndexName(), getIndexType(), id)
+                .execute()
+                .actionGet();
+        if (response.isFound()) {
+            logger.debug("#################Document with ID : {}, "
+                    + "was deleted.", id);
+        } else {
+            logger.debug("#################Document with ID : {}, "
+                    + "was not found in ElasticSearch.");
+        }
     }
 
     @Override

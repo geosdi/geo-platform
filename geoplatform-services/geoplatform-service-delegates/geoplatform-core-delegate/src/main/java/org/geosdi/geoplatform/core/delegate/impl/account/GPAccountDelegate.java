@@ -155,11 +155,11 @@ public class GPAccountDelegate implements AccountDelegate {
     @Override
     public Long updateUser(GPUser user)
             throws ResourceNotFoundFault, IllegalParameterFault {
+        EntityCorrectness.checkAccountLog(user);
         if (user.getId() == null) {
             throw new IllegalArgumentException("User \"ID\" must be NOT NULL");
         }
         GPUser orig = (GPUser) this.getAccountById(user.getId());
-        EntityCorrectness.checkAccountLog(orig); // TODO assert
 
         // Set the values (except username and property not managed)
         String name = user.getName();

@@ -5,8 +5,10 @@ target/
 .settings
 .classpath
 .project
+.idea
 
 # ignore demo artifact folders
+*.iml
 gwt-unitCache/
 *_demo/
 /geoplatform-gui/demos/*-demo/war/WEB-INF/*/
@@ -17,3 +19,7 @@ gwt-unitCache/
 /geoplatform-rest-documentation/geoplatform-rest-core-documentation/src/main/webapp/css/
 /geoplatform-rest-documentation/geoplatform-rest-core-documentation/src/main/webapp/o2c.html
 /geoplatform-rest-documentation/geoplatform-rest-core-documentation/src/main/webapp/lib/
+/geoplatform-experimental/geoplatform-elastic-search-connector/geoplatform-elastic-search-connector.iml
+/geoplatform-dependencies/geoplatform-cxf-dependency/geoplatform-cxf-dependency.iml
+/geoplatform-dependencies/geoplatform-dropwizard-dependency/geoplatform-dropwizard-dependency.iml
+/geoplatform-dependencies/geoplatform-httpclient-dependency/geoplatform-httpclient-dependency.iml

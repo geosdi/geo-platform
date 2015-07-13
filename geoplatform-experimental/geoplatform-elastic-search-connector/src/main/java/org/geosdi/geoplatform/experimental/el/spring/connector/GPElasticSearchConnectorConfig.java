@@ -40,8 +40,8 @@ import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.ImmutableSettings;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import org.geosdi.geoplatform.experimental.el.spring.configuration.GPElasticSearchProperties;
-import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.context.annotation.Bean;
@@ -55,8 +55,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 class GPElasticSearchConnectorConfig {
 
-    @GeoPlatformLog
-    static Logger logger;
+    private static final Logger logger = LoggerFactory
+            .getLogger(GPElasticSearchConnectorConfig.class);
 
     @Bean(name = "elastichSearchClient", destroyMethod = "close")
     @Required

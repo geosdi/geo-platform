@@ -61,6 +61,11 @@ public class GPJacksonSupport implements JacksonSupport {
         this(defaultProp());
     }
 
+    public GPJacksonSupport(DateFormat format) {
+        this();
+        this.mapper.setDateFormat(format);
+    }
+
     public GPJacksonSupport(JacksonSupportConfigFeature... features) {
         mapper = new ObjectMapper();
         for (JacksonSupportConfigFeature feature : features) {

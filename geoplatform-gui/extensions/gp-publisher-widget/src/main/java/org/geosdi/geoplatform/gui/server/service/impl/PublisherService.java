@@ -147,7 +147,7 @@ public class PublisherService implements IPublisherService {
     }
 
     @Override
-    public boolean createWorkspace(String workspaceName,
+    public boolean createWorkspace(String workspaceName, boolean silent,
             HttpServletRequest httpServletRequest) throws GeoPlatformException {
         try {
             sessionUtility.getLoggedAccount(httpServletRequest);
@@ -156,8 +156,7 @@ public class PublisherService implements IPublisherService {
         }
         boolean result = false;
         try {
-            result = geoPlatformPublishClient.createWorkspace(workspaceName);
-
+            result = geoPlatformPublishClient.createWorkspace(workspaceName, silent);
         } catch (ResourceNotFoundFault ex) {
             logger.error("Error on creating workspace: " + ex);
             throw new GeoPlatformException(ex.getMessage());

@@ -427,9 +427,9 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
     }
 
     @Override
-    public Boolean createWorkspace(String workspaceName) throws ResourceNotFoundFault {
+    public Boolean createWorkspace(String workspaceName, boolean silent) throws ResourceNotFoundFault {
         boolean exists = this.restReader.existsWorkspace(workspaceName, true);
-        if (exists) {
+        if (exists && !silent) {
             throw new ResourceNotFoundFault("The workspace: " + workspaceName + " already exists");
         }
         return restPublisher.createWorkspace(workspaceName);

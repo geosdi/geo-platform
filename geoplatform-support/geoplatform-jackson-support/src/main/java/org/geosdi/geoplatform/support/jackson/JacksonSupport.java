@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.support.jackson;
 
 import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.text.DateFormat;
 
 /**
  *
@@ -48,6 +49,8 @@ public interface JacksonSupport {
     ObjectMapper getDefaultMapper();
 
     void registerModule(Module module);
+    
+    void setDateFormat(DateFormat format);
 
     String getProviderName();
 

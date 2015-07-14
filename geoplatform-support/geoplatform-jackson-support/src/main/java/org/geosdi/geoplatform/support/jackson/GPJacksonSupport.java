@@ -40,7 +40,7 @@ import com.fasterxml.jackson.databind.introspect.AnnotationIntrospectorPair;
 import com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.fasterxml.jackson.module.jaxb.JaxbAnnotationIntrospector;
-import java.text.SimpleDateFormat;
+import java.text.DateFormat;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.FAIL_ON_UNKNOW_PROPERTIES_DISABLE;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.INDENT_OUTPUT_ENABLE;
@@ -74,7 +74,12 @@ public class GPJacksonSupport implements JacksonSupport {
         mapper.setAnnotationIntrospector(new AnnotationIntrospectorPair(
                 primary, secondary));
 
-        mapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ"));
+//        mapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ"));
+    }
+
+    @Override
+    public void setDateFormat(DateFormat format) {
+        this.mapper.setDateFormat(format);
     }
 
     @Override
@@ -99,4 +104,5 @@ public class GPJacksonSupport implements JacksonSupport {
             WRAP_ROOT_VALUE_ENABLE,
             INDENT_OUTPUT_ENABLE};
     }
+
 }

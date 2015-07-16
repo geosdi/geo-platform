@@ -75,8 +75,8 @@ public class PublisherRemoteImpl extends GPAutoInjectingXsrfTokenServiceServlet
     }
 
     @Override
-    public boolean createWorkspace(String workspaceName) throws GeoPlatformException {
-        return this.publisherService.createWorkspace(workspaceName,
+    public boolean createWorkspace(String workspaceName, boolean silent) throws GeoPlatformException {
+        return this.publisherService.createWorkspace(workspaceName, silent,
                 super.getThreadLocalRequest());
     }
 

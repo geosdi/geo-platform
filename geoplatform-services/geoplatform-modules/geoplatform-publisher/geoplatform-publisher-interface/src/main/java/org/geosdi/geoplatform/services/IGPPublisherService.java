@@ -88,7 +88,15 @@ public interface IGPPublisherService {
     InfoPreviewStore getPreviewDataStores(String workspace) throws
             ResourceNotFoundFault;
 
-    Boolean createWorkspace(String workspaceName) throws
+    /**
+     * Creates a new workspace and returns exception if it already exists, 
+     * set silent param equal to true to avoid exception
+     * @param workspaceName
+     * @param silent
+     * @return
+     * @throws ResourceNotFoundFault 
+     */
+    Boolean createWorkspace(String workspaceName, boolean silent) throws
             ResourceNotFoundFault;
 
     Boolean publish(PublishLayerRequest publishRequest)

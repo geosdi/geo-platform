@@ -167,8 +167,8 @@ public class AddWorkspaceWidget extends GenericFormWidget {
 
     @Override
     public void execute() {
-        PublisherRemote.Util.getInstance().createWorkspace(this.workspaceNameTextField.getValue(),
-                new AsyncCallback<Boolean>() {
+        PublisherRemote.Util.getInstance().createWorkspace(
+                this.workspaceNameTextField.getValue(), false, new AsyncCallback<Boolean>() {
 
                     @Override
                     public void onFailure(Throwable caught) {

@@ -53,6 +53,6 @@ public interface IPublisherService {
     void kmlPreview(HttpServletRequest httpServletRequest, String url)
             throws GeoPlatformException;
 
-    boolean createWorkspace(String workspaceName, HttpServletRequest httpServletRequest)
+    boolean createWorkspace(String workspaceName, boolean silent, HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 }

@@ -83,8 +83,9 @@ public class GPJacksonSupport implements JacksonSupport {
     }
 
     @Override
-    public void setDateFormat(DateFormat format) {
+    public JacksonSupport setDateFormat(DateFormat format) {
         this.mapper.setDateFormat(format);
+        return this;
     }
 
     @Override
@@ -93,13 +94,28 @@ public class GPJacksonSupport implements JacksonSupport {
     }
 
     @Override
-    public final void registerModule(Module module) {
+    public final JacksonSupport registerModule(Module module) {
         this.mapper.registerModule(module);
+        return this;
     }
 
     @Override
     public String getProviderName() {
         return getClass().getSimpleName();
+    }
+
+    @Override
+    public JacksonSupport configure(JacksonSupportConfigFeature feature) {
+        feature.configureMapper(mapper);
+        return this;
+    }
+
+    @Override
+    public JacksonSupport configure(JacksonSupportConfigFeature... features) {
+        for (JacksonSupportConfigFeature feature : features) {
+            feature.configureMapper(mapper);
+        }
+        return this;
     }
 
     public static JacksonSupportConfigFeature[] defaultProp() {

@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.experimental.el.dao;
 
+import org.elasticsearch.action.bulk.BulkResponse;
 import org.geosdi.geoplatform.experimental.el.index.GPIndexCreator;
 import org.geosdi.geoplatform.experimental.el.mapper.GPBaseMapper;
 import org.springframework.beans.factory.InitializingBean;
@@ -49,12 +50,14 @@ import org.springframework.beans.factory.InitializingBean;
 public interface GPElasticSearchDAO<D extends Object> {
 
     /**
-     * 
+     *
      * @param document
      * @return D
-     * @throws Exception 
+     * @throws Exception
      */
     D persist(D document) throws Exception;
+
+    BulkResponse persist(Iterable<D> documents) throws Exception;
 
     void update(D document) throws Exception;
 

@@ -36,6 +36,8 @@
 package org.geosdi.geoplatform.experimental.el.dao;
 
 import com.google.common.base.Preconditions;
+import org.elasticsearch.action.bulk.BulkRequestBuilder;
+import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.count.CountResponse;
 import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.get.GetResponse;

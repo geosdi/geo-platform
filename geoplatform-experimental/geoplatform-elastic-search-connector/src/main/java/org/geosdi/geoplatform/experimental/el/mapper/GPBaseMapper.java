@@ -41,6 +41,7 @@ import java.io.InputStream;
 import java.io.Reader;
 import java.net.URL;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
+import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 /**
  *
@@ -52,12 +53,13 @@ import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 public abstract class GPBaseMapper<D extends Object> implements GPElasticSearchMapper<D> {
 
     private final Class<D> documentClass;
-    private final GPJacksonSupport reader = new GPJacksonSupport();
+    private final JacksonSupport reader;
 
-    public GPBaseMapper(Class<D> theDocumentClass) {
+    public GPBaseMapper(Class<D> theDocumentClass, JacksonSupport theReader) {
         Preconditions.checkNotNull(theDocumentClass,
                 "The Document Class must not be null");
         this.documentClass = theDocumentClass;
+        this.reader = ((theReader != null) ? theReader : new GPJacksonSupport());
     }
 
     @Override

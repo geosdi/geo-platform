@@ -35,7 +35,10 @@
  */
 package org.geosdi.geoplatform.experimental.el.dao;
 
+import java.util.List;
+import net.jcip.annotations.Immutable;
 import org.elasticsearch.action.bulk.BulkResponse;
+import org.elasticsearch.search.sort.SortOrder;
 import org.geosdi.geoplatform.experimental.el.index.GPIndexCreator;
 import org.geosdi.geoplatform.experimental.el.mapper.GPBaseMapper;
 import org.springframework.beans.factory.InitializingBean;
@@ -52,19 +55,56 @@ public interface GPElasticSearchDAO<D extends Object> {
     /**
      *
      * @param document
+     *
      * @return D
      * @throws Exception
      */
     D persist(D document) throws Exception;
 
+    /**
+     *
+     * @param documents
+     *
+     * @return {@link BulkResponse}
+     * @throws Exception
+     */
     BulkResponse persist(Iterable<D> documents) throws Exception;
 
+    /**
+     *
+     * @param document
+     * @throws Exception
+     */
     void update(D document) throws Exception;
 
+    /**
+     *
+     * @throws Exception
+     */
     void removeAll() throws Exception;
 
+    /**
+     *
+     * @param <P>
+     * @param page
+     *
+     * @return {@link List<D>}
+     * @throws Exception
+     */
+    <P extends Page> List<D> find(P page) throws Exception;
+
+    /**
+     *
+     * @param <Mapper>
+     * @param theMapper
+     */
     <Mapper extends GPBaseMapper<D>> void setMapper(Mapper theMapper);
 
+    /**
+     *
+     * @param <IC>
+     * @param theIndexCreator
+     */
     <IC extends GPIndexCreator> void setIndexCreator(IC theIndexCreator);
 
     /**
@@ -103,6 +143,78 @@ public interface GPElasticSearchDAO<D extends Object> {
          * @throws java.lang.Exception
          */
         Long count() throws Exception;
+
+    }
+
+    @Immutable
+    public static class Page {
+
+        private final int from;
+        private final int size;
+
+        public Page(int from, int size) {
+            this.from = from;
+            this.size = size;
+        }
+
+        /**
+         * @return the from
+         */
+        public int getFrom() {
+            return from;
+        }
+
+        /**
+         * @return the size
+         */
+        public int getSize() {
+            return size;
+        }
+
+        @Override
+        public String toString() {
+            return getClass().getSimpleName() + " {"
+                    + " from = " + from
+                    + ", size = " + size + '}';
+        }
+
+    }
+
+    @Immutable
+    public static class SortablePage extends Page {
+
+        private final String field;
+        private final SortOrder sortOrder;
+
+        public SortablePage(String field, SortOrder sortOrder, int from,
+                int size) {
+            super(from, size);
+            this.field = field;
+            this.sortOrder = sortOrder;
+        }
+
+        /**
+         * @return the field
+         */
+        public String getField() {
+            return field;
+        }
+
+        /**
+         * @return the sortOrder
+         */
+        public SortOrder getSortOrder() {
+            return sortOrder;
+        }
+
+        @Override
+        public String toString() {
+            return getClass().getSimpleName() + " {"
+                    + " from = " + super.from
+                    + ", size = " + super.size
+                    + ", field = " + field
+                    + ", sortOrder = " + sortOrder + '}';
+        }
 
     }
 

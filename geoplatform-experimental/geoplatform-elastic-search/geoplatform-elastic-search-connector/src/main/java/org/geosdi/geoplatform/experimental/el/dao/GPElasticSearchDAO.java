@@ -37,10 +37,14 @@ package org.geosdi.geoplatform.experimental.el.dao;
 
 import net.jcip.annotations.Immutable;
 import org.elasticsearch.action.bulk.BulkResponse;
+import org.elasticsearch.action.search.SearchRequestBuilder;
+import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.search.sort.SortOrder;
 import org.geosdi.geoplatform.experimental.el.api.mapper.GPBaseMapper;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
 import org.geosdi.geoplatform.experimental.el.index.GPIndexCreator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 
 import java.util.List;
@@ -134,9 +138,32 @@ public interface GPElasticSearchDAO<D extends Document> {
 
     }
 
-    @Immutable
-    public static class Page {
+    interface PageBuilder {
 
+        /**
+         *
+         * @param builder
+         * @param <Builder>
+         *
+         * @return {@link SearchRequestBuilder} Builder
+         * @throws Exception
+         */
+        <Builder extends SearchRequestBuilder> Builder buildPage(Builder builder)
+                throws Exception;
+
+        /**
+         *
+         * @return {@link Boolean}
+         */
+        Boolean canBuildPage();
+
+    }
+
+    @Immutable
+    public static class Page implements PageBuilder{
+
+        private final Logger logger = LoggerFactory.getLogger(this.getClass());
+        //
         private final int from;
         private final int size;
 
@@ -160,6 +187,28 @@ public interface GPElasticSearchDAO<D extends Document> {
         }
 
         @Override
+        public Boolean canBuildPage() {
+            return (this.size > 0);
+        }
+
+        protected <Builder extends SearchRequestBuilder> Builder internalBuildPage(Builder builder)
+                throws Exception {
+            logger.trace("##############Called {} #internalBuildPage " +
+                            "- with parameters :  from = {} - size = {}\n\n",
+                    getClass().getSimpleName(), from, size);
+
+            return (Builder) builder.setFrom(this.from).setSize(this.size);
+        }
+
+        @Override
+        public <Builder extends SearchRequestBuilder> Builder buildPage(Builder builder)
+                throws Exception {
+            logger.trace("#################Called {} #buildPage", getClass().getSimpleName());
+
+            return (canBuildPage() ? internalBuildPage(builder) : builder);
+        }
+
+        @Override
         public String toString() {
             return getClass().getSimpleName() + " {"
                     + " from = " + from
@@ -171,6 +220,8 @@ public interface GPElasticSearchDAO<D extends Document> {
     @Immutable
     public static class SortablePage extends Page {
 
+        private final Logger logger = LoggerFactory.getLogger(this.getClass());
+        //
         private final String field;
         private final SortOrder sortOrder;
 
@@ -196,14 +247,95 @@ public interface GPElasticSearchDAO<D extends Document> {
         }
 
         @Override
+        public Boolean canBuildPage() {
+            return (((this.field != null) && !(this.field.isEmpty()))
+                    && (this.sortOrder != null));
+        }
+
+        @Override
+        protected <Builder extends SearchRequestBuilder> Builder internalBuildPage(Builder builder)
+                throws Exception {
+            logger.trace("##############Called {} #internalBuildPage " +
+                            "- with parameters :  field = {} - sortOrder = {}\n\n",
+                    getClass().getSimpleName(), field, sortOrder);
+
+            return (Builder) builder.addSort(this.field, this.sortOrder);
+        }
+
+        @Override
+        public <Builder extends SearchRequestBuilder> Builder buildPage(Builder builder) throws Exception {
+            logger.trace("#################Called {} #buildPage", getClass().getSimpleName());
+
+            return (canBuildPage() ? (super.canBuildPage()
+                    ? internalBuildPage(super.internalBuildPage(builder))
+                    : internalBuildPage(builder)) : builder);
+        }
+
+        @Override
         public String toString() {
             return getClass().getSimpleName() + " {"
-                    + " from = " + super.from
-                    + ", size = " + super.size
+                    + " from = " + super.getFrom()
+                    + ", size = " + super.getSize()
                     + ", field = " + field
                     + ", sortOrder = " + sortOrder + '}';
         }
 
+    }
+
+    @Immutable
+    public static class QueriableSortablePage extends SortablePage {
+
+        private final Logger logger = LoggerFactory.getLogger(this.getClass());
+        //
+        private final QueryBuilder query;
+
+        public QueriableSortablePage(String field, SortOrder sortOrder, int from,
+                                     int size, QueryBuilder query) {
+            super(field, sortOrder, from, size);
+            this.query = query;
+        }
+
+        /**
+         *
+         * @return the query to perform
+         */
+        public QueryBuilder getQuery() {
+            return query;
+        }
+
+        @Override
+        public Boolean canBuildPage() {
+            return (this.query != null);
+        }
+
+        @Override
+        protected <Builder extends SearchRequestBuilder> Builder internalBuildPage(Builder builder)
+                throws Exception {
+            logger.trace("##############Called {} #internalBuildPage " +
+                            "- with parameters :  query = {} \n\n",
+                    getClass().getSimpleName(), query);
+
+            return (Builder) builder.setQuery(this.query);
+        }
+
+        @Override
+        public <Builder extends SearchRequestBuilder> Builder buildPage(Builder builder) throws Exception {
+            logger.trace("#################Called {} #buildPage", getClass().getSimpleName());
+
+            return (canBuildPage() ? (super.canBuildPage()
+                    ? internalBuildPage(super.internalBuildPage(builder))
+                    : internalBuildPage(builder)) : builder);
+        }
+
+        @Override
+        public String toString() {
+            return getClass().getSimpleName() + " {"
+                    + " from = " + super.getFrom()
+                    + ", size = " + super.getSize()
+                    + ", field = " + super.getField()
+                    + ", sortOrder = " + super.getSortOrder()
+                    + ", query = " + query + '}';
+        }
     }
 
 }

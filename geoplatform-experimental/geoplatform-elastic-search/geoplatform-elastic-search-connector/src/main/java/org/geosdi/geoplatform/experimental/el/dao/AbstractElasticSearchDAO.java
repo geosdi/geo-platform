@@ -142,18 +142,10 @@ public abstract class AbstractElasticSearchDAO<D extends Document>
 
     @Override
     public <P extends Page> List<D> find(P page) throws Exception {
-        Preconditions.checkArgument(((page != null)
-                && (page.getSize() >= 0)), "Page must not be null and Size must "
-                + "be greater than 0.");
-        SearchRequestBuilder builder = this.elastichSearchClient
+        Preconditions.checkArgument((page != null), "Page must not be null.");
+        SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient
                 .prepareSearch(getIndexName())
-                .setTypes(getIndexType())
-                .setFrom(page.getFrom()).setSize(page.getSize());
-
-        if (page instanceof SortablePage) {
-            SortablePage sortPage = (SortablePage) page;
-            builder.addSort(sortPage.getField(), sortPage.getSortOrder());
-        }
+                .setTypes(getIndexType()));
 
         SearchResponse searchResponse = builder.get();
 

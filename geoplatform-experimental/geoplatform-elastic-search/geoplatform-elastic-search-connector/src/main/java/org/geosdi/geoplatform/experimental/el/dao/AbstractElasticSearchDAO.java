@@ -91,7 +91,7 @@ public abstract class AbstractElasticSearchDAO<D extends Document>
             document.setId(response.getId());
             update(document);
         }
-        logger.debug("##############User Created : {}\n\n",
+        logger.debug("##############{} Created : {}\n\n", this.mapper.getDocumentClassName(),
                 response.isCreated());
 
         return document;
@@ -101,8 +101,8 @@ public abstract class AbstractElasticSearchDAO<D extends Document>
     public void update(D document) throws Exception {
         Preconditions.checkArgument(((document != null)
                 && ((document.getId() != null)
-                && !(document.getId().isEmpty()))), "The User to Update must"
-                + " not be null or ID must not be null or Empty.");
+                && !(document.getId().isEmpty()))), "The {} to Update must"
+                + " not be null or ID must not be null or Empty.", this.mapper.getDocumentClassName());
         logger.debug("################Try to Update : {}\n\n", document);
 
         this.elastichSearchClient

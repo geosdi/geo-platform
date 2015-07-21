@@ -147,6 +147,8 @@ public abstract class AbstractElasticSearchDAO<D extends Document>
                 .prepareSearch(getIndexName())
                 .setTypes(getIndexType()));
 
+        logger.trace("#########################Builder : {}\n\n", builder.toString());
+
         SearchResponse searchResponse = builder.get();
 
         if (searchResponse.status() != RestStatus.OK) {

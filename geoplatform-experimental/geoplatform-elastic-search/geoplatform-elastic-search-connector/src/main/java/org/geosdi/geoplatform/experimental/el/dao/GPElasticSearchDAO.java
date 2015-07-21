@@ -82,6 +82,14 @@ public interface GPElasticSearchDAO<D extends Document> {
     void removeAll() throws Exception;
 
     /**
+     *
+     * @return {@link List<D>}
+     *
+     * @throws Exception
+     */
+    List<D> findAll() throws Exception;
+
+    /**
      * @param <P>
      * @param page
      * @return {@link List<D>}
@@ -141,28 +149,20 @@ public interface GPElasticSearchDAO<D extends Document> {
     interface PageBuilder {
 
         /**
-         *
          * @param builder
          * @param <Builder>
-         *
          * @return {@link SearchRequestBuilder} Builder
          * @throws Exception
          */
         <Builder extends SearchRequestBuilder> Builder buildPage(Builder builder)
                 throws Exception;
 
-        /**
-         *
-         * @return {@link Boolean}
-         */
-        Boolean canBuildPage();
-
     }
 
     @Immutable
-    public static class Page implements PageBuilder{
+    public class Page implements PageBuilder {
 
-        private final Logger logger = LoggerFactory.getLogger(this.getClass());
+        protected static final Logger logger = LoggerFactory.getLogger(Page.class);
         //
         private final int from;
         private final int size;
@@ -186,16 +186,14 @@ public interface GPElasticSearchDAO<D extends Document> {
             return size;
         }
 
-        @Override
-        public Boolean canBuildPage() {
+        private Boolean canBuildPage() {
             return (this.size > 0);
         }
 
-        protected <Builder extends SearchRequestBuilder> Builder internalBuildPage(Builder builder)
+        private <Builder extends SearchRequestBuilder> Builder internalBuildPage(Builder builder)
                 throws Exception {
-            logger.trace("##############Called {} #internalBuildPage " +
-                            "- with parameters :  from = {} - size = {}\n\n",
-                    getClass().getSimpleName(), from, size);
+            logger.trace("####################Called {} #internalBuildPage with parameters " +
+                    "from : {} - size : {}\n\n", getClass().getSimpleName(), from, size);
 
             return (Builder) builder.setFrom(this.from).setSize(this.size);
         }
@@ -203,9 +201,8 @@ public interface GPElasticSearchDAO<D extends Document> {
         @Override
         public <Builder extends SearchRequestBuilder> Builder buildPage(Builder builder)
                 throws Exception {
-            logger.trace("#################Called {} #buildPage", getClass().getSimpleName());
 
-            return (canBuildPage() ? internalBuildPage(builder) : builder);
+            return (canBuildPage() ? this.internalBuildPage(builder) : builder);
         }
 
         @Override
@@ -218,12 +215,22 @@ public interface GPElasticSearchDAO<D extends Document> {
     }
 
     @Immutable
-    public static class SortablePage extends Page {
+    public class SortablePage extends Page {
 
-        private final Logger logger = LoggerFactory.getLogger(this.getClass());
-        //
         private final String field;
         private final SortOrder sortOrder;
+
+        /**
+         * <p>In this case no Pagination , and Elastic Search will return only
+         * 10 results in case of Match
+         * </p>
+         *
+         * @param field
+         * @param sortOrder
+         */
+        public SortablePage( String field, SortOrder sortOrder) {
+            this(field, sortOrder, 0, 0);
+        }
 
         public SortablePage(String field, SortOrder sortOrder, int from,
                             int size) {
@@ -246,29 +253,22 @@ public interface GPElasticSearchDAO<D extends Document> {
             return sortOrder;
         }
 
-        @Override
-        public Boolean canBuildPage() {
+        private Boolean canBuildPage() {
             return (((this.field != null) && !(this.field.isEmpty()))
                     && (this.sortOrder != null));
         }
 
-        @Override
-        protected <Builder extends SearchRequestBuilder> Builder internalBuildPage(Builder builder)
+        private <Builder extends SearchRequestBuilder> Builder internalBuildPage(Builder builder)
                 throws Exception {
-            logger.trace("##############Called {} #internalBuildPage " +
-                            "- with parameters :  field = {} - sortOrder = {}\n\n",
-                    getClass().getSimpleName(), field, sortOrder);
+            logger.trace("####################Called {} #internalBuildPage with parameters " +
+                    "field : {} - sortOrder : {}\n\n", getClass().getSimpleName(), field, sortOrder);
 
             return (Builder) builder.addSort(this.field, this.sortOrder);
         }
 
         @Override
         public <Builder extends SearchRequestBuilder> Builder buildPage(Builder builder) throws Exception {
-            logger.trace("#################Called {} #buildPage", getClass().getSimpleName());
-
-            return (canBuildPage() ? (super.canBuildPage()
-                    ? internalBuildPage(super.internalBuildPage(builder))
-                    : internalBuildPage(builder)) : builder);
+            return (canBuildPage() ? internalBuildPage(super.buildPage(builder)) : super.buildPage(builder));
         }
 
         @Override
@@ -283,11 +283,21 @@ public interface GPElasticSearchDAO<D extends Document> {
     }
 
     @Immutable
-    public static class QueriableSortablePage extends SortablePage {
+    public class QueriableSortablePage extends SortablePage {
 
-        private final Logger logger = LoggerFactory.getLogger(this.getClass());
-        //
         private final QueryBuilder query;
+
+        public QueriableSortablePage(QueryBuilder query) {
+            this(0, 0, query);
+        }
+
+        public QueriableSortablePage(String field, SortOrder sortOrder, QueryBuilder query) {
+            this(field, sortOrder, 0, 0, query);
+        }
+
+        public QueriableSortablePage(int from, int size, QueryBuilder query) {
+            this(null, null, from, size, query);
+        }
 
         public QueriableSortablePage(String field, SortOrder sortOrder, int from,
                                      int size, QueryBuilder query) {
@@ -296,35 +306,28 @@ public interface GPElasticSearchDAO<D extends Document> {
         }
 
         /**
-         *
          * @return the query to perform
          */
         public QueryBuilder getQuery() {
             return query;
         }
 
-        @Override
-        public Boolean canBuildPage() {
+        private Boolean canBuildPage() {
             return (this.query != null);
         }
 
-        @Override
-        protected <Builder extends SearchRequestBuilder> Builder internalBuildPage(Builder builder)
+        private <Builder extends SearchRequestBuilder> Builder internalBuildPage(Builder builder)
                 throws Exception {
-            logger.trace("##############Called {} #internalBuildPage " +
-                            "- with parameters :  query = {} \n\n",
-                    getClass().getSimpleName(), query);
+            logger.trace("####################Called {} #internalBuildPage with parameters " +
+                    "query : {}\n\n", getClass().getSimpleName(), query);
+
 
             return (Builder) builder.setQuery(this.query);
         }
 
         @Override
         public <Builder extends SearchRequestBuilder> Builder buildPage(Builder builder) throws Exception {
-            logger.trace("#################Called {} #buildPage", getClass().getSimpleName());
-
-            return (canBuildPage() ? (super.canBuildPage()
-                    ? internalBuildPage(super.internalBuildPage(builder))
-                    : internalBuildPage(builder)) : builder);
+            return (canBuildPage() ? internalBuildPage(super.buildPage(builder)) : super.buildPage(builder));
         }
 
         @Override

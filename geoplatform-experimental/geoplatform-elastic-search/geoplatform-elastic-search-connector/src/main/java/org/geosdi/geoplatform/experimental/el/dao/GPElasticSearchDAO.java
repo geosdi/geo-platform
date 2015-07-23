@@ -87,7 +87,7 @@ public interface GPElasticSearchDAO<D extends Document> {
      *
      * @throws Exception
      */
-    List<D> findAll() throws Exception;
+    List<D> findLasts() throws Exception;
 
     /**
      * @param <P>

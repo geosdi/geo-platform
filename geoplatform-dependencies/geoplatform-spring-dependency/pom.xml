@@ -149,7 +149,7 @@
     <properties>
         <spring-version>4.1.7.RELEASE</spring-version>
         <spring-support>2.0.8</spring-support>
-        <spring-security-version>4.0.1.RELEASE</spring-security-version>
+        <spring-security-version>4.0.2.RELEASE</spring-security-version>
     </properties>
 
 </project>

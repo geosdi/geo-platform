@@ -1,10 +1,9 @@
 /**
- *
  * geo-platform Rich webgis framework http://geo-platform.org
  * ====================================================================
- *
+ * <p/>
  * Copyright (C) 2008-2015 geoSDI Group (CNR IMAA - Potenza - ITALY).
- *
+ * <p/>
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
@@ -13,13 +12,13 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details. You should have received a copy of the GNU General Public License
  * along with this program. If not, see http://www.gnu.org/licenses/
- *
+ * <p/>
  * ====================================================================
- *
+ * <p/>
  * Linking this library statically or dynamically with other modules is making a
  * combined work based on this library. Thus, the terms and conditions of the
  * GNU General Public License cover the whole combination.
- *
+ * <p/>
  * As a special exception, the copyright holders of this library give you
  * permission to link this library with independent modules to produce an
  * executable, regardless of the license terms of these independent modules, and
@@ -33,11 +32,12 @@
  */
 package org.geosdi.geoplatform.support.xmpp.spring.configuration.auth;
 
-import javax.inject.Named;
 import net.jcip.annotations.Immutable;
 import org.geosdi.geoplatform.support.xmpp.configuration.auth.XMPPAuth;
 import org.geosdi.geoplatform.support.xmpp.spring.annotation.GPXMPPProp;
 import org.springframework.beans.factory.annotation.Value;
+
+import javax.inject.Named;
 
 /**
  *
@@ -62,11 +62,6 @@ public class GPSpringXMPPAuth implements XMPPAuth {
     @Override
     public String getXMPPPassword() {
         return this.xmppPassword;
-    }
-
-    @Override
-    public String toString() {
-        return "GPSpringXMPPAuth{" + "xmppUserName=" + xmppUserName + ", xmppPassword=" + xmppPassword + '}';
     }
 
 }

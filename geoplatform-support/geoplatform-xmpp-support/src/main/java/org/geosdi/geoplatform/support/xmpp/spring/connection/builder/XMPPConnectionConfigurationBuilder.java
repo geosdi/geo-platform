@@ -1,10 +1,9 @@
 /**
- *
  * geo-platform Rich webgis framework http://geo-platform.org
  * ====================================================================
- *
+ * <p/>
  * Copyright (C) 2008-2015 geoSDI Group (CNR IMAA - Potenza - ITALY).
- *
+ * <p/>
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
@@ -13,13 +12,13 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details. You should have received a copy of the GNU General Public License
  * along with this program. If not, see http://www.gnu.org/licenses/
- *
+ * <p/>
  * ====================================================================
- *
+ * <p/>
  * Linking this library statically or dynamically with other modules is making a
  * combined work based on this library. Thus, the terms and conditions of the
  * GNU General Public License cover the whole combination.
- *
+ * <p/>
  * As a special exception, the copyright holders of this library give you
  * permission to link this library with independent modules to produce an
  * executable, regardless of the license terms of these independent modules, and
@@ -40,7 +39,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -68,23 +66,25 @@ public final class XMPPConnectionConfigurationBuilder {
                 + "null.");
 
         logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ I'am building "
-                + "XMPP ConnectionCnfiguration with Properties : {}\n\n",
+                        + "XMPP ConnectionCnfiguration with Properties : {}\n\n",
                 xmppProperties);
 
-        XMPPTCPConnectionConfiguration.Builder builder = XMPPTCPConnectionConfiguration
+        return (((xmppProperties.getServiceName() != null)
+                && (!xmppProperties.getServiceName().isEmpty()))
+                ? internalBuilder()
+                .setServiceName(xmppProperties.getServiceName())
+                .build()
+                : internalBuilder().build());
+    }
+
+    protected XMPPTCPConnectionConfiguration.Builder internalBuilder() {
+        return XMPPTCPConnectionConfiguration
                 .builder()
                 .setPort(xmppProperties.getXMPPPort())
                 .setHost(xmppProperties.getXMPPHost())
                 .setSecurityMode(xmppProperties.getSecurityMode())
                 .setCompressionEnabled(xmppProperties.isCompressionEnabled())
                 .setDebuggerEnabled(xmppProperties.isDebuggerEnabled());
-
-        return (((xmppProperties.getServiceName() != null)
-                && (!xmppProperties.getServiceName().isEmpty()))
-                        ? builder
-                        .setServiceName(xmppProperties.getServiceName())
-                        .build()
-                        : builder.build());
     }
 
 }

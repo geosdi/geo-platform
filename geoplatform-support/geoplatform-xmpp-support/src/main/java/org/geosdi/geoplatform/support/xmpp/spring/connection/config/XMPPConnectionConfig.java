@@ -38,7 +38,7 @@ package org.geosdi.geoplatform.support.xmpp.spring.connection.config;
 import org.geosdi.geoplatform.support.xmpp.configuration.properties.XMPPProperties;
 import org.geosdi.geoplatform.support.xmpp.spring.annotation.GPXMPPConnection;
 import org.geosdi.geoplatform.support.xmpp.spring.connection.builder.XMPPConnectionConfigurationBuilder;
-import org.jivesoftware.smack.ConnectionConfiguration;
+import org.jivesoftware.smack.tcp.XMPPTCPConnectionConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -55,18 +55,12 @@ class XMPPConnectionConfig {
 
     @Bean(name = "xmppConnectionConfiguration")
     @Autowired
-    public ConnectionConfiguration xmppConnectionConfiguration(@Qualifier(
+    public XMPPTCPConnectionConfiguration xmppConnectionConfiguration(@Qualifier(
             value = "gpSpringXMPPProp") XMPPProperties gpSpringXMPPProp) {
 
-        ConnectionConfiguration xmppConConfig = XMPPConnectionConfigurationBuilder.
-                newInstance().withXMPPProperties(gpSpringXMPPProp).
-                build();
-
-        xmppConConfig.setCompressionEnabled(gpSpringXMPPProp.isCompressionEnabled());
-        xmppConConfig.setSecurityMode(gpSpringXMPPProp.getSecurityMode());
-        xmppConConfig.setDebuggerEnabled(gpSpringXMPPProp.isDebuggerEnabled());
-
-        return xmppConConfig;
+        return  XMPPConnectionConfigurationBuilder.newInstance()
+                .withXMPPProperties(gpSpringXMPPProp)
+                .build();
     }
 
 }

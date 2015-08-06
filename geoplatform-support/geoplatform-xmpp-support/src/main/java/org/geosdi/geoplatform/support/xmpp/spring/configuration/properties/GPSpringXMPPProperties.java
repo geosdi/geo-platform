@@ -36,14 +36,15 @@
 package org.geosdi.geoplatform.support.xmpp.spring.configuration.properties;
 
 import com.google.common.base.Preconditions;
-import javax.annotation.Resource;
-import javax.inject.Named;
 import net.jcip.annotations.Immutable;
 import org.geosdi.geoplatform.support.xmpp.configuration.auth.XMPPAuth;
 import org.geosdi.geoplatform.support.xmpp.configuration.properties.XMPPProperties;
 import org.geosdi.geoplatform.support.xmpp.spring.annotation.GPXMPPProp;
 import org.jivesoftware.smack.ConnectionConfiguration;
 import org.springframework.beans.factory.annotation.Value;
+
+import javax.annotation.Resource;
+import javax.inject.Named;
 
 /**
  *
@@ -94,7 +95,7 @@ public class GPSpringXMPPProperties implements XMPPProperties {
     @Override
     public ConnectionConfiguration.SecurityMode getSecurityMode() {
         return this.securityMode = ((this.securityMode != null)
-                ? this.securityMode : ConnectionConfiguration.SecurityMode.enabled);
+                ? this.securityMode : ConnectionConfiguration.SecurityMode.ifpossible);
     }
 
     @Override

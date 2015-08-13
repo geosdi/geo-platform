@@ -35,12 +35,13 @@
  */
 package org.geosdi.geoplatform.connector.jaxb;
 
-import java.util.Map;
+import org.geosdi.geoplatform.jaxb.GeoPlatformJAXBContext;
+import org.geosdi.geoplatform.jaxb.repository.GeoPlatformJAXBContextRepository.GeoPlatformJAXBContextKey;
+
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import org.geosdi.geoplatform.jaxb.GeoPlatformJAXBContext;
-import org.geosdi.geoplatform.jaxb.repository.GeoPlatformJAXBContextRepository.GeoPlatformJAXBContextKey;
+import java.util.Map;
 
 /**
  *
@@ -68,19 +69,13 @@ public class WFSJAXBContext extends GeoPlatformJAXBContext {
     }
 
     @Override
-    public Marshaller acquireMarshaller() throws JAXBException {
-        synchronized (this) {
-            return super.marshaller != null
-                    ? super.marshaller : super.createMarshaller();
-        }
+    public Marshaller acquireMarshaller() throws Exception {
+        return super.createMarshaller();
     }
 
     @Override
-    public Unmarshaller acquireUnmarshaller() throws JAXBException {
-        synchronized (this) {
-            return super.unmarshaller != null
-                    ? super.unmarshaller : super.createUnmarshaller();
-        }
+    public Unmarshaller acquireUnmarshaller() throws Exception {
+        return super.createUnmarshaller();
     }
 
     public static class WFSJAXBContextKey extends GeoPlatformJAXBContextKey {

@@ -33,8 +33,6 @@
  */
 package org.geosdi.geoplatform.support.xmpp.spring.connection.manager;
 
-import java.io.IOException;
-import javax.security.sasl.SaslException;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
 import org.geosdi.geoplatform.support.xmpp.configuration.auth.XMPPAuth;
 import org.jivesoftware.smack.SmackException;
@@ -45,6 +43,9 @@ import org.jivesoftware.smack.packet.Stanza;
 import org.jivesoftware.smack.tcp.XMPPTCPConnection;
 import org.jivesoftware.smack.tcp.XMPPTCPConnectionConfiguration;
 import org.slf4j.Logger;
+
+import javax.security.sasl.SaslException;
+import java.io.IOException;
 
 /**
  *
@@ -58,7 +59,7 @@ public class GPXMPPConnectionManager implements XMPPConnectionManager {
     //
     private final XMPPTCPConnectionConfiguration connectionConfig;
     private final XMPPAuth gpSpringXMPPAuth;
-    private XMPPTCPConnection connection;
+    private volatile XMPPTCPConnection connection;
     
     public GPXMPPConnectionManager(
             XMPPTCPConnectionConfiguration theConnectionConfig,

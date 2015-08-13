@@ -49,14 +49,16 @@ import org.slf4j.LoggerFactory;
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
+ * 
+ * @param <T>
  */
 public abstract class GPConnectorStore<T extends GPAbstractServerConnector>
         implements GeoPlatformConnector {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
-    private Date registrationDate = new Date();
-    private SimpleDateFormat dt = new SimpleDateFormat("yyyyy-mm-dd hh:mm:ss");
+    private final Date registrationDate = new Date();
+    private final SimpleDateFormat dt = new SimpleDateFormat("yyyyy-mm-dd hh:mm:ss");
     protected T server;
 
     public GPConnectorStore(T theServer) {

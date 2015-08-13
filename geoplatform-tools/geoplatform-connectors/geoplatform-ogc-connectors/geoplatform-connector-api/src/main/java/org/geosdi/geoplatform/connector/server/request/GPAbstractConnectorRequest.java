@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.connector.server.request;
 
-import java.net.URI;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.config.CookieSpecs;
 import org.apache.http.client.config.RequestConfig;
@@ -44,6 +43,8 @@ import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.net.URI;
 
 /**
  *
@@ -93,7 +94,8 @@ public abstract class GPAbstractConnectorRequest<T>
 
     private RequestConfig createRequestConfig() {
         return RequestConfig.custom()
-                .setCookieSpec(CookieSpecs.BEST_MATCH).setSocketTimeout(8000)
+                .setCookieSpec(CookieSpecs.DEFAULT)
+                .setSocketTimeout(8000)
                 .setConnectTimeout(8000)
                 .setConnectionRequestTimeout(8000).build();
     }

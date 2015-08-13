@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.connector.api;
 
 import java.net.URL;
+import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 import org.geosdi.geoplatform.support.httpclient.proxy.HttpClientProxyConfiguration;
 
@@ -43,10 +44,14 @@ import org.geosdi.geoplatform.support.httpclient.proxy.HttpClientProxyConfigurat
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
+ * 
+ * @param <B>
  */
 public interface GPConnectorBuilder<B extends AbstractConnectorBuilder> {
 
     B withServerUrl(URL theServerUrl);
+    
+    B withPooledConnectorConfig(GPServerConnector.GPPooledConnectorConfig thePooledConnectorConfig);
 
     B withClientSecurity(GPSecurityConnector theSecurityConnector);
 

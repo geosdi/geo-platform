@@ -36,12 +36,13 @@ package org.geosdi.geoplatform.connector;
 import java.io.FileOutputStream;
 import java.net.URL;
 import java.util.List;
+import javax.annotation.Resource;
 import javax.xml.bind.JAXBElement;
+import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.CatalogGetCapabilitiesRequest;
 import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordByIdRequest;
 import org.geosdi.geoplatform.connector.server.security.BasicPreemptiveSecurityConnector;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
-import org.geosdi.geoplatform.gui.responce.OnlineResourceProtocolType;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
 import org.geosdi.geoplatform.xml.csw.OutputSchema;
 import org.geosdi.geoplatform.xml.csw.v202.AbstractRecordType;
@@ -57,6 +58,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -67,19 +69,15 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:applicationContext.xml",
+@ContextConfiguration(locations = {"classpath:applicationContext-geoSDI.xml",
     "classpath:applicationContext-Logger.xml"})
 public class CatalogGetRecordByIdTest {
 
     @GeoPlatformLog
     private static Logger logger;
     //
+    @Resource(name = "geoSDIServerConnectorStore")
     private GPCatalogConnectorStore serverConnector;
-    /**
-     * geoSDI Catalog.
-     */
-    private @Value("configurator{geosdi_catalog_url}")
-    String geosdiUrl;
     /**
      * SNIPC Catalog.
      */
@@ -94,17 +92,10 @@ public class CatalogGetRecordByIdTest {
      */
     private static final String ISPRA_URL = "http://sgi.isprambiente.it/geoportal/csw/discovery";
 
-    @Before
-    public void setUp() throws Exception {
-        URL url = new URL(geosdiUrl);
-        this.serverConnector = GPCSWConnectorBuilder.newConnector().
-                withServerUrl(url).build();
-    }
-
     @Test
     public void testTypeSummary() throws Exception {
         CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request
-                = this.serverConnector.createGetRecordByIdRequest();
+                = serverConnector.createGetRecordByIdRequest();
 
         request.setId("7e418dac-3764-4290-b8ac-47c9ac2a12af");
 
@@ -125,7 +116,7 @@ public class CatalogGetRecordByIdTest {
     @Test
     public void testTypeFull() throws Exception {
         CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request
-                = this.serverConnector.createGetRecordByIdRequest();
+                = serverConnector.createGetRecordByIdRequest();
 
         request.setId("7e418dac-3764-4290-b8ac-47c9ac2a12af");
 
@@ -172,7 +163,7 @@ public class CatalogGetRecordByIdTest {
     @Test
     public void testDoubleRequest() throws Exception {
         CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request
-                = this.serverConnector.createGetRecordByIdRequest();
+                = serverConnector.createGetRecordByIdRequest();
 
         request.setId("7e418dac-3764-4290-b8ac-47c9ac2a12af",
                 "r_friuli:m8726-cc-i1286");
@@ -195,7 +186,7 @@ public class CatalogGetRecordByIdTest {
     @Test
     public void testOutputGmd() throws Exception {
         CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request
-                = this.serverConnector.createGetRecordByIdRequest();
+                = serverConnector.createGetRecordByIdRequest();
 
         request.setId("7e418dac-3764-4290-b8ac-47c9ac2a12af");
         request.setElementSetType(ElementSetType.FULL.value());
@@ -269,13 +260,13 @@ public class CatalogGetRecordByIdTest {
         URL url = new URL(snipcUrl);
         GPSecurityConnector securityConnector = new BasicPreemptiveSecurityConnector(
                 snipcUsername, snipcPassword);
-        this.serverConnector = GPCSWConnectorBuilder.newConnector().
+        GPCatalogConnectorStore snipcConnector = GPCSWConnectorBuilder.newConnector().
                 withServerUrl(url).
                 withClientSecurity(securityConnector).
                 build();
 
         CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request
-                = this.serverConnector.createGetRecordByIdRequest();
+                = snipcConnector.createGetRecordByIdRequest();
 
         request.setId("PCM:901:20101021:112931");
         request.setElementSetType(ElementSetType.FULL.toString());
@@ -308,19 +299,19 @@ public class CatalogGetRecordByIdTest {
         URL url = new URL(snipcUrl);
         GPSecurityConnector securityConnector = new BasicPreemptiveSecurityConnector(
                 snipcUsername, snipcPassword);
-        this.serverConnector = GPCSWConnectorBuilder.newConnector().
+        GPCatalogConnectorStore snipcConnector = GPCSWConnectorBuilder.newConnector().
                 withServerUrl(url).
                 withClientSecurity(securityConnector).
                 build();
 
         CatalogGetCapabilitiesRequest<CapabilitiesType> requestGetCap
-                = this.serverConnector.createGetCapabilitiesRequest();
+                = snipcConnector.createGetCapabilitiesRequest();
 
         logger.info("GetCapabilities SNIPC @@@@@@@@@@@@@@@@@@@"
                 + "@@@@@ " + requestGetCap.getResponse());
 
         CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request
-                = this.serverConnector.createGetRecordByIdRequest();
+                = snipcConnector.createGetRecordByIdRequest();
 
         request.setId("{3DEE88CB-A0DB-4794-941A-FD8119621A2F}");
         request.setElementSetType(ElementSetType.FULL.toString());

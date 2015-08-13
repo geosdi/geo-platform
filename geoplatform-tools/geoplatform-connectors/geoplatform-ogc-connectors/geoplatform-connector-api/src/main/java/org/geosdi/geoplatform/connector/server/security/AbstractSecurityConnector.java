@@ -61,6 +61,7 @@ public abstract class AbstractSecurityConnector implements GPSecurityConnector {
      * Bind Credentials for {@link CredentialsProvider} class
      *
      * @param credentialsProvider
+     * @param targetURI
      */
     protected void bindCredentials(CredentialsProvider credentialsProvider,
             URI targetURI) {

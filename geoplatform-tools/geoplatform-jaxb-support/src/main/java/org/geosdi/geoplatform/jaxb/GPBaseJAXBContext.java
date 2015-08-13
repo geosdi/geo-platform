@@ -35,11 +35,11 @@
  */
 package org.geosdi.geoplatform.jaxb;
 
-import java.util.Map;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import java.util.Map;
 
 /**
  *
@@ -81,7 +81,7 @@ public abstract class GPBaseJAXBContext {
     /**
      *
      *
-     * @param classesToBeBound list of java classes to be recognized by the new
+     * @param classToBeBound list of java classes to be recognized by the new
      * {@link JAXBContext}. Can be empty, in which case a {@link JAXBContext}
      * that only knows about spec-defined classes will be returned.
      *

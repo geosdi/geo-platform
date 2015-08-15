@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.connector.jaxb;
 import org.geosdi.geoplatform.jaxb.GeoPlatformJAXBContext;
 import org.geosdi.geoplatform.jaxb.repository.GeoPlatformJAXBContextRepository.GeoPlatformJAXBContextKey;
 
+import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
@@ -66,6 +67,10 @@ public class WFSJAXBContext extends GeoPlatformJAXBContext {
 
     public WFSJAXBContext(String contextPath) throws JAXBException {
         super(contextPath);
+    }
+
+    public WFSJAXBContext(JAXBContext theJaxbContext) {
+        super(theJaxbContext);
     }
 
     @Override

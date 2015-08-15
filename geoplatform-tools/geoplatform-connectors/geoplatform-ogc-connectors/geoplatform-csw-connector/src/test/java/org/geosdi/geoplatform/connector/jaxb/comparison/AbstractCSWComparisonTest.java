@@ -145,7 +145,7 @@ public abstract class AbstractCSWComparisonTest {
 
     private class CSWSimpleTask implements Callable<Long> {
 
-        protected final GPBaseJAXBContext jaxbContext;
+        final GPBaseJAXBContext jaxbContext;
 
         public CSWSimpleTask(GPBaseJAXBContext theJaxbContext) {
             this.jaxbContext = theJaxbContext;

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ows="http://www.opengis.net/ows" xmlns:wfs="http://www.opengis.net/wfs" xmlns:gml="http://www.opengis.net/gml" xmlns:ogc="http://www.opengis.net/ogc" xmlns:ns6="http://www.w3.org/1999/xlink" xmlns:ns7="http://www.w3.org/2001/SMIL20/" xmlns:ns8="http://www.w3.org/2001/SMIL20/Language" targetNamespace="http://www.openplans.org/spearfish" elementFormDefault="qualified">
+    <xs:import namespace="http://www.opengis.net/gml" schemaLocation="http://150.145.141.92:80/geoserver/schemas/gml/3.1.1/base/gml.xsd"/>
+    <xs:complexType name="firesatType">
+        <xs:complexContent>
+            <xs:extension base="gml:AbstractFeatureType">
+                <xs:sequence>
+                    <xs:element type="gml:MultiSurfacePropertyType" nillable="true" name="the_geom" minOccurs="0" maxOccurs="1"/>
+                    <xs:element type="xs:int" nillable="true" name="FID_comuni" minOccurs="0" maxOccurs="1"/>
+                    <xs:element type="xs:double" nillable="true" name="AREA" minOccurs="0" maxOccurs="1"/>
+                    <xs:element type="xs:double" nillable="true" name="PERIMETER" minOccurs="0" maxOccurs="1"/>
+                    <xs:element type="xs:int" nillable="true" name="COD_ISTAT" minOccurs="0" maxOccurs="1"/>
+                    <xs:element type="xs:long" nillable="true" name="ISTAT" minOccurs="0" maxOccurs="1"/>
+                    <xs:element type="xs:string" nillable="true" name="NOME_COM" minOccurs="0" maxOccurs="1"/>
+                    <xs:element type="xs:long" nillable="true" name="COD_REG" minOccurs="0" maxOccurs="1"/>
+                    <xs:element type="xs:long" nillable="true" name="COD_PRO" minOccurs="0" maxOccurs="1"/>
+                    <xs:element type="xs:long" nillable="true" name="COD_COM" minOccurs="0" maxOccurs="1"/>
+                    <xs:element type="xs:string" nillable="true" name="CMONTANA" minOccurs="0" maxOccurs="1"/>
+                    <xs:element type="xs:int" nillable="true" name="CODCM" minOccurs="0" maxOccurs="1"/>
+                    <xs:element type="xs:int" nillable="true" name="Aree_Venti" minOccurs="0" maxOccurs="1"/>
+                    <xs:element type="xs:int" nillable="true" name="FID_class0" minOccurs="0" maxOccurs="1"/>
+                    <xs:element type="xs:int" nillable="true" name="Parts" minOccurs="0" maxOccurs="1"/>
+                    <xs:element type="xs:double" nillable="true" name="Length" minOccurs="0" maxOccurs="1"/>
+                    <xs:element type="xs:double" nillable="true" name="Area_1" minOccurs="0" maxOccurs="1"/>
+                    <xs:element type="xs:int" nillable="true" name="Classe" minOccurs="0" maxOccurs="1"/>
+                    <xs:element type="xs:dateTime" nillable="true" name="Data" minOccurs="0" maxOccurs="1"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:element xmlns:sf="http://www.openplans.org/spearfish" type="sf:firesatType" substitutionGroup="gml:_Feature" name="firesat"/>
+</xs:schema>

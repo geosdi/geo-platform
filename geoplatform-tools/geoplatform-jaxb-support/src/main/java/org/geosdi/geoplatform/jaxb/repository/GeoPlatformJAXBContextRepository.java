@@ -37,13 +37,13 @@ package org.geosdi.geoplatform.jaxb.repository;
 import com.google.common.collect.Maps;
 import net.jcip.annotations.ThreadSafe;
 import org.geosdi.geoplatform.jaxb.GPBaseJAXBContext;
+import org.geosdi.geoplatform.jaxb.provider.GeoPlatformJAXBContextProvider;
 
 import java.awt.*;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -58,7 +58,7 @@ public abstract class GeoPlatformJAXBContextRepository implements JAXBContextRep
     /**
      * <p> Register the JAXB Context for the Specific Connector </p>
      *
-     * @param key see also {@link GeoPlatformJAXBContextKey}
+     * @param key      see also {@link GeoPlatformJAXBContextKey}
      * @param provider {@link Object}
      */
     @Override
@@ -80,7 +80,6 @@ public abstract class GeoPlatformJAXBContextRepository implements JAXBContextRep
      * <p> Retrieve the JAXBContext for Specific Connector registered </p>
      *
      * @param key
-     *
      * @return GPConnectorJAXBContext Provider registered for Key
      */
     @Override
@@ -101,9 +100,9 @@ public abstract class GeoPlatformJAXBContextRepository implements JAXBContextRep
             extends RenderingHints.Key {
 
         private static final AtomicInteger keyID = new AtomicInteger(0);
-        private final Class<?> jaxbContextClass;
+        private final Class<? extends GeoPlatformJAXBContextProvider> jaxbContextClass;
 
-        public GeoPlatformJAXBContextKey(Class<?> thejaxbContextClass) {
+        public GeoPlatformJAXBContextKey(Class<? extends GeoPlatformJAXBContextProvider> thejaxbContextClass) {
             super(keyID.getAndIncrement());
             this.jaxbContextClass = thejaxbContextClass;
         }

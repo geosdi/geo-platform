@@ -35,12 +35,12 @@
  */
 package org.geosdi.geoplatform.connector.jaxb.pool;
 
-import java.util.Map;
+import org.geosdi.geoplatform.jaxb.pool.GeoPlatformJAXBContextPool;
+import org.geosdi.geoplatform.jaxb.repository.GeoPlatformJAXBContextRepository;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import org.geosdi.geoplatform.connector.jaxb.CSWConnectorJAXBContext;
-import org.geosdi.geoplatform.jaxb.repository.GeoPlatformJAXBContextRepository;
-import org.geosdi.geoplatform.jaxb.pool.GeoPlatformJAXBContextPool;
+import java.util.Map;
 
 /**
  *
@@ -77,7 +77,7 @@ public class CSWJAXBContextPool
             extends GeoPlatformJAXBContextRepository.GeoPlatformJAXBContextKey {
 
         public CSWJAXBContextPoolKey() {
-            super(CSWConnectorJAXBContext.class);
+            super(CSWConnectorJAXBContextPool.class);
         }
 
         @Override

@@ -33,10 +33,6 @@
  */
 package org.geosdi.geoplatform.connector.wfs;
 
-import java.awt.print.Book;
-import java.net.URL;
-import java.util.concurrent.atomic.AtomicBoolean;
-import javax.xml.namespace.QName;
 import org.geosdi.geoplatform.connector.GPWFSConnectorStore;
 import org.geosdi.geoplatform.connector.WFSConnectorBuilder;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
@@ -44,6 +40,9 @@ import org.geosdi.geoplatform.connector.server.security.BasicPreemptiveSecurityC
 import org.junit.Before;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import javax.xml.namespace.QName;
+import java.net.URL;
 
 /**
  *
@@ -67,7 +66,6 @@ public class WFSTestConfigurator {
     @Before
     public void setUp() throws Exception {
         if (!flag) {
-            logger.info("####################ECCOLO@@@@@@@@@@@@@@@@@@");
             serverConnector = WFSConnectorBuilder.newConnector().withServerUrl(
                     new URL(wfsURL))
                     .withPooledConnectorConfig(new GPServerConnector.BasePooledConnectorConfig(150, 80))

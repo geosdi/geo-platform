@@ -172,6 +172,9 @@ public interface BaseMenuGenericToolConstants extends ConstantsWithLookup {
     @DefaultStringValue("Import Style")
     String importLayerStyleText();
 
+    @DefaultStringValue("Classify Layer Style")
+    String classifyLayerStyleText();
+
     @DefaultStringValue("Edit WFS Mode")
     String treeMenuEditWFSModeText();
 

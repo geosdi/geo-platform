@@ -99,7 +99,7 @@ public class GPTreeMenuTest {
         List<? extends GPMenuGenericTool> tools = gpTreeMenuStore.getTools(
                 new SingleSelectionCompositeKey(GPTreeCompositeType.LEAF));
 
-        Assert.assertEquals(12, tools.size());
+        Assert.assertEquals(11, tools.size());
 
         logger.info("LEAF TREE MENU @@@@@@@@@@@@@@@@@@@@@@@@@@ \n\n {} \n",
                 tools);

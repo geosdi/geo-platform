@@ -151,6 +151,9 @@ public interface BaseMenuGenericToolConstants extends ConstantsWithLookup {
     @DefaultStringValue("CQL Filter")
     String treeMenuCQLFilterText();
 
+    @DefaultStringValue("SLD")
+    String sldGroupMenuText();
+
     @DefaultStringValue("Add/Modify CQL Filter")
     String treeMenuCQLAddModifyFilterText();
 
@@ -174,6 +177,9 @@ public interface BaseMenuGenericToolConstants extends ConstantsWithLookup {
 
     @DefaultStringValue("Classify Layer Style")
     String classifyLayerStyleText();
+
+    @DefaultStringValue("Rasterize Layer Style")
+    String rasterizeLayerStyleText();
 
     @DefaultStringValue("Edit WFS Mode")
     String treeMenuEditWFSModeText();

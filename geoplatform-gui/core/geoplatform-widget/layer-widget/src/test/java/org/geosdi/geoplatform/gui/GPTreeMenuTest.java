@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui;
 
-import java.util.List;
 import org.geosdi.geoplatform.gui.configuration.GPMenuGenericTool;
 import org.geosdi.geoplatform.gui.configuration.composite.GPTreeCompositeType;
 import org.geosdi.geoplatform.gui.configuration.composite.menu.MultiSelectionElementType;
@@ -51,6 +50,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.List;
 
 /**
  *
@@ -99,7 +100,7 @@ public class GPTreeMenuTest {
         List<? extends GPMenuGenericTool> tools = gpTreeMenuStore.getTools(
                 new SingleSelectionCompositeKey(GPTreeCompositeType.LEAF));
 
-        Assert.assertEquals(11, tools.size());
+        Assert.assertEquals(12, tools.size());
 
         logger.info("LEAF TREE MENU @@@@@@@@@@@@@@@@@@@@@@@@@@ \n\n {} \n",
                 tools);

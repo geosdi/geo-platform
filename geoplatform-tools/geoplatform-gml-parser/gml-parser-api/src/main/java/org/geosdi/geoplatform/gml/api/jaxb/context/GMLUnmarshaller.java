@@ -35,15 +35,16 @@
  */
 package org.geosdi.geoplatform.gml.api.jaxb.context;
 
+import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
+import org.w3c.dom.Node;
+import org.xml.sax.InputSource;
+
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.JAXBException;
 import java.io.File;
 import java.io.InputStream;
 import java.io.Reader;
 import java.net.URL;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
-import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
-import org.w3c.dom.Node;
-import org.xml.sax.InputSource;
 
 /**
  *
@@ -52,22 +53,28 @@ import org.xml.sax.InputSource;
  */
 public interface GMLUnmarshaller {
 
-    Object unmarshal(File f) throws JAXBException,
+    <T> T unmarshal(File f) throws JAXBException,
             ParserException;
 
-    Object unmarshal(InputStream is) throws JAXBException,
+    <T> T unmarshal(InputStream is) throws JAXBException,
             ParserException;
 
-    Object unmarshal(Reader reader) throws JAXBException,
+    <T> T unmarshal(Reader reader) throws JAXBException,
             ParserException;
 
-    Object unmarshal(URL url) throws JAXBException,
+    <T> T unmarshal(URL url) throws JAXBException,
             ParserException;
 
-    Object unmarshal(InputSource source) throws JAXBException,
+    <T> T unmarshal(InputSource source) throws JAXBException,
             ParserException;
 
-    Object unmarshal(Node node) throws JAXBException,
+    <T> T unmarshal(javax.xml.transform.Source source) throws Exception;
+
+    <T> T unmarshal(javax.xml.stream.XMLStreamReader reader) throws Exception;
+
+    <T> T unmarshal(javax.xml.stream.XMLEventReader reader) throws Exception;
+
+    <T> T unmarshal(Node node) throws JAXBException,
             ParserException;
 
     <T> JAXBElement<T> unmarshal(org.w3c.dom.Node node,
@@ -82,6 +89,6 @@ public interface GMLUnmarshaller {
 
     <T> JAXBElement<T> unmarshal(javax.xml.stream.XMLEventReader reader,
             Class<T> declaredType) throws JAXBException, ParserException;
-    
+
     void dispose() throws Exception;
 }

@@ -35,9 +35,11 @@
  */
 package org.geosdi.geoplatform.gml.impl.v311.jaxb.context;
 
-import javax.xml.bind.JAXBContext;
 import org.geosdi.geoplatform.gml.api.jaxb.context.GMLJAXBContextSimple;
 import org.geosdi.geoplatform.gml.api.jaxb.context.GMLMarshaller;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
 
 /**
  *
@@ -53,6 +55,8 @@ public class GMLJAXBContextSimpleV311 extends GMLJAXBContextSimple {
 
     @Override
     public GMLMarshaller acquireMarshaller() throws Exception {
-        return new GMLMarshallerV311(jaxbContext.createMarshaller());
+        Marshaller marshaller = this.jaxbContext.createMarshaller();
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+        return new GMLMarshallerV311(marshaller);
     }
 }

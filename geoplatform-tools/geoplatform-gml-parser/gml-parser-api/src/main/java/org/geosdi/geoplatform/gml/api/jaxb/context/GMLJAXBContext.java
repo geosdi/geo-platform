@@ -42,7 +42,17 @@ package org.geosdi.geoplatform.gml.api.jaxb.context;
  */
 public interface GMLJAXBContext {
 
+    /**
+     *
+     * @return {@link GMLMarshaller}
+     * @throws Exception
+     */
     GMLMarshaller acquireMarshaller() throws Exception;
 
+    /**
+     *
+     * @return {@link GMLUnmarshaller}
+     * @throws Exception
+     */
     GMLUnmarshaller acquireUnmarshaller() throws Exception;
 }

@@ -35,11 +35,13 @@
  */
 package org.geosdi.geoplatform.gml.api.jaxb.context.pool;
 
-import javax.xml.bind.JAXBContext;
 import org.apache.commons.pool2.BasePooledObjectFactory;
 import org.apache.commons.pool2.PooledObject;
 import org.apache.commons.pool2.impl.DefaultPooledObject;
 import org.geosdi.geoplatform.gml.api.jaxb.DefaultGMLUnmarshaller;
+import org.geosdi.geoplatform.gml.api.jaxb.context.GMLUnmarshaller;
+
+import javax.xml.bind.JAXBContext;
 
 /**
  *
@@ -47,7 +49,7 @@ import org.geosdi.geoplatform.gml.api.jaxb.DefaultGMLUnmarshaller;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class GMLUnmarshallerFactory
-        extends BasePooledObjectFactory<DefaultGMLUnmarshaller> {
+        extends BasePooledObjectFactory<GMLUnmarshaller> {
 
     private final JAXBContext jaxbContext;
 
@@ -56,17 +58,17 @@ public class GMLUnmarshallerFactory
     }
 
     @Override
-    public DefaultGMLUnmarshaller create() throws Exception {
+    public GMLUnmarshaller create() throws Exception {
         return new DefaultGMLUnmarshaller(jaxbContext.createUnmarshaller());
     }
 
     @Override
-    public PooledObject<DefaultGMLUnmarshaller> wrap(DefaultGMLUnmarshaller obj) {
-        return new DefaultPooledObject<DefaultGMLUnmarshaller>(obj);
+    public PooledObject<GMLUnmarshaller> wrap(GMLUnmarshaller obj) {
+        return new DefaultPooledObject<GMLUnmarshaller>(obj);
     }
 
     @Override
-    public void destroyObject(PooledObject<DefaultGMLUnmarshaller> p)
+    public void destroyObject(PooledObject<GMLUnmarshaller> p)
             throws Exception {
         p.getObject().dispose();
     }

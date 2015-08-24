@@ -33,19 +33,33 @@
  */
 package org.geosdi.geoplatform.gui.client.impl;
 
+import org.geosdi.geoplatform.gui.command.api.GPCommandResponse;
+
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class GenericStringCommandResponse extends GenericCommandResponse<String> {
+public class GenericStringCommandResponse implements GPCommandResponse<String> {
 
     private static final long serialVersionUID = -1974395164594000093L;
 
+    private String result;
+    
     public GenericStringCommandResponse() {
     }
 
     public GenericStringCommandResponse(String result) {
-        super(result);
+        this.result = result;
+    }
+
+    @Override
+    public String getResult() {
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "GenericStringCommandResponse{" + "result=" + result + '}';
     }
 
 }

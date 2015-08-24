@@ -49,7 +49,7 @@ import org.geosdi.geoplatform.gui.utility.GSAuthKeyManager;
  */
 public class GPLegendWidget {
 
-    protected static final String GET_LEGEND_REQUEST = "?REQUEST=GetLegendGraphic"
+    public static final String GET_LEGEND_REQUEST = "?REQUEST=GetLegendGraphic"
             + "&VERSION=1.0.0&FORMAT=image/png&LAYER=";
     protected ContentPanel legendsStore;
 

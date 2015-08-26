@@ -47,6 +47,9 @@ public class DisplayLayerMapEvent extends GwtEvent<LayerMapChangedHandler> {
 
     private GPLayerBean layerBean;
 
+    public DisplayLayerMapEvent() {
+    }
+    
     public DisplayLayerMapEvent(GPLayerBean theLayerBean) {
         this.layerBean = theLayerBean;
     }
@@ -56,6 +59,10 @@ public class DisplayLayerMapEvent extends GwtEvent<LayerMapChangedHandler> {
      */
     public GPLayerBean getLayerBean() {
         return layerBean;
+    }
+
+    public void setLayerBean(GPLayerBean layerBean) {
+        this.layerBean = layerBean;
     }
 
     @Override

@@ -48,6 +48,9 @@ public class HideLayerMapEvent extends GwtEvent<LayerMapChangedHandler> {
 
     private GPLayerBean layerBean;
 
+    public HideLayerMapEvent() {
+    }
+    
     public HideLayerMapEvent(GPLayerBean theLayerBean) {
         this.layerBean = theLayerBean;
     }
@@ -57,6 +60,10 @@ public class HideLayerMapEvent extends GwtEvent<LayerMapChangedHandler> {
      */
     public GPLayerBean getLayerBean() {
         return layerBean;
+    }
+
+    public void setLayerBean(GPLayerBean layerBean) {
+        this.layerBean = layerBean;
     }
 
     @Override

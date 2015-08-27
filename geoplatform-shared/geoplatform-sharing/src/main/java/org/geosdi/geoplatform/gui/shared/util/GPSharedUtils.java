@@ -77,6 +77,13 @@ public class GPSharedUtils {
         return true;
     }
 
+    public static <T> boolean isEmpty(final List<T> objList) {
+        if (objList == null || objList.isEmpty()) {
+            return true;
+        }
+        return false;
+    }
+    
     public static <T> boolean isNotEmpty(final List<T> objList) {
         if (objList == null || objList.isEmpty()) {
             return false;

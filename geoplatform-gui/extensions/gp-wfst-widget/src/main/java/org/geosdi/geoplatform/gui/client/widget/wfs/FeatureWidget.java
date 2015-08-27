@@ -255,7 +255,7 @@ public class FeatureWidget extends GeoPlatformWindow
         SplitBar bar = attributesWidget.getData("splitBar");
         
         if (bar != null) {
-            this.attributesWidget.manageGridSize();
+            this.attributesWidget.manageGridHeight();
             this.mapWidget.manageMapSize();
         }
     }

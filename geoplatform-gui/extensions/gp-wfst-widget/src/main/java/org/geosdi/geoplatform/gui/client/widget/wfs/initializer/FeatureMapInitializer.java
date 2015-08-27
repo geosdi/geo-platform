@@ -1,42 +1,42 @@
 /**
  *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
+ * geo-platform Rich webgis framework http://geo-platform.org
+ * ====================================================================
  *
- *   Copyright (C) 2008-2015 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2015 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version. This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details. You should have received a copy of the GNU General Public License
+ * along with this program. If not, see http://www.gnu.org/licenses/
  *
- *   ====================================================================
+ * ====================================================================
  *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
+ * Linking this library statically or dynamically with other modules is making a
+ * combined work based on this library. Thus, the terms and conditions of the
+ * GNU General Public License cover the whole combination.
  *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * As a special exception, the copyright holders of this library give you
+ * permission to link this library with independent modules to produce an
+ * executable, regardless of the license terms of these independent modules, and
+ * to copy and distribute the resulting executable under terms of your choice,
+ * provided that you also meet, for each linked independent module, the terms
+ * and conditions of the license of that module. An independent module is a
+ * module which is not derived from or based on this library. If you modify this
+ * library, you may extend this exception to your version of the library, but
+ * you are not obligated to do so. If you do not wish to do so, delete this
+ * exception statement from your version.
  */
 package org.geosdi.geoplatform.gui.client.widget.wfs.initializer;
 
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.Timer;
+import java.util.ArrayList;
+import java.util.List;
 import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.model.binder.ILayerSchemaBinder;
 import org.geosdi.geoplatform.gui.client.puregwt.observer.event.ResetToolbarObserverEvent;
@@ -79,6 +79,8 @@ public class FeatureMapInitializer implements IFeatureMapInitializer {
     private InjectGetFeatureModelEvent injectGetFeatureModelEvent;
     private final GPEventBus bus;
     private Layer wms;
+    private List<GPLayerBean> layers;
+    private List<Layer> wmsLayers;
 
     @Inject
     public FeatureMapInitializer(GPEventBus theBus) {
@@ -114,6 +116,14 @@ public class FeatureMapInitializer implements IFeatureMapInitializer {
         this.bus.fireEvent(resetToolbarObserver);
         this.vectorLayer.destroyFeatures();
 
+        if ((this.wmsLayers != null) && !(this.wmsLayers.isEmpty())) {
+            for (Layer layer : this.wmsLayers) {
+                this.mapWidget.getMap().removeLayer(layer);
+            }
+            this.layers = null;
+            this.wmsLayers = null;
+        }
+
         if (wms != null) {
             this.mapWidget.getMap().removeLayer(wms);
         }
@@ -137,7 +147,22 @@ public class FeatureMapInitializer implements IFeatureMapInitializer {
         ((WMS) this.wms).redraw(true);
     }
 
+    @Override
+    public void bindLayers(List<GPLayerBean> theLayers) {
+        this.layers = theLayers;
+    }
+
     protected void loadLayerOnMap() {
+        if ((this.layers != null) && !(this.layers.isEmpty())) {
+            this.wmsLayers = new ArrayList<Layer>();
+            for (GPLayerBean layer : this.layers) {
+                this.wmsLayers.add(this.mapLayerBuilder.buildLayer(layer));
+                this.mapWidget.getMap()
+                        .addLayers(this.wmsLayers
+                                .toArray(new Layer[this.wmsLayers.size()]));
+            }
+        }
+
         this.mapWidget.getMap().addLayer(wms);
         this.mapWidget.getMap().addLayer(vectorLayer);
 

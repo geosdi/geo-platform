@@ -37,7 +37,10 @@ package org.geosdi.geoplatform.gui.client.puregwt.map.initializer;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
+import java.util.List;
 import org.geosdi.geoplatform.gui.client.puregwt.map.initializer.event.RedrawWMSLayerEvent;
+import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
 
 /**
  *
@@ -51,5 +54,12 @@ public interface IFeatureMapInitializerHandler extends EventHandler {
     GwtEvent.Type<IFeatureMapInitializerHandler> TYPE = new GwtEvent.Type<IFeatureMapInitializerHandler>();
 
     void redrawWMSLayer();
+    
+    /**
+     * <p>Bind Layers on {@link GPTreePanel<T>} Tree</p>
+     * 
+     * @param theLayers 
+     */
+    void bindLayers(List<GPLayerBean> theLayers);
 
 }

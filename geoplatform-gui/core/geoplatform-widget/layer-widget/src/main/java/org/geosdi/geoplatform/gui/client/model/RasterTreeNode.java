@@ -109,10 +109,12 @@ public class RasterTreeNode extends AbstractRasterTreeModel implements
         super.setUUID(UUID);
     }
 
+    @Override
     public boolean isSingleTileRequest() {
         return singleTileRequest;
     }
 
+    @Override
     public final void setSingleTileRequest(boolean singleTileRequest) {
         this.singleTileRequest = singleTileRequest;
         set(GPRasterKeyValue.SINGLE_TILE_REQUEST.toString(), this.singleTileRequest);

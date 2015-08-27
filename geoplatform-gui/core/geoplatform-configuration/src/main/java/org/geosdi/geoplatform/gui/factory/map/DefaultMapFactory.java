@@ -53,6 +53,9 @@ public class DefaultMapFactory implements GeoPlatformMapFactory {
     /**
      * (non-Javadoc)
      *
+     * @param width
+     * @param height
+     * @return 
      * @see
      * org.geosdi.geoplatform.gui.factory.GeoPlatformMapFactory#createMap(java.lang.String,
      * java.lang.String)
@@ -65,6 +68,10 @@ public class DefaultMapFactory implements GeoPlatformMapFactory {
     /**
      * (non-Javadoc)
      *
+     * @param width
+     * @param height
+     * @param options
+     * @return 
      * @see
      * org.geosdi.geoplatform.gui.factory.GeoPlatformMapFactory#createMap(java.lang.String,
      * java.lang.String, org.gwtopenmaps.openlayers.client.MapOptions)

@@ -48,7 +48,6 @@ import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
 import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.config.annotation.ResetButton;
 import org.geosdi.geoplatform.gui.client.config.annotation.SaveButton;
@@ -60,7 +59,11 @@ import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar;
 import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.EditingToolBarDialog;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableEvent;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableHandler;
+import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
+import org.geosdi.geoplatform.gui.configuration.map.puregwt.event.ScaleVisibleEvent;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
+
+import javax.inject.Inject;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -90,6 +93,7 @@ public class FeatureWidget extends GeoPlatformWindow
     private final Button saveButton;
     private final Button resetButton;
     private final GPEventBus bus;
+    private final ScaleVisibleEvent scaleVisibleEvent = new ScaleVisibleEvent();
     
     @Inject
     public FeatureWidget(GPEventBus theBus, @ResetButton Button theResetButton,
@@ -122,10 +126,11 @@ public class FeatureWidget extends GeoPlatformWindow
     
     @Override
     public void setWindowProperties() {
-        super.setCollapsible(false);
-        super.setResizable(false);
-        super.setModal(true);
-        super.setPlain(true);
+        super.setCollapsible(Boolean.FALSE);
+        super.setResizable(Boolean.TRUE);
+        super.setMaximizable(Boolean.TRUE);
+        super.setModal(Boolean.TRUE);
+        super.setPlain(Boolean.TRUE);
         
         super.setLayout(layout);
     }
@@ -198,6 +203,8 @@ public class FeatureWidget extends GeoPlatformWindow
         this.mapWidget.reset();
         this.attributesWidget.reset();
         this.statusBar.reset();
+        this.scaleVisibleEvent.setActivate(Boolean.TRUE);
+        MapHandlerManager.fireEvent(scaleVisibleEvent);
     }
     
     @Override
@@ -216,6 +223,8 @@ public class FeatureWidget extends GeoPlatformWindow
     @Override
     protected void afterShow() {
         super.afterShow();
+        this.scaleVisibleEvent.setActivate(Boolean.FALSE);
+        MapHandlerManager.fireEvent(scaleVisibleEvent);
         
         this.statusBar.setBusy("Loading Layer as WFS");
         

@@ -94,18 +94,18 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
     //
     @Inject
     private ILayerSchemaBinder layerSchemaBinder;
-    private GPEventBus bus;
-    private TimeInputWidget timeInputWidget;
+    private final GPEventBus bus;
+    private final TimeInputWidget timeInputWidget;
     private ListStore<FeatureAttributeValuesDetail> store;
     private EditorGrid<FeatureAttributeValuesDetail> grid;
     //
     private List<VectorFeature> vectors;
-    private FeatureMapHeightEvent increaseHeightEvent = new IncreaseHeightEvent();
+    private final FeatureMapHeightEvent increaseHeightEvent = new IncreaseHeightEvent();
     //
     private String dataAttributeName;
     //
-    private GetFeatureControlBuilder featureControlBuilder;
-    private WFSProtocolCRUDOptions featureCRUDProtocol;
+    private final GetFeatureControlBuilder featureControlBuilder;
+    private final WFSProtocolCRUDOptions featureCRUDProtocol;
     private final FeatureStatusBarEvent successStatusBarEvent = new FeatureStatusBarEvent(
             "", FeatureStatusBarType.STATUS_OK);
     ResetStatusBarEvent resetStatusBarEvent = new ResetStatusBarEvent();

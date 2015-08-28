@@ -34,8 +34,8 @@
  */
 package org.geosdi.geoplatform.connector.jaxb.comparison;
 
-import org.geosdi.geoplatform.connector.jaxb.CSWJAXBContext;
-import org.geosdi.geoplatform.connector.jaxb.pool.CSWJAXBContextPool;
+import org.geosdi.geoplatform.connector.jaxb.context.CSWJAXBContext;
+import org.geosdi.geoplatform.connector.jaxb.context.pool.CSWJAXBContextPool;
 import org.geosdi.geoplatform.junit.Order;
 import org.geosdi.geoplatform.junit.OrderedRunner;
 import org.geosdi.geoplatform.xml.csw.v202.GetRecordsType;

@@ -33,47 +33,57 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.jaxb;
+package org.geosdi.geoplatform.connector.jaxb.context.pool;
 
+import org.geosdi.geoplatform.jaxb.pool.GeoPlatformJAXBContextPool;
+import org.geosdi.geoplatform.jaxb.repository.GeoPlatformJAXBContextRepository;
+
+import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import org.geosdi.geoplatform.connector.jaxb.WFSJAXBContext.WFSJAXBContextKey;
-import org.geosdi.geoplatform.jaxb.provider.GeoPlatformJAXBContextProvider;
-import org.geosdi.geoplatform.xml.wfs.WFSContextServiceProvider;
-import org.slf4j.LoggerFactory;
+import java.util.Map;
+import org.geosdi.geoplatform.connector.jaxb.repository.CSWConnectorJAXBContextPool;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public final class WFSConnectorJAXBContext implements
-        GeoPlatformJAXBContextProvider {
+public class CSWJAXBContextPool
+        extends GeoPlatformJAXBContextPool {
 
-    static {
-        try {
-            jaxbContext = new WFSJAXBContext(
-                    WFSContextServiceProvider.loadContextPath());
-        } catch (JAXBException e) {
-            LoggerFactory.getLogger(WFSConnectorJAXBContext.class).error(
-                    "Failed to Initialize JAXBContext for Class "
-                    + WFSConnectorJAXBContext.class.getName()
-                    + ": @@@@@@@@@@@@@@@@@ " + e);
+    public CSWJAXBContextPool(String contextPath) throws JAXBException {
+        super(contextPath);
+    }
+
+    public CSWJAXBContextPool(String contextPath,
+            ClassLoader classLoader) throws JAXBException {
+        super(contextPath, classLoader);
+    }
+
+    public CSWJAXBContextPool(String contextPath,
+            ClassLoader classLoader,
+            Map<String, ?> properties) throws JAXBException {
+        super(contextPath, classLoader, properties);
+    }
+
+    public CSWJAXBContextPool(Class... classToBeBound) throws JAXBException {
+        super(classToBeBound);
+    }
+
+    public CSWJAXBContextPool(JAXBContext theJaxbContext) {
+        super(theJaxbContext);
+    }
+
+    public static class CSWJAXBContextPoolKey
+            extends GeoPlatformJAXBContextRepository.GeoPlatformJAXBContextKey {
+
+        public CSWJAXBContextPoolKey() {
+            super(CSWConnectorJAXBContextPool.class);
         }
-    }
-    //
-    private static WFSJAXBContext jaxbContext;
-    public static final WFSJAXBContextKey WFS_CONTEXT_KEY = new WFSJAXBContextKey();
 
-    protected WFSConnectorJAXBContext() {
-    }
-
-    @Override
-    public WFSJAXBContext getJAXBProvider() {
-        return jaxbContext;
-    }
-
-    @Override
-    public WFSJAXBContextKey getKeyProvider() {
-        return WFSConnectorJAXBContext.WFS_CONTEXT_KEY;
+        @Override
+        public boolean isCompatibleValue(Object o) {
+            return o instanceof CSWJAXBContextPool;
+        }
     }
 }

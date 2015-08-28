@@ -1,7 +1,7 @@
 package org.geosdi.geoplatform.connector.wfs.jaxb.comparison;
 
-import org.geosdi.geoplatform.connector.jaxb.WFSJAXBContext;
-import org.geosdi.geoplatform.connector.jaxb.pool.WFSJAXBContextPool;
+import org.geosdi.geoplatform.connector.jaxb.context.WFSJAXBContext;
+import org.geosdi.geoplatform.connector.jaxb.context.pool.WFSJAXBContextPool;
 import org.geosdi.geoplatform.junit.Order;
 import org.geosdi.geoplatform.junit.OrderedRunner;
 import org.geosdi.geoplatform.xml.wfs.v110.WFSCapabilitiesType;

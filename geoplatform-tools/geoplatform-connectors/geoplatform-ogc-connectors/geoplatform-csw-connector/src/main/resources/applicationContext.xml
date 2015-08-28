@@ -18,7 +18,8 @@
     
     <context:component-scan base-package="org.geosdi.geoplatform.connector.proxy, 
                             org.geosdi.geoplatform.connector.security,
-                            org.geosdi.geoplatform.connector.schema"/>
+                            org.geosdi.geoplatform.connector.schema, 
+                            org.geosdi.geoplatform.connector.repository"/>
     
     <import resource="classpath:applicationContext-jasypt.xml" />
     
@@ -44,7 +45,5 @@
     </bean>
     
     <bean id="catalogCapabilitiesBean" class="org.geosdi.geoplatform.connector.CatalogGetCapabilitiesBean" />
-    
-    <bean id="catalogJAXBContextConfigurator" class="org.geosdi.geoplatform.connector.jaxb.CatalogJAXBContextConfigurator" />
 
 </beans>

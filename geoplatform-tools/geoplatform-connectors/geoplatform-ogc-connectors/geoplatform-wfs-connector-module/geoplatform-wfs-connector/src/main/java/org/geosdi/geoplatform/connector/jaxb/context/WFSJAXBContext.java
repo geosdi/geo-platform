@@ -33,32 +33,66 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.jaxb;
+package org.geosdi.geoplatform.connector.jaxb.context;
 
-import org.springframework.context.annotation.Bean;
+import org.geosdi.geoplatform.jaxb.GeoPlatformJAXBContext;
+import org.geosdi.geoplatform.jaxb.repository.GeoPlatformJAXBContextRepository.GeoPlatformJAXBContextKey;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import java.util.Map;
+import org.geosdi.geoplatform.connector.jaxb.repository.WFSConnectorJAXBContext;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class CatalogJAXBContextConfigurator {
+public class WFSJAXBContext extends GeoPlatformJAXBContext {
 
-    /**
-     * Create an Instance for CSWConnectorJAXBContext and register it in
-     * GeoPlatformJAXBContextRepository with the specific Key.
-     *
-     * @return CSWConnectorJAXBContext
-     */
-    public @Bean(name = "cswConnectorJAXBContext")
-    CSWConnectorJAXBContext cswConnectorJAXBContext() {
+    public WFSJAXBContext(Class... classToBeBound) throws JAXBException {
+        super(classToBeBound);
+    }
 
-        CSWConnectorJAXBContext cswJAXBContext = new CSWConnectorJAXBContext();
+    public WFSJAXBContext(String contextPath, ClassLoader classLoader,
+            Map<String, ?> properties) throws JAXBException {
+        super(contextPath, classLoader, properties);
+    }
 
-        JAXBContextConnectorRepository.registerProvider(
-                cswJAXBContext.getKeyProvider(),
-                cswJAXBContext.getJAXBProvider());
+    public WFSJAXBContext(String contextPath, ClassLoader classLoader)
+            throws JAXBException {
+        super(contextPath, classLoader);
+    }
 
-        return cswJAXBContext;
+    public WFSJAXBContext(String contextPath) throws JAXBException {
+        super(contextPath);
+    }
+
+    public WFSJAXBContext(JAXBContext theJaxbContext) {
+        super(theJaxbContext);
+    }
+
+    @Override
+    public Marshaller acquireMarshaller() throws Exception {
+        return super.createMarshaller();
+    }
+
+    @Override
+    public Unmarshaller acquireUnmarshaller() throws Exception {
+        return super.createUnmarshaller();
+    }
+
+    public static class WFSJAXBContextKey extends GeoPlatformJAXBContextKey {
+
+        public WFSJAXBContextKey() {
+            super(WFSConnectorJAXBContext.class);
+        }
+
+        @Override
+        public boolean isCompatibleValue(Object o) {
+            return o instanceof WFSJAXBContext;
+        }
     }
 }

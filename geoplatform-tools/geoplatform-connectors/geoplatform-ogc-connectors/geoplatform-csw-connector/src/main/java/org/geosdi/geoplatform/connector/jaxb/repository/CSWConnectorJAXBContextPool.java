@@ -1,5 +1,6 @@
-package org.geosdi.geoplatform.connector.jaxb.pool;
+package org.geosdi.geoplatform.connector.jaxb.repository;
 
+import org.geosdi.geoplatform.connector.jaxb.context.pool.CSWJAXBContextPool;
 import org.geosdi.geoplatform.jaxb.provider.GeoPlatformJAXBContextProvider;
 import org.geosdi.geoplatform.xml.csw.CSWContextServiceProvider;
 import org.slf4j.LoggerFactory;

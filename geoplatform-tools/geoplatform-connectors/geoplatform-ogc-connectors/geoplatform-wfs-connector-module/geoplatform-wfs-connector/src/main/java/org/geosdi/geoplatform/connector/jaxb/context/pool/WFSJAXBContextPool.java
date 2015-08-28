@@ -1,4 +1,4 @@
-package org.geosdi.geoplatform.connector.jaxb.pool;
+package org.geosdi.geoplatform.connector.jaxb.context.pool;
 
 import org.geosdi.geoplatform.jaxb.pool.GeoPlatformJAXBContextPool;
 import org.geosdi.geoplatform.jaxb.repository.GeoPlatformJAXBContextRepository;
@@ -6,6 +6,8 @@ import org.geosdi.geoplatform.jaxb.repository.GeoPlatformJAXBContextRepository;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import java.util.Map;
+import org.geosdi.geoplatform.connector.jaxb.repository.WFSConnectorJAXBContextPool;
+import org.geosdi.geoplatform.connector.jaxb.repository.WFSConnectorJAXBContextPool;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jaxb:bindings version="1.0" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" 
+               xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+               xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" 
+               jaxb:schemaLocation="
+               http://java.sun.com/xml/ns/jaxb
+               http://java.sun.com/xml/ns/jaxb/bindingschema_1_0.xsd
+               http://www.w3.org/2001/XMLSchema
+               http://www.w3.org/2001/XMLSchema.xsd"
+               jaxb:extensionBindingPrefixes="xjc">
+
+    <jaxb:bindings schemaLocation="wmc/1.1.0/context.xsd"
+                   node="/xs:schema">
+        <jaxb:globalBindings
+            fixedAttributeAsConstantProperty="true"
+            typesafeEnumBase="xs:string"
+            typesafeEnumMemberName="generateName" 
+            generateIsSetMethod="true">
+            <xjc:noValidator />
+            <xjc:noValidatingUnmarshaller />
+        </jaxb:globalBindings>
+        
+        <jaxb:schemaBindings>
+            <jaxb:package name="org.geosdi.geoplatform.xml.wmc.v110"/>
+        </jaxb:schemaBindings>
+    </jaxb:bindings>
+
+</jaxb:bindings>

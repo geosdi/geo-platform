@@ -23,6 +23,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class AbstractWFSComparisonTest {
 
     enum WFSTaskType {
+
         DESCRIBE_FEATURE_SIMPLE,
         DESCRIBE_FEATURE_POOLED,
         DESCRIBE_FEATURE_SECURE_SIMPLE,
@@ -44,6 +45,7 @@ public class AbstractWFSComparisonTest {
             thread.setDaemon(Boolean.TRUE);
             return thread;
         }
+
     };
     //
     protected final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -73,8 +75,8 @@ public class AbstractWFSComparisonTest {
         return 150;
     }
 
-    protected long executeMultiThreadsTasks(GPBaseJAXBContext jaxbContext, WFSTaskType wfsTaskType)
-            throws Exception {
+    long executeMultiThreadsTasks(GPBaseJAXBContext jaxbContext,
+            WFSTaskType wfsTaskType) throws Exception {
         long time = 0;
 
         int numThreads = defineNumThreads();
@@ -102,8 +104,9 @@ public class AbstractWFSComparisonTest {
         return time;
     }
 
-    private void fillTasksList(GPBaseJAXBContext jaxbContext, List<Callable<Long>> tasks,
-                               WFSTaskType wfsTaskType, int numThreads) {
+    private void fillTasksList(GPBaseJAXBContext jaxbContext,
+            List<Callable<Long>> tasks,
+            WFSTaskType wfsTaskType, int numThreads) {
         switch (wfsTaskType) {
             case DESCRIBE_FEATURE_SIMPLE:
                 for (int i = 0; i < numThreads; i++) {
@@ -169,6 +172,7 @@ public class AbstractWFSComparisonTest {
 
             return System.currentTimeMillis() - start;
         }
+
     }
 
     private class WFSDescribeFeaturePooledTask extends WFSDescribeFeatureSimpleTask {
@@ -188,11 +192,13 @@ public class AbstractWFSComparisonTest {
 
             return System.currentTimeMillis() - start;
         }
+
     }
 
     private class WFSSecureDescribeFeatureSimpleTask extends WFSDescribeFeatureSimpleTask {
 
-        public WFSSecureDescribeFeatureSimpleTask(GPBaseJAXBContext theJaxbContext) {
+        public WFSSecureDescribeFeatureSimpleTask(
+                GPBaseJAXBContext theJaxbContext) {
             super(theJaxbContext);
         }
 
@@ -209,11 +215,13 @@ public class AbstractWFSComparisonTest {
 
             return System.currentTimeMillis() - start;
         }
+
     }
 
     private class WFSSecureDescribeFeaturePooledTask extends WFSDescribeFeatureSimpleTask {
 
-        public WFSSecureDescribeFeaturePooledTask(GPBaseJAXBContext theJaxbContext) {
+        public WFSSecureDescribeFeaturePooledTask(
+                GPBaseJAXBContext theJaxbContext) {
             super(theJaxbContext);
         }
 
@@ -228,6 +236,7 @@ public class AbstractWFSComparisonTest {
 
             return System.currentTimeMillis() - start;
         }
+
     }
 
     private class WFSGetCapabilitiesSimpleTask extends WFSDescribeFeatureSimpleTask {
@@ -249,6 +258,7 @@ public class AbstractWFSComparisonTest {
 
             return System.currentTimeMillis() - start;
         }
+
     }
 
     private class WFSGetCapabilitiesPooledTask extends WFSDescribeFeatureSimpleTask {
@@ -261,19 +271,20 @@ public class AbstractWFSComparisonTest {
         public Long call() throws Exception {
             long start = System.currentTimeMillis();
 
-            WFSCapabilitiesType getCapabilities = (WFSCapabilitiesType) ((WFSJAXBContextPool)
-                    jaxbContext).unmarshal(getCapabilitiesFile);
+            WFSCapabilitiesType getCapabilities = (WFSCapabilitiesType) ((WFSJAXBContextPool) jaxbContext).unmarshal(getCapabilitiesFile);
             StringWriter writer = new StringWriter();
             ((WFSJAXBContextPool) jaxbContext).marshal(getCapabilities, writer);
             logger.debug("\n{}\n", writer);
 
             return System.currentTimeMillis() - start;
         }
+
     }
 
     private class WFSSecureGetCapabilitiesSimpleTask extends WFSDescribeFeatureSimpleTask {
 
-        public WFSSecureGetCapabilitiesSimpleTask(GPBaseJAXBContext theJaxbContext) {
+        public WFSSecureGetCapabilitiesSimpleTask(
+                GPBaseJAXBContext theJaxbContext) {
             super(theJaxbContext);
         }
 
@@ -290,11 +301,13 @@ public class AbstractWFSComparisonTest {
 
             return System.currentTimeMillis() - start;
         }
+
     }
 
     private class WFSSecureGetCapabilitiesPooledTask extends WFSDescribeFeatureSimpleTask {
 
-        public WFSSecureGetCapabilitiesPooledTask(GPBaseJAXBContext theJaxbContext) {
+        public WFSSecureGetCapabilitiesPooledTask(
+                GPBaseJAXBContext theJaxbContext) {
             super(theJaxbContext);
         }
 
@@ -302,13 +315,13 @@ public class AbstractWFSComparisonTest {
         public Long call() throws Exception {
             long start = System.currentTimeMillis();
 
-            WFSCapabilitiesType getSecureCapabilities = (WFSCapabilitiesType) ((WFSJAXBContextPool)
-                    jaxbContext).unmarshal(getCapabilitiesSecureFile);
+            WFSCapabilitiesType getSecureCapabilities = (WFSCapabilitiesType) ((WFSJAXBContextPool) jaxbContext).unmarshal(getCapabilitiesSecureFile);
             StringWriter writer = new StringWriter();
             ((WFSJAXBContextPool) jaxbContext).marshal(getSecureCapabilities, writer);
             logger.debug("\n{}\n", writer);
 
             return System.currentTimeMillis() - start;
         }
+
     }
 }

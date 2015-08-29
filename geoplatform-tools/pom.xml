@@ -29,6 +29,7 @@
         <module>geoplatform-jaxb-support</module>
         <module>geoplatform-jasypt-support</module>
         <module>geoplatform-jaxb-spatial-adapter</module>
+        <module>geoplatform-wmc-jaxb-support</module>
     </modules>
 
 </project>

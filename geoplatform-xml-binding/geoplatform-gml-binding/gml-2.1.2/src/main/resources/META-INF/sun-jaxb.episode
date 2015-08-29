@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<bindings version="2.1" xmlns="http://java.sun.com/xml/ns/jaxb">
+  <!--
+
+Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
+Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
+Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
+Generato il: 2015.08.25 alle 10:30:08 PM CEST 
+
+  -->
+  <bindings scd="x-schema::tns" xmlns:tns="http://www.opengis.net/gml">
+    <schemaBindings map="false">
+      <package name="org.geosdi.geoplatform.xml.gml.v212"/>
+    </schemaBindings>
+    <bindings scd="~tns:PointPropertyType">
+      <class ref="org.geosdi.geoplatform.xml.gml.v212.PointPropertyType"/>
+    </bindings>
+    <bindings scd="~tns:GeometryAssociationType">
+      <class ref="org.geosdi.geoplatform.xml.gml.v212.GeometryAssociationType"/>
+    </bindings>
+    <bindings scd="~tns:MultiPolygonPropertyType">
+      <class ref="org.geosdi.geoplatform.xml.gml.v212.MultiPolygonPropertyType"/>
+    </bindings>
+    <bindings scd="~tns:MultiPolygonType">
+      <class ref="org.geosdi.geoplatform.xml.gml.v212.MultiPolygonType"/>
+    </bindings>
+    <bindings scd="~tns:AbstractGeometryType">
+      <class ref="org.geosdi.geoplatform.xml.gml.v212.AbstractGeometryType"/>
+    </bindings>
+    <bindings scd="~tns:LineStringPropertyType">
+      <class ref="org.geosdi.geoplatform.xml.gml.v212.LineStringPropertyType"/>
+    </bindings>
+    <bindings scd="~tns:MultiPointPropertyType">
+      <class ref="org.geosdi.geoplatform.xml.gml.v212.MultiPointPropertyType"/>
+    </bindings>
+    <bindings scd="~tns:LineStringMemberType">
+      <class ref="org.geosdi.geoplatform.xml.gml.v212.LineStringMemberType"/>
+    </bindings>
+    <bindings scd="~tns:LinearRingType">
+      <class ref="org.geosdi.geoplatform.xml.gml.v212.LinearRingType"/>
+    </bindings>
+    <bindings scd="~tns:PointMemberType">
+      <class ref="org.geosdi.geoplatform.xml.gml.v212.PointMemberType"/>
+    </bindings>
+    <bindings scd="~tns:LinearRingMemberType">
+      <class ref="org.geosdi.geoplatform.xml.gml.v212.LinearRingMemberType"/>
+    </bindings>
+    <bindings scd="~tns:CoordType">
+      <class ref="org.geosdi.geoplatform.xml.gml.v212.CoordType"/>
+    </bindings>
+    <bindings scd="~tns:PolygonPropertyType">
+      <class ref="org.geosdi.geoplatform.xml.gml.v212.PolygonPropertyType"/>
+    </bindings>
+    <bindings scd="~tns:GeometryCollectionType">
+      <class ref="org.geosdi.geoplatform.xml.gml.v212.GeometryCollectionType"/>
+    </bindings>
+    <bindings scd="~tns:MultiLineStringPropertyType">
+      <class ref="org.geosdi.geoplatform.xml.gml.v212.MultiLineStringPropertyType"/>
+    </bindings>
+    <bindings scd="~tns:PolygonMemberType">
+      <class ref="org.geosdi.geoplatform.xml.gml.v212.PolygonMemberType"/>
+    </bindings>
+    <bindings scd="~tns:MultiPointType">
+      <class ref="org.geosdi.geoplatform.xml.gml.v212.MultiPointType"/>
+    </bindings>
+    <bindings scd="~tns:PointType">
+      <class ref="org.geosdi.geoplatform.xml.gml.v212.PointType"/>
+    </bindings>
+    <bindings scd="~tns:CoordinatesType">
+      <class ref="org.geosdi.geoplatform.xml.gml.v212.CoordinatesType"/>
+    </bindings>
+    <bindings scd="~tns:AbstractFeatureType">
+      <class ref="org.geosdi.geoplatform.xml.gml.v212.AbstractFeatureType"/>
+    </bindings>
+    <bindings scd="~tns:MultiGeometryPropertyType">
+      <class ref="org.geosdi.geoplatform.xml.gml.v212.MultiGeometryPropertyType"/>
+    </bindings>
+    <bindings scd="~tns:LineStringType">
+      <class ref="org.geosdi.geoplatform.xml.gml.v212.LineStringType"/>
+    </bindings>
+    <bindings scd="~tns:FeatureAssociationType">
+      <class ref="org.geosdi.geoplatform.xml.gml.v212.FeatureAssociationType"/>
+    </bindings>
+    <bindings scd="~tns:BoxType">
+      <class ref="org.geosdi.geoplatform.xml.gml.v212.BoxType"/>
+    </bindings>
+    <bindings scd="~tns:MultiLineStringType">
+      <class ref="org.geosdi.geoplatform.xml.gml.v212.MultiLineStringType"/>
+    </bindings>
+    <bindings scd="~tns:BoundingShapeType">
+      <class ref="org.geosdi.geoplatform.xml.gml.v212.BoundingShapeType"/>
+    </bindings>
+    <bindings scd="~tns:PolygonType">
+      <class ref="org.geosdi.geoplatform.xml.gml.v212.PolygonType"/>
+    </bindings>
+    <bindings scd="~tns:AbstractFeatureCollectionType">
+      <class ref="org.geosdi.geoplatform.xml.gml.v212.AbstractFeatureCollectionType"/>
+    </bindings>
+    <bindings scd="~tns:AbstractGeometryCollectionBaseType">
+      <class ref="org.geosdi.geoplatform.xml.gml.v212.AbstractGeometryCollectionBaseType"/>
+    </bindings>
+    <bindings scd="~tns:AbstractFeatureCollectionBaseType">
+      <class ref="org.geosdi.geoplatform.xml.gml.v212.AbstractFeatureCollectionBaseType"/>
+    </bindings>
+    <bindings scd="~tns:GeometryPropertyType">
+      <class ref="org.geosdi.geoplatform.xml.gml.v212.GeometryPropertyType"/>
+    </bindings>
+    <bindings scd="~tns:NullType">
+      <typesafeEnumClass ref="org.geosdi.geoplatform.xml.gml.v212.NullType"/>
+    </bindings>
+  </bindings>
+</bindings>
+

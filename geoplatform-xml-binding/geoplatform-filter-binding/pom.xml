@@ -16,6 +16,7 @@
     <name>Geo-Platform :: == Binding Filter XML Module</name>
 
     <modules>
+        <module>filter-1.0.0</module>
         <module>filter-1.1.0</module>
     </modules>
 	

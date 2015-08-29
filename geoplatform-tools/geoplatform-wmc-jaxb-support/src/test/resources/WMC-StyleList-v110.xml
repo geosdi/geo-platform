@@ -1,0 +1,7 @@
+<StyleList xmlns="http://www.opengis.net/context" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://www.opengis.net/context http://schemas.opengis.net/context/1.1.0/context.xsd">
+    <Style current="1">
+        <Name/>
+        <Title>Default</Title>
+    </Style>
+</StyleList>

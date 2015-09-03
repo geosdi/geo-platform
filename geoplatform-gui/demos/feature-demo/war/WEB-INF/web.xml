@@ -15,6 +15,11 @@
         <param-name>spring.profiles.active</param-name>
         <param-value>prod</param-value>
     </context-param>
+    
+    <context-param>
+        <param-name>gwt.xsrf.session_cookie_name</param-name>
+        <param-value>GEOSDI_COOKIE</param-value>
+    </context-param>
 
     <!-- spring context loader -->
     <listener>
@@ -29,6 +34,18 @@
     <servlet-mapping>
         <servlet-name>GeoPlatformService</servlet-name>
         <url-pattern>/feature_demo/GeoPlatformService</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>xsrf</servlet-name>
+        <servlet-class>
+            com.google.gwt.user.server.rpc.XsrfTokenServiceServlet
+        </servlet-class>
+        <load-on-startup>0</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>xsrf</servlet-name>
+        <url-pattern>/feature_demo/xsrf</url-pattern>
     </servlet-mapping>
     
     <!-- Open proxy to circumvent cross-domain XMLHTTPRequest restrictions. -->

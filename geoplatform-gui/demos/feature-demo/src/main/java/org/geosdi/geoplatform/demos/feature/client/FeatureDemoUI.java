@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.demos.feature.client;
 
 import com.google.gwt.core.client.EntryPoint;
-import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.LayerTypeHandlerManager;
 import org.geosdi.geoplatform.gui.client.config.FeatureInjector;
 import org.geosdi.geoplatform.gui.client.widget.wfs.FeatureWidget;
@@ -48,6 +47,8 @@ import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
 import org.geosdi.geoplatform.gui.shared.GPLayerType;
 import org.gwtopenmaps.openlayers.client.OpenLayers;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
@@ -55,7 +56,7 @@ import org.gwtopenmaps.openlayers.client.OpenLayers;
 public class FeatureDemoUI implements EntryPoint {
 
 //    private static final String SCOPE = "http://localhost:8989/geoserver/wms";
-    private static final String SCOPE = "http://150.146.160.92/geoserver/wms";
+    private static final String SCOPE = "http://150.145.141.92/geoserver/wms";
 
     @Override
     public void onModuleLoad() {

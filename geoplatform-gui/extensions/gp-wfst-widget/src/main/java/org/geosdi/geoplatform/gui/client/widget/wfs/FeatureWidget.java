@@ -1,37 +1,35 @@
 /**
  *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
+ * geo-platform Rich webgis framework http://geo-platform.org
+ * ====================================================================
  *
- *   Copyright (C) 2008-2015 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2015 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version. This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details. You should have received a copy of the GNU General Public License
+ * along with this program. If not, see http://www.gnu.org/licenses/
  *
- *   ====================================================================
+ * ====================================================================
  *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
+ * Linking this library statically or dynamically with other modules is making a
+ * combined work based on this library. Thus, the terms and conditions of the
+ * GNU General Public License cover the whole combination.
  *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * As a special exception, the copyright holders of this library give you
+ * permission to link this library with independent modules to produce an
+ * executable, regardless of the license terms of these independent modules, and
+ * to copy and distribute the resulting executable under terms of your choice,
+ * provided that you also meet, for each linked independent module, the terms
+ * and conditions of the license of that module. An independent module is a
+ * module which is not derived from or based on this library. If you modify this
+ * library, you may extend this exception to your version of the library, but
+ * you are not obligated to do so. If you do not wish to do so, delete this
+ * exception statement from your version.
  */
 package org.geosdi.geoplatform.gui.client.widget.wfs;
 
@@ -73,7 +71,7 @@ import javax.inject.Inject;
  */
 public class FeatureWidget extends GeoPlatformWindow
         implements IFeatureWidget, ActionEnableHandler {
-    
+
     @Inject
     private FeatureSelectionWidget selectionWidget;
     @Inject
@@ -94,7 +92,7 @@ public class FeatureWidget extends GeoPlatformWindow
     private final Button resetButton;
     private final GPEventBus bus;
     private final ScaleVisibleEvent scaleVisibleEvent = new ScaleVisibleEvent();
-    
+
     @Inject
     public FeatureWidget(GPEventBus theBus, @ResetButton Button theResetButton,
             @SaveButton Button theSaveButton) {
@@ -102,10 +100,10 @@ public class FeatureWidget extends GeoPlatformWindow
         this.bus = theBus;
         this.resetButton = theResetButton;
         this.saveButton = theSaveButton;
-        
+
         bus.addHandler(ActionEnableEvent.TYPE, this);
     }
-    
+
     @Override
     public void addComponent() {
         this.addSelectionWidget();
@@ -113,17 +111,17 @@ public class FeatureWidget extends GeoPlatformWindow
         this.addAttributesWidget();
         this.createStatusBar();
         this.createEditingBar();
-        
+
         super.setTopComponent(this.featureWidgetBar);
     }
-    
+
     @Override
     public void initSize() {
         super.setSize(1000, 650);
         super.setHeadingHtml("GeoPlatform WFS-T Widget");
         super.setIcon(AbstractImagePrototype.create(BasicWidgetResources.ICONS.vector()));
     }
-    
+
     @Override
     public void setWindowProperties() {
         super.setCollapsible(Boolean.FALSE);
@@ -131,27 +129,27 @@ public class FeatureWidget extends GeoPlatformWindow
         super.setMaximizable(Boolean.TRUE);
         super.setModal(Boolean.TRUE);
         super.setPlain(Boolean.TRUE);
-        
+
         super.setLayout(layout);
     }
-    
+
     private void addSelectionWidget() {
         BorderLayoutData layoutData = new BorderLayoutData(LayoutRegion.EAST,
                 300);
         layoutData.setMargins(new Margins(5, 5, 5, 5));
         layoutData.setCollapsible(true);
-        
+
         super.add(this.selectionWidget, layoutData);
     }
-    
+
     private void addMapWidget() {
         BorderLayoutData layoutData = new BorderLayoutData(LayoutRegion.CENTER,
                 700);
         layoutData.setMargins(new Margins(5));
-        
+
         super.add(this.mapWidget, layoutData);
     }
-    
+
     private void addAttributesWidget() {
         BorderLayoutData layoutData = new BorderLayoutData(LayoutRegion.SOUTH,
                 150);
@@ -160,44 +158,44 @@ public class FeatureWidget extends GeoPlatformWindow
         layoutData.setSplit(true);
         layoutData.setMinSize(150);
         layoutData.setMaxSize(500);
-        
+
         attributesWidget.setHeaderVisible(true);
         attributesWidget.getHeader().setText("Feature Attributes");
-        attributesWidget.getHeader().setStyleAttribute("textAlign",
-                "center");
+        attributesWidget.getHeader().setStyleAttribute("textAlign", "center");
         attributesWidget.setScrollMode(Style.Scroll.AUTOY);
-        
+
         super.add(this.attributesWidget, layoutData);
     }
-    
+
     private void createStatusBar() {
         super.setButtonAlign(Style.HorizontalAlignment.LEFT);
-        
+
         super.getButtonBar().add(this.statusBar);
         super.getButtonBar().add(new FillToolItem());
-        
+
         super.addButton(resetButton);
         super.addButton(saveButton);
-        
+
         this.disableButtons();
-        
+
         Button close = new Button(ButtonsConstants.INSTANCE.closeText(),
                 AbstractImagePrototype.create(BasicWidgetResources.ICONS.cancel()),
                 new SelectionListener<ButtonEvent>() {
-                    
+
                     @Override
                     public void componentSelected(ButtonEvent ce) {
                         hide();
                     }
-                    
+
                 });
+        close.setEnabled(super.isClosable());
         super.addButton(close);
     }
-    
+
     private void createEditingBar() {
         super.add(editToolbarDialog);
     }
-    
+
     @Override
     public void reset() {
         this.mapWidget.reset();
@@ -206,7 +204,7 @@ public class FeatureWidget extends GeoPlatformWindow
         this.scaleVisibleEvent.setActivate(Boolean.TRUE);
         MapHandlerManager.fireEvent(scaleVisibleEvent);
     }
-    
+
     @Override
     public void show() {
         if ((this.layerSchemaBinder.getSelectedLayer() == null)
@@ -214,33 +212,33 @@ public class FeatureWidget extends GeoPlatformWindow
             throw new IllegalArgumentException(
                     "Both SchemaDTO and GPLayerBean must not be null");
         }
-        
+
         this.selectionWidget.reconfigureAttributes();
-        
+
         super.show();
     }
-    
+
     @Override
     protected void afterShow() {
         super.afterShow();
         this.scaleVisibleEvent.setActivate(Boolean.FALSE);
         MapHandlerManager.fireEvent(scaleVisibleEvent);
-        
+
         this.statusBar.setBusy("Loading Layer as WFS");
-        
+
         this.mapWidget.bindLayerSchema();
         this.attributesWidget.reconfigureEditorGrid();
         FeatureAttributesWindowBuilder.fireAttributesWindowEvent(
                 FeatureAttributesWindowBuilder.RECONFIGURE_STATE);
     }
-    
+
     @Override
     protected void endDrag(DragEvent de, boolean canceled) {
         super.endDrag(de, canceled);
-        
+
         this.mapWidget.updateSize();
     }
-    
+
     @Override
     public void onActionEnabled(ActionEnableEvent event) {
         if (event.isEnabled()) {
@@ -249,25 +247,25 @@ public class FeatureWidget extends GeoPlatformWindow
             disableButtons();
         }
     }
-    
+
     @Override
     public void manageWidgetsSize() {
         SplitBar bar = attributesWidget.getData("splitBar");
-        
+
         if (bar != null) {
             this.attributesWidget.manageGridHeight();
             this.mapWidget.manageMapSize();
         }
     }
-    
+
     private void disableButtons() {
         resetButton.disable();
         saveButton.disable();
     }
-    
+
     private void enableButtons() {
         resetButton.enable();
         saveButton.enable();
     }
-    
+
 }

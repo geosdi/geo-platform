@@ -36,10 +36,11 @@
 package org.geosdi.geoplatform.gui.client.widget.wfs.layout.responsibility;
 
 import com.extjs.gxt.ui.client.widget.ContentPanel;
-import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.puregwt.map.event.DecreaseHeightEvent;
-import org.geosdi.geoplatform.gui.client.widget.wfs.FeatureAttributesWidget;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
+
+import javax.inject.Inject;
+import org.geosdi.geoplatform.gui.client.widget.wfs.FeatureAttributesWidget;
 
 /**
  *

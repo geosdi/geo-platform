@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.gui.client.i18n;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.Constants;
-import com.google.gwt.i18n.client.Constants.DefaultStringValue;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -117,6 +116,6 @@ public interface WFSTWidgetConstants extends Constants {
     @DefaultStringValue("Feature Attribute Window")
     String FeatureAttributesWindow_headingText();
 
-    @DefaultStringValue("Plese, verify all the attribute before save")
+    @DefaultStringValue("Please, verify all the attribute before save")
     String FeatureAttributesWindow_infoVerifyAttribute();
 }

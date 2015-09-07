@@ -35,8 +35,9 @@
  */
 package org.geosdi.geoplatform.gui.client.config.provider;
 
-import javax.inject.Provider;
 import org.gwtopenmaps.openlayers.client.Style;
+
+import javax.inject.Provider;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -49,7 +50,7 @@ public class VectorStyleProvider implements Provider<Style> {
         Style vectorStyle = new Style();
         vectorStyle.setStrokeColor("#000000");
         vectorStyle.setStrokeWidth(1);
-        vectorStyle.setFillColor("#FF0000");
+        vectorStyle.setFillColor("#FFFF00");
         vectorStyle.setFillOpacity(0.5);
         vectorStyle.setPointRadius(5);
         vectorStyle.setStrokeOpacity(1.0);

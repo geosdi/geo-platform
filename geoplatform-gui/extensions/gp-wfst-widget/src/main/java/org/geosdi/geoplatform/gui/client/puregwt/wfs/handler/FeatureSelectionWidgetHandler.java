@@ -43,9 +43,11 @@ import org.geosdi.geoplatform.gui.client.widget.wfs.FeatureAttributeConditionFie
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public interface DeleteAttributeConditionHandler extends EventHandler {
+public interface FeatureSelectionWidgetHandler extends EventHandler {
 
-    Type<DeleteAttributeConditionHandler> TYPE = new Type<DeleteAttributeConditionHandler>();
+    Type<FeatureSelectionWidgetHandler> TYPE = new Type<FeatureSelectionWidgetHandler>();
 
     void deleteCondition(FeatureAttributeConditionField field);
+
+    void queryEnabled(boolean enabled);
 }

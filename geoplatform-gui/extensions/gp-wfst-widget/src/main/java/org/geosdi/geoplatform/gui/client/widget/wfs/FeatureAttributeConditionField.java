@@ -49,7 +49,6 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.connector.wfs.response.AttributeDTO;
 import org.geosdi.geoplatform.connector.wfs.response.QueryRestrictionDTO;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
-import org.geosdi.geoplatform.gui.client.config.FeatureInjector;
 import org.geosdi.geoplatform.gui.client.model.wfs.AttributeDetail;
 import org.geosdi.geoplatform.gui.client.model.wfs.OperatorType;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.DeleteAttributeConditionEvent;
@@ -98,7 +97,6 @@ public class FeatureAttributeConditionField extends MultiField implements
         final String spacer = "<span class='spacer'>&nbsp;</span>";
         Button deleteButton = this.createDeleteButton();
         super.add(new AdapterField(deleteButton));
-//        super.add(new LabelField(spacer));
         super.add(this.createNameAttributeCombo());
         super.add(new LabelField(spacer));
         super.add(this.createConditionsCombo());
@@ -159,7 +157,6 @@ public class FeatureAttributeConditionField extends MultiField implements
         nameAttributeCombo.setStore(nameAttributeStore);
         nameAttributeCombo.setDisplayField(
                 AttributeDetail.AttributeDetailKeyValue.NAME.name());
-//        nameAttributeCombo.setSimpleValue("XXX");
 
         return nameAttributeCombo;
     }
@@ -174,7 +171,7 @@ public class FeatureAttributeConditionField extends MultiField implements
         for (OperatorType operator : OperatorType.values()) {
             operatorCombo.add(operator.toString());
         }
-//        conditionsCombo.setSimpleValue(OperatorType.EQUAL);
+
         operatorCombo.disable();
         return operatorCombo;
     }
@@ -189,8 +186,6 @@ public class FeatureAttributeConditionField extends MultiField implements
 
             @Override
             public void componentSelected(ButtonEvent ce) {
-                FeatureInjector injector = FeatureInjector.MainInjector.getInstance();
-                GPEventBus bus = injector.getEventBus();
                 bus.fireEvent(new DeleteAttributeConditionEvent(
                         FeatureAttributeConditionField.this));
             }

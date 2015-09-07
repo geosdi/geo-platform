@@ -40,47 +40,30 @@ import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.*;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.extjs.gxt.ui.client.widget.layout.VBoxLayoutData;
-import com.extjs.gxt.ui.client.widget.tips.ToolTipConfig;
-import com.google.common.collect.Lists;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import org.geosdi.geoplatform.connector.wfs.response.FeatureDTO;
-import org.geosdi.geoplatform.connector.wfs.response.QueryDTO;
-import org.geosdi.geoplatform.connector.wfs.response.QueryRestrictionDTO;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
-import org.geosdi.geoplatform.gui.client.command.wfst.basic.GetAllFeatureRequest;
-import org.geosdi.geoplatform.gui.client.command.wfst.basic.GetAllFeatureResponse;
-import org.geosdi.geoplatform.gui.client.command.wfst.basic.QueryFeatureRequest;
-import org.geosdi.geoplatform.gui.client.command.wfst.basic.QueryFeatureResponse;
+import org.geosdi.geoplatform.gui.client.config.annotation.FeatureAttributeConditionFieldList;
+import org.geosdi.geoplatform.gui.client.config.annotation.MatchComboField;
+import org.geosdi.geoplatform.gui.client.config.annotation.QueryFeatureButton;
+import org.geosdi.geoplatform.gui.client.config.annotation.SelectFeaturesButton;
 import org.geosdi.geoplatform.gui.client.model.binder.ILayerSchemaBinder;
 import org.geosdi.geoplatform.gui.client.model.wfs.AttributeDetail;
-import org.geosdi.geoplatform.gui.client.model.wfs.FeatureDetail;
 import org.geosdi.geoplatform.gui.client.puregwt.map.event.FeatureMapWidthEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.map.event.IncreaseWidthEvent;
-import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureInstancesEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureMaskAttributesEvent;
-import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.DeleteAttributeConditionHandler;
+import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.FeatureSelectionWidgetHandler;
 import org.geosdi.geoplatform.gui.client.util.FeatureConverter;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
-import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
-import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
-import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
-import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
-import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
-import org.geosdi.geoplatform.gui.shared.util.GPSharedUtils;
 
 import javax.inject.Inject;
 import java.util.List;
-import java.util.Map;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- *
+ * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class FeatureSelectionWidget extends GeoPlatformContentPanel implements DeleteAttributeConditionHandler {
+public class FeatureSelectionWidget extends GeoPlatformContentPanel implements IFeatureSelectionWidget {
 
     public static final String ID = WFSWidgetNames.FEATURE_SELECTION.name();
     //
@@ -89,28 +72,33 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel implements D
     @Inject
     private ILayerSchemaBinder layerSchemaBinder;
     private List<AttributeDetail> attributes;
-    private List<FeatureAttributeConditionField> attributeConditions;
+    private final List<FeatureAttributeConditionField> attributeConditions;
     //
     private FormPanel formPanel;
     private FieldSet matchResultSet;
-    private SimpleComboBox<String> matchComboField;
+    private final SimpleComboBox<String> matchComboField;
     private Button addConditionButton;
     private Button resetConditionsButton;
-    private Button selectAllButton;
-    private Button queryButton;
-    private final GetAllFeatureRequest getAllFeatureRequest = GWT.<GetAllFeatureRequest>create(
-            GetAllFeatureRequest.class);
+    private final Button selectFeaturesButton;
+    private final Button queryFeatureButton;
     private final FeatureMapWidthEvent increaseWidthEvent = new IncreaseWidthEvent();
-    private final QueryFeatureRequest queryFeatureRequest = GWT.<QueryFeatureRequest>create(QueryFeatureRequest.class);
 
     @Inject
-    public FeatureSelectionWidget(GPEventBus theBus) {
+    public FeatureSelectionWidget(GPEventBus theBus,
+            @SelectFeaturesButton Button theSelectFeaturesButton,
+            @QueryFeatureButton Button theQueryFeatureButton,
+            @FeatureAttributeConditionFieldList List theAttributeConditions,
+            @MatchComboField SimpleComboBox theMatchComboField) {
         super(Boolean.TRUE);
         this.bus = theBus;
-        bus.addHandler(DeleteAttributeConditionHandler.TYPE, this);
-        this.attributeConditions = Lists.<FeatureAttributeConditionField>newArrayList();
+        this.selectFeaturesButton = theSelectFeaturesButton;
+        this.queryFeatureButton = theQueryFeatureButton;
+        this.attributeConditions = theAttributeConditions;
+        this.matchComboField = theMatchComboField;
+        bus.addHandler(FeatureSelectionWidgetHandler.TYPE, this);
     }
 
+    @Override
     public void reconfigureAttributes() {
         this.attributes = FeatureConverter.convertDTOs(this.layerSchemaBinder.getLayerSchemaDTO().getAttributes());
     }
@@ -142,6 +130,19 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel implements D
         super.setScrollMode(Style.Scroll.AUTO);
     }
 
+    @Override
+    public void queryEnabled(boolean enabled) {
+        selectFeaturesButton.setEnabled(enabled);
+        queryFeatureButton.setEnabled(enabled);
+        bus.fireEvent(new FeatureMaskAttributesEvent(!enabled));
+    }
+
+    @Override
+    public void deleteCondition(FeatureAttributeConditionField field) {
+        attributeConditions.remove(field);
+        matchResultSet.remove(field);
+    }
+
     private void createFormPanel() {
         this.formPanel = new FormPanel();
         formPanel.setHeaderVisible(false);
@@ -158,23 +159,6 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel implements D
         matchResultSet.setCheckboxToggle(true);
         matchResultSet.setExpanded(true);
 
-        matchComboField = new SimpleComboBox<String>() {
-
-            @Override
-            protected void onSelect(SimpleComboValue<String> model, int index) {
-                super.onSelect(model, index);
-            }
-
-        };
-        matchComboField.setToolTip(new ToolTipConfig("Match selection", "Change feature selection"));
-        matchComboField.setEditable(false);
-        matchComboField.setTypeAhead(true);
-        matchComboField.setTriggerAction(ComboBox.TriggerAction.ALL);
-        matchComboField.add(MatchType.ALL.name());
-        matchComboField.add(MatchType.ANY.name());
-        matchComboField.add(MatchType.NONE.name());
-        matchComboField.setSimpleValue(MatchType.ALL.name());
-
         MultiField multiMatchField = new MultiField();
         multiMatchField.add(new LabelField("Match" + "&nbsp;"));
         multiMatchField.add(matchComboField);
@@ -182,20 +166,20 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel implements D
 
         matchResultSet.addListener(Events.Collapse, new Listener<FieldSetEvent>() {
 
-                    @Override
-                    public void handleEvent(FieldSetEvent be) {
-                        selectionEnabled(false);
-                    }
+            @Override
+            public void handleEvent(FieldSetEvent be) {
+                selectionEnabled(false);
+            }
 
-                });
+        });
         matchResultSet.addListener(Events.Expand, new Listener<FieldSetEvent>() {
 
-                    @Override
-                    public void handleEvent(FieldSetEvent be) {
-                        selectionEnabled(true);
-                    }
+            @Override
+            public void handleEvent(FieldSetEvent be) {
+                selectionEnabled(true);
+            }
 
-                });
+        });
 
         formPanel.add(matchResultSet);
     }
@@ -240,134 +224,13 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel implements D
     private void createQueryButtons() {
         super.setButtonAlign(Style.HorizontalAlignment.RIGHT);
 
-        this.selectAllButton = new Button("Get 100 Features", new SelectionListener<ButtonEvent>() {
-
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                queryEnabled(false);
-
-                getAllFeatureRequest.setServerUrl(layerSchemaBinder.getLayerSchemaDTO().getScope());
-                getAllFeatureRequest.setTypeName(layerSchemaBinder.getLayerSchemaDTO().getTypeName());
-                getAllFeatureRequest.setMaxFeatures(100);
-
-                ClientCommandDispatcher.getInstance().execute(new GPClientCommand<GetAllFeatureResponse>() {
-
-                            private static final long serialVersionUID = 9028489214099941178L;
-
-                            {
-                                super.setCommandRequest(getAllFeatureRequest);
-                            }
-
-                            @Override
-                            public void onCommandSuccess(GetAllFeatureResponse response) {
-                                if (!response.getResult().isFeaturesLoaded()) {
-                                    String errorMessage = "Error on WFS GetFeature request";
-
-                                    GeoPlatformMessage.errorMessage("GetFeture Service Error",
-                                            errorMessage + " - " + response.getResult().getErrorMessage());
-
-                                    LayoutManager.getInstance().getStatusMap().setStatus(
-                                            errorMessage + " for " + layerSchemaBinder.getLayerSchemaDTO().getTypeName() + " layer.",
-                                            SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
-                                    queryEnabled(true);
-                                } else {
-                                    List<FeatureDetail> instances = Lists.<FeatureDetail>newArrayListWithCapacity(
-                                            response.getResult().getFeatures().size());
-                                    for (FeatureDTO feature : GPSharedUtils.safeList(
-                                            response.getResult().getFeatures())) {
-                                        Map<String, String> attributes = feature.getAttributes().getAttributesMap();
-                                        FeatureDetail featureDetail = new FeatureDetail(attributes, feature);
-                                        instances.add(featureDetail);
-                                    }
-
-                                    FeatureInstancesEvent e = new FeatureInstancesEvent();
-                                    e.setInstances(instances);
-                                    bus.fireEvent(e);
-                                    queryEnabled(true);
-                                }
-                            }
-
-                            @Override
-                            public void onCommandFailure(Throwable exception) {
-                                String errorMessage = "Error on WFS GetFeature request";
-
-                                GeoPlatformMessage.errorMessage("GetFeture Service Error",
-                                        errorMessage + " - " + exception.getMessage());
-
-                                LayoutManager.getInstance().getStatusMap().setStatus(
-                                        errorMessage + " for " + layerSchemaBinder.getLayerSchemaDTO().getTypeName() + " layer.",
-                                        SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
-                            }
-
-                        });
-            }
-
-        });
-        super.addButton(selectAllButton);
-
-        this.queryButton = new Button("Query", new SelectionListener<ButtonEvent>() {
-
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                QueryDTO queryDTO = new QueryDTO();
-                queryDTO.setMatchOperator(FeatureSelectionWidget.this.matchComboField.getValue().getValue());
-                List<QueryRestrictionDTO> queryRestrictions = Lists.<QueryRestrictionDTO>newArrayListWithExpectedSize(
-                        attributeConditions.size());
-                for (FeatureAttributeConditionField conditionField : GPSharedUtils.safeList(attributeConditions)) {
-                    QueryRestrictionDTO queryRestriction = conditionField.getQueryRestriction();
-                    if (queryRestriction != null) {
-                        queryRestrictions.add(queryRestriction);
-                    }
-                }
-                queryFeatureRequest.setQuery(queryDTO);
-
-                ClientCommandDispatcher.getInstance().execute(new GPClientCommand<QueryFeatureResponse>() {
-
-                            private static final long serialVersionUID = 7052499099859652678L;
-
-                            {
-                                super.setCommandRequest(queryFeatureRequest);
-                            }
-
-                            @Override
-                            public void onCommandSuccess(QueryFeatureResponse response) {
-                                //TODO: Show response result
-                                System.out.println("On success");
-                            }
-
-                            @Override
-                            public void onCommandFailure(Throwable exception) {
-                                GeoPlatformMessage.errorMessage("Query Error", exception.getMessage());
-                            }
-
-                        });
-            }
-
-        });
-        super.addButton(queryButton);
+        super.addButton(this.selectFeaturesButton);
+        super.addButton(queryFeatureButton);
     }
 
     private void selectionEnabled(boolean enabled) {
         addConditionButton.setVisible(enabled);
         resetConditionsButton.setVisible(enabled);
-        queryButton.setEnabled(enabled);
+        queryFeatureButton.setEnabled(enabled);
     }
-
-    private void queryEnabled(boolean enabled) {
-        selectAllButton.setEnabled(enabled);
-        queryButton.setEnabled(enabled);
-        bus.fireEvent(new FeatureMaskAttributesEvent(!enabled));
-    }
-
-    @Override
-    public void deleteCondition(FeatureAttributeConditionField field) {
-        attributeConditions.remove(field);
-        matchResultSet.remove(field);
-    }
-
-    private enum MatchType {
-
-        ALL, ANY, NONE;
-    }
-
 }

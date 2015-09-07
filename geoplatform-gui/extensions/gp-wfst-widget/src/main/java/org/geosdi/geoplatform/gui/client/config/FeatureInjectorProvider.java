@@ -35,6 +35,7 @@
 package org.geosdi.geoplatform.gui.client.config;
 
 import com.extjs.gxt.ui.client.widget.button.ButtonBar;
+import com.extjs.gxt.ui.client.widget.form.SimpleComboBox;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.google.gwt.inject.client.AbstractGinModule;
 import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.DescribeFeatureTypeHandler;
@@ -46,6 +47,8 @@ import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.schema.
 import org.geosdi.geoplatform.gui.client.command.wfst.feature.EraseFeatureRequest;
 import org.geosdi.geoplatform.gui.client.command.wfst.feature.InsertFeatureRequest;
 import org.geosdi.geoplatform.gui.client.command.wfst.feature.UpdateFeatureGeometryRequest;
+import org.geosdi.geoplatform.gui.client.config.annotation.FeatureAttributeConditionFieldList;
+import org.geosdi.geoplatform.gui.client.config.annotation.MatchComboField;
 import org.geosdi.geoplatform.gui.client.config.provider.*;
 import org.geosdi.geoplatform.gui.client.config.provider.layout.BorderLayoutProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.window.buttonbar.FeatureWidgetBar;
@@ -62,6 +65,7 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
 import org.gwtopenmaps.openlayers.client.protocol.WFSProtocolCRUDOptions;
 
 import javax.inject.Singleton;
+import java.util.List;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -110,6 +114,11 @@ public class FeatureInjectorProvider extends AbstractGinModule {
         bind(GotoXYWidget.class).toProvider(WFSGotoXYWigetProvider.class).in(Singleton.class);
 
         bind(ButtonBar.class).toProvider(FeatureWidgetBar.class).in(Singleton.class);
+
+        bind(List.class).annotatedWith(FeatureAttributeConditionFieldList.class).toProvider(
+                FeatureAttributeConditionFieldListProvider.class).in(Singleton.class);
+        bind(SimpleComboBox.class).annotatedWith(MatchComboField.class).
+                toProvider(MatchComboFieldProvider.class).in(Singleton.class);
     }
 
 }

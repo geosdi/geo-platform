@@ -54,7 +54,7 @@ public enum OperatorType {
     //
 //    BEFORE("before"),
 //    AFTER("after");
-    private String symbol;
+    private final String symbol;
 
     private OperatorType(String symbol) {
         this.symbol = symbol;

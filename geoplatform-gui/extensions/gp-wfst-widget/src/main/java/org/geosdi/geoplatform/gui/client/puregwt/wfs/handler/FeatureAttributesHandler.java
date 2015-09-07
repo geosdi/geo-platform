@@ -37,8 +37,9 @@ package org.geosdi.geoplatform.gui.client.puregwt.wfs.handler;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
-import java.util.List;
 import org.geosdi.geoplatform.gui.client.model.wfs.FeatureDetail;
+
+import java.util.List;
 
 /**
  *
@@ -51,6 +52,8 @@ public interface FeatureAttributesHandler extends EventHandler {
     void postInstances(List<FeatureDetail> instaces);
 
     void resetInstances();
+
+    void removeFeatureDetail(String featureID);
 
     void saveAttributes();
 

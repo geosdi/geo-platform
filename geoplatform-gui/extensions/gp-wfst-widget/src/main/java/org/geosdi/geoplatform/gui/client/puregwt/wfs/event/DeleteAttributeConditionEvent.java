@@ -36,8 +36,8 @@
 package org.geosdi.geoplatform.gui.client.puregwt.wfs.event;
 
 import com.google.gwt.event.shared.GwtEvent;
-import org.geosdi.geoplatform.gui.client.widget.wfs.FeatureAttributeConditionField;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.DeleteAttributeConditionHandler;
+import org.geosdi.geoplatform.gui.client.widget.wfs.FeatureAttributeConditionField;
 
 /**
  *

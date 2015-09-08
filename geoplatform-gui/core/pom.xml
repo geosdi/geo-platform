@@ -5,12 +5,12 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>geoplatform-gui</artifactId>
-        <version>1.7-SNAPSHOT</version>
+        <version>1.8-SNAPSHOT</version>
     </parent>
 
     <groupId>org.geosdi</groupId>
     <artifactId>core</artifactId>
-    <version>1.7-SNAPSHOT</version>
+    <version>1.8-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Geo-Platform :: == Core Module</name>
@@ -112,7 +112,7 @@
             <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>geoplatform-resources</artifactId>
-                <version>1.2.12</version>
+                <version>1.2.12-gwt2.7.x</version>
             </dependency>
             
             <dependency>

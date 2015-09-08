@@ -109,7 +109,7 @@ public class CatalogGetRecordsTest {
 
         List<JAXBElement<? extends AbstractRecordType>> metadata = result.getAbstractRecord();
         if (!metadata.isEmpty()) {
-            logger.info("FIRST FULL METADATA @@@@@@@@@@@@@@@@@@@@@ {}",
+            logger.info("FIRST FULL METADATA @@@@@@@@@@@@@@@@@@@@@ {}",
                     (SummaryRecordType) (metadata.get(0).getValue()));
         }
     }
@@ -221,7 +221,7 @@ public class CatalogGetRecordsTest {
         List<JAXBElement<? extends AbstractRecordType>> metadata = result.getAbstractRecord();
 
         if (!metadata.isEmpty()) {
-            logger.info("FIRST SECURE METADATA @@@@@@@@@@@@@@@@@@@@@ {}",
+            logger.info("FIRST SECURE METADATA @@@@@@@@@@@@@@@@@@@@@ {}",
                     (RecordType) (metadata.get(0).getValue()));
         }
     }

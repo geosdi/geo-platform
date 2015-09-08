@@ -43,6 +43,7 @@ import org.geosdi.geoplatform.connector.server.request.CatalogGetCapabilitiesReq
 import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordByIdRequest;
 import org.geosdi.geoplatform.connector.server.security.BasicPreemptiveSecurityConnector;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
+import org.geosdi.geoplatform.gui.responce.OnlineResourceProtocolType;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
 import org.geosdi.geoplatform.xml.csw.OutputSchema;
 import org.geosdi.geoplatform.xml.csw.v202.AbstractRecordType;

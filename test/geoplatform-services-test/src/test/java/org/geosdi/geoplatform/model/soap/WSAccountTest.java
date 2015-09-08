@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.model.soap;
 
-import java.util.List;
 import org.geosdi.geoplatform.core.model.GPAuthority;
 import org.geosdi.geoplatform.core.model.GPOrganization;
 import org.geosdi.geoplatform.core.model.GPUser;
@@ -52,6 +51,8 @@ import org.geosdi.geoplatform.response.ShortAccountDTO;
 import org.geosdi.geoplatform.response.UserDTO;
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.List;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -170,8 +171,7 @@ public class WSAccountTest extends BaseSoapServiceTest {
                 authority.getAuthority());
         Assert.assertEquals("Authority level", super.getTrustedLevelByRole(
                 GPRole.USER), authority.getTrustedLevel());
-        Assert.assertEquals("Authority username", usernameTest,
-                authority.getAccountNaturalID());
+        Assert.assertEquals("Authority username", usernameTest, authority.getAccountNaturalID());
     }
 
     @Test
@@ -212,8 +212,7 @@ public class WSAccountTest extends BaseSoapServiceTest {
 
     @Test
     public void testInsertDuplicateUserWRTUsername() {
-        GPUser user = super.createUser(usernameTest, organizationTest,
-                GPRole.USER);
+        GPUser user = super.createUser(usernameTest, organizationTest, GPRole.USER);
         try {
             gpWSClient.insertAccount(new InsertAccountRequest(user,
                     Boolean.FALSE));
@@ -262,8 +261,7 @@ public class WSAccountTest extends BaseSoapServiceTest {
 
     @Test
     public void testAuthorizationCorrectUsername() throws Exception {
-        GPUser user = gpWSClient.getUserDetailByUsernameAndPassword(usernameTest,
-                passwordTest);
+        GPUser user = gpWSClient.getUserDetailByUsernameAndPassword(usernameTest, passwordTest);
         Assert.assertNotNull("User is null", user);
         Assert.assertEquals(usernameTest, user.getUsername());
     }
@@ -279,8 +277,7 @@ public class WSAccountTest extends BaseSoapServiceTest {
     @Test(expected = ResourceNotFoundFault.class)
     public void testAuthorizationIncorrectUsername() throws Exception {
         String wrongUsername = usernameTest + "_";
-        gpWSClient.getUserDetailByUsernameAndPassword(wrongUsername,
-                passwordTest);
+        gpWSClient.getUserDetailByUsernameAndPassword(wrongUsername, passwordTest);
     }
 
     @Test(expected = ResourceNotFoundFault.class)
@@ -325,14 +322,29 @@ public class WSAccountTest extends BaseSoapServiceTest {
     @Test(expected = IllegalParameterFault.class)
     public void testUserErrorTemporarySetting()
             throws ResourceNotFoundFault, IllegalParameterFault {
-        Assert.assertFalse("UserTest should be a standard account",
-                userTest.isAccountTemporary());
+        Assert.assertFalse("UserTest should be a standard account", userTest.isAccountTemporary());
 
         // Set the standard user to temporary (wrongly)
         userTest.setAccountTemporary(true);
 
         // Must be throws IllegalParameterFault because the standard user will be temporary
         gpWSClient.updateUser(userTest);
+    }
+
+    @Test
+    public void updateUserSoapTest() throws Exception{
+        Long idUser = super.createAndInsertUser("userToUpdate-SOAP", organizationTest, GPRole.ADMIN);
+
+        GPUser user = gpWSClient.getUserDetail(idUser);
+        logger.info("##################USER : {}\n", user);
+
+        user.setName("UserToUpdate");
+        gpWSClient.updateUser(user);
+
+        user = gpWSClient.getUserDetail(idUser);
+        logger.info("#################USER_UPDATED : {}\n", user);
+
+        gpWSClient.deleteAccount(idUser);
     }
 
     @Test

@@ -38,33 +38,26 @@ package org.geosdi.geoplatform.services.csw;
 import java.math.BigInteger;
 import java.net.URL;
 import java.util.List;
-import javax.annotation.Resource;
 import javax.xml.bind.JAXBElement;
 import org.geosdi.geoplatform.connector.GPCSWConnectorBuilder;
 import org.geosdi.geoplatform.connector.GPCatalogConnectorStore;
-import static org.geosdi.geoplatform.connector.schema.CSWOperationsWithOutputSchema.GET_RECORDS;
-import org.geosdi.geoplatform.connector.schema.CSWOutputSchemaFinder;
 import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequest;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
 import org.geosdi.geoplatform.gui.responce.TextInfo;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
 import org.geosdi.geoplatform.responce.FullRecordDTO;
+import org.geosdi.geoplatform.services.delegate.dc.DublinCoreAnalyzer;
 import org.geosdi.geoplatform.xml.csw.ConstraintLanguage;
 import org.geosdi.geoplatform.xml.csw.ConstraintLanguageVersion;
 import org.geosdi.geoplatform.xml.csw.OutputSchema;
 import org.geosdi.geoplatform.xml.csw.TypeName;
+import org.geosdi.geoplatform.xml.csw.v202.AbstractRecordType;
 import org.geosdi.geoplatform.xml.csw.v202.ElementSetType;
 import org.geosdi.geoplatform.xml.csw.v202.GetRecordsResponseType;
+import org.geosdi.geoplatform.xml.csw.v202.RecordType;
 import org.geosdi.geoplatform.xml.csw.v202.ResultType;
 import org.geosdi.geoplatform.xml.csw.v202.SearchResultsType;
-import org.geosdi.geoplatform.xml.iso19139.v20070417.gco.CharacterStringPropertyType;
-import org.geosdi.geoplatform.xml.iso19139.v20070417.gmd.AbstractMDIdentificationType;
-import org.geosdi.geoplatform.xml.iso19139.v20070417.gmd.CICitationPropertyType;
-import org.geosdi.geoplatform.xml.iso19139.v20070417.gmd.CICitationType;
-import org.geosdi.geoplatform.xml.iso19139.v20070417.gmd.MDIdentificationPropertyType;
-import org.geosdi.geoplatform.xml.iso19139.v20070417.gmd.MDKeywordsPropertyType;
-import org.geosdi.geoplatform.xml.iso19139.v20070417.gmd.MDKeywordsType;
-import org.geosdi.geoplatform.xml.iso19139.v20070417.gmd.MDMetadataType;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -84,8 +77,7 @@ public class CSWGetRecordsEsriTest {
     @GeoPlatformLog
     private static Logger logger;
     //
-    @Resource(name = "gpCSWOutputSchemaFinder")
-    private CSWOutputSchemaFinder gpCSWOutputSchemaFinder;
+    private final DublinCoreAnalyzer gpDublinCoreAnalyzer = new DublinCoreAnalyzer.GPDublinCoreAnalyzer();
 
     @Test
     public void testFullRecordEsri() throws Exception {
@@ -109,21 +101,44 @@ public class CSWGetRecordsEsriTest {
         });
 
         CatalogGetRecordsRequest<GetRecordsResponseType> request = serverConnector.createGetRecordsRequest();
+        request.setTypeName(TypeName.RECORD_V202);
+        request.setOutputSchema(OutputSchema.CSW_V202);
+        request.setElementSetName(ElementSetType.FULL.value());
+        request.setResultType(ResultType.RESULTS.value());
+
         request.setConstraintLanguage(ConstraintLanguage.FILTER);
         request.setConstraintLanguageVersion(ConstraintLanguageVersion.V110);
         request.setCatalogFinder(finderBean);
 
-        OutputSchema outputSchema = this.gpCSWOutputSchemaFinder
-                .retrieveBestOutputSchemaForRequest(serverConnector,
-                        GET_RECORDS.toString());
+        request.setStartPosition(BigInteger.ONE);
+        request.setMaxRecords(BigInteger.valueOf(25));
 
-        if (outputSchema == OutputSchema.GMD) {
-            request.setOutputSchema(outputSchema);
-            request.setTypeName(TypeName.METADATA);
-        } else {
-            request.setOutputSchema(OutputSchema.CSW_V202);
-            request.setTypeName(TypeName.RECORD_V202);
-        }
+        logger.debug("\n\n#####################RESPONSE AS STRING : {}\n\n",
+                request.getResponseAsString());
+
+        GetRecordsResponseType response = request.getResponse();
+
+        SearchResultsType result = response.getSearchResults();
+
+        List<JAXBElement<? extends AbstractRecordType>> records
+                = result.getAbstractRecord();
+        logger.debug("\n*** Record list size: {} ***", records.size());
+
+        processFirstResult((RecordType) records.get(1).getValue());
+
+    }
+
+    @Test
+    public void testFullRecordGeoSDI() throws Exception {
+        URL url = new URL("http://catalog.geosdi.org:80/geonetwork/srv/en/csw");
+        GPCatalogConnectorStore serverConnector = GPCSWConnectorBuilder
+                .newConnector().withServerUrl(url).build();
+
+        CatalogGetRecordsRequest<GetRecordsResponseType> request = serverConnector.createGetRecordsRequest();
+
+        request.setTypeName(TypeName.METADATA);
+
+        request.setOutputSchema(OutputSchema.CSW_V202);
         request.setElementSetName(ElementSetType.FULL.toString());
         request.setResultType(ResultType.RESULTS.toString());
 
@@ -136,93 +151,16 @@ public class CSWGetRecordsEsriTest {
         GetRecordsResponseType response = request.getResponse();
 
         SearchResultsType result = response.getSearchResults();
-        List<Object> metadati = result.getAny();
+        List<JAXBElement<? extends AbstractRecordType>> metadata = result.getAbstractRecord();
 
-        for (Object metadato : metadati) {
-            logger.info("\n\n@@@@@@@@@@@@@@@@@@METADATO : {}\n\n",
-                    ((JAXBElement) metadato).getValue());
-        }
-//        this.fillFullRecordDTO(((JAXBElement<MDMetadataType>) metadati.get(0))
-//                .getValue());
-//        
-//        for (Object m : metadati) {
-//            logger.trace("@@@@@@@@@@@@@@@@@@FOUND METADATA : {}\n\n",
-//                    ((JAXBElement<MDMetadataType>) m).getValue());
-//        }
+        Assert.assertEquals("The Result not contains 25 elements", 25,
+                metadata.size());
+
+        processFirstResult((RecordType) metadata.get(0).getValue());
     }
 
-    private void fillFullRecordDTO(MDMetadataType metadata) {
-        FullRecordDTO fullRecordDTO = new FullRecordDTO();
-
-        CharacterStringPropertyType cspt = metadata.getFileIdentifier();
-        JAXBElement<?> jaxbElement = cspt.getCharacterString();
-        if (jaxbElement.getValue() instanceof String) {
-            fullRecordDTO.setIdentifier((String) jaxbElement.getValue());
-        }
-
-        logger.info("MDIdentificationPropertyType : {}\n\n",
-                metadata.getIdentificationInfo());
-
-        List<MDIdentificationPropertyType> identificationInfos = metadata
-                .getIdentificationInfo();
-
-        for (MDIdentificationPropertyType i : identificationInfos) {
-            if (i.isSetAbstractMDIdentification()) {
-                AbstractMDIdentificationType elem = i.getAbstractMDIdentification().getValue();
-                fillTitle(elem.getCitation(), fullRecordDTO);
-                if (elem.isSetAbstract()) {
-                    fillAbstract(elem.getAbstract(), fullRecordDTO);
-                }
-                if (elem.isSetDescriptiveKeywords()) {
-                    fillKeywords(elem.getDescriptiveKeywords(), fullRecordDTO);
-                }
-
-            }
-        }
-
-        logger.debug("####################FULL_RECORD_DTO : {}\n\n",
-                fullRecordDTO);
-    }
-
-    private void fillTitle(CICitationPropertyType citation,
-            FullRecordDTO fullRecordDTO) {
-        logger.debug("{}", citation);
-        if (citation.isSetCICitation()) {
-            CICitationType ciCitation = citation.getCICitation();
-            CharacterStringPropertyType title = ciCitation.getTitle();
-            logger.info("\n\n################TITLE : {}\n\n",
-                    title.getCharacterString().getValue());
-            if (title.getCharacterString().getValue() instanceof String) {
-                fullRecordDTO.setTitle((String) title.getCharacterString()
-                        .getValue());
-            }
-        }
-    }
-
-    private void fillAbstract(CharacterStringPropertyType _abstract,
-            FullRecordDTO fullRecordDTO) {
-        logger.info("\n\n################ABSTRACT : {}\n\n",
-                _abstract.getCharacterString().getValue());
-        if (_abstract.getCharacterString().getValue() instanceof String) {
-            fullRecordDTO.setAbstractText((String) _abstract.getCharacterString()
-                    .getValue());
-        }
-    }
-
-    private void fillKeywords(List<MDKeywordsPropertyType> descriptiveKeywords,
-            FullRecordDTO fullRecordDTO) {
-        for (MDKeywordsPropertyType keyword : descriptiveKeywords) {
-            if (keyword.isSetMDKeywords()) {
-                MDKeywordsType mdKeywords = keyword.getMDKeywords();
-                if (mdKeywords.isSetKeyword()) {
-                    for (CharacterStringPropertyType k : mdKeywords.getKeyword()) {
-                        if (k.getCharacterString().getValue() instanceof String) {
-                            fullRecordDTO.addSubject((String) k.getCharacterString().getValue());
-                        }
-                    }
-                }
-            }
-        }
+    void processFirstResult(RecordType record) {
+        this.gpDublinCoreAnalyzer.analyzeRecord(record, new FullRecordDTO());
     }
 
 }

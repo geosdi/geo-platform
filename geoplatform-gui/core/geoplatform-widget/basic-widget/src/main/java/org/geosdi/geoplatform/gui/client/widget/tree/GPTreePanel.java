@@ -3,7 +3,7 @@
  * geo-platform Rich webgis framework http://geo-platform.org
  * ====================================================================
  *
- *   Copyright (C) 2008-2015 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2015 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -35,27 +35,36 @@ package org.geosdi.geoplatform.gui.client.widget.tree;
 
 import com.extjs.gxt.ui.client.data.ModelData;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import com.google.common.collect.Lists;
+import java.util.Iterator;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.geosdi.geoplatform.gui.client.widget.map.event.LayerRangeEventHandler;
 import org.geosdi.geoplatform.gui.client.widget.tree.decorator.GPTreeCheckDecorator;
 import org.geosdi.geoplatform.gui.client.widget.tree.decorator.GPTreeIconDecorator;
 import org.geosdi.geoplatform.gui.client.widget.tree.decorator.GPTreeLabelDecorator;
+import org.geosdi.geoplatform.gui.client.widget.tree.decorator.GPTreeLayerPresenceDecorator;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
+import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
+import org.geosdi.geoplatform.gui.model.tree.AbstractRootTreeNode;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.shared.util.GPSharedUtils;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
+ *
+ * @param <T>
  */
 public class GPTreePanel<T extends GPBeanTreeModel> extends TreePanel<T>
         implements GPTreeLabelDecorator<T>, GPTreeIconDecorator<T>,
-        GPTreeCheckDecorator<T>, LayerRangeEventHandler {
+        GPTreeCheckDecorator<T>, GPTreeLayerPresenceDecorator, LayerRangeEventHandler {
 
-    private final static Logger logger = Logger.getLogger("");
+    private final static Logger logger = Logger.getLogger("GPTreePanel");
 
     public GPTreePanel(GPTreeStore<T> store) {
         super(store);
@@ -140,6 +149,54 @@ public class GPTreePanel<T extends GPBeanTreeModel> extends TreePanel<T>
                 }
             }
         }
+    }
+
+    @Override
+    public List<GPLayerBean> getVisibleLayersOnTree() {
+        List<GPLayerBean> visibleLayers = Lists.<GPLayerBean>newArrayList();
+        AbstractRootTreeNode root = (AbstractRootTreeNode) this.getStore().getRootItems().get(
+                0);
+        assert (root != null) : "GPTreePanel on getVisibleLayers():"
+                + " Impossible to retrieve root element";
+        return this.getVisibleLayersOnTree(root.getChildren(), visibleLayers);
+    }
+
+    @Override
+    public List<GPLayerBean> getAllLayersOnTree() {
+        List<GPLayerBean> allLayers = Lists.<GPLayerBean>newArrayList();
+        AbstractRootTreeNode root = (AbstractRootTreeNode) this.getStore().getRootItems().get(
+                0);
+        assert (root != null) : "GPTreePanel on getAllLayersOnTree():"
+                + " Impossible to retrieve root element";
+        return this.getAllLayersOnTree(root.getChildren(), allLayers);
+    }
+
+    private List<GPLayerBean> getVisibleLayersOnTree(List<ModelData> layers,
+            List<GPLayerBean> visibleLayers) {
+        for (Iterator<ModelData> it = layers.iterator(); it.hasNext();) {
+            GPBeanTreeModel element = (GPBeanTreeModel) it.next();
+            if (element instanceof AbstractFolderTreeNode && element.isChecked()
+                    && element.getChildCount() != 0) {
+                this.getVisibleLayersOnTree(element.getChildren(), visibleLayers);
+            } else if (element.isChecked() && element instanceof GPLayerTreeModel) {
+                visibleLayers.add((GPLayerBean) element);
+            }
+        }
+        return visibleLayers;
+    }
+
+    private List<GPLayerBean> getAllLayersOnTree(List<ModelData> layers,
+            List<GPLayerBean> allLayers) {
+        for (Iterator<ModelData> it = layers.iterator(); it.hasNext();) {
+            GPBeanTreeModel element = (GPBeanTreeModel) it.next();
+            if (element instanceof AbstractFolderTreeNode
+                    && element.getChildCount() != 0) {
+                this.getVisibleLayersOnTree(element.getChildren(), allLayers);
+            } else if (element instanceof GPLayerTreeModel) {
+                allLayers.add((GPLayerBean) element);
+            }
+        }
+        return allLayers;
     }
 
     private void activeRasterMinMaxScaleLabel(GPRasterBean rasterBean) {

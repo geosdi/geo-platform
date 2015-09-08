@@ -37,126 +37,155 @@
 
 -->
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
            http://www.springframework.org/schema/context
            http://www.springframework.org/schema/context/spring-context-3.2.xsd"
-	default-autowire="byName">
+       default-autowire="byName">
 
-    <context:annotation-config />
+    <context:annotation-config/>
 
-	<!-- general definitions -->
+    <!-- general definitions -->
     <context:property-placeholder
-		location="classpath:application-TEST.properties" />
+            location="classpath:application-TEST.properties"/>
 
     <bean id="geoPlatformInfo" class="org.geosdi.geoplatform.gui.global.GeoPlatformInfo">
         <property name="version">
             <bean id="geoPlatformVersionInfo"
-				class="org.geosdi.geoplatform.gui.global.GeoPlatformVersionInfo">
-                <property name="name" value="${name}" />
-                <property name="version" value="${version}" />
+                  class="org.geosdi.geoplatform.gui.global.GeoPlatformVersionInfo">
+                <property name="name" value="${name}"/>
+                <property name="version" value="${version}"/>
             </bean>
         </property>
         <property name="copyrightInfo">
             <list>
                 <bean class="org.geosdi.geoplatform.gui.global.CopyrightInfo">
-                    <property name="key" value="${keyGeosdi}" />
-                    <property name="version" value="${version}" />
-                    <property name="copyright" value="${copyrightGeosdi}" />
-                    <property name="licenseName" value="${licenseNameGeosdi}" />
-                    <property name="licenseUrl" value="${licenseUrlGeosdi}" />
+                    <property name="key" value="${keyGeosdi}"/>
+                    <property name="version" value="${version}"/>
+                    <property name="copyright" value="${copyrightGeosdi}"/>
+                    <property name="licenseName" value="${licenseNameGeosdi}"/>
+                    <property name="licenseUrl" value="${licenseUrlGeosdi}"/>
                 </bean>
                 <bean class="org.geosdi.geoplatform.gui.global.CopyrightInfo">
-                    <property name="key" value="${keyGWT}" />
-                    <property name="version" value="${versionGWT}" />
-                    <property name="copyright" value="" />
-                    <property name="licenseName" value="${licenseNameGWT}" />
-                    <property name="licenseUrl" value="${licenseUrlGWT}" />
+                    <property name="key" value="${keyGWT}"/>
+                    <property name="version" value="${versionGWT}"/>
+                    <property name="copyright" value=""/>
+                    <property name="licenseName" value="${licenseNameGWT}"/>
+                    <property name="licenseUrl" value="${licenseUrlGWT}"/>
                 </bean>
                 <bean class="org.geosdi.geoplatform.gui.global.CopyrightInfo">
-                    <property name="key" value="${keyGWT-OL}" />
-                    <property name="version" value="${versionGWT-OL}" />
-                    <property name="copyright" value="${copyrightGWT-OL}" />
-                    <property name="licenseName" value="${versionGWT-OL}" />
-                    <property name="licenseUrl" value="${licenseUrlGWT-OL}" />
+                    <property name="key" value="${keyGWT-OL}"/>
+                    <property name="version" value="${versionGWT-OL}"/>
+                    <property name="copyright" value="${copyrightGWT-OL}"/>
+                    <property name="licenseName" value="${versionGWT-OL}"/>
+                    <property name="licenseUrl" value="${licenseUrlGWT-OL}"/>
                 </bean>
                 <bean class="org.geosdi.geoplatform.gui.global.CopyrightInfo">
-                    <property name="key" value="${keySpring}" />
-                    <property name="version" value="${versionSpring}" />
-                    <property name="copyright" value="" />
-                    <property name="licenseName" value="${licenseNameSpring}" />
-                    <property name="licenseUrl" value="${licenseUrlSpring}" />
+                    <property name="key" value="${keySpring}"/>
+                    <property name="version" value="${versionSpring}"/>
+                    <property name="copyright" value=""/>
+                    <property name="licenseName" value="${licenseNameSpring}"/>
+                    <property name="licenseUrl" value="${licenseUrlSpring}"/>
                 </bean>
                 <bean class="org.geosdi.geoplatform.gui.global.CopyrightInfo">
-                    <property name="key" value="${keyHibernate}" />
-                    <property name="version" value="${versionHibernate}" />
-                    <property name="copyright" value="" />
-                    <property name="licenseName" value="${licenseNameHibernate}" />
-                    <property name="licenseUrl" value="${licenseUrlHibernate}" />
+                    <property name="key" value="${keyHibernate}"/>
+                    <property name="version" value="${versionHibernate}"/>
+                    <property name="copyright" value=""/>
+                    <property name="licenseName" value="${licenseNameHibernate}"/>
+                    <property name="licenseUrl" value="${licenseUrlHibernate}"/>
                 </bean>
                 <bean class="org.geosdi.geoplatform.gui.global.CopyrightInfo">
-                    <property name="key" value="${keyGXT}" />
-                    <property name="version" value="${versionGXT}" />
-                    <property name="copyright" value="" />
-                    <property name="licenseName" value="${licenseNameGXT}" />
-                    <property name="licenseUrl" value="${licenseUrlGXT}" />
+                    <property name="key" value="${keyGXT}"/>
+                    <property name="version" value="${versionGXT}"/>
+                    <property name="copyright" value=""/>
+                    <property name="licenseName" value="${licenseNameGXT}"/>
+                    <property name="licenseUrl" value="${licenseUrlGXT}"/>
                 </bean>
                 <bean class="org.geosdi.geoplatform.gui.global.CopyrightInfo">
-                    <property name="key" value="${keyPiriti}" />
-                    <property name="version" value="${versionPiriti}" />
-                    <property name="copyright" value="" />
-                    <property name="licenseName" value="${licenseNamePiriti}" />
-                    <property name="licenseUrl" value="${licenseUrlPiriti}" />
+                    <property name="key" value="${keyPiriti}"/>
+                    <property name="version" value="${versionPiriti}"/>
+                    <property name="copyright" value=""/>
+                    <property name="licenseName" value="${licenseNamePiriti}"/>
+                    <property name="licenseUrl" value="${licenseUrlPiriti}"/>
                 </bean>
                 <bean class="org.geosdi.geoplatform.gui.global.CopyrightInfo">
-                    <property name="key" value="${keyEhCache}" />
-                    <property name="version" value="${versionEhCache}" />
-                    <property name="copyright" value="" />
-                    <property name="licenseName" value="${licenseNameEhCache}" />
-                    <property name="licenseUrl" value="${licenseUrlEhCache}" />
+                    <property name="key" value="${keyEhCache}"/>
+                    <property name="version" value="${versionEhCache}"/>
+                    <property name="copyright" value=""/>
+                    <property name="licenseName" value="${licenseNameEhCache}"/>
+                    <property name="licenseUrl" value="${licenseUrlEhCache}"/>
                 </bean>
                 <bean class="org.geosdi.geoplatform.gui.global.CopyrightInfo">
-                    <property name="key" value="${keyCXF}" />
-                    <property name="version" value="${versionCXF}" />
-                    <property name="copyright" value="" />
-                    <property name="licenseName" value="${licenseNameCXF}" />
-                    <property name="licenseUrl" value="${licenseUrlCXF}" />
+                    <property name="key" value="${keyCXF}"/>
+                    <property name="version" value="${versionCXF}"/>
+                    <property name="copyright" value=""/>
+                    <property name="licenseName" value="${licenseNameCXF}"/>
+                    <property name="licenseUrl" value="${licenseUrlCXF}"/>
                 </bean>
                 <bean class="org.geosdi.geoplatform.gui.global.CopyrightInfo">
-                    <property name="key" value="${keyJAXB}" />
-                    <property name="version" value="${versionJAXB}" />
-                    <property name="copyright" value="" />
-                    <property name="licenseName" value="${licenseNameJAXB}" />
-                    <property name="licenseUrl" value="${licenseUrlJAXB}" />
+                    <property name="key" value="${keyJAXB}"/>
+                    <property name="version" value="${versionJAXB}"/>
+                    <property name="copyright" value=""/>
+                    <property name="licenseName" value="${licenseNameJAXB}"/>
+                    <property name="licenseUrl" value="${licenseUrlJAXB}"/>
                 </bean>
                 <bean class="org.geosdi.geoplatform.gui.global.CopyrightInfo">
-                    <property name="key" value="${keyXStream}" />
-                    <property name="version" value="${versionXStream}" />
-                    <property name="copyright" value="" />
-                    <property name="licenseName" value="${licenseNameXStream}" />
-                    <property name="licenseUrl" value="${licenseUrlXStream}" />
+                    <property name="key" value="${keyXStream}"/>
+                    <property name="version" value="${versionXStream}"/>
+                    <property name="copyright" value=""/>
+                    <property name="licenseName" value="${licenseNameXStream}"/>
+                    <property name="licenseUrl" value="${licenseUrlXStream}"/>
                 </bean>
                 <bean class="org.geosdi.geoplatform.gui.global.CopyrightInfo">
-                    <property name="key" value="${keySpringSecurity}" />
-                    <property name="version" value="${versionSpringSecurity}" />
-                    <property name="copyright" value="" />
-                    <property name="licenseName" value="${licenseNameSpringSecurity}" />
-                    <property name="licenseUrl" value="${licenseUrlSpringSecurity}" />
+                    <property name="key" value="${keySpringSecurity}"/>
+                    <property name="version" value="${versionSpringSecurity}"/>
+                    <property name="copyright" value=""/>
+                    <property name="licenseName" value="${licenseNameSpringSecurity}"/>
+                    <property name="licenseUrl" value="${licenseUrlSpringSecurity}"/>
                 </bean>
                 <bean class="org.geosdi.geoplatform.gui.global.CopyrightInfo">
-                    <property name="key" value="${keyHibGenericDAO}" />
-                    <property name="version" value="${versionHibGenericDAO}" />
-                    <property name="copyright" value="" />
-                    <property name="licenseName" value="${licenseNameHibGenericDAO}" />
-                    <property name="licenseUrl" value="${licenseUrlHibGenericDAO}" />
+                    <property name="key" value="${keyHibGenericDAO}"/>
+                    <property name="version" value="${versionHibGenericDAO}"/>
+                    <property name="copyright" value=""/>
+                    <property name="licenseName" value="${licenseNameHibGenericDAO}"/>
+                    <property name="licenseUrl" value="${licenseUrlHibGenericDAO}"/>
                 </bean>
                 <bean class="org.geosdi.geoplatform.gui.global.CopyrightInfo">
-                    <property name="key" value="${keyJasypt}" />
-                    <property name="version" value="${versionJasypt}" />
-                    <property name="copyright" value="" />
-                    <property name="licenseName" value="${licenseNameJasypt}" />
-                    <property name="licenseUrl" value="${licenseUrlJasypt}" />
+                    <property name="key" value="${keyJasypt}"/>
+                    <property name="version" value="${versionJasypt}"/>
+                    <property name="copyright" value=""/>
+                    <property name="licenseName" value="${licenseNameJasypt}"/>
+                    <property name="licenseUrl" value="${licenseUrlJasypt}"/>
+                </bean>
+                <bean class="org.geosdi.geoplatform.gui.global.CopyrightInfo">
+                    <property name="key" value="${keyJackson}"/>
+                    <property name="version" value="${versionJackson}"/>
+                    <property name="copyright" value=""/>
+                    <property name="licenseName" value="${licenseNameJackson}"/>
+                    <property name="licenseUrl" value="${licenseUrlJackson}"/>
+                </bean>
+                <bean class="org.geosdi.geoplatform.gui.global.CopyrightInfo">
+                    <property name="key" value="${keyDropwizard}"/>
+                    <property name="version" value="${versionDropwizard}"/>
+                    <property name="copyright" value=""/>
+                    <property name="licenseName" value="${licenseNameDropwizard}"/>
+                    <property name="licenseUrl" value="${licenseUrlDropwizard}"/>
+                </bean>
+                <bean class="org.geosdi.geoplatform.gui.global.CopyrightInfo">
+                    <property name="key" value="${keyHttpClient}"/>
+                    <property name="version" value="${versionHttpClient}"/>
+                    <property name="copyright" value=""/>
+                    <property name="licenseName" value="${licenseNameHttpClient}"/>
+                    <property name="licenseUrl" value="${licenseUrlHttpClient}"/>
+                </bean>
+                <bean class="org.geosdi.geoplatform.gui.global.CopyrightInfo">
+                    <property name="key" value="${keySwagger}"/>
+                    <property name="version" value="${versionSwagger}"/>
+                    <property name="copyright" value=""/>
+                    <property name="licenseName" value="${licenseNameSwagger}"/>
+                    <property name="licenseUrl" value="${licenseUrlSwagger}"/>
                 </bean>
             </list>
         </property>

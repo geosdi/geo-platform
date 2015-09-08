@@ -23,5 +23,7 @@
             
     <logger name="org.geosdi.geoplatform.connector.schema.GPCSWOutputSchemaFinder"
                     level="debug" />
+    <logger name="org.geosdi.geoplatform.connector.jaxb.comparison.CSWContextComparisonTest"
+            level="debug" />
 
 </configuration>

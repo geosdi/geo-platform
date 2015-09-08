@@ -48,11 +48,11 @@ public interface LegendLayerHandler extends EventHandler {
 
     Type<LegendLayerHandler> TYPE = new Type<LegendLayerHandler>();
 
-    public void onDisplayLegend(GPLayerBean layerBean);
+    void onDisplayLegend(GPLayerBean layerBean);
 
-    public void onHideLegend(GPLayerBean layerBean);
+    void onHideLegend(GPLayerBean layerBean);
     
-    public void onReloadLegend(GPLayerBean layerBean);
+    void onReloadLegend(GPLayerBean layerBean);
     
-    public void cleanLegendWidget();
+    void cleanLegendWidget();
 }

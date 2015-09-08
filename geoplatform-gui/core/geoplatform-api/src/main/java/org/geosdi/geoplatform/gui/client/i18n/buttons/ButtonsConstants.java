@@ -139,6 +139,9 @@ public interface ButtonsConstants extends Constants {
 
     @DefaultStringValue("Add on Tree")
     String addOnTreeText();
+    
+    @DefaultStringValue("Load")
+    String loadWMSGetCapabilitiesText();
 
     @DefaultStringValue("Set Default")
     String setDefautlText();

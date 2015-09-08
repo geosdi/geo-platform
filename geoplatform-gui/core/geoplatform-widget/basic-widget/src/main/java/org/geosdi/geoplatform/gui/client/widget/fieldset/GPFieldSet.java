@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.widget.fieldset;
 
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
+import java.util.logging.Logger;
 import org.geosdi.geoplatform.gui.client.widget.IGPSubClassesInitialization;
 
 /**
@@ -44,6 +45,8 @@ import org.geosdi.geoplatform.gui.client.widget.IGPSubClassesInitialization;
  */
 public abstract class GPFieldSet extends FieldSet implements IGPSubClassesInitialization {
 
+    protected final static Logger logger = Logger.getLogger("");
+    
     public GPFieldSet() {
     }
 

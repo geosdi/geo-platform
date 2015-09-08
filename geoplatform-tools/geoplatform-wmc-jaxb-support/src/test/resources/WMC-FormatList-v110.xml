@@ -1,0 +1,4 @@
+<FormatList xmlns="http://www.opengis.net/context" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://www.opengis.net/context http://schemas.opengis.net/context/1.1.0/context.xsd">
+    <Format current="1">image/png</Format>
+</FormatList>

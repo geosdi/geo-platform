@@ -53,5 +53,5 @@ public interface PublisherRemoteAsync {
 
     void kmlPreview(String url, AsyncCallback<Boolean> callback);
 
-    void createWorkspace(String workspaceName, AsyncCallback<Boolean> callback);
+    void createWorkspace(String workspaceName, boolean silent, AsyncCallback<Boolean> callback);
 }

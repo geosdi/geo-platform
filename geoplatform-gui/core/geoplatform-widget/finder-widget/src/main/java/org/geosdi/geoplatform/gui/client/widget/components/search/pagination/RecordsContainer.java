@@ -82,7 +82,7 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
     private static final XsrfTokenServiceAsync xsrf = GPXsrfTokenService.Util.getInstance();
     private static final GPCatalogFinderRemoteAsync catalogFinderRemote = GPCatalogFinderRemote.Util.getInstance();
     //
-    protected GPEventBus bus;
+    private final GPEventBus bus;
     private final CatalogFinderBean catalogFinder;
     private CheckBoxSelectionModel<FullRecord> selectionModel;
     private RowExpander rowExpander;
@@ -166,7 +166,7 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
         configs.add(titleColumn);
 
         selectionModel = new CheckBoxSelectionModel<FullRecord>();
-        selectionModel.setSelectionMode(SelectionMode.MULTI);
+        selectionModel.setSelectionMode(SelectionMode.SINGLE);
         configs.add(selectionModel.getColumn());
 
         return new ColumnModel(configs);
@@ -280,10 +280,7 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
                         @Override
                         public void handleEvent(SelectionEvent<FullRecord> se) {
                             FullRecord record = se.getModel();
-                            System.out.println("ECCOLE ############### "
-                                    + record.getUriMap());
-                            if (!(record.isForWMSGetMapRequest())
-                            && !(record.isForWMSGetCapabilities())) {
+                            if (!(record.isPossibleAddOnTreeOperation())) {
                                 se.setCancelled(true);
 
                                 metadataSelection.addRecordExcluded(record);

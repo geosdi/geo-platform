@@ -54,11 +54,12 @@ public interface GPSecurityConnector {
     /**
      * Method to secure Connection
      *
-     * @param C an instance of {@link GPConnectorRequest} class
-     * @param H an instance of {@link HttpUriRequest} class (HttpPost or
+     * @param <C> an instance of {@link GPConnectorRequest} class
+     * @param <H> an instance of {@link HttpUriRequest} class (HttpPost or
      * HttpGet)
      *
      * @return CloseableHttpResponse
+     * @throws org.apache.http.client.ClientProtocolException
      *
      */
     <C extends GPConnectorRequest, H extends HttpUriRequest> CloseableHttpResponse secure(

@@ -62,7 +62,7 @@ public class ServerInterceptorStrategyFactory
 
     @Override
     protected Map<String, Object> createUsernameTokenInterceptor() {
-        Map<String, Object> props = new HashMap<String, Object>();
+        Map<String, Object> props = new HashMap<>();
 
         props.put(WSHandlerConstants.USER, strategyBean.getUsernameTokenUser());
         props.put(WSHandlerConstants.PASSWORD_TYPE, WSConstants.PW_DIGEST);
@@ -75,7 +75,7 @@ public class ServerInterceptorStrategyFactory
 
     @Override
     protected WSS4JInInterceptor createEncryptionInInterceptor() {
-        Map<String, Object> inProps = new HashMap<String, Object>();
+        Map<String, Object> inProps = new HashMap<>();
 
         inProps.put(WSHandlerConstants.ACTION, WSHandlerConstants.ENCRYPT);
         inProps.put(WSHandlerConstants.DEC_PROP_FILE,
@@ -88,7 +88,7 @@ public class ServerInterceptorStrategyFactory
 
     @Override
     protected WSS4JOutInterceptor createEncryptionOutInterceptor() {
-        Map<String, Object> outProps = new HashMap<String, Object>();
+        Map<String, Object> outProps = new HashMap<>();
 
         outProps.put(WSHandlerConstants.ACTION, WSHandlerConstants.ENCRYPT);
         outProps.put(WSHandlerConstants.ENC_PROP_FILE,
@@ -101,7 +101,7 @@ public class ServerInterceptorStrategyFactory
 
     @Override
     protected WSS4JInInterceptor createSignatureInInterceptor() {
-        Map<String, Object> inProps = new HashMap<String, Object>();
+        Map<String, Object> inProps = new HashMap<>();
 
         inProps.put(WSHandlerConstants.ACTION, WSHandlerConstants.SIGNATURE);
         inProps.put(WSHandlerConstants.SIG_PROP_FILE,
@@ -112,7 +112,7 @@ public class ServerInterceptorStrategyFactory
 
     @Override
     protected WSS4JOutInterceptor createSignatureOutInterceptor() {
-        Map<String, Object> outProps = new HashMap<String, Object>();
+        Map<String, Object> outProps = new HashMap<>();
 
         outProps.put(WSHandlerConstants.ACTION, WSHandlerConstants.SIGNATURE);
         outProps.put(WSHandlerConstants.USER, strategyBean.getServerKeystoreUser());
@@ -126,7 +126,7 @@ public class ServerInterceptorStrategyFactory
 
     @Override
     protected WSS4JInInterceptor createTimestampSignatureEncryptionInInterceptor() {
-        Map<String, Object> inProps = new HashMap<String, Object>();
+        Map<String, Object> inProps = new HashMap<>();
 
         StringBuilder sb = new StringBuilder();
         sb.append(WSHandlerConstants.TIMESTAMP + " ");
@@ -146,7 +146,7 @@ public class ServerInterceptorStrategyFactory
 
     @Override
     protected WSS4JOutInterceptor createTimestampSignatureEncryptionOutInterceptor() {
-        Map<String, Object> outProps = new HashMap<String, Object>();
+        Map<String, Object> outProps = new HashMap<>();
 
         StringBuilder sb = new StringBuilder();
         sb.append(WSHandlerConstants.TIMESTAMP + " ");

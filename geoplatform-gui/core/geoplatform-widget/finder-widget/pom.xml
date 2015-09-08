@@ -134,6 +134,12 @@
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
         </dependency>
+        
+        <!-- THIS FOR WMS GET CAPABILITIES EXTENSION -->
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-server-api</artifactId>
+        </dependency>
 
         <!-- logging dependencies, delegate all to slf4j and use logback -->
         <dependency>
@@ -169,7 +175,7 @@
 
         <plugins>
             <!-- ... or ask the plugin to detect them based on gwt modules files and 
-        				copy the required java sources -->
+            copy the required java sources -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>gwt-maven-plugin</artifactId>
@@ -194,7 +200,7 @@
         </plugins>
 
         <!-- TODO: the resources stuff hardcodes paths to source + test directories, 
-     			we should be able to use some properties here -->
+        we should be able to use some properties here -->
         <resources>
             <resource>
                 <directory>${basedir}/src/main/java</directory>

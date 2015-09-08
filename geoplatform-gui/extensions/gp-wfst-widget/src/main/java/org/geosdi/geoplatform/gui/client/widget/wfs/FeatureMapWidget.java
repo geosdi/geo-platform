@@ -36,11 +36,12 @@
 package org.geosdi.geoplatform.gui.client.widget.wfs;
 
 import com.google.gwt.event.shared.HandlerRegistration;
-import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
 import org.geosdi.geoplatform.gui.client.widget.wfs.initializer.IFeatureMapInitializer;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.gwtopenmaps.openlayers.client.MapWidget;
+
+import javax.inject.Inject;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -56,11 +57,11 @@ public class FeatureMapWidget extends GeoPlatformContentPanel
     @Inject
     private IFeatureMapInitializer featureMapInitializer;
     private final GPEventBus bus;
-    private HandlerRegistration handlerRegistration;
+    private final HandlerRegistration handlerRegistration;
 
     @Inject
     public FeatureMapWidget(GPEventBus theBus) {
-        super(true);
+        super(Boolean.TRUE);
 
         this.bus = theBus;
         this.handlerRegistration = this.bus.addHandler(FeatureMapWidget.TYPE,

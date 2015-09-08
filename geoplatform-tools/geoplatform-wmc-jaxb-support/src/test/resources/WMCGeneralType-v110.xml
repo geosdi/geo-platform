@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<General xmlns="http://www.opengis.net/context" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.opengis.net/context http://schemas.opengis.net/context/1.1.0/context.xsd">
+    <Window width="768" height="384"/>
+    <BoundingBox minx="-180.000000000000000" miny="-90.0000000000000000" maxx="180.000000000000000"
+                 maxy="90.0000000000000000" SRS="EPSG:4326"/>
+    <Title/>
+    <Extension>
+        <ol:maxExtent xmlns:ol="http://openlayers.org/context" minx="-180.000000000000000"
+                      miny="-90.0000000000000000" maxx="180.000000000000000" maxy="90.0000000000000000"/>
+    </Extension>
+</General>

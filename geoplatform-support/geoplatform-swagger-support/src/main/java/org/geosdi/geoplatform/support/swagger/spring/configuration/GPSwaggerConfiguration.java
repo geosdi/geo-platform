@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.support.swagger.spring.configuration;
 
 import com.google.common.base.Preconditions;
+import java.util.Arrays;
 import net.jcip.annotations.Immutable;
 import org.geosdi.geoplatform.configurator.bootstrap.cxf.Rest;
 import org.springframework.beans.factory.annotation.Value;
@@ -53,7 +54,7 @@ public class GPSwaggerConfiguration implements SwaggerConfiguration {
 
     @Value(value = "gpSwaggerConfigurator{gp.swagger.resourcePackage:@null}")
     private String resourcePackage;
-    @Value(value = "gpSwaggerConfigurator{gp.swagger.version:@null}")
+    @Value(value = "gpSwaggerConfigurator{gp.swagger.api.version:@null}")
     private String version;
     @Value(value = "gpSwaggerConfigurator{gp.swagger.host:@null}")
     private String host;
@@ -69,6 +70,8 @@ public class GPSwaggerConfiguration implements SwaggerConfiguration {
     private String license;
     @Value(value = "gpSwaggerConfigurator{gp.swagger.licenseUrl:@null}")
     private String licenseUrl;
+    @Value(value = "gpSwaggerConfigurator{gp.swagger.scheme:@null}")
+    private String scheme;
 
     @Override
     public String getResourcePackage() {
@@ -77,7 +80,8 @@ public class GPSwaggerConfiguration implements SwaggerConfiguration {
 
     @Override
     public String getVersion() {
-        return this.version = ((this.version != null) ? this.version : "1.0.0");
+        return this.version = (((this.version != null)
+                && !(this.version.isEmpty())) ? this.version : "1.0.0");
     }
 
     /**
@@ -100,8 +104,9 @@ public class GPSwaggerConfiguration implements SwaggerConfiguration {
 
     @Override
     public String getDescription() {
-        return this.description = ((this.description != null)
-                ? this.description : "");
+        return this.description = (((this.description != null)
+                && !(this.description.isEmpty()))
+                        ? this.description : "");
     }
 
     @Override
@@ -111,18 +116,26 @@ public class GPSwaggerConfiguration implements SwaggerConfiguration {
 
     @Override
     public String getLicense() {
-        return this.license = ((this.license != null) ? this.license : "");
+        return this.license = (((this.license != null)
+                && !(this.description.isEmpty())) ? this.license : "");
     }
 
     @Override
     public String getLicenseUrl() {
-        return this.licenseUrl = ((this.licenseUrl != null)
-                ? this.licenseUrl : "");
+        return this.licenseUrl = (((this.licenseUrl != null)
+                && !(this.licenseUrl.isEmpty()))
+                        ? this.licenseUrl : "");
     }
 
     @Override
     public Boolean isScan() {
         return Boolean.TRUE;
+    }
+
+    @Override
+    public String[] getSchemes() {
+        return ((this.scheme != null) && !(this.scheme.isEmpty())
+                ? this.scheme.split(",") : new String[]{"http"});
     }
 
     @Override
@@ -159,6 +172,9 @@ public class GPSwaggerConfiguration implements SwaggerConfiguration {
                 + ", description = " + getDescription()
                 + ", contact = " + contact
                 + ", license = " + getLicense()
-                + ", licenseUrl = " + getLicenseUrl() + '}';
+                + ", licenseUrl = " + getLicenseUrl()
+                + ", schemes = " + Arrays.toString(getSchemes())
+                + ", scan = " + isScan() + '}';
     }
+
 }

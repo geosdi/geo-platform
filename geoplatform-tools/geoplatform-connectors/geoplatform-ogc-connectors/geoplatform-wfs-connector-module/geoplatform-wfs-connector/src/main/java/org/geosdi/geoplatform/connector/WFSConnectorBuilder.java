@@ -64,7 +64,7 @@ public class WFSConnectorBuilder
 
         WFSVersion v = WFSVersion.fromString(version);
 
-        return new GPWFSConnectorStore(serverUrl,
+        return new GPWFSConnectorStore(serverUrl, pooledConnectorConfig,
                 securityConnector, v);
     }
 }

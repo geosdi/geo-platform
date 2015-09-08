@@ -36,14 +36,14 @@
 package org.geosdi.geoplatform.gui.client.puregwt.wfs.event;
 
 import com.google.gwt.event.shared.GwtEvent;
+import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.FeatureSelectionWidgetHandler;
 import org.geosdi.geoplatform.gui.client.widget.wfs.FeatureAttributeConditionField;
-import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.DeleteAttributeConditionHandler;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class DeleteAttributeConditionEvent extends GwtEvent<DeleteAttributeConditionHandler> {
+public class DeleteAttributeConditionEvent extends GwtEvent<FeatureSelectionWidgetHandler> {
 
     private FeatureAttributeConditionField conditionField;
 
@@ -52,12 +52,12 @@ public class DeleteAttributeConditionEvent extends GwtEvent<DeleteAttributeCondi
     }
 
     @Override
-    public Type<DeleteAttributeConditionHandler> getAssociatedType() {
-        return DeleteAttributeConditionHandler.TYPE;
+    public Type<FeatureSelectionWidgetHandler> getAssociatedType() {
+        return FeatureSelectionWidgetHandler.TYPE;
     }
 
     @Override
-    protected void dispatch(DeleteAttributeConditionHandler handler) {
+    protected void dispatch(FeatureSelectionWidgetHandler handler) {
         handler.deleteCondition(conditionField);
     }
 }

@@ -35,9 +35,6 @@
  */
 package org.geosdi.geoplatform.model.rest;
 
-import java.util.List;
-import javax.ws.rs.InternalServerErrorException;
-import javax.ws.rs.ServerErrorException;
 import org.geosdi.geoplatform.core.model.GPAuthority;
 import org.geosdi.geoplatform.core.model.GPOrganization;
 import org.geosdi.geoplatform.core.model.GPUser;
@@ -55,6 +52,10 @@ import org.geosdi.geoplatform.response.ShortAccountDTO;
 import org.geosdi.geoplatform.response.UserDTO;
 import org.junit.Assert;
 import org.junit.Test;
+
+import javax.ws.rs.InternalServerErrorException;
+import javax.ws.rs.ServerErrorException;
+import java.util.List;
 
 /**
  *
@@ -177,8 +178,7 @@ public class RSAccountTest extends BasicRestServiceTest {
                 authority.getAuthority());
         Assert.assertEquals("Authority level", super.getTrustedLevelByRole(
                 GPRole.USER), authority.getTrustedLevel());
-        Assert.assertEquals("Authority username", usernameTest,
-                authority.getAccountNaturalID());
+        Assert.assertEquals("Authority username", usernameTest, authority.getAccountNaturalID());
     }
 
     @Test
@@ -219,8 +219,7 @@ public class RSAccountTest extends BasicRestServiceTest {
 
     @Test
     public void testInsertDuplicateUserWRTUsernameRest() throws Exception {
-        GPUser user = super.createUser(usernameTest, organizationTest,
-                GPRole.USER);
+        GPUser user = super.createUser(usernameTest, organizationTest, GPRole.USER);
         try {
             gpWSClient.insertAccount(new InsertAccountRequest(user,
                     Boolean.FALSE));
@@ -281,8 +280,7 @@ public class RSAccountTest extends BasicRestServiceTest {
 
     @Test
     public void testAuthorizationCorrectUsernameRest() throws Exception {
-        GPUser user = gpWSClient.getUserDetailByUsernameAndPassword(usernameTest,
-                passwordTest);
+        GPUser user = gpWSClient.getUserDetailByUsernameAndPassword(usernameTest, passwordTest);
         Assert.assertNotNull("User is null", user);
         Assert.assertEquals(usernameTest, user.getUsername());
     }
@@ -298,8 +296,7 @@ public class RSAccountTest extends BasicRestServiceTest {
     @Test(expected = InternalServerErrorException.class)
     public void testAuthorizationIncorrectUsernameRest() throws Exception {
         String wrongUsername = usernameTest + "_";
-        gpWSClient.getUserDetailByUsernameAndPassword(wrongUsername,
-                passwordTest);
+        gpWSClient.getUserDetailByUsernameAndPassword(wrongUsername, passwordTest);
     }
 
     @Test(expected = InternalServerErrorException.class)
@@ -325,6 +322,22 @@ public class RSAccountTest extends BasicRestServiceTest {
 
         // Must be throws AccountLoginFault because the user is disabled
         gpWSClient.getUserDetailByUsernameAndPassword(usernameTest, passwordTest);
+    }
+
+    @Test
+    public void updateUserRestTest() throws Exception{
+        Long idUser = super.createAndInsertUser("userToUpdate-SOAP", organizationTest, GPRole.ADMIN);
+
+        GPUser user = gpWSClient.getUserDetail(idUser);
+        logger.info("##################USER : {}\n", user);
+
+        user.setName("UserToUpdate");
+        gpWSClient.updateUser(user);
+
+        user = gpWSClient.getUserDetail(idUser);
+        logger.info("#################USER_UPDATED : {}\n", user);
+
+        gpWSClient.deleteAccount(idUser);
     }
 
     @Test

@@ -101,6 +101,12 @@ public class FullRecordDTO extends AbstractRecordDTO {
         }
     }
 
+    public URIDTO getURIDtoForWMSGetCapabilities() {
+        return (this.uriMap.containsKey(OnlineResourceProtocolType.OGC_WMS_1_1_1_HTTP_GET_CAPABILITIES)
+                ? uriMap.get(OnlineResourceProtocolType.OGC_WMS_1_1_1_HTTP_GET_CAPABILITIES)
+                : uriMap.get(OnlineResourceProtocolType.OGC_WMS_1_3_0_HTTP_GET_CAPABILITIES));
+    }
+
     @Override
     public String toString() {
         return super.toString()

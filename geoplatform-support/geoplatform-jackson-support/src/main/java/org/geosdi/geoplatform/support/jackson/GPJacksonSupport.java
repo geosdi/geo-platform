@@ -40,7 +40,7 @@ import com.fasterxml.jackson.databind.introspect.AnnotationIntrospectorPair;
 import com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.fasterxml.jackson.module.jaxb.JaxbAnnotationIntrospector;
-import java.text.SimpleDateFormat;
+import java.text.DateFormat;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.FAIL_ON_UNKNOW_PROPERTIES_DISABLE;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.INDENT_OUTPUT_ENABLE;
@@ -61,6 +61,11 @@ public class GPJacksonSupport implements JacksonSupport {
         this(defaultProp());
     }
 
+    public GPJacksonSupport(DateFormat format) {
+        this();
+        this.mapper.setDateFormat(format);
+    }
+
     public GPJacksonSupport(JacksonSupportConfigFeature... features) {
         mapper = new ObjectMapper();
         for (JacksonSupportConfigFeature feature : features) {
@@ -74,7 +79,13 @@ public class GPJacksonSupport implements JacksonSupport {
         mapper.setAnnotationIntrospector(new AnnotationIntrospectorPair(
                 primary, secondary));
 
-        mapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ"));
+//        mapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ"));
+    }
+
+    @Override
+    public JacksonSupport setDateFormat(DateFormat format) {
+        this.mapper.setDateFormat(format);
+        return this;
     }
 
     @Override
@@ -83,13 +94,28 @@ public class GPJacksonSupport implements JacksonSupport {
     }
 
     @Override
-    public final void registerModule(Module module) {
+    public final JacksonSupport registerModule(Module module) {
         this.mapper.registerModule(module);
+        return this;
     }
 
     @Override
     public String getProviderName() {
         return getClass().getSimpleName();
+    }
+
+    @Override
+    public JacksonSupport configure(JacksonSupportConfigFeature feature) {
+        feature.configureMapper(mapper);
+        return this;
+    }
+
+    @Override
+    public JacksonSupport configure(JacksonSupportConfigFeature... features) {
+        for (JacksonSupportConfigFeature feature : features) {
+            feature.configureMapper(mapper);
+        }
+        return this;
     }
 
     public static JacksonSupportConfigFeature[] defaultProp() {
@@ -99,4 +125,5 @@ public class GPJacksonSupport implements JacksonSupport {
             WRAP_ROOT_VALUE_ENABLE,
             INDENT_OUTPUT_ENABLE};
     }
+
 }

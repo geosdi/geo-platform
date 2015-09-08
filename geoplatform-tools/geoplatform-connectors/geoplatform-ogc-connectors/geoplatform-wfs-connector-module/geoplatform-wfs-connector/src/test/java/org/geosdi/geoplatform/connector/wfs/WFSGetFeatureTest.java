@@ -56,7 +56,7 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
     @Test
     public void statesHits() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request
-                = super.serverConnector.createGetFeatureRequest();
+                = serverConnector.createGetFeatureRequest();
 
         request.setResultType(ResultTypeType.HITS.value());
         request.setTypeName(statesName);
@@ -69,7 +69,7 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
     @Test
     public void secureStatesHits() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request
-                = super.secureServerConnector.createGetFeatureRequest();
+                = secureServerConnector.createGetFeatureRequest();
 
         request.setResultType(ResultTypeType.HITS.value());
         request.setTypeName(statesName);
@@ -82,7 +82,7 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
     @Test
     public void statesResults() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request
-                = super.serverConnector.createGetFeatureRequest();
+                = serverConnector.createGetFeatureRequest();
 
         request.setResultType(ResultTypeType.RESULTS.value());
         request.setTypeName(statesName);
@@ -106,7 +106,7 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
     @Test
     public void statesFeatureIDs() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request
-                = super.serverConnector.createGetFeatureRequest();
+                = serverConnector.createGetFeatureRequest();
 
         request.setResultType(ResultTypeType.RESULTS.value());
         request.setTypeName(statesName);
@@ -123,7 +123,7 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
     @Test
     public void statesBBox() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request
-                = super.serverConnector.createGetFeatureRequest();
+                = serverConnector.createGetFeatureRequest();
 
         request.setResultType(ResultTypeType.HITS.value());
         request.setTypeName(statesName);
@@ -141,7 +141,7 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
     @Test
     public void statesSRS() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request
-                = super.serverConnector.createGetFeatureRequest();
+                = serverConnector.createGetFeatureRequest();
 
         request.setTypeName(statesName);
         request.setResultType(ResultTypeType.RESULTS.value());
@@ -149,7 +149,7 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
         FeatureCollectionType response = request.getResponse();
         // TODO Check geometry into default SRS EPSG:4326
 
-        request = super.serverConnector.createGetFeatureRequest();
+        request = serverConnector.createGetFeatureRequest();
 
         request.setTypeName(statesName);
         request.setResultType(ResultTypeType.RESULTS.value());

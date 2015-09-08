@@ -35,31 +35,25 @@
  */
 package org.geosdi.geoplatform.support.wfs.feature.reader;
 
-import java.io.InputStream;
-import java.io.StringReader;
-import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.List;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.namespace.QName;
-import org.geosdi.geoplatform.connector.jaxb.JAXBContextConnectorRepository;
-import org.geosdi.geoplatform.connector.jaxb.WFSConnectorJAXBContext;
+import org.geosdi.geoplatform.connector.jaxb.repository.JAXBContextConnectorRepository;
+import org.geosdi.geoplatform.connector.jaxb.repository.WFSConnectorJAXBContext;
 import org.geosdi.geoplatform.connector.wfs.response.AttributeDTO;
 import org.geosdi.geoplatform.connector.wfs.response.GeometryAttributeDTO;
 import org.geosdi.geoplatform.connector.wfs.response.LayerSchemaDTO;
 import org.geosdi.geoplatform.jaxb.GPBaseJAXBContext;
 import org.geosdi.geoplatform.support.wfs.feature.geometry.GeometryBinding;
-import org.geosdi.geoplatform.xml.xsd.v2001.ComplexContent;
-import org.geosdi.geoplatform.xml.xsd.v2001.Element;
-import org.geosdi.geoplatform.xml.xsd.v2001.ExplicitGroup;
-import org.geosdi.geoplatform.xml.xsd.v2001.ExtensionType;
-import org.geosdi.geoplatform.xml.xsd.v2001.LocalSimpleType;
-import org.geosdi.geoplatform.xml.xsd.v2001.Schema;
-import org.geosdi.geoplatform.xml.xsd.v2001.TopLevelComplexType;
-import org.geosdi.geoplatform.xml.xsd.v2001.TopLevelElement;
+import org.geosdi.geoplatform.xml.xsd.v2001.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.namespace.QName;
+import java.io.InputStream;
+import java.io.StringReader;
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *

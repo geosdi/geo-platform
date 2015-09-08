@@ -45,11 +45,11 @@ import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 public class PoolConfig extends GenericObjectPoolConfig {
 
     {
-        super.setMaxIdle(3);
-        super.setMaxTotal(20);
-        super.setMinIdle(1);
+        super.setMaxIdle(25);
+        super.setMaxTotal(150);
+        super.setMinIdle(16);
         super.setTimeBetweenEvictionRunsMillis(1000L * 60L * 10L);
-        super.setNumTestsPerEvictionRun(10);
+        super.setNumTestsPerEvictionRun(50);
         super.setMinEvictableIdleTimeMillis(1000L * 60L * 5L);
     }
 

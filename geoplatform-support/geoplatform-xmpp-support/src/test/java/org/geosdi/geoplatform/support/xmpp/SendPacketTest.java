@@ -69,7 +69,7 @@ public class SendPacketTest {
     static Logger logger;
     //
     static final String GP_XMPP_KEY = "GP_XMPP_FILE_PROP";
-    static final String SENDER = "JnFAHibv/ZxmDtQGXHMghKpQLxSOiGjYcAfhDNRNUh8=";
+    static final String RECEIVER = "JnFAHibv/ZxmDtQGXHMghKpQLxSOiGjYcAfhDNRNUh8=";
     static final String MESSAGE = " is building geo-platform.";
     //
     @Resource(name = "gpXMPPConnectionManager")
@@ -92,7 +92,7 @@ public class SendPacketTest {
     public void setUp() {
         Assert.assertNotNull(gpXMPPConnectionManager);
         this.message = new Message(this.gpXmppPooledPBEStringEncryptor.
-                decrypt(SENDER), Message.Type.normal);
+                decrypt(RECEIVER), Message.Type.chat);
         this.message.setSubject("Example XMPP Message");
         String user = System.getProperty("user.name");
         this.message.setBody((user != null) ? user + MESSAGE : "Someone"
@@ -103,7 +103,7 @@ public class SendPacketTest {
     public void sendPacket() throws SmackException.NotConnectedException,
             XMPPException, SmackException, IOException, InterruptedException {
         this.gpXMPPConnectionManager.login();
-        this.gpXMPPConnectionManager.sendPacket(message);
+        this.gpXMPPConnectionManager.sendStanza(message);
         
         Thread.sleep(3000);
     }

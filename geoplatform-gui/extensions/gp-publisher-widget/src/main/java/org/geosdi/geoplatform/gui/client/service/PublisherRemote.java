@@ -70,6 +70,6 @@ public interface PublisherRemote extends RemoteService {
 
     void kmlPreview(String url) throws GeoPlatformException;
 
-    boolean createWorkspace(String workspaceName) throws GeoPlatformException;
+    boolean createWorkspace(String workspaceName, boolean silent) throws GeoPlatformException;
 
 }

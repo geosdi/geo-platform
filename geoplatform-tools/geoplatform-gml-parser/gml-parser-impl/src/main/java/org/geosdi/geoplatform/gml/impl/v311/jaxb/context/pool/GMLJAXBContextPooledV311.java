@@ -35,11 +35,21 @@
  */
 package org.geosdi.geoplatform.gml.impl.v311.jaxb.context.pool;
 
-import javax.xml.bind.JAXBContext;
 import org.apache.commons.pool2.impl.GenericObjectPool;
 import org.geosdi.geoplatform.gml.api.jaxb.context.GMLMarshaller;
 import org.geosdi.geoplatform.gml.api.jaxb.context.pool.GMLJAXBContextPooled;
 import org.geosdi.geoplatform.gml.api.jaxb.context.pool.PoolConfig;
+import org.geosdi.geoplatform.gml.impl.v311.jaxb.context.GMLMarshallerV311;
+import org.w3c.dom.Node;
+import org.xml.sax.ContentHandler;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.stream.XMLEventWriter;
+import javax.xml.stream.XMLStreamWriter;
+import javax.xml.transform.Result;
+import java.io.File;
+import java.io.OutputStream;
+import java.io.Writer;
 
 /**
  *
@@ -57,10 +67,69 @@ public class GMLJAXBContextPooledV311 extends GMLJAXBContextPooled {
     }
 
     @Override
-    public GMLMarshaller acquireMarshaller() throws Exception {
-        GMLMarshaller marshaller = gmlMarshallerPool.borrowObject();
-        gmlMarshallerPool.returnObject(marshaller);
+    public void marshal(Object jaxbElement, Result result) throws Exception {
+        GMLMarshaller marshaller = this.gmlMarshallerPool.borrowObject();
+        marshaller.marshal(jaxbElement, result);
+        this.gmlMarshallerPool.returnObject(marshaller);
+    }
 
-        return marshaller;
+    @Override
+    public void marshal(Object jaxbElement, OutputStream os) throws Exception {
+        GMLMarshaller marshaller = this.gmlMarshallerPool.borrowObject();
+        marshaller.marshal(jaxbElement, os);
+        this.gmlMarshallerPool.returnObject(marshaller);
+    }
+
+    @Override
+    public void marshal(Object jaxbElement, File output) throws Exception {
+        GMLMarshaller marshaller = this.gmlMarshallerPool.borrowObject();
+        marshaller.marshal(jaxbElement, output);
+        this.gmlMarshallerPool.returnObject(marshaller);
+    }
+
+    @Override
+    public void marshal(Object jaxbElement, Writer writer) throws Exception {
+        GMLMarshaller marshaller = this.gmlMarshallerPool.borrowObject();
+        marshaller.marshal(jaxbElement, writer);
+        this.gmlMarshallerPool.returnObject(marshaller);
+    }
+
+    @Override
+    public void marshal(Object jaxbElement, ContentHandler handler) throws Exception {
+        GMLMarshaller marshaller = this.gmlMarshallerPool.borrowObject();
+        marshaller.marshal(jaxbElement, handler);
+        this.gmlMarshallerPool.returnObject(marshaller);
+    }
+
+    @Override
+    public void marshal(Object jaxbElement, Node node) throws Exception {
+        GMLMarshaller marshaller = this.gmlMarshallerPool.borrowObject();
+        marshaller.marshal(jaxbElement, node);
+        this.gmlMarshallerPool.returnObject(marshaller);
+    }
+
+    @Override
+    public void marshal(Object jaxbElement, XMLStreamWriter writer) throws Exception {
+        GMLMarshaller marshaller = this.gmlMarshallerPool.borrowObject();
+        marshaller.marshal(jaxbElement, writer);
+        this.gmlMarshallerPool.returnObject(marshaller);
+    }
+
+    @Override
+    public void marshal(Object jaxbElement, XMLEventWriter writer) throws Exception {
+        GMLMarshaller marshaller = this.gmlMarshallerPool.borrowObject();
+        marshaller.marshal(jaxbElement, writer);
+        this.gmlMarshallerPool.returnObject(marshaller);
+    }
+
+    /**
+     * <p>Remember this not use {@link #gmlMarshallerPool}</p>
+     *
+     * @return {@link GMLMarshaller}
+     * @throws Exception
+     */
+    @Override
+    public GMLMarshaller acquireMarshaller() throws Exception {
+        return new GMLMarshallerV311(jaxbContext.createMarshaller());
     }
 }

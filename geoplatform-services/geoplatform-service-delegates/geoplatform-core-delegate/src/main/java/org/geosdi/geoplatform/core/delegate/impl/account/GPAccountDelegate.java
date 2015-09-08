@@ -155,7 +155,7 @@ public class GPAccountDelegate implements AccountDelegate {
     @Override
     public Long updateUser(GPUser user)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        if (user.getId() == null) {
+        if (user == null || user.getId() == null) {
             throw new IllegalArgumentException("User \"ID\" must be NOT NULL");
         }
         GPUser orig = (GPUser) this.getAccountById(user.getId());

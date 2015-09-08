@@ -53,7 +53,7 @@ public class ConcreteLayerSchemaHandler extends LayerSchemaParserHandler {
 
     @Inject
     private ILayerSchemaBinder layerSchemaBinder;
-    private FeatureWidget featureWidget;
+    private final FeatureWidget featureWidget;
 
     @Inject
     public ConcreteLayerSchemaHandler(FeatureWidget theFeatureWidget) {

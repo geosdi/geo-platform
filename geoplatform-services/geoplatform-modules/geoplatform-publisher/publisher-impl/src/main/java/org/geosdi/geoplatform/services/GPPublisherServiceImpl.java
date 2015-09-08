@@ -110,8 +110,9 @@ public class GPPublisherServiceImpl extends GPPublisherBasicServiceImpl
     }
 
     @Override
-    public Boolean createWorkspace(String workspaceName) throws ResourceNotFoundFault {
-        return super.createWorkspace(workspaceName);
+    public Boolean createWorkspace(String workspaceName, boolean silent) 
+            throws ResourceNotFoundFault {
+        return super.createWorkspace(workspaceName, silent);
     }
 
     @Override

@@ -299,6 +299,42 @@ public enum GPJacksonSupportEnum implements
                 }
 
             },
+    WRITE_DATES_AS_TIMESTAMPS_ENABLE() {
+
+                @Override
+                public Boolean getValue() {
+                    return Boolean.TRUE;
+                }
+
+                @Override
+                public SerializationFeature getFeature() {
+                    return SerializationFeature.WRITE_DATES_AS_TIMESTAMPS;
+                }
+
+                @Override
+                public void configureMapper(ObjectMapper mapper) {
+                    mapper.configure(this.getFeature(), this.getValue());
+                }
+
+            },
+    WRITE_DATES_AS_TIMESTAMPS_DISABLE() {
+
+                @Override
+                public Boolean getValue() {
+                    return Boolean.FALSE;
+                }
+
+                @Override
+                public SerializationFeature getFeature() {
+                    return SerializationFeature.WRITE_DATES_AS_TIMESTAMPS;
+                }
+
+                @Override
+                public void configureMapper(ObjectMapper mapper) {
+                    mapper.configure(this.getFeature(), this.getValue());
+                }
+
+            },
     USE_WRAPPER_NAME_AS_PROPERTY_NAME_ENABLE() {
 
                 @Override
@@ -333,5 +369,6 @@ public enum GPJacksonSupportEnum implements
                 public void configureMapper(ObjectMapper mapper) {
                     mapper.configure(this.getFeature(), this.getValue());
                 }
+
             };
 }

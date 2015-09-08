@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<bindings version="2.1" xmlns="http://java.sun.com/xml/ns/jaxb">
+  <!--
+
+Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
+Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
+Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
+Generato il: 2015.08.25 alle 10:19:44 PM CEST 
+
+  -->
+  <bindings scd="x-schema::tns" xmlns:tns="http://www.w3.org/1999/xlink">
+    <schemaBindings map="false">
+      <package name="org.geosdi.geoplatform.xml.xlink.v100"/>
+    </schemaBindings>
+    <bindings scd="~tns:typeType">
+      <typesafeEnumClass ref="org.geosdi.geoplatform.xml.xlink.v100.TypeType"/>
+    </bindings>
+  </bindings>
+</bindings>
+

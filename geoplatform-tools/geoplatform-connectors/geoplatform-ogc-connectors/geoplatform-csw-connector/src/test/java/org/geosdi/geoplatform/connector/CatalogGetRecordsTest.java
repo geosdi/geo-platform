@@ -39,6 +39,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+import javax.annotation.Resource;
 import javax.xml.bind.JAXBElement;
 import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequest;
 import org.geosdi.geoplatform.connector.server.security.BasicPreemptiveSecurityConnector;
@@ -64,17 +65,15 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:applicationContext-Test.xml",
+@ContextConfiguration(locations = {"classpath:applicationContext-geoSDI.xml",
     "classpath:applicationContext-Logger.xml"})
 public class CatalogGetRecordsTest {
 
     @GeoPlatformLog
     private static Logger logger;
-    /**
-     * geoSDI Catalog.
-     */
-    private @Value("configurator{geosdi_catalog_url}")
-    String geosdiUrl;
+    //
+    @Resource(name = "geoSDIServerConnectorStore")
+    private GPCatalogConnectorStore serverConnector;
     /**
      * SNIPC Catalog.
      */
@@ -87,10 +86,6 @@ public class CatalogGetRecordsTest {
 
     @Test
     public void testSummaryRecord() throws Exception {
-        URL url = new URL(geosdiUrl);
-        GPCatalogConnectorStore serverConnector = GPCSWConnectorBuilder.newConnector().withServerUrl(
-                url).build();
-
         CatalogGetRecordsRequest<GetRecordsResponseType> request = serverConnector.createGetRecordsRequest();
 
         request.setTypeName(TypeName.METADATA);
@@ -114,17 +109,13 @@ public class CatalogGetRecordsTest {
 
         List<JAXBElement<? extends AbstractRecordType>> metadata = result.getAbstractRecord();
         if (!metadata.isEmpty()) {
-            logger.info("FIRST FULL METADATA @@@@@@@@@@@@@@@@@@@@@ {}",
+            logger.info("FIRST FULL METADATA @@@@@@@@@@@@@@@@@@@@@ {}",
                     (SummaryRecordType) (metadata.get(0).getValue()));
         }
     }
 
     @Test
     public void testFullRecord() throws Exception {
-        URL url = new URL(geosdiUrl);
-        GPCatalogConnectorStore serverConnector = GPCSWConnectorBuilder
-                .newConnector().withServerUrl(url).build();
-
         CatalogGetRecordsRequest<GetRecordsResponseType> request = serverConnector.createGetRecordsRequest();
 
         request.setTypeName(TypeName.METADATA);
@@ -155,10 +146,10 @@ public class CatalogGetRecordsTest {
     public void testCQLTemporalFilterGeomatys() throws Exception {
         URL url = new URL(
                 "http://demo.geomatys.com/mdweb-cnes-labs/WS/csw/default");
-        GPCatalogConnectorStore serverConnector = GPCSWConnectorBuilder.newConnector().
+        GPCatalogConnectorStore sc = GPCSWConnectorBuilder.newConnector().
                 withServerUrl(url).build();
 
-        CatalogGetRecordsRequest<GetRecordsResponseType> request = serverConnector.createGetRecordsRequest();
+        CatalogGetRecordsRequest<GetRecordsResponseType> request = sc.createGetRecordsRequest();
 
         request.setTypeName(TypeName.RECORD_V202);
 
@@ -198,13 +189,15 @@ public class CatalogGetRecordsTest {
     @Ignore("Require to add the SNIPC certificate into default keystore")
     @Test
     public void testSecureGetRecords() throws Exception {
-        GPCatalogConnectorStore serverConnector = GPCSWConnectorBuilder.newConnector().withServerUrl(
-                new URL(
-                        snipcUrl)).withClientSecurity(
+        GPCatalogConnectorStore snipcServerConnector = GPCSWConnectorBuilder
+                .newConnector()
+                .withServerUrl(new URL(snipcUrl))
+                .withClientSecurity(
                         new BasicPreemptiveSecurityConnector(
-                                snipcUsername, snipcPassword)).build();
+                                snipcUsername, snipcPassword))
+                .build();
 
-        CatalogGetRecordsRequest<GetRecordsResponseType> request = serverConnector.createGetRecordsRequest();
+        CatalogGetRecordsRequest<GetRecordsResponseType> request = snipcServerConnector.createGetRecordsRequest();
 
         request.setTypeName(TypeName.RECORD_V202);
 
@@ -228,7 +221,7 @@ public class CatalogGetRecordsTest {
         List<JAXBElement<? extends AbstractRecordType>> metadata = result.getAbstractRecord();
 
         if (!metadata.isEmpty()) {
-            logger.info("FIRST SECURE METADATA @@@@@@@@@@@@@@@@@@@@@ {}",
+            logger.info("FIRST SECURE METADATA @@@@@@@@@@@@@@@@@@@@@ {}",
                     (RecordType) (metadata.get(0).getValue()));
         }
     }

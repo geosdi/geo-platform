@@ -1,0 +1,12 @@
+<Extension xmlns="http://www.opengis.net/context" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://www.opengis.net/context http://schemas.opengis.net/context/1.1.0/context.xsd">
+    <ol:maxExtent xmlns:ol="http://openlayers.org/context" minx="-180.000000000000000"
+                  miny="-90.0000000000000000" maxx="180.000000000000000" maxy="90.0000000000000000"/>
+    <ol:tileSize xmlns:ol="http://openlayers.org/context" width="256" height="256"/>
+    <ol:transparent xmlns:ol="http://openlayers.org/context">true</ol:transparent>
+    <ol:numZoomLevels xmlns:ol="http://openlayers.org/context">16</ol:numZoomLevels>
+    <ol:units xmlns:ol="http://openlayers.org/context">degrees</ol:units>
+    <ol:isBaseLayer xmlns:ol="http://openlayers.org/context">false</ol:isBaseLayer>
+    <ol:displayInLayerSwitcher xmlns:ol="http://openlayers.org/context">true</ol:displayInLayerSwitcher>
+    <ol:singleTile xmlns:ol="http://openlayers.org/context">false</ol:singleTile>
+</Extension>

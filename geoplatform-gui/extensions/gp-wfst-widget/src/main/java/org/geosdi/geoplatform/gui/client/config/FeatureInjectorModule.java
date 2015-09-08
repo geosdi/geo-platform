@@ -36,15 +36,14 @@
 package org.geosdi.geoplatform.gui.client.config;
 
 import com.google.gwt.inject.client.AbstractGinModule;
-import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.model.binder.FeatureIdBinder;
 import org.geosdi.geoplatform.gui.client.model.binder.IFeatureIdBinder;
 import org.geosdi.geoplatform.gui.client.model.binder.ILayerSchemaBinder;
 import org.geosdi.geoplatform.gui.client.model.binder.LayerSchemaBinder;
-import org.geosdi.geoplatform.gui.client.widget.wfs.FeatureAttributesWidget;
 import org.geosdi.geoplatform.gui.client.widget.wfs.FeatureMapWidget;
 import org.geosdi.geoplatform.gui.client.widget.wfs.FeatureWidget;
 import org.geosdi.geoplatform.gui.client.widget.wfs.IFeatureMapWidget;
+import org.geosdi.geoplatform.gui.client.widget.wfs.binding.grid.WFSFeatureGridBinding;
 import org.geosdi.geoplatform.gui.client.widget.wfs.builder.AttributeCustomFieldsMap;
 import org.geosdi.geoplatform.gui.client.widget.wfs.builder.feature.FeatureAttributesWindowBuilder;
 import org.geosdi.geoplatform.gui.client.widget.wfs.initializer.FeatureMapInitializer;
@@ -55,6 +54,9 @@ import org.geosdi.geoplatform.gui.factory.map.DefaultMapFactory;
 import org.geosdi.geoplatform.gui.factory.map.GeoPlatformMapFactory;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBusImpl;
+
+import javax.inject.Singleton;
+import org.geosdi.geoplatform.gui.client.widget.wfs.FeatureAttributesWidget;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -73,8 +75,7 @@ public class FeatureInjectorModule extends AbstractGinModule {
                 Singleton.class);
         bind(GeoPlatformMapFactory.class).to(DefaultMapFactory.class);
         
-        bind(IFeatureMapInitializer.class).to(FeatureMapInitializer.class).in(
-                Singleton.class);
+        bind(IFeatureMapInitializer.class).to(FeatureMapInitializer.class).in(Singleton.class);
         
         bind(FeatureSelectionLayoutHandler.class).in(Singleton.class);
         bind(FeatureAttributesLayoutHandler.class).in(Singleton.class);
@@ -86,6 +87,7 @@ public class FeatureInjectorModule extends AbstractGinModule {
                 Singleton.class);
         
         bind(FeatureAttributesWindowBuilder.class).asEagerSingleton();
+        bind(WFSFeatureGridBinding.class).asEagerSingleton();
         
         requestStaticInjection(AttributeCustomFieldsMap.class);
     }

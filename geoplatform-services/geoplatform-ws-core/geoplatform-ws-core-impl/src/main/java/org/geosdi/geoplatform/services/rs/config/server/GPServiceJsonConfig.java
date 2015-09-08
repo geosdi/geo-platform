@@ -34,10 +34,8 @@
 package org.geosdi.geoplatform.services.rs.config.server;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 import javax.ws.rs.core.Application;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.ext.RuntimeDelegate;
 import org.apache.cxf.interceptor.Interceptor;
 import org.apache.cxf.interceptor.LoggingInInterceptor;
@@ -53,6 +51,9 @@ import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.geosdi.geoplatform.support.cxf.rs.provider.configurator.GPRestProviderType;
 import org.geosdi.geoplatform.support.cxf.rs.provider.factory.GPRestProviderFactory;
 import org.geosdi.geoplatform.support.cxf.rs.provider.jettyson.GPJSONProvider;
+import org.geosdi.geoplatform.support.swagger.spring.configuration.rest.GPSwaggerRestConfiguration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.beans.factory.annotation.Value;
@@ -68,31 +69,47 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 class GPServiceJsonConfig {
 
+    private static final Logger logger = LoggerFactory.getLogger(GPServiceJsonConfig.class);
+
     @Bean(initMethod = "create")
     @Required
     public static JAXRSServerFactoryBean geoplatformServiceJSON(@Qualifier(
             value = "geoPlatformService") GeoPlatformService geoPlatformService,
             @Qualifier(value = "gpJsonCoreApplication") Application gpJsonCoreApplication,
             @Value("configurator{cxf_rest_provider_type}") GPRestProviderType providerType,
+            @Qualifier(value = "gpCoreSwaggerRestConfiguration") GPSwaggerRestConfiguration gpCoreSwaggerRestConfiguration,
             @Qualifier(value = "gpCrossResourceSharingFilter") CrossOriginResourceSharingFilter gpCrossResourceSharingFilter,
             @Qualifier(value = "serverLoggingInInterceptorBean") LoggingInInterceptor serverLogInInterceptor,
             @Qualifier(value = "serverLoggingOutInterceptorBean") LoggingOutInterceptor serverLogOutInterceptor) {
 
+        logger.debug("\n\n#####################GP_CORE_SWAGGER_CONFIGURED : {}\n\n",
+                gpCoreSwaggerRestConfiguration.isSwaggerConfigured());
+
+        List<Object> serviceBeans;
+        List<? extends Object> providers;
+
+        if (gpCoreSwaggerRestConfiguration.isSwaggerConfigured()) {
+            serviceBeans = Arrays.asList(new Object[]{geoPlatformService,
+                gpCoreSwaggerRestConfiguration.getSwaggerApiListingResource()});
+            providers = Arrays.asList(
+                    new Object[]{createProvider(providerType),
+                        gpCoreSwaggerRestConfiguration.getSwaggerResourceWriter(),
+                        new GPExceptionFaultMapper(),
+                        gpCrossResourceSharingFilter});
+        } else {
+            serviceBeans = Arrays.asList(new Object[]{geoPlatformService});
+            providers = Arrays.asList(
+                    new Object[]{createProvider(providerType),
+                        new GPExceptionFaultMapper(),
+                        gpCrossResourceSharingFilter});
+        }
+
         JAXRSServerFactoryBean factory = RuntimeDelegate.getInstance().createEndpoint(
                 gpJsonCoreApplication, JAXRSServerFactoryBean.class);
-        factory.setServiceBean(geoPlatformService);
+        factory.setServiceBeans(serviceBeans);
         factory.setAddress(factory.getAddress());
 
-        factory.setProviders(Arrays.asList(
-                new Object[]{createProvider(providerType),
-                    new GPExceptionFaultMapper(),
-                    gpCrossResourceSharingFilter}));
-
-        Map<Object, Object> extensionMappings = new HashMap<>();
-        extensionMappings.put("xml", MediaType.APPLICATION_XML);
-        extensionMappings.put("json", MediaType.APPLICATION_JSON);
-
-        factory.setExtensionMappings(extensionMappings);
+        factory.setProviders(providers);
 
         factory.setInInterceptors(Arrays.<Interceptor<? extends Message>>asList(
                 serverLogInInterceptor)
@@ -113,4 +130,5 @@ class GPServiceJsonConfig {
         }
         return provider;
     }
+
 }

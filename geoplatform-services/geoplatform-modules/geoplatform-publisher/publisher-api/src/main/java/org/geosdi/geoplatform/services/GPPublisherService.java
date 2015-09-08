@@ -215,7 +215,9 @@ public interface GPPublisherService extends IGPPublisherService {
     @Override
     Boolean createWorkspace(
             @WebParam(name = "workspaceName")
-            @QueryParam(value = "workspaceName") String workspaceName)
+            @QueryParam(value = "workspaceName") String workspaceName,
+            @WebParam(name = "silent")
+            @QueryParam(value = "silent") boolean silent)
             throws ResourceNotFoundFault;
 
     @Post

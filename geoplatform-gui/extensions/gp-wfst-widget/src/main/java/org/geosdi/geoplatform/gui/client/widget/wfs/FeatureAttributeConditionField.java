@@ -41,20 +41,14 @@ import com.extjs.gxt.ui.client.event.SelectionChangedListener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.button.Button;
-import com.extjs.gxt.ui.client.widget.form.AdapterField;
-import com.extjs.gxt.ui.client.widget.form.ComboBox;
-import com.extjs.gxt.ui.client.widget.form.LabelField;
-import com.extjs.gxt.ui.client.widget.form.MultiField;
-import com.extjs.gxt.ui.client.widget.form.SimpleComboBox;
+import com.extjs.gxt.ui.client.widget.form.*;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import java.util.List;
 import org.geosdi.geoplatform.connector.wfs.response.AttributeDTO;
 import org.geosdi.geoplatform.connector.wfs.response.QueryRestrictionDTO;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
-import org.geosdi.geoplatform.gui.client.config.FeatureInjector;
 import org.geosdi.geoplatform.gui.client.model.wfs.AttributeDetail;
 import org.geosdi.geoplatform.gui.client.model.wfs.OperatorType;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.DeleteAttributeConditionEvent;
@@ -65,6 +59,8 @@ import org.geosdi.geoplatform.gui.client.widget.wfs.builder.AttributeCustomField
 import org.geosdi.geoplatform.gui.client.widget.wfs.time.TimeInputWidget;
 import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextField;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
+
+import java.util.List;
 
 /**
  *
@@ -101,7 +97,6 @@ public class FeatureAttributeConditionField extends MultiField implements
         final String spacer = "<span class='spacer'>&nbsp;</span>";
         Button deleteButton = this.createDeleteButton();
         super.add(new AdapterField(deleteButton));
-//        super.add(new LabelField(spacer));
         super.add(this.createNameAttributeCombo());
         super.add(new LabelField(spacer));
         super.add(this.createConditionsCombo());
@@ -162,7 +157,6 @@ public class FeatureAttributeConditionField extends MultiField implements
         nameAttributeCombo.setStore(nameAttributeStore);
         nameAttributeCombo.setDisplayField(
                 AttributeDetail.AttributeDetailKeyValue.NAME.name());
-//        nameAttributeCombo.setSimpleValue("XXX");
 
         return nameAttributeCombo;
     }
@@ -177,7 +171,7 @@ public class FeatureAttributeConditionField extends MultiField implements
         for (OperatorType operator : OperatorType.values()) {
             operatorCombo.add(operator.toString());
         }
-//        conditionsCombo.setSimpleValue(OperatorType.EQUAL);
+
         operatorCombo.disable();
         return operatorCombo;
     }
@@ -192,8 +186,6 @@ public class FeatureAttributeConditionField extends MultiField implements
 
             @Override
             public void componentSelected(ButtonEvent ce) {
-                FeatureInjector injector = FeatureInjector.MainInjector.getInstance();
-                GPEventBus bus = injector.getEventBus();
                 bus.fireEvent(new DeleteAttributeConditionEvent(
                         FeatureAttributeConditionField.this));
             }

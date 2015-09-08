@@ -306,11 +306,18 @@
                             <property name="order" value="10" />
                         </bean>
                         <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeMenuClientTool">
+                            <property name="id" value="CLASSIFY_LAYER_STYLE" />
+                            <property name="textKey" value="classifyLayerStyleText" />
+                            <property name="enabled" value="true" />
+                            <property name="secure" value="false" />
+                            <property name="order" value="11" />
+                        </bean>
+                        <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeMenuClientTool">
                             <property name="id" value="LAYER_PROPERTIES" />
                             <property name="textKey" value="treeMenuLayerPropertiesText" />
                             <property name="enabled" value="true" />
                             <property name="secure" value="false" />
-                            <property name="order" value="11" />
+                            <property name="order" value="12" />
                         </bean>
                     </list>
                 </entry>

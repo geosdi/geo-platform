@@ -35,12 +35,13 @@
  */
 package org.geosdi.geoplatform.gui.client.config.provider;
 
-import javax.inject.Inject;
-import javax.inject.Provider;
 import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetConstants;
 import org.gwtopenmaps.openlayers.client.Style;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
 import org.gwtopenmaps.openlayers.client.layer.VectorOptions;
+
+import javax.inject.Inject;
+import javax.inject.Provider;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

@@ -35,11 +35,12 @@
  */
 package org.geosdi.geoplatform.jaxb.pool.factory;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
 import org.apache.commons.pool2.BasePooledObjectFactory;
 import org.apache.commons.pool2.PooledObject;
 import org.apache.commons.pool2.impl.DefaultPooledObject;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
 
 /**
  *

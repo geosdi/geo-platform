@@ -39,7 +39,7 @@ import org.geosdi.geoplatform.support.xmpp.configuration.auth.XMPPAuth;
 import org.geosdi.geoplatform.support.xmpp.spring.annotation.GPXMPPConnection;
 import org.geosdi.geoplatform.support.xmpp.spring.connection.manager.GPXMPPConnectionManager;
 import org.geosdi.geoplatform.support.xmpp.spring.connection.manager.XMPPConnectionManager;
-import org.jivesoftware.smack.ConnectionConfiguration;
+import org.jivesoftware.smack.tcp.XMPPTCPConnectionConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -58,7 +58,7 @@ class GPXMPPConnectionManagerConfig {
             initMethod = "initXMPPConnectionManager")
     @Autowired
     public XMPPConnectionManager xmppConnectionManager(@Qualifier(
-            value = "xmppConnectionConfiguration") ConnectionConfiguration xmppConnectionConfiguration, @Qualifier(
+            value = "xmppConnectionConfiguration") XMPPTCPConnectionConfiguration xmppConnectionConfiguration, @Qualifier(
                     value = "gpSpringXMPPAuth") XMPPAuth gpSpringXMPPAuth) {
 
         return new GPXMPPConnectionManager(xmppConnectionConfiguration, gpSpringXMPPAuth);

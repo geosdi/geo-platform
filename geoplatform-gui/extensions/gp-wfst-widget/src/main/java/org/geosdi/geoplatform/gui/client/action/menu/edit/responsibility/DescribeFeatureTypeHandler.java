@@ -47,7 +47,7 @@ import org.geosdi.geoplatform.gui.model.GPLayerBean;
  */
 public class DescribeFeatureTypeHandler extends LayerTypeHandler {
 
-    private GPDescribeFeatureDispatcher featureDispatcher;
+    private final GPDescribeFeatureDispatcher featureDispatcher;
 
     public DescribeFeatureTypeHandler(
             GPDescribeFeatureDispatcher theFeatureDispatcher) {

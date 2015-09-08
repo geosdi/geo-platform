@@ -45,11 +45,11 @@ import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 public class GeoPlatformJAXBConfig extends GenericObjectPoolConfig {
 
     {
-        super.setMaxIdle(6);
-        super.setMaxTotal(40);
-        super.setMinIdle(1);
+        super.setMaxIdle(15);
+        super.setMaxTotal(100);
+        super.setMinIdle(6);
         super.setTimeBetweenEvictionRunsMillis(1000L * 60L * 10L);
-        super.setNumTestsPerEvictionRun(10);
+        super.setNumTestsPerEvictionRun(50);
         super.setMinEvictableIdleTimeMillis(1000L * 60L * 5L);
     }
 

@@ -42,7 +42,18 @@
                 <version>${jackson-version}</version>
             </dependency>
 
-        
+            <dependency>
+                <groupId>com.fasterxml.jackson.datatype</groupId>
+                <artifactId>jackson-datatype-joda</artifactId>
+                <version>${jackson-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.dataformat</groupId>
+                <artifactId>jackson-dataformat-xml</artifactId>
+                <version>${jackson-version}</version>
+            </dependency>
+            
             <!-- JAX-RS provider -->
             <dependency>
                 <groupId>com.fasterxml.jackson.jaxrs</groupId>
@@ -60,7 +71,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <jackson-version>2.5.3</jackson-version>
+        <jackson-version>2.6.1</jackson-version>
     </properties>
     
 </project>

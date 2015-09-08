@@ -19,12 +19,6 @@
     <dependencies>
         
         <dependency>
-            <groupId>org.bouncycastle</groupId>
-            <artifactId>bcprov-jdk16</artifactId>
-            <version>1.46</version>
-        </dependency>
-        
-        <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-ws-csw-connector</artifactId>
             <version>${project.version}</version>

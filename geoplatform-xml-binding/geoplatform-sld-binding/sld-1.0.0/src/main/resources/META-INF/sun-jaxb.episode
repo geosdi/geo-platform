@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<bindings version="2.1" xmlns="http://java.sun.com/xml/ns/jaxb">
+  <!--
+
+Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
+Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
+Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
+Generato il: 2015.08.25 alle 11:12:35 PM CEST 
+
+  -->
+  <bindings scd="x-schema::tns" xmlns:tns="http://www.opengis.net/sld">
+    <schemaBindings map="false">
+      <package name="org.geosdi.geoplatform.xml.sld.v100"/>
+    </schemaBindings>
+    <bindings scd="tns:Displacement">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.DisplacementElement"/>
+    </bindings>
+    <bindings scd="~tns:ParameterValueType">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.ParameterValueType"/>
+    </bindings>
+    <bindings scd="tns:ChannelSelection">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.ChannelSelectionElement"/>
+    </bindings>
+    <bindings scd="~tns:SelectedChannelType">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.SelectedChannelType"/>
+    </bindings>
+    <bindings scd="tns:NamedStyle">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.NamedStyleElement"/>
+    </bindings>
+    <bindings scd="tns:ExternalGraphic">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.ExternalGraphicElement"/>
+    </bindings>
+    <bindings scd="tns:OnlineResource">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.OnlineResourceElement"/>
+    </bindings>
+    <bindings scd="~tns:SymbolizerType">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.SymbolizerType"/>
+    </bindings>
+    <bindings scd="tns:LinePlacement">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.LinePlacementElement"/>
+    </bindings>
+    <bindings scd="tns:RANDOM">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.RANDOMElement"/>
+    </bindings>
+    <bindings scd="tns:Geometry">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.GeometryElement"/>
+    </bindings>
+    <bindings scd="tns:LegendGraphic">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.LegendGraphicElement"/>
+    </bindings>
+    <bindings scd="tns:Graphic">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.GraphicElement"/>
+    </bindings>
+    <bindings scd="tns:Mark">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.MarkElement"/>
+    </bindings>
+    <bindings scd="tns:Fill">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.FillElement"/>
+    </bindings>
+    <bindings scd="tns:GraphicFill">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.GraphicFillElement"/>
+    </bindings>
+    <bindings scd="tns:CssParameter">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.CssParameterElement"/>
+    </bindings>
+    <bindings scd="tns:Stroke">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.StrokeElement"/>
+    </bindings>
+    <bindings scd="tns:GraphicStroke">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.GraphicStrokeElement"/>
+    </bindings>
+    <bindings scd="tns:ImageOutline">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.ImageOutlineElement"/>
+    </bindings>
+    <bindings scd="tns:NamedLayer">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.NamedLayerElement"/>
+    </bindings>
+    <bindings scd="tns:LayerFeatureConstraints">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.LayerFeatureConstraintsElement"/>
+    </bindings>
+    <bindings scd="tns:FeatureTypeConstraint">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.FeatureTypeConstraintElement"/>
+    </bindings>
+    <bindings scd="tns:Extent">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.ExtentElement"/>
+    </bindings>
+    <bindings scd="tns:UserStyle">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.UserStyleElement"/>
+    </bindings>
+    <bindings scd="tns:FeatureTypeStyle">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.FeatureTypeStyleElement"/>
+    </bindings>
+    <bindings scd="tns:Rule">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.RuleElement"/>
+    </bindings>
+    <bindings scd="tns:ElseFilter">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.ElseFilterElement"/>
+    </bindings>
+    <bindings scd="tns:LabelPlacement">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.LabelPlacementElement"/>
+    </bindings>
+    <bindings scd="tns:PointPlacement">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.PointPlacementElement"/>
+    </bindings>
+    <bindings scd="tns:AnchorPoint">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.AnchorPointElement"/>
+    </bindings>
+    <bindings scd="tns:ColorMapEntry">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.ColorMapEntryElement"/>
+    </bindings>
+    <bindings scd="tns:RemoteOWS">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.RemoteOWSElement"/>
+    </bindings>
+    <bindings scd="tns:Normalize">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.NormalizeElement"/>
+    </bindings>
+    <bindings scd="tns:ShadedRelief">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.ShadedReliefElement"/>
+    </bindings>
+    <bindings scd="tns:EARLIEST_ON_TOP">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.EARLIESTONTOPElement"/>
+    </bindings>
+    <bindings scd="tns:Font">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.FontElement"/>
+    </bindings>
+    <bindings scd="tns:OverlapBehavior">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.OverlapBehaviorElement"/>
+    </bindings>
+    <bindings scd="tns:LATEST_ON_TOP">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.LATESTONTOPElement"/>
+    </bindings>
+    <bindings scd="tns:AVERAGE">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.AVERAGEElement"/>
+    </bindings>
+    <bindings scd="tns:StyledLayerDescriptor">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.StyledLayerDescriptorElement"/>
+    </bindings>
+    <bindings scd="tns:UserLayer">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.UserLayerElement"/>
+    </bindings>
+    <bindings scd="tns:Histogram">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.HistogramElement"/>
+    </bindings>
+    <bindings scd="tns:ContrastEnhancement">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.ContrastEnhancementElement"/>
+    </bindings>
+    <bindings scd="tns:ColorMap">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.ColorMapElement"/>
+    </bindings>
+    <bindings scd="tns:Halo">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.HaloElement"/>
+    </bindings>
+  </bindings>
+</bindings>
+

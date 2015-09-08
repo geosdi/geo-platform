@@ -38,18 +38,19 @@ package org.geosdi.geoplatform.gui.client.widget.wfs.map.dispatcher.executor;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 import com.extjs.gxt.ui.client.widget.Dialog;
-import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.command.wfst.feature.EraseFeatureRequest;
 import org.geosdi.geoplatform.gui.client.command.wfst.feature.EraseFeatureResponse;
 import org.geosdi.geoplatform.gui.client.model.binder.IFeatureIdBinder;
-import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureInstancesEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureStatusBarEvent;
+import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.RemoveFeatureDetailEvent;
 import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar;
 import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.command.api.GPClientCommandExecutor;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
+
+import javax.inject.Inject;
 
 /**
  *
@@ -65,7 +66,7 @@ public class WFSEraseFeatureExecutor extends WFSDispatcherExecutor implements
     private IFeatureIdBinder fidBinder;
     @Inject
     private Vector vector;
-    private final FeatureInstancesEvent resetGridEvent = new FeatureInstancesEvent();
+    private RemoveFeatureDetailEvent removeFeatureDetailEvent;
 
     @Inject
     public WFSEraseFeatureExecutor() {
@@ -162,7 +163,7 @@ public class WFSEraseFeatureExecutor extends WFSDispatcherExecutor implements
         if (result) {
             vector.removeFeature(feature);
             super.fireEvents();
-            bus.fireEvent(resetGridEvent);
+            bus.fireEvent(new RemoveFeatureDetailEvent(feature.getFID()));
         } else {
             bus.fireEvent(statusNotOk);
         }

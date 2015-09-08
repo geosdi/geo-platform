@@ -66,7 +66,6 @@ import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.exception.ServerInternalFault;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
-import org.geosdi.geoplatform.gui.responce.URIDTO;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.FullRecordDTO;
@@ -74,6 +73,7 @@ import org.geosdi.geoplatform.responce.ServerCSWDTO;
 import org.geosdi.geoplatform.responce.SummaryRecordDTO;
 import org.geosdi.geoplatform.services.BindingUtility;
 import org.geosdi.geoplatform.services.GeoPlatformCSWService;
+import org.geosdi.geoplatform.services.delegate.dc.DublinCoreAnalyzer;
 import org.geosdi.geoplatform.services.development.CSWEntityCorrectness;
 import org.geosdi.geoplatform.xml.csw.ConstraintLanguage;
 import org.geosdi.geoplatform.xml.csw.ConstraintLanguageVersion;
@@ -86,9 +86,6 @@ import org.geosdi.geoplatform.xml.csw.v202.GetRecordsResponseType;
 import org.geosdi.geoplatform.xml.csw.v202.RecordType;
 import org.geosdi.geoplatform.xml.csw.v202.ResultType;
 import org.geosdi.geoplatform.xml.csw.v202.SummaryRecordType;
-import org.geosdi.geoplatform.xml.csw.v202.dc.elements.SimpleLiteral;
-import org.geosdi.geoplatform.xml.csw.v202.dc.terms.URI;
-import org.geosdi.geoplatform.xml.ows.v100.BoundingBoxType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -118,6 +115,7 @@ class CSWServiceDelegate implements CSWDelegate {
     private SnipcCatalogBeanProvider snipcProvider;
     @Autowired
     private CSWProxyConnectionConfiguration cswProxyConfiguration;
+    private DublinCoreAnalyzer gpDublinCoreAnalyzer = new DublinCoreAnalyzer.GPDublinCoreAnalyzer();
 
     /**
      * @see
@@ -512,69 +510,10 @@ class CSWServiceDelegate implements CSWDelegate {
 
     private FullRecordDTO convertFullRecords(RecordType record,
             GeoPlatformServer server) {
-
         FullRecordDTO dto = new FullRecordDTO();
         dto.setIdCatalog(server.getId());
         dto.setCatalogURL(server.getServerUrl());
-        logger.debug("\n\n############DCE_ELEMENTS_SIZE : {}\n\n",
-                record.getDCElement().size());
-
-        for (JAXBElement<? extends SimpleLiteral> element : record.getDCElement()) {
-            String localPartElement = element.getName().getLocalPart();
-            List<String> contentElement = element.getValue().getContent();
-
-            logger.trace("\n\n###################LOCAL_PART_NAME : {} "
-                    + "- CONTENT_ELEMENT : {}\n\n", localPartElement,
-                    contentElement);
-
-            if ("identifier".equals(localPartElement)) {
-                dto.setIdentifier(
-                        BindingUtility.convertStringListToString(
-                                contentElement));
-            }
-
-            if ("title".equals(localPartElement)) {
-                dto.setTitle(
-                        BindingUtility.convertStringListToString(
-                                contentElement));
-            }
-
-            if ("type".equals(localPartElement)) {
-                dto.setType(
-                        BindingUtility.convertStringListToString(
-                                contentElement));
-            }
-
-            if ("abstract".equals(localPartElement)) {
-                dto.setAbstractText(
-                        BindingUtility.convertStringListToString(
-                                contentElement));
-            }
-
-            if ("subject".equals(localPartElement)) {
-                dto.addSubject(
-                        BindingUtility.convertStringListToString(
-                                contentElement));
-            }
-
-            if ("URI".equals(localPartElement)) {
-                URI uri = (URI) element.getValue();
-                String protocol = uri.getProtocol();
-
-                URIDTO uriDTO = new URIDTO();
-                uriDTO.setProtocol(protocol);
-                uriDTO.setName(uri.getName());
-                uriDTO.setDescription(uri.getDescription());
-                uriDTO.setServiceURL(uri.getServiceURL());
-                dto.addUri(uriDTO);
-            }
-        }
-
-        if (!record.getBoundingBox().isEmpty()) {
-            BoundingBoxType bBoxType = record.getBoundingBox().get(0).getValue();
-            dto.setBBox(BindingUtility.convertBBoxTypeToBBox(bBoxType));
-            dto.setCrs(BindingUtility.convertEncodedCRS(bBoxType.getCrs()));
-        }
+        this.gpDublinCoreAnalyzer.analyzeRecord(record, dto);
 
         return dto;
     }

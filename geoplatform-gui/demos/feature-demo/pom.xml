@@ -135,12 +135,6 @@
                     <extraJvmArgs>-XX:MaxPermSize=766M -Xmx1024M -Xss1024k -Dgwt.nowarn.legacy.tools</extraJvmArgs>
                     
                     <module>org.geosdi.geoplatform.demos.feature.FeatureDemoUI</module>
-                    <!--                    
-                    <inplace>true</inplace>
-                    <gwtVersion>${gwtVersion}</gwtVersion>
-                    <warSourceDirectory>war</warSourceDirectory>
-                    <disableCastChecking>true</disableCastChecking>
-                    <disableClassMetadata>true</disableClassMetadata>-->
                 </configuration>
             </plugin>
 

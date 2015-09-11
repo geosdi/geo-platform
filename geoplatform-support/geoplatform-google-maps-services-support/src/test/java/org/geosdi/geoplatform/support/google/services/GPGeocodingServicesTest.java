@@ -65,36 +65,36 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:applicationContext-Test.xml"})
 public class GPGeocodingServicesTest extends GPBaseConfigTest {
-
+    
     @GeoPlatformLog
     static Logger logger;
     //
     @Autowired
     private GPGeocodingService gpGeocodingService;
-
+    
     @Before
     public void setUp() {
         Assert.assertNotNull(gpGeocodingService);
     }
-
+    
     @Test
     public void gpSimpleGeocodingTest() throws Exception {
         GeocodingResult[] results = gpGeocodingService.newRequest().address(
                 "Potenza").await();
         checkResult(results);
     }
-
+    
     @Test
     public void gpGeocodingAsyncTest() throws Exception {
         final List<GeocodingResult[]> resps = new ArrayList<>();
         PendingResult.Callback<GeocodingResult[]> callback
                 = new PendingResult.Callback<GeocodingResult[]>() {
-
+                    
                     @Override
                     public void onResult(GeocodingResult[] result) {
                         resps.add(result);
                     }
-
+                    
                     @Override
                     public void onFailure(Throwable e) {
                         logger.error("###############ERROR : {}", e);
@@ -106,7 +106,7 @@ public class GPGeocodingServicesTest extends GPBaseConfigTest {
         assertNotNull(resps.get(0));
         checkResult(resps.get(0));
     }
-
+    
     @Test
     public void gpReverseGeocodingTest() throws Exception {
         GeocodingResult[] results = gpGeocodingService.newRequest()
@@ -114,7 +114,7 @@ public class GPGeocodingServicesTest extends GPBaseConfigTest {
         assertTrue("Address contain 'Potenza'",
                 results[0].formattedAddress.contains("Potenza"));
     }
-
+    
     @Test
     public void gpGeocodingWithRegionTest() throws Exception {
         GeocodingResult[] results = gpGeocodingService.newRequest().address(
@@ -123,16 +123,16 @@ public class GPGeocodingServicesTest extends GPBaseConfigTest {
         assertEquals("85050 Marsicovetere PZ, Italy",
                 results[0].formattedAddress);
     }
-
+    
     @Test
     public void gpGeocodingTheGoogleplexTest() throws Exception {
         GeocodingResult[] results = gpGeocodingService.newRequest()
                 .address("1600 Amphitheatre Parkway, Mountain View, CA").await();
         assertNotNull(results);
-        assertEquals("1600 Amphitheatre Parkway, Mountain View, CA 94043, USA",
+        assertEquals("1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA",
                 results[0].formattedAddress);
     }
-
+    
     @Test
     public void gpGeocodingWithComponentFilterTest() throws Exception {
         GeocodingResult[] results = gpGeocodingService.newRequest()
@@ -143,7 +143,7 @@ public class GPGeocodingServicesTest extends GPBaseConfigTest {
         assertEquals("85050 Marsicovetere PZ, Italy",
                 results[0].formattedAddress);
     }
-
+    
     @Test
     public void gpGeocodingBoundsTest() throws Exception {
         GeocodingResult[] results = gpGeocodingService.newRequest().address(
@@ -153,7 +153,7 @@ public class GPGeocodingServicesTest extends GPBaseConfigTest {
         Assert.assertEquals("85050 Marsicovetere PZ, Italy",
                 results[0].formattedAddress);
     }
-
+    
     private void checkResult(GeocodingResult[] results) {
         Assert.assertNotNull(results);
         Assert.assertNotNull(results[0].geometry);

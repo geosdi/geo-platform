@@ -35,23 +35,38 @@
  */
 package org.geosdi.geoplatform.connector.wfs;
 
-import java.math.BigInteger;
-import java.util.Arrays;
 import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequest;
-import static org.geosdi.geoplatform.connector.wfs.WFSTestConfigurator.logger;
+import org.geosdi.geoplatform.connector.wfs.response.QueryDTO;
 import org.geosdi.geoplatform.gui.shared.bean.BBox;
+import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
 import org.geosdi.geoplatform.xml.gml.v311.FeatureArrayPropertyType;
 import org.geosdi.geoplatform.xml.wfs.v110.FeatureCollectionType;
 import org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
+
+import java.io.File;
+import java.math.BigInteger;
+import java.util.Arrays;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class WFSGetFeatureTest extends WFSTestConfigurator {
+
+    private static QueryDTO queryDTOAnd;
+
+    @BeforeClass
+    public static void beforeClass() throws Exception {
+        String queryDTOAndStringFileName = new File(".").getCanonicalPath() + File.separator +
+                "src/test/resources/unmarshall/query/wfsQueryAnd.xml";
+        File queryDTOAndFile = new File(queryDTOAndStringFileName);
+        queryDTOAnd = GPJAXBContextBuilder.newInstance().unmarshal(queryDTOAndFile, QueryDTO.class);
+        logger.info("####################QUERY_DTO_AND : {}\n\n", queryDTOAnd);
+    }
 
     @Test
     public void statesHits() throws Exception {
@@ -67,6 +82,21 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
     }
 
     @Test
+    public void statesHitsQueryRestrictions() throws Exception {
+        WFSGetFeatureRequest<FeatureCollectionType> request
+                = serverConnector.createGetFeatureRequest();
+
+        request.setResultType(ResultTypeType.HITS.value());
+        request.setTypeName(statesName);
+        request.setQueryDTO(queryDTOAnd);
+
+        logger.info("######################\n{}\n", request.showRequestAsString());
+
+        FeatureCollectionType response = request.getResponse();
+        Assert.assertEquals(7, response.getNumberOfFeatures().intValue());
+    }
+
+    @Test
     public void secureStatesHits() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request
                 = secureServerConnector.createGetFeatureRequest();
@@ -75,8 +105,23 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
         request.setTypeName(statesName);
 
         FeatureCollectionType response = request.getResponse();
-        logger.info("@@@@@@@@@@@@@@@ SECURE STATES Features Found : "
-                + "@@@@@@@@@@@@@@@@@ {}\n\n", response.getNumberOfFeatures());
+        logger.info("@@@@@@@@@@@@@@@ SECURE STATES Features Found : " + "@@@@@@@@@@@@@@@@@ {}\n\n",
+                response.getNumberOfFeatures());
+    }
+
+    @Test
+    public void secureStatesHitsQueryRestrictions() throws Exception {
+        WFSGetFeatureRequest<FeatureCollectionType> request
+                = secureServerConnector.createGetFeatureRequest();
+
+        request.setResultType(ResultTypeType.HITS.value());
+        request.setTypeName(statesName);
+        request.setQueryDTO(queryDTOAnd);
+
+        logger.info("######################\n{}\n", request.showRequestAsString());
+
+        FeatureCollectionType response = request.getResponse();
+        Assert.assertEquals(8, response.getNumberOfFeatures().intValue());
     }
 
     @Test

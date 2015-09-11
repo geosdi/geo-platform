@@ -39,16 +39,17 @@ import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.Validator;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetMessages;
-import org.geosdi.geoplatform.gui.client.model.wfs.OperatorType;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureStatusBarEvent;
 import org.geosdi.geoplatform.gui.client.widget.validator.TypeValidator;
 import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar.FeatureStatusBarType;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
+import org.geosdi.geoplatform.gui.shared.wfs.OperatorType;
+
+import javax.inject.Inject;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group

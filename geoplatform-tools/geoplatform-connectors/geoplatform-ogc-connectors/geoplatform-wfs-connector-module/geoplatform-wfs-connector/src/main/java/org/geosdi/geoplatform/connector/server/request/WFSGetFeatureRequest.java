@@ -35,10 +35,12 @@
  */
 package org.geosdi.geoplatform.connector.server.request;
 
+import org.geosdi.geoplatform.connector.wfs.response.QueryDTO;
+import org.geosdi.geoplatform.gui.shared.bean.BBox;
+
+import javax.xml.namespace.QName;
 import java.math.BigInteger;
 import java.util.List;
-import javax.xml.namespace.QName;
-import org.geosdi.geoplatform.gui.shared.bean.BBox;
 
 /**
  *
@@ -156,4 +158,17 @@ public interface WFSGetFeatureRequest<T> extends GPConnectorRequest<T> {
      * @param value
      */
     void setMaxFeatures(BigInteger value);
+
+    /**
+     * <p>{@link QueryDTO} class contains all Restrictions for Attributes</p>
+     *
+     * @param queryDTO
+     */
+    void setQueryDTO(QueryDTO queryDTO);
+
+    /**
+     *
+     * @return {@link QueryDTO}
+     */
+    QueryDTO getQueryDTO();
 }

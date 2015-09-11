@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -14,7 +15,7 @@
     <packaging>war</packaging>
 
     <name>Geo-Platform :: == Feature Widget Demo</name>
-    
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -23,18 +24,18 @@
                 <version>${project.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency>    
-        </dependencies>    
-    </dependencyManagement>    
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
-        
+
         <dependency>
             <groupId>com.google.gwt</groupId>
             <artifactId>gwt-user</artifactId>
             <scope>provided</scope>
         </dependency>
-        
+
         <!-- GXT -->
         <dependency>
             <groupId>com.extjs</groupId>
@@ -62,18 +63,18 @@
             <artifactId>geoplatform-configuration</artifactId>
             <classifier>sources</classifier>
         </dependency>
-        
+
         <!-- GEOPLATFORM_RESOURCES -->
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-resources</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>gp-wfst-widget</artifactId>
         </dependency>
-       
+
         <!-- logging dependencies, delegate all to slf4j and use logback -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -90,10 +91,10 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-        </dependency>        
+        </dependency>
 
     </dependencies>
-    
+
     <build>
         <outputDirectory>war/WEB-INF/classes</outputDirectory>
         <plugins>
@@ -162,10 +163,10 @@
                         <phase>clean</phase>
                         <configuration>
                             <tasks>
-                                <delete dir="war/feature_demo" />
-                                <delete dir="war/WEB-INF/deploy" />
-                                <delete dir="war/WEB-INF/lib" />
-                                <delete dir="gwt-unitCache" />
+                                <delete dir="war/feature_demo"/>
+                                <delete dir="war/WEB-INF/deploy"/>
+                                <delete dir="war/WEB-INF/lib"/>
+                                <delete dir="gwt-unitCache"/>
                             </tasks>
                         </configuration>
                         <goals>
@@ -174,7 +175,7 @@
                     </execution>
                 </executions>
             </plugin>
-            
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>
@@ -185,7 +186,7 @@
 
         </plugins>
         <finalName>feature_demo</finalName>
-    </build>    
-    
+    </build>
+
 </project>
 

@@ -10,12 +10,20 @@
     </appender>
 
     <root>
-        <level value="info" />
-        <appender-ref ref="STDOUT" />
+        <level value="info"/>
+        <appender-ref ref="STDOUT"/>
     </root>
 
     <logger name="org.geosdi.geoplatform.connector.wfs.jaxb.comparison.WFSContextComparisonTest"
-            level="debug" />
+            level="debug"/>
+    <logger name="org.geosdi.geoplatform.connector.wfs.jaxb.unmarshall" level="debug"/>
+    <logger name="org.geosdi.geoplatform.connector.server.request.v110.query.factory.QueryRestrictionFactory"
+            level="debug"/>
+
+    <logger name="org.geosdi.geoplatform.connector.server.request.v110.query.responsibility.ILogicOperatorHandler"
+            level="trace"/>
+    <logger name="org.geosdi.geoplatform.connector.server.request.v110.query.responsibility.AndOperatorHandler"
+            level="debug"/>
 
 
 </configuration>

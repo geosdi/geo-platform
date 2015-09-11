@@ -39,7 +39,7 @@
             <groupId>com.google.gwt</groupId>
             <artifactId>gwt-dev</artifactId>
             <version>${gwtVersion}</version>
-            <scope>runtime</scope>
+            <scope>provided</scope>
         </dependency>
         
         <!-- GXT -->

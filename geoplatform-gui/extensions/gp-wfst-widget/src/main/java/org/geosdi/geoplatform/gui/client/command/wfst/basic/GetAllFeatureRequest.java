@@ -43,7 +43,7 @@ import org.geosdi.geoplatform.gui.client.command.wfst.WFSTRequest;
  */
 public class GetAllFeatureRequest extends WFSTRequest {
 
-    private static final long serialVersionUID = -6654716353803557422L;
+    private static final long serialVersionUID = -9218670903838832441L;
     //
     private int maxFeatures;
 

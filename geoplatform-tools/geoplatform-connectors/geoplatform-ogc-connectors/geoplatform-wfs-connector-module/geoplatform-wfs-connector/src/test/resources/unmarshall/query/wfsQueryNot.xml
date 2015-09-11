@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<QueryDTO>
+    <matchOperator>NONE</matchOperator>
+    <queryRestrictionList>
+        <queryRestriction>
+            <attribute>
+                <maxOccurs>1</maxOccurs>
+                <minOccurs>0</minOccurs>
+                <name>WORKERS</name>
+                <nillable>true</nillable>
+                <type>double</type>
+                <value></value>
+            </attribute>
+            <operator>GREATER_OR_EQUAL</operator>
+            <restriction>0.25</restriction>
+        </queryRestriction>
+        <queryRestriction>
+            <attribute>
+                <maxOccurs>1</maxOccurs>
+                <minOccurs>0</minOccurs>
+                <name>MANUAL</name>
+                <nillable>true</nillable>
+                <type>double</type>
+                <value></value>
+            </attribute>
+            <operator>GREATER_OR_EQUAL</operator>
+            <restriction>0.25</restriction>
+        </queryRestriction>
+    </queryRestrictionList>
+</QueryDTO>

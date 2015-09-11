@@ -4,6 +4,7 @@ import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import com.extjs.gxt.ui.client.widget.form.SimpleComboBox;
 import com.extjs.gxt.ui.client.widget.form.SimpleComboValue;
 import com.extjs.gxt.ui.client.widget.tips.ToolTipConfig;
+import org.geosdi.geoplatform.gui.shared.wfs.LogicOperatorType;
 
 import javax.inject.Provider;
 
@@ -27,16 +28,11 @@ public class MatchComboFieldProvider implements Provider<SimpleComboBox<String>>
         matchComboField.setEditable(Boolean.FALSE);
         matchComboField.setTypeAhead(Boolean.TRUE);
         matchComboField.setTriggerAction(ComboBox.TriggerAction.ALL);
-        matchComboField.add(MatchType.ALL.name());
-        matchComboField.add(MatchType.ANY.name());
-        matchComboField.add(MatchType.NONE.name());
-        matchComboField.setSimpleValue(MatchType.ALL.name());
+        matchComboField.add(LogicOperatorType.ALL.name());
+        matchComboField.add(LogicOperatorType.ANY.name());
+        matchComboField.add(LogicOperatorType.NONE.name());
+        matchComboField.setSimpleValue(LogicOperatorType.ALL.name());
 
         return matchComboField;
-    }
-
-    private enum MatchType {
-
-        ALL, ANY, NONE;
     }
 }

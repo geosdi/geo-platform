@@ -50,7 +50,6 @@ import org.geosdi.geoplatform.connector.wfs.response.AttributeDTO;
 import org.geosdi.geoplatform.connector.wfs.response.QueryRestrictionDTO;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.model.wfs.AttributeDetail;
-import org.geosdi.geoplatform.gui.client.model.wfs.OperatorType;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.DeleteAttributeConditionEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.IDateSelectedHandler;
 import org.geosdi.geoplatform.gui.client.util.FeatureConverter;
@@ -59,6 +58,7 @@ import org.geosdi.geoplatform.gui.client.widget.wfs.builder.AttributeCustomField
 import org.geosdi.geoplatform.gui.client.widget.wfs.time.TimeInputWidget;
 import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextField;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
+import org.geosdi.geoplatform.gui.shared.wfs.OperatorType;
 
 import java.util.List;
 
@@ -66,8 +66,7 @@ import java.util.List;
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class FeatureAttributeConditionField extends MultiField implements
-        IDateSelectedHandler {
+public class FeatureAttributeConditionField extends MultiField implements IFeatureAttributeConditionField {
 
     private List<AttributeDetail> attributes;
     private ComboBox<AttributeDetail> nameAttributeCombo;
@@ -77,15 +76,27 @@ public class FeatureAttributeConditionField extends MultiField implements
     private TimeInputWidget timeInputWidget;
     private HandlerRegistration clickHandlerRegistration;
 
-    public FeatureAttributeConditionField(GPEventBus bus,
-            List<AttributeDetail> attributes) {
+    public FeatureAttributeConditionField(GPEventBus bus, List<AttributeDetail> attributes) {
         assert (attributes != null) : "attributes must not be null.";
         this.attributes = attributes;
         this.bus = bus;
         this.timeInputWidget = new TimeInputWidget(bus);
-        this.bus.addHandlerToSource(IDateSelectedHandler.TYPE, timeInputWidget,
-                this);
+        this.bus.addHandlerToSource(IDateSelectedHandler.TYPE, timeInputWidget, this);
         this.createComponents();
+    }
+
+    @Override
+    public QueryRestrictionDTO getQueryRestriction() {
+        QueryRestrictionDTO queryRestriction = null;
+        AttributeDetail attributeDetail = this.nameAttributeCombo.getValue();
+        String operator = this.operatorCombo.getValue().getValue();
+        String restriction = this.conditionAttributeField.getValue();
+        if ((attributeDetail != null) && (operator != null) && (this.conditionAttributeField.isValid()) &&
+                (restriction != null)) {
+            AttributeDTO attributeDTO = FeatureConverter.convert(attributeDetail);
+            queryRestriction = new QueryRestrictionDTO(attributeDTO, OperatorType.fromSymbol(operator), restriction);
+        }
+        return queryRestriction;
     }
 
     @Override
@@ -111,52 +122,46 @@ public class FeatureAttributeConditionField extends MultiField implements
         nameAttributeCombo.setTriggerAction(ComboBox.TriggerAction.ALL);
         nameAttributeCombo.setWidth(110);
 
-        this.nameAttributeCombo.addSelectionChangedListener(
-                new SelectionChangedListener<AttributeDetail>() {
+        this.nameAttributeCombo.addSelectionChangedListener(new SelectionChangedListener<AttributeDetail>() {
 
-                    @Override
-                    public void selectionChanged(
-                            SelectionChangedEvent<AttributeDetail> se) {
-                                if (clickHandlerRegistration != null) {
-                                    clickHandlerRegistration.removeHandler();
-                                }
-                                AttributeDetail attributeDetail = se.getSelectedItem();
-                                if (attributeDetail == null) {
-                                    operatorCombo.disable();
-                                } else {
-                                    AttributeCustomFields customFields
-                                    = AttributeCustomFieldsMap.getAttributeCustomFields(
-                                            attributeDetail.getType());
-                                    operatorCombo.clear();
-                                    operatorCombo.removeAll();
-                                    for (OperatorType operatorType : customFields.getOperatorList()) {
-                                        operatorCombo.add(operatorType.toString());
-                                    }
-                                    operatorCombo.enable();
-                                    conditionAttributeField.clear();
-                                    conditionAttributeField.setValidator(
-                                            customFields.getValidator());
-                                    conditionAttributeField.setToolTip(
-                                            "Datatype: " + attributeDetail.getType());
-                                    if (attributeDetail.getType().equals("dateTime")) {
-                                        conditionAttributeField.addHandler(new ClickHandler() {
+            @Override
+            public void selectionChanged(SelectionChangedEvent<AttributeDetail> se) {
+                if (clickHandlerRegistration != null) {
+                    clickHandlerRegistration.removeHandler();
+                }
+                AttributeDetail attributeDetail = se.getSelectedItem();
+                if (attributeDetail == null) {
+                    operatorCombo.disable();
+                } else {
+                    AttributeCustomFields customFields = AttributeCustomFieldsMap.getAttributeCustomFields(
+                            attributeDetail.getType());
+                    operatorCombo.clear();
+                    operatorCombo.removeAll();
+                    for (OperatorType operatorType : customFields.getOperatorList()) {
+                        operatorCombo.add(operatorType.toString());
+                    }
+                    operatorCombo.enable();
+                    conditionAttributeField.clear();
+                    conditionAttributeField.setValidator(customFields.getValidator());
+                    conditionAttributeField.setToolTip("Datatype: " + attributeDetail.getType());
+                    if (attributeDetail.getType().equals("dateTime")) {
+                        conditionAttributeField.addHandler(new ClickHandler() {
 
-                                            @Override
-                                            public void onClick(ClickEvent event) {
-                                                timeInputWidget.show();
-                                            }
-
-                                        }, ClickEvent.getType());
-                                    }
-                                }
+                            @Override
+                            public void onClick(ClickEvent event) {
+                                timeInputWidget.show();
                             }
 
-                });
+                        }, ClickEvent.getType());
+                    }
+                }
+            }
+
+        });
         ListStore nameAttributeStore = new ListStore<AttributeDetail>();
         nameAttributeStore.add(attributes);
         nameAttributeCombo.setStore(nameAttributeStore);
-        nameAttributeCombo.setDisplayField(
-                AttributeDetail.AttributeDetailKeyValue.NAME.name());
+        nameAttributeCombo.setDisplayField(AttributeDetail.AttributeDetailKeyValue.NAME.name());
 
         return nameAttributeCombo;
     }
@@ -186,8 +191,7 @@ public class FeatureAttributeConditionField extends MultiField implements
 
             @Override
             public void componentSelected(ButtonEvent ce) {
-                bus.fireEvent(new DeleteAttributeConditionEvent(
-                        FeatureAttributeConditionField.this));
+                bus.fireEvent(new DeleteAttributeConditionEvent(FeatureAttributeConditionField.this));
             }
 
         });
@@ -197,19 +201,4 @@ public class FeatureAttributeConditionField extends MultiField implements
 
         return button;
     }
-
-    public QueryRestrictionDTO getQueryRestriction() {
-        QueryRestrictionDTO queryRestriction = null;
-        AttributeDetail attributeDetail = this.nameAttributeCombo.getValue();
-        String operator = this.operatorCombo.getValue().getValue();
-        String restriction = this.conditionAttributeField.getValue();
-        if (attributeDetail != null && operator != null && this.conditionAttributeField.isValid()
-                && restriction != null) {
-            AttributeDTO attributeDTO = FeatureConverter.convert(attributeDetail);
-            queryRestriction = new QueryRestrictionDTO(attributeDTO, operator,
-                    restriction);
-        }
-        return queryRestriction;
-    }
-
 }

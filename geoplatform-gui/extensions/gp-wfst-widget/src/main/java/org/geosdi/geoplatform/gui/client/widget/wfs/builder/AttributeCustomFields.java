@@ -36,8 +36,9 @@
 package org.geosdi.geoplatform.gui.client.widget.wfs.builder;
 
 import com.extjs.gxt.ui.client.widget.form.Validator;
+import org.geosdi.geoplatform.gui.shared.wfs.OperatorType;
+
 import java.util.List;
-import org.geosdi.geoplatform.gui.client.model.wfs.OperatorType;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group

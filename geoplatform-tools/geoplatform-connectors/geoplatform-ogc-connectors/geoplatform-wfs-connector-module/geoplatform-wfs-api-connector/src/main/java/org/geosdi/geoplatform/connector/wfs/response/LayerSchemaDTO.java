@@ -35,16 +35,11 @@
  */
 package org.geosdi.geoplatform.connector.wfs.response;
 
+import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
 
 /**
  * @author Francesco Izzi - CNR IMAA geoSDI Group
@@ -143,12 +138,12 @@ public class LayerSchemaDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "LayerSchemaDTO{"
-                + "typeName=" + typeName
-                + ", targetNamespace=" + targetNamespace
-                + ", scope=" + scope
-                + ", geometry=" + geometry
-                + ", attributes=" + attributes + '}';
+        return "LayerSchemaDTO {"
+                + " typeName = " + typeName
+                + ", targetNamespace = " + targetNamespace
+                + ", scope = " + scope
+                + ", geometry = " + geometry
+                + ", attributes = " + attributes + '}';
     }
 
 }

@@ -1,10 +1,9 @@
 /**
- *
  * geo-platform Rich webgis framework http://geo-platform.org
  * ====================================================================
- *
+ * <p/>
  * Copyright (C) 2008-2015 geoSDI Group (CNR IMAA - Potenza - ITALY).
- *
+ * <p/>
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
@@ -13,13 +12,13 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details. You should have received a copy of the GNU General Public License
  * along with this program. If not, see http://www.gnu.org/licenses/
- *
+ * <p/>
  * ====================================================================
- *
+ * <p/>
  * Linking this library statically or dynamically with other modules is making a
  * combined work based on this library. Thus, the terms and conditions of the
  * GNU General Public License cover the whole combination.
- *
+ * <p/>
  * As a special exception, the copyright holders of this library give you
  * permission to link this library with independent modules to produce an
  * executable, regardless of the license terms of these independent modules, and
@@ -37,7 +36,6 @@ import org.geosdi.geoplatform.connector.GPWFSConnectorStore;
 import org.geosdi.geoplatform.connector.WFSConnectorBuilder;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.security.BasicPreemptiveSecurityConnector;
-import org.junit.Before;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,41 +43,35 @@ import javax.xml.namespace.QName;
 import java.net.URL;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class WFSTestConfigurator {
 
-    protected static final Logger logger = LoggerFactory.getLogger(
-            WFSTestConfigurator.class);
+    protected static final Logger logger = LoggerFactory.getLogger(WFSTestConfigurator.class);
+    //
+    private static final String wfsURL = "http://150.145.141.92/geoserver/wfs";
+    private static final String wfsSecureURL = "http://150.145.141.180/geoserver/wfs";
+
+    static {
+        try {
+            serverConnector = WFSConnectorBuilder.newConnector().withServerUrl(
+                    new URL(wfsURL)).withPooledConnectorConfig(
+                    new GPServerConnector.BasePooledConnectorConfig(150, 80)).build();
+            secureServerConnector = WFSConnectorBuilder.newConnector().withServerUrl(
+                    new URL(wfsSecureURL)).withPooledConnectorConfig(
+                    new GPServerConnector.BasePooledConnectorConfig(150, 80)).withClientSecurity(
+                    new BasicPreemptiveSecurityConnector("admin", "geoservertest")).build();
+        } catch (Exception ex) {
+            logger.error("#######################EXCEPTION : {}", ex.getMessage());
+        }
+    }
+
     //
     protected static final QName statesName = new QName("topp:states");
     protected static final QName sfRoads = new QName("sf:roads");
     //
-    private static final String wfsURL = "http://150.145.141.92/geoserver/wfs";
-    private static final String wfsSecureURL = "http://150.145.141.180/geoserver/wfs";
-    private static boolean flag;
     protected static GPWFSConnectorStore serverConnector;
     protected static GPWFSConnectorStore secureServerConnector;
-
-    @Before
-    public void setUp() throws Exception {
-        if (!flag) {
-            serverConnector = WFSConnectorBuilder.newConnector().withServerUrl(
-                    new URL(wfsURL))
-                    .withPooledConnectorConfig(new GPServerConnector.BasePooledConnectorConfig(150, 80))
-                    .build();
-
-            secureServerConnector = WFSConnectorBuilder
-                    .newConnector()
-                    .withServerUrl(new URL(wfsSecureURL))
-                    .withPooledConnectorConfig(new GPServerConnector.BasePooledConnectorConfig(150, 80))
-                    .withClientSecurity(
-                            new BasicPreemptiveSecurityConnector(
-                                    "admin", "geoservertest")).build();
-            flag = true;
-        }
-    }
 
 }

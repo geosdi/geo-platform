@@ -12,10 +12,12 @@ import org.geosdi.geoplatform.gui.client.command.wfst.basic.QueryFeatureRequest;
 import org.geosdi.geoplatform.gui.client.command.wfst.basic.QueryFeatureResponse;
 import org.geosdi.geoplatform.gui.client.config.annotation.FeatureAttributeConditionFieldList;
 import org.geosdi.geoplatform.gui.client.config.annotation.MatchComboField;
+import org.geosdi.geoplatform.gui.client.model.binder.ILayerSchemaBinder;
 import org.geosdi.geoplatform.gui.client.widget.wfs.FeatureAttributeConditionField;
 import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
 import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.geosdi.geoplatform.gui.shared.util.GPSharedUtils;
 
 import javax.inject.Inject;
@@ -29,13 +31,17 @@ import java.util.List;
 public class QueryFeatureButtonProvider implements Provider<Button> {
 
     private final QueryFeatureRequest queryFeatureRequest = GWT.<QueryFeatureRequest>create(QueryFeatureRequest.class);
+    private final GPEventBus bus;
+    private final ILayerSchemaBinder layerSchemaBinder;
     private final SimpleComboBox<String> matchComboField;
     private final List<FeatureAttributeConditionField> attributeConditions;
 
     @Inject
-    public QueryFeatureButtonProvider(
+    public QueryFeatureButtonProvider(GPEventBus theBus, ILayerSchemaBinder theLayerSchemaBinder,
             @MatchComboField SimpleComboBox matchComboField,
             @FeatureAttributeConditionFieldList List attributeConditions) {
+        this.bus = theBus;
+        this.layerSchemaBinder = theLayerSchemaBinder;
         this.matchComboField = matchComboField;
         this.attributeConditions = attributeConditions;
     }
@@ -46,6 +52,10 @@ public class QueryFeatureButtonProvider implements Provider<Button> {
 
             @Override
             public void componentSelected(ButtonEvent ce) {
+                queryFeatureRequest.setServerUrl(layerSchemaBinder.getLayerSchemaDTO().getScope());
+                queryFeatureRequest.setTypeName(layerSchemaBinder.getLayerSchemaDTO().getTypeName());
+                queryFeatureRequest.setMaxFeatures(100);
+
                 QueryDTO queryDTO = new QueryDTO();
                 queryDTO.setMatchOperator(matchComboField.getValue().getValue());
                 List<QueryRestrictionDTO> queryRestrictions = Lists.<QueryRestrictionDTO>newArrayListWithExpectedSize(
@@ -56,6 +66,7 @@ public class QueryFeatureButtonProvider implements Provider<Button> {
                         queryRestrictions.add(queryRestriction);
                     }
                 }
+                queryDTO.setQueryRestrictionList(queryRestrictions);
                 queryFeatureRequest.setQuery(queryDTO);
 
                 ClientCommandDispatcher.getInstance().execute(new GPClientCommand<QueryFeatureResponse>() {

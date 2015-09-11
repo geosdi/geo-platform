@@ -3,8 +3,9 @@
 <module rename-to="feature_demo">
     <inherits name="org.geosdi.geoplatform.gui.GeoPlatform" />
 	
-    <!-- ADDING GEOPLATFORM-RESOURCES MODULE -->
-    <inherits name="org.geosdi.geoplatform.gui.Resources" />
+        <!-- ADDING GEOPLATFORM-RESOURCES MODULE -->
+    <inherits name='org.geosdi.geoplatform.gui.GWTOLResources' />
+    <inherits name='org.geosdi.geoplatform.gui.GXTResources' />
     
     <inherits name="org.geosdi.geoplatform.gui.WFSWidgetUI" />
 	

@@ -3,13 +3,16 @@
 <module rename-to="catalog_finder_demo">
     <inherits name='org.geosdi.geoplatform.gui.GeoPlatform' />
 	
-    <!-- ADDING GEOPLATFORM-RESOURCES MODULE -->
-    <inherits name='org.geosdi.geoplatform.gui.Resources' />
+        <!-- ADDING GEOPLATFORM-RESOURCES MODULE -->
+    <inherits name='org.geosdi.geoplatform.gui.GWTOLResources' />
+    <inherits name='org.geosdi.geoplatform.gui.GXTResources' />
     
     <inherits name="org.geosdi.geoplatform.gui.GPCatalogFinder" />
 	
     <source path="client" />
 	
     <entry-point class='org.geosdi.geoplatform.demos.catalog.client.CatalogFinderDemoUI' />
+    
+    <add-linker name="xsiframe"/>
 	
 </module>

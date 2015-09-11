@@ -33,6 +33,13 @@
             <artifactId>gwt-user</artifactId>
             <scope>provided</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-dev</artifactId>
+            <version>${gwtVersion}</version>
+            <scope>runtime</scope>
+        </dependency>
         
         <dependency>
             <groupId>com.google.web.bindery</groupId>
@@ -146,17 +153,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>gwt-maven-plugin</artifactId>
-                <configuration>
-                    <inplace>true</inplace>
-                    <gwtVersion>${gwtVersion}</gwtVersion>
-                    <module>org.geosdi.geoplatform.demos.catalog.CatalogFinderDemoUI</module>
-                    <runTarget>CatalogFinderDemoUI.html</runTarget>
-                    <warSourceDirectory>war</warSourceDirectory>
-                    <disableCastChecking>true</disableCastChecking>
-                    <disableClassMetadata>true</disableClassMetadata>
-                    <hostedWebapp>${basedir}/war</hostedWebapp>
-                    <extraJvmArgs>-XX:MaxPermSize=766M -Xmx1024M -Xss1024k -Dgwt.nowarn.legacy.tools</extraJvmArgs>
-                </configuration>
+                <version>${gwtVersion}</version>
                 <executions>
                     <execution>
                         <id>test</id>
@@ -168,6 +165,20 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <runTarget>CatalogFinderDemoUI.html</runTarget>
+                    <hostedWebapp>${basedir}/war</hostedWebapp>
+                    <incremental>false</incremental>
+                    <extraJvmArgs>-XX:MaxPermSize=766M -Xmx1024M -Xss1024k -Dgwt.nowarn.legacy.tools</extraJvmArgs>
+                    
+                    <module>org.geosdi.geoplatform.demos.catalog.CatalogFinderDemoUI</module>
+<!--                    
+                    <inplace>true</inplace>
+                    <gwtVersion>${gwtVersion}</gwtVersion>
+                    <warSourceDirectory>war</warSourceDirectory>
+                    <disableCastChecking>true</disableCastChecking>
+                    <disableClassMetadata>true</disableClassMetadata>-->
+                </configuration>
             </plugin>
 
             <!-- Run the application using "mvn jetty:run" -->

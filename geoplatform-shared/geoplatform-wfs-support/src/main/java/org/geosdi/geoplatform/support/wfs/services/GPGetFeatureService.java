@@ -39,6 +39,7 @@ import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequest;
 import org.geosdi.geoplatform.connector.wfs.response.FeatureCollectionDTO;
 import org.geosdi.geoplatform.connector.wfs.response.FeatureDTO;
 import org.geosdi.geoplatform.connector.wfs.response.LayerSchemaDTO;
+import org.geosdi.geoplatform.connector.wfs.response.QueryDTO;
 import org.geosdi.geoplatform.gui.shared.bean.BBox;
 import org.geosdi.geoplatform.support.wfs.feature.reader.WFSGetFeatureStaxReader;
 import org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType;
@@ -88,6 +89,18 @@ public class GPGetFeatureService extends AbstractFeatureService implements GetFe
 
         WFSGetFeatureRequest request = this.createRequest(layerSchema);
         request.setMaxFeatures(BigInteger.valueOf(maxFeatures));
+
+        return this.getFeatureCollection(request, layerSchema);
+    }
+
+    @Override
+    public FeatureCollectionDTO getFeature(LayerSchemaDTO layerSchema, int maxFeatures, QueryDTO queryDTO)
+            throws Exception {
+        maxFeatures = (maxFeatures > 0) ? maxFeatures : 100;
+
+        WFSGetFeatureRequest request = this.createRequest(layerSchema);
+        request.setMaxFeatures(BigInteger.valueOf(maxFeatures));
+        request.setQueryDTO(queryDTO);
 
         return this.getFeatureCollection(request, layerSchema);
     }

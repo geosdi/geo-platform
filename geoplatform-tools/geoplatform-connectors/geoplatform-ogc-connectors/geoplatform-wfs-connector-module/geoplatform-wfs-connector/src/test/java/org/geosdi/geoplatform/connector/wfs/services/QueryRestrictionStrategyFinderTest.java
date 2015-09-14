@@ -1,7 +1,7 @@
 package org.geosdi.geoplatform.connector.wfs.services;
 
-import org.geosdi.geoplatform.connector.server.request.v110.query.factory.QueryRestrictionStrategy;
-import org.geosdi.geoplatform.connector.server.request.v110.query.factory.QueryRestrictionsStrategyFinder;
+import org.geosdi.geoplatform.connector.server.request.v110.query.repository.QueryRestrictionStrategy;
+import org.geosdi.geoplatform.connector.server.request.v110.query.repository.QueryRestrictionsStrategyFinder;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -23,7 +23,7 @@ public class QueryRestrictionStrategyFinderTest {
 
         logger.info("#########################QUERY_RESTRICTIONS_ALL_STRATEGIES : {}\n", strategies);
 
-        Assert.assertEquals(10, strategies.size());
+        Assert.assertEquals(11, strategies.size());
     }
 
     @Test
@@ -32,6 +32,6 @@ public class QueryRestrictionStrategyFinderTest {
 
         logger.info("#########################QUERY_RESTRICTIONS_VALID_STRATEGIES : {}\n", strategies);
 
-        Assert.assertEquals(9, strategies.size());
+        Assert.assertEquals(10, strategies.size());
     }
 }

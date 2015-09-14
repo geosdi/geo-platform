@@ -17,13 +17,14 @@
     <logger name="org.geosdi.geoplatform.connector.wfs.jaxb.comparison.WFSContextComparisonTest"
             level="debug"/>
     <logger name="org.geosdi.geoplatform.connector.wfs.jaxb.unmarshall" level="debug"/>
-    <logger name="org.geosdi.geoplatform.connector.server.request.v110.query.factory.QueryRestrictionFactory"
+    <logger name="org.geosdi.geoplatform.connector.server.request.v110.query.repository.QueryRestrictionRepository"
             level="debug"/>
 
     <logger name="org.geosdi.geoplatform.connector.server.request.v110.query.responsibility.ILogicOperatorHandler"
             level="trace"/>
     <logger name="org.geosdi.geoplatform.connector.server.request.v110.query.responsibility.AndOperatorHandler"
             level="debug"/>
+    <logger name="org.geosdi.geoplatform.connector.wfs.services.QueryRestrictionFactoryMassiveTest" level="info"/>
 
 
 </configuration>

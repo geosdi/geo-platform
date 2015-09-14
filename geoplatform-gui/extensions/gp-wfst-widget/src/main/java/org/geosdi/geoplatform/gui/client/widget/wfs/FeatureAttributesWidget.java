@@ -61,6 +61,7 @@ import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.WFSFeatureBindingHa
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
 import org.geosdi.geoplatform.gui.client.widget.wfs.builder.AttributeCustomFieldsMap;
 import org.geosdi.geoplatform.gui.client.widget.wfs.builder.GetFeatureControlBuilder;
+import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar;
 import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar.FeatureStatusBarType;
 import org.geosdi.geoplatform.gui.client.widget.wfs.time.TimeInputWidget;
 import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextField;
@@ -324,14 +325,12 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel implements 
     public void postInstances(List<FeatureDetail> instaces) {
         assert (instaces != null) : "Feature instances must not be null.";
         int numFeature = instaces.size();
-        if (numFeature == 0) {
-            System.out.println("*** NO FEATURE"); // TODO
-            return;
-        }
 
         grid.mask("Retrieve " + numFeature + " feature instance attributes");
         this.populateStore(instaces);
         grid.unmask();
+        bus.fireEvent(new FeatureStatusBarEvent("Features Loaded " + numFeature,
+                FeatureStatusBar.FeatureStatusBarType.STATUS_OK));
     }
 
     private void populateStore(List<FeatureDetail> attValues) {

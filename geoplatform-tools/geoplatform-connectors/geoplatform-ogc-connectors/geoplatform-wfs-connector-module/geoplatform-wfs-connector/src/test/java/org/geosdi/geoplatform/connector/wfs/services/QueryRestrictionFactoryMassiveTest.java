@@ -1,7 +1,7 @@
 package org.geosdi.geoplatform.connector.wfs.services;
 
-import org.geosdi.geoplatform.connector.server.request.v110.query.factory.QueryRestrictionFactory;
-import org.geosdi.geoplatform.connector.server.request.v110.query.factory.QueryRestrictionStrategy;
+import org.geosdi.geoplatform.connector.server.request.v110.query.repository.QueryRestrictionRepository;
+import org.geosdi.geoplatform.connector.server.request.v110.query.repository.QueryRestrictionStrategy;
 import org.geosdi.geoplatform.gui.shared.wfs.OperatorType;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -18,10 +19,24 @@ import java.util.concurrent.*;
 public class QueryRestrictionFactoryMassiveTest {
 
     private static final Logger logger = LoggerFactory.getLogger(QueryRestrictionFactoryMassiveTest.class);
+    //
+    private static final ThreadFactory QueryRestrictionThreadFactory = new ThreadFactory() {
+
+        private final AtomicInteger threadID = new AtomicInteger(0);
+
+        @Override
+        public Thread newThread(Runnable r) {
+            Thread thread = Executors.privilegedThreadFactory().newThread(r);
+            thread.setName("QueryRestrictionThread - " + threadID.getAndIncrement());
+            thread.setDaemon(Boolean.TRUE);
+            return thread;
+        }
+
+    };
 
     @Test
     public void queryRestrictionFactoryTest() throws InterruptedException, ExecutionException {
-        ExecutorService executor = Executors.newFixedThreadPool(2);
+        ExecutorService executor = Executors.newFixedThreadPool(150, QueryRestrictionThreadFactory);
 
         List<Callable<QueryRestrictionStrategy>> tasks = new ArrayList<>(1000);
 
@@ -42,8 +57,10 @@ public class QueryRestrictionFactoryMassiveTest {
                 tasks.add(new CallableEntity(OperatorType.LESS_OR_EQUAL));
             } else if ((i > 700) && (i < 800)) {
                 tasks.add(new CallableEntity(OperatorType.STARTS_WITH));
-            } else if ((i > 800) && (i < 1000)) {
+            } else if ((i > 800) && (i < 900)) {
                 tasks.add(new CallableEntity(OperatorType.NOT_EQUAL));
+            } else if((i > 900) && (i < 1000)) {
+                tasks.add(new CallableEntity(OperatorType.LIKE));
             }
         }
 
@@ -54,7 +71,7 @@ public class QueryRestrictionFactoryMassiveTest {
 
         if (flag) {
             for (Future<QueryRestrictionStrategy> future : results) {
-                logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}\n", future.get());
+                logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}\n", future.get());
             }
         } else {
             throw new InterruptedException("Some Threads are not executed.");
@@ -71,7 +88,7 @@ public class QueryRestrictionFactoryMassiveTest {
 
         @Override
         public QueryRestrictionStrategy call() throws Exception {
-            return QueryRestrictionFactory.getQueryRestrictionStrategy(operator);
+            return QueryRestrictionRepository.getQueryRestrictionStrategy(operator);
         }
     }
 }

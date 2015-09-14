@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.connector.server.request;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.wfs.response.QueryDTO;
 import org.geosdi.geoplatform.gui.shared.bean.BBox;
+import org.geosdi.geoplatform.xml.wfs.v110.QueryType;
 
 import javax.xml.namespace.QName;
 import java.math.BigInteger;
@@ -51,6 +52,7 @@ public abstract class AbstractGetFeatureRequest<T> extends WFSRequest<T> impleme
     //
     protected QName typeName;
     protected List<String> featureIDs;
+    protected List<String> propertyNames;
     protected BBox bBox;
     protected String srs;
     protected String resultType;
@@ -80,6 +82,40 @@ public abstract class AbstractGetFeatureRequest<T> extends WFSRequest<T> impleme
     @Override
     public void setFeatureIDs(List<String> featureIDs) {
         this.featureIDs = featureIDs;
+    }
+
+    /**
+     * @return {@link Boolean}
+     */
+    @Override
+    public Boolean isSetFeatureIDs() {
+        return ((this.featureIDs != null) && !(this.featureIDs.isEmpty()));
+    }
+
+    /**
+     * <p>The Property Names to retrieve in {@link QueryType} query</p>
+     *
+     * @param propertyNames
+     */
+    @Override
+    public void setPropertyNames(List<String> propertyNames) {
+        this.propertyNames = propertyNames;
+    }
+
+    /**
+     * @return {@link List <String>} Property Names
+     */
+    @Override
+    public List<String> getPropertyNames() {
+        return this.propertyNames;
+    }
+
+    /**
+     * @return {@link Boolean}
+     */
+    @Override
+    public Boolean isSetPropertyNames() {
+        return ((this.propertyNames != null) && !(this.propertyNames.isEmpty()));
     }
 
     @Override
@@ -141,17 +177,27 @@ public abstract class AbstractGetFeatureRequest<T> extends WFSRequest<T> impleme
     public void setQueryDTO(QueryDTO queryDTO) {
         this.queryDTO = queryDTO;
     }
+
     /**
      * @return {@link QueryDTO}
      */
     @Override
     public QueryDTO getQueryDTO() {
-        return null;
+        return this.queryDTO;
+    }
+
+    /**
+     * @return {@link Boolean}
+     */
+    @Override
+    public Boolean isSetQueryDTO() {
+        return ((this.queryDTO != null) && (this.queryDTO.isSetQueryRestrictionList()));
     }
 
     @Override
     public String toString() {
-        return this.getClass().getSimpleName() + " {" +
+        return this.getClass()
+                .getSimpleName() + " {" +
                 "  typeName = " + typeName +
                 ", featureIDs = " + featureIDs +
                 ", bBox = " + bBox +

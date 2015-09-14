@@ -51,7 +51,6 @@ import java.math.BigInteger;
 import java.util.Arrays;
 
 /**
- *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class WFSGetFeatureTest extends WFSTestConfigurator {
@@ -129,8 +128,7 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
         logger.info("######################\n{}\n", request.showRequestAsString());
 
         FeatureCollectionType response = request.getResponse();
-        Assert.assertEquals(7, response.getNumberOfFeatures()
-                .intValue());
+        Assert.assertEquals(7, response.getNumberOfFeatures().intValue());
     }
 
     @Test
@@ -156,8 +154,7 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
         logger.info("######################\n{}\n", request.showRequestAsString());
 
         FeatureCollectionType response = request.getResponse();
-        Assert.assertEquals(8, response.getNumberOfFeatures()
-                .intValue());
+        Assert.assertEquals(8, response.getNumberOfFeatures().intValue());
     }
 
     @Test
@@ -177,11 +174,9 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
         FeatureArrayPropertyType featureMembers = response.getFeatureMembers();
         logger.info("----------- {}", featureMembers.isSetFeature());
         logger.info("----------- {}", featureMembers.getFeature());
-        logger.info("----------- {}", featureMembers.getFeature()
-                .size());
+        logger.info("----------- {}", featureMembers.getFeature().size());
         logger.info("+++++++++++ {}", response.getFeatureMember());
-        logger.info("+++++++++++ {}\n\n", response.getFeatureMember()
-                .size());
+        logger.info("+++++++++++ {}\n\n", response.getFeatureMember().size());
     }
 
     @Test
@@ -196,24 +191,24 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
         logger.info("RESPONSE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}\n", request.getResponseAsString());
 
         FeatureCollectionType response = request.getResponse();
-        Assert.assertEquals(2, response.getNumberOfFeatures()
-                .intValue());
+        Assert.assertEquals(2, response.getNumberOfFeatures().intValue());
     }
 
     @Test
     public void statesBBox() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
 
-        request.setResultType(ResultTypeType.HITS.value());
+        request.setResultType(ResultTypeType.RESULTS.value());
         request.setTypeName(statesName);
+        request.setPropertyNames(Arrays.asList(new String[]{"STATE_NAME", "PERSONS"}));
         request.setBBox(new BBox(-75.102613, 40.212597, -72.361859, 41.512517));
         request.setSRS("EPSG:4326");
 
-        logger.info("RESPONSE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}\n", request.getResponseAsString());
+        logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@RESPONSE_AS_STRING : \n{}\n", request.getResponseAsString());
 
         FeatureCollectionType response = request.getResponse();
-        Assert.assertEquals(4, response.getNumberOfFeatures()
-                .intValue());
+        Assert.assertEquals(4, response.getNumberOfFeatures().intValue());
     }
 
     @Ignore("ToDo complete with assertion")

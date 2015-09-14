@@ -40,12 +40,12 @@ import org.geosdi.geoplatform.connector.server.request.WFSDescribeFeatureTypeReq
 import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequest;
 import org.geosdi.geoplatform.connector.wfs.response.FeatureCollectionDTO;
 import org.geosdi.geoplatform.connector.wfs.response.LayerSchemaDTO;
+import org.geosdi.geoplatform.gui.shared.bean.BBox;
 import org.geosdi.geoplatform.support.wfs.feature.reader.FeatureSchemaReader;
 import org.geosdi.geoplatform.support.wfs.feature.reader.GPFeatureSchemaReader;
 import org.geosdi.geoplatform.support.wfs.feature.reader.WFSGetFeatureStaxReader;
 import org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType;
 import org.geosdi.geoplatform.xml.xsd.v2001.Schema;
-import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,43 +57,38 @@ import java.net.URL;
 import java.util.Arrays;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class WFSGetAllFeaturesRequestTest {
+public class WFSGetFeaturesRequestTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(WFSGetAllFeaturesRequestTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(WFSGetFeaturesRequestTest.class);
     //
     private static final QName information = new QName("admin:admin_shp_06banisuhela_crisis_information_poly");
-    private static final String informationName = information.getLocalPart().substring(
-            information.getLocalPart().indexOf(":") + 1, information.getLocalPart().length());
+    private static final String informationName = information.getLocalPart()
+            .substring(information.getLocalPart().indexOf(":") + 1, information.getLocalPart().length());
+    private static final QName states = new QName("topp:states");
+    private static final String statesName = states.getLocalPart()
+            .substring(states.getLocalPart().indexOf(":") + 1, states.getLocalPart().length());
     //
-    private final String wfsURL = "http://geoserver.wfppal.org/geoserver/wfs";
-    GPWFSConnectorStore serverConnector;
-    FeatureSchemaReader featureReaderXSD = new GPFeatureSchemaReader();
+    private final static FeatureSchemaReader featureReaderXSD = new GPFeatureSchemaReader();
 
-    @Before
-    public void setUp() throws Exception {
-        this.serverConnector = WFSConnectorBuilder.newConnector().withServerUrl(new URL(wfsURL)).build();
-    }
 
-    //@Ignore(value = "Server can be down")
     @Test
     public void getAllFeaturesTest() throws Exception {
-
+        String wfsURL = "http://geoserver.wfppal.org/geoserver/wfs";
+        GPWFSConnectorStore serverConnector = WFSConnectorBuilder.newConnector().withServerUrl(new URL(wfsURL)).build();
         WFSDescribeFeatureTypeRequest<Schema> request = serverConnector.createDescribeFeatureTypeRequest();
         request.setTypeName(Arrays.asList(information));
         Schema response = request.getResponse();
 
-        LayerSchemaDTO layerSchema = featureReaderXSD.getFeature(response,
-                informationName);
+        LayerSchemaDTO layerSchema = featureReaderXSD.getFeature(response, informationName);
         if (layerSchema == null) {
             throw new IllegalStateException("The Layer Schema is null.");
         }
         layerSchema.setScope(wfsURL);
 
-        logger.info("\n\t##################################LAYER_SCHEMA : {}", layerSchema);
+        logger.debug("\n\t##################################LAYER_SCHEMA : {}", layerSchema);
 
         WFSGetFeatureRequest getFeatureRequest = serverConnector.createGetFeatureRequest();
         getFeatureRequest.setTypeName(new QName(layerSchema.getTypeName()));
@@ -102,12 +97,9 @@ public class WFSGetAllFeaturesRequestTest {
 
         getFeatureRequest.setMaxFeatures(BigInteger.valueOf(50));
 
-        logger.info("\n\t@@@@@@@@@@@@@@@@@@RESPONSE_AS_STRING : {}", getFeatureRequest.getResponseAsString());
+        logger.debug("\n\t@@@@@@@@@@@@@@@@@@RESPONSE_AS_STRING : {}", getFeatureRequest.getResponseAsString());
 
         InputStream is = getFeatureRequest.getResponseAsStream();
-        if (is == null) { // TODO check if the is can be null
-            logger.error("\n### The layer \"{}\" isn't a feature ###", layerSchema.getTypeName());
-        }
 
         final WFSGetFeatureStaxReader featureReaderStAX = new WFSGetFeatureStaxReader(layerSchema);
 
@@ -117,6 +109,46 @@ public class WFSGetAllFeaturesRequestTest {
             featureCollection.setErrorMessage(getFeatureRequest.getResponseAsString());
         }
 
-        logger.info("\n\t@@@@@@@@@@@@@@@@@@@@@@@@@@@FEATURE_COLLECTION_DTO : {}", featureCollection);
+        logger.debug("\n\t@@@@@@@@@@@@@@@@@@@@@@@@@@@FEATURE_COLLECTION_DTO : {}", featureCollection);
+    }
+
+    @Test
+    public void statesTest() throws Exception {
+        String wfsURL = "http://150.145.141.92/geoserver/wfs";
+        GPWFSConnectorStore serverConnector = WFSConnectorBuilder.newConnector().withServerUrl(new URL(wfsURL)).build();
+        WFSDescribeFeatureTypeRequest<Schema> request = serverConnector.createDescribeFeatureTypeRequest();
+        request.setTypeName(Arrays.asList(states));
+        Schema response = request.getResponse();
+
+        LayerSchemaDTO layerSchema = featureReaderXSD.getFeature(response, statesName);
+        if (layerSchema == null) {
+            throw new IllegalStateException("The Layer Schema is null.");
+        }
+        layerSchema.setScope(wfsURL);
+
+        logger.debug("\n\t##################################LAYER_SCHEMA : {}", layerSchema);
+
+        WFSGetFeatureRequest getFeatureRequest = serverConnector.createGetFeatureRequest();
+        getFeatureRequest.setTypeName(new QName(layerSchema.getTypeName()));
+        getFeatureRequest.setPropertyNames(Arrays.asList(new String[]{"STATE_NAME", "PERSONS"}));
+        getFeatureRequest.setBBox(new BBox(-75.102613, 40.212597, -72.361859, 41.512517));
+        getFeatureRequest.setSRS("EPSG:4326");
+        getFeatureRequest.setResultType(ResultTypeType.RESULTS.value());
+
+        getFeatureRequest.setMaxFeatures(BigInteger.valueOf(50));
+
+        logger.debug("\n\t@@@@@@@@@@@@@@@@@@RESPONSE_AS_STRING : {}", getFeatureRequest.getResponseAsString());
+
+        InputStream is = getFeatureRequest.getResponseAsStream();
+
+        final WFSGetFeatureStaxReader featureReaderStAX = new WFSGetFeatureStaxReader(layerSchema);
+
+        FeatureCollectionDTO featureCollection = featureReaderStAX.read(is);
+
+        if (!featureCollection.isFeaturesLoaded()) {
+            featureCollection.setErrorMessage(getFeatureRequest.getResponseAsString());
+        }
+
+        logger.debug("\n\t@@@@@@@@@@@@@@@@@@@@@@@@@@@FEATURE_COLLECTION_DTO : {}", featureCollection);
     }
 }

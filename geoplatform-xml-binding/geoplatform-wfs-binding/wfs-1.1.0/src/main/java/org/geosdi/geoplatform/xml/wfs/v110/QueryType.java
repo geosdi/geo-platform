@@ -43,16 +43,6 @@
 
 package org.geosdi.geoplatform.xml.wfs.v110;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElements;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.namespace.QName;
 import org.geosdi.geoplatform.xml.filter.v110.FilterType;
 import org.geosdi.geoplatform.xml.filter.v110.FunctionType;
 import org.geosdi.geoplatform.xml.filter.v110.SortByType;
@@ -60,6 +50,11 @@ import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+
+import javax.xml.bind.annotation.*;
+import javax.xml.namespace.QName;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -95,6 +90,7 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  * 
  * 
  */
+@XmlRootElement(name = "QueryType")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "QueryType", propOrder = {
     "propertyNameOrXlinkPropertyNameOrFunction",

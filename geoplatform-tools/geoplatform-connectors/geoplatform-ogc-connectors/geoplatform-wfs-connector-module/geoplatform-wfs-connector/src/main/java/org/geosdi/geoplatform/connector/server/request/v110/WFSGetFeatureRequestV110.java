@@ -53,6 +53,7 @@ import javax.xml.bind.JAXBElement;
 import java.util.Arrays;
 
 /**
+ * @author Giuseppe La Scaleia - <giuseppe.lascaleia@geosdi.org>
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class WFSGetFeatureRequestV110 extends AbstractGetFeatureRequest<FeatureCollectionType> {
@@ -76,7 +77,7 @@ public class WFSGetFeatureRequestV110 extends AbstractGetFeatureRequest<FeatureC
         query.setTypeName(Arrays.asList(typeName));
         request.getQuery().add(query);
 
-        if (featureIDs != null && !featureIDs.isEmpty()) {
+        if (super.isSetFeatureIDs()) {
             FilterType filter = new FilterType();
 
             for (String featureID : featureIDs) {
@@ -89,6 +90,12 @@ public class WFSGetFeatureRequestV110 extends AbstractGetFeatureRequest<FeatureC
             }
 
             query.setFilter(filter);
+        }
+
+        if (super.isSetPropertyNames()) {
+            for (String propertyName : propertyNames) {
+                query.getPropertyNameOrXlinkPropertyNameOrFunction().add(propertyName);
+            }
         }
 
         if (srs != null) {
@@ -106,14 +113,16 @@ public class WFSGetFeatureRequestV110 extends AbstractGetFeatureRequest<FeatureC
             filter.setSpatialOps(areaOperator);
         }
 
-        if ((queryDTO != null) && (queryDTO.isSetQueryRestrictionList())) {
+        if (super.isSetQueryDTO()) {
             FilterType filterType = query.getFilter();
             if (filterType == null) {
                 filterType = new FilterType();
                 query.setFilter(filterType);
             }
-            ILogicOperatorHandler.WFSQueryRestrictionsBuilder.builder().withFilterType(filterType).withQueryDTO(
-                    queryDTO).build();
+            ILogicOperatorHandler.WFSQueryRestrictionsBuilder.builder()
+                    .withFilterType(filterType)
+                    .withQueryDTO(queryDTO)
+                    .build();
         }
 
         request.setResultType(resultType != null ? ResultTypeType.fromValue(resultType) : ResultTypeType.RESULTS);

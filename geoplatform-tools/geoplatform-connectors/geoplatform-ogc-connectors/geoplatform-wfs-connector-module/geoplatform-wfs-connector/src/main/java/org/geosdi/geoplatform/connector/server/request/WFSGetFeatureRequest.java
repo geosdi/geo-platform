@@ -78,6 +78,12 @@ public interface WFSGetFeatureRequest<T> extends GPConnectorRequest<T> {
     void setFeatureIDs(List<String> FeatureIDs);
 
     /**
+     *
+     * @return {@link Boolean}
+     */
+    Boolean isSetFeatureIDs();
+
+    /**
      * Gets the value of the BBox query property.
      * 
      * @return BBox
@@ -160,6 +166,25 @@ public interface WFSGetFeatureRequest<T> extends GPConnectorRequest<T> {
     void setMaxFeatures(BigInteger value);
 
     /**
+     * <p>The Property Names to retrieve in {@link org.geosdi.geoplatform.xml.wfs.v110.QueryType} query</p>
+     *
+     * @param propertyNames
+     */
+    void setPropertyNames(List<String> propertyNames);
+
+    /**
+     *
+     * @return {@link List<String>} Property Names
+     */
+    List<String> getPropertyNames();
+
+    /**
+     *
+     * @return {@link Boolean}
+     */
+    Boolean isSetPropertyNames();
+
+    /**
      * <p>{@link QueryDTO} class contains all Restrictions for Attributes</p>
      *
      * @param queryDTO
@@ -171,4 +196,10 @@ public interface WFSGetFeatureRequest<T> extends GPConnectorRequest<T> {
      * @return {@link QueryDTO}
      */
     QueryDTO getQueryDTO();
+
+    /**
+     *
+     * @return {@link Boolean}
+     */
+    Boolean isSetQueryDTO();
 }

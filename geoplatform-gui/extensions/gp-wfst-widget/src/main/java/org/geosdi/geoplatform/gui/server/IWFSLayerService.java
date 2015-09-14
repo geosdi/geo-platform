@@ -35,11 +35,13 @@
  */
 package org.geosdi.geoplatform.gui.server;
 
-import java.util.List;
 import org.geosdi.geoplatform.connector.wfs.response.AttributeDTO;
 import org.geosdi.geoplatform.connector.wfs.response.FeatureCollectionDTO;
 import org.geosdi.geoplatform.connector.wfs.response.LayerSchemaDTO;
+import org.geosdi.geoplatform.connector.wfs.response.QueryDTO;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+
+import java.util.List;
 
 /**
  *
@@ -53,6 +55,9 @@ public interface IWFSLayerService {
 
     FeatureCollectionDTO getAllFeature(String serverUrl, String typeName,
             int maxFeatures) throws GeoPlatformException;
+
+    FeatureCollectionDTO getFeaturesByQuery(String serverUrl, String typeName,
+            int maxFeatures, QueryDTO queryDTO) throws GeoPlatformException;
 
     boolean transactionUpdate(String serverURL, String typeName,
             String fid, List<? extends AttributeDTO> attributes)

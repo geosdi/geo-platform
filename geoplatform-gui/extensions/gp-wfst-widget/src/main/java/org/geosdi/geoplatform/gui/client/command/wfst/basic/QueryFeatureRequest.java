@@ -57,6 +57,14 @@ public class QueryFeatureRequest extends GetAllFeatureRequest {
         this.query = query;
     }
 
+    /**
+     *
+     * @return {@link Boolean}
+     */
+    public Boolean isSetQuery() {
+        return ((this.query != null) && (this.query.isSetQueryRestrictionList()));
+    }
+
     @Override
     public String getCommandName() {
         return "command.wfst.basic.QueryFeatureCommand";

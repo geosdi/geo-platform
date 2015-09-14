@@ -1,7 +1,7 @@
 package org.geosdi.geoplatform.connector.server.request.v110.query.responsibility;
 
-import org.geosdi.geoplatform.connector.server.request.v110.query.factory.QueryRestrictionFactory;
-import org.geosdi.geoplatform.connector.server.request.v110.query.factory.QueryRestrictionStrategy;
+import org.geosdi.geoplatform.connector.server.request.v110.query.repository.QueryRestrictionRepository;
+import org.geosdi.geoplatform.connector.server.request.v110.query.repository.QueryRestrictionStrategy;
 import org.geosdi.geoplatform.connector.wfs.response.QueryDTO;
 import org.geosdi.geoplatform.connector.wfs.response.QueryRestrictionDTO;
 import org.geosdi.geoplatform.gui.shared.wfs.OperatorType;
@@ -53,7 +53,7 @@ public abstract class LogicOperatorHandler implements ILogicOperatorHandler {
         for (QueryRestrictionDTO queryRestrictionDTO : queryRestrictionDTOs) {
             OperatorType operatorType = queryRestrictionDTO.getOperator();
             if (operatorType != null) {
-                QueryRestrictionStrategy<?> queryRestrictionStrategy = QueryRestrictionFactory.getQueryRestrictionStrategy(
+                QueryRestrictionStrategy<?> queryRestrictionStrategy = QueryRestrictionRepository.getQueryRestrictionStrategy(
                         operatorType);
                 if (queryRestrictionStrategy != null) {
                     elements.add(queryRestrictionStrategy.create(queryRestrictionDTO));

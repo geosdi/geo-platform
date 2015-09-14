@@ -1,4 +1,4 @@
-package org.geosdi.geoplatform.connector.server.request.v110.query.factory;
+package org.geosdi.geoplatform.connector.server.request.v110.query.repository;
 
 import org.geosdi.geoplatform.gui.shared.wfs.OperatorType;
 
@@ -12,7 +12,7 @@ public class ContainsStrategy extends MatchStrategy {
      * @return {@link OperatorType}
      */
     @Override
-    public final OperatorType forOperatorType() {
+    public OperatorType forOperatorType() {
         return OperatorType.CONTAINS;
     }
 

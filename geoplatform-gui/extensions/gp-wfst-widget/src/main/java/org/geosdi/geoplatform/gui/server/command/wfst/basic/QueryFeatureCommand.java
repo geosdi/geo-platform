@@ -34,11 +34,14 @@
  */
 package org.geosdi.geoplatform.gui.server.command.wfst.basic;
 
-import org.geosdi.geoplatform.gui.client.command.wfst.basic.GetAllFeatureResponse;
+import org.geosdi.geoplatform.connector.wfs.response.FeatureCollectionDTO;
 import org.geosdi.geoplatform.gui.client.command.wfst.basic.QueryFeatureRequest;
+import org.geosdi.geoplatform.gui.client.command.wfst.basic.QueryFeatureResponse;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;
+import org.geosdi.geoplatform.gui.server.IWFSLayerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
@@ -50,17 +53,28 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Lazy(true)
 @Component(value = "command.wfst.basic.QueryFeatureCommand")
-public class QueryFeatureCommand implements GPCommand<QueryFeatureRequest, GetAllFeatureResponse> {
+public class QueryFeatureCommand implements GPCommand<QueryFeatureRequest, QueryFeatureResponse> {
 
     private static final Logger logger = LoggerFactory.getLogger(QueryFeatureCommand.class);
+    //
+    @Autowired
+    private IWFSLayerService wfsLayerService;
 
     @Override
-    public GetAllFeatureResponse execute(QueryFeatureRequest request, HttpServletRequest httpServletRequest) {
+    public QueryFeatureResponse execute(QueryFeatureRequest request, HttpServletRequest httpServletRequest) {
 
         logger.debug("##################### Executing {} Command", this.
                 getClass().getSimpleName());
-        logger.debug("###################### QueryFeatureRequest : {}\n", request);
+        FeatureCollectionDTO result = ((request.getQuery() != null) &&
+                (request.getQuery().isSetQueryRestrictionList())) ?
+                this.wfsLayerService.getFeaturesByQuery(request.getServerUrl(), request.getTypeName(),
+                        request.getMaxFeatures(), request.getQuery()) :
+                this.wfsLayerService.getAllFeature(request.getServerUrl(), request.getTypeName(),
+                        request.getMaxFeatures());
 
-        return new GetAllFeatureResponse(null);
+        logger.debug("@@@@@@@@@@@@@@@@@@@@@FOUND : {} - Features\n", result.getFeatures().size());
+        logger.trace("#################### Found {} \n", result);
+
+        return new QueryFeatureResponse(result);
     }
 }

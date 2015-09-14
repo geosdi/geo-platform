@@ -1,4 +1,4 @@
-package org.geosdi.geoplatform.connector.server.request.v110.query.factory;
+package org.geosdi.geoplatform.connector.server.request.v110.query.repository;
 
 import net.jcip.annotations.ThreadSafe;
 

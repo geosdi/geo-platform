@@ -10,8 +10,8 @@ import org.geosdi.geoplatform.gui.client.command.wfst.basic.GetAllFeatureRequest
 import org.geosdi.geoplatform.gui.client.command.wfst.basic.GetAllFeatureResponse;
 import org.geosdi.geoplatform.gui.client.model.binder.ILayerSchemaBinder;
 import org.geosdi.geoplatform.gui.client.model.wfs.FeatureDetail;
-import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.EnableQueryButtonEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureInstancesEvent;
+import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.FeatureSelectionWidgetHandler;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
 import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
 import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
@@ -33,8 +33,6 @@ public class SelectFeatureButtonProvider implements Provider<Button> {
 
     private final GetAllFeatureRequest getAllFeatureRequest = GWT.<GetAllFeatureRequest>create(
             GetAllFeatureRequest.class);
-    private final EnableQueryButtonEvent enableQueryButtonEvent = new EnableQueryButtonEvent(Boolean.TRUE);
-    private final EnableQueryButtonEvent disableQueryButtonEvent = new EnableQueryButtonEvent(Boolean.FALSE);
     private final GPEventBus bus;
     private final ILayerSchemaBinder layerSchemaBinder;
 
@@ -50,7 +48,7 @@ public class SelectFeatureButtonProvider implements Provider<Button> {
 
             @Override
             public void componentSelected(ButtonEvent ce) {
-                bus.fireEvent(disableQueryButtonEvent);
+                bus.fireEvent(FeatureSelectionWidgetHandler.DISABLE_QUERY_BUTTON_EVENT);
 
                 getAllFeatureRequest.setServerUrl(layerSchemaBinder.getLayerSchemaDTO().getScope());
                 getAllFeatureRequest.setTypeName(layerSchemaBinder.getLayerSchemaDTO().getTypeName());
@@ -73,8 +71,8 @@ public class SelectFeatureButtonProvider implements Provider<Button> {
                                     errorMessage + " - " + response.getResult().getErrorMessage());
 
                             LayoutManager.getInstance().getStatusMap().setStatus(
-                                    errorMessage + " for " + layerSchemaBinder.getLayerSchemaDTO().getTypeName() + " layer.",
-                                    SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
+                                    errorMessage + " for " + layerSchemaBinder.getLayerSchemaDTO().getTypeName() +
+                                            " layer.", SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
                         } else {
                             List<FeatureDetail> instances = Lists.<FeatureDetail>newArrayListWithCapacity(
                                     response.getResult().getFeatures().size());
@@ -88,7 +86,7 @@ public class SelectFeatureButtonProvider implements Provider<Button> {
                             e.setInstances(instances);
                             bus.fireEvent(e);
                         }
-                        bus.fireEvent(enableQueryButtonEvent);
+                        bus.fireEvent(FeatureSelectionWidgetHandler.ENABLE_QUERY_BUTTON_EVENT);
                     }
 
                     @Override
@@ -99,8 +97,8 @@ public class SelectFeatureButtonProvider implements Provider<Button> {
                                 errorMessage + " - " + exception.getMessage());
 
                         LayoutManager.getInstance().getStatusMap().setStatus(
-                                errorMessage + " for " + layerSchemaBinder.getLayerSchemaDTO().getTypeName() + " layer.",
-                                SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
+                                errorMessage + " for " + layerSchemaBinder.getLayerSchemaDTO().getTypeName() +
+                                        " layer.", SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
                     }
 
                 });

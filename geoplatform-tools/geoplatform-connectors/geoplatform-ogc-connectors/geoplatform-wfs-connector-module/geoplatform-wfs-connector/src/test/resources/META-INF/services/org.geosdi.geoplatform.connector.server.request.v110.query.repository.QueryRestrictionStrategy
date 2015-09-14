@@ -1,0 +1,11 @@
+org.geosdi.geoplatform.connector.server.request.v110.query.repository.ContainsStrategy
+org.geosdi.geoplatform.connector.server.request.v110.query.repository.LikeStrategy
+org.geosdi.geoplatform.connector.server.request.v110.query.repository.EndsWithStrategy
+org.geosdi.geoplatform.connector.server.request.v110.query.repository.EqualStrategy
+org.geosdi.geoplatform.connector.server.request.v110.query.repository.GreaterOrEqualStrategy
+org.geosdi.geoplatform.connector.server.request.v110.query.repository.GreaterStrategy
+org.geosdi.geoplatform.connector.server.request.v110.query.repository.LessOrEqualStrategy
+org.geosdi.geoplatform.connector.server.request.v110.query.repository.LessStrategy
+org.geosdi.geoplatform.connector.server.request.v110.query.repository.NotEqualStrategy
+org.geosdi.geoplatform.connector.server.request.v110.query.repository.StartsWithStrategy
+org.geosdi.geoplatform.connector.wfs.services.QueryRestrictionMockStrategy

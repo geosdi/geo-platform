@@ -1,4 +1,4 @@
-package org.geosdi.geoplatform.connector.server.request.v110.query.factory;
+package org.geosdi.geoplatform.connector.server.request.v110.query.repository;
 
 import org.geosdi.geoplatform.gui.shared.wfs.OperatorType;
 import org.geosdi.geoplatform.xml.filter.v110.BinaryComparisonOpType;
@@ -9,11 +9,11 @@ import javax.xml.bind.JAXBElement;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GreaterOrEqualStrategy extends GenericBinaryStrategy {
+public class GreaterStrategy extends GenericBinaryStrategy {
 
     @Override
     protected JAXBElement<BinaryComparisonOpType> create(BinaryComparisonOpType binaryComparisonOpType) {
-        return filterFactory.createPropertyIsGreaterThanOrEqualTo(binaryComparisonOpType);
+        return filterFactory.createPropertyIsGreaterThan(binaryComparisonOpType);
     }
 
     /**
@@ -21,6 +21,6 @@ public class GreaterOrEqualStrategy extends GenericBinaryStrategy {
      */
     @Override
     public final OperatorType forOperatorType() {
-        return OperatorType.GREATER_OR_EQUAL;
+        return OperatorType.GREATER;
     }
 }

@@ -20,18 +20,14 @@ public class QueryRestrictionStrategyFinderTest {
     @Test
     public void queryRestrictionsAllStrategyTest() {
         Set<QueryRestrictionStrategy> strategies = QueryRestrictionsStrategyFinder.getAllStrategies();
-
         logger.info("#########################QUERY_RESTRICTIONS_ALL_STRATEGIES : {}\n", strategies);
-
         Assert.assertEquals(11, strategies.size());
     }
 
     @Test
     public void queryRestrictionsValidStrategyTest() {
         Set<QueryRestrictionStrategy> strategies = QueryRestrictionsStrategyFinder.getValidStrategies();
-
         logger.info("#########################QUERY_RESTRICTIONS_VALID_STRATEGIES : {}\n", strategies);
-
         Assert.assertEquals(10, strategies.size());
     }
 }

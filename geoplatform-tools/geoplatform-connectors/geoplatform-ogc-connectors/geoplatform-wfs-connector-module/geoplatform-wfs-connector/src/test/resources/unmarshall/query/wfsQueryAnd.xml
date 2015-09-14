@@ -50,5 +50,41 @@
             <operator>CONTAINS</operator>
             <restriction>Mtn</restriction>
         </queryRestriction>
+        <queryRestriction>
+            <attribute>
+                <maxOccurs>1</maxOccurs>
+                <minOccurs>0</minOccurs>
+                <name>SUB_REGION</name>
+                <nillable>true</nillable>
+                <type>string</type>
+                <value></value>
+            </attribute>
+            <operator>STARTS_WITH</operator>
+            <restriction>Mtn</restriction>
+        </queryRestriction>
+        <queryRestriction>
+            <attribute>
+                <maxOccurs>1</maxOccurs>
+                <minOccurs>0</minOccurs>
+                <name>SUB_REGION</name>
+                <nillable>true</nillable>
+                <type>string</type>
+                <value></value>
+            </attribute>
+            <operator>ENDS_WITH</operator>
+            <restriction>Mtn</restriction>
+        </queryRestriction>
+        <queryRestriction>
+            <attribute>
+                <maxOccurs>1</maxOccurs>
+                <minOccurs>0</minOccurs>
+                <name>SUB_REGION</name>
+                <nillable>true</nillable>
+                <type>string</type>
+                <value></value>
+            </attribute>
+            <operator>LIKE</operator>
+            <restriction>Mtn</restriction>
+        </queryRestriction>
     </queryRestrictionList>
 </QueryDTO>

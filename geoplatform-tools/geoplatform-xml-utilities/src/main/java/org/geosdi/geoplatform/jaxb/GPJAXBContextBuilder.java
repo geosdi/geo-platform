@@ -35,27 +35,19 @@
  */
 package org.geosdi.geoplatform.jaxb;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.Writer;
-import java.lang.ref.WeakReference;
-import java.net.URI;
-import java.net.URL;
-import javax.xml.bind.DataBindingException;
-import javax.xml.bind.JAXB;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
+import org.w3c.dom.Node;
+
+import javax.xml.bind.*;
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLEventWriter;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.XMLStreamWriter;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
-import org.w3c.dom.Node;
+import java.io.*;
+import java.lang.ref.WeakReference;
+import java.net.URI;
+import java.net.URL;
 
 /**
  *
@@ -158,6 +150,18 @@ public final class GPJAXBContextBuilder {
             Class<T> type) {
         try {
             Object item = getContext(type).createUnmarshaller().unmarshal(xml);
+
+            return (item instanceof JAXBElement) ? ((JAXBElement<T>) item).
+                    getValue() : (T) item;
+        } catch (JAXBException e) {
+            throw new DataBindingException(e);
+        }
+    }
+
+    public <T> T unmarshal(Reader reader,
+            Class<T> type) {
+        try {
+            Object item = getContext(type).createUnmarshaller().unmarshal(reader);
 
             return (item instanceof JAXBElement) ? ((JAXBElement<T>) item).
                     getValue() : (T) item;

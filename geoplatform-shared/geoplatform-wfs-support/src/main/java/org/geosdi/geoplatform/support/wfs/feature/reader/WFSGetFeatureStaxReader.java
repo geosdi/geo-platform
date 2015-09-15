@@ -111,10 +111,10 @@ public class WFSGetFeatureStaxReader extends AbstractStaxStreamReader<FeatureCol
                 } else if (super.isTagName(prefix, name)) {
                     feature = this.readFID();
                     fc.addFeature(feature);
-                    if (!super.isTagName(prefix, geometryName)) {
-                        FeatureAttributesMap attributes = this.readAttributes(name, attributeNames);
-                        feature.setAttributes(attributes);
-                    }
+                    //                    if (!super.isTagName(prefix, geometryName)) {
+                    //                        FeatureAttributesMap attributes = this.readAttributes(name, attributeNames);
+                    //                        feature.setAttributes(attributes);
+                    //                    }
                 } else if (super.isTagName(prefix, geometryName)) {
                     assert (feature != null); // TODO DEL
                     String geometryWKT = this.readGeometry();
@@ -184,6 +184,9 @@ public class WFSGetFeatureStaxReader extends AbstractStaxStreamReader<FeatureCol
         }
 
         Map<String, String> map = new HashMap<String, String>(attributeNames.size());
+        for (String name : attributeNames) {
+            map.put(name, null);
+        }
         FeatureAttributesMap fMap = new FeatureAttributesMap();
         fMap.setAttributesMap(map);
 

@@ -64,8 +64,8 @@ public class GPLoginAccessManager extends GeoPlatformContentPanel {
 
     public void doLogin(EventType eventOnSuccess, String loadingMessage) {
         this.eventOnSuccess = eventOnSuccess;
-        BasicGinInjector.MainInjector.getInstance().getSecurityLoginChainOfResponsibility().doLogin();
         this.showProgressBar(loadingMessage);
+        BasicGinInjector.MainInjector.getInstance().getSecurityLoginChainOfResponsibility().doLogin();
     }
 
     private void showProgressBar(final String loadingMessage) {

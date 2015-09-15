@@ -15,4 +15,15 @@
         <appender-ref ref="STDOUT" />
     </root>
 
+    <logger name="org.geosdi.geoplatform.connector.server.request.v110.query.repository.QueryRestrictionRepository"
+            level="debug"/>
+
+    <logger name="org.geosdi.geoplatform.connector.server.request.v110.query.responsibility.ILogicOperatorHandler"
+            level="trace"/>
+    <logger name="org.geosdi.geoplatform.connector.server.request.v110.query.responsibility.AndOperatorHandler"
+            level="debug"/>
+
+    <logger name="org.geosdi.geoplatform.gui.server.command.wfst.basic.GetAllFeatureCommand"
+            level="trace"/>
+
 </configuration>

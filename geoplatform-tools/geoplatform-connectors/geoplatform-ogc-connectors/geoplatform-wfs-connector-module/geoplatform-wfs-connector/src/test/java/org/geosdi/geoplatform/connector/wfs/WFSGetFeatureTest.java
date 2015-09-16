@@ -43,7 +43,6 @@ import org.geosdi.geoplatform.xml.wfs.v110.FeatureCollectionType;
 import org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType;
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.StringReader;
@@ -211,25 +210,256 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
         Assert.assertEquals(4, response.getNumberOfFeatures().intValue());
     }
 
-    @Ignore("ToDo complete with assertion")
     @Test
-    public void statesSRS() throws Exception {
+    public void statesContainsRestrictionTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
 
         request.setTypeName(statesName);
-        request.setResultType(ResultTypeType.RESULTS.value());
+        request.setResultType(ResultTypeType.HITS.value());
+        request.setQueryDTO(GPJAXBContextBuilder.newInstance()
+                .unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                        "<QueryDTO>\n" +
+                        "    <matchOperator>ALL</matchOperator>\n" +
+                        "    <queryRestrictionList>\n" +
+                        "        <queryRestriction>\n" +
+                        "            <attribute>\n" +
+                        "                <maxOccurs>1</maxOccurs>\n" +
+                        "                <minOccurs>0</minOccurs>\n" +
+                        "                <name>SUB_REGION</name>\n" +
+                        "                <nillable>true</nillable>\n" +
+                        "                <type>string</type>\n" +
+                        "                <value></value>\n" +
+                        "            </attribute>\n" +
+                        "            <operator>CONTAINS</operator>\n" +
+                        "            <restriction>Mtn</restriction>\n" +
+                        "        </queryRestriction>\n" +
+                        "    </queryRestrictionList>\n" +
+                        "</QueryDTO>"), QueryDTO.class));
+
+        logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
 
         FeatureCollectionType response = request.getResponse();
-        // TODO Check geometry into default SRS EPSG:4326
+        Assert.assertEquals(7, response.getNumberOfFeatures().intValue());
+    }
 
-        request = serverConnector.createGetFeatureRequest();
+    @Test
+    public void statesSecureContainsRestrictionTest() throws Exception {
+        WFSGetFeatureRequest<FeatureCollectionType> request = secureServerConnector.createGetFeatureRequest();
 
         request.setTypeName(statesName);
-        request.setResultType(ResultTypeType.RESULTS.value());
-        request.setSRS("EPSG:900913");
+        request.setResultType(ResultTypeType.HITS.value());
+        request.setQueryDTO(GPJAXBContextBuilder.newInstance()
+                .unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                        "<QueryDTO>\n" +
+                        "    <matchOperator>ALL</matchOperator>\n" +
+                        "    <queryRestrictionList>\n" +
+                        "        <queryRestriction>\n" +
+                        "            <attribute>\n" +
+                        "                <maxOccurs>1</maxOccurs>\n" +
+                        "                <minOccurs>0</minOccurs>\n" +
+                        "                <name>SUB_REGION</name>\n" +
+                        "                <nillable>true</nillable>\n" +
+                        "                <type>string</type>\n" +
+                        "                <value></value>\n" +
+                        "            </attribute>\n" +
+                        "            <operator>CONTAINS</operator>\n" +
+                        "            <restriction>Mtn</restriction>\n" +
+                        "        </queryRestriction>\n" +
+                        "    </queryRestrictionList>\n" +
+                        "</QueryDTO>"), QueryDTO.class));
 
-        response = request.getResponse();
-        // TODO Check geometry into SRS EPSG:900913
+        logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
+
+        FeatureCollectionType response = request.getResponse();
+        Assert.assertEquals(8, response.getNumberOfFeatures().intValue());
+    }
+
+    @Test
+    public void statesNotContainsRestrictionTest() throws Exception {
+        WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
+
+        request.setTypeName(statesName);
+        request.setResultType(ResultTypeType.HITS.value());
+        request.setQueryDTO(GPJAXBContextBuilder.newInstance()
+                .unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                        "<QueryDTO>\n" +
+                        "    <matchOperator>NONE</matchOperator>\n" +
+                        "    <queryRestrictionList>\n" +
+                        "        <queryRestriction>\n" +
+                        "            <attribute>\n" +
+                        "                <maxOccurs>1</maxOccurs>\n" +
+                        "                <minOccurs>0</minOccurs>\n" +
+                        "                <name>SUB_REGION</name>\n" +
+                        "                <nillable>true</nillable>\n" +
+                        "                <type>string</type>\n" +
+                        "                <value></value>\n" +
+                        "            </attribute>\n" +
+                        "            <operator>CONTAINS</operator>\n" +
+                        "            <restriction>Mtn</restriction>\n" +
+                        "        </queryRestriction>\n" +
+                        "    </queryRestrictionList>\n" +
+                        "</QueryDTO>"), QueryDTO.class));
+
+        logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
+
+        FeatureCollectionType response = request.getResponse();
+        Assert.assertEquals(36, response.getNumberOfFeatures().intValue());
+    }
+
+    @Test
+    public void statesSecureNotContainsRestrictionTest() throws Exception {
+        WFSGetFeatureRequest<FeatureCollectionType> request = secureServerConnector.createGetFeatureRequest();
+
+        request.setTypeName(statesName);
+        request.setResultType(ResultTypeType.HITS.value());
+        request.setQueryDTO(GPJAXBContextBuilder.newInstance()
+                .unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                        "<QueryDTO>\n" +
+                        "    <matchOperator>NONE</matchOperator>\n" +
+                        "    <queryRestrictionList>\n" +
+                        "        <queryRestriction>\n" +
+                        "            <attribute>\n" +
+                        "                <maxOccurs>1</maxOccurs>\n" +
+                        "                <minOccurs>0</minOccurs>\n" +
+                        "                <name>SUB_REGION</name>\n" +
+                        "                <nillable>true</nillable>\n" +
+                        "                <type>string</type>\n" +
+                        "                <value></value>\n" +
+                        "            </attribute>\n" +
+                        "            <operator>CONTAINS</operator>\n" +
+                        "            <restriction>Mtn</restriction>\n" +
+                        "        </queryRestriction>\n" +
+                        "    </queryRestrictionList>\n" +
+                        "</QueryDTO>"), QueryDTO.class));
+
+        logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
+
+        FeatureCollectionType response = request.getResponse();
+        Assert.assertEquals(41, response.getNumberOfFeatures().intValue());
+    }
+
+    @Test
+    public void statesGreatherThanRestrictionTest() throws Exception {
+        WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
+
+        request.setTypeName(statesName);
+        request.setResultType(ResultTypeType.HITS.value());
+        request.setQueryDTO(GPJAXBContextBuilder.newInstance()
+                .unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                        "<QueryDTO>\n" +
+                        "    <matchOperator>ALL</matchOperator>\n" +
+                        "    <queryRestrictionList>\n" +
+                        "        <queryRestriction>\n" +
+                        "            <attribute>\n" +
+                        "                <maxOccurs>1</maxOccurs>\n" +
+                        "                <minOccurs>0</minOccurs>\n" +
+                        "                <name>WORKERS</name>\n" +
+                        "                <nillable>true</nillable>\n" +
+                        "                <type>double</type>\n" +
+                        "                <value></value>\n" +
+                        "            </attribute>\n" +
+                        "            <operator>GREATER</operator>\n" +
+                        "            <restriction>6000000</restriction>\n" +
+                        "        </queryRestriction>\n" +
+                        "    </queryRestrictionList>\n" +
+                        "</QueryDTO>"), QueryDTO.class));
+        logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
+
+        FeatureCollectionType response = request.getResponse();
+        Assert.assertEquals(2, response.getNumberOfFeatures().intValue());
+    }
+
+    @Test
+    public void statesSecureGreatherThanRestrictionTest() throws Exception {
+        WFSGetFeatureRequest<FeatureCollectionType> request = secureServerConnector.createGetFeatureRequest();
+
+        request.setTypeName(statesName);
+        request.setResultType(ResultTypeType.HITS.value());
+        request.setQueryDTO(GPJAXBContextBuilder.newInstance()
+                .unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                        "<QueryDTO>\n" +
+                        "    <matchOperator>ALL</matchOperator>\n" +
+                        "    <queryRestrictionList>\n" +
+                        "        <queryRestriction>\n" +
+                        "            <attribute>\n" +
+                        "                <maxOccurs>1</maxOccurs>\n" +
+                        "                <minOccurs>0</minOccurs>\n" +
+                        "                <name>WORKERS</name>\n" +
+                        "                <nillable>true</nillable>\n" +
+                        "                <type>double</type>\n" +
+                        "                <value></value>\n" +
+                        "            </attribute>\n" +
+                        "            <operator>GREATER</operator>\n" +
+                        "            <restriction>6000000</restriction>\n" +
+                        "        </queryRestriction>\n" +
+                        "    </queryRestrictionList>\n" +
+                        "</QueryDTO>"), QueryDTO.class));
+        logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
+
+        FeatureCollectionType response = request.getResponse();
+        Assert.assertEquals(3, response.getNumberOfFeatures().intValue());
+    }
+
+    @Test
+    public void statesNotGreatherThanRestrictionTest() throws Exception {
+        WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
+
+        request.setTypeName(statesName);
+        request.setResultType(ResultTypeType.HITS.value());
+        request.setQueryDTO(GPJAXBContextBuilder.newInstance()
+                .unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                        "<QueryDTO>\n" +
+                        "    <matchOperator>NONE</matchOperator>\n" +
+                        "    <queryRestrictionList>\n" +
+                        "        <queryRestriction>\n" +
+                        "            <attribute>\n" +
+                        "                <maxOccurs>1</maxOccurs>\n" +
+                        "                <minOccurs>0</minOccurs>\n" +
+                        "                <name>WORKERS</name>\n" +
+                        "                <nillable>true</nillable>\n" +
+                        "                <type>double</type>\n" +
+                        "                <value></value>\n" +
+                        "            </attribute>\n" +
+                        "            <operator>GREATER</operator>\n" +
+                        "            <restriction>6000000</restriction>\n" +
+                        "        </queryRestriction>\n" +
+                        "    </queryRestrictionList>\n" +
+                        "</QueryDTO>"), QueryDTO.class));
+        logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
+
+        FeatureCollectionType response = request.getResponse();
+        Assert.assertEquals(41, response.getNumberOfFeatures().intValue());
+    }
+
+    @Test
+    public void statesSecureNotGreatherThanRestrictionTest() throws Exception {
+        WFSGetFeatureRequest<FeatureCollectionType> request = secureServerConnector.createGetFeatureRequest();
+
+        request.setTypeName(statesName);
+        request.setResultType(ResultTypeType.HITS.value());
+        request.setQueryDTO(GPJAXBContextBuilder.newInstance()
+                .unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                        "<QueryDTO>\n" +
+                        "    <matchOperator>NONE</matchOperator>\n" +
+                        "    <queryRestrictionList>\n" +
+                        "        <queryRestriction>\n" +
+                        "            <attribute>\n" +
+                        "                <maxOccurs>1</maxOccurs>\n" +
+                        "                <minOccurs>0</minOccurs>\n" +
+                        "                <name>WORKERS</name>\n" +
+                        "                <nillable>true</nillable>\n" +
+                        "                <type>double</type>\n" +
+                        "                <value></value>\n" +
+                        "            </attribute>\n" +
+                        "            <operator>GREATER</operator>\n" +
+                        "            <restriction>6000000</restriction>\n" +
+                        "        </queryRestriction>\n" +
+                        "    </queryRestrictionList>\n" +
+                        "</QueryDTO>"), QueryDTO.class));
+        logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
+
+        FeatureCollectionType response = request.getResponse();
+        Assert.assertEquals(46, response.getNumberOfFeatures().intValue());
     }
 
 }

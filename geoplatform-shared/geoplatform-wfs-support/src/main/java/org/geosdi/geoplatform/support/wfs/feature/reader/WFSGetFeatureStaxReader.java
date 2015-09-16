@@ -94,7 +94,7 @@ public class WFSGetFeatureStaxReader extends AbstractStaxStreamReader<FeatureCol
         }
         String prefix = typeName.substring(0, typeName.indexOf(":"));
         String name = typeName.substring(typeName.indexOf(":") + 1);
-        logger.debug("\n@@@ Read feature {}:{} @@@", prefix, name);
+        logger.debug("\n@@@@@@ Read feature {}:{} @@@@@@", prefix, name);
 
         GeometryAttributeDTO geometryAtt = layerSchema.getGeometry();
         String geometryName = geometryAtt.getName();
@@ -106,7 +106,7 @@ public class WFSGetFeatureStaxReader extends AbstractStaxStreamReader<FeatureCol
         List<String> attributeNames = layerSchema.getAttributeNames();
 
         FeatureCollectionDTO fc = new FeatureCollectionDTO();
-        FeatureDTO feature = null; // TODO Not initialize
+        FeatureDTO feature = null;
         while (reader.hasNext()) {
             int evenType = reader.getEventType();
             if (evenType == XMLEvent.START_ELEMENT) {
@@ -116,7 +116,6 @@ public class WFSGetFeatureStaxReader extends AbstractStaxStreamReader<FeatureCol
                     feature = this.readFID();
                     fc.addFeature(feature);
                 } else if (super.isTagName(prefix, geometryName)) {
-                    assert (feature != null); // TODO DEL
                     String geometryWKT = this.readGeometry();
                     feature.setGeometry(geometryWKT);
 

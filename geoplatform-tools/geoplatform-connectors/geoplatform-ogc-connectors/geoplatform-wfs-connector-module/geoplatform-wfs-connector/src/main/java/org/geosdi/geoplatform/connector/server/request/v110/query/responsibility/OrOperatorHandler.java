@@ -4,6 +4,7 @@ import org.geosdi.geoplatform.connector.wfs.response.QueryDTO;
 import org.geosdi.geoplatform.connector.wfs.response.QueryRestrictionDTO;
 import org.geosdi.geoplatform.gui.shared.wfs.LogicOperatorType;
 import org.geosdi.geoplatform.xml.filter.v110.BinaryLogicOpType;
+import org.geosdi.geoplatform.xml.filter.v110.ComparisonOpsType;
 import org.geosdi.geoplatform.xml.filter.v110.FilterType;
 
 import javax.xml.bind.JAXBElement;
@@ -40,12 +41,17 @@ public class OrOperatorHandler extends LogicOperatorHandler {
     @Override
     protected void processQueryRestrictions(FilterType filter, List<QueryRestrictionDTO> queryRestrictionDTOs) {
         logger.debug("################### {} Processing............\n", getFilterName());
-        BinaryLogicOpType or = new BinaryLogicOpType();
         List<JAXBElement<?>> elements = super.buildJAXBElementList(queryRestrictionDTOs);
         logger.debug("##################{} builds : {} " + (elements.size() > 1 ? "elements" : "element") + "\n",
                 getFilterName(), elements.size());
-        or.setComparisonOpsOrSpatialOpsOrLogicOps(elements);
-        filter.setLogicOps(filterFactory.createOr(or));
+        if (elements.size() == 1) {
+            JAXBElement<ComparisonOpsType> element = (JAXBElement<ComparisonOpsType>) elements.get(0);
+            filter.setComparisonOps(element);
+        } else if (elements.size() > 1) {
+            BinaryLogicOpType or = new BinaryLogicOpType();
+            or.setComparisonOpsOrSpatialOpsOrLogicOps(elements);
+            filter.setLogicOps(filterFactory.createOr(or));
+        }
     }
 
     /**

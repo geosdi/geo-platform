@@ -5,6 +5,7 @@ import org.geosdi.geoplatform.connector.wfs.response.QueryRestrictionDTO;
 import org.geosdi.geoplatform.gui.shared.wfs.LogicOperatorType;
 import org.geosdi.geoplatform.gui.shared.wfs.OperatorType;
 import org.geosdi.geoplatform.xml.filter.v110.BinaryLogicOpType;
+import org.geosdi.geoplatform.xml.filter.v110.ComparisonOpsType;
 import org.geosdi.geoplatform.xml.filter.v110.FilterType;
 
 import javax.xml.bind.JAXBElement;
@@ -41,12 +42,17 @@ public class AndOperatorHandler extends LogicOperatorHandler {
     @Override
     protected void processQueryRestrictions(FilterType filter, List<QueryRestrictionDTO> queryRestrictionDTOs) {
         logger.debug("################### {} Processing............\n", getFilterName());
-        BinaryLogicOpType and = new BinaryLogicOpType();
         List<JAXBElement<?>> elements = super.buildJAXBElementList(queryRestrictionDTOs);
-        logger.debug("\n##################{} builds : {} " + (elements.size() > 1 ? "elements" : "element") + "\n",
+        logger.debug("##################{} builds : {} " + (elements.size() > 1 ? "elements" : "element") + "\n",
                 getFilterName(), elements.size());
-        and.setComparisonOpsOrSpatialOpsOrLogicOps(elements);
-        filter.setLogicOps(filterFactory.createAnd(and));
+        if (elements.size() == 1) {
+            JAXBElement<ComparisonOpsType> opsTypeJAXBElement = (JAXBElement<ComparisonOpsType>) elements.get(0);
+            filter.setComparisonOps(opsTypeJAXBElement);
+        } else if (elements.size() > 1) {
+            BinaryLogicOpType and = new BinaryLogicOpType();
+            and.setComparisonOpsOrSpatialOpsOrLogicOps(elements);
+            filter.setLogicOps(filterFactory.createAnd(and));
+        }
     }
 
     /**

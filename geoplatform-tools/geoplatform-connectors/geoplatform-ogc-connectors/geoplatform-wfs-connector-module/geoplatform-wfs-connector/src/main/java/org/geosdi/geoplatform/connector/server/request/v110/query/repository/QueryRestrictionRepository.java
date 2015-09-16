@@ -22,7 +22,7 @@ public final class QueryRestrictionRepository {
         for (QueryRestrictionStrategy<?> queryRestrictionStrategy : QueryRestrictionsStrategyFinder.getValidStrategies()) {
             parameters.put(queryRestrictionStrategy.forOperatorType(), queryRestrictionStrategy);
         }
-        logger.debug("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@{} parameters map up with {} values.\n\n",
+        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@{} parameters map up with {} values.\n\n",
                 QueryRestrictionRepository.class.getSimpleName(), parameters.size());
     }
 

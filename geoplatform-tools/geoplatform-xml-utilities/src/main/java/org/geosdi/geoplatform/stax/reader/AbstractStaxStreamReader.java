@@ -51,7 +51,6 @@ import java.net.URI;
 import java.net.URL;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -65,7 +64,7 @@ public abstract class AbstractStaxStreamReader<T> implements GeoPlatformStaxRead
     /**
      * Method to Acquire a valid {@link XMLStreamReader} Reader. The possible
      * Objets are :
-     *
+     * <p/>
      * <ol> <li>{@link File}</li> <li>{@link Reader}</li>
      * <li>{@link InputStream}</li> <li>{@link URL}</li> <li>{@link URI}</li>
      * <li>{@link XMLStreamReader}</li> <li>{@link Source}</li>
@@ -76,11 +75,8 @@ public abstract class AbstractStaxStreamReader<T> implements GeoPlatformStaxRead
     @Override
     public void acquireReader(Object o) throws XMLStreamException, IOException {
         this.reset();
-
         Preconditions.checkNotNull(o, "The Object passed to " + "acquire Reader must not be null.");
-
         this.stream = streamBuilder.buildStream(o);
-
         this.reader = (this.stream != null) ? xmlStreamBuilder.build(stream) : xmlStreamBuilder.build(o);
     }
 
@@ -97,7 +93,6 @@ public abstract class AbstractStaxStreamReader<T> implements GeoPlatformStaxRead
     }
 
     /**
-     *
      * @param tagName
      * @throws XMLStreamException
      */
@@ -116,15 +111,15 @@ public abstract class AbstractStaxStreamReader<T> implements GeoPlatformStaxRead
     /**
      * Check if the tag correspond to prefix and localName.
      *
-     * @param prefix the prefix of the tag
+     * @param prefix    the prefix of the tag
      * @param localName the localName of the tag
-     * @return true if the tag is prefix:localName
+     * @return {@link Boolean#TRUE} if the tag is prefix:localName
      */
-    protected boolean isTagName(String prefix, String localName) {
+    protected Boolean isTagName(String prefix, String localName) {
         if (prefix.equals(reader.getPrefix()) && localName.equals(reader.getLocalName())) {
-            return true;
+            return Boolean.TRUE;
         }
-        return false;
+        return Boolean.FALSE;
     }
 
     /**

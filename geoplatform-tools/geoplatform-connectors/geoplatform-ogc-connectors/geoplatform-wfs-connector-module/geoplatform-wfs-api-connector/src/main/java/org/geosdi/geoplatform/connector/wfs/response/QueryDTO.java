@@ -59,7 +59,8 @@ public class QueryDTO implements Serializable {
     }
 
     public String getMatchOperator() {
-        return matchOperator = ((this.matchOperator != null) && !(this.matchOperator.isEmpty()) ? this.matchOperator :
+        return matchOperator = ((this.matchOperator != null) && !(this.matchOperator.isEmpty()) ?
+                this.matchOperator :
                 OperatorType.EQUAL.toString());
     }
 

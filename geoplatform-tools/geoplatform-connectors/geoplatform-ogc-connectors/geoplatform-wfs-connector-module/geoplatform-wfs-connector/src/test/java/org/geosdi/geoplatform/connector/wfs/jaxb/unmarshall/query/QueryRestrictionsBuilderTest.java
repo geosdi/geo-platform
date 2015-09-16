@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.io.StringReader;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -45,23 +46,617 @@ public class QueryRestrictionsBuilderTest {
     @Test
     public void wfsQueryRestrictionsBuilderAndTest() throws Exception {
         logger.info("##################FILTER_CREATED_AND : {}\n",
-                ILogicOperatorHandler.WFSQueryRestrictionsBuilder.builder().withFilterType(
-                        new FilterType()).withQueryDTO(queryDTOAnd).build());
+                ILogicOperatorHandler.WFSQueryRestrictionsBuilder.builder()
+                        .withFilterType(new FilterType())
+                        .withQueryDTO(queryDTOAnd)
+                        .build());
 
     }
 
     @Test
     public void wfsQueryRestrictionsBuilderOrTest() throws Exception {
         logger.info("##################FILTER_CREATED_OR : {}\n",
-                ILogicOperatorHandler.WFSQueryRestrictionsBuilder.builder().withFilterType(
-                        new FilterType()).withQueryDTO(queryDTOOr).build());
+                ILogicOperatorHandler.WFSQueryRestrictionsBuilder.builder()
+                        .withFilterType(new FilterType())
+                        .withQueryDTO(queryDTOOr)
+                        .build());
 
     }
 
     @Test
     public void wfsQueryRestrictionsBuilderNotTest() throws Exception {
         logger.info("##################FILTER_CREATED_NOT : {}\n",
-                ILogicOperatorHandler.WFSQueryRestrictionsBuilder.builder().withFilterType(
-                        new FilterType()).withQueryDTO(queryDTONot).build());
+                ILogicOperatorHandler.WFSQueryRestrictionsBuilder.builder()
+                        .withFilterType(new FilterType())
+                        .withQueryDTO(queryDTONot)
+                        .build());
+    }
+
+    @Test
+    public void wfsQueryRestrictionsBuilderNotStringTest() throws Exception {
+        logger.info("##################FILTER_CREATED_NOT_FROM_STRING : {}\n",
+                ILogicOperatorHandler.WFSQueryRestrictionsBuilder.builder()
+                        .withFilterType(new FilterType())
+                        .withQueryDTO(GPJAXBContextBuilder.newInstance()
+                                .unmarshal(new StringReader(
+                                        "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                                                "<QueryDTO>\n" +
+                                                "    <matchOperator>NONE</matchOperator>\n" +
+                                                "    <queryRestrictionList>\n" +
+                                                "        <queryRestriction>\n" +
+                                                "            <attribute>\n" +
+                                                "                <maxOccurs>1</maxOccurs>\n" +
+                                                "                <minOccurs>0</minOccurs>\n" +
+                                                "                <name>SUB_REGION</name>\n" +
+                                                "                <nillable>true</nillable>\n" +
+                                                "                <type>string</type>\n" +
+                                                "                <value></value>\n" +
+                                                "            </attribute>\n" +
+                                                "            <operator>CONTAINS</operator>\n" +
+                                                "            <restriction>Mtn</restriction>\n" +
+                                                "        </queryRestriction>\n" +
+                                                "    </queryRestrictionList>\n" +
+                                                "</QueryDTO>"), QueryDTO.class))
+                        .build());
+    }
+
+    @Test
+    public void wfsQueryRestrictionsBuilderAndGreatherTest() throws Exception {
+        logger.info("##################FILTER_CREATED_GREATHER : {}\n",
+                ILogicOperatorHandler.WFSQueryRestrictionsBuilder.builder()
+                        .withFilterType(new FilterType())
+                        .withQueryDTO(GPJAXBContextBuilder.newInstance()
+                                .unmarshal(new StringReader(
+                                        "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                                                "<QueryDTO>\n" +
+                                                "    <matchOperator>ALL</matchOperator>\n" +
+                                                "    <queryRestrictionList>\n" +
+                                                "        <queryRestriction>\n" +
+                                                "            <attribute>\n" +
+                                                "                <maxOccurs>1</maxOccurs>\n" +
+                                                "                <minOccurs>0</minOccurs>\n" +
+                                                "                <name>WORKERS</name>\n" +
+                                                "                <nillable>true</nillable>\n" +
+                                                "                <type>double</type>\n" +
+                                                "                <value></value>\n" +
+                                                "            </attribute>\n" +
+                                                "            <operator>GREATER</operator>\n" +
+                                                "            <restriction>0.25</restriction>\n" +
+                                                "        </queryRestriction>\n" +
+                                                "    </queryRestrictionList>\n" +
+                                                "</QueryDTO>"), QueryDTO.class))
+                        .build());
+    }
+
+    @Test
+    public void wfsQueryRestrictionsBuilderAndGreatherOrEqualTest() throws Exception {
+        logger.info("##################FILTER_CREATED_GREATHER_OR_EQUAL : {}\n",
+                ILogicOperatorHandler.WFSQueryRestrictionsBuilder.builder()
+                        .withFilterType(new FilterType())
+                        .withQueryDTO(GPJAXBContextBuilder.newInstance()
+                                .unmarshal(new StringReader(
+                                        "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                                                "<QueryDTO>\n" +
+                                                "    <matchOperator>ALL</matchOperator>\n" +
+                                                "    <queryRestrictionList>\n" +
+                                                "        <queryRestriction>\n" +
+                                                "            <attribute>\n" +
+                                                "                <maxOccurs>1</maxOccurs>\n" +
+                                                "                <minOccurs>0</minOccurs>\n" +
+                                                "                <name>WORKERS</name>\n" +
+                                                "                <nillable>true</nillable>\n" +
+                                                "                <type>double</type>\n" +
+                                                "                <value></value>\n" +
+                                                "            </attribute>\n" +
+                                                "            <operator>GREATER_OR_EQUAL</operator>\n" +
+                                                "            <restriction>0.25</restriction>\n" +
+                                                "        </queryRestriction>\n" +
+                                                "    </queryRestrictionList>\n" +
+                                                "</QueryDTO>"), QueryDTO.class))
+                        .build());
+    }
+
+    @Test
+    public void wfsQueryRestrictionsBuilderOrGreatherTest() throws Exception {
+        logger.info("##################FILTER_CREATED_GREATHER : {}\n",
+                ILogicOperatorHandler.WFSQueryRestrictionsBuilder.builder()
+                        .withFilterType(new FilterType())
+                        .withQueryDTO(GPJAXBContextBuilder.newInstance()
+                                .unmarshal(new StringReader(
+                                        "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                                                "<QueryDTO>\n" +
+                                                "    <matchOperator>ANY</matchOperator>\n" +
+                                                "    <queryRestrictionList>\n" +
+                                                "        <queryRestriction>\n" +
+                                                "            <attribute>\n" +
+                                                "                <maxOccurs>1</maxOccurs>\n" +
+                                                "                <minOccurs>0</minOccurs>\n" +
+                                                "                <name>WORKERS</name>\n" +
+                                                "                <nillable>true</nillable>\n" +
+                                                "                <type>double</type>\n" +
+                                                "                <value></value>\n" +
+                                                "            </attribute>\n" +
+                                                "            <operator>GREATER</operator>\n" +
+                                                "            <restriction>0.25</restriction>\n" +
+                                                "        </queryRestriction>\n" +
+                                                "    </queryRestrictionList>\n" +
+                                                "</QueryDTO>"), QueryDTO.class))
+                        .build());
+    }
+
+    @Test
+    public void wfsQueryRestrictionsBuilderNotGreatherTest() throws Exception {
+        logger.info("##################FILTER_CREATED_NOT_GREATHER : {}\n",
+                ILogicOperatorHandler.WFSQueryRestrictionsBuilder.builder()
+                        .withFilterType(new FilterType())
+                        .withQueryDTO(GPJAXBContextBuilder.newInstance()
+                                .unmarshal(new StringReader(
+                                        "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                                                "<QueryDTO>\n" +
+                                                "    <matchOperator>NONE</matchOperator>\n" +
+                                                "    <queryRestrictionList>\n" +
+                                                "        <queryRestriction>\n" +
+                                                "            <attribute>\n" +
+                                                "                <maxOccurs>1</maxOccurs>\n" +
+                                                "                <minOccurs>0</minOccurs>\n" +
+                                                "                <name>WORKERS</name>\n" +
+                                                "                <nillable>true</nillable>\n" +
+                                                "                <type>double</type>\n" +
+                                                "                <value></value>\n" +
+                                                "            </attribute>\n" +
+                                                "            <operator>GREATER</operator>\n" +
+                                                "            <restriction>0.25</restriction>\n" +
+                                                "        </queryRestriction>\n" +
+                                                "    </queryRestrictionList>\n" +
+                                                "</QueryDTO>"), QueryDTO.class))
+                        .build());
+    }
+
+    @Test
+    public void wfsQueryRestrictionsBuilderOrGreatherOrEqualTest() throws Exception {
+        logger.info("##################FILTER_CREATED_GREATHER_OR_EQUAL : {}\n",
+                ILogicOperatorHandler.WFSQueryRestrictionsBuilder.builder()
+                        .withFilterType(new FilterType())
+                        .withQueryDTO(GPJAXBContextBuilder.newInstance()
+                                .unmarshal(new StringReader(
+                                        "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                                                "<QueryDTO>\n" +
+                                                "    <matchOperator>ANY</matchOperator>\n" +
+                                                "    <queryRestrictionList>\n" +
+                                                "        <queryRestriction>\n" +
+                                                "            <attribute>\n" +
+                                                "                <maxOccurs>1</maxOccurs>\n" +
+                                                "                <minOccurs>0</minOccurs>\n" +
+                                                "                <name>WORKERS</name>\n" +
+                                                "                <nillable>true</nillable>\n" +
+                                                "                <type>double</type>\n" +
+                                                "                <value></value>\n" +
+                                                "            </attribute>\n" +
+                                                "            <operator>GREATER_OR_EQUAL</operator>\n" +
+                                                "            <restriction>0.25</restriction>\n" +
+                                                "        </queryRestriction>\n" +
+                                                "    </queryRestrictionList>\n" +
+                                                "</QueryDTO>"), QueryDTO.class))
+                        .build());
+    }
+
+    @Test
+    public void wfsQueryRestrictionsBuilderNotGreatherOrEqualTest() throws Exception {
+        logger.info("##################FILTER_CREATED_NOT_GREATHER_OR_EQUAL : {}\n",
+                ILogicOperatorHandler.WFSQueryRestrictionsBuilder.builder()
+                        .withFilterType(new FilterType())
+                        .withQueryDTO(GPJAXBContextBuilder.newInstance()
+                                .unmarshal(new StringReader(
+                                        "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                                                "<QueryDTO>\n" +
+                                                "    <matchOperator>NONE</matchOperator>\n" +
+                                                "    <queryRestrictionList>\n" +
+                                                "        <queryRestriction>\n" +
+                                                "            <attribute>\n" +
+                                                "                <maxOccurs>1</maxOccurs>\n" +
+                                                "                <minOccurs>0</minOccurs>\n" +
+                                                "                <name>WORKERS</name>\n" +
+                                                "                <nillable>true</nillable>\n" +
+                                                "                <type>double</type>\n" +
+                                                "                <value></value>\n" +
+                                                "            </attribute>\n" +
+                                                "            <operator>GREATER_OR_EQUAL</operator>\n" +
+                                                "            <restriction>0.25</restriction>\n" +
+                                                "        </queryRestriction>\n" +
+                                                "    </queryRestrictionList>\n" +
+                                                "</QueryDTO>"), QueryDTO.class))
+                        .build());
+    }
+
+    @Test
+    public void wfsQueryRestrictionsBuilderAndLessTest() throws Exception {
+        logger.info("##################FILTER_CREATED_LESS : {}\n",
+                ILogicOperatorHandler.WFSQueryRestrictionsBuilder.builder()
+                        .withFilterType(new FilterType())
+                        .withQueryDTO(GPJAXBContextBuilder.newInstance()
+                                .unmarshal(new StringReader(
+                                        "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                                                "<QueryDTO>\n" +
+                                                "    <matchOperator>ALL</matchOperator>\n" +
+                                                "    <queryRestrictionList>\n" +
+                                                "        <queryRestriction>\n" +
+                                                "            <attribute>\n" +
+                                                "                <maxOccurs>1</maxOccurs>\n" +
+                                                "                <minOccurs>0</minOccurs>\n" +
+                                                "                <name>WORKERS</name>\n" +
+                                                "                <nillable>true</nillable>\n" +
+                                                "                <type>double</type>\n" +
+                                                "                <value></value>\n" +
+                                                "            </attribute>\n" +
+                                                "            <operator>LESS</operator>\n" +
+                                                "            <restriction>0.25</restriction>\n" +
+                                                "        </queryRestriction>\n" +
+                                                "    </queryRestrictionList>\n" +
+                                                "</QueryDTO>"), QueryDTO.class))
+                        .build());
+    }
+
+    @Test
+    public void wfsQueryRestrictionsBuilderAndLessOrEqualTest() throws Exception {
+        logger.info("##################FILTER_CREATED_LESS_OR_EQUAL : {}\n",
+                ILogicOperatorHandler.WFSQueryRestrictionsBuilder.builder()
+                        .withFilterType(new FilterType())
+                        .withQueryDTO(GPJAXBContextBuilder.newInstance()
+                                .unmarshal(new StringReader(
+                                        "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                                                "<QueryDTO>\n" +
+                                                "    <matchOperator>ALL</matchOperator>\n" +
+                                                "    <queryRestrictionList>\n" +
+                                                "        <queryRestriction>\n" +
+                                                "            <attribute>\n" +
+                                                "                <maxOccurs>1</maxOccurs>\n" +
+                                                "                <minOccurs>0</minOccurs>\n" +
+                                                "                <name>WORKERS</name>\n" +
+                                                "                <nillable>true</nillable>\n" +
+                                                "                <type>double</type>\n" +
+                                                "                <value></value>\n" +
+                                                "            </attribute>\n" +
+                                                "            <operator>LESS_OR_EQUAL</operator>\n" +
+                                                "            <restriction>0.25</restriction>\n" +
+                                                "        </queryRestriction>\n" +
+                                                "    </queryRestrictionList>\n" +
+                                                "</QueryDTO>"), QueryDTO.class))
+                        .build());
+    }
+
+    @Test
+    public void wfsQueryRestrictionsBuilderOrLessTest() throws Exception {
+        logger.info("##################FILTER_CREATED_LESS : {}\n",
+                ILogicOperatorHandler.WFSQueryRestrictionsBuilder.builder()
+                        .withFilterType(new FilterType())
+                        .withQueryDTO(GPJAXBContextBuilder.newInstance()
+                                .unmarshal(new StringReader(
+                                        "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                                                "<QueryDTO>\n" +
+                                                "    <matchOperator>ANY</matchOperator>\n" +
+                                                "    <queryRestrictionList>\n" +
+                                                "        <queryRestriction>\n" +
+                                                "            <attribute>\n" +
+                                                "                <maxOccurs>1</maxOccurs>\n" +
+                                                "                <minOccurs>0</minOccurs>\n" +
+                                                "                <name>WORKERS</name>\n" +
+                                                "                <nillable>true</nillable>\n" +
+                                                "                <type>double</type>\n" +
+                                                "                <value></value>\n" +
+                                                "            </attribute>\n" +
+                                                "            <operator>LESS</operator>\n" +
+                                                "            <restriction>0.25</restriction>\n" +
+                                                "        </queryRestriction>\n" +
+                                                "    </queryRestrictionList>\n" +
+                                                "</QueryDTO>"), QueryDTO.class))
+                        .build());
+    }
+
+    @Test
+    public void wfsQueryRestrictionsBuilderNotLessTest() throws Exception {
+        logger.info("##################FILTER_CREATED_NOT_LESS : {}\n",
+                ILogicOperatorHandler.WFSQueryRestrictionsBuilder.builder()
+                        .withFilterType(new FilterType())
+                        .withQueryDTO(GPJAXBContextBuilder.newInstance()
+                                .unmarshal(new StringReader(
+                                        "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                                                "<QueryDTO>\n" +
+                                                "    <matchOperator>NONE</matchOperator>\n" +
+                                                "    <queryRestrictionList>\n" +
+                                                "        <queryRestriction>\n" +
+                                                "            <attribute>\n" +
+                                                "                <maxOccurs>1</maxOccurs>\n" +
+                                                "                <minOccurs>0</minOccurs>\n" +
+                                                "                <name>WORKERS</name>\n" +
+                                                "                <nillable>true</nillable>\n" +
+                                                "                <type>double</type>\n" +
+                                                "                <value></value>\n" +
+                                                "            </attribute>\n" +
+                                                "            <operator>LESS</operator>\n" +
+                                                "            <restriction>0.25</restriction>\n" +
+                                                "        </queryRestriction>\n" +
+                                                "    </queryRestrictionList>\n" +
+                                                "</QueryDTO>"), QueryDTO.class))
+                        .build());
+    }
+
+    @Test
+    public void wfsQueryRestrictionsBuilderOrLessOrEqualTest() throws Exception {
+        logger.info("##################FILTER_CREATED_LESS_OR_EQUAL : {}\n",
+                ILogicOperatorHandler.WFSQueryRestrictionsBuilder.builder()
+                        .withFilterType(new FilterType())
+                        .withQueryDTO(GPJAXBContextBuilder.newInstance()
+                                .unmarshal(new StringReader(
+                                        "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                                                "<QueryDTO>\n" +
+                                                "    <matchOperator>ANY</matchOperator>\n" +
+                                                "    <queryRestrictionList>\n" +
+                                                "        <queryRestriction>\n" +
+                                                "            <attribute>\n" +
+                                                "                <maxOccurs>1</maxOccurs>\n" +
+                                                "                <minOccurs>0</minOccurs>\n" +
+                                                "                <name>WORKERS</name>\n" +
+                                                "                <nillable>true</nillable>\n" +
+                                                "                <type>double</type>\n" +
+                                                "                <value></value>\n" +
+                                                "            </attribute>\n" +
+                                                "            <operator>LESS_OR_EQUAL</operator>\n" +
+                                                "            <restriction>0.25</restriction>\n" +
+                                                "        </queryRestriction>\n" +
+                                                "    </queryRestrictionList>\n" +
+                                                "</QueryDTO>"), QueryDTO.class))
+                        .build());
+    }
+
+    @Test
+    public void wfsQueryRestrictionsBuilderNotLessOrEqualTest() throws Exception {
+        logger.info("##################FILTER_CREATED_NOT_LESS_OR_EQUAL : {}\n",
+                ILogicOperatorHandler.WFSQueryRestrictionsBuilder.builder()
+                        .withFilterType(new FilterType())
+                        .withQueryDTO(GPJAXBContextBuilder.newInstance()
+                                .unmarshal(new StringReader(
+                                        "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                                                "<QueryDTO>\n" +
+                                                "    <matchOperator>NONE</matchOperator>\n" +
+                                                "    <queryRestrictionList>\n" +
+                                                "        <queryRestriction>\n" +
+                                                "            <attribute>\n" +
+                                                "                <maxOccurs>1</maxOccurs>\n" +
+                                                "                <minOccurs>0</minOccurs>\n" +
+                                                "                <name>WORKERS</name>\n" +
+                                                "                <nillable>true</nillable>\n" +
+                                                "                <type>double</type>\n" +
+                                                "                <value></value>\n" +
+                                                "            </attribute>\n" +
+                                                "            <operator>LESS_OR_EQUAL</operator>\n" +
+                                                "            <restriction>0.25</restriction>\n" +
+                                                "        </queryRestriction>\n" +
+                                                "    </queryRestrictionList>\n" +
+                                                "</QueryDTO>"), QueryDTO.class))
+                        .build());
+    }
+
+    @Test
+    public void wfsQueryRestrictionsBuilderAndEqualTest() throws Exception {
+        logger.info("##################FILTER_CREATED_EQUAL : {}\n",
+                ILogicOperatorHandler.WFSQueryRestrictionsBuilder.builder()
+                        .withFilterType(new FilterType())
+                        .withQueryDTO(GPJAXBContextBuilder.newInstance()
+                                .unmarshal(new StringReader(
+                                        "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                                                "<QueryDTO>\n" +
+                                                "    <matchOperator>ALL</matchOperator>\n" +
+                                                "    <queryRestrictionList>\n" +
+                                                "        <queryRestriction>\n" +
+                                                "            <attribute>\n" +
+                                                "                <maxOccurs>1</maxOccurs>\n" +
+                                                "                <minOccurs>0</minOccurs>\n" +
+                                                "                <name>SUB_REGION</name>\n" +
+                                                "                <nillable>true</nillable>\n" +
+                                                "                <type>string</type>\n" +
+                                                "                <value></value>\n" +
+                                                "            </attribute>\n" +
+                                                "            <operator>EQUAL</operator>\n" +
+                                                "            <restriction>Mtn</restriction>\n" +
+                                                "        </queryRestriction>\n" +
+                                                "    </queryRestrictionList>\n" +
+                                                "</QueryDTO>"), QueryDTO.class))
+                        .build());
+    }
+
+    @Test
+    public void wfsQueryRestrictionsBuilderOrEqualTest() throws Exception {
+        logger.info("##################FILTER_CREATED_EQUAL : {}\n",
+                ILogicOperatorHandler.WFSQueryRestrictionsBuilder.builder()
+                        .withFilterType(new FilterType())
+                        .withQueryDTO(GPJAXBContextBuilder.newInstance()
+                                .unmarshal(new StringReader(
+                                        "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                                                "<QueryDTO>\n" +
+                                                "    <matchOperator>ANY</matchOperator>\n" +
+                                                "    <queryRestrictionList>\n" +
+                                                "        <queryRestriction>\n" +
+                                                "            <attribute>\n" +
+                                                "                <maxOccurs>1</maxOccurs>\n" +
+                                                "                <minOccurs>0</minOccurs>\n" +
+                                                "                <name>SUB_REGION</name>\n" +
+                                                "                <nillable>true</nillable>\n" +
+                                                "                <type>string</type>\n" +
+                                                "                <value></value>\n" +
+                                                "            </attribute>\n" +
+                                                "            <operator>EQUAL</operator>\n" +
+                                                "            <restriction>Mtn</restriction>\n" +
+                                                "        </queryRestriction>\n" +
+                                                "    </queryRestrictionList>\n" +
+                                                "</QueryDTO>"), QueryDTO.class))
+                        .build());
+    }
+
+    @Test
+    public void wfsQueryRestrictionsBuilderAndContainsTest() throws Exception {
+        logger.info("##################FILTER_CREATED_CONTAINS : {}\n",
+                ILogicOperatorHandler.WFSQueryRestrictionsBuilder.builder()
+                        .withFilterType(new FilterType())
+                        .withQueryDTO(GPJAXBContextBuilder.newInstance()
+                                .unmarshal(new StringReader(
+                                        "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                                                "<QueryDTO>\n" +
+                                                "    <matchOperator>ALL</matchOperator>\n" +
+                                                "    <queryRestrictionList>\n" +
+                                                "        <queryRestriction>\n" +
+                                                "            <attribute>\n" +
+                                                "                <maxOccurs>1</maxOccurs>\n" +
+                                                "                <minOccurs>0</minOccurs>\n" +
+                                                "                <name>SUB_REGION</name>\n" +
+                                                "                <nillable>true</nillable>\n" +
+                                                "                <type>string</type>\n" +
+                                                "                <value></value>\n" +
+                                                "            </attribute>\n" +
+                                                "            <operator>CONTAINS</operator>\n" +
+                                                "            <restriction>Mtn</restriction>\n" +
+                                                "        </queryRestriction>\n" +
+                                                "    </queryRestrictionList>\n" +
+                                                "</QueryDTO>"), QueryDTO.class))
+                        .build());
+    }
+
+    @Test
+    public void wfsQueryRestrictionsBuilderOrContainsTest() throws Exception {
+        logger.info("##################FILTER_CREATED_CONTAINS : {}\n",
+                ILogicOperatorHandler.WFSQueryRestrictionsBuilder.builder()
+                        .withFilterType(new FilterType())
+                        .withQueryDTO(GPJAXBContextBuilder.newInstance()
+                                .unmarshal(new StringReader(
+                                        "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                                                "<QueryDTO>\n" +
+                                                "    <matchOperator>ANY</matchOperator>\n" +
+                                                "    <queryRestrictionList>\n" +
+                                                "        <queryRestriction>\n" +
+                                                "            <attribute>\n" +
+                                                "                <maxOccurs>1</maxOccurs>\n" +
+                                                "                <minOccurs>0</minOccurs>\n" +
+                                                "                <name>SUB_REGION</name>\n" +
+                                                "                <nillable>true</nillable>\n" +
+                                                "                <type>string</type>\n" +
+                                                "                <value></value>\n" +
+                                                "            </attribute>\n" +
+                                                "            <operator>CONTAINS</operator>\n" +
+                                                "            <restriction>Mtn</restriction>\n" +
+                                                "        </queryRestriction>\n" +
+                                                "    </queryRestrictionList>\n" +
+                                                "</QueryDTO>"), QueryDTO.class))
+                        .build());
+    }
+
+    @Test
+    public void wfsQueryRestrictionsBuilderNotContainsTest() throws Exception {
+        logger.info("##################FILTER_CREATED_NOT_CONTAINS : {}\n",
+                ILogicOperatorHandler.WFSQueryRestrictionsBuilder.builder()
+                        .withFilterType(new FilterType())
+                        .withQueryDTO(GPJAXBContextBuilder.newInstance()
+                                .unmarshal(new StringReader(
+                                        "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                                                "<QueryDTO>\n" +
+                                                "    <matchOperator>NONE</matchOperator>\n" +
+                                                "    <queryRestrictionList>\n" +
+                                                "        <queryRestriction>\n" +
+                                                "            <attribute>\n" +
+                                                "                <maxOccurs>1</maxOccurs>\n" +
+                                                "                <minOccurs>0</minOccurs>\n" +
+                                                "                <name>SUB_REGION</name>\n" +
+                                                "                <nillable>true</nillable>\n" +
+                                                "                <type>string</type>\n" +
+                                                "                <value></value>\n" +
+                                                "            </attribute>\n" +
+                                                "            <operator>CONTAINS</operator>\n" +
+                                                "            <restriction>Mtn</restriction>\n" +
+                                                "        </queryRestriction>\n" +
+                                                "    </queryRestrictionList>\n" +
+                                                "</QueryDTO>"), QueryDTO.class))
+                        .build());
+    }
+
+    @Test
+    public void wfsQueryRestrictionsBuilderAndStartWithTest() throws Exception {
+        logger.info("##################FILTER_CREATED_START_WITH : {}\n",
+                ILogicOperatorHandler.WFSQueryRestrictionsBuilder.builder()
+                        .withFilterType(new FilterType())
+                        .withQueryDTO(GPJAXBContextBuilder.newInstance()
+                                .unmarshal(new StringReader(
+                                        "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                                                "<QueryDTO>\n" +
+                                                "    <matchOperator>ALL</matchOperator>\n" +
+                                                "    <queryRestrictionList>\n" +
+                                                "        <queryRestriction>\n" +
+                                                "            <attribute>\n" +
+                                                "                <maxOccurs>1</maxOccurs>\n" +
+                                                "                <minOccurs>0</minOccurs>\n" +
+                                                "                <name>SUB_REGION</name>\n" +
+                                                "                <nillable>true</nillable>\n" +
+                                                "                <type>string</type>\n" +
+                                                "                <value></value>\n" +
+                                                "            </attribute>\n" +
+                                                "            <operator>STARTS_WITH</operator>\n" +
+                                                "            <restriction>Mtn</restriction>\n" +
+                                                "        </queryRestriction>\n" +
+                                                "    </queryRestrictionList>\n" +
+                                                "</QueryDTO>"), QueryDTO.class))
+                        .build());
+    }
+
+    @Test
+    public void wfsQueryRestrictionsBuilderOrStartWithTest() throws Exception {
+        logger.info("##################FILTER_CREATED_START_WITH : {}\n",
+                ILogicOperatorHandler.WFSQueryRestrictionsBuilder.builder()
+                        .withFilterType(new FilterType())
+                        .withQueryDTO(GPJAXBContextBuilder.newInstance()
+                                .unmarshal(new StringReader(
+                                        "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                                                "<QueryDTO>\n" +
+                                                "    <matchOperator>ANY</matchOperator>\n" +
+                                                "    <queryRestrictionList>\n" +
+                                                "        <queryRestriction>\n" +
+                                                "            <attribute>\n" +
+                                                "                <maxOccurs>1</maxOccurs>\n" +
+                                                "                <minOccurs>0</minOccurs>\n" +
+                                                "                <name>SUB_REGION</name>\n" +
+                                                "                <nillable>true</nillable>\n" +
+                                                "                <type>string</type>\n" +
+                                                "                <value></value>\n" +
+                                                "            </attribute>\n" +
+                                                "            <operator>STARTS_WITH</operator>\n" +
+                                                "            <restriction>Mtn</restriction>\n" +
+                                                "        </queryRestriction>\n" +
+                                                "    </queryRestrictionList>\n" +
+                                                "</QueryDTO>"), QueryDTO.class))
+                        .build());
+    }
+
+    @Test
+    public void wfsQueryRestrictionsBuilderNotStartWithTest() throws Exception {
+        logger.info("##################FILTER_CREATED_NOT_START_WITH : {}\n",
+                ILogicOperatorHandler.WFSQueryRestrictionsBuilder.builder()
+                        .withFilterType(new FilterType())
+                        .withQueryDTO(GPJAXBContextBuilder.newInstance()
+                                .unmarshal(new StringReader(
+                                        "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                                                "<QueryDTO>\n" +
+                                                "    <matchOperator>NONE</matchOperator>\n" +
+                                                "    <queryRestrictionList>\n" +
+                                                "        <queryRestriction>\n" +
+                                                "            <attribute>\n" +
+                                                "                <maxOccurs>1</maxOccurs>\n" +
+                                                "                <minOccurs>0</minOccurs>\n" +
+                                                "                <name>SUB_REGION</name>\n" +
+                                                "                <nillable>true</nillable>\n" +
+                                                "                <type>string</type>\n" +
+                                                "                <value></value>\n" +
+                                                "            </attribute>\n" +
+                                                "            <operator>STARTS_WITH</operator>\n" +
+                                                "            <restriction>Mtn</restriction>\n" +
+                                                "        </queryRestriction>\n" +
+                                                "    </queryRestrictionList>\n" +
+                                                "</QueryDTO>"), QueryDTO.class))
+                        .build());
     }
 }

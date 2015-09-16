@@ -37,13 +37,12 @@ public class NotOperatorHandler extends LogicOperatorHandler {
     @Override
     protected void processQueryRestrictions(FilterType filter, List<QueryRestrictionDTO> queryRestrictionDTOs) {
         logger.debug("################### {} Processing............\n", getFilterName());
-        UnaryLogicOpType unaryLogicOpType = new UnaryLogicOpType();
-        BinaryLogicOpType and = new BinaryLogicOpType();
         List<JAXBElement<?>> elements = super.buildJAXBElementList(queryRestrictionDTOs);
-        logger.debug("\n##################{} builds : {} " + (elements.size() > 1 ? "elements" : "element") + "\n",
+        logger.debug("##################{} builds : {} " + (elements.size() > 1 ? "elements" : "element") + "\n",
                 getFilterName(), elements.size());
-        and.setComparisonOpsOrSpatialOpsOrLogicOps(elements);
-        unaryLogicOpType.setLogicOps(filterFactory.createAnd(and));
+        UnaryLogicOpType unaryLogicOpType = ((elements.size() == 1) ?
+                createComparisonOps(elements.get(0)) :
+                createLogicOps(elements));
         filter.setLogicOps(filterFactory.createNot(unaryLogicOpType));
     }
 
@@ -55,5 +54,29 @@ public class NotOperatorHandler extends LogicOperatorHandler {
     @Override
     protected String getOperatorValue() {
         return LogicOperatorType.NONE.name();
+    }
+
+    /**
+     *
+     * @param element
+     * @return {@link UnaryLogicOpType}
+     */
+    protected UnaryLogicOpType createComparisonOps(JAXBElement element) {
+        UnaryLogicOpType unaryLogicOpType = new UnaryLogicOpType();
+        unaryLogicOpType.setComparisonOps(element);
+        return unaryLogicOpType;
+    }
+
+    /**
+     *
+     * @param elements
+     * @return {@link UnaryLogicOpType}
+     */
+    protected UnaryLogicOpType createLogicOps(List<JAXBElement<?>> elements) {
+        UnaryLogicOpType unaryLogicOpType = new UnaryLogicOpType();
+        BinaryLogicOpType and = new BinaryLogicOpType();
+        and.setComparisonOpsOrSpatialOpsOrLogicOps(elements);
+        unaryLogicOpType.setLogicOps(filterFactory.createAnd(and));
+        return unaryLogicOpType;
     }
 }

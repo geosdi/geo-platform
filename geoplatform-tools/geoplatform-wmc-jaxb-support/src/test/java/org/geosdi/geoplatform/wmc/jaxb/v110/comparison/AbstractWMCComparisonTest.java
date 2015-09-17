@@ -62,9 +62,9 @@ public abstract class AbstractWMCComparisonTest {
                 numThreads);
         for (int i = 0; i < numThreads; i++) {
             if (jaxbContext instanceof WMCJAXBContextPoolV110) {
-                tasks.add(new CSWPooledTask(jaxbContext));
+                tasks.add(new WMCPooledTask(jaxbContext));
             } else {
-                tasks.add(new CSWSimpleTask(jaxbContext));
+                tasks.add(new WMCSimpleTask(jaxbContext));
             }
         }
 
@@ -84,11 +84,11 @@ public abstract class AbstractWMCComparisonTest {
         return time;
     }
 
-    private class CSWSimpleTask implements Callable<Long> {
+    private class WMCSimpleTask implements Callable<Long> {
 
         final GPBaseJAXBContext jaxbContext;
 
-        public CSWSimpleTask(GPBaseJAXBContext theJaxbContext) {
+        public WMCSimpleTask(GPBaseJAXBContext theJaxbContext) {
             this.jaxbContext = theJaxbContext;
         }
 
@@ -107,9 +107,9 @@ public abstract class AbstractWMCComparisonTest {
         }
     }
 
-    private class CSWPooledTask extends CSWSimpleTask {
+    private class WMCPooledTask extends WMCSimpleTask {
 
-        public CSWPooledTask(GPBaseJAXBContext theJaxbContext) {
+        public WMCPooledTask(GPBaseJAXBContext theJaxbContext) {
             super(theJaxbContext);
         }
 

@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.persistence.configuration.hibernate;
 
-import javax.sql.DataSource;
 import org.geosdi.geoplatform.persistence.configuration.basic.strategy.PropertiesStrategyManager;
 import org.geosdi.geoplatform.persistence.configuration.properties.GPPersistenceConnector;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,9 +42,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
-import org.springframework.orm.hibernate4.HibernateTransactionManager;
-import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+import javax.sql.DataSource;
 
 /**
  *

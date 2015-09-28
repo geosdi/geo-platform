@@ -33,16 +33,17 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.persistence.configuration.jpa.export.reflection;
+package org.geosdi.geoplatform.persistence.configuration.export.reflection;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.Entity;
 import org.geosdi.geoplatform.persistence.configuration.properties.GPPersistenceConnector;
 import org.reflections.Reflections;
 import org.reflections.util.ConfigurationBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.persistence.Entity;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
@@ -75,5 +76,4 @@ public class ReflectionsSchemaExport implements GPReflectionsSchemaExport {
     public void afterPropertiesSet() throws Exception {
         this.reflectionsConf = gpPersistenceConnector.getPackagesToScan();
     }
-
 }

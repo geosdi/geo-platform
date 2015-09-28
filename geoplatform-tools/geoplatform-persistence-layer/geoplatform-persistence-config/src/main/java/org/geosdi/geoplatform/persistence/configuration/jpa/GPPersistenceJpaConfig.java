@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.persistence.configuration.jpa;
 
-import javax.sql.DataSource;
 import org.geosdi.geoplatform.persistence.configuration.basic.strategy.PropertiesStrategyManager;
 import org.geosdi.geoplatform.persistence.configuration.properties.GPPersistenceConnector;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +50,8 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.sql.DataSource;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -59,7 +60,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @Profile(value = "jpa")
 @EnableTransactionManagement
-public class GPPersistenceJpaConfig {
+class GPPersistenceJpaConfig {
     
     @Autowired
     private GPPersistenceConnector gpPersistenceConnector;
@@ -77,6 +78,7 @@ public class GPPersistenceJpaConfig {
     public LocalContainerEntityManagerFactoryBean gpEntityManagerFactory() {
         final LocalContainerEntityManagerFactoryBean gpFactoryBean = new LocalContainerEntityManagerFactoryBean();
         gpFactoryBean.setDataSource(this.persitenceDataSource);
+
         gpFactoryBean.setPackagesToScan(
                 this.gpPersistenceConnector.getPackagesToScan());
         

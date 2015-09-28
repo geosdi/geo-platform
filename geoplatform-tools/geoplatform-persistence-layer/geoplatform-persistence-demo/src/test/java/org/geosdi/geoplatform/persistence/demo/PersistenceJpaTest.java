@@ -35,13 +35,13 @@
  */
 package org.geosdi.geoplatform.persistence.demo;
 
-import org.junit.Assert;
 import org.geosdi.geoplatform.persistence.demo.dao.ICarDAO;
 import org.geosdi.geoplatform.persistence.demo.dao.ICarPartDAO;
 import org.geosdi.geoplatform.persistence.demo.model.Car;
 import org.geosdi.geoplatform.persistence.demo.model.CarPart;
 import org.geosdi.geoplatform.persistence.loader.PersistenceLoaderConfigurer;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

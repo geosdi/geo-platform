@@ -33,27 +33,21 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.persistence.configuration.jpa.export.reflection.config;
+package org.geosdi.geoplatform.persistence.configuration.export.reflection;
 
-import org.geosdi.geoplatform.persistence.configuration.jpa.export.reflection.GPReflectionsSchemaExport;
-import org.geosdi.geoplatform.persistence.configuration.jpa.export.reflection.ReflectionsSchemaExport;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
+import org.springframework.beans.factory.InitializingBean;
+
+import java.util.Set;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Configuration
-@Profile("jpa")
-class JpaSchemaExportConfig {
+public interface GPReflectionsSchemaExport extends InitializingBean {
 
-    @Bean(initMethod = "scanPackages")
-    @Profile("jpa")
-    public GPReflectionsSchemaExport reflectionsSchemaExport() {
-        return new ReflectionsSchemaExport();
-    }
+    void scanPackages();
+
+    Set<Class<?>> getAnnotatedClasses();
 
 }

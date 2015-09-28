@@ -34,19 +34,21 @@
  */
 package org.geosdi.geoplatform.persistence.configuration.hibernate.export;
 
-import org.apache.commons.lang.reflect.FieldUtils;
 import org.geosdi.geoplatform.persistence.configuration.export.PersistenceSchemaExport;
+import org.geosdi.geoplatform.persistence.configuration.export.reflection.GPReflectionsSchemaExport;
 import org.hibernate.boot.MetadataSources;
-import org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.boot.spi.MetadataImplementor;
-import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
-import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Component;
+
+import java.util.Properties;
+import java.util.Set;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -59,23 +61,33 @@ public class GPHibernateSchemaExport extends PersistenceSchemaExport {
     private static final Logger logger = LoggerFactory.getLogger(GPHibernateSchemaExport.class);
     //
     @Autowired
-    private LocalSessionFactoryBean gpSessionFactoryBean;
+    private GPReflectionsSchemaExport reflectionsSchemaExport;
+    @Autowired
+    private Properties hibernateProperties;
 
     @Override
     protected void createSchema() {
-        Configuration configuration = this.gpSessionFactoryBean.getConfiguration();
-        try {
-            /** Hacking in a non Better WAY : TODO Try to find a better solution **/
-            MetadataSources metadataSources = (MetadataSources) FieldUtils.readField(configuration, "metadataSources",
-                    Boolean.TRUE);
-            schema = new SchemaExport((MetadataImplementor) metadataSources.getMetadataBuilder(
-                    configuration.getStandardServiceRegistryBuilder().build())
-                    .applyImplicitNamingStrategy(ImplicitNamingStrategyJpaCompliantImpl.INSTANCE)
-                    .build());
+        if ((this.generateSchema != null) && (this.generateSchema.equalsIgnoreCase("generate"))) {
+            Set<Class<?>> annotatedClasses = reflectionsSchemaExport.getAnnotatedClasses();
 
+            if (annotatedClasses.isEmpty()) {
+                throw new IllegalStateException("There are no Classes Annotated with" + " @Entity Annotations.");
+            }
+
+            ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(hibernateProperties)
+                    .build();
+            MetadataSources metadataSource = new MetadataSources(serviceRegistry);
+            for (Class<?> classe : annotatedClasses) {
+                metadataSource.addAnnotatedClass(classe);
+            }
+            MetadataImplementor metadata = (MetadataImplementor) metadataSource.buildMetadata();
+            schema = new SchemaExport(serviceRegistry, metadata);
             super.exportSchema();
-        } catch (Exception ex) {
-            logger.error("#############Error Generating SchemaExport : {}\n", ex.getMessage());
         }
+    }
+
+    @Override
+    protected String getSchemaFileName() {
+        return "schema-hibernate.sql";
     }
 }

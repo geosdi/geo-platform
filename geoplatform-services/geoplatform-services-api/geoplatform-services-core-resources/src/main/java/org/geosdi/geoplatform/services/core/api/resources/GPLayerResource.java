@@ -230,6 +230,14 @@ public interface GPLayerResource {
     ShortLayerDTOContainer getLayers(Long projectID);
 
     /**
+     * Retrieve a list of all the first level Layers in a Project.
+     *
+     * @param projectID the Project ID
+     * @return the list of Layers
+     */
+    ShortLayerDTOContainer getFirstLevelLayers(Long projectID);
+
+    /**
      * Retrieve the Bounding Box of a Layer.
      *
      * @param layerID the Layer ID

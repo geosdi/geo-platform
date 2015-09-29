@@ -87,7 +87,7 @@ class GPServiceJsonConfig {
 
         List<Object> serviceBeans;
         List<? extends Object> providers;
-
+        
         if (gpCoreSwaggerRestConfiguration.isSwaggerConfigured()) {
             serviceBeans = Arrays.asList(new Object[]{geoPlatformService,
                 gpCoreSwaggerRestConfiguration.getSwaggerApiListingResource()});

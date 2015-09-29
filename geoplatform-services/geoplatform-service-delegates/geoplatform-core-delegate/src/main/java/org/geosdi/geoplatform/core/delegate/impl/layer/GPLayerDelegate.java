@@ -1,40 +1,40 @@
 /**
  *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
+ * geo-platform Rich webgis framework http://geo-platform.org
+ * ====================================================================
  *
- *   Copyright (C) 2008-2015 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2015 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version. This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details. You should have received a copy of the GNU General Public License
+ * along with this program. If not, see http://www.gnu.org/licenses/
  *
- *   ====================================================================
+ * ====================================================================
  *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
+ * Linking this library statically or dynamically with other modules is making a
+ * combined work based on this library. Thus, the terms and conditions of the
+ * GNU General Public License cover the whole combination.
  *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * As a special exception, the copyright holders of this library give you
+ * permission to link this library with independent modules to produce an
+ * executable, regardless of the license terms of these independent modules, and
+ * to copy and distribute the resulting executable under terms of your choice,
+ * provided that you also meet, for each linked independent module, the terms
+ * and conditions of the license of that module. An independent module is a
+ * module which is not derived from or based on this library. If you modify this
+ * library, you may extend this exception to your version of the library, but
+ * you are not obligated to do so. If you do not wish to do so, delete this
+ * exception statement from your version.
  */
 package org.geosdi.geoplatform.core.delegate.impl.layer;
 
+import com.google.common.collect.Lists;
+import com.googlecode.genericdao.search.Filter;
 import com.googlecode.genericdao.search.Search;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +52,7 @@ import org.geosdi.geoplatform.core.model.GPVectorLayer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.shared.GPLayerType;
+import org.geosdi.geoplatform.gui.shared.util.GPSharedUtils;
 import org.geosdi.geoplatform.request.layer.InsertLayerRequest;
 import org.geosdi.geoplatform.request.layer.WSAddLayerAndTreeModificationsRequest;
 import org.geosdi.geoplatform.request.layer.WSAddLayersAndTreeModificationsRequest;
@@ -462,6 +463,29 @@ public class GPLayerDelegate implements LayerDelegate {
 
         return new ShortLayerDTOContainer(ShortLayerDTO
                 .convertToShortLayerDTOList(foundLayer));
+    }
+
+    @Override
+    public ShortLayerDTOContainer getFirstLevelLayers(Long projectID) {
+        Search searchCriteria = new Search(GPLayer.class);
+        searchCriteria.addSortDesc("position");
+//            Filter.equal("folder.id", folder.getId());
+        Filter filterEqualFolderID = new Filter();
+        filterEqualFolderID.setProperty("folder.id");
+        filterEqualFolderID.setOperator(Filter.OP_EQUAL);
+        searchCriteria.addFilter(filterEqualFolderID);
+
+        List<GPFolder> rootFolders = folderDao.searchRootFolders(projectID);
+        List<GPLayer> firstLevelLayers = Lists.<GPLayer>newArrayList();
+        for (GPFolder folder : GPSharedUtils.safeList(rootFolders)) {
+            filterEqualFolderID.setValue(folder.getId());
+            firstLevelLayers.addAll(layerDao.search(searchCriteria));
+        }
+
+        EntityCorrectness.checkLayerCompleteListLog(firstLevelLayers); // TODO assert
+
+        return new ShortLayerDTOContainer(ShortLayerDTO
+                .convertToShortLayerDTOList(firstLevelLayers));
     }
 
     @Override

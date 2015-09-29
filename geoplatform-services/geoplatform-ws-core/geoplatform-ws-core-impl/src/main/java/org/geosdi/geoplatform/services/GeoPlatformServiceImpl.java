@@ -778,6 +778,11 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
+    public ShortLayerDTOContainer getFirstLevelLayers(Long projectID) {
+        return gpLayerDelegate.getFirstLevelLayers(projectID);
+    }
+
+    @Override
     public GPBBox getBBox(Long layerID) throws ResourceNotFoundFault {
         return gpLayerDelegate.getBBox(layerID);
     }

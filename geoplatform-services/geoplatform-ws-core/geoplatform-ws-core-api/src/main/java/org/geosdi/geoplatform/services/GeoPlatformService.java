@@ -1738,6 +1738,21 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     ShortLayerDTOContainer getLayers(@WebParam(name = "projectID")
             @PathParam(value = "projectID") Long projectID);
 
+    @CrossOriginResourceSharing(
+            allowHeaders = {"*"},
+            allowOrigins = {
+                "http://localhost:80"
+            },
+            allowAllOrigins = true
+    )
+    @Get
+    @GET
+    @Path(value = GPServiceRSPathConfig.GET_FIRST_LEVEL_LAYERS_PATH)
+    @WebResult(name = "layers")
+    @Override
+    ShortLayerDTOContainer getFirstLevelLayers(@WebParam(name = "projectID")
+            @PathParam(value = "projectID") Long projectID);
+
     /**
      * Retrieve the Bounding Box of a Layer.
      *

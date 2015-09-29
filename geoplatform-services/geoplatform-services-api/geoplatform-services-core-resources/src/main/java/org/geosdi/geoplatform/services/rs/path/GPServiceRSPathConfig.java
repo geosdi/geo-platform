@@ -247,6 +247,8 @@ public final class GPServiceRSPathConfig {
     public static final String DELETE_LAYER_PATH = LAYERS_PATH + "deleteLayer";
     public static final String GET_LAYERS_PATH = LAYERS_PATH
             + "getLayers/{projectID}";
+    public static final String GET_FIRST_LEVEL_LAYERS_PATH = LAYERS_PATH
+            + "getFirstLevelLayers/{projectID}";
     public static final String GET_LAYER_BBOX_PATH = LAYERS_PATH
             + "getBBox/{layerID}";
     public static final String GET_LAYER_INFO_PATH = LAYERS_PATH

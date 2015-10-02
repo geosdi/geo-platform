@@ -97,6 +97,14 @@ public interface GPElasticSearchMapper<D extends Document> {
     String getDocumentClassName();
 
     /**
+     *
+     * @param file
+     * @param document
+     * @throws Exception
+     */
+    void write(File file, D document) throws Exception;
+
+    /**
      * @return {@link String} Mapper Name
      */
     String getMapperName();

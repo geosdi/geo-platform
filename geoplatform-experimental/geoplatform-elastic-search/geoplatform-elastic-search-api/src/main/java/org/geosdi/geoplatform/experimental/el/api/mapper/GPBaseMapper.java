@@ -93,6 +93,16 @@ public abstract class GPBaseMapper<D extends Document> implements GPElasticSearc
                 .writeValueAsString(document);
     }
 
+    /**
+     * @param file
+     * @param document
+     * @throws Exception
+     */
+    @Override
+    public void write(File file, D document) throws Exception {
+        this.reader.getDefaultMapper().writeValue(file, document);
+    }
+
     @Override
     public String getDocumentClassName() {
         return this.documentClass.getSimpleName();

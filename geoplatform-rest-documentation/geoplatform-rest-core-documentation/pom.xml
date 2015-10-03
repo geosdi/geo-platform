@@ -414,6 +414,7 @@
                         <configuration>
                             <tasks>
                                 <delete dir="${basedir}/src/main/webapp/lib" />
+                                <delete dir="${basedir}/src/main/webapp/lang" />
                                 <delete dir="${basedir}/src/main/webapp/css" />
                                 <delete dir="${basedir}/src/main/webapp/fonts" />
                                 <delete dir="${basedir}/src/main/webapp/images" />

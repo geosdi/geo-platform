@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.support.swagger.spring.context;
 
-import com.wordnik.swagger.jaxrs.config.BeanConfig;
+import io.swagger.jaxrs.config.BeanConfig;
 import org.geosdi.geoplatform.configurator.bootstrap.cxf.Rest;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
 import org.geosdi.geoplatform.support.swagger.spring.configuration.SwaggerConfiguration;

@@ -35,8 +35,8 @@
  */
 package org.geosdi.geoplatform.services.rs.config.server.swagger;
 
-import com.wordnik.swagger.jaxrs.listing.ApiListingResource;
-import com.wordnik.swagger.jaxrs.listing.SwaggerSerializers;
+import io.swagger.jaxrs.listing.ApiListingResource;
+import io.swagger.jaxrs.listing.SwaggerSerializers;
 import net.jcip.annotations.Immutable;
 import org.geosdi.geoplatform.support.swagger.spring.configuration.rest.GPSwaggerRestConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -35,8 +35,8 @@
  */
 package org.geosdi.geoplatform.support.swagger.spring.configuration.rest;
 
-import com.wordnik.swagger.jaxrs.listing.ApiListingResource;
-import com.wordnik.swagger.jaxrs.listing.SwaggerSerializers;
+import io.swagger.jaxrs.listing.ApiListingResource;
+import io.swagger.jaxrs.listing.SwaggerSerializers;
 
 /**
  *

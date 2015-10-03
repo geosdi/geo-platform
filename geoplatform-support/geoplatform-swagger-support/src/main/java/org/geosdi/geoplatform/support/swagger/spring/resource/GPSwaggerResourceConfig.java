@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.support.swagger.spring.resource;
 
-import com.wordnik.swagger.jaxrs.listing.ApiListingResource;
+import io.swagger.jaxrs.listing.ApiListingResource;
 import org.geosdi.geoplatform.configurator.bootstrap.cxf.Rest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

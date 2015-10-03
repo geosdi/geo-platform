@@ -20,15 +20,14 @@
             <!-- =========================================================== -->
             <!-- ========================== SWAGGER ======================== -->
             <!-- =========================================================== -->
-           
             <dependency>
-                <groupId>com.wordnik</groupId>
+                <groupId>io.swagger</groupId>
                 <artifactId>swagger-core</artifactId>
                 <version>${swagger.version}</version>
             </dependency>
            
             <dependency>
-                <groupId>com.wordnik</groupId>
+                <groupId>io.swagger</groupId>
                 <artifactId>swagger-jaxrs</artifactId>
                 <version>${swagger.version}</version>
             </dependency>
@@ -37,7 +36,7 @@
     </dependencyManagement>
     
     <properties>
-        <swagger.version>1.5.2-M2</swagger.version>
+        <swagger.version>1.5.3</swagger.version>
     </properties>
 
 </project>

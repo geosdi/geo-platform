@@ -160,12 +160,12 @@
         <!-- ========================== SWAGGER ======================== -->
         <!-- =========================================================== -->
         <dependency>
-            <groupId>com.wordnik</groupId>
+            <groupId>io.swagger</groupId>
             <artifactId>swagger-core</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.wordnik</groupId>
+            <groupId>io.swagger</groupId>
             <artifactId>swagger-jaxrs</artifactId>
             <exclusions>
                 <exclusion>

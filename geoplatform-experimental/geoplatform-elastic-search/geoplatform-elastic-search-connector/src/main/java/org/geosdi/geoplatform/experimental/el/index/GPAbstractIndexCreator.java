@@ -88,7 +88,7 @@ public abstract class GPAbstractIndexCreator implements GPIndexCreator,
     }
 
     @Override
-    public synchronized boolean existIndex() throws Exception {
+    public synchronized Boolean existIndex() throws Exception {
         return this.elastichSearchClient
                 .admin().indices()
                 .prepareExists(getIndexName())

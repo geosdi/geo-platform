@@ -51,6 +51,7 @@ import org.elasticsearch.rest.RestStatus;
 import org.elasticsearch.search.SearchHit;
 import org.geosdi.geoplatform.experimental.el.api.mapper.GPBaseMapper;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
+import org.geosdi.geoplatform.experimental.el.configurator.GPIndexConfigurator;
 import org.geosdi.geoplatform.experimental.el.dao.GPElasticSearchDAO.GPElasticSearchBaseDAO;
 import org.geosdi.geoplatform.experimental.el.index.GPIndexCreator;
 import org.slf4j.Logger;
@@ -68,7 +69,7 @@ public abstract class AbstractElasticSearchDAO<D extends Document>
 
     protected final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
-    protected GPIndexCreator indexCreator;
+    private GPIndexCreator indexCreator;
     protected GPBaseMapper<D> mapper;
     protected Client elastichSearchClient;
 
@@ -231,6 +232,32 @@ public abstract class AbstractElasticSearchDAO<D extends Document>
      */
     protected final String getIndexType() {
         return this.indexCreator.getIndexSettings().getIndexType();
+    }
+
+    /**
+     * <p>Remember Index Creation is called by {@link GPIndexConfigurator#configure()}</p>
+     *
+     * @throws Exception
+     */
+    protected final void createIndex() throws Exception {
+        this.indexCreator.createIndex();
+    }
+
+    /**
+     * <p>Dangerous. If called all Data will be dropped</p>
+     *
+     * @throws Exception
+     */
+    protected final void deleteIndex() throws Exception {
+        this.indexCreator.deleteIndex();
+    }
+
+    /**
+     * @return {@link Boolean}
+     * @throws Exception
+     */
+    public Boolean existIndex() throws Exception {
+        return this.indexCreator.existIndex();
     }
 
     @Override

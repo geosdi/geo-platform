@@ -44,14 +44,33 @@ import org.springframework.core.Ordered;
  */
 public interface GPIndexCreator extends Ordered {
 
+    /**
+     * <p>Create Index with {@link GPIndexSettings#getIndexName()} and {@link GPIndexSettings#getIndexType()}</p>
+     * @throws Exception
+     */
     void createIndex() throws Exception;
 
+    /**
+     * <p>Delete Index</p>
+     * @throws Exception
+     */
     void deleteIndex() throws Exception;
 
-    boolean existIndex() throws Exception;
+    /**
+     * @return {@link Boolean}
+     * @throws Exception
+     */
+    Boolean existIndex() throws Exception;
 
+    /**
+     * @param <IS>
+     * @return {@link org.geosdi.geoplatform.experimental.el.index.GPIndexCreator.GPIndexSettings}
+     */
     <IS extends GPIndexSettings> IS getIndexSettings();
 
+    /**
+     * @return {@link Client} client
+     */
     Client client();
 
     /**
@@ -61,8 +80,14 @@ public interface GPIndexCreator extends Ordered {
      */
     interface GPIndexSettings {
 
+        /**
+         * @return {@link String} Index Name
+         */
         String getIndexName();
 
+        /**
+         * @return {@link String} Index Type
+         */
         String getIndexType();
 
     }

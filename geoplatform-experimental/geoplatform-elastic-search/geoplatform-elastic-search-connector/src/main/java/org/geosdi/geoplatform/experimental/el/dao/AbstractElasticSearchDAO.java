@@ -69,7 +69,7 @@ public abstract class AbstractElasticSearchDAO<D extends Document>
 
     protected final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
-    private GPIndexCreator indexCreator;
+    protected GPIndexCreator indexCreator;
     protected GPBaseMapper<D> mapper;
     protected Client elastichSearchClient;
 

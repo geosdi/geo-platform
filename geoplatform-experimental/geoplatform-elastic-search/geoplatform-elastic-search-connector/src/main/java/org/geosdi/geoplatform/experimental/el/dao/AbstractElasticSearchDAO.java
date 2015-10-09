@@ -260,6 +260,14 @@ public abstract class AbstractElasticSearchDAO<D extends Document>
         return this.indexCreator.existIndex();
     }
 
+    /**
+     * @param theIndexCreator
+     */
+    @Override
+    public <IC extends GPIndexCreator> void setIndexCreator(IC theIndexCreator) {
+        this.indexCreator = theIndexCreator;
+    }
+
     @Override
     public final void afterPropertiesSet() throws Exception {
         Preconditions.checkNotNull(this.mapper, "The Mapper must not be null.");

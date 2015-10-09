@@ -69,7 +69,7 @@ public abstract class AbstractElasticSearchDAO<D extends Document>
 
     protected final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
-    protected GPIndexCreator indexCreator;
+    private GPIndexCreator indexCreator;
     protected GPBaseMapper<D> mapper;
     protected Client elastichSearchClient;
 
@@ -258,6 +258,14 @@ public abstract class AbstractElasticSearchDAO<D extends Document>
      */
     public Boolean existIndex() throws Exception {
         return this.indexCreator.existIndex();
+    }
+
+    /**
+     * @param theIndexCreator
+     */
+    @Override
+    public <IC extends GPIndexCreator> void setIndexCreator(IC theIndexCreator) {
+        this.indexCreator = theIndexCreator;
     }
 
     @Override

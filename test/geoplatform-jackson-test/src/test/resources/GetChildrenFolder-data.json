@@ -1,35 +1,264 @@
 {
-    "ChildrenFolderStore": {
-        "child": [{
+  "ChildrenFolderStore": {
+    "children": [
+      {
+        "type": "FolderDTO",
+        "id": 15454,
+        "name": "folder3",
+        "position": 3,
+        "shared": false,
+        "checked": false,
+        "expanded": false,
+        "numberOfDescendants": 0,
+        "elementList": [
+          {
+            "type": "RasterLayerDTO",
+            "id": 4550,
+            "name": "N-raster-rs-rootFolderA",
+            "position": 15,
+            "shared": false,
+            "checked": false,
+            "title": "T-raster-rs-rootFolderA",
+            "alias": null,
+            "urlServer": "",
+            "srs": "",
+            "abstractText": "",
+            "layerType": "WMS",
+            "bbox": {
+              "minX": 10.0,
+              "minY": 10.0,
+              "maxX": 20.0,
+              "maxY": 20.0
+            },
+            "cached": false,
+            "cqlFilter": null,
+            "timeFilter": null,
+            "singleTileRequest": false,
+            "layerInfo": {
+              "queryable": false,
+              "keywords": "keyword_test_rs"
+            },
+            "opacity": 1.0,
+            "maxScale": null,
+            "minScale": null,
+            "styleList": []
+          },
+          {
+            "type": "FolderDTO",
+            "id": 11302,
+            "name": "folder1A_rs",
+            "position": 14,
+            "shared": false,
+            "checked": false,
+            "expanded": false,
+            "numberOfDescendants": 8,
+            "elementList": [
+              {
                 "type": "FolderDTO",
-                "id": 15454,
-                "name": "folder3",
-                "position": 3,
+                "id": 11305,
+                "name": "folder2A_rs",
+                "position": 13,
+                "shared": false,
+                "checked": false,
+                "expanded": false,
+                "numberOfDescendants": 4,
+                "elementList": [
+                  {
+                    "type": "FolderDTO",
+                    "id": 11308,
+                    "name": "folder3A_rs",
+                    "position": 12,
+                    "shared": false,
+                    "checked": false,
+                    "expanded": false,
+                    "numberOfDescendants": 1,
+                    "elementList": [
+                      {
+                        "type": "VectorLayerDTO",
+                        "id": 4553,
+                        "name": "N-vector-rs-folder3A_rs",
+                        "position": 11,
+                        "shared": false,
+                        "checked": false,
+                        "title": "T-vector-rs-folder3A_rs",
+                        "alias": null,
+                        "urlServer": "",
+                        "srs": "",
+                        "abstractText": "",
+                        "layerType": "POLYGON",
+                        "bbox": {
+                          "minX": 10.0,
+                          "minY": 10.0,
+                          "maxX": 20.0,
+                          "maxY": 20.0
+                        },
+                        "cached": false,
+                        "cqlFilter": null,
+                        "timeFilter": null,
+                        "singleTileRequest": false
+                      }
+                    ]
+                  },
+                  {
+                    "type": "FolderDTO",
+                    "id": 11309,
+                    "name": "folder3B_rs",
+                    "position": 10,
+                    "shared": false,
+                    "checked": false,
+                    "expanded": false,
+                    "numberOfDescendants": 0,
+                    "elementList": []
+                  },
+                  {
+                    "type": "FolderDTO",
+                    "id": 11310,
+                    "name": "folder3C_rs",
+                    "position": 9,
+                    "shared": false,
+                    "checked": false,
+                    "expanded": false,
+                    "numberOfDescendants": 0,
+                    "elementList": []
+                  }
+                ]
+              },
+              {
+                "type": "FolderDTO",
+                "id": 11306,
+                "name": "folder2B_rs",
+                "position": 8,
                 "shared": false,
                 "checked": false,
                 "expanded": false,
                 "numberOfDescendants": 0,
                 "elementList": []
-            }, {
+              },
+              {
                 "type": "FolderDTO",
-                "id": 15455,
-                "name": "folder4",
-                "position": 2,
+                "id": 11307,
+                "name": "folder2C_rs",
+                "position": 7,
                 "shared": false,
                 "checked": false,
                 "expanded": false,
-                "numberOfDescendants": 0,
-                "elementList": []
-            }, {
-                "type": "FolderDTO",
-                "id": 15456,
-                "name": "folder5",
-                "position": 1,
+                "numberOfDescendants": 1,
+                "elementList": [
+                  {
+                    "type": "RasterLayerDTO",
+                    "id": 4552,
+                    "name": "N-raster-rs-folder2C_rs",
+                    "position": 6,
+                    "shared": false,
+                    "checked": false,
+                    "title": "T-raster-rs-folder2C_rs",
+                    "alias": null,
+                    "urlServer": "",
+                    "srs": "",
+                    "abstractText": "",
+                    "layerType": "WMS",
+                    "bbox": {
+                      "minX": 10.0,
+                      "minY": 10.0,
+                      "maxX": 20.0,
+                      "maxY": 20.0
+                    },
+                    "cached": false,
+                    "cqlFilter": null,
+                    "timeFilter": null,
+                    "singleTileRequest": false,
+                    "layerInfo": {
+                      "queryable": false,
+                      "keywords": "keyword_test_rs"
+                    },
+                    "opacity": 1.0,
+                    "maxScale": null,
+                    "minScale": null,
+                    "styleList": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "FolderDTO",
+            "id": 11303,
+            "name": "folder1B_rs",
+            "position": 5,
+            "shared": false,
+            "checked": false,
+            "expanded": false,
+            "numberOfDescendants": 1,
+            "elementList": [
+              {
+                "type": "RasterLayerDTO",
+                "id": 4551,
+                "name": "N-raster-rs-folder1B_rs",
+                "position": 4,
                 "shared": false,
                 "checked": false,
-                "expanded": false,
-                "numberOfDescendants": 0,
-                "elementList": []
-            }]
-    }
+                "title": "T-raster-rs-folder1B_rs",
+                "alias": null,
+                "urlServer": "",
+                "srs": "",
+                "abstractText": "",
+                "layerType": "WMS",
+                "bbox": {
+                  "minX": 10.0,
+                  "minY": 10.0,
+                  "maxX": 20.0,
+                  "maxY": 20.0
+                },
+                "cached": false,
+                "cqlFilter": null,
+                "timeFilter": null,
+                "singleTileRequest": false,
+                "layerInfo": {
+                  "queryable": false,
+                  "keywords": "keyword_test_rs"
+                },
+                "opacity": 1.0,
+                "maxScale": null,
+                "minScale": null,
+                "styleList": []
+              }
+            ]
+          },
+          {
+            "type": "FolderDTO",
+            "id": 11304,
+            "name": "folder1C_rs",
+            "position": 3,
+            "shared": false,
+            "checked": false,
+            "expanded": false,
+            "numberOfDescendants": 0,
+            "elementList": []
+          }
+        ]
+      },
+      {
+        "type": "FolderDTO",
+        "id": 15455,
+        "name": "folder4",
+        "position": 2,
+        "shared": false,
+        "checked": false,
+        "expanded": false,
+        "numberOfDescendants": 0,
+        "elementList": []
+      },
+      {
+        "type": "FolderDTO",
+        "id": 15456,
+        "name": "folder5",
+        "position": 1,
+        "shared": false,
+        "checked": false,
+        "expanded": false,
+        "numberOfDescendants": 0,
+        "elementList": []
+      }
+    ]
+  }
 }

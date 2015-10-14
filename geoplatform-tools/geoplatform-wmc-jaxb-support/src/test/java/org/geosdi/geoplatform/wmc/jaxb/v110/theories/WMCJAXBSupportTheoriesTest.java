@@ -12,6 +12,7 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.io.StringWriter;
+import java.net.URL;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -35,6 +36,18 @@ public class WMCJAXBSupportTheoriesTest extends AbstractWMCJAXBTheoriesTest {
 
         Unmarshaller unmarshaller = wmcJAXBContext.acquireUnmarshaller();
         Object o = unmarshaller.unmarshal(wmcFile);
+
+        logger.info("#####################{}\n", (o instanceof JAXBElement) ? ((JAXBElement) o).getValue() : o);
+        Marshaller marshaller = wmcJAXBContext.acquireMarshaller();
+        StringWriter writer = new StringWriter();
+        marshaller.marshal((o instanceof JAXBElement) ? ((JAXBElement) o).getValue() : o, writer);
+        logger.info("###########################\n{}\n\n", writer);
+    }
+
+    @Theory
+    public void wmcJaxbSupportURLTest(String fileName) throws Exception {
+        Unmarshaller unmarshaller = wmcJAXBContext.acquireUnmarshaller();
+        Object o = unmarshaller.unmarshal(new URL(baseRepoURL.concat(fileName)));
 
         logger.info("#####################{}\n", (o instanceof JAXBElement) ? ((JAXBElement) o).getValue() : o);
         Marshaller marshaller = wmcJAXBContext.acquireMarshaller();

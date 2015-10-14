@@ -33,10 +33,6 @@
  */
 package org.geosdi.geoplatform.services.rs.config.server;
 
-import java.util.Arrays;
-import java.util.List;
-import javax.ws.rs.core.Application;
-import javax.ws.rs.ext.RuntimeDelegate;
 import org.apache.cxf.interceptor.Interceptor;
 import org.apache.cxf.interceptor.LoggingInInterceptor;
 import org.apache.cxf.interceptor.LoggingOutInterceptor;
@@ -59,6 +55,11 @@ import org.springframework.beans.factory.annotation.Required;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import javax.ws.rs.core.Application;
+import javax.ws.rs.ext.RuntimeDelegate;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  *

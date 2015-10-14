@@ -35,13 +35,9 @@
  */
 package org.geosdi.geoplatform.response;
 
+import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -54,8 +50,7 @@ public class ShortLayerDTOContainer implements Serializable {
 
     private static final long serialVersionUID = 5712220534289414131L;
     //
-    @XmlElementWrapper(name = "layers")
-    @XmlElement(name = "layer")
+    @XmlElement(name = "layers")
     private List<ShortLayerDTO> layers;
 
     public ShortLayerDTOContainer() {

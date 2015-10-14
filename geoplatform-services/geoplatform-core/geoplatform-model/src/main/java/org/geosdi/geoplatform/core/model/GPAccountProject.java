@@ -35,26 +35,15 @@
  */
 package org.geosdi.geoplatform.core.model;
 
-import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAnyElement;
-import javax.xml.bind.annotation.XmlRootElement;
 import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.Index;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.annotations.*;
 import org.springframework.security.acls.domain.BasePermission;
+
+import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.*;
+import java.io.Serializable;
 
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
@@ -79,7 +68,9 @@ public class GPAccountProject implements Serializable {
             sequenceName = "GP_ACCOUNT_PROJECT_SEQ")
     private Long id;
     //
-    @XmlAnyElement(lax = true)
+    //@XmlAnyElement(lax = true)
+    @XmlElement(name = "account")
+//    @XmlElementRefs(value = {
     @ManyToOne(optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @Index(name = "ACCOUNT_ID_INDEX")

@@ -35,25 +35,27 @@
  */
 package org.geosdi.geoplatform.request;
 
-import java.io.Serializable;
+import org.geosdi.geoplatform.core.model.GPAccount;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAnyElement;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.geosdi.geoplatform.core.model.GPAccount;
+import java.io.Serializable;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@XmlRootElement
+@XmlRootElement(name = "InsertAccountRequest")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class InsertAccountRequest implements Serializable {
 
     private static final long serialVersionUID = 1646506363613851665L;
     //
-    @XmlAnyElement(lax = true)
+    //@XmlAnyElement(lax = true)
+    @XmlElement(name = "account")
     private GPAccount account;
     private boolean sendEmail;
 

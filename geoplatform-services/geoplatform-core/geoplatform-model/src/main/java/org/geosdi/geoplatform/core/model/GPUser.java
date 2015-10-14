@@ -35,20 +35,21 @@
  */
 package org.geosdi.geoplatform.core.model;
 
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.xml.bind.annotation.XmlRootElement;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Index;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  * @author giuseppe
  *
  */
-@XmlRootElement(name = "User")
+@XmlRootElement(name = "GPUser")
 @Entity(name = "User")
 @DiscriminatorValue("GPUser")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "user")

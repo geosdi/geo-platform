@@ -226,4 +226,74 @@ public class WMCJAXBPoolSupportTest {
         wmcJAXBContextPool.marshal(layerListType, writer);
         logger.info("###########################\n{}\n\n", writer);
     }
+
+    @Test
+    public void wmcLayerListV110SupportPoolURLTest() throws Exception {
+        LayerListType layerListType = (LayerListType) wmcJAXBContextPool
+                .unmarshal(new URL("http://150.145.141.124/GONFALONI-Upload/WMCLayerTypeList-v110.xml"));
+        logger.info("#####################{}\n", layerListType);
+        StringWriter writer = new StringWriter();
+        wmcJAXBContextPool.marshal(layerListType, writer);
+        logger.info("###########################\n{}\n\n", writer);
+    }
+
+    @Test
+    public void wmcGeneralTypeV110SupportPoolURLTest() throws Exception {
+        GeneralType generalType = (GeneralType) wmcJAXBContextPool
+                .unmarshal(new URL("http://150.145.141.124/GONFALONI-Upload/WMCGeneralType-v110.xml"));
+        logger.info("#####################{}\n", generalType);
+        StringWriter writer = new StringWriter();
+        wmcJAXBContextPool.marshal(generalType, writer);
+        logger.info("###########################\n{}\n\n", writer);
+    }
+
+    @Test
+    public void wmcFormatListV110SupportPoolURLTest() throws Exception {
+        FormatListType formatListType = (FormatListType) wmcJAXBContextPool
+                .unmarshal(new URL("http://150.145.141.124/GONFALONI-Upload/WMC-FormatList-v110.xml"));
+        logger.info("#####################{}\n", formatListType);
+        StringWriter writer = new StringWriter();
+        wmcJAXBContextPool.marshal(formatListType, writer);
+        logger.info("###########################\n{}\n\n", writer);
+    }
+
+    @Test
+    public void wmcStyleListV110SupportPoolURLTest() throws Exception {
+        StyleListType styleListType = (StyleListType) wmcJAXBContextPool
+                .unmarshal(new URL("http://150.145.141.124/GONFALONI-Upload/WMC-StyleList-v110.xml"));
+        logger.info("#####################{}\n", styleListType);
+        StringWriter writer = new StringWriter();
+        wmcJAXBContextPool.marshal(styleListType, writer);
+        logger.info("###########################\n{}\n\n", writer);
+    }
+
+    @Test
+    public void wmcServerV110SupportPoolURLTest() throws Exception {
+        ServerType serverType = (ServerType) wmcJAXBContextPool
+                .unmarshal(new URL("http://150.145.141.124/GONFALONI-Upload/WMC-Server-v110.xml"));
+        logger.info("#####################{}\n", serverType);
+        StringWriter writer = new StringWriter();
+        wmcJAXBContextPool.marshal(serverType, writer);
+        logger.info("###########################\n{}\n\n", writer);
+    }
+
+    @Test
+    public void wmcLayerTypeV110SupportPoolURLTest() throws Exception {
+        LayerType layerType = (LayerType) wmcJAXBContextPool
+                .unmarshal(new URL("http://150.145.141.124/GONFALONI-Upload/WMCLayerType-v110.xml"));
+        logger.info("#####################{}\n", layerType);
+        StringWriter writer = new StringWriter();
+        wmcJAXBContextPool.marshal(layerType, writer);
+        logger.info("###########################\n{}\n\n", writer);
+    }
+
+    @Test
+    public void wmcExtensionTypeV110SupportPoolURLTest() throws Exception {
+        ExtensionType extensionType = (ExtensionType) wmcJAXBContextPool
+                .unmarshal(new URL("http://150.145.141.124/GONFALONI-Upload/WMC-Extension-v110.xml"));
+        logger.info("#####################{}\n", extensionType);
+        StringWriter writer = new StringWriter();
+        wmcJAXBContextPool.marshal(extensionType, writer);
+        logger.info("###########################\n{}\n\n", writer);
+    }
 }

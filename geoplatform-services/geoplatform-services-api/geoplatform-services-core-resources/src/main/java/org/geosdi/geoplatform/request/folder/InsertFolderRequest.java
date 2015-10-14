@@ -35,18 +35,19 @@
  */
 package org.geosdi.geoplatform.request.folder;
 
-import java.io.Serializable;
+import org.geosdi.geoplatform.core.model.GPFolder;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.geosdi.geoplatform.core.model.GPFolder;
+import java.io.Serializable;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@XmlRootElement
+@XmlRootElement(name = "InsertFolderRequest")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class InsertFolderRequest implements Serializable {
 

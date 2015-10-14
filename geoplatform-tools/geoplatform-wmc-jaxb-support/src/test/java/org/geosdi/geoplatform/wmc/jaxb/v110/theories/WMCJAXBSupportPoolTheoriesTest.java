@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 import javax.xml.bind.JAXBElement;
 import java.io.File;
 import java.io.StringWriter;
+import java.net.URL;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -32,6 +33,16 @@ public class WMCJAXBSupportPoolTheoriesTest extends AbstractWMCJAXBTheoriesTest 
         File wmcFile = new File(wmcFileString);
 
         Object o = wmcJAXBContextPool.unmarshal(wmcFile);
+
+        logger.info("#####################{}\n", (o instanceof JAXBElement) ? ((JAXBElement) o).getValue() : o);
+        StringWriter writer = new StringWriter();
+        wmcJAXBContextPool.marshal((o instanceof JAXBElement) ? ((JAXBElement) o).getValue() : o, writer);
+        logger.info("###########################\n{}\n\n", writer);
+    }
+
+    @Theory
+    public void wmcJaxbSupportPoolURLTest(String fileName) throws Exception {
+        Object o = wmcJAXBContextPool.unmarshal(new URL(baseRepoURL.concat(fileName)));
 
         logger.info("#####################{}\n", (o instanceof JAXBElement) ? ((JAXBElement) o).getValue() : o);
         StringWriter writer = new StringWriter();

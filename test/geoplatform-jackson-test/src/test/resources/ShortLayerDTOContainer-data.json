@@ -1,6 +1,6 @@
 {
     "ShortLayerDTOContainer": {
-        "layer": [{
+        "layers": [{
                 "type": "ShortLayerDTO",
                 "id": 8350,
                 "name": "name_raster_1_rs",

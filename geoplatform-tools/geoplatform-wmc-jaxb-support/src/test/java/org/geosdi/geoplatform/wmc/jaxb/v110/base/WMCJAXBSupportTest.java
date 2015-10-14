@@ -223,4 +223,88 @@ public class WMCJAXBSupportTest {
         marshaller.marshal(layerListType, writer);
         logger.info("###########################\n{}\n\n", writer);
     }
+
+    @Test
+    public void wmcLayerListV110SupportURLTest() throws Exception {
+        Unmarshaller unmarshaller = wmcJAXBContext.acquireUnmarshaller();
+        LayerListType layerListType = (LayerListType) unmarshaller
+                .unmarshal(new URL("http://150.145.141.124/GONFALONI-Upload/WMCLayerTypeList-v110.xml"));
+        logger.info("#####################{}\n", layerListType);
+        Marshaller marshaller = wmcJAXBContext.acquireMarshaller();
+        StringWriter writer = new StringWriter();
+        marshaller.marshal(layerListType, writer);
+        logger.info("###########################\n{}\n\n", writer);
+    }
+
+    @Test
+    public void wmcGeneralTypeV110SupportURLTest() throws Exception {
+        Unmarshaller unmarshaller = wmcJAXBContext.acquireUnmarshaller();
+        GeneralType generalType = (GeneralType) unmarshaller
+                .unmarshal(new URL("http://150.145.141.124/GONFALONI-Upload/WMCGeneralType-v110.xml"));
+        logger.info("#####################{}\n", generalType);
+        Marshaller marshaller = wmcJAXBContext.acquireMarshaller();
+        StringWriter writer = new StringWriter();
+        marshaller.marshal(generalType, writer);
+        logger.info("###########################\n{}\n\n", writer);
+    }
+
+    @Test
+    public void wmcFormatListV110SupportURLTest() throws Exception {
+        Unmarshaller unmarshaller = wmcJAXBContext.acquireUnmarshaller();
+        FormatListType formatListType = (FormatListType) unmarshaller
+                .unmarshal(new URL("http://150.145.141.124/GONFALONI-Upload/WMC-FormatList-v110.xml"));
+        logger.info("#####################{}\n", formatListType);
+        Marshaller marshaller = wmcJAXBContext.acquireMarshaller();
+        StringWriter writer = new StringWriter();
+        marshaller.marshal(formatListType, writer);
+        logger.info("###########################\n{}\n\n", writer);
+    }
+
+    @Test
+    public void wmcStyleListV110SupportURLTest() throws Exception {
+        Unmarshaller unmarshaller = wmcJAXBContext.acquireUnmarshaller();
+        StyleListType styleListType = (StyleListType) unmarshaller
+                .unmarshal(new URL("http://150.145.141.124/GONFALONI-Upload/WMC-StyleList-v110.xml"));
+        logger.info("#####################{}\n", styleListType);
+        Marshaller marshaller = wmcJAXBContext.acquireMarshaller();
+        StringWriter writer = new StringWriter();
+        marshaller.marshal(styleListType, writer);
+        logger.info("###########################\n{}\n\n", writer);
+    }
+
+    @Test
+    public void wmcServerV110SupportURLTest() throws Exception {
+        Unmarshaller unmarshaller = wmcJAXBContext.acquireUnmarshaller();
+        ServerType serverType = (ServerType) unmarshaller
+                .unmarshal(new URL("http://150.145.141.124/GONFALONI-Upload/WMC-Server-v110.xml"));
+        logger.info("#####################{}\n", serverType);
+        Marshaller marshaller = wmcJAXBContext.acquireMarshaller();
+        StringWriter writer = new StringWriter();
+        marshaller.marshal(serverType, writer);
+        logger.info("###########################\n{}\n\n", writer);
+    }
+
+    @Test
+    public void wmcLayerTypeV110SupportURLTest() throws Exception {
+        Unmarshaller unmarshaller = wmcJAXBContext.acquireUnmarshaller();
+        LayerType layerType = (LayerType) unmarshaller
+                .unmarshal(new URL("http://150.145.141.124/GONFALONI-Upload/WMCLayerType-v110.xml"));
+        logger.info("#####################{}\n", layerType);
+        Marshaller marshaller = wmcJAXBContext.acquireMarshaller();
+        StringWriter writer = new StringWriter();
+        marshaller.marshal(layerType, writer);
+        logger.info("###########################\n{}\n\n", writer);
+    }
+
+    @Test
+    public void wmcExtensionTypeV110SupportURLTest() throws Exception {
+        Unmarshaller unmarshaller = wmcJAXBContext.acquireUnmarshaller();
+        ExtensionType extensionType = (ExtensionType) unmarshaller
+                .unmarshal(new URL("http://150.145.141.124/GONFALONI-Upload/WMC-Extension-v110.xml"));
+        logger.info("#####################{}\n", extensionType);
+        Marshaller marshaller = wmcJAXBContext.acquireMarshaller();
+        StringWriter writer = new StringWriter();
+        marshaller.marshal(extensionType, writer);
+        logger.info("###########################\n{}\n\n", writer);
+    }
 }

@@ -17,6 +17,7 @@ public abstract class AbstractWMCJAXBTheoriesTest {
     protected static final Logger logger = LoggerFactory.getLogger(AbstractWMCJAXBTheoriesTest.class);
     //
     protected static String dirFiles;
+    protected static final String baseRepoURL = "http://150.145.141.124/GONFALONI-Upload/";
 
     @BeforeClass
     public static void buildDirFiles() throws IOException {

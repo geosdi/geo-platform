@@ -37,15 +37,12 @@ package org.geosdi.geoplatform.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.Lists;
-import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
 import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.response.factory.AccountDTOFactory;
+
+import javax.xml.bind.annotation.*;
+import java.util.List;
 
 /**
  *
@@ -66,8 +63,7 @@ public class ProjectDTO {
     private Boolean defaultProject;
     private ShortAccountDTO owner;
     //
-    @XmlElementWrapper(name = "rootFolders")
-    @XmlElement(name = "folder")
+    @XmlElement(name = "rootFolders")
     @JsonProperty(value = "rootFolders")
     private List<FolderDTO> rootFolders;
 
@@ -231,9 +227,6 @@ public class ProjectDTO {
         return defaultProject;
     }
 
-    /**
-     * @param default the defaultProject to set
-     */
     public void setDefault(Boolean defaultProject) {
         this.defaultProject = defaultProject;
     }
@@ -252,9 +245,6 @@ public class ProjectDTO {
         this.owner = owner;
     }
 
-    /**
-     * @param rootFolders to set
-     */
     public List<FolderDTO> getRootFolders() {
         return rootFolders;
     }

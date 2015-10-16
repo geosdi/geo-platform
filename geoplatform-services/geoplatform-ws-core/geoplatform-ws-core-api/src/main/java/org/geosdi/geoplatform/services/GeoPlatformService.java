@@ -155,10 +155,10 @@ import org.geosdi.geoplatform.services.rs.path.GPServiceRSPathConfig;
         description = "Base GeoPlatform REST Service Core")
 @Consumes(value = {MediaType.APPLICATION_JSON})
 @Produces(value = {MediaType.APPLICATION_JSON})
-@FastInfoset(force = true, serializerMinAttributeValueSize = 200,
-        serializerMaxAttributeValueSize = 400, serializerMinCharacterContentChunkSize = 100,
-        serializerAttributeValueMapMemoryLimit = 200, serializerMaxCharacterContentChunkSize = 300,
-        serializerCharacterContentChunkMapMemoryLimit = 200)
+//@FastInfoset(force = true, serializerMinAttributeValueSize = 200,
+//        serializerMaxAttributeValueSize = 400, serializerMinCharacterContentChunkSize = 100,
+//        serializerAttributeValueMapMemoryLimit = 200, serializerMaxCharacterContentChunkSize = 300,
+//        serializerCharacterContentChunkMapMemoryLimit = 200)
 @WebService(name = "GeoPlatformService",
         targetNamespace = "http://services.geo-platform.org/")
 public interface GeoPlatformService extends GPCoreServiceApi {

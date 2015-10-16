@@ -1,5 +1,5 @@
-
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -16,27 +16,44 @@
 
     <name>Geo-Platform :: == Web Services Module Test</name>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.geosdi</groupId>
+                <artifactId>geoplatform-cxf-dependency</artifactId>
+                <type>pom</type>
+                <scope>import</scope>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
-        
+
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-ws-csw-connector</artifactId>
             <version>${project.version}</version>
             <scope>runtime</scope>
         </dependency>
-        
+
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-cxf-rs-provider-support</artifactId>
             <version>${project.version}</version>
         </dependency>
-        
+
+        <dependency>
+            <groupId>com.sun.xml.fastinfoset</groupId>
+            <artifactId>FastInfoset</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-cxf-server-support</artifactId>
             <version>${project.version}</version>
         </dependency>
-        
+
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-sharing</artifactId>
@@ -50,21 +67,21 @@
             <version>${project.version}</version>
             <scope>runtime</scope>
         </dependency>
-        
+
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-ws-geonetwork-connector</artifactId>
             <version>${project.version}</version>
             <scope>runtime</scope>
         </dependency>
-        
+
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-ws-wms-connector</artifactId>
             <version>${project.version}</version>
             <scope>runtime</scope>
         </dependency>
-        
+
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-ws-publish-connector</artifactId>
@@ -83,7 +100,7 @@
             <artifactId>geoplatform-ws-core-impl</artifactId>
             <scope>runtime</scope>
         </dependency>
-        
+
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-wms-api</artifactId>
@@ -95,13 +112,13 @@
             <artifactId>geoplatform-wms-impl</artifactId>
             <scope>runtime</scope>
         </dependency>
-        
+
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-tracking-api</artifactId>
             <scope>runtime</scope>
         </dependency>
-        
+
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-scheduler-api</artifactId>
@@ -113,7 +130,7 @@
             <artifactId>geoplatform-scheduler-impl</artifactId>
             <scope>runtime</scope>
         </dependency>
-        
+
         <!-- =============================================================== -->
         <!-- ==================== GEOPLATFORM CATALOG ====================== -->
         <!-- =============================================================== -->
@@ -121,12 +138,12 @@
             <groupId>org.geosdi</groupId>
             <artifactId>geonetwork-catalog-api</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geonetwork-catalog-impl</artifactId>
         </dependency>
-        
+
         <!-- =============================================================== -->
         <!-- =================== GEOPLATFORM PUBLISHER ===================== -->
         <!-- =============================================================== -->
@@ -134,12 +151,12 @@
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-publisher-api</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-publisher-impl</artifactId>
         </dependency>
-        
+
         <!-- =============================================================== -->
         <!-- ==================== CSW CATALOG ====================== -->
         <!-- =============================================================== -->
@@ -147,12 +164,12 @@
             <groupId>org.geosdi</groupId>
             <artifactId>csw-catalog-api</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>csw-catalog-impl</artifactId>
         </dependency>
-        
+
         <!-- =============================================================== -->
         <!-- ==================== GEOPLATFORM WFS ====================== -->
         <!-- =============================================================== -->
@@ -162,7 +179,7 @@
             <version>${project.version}</version>
             <scope>runtime</scope>
         </dependency>
-        
+
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-wfs-api</artifactId>
@@ -237,13 +254,13 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-initializer</artifactId>
             <version>${project.version}</version>
         </dependency>
-        
+
         <!-- SCOPE TEST -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -257,7 +274,7 @@
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
-        
+
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
@@ -265,7 +282,7 @@
         </dependency>
 
     </dependencies>
-    
+
     <build>
         <plugins>
             <plugin>

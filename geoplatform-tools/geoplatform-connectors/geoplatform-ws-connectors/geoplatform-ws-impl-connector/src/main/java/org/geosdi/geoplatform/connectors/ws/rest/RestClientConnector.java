@@ -72,8 +72,7 @@ public abstract class RestClientConnector<E> extends GPAbstractWSClientConnector
                     "The Parameter Address can't be null.");
         }
 
-        this.basicRestProvider = GPRestProviderFactory.createProvider(
-                providerType);
+        this.basicRestProvider = GPRestProviderFactory.createProvider(providerType);
 
         if (this.basicRestProvider == null) {
             throw new IllegalArgumentException("The Provider cannot be null.");

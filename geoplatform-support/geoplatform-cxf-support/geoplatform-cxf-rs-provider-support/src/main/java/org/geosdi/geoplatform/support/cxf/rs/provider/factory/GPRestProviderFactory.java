@@ -34,14 +34,16 @@
  */
 package org.geosdi.geoplatform.support.cxf.rs.provider.factory;
 
+import org.apache.cxf.jaxrs.provider.JAXBElementProvider;
 import org.geosdi.geoplatform.support.cxf.rs.provider.configurator.GPRestProviderType;
 import org.geosdi.geoplatform.support.cxf.rs.provider.jackson.CXFJacksonProvider;
 import org.geosdi.geoplatform.support.cxf.rs.provider.jettyson.GPJSONProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Arrays;
+
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -68,6 +70,17 @@ public final class GPRestProviderFactory {
                                 + "RestProviderFactory is building an instance of {}\n\n",
                         GPJSONProvider.class);
                 return new GPJSONProvider<>();
+
+            case FASTINFOSET:
+                logger.debug("\n\n########################### " +
+                                "RestProviderFactory is building an instance of {}\n\n",
+                        JAXBElementProvider.class);
+                return new JAXBElementProvider() {
+                    {
+                        super.setConsumeMediaTypes(Arrays.asList(new String[]{"application/fastinfoset"}));
+                        super.setProduceMediaTypes(Arrays.asList(new String[]{"application/fastinfoset"}));
+                    }
+                };
 
             default:
                 logger.debug("\n\n############################### "

@@ -51,6 +51,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+
+import org.apache.cxf.annotations.FastInfoset;
 import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
 import org.codehaus.jra.Delete;
 import org.codehaus.jra.Get;
@@ -153,6 +155,10 @@ import org.geosdi.geoplatform.services.rs.path.GPServiceRSPathConfig;
         description = "Base GeoPlatform REST Service Core")
 @Consumes(value = {MediaType.APPLICATION_JSON})
 @Produces(value = {MediaType.APPLICATION_JSON})
+@FastInfoset(force = true, serializerMinAttributeValueSize = 200,
+        serializerMaxAttributeValueSize = 400, serializerMinCharacterContentChunkSize = 100,
+        serializerAttributeValueMapMemoryLimit = 200, serializerMaxCharacterContentChunkSize = 300,
+        serializerCharacterContentChunkMapMemoryLimit = 200)
 @WebService(name = "GeoPlatformService",
         targetNamespace = "http://services.geo-platform.org/")
 public interface GeoPlatformService extends GPCoreServiceApi {

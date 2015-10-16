@@ -1,10 +1,9 @@
 /**
- *
  * geo-platform Rich webgis framework http://geo-platform.org
  * ====================================================================
- *
+ * <p/>
  * Copyright (C) 2008-2015 geoSDI Group (CNR IMAA - Potenza - ITALY).
- *
+ * <p/>
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
@@ -13,13 +12,13 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details. You should have received a copy of the GNU General Public License
  * along with this program. If not, see http://www.gnu.org/licenses/
- *
+ * <p/>
  * ====================================================================
- *
+ * <p/>
  * Linking this library statically or dynamically with other modules is making a
  * combined work based on this library. Thus, the terms and conditions of the
  * GNU General Public License cover the whole combination.
- *
+ * <p/>
  * As a special exception, the copyright holders of this library give you
  * permission to link this library with independent modules to produce an
  * executable, regardless of the license terms of these independent modules, and
@@ -37,6 +36,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
+
 import java.util.List;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
@@ -53,6 +53,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.cxf.annotations.FastInfoset;
+import org.apache.cxf.annotations.GZIP;
 import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
 import org.codehaus.jra.Delete;
 import org.codehaus.jra.Get;
@@ -139,15 +140,15 @@ import org.geosdi.geoplatform.services.rs.path.GPServiceRSPathConfig;
  */
 @CrossOriginResourceSharing(
         allowOrigins = {
-            "http://127.0.0.1:9001"
+                "http://127.0.0.1:9001"
         },
         allowCredentials = true,
         maxAge = 1,
         allowHeaders = {
-            "X-custom-1", "X-custom-2"
+                "X-custom-1", "X-custom-2"
         },
         exposeHeaders = {
-            "X-custom-3", "X-custom-4"
+                "X-custom-3", "X-custom-4"
         }
 )
 @Path(value = GPServiceRSPathConfig.DEFAULT_RS_SERVICE_PATH)
@@ -155,10 +156,9 @@ import org.geosdi.geoplatform.services.rs.path.GPServiceRSPathConfig;
         description = "Base GeoPlatform REST Service Core")
 @Consumes(value = {MediaType.APPLICATION_JSON})
 @Produces(value = {MediaType.APPLICATION_JSON})
-//@FastInfoset(force = true, serializerMinAttributeValueSize = 200,
-//        serializerMaxAttributeValueSize = 400, serializerMinCharacterContentChunkSize = 100,
-//        serializerAttributeValueMapMemoryLimit = 200, serializerMaxCharacterContentChunkSize = 300,
-//        serializerCharacterContentChunkMapMemoryLimit = 200)
+@FastInfoset(serializerMinAttributeValueSize = 200, serializerMaxAttributeValueSize = 400,
+        serializerMinCharacterContentChunkSize = 100, serializerAttributeValueMapMemoryLimit = 200,
+        serializerMaxCharacterContentChunkSize = 300, serializerCharacterContentChunkMapMemoryLimit = 200)
 @WebService(name = "GeoPlatformService",
         targetNamespace = "http://services.geo-platform.org/")
 public interface GeoPlatformService extends GPCoreServiceApi {
@@ -167,6 +167,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     // ==========================================================================
     // === Organization
     // ==========================================================================
+
     /**
      * Insert an Organization.
      *
@@ -291,7 +292,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @Delete
     @Override
     Boolean deleteAccount(@WebParam(name = "accountID")
-            @QueryParam(value = "accountID") Long accountID)
+    @QueryParam(value = "accountID") Long accountID)
             throws ResourceNotFoundFault;
 
     /**
@@ -311,9 +312,9 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @WebResult(name = "user")
     @Override
     GPUser getUserDetail(@WebParam(name = "userID")
-            @PathParam(value = "userID")
-            @ApiParam(name = "userID", value = "The ID of user to fetch",
-                    required = true) Long userID)
+    @PathParam(value = "userID")
+    @ApiParam(name = "userID", value = "The ID of user to fetch",
+            required = true) Long userID)
             throws ResourceNotFoundFault;
 
     /**
@@ -400,7 +401,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @WebResult(name = "user")
     @Override
     UserDTO getShortUser(@WebParam(name = "userID")
-            @PathParam(value = "userID") Long userID)
+    @PathParam(value = "userID") Long userID)
             throws ResourceNotFoundFault;
 
     /**
@@ -461,7 +462,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @WebResult(name = "searchUserResponse")
     @Override
     SearchUsersResponseWS searchUsers(@WebParam(name = "userID")
-            @QueryParam(value = "userID") Long userID,
+    @QueryParam(value = "userID") Long userID,
             @QueryParam("") PaginatedSearchRequest request)
             throws ResourceNotFoundFault;
 
@@ -522,7 +523,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @WebResult(name = "count")
     @Override
     Long getUsersCount(@WebParam(name = "organization")
-            @QueryParam(value = "organization") String organization,
+    @QueryParam(value = "organization") String organization,
             @QueryParam("") SearchRequest request);
 
     /**
@@ -539,7 +540,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @WebResult(name = "authority")
     @Override
     GetAuthorityResponse getAuthorities(@WebParam(name = "accountID")
-            @PathParam(value = "accountID") Long accountID)
+    @PathParam(value = "accountID") Long accountID)
             throws ResourceNotFoundFault;
 
     /**
@@ -594,6 +595,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     // ==========================================================================
     // === AccountProject
     // ==========================================================================
+
     /**
      * Insert an AccountProject.
      *
@@ -678,7 +680,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @Override
     WSGetAccountProjectsResponse getAccountProjectsByAccountID(@PathParam(
             value = "accountID")
-            @WebParam(name = "accountID") Long accountID);
+    @WebParam(name = "accountID") Long accountID);
 
     /**
      * Retrieve the AccountProjects for a Project.
@@ -730,7 +732,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @Path(value = GPServiceRSPathConfig.GET_ACCOUNT_PROJECTS_COUNT_PATH)
     @Override
     Long getAccountProjectsCount(@WebParam(name = "accountID")
-            @QueryParam(value = "accountID") Long accountID,
+    @QueryParam(value = "accountID") Long accountID,
             @QueryParam("") SearchRequest request) throws ResourceNotFoundFault;
 
     /**
@@ -788,7 +790,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @WebResult(name = "projectOwner")
     @Override
     GPAccountProject getProjectOwner(@WebParam(name = "projectID")
-            @PathParam(value = "projectID") Long projectID)
+    @PathParam(value = "projectID") Long projectID)
             throws ResourceNotFoundFault;
 
     /**
@@ -830,7 +832,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @WebResult(name = "defaultProject")
     @Override
     GPProject getDefaultProject(@WebParam(name = "accountID")
-            @PathParam(value = "accountID") Long accountID)
+    @PathParam(value = "accountID") Long accountID)
             throws ResourceNotFoundFault;
 
     /**
@@ -848,7 +850,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @WebResult(name = "defaultProjectDTO")
     @Override
     ProjectDTO getDefaultProjectDTO(@WebParam(name = "accountID")
-            @PathParam(value = "accountID") Long accountID)
+    @PathParam(value = "accountID") Long accountID)
             throws ResourceNotFoundFault;
 
     /**
@@ -864,7 +866,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @Path(value = GPServiceRSPathConfig.UPDATE_DEFAULT_PROJECT_PATH)
     @Override
     GPProject updateDefaultProject(@WebParam(name = "accountID")
-            @QueryParam(value = "accountID") Long accountID,
+    @QueryParam(value = "accountID") Long accountID,
             @WebParam(name = "projectID")
             @QueryParam(value = "projectID") Long projectID)
             throws ResourceNotFoundFault;
@@ -1008,7 +1010,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @Path(value = GPServiceRSPathConfig.DELETE_PROJECT_PATH)
     @Override
     Boolean deleteProject(@WebParam(name = "projectID")
-            @PathParam(value = "projectID") Long projectID)
+    @PathParam(value = "projectID") Long projectID)
             throws ResourceNotFoundFault;
 
     /**
@@ -1024,7 +1026,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @WebResult(name = "project")
     @Override
     GPProject getProjectDetail(@WebParam(name = "projectID")
-            @PathParam(value = "projectID") Long projectID)
+    @PathParam(value = "projectID") Long projectID)
             throws ResourceNotFoundFault;
 
     /**
@@ -1040,7 +1042,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @WebResult(name = "project")
     @Override
     Integer getNumberOfElementsProject(@WebParam(name = "projectID")
-            @PathParam(value = "projectID") Long projectID)
+    @PathParam(value = "projectID") Long projectID)
             throws ResourceNotFoundFault;
 
     /**
@@ -1055,7 +1057,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @Path(value = GPServiceRSPathConfig.SET_PROJECT_SHARED_PATH)
     @Override
     void setProjectShared(@WebParam(name = "projectID")
-            @QueryParam(value = "projectID") Long projectID)
+    @QueryParam(value = "projectID") Long projectID)
             throws ResourceNotFoundFault;
 
     // </editor-fold>
@@ -1069,7 +1071,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @WebResult(name = "viewport")
     @Override
     GPViewport getDefaultViewport(@WebParam(name = "accountProjectID")
-            @PathParam(value = "accountProjectID") Long accountProjectID)
+    @PathParam(value = "accountProjectID") Long accountProjectID)
             throws ResourceNotFoundFault;
 
     @Get
@@ -1079,7 +1081,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @Override
     WSGetViewportResponse getAccountProjectViewports(@WebParam(
             name = "accountProjectID")
-            @PathParam(value = "accountProjectID") Long accountProjectID)
+    @PathParam(value = "accountProjectID") Long accountProjectID)
             throws ResourceNotFoundFault;
 
     @Post
@@ -1103,7 +1105,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @WebResult(name = "viewport")
     @Override
     GPViewport getViewportById(@WebParam(name = "idViewport")
-            @QueryParam(value = "idViewport") Long idViewport)
+    @QueryParam(value = "idViewport") Long idViewport)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
     @Delete
@@ -1111,7 +1113,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @Path(value = GPServiceRSPathConfig.DELETE_VIEWPORT_PATH)
     @Override
     Boolean deleteViewport(@WebParam(name = "viewportID")
-            @QueryParam(value = "viewportID") Long viewportID)
+    @QueryParam(value = "viewportID") Long viewportID)
             throws ResourceNotFoundFault;
 
     @Put
@@ -1192,7 +1194,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @Deprecated
     @Override
     Boolean deleteFolder(@WebParam(name = "folderID")
-            @QueryParam(value = "folderID") Long folderID)
+    @QueryParam(value = "folderID") Long folderID)
             throws ResourceNotFoundFault;
 
     /**
@@ -1211,7 +1213,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @Path(value = GPServiceRSPathConfig.SAVE_FOLDER_PROPERTIES_PATH)
     @Override
     Long saveFolderProperties(@WebParam(name = "folderID")
-            @QueryParam(value = "folderID") Long folderID,
+    @QueryParam(value = "folderID") Long folderID,
             @WebParam(name = "folderName")
             @QueryParam(value = "folderName") String folderName,
             @WebParam(name = "checked")
@@ -1298,7 +1300,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @WebResult(name = "folder")
     @Override
     FolderDTO getShortFolder(@WebParam(name = "folderID")
-            @PathParam(value = "folderID") Long folderID)
+    @PathParam(value = "folderID") Long folderID)
             throws ResourceNotFoundFault;
 
     /**
@@ -1314,7 +1316,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @WebResult(name = "folder")
     @Override
     GPFolder getFolderDetail(@WebParam(name = "folderID")
-            @PathParam(value = "folderID") Long folderID)
+    @PathParam(value = "folderID") Long folderID)
             throws ResourceNotFoundFault;
 
     /**
@@ -1369,7 +1371,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @WebResult(name = "folder")
     @Override
     ChildrenFolderStore getChildrenFolders(@WebParam(name = "folderID")
-            @PathParam(value = "folderID") Long folderID);
+    @PathParam(value = "folderID") Long folderID);
 
     /**
      * Retrieve the children elements (Folders and Layers) of a Folder.
@@ -1383,7 +1385,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @WebResult(name = "childrenElement")
     @Override
     TreeFolderElementsStore getChildrenElements(@WebParam(name = "folderID")
-            @PathParam(value = "folderID") Long folderID);
+    @PathParam(value = "folderID") Long folderID);
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Folder / Project">
 
@@ -1403,7 +1405,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @WebResult(name = "project")
     @Override
     ProjectDTO getProjectWithRootFolders(@WebParam(name = "projectID")
-            @PathParam(value = "projectID") Long projectID,
+    @PathParam(value = "projectID") Long projectID,
             @WebParam(name = "accountID")
             @PathParam(value = "accountID") Long accountID)
             throws ResourceNotFoundFault;
@@ -1449,7 +1451,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @WebResult(name = "project")
     @Override
     ProjectDTO exportProject(@WebParam(name = "projectID")
-            @PathParam(value = "projectID") Long projectID)
+    @PathParam(value = "projectID") Long projectID)
             throws ResourceNotFoundFault;
 
     /**
@@ -1475,6 +1477,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     // ==========================================================================
     // === Layer
     // ==========================================================================
+
     /**
      * Insert a Layer.
      *
@@ -1543,7 +1546,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @Deprecated
     @Override
     Boolean deleteLayer(@WebParam(name = "layerID")
-            @QueryParam(value = "layerID") Long layerID)
+    @QueryParam(value = "layerID") Long layerID)
             throws ResourceNotFoundFault;
 
     /**
@@ -1696,7 +1699,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @WebResult(name = "rasterLayer")
     @Override
     GPRasterLayer getRasterLayer(@WebParam(name = "layerID")
-            @PathParam(value = "layerID") Long layerID)
+    @PathParam(value = "layerID") Long layerID)
             throws ResourceNotFoundFault;
 
     /**
@@ -1712,7 +1715,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @WebResult(name = "vectorLayer")
     @Override
     GPVectorLayer getVectorLayer(@WebParam(name = "layerID")
-            @PathParam(value = "layerID") Long layerID)
+    @PathParam(value = "layerID") Long layerID)
             throws ResourceNotFoundFault;
 
     /**
@@ -1727,7 +1730,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @Path(value = GPServiceRSPathConfig.GET_SHORT_LAYER_PATH)
     @WebResult(name = "shortLayerDTO")
     ShortLayerDTO getShortLayer(@WebParam(name = "layerID")
-            @PathParam(value = "layerID") Long layerID)
+    @PathParam(value = "layerID") Long layerID)
             throws ResourceNotFoundFault;
 
     /**
@@ -1742,7 +1745,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @WebResult(name = "layer")
     @Override
     ShortLayerDTOContainer getLayers(@WebParam(name = "projectID")
-            @PathParam(value = "projectID") Long projectID);
+    @PathParam(value = "projectID") Long projectID);
 
     @Get
     @GET
@@ -1750,7 +1753,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @WebResult(name = "layers")
     @Override
     ShortLayerDTOContainer getFirstLevelLayers(@WebParam(name = "projectID")
-            @PathParam(value = "projectID") Long projectID);
+    @PathParam(value = "projectID") Long projectID);
 
     /**
      * Retrieve the Bounding Box of a Layer.
@@ -1765,7 +1768,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @WebResult(name = "bBox")
     @Override
     GPBBox getBBox(@WebParam(name = "layerID")
-            @PathParam(value = "layerID") Long layerID)
+    @PathParam(value = "layerID") Long layerID)
             throws ResourceNotFoundFault;
 
     /**
@@ -1781,7 +1784,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @WebResult(name = "layerInfo")
     @Override
     GPLayerInfo getLayerInfo(@WebParam(name = "layerID")
-            @PathParam(value = "layerID") Long layerID)
+    @PathParam(value = "layerID") Long layerID)
             throws ResourceNotFoundFault;
 //
 //    /**
@@ -1809,6 +1812,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
 //    @WebResult(name = "geometry")
 //    GeometryDTO getGeometry(@WebParam(name = "layerID") Long layerID)
 //            throws ResourceNotFoundFault;
+
     /**
      * Retrieve the type of a Layer.
      *
@@ -1822,7 +1826,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @WebResult(name = "layerType")
     @Override
     GPLayerType getLayerType(@WebParam(name = "layerID")
-            @PathParam(value = "layerID") Long layerID)
+    @PathParam(value = "layerID") Long layerID)
             throws ResourceNotFoundFault;
 
     /**
@@ -1847,6 +1851,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     // ==========================================================================
     // === ACL
     // ==========================================================================
+
     /**
      * Retrieve all Organization Roles.
      *
@@ -1990,7 +1995,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @Path(value = GPServiceRSPathConfig.DELETE_SERVER_PATH)
     @Override
     Boolean deleteServer(@WebParam(name = "serverID")
-            @QueryParam(value = "serverID") Long serverID)
+    @QueryParam(value = "serverID") Long serverID)
             throws ResourceNotFoundFault;
 
     @Get
@@ -2009,7 +2014,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @WebResult(name = "server")
     @Override
     GeoPlatformServer getServerDetail(@WebParam(name = "serverID")
-            @PathParam(value = "serverID") Long serverID)
+    @PathParam(value = "serverID") Long serverID)
             throws ResourceNotFoundFault;
 
     @Get
@@ -2018,7 +2023,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @WebResult(name = "server")
     @Override
     ServerDTO getShortServer(@WebParam(name = "serverUrl")
-            @QueryParam(value = "serverUrl") String serverUrl)
+    @QueryParam(value = "serverUrl") String serverUrl)
             throws ResourceNotFoundFault;
 
     @Get
@@ -2044,6 +2049,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     // ==========================================================================
     // === Message
     // ==========================================================================
+
     /**
      * Insert a Message.
      *
@@ -2089,7 +2095,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @Path(value = GPServiceRSPathConfig.DELETE_MESSAGE_PATH)
     @Override
     Boolean deleteMessage(@WebParam(name = "messageID")
-            @PathParam(value = "messageID") Long messageID)
+    @PathParam(value = "messageID") Long messageID)
             throws ResourceNotFoundFault;
 
     /**
@@ -2104,7 +2110,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @Path(value = GPServiceRSPathConfig.GET_MESSAGE_DETAIL_PATH)
     @Override
     GPMessage getMessageDetail(@WebParam(name = "messageID")
-            @PathParam(value = "messageID") Long messageID)
+    @PathParam(value = "messageID") Long messageID)
             throws ResourceNotFoundFault;
 
     /**

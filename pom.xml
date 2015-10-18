@@ -12,7 +12,7 @@
     <packaging>pom</packaging>
 
     <name>Geo-Platform :: == GeoSDI Framework</name>
-    <url>http://code.google.com/p/geo-platform/</url>
+    <url>https://github.com/geosdi/geo-platform</url>
 
     <scm>
         <url>https://github.com/geosdi/geo-platform</url>
@@ -1221,6 +1221,35 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.5</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>test-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <archive>
+                        <index>true</index>
+                        <manifest>
+                            <addClasspath>false</addClasspath>
+                        </manifest>
+                        <manifestEntries>
+                            <Specification-Title>org.geosdi.geoplatform</Specification-Title>
+                            <Specification-Version>${project.version}</Specification-Version>
+                            <Specification-Vendor>${project.url}</Specification-Vendor>
+                            <Implementation-Title>org.geosdi.geoplatform</Implementation-Title>
+                            <Implementation-Version>${build.branch}/${build.commit.id}</Implementation-Version>
+                            <Implementation-Vendor>${project.url}</Implementation-Vendor>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
             </plugin>
             
             <!-- initialize git revision info -->

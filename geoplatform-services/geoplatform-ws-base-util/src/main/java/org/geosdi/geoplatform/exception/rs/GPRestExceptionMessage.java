@@ -35,9 +35,12 @@
  */
 package org.geosdi.geoplatform.exception.rs;
 
-import java.io.Serializable;
-import javax.xml.bind.annotation.XmlRootElement;
 import org.geosdi.geoplatform.exception.GPExceptionFaultType;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 
 /**
  *
@@ -45,10 +48,11 @@ import org.geosdi.geoplatform.exception.GPExceptionFaultType;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class GPRestExceptionMessage implements Serializable {
 
     private static final long serialVersionUID = -8447193762518149838L;
-
+    //
     private GPExceptionFaultType faultType;
     private String message;
     private Long id;

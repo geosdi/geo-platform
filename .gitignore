@@ -12,6 +12,7 @@ target/
 gwt-unitCache/
 *_demo/
 /geoplatform-gui/demos/*-demo/war/WEB-INF/*/
+/geoplatform-rest-documentation/geoplatform-rest-core-documentation/src/main/webapp/lang/
 /geoplatform-rest-documentation/geoplatform-rest-core-documentation/src/main/webapp/fonts/
 /geoplatform-rest-documentation/geoplatform-rest-core-documentation/src/main/webapp/swagger-ui.js
 /geoplatform-rest-documentation/geoplatform-rest-core-documentation/src/main/webapp/swagger-ui.min.js

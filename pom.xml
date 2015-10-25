@@ -125,14 +125,14 @@
             <url>http://gwtquery-ui.googlecode.com/svn/mavenrepo</url>
         </repository>
         
-        <repository>
+        <!-- repository>
             <id>boundlessgeo</id>
             <name>BoundlessGeo Maven Repository</name>
             <url>http://repo.boundlessgeo.com/main/</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
-        </repository>
+        </repository -->
     </repositories>
 
     <modules>

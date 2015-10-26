@@ -46,6 +46,7 @@ import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.common.collect.Lists;
+import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.rest.RestStatus;
 import org.elasticsearch.search.SearchHit;
@@ -207,6 +208,21 @@ public abstract class AbstractElasticSearchDAO<D extends Document>
         CountResponse response = this.elastichSearchClient
                 .prepareCount(getIndexName())
                 .setTypes(getIndexType())
+                .execute().actionGet();
+        return response.getCount();
+    }
+
+    /**
+     * @param queryBuilder
+     * @return {@link Long}
+     * @throws Exception
+     */
+    @Override
+    public Long count(QueryBuilder queryBuilder) throws Exception {
+        CountResponse response = this.elastichSearchClient
+                .prepareCount(getIndexName())
+                .setTypes(getIndexType())
+                .setQuery(queryBuilder)
                 .execute().actionGet();
         return response.getCount();
     }

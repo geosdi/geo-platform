@@ -82,9 +82,7 @@ public interface GPElasticSearchDAO<D extends Document> {
     void removeAll() throws Exception;
 
     /**
-     *
      * @return {@link List<D>}
-     *
      * @throws Exception
      */
     List<D> findLasts() throws Exception;
@@ -143,6 +141,13 @@ public interface GPElasticSearchDAO<D extends Document> {
          * @throws java.lang.Exception
          */
         Long count() throws Exception;
+
+        /**
+         * @param queryBuilder
+         * @return {@link Long}
+         * @throws Exception
+         */
+        Long count(QueryBuilder queryBuilder) throws Exception;
 
     }
 
@@ -228,12 +233,12 @@ public interface GPElasticSearchDAO<D extends Document> {
          * @param field
          * @param sortOrder
          */
-        public SortablePage( String field, SortOrder sortOrder) {
+        public SortablePage(String field, SortOrder sortOrder) {
             this(field, sortOrder, 0, 0);
         }
 
         public SortablePage(String field, SortOrder sortOrder, int from,
-                            int size) {
+                int size) {
             super(from, size);
             this.field = field;
             this.sortOrder = sortOrder;
@@ -300,7 +305,7 @@ public interface GPElasticSearchDAO<D extends Document> {
         }
 
         public QueriableSortablePage(String field, SortOrder sortOrder, int from,
-                                     int size, QueryBuilder query) {
+                int size, QueryBuilder query) {
             super(field, sortOrder, from, size);
             this.query = query;
         }

@@ -143,7 +143,7 @@ public abstract class AbstractElasticSearchDAO<D extends Document>
     }
 
     @Override
-    public <P extends Page> List<D> find(P page) throws Exception {
+    public <P extends Page> IPageResult<D> find(P page) throws Exception {
         Preconditions.checkArgument((page != null), "Page must not be null.");
         SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient
                 .prepareSearch(getIndexName())
@@ -158,8 +158,9 @@ public abstract class AbstractElasticSearchDAO<D extends Document>
                     + searchResponse.status());
         }
 
-        logger.debug("###################TOTAL HITS FOUND : {} .\n\n",
-                searchResponse.getHits().getTotalHits());
+        Long total = searchResponse.getHits().getTotalHits();
+
+        logger.debug("###################TOTAL HITS FOUND : {} .\n\n", total);
 
         List<D> documents = Lists.newArrayList();
 
@@ -171,7 +172,7 @@ public abstract class AbstractElasticSearchDAO<D extends Document>
             documents.add(document);
         }
 
-        return documents;
+        return new PageResult<D>(total, documents);
     }
 
     @Override

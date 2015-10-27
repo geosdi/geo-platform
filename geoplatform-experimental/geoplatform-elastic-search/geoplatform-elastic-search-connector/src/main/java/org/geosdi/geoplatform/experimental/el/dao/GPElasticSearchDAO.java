@@ -93,7 +93,7 @@ public interface GPElasticSearchDAO<D extends Document> {
      * @return {@link List<D>}
      * @throws Exception
      */
-    <P extends Page> List<D> find(P page) throws Exception;
+    <P extends Page> IPageResult<D> find(P page) throws Exception;
 
     /**
      * @param <Mapper>
@@ -148,6 +148,25 @@ public interface GPElasticSearchDAO<D extends Document> {
          * @throws Exception
          */
         Long count(QueryBuilder queryBuilder) throws Exception;
+
+    }
+
+    /**
+     *
+     */
+    interface IPageResult<D> {
+
+        /**
+         * <p>The Total Results Number</p>
+         *
+         * @return {@link Long}
+         */
+        Long getTotal();
+
+        /**
+         * @return {@link List<D>}
+         */
+        List<D> getResults();
 
     }
 

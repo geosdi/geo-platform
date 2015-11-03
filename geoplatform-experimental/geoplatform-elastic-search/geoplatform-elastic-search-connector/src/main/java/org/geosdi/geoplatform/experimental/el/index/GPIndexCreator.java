@@ -91,5 +91,4 @@ public interface GPIndexCreator extends Ordered {
         String getIndexType();
 
     }
-
 }

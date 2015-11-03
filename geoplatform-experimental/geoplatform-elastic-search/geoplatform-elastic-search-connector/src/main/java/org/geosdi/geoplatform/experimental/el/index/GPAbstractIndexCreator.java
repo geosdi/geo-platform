@@ -36,7 +36,9 @@
 package org.geosdi.geoplatform.experimental.el.index;
 
 import com.google.common.base.Preconditions;
+import org.elasticsearch.action.admin.indices.mapping.put.PutMappingResponse;
 import org.elasticsearch.client.Client;
+import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.InitializingBean;
@@ -63,6 +65,7 @@ public abstract class GPAbstractIndexCreator implements GPIndexCreator,
                     + "exist, so i will create it.\n", getIndexName());
             this.elastichSearchClient.admin().indices()
                     .prepareCreate(getIndexName()).get();
+            this.preparePutMapping();
         } else {
             logger.debug("\n\n######################INDEX_NAME : {} "
                     + "already exists.\n", getIndexName());
@@ -95,12 +98,42 @@ public abstract class GPAbstractIndexCreator implements GPIndexCreator,
                 .get().isExists();
     }
 
+    /**
+     * @param xContentBuilder
+     * @return
+     * @throws Exception
+     */
+    protected PutMappingResponse putMapping(XContentBuilder xContentBuilder) throws Exception {
+        Preconditions.checkNotNull(xContentBuilder, "The XContentBuilder must not be null");
+        return this.elastichSearchClient
+                .admin()
+                .indices()
+                .preparePutMapping(getIndexName())
+                .setType(getIndexType())
+                .setSource(xContentBuilder)
+                .execute().actionGet();
+    }
+
+    /**
+     * @return {@link String} The Index Name
+     */
     protected final String getIndexName() {
         return getIndexSettings().getIndexName();
     }
 
+    /**
+     * @return {@link String} The Index Type
+     */
     protected final String getIndexType() {
         return getIndexSettings().getIndexType();
+    }
+
+    /**
+     * <p>Generate the Correct Mapping.</p>
+     *
+     * @throws Exception
+     */
+    protected void preparePutMapping() throws Exception {
     }
 
     @Override
@@ -122,5 +155,4 @@ public abstract class GPAbstractIndexCreator implements GPIndexCreator,
                 || !(this.getIndexType().isEmpty()), "The Index Type must not be"
                 + " null or an empty String.");
     }
-
 }

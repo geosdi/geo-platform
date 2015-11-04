@@ -434,7 +434,7 @@
             <dependency>
                 <groupId>org.quartz-scheduler</groupId>
                 <artifactId>quartz</artifactId>
-                <version>2.2.1</version>
+                <version>2.2.2</version>
             </dependency>
 
             <!-- =========================================================== -->
@@ -1419,7 +1419,7 @@
         
         <javax.ws.rs-api-version>2.0</javax.ws.rs-api-version>  
 
-        <jibx-version>1.2.5</jibx-version>
+        <jibx-version>1.2.6</jibx-version>
 
         <aspectj-version>1.8.0</aspectj-version>
         <ubl-version>2.0</ubl-version>

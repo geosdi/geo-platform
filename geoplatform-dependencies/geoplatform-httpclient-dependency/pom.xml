@@ -36,7 +36,7 @@
     </dependencyManagement>
     
     <properties>
-        <httpcomponents-core-version>4.4.3</httpcomponents-core-version>
+        <httpcomponents-core-version>4.4.4</httpcomponents-core-version>
         <httpcomponents-client-version>4.5.1</httpcomponents-client-version>
     </properties>
 

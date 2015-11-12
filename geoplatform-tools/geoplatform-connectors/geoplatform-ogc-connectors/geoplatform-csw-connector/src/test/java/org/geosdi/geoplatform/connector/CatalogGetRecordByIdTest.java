@@ -1,10 +1,9 @@
 /**
- *
  * geo-platform Rich webgis framework http://geo-platform.org
  * ====================================================================
- *
+ * <p/>
  * Copyright (C) 2008-2015 geoSDI Group (CNR IMAA - Potenza - ITALY).
- *
+ * <p/>
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
@@ -13,13 +12,13 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details. You should have received a copy of the GNU General Public License
  * along with this program. If not, see http://www.gnu.org/licenses/
- *
+ * <p/>
  * ====================================================================
- *
+ * <p/>
  * Linking this library statically or dynamically with other modules is making a
  * combined work based on this library. Thus, the terms and conditions of the
  * GNU General Public License cover the whole combination.
- *
+ * <p/>
  * As a special exception, the copyright holders of this library give you
  * permission to link this library with independent modules to produce an
  * executable, regardless of the license terms of these independent modules, and
@@ -33,36 +32,29 @@
  */
 package org.geosdi.geoplatform.connector;
 
-import java.io.FileOutputStream;
-import java.net.URL;
-import java.util.List;
-import javax.annotation.Resource;
-import javax.xml.bind.JAXBElement;
-import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.CatalogGetCapabilitiesRequest;
 import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordByIdRequest;
 import org.geosdi.geoplatform.connector.server.security.BasicPreemptiveSecurityConnector;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
-import org.geosdi.geoplatform.gui.responce.OnlineResourceProtocolType;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
 import org.geosdi.geoplatform.xml.csw.OutputSchema;
-import org.geosdi.geoplatform.xml.csw.v202.AbstractRecordType;
-import org.geosdi.geoplatform.xml.csw.v202.CapabilitiesType;
-import org.geosdi.geoplatform.xml.csw.v202.ElementSetType;
-import org.geosdi.geoplatform.xml.csw.v202.GetRecordByIdResponseType;
-import org.geosdi.geoplatform.xml.csw.v202.SummaryRecordType;
+import org.geosdi.geoplatform.xml.csw.v202.*;
 import org.geosdi.geoplatform.xml.gfc.FCFeatureCatalogueType;
 import org.geosdi.geoplatform.xml.iso19139.v20070417.gmd.MDMetadataType;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import javax.annotation.Resource;
+import javax.xml.bind.JAXBElement;
+import java.io.FileOutputStream;
+import java.net.URL;
+import java.util.List;
 
 /**
  *
@@ -71,7 +63,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:applicationContext-geoSDI.xml",
-    "classpath:applicationContext-Logger.xml"})
+        "classpath:applicationContext-Logger.xml"})
 public class CatalogGetRecordByIdTest {
 
     @GeoPlatformLog
@@ -82,11 +74,14 @@ public class CatalogGetRecordByIdTest {
     /**
      * SNIPC Catalog.
      */
-    private @Value("configurator{snipc_catalog_url}")
+    private
+    @Value("configurator{snipc_catalog_url}")
     String snipcUrl;
-    private @Value("configurator{snipc_catalog_username}")
+    private
+    @Value("configurator{snipc_catalog_username}")
     String snipcUsername;
-    private @Value("configurator{snipc_catalog_password}")
+    private
+    @Value("configurator{snipc_catalog_password}")
     String snipcPassword;
     /**
      * ISPRA Catalog.
@@ -135,12 +130,12 @@ public class CatalogGetRecordByIdTest {
                 ((JAXBElement) any.get(0)).getValue());
     }
 
-    @Test
+    @Test(expected = IllegalStateException.class)
     public void testTypeFullIspra() throws Exception {
         GPCatalogConnectorStore ispraServerConnector = GPCSWConnectorBuilder
                 .newConnector()
                 .withServerUrl(new URL("http://www.geoportale.isprambiente.it/"
-                                + "geoportale/csw/discovery"))
+                        + "geoportale/csw/discovery"))
                 .build();
         CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request
                 = ispraServerConnector.createGetRecordByIdRequest();

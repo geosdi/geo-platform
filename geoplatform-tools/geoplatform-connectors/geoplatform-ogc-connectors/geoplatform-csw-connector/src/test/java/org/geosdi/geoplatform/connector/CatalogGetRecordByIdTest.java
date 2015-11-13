@@ -130,6 +130,7 @@ public class CatalogGetRecordByIdTest {
                 ((JAXBElement) any.get(0)).getValue());
     }
 
+    @Ignore(value = "Server has Problem")
     @Test(expected = IllegalStateException.class)
     public void testTypeFullIspra() throws Exception {
         GPCatalogConnectorStore ispraServerConnector = GPCSWConnectorBuilder

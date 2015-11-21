@@ -64,7 +64,15 @@
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-logger-support</artifactId>
             <version>${project.version}</version>
-        </dependency> 
+        </dependency>
+
+        <!-- =========================================================== -->
+        <!-- ======================== GUAVA =========================== -->
+        <!-- =========================================================== -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
         
         <dependency>
             <groupId>org.springframework</groupId>

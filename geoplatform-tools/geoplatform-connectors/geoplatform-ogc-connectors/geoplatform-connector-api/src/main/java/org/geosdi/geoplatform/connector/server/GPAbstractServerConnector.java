@@ -1,10 +1,9 @@
 /**
- *
  * geo-platform Rich webgis framework http://geo-platform.org
  * ====================================================================
- *
+ * <p/>
  * Copyright (C) 2008-2015 geoSDI Group (CNR IMAA - Potenza - ITALY).
- *
+ * <p/>
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
@@ -13,13 +12,13 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details. You should have received a copy of the GNU General Public License
  * along with this program. If not, see http://www.gnu.org/licenses/
- *
+ * <p/>
  * ====================================================================
- *
+ * <p/>
  * Linking this library statically or dynamically with other modules is making a
  * combined work based on this library. Thus, the terms and conditions of the
  * GNU General Public License cover the whole combination.
- *
+ * <p/>
  * As a special exception, the copyright holders of this library give you
  * permission to link this library with independent modules to produce an
  * executable, regardless of the license terms of these independent modules, and
@@ -33,10 +32,6 @@
  */
 package org.geosdi.geoplatform.connector.server;
 
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
 import org.apache.http.HttpHost;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.conn.HttpClientConnectionManager;
@@ -50,8 +45,12 @@ import org.geosdi.geoplatform.support.httpclient.proxy.HttpClientProxyConfigurat
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+
 /**
- *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
  */
@@ -66,11 +65,20 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
     private final HttpClientProxyConfiguration proxyConfiguration;
     private volatile CloseableHttpClient httpClient;
 
+    /**
+     * @param theUrl
+     * @param theSecurityConnector
+     */
     protected GPAbstractServerConnector(URL theUrl,
             GPSecurityConnector theSecurityConnector) {
         this(theUrl, theSecurityConnector, DEFAULT_POOLED, null);
     }
 
+    /**
+     * @param theUrl
+     * @param theSecurityConnector
+     * @param theProxyConfiguration
+     */
     protected GPAbstractServerConnector(URL theUrl,
             GPSecurityConnector theSecurityConnector,
             HttpClientProxyConfiguration theProxyConfiguration) {
@@ -78,17 +86,32 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
                 theProxyConfiguration);
     }
 
+    /**
+     * @param theUrl
+     * @param thePooledConnectorConfig
+     */
     protected GPAbstractServerConnector(URL theUrl,
             GPPooledConnectorConfig thePooledConnectorConfig) {
         this(theUrl, null, thePooledConnectorConfig, null);
     }
 
+    /**
+     * @param theUrl
+     * @param theSecurityConnector
+     * @param thePooledConnectorConfig
+     */
     protected GPAbstractServerConnector(URL theUrl,
             GPSecurityConnector theSecurityConnector,
             GPPooledConnectorConfig thePooledConnectorConfig) {
         this(theUrl, theSecurityConnector, thePooledConnectorConfig, null);
     }
 
+    /**
+     * @param theUrl
+     * @param theSecurityConnector
+     * @param thePooledConnectorConfig
+     * @param theProxyConfiguration
+     */
     protected GPAbstractServerConnector(URL theUrl,
             GPSecurityConnector theSecurityConnector,
             GPPooledConnectorConfig thePooledConnectorConfig,
@@ -100,16 +123,25 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
         this.proxyConfiguration = theProxyConfiguration;
     }
 
+    /**
+     * @return {@link URL}
+     */
     @Override
     public URL getURL() {
         return url;
     }
 
+    /**
+     * @return {@link GPSecurityConnector}
+     */
     @Override
     public GPSecurityConnector getSecurityConnector() {
         return this.securityConnector;
     }
 
+    /**
+     * @return {@link URI}
+     */
     @Override
     public URI getURI() {
         try {
@@ -120,13 +152,16 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
         return null;
     }
 
+    /**
+     * @return {@link CloseableHttpClient}
+     */
     @Override
     public CloseableHttpClient getClientConnection() {
         return httpClient = (httpClient != null)
                 ? httpClient : proxyConfiguration != null
-                        ? proxyConfiguration.isUseProxy()
-                                ? configureProxy() : createDefaultHttpClient()
-                        : createDefaultHttpClient();
+                ? proxyConfiguration.isUseProxy()
+                ? configureProxy() : createDefaultHttpClient()
+                : createDefaultHttpClient();
     }
 
     @Override
@@ -145,7 +180,6 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
      * the ? character </p>
      *
      * @param urlServer
-     *
      * @return String
      */
     protected static URL analyzesServerURL(String urlServer) {
@@ -184,13 +218,11 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
             HttpHost proxy = new HttpHost(proxyConfiguration.getProxyUrl(),
                     proxyConfiguration.getProxyPort());
 
-            CloseableHttpClient httpclient = HttpClients
+            return HttpClients
                     .custom()
                     .setConnectionManager(createClientConnectionManager())
                     .setProxy(proxy)
                     .build();
-
-            return httpclient;
         }
     }
 

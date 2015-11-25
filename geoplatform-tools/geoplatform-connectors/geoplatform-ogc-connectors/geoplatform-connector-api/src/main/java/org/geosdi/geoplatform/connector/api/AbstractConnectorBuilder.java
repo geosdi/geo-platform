@@ -1,10 +1,9 @@
 /**
- *
  * geo-platform Rich webgis framework http://geo-platform.org
  * ====================================================================
- *
+ * <p/>
  * Copyright (C) 2008-2015 geoSDI Group (CNR IMAA - Potenza - ITALY).
- *
+ * <p/>
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
@@ -13,13 +12,13 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details. You should have received a copy of the GNU General Public License
  * along with this program. If not, see http://www.gnu.org/licenses/
- *
+ * <p/>
  * ====================================================================
- *
+ * <p/>
  * Linking this library statically or dynamically with other modules is making a
  * combined work based on this library. Thus, the terms and conditions of the
  * GNU General Public License cover the whole combination.
- *
+ * <p/>
  * As a special exception, the copyright holders of this library give you
  * permission to link this library with independent modules to produce an
  * executable, regardless of the license terms of these independent modules, and
@@ -33,18 +32,15 @@
  */
 package org.geosdi.geoplatform.connector.api;
 
-import java.net.URL;
 import org.geosdi.geoplatform.connector.server.GPServerConnector.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 import org.geosdi.geoplatform.support.httpclient.proxy.HttpClientProxyConfiguration;
 
+import java.net.URL;
+
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- *
- * @param <B>
- * @param <C>
  */
 public abstract class AbstractConnectorBuilder<B extends AbstractConnectorBuilder, C extends GPConnectorStore>
         implements GPConnectorBuilder<B> {
@@ -61,35 +57,40 @@ public abstract class AbstractConnectorBuilder<B extends AbstractConnectorBuilde
     @Override
     public B withClientSecurity(GPSecurityConnector theSecurityConnector) {
         this.securityConnector = theSecurityConnector;
-        return (B) this;
+        return self();
     }
 
     @Override
     public B withPooledConnectorConfig(
             GPPooledConnectorConfig thePooledConnectorConfig) {
-       this.pooledConnectorConfig = thePooledConnectorConfig;
-       return (B) this;
+        this.pooledConnectorConfig = thePooledConnectorConfig;
+        return self();
     }
 
     @Override
     public B withServerUrl(URL theServerUrl) {
         this.serverUrl = theServerUrl;
-        return (B) this;
+        return self();
     }
 
     @Override
     public B withProxyConfiguration(
             HttpClientProxyConfiguration theProxyConfiguration) {
         this.proxyConfiguration = theProxyConfiguration;
-        return (B) this;
+        return self();
     }
 
     @Override
     public B withVersion(String theVersion) {
         this.version = theVersion;
-        return (B) this;
+        return self();
     }
 
     public abstract C build() throws Exception;
+
+    /**
+     * @return {@link B}
+     */
+    protected abstract B self();
 
 }

@@ -1,10 +1,9 @@
 /**
- *
  * geo-platform Rich webgis framework http://geo-platform.org
  * ====================================================================
- *
+ * <p/>
  * Copyright (C) 2008-2015 geoSDI Group (CNR IMAA - Potenza - ITALY).
- *
+ * <p/>
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
@@ -13,13 +12,13 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details. You should have received a copy of the GNU General Public License
  * along with this program. If not, see http://www.gnu.org/licenses/
- *
+ * <p/>
  * ====================================================================
- *
+ * <p/>
  * Linking this library statically or dynamically with other modules is making a
  * combined work based on this library. Thus, the terms and conditions of the
  * GNU General Public License cover the whole combination.
- *
+ * <p/>
  * As a special exception, the copyright holders of this library give you
  * permission to link this library with independent modules to produce an
  * executable, regardless of the license terms of these independent modules, and
@@ -33,7 +32,6 @@
  */
 package org.geosdi.geoplatform.connector.server;
 
-import java.net.URL;
 import org.geosdi.geoplatform.connector.WFSVersion;
 import org.geosdi.geoplatform.connector.WFSVersionException;
 import org.geosdi.geoplatform.connector.server.request.WFSDescribeFeatureTypeRequest;
@@ -46,8 +44,9 @@ import org.geosdi.geoplatform.connector.server.request.v110.WFSGetFeatureRequest
 import org.geosdi.geoplatform.connector.server.request.v110.WFSTransactionRequestV110;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 
+import java.net.URL;
+
 /**
- *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class GPWFSServerConnector extends GPAbstractServerConnector
@@ -61,7 +60,7 @@ public class GPWFSServerConnector extends GPAbstractServerConnector
      * and the specific version.</p>
      *
      * @param urlServer the String that represent WFS server URL
-     * @param version the value of WFS version. Must be 1.1.0
+     * @param version   the value of WFS version. Must be 1.1.0
      */
     public GPWFSServerConnector(String urlServer, String version) {
         this(urlServer, null, version);
@@ -72,9 +71,9 @@ public class GPWFSServerConnector extends GPAbstractServerConnector
      * Create an instance of {@link GPWFSServerConnector} with the server URL,
      * {@link GPSecurityConnector} for security and version.</p>
      *
-     * @param urlServer the String that represent WFS server URL
+     * @param urlServer         the String that represent WFS server URL
      * @param securityConnector {@link GPSecurityConnector}
-     * @param version the value of WFS version. Must be 1.1.0
+     * @param version           the value of WFS version. Must be 1.1.0
      */
     public GPWFSServerConnector(String urlServer,
             GPSecurityConnector securityConnector,
@@ -83,6 +82,12 @@ public class GPWFSServerConnector extends GPAbstractServerConnector
                 toWFSVersion(version));
     }
 
+    /**
+     * @param urlServer
+     * @param pooledConnectorConfig
+     * @param securityConnector
+     * @param version
+     */
     public GPWFSServerConnector(String urlServer,
             GPPooledConnectorConfig pooledConnectorConfig,
             GPSecurityConnector securityConnector,
@@ -97,9 +102,9 @@ public class GPWFSServerConnector extends GPAbstractServerConnector
      * server UR:, {@link GPSecurityConnector} security context and
      * {@link WFSVersion} WFS version.</p>
      *
-     * @param server {@link URL} server URL
+     * @param server            {@link URL} server URL
      * @param securityConnector {@link GPSecurityConnector}
-     * @param theVersion {@link WFSVersion} WFS version. Must be 1.1.0
+     * @param theVersion        {@link WFSVersion} WFS version. Must be 1.1.0
      */
     public GPWFSServerConnector(URL server,
             GPSecurityConnector securityConnector,
@@ -109,7 +114,6 @@ public class GPWFSServerConnector extends GPAbstractServerConnector
     }
 
     /**
-     *
      * @param server
      * @param pooledConnectorConfig
      * @param securityConnector
@@ -178,7 +182,7 @@ public class GPWFSServerConnector extends GPAbstractServerConnector
      * <p>
      * Create a WFSTransaction request.</p>
      *
-     * @return {@link WFSTransaction}
+     * @return {@link WFSTransactionRequest}
      */
     @Override
     public WFSTransactionRequest createTransactionRequest() {
@@ -204,7 +208,6 @@ public class GPWFSServerConnector extends GPAbstractServerConnector
      * Method that convert String version in {@link WFSVersion} instance.</p>
      *
      * @param version
-     *
      * @return {@link WFSVersion}
      */
     private static WFSVersion toWFSVersion(String version) {

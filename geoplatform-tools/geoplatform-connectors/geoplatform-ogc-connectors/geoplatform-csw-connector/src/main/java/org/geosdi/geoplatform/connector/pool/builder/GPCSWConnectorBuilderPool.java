@@ -80,4 +80,11 @@ public class GPCSWConnectorBuilderPool extends AbstractConnectorBuilder<GPCSWCon
         return catalogStore;
     }
 
+    /**
+     * @return {@link GPCSWConnectorBuilderPool}
+     */
+    @Override
+    protected final GPCSWConnectorBuilderPool self() {
+        return this;
+    }
 }

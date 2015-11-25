@@ -1,10 +1,9 @@
 /**
- *
  * geo-platform Rich webgis framework http://geo-platform.org
  * ====================================================================
- *
+ * <p/>
  * Copyright (C) 2008-2015 geoSDI Group (CNR IMAA - Potenza - ITALY).
- *
+ * <p/>
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
@@ -13,13 +12,13 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details. You should have received a copy of the GNU General Public License
  * along with this program. If not, see http://www.gnu.org/licenses/
- *
+ * <p/>
  * ====================================================================
- *
+ * <p/>
  * Linking this library statically or dynamically with other modules is making a
  * combined work based on this library. Thus, the terms and conditions of the
  * GNU General Public License cover the whole combination.
- *
+ * <p/>
  * As a special exception, the copyright holders of this library give you
  * permission to link this library with independent modules to produce an
  * executable, regardless of the license terms of these independent modules, and
@@ -64,12 +63,19 @@ public class GPCSWConnectorBuilder
 
         GPCatalogConnectorStore cswConnector = super.proxyConfiguration != null
                 ? new GPCatalogConnectorStore(
-                        serverUrl, pooledConnectorConfig, securityConnector,
-                        proxyConfiguration, v)
+                serverUrl, pooledConnectorConfig, securityConnector,
+                proxyConfiguration, v)
                 : new GPCatalogConnectorStore(
-                        serverUrl, pooledConnectorConfig, securityConnector, v);
+                serverUrl, pooledConnectorConfig, securityConnector, v);
 
         return cswConnector;
     }
 
+    /**
+     * @return {@link GPCSWConnectorBuilder}
+     */
+    @Override
+    protected final GPCSWConnectorBuilder self() {
+        return this;
+    }
 }

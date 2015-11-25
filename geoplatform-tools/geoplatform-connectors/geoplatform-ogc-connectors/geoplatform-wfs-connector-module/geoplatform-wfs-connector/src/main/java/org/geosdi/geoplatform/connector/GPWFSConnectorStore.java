@@ -1,10 +1,9 @@
 /**
- *
  * geo-platform Rich webgis framework http://geo-platform.org
  * ====================================================================
- *
+ * <p/>
  * Copyright (C) 2008-2015 geoSDI Group (CNR IMAA - Potenza - ITALY).
- *
+ * <p/>
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
@@ -13,13 +12,13 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details. You should have received a copy of the GNU General Public License
  * along with this program. If not, see http://www.gnu.org/licenses/
- *
+ * <p/>
  * ====================================================================
- *
+ * <p/>
  * Linking this library statically or dynamically with other modules is making a
  * combined work based on this library. Thus, the terms and conditions of the
  * GNU General Public License cover the whole combination.
- *
+ * <p/>
  * As a special exception, the copyright holders of this library give you
  * permission to link this library with independent modules to produce an
  * executable, regardless of the license terms of these independent modules, and
@@ -33,7 +32,6 @@
  */
 package org.geosdi.geoplatform.connector;
 
-import java.net.URL;
 import org.geosdi.geoplatform.connector.api.GPConnectorStore;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.GPWFSServerConnector;
@@ -43,29 +41,48 @@ import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequest;
 import org.geosdi.geoplatform.connector.server.request.WFSTransactionRequest;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 
+import java.net.URL;
+
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class GPWFSConnectorStore extends GPConnectorStore<GPWFSServerConnector>
         implements WFSConnector {
 
+    /**
+     * @param serverURL
+     */
     public GPWFSConnectorStore(URL serverURL) {
         this(serverURL, WFSVersion.V110);
     }
 
+    /**
+     * @param serverURL
+     * @param theVersion
+     */
     public GPWFSConnectorStore(URL serverURL,
             WFSVersion theVersion) {
         this(serverURL, null, theVersion);
     }
 
+    /**
+     * @param serverURL
+     * @param security
+     * @param theVersion
+     */
     public GPWFSConnectorStore(URL serverURL,
             GPSecurityConnector security,
             WFSVersion theVersion) {
         super(new GPWFSServerConnector(serverURL, security, theVersion));
     }
 
+    /**
+     * @param serverURL
+     * @param pooledConnectorConfig
+     * @param security
+     * @param theVersion
+     */
     public GPWFSConnectorStore(URL serverURL,
             GPServerConnector.GPPooledConnectorConfig pooledConnectorConfig,
             GPSecurityConnector security,

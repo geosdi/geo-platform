@@ -32,8 +32,6 @@
  */
 package org.geosdi.geoplatform.connector.server.request;
 
-import com.google.common.base.Charsets;
-import com.google.common.io.CharStreams;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -44,45 +42,25 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
- * @email giuseppe.lascaleia@geosdi.org
  */
 public abstract class GPPostConnectorRequest<T>
-        extends GPAbstractConnectorRequest<T> {
-
-    private HttpPost postMethod;
-
+        extends PostConnectorRequest<T> {
+    /**
+     * @param server
+     */
     public GPPostConnectorRequest(GPServerConnector server) {
         super(server);
-    }
-
-    private HttpPost getPostMethod() throws Exception {
-        if (postMethod == null) {
-            this.preparePostMethod();
-        }
-
-        return postMethod;
-    }
-
-    private void preparePostMethod() throws Exception {
-
-        this.postMethod = new HttpPost(super.serverURI);
-        this.postMethod.setConfig(super.prepareRequestConfig());
-
-        HttpEntity httpEntity = this.preparePostEntity();
-        this.postMethod.setEntity(httpEntity);
-
     }
 
     @Override
     public T getResponse() throws Exception {
         T response = null;
 
-        HttpPost httpPost = this.getPostMethod();
+        HttpPost httpPost = super.getPostMethod();
         CloseableHttpResponse httpResponse = super.securityConnector
                 .secure(this, httpPost);
 
@@ -114,51 +92,4 @@ public abstract class GPPostConnectorRequest<T>
 
         return response;
     }
-
-    @Override
-    public String getResponseAsString() throws Exception {
-        String content = null;
-
-        HttpPost httpPost = this.getPostMethod();
-        CloseableHttpResponse httpResponse = super.securityConnector.secure(
-                this,
-                httpPost);
-        HttpEntity responseEntity = httpResponse.getEntity();
-
-        if (responseEntity != null) {
-            InputStream is = responseEntity.getContent();
-
-            content = CharStreams.toString(new InputStreamReader(is,
-                    Charsets.UTF_8));
-
-            EntityUtils.consume(responseEntity);
-        } else {
-            throw new IllegalStateException(
-                    "Connector Server Error: Connection problem");
-        }
-
-        return content;
-    }
-
-    @Override
-    public InputStream getResponseAsStream() throws Exception {
-
-        HttpPost httpPost = this.getPostMethod();
-        CloseableHttpResponse httpResponse = super.securityConnector.secure(
-                this,
-                httpPost);
-
-        HttpEntity responseEntity = httpResponse.getEntity();
-        if (responseEntity != null) {
-            return responseEntity.getContent();
-
-        } else {
-            throw new IllegalStateException("Connector Server Error: "
-                    + "Connection problem");
-        }
-
-    }
-
-    protected abstract HttpEntity preparePostEntity() throws Exception;
-
 }

@@ -43,6 +43,7 @@ package org.geosdi.geoplatform.support.cxf.rs.provider.configurator;
 public enum GPRestProviderType {
 
     JACKSON,
-    JETTYSON;
-
+    JACKSON_JODA_TIME,
+    JETTYSON,
+    FASTINFOSET;
 }

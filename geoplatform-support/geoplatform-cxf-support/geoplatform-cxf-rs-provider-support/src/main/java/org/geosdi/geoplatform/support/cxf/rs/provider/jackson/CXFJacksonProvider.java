@@ -47,7 +47,11 @@ public class CXFJacksonProvider extends CXFBaseJacksonProvider {
 
     public CXFJacksonProvider() {
         this(new GPJacksonSupport(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ"))
-                .getDefaultMapper(), BASIC_ANNOTATIONS);
+                .getDefaultMapper(), DEFAULT_ANNOTATIONS);
+    }
+
+    public CXFJacksonProvider(GPJacksonSupport jacksonSupport) {
+        super(jacksonSupport.getDefaultMapper(), DEFAULT_ANNOTATIONS);
     }
 
     public CXFJacksonProvider(ObjectMapper mapper,

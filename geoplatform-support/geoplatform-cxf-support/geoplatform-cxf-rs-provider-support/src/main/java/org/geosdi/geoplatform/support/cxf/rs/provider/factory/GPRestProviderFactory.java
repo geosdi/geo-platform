@@ -34,14 +34,18 @@
  */
 package org.geosdi.geoplatform.support.cxf.rs.provider.factory;
 
+import com.fasterxml.jackson.datatype.joda.JodaModule;
 import org.apache.cxf.jaxrs.provider.JAXBElementProvider;
 import org.geosdi.geoplatform.support.cxf.rs.provider.configurator.GPRestProviderType;
 import org.geosdi.geoplatform.support.cxf.rs.provider.jackson.CXFJacksonProvider;
 import org.geosdi.geoplatform.support.cxf.rs.provider.jettyson.GPJSONProvider;
+import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
+
+import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.WRITE_DATES_AS_TIMESTAMPS_DISABLE;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -64,6 +68,13 @@ public final class GPRestProviderFactory {
                                 + "is building an instance of {}\n\n",
                         CXFJacksonProvider.class);
                 return new CXFJacksonProvider();
+
+            case JACKSON_JODA_TIME:
+                logger.debug("\n\n############################### RestProviderFactory "
+                                + "is building an instance of {} with JODA_TIME SUPPORT\n\n",
+                        CXFJacksonProvider.class);
+                return new CXFJacksonProvider(new GPJacksonSupport().registerModule(new JodaModule())
+                        .configure(WRITE_DATES_AS_TIMESTAMPS_DISABLE));
 
             case JETTYSON:
                 logger.debug("\n\n############################### "

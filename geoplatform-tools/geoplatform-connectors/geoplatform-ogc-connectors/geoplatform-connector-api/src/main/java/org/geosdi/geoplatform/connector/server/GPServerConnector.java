@@ -1,10 +1,9 @@
 /**
- *
  * geo-platform Rich webgis framework http://geo-platform.org
  * ====================================================================
- *
+ * <p/>
  * Copyright (C) 2008-2015 geoSDI Group (CNR IMAA - Potenza - ITALY).
- *
+ * <p/>
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
@@ -13,13 +12,13 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details. You should have received a copy of the GNU General Public License
  * along with this program. If not, see http://www.gnu.org/licenses/
- *
+ * <p/>
  * ====================================================================
- *
+ * <p/>
  * Linking this library statically or dynamically with other modules is making a
  * combined work based on this library. Thus, the terms and conditions of the
  * GNU General Public License cover the whole combination.
- *
+ * <p/>
  * As a special exception, the copyright holders of this library give you
  * permission to link this library with independent modules to produce an
  * executable, regardless of the license terms of these independent modules, and
@@ -34,15 +33,16 @@
 package org.geosdi.geoplatform.connector.server;
 
 import com.google.common.base.Preconditions;
-import java.net.URI;
-import java.net.URL;
 import net.jcip.annotations.Immutable;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 
+import java.net.URI;
+import java.net.URL;
+
 /**
- *
+ * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public interface GPServerConnector {
@@ -50,53 +50,46 @@ public interface GPServerConnector {
     static final GPPooledConnectorConfig DEFAULT_POOLED = new BasePooledConnectorConfig(80, 20);
 
     /**
-     *
      * @return {@link URL}
      */
     URL getURL();
 
     /**
-     *
      * @return {@link URI}
      */
     URI getURI();
 
     /**
-     *
      * @return {@link CredentialsProvider}
      */
     CredentialsProvider getCredentialsProvider();
 
     /**
-     *
      * @return {@link CloseableHttpClient}
      */
     CloseableHttpClient getClientConnection();
 
     /**
-     *
      * @return {@link GPAbstractServerConnector}
      */
     GPSecurityConnector getSecurityConnector();
 
     /**
-     *
      * @throws Exception
      */
     void dispose() throws Exception;
-    
+
     /**
-     * 
      * @param <V>
-     * @return 
+     * @return
      */
     <V extends GPServerConnectorVersion> V getVersion();
-    
+
     /**
-     * 
+     *
      */
     interface GPServerConnectorVersion {
-        
+
         String getVersion();
     }
 
@@ -106,13 +99,11 @@ public interface GPServerConnector {
     interface GPPooledConnectorConfig {
 
         /**
-         *
          * @return {@link Integer}
          */
         Integer getMaxTotalConnections();
 
         /**
-         *
          * @return {@link Integer}
          */
         Integer getDefaultMaxPerRoute();
@@ -129,10 +120,10 @@ public interface GPServerConnector {
                 Integer theDefaultMaxPerRoute) {
             Preconditions.checkArgument((theMaxTotalConnections > 0),
                     "The Parameter MaxTotalConnections must be greater"
-                    + " than zero.");
+                            + " than zero.");
             Preconditions.checkArgument((theDefaultMaxPerRoute > 0),
                     "The Parameter MaxTotalPerRoute must be greater"
-                    + " than zero.");
+                            + " than zero.");
 
             this.maxTotalConnections = theMaxTotalConnections;
             this.defaultMaxPerRoute = theDefaultMaxPerRoute;

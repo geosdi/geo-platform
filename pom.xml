@@ -62,9 +62,9 @@
     <repositories>
         <!-- geoSDI -->
         <repository>
-            <id>geosdi</id>
-            <name>geoSDI Repository</name>
-            <url>http://repo.geosdi.org</url>
+            <id>repo.geosdi.org</id>
+            <name>repo.geosdi.org-releases</name>
+            <url>http://repo.geosdi.org/artifactory/libs-snapshot-local</url>
         </repository>
 
         <!-- Hibernate Spatial -->

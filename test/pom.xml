@@ -18,9 +18,17 @@
     <repositories>
         <!-- geoSDI -->
         <repository>
-            <id>geosdi</id>
-            <name>geoSDI Repository</name>
-            <url>http://repo.geosdi.org</url>
+            <id>geosdi-realese</id>
+            <name>repo.geosdi.org-releases</name>
+            <url>http://repo.geosdi.org/artifactory/libs-release-local</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>geosdi-snapshots</id>
+            <name>repo.geosdi.org-snapshots</name>
+            <url>http://repo.geosdi.org/artifactory/libs-snapshot-local</url>
         </repository>
     </repositories>
     

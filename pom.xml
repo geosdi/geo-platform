@@ -44,27 +44,28 @@
     
     <distributionManagement>
         <repository>
-            <id>repo.geosdi.org</id>
-            <name>repo.geosdi.org-releases</name>
+            <id>geosdi-snapshots</id>
+            <name>repo.geosdi.org-snapshots</name>
             <url>http://repo.geosdi.org/artifactory/libs-snapshot-local</url>
         </repository>
     </distributionManagement>
-    
-    <!-- distributionManagement>
-     
-        <repository>
-            <uniqueVersion>false</uniqueVersion>
-            <id>geosdi</id>
-            <url>ftp://repo.geosdi.org/</url>
-        </repository>
-    </distributionManagement -->
+
  
     <repositories>
         <!-- geoSDI -->
         <repository>
-            <id>repo.geosdi.org</id>
-            <name>repo.geosdi.org-releases</name>
+            <id>geosdi-snapshots</id>
+            <name>repo.geosdi.org-snapshots</name>
             <url>http://repo.geosdi.org/artifactory/libs-snapshot-local</url>
+        </repository>
+        
+        <repository>
+            <id>geosdi-realese</id>
+            <name>repo.geosdi.org-releases</name>
+            <url>http://repo.geosdi.org/artifactory/libs-release-local</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
         </repository>
 
         <!-- Hibernate Spatial -->

@@ -47,9 +47,9 @@
         <!-- geoSDI Repository -->
         <!--.................................. -->
         <repository>
-            <uniqueVersion>false</uniqueVersion>
-            <id>geosdi</id>
-            <url>ftp://repo.geosdi.org/</url>
+            <id>repo.geosdi.org</id>
+            <name>repo.geosdi.org-releases</name>
+            <url>http://repo.geosdi.org/artifactory/libs-snapshot-local</url>
         </repository>
     </distributionManagement>
  

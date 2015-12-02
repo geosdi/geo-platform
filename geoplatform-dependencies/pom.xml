@@ -28,8 +28,8 @@
         <!-- geoSDI Repository -->
         <!--.................................. -->
         <repository>
-            <id>repo.geosdi.org</id>
-            <name>repo.geosdi.org-releases</name>
+            <id>geosdi-snapshots</id>
+            <name>repo.geosdi.org-snapshots</name>
             <url>http://repo.geosdi.org/artifactory/libs-snapshot-local</url>
         </repository>
     </distributionManagement>

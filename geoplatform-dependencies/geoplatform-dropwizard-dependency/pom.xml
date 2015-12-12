@@ -18,7 +18,8 @@
     
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <dropwizard-version>0.8.2</dropwizard-version>
+        <dropwizard-version>0.9.1</dropwizard-version>
+        <metrics-version>3.1.0</metrics-version>
     </properties>
     
     <dependencyManagement>
@@ -34,15 +35,70 @@
                 <artifactId>dropwizard-views</artifactId>
                 <version>${dropwizard-version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>io.dropwizard</groupId>
+                <artifactId>dropwizard-validation</artifactId>
+                <version>${dropwizard-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.dropwizard</groupId>
+                <artifactId>dropwizard-configuration</artifactId>
+                <version>${dropwizard-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.dropwizard</groupId>
+                <artifactId>dropwizard-metrics</artifactId>
+                <version>${dropwizard-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.dropwizard</groupId>
+                <artifactId>dropwizard-lifecycle</artifactId>
+                <version>${dropwizard-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.dropwizard</groupId>
+                <artifactId>dropwizard-jetty</artifactId>
+                <version>${dropwizard-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.dropwizard</groupId>
+                <artifactId>dropwizard-util</artifactId>
+                <version>${dropwizard-version}</version>
+            </dependency>
             
             <dependency>
                 <groupId>io.dropwizard</groupId>
                 <artifactId>dropwizard-assets</artifactId>
                 <version>${dropwizard-version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>io.dropwizard</groupId>
+                <artifactId>dropwizard-servlets</artifactId>
+                <version>${dropwizard-version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>io.dropwizard</groupId>
                 <artifactId>dropwizard-spdy</artifactId>
+                <version>${dropwizard-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.dropwizard</groupId>
+                <artifactId>dropwizard-logging</artifactId>
+                <version>${dropwizard-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.dropwizard</groupId>
+                <artifactId>dropwizard-jersey</artifactId>
                 <version>${dropwizard-version}</version>
             </dependency>
             
@@ -68,6 +124,52 @@
                 <groupId>io.dropwizard</groupId>
                 <artifactId>dropwizard-validation</artifactId>
                 <version>${dropwizard-version}</version>
+            </dependency>
+
+            <!-- ############################################ -->
+            <!-- ################ METRICS ################### -->
+            <!-- ############################################ -->
+
+            <dependency>
+                <groupId>io.dropwizard.metrics</groupId>
+                <artifactId>metrics-core</artifactId>
+                <version>${metrics-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.dropwizard.metrics</groupId>
+                <artifactId>metrics-healthchecks</artifactId>
+                <version>${metrics-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.dropwizard.metrics</groupId>
+                <artifactId>metrics-logback</artifactId>
+                <version>${metrics-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.dropwizard.metrics</groupId>
+                <artifactId>metrics-annotation</artifactId>
+                <version>${metrics-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.dropwizard.metrics</groupId>
+                <artifactId>metrics-jetty9</artifactId>
+                <version>${metrics-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.dropwizard.metrics</groupId>
+                <artifactId>metrics-jersey2</artifactId>
+                <version>${metrics-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.dropwizard.metrics</groupId>
+                <artifactId>metrics-jvm</artifactId>
+                <version>${metrics-version}</version>
             </dependency>
             
             <dependency>

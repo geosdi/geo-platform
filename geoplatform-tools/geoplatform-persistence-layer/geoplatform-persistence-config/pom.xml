@@ -34,6 +34,11 @@
             <version>2.6</version>
         </dependency>
 
+        <dependency>
+            <groupId>javax.transaction</groupId>
+            <artifactId>jta</artifactId>
+        </dependency>
+
         <!-- =========================================================== -->
         <!-- ================ HIBERNATE C3P0 ANNOTATIONS =============== -->
         <!-- =========================================================== -->

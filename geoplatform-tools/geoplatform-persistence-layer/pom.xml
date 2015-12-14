@@ -1,7 +1,7 @@
-
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-  
+
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>geoplatform-tools</artifactId>
@@ -14,7 +14,7 @@
     <packaging>pom</packaging>
 
     <name>Geo-Platform :: == Persistence Layer Module</name>
-    
+
     <repositories>
 
         <repository>
@@ -33,7 +33,7 @@
         </repository>
 
     </repositories>
-    
+
     <dependencyManagement>
         <dependencies>
             <!-- =========================================================== -->
@@ -44,14 +44,14 @@
                 <artifactId>hibernate-entitymanager</artifactId>
                 <version>${hibernate-version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-core</artifactId>
                 <version>${hibernate-version}</version>
             </dependency>
-            
-        
+
+
             <!-- =========================================================== -->
             <!-- ============== HIBERNATE JAVAX PERSISTENCE ================ -->
             <!-- =========================================================== -->
@@ -60,7 +60,7 @@
                 <artifactId>hibernate-jpa-2.1-api</artifactId>
                 <version>${hibernate-persistence-version}</version>
             </dependency>
-            
+
             <!-- =========================================================== -->
             <!-- ============== HIBERNATE COMMONS ANNOTATIONS ============== -->
             <!-- =========================================================== -->
@@ -69,7 +69,7 @@
                 <artifactId>hibernate-commons-annotations</artifactId>
                 <version>${hibernate-commons-annotations-version}</version>
             </dependency>
-            
+
             <!-- =========================================================== -->
             <!-- ================ HIBERNATE C3P0 ANNOTATIONS =============== -->
             <!-- =========================================================== -->
@@ -78,13 +78,13 @@
                 <artifactId>hibernate-c3p0</artifactId>
                 <version>${hibernate-version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>com.mchange</groupId>
                 <artifactId>c3p0</artifactId>
                 <version>0.9.5.1</version>
             </dependency>
-            
+
             <!-- =========================================================== -->
             <!-- ===================== SPRING DATA JPA ===================== -->
             <!-- =========================================================== -->
@@ -93,10 +93,16 @@
                 <artifactId>spring-data-jpa</artifactId>
                 <version>${spring-data-jpa-version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>javax.transaction</groupId>
+                <artifactId>jta</artifactId>
+                <version>${jta-version}</version>
+            </dependency>
         </dependencies>
-        
+
     </dependencyManagement>
-    
+
     <modules>
         <module>geoplatform-persistence-api</module>
         <module>geoplatform-persistence-config</module>
@@ -106,12 +112,13 @@
         <module>geoplatform-persistence-demo</module>
         <module>geoplatform-persistence-search-demo</module>
     </modules>
-    
-    <properties>      
-        <hibernate-version>5.0.3.Final</hibernate-version>
+
+    <properties>
+        <hibernate-version>5.0.5.Final</hibernate-version>
         <hibernate-persistence-version>1.0.0.Final</hibernate-persistence-version>
-        <hibernate-commons-annotations-version>5.0.0.Final</hibernate-commons-annotations-version>
-        <spring-data-jpa-version>1.9.0.RELEASE</spring-data-jpa-version>
+        <hibernate-commons-annotations-version>5.0.1.Final</hibernate-commons-annotations-version>
+        <spring-data-jpa-version>1.9.1.RELEASE</spring-data-jpa-version>
+        <jta-version>1.1</jta-version>
     </properties>
-    
+
 </project>

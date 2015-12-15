@@ -709,12 +709,6 @@
                 <version>${hibernate-generic-dao-version}</version>
             </dependency>
 
-	    <dependency>
-		<groupId>com.googlecode.genericdao</groupId>
-		<artifactId>search</artifactId>
-		<version>${hibernate-generic-dao-version}</version>
-            </dependency>
-
             <!-- =========================================================== -->
             <!-- HIBERNATE -->
             <!-- =========================================================== -->

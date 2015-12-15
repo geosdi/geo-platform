@@ -49,7 +49,10 @@ import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.action.search.SearchScrollRequest;
+import org.elasticsearch.action.search.SearchType;
 import org.elasticsearch.client.Client;
+import org.elasticsearch.common.unit.TimeValue;
 //import org.elasticsearch.common.collect.Lists;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
@@ -207,8 +210,24 @@ public abstract class AbstractElasticSearchDAO<D extends Document> implements GP
 	}
 
 	@Override
-	public void removeAll() {
-		this.elastichSearchClient.delete(new DeleteRequest(getIndexName())).actionGet();
+	public void removeAll() throws Exception {		
+		SearchResponse searchResponse = this.elastichSearchClient.prepareSearch()
+				.setIndices(getIndexName())
+				.setTypes(getIndexType())
+		        .setScroll(new TimeValue(60000))
+		        .setSize(100).execute().actionGet(); 
+		while (true) {
+
+			for (SearchHit searchHit : searchResponse.getHits().hits()) {
+		    	D document = this.mapper.read(searchHit.getSourceAsString());
+		    	this.elastichSearchClient.delete(new DeleteRequest(getIndexName(),getIndexType(),document.getId())).actionGet();
+		    }
+			searchResponse = this.elastichSearchClient.prepareSearchScroll(searchResponse.getScrollId()).setScroll(new TimeValue(600000)).execute().actionGet();
+		    if (searchResponse.getHits().getHits().length == 0) {
+		        break;
+		    }
+		}
+		
 	}
 
 	/**

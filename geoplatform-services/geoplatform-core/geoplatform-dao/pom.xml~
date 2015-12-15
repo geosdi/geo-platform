@@ -5,12 +5,12 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>geoplatform-core</artifactId>
-        <version>1.7-SNAPSHOT</version>
+        <version>1.8-SNAPSHOT</version>
     </parent>
 
     <groupId>org.geosdi</groupId>
     <artifactId>geoplatform-dao</artifactId>
-    <version>1.7-SNAPSHOT</version>
+    <version>1.8-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Geo-Platform :: == CORE DAO</name>
@@ -163,11 +163,6 @@
             <groupId>com.googlecode.genericdao</groupId>
             <artifactId>search-hibernate</artifactId>
         </dependency>
-        
-        <dependency>
-            <groupId>com.googlecode.genericdao</groupId>
-            <artifactId>search</artifactId>
-        </dependency>
 
         <dependency>
             <groupId>com.googlecode.genericdao</groupId>
@@ -177,6 +172,7 @@
 	<dependency>
 		<groupId>com.googlecode.genericdao</groupId>
 		<artifactId>search</artifactId>
+		<version>1.2.0</version>
 	</dependency>
 
         

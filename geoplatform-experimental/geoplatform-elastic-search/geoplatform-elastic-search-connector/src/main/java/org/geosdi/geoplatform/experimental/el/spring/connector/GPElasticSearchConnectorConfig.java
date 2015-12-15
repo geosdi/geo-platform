@@ -35,9 +35,12 @@
  */
 package org.geosdi.geoplatform.experimental.el.spring.connector;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 import org.elasticsearch.client.Client;
 import org.elasticsearch.client.transport.TransportClient;
-import org.elasticsearch.common.settings.ImmutableSettings;
+import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import org.geosdi.geoplatform.experimental.el.spring.configuration.GPElasticSearchProperties;
 import org.slf4j.Logger;
@@ -54,24 +57,26 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 class GPElasticSearchConnectorConfig {
 
-    private static final Logger logger = LoggerFactory
-            .getLogger(GPElasticSearchConnectorConfig.class);
+	private static final Logger logger = LoggerFactory.getLogger(GPElasticSearchConnectorConfig.class);
 
-    @Bean(name = "elastichSearchClient", destroyMethod = "close")
-    @Required
-    public static Client gpElasticSearchConnector(@Qualifier(
-            value = "gpBaseElasticSearchProperties") GPElasticSearchProperties gpBaseElasticSearchProperties) {
+	@Bean(name = "elastichSearchClient", destroyMethod = "close")
+	@Required
+	public static Client gpElasticSearchConnector(
+			@Qualifier(value = "gpBaseElasticSearchProperties") GPElasticSearchProperties gpBaseElasticSearchProperties)
+					throws UnknownHostException {
 
-        logger.debug("\n\n@@@@@@@@@@@@@@@@@@INITIALIZING ELASTIC SEARCH WITH "
-                + "CONFIGURATION : {}\n", gpBaseElasticSearchProperties);
+		logger.debug("\n\n@@@@@@@@@@@@@@@@@@INITIALIZING ELASTIC SEARCH WITH " + "CONFIGURATION : {}\n",
+				gpBaseElasticSearchProperties);
 
-        return new TransportClient(ImmutableSettings.settingsBuilder().put(
-                "cluster.name",
-                gpBaseElasticSearchProperties.getClusterName())).addTransportAddress(
-                new InetSocketTransportAddress(
-                        gpBaseElasticSearchProperties.getHost(),
-                        gpBaseElasticSearchProperties.getPort()));
+		return TransportClient.builder()
+				.settings(Settings.settingsBuilder().put("cluster.name", gpBaseElasticSearchProperties.getClusterName())
+						.build())
+				.build().addTransportAddress(
+						new InetSocketTransportAddress(InetAddress.getByName(gpBaseElasticSearchProperties.getHost()),
+								gpBaseElasticSearchProperties.getPort()));
+								// return client;
 
-    }
+
+	}
 
 }

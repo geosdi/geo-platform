@@ -5,12 +5,12 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>geoplatform-elastic-search</artifactId>
-        <version>1.7-SNAPSHOT</version>
+        <version>1.8-SNAPSHOT</version>
     </parent>
 
     <groupId>org.geosdi</groupId>
     <artifactId>geoplatform-elastic-search-connector</artifactId>
-    <version>1.7-SNAPSHOT</version>
+    <version>1.8-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Geo-Platform :: == ElasticSearch Connector Module</name>
@@ -40,15 +40,6 @@
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-jackson-support</artifactId>
             <version>${project.version}</version>
-        </dependency>
-
-        <!-- =========================================================== -->
-        <!-- ======================== JODA-TIME ======================== -->
-        <!-- =========================================================== -->
-
-        <dependency>
-            <groupId>joda-time</groupId>
-            <artifactId>joda-time</artifactId>
         </dependency>
 
         <!-- =========================================================== -->
@@ -129,14 +120,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
             </plugin>
         </plugins>
     </build>

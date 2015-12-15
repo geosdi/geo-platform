@@ -6,6 +6,7 @@ target/
 .classpath
 .project
 .idea
+.class
 
 # ignore demo artifact folders
 *.iml

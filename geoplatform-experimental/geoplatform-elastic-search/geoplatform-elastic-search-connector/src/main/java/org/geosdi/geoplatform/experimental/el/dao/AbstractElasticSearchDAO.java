@@ -218,6 +218,8 @@ public abstract class AbstractElasticSearchDAO<D extends Document> implements GP
 		        .setSize(100).execute().actionGet(); 
 		while (true) {
 
+			
+			
 			for (SearchHit searchHit : searchResponse.getHits().hits()) {
 		    	D document = this.mapper.read(searchHit.getSourceAsString());
 		    	this.elastichSearchClient.delete(new DeleteRequest(getIndexName(),getIndexType(),document.getId())).actionGet();

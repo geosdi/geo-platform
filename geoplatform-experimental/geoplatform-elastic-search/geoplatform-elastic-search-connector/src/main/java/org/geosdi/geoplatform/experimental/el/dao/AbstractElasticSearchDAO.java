@@ -1,41 +1,41 @@
-/**
- * geo-platform
- * Rich webgis framework
- * http://geo-platform.org
+/*
+ *  geo-platform
+ *  Rich webgis framework
+ *  http://geo-platform.org
  * ====================================================================
- * <p/>
- * Copyright (C) 2008-2016 geoSDI Group (CNR IMAA - Potenza - ITALY).
- * <p/>
- * This program is free software: you can redistribute it and/or modify it
- * under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version. This program is distributed in the
- * hope that it will be useful, but WITHOUT ANY WARRANTY; without
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR
- * A PARTICULAR PURPOSE. See the GNU General Public License
- * for more details. You should have received a copy of the GNU General
- * Public License along with this program. If not, see http://www.gnu.org/licenses/
- * <p/>
+ *
+ * Copyright (C) 2008-2015 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ *
+ * This program is free software: you can redistribute it and/or modify it 
+ * under the terms of the GNU General Public License as published by 
+ * the Free Software Foundation, either version 3 of the License, or 
+ * (at your option) any later version. This program is distributed in the 
+ * hope that it will be useful, but WITHOUT ANY WARRANTY; without 
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR 
+ * A PARTICULAR PURPOSE. See the GNU General Public License 
+ * for more details. You should have received a copy of the GNU General 
+ * Public License along with this program. If not, see http://www.gnu.org/licenses/ 
+ *
  * ====================================================================
- * <p/>
- * Linking this library statically or dynamically with other modules is
- * making a combined work based on this library. Thus, the terms and
- * conditions of the GNU General Public License cover the whole combination.
- * <p/>
- * As a special exception, the copyright holders of this library give you permission
- * to link this library with independent modules to produce an executable, regardless
- * of the license terms of these independent modules, and to copy and distribute
- * the resulting executable under terms of your choice, provided that you also meet,
- * for each linked independent module, the terms and conditions of the license of
- * that module. An independent module is a module which is not derived from or
- * based on this library. If you modify this library, you may extend this exception
- * to your version of the library, but you are not obligated to do so. If you do not
- * wish to do so, delete this exception statement from your version.
+ *
+ * Linking this library statically or dynamically with other modules is 
+ * making a combined work based on this library. Thus, the terms and 
+ * conditions of the GNU General Public License cover the whole combination. 
+ * 
+ * As a special exception, the copyright holders of this library give you permission 
+ * to link this library with independent modules to produce an executable, regardless 
+ * of the license terms of these independent modules, and to copy and distribute 
+ * the resulting executable under terms of your choice, provided that you also meet, 
+ * for each linked independent module, the terms and conditions of the license of 
+ * that module. An independent module is a module which is not derived from or 
+ * based on this library. If you modify this library, you may extend this exception 
+ * to your version of the library, but you are not obligated to do so. If you do not 
+ * wish to do so, delete this exception statement from your version. 
+ *
  */
 package org.geosdi.geoplatform.experimental.el.dao;
 
 import com.google.common.base.Preconditions;
-import com.google.common.collect.Lists;
 import org.elasticsearch.action.bulk.BulkRequestBuilder;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.delete.DeleteRequest;
@@ -57,7 +57,9 @@ import org.geosdi.geoplatform.experimental.el.index.GPIndexCreator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @param <D>
@@ -76,6 +78,7 @@ public abstract class AbstractElasticSearchDAO<D extends Document> implements GP
     public D persist(D document) throws Exception {
         logger.debug("#################Try to insert {}\n\n", document);
         IndexResponse response;
+
         if (document.isIdSetted()) {
             response = this.elastichSearchClient.prepareIndex(getIndexName(), getIndexType(), document.getId())
                     .setSource(this.mapper.writeAsString(document)).get();
@@ -86,6 +89,7 @@ public abstract class AbstractElasticSearchDAO<D extends Document> implements GP
             update(document);
         }
         logger.debug("##############{} Created : {}\n\n", this.mapper.getDocumentClassName(), response.isCreated());
+
         return document;
     }
 
@@ -104,6 +108,7 @@ public abstract class AbstractElasticSearchDAO<D extends Document> implements GP
     @Override
     public BulkResponse persist(Iterable<D> documents) throws Exception {
         Preconditions.checkArgument(((documents != null)), "The Documents " + "to save, must not be null.");
+
         BulkRequestBuilder bulkRequest = this.elastichSearchClient.prepareBulk();
         for (D document : documents) {
             if (document.isIdSetted()) {
@@ -137,22 +142,20 @@ public abstract class AbstractElasticSearchDAO<D extends Document> implements GP
 
         Long total = searchResponse.getHits().getTotalHits();
         logger.debug("###################TOTAL HITS FOUND : {} .\n\n", total);
-        List<D> documents = Lists.newArrayList();
-        for (SearchHit searchHit : searchResponse.getHits().hits()) {
-            D document = this.mapper.read(searchHit.getSourceAsString());
-            if (!document.isIdSetted()) {
-                document.setId(searchHit.getId());
-            }
-            documents.add(document);
-        }
-        return new PageResult<D>(total, documents);
+
+        return new PageResult<D>(total, Stream.of(searchResponse.getHits().hits())
+                .map(new GPSearchHitFunction())
+                .filter(s -> {
+                    return s != null;
+                })
+                .collect(Collectors.toList()));
     }
 
     @Override
     public void delete(String id) {
         Preconditions.checkArgument(((id != null) && !(id.isEmpty())), "The ID must not be null or an Empty String");
-        DeleteResponse response = elastichSearchClient.prepareDelete(getIndexName(), getIndexType(), id)
-                .execute().actionGet();
+        DeleteResponse response = elastichSearchClient.prepareDelete(getIndexName(), getIndexType(), id).execute()
+                .actionGet();
         if (response.isFound()) {
             logger.debug("#################Document with ID : {}, " + "was deleted.", id);
         } else {
@@ -166,14 +169,16 @@ public abstract class AbstractElasticSearchDAO<D extends Document> implements GP
                 "The ElasticSearch ID must not be null or an Empty String");
 
         GetResponse existResponse = elastichSearchClient.prepareGet(getIndexName(), getIndexType(), id).get();
+
         return (existResponse.isExists()) ? this.mapper.read(existResponse.getSourceAsString()) : null;
     }
 
     @Override
     public Long count() {
-        SearchRequestBuilder builder = this.elastichSearchClient.prepareSearch(getIndexName()).setTypes(getIndexType());
-        SearchResponse searchResponse = builder.get();
-        return searchResponse.getHits().getTotalHits();
+        return this.elastichSearchClient
+                .prepareSearch(getIndexName())
+                .setTypes(getIndexType())
+                .get().getHits().getTotalHits();
     }
 
     /**
@@ -183,11 +188,11 @@ public abstract class AbstractElasticSearchDAO<D extends Document> implements GP
      */
     @Override
     public Long count(QueryBuilder queryBuilder) throws Exception {
-        SearchRequestBuilder builder = this.elastichSearchClient.prepareSearch(getIndexName())
+        return this.elastichSearchClient
+                .prepareSearch(getIndexName())
                 .setQuery(queryBuilder)
-                .setTypes(getIndexType());
-        SearchResponse searchResponse = builder.get();
-        return searchResponse.getHits().getTotalHits();
+                .setTypes(getIndexType())
+                .get().getHits().getTotalHits();
 
     }
 
@@ -267,7 +272,36 @@ public abstract class AbstractElasticSearchDAO<D extends Document> implements GP
     public final void afterPropertiesSet() throws Exception {
         Preconditions.checkNotNull(this.mapper, "The Mapper must not be null.");
         Preconditions.checkNotNull(this.indexCreator, "The Index Creator must " + "not be null.");
+
         this.elastichSearchClient = this.indexCreator.client();
+
         Preconditions.checkNotNull(this.elastichSearchClient, "The ElasticSearch Client must " + "not be null.");
+    }
+
+    /**
+     * <p>Interna Class to use {@link Function<SearchHit, D>} Java 8 facility.</p>
+     */
+    class GPSearchHitFunction implements Function<SearchHit, D> {
+
+        /**
+         * Applies this function to the given argument.
+         *
+         * @param searchHit the function argument
+         * @return the function result
+         */
+        @Override
+        public D apply(SearchHit searchHit) {
+            try {
+                D document = mapper.read(searchHit.getSourceAsString());
+                if (!document.isIdSetted()) {
+                    document.setId(searchHit.getId());
+                }
+                return document;
+            } catch (Exception ex) {
+                logger.error("#################PARSER_EXCEPTION : {}\n", ex.getMessage());
+                ex.printStackTrace();
+            }
+            return null;
+        }
     }
 }

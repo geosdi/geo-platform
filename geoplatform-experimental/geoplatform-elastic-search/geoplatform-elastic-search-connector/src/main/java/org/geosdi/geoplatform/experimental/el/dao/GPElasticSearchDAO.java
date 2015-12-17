@@ -184,7 +184,7 @@ public interface GPElasticSearchDAO<D extends Document> {
     }
 
     @Immutable
-    public class Page implements PageBuilder {
+    class Page implements PageBuilder {
 
         protected static final Logger logger = LoggerFactory.getLogger(Page.class);
         //
@@ -239,7 +239,7 @@ public interface GPElasticSearchDAO<D extends Document> {
     }
 
     @Immutable
-    public class SortablePage extends Page {
+    class SortablePage extends Page {
 
         private final String field;
         private final SortOrder sortOrder;
@@ -307,7 +307,7 @@ public interface GPElasticSearchDAO<D extends Document> {
     }
 
     @Immutable
-    public class QueriableSortablePage extends SortablePage {
+    class QueriableSortablePage extends SortablePage {
 
         private final QueryBuilder query;
 
@@ -364,5 +364,4 @@ public interface GPElasticSearchDAO<D extends Document> {
                     + ", query = " + query + '}';
         }
     }
-
 }

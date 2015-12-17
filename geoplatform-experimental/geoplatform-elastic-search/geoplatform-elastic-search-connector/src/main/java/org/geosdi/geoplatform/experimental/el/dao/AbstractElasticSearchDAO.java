@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.experimental.el.dao;
 
 import com.google.common.base.Preconditions;
-import com.google.common.collect.Lists;
 import org.elasticsearch.action.bulk.BulkRequestBuilder;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.delete.DeleteRequest;
@@ -58,7 +57,9 @@ import org.geosdi.geoplatform.experimental.el.index.GPIndexCreator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @param <D>
@@ -133,7 +134,6 @@ public abstract class AbstractElasticSearchDAO<D extends Document> implements GP
                 .buildPage(this.elastichSearchClient.prepareSearch(getIndexName()).setTypes(getIndexType()));
 
         logger.trace("#########################Builder : {}\n\n", builder.toString());
-
         SearchResponse searchResponse = builder.get();
 
         if (searchResponse.status() != RestStatus.OK) {
@@ -141,20 +141,14 @@ public abstract class AbstractElasticSearchDAO<D extends Document> implements GP
         }
 
         Long total = searchResponse.getHits().getTotalHits();
-
         logger.debug("###################TOTAL HITS FOUND : {} .\n\n", total);
 
-        List<D> documents = Lists.newArrayList();
-
-        for (SearchHit searchHit : searchResponse.getHits().hits()) {
-            D document = this.mapper.read(searchHit.getSourceAsString());
-            if (!document.isIdSetted()) {
-                document.setId(searchHit.getId());
-            }
-            documents.add(document);
-        }
-
-        return new PageResult<D>(total, documents);
+        return new PageResult<D>(total, Stream.of(searchResponse.getHits().hits())
+                .map(new GPSearchHitFunction())
+                .filter(s -> {
+                    return s != null;
+                })
+                .collect(Collectors.toList()));
     }
 
     @Override
@@ -284,4 +278,30 @@ public abstract class AbstractElasticSearchDAO<D extends Document> implements GP
         Preconditions.checkNotNull(this.elastichSearchClient, "The ElasticSearch Client must " + "not be null.");
     }
 
+    /**
+     * <p>Interna Class to use {@link Function<SearchHit, D>} Java 8 facility.</p>
+     */
+    class GPSearchHitFunction implements Function<SearchHit, D> {
+
+        /**
+         * Applies this function to the given argument.
+         *
+         * @param searchHit the function argument
+         * @return the function result
+         */
+        @Override
+        public D apply(SearchHit searchHit) {
+            try {
+                D document = mapper.read(searchHit.getSourceAsString());
+                if (!document.isIdSetted()) {
+                    document.setId(searchHit.getId());
+                }
+                return document;
+            } catch (Exception ex) {
+                logger.error("#################PARSER_EXCEPTION : {}\n", ex.getMessage());
+                ex.printStackTrace();
+            }
+            return null;
+        }
+    }
 }

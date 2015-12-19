@@ -34,11 +34,6 @@
             <artifactId>hibernate-search-orm</artifactId>
             <version>${hibernate-search-version}</version>
         </dependency>
-        
-<!--        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-search-analyzers</artifactId>
-            <version>${hibernate-search-version}</version>
-        </dependency>-->
+
     </dependencies>
 </project>

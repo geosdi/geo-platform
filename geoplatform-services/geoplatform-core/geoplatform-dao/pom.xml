@@ -1,5 +1,5 @@
-
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -14,7 +14,7 @@
     <packaging>jar</packaging>
 
     <name>Geo-Platform :: == CORE DAO</name>
-    
+
     <properties>
         <!-- Keep aligned with src/main/resources/geoplatform_datasource.xml -->
         <db.baseurl>jdbc:postgresql://localhost:5432</db.baseurl>
@@ -22,11 +22,11 @@
         <db.driverClassName>org.postgresql.Driver</db.driverClassName>
         <db.username>postgres</db.username>
         <db.password></db.password>
-        
+
         <dataset.file>src/test/resources/bootstrap-db.xml</dataset.file>
     </properties>
 
-    <dependencies>             
+    <dependencies>
 
         <!-- APACHE COMMONS -->
         <dependency>
@@ -48,12 +48,12 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        
+
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-base-configurator</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-sharing</artifactId>
@@ -104,7 +104,7 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
         </dependency>
-		
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
@@ -169,18 +169,18 @@
             <artifactId>search-jpa-hibernate</artifactId>
         </dependency>
 
-	<dependency>
-		<groupId>com.googlecode.genericdao</groupId>
-		<artifactId>search</artifactId>
-	</dependency>
+        <dependency>
+            <groupId>com.googlecode.genericdao</groupId>
+            <artifactId>search</artifactId>
+        </dependency>
 
-        
+
         <!-- H2 and GEODB -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
         </dependency>
-        
+
         <!--dependency>
             <groupId>org.hibernatespatial</groupId>
             <artifactId>hibernate-spatial-h2-geodb</artifactId>
@@ -191,12 +191,12 @@
             <groupId>commons-dbcp</groupId>
             <artifactId>commons-dbcp</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>org.postgis</groupId>
             <artifactId>postgis-jdbc</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
@@ -213,7 +213,7 @@
             <artifactId>validation-api</artifactId>
             <version>1.1.0.Final</version>
         </dependency>
-        
+
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
@@ -223,20 +223,20 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-        </dependency>        
+        </dependency>
 
         <!-- HIBERNATE-SPATIAL -->
         <dependency>
             <groupId>org.hibernatespatial</groupId>
             <artifactId>hibernate-spatial-postgis</artifactId>
         </dependency>
-        
+
         <!-- CGLIB -->
         <dependency>
             <groupId>cglib</groupId>
             <artifactId>cglib-nodep</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>org.apache.xmlgraphics</groupId>
             <artifactId>batik-ext</artifactId>
@@ -249,7 +249,7 @@
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
-        
+
         <dependency>
             <groupId>net.sf.ehcache</groupId>
             <artifactId>ehcache-core</artifactId>
@@ -258,7 +258,7 @@
             <groupId>net.sf.ehcache</groupId>
             <artifactId>ehcache-terracotta</artifactId>
         </dependency>
-        
+
     </dependencies>
 
     <build>
@@ -268,7 +268,7 @@
                 <artifactId>hibernate3-maven-plugin</artifactId>
                 <version>2.2</version>
                 <dependencies>
-                    
+
                     <dependency>
                         <groupId>org.hibernate</groupId>
                         <artifactId>hibernate-core</artifactId>
@@ -280,13 +280,13 @@
                         <artifactId>hibernate-entitymanager</artifactId>
                         <version>${hibernate-version}</version>
                     </dependency>
-                    
+
                     <dependency>
                         <groupId>org.hibernate</groupId>
                         <artifactId>hibernate-tools</artifactId>
                         <version>3.2.4.GA</version>
                     </dependency>
-                    
+
                     <dependency>
                         <groupId>org.hibernate</groupId>
                         <artifactId>hibernate-validator</artifactId>
@@ -294,7 +294,7 @@
                     </dependency>
 
                 </dependencies>
-                
+
                 <executions>
                     <execution>
                         <phase>process-classes</phase>
@@ -341,20 +341,20 @@
         </plugins>
 
     </build>
-    
+
     <profiles>
         <!-- mvn sql:execute -P drop-db & mvn sql:execute -P create-db & mvn sql:execute -P create-db-schema -->
-        
+
         <!-- mvn sql:execute -P drop-db -->
         <profile>
-            <id>drop-db</id>            
+            <id>drop-db</id>
             <build>
                 <plugins>
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>sql-maven-plugin</artifactId>
                         <version>1.5</version>
-                        
+
                         <dependencies>
                             <dependency>
                                 <groupId>org.postgresql</groupId>
@@ -362,34 +362,34 @@
                                 <version>${postgresql-version}</version>
                             </dependency>
                         </dependencies>
-                                                
+
                         <configuration>
                             <!-- Need another database to drop the targeted one -->
                             <url>${db.baseurl}/template_postgis</url>
-                            <driver>${db.driverClassName}</driver>                            
+                            <driver>${db.driverClassName}</driver>
                             <username>${db.username}</username>
-                            <password>${db.password}</password>                            
-                            
+                            <password>${db.password}</password>
+
                             <sqlCommand>DROP DATABASE gp</sqlCommand>
                             <autocommit>true</autocommit>
                             <!-- Ignore error when database is not avaiable -->
                             <onError>continue</onError>
-                        </configuration>                                                
+                        </configuration>
                     </plugin>
                 </plugins>
             </build>
         </profile>
-        
+
         <!-- mvn sql:execute -P create-db -->
         <profile>
-            <id>create-db</id>            
+            <id>create-db</id>
             <build>
                 <plugins>
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>sql-maven-plugin</artifactId>
                         <version>1.5</version>
-                        
+
                         <dependencies>
                             <dependency>
                                 <groupId>org.postgresql</groupId>
@@ -397,22 +397,22 @@
                                 <version>${postgresql-version}</version>
                             </dependency>
                         </dependencies>
-                                                
+
                         <configuration>
                             <url>${db.baseurl}</url>
                             <driver>${db.driverClassName}</driver>
                             <username>${db.username}</username>
                             <password>${db.password}</password>
-                            
+
                             <!-- No transaction -->
                             <autocommit>true</autocommit>
                             <sqlCommand>CREATE DATABASE gp TEMPLATE template_postgis</sqlCommand>
-                        </configuration>                                                
+                        </configuration>
                     </plugin>
                 </plugins>
             </build>
         </profile>
-        
+
         <!-- mvn sql:execute -P create-db-schema -->
         <profile>
             <id>create-db-schema</id>
@@ -422,7 +422,7 @@
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>sql-maven-plugin</artifactId>
                         <version>1.5</version>
-                        
+
                         <dependencies>
                             <dependency>
                                 <groupId>org.postgresql</groupId>
@@ -430,15 +430,15 @@
                                 <version>${postgresql-version}</version>
                             </dependency>
                         </dependencies>
-                                                
+
                         <configuration>
                             <url>${db.url}</url>
                             <driver>${db.driverClassName}</driver>
                             <username>${db.username}</username>
                             <password>${db.password}</password>
-                                                        
+
                             <autocommit>true</autocommit>
-                            <srcFiles>                      
+                            <srcFiles>
                                 <srcFile>target/classes/geoplatform-model.ddl</srcFile>
                             </srcFiles>
                         </configuration>
@@ -446,7 +446,7 @@
                 </plugins>
             </build>
         </profile>
-        
+
         <!-- mvn sql:execute -P bootstrap-db -->
         <profile>
             <id>bootstrap-db</id>
@@ -456,7 +456,7 @@
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>sql-maven-plugin</artifactId>
                         <version>1.5</version>
-                        
+
                         <dependencies>
                             <dependency>
                                 <groupId>org.postgresql</groupId>
@@ -464,15 +464,15 @@
                                 <version>${postgresql-version}</version>
                             </dependency>
                         </dependencies>
-                                                
+
                         <configuration>
                             <url>${db.url}</url>
                             <driver>${db.driverClassName}</driver>
                             <username>${db.username}</username>
                             <password>${db.password}</password>
-                                                        
+
                             <autocommit>true</autocommit>
-                            <srcFiles>                      
+                            <srcFiles>
                                 <srcFile>target/classes/data/insert.sql</srcFile>
                             </srcFiles>
                         </configuration>
@@ -480,7 +480,7 @@
                 </plugins>
             </build>
         </profile>
-        
+
         <!-- mvn dbunit:export -P export-data -->
         <profile>
             <id>export-data</id>
@@ -490,7 +490,7 @@
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>dbunit-maven-plugin</artifactId>
                         <version>1.0-beta-3</version>
-                        
+
                         <dependencies>
                             <dependency>
                                 <groupId>org.postgresql</groupId>
@@ -498,30 +498,31 @@
                                 <version>${postgresql-version}</version>
                             </dependency>
                         </dependencies>
-                                                
-                        <configuration>                            
+
+                        <configuration>
                             <url>${db.url}</url>
                             <driver>${db.driverClassName}</driver>
                             <username>${db.username}</username>
                             <password>${db.password}</password>
-                            
-                            <dataTypeFactoryName>org.dbunit.ext.postgresql.PostgresqlDataTypeFactory</dataTypeFactoryName>
+
+                            <dataTypeFactoryName>org.dbunit.ext.postgresql.PostgresqlDataTypeFactory
+                            </dataTypeFactoryName>
                             <format>xml</format>
                             <dest>${dataset.file}</dest>
-                            <tables> 
+                            <tables>
                                 <list>
                                     <name>gp_account</name>
                                 </list>
                                 <list>
                                     <name>gp_authority</name>
                                 </list>
-                            </tables>                                                            
-                        </configuration>                        
+                            </tables>
+                        </configuration>
                     </plugin>
                 </plugins>
             </build>
         </profile>
-        
+
         <!-- mvn dbunit:operation -P import-data -->
         <profile>
             <id>import-data</id>
@@ -531,7 +532,7 @@
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>dbunit-maven-plugin</artifactId>
                         <version>1.0-beta-3</version>
-                        
+
                         <dependencies>
                             <dependency>
                                 <groupId>org.postgresql</groupId>
@@ -539,24 +540,25 @@
                                 <version>${postgresql-version}</version>
                             </dependency>
                         </dependencies>
-                                                
-                        <configuration>                            
+
+                        <configuration>
                             <url>${db.url}</url>
                             <driver>${db.driverClassName}</driver>
                             <username>${db.username}</username>
                             <password>${db.password}</password>
-                                                            
-                            <dataTypeFactoryName>org.dbunit.ext.postgresql.PostgresqlDataTypeFactory</dataTypeFactoryName>
+
+                            <dataTypeFactoryName>org.dbunit.ext.postgresql.PostgresqlDataTypeFactory
+                            </dataTypeFactoryName>
                             <format>xml</format>
                             <src>${dataset.file}</src>
                             <!-- DELETE_ALL operation followed by an INSERT operation -->
                             <type>CLEAN_INSERT</type>
-                        </configuration>                        
+                        </configuration>
                     </plugin>
                 </plugins>
-            </build>            
+            </build>
         </profile>
-        
+
     </profiles>
 
 </project>

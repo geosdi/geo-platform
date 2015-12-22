@@ -163,6 +163,11 @@
             <groupId>com.googlecode.genericdao</groupId>
             <artifactId>search-hibernate</artifactId>
         </dependency>
+        
+        <dependency>
+            <groupId>com.googlecode.genericdao</groupId>
+            <artifactId>search</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>com.googlecode.genericdao</groupId>

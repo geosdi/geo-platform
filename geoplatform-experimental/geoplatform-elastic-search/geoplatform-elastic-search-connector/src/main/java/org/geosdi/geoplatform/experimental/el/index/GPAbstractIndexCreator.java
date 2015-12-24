@@ -61,8 +61,8 @@ public abstract class GPAbstractIndexCreator implements GPIndexCreator,
     @Override
     public synchronized void createIndex() throws Exception {
         if (!existIndex()) {
-            logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@INDEX_NAME : {} doesn't "
-                    + "exist, so i will create it.\n", getIndexName());
+            logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@INDEX_NAME : {} - INDEX_TYPE : {} doesn't "
+                    + "exist, so i will create it.\n", getIndexName(), getIndexType());
             this.elastichSearchClient.admin().indices()
                     .prepareCreate(getIndexName()).get();
             this.preparePutMapping();
@@ -77,11 +77,11 @@ public abstract class GPAbstractIndexCreator implements GPIndexCreator,
         if (existIndex()) {
             this.elastichSearchClient.admin().indices().prepareDelete(
                     getIndexName()).get();
-            logger.debug("#########################INDEX_NAME : {} deleted.\n",
-                    getIndexName());
+            logger.debug("#########################INDEX_NAME : {} - INDEX_TYPE : {} deleted.\n",
+                    getIndexName(), getIndexType());
         } else {
-            logger.debug("@@@@@@@@@@@@@@@@@@@@INDEX_NAME : {} doesn't exist.\n",
-                    getIndexName());
+            logger.debug("@@@@@@@@@@@@@@@@@@@@INDEX_NAME : {} - INDEX_TYPE : {} doesn't exist.\n",
+                    getIndexName(), getIndexType());
         }
     }
 

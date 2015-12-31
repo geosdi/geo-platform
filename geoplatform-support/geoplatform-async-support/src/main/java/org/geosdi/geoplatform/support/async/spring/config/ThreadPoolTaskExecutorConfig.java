@@ -45,7 +45,6 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.ThreadPoolExecutor.CallerRunsPolicy;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -56,10 +55,9 @@ class ThreadPoolTaskExecutorConfig implements GPAsyncConfigurer {
     @GeoPlatformLog
     static Logger logger;
 
-    @Override
     @Bean(name = "gpThreadPoolTaskExecutor")
-    public Executor createAsyncExecutor(
-            @Qualifier(value = "gpTaskExecutorProp") TaskExecutorProperties gpTaskExecutorProp) {
+    @Override
+    public Executor createAsyncExecutor(@Qualifier(value = "gpTaskExecutorProp") TaskExecutorProperties gpTaskExecutorProp) {
         logger.debug("\n\n########################################Initializing "
                         + "GeoPlatform ThreadPoolTaskExecutor with Properties \n {}\n\n",
                 gpTaskExecutorProp);
@@ -75,5 +73,4 @@ class ThreadPoolTaskExecutorConfig implements GPAsyncConfigurer {
 
         return executor;
     }
-
 }

@@ -19,6 +19,7 @@
         <module>geoplatform-cxf-support</module>
         <module>geoplatform-httpclient-support</module>
         <module>geoplatform-mail-support</module>
+        <module>geoplatform-async-api-support</module>
         <module>geoplatform-async-support</module>
         <module>geoplatform-async-mail-support</module>
         <module>geoplatform-xmpp-support</module>

@@ -32,50 +32,25 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.support.async.spring.placeholder;
+package org.geosdi.geoplatform.support.async.spring.config;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.geosdi.geoplatform.support.async.spring.properties.TaskExecutorProperties;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 
-import java.net.MalformedURLException;
+import java.util.concurrent.Executor;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Configuration
-class GPAsyncPlaceholderConfig {
+public interface GPAsyncConfigurer {
 
-    private static final Logger logger = LoggerFactory.getLogger(GPAsyncPlaceholderConfig.class);
-    private static final PlaceholderAsyncResourcesLoader placeholderResourcesLoader = new PlaceholderAsyncResourcesLoader();
-
-    @Bean(name = "gpAsyncPropertyConfigurer")
-    public static PropertySourcesPlaceholderConfigurer gpAsyncPropertyConfigurer(
-            @Value("#{systemProperties['GP_DATA_DIR']}") String gpConfigDataDir,
-            @Value("#{systemProperties['GP_ASYNC_FILE_PROP']}") String gpAsyncFileProp)
-            throws MalformedURLException {
-
-        logger.debug("\n\n############################ Initializing GeoPlatform "
-                        + "AsyncPropertyConfigurer with System Props : [ GP_DATA_DIR : {} - "
-                        + "GP_ASYNC_FILE_PROP : {} ]\n\n", gpConfigDataDir,
-                gpAsyncFileProp);
-
-        PropertySourcesPlaceholderConfigurer gpAPC = new PropertySourcesPlaceholderConfigurer();
-        gpAPC.setPlaceholderPrefix("gpAsyncConfigurator{");
-        gpAPC.setPlaceholderSuffix("}");
-        gpAPC.setNullValue("@null");
-
-        gpAPC.setLocations(placeholderResourcesLoader.loadResources(gpConfigDataDir,
-                gpAsyncFileProp));
-        gpAPC.setIgnoreResourceNotFound(Boolean.TRUE);
-        gpAPC.setIgnoreUnresolvablePlaceholders(Boolean.TRUE);
-
-        return gpAPC;
-    }
-
+    /**
+     * @param taskExecutorProp
+     * @return {@link Executor}
+     */
+    @Lazy
+    @Autowired
+    Executor createAsyncExecutor(TaskExecutorProperties taskExecutorProp);
 }

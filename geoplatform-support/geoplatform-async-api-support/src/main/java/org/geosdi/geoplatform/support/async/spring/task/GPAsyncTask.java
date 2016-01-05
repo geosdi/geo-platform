@@ -13,7 +13,7 @@ public interface GPAsyncTask<S extends Object, R extends Object> {
      * @return {@link R}
      * @throws Exception
      */
-    Future<R> aync(S source) throws Exception;
+    Future<R> async(S source) throws Exception;
 
     /**
      * @param <T>

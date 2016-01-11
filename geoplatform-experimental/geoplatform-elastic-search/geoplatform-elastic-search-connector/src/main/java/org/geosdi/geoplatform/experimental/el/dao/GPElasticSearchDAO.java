@@ -39,10 +39,12 @@ import net.jcip.annotations.Immutable;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.sort.SortOrder;
 import org.geosdi.geoplatform.experimental.el.api.mapper.GPBaseMapper;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
 import org.geosdi.geoplatform.experimental.el.index.GPIndexCreator;
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -183,6 +185,9 @@ public interface GPElasticSearchDAO<D extends Document> {
 
     }
 
+    /**
+     *
+     */
     @Immutable
     class Page implements PageBuilder {
 
@@ -235,9 +240,11 @@ public interface GPElasticSearchDAO<D extends Document> {
                     + " from = " + from
                     + ", size = " + size + '}';
         }
-
     }
 
+    /**
+     *
+     */
     @Immutable
     class SortablePage extends Page {
 
@@ -306,6 +313,9 @@ public interface GPElasticSearchDAO<D extends Document> {
 
     }
 
+    /**
+     *
+     */
     @Immutable
     class QueriableSortablePage extends SortablePage {
 
@@ -362,6 +372,94 @@ public interface GPElasticSearchDAO<D extends Document> {
                     + ", field = " + super.getField()
                     + ", sortOrder = " + super.getSortOrder()
                     + ", query = " + query + '}';
+        }
+    }
+
+    /**
+     *
+     */
+    @Immutable
+    class DateRangeSortablePage extends QueriableSortablePage {
+
+        private final String dateField;
+        private final DateTime dateFrom;
+        private final DateTime dateTo;
+
+        public DateRangeSortablePage(String theDateField, DateTime theDateFrom, DateTime theDateTo) {
+            this(null, null, null, theDateField, theDateFrom, theDateTo);
+        }
+
+        public DateRangeSortablePage(String theDateField, DateTime theDateFrom, DateTime theDateTo,
+                int from, int size) {
+            this(null, null, null, from, size, theDateField, theDateFrom, theDateTo);
+        }
+
+        public DateRangeSortablePage(String field, SortOrder sortOrder, QueryBuilder query,
+                String theDateField, DateTime theDateFrom, DateTime theDateTo) {
+            this(field, sortOrder, query, 0, 0, theDateField, theDateFrom, theDateTo);
+        }
+
+        public DateRangeSortablePage(String field, SortOrder sortOrder, QueryBuilder query, int from,
+                int size, String theDateField, DateTime theDateFrom, DateTime theDateTo) {
+            super(field, sortOrder, from, size, query);
+            this.dateField = theDateField;
+            this.dateFrom = theDateFrom;
+            this.dateTo = theDateTo;
+        }
+
+        /**
+         * @return {@link String}
+         */
+        public String getDateField() {
+            return dateField;
+        }
+
+        /**
+         * @return {@link DateTime}
+         */
+        public DateTime getDateFrom() {
+            return dateFrom;
+        }
+
+        /**
+         * @return {@link DateTime}
+         */
+        public DateTime getDateTo() {
+            return dateTo;
+        }
+
+        private Boolean canBuildPage() {
+            return (((this.dateField != null) && !(this.dateField.isEmpty())) && (this.dateFrom != null)
+                    && (this.dateTo != null));
+        }
+
+        private <Builder extends SearchRequestBuilder> Builder internalBuildPage(Builder builder)
+                throws Exception {
+            logger.trace("####################Called {} #internalBuildPage with parameters " +
+                            "dateField : {} - dateFrom : {} - dateTo : {} \n\n",
+                    getClass().getSimpleName(), this.dateField, this.dateFrom, this.dateTo);
+
+
+            return (Builder) builder.setQuery(QueryBuilders.rangeQuery(dateField).gte(dateFrom).lte(dateTo));
+        }
+
+        @Override
+        public <Builder extends SearchRequestBuilder> Builder buildPage(Builder builder) throws Exception {
+            return (canBuildPage() ? internalBuildPage(super.buildPage(builder)) : super.buildPage(builder));
+        }
+
+        @Override
+        public String toString() {
+            return getClass().getSimpleName() + " {" +
+                    "  from = " + super.getFrom() +
+                    ", size = " + super.getSize() +
+                    ", field = " + super.getField() +
+                    ", sortOrder = " + super.getSortOrder() +
+                    ", query = " + super.getQuery() +
+                    " ,dateField = '" + dateField + '\'' +
+                    ", dateFrom = " + dateFrom +
+                    ", dateTo = " + dateTo +
+                    '}';
         }
     }
 }

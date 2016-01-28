@@ -39,16 +39,26 @@ import com.google.maps.GeocodingApiRequest;
 import com.google.maps.model.LatLng;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 public interface GPGeocodingService {
 
+    /**
+     * @return {@link GeocodingApiRequest}
+     */
     GeocodingApiRequest newRequest();
 
+    /**
+     * @param address
+     * @return {@link GeocodingApiRequest}
+     */
     GeocodingApiRequest geocode(String address);
 
+    /**
+     * @param location
+     * @return {@link GeocodingApiRequest}
+     */
     GeocodingApiRequest reverseGeocode(LatLng location);
 
 }

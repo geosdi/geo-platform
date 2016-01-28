@@ -36,16 +36,22 @@
 package org.geosdi.geoplatform.support.google.spring.services.directions;
 
 import com.google.maps.DirectionsApiRequest;
-import com.google.maps.GeoApiContext;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 public interface GPDirectionsService {
 
+    /**
+     * @return {@link DirectionsApiRequest}
+     */
     DirectionsApiRequest newRequest();
 
+    /**
+     * @param origin
+     * @param destination
+     * @return {@link DirectionsApiRequest}
+     */
     DirectionsApiRequest getDirections(String origin, String destination);
 }

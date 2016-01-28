@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.support.google.spring.services.context;
 
 import com.google.maps.GeoApiContext;
-import java.util.concurrent.TimeUnit;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
 import org.geosdi.geoplatform.support.google.spring.configuration.GeoApiContextConfig;
 import org.slf4j.Logger;
@@ -45,24 +44,24 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.concurrent.TimeUnit;
+
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Configuration
 class GPGeoApiContextConfig {
-    
+
     @GeoPlatformLog
     static Logger logger;
 
     @Bean
     @Autowired
-    public GeoApiContext gpGeoApiContext(@Qualifier(
-            value = "gpGeoApiContextConfig") GeoApiContextConfig gpGeoApiContextConfig) {
+    public GeoApiContext gpGeoApiContext(@Qualifier(value = "gpGeoApiContextConfig") GeoApiContextConfig gpGeoApiContextConfig) {
         logger.debug("@@@@@@@@@@@@@@@@@@@@INITIALIZING GP_GEO_API_CONTEXT with "
                 + ": {}\n\n", gpGeoApiContextConfig);
-        
+
         return new GeoApiContext().setApiKey(gpGeoApiContextConfig.getApiKey()).setConnectTimeout(
                 gpGeoApiContextConfig.getConnectionTimeout(), TimeUnit.SECONDS)
                 .setReadTimeout(gpGeoApiContextConfig.getReadTimeout(),
@@ -73,5 +72,4 @@ class GPGeoApiContextConfig {
                         TimeUnit.SECONDS)
                 .setQueryRateLimit(gpGeoApiContextConfig.getQueryRateLimit());
     }
-
 }

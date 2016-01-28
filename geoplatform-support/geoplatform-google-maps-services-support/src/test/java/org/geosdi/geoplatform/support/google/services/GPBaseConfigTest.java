@@ -39,7 +39,6 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -57,5 +56,4 @@ public abstract class GPBaseConfigTest {
     public static void afterClass() {
         System.clearProperty(GP_GOOGLE_SERVICES_FILE_KEY);
     }
-
 }

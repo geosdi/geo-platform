@@ -1,37 +1,36 @@
 /**
- *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
- *
- *   Copyright (C) 2008-2016 geoSDI Group (CNR IMAA - Potenza - ITALY).
- *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
- *
- *   ====================================================================
- *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
- *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * geo-platform
+ * Rich webgis framework
+ * http://geo-platform.org
+ * ====================================================================
+ * <p/>
+ * Copyright (C) 2008-2016 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * <p/>
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version. This program is distributed in the
+ * hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License
+ * for more details. You should have received a copy of the GNU General
+ * Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * <p/>
+ * ====================================================================
+ * <p/>
+ * Linking this library statically or dynamically with other modules is
+ * making a combined work based on this library. Thus, the terms and
+ * conditions of the GNU General Public License cover the whole combination.
+ * <p/>
+ * As a special exception, the copyright holders of this library give you permission
+ * to link this library with independent modules to produce an executable, regardless
+ * of the license terms of these independent modules, and to copy and distribute
+ * the resulting executable under terms of your choice, provided that you also meet,
+ * for each linked independent module, the terms and conditions of the license of
+ * that module. An independent module is a module which is not derived from or
+ * based on this library. If you modify this library, you may extend this exception
+ * to your version of the library, but you are not obligated to do so. If you do not
+ * wish to do so, delete this exception statement from your version.
  */
 package org.geosdi.geoplatform.experimental.el.dao;
 
@@ -39,7 +38,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import org.elasticsearch.action.bulk.BulkRequestBuilder;
 import org.elasticsearch.action.bulk.BulkResponse;
-import org.elasticsearch.action.count.CountResponse;
+import org.elasticsearch.action.delete.DeleteRequest;
 import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexResponse;
@@ -47,7 +46,6 @@ import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.index.query.QueryBuilder;
-import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.rest.RestStatus;
 import org.elasticsearch.search.SearchHit;
 import org.geosdi.geoplatform.experimental.el.api.mapper.GPBaseMapper;
@@ -65,8 +63,7 @@ import java.util.List;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class AbstractElasticSearchDAO<D extends Document>
-        implements GPElasticSearchBaseDAO<D> {
+public abstract class AbstractElasticSearchDAO<D extends Document> implements GPElasticSearchBaseDAO<D> {
 
     protected final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
@@ -80,58 +77,43 @@ public abstract class AbstractElasticSearchDAO<D extends Document>
         IndexResponse response;
 
         if (document.isIdSetted()) {
-            response = this.elastichSearchClient
-                    .prepareIndex(getIndexName(), getIndexType(),
-                            document.getId())
-                    .setSource(this.mapper.writeAsString(document))
-                    .get();
+            response = this.elastichSearchClient.prepareIndex(getIndexName(), getIndexType(), document.getId())
+                    .setSource(this.mapper.writeAsString(document)).get();
         } else {
-            response = this.elastichSearchClient
-                    .prepareIndex(getIndexName(), getIndexType())
-                    .setSource(this.mapper.writeAsString(document))
-                    .get();
+            response = this.elastichSearchClient.prepareIndex(getIndexName(), getIndexType())
+                    .setSource(this.mapper.writeAsString(document)).get();
             document.setId(response.getId());
             update(document);
         }
-        logger.debug("##############{} Created : {}\n\n", this.mapper.getDocumentClassName(),
-                response.isCreated());
+        logger.debug("##############{} Created : {}\n\n", this.mapper.getDocumentClassName(), response.isCreated());
 
         return document;
     }
 
     @Override
     public void update(D document) throws Exception {
-        Preconditions.checkArgument(((document != null)
-                && ((document.getId() != null)
-                && !(document.getId().isEmpty()))), "The {} to Update must"
-                + " not be null or ID must not be null or Empty.", this.mapper.getDocumentClassName());
+        Preconditions.checkArgument(
+                ((document != null) && ((document.getId() != null) && !(document.getId().isEmpty()))),
+                "The {} to Update must" + " not be null or ID must not be null or Empty.",
+                this.mapper.getDocumentClassName());
         logger.debug("################Try to Update : {}\n\n", document);
 
-        this.elastichSearchClient
-                .prepareUpdate(getIndexName(), getIndexType(),
-                        document.getId())
-                .setDoc(this.mapper.writeAsString(document))
-                .get();
+        this.elastichSearchClient.prepareUpdate(getIndexName(), getIndexType(), document.getId())
+                .setDoc(this.mapper.writeAsString(document)).get();
     }
 
     @Override
     public BulkResponse persist(Iterable<D> documents) throws Exception {
-        Preconditions.checkArgument(((documents != null)), "The Documents "
-                + "to save, must not be null.");
+        Preconditions.checkArgument(((documents != null)), "The Documents " + "to save, must not be null.");
 
         BulkRequestBuilder bulkRequest = this.elastichSearchClient.prepareBulk();
         for (D document : documents) {
             if (document.isIdSetted()) {
-                bulkRequest.add(this.elastichSearchClient
-                        .prepareIndex(getIndexName(), getIndexType(),
-                                document.getId())
-                        .setSource(this.mapper
-                                .writeAsString(document)));
+                bulkRequest.add(this.elastichSearchClient.prepareIndex(getIndexName(), getIndexType(), document.getId())
+                        .setSource(this.mapper.writeAsString(document)));
             } else {
-                bulkRequest.add(this.elastichSearchClient
-                        .prepareIndex(getIndexName(), getIndexType())
-                        .setSource(this.mapper
-                                .writeAsString(document)));
+                bulkRequest.add(this.elastichSearchClient.prepareIndex(getIndexName(), getIndexType())
+                        .setSource(this.mapper.writeAsString(document)));
             }
         }
 
@@ -145,17 +127,15 @@ public abstract class AbstractElasticSearchDAO<D extends Document>
     @Override
     public <P extends Page> IPageResult<D> find(P page) throws Exception {
         Preconditions.checkArgument((page != null), "Page must not be null.");
-        SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient
-                .prepareSearch(getIndexName())
-                .setTypes(getIndexType()));
+        SearchRequestBuilder builder = page
+                .buildPage(this.elastichSearchClient.prepareSearch(getIndexName()).setTypes(getIndexType()));
 
         logger.trace("#########################Builder : {}\n\n", builder.toString());
 
         SearchResponse searchResponse = builder.get();
 
         if (searchResponse.status() != RestStatus.OK) {
-            throw new IllegalStateException("Problem in Search : "
-                    + searchResponse.status());
+            throw new IllegalStateException("Problem in Search : " + searchResponse.status());
         }
 
         Long total = searchResponse.getHits().getTotalHits();
@@ -177,18 +157,13 @@ public abstract class AbstractElasticSearchDAO<D extends Document>
 
     @Override
     public void delete(String id) {
-        Preconditions.checkArgument(((id != null) && !(id.isEmpty())),
-                "The ID must not be null or an Empty String");
-        DeleteResponse response = elastichSearchClient
-                .prepareDelete(getIndexName(), getIndexType(), id)
-                .execute()
+        Preconditions.checkArgument(((id != null) && !(id.isEmpty())), "The ID must not be null or an Empty String");
+        DeleteResponse response = elastichSearchClient.prepareDelete(getIndexName(), getIndexType(), id).execute()
                 .actionGet();
         if (response.isFound()) {
-            logger.debug("#################Document with ID : {}, "
-                    + "was deleted.", id);
+            logger.debug("#################Document with ID : {}, " + "was deleted.", id);
         } else {
-            logger.debug("#################Document with ID : {}, "
-                    + "was not found in ElasticSearch.");
+            logger.debug("#################Document with ID : {}, " + "was not found in ElasticSearch.");
         }
     }
 
@@ -197,20 +172,16 @@ public abstract class AbstractElasticSearchDAO<D extends Document>
         Preconditions.checkArgument((id != null) && !(id.isEmpty()),
                 "The ElasticSearch ID must not be null or an Empty String");
 
-        GetResponse existResponse = elastichSearchClient
-                .prepareGet(getIndexName(), getIndexType(), id).get();
+        GetResponse existResponse = elastichSearchClient.prepareGet(getIndexName(), getIndexType(), id).get();
 
-        return (existResponse.isExists())
-                ? this.mapper.read(existResponse.getSourceAsString()) : null;
+        return (existResponse.isExists()) ? this.mapper.read(existResponse.getSourceAsString()) : null;
     }
 
     @Override
     public Long count() {
-        CountResponse response = this.elastichSearchClient
-                .prepareCount(getIndexName())
-                .setTypes(getIndexType())
-                .execute().actionGet();
-        return response.getCount();
+        SearchRequestBuilder builder = this.elastichSearchClient.prepareSearch(getIndexName()).setTypes(getIndexType());
+        SearchResponse searchResponse = builder.get();
+        return searchResponse.getHits().getTotalHits();
     }
 
     /**
@@ -220,21 +191,15 @@ public abstract class AbstractElasticSearchDAO<D extends Document>
      */
     @Override
     public Long count(QueryBuilder queryBuilder) throws Exception {
-        CountResponse response = this.elastichSearchClient
-                .prepareCount(getIndexName())
-                .setTypes(getIndexType())
-                .setQuery(queryBuilder)
-                .execute().actionGet();
-        return response.getCount();
+        SearchRequestBuilder builder = this.elastichSearchClient.prepareSearch(getIndexName()).setQuery(queryBuilder)
+                .setTypes(getIndexType());
+        SearchResponse searchResponse = builder.get();
+        return searchResponse.getHits().getTotalHits();
     }
 
     @Override
     public void removeAll() {
-        this.elastichSearchClient
-                .prepareDeleteByQuery(getIndexName())
-                .setQuery(QueryBuilders.matchAllQuery())
-                .setTypes(getIndexType())
-                .execute().actionGet();
+        this.elastichSearchClient.delete(new DeleteRequest(getIndexName())).actionGet();
     }
 
     /**
@@ -252,7 +217,10 @@ public abstract class AbstractElasticSearchDAO<D extends Document>
     }
 
     /**
-     * <p>Remember Index Creation is called by {@link GPIndexConfigurator#configure()}</p>
+     * <p>
+     * Remember Index Creation is called by
+     * {@link GPIndexConfigurator#configure()}
+     * </p>
      *
      * @throws Exception
      */
@@ -261,7 +229,9 @@ public abstract class AbstractElasticSearchDAO<D extends Document>
     }
 
     /**
-     * <p>Dangerous. If called all Data will be dropped</p>
+     * <p>
+     * Dangerous. If called all Data will be dropped
+     * </p>
      *
      * @throws Exception
      */
@@ -288,13 +258,11 @@ public abstract class AbstractElasticSearchDAO<D extends Document>
     @Override
     public final void afterPropertiesSet() throws Exception {
         Preconditions.checkNotNull(this.mapper, "The Mapper must not be null.");
-        Preconditions.checkNotNull(this.indexCreator, "The Index Creator must "
-                + "not be null.");
+        Preconditions.checkNotNull(this.indexCreator, "The Index Creator must " + "not be null.");
 
         this.elastichSearchClient = this.indexCreator.client();
 
-        Preconditions.checkNotNull(this.elastichSearchClient, "The ElasticSearch Client must "
-                + "not be null.");
+        Preconditions.checkNotNull(this.elastichSearchClient, "The ElasticSearch Client must " + "not be null.");
     }
 
 }

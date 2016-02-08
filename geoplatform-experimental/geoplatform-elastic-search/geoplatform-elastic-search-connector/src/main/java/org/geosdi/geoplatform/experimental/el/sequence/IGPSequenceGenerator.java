@@ -31,6 +31,15 @@ public interface IGPSequenceGenerator extends InitializingBean {
     IGPSequence getSequenceModel();
 
     /**
+     * @return {@link String}
+     */
+    default String sequenceName() {
+        return getClass().getSimpleName() + "{"
+                + " sequenceID = " + getSequenceID()
+                + "}";
+    }
+
+    /**
      * <p>
      * Sequence Settings Interface to define both IndexName and IndexType
      * </p>

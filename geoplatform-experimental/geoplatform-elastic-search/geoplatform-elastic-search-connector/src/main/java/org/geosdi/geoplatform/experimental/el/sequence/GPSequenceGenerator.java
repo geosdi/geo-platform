@@ -70,6 +70,7 @@ public abstract class GPSequenceGenerator implements IGPSequenceGenerator {
                         BaseSequenceSettings.GP_SEQUENCE.getSequenceType(), this.gpSequence.getSequenceId())
                 .setSource(mapper.getDefaultMapper().writeValueAsString(this.gpSequence))
                 .get();
+        this.gpSequence.setVersion(response.getVersion());
         return response.getVersion();
     }
 
@@ -87,6 +88,7 @@ public abstract class GPSequenceGenerator implements IGPSequenceGenerator {
                         this.gpSequence.getSequenceId())
                 .setDoc(mapper.getDefaultMapper().writeValueAsString(this.gpSequence))
                 .get();
+        this.gpSequence.setVersion(updateResponse.getVersion());
         return updateResponse.getVersion();
     }
 

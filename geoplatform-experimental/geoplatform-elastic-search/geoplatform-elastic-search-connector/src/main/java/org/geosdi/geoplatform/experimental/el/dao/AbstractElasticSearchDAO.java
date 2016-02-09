@@ -4,7 +4,7 @@
  *  http://geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2015 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2016 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -108,7 +108,6 @@ public abstract class AbstractElasticSearchDAO<D extends Document> implements GP
     @Override
     public BulkResponse persist(Iterable<D> documents) throws Exception {
         Preconditions.checkArgument(((documents != null)), "The Documents " + "to save, must not be null.");
-
         BulkRequestBuilder bulkRequest = this.elastichSearchClient.prepareBulk();
         for (D document : documents) {
             if (document.isIdSetted()) {
@@ -147,8 +146,7 @@ public abstract class AbstractElasticSearchDAO<D extends Document> implements GP
                 .map(new GPSearchHitFunction())
                 .filter(s -> {
                     return s != null;
-                })
-                .collect(Collectors.toList()));
+                }).collect(Collectors.toList()));
     }
 
     @Override
@@ -167,9 +165,7 @@ public abstract class AbstractElasticSearchDAO<D extends Document> implements GP
     public D find(String id) throws Exception {
         Preconditions.checkArgument((id != null) && !(id.isEmpty()),
                 "The ElasticSearch ID must not be null or an Empty String");
-
         GetResponse existResponse = elastichSearchClient.prepareGet(getIndexName(), getIndexType(), id).get();
-
         return (existResponse.isExists()) ? this.mapper.read(existResponse.getSourceAsString()) : null;
     }
 
@@ -204,10 +200,10 @@ public abstract class AbstractElasticSearchDAO<D extends Document> implements GP
                 .setScroll(new TimeValue(60000))
                 .setSize(100).execute().actionGet();
         while (true) {
-            for (SearchHit searchHit : searchResponse.getHits().hits()) {
-                D document = this.mapper.read(searchHit.getSourceAsString());
-                this.elastichSearchClient.delete(new DeleteRequest(getIndexName(), getIndexType(), document.getId())).actionGet();
-            }
+            Stream.of(searchResponse.getHits().hits()).forEach(document -> {
+                this.elastichSearchClient.delete(new DeleteRequest(getIndexName(), getIndexType(),
+                        document.getId())).actionGet();
+            });
             searchResponse = this.elastichSearchClient.prepareSearchScroll(searchResponse.getScrollId()).setScroll(new TimeValue(600000)).execute().actionGet();
             if (searchResponse.getHits().getHits().length == 0) {
                 break;
@@ -272,9 +268,7 @@ public abstract class AbstractElasticSearchDAO<D extends Document> implements GP
     public final void afterPropertiesSet() throws Exception {
         Preconditions.checkNotNull(this.mapper, "The Mapper must not be null.");
         Preconditions.checkNotNull(this.indexCreator, "The Index Creator must " + "not be null.");
-
         this.elastichSearchClient = this.indexCreator.client();
-
         Preconditions.checkNotNull(this.elastichSearchClient, "The ElasticSearch Client must " + "not be null.");
     }
 

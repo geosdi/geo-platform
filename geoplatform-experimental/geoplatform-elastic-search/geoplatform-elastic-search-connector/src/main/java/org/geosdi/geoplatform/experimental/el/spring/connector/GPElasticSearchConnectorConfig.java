@@ -68,11 +68,11 @@ class GPElasticSearchConnectorConfig {
                 gpBaseElasticSearchProperties);
 
         return TransportClient.builder()
-                .settings(Settings.settingsBuilder().put("cluster.name", gpBaseElasticSearchProperties.getClusterName())
+                .settings(Settings.settingsBuilder()
+                        .put("cluster.name", gpBaseElasticSearchProperties.getClusterName())
                         .build())
                 .build().addTransportAddress(
                         new InetSocketTransportAddress(InetAddress.getByName(gpBaseElasticSearchProperties.getHost()),
                                 gpBaseElasticSearchProperties.getPort()));
-
     }
 }

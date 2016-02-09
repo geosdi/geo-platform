@@ -66,223 +66,208 @@ import java.util.List;
  */
 public abstract class AbstractElasticSearchDAO<D extends Document> implements GPElasticSearchBaseDAO<D> {
 
-	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
-	//
-	private GPIndexCreator indexCreator;
-	protected GPBaseMapper<D> mapper;
-	protected Client elastichSearchClient;
+    protected final Logger logger = LoggerFactory.getLogger(this.getClass());
+    //
+    private GPIndexCreator indexCreator;
+    protected GPBaseMapper<D> mapper;
+    protected Client elastichSearchClient;
 
-	@Override
-	public D persist(D document) throws Exception {
-		logger.debug("#################Try to insert {}\n\n", document);
-		IndexResponse response;
+    @Override
+    public D persist(D document) throws Exception {
+        logger.debug("#################Try to insert {}\n\n", document);
+        IndexResponse response;
+        if (document.isIdSetted()) {
+            response = this.elastichSearchClient.prepareIndex(getIndexName(), getIndexType(), document.getId())
+                    .setSource(this.mapper.writeAsString(document)).get();
+        } else {
+            response = this.elastichSearchClient.prepareIndex(getIndexName(), getIndexType())
+                    .setSource(this.mapper.writeAsString(document)).get();
+            document.setId(response.getId());
+            update(document);
+        }
+        logger.debug("##############{} Created : {}\n\n", this.mapper.getDocumentClassName(), response.isCreated());
+        return document;
+    }
 
-		if (document.isIdSetted()) {
-			response = this.elastichSearchClient.prepareIndex(getIndexName(), getIndexType(), document.getId())
-					.setSource(this.mapper.writeAsString(document)).get();
-		} else {
-			response = this.elastichSearchClient.prepareIndex(getIndexName(), getIndexType())
-					.setSource(this.mapper.writeAsString(document)).get();
-			document.setId(response.getId());
-			update(document);
-		}
-		logger.debug("##############{} Created : {}\n\n", this.mapper.getDocumentClassName(), response.isCreated());
+    @Override
+    public void update(D document) throws Exception {
+        Preconditions.checkArgument(
+                ((document != null) && ((document.getId() != null) && !(document.getId().isEmpty()))),
+                "The {} to Update must" + " not be null or ID must not be null or Empty.",
+                this.mapper.getDocumentClassName());
+        logger.debug("################Try to Update : {}\n\n", document);
 
-		return document;
-	}
+        this.elastichSearchClient.prepareUpdate(getIndexName(), getIndexType(), document.getId())
+                .setDoc(this.mapper.writeAsString(document)).get();
+    }
 
-	@Override
-	public void update(D document) throws Exception {
-		Preconditions.checkArgument(
-				((document != null) && ((document.getId() != null) && !(document.getId().isEmpty()))),
-				"The {} to Update must" + " not be null or ID must not be null or Empty.",
-				this.mapper.getDocumentClassName());
-		logger.debug("################Try to Update : {}\n\n", document);
+    @Override
+    public BulkResponse persist(Iterable<D> documents) throws Exception {
+        Preconditions.checkArgument(((documents != null)), "The Documents " + "to save, must not be null.");
+        BulkRequestBuilder bulkRequest = this.elastichSearchClient.prepareBulk();
+        for (D document : documents) {
+            if (document.isIdSetted()) {
+                bulkRequest.add(this.elastichSearchClient.prepareIndex(getIndexName(), getIndexType(), document.getId())
+                        .setSource(this.mapper.writeAsString(document)));
+            } else {
+                bulkRequest.add(this.elastichSearchClient.prepareIndex(getIndexName(), getIndexType())
+                        .setSource(this.mapper.writeAsString(document)));
+            }
+        }
 
-		this.elastichSearchClient.prepareUpdate(getIndexName(), getIndexType(), document.getId())
-				.setDoc(this.mapper.writeAsString(document)).get();
-	}
+        BulkResponse bulkResponse = bulkRequest.get();
+        if (bulkResponse.hasFailures()) {
+            throw new IllegalStateException(bulkResponse.buildFailureMessage());
+        }
+        return bulkResponse;
+    }
 
-	@Override
-	public BulkResponse persist(Iterable<D> documents) throws Exception {
-		Preconditions.checkArgument(((documents != null)), "The Documents " + "to save, must not be null.");
+    @Override
+    public <P extends Page> IPageResult<D> find(P page) throws Exception {
+        Preconditions.checkArgument((page != null), "Page must not be null.");
+        SearchRequestBuilder builder = page
+                .buildPage(this.elastichSearchClient.prepareSearch(getIndexName()).setTypes(getIndexType()));
 
-		BulkRequestBuilder bulkRequest = this.elastichSearchClient.prepareBulk();
-		for (D document : documents) {
-			if (document.isIdSetted()) {
-				bulkRequest.add(this.elastichSearchClient.prepareIndex(getIndexName(), getIndexType(), document.getId())
-						.setSource(this.mapper.writeAsString(document)));
-			} else {
-				bulkRequest.add(this.elastichSearchClient.prepareIndex(getIndexName(), getIndexType())
-						.setSource(this.mapper.writeAsString(document)));
-			}
-		}
+        logger.trace("#########################Builder : {}\n\n", builder.toString());
+        SearchResponse searchResponse = builder.get();
 
-		BulkResponse bulkResponse = bulkRequest.get();
-		if (bulkResponse.hasFailures()) {
-			throw new IllegalStateException(bulkResponse.buildFailureMessage());
-		}
-		return bulkResponse;
-	}
+        if (searchResponse.status() != RestStatus.OK) {
+            throw new IllegalStateException("Problem in Search : " + searchResponse.status());
+        }
 
-	@Override
-	public <P extends Page> IPageResult<D> find(P page) throws Exception {
-		Preconditions.checkArgument((page != null), "Page must not be null.");
-		SearchRequestBuilder builder = page
-				.buildPage(this.elastichSearchClient.prepareSearch(getIndexName()).setTypes(getIndexType()));
+        Long total = searchResponse.getHits().getTotalHits();
+        logger.debug("###################TOTAL HITS FOUND : {} .\n\n", total);
+        List<D> documents = Lists.newArrayList();
+        for (SearchHit searchHit : searchResponse.getHits().hits()) {
+            D document = this.mapper.read(searchHit.getSourceAsString());
+            if (!document.isIdSetted()) {
+                document.setId(searchHit.getId());
+            }
+            documents.add(document);
+        }
+        return new PageResult<D>(total, documents);
+    }
 
-		logger.trace("#########################Builder : {}\n\n", builder.toString());
+    @Override
+    public void delete(String id) {
+        Preconditions.checkArgument(((id != null) && !(id.isEmpty())), "The ID must not be null or an Empty String");
+        DeleteResponse response = elastichSearchClient.prepareDelete(getIndexName(), getIndexType(), id)
+                .execute().actionGet();
+        if (response.isFound()) {
+            logger.debug("#################Document with ID : {}, " + "was deleted.", id);
+        } else {
+            logger.debug("#################Document with ID : {}, " + "was not found in ElasticSearch.");
+        }
+    }
 
-		SearchResponse searchResponse = builder.get();
+    @Override
+    public D find(String id) throws Exception {
+        Preconditions.checkArgument((id != null) && !(id.isEmpty()),
+                "The ElasticSearch ID must not be null or an Empty String");
 
-		if (searchResponse.status() != RestStatus.OK) {
-			throw new IllegalStateException("Problem in Search : " + searchResponse.status());
-		}
+        GetResponse existResponse = elastichSearchClient.prepareGet(getIndexName(), getIndexType(), id).get();
+        return (existResponse.isExists()) ? this.mapper.read(existResponse.getSourceAsString()) : null;
+    }
 
-		Long total = searchResponse.getHits().getTotalHits();
+    @Override
+    public Long count() {
+        SearchRequestBuilder builder = this.elastichSearchClient.prepareSearch(getIndexName()).setTypes(getIndexType());
+        SearchResponse searchResponse = builder.get();
+        return searchResponse.getHits().getTotalHits();
+    }
 
-		logger.debug("###################TOTAL HITS FOUND : {} .\n\n", total);
+    /**
+     * @param queryBuilder
+     * @return {@link Long}
+     * @throws Exception
+     */
+    @Override
+    public Long count(QueryBuilder queryBuilder) throws Exception {
+        SearchRequestBuilder builder = this.elastichSearchClient.prepareSearch(getIndexName())
+                .setQuery(queryBuilder)
+                .setTypes(getIndexType());
+        SearchResponse searchResponse = builder.get();
+        return searchResponse.getHits().getTotalHits();
 
-		List<D> documents = Lists.newArrayList();
+    }
 
-		for (SearchHit searchHit : searchResponse.getHits().hits()) {
-			D document = this.mapper.read(searchHit.getSourceAsString());
-			if (!document.isIdSetted()) {
-				document.setId(searchHit.getId());
-			}
-			documents.add(document);
-		}
+    @Override
+    public void removeAll() throws Exception {
+        SearchResponse searchResponse = this.elastichSearchClient.prepareSearch()
+                .setIndices(getIndexName())
+                .setTypes(getIndexType())
+                .setScroll(new TimeValue(60000))
+                .setSize(100).execute().actionGet();
+        while (true) {
+            for (SearchHit searchHit : searchResponse.getHits().hits()) {
+                D document = this.mapper.read(searchHit.getSourceAsString());
+                this.elastichSearchClient.delete(new DeleteRequest(getIndexName(), getIndexType(), document.getId())).actionGet();
+            }
+            searchResponse = this.elastichSearchClient.prepareSearchScroll(searchResponse.getScrollId()).setScroll(new TimeValue(600000)).execute().actionGet();
+            if (searchResponse.getHits().getHits().length == 0) {
+                break;
+            }
+        }
+    }
 
-		return new PageResult<D>(total, documents);
-	}
+    /**
+     * @return The Index Name
+     */
+    protected final String getIndexName() {
+        return this.indexCreator.getIndexSettings().getIndexName();
+    }
 
-	@Override
-	public void delete(String id) {
-		Preconditions.checkArgument(((id != null) && !(id.isEmpty())), "The ID must not be null or an Empty String");
-		DeleteResponse response = elastichSearchClient.prepareDelete(getIndexName(), getIndexType(), id).execute()
-				.actionGet();
-		if (response.isFound()) {
-			logger.debug("#################Document with ID : {}, " + "was deleted.", id);
-		} else {
-			logger.debug("#################Document with ID : {}, " + "was not found in ElasticSearch.");
-		}
-	}
+    /**
+     * @return The Index Type
+     */
+    protected final String getIndexType() {
+        return this.indexCreator.getIndexSettings().getIndexType();
+    }
 
-	@Override
-	public D find(String id) throws Exception {
-		Preconditions.checkArgument((id != null) && !(id.isEmpty()),
-				"The ElasticSearch ID must not be null or an Empty String");
+    /**
+     * <p>
+     * Remember Index Creation is called by
+     * {@link GPIndexConfigurator#configure()}
+     * </p>
+     *
+     * @throws Exception
+     */
+    protected final void createIndex() throws Exception {
+        this.indexCreator.createIndex();
+    }
 
-		GetResponse existResponse = elastichSearchClient.prepareGet(getIndexName(), getIndexType(), id).get();
+    /**
+     * <p>
+     * Dangerous. If called all Data will be dropped
+     * </p>
+     *
+     * @throws Exception
+     */
+    protected final void deleteIndex() throws Exception {
+        this.indexCreator.deleteIndex();
+    }
 
-		return (existResponse.isExists()) ? this.mapper.read(existResponse.getSourceAsString()) : null;
-	}
+    /**
+     * @return {@link Boolean}
+     * @throws Exception
+     */
+    public Boolean existIndex() throws Exception {
+        return this.indexCreator.existIndex();
+    }
 
-	@Override
-	public Long count() {
-		SearchRequestBuilder builder = this.elastichSearchClient.prepareSearch(getIndexName()).setTypes(getIndexType());
-		SearchResponse searchResponse = builder.get();
-		return searchResponse.getHits().getTotalHits();
-	}
+    /**
+     * @param theIndexCreator
+     */
+    @Override
+    public <IC extends GPIndexCreator> void setIndexCreator(IC theIndexCreator) {
+        this.indexCreator = theIndexCreator;
+    }
 
-	/**
-	 * @param queryBuilder
-	 * @return {@link Long}
-	 * @throws Exception
-	 */
-	@Override
-	public Long count(QueryBuilder queryBuilder) throws Exception {
-
-		SearchRequestBuilder builder = this.elastichSearchClient.prepareSearch(getIndexName()).setQuery(queryBuilder)
-				.setTypes(getIndexType());
-		SearchResponse searchResponse = builder.get();
-		return searchResponse.getHits().getTotalHits();
-
-	}
-
-	@Override
-	public void removeAll() throws Exception {		
-		SearchResponse searchResponse = this.elastichSearchClient.prepareSearch()
-				.setIndices(getIndexName())
-				.setTypes(getIndexType())
-		        .setScroll(new TimeValue(60000))
-		        .setSize(100).execute().actionGet(); 
-		while (true) {
-
-			
-			
-			for (SearchHit searchHit : searchResponse.getHits().hits()) {
-		    	D document = this.mapper.read(searchHit.getSourceAsString());
-		    	this.elastichSearchClient.delete(new DeleteRequest(getIndexName(),getIndexType(),document.getId())).actionGet();
-		    }
-			searchResponse = this.elastichSearchClient.prepareSearchScroll(searchResponse.getScrollId()).setScroll(new TimeValue(600000)).execute().actionGet();
-		    if (searchResponse.getHits().getHits().length == 0) {
-		        break;
-		    }
-		}
-		
-	}
-
-	/**
-	 * @return The Index Name
-	 */
-	protected final String getIndexName() {
-		return this.indexCreator.getIndexSettings().getIndexName();
-	}
-
-	/**
-	 * @return The Index Type
-	 */
-	protected final String getIndexType() {
-		return this.indexCreator.getIndexSettings().getIndexType();
-	}
-
-	/**
-	 * <p>
-	 * Remember Index Creation is called by
-	 * {@link GPIndexConfigurator#configure()}
-	 * </p>
-	 *
-	 * @throws Exception
-	 */
-	protected final void createIndex() throws Exception {
-		this.indexCreator.createIndex();
-	}
-
-	/**
-	 * <p>
-	 * Dangerous. If called all Data will be dropped
-	 * </p>
-	 *
-	 * @throws Exception
-	 */
-	protected final void deleteIndex() throws Exception {
-		this.indexCreator.deleteIndex();
-	}
-
-	/**
-	 * @return {@link Boolean}
-	 * @throws Exception
-	 */
-	public Boolean existIndex() throws Exception {
-		return this.indexCreator.existIndex();
-	}
-
-	/**
-	 * @param theIndexCreator
-	 */
-	@Override
-	public <IC extends GPIndexCreator> void setIndexCreator(IC theIndexCreator) {
-		this.indexCreator = theIndexCreator;
-	}
-
-	@Override
-	public final void afterPropertiesSet() throws Exception {
-		Preconditions.checkNotNull(this.mapper, "The Mapper must not be null.");
-		Preconditions.checkNotNull(this.indexCreator, "The Index Creator must " + "not be null.");
-
-		this.elastichSearchClient = this.indexCreator.client();
-
-		Preconditions.checkNotNull(this.elastichSearchClient, "The ElasticSearch Client must " + "not be null.");
-	}
+    @Override
+    public final void afterPropertiesSet() throws Exception {
+        Preconditions.checkNotNull(this.mapper, "The Mapper must not be null.");
+        Preconditions.checkNotNull(this.indexCreator, "The Index Creator must " + "not be null.");
+        this.elastichSearchClient = this.indexCreator.client();
+        Preconditions.checkNotNull(this.elastichSearchClient, "The ElasticSearch Client must " + "not be null.");
+    }
 }

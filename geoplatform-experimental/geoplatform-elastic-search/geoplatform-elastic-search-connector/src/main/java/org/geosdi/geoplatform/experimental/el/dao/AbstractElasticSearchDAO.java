@@ -144,9 +144,7 @@ public abstract class AbstractElasticSearchDAO<D extends Document> implements GP
 
         return new PageResult<D>(total, Stream.of(searchResponse.getHits().hits())
                 .map(new GPSearchHitFunction())
-                .filter(s -> {
-                    return s != null;
-                }).collect(Collectors.toList()));
+                .filter(s -> s != null).collect(Collectors.toList()));
     }
 
     @Override

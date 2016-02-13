@@ -42,12 +42,14 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.boot.spi.MetadataImplementor;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
+import org.hibernate.tool.schema.TargetType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
+import java.util.EnumSet;
 import java.util.Properties;
 import java.util.Set;
 
@@ -82,8 +84,9 @@ public class JpaSchemaExport extends PersistenceSchemaExport {
                 metadataSource.addAnnotatedClass(classe);
             }
             MetadataImplementor metadata = (MetadataImplementor) metadataSource.buildMetadata();
-            schema = new SchemaExport(serviceRegistry, metadata);
+            schema = new SchemaExport();
             super.exportSchema();
+            schema.create(EnumSet.of(TargetType.SCRIPT), metadata);
         }
     }
 

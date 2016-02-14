@@ -41,14 +41,12 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.boot.spi.MetadataImplementor;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
-import org.hibernate.tool.schema.TargetType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
-import java.util.EnumSet;
 import java.util.Properties;
 import java.util.Set;
 
@@ -76,7 +74,8 @@ public class GPHibernateSchemaExport extends PersistenceSchemaExport {
                 throw new IllegalStateException("There are no Classes Annotated with" + " @Entity Annotations.");
             }
 
-            ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(hibernateProperties)
+            ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
+                    .applySettings(hibernateProperties)
                     .build();
             MetadataSources metadataSource = new MetadataSources(serviceRegistry);
             for (Class<?> classe : annotatedClasses) {
@@ -84,8 +83,7 @@ public class GPHibernateSchemaExport extends PersistenceSchemaExport {
             }
             MetadataImplementor metadata = (MetadataImplementor) metadataSource.buildMetadata();
             schema = new SchemaExport();
-            super.exportSchema();
-            schema.create(EnumSet.of(TargetType.SCRIPT), metadata);
+            super.exportSchema(metadata);
         }
     }
 

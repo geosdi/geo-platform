@@ -34,13 +34,16 @@
  */
 package org.geosdi.geoplatform.persistence.configuration.export;
 
+import org.hibernate.boot.Metadata;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 
+import javax.annotation.Resource;
 import java.io.File;
+import java.util.EnumSet;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -56,6 +59,8 @@ public abstract class PersistenceSchemaExport implements InitializingBean {
     private String userHome;
     @Value(value = "#{systemProperties['gpSchemaExport']}")
     protected String generateSchema;
+    @Resource(name = "gpTargetType")
+    private EnumSet gpTargetType;
     protected SchemaExport schema;
 
     @Override
@@ -63,7 +68,7 @@ public abstract class PersistenceSchemaExport implements InitializingBean {
         this.createSchema();
     }
 
-    protected final void exportSchema() {
+    protected final void exportSchema(Metadata metadata) {
         String schemaExportDirPath = this.userHome + File.separator + SCHEMA_EXPORT_DIR_NAME;
         File dirPath = new File(schemaExportDirPath);
 
@@ -88,6 +93,7 @@ public abstract class PersistenceSchemaExport implements InitializingBean {
 
         schema.setFormat(true);
         schema.setDelimiter(";");
+        schema.create(this.gpTargetType, metadata);
     }
 
     protected abstract void createSchema();

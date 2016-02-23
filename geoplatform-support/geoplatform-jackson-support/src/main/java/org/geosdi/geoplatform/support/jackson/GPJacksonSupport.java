@@ -44,7 +44,7 @@ import com.fasterxml.jackson.module.jaxb.JaxbAnnotationIntrospector;
 import org.geosdi.geoplatform.support.jackson.property.JacksonSupportConfigFeature;
 
 import java.text.DateFormat;
-import java.util.Arrays;
+import java.util.stream.Stream;
 
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 
@@ -67,8 +67,7 @@ public class GPJacksonSupport implements JacksonSupport {
 
     public GPJacksonSupport(JacksonSupportConfigFeature... features) {
         mapper = new ObjectMapper();
-        Arrays.asList(features).parallelStream()
-                .filter(f -> f != null).forEach(f -> f.configureMapper(mapper));
+        Stream.of(features).filter(f -> f != null).forEach(f -> f.configureMapper(mapper));
         AnnotationIntrospector primary = new JaxbAnnotationIntrospector(
                 TypeFactory.defaultInstance());
         AnnotationIntrospector secondary = new JacksonAnnotationIntrospector();

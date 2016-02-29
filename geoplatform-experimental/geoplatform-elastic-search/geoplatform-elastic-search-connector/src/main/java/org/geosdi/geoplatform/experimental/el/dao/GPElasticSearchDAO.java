@@ -40,9 +40,7 @@ import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.sort.SortOrder;
-import org.geosdi.geoplatform.experimental.el.api.mapper.GPBaseMapper;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
-import org.geosdi.geoplatform.experimental.el.index.GPIndexCreator;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -58,7 +56,7 @@ import java.util.List;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPElasticSearchDAO<D extends Document> {
+public interface GPElasticSearchDAO<D extends Document>  extends ElasticSearchDAO<D>{
 
     /**
      * @param document
@@ -98,18 +96,6 @@ public interface GPElasticSearchDAO<D extends Document> {
      * @throws Exception
      */
     <P extends Page> IPageResult<D> find(P page) throws Exception;
-
-    /**
-     * @param <Mapper>
-     * @param theMapper
-     */
-    <Mapper extends GPBaseMapper<D>> void setMapper(Mapper theMapper);
-
-    /**
-     * @param <IC>
-     * @param theIndexCreator
-     */
-    <IC extends GPIndexCreator> void setIndexCreator(IC theIndexCreator);
 
     /**
      * @param <D>

@@ -43,6 +43,8 @@ import java.io.InputStream;
 import java.io.Reader;
 import java.net.URL;
 
+import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
+
 /**
  * @param <D>
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -50,7 +52,7 @@ import java.net.URL;
  */
 public interface GPElasticSearchMapper<D extends Document> {
 
-    JacksonSupport DEFAULT_MAPPER = new GPJacksonSupport();
+    JacksonSupport DEFAULT_MAPPER = new GPJacksonSupport().configure(NON_NULL);
 
     /**
      * @param url representing {@link URL} as String

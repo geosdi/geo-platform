@@ -48,7 +48,6 @@ import org.elasticsearch.client.Client;
 import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.rest.RestStatus;
-import org.elasticsearch.search.SearchHit;
 import org.geosdi.geoplatform.experimental.el.api.mapper.GPBaseMapper;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
 import org.geosdi.geoplatform.experimental.el.configurator.GPIndexConfigurator;
@@ -57,9 +56,9 @@ import org.geosdi.geoplatform.experimental.el.index.GPIndexCreator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 /**
  * @param <D>
@@ -78,7 +77,6 @@ public abstract class AbstractElasticSearchDAO<D extends Document> implements GP
     public D persist(D document) throws Exception {
         logger.debug("#################Try to insert {}\n\n", document);
         IndexResponse response;
-
         if (document.isIdSetted()) {
             response = this.elastichSearchClient.prepareIndex(getIndexName(), getIndexType(), document.getId())
                     .setSource(this.mapper.writeAsString(document)).get();
@@ -89,7 +87,6 @@ public abstract class AbstractElasticSearchDAO<D extends Document> implements GP
             update(document);
         }
         logger.debug("##############{} Created : {}\n\n", this.mapper.getDocumentClassName(), response.isCreated());
-
         return document;
     }
 
@@ -109,16 +106,10 @@ public abstract class AbstractElasticSearchDAO<D extends Document> implements GP
     public BulkResponse persist(Iterable<D> documents) throws Exception {
         Preconditions.checkArgument(((documents != null)), "The Documents " + "to save, must not be null.");
         BulkRequestBuilder bulkRequest = this.elastichSearchClient.prepareBulk();
-        for (D document : documents) {
-            if (document.isIdSetted()) {
-                bulkRequest.add(this.elastichSearchClient.prepareIndex(getIndexName(), getIndexType(), document.getId())
-                        .setSource(this.mapper.writeAsString(document)));
-            } else {
-                bulkRequest.add(this.elastichSearchClient.prepareIndex(getIndexName(), getIndexType())
-                        .setSource(this.mapper.writeAsString(document)));
-            }
-        }
-
+        StreamSupport.stream(documents.spliterator(), Boolean.FALSE)
+                .map(document -> this.prepareIndexRequestBuilder(document))
+                .filter(IndexRequestBuilder -> IndexRequestBuilder != null)
+                .forEach(IndexRequestBuilder -> bulkRequest.add(IndexRequestBuilder));
         BulkResponse bulkResponse = bulkRequest.get();
         if (bulkResponse.hasFailures()) {
             throw new IllegalStateException(bulkResponse.buildFailureMessage());
@@ -129,21 +120,17 @@ public abstract class AbstractElasticSearchDAO<D extends Document> implements GP
     @Override
     public <P extends Page> IPageResult<D> find(P page) throws Exception {
         Preconditions.checkArgument((page != null), "Page must not be null.");
-        SearchRequestBuilder builder = page
-                .buildPage(this.elastichSearchClient.prepareSearch(getIndexName()).setTypes(getIndexType()));
-
+        SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient
+                .prepareSearch(getIndexName()).setTypes(getIndexType()));
         logger.trace("#########################Builder : {}\n\n", builder.toString());
         SearchResponse searchResponse = builder.get();
-
         if (searchResponse.status() != RestStatus.OK) {
             throw new IllegalStateException("Problem in Search : " + searchResponse.status());
         }
-
         Long total = searchResponse.getHits().getTotalHits();
         logger.debug("###################TOTAL HITS FOUND : {} .\n\n", total);
-
         return new PageResult<D>(total, Stream.of(searchResponse.getHits().hits())
-                .map(new GPSearchHitFunction())
+                .map(searchHit -> this.readDocument(searchHit))
                 .filter(s -> s != null).collect(Collectors.toList()));
     }
 
@@ -187,7 +174,6 @@ public abstract class AbstractElasticSearchDAO<D extends Document> implements GP
                 .setQuery(queryBuilder)
                 .setTypes(getIndexType())
                 .get().getHits().getTotalHits();
-
     }
 
     @Override
@@ -210,16 +196,40 @@ public abstract class AbstractElasticSearchDAO<D extends Document> implements GP
     }
 
     /**
+     * @param document
+     * @return {@link String}
+     * @throws Exception
+     */
+    @Override
+    public String writeDocumentAsString(D document) throws Exception {
+        Preconditions.checkNotNull(document, "The Document must not be null.");
+        return this.mapper.writeAsString(document);
+    }
+
+    /**
+     * @param documentAsString
+     * @return {@link D}
+     * @throws Exception
+     */
+    @Override
+    public D readDocument(String documentAsString) throws Exception {
+        Preconditions.checkNotNull(documentAsString, "The String to Wrap must not be null");
+        return mapper.read(documentAsString);
+    }
+
+    /**
      * @return The Index Name
      */
-    protected final String getIndexName() {
+    @Override
+    public final String getIndexName() {
         return this.indexCreator.getIndexSettings().getIndexName();
     }
 
     /**
      * @return The Index Type
      */
-    protected final String getIndexType() {
+    @Override
+    public final String getIndexType() {
         return this.indexCreator.getIndexSettings().getIndexType();
     }
 
@@ -250,6 +260,7 @@ public abstract class AbstractElasticSearchDAO<D extends Document> implements GP
      * @return {@link Boolean}
      * @throws Exception
      */
+    @Override
     public Boolean existIndex() throws Exception {
         return this.indexCreator.existIndex();
     }
@@ -262,38 +273,21 @@ public abstract class AbstractElasticSearchDAO<D extends Document> implements GP
         this.indexCreator = theIndexCreator;
     }
 
+    /**
+     * @return {@link Client}
+     * @throws Exception
+     */
+    @Override
+    public final Client client() throws Exception {
+        Preconditions.checkNotNull(this.elastichSearchClient, "The Client is null. Check your Configuration.");
+        return this.elastichSearchClient;
+    }
+
     @Override
     public final void afterPropertiesSet() throws Exception {
         Preconditions.checkNotNull(this.mapper, "The Mapper must not be null.");
         Preconditions.checkNotNull(this.indexCreator, "The Index Creator must " + "not be null.");
         this.elastichSearchClient = this.indexCreator.client();
         Preconditions.checkNotNull(this.elastichSearchClient, "The ElasticSearch Client must " + "not be null.");
-    }
-
-    /**
-     * <p>Interna Class to use {@link Function<SearchHit, D>} Java 8 facility.</p>
-     */
-    class GPSearchHitFunction implements Function<SearchHit, D> {
-
-        /**
-         * Applies this function to the given argument.
-         *
-         * @param searchHit the function argument
-         * @return the function result
-         */
-        @Override
-        public D apply(SearchHit searchHit) {
-            try {
-                D document = mapper.read(searchHit.getSourceAsString());
-                if (!document.isIdSetted()) {
-                    document.setId(searchHit.getId());
-                }
-                return document;
-            } catch (Exception ex) {
-                logger.error("#################PARSER_EXCEPTION : {}\n", ex.getMessage());
-                ex.printStackTrace();
-            }
-            return null;
-        }
     }
 }

@@ -31,6 +31,12 @@
                 <artifactId>httpcore</artifactId>
                 <version>${httpcomponents-core-version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpmime</artifactId>
+                <version>${httpcomponents-mime-version}</version>
+            </dependency>
             
         </dependencies>
     </dependencyManagement>
@@ -38,6 +44,7 @@
     <properties>
         <httpcomponents-core-version>4.4.4</httpcomponents-core-version>
         <httpcomponents-client-version>4.5.1</httpcomponents-client-version>
+        <httpcomponents-mime-version>4.5.2</httpcomponents-mime-version>
     </properties>
 
 </project>

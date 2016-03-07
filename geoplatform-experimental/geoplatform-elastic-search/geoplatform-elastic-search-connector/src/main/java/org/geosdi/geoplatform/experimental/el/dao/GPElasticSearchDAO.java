@@ -41,6 +41,7 @@ import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.sort.SortOrder;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
+import org.geosdi.geoplatform.experimental.el.condition.PredicateCondition;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,7 +57,7 @@ import java.util.List;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPElasticSearchDAO<D extends Document>  extends ElasticSearchDAO<D>{
+public interface GPElasticSearchDAO<D extends Document> extends ElasticSearchDAO<D> {
 
     /**
      * @param document
@@ -96,6 +97,20 @@ public interface GPElasticSearchDAO<D extends Document>  extends ElasticSearchDA
      * @throws Exception
      */
     <P extends Page> IPageResult<D> find(P page) throws Exception;
+
+    /**
+     * @param ids
+     * @return {@link List<D>}
+     * @throws Exception
+     */
+    List<D> findByIDS(Iterable<String> ids, PredicateCondition<D> condition) throws Exception;
+
+    /**
+     * @param ids
+     * @return {@link List<D>}
+     * @throws Exception
+     */
+    List<D> findByIDS(Iterable<String> ids) throws Exception;
 
     /**
      * @param <D>

@@ -1,6 +1,7 @@
 package org.geosdi.geoplatform.experimental.el.dao;
 
 import com.google.common.base.Preconditions;
+import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexRequestBuilder;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.search.SearchHit;
@@ -55,6 +56,24 @@ public interface ElasticSearchDAO<D extends Document> {
             D document = readDocument(searchHit.getSourceAsString());
             if (!document.isIdSetted())
                 document.setId(searchHit.getId());
+            return document;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * @param response
+     * @return {@link D}
+     */
+    default D readGetResponse(GetResponse response) {
+        try {
+            Preconditions.checkNotNull(response, "The GetResponse must not be null.");
+            D document = readDocument(response.getSourceAsString());
+            if (!document.isIdSetted()) {
+                document.setId(response.getId());
+            }
             return document;
         } catch (Exception ex) {
             ex.printStackTrace();

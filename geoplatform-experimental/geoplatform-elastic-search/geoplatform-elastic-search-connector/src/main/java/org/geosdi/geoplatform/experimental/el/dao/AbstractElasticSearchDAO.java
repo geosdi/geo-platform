@@ -36,11 +36,13 @@
 package org.geosdi.geoplatform.experimental.el.dao;
 
 import com.google.common.base.Preconditions;
+import com.google.common.collect.Iterables;
 import org.elasticsearch.action.bulk.BulkRequestBuilder;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.delete.DeleteRequest;
 import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.get.GetResponse;
+import org.elasticsearch.action.get.MultiGetResponse;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
@@ -50,15 +52,20 @@ import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.rest.RestStatus;
 import org.geosdi.geoplatform.experimental.el.api.mapper.GPBaseMapper;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
+import org.geosdi.geoplatform.experimental.el.condition.PredicateCondition;
 import org.geosdi.geoplatform.experimental.el.configurator.GPIndexConfigurator;
 import org.geosdi.geoplatform.experimental.el.dao.GPElasticSearchDAO.GPElasticSearchBaseDAO;
 import org.geosdi.geoplatform.experimental.el.index.GPIndexCreator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
+
+import static java.lang.Boolean.TRUE;
 
 /**
  * @param <D>
@@ -100,6 +107,35 @@ public abstract class AbstractElasticSearchDAO<D extends Document> implements GP
 
         this.elastichSearchClient.prepareUpdate(getIndexName(), getIndexType(), document.getId())
                 .setDoc(this.mapper.writeAsString(document)).get();
+    }
+
+    /**
+     * @param ids
+     * @return {@link List <D>}
+     * @throws Exception
+     */
+    @Override
+    public List<D> findByIDS(Iterable<String> ids) throws Exception {
+        return findByIDS(ids, new PredicateCondition.EmptyPredicateCondition<D>());
+    }
+
+    /**
+     * @param ids
+     * @return {@link List <D>}
+     * @throws Exception
+     */
+    @Override
+    public List<D> findByIDS(Iterable<String> ids, PredicateCondition<D> condition) throws Exception {
+        Preconditions.checkArgument((ids != null) && (Iterables.size(ids) > 0));
+        MultiGetResponse multiGetResponses = this.elastichSearchClient.prepareMultiGet()
+                .setRealtime(TRUE)
+                .setIgnoreErrorsOnGeneratedFields(TRUE)
+                .add(getIndexName(), getIndexType(), ids).get();
+
+        return Arrays.stream(multiGetResponses.getResponses()).filter(response -> !response.isFailed())
+                .map(r -> readGetResponse(r.getResponse()))
+                .filter(d -> ((condition != null) ? ((d != null) && (condition.test(d))) : d != null))
+                .collect(Collectors.toList());
     }
 
     @Override

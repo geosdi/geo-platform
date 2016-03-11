@@ -35,7 +35,10 @@
  */
 package org.geosdi.geoplatform.exception;
 
+import javax.ws.rs.core.Response;
 import javax.xml.ws.WebFault;
+
+import static javax.ws.rs.core.Response.Status.INTERNAL_SERVER_ERROR;
 
 /**
  *
@@ -68,4 +71,13 @@ public class ServerInternalFault extends GPExceptionFault {
         return GPExceptionFaultType.ServerInternalFault;
     }
 
+    /**
+     * <p>Only for RS Exception</p>
+     *
+     * @return {@link Response.Status}
+     */
+    @Override
+    public Response.Status status() {
+        return INTERNAL_SERVER_ERROR;
+    }
 }

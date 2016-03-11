@@ -37,6 +37,8 @@ package org.geosdi.geoplatform.exception;
 
 import javax.xml.ws.WebFault;
 
+import static javax.ws.rs.core.Response.Status;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -82,5 +84,15 @@ public class ResourceNotFoundFault extends GPExceptionFault {
     @Override
     public GPExceptionFaultType getExceptionType() {
         return GPExceptionFaultType.ResourceNotFoundFault;
+    }
+
+    /**
+     * <p>Only for RS Exception</p>
+     *
+     * @return {@link Status}
+     */
+    @Override
+    public Status status() {
+        return Status.NOT_FOUND;
     }
 }

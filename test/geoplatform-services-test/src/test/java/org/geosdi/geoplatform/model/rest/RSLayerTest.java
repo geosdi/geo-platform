@@ -35,17 +35,7 @@
  */
 package org.geosdi.geoplatform.model.rest;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import javax.ws.rs.InternalServerErrorException;
-import org.geosdi.geoplatform.core.model.GPBBox;
-import org.geosdi.geoplatform.core.model.GPLayer;
-import org.geosdi.geoplatform.core.model.GPLayerInfo;
-import org.geosdi.geoplatform.core.model.GPRasterLayer;
-import org.geosdi.geoplatform.core.model.GPVectorLayer;
+import org.geosdi.geoplatform.core.model.*;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.exception.rs.GPRestExceptionMessage;
@@ -61,6 +51,10 @@ import org.geosdi.geoplatform.response.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.response.collection.TreeFolderElements;
 import org.junit.Assert;
 import org.junit.Test;
+
+import javax.ws.rs.ClientErrorException;
+import javax.ws.rs.NotFoundException;
+import java.util.*;
 
 /**
  *
@@ -438,14 +432,14 @@ public class RSLayerTest extends BasicRestServiceTest {
                             projectTest.getId(),
                             rootFolderA.getId(), raster, descendantsMapData));
             Assert.fail("Add layer must fail because title value is null");
-        } catch (InternalServerErrorException ex) {
+        } catch (ClientErrorException ex) {
             GPRestExceptionMessage exMess = ex.getResponse().readEntity(
                     GPRestExceptionMessage.class);
             logger.debug("\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}\n", exMess);
             try {
                 raster1 = gpWSClient.getRasterLayer(idRaster1);
                 Assert.fail("rasterLayer1 must not exist");
-            } catch (InternalServerErrorException rnf) {
+            } catch (NotFoundException rnf) {
                 GPRestExceptionMessage rnfMess = rnf.getResponse().readEntity(
                         GPRestExceptionMessage.class);
                 logger.debug("\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}\n", rnfMess);

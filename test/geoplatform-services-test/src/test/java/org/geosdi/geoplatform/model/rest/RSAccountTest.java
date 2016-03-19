@@ -53,8 +53,10 @@ import org.geosdi.geoplatform.response.UserDTO;
 import org.junit.Assert;
 import org.junit.Test;
 
+import javax.ws.rs.BadRequestException;
+import javax.ws.rs.ClientErrorException;
 import javax.ws.rs.InternalServerErrorException;
-import javax.ws.rs.ServerErrorException;
+import javax.ws.rs.NotFoundException;
 import java.util.List;
 
 /**
@@ -119,7 +121,7 @@ public class RSAccountTest extends BasicRestServiceTest {
         gpWSClient.deleteOrganization(otherOrganizationID);
     }
 
-    @Test(expected = ServerErrorException.class)
+    @Test(expected = NotFoundException.class)
     public void testAllOrganizationAccountsIncorrectRest() throws Exception {
         String wrongOrganizationName = organizationNameRSTest + "_";
         gpWSClient.getAccounts(wrongOrganizationName);
@@ -159,7 +161,7 @@ public class RSAccountTest extends BasicRestServiceTest {
                 userFromWS.getId().longValue());
     }
 
-    @Test(expected = InternalServerErrorException.class)
+    @Test(expected = BadRequestException.class)
     public void testInsertUserWithNoRolesRest() throws IllegalParameterFault {
         super.createAndInsertUser("user-no-roles-rest", organizationTest);
     }
@@ -224,7 +226,7 @@ public class RSAccountTest extends BasicRestServiceTest {
             gpWSClient.insertAccount(new InsertAccountRequest(user,
                     Boolean.FALSE));
             Assert.fail("User already exist wrt username");
-        } catch (InternalServerErrorException ex) {
+        } catch (ClientErrorException ex) {
             GPRestExceptionMessage exMess = ex.getResponse().readEntity(
                     GPRestExceptionMessage.class);
             logger.debug("\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}\n", exMess);
@@ -245,7 +247,7 @@ public class RSAccountTest extends BasicRestServiceTest {
             gpWSClient.insertAccount(new InsertAccountRequest(user,
                     Boolean.FALSE));
             Assert.fail("User already exist wrt email");
-        } catch (InternalServerErrorException ex) {
+        } catch (ClientErrorException ex) {
             GPRestExceptionMessage exMess = ex.getResponse().readEntity(
                     GPRestExceptionMessage.class);
             logger.debug("\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}\n", exMess);
@@ -266,7 +268,7 @@ public class RSAccountTest extends BasicRestServiceTest {
             gpWSClient.insertAccount(new InsertAccountRequest(user,
                     Boolean.FALSE));
             Assert.fail("User incorrect wrt organization");
-        } catch (InternalServerErrorException ex) {
+        } catch (ClientErrorException ex) {
             GPRestExceptionMessage exMess = ex.getResponse().readEntity(
                     GPRestExceptionMessage.class);
             logger.debug("\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}\n", exMess);
@@ -293,19 +295,19 @@ public class RSAccountTest extends BasicRestServiceTest {
         Assert.assertEquals(emailTest, user.getEmailAddress());
     }
 
-    @Test(expected = InternalServerErrorException.class)
+    @Test(expected = NotFoundException.class)
     public void testAuthorizationIncorrectUsernameRest() throws Exception {
         String wrongUsername = usernameTest + "_";
         gpWSClient.getUserDetailByUsernameAndPassword(wrongUsername, passwordTest);
     }
 
-    @Test(expected = InternalServerErrorException.class)
+    @Test(expected = NotFoundException.class)
     public void testAuthorizationIncorrectEmailRest() throws Exception {
         String wrongEmail = emailTest + "_";
         gpWSClient.getUserDetailByUsernameAndPassword(wrongEmail, passwordTest);
     }
 
-    @Test(expected = InternalServerErrorException.class)
+    @Test(expected = BadRequestException.class)
     public void testAuthorizationIncorrectPasswordRest() throws Exception {
         String wrongPassword = passwordTest + "_";
         gpWSClient.getUserDetailByUsernameAndPassword(usernameTest,

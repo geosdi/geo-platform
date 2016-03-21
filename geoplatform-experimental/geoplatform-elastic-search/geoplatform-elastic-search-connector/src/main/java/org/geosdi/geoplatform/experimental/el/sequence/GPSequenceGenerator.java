@@ -1,6 +1,7 @@
 package org.geosdi.geoplatform.experimental.el.sequence;
 
 import com.google.common.base.Preconditions;
+import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.update.UpdateResponse;
 import org.elasticsearch.client.Client;
@@ -130,5 +131,14 @@ public abstract class GPSequenceGenerator implements IGPSequenceGenerator {
         Preconditions.checkArgument((getSequenceID() != null) && !(getSequenceID().isEmpty()),
                 "The SequenceID must not be null or an Empty String.");
         this.gpSequence = new GPSequence(getSequenceID());
+        if (existSequence()) {
+            GetResponse response = this.elastichSearchClient
+                    .prepareGet()
+                    .setIndex(BaseSequenceSettings.GP_SEQUENCE.getSequenceName())
+                    .setType(BaseSequenceSettings.GP_SEQUENCE.getSequenceType())
+                    .setId(this.gpSequence.getSequenceId()).execute().actionGet();
+            logger.debug(":::::::::::::::::::::::::::::::::VERSION_FOUND : {}\n", response.getVersion());
+            this.gpSequence.setVersion(response.getVersion());
+        }
     }
 }

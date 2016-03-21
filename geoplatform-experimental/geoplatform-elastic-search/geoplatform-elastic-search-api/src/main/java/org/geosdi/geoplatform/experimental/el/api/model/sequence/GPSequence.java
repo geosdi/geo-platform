@@ -46,9 +46,20 @@ public class GPSequence implements IGPSequence {
         return this.version;
     }
 
+    /**
+     * @param theVersion
+     */
     @Override
     public void setVersion(Long theVersion) {
         this.version = theVersion;
+    }
+
+    /**
+     * @return {@link Boolean}
+     */
+    @Override
+    public Boolean isSetVersion() {
+        return this.version != null;
     }
 
     @Override

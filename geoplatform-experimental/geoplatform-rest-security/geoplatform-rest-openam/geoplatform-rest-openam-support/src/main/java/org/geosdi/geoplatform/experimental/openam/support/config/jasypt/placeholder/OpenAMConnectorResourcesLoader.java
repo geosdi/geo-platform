@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.geosdi.geoplatform.experimental.openam.support.config.placeholder;
+package org.geosdi.geoplatform.experimental.openam.support.config.jasypt.placeholder;
 
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;

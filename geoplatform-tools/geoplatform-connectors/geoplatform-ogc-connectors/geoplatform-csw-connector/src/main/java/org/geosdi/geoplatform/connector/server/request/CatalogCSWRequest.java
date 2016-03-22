@@ -39,6 +39,7 @@ import org.apache.http.HttpEntity;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.geosdi.geoplatform.connector.jaxb.repository.CSWConnectorJAXBContext;
+import org.geosdi.geoplatform.connector.jaxb.repository.JAXBContextConnectorRepository;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.jaxb.GPBaseJAXBContext;
@@ -46,8 +47,6 @@ import org.geosdi.geoplatform.jaxb.GPBaseJAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.StringWriter;
-import java.io.UnsupportedEncodingException;
-import org.geosdi.geoplatform.connector.jaxb.repository.JAXBContextConnectorRepository;
 
 /**
  *
@@ -70,9 +69,7 @@ public abstract class CatalogCSWRequest<T> extends GPPostConnectorRequest<T> {
     }
 
     @Override
-    protected HttpEntity preparePostEntity()
-            throws IllegalParameterFault, Exception, UnsupportedEncodingException {
-
+    protected HttpEntity preparePostEntity() throws Exception {
         Marshaller marshaller = getMarshaller();
 
         Object request = this.createRequest();

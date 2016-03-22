@@ -18,6 +18,7 @@
     <modules>
         <module>geoplatform-mongodb</module>
         <module>geoplatform-elastic-search</module>
+        <module>geoplatform-rest-security</module>
     </modules>
 
 </project>

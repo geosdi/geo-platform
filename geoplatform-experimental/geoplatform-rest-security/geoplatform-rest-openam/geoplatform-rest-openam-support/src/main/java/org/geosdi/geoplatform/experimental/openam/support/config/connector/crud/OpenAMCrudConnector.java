@@ -62,7 +62,6 @@ public abstract class OpenAMCrudConnector extends OpenAMAuthorizedConnector {
         logger.debug("::::::::::::::::::::::::::::::AUTHENTICATE_FOR_CREATION_USER : {}\n", openAMAuthenticate);
 
         String openAMUserAsString = this.openAMReader.writeValueAsString(openAMUser);
-
         logger.debug("::::::::::::::::::::::::::OPENAM_USER_AS_STRING : {}\n", openAMUserAsString);
 
         HttpPost httpPost = new HttpPost(createUserURI);
@@ -79,16 +78,7 @@ public abstract class OpenAMCrudConnector extends OpenAMAuthorizedConnector {
             throw new IllegalStateException("OpenAMCreateUser Error Code : "
                     + response.getStatusLine().getStatusCode());
         }
-
-//        OpenAMGroup openAMGroup = new OpenAMGroup();
-//        openAMGroup.setGroupName("CERT");
-//        openAMGroup.setUniqueMember(openAMCreateUserResponse.getDn());
-//
-//        logger.debug("::::::::::::::::::::::::::::::UPDATE_GROUP_RESPONSE : {}\n",
-//                this.updateGroupAddingUser(openAMAuthenticate.getTokenId(), openAMGroup));
-
         this.logout(openAMAuthenticate.getTokenId());
-
         return this.openAMReader.readValue(response.getEntity().getContent(), OpenAMUserResponse.class);
     }
 
@@ -216,7 +206,6 @@ public abstract class OpenAMCrudConnector extends OpenAMAuthorizedConnector {
         }
 
         super.logout(openAMAuthenticate.getTokenId());
-
         return this.openAMReader.readValue(response.getEntity().getContent(), OpenAMGroupResponse.class);
     }
 }

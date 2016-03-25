@@ -5,6 +5,8 @@ import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 
+import java.util.Arrays;
+
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
@@ -27,4 +29,11 @@ public class BooleanMultiMatchSearch extends  IBooleanSearch.AbstractBooleanSear
      */
     @Override
     public QueryBuilder buildQuery(){ return QueryBuilders.multiMatchQuery(value, listaField).operator(this.operator); }
+
+    @Override
+    public String toString() {
+        return "BooleanMultiMatchSearch{" +
+                "listaField=" + Arrays.toString(listaField) +
+                "} " + super.toString();
+    }
 }

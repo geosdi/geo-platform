@@ -385,20 +385,14 @@ public interface GPElasticSearchDAO<D extends Document> extends ElasticSearchDAO
      *
      */
     @Immutable
-    class DateRangeSortablePage extends QueriableSortablePage implements IBooleanSearch {
+    class DateRangeSortablePage extends QueriableSortablePage {
 
         private final String dateField;
         private final DateTime dateFrom;
         private final DateTime dateTo;
-        private BooleanQueryType type;
 
         public DateRangeSortablePage(String theDateField, DateTime theDateFrom, DateTime theDateTo) {
             this(null, null, null, theDateField, theDateFrom, theDateTo);
-        }
-
-        public DateRangeSortablePage(String theDateField, DateTime theDateFrom, DateTime theDateTo, BooleanQueryType type) {
-            this(null, null, null, theDateField, theDateFrom, theDateTo);
-            this.type = type;
         }
 
         public DateRangeSortablePage(String theDateField, DateTime theDateFrom, DateTime theDateTo,
@@ -440,13 +434,6 @@ public interface GPElasticSearchDAO<D extends Document> extends ElasticSearchDAO
             return dateTo;
         }
 
-        /**
-         * @return {@link BooleanQueryType}
-         */
-        public BooleanQueryType getType() {
-            return this.type;
-        }
-
         private Boolean canBuildPage() {
             return (((this.dateField != null) && !(this.dateField.isEmpty())) && (this.dateFrom != null)
                     && (this.dateTo != null));
@@ -465,13 +452,6 @@ public interface GPElasticSearchDAO<D extends Document> extends ElasticSearchDAO
         @Override
         public <Builder extends SearchRequestBuilder> Builder buildPage(Builder builder) throws Exception {
             return (canBuildPage() ? internalBuildPage(super.buildPage(builder)) : super.buildPage(builder));
-        }
-
-        /**
-         * @return {@link QueryBuilder}
-         */
-        public QueryBuilder buildQuery() {
-            return QueryBuilders.rangeQuery(dateField).gte(dateFrom).lte(dateTo);
         }
 
         @Override

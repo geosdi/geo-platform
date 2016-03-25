@@ -1,4 +1,4 @@
-package org.geosdi.geoplatform.experimental.el.dao.booleansearch;
+package org.geosdi.geoplatform.experimental.el.search.bool;
 
 import net.jcip.annotations.Immutable;
 import org.elasticsearch.index.query.QueryBuilder;
@@ -11,8 +11,8 @@ import org.elasticsearch.index.query.QueryBuilders;
 @Immutable
 class BooleanFieldExistsSearch extends IBooleanSearch.AbstractBooleanSearch {
 
-    public BooleanFieldExistsSearch(String theField) {
-        this.field = theField;
+    public BooleanFieldExistsSearch(String theField, BooleanQueryType theType) {
+        super(theField, theType);
     }
 
     /**
@@ -22,5 +22,4 @@ class BooleanFieldExistsSearch extends IBooleanSearch.AbstractBooleanSearch {
     public QueryBuilder buildQuery() {
         return QueryBuilders.existsQuery(field);
     }
-
 }

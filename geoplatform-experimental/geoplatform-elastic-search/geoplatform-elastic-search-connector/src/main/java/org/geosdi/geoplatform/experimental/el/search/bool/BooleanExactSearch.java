@@ -1,4 +1,4 @@
-package org.geosdi.geoplatform.experimental.el.dao.booleansearch;
+package org.geosdi.geoplatform.experimental.el.search.bool;
 
 import net.jcip.annotations.Immutable;
 import org.elasticsearch.index.query.MatchQueryBuilder;
@@ -10,22 +10,18 @@ import org.elasticsearch.index.query.QueryBuilders;
  * @email vito.salvia@gmail.com
  */
 @Immutable
-public class BooleanExactSearch extends  IBooleanSearch.AbstractBooleanSearch{
+public class BooleanExactSearch extends IBooleanSearch.AbstractBooleanSearch {
 
-    public BooleanExactSearch(String theField, String theValue, BooleanQueryType theType,MatchQueryBuilder.Operator theOperator) {
-        this.value = theValue;
-        this.field = theField;
-        this.type = theType;
-        this.operator = theOperator;
+    public BooleanExactSearch(String theField, String theValue, BooleanQueryType theType,
+            MatchQueryBuilder.Operator theOperator) {
+        super(theValue, theField, theType, theOperator);
     }
 
     /**
-     *
      * @return {@link QueryBuilder}
      */
     @Override
-    public QueryBuilder buildQuery(){
+    public QueryBuilder buildQuery() {
         return QueryBuilders.matchQuery(field, value).operator(operator);
     }
-
 }

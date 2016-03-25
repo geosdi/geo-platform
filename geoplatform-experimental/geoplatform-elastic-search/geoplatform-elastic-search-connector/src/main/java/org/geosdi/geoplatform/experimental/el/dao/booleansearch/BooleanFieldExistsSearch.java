@@ -9,17 +9,18 @@ import org.elasticsearch.index.query.QueryBuilders;
  * @email vito.salvia@gmail.com
  */
 @Immutable
-class BooleanFieldExistsSearch extends  IBooleanSearch.AbstractBooleanSearch{
+class BooleanFieldExistsSearch extends IBooleanSearch.AbstractBooleanSearch {
 
     public BooleanFieldExistsSearch(String theField) {
         this.field = theField;
     }
 
     /**
-     *
      * @return {@link QueryBuilder}
      */
     @Override
-    public QueryBuilder buildQuery(){ return QueryBuilders.existsQuery(field); }
+    public QueryBuilder buildQuery() {
+        return QueryBuilders.existsQuery(field);
+    }
 
 }

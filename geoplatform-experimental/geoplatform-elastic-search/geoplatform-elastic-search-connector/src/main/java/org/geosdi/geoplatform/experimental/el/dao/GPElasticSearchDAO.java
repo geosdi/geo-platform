@@ -37,16 +37,19 @@ package org.geosdi.geoplatform.experimental.el.dao;
 import net.jcip.annotations.Immutable;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.search.SearchRequestBuilder;
+import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.sort.SortOrder;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
 import org.geosdi.geoplatform.experimental.el.condition.PredicateCondition;
+import org.geosdi.geoplatform.experimental.el.dao.booleansearch.IBooleanSearch;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -382,14 +385,20 @@ public interface GPElasticSearchDAO<D extends Document> extends ElasticSearchDAO
      *
      */
     @Immutable
-    class DateRangeSortablePage extends QueriableSortablePage {
+    class DateRangeSortablePage extends QueriableSortablePage implements IBooleanSearch {
 
         private final String dateField;
         private final DateTime dateFrom;
         private final DateTime dateTo;
+        private BooleanQueryType type;
 
         public DateRangeSortablePage(String theDateField, DateTime theDateFrom, DateTime theDateTo) {
             this(null, null, null, theDateField, theDateFrom, theDateTo);
+        }
+
+        public DateRangeSortablePage(String theDateField, DateTime theDateFrom, DateTime theDateTo, BooleanQueryType type) {
+            this(null, null, null, theDateField, theDateFrom, theDateTo);
+            this.type = type;
         }
 
         public DateRangeSortablePage(String theDateField, DateTime theDateFrom, DateTime theDateTo,
@@ -431,6 +440,13 @@ public interface GPElasticSearchDAO<D extends Document> extends ElasticSearchDAO
             return dateTo;
         }
 
+        /**
+         * @return {@link BooleanQueryType}
+         */
+        public BooleanQueryType getType() {
+            return this.type;
+        }
+
         private Boolean canBuildPage() {
             return (((this.dateField != null) && !(this.dateField.isEmpty())) && (this.dateFrom != null)
                     && (this.dateTo != null));
@@ -451,6 +467,13 @@ public interface GPElasticSearchDAO<D extends Document> extends ElasticSearchDAO
             return (canBuildPage() ? internalBuildPage(super.buildPage(builder)) : super.buildPage(builder));
         }
 
+        /**
+         * @return {@link QueryBuilder}
+         */
+        public QueryBuilder buildQuery() {
+            return QueryBuilders.rangeQuery(dateField).gte(dateFrom).lte(dateTo);
+        }
+
         @Override
         public String toString() {
             return getClass().getSimpleName() + " {" +
@@ -465,4 +488,66 @@ public interface GPElasticSearchDAO<D extends Document> extends ElasticSearchDAO
                     '}';
         }
     }
+
+    @Immutable
+    class MultiFieldsSearch extends SortablePage {
+
+        private final IBooleanSearch[] queryList;
+        private BoolQueryBuilder queryBuilder = QueryBuilders.boolQuery();
+
+        public MultiFieldsSearch(IBooleanSearch... queryList) {
+            this(null, null, 0, 0, queryList);
+        }
+
+        public MultiFieldsSearch(int from, int size, IBooleanSearch... queryList) {
+            this(null, null, from, size, queryList);
+        }
+
+        public MultiFieldsSearch(String field, SortOrder sortOrder, int from,
+                int size, IBooleanSearch... queryList) {
+            super(field, sortOrder, from, size);
+            this.queryList = queryList;
+        }
+
+        private Boolean canBuildPage() {
+            return this.queryList != null && (this.queryList.length > 0);
+        }
+
+        private <Builder extends SearchRequestBuilder> Builder internalBuildPage(Builder builder)
+                throws Exception {
+            logger.trace("####################Called {} #internalBuildPage with parameters " +
+                            "queryList : {} \n\n",
+                    getClass().getSimpleName(), this.queryList);
+
+            Arrays.stream(this.queryList).forEach(q -> buildQuery(q));
+
+            logger.trace("####################Query Created:" +
+                            ": {} \n\n",
+                    this.queryBuilder.toString());
+
+            return (Builder) builder.setQuery(queryBuilder);
+        }
+
+        @Override
+        public <Builder extends SearchRequestBuilder> Builder buildPage(Builder builder) throws Exception {
+            return (canBuildPage() ? internalBuildPage(super.buildPage(builder)) : super.buildPage(builder));
+        }
+
+        protected void buildQuery(IBooleanSearch booleanQuery) {
+            switch (booleanQuery.getType()) {
+                case SHOULD:
+                    queryBuilder.should(booleanQuery.buildQuery());
+                    break;
+                case MUST:
+                    queryBuilder.must(booleanQuery.buildQuery());
+                    break;
+                case MUST_NOT:
+                    queryBuilder.mustNot(booleanQuery.buildQuery());
+                    break;
+            }
+
+        }
+
+    }
+
 }

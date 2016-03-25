@@ -495,20 +495,16 @@ public interface GPElasticSearchDAO<D extends Document> extends ElasticSearchDAO
          * @param booleanQuery
          */
         protected void buildQuery(IBooleanSearch booleanQuery) {
-            try {
-                switch (booleanQuery.getType()) {
-                    case SHOULD:
-                        queryBuilder.should(booleanQuery.buildQuery());
-                        break;
-                    case MUST:
-                        queryBuilder.must(booleanQuery.buildQuery());
-                        break;
-                    case MUST_NOT:
-                        queryBuilder.mustNot(booleanQuery.buildQuery());
-                        break;
-                }
-            } catch (Exception ex) {
-                ex.printStackTrace();
+            switch (booleanQuery.getType()) {
+                case SHOULD:
+                    queryBuilder.should(booleanQuery.buildQuery());
+                    break;
+                case MUST:
+                    queryBuilder.must(booleanQuery.buildQuery());
+                    break;
+                case MUST_NOT:
+                    queryBuilder.mustNot(booleanQuery.buildQuery());
+                    break;
             }
         }
     }

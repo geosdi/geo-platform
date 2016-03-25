@@ -1,4 +1,4 @@
-package org.geosdi.geoplatform.experimental.el.dao.booleansearch;
+package org.geosdi.geoplatform.experimental.el.search.bool;
 
 import net.jcip.annotations.Immutable;
 import org.elasticsearch.index.query.MatchQueryBuilder;
@@ -12,23 +12,23 @@ import java.util.Arrays;
  * @email vito.salvia@gmail.com
  */
 @Immutable
-public class BooleanMultiMatchSearch extends  IBooleanSearch.AbstractBooleanSearch{
+public class BooleanMultiMatchSearch extends IBooleanSearch.AbstractBooleanSearch {
 
-    private String[] listaField;
+    private final String[] listaField;
 
-    public BooleanMultiMatchSearch(String theValue, BooleanQueryType theType,MatchQueryBuilder.Operator theOperator,String[] listaField) {
-        this.value = theValue;
-        this.type = theType;
-        this.operator = theOperator;
+    public BooleanMultiMatchSearch(String theValue, BooleanQueryType theType,
+            MatchQueryBuilder.Operator theOperator, String[] listaField) {
+        super(theValue, theType, theOperator);
         this.listaField = listaField;
     }
 
     /**
-     *
      * @return {@link QueryBuilder}
      */
     @Override
-    public QueryBuilder buildQuery(){ return QueryBuilders.multiMatchQuery(value, listaField).operator(this.operator); }
+    public QueryBuilder buildQuery() {
+        return QueryBuilders.multiMatchQuery(value, listaField).operator(this.operator);
+    }
 
     @Override
     public String toString() {

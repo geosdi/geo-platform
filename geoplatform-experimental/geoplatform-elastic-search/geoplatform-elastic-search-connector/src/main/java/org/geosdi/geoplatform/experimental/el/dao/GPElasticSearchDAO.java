@@ -156,7 +156,6 @@ public interface GPElasticSearchDAO<D extends Document> extends ElasticSearchDAO
          * @throws Exception
          */
         Long count(QueryBuilder queryBuilder) throws Exception;
-
     }
 
     /**
@@ -188,7 +187,35 @@ public interface GPElasticSearchDAO<D extends Document> extends ElasticSearchDAO
          */
         <Builder extends SearchRequestBuilder> Builder buildPage(Builder builder)
                 throws Exception;
+    }
 
+    /**
+     *
+     */
+    interface MultiFieldPageBuilder extends PageBuilder {
+
+        /**
+         * @return {@link BoolQueryBuilder}
+         */
+        BoolQueryBuilder boolQueryBuilder();
+
+        /**
+         * @param search
+         * @param <Search>
+         */
+        default <Search extends IBooleanSearch> void buildQuery(Search search) {
+            switch (search.getType()) {
+                case SHOULD:
+                    boolQueryBuilder().should(search.buildQuery());
+                    break;
+                case MUST:
+                    boolQueryBuilder().must(search.buildQuery());
+                    break;
+                case MUST_NOT:
+                    boolQueryBuilder().mustNot(search.buildQuery());
+                    break;
+            }
+        }
     }
 
     /**
@@ -236,7 +263,6 @@ public interface GPElasticSearchDAO<D extends Document> extends ElasticSearchDAO
         @Override
         public <Builder extends SearchRequestBuilder> Builder buildPage(Builder builder)
                 throws Exception {
-
             return (canBuildPage() ? this.internalBuildPage(builder) : builder);
         }
 
@@ -385,26 +411,26 @@ public interface GPElasticSearchDAO<D extends Document> extends ElasticSearchDAO
      *
      */
     @Immutable
-    class DateRangeSortablePage extends QueriableSortablePage {
+    class DateRangeSortablePage extends SortablePage implements MultiFieldPageBuilder {
 
         private final IGPDateQuerySearch[] dateQuerySearch;
+        private BoolQueryBuilder queryBuilder = QueryBuilders.boolQuery();
 
         public DateRangeSortablePage(IGPDateQuerySearch... theDateQuerySearch) {
-            this(null, null, null, theDateQuerySearch);
+            this(null, null, theDateQuerySearch);
         }
 
         public DateRangeSortablePage(int from, int size, IGPDateQuerySearch... theDateQuerySearch) {
-            this(null, null, null, from, size, theDateQuerySearch);
+            this(null, null, from, size, theDateQuerySearch);
         }
 
-        public DateRangeSortablePage(String field, SortOrder sortOrder, QueryBuilder query,
+        public DateRangeSortablePage(String field, SortOrder sortOrder, IGPDateQuerySearch... theDateQuerySearch) {
+            this(field, sortOrder, 0, 0, theDateQuerySearch);
+        }
+
+        public DateRangeSortablePage(String field, SortOrder sortOrder, int from, int size,
                 IGPDateQuerySearch... theDateQuerySearch) {
-            this(field, sortOrder, query, 0, 0, theDateQuerySearch);
-        }
-
-        public DateRangeSortablePage(String field, SortOrder sortOrder, QueryBuilder query, int from,
-                int size, IGPDateQuerySearch... theDateQuerySearch) {
-            super(field, sortOrder, from, size, query);
+            super(field, sortOrder, from, size);
             this.dateQuerySearch = theDateQuerySearch;
         }
 
@@ -415,6 +441,14 @@ public interface GPElasticSearchDAO<D extends Document> extends ElasticSearchDAO
             return this.dateQuerySearch;
         }
 
+        /**
+         * @return {@link BoolQueryBuilder}
+         */
+        @Override
+        public BoolQueryBuilder boolQueryBuilder() {
+            return this.queryBuilder;
+        }
+
         private Boolean canBuildPage() {
             return ((this.dateQuerySearch != null) && (this.dateQuerySearch.length > 0));
         }
@@ -423,11 +457,11 @@ public interface GPElasticSearchDAO<D extends Document> extends ElasticSearchDAO
                 throws Exception {
             logger.trace("####################Called {} #internalBuildPage with parameters " +
                     "dateQuerySearch : {} \n\n", getClass().getSimpleName(), this.dateQuerySearch);
-
             Arrays.stream(this.dateQuerySearch)
                     .filter(q -> q != null)
-                    .forEach(q -> builder.setQuery(q.buildQuery()));
-            logger.trace("####################Query Created: \n{} \n\n", builder.toString());
+                    .forEach(q -> buildQuery(q));
+            builder.setQuery(queryBuilder);
+            logger.trace("####################{} Query Created: \n{} \n\n", getClass().getSimpleName(), builder);
             return builder;
         }
 
@@ -443,14 +477,13 @@ public interface GPElasticSearchDAO<D extends Document> extends ElasticSearchDAO
                     ", size = " + super.getSize() +
                     ", field = " + super.getField() +
                     ", sortOrder = " + super.getSortOrder() +
-                    ", query = " + super.getQuery() +
                     " ,dateQuerySearch = '" + dateQuerySearch + '\'' +
                     '}';
         }
     }
 
     @Immutable
-    class MultiFieldsSearch extends SortablePage {
+    class MultiFieldsSearch extends SortablePage implements MultiFieldPageBuilder {
 
         private final IBooleanSearch[] queryList;
         private BoolQueryBuilder queryBuilder = QueryBuilders.boolQuery();
@@ -476,11 +509,10 @@ public interface GPElasticSearchDAO<D extends Document> extends ElasticSearchDAO
         private <Builder extends SearchRequestBuilder> Builder internalBuildPage(Builder builder)
                 throws Exception {
             logger.trace("####################Called {} #internalBuildPage with parameters " +
-                            "queryList : {} \n\n",
-                    getClass().getSimpleName(), this.queryList);
-
+                    "queryList : {} \n\n", getClass().getSimpleName(), this.queryList);
             Arrays.stream(this.queryList).forEach(q -> buildQuery(q));
-            logger.trace("####################Query Created: \n{} \n\n", this.queryBuilder.toString());
+            logger.trace("####################{} - Create Query: \n{} \n\n", getClass().getSimpleName(),
+                    this.queryBuilder.toString());
             return (Builder) builder.setQuery(queryBuilder);
         }
 
@@ -490,20 +522,11 @@ public interface GPElasticSearchDAO<D extends Document> extends ElasticSearchDAO
         }
 
         /**
-         * @param booleanQuery
+         * @return {@link BoolQueryBuilder}
          */
-        protected void buildQuery(IBooleanSearch booleanQuery) {
-            switch (booleanQuery.getType()) {
-                case SHOULD:
-                    queryBuilder.should(booleanQuery.buildQuery());
-                    break;
-                case MUST:
-                    queryBuilder.must(booleanQuery.buildQuery());
-                    break;
-                case MUST_NOT:
-                    queryBuilder.mustNot(booleanQuery.buildQuery());
-                    break;
-            }
+        @Override
+        public BoolQueryBuilder boolQueryBuilder() {
+            return this.queryBuilder;
         }
     }
 }

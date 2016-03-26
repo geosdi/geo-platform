@@ -16,7 +16,7 @@ public class BooleanMultiMatchSearch extends IBooleanSearch.AbstractBooleanSearc
 
     private final String[] listaField;
 
-    public BooleanMultiMatchSearch(String theValue, BooleanQueryType theType,
+    public BooleanMultiMatchSearch(Object theValue, BooleanQueryType theType,
             MatchQueryBuilder.Operator theOperator, String[] listaField) {
         super(theValue, theType, theOperator);
         this.listaField = listaField;

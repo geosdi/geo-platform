@@ -12,7 +12,7 @@ import org.elasticsearch.index.query.QueryBuilders;
 @Immutable
 public class BooleanExactSearch extends IBooleanSearch.AbstractBooleanSearch {
 
-    public BooleanExactSearch(String theField, String theValue, BooleanQueryType theType,
+    public BooleanExactSearch(String theField, Object theValue, BooleanQueryType theType,
             MatchQueryBuilder.Operator theOperator) {
         super(theValue, theField, theType, theOperator);
     }

@@ -4,14 +4,14 @@ import com.google.common.base.Preconditions;
 import jdk.nashorn.internal.ir.annotations.Immutable;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
-import org.geosdi.geoplatform.experimental.el.search.IGPQuerySearch;
+import org.geosdi.geoplatform.experimental.el.search.bool.IBooleanSearch;
 import org.joda.time.DateTime;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGPDateQuerySearch extends IGPQuerySearch {
+public interface IGPDateQuerySearch extends IBooleanSearch {
 
     /**
      * @return {@link DateTime}
@@ -27,19 +27,17 @@ public interface IGPDateQuerySearch extends IGPQuerySearch {
      *
      */
     @Immutable
-    class GPDateQuerySearch implements IGPDateQuerySearch {
+    class GPDateQuerySearch extends IBooleanSearch.AbstractBooleanSearch implements IGPDateQuerySearch {
 
-        private final String field;
         private final DateTime dateTo;
         private final DateTime dateFrom;
 
-        public GPDateQuerySearch(String theField, DateTime theDateTo, DateTime theDateFrom) {
-            Preconditions.checkArgument((theField != null) && !(theField.isEmpty()), "The Parameter Field " +
-                    "must not be null or an Empty String.");
+        public GPDateQuerySearch(String theField, BooleanQueryType theBooleanQueryType,
+                DateTime theDateFrom, DateTime theDateTo) {
+            super(theField, theBooleanQueryType);
             Preconditions.checkArgument((theDateTo != null), "The Parameter DateTo must not be null.");
             Preconditions.checkArgument((theDateFrom != null), "The Parameter DateFrom must not be null.");
-            Preconditions.checkArgument((theDateFrom.isAfter(theDateTo)), "The Parameter DateFrom must be after DateTo.");
-            this.field = theField;
+            Preconditions.checkArgument((theDateFrom.isBefore(theDateTo)), "The Parameter DateFrom must be after DateTo.");
             this.dateTo = theDateTo;
             this.dateFrom = theDateFrom;
         }

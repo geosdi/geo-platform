@@ -12,7 +12,7 @@ import org.elasticsearch.index.query.QueryBuilders;
 @Immutable
 public class BooleanPrefixSearch extends IBooleanSearch.AbstractBooleanSearch {
 
-    public BooleanPrefixSearch(String theField, String theValue, BooleanQueryType theType,
+    public BooleanPrefixSearch(String theField, Object theValue, BooleanQueryType theType,
             MatchQueryBuilder.Operator theOperator) {
         super(theValue, theField, theType, theOperator);
     }

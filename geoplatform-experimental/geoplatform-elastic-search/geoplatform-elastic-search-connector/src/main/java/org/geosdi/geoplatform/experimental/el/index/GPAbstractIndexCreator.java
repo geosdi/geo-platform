@@ -125,20 +125,6 @@ public abstract class GPAbstractIndexCreator implements GPIndexCreator,
     }
 
     /**
-     * @return {@link String} The Index Name
-     */
-    protected final String getIndexName() {
-        return getIndexSettings().getIndexName();
-    }
-
-    /**
-     * @return {@link String} The Index Type
-     */
-    protected final String getIndexType() {
-        return getIndexSettings().getIndexType();
-    }
-
-    /**
      * <p>Generate the Correct Mapping.</p>
      *
      * @throws Exception

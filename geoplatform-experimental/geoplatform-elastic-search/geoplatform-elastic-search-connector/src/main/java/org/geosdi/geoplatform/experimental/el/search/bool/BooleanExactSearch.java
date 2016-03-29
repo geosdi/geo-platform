@@ -22,6 +22,6 @@ public class BooleanExactSearch extends IBooleanSearch.AbstractBooleanSearch {
      */
     @Override
     public QueryBuilder buildQuery() {
-        return QueryBuilders.matchQuery(field, value).operator(operator);
+        return QueryBuilders.matchQuery(field, value).cutoffFrequency(0.001f).operator(operator);
     }
 }

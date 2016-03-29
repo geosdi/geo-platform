@@ -46,19 +46,14 @@ import org.elasticsearch.action.get.MultiGetResponse;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
-import org.elasticsearch.client.Client;
 import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.rest.RestStatus;
-import org.geosdi.geoplatform.experimental.el.api.mapper.GPBaseMapper;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
 import org.geosdi.geoplatform.experimental.el.condition.PredicateCondition;
-import org.geosdi.geoplatform.experimental.el.configurator.GPIndexConfigurator;
-import org.geosdi.geoplatform.experimental.el.dao.GPElasticSearchDAO.GPElasticSearchBaseDAO;
-import org.geosdi.geoplatform.experimental.el.index.GPIndexCreator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -72,13 +67,7 @@ import static java.lang.Boolean.TRUE;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class AbstractElasticSearchDAO<D extends Document> implements GPElasticSearchBaseDAO<D> {
-
-    protected final Logger logger = LoggerFactory.getLogger(this.getClass());
-    //
-    private GPIndexCreator indexCreator;
-    protected GPBaseMapper<D> mapper;
-    protected Client elastichSearchClient;
+public abstract class AbstractElasticSearchDAO<D extends Document> extends GPBaseElasticSearchDAO<D> {
 
     @Override
     public D persist(D document) throws Exception {
@@ -151,6 +140,24 @@ public abstract class AbstractElasticSearchDAO<D extends Document> implements GP
             throw new IllegalStateException(bulkResponse.buildFailureMessage());
         }
         return bulkResponse;
+    }
+
+    /**
+     * <p>Persist all Files json in a Directory. This method in not recursive for the Directory.</p>
+     *
+     * @param direrctory
+     * @return {@link}
+     * @throws Exception
+     */
+    @Override
+    public BulkResponse persist(Path direrctory) throws Exception {
+        Preconditions.checkArgument((direrctory != null) && (direrctory.toFile().isDirectory()),
+                "The Parameter Directory must not be null and must be a Directory.");
+        return this.persist((List<D>) Files.list(direrctory)
+                .filter(path -> path.toFile().getName().endsWith(".json"))
+                .map(path -> super.readDocument(path))
+                .filter(d -> d != null)
+                .collect(Collectors.toList()));
     }
 
     @Override
@@ -229,101 +236,5 @@ public abstract class AbstractElasticSearchDAO<D extends Document> implements GP
                 break;
             }
         }
-    }
-
-    /**
-     * @param document
-     * @return {@link String}
-     * @throws Exception
-     */
-    @Override
-    public String writeDocumentAsString(D document) throws Exception {
-        Preconditions.checkNotNull(document, "The Document must not be null.");
-        return this.mapper.writeAsString(document);
-    }
-
-    /**
-     * @param documentAsString
-     * @return {@link D}
-     * @throws Exception
-     */
-    @Override
-    public D readDocument(String documentAsString) throws Exception {
-        Preconditions.checkNotNull(documentAsString, "The String to Wrap must not be null");
-        return mapper.read(documentAsString);
-    }
-
-    /**
-     * @return The Index Name
-     */
-    @Override
-    public final String getIndexName() {
-        return this.indexCreator.getIndexSettings().getIndexName();
-    }
-
-    /**
-     * @return The Index Type
-     */
-    @Override
-    public final String getIndexType() {
-        return this.indexCreator.getIndexSettings().getIndexType();
-    }
-
-    /**
-     * <p>
-     * Remember Index Creation is called by
-     * {@link GPIndexConfigurator#configure()}
-     * </p>
-     *
-     * @throws Exception
-     */
-    protected final void createIndex() throws Exception {
-        this.indexCreator.createIndex();
-    }
-
-    /**
-     * <p>
-     * Dangerous. If called all Data will be dropped
-     * </p>
-     *
-     * @throws Exception
-     */
-    protected final void deleteIndex() throws Exception {
-        this.indexCreator.deleteIndex();
-    }
-
-    /**
-     * @return {@link Boolean}
-     * @throws Exception
-     */
-    @Override
-    public Boolean existIndex() throws Exception {
-        return this.indexCreator.existIndex();
-    }
-
-    /**
-     * @param theIndexCreator
-     */
-    @Override
-    public <IC extends GPIndexCreator> void setIndexCreator(IC theIndexCreator) {
-        this.indexCreator = theIndexCreator;
-    }
-
-    /**
-     * @return {@link Client}
-     * @throws Exception
-     */
-    @Override
-    public final Client client() throws Exception {
-        Preconditions.checkNotNull(this.elastichSearchClient, "The Client is null. Check your Configuration.");
-        return this.elastichSearchClient;
-    }
-
-    @Override
-    public final void afterPropertiesSet() throws Exception {
-        Preconditions.checkNotNull(this.mapper, "The Mapper must not be null.");
-        Preconditions.checkNotNull(this.indexCreator, "The Index Creator must " + "not be null.");
-        this.elastichSearchClient = this.indexCreator.client();
-        Preconditions.checkNotNull(this.elastichSearchClient, "The ElasticSearch Client must " + "not be null.");
     }
 }

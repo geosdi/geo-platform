@@ -9,6 +9,8 @@ import org.geosdi.geoplatform.experimental.el.api.mapper.GPBaseMapper;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
 import org.geosdi.geoplatform.experimental.el.index.GPIndexCreator;
 
+import java.nio.file.Path;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -62,6 +64,13 @@ public interface ElasticSearchDAO<D extends Document> {
         }
         return null;
     }
+
+    /**
+     * @param thePath
+     * @return {}
+     * @throws Exception
+     */
+    D readDocument(Path thePath);
 
     /**
      * @param response

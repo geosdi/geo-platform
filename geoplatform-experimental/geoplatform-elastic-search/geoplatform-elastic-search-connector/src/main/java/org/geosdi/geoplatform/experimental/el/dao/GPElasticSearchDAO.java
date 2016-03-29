@@ -49,6 +49,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 
+import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
 
@@ -75,6 +76,15 @@ public interface GPElasticSearchDAO<D extends Document> extends ElasticSearchDAO
      * @throws Exception
      */
     BulkResponse persist(Iterable<D> documents) throws Exception;
+
+    /**
+     * <p>Persist all Files json in a Directory. This method in not recursive for the Directory.</p>
+     *
+     * @param direrctory
+     * @return {@link}
+     * @throws Exception
+     */
+    BulkResponse persist(Path direrctory) throws Exception;
 
     /**
      * @param document

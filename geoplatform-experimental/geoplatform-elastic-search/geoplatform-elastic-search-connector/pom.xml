@@ -19,6 +19,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <elasticsearch-version>2.2.1</elasticsearch-version>
+        <spatial4j.version>0.6</spatial4j.version>
     </properties>
 
     <dependencies>
@@ -101,6 +102,26 @@
             <groupId>org.elasticsearch</groupId>
             <artifactId>elasticsearch</artifactId>
             <version>${elasticsearch-version}</version>
+        </dependency>
+
+        <!-- =========================================================== -->
+        <!-- ====================== SPATIAL SUPPORT ==================== -->
+        <!-- =========================================================== -->
+        <dependency>
+            <groupId>org.locationtech.spatial4j</groupId>
+            <artifactId>spatial4j</artifactId>
+            <version>${spatial4j.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.vividsolutions</groupId>
+            <artifactId>jts</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>xerces</groupId>
+                    <artifactId>xercesImpl</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- =========================================================== -->

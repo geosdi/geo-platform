@@ -35,15 +35,16 @@
  */
 package org.geosdi.geoplatform.support.mail.spring.session;
 
-import java.util.Properties;
+import org.geosdi.geoplatform.support.mail.configuration.properties.JavaMailProp;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Required;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
 import javax.mail.Authenticator;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
-import org.geosdi.geoplatform.support.mail.configuration.properties.JavaMailProp;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import java.util.Properties;
 
 /**
  *
@@ -54,7 +55,7 @@ import org.springframework.context.annotation.Configuration;
 class GPMailSessionConfig {
 
     @Bean(name = "gpMailSpringSession")
-    @Autowired
+    @Required
     public static Session gpMailSpringSession(
             @Qualifier(value = "gpJavaMailProperties") final Properties gpJavaMailProperties) {
         return Session.getInstance(gpJavaMailProperties, new Authenticator() {

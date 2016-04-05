@@ -43,14 +43,6 @@ public interface IGPDateQuerySearch extends IBooleanSearch {
         }
 
         /**
-         * @return {@link String}
-         */
-        @Override
-        public String getField() {
-            return this.field;
-        }
-
-        /**
          * @return {@link DateTime}
          */
         @Override

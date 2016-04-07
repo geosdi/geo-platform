@@ -44,6 +44,7 @@ public enum GPRestProviderType {
 
     JACKSON,
     JACKSON_JODA_TIME,
+    JACKSON_JODA_TIME_WITHOUT_ROOT,
     JETTYSON,
     FASTINFOSET;
 }

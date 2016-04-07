@@ -17,6 +17,14 @@ public interface IOpenAMAuthorizedConnector extends DisposableBean {
     IOpenAMAuthenticate authenticate() throws Exception;
 
     /**
+     * @param userName
+     * @param password
+     * @return {@link IOpenAMAuthenticate}
+     * @throws Exception
+     */
+    IOpenAMAuthenticate authenticate(String userName, String password) throws Exception;
+
+    /**
      * @param tokenId
      * @return {@link IOpenAMLogout}
      * @throws Exception

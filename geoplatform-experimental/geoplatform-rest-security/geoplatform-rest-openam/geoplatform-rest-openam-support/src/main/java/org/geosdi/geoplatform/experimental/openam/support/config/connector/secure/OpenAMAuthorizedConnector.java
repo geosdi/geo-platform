@@ -96,6 +96,41 @@ public abstract class OpenAMAuthorizedConnector implements BaseOpenAMConnector {
     }
 
     /**
+     * @param userName
+     * @param password
+     * @return {@link IOpenAMAuthenticate}
+     * @throws Exception
+     */
+    @Override
+    public IOpenAMAuthenticate authenticate(String userName, String password) throws Exception {
+        Preconditions.checkArgument((userName != null) && !(userName.isEmpty()), "The Parameter UserName must " +
+                "not be null or an Empty String.");
+        Preconditions.checkArgument((password != null) && !(password.isEmpty()), "The Parameter Password must " +
+                "not be null or an Empty String.");
+
+        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@TRYING TO AUTHENTICATE WITH " + "OPENAM_CONNECTOR_SETTINGS : {}\n",
+                this.openAMConnectorSettings);
+        IOpenAMAuthenticateRequest authenticateRequest = this.openAMRequestMediator.getRequest(AUTHENTICATE);
+        URI authenticateURI = this.buildURI(openAMConnectorSettings, authenticateRequest).build();
+
+        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@OPENAM_AUTHENTICATE_TOKEN_CONNECTOR_URI : {}\n",
+                URLDecoder.decode(authenticateURI.toString(), "UTF-8"));
+
+        HttpPost httpPost = new HttpPost(authenticateURI);
+        httpPost.addHeader("Content-Type", "application/json");
+        httpPost.addHeader(authenticateRequest.getUserNameKey(), userName);
+        httpPost.addHeader(authenticateRequest.getPasswordKey(), password);
+
+        CloseableHttpResponse response = this.httpClient.execute(httpPost);
+
+        if (response.getStatusLine().getStatusCode() != 200) {
+            throw new IllegalStateException("OpenAMValidateToken Error Code : "
+                    + response.getStatusLine().getStatusCode());
+        }
+        return this.openAMReader.readValue(response.getEntity().getContent(), OpenAMAuthenticate.class);
+    }
+
+    /**
      * @param tokenId
      * @return {@link IOpenAMLogout}
      * @throws Exception

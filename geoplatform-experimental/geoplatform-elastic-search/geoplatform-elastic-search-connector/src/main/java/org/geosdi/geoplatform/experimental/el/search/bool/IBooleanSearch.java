@@ -21,11 +21,6 @@ public interface IBooleanSearch extends IGPQuerySearch {
     Object getValue();
 
     /**
-     * @return {@link org.elasticsearch.index.query.MatchQueryBuilder.Operator}
-     */
-    MatchQueryBuilder.Operator getOperator();
-
-    /**
      *
      */
     enum BooleanQueryType {
@@ -53,6 +48,16 @@ public interface IBooleanSearch extends IGPQuerySearch {
                     "The Parameter Field must not be null or an Empty String.");
             Preconditions.checkArgument((theType != null), "The Parameter Type must not be null.");
             this.field = theField;
+            this.type = theType;
+        }
+
+        public AbstractBooleanSearch(String theField, Object theValue, BooleanQueryType theType) {
+            Preconditions.checkArgument(((theField != null) && !(theField.isEmpty())),
+                    "The Parameter Field must not be null or an Empty String.");
+            Preconditions.checkArgument(((theValue != null)), "The Parameter Value must not be null.");
+            Preconditions.checkArgument((theType != null), "The Parameter Type must not be null.");
+            this.field = theField;
+            this.value = theValue;
             this.type = theType;
         }
 
@@ -102,15 +107,6 @@ public interface IBooleanSearch extends IGPQuerySearch {
         public Object getValue() {
             return this.value;
         }
-
-        /**
-         * @return {@link MatchQueryBuilder.Operator}
-         */
-        @Override
-        public MatchQueryBuilder.Operator getOperator() {
-            return this.operator;
-        }
-
 
         @Override
         public String toString() {

@@ -106,10 +106,32 @@ public interface GPElasticSearchDAO<D extends Document> extends ElasticSearchDAO
     /**
      * @param <P>
      * @param page
-     * @return {@link List<D>}
+     * @return {@link IPageResult<D>}
      * @throws Exception
      */
     <P extends Page> IPageResult<D> find(P page) throws Exception;
+
+    /**
+     * @param page
+     * @param includeFields
+     * @param excludeFields
+     * @param <P>
+     * @return {@link IPageResult<D>}
+     * @throws Exception
+     */
+    <P extends Page> IPageResult<D> find(P page, String[] includeFields, String[] excludeFields)
+            throws Exception;
+
+    /**
+     * @param page
+     * @param includeField
+     * @param excludeField
+     * @param <P>
+     * @return {@link IPageResult<D>}
+     * @throws Exception
+     */
+    <P extends Page> IPageResult<D> find(P page, String includeField, String excludeField)
+            throws Exception;
 
     /**
      * @param ids

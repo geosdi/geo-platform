@@ -177,6 +177,58 @@ public abstract class AbstractElasticSearchDAO<D extends Document> extends GPBas
                 .filter(s -> s != null).collect(Collectors.toList()));
     }
 
+    /**
+     * @param page
+     * @param includeFields
+     * @param excludeFields
+     * @return {@link IPageResult <D>}
+     * @throws Exception
+     */
+    @Override
+    public <P extends Page> IPageResult<D> find(P page, String[] includeFields, String[] excludeFields)
+            throws Exception {
+        Preconditions.checkArgument((page != null), "Page must not be null.");
+        SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient
+                .prepareSearch(getIndexName()).setTypes(getIndexType()));
+        builder.setFetchSource(includeFields, excludeFields);
+        logger.trace("#########################Builder : {}\n\n", builder.toString());
+        SearchResponse searchResponse = builder.get();
+        if (searchResponse.status() != RestStatus.OK) {
+            throw new IllegalStateException("Problem in Search : " + searchResponse.status());
+        }
+        Long total = searchResponse.getHits().getTotalHits();
+        logger.debug("###################TOTAL HITS FOUND : {} .\n\n", total);
+        return new PageResult<D>(total, Stream.of(searchResponse.getHits().hits())
+                .map(searchHit -> this.readDocument(searchHit))
+                .filter(s -> s != null).collect(Collectors.toList()));
+    }
+
+    /**
+     * @param page
+     * @param includeField
+     * @param excludeField
+     * @return {@link IPageResult <D>}
+     * @throws Exception
+     */
+    @Override
+    public <P extends Page> IPageResult<D> find(P page, String includeField, String excludeField)
+            throws Exception {
+        Preconditions.checkArgument((page != null), "Page must not be null.");
+        SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient
+                .prepareSearch(getIndexName()).setTypes(getIndexType()));
+        builder.setFetchSource(includeField, excludeField);
+        logger.trace("#########################Builder : {}\n\n", builder.toString());
+        SearchResponse searchResponse = builder.get();
+        if (searchResponse.status() != RestStatus.OK) {
+            throw new IllegalStateException("Problem in Search : " + searchResponse.status());
+        }
+        Long total = searchResponse.getHits().getTotalHits();
+        logger.debug("###################TOTAL HITS FOUND : {} .\n\n", total);
+        return new PageResult<D>(total, Stream.of(searchResponse.getHits().hits())
+                .map(searchHit -> this.readDocument(searchHit))
+                .filter(s -> s != null).collect(Collectors.toList()));
+    }
+
     @Override
     public void delete(String id) {
         Preconditions.checkArgument(((id != null) && !(id.isEmpty())), "The ID must not be null or an Empty String");

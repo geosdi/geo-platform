@@ -175,7 +175,7 @@ public abstract class AbstractElasticSearchDAO<D extends Document> extends Pagea
         Preconditions.checkArgument((id != null) && !(id.isEmpty()),
                 "The ElasticSearch ID must not be null or an Empty String");
         GetResponse existResponse = elastichSearchClient.prepareGet(getIndexName(), getIndexType(), id).get();
-        return (existResponse.isExists()) ? this.mapper.read(existResponse.getSourceAsString()) : null;
+        return (existResponse.isExists()) ? readGetResponse(existResponse) : null;
     }
 
     @Override

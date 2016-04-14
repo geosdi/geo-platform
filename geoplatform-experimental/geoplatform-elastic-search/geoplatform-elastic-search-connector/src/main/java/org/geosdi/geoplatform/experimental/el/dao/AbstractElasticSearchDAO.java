@@ -44,11 +44,9 @@ import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.get.MultiGetResponse;
 import org.elasticsearch.action.index.IndexResponse;
-import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.index.query.QueryBuilder;
-import org.elasticsearch.rest.RestStatus;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
 import org.geosdi.geoplatform.experimental.el.condition.PredicateCondition;
 
@@ -67,7 +65,7 @@ import static java.lang.Boolean.TRUE;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class AbstractElasticSearchDAO<D extends Document> extends GPBaseElasticSearchDAO<D> {
+public abstract class AbstractElasticSearchDAO<D extends Document> extends PageableElasticSearchDAO<D> {
 
     @Override
     public D persist(D document) throws Exception {
@@ -158,75 +156,6 @@ public abstract class AbstractElasticSearchDAO<D extends Document> extends GPBas
                 .map(path -> super.readDocument(path))
                 .filter(d -> d != null)
                 .collect(Collectors.toList()));
-    }
-
-    @Override
-    public <P extends Page> IPageResult<D> find(P page) throws Exception {
-        Preconditions.checkArgument((page != null), "Page must not be null.");
-        SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient
-                .prepareSearch(getIndexName()).setTypes(getIndexType()));
-        logger.trace("#########################Builder : {}\n\n", builder.toString());
-        SearchResponse searchResponse = builder.get();
-        if (searchResponse.status() != RestStatus.OK) {
-            throw new IllegalStateException("Problem in Search : " + searchResponse.status());
-        }
-        Long total = searchResponse.getHits().getTotalHits();
-        logger.debug("###################TOTAL HITS FOUND : {} .\n\n", total);
-        return new PageResult<D>(total, Stream.of(searchResponse.getHits().hits())
-                .map(searchHit -> this.readDocument(searchHit))
-                .filter(s -> s != null).collect(Collectors.toList()));
-    }
-
-    /**
-     * @param page
-     * @param includeFields
-     * @param excludeFields
-     * @return {@link IPageResult <D>}
-     * @throws Exception
-     */
-    @Override
-    public <P extends Page> IPageResult<D> find(P page, String[] includeFields, String[] excludeFields)
-            throws Exception {
-        Preconditions.checkArgument((page != null), "Page must not be null.");
-        SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient
-                .prepareSearch(getIndexName()).setTypes(getIndexType()));
-        builder.setFetchSource(includeFields, excludeFields);
-        logger.trace("#########################Builder : {}\n\n", builder.toString());
-        SearchResponse searchResponse = builder.get();
-        if (searchResponse.status() != RestStatus.OK) {
-            throw new IllegalStateException("Problem in Search : " + searchResponse.status());
-        }
-        Long total = searchResponse.getHits().getTotalHits();
-        logger.debug("###################TOTAL HITS FOUND : {} .\n\n", total);
-        return new PageResult<D>(total, Stream.of(searchResponse.getHits().hits())
-                .map(searchHit -> this.readDocument(searchHit))
-                .filter(s -> s != null).collect(Collectors.toList()));
-    }
-
-    /**
-     * @param page
-     * @param includeField
-     * @param excludeField
-     * @return {@link IPageResult <D>}
-     * @throws Exception
-     */
-    @Override
-    public <P extends Page> IPageResult<D> find(P page, String includeField, String excludeField)
-            throws Exception {
-        Preconditions.checkArgument((page != null), "Page must not be null.");
-        SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient
-                .prepareSearch(getIndexName()).setTypes(getIndexType()));
-        builder.setFetchSource(includeField, excludeField);
-        logger.trace("#########################Builder : {}\n\n", builder.toString());
-        SearchResponse searchResponse = builder.get();
-        if (searchResponse.status() != RestStatus.OK) {
-            throw new IllegalStateException("Problem in Search : " + searchResponse.status());
-        }
-        Long total = searchResponse.getHits().getTotalHits();
-        logger.debug("###################TOTAL HITS FOUND : {} .\n\n", total);
-        return new PageResult<D>(total, Stream.of(searchResponse.getHits().hits())
-                .map(searchHit -> this.readDocument(searchHit))
-                .filter(s -> s != null).collect(Collectors.toList()));
     }
 
     @Override

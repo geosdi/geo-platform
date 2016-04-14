@@ -45,7 +45,7 @@ import java.util.List;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Immutable
-public class PageResult<D extends Document> implements GPElasticSearchDAO.IPageResult<D> {
+public class PageResult<D extends Document> implements GPPageableElasticSearchDAO.IPageResult<D> {
 
     private final Long total;
     private final List<D> results;

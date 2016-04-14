@@ -15,7 +15,7 @@ import java.nio.file.Path;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface ElasticSearchDAO<D extends Document> {
+public interface ElasticSearchDAO<D extends Document> extends GPPageableElasticSearchDAO<D> {
 
     /**
      * @param <Mapper>

@@ -62,5 +62,6 @@
     <logger name="org.geosdi.geoplatform.core.dao.impl.GPFolderDAOImpl" level="info"/>
     <logger name="org.geosdi.geoplatform.core.dao.impl.GPLayerDAOImpl" level="info"/>
     <logger name="org.geosdi.geoplatform.core.dao.impl.GPServerDAOImpl" level="info"/>
+    <logger name="org.geosdi.geoplatform.services.GPWMSServiceImpl" level="debug"/>
 
 </configuration>

@@ -36,13 +36,6 @@
 package org.geosdi.geoplatform.services;
 
 import com.google.common.collect.Lists;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
 import org.geosdi.geoplatform.core.dao.GPServerDAO;
 import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPLayerInfo;
@@ -59,6 +52,14 @@ import org.geotools.data.wms.WebMapServer;
 import org.geotools.ows.ServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 public class GPWMSServiceImpl implements GPWMSService {
 
@@ -121,7 +122,7 @@ public class GPWMSServiceImpl implements GPWMSService {
         WMSCapabilities cap = null;
 
         String urlServerEdited = this.editServerUrl(serverUrl, token, authkey);
-        logger.debug("\nURL Server edited: {}", urlServerEdited);
+        logger.debug("####################URL Server edited: {}\n", urlServerEdited);
 
         try {
             serverURL = new URL(urlServerEdited);

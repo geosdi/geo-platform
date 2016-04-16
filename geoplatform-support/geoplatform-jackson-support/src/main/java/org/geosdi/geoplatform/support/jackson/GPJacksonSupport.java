@@ -44,6 +44,8 @@ import com.fasterxml.jackson.module.jaxb.JaxbAnnotationIntrospector;
 import org.geosdi.geoplatform.support.jackson.property.JacksonSupportConfigFeature;
 
 import java.text.DateFormat;
+import java.util.Locale;
+import java.util.TimeZone;
 import java.util.stream.Stream;
 
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
@@ -60,11 +62,17 @@ public class GPJacksonSupport implements JacksonSupport {
         this(defaultProp());
     }
 
+    /**
+     * @param format
+     */
     public GPJacksonSupport(DateFormat format) {
         this();
         this.mapper.setDateFormat(format);
     }
 
+    /**
+     * @param features
+     */
     public GPJacksonSupport(JacksonSupportConfigFeature... features) {
         mapper = new ObjectMapper();
         Stream.of(features).filter(f -> f != null).forEach(f -> f.configureMapper(mapper));
@@ -74,43 +82,83 @@ public class GPJacksonSupport implements JacksonSupport {
 
         mapper.setAnnotationIntrospector(new AnnotationIntrospectorPair(
                 primary, secondary));
-
-//        mapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ"));
     }
 
+    /**
+     * @param format
+     * @return {@link JacksonSupport}
+     */
     @Override
     public JacksonSupport setDateFormat(DateFormat format) {
         this.mapper.setDateFormat(format);
         return this;
     }
 
+    /**
+     * @return {@link ObjectMapper}
+     */
     @Override
     public final ObjectMapper getDefaultMapper() {
         return this.mapper;
     }
 
+    /**
+     * @param module
+     * @return {@link GPJacksonSupport}
+     */
     @Override
     public final GPJacksonSupport registerModule(Module module) {
         this.mapper.registerModule(module);
         return this;
     }
 
+    /**
+     * @return {@link String}
+     */
     @Override
     public String getProviderName() {
         return getClass().getSimpleName();
     }
 
+    /**
+     * @param feature
+     * @return {@link GPJacksonSupport}
+     */
     @Override
     public GPJacksonSupport configure(JacksonSupportConfigFeature feature) {
         feature.configureMapper(mapper);
         return this;
     }
 
+    /**
+     * @param features
+     * @return {@link GPJacksonSupport}
+     */
     @Override
     public GPJacksonSupport configure(JacksonSupportConfigFeature... features) {
         for (JacksonSupportConfigFeature feature : features) {
             feature.configureMapper(mapper);
         }
+        return this;
+    }
+
+    /**
+     * @param locale
+     * @return {@link GPJacksonSupport}
+     */
+    @Override
+    public GPJacksonSupport setLocale(Locale locale) {
+        this.mapper.setLocale(locale);
+        return this;
+    }
+
+    /**
+     * @param timeZone
+     * @return {@link GPJacksonSupport}
+     */
+    @Override
+    public GPJacksonSupport setTimeZone(TimeZone timeZone) {
+        this.mapper.setTimeZone(timeZone);
         return this;
     }
 

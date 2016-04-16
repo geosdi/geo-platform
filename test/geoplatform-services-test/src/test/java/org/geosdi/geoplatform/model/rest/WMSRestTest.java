@@ -35,10 +35,8 @@
  */
 package org.geosdi.geoplatform.model.rest;
 
-import java.text.ParseException;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.model.soap.ServiceWMSTest;
-import static org.geosdi.geoplatform.model.soap.ServiceWMSTest.serverUrlGeoSDI;
 import org.geosdi.geoplatform.request.RequestByID;
 import org.geosdi.geoplatform.response.ServerDTO;
 import org.junit.Assert;
@@ -48,6 +46,8 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.text.ParseException;
 
 /**
  *
@@ -80,4 +80,11 @@ public class WMSRestTest extends ServiceWMSTest {
                 serverDTO.getLayerList().size());
     }
 
+    @Test
+    public void testRestExternalGetCapabilities() throws Exception {
+        ServerDTO serverDTO = gpWMSClient.getCapabilities("http://sgi1.isprambiente.it/arcgis/services/servizi/" +
+                "geologia500k/MapServer/WMSServer?request=GetCapabilities&service=WMS", new RequestByID(),
+                null, null);
+        logger.info("###############################FOUND : {}\n", serverDTO);
+    }
 }

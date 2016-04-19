@@ -9,7 +9,7 @@ import org.elasticsearch.index.query.QueryBuilders;
  * @email vito.salvia@gmail.com
  */
 @Immutable
-class BooleanFieldExistsSearch extends IBooleanSearch.AbstractBooleanSearch {
+public class BooleanFieldExistsSearch extends IBooleanSearch.AbstractBooleanSearch {
 
     public BooleanFieldExistsSearch(String theField, BooleanQueryType theType) {
         super(theField, theType);

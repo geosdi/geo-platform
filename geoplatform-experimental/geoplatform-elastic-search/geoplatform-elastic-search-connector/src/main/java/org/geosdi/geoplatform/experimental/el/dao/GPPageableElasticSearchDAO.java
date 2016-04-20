@@ -404,6 +404,10 @@ public interface GPPageableElasticSearchDAO<D extends Document> {
             this(null, null, from, size, queryList);
         }
 
+        public MultiFieldsSearch(String field, SortOrder sortOrder, IBooleanSearch... queryList) {
+            this(field, sortOrder, 0, 0, queryList);
+        }
+
         public MultiFieldsSearch(String field, SortOrder sortOrder, int from,
                 int size, IBooleanSearch... queryList) {
             super(field, sortOrder, from, size);

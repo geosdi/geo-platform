@@ -2,6 +2,7 @@ package org.geosdi.geoplatform.experimental.el.search.geoshape;
 
 import com.google.common.base.Preconditions;
 import jdk.nashorn.internal.ir.annotations.Immutable;
+import org.elasticsearch.common.geo.ShapeRelation;
 import org.elasticsearch.common.geo.builders.ShapeBuilder;
 import org.elasticsearch.index.query.GeoShapeQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
@@ -34,7 +35,9 @@ public interface IGPGeoShapeQuerySearch extends IBooleanSearch {
             case DISJOINT:
                 return QueryBuilders.geoDisjointQuery(getField(), getShapeBuilder());
             case WITHIN:
-                return QueryBuilders.geoDisjointQuery(getField(), getShapeBuilder());
+                return QueryBuilders.geoWithinQuery(getField(), getShapeBuilder());
+            case CONTAINS:
+                return QueryBuilders.geoShapeQuery(getField(), getShapeBuilder(), ShapeRelation.CONTAINS);
         }
         return null;
     }
@@ -43,7 +46,7 @@ public interface IGPGeoShapeQuerySearch extends IBooleanSearch {
      *
      */
     enum GPShapeRelation {
-        INTERSECTS, DISJOINT, WITHIN;
+        INTERSECTS, DISJOINT, WITHIN, CONTAINS;
     }
 
     /**

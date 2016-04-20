@@ -1,6 +1,8 @@
 package org.geosdi.geoplatform.experimental.openam.support.config.connector.crud;
 
+import com.google.common.base.Charsets;
 import com.google.common.base.Preconditions;
+import com.google.common.io.CharStreams;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpPost;
@@ -24,6 +26,7 @@ import org.geosdi.geoplatform.experimental.openam.support.connector.request.user
 import org.geosdi.geoplatform.experimental.openam.support.connector.request.users.OpenAMUpdateUserRequest;
 import org.geosdi.geoplatform.experimental.rs.security.connector.settings.GPConnectorSettings;
 
+import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URLDecoder;
 
@@ -75,8 +78,9 @@ public abstract class OpenAMCrudConnector extends OpenAMAuthorizedConnector {
 //                .toString(new InputStreamReader(response.getEntity().getContent(), Charsets.UTF_8)));
 
         if (response.getStatusLine().getStatusCode() != 201) {
-            throw new IllegalStateException("OpenAMCreateUser Error Code : "
-                    + response.getStatusLine().getStatusCode());
+            throw new IllegalStateException("OpenAMCreateUser Error : "
+                    + CharStreams.toString(new InputStreamReader(response.getEntity()
+                    .getContent(), Charsets.UTF_8)));
         }
         this.logout(openAMAuthenticate.getTokenId());
         return this.openAMReader.readValue(response.getEntity().getContent(), OpenAMUserResponse.class);

@@ -34,6 +34,10 @@
  */
 package org.geosdi.geoplatform.persistence.dao;
 
+import net.jcip.annotations.Immutable;
+
+import java.util.List;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -55,4 +59,63 @@ public interface GPGenericDAO<T extends Object> {
      * @return {@link Integer}
      */
     Integer removeAll();
+
+    /**
+     *
+     */
+    interface IGPPageResult<T> {
+
+        /**
+         * <p>The Total Results Number</p>
+         *
+         * @return {@link Long}
+         */
+        Long getTotal();
+
+        /**
+         * @return {@link List<T>}
+         */
+        List<T> getResults();
+    }
+
+    /**
+     *
+     */
+    @Immutable
+    class GPPageResult<T extends Object> implements IGPPageResult<T> {
+
+        private final Long total;
+        private final List<T> results;
+
+        public GPPageResult(Long theTotal, List<T> theResults) {
+            this.total = theTotal;
+            this.results = theResults;
+        }
+
+        /**
+         * <p>The Total Results Number</p>
+         *
+         * @return {@link Long}
+         */
+        @Override
+        public Long getTotal() {
+            return this.total;
+        }
+
+        /**
+         * @return {@link List <T>}
+         */
+        @Override
+        public List<T> getResults() {
+            return this.results;
+        }
+
+        @Override
+        public String toString() {
+            return getClass().getSimpleName() + " {" +
+                    " total = " + total +
+                    ", results = " + results +
+                    '}';
+        }
+    }
 }

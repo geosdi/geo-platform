@@ -48,6 +48,11 @@
             <artifactId>jackson-databind</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+
         <!-- Support for JAX-B annotations as additional configuration -->
         <dependency>
             <groupId>com.fasterxml.jackson.module</groupId>

@@ -34,25 +34,23 @@
  */
 package org.geosdi.geoplatform.experimental.el.api.mapper;
 
+import com.google.common.base.Preconditions;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
-import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
-import org.geosdi.geoplatform.support.jackson.JacksonSupport;
+import org.geosdi.geoplatform.support.jackson.mapper.GPJacksonMapper;
 
 import java.io.File;
 import java.io.InputStream;
 import java.io.Reader;
 import java.net.URL;
-
-import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
+import java.nio.file.Path;
+import java.util.Collection;
 
 /**
  * @param <D>
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPElasticSearchMapper<D extends Document> {
-
-    JacksonSupport DEFAULT_MAPPER = new GPJacksonSupport().configure(NON_NULL);
+public interface GPElasticSearchMapper<D extends Document> extends GPJacksonMapper<D> {
 
     /**
      * @param url representing {@link URL} as String
@@ -107,6 +105,28 @@ public interface GPElasticSearchMapper<D extends Document> {
      * @throws Exception
      */
     void write(File file, D document) throws Exception;
+
+    /**
+     * @param direrctory
+     * @return {@link Collection<D>}
+     * @throws Exception
+     */
+    Collection<D> readFromDirectory(Path direrctory) throws Exception;
+
+    /**
+     * @param thePath
+     * @return {@link D}
+     */
+    default D read(Path thePath) {
+        Preconditions.checkArgument((thePath != null) && (thePath.toFile().exists()),
+                "The Parameter Path must not be null and the Associated File must exist.");
+        try {
+            return this.read(thePath.toFile());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
 
     /**
      * @return {@link String} Mapper Name

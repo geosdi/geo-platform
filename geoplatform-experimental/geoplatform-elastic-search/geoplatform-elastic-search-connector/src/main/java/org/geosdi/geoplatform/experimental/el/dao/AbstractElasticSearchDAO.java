@@ -151,7 +151,7 @@ public abstract class AbstractElasticSearchDAO<D extends Document> extends Pagea
     public BulkResponse persist(Path direrctory) throws Exception {
         Preconditions.checkArgument((direrctory != null) && (direrctory.toFile().isDirectory()),
                 "The Parameter Directory must not be null and must be a Directory.");
-        return this.persist((List<D>) Files.list(direrctory)
+        return this.persist(Files.list(direrctory)
                 .filter(path -> path.toFile().getName().endsWith(".json"))
                 .map(path -> super.readDocument(path))
                 .filter(d -> d != null)

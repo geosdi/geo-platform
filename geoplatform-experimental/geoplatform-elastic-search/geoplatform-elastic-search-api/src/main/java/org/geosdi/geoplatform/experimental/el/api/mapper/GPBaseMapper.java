@@ -34,75 +34,24 @@
  */
 package org.geosdi.geoplatform.experimental.el.api.mapper;
 
-import com.google.common.base.Preconditions;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
-
-import java.io.File;
-import java.io.InputStream;
-import java.io.Reader;
-import java.net.URL;
+import org.geosdi.geoplatform.support.jackson.mapper.GPBaseJacksonMapper;
 
 /**
  * @param <D>
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GPBaseMapper<D extends Document> implements GPElasticSearchMapper<D> {
-
-    private final Class<D> documentClass;
-    private final JacksonSupport reader;
+public abstract class GPBaseMapper<D extends Document> extends GPBaseJacksonMapper<D>
+        implements GPElasticSearchMapper<D> {
 
     public GPBaseMapper(Class<D> theDocumentClass, JacksonSupport theReader) {
-        Preconditions.checkNotNull(theDocumentClass,
-                "The Document Class must not be null");
-        this.documentClass = theDocumentClass;
-        this.reader = ((theReader != null) ? theReader : DEFAULT_MAPPER);
-    }
-
-    @Override
-    public D read(URL url) throws Exception {
-        return reader.getDefaultMapper().readValue(url, documentClass);
-    }
-
-    @Override
-    public D read(File file) throws Exception {
-        return this.reader.getDefaultMapper().readValue(file, documentClass);
-    }
-
-    @Override
-    public D read(InputStream in) throws Exception {
-        return reader.getDefaultMapper().readValue(in, documentClass);
-    }
-
-    @Override
-    public D read(Reader r) throws Exception {
-        return this.reader.getDefaultMapper().readValue(r, documentClass);
-    }
-
-    @Override
-    public D read(String s) throws Exception {
-        return this.reader.getDefaultMapper().readValue(s, documentClass);
-    }
-
-    @Override
-    public String writeAsString(D document) throws Exception {
-        return this.reader.getDefaultMapper()
-                .writeValueAsString(document);
-    }
-
-    /**
-     * @param file
-     * @param document
-     * @throws Exception
-     */
-    @Override
-    public void write(File file, D document) throws Exception {
-        this.reader.getDefaultMapper().writeValue(file, document);
+        super(theDocumentClass, theReader);
     }
 
     @Override
     public String getDocumentClassName() {
-        return this.documentClass.getSimpleName();
+        return this.entityClass.getSimpleName();
     }
 }

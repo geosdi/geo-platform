@@ -49,7 +49,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -77,6 +79,19 @@ public abstract class GPAbstractJpaDAO<T extends Object, ID extends Serializable
     public void update(T entity) {
         Preconditions.checkNotNull(entity, "Entity to update must not be null.");
         this.entityManager.merge(entity);
+    }
+
+    /**
+     * @param entities
+     * @return {@link Collection <T>}
+     */
+    @Override
+    public Collection<T> persist(Iterable<T> entities) {
+        List<T> persistedEntities = new ArrayList<>();
+        for (T entity : entities) {
+            persistedEntities.add(this.persist(entity));
+        }
+        return persistedEntities;
     }
 
     @Override
@@ -150,8 +165,7 @@ public abstract class GPAbstractJpaDAO<T extends Object, ID extends Serializable
     @Override
     public Integer removeAll() {
         Query q = this.entityManager.createNativeQuery("delete from "
-                        + persistentClass.getSimpleName(),
-                persistentClass);
+                + persistentClass.getSimpleName(), persistentClass);
         return q.executeUpdate();
     }
 

@@ -45,6 +45,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -84,6 +87,19 @@ public abstract class GenericJPASearchDAO<T extends Object> implements GPBaseSea
 
         this.entityManager.persist(entity);
         return entity;
+    }
+
+    /**
+     * @param entities
+     * @return {@link Collection <T>}
+     */
+    @Override
+    public Collection<T> persist(Iterable<T> entities) {
+        List<T> persistedEntities = new ArrayList<>();
+        for (T entity : entities) {
+            persistedEntities.add(this.persist(entity));
+        }
+        return persistedEntities;
     }
 
     @Override

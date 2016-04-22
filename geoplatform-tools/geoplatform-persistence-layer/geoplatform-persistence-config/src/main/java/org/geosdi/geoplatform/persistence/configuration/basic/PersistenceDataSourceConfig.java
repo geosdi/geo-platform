@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.persistence.configuration.basic;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
-import javax.sql.DataSource;
 import org.geosdi.geoplatform.persistence.configuration.c3p0.C3P0BasicProperties;
 import org.geosdi.geoplatform.persistence.configuration.properties.GPPersistenceConnector;
 import org.slf4j.Logger;
@@ -44,6 +43,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import javax.sql.DataSource;
 
 /**
  *
@@ -82,6 +83,7 @@ public class PersistenceDataSourceConfig {
                 .getAcquireIncrement());
         dataSource.setAcquireRetryAttempts(c3p0BasicProperties.
                 getAcquireRetryAttempts());
+        dataSource.setInitialPoolSize(c3p0BasicProperties.getMinPoolSize());
         dataSource.setMinPoolSize(c3p0BasicProperties.getMinPoolSize());
         dataSource.setMaxPoolSize(c3p0BasicProperties.getMaxPoolSize());
         dataSource.setMaxIdleTime(c3p0BasicProperties.getMaxIdleTime());

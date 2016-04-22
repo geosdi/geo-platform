@@ -36,6 +36,7 @@ package org.geosdi.geoplatform.persistence.dao;
 
 import net.jcip.annotations.Immutable;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -51,11 +52,22 @@ public interface GPGenericDAO<T extends Object> {
     T persist(T entity);
 
     /**
+     * @param entities
+     * @return {@link Collection<T>}
+     */
+    Collection<T> persist(Iterable<T> entities);
+
+    /**
      * @param entity
      */
     void update(T entity);
 
     /**
+     * <p>For this method remember that we assume that the Table name is it Class Name.
+     * If it is different remember to override this method to implement the correct
+     * way to delete all Entities.
+     * </p>
+     *
      * @return {@link Integer}
      */
     Integer removeAll();

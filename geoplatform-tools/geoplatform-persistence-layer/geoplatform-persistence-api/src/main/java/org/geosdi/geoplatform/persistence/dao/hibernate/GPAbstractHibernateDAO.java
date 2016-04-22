@@ -49,7 +49,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -78,6 +80,19 @@ public abstract class GPAbstractHibernateDAO<T extends Object, ID extends Serial
     public void update(T entity) {
         Preconditions.checkNotNull(entity, "Entity to update must not be null.");
         getCurrentSession().merge(entity);
+    }
+
+    /**
+     * @param entities
+     * @return {@link Collection <T>}
+     */
+    @Override
+    public Collection<T> persist(Iterable<T> entities) {
+        List<T> persistedEntities = new ArrayList<>();
+        for (T entity : entities) {
+            persistedEntities.add(this.persist(entity));
+        }
+        return persistedEntities;
     }
 
     @Override

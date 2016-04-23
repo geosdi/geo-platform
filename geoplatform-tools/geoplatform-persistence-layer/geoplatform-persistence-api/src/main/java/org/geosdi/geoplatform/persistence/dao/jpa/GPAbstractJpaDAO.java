@@ -176,6 +176,16 @@ public abstract class GPAbstractJpaDAO<T extends Object, ID extends Serializable
     }
 
     /**
+     * @param criterion
+     * @return {@link Number}
+     */
+    @Override
+    public Number count(Criterion criterion) {
+        return (Number) getSession().createCriteria(persistentClass).add(criterion)
+                .setProjection(Projections.rowCount()).uniqueResult();
+    }
+
+    /**
      * @param theEntityManager
      */
     @PersistenceContext

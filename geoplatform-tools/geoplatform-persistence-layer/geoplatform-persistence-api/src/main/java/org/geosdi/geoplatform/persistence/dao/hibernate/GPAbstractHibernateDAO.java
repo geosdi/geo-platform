@@ -170,6 +170,16 @@ public abstract class GPAbstractHibernateDAO<T extends Object, ID extends Serial
                 .setProjection(Projections.rowCount()).uniqueResult();
     }
 
+    /**
+     * @param criterion
+     * @return {@link Number}
+     */
+    @Override
+    public Number count(Criterion criterion) {
+        return (Number) getCurrentSession().createCriteria(persistentClass).add(criterion)
+                .setProjection(Projections.rowCount()).uniqueResult();
+    }
+
     protected Session getCurrentSession() {
         return this.sessionFactory.getCurrentSession();
     }

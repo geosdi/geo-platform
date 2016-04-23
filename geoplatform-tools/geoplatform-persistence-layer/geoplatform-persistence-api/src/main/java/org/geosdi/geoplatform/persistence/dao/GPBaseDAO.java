@@ -93,4 +93,10 @@ public interface GPBaseDAO<T extends Object, ID extends Serializable>
      * @return {@link Number}
      */
     Number count();
+
+    /**
+     * @param criterion
+     * @return {@link Number}
+     */
+    Number count(Criterion criterion);
 }

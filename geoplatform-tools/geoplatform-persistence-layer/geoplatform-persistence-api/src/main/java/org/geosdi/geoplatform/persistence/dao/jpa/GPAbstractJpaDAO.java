@@ -117,8 +117,7 @@ public abstract class GPAbstractJpaDAO<T extends Object, ID extends Serializable
 
     @Override
     public T find(ID id) throws GPDAOException {
-        Preconditions.checkArgument(id != null);
-
+        Preconditions.checkArgument(id != null, "The Parameter ID must not be null.");
         try {
             Criteria crit = getSession().createCriteria(persistentClass);
             return (T) crit.add(Restrictions.idEq(id)).uniqueResult();
@@ -135,8 +134,7 @@ public abstract class GPAbstractJpaDAO<T extends Object, ID extends Serializable
     }
 
     @Override
-    public List<T> findAll(int start,
-            int end) throws GPDAOException {
+    public List<T> findAll(int start, int end) throws GPDAOException {
         try {
             Criteria crit = getSession().createCriteria(persistentClass);
             crit.setFirstResult(start);

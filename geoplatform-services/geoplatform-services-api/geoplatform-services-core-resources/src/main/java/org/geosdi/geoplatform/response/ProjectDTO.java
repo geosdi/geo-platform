@@ -68,7 +68,6 @@ public class ProjectDTO {
     //
     @XmlElementWrapper(name = "rootFolders")
     @XmlElement(name = "folder")
-    @JsonProperty(value = "rootFolders")
     private List<FolderDTO> rootFolders;
 
     /**

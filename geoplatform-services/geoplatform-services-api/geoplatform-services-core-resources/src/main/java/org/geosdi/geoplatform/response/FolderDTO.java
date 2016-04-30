@@ -37,14 +37,15 @@ package org.geosdi.geoplatform.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.Lists;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import org.geosdi.geoplatform.core.model.GPFolder;
+import org.geosdi.geoplatform.core.model.GPProject;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.geosdi.geoplatform.core.model.GPFolder;
-import org.geosdi.geoplatform.core.model.GPProject;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -60,7 +61,7 @@ public class FolderDTO extends AbstractElementDTO {
     private Integer numberOfDescendants;
     //
     @JsonProperty(value = "elementList")
-    private List<IElementDTO> elementList = new ArrayList<>();
+    private List<AbstractElementDTO> elementList = new ArrayList<>();
 
     /**
      * Default constructor. FOR JAXB
@@ -111,7 +112,7 @@ public class FolderDTO extends AbstractElementDTO {
     /**
      * @return the elementList
      */
-    public List<IElementDTO> getElementList() {
+    public List<AbstractElementDTO> getElementList() {
         return elementList;
     }
 

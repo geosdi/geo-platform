@@ -35,33 +35,23 @@
  */
 package org.geosdi.geoplatform.model.soap;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import org.geosdi.geoplatform.core.model.GPAccount;
-import org.geosdi.geoplatform.core.model.GPFolder;
-import org.geosdi.geoplatform.core.model.GPLayer;
-import org.geosdi.geoplatform.core.model.GPProject;
-import org.geosdi.geoplatform.core.model.GPRasterLayer;
-import org.geosdi.geoplatform.core.model.GPUser;
-import org.geosdi.geoplatform.core.model.GPVectorLayer;
+import org.geosdi.geoplatform.core.model.*;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.shared.GPRole;
 import org.geosdi.geoplatform.request.PutAccountsProjectRequest;
 import org.geosdi.geoplatform.request.RequestByAccountProjectIDs;
 import org.geosdi.geoplatform.request.project.ImportProjectRequest;
-import org.geosdi.geoplatform.response.FolderDTO;
-import org.geosdi.geoplatform.response.IElementDTO;
-import org.geosdi.geoplatform.response.ProjectDTO;
-import org.geosdi.geoplatform.response.RasterLayerDTO;
-import org.geosdi.geoplatform.response.ShortAccountDTO;
-import org.geosdi.geoplatform.response.VectorLayerDTO;
+import org.geosdi.geoplatform.response.*;
 import org.geosdi.geoplatform.response.collection.TreeFolderElements;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.security.acls.domain.BasePermission;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -224,7 +214,7 @@ public class WSProjectTest extends BaseSoapServiceTest {
         Assert.assertEquals("A", nameRootFolderA, rootFolders.get(0).getName());
         Assert.assertEquals("B", nameRootFolderB, rootFolders.get(1).getName());
 
-        List<IElementDTO> childRootFolderA = rootFolders.get(0).getElementList();
+        List<AbstractElementDTO> childRootFolderA = rootFolders.get(0).getElementList();
         Assert.assertEquals("#A", 4, childRootFolderA.size());
         Assert.assertEquals("R-A", nameRaster + nameRootFolderA,
                 childRootFolderA.get(0).getName());
@@ -235,13 +225,13 @@ public class WSProjectTest extends BaseSoapServiceTest {
         Assert.assertEquals("1C", nameFolder1C,
                 childRootFolderA.get(3).getName());
 
-        List<IElementDTO> childFolder1A = ((FolderDTO) childRootFolderA.get(1)).getElementList();
+        List<AbstractElementDTO> childFolder1A = ((FolderDTO) childRootFolderA.get(1)).getElementList();
         Assert.assertEquals("#1A", 3, childFolder1A.size());
         Assert.assertEquals("2A", nameFolder2A, childFolder1A.get(0).getName());
         Assert.assertEquals("2B", nameFolder2B, childFolder1A.get(1).getName());
         Assert.assertEquals("2C", nameFolder2C, childFolder1A.get(2).getName());
 
-        List<IElementDTO> childFolder2A = ((FolderDTO) childFolder1A.get(0)).getElementList();
+        List<AbstractElementDTO> childFolder2A = ((FolderDTO) childFolder1A.get(0)).getElementList();
         Assert.assertEquals("#2A", 3, childFolder2A.size());
         Assert.assertEquals("3A", nameFolder3A, childFolder2A.get(0).getName());
         Assert.assertEquals("3B", nameFolder3B, childFolder2A.get(1).getName());
@@ -262,7 +252,7 @@ public class WSProjectTest extends BaseSoapServiceTest {
         Assert.assertEquals("V-3A", nameVector + nameFolder3A,
                 f3A.getElementList().get(0).getName());
 
-        List<IElementDTO> childRootFolderB = rootFolders.get(1).getElementList();
+        List<AbstractElementDTO> childRootFolderB = rootFolders.get(1).getElementList();
         Assert.assertEquals("#B", 1, childRootFolderB.size());
         Assert.assertEquals("V-B", nameVector + nameRootFolderB,
                 childRootFolderB.get(0).getName());
@@ -280,7 +270,7 @@ public class WSProjectTest extends BaseSoapServiceTest {
         Assert.assertEquals("#root", 1, rootFolders.size());
         Assert.assertEquals("B", nameRootFolderB, rootFolders.get(0).getName());
 
-        List<IElementDTO> childRootFolderB = rootFolders.get(0).getElementList();
+        List<AbstractElementDTO> childRootFolderB = rootFolders.get(0).getElementList();
         Assert.assertEquals("#B", 1, childRootFolderB.size());
         Assert.assertEquals("V-B", nameVector + nameRootFolderB,
                 childRootFolderB.get(0).getName());
@@ -452,7 +442,7 @@ public class WSProjectTest extends BaseSoapServiceTest {
         Assert.assertEquals("A", nameRootFolderA, rootFolders.get(0).getName());
         Assert.assertEquals("B", nameRootFolderB, rootFolders.get(1).getName());
 
-        List<IElementDTO> childRootFolderA = rootFolders.get(0).getElementList();
+        List<AbstractElementDTO> childRootFolderA = rootFolders.get(0).getElementList();
         Assert.assertEquals("#A", 4, childRootFolderA.size());
         Assert.assertEquals("R-A", nameRaster + nameRootFolderA,
                 childRootFolderA.get(0).getName());
@@ -463,13 +453,13 @@ public class WSProjectTest extends BaseSoapServiceTest {
         Assert.assertEquals("1C", nameFolder1C,
                 childRootFolderA.get(3).getName());
 
-        List<IElementDTO> childFolder1A = ((FolderDTO) childRootFolderA.get(1)).getElementList();
+        List<AbstractElementDTO> childFolder1A = ((FolderDTO) childRootFolderA.get(1)).getElementList();
         Assert.assertEquals("#1A", 3, childFolder1A.size());
         Assert.assertEquals("2A", nameFolder2A, childFolder1A.get(0).getName());
         Assert.assertEquals("2B", nameFolder2B, childFolder1A.get(1).getName());
         Assert.assertEquals("2C", nameFolder2C, childFolder1A.get(2).getName());
 
-        List<IElementDTO> childFolder2A = ((FolderDTO) childFolder1A.get(0)).getElementList();
+        List<AbstractElementDTO> childFolder2A = ((FolderDTO) childFolder1A.get(0)).getElementList();
         Assert.assertEquals("#2A", 0, childFolder2A.size()); // NO elements
 
         FolderDTO f1B = (FolderDTO) childRootFolderA.get(2);
@@ -480,7 +470,7 @@ public class WSProjectTest extends BaseSoapServiceTest {
         Assert.assertEquals("R-2C", nameRaster + nameFolder2C,
                 f2C.getElementList().get(0).getName());
 
-        List<IElementDTO> childRootFolderB = rootFolders.get(1).getElementList();
+        List<AbstractElementDTO> childRootFolderB = rootFolders.get(1).getElementList();
         Assert.assertEquals("#B", 1, childRootFolderB.size());
         Assert.assertEquals("V-B", nameVector + nameRootFolderB,
                 childRootFolderB.get(0).getName());

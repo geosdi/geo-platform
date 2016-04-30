@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.response;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**

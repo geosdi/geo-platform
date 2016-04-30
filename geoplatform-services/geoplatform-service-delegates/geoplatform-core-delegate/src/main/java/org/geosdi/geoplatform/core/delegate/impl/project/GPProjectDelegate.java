@@ -36,24 +36,9 @@
 package org.geosdi.geoplatform.core.delegate.impl.project;
 
 import com.googlecode.genericdao.search.Search;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import org.geosdi.geoplatform.core.dao.GPAccountDAO;
-import org.geosdi.geoplatform.core.dao.GPAccountProjectDAO;
-import org.geosdi.geoplatform.core.dao.GPFolderDAO;
-import org.geosdi.geoplatform.core.dao.GPLayerDAO;
-import org.geosdi.geoplatform.core.dao.GPProjectDAO;
+import org.geosdi.geoplatform.core.dao.*;
 import org.geosdi.geoplatform.core.delegate.api.project.ProjectDelegate;
-import org.geosdi.geoplatform.core.model.GPAccount;
-import org.geosdi.geoplatform.core.model.GPAccountProject;
-import org.geosdi.geoplatform.core.model.GPFolder;
-import org.geosdi.geoplatform.core.model.GPLayer;
-import org.geosdi.geoplatform.core.model.GPOrganization;
-import org.geosdi.geoplatform.core.model.GPProject;
-import org.geosdi.geoplatform.core.model.GPRasterLayer;
-import org.geosdi.geoplatform.core.model.GPVectorLayer;
+import org.geosdi.geoplatform.core.model.*;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
@@ -62,15 +47,7 @@ import org.geosdi.geoplatform.request.RequestByAccountProjectIDs;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.request.project.ImportProjectRequest;
 import org.geosdi.geoplatform.request.project.SaveProjectRequest;
-import org.geosdi.geoplatform.response.AccountProjectPropertiesDTO;
-import org.geosdi.geoplatform.response.FolderDTO;
-import org.geosdi.geoplatform.response.IElementDTO;
-import org.geosdi.geoplatform.response.ProjectDTO;
-import org.geosdi.geoplatform.response.RasterLayerDTO;
-import org.geosdi.geoplatform.response.ShortAccountDTOContainer;
-import org.geosdi.geoplatform.response.ShortLayerDTO;
-import org.geosdi.geoplatform.response.VectorLayerDTO;
-import org.geosdi.geoplatform.response.WSGetAccountProjectsResponse;
+import org.geosdi.geoplatform.response.*;
 import org.geosdi.geoplatform.response.factory.AccountDTOFactory;
 import org.geosdi.geoplatform.services.development.EntityCorrectness;
 import org.slf4j.Logger;
@@ -78,6 +55,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.acls.domain.BasePermission;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Project service delegate.
@@ -750,7 +732,7 @@ public class GPProjectDelegate implements ProjectDelegate {
             GPFolder folder = FolderDTO.convertToGPFolder(project, null,
                     folderDTO);
 
-            List<IElementDTO> childs = folderDTO.getElementList();
+            List<AbstractElementDTO> childs = folderDTO.getElementList();
             int numberOfDescendants = this.persistElementList(project, folder,
                     childs);
 
@@ -864,7 +846,7 @@ public class GPProjectDelegate implements ProjectDelegate {
     }
 
     private int persistElementList(GPProject project, GPFolder parent,
-            List<IElementDTO> elementList) throws IllegalParameterFault {
+            List<AbstractElementDTO> elementList) throws IllegalParameterFault {
         int numberOfDescendants = 0;
 
         for (int i = elementList.size() - 1; i >= 0; i--) {
@@ -875,7 +857,7 @@ public class GPProjectDelegate implements ProjectDelegate {
                 GPFolder folder = FolderDTO.convertToGPFolder(project, parent,
                         folderDTO);
 
-                List<IElementDTO> childs = folderDTO.getElementList();
+                List<AbstractElementDTO> childs = folderDTO.getElementList();
 
                 int descendantsIth = this.persistElementList(project, folder,
                         childs);

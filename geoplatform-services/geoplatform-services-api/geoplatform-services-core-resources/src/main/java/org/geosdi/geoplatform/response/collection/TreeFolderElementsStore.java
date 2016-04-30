@@ -35,16 +35,13 @@
  */
 package org.geosdi.geoplatform.response.collection;
 
-import java.util.Collection;
-import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
 import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.response.FolderDTO;
 import org.geosdi.geoplatform.response.ShortLayerDTO;
+
+import javax.xml.bind.annotation.*;
+import java.util.Collection;
+import java.util.List;
 
 /**
  *

@@ -37,11 +37,6 @@ package org.geosdi.geoplatform.gui.server.service.converter;
 
 import com.google.common.collect.Lists;
 import it.geosolutions.geoserver.rest.GeoServerRESTReader;
-import java.net.MalformedURLException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
 import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPProject;
@@ -49,29 +44,23 @@ import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoFolder;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.client.widget.time.LayerTimeFilterWidget;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo;
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo;
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerClientInfo;
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
+import org.geosdi.geoplatform.gui.configuration.map.client.layer.*;
 import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
 import org.geosdi.geoplatform.gui.model.user.GPSimpleUser;
 import org.geosdi.geoplatform.gui.shared.GPLayerType;
-import org.geosdi.geoplatform.response.AccountProjectPropertiesDTO;
-import org.geosdi.geoplatform.response.FolderDTO;
-import org.geosdi.geoplatform.response.IElementDTO;
-import org.geosdi.geoplatform.response.ProjectDTO;
-import org.geosdi.geoplatform.response.RasterLayerDTO;
-import org.geosdi.geoplatform.response.ShortAccountDTO;
-import org.geosdi.geoplatform.response.ShortLayerDTO;
-import org.geosdi.geoplatform.response.UserDTO;
-import org.geosdi.geoplatform.response.VectorLayerDTO;
+import org.geosdi.geoplatform.response.*;
 import org.geosdi.geoplatform.response.collection.TreeFolderElements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+
+import java.net.MalformedURLException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Simple Class to convert Web-Services beans model in DTO beans Client.
@@ -104,9 +93,9 @@ public class DTOLayerConverter {
     }
 
     private List<IGPFolderElements> convertFolderElements(
-            List<IElementDTO> folderElements) {
+            List<AbstractElementDTO> folderElements) {
         List<IGPFolderElements> clientFolderElements = Lists.<IGPFolderElements>newArrayList();
-        Iterator<IElementDTO> iterator = folderElements.iterator();
+        Iterator<AbstractElementDTO> iterator = folderElements.iterator();
         while (iterator.hasNext()) {
             clientFolderElements.add(this.convertElement(iterator.next()));
         }
@@ -116,7 +105,7 @@ public class DTOLayerConverter {
     public ArrayList<IGPFolderElements> convertFolderElements(
             TreeFolderElements folderElements) {
         ArrayList<IGPFolderElements> clientFolderElements = Lists.<IGPFolderElements>newArrayList();
-        Iterator<IElementDTO> iterator = folderElements.iterator();
+        Iterator<AbstractElementDTO> iterator = folderElements.iterator();
         while (iterator.hasNext()) {
             IElementDTO elementDTO = iterator.next();
             logger.debug("@@@@@@@@@@@@@@@@@@ Element in HashSet {}", elementDTO);

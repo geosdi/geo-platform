@@ -1,0 +1,8 @@
+org.geosdi.geoplatform.support.jackson.jts.deserializer.geometry.writer.JTSPointWriter
+org.geosdi.geoplatform.support.jackson.jts.deserializer.geometry.writer.JTSLineStringWriter
+org.geosdi.geoplatform.support.jackson.jts.deserializer.geometry.writer.JTSPolygonWriter
+org.geosdi.geoplatform.support.jackson.jts.deserializer.geometry.writer.JTSLinearRingWriter
+org.geosdi.geoplatform.support.jackson.jts.deserializer.geometry.writer.JTSMultiPointWriter
+org.geosdi.geoplatform.support.jackson.jts.deserializer.geometry.writer.JTSMultiLineStringWriter
+org.geosdi.geoplatform.support.jackson.jts.deserializer.geometry.writer.JTSMultiPolygonWriter
+org.geosdi.geoplatform.support.jackson.jts.deserializer.geometry.writer.JTSGeometryCollectionWriter

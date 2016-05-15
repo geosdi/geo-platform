@@ -1,0 +1,31 @@
+{
+  "type" : "GeometryCollection",
+  "crs" : {
+    "type" : "name",
+    "properties" : {
+      "name" : "EPSG:4326"
+    }
+  },
+  "geometries" : [ {
+    "type" : "Point",
+    "coordinates" : [ 0.0, 0.0 ]
+  }, {
+    "type" : "Point",
+    "coordinates" : [ 1.0, 0.0 ]
+  }, {
+    "type" : "Point",
+    "coordinates" : [ 1.0, 1.0 ]
+  }, {
+    "type" : "Point",
+    "coordinates" : [ 0.0, 1.0 ]
+  }, {
+    "type" : "LineString",
+    "coordinates" : [ [ 4.0, 6.0 ], [ 7.0, 10.0 ] ]
+  }, {
+    "type" : "Polygon",
+    "coordinates" : [ [ [ 35.0, 10.0 ], [ 10.0, 20.0 ], [ 15.0, 40.0 ], [ 45.0, 45.0 ], [ 35.0, 10.0 ] ], [ [ 20.0, 30.0 ], [ 35.0, 35.0 ], [ 30.0, 20.0 ], [ 20.0, 30.0 ] ] ]
+  }, {
+    "type" : "LineString",
+    "coordinates" : [ [ 7.0, 7.0 ], [ 6.0, 9.0 ], [ 6.0, 11.0 ], [ 7.0, 12.0 ], [ 9.0, 11.0 ], [ 11.0, 12.0 ], [ 13.0, 11.0 ], [ 13.0, 9.0 ], [ 11.0, 7.0 ], [ 7.0, 7.0 ] ]
+  } ]
+}

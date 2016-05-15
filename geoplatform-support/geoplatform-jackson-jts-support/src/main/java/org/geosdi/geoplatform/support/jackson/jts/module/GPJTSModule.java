@@ -10,10 +10,10 @@ import org.geosdi.geoplatform.support.jackson.jts.serializer.GPGeoJsonSerializer
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class JTSModule extends SimpleModule {
+public class GPJTSModule extends SimpleModule {
 
-    public JTSModule() {
-        super("JTSModule", new Version(1, 8, 0, "SNAPSHOT", "org.geosdi", "geoplatform-jackson-jts-support"));
+    public GPJTSModule() {
+        super("GPJTSModule", new Version(1, 8, 0, "SNAPSHOT", "org.geosdi", "geoplatform-jackson-jts-support"));
         super.addSerializer(Geometry.class, new GPGeoJsonSerializer());
         super.addDeserializer(Geometry.class, new JTSGeometryDeserializer());
         super.addDeserializer(Point.class, new JTSPointDeserializer());

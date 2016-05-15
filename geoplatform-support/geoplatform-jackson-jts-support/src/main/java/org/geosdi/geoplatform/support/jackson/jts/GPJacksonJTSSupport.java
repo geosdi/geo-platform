@@ -1,7 +1,7 @@
 package org.geosdi.geoplatform.support.jackson.jts;
 
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
-import org.geosdi.geoplatform.support.jackson.jts.module.JTSModule;
+import org.geosdi.geoplatform.support.jackson.jts.module.GPJTSModule;
 
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.INDENT_OUTPUT_ENABLE;
@@ -18,7 +18,7 @@ public class GPJacksonJTSSupport extends GPJacksonSupport {
                 ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
                 WRAP_ROOT_VALUE_DISABLE,
                 INDENT_OUTPUT_ENABLE);
-        super.registerModule(new JTSModule());
+        super.registerModule(new GPJTSModule());
     }
 
     /**

@@ -1024,7 +1024,7 @@
             <dependency>
                 <groupId>com.google.gwt</groupId>
                 <artifactId>gwtquery-ui</artifactId>
-                <version>r146</version>
+                <version>r147</version>
                 <!--                <scope>provided</scope>-->
             </dependency>
             

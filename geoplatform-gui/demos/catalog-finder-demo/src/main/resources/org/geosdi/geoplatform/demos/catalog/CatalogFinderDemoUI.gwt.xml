@@ -3,7 +3,8 @@
     <inherits name='org.geosdi.geoplatform.gui.GeoPlatform' />
 	
     <!-- ADDING GEOPLATFORM-RESOURCES MODULE -->
-    <inherits name='org.geosdi.geoplatform.gui.Resources' />
+    <inherits name='org.geosdi.geoplatform.gui.GWTOLResources' />
+    <inherits name='org.geosdi.geoplatform.gui.GXTResources' />
     
     <inherits name="org.geosdi.geoplatform.gui.GPCatalogFinder" />
 	
@@ -18,5 +19,6 @@
     <script src="lib/defs/EPSG3857.js" />
 	
     <entry-point class='org.geosdi.geoplatform.demos.catalog.client.CatalogFinderDemoUI' />
+    <add-linker name="xsiframe"/>
 	
 </module>

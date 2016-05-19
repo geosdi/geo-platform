@@ -33,6 +33,13 @@
             <artifactId>gwt-user</artifactId>
             <scope>provided</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-dev</artifactId>
+            <version>${gwtVersion}</version>
+            <scope>provided</scope>
+        </dependency>
         
         <dependency>
             <groupId>com.google.web.bindery</groupId>
@@ -146,17 +153,6 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>gwt-maven-plugin</artifactId>
-                <configuration>
-                    <inplace>true</inplace>
-                    <gwtVersion>${gwtVersion}</gwtVersion>
-                    <module>org.geosdi.geoplatform.demos.catalog.CatalogFinderDemoUI</module>
-                    <runTarget>CatalogFinderDemoUI.html</runTarget>
-                    <warSourceDirectory>war</warSourceDirectory>
-                    <disableCastChecking>true</disableCastChecking>
-                    <disableClassMetadata>true</disableClassMetadata>
-                    <hostedWebapp>${basedir}/war</hostedWebapp>
-                    <extraJvmArgs>-XX:MaxPermSize=766M -Xmx1024M -Xss1024k -Dgwt.nowarn.legacy.tools</extraJvmArgs>
-                </configuration>
                 <executions>
                     <execution>
                         <id>test</id>
@@ -168,13 +164,26 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <inplace>true</inplace>
+                    <module>org.geosdi.geoplatform.demos.catalog.CatalogFinderDemoUI</module>
+                    <runTarget>CatalogFinderDemoUI.html</runTarget>
+                    <warSourceDirectory>war</warSourceDirectory>
+                    <disableCastChecking>true</disableCastChecking>
+                    <disableClassMetadata>true</disableClassMetadata>
+                    <hostedWebapp>${basedir}/war</hostedWebapp>
+                    <extraJvmArgs>-Xmx1024M -Xss1024k -Dgwt.nowarn.legacy.tools</extraJvmArgs>
+                </configuration>
             </plugin>
 
             <!-- Run the application using "mvn jetty:run" -->
             <plugin>
                 <groupId>org.mortbay.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
+                <version>8.1.16.v20140903</version>
                 <configuration>
+                    <stopKey>foo</stopKey>
+                    <stopPort>8888</stopPort>
                     <contextXml>${basedir}/war/WEB-INF/jetty-context.xml</contextXml>
                     <webAppSourceDirectory>${basedir}/war</webAppSourceDirectory>
                     <webAppConfig>

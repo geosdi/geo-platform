@@ -36,6 +36,13 @@
             <scope>provided</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-dev</artifactId>
+            <version>${gwtVersion}</version>
+            <scope>provided</scope>
+        </dependency>
+
         <!-- GXT -->
         <dependency>
             <groupId>com.extjs</groupId>
@@ -110,35 +117,35 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>gwt-maven-plugin</artifactId>
-                <configuration>
-                    <inplace>true</inplace>
-                    <gwtVersion>${gwtVersion}</gwtVersion>
-                    <module>org.geosdi.geoplatform.demos.feature.FeatureDemoUI</module>
-                    <runTarget>FeatureDemoUI.html</runTarget>
-                    <warSourceDirectory>war</warSourceDirectory>
-                    <disableCastChecking>true</disableCastChecking>
-                    <disableClassMetadata>true</disableClassMetadata>
-                    <hostedWebapp>${basedir}/war</hostedWebapp>
-                    <extraJvmArgs>-XX:MaxPermSize=766M -Xmx1024M -Xss1024k -Dgwt.nowarn.legacy.tools</extraJvmArgs>
-                </configuration>
                 <executions>
                     <execution>
                         <id>test</id>
                         <goals>
                             <goal>clean</goal>
-                            <!--<goal>compile</goal>-->
+                            <goal>compile</goal>
                             <goal>generateAsync</goal>
                             <goal>test</goal>
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <runTarget>FeatureDemoUI.html</runTarget>
+                    <hostedWebapp>${basedir}/war</hostedWebapp>
+                    <incremental>false</incremental>
+                    <extraJvmArgs>-Xmx1024M -Xss1024k -Dgwt.nowarn.legacy.tools</extraJvmArgs>
+
+                    <module>org.geosdi.geoplatform.demos.feature.FeatureDemoUI</module>
+                </configuration>
             </plugin>
 
             <!-- Run the application using "mvn jetty:run" -->
             <plugin>
                 <groupId>org.mortbay.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
+                <version>8.1.16.v20140903</version>
                 <configuration>
+                    <stopKey>foo</stopKey>
+                    <stopPort>9999</stopPort>
                     <contextXml>${basedir}/war/WEB-INF/jetty-context.xml</contextXml>
                     <webAppSourceDirectory>${basedir}/war</webAppSourceDirectory>
                     <webAppConfig>

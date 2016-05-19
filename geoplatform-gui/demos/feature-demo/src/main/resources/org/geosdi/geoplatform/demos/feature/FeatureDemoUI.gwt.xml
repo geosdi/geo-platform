@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?> 
-<!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.4.0//EN" "http://google-web-toolkit.googlecode.com/svn/tags/2.4.0/distro-source/core/src/gwt-module.dtd">
+
 <module rename-to="feature_demo">
     <inherits name="org.geosdi.geoplatform.gui.GeoPlatform" />
 	
     <!-- ADDING GEOPLATFORM-RESOURCES MODULE -->
-    <inherits name="org.geosdi.geoplatform.gui.Resources" />
+    <inherits name='org.geosdi.geoplatform.gui.GWTOLResources' />
+    <inherits name='org.geosdi.geoplatform.gui.GXTResources' />
     
     <inherits name="org.geosdi.geoplatform.gui.WFSWidgetUI" />
 	
@@ -19,5 +19,6 @@
     <script src="lib/defs/EPSG3857.js" />
 	
     <entry-point class="org.geosdi.geoplatform.demos.feature.client.FeatureDemoUI" />
+    <add-linker name="xsiframe"/>
 	
 </module>

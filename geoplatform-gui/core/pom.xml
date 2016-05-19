@@ -120,7 +120,7 @@
             <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>geoplatform-resources</artifactId>
-                <version>1.2.12</version>
+                <version>1.2.12-gwt2.7.x</version>
             </dependency>
             
             <dependency>
@@ -157,7 +157,7 @@
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>gwt-maven-plugin</artifactId>
-                    <version>2.5.1</version>
+                    <version>${gwtVersion}</version>
                 </plugin>
             </plugins>
         </pluginManagement>

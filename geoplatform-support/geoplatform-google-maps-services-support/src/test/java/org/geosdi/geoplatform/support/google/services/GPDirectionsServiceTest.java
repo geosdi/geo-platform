@@ -78,7 +78,7 @@ public class GPDirectionsServiceTest extends GPBaseConfigTest {
     @Test
     public void gpGetDirectionsTest() throws Exception {
         DirectionsRoute[] routes = gpDirectionsService.getDirections("Potenza",
-                "Roma").mode(TravelMode.DRIVING).await();
+                "Roma").mode(TravelMode.DRIVING).await().routes;
         assertNotNull(routes);
         assertNotNull(routes[0]);
         assertThat(routes[0].overviewPolyline.decodePath().size(), not(0));
@@ -106,7 +106,7 @@ public class GPDirectionsServiceTest extends GPBaseConfigTest {
         DirectionsRoute[] routes = gpDirectionsService.newRequest()
                 .mode(TravelMode.WALKING)
                 .origin("Via Provinciale, Marsicovetere")
-                .destination("Via Nazionale, Marsicovetere").await();
+                .destination("Via Nazionale, Marsicovetere").await().routes;
         assertNotNull(routes);
         assertEquals(TravelMode.WALKING, routes[0].legs[0].steps[0].travelMode);
     }
@@ -119,7 +119,7 @@ public class GPDirectionsServiceTest extends GPBaseConfigTest {
                 .language("it")
                 .avoid(RouteRestriction.HIGHWAYS)
                 .mode(TravelMode.BICYCLING)
-                .await();
+                .await().routes;
         assertNotNull(routes);
         assertEquals(TravelMode.BICYCLING, routes[0].legs[0].steps[0].travelMode);
         logger.info("@@@@@@@@@@@@@@@DURATION TRAVEL FROM NEW YORK TO MONTREAL :"
@@ -135,7 +135,7 @@ public class GPDirectionsServiceTest extends GPBaseConfigTest {
                 .region("it")
                 .origin("Siracusa")
                 .destination("Roma")
-                .await();
+                .await().routes;
         assertNotNull(routes);
         assertNotNull(routes[0]);
         assertNotNull(routes[0].legs);
@@ -155,7 +155,7 @@ public class GPDirectionsServiceTest extends GPBaseConfigTest {
                 .language("it")
                 .origin("Marsicovetere PZ, Italy")
                 .destination("Paterno PZ, Italy")
-                .await();
+                .await().routes;
         assertNotNull(routes);
         assertNotNull(routes[0]);
         assertNotNull(routes[0].legs);
@@ -178,7 +178,7 @@ public class GPDirectionsServiceTest extends GPBaseConfigTest {
                 .mode(TravelMode.TRANSIT)
                 .departureTime(new DateTime())
                 .avoid(RouteRestriction.HIGHWAYS)
-                .await();
+                .await().routes;
         assertEquals(Boolean.TRUE, (routes.length > 0));
 
         logger.info("#####################DISTANCE : {}\n",
@@ -194,7 +194,7 @@ public class GPDirectionsServiceTest extends GPBaseConfigTest {
     public void testNotFound() throws Exception {
         DirectionsRoute[] routes = gpDirectionsService.getDirections(
                 "sdjfhsjfhsjf",
-                "sjdfhjsdf7w7r").await();
+                "sjdfhjsdf7w7r").await().routes;
     }
 
 }

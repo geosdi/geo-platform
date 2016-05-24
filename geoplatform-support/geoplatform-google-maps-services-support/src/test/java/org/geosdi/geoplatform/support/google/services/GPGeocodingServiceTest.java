@@ -35,8 +35,8 @@
  */
 package org.geosdi.geoplatform.support.google.services;
 
-import com.google.maps.GeocodingApi.ComponentFilter;
 import com.google.maps.PendingResult;
+import com.google.maps.model.ComponentFilter;
 import com.google.maps.model.GeocodingResult;
 import com.google.maps.model.LatLng;
 import com.google.maps.model.LocationType;

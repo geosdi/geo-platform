@@ -1,5 +1,6 @@
 package org.geosdi.geoplatform.experimental.el.search.geobbox;
 
+import com.google.common.base.Preconditions;
 import com.vividsolutions.jts.geom.Envelope;
 import net.jcip.annotations.Immutable;
 import org.elasticsearch.index.query.GeoBoundingBoxQueryBuilder;
@@ -39,6 +40,7 @@ public interface IGPGeoBoundingBoxQuerySearch extends IBooleanSearch {
 
         public GPGeoBoundingBoxQuerySearch(String theField, BooleanQueryType theType, Envelope theEnvelope) {
             super(theField, theType);
+            Preconditions.checkArgument(theEnvelope != null, "The Parameter Envelope must not be null.");
             this.envelope = theEnvelope;
         }
 

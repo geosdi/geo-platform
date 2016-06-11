@@ -1,6 +1,8 @@
 package org.geosdi.geoplatform.persistence.dao.jpa;
 
 import org.geosdi.geoplatform.persistence.dao.GPBaseDAO;
+import org.hibernate.Cache;
+import org.hibernate.SessionFactory;
 
 import javax.persistence.EntityManager;
 import java.io.Serializable;
@@ -15,4 +17,14 @@ public interface GPBaseJpaDAO<T extends Object, ID extends Serializable> extends
      * @param theEntityManager
      */
     void setEm(final EntityManager theEntityManager);
+
+    /**
+     * @return {@link SessionFactory}
+     */
+    SessionFactory getSessionFactory();
+
+    /**
+     * @return {@link Cache}
+     */
+     Cache getCache();
 }

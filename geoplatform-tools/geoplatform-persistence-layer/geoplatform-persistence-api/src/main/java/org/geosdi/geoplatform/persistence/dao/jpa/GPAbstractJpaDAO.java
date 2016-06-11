@@ -37,9 +37,7 @@ package org.geosdi.geoplatform.persistence.dao.jpa;
 import com.google.common.base.Preconditions;
 import org.geosdi.geoplatform.persistence.dao.GPAbstractBaseDAO;
 import org.geosdi.geoplatform.persistence.dao.exception.GPDAOException;
-import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
+import org.hibernate.*;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
@@ -191,6 +189,22 @@ public abstract class GPAbstractJpaDAO<T extends Object, ID extends Serializable
     public void setEm(EntityManager theEntityManager) {
         Preconditions.checkNotNull(theEntityManager);
         this.entityManager = theEntityManager;
+    }
+
+    /**
+     * @return {@link SessionFactory}
+     */
+    @Override
+    public final SessionFactory getSessionFactory() {
+        return getSession().getSessionFactory();
+    }
+
+    /**
+     * @return {@link Cache}
+     */
+    @Override
+    public Cache getCache() {
+        return getSessionFactory().getCache();
     }
 
     /**

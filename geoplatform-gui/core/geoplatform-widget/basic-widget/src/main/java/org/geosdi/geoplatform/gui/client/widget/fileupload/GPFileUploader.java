@@ -45,7 +45,6 @@ import com.google.gwt.user.client.ui.FormPanel;
 import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteEvent;
 import com.google.gwt.user.client.ui.FormPanel.SubmitEvent;
 import com.google.gwt.user.client.ui.Hidden;
-import java.util.logging.Logger;
 import org.geosdi.geoplatform.gui.client.event.AbstractUploadEvent;
 import org.geosdi.geoplatform.gui.client.i18n.BasicWidgetConstants;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
@@ -56,6 +55,8 @@ import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.shared.util.GPSharedUtils;
+
+import java.util.logging.Logger;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -87,7 +88,6 @@ public class GPFileUploader {
     private void createUploadComponent(String uploadAction,
             final GPExtensions... extensions) {
         uploaderProgressBar = new UploaderProgressBar();
-        formPanel = new FormPanel();
         formPanel.setAction(GWT.getModuleBaseURL() + uploadAction);
         formPanel.setEncoding(FormPanel.ENCODING_MULTIPART);
         formPanel.setMethod(FormPanel.METHOD_POST);

@@ -70,6 +70,18 @@
             <url>http://repo.geosdi.org/artifactory/libs-snapshot-local</url>
         </repository>
 
+        <!-- Spring -->
+        <repository>
+            <id>repository.spring.release</id>
+            <name>Spring GA Repository</name>
+            <url>http://repo.spring.io/release</url>
+        </repository>
+        <repository>
+            <id>repository.spring.snapshot</id>
+            <name>Spring Snapshot Repository</name>
+            <url>http://repo.spring.io/snapshot</url>
+        </repository>
+        
         <!-- Hibernate Spatial -->
         <repository>
             <id>Hibernate Spatial repo</id>
@@ -128,15 +140,6 @@
             <id>gwtquery-ui-repository</id>
             <url>http://gwtquery-ui.googlecode.com/svn/mavenrepo</url>
         </repository>
-        
-        <!-- repository>
-            <id>boundlessgeo</id>
-            <name>BoundlessGeo Maven Repository</name>
-            <url>http://repo.boundlessgeo.com/main/</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository -->
     </repositories>
 
     <modules>

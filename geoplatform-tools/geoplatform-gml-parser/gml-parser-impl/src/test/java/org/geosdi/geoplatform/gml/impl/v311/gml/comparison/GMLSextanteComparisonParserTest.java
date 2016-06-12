@@ -37,10 +37,9 @@ package org.geosdi.geoplatform.gml.impl.v311.gml.comparison;
 
 import org.geosdi.geoplatform.gml.impl.v311.jaxb.context.factory.GMLContextFactoryV311;
 import org.geosdi.geoplatform.gml.impl.v311.jaxb.context.factory.GMLContextType;
-import org.geosdi.geoplatform.junit.Order;
-import org.geosdi.geoplatform.junit.OrderedRunner;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 
 import java.util.concurrent.TimeUnit;
 
@@ -49,11 +48,10 @@ import java.util.concurrent.TimeUnit;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@RunWith(OrderedRunner.class)
+@FixMethodOrder(value = MethodSorters.NAME_ASCENDING)
 public class GMLSextanteComparisonParserTest extends AbstractGMLComparisonTest {
 
     @Test
-    @Order(order = 2)
     public void gmlPointSextantePoolTest() throws Exception {
         logger.info("gmlPointSextantePoolTest : Executed {} threads in {} s \n",
                 super.defineNumThreads(),
@@ -63,7 +61,6 @@ public class GMLSextanteComparisonParserTest extends AbstractGMLComparisonTest {
     }
 
     @Test
-    @Order(order = 1)
     public void gmlPointSextanteSimpleTest() throws Exception {
         logger.info("gmlPointSextanteSimpleTest : Executed {} threads in {} s \n",
                 super.defineNumThreads(),
@@ -73,7 +70,6 @@ public class GMLSextanteComparisonParserTest extends AbstractGMLComparisonTest {
     }
 
     @Test
-    @Order(order = 3)
     public void gmlLineStringSextantePoolTest() throws Exception {
         logger.info("gmlLineStringSextantePoolTest : Executed {} threads in {} s \n",
                 super.defineNumThreads(),
@@ -83,7 +79,6 @@ public class GMLSextanteComparisonParserTest extends AbstractGMLComparisonTest {
     }
 
     @Test
-    @Order(order = 4)
     public void gmlLineStringSextanteSimpleTest() throws Exception {
         logger.info("gmlLineStringSextanteSimpleTest : Executed {} threads in {} s \n",
                 super.defineNumThreads(),
@@ -93,7 +88,6 @@ public class GMLSextanteComparisonParserTest extends AbstractGMLComparisonTest {
     }
 
     @Test
-    @Order(order = 5)
     public void gmlLinearRingSextantePoolTest() throws Exception {
         logger.info("gmlLinearRingSextantePoolTest : Executed {} threads in {} s \n",
                 super.defineNumThreads(),
@@ -103,7 +97,6 @@ public class GMLSextanteComparisonParserTest extends AbstractGMLComparisonTest {
     }
 
     @Test
-    @Order(order = 6)
     public void gmlLinearRingSextanteSimpleTest() throws Exception {
         logger.info("gmlLinearRingSextanteSimpleTest : Executed {} threads in {} s \n",
                 super.defineNumThreads(),
@@ -113,7 +106,6 @@ public class GMLSextanteComparisonParserTest extends AbstractGMLComparisonTest {
     }
 
     @Test
-    @Order(order = 7)
     public void gmlPolygonSextantePoolTest() throws Exception {
         logger.info("gmlPolygonSextantePoolTest : Executed {} threads in {} s \n",
                 super.defineNumThreads(),
@@ -123,7 +115,6 @@ public class GMLSextanteComparisonParserTest extends AbstractGMLComparisonTest {
     }
 
     @Test
-    @Order(order = 8)
     public void gmlPolygonSextanteSimpleTest() throws Exception {
         logger.info("gmlPolygonSextanteSimpleTest : Executed {} threads in {} s \n",
                 super.defineNumThreads(),
@@ -133,7 +124,6 @@ public class GMLSextanteComparisonParserTest extends AbstractGMLComparisonTest {
     }
 
     @Test
-    @Order(order = 9)
     public void gmlMultiPointSextantePoolTest() throws Exception {
         logger.info("gmlMultiPointSextantePoolTest : Executed {} threads in {} s \n",
                 super.defineNumThreads(),
@@ -143,7 +133,6 @@ public class GMLSextanteComparisonParserTest extends AbstractGMLComparisonTest {
     }
 
     @Test
-    @Order(order = 10)
     public void gmlMultiPointSextanteSimpleTest() throws Exception {
         logger.info("gmlMultiPointSextanteSimpleTest : Executed {} threads in {} s \n",
                 super.defineNumThreads(),
@@ -153,7 +142,6 @@ public class GMLSextanteComparisonParserTest extends AbstractGMLComparisonTest {
     }
 
     @Test
-    @Order(order = 11)
     public void gmlMultiLineStringSextantePoolTest() throws Exception {
         logger.info("gmlMultiLineStringSextantePoolTest : Executed {} threads in {} s \n",
                 super.defineNumThreads(),
@@ -163,7 +151,6 @@ public class GMLSextanteComparisonParserTest extends AbstractGMLComparisonTest {
     }
 
     @Test
-    @Order(order = 12)
     public void gmlMultiLineStringSextanteSimpleTest() throws Exception {
         logger.info("gmlMultiLineStringSextanteSimpleTest : Executed {} threads in {} s \n",
                 super.defineNumThreads(),
@@ -173,7 +160,6 @@ public class GMLSextanteComparisonParserTest extends AbstractGMLComparisonTest {
     }
 
     @Test
-    @Order(order = 13)
     public void gmlMultiPolygonSextantePoolTest() throws Exception {
         logger.info("gmlMultiPolygonSextantePoolTest : Executed {} threads in {} s \n",
                 super.defineNumThreads(),
@@ -183,7 +169,6 @@ public class GMLSextanteComparisonParserTest extends AbstractGMLComparisonTest {
     }
 
     @Test
-    @Order(order = 14)
     public void gmlMultiPolygonSextanteSimpleTest() throws Exception {
         logger.info("gmlMultiPolygonSextanteSimpleTest : Executed {} threads in {} s \n",
                 super.defineNumThreads(),
@@ -193,7 +178,6 @@ public class GMLSextanteComparisonParserTest extends AbstractGMLComparisonTest {
     }
 
     @Test
-    @Order(order = 17)
     public void gmlMultiCurveSextantePoolTest() throws Exception {
         logger.info("gmlMultiCurveSextantePoolTest : Executed {} threads in {} s \n",
                 super.defineNumThreads(),
@@ -203,7 +187,6 @@ public class GMLSextanteComparisonParserTest extends AbstractGMLComparisonTest {
     }
 
     @Test
-    @Order(order = 18)
     public void gmlMultiCurveSextanteSimpleTest() throws Exception {
         logger.info("gmlMultiCurveSextanteSimpleTest : Executed {} threads in {} s \n",
                 super.defineNumThreads(),
@@ -213,7 +196,6 @@ public class GMLSextanteComparisonParserTest extends AbstractGMLComparisonTest {
     }
 
     @Test
-    @Order(order = 15)
     public void gmlMultiSurfaceSextantePoolTest() throws Exception {
         logger.info("gmlMultiSurfaceSextantePoolTest : Executed {} threads in {} s \n",
                 super.defineNumThreads(),
@@ -223,7 +205,6 @@ public class GMLSextanteComparisonParserTest extends AbstractGMLComparisonTest {
     }
 
     @Test
-    @Order(order = 16)
     public void gmlMultiSurfaceSextanteSimpleTest() throws Exception {
         logger.info("gmlMultiSurfaceSextanteSimpleTest : Executed {} threads in {} s \n",
                 super.defineNumThreads(),
@@ -233,7 +214,6 @@ public class GMLSextanteComparisonParserTest extends AbstractGMLComparisonTest {
     }
 
     @Test
-    @Order(order = 19)
     public void gmlGeometryCollectionSextantePoolTest() throws Exception {
         logger.info("gmlGeometryCollectionSextantePoolTest : Executed {} threads in {} s \n",
                 super.defineNumThreads(),
@@ -243,7 +223,6 @@ public class GMLSextanteComparisonParserTest extends AbstractGMLComparisonTest {
     }
 
     @Test
-    @Order(order = 20)
     public void gmlGeometryCollectionSimpleTest() throws Exception {
         logger.info("gmlGeometryCollectionSimpleTest : Executed {} threads in {} s \n",
                 super.defineNumThreads(),
@@ -253,7 +232,6 @@ public class GMLSextanteComparisonParserTest extends AbstractGMLComparisonTest {
     }
 
     @Test
-    @Order(order = 21)
     public void totalCountTestsExecuted() {
         logger.info("#####################Executed : {} Tasks\n", count.get());
     }

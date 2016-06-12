@@ -37,11 +37,10 @@ package org.geosdi.geoplatform.connector.jaxb.comparison;
 
 import org.geosdi.geoplatform.connector.jaxb.context.CSWJAXBContext;
 import org.geosdi.geoplatform.connector.jaxb.context.pool.CSWJAXBContextPool;
-import org.geosdi.geoplatform.junit.Order;
-import org.geosdi.geoplatform.junit.OrderedRunner;
 import org.geosdi.geoplatform.xml.csw.v202.GetRecordsType;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 
 import javax.xml.bind.JAXBContext;
 import java.util.concurrent.TimeUnit;
@@ -50,12 +49,11 @@ import java.util.concurrent.TimeUnit;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@RunWith(OrderedRunner.class)
+@FixMethodOrder(value = MethodSorters.NAME_ASCENDING)
 public class CSWContextComparisonTest
         extends AbstractCSWComparisonTest {
 
     @Test
-    @Order(order = 1)
     public void cswPooledContextTest() throws Exception {
         logger.info("CSWPooledContextTest : Executed {} threads in {} s \n",
                 super.defineNumThreads(),
@@ -65,7 +63,6 @@ public class CSWContextComparisonTest
     }
 
     @Test
-    @Order(order = 0)
     public void cswSimpleContextTest() throws Exception {
         logger.info("CSWSimpleContextTest : Executed {} threads in {} s \n",
                 super.defineNumThreads(),

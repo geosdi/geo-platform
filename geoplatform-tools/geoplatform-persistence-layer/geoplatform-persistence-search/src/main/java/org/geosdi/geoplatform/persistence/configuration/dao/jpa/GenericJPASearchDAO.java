@@ -80,7 +80,7 @@ public abstract class GenericJPASearchDAO<T extends Object> implements GPBaseSea
                 ? Search.getFullTextEntityManager(
                 entityManager) : ftEntityManager;
     }
-
+    
     @Override
     public T persist(T entity) {
         Preconditions.checkNotNull(entity);

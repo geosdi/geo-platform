@@ -18,7 +18,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring-data-mongodb-version>1.8.4.RELEASE</spring-data-mongodb-version>
+        <spring-data-mongodb-version>1.9.2.RELEASE</spring-data-mongodb-version>
         <hibernate-validator-version>5.2.4.Final</hibernate-validator-version>
         <javax-el-version>3.0.0</javax-el-version>
     </properties>

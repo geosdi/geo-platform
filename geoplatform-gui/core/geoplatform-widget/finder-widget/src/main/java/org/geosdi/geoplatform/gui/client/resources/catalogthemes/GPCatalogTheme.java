@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.gui.client.resources.catalogthemes;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.ClientBundle;
-import com.google.gwt.resources.client.ClientBundle.Source;
 import com.google.gwt.resources.client.TextResource;
 
 /**
@@ -47,7 +46,7 @@ import com.google.gwt.resources.client.TextResource;
  */
 public interface GPCatalogTheme extends ClientBundle {
     
-    public static final GPCatalogTheme RESOURCES = GWT.create(GPCatalogTheme.class);
+    GPCatalogTheme RESOURCES = GWT.create(GPCatalogTheme.class);
 
     @Source(value = "css/GPCatalogFinder.css")
     TextResource gpCatalogFinderCss();

@@ -39,6 +39,8 @@ import org.elasticsearch.cluster.metadata.MappingMetaData;
 import org.elasticsearch.common.collect.ImmutableOpenMap;
 import org.springframework.core.Ordered;
 
+import java.util.Map;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -97,17 +99,32 @@ public interface GPIndexCreator extends Ordered {
     }
 
     /**
-     * @return {@link String}
+     * @return {@link MappingMetaData}
      * @throws Exception
      */
-    default String getMappingAsString() throws Exception {
+    default MappingMetaData loadMappingMetaData() throws Exception {
         ImmutableOpenMap<String, ImmutableOpenMap<String, MappingMetaData>> indexMappings = client()
                 .admin().indices().prepareGetMappings(getIndexName())
                 .setTypes(getIndexSettings().getIndexType())
                 .execute().actionGet().getMappings();
         ImmutableOpenMap<String, MappingMetaData> typeMappings = indexMappings.get(getIndexName());
-        MappingMetaData mapping = typeMappings.get(getIndexType());
-        return mapping.source().toString();
+        return typeMappings.get(getIndexType());
+    }
+
+    /**
+     * @return {@link String}
+     * @throws Exception
+     */
+    default String getMappingAsString() throws Exception {
+        return loadMappingMetaData().source().toString();
+    }
+
+    /**
+     * @return {@link Map<String, Object>}
+     * @throws Exception
+     */
+    default Map<String, Object> getMappingAsMap() throws Exception {
+        return loadMappingMetaData().sourceAsMap();
     }
 
     /**

@@ -45,7 +45,6 @@
                 <version>${hibernate-version}</version>
             </dependency>
 
-
             <!-- =========================================================== -->
             <!-- ============== HIBERNATE JAVAX PERSISTENCE ================ -->
             <!-- =========================================================== -->
@@ -87,7 +86,6 @@
                 <artifactId>hibernate-spatial</artifactId>
                 <version>${hibernate-version}</version>
             </dependency>
-
 
             <!-- =========================================================== -->
             <!-- ===================== SPRING DATA JPA ===================== -->

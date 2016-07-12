@@ -170,6 +170,11 @@
             <artifactId>search-jpa-hibernate</artifactId>
         </dependency>
         
+        <dependency>
+            <groupId>com.googlecode.genericdao</groupId>
+            <artifactId>search</artifactId>
+        </dependency>
+        
         <!-- H2 and GEODB -->
         <dependency>
             <groupId>com.h2database</groupId>

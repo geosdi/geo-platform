@@ -47,18 +47,27 @@
         <!-- geoSDI Repository -->
         <!--.................................. -->
         <repository>
-            <uniqueVersion>false</uniqueVersion>
-            <id>geosdi</id>
-            <url>ftp://repo.geosdi.org/</url>
+            <id>geosdi-snapshots</id>
+            <name>repo.geosdi.org-snapshots</name>
+            <url>http://repo.geosdi.org/artifactory/libs-snapshot-local</url>
         </repository>
     </distributionManagement>
  
     <repositories>
         <!-- geoSDI -->
         <repository>
-            <id>geosdi</id>
-            <name>geoSDI Repository</name>
-            <url>http://repo.geosdi.org</url>
+            <id>geosdi-realese</id>
+            <name>repo.geosdi.org-releases</name>
+            <url>http://repo.geosdi.org/artifactory/libs-release-local</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        
+        <repository>
+            <id>geosdi-snapshots</id>
+            <name>repo.geosdi.org-snapshots</name>
+            <url>http://repo.geosdi.org/artifactory/libs-snapshot-local</url>
         </repository>
 
         <!-- Hibernate Spatial -->
@@ -673,38 +682,45 @@
                 <scope>test</scope>
             </dependency>
 
-            <!-- =========================================================== -->
-            <!-- HIBERNATE-GENERIC-DAO -->
-            <!-- =========================================================== -->
-            <dependency>
-                <groupId>com.googlecode.genericdao</groupId>
-                <artifactId>dao</artifactId>
-                <version>${hibernate-generic-dao-version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>javax.persistence</groupId>
-                        <artifactId>persistence-api</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
+<!-- =========================================================== -->
+<!-- HIBERNATE-GENERIC-DAO -->
+<!-- =========================================================== -->
+<dependency>
+    <groupId>com.googlecode.genericdao</groupId>
+    <artifactId>dao</artifactId>
+    <version>${hibernate-generic-dao-version}</version>
+    <exclusions>
+        <exclusion>
+            <groupId>javax.persistence</groupId>
+            <artifactId>persistence-api</artifactId>
+        </exclusion>
+    </exclusions>
+</dependency>
 
-            <dependency>
-                <groupId>com.googlecode.genericdao</groupId>
-                <artifactId>search-hibernate</artifactId>
-                <version>${hibernate-generic-dao-version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>javax.persistence</groupId>
-                        <artifactId>persistence-api</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
+<dependency>
+    <groupId>com.googlecode.genericdao</groupId>
+    <artifactId>search-hibernate</artifactId>
+    <version>${hibernate-generic-dao-version}</version>
+    <exclusions>
+        <exclusion>
+            <groupId>javax.persistence</groupId>
+            <artifactId>persistence-api</artifactId>
+        </exclusion>
+    </exclusions>
+</dependency>
 
-            <dependency>
-                <groupId>com.googlecode.genericdao</groupId>
-                <artifactId>search-jpa-hibernate</artifactId>
-                <version>${hibernate-generic-dao-version}</version>
-            </dependency>
+<dependency>
+    <groupId>com.googlecode.genericdao</groupId>
+    <artifactId>search-jpa-hibernate</artifactId>
+    <version>${hibernate-generic-dao-version}</version>
+</dependency>
+
+<dependency>
+    <groupId>com.googlecode.genericdao</groupId>
+    <artifactId>search</artifactId>
+    <version>${hibernate-generic-dao-version}</version>
+</dependency>
+
 
             <!-- =========================================================== -->
             <!-- HIBERNATE -->
@@ -1016,7 +1032,7 @@
             <dependency>
                 <groupId>com.google.gwt</groupId>
                 <artifactId>gwtquery-ui</artifactId>
-                <version>r146</version>
+                <version>r147</version>
                 <!--                <scope>provided</scope>-->
             </dependency>
             

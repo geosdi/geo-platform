@@ -29,6 +29,8 @@
         <module>geoplatform-swagger-support</module>
         <module>geoplatform-quartz-support</module>
         <module>geoplatform-jackson-jts-support</module>
+        <module>geoplatform-bridge-support</module>
+        <module>geoplatform-primitive-type</module>
     </modules>
 
 </project>

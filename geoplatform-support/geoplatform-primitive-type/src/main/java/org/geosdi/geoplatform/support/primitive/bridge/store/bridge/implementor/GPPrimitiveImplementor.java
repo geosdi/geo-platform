@@ -50,7 +50,7 @@ public abstract class GPPrimitiveImplementor<P extends Object> implements Primit
                 "  key = " + key +
                 ", primitiveClass = " + primitiveClass +
                 ", primitiveName = " + getPrimitiveName() +
-                ", operators = " + getOperatorLoader()::load +
+                ", operators = " + getOperatorLoader().load() +
                 '}';
     }
 

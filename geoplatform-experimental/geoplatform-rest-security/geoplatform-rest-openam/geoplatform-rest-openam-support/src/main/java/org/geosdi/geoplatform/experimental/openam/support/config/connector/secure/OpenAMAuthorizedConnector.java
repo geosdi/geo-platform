@@ -13,6 +13,8 @@ import org.geosdi.geoplatform.experimental.openam.api.model.authenticate.IOpenAM
 import org.geosdi.geoplatform.experimental.openam.api.model.authenticate.IOpenAMLogout;
 import org.geosdi.geoplatform.experimental.openam.api.model.authenticate.OpenAMAuthenticate;
 import org.geosdi.geoplatform.experimental.openam.api.model.authenticate.OpenAMLogout;
+import org.geosdi.geoplatform.experimental.openam.api.model.error.IOpenAMErrorResponse;
+import org.geosdi.geoplatform.experimental.openam.api.model.error.OpenAMErrorResponse;
 import org.geosdi.geoplatform.experimental.openam.support.config.connector.base.BaseOpenAMConnector;
 import org.geosdi.geoplatform.experimental.openam.support.connector.request.authenticate.IOpenAMAuthenticateRequest;
 import org.geosdi.geoplatform.experimental.openam.support.connector.request.authenticate.OpenAMLogoutRequest;
@@ -124,8 +126,10 @@ public abstract class OpenAMAuthorizedConnector implements BaseOpenAMConnector {
         CloseableHttpResponse response = this.httpClient.execute(httpPost);
 
         if (response.getStatusLine().getStatusCode() != 200) {
-            throw new IllegalStateException("OpenAMValidateToken Error Code : "
-                    + response.getStatusLine().getStatusCode());
+            IOpenAMErrorResponse openAMErrorResponse = this.openAMReader
+                    .readValue(response.getEntity().getContent(), OpenAMErrorResponse.class);
+            throw new IllegalStateException("OpenAMAuthentication Error Code : " + openAMErrorResponse.getCode()
+                    + " - Reason : " + openAMErrorResponse.getReason() + " - Message : " + openAMErrorResponse.getMessage());
         }
         return this.openAMReader.readValue(response.getEntity().getContent(), OpenAMAuthenticate.class);
     }

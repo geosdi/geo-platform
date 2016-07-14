@@ -78,6 +78,12 @@
                 <version>${jackson-version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>com.fasterxml.jackson.dataformat</groupId>
+                <artifactId>jackson-dataformats-binary</artifactId>
+                <version>${jackson-version}</version>
+            </dependency>
+
             <!-- JAX-RS provider -->
             <dependency>
                 <groupId>com.fasterxml.jackson.jaxrs</groupId>
@@ -95,7 +101,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <jackson-version>2.7.5</jackson-version>
+        <jackson-version>2.8.0</jackson-version>
     </properties>
     
 </project>

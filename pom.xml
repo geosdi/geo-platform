@@ -273,7 +273,15 @@
                 <scope>import</scope>
                 <version>${project.version}</version>
             </dependency>
-
+            
+            <dependency>
+                <groupId>org.geosdi</groupId>
+                <artifactId>geoplatform-jackson-dependency</artifactId>
+                <type>pom</type>
+                <scope>import</scope>
+                <version>${project.version}</version>
+            </dependency>
+            
             <!-- =========================================================== -->
             <!-- GEOPLATFORM-WS MODULES -->
             <!-- =========================================================== -->

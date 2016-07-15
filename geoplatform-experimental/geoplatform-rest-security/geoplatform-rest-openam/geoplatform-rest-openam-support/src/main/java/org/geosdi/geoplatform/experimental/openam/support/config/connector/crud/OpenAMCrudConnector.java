@@ -1,8 +1,6 @@
 package org.geosdi.geoplatform.experimental.openam.support.config.connector.crud;
 
-import com.google.common.base.Charsets;
 import com.google.common.base.Preconditions;
-import com.google.common.io.CharStreams;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpPost;
@@ -13,6 +11,8 @@ import org.apache.http.entity.StringEntity;
 import org.geosdi.geoplatform.experimental.openam.api.model.authenticate.IOpenAMAuthenticate;
 import org.geosdi.geoplatform.experimental.openam.api.model.delete.IOpenAMDeleteResponse;
 import org.geosdi.geoplatform.experimental.openam.api.model.delete.OpenAMDeleteResponse;
+import org.geosdi.geoplatform.experimental.openam.api.model.error.IOpenAMErrorResponse;
+import org.geosdi.geoplatform.experimental.openam.api.model.error.OpenAMErrorResponse;
 import org.geosdi.geoplatform.experimental.openam.api.model.groups.IOpenAMGroup;
 import org.geosdi.geoplatform.experimental.openam.api.model.groups.IOpenAMGroupResponse;
 import org.geosdi.geoplatform.experimental.openam.api.model.groups.OpenAMGroupResponse;
@@ -26,7 +26,6 @@ import org.geosdi.geoplatform.experimental.openam.support.connector.request.user
 import org.geosdi.geoplatform.experimental.openam.support.connector.request.users.OpenAMUpdateUserRequest;
 import org.geosdi.geoplatform.experimental.rs.security.connector.settings.GPConnectorSettings;
 
-import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URLDecoder;
 
@@ -78,9 +77,10 @@ public abstract class OpenAMCrudConnector extends OpenAMAuthorizedConnector {
 //                .toString(new InputStreamReader(response.getEntity().getContent(), Charsets.UTF_8)));
 
         if (response.getStatusLine().getStatusCode() != 201) {
-            throw new IllegalStateException("OpenAMCreateUser Error : "
-                    + CharStreams.toString(new InputStreamReader(response.getEntity()
-                    .getContent(), Charsets.UTF_8)));
+            IOpenAMErrorResponse openAMErrorResponse = this.openAMReader
+                    .readValue(response.getEntity().getContent(), OpenAMErrorResponse.class);
+            throw new IllegalStateException("OpenAMUpdateUser Error Code : " + openAMErrorResponse.getCode()
+                    + " - Reason : " + openAMErrorResponse.getReason() + " - Message : " + openAMErrorResponse.getMessage());
         }
         this.logout(openAMAuthenticate.getTokenId());
         return this.openAMReader.readValue(response.getEntity().getContent(), OpenAMUserResponse.class);
@@ -119,8 +119,10 @@ public abstract class OpenAMCrudConnector extends OpenAMAuthorizedConnector {
         CloseableHttpResponse response = this.httpClient.execute(httpPut);
 
         if (response.getStatusLine().getStatusCode() != 200) {
-            throw new IllegalStateException("OpenAMUpdateUser Error Code : "
-                    + response.getStatusLine().getStatusCode());
+            IOpenAMErrorResponse openAMErrorResponse = this.openAMReader
+                    .readValue(response.getEntity().getContent(), OpenAMErrorResponse.class);
+            throw new IllegalStateException("OpenAMUpdateUser Error Code : " + openAMErrorResponse.getCode()
+                    + " - Reason : " + openAMErrorResponse.getReason() + " - Message : " + openAMErrorResponse.getMessage());
         }
         this.logout(openAMAuthenticate.getTokenId());
         return this.openAMReader.readValue(response.getEntity().getContent(), OpenAMUserResponse.class);
@@ -162,8 +164,10 @@ public abstract class OpenAMCrudConnector extends OpenAMAuthorizedConnector {
             }
 
             if (response.getStatusLine().getStatusCode() != 200) {
-                throw new IllegalStateException("OpenAMDeleteeUser Error Code : "
-                        + response.getStatusLine().getStatusCode());
+                IOpenAMErrorResponse openAMErrorResponse = this.openAMReader
+                        .readValue(response.getEntity().getContent(), OpenAMErrorResponse.class);
+                throw new IllegalStateException("OpenAMUpdateUser Error Code : " + openAMErrorResponse.getCode()
+                        + " - Reason : " + openAMErrorResponse.getReason() + " - Message : " + openAMErrorResponse.getMessage());
             }
             return this.openAMReader.readValue(response.getEntity().getContent(), OpenAMDeleteResponse.class);
         } finally {
@@ -205,8 +209,10 @@ public abstract class OpenAMCrudConnector extends OpenAMAuthorizedConnector {
         CloseableHttpResponse response = this.httpClient.execute(httpPut);
 
         if (response.getStatusLine().getStatusCode() != 200) {
-            throw new IllegalStateException("OpenAMUpdateGroupAddingUser Error Code : "
-                    + response.getStatusLine().getStatusCode());
+            IOpenAMErrorResponse openAMErrorResponse = this.openAMReader
+                    .readValue(response.getEntity().getContent(), OpenAMErrorResponse.class);
+            throw new IllegalStateException("OpenAMUpdateUser Error Code : " + openAMErrorResponse.getCode()
+                    + " - Reason : " + openAMErrorResponse.getReason() + " - Message : " + openAMErrorResponse.getMessage());
         }
 
         super.logout(openAMAuthenticate.getTokenId());

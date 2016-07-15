@@ -91,8 +91,10 @@ public abstract class OpenAMAuthorizedConnector implements BaseOpenAMConnector {
         CloseableHttpResponse response = this.httpClient.execute(httpPost);
 
         if (response.getStatusLine().getStatusCode() != 200) {
-            throw new IllegalStateException("OpenAMValidateToken Error Code : "
-                    + response.getStatusLine().getStatusCode());
+            IOpenAMErrorResponse openAMErrorResponse = this.openAMReader
+                    .readValue(response.getEntity().getContent(), OpenAMErrorResponse.class);
+            throw new IllegalStateException("OpenAMUpdateUser Error Code : " + openAMErrorResponse.getCode()
+                    + " - Reason : " + openAMErrorResponse.getReason() + " - Message : " + openAMErrorResponse.getMessage());
         }
         return this.openAMReader.readValue(response.getEntity().getContent(), OpenAMAuthenticate.class);
     }
@@ -156,8 +158,10 @@ public abstract class OpenAMAuthorizedConnector implements BaseOpenAMConnector {
         CloseableHttpResponse response = this.httpClient.execute(httpPost);
 
         if (response.getStatusLine().getStatusCode() != 200) {
-            throw new IllegalStateException("OpenAMLogout Error Code : "
-                    + response.getStatusLine().getStatusCode());
+            IOpenAMErrorResponse openAMErrorResponse = this.openAMReader
+                    .readValue(response.getEntity().getContent(), OpenAMErrorResponse.class);
+            throw new IllegalStateException("OpenAMUpdateUser Error Code : " + openAMErrorResponse.getCode()
+                    + " - Reason : " + openAMErrorResponse.getReason() + " - Message : " + openAMErrorResponse.getMessage());
         }
         return this.openAMReader.readValue(response.getEntity().getContent(), OpenAMLogout.class);
     }

@@ -80,7 +80,7 @@
 
             <dependency>
                 <groupId>com.fasterxml.jackson.dataformat</groupId>
-                <artifactId>jackson-dataformats-binary</artifactId>
+                <artifactId>jackson-dataformat-smile</artifactId>
                 <version>${jackson-version}</version>
             </dependency>
 

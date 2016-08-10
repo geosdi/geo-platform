@@ -16,7 +16,7 @@ public interface GPBaseJpaDAO<T extends Object, ID extends Serializable> extends
     /**
      * @param theEntityManager
      */
-    void setEm(final EntityManager theEntityManager);
+    void setEm(EntityManager theEntityManager);
 
     /**
      * @return {@link SessionFactory}
@@ -26,5 +26,5 @@ public interface GPBaseJpaDAO<T extends Object, ID extends Serializable> extends
     /**
      * @return {@link Cache}
      */
-     Cache getCache();
+    Cache getCache();
 }

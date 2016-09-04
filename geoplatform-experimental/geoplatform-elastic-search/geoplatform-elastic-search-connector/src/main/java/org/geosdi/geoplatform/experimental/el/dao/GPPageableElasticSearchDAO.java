@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -60,8 +61,23 @@ public interface GPPageableElasticSearchDAO<D extends Document> {
      * @return {@link SearchResponse}
      * @throws Exception
      */
-    <P extends Page> SearchResponse find(P page,
-            AbstractAggregationBuilder aggregationBuilder) throws Exception;
+    <P extends Page> SearchResponse find(P page, AbstractAggregationBuilder aggregationBuilder)
+            throws Exception;
+
+    /**
+     * @param page
+     * @param <P>
+     * @throws Exception
+     */
+    <P extends Page> void deleteByPage(P page) throws Exception;
+
+    /**
+     * @param page
+     * @param <P>
+     * @return {@link CompletableFuture<Boolean>}
+     * @throws Exception
+     */
+    <P extends Page> CompletableFuture<Boolean> deleteByPageAsync(P page) throws Exception;
 
     /**
      *
@@ -165,7 +181,7 @@ public interface GPPageableElasticSearchDAO<D extends Document> {
             logger.trace("####################Called {} #internalBuildPage with parameters " +
                     "from : {} - size : {}\n\n", getClass().getSimpleName(), from, size);
 
-            return (Builder) builder.setFrom(this.from).setSize(this.size);
+            return (Builder) ((this.from >= 0) ? builder.setFrom(this.from).setSize(this.size) : builder.setSize(this.size));
         }
 
         @Override

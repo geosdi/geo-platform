@@ -35,16 +35,14 @@
 package org.geosdi.geoplatform.persistence.dao.jpa;
 
 import com.google.common.base.Preconditions;
-import org.geosdi.geoplatform.persistence.dao.GPAbstractBaseDAO;
 import org.geosdi.geoplatform.persistence.dao.exception.GPDAOException;
+import org.geosdi.geoplatform.persistence.dao.jpa.criteria.GPCriteriaJpaDAO;
 import org.hibernate.*;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -57,10 +55,8 @@ import java.util.List;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Transactional
-public abstract class GPAbstractJpaDAO<T extends Object, ID extends Serializable> extends GPAbstractBaseDAO<T, ID>
+public abstract class GPAbstractJpaDAO<T extends Object, ID extends Serializable> extends GPCriteriaJpaDAO<T, ID>
         implements GPBaseJpaDAO<T, ID> {
-
-    protected EntityManager entityManager;
 
     public GPAbstractJpaDAO(Class<T> thePersistentClass) {
         super(thePersistentClass);
@@ -179,45 +175,5 @@ public abstract class GPAbstractJpaDAO<T extends Object, ID extends Serializable
     public Number count(Criterion criterion) {
         return (Number) getSession().createCriteria(persistentClass).add(criterion)
                 .setProjection(Projections.rowCount()).uniqueResult();
-    }
-
-    /**
-     * @param theEntityManager
-     */
-    @PersistenceContext
-    @Override
-    public void setEm(EntityManager theEntityManager) {
-        Preconditions.checkNotNull(theEntityManager);
-        this.entityManager = theEntityManager;
-    }
-
-    /**
-     * @return {@link SessionFactory}
-     */
-    @Override
-    public final SessionFactory getSessionFactory() {
-        return getSession().getSessionFactory();
-    }
-
-    /**
-     * @return {@link Cache}
-     */
-    @Override
-    public Cache getCache() {
-        return getSessionFactory().getCache();
-    }
-
-    /**
-     * @return {@link Session}
-     */
-    protected final Session getSession() {
-        return (Session) this.entityManager.getDelegate();
-    }
-
-    /**
-     * @return {@link Criteria}
-     */
-    protected final Criteria createCriteria() {
-        return this.getSession().createCriteria(persistentClass);
     }
 }

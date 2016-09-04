@@ -9,7 +9,9 @@ import org.geosdi.geoplatform.experimental.el.index.GPIndexCreator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.Resource;
 import java.nio.file.Path;
+import java.util.concurrent.Executor;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -22,6 +24,8 @@ abstract class GPBaseElasticSearchDAO<D extends Document> implements GPElasticSe
     private GPIndexCreator indexCreator;
     protected GPBaseMapper<D> mapper;
     protected Client elastichSearchClient;
+    @Resource(name = "elasticSearchExecutor")
+    protected Executor elasticSearchExecutor;
 
     /**
      * @param document
@@ -51,12 +55,12 @@ abstract class GPBaseElasticSearchDAO<D extends Document> implements GPElasticSe
      * @throws Exception
      */
     @Override
-    public D readDocument(Path thePath)  {
+    public D readDocument(Path thePath) {
         Preconditions.checkArgument((thePath != null) && (thePath.toFile().exists()), "The Parameter thePath must " +
                 "not be null and the File must exist.");
         try {
             return this.mapper.read(thePath.toFile());
-        }catch (Exception ex) {
+        } catch (Exception ex) {
             logger.error("@@@@@@@@@@@@@@@@@@@@@@@@@Error read path : {} - Exception : {}\n", thePath, ex.getMessage());
             ex.printStackTrace();
         }
@@ -132,8 +136,9 @@ abstract class GPBaseElasticSearchDAO<D extends Document> implements GPElasticSe
     @Override
     public final void afterPropertiesSet() throws Exception {
         Preconditions.checkNotNull(this.mapper, "The Mapper must not be null.");
-        Preconditions.checkNotNull(this.indexCreator, "The Index Creator must " + "not be null.");
+        Preconditions.checkNotNull(this.indexCreator, "The Index Creator must not be null.");
         this.elastichSearchClient = this.indexCreator.client();
-        Preconditions.checkNotNull(this.elastichSearchClient, "The ElasticSearch Client must " + "not be null.");
+        Preconditions.checkNotNull(this.elastichSearchClient, "The ElasticSearch Client must not be null.");
+        Preconditions.checkNotNull(this.elasticSearchExecutor, "The ElasticSearchExecutor must not be null");
     }
 }

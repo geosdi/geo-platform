@@ -212,7 +212,7 @@ public abstract class AbstractElasticSearchDAO<D extends Document> extends Pagea
                 this.elastichSearchClient.delete(new DeleteRequest(getIndexName(), getIndexType(),
                         document.getId())).actionGet();
             });
-            searchResponse = this.elastichSearchClient.prepareSearchScroll(searchResponse.getScrollId()).setScroll(new TimeValue(600000)).execute().actionGet();
+            searchResponse = this.elastichSearchClient.prepareSearchScroll(searchResponse.getScrollId()).setScroll(new TimeValue(60000)).execute().actionGet();
             if (searchResponse.getHits().getHits().length == 0) {
                 break;
             }

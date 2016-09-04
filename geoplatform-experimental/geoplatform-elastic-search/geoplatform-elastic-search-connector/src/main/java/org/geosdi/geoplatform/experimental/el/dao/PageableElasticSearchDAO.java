@@ -1,12 +1,15 @@
 package org.geosdi.geoplatform.experimental.el.dao;
 
 import com.google.common.base.Preconditions;
+import org.elasticsearch.action.delete.DeleteRequest;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.rest.RestStatus;
 import org.elasticsearch.search.aggregations.AbstractAggregationBuilder;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
 
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -105,5 +108,43 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends GPBas
             throw new IllegalStateException("Problem in Search : " + searchResponse.status());
         }
         return searchResponse;
+    }
+
+    /**
+     * @param page
+     * @throws Exception
+     */
+    @Override
+    public <P extends Page> void deleteByPage(P page) throws Exception {
+        Preconditions.checkNotNull(page, "Parameter Page must not be null.");
+        SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient
+                .prepareSearch(getIndexName()).setTypes(getIndexType()));
+        logger.trace("#########################deleteByPage#Builder : \n{}\n", builder.toString());
+        SearchResponse searchResponse = builder.setSize((page.getSize() > 0) ? page.getSize() : 20)
+                .setScroll(new TimeValue(10000)).execute().actionGet();
+        if (searchResponse.status() != RestStatus.OK) {
+            throw new IllegalStateException("Problem in Search : " + searchResponse.status());
+        }
+        while (true) {
+            Stream.of(searchResponse.getHits().hits()).forEach(document -> {
+                this.elastichSearchClient.delete(new DeleteRequest(getIndexName(), getIndexType(),
+                        document.getId())).actionGet();
+            });
+            searchResponse = this.elastichSearchClient.prepareSearchScroll(searchResponse.getScrollId())
+                    .setScroll(new TimeValue(10000)).execute().actionGet();
+            if (searchResponse.getHits().getHits().length == 0) {
+                break;
+            }
+        }
+    }
+
+    /**
+     * @param page
+     * @return {@link CompletableFuture<Boolean>}
+     * @throws Exception
+     */
+    @Override
+    public <P extends Page> CompletableFuture<Boolean> deleteByPageAsync(P page) throws Exception {
+        return null;
     }
 }

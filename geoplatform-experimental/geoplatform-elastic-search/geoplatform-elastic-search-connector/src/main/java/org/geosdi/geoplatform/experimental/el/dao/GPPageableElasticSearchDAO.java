@@ -67,9 +67,10 @@ public interface GPPageableElasticSearchDAO<D extends Document> {
     /**
      * @param page
      * @param <P>
+     * @return {@link Boolean}
      * @throws Exception
      */
-    <P extends Page> void deleteByPage(P page) throws Exception;
+    <P extends Page> Boolean deleteByPage(P page) throws Exception;
 
     /**
      * @param page

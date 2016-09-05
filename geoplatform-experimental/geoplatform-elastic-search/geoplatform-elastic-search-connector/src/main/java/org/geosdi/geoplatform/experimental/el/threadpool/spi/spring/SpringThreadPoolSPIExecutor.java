@@ -19,15 +19,15 @@ public class SpringThreadPoolSPIExecutor implements GPThreadPoolSPIExecutor {
     protected static final Logger logger = LoggerFactory.getLogger(SpringThreadPoolSPIExecutor.class);
 
     /**
-     * @return {@link E}
+     * @return {@link Executor}
      */
     @Override
-    public <E extends Executor> E createExecutor() {
+    public Executor createExecutor() {
         GPThreadPoolConfigBuilder.GPThreadPoolConfig threadPoolConfig = GPElasticSearchThreadPoolConfigBuilder
                 .threadPoolConfigBuilder().build();
         logger.trace("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@{} is building Executor with Config : {}\n",
                 this.getThreadPoolSPIExecutorName(), threadPoolConfig);
-        return (E) new ThreadPoolTaskExecutor() {
+        return new ThreadPoolTaskExecutor() {
 
             {
                 super.setThreadNamePrefix(threadPoolConfig.getThreadNamePrefix());

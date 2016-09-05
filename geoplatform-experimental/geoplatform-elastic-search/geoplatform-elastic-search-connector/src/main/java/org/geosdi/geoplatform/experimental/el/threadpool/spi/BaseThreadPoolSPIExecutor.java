@@ -28,7 +28,7 @@ public class BaseThreadPoolSPIExecutor implements GPThreadPoolSPIExecutor {
         logger.trace("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@{} is building Executor with Config : {}\n",
                 this.getThreadPoolSPIExecutorName(), threadPoolConfig);
         return (E) new ThreadPoolExecutor(threadPoolConfig.getCorePoolSize(), threadPoolConfig.getMaxPoolSize(),
-                threadPoolConfig.getKeepAlive(), TimeUnit.MINUTES, threadPoolConfig.getQueue(),
+                threadPoolConfig.getKeepAlive(), TimeUnit.SECONDS, threadPoolConfig.getQueue(),
                 threadPoolConfig.getThreadFactory(), new ThreadPoolExecutor.CallerRunsPolicy());
     }
 }

@@ -115,27 +115,28 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends GPBas
      * @throws Exception
      */
     @Override
-    public <P extends Page> void deleteByPage(P page) throws Exception {
+    public <P extends Page> Boolean deleteByPage(P page) throws Exception {
         Preconditions.checkNotNull(page, "Parameter Page must not be null.");
         SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient
                 .prepareSearch(getIndexName()).setTypes(getIndexType()));
         logger.trace("#########################deleteByPage#Builder : \n{}\n", builder.toString());
-        SearchResponse searchResponse = builder.setSize((page.getSize() > 0) ? page.getSize() : 20)
-                .setScroll(new TimeValue(10000)).execute().actionGet();
+        SearchResponse searchResponse = builder.setSize((page.getSize() > 0) ? page.getSize() : 50)
+                .setScroll(new TimeValue(60000)).setNoFields().execute().actionGet();
         if (searchResponse.status() != RestStatus.OK) {
             throw new IllegalStateException("Problem in Search : " + searchResponse.status());
         }
         while (true) {
-            Stream.of(searchResponse.getHits().hits()).forEach(document -> {
+            Stream.of(searchResponse.getHits().hits()).forEach(searchHit -> {
                 this.elastichSearchClient.delete(new DeleteRequest(getIndexName(), getIndexType(),
-                        document.getId())).actionGet();
+                        searchHit.getId())).actionGet();
             });
             searchResponse = this.elastichSearchClient.prepareSearchScroll(searchResponse.getScrollId())
-                    .setScroll(new TimeValue(10000)).execute().actionGet();
+                    .setScroll(new TimeValue(60000)).execute().actionGet();
             if (searchResponse.getHits().getHits().length == 0) {
                 break;
             }
         }
+        return Boolean.TRUE;
     }
 
     /**
@@ -145,6 +146,15 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends GPBas
      */
     @Override
     public <P extends Page> CompletableFuture<Boolean> deleteByPageAsync(P page) throws Exception {
-        return null;
+        return CompletableFuture.supplyAsync(() -> {
+
+            try {
+                return deleteByPage(page);
+            } catch (Exception ex) {
+                logger.error("@@@@@@@@@@@@@@@@@@@@@@@@PageableElasticSearchDAO#deleteByPageAsync error : {}\n",
+                        ex.getMessage());
+                throw new IllegalStateException(ex);
+            }
+        }, this.elasticSearchExecutor);
     }
 }

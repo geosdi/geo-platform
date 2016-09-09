@@ -1,5 +1,7 @@
 package org.geosdi.geoplatform.experimental.el.index.settings;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jdk.nashorn.internal.ir.annotations.Immutable;
 import org.geosdi.geoplatform.experimental.el.index.GPIndexCreator;
 
@@ -13,7 +15,9 @@ public class GPBaseIndexSettings implements GPIndexCreator.GPIndexSettings {
     private final String indexName;
     private final String indexType;
 
-    public GPBaseIndexSettings(String theIndexName, String theIndexType) {
+    @JsonCreator
+    public GPBaseIndexSettings(@JsonProperty(value = "indexName") String theIndexName,
+            @JsonProperty(value = "indexType") String theIndexType) {
         this.indexName = theIndexName;
         this.indexType = theIndexType;
     }

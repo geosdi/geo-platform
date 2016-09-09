@@ -9,11 +9,6 @@ import org.elasticsearch.index.query.QueryBuilder;
 public interface IGPQuerySearch {
 
     /**
-     * @return {@link String}
-     */
-    String getField();
-
-    /**
      * @return {@link QueryBuilder}
      */
     QueryBuilder buildQuery();

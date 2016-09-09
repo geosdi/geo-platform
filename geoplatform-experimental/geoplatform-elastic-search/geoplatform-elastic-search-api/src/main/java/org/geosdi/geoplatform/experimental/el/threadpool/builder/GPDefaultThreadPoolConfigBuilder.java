@@ -123,8 +123,7 @@ abstract class GPDefaultThreadPoolConfigBuilder implements GPThreadPoolConfigBui
         return new GPElasticSearchThreadPoolConfig(this.threadNamePrefix, this.corePoolSize, this.maxPoolSize, this.queueCapacity,
                 (this.queueCapacity != null) && (!(this.queueCapacity.equals(defaultQueueCapacity())) && (this.queueCapacity > 0)) ?
                         defaultQueueWithCapacity(this.queueCapacity) : defaultQueue(), this.keepAlive,
-                (this.threadFactory instanceof GPDefaultThreadFactory) ? this.threadFactory :
-                        new GPDecoratorThreadFactory(this.threadNamePrefix, this.isDaemon, this.priority, this.threadFactory),
+                new GPDecoratorThreadFactory(this.threadNamePrefix, this.isDaemon, this.priority, this.threadFactory),
                 this.isDaemon, this.priority);
     }
 

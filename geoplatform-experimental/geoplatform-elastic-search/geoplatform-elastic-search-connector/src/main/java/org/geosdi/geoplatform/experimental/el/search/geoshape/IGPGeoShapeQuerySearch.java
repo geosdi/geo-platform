@@ -26,6 +26,11 @@ public interface IGPGeoShapeQuerySearch extends IBooleanSearch {
     ShapeBuilder getShapeBuilder();
 
     /**
+     * @return {@link String}
+     */
+    String getField();
+
+    /**
      * @return {@link GeoShapeQueryBuilder}
      */
     default GeoShapeQueryBuilder buildGeoQuery() {

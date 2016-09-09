@@ -1,6 +1,7 @@
 package org.geosdi.geoplatform.experimental.el.dao;
 
 import net.jcip.annotations.Immutable;
+import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.index.query.BoolQueryBuilder;
@@ -11,6 +12,7 @@ import org.elasticsearch.search.sort.SortOrder;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
 import org.geosdi.geoplatform.experimental.el.search.bool.IBooleanSearch;
 import org.geosdi.geoplatform.experimental.el.search.date.IGPDateQuerySearch;
+import org.geosdi.geoplatform.experimental.el.search.delete.DeleteByPage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -67,19 +69,19 @@ public interface GPPageableElasticSearchDAO<D extends Document> {
     /**
      * @param page
      * @param <P>
-     * @return {@link Boolean}
+     * @return {@link BulkResponse}
      * @throws Exception
      */
-    <P extends Page> Boolean deleteByPage(P page) throws Exception;
+    <P extends DeleteByPage> BulkResponse deleteByPage(P page) throws Exception;
 
     /**
      * @param page
      * @param <P>
-     * @return {@link CompletableFuture<Boolean>}
+     * @return {@link CompletableFuture<BulkResponse>}
      * @throws Exception
      */
-    <P extends Page> CompletableFuture<Boolean> deleteByPageAsync(P page) throws Exception;
-
+    <P extends DeleteByPage> CompletableFuture<BulkResponse> deleteByPageAsync(P page) throws Exception;
+    
     /**
      *
      */

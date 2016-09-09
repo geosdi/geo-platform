@@ -1,6 +1,8 @@
 package org.geosdi.geoplatform.experimental.el.dao;
 
 import com.google.common.base.Preconditions;
+import org.elasticsearch.action.bulk.BulkRequestBuilder;
+import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.delete.DeleteRequest;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
@@ -8,6 +10,7 @@ import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.rest.RestStatus;
 import org.elasticsearch.search.aggregations.AbstractAggregationBuilder;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
+import org.geosdi.geoplatform.experimental.el.search.delete.DeleteByPage;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
@@ -111,41 +114,48 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends GPBas
     }
 
     /**
+     * <p>@Todo Try to improve this code with Pagination Concept</p>
+     *
      * @param page
      * @throws Exception
      */
     @Override
-    public <P extends Page> Boolean deleteByPage(P page) throws Exception {
+    public <P extends DeleteByPage> BulkResponse deleteByPage(P page) throws Exception {
         Preconditions.checkNotNull(page, "Parameter Page must not be null.");
         SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient
                 .prepareSearch(getIndexName()).setTypes(getIndexType()));
         logger.trace("#########################deleteByPage#Builder : \n{}\n", builder.toString());
-        SearchResponse searchResponse = builder.setSize((page.getSize() > 0) ? page.getSize() : 50)
-                .setScroll(new TimeValue(60000)).setNoFields().execute().actionGet();
+        SearchResponse searchResponse = builder.setSize(500)
+                .setScroll(new TimeValue(10000)).setNoFields().execute().actionGet();
         if (searchResponse.status() != RestStatus.OK) {
             throw new IllegalStateException("Problem in Search : " + searchResponse.status());
         }
+        BulkRequestBuilder bulkRequest = this.elastichSearchClient.prepareBulk();
         while (true) {
-            Stream.of(searchResponse.getHits().hits()).forEach(searchHit -> {
-                this.elastichSearchClient.delete(new DeleteRequest(getIndexName(), getIndexType(),
-                        searchHit.getId())).actionGet();
-            });
+            Stream.of(searchResponse.getHits().hits())
+                    .map(searchHit -> new DeleteRequest(getIndexName(), getIndexType(), searchHit.getId()))
+                    .filter(deleteRequest -> deleteRequest != null)
+                    .forEach(deleteRequest -> bulkRequest.add(deleteRequest));
             searchResponse = this.elastichSearchClient.prepareSearchScroll(searchResponse.getScrollId())
-                    .setScroll(new TimeValue(60000)).execute().actionGet();
-            if (searchResponse.getHits().getHits().length == 0) {
+                    .setScroll(new TimeValue(10000)).execute().actionGet();
+            if (searchResponse.getHits().hits().length == 0) {
                 break;
             }
         }
-        return Boolean.TRUE;
+        BulkResponse bulkResponse = bulkRequest.get();
+        if (bulkResponse.hasFailures()) {
+            throw new IllegalStateException(bulkResponse.buildFailureMessage());
+        }
+        return bulkResponse;
     }
 
     /**
      * @param page
-     * @return {@link CompletableFuture<Boolean>}
+     * @return {@link CompletableFuture<BulkResponse>}
      * @throws Exception
      */
     @Override
-    public <P extends Page> CompletableFuture<Boolean> deleteByPageAsync(P page) throws Exception {
+    public <P extends DeleteByPage> CompletableFuture<BulkResponse> deleteByPageAsync(P page) throws Exception {
         return CompletableFuture.supplyAsync(() -> {
 
             try {
@@ -157,4 +167,34 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends GPBas
             }
         }, this.elasticSearchExecutor);
     }
+
+//    /**
+//     * @param page
+//     * @return {@link BulkResponse}
+//     * @throws Exception
+//     */
+//    @Override
+//    public <P extends Page> BulkResponse deleteWithBulkByPage(P page) throws Exception {
+//        Preconditions.checkNotNull(page, "Parameter Page must not be null.");
+//        Long count = super.count(page.buildPage(this.elastichSearchClient
+//                .prepareSearch(getIndexName()).setTypes(getIndexType())));
+//        SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient
+//                .prepareSearch(getIndexName())
+//                .setTypes(getIndexType()).setFrom(0).setSize(count.intValue()).setNoFields());
+//        logger.trace("#########################deleteByPage#Builder : \n{}\n", builder.toString());
+//        SearchResponse searchResponse = builder.execute().actionGet();
+//        if (searchResponse.status() != RestStatus.OK) {
+//            throw new IllegalStateException("Problem in Search : " + searchResponse.status());
+//        }
+//        BulkRequestBuilder bulkRequest = this.elastichSearchClient.prepareBulk();
+//        Stream.of(searchResponse.getHits().hits())
+//                .map(searchHit -> new DeleteRequest(getIndexName(), getIndexType(), searchHit.getId()))
+//                .filter(deleteRequest -> deleteRequest != null)
+//                .forEach(deleteRequest -> bulkRequest.add(deleteRequest));
+//        BulkResponse bulkResponse = bulkRequest.get();
+//        if (bulkResponse.hasFailures()) {
+//            throw new IllegalStateException(bulkResponse.buildFailureMessage());
+//        }
+//        return bulkResponse;
+//    }
 }

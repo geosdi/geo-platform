@@ -5,12 +5,12 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>geoplatform-elastic-search</artifactId>
-        <version>1.8-SNAPSHOT</version>
+        <version>1.7-SNAPSHOT</version>
     </parent>
 
     <groupId>org.geosdi</groupId>
     <artifactId>geoplatform-elastic-search-connector</artifactId>
-    <version>1.8-SNAPSHOT</version>
+    <version>1.7-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Geo-Platform :: == ElasticSearch Connector Module</name>
@@ -18,7 +18,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <elasticsearch-version>2.3.1</elasticsearch-version>
+        <elasticsearch-version>2.4.0</elasticsearch-version>
         <spatial4j.version>0.6</spatial4j.version>
     </properties>
 

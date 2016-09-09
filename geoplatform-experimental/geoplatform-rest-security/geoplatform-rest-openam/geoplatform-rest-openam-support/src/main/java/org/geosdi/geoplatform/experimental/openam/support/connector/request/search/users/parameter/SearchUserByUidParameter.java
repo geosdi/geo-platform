@@ -1,6 +1,6 @@
 package org.geosdi.geoplatform.experimental.openam.support.connector.request.search.users.parameter;
 
-import org.apache.http.annotation.Immutable;
+import net.jcip.annotations.Immutable;
 import org.geosdi.geoplatform.experimental.openam.api.connector.request.parameter.RequestParameter;
 
 import static org.geosdi.geoplatform.experimental.openam.api.connector.request.parameter.RequestParameter.RequestParameterType.SEARCH_USER_BY_UID;

@@ -1,6 +1,6 @@
 package org.geosdi.geoplatform.experimental.openam.support.connector.request.authenticate.parameter;
 
-import org.apache.http.annotation.Immutable;
+import net.jcip.annotations.Immutable;
 import org.geosdi.geoplatform.experimental.openam.api.connector.request.parameter.RequestParameter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

@@ -1,6 +1,6 @@
 package org.geosdi.geoplatform.experimental.openam.support.connector.request.users;
 
-import org.apache.http.annotation.Immutable;
+import net.jcip.annotations.Immutable;
 import org.springframework.stereotype.Component;
 
 import static org.geosdi.geoplatform.experimental.openam.support.connector.request.BaseOpenAMRequest.OpenAMRequestType.CREATE_USER;

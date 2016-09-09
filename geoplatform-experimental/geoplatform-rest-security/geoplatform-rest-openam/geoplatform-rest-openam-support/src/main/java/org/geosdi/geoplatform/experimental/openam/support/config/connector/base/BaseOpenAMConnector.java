@@ -3,7 +3,7 @@ package org.geosdi.geoplatform.experimental.openam.support.config.connector.base
 import com.google.common.base.Preconditions;
 import org.apache.http.HttpEntityEnclosingRequest;
 import org.apache.http.HttpRequest;
-import org.apache.http.annotation.Immutable;
+import net.jcip.annotations.Immutable;
 import org.apache.http.client.HttpRequestRetryHandler;
 import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.client.utils.URIBuilder;

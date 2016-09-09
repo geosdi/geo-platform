@@ -1,7 +1,7 @@
 package org.geosdi.geoplatform.experimental.openam.support.connector.request.serverinfo;
 
 import com.google.common.base.Preconditions;
-import org.apache.http.annotation.Immutable;
+import net.jcip.annotations.Immutable;
 import org.geosdi.geoplatform.experimental.openam.support.connector.request.BaseOpenAMRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

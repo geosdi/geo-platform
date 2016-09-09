@@ -44,6 +44,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 import java.net.InetAddress;
@@ -53,6 +54,7 @@ import java.net.UnknownHostException;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@ComponentScan(value = {"org.geosdi.geoplatform.experimental.el.dao.executor.config"})
 @Configuration
 class GPElasticSearchConnectorConfig {
 

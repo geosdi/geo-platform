@@ -32,8 +32,8 @@ public class BooleanMultiMatchSearch extends IBooleanSearch.AbstractBooleanSearc
 
     @Override
     public String toString() {
-        return "BooleanMultiMatchSearch{" +
-                "listaField=" + Arrays.toString(listaField) +
-                "} " + super.toString();
+        return super.toString() + " {" +
+                " listaField = " + Arrays.toString(listaField) +
+                "} ";
     }
 }

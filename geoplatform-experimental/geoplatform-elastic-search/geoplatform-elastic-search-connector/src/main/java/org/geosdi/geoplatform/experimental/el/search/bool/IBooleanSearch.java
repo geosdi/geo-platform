@@ -16,11 +16,6 @@ public interface IBooleanSearch extends IGPQuerySearch {
     BooleanQueryType getType();
 
     /**
-     * @return {@link Object}
-     */
-    Object getValue();
-
-    /**
      *
      */
     enum BooleanQueryType {
@@ -95,7 +90,6 @@ public interface IBooleanSearch extends IGPQuerySearch {
         /**
          * @return {@link String}
          */
-        @Override
         public String getField() {
             return this.field;
         }
@@ -103,7 +97,6 @@ public interface IBooleanSearch extends IGPQuerySearch {
         /**
          * @return {@link Object}
          */
-        @Override
         public Object getValue() {
             return this.value;
         }

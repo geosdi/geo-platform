@@ -35,7 +35,9 @@
  */
 package org.geosdi.geoplatform.experimental.el.dao;
 
+import com.google.common.base.Preconditions;
 import org.elasticsearch.action.bulk.BulkResponse;
+import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
 import org.geosdi.geoplatform.experimental.el.condition.PredicateCondition;
@@ -146,5 +148,16 @@ public interface GPElasticSearchDAO<D extends Document> extends ElasticSearchDAO
          * @throws Exception
          */
         Long count(QueryBuilder queryBuilder) throws Exception;
+
+        /**
+         * @param builder
+         * @param <Builder>
+         * @return {@link Long}
+         * @throws Exception
+         */
+        default <Builder extends SearchRequestBuilder> Long count(Builder builder) throws Exception {
+            Preconditions.checkNotNull(builder, "The Parameter Builder must not be null");
+            return builder.execute().get().getHits().getTotalHits();
+        }
     }
 }

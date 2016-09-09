@@ -45,7 +45,8 @@ abstract class GPBaseElasticSearchDAO<D extends Document> implements GPElasticSe
      */
     @Override
     public D readDocument(String documentAsString) throws Exception {
-        Preconditions.checkNotNull(documentAsString, "The String to Wrap must not be null");
+        Preconditions.checkArgument(((documentAsString != null) && !(documentAsString.isEmpty())),
+                "The String to Wrap must not be null or Empty");
         return mapper.read(documentAsString);
     }
 

@@ -20,17 +20,6 @@ public interface IGPGeoBoundingBoxQuerySearch extends IBooleanSearch {
     Envelope getEnvelope();
 
     /**
-     * @return {@link GeoBoundingBoxQueryBuilder}
-     */
-    default GeoBoundingBoxQueryBuilder buildGeoBoundingBoxQueryBuilder() {
-        return QueryBuilders.geoBoundingBoxQuery("mountainNowTodayPost.surveys.location")
-                .topLeft(getEnvelope().getMaxY(), getEnvelope().getMinX())
-                .topRight(getEnvelope().getMaxY(), getEnvelope().getMaxX())
-                .bottomLeft(getEnvelope().getMinY(), getEnvelope().getMinX())
-                .bottomRight(getEnvelope().getMinY(), getEnvelope().getMaxX());
-    }
-
-    /**
      *
      */
     @Immutable
@@ -57,7 +46,18 @@ public interface IGPGeoBoundingBoxQuerySearch extends IBooleanSearch {
          */
         @Override
         public QueryBuilder buildQuery() {
-            return buildGeoBoundingBoxQueryBuilder();
+            return this.buildGeoBoundingBoxQueryBuilder();
+        }
+
+        /**
+         * @return {@link GeoBoundingBoxQueryBuilder}
+         */
+        protected final GeoBoundingBoxQueryBuilder buildGeoBoundingBoxQueryBuilder() {
+            return QueryBuilders.geoBoundingBoxQuery(this.field)
+                    .topLeft(this.envelope.getMaxY(), this.envelope.getMinX())
+                    .topRight(this.envelope.getMaxY(), this.envelope.getMaxX())
+                    .bottomLeft(this.envelope.getMinY(), this.envelope.getMinX())
+                    .bottomRight(this.envelope.getMinY(), this.envelope.getMaxX());
         }
     }
 }

@@ -26,28 +26,6 @@ public interface IGPGeoShapeQuerySearch extends IBooleanSearch {
     ShapeBuilder getShapeBuilder();
 
     /**
-     * @return {@link String}
-     */
-    String getField();
-
-    /**
-     * @return {@link GeoShapeQueryBuilder}
-     */
-    default GeoShapeQueryBuilder buildGeoQuery() {
-        switch (getShapeRelation()) {
-            case INTERSECTS:
-                return QueryBuilders.geoIntersectionQuery(getField(), getShapeBuilder());
-            case DISJOINT:
-                return QueryBuilders.geoDisjointQuery(getField(), getShapeBuilder());
-            case WITHIN:
-                return QueryBuilders.geoWithinQuery(getField(), getShapeBuilder());
-            case CONTAINS:
-                return QueryBuilders.geoShapeQuery(getField(), getShapeBuilder(), ShapeRelation.CONTAINS);
-        }
-        return null;
-    }
-
-    /**
      *
      */
     enum GPShapeRelation {
@@ -93,7 +71,24 @@ public interface IGPGeoShapeQuerySearch extends IBooleanSearch {
          */
         @Override
         public QueryBuilder buildQuery() {
-            return this.buildGeoQuery();
+            return this.buildGeoShapeQueryBuilder();
+        }
+
+        /**
+         * @return {@link GeoShapeQueryBuilder}
+         */
+        protected final GeoShapeQueryBuilder buildGeoShapeQueryBuilder() {
+            switch (this.shapeRelation) {
+                case INTERSECTS:
+                    return QueryBuilders.geoIntersectionQuery(this.field, this.shapeBuilder);
+                case DISJOINT:
+                    return QueryBuilders.geoDisjointQuery(this.field, this.shapeBuilder);
+                case WITHIN:
+                    return QueryBuilders.geoWithinQuery(this.field, this.shapeBuilder);
+                case CONTAINS:
+                    return QueryBuilders.geoShapeQuery(this.field, getShapeBuilder(), ShapeRelation.CONTAINS);
+            }
+            return null;
         }
     }
 }

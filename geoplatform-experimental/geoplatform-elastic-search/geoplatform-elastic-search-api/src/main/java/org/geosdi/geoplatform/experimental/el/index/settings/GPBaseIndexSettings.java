@@ -2,15 +2,17 @@ package org.geosdi.geoplatform.experimental.el.index.settings;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jdk.nashorn.internal.ir.annotations.Immutable;
-import org.geosdi.geoplatform.experimental.el.index.GPIndexCreator;
+import net.jcip.annotations.Immutable;
+import org.geosdi.geoplatform.experimental.el.index.GPBaseIndexCreator;
+
+import java.util.Objects;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Immutable
-public class GPBaseIndexSettings implements GPIndexCreator.GPIndexSettings {
+public class GPBaseIndexSettings implements GPBaseIndexCreator.GPIndexSettings {
 
     private final String indexName;
     private final String indexType;
@@ -30,6 +32,20 @@ public class GPBaseIndexSettings implements GPIndexCreator.GPIndexSettings {
     @Override
     public String getIndexType() {
         return this.indexType;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        GPBaseIndexSettings that = (GPBaseIndexSettings) o;
+        return Objects.equals(indexName, that.indexName) &&
+                Objects.equals(indexType, that.indexType);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(indexName, indexType);
     }
 
     @Override

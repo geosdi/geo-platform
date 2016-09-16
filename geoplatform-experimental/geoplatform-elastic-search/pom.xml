@@ -19,7 +19,7 @@
     <modules>
         <module>geoplatform-elastic-search-api</module>
         <module>geoplatform-elastic-search-connector</module>
-        <module>gp-elasticsearh-query-builder</module>
+        <module>gp-elasticsearch-query-builder</module>
     </modules>
 
 </project>

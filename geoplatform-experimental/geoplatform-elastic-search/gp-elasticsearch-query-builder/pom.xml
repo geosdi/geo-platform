@@ -10,7 +10,7 @@
     </parent>
 
     <groupId>org.geosdi</groupId>
-    <artifactId>gp-elasticsearh-query-builder</artifactId>
+    <artifactId>gp-elasticsearch-query-builder</artifactId>
     <version>1.8-SNAPSHOT</version>
     <packaging>pom</packaging>
 

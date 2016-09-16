@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 class GPQueryIndexSettingsConfig {
 
     @Bean
-    public <IS extends GPIndexSettings> IS gpQueryIndexSettings() {
+    public static <IS extends GPIndexSettings> IS gpQueryIndexSettings() {
         return new GPQueryIndexSettingsFinder().findQueryIndexSettings();
     }
 }

@@ -18,6 +18,7 @@
 
     <modules>
         <module>gp-elasticsearch-query-reflection</module>
+        <module>gp-elasticsearch-query-mediator</module>
     </modules>
 
 </project>

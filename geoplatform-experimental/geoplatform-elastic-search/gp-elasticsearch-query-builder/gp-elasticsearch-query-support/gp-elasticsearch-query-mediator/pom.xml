@@ -4,16 +4,16 @@
 
     <parent>
         <groupId>org.geosdi</groupId>
-        <artifactId>gp-elasticsearch-query-core</artifactId>
+        <artifactId>gp-elasticsearch-query-support</artifactId>
         <version>1.7-SNAPSHOT</version>
     </parent>
 
     <groupId>org.geosdi</groupId>
-    <artifactId>gp-elasticsearch-query-dao</artifactId>
+    <artifactId>gp-elasticsearch-query-mediator</artifactId>
     <version>1.7-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>Geo-Platform :: == Elastic Search Query DAO</name>
+    <name>Geo-Platform :: == Elastic Search Query Mediator</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -22,26 +22,34 @@
 
     <dependencies>
         <!-- =========================================================== -->
-        <!-- ========== GEOPLATFOM ELASTICSEARCH QUERY MODEL =========== -->
+        <!-- ============= GEOPLATFORM ELASTIC SEARCH API ============== -->
         <!-- =========================================================== -->
         <dependency>
             <groupId>org.geosdi</groupId>
-            <artifactId>gp-elasticsearch-query-model</artifactId>
+            <artifactId>geoplatform-elastic-search-api</artifactId>
             <version>${project.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.fasterxml.jackson.datatype</groupId>
-            <artifactId>jackson-datatype-joda</artifactId>
-        </dependency>
-
         <!-- =========================================================== -->
-        <!-- ========== GEOPLATFORM ELASTIC SEARCH CONNECTOR =========== -->
+        <!-- ================ GEOPLATFORM LOGGER SUPPORT =============== -->
         <!-- =========================================================== -->
         <dependency>
             <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-elastic-search-connector</artifactId>
+            <artifactId>geoplatform-logger-support</artifactId>
             <version>${project.version}</version>
+        </dependency>
+
+        <!-- =========================================================== -->
+        <!-- =========================== SPRING ======================== -->
+        <!-- =========================================================== -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
         </dependency>
 
         <dependency>
@@ -68,21 +76,16 @@
     <build>
         <plugins>
             <plugin>
-                <inherited>true</inherited>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <attach>true</attach>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>jar-no-fork</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>

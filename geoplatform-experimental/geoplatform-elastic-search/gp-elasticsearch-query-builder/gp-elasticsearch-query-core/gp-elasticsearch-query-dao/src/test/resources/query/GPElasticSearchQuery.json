@@ -1,9 +1,9 @@
 {
   "gpElasticSearchQuery" : {
-    "id" : "2b9df42e-fa8e-4c73-9c49-29336115349e",
+    "id" : "cb2556e0-49f9-419a-857f-f0b002dcb902",
     "queryName" : "QUERY_TEST",
     "description" : "DESCRIPTION_TEST",
-    "creationDate" : "2016-09-16T08:12:16.475Z",
+    "creationDate" : "2016-09-17T07:36:03.841Z",
     "queryTemplate" : "TEMPLATE_TEST",
     "indexSettings" : {
       "indexName" : "INDEX_NAME_TEST",
@@ -13,13 +13,13 @@
       "entry" : [ {
         "key" : {
           "type" : "queryParamKey",
-          "key" : "KEY@21"
+          "key" : "KEY@10"
         },
         "value" : {
-          "value" : 21,
+          "value" : 10,
           "keyValue" : {
             "type" : "queryParamKey",
-            "key" : "KEY@21"
+            "key" : "KEY@10"
           },
           "valueType" : "Number",
           "type" : "QueryParamValue"
@@ -41,20 +41,6 @@
       }, {
         "key" : {
           "type" : "queryParamKey",
-          "key" : "KEY@20"
-        },
-        "value" : {
-          "value" : 20,
-          "keyValue" : {
-            "type" : "queryParamKey",
-            "key" : "KEY@20"
-          },
-          "valueType" : "Number",
-          "type" : "QueryParamValue"
-        }
-      }, {
-        "key" : {
-          "type" : "queryParamKey",
           "key" : "KEY@0"
         },
         "value" : {
@@ -62,20 +48,6 @@
           "keyValue" : {
             "type" : "queryParamKey",
             "key" : "KEY@0"
-          },
-          "valueType" : "Number",
-          "type" : "QueryParamValue"
-        }
-      }, {
-        "key" : {
-          "type" : "queryParamKey",
-          "key" : "KEY@34"
-        },
-        "value" : {
-          "value" : 34,
-          "keyValue" : {
-            "type" : "queryParamKey",
-            "key" : "KEY@34"
           },
           "valueType" : "Number",
           "type" : "QueryParamValue"
@@ -111,20 +83,6 @@
       }, {
         "key" : {
           "type" : "queryParamKey",
-          "key" : "KEY@33"
-        },
-        "value" : {
-          "value" : 33,
-          "keyValue" : {
-            "type" : "queryParamKey",
-            "key" : "KEY@33"
-          },
-          "valueType" : "Number",
-          "type" : "QueryParamValue"
-        }
-      }, {
-        "key" : {
-          "type" : "queryParamKey",
           "key" : "KEY@11"
         },
         "value" : {
@@ -146,20 +104,6 @@
           "keyValue" : {
             "type" : "queryParamKey",
             "key" : "KEY@2"
-          },
-          "valueType" : "Number",
-          "type" : "QueryParamValue"
-        }
-      }, {
-        "key" : {
-          "type" : "queryParamKey",
-          "key" : "KEY@36"
-        },
-        "value" : {
-          "value" : 36,
-          "keyValue" : {
-            "type" : "queryParamKey",
-            "key" : "KEY@36"
           },
           "valueType" : "Number",
           "type" : "QueryParamValue"
@@ -195,20 +139,6 @@
       }, {
         "key" : {
           "type" : "queryParamKey",
-          "key" : "KEY@35"
-        },
-        "value" : {
-          "value" : 35,
-          "keyValue" : {
-            "type" : "queryParamKey",
-            "key" : "KEY@35"
-          },
-          "valueType" : "Number",
-          "type" : "QueryParamValue"
-        }
-      }, {
-        "key" : {
-          "type" : "queryParamKey",
           "key" : "KEY@13"
         },
         "value" : {
@@ -237,20 +167,6 @@
       }, {
         "key" : {
           "type" : "queryParamKey",
-          "key" : "KEY@38"
-        },
-        "value" : {
-          "value" : 38,
-          "keyValue" : {
-            "type" : "queryParamKey",
-            "key" : "KEY@38"
-          },
-          "valueType" : "Number",
-          "type" : "QueryParamValue"
-        }
-      }, {
-        "key" : {
-          "type" : "queryParamKey",
           "key" : "KEY@16"
         },
         "value" : {
@@ -272,20 +188,6 @@
           "keyValue" : {
             "type" : "queryParamKey",
             "key" : "KEY@7"
-          },
-          "valueType" : "Number",
-          "type" : "QueryParamValue"
-        }
-      }, {
-        "key" : {
-          "type" : "queryParamKey",
-          "key" : "KEY@37"
-        },
-        "value" : {
-          "value" : 37,
-          "keyValue" : {
-            "type" : "queryParamKey",
-            "key" : "KEY@37"
           },
           "valueType" : "Number",
           "type" : "QueryParamValue"
@@ -349,20 +251,6 @@
       }, {
         "key" : {
           "type" : "queryParamKey",
-          "key" : "KEY@39"
-        },
-        "value" : {
-          "value" : 39,
-          "keyValue" : {
-            "type" : "queryParamKey",
-            "key" : "KEY@39"
-          },
-          "valueType" : "Number",
-          "type" : "QueryParamValue"
-        }
-      }, {
-        "key" : {
-          "type" : "queryParamKey",
           "key" : "KEY@17"
         },
         "value" : {
@@ -402,178 +290,270 @@
           "valueType" : "Number",
           "type" : "QueryParamValue"
         }
-      }, {
+      } ]
+    },
+    "queryExtraParameters" : {
+      "entry" : [ {
         "key" : {
           "type" : "queryParamKey",
-          "key" : "KEY@30"
+          "key" : "KEY_EXTRA@5"
         },
         "value" : {
-          "value" : 30,
+          "value" : 5,
           "keyValue" : {
             "type" : "queryParamKey",
-            "key" : "KEY@30"
+            "key" : "KEY_EXTRA@5"
           },
-          "valueType" : "Number",
-          "type" : "QueryParamValue"
+          "type" : "QueryExtraParamValue"
         }
       }, {
         "key" : {
           "type" : "queryParamKey",
-          "key" : "KEY@32"
+          "key" : "KEY_EXTRA@6"
         },
         "value" : {
-          "value" : 32,
+          "value" : 6,
           "keyValue" : {
             "type" : "queryParamKey",
-            "key" : "KEY@32"
+            "key" : "KEY_EXTRA@6"
           },
-          "valueType" : "Number",
-          "type" : "QueryParamValue"
+          "type" : "QueryExtraParamValue"
         }
       }, {
         "key" : {
           "type" : "queryParamKey",
-          "key" : "KEY@10"
+          "key" : "KEY_EXTRA@7"
+        },
+        "value" : {
+          "value" : 7,
+          "keyValue" : {
+            "type" : "queryParamKey",
+            "key" : "KEY_EXTRA@7"
+          },
+          "type" : "QueryExtraParamValue"
+        }
+      }, {
+        "key" : {
+          "type" : "queryParamKey",
+          "key" : "KEY_EXTRA@8"
+        },
+        "value" : {
+          "value" : 8,
+          "keyValue" : {
+            "type" : "queryParamKey",
+            "key" : "KEY_EXTRA@8"
+          },
+          "type" : "QueryExtraParamValue"
+        }
+      }, {
+        "key" : {
+          "type" : "queryParamKey",
+          "key" : "KEY_EXTRA@11"
+        },
+        "value" : {
+          "value" : 11,
+          "keyValue" : {
+            "type" : "queryParamKey",
+            "key" : "KEY_EXTRA@11"
+          },
+          "type" : "QueryExtraParamValue"
+        }
+      }, {
+        "key" : {
+          "type" : "queryParamKey",
+          "key" : "KEY_EXTRA@1"
+        },
+        "value" : {
+          "value" : 1,
+          "keyValue" : {
+            "type" : "queryParamKey",
+            "key" : "KEY_EXTRA@1"
+          },
+          "type" : "QueryExtraParamValue"
+        }
+      }, {
+        "key" : {
+          "type" : "queryParamKey",
+          "key" : "KEY_EXTRA@10"
         },
         "value" : {
           "value" : 10,
           "keyValue" : {
             "type" : "queryParamKey",
-            "key" : "KEY@10"
+            "key" : "KEY_EXTRA@10"
           },
-          "valueType" : "Number",
-          "type" : "QueryParamValue"
+          "type" : "QueryExtraParamValue"
         }
       }, {
         "key" : {
           "type" : "queryParamKey",
-          "key" : "KEY@31"
+          "key" : "KEY_EXTRA@2"
         },
         "value" : {
-          "value" : 31,
+          "value" : 2,
           "keyValue" : {
             "type" : "queryParamKey",
-            "key" : "KEY@31"
+            "key" : "KEY_EXTRA@2"
           },
-          "valueType" : "Number",
-          "type" : "QueryParamValue"
+          "type" : "QueryExtraParamValue"
         }
       }, {
         "key" : {
           "type" : "queryParamKey",
-          "key" : "KEY@23"
+          "key" : "KEY_EXTRA@3"
         },
         "value" : {
-          "value" : 23,
+          "value" : 3,
           "keyValue" : {
             "type" : "queryParamKey",
-            "key" : "KEY@23"
+            "key" : "KEY_EXTRA@3"
           },
-          "valueType" : "Number",
-          "type" : "QueryParamValue"
+          "type" : "QueryExtraParamValue"
         }
       }, {
         "key" : {
           "type" : "queryParamKey",
-          "key" : "KEY@22"
+          "key" : "KEY_EXTRA@4"
         },
         "value" : {
-          "value" : 22,
+          "value" : 4,
           "keyValue" : {
             "type" : "queryParamKey",
-            "key" : "KEY@22"
+            "key" : "KEY_EXTRA@4"
           },
-          "valueType" : "Number",
-          "type" : "QueryParamValue"
+          "type" : "QueryExtraParamValue"
         }
       }, {
         "key" : {
           "type" : "queryParamKey",
-          "key" : "KEY@25"
+          "key" : "KEY_EXTRA@9"
         },
         "value" : {
-          "value" : 25,
+          "value" : 9,
           "keyValue" : {
             "type" : "queryParamKey",
-            "key" : "KEY@25"
+            "key" : "KEY_EXTRA@9"
           },
-          "valueType" : "Number",
-          "type" : "QueryParamValue"
+          "type" : "QueryExtraParamValue"
         }
       }, {
         "key" : {
           "type" : "queryParamKey",
-          "key" : "KEY@24"
+          "key" : "KEY_EXTRA@15"
         },
         "value" : {
-          "value" : 24,
+          "value" : 15,
           "keyValue" : {
             "type" : "queryParamKey",
-            "key" : "KEY@24"
+            "key" : "KEY_EXTRA@15"
           },
-          "valueType" : "Number",
-          "type" : "QueryParamValue"
+          "type" : "QueryExtraParamValue"
         }
       }, {
         "key" : {
           "type" : "queryParamKey",
-          "key" : "KEY@27"
+          "key" : "KEY_EXTRA@14"
         },
         "value" : {
-          "value" : 27,
+          "value" : 14,
           "keyValue" : {
             "type" : "queryParamKey",
-            "key" : "KEY@27"
+            "key" : "KEY_EXTRA@14"
           },
-          "valueType" : "Number",
-          "type" : "QueryParamValue"
+          "type" : "QueryExtraParamValue"
         }
       }, {
         "key" : {
           "type" : "queryParamKey",
-          "key" : "KEY@26"
+          "key" : "KEY_EXTRA@13"
         },
         "value" : {
-          "value" : 26,
+          "value" : 13,
           "keyValue" : {
             "type" : "queryParamKey",
-            "key" : "KEY@26"
+            "key" : "KEY_EXTRA@13"
           },
-          "valueType" : "Number",
-          "type" : "QueryParamValue"
+          "type" : "QueryExtraParamValue"
         }
       }, {
         "key" : {
           "type" : "queryParamKey",
-          "key" : "KEY@29"
+          "key" : "KEY_EXTRA@12"
         },
         "value" : {
-          "value" : 29,
+          "value" : 12,
           "keyValue" : {
             "type" : "queryParamKey",
-            "key" : "KEY@29"
+            "key" : "KEY_EXTRA@12"
           },
-          "valueType" : "Number",
-          "type" : "QueryParamValue"
+          "type" : "QueryExtraParamValue"
         }
       }, {
         "key" : {
           "type" : "queryParamKey",
-          "key" : "KEY@28"
+          "key" : "KEY_EXTRA@0"
         },
         "value" : {
-          "value" : 28,
+          "value" : 0,
           "keyValue" : {
             "type" : "queryParamKey",
-            "key" : "KEY@28"
+            "key" : "KEY_EXTRA@0"
           },
-          "valueType" : "Number",
-          "type" : "QueryParamValue"
+          "type" : "QueryExtraParamValue"
+        }
+      }, {
+        "key" : {
+          "type" : "queryParamKey",
+          "key" : "KEY_EXTRA@19"
+        },
+        "value" : {
+          "value" : 19,
+          "keyValue" : {
+            "type" : "queryParamKey",
+            "key" : "KEY_EXTRA@19"
+          },
+          "type" : "QueryExtraParamValue"
+        }
+      }, {
+        "key" : {
+          "type" : "queryParamKey",
+          "key" : "KEY_EXTRA@18"
+        },
+        "value" : {
+          "value" : 18,
+          "keyValue" : {
+            "type" : "queryParamKey",
+            "key" : "KEY_EXTRA@18"
+          },
+          "type" : "QueryExtraParamValue"
+        }
+      }, {
+        "key" : {
+          "type" : "queryParamKey",
+          "key" : "KEY_EXTRA@17"
+        },
+        "value" : {
+          "value" : 17,
+          "keyValue" : {
+            "type" : "queryParamKey",
+            "key" : "KEY_EXTRA@17"
+          },
+          "type" : "QueryExtraParamValue"
+        }
+      }, {
+        "key" : {
+          "type" : "queryParamKey",
+          "key" : "KEY_EXTRA@16"
+        },
+        "value" : {
+          "value" : 16,
+          "keyValue" : {
+            "type" : "queryParamKey",
+            "key" : "KEY_EXTRA@16"
+          },
+          "type" : "QueryExtraParamValue"
         }
       } ]
-    },
-    "queryExtraParameters" : {
-      "entry" : [ ]
     }
   }
 }

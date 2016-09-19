@@ -20,5 +20,7 @@
 
     <logger name="org.geosdi.geoplatform.experimental.el.query.mediator.GPBaseElasticSearchQueryMediator"
             level="trace"/>
+    <logger name="org.geosdi.geoplatform.experimental.el.query.mediator.colleague.decorator.GPElasticSearchQueryColleagueDecorator"
+            level="trace"/>
 
 </configuration>

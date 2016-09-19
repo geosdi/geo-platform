@@ -50,11 +50,27 @@ public class GPElasticSearchQueryMediatorTest {
     }
 
     @Test
+    public void executeQuerySimpleColleagueWithoutQueryTemplateParamtersTest() throws Exception {
+        String executionResult = this.queryMediator.executeQueryColleague(new GPBaseIndexSettings("QueryColleagueSimpleIndex",
+                "QueryColleagueSimpleType"), "DO IT SIMPLE without Query Template Paramters", null);
+        logger.info("###########################QUERY_COLLEAGUE_SIMPLE executing -------------> : {}\n",
+                executionResult);
+    }
+
+    @Test
     public void executeQueryBaseColleagueTest() throws Exception {
         Map<String, Object> map = new HashMap<>();
         map.put("command", "BASE");
         String executionResult = this.queryMediator.executeQueryColleague(new GPBaseIndexSettings("QueryColleagueBaseIndex",
                 "QueryColleagueBaseType"), "DO IT ${command}", map);
+        logger.info("###########################QUERY_COLLEAGUE_BASE executing -------------> : {}\n",
+                executionResult);
+    }
+
+    @Test
+    public void executeQueryBaseColleagueWithoutQueryTemplateParametersTest() throws Exception {
+        String executionResult = this.queryMediator.executeQueryColleague(new GPBaseIndexSettings("QueryColleagueBaseIndex",
+                "QueryColleagueBaseType"), "DO IT BASE without Query Template Paramters", null);
         logger.info("###########################QUERY_COLLEAGUE_BASE executing -------------> : {}\n",
                 executionResult);
     }

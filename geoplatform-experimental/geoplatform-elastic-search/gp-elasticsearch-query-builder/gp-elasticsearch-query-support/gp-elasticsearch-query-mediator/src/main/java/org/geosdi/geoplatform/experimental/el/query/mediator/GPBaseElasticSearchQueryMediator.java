@@ -2,9 +2,12 @@ package org.geosdi.geoplatform.experimental.el.query.mediator;
 
 import com.google.common.base.Preconditions;
 import org.geosdi.geoplatform.experimental.el.index.GPBaseIndexCreator;
-import org.geosdi.geoplatform.experimental.el.query.mediator.colleague.GPElasticSearchQueryColleague;
+import org.geosdi.geoplatform.experimental.el.query.mediator.colleague.decorator.IGPElasticSearchQueryColleagueDecorator;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
 import org.slf4j.Logger;
+
+import javax.annotation.Nullable;
+import java.util.Map;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -19,7 +22,7 @@ public class GPBaseElasticSearchQueryMediator extends AbstractElasticSearchQuery
      * @param queryColleague
      */
     @Override
-    public void registerQueryColleague(GPElasticSearchQueryColleague queryColleague)
+    public void registerQueryColleague(IGPElasticSearchQueryColleagueDecorator queryColleague)
             throws Exception {
         Preconditions.checkArgument((queryColleague != null), "The Parameter Query Colleague must " +
                 "not be null.");
@@ -33,12 +36,13 @@ public class GPBaseElasticSearchQueryMediator extends AbstractElasticSearchQuery
     /**
      * @param queryColleagueKey
      * @param queryTemplate
+     * @param queryTemplateParameters
      * @return {@link R}
      * @throws Exception
      */
     @Override
-    public <R> R executeQueryColleague(GPBaseIndexCreator.GPIndexSettings queryColleagueKey,
-            String queryTemplate) throws Exception {
+    public <R, V> R executeQueryColleague(GPBaseIndexCreator.GPIndexSettings queryColleagueKey, String queryTemplate,
+            @Nullable Map<String, V> queryTemplateParameters) throws Exception {
         Preconditions.checkArgument((queryColleagueKey != null), "The Parameter QueryColleagueKey must " +
                 "not be null.");
         Preconditions.checkArgument((queryTemplate != null) && !(queryTemplate.isEmpty()),
@@ -46,7 +50,7 @@ public class GPBaseElasticSearchQueryMediator extends AbstractElasticSearchQuery
         logger.trace("#################################{} executing  ---------------->\n\n{}\n",
                 this, queryTemplate);
         return (super.isQueryColleagueRegistered(queryColleagueKey) ? super.getQueryColleague(queryColleagueKey)
-                .executeQueryColleague(queryTemplate) : null);
+                .executeQueryColleague(queryTemplate, queryTemplateParameters) : null);
     }
 
     /**

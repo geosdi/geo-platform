@@ -3,6 +3,8 @@ package org.geosdi.geoplatform.experimental.el.query.mediator.colleague.config;
 import com.google.common.base.Preconditions;
 import org.geosdi.geoplatform.experimental.el.index.GPBaseIndexCreator;
 import org.geosdi.geoplatform.experimental.el.query.mediator.colleague.GPElasticSearchQueryColleague;
+import org.geosdi.geoplatform.experimental.el.query.mediator.colleague.decorator.GPElasticSearchQueryColleagueDecorator;
+import org.geosdi.geoplatform.experimental.el.query.mediator.colleague.decorator.IGPElasticSearchQueryColleagueDecorator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -20,12 +22,14 @@ import java.util.stream.Collectors;
 class QueryColleagueRegistryConfig {
 
     @Bean
-    public static Map<GPBaseIndexCreator.GPIndexSettings, GPElasticSearchQueryColleague> elasticSearchQueryColleagueRegistry(@Nonnull List<GPElasticSearchQueryColleague> queryColleagues)
+    public static Map<GPBaseIndexCreator.GPIndexSettings, IGPElasticSearchQueryColleagueDecorator> elasticSearchQueryColleagueRegistry(@Nonnull List<GPElasticSearchQueryColleague> queryColleagues)
             throws Exception {
         Preconditions.checkArgument((queryColleagues != null) && !(queryColleagues.isEmpty()), "Attention " +
                 "in classpath there are no instance of ", GPElasticSearchQueryColleague.class.getSimpleName());
         return queryColleagues.stream()
                 .filter(queryColleague -> queryColleague != null)
-                .collect(Collectors.toMap(GPElasticSearchQueryColleague::getQueryColleagueKey, Function.identity()));
+                .map(queryColleague -> GPElasticSearchQueryColleagueDecorator.decore(queryColleague))
+                .collect(Collectors.toMap(IGPElasticSearchQueryColleagueDecorator::getQueryColleagueKey,
+                        Function.identity()));
     }
 }

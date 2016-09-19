@@ -4,6 +4,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
 import org.geosdi.geoplatform.experimental.el.index.GPBaseIndexCreator;
 import org.geosdi.geoplatform.experimental.el.query.mediator.colleague.GPElasticSearchQueryColleague;
+import org.geosdi.geoplatform.experimental.el.query.mediator.colleague.decorator.IGPElasticSearchQueryColleagueDecorator;
 
 import javax.annotation.Resource;
 import java.util.Map;
@@ -15,7 +16,7 @@ import java.util.Map;
 public abstract class AbstractElasticSearchQueryMediator implements GPElasticSearchQueryMediator {
 
     @Resource(name = "elasticSearchQueryColleagueRegistry")
-    protected Map<GPBaseIndexCreator.GPIndexSettings, GPElasticSearchQueryColleague> queryColleagueRegistry;
+    protected Map<GPBaseIndexCreator.GPIndexSettings, IGPElasticSearchQueryColleagueDecorator> queryColleagueRegistry;
 
     /**
      * @param queryColleagueKey
@@ -23,7 +24,7 @@ public abstract class AbstractElasticSearchQueryMediator implements GPElasticSea
      * @throws Exception
      */
     @Override
-    public GPElasticSearchQueryColleague getQueryColleague(GPBaseIndexCreator.GPIndexSettings queryColleagueKey)
+    public IGPElasticSearchQueryColleagueDecorator getQueryColleague(GPBaseIndexCreator.GPIndexSettings queryColleagueKey)
             throws Exception {
         Preconditions.checkArgument((queryColleagueKey != null), "The Parameter Query Colleague Key must " +
                 "not be null.");
@@ -43,8 +44,8 @@ public abstract class AbstractElasticSearchQueryMediator implements GPElasticSea
      * @return {@link ImmutableMap<org.geosdi.geoplatform.experimental.el.index.GPBaseIndexCreator.GPIndexSettings, GPElasticSearchQueryColleague>}
      */
     @Override
-    public ImmutableMap<GPBaseIndexCreator.GPIndexSettings, GPElasticSearchQueryColleague> getAllQueryColleagues() {
-        return new ImmutableMap.Builder<GPBaseIndexCreator.GPIndexSettings, GPElasticSearchQueryColleague>()
+    public ImmutableMap<GPBaseIndexCreator.GPIndexSettings, IGPElasticSearchQueryColleagueDecorator> getAllQueryColleagues() {
+        return new ImmutableMap.Builder<GPBaseIndexCreator.GPIndexSettings, IGPElasticSearchQueryColleagueDecorator>()
                 .putAll(this.queryColleagueRegistry).build();
     }
 

@@ -24,7 +24,7 @@ public class GPElasticSearchQueryColleagueDecorator extends AbstractQueryColleag
      * @param queryColleague
      * @return {@link GPElasticSearchQueryColleague}
      */
-    public static GPElasticSearchQueryColleagueDecorator decore(GPElasticSearchQueryColleague queryColleague) {
+    public static GPElasticSearchQueryColleagueDecorator of(GPElasticSearchQueryColleague queryColleague) {
         Preconditions.checkArgument((queryColleague != null), "The Parameter Query Colleague must not be null.");
         return new GPElasticSearchQueryColleagueDecorator(queryColleague);
     }
@@ -38,7 +38,7 @@ public class GPElasticSearchQueryColleagueDecorator extends AbstractQueryColleag
     @Override
     public <R, V> R executeQueryColleague(String queryTemplate, @Nullable Map<String, V> queryTemplateParameters)
             throws Exception {
-        logger.trace("################################{} executing QueryTemplate : \n\n{}\n with Template Parameters" +
+        logger.trace("################################{} executing QueryTemplate : \n\n{}\n\n with Template Parameters" +
                 " : {}\n", super.getQueryColleague(), queryTemplate, queryTemplateParameters);
         return this.queryColleague.executeQueryColleague(super.decoreQueryTemplate(queryTemplate,
                 queryTemplateParameters));

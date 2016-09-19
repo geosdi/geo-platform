@@ -28,7 +28,7 @@ class QueryColleagueRegistryConfig {
                 "in classpath there are no instance of ", GPElasticSearchQueryColleague.class.getSimpleName());
         return queryColleagues.stream()
                 .filter(queryColleague -> queryColleague != null)
-                .map(queryColleague -> GPElasticSearchQueryColleagueDecorator.decore(queryColleague))
+                .map(queryColleague -> GPElasticSearchQueryColleagueDecorator.of(queryColleague))
                 .collect(Collectors.toMap(IGPElasticSearchQueryColleagueDecorator::getQueryColleagueKey,
                         Function.identity()));
     }

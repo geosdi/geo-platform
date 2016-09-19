@@ -1,6 +1,7 @@
 package org.geosdi.geoplatform.experimental.el.query.mediator.colleague;
 
 import org.geosdi.geoplatform.experimental.el.index.GPBaseIndexCreator;
+import org.geosdi.geoplatform.experimental.el.query.mediator.colleague.decorator.IGPElasticSearchQueryColleagueDecorator;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
 import org.junit.Assert;
 import org.junit.Before;
@@ -25,7 +26,7 @@ public class QueryColleagueRegistryTest {
     static Logger logger;
     //
     @Resource(name = "elasticSearchQueryColleagueRegistry")
-    private Map<GPBaseIndexCreator.GPIndexSettings, GPElasticSearchQueryColleague> queryColleagueRegistry;
+    private Map<GPBaseIndexCreator.GPIndexSettings, IGPElasticSearchQueryColleagueDecorator> queryColleagueRegistry;
 
     @Before
     public void setUp() throws Exception {

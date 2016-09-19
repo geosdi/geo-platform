@@ -3,6 +3,7 @@ package org.geosdi.geoplatform.experimental.el.query.mediator.colleague.model;
 import org.geosdi.geoplatform.experimental.el.index.GPBaseIndexCreator;
 import org.geosdi.geoplatform.experimental.el.index.settings.GPBaseIndexSettings;
 import org.geosdi.geoplatform.experimental.el.query.mediator.colleague.GPElasticSearchQueryColleague;
+import org.geosdi.geoplatform.experimental.el.query.template.IGPElasticSearchQueryTemplate;
 import org.springframework.stereotype.Component;
 
 /**
@@ -31,5 +32,13 @@ public class QueryColleagueMockSimple implements GPElasticSearchQueryColleague {
     @Override
     public <QUERY_COLLEAGUE_KEY extends GPBaseIndexCreator.GPIndexSettings> QUERY_COLLEAGUE_KEY getQueryColleagueKey() {
         return (QUERY_COLLEAGUE_KEY) this.collegueKey;
+    }
+
+    /**
+     * @return {@link QUERY_TEMPLATE}
+     */
+    @Override
+    public <QUERY_TEMPLATE extends IGPElasticSearchQueryTemplate> QUERY_TEMPLATE getQueryTemplate() {
+        return null;
     }
 }

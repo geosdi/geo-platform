@@ -2,17 +2,13 @@ package org.geosdi.geoplatform.experimental.el.query.dao;
 
 import com.google.common.base.Preconditions;
 import org.elasticsearch.search.sort.SortOrder;
-import org.geosdi.geoplatform.experimental.el.api.mapper.GPBaseMapper;
 import org.geosdi.geoplatform.experimental.el.dao.AbstractElasticSearchDAO;
-import org.geosdi.geoplatform.experimental.el.index.GPIndexCreator;
 import org.geosdi.geoplatform.experimental.el.query.model.GPElasticSearchQuery;
 import org.geosdi.geoplatform.experimental.el.search.date.IGPDateQuerySearch.GPDateQuerySearch;
 import org.geosdi.geoplatform.experimental.el.search.phrase.GPPhrasePrefixSearch;
 import org.joda.time.DateTime;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.Nullable;
-import javax.annotation.Resource;
 import java.util.List;
 
 import static org.elasticsearch.index.query.QueryBuilders.matchAllQuery;
@@ -22,8 +18,8 @@ import static org.geosdi.geoplatform.experimental.el.search.bool.IBooleanSearch.
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Component(value = "gpElasticSearchQueryDAO")
-public class GPElasticSearchQueryDAO extends AbstractElasticSearchDAO<GPElasticSearchQuery>
+//@Component(value = "gpElasticSearchQueryDAO")
+public abstract class GPElasticSearchQueryDAO extends AbstractElasticSearchDAO<GPElasticSearchQuery>
         implements IGPElasticSearchQueryDAO {
 
     /**
@@ -88,21 +84,21 @@ public class GPElasticSearchQueryDAO extends AbstractElasticSearchDAO<GPElasticS
                 matchAllQuery())).getResults();
     }
 
-    /**
-     * @param theMapper
-     */
-    @Resource(name = "gpElasticSearchQueryMapper")
-    @Override
-    public <Mapper extends GPBaseMapper<GPElasticSearchQuery>> void setMapper(Mapper theMapper) {
-        this.mapper = theMapper;
-    }
-
-    /**
-     * @param theIndexCreator
-     */
-    @Resource(name = "gpElasticSearchQueryIndexCreator")
-    @Override
-    public <IC extends GPIndexCreator> void setIndexCreator(IC theIndexCreator) {
-        super.setIndexCreator(theIndexCreator);
-    }
+//    /**
+//     * @param theMapper
+//     */
+//    @Resource(name = "gpElasticSearchQueryMapper")
+//    @Override
+//    public <Mapper extends GPBaseMapper<GPElasticSearchQuery>> void setMapper(Mapper theMapper) {
+//        this.mapper = theMapper;
+//    }
+//
+//    /**
+//     * @param theIndexCreator
+//     */
+//    @Resource(name = "gpElasticSearchQueryIndexCreator")
+//    @Override
+//    public <IC extends GPIndexCreator> void setIndexCreator(IC theIndexCreator) {
+//        super.setIndexCreator(theIndexCreator);
+//    }
 }

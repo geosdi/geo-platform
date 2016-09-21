@@ -1,5 +1,6 @@
 package org.geosdi.geoplatform.experimental.el.query.mediator.colleague.decorator;
 
+import org.apache.commons.lang3.text.StrSubstitutor;
 import org.geosdi.geoplatform.experimental.el.index.GPBaseIndexCreator;
 import org.geosdi.geoplatform.experimental.el.query.mediator.colleague.GPElasticSearchQueryColleague;
 import org.geosdi.geoplatform.experimental.el.query.template.IGPElasticSearchQueryTemplate;
@@ -31,6 +32,18 @@ public interface IGPElasticSearchQueryColleagueDecorator {
      */
     <R, V> R executeQueryColleague(String queryTemplate, @Nullable Map<String, V> queryTemplateParameters)
             throws Exception;
+
+    /**
+     * @param <QUERY_SUBSTITUTOR>
+     * @return {@link QUERY_SUBSTITUTOR}
+     */
+    <QUERY_SUBSTITUTOR extends StrSubstitutor> StrSubstitutor getQuerySubstitutor();
+
+    /**
+     * @param <V>
+     * @return {@link Map<String, V>}
+     */
+    <V> Map<String, V> getQueryTemplateParameters();
 
     /**
      * @param <QUERY_COLLEAGUE_KEY>

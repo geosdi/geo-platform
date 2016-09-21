@@ -1,8 +1,6 @@
 package org.geosdi.geoplatform.experimental.el.query.index;
 
 import org.geosdi.geoplatform.experimental.el.index.GPAbstractIndexCreator;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 
@@ -10,8 +8,8 @@ import javax.annotation.Resource;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@ComponentScan(value = {"org.geosdi.geoplatform.experimental.el.query.index.settings.config"})
-@Component(value = "gpElasticSearchQueryIndexCreator")
+//@ComponentScan(value = {"org.geosdi.geoplatform.experimental.el.query.index.settings.config"})
+//@Component(value = "gpElasticSearchQueryIndexCreator")
 public class GPElasticSearchQueryIndexCreator extends GPAbstractIndexCreator {
 
     @Resource(name = "gpQueryIndexSettings")
@@ -21,7 +19,7 @@ public class GPElasticSearchQueryIndexCreator extends GPAbstractIndexCreator {
      * @return {@link GPIndexSettings}
      */
     @Override
-    public <IS extends GPIndexSettings> IS getIndexSettings() {
+    public final <IS extends GPIndexSettings> IS getIndexSettings() {
         return (IS) this.gpQueryIndexSettings;
     }
 

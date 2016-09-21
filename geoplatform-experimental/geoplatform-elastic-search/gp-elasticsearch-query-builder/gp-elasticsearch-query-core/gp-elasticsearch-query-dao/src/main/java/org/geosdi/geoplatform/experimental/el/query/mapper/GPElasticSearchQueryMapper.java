@@ -5,7 +5,6 @@ import org.geosdi.geoplatform.experimental.el.api.mapper.GPBaseMapper;
 import org.geosdi.geoplatform.experimental.el.query.model.GPElasticSearchQuery;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature;
-import org.springframework.stereotype.Component;
 
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.WRITE_DATES_AS_TIMESTAMPS_DISABLE;
 
@@ -13,7 +12,7 @@ import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEn
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Component(value = "gpElasticSearchQueryMapper")
+//@Component(value = "gpElasticSearchQueryMapper")
 public class GPElasticSearchQueryMapper extends GPBaseMapper<GPElasticSearchQuery> {
 
     public GPElasticSearchQueryMapper() {

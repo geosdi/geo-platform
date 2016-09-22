@@ -50,11 +50,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 public abstract class GPBaseMapper<D extends Document> extends GPBaseJacksonMapper<D>
         implements GPElasticSearchMapper<D> {
 
-    private String jsonRootName;
+    private final String jsonRootName;
 
     public GPBaseMapper(Class<D> theDocumentClass, JacksonSupport theReader) {
         super(theDocumentClass, theReader);
-        findJsonRootName();
+        this.jsonRootName = findJsonRootName();
     }
 
     @Override
@@ -64,11 +64,10 @@ public abstract class GPBaseMapper<D extends Document> extends GPBaseJacksonMapp
 
     /**
      * @return {@link String}
-     * @throws Exception
      */
     @Override
-    public String getJsonRootName() throws Exception {
-        return this.jsonRootName = ((this.jsonRootName != null) ? this.jsonRootName : findJsonRootName());
+    public String getJsonRootName() {
+        return this.jsonRootName;
     }
 
     /**
@@ -77,10 +76,10 @@ public abstract class GPBaseMapper<D extends Document> extends GPBaseJacksonMapp
     private String findJsonRootName() {
         XmlRootElement xmlRootElement = AnnotationUtils.findAnnotation(this.entityClass, XmlRootElement.class);
         if (xmlRootElement != null)
-            return (this.jsonRootName = xmlRootElement.name());
+            return xmlRootElement.name();
         JsonRootName jsonRootName = AnnotationUtils.findAnnotation(this.entityClass, JsonRootName.class);
         if (jsonRootName != null)
-            return (this.jsonRootName = jsonRootName.value());
+            return jsonRootName.value();
         throw new IllegalStateException("You must add @XmlRootElement or @JsonRootName on "
                 + this.entityClass.getSimpleName());
     }

@@ -11,11 +11,15 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPElasticSearchQueryTaskFilePrinter extends GPElasticSearchQueryTaskLoggerPrinter {
+public class GPElasticSearchQueryTaskFilePrinter<V extends GPElasticSearchQuery>
+        extends GPElasticSearchQueryTaskLoggerPrinter<V> {
 
-    public GPElasticSearchQueryTaskFilePrinter(GPElasticSearchQuery theValue, GPBaseMapper<GPElasticSearchQuery> theMapper,
-            AtomicInteger theCounter) {
+    private final String fileName;
+
+    public GPElasticSearchQueryTaskFilePrinter(V theValue, GPBaseMapper<V> theMapper,
+            AtomicInteger theCounter, String theFileName) {
         super(theValue, theMapper, theCounter);
+        this.fileName = theFileName;
     }
 
     /**
@@ -24,7 +28,8 @@ public class GPElasticSearchQueryTaskFilePrinter extends GPElasticSearchQueryTas
      * @throws Exception
      */
     @Override
-    protected void print(GPElasticSearchQuery value, AtomicInteger counter) throws Exception {
-        mapper.write(new File("./target/GPElasticSearchQuery-" + counter.incrementAndGet() + ".json"), value);
+    protected void print(V value, AtomicInteger counter) throws Exception {
+        mapper.write(new File("./target/" + fileName + "-"
+                + counter.incrementAndGet() + ".json"), value);
     }
 }

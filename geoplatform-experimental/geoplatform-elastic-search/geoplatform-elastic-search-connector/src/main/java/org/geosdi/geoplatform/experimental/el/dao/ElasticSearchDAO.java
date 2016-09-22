@@ -34,6 +34,12 @@ public interface ElasticSearchDAO<D extends Document> extends GPPageableElasticS
     String getIndexType();
 
     /**
+     * @return {@link String}
+     * @throws Exception
+     */
+    String getJsonRootName() throws Exception;
+
+    /**
      * @param document
      * @return {@link String}
      * @throws Exception

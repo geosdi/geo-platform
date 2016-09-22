@@ -37,11 +37,11 @@ public class GPElasticSearchQueryMapperTest {
 
     private static final Logger logger = LoggerFactory.getLogger(GPElasticSearchQueryMapperTest.class);
     //
-    private final GPElasticSearchQueryMapper queryMapper = new GPElasticSearchQueryMapper();
+    private final GPElasticSearchQueryMapper queryMapper = new GPElasticSearchQueryMapper<>(GPElasticSearchQuery.class);
 
     @Test
     public void writeGPElasticSearchQueryAsStringTest() throws Exception {
-        logger.info("##########################MOUNTAIN_NOW_USER_AS_STRING : \n{}\n",
+        logger.info("##########################GP_ELASTIC_SEARCH_QUERY_AS_STRING : \n{}\n",
                 this.queryMapper.writeAsString(createMockGPElasticSearchQuery()));
     }
 
@@ -60,9 +60,10 @@ public class GPElasticSearchQueryMapperTest {
     public void printGPElasticSearchQueryFileTest() throws Exception {
         AtomicInteger counter = new AtomicInteger(0);
         StreamSupport.stream(createMockGPElasticSearchQuery(20).spliterator(), Boolean.FALSE)
-                .forEach(query -> new GPElasticSearchQueryTaskFilePrinter(query, this.queryMapper, counter).start());
+                .forEach(query -> new GPElasticSearchQueryTaskFilePrinter(query, this.queryMapper,
+                        counter, "GPElasticSearchQuery").start());
         Thread.sleep(1000);
-        logger.info(":::::::::::::::::::::::::::::PRINTED : {} MountainNowUsers.\n", counter.get());
+        logger.info(":::::::::::::::::::::::::::::PRINTED : {} GPElasticSearchQuery.\n", counter.get());
     }
 
     @Test

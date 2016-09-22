@@ -142,4 +142,13 @@ abstract class GPBaseElasticSearchDAO<D extends Document> implements GPElasticSe
         Preconditions.checkNotNull(this.elastichSearchClient, "The ElasticSearch Client must not be null.");
         Preconditions.checkNotNull(this.elasticSearchExecutor, "The ElasticSearchExecutor must not be null");
     }
+
+    /**
+     * @return {@link String}
+     * @throws Exception
+     */
+    @Override
+    public final String getJsonRootName() throws Exception {
+        return this.mapper.getJsonRootName();
+    }
 }

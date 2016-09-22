@@ -21,11 +21,17 @@
     </properties>
 
     <dependencies>
+        <!-- =========================================================== -->
+        <!-- =========================== SPRING ======================== -->
+        <!-- =========================================================== -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+        </dependency>
 
         <!-- =========================================================== -->
         <!-- =============== GEOPLATFORM JACKSON SUPPORT =============== -->
         <!-- =========================================================== -->
-
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-jackson-support</artifactId>

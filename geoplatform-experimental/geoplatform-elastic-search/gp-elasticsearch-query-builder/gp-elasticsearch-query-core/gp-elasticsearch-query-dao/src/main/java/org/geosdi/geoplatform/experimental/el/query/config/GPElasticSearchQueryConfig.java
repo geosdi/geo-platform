@@ -14,7 +14,7 @@ public interface GPElasticSearchQueryConfig {
      * @param <Mapper>
      * @return {@link Mapper}
      */
-    <Mapper extends GPBaseMapper<GPElasticSearchQuery>> Mapper configureElasticSearchQueryMapper();
+    <Q extends GPElasticSearchQuery, Mapper extends GPBaseMapper<Q>> Mapper configureElasticSearchQueryMapper();
 
     /**
      * @param <QueryDAO>

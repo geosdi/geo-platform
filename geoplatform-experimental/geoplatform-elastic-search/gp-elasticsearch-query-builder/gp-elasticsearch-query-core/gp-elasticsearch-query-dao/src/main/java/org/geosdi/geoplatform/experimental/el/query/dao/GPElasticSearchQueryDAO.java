@@ -1,6 +1,7 @@
 package org.geosdi.geoplatform.experimental.el.query.dao;
 
 import com.google.common.base.Preconditions;
+import org.elasticsearch.search.sort.SortOrder;
 import org.geosdi.geoplatform.experimental.el.dao.AbstractElasticSearchDAO;
 import org.geosdi.geoplatform.experimental.el.query.model.GPElasticSearchQuery;
 import org.geosdi.geoplatform.experimental.el.search.date.IGPDateQuerySearch.GPDateQuerySearch;
@@ -67,8 +68,9 @@ public abstract class GPElasticSearchQueryDAO<Q extends GPElasticSearchQuery> ex
         Preconditions.checkArgument((fromDate != null), "The Parameter From Must not be null.");
         Preconditions.checkArgument((toDate != null), "The Parameter To Must not be null.");
         Preconditions.checkArgument(fromDate.isBefore(toDate), "The Parameter From must be Before of To");
-        return super.find(new MultiFieldsSearch(from, size, new GPDateQuerySearch(super.getJsonRootName()
-                .concat(".creationDate"), MUST, fromDate, toDate)));
+        String field = super.getJsonRootName().concat(".creationDate");
+        return super.find(new MultiFieldsSearch(field, SortOrder.DESC, from, size, new GPDateQuerySearch(field,
+                MUST, fromDate, toDate)));
     }
 
     /**

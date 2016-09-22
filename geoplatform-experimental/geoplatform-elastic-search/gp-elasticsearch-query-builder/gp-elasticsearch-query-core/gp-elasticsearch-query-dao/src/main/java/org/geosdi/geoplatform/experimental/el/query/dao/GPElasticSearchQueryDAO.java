@@ -68,7 +68,7 @@ public abstract class GPElasticSearchQueryDAO<Q extends GPElasticSearchQuery> ex
         Preconditions.checkArgument((toDate != null), "The Parameter To Must not be null.");
         Preconditions.checkArgument(fromDate.isBefore(toDate), "The Parameter From must be Before of To");
         return super.find(new MultiFieldsSearch(from, size, new GPDateQuerySearch(super.getJsonRootName()
-                .concat(".description"), MUST, fromDate, toDate)));
+                .concat(".creationDate"), MUST, fromDate, toDate)));
     }
 
     /**

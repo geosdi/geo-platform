@@ -5,6 +5,7 @@ import org.elasticsearch.client.Client;
 import org.geosdi.geoplatform.experimental.el.api.mapper.GPBaseMapper;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
 import org.geosdi.geoplatform.experimental.el.configurator.GPIndexConfigurator;
+import org.geosdi.geoplatform.experimental.el.index.GPBaseIndexCreator;
 import org.geosdi.geoplatform.experimental.el.index.GPIndexCreator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -74,6 +75,14 @@ abstract class GPBaseElasticSearchDAO<D extends Document> implements GPElasticSe
     @Override
     public final String getIndexName() {
         return this.indexCreator.getIndexSettings().getIndexName();
+    }
+
+    /**
+     * @return {@link org.geosdi.geoplatform.experimental.el.index.GPBaseIndexCreator.GPIndexSettings}
+     */
+    @Override
+    public final <IS extends GPBaseIndexCreator.GPIndexSettings> IS getIndexSettings() {
+        return this.indexCreator.getIndexSettings();
     }
 
     /**

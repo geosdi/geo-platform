@@ -3,7 +3,6 @@ package org.geosdi.geoplatform.experimental.el.query.mediator;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
 import org.geosdi.geoplatform.experimental.el.index.GPBaseIndexCreator;
-import org.geosdi.geoplatform.experimental.el.query.mediator.colleague.GPElasticSearchQueryColleague;
 import org.geosdi.geoplatform.experimental.el.query.mediator.colleague.decorator.IGPElasticSearchQueryColleagueDecorator;
 
 import javax.annotation.Resource;

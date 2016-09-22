@@ -34,9 +34,13 @@
  */
 package org.geosdi.geoplatform.experimental.el.api.mapper;
 
+import com.fasterxml.jackson.annotation.JsonRootName;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import org.geosdi.geoplatform.support.jackson.mapper.GPBaseJacksonMapper;
+import org.springframework.core.annotation.AnnotationUtils;
+
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @param <D>
@@ -46,12 +50,38 @@ import org.geosdi.geoplatform.support.jackson.mapper.GPBaseJacksonMapper;
 public abstract class GPBaseMapper<D extends Document> extends GPBaseJacksonMapper<D>
         implements GPElasticSearchMapper<D> {
 
+    private String jsonRootName;
+
     public GPBaseMapper(Class<D> theDocumentClass, JacksonSupport theReader) {
         super(theDocumentClass, theReader);
+        findJsonRootName();
     }
 
     @Override
     public String getDocumentClassName() {
         return this.entityClass.getSimpleName();
+    }
+
+    /**
+     * @return {@link String}
+     * @throws Exception
+     */
+    @Override
+    public String getJsonRootName() throws Exception {
+        return this.jsonRootName = ((this.jsonRootName != null) ? this.jsonRootName : findJsonRootName());
+    }
+
+    /**
+     * @return {@link String}
+     */
+    private String findJsonRootName() {
+        XmlRootElement xmlRootElement = AnnotationUtils.findAnnotation(this.entityClass, XmlRootElement.class);
+        if (xmlRootElement != null)
+            return (this.jsonRootName = xmlRootElement.name());
+        JsonRootName jsonRootName = AnnotationUtils.findAnnotation(this.entityClass, JsonRootName.class);
+        if (jsonRootName != null)
+            return (this.jsonRootName = jsonRootName.value());
+        throw new IllegalStateException("You must add @XmlRootElement or @JsonRootName on "
+                + this.entityClass.getSimpleName());
     }
 }

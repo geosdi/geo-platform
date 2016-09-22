@@ -1,7 +1,6 @@
 package org.geosdi.geoplatform.experimental.el.query.dao;
 
 import com.google.common.base.Preconditions;
-import org.elasticsearch.search.sort.SortOrder;
 import org.geosdi.geoplatform.experimental.el.dao.AbstractElasticSearchDAO;
 import org.geosdi.geoplatform.experimental.el.query.model.GPElasticSearchQuery;
 import org.geosdi.geoplatform.experimental.el.search.date.IGPDateQuerySearch.GPDateQuerySearch;
@@ -12,15 +11,15 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 import static org.elasticsearch.index.query.QueryBuilders.matchAllQuery;
+import static org.elasticsearch.search.sort.SortOrder.DESC;
 import static org.geosdi.geoplatform.experimental.el.search.bool.IBooleanSearch.BooleanQueryType.MUST;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-//@Component(value = "gpElasticSearchQueryDAO")
-public abstract class GPElasticSearchQueryDAO extends AbstractElasticSearchDAO<GPElasticSearchQuery>
-        implements IGPElasticSearchQueryDAO {
+public abstract class GPElasticSearchQueryDAO<Q extends GPElasticSearchQuery> extends AbstractElasticSearchDAO<Q>
+        implements IGPElasticSearchQueryDAO<Q> {
 
     /**
      * @param queryName
@@ -30,12 +29,12 @@ public abstract class GPElasticSearchQueryDAO extends AbstractElasticSearchDAO<G
      * @throws Exception
      */
     @Override
-    public IPageResult<GPElasticSearchQuery> findByQueryName(String queryName, @Nullable Integer from,
+    public IPageResult<Q> findByQueryName(String queryName, @Nullable Integer from,
             @Nullable Integer size) throws Exception {
         Preconditions.checkArgument(((queryName != null) && !(queryName.isEmpty())), "The Parameter " +
                 "Query Name must not be null or an Empty String.");
-        return super.find(new MultiFieldsSearch(from, size, new GPPhrasePrefixSearch("gpElasticSearchQuery.queryName",
-                queryName, MUST)));
+        return super.find(new MultiFieldsSearch(from, size, new GPPhrasePrefixSearch(super.getJsonRootName()
+                .concat(".queryName"), queryName, MUST)));
     }
 
     /**
@@ -46,12 +45,12 @@ public abstract class GPElasticSearchQueryDAO extends AbstractElasticSearchDAO<G
      * @throws Exception
      */
     @Override
-    public IPageResult<GPElasticSearchQuery> findByQueryDescription(String queryDescription, @Nullable Integer from,
+    public IPageResult<Q> findByQueryDescription(String queryDescription, @Nullable Integer from,
             @Nullable Integer size) throws Exception {
         Preconditions.checkArgument(((queryDescription != null) && !(queryDescription.isEmpty())), "The Parameter " +
                 "Query Description must not be null or an Empty String.");
-        return super.find(new MultiFieldsSearch(from, size, new GPPhrasePrefixSearch("gpElasticSearchQuery.description",
-                queryDescription, MUST)));
+        return super.find(new MultiFieldsSearch(from, size, new GPPhrasePrefixSearch(super.getJsonRootName()
+                .concat(".description"), queryDescription, MUST)));
     }
 
     /**
@@ -63,13 +62,13 @@ public abstract class GPElasticSearchQueryDAO extends AbstractElasticSearchDAO<G
      * @throws Exception
      */
     @Override
-    public IPageResult<GPElasticSearchQuery> findByQueryCreationDate(DateTime fromDate, DateTime toDate,
+    public IPageResult<Q> findByQueryCreationDate(DateTime fromDate, DateTime toDate,
             @Nullable Integer from, @Nullable Integer size) throws Exception {
         Preconditions.checkArgument((fromDate != null), "The Parameter From Must not be null.");
         Preconditions.checkArgument((toDate != null), "The Parameter To Must not be null.");
         Preconditions.checkArgument(fromDate.isBefore(toDate), "The Parameter From must be Before of To");
-        return super.find(new MultiFieldsSearch(from, size, new GPDateQuerySearch("gpElasticSearchQuery.description",
-                MUST, fromDate, toDate)));
+        return super.find(new MultiFieldsSearch(from, size, new GPDateQuerySearch(super.getJsonRootName()
+                .concat(".description"), MUST, fromDate, toDate)));
     }
 
     /**
@@ -77,28 +76,10 @@ public abstract class GPElasticSearchQueryDAO extends AbstractElasticSearchDAO<G
      * @throws Exception
      */
     @Override
-    public List<GPElasticSearchQuery> findLasts() throws Exception {
+    public List<Q> findLasts() throws Exception {
         logger.debug("###############Try to find Lasts 10 GPElasticSearchQuery, orderBy " +
                 "creationDate #SortOrder.DESC.\n\n");
-        return super.find(new QueriableSortablePage("gpElasticSearchQuery.creationDate", SortOrder.DESC,
+        return super.find(new QueriableSortablePage(super.getJsonRootName().concat(".creationDate"), DESC,
                 matchAllQuery())).getResults();
     }
-
-//    /**
-//     * @param theMapper
-//     */
-//    @Resource(name = "gpElasticSearchQueryMapper")
-//    @Override
-//    public <Mapper extends GPBaseMapper<GPElasticSearchQuery>> void setMapper(Mapper theMapper) {
-//        this.mapper = theMapper;
-//    }
-//
-//    /**
-//     * @param theIndexCreator
-//     */
-//    @Resource(name = "gpElasticSearchQueryIndexCreator")
-//    @Override
-//    public <IC extends GPIndexCreator> void setIndexCreator(IC theIndexCreator) {
-//        super.setIndexCreator(theIndexCreator);
-//    }
 }

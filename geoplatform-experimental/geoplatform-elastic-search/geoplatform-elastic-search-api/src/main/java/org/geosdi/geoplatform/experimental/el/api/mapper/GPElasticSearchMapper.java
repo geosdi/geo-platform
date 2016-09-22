@@ -132,4 +132,10 @@ public interface GPElasticSearchMapper<D extends Document> extends GPJacksonMapp
      * @return {@link String} Mapper Name
      */
     String getMapperName();
+
+    /**
+     * @return {@link String}
+     * @throws Exception
+     */
+    String getJsonRootName() throws Exception;
 }

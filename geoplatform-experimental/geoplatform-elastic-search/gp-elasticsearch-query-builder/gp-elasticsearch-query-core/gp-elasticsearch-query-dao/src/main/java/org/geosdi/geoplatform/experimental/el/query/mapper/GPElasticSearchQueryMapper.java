@@ -12,11 +12,10 @@ import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEn
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-//@Component(value = "gpElasticSearchQueryMapper")
-public class GPElasticSearchQueryMapper extends GPBaseMapper<GPElasticSearchQuery> {
+public class GPElasticSearchQueryMapper<Q extends GPElasticSearchQuery> extends GPBaseMapper<Q> {
 
-    public GPElasticSearchQueryMapper() {
-        super(GPElasticSearchQuery.class, new GPJacksonSupport()
+    public GPElasticSearchQueryMapper(Class<Q> theQueryClass) {
+        super(theQueryClass, new GPJacksonSupport()
                 .registerModule(new JodaModule())
                 .configure(WRITE_DATES_AS_TIMESTAMPS_DISABLE)
                 .configure(GPJsonIncludeFeature.NON_NULL));

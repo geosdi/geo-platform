@@ -7,6 +7,7 @@ import org.elasticsearch.client.Client;
 import org.elasticsearch.search.SearchHit;
 import org.geosdi.geoplatform.experimental.el.api.mapper.GPBaseMapper;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
+import org.geosdi.geoplatform.experimental.el.index.GPBaseIndexCreator.GPIndexSettings;
 import org.geosdi.geoplatform.experimental.el.index.GPIndexCreator;
 
 import java.nio.file.Path;
@@ -32,6 +33,12 @@ public interface ElasticSearchDAO<D extends Document> extends GPPageableElasticS
      * @return {@link String}
      */
     String getIndexType();
+
+    /**
+     * @param <IS>
+     * @return {@link GPIndexSettings}
+     */
+    <IS extends GPIndexSettings> IS getIndexSettings();
 
     /**
      * @return {@link String}

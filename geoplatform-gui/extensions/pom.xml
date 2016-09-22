@@ -42,7 +42,6 @@
     <modules>
         <module>gp-publisher-widget</module>
         <module>gp-wfst-widget</module>
-        <module>gp-wps-widget</module>
         <module>oauth2-widget</module>
     </modules>
 

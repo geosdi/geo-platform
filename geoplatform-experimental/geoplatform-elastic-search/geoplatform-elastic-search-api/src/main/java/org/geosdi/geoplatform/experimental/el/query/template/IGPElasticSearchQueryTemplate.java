@@ -9,8 +9,7 @@ import net.jcip.annotations.Immutable;
  */
 public interface IGPElasticSearchQueryTemplate {
 
-    IGPElasticSearchQueryTemplate DEFAULT_QUERY_TEMPLATE = new GPElasticSearchQueryTemplate("${", "}",
-            new Character('$'), ":-");
+    IGPElasticSearchQueryTemplate DEFAULT_QUERY_TEMPLATE = new GPElasticSearchQueryTemplate("${", "}");
 
     /**
      * @return {@link String}
@@ -23,37 +22,21 @@ public interface IGPElasticSearchQueryTemplate {
     String getSuffix();
 
     /**
-     * @return {@link Character}
+     *
      */
-    Character getEscape();
-
-    /**
-     * @return {@link String}
-     */
-    String getValueDelimiter();
-
     @Immutable
     class GPElasticSearchQueryTemplate implements IGPElasticSearchQueryTemplate {
 
         private final String prefix;
         private final String suffix;
-        private final Character escape;
-        private final String valueDelimiter;
 
-        public GPElasticSearchQueryTemplate(String thePrefix, String theSuffix,
-                Character theEscape, String theValueDelimiter) {
+        public GPElasticSearchQueryTemplate(String thePrefix, String theSuffix) {
             Preconditions.checkArgument((thePrefix != null) && !(thePrefix.isEmpty()),
                     "The Parameter Prefix must not be null or an Empty String.");
             Preconditions.checkArgument((theSuffix != null) && !(theSuffix.isEmpty()),
                     "The Parameter Suffix must not be null or an Empty String.");
-            Preconditions.checkArgument((theEscape != null),
-                    "The Parameter Escape must not be null.");
-            Preconditions.checkArgument((theValueDelimiter != null) && !(theValueDelimiter.isEmpty()),
-                    "The Parameter Value Delimiter must not be null or an Empty String.");
             this.prefix = thePrefix;
             this.suffix = theSuffix;
-            this.escape = theEscape;
-            this.valueDelimiter = theValueDelimiter;
         }
 
         /**
@@ -72,29 +55,12 @@ public interface IGPElasticSearchQueryTemplate {
             return this.suffix;
         }
 
-        /**
-         * @return {@link Character}
-         */
-        @Override
-        public Character getEscape() {
-            return this.escape;
-        }
-
-        /**
-         * @return {@link String}
-         */
-        @Override
-        public String getValueDelimiter() {
-            return this.valueDelimiter;
-        }
 
         @Override
         public String toString() {
             return getClass().getSimpleName() + "{" +
                     " prefix = '" + prefix + '\'' +
                     ", suffix = '" + suffix + '\'' +
-                    ", escape = " + escape +
-                    ", valueDelimiter = '" + valueDelimiter + '\'' +
                     '}';
         }
     }

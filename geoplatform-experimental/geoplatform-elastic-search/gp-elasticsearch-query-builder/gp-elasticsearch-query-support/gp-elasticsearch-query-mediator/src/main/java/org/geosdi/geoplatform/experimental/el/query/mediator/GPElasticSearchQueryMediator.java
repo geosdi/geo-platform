@@ -23,7 +23,7 @@ public interface GPElasticSearchQueryMediator extends InitializingBean, Disposab
 
     /**
      * @param queryColleagueKey
-     * @return {@link GPElasticSearchQueryColleague}
+     * @return {@link org.geosdi.geoplatform.experimental.el.query.mediator.colleague.GPElasticSearchQueryColleague}
      * @throws Exception
      */
     IGPElasticSearchQueryColleagueDecorator getQueryColleague(GPIndexSettings queryColleagueKey) throws Exception;
@@ -42,7 +42,7 @@ public interface GPElasticSearchQueryMediator extends InitializingBean, Disposab
             throws Exception;
 
     /**
-     * @return {@link ImmutableMap<GPIndexSettings, GPElasticSearchQueryColleague>}
+     * @return {@link ImmutableMap<GPIndexSettings, org.geosdi.geoplatform.experimental.el.query.mediator.colleague.GPElasticSearchQueryColleague>}
      */
     ImmutableMap<GPIndexSettings, IGPElasticSearchQueryColleagueDecorator> getAllQueryColleagues();
 }

@@ -1,10 +1,10 @@
 package org.geosdi.geoplatform.experimental.el.query.mediator.colleague.decorator;
 
-import org.apache.commons.lang3.text.StrLookup;
-import org.apache.commons.lang3.text.StrSubstitutor;
 import org.geosdi.geoplatform.experimental.el.index.GPBaseIndexCreator;
 import org.geosdi.geoplatform.experimental.el.query.mediator.colleague.GPElasticSearchQueryColleague;
 import org.geosdi.geoplatform.experimental.el.query.template.IGPElasticSearchQueryTemplate;
+import org.geosdi.geoplatform.experimental.el.query.template.IGPElasticSearchQueryTemplateReplacer;
+import org.geosdi.geoplatform.experimental.el.query.template.IGPElasticSearchQueryTemplateReplacer.GPElasticSearchQueryTemplateReplacer;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;
@@ -19,14 +19,13 @@ abstract class AbstractQueryColleagueDecorator implements IGPElasticSearchQueryC
     protected final GPElasticSearchQueryColleague queryColleague;
     protected final IGPElasticSearchQueryTemplate queryTemplate;
     private ThreadLocal<Map<String, Object>> queryTemplateParameters = ThreadLocal.withInitial(() -> new HashMap<String, Object>());
-    private final ThreadLocal<StrSubstitutor> querySubstitutor;
+    private final ThreadLocal<IGPElasticSearchQueryTemplateReplacer> queryReplacer;
 
     protected AbstractQueryColleagueDecorator(GPElasticSearchQueryColleague theColleague) {
         this.queryColleague = theColleague;
         this.queryTemplate = ((this.queryColleague.getQueryTemplate() != null) ? this.queryColleague.getQueryTemplate()
                 : this.getQueryTemplate());
-        this.querySubstitutor = ThreadLocal.withInitial(() -> new StrSubstitutor(this.queryTemplateParameters.get(),
-                this.queryTemplate.getPrefix(), this.queryTemplate.getSuffix(), this.queryTemplate.getEscape().charValue()));
+        this.queryReplacer = ThreadLocal.withInitial(() -> new GPElasticSearchQueryTemplateReplacer(this.queryTemplate));
     }
 
     /**
@@ -48,9 +47,8 @@ abstract class AbstractQueryColleagueDecorator implements IGPElasticSearchQueryC
     /**
      * @return {@link QUERY_SUBSTITUTOR}
      */
-    @Override
-    public <QUERY_SUBSTITUTOR extends StrSubstitutor> StrSubstitutor getQuerySubstitutor() {
-        return this.querySubstitutor.get();
+    public <QUERY_SUBSTITUTOR extends IGPElasticSearchQueryTemplateReplacer> IGPElasticSearchQueryTemplateReplacer getQueryReplacer() {
+        return this.queryReplacer.get();
     }
 
     /**
@@ -69,21 +67,17 @@ abstract class AbstractQueryColleagueDecorator implements IGPElasticSearchQueryC
      */
     protected final <V> String decoreQueryTemplate(String queryTemplate,
             @Nullable Map<String, V> queryTemplateParameters) {
-        replaceQuerySubstituorVariableResolver(queryTemplate, queryTemplateParameters);
+        replaceQueryTemplateParameters(queryTemplateParameters);
         return ((queryTemplateParameters != null) && !(queryTemplateParameters.isEmpty()) ?
-                this.querySubstitutor.get().replace(queryTemplate) : queryTemplate);
+                this.queryReplacer.get().replace(queryTemplate, this.queryTemplateParameters.get()) : queryTemplate);
     }
 
     /**
-     * @param queryTemplate
      * @param queryTemplateParameters
      * @param <V>
      */
-    protected <V> void replaceQuerySubstituorVariableResolver(String queryTemplate,
-            Map<String, V> queryTemplateParameters) {
-        if (((queryTemplateParameters != null) && !(queryTemplateParameters.isEmpty()))) {
+    protected <V> void replaceQueryTemplateParameters(Map<String, V> queryTemplateParameters) {
+        if (((queryTemplateParameters != null) && !(queryTemplateParameters.isEmpty())))
             this.queryTemplateParameters.set((Map<String, Object>) queryTemplateParameters);
-            this.querySubstitutor.get().setVariableResolver(StrLookup.mapLookup(this.queryTemplateParameters.get()));
-        }
     }
 }

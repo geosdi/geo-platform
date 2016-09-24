@@ -2,6 +2,7 @@ package org.geosdi.geoplatform.experimental.el.query.mediator.colleague.decorato
 
 import com.google.common.base.Preconditions;
 import org.geosdi.geoplatform.experimental.el.query.mediator.colleague.GPElasticSearchQueryColleague;
+import org.geosdi.geoplatform.experimental.el.query.mediator.colleague.GPElasticSearchQueryColleague.GPElasticSearchQueryColleagueParams;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,7 +41,9 @@ public class GPElasticSearchQueryColleagueDecorator extends AbstractQueryColleag
             throws Exception {
         logger.trace("################################{} executing QueryTemplate : \n\n{}\n\n with Template Parameters" +
                 " : {}\n", super.getQueryColleague(), queryTemplate, queryTemplateParameters);
-        return this.queryColleague.executeQueryColleague(super.decoreQueryTemplate(queryTemplate,
-                queryTemplateParameters));
+        Integer from = ((queryTemplateParameters != null) && !(queryTemplateParameters.isEmpty()) ? (Integer) queryTemplateParameters.get("from") : null);
+        Integer size = ((queryTemplateParameters != null) && !(queryTemplateParameters.isEmpty()) ? (Integer) queryTemplateParameters.get("size") : null);
+        return this.queryColleague.executeQueryColleague(new GPElasticSearchQueryColleagueParams(from, size,
+                super.decoreQueryTemplate(queryTemplate, queryTemplateParameters)));
     }
 }

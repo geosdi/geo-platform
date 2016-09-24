@@ -17,13 +17,14 @@ public class QueryColleagueMockBase implements GPElasticSearchQueryColleague {
             "QueryColleagueBaseType");
 
     /**
-     * @param queryTemplate
+     * @param colleagueParam
      * @return {@link R}
      * @throws Exception
      */
     @Override
-    public <R> R executeQueryColleague(String queryTemplate) throws Exception {
-        return (R) "####################This is QueryColleagueMockBaseExecution : ".concat(queryTemplate);
+    public <COLLEAGUE_PARAM extends IGPElasticSearchQueryColleagueParams, R extends Object> R executeQueryColleague(COLLEAGUE_PARAM colleagueParam)
+            throws Exception {
+        return (R) "####################This is QueryColleagueMockBaseExecution : ".concat(colleagueParam.getQueryTemplate());
     }
 
     /**

@@ -1,30 +1,60 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  
-  <parent>
-      <groupId>org.geosdi</groupId>
-      <artifactId>gp-elasticsearch-query-rs</artifactId>
-      <version>1.7-SNAPSHOT</version>
-  </parent>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.geosdi</groupId>
-  <artifactId>gp-elasticsearch-query-rs-api</artifactId>
-  <version>1.7-SNAPSHOT</version>
-  <packaging>jar</packaging>
+    <parent>
+        <groupId>org.geosdi</groupId>
+        <artifactId>gp-elasticsearch-query-rs</artifactId>
+        <version>1.7-SNAPSHOT</version>
+    </parent>
 
-  <name>Geo-Platform :: == Elastic Search Query REST Api Module</name>
-  <url>http://maven.apache.org</url>
+    <groupId>org.geosdi</groupId>
+    <artifactId>gp-elasticsearch-query-rs-api</artifactId>
+    <version>1.7-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
+    <name>Geo-Platform :: == Elastic Search Query REST Api Module</name>
+    <url>http://maven.apache.org</url>
 
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <!-- =========================================================== -->
+        <!-- ========== GEOPLATFOM ELASTICSEARCH QUERY MODEL =========== -->
+        <!-- =========================================================== -->
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>gp-elasticsearch-query-model</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxrs</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <inherited>true</inherited>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <configuration>
+                    <attach>true</attach>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

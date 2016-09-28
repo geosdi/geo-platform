@@ -42,4 +42,12 @@ public interface IGPElasticSearchQueryDAO<Q extends GPElasticSearchQuery> extend
      */
     IPageResult<Q> findByQueryCreationDate(DateTime fromDate, DateTime toDate,
             @Nullable Integer from, @Nullable Integer size) throws Exception;
+
+    /**
+     * @param from
+     * @param size
+     * @return {@link org.geosdi.geoplatform.experimental.el.dao.GPPageableElasticSearchDAO.IPageResult<Q>}
+     * @throws Exception
+     */
+    IPageResult<Q> findQuery(@Nullable Integer from, @Nullable Integer size) throws Exception;
 }

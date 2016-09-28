@@ -84,4 +84,16 @@ public abstract class GPElasticSearchQueryDAO<Q extends GPElasticSearchQuery> ex
         return super.find(new QueriableSortablePage(super.getJsonRootName().concat(".creationDate"), DESC,
                 matchAllQuery())).getResults();
     }
+
+    /**
+     * @param from
+     * @param size
+     * @return {@link IPageResult <Q>}
+     * @throws Exception
+     */
+    @Override
+    public IPageResult<Q> findQuery(@Nullable Integer from, @Nullable Integer size) throws Exception {
+        return super.find(new QueriableSortablePage(super.getJsonRootName().concat(".creationDate"), DESC,
+                from, size, matchAllQuery()));
+    }
 }

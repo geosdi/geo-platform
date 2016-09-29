@@ -636,10 +636,10 @@ public class GPAccountDelegate implements AccountDelegate {
         accountToUpdate.setEnabled(account.isEnabled());
         accountToUpdate.setLoadExpandedFolders(account.isLoadExpandedFolders());
 
-        if (!accountToUpdate.isAccountTemporary() && account.isAccountTemporary()) {
-            throw new IllegalParameterFault(
-                    "A standard account cannot be changed to temporary account");
-        }
+//        if (!accountToUpdate.isAccountTemporary() && account.isAccountTemporary()) {
+//            throw new IllegalParameterFault(
+//                    "A standard account cannot be changed to temporary account");
+//        }
         accountToUpdate.setAccountTemporary(account.isAccountTemporary());
     }
 

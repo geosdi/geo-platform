@@ -21,8 +21,7 @@ public interface IGPElasticSearchQueryService {
      * @return {@link Response}
      * @throws Exception
      */
-    Response findGPElasticSearchQuery(@QueryParam(value = "from") @DefaultValue(value = "0") Integer from,
-            @QueryParam(value = "size") @DefaultValue(value = "10") Integer size) throws Exception;
+    Response findGPElasticSearchQuery(Integer from, Integer size) throws Exception;
 
     /**
      * @param from
@@ -32,8 +31,6 @@ public interface IGPElasticSearchQueryService {
      * @return {@link Response}
      * @throws Exception
      */
-    Response findGPElasticSearchQueryByCreationDate(@QueryParam(value = "from") @DefaultValue(value = "0") Integer from,
-            @QueryParam(value = "size") @DefaultValue(value = "10") Integer size,
-            @QueryParam(value = "fromDate") Long fromDate, @QueryParam(value = "toDate") Long toDate)
-            throws Exception;
+    Response findGPElasticSearchQueryByCreationDate(Integer from, Integer size, Long fromDate,
+            Long toDate) throws Exception;
 }

@@ -210,8 +210,7 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         this.expiredLabelField = new LabelField();
 
         MultiField tempAndExpiredFields = new MultiField();
-        tempAndExpiredFields.setFieldLabel(UserModuleConstants.INSTANCE.
-                temporaryFieldLabelText());
+        tempAndExpiredFields.setFieldLabel(UserModuleConstants.INSTANCE.temporaryFieldLabelText());
         tempAndExpiredFields.add(temporaryField);
         tempAndExpiredFields.add(new LabelField(
                 "<span class='spacer'>&nbsp;</span>"));
@@ -383,7 +382,7 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
                                 user.getCreationDate())));
 
         if (!user.isTemporary()) {
-            this.temporaryField.setReadOnly(true);
+            this.temporaryField.setReadOnly(false);
             this.temporaryField.setToolTip(UserModuleConstants.INSTANCE.
                     UserPropertiesBinding_temporaryFieldCheckedTooltipText());
         } else {

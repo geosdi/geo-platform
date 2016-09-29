@@ -69,14 +69,14 @@ public class TempAccountExpireJob implements Job {
         searchCriteria.addFilterEqual("accountTemporary", true);
         searchCriteria.addFilterEqual("accountNonExpired", true);
 
-        GregorianCalendar calendar = new GregorianCalendar();
-        calendar.add(Calendar.DAY_OF_MONTH, -10);
-        searchCriteria.addFilterLessThan("creationDate", calendar.getTime());
-        logger.trace("\n*** Handle temp account created before "
-                + DateFormat.getDateInstance().format(calendar.getTime()));
+//        GregorianCalendar calendar = new GregorianCalendar();
+//        calendar.add(Calendar.DAY_OF_MONTH, -10);
+//        searchCriteria.addFilterLessThan("creationDate", calendar.getTime());
+        //logger.trace("\n*** Handle temp account created before "
+        //        + DateFormat.getDateInstance().format(calendar.getTime()));
 
         List<GPAccount> accountList = accountDAO.search(searchCriteria);
-        logger.debug("\n*** Number of temporary account exipred: " + accountList.size());
+        logger.info("\n*** Number of temporary account exipred: " + accountList.size());
         
         for (GPAccount account : accountList) {
             logger.trace("\n*** " + account);

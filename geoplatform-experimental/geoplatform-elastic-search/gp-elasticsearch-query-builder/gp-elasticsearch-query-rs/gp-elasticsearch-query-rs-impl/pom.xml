@@ -28,6 +28,15 @@
         </dependency>
 
         <!-- =========================================================== -->
+        <!-- ========= GEOPLATFOM ELASTICSEARCH QUERY MEDIATOR ========= -->
+        <!-- =========================================================== -->
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>gp-elasticsearch-query-mediator</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- =========================================================== -->
         <!-- =========== GEOPLATFOM ELASTICSEARCH QUERY DAO ============ -->
         <!-- =========================================================== -->
         <dependency>

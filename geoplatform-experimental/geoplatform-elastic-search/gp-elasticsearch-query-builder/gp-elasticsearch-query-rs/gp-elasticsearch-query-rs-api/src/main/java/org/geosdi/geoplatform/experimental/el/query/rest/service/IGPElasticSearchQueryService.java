@@ -1,19 +1,14 @@
 package org.geosdi.geoplatform.experimental.el.query.rest.service;
 
-import org.geosdi.geoplatform.experimental.el.query.rest.path.GPElasticSearchQueryRestPathConfig;
+import org.geosdi.geoplatform.experimental.el.query.rest.request.GPElasticSearchQueryExecutionRequest;
 
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Path(value = GPElasticSearchQueryRestPathConfig.GP_ELASTICH_SEARCH_QUERY_PATH)
-@Consumes(value = {MediaType.APPLICATION_JSON})
-@Produces(value = {MediaType.APPLICATION_JSON})
-public interface IGPElasticSearchQueryService {
+public interface IGPElasticSearchQueryService<REQUEST extends GPElasticSearchQueryExecutionRequest> {
 
     /**
      * @param from
@@ -33,4 +28,11 @@ public interface IGPElasticSearchQueryService {
      */
     Response findGPElasticSearchQueryByCreationDate(Integer from, Integer size, Long fromDate,
             Long toDate) throws Exception;
+
+    /**
+     * @param request
+     * @return {@link Response}
+     * @throws Exception
+     */
+    Response executeGPElasticSearchQuery(REQUEST request) throws Exception;
 }

@@ -3,6 +3,7 @@ package org.geosdi.geoplatform.experimental.el.query.rest.service;
 import org.geosdi.geoplatform.experimental.el.query.dao.IGPElasticSearchQueryDAO;
 import org.geosdi.geoplatform.experimental.el.query.model.GPElasticSearchQuery;
 import org.geosdi.geoplatform.experimental.el.query.rest.delegare.IGPElasticSearchQueryDelegate;
+import org.geosdi.geoplatform.experimental.el.query.rest.request.GPElasticSearchQueryExecutionRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.ws.rs.core.Response;
@@ -12,9 +13,9 @@ import javax.ws.rs.core.Response;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class GPElasticSearchQueryService<QUERY extends GPElasticSearchQuery,
-        QUERY_DAO extends IGPElasticSearchQueryDAO<QUERY>,
-        QUERY_DELEGATE extends IGPElasticSearchQueryDelegate<QUERY, QUERY_DAO>>
-        implements GPElasticSearchQueryServiceSupport<QUERY, QUERY_DAO, QUERY_DELEGATE> {
+        QUERY_DAO extends IGPElasticSearchQueryDAO<QUERY>, REQUEST extends GPElasticSearchQueryExecutionRequest,
+        QUERY_DELEGATE extends IGPElasticSearchQueryDelegate<QUERY, QUERY_DAO, REQUEST>>
+        implements GPElasticSearchQueryServiceSupport<QUERY, QUERY_DAO, QUERY_DELEGATE, REQUEST> {
 
     protected QUERY_DELEGATE queryDelegate;
 
@@ -41,6 +42,16 @@ public class GPElasticSearchQueryService<QUERY extends GPElasticSearchQuery,
     public Response findGPElasticSearchQueryByCreationDate(Integer from, Integer size, Long fromDate, Long toDate)
             throws Exception {
         return Response.ok(this.queryDelegate.findQueryByCreationDate(from, size, fromDate, toDate)).build();
+    }
+
+    /**
+     * @param request
+     * @return {@link Response}
+     * @throws Exception
+     */
+    @Override
+    public Response executeGPElasticSearchQuery(REQUEST request) throws Exception {
+        return Response.ok(this.queryDelegate.executeGPElasticSearchQuery(request)).build();
     }
 
     /**

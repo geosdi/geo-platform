@@ -12,4 +12,5 @@ public final class GPElasticSearchQueryRestPathConfig {
     public static final String GP_ELASTICH_SEARCH_QUERY_PATH = "/query";
     public static final String GP_ELASTICH_SEARCH_FIND_QUERY_PATH = "/findGPElasticSearchQuery";
     public static final String GP_ELASTIC_SEARCH_FIND_QUERY_BY_CREATION_DATE_PATH = "/findGPElasticSearchQueryByCreationDate";
+    public static final String GP_ELASTIC_SEARCH_EXECUTE_QUERY_PATH = "/executeGPElasticSearchQuery";
 }

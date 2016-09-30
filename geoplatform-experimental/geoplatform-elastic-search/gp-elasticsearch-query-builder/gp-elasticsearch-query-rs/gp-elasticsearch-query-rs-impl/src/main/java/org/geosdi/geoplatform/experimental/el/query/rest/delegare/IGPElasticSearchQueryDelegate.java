@@ -2,6 +2,8 @@ package org.geosdi.geoplatform.experimental.el.query.rest.delegare;
 
 import org.geosdi.geoplatform.experimental.el.query.dao.IGPElasticSearchQueryDAO;
 import org.geosdi.geoplatform.experimental.el.query.model.GPElasticSearchQuery;
+import org.geosdi.geoplatform.experimental.el.query.rest.request.GPElasticSearchQueryExecutionRequest;
+import org.geosdi.geoplatform.experimental.el.query.rest.response.GPElasticSearchQueryExecutorStore;
 import org.geosdi.geoplatform.experimental.el.query.rest.response.GPElasticSearchQueryStore;
 
 /**
@@ -9,7 +11,7 @@ import org.geosdi.geoplatform.experimental.el.query.rest.response.GPElasticSearc
  * @email giuseppe.lascaleia@geosdi.org
  */
 public interface IGPElasticSearchQueryDelegate<QUERY extends GPElasticSearchQuery,
-        QUERY_DAO extends IGPElasticSearchQueryDAO<QUERY>> {
+        QUERY_DAO extends IGPElasticSearchQueryDAO<QUERY>, REQUEST extends GPElasticSearchQueryExecutionRequest> {
 
     /**
      * @param from
@@ -29,6 +31,14 @@ public interface IGPElasticSearchQueryDelegate<QUERY extends GPElasticSearchQuer
      */
     GPElasticSearchQueryStore<QUERY> findQueryByCreationDate(Integer from, Integer size, Long fromDate,
             Long toDate) throws Exception;
+
+    /**
+     * @param request
+     * @return {@link GPElasticSearchQueryExecutorStore<R>}
+     * @throws Exception
+     */
+    <R> GPElasticSearchQueryExecutorStore<R> executeGPElasticSearchQuery(REQUEST request)
+            throws Exception;
 
     /**
      * @param theQueryDAO

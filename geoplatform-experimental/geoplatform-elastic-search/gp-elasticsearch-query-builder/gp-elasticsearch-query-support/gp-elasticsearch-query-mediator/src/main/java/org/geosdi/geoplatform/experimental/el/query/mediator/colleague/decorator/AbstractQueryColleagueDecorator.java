@@ -65,19 +65,10 @@ abstract class AbstractQueryColleagueDecorator implements IGPElasticSearchQueryC
      * @param <V>
      * @return {@link String}
      */
-    protected final <V> String decoreQueryTemplate(String queryTemplate,
-            @Nullable Map<String, V> queryTemplateParameters) {
-        replaceQueryTemplateParameters(queryTemplateParameters);
-        return ((queryTemplateParameters != null) && !(queryTemplateParameters.isEmpty()) ?
-                this.queryReplacer.get().replace(queryTemplate, this.queryTemplateParameters.get()) : queryTemplate);
-    }
-
-    /**
-     * @param queryTemplateParameters
-     * @param <V>
-     */
-    protected <V> void replaceQueryTemplateParameters(Map<String, V> queryTemplateParameters) {
+    protected final <V> String decoreQueryTemplate(String queryTemplate, @Nullable Map<String, V> queryTemplateParameters) {
         if (((queryTemplateParameters != null) && !(queryTemplateParameters.isEmpty())))
             this.queryTemplateParameters.set((Map<String, Object>) queryTemplateParameters);
+        return ((queryTemplateParameters != null) && !(queryTemplateParameters.isEmpty()) ?
+                this.queryReplacer.get().replace(queryTemplate, this.queryTemplateParameters.get()) : queryTemplate);
     }
 }

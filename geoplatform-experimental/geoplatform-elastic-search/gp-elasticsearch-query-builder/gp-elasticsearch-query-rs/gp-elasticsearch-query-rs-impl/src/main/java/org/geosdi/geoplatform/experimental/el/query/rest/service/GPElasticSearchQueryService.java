@@ -12,7 +12,7 @@ import javax.ws.rs.core.Response;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPElasticSearchQueryService<QUERY extends GPElasticSearchQuery,
+public abstract class GPElasticSearchQueryService<QUERY extends GPElasticSearchQuery,
         QUERY_DAO extends IGPElasticSearchQueryDAO<QUERY>, REQUEST extends GPElasticSearchQueryExecutionRequest,
         QUERY_DELEGATE extends IGPElasticSearchQueryDelegate<QUERY, QUERY_DAO, REQUEST>>
         implements GPElasticSearchQueryServiceSupport<QUERY, QUERY_DAO, QUERY_DELEGATE, REQUEST> {
@@ -49,10 +49,7 @@ public class GPElasticSearchQueryService<QUERY extends GPElasticSearchQuery,
      * @return {@link Response}
      * @throws Exception
      */
-    @Override
-    public Response executeGPElasticSearchQuery(REQUEST request) throws Exception {
-        return Response.ok(this.queryDelegate.executeGPElasticSearchQuery(request)).build();
-    }
+    public abstract Response executeGPElasticSearchQuery(REQUEST request) throws Exception;
 
     /**
      * @param theQueryDelegate

@@ -28,11 +28,4 @@ public interface IGPElasticSearchQueryService<REQUEST extends GPElasticSearchQue
      */
     Response findGPElasticSearchQueryByCreationDate(Integer from, Integer size, Long fromDate,
             Long toDate) throws Exception;
-
-    /**
-     * @param request
-     * @return {@link Response}
-     * @throws Exception
-     */
-    Response executeGPElasticSearchQuery(REQUEST request) throws Exception;
 }

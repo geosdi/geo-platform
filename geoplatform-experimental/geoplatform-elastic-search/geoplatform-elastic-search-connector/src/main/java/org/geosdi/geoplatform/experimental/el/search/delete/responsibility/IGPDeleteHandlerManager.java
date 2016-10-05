@@ -26,7 +26,7 @@ public interface IGPDeleteHandlerManager {
      */
     class GPDeleteHandlerManager implements IGPDeleteHandlerManager {
 
-        private final GPAbstractDeleteHandler<ElasticSearchDAO> scrollDeleteHandler = new GPPreparerDeleteHandler();
+        private final GPAbstractDeleteHandler<ElasticSearchDAO> preparerDeleteHandler = new GPPreparerDeleteHandler();
 
         /**
          * @param page
@@ -36,7 +36,7 @@ public interface IGPDeleteHandlerManager {
          */
         @Override
         public <Result extends IDeleteByPageResult, Page extends DeleteByPage> Result delete(Page page, ElasticSearchDAO searchDAO) throws Exception {
-            return this.scrollDeleteHandler.delete(page, searchDAO);
+            return this.preparerDeleteHandler.delete(page, searchDAO);
         }
     }
 }

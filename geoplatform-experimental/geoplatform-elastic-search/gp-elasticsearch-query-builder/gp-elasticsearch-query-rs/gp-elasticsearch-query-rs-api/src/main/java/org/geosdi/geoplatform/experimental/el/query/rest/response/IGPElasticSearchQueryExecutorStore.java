@@ -1,7 +1,7 @@
 package org.geosdi.geoplatform.experimental.el.query.rest.response;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -20,12 +20,12 @@ public interface IGPElasticSearchQueryExecutorStore<V extends Object> extends Se
     void setTotal(Long theTotal);
 
     /**
-     * @return {@link List<V>}
+     * @return {@link Collection<V>}
      */
-    List<V> getExecutionResults();
+    Collection<V> getExecutionResults();
 
     /**
      * @param theExecutionResults
      */
-    void setExecutionResults(List<V> theExecutionResults);
+    void setExecutionResults(Collection<V> theExecutionResults);
 }

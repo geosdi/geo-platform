@@ -1,6 +1,6 @@
 package org.geosdi.geoplatform.experimental.el.threadpool.spi.finder;
 
-import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -12,5 +12,5 @@ public interface GPThreadPoolExecutorFinder {
      * @param <E>
      * @return {@link E}
      */
-    <E extends Executor> E findExecutor();
+    <E extends ExecutorService> E findExecutor();
 }

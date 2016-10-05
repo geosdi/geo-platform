@@ -11,6 +11,7 @@ import org.geosdi.geoplatform.experimental.el.index.GPBaseIndexCreator.GPIndexSe
 import org.geosdi.geoplatform.experimental.el.index.GPIndexCreator;
 
 import java.nio.file.Path;
+import java.util.concurrent.ExecutorService;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -138,4 +139,11 @@ public interface ElasticSearchDAO<D extends Document> extends GPPageableElasticS
      * @throws Exception
      */
     Client client() throws Exception;
+
+    /**
+     * @param <E>
+     * @return {@link E}
+     * @throws Exception
+     */
+    <E extends ExecutorService> E executor() throws Exception;
 }

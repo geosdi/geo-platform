@@ -1,8 +1,11 @@
 package org.geosdi.geoplatform.experimental.el.query;
 
 
+import org.geosdi.geoplatform.experimental.el.query.mapper.GPElasticSearchQueryMapperTest;
+import org.geosdi.geoplatform.experimental.el.query.model.GPElasticSearchQuery;
 import org.geosdi.geoplatform.experimental.el.query.rest.request.GPElasticSearchQueryExecutionRequest;
 import org.geosdi.geoplatform.experimental.el.query.rest.request.IGPElasticSearchQueryExecutionRequest;
+import org.geosdi.geoplatform.experimental.el.query.rest.response.GPElasticSearchQueryExecutorStore;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature;
@@ -10,6 +13,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.UUID;
@@ -48,6 +52,24 @@ public class GPElasticSearchQueryExecutionRequestTest {
                         "    }\n" +
                         "  }\n" +
                         "}", GPElasticSearchQueryExecutionRequest.class));
+    }
+
+    @Test
+    public void writeGPElasticSearchQueryExecutorStoreAsStringTest() throws Exception {
+        GPElasticSearchQueryExecutorStore<GPElasticSearchQuery> queryExecutorStore = new GPElasticSearchQueryExecutorStore<>();
+        queryExecutorStore.setTotal(10l);
+        queryExecutorStore.setExecutionResults(GPElasticSearchQueryMapperTest.createMockGPElasticSearchQuery(10));
+        logger.info("#####################################GP_ELASTICSEARCH_QUERY_STORE : \n\n{}\n\n",
+                jacksonSupport.getDefaultMapper().writeValueAsString(queryExecutorStore));
+    }
+
+    @Test
+    public void writeGPElasticSearchQueryExecutorStoreAsFileTest() throws Exception {
+        GPElasticSearchQueryExecutorStore<GPElasticSearchQuery> queryExecutorStore = new GPElasticSearchQueryExecutorStore<>();
+        queryExecutorStore.setTotal(10l);
+        queryExecutorStore.setExecutionResults(GPElasticSearchQueryMapperTest.createMockGPElasticSearchQuery(10));
+        jacksonSupport.getDefaultMapper().writeValue(new File("./target/GPElasticSearchQueryExecutorStore.json"),
+                queryExecutorStore);
     }
 
     public static IGPElasticSearchQueryExecutionRequest createMockGPElasticSearchQuery() {

@@ -1,16 +1,16 @@
 package org.geosdi.geoplatform.experimental.el.dao;
 
 import com.google.common.base.Preconditions;
-import org.elasticsearch.action.bulk.BulkRequestBuilder;
 import org.elasticsearch.action.bulk.BulkResponse;
-import org.elasticsearch.action.delete.DeleteRequest;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
-import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.rest.RestStatus;
 import org.elasticsearch.search.aggregations.AbstractAggregationBuilder;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
 import org.geosdi.geoplatform.experimental.el.search.delete.DeleteByPage;
+import org.geosdi.geoplatform.experimental.el.search.delete.DeleteByPage.DeleteByPageSearch;
+import org.geosdi.geoplatform.experimental.el.search.delete.responsibility.IGPDeleteHandlerManager;
+import org.geosdi.geoplatform.experimental.el.search.delete.responsibility.IGPDeleteHandlerManager.GPDeleteHandlerManager;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
@@ -21,6 +21,8 @@ import java.util.stream.Stream;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public abstract class PageableElasticSearchDAO<D extends Document> extends GPBaseElasticSearchDAO<D> {
+
+    private static final IGPDeleteHandlerManager deleteHandlerManager = new GPDeleteHandlerManager();
 
     @Override
     public <P extends Page> IPageResult<D> find(P page) throws Exception {
@@ -113,40 +115,14 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends GPBas
         return searchResponse;
     }
 
-    /**
-     * <p>@Todo Try to improve this code with Pagination Concept</p>
-     *
+    /**s
      * @param page
      * @throws Exception
      */
     @Override
-    public <P extends DeleteByPage> BulkResponse deleteByPage(P page) throws Exception {
+    public <Result extends DeleteByPage.IDeleteByPageResult, P extends Page> Result deleteByPage(P page) throws Exception {
         Preconditions.checkNotNull(page, "Parameter Page must not be null.");
-        SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient
-                .prepareSearch(getIndexName()).setTypes(getIndexType()));
-        logger.trace("#########################deleteByPage#Builder : \n{}\n", builder.toString());
-        SearchResponse searchResponse = builder.setSize(500)
-                .setScroll(new TimeValue(10000)).setNoFields().execute().actionGet();
-        if (searchResponse.status() != RestStatus.OK) {
-            throw new IllegalStateException("Problem in Search : " + searchResponse.status());
-        }
-        BulkRequestBuilder bulkRequest = this.elastichSearchClient.prepareBulk();
-        while (true) {
-            Stream.of(searchResponse.getHits().hits())
-                    .map(searchHit -> new DeleteRequest(getIndexName(), getIndexType(), searchHit.getId()))
-                    .filter(deleteRequest -> deleteRequest != null)
-                    .forEach(deleteRequest -> bulkRequest.add(deleteRequest));
-            searchResponse = this.elastichSearchClient.prepareSearchScroll(searchResponse.getScrollId())
-                    .setScroll(new TimeValue(10000)).execute().actionGet();
-            if (searchResponse.getHits().hits().length == 0) {
-                break;
-            }
-        }
-        BulkResponse bulkResponse = bulkRequest.get();
-        if (bulkResponse.hasFailures()) {
-            throw new IllegalStateException(bulkResponse.buildFailureMessage());
-        }
-        return bulkResponse;
+        return deleteHandlerManager.delete(new DeleteByPageSearch(page), this);
     }
 
     /**
@@ -155,7 +131,7 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends GPBas
      * @throws Exception
      */
     @Override
-    public <P extends DeleteByPage> CompletableFuture<BulkResponse> deleteByPageAsync(P page) throws Exception {
+    public <Result extends DeleteByPage.IDeleteByPageResult, P extends Page> CompletableFuture<Result> deleteByPageAsync(P page) throws Exception {
         return CompletableFuture.supplyAsync(() -> {
 
             try {

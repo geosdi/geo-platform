@@ -3,7 +3,7 @@ package org.geosdi.geoplatform.experimental.el.query.rest.response;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.List;
+import java.util.Collection;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -16,12 +16,12 @@ public class GPElasticSearchQueryExecutorStore<V extends Object> implements IGPE
     private static final long serialVersionUID = -1424696684053893265L;
     //
     private Long total;
-    private List<V> executionResults;
+    private Collection<V> executionResults;
 
     public GPElasticSearchQueryExecutorStore() {
     }
 
-    public GPElasticSearchQueryExecutorStore(Long total, List<V> executionResults) {
+    public GPElasticSearchQueryExecutorStore(Long total, Collection<V> executionResults) {
         this.total = total;
         this.executionResults = executionResults;
     }
@@ -43,10 +43,10 @@ public class GPElasticSearchQueryExecutorStore<V extends Object> implements IGPE
     }
 
     /**
-     * @return {@link List <V>}
+     * @return {@link Collection<V>}
      */
     @Override
-    public List<V> getExecutionResults() {
+    public Collection<V> getExecutionResults() {
         return this.executionResults;
     }
 
@@ -54,7 +54,7 @@ public class GPElasticSearchQueryExecutorStore<V extends Object> implements IGPE
      * @param theExecutionResults
      */
     @Override
-    public void setExecutionResults(List<V> theExecutionResults) {
+    public void setExecutionResults(Collection<V> theExecutionResults) {
         this.executionResults = theExecutionResults;
     }
 

@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.annotation.Resource;
 import java.nio.file.Path;
-import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -26,7 +26,7 @@ abstract class GPBaseElasticSearchDAO<D extends Document> implements GPElasticSe
     protected GPBaseMapper<D> mapper;
     protected Client elastichSearchClient;
     @Resource(name = "elasticSearchExecutor")
-    protected Executor elasticSearchExecutor;
+    protected ExecutorService elasticSearchExecutor;
 
     /**
      * @param document
@@ -141,6 +141,16 @@ abstract class GPBaseElasticSearchDAO<D extends Document> implements GPElasticSe
     public final Client client() throws Exception {
         Preconditions.checkNotNull(this.elastichSearchClient, "The Client is null. Check your Configuration.");
         return this.elastichSearchClient;
+    }
+
+    /**
+     * @return {@link E}
+     * @throws Exception
+     */
+    @Override
+    public final <E extends ExecutorService> E executor() throws Exception {
+        Preconditions.checkNotNull(this.elasticSearchExecutor, "The Executor is null. Check your Configuration.");
+        return (E) this.elasticSearchExecutor;
     }
 
     @Override

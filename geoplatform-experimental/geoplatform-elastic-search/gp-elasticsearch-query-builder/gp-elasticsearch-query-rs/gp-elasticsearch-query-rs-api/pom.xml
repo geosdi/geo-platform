@@ -44,6 +44,21 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>gp-elasticsearch-query-dao</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>gp-elasticsearch-query-dao</artifactId>
+            <version>${project.version}</version>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
+
         <!-- =========================================================== -->
         <!-- =============== GEOPLATFORM JACKSON SUPPORT =============== -->
         <!-- =========================================================== -->

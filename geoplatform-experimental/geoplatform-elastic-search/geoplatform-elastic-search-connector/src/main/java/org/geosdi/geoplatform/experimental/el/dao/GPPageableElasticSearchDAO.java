@@ -72,7 +72,7 @@ public interface GPPageableElasticSearchDAO<D extends Document> {
      * @return {@link BulkResponse}
      * @throws Exception
      */
-    <P extends DeleteByPage> BulkResponse deleteByPage(P page) throws Exception;
+    <Result extends DeleteByPage.IDeleteByPageResult, P extends Page> Result deleteByPage(P page) throws Exception;
 
     /**
      * @param page
@@ -80,8 +80,8 @@ public interface GPPageableElasticSearchDAO<D extends Document> {
      * @return {@link CompletableFuture<BulkResponse>}
      * @throws Exception
      */
-    <P extends DeleteByPage> CompletableFuture<BulkResponse> deleteByPageAsync(P page) throws Exception;
-    
+    <Result extends DeleteByPage.IDeleteByPageResult, P extends Page> CompletableFuture<Result> deleteByPageAsync(P page) throws Exception;
+
     /**
      *
      */
@@ -156,9 +156,9 @@ public interface GPPageableElasticSearchDAO<D extends Document> {
         private final int from;
         private final int size;
 
-        public Page(int from, int size) {
-            this.from = from;
-            this.size = size;
+        public Page(int theFrom, int theSize) {
+            this.from = Math.abs(theFrom);
+            this.size = Math.abs(theSize);
         }
 
         /**

@@ -6,12 +6,13 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
-import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -25,12 +26,12 @@ public class GPElastichSearchExecutorConfigTest {
     static Logger logger;
     //
     @Resource(name = "elasticSearchExecutor")
-    private Executor elasticSearchExecutor;
+    private ExecutorService elasticSearchExecutor;
 
     @After
     public void setUp() throws Exception {
         Assert.assertNotNull(this.elasticSearchExecutor);
-        Assert.assertTrue(this.elasticSearchExecutor instanceof ThreadPoolTaskExecutor);
+        Assert.assertTrue(this.elasticSearchExecutor instanceof ThreadPoolExecutor);
     }
 
     @Test
@@ -41,6 +42,6 @@ public class GPElastichSearchExecutorConfigTest {
     @Test
     public void printThreadPoolKeepAliveTest() {
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@KEEP_ALIVE_SECONDS : {}\n",
-                ((ThreadPoolTaskExecutor) this.elasticSearchExecutor).getKeepAliveSeconds());
+                ((ThreadPoolExecutor) this.elasticSearchExecutor).getKeepAliveTime(TimeUnit.SECONDS));
     }
 }

@@ -3,6 +3,7 @@ package org.geosdi.geoplatform.experimental.el.search.delete;
 import com.google.common.base.Preconditions;
 import net.jcip.annotations.Immutable;
 import org.elasticsearch.action.search.SearchRequestBuilder;
+import org.elasticsearch.common.unit.TimeValue;
 import org.geosdi.geoplatform.experimental.el.dao.GPPageableElasticSearchDAO;
 
 /**
@@ -21,6 +22,22 @@ public interface DeleteByPage {
             throws Exception;
 
     /**
+     * @return {@link Integer}
+     */
+    Integer getFrom();
+
+    /**
+     * @return {@link Integer}
+     */
+    Integer getSize();
+
+    /**
+     * @param <P>
+     * @return {@link P}
+     */
+    <P extends GPPageableElasticSearchDAO.Page> P getPage();
+
+    /**
      *
      */
     interface IDeleteByPageResult {
@@ -28,14 +45,14 @@ public interface DeleteByPage {
         /**
          * <p>The total Number of Elements deleted</p>
          *
-         * @return {@link Long}
+         * @return {@link Integer}
          */
-        Long getElementsDeleted();
+        Integer getElementsDeleted();
 
         /**
-         * @return {@link Long}
+         * @return {@link TimeValue}
          */
-        Long getExecutionTime();
+        TimeValue getExecutionTime();
     }
 
     /**
@@ -46,7 +63,7 @@ public interface DeleteByPage {
 
         private final GPPageableElasticSearchDAO.Page page;
 
-        protected DeleteByPageSearch(GPPageableElasticSearchDAO.Page thePage) {
+        public DeleteByPageSearch(GPPageableElasticSearchDAO.Page thePage) {
             Preconditions.checkNotNull(thePage, "The Parameter Page must not be null.");
             this.page = thePage;
         }
@@ -60,6 +77,52 @@ public interface DeleteByPage {
         public <Builder extends SearchRequestBuilder> Builder buildPage(Builder builder) throws Exception {
             return this.page.buildPage(builder);
         }
+
+        /**
+         * @return {@link Integer}
+         */
+        @Override
+        public Integer getFrom() {
+            return this.page.getFrom();
+        }
+
+        /**
+         * @return {@link Integer}
+         */
+        @Override
+        public Integer getSize() {
+            return this.page.getSize();
+        }
+
+        /**
+         * @return {@link P}
+         */
+        @Override
+        public <P extends GPPageableElasticSearchDAO.Page> P getPage() {
+            return (P) this.page;
+        }
+    }
+
+    /**
+     *
+     */
+    @Immutable
+    class DeleteByPageSearchDecorator extends DeleteByPageSearch {
+
+        private final Long size;
+
+        public DeleteByPageSearchDecorator(GPPageableElasticSearchDAO.Page thePage, Long size) {
+            super(thePage);
+            this.size = size;
+        }
+
+        /**
+         * @return {@link Integer}
+         */
+        @Override
+        public Integer getSize() {
+            return this.size.intValue();
+        }
     }
 
     /**
@@ -68,27 +131,27 @@ public interface DeleteByPage {
     @Immutable
     class DeleteByPageResult implements IDeleteByPageResult {
 
-        private final Long elementsDeleted;
-        private final Long executionTime;
+        private final Integer elementsDeleted;
+        private final TimeValue executionTime;
 
-        public DeleteByPageResult(Long theElementsDeleted, Long theExecutionTime) {
+        public DeleteByPageResult(Integer theElementsDeleted, TimeValue theExecutionTime) {
             this.elementsDeleted = theElementsDeleted;
             this.executionTime = theExecutionTime;
         }
 
         /**
-         * @return {@link Long}
+         * @return {@link Integer}
          */
         @Override
-        public Long getElementsDeleted() {
+        public Integer getElementsDeleted() {
             return this.elementsDeleted;
         }
 
         /**
-         * @return {@link Long}
+         * @return {@link TimeValue}
          */
         @Override
-        public Long getExecutionTime() {
+        public TimeValue getExecutionTime() {
             return this.executionTime;
         }
 

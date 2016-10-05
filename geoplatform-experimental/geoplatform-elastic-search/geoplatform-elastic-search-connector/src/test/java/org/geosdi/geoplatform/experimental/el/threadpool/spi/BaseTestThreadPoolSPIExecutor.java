@@ -5,6 +5,7 @@ import org.geosdi.geoplatform.experimental.el.threadpool.builder.GPThreadPoolCon
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -13,21 +14,21 @@ import java.util.concurrent.TimeUnit;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class BaseThreadPoolSPIExecutor implements GPThreadPoolSPIExecutor {
+public class BaseTestThreadPoolSPIExecutor implements GPThreadPoolSPIExecutor {
 
-    private static final Logger logger = LoggerFactory.getLogger(BaseThreadPoolSPIExecutor.class);
+    private static final Logger logger = LoggerFactory.getLogger(BaseTestThreadPoolSPIExecutor.class);
 
     /**
-     * @return {@link E}
-     * @throws Exception
+     * @return {@link Executor}
      */
     @Override
-    public <E extends ExecutorService> E createExecutor() {
+    public ExecutorService createExecutor() {
         GPThreadPoolConfigBuilder.GPThreadPoolConfig threadPoolConfig = GPElasticSearchThreadPoolConfigBuilder
-                .threadPoolConfigBuilder().build();
+                .threadPoolConfigBuilder().withThreadNamePrefix("SpringTestExecutor - ")
+                .withQueueCapacity(100).build();
         logger.trace("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@{} is building Executor with Config : {}\n",
                 this.getThreadPoolSPIExecutorName(), threadPoolConfig);
-        return (E) new ThreadPoolExecutor(threadPoolConfig.getCorePoolSize(), threadPoolConfig.getMaxPoolSize(),
+        return new ThreadPoolExecutor(threadPoolConfig.getCorePoolSize(), threadPoolConfig.getMaxPoolSize(),
                 threadPoolConfig.getKeepAlive(), TimeUnit.SECONDS, threadPoolConfig.getQueue(),
                 threadPoolConfig.getThreadFactory(), new ThreadPoolExecutor.CallerRunsPolicy());
     }

@@ -6,7 +6,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -20,7 +20,7 @@ public class GPThreadPoolExecutorFinderTest {
 
     @Test
     public void threadPoolExecutorFindTest() throws Exception {
-        Executor executor = this.threadPoolExecutorFinder.findExecutor();
+        ExecutorService executor = this.threadPoolExecutorFinder.findExecutor();
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@GPThreadPoolExecutorFinderTest.findExecutor : {}\n",
                 executor);
     }

@@ -1,37 +1,36 @@
 /**
- *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
- *
- *   Copyright (C) 2008-2016 geoSDI Group (CNR IMAA - Potenza - ITALY).
- *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
- *
- *   ====================================================================
- *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
- *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * geo-platform
+ * Rich webgis framework
+ * http://geo-platform.org
+ * ====================================================================
+ * <p>
+ * Copyright (C) 2008-2016 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * <p>
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version. This program is distributed in the
+ * hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License
+ * for more details. You should have received a copy of the GNU General
+ * Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * <p>
+ * ====================================================================
+ * <p>
+ * Linking this library statically or dynamically with other modules is
+ * making a combined work based on this library. Thus, the terms and
+ * conditions of the GNU General Public License cover the whole combination.
+ * <p>
+ * As a special exception, the copyright holders of this library give you permission
+ * to link this library with independent modules to produce an executable, regardless
+ * of the license terms of these independent modules, and to copy and distribute
+ * the resulting executable under terms of your choice, provided that you also meet,
+ * for each linked independent module, the terms and conditions of the license of
+ * that module. An independent module is a module which is not derived from or
+ * based on this library. If you modify this library, you may extend this exception
+ * to your version of the library, but you are not obligated to do so. If you do not
+ * wish to do so, delete this exception statement from your version.
  */
 package org.geosdi.geoplatform.gui.client.form;
 
@@ -52,28 +51,16 @@ import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.common.collect.Lists;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.http.client.Request;
-import com.google.gwt.http.client.RequestBuilder;
-import com.google.gwt.http.client.RequestCallback;
-import com.google.gwt.http.client.RequestException;
-import com.google.gwt.http.client.Response;
-import com.google.gwt.http.client.URL;
+import com.google.gwt.http.client.*;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.RootPanel;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.PrintResources;
-import static org.geosdi.geoplatform.gui.client.form.GPPrintWidget.PRINT_VECTOR_NAME;
 import org.geosdi.geoplatform.gui.client.form.binding.GPComboBoxFieldBinding;
 import org.geosdi.geoplatform.gui.client.form.binding.MapCommentFieldBinding;
 import org.geosdi.geoplatform.gui.client.form.binding.MapTitleFieldBinding;
 import org.geosdi.geoplatform.gui.client.form.binding.PrintTitleFieldBinding;
-import org.geosdi.geoplatform.gui.client.i18n.PrintModuleConstants;
 import org.geosdi.geoplatform.gui.client.i18n.PrintTemplateConstants;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.model.DPI;
@@ -83,10 +70,11 @@ import org.geosdi.geoplatform.gui.client.model.PrintTemplate;
 import org.geosdi.geoplatform.gui.client.model.Scale;
 import org.geosdi.geoplatform.gui.client.utility.LayerComparable;
 import org.geosdi.geoplatform.gui.client.utility.PrintUtility;
-import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextField;
 import org.geosdi.geoplatform.gui.client.widget.form.binding.GPDynamicFormBinding;
 import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextArea;
+import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextField;
 import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.factory.map.GPApplicationMap;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
@@ -98,15 +86,22 @@ import org.gwtopenmaps.openlayers.client.control.DragFeature;
 import org.gwtopenmaps.openlayers.client.layer.Layer;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
 
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import static org.geosdi.geoplatform.gui.client.i18n.PrintModuleConstants.INSTANCE;
+
 /**
- *
  * @author Francesco Izzi - CNR IMAA geoSDI Group
  * @mail francesco.izzi@geosdi.org
  */
 public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
 
     public final static String PRINT_VECTOR_NAME = "VectorPrintExtent";
-    private final static Logger logger = Logger.getLogger("");
+    private final static Logger logger = Logger.getLogger("GPPrintWidget");
     private ListStore<DPI> storeDPI;
     private ListStore<PrintTemplate> storeTemplate;
     private ListStore<Scale> storeScale;
@@ -148,7 +143,7 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
 
     @Override
     public void initSize() {
-        super.setHeadingHtml(PrintModuleConstants.INSTANCE.GPPrintWidget_headingText());
+        super.setHeadingHtml(INSTANCE.GPPrintWidget_headingText());
         super.setPosition(RootPanel.get().getOffsetWidth() - 400 - 6, 55);
         setSize(400, 650);
     }
@@ -163,12 +158,19 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
     @Override
     public void execute() {
         if (formPanel.isValid()) {
+            layerList = buildLayerList();
+            if (layerList.isEmpty()) {
+                GeoPlatformMessage.alertMessage(INSTANCE.GPPrintWidget_warningMessageLayersEmptyListText(),
+                        INSTANCE.GPPrintWidget_warningMessageLayersEmptyListText());
+                return;
+            }
+
             logger.log(Level.FINEST, "Execute ......");
             // Center on correct ViewPort
             LonLat center = printExtent.getDataExtent().getCenterLonLat();
             if (GPApplicationMap.getInstance().getApplicationMap().getMap().
                     getProjection().equals(
-                            GPCoordinateReferenceSystem.WGS_84.getCode())) {
+                    GPCoordinateReferenceSystem.WGS_84.getCode())) {
                 center.transform(GPCoordinateReferenceSystem.WGS_84.getCode(),
                         GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode());
             }
@@ -213,11 +215,12 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
             builder.setHeader("Content-Type",
                     "application/x-www-form-urlencoded");
             try {
-                Info.display(PrintModuleConstants.INSTANCE.printText(),
-                        PrintModuleConstants.INSTANCE.GPPrintWidget_infoStartPringBodyText());
+                Info.display(INSTANCE.printText(),
+                        INSTANCE.GPPrintWidget_infoStartPringBodyText());
                 logger.log(Level.INFO, jsonData);
                 Request response = builder.sendRequest(jsonData,
                         new RequestCallback() {
+
                             @Override
                             public void onError(Request request, Throwable exception) {
                                 Window.alert(exception.getLocalizedMessage());
@@ -226,8 +229,8 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
                             @Override
                             public void onResponseReceived(Request request,
                                     Response response) {
-                                Info.display(PrintModuleConstants.INSTANCE.printText(),
-                                        PrintModuleConstants.INSTANCE.GPPrintWidget_infoFinishPrintBodyText());
+                                Info.display(INSTANCE.printText(),
+                                        INSTANCE.GPPrintWidget_infoFinishPrintBodyText());
                                 String downloadURL = response.getText().substring(11,
                                         response.getText().indexOf("printout") + 8);
 
@@ -249,33 +252,35 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
         String jsonLegendLayer = "";
 
         layerList = buildLayerList();
+        if (!layerList.isEmpty()) {
 
-        Collections.sort(layerList, new LayerComparable());
+            Collections.sort(layerList, new LayerComparable());
 
-        String firstLegend = "{\n"
-                + "\"name\": \"" + layerList.get(0).getName() + "\",\n"
-                + "\"classes\": ["
-                + "{"
-                + "\"name\": \"" + "\",\n"
-                + "\"icons\": ["
-                + "\"" + getLegendUrl(layerList.get(0)) + "\""
-                //+ "\"" + "http%3A%2F%2Fdpc.geosdi.org%2Fgeoserver%2Fwms%3FREQUEST%3DGetLegendGraphic%26VERSION%3D1.0.0%26FORMAT%3Dimage%2Fpng%26LAYER%3DPiano_Calabria%3Apga%26scale%3D5000%26service%3DWMS" + "\""
-                + "]\n"
-                + "}"
-                + "]\n"
-                + "}";
+            String firstLegend = "{\n"
+                    + "\"name\": \"" + layerList.get(0).getName() + "\",\n"
+                    + "\"classes\": ["
+                    + "{"
+                    + "\"name\": \"" + "\",\n"
+                    + "\"icons\": ["
+                    + "\"" + getLegendUrl(layerList.get(0)) + "\""
+                    //+ "\"" + "http%3A%2F%2Fdpc.geosdi.org%2Fgeoserver%2Fwms%3FREQUEST%3DGetLegendGraphic%26VERSION%3D1.0.0%26FORMAT%3Dimage%2Fpng%26LAYER%3DPiano_Calabria%3Apga%26scale%3D5000%26service%3DWMS" + "\""
+                    + "]\n"
+                    + "}"
+                    + "]\n"
+                    + "}";
 
-        String legendListJson = "";
-        for (int i = 1; i < layerList.size(); i++) {
-            if (layerList.get(i) instanceof GPLayerBean) {
-                GPLayerBean layer = (GPLayerBean) layerList.get(i);
-                legendListJson = legendListJson.concat(buildLegendOrderList(
-                        layer));
+            String legendListJson = "";
+            for (int i = 1; i < layerList.size(); i++) {
+                if (layerList.get(i) instanceof GPLayerBean) {
+                    GPLayerBean layer = (GPLayerBean) layerList.get(i);
+                    legendListJson = legendListJson.concat(buildLegendOrderList(
+                            layer));
+                }
             }
+            return jsonLegendLayer.concat(firstLegend + legendListJson);
         }
 
-        return jsonLegendLayer.concat(firstLegend + legendListJson);
-
+        return jsonLegendLayer;
     }
 
     private String buildLegendOrderList(GPLayerBean layer) {
@@ -311,12 +316,12 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
 
         String style = this.getStyleFromLayer(layer);
 
-        String imageURL = URL.encodeComponent(
+        String imageURL = URL.encodeQueryString(
                 dataSourceT + "?REQUEST=GetLegendGraphic"
-                + "&VERSION=1.0.0&FORMAT=image/png&LAYER="
-                + URL.encode(layer.getName())
-                + "&STYLE=" + style
-                + "&scale=5000&service=WMS");
+                        + "&VERSION=1.0.0&FORMAT=image/png&LAYER="
+                        + URL.encode(layer.getName())
+                        + "&STYLE=" + style
+                        + "&scale=5000&service=WMS");
 
         return imageURL;
 
@@ -349,11 +354,8 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
         Collections.sort(layerList, new LayerComparable());
 
         String layerListJson = "";
-        for (int i = 0; i < layerList.size(); i++) {
-            if (layerList.get(i) instanceof GPLayerBean) {
-                GPLayerBean layer = (GPLayerBean) layerList.get(i);
-                layerListJson = layerListJson.concat(buildLayersOrderList(layer));
-            }
+        for (GPLayerBean layerBean : layerList) {
+            layerListJson = layerListJson.concat(buildLayersOrderList(layerBean));
         }
 
         String end = "],";
@@ -361,7 +363,6 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
         if (checkPrintBaseMap.getValue()) {
             return json.concat(start + baseURL + opacity + type + maxExtent + tileSize + resolutions + extentions + layerListJson + end);
         } else {
-
             return json.concat(start.replace("{", "") + layerListJson.substring(1, layerListJson.length()) + end);
 
         }
@@ -425,7 +426,7 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
 
         if (printExtent != null && dragPrintArea != null) {
             PrintUtility.disableDragPrintArea(GPApplicationMap.getInstance().
-                    getApplicationMap().getMap(),
+                            getApplicationMap().getMap(),
                     dragPrintArea);
         }
 
@@ -443,7 +444,7 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
             //*****************
             GPApplicationMap.getInstance().
                     getApplicationMap().getMap().getLayerByName(
-                            PRINT_VECTOR_NAME).setOpacity(0f);
+                    PRINT_VECTOR_NAME).setOpacity(0f);
 //            GPApplicationMap.getInstance().getApplicationMap().getMap().removeLayer(printExtent);
             //*****************+
             //GPApplicationMap.getInstance().getApplicationMap().getMap().getLayerByName("VectorPrintExtent").destroy(true);
@@ -453,7 +454,7 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
 
     private void addEditPrintSettings() {
         fieldSet = new FieldSet();
-        fieldSet.setHeadingHtml(PrintModuleConstants.INSTANCE.GPPrintWidget_editFieldSetHeadingText());
+        fieldSet.setHeadingHtml(INSTANCE.GPPrintWidget_editFieldSetHeadingText());
         FormLayout layout = new FormLayout();
         layout.setLabelWidth(100);
         layout.setLabelPad(5);
@@ -462,20 +463,20 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
         title = new GPSecureStringTextField();
         title.setAllowBlank(false);
         title.setName(GPPrintEnumBean.GPPRINT_TITLE.toString());
-        title.setFieldLabel(PrintModuleConstants.INSTANCE.GPPrintWidget_titleLabelText());
+        title.setFieldLabel(INSTANCE.GPPrintWidget_titleLabelText());
 
         fieldSet.add(title);
 
         mapTitle = new GPSecureStringTextField();
         mapTitle.setName(GPPrintEnumBean.GPPRINT_MAP_TITLE.toString());
-        mapTitle.setFieldLabel(PrintModuleConstants.INSTANCE.GPPrintWidget_mapTitleLabelText());
+        mapTitle.setFieldLabel(INSTANCE.GPPrintWidget_mapTitleLabelText());
 
         fieldSet.add(mapTitle);
 
         comments = new GPSecureStringTextArea();
         comments.setName(GPPrintEnumBean.GPPRINT_COMMENTS.toString());
         comments.setPreventScrollbars(true);
-        comments.setFieldLabel(PrintModuleConstants.INSTANCE.GPPrintWidget_commentsLabelText());
+        comments.setFieldLabel(INSTANCE.GPPrintWidget_commentsLabelText());
 
         comments.setSize(150, 150);
         fieldSet.add(comments);
@@ -485,7 +486,7 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
 
     private void addComboDPI() {
         fieldSet = new FieldSet();
-        fieldSet.setHeadingHtml(PrintModuleConstants.INSTANCE.GPPrintWidget_DPIFieldSetHeadingText());
+        fieldSet.setHeadingHtml(INSTANCE.GPPrintWidget_DPIFieldSetHeadingText());
         FormLayout layout = new FormLayout();
         layout.setLabelWidth(100);
         layout.setLabelPad(5);
@@ -495,8 +496,8 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
         this.storeDPI.add(PrintUtility.getDPI());
 
         this.comboDPI = new ComboBox<DPI>();
-        this.comboDPI.setFieldLabel(PrintModuleConstants.INSTANCE.GPPrintWidget_comboDPIFieldLabelText());
-        this.comboDPI.setEmptyText(PrintModuleConstants.INSTANCE.GPPrintWidget_comboDPIEmptyText());
+        this.comboDPI.setFieldLabel(INSTANCE.GPPrintWidget_comboDPIFieldLabelText());
+        this.comboDPI.setEmptyText(INSTANCE.GPPrintWidget_comboDPIEmptyText());
         this.comboDPI.setDisplayField(DPI.EnumDPI.DPI.getValue());
         this.comboDPI.setEditable(false);
         this.comboDPI.setAllowBlank(false);
@@ -513,7 +514,7 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
 
     private void addComboTemplate() {
         fieldSet = new FieldSet();
-        fieldSet.setHeadingHtml(PrintModuleConstants.INSTANCE.GPPrintWidget_templateFieldSetHeadingText());
+        fieldSet.setHeadingHtml(INSTANCE.GPPrintWidget_templateFieldSetHeadingText());
         FormLayout layout = new FormLayout();
         layout.setLabelWidth(100);
         layout.setLabelPad(5);
@@ -524,7 +525,7 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
 
         this.comboTemplate = new ComboBox<PrintTemplate>();
         this.comboTemplate.setFieldLabel(
-                PrintModuleConstants.INSTANCE.GPPrintWidget_comboTemplateFieldLabelText());
+                INSTANCE.GPPrintWidget_comboTemplateFieldLabelText());
 //        this.comboTemplate.setEmptyText("Choose Template....");
         this.comboTemplate.setValue(new PrintTemplate(
                 PrintTemplateConstants.INSTANCE.A4_Portrait()));
@@ -549,7 +550,7 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
                     public void selectionChanged(SelectionChangedEvent<PrintTemplate> se) {
                         if (se != null) {
                             if (GPApplicationMap.getInstance().getApplicationMap().
-                            getMap().getLayerByName(PRINT_VECTOR_NAME) != null) {
+                                    getMap().getLayerByName(PRINT_VECTOR_NAME) != null) {
 
                                 printExtent.removeAllFeatures();
 
@@ -557,17 +558,17 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
                                 String scaleStringRight = scaleString.substring(
                                         scaleString.indexOf(":") + 1);
                                 String scaleStringWithoutDot = scaleStringRight.
-                                replaceAll("\\.", "");
+                                        replaceAll("\\.", "");
                                 float scale = Float.parseFloat(scaleStringWithoutDot);
                                 updateRotationAndSizeForPrint(se.getSelectedItem().
                                         getTemplate());
 
                                 printExtent.addFeature(PrintUtility.updateRectangle(
-                                                GPApplicationMap.getInstance().
+                                        GPApplicationMap.getInstance().
                                                 getApplicationMap().getMap().getCenter(), scale,
-                                                GPApplicationMap.getInstance().
+                                        GPApplicationMap.getInstance().
                                                 getApplicationMap().getMap(), sizeFactor,
-                                                rotation));
+                                        rotation));
                             }
 
                         }
@@ -577,7 +578,7 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
 
     private void addScaleCombo() {
         fieldSet = new FieldSet();
-        fieldSet.setHeadingHtml(PrintModuleConstants.INSTANCE.GPPrintWidget_scaleFieldSetHeadingText());
+        fieldSet.setHeadingHtml(INSTANCE.GPPrintWidget_scaleFieldSetHeadingText());
         FormLayout layout = new FormLayout();
         layout.setLabelWidth(100);
         layout.setLabelPad(5);
@@ -587,7 +588,7 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
         this.storeScale.add(PrintUtility.getScale());
 
         this.comboScale = new ComboBox<Scale>();
-        this.comboScale.setFieldLabel(PrintModuleConstants.INSTANCE.
+        this.comboScale.setFieldLabel(INSTANCE.
                 GPPrintWidget_comboScaleFieldLabelText());
 //        this.comboScale.setEmptyText("Choose Scale....");
         this.comboScale.setValue(new Scale("1:4.000.000"));
@@ -611,22 +612,22 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
                     public void selectionChanged(SelectionChangedEvent<Scale> se) {
                         if (se != null) {
                             if (GPApplicationMap.getInstance().getApplicationMap().
-                            getMap().getLayerByName(PRINT_VECTOR_NAME) != null) {
+                                    getMap().getLayerByName(PRINT_VECTOR_NAME) != null) {
                                 printExtent.removeAllFeatures();
 
                                 String scaleString = se.getSelectedItem().getScale();
                                 String scaleStringRight = scaleString.substring(
                                         scaleString.indexOf(":") + 1);
                                 String scaleStringWithoutDot = scaleStringRight.
-                                replaceAll("\\.", "");
+                                        replaceAll("\\.", "");
                                 float scale = Float.parseFloat(scaleStringWithoutDot);
 
                                 printExtent.addFeature(PrintUtility.updateRectangle(
-                                                GPApplicationMap.getInstance().
+                                        GPApplicationMap.getInstance().
                                                 getApplicationMap().getMap().getCenter(), scale,
-                                                GPApplicationMap.getInstance().
+                                        GPApplicationMap.getInstance().
                                                 getApplicationMap().getMap(), sizeFactor,
-                                                rotation));
+                                        rotation));
                             }
 
                         }
@@ -637,16 +638,16 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
 
     private void addCheckPrintBaseMap() {
         fieldSet = new FieldSet();
-        fieldSet.setHeadingHtml(PrintModuleConstants.INSTANCE.
+        fieldSet.setHeadingHtml(INSTANCE.
                 GPPrintWidget_checkPrintFieldSetHeadingText());
         FormLayout layout = new FormLayout();
         layout.setLabelWidth(100);
         layout.setLabelPad(5);
         fieldSet.setLayout(layout);
         this.checkPrintBaseMap = new CheckBox();
-        this.checkPrintBaseMap.setFieldLabel(PrintModuleConstants.INSTANCE.
+        this.checkPrintBaseMap.setFieldLabel(INSTANCE.
                 GPPrintWidget_checkBoxPrintBaseMapFieldLabelText());
-        this.checkPrintBaseMap.setToolTip(PrintModuleConstants.INSTANCE.
+        this.checkPrintBaseMap.setToolTip(INSTANCE.
                 GPPrintWidget_checkBoxPrintBaseMapTooltipText());
         fieldSet.add(this.checkPrintBaseMap);
         super.formPanel.add(fieldSet);
@@ -681,7 +682,7 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
 
     private List<GPLayerBean> getVisibleLayersOnTree(List<ModelData> layers,
             List<GPLayerBean> visibleLayers) {
-        for (Iterator<ModelData> it = layers.iterator(); it.hasNext();) {
+        for (Iterator<ModelData> it = layers.iterator(); it.hasNext(); ) {
             GPBeanTreeModel element = (GPBeanTreeModel) it.next();
             if (element instanceof AbstractFolderTreeNode && element.isChecked()
                     && element.getChildCount() != 0) {
@@ -699,7 +700,7 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
         layerList = Lists.<GPLayerBean>newArrayList();
         AbstractRootTreeNode root = (AbstractRootTreeNode) this.tree.getStore().
                 getRootItems().get(
-                        0);
+                0);
         assert (root != null) : "VisitorDisplayHide on getVisibleLayers(): Impossible to retrieve root element";
         return this.getVisibleLayersOnTree(root.getChildren(), layerList);
     }
@@ -717,7 +718,7 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
         if (GPApplicationMap.getInstance().getApplicationMap().getMap().
                 getLayerByName(PRINT_VECTOR_NAME) == null) {
             printExtent = PrintUtility.createRectangle(GPApplicationMap.
-                    getInstance().getApplicationMap().getMap().getCenter(), 4000000,
+                            getInstance().getApplicationMap().getMap().getCenter(), 4000000,
                     GPApplicationMap.getInstance().getApplicationMap().getMap(),
                     sizeFactor, rotation);
             Layer layer = Layer.narrowToLayer(printExtent.getJSObject());
@@ -729,7 +730,7 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
 //            /* Use existing layer */
             GPApplicationMap.getInstance().
                     getApplicationMap().getMap().getLayerByName(
-                            PRINT_VECTOR_NAME).setOpacity(1f);
+                    PRINT_VECTOR_NAME).setOpacity(1f);
             dragPrintArea = PrintUtility.enableDragPrintArea(GPApplicationMap.
                     getInstance().getApplicationMap().getMap(), printExtent);
         }

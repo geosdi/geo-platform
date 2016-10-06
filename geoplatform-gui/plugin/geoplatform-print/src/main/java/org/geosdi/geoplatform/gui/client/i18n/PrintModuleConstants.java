@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.gui.client.i18n;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.Constants;
-import com.google.gwt.i18n.client.Constants.DefaultStringValue;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -104,6 +103,12 @@ public interface PrintModuleConstants extends Constants {
 
     @DefaultStringValue("GeoPlatform Print Widget")
     String GPPrintWidget_headingText();
+
+    @DefaultStringValue("Please Select Layers to print in GPLayerWidget")
+    String GPPrintWidget_warningMessageLayersEmptyListText();
+
+    @DefaultStringValue("GeoPlatform Print Warning")
+    String GPPrintWidget_warningMessageLayersEmptyListHeaderText();
 
     /**
      * start PrintLayersAction

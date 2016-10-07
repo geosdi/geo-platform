@@ -319,7 +319,7 @@ public class WSAccountTest extends BaseSoapServiceTest {
         gpWSClient.getUserDetailByUsernameAndPassword(usernameTest, passwordTest);
     }
 
-    @Test(expected = IllegalParameterFault.class)
+    @Test
     public void testUserErrorTemporarySetting()
             throws ResourceNotFoundFault, IllegalParameterFault {
         Assert.assertFalse("UserTest should be a standard account", userTest.isAccountTemporary());

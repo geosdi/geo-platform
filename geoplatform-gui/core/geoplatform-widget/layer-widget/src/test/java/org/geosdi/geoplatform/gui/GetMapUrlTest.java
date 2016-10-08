@@ -35,12 +35,11 @@
  */
 package org.geosdi.geoplatform.gui;
 
-import java.net.URL;
-import java.net.URLConnection;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,6 +53,7 @@ public class GetMapUrlTest {
 
     private static final Logger logger = LoggerFactory.getLogger(GetMapUrlTest.class);
 
+    @Ignore(value = "Server is Down")
     @Test
     public void getMapUrlTest() throws Exception {
         CloseableHttpClient client = HttpClients

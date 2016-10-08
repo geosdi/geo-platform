@@ -136,12 +136,6 @@
             <version>${geoserver-manager-version}</version>
         </dependency>
         
-        <!--        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>gp-wfst-widget</artifactId>
-            <version>1.5-20130126.152419-92</version>
-        </dependency>-->
-        
         <!-- GIN -->
         <dependency>
             <groupId>com.google.gwt.inject</groupId>
@@ -181,26 +175,28 @@
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
-            <artifactId>jcl-over-slf4j</artifactId>
+            <artifactId>slf4j-simple</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>log4j-over-slf4j</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.slf4j</groupId>-->
+            <!--<artifactId>log4j-over-slf4j</artifactId>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>ch.qos.logback</groupId>-->
+            <!--<artifactId>logback-classic</artifactId>-->
+        <!--</dependency>-->
 
+        <!-- SCOPE TEST -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
+            <scope>test</scope>
         </dependency>
-        
-        <!-- SCOPE TEST -->
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>

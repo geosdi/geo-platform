@@ -36,8 +36,6 @@
 package org.geosdi.geoplatform.gui.server.command.filter.basic;
 
 import com.google.common.collect.Lists;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.client.command.filter.basic.FilterDescribeFeatureRequest;
 import org.geosdi.geoplatform.gui.client.command.filter.basic.FilterDescribeFeatureResponse;
@@ -52,6 +50,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -97,7 +98,7 @@ public class FilterDescribeFeatureCommand implements
     }
 
     /**
-     * @param geoPlatformPublisherClient the geoPlatformPublisherClient to set
+     * @param geoPlatformPublishClient the geoPlatformPublisherClient to set
      */
     @Autowired
     public void setGeoPlatformPublishClient(

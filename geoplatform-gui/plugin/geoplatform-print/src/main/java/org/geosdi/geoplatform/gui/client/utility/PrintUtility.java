@@ -74,8 +74,8 @@ public class PrintUtility {
         dpi.add(new DPI("127"));
         dpi.add(new DPI("190"));
         dpi.add(new DPI("254"));
-        dpi.add(new DPI("300"));
-        dpi.add(new DPI("600"));
+        //dpi.add(new DPI("300"));
+        //dpi.add(new DPI("600"));
         return dpi;
     }
 

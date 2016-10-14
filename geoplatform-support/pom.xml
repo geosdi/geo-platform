@@ -31,6 +31,7 @@
         <module>geoplatform-jackson-jts-support</module>
         <module>geoplatform-bridge-support</module>
         <module>geoplatform-primitive-type</module>
+        <module>geoplatform-c3p0-support</module>
     </modules>
 
 </project>

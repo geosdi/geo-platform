@@ -72,10 +72,13 @@
                 <version>${hibernate-version}</version>
             </dependency>
 
+            <!-- =========================================================== -->
+            <!-- ================ GEOPLATFORM C3P0 Support ================= -->
+            <!-- =========================================================== -->
             <dependency>
-                <groupId>com.mchange</groupId>
-                <artifactId>c3p0</artifactId>
-                <version>0.9.5.2</version>
+                <groupId>org.geosdi</groupId>
+                <artifactId>geoplatform-c3p0-support</artifactId>
+                <version>${project.version}</version>
             </dependency>
 
             <!-- =========================================================== -->

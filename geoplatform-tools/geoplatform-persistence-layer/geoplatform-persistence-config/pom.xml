@@ -34,16 +34,19 @@
         </dependency>
 
         <!-- =========================================================== -->
+        <!-- ================ GEOPLATFORM C3P0 Support ================= -->
+        <!-- =========================================================== -->
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-c3p0-support</artifactId>
+        </dependency>
+
+        <!-- =========================================================== -->
         <!-- ================ HIBERNATE C3P0 ANNOTATIONS =============== -->
         <!-- =========================================================== -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-c3p0</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.mchange</groupId>
-            <artifactId>c3p0</artifactId>
         </dependency>
 
         <dependency>

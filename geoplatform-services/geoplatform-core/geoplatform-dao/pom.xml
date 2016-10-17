@@ -15,6 +15,18 @@
 
     <name>Geo-Platform :: == CORE DAO</name>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.geosdi</groupId>
+                <artifactId>geoplatform-hibernate-validator-dependency</artifactId>
+                <type>pom</type>
+                <scope>import</scope>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <properties>
         <!-- Keep aligned with src/main/resources/geoplatform_datasource.xml -->
         <db.baseurl>jdbc:postgresql://localhost:5432</db.baseurl>
@@ -216,7 +228,11 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>4.2.0.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.el</groupId>
+            <artifactId>javax.el-api</artifactId>
         </dependency>
 
         <dependency>

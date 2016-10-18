@@ -9,11 +9,6 @@
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
 
-    <env-entry>
-        <env-entry-name>JDBC_TEMPLATE_PBE_KEY</env-entry-name>
-        <env-entry-value>$-geosdi2016,??/0x,??-345</env-entry-value>
-    </env-entry>
-
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>

@@ -47,7 +47,8 @@ public class MultiPolygonWriter extends BaseWriter<MultiPolygon, org.geojson.Mul
             Polygon polygon = new Polygon();
             polygon.setExteriorRing(COORDINATE_WRITER.buildPolygonExteriorRing(jtsPolygon));
             if (jtsPolygon.getNumInteriorRing() > 0)
-                polygon.addInteriorRing(COORDINATE_WRITER.buildPolygonInteriorRing(jtsPolygon));
+                COORDINATE_WRITER.buildPolygonInteriorRing(jtsPolygon).stream()
+                        .forEach(interiorRing -> polygon.addInteriorRing(interiorRing));
             multiPolygon.add(polygon);
         }
         return multiPolygon;

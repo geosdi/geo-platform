@@ -49,10 +49,10 @@ public class GeoJsonCoordinateWriter implements IGeoJsonCoordinateWriter {
      * @return {@link List<LngLatAlt>}
      */
     @Override
-    public List<LngLatAlt> buildPolygonInteriorRing(Polygon polygon) {
-        List<LngLatAlt> coordinates = new ArrayList<>();
+    public List<List<LngLatAlt>> buildPolygonInteriorRing(Polygon polygon) {
+        List<List<LngLatAlt>> coordinates = new ArrayList<>();
         for (int i = 0; i < polygon.getNumInteriorRing(); i++) {
-            coordinates.addAll(buildLineStringCoordinate(polygon.getInteriorRingN(i)));
+            coordinates.add(buildLineStringCoordinate(polygon.getInteriorRingN(i)));
         }
         return coordinates;
     }

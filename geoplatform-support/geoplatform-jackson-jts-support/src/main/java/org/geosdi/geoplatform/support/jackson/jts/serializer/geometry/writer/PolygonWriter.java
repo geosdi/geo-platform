@@ -41,7 +41,8 @@ public class PolygonWriter extends BaseWriter<Polygon, org.geojson.Polygon> {
         org.geojson.Polygon polygon = new org.geojson.Polygon();
         polygon.setExteriorRing(COORDINATE_WRITER.buildPolygonExteriorRing(geometry));
         if (geometry.getNumInteriorRing() > 0)
-            polygon.addInteriorRing(COORDINATE_WRITER.buildPolygonInteriorRing(geometry));
+            COORDINATE_WRITER.buildPolygonInteriorRing(geometry).stream()
+                    .forEach(interiorRing -> polygon.addInteriorRing(interiorRing));
         return polygon;
     }
 

@@ -347,6 +347,18 @@
             
             <dependency>
                 <groupId>org.geosdi</groupId>
+                <artifactId>layer-builder-service-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            
+            <dependency>
+                <groupId>org.geosdi</groupId>
+                <artifactId>layer-builder-service-impl</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            
+            <dependency>
+                <groupId>org.geosdi</groupId>
                 <artifactId>geoplatform-publisher-api</artifactId>
                 <version>${project.version}</version>
             </dependency>

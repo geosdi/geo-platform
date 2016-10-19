@@ -1,6 +1,5 @@
 package org.geosdi.geoplatform.hibernate.validator.support.request;
 
-import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 import java.util.Locale;
 
@@ -23,8 +22,9 @@ public interface GPI18NRequestValidator extends Serializable {
     /**
      * @return {@link Locale}
      */
-    @XmlTransient
-    default Locale getLocale() {
-        return Locale.forLanguageTag(getLang());
-    }
+//    @XmlTransient
+//    default Locale getLocale() {
+//        return Locale.forLanguageTag(getLang());
+//    }
+//    Locale getLocale();
 }

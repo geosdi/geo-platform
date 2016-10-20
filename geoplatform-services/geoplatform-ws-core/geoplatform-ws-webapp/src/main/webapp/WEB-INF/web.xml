@@ -3,12 +3,12 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="
       http://java.sun.com/xml/ns/javaee  http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
-    
+
     <!-- Adding the Spring Context Listener. It will help to init Spring Context -->
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
-    
+
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
@@ -16,25 +16,25 @@
             classpath*:applicationContext-Service.xml
         </param-value>
     </context-param>
-    
+
     <!-- Activate @Rest Spring Profile -->
     <context-param>
         <param-name>spring.profiles.active</param-name>
         <param-value>rest</param-value>
     </context-param>
-  
+
     <!-- CXF Servlet -->
     <servlet>
         <servlet-name>CXFServlet</servlet-name>
         <servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
     </servlet>
-    
+
     <!-- Mapping with a URL Pattern -->
     <servlet-mapping>
         <servlet-name>CXFServlet</servlet-name>
         <url-pattern>/*</url-pattern>
     </servlet-mapping>
-    
+
     <listener>
         <listener-class>
             org.springframework.web.context.request.RequestContextListener

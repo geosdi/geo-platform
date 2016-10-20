@@ -33,7 +33,7 @@ public interface IGeoJsonCoordinateWriter {
      * @param polygon
      * @return {@link List<LngLatAlt>}
      */
-    List<LngLatAlt> buildPolygonInteriorRing(Polygon polygon);
+    List<List<LngLatAlt>> buildPolygonInteriorRing(Polygon polygon);
 
     /**
      * @param multiPoint

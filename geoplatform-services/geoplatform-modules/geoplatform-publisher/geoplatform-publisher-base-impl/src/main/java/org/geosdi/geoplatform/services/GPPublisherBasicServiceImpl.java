@@ -1141,7 +1141,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
         reload();
         String userWorkspace = workspace;
         if (GPSharedUtils.isEmpty(userWorkspace)) {
-            userWorkspace = getWorkspace(userName);
+            userWorkspace = getWorkspace(PublishUtility.removeSpecialCharactersFromString(userName));
         }
         file = PublishUtility.getFileNameToLowerCase(file);
         String tempUserDir = PublishUtility.createDir(

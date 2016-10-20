@@ -87,6 +87,8 @@ public class CQLFilterBasicRow extends MultiField<String> {
         operatorComboBox.setDisplayField(CQLOperatorValue.LimitConditionEnum.OPERATOR.toString());
         operatorComboBox.setEditable(Boolean.FALSE);
         operatorComboBox.setForceSelection(Boolean.TRUE);
+        operatorComboBox.setTypeAhead(Boolean.TRUE);
+        operatorComboBox.setTriggerAction(ComboBox.TriggerAction.ALL);
         this.operatorComboBox.setValue(operatorListStore.getAt(0));
         operatorComboBox.addSelectionChangedListener(new SelectionChangedListener<CQLOperatorValue>() {
             @Override

@@ -120,6 +120,8 @@ public class CQLFilterAdvancedTab extends GeoPlatformTabItem implements ICQLFilt
         operatorComboBox.setDisplayField(CQLOperatorValue.LimitConditionEnum.OPERATOR.toString());
         operatorComboBox.setEditable(Boolean.FALSE);
         operatorComboBox.setForceSelection(Boolean.TRUE);
+        operatorComboBox.setTypeAhead(Boolean.TRUE);
+        operatorComboBox.setTriggerAction(ComboBox.TriggerAction.ALL);
         operatorComboBox.setEmptyText(LayerFiltersModuleConstants.INSTANCE.CQLFilterAdvancedTab_operatorEmptyText());
         operatorComboBox.addSelectionChangedListener(new SelectionChangedListener<CQLOperatorValue>() {
             @Override

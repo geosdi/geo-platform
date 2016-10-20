@@ -50,12 +50,13 @@ public class LogicalOperator extends GeoPlatformBeanModel {
 
     public enum LogicalOperatorKeyValue {
 
-        AND(), OR(), KEY_NAME();
+        AND(), OR(), NOT(), KEY_NAME();
     }
 
     static {
         operatorsList.add(new LogicalOperator(LogicalOperatorKeyValue.AND));
         operatorsList.add(new LogicalOperator(LogicalOperatorKeyValue.OR));
+        operatorsList.add(new LogicalOperator(LogicalOperatorKeyValue.NOT)                                                                                         );
     }
 
     public LogicalOperator(LogicalOperatorKeyValue logicalOperatorKeyValue) {

@@ -86,6 +86,7 @@ public class GeometryBinding {
 
         GML_GEOMETRY_BINDING.put("Polygon", Polygon.class);
         GML_GEOMETRY_BINDING.put("PolygonPropertyType", Polygon.class);
+        GML_GEOMETRY_BINDING.put("SurfacePropertyType", Polygon.class);
 
         GML_GEOMETRY_BINDING.put("Ring", LinearRing.class);
         GML_GEOMETRY_BINDING.put("RingPropertyType", LinearRing.class);

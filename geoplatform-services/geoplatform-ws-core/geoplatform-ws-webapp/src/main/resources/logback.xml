@@ -52,5 +52,6 @@
     <logger name="org.geosdi.geoplatform.services.GPTrackingServiceImpl" level="debug"/>
 
     <logger name="org.geosdi.geoplatform.services.GPTrackingServiceImpl" level="debug"/><!-- TODO info -->
+    <logger name="org.geosdi.geoplatform.jdbc.template.spring" level="debug"/>
     
 </configuration>

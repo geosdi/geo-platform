@@ -100,6 +100,17 @@ public class AttributeCustomFieldsMap {
             }
             
         })));
+
+        map.put("bigdecimal", new AttributeCustomFields(getNumberOperatorTypes(),
+                attributeValuesValidator("bigdecimal", new TypeValidator() {
+
+                    @Override
+                    public boolean validateType(String value) {
+                        return value.matches("(\\+|-)?([0-9]+(\\.[0-9]*)?|\\.[0-9]+)");
+                    }
+
+                })));
+
         map.put("float", new AttributeCustomFields(getNumberOperatorTypes(),
                 attributeValuesValidator("float", new TypeValidator() {
             

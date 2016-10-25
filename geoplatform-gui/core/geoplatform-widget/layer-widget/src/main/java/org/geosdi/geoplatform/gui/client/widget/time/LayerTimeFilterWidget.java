@@ -201,6 +201,8 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
         this.startDimensionComboBox.setStore(this.startStore);
         this.startDimensionComboBox.setDisplayField(DimensionData.DIMENSION_KEY);
         this.startDimensionComboBox.setEditable(Boolean.FALSE);
+        this.startDimensionComboBox.setTypeAhead(Boolean.TRUE);
+        this.startDimensionComboBox.setTriggerAction(ComboBox.TriggerAction.ALL);
         this.startDimensionComboBox.addSelectionChangedListener(new SelectionChangedListener<DimensionData>() {
             @Override
             public void selectionChanged(SelectionChangedEvent<DimensionData> se) {
@@ -228,6 +230,8 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
         this.endDimensionComboBox.setDisplayField(DimensionData.DIMENSION_KEY);
         this.endDimensionComboBox.disable();
         this.endDimensionComboBox.setEditable(Boolean.FALSE);
+        this.endDimensionComboBox.setTypeAhead(Boolean.TRUE);
+        this.endDimensionComboBox.setTriggerAction(ComboBox.TriggerAction.ALL);
         dimensionSizeLabel = new Label();
         dimensionSizeLabel.setStyleAttribute("font-size", "12px");
         this.startFilterNumberField = new NumberField();

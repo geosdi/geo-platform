@@ -141,6 +141,9 @@ public interface GPPageableElasticSearchDAO<D extends Document> {
                 case MUST_NOT:
                     boolQueryBuilder().mustNot(search.buildQuery());
                     break;
+                case FILTER:
+                    boolQueryBuilder().filter(search.buildQuery());
+                    break;
             }
         }
     }

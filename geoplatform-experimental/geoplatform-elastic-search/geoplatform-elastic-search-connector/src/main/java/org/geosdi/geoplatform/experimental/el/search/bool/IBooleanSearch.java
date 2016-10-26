@@ -19,7 +19,7 @@ public interface IBooleanSearch extends IGPQuerySearch {
      *
      */
     enum BooleanQueryType {
-        MUST, SHOULD, MUST_NOT;
+        MUST, SHOULD, MUST_NOT, FILTER;
     }
 
     /**

@@ -39,12 +39,11 @@ import org.geosdi.geoplatform.support.cxf.rs.provider.configurator.GPRestProvide
 import org.geosdi.geoplatform.support.cxf.rs.provider.jackson.CXFJacksonProvider;
 import org.geosdi.geoplatform.support.cxf.rs.provider.jettyson.GPJSONProvider;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
+import org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
-import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.INDENT_OUTPUT_ENABLE;
-import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.WRAP_ROOT_VALUE_DISABLE;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -73,7 +72,9 @@ public final class GPRestProviderFactory {
                                 + "is building an instance of {} with JODA_TIME SUPPORT\n\n",
                         CXFJacksonProvider.class);
                 return new CXFJacksonProvider(new GPJacksonSupport().registerModule(new JodaModule())
-                        .configure(WRITE_DATES_AS_TIMESTAMPS_DISABLE));
+                        .configure(WRITE_DATES_AS_TIMESTAMPS_DISABLE)
+                        .configure(GPJsonIncludeFeature.NON_NULL)
+                        .configure(GPJsonIncludeFeature.NON_NULL));
 
             case JACKSON_JODA_TIME_WITHOUT_ROOT:
                 logger.debug("\n\n############################### RestProviderFactory "
@@ -85,7 +86,8 @@ public final class GPRestProviderFactory {
                         WRAP_ROOT_VALUE_DISABLE,
                         INDENT_OUTPUT_ENABLE)
                         .registerModule(new JodaModule())
-                        .configure(WRITE_DATES_AS_TIMESTAMPS_DISABLE));
+                        .configure(WRITE_DATES_AS_TIMESTAMPS_DISABLE)
+                        .configure(GPJsonIncludeFeature.NON_NULL));
 
             case JETTYSON:
                 logger.debug("\n\n############################### "

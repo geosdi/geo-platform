@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.ws.wfs;
 
-import javax.xml.ws.Endpoint;
 import org.apache.cxf.jaxws.EndpointImpl;
 import org.geosdi.geoplatform.connectors.ws.wfs.GPWFSClientTestConnector;
 import org.geosdi.geoplatform.cxf.bus.GPSpringBusConfigurator;
@@ -46,6 +45,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.TestContext;
 import org.springframework.test.context.TestExecutionListener;
+
+import javax.xml.ws.Endpoint;
 
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>

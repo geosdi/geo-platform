@@ -1,8 +1,6 @@
 package org.geosdi.geoplatform.support.primitive.bridge.store;
 
-import org.geosdi.geoplatform.support.primitive.bridge.store.bridge.implementor.PrimitiveImplementor;
-import org.geosdi.geoplatform.support.primitive.bridge.store.bridge.store.GPPrimitiveImplementorStore;
-import org.geosdi.geoplatform.support.primitive.bridge.store.bridge.store.PrimitiveImplementorStore;
+import org.geosdi.geoplatform.support.primitive.bridge.implementor.PrimitiveImplementor;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;

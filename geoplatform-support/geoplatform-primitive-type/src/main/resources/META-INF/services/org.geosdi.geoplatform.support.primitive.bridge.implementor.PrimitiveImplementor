@@ -1,0 +1,12 @@
+org.geosdi.geoplatform.support.primitive.bridge.implementor.character.CharacterImplementor
+org.geosdi.geoplatform.support.primitive.bridge.implementor.character.StringImplementor
+org.geosdi.geoplatform.support.primitive.bridge.implementor.number.BigDecimalImplementor
+org.geosdi.geoplatform.support.primitive.bridge.implementor.number.BigIntegerImplementor
+org.geosdi.geoplatform.support.primitive.bridge.implementor.number.BooleanImplementor
+org.geosdi.geoplatform.support.primitive.bridge.implementor.number.ByteImplementor
+org.geosdi.geoplatform.support.primitive.bridge.implementor.number.DoubleImplementor
+org.geosdi.geoplatform.support.primitive.bridge.implementor.number.FloatImplementor
+org.geosdi.geoplatform.support.primitive.bridge.implementor.number.IntegerImplementor
+org.geosdi.geoplatform.support.primitive.bridge.implementor.number.LongImplementor
+org.geosdi.geoplatform.support.primitive.bridge.implementor.number.NumberImplementor
+org.geosdi.geoplatform.support.primitive.bridge.implementor.number.ShortPrimitive

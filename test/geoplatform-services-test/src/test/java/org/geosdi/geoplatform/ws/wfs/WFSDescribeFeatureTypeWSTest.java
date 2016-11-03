@@ -35,13 +35,14 @@
  */
 package org.geosdi.geoplatform.ws.wfs;
 
-import java.util.List;
-import javax.xml.namespace.QName;
 import org.apache.cxf.binding.soap.SoapFault;
 import org.geosdi.geoplatform.connector.wfs.response.AttributeDTO;
 import org.geosdi.geoplatform.connector.wfs.response.LayerSchemaDTO;
 import org.junit.Assert;
 import org.junit.Test;
+
+import javax.xml.namespace.QName;
+import java.util.List;
 
 /**
  *
@@ -86,7 +87,7 @@ public class WFSDescribeFeatureTypeWSTest extends WFSAbstractTest {
         }
     }
 
-    @Test
+    @Test(expected = SoapFault.class)
     public void comuniFeatureV110() throws Exception {
         LayerSchemaDTO layerSchema
                 = wfsService.describeFeatureType(addressDatastore,

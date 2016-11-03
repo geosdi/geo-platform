@@ -1,6 +1,7 @@
 package org.geosdi.geoplatform.support.primitive.bridge.store;
 
 import org.geosdi.geoplatform.support.primitive.bridge.implementor.PrimitiveImplementor;
+import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -8,6 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.Date;
 import java.util.Set;
 
 /**
@@ -136,5 +138,32 @@ public class GPPrimitiveImplementorStoreTest {
         logger.info("###########################STRING_PRIMITIVE_IMPLEMENTORS : {}\n", primitiveImplementor);
         Assert.assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(String.class));
         Assert.assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(String[].class));
+    }
+
+    @Test
+    public void loadDateTimePrimitiveImplementorTest() throws Exception {
+        DateTime dateTime = DateTime.now();
+        PrimitiveImplementor dateTimePrimitiveImplementor = primitiveImplementorStore.getPrimitiveImplementorForClass(dateTime.getClass());
+        logger.info("########################DATE_TIME_IMPLEMENTOR : {}\n", dateTimePrimitiveImplementor);
+        Assert.assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(dateTime.getClass()));
+        Assert.assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(dateTime.toLocalDateTime().getClass()));
+        Assert.assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(dateTime.toMutableDateTime().getClass()));
+        Assert.assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(dateTime.toInstant().getClass()));
+    }
+
+    @Test
+    public void loadDatePrimitiveImplementorTest() throws Exception {
+        Date date = new Date();
+        PrimitiveImplementor dateTimePrimitiveImplementor = primitiveImplementorStore.getPrimitiveImplementorForClass(date.getClass());
+        logger.info("########################DATE_IMPLEMENTOR : {}\n", dateTimePrimitiveImplementor);
+        Assert.assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(date.getClass()));
+    }
+
+    @Test
+    public void loadSQLDatePrimitiveImplementorTest() throws Exception {
+        java.sql.Date sqlDate = new java.sql.Date(1478183430660l);
+        PrimitiveImplementor dateTimePrimitiveImplementor = primitiveImplementorStore.getPrimitiveImplementorForClass(sqlDate.getClass());
+        logger.info("########################SQL_DATE_IMPLEMENTOR : {}\n", dateTimePrimitiveImplementor);
+        Assert.assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(sqlDate.getClass()));
     }
 }

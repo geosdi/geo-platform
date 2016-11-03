@@ -10,3 +10,7 @@ org.geosdi.geoplatform.support.primitive.bridge.implementor.number.IntegerImplem
 org.geosdi.geoplatform.support.primitive.bridge.implementor.number.LongImplementor
 org.geosdi.geoplatform.support.primitive.bridge.implementor.number.NumberImplementor
 org.geosdi.geoplatform.support.primitive.bridge.implementor.number.ShortPrimitive
+org.geosdi.geoplatform.support.primitive.bridge.implementor.time.DateTimeImplementor
+org.geosdi.geoplatform.support.primitive.bridge.implementor.time.SQLDateImplementor
+org.geosdi.geoplatform.support.primitive.bridge.implementor.time.DateImplementor
+org.geosdi.geoplatform.support.primitive.bridge.implementor.time.CalendarImplementor

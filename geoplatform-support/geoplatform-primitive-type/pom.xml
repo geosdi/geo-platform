@@ -41,6 +41,14 @@
             <version>1.0</version>
         </dependency>
 
+        <!-- =========================================================== -->
+        <!-- ====================== JODA-TIME ========================== -->
+        <!-- =========================================================== -->
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+        </dependency>
+
         <!-- logging dependencies, delegate all to slf4j and use logback -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -57,13 +65,6 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.4</version>
-            <scope>test</scope>
         </dependency>
 
         <dependency>

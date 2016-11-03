@@ -59,7 +59,7 @@ public class WFSDescribeFeatureTest {
 
     private static final Logger logger = LoggerFactory.getLogger(WFSDescribeFeatureTest.class);
     //
-    private static final String wfsURL = "http://iterservice.regione.campania.it/geoserver/wfs";
+    private static final String wfsURL = "http://150.145.141.92/geoserver/wfs";
 
     static {
         try {
@@ -72,7 +72,7 @@ public class WFSDescribeFeatureTest {
     }
 
     //
-    private static final QName statesName = new QName("itercampania:sciame");
+    private static final QName statesName = new QName("topp:states");
     private static final QName sfRoads = new QName("sf:roads");
     //
     private static GPWFSConnectorStore serverConnector;

@@ -19,6 +19,7 @@
         <appender-ref ref="STDOUT"/>
     </logger>
 
-    <logger name="org.geosdi.geoplatform.support.primitive.bridge.store.bridge.store.GPPrimitiveImplementorStore" level="debug"/>
+    <logger name="org.geosdi.geoplatform.support.primitive.bridge.store.GPPrimitiveImplementorStore" level="debug"/>
+    <logger name="org.geosdi.geoplatform.support.primitive.bridge.store.massive" level="info"/>
 
 </configuration>

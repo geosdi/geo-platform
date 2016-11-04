@@ -9,9 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 import java.util.Set;
 
 /**
@@ -167,11 +165,5 @@ public class GPPrimitiveImplementorStoreTest {
         PrimitiveImplementor dateTimePrimitiveImplementor = primitiveImplementorStore.getPrimitiveImplementorForClass(sqlDate.getClass());
         logger.info("########################SQL_DATE_IMPLEMENTOR : {}\n", dateTimePrimitiveImplementor);
         Assert.assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(sqlDate.getClass()));
-    }
-
-    @Test
-    public void parseDateTest() throws Exception {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd G 'at' HH:mm:ss z", Locale.ENGLISH);
-        logger.info("################################{}\n", format.parse("2001.07.04 AD at 12:08:56 PDT"));
     }
 }

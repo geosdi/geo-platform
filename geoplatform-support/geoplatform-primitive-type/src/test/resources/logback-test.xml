@@ -21,5 +21,6 @@
 
     <logger name="org.geosdi.geoplatform.support.primitive.bridge.store.GPPrimitiveImplementorStore" level="debug"/>
     <logger name="org.geosdi.geoplatform.support.primitive.bridge.store.massive" level="info"/>
+    <logger name="org.geosdi.geoplatform.support.primitive.string.responsibility" level="debug"/>
 
 </configuration>

@@ -140,6 +140,9 @@
         <repository>
             <id>gwtquery-ui-repository</id>
             <url>http://gwtquery-ui.googlecode.com/svn/mavenrepo</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
         </repository>
     </repositories>
 

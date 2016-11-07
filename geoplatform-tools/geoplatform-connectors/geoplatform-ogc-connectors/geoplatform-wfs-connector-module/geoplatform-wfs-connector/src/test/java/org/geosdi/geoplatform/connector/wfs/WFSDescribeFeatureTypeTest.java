@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.connector.wfs;
 
 import org.geosdi.geoplatform.connector.server.request.WFSDescribeFeatureTypeRequest;
 import org.geosdi.geoplatform.xml.xsd.v2001.*;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.xml.bind.JAXBElement;
@@ -52,6 +53,7 @@ import java.util.List;
  */
 public class WFSDescribeFeatureTypeTest extends WFSTestConfigurator {
 
+    @Ignore
     @Test
     public void testV110() throws Exception {
         WFSDescribeFeatureTypeRequest<Schema> request = super.serverConnector.createDescribeFeatureTypeRequest();

@@ -33,51 +33,59 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.client.config;
+package org.geosdi.geoplatform.gui.client.action.menu.showelements;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.inject.client.GinModules;
-import com.google.gwt.inject.client.Ginjector;
+import com.extjs.gxt.ui.client.event.ComponentEvent;
+import com.extjs.gxt.ui.client.event.MenuEvent;
+import com.extjs.gxt.ui.client.event.SelectionListener;
+import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
+import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.LayerTypeHandlerManager;
 import org.geosdi.geoplatform.gui.client.action.menu.strategy.IActionStrategy;
-import org.geosdi.geoplatform.gui.client.widget.wfs.FeatureWidget;
+import org.geosdi.geoplatform.gui.client.config.FeatureInjector;
+import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetConstants;
 import org.geosdi.geoplatform.gui.client.widget.wfs.ShowFeaturesWidget;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
 /**
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- *
- * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
  */
-@GinModules(value = {FeatureInjectorModule.class, FeatureInjectorProvider.class,
-    FeatureInjectorButtonProvider.class, FeatureInjectorEventProvider.class,
-    FeatureInjectorToolbar.class})
-public interface FeatureInjector extends Ginjector {
+public class ShowFeaturesWFSAction extends MenuBaseAction{
 
-    public static class MainInjector {
+    private final TreePanel<GPBeanTreeModel> treePanel;
+    private final GPEventBus bus;
+    private final LayerTypeHandlerManager layerTypeHandlerManager;
+    private IActionStrategy actionStrategy;
+    private ShowFeaturesWidget showFeaturesWidget;
 
-        private static FeatureInjector INSTANCE = GWT.create(
-                FeatureInjector.class);
-
-        private MainInjector() {
-        }
-
-        public static FeatureInjector getInstance() {
-            return INSTANCE;
-        }
-
+    public ShowFeaturesWFSAction(TreePanel<GPBeanTreeModel> treePanel) {
+        super(WFSTWidgetConstants.INSTANCE.showFeaturesTitleText(),
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.vector()));
+        this.treePanel = treePanel;
+        this.bus = FeatureInjector.MainInjector.getInstance().getEventBus();
+        this.showFeaturesWidget = FeatureInjector.MainInjector.getInstance().getShowElementsWidget();
+        this.layerTypeHandlerManager = FeatureInjector.MainInjector.getInstance().getLayerTypeHandlerManager();
+        this.actionStrategy = FeatureInjector.MainInjector.getInstance().getActionStrategy();
     }
 
-    GPEventBus getEventBus();
+    /**
+     * (non-Javadoc)
+     *
+     * @param e
+     * @see SelectionListener#componentSelected(ComponentEvent)
+     */
+    @Override
+    public void componentSelected(MenuEvent e) {
+        this.actionStrategy.setWidgetType(IActionStrategy.WidgetType.SHOW_FEATURES);
+        final GPLayerBean layer = (GPLayerBean) this.treePanel.getSelectionModel().getSelectedItem();
+        this.layerTypeHandlerManager.forwardLayerType(layer);
+    }
 
-    LayerTypeHandlerManager getLayerTypeHandlerManager();
 
-    FeatureWidget getFeatureWidget();
-
-    ShowFeaturesWidget getShowElementsWidget();
-
-    IActionStrategy.ActionStrategy getActionStrategy();
 
 }

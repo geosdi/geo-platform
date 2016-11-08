@@ -41,6 +41,7 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.LayerTypeHandlerManager;
+import org.geosdi.geoplatform.gui.client.action.menu.strategy.IActionStrategy;
 import org.geosdi.geoplatform.gui.client.config.FeatureInjector;
 import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetConstants;
 import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetMessages;
@@ -67,6 +68,7 @@ public class EditWFSAction extends MenuBaseAction implements IEditWFSAction {
     private final LayerTypeHandlerManager layerTypeHandlerManager;
     private final GPEventBus bus;
     private final BindLayersEvent bindLayersEvent = new BindLayersEvent();
+    private IActionStrategy actionStrategy;
 
     public EditWFSAction(TreePanel<GPBeanTreeModel> treePanel) {
         super(WFSTWidgetConstants.INSTANCE.EditWFSAction_titleText(),
@@ -74,16 +76,17 @@ public class EditWFSAction extends MenuBaseAction implements IEditWFSAction {
         this.treePanel = treePanel;
         this.bus = FeatureInjector.MainInjector.getInstance().getEventBus();
         this.layerTypeHandlerManager = FeatureInjector.MainInjector.getInstance().getLayerTypeHandlerManager();
+        this.actionStrategy = FeatureInjector.MainInjector.getInstance().getActionStrategy();
     }
 
     @Override
     public void componentSelected(MenuEvent e) {
+        this.actionStrategy.setWidgetType(IActionStrategy.WidgetType.EDIT_WFS_ACTION);
         final GPLayerBean layer = (GPLayerBean) this.treePanel.getSelectionModel().getSelectedItem();
         bindLayersTree(layer);
 
         LayoutManager.getInstance().getStatusMap().setBusy(
                 WFSTWidgetMessages.INSTANCE.checkingIfLayerIsAVectorMessage(layer.getName()));
-
         this.layerTypeHandlerManager.forwardLayerType(layer);
     }
 

@@ -36,13 +36,13 @@
 package org.geosdi.geoplatform.gui.client.config;
 
 import com.google.gwt.inject.client.AbstractGinModule;
+import org.geosdi.geoplatform.gui.client.action.menu.strategy.IActionStrategy;
+import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetMessages;
 import org.geosdi.geoplatform.gui.client.model.binder.FeatureIdBinder;
 import org.geosdi.geoplatform.gui.client.model.binder.IFeatureIdBinder;
 import org.geosdi.geoplatform.gui.client.model.binder.ILayerSchemaBinder;
 import org.geosdi.geoplatform.gui.client.model.binder.LayerSchemaBinder;
-import org.geosdi.geoplatform.gui.client.widget.wfs.FeatureMapWidget;
-import org.geosdi.geoplatform.gui.client.widget.wfs.FeatureWidget;
-import org.geosdi.geoplatform.gui.client.widget.wfs.IFeatureMapWidget;
+import org.geosdi.geoplatform.gui.client.widget.wfs.*;
 import org.geosdi.geoplatform.gui.client.widget.wfs.binding.grid.WFSFeatureGridBinding;
 import org.geosdi.geoplatform.gui.client.widget.wfs.builder.AttributeCustomFieldsMap;
 import org.geosdi.geoplatform.gui.client.widget.wfs.builder.feature.FeatureAttributesWindowBuilder;
@@ -56,7 +56,6 @@ import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBusImpl;
 
 import javax.inject.Singleton;
-import org.geosdi.geoplatform.gui.client.widget.wfs.FeatureAttributesWidget;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -71,8 +70,11 @@ public class FeatureInjectorModule extends AbstractGinModule {
         bind(GPEventBus.class).to(GPEventBusImpl.class).in(Singleton.class);
         bind(FeatureWidget.class).in(Singleton.class);
         bind(FeatureAttributesWidget.class).in(Singleton.class);
+        bind(ShowFeatureAttributesWidget.class).in(Singleton.class);
+        bind(WFSTWidgetMessages.class).asEagerSingleton();
         bind(IFeatureMapWidget.class).to(FeatureMapWidget.class).in(
                 Singleton.class);
+        bind(IActionStrategy.class).to(IActionStrategy.ActionStrategy.class).in(Singleton.class);
         bind(GeoPlatformMapFactory.class).to(DefaultMapFactory.class);
         
         bind(IFeatureMapInitializer.class).to(FeatureMapInitializer.class).in(Singleton.class);

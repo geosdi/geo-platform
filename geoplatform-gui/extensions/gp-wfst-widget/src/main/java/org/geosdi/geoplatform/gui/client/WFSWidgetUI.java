@@ -41,6 +41,7 @@ import org.geosdi.geoplatform.gui.action.menu.MenuAction;
 import org.geosdi.geoplatform.gui.action.tree.menu.TreeMenuActionCreator;
 import org.geosdi.geoplatform.gui.action.tree.menu.TreeMenuActionRegistar;
 import org.geosdi.geoplatform.gui.client.action.menu.edit.EditWFSAction;
+import org.geosdi.geoplatform.gui.client.action.menu.showelements.ShowFeaturesWFSAction;
 import org.geosdi.geoplatform.gui.impl.tree.menu.config.TreeMenuGinInjector;
 
 /**
@@ -64,6 +65,14 @@ public class WFSWidgetUI implements EntryPoint {
             @Override
             public MenuAction createAction(TreePanel treePanel) {
                 return new EditWFSAction(treePanel);
+            }
+
+        });
+        registar.put("SHOW_FEATURES", new TreeMenuActionCreator() {
+
+            @Override
+            public MenuAction createAction(TreePanel treePanel) {
+                return new ShowFeaturesWFSAction(treePanel);
             }
 
         });

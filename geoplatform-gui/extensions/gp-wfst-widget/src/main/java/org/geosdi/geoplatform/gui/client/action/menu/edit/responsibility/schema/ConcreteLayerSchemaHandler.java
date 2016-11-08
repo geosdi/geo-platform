@@ -35,15 +35,17 @@
  */
 package org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.schema;
 
-import javax.inject.Inject;
 import org.geosdi.geoplatform.connector.wfs.response.LayerSchemaDTO;
+import org.geosdi.geoplatform.gui.client.action.menu.strategy.IActionStrategy;
 import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetMessages;
 import org.geosdi.geoplatform.gui.client.model.binder.ILayerSchemaBinder;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
-import org.geosdi.geoplatform.gui.client.widget.wfs.FeatureWidget;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.geosdi.geoplatform.gui.shared.GPLayerType;
+
+import javax.inject.Inject;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -53,11 +55,14 @@ public class ConcreteLayerSchemaHandler extends LayerSchemaParserHandler {
 
     @Inject
     private ILayerSchemaBinder layerSchemaBinder;
-    private final FeatureWidget featureWidget;
+    private final IActionStrategy actionStrategy;
+    private final GPEventBus bus;
 
     @Inject
-    public ConcreteLayerSchemaHandler(FeatureWidget theFeatureWidget) {
-        this.featureWidget = theFeatureWidget;
+    public ConcreteLayerSchemaHandler(
+            IActionStrategy actionStrategy,GPEventBus theBus) {
+        this.actionStrategy = actionStrategy;
+        this.bus = theBus;
     }
 
     @Override
@@ -71,7 +76,6 @@ public class ConcreteLayerSchemaHandler extends LayerSchemaParserHandler {
 
     private void showFeatureWidget(LayerSchemaDTO schemaDTO, GPLayerBean layer) {
         String geometryType = schemaDTO.getGeometry().getType();
-
         layer.setLayerType(
                 GPLayerType.valueOf(geometryType.toUpperCase()));
 
@@ -81,6 +85,6 @@ public class ConcreteLayerSchemaHandler extends LayerSchemaParserHandler {
                 SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
 
         layerSchemaBinder.bind(layer, schemaDTO);
-        featureWidget.show();
+        actionStrategy.showWidget();
     }
 }

@@ -35,13 +35,13 @@
 package org.geosdi.geoplatform.gui.client.i18n;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.i18n.client.Constants;
+import com.google.gwt.i18n.client.ConstantsWithLookup;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public interface WFSTWidgetConstants extends Constants {
+public interface WFSTWidgetConstants extends ConstantsWithLookup {
 
     WFSTWidgetConstants INSTANCE = GWT.create(WFSTWidgetConstants.class);
 
@@ -116,4 +116,12 @@ public interface WFSTWidgetConstants extends Constants {
 
     @DefaultStringValue("Please, verify all the attribute before save")
     String FeatureAttributesWindow_infoVerifyAttribute();
+
+    /**
+     * start ShowFeaturesWFSAction
+     */
+    @DefaultStringValue("Show 100 Features")
+    String showFeaturesTitleText();
+
+
 }

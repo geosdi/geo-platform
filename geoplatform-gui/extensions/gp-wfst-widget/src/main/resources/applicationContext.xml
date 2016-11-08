@@ -11,6 +11,16 @@
         <property name="enabled" value="true" />
         <property name="secure" value="false" />
         <property name="order" value="8" />
+
+    </bean>
+
+    <bean id="SHOW_FEATURES" class="org.geosdi.geoplatform.gui.client.config.composite.menu.tools.WFSWidgetTreeMenuClientTool">
+        <property name="id" value="SHOW_FEATURES" />
+        <property name="textKey" value="showFeaturesTitleText" />
+        <property name="enabled" value="true" />
+        <property name="secure" value="false" />
+        <property name="order" value="9" />
+
     </bean>
 
 </beans>

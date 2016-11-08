@@ -55,4 +55,6 @@ public interface WFSTWidgetMessages extends Messages {
 
     String errorFeatureTypeRequestForLayerMessage(String errorMessage, String layerName);
 
+    String labelShowFeature(int size);
+
 }

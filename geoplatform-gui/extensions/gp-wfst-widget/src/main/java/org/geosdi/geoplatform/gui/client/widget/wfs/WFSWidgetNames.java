@@ -43,7 +43,8 @@ package org.geosdi.geoplatform.gui.client.widget.wfs;
 public enum WFSWidgetNames {
 
     FEATURE_ATTRIBUTES("WFST-FeatureAttributesWidget"),
-    FEATURE_SELECTION("WFST-FeatureSelectionWidget");
+    FEATURE_SELECTION("WFST-FeatureSelectionWidget"),
+    SHOW_FEATURES("WFST-ShowFeatures");
     //
     private String value;
 

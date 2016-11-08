@@ -164,7 +164,6 @@ public class FeatureWidget extends GeoPlatformWindow
         attributesWidget.setHeaderVisible(true);
         attributesWidget.getHeader().setText("Feature Attributes");
         attributesWidget.getHeader().setStyleAttribute("textAlign", "center");
-        attributesWidget.setScrollMode(Style.Scroll.AUTOY);
 
         super.add(this.attributesWidget, layoutData);
     }

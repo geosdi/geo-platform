@@ -172,7 +172,6 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel implements 
 
     @Override
     public void setPanelProperties() {
-        super.setScrollMode(Style.Scroll.AUTOX);
     }
 
     @Override

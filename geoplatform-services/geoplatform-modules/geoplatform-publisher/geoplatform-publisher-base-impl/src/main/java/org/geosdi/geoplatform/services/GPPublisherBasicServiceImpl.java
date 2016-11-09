@@ -1139,10 +1139,13 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
             File file, String workspace) throws ResourceNotFoundFault {
         logger.info("Call to analyzeZIPInPreview");
         reload();
+        String userNameWithoutSpecialCharacter = PublishUtility.removeSpecialCharactersFromString(userName);
         String userWorkspace = workspace;
         if (GPSharedUtils.isEmpty(userWorkspace)) {
-            userWorkspace = getWorkspace(PublishUtility.removeSpecialCharactersFromString(userName));
+            userWorkspace = userNameWithoutSpecialCharacter;
         }
+
+
         file = PublishUtility.getFileNameToLowerCase(file);
         String tempUserDir = PublishUtility.createDir(
                 this.geoportalDir + userName);
@@ -1152,7 +1155,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
                 tempUserDir + PublishUtility.TIF_DIR_NAME);
         // decompress the zip file in the <tmp>/shp directory, read info and create <layername>.zip files for each layer in <tmp>/zip
         // and decompress the geotiff files in user/tiff direcotry
-        List<LayerInfo> infoShapeList = getInfoFromCompressedFile(userName, file,
+        List<LayerInfo> infoShapeList = getInfoFromCompressedFile(userNameWithoutSpecialCharacter, file,
                 tempUserDir, tempUserZipDir, tempUserTifDir, userWorkspace);
         if (infoShapeList.isEmpty()) {
             throw new ResourceNotFoundFault(

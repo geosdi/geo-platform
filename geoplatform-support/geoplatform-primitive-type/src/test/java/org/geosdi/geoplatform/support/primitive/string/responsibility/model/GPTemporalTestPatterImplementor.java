@@ -10,6 +10,11 @@ import java.util.Locale;
  */
 public class GPTemporalTestPatterImplementor extends GPBaseTemporalPatternImplementor {
 
+    public GPTemporalTestPatterImplementor() {
+        super();
+        super.addPattern("YYYY");
+    }
+
     /**
      * @return {@link Locale}
      */

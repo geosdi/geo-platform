@@ -83,6 +83,8 @@ public class FeatureInjectorButtonProvider extends AbstractGinModule {
                 Singleton.class);
         bind(Button.class).annotatedWith(QueryFeatureButton.class).toProvider(QueryFeatureButtonProvider.class).in(
                 Singleton.class);
+        bind(Button.class).annotatedWith(GetAllFeaturesButton.class).toProvider(GetAllFeaturesButtonProvider.class).in(
+                Singleton.class);
     }
 
 }

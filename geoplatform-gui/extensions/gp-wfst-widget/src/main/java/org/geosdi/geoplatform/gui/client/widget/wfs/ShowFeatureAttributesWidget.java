@@ -111,7 +111,7 @@ public class ShowFeatureAttributesWidget extends GeoPlatformContentPanel {
     @Override
     public void addComponent() {
         this.createStore();
-        this.createEditorGrid();
+        this.createGrid();
     }
 
     @Override
@@ -145,7 +145,7 @@ public class ShowFeatureAttributesWidget extends GeoPlatformContentPanel {
         });
     }
 
-    private void createEditorGrid() {
+    private void createGrid() {
         grid = new Grid<FeatureDetail>(store, mockColumnModel);
         grid.setBorders(Boolean.TRUE);
         grid.setStripeRows(Boolean.TRUE);

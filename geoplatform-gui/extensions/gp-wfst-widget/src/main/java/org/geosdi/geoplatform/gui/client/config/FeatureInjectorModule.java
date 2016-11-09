@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.config;
 
 import com.google.gwt.inject.client.AbstractGinModule;
 import org.geosdi.geoplatform.gui.client.action.menu.strategy.IActionStrategy;
+import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetConstants;
 import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetMessages;
 import org.geosdi.geoplatform.gui.client.model.binder.FeatureIdBinder;
 import org.geosdi.geoplatform.gui.client.model.binder.IFeatureIdBinder;
@@ -71,7 +72,9 @@ public class FeatureInjectorModule extends AbstractGinModule {
         bind(FeatureWidget.class).in(Singleton.class);
         bind(FeatureAttributesWidget.class).in(Singleton.class);
         bind(ShowFeatureAttributesWidget.class).in(Singleton.class);
+        bind(ShowFeaturesWidget.class).in(Singleton.class);
         bind(WFSTWidgetMessages.class).asEagerSingleton();
+        bind(WFSTWidgetConstants.class).asEagerSingleton();
         bind(IFeatureMapWidget.class).to(FeatureMapWidget.class).in(
                 Singleton.class);
         bind(IActionStrategy.class).to(IActionStrategy.ActionStrategy.class).in(Singleton.class);

@@ -120,8 +120,9 @@ public interface WFSTWidgetConstants extends ConstantsWithLookup {
     /**
      * start ShowFeaturesWFSAction
      */
-    @DefaultStringValue("Show 100 Features")
+    @DefaultStringValue("Show Features")
     String showFeaturesTitleText();
 
-
+    @DefaultStringValue("Get all Features")
+    String getAllFeatures();
 }

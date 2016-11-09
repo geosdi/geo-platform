@@ -35,10 +35,12 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.wfs;
 
+import com.extjs.gxt.ui.client.Style;
 import com.extjs.gxt.ui.client.Style.LayoutRegion;
 import com.extjs.gxt.ui.client.event.DragEvent;
 import com.extjs.gxt.ui.client.util.Margins;
 import com.extjs.gxt.ui.client.widget.SplitBar;
+import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
 import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
@@ -49,9 +51,11 @@ import org.geosdi.geoplatform.connector.wfs.response.FeatureDTO;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.command.wfst.basic.GetAllFeatureRequest;
 import org.geosdi.geoplatform.gui.client.command.wfst.basic.GetAllFeatureResponse;
+import org.geosdi.geoplatform.gui.client.config.annotation.GetAllFeaturesButton;
 import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetMessages;
 import org.geosdi.geoplatform.gui.client.model.binder.ILayerSchemaBinder;
 import org.geosdi.geoplatform.gui.client.model.wfs.FeatureDetail;
+import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.ShowFeatureAttributesHandler;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar;
@@ -71,7 +75,7 @@ import java.util.Map;
  * @email vito.salvia@gmail.com
  */
 public class ShowFeaturesWidget extends GeoPlatformWindow
-        implements IFeatureWidget{
+        implements IFeatureWidget,ShowFeatureAttributesHandler{
 
     @Inject
     private FeatureStatusBar statusBar;
@@ -79,18 +83,21 @@ public class ShowFeaturesWidget extends GeoPlatformWindow
     private ShowFeatureAttributesWidget attributesWidget;
     private ILayerSchemaBinder layerSchemaBinder;
     private final GPEventBus bus;
-    private final int size = 50;
+    private int size = 50;
     private WFSTWidgetMessages i18n;
+    private Button getAllFeatureButton;
     private final GetAllFeatureRequest getAllFeatureRequest = GWT.<GetAllFeatureRequest>create(
             GetAllFeatureRequest.class);
 
     @Inject
     public ShowFeaturesWidget(GPEventBus theBus,WFSTWidgetMessages i18n,
-            ILayerSchemaBinder layerSchemaBinder) {
+            ILayerSchemaBinder layerSchemaBinder,@GetAllFeaturesButton Button getAllFeatureButton) {
         super(true);
         this.i18n = i18n;
         this.layerSchemaBinder = layerSchemaBinder;
+        this.getAllFeatureButton = getAllFeatureButton;
         this.bus = theBus;
+        this.bus.addHandler(ShowFeatureAttributesHandler.TYPE,this);
     }
 
     @Override
@@ -111,7 +118,7 @@ public class ShowFeaturesWidget extends GeoPlatformWindow
         super.setCollapsible(Boolean.FALSE);
         super.setResizable(Boolean.TRUE);
         super.setMaximizable(Boolean.TRUE);
-        super.setModal(Boolean.TRUE);
+        super.setModal(Boolean.FALSE);
         super.setPlain(Boolean.TRUE);
         super.setLayout(new BorderLayout());
     }
@@ -142,19 +149,23 @@ public class ShowFeaturesWidget extends GeoPlatformWindow
             throw new IllegalArgumentException(
                     "Both SchemaDTO and GPLayerBean must not be null");
         }
+        this.size = 50;
         super.show();
+        this.getAllFeatureButton.setEnabled(false);
         loadFeatures();
     }
 
     private void createStatusBar() {
+        super.setButtonAlign(Style.HorizontalAlignment.LEFT);
         super.getButtonBar().add(this.statusBar);
         super.getButtonBar().add(new FillToolItem());
+        super.addButton(getAllFeatureButton);
     }
 
     @Override
     protected void afterShow() {
         super.afterShow();
-        this.statusBar.setBusy("Loading Layer as WFS");
+        this.statusBar.setBusy("Loading Features");
         this.attributesWidget.reconfigureEditorGrid();
     }
 
@@ -173,6 +184,7 @@ public class ShowFeaturesWidget extends GeoPlatformWindow
     }
 
     private void loadFeatures(){
+        this.getAllFeatureButton.setEnabled(false);
         attributesWidget.maskAttributes(true);
         getAllFeatureRequest.setServerUrl(layerSchemaBinder.getLayerSchemaDTO().getScope());
         getAllFeatureRequest.setTypeName(layerSchemaBinder.getLayerSchemaDTO().getTypeName());
@@ -211,6 +223,8 @@ public class ShowFeaturesWidget extends GeoPlatformWindow
                     } else {
                         attributesWidget.postInstances(instances);
                     }
+                    getAllFeatureButton.setEnabled(true);
+
                 }
             }
 
@@ -228,4 +242,10 @@ public class ShowFeaturesWidget extends GeoPlatformWindow
         });
     }
 
+    @Override
+    public void getAllFeatures() {
+        reset();
+        size = 1000000;
+        loadFeatures();
+    }
 }

@@ -33,49 +33,19 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.client;
+package org.geosdi.geoplatform.gui.client.puregwt.wfs.handler;
 
-import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import com.google.gwt.core.client.EntryPoint;
-import org.geosdi.geoplatform.gui.action.menu.MenuAction;
-import org.geosdi.geoplatform.gui.action.tree.menu.TreeMenuActionCreator;
-import org.geosdi.geoplatform.gui.action.tree.menu.TreeMenuActionRegistar;
-import org.geosdi.geoplatform.gui.client.action.menu.edit.EditWFSAction;
-import org.geosdi.geoplatform.gui.client.action.menu.showfeatures.ShowFeaturesWFSAction;
-import org.geosdi.geoplatform.gui.impl.tree.menu.config.TreeMenuGinInjector;
+import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent.Type;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- *
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
  */
-public class WFSWidgetUI implements EntryPoint {
+public interface ShowFeatureAttributesHandler extends EventHandler {
 
-    /**
-     * (non-Javadoc)
-     *
-     * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
-     */
-    @Override
-    public void onModuleLoad() {
-        TreeMenuActionRegistar registar = TreeMenuGinInjector.MainInjector.getInstance().getTreeMenuActionRegistar();
+    Type<ShowFeatureAttributesHandler> TYPE = new Type<ShowFeatureAttributesHandler>();
 
-        registar.put("EDIT_FEATURE", new TreeMenuActionCreator() {
-
-            @Override
-            public MenuAction createAction(TreePanel treePanel) {
-                return new EditWFSAction(treePanel);
-            }
-
-        });
-        registar.put("SHOW_FEATURES", new TreeMenuActionCreator() {
-
-            @Override
-            public MenuAction createAction(TreePanel treePanel) {
-                return new ShowFeaturesWFSAction(treePanel);
-            }
-
-        });
-    }
+    void getAllFeatures();
 
 }

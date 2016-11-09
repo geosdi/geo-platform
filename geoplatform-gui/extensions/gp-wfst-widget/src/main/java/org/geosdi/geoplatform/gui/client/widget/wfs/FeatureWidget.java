@@ -102,7 +102,6 @@ public class FeatureWidget extends GeoPlatformWindow
         this.bus = theBus;
         this.resetButton = theResetButton;
         this.saveButton = theSaveButton;
-
         bus.addHandler(ActionEnableEvent.TYPE, this);
     }
 

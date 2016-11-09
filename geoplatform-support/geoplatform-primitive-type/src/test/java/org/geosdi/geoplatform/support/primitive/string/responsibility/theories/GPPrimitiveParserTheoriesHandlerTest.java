@@ -28,7 +28,7 @@ public class GPPrimitiveParserTheoriesHandlerTest {
                 "02001.July.04 AD 12:08 PM", "Wed, 4 Jul 2001 12:08:56 -0700",
                 "010704120856-0700", "2001-07-04T12:08:56.235-0700",
                 "16/08/1977", "This is an important Date.", "12898.89873482", "21-05-15", "Test1",
-                "Test2"};
+                "Test2", "1998"};
     }
 
     @Theory

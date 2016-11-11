@@ -35,9 +35,6 @@
  */
 package org.geosdi.geoplatform.services;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.List;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.ProcessEPSGResultRequest;
 import org.geosdi.geoplatform.request.PublishLayerRequest;
@@ -46,6 +43,11 @@ import org.geosdi.geoplatform.request.PublishRequest;
 import org.geosdi.geoplatform.responce.InfoPreview;
 import org.geosdi.geoplatform.responce.InfoPreviewStore;
 import org.geosdi.geoplatform.responce.LayerAttributeStore;
+import org.geosdi.geoplatform.responce.UniqueValuesInfo;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.List;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -64,6 +66,9 @@ public interface IGPPublisherService {
             throws ResourceNotFoundFault;
 
     LayerAttributeStore describeFeatureType(String layerName)
+            throws ResourceNotFoundFault;
+
+    UniqueValuesInfo uniqueValues(String layerName,String layerAttribute)
             throws ResourceNotFoundFault;
 
     /**

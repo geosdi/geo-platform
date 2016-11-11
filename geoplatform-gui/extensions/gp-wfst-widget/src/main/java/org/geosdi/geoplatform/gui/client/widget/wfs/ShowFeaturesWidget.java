@@ -151,7 +151,6 @@ public class ShowFeaturesWidget extends GeoPlatformWindow
         }
         this.size = 50;
         super.show();
-        this.getAllFeatureButton.setEnabled(false);
         loadFeatures();
     }
 

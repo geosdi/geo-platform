@@ -35,9 +35,6 @@
  */
 package org.geosdi.geoplatform.services;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import javax.jws.WebService;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.ProcessEPSGResultRequest;
 import org.geosdi.geoplatform.request.PublishLayerRequest;
@@ -46,6 +43,11 @@ import org.geosdi.geoplatform.request.PublishRequest;
 import org.geosdi.geoplatform.responce.InfoPreview;
 import org.geosdi.geoplatform.responce.InfoPreviewStore;
 import org.geosdi.geoplatform.responce.LayerAttributeStore;
+import org.geosdi.geoplatform.responce.UniqueValuesInfo;
+
+import javax.jws.WebService;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 @WebService(
         endpointInterface = "org.geosdi.geoplatform.services.GPPublisherService")
@@ -80,6 +82,11 @@ public class GPPublisherServiceImpl extends GPPublisherBasicServiceImpl
     public LayerAttributeStore describeFeatureType(String layerName) throws
             ResourceNotFoundFault {
         return super.describeFeatureType(layerName);
+    }
+
+    @Override
+    public UniqueValuesInfo uniqueValues(String layerName, String layerAttribute) throws ResourceNotFoundFault {
+        return super.uniqueValues(layerName,layerAttribute);
     }
 
     @Override

@@ -76,6 +76,8 @@ public final class GPPublisherRSPathConfig {
             "publishAll";
     public static final String PUBLISH_ALL_OF_PREVIEW_PATH = PREVIEW_BASE_PATH +
             "publishAllofPreview";
+    public static final String UNIQUE_VALUES_PATH = PREVIEW_BASE_PATH +
+            "uniqueValue";
 
     private GPPublisherRSPathConfig() {
     }

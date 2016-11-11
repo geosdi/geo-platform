@@ -43,11 +43,6 @@ import it.geosolutions.geoserver.rest.decoder.RESTFeatureType.Attribute;
 import it.geosolutions.geoserver.rest.decoder.utils.NameLinkElem;
 import it.geosolutions.geoserver.rest.encoder.GSResourceEncoder;
 import it.geosolutions.geoserver.rest.encoder.coverage.GSCoverageEncoder;
-import java.io.*;
-import java.util.*;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
-import javax.annotation.Resource;
 import org.apache.commons.httpclient.NameValuePair;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.shared.publisher.LayerPublishAction;
@@ -56,10 +51,7 @@ import org.geosdi.geoplatform.request.ProcessEPSGResultRequest;
 import org.geosdi.geoplatform.request.PublishLayerRequest;
 import org.geosdi.geoplatform.request.PublishLayersRequest;
 import org.geosdi.geoplatform.request.PublishRequest;
-import org.geosdi.geoplatform.responce.InfoPreview;
-import org.geosdi.geoplatform.responce.InfoPreviewStore;
-import org.geosdi.geoplatform.responce.LayerAttribute;
-import org.geosdi.geoplatform.responce.LayerAttributeStore;
+import org.geosdi.geoplatform.responce.*;
 import org.geosdi.geoplatform.services.geotiff.GeoTiffOverviews;
 import org.geosdi.geoplatform.services.geotiff.GeoTiffOverviewsConfiguration;
 import org.geosdi.geoplatform.services.utility.Ds2dsConfiguration;
@@ -77,15 +69,20 @@ import org.geotools.gce.geotiff.GeoTiffReader;
 import org.geotools.referencing.CRS;
 import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
-import org.quartz.CalendarIntervalScheduleBuilder;
-import org.quartz.SchedulerException;
-import org.quartz.Trigger;
-import org.quartz.TriggerBuilder;
-import org.quartz.TriggerKey;
+import org.quartz.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.annotation.Resource;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.*;
+import java.util.Calendar;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 
 public class GPPublisherBasicServiceImpl implements IGPPublisherService,
         InitializingBean {
@@ -232,6 +229,18 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
             result.add(layerAttribute);
         }
         return new LayerAttributeStore(result);
+    }
+
+    @Override
+    public UniqueValuesInfo uniqueValues(String layerName, String layerAttribute) throws ResourceNotFoundFault {
+/*        RESTServiceUniqueValues restServiceUniqueValues = this.restReader.uniqueValues(layerName,layerAttribute);
+        logger.info("############"+restServiceUniqueValues);*/
+        List<String> list = new ArrayList<>();
+        list.add("PROVA_1");
+        list.add("PROVA_2");
+        list.add("PROVA_3");
+        list.add("PROVA_4");
+        return new UniqueValuesInfo(list,layerAttribute,4);
     }
 
     /**

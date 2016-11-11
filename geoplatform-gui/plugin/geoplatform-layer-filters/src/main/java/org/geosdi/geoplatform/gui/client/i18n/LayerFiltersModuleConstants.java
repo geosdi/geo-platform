@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.gui.client.i18n;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.Constants;
-import com.google.gwt.i18n.client.Constants.DefaultStringValue;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -280,4 +279,8 @@ public interface LayerFiltersModuleConstants extends Constants {
             + "by its minimum and maximum X and Y values. The optional CRS is a string containing an SRS code "
             + "(For example, 'EPSG:4326'. The default is to use the CRS of the queried layer)")
     String BBOXCQLButton_titleText();
+
+    @DefaultStringValue("Unique Value")
+    String CQLFilterAdvancedTab_uniqueOperatorTooltipText();
+
 }

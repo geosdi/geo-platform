@@ -35,20 +35,6 @@
  */
 package org.geosdi.geoplatform.services;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.List;
-import javax.jws.WebParam;
-import javax.jws.WebResult;
-import javax.jws.WebService;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.MediaType;
 import org.apache.cxf.jaxrs.ext.multipart.Multipart;
 import org.codehaus.jra.Get;
 import org.codehaus.jra.HttpResource;
@@ -62,7 +48,17 @@ import org.geosdi.geoplatform.request.PublishRequest;
 import org.geosdi.geoplatform.responce.InfoPreview;
 import org.geosdi.geoplatform.responce.InfoPreviewStore;
 import org.geosdi.geoplatform.responce.LayerAttributeStore;
+import org.geosdi.geoplatform.responce.UniqueValuesInfo;
 import org.geosdi.geoplatform.services.rs.path.GPPublisherRSPathConfig;
+
+import javax.jws.WebParam;
+import javax.jws.WebResult;
+import javax.jws.WebService;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.List;
 
 /**
  * Public interface to define the service operations mapped via REST using CXT
@@ -129,6 +125,19 @@ public interface GPPublisherService extends IGPPublisherService {
     LayerAttributeStore describeFeatureType(
             @WebParam(name = "layerName")
             @QueryParam(value = "layerName") String layerName)
+            throws ResourceNotFoundFault;
+
+    @Get
+    @GET
+    @Path(value = GPPublisherRSPathConfig.UNIQUE_VALUES_PATH)
+    @HttpResource(location = "/preview/uniqueValue")
+    @WebResult(name = "Result")
+    @Override
+    UniqueValuesInfo uniqueValues(
+            @WebParam(name = "layerName")
+            @QueryParam(value = "layerName") String layerName,
+            @WebParam(name = "layerAttribute")
+            @QueryParam(value = "layerAttribute") String layerAttribute)
             throws ResourceNotFoundFault;
 
     @Post

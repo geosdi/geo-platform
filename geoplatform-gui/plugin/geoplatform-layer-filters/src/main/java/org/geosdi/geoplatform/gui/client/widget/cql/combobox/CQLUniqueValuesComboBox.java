@@ -35,78 +35,79 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.cql.combobox;
 
-import com.extjs.gxt.ui.client.Style.SortDir;
+import com.extjs.gxt.ui.client.Style;
 import com.extjs.gxt.ui.client.data.*;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import org.geosdi.geoplatform.gui.client.command.filter.basic.FilterDescribeFeatureRequest;
-import org.geosdi.geoplatform.gui.client.command.filter.basic.FilterDescribeFeatureResponse;
+import org.geosdi.geoplatform.gui.client.command.filter.basic.UniqueValueResponse;
+import org.geosdi.geoplatform.gui.client.command.filter.basic.UniqueValuesRequest;
 import org.geosdi.geoplatform.gui.client.i18n.LayerFiltersModuleConstants;
+import org.geosdi.geoplatform.gui.client.model.GPUniqueValues;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
 import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
-import org.geosdi.geoplatform.gui.model.tree.GPLayerAttributes;
-import org.geosdi.geoplatform.gui.model.tree.GPLayerAttributes.GPAttributeKey;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 
-import java.util.List;
-
 /**
- * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email nazzareno.sileno@geosdi.org
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
  */
-public class CQLLayerAttributesComboBox extends ComboBox<GPLayerAttributes> {
+public class CQLUniqueValuesComboBox extends ComboBox<GPUniqueValues> {
 
-    private FilterDescribeFeatureRequest filterDescribeFeatureRequest = GWT.
-            <FilterDescribeFeatureRequest>create(FilterDescribeFeatureRequest.class);
-    private ListLoader<ListLoadResult<GPLayerAttributes>> loader;
+    private final UniqueValuesRequest uniqueValuesRequest = GWT.
+            <UniqueValuesRequest>create(UniqueValuesRequest.class);
+    private ListLoader<ListLoadResult<GPUniqueValues>> loader;
     private GPTreePanel<GPBeanTreeModel> treePanel;
+    private String layerAttribute;
 
-    public CQLLayerAttributesComboBox(GPTreePanel<GPBeanTreeModel> treePanel) {
+    public CQLUniqueValuesComboBox(GPTreePanel<GPBeanTreeModel> treePanel){
         this.treePanel = treePanel;
-        this.init();
+        setComboBoxProperties();
+        super.store = new ListStore<GPUniqueValues>();
+        loadUniqueValue("STATE_NAME");
     }
 
-    private void init() {
-        this.setComboBoxProperties();
+    public void loadUniqueValue(String layerAttribute) {
+        final String layerName = ((GPLayerTreeModel) treePanel.getSelectionModel().getSelectedItem()).getName();
+        uniqueValuesRequest.setLayerName(layerName);
+        uniqueValuesRequest.setLayerAttribute(layerAttribute);
         // proxy loader
-        RpcProxy<List<GPLayerAttributes>> proxy = new RpcProxy<List<GPLayerAttributes>>() {
+        RpcProxy<GPUniqueValues> proxy = new RpcProxy<GPUniqueValues>() {
             @Override
-            public void load(final Object loadConfig, AsyncCallback<List<GPLayerAttributes>> callback) {
-                final String layerName = ((GPLayerTreeModel) treePanel.getSelectionModel().getSelectedItem()).getName();
-                filterDescribeFeatureRequest.setLayerName(layerName);
-
+            public void load(final Object loadConfig, AsyncCallback<GPUniqueValues> callback) {
                 ClientCommandDispatcher.getInstance().execute(
-                        new GPClientCommand<FilterDescribeFeatureResponse>() {
-                    private static final long serialVersionUID = 4372276287420606744L;
+                        new GPClientCommand<UniqueValueResponse>() {
 
-                    {
-                        super.setCommandRequest(filterDescribeFeatureRequest);
-                    }
+                            private static final long serialVersionUID = -6344112951569266067L;
 
-                    @Override
-                    public void onCommandSuccess(
-                            FilterDescribeFeatureResponse response) {
-                        loader.fireEvent(Loader.Load, new LoadEvent(loader,
-                                loadConfig, response.getResult()));
-                    }
+                            {
+                                super.setCommandRequest(uniqueValuesRequest);
+                            }
 
-                    @Override
-                    public void onCommandFailure(Throwable exception) {
-                        System.out.println("Errore : " + exception);
-                    }
-                });
+                            @Override
+                            public void onCommandSuccess(
+                                    UniqueValueResponse response) {
+                                GWT.log("####SUCCESSO");
+                                loader.fireEvent(Loader.Load, new LoadEvent(loader,
+                                        loadConfig, response.getResult()));
+                            }
+
+                            @Override
+                            public void onCommandFailure(Throwable exception) {
+                                System.out.println("Errore : " + exception);
+                            }
+                        });
             }
         };
-        loader = new BaseListLoader<ListLoadResult<GPLayerAttributes>>(proxy);
-        loader.setSortField(GPAttributeKey.ATTRIBUTE_VALUE.toString());
-        loader.setSortDir(SortDir.ASC);
+        loader = new BaseListLoader<ListLoadResult<GPUniqueValues>>(proxy);
+        loader.setSortField(GPUniqueValues.GPUniqueValueKey.UNIQUE_VALUE.toString());
+        loader.setSortDir(Style.SortDir.ASC);
         loader.setRemoteSort(true);
         // configure store
-        super.store = new ListStore<GPLayerAttributes>(loader);
+        super.store = new ListStore<GPUniqueValues>(loader);
     }
 
     private void setComboBoxProperties() {
@@ -114,10 +115,11 @@ public class CQLLayerAttributesComboBox extends ComboBox<GPLayerAttributes> {
         this.setForceSelection(true);
         this.setLoadingText(LayerFiltersModuleConstants.INSTANCE.CQLLayerAttributesComboBox_loadingText());
         this.setTriggerAction(TriggerAction.ALL);
-        this.setDisplayField(GPAttributeKey.ATTRIBUTE_VALUE.toString());
+        this.setDisplayField(GPUniqueValues.GPUniqueValueKey.UNIQUE_VALUE.toString());
         this.setEditable(false);
         this.setForceSelection(true);
         this.setUseQueryCache(Boolean.FALSE);
-//        this.setValueField(GPLayerAttributes.GPAttributeKey.ATTRIBUTE_VALUE.toString());
     }
+
+
 }

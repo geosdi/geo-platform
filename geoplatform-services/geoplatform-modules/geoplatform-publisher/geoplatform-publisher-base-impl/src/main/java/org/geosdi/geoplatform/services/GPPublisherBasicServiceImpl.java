@@ -1,37 +1,36 @@
 /**
- *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
- *
- *   Copyright (C) 2008-2016 geoSDI Group (CNR IMAA - Potenza - ITALY).
- *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
- *
- *   ====================================================================
- *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
- *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * geo-platform
+ * Rich webgis framework
+ * http://geo-platform.org
+ * ====================================================================
+ * <p>
+ * Copyright (C) 2008-2016 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * <p>
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version. This program is distributed in the
+ * hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License
+ * for more details. You should have received a copy of the GNU General
+ * Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * <p>
+ * ====================================================================
+ * <p>
+ * Linking this library statically or dynamically with other modules is
+ * making a combined work based on this library. Thus, the terms and
+ * conditions of the GNU General Public License cover the whole combination.
+ * <p>
+ * As a special exception, the copyright holders of this library give you permission
+ * to link this library with independent modules to produce an executable, regardless
+ * of the license terms of these independent modules, and to copy and distribute
+ * the resulting executable under terms of your choice, provided that you also meet,
+ * for each linked independent module, the terms and conditions of the license of
+ * that module. An independent module is a module which is not derived from or
+ * based on this library. If you modify this library, you may extend this exception
+ * to your version of the library, but you are not obligated to do so. If you do not
+ * wish to do so, delete this exception statement from your version.
  */
 package org.geosdi.geoplatform.services;
 
@@ -99,6 +98,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
         String sld;
         List<LayerPublishAction> alreadyExists;
     }
+
     private String RESTURL = "";
     private String RESTUSER = "";
     private String RESTPW = "";
@@ -213,7 +213,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
             //The requested style can't be loaded from the rest url configured.
             throw new ResourceNotFoundFault(
                     "The requested style can't be "
-                    + "loaded from the rest url configured on the publisher service.");
+                            + "loaded from the rest url configured on the publisher service.");
         }
         return this.restReader.getSLD(styleName);
     }
@@ -233,14 +233,9 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
 
     @Override
     public UniqueValuesInfo uniqueValues(String layerName, String layerAttribute) throws ResourceNotFoundFault {
-/*        RESTServiceUniqueValues restServiceUniqueValues = this.restReader.uniqueValues(layerName,layerAttribute);
-        logger.info("############"+restServiceUniqueValues);*/
-        List<String> list = new ArrayList<>();
-        list.add("PROVA_1");
-        list.add("PROVA_2");
-        list.add("PROVA_3");
-        list.add("PROVA_4");
-        return new UniqueValuesInfo(list,layerAttribute,4);
+        RESTServiceUniqueValues restServiceUniqueValues = this.restReader.uniqueValues(layerName, layerAttribute);
+        List<String> list = restServiceUniqueValues.getNames();
+        return new UniqueValuesInfo(list, layerAttribute, list.size());
     }
 
     /**
@@ -382,7 +377,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
         try {
             logger.info(
                     "Parameters: userWorkspace: " + userWorkspace + " - layerName: " + layerName
-                    + " - featureType: " + featureType + " - layer: " + layer + " - RESTURL: " + RESTURL);
+                            + " - featureType: " + featureType + " - layer: " + layer + " - RESTURL: " + RESTURL);
 //            Map<String, String> parametersMap = Maps.newHashMap();
 //            parametersMap.put("url", layerName);
 //            featureType = DataStoreFinder.getDataStore(parametersMap).getFeatureSource(layerName);
@@ -905,14 +900,14 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
         String pathInTifDir = this.geoportalDir + userName + System.getProperty(
                 "file.separator")
                 + PublishUtility.TIF_DIR_NAME + System.getProperty(
-                        "file.separator");
+                "file.separator");
         if (existsCoverageStore(userWorkspace, fileName)) {
             logger.debug(
                     "********** analyzeTIFInPreview existsCoverageStore(userWorkspace, fileName): "
-                    + userWorkspace + " - " + fileName);
+                            + userWorkspace + " - " + fileName);
             infoPreview.setMessage(
                     "The data store " + fileName + " in " + userWorkspace
-                    + " already exists");
+                            + " already exists");
             fileName = fileName + System.currentTimeMillis();
             infoPreview.setFileName(fileName);
             infoPreview.setAlreadyExists(Lists.<LayerPublishAction>newArrayList(
@@ -961,7 +956,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
                 startAt(calendar.getTime()).
                 withSchedule(
                         CalendarIntervalScheduleBuilder.calendarIntervalSchedule().
-                        withMisfireHandlingInstructionFireAndProceed()).
+                                withMisfireHandlingInstructionFireAndProceed()).
                 build();
         trigger.getJobDataMap().put(PublishUtility.USER_WORKSPACE,
                 userWorkspace);
@@ -988,7 +983,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
                 startAt(calendar.getTime()).
                 withSchedule(
                         CalendarIntervalScheduleBuilder.calendarIntervalSchedule().
-                        withMisfireHandlingInstructionFireAndProceed()).
+                                withMisfireHandlingInstructionFireAndProceed()).
                 build();
         trigger.getJobDataMap().put(PublishUtility.USER_WORKSPACE, userWorkspace);
         trigger.getJobDataMap().put(PublisherShpCleanerJob.LAYER_NAME, layerName);
@@ -1034,7 +1029,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
                 if (infoPreview.isIsShape()) {
                     if (GPSharedUtils.isNotEmpty(infoPreview.getNewName())
                             && this.restReader.getLayer(
-                                    PublishUtility.removeSpecialCharactersFromString(userName)
+                            PublishUtility.removeSpecialCharactersFromString(userName)
                                     + "_shp_" + infoPreview.getNewName()) != null) {
                         throw new ResourceNotFoundFault(
                                 "A layer named: " + infoPreview.getNewName() + " already exists");
@@ -1047,9 +1042,9 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
                 } else {
                     if (GPSharedUtils.isNotEmpty(infoPreview.getNewName())
                             && this.restReader.getLayer(userWorkspace,
-                                    userName + "_" + infoPreview.getNewName()) != null
+                            userName + "_" + infoPreview.getNewName()) != null
                             && this.restReader.getCoverage(this.restReader.getLayer(userWorkspace,
-                                            userName + "_" + infoPreview.getNewName())) != null) {
+                            userName + "_" + infoPreview.getNewName())) != null) {
                         throw new ResourceNotFoundFault(
                                 "A layer named: " + infoPreview.getNewName() + " already exists");
                     }
@@ -1084,7 +1079,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
             info.sld = infoPreview.getStyleName();
             if (infoPreview.isIsShape() && infoPreview.getLayerPublishAction() != null
                     && infoPreview.getLayerPublishAction().equals(
-                            LayerPublishAction.APPEND)) {
+                    LayerPublishAction.APPEND)) {
                 logger.info(
                         "***** processEPSGResult: Executing shape append for zip file: " + infoPreview.getFileName());
                 //Settiamo una nuova source feature per evitare di usare quella vecchia
@@ -1102,7 +1097,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
                 }
             } else if (infoPreview.isIsShape() && infoPreview.getLayerPublishAction() != null
                     && infoPreview.getLayerPublishAction().equals(
-                            LayerPublishAction.OVERRIDE)) {
+                    LayerPublishAction.OVERRIDE)) {
                 //Settiamo una nuova source feature per evitare di usare quella vecchia
                 //che punta al precedente file shp
                 ds2dsConfiguration.setSourceFeature(new FeatureConfiguration());
@@ -1233,11 +1228,11 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
             } else {
                 logger.info(
                         "Some problems occured when publishing " + fileInTifDir
-                        + " into the " + userWorkspace
-                        + " workspace: may be the layer is already published in a db");
+                                + " into the " + userWorkspace
+                                + " workspace: may be the layer is already published in a db");
                 infoPreview = new InfoPreview(fileName,
                         "Some problems occured when publishing " + fileInTifDir
-                        + " into the " + userWorkspace + " workspace");
+                                + " into the " + userWorkspace + " workspace");
             }
         } catch (Exception ex) {
             logger.error("Some problems occured when publishing " + fileName
@@ -1245,7 +1240,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
             ex.printStackTrace();
             infoPreview = new InfoPreview(fileName,
                     "Some problems occured when publishing "
-                    + fileName + " into the " + userWorkspace + " workspace");
+                            + fileName + " into the " + userWorkspace + " workspace");
         }
         // calculate the PNG URL to return
         infoPreview.setUrl(infoPreview.getUrl() + "/wms");
@@ -1286,26 +1281,26 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
             if (published) {
                 logger.info(
                         info.name + " correctly published in the "
-                        + userWorkspace + " workspace " + info.name);
+                                + userWorkspace + " workspace " + info.name);
                 infoPreview = this.buildSHPInfoPreviewFromExistingWK(
                         userWorkspace, info.name, info.sld);
             } else {
                 logger.info(
                         "Some problems occured when publishing " + info.name
-                        + " into the " + userWorkspace
-                        + " workspace: may be the layer is already published in a db");
+                                + " into the " + userWorkspace
+                                + " workspace: may be the layer is already published in a db");
                 infoPreview = new InfoPreview(info.name,
                         "Some problems occured when publishing " + info.name
-                        + " into the " + userWorkspace + " workspace");
+                                + " into the " + userWorkspace + " workspace");
             }
         } catch (Exception ex) {
             logger.error(
                     "Some problems occured when publishing " + info.name
-                    + " into the " + userWorkspace + " workspace");
+                            + " into the " + userWorkspace + " workspace");
             ex.printStackTrace();
             infoPreview = new InfoPreview(info.name,
                     "Some problems occured when publishing " + info.name
-                    + " into the " + userWorkspace + " workspace");
+                            + " into the " + userWorkspace + " workspace");
         } finally {
             tempFile.delete();
         }

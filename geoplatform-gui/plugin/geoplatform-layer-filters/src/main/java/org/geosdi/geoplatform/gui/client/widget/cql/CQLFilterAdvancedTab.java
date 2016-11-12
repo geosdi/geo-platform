@@ -45,10 +45,12 @@ import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import com.extjs.gxt.ui.client.widget.form.TextArea;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
-import com.google.gwt.core.client.GWT;
 import org.geosdi.geoplatform.gui.client.i18n.LayerFiltersModuleConstants;
 import org.geosdi.geoplatform.gui.client.model.GPUniqueValues;
-import org.geosdi.geoplatform.gui.client.widget.cql.button.*;
+import org.geosdi.geoplatform.gui.client.widget.cql.button.BBOXCQLButton;
+import org.geosdi.geoplatform.gui.client.widget.cql.button.BetweenCQLButton;
+import org.geosdi.geoplatform.gui.client.widget.cql.button.INCQLButton;
+import org.geosdi.geoplatform.gui.client.widget.cql.button.TimeCQLButton;
 import org.geosdi.geoplatform.gui.client.widget.cql.combobox.CQLLayerAttributesComboBox;
 import org.geosdi.geoplatform.gui.client.widget.cql.combobox.CQLLogicalOperatorComboBox;
 import org.geosdi.geoplatform.gui.client.widget.cql.combobox.CQLUniqueValuesComboBox;
@@ -88,7 +90,7 @@ public class CQLFilterAdvancedTab extends GeoPlatformTabItem implements ICQLFilt
         uniqueValuePanel.setSpacing(2);
         final CQLUniqueValuesComboBox uniqueValueComboBox = new CQLUniqueValuesComboBox(this.treePanel);
         uniqueValueComboBox.setEmptyText(LayerFiltersModuleConstants.INSTANCE.CQLFilterAdvancedTab_uniqueOperatorTooltipText());
-        //uniqueValueComboBox.setEnabled(false);
+        uniqueValueComboBox.setEnabled(false);
         uniqueValueComboBox.addSelectionChangedListener(new SelectionChangedListener<GPUniqueValues>() {
             @Override
             public void selectionChanged(SelectionChangedEvent<GPUniqueValues> se) {
@@ -114,7 +116,7 @@ public class CQLFilterAdvancedTab extends GeoPlatformTabItem implements ICQLFilt
                             GPAttributeKey.ATTRIBUTE_VALUE.toString()).toString());
                     attributesComboBox.reset();
                     uniqueValueComboBox.setEnabled(true);
-                    uniqueValueComboBox.loadUniqueValue(layerAttribute.get(
+                    uniqueValueComboBox.setLayerAttribute(layerAttribute.get(
                             GPAttributeKey.ATTRIBUTE_VALUE.toString()).toString());
                 }
             }

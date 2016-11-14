@@ -86,11 +86,13 @@ public class PrintUtility {
         templates.add(new PrintTemplate(PrintTemplateConstants.INSTANCE.A2_Portrait()));
         templates.add(new PrintTemplate(PrintTemplateConstants.INSTANCE.A1_Portrait()));
         templates.add(new PrintTemplate(PrintTemplateConstants.INSTANCE.A0_Portrait()));
+        templates.add(new PrintTemplate(PrintTemplateConstants.INSTANCE.A0P_Portrait()));
         templates.add(new PrintTemplate(PrintTemplateConstants.INSTANCE.A4_Landscape()));
         templates.add(new PrintTemplate(PrintTemplateConstants.INSTANCE.A3_Landscape()));
         templates.add(new PrintTemplate(PrintTemplateConstants.INSTANCE.A2_Landscape()));
         templates.add(new PrintTemplate(PrintTemplateConstants.INSTANCE.A1_Landscape()));
         templates.add(new PrintTemplate(PrintTemplateConstants.INSTANCE.A0_Landscape()));
+        templates.add(new PrintTemplate(PrintTemplateConstants.INSTANCE.A0P_Landscape()));
         return templates;
     }
 

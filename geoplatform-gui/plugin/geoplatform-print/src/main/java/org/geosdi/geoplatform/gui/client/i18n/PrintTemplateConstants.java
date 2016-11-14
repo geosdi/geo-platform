@@ -63,6 +63,9 @@ public interface PrintTemplateConstants extends Constants {
     @DefaultStringValue("A0 Portrait")
     String A0_Portrait();
 
+    @DefaultStringValue("A0+ Portrait")
+    String A0P_Portrait();
+
     @DefaultStringValue("A4 Landscape")
     String A4_Landscape();
 
@@ -77,4 +80,7 @@ public interface PrintTemplateConstants extends Constants {
 
     @DefaultStringValue("A0 Landscape")
     String A0_Landscape();
+
+    @DefaultStringValue("A0+ Landscape")
+    String A0P_Landscape();
 }

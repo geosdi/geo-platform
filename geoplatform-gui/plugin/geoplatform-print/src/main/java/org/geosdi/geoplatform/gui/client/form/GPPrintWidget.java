@@ -768,6 +768,12 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
         } else if (template.contains(PrintTemplateConstants.INSTANCE.A0_Portrait())) {
             sizeFactor = 4;
             rotation = true;
+        } else if (template.contains(PrintTemplateConstants.INSTANCE.A0P_Landscape())) {
+            sizeFactor = 5;
+            rotation = false;
+        } else if (template.contains(PrintTemplateConstants.INSTANCE.A0P_Portrait())) {
+            sizeFactor = 5;
+            rotation = true;
         }
     }
 

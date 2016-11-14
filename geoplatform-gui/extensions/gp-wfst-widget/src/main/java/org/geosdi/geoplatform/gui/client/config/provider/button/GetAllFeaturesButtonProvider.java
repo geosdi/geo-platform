@@ -40,7 +40,7 @@ import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
-import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
+import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetConstants;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.GetAllFeaturesEvent;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
@@ -55,15 +55,17 @@ public class GetAllFeaturesButtonProvider implements Provider<Button> {
 
     private GPEventBus bus;
     private final GetAllFeaturesEvent getAllFeaturesEvent = new GetAllFeaturesEvent();
+    private WFSTWidgetConstants wfstWidgetConstants;
 
     @Inject
-    public GetAllFeaturesButtonProvider(GPEventBus theBus) {
+    public GetAllFeaturesButtonProvider(GPEventBus theBus,WFSTWidgetConstants wfstWidgetConstants) {
         this.bus = theBus;
+        this.wfstWidgetConstants = wfstWidgetConstants;
     }
 
     @Override
     public Button get() {
-        return new Button(ButtonsConstants.INSTANCE.searchText(),
+        return new Button(wfstWidgetConstants.getAllFeatures(),
                 AbstractImagePrototype.create(BasicWidgetResources.ICONS.search()),
                 new SelectionListener<ButtonEvent>() {
 

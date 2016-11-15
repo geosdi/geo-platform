@@ -74,9 +74,8 @@ public abstract class AbstractMassiveImplementorStoreTest {
      */
     protected Long executePrimitiveTask(int numbers, PrimitiveTaskType taskType) throws Exception {
         long time = 0;
-        int numThreads = defineNumThreads();
-        ExecutorService executor = Executors.newFixedThreadPool(numThreads, PrimitiveImplementorThreadFactory);
-        Collection<Callable<Long>> tasks = this.createPrimitiveTask(40, PrimitiveTaskType.INTEGER);
+        ExecutorService executor = Executors.newFixedThreadPool(numbers, PrimitiveImplementorThreadFactory);
+        Collection<Callable<Long>> tasks = this.createPrimitiveTask(40, taskType);
         List<Future<Long>> results = executor.invokeAll(tasks);
         executor.shutdown();
         boolean flag = executor.awaitTermination(5, TimeUnit.SECONDS);

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-  
+
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>geoplatform-dependencies</artifactId>
@@ -14,7 +15,7 @@
     <packaging>pom</packaging>
 
     <name>Geo-Platform :: == Spring Dependencies Module</name>
-    
+
     <repositories>
         <!-- Spring -->
         <repository>
@@ -28,7 +29,7 @@
             <url>http://repo.spring.io/snapshot</url>
         </repository>
     </repositories>
-    
+
     <dependencyManagement>
         <dependencies>
             <!-- =========================================================== -->
@@ -89,19 +90,19 @@
                 <artifactId>spring-orm</artifactId>
                 <version>${spring-version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-jms</artifactId>
                 <version>${spring-version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>javax.inject</groupId>
                 <artifactId>javax.inject</artifactId>
                 <version>1</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-web</artifactId>
@@ -126,7 +127,7 @@
             </dependency>
 
             <!-- =========================================================== -->
-            <!-- SPRING SECURITY -->
+            <!-- ======================== SPRING SECURITY ================== -->
             <!-- =========================================================== -->
             <dependency>
                 <groupId>org.springframework.security</groupId>
@@ -143,13 +144,24 @@
                 <artifactId>spring-security-acl</artifactId>
                 <version>${spring-security-version}</version>
             </dependency>
+
+            <!-- =========================================================== -->
+            <!-- ======================= SPRING BATCH ====================== -->
+            <!-- =========================================================== -->
+            <dependency>
+                <groupId>org.springframework.batch</groupId>
+                <artifactId>spring-batch-core</artifactId>
+                <version>${spring-batch.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
-    
+
     <properties>
         <spring-version>4.3.4.RELEASE</spring-version>
         <spring-support>2.0.8</spring-support>
         <spring-security-version>4.2.0.RELEASE</spring-security-version>
+        <spring-batch.version>3.0.7.RELEASE</spring-batch.version>
     </properties>
 
 </project>

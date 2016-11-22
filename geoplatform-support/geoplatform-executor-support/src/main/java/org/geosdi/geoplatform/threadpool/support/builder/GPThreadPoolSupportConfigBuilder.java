@@ -1,4 +1,4 @@
-package org.geosdi.geoplatform.experimental.el.threadpool.builder;
+package org.geosdi.geoplatform.threadpool.support.builder;
 
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
@@ -7,18 +7,18 @@ import java.util.concurrent.TimeUnit;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPElasticSearchThreadPoolConfigBuilder extends GPDefaultThreadPoolConfigBuilder {
+public class GPThreadPoolSupportConfigBuilder extends GPDefaultThreadPoolConfigBuilder {
 
-    private GPElasticSearchThreadPoolConfigBuilder() {
+    private GPThreadPoolSupportConfigBuilder() {
         super(defaultThreadNamePrefix(), defaultCorePoolSize(), defaultMaxPoolSize(), defaultQueueCapacity(),
                 defaultQueue(), defaultKeepAlive(), defaultThreadFactory(), defaultIsDaemon(), defaultPriority());
     }
 
     /**
-     * @return {@link GPElasticSearchThreadPoolConfigBuilder}
+     * @return {@link GPThreadPoolSupportConfigBuilder}
      */
     public static <ConfigBuilder extends GPThreadPoolConfigBuilder> ConfigBuilder threadPoolConfigBuilder() {
-        return (ConfigBuilder) new GPElasticSearchThreadPoolConfigBuilder();
+        return (ConfigBuilder) new GPThreadPoolSupportConfigBuilder();
     }
 
     /**

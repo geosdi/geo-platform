@@ -1,4 +1,4 @@
-package org.geosdi.geoplatform.experimental.el.threadpool.factory;
+package org.geosdi.geoplatform.threadpool.support.factory;
 
 import java.util.concurrent.ThreadFactory;
 

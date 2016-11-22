@@ -1,4 +1,4 @@
-package org.geosdi.geoplatform.experimental.el.threadpool.factory;
+package org.geosdi.geoplatform.threadpool.support.factory;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -9,7 +9,7 @@ import static java.lang.Thread.MAX_PRIORITY;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPDefaultThreadFactory implements GPElasticSearchThreadFactory {
+public class GPDefaultThreadFactory implements GPThreadFactorySupport {
 
     private final AtomicInteger threadID = new AtomicInteger(0);
     private final String threadNamePrefix;

@@ -14,7 +14,7 @@ import java.util.concurrent.Executor;
 class GPElastichSearchExecutorConfig {
 
     @Bean
-    public static <E extends Executor> E elasticSearchExecutor() {
+    public static Executor elasticSearchExecutor() {
         return new GPElasticSearchThreadPoolExecutorFinder().findExecutor();
     }
 }

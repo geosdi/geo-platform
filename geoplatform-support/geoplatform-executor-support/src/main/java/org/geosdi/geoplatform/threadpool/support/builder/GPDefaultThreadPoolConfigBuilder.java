@@ -1,8 +1,8 @@
-package org.geosdi.geoplatform.experimental.el.threadpool.builder;
+package org.geosdi.geoplatform.threadpool.support.builder;
 
 import net.jcip.annotations.Immutable;
-import org.geosdi.geoplatform.experimental.el.threadpool.factory.GPDecoratorThreadFactory;
-import org.geosdi.geoplatform.experimental.el.threadpool.factory.GPDefaultThreadFactory;
+import org.geosdi.geoplatform.threadpool.support.factory.GPDecoratorThreadFactory;
+import org.geosdi.geoplatform.threadpool.support.factory.GPDefaultThreadFactory;
 
 import java.util.Queue;
 import java.util.concurrent.*;
@@ -198,7 +198,7 @@ abstract class GPDefaultThreadPoolConfigBuilder implements GPThreadPoolConfigBui
         }
 
         /**
-         * <p>Returns Keep Alive in {@link java.util.concurrent.TimeUnit#SECONDS}</p>
+         * <p>Returns Keep Alive in {@link TimeUnit#SECONDS}</p>
          *
          * @return {@link Long}
          */

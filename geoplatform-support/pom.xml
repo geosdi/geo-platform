@@ -33,6 +33,7 @@
         <module>geoplatform-primitive-type</module>
         <module>geoplatform-c3p0-support</module>
         <module>geoplatform-hibernate-validator-support</module>
+        <module>geoplatform-executor-support</module>
     </modules>
 
 </project>

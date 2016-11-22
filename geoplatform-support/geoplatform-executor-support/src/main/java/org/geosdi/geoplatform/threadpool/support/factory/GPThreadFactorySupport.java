@@ -1,4 +1,4 @@
-package org.geosdi.geoplatform.experimental.el.threadpool.factory;
+package org.geosdi.geoplatform.threadpool.support.factory;
 
 import java.util.concurrent.ThreadFactory;
 
@@ -6,7 +6,7 @@ import java.util.concurrent.ThreadFactory;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPElasticSearchThreadFactory extends ThreadFactory {
+public interface GPThreadFactorySupport extends ThreadFactory {
 
     /**
      * @return {@link String}

@@ -1,19 +1,19 @@
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
         <groupId>org.geosdi</groupId>
-        <artifactId>geoplatform-elastic-search</artifactId>
+        <artifactId>geoplatform-support</artifactId>
         <version>1.8-SNAPSHOT</version>
     </parent>
 
     <groupId>org.geosdi</groupId>
-    <artifactId>geoplatform-elastic-search-api</artifactId>
+    <artifactId>geoplatform-executor-support</artifactId>
     <version>1.8-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>Geo-Platform :: == ElasticSearch Api Module</name>
+    <name>Geo-Platform :: == Executor Support</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -29,35 +29,33 @@
             <artifactId>spring-core</artifactId>
         </dependency>
 
-        <!-- =========================================================== -->
-        <!-- =============== GEOPLATFORM EXECUTOR SUPPORT ============== -->
-        <!-- =========================================================== -->
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-executor-support</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <!-- =========================================================== -->
-        <!-- =============== GEOPLATFORM JACKSON SUPPORT =============== -->
-        <!-- =========================================================== -->
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-jackson-support</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>net.jcip</groupId>
             <artifactId>jcip-annotations</artifactId>
             <version>1.0</version>
         </dependency>
 
+        <!-- logging dependencies, delegate all to slf4j and use logback -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>log4j-over-slf4j</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
+
+        <!-- =========================================================== -->
+        <!-- ============================ TEST ========================= -->
+        <!-- =========================================================== -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -73,5 +71,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

@@ -1,7 +1,7 @@
 package org.geosdi.geoplatform.experimental.el.threadpool.spi;
 
-import org.geosdi.geoplatform.experimental.el.threadpool.builder.GPElasticSearchThreadPoolConfigBuilder;
-import org.geosdi.geoplatform.experimental.el.threadpool.builder.GPThreadPoolConfigBuilder;
+import org.geosdi.geoplatform.threadpool.support.builder.GPThreadPoolConfigBuilder;
+import org.geosdi.geoplatform.threadpool.support.builder.GPThreadPoolSupportConfigBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,7 +23,7 @@ public class BaseTestThreadPoolSPIExecutor implements GPThreadPoolSPIExecutor {
      */
     @Override
     public ExecutorService createExecutor() {
-        GPThreadPoolConfigBuilder.GPThreadPoolConfig threadPoolConfig = GPElasticSearchThreadPoolConfigBuilder
+        GPThreadPoolConfigBuilder.GPThreadPoolConfig threadPoolConfig = GPThreadPoolSupportConfigBuilder
                 .threadPoolConfigBuilder().withThreadNamePrefix("SpringTestExecutor - ")
                 .withQueueCapacity(100).build();
         logger.trace("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@{} is building Executor with Config : {}\n",

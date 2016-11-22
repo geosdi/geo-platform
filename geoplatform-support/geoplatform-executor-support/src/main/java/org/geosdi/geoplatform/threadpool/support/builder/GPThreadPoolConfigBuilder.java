@@ -1,4 +1,4 @@
-package org.geosdi.geoplatform.experimental.el.threadpool.builder;
+package org.geosdi.geoplatform.threadpool.support.builder;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ThreadFactory;
@@ -96,7 +96,7 @@ public interface GPThreadPoolConfigBuilder {
         Integer getQueueCapacity();
 
         /**
-         * <p>Returns Keep Alive in {@link java.util.concurrent.TimeUnit#SECONDS}</p>
+         * <p>Returns Keep Alive in {@link TimeUnit#SECONDS}</p>
          *
          * @return {@link Long}
          */

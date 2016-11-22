@@ -1,4 +1,4 @@
-package org.geosdi.geoplatform.experimental.el.threadpool;
+package org.geosdi.geoplatform.threadpool;
 
 import org.geosdi.geoplatform.threadpool.support.builder.GPThreadPoolConfigBuilder;
 import org.geosdi.geoplatform.threadpool.support.builder.GPThreadPoolSupportConfigBuilder;
@@ -14,16 +14,16 @@ import java.util.concurrent.*;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPThreadPoolConfigBuilderTest {
+public class GPThreadPoolSupportConfigBuilderTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(GPThreadPoolConfigBuilderTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(GPThreadPoolSupportConfigBuilderTest.class);
 
     @Test
     public void createThreadPoolWithQueueCapacityConfigTest() throws Exception {
         GPThreadPoolConfigBuilder.GPThreadPoolConfig threadPoolConfig = GPThreadPoolSupportConfigBuilder
-                .threadPoolConfigBuilder().withQueueCapacity(30).build();
+                .threadPoolConfigBuilder().withQueueCapacity(60).build();
         Assert.assertTrue(threadPoolConfig.getQueue() instanceof LinkedBlockingDeque);
-        Assert.assertEquals(30, ((BlockingDeque) threadPoolConfig.getQueue()).remainingCapacity());
+        Assert.assertEquals(60, ((BlockingDeque) threadPoolConfig.getQueue()).remainingCapacity());
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@THREAD_POOL_CONFIG : {}\n", threadPoolConfig);
     }
 
@@ -81,10 +81,5 @@ public class GPThreadPoolConfigBuilderTest {
         Assert.assertTrue(threadPoolConfig.isDaemon() == Boolean.TRUE);
         Assert.assertTrue(threadPoolConfig.getPriority() == Thread.MAX_PRIORITY);
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@THREAD_POOL_CONFIG : {}\n", threadPoolConfig);
-    }
-
-    @Test
-    public void simpleTest() {
-        logger.info("###############################{}", TimeUnit.SECONDS.convert(30000l, TimeUnit.MILLISECONDS));
     }
 }

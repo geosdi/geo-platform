@@ -14,12 +14,12 @@ import java.util.concurrent.ExecutorService;
 public class GPElasticSearchThreadPoolExecutorFinder implements GPThreadPoolExecutorFinder {
 
     /**
-     * @return {@link E}
+     * @return {@link ExecutorService}
      */
     @Override
-    public <E extends ExecutorService> E findExecutor() {
+    public ExecutorService findExecutor() {
         Iterator<GPThreadPoolSPIExecutor> it = ServiceLoader.load(GPThreadPoolSPIExecutor.class).iterator();
         GPThreadPoolSPIExecutor threadPoolSPIExecutor = (it.hasNext() ? it.next() : new BaseThreadPoolSPIExecutor());
-        return (E) threadPoolSPIExecutor.createExecutor();
+        return threadPoolSPIExecutor.createExecutor();
     }
 }

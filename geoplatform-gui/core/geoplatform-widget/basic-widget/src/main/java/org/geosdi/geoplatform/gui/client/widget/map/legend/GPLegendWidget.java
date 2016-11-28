@@ -93,7 +93,7 @@ public class GPLegendWidget {
                 dataSource = layerBean.getDataSource().replaceAll("/wfs", "/wms");
             }
             StringBuilder imageURL = new StringBuilder();
-            imageURL.append(dataSource).append(GET_LEGEND_REQUEST).append(layerBean.getName())
+            imageURL.append(dataSource).append(!dataSource.contains("?") ? GET_LEGEND_REQUEST : GET_LEGEND_REQUEST.replaceAll("\\?","&")).append(layerBean.getName())
                     .append("&scale=").append(
                             GPApplicationMap.getInstance().getApplicationMap().getMap().getScale()).
                     append("&service=WMS");

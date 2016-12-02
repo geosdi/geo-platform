@@ -41,7 +41,7 @@ abstract class GPDefaultThreadPoolConfigBuilder implements GPThreadPoolConfigBui
      * @return {@link String}
      */
     protected static String defaultThreadNamePrefix() {
-        return "GPElasticSearchTaskExecutor - ";
+        return "GPTaskExecutorSupport - ";
     }
 
     /**

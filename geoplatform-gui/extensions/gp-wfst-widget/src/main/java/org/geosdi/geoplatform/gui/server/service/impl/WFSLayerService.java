@@ -76,11 +76,11 @@ public class WFSLayerService implements IWFSLayerService {
     @Override
     public FeatureCollectionDTO getAllFeature(String serverUrl, String typeName, int maxFeatures)
             throws GeoPlatformException {
-
+        logger.info("#####################################EXECUTING : getAllFeature");
         try {
             return geoPlatformWFSClient.getAllFeatureDirect(serverUrl, typeName, maxFeatures);
         } catch (Exception ex) {
-            logger.error("\n\n@@@@@@@@@@@@@@@@@@@ WFSLayerService#getAllFeature " + "Error {} @@@@@@@@@@@@@",
+            logger.warn("\n\n@@@@@@@@@@@@@@@@@@@ WFSLayerService#getAllFeature " + "Error {} @@@@@@@@@@@@@",
                     ex.getMessage());
             throw new GeoPlatformException(ex.getMessage());
         }
@@ -93,7 +93,7 @@ public class WFSLayerService implements IWFSLayerService {
         try {
             return this.geoPlatformWFSClient.transactionUpdate(serverURL, typeName, fid, attributes);
         } catch (Exception ex) {
-            logger.error("\n\n@@@@ WFSLayerService Transaction Update Error {} " + "@@@@@@@@@@@@@", ex.getMessage());
+            logger.warn("\n\n@@@@ WFSLayerService Transaction Update Error {} " + "@@@@@@@@@@@@@", ex.getMessage());
             throw new GeoPlatformException(ex.getMessage());
         }
     }
@@ -104,7 +104,7 @@ public class WFSLayerService implements IWFSLayerService {
         try {
             return this.geoPlatformWFSClient.transactionDelete(serverURL, typeName, fid);
         } catch (Exception ex) {
-            logger.error("\n\n@@@@ WFSLayerService Transaction Delete Error {} " + "@@@@@@@@@@@@@", ex.getMessage());
+            logger.warn("\n\n@@@@ WFSLayerService Transaction Delete Error {} " + "@@@@@@@@@@@@@", ex.getMessage());
             throw new GeoPlatformException(ex.getMessage());
         }
     }
@@ -116,7 +116,7 @@ public class WFSLayerService implements IWFSLayerService {
         try {
             return this.geoPlatformWFSClient.transactionInsert(serverURL, typeName, targetNamespace, attributes);
         } catch (Exception ex) {
-            logger.error("\n\n@@@@ WFSLayerService Transaction Insert Error {} " + "@@@@@@@@@@@@@", ex.getMessage());
+            logger.warn("\n\n@@@@ WFSLayerService Transaction Insert Error {} " + "@@@@@@@@@@@@@", ex.getMessage());
             throw new GeoPlatformException(ex.getMessage());
         }
     }
@@ -124,11 +124,12 @@ public class WFSLayerService implements IWFSLayerService {
     @Override
     public FeatureCollectionDTO getFeaturesByQuery(String serverUrl, String typeName, int maxFeatures,
             QueryDTO queryDTO) throws GeoPlatformException {
-
+        logger.info("#####################################EXECUTING : getFeaturesByQuery");
         try {
             return this.geoPlatformWFSClient.getFeaturesByQueryDirect(serverUrl, typeName, maxFeatures, queryDTO);
         } catch (Exception ex) {
-            logger.error("\n\n@@@@ WFSLayerService Get Feature By Query Error {} " + "@@@@@@@@@@@@@", ex.getMessage());
+            ex.printStackTrace();
+            logger.info("\n\n@@@@ WFSLayerService Get Feature By Query Error {} " + "@@@@@@@@@@@@@", ex.getMessage());
             throw new GeoPlatformException(ex.getMessage());
         }
     }

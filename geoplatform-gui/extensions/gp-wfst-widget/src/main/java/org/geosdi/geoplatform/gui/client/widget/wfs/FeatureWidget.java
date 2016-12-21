@@ -212,9 +212,6 @@ public class FeatureWidget extends GeoPlatformWindow
             throw new IllegalArgumentException(
                     "Both SchemaDTO and GPLayerBean must not be null");
         }
-
-        this.selectionWidget.reconfigureAttributes();
-
         super.show();
     }
 
@@ -226,6 +223,7 @@ public class FeatureWidget extends GeoPlatformWindow
 
         this.statusBar.setBusy("Loading Layer as WFS");
 
+        this.selectionWidget.reconfigureAttributes();
         this.mapWidget.bindLayerSchema();
         this.attributesWidget.reconfigureEditorGrid();
         FeatureAttributesWindowBuilder.fireAttributesWindowEvent(

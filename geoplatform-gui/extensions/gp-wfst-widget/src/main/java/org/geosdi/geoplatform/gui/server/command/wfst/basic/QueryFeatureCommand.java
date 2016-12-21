@@ -63,7 +63,6 @@ public class QueryFeatureCommand implements GPCommand<QueryFeatureRequest, Query
 
     @Override
     public QueryFeatureResponse execute(QueryFeatureRequest request, HttpServletRequest httpServletRequest) {
-
         logger.debug("##################### Executing {} Command", this.
                 getClass().getSimpleName());
         FeatureCollectionDTO result = ((request.getQuery() != null) &&
@@ -72,10 +71,7 @@ public class QueryFeatureCommand implements GPCommand<QueryFeatureRequest, Query
                         request.getMaxFeatures(), request.getQuery()) :
                 this.wfsLayerService.getAllFeature(request.getServerUrl(), request.getTypeName(),
                         request.getMaxFeatures());
-
-        logger.debug("@@@@@@@@@@@@@@@@@@@@@FOUND : {} - Features\n", result.getFeatures().size());
-        logger.trace("#################### Found {} \n", result);
-
+        logger.debug("#################### Found {} \n", result);
         return new QueryFeatureResponse(result);
     }
 }

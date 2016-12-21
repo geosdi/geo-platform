@@ -38,4 +38,10 @@ public class GPPrimitiveParserTest {
         logger.info("#######################PARSE_DATE_TIME : {}\n",
                 primitiveParserHandlerManager.parseValue("2001-07-04T12:08:56.235-0700").getSimpleName());
     }
+
+    @Test
+    public void parseDateTimeAnotherTest() throws Exception {
+        logger.info("#######################PARSE_DATE_TIME : {}\n",
+                primitiveParserHandlerManager.parseValue("2016-08-28 14:36:15").getSimpleName());
+    }
 }

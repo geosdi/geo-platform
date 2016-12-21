@@ -88,7 +88,7 @@ public class GPGeocodingServiceTest extends GPBaseConfigTest {
 
     @Test
     public void gpTitoScaloPlaceIDTest() throws Exception {
-        GeocodingResult[] results = gpGeocodingService.newRequest().address("Tito").await();
+        GeocodingResult[] results = gpGeocodingService.newRequest().address("Tito Scalo").await();
         Assert.assertTrue((results != null) && (results.length > 0));
         logger.info("###########################Location : {} - Geometry : {} - PlaceID : {}\n",
                 results[0].formattedAddress, results[0].geometry, results[0].placeId);

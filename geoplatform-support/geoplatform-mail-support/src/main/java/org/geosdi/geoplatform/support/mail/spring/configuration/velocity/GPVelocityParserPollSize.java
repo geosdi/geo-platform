@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.support.mail.spring.configuration.velocity;
 
 import net.jcip.annotations.Immutable;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 /**
@@ -45,6 +46,7 @@ import org.springframework.stereotype.Component;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Immutable
+@Profile(value = "GPMailVelocitySupport")
 @Component(value = "gpVelocityParserPollSize")
 public class GPVelocityParserPollSize {
 
@@ -64,5 +66,4 @@ public class GPVelocityParserPollSize {
         return getClass().getSimpleName() + " {"
                 + "poolSize = " + getPoolSize() + '}';
     }
-
 }

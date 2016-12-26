@@ -20,5 +20,6 @@
     </logger>
     
     <logger name="org.geosdi.geoplatform.support.mail.spring.velocity.GPSpringVelocityEngineConfig" level="debug"/>
+    <logger name="org.geosdi.geoplatform.support.mail.spring.freemarker.GPSpringFreeMarkerConfig" level="debug"/>
 
 </configuration>

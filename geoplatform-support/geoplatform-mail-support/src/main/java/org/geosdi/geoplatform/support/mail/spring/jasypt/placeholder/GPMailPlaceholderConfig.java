@@ -35,14 +35,14 @@
  */
 package org.geosdi.geoplatform.support.mail.spring.jasypt.placeholder;
 
-import java.net.MalformedURLException;
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 import org.jasypt.spring31.properties.EncryptablePropertySourcesPlaceholderConfigurer;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.net.MalformedURLException;
 
 /**
  *
@@ -55,7 +55,6 @@ class GPMailPlaceholderConfig {
     private static final PlaceholderMailResourcesLoader placeholderResourcesLoader = new PlaceholderMailResourcesLoader();
 
     @Bean(name = "gpMailPropertyConfigurer")
-    @Required
     public static EncryptablePropertySourcesPlaceholderConfigurer gpMailPropertyConfigurer(@Qualifier(
             value = "gpMailPooledPBEStringEncryptor") PooledPBEStringEncryptor gpMailPooledPBEStringEncryptor,
             @Value("#{systemProperties['GP_DATA_DIR']}") String gpConfigDataDir,

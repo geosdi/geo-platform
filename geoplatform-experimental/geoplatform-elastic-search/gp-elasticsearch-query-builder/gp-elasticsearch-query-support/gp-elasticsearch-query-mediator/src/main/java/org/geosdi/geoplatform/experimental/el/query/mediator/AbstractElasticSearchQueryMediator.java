@@ -19,7 +19,7 @@ public abstract class AbstractElasticSearchQueryMediator implements GPElasticSea
 
     /**
      * @param queryColleagueKey
-     * @return {@link GPElasticSearchQueryColleague}
+     * @return {@link org.geosdi.geoplatform.experimental.el.query.mediator.colleague.GPElasticSearchQueryColleague}
      * @throws Exception
      */
     @Override
@@ -40,7 +40,7 @@ public abstract class AbstractElasticSearchQueryMediator implements GPElasticSea
     }
 
     /**
-     * @return {@link ImmutableMap<org.geosdi.geoplatform.experimental.el.index.GPBaseIndexCreator.GPIndexSettings, GPElasticSearchQueryColleague>}
+     * @return {@link ImmutableMap<org.geosdi.geoplatform.experimental.el.index.GPBaseIndexCreator.GPIndexSettings, org.geosdi.geoplatform.experimental.el.query.mediator.colleague.GPElasticSearchQueryColleague>}
      */
     @Override
     public ImmutableMap<GPBaseIndexCreator.GPIndexSettings, IGPElasticSearchQueryColleagueDecorator> getAllQueryColleagues() {

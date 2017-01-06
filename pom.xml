@@ -1179,7 +1179,7 @@
                 <plugin>
                     <groupId>com.mycila</groupId>
                     <artifactId>license-maven-plugin</artifactId>
-                    <version>2.11</version>
+                    <version>3.0</version>
                     <configuration>
                         <header>etc/header.txt</header>
                         <aggregate>true</aggregate>
@@ -1328,9 +1328,8 @@
                     <skipPoms>false</skipPoms>
                 </configuration>
             </plugin>
-
         </plugins>
-
+        
         <extensions>
             <extension>
                 <groupId>org.apache.maven.wagon</groupId>

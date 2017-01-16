@@ -106,4 +106,13 @@ public final class GPAccountLogged {
         return this.accountDetail.getUsername();
     }
 
+    /**
+     *
+     * @return email
+     */
+    public String getEmail() {
+        assert (accountDetail != null) : "accountDetail must not be null.";
+        return this.accountDetail.getEmail();
+    }
+
 }

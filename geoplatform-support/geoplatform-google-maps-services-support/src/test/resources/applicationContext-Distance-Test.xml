@@ -15,6 +15,7 @@
                                           org.geosdi.geoplatform.support.google.spring.placeholder,
                                           org.geosdi.geoplatform.support.google.spring.configuration,
                                           org.geosdi.geoplatform.support.google.spring.services.context,
-                                          org.geosdi.geoplatform.support.google.spring.services.distance"/>
+                                          org.geosdi.geoplatform.support.google.spring.services.distance,
+                                          org.geosdi.geoplatform.support.google.spring.services.geocoding"/>
 
 </beans>

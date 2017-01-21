@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.support.google.services;
 
 import com.google.maps.model.*;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
-import org.geosdi.geoplatform.support.google.spring.services.distance.*;
+import org.geosdi.geoplatform.support.google.spring.services.distance.GPDistanceMatrixService;
 import org.geosdi.geoplatform.support.google.spring.services.geocoding.GPGeocodingService;
 import org.junit.Assert;
 import org.junit.Before;
@@ -142,6 +142,22 @@ public class GPDistanceMatrixServiceTest extends GPBaseConfigTest {
         logger.info("###########################Location : {} - Geometry : {} - PlaceID : {}\n",
                 results[0].formattedAddress, results[0].geometry, results[0].placeId);
         GeocodingResult[] resultsParaguai = gpGeocodingService.newRequest().address("Paraguai").await();
+        Assert.assertTrue((resultsParaguai != null) && (resultsParaguai.length > 0));
+        logger.info("###########################Location : {} - Geometry : {} - PlaceID : {}\n",
+                resultsParaguai[0].formattedAddress, resultsParaguai[0].geometry, resultsParaguai[0].placeId);
+        logger.info("{}", this.gpDistanceMatrixService
+                .distance(results[0].geometry.location.lat, results[0].geometry.location.lng,
+                        resultsParaguai[0].geometry.location.lat, resultsParaguai[0].geometry.location.lng,
+                        K).intValue());
+    }
+
+    @Test
+    public void titoRomaDistanceDirectTest() throws Exception {
+        GeocodingResult[] results = gpGeocodingService.newRequest().address("Tito Potenza").await();
+        Assert.assertTrue((results != null) && (results.length > 0));
+        logger.info("###########################Location : {} - Geometry : {} - PlaceID : {}\n",
+                results[0].formattedAddress, results[0].geometry, results[0].placeId);
+        GeocodingResult[] resultsParaguai = gpGeocodingService.newRequest().address("Roma").await();
         Assert.assertTrue((resultsParaguai != null) && (resultsParaguai.length > 0));
         logger.info("###########################Location : {} - Geometry : {} - PlaceID : {}\n",
                 resultsParaguai[0].formattedAddress, resultsParaguai[0].geometry, resultsParaguai[0].placeId);

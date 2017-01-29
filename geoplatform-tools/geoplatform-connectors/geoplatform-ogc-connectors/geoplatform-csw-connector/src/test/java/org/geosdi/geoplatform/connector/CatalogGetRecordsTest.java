@@ -35,14 +35,6 @@
  */
 package org.geosdi.geoplatform.connector;
 
-import java.math.BigInteger;
-import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.List;
-import javax.annotation.Resource;
-import javax.xml.bind.JAXBElement;
 import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequest;
 import org.geosdi.geoplatform.connector.server.security.BasicPreemptiveSecurityConnector;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
@@ -59,6 +51,15 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import javax.annotation.Resource;
+import javax.xml.bind.JAXBElement;
+import java.math.BigInteger;
+import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.List;
 
 /**
  *
@@ -111,7 +112,7 @@ public class CatalogGetRecordsTest {
 
         List<JAXBElement<? extends AbstractRecordType>> metadata = result.getAbstractRecord();
         if (!metadata.isEmpty()) {
-            logger.info("FIRST FULL METADATA @@@@@@@@@@@@@@@@@@@@@ {}",
+            logger.info("FIRST FULL METADATA @@@@@@@@@@@@@@@@@@@@@ {}",
                     (SummaryRecordType) (metadata.get(0).getValue()));
         }
     }
@@ -223,9 +224,41 @@ public class CatalogGetRecordsTest {
         List<JAXBElement<? extends AbstractRecordType>> metadata = result.getAbstractRecord();
 
         if (!metadata.isEmpty()) {
-            logger.info("FIRST SECURE METADATA @@@@@@@@@@@@@@@@@@@@@ {}",
+            logger.info("FIRST SECURE METADATA @@@@@@@@@@@@@@@@@@@@@ {}",
                     (RecordType) (metadata.get(0).getValue()));
         }
     }
 
+    @Test
+    public void testGetRecordsRNDTWithConnector() throws Exception {
+        GPCatalogConnectorStore rndtServerConnector = GPCSWConnectorBuilder
+                .newConnector()
+                .withServerUrl(new URL("http://www.rndt.gov.it/RNDT/CSW"))
+                .build();
+
+        CatalogGetRecordsRequest<GetRecordsResponseType> request = rndtServerConnector.createGetRecordsRequest();
+        request.setTypeName(TypeName.RECORD_V202);
+        request.setOutputSchema(OutputSchema.CSW_V202);
+        request.setElementSetName(ElementSetType.FULL.toString());
+        request.setResultType(ResultType.RESULTS.toString());
+        request.setStartPosition(BigInteger.ONE);
+        request.setMaxRecords(BigInteger.valueOf(25));
+
+        GetRecordsResponseType response = request.getResponse();
+
+        SearchResultsType result = response.getSearchResults();
+        logger.info("RECORD MATCHES @@@@@@@@@@@@@@@@@@@@@ {}",
+                result.getNumberOfRecordsMatched());
+        logger.info("RECORDS FOUND @@@@@@@@@@@@@@@@@@@@@@ {}",
+                result.getNumberOfRecordsReturned());
+        logger.info("NEXT RECORD @@@@@@@@@@@@@@@@@@@@@@ {}",
+                result.getNextRecord());
+
+        List<JAXBElement<? extends AbstractRecordType>> metadata = result.getAbstractRecord();
+
+        if (!metadata.isEmpty()) {
+            logger.info("FIRST SECURE METADATA @@@@@@@@@@@@@@@@@@@@@ {}",
+                    (RecordType) (metadata.get(0).getValue()));
+        }
+    }
 }

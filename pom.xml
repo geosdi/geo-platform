@@ -1018,7 +1018,7 @@
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava-gwt</artifactId>
-                <version>${guava-version}</version>
+                <version>${guava-gwt-version}</version>
             </dependency>
             
             <!-- =========================================================== -->
@@ -1504,7 +1504,8 @@
         
         <jasypt-version>1.9.2</jasypt-version>
         
-        <guava-version>20.0</guava-version>
+        <guava-gwt-version>19.0</guava-gwt-version>
+        <guava-version>21.0</guava-version>
         <guice-version>3.0</guice-version>
         
         <ehcache-version>2.6.3</ehcache-version>

@@ -11,38 +11,38 @@
     </appender>
 
     <logger name="org.apache.cxf" level="info" additivity="false">
-        <appender-ref ref="STDOUT" />
+        <appender-ref ref="STDOUT"/>
     </logger>
 
     <logger name="org.hibernate" level="info" additivity="false">
-        <appender-ref ref="STDOUT" />
+        <appender-ref ref="STDOUT"/>
     </logger>
 
     <logger name="org.springframework" level="info" additivity="false">
-        <appender-ref ref="STDOUT" />
+        <appender-ref ref="STDOUT"/>
     </logger>
-    
+
     <logger name="org.quartz" level="info" additivity="false">
-        <appender-ref ref="STDOUT" />
+        <appender-ref ref="STDOUT"/>
     </logger>
 
     <root>
-        <level value="info" />
-        <appender-ref ref="STDOUT" />
+        <level value="info"/>
+        <appender-ref ref="STDOUT"/>
     </root>
-    
+
     <logger name="org.geosdi.geoplatform.services.AclServiceImpl" level="info"/>
     <logger name="org.geosdi.geoplatform.services.delegate.CSWServiceDelegate" level="trace"/><!-- TODO info -->
     <logger name="org.geosdi.geoplatform.services.WMSServiceImpl" level="debug"/><!-- TODO info -->
-    
+
     <logger name="org.geosdi.geoplatform.jobs.TempAccountExpireJob" level="info"/>
     <logger name="org.geosdi.geoplatform.jobs.EmailTask" level="info"/><!-- TODO info -->
     <logger name="org.geosdi.geoplatform.jobs.EmailRegistrationJob" level="debug"/><!-- TODO info -->
     <logger name="org.geosdi.geoplatform.jobs.EmailModificationJob" level="debug"/><!-- TODO info -->
-    
+
     <logger name="org.geosdi.geoplatform.connector.server.request.v202.CatalogGetRecordsV202"
-            level="debug" /><!-- TODO info -->
-            
+            level="debug"/><!-- TODO info -->
+
     <logger name="org.geosdi.geoplatform.connector.server.request.v202.responsibility.TextSearchRequest"
             level="debug"/><!-- TODO info -->
     <logger name="org.geosdi.geoplatform.connector.server.request.v202.responsibility.AreaSearchRequest"
@@ -53,5 +53,12 @@
 
     <logger name="org.geosdi.geoplatform.services.GPTrackingServiceImpl" level="debug"/><!-- TODO info -->
     <logger name="org.geosdi.geoplatform.jdbc.template.spring" level="debug"/>
-    
+    <!-- #################################CSV_IMPORTER_SECTION ########################################-->
+    <logger name="org.geosdi.geoplatform.csv.importer.job.launcher.CSVLayerImporterJobLauncher"
+            level="debug"/>
+    <logger name="org.geosdi.geoplatform.csv.importer.job.runner.config.CSVLayerImporterJobRunner"
+            level="debug"/>
+    <logger name="org.geosdi.geoplatform.csv.importer.step.spatial.decorator.CSVBatchGeocoderDecoratorStrategy"
+            level="debug"/>
+
 </configuration>

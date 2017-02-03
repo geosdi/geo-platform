@@ -35,23 +35,16 @@
  */
 package org.geosdi.geoplatform.core.model;
 
-import java.io.Serializable;
-import java.util.Date;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Index;
+
+import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
@@ -86,7 +79,8 @@ public class GPProject implements Serializable {
     private Date creationDate = new Date(System.currentTimeMillis());
     //
     @Column
-    private int version = 1;
+    @Version
+    private int version;
     //
     @Column
     private boolean shared = false;

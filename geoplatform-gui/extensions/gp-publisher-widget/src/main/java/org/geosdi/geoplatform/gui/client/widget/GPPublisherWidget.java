@@ -125,7 +125,7 @@ public class GPPublisherWidget extends AbstractPublisherWidget {
 
                                             @Override
                                             public void onCommandSuccess(
-                                                    PublishLayerPreviewResponse response) {
+                                                    final PublishLayerPreviewResponse response) {
                                                 PublisherProgressBar.getInstance().show(
                                                         PublisherWidgetConstants.INSTANCE.
                                                                 EPSGTablePanel_processingDataProgressBarText());

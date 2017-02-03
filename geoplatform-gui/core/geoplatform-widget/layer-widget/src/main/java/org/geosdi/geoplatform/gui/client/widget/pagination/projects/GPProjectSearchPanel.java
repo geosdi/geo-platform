@@ -164,6 +164,11 @@ public class GPProjectSearchPanel extends GPListViewSearchPanel<GPClientProject>
                 LayerModuleConstants.INSTANCE.GPProjectSearchPanel_listViewPropertiesText());
         sb.append(": {numberOfElements} <B>{shared}</B></div>");
         sb.append("<div>{message}</div>");
+        sb.append("<div>");
+        sb.append(
+                LayerModuleConstants.INSTANCE.GPProjectSearchPanel_listViewVersionText());
+        sb.append(": {version}</div>");
+        sb.append("<div>{creationDate}</div>");
         sb.append("</div></tpl>");
         getListView().setTemplate(sb.toString());
         getListView().getSelectionModel().setSelectionMode(SelectionMode.SINGLE);

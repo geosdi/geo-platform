@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.gui.client.i18n;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.Constants;
-import com.google.gwt.i18n.client.Constants.DefaultStringValue;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -305,6 +304,9 @@ public interface LayerModuleConstants extends Constants {
 
     @DefaultStringValue("Properties")
     String GPProjectSearchPanel_listViewPropertiesText();
+
+    @DefaultStringValue("Version")
+    String GPProjectSearchPanel_listViewVersionText();
 
     @DefaultStringValue("Load on Tree")
     String GPProjectSearchPanel_selectButtonText();

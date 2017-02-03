@@ -35,9 +35,10 @@
  */
 package org.geosdi.geoplatform.gui.model.project;
 
-import java.util.List;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.global.security.IGPUserSimpleDetail;
+
+import java.util.List;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -87,5 +88,11 @@ public interface IGPClientProject {
      * @return the shared
      */
     boolean isShared();
+
+    /**
+     *
+     * @return the creationDate
+     */
+    String getCreationDate();
 
 }

@@ -37,6 +37,8 @@ package org.geosdi.geoplatform.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.Lists;
+
+import java.util.Date;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -62,6 +64,7 @@ public class ProjectDTO {
     private Boolean shared;
     private String description;
     private String imagePath;
+    private Date creationDate;
     //
     private Boolean defaultProject;
     private ShortAccountDTO owner;
@@ -89,6 +92,7 @@ public class ProjectDTO {
         this.shared = project.isShared();
         this.description = project.getDescription();
         this.imagePath = project.getImagePath();
+        this.creationDate = project.getCreationDate();
     }
 
     /**
@@ -221,6 +225,22 @@ public class ProjectDTO {
      */
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    /**
+     *
+     * @param creationDate
+     */
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
     }
 
     /**

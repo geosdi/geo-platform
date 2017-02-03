@@ -35,11 +35,13 @@
  */
 package org.geosdi.geoplatform.gui.client.model.projects;
 
-import org.geosdi.geoplatform.gui.model.project.IGPClientProject;
-import java.util.List;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.global.security.IGPUserSimpleDetail;
 import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
+import org.geosdi.geoplatform.gui.model.project.IGPClientProject;
+
+import java.text.SimpleDateFormat;
+import java.util.List;
 
 /**
  *
@@ -124,6 +126,22 @@ public class GPClientProject extends GeoPlatformBeanModel implements IGPClientPr
         Integer version = (Integer) super.get(
                 GPClientProjectKey.PROJECT_VERSION.toString());
         return (version != null) ? version.intValue() : 0;
+    }
+
+    /**
+     *
+     * @param creationDate
+     */
+    public void setCreationDate(String creationDate){
+        set(GPClientProjectKey.CREATION_DATE.toString(), creationDate);
+    }
+
+    /**
+     * @return the creationDate
+     */
+    @Override
+    public String getCreationDate() {
+        return super.get(GPClientProjectKey.CREATION_DATE.toString());
     }
 
     /**

@@ -57,6 +57,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.net.MalformedURLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -71,6 +72,8 @@ import java.util.List;
 @Component(value = "dtoLayerConverter")
 public class DTOLayerConverter {
 
+    private static SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
+    //
     private GeoServerRESTReader sharedRestReader;
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -300,7 +303,9 @@ public class DTOLayerConverter {
         GPClientProject clientProject = new GPClientProject();
         clientProject.setId(projectDTO.getId());
         clientProject.setName(projectDTO.getName());
+        clientProject.setVersion(projectDTO.getVersion());
         clientProject.setNumberOfElements(projectDTO.getNumberOfElements());
+        clientProject.setCreationDate(dateFormatter.format(projectDTO.getCreationDate()));
         if (projectDTO.isDefault() != null) {
             clientProject.setDefaultProject(projectDTO.isDefault());
         }

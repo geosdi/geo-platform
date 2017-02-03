@@ -44,7 +44,8 @@ public enum GPClientProjectKey {
     PROJECT_NAME("name"), PROJECT_IMAGE("image"),
     PROJECT_ELEMENTS("numberOfElements"), DEFAULT_PROJECT("defaultProject"),
     PROJECT_VERSION("version"), PROJECT_SHARED("shared"),
-    DEFAULT_PROJECT_KEY_MESSAGE("message");
+    DEFAULT_PROJECT_KEY_MESSAGE("message"),
+    CREATION_DATE("creationDate");
     //
     private String value;
 

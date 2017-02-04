@@ -119,6 +119,9 @@ public interface LayerModuleConstants extends Constants {
     @DefaultStringValue("GP Folder Properties Widget")
     String FolderPropertiesWidget_headingText();
 
+    @DefaultStringValue("Project Properties Widget")
+    String ProjectPropertiesWidget_headingText();
+
     /**
      * start LayerTimeFilterWidget
      */
@@ -319,6 +322,15 @@ public interface LayerModuleConstants extends Constants {
 
     @DefaultStringValue("It is not possible to load the selected project without first saving the layer tree operations")
     String GPProjectSearchPanel_loadProjectVerifySaveOperationsMessageText();
+
+    /**
+     * start ProjectProperties
+     */
+    @DefaultStringValue("Creation Date")
+    String GPProjectSearchPanel_listViewCreationDateText();
+
+    @DefaultStringValue("Message")
+    String GPProjectSearchPanel_listViewMessageText();
 
     /**
      * start EnumProjectMessage

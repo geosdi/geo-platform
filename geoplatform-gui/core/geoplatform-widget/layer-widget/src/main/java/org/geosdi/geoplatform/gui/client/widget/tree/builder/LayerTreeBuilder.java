@@ -39,12 +39,6 @@ import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.data.ModelData;
 import com.google.common.collect.Lists;
 import com.google.gwt.core.client.GWT;
-import java.util.Iterator;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.inject.Inject;
-import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.command.layer.basic.LoadDefaultProjectElementsRequest;
 import org.geosdi.geoplatform.gui.client.command.layer.basic.LoadDefaultProjectElementsResponse;
 import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
@@ -80,6 +74,13 @@ import org.geosdi.geoplatform.gui.puregwt.featureinfo.event.CleanFeatureInfoCach
 import org.geosdi.geoplatform.gui.shared.util.GPSharedUtils;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
+import java.util.Iterator;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * <p>
@@ -161,6 +162,11 @@ public class LayerTreeBuilder implements GPCompositeBuilder {
     protected final void onBuildSuccess(GPClientProject clientProject) {
         Registry.register(UserSessionEnum.CURRENT_PROJECT_ON_TREE.name(), clientProject);
         root.setLabel(clientProject.getName());
+        root.setCreationDate(clientProject.getCreationDate());
+        root.setProjectElements(clientProject.getNumberOfElements());
+        root.setProjectMessage(clientProject.getDefaultProjectLabel());
+        root.setProjectName(clientProject.getName());
+        root.setProjectShared(clientProject.isShared());
         root.modelConverter(clientProject.getRootFolders());
         store.add(root, Boolean.TRUE);
         visitorDisplay.enableCheckedComponent(root);

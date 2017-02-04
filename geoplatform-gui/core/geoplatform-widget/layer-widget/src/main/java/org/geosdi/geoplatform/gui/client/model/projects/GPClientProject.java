@@ -40,7 +40,6 @@ import org.geosdi.geoplatform.gui.global.security.IGPUserSimpleDetail;
 import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 import org.geosdi.geoplatform.gui.model.project.IGPClientProject;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**

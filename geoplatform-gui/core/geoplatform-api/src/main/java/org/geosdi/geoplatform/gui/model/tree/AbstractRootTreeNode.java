@@ -55,5 +55,4 @@ public abstract class AbstractRootTreeNode extends GPBeanTreeModel {
     public GPTreeCompositeType getTreeCompositeType() {
         return GPTreeCompositeType.ROOT;
     }
-
 }

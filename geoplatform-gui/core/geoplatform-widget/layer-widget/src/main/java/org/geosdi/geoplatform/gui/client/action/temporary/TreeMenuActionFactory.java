@@ -39,23 +39,8 @@ import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.action.menu.MenuAction;
 import org.geosdi.geoplatform.gui.action.tree.menu.TreeMenuActionCreator;
 import org.geosdi.geoplatform.gui.action.tree.menu.TreeMenuActionRegistar;
-import org.geosdi.geoplatform.gui.client.action.menu.AddFolderMenuAction;
-import org.geosdi.geoplatform.gui.client.action.menu.CreateFolderViewportAction;
-import org.geosdi.geoplatform.gui.client.action.menu.CreateLayerViewportAction;
-import org.geosdi.geoplatform.gui.client.action.menu.DeleteElementsMenuAction;
-import org.geosdi.geoplatform.gui.client.action.menu.ShowFolderRenameAction;
-import org.geosdi.geoplatform.gui.client.action.menu.ShowLayerPropertiesAction;
-import org.geosdi.geoplatform.gui.client.action.menu.ZoomToLayerExtentAction;
-import org.geosdi.geoplatform.gui.client.action.menu.export.ExportoToCSV;
-import org.geosdi.geoplatform.gui.client.action.menu.export.ExportoToGML2;
-import org.geosdi.geoplatform.gui.client.action.menu.export.ExportoToGML3_1;
-import org.geosdi.geoplatform.gui.client.action.menu.export.ExportoToGML3_2;
-import org.geosdi.geoplatform.gui.client.action.menu.export.ExportoToGeoJSON;
-import org.geosdi.geoplatform.gui.client.action.menu.export.ExportoToGeoRSS;
-import org.geosdi.geoplatform.gui.client.action.menu.export.ExportoToKML;
-import org.geosdi.geoplatform.gui.client.action.menu.export.ExportoToPDF;
-import org.geosdi.geoplatform.gui.client.action.menu.export.ExportoToShpZip;
-import org.geosdi.geoplatform.gui.client.action.menu.export.ExportoToTIFF;
+import org.geosdi.geoplatform.gui.client.action.menu.*;
+import org.geosdi.geoplatform.gui.client.action.menu.export.*;
 import org.geosdi.geoplatform.gui.client.action.menu.legend.GetLegendGraphicsBox;
 import org.geosdi.geoplatform.gui.client.action.menu.time.AddModifyTimeFilterAction;
 import org.geosdi.geoplatform.gui.client.action.menu.time.RemoveTimeFilterAction;
@@ -107,6 +92,15 @@ public class TreeMenuActionFactory {
             @Override
             public MenuAction createAction(TreePanel treePanel) {
                 return LayerModuleInjector.MainInjector.getInstance().getShareProjectMenuAction();
+            }
+
+        });
+
+        registar.put("PROJECT_PROPERTIES", new TreeMenuActionCreator() {
+
+            @Override
+            public MenuAction createAction(TreePanel treePanel) {
+                return new ShowProjectPropertiesMenuAction(treePanel);
             }
 
         });

@@ -81,5 +81,4 @@ public interface LayerModuleInjector extends Ginjector {
     public PasteLayerAction getPasteLayerAction();
 
     public CopyLayerAction getCopyLayerAction();
-
 }

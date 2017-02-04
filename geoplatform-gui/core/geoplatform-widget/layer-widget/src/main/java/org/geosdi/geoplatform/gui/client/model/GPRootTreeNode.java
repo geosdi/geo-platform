@@ -37,21 +37,23 @@ package org.geosdi.geoplatform.gui.client.model;
 
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import java.util.List;
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
+import org.geosdi.geoplatform.gui.client.model.projects.GPClientProjectKey;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorPosition;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.model.tree.AbstractRootTreeNode;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.TreeStatusEnum;
 
+import java.util.List;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  *
  */
-public class GPRootTreeNode extends AbstractRootTreeNode {
+public class GPRootTreeNode extends AbstractRootTreeNode implements IGPRootTreeNode {
 
     private static final long serialVersionUID = 1765450539495169525L;
 
@@ -60,6 +62,106 @@ public class GPRootTreeNode extends AbstractRootTreeNode {
 
     public GPRootTreeNode(TreePanel<GPBeanTreeModel> theTree) {
         super.setLabel(LayerModuleConstants.INSTANCE.GPRootTreeNode_labelText());
+    }
+
+    /**
+     * @param projectName
+     */
+    @Override
+    public void setProjectName(String projectName) {
+        set(GPClientProjectKey.PROJECT_NAME.toString(), projectName);
+    }
+
+    /**
+     * @return
+     */
+    @Override
+    public String getProjectName() {
+        return super.get(GPClientProjectKey.PROJECT_NAME.toString());
+    }
+
+    /**
+     * @param projectElements
+     */
+    @Override
+    public void setProjectElements(int projectElements) {
+        set(GPClientProjectKey.PROJECT_ELEMENTS.toString(), projectElements);
+    }
+
+    /**
+     * @return
+     */
+    @Override
+    public int getProjectElements() {
+        Integer numberOfElements = (Integer) super.get(
+                GPClientProjectKey.PROJECT_ELEMENTS.toString());
+        return (numberOfElements != null) ? numberOfElements.intValue() : 0;
+    }
+
+    /**
+     * @param projectVersion
+     */
+    @Override
+    public void setProjectVersion(int projectVersion) {
+        set(GPClientProjectKey.PROJECT_VERSION.toString(), projectVersion);
+    }
+
+    /**
+     * @return
+     */
+    @Override
+    public int getProjectVersion() {
+        Integer version = (Integer) super.get(
+                GPClientProjectKey.PROJECT_VERSION.toString());
+        return (version != null) ? version.intValue() : 0;
+    }
+
+    /**
+     * @param projectMessage
+     */
+    @Override
+    public void setProjectMessage(String projectMessage) {
+        set(GPClientProjectKey.DEFAULT_PROJECT_KEY_MESSAGE.toString(), projectMessage);
+    }
+
+    /**
+     * @return
+     */
+    @Override
+    public String getProjectMessage() {
+        return super.get(GPClientProjectKey.DEFAULT_PROJECT_KEY_MESSAGE.toString());
+    }
+
+    /**
+     * @param creationDate
+     */
+    @Override
+    public void setCreationDate(String creationDate) {
+        set(GPClientProjectKey.CREATION_DATE.toString(), creationDate);
+    }
+
+    /**
+     * @return
+     */
+    @Override
+    public String getCreationDate() {
+        return super.get(GPClientProjectKey.CREATION_DATE.toString());
+    }
+
+    /**
+     * @param projectsShared
+     */
+    @Override
+    public void setProjectShared(boolean projectsShared) {
+        set(GPClientProjectKey.PROJECT_SHARED.toString(), projectsShared);
+    }
+
+    /**
+     * @return
+     */
+    @Override
+    public boolean isProjectsShared() {
+        return super.get(GPClientProjectKey.PROJECT_SHARED.toString());
     }
 
     /**
@@ -104,4 +206,8 @@ public class GPRootTreeNode extends AbstractRootTreeNode {
         return TreeStatusEnum.ROOT_SELECTED;
     }
 
+    @Override
+    public String toString() {
+        return "GPRootTreeNode{} " + super.toString();
+    }
 }

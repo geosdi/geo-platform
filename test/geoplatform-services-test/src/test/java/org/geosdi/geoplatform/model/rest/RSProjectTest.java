@@ -870,7 +870,7 @@ public class RSProjectTest extends BasicRestServiceTest {
                 + "@@@@@@@@@@@@@@@@@@", project);
 
         Assert.assertEquals(Boolean.TRUE, project.isShared());
-        Assert.assertEquals(4, project.getVersion());
+        Assert.assertEquals(2, project.getVersion());
 
         GPProject defaultProject = gpWSClient.getDefaultProject(idUserTest);
 

@@ -35,23 +35,25 @@
  */
 package org.geosdi.geoplatform.gui.client.model;
 
-import com.extjs.gxt.ui.client.GXT;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import java.util.List;
-import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorModelConverter;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
-import org.geosdi.geoplatform.gui.model.tree.IGPNode;
 import org.geosdi.geoplatform.gui.model.tree.TreeStatusEnum;
+
+import java.util.List;
+
+import static com.extjs.gxt.ui.client.GXT.IMAGES;
+import static com.google.gwt.user.client.ui.AbstractImagePrototype.create;
+import static org.geosdi.geoplatform.gui.client.LayerResources.ICONS;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  *
  */
-public class FolderTreeNode extends AbstractFolderTreeNode implements IGPNode {
+public class FolderTreeNode extends AbstractFolderTreeNode {
 
     private static final long serialVersionUID = -3687415822526940729L;
     //
@@ -79,6 +81,7 @@ public class FolderTreeNode extends AbstractFolderTreeNode implements IGPNode {
      *
      * @param layersClientInfo
      */
+    @Override
     public final void modelConverter(List<IGPFolderElements> layersClientInfo) {
         for (IGPFolderElements element : layersClientInfo) {
             element.accept(this.visitor);
@@ -92,10 +95,7 @@ public class FolderTreeNode extends AbstractFolderTreeNode implements IGPNode {
      */
     @Override
     public AbstractImagePrototype getIcon() {
-        if (this.isLoading()) {
-            return GXT.IMAGES.icon_wait();
-        }
-        return AbstractImagePrototype.create(LayerResources.ICONS.layerFolder());
+        return (isLoading() ? IMAGES.icon_wait() : create(ICONS.layerFolder()));
     }
 
     public boolean isLoading() {

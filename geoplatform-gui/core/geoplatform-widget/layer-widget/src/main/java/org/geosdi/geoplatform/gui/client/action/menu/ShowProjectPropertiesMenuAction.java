@@ -40,8 +40,8 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseSecureAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
-import org.geosdi.geoplatform.gui.client.model.IGPRootTreeNode;
 import org.geosdi.geoplatform.gui.client.widget.ShowProjectPropertiesWidget;
+import org.geosdi.geoplatform.gui.model.tree.IGPRootTreeNode;
 import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 
 /**

@@ -37,10 +37,10 @@ package org.geosdi.geoplatform.gui.client.widget.tab.binding;
 
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
-import org.geosdi.geoplatform.gui.client.model.IGPRootTreeNode;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProjectKey;
 import org.geosdi.geoplatform.gui.client.widget.binding.GeoPlatformBindingWidget;
 import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextField;
+import org.geosdi.geoplatform.gui.model.tree.IGPRootTreeNode;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group

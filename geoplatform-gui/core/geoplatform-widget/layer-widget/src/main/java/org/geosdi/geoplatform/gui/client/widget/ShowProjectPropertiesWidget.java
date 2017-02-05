@@ -44,8 +44,8 @@ import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
-import org.geosdi.geoplatform.gui.client.model.IGPRootTreeNode;
 import org.geosdi.geoplatform.gui.client.widget.tab.binding.GPProjectPropertiesBinding;
+import org.geosdi.geoplatform.gui.model.tree.IGPRootTreeNode;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group

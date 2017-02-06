@@ -53,7 +53,6 @@ public abstract class DrawEditorPointFeature extends DrawEditorFeatureControl {
     public DrawEditorPointFeature(Vector vector, boolean lazy,
             GeometryTypeBinder theGeometryBinder) {
         super(vector, lazy);
-
         this.wktGeometryBuilder = new WktPointGeometryBuilder(theGeometryBinder);
     }
 
@@ -61,5 +60,4 @@ public abstract class DrawEditorPointFeature extends DrawEditorFeatureControl {
     protected final PointHandler buildHandler() {
         return new PointHandler();
     }
-
 }

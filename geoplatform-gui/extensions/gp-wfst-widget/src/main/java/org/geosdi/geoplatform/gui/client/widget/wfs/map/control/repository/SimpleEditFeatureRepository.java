@@ -36,8 +36,9 @@
 package org.geosdi.geoplatform.gui.client.widget.wfs.map.control.repository;
 
 import com.google.common.collect.Maps;
-import java.util.Map;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.edit.WFSEditFeatureControl;
+
+import java.util.Map;
 
 /**
  *
@@ -49,8 +50,7 @@ public class SimpleEditFeatureRepository implements WFSEditFeatureRepository {
     private final Map<String, WFSEditFeatureControl> featureControRepo = Maps.newHashMap();
 
     @Override
-    public void bindWFSEditFeatureControl(
-            WFSEditFeatureControl editFeatureControl) {
+    public void bindWFSEditFeatureControl(WFSEditFeatureControl editFeatureControl) {
         String[] keys = editFeatureControl.getEditFeatureKeys();
         for (String key : keys) {
             featureControRepo.put(key, editFeatureControl);

@@ -68,5 +68,4 @@ public abstract class WFSAbstractMapMediator implements WFSMapMediator {
             colleague.resetColleague();
         }
     }
-
 }

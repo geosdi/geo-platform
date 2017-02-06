@@ -43,6 +43,7 @@ import org.geosdi.geoplatform.gui.client.model.binder.FeatureIdBinder;
 import org.geosdi.geoplatform.gui.client.model.binder.IFeatureIdBinder;
 import org.geosdi.geoplatform.gui.client.model.binder.ILayerSchemaBinder;
 import org.geosdi.geoplatform.gui.client.model.binder.LayerSchemaBinder;
+import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.WFSUndoRedoMediatorHandlerSupport;
 import org.geosdi.geoplatform.gui.client.widget.wfs.*;
 import org.geosdi.geoplatform.gui.client.widget.wfs.binding.grid.WFSFeatureGridBinding;
 import org.geosdi.geoplatform.gui.client.widget.wfs.builder.AttributeCustomFieldsMap;
@@ -92,6 +93,7 @@ public class FeatureInjectorModule extends AbstractGinModule {
                 Singleton.class);
         
         bind(FeatureAttributesWindowBuilder.class).asEagerSingleton();
+        bind(WFSUndoRedoMediatorHandlerSupport.class).asEagerSingleton();
         bind(WFSFeatureGridBinding.class).asEagerSingleton();
         
         requestStaticInjection(AttributeCustomFieldsMap.class);

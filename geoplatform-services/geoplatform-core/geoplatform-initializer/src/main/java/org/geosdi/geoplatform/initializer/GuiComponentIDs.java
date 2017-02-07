@@ -124,6 +124,12 @@ public class GuiComponentIDs {
     public static final String SAVE_TREE = "SAVE_TREE";
     public static final String PRINT_LAYERS = "PRINT_LAYERS";
     //
+    /**
+     * LAYER MENU
+     */
+    public static final String LAYER_BUILDER = "LAYER_BUILDER";
+    public static final String CSV_IMPORTER = "CSV_IMPORTER";
+    //
     public static final String EXPORT_PROJECT = "EXPORT_PROJECT";
     public static final String IMPORT_PROJECT = "IMPORT_PROJECT";
     public static final String PREVIEW_KML = "PREVIEW_KML";
@@ -206,6 +212,8 @@ public class GuiComponentIDs {
         all.add(OPEN_CATALOG_FINDER);
         all.add(EDIT_WSF);
         all.add(EXPORT);
+        all.add(LAYER_BUILDER);
+        all.add(CSV_IMPORTER);
         //
         LIST_ALL = Collections.<String>unmodifiableList(all);
         /**

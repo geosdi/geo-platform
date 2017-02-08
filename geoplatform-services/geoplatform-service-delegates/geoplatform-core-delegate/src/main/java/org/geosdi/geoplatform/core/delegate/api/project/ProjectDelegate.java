@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.core.delegate.api.project;
 
-import java.util.List;
 import org.geosdi.geoplatform.core.model.GPAccountProject;
 import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
@@ -44,6 +43,7 @@ import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.PutAccountsProjectRequest;
 import org.geosdi.geoplatform.request.RequestByAccountProjectIDs;
 import org.geosdi.geoplatform.request.SearchRequest;
+import org.geosdi.geoplatform.request.project.CloneProjectRequest;
 import org.geosdi.geoplatform.request.project.ImportProjectRequest;
 import org.geosdi.geoplatform.request.project.SaveProjectRequest;
 import org.geosdi.geoplatform.response.AccountProjectPropertiesDTO;
@@ -53,6 +53,8 @@ import org.geosdi.geoplatform.response.WSGetAccountProjectsResponse;
 import org.geosdi.geoplatform.services.core.api.resources.GPAccountProjectResource;
 import org.geosdi.geoplatform.services.core.api.resources.GPFolderProjectResource;
 import org.geosdi.geoplatform.services.core.api.resources.GPProjectResource;
+
+import java.util.List;
 
 /**
  *
@@ -72,6 +74,9 @@ public interface ProjectDelegate extends GPProjectResource,
 
     @Override
     Long insertProject(GPProject project) throws IllegalParameterFault;
+
+    @Override
+    Long cloneProject(CloneProjectRequest cloneProjectRequest) throws Exception;
 
     @Override
     Long updateProject(GPProject project)

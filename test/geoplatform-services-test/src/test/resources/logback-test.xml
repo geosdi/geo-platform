@@ -42,11 +42,13 @@
     <logger name="org.geosdi.geoplatform.services.ProjectServiceImpl" level="info"/>
     <logger name="org.geosdi.geoplatform.services.AccountServiceImpl" level="info"/>
     <logger name="org.geosdi.geoplatform.services.WMSServiceImpl" level="info"/>
-    <logger name="org.geosdi.geoplatform.services.delegate.CSWServiceDelegate" level="trace"/>
+    <logger name="org.geosdi.geoplatform.services.delegate.CSWDelegate" level="trace"/>
     <logger name="org.geosdi.geoplatform.services.GPWFSServiceImpl" level="trace"/><!-- TODO info -->
     <logger name="org.geosdi.geoplatform.services.FeatureReader" level="debug"/><!-- TODO info -->
     <logger name="org.geosdi.geoplatform.services.feature.GPTransactionService" level="debug"/><!-- TODO info -->
-    
+
+    <logger name="org.geosdi.geoplatform.core.delegate.impl.project.GPProjectDelegate" level="info"/>
+
     <logger name="org.geosdi.geoplatform.connector.server.request.v202.CatalogGetRecordsV202" level="info"/>
     <logger name="org.geosdi.geoplatform.connector.server.request.v202.responsibility.TextSearchRequest" level="info"/>
     <logger name="org.geosdi.geoplatform.connector.server.request.v202.responsibility.AreaSearchRequest" level="info"/>

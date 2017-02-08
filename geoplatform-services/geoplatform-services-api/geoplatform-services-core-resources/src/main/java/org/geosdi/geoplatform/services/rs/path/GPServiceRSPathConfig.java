@@ -146,6 +146,8 @@ public final class GPServiceRSPathConfig {
             + "saveAccountProjectProperties";
     public static final String SAVE_PROJECT_PATH = PROJECTS_PATH
             + "saveProject";
+    public static final String CLONE_PROJECT_PATH = PROJECTS_PATH
+            + "cloneProject";
     public static final String SET_PROJECT_SHARED_PATH = PROJECTS_PATH
             + "setProjectShared";
 

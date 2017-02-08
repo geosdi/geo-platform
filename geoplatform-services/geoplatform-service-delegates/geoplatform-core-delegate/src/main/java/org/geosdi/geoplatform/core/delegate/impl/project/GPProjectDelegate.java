@@ -1,43 +1,45 @@
 /**
- *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
- *
- *   Copyright (C) 2008-2017 geoSDI Group (CNR IMAA - Potenza - ITALY).
- *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
- *
- *   ====================================================================
- *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
- *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * geo-platform
+ * Rich webgis framework
+ * http://geo-platform.org
+ * ====================================================================
+ * <p>
+ * Copyright (C) 2008-2017 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * <p>
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version. This program is distributed in the
+ * hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License
+ * for more details. You should have received a copy of the GNU General
+ * Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * <p>
+ * ====================================================================
+ * <p>
+ * Linking this library statically or dynamically with other modules is
+ * making a combined work based on this library. Thus, the terms and
+ * conditions of the GNU General Public License cover the whole combination.
+ * <p>
+ * As a special exception, the copyright holders of this library give you permission
+ * to link this library with independent modules to produce an executable, regardless
+ * of the license terms of these independent modules, and to copy and distribute
+ * the resulting executable under terms of your choice, provided that you also meet,
+ * for each linked independent module, the terms and conditions of the license of
+ * that module. An independent module is a module which is not derived from or
+ * based on this library. If you modify this library, you may extend this exception
+ * to your version of the library, but you are not obligated to do so. If you do not
+ * wish to do so, delete this exception statement from your version.
  */
 package org.geosdi.geoplatform.core.delegate.impl.project;
 
 import com.googlecode.genericdao.search.Search;
+import org.geosdi.geoplatform.core.binding.GPProjectBinder;
 import org.geosdi.geoplatform.core.dao.*;
 import org.geosdi.geoplatform.core.delegate.api.project.ProjectDelegate;
+import org.geosdi.geoplatform.core.delegate.impl.project.function.GPFolderFunction;
+import org.geosdi.geoplatform.core.delegate.impl.project.function.GPLayerFunction;
 import org.geosdi.geoplatform.core.model.*;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
@@ -45,6 +47,7 @@ import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.PutAccountsProjectRequest;
 import org.geosdi.geoplatform.request.RequestByAccountProjectIDs;
 import org.geosdi.geoplatform.request.SearchRequest;
+import org.geosdi.geoplatform.request.project.CloneProjectRequest;
 import org.geosdi.geoplatform.request.project.ImportProjectRequest;
 import org.geosdi.geoplatform.request.project.SaveProjectRequest;
 import org.geosdi.geoplatform.response.*;
@@ -60,6 +63,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * Project service delegate.
@@ -377,7 +382,7 @@ public class GPProjectDelegate implements ProjectDelegate {
         if (accountProject == null) {
             throw new ResourceNotFoundFault(
                     "AccountProjects not found for with id:\"" + accountID
-                    + "\" and project with id:\"" + projectID + "\"");
+                            + "\" and project with id:\"" + projectID + "\"");
         }
         EntityCorrectness.checkAccountProjectLog(accountProject); // TODO assert
 
@@ -539,7 +544,7 @@ public class GPProjectDelegate implements ProjectDelegate {
         if (apRequest == null) {
             throw new IllegalParameterFault(
                     "The PutAccountsProjectRequest must "
-                    + "not be null.");
+                            + "not be null.");
         }
         Long projectID = apRequest.getProjectID();
         List<Long> accountIDsProject = apRequest.getAccountIDsProject();
@@ -705,6 +710,63 @@ public class GPProjectDelegate implements ProjectDelegate {
     }
 
     @Override
+    public Long cloneProject(CloneProjectRequest cloneProjectRequest) throws Exception {
+        GPAccount gpAccount = accountDao.find(cloneProjectRequest.getAccountID());
+        if (gpAccount == null) {
+            throw new ResourceNotFoundFault(
+                    "Account not found for with id:\"" + cloneProjectRequest.getAccountID());
+        }
+        GPProject gpProject = projectDao.find(cloneProjectRequest.getGpProject().getId());
+        if (gpProject == null) {
+            throw new ResourceNotFoundFault(
+                    "Project not found for with id:\"" + cloneProjectRequest.getGpProject().getId());
+        }
+        try {
+            // Root Folders
+            List<GPFolder> rootFolders = folderDao.searchRootFolders(cloneProjectRequest.getGpProject().getId());
+            logger.debug("\n*** rootFolders:\n{}", rootFolders);
+
+            GPProject projectCloned = GPProjectBinder.newGProjectBinder().withFrom(cloneProjectRequest.getGpProject()).bind();
+            GPAccountProject gpAccountProject = new GPAccountProject();
+            gpAccountProject.setAccount(gpAccount);
+            gpAccountProject.setProject(projectCloned);
+            gpAccountProject.setDefaultProject(false);
+            projectDao.persist(projectCloned);
+            accountProjectDao.persist(gpAccountProject);
+
+            Map<Long, GPFolder> folderMap = IntStream.iterate(0, n -> n + 1).limit(rootFolders.size()).boxed()
+                    .collect(Collectors.toMap(i -> rootFolders.get(i).getId(),
+                            i -> new GPFolderFunction(projectCloned, folderDao, null).apply(rootFolders.get(i))));
+
+            // Sub Folders
+            Search searchCriteria = new Search(GPFolder.class);
+            searchCriteria.addFilterEqual("project.id", cloneProjectRequest.getGpProject().getId());
+            searchCriteria.addFilterNotNull("parent.id");
+            List<GPFolder> subFolders = folderDao.search(searchCriteria);
+
+            IntStream.iterate(0, n -> n + 1).limit(subFolders.size()).boxed().forEach(i ->
+            {
+                GPFolder folderCloned = new GPFolderFunction(projectCloned, folderDao, folderMap.get(subFolders.get(i).getParent().getId())).apply(subFolders.get(i));
+                folderMap.put(subFolders.get(i).getId(), folderCloned);
+            });
+
+            // Sub Layers
+            searchCriteria = new Search(GPLayer.class);
+            searchCriteria.addFilterEqual("project.id", cloneProjectRequest.getGpProject().getId());
+            List<GPLayer> subLayers = layerDao.search(searchCriteria);
+
+            IntStream.iterate(0, n -> n + 1).limit(subLayers.size()).boxed().forEach(i -> {
+                new GPLayerFunction(projectCloned, layerDao, folderMap.get(subLayers.get(i).getFolder().getId())).apply(subLayers.get(i));
+            });
+
+            return projectCloned.getId();
+        } catch (IllegalParameterFault e) {
+            throw new IllegalParameterFault(e.getMessage());
+        }
+    }
+
+
+    @Override
     public Long importProject(ImportProjectRequest impRequest) throws
             IllegalParameterFault, ResourceNotFoundFault {
         if (impRequest == null) {
@@ -764,7 +826,7 @@ public class GPProjectDelegate implements ProjectDelegate {
     //</editor-fold>
 
     /**
-     ***************************************************************************
+     * **************************************************************************
      */
     private GPProject getProjectByID(Long projectID) throws
             ResourceNotFoundFault {

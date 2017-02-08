@@ -39,87 +39,33 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
-
-import java.util.List;
-import javax.jws.WebParam;
-import javax.jws.WebResult;
-import javax.jws.WebService;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.MediaType;
-
 import org.apache.cxf.annotations.FastInfoset;
-import org.apache.cxf.annotations.GZIP;
 import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
 import org.codehaus.jra.Delete;
 import org.codehaus.jra.Get;
 import org.codehaus.jra.Post;
 import org.codehaus.jra.Put;
-import org.geosdi.geoplatform.core.model.GPAccountProject;
-import org.geosdi.geoplatform.core.model.GPApplication;
-import org.geosdi.geoplatform.core.model.GPBBox;
-import org.geosdi.geoplatform.core.model.GPFolder;
-import org.geosdi.geoplatform.core.model.GPLayer;
-import org.geosdi.geoplatform.core.model.GPLayerInfo;
-import org.geosdi.geoplatform.core.model.GPMessage;
-import org.geosdi.geoplatform.core.model.GPOrganization;
-import org.geosdi.geoplatform.core.model.GPProject;
-import org.geosdi.geoplatform.core.model.GPRasterLayer;
-import org.geosdi.geoplatform.core.model.GPUser;
-import org.geosdi.geoplatform.core.model.GPVectorLayer;
-import org.geosdi.geoplatform.core.model.GPViewport;
-import org.geosdi.geoplatform.core.model.GSAccount;
-import org.geosdi.geoplatform.core.model.GSResource;
-import org.geosdi.geoplatform.core.model.GeoPlatformServer;
+import org.geosdi.geoplatform.core.model.*;
 import org.geosdi.geoplatform.exception.AccountLoginFault;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.shared.GPLayerType;
-import org.geosdi.geoplatform.request.InsertAccountRequest;
+import org.geosdi.geoplatform.request.*;
 import org.geosdi.geoplatform.request.folder.InsertFolderRequest;
-import org.geosdi.geoplatform.request.PaginatedSearchRequest;
-import org.geosdi.geoplatform.request.PutAccountsProjectRequest;
-import org.geosdi.geoplatform.request.RequestByAccountProjectIDs;
-import org.geosdi.geoplatform.request.RequestByID;
 import org.geosdi.geoplatform.request.folder.WSAddFolderAndTreeModificationsRequest;
-import org.geosdi.geoplatform.request.folder.WSDeleteFolderAndTreeModifications;
 import org.geosdi.geoplatform.request.folder.WSDDFolderAndTreeModifications;
-import org.geosdi.geoplatform.request.SearchRequest;
-import org.geosdi.geoplatform.request.layer.InsertLayerRequest;
-import org.geosdi.geoplatform.request.layer.WSAddLayerAndTreeModificationsRequest;
-import org.geosdi.geoplatform.request.layer.WSAddLayersAndTreeModificationsRequest;
-import org.geosdi.geoplatform.request.layer.WSDDLayerAndTreeModificationsRequest;
-import org.geosdi.geoplatform.request.layer.WSDeleteLayerAndTreeModificationsRequest;
+import org.geosdi.geoplatform.request.folder.WSDeleteFolderAndTreeModifications;
+import org.geosdi.geoplatform.request.layer.*;
 import org.geosdi.geoplatform.request.message.MarkMessageReadByDateRequest;
 import org.geosdi.geoplatform.request.organization.WSPutRolePermissionRequest;
 import org.geosdi.geoplatform.request.organization.WSSaveRoleRequest;
+import org.geosdi.geoplatform.request.project.CloneProjectRequest;
 import org.geosdi.geoplatform.request.project.ImportProjectRequest;
 import org.geosdi.geoplatform.request.project.SaveProjectRequest;
 import org.geosdi.geoplatform.request.server.WSSaveServerRequest;
 import org.geosdi.geoplatform.request.viewport.InsertViewportRequest;
 import org.geosdi.geoplatform.request.viewport.ManageViewportRequest;
-import org.geosdi.geoplatform.response.AccountProjectPropertiesDTO;
-import org.geosdi.geoplatform.response.ApplicationDTO;
-import org.geosdi.geoplatform.response.FolderDTO;
-import org.geosdi.geoplatform.response.GetDataSourceResponse;
-import org.geosdi.geoplatform.response.MessageDTO;
-import org.geosdi.geoplatform.response.ProjectDTO;
-import org.geosdi.geoplatform.response.RasterPropertiesDTO;
-import org.geosdi.geoplatform.response.SearchUsersResponseWS;
-import org.geosdi.geoplatform.response.ServerDTO;
-import org.geosdi.geoplatform.response.ServerDTOContainer;
-import org.geosdi.geoplatform.response.ShortAccountDTOContainer;
-import org.geosdi.geoplatform.response.ShortLayerDTO;
-import org.geosdi.geoplatform.response.ShortLayerDTOContainer;
-import org.geosdi.geoplatform.response.UserDTO;
-import org.geosdi.geoplatform.response.WSGetAccountProjectsResponse;
+import org.geosdi.geoplatform.response.*;
 import org.geosdi.geoplatform.response.authority.GetAuthoritiesResponseWS;
 import org.geosdi.geoplatform.response.authority.GetAuthorityResponse;
 import org.geosdi.geoplatform.response.collection.ChildrenFolderStore;
@@ -132,6 +78,13 @@ import org.geosdi.geoplatform.response.role.WSGetRoleResponse;
 import org.geosdi.geoplatform.response.viewport.WSGetViewportResponse;
 import org.geosdi.geoplatform.services.core.api.GPCoreServiceApi;
 import org.geosdi.geoplatform.services.rs.path.GPServiceRSPathConfig;
+
+import javax.jws.WebParam;
+import javax.jws.WebResult;
+import javax.jws.WebService;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import java.util.List;
 
 /**
  * Public interface to define the service operations mapped via REST and SOAP
@@ -967,6 +920,23 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     Long saveProject(
             @WebParam(name = "saveProjectRequest") SaveProjectRequest saveProjectRequest)
             throws ResourceNotFoundFault, IllegalParameterFault;
+
+    /**
+     * Clonse a Project.
+     *
+     * @param cloneProjectRequest
+     *
+     * @return the Project ID
+     * @throws ResourceNotFoundFault if the Account not found
+     * @throws IllegalParameterFault if the Project is not valid
+     */
+    @Post
+    @POST
+    @Path(value = GPServiceRSPathConfig.CLONE_PROJECT_PATH)
+    @Override
+    Long cloneProject(
+            @WebParam(name = "cloneProjectRequest") CloneProjectRequest cloneProjectRequest)
+            throws Exception;
 
     /**
      * Save a Project.

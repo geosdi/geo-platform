@@ -167,6 +167,7 @@ public class LayerTreeBuilder implements GPCompositeBuilder {
         root.setProjectMessage(clientProject.getDefaultProjectLabel());
         root.setProjectName(clientProject.getName());
         root.setProjectShared(clientProject.isShared());
+        root.setProjectVersion(clientProject.getVersion());
         root.modelConverter(clientProject.getRootFolders());
         store.add(root, Boolean.TRUE);
         visitorDisplay.enableCheckedComponent(root);

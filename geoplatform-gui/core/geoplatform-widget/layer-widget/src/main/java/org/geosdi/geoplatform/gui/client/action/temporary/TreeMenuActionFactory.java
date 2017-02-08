@@ -104,6 +104,15 @@ public class TreeMenuActionFactory {
             }
 
         });
+
+        registar.put("CLONE_PROJECT", new TreeMenuActionCreator() {
+
+            @Override
+            public MenuAction createAction(TreePanel treePanel) {
+                return new CloneProjectMenuAction(treePanel);
+            }
+
+        });
     }
 
     private static void buildCompositeMenuActions() {

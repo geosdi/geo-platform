@@ -689,6 +689,12 @@ public interface LayerModuleConstants extends Constants {
     @DefaultStringValue("Share Project")
     String ShareProjectMenuAction_titleText();
 
+    @DefaultStringValue("Project Properties")
+    String ShareProjectPropertiesMenuAction_titleText();
+
+    @DefaultStringValue("Clone Project")
+    String ShareCloneProjectMenuAction_titleText();
+
     /**
      * start RefreshLayerAction
      */

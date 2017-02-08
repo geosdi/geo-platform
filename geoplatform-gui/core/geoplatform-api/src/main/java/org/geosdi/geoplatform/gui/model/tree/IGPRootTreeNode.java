@@ -9,6 +9,18 @@ import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientI
 public interface IGPRootTreeNode extends GPCompositeTreeModelConverter<GPFolderClientInfo>, IGPNode {
 
     /**
+     *
+     * @param projectID
+     */
+    void setProjectID(long projectID);
+
+    /**
+     *
+     * @return
+     */
+    long getProjectID();
+
+    /**
      * @param projectName
      */
     void setProjectName(String projectName);

@@ -63,6 +63,21 @@ public class GPRootTreeNode extends AbstractRootTreeNode {
     }
 
     /**
+     * @param projectID
+     */
+    @Override
+    public void setProjectID(long projectID) {
+        set(GPClientProjectKey.PROJECT_ID.toString(), projectID);
+    }
+
+    /**
+     * @return
+     */
+    @Override
+    public long getProjectID() {
+        return super.get(GPClientProjectKey.PROJECT_ID.toString(),0);    }
+
+    /**
      * @param projectName
      */
     @Override

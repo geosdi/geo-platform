@@ -115,6 +115,12 @@
         <repository>
             <id>osgeo</id>
             <name>Open Source Geospatial Foundation Repository</name>
+            <url>http://download.osgeo.org/webdav/geotools/</url>
+        </repository>
+        
+        <repository>
+            <id>boundlessgeo</id>
+            <name>Open Source Geospatial Foundation Repository</name>
             <url>https://repo.boundlessgeo.com/release/</url>
         </repository>
 

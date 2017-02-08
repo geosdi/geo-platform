@@ -41,9 +41,11 @@ import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.shared.GPRole;
 import org.geosdi.geoplatform.request.PutAccountsProjectRequest;
 import org.geosdi.geoplatform.request.RequestByAccountProjectIDs;
+import org.geosdi.geoplatform.request.project.CloneProjectRequest;
 import org.geosdi.geoplatform.request.project.ImportProjectRequest;
 import org.geosdi.geoplatform.request.project.SaveProjectRequest;
 import org.geosdi.geoplatform.response.*;
+import org.geosdi.geoplatform.response.collection.ChildrenFolderStore;
 import org.geosdi.geoplatform.response.collection.TreeFolderElements;
 import org.junit.Assert;
 import org.junit.Test;
@@ -90,6 +92,21 @@ public class RSProjectTest extends BasicRestServiceTest {
     GPRasterLayer rasterFolder2C;
     GPVectorLayer vectorFolder3A;
     GPVectorLayer vectorRootFolderB;
+
+    private static final String titleFolderA = "folder_A";
+    private static final String titleFolderB = "folder_B";
+    private static final String titleFolderC = "folder_C";
+    private static final String titleFolderD = "folder_D";
+    private static final String titleFolderE = "folder_E";
+
+    private static final String titleRasterA = "raster_A";
+    private static final String titleRasterE = "raster_E";
+    private static final String titleVectorB = "vector_B";
+    private static final String titleVectorC = "vector_C";
+    private static final String titleVectorD = "vector_D";
+
+
+
 
     @Override
     public void setUp() throws Exception {
@@ -890,6 +907,73 @@ public class RSProjectTest extends BasicRestServiceTest {
         Assert.assertEquals("Save-Project-Rest", loadProject.getName());
 
         GPAccountProject owner = gpWSClient.getProjectOwner(idProject);
+
+        Assert.assertEquals(usernameTest, owner.getAccount().getNaturalID());
+        Assert.assertEquals(Boolean.TRUE, gpWSClient.deleteAccount(
+                owner.getAccount().getId()));
+    }
+
+    @Test
+    public void cloneProjectTestRest() throws Exception{
+        //create project
+        GPProject project = super.createProject("Project-To-Be-Cloned",
+                Boolean.FALSE, 200, new Date(System.currentTimeMillis()));
+        Long idProject = gpWSClient.saveProject(new SaveProjectRequest(
+                usernameTest, project, Boolean.TRUE));
+
+        GPProject loadProject = gpWSClient.getProjectDetail(idProject);
+
+        Assert.assertEquals(200, loadProject.getNumberOfElements());
+        Assert.assertEquals("Project-To-Be-Cloned", loadProject.getName());
+
+        GPAccountProject owner = gpWSClient.getProjectOwner(idProject);
+
+        //create folders
+        long idFolder_A = super.createAndInsertFolder(titleFolderA,loadProject,1,null);
+        GPFolder folder_A = gpWSClient.getFolderDetail(idFolder_A);
+        long idFolder_B = super.createAndInsertFolder(titleFolderB,loadProject,2,folder_A);
+        GPFolder folder_B = gpWSClient.getFolderDetail(idFolder_B);
+        long idFolder_C = super.createAndInsertFolder(titleFolderC,loadProject,3,folder_A);
+        GPFolder folder_C = gpWSClient.getFolderDetail(idFolder_C);
+        long idFolder_D = super.createAndInsertFolder(titleFolderD,loadProject,4,folder_B);
+        GPFolder folder_D = gpWSClient.getFolderDetail(idFolder_D);
+        long idFolder_E = super.createAndInsertFolder(titleFolderE,loadProject,5,folder_C);
+        GPFolder folder_E = gpWSClient.getFolderDetail(idFolder_E);
+
+        //create layers
+        super.createAndInsertRasterLayer(folder_A,titleRasterA,"name_"+titleRasterA,"abstract_"+titleRasterA,1,"srs",serverUrlTest);
+        super.createAndInsertRasterLayer(folder_E,titleRasterE,"name_"+titleRasterE,"abstract_"+titleRasterE,1,"srs",serverUrlTest);
+        super.createAndInsertVectorLayer(folder_B,titleVectorB,"name_"+titleVectorB,"abstract_"+titleVectorB,1,"srs",serverUrlTest);
+        super.createAndInsertVectorLayer(folder_D,titleVectorD,"name_"+titleVectorD,"abstract_"+titleVectorD,1,"srs",serverUrlTest);
+        super.createAndInsertVectorLayer(folder_C,titleVectorC,"name_"+titleVectorC,"abstract_"+titleVectorC,1,"srs",serverUrlTest);
+
+        CloneProjectRequest request = new CloneProjectRequest(loadProject,owner.getAccount().getId(),loadProject.getName().concat("-copy"));
+        long idProjectCloned = gpWSClient.cloneProject(request);
+        ProjectDTO projectDTO = gpWSClient.getProjectWithRootFolders(idProjectCloned,owner.getAccount().getId());
+        GPFolder rootFolder = gpWSClient.getFolderDetail(projectDTO.getRootFolders().get(0).getId());
+        ChildrenFolderStore rootChildrens = gpWSClient.getChildrenFolders(rootFolder.getId());
+        GPFolder clonedFolder_B = gpWSClient.getFolderDetail(rootChildrens.getChildren().get(0).getId());
+        GPFolder clonedFolder_C = gpWSClient.getFolderDetail(rootChildrens.getChildren().get(1).getId());
+        ChildrenFolderStore bChildrens = gpWSClient.getChildrenFolders(rootChildrens.getChildren().get(0).getId());
+        GPFolder clonedFolder_D = gpWSClient.getFolderDetail(bChildrens.getChildren().get(0).getId());
+        ChildrenFolderStore cChildrens = gpWSClient.getChildrenFolders(rootChildrens.getChildren().get(1).getId());
+        GPFolder clonedFolder_E = gpWSClient.getFolderDetail(cChildrens.getChildren().get(0).getId());
+        ShortLayerDTOContainer gpLayers = gpWSClient.getLayers(idProjectCloned);
+
+        Assert.assertEquals("Project-To-Be-Cloned-copy",projectDTO.getName());
+        Assert.assertEquals(titleFolderA,rootFolder.getName());
+        Assert.assertTrue("Project ID",rootFolder.getProject().getId() == idProjectCloned);
+        Assert.assertTrue("Project ID",clonedFolder_B.getProject().getId() == idProjectCloned);
+        Assert.assertTrue("Project ID",clonedFolder_C.getProject().getId() == idProjectCloned);
+        Assert.assertTrue("Project ID",clonedFolder_D.getProject().getId() == idProjectCloned);
+        Assert.assertTrue("Project ID",clonedFolder_E.getProject().getId() == idProjectCloned);
+        Assert.assertTrue("Layers Size",gpLayers.getLayers().size() == 5);
+        Assert.assertTrue("Root Children folders",rootChildrens.getChildren().size() == 2);
+
+        Assert.assertEquals(titleFolderB,clonedFolder_B.getName());
+        Assert.assertEquals(titleFolderC,clonedFolder_C.getName());
+        Assert.assertEquals(titleFolderD,clonedFolder_D.getName());
+        Assert.assertEquals(titleFolderE,clonedFolder_E.getName());
 
         Assert.assertEquals(usernameTest, owner.getAccount().getNaturalID());
         Assert.assertEquals(Boolean.TRUE, gpWSClient.deleteAccount(

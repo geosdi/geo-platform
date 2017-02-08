@@ -40,25 +40,8 @@ import com.google.common.collect.Maps;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.MultiPolygon;
 import com.vividsolutions.jts.io.WKTReader;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-import java.util.concurrent.TimeUnit;
-import org.geosdi.geoplatform.core.acl.AclClass;
-import org.geosdi.geoplatform.core.acl.AclEntry;
-import org.geosdi.geoplatform.core.acl.AclObjectIdentity;
-import org.geosdi.geoplatform.core.acl.AclSid;
-import org.geosdi.geoplatform.core.acl.GeoPlatformPermission;
-import org.geosdi.geoplatform.core.acl.GuiComponent;
-import org.geosdi.geoplatform.core.acl.dao.AclClassDAO;
-import org.geosdi.geoplatform.core.acl.dao.AclEntryDAO;
-import org.geosdi.geoplatform.core.acl.dao.AclObjectIdentityDAO;
-import org.geosdi.geoplatform.core.acl.dao.AclSidDAO;
-import org.geosdi.geoplatform.core.acl.dao.GuiComponentDAO;
+import org.geosdi.geoplatform.core.acl.*;
+import org.geosdi.geoplatform.core.acl.dao.*;
 import org.geosdi.geoplatform.core.dao.*;
 import org.geosdi.geoplatform.core.model.*;
 import org.geosdi.geoplatform.core.model.enums.GrantType;
@@ -78,6 +61,9 @@ import org.springframework.expression.ParseException;
 import org.springframework.security.acls.domain.BasePermission;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -532,6 +518,17 @@ public abstract class BaseInitializerTest {
         //
         viewerProject.setNumberOfElements(6);
         projectDAO.merge(viewerProject);
+    }
+
+    private void cloneProject(){
+
+
+/*        GPProject gpProject = projectDAO.findByProjectName("project_admin_k_1");
+        GPProject gpProjectCloned = GPProjectBinder.getGProjectBinder().withFrom(gpProject).bind();
+        projectDAO.persist(gpProjectCloned);
+        this.insertBindingUserProject(adminTest, gpProjectCloned,
+                BasePermission.ADMINISTRATION.getMask(), false);*/
+
     }
 
     private void insertGPAccessInfoTest() {

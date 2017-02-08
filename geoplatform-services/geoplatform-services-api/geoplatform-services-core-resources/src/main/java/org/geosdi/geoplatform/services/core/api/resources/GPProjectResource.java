@@ -37,10 +37,10 @@ package org.geosdi.geoplatform.services.core.api.resources;
 
 import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
+import org.geosdi.geoplatform.request.project.CloneProjectRequest;
 import org.geosdi.geoplatform.request.project.SaveProjectRequest;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -50,11 +50,11 @@ public interface GPProjectResource {
     // ==========================================================================
     // === Project
     // ==========================================================================
+
     /**
      * Save a Project and its Account owner.
      *
      * @param saveProjectRequest
-     *
      * @return the Project ID
      * @throws Exception if the Account not found or if the Project is not valid
      */
@@ -65,22 +65,27 @@ public interface GPProjectResource {
      *
      * @param project the Project to save
      * @return the Project ID
-     *
      * @throws Exception if the Project is not valid
-     * @deprecated only for test purpose
      * @see #saveProject(java.lang.String,
      * org.geosdi.geoplatform.core.model.GPProject, boolean)
+     * @deprecated only for test purpose
      */
     @Deprecated
     Long insertProject(GPProject project) throws Exception;
+
+    /**
+     * @param cloneProjectRequest
+     * @return
+     * @throws Exception
+     */
+    Long cloneProject(CloneProjectRequest cloneProjectRequest) throws Exception;
 
     /**
      * Update a Project.
      *
      * @param project the Project to update
      * @return the Project ID
-     *
-     * @throws Exception if the Project not found
+     * @throws Exception             if the Project not found
      * @throws IllegalParameterFault if the Project is not valid
      */
     Long updateProject(GPProject project) throws Exception;
@@ -90,7 +95,6 @@ public interface GPProjectResource {
      *
      * @param projectID the Project to delete
      * @return true if the Project was deleted
-     *
      * @throws Exception if the Project not found
      */
     Boolean deleteProject(Long projectID) throws Exception;
@@ -100,7 +104,6 @@ public interface GPProjectResource {
      *
      * @param projectID the Project ID
      * @return the Project to retrieve
-     *
      * @throws Exception if the Project not found
      */
     GPProject getProjectDetail(Long projectID) throws Exception;
@@ -110,7 +113,6 @@ public interface GPProjectResource {
      *
      * @param projectID the Project ID
      * @return the number of elements to retrieve
-     *
      * @throws Exception if Project not found
      */
     Integer getNumberOfElementsProject(Long projectID) throws Exception;
@@ -119,9 +121,9 @@ public interface GPProjectResource {
      * Set a Project as shared.
      *
      * @param projectID the Project ID
-     *
      * @throws Exception if Project not found
      */
     void setProjectShared(Long projectID) throws Exception;
     // </editor-fold>
+
 }

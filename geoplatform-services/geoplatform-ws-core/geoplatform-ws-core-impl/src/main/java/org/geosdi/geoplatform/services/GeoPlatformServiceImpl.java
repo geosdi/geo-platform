@@ -71,6 +71,7 @@ import org.geosdi.geoplatform.request.layer.WSDeleteLayerAndTreeModificationsReq
 import org.geosdi.geoplatform.request.message.MarkMessageReadByDateRequest;
 import org.geosdi.geoplatform.request.organization.WSPutRolePermissionRequest;
 import org.geosdi.geoplatform.request.organization.WSSaveRoleRequest;
+import org.geosdi.geoplatform.request.project.CloneProjectRequest;
 import org.geosdi.geoplatform.request.project.ImportProjectRequest;
 import org.geosdi.geoplatform.request.project.SaveProjectRequest;
 import org.geosdi.geoplatform.request.server.WSSaveServerRequest;
@@ -451,6 +452,16 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     public Long saveProject(SaveProjectRequest saveProjectRequest)
             throws ResourceNotFoundFault, IllegalParameterFault {
         return gpProjectDelegate.saveProject(saveProjectRequest);
+    }
+
+    /**
+     * @param cloneProjectRequest
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public Long cloneProject(CloneProjectRequest cloneProjectRequest) throws Exception {
+        return gpProjectDelegate.cloneProject(cloneProjectRequest);
     }
 
     @Override

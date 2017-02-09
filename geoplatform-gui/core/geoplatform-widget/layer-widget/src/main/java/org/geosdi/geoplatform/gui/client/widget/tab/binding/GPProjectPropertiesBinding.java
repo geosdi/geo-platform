@@ -86,14 +86,6 @@ public class GPProjectPropertiesBinding extends GeoPlatformBindingWidget<IGPRoot
         projectVersionField.setReadOnly(true);
         fp.add(projectVersionField);
 
-        projectMessageField = new GPSecureStringTextField();
-        projectMessageField.setId(GPClientProjectKey.DEFAULT_PROJECT_KEY_MESSAGE.toString());
-        projectMessageField.setName(GPClientProjectKey.DEFAULT_PROJECT_KEY_MESSAGE.toString());
-        projectMessageField.setFieldLabel(LayerModuleConstants.INSTANCE.
-                GPProjectSearchPanel_listViewMessageText());
-        projectMessageField.setReadOnly(true);
-        fp.add(projectMessageField);
-
         creationDateField = new GPSecureStringTextField();
         creationDateField.setId(GPClientProjectKey.CREATION_DATE.toString());
         creationDateField.setName(GPClientProjectKey.CREATION_DATE.toString());

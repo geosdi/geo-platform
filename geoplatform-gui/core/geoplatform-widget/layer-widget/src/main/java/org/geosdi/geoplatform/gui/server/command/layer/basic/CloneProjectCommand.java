@@ -33,89 +33,52 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.request.project;
+package org.geosdi.geoplatform.gui.server.command.layer.basic;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
-import java.io.Serializable;
+import org.geosdi.geoplatform.gui.client.command.layer.basic.CloneProjectCommandRequest;
+import org.geosdi.geoplatform.gui.client.command.layer.basic.CloneProjectCommandResponse;
+import org.geosdi.geoplatform.gui.command.server.GPCommand;
+import org.geosdi.geoplatform.gui.server.ILayerService;
+import org.geosdi.geoplatform.request.project.CloneProjectRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Component;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-@XmlRootElement
-@XmlAccessorType(XmlAccessType.FIELD)
-public class CloneProjectRequest implements Serializable {
+@Lazy(true)
+@Component(value = "command.layer.basic.CloneProjectCommand")
+public class CloneProjectCommand implements
+        GPCommand<CloneProjectCommandRequest, CloneProjectCommandResponse> {
 
-    private static final long serialVersionUID = 5586917396739817679L;
+    private static final Logger logger = LoggerFactory.getLogger(
+            CloneProjectCommand.class);
     //
-    private Long gpProjectID;
-    private Long accountID;
-    private String nameProject;
-
-    public CloneProjectRequest() {
-    }
-
-    public CloneProjectRequest(Long gpProjectID,
-            Long theAccountID,String nameProject) {
-        this.gpProjectID = gpProjectID;
-        this.accountID = theAccountID;
-        this.nameProject = nameProject;
-    }
+    @Autowired
+    private ILayerService layerService;
 
     /**
-     *
-     * @return the gpProjectID
-     */
-    public Long getGpProjectID() {
-        return gpProjectID;
-    }
-
-    /**
-     *
-     * @param gpProjectID
-     */
-    public void setGpProjectID(Long gpProjectID) {
-        this.gpProjectID = gpProjectID;
-    }
-
-    /**
-     * @return the accountID
-     */
-    public Long getAccountID() {
-        return accountID;
-    }
-
-    /**
-     * @param accountID the accountID to set
-     */
-    public void setAccountID(Long accountID) {
-        this.accountID = accountID;
-    }
-
-    /**
-     *
+     * @param request
+     * @param httpServletRequest
      * @return
      */
-    public String getNameProject() {
-        return nameProject;
-    }
-
-    /**
-     *
-     * @param nameProject
-     */
-    public void setNameProject(String nameProject) {
-        this.nameProject = nameProject;
-    }
-
     @Override
-    public String toString() {
-        return "CloneProjectRequest{" +
-                "gpProjectID='" + gpProjectID + '\'' +
-                ", accountID=" + accountID +
-                ", nameProject='" + nameProject + '\'' +
-                '}';
+    public CloneProjectCommandResponse execute(CloneProjectCommandRequest request, HttpServletRequest httpServletRequest) {
+        logger.debug("##################### Executing {} Command", this.
+                getClass().getSimpleName());
+
+        CloneProjectRequest projectRequest = new CloneProjectRequest(request.getProjectID(), request.getAccountID(),request.getNameProject());
+
+        Long projectIDCloned = this.layerService.cloneProject(projectRequest);
+
+        logger.debug("#################### Found {} ", projectIDCloned);
+
+        return new CloneProjectCommandResponse(projectIDCloned);
     }
 }

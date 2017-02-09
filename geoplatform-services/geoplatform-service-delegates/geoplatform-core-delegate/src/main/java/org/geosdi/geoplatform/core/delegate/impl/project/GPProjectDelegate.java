@@ -35,7 +35,7 @@
 package org.geosdi.geoplatform.core.delegate.impl.project;
 
 import com.googlecode.genericdao.search.Search;
-import org.geosdi.geoplatform.core.binding.GPProjectBinder;
+import org.geosdi.geoplatform.core.binding.IGPProjectBinder;
 import org.geosdi.geoplatform.core.dao.*;
 import org.geosdi.geoplatform.core.delegate.api.project.ProjectDelegate;
 import org.geosdi.geoplatform.core.delegate.impl.project.function.GPFolderFunction;
@@ -716,17 +716,17 @@ public class GPProjectDelegate implements ProjectDelegate {
             throw new ResourceNotFoundFault(
                     "Account not found for with id:\"" + cloneProjectRequest.getAccountID());
         }
-        GPProject gpProject = projectDao.find(cloneProjectRequest.getGpProject().getId());
+        GPProject gpProject = projectDao.find(cloneProjectRequest.getGpProjectID());
         if (gpProject == null) {
             throw new ResourceNotFoundFault(
-                    "Project not found for with id:\"" + cloneProjectRequest.getGpProject().getId());
+                    "Project not found for with id:\"" + cloneProjectRequest.getGpProjectID());
         }
         try {
             // Root Folders
-            List<GPFolder> rootFolders = folderDao.searchRootFolders(cloneProjectRequest.getGpProject().getId());
+            List<GPFolder> rootFolders = folderDao.searchRootFolders(cloneProjectRequest.getGpProjectID());
             logger.debug("\n*** rootFolders:\n{}", rootFolders);
 
-            GPProject projectCloned = GPProjectBinder.newGProjectBinder().withFrom(cloneProjectRequest.getGpProject()).bind();
+            GPProject projectCloned = IGPProjectBinder.GPProjectBinder.newGProjectBinder().withNameProject(cloneProjectRequest.getNameProject()).withFrom(gpProject).bind();
             GPAccountProject gpAccountProject = new GPAccountProject();
             gpAccountProject.setAccount(gpAccount);
             gpAccountProject.setProject(projectCloned);
@@ -740,7 +740,7 @@ public class GPProjectDelegate implements ProjectDelegate {
 
             // Sub Folders
             Search searchCriteria = new Search(GPFolder.class);
-            searchCriteria.addFilterEqual("project.id", cloneProjectRequest.getGpProject().getId());
+            searchCriteria.addFilterEqual("project.id", cloneProjectRequest.getGpProjectID());
             searchCriteria.addFilterNotNull("parent.id");
             List<GPFolder> subFolders = folderDao.search(searchCriteria);
 
@@ -752,7 +752,7 @@ public class GPProjectDelegate implements ProjectDelegate {
 
             // Sub Layers
             searchCriteria = new Search(GPLayer.class);
-            searchCriteria.addFilterEqual("project.id", cloneProjectRequest.getGpProject().getId());
+            searchCriteria.addFilterEqual("project.id", cloneProjectRequest.getGpProjectID());
             List<GPLayer> subLayers = layerDao.search(searchCriteria);
 
             IntStream.iterate(0, n -> n + 1).limit(subLayers.size()).boxed().forEach(i -> {

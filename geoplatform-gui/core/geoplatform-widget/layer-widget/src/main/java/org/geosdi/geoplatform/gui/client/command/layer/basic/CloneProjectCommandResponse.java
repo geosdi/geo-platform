@@ -33,89 +33,37 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.request.project;
+package org.geosdi.geoplatform.gui.client.command.layer.basic;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
-import java.io.Serializable;
+import org.geosdi.geoplatform.gui.command.api.GPCommandResponse;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-@XmlRootElement
-@XmlAccessorType(XmlAccessType.FIELD)
-public class CloneProjectRequest implements Serializable {
+public class CloneProjectCommandResponse implements
+        GPCommandResponse<Long> {
 
-    private static final long serialVersionUID = 5586917396739817679L;
+    private static final long serialVersionUID = -5592290985836252655L;
     //
-    private Long gpProjectID;
-    private Long accountID;
-    private String nameProject;
+    private long projectID;
 
-    public CloneProjectRequest() {
+    public CloneProjectCommandResponse() {
     }
 
-    public CloneProjectRequest(Long gpProjectID,
-            Long theAccountID,String nameProject) {
-        this.gpProjectID = gpProjectID;
-        this.accountID = theAccountID;
-        this.nameProject = nameProject;
+    public CloneProjectCommandResponse(long projectID) {
+        this.projectID = projectID;
     }
 
-    /**
-     *
-     * @return the gpProjectID
-     */
-    public Long getGpProjectID() {
-        return gpProjectID;
-    }
-
-    /**
-     *
-     * @param gpProjectID
-     */
-    public void setGpProjectID(Long gpProjectID) {
-        this.gpProjectID = gpProjectID;
-    }
-
-    /**
-     * @return the accountID
-     */
-    public Long getAccountID() {
-        return accountID;
-    }
-
-    /**
-     * @param accountID the accountID to set
-     */
-    public void setAccountID(Long accountID) {
-        this.accountID = accountID;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getNameProject() {
-        return nameProject;
-    }
-
-    /**
-     *
-     * @param nameProject
-     */
-    public void setNameProject(String nameProject) {
-        this.nameProject = nameProject;
+    @Override
+    public Long getResult() {
+        return this.projectID;
     }
 
     @Override
     public String toString() {
-        return "CloneProjectRequest{" +
-                "gpProjectID='" + gpProjectID + '\'' +
-                ", accountID=" + accountID +
-                ", nameProject='" + nameProject + '\'' +
+        return "CloneProjectCommandResponse{" +
+                "projectID=" + projectID +
                 '}';
     }
 }

@@ -40,8 +40,8 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseSecureAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
+import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
 import org.geosdi.geoplatform.gui.client.widget.CloneProjectWidget;
-import org.geosdi.geoplatform.gui.model.tree.IGPRootTreeNode;
 import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 
 /**
@@ -55,7 +55,7 @@ public class CloneProjectMenuAction extends MenuBaseSecureAction {
 
     public CloneProjectMenuAction(
             TreePanel treePanel) {
-        super(GPTrustedLevel.HIGH, LayerModuleConstants.INSTANCE.ShareProjectMenuAction_titleText(),
+        super(GPTrustedLevel.HIGH, LayerModuleConstants.INSTANCE.ShareCloneProjectMenuAction_titleText(),
                 AbstractImagePrototype.create(BasicWidgetResources.ICONS.edit()));
         this.treePanel = treePanel;
         this.cloneProjectWidget = new CloneProjectWidget();
@@ -63,7 +63,7 @@ public class CloneProjectMenuAction extends MenuBaseSecureAction {
 
     @Override
     public void componentSelected(MenuEvent e) {
-        IGPRootTreeNode treeNode = (IGPRootTreeNode) this.treePanel.getSelectionModel().getSelectedItem();
-       // this.propertiesWidget.showWithBinding(treeNode);
+        GPRootTreeNode treeNode = (GPRootTreeNode) this.treePanel.getSelectionModel().getSelectedItem();
+        this.cloneProjectWidget.show(treeNode);
     }
 }

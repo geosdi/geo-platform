@@ -947,7 +947,7 @@ public class RSProjectTest extends BasicRestServiceTest {
         super.createAndInsertVectorLayer(folder_D,titleVectorD,"name_"+titleVectorD,"abstract_"+titleVectorD,1,"srs",serverUrlTest);
         super.createAndInsertVectorLayer(folder_C,titleVectorC,"name_"+titleVectorC,"abstract_"+titleVectorC,1,"srs",serverUrlTest);
 
-        CloneProjectRequest request = new CloneProjectRequest(loadProject,owner.getAccount().getId(),loadProject.getName().concat("-copy"));
+        CloneProjectRequest request = new CloneProjectRequest(loadProject.getId(),owner.getAccount().getId(),loadProject.getName().concat("-copy"));
         long idProjectCloned = gpWSClient.cloneProject(request);
         ProjectDTO projectDTO = gpWSClient.getProjectWithRootFolders(idProjectCloned,owner.getAccount().getId());
         GPFolder rootFolder = gpWSClient.getFolderDetail(projectDTO.getRootFolders().get(0).getId());

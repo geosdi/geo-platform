@@ -37,15 +37,22 @@ package org.geosdi.geoplatform.gui.client.widget;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
-import com.extjs.gxt.ui.client.event.WindowEvent;
-import com.extjs.gxt.ui.client.event.WindowListener;
 import com.extjs.gxt.ui.client.widget.VerticalPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.widget.form.FormPanel;
+import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
+import com.google.gwt.core.client.GWT;
+import org.geosdi.geoplatform.gui.client.command.layer.basic.CloneProjectCommandRequest;
+import org.geosdi.geoplatform.gui.client.command.layer.basic.CloneProjectCommandResponse;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
-import org.geosdi.geoplatform.gui.client.widget.tab.binding.GPProjectPropertiesBinding;
-import org.geosdi.geoplatform.gui.model.tree.IGPRootTreeNode;
+import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
+import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.global.security.GPAccountLogged;
+import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -54,9 +61,10 @@ import org.geosdi.geoplatform.gui.model.tree.IGPRootTreeNode;
 public class CloneProjectWidget extends GeoPlatformWindow {
 
     private final VerticalPanel vp = new VerticalPanel();
-    private IGPRootTreeNode model;
+    private GPRootTreeNode model;
+    private TextField<String> projectNameField;
 
-    private GPProjectPropertiesBinding gpProjectPropertiesBinding;
+    private FormPanel fp;
 
     public CloneProjectWidget() {
         super(true);
@@ -64,9 +72,9 @@ public class CloneProjectWidget extends GeoPlatformWindow {
 
     @Override
     public void addComponent() {
-        vp.setSpacing(10);
-        this.gpProjectPropertiesBinding = new GPProjectPropertiesBinding();
-        this.vp.add(this.gpProjectPropertiesBinding.getWidget());
+        //vp.setSpacing(10);
+        createFormPanel();
+        this.vp.add(fp);
         super.add(this.vp);
 
         Button close = new Button(ButtonsConstants.INSTANCE.closeText(),
@@ -77,8 +85,71 @@ public class CloneProjectWidget extends GeoPlatformWindow {
                         hide();
                     }
                 });
+        Button clone = new Button(ButtonsConstants.INSTANCE.cloneText(),
+                new SelectionListener<ButtonEvent>() {
 
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                        if(fp.isValid())
+                            cloneProjectCommand();
+                    }
+                });
+
+        super.addButton(clone);
         super.addButton(close);
+    }
+
+    private void cloneProjectCommand(){
+
+        final CloneProjectCommandRequest cloneProjectCommandRequest = GWT.
+                <CloneProjectCommandRequest>create(CloneProjectCommandRequest.class);
+
+        cloneProjectCommandRequest.setProjectID(model.getId());
+        cloneProjectCommandRequest.setNameProject(projectNameField.getValue());
+        cloneProjectCommandRequest.setAccountID(GPAccountLogged.getInstance().getAccountDetailID());
+        ClientCommandDispatcher.getInstance().execute(new GPClientCommand<CloneProjectCommandResponse>() {
+
+            private static final long serialVersionUID = 4372276287420606744L;
+
+            {
+                super.setCommandRequest(cloneProjectCommandRequest);
+            }
+
+            @Override
+            public void onCommandSuccess(CloneProjectCommandResponse response) {
+                GeoPlatformMessage.okMessage(LayerModuleConstants.INSTANCE.
+                                CloneProjectWidget_cloneSuccessTitleText(),
+                        LayerModuleConstants.INSTANCE.CloneProjectWidget_cloneProjectSuccessTitleText());
+                LayoutManager.getInstance().getStatusMap().setStatus(
+                        LayerModuleConstants.INSTANCE.CloneProjectWidget_cloneProjectSuccessTitleText(),
+                        SaveStatus.EnumSaveStatus.STATUS_SAVE.toString());
+                hide();
+            }
+
+            @Override
+            public void onCommandFailure(Throwable exception) {
+                GeoPlatformMessage.errorMessage(LayerModuleConstants.INSTANCE.
+                                CloneProjectWidget_cloneProjectErrorTitleText(),
+                        exception.getMessage());
+                LayoutManager.getInstance().getStatusMap().setStatus(
+                        LayerModuleConstants.INSTANCE.CloneProjectWidget_cloneProjectErrorTitleText(),
+                        SaveStatus.EnumSaveStatus.STATUS_SAVE_ERROR.toString());
+            }
+        });
+
+    }
+
+    private void createFormPanel(){
+        fp = new FormPanel();
+        fp.setBorders(false);
+        fp.setHeaderVisible(false);
+        fp.setBodyBorder(false);
+
+        projectNameField = new TextField<>();
+        projectNameField.setFieldLabel(LayerModuleConstants.INSTANCE.
+                GPProjectSearchPanel_listViewNameText());
+        projectNameField.setAllowBlank(false);
+        fp.add(projectNameField);
     }
 
     @Override
@@ -90,22 +161,15 @@ public class CloneProjectWidget extends GeoPlatformWindow {
     @Override
     public void setWindowProperties() {
         setHeadingHtml(
-                LayerModuleConstants.INSTANCE.ProjectPropertiesWidget_headingText());
+                LayerModuleConstants.INSTANCE.CloneProjectWidget_headingText());
         setModal(true);
         setResizable(false);
         setLayout(new FlowLayout());
-        addWindowListener(new WindowListener() {
-
-            @Override
-            public void windowShow(WindowEvent we) {
-                gpProjectPropertiesBinding.bindModel(model);
-            }
-        });
-
     }
 
-    public void showWithBinding(IGPRootTreeNode model) {
+    public void show(GPRootTreeNode model) {
         this.model = model;
         super.show();
+        projectNameField.setValue(model.getProjectName().concat("-copy"));
     }
 }

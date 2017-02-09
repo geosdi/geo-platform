@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.gui.client.i18n.buttons;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.Constants;
-import com.google.gwt.i18n.client.Constants.DefaultStringValue;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -148,4 +147,7 @@ public interface ButtonsConstants extends Constants {
 
     @DefaultStringValue("Print")
     String printText();
+
+    @DefaultStringValue("Clone")
+    String cloneText();
 }

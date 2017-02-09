@@ -23,6 +23,8 @@ public interface IBinder<TO extends Object, FROM extends Object, B extends IBind
 
         protected FROM from;
 
+        protected AbstractBinder(){}
+
         @Override
         public B withFrom(FROM from) {
             this.from = from;

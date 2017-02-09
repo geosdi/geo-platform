@@ -55,7 +55,7 @@ public class ShowProjectPropertiesMenuAction extends MenuBaseSecureAction {
 
     public ShowProjectPropertiesMenuAction(
             TreePanel treePanel) {
-        super(GPTrustedLevel.HIGH, LayerModuleConstants.INSTANCE.ShareProjectMenuAction_titleText(),
+        super(GPTrustedLevel.HIGH, LayerModuleConstants.INSTANCE.ShareProjectPropertiesMenuAction_titleText(),
                 AbstractImagePrototype.create(BasicWidgetResources.ICONS.info()));
         this.treePanel = treePanel;
         this.propertiesWidget = new ShowProjectPropertiesWidget();

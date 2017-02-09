@@ -122,6 +122,9 @@ public interface LayerModuleConstants extends Constants {
     @DefaultStringValue("Project Properties Widget")
     String ProjectPropertiesWidget_headingText();
 
+    @DefaultStringValue("Clone Project Widget")
+    String CloneProjectWidget_headingText();
+
     /**
      * start LayerTimeFilterWidget
      */
@@ -745,4 +748,13 @@ public interface LayerModuleConstants extends Constants {
      */
     @DefaultStringValue("The selected layer was not a vectorial layer")
     String ExportoToShpZip_warningBodyText();
+
+    @DefaultStringValue("Clone Project Error")
+    String CloneProjectWidget_cloneProjectErrorTitleText();
+
+    @DefaultStringValue("Project Cloned")
+    String CloneProjectWidget_cloneProjectSuccessTitleText();
+
+    @DefaultStringValue("Success")
+    String CloneProjectWidget_cloneSuccessTitleText();
 }

@@ -30,6 +30,8 @@ public interface IGPLayerBinder<TO extends GPLayer, FROM extends GPLayer, B exte
         private GPProject projectCloned;
         private GPFolder folderCloned;
 
+        protected GPLayerBinder(){super();}
+
         public static IGPLayerBinder<GPLayer, GPLayer, IGPLayerBinder> newGPFolderBinder() {
             return new GPLayerBinder();
         }

@@ -31,6 +31,8 @@ public interface IGPFolderBinder<TO extends GPFolder, FROM extends GPFolder, B e
         private GPProject projectCloned;
         private GPFolder folderCloned;
 
+        protected GPFolderBinder(){super();}
+
         public static IGPFolderBinder<GPFolder, GPFolder, IGPFolderBinder> newGPFolderBinder() {
             return new GPFolderBinder();
         }

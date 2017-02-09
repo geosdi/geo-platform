@@ -31,7 +31,9 @@ public interface IBinder<TO extends Object, FROM extends Object, B extends IBind
             return self();
         }
 
-        protected abstract B self();
+        protected B self() {
+            return (B) this;
+        }
 
         protected void checkArguments() {
             Preconditions.checkNotNull(from, "The FROM Parameter must not be null.");

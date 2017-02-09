@@ -50,11 +50,6 @@ public interface IGPProjectBinder<TO extends GPProject, FROM extends GPProject, 
             return self();
         }
 
-        @Override
-        protected IGPProjectBinder<GPProject, GPProject, IGPProjectBinder> self() {
-            return this;
-        }
-
         class GPProjectFunction implements Function<GPProject, GPProject> {
 
             /**

@@ -35,23 +35,16 @@
  */
 package org.geosdi.geoplatform.core.model;
 
-import java.io.Serializable;
-import javax.persistence.Column;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.*;
+
+import javax.persistence.*;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.Index;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import java.io.Serializable;
 
 /**
  * @author Francesco Izzi - geoSDI
@@ -228,6 +221,17 @@ public class GPFolder implements Serializable {
     }
 
     /**
+     *
+     * @return
+     */
+    public int getLevel() {
+        if(parent == null)
+            return 0;
+        else
+        return parent.getLevel()+1;
+    }
+
+    /**
      * (non-Javadoc)
      *
      * @see java.lang.Object#toString()
@@ -254,6 +258,7 @@ public class GPFolder implements Serializable {
         str.append(", checked=").append(checked);
         str.append(", shared=").append(shared);
         str.append(", expanded=").append(expanded);
+        str.append(", level=").append(getLevel());
         return str.append("}").toString();
     }
 

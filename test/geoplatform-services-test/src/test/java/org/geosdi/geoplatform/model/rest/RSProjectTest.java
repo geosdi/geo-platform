@@ -951,9 +951,9 @@ public class RSProjectTest extends BasicRestServiceTest {
         ChildrenFolderStore rootChildrens = gpWSClient.getChildrenFolders(rootFolder.getId());
         GPFolder clonedFolder_B = gpWSClient.getFolderDetail(rootChildrens.getChildren().get(0).getId());
         GPFolder clonedFolder_C = gpWSClient.getFolderDetail(rootChildrens.getChildren().get(1).getId());
-        ChildrenFolderStore bChildrens = gpWSClient.getChildrenFolders(rootChildrens.getChildren().get(0).getId());
+        ChildrenFolderStore bChildrens = gpWSClient.getChildrenFolders(clonedFolder_B.getId());
         GPFolder clonedFolder_D = gpWSClient.getFolderDetail(bChildrens.getChildren().get(0).getId());
-        ChildrenFolderStore cChildrens = gpWSClient.getChildrenFolders(rootChildrens.getChildren().get(1).getId());
+        ChildrenFolderStore cChildrens = gpWSClient.getChildrenFolders(clonedFolder_C.getId());
         GPFolder clonedFolder_E = gpWSClient.getFolderDetail(cChildrens.getChildren().get(0).getId());
         ShortLayerDTOContainer gpLayers = gpWSClient.getLayers(idProjectCloned);
 
@@ -964,6 +964,11 @@ public class RSProjectTest extends BasicRestServiceTest {
         Assert.assertTrue("Project ID",clonedFolder_C.getProject().getId() == idProjectCloned);
         Assert.assertTrue("Project ID",clonedFolder_D.getProject().getId() == idProjectCloned);
         Assert.assertTrue("Project ID",clonedFolder_E.getProject().getId() == idProjectCloned);
+        Assert.assertTrue("Parent ID",clonedFolder_B.getParent().getId().longValue() == rootFolder.getId().longValue());
+        Assert.assertTrue("Parent ID",clonedFolder_C.getParent().getId().longValue() == rootFolder.getId().longValue());
+        Assert.assertTrue("Parent ID",clonedFolder_D.getParent().getId().longValue() == clonedFolder_B.getId().longValue());
+        Assert.assertTrue("Parent ID",clonedFolder_E.getParent().getId().longValue() == clonedFolder_C.getId().longValue());
+
         Assert.assertTrue("Layers Size",gpLayers.getLayers().size() == 5);
         Assert.assertTrue("Root Children folders",rootChildrens.getChildren().size() == 2);
 

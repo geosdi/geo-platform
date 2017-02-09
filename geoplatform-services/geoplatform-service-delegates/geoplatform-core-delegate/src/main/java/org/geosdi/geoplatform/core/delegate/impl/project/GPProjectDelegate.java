@@ -58,10 +58,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.acls.domain.BasePermission;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -745,7 +742,8 @@ public class GPProjectDelegate implements ProjectDelegate {
             searchCriteria.addFilterEqual("project.id", cloneProjectRequest.getGpProjectID());
             searchCriteria.addFilterNotNull("parent.id");
             List<GPFolder> subFolders = folderDao.search(searchCriteria);
-
+            Collections.sort(subFolders,Comparator.comparingInt(f->f.getLevel()));
+            
             IntStream.iterate(0, n -> n + 1).limit(subFolders.size()).boxed().forEach(i ->
             {
                 GPFolder folderCloned = new GPFolderFunction(projectCloned, folderDao, folderMap.get(subFolders.get(i).getParent().getId())).apply(subFolders.get(i));
@@ -766,7 +764,6 @@ public class GPProjectDelegate implements ProjectDelegate {
             throw new IllegalParameterFault(e.getMessage());
         }
     }
-
 
     @Override
     public Long importProject(ImportProjectRequest impRequest) throws

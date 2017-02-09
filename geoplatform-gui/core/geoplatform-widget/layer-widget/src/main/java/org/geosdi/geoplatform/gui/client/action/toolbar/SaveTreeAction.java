@@ -45,12 +45,13 @@ import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
-import org.geosdi.geoplatform.gui.model.tree.LayerEvents;
 import org.geosdi.geoplatform.gui.client.model.memento.puregwt.GPPeekCacheEventHandler;
 import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
 import org.geosdi.geoplatform.gui.client.plugin.tree.toolbar.SaveTreeToolbarPlugin;
+import org.geosdi.geoplatform.gui.client.puregwt.refresh.support.GPCompositeRefreshHandlerSupport;
 import org.geosdi.geoplatform.gui.global.security.GPAccountLogged;
 import org.geosdi.geoplatform.gui.model.memento.IMemento;
+import org.geosdi.geoplatform.gui.model.tree.LayerEvents;
 import org.geosdi.geoplatform.gui.model.tree.TreeStatusEnum;
 import org.geosdi.geoplatform.gui.observable.Observable;
 import org.geosdi.geoplatform.gui.observable.Observer;
@@ -58,6 +59,8 @@ import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayersProgressBarEvent;
 import org.geosdi.geoplatform.gui.puregwt.savecache.SaveCacheHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
+
+import static org.geosdi.geoplatform.gui.client.puregwt.refresh.GPCompositeRefreshHandler.LOAD_ROOT_ELEMENTS_EVENT;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -117,6 +120,7 @@ public class SaveTreeAction extends ToolbarLayerTreeAction
                 SaveCacheHandlerManager.fireEvent(this.eventAfterAllSaveOperations);
                 this.eventAfterAllSaveOperations = null;
             }
+            GPCompositeRefreshHandlerSupport.fireCompositeRefreshEvent(LOAD_ROOT_ELEMENTS_EVENT);
         }
     }
 

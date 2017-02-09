@@ -53,9 +53,8 @@ public class ShowProjectPropertiesMenuAction extends MenuBaseSecureAction {
     private ShowProjectPropertiesWidget propertiesWidget;
     private TreePanel treePanel;
 
-    public ShowProjectPropertiesMenuAction(
-            TreePanel treePanel) {
-        super(GPTrustedLevel.HIGH, LayerModuleConstants.INSTANCE.ShareProjectPropertiesMenuAction_titleText(),
+    public ShowProjectPropertiesMenuAction(TreePanel treePanel) {
+        super(GPTrustedLevel.HIGH, LayerModuleConstants.INSTANCE.ShareProjectMenuAction_titleText(),
                 AbstractImagePrototype.create(BasicWidgetResources.ICONS.info()));
         this.treePanel = treePanel;
         this.propertiesWidget = new ShowProjectPropertiesWidget();
@@ -64,6 +63,6 @@ public class ShowProjectPropertiesMenuAction extends MenuBaseSecureAction {
     @Override
     public void componentSelected(MenuEvent e) {
         IGPRootTreeNode treeNode = (IGPRootTreeNode) this.treePanel.getSelectionModel().getSelectedItem();
-        this.propertiesWidget.showWithBinding(treeNode);
+        this.propertiesWidget.showWithBinding(treeNode, this.treePanel.getStore().getAllItems().size() - 1);
     }
 }

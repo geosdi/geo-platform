@@ -35,7 +35,6 @@
 package org.geosdi.geoplatform.core.delegate.impl.project;
 
 import com.googlecode.genericdao.search.Search;
-import org.geosdi.geoplatform.core.binding.IGPProjectBinder;
 import org.geosdi.geoplatform.core.dao.*;
 import org.geosdi.geoplatform.core.delegate.api.project.ProjectDelegate;
 import org.geosdi.geoplatform.core.delegate.impl.project.function.GPFolderFunction;
@@ -65,6 +64,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import static org.geosdi.geoplatform.core.binding.IGPProjectBinder.GPProjectBinder.newGProjectBinder;
 
 /**
  * Project service delegate.
@@ -725,8 +726,9 @@ public class GPProjectDelegate implements ProjectDelegate {
             // Root Folders
             List<GPFolder> rootFolders = folderDao.searchRootFolders(cloneProjectRequest.getGpProjectID());
             logger.debug("\n*** rootFolders:\n{}", rootFolders);
-
-            GPProject projectCloned = IGPProjectBinder.GPProjectBinder.newGProjectBinder().withNameProject(cloneProjectRequest.getNameProject()).withFrom(gpProject).bind();
+            GPProject projectCloned = newGProjectBinder()
+                    .withNameProject(cloneProjectRequest.getNameProject())
+                    .withFrom(gpProject).bind();
             GPAccountProject gpAccountProject = new GPAccountProject();
             gpAccountProject.setAccount(gpAccount);
             gpAccountProject.setProject(projectCloned);

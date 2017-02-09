@@ -105,9 +105,6 @@ public class RSProjectTest extends BasicRestServiceTest {
     private static final String titleVectorC = "vector_C";
     private static final String titleVectorD = "vector_D";
 
-
-
-
     @Override
     public void setUp() throws Exception {
         super.setUp();

@@ -44,6 +44,7 @@ import org.geosdi.geoplatform.gui.command.api.GPCommandRequest;
 public class LoadProjectRequest implements GPCommandRequest {
 
     private static final long serialVersionUID = 5255505696297418156L;
+    //
     private long projectId;
 
     public long getProjectId() {

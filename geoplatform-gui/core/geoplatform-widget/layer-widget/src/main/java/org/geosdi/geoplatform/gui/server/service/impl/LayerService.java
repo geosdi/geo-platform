@@ -38,6 +38,16 @@ import com.extjs.gxt.ui.client.data.BasePagingLoadResult;
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.google.common.collect.Lists;
 import it.geosolutions.geoserver.rest.GeoServerRESTReader;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.io.IOUtils;
 import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPFolder;
@@ -87,15 +97,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
@@ -138,7 +139,6 @@ public class LayerService implements ILayerService {
     }
 
     /**
-     *
      * @param geoPlatformTrackingClient the geoPlatformTrackingClient to set
      */
     @Autowired
@@ -183,6 +183,17 @@ public class LayerService implements ILayerService {
             logger.error("Returning no elements: " + rnf);
         }
         return this.dtoLayerConverter.convertToGPClientProject(projectDTO);
+    }
+
+    @Override
+    public Integer loadRootElements(Long projectID, HttpServletRequest httpServletRequest)
+            throws GeoPlatformException {
+        try {
+            return this.geoPlatformServiceClient.getNumberOfElementsProject(projectID);
+        } catch (ResourceNotFoundFault ex) {
+            ex.printStackTrace();
+            throw new GeoPlatformException(ex.getMessage());
+        }
     }
 
     @Override

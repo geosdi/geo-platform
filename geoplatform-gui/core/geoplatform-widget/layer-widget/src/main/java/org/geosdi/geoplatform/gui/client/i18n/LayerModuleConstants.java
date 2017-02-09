@@ -44,8 +44,7 @@ import com.google.gwt.i18n.client.Constants;
  */
 public interface LayerModuleConstants extends Constants {
 
-    public static final LayerModuleConstants INSTANCE
-            = GWT.create(LayerModuleConstants.class);
+    LayerModuleConstants INSTANCE = GWT.create(LayerModuleConstants.class);
 
     @DefaultStringValue("Save Delete Operation Error")
     String errorSaveDeleteOperationTitleText();
@@ -757,4 +756,7 @@ public interface LayerModuleConstants extends Constants {
 
     @DefaultStringValue("Success")
     String CloneProjectWidget_cloneSuccessTitleText();
+
+    @DefaultStringValue("Reload from UI")
+    String ShowProjectPropertiesWidget_checkBoxLabel();
 }

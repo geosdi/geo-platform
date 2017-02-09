@@ -8,6 +8,7 @@ import org.geosdi.geoplatform.gui.client.widget.wfs.buttonbar.undoredo.mediator.
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBusImpl;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static org.geosdi.geoplatform.gui.client.widget.wfs.buttonbar.undoredo.mediator.WFSUndoRedoMediatorHandler.TYPE;
@@ -25,7 +26,7 @@ public final class WFSUndoRedoMediatorHandlerSupport {
 
     @Inject
     public WFSUndoRedoMediatorHandlerSupport(WFSUndoRedoMediator wfsUndoRedoMediator) {
-        logger.info("###################################WFSUndoRedoMediatorHandlerSupport " + wfsUndoRedoMediator);
+        logger.log(Level.FINE, "###################################WFSUndoRedoMediatorHandlerSupport " + wfsUndoRedoMediator);
         addUndoRedoMediatorHandler(wfsUndoRedoMediator);
     }
 
@@ -34,7 +35,6 @@ public final class WFSUndoRedoMediatorHandlerSupport {
     }
 
     public static void fireUndoRedoEvent(WFSUndoRedoEvent event) {
-        logger.info("###########################fireUndoRedoEvent");
         bus.fireEvent(event);
     }
 }

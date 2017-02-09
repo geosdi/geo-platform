@@ -33,7 +33,7 @@
         <db.url>${db.baseurl}/gp</db.url>
         <db.driverClassName>org.postgresql.Driver</db.driverClassName>
         <db.username>postgres</db.username>
-        <db.password></db.password>
+        <db.password>0x,postgres,0x</db.password>
 
         <dataset.file>src/test/resources/bootstrap-db.xml</dataset.file>
     </properties>
@@ -462,6 +462,15 @@
                                 <srcFile>target/classes/geoplatform-model.ddl</srcFile>
                             </srcFiles>
                         </configuration>
+                        <executions>
+                            <execution>
+                                <id>create-db-schema</id>
+                                <phase>compile</phase>
+                                <goals>
+                                    <goal>execute</goal>
+                                </goals>
+                            </execution>
+                        </executions>
                     </plugin>
                 </plugins>
             </build>

@@ -625,10 +625,8 @@ public class LayerService implements ILayerService {
     }
 
     @Override
-    public BasePagingLoadResult<GPClientProject> searchProjects(
-            PagingLoadConfig config,
-            String searchText, String imageURL,
-            HttpServletRequest httpServletRequest)
+    public BasePagingLoadResult<GPClientProject> searchProjects(PagingLoadConfig config,
+            String searchText, String imageURL, HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
         GPAccount account = null;
         try {
@@ -642,14 +640,15 @@ public class LayerService implements ILayerService {
         try {
             Long projectsCount = this.geoPlatformServiceClient.getAccountProjectsCount(
                     account.getId(), srq);
-
+            if(projectsCount == 0l) {
+                throw new GeoPlatformException("There are no results");
+            }
+            logger.debug("#############################PROJECT_COUNT : {}\n", projectsCount);
             int page = start == 0 ? start : start / config.getLimit();
-
             PaginatedSearchRequest psr = new PaginatedSearchRequest(searchText,
                     config.getLimit(), page);
-
-            List<ProjectDTO> projectsDTO = this.geoPlatformServiceClient.searchAccountProjects(
-                    account.getId(), psr);
+            List<ProjectDTO> projectsDTO = this.geoPlatformServiceClient.searchAccountProjects(account.getId(),
+                    psr);
 
             if (projectsDTO == null) {
                 throw new GeoPlatformException("There are no results");
@@ -658,23 +657,20 @@ public class LayerService implements ILayerService {
             ArrayList<GPClientProject> clientProjects = new ArrayList<GPClientProject>();
 
             for (ProjectDTO projectDTO : projectsDTO) {
-                GPClientProject clientProject = this.dtoLayerConverter.convertToGPCLientProject(
-                        projectDTO, imageURL);
+                GPClientProject clientProject = this.dtoLayerConverter.convertToGPCLientProject(projectDTO,
+                        imageURL);
                 clientProjects.add(clientProject);
             }
-
             return new BasePagingLoadResult<GPClientProject>(clientProjects,
                     config.getOffset(), projectsCount.intValue());
-
         } catch (ResourceNotFoundFault ex) {
-            logger.error("An Error Occured : " + ex.getMessage());
+            ex.printStackTrace();
             throw new GeoPlatformException(ex.getMessage());
         }
     }
 
     @Override
-    public void setDefaultProject(Long projectID,
-            HttpServletRequest httpServletRequest)
+    public void setDefaultProject(Long projectID, HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
         try {
             GPAccount account = this.sessionUtility.getLoggedAccount(

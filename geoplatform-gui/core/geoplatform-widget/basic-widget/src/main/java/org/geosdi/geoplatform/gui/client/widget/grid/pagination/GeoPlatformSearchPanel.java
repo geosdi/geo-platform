@@ -55,7 +55,6 @@ import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.Widget;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
-import org.geosdi.geoplatform.gui.client.i18n.BasicWidgetConstants;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.i18n.status.SearchStatusConstants;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
@@ -63,6 +62,8 @@ import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextField;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
+
+import static org.geosdi.geoplatform.gui.client.i18n.BasicWidgetConstants.INSTANCE;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -135,14 +136,14 @@ public abstract class GeoPlatformSearchPanel<C extends Widget, T extends GeoPlat
         formPanel.setLayout(new FlowLayout());
         FieldSet searchFieldSet = new FieldSet();
         searchFieldSet.setHeadingHtml(
-                BasicWidgetConstants.INSTANCE.GeoPlatformSearchPanel_headingText());
+                INSTANCE.GeoPlatformSearchPanel_headingText());
         FormLayout layout = new FormLayout();
         layout.setLabelWidth(80);
         searchFieldSet.setLayout(layout);
         search = new GPSecureStringTextField();
         search.setLabelStyle("width:100px");
         search.setFieldLabel(
-                BasicWidgetConstants.INSTANCE.GeoPlatformSearchPanel_searchFieldLabelText());
+                INSTANCE.GeoPlatformSearchPanel_searchFieldLabelText());
         search.addKeyListener(new KeyListener() {
 
             @Override
@@ -264,8 +265,7 @@ public abstract class GeoPlatformSearchPanel<C extends Widget, T extends GeoPlat
 
             @Override
             public void loaderBeforeLoad(LoadEvent le) {
-                searchStatus.setBusy(
-                        BasicWidgetConstants.INSTANCE.GeoPlatformSearchPanel_connectionBusyStatusText());
+                searchStatus.setBusy(INSTANCE.GeoPlatformSearchPanel_connectionBusyStatusText());
                 if (selectButton.isEnabled()) {
                     selectButton.disable();
                 }

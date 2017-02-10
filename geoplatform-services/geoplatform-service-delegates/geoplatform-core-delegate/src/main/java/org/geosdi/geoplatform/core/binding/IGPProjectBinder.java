@@ -72,6 +72,4 @@ public interface IGPProjectBinder<TO extends GPProject, FROM extends GPProject, 
             }
         }
     }
-
-
 }

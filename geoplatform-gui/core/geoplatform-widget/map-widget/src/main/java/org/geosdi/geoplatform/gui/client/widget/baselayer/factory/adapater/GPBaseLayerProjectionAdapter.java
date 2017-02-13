@@ -55,9 +55,9 @@ public class GPBaseLayerProjectionAdapter {
             case BING_HYBRID:
             case BING_AERIAL:
                 return new Projection(GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode());
-
             case METACARTA:
             case GEOSDI_BASE:
+                return new Projection(GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode());
             case GEOSDI_NULL_BASE:
                 return new Projection(GPCoordinateReferenceSystem.WGS_84.getCode());
 

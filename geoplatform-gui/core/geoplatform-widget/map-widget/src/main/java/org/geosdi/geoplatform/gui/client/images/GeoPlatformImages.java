@@ -59,6 +59,9 @@ public interface GeoPlatformImages extends ClientBundle {
     @Source("DPC.png")
     ImageResource DPC();
 
+    @Source("Iter.png")
+    ImageResource ITER();
+
     @Source("GoogleHybrid.png")
     ImageResource googleHybrid();
 

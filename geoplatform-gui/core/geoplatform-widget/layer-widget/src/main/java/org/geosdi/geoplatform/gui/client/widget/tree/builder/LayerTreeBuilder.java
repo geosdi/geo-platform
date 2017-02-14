@@ -165,6 +165,7 @@ public class LayerTreeBuilder implements GPCompositeBuilder {
         root.setProjectElements(clientProject.getNumberOfElements());
         root.setProjectMessage(clientProject.getDefaultProjectLabel());
         root.setProjectName(clientProject.getName());
+        root.setProjectVersion(clientProject.getVersion());
         root.setProjectShared(clientProject.isShared());
         root.modelConverter(clientProject.getRootFolders());
         store.add(root, Boolean.TRUE);

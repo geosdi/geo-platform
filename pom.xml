@@ -1487,7 +1487,7 @@
 
         <aspectj-version>1.8.0</aspectj-version>
         <ubl-version>2.0</ubl-version>
-        <jetty-version>8.1.14.v20131031</jetty-version>
+        <jetty-version>9.3.15.v20161220</jetty-version>
 
         <postgresql-version>9.4-1200-jdbc41</postgresql-version>
         <postgis-jdbc-version>1.5.2</postgis-jdbc-version>

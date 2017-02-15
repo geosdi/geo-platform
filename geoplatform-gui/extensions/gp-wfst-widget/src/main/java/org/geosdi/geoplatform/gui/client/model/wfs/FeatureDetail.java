@@ -64,6 +64,7 @@ public class FeatureDetail extends FeatureAttributeValuesDetail {
     public FeatureDetail(VectorFeature theFeature, Map<String, String> theAttributes) {
         super(theAttributes);
         this.vectorFeature = theFeature;
+        this.featureID = this.vectorFeature.getFID();
     }
 
     public VectorFeature getVectorFeature() {

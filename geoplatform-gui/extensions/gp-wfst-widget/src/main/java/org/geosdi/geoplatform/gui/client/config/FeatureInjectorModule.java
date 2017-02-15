@@ -52,8 +52,6 @@ import org.geosdi.geoplatform.gui.client.widget.wfs.initializer.FeatureMapInitia
 import org.geosdi.geoplatform.gui.client.widget.wfs.initializer.IFeatureMapInitializer;
 import org.geosdi.geoplatform.gui.client.widget.wfs.layout.responsibility.FeatureAttributesLayoutHandler;
 import org.geosdi.geoplatform.gui.client.widget.wfs.layout.responsibility.FeatureSelectionLayoutHandler;
-import org.geosdi.geoplatform.gui.factory.map.DefaultMapFactory;
-import org.geosdi.geoplatform.gui.factory.map.GeoPlatformMapFactory;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBusImpl;
 
@@ -79,8 +77,7 @@ public class FeatureInjectorModule extends AbstractGinModule {
         bind(IFeatureMapWidget.class).to(FeatureMapWidget.class).in(
                 Singleton.class);
         bind(IActionStrategy.class).to(IActionStrategy.ActionStrategy.class).in(Singleton.class);
-        bind(GeoPlatformMapFactory.class).to(DefaultMapFactory.class);
-        
+
         bind(IFeatureMapInitializer.class).to(FeatureMapInitializer.class).in(Singleton.class);
         
         bind(FeatureSelectionLayoutHandler.class).in(Singleton.class);

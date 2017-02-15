@@ -328,6 +328,10 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel implements 
         assert (instaces != null) : "Feature instances must not be null.";
         int numFeature = instaces.size();
 
+        for(FeatureDetail featureDetail : instaces) {
+            logger.info("##################################FID : " + featureDetail.getFeatureID());
+        }
+
         grid.mask("Retrieve " + numFeature + " feature instance attributes");
         this.populateStore(instaces);
         grid.unmask();

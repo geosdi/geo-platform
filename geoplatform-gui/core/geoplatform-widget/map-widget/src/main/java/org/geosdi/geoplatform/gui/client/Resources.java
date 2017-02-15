@@ -37,7 +37,8 @@ package org.geosdi.geoplatform.gui.client;
 
 import com.google.gwt.core.client.GWT;
 import org.geosdi.geoplatform.gui.client.icons.GeoPlatformIcons;
-import org.geosdi.geoplatform.gui.client.images.GeoPlatformImages;
+import org.geosdi.geoplatform.gui.global.baselayer.BaseLayerResources;
+import org.geosdi.geoplatform.gui.global.baselayer.images.GeoPlatformImages;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -47,5 +48,5 @@ import org.geosdi.geoplatform.gui.client.images.GeoPlatformImages;
 public class Resources {
 
     public static final GeoPlatformIcons ICONS = GWT.create(GeoPlatformIcons.class);
-    public static final GeoPlatformImages IMAGES = GWT.create(GeoPlatformImages.class);
+    public static final GeoPlatformImages IMAGES = BaseLayerResources.IMAGES;
 }

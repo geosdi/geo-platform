@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.widget.baselayer.model;
 
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import org.geosdi.geoplatform.gui.global.baselayer.GPBaseLayerValue;
 import org.geosdi.geoplatform.gui.global.enumeration.BaseLayerValue;
 import org.geosdi.geoplatform.gui.global.enumeration.GlobalRegistryEnum;
 import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
@@ -58,11 +59,11 @@ public class GPBaseLayer extends GeoPlatformBeanModel {
     }
 
     public GPBaseLayer(Layer gwtOlBaseLayer, AbstractImagePrototype baseLayerImage,
-            Projection projection, BaseLayerValue enumName) {
+            Projection projection, GPBaseLayerValue layerValue) {
         super.set(BaseLayerKey.IMAGE.toString(), baseLayerImage.getHTML());
         super.set(GlobalRegistryEnum.BASE_LAYER.toString(), gwtOlBaseLayer);
         super.set(BaseLayerKey.PROJECTION.toString(), projection);
-        super.set(BaseLayerKey.ENUM_NAME.toString(), enumName);
+        super.set(BaseLayerKey.ENUM_NAME.toString(), layerValue);
         super.set(GlobalRegistryEnum.TOOLTIP.toString(),
                 gwtOlBaseLayer.getName()
                 + " - " + projection.getProjectionCode());

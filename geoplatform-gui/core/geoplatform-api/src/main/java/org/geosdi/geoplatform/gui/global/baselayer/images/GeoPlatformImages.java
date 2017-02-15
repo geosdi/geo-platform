@@ -33,7 +33,7 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.client.images;
+package org.geosdi.geoplatform.gui.global.baselayer.images;
 
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.ImageResource;
@@ -58,9 +58,6 @@ public interface GeoPlatformImages extends ClientBundle {
 
     @Source("DPC.png")
     ImageResource DPC();
-
-    @Source("Iter.png")
-    ImageResource ITER();
 
     @Source("GoogleHybrid.png")
     ImageResource googleHybrid();

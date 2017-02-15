@@ -1,37 +1,36 @@
 /**
- *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
- *
- *   Copyright (C) 2008-2017 geoSDI Group (CNR IMAA - Potenza - ITALY).
- *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
- *
- *   ====================================================================
- *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
- *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * geo-platform
+ * Rich webgis framework
+ * http://geo-platform.org
+ * ====================================================================
+ * <p>
+ * Copyright (C) 2008-2017 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * <p>
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version. This program is distributed in the
+ * hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License
+ * for more details. You should have received a copy of the GNU General
+ * Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * <p>
+ * ====================================================================
+ * <p>
+ * Linking this library statically or dynamically with other modules is
+ * making a combined work based on this library. Thus, the terms and
+ * conditions of the GNU General Public License cover the whole combination.
+ * <p>
+ * As a special exception, the copyright holders of this library give you permission
+ * to link this library with independent modules to produce an executable, regardless
+ * of the license terms of these independent modules, and to copy and distribute
+ * the resulting executable under terms of your choice, provided that you also meet,
+ * for each linked independent module, the terms and conditions of the license of
+ * that module. An independent module is a module which is not derived from or
+ * based on this library. If you modify this library, you may extend this exception
+ * to your version of the library, but you are not obligated to do so. If you do not
+ * wish to do so, delete this exception statement from your version.
  */
 package org.geosdi.geoplatform.gui.client.widget.baselayer;
 
@@ -47,22 +46,23 @@ import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.ListView;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.button.GPSecureButton;
-import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.action.baselayer.SaveBaseLayerAction;
 import org.geosdi.geoplatform.gui.client.event.ChangeBaseLayerEvent;
 import org.geosdi.geoplatform.gui.client.i18n.MapModuleConstants;
-import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
 import org.geosdi.geoplatform.gui.client.widget.baselayer.factory.GPMapBaseLayerFactory;
 import org.geosdi.geoplatform.gui.client.widget.baselayer.model.GPBaseLayer;
 import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformSecureAction;
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
-import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
 import org.geosdi.geoplatform.gui.global.enumeration.GlobalRegistryEnum;
 import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
+
+import static com.google.gwt.user.client.ui.AbstractImagePrototype.create;
+import static org.geosdi.geoplatform.gui.client.BasicWidgetResources.ICONS;
+import static org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants.INSTANCE;
+import static org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -72,6 +72,7 @@ public class BaseLayerWidget extends GeoPlatformWindow {
 
     private static final short WIDGET_WIDTH = 485;
     private static final short WIDGET_HEIGHT = 385;
+    //
     private ListStore<GPBaseLayer> store = new ListStore<GPBaseLayer>();
     private ListView<GPBaseLayer> listView;
     private ContentPanel centralPanel;
@@ -85,13 +86,12 @@ public class BaseLayerWidget extends GeoPlatformWindow {
     public void addComponent() {
         this.store.add(GPMapBaseLayerFactory.getBaseLayerList());
         GeoPlatformSecureAction saveBaseLayerAction = new SaveBaseLayerAction(GPTrustedLevel.LOW, this);
-        this.saveButton = new GPSecureButton(ButtonsConstants.INSTANCE.saveText(),
-                AbstractImagePrototype.create(BasicWidgetResources.ICONS.save()),
+        this.saveButton = new GPSecureButton(INSTANCE.saveText(), create(ICONS.save()),
                 saveBaseLayerAction);
         this.saveButton.disable();
-        Button applyButton = new Button(ButtonsConstants.INSTANCE.applyCloseText(),
-                AbstractImagePrototype.create(BasicWidgetResources.ICONS.done()),
+        Button applyButton = new Button(INSTANCE.applyCloseText(), create(ICONS.done()),
                 new SelectionListener<ButtonEvent>() {
+            
                     @Override
                     public void componentSelected(ButtonEvent ce) {
                         BaseLayerWidget.super.hide();
@@ -112,6 +112,23 @@ public class BaseLayerWidget extends GeoPlatformWindow {
         super.setHeadingHtml(MapModuleConstants.INSTANCE.BaseLayerWidget_headingText());
         super.setScrollMode(Style.Scroll.NONE);
         super.setResizable(Boolean.FALSE);
+    }
+
+    @Override
+    public void finalizeInitOperations() {
+        super.finalizeInitOperations();
+        this.centralPanel = new ContentPanel(new FlowLayout(0));
+        this.centralPanel.setHeaderVisible(Boolean.FALSE);
+        this.centralPanel.setFrame(Boolean.TRUE);
+        this.centralPanel.setSize(WIDGET_WIDTH - 15, WIDGET_HEIGHT - 20);
+        this.centralPanel.add(this.generateListView());
+        this.centralPanel.setScrollMode(Style.Scroll.NONE);
+        super.add(this.centralPanel);
+    }
+
+    @Override
+    public void reset() {
+        this.saveButton.disable();
     }
 
     private ListView<GPBaseLayer> generateListView() {
@@ -135,38 +152,21 @@ public class BaseLayerWidget extends GeoPlatformWindow {
                     ChangeBaseLayerEvent event;
 
                     @Override
-                    public void selectionChanged(
-                            SelectionChangedEvent<GPBaseLayer> se) {
-                                GPBaseLayer selectedBaseLayer = se.getSelectedItem();
-                                if (selectedBaseLayer != null) {
-                                    event = new ChangeBaseLayerEvent(selectedBaseLayer);
-                                    MapHandlerManager.fireEvent(event);
-                                    IGPAccountDetail accountDetail = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
-                                    accountDetail.setBaseLayer(selectedBaseLayer.getBaseLayerEnumName().toString());
-//                            Registry.register(GlobalRegistryEnum.BASE_LAYER.toString(),
-//                                    selectedBaseLayer.getBaseLayerEnumName().toString());
-                                }
-                                listView.getSelectionModel().deselectAll();
-                                BaseLayerWidget.this.saveButton.enable();
-                            }
+                    public void selectionChanged(SelectionChangedEvent<GPBaseLayer> se) {
+                        GPBaseLayer selectedBaseLayer = se.getSelectedItem();
+                        if (selectedBaseLayer != null) {
+                            event = new ChangeBaseLayerEvent(selectedBaseLayer);
+                            MapHandlerManager.fireEvent(event);
+                            IGPAccountDetail accountDetail = Registry.get(ACCOUNT_DETAIL_IN_SESSION.name());
+                            accountDetail.setBaseLayer(selectedBaseLayer.getBaseLayerEnumName().toString());
+                        }
+                        listView.getSelectionModel().deselectAll();
+                        BaseLayerWidget.this.saveButton.enable();
+                    }
 
                 });
-
         setListViewProperties();
-
         return listView;
-    }
-
-    @Override
-    public void finalizeInitOperations() {
-        super.finalizeInitOperations();
-        this.centralPanel = new ContentPanel(new FlowLayout(0));
-        this.centralPanel.setHeaderVisible(Boolean.FALSE);
-        this.centralPanel.setFrame(Boolean.TRUE);
-        this.centralPanel.setSize(WIDGET_WIDTH - 15, WIDGET_HEIGHT - 20);
-        this.centralPanel.add(this.generateListView());
-        this.centralPanel.setScrollMode(Style.Scroll.NONE);
-        super.add(this.centralPanel);
     }
 
     private void setListViewProperties() {
@@ -186,11 +186,4 @@ public class BaseLayerWidget extends GeoPlatformWindow {
 
         listView.setSize(WIDGET_WIDTH - 25, WIDGET_HEIGHT - 75);
     }
-
-    @Override
-    public void hide() {
-        super.hide();
-        this.saveButton.disable();
-    }
-
 }

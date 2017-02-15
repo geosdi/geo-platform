@@ -43,6 +43,7 @@ import org.geosdi.geoplatform.gui.global.enumeration.BaseLayerValue;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@Deprecated
 public class GPBaseLayerIconAdapter {
 
     protected static AbstractImagePrototype adaptBaseLayerIcon(BaseLayerValue key) {
@@ -73,8 +74,7 @@ public class GPBaseLayerIconAdapter {
                 baseLayerIcon = AbstractImagePrototype.create(Resources.IMAGES.metacartaVmap());
                 break;
             case GEOSDI_BASE:
-//                baseLayerIcon = AbstractImagePrototype.create(Resources.IMAGES.DPC());
-                baseLayerIcon = AbstractImagePrototype.create(Resources.IMAGES.ITER());
+                baseLayerIcon = AbstractImagePrototype.create(Resources.IMAGES.DPC());
                 break;
             case GEOSDI_NULL_BASE:
                 baseLayerIcon = AbstractImagePrototype.create(Resources.IMAGES.blank());

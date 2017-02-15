@@ -1,63 +1,24 @@
-/**
- * geo-platform
- * Rich webgis framework
- * http://geo-platform.org
- * ====================================================================
- * <p>
- * Copyright (C) 2008-2017 geoSDI Group (CNR IMAA - Potenza - ITALY).
- * <p>
- * This program is free software: you can redistribute it and/or modify it
- * under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version. This program is distributed in the
- * hope that it will be useful, but WITHOUT ANY WARRANTY; without
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR
- * A PARTICULAR PURPOSE. See the GNU General Public License
- * for more details. You should have received a copy of the GNU General
- * Public License along with this program. If not, see http://www.gnu.org/licenses/
- * <p>
- * ====================================================================
- * <p>
- * Linking this library statically or dynamically with other modules is
- * making a combined work based on this library. Thus, the terms and
- * conditions of the GNU General Public License cover the whole combination.
- * <p>
- * As a special exception, the copyright holders of this library give you permission
- * to link this library with independent modules to produce an executable, regardless
- * of the license terms of these independent modules, and to copy and distribute
- * the resulting executable under terms of your choice, provided that you also meet,
- * for each linked independent module, the terms and conditions of the license of
- * that module. An independent module is a module which is not derived from or
- * based on this library. If you modify this library, you may extend this exception
- * to your version of the library, but you are not obligated to do so. If you do not
- * wish to do so, delete this exception statement from your version.
- */
-package org.geosdi.geoplatform.gui.factory.baselayer;
+package org.geosdi.geoplatform.gui.baselayer.store;
 
 import com.google.common.collect.Maps;
 import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
+import org.geosdi.geoplatform.gui.factory.baselayer.GPBaseLayerCreator;
+import org.geosdi.geoplatform.gui.global.baselayer.GPBaseLayerValue;
 import org.geosdi.geoplatform.gui.global.enumeration.BaseLayerValue;
 import org.gwtopenmaps.openlayers.client.OpenLayers;
 import org.gwtopenmaps.openlayers.client.Size;
 import org.gwtopenmaps.openlayers.client.layer.*;
 import org.gwtopenmaps.openlayers.client.protocol.ProtocolType;
 
-import java.util.Collections;
-import java.util.EnumMap;
 import java.util.Map;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * see {@link org.geosdi.geoplatform.gui.baselayer.store.GPBaseLayerStore}
  */
-@Deprecated
-class GPBaseLayerRepository {
+abstract class AbstractBaseLayerStore implements IGPBaseLayerStore {
 
-    private final String bingKey = "ApTJzdkyN1DdFKkRAE6QIDtzihNaf6IWJsT-nQ_2eMoO4PN__0Tzhl2-WgJtXFSp";
-    private EnumMap<BaseLayerValue, GPBaseLayerCreator> baseLayerMap = Maps.
-            <BaseLayerValue, GPBaseLayerCreator>newEnumMap(BaseLayerValue.class);
-    private static GPBaseLayerRepository instance;
+    private static final String bingKey = "ApTJzdkyN1DdFKkRAE6QIDtzihNaf6IWJsT-nQ_2eMoO4PN__0Tzhl2-WgJtXFSp";
     public final static double[] baseMapResolutions = {156543.03390625d, 78271.516953125d,
             39135.7584765625d, 19567.87923828125d, 9783.939619140625d,
             4891.9698095703125d, 2445.9849047851562d, 1222.9924523925781d,
@@ -70,34 +31,14 @@ class GPBaseLayerRepository {
             0.004665345964021981d, 0.0023326729820109904d,
             0.0011663364910054952d, 5.831682455027476E-4d,
             2.915841227513738E-4d, 1.457920613756869E-4d};
+    //
+    protected Map<GPBaseLayerValue, GPBaseLayerCreator> baseLayerMap = Maps.newHashMap();
 
-    private GPBaseLayerRepository() {
-        lookupBaseLayers();
+    protected AbstractBaseLayerStore() {
+        lookupDefaultBaseLayers();
     }
 
-    public static GPBaseLayerRepository getInstance() {
-        if (instance == null) {
-            instance = new GPBaseLayerRepository();
-        }
-
-        return instance;
-    }
-
-    public Layer findBaseLayer(BaseLayerValue enumLayer) {
-        return (baseLayerMap.get(enumLayer) != null)
-                ? baseLayerMap.get(enumLayer).createBaseLayer() : null;
-    }
-
-    /**
-     * Return all Base Layers registered in the Repository
-     *
-     * @return Map<BaseLayerEnum, GPBaseLayerCreator>
-     */
-    public Map<BaseLayerValue, GPBaseLayerCreator> getAllBaseLayers() {
-        return Collections.unmodifiableMap(baseLayerMap);
-    }
-
-    private void lookupBaseLayers() {
+    private void lookupDefaultBaseLayers() {
         baseLayerMap.put(BaseLayerValue.OPEN_STREET_MAP,
                 new GPBaseLayerCreator() {
 
@@ -219,14 +160,12 @@ class GPBaseLayerRepository {
     private Layer createGeoSdiBaseLayer() {
         WMSParams wmsParams = new WMSParams();
         wmsParams.setFormat("image/png");
-        wmsParams.setLayers("itercampania:Ortofoto Regione Campania 2014");
+        wmsParams.setLayers("Mappa_di_Base");
         wmsParams.setStyles("");
         WMSOptions wmsLayerParams = new WMSOptions();
-        wmsLayerParams.setResolutions(baseMapResolutions);
-        wmsLayerParams.setProjection(
-                GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode());
+        wmsLayerParams.setProjection(GPCoordinateReferenceSystem.WGS_84.getCode());
         wmsLayerParams.setTileSize(new Size(256, 256));
-        Layer geoSdi = new WMS("iterCampania", "https://iterservice.regione.campania.it/geowebcache/service/wms",
+        Layer geoSdi = new WMS("geoSdi", "http://dpc.geosdi.org/geoserver/wms",
                 wmsParams, wmsLayerParams);
         geoSdi.setIsBaseLayer(Boolean.TRUE);
         return geoSdi;
@@ -373,5 +312,4 @@ class GPBaseLayerRepository {
         EmptyLayer emptyLayer = new EmptyLayer("Empty layer", emptyLayerOptions);
         return emptyLayer;
     }
-
 }

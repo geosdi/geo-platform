@@ -35,6 +35,7 @@
     <source path="command/capabilities" />
     <source path="containers" />
     <source path="global" />
+    <source path="baselayer" />
     <source path="model" />
     <source path="observable" />
     <source path="puregwt" />

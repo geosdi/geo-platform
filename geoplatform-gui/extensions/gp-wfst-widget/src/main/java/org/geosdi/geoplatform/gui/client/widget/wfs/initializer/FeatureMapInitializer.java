@@ -46,14 +46,11 @@ import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.getfeature.WFSGe
 import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar;
 import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.WFSButtonKeyProvider;
 import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.WFSToggleButton;
-import org.geosdi.geoplatform.gui.factory.baselayer.GPBaseLayerFactory;
-import org.geosdi.geoplatform.gui.global.enumeration.BaseLayerValue;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.gwtopenmaps.openlayers.client.Bounds;
 import org.gwtopenmaps.openlayers.client.LonLat;
 import org.gwtopenmaps.openlayers.client.MapWidget;
-import org.gwtopenmaps.openlayers.client.control.LayerSwitcher;
 import org.gwtopenmaps.openlayers.client.layer.Layer;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
 import org.gwtopenmaps.openlayers.client.layer.WMS;
@@ -140,10 +137,6 @@ public class FeatureMapInitializer implements IFeatureMapInitializer {
 
     @Override
     public void initMapWidget() {
-        this.mapWidget.getMap().addControl(new LayerSwitcher());
-        Layer layerIter = GPBaseLayerFactory.getBaseLayer(BaseLayerValue.GEOSDI_BASE);
-        layerIter.setDisplayInLayerSwitcher(Boolean.TRUE);
-        this.mapWidget.getMap().addLayer(layerIter);
         this.mapWidget.getMap().setCenter(italyLonLat, 4);
     }
 
@@ -189,5 +182,4 @@ public class FeatureMapInitializer implements IFeatureMapInitializer {
         this.bus.fireEvent(new FeatureStatusBarEvent("WFS Layer loaded",
                 FeatureStatusBar.FeatureStatusBarType.STATUS_OK));
     }
-
 }

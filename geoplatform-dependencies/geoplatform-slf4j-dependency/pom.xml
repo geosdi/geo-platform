@@ -39,7 +39,7 @@
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>jul-to-slf4j</artifactId>
-                <version>1.7.13</version>
+                <version>${slf4j-version}</version>
             </dependency>
             
             <!-- 
@@ -74,13 +74,13 @@
             <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-classic</artifactId>
-                <version>1.1.7</version>
+                <version>1.2.1</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
     
     <properties>
-        <slf4j-version>1.7.21</slf4j-version>
+        <slf4j-version>1.7.23</slf4j-version>
     </properties>
 
 </project>

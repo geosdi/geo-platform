@@ -36,11 +36,16 @@
 package org.geosdi.geoplatform.exception;
 
 import javax.ws.rs.core.Response;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public abstract class GPExceptionFault extends RuntimeException {
 
     private static final long serialVersionUID = 9125280996002302152L;

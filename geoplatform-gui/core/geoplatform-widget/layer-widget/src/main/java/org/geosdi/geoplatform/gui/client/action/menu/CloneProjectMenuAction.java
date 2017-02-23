@@ -34,14 +34,22 @@
  */
 package org.geosdi.geoplatform.gui.client.action.menu;
 
+import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.MenuEvent;
+import com.extjs.gxt.ui.client.event.MessageBoxEvent;
+import com.extjs.gxt.ui.client.widget.Dialog;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseSecureAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
+import org.geosdi.geoplatform.gui.client.i18n.MementoPersistenceConstants;
 import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
+import org.geosdi.geoplatform.gui.client.model.memento.puregwt.event.PeekCacheEvent;
 import org.geosdi.geoplatform.gui.client.widget.CloneProjectWidget;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 
 /**
@@ -50,8 +58,8 @@ import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
  */
 public class CloneProjectMenuAction extends MenuBaseSecureAction {
 
-    private CloneProjectWidget cloneProjectWidget;
-    private TreePanel treePanel;
+    private final CloneProjectWidget cloneProjectWidget;
+    private final TreePanel treePanel;
 
     public CloneProjectMenuAction(
             TreePanel treePanel) {
@@ -63,7 +71,24 @@ public class CloneProjectMenuAction extends MenuBaseSecureAction {
 
     @Override
     public void componentSelected(MenuEvent e) {
-        GPRootTreeNode treeNode = (GPRootTreeNode) this.treePanel.getSelectionModel().getSelectedItem();
-        this.cloneProjectWidget.show(treeNode);
+        final GPRootTreeNode treeNode = (GPRootTreeNode) this.treePanel.getSelectionModel().getSelectedItem();
+
+        if (!MementoModuleInjector.MainInjector.getInstance().getMementoSave().isEmpty()) {
+            GeoPlatformMessage.confirmMessage(
+                    MementoPersistenceConstants.INSTANCE.MementoSaveCacheManager_unsavedOperationsText(),
+                    MementoPersistenceConstants.INSTANCE.MementoSaveCacheManager_unsavedOperationMessageText(),
+                    new Listener<MessageBoxEvent>() {
+                        @Override
+                        public void handleEvent(MessageBoxEvent be) {
+                            if (Dialog.YES.equals(be.getButtonClicked().getItemId())) {
+                                PeekCacheEvent peekCacheEvent = new PeekCacheEvent();
+                                LayerHandlerManager.fireEvent(peekCacheEvent);
+                            }
+                            cloneProjectWidget.show(treeNode);
+                        }
+                    });
+        } else {
+            this.cloneProjectWidget.show(treeNode);
+        }
     }
 }

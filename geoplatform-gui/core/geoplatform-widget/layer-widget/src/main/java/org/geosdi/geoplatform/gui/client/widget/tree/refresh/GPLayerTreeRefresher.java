@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import org.geosdi.geoplatform.gui.client.command.layer.basic.LoadRootElementsRequest;
 import org.geosdi.geoplatform.gui.client.command.layer.basic.LoadRootElementsResponse;
 import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
+import org.geosdi.geoplatform.gui.client.model.projects.GPShortClientProject;
 import org.geosdi.geoplatform.gui.client.puregwt.refresh.GPCompositeRefreshHandler;
 import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.command.api.GPClientCommandExecutor;
@@ -40,7 +41,9 @@ public class GPLayerTreeRefresher implements GPCompositeRefreshHandler {
 
             @Override
             public void onCommandSuccess(LoadRootElementsResponse response) {
-                root.setProjectElements(response.getResult());
+                GPShortClientProject gpShortClientProject = response.getResult();
+                root.setProjectElements(gpShortClientProject.getNumberOfElements());
+                root.setProjectVersion(gpShortClientProject.getVersion());
             }
 
             @Override

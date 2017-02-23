@@ -1,37 +1,36 @@
 /**
- *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
- *
- *   Copyright (C) 2008-2017 geoSDI Group (CNR IMAA - Potenza - ITALY).
- *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
- *
- *   ====================================================================
- *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
- *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * geo-platform
+ * Rich webgis framework
+ * http://geo-platform.org
+ * ====================================================================
+ * <p>
+ * Copyright (C) 2008-2017 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * <p>
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version. This program is distributed in the
+ * hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License
+ * for more details. You should have received a copy of the GNU General
+ * Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * <p>
+ * ====================================================================
+ * <p>
+ * Linking this library statically or dynamically with other modules is
+ * making a combined work based on this library. Thus, the terms and
+ * conditions of the GNU General Public License cover the whole combination.
+ * <p>
+ * As a special exception, the copyright holders of this library give you permission
+ * to link this library with independent modules to produce an executable, regardless
+ * of the license terms of these independent modules, and to copy and distribute
+ * the resulting executable under terms of your choice, provided that you also meet,
+ * for each linked independent module, the terms and conditions of the license of
+ * that module. An independent module is a module which is not derived from or
+ * based on this library. If you modify this library, you may extend this exception
+ * to your version of the library, but you are not obligated to do so. If you do not
+ * wish to do so, delete this exception statement from your version.
  */
 package org.geosdi.geoplatform.services;
 
@@ -170,10 +169,9 @@ public interface GeoPlatformService extends GPCoreServiceApi {
      * Insert an Account (User or Application).
      *
      * @param insertAccountRequest
-     *
      * @return the Account ID
      * @throws IllegalParameterFault if the account not have an Organization or
-     * there is a duplicate Account
+     *                               there is a duplicate Account
      */
     @Post
     @POST
@@ -195,7 +193,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
      * @return the User ID
      * @throws ResourceNotFoundFault if User not found
      * @throws IllegalParameterFault if User ID is null or update a standard
-     * User to a temporary User
+     *                               User to a temporary User
      */
     @PUT
     @Path(value = GPServiceRSPathConfig.UPDATE_USER_PATH)
@@ -208,13 +206,13 @@ public interface GeoPlatformService extends GPCoreServiceApi {
      * Update a User, also his password. If password or email is changed will be
      * sent an email for modification.
      *
-     * @param user the User to update
+     * @param user                 the User to update
      * @param currentPlainPassword the plaintext password of the User
-     * @param newPlainPassword the new plaintext password of the User
+     * @param newPlainPassword     the new plaintext password of the User
      * @return the User ID
      * @throws ResourceNotFoundFault if User not found
      * @throws IllegalParameterFault if User ID is null or the
-     * currentPlainPassword is wrong
+     *                               currentPlainPassword is wrong
      */
     @Put
     Long updateOwnUser(
@@ -230,7 +228,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
      * @return the Application ID
      * @throws ResourceNotFoundFault if Application not found
      * @throws IllegalParameterFault if Application ID is null or update a
-     * standard Application to a temporary Application
+     *                               standard Application to a temporary Application
      */
     @Post
     Long updateApplication(
@@ -300,12 +298,12 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     /**
      * Retrieve a User by username (or email) and password to authenticate it.
      *
-     * @param username the username or the email of the User
+     * @param username      the username or the email of the User
      * @param plainPassword the plaintext password of the User
      * @return the User to retrieve
      * @throws ResourceNotFoundFault if User not found or not have Authorities
      * @throws IllegalParameterFault if the password is wrong
-     * @throws AccountLoginFault if User is disabled or expired
+     * @throws AccountLoginFault     if User is disabled or expired
      */
     @Get
     @GET
@@ -339,7 +337,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
      * @param appID the Application string ID
      * @return the Application to retrieve
      * @throws ResourceNotFoundFault if Application not found
-     * @throws AccountLoginFault if Application is disabled or expired
+     * @throws AccountLoginFault     if Application is disabled or expired
      */
     @Get
     @WebResult(name = "application")
@@ -366,7 +364,6 @@ public interface GeoPlatformService extends GPCoreServiceApi {
      * Retrieve a User by username.
      *
      * @param request
-     *
      * @return the User to retrieve
      * @throws ResourceNotFoundFault if User not found
      */
@@ -408,11 +405,11 @@ public interface GeoPlatformService extends GPCoreServiceApi {
      * searched by name like of username. Note: the Organization of the User is
      * retrieved by User ID.
      *
-     * @param userID the User ID that will exclude from the search (logged user)
+     * @param userID  the User ID that will exclude from the search (logged user)
      * @param request the request that wrap the search parameters
      * @return the paginate list of Users found
      * @throws ResourceNotFoundFault if User not found or a searched User not
-     * have Authorities
+     *                               have Authorities
      */
     @Get
     @GET
@@ -457,7 +454,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
      * Retrieve the number of Accounts founded by search request.
      *
      * @param request the request that wrap the username (for User) or the
-     * string ID (for Application)
+     *                string ID (for Application)
      * @return the number of Accounts found
      */
     @Get
@@ -472,7 +469,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
      * request.
      *
      * @param organization the Organization name
-     * @param request the request that wrap the username
+     * @param request      the request that wrap the username
      * @return the number of Users found
      */
     @Get
@@ -490,7 +487,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
      * @param accountID the Account ID
      * @return the list of string Authorities
      * @throws ResourceNotFoundFault if Account not found or Account not have
-     * Authorities
+     *                               Authorities
      */
     @Get
     @GET
@@ -505,10 +502,10 @@ public interface GeoPlatformService extends GPCoreServiceApi {
      * Retrieve the Authorities of an Account.
      *
      * @param accountNaturalID the username (for User) or the appID (for
-     * Application)
+     *                         Application)
      * @return the list of Authorities
      * @throws ResourceNotFoundFault if Account not found or Account not have
-     * Authorities
+     *                               Authorities
      */
     @Get
     @GET
@@ -574,9 +571,9 @@ public interface GeoPlatformService extends GPCoreServiceApi {
      * @param accountProject the AccountProject to update
      * @return the AccountProject ID
      * @throws ResourceNotFoundFault if AccountProject, Account or Project not
-     * found
+     *                               found
      * @throws IllegalParameterFault if AccountProject, Account or Project are
-     * not valid
+     *                               not valid
      */
     @Put
     @PUT
@@ -679,8 +676,8 @@ public interface GeoPlatformService extends GPCoreServiceApi {
      * request.
      *
      * @param accountID the Account ID
-     * @param request the request that wrap the username (for User) or the
-     * string ID (for Application)
+     * @param request   the request that wrap the username (for User) or the
+     *                  string ID (for Application)
      * @return the number of AccountProjects found
      * @throws ResourceNotFoundFault if Account not found
      */
@@ -718,8 +715,8 @@ public interface GeoPlatformService extends GPCoreServiceApi {
      * Each Project result, if shared, contain the own Account owner.
      *
      * @param accountID the Account ID
-     * @param request the request that wrap Project ID, Project name and Account
-     * ID
+     * @param request   the request that wrap Project ID, Project name and Account
+     *                  ID
      * @return the paginated list of Projects of the Account
      * @throws ResourceNotFoundFault if Account not found
      */
@@ -833,7 +830,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
      * Account.
      *
      * @param accountProjectProperties request that wrap Project information and
-     * Account ID
+     *                                 Account ID
      * @return true if the properties was saved
      * @throws ResourceNotFoundFault if Project or Account not found
      * @throws IllegalParameterFault if Project name is invalid
@@ -886,10 +883,9 @@ public interface GeoPlatformService extends GPCoreServiceApi {
      * owner ID relation must be present, otherwise the Project will be unshare.
      *
      * @param apRequest {@link PutAccountsProjectRequest}
-     *
      * @return true if the relations of sharing are updated
-     * @throws ResourceNotFoundFault if Project not found or an Account not
-     * found
+     * @throws ResourceNotFoundFault                                  if Project not found or an Account not
+     *                                                                found
      * @throws org.geosdi.geoplatform.exception.IllegalParameterFault
      */
     @Put
@@ -909,7 +905,6 @@ public interface GeoPlatformService extends GPCoreServiceApi {
      * Save a Project and its Account owner.
      *
      * @param saveProjectRequest
-     *
      * @return the Project ID
      * @throws ResourceNotFoundFault if the Account not found
      * @throws IllegalParameterFault if the Project is not valid
@@ -926,7 +921,6 @@ public interface GeoPlatformService extends GPCoreServiceApi {
      * Clonse a Project.
      *
      * @param cloneProjectRequest
-     *
      * @return the Project ID
      * @throws ResourceNotFoundFault if the Account not found
      * @throws IllegalParameterFault if the Project is not valid
@@ -945,9 +939,9 @@ public interface GeoPlatformService extends GPCoreServiceApi {
      * @param project the Project to save
      * @return the Project ID
      * @throws IllegalParameterFault if the Project is not valid
-     * @deprecated only for test purpose
      * @see #saveProject(java.lang.String,
      * org.geosdi.geoplatform.core.model.GPProject, boolean)
+     * @deprecated only for test purpose
      */
     @Post
     @Path(value = GPServiceRSPathConfig.INSERT_PROJECT_PATH)
@@ -1020,10 +1014,20 @@ public interface GeoPlatformService extends GPCoreServiceApi {
             throws ResourceNotFoundFault;
 
     /**
+     * @param projectID
+     * @return {@link ShortProjectDTO}
+     * @throws ResourceNotFoundFault
+     */
+    @Get
+    @GET
+    @Path(value = GPServiceRSPathConfig.GET_SHORT_PROJECT_PATH)
+    ShortProjectDTO getShortProject(@WebParam(name = "projectID")
+    @PathParam(value = "projectID") Long projectID) throws ResourceNotFoundFault;
+
+    /**
      * Set a Project as shared.
      *
      * @param projectID the Project ID
-     *
      * @throws ResourceNotFoundFault if Project not found
      */
     @Put
@@ -1115,14 +1119,13 @@ public interface GeoPlatformService extends GPCoreServiceApi {
      * Insert a Folder into a Project.
      *
      * @param insertFolderRequest
-     *
      * @return the Folder ID
      * @throws ResourceNotFoundFault if Project not found
      * @throws IllegalParameterFault if Folder is not valid
-     * @deprecated only for test purpose
      * @see #saveAddedFolderAndTreeModifications(java.lang.Long, java.lang.Long,
      * org.geosdi.geoplatform.core.model.GPFolder,
      * org.geosdi.geoplatform.responce.collection.GPWebServiceMapData)
+     * @deprecated only for test purpose
      */
     @Post
     @POST
@@ -1140,9 +1143,9 @@ public interface GeoPlatformService extends GPCoreServiceApi {
      * @return the Folder ID
      * @throws ResourceNotFoundFault if Folder not found
      * @throws IllegalParameterFault if Folder is not valid
-     * @deprecated only for test purpose
      * @see #saveFolderProperties(java.lang.Long, java.lang.String, boolean,
      * boolean)
+     * @deprecated only for test purpose
      */
     @Put
     @PUT
@@ -1158,9 +1161,9 @@ public interface GeoPlatformService extends GPCoreServiceApi {
      * @param folderID the Folder ID
      * @return true if the Folder was deleted
      * @throws ResourceNotFoundFault if Folder not found
-     * @deprecated only for test purpose
      * @see #saveDeletedFolderAndTreeModifications(java.lang.Long,
      * org.geosdi.geoplatform.responce.collection.GPWebServiceMapData)
+     * @deprecated only for test purpose
      */
     @Delete
     @DELETE
@@ -1174,10 +1177,10 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     /**
      * Update properties (name, checked and expanded) of a Folder.
      *
-     * @param folderID the Folder ID
+     * @param folderID   the Folder ID
      * @param folderName the Folder name
-     * @param checked the Folder checked
-     * @param expanded the Folder expanded
+     * @param checked    the Folder checked
+     * @param expanded   the Folder expanded
      * @return the Folder ID
      * @throws ResourceNotFoundFault
      * @throws IllegalParameterFault
@@ -1203,7 +1206,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
      * @return the Folder ID
      * @throws ResourceNotFoundFault if Project or parent Folder not found
      * @throws IllegalParameterFault if the map of descendants is empty for a
-     * folder sibling, or if the Folder is not valid
+     *                               folder sibling, or if the Folder is not valid
      */
     @Put
     @PUT
@@ -1218,7 +1221,6 @@ public interface GeoPlatformService extends GPCoreServiceApi {
      * tree.
      *
      * @param sdfModificationRequest
-     *
      * @return true if the Folder was deleted
      * @throws ResourceNotFoundFault if Folder not found
      */
@@ -1234,7 +1236,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
      * Save the check status of a Folder and manage Folder ancestors.
      *
      * @param folderID the Folder ID
-     * @param checked the check status
+     * @param checked  the check status
      * @return true if the check status was saved
      * @throws ResourceNotFoundFault if Folder not found
      */
@@ -1249,7 +1251,6 @@ public interface GeoPlatformService extends GPCoreServiceApi {
      * positions on tree.
      *
      * @param sddfTreeModificationRequest
-     *
      * @return true if the Folder wad shifted
      * @throws ResourceNotFoundFault if Folder or parent Folder not found
      */
@@ -1433,7 +1434,6 @@ public interface GeoPlatformService extends GPCoreServiceApi {
      * owner.
      *
      * @param impRequest
-     *
      * @return the Project ID
      * @throws IllegalParameterFault if Project and its contents is not valid
      * @throws ResourceNotFoundFault if Account not found
@@ -1474,9 +1474,8 @@ public interface GeoPlatformService extends GPCoreServiceApi {
      * @return the Layer ID
      * @throws ResourceNotFoundFault if Layer not found
      * @throws IllegalParameterFault if the Layer is not valid
+     * @see #saveLayerProperties(org.geosdi.geoplatform.responce.RasterPropertiesDTO)
      * @deprecated only for test purpose
-     * @see
-     * #saveLayerProperties(org.geosdi.geoplatform.responce.RasterPropertiesDTO)
      */
     @Put
     @PUT
@@ -1509,9 +1508,9 @@ public interface GeoPlatformService extends GPCoreServiceApi {
      * @param layerID the Layer ID
      * @return true if the Layer was deleted
      * @throws ResourceNotFoundFault if Layer not found
-     * @deprecated only for test purpose
      * @see #saveDeletedLayerAndTreeModifications(java.lang.Long,
      * org.geosdi.geoplatform.responce.collection.GPWebServiceMapData)
+     * @deprecated only for test purpose
      */
     @Delete
     @DELETE
@@ -1526,7 +1525,6 @@ public interface GeoPlatformService extends GPCoreServiceApi {
      * Insert a Layer, moreover manage Folder ancestors and positions on tree.
      *
      * @param addLayerRequest
-     *
      * @return the Layer ID
      * @throws ResourceNotFoundFault if Project or parent Folder not found
      * @throws IllegalParameterFault if Layer is not valid
@@ -1544,7 +1542,6 @@ public interface GeoPlatformService extends GPCoreServiceApi {
      * tree.
      *
      * @param addLayersRequest
-     *
      * @return the Layer list ID
      * @throws ResourceNotFoundFault if Project or parent Folder not found
      * @throws IllegalParameterFault if Layer or Layer list are not valid
@@ -1563,7 +1560,6 @@ public interface GeoPlatformService extends GPCoreServiceApi {
      * tree.
      *
      * @param deleteLayerRequest
-     *
      * @return true if the Layer was deleted
      * @throws ResourceNotFoundFault if Layer not found
      */
@@ -1598,12 +1594,12 @@ public interface GeoPlatformService extends GPCoreServiceApi {
      * Fix the check status of old and new ancestors for a layer checked, with
      * Drag and Drop operation.
      *
-     * @param layerID the Layer ID
+     * @param layerID     the Layer ID
      * @param oldFolderID the origin parent Folder ID
      * @param newFolderID the final parent Folder ID
      * @return true if the check status was fixed
      * @throws ResourceNotFoundFault if Layer or old/new ancestors Folder not
-     * found
+     *                               found
      */
     @Put
     boolean fixCheckStatusLayerAndTreeModifications(
@@ -1617,7 +1613,6 @@ public interface GeoPlatformService extends GPCoreServiceApi {
      * positions on tree.
      *
      * @param ddLayerReq
-     *
      * @return true if the Layer wad shifted
      * @throws ResourceNotFoundFault if Layer or parent Folder not found
      * @throws IllegalParameterFault if parent Folder ID is null
@@ -1819,9 +1814,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
      * Retrieve all Organization Roles.
      *
      * @param organization organization name
-     *
      * @return {@link GPGetRoleResponse} GetRoleResponse with all Roles
-     *
      * @throws org.geosdi.geoplatform.exception.ResourceNotFoundFault
      */
     @Get
@@ -1849,7 +1842,6 @@ public interface GeoPlatformService extends GPCoreServiceApi {
      * It is based only on application ID.
      *
      * @param appID application ID
-     *
      * @return Map that contains GUI Components permissions, with: <ul> <li> key
      * = ID Component </li> <li> value = Permission </li> </ul>
      * @throws ResourceNotFoundFault if the application is not found
@@ -1866,7 +1858,6 @@ public interface GeoPlatformService extends GPCoreServiceApi {
      * It is based on accounts with disjoined authorities.
      *
      * @param accountID account ID
-     *
      * @return Map that contains GUI Components permissions, with: <ul> <li> key
      * = ID Component </li> <li> value = Permission </li> </ul>
      * @throws ResourceNotFoundFault if the account is not found
@@ -1884,9 +1875,8 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     /**
      * Retrieve the GUI Component permissions for a Role (Authority).
      *
-     * @param role role (authority) name
+     * @param role         role (authority) name
      * @param organization organization name
-     *
      * @return Map that contains GUI Components permissions, with: key = ID
      * Component value = Permission
      * @throws ResourceNotFoundFault if the role (authority) is not found
@@ -1907,7 +1897,6 @@ public interface GeoPlatformService extends GPCoreServiceApi {
      * Update the permission of a role (authority).
      *
      * @param putRolePermissionReq
-     *
      * @return if the update was successful
      * @throws ResourceNotFoundFault if the role (authority) is not found
      */
@@ -1923,7 +1912,6 @@ public interface GeoPlatformService extends GPCoreServiceApi {
      * Save a new role (authority).
      *
      * @param saveRoleReq
-     *
      * @return if the saving was successful
      * @throws IllegalParameterFault if the role (authority) already exist
      */
@@ -2018,7 +2006,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
      * @param message the Message to insert
      * @return the Message ID
      * @throws ResourceNotFoundFault if the Account recipient or sender not
-     * found
+     *                               found
      * @throws IllegalParameterFault if Message is not valid
      */
     @Post
@@ -2035,7 +2023,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
      * @param messageDTO the Message to insert for each Account recipient
      * @return true if the Messages was added
      * @throws ResourceNotFoundFault if Account sender or one Account recipient
-     * not found
+     *                               not found
      */
     @Post
     @POST

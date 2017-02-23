@@ -1,37 +1,36 @@
 /**
- *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
- *
- *   Copyright (C) 2008-2017 geoSDI Group (CNR IMAA - Potenza - ITALY).
- *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
- *
- *   ====================================================================
- *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
- *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * geo-platform
+ * Rich webgis framework
+ * http://geo-platform.org
+ * ====================================================================
+ * <p>
+ * Copyright (C) 2008-2017 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * <p>
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version. This program is distributed in the
+ * hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License
+ * for more details. You should have received a copy of the GNU General
+ * Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * <p>
+ * ====================================================================
+ * <p>
+ * Linking this library statically or dynamically with other modules is
+ * making a combined work based on this library. Thus, the terms and
+ * conditions of the GNU General Public License cover the whole combination.
+ * <p>
+ * As a special exception, the copyright holders of this library give you permission
+ * to link this library with independent modules to produce an executable, regardless
+ * of the license terms of these independent modules, and to copy and distribute
+ * the resulting executable under terms of your choice, provided that you also meet,
+ * for each linked independent module, the terms and conditions of the license of
+ * that module. An independent module is a module which is not derived from or
+ * based on this library. If you modify this library, you may extend this exception
+ * to your version of the library, but you are not obligated to do so. If you do not
+ * wish to do so, delete this exception statement from your version.
  */
 package org.geosdi.geoplatform.model.soap;
 
@@ -526,7 +525,7 @@ public class WSProjectTest extends BaseSoapServiceTest {
     }
 
     @Test
-    public void cloneProjectTestSoap() throws Exception{
+    public void cloneProjectTestSoap() throws Exception {
         //create project
         GPProject project = super.createProject("Project-To-Be-Cloned",
                 Boolean.FALSE, 200, new Date(System.currentTimeMillis()));
@@ -541,27 +540,27 @@ public class WSProjectTest extends BaseSoapServiceTest {
         GPAccountProject owner = gpWSClient.getProjectOwner(idProject);
 
         //create folders
-        long idFolder_A = super.createAndInsertFolder(titleFolderA,loadProject,1,null);
+        long idFolder_A = super.createAndInsertFolder(titleFolderA, loadProject, 1, null);
         GPFolder folder_A = gpWSClient.getFolderDetail(idFolder_A);
-        long idFolder_B = super.createAndInsertFolder(titleFolderB,loadProject,2,folder_A);
+        long idFolder_B = super.createAndInsertFolder(titleFolderB, loadProject, 2, folder_A);
         GPFolder folder_B = gpWSClient.getFolderDetail(idFolder_B);
-        long idFolder_C = super.createAndInsertFolder(titleFolderC,loadProject,3,folder_A);
+        long idFolder_C = super.createAndInsertFolder(titleFolderC, loadProject, 3, folder_A);
         GPFolder folder_C = gpWSClient.getFolderDetail(idFolder_C);
-        long idFolder_D = super.createAndInsertFolder(titleFolderD,loadProject,4,folder_B);
+        long idFolder_D = super.createAndInsertFolder(titleFolderD, loadProject, 4, folder_B);
         GPFolder folder_D = gpWSClient.getFolderDetail(idFolder_D);
-        long idFolder_E = super.createAndInsertFolder(titleFolderE,loadProject,5,folder_C);
+        long idFolder_E = super.createAndInsertFolder(titleFolderE, loadProject, 5, folder_C);
         GPFolder folder_E = gpWSClient.getFolderDetail(idFolder_E);
 
         //create layers
-        super.createAndInsertRasterLayer(folder_A,titleRasterA,"name_"+titleRasterA,"abstract_"+titleRasterA,1,"srs",serverUrlTest);
-        super.createAndInsertRasterLayer(folder_E,titleRasterE,"name_"+titleRasterE,"abstract_"+titleRasterE,1,"srs",serverUrlTest);
-        super.createAndInsertVectorLayer(folder_B,titleVectorB,"name_"+titleVectorB,"abstract_"+titleVectorB,1,"srs",serverUrlTest);
-        super.createAndInsertVectorLayer(folder_D,titleVectorD,"name_"+titleVectorD,"abstract_"+titleVectorD,1,"srs",serverUrlTest);
-        super.createAndInsertVectorLayer(folder_C,titleVectorC,"name_"+titleVectorC,"abstract_"+titleVectorC,1,"srs",serverUrlTest);
+        super.createAndInsertRasterLayer(folder_A, titleRasterA, "name_" + titleRasterA, "abstract_" + titleRasterA, 1, "srs", serverUrlTest);
+        super.createAndInsertRasterLayer(folder_E, titleRasterE, "name_" + titleRasterE, "abstract_" + titleRasterE, 1, "srs", serverUrlTest);
+        super.createAndInsertVectorLayer(folder_B, titleVectorB, "name_" + titleVectorB, "abstract_" + titleVectorB, 1, "srs", serverUrlTest);
+        super.createAndInsertVectorLayer(folder_D, titleVectorD, "name_" + titleVectorD, "abstract_" + titleVectorD, 1, "srs", serverUrlTest);
+        super.createAndInsertVectorLayer(folder_C, titleVectorC, "name_" + titleVectorC, "abstract_" + titleVectorC, 1, "srs", serverUrlTest);
 
-        CloneProjectRequest request = new CloneProjectRequest(loadProject.getId(),owner.getAccount().getId(),loadProject.getName().concat("-copy"));
+        CloneProjectRequest request = new CloneProjectRequest(loadProject.getId(), owner.getAccount().getId(), loadProject.getName().concat("-copy"));
         long idProjectCloned = gpWSClient.cloneProject(request);
-        ProjectDTO projectDTO = gpWSClient.getProjectWithRootFolders(idProjectCloned,owner.getAccount().getId());
+        ProjectDTO projectDTO = gpWSClient.getProjectWithRootFolders(idProjectCloned, owner.getAccount().getId());
         GPFolder rootFolder = gpWSClient.getFolderDetail(projectDTO.getRootFolders().get(0).getId());
         ChildrenFolderStore rootChildrens = gpWSClient.getChildrenFolders(rootFolder.getId());
         GPFolder clonedFolder_B = gpWSClient.getFolderDetail(rootChildrens.getChildren().get(0).getId());
@@ -572,20 +571,20 @@ public class WSProjectTest extends BaseSoapServiceTest {
         GPFolder clonedFolder_E = gpWSClient.getFolderDetail(cChildrens.getChildren().get(0).getId());
         ShortLayerDTOContainer gpLayers = gpWSClient.getLayers(idProjectCloned);
 
-        Assert.assertEquals("Project-To-Be-Cloned-copy",projectDTO.getName());
-        Assert.assertEquals(titleFolderA,rootFolder.getName());
-        Assert.assertTrue("Project ID",rootFolder.getProject().getId() == idProjectCloned);
-        Assert.assertTrue("Project ID",clonedFolder_B.getProject().getId() == idProjectCloned);
-        Assert.assertTrue("Project ID",clonedFolder_C.getProject().getId() == idProjectCloned);
-        Assert.assertTrue("Project ID",clonedFolder_D.getProject().getId() == idProjectCloned);
-        Assert.assertTrue("Project ID",clonedFolder_E.getProject().getId() == idProjectCloned);
-        Assert.assertTrue("Layers Size",gpLayers.getLayers().size() == 5);
-        Assert.assertTrue("Root Children folders",rootChildrens.getChildren().size() == 2);
+        Assert.assertEquals("Project-To-Be-Cloned-copy", projectDTO.getName());
+        Assert.assertEquals(titleFolderA, rootFolder.getName());
+        Assert.assertTrue("Project ID", rootFolder.getProject().getId() == idProjectCloned);
+        Assert.assertTrue("Project ID", clonedFolder_B.getProject().getId() == idProjectCloned);
+        Assert.assertTrue("Project ID", clonedFolder_C.getProject().getId() == idProjectCloned);
+        Assert.assertTrue("Project ID", clonedFolder_D.getProject().getId() == idProjectCloned);
+        Assert.assertTrue("Project ID", clonedFolder_E.getProject().getId() == idProjectCloned);
+        Assert.assertTrue("Layers Size", gpLayers.getLayers().size() == 5);
+        Assert.assertTrue("Root Children folders", rootChildrens.getChildren().size() == 2);
 
-        Assert.assertEquals(titleFolderB,clonedFolder_B.getName());
-        Assert.assertEquals(titleFolderC,clonedFolder_C.getName());
-        Assert.assertEquals(titleFolderD,clonedFolder_D.getName());
-        Assert.assertEquals(titleFolderE,clonedFolder_E.getName());
+        Assert.assertEquals(titleFolderB, clonedFolder_B.getName());
+        Assert.assertEquals(titleFolderC, clonedFolder_C.getName());
+        Assert.assertEquals(titleFolderD, clonedFolder_D.getName());
+        Assert.assertEquals(titleFolderE, clonedFolder_E.getName());
 
         Assert.assertEquals(usernameTest, owner.getAccount().getNaturalID());
         Assert.assertEquals(Boolean.TRUE, gpWSClient.deleteAccount(
@@ -875,5 +874,11 @@ public class WSProjectTest extends BaseSoapServiceTest {
         Assert.assertEquals(1, accountsToShare.size());
         Assert.assertEquals(idUserTest,
                 accountsToShare.get(0).getId().longValue());
+    }
+
+    @Test
+    public void testGetShortProjectTest() throws Exception {
+        logger.info("#############################SHORT_PROJECT : {}\n", gpWSClient
+                .getShortProject(idProjectTest));
     }
 }

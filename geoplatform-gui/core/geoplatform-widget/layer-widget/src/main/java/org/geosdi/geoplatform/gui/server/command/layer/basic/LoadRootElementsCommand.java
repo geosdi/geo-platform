@@ -2,6 +2,7 @@ package org.geosdi.geoplatform.gui.server.command.layer.basic;
 
 import org.geosdi.geoplatform.gui.client.command.layer.basic.LoadRootElementsRequest;
 import org.geosdi.geoplatform.gui.client.command.layer.basic.LoadRootElementsResponse;
+import org.geosdi.geoplatform.gui.client.model.projects.GPShortClientProject;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;
 import org.geosdi.geoplatform.gui.server.ILayerService;
 import org.slf4j.Logger;
@@ -34,8 +35,8 @@ public class LoadRootElementsCommand implements GPCommand<LoadRootElementsReques
     public LoadRootElementsResponse execute(LoadRootElementsRequest request, HttpServletRequest httpServletRequest) {
         logger.debug("##################### Executing {} Command with Request : {}",
                 this.getClass().getSimpleName(), request);
-        Integer numberOfElements = this.layerService.loadRootElements(request.getProjectId(), httpServletRequest);
-        logger.debug("#################### Found {} ", numberOfElements);
-        return new LoadRootElementsResponse(numberOfElements);
+        GPShortClientProject gpShortClientProject = this.layerService.loadRootElements(request.getProjectId(), httpServletRequest);
+        logger.debug("#################### Found {} ", gpShortClientProject);
+        return new LoadRootElementsResponse(gpShortClientProject);
     }
 }

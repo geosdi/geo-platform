@@ -43,6 +43,7 @@ import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveDrag
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveRemove;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoLayerOriginalProperties;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
+import org.geosdi.geoplatform.gui.client.model.projects.GPShortClientProject;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
@@ -154,5 +155,5 @@ public interface ILayerService {
 
     Long cloneProject(CloneProjectRequest request) throws GeoPlatformException;
 
-    Integer loadRootElements(Long projectID, HttpServletRequest httpServletRequest) throws GeoPlatformException;
+    GPShortClientProject loadRootElements(Long projectID, HttpServletRequest httpServletRequest) throws GeoPlatformException;
 }

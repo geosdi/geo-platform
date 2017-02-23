@@ -62,6 +62,7 @@ import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveDrag
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveRemove;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoLayerOriginalProperties;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
+import org.geosdi.geoplatform.gui.client.model.projects.GPShortClientProject;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
@@ -186,10 +187,11 @@ public class LayerService implements ILayerService {
     }
 
     @Override
-    public Integer loadRootElements(Long projectID, HttpServletRequest httpServletRequest)
+    public GPShortClientProject loadRootElements(Long projectID, HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
         try {
-            return this.geoPlatformServiceClient.getNumberOfElementsProject(projectID);
+            ShortProjectDTO shortProjectDTO = this.geoPlatformServiceClient.getShortProject(projectID);
+            return new GPShortClientProject(shortProjectDTO.getVersion(), shortProjectDTO.getNumberOfElements());
         } catch (ResourceNotFoundFault ex) {
             ex.printStackTrace();
             throw new GeoPlatformException(ex.getMessage());

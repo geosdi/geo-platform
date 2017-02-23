@@ -208,6 +208,8 @@ public final class GPServiceRSPathConfig {
             + "getFolderDetail/{folderID}";
     public static final String GET_SHORT_FOLDER_PATH = FOLDERS_PATH
             + "getShortFolder/{folderID}";
+    public static final String GET_SHORT_PROJECT_PATH = FOLDERS_PATH
+            + "getShortProject/{projectID}";
     public static final String GET_NUMBER_OF_ELEMENTS_PROJECT_PATH = FOLDERS_PATH
             + "getNumberOfElementsProject/{projectID}";
     public static final String GET_PROJECT_WITH_ROOT_FOLDERS_PATH = FOLDERS_PATH

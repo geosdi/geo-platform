@@ -997,6 +997,12 @@ public class RSProjectTest extends BasicRestServiceTest {
         Assert.assertEquals(Boolean.TRUE, gpWSClient.deleteProject(idProject));
     }
 
+    @Test
+    public void testGetShortProjectRSTest() throws Exception {
+        logger.info("#############################SHORT_PROJECT_RS : {}\n", gpWSClient
+                .getShortProject(idProjectTest));
+    }
+
     private void assertLayerRest(String msg, GPLayer layer,
             IElementDTO layerToCheck) {
         Assert.assertEquals(msg, layer.getName(), layerToCheck.getName());

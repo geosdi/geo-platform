@@ -187,6 +187,17 @@ public class GPProjectDelegate implements ProjectDelegate {
         return project.getNumberOfElements();
     }
 
+    /**
+     * @param projectID
+     * @return {@link ShortProjectDTO}
+     * @throws ResourceNotFoundFault
+     */
+    @Override
+    public ShortProjectDTO getShortProject(Long projectID) throws ResourceNotFoundFault {
+        GPProject project = this.getProjectDetail(projectID);
+        return new ShortProjectDTO(project.getVersion(), project.getNumberOfElements());
+    }
+
     @Override
     public void setProjectShared(Long projectID) throws ResourceNotFoundFault {
         GPProject project = this.getProjectByID(projectID);
@@ -742,8 +753,8 @@ public class GPProjectDelegate implements ProjectDelegate {
             searchCriteria.addFilterEqual("project.id", cloneProjectRequest.getGpProjectID());
             searchCriteria.addFilterNotNull("parent.id");
             List<GPFolder> subFolders = folderDao.search(searchCriteria);
-            Collections.sort(subFolders,Comparator.comparingInt(f->f.getLevel()));
-            
+            Collections.sort(subFolders, Comparator.comparingInt(f -> f.getLevel()));
+
             IntStream.iterate(0, n -> n + 1).limit(subFolders.size()).boxed().forEach(i ->
             {
                 GPFolder folderCloned = new GPFolderFunction(projectCloned, folderDao, folderMap.get(subFolders.get(i).getParent().getId())).apply(subFolders.get(i));

@@ -18,10 +18,21 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring-data-mongodb-version>1.9.2.RELEASE</spring-data-mongodb-version>
-        <hibernate-validator-version>5.2.4.Final</hibernate-validator-version>
+        <spring-data-mongodb-version>1.10.1.RELEASE</spring-data-mongodb-version>
         <javax-el-version>3.0.0</javax-el-version>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.geosdi</groupId>
+                <artifactId>geoplatform-hibernate-validator-dependency</artifactId>
+                <version>${project.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <!-- =========================================================== -->
@@ -90,7 +101,6 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>${hibernate-validator-version}</version>
         </dependency>
         
         <dependency>

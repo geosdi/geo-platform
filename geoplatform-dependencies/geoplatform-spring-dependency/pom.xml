@@ -158,9 +158,9 @@
     </dependencyManagement>
 
     <properties>
-        <spring-version>4.3.6.RELEASE</spring-version>
+        <spring-version>4.3.7.RELEASE</spring-version>
         <spring-support>2.0.8</spring-support>
-        <spring-security-version>4.2.1.RELEASE</spring-security-version>
+        <spring-security-version>4.2.2.RELEASE</spring-security-version>
         <spring-batch.version>3.0.7.RELEASE</spring-batch.version>
     </properties>
 

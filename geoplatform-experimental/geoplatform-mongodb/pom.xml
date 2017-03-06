@@ -19,7 +19,6 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring-data-mongodb-version>1.10.1.RELEASE</spring-data-mongodb-version>
-        <javax-el-version>3.0.0</javax-el-version>
     </properties>
 
     <dependencyManagement>
@@ -102,11 +101,15 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
         </dependency>
-        
+
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>javax.el</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>javax.el</groupId>
             <artifactId>javax.el-api</artifactId>
-            <version>${javax-el-version}</version>
         </dependency>
         
         <!-- =========================================================== -->

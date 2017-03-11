@@ -1,50 +1,45 @@
 /**
- *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
- *
- *   Copyright (C) 2008-2017 geoSDI Group (CNR IMAA - Potenza - ITALY).
- *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
- *
- *   ====================================================================
- *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
- *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * geo-platform
+ * Rich webgis framework
+ * http://geo-platform.org
+ * ====================================================================
+ * <p>
+ * Copyright (C) 2008-2017 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * <p>
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version. This program is distributed in the
+ * hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License
+ * for more details. You should have received a copy of the GNU General
+ * Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * <p>
+ * ====================================================================
+ * <p>
+ * Linking this library statically or dynamically with other modules is
+ * making a combined work based on this library. Thus, the terms and
+ * conditions of the GNU General Public License cover the whole combination.
+ * <p>
+ * As a special exception, the copyright holders of this library give you permission
+ * to link this library with independent modules to produce an executable, regardless
+ * of the license terms of these independent modules, and to copy and distribute
+ * the resulting executable under terms of your choice, provided that you also meet,
+ * for each linked independent module, the terms and conditions of the license of
+ * that module. An independent module is a module which is not derived from or
+ * based on this library. If you modify this library, you may extend this exception
+ * to your version of the library, but you are not obligated to do so. If you do not
+ * wish to do so, delete this exception statement from your version.
  */
 package org.geosdi.geoplatform.support.jackson.mapper;
 
-import com.google.common.base.Preconditions;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
+import org.geosdi.geoplatform.support.jackson.reader.GPJacksonReaderSupport;
 
 import java.io.File;
-import java.io.InputStream;
-import java.io.Reader;
-import java.net.URL;
-import java.nio.file.Path;
-import java.util.Collection;
+import java.io.Writer;
 
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
 
@@ -52,44 +47,9 @@ import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeatu
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPJacksonMapper<T extends Object> {
+public interface GPJacksonMapper<T extends Object> extends GPJacksonReaderSupport<T> {
 
     JacksonSupport DEFAULT_MAPPER = new GPJacksonSupport().configure(NON_NULL);
-
-    /**
-     * @param url representing {@link URL} as String
-     * @return T
-     * @throws Exception
-     */
-    T read(URL url) throws Exception;
-
-    /**
-     * @param file
-     * @return T
-     * @throws Exception
-     */
-    T read(File file) throws Exception;
-
-    /**
-     * @param in
-     * @return T
-     * @throws Exception
-     */
-    T read(InputStream in) throws Exception;
-
-    /**
-     * @param r
-     * @return T
-     * @throws Exception
-     */
-    T read(Reader r) throws Exception;
-
-    /**
-     * @param s
-     * @return T
-     * @throws Exception
-     */
-    T read(String s) throws Exception;
 
     /**
      * @param entity
@@ -106,24 +66,9 @@ public interface GPJacksonMapper<T extends Object> {
     void write(File file, T entity) throws Exception;
 
     /**
-     * @param direrctory
-     * @return {@link Collection <T>}
+     * @param writer
+     * @param entity
      * @throws Exception
      */
-    Collection<T> readFromDirectory(Path direrctory) throws Exception;
-
-    /**
-     * @param thePath
-     * @return {@link T}
-     */
-    default T read(Path thePath) {
-        Preconditions.checkArgument((thePath != null) && (thePath.toFile().exists()),
-                "The Parameter Path must not be null and the Associated File must exist.");
-        try {
-            return this.read(thePath.toFile());
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return null;
-    }
+    void write(Writer writer, T entity) throws Exception;
 }

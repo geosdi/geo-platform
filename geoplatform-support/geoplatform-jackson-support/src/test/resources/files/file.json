@@ -1,0 +1,16 @@
+{
+  "args": {
+    "color": "red",
+    "shape": "square"
+  },
+  "headers": {
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Accept-Encoding": "gzip, deflate, br",
+    "Accept-Language": "it-IT,it;q=0.8,en-US;q=0.5,en;q=0.3",
+    "Host": "httpbin.org",
+    "Upgrade-Insecure-Requests": "1",
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:52.0) Gecko/20100101 Firefox/52.0"
+  },
+  "origin": "82.61.27.192",
+  "url": "https://httpbin.org/get?color=red&shape=square"
+}

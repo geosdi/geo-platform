@@ -154,10 +154,10 @@ public class GPGeocodingServiceTest extends GPBaseConfigTest {
     public void gpGeocodingWithComponentFilterTest() throws Exception {
         GeocodingResult[] results = gpGeocodingService.newRequest()
                 .address("Marsicovetere")
-                .components(ComponentFilter
+                .components(ComponentFilter.country("it"), ComponentFilter
                         .postalCode("85050")).await();
         assertNotNull(results);
-        assertEquals("85050 Marsicovetere PZ, Italy",
+        assertEquals("85050 Province of Potenza, Italy",
                 results[0].formattedAddress);
     }
 

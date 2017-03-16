@@ -10,16 +10,15 @@
     </appender>
 
     <root>
-        <level value="info" />
-        <appender-ref ref="STDOUT" />
+        <level value="info"/>
+        <appender-ref ref="STDOUT"/>
     </root>
-    
+
     <logger name="org.geosdi.geoplatform.services.csw.CSWGetRecordsEsriTest"
-            level="debug" /><!-- TODO info -->
-            
+            level="debug"/><!-- TODO info -->
+
     <logger name="org.geosdi.geoplatform.connector.schema.GPCSWOutputSchemaFinder"
-            level="debug" />
-    <logger name="org.geosdi.geoplatform.services.delegate.dc"
-            level="debug" />
+            level="debug"/>
+    <logger name="org.geosdi.geoplatform.services.delegate.dc" level="debug"/>
 
 </configuration>

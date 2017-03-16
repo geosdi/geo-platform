@@ -299,6 +299,12 @@
                         <groupId>org.hibernate</groupId>
                         <artifactId>hibernate-entitymanager</artifactId>
                         <version>${hibernate-version}</version>
+                        <exclusions>
+                            <exclusion>
+                                <artifactId>asm</artifactId>
+                                <groupId>asm</groupId>
+                            </exclusion>
+                        </exclusions>
                     </dependency>
 
                     <dependency>

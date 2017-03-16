@@ -18,10 +18,6 @@
     <dependencies>
         <!-- logging dependencies, delegate all to slf4j and use logback -->
         <dependency>
-            <groupId>cglib</groupId>
-            <artifactId>cglib</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
         </dependency>

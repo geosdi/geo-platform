@@ -46,6 +46,14 @@ import java.util.concurrent.TimeUnit;
 public class MassiveImplementorStoreTest extends AbstractMassiveImplementorStoreTest {
 
     @Test
+    public void massiveLoadAllImplementorsTest() throws Exception {
+        logger.info("massiveLoadAllImplementorsTest : Executed {} threads for {} Tasks in {} s \n",
+                super.defineNumThreads(), super.defineNumTasks(),
+                TimeUnit.MILLISECONDS.toSeconds(super.executePrimitiveTask(super.defineNumTasks(),
+                        PrimitiveTaskType.ALL_IMPLEMENTORS)));
+    }
+
+    @Test
     public void massiveIntegerImplementorTest() throws Exception {
         logger.info("massiveIntegerImplementorTest : Executed {} threads for {} Tasks in {} s \n",
                 super.defineNumThreads(), super.defineNumTasks(),

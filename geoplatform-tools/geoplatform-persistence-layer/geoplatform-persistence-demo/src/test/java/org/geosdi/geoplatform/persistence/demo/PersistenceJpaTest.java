@@ -95,6 +95,17 @@ public class PersistenceJpaTest {
         Assert.assertNotNull("The car part is not null", test);
 
         Assert.assertEquals(100, this.jpaCarDAO.findAll().size());
+        Car car = this.jpaCarDAO.findByPlate("AR7930");
+        Assert.assertNotNull(car);
+        car.setModel("MODEL_TEST");
+        this.jpaCarDAO.update(car);
+        logger.info("##################################UPDATE_CAR : {}\n", car.getModel());
+
+        CarPart carPart = this.jpaCarPartDAO.findByPartName(PART_NAME + 20);
+        Assert.assertNotNull(carPart);
+        carPart.setCar(car);
+        this.jpaCarPartDAO.update(carPart);
+        Assert.assertTrue(carPart.getCar().getId().equals(car.getId()));
     }
 
     private void insert() {

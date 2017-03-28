@@ -60,7 +60,7 @@ public class GPPrimitiveImplementorStoreTest {
     @Test
     public void loadAllPrimitiveImplementorsTest() throws Exception {
         Set<PrimitiveImplementor<?>> primitiveImplementors = primitiveImplementorStore.getAllImplementors();
-        logger.info("##########################PRIMITIVE_IMPLEMENTORS : {}\n", primitiveImplementors);
+        logger.info("##########################PRIMITIVE_IMPLEMENTORS : {}\n", primitiveImplementors.size());
     }
 
     @Test

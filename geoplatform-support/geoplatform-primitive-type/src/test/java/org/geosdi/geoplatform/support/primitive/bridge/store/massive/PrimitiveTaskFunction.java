@@ -87,6 +87,8 @@ public class PrimitiveTaskFunction implements Function<Integer, Callable<Long>> 
                 return new AbstractMassiveImplementorStoreTest.CharacterPrimitiveTask();
             case STRING:
                 return new AbstractMassiveImplementorStoreTest.StringPrimitiveTask();
+            case ALL_IMPLEMENTORS:
+                return new AbstractMassiveImplementorStoreTest.AllImplementorsTask();
             default:
                 return new AbstractMassiveImplementorStoreTest.IntegerPrimitiveTask();
         }

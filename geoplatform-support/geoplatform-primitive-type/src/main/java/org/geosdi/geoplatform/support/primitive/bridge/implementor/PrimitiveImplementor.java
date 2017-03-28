@@ -97,7 +97,6 @@ public interface PrimitiveImplementor<P extends Object> extends GPImplementor<Se
 
             PrimitiveImplementorKey that = (PrimitiveImplementorKey) o;
             return classe.equals(that.classe);
-
         }
 
         @Override

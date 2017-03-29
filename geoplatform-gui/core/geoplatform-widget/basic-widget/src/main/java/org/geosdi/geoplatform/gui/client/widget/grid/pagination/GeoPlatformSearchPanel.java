@@ -168,7 +168,6 @@ public abstract class GeoPlatformSearchPanel<C extends Widget, T extends GeoPlat
         data.setMargins(new Margins(5, 5, 5, 5));
         searchFieldSet.add(search, data);
         formPanel.add(searchFieldSet);
-        initWidget();
         if (widget == null) {
             throw new NullPointerException(
                     "Widget must be not null (create widget into initWidget method).");

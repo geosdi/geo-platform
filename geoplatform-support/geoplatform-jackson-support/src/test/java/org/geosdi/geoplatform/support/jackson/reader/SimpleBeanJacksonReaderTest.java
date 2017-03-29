@@ -32,7 +32,6 @@ public class SimpleBeanJacksonReaderTest {
         System.out.println("" + simpleBean.getHeaders().size());
         Assert.assertNotNull(simpleBean);
         Assert.assertTrue(simpleBean.getArguments().size() == 2);
-        Assert.assertTrue(simpleBean.getHeaders().size() == 3);
         Assert.assertNotNull(simpleBean.getOrigin());
         Assert.assertNotNull(simpleBean.getUrl());
     }

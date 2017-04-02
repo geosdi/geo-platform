@@ -638,6 +638,9 @@
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>${jetty-version}</version>
                 <configuration>
+                    <httpConnector>
+                        <port>8181</port>
+                    </httpConnector>
                     <contextXml>${basedir}/src/main/webapp/WEB-INF/jetty-context.xml</contextXml>
                     <scanIntervalSeconds>0</scanIntervalSeconds>
                     <stopKey>foo</stopKey>

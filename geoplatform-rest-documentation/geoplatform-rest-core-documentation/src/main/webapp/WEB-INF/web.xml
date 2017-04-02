@@ -32,7 +32,7 @@
     <!-- Mapping with a URL Pattern -->
     <servlet-mapping>
         <servlet-name>CXFServlet</servlet-name>
-        <url-pattern>/api/*</url-pattern>
+        <url-pattern>/geoplatform-rest-core-documentation/api/*</url-pattern>
     </servlet-mapping>
     
     <listener>

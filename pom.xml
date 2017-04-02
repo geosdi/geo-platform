@@ -134,13 +134,6 @@
                 <enabled>true</enabled>
             </releases>
         </repository>
-       
-        <repository>
-            <url>http://oss.sonatype.org/content/repositories/sourceforge-releases</url>
-            <id>sonatype-mirror</id>
-            <layout>default</layout>
-            <name>Repository for library including ehcache recent ones</name>
-        </repository>
         
         <!-- GWTQUERY-UI PLUGIN -->
         <repository>
@@ -607,7 +600,7 @@
             <dependency>
                 <groupId>commons-io</groupId>
                 <artifactId>commons-io</artifactId>
-                <version>2.4</version>
+                <version>2.5</version>
             </dependency>
             <dependency>
                 <groupId>commons-dbcp</groupId>

@@ -1,35 +1,28 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    
+
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>geoplatform-rest-documentation</artifactId>
         <version>1.8-SNAPSHOT</version>
     </parent>
-    
+
     <groupId>org.geosdi</groupId>
     <artifactId>geoplatform-rest-core-documentation</artifactId>
     <packaging>war</packaging>
     <version>1.8-SNAPSHOT</version>
-    
+
     <name>Geo-Platform :: == Rest Core Documentation</name>
     <url>http://maven.apache.org</url>
-    
+
     <properties>
-        <swagger-ui-version>2.1.3</swagger-ui-version>
+        <swagger-ui-version>2.2.8</swagger-ui-version>
     </properties>
-    
+
     <dependencies>
-<!--
         <dependency>
             <groupId>org.bouncycastle</groupId>
-            <artifactId>bcprov-jdk16</artifactId>
-            <version>1.46</version>
-        </dependency>
--->
-	<dependency>
-    	    <groupId>org.bouncycastle</groupId>
             <artifactId>bcprov-jdk15on</artifactId>
             <version>1.55</version>
         </dependency>
@@ -67,7 +60,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        
+
         <!-- =============================================================== -->
         <!-- GEOPLATFORM -->
         <!-- =============================================================== -->
@@ -95,7 +88,7 @@
             <groupId>dom4j</groupId>
             <artifactId>dom4j</artifactId>
         </dependency>
-       
+
         <!-- logging dependencies, delegate all to slf4j and use logback -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -219,13 +212,13 @@
             <groupId>cglib</groupId>
             <artifactId>cglib-nodep</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <scope>provided</scope>
         </dependency>
-        
+
         <!-- =============================================================== -->
         <!-- JUnit -->
         <!-- =============================================================== -->
@@ -257,7 +250,7 @@
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-databinding-aegis</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-frontend-simple</artifactId>
@@ -266,37 +259,37 @@
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-core</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>org.apache.ws.xmlschema</groupId>
             <artifactId>xmlschema-core</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-databinding-jaxb</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>wsdl4j</groupId>
             <artifactId>wsdl4j</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-rs-service-description</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>org.apache.santuario</groupId>
             <artifactId>xmlsec</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>org.codehaus.jettison</groupId>
             <artifactId>jettison</artifactId>
         </dependency>
-        
+
         <!-- =============================================================== -->
         <!-- JASYPT -->
         <!-- =============================================================== -->
@@ -308,18 +301,18 @@
             <groupId>org.jasypt</groupId>
             <artifactId>jasypt-spring31</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-cxf-server-configurator</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
-    
+
     <build>
         <defaultGoal>jetty:run</defaultGoal>
         <finalName>geoplatform-rest-core-documentation</finalName>
-        
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -342,7 +335,7 @@
                     </execution>
                 </executions>
             </plugin>
-            
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>
@@ -350,9 +343,9 @@
                     <skip>true</skip>
                 </configuration>
             </plugin>
-            
+
             <plugin>
-                <groupId>org.mortbay.jetty</groupId>
+                <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>${jetty-version}</version>
                 <configuration>
@@ -365,11 +358,11 @@
                     </webApp>
                 </configuration>
             </plugin>
-            
+
             <plugin>
                 <groupId>com.googlecode.maven-download-plugin</groupId>
                 <artifactId>download-maven-plugin</artifactId>
-                <version>1.2.1</version>
+                <version>1.3.0</version>
                 <executions>
                     <execution>
                         <id>swagger-ui</id>
@@ -384,7 +377,7 @@
                     </execution>
                 </executions>
             </plugin>
-            
+
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>2.6</version>
@@ -399,7 +392,8 @@
                             <outputDirectory>src/main/webapp</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>${project.build.directory}/swagger-ui-${swagger-ui-version}/dist</directory>
+                                    <directory>${project.build.directory}/swagger-ui-${swagger-ui-version}/dist
+                                    </directory>
                                     <filtering>true</filtering>
                                     <excludes>
                                         <exclude>index.html</exclude>
@@ -410,7 +404,7 @@
                     </execution>
                 </executions>
             </plugin>
-            
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>
@@ -420,14 +414,21 @@
                         <phase>clean</phase>
                         <configuration>
                             <tasks>
-                                <delete dir="${basedir}/src/main/webapp/lib" />
-                                <delete dir="${basedir}/src/main/webapp/lang" />
-                                <delete dir="${basedir}/src/main/webapp/css" />
-                                <delete dir="${basedir}/src/main/webapp/fonts" />
-                                <delete dir="${basedir}/src/main/webapp/images" />
-                                <delete file="${basedir}/src/main/webapp/o2c.html" />
-                                <delete file="${basedir}/src/main/webapp/swagger-ui.js" />
-                                <delete file="${basedir}/src/main/webapp/swagger-ui.min.js" />
+                                <delete dir="${basedir}/src/main/webapp/lib"/>
+                                <delete dir="${basedir}/src/main/webapp/lang"/>
+                                <delete dir="${basedir}/src/main/webapp/css"/>
+                                <delete dir="${basedir}/src/main/webapp/fonts"/>
+                                <delete dir="${basedir}/src/main/webapp/images"/>
+                                <delete file="${basedir}/src/main/webapp/o2c.html"/>
+                                <delete file="${basedir}/src/main/webapp/swagger-ui.js"/>
+                                <delete file="${basedir}/src/main/webapp/swagger-ui.css"/>
+                                <delete file="${basedir}/src/main/webapp/swagger-ui.css.map"/>
+                                <delete file="${basedir}/src/main/webapp/swagger-ui.js.map"/>
+                                <delete file="${basedir}/src/main/webapp/swagger-ui-bundle.js"/>
+                                <delete file="${basedir}/src/main/webapp/swagger-ui-bundle.js.map"/>
+                                <delete file="${basedir}/src/main/webapp/swagger-ui-standalone-preset.js"/>
+                                <delete file="${basedir}/src/main/webapp/swagger-ui-standalone-preset.js.map"/>
+                                <delete file="${basedir}/src/main/webapp/swagger-ui.min.js"/>
                             </tasks>
                         </configuration>
                         <goals>

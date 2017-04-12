@@ -56,7 +56,7 @@ class XMPPConnectionConfig {
     @Bean(name = "xmppConnectionConfiguration")
     @Autowired
     public XMPPTCPConnectionConfiguration xmppConnectionConfiguration(@Qualifier(
-            value = "gpSpringXMPPProp") XMPPProperties gpSpringXMPPProp) {
+            value = "gpSpringXMPPProp") XMPPProperties gpSpringXMPPProp) throws Exception {
 
         return  XMPPConnectionConfigurationBuilder.newInstance()
                 .withXMPPProperties(gpSpringXMPPProp)

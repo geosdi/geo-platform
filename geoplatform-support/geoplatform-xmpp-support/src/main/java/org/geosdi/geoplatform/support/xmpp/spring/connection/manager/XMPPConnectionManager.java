@@ -35,12 +35,8 @@
  */
 package org.geosdi.geoplatform.support.xmpp.spring.connection.manager;
 
-import java.io.IOException;
-import javax.security.sasl.SaslException;
-import org.jivesoftware.smack.SmackException;
 import org.jivesoftware.smack.XMPPConnection;
-import org.jivesoftware.smack.XMPPException;
-import org.jivesoftware.smack.chat.ChatManager;
+import org.jivesoftware.smack.chat2.ChatManager;
 import org.jivesoftware.smack.packet.Stanza;
 import org.springframework.beans.factory.DisposableBean;
 
@@ -51,20 +47,17 @@ import org.springframework.beans.factory.DisposableBean;
  */
 public interface XMPPConnectionManager extends DisposableBean {
 
-    void disconnect() throws SmackException.NotConnectedException;
+    void disconnect() throws Exception;
 
-    void login() throws XMPPException, SmackException, SaslException,
-            IOException;
+    void login() throws Exception;
 
-    void login(String resource) throws XMPPException, SmackException,
-            SaslException, IOException;
+    void login(String resource) throws Exception;
 
-    void sendStanza(Stanza stanza) throws SmackException.NotConnectedException;
+    void sendStanza(Stanza stanza) throws Exception;
 
     XMPPConnection getConnection();
 
-    void initXMPPConnectionManager() throws SmackException, IOException,
-            XMPPException;
+    void initXMPPConnectionManager() throws Exception;
     
     ChatManager createChatManager();
 

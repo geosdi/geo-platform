@@ -315,4 +315,15 @@ public abstract class GeoPlatformSearchPanel<C extends Widget, T extends GeoPlat
         return pageSize;
     }
 
+    /**
+     * Called before the component has been rendered.
+     * <p>
+     * <p/>
+     * This method can be used to lazily alter this component pre-render
+     */
+    @Override
+    protected void beforeRender() {
+        super.beforeRender();
+        this.init();
+    }
 }

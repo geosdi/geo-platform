@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.stax.reader;
 
 import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.events.XMLEvent;
 import java.io.IOException;
 
@@ -50,7 +51,7 @@ public interface GeoPlatformStaxReader {
      * @throws XMLStreamException
      * @throws IOException
      */
-    void acquireReader(Object o) throws XMLStreamException, IOException;
+    XMLStreamReader acquireReader(Object o) throws XMLStreamException, IOException;
 
     /**
      * @throws XMLStreamException

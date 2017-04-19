@@ -40,6 +40,7 @@ import org.geosdi.geoplatform.connector.WFSConnectorBuilder;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.WFSDescribeFeatureTypeRequest;
 import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
+import org.geosdi.geoplatform.support.wfs.feature.reader.FeatureSchemaReader;
 import org.geosdi.geoplatform.support.wfs.feature.reader.GPFeatureSchemaReader;
 import org.geosdi.geoplatform.xml.xsd.v2001.Schema;
 import org.junit.Test;
@@ -77,6 +78,7 @@ public class WFSDescribeFeatureTest {
     //
     private static GPWFSConnectorStore serverConnector;
     private static final GPJAXBContextBuilder gpJAXBContextBuilder = GPJAXBContextBuilder.newInstance();
+    private static final FeatureSchemaReader schemaReader = new GPFeatureSchemaReader();
 
     @Test
     public void describeToppStatesTest() throws Exception {
@@ -88,9 +90,9 @@ public class WFSDescribeFeatureTest {
 
         String name = localPart.substring(localPart.indexOf(":") + 1);
         StringWriter writer = new StringWriter();
-        gpJAXBContextBuilder.marshal(new GPFeatureSchemaReader().getFeature(s, name), writer);
+        gpJAXBContextBuilder.marshal(schemaReader.getFeature(s, name), writer);
 
-        logger.info("######################LAYER_SCHEMA_TOPP_STATES_XML : {}\n", writer);
+        logger.info("######################LAYER_SCHEMA_TOPP_STATES_XML : \n{}\n", writer);
     }
 
     @Test
@@ -103,8 +105,8 @@ public class WFSDescribeFeatureTest {
 
         String name = localPart.substring(localPart.indexOf(":") + 1);
         StringWriter writer = new StringWriter();
-        gpJAXBContextBuilder.marshal(new GPFeatureSchemaReader().getFeature(s, name), writer);
+        gpJAXBContextBuilder.marshal(schemaReader.getFeature(s, name), writer);
 
-        logger.info("######################LAYER_SCHEMA_SF_ROAD_XML : {}\n", writer);
+        logger.info("######################LAYER_SCHEMA_SF_ROAD_XML : \n{}\n", writer);
     }
 }

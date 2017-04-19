@@ -37,9 +37,9 @@ public abstract class GPGridSearchPanel<T extends GeoPlatformBeanModel>
             @Override
             public void handleEvent(BaseEvent be) {
                 if (widget.getSelectionModel().getSelection().size() > 0) {
-                    selectButton.enable();
+                    actionAfterSelect();
                 } else {
-                    selectButton.disable();
+                    actionAfterDeselect();
                 }
             }
         });
@@ -53,6 +53,14 @@ public abstract class GPGridSearchPanel<T extends GeoPlatformBeanModel>
         });
 
         setGridProperties();
+    }
+
+    protected void actionAfterSelect(){
+        selectButton.enable();
+    }
+
+    protected void actionAfterDeselect(){
+        selectButton.disable();
     }
 
     public abstract void setGridProperties();

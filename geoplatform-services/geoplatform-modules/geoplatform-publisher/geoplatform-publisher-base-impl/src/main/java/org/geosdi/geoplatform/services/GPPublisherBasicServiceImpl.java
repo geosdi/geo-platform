@@ -185,7 +185,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
             this.styleIsValid(styleToPublish);
         }
         if (styleName != null) {
-            result = restPublisher.publishStyle(styleToPublish, styleName, true);
+            result = restPublisher.publishStyle(styleToPublish, styleName, Boolean.TRUE);
         } else {
             result = restPublisher.publishStyle(styleToPublish);
         }
@@ -198,7 +198,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
         if (validate) {
             this.styleIsValid(styleToPublish);
         }
-        return restPublisher.updateStyle(styleToPublish, styleName, true);
+        return restPublisher.updateStyle(styleToPublish, styleName, Boolean.TRUE);
     }
 
     @Override

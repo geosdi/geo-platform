@@ -781,7 +781,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
      */
     @Override
     public Boolean existsStyle(String styleName) {
-        return restReader.existsStyle(styleName);
+        return restReader.existsStyle(styleName, Boolean.TRUE);
     }
 
     @Override

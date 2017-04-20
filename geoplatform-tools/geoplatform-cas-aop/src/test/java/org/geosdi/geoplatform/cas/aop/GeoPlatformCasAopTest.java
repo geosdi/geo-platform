@@ -41,6 +41,6 @@ public class GeoPlatformCasAopTest {
     @Test(expected = IllegalStateException.class)
     public void casAopUpdateStyleTest() throws Exception {
         logger.info("############################UPDATE_STYLE_RESULT : {}\n",
-                this.casPublisherService.updateStyle("PIPPO", "pippo", false));
+                this.casPublisherService.updateStyle("PIPPO", "pippo", Boolean.FALSE));
     }
 }

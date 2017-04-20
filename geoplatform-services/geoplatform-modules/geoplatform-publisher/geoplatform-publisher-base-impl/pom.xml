@@ -1,8 +1,9 @@
 <?xml version="1.0"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <modelVersion>4.0.0</modelVersion>
-  
+
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>geoplatform-publisher</artifactId>
@@ -15,27 +16,26 @@
     <packaging>jar</packaging>
 
     <name>Geo-Platform :: == Publish Module Base Impl</name>
-  
+
     <dependencies>
-        
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-sharing</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>gp-shared-beans</artifactId>
             <version>${project.version}</version>
         </dependency>
-        
+
         <!--Dependency to check style validity-->
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>sld-validator</artifactId>
             <version>${project.version}</version>
         </dependency>
-        
+
         <!-- APACHE COMMONS -->
         <dependency>
             <groupId>commons-lang</groupId>
@@ -49,7 +49,7 @@
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
         </dependency>
-        
+
         <!--
         Transitive dependiency of commons-httpclient:commons-httpclient.
         The latter is a transitive dependiency for:
@@ -77,27 +77,27 @@
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-base-configurator</artifactId>
         </dependency>
-        
+
         <!-- =========================================================== -->
         <!-- ======================== GUAVA =========================== -->
         <!-- =========================================================== -->
-            
+
         <dependency>
             <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>          
+            <artifactId>guava</artifactId>
         </dependency>
-        
+
         <!--        <dependency>
             <groupId>net.java.dev.jsr-275</groupId>
             <artifactId>jsr-275</artifactId>
         </dependency>-->
-        
+
         <dependency>
             <groupId>it.geosolutions</groupId>
             <artifactId>geoserver-manager</artifactId>
             <version>${geoserver-manager-version}</version>
         </dependency>
-        
+
         <dependency>
             <groupId>org.apache.xmlgraphics</groupId>
             <artifactId>batik-ext</artifactId>
@@ -157,7 +157,7 @@
             <groupId>org.geotools.jdbc</groupId>
             <artifactId>gt-jdbc-postgis</artifactId>
         </dependency>
-        
+
         <!-- QUARTZ -->
         <dependency>
             <groupId>org.quartz-scheduler</groupId>
@@ -191,7 +191,7 @@
             <artifactId>spring-tx</artifactId>
             <scope>provided</scope>
         </dependency>
-        
+
         <!-- CGLIB -->
         <dependency>
             <groupId>cglib</groupId>
@@ -204,33 +204,37 @@
             <artifactId>log4j</artifactId>
         </dependency>
 
-        <!-- SCOPE TEST -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-        </dependency>
-
         <!-- logging dependencies, delegate all to slf4j and use logback -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>jcl-over-slf4j</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>log4j-over-slf4j</artifactId>
         </dependency>
+
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
         </dependency>
+
         <!-- JUnit -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>

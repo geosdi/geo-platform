@@ -2,6 +2,7 @@ package org.geosdi.geoplatform.jaxb;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
+import java.util.Objects;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -15,5 +16,18 @@ public class GPJAXBContextCache {
     public GPJAXBContextCache(Class type) throws JAXBException {
         this.type = type;
         this.context = JAXBContext.newInstance(type);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof GPJAXBContextCache)) return false;
+        GPJAXBContextCache that = (GPJAXBContextCache) o;
+        return Objects.equals(type, that.type);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(type);
     }
 }

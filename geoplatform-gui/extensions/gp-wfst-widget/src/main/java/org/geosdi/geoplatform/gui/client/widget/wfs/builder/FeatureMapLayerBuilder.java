@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.wfs.builder;
 
-import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
 import org.geosdi.geoplatform.gui.impl.map.store.AbstractMapLayerBuilder;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
@@ -47,6 +46,8 @@ import org.gwtopenmaps.openlayers.client.Projection;
 import org.gwtopenmaps.openlayers.client.layer.WMS;
 import org.gwtopenmaps.openlayers.client.layer.WMSOptions;
 import org.gwtopenmaps.openlayers.client.layer.WMSParams;
+
+import javax.inject.Inject;
 
 /**
  * <p>A Special Class that build WMS to display in {@link MapWidget}</p>

@@ -1,0 +1,85 @@
+<GeocodeResponse>
+    <status>OK</status>
+    <result>
+        <type>street_address</type>
+        <formatted_address>
+            Via Provinciale, 169, 85050 Villa D'agri PZ, Italia
+        </formatted_address>
+        <address_component>
+            <long_name>169</long_name>
+            <short_name>169</short_name>
+            <type>street_number</type>
+        </address_component>
+        <address_component>
+            <long_name>Via Provinciale</long_name>
+            <short_name>Via Provinciale</short_name>
+            <type>route</type>
+        </address_component>
+        <address_component>
+            <long_name>Villa D'agri</long_name>
+            <short_name>Villa D'agri</short_name>
+            <type>locality</type>
+            <type>political</type>
+        </address_component>
+        <address_component>
+            <long_name>Marsicovetere</long_name>
+            <short_name>Marsicovetere</short_name>
+            <type>administrative_area_level_3</type>
+            <type>political</type>
+        </address_component>
+        <address_component>
+            <long_name>Provincia di Potenza</long_name>
+            <short_name>PZ</short_name>
+            <type>administrative_area_level_2</type>
+            <type>political</type>
+        </address_component>
+        <address_component>
+            <long_name>Basilicata</long_name>
+            <short_name>Basilicata</short_name>
+            <type>administrative_area_level_1</type>
+            <type>political</type>
+        </address_component>
+        <address_component>
+            <long_name>Italia</long_name>
+            <short_name>IT</short_name>
+            <type>country</type>
+            <type>political</type>
+        </address_component>
+        <address_component>
+            <long_name>85050</long_name>
+            <short_name>85050</short_name>
+            <type>postal_code</type>
+        </address_component>
+        <geometry>
+            <location>
+                <lat>40.3579817</lat>
+                <lng>15.8267370</lng>
+            </location>
+            <location_type>RANGE_INTERPOLATED</location_type>
+            <viewport>
+                <southwest>
+                    <lat>40.3566256</lat>
+                    <lng>15.8253872</lng>
+                </southwest>
+                <northeast>
+                    <lat>40.3593236</lat>
+                    <lng>15.8280851</lng>
+                </northeast>
+            </viewport>
+            <bounds>
+                <southwest>
+                    <lat>40.3579675</lat>
+                    <lng>15.8267353</lng>
+                </southwest>
+                <northeast>
+                    <lat>40.3579817</lat>
+                    <lng>15.8267370</lng>
+                </northeast>
+            </bounds>
+        </geometry>
+        <partial_match>true</partial_match>
+        <place_id>
+            EjNWaWEgUHJvdmluY2lhbGUsIDE2OSwgODUwNTAgVmlsbGEgRCdhZ3JpIFBaLCBJdGFsaWE
+        </place_id>
+    </result>
+</GeocodeResponse>

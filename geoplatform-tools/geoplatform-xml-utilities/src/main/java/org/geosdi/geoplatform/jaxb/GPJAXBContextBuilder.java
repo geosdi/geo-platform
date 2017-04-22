@@ -38,7 +38,9 @@ import javax.xml.bind.*;
 import java.lang.ref.WeakReference;
 
 /**
- * This Class is a Decorator for {@link JAXB} class
+ * <p>This Class is a Decorator for {@link JAXB} class.
+ * If you want use a pool class see {@link org.geosdi.geoplatform.jaxb.pool.GPJAXBContextBuilderPool}
+ * </p>
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -72,31 +74,5 @@ public final class GPJAXBContextBuilder extends AbstractJAXBContextBuilder {
         GPJAXBContextCache d = new GPJAXBContextCache(type);
         cache = new WeakReference<GPJAXBContextCache>(d);
         return d.context;
-    }
-
-    /**
-     * @param jaxbObject
-     * @return {@link Marshaller}
-     */
-    protected Marshaller createMarshaller(Object jaxbObject) {
-        try {
-            JAXBContext context;
-
-            if (jaxbObject instanceof JAXBElement) {
-                context = getContext(
-                        ((JAXBElement<?>) jaxbObject).getDeclaredType());
-            } else {
-                Class<?> clazz = jaxbObject.getClass();
-                context = getContext(clazz);
-            }
-
-            Marshaller marshaller = context.createMarshaller();
-            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
-
-            return marshaller;
-        } catch (JAXBException e) {
-            throw new DataBindingException(e);
-        }
     }
 }

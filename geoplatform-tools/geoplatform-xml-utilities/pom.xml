@@ -23,6 +23,14 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
         </dependency>
+
+        <!-- =========================================================== -->
+        <!-- ===================== COMMONS-POOL ======================== -->
+        <!-- =========================================================== -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
+        </dependency>
         
         <!-- logging dependencies, delegate all to slf4j and use logback -->
         <dependency>

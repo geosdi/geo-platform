@@ -17,7 +17,7 @@ import java.net.URL;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-abstract class AbstractJAXBContextBuilder implements IGPJAXBContextBuilder {
+public abstract class AbstractJAXBContextBuilder implements IGPJAXBContextBuilder {
 
     protected AbstractJAXBContextBuilder() {
     }
@@ -251,5 +251,25 @@ abstract class AbstractJAXBContextBuilder implements IGPJAXBContextBuilder {
      * @param jaxbObject
      * @return {@link Marshaller}
      */
-    protected abstract Marshaller createMarshaller(Object jaxbObject);
+    protected Marshaller createMarshaller(Object jaxbObject) {
+        try {
+            JAXBContext context;
+
+            if (jaxbObject instanceof JAXBElement) {
+                context = getContext(
+                        ((JAXBElement<?>) jaxbObject).getDeclaredType());
+            } else {
+                Class<?> clazz = jaxbObject.getClass();
+                context = getContext(clazz);
+            }
+
+            Marshaller marshaller = context.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+            marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
+
+            return marshaller;
+        } catch (JAXBException e) {
+            throw new DataBindingException(e);
+        }
+    }
 }

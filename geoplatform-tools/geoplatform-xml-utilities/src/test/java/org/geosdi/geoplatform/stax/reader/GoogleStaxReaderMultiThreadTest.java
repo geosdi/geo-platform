@@ -15,15 +15,19 @@ public class GoogleStaxReaderMultiThreadTest {
 
     private static final Logger logger = LoggerFactory.getLogger(GoogleStaxReaderMultiThreadTest.class);
     //
+    private static File file = new File("src/test/resources/googleGeocodeExample.xml");
+    private static File file1 = new File("src/test/resources/googleGeocodeExample1.xml");
+    //
     private static final GoogleGeocodingStaxReader googleStaxReader = new GoogleGeocodingStaxReader();
 
     @Test
     public void googleStaxReaderMultiThreadTest() throws Exception {
-        String pathFile = new File(".").getCanonicalPath() + File.separator
-                + "src/test/resources/googleGeocodeExample.xml";
-        File file = new File(pathFile);
         for (int i = 0; i < 20; i++) {
-            new GoogleStaxReaderTask(i, "GoogleStaxReaderTask", file).start();
+            if (i % 2 == 0) {
+                new GoogleStaxReaderTask(i, "GoogleStaxReaderTask", file).start();
+            } else {
+                new GoogleStaxReaderTask(i, "GoogleStaxReaderTask", file1).start();
+            }
         }
         Thread.sleep(500);
     }

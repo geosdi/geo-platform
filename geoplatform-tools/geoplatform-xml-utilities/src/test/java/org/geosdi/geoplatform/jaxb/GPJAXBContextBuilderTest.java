@@ -17,6 +17,7 @@ import java.io.File;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -275,6 +276,11 @@ public class GPJAXBContextBuilderTest {
                         "        </attribute>\n" +
                         "    </attributes>\n" +
                         "</AttributeStore>"), AttributeStore.class));
+    }
+
+    @Test
+    public void i_simpleDurationTest() throws Exception {
+        logger.info("{}\n", TimeUnit.MILLISECONDS.toMinutes(100L * 60L * 20L));
     }
 
     /**

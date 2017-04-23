@@ -9,12 +9,12 @@ import org.apache.commons.pool2.impl.GenericKeyedObjectPoolConfig;
 public class GPJAXBContextBuilderPoolConfig extends GenericKeyedObjectPoolConfig {
 
     {
-        super.setMaxIdlePerKey(4);
-        super.setMaxTotal(15);
+        super.setMaxIdlePerKey(10);
+        super.setMaxTotal(50);
         super.setMinIdlePerKey(1);
         super.setJmxEnabled(Boolean.FALSE);
         super.setTimeBetweenEvictionRunsMillis(100L * 60L * 20L);
-        super.setNumTestsPerEvictionRun(4);
+        super.setNumTestsPerEvictionRun(15);
         super.setMinEvictableIdleTimeMillis(100L * 60L * 10L);
     }
 }

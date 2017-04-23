@@ -1,5 +1,6 @@
 package org.geosdi.geoplatform.jaxb;
 
+import com.google.common.base.Preconditions;
 import org.w3c.dom.Node;
 
 import javax.xml.bind.*;
@@ -252,19 +253,15 @@ public abstract class AbstractJAXBContextBuilder implements IGPJAXBContextBuilde
      * @return {@link Marshaller}
      */
     protected Marshaller createMarshaller(Object jaxbObject) {
+        Preconditions.checkArgument(jaxbObject != null,
+                "The Parameter jaxbObject must not be null.");
         try {
-            JAXBContext context;
-
-            if (jaxbObject instanceof JAXBElement) {
-                context = getContext(
-                        ((JAXBElement<?>) jaxbObject).getDeclaredType());
-            } else {
-                Class<?> clazz = jaxbObject.getClass();
-                context = getContext(clazz);
-            }
+            JAXBContext context = ((jaxbObject instanceof JAXBElement)
+                    ? getContext(((JAXBElement<?>) jaxbObject).getDeclaredType())
+                    : getContext(jaxbObject.getClass()));
 
             Marshaller marshaller = context.createMarshaller();
-            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
             marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
 
             return marshaller;

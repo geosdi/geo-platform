@@ -6,8 +6,9 @@ import org.junit.runners.MethodSorters;
 
 import java.util.concurrent.TimeUnit;
 
-import static org.geosdi.geoplatform.jaxb.comparison.AbstractAXBContextBuilderComparisonTest.GPJAXBContextBuilderTaskType.POOLED;
-import static org.geosdi.geoplatform.jaxb.comparison.AbstractAXBContextBuilderComparisonTest.GPJAXBContextBuilderTaskType.SIMPLE;
+import static org.geosdi.geoplatform.jaxb.comparison.task.GPJAXBContextBuilderTaskType.POOLED;
+import static org.geosdi.geoplatform.jaxb.comparison.task.GPJAXBContextBuilderTaskType.SIMPLE;
+
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

@@ -1,6 +1,7 @@
 package org.geosdi.geoplatform.stax.reader;
 
 import org.geosdi.geoplatform.stax.reader.demo.GoogleGeocodingStaxReader;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,10 +16,16 @@ public class GoogleStaxReaderMultiThreadTest {
 
     private static final Logger logger = LoggerFactory.getLogger(GoogleStaxReaderMultiThreadTest.class);
     //
-    private static File file = new File("src/test/resources/googleGeocodeExample.xml");
-    private static File file1 = new File("src/test/resources/googleGeocodeExample1.xml");
+    private static File file;
+    private static File file1;
     //
     private static final GoogleGeocodingStaxReader googleStaxReader = new GoogleGeocodingStaxReader();
+
+    @BeforeClass
+    public static void beforeClass() throws Exception {
+        file = new File("src/test/resources/googleGeocodeExample.xml");
+        file1 = new File("src/test/resources/googleGeocodeExample1.xml");
+    }
 
     @Test
     public void googleStaxReaderMultiThreadTest() throws Exception {

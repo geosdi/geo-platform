@@ -1,12 +1,13 @@
 package org.geosdi.geoplatform.jaxb.comparison;
 
+import org.geosdi.geoplatform.jaxb.comparison.task.GPJAXBContextBuilderTaskType;
+import org.geosdi.geoplatform.jaxb.comparison.task.factory.GPJAXBContextBuilderComparisonThreadFactory;
 import org.geosdi.geoplatform.jaxb.comparison.task.function.GPJAXBContextBuilderTaskFunction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.concurrent.*;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -16,26 +17,6 @@ import java.util.stream.IntStream;
  */
 public class AbstractAXBContextBuilderComparisonTest {
 
-    public enum GPJAXBContextBuilderTaskType {
-
-        SIMPLE,
-        POOLED;
-    }
-
-    private static final ThreadFactory GPJAXBContextBuilderComparisonThreadFactory = new ThreadFactory() {
-
-        private final AtomicInteger threadID = new AtomicInteger(0);
-
-        @Override
-        public Thread newThread(Runnable r) {
-            Thread thread = Executors.privilegedThreadFactory().newThread(r);
-            thread.setName("GPJAXBContextBuilderComparisonThread - " + threadID.getAndIncrement());
-            thread.setDaemon(Boolean.TRUE);
-            return thread;
-        }
-
-    };
-    //
     protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     protected int defineNumThreads() {
@@ -46,8 +27,8 @@ public class AbstractAXBContextBuilderComparisonTest {
         long time = 0;
 
         int numThreads = defineNumThreads();
-        ExecutorService executor = Executors.newFixedThreadPool(numThreads,
-                GPJAXBContextBuilderComparisonThreadFactory);
+        ExecutorService executor = Executors.newFixedThreadPool(12,
+                new GPJAXBContextBuilderComparisonThreadFactory());
 
         List<Callable<Long>> tasks = IntStream.iterate(0, n -> n + 1)
                 .limit(numThreads)

@@ -1,8 +1,8 @@
 package org.geosdi.geoplatform.jaxb.comparison.task.function;
 
-import org.geosdi.geoplatform.jaxb.comparison.AbstractAXBContextBuilderComparisonTest.GPJAXBContextBuilderTaskType;
 import org.geosdi.geoplatform.jaxb.comparison.task.GPJAXBContextBuilderTaskPooled;
 import org.geosdi.geoplatform.jaxb.comparison.task.GPJAXBContextBuilderTaskSimple;
+import org.geosdi.geoplatform.jaxb.comparison.task.GPJAXBContextBuilderTaskType;
 
 import java.util.concurrent.Callable;
 import java.util.function.Function;

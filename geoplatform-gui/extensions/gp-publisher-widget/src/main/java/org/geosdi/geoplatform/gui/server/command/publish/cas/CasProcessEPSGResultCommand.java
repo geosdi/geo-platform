@@ -1,54 +1,47 @@
 /**
- *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
- *
- *   Copyright (C) 2008-2017 geoSDI Group (CNR IMAA - Potenza - ITALY).
- *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
- *
- *   ====================================================================
- *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
- *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * geo-platform
+ * Rich webgis framework
+ * http://geo-platform.org
+ * ====================================================================
+ * <p>
+ * Copyright (C) 2008-2017 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * <p>
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version. This program is distributed in the
+ * hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License
+ * for more details. You should have received a copy of the GNU General
+ * Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * <p>
+ * ====================================================================
+ * <p>
+ * Linking this library statically or dynamically with other modules is
+ * making a combined work based on this library. Thus, the terms and
+ * conditions of the GNU General Public License cover the whole combination.
+ * <p>
+ * As a special exception, the copyright holders of this library give you permission
+ * to link this library with independent modules to produce an executable, regardless
+ * of the license terms of these independent modules, and to copy and distribute
+ * the resulting executable under terms of your choice, provided that you also meet,
+ * for each linked independent module, the terms and conditions of the license of
+ * that module. An independent module is a module which is not derived from or
+ * based on this library. If you modify this library, you may extend this exception
+ * to your version of the library, but you are not obligated to do so. If you do not
+ * wish to do so, delete this exception statement from your version.
  */
 package org.geosdi.geoplatform.gui.server.command.publish.cas;
 
 import com.google.common.collect.Lists;
-import java.util.ArrayList;
-import java.util.List;
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.core.model.GPAccount;
-import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.client.command.publish.basic.ProcessEPSGResultResponse;
 import org.geosdi.geoplatform.gui.client.command.publish.cas.CasProcessEPSGResultRequest;
 import org.geosdi.geoplatform.gui.client.model.EPSGLayerData;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.SessionUtility;
-import org.geosdi.geoplatform.gui.server.utility.PublisherFileUtils;
 import org.geosdi.geoplatform.gui.shared.publisher.LayerPublishAction;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 import org.geosdi.geoplatform.request.ProcessEPSGResultRequest;
@@ -62,8 +55,14 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.geosdi.geoplatform.gui.server.utility.PublisherFileUtils.generateJSONObjects;
+
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -80,8 +79,7 @@ public class CasProcessEPSGResultCommand implements
     private SessionUtility sessionUtility;
 
     @Override
-    public ProcessEPSGResultResponse execute(
-            CasProcessEPSGResultRequest request,
+    public ProcessEPSGResultResponse execute(CasProcessEPSGResultRequest request,
             HttpServletRequest httpServletRequest) {
         GPAccount account;
         try {
@@ -89,19 +87,18 @@ public class CasProcessEPSGResultCommand implements
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }
-        List<InfoPreview> resultList = null;
+
         List<EPSGLayerData> previewLayerList = request.getPreviewLayerList();
         try {
-            resultList = casPublisherService.processEPSGResult(
+            List<InfoPreview> resultList = casPublisherService.processEPSGResult(
                     new ProcessEPSGResultRequest(account.getNaturalID(),
                             this.trasformPreviewLayerList(
                                     previewLayerList), request.getWorkspace())).getInfoPreviews();
-        } catch (ResourceNotFoundFault ex) {
-            logger.error("Error on publish shape: " + ex);
+            return new ProcessEPSGResultResponse(generateJSONObjects(resultList));
+        } catch (Exception ex) {
+            ex.printStackTrace();
             throw new GeoPlatformException("Error on publish shape.");
         }
-        return new ProcessEPSGResultResponse(
-                PublisherFileUtils.generateJSONObjects(resultList));
     }
 
     private ArrayList<InfoPreview> trasformPreviewLayerList(
@@ -127,12 +124,10 @@ public class CasProcessEPSGResultCommand implements
     }
 
     /**
-     * @param geoPlatformServiceClient the geoPlatformServiceClient to set
+     * @param casPublisherService
      */
     @Resource
-    public void setCasPublisherService(
-            @Qualifier("casPublisherService") GPPublisherBasicServiceImpl casPublisherService) {
-//        System.out.println("*************** Setting publisher service: " + );
+    public void setCasPublisherService(@Qualifier("casPublisherService") GPPublisherBasicServiceImpl casPublisherService) {
         this.casPublisherService = casPublisherService;
     }
 }

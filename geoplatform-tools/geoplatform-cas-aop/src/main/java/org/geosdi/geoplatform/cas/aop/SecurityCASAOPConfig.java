@@ -50,5 +50,4 @@ class SecurityCASAOPConfig {
     public SecurityCASAOP securityCASAOP() {
         return new SecurityCASAOP();
     }
-
 }

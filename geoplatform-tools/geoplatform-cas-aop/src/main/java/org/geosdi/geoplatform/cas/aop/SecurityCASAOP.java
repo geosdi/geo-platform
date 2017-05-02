@@ -96,6 +96,7 @@ public class SecurityCASAOP {
         try {
             Method method = GeoServerCASRESTReader.class.getMethod(
                     proceedingJoinPoint.getSignature().getName(), types);
+            method.setAccessible(Boolean.TRUE);
             return method.invoke(this.casRestReader, proceedingJoinPoint.getArgs());
         } catch (Exception e) {
             e.printStackTrace();
@@ -119,6 +120,7 @@ public class SecurityCASAOP {
         try {
             Method method = GeoServerCASRESTPublisher.class.getMethod(
                     proceedingJoinPoint.getSignature().getName(), types);
+            method.setAccessible(Boolean.TRUE);
             return method.invoke(this.casRestPublisher, proceedingJoinPoint.getArgs());
         } catch (Exception e) {
             e.printStackTrace();
@@ -142,6 +144,7 @@ public class SecurityCASAOP {
         try {
             Method method = GeoServerCASRESTStoreManager.class.getMethod(
                     proceedingJoinPoint.getSignature().getName(), types);
+            method.setAccessible(Boolean.TRUE);
             logger.info("After REST Store Manager Method");
             return method.invoke(this.casRestStoreManager, proceedingJoinPoint.getArgs());
         } catch (Exception e) {

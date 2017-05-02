@@ -296,7 +296,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
         logger.info("Removing shp " + layerName + " from " + userWorkspace);
         this.removeLayer(layerName);
         restPublisher.unpublishFeatureType(userWorkspace, layerName, layerName);
-        reload();
+        //reload();
         restPublisher.removeDatastore(userWorkspace, layerName, Boolean.TRUE);
         return Boolean.TRUE;
     }
@@ -318,7 +318,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
         logger.info("Removing tif " + layerName + " from " + userWorkspace);
         this.removeLayer(layerName);
         restPublisher.unpublishCoverage(userWorkspace, layerName, layerName);
-        reload();
+        //reload();
         restPublisher.removeCoverageStore(userWorkspace, layerName,
                 Boolean.FALSE);
         return Boolean.TRUE;
@@ -413,7 +413,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
     @Override
     public InfoPreviewStore getPreviewDataStores(String workspace) throws
             ResourceNotFoundFault {
-        reload();
+        //reload();
         List<InfoPreview> listPreviews = Lists.<InfoPreview>newArrayList();
         String userWorkspace = workspace;
         if (userWorkspace == null) {
@@ -629,7 +629,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
     }
 
     private String publishSLD(File fileSLD, String layerName) throws ResourceNotFoundFault {
-        reload();
+        //reload();
         logger.info(
                 "\n INFO: FOUND STYLE FILE. TRYING TO PUBLISH WITH " + layerName + " NAME");
         if (styleIsValid(fileSLD)) {
@@ -1008,121 +1008,126 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
     public InfoPreviewStore processEPSGResult(ProcessEPSGResultRequest request)
             throws ResourceNotFoundFault {
         /* TODO CHECK All Possible NPE */
-        String userName = request.getUserName();
-        List<InfoPreview> previewLayerList = request.getPreviews();
+        try {
+            String userName = request.getUserName();
+            List<InfoPreview> previewLayerList = request.getPreviews();
 
-        String tempUserDir = PublishUtility.createDir(
-                this.geoportalDir + userName);
-        String tempUserZipDir = PublishUtility.createDir(
-                tempUserDir + PublishUtility.ZIP_DIR_NAME);
-        String tempUserTifDir = PublishUtility.createDir(
-                tempUserDir + PublishUtility.TIF_DIR_NAME);
-        String userWorkspace = request.getWorkspace();
-        if (userWorkspace == null) {
-            userWorkspace = getWorkspace(userName);
-        }
-        List<InfoPreview> infoPreviewList = Lists.<InfoPreview>newArrayList();
-        for (InfoPreview infoPreview : previewLayerList) {
-            if (infoPreview.getLayerPublishAction() != null) {
-                if (infoPreview.isIsShape()) {
-                    if (GPSharedUtils.isNotEmpty(infoPreview.getNewName())
-                            && this.restReader.getLayer(
-                            PublishUtility.removeSpecialCharactersFromString(userName)
-                                    + "_shp_" + infoPreview.getNewName()) != null) {
-                        throw new ResourceNotFoundFault(
-                                "A layer named: " + infoPreview.getNewName() + " already exists");
-                    }
-                    if (infoPreview.getLayerPublishAction().equals(
-                            LayerPublishAction.RENAME)) {
-                        PublishUtility.manageRename(userName, infoPreview,
-                                tempUserDir);
-                    }
-                } else {
-                    if (GPSharedUtils.isNotEmpty(infoPreview.getNewName())
-                            && this.restReader.getLayer(userWorkspace,
-                            userName + "_" + infoPreview.getNewName()) != null
-                            && this.restReader.getCoverage(this.restReader.getLayer(userWorkspace,
-                            userName + "_" + infoPreview.getNewName())) != null) {
-                        throw new ResourceNotFoundFault(
-                                "A layer named: " + infoPreview.getNewName() + " already exists");
-                    }
-                    boolean result = PublishUtility.manageRename(userName,
-                            infoPreview, tempUserDir);
-                    //Pubblicare lo stile se ho duplicato il tif
-                    if (result) {
-                        String SLDFileName = infoPreview.getDataStoreName() + ".sld";
-                        File fileSLD = new File(tempUserTifDir, SLDFileName);
-                        if (fileSLD.exists()) {
-                            infoPreview.setStyleName(this.publishSLD(fileSLD,
-                                    infoPreview.getDataStoreName()));
+            String tempUserDir = PublishUtility.createDir(
+                    this.geoportalDir + userName);
+            String tempUserZipDir = PublishUtility.createDir(
+                    tempUserDir + PublishUtility.ZIP_DIR_NAME);
+            String tempUserTifDir = PublishUtility.createDir(
+                    tempUserDir + PublishUtility.TIF_DIR_NAME);
+            String userWorkspace = request.getWorkspace();
+            if (userWorkspace == null) {
+                userWorkspace = getWorkspace(userName);
+            }
+            List<InfoPreview> infoPreviewList = Lists.<InfoPreview>newArrayList();
+            for (InfoPreview infoPreview : previewLayerList) {
+                if (infoPreview.getLayerPublishAction() != null) {
+                    if (infoPreview.isIsShape()) {
+                        if (GPSharedUtils.isNotEmpty(infoPreview.getNewName())
+                                && this.restReader.getLayer(
+                                PublishUtility.removeSpecialCharactersFromString(userName)
+                                        + "_shp_" + infoPreview.getNewName()) != null) {
+                            throw new ResourceNotFoundFault(
+                                    "A layer named: " + infoPreview.getNewName() + " already exists");
                         }
-                        String coverageStoreName = new String(
-                                infoPreview.getDataStoreName());
-                        logger.debug(
-                                "********** processEPSGResult Before removing coverage store: " + coverageStoreName);
-                        if (restReader.getCoverage(userWorkspace,
-                                coverageStoreName, coverageStoreName) != null) {
+                        if (infoPreview.getLayerPublishAction().equals(
+                                LayerPublishAction.RENAME)) {
+                            PublishUtility.manageRename(userName, infoPreview,
+                                    tempUserDir);
+                        }
+                    } else {
+                        if (GPSharedUtils.isNotEmpty(infoPreview.getNewName())
+                                && this.restReader.getLayer(userWorkspace,
+                                userName + "_" + infoPreview.getNewName()) != null
+                                && this.restReader.getCoverage(this.restReader.getLayer(userWorkspace,
+                                userName + "_" + infoPreview.getNewName())) != null) {
+                            throw new ResourceNotFoundFault(
+                                    "A layer named: " + infoPreview.getNewName() + " already exists");
+                        }
+                        boolean result = PublishUtility.manageRename(userName,
+                                infoPreview, tempUserDir);
+                        //Pubblicare lo stile se ho duplicato il tif
+                        if (result) {
+                            String SLDFileName = infoPreview.getDataStoreName() + ".sld";
+                            File fileSLD = new File(tempUserTifDir, SLDFileName);
+                            if (fileSLD.exists()) {
+                                infoPreview.setStyleName(this.publishSLD(fileSLD,
+                                        infoPreview.getDataStoreName()));
+                            }
+                            String coverageStoreName = new String(
+                                    infoPreview.getDataStoreName());
                             logger.debug(
-                                    "********** processEPSGResult removing coverage store: " + coverageStoreName);
-                            restPublisher.removeCoverageStore(userWorkspace,
-                                    coverageStoreName, Boolean.TRUE);
+                                    "********** processEPSGResult Before removing coverage store: " + coverageStoreName);
+                            if (restReader.getCoverage(userWorkspace,
+                                    coverageStoreName, coverageStoreName) != null) {
+                                logger.debug(
+                                        "********** processEPSGResult removing coverage store: " + coverageStoreName);
+                                restPublisher.removeCoverageStore(userWorkspace,
+                                        coverageStoreName, Boolean.TRUE);
+                            }
                         }
                     }
                 }
-            }
-            LayerInfo info = new LayerInfo();
+                LayerInfo info = new LayerInfo();
 
-            info.epsg = infoPreview.getCrs();
-            info.name = infoPreview.getDataStoreName();
-            info.sld = infoPreview.getStyleName();
-            if (infoPreview.isIsShape() && infoPreview.getLayerPublishAction() != null
-                    && infoPreview.getLayerPublishAction().equals(
-                    LayerPublishAction.APPEND)) {
-                logger.info(
-                        "***** processEPSGResult: Executing shape append for zip file: " + infoPreview.getFileName());
-                //Settiamo una nuova source feature per evitare di usare quella vecchia
-                //che punta al precedente file shp
-                ds2dsConfiguration.setSourceFeature(new FeatureConfiguration());
-                ds2dsConfiguration.setForcePurgeAllData(Boolean.FALSE);
-                ds2dsConfiguration.setPurgeData(Boolean.FALSE);
-                this.shapeAppender.importFile(tempUserDir, new File(
-                        infoPreview.getFileName()));
-                infoPreview = this.buildSHPInfoPreviewFromExistingWK(userWorkspace,
-                        infoPreview.getDataStoreName(), info.sld);
+                info.epsg = infoPreview.getCrs();
+                info.name = infoPreview.getDataStoreName();
+                info.sld = infoPreview.getStyleName();
+                if (infoPreview.isIsShape() && infoPreview.getLayerPublishAction() != null
+                        && infoPreview.getLayerPublishAction().equals(
+                        LayerPublishAction.APPEND)) {
+                    logger.info(
+                            "***** processEPSGResult: Executing shape append for zip file: " + infoPreview.getFileName());
+                    //Settiamo una nuova source feature per evitare di usare quella vecchia
+                    //che punta al precedente file shp
+                    ds2dsConfiguration.setSourceFeature(new FeatureConfiguration());
+                    ds2dsConfiguration.setForcePurgeAllData(Boolean.FALSE);
+                    ds2dsConfiguration.setPurgeData(Boolean.FALSE);
+                    this.shapeAppender.importFile(tempUserDir, new File(
+                            infoPreview.getFileName()));
+                    infoPreview = this.buildSHPInfoPreviewFromExistingWK(userWorkspace,
+                            infoPreview.getDataStoreName(), info.sld);
 //                infoPreview.setLayerPublishAction(LayerPublishAction.APPEND);
-                if (infoPreview.getUrl().indexOf("/wms") == -1) {
-                    infoPreview.setUrl(infoPreview.getUrl() + "/wms");
-                }
-            } else if (infoPreview.isIsShape() && infoPreview.getLayerPublishAction() != null
-                    && infoPreview.getLayerPublishAction().equals(
-                    LayerPublishAction.OVERRIDE)) {
-                //Settiamo una nuova source feature per evitare di usare quella vecchia
-                //che punta al precedente file shp
-                ds2dsConfiguration.setSourceFeature(new FeatureConfiguration());
-                ds2dsConfiguration.setForcePurgeAllData(Boolean.TRUE);
-                this.shapeAppender.importFile(tempUserDir, new File(
-                        infoPreview.getFileName()));
-                infoPreview = this.buildSHPInfoPreviewFromExistingWK(
-                        userWorkspace, infoPreview.getDataStoreName(), info.sld);
+                    if (infoPreview.getUrl().indexOf("/wms") == -1) {
+                        infoPreview.setUrl(infoPreview.getUrl() + "/wms");
+                    }
+                } else if (infoPreview.isIsShape() && infoPreview.getLayerPublishAction() != null
+                        && infoPreview.getLayerPublishAction().equals(
+                        LayerPublishAction.OVERRIDE)) {
+                    //Settiamo una nuova source feature per evitare di usare quella vecchia
+                    //che punta al precedente file shp
+                    ds2dsConfiguration.setSourceFeature(new FeatureConfiguration());
+                    ds2dsConfiguration.setForcePurgeAllData(Boolean.TRUE);
+                    this.shapeAppender.importFile(tempUserDir, new File(
+                            infoPreview.getFileName()));
+                    infoPreview = this.buildSHPInfoPreviewFromExistingWK(
+                            userWorkspace, infoPreview.getDataStoreName(), info.sld);
 //                        infoPreview.setLayerPublishAction(LayerPublishAction.OVERRIDE);
-                if (infoPreview.getUrl().indexOf("/wms") == -1) {
-                    infoPreview.setUrl(infoPreview.getUrl() + "/wms");
+                    if (infoPreview.getUrl().indexOf("/wms") == -1) {
+                        infoPreview.setUrl(infoPreview.getUrl() + "/wms");
+                    }
+                } else if (infoPreview.isIsShape()) {
+                    logger.info(
+                            "***** processEPSGResult: Executing shape publish zip file: " + infoPreview.getFileName());
+                    info.isShp = Boolean.TRUE;
+                    infoPreview = this.publishShpInPreview(userWorkspace, info,
+                            tempUserZipDir);
+                } else if (!infoPreview.isIsShape()) {
+                    info.isShp = Boolean.FALSE;
+                    File fileInTifDir = new File(tempUserTifDir, info.name + ".tif");
+                    infoPreview = this.publishTifInPreview(userWorkspace,
+                            fileInTifDir, info.name, info.epsg, info.sld);
                 }
-            } else if (infoPreview.isIsShape()) {
-                logger.info(
-                        "***** processEPSGResult: Executing shape publish zip file: " + infoPreview.getFileName());
-                info.isShp = Boolean.TRUE;
-                infoPreview = this.publishShpInPreview(userWorkspace, info,
-                        tempUserZipDir);
-            } else if (!infoPreview.isIsShape()) {
-                info.isShp = Boolean.FALSE;
-                File fileInTifDir = new File(tempUserTifDir, info.name + ".tif");
-                infoPreview = this.publishTifInPreview(userWorkspace,
-                        fileInTifDir, info.name, info.epsg, info.sld);
+                infoPreviewList.add(infoPreview);
             }
-            infoPreviewList.add(infoPreview);
+            return new InfoPreviewStore(infoPreviewList);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new IllegalStateException(ex.getMessage());
         }
-        return new InfoPreviewStore(infoPreviewList);
     }
 
     /**
@@ -1140,7 +1145,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
     public InfoPreviewStore analyzeZIPEPSG(String sessionID, String userName,
             File file, String workspace) throws ResourceNotFoundFault {
         logger.info("Call to analyzeZIPInPreview");
-        reload();
+        //reload();
         String userNameWithoutSpecialCharacter = PublishUtility.removeSpecialCharactersFromString(userName);
         String userWorkspace = workspace;
         if (GPSharedUtils.isEmpty(userWorkspace)) {

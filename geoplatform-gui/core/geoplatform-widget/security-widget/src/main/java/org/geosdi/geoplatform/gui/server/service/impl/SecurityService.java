@@ -166,8 +166,8 @@ public class SecurityService implements ISecurityService {
     public IGPAccountDetail ssoLogin(HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
         IGPAccountDetail accountDetail = null;
-        String ivUser = httpServletRequest.getHeader("iv-user");
-        logger.info("**SecurityService** iv-user found in header: " + ivUser);
+        String ivUser = httpServletRequest.getHeader("http_userid");
+        logger.info("**SecurityService** http_userid found in header: " + ivUser);
         if (ivUser != null) {
             GPUser user;
             try {

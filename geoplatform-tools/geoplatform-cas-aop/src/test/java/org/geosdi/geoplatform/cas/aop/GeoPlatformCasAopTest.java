@@ -2,6 +2,8 @@ package org.geosdi.geoplatform.cas.aop;
 
 import it.geosolutions.geoserver.rest.GeoServerRESTPublisher;
 import it.geosolutions.geoserver.rest.cas.GeoServerCASRESTPublisher;
+import it.geosolutions.geoserver.rest.cas.GeoServerCASRESTReader;
+import it.geosolutions.geoserver.rest.sldservice.Ramp;
 import org.apache.commons.httpclient.NameValuePair;
 import org.geosdi.geoplatform.services.IGPPublisherService;
 import org.junit.Assert;
@@ -72,10 +74,18 @@ public class GeoPlatformCasAopTest {
     }
 
     @Test
-    public void findMethodTest() throws Exception {
+    public void findGeoServerCASRESTPublisherMethodTest() throws Exception {
         Method method = GeoServerCASRESTPublisher.class.getMethod("publishShp", String.class, String.class,
                 NameValuePair[].class, String.class, GeoServerRESTPublisher.UploadMethod.class,
                 URI.class, String.class, String.class);
+        Assert.assertNotNull(method);
+    }
+
+    @Test
+    public void findGeoServerCASRESTReaderMethodTest() throws Exception {
+        Method method = GeoServerCASRESTReader.class.getMethod("classifyVectorData", String.class, String.class,
+                Ramp.class, Integer.class, it.geosolutions.geoserver.rest.sldservice.Method.class, Boolean.class,
+                Boolean.class, Boolean.class, String.class, String.class, String.class, Boolean.class, String.class);
         Assert.assertNotNull(method);
     }
 }

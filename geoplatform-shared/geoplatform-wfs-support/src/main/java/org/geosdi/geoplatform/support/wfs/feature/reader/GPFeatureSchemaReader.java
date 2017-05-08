@@ -34,8 +34,6 @@
  */
 package org.geosdi.geoplatform.support.wfs.feature.reader;
 
-import org.geosdi.geoplatform.connector.jaxb.repository.JAXBContextConnectorRepository;
-import org.geosdi.geoplatform.connector.jaxb.repository.WFSConnectorJAXBContext;
 import org.geosdi.geoplatform.connector.wfs.response.AttributeDTO;
 import org.geosdi.geoplatform.connector.wfs.response.GeometryAttributeDTO;
 import org.geosdi.geoplatform.connector.wfs.response.LayerSchemaDTO;
@@ -54,6 +52,9 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.geosdi.geoplatform.connector.jaxb.repository.JAXBContextConnectorRepository.getProvider;
+import static org.geosdi.geoplatform.connector.jaxb.repository.WFSConnectorJAXBContext.WFS_CONTEXT_KEY;
+
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
@@ -64,8 +65,7 @@ public class GPFeatureSchemaReader implements FeatureSchemaReader {
     private static final GPBaseJAXBContext wfsContext;
 
     static {
-        wfsContext = JAXBContextConnectorRepository.getProvider(
-                WFSConnectorJAXBContext.WFS_CONTEXT_KEY);
+        wfsContext = getProvider(WFS_CONTEXT_KEY);
     }
 
     /**
@@ -159,15 +159,13 @@ public class GPFeatureSchemaReader implements FeatureSchemaReader {
                 TopLevelComplexType type = schema.getTopLevelComplexType(
                         typeName.getLocalPart());
                 List<Element> elementAttributes = this.getElementAttributes(type);
-                logger.trace("*** Element Attributes: {}", elementAttributes);
+                logger.trace("################### Element Attributes: {}", elementAttributes);
 
                 layerSchema = new LayerSchemaDTO();
                 layerSchema.setTargetNamespace(schema.getTargetNamespace());
-                layerSchema.setTypeName(
-                        typeName.getPrefix() + ":" + element.getName());
+                layerSchema.setTypeName(typeName.getPrefix().concat(":").concat(element.getName()));
 
-                List<AttributeDTO> attributes = new ArrayList<AttributeDTO>(
-                        elementAttributes.size() - 1);
+                List<AttributeDTO> attributes = new ArrayList<>(elementAttributes.size() - 1);
                 for (Element attributeElement : elementAttributes) {
                     AttributeDTO attribute = this.getAttribute(attributeElement);
                     GeometryAttributeDTO geometryAttribute = this.getGeometryAttribute(
@@ -222,16 +220,9 @@ public class GPFeatureSchemaReader implements FeatureSchemaReader {
         attribute.setMinOccurs(minOccurs == null ? 1 : minOccurs.intValue());
 
         String maxOccurs = attributeElement.getMaxOccurs();
-        if (maxOccurs == null) {
-            attribute.setMaxOccurs(1);
-        } else if ("unbounded".equalsIgnoreCase(maxOccurs)) {
-            attribute.setMaxOccurs(Integer.MAX_VALUE);
-        } else {
-            attribute.setMaxOccurs(Integer.parseInt(maxOccurs));
-        }
-
+        attribute.setMaxOccurs((maxOccurs == null) ? 1 : (maxOccurs.equalsIgnoreCase("unbounded"))
+                ? Integer.MAX_VALUE : Integer.parseInt(maxOccurs));
         attribute.setNillable(attributeElement.isNillable());
-
         return attribute;
     }
 
@@ -241,8 +232,7 @@ public class GPFeatureSchemaReader implements FeatureSchemaReader {
             return null;
         }
         GeometryAttributeDTO geometryAttribute = new GeometryAttributeDTO();
-        geometryAttribute.setType(
-                GeometryBinding.getGMLGeometry(type).getSimpleName());
+        geometryAttribute.setType(GeometryBinding.getGMLGeometry(type).getSimpleName());
         geometryAttribute.setName(attribute.getName());
         return geometryAttribute;
     }

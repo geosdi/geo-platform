@@ -60,7 +60,7 @@ public class WFSDescribeFeatureTest {
 
     private static final Logger logger = LoggerFactory.getLogger(WFSDescribeFeatureTest.class);
     //
-    private static final String wfsURL = "http://150.145.141.92/geoserver/wfs";
+    private static final String wfsURL = "http://150.145.141.185/geoserver/wfs";
 
     static {
         try {
@@ -74,6 +74,7 @@ public class WFSDescribeFeatureTest {
 
     //
     private static final QName statesName = new QName("topp:states");
+    private static final QName siteTRCom = new QName("cite:tr_com");
     private static final QName sfRoads = new QName("sf:roads");
     //
     private static GPWFSConnectorStore serverConnector;
@@ -108,5 +109,20 @@ public class WFSDescribeFeatureTest {
         gpJAXBContextBuilder.marshal(schemaReader.getFeature(s, name), writer);
 
         logger.info("######################LAYER_SCHEMA_SF_ROAD_XML : \n{}\n", writer);
+    }
+
+    @Test
+    public void describeSiteTrTest() throws Exception {
+        WFSDescribeFeatureTypeRequest<Schema> request = serverConnector.createDescribeFeatureTypeRequest();
+
+        String localPart = siteTRCom.getLocalPart();
+        request.setTypeName(Arrays.asList(siteTRCom));
+        Schema s = request.getResponse();
+
+        String name = localPart.substring(localPart.indexOf(":") + 1);
+        StringWriter writer = new StringWriter();
+        gpJAXBContextBuilder.marshal(schemaReader.getFeature(s, name), writer);
+
+        logger.info("######################LAYER_SCHEMA_SITE_COM_XML : \n{}\n", writer);
     }
 }

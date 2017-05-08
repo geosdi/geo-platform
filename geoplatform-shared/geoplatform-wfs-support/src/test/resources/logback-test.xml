@@ -15,7 +15,7 @@
         <appender-ref ref="STDOUT"/>
     </root>
 
-    <logger name="org.geosdi.geoplatform.support.wfs.feature.reader.WFSGetFeatureStaxReader" level="info"/>
+    <logger name="org.geosdi.geoplatform.support.wfs.feature.reader.WFSGetFeatureStaxReader" level="debug"/>
 
     <logger name="org.geosdi.geoplatform.wfs.WFSGetFeaturesRequestTest" level="debug"/>
 

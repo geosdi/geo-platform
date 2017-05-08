@@ -52,6 +52,7 @@ import org.geosdi.geoplatform.xml.gml.v311.AbstractGeometryType;
 import javax.xml.bind.DatatypeConverter;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.events.XMLEvent;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -75,13 +76,12 @@ public class WFSGetFeatureStaxReader extends AbstractStaxStreamReader<FeatureCol
     private final GMLBaseSextanteParser sextanteParser = GMLBaseParametersRepo.getDefaultSextanteParser();
 
     public WFSGetFeatureStaxReader(LayerSchemaDTO layerSchema) {
+        Preconditions.checkArgument(layerSchema != null, "The LayerSchema must not be null.");
         this.layerSchema = layerSchema;
     }
 
     @Override
     public FeatureCollectionDTO read(Object o) throws Exception {
-        Preconditions.checkArgument(this.layerSchema != null,
-                "The LayerSchema must not be null.");
         XMLStreamReader reader = super.acquireReader(o);
 
         String typeName = layerSchema.getTypeName();
@@ -116,12 +116,9 @@ public class WFSGetFeatureStaxReader extends AbstractStaxStreamReader<FeatureCol
                     feature.setGeometry(geometryWKT);
 
                     super.goToEndTag(geometryName);
-
-                    FeatureAttributesMap attributes = this.readAttributes(name, attributeNames, Boolean.TRUE);
-                    feature.setAttributes(attributes);
+                    this.readAttributes(feature, name, attributeNames, Boolean.TRUE, prefix, geometryName);
                 } else if ((attributeNames != null) && (attributeNames.contains(reader.getLocalName()))) {
-                    FeatureAttributesMap attributes = this.readAttributes(name, attributeNames, Boolean.FALSE);
-                    feature.setAttributes(attributes);
+                    this.readAttributes(feature, name, attributeNames, Boolean.FALSE, prefix, geometryName);
                 }
             }
             reader.next();
@@ -185,13 +182,14 @@ public class WFSGetFeatureStaxReader extends AbstractStaxStreamReader<FeatureCol
      * @return {@link FeatureAttributesMap}
      * @throws Exception
      */
-    private FeatureAttributesMap readAttributes(String featureName, List<String> attributeNames, Boolean nextTag)
-            throws Exception {
-        if (attributeNames == null) {
-            return null;
-        }
+    private void readAttributes(FeatureDTO feature, String featureName, List<String> attributeNames, Boolean nextTag,
+            String prefix, String geometryName) throws Exception {
+        Preconditions.checkArgument(feature != null, "The Parameter Feature must not be null.");
 
-        Map<String, String> map = new HashMap<String, String>(attributeNames.size());
+        if (attributeNames == null) {
+            attributeNames = new ArrayList<>();
+        }
+        Map<String, String> map = new HashMap<>();
         for (String name : attributeNames) {
             map.put(name, null);
         }
@@ -208,20 +206,26 @@ public class WFSGetFeatureStaxReader extends AbstractStaxStreamReader<FeatureCol
             }
 
             if (eventType == XMLEvent.START_ELEMENT) {
-                String localName = reader().getLocalName();
-                logger.trace("################LOCAL_NAME : {}\n", localName);
+                if (super.isTagName(prefix, geometryName)) {
+                    String geometryWKT = this.readGeometry();
+                    feature.setGeometry(geometryWKT);
+                    super.goToEndTag(geometryName);
+                } else {
+                    String localName = reader().getLocalName();
+                    logger.trace("################LOCAL_NAME : {}\n", localName);
 
-                eventType = reader().next();
-                if (eventType == XMLEvent.CHARACTERS) {
-                    String attributeValue = reader().getText();
-                    map.put(localName, attributeValue);
-                    logger.trace("@@@@@@@@@@@@@@@@@@Attribute : LocalName :'{}': AttributeValue : {} @@@\n",
-                            localName, attributeValue);
-                    super.goToEndTag(localName);
+                    eventType = reader().next();
+                    if (eventType == XMLEvent.CHARACTERS) {
+                        String attributeValue = reader().getText();
+                        map.put(localName, attributeValue);
+                        logger.trace("@@@@@@@@@@@@@@@@@@Attribute : LocalName :'{}': AttributeValue : {} @@@\n",
+                                localName, attributeValue);
+                        super.goToEndTag(localName);
+                    }
                 }
+                eventType = reader().nextTag();
             }
-            eventType = reader().nextTag();
         }
-        return fMap;
+        feature.setAttributes(fMap);
     }
 }

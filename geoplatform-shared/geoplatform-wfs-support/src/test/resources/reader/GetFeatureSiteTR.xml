@@ -1,0 +1,668 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfs:FeatureCollection numberOfFeatures="50"
+  timeStamp="2017-05-07T09:03:31.312Z" xmlns:admin="http://admin"
+  xmlns:cite="http://www.opengeospatial.net/cite"
+  xmlns:geocommm_s1="http://iter.regione.campania.it/geocom_s1/"
+  xmlns:gml="http://www.opengis.net/gml"
+  xmlns:ogc="http://www.opengis.net/ogc"
+  xmlns:ows="http://www.opengis.net/ows"
+  xmlns:sf="http://www.openplans.org/spearfish"
+  xmlns:tiger="http://www.census.gov"
+  xmlns:topp="http://www.openplans.org/topp"
+  xmlns:wfs="http://www.opengis.net/wfs"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengeospatial.net/cite http://150.145.141.241/geoserver/wfs?service=WFS&amp;version=1.1.0&amp;request=DescribeFeatureType&amp;typeName=cite%3Atr_com http://www.opengis.net/wfs http://150.145.141.241/geoserver/schemas/wfs/1.1.0/wfs.xsd">
+  <gml:featureMembers>
+    <cite:tr_com gml:id="tr_com.esempio.800757">
+      <cite:tr_com_cod/>
+      <cite:data_ini>2016-01-16Z</cite:data_ini>
+      <cite:fonte>01</cite:fonte>
+      <cite:scala>05</cite:scala>
+      <cite:tr_com_nom/>
+      <cite:tr_com_psu>03</cite:tr_com_psu>
+      <cite:tr_com_tra>
+        <gml:LineString srsDimension="3" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:posList>11.2932383 44.50004051 0 11.29310357 44.49977607 0</gml:posList>
+        </gml:LineString>
+      </cite:tr_com_tra>
+    </cite:tr_com>
+    <cite:tr_com gml:id="tr_com.esempio.800758">
+      <cite:tr_com_cod/>
+      <cite:data_ini>2016-01-16Z</cite:data_ini>
+      <cite:fonte>01</cite:fonte>
+      <cite:scala>05</cite:scala>
+      <cite:tr_com_nom/>
+      <cite:tr_com_psu>01</cite:tr_com_psu>
+      <cite:tr_com_tra>
+        <gml:LineString srsDimension="3" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:posList>11.29310357 44.49977607 0 11.29308758 44.4997439 0 11.29327128 44.49969107 0 11.29325708 44.49966237 0</gml:posList>
+        </gml:LineString>
+      </cite:tr_com_tra>
+    </cite:tr_com>
+    <cite:tr_com gml:id="tr_com.esempio.800759">
+      <cite:tr_com_cod/>
+      <cite:data_ini>2016-01-16Z</cite:data_ini>
+      <cite:fonte>01</cite:fonte>
+      <cite:scala>05</cite:scala>
+      <cite:tr_com_nom/>
+      <cite:tr_com_psu>03</cite:tr_com_psu>
+      <cite:tr_com_tra>
+        <gml:LineString srsDimension="3" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:posList>11.29102296 44.50072782 0 11.29092384 44.50055943 0 11.29092162 44.50042059 0 11.29134836 44.50033912 0 11.29207026 44.50020914 0 11.29284877 44.5000919 0 11.2932383 44.50004051 0</gml:posList>
+        </gml:LineString>
+      </cite:tr_com_tra>
+    </cite:tr_com>
+    <cite:tr_com gml:id="tr_com.esempio.800760">
+      <cite:tr_com_cod/>
+      <cite:data_ini>2016-01-16Z</cite:data_ini>
+      <cite:fonte>01</cite:fonte>
+      <cite:scala>05</cite:scala>
+      <cite:tr_com_nom/>
+      <cite:tr_com_psu>03</cite:tr_com_psu>
+      <cite:tr_com_tra>
+        <gml:LineString srsDimension="3" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:posList>11.33104175 44.49549694 0 11.33108658 44.495512 0</gml:posList>
+        </gml:LineString>
+      </cite:tr_com_tra>
+    </cite:tr_com>
+    <cite:tr_com gml:id="tr_com.esempio.800761">
+      <cite:tr_com_cod/>
+      <cite:data_ini>2016-01-16Z</cite:data_ini>
+      <cite:fonte>01</cite:fonte>
+      <cite:scala>05</cite:scala>
+      <cite:tr_com_nom/>
+      <cite:tr_com_psu>03</cite:tr_com_psu>
+      <cite:tr_com_tra>
+        <gml:LineString srsDimension="3" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:posList>11.33108658 44.495512 0 11.33121092 44.4955171 0</gml:posList>
+        </gml:LineString>
+      </cite:tr_com_tra>
+    </cite:tr_com>
+    <cite:tr_com gml:id="tr_com.esempio.800762">
+      <cite:tr_com_cod/>
+      <cite:data_ini>2016-01-16Z</cite:data_ini>
+      <cite:fonte>01</cite:fonte>
+      <cite:scala>05</cite:scala>
+      <cite:tr_com_nom/>
+      <cite:tr_com_psu>03</cite:tr_com_psu>
+      <cite:tr_com_tra>
+        <gml:LineString srsDimension="3" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:posList>11.33121092 44.4955171 0 11.3313416 44.49552246 0</gml:posList>
+        </gml:LineString>
+      </cite:tr_com_tra>
+    </cite:tr_com>
+    <cite:tr_com gml:id="tr_com.esempio.800763">
+      <cite:tr_com_cod/>
+      <cite:data_ini>2016-01-16Z</cite:data_ini>
+      <cite:fonte>01</cite:fonte>
+      <cite:scala>05</cite:scala>
+      <cite:tr_com_nom/>
+      <cite:tr_com_psu>03</cite:tr_com_psu>
+      <cite:tr_com_tra>
+        <gml:LineString srsDimension="3" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:posList>11.3313416 44.49552246 0 11.33146367 44.49552745 0</gml:posList>
+        </gml:LineString>
+      </cite:tr_com_tra>
+    </cite:tr_com>
+    <cite:tr_com gml:id="tr_com.esempio.800764">
+      <cite:tr_com_cod/>
+      <cite:data_ini>2016-01-16Z</cite:data_ini>
+      <cite:fonte>01</cite:fonte>
+      <cite:scala>05</cite:scala>
+      <cite:tr_com_nom/>
+      <cite:tr_com_psu>03</cite:tr_com_psu>
+      <cite:tr_com_tra>
+        <gml:LineString srsDimension="3" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:posList>11.33146367 44.49552745 0 11.33156496 44.49553161 0 11.331601 44.4955317 0</gml:posList>
+        </gml:LineString>
+      </cite:tr_com_tra>
+    </cite:tr_com>
+    <cite:tr_com gml:id="tr_com.esempio.800765">
+      <cite:tr_com_cod/>
+      <cite:data_ini>2016-01-16Z</cite:data_ini>
+      <cite:fonte>01</cite:fonte>
+      <cite:scala>05</cite:scala>
+      <cite:tr_com_nom/>
+      <cite:tr_com_psu>03</cite:tr_com_psu>
+      <cite:tr_com_tra>
+        <gml:LineString srsDimension="3" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:posList>11.331601 44.4955317 0 11.3317313 44.49553202 0</gml:posList>
+        </gml:LineString>
+      </cite:tr_com_tra>
+    </cite:tr_com>
+    <cite:tr_com gml:id="tr_com.esempio.800766">
+      <cite:tr_com_cod/>
+      <cite:data_ini>2016-01-16Z</cite:data_ini>
+      <cite:fonte>01</cite:fonte>
+      <cite:scala>05</cite:scala>
+      <cite:tr_com_nom/>
+      <cite:tr_com_psu>03</cite:tr_com_psu>
+      <cite:tr_com_tra>
+        <gml:LineString srsDimension="3" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:posList>11.3317313 44.49553202 0 11.33190915 44.49553244 0</gml:posList>
+        </gml:LineString>
+      </cite:tr_com_tra>
+    </cite:tr_com>
+    <cite:tr_com gml:id="tr_com.esempio.800767">
+      <cite:tr_com_cod/>
+      <cite:data_ini>2016-01-16Z</cite:data_ini>
+      <cite:fonte>01</cite:fonte>
+      <cite:scala>05</cite:scala>
+      <cite:tr_com_nom/>
+      <cite:tr_com_psu>03</cite:tr_com_psu>
+      <cite:tr_com_tra>
+        <gml:LineString srsDimension="3" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:posList>11.33190915 44.49553244 0 11.33190305 44.49558492 0</gml:posList>
+        </gml:LineString>
+      </cite:tr_com_tra>
+    </cite:tr_com>
+    <cite:tr_com gml:id="tr_com.esempio.800768">
+      <cite:tr_com_cod/>
+      <cite:data_ini>2016-01-16Z</cite:data_ini>
+      <cite:fonte>01</cite:fonte>
+      <cite:scala>05</cite:scala>
+      <cite:tr_com_nom/>
+      <cite:tr_com_psu>01</cite:tr_com_psu>
+      <cite:tr_com_tra>
+        <gml:LineString srsDimension="3" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:posList>11.33190305 44.49558492 0 11.33190291 44.49558748 0 11.33185031 44.49558521 0 11.33184918 44.49559813 0</gml:posList>
+        </gml:LineString>
+      </cite:tr_com_tra>
+    </cite:tr_com>
+    <cite:tr_com gml:id="tr_com.esempio.800769">
+      <cite:tr_com_cod/>
+      <cite:data_ini>2016-01-16Z</cite:data_ini>
+      <cite:fonte>01</cite:fonte>
+      <cite:scala>05</cite:scala>
+      <cite:tr_com_nom/>
+      <cite:tr_com_psu>01</cite:tr_com_psu>
+      <cite:tr_com_tra>
+        <gml:LineString srsDimension="3" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:posList>11.35409027 44.5251232 0 11.35406256 44.52504331 0 11.35409709 44.52503747 0</gml:posList>
+        </gml:LineString>
+      </cite:tr_com_tra>
+    </cite:tr_com>
+    <cite:tr_com gml:id="tr_com.esempio.800770">
+      <cite:tr_com_cod/>
+      <cite:data_ini>2016-01-16Z</cite:data_ini>
+      <cite:fonte>01</cite:fonte>
+      <cite:scala>05</cite:scala>
+      <cite:tr_com_nom/>
+      <cite:tr_com_psu>03</cite:tr_com_psu>
+      <cite:tr_com_tra>
+        <gml:LineString srsDimension="3" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:posList>11.35464803 44.52504086 0 11.35458946 44.52506052 0 11.3540956 44.52513687 0 11.35409027 44.5251232 0</gml:posList>
+        </gml:LineString>
+      </cite:tr_com_tra>
+    </cite:tr_com>
+    <cite:tr_com gml:id="tr_com.esempio.800771">
+      <cite:tr_com_cod/>
+      <cite:data_ini>2016-01-16Z</cite:data_ini>
+      <cite:fonte>01</cite:fonte>
+      <cite:scala>05</cite:scala>
+      <cite:tr_com_nom/>
+      <cite:tr_com_psu>03</cite:tr_com_psu>
+      <cite:tr_com_tra>
+        <gml:LineString srsDimension="3" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:posList>11.35343327 44.5236717 0 11.35328437 44.52329819 0 11.35307204 44.5228852 0 11.35552544 44.5220906 0 11.3559576 44.5220491 0 11.35801957 44.52131166 0</gml:posList>
+        </gml:LineString>
+      </cite:tr_com_tra>
+    </cite:tr_com>
+    <cite:tr_com gml:id="tr_com.esempio.800772">
+      <cite:tr_com_cod/>
+      <cite:data_ini>2016-01-16Z</cite:data_ini>
+      <cite:fonte>01</cite:fonte>
+      <cite:scala>05</cite:scala>
+      <cite:tr_com_nom/>
+      <cite:tr_com_psu>03</cite:tr_com_psu>
+      <cite:tr_com_tra>
+        <gml:LineString srsDimension="3" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:posList>11.35343327 44.5236717 0 11.35371779 44.52377744 0 11.3539696 44.52402103 0 11.35424602 44.52439957 0 11.35451449 44.5248096 0 11.35464803 44.52504086 0</gml:posList>
+        </gml:LineString>
+      </cite:tr_com_tra>
+    </cite:tr_com>
+    <cite:tr_com gml:id="tr_com.esempio.800773">
+      <cite:tr_com_cod/>
+      <cite:data_ini>2016-01-16Z</cite:data_ini>
+      <cite:fonte>01</cite:fonte>
+      <cite:scala>05</cite:scala>
+      <cite:tr_com_nom/>
+      <cite:tr_com_psu>03</cite:tr_com_psu>
+      <cite:tr_com_tra>
+        <gml:LineString srsDimension="3" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:posList>11.03021088 44.83575575 0 11.03017472 44.83579527 0</gml:posList>
+        </gml:LineString>
+      </cite:tr_com_tra>
+    </cite:tr_com>
+    <cite:tr_com gml:id="tr_com.esempio.800774">
+      <cite:tr_com_cod/>
+      <cite:data_ini>2016-01-16Z</cite:data_ini>
+      <cite:fonte>01</cite:fonte>
+      <cite:scala>05</cite:scala>
+      <cite:tr_com_nom/>
+      <cite:tr_com_psu>03</cite:tr_com_psu>
+      <cite:tr_com_tra>
+        <gml:LineString srsDimension="3" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:posList>11.03166952 44.83559182 0 11.03170251 44.83560699 0</gml:posList>
+        </gml:LineString>
+      </cite:tr_com_tra>
+    </cite:tr_com>
+    <cite:tr_com gml:id="tr_com.esempio.800775">
+      <cite:tr_com_cod/>
+      <cite:data_ini>2016-01-16Z</cite:data_ini>
+      <cite:fonte>01</cite:fonte>
+      <cite:scala>05</cite:scala>
+      <cite:tr_com_nom/>
+      <cite:tr_com_psu>03</cite:tr_com_psu>
+      <cite:tr_com_tra>
+        <gml:LineString srsDimension="3" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:posList>11.03073077 44.83629417 0 11.0314092 44.83578988 0 11.03166952 44.83559182 0</gml:posList>
+        </gml:LineString>
+      </cite:tr_com_tra>
+    </cite:tr_com>
+    <cite:tr_com gml:id="tr_com.esempio.800776">
+      <cite:tr_com_cod/>
+      <cite:data_ini>2016-01-16Z</cite:data_ini>
+      <cite:fonte>01</cite:fonte>
+      <cite:scala>05</cite:scala>
+      <cite:tr_com_nom/>
+      <cite:tr_com_psu>03</cite:tr_com_psu>
+      <cite:tr_com_tra>
+        <gml:LineString srsDimension="3" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:posList>11.03073077 44.83629417 0 11.03035002 44.83584976 0 11.03029234 44.83579381 0 11.03021088 44.83575575 0</gml:posList>
+        </gml:LineString>
+      </cite:tr_com_tra>
+    </cite:tr_com>
+    <cite:tr_com gml:id="tr_com.esempio.800777">
+      <cite:tr_com_cod/>
+      <cite:data_ini>2016-07-23Z</cite:data_ini>
+      <cite:fonte>01</cite:fonte>
+      <cite:scala>05</cite:scala>
+      <cite:tr_com_nom/>
+      <cite:tr_com_psu>03</cite:tr_com_psu>
+      <cite:tr_com_tra>
+        <gml:LineString srsDimension="3" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:posList>12.06463897 44.12524076 0 12.06459223 44.12525755 0</gml:posList>
+        </gml:LineString>
+      </cite:tr_com_tra>
+    </cite:tr_com>
+    <cite:tr_com gml:id="tr_com.esempio.800778">
+      <cite:tr_com_cod/>
+      <cite:data_ini>2016-07-23Z</cite:data_ini>
+      <cite:fonte>01</cite:fonte>
+      <cite:scala>05</cite:scala>
+      <cite:tr_com_nom/>
+      <cite:tr_com_psu>03</cite:tr_com_psu>
+      <cite:tr_com_tra>
+        <gml:LineString srsDimension="3" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:posList>12.06459223 44.12525755 0 12.06448719 44.12514745 0 12.06446016 44.12512594 0 12.06443585 44.1251187 0 12.06432466 44.12512527 0 12.06402663 44.12516255 0</gml:posList>
+        </gml:LineString>
+      </cite:tr_com_tra>
+    </cite:tr_com>
+    <cite:tr_com gml:id="tr_com.esempio.800780">
+      <cite:tr_com_cod/>
+      <cite:data_ini>2016-07-23Z</cite:data_ini>
+      <cite:fonte>01</cite:fonte>
+      <cite:scala>05</cite:scala>
+      <cite:tr_com_nom/>
+      <cite:tr_com_psu>03</cite:tr_com_psu>
+      <cite:tr_com_tra>
+        <gml:LineString srsDimension="3" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:posList>12.06304716 44.12469163 0 12.06292726 44.12434927 0</gml:posList>
+        </gml:LineString>
+      </cite:tr_com_tra>
+    </cite:tr_com>
+    <cite:tr_com gml:id="tr_com.esempio.800781">
+      <cite:tr_com_cod/>
+      <cite:data_ini>2016-07-23Z</cite:data_ini>
+      <cite:fonte>01</cite:fonte>
+      <cite:scala>05</cite:scala>
+      <cite:tr_com_nom/>
+      <cite:tr_com_psu>03</cite:tr_com_psu>
+      <cite:tr_com_tra>
+        <gml:LineString srsDimension="3" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:posList>12.06292726 44.12434927 0 12.06307046 44.1243151 0</gml:posList>
+        </gml:LineString>
+      </cite:tr_com_tra>
+    </cite:tr_com>
+    <cite:tr_com gml:id="tr_com.esempio.800782">
+      <cite:tr_com_cod/>
+      <cite:data_ini>2016-07-23Z</cite:data_ini>
+      <cite:fonte>01</cite:fonte>
+      <cite:scala>05</cite:scala>
+      <cite:tr_com_nom/>
+      <cite:tr_com_psu>02</cite:tr_com_psu>
+      <cite:tr_com_tra>
+        <gml:LineString srsDimension="3" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:posList>12.06299228 44.12428426 0 12.06307046 44.1243151 0</gml:posList>
+        </gml:LineString>
+      </cite:tr_com_tra>
+    </cite:tr_com>
+    <cite:tr_com gml:id="tr_com.esempio.800785">
+      <cite:tr_com_cod/>
+      <cite:data_ini>2016-06-25Z</cite:data_ini>
+      <cite:fonte>01</cite:fonte>
+      <cite:scala>05</cite:scala>
+      <cite:tr_com_nom/>
+      <cite:tr_com_psu>03</cite:tr_com_psu>
+      <cite:tr_com_tra>
+        <gml:LineString srsDimension="3" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:posList>11.07250409 44.8811374 0 11.07259631 44.88135929 0 11.07268748 44.88169668 0 11.07270111 44.881803 0 11.07274597 44.88199964 0</gml:posList>
+        </gml:LineString>
+      </cite:tr_com_tra>
+    </cite:tr_com>
+    <cite:tr_com gml:id="tr_com.esempio.800787">
+      <cite:tr_com_cod/>
+      <cite:data_ini>2015-12-13Z</cite:data_ini>
+      <cite:fonte>01</cite:fonte>
+      <cite:scala>05</cite:scala>
+      <cite:tr_com_nom/>
+      <cite:tr_com_psu>03</cite:tr_com_psu>
+      <cite:tr_com_tra>
+        <gml:LineString srsDimension="3" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:posList>11.21351563 44.53890037 0 11.21423961 44.53860647 0 11.21486082 44.53837217 0 11.21689762 44.53770129 0 11.21930678 44.53690109 0 11.22269763 44.53570963 0 11.22687418 44.53418734 0 11.22686489 44.53407381 0 11.22703907 44.53408101 0 11.22729123 44.53403697 0 11.22750264 44.53397243 0 11.22741281 44.5338356 0 11.22799603 44.53373529 0 11.22805892 44.53381587 0 11.22844662 44.5336766 0</gml:posList>
+        </gml:LineString>
+      </cite:tr_com_tra>
+    </cite:tr_com>
+    <cite:tr_com gml:id="tr_com.esempio.800788">
+      <cite:tr_com_cod/>
+      <cite:data_ini>2015-12-13Z</cite:data_ini>
+      <cite:fonte>01</cite:fonte>
+      <cite:scala>05</cite:scala>
+      <cite:tr_com_nom/>
+      <cite:tr_com_psu>02</cite:tr_com_psu>
+      <cite:tr_com_tra>
+        <gml:LineString srsDimension="3" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:posList>11.22890386 44.5339237 0 11.22896363 44.53390316 0 11.22899424 44.53395382 0</gml:posList>
+        </gml:LineString>
+      </cite:tr_com_tra>
+    </cite:tr_com>
+    <cite:tr_com gml:id="tr_com.esempio.800789">
+      <cite:tr_com_cod/>
+      <cite:data_ini>2015-12-13Z</cite:data_ini>
+      <cite:fonte>01</cite:fonte>
+      <cite:scala>05</cite:scala>
+      <cite:tr_com_nom/>
+      <cite:tr_com_psu>03</cite:tr_com_psu>
+      <cite:tr_com_tra>
+        <gml:LineString srsDimension="3" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:posList>11.22844662 44.5336766 0 11.22849836 44.53376868 0</gml:posList>
+        </gml:LineString>
+      </cite:tr_com_tra>
+    </cite:tr_com>
+    <cite:tr_com gml:id="tr_com.esempio.800790">
+      <cite:tr_com_cod/>
+      <cite:data_ini>2015-12-13Z</cite:data_ini>
+      <cite:fonte>01</cite:fonte>
+      <cite:scala>05</cite:scala>
+      <cite:tr_com_nom/>
+      <cite:tr_com_psu>03</cite:tr_com_psu>
+      <cite:tr_com_tra>
+        <gml:LineString srsDimension="3" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:posList>11.19573912 44.54617551 0 11.1952124 44.54540316 0</gml:posList>
+        </gml:LineString>
+      </cite:tr_com_tra>
+    </cite:tr_com>
+    <cite:tr_com gml:id="tr_com.esempio.800791">
+      <cite:tr_com_cod/>
+      <cite:data_ini>2015-12-13Z</cite:data_ini>
+      <cite:fonte>01</cite:fonte>
+      <cite:scala>05</cite:scala>
+      <cite:tr_com_nom/>
+      <cite:tr_com_psu>03</cite:tr_com_psu>
+      <cite:tr_com_tra>
+        <gml:LineString srsDimension="3" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:posList>11.19226226 44.54781982 0 11.19203262 44.54792284 0</gml:posList>
+        </gml:LineString>
+      </cite:tr_com_tra>
+    </cite:tr_com>
+    <cite:tr_com gml:id="tr_com.esempio.800797">
+      <cite:tr_com_cod/>
+      <cite:data_ini>2015-12-13Z</cite:data_ini>
+      <cite:fonte>01</cite:fonte>
+      <cite:scala>05</cite:scala>
+      <cite:tr_com_nom/>
+      <cite:tr_com_psu>03</cite:tr_com_psu>
+      <cite:tr_com_tra>
+        <gml:LineString srsDimension="3" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:posList>11.1935134 44.54723447 0 11.19334131 44.54731695 0</gml:posList>
+        </gml:LineString>
+      </cite:tr_com_tra>
+    </cite:tr_com>
+    <cite:tr_com gml:id="tr_com.esempio.800798">
+      <cite:tr_com_cod/>
+      <cite:data_ini>2015-12-13Z</cite:data_ini>
+      <cite:fonte>01</cite:fonte>
+      <cite:scala>05</cite:scala>
+      <cite:tr_com_nom/>
+      <cite:tr_com_psu>03</cite:tr_com_psu>
+      <cite:tr_com_tra>
+        <gml:LineString srsDimension="3" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:posList>11.19237244 44.54460551 0 11.19219336 44.54468485 0</gml:posList>
+        </gml:LineString>
+      </cite:tr_com_tra>
+    </cite:tr_com>
+    <cite:tr_com gml:id="tr_com.esempio.800799">
+      <cite:tr_com_cod/>
+      <cite:data_ini>2015-12-13Z</cite:data_ini>
+      <cite:fonte>01</cite:fonte>
+      <cite:scala>05</cite:scala>
+      <cite:tr_com_nom/>
+      <cite:tr_com_psu>03</cite:tr_com_psu>
+      <cite:tr_com_tra>
+        <gml:LineString srsDimension="3" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:posList>11.19253272 44.54465266 0 11.19237244 44.54460551 0</gml:posList>
+        </gml:LineString>
+      </cite:tr_com_tra>
+    </cite:tr_com>
+    <cite:tr_com gml:id="tr_com.esempio.800800">
+      <cite:tr_com_cod/>
+      <cite:data_ini>2015-12-13Z</cite:data_ini>
+      <cite:fonte>01</cite:fonte>
+      <cite:scala>05</cite:scala>
+      <cite:tr_com_nom/>
+      <cite:tr_com_psu>03</cite:tr_com_psu>
+      <cite:tr_com_tra>
+        <gml:LineString srsDimension="3" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:posList>11.19280537 44.54615501 0 11.19181114 44.54651252 0</gml:posList>
+        </gml:LineString>
+      </cite:tr_com_tra>
+    </cite:tr_com>
+    <cite:tr_com gml:id="tr_com.esempio.800801">
+      <cite:tr_com_cod/>
+      <cite:data_ini>2015-12-13Z</cite:data_ini>
+      <cite:fonte>01</cite:fonte>
+      <cite:scala>05</cite:scala>
+      <cite:tr_com_nom/>
+      <cite:tr_com_psu>03</cite:tr_com_psu>
+      <cite:tr_com_tra>
+        <gml:LineString srsDimension="3" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:posList>11.19304902 44.54616662 0 11.19299601 44.54610292 0</gml:posList>
+        </gml:LineString>
+      </cite:tr_com_tra>
+    </cite:tr_com>
+    <cite:tr_com gml:id="tr_com.esempio.800802">
+      <cite:tr_com_cod/>
+      <cite:data_ini>2015-12-13Z</cite:data_ini>
+      <cite:fonte>01</cite:fonte>
+      <cite:scala>05</cite:scala>
+      <cite:tr_com_nom/>
+      <cite:tr_com_psu>03</cite:tr_com_psu>
+      <cite:tr_com_tra>
+        <gml:LineString srsDimension="3" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:posList>11.19295377 44.54620492 0 11.19304902 44.54616662 0</gml:posList>
+        </gml:LineString>
+      </cite:tr_com_tra>
+    </cite:tr_com>
+    <cite:tr_com gml:id="tr_com.esempio.800803">
+      <cite:tr_com_cod/>
+      <cite:data_ini>2015-12-13Z</cite:data_ini>
+      <cite:fonte>01</cite:fonte>
+      <cite:scala>05</cite:scala>
+      <cite:tr_com_nom/>
+      <cite:tr_com_psu>03</cite:tr_com_psu>
+      <cite:tr_com_tra>
+        <gml:LineString srsDimension="3" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:posList>11.19329808 44.54665483 0 11.19367917 44.54709965 0</gml:posList>
+        </gml:LineString>
+      </cite:tr_com_tra>
+    </cite:tr_com>
+    <cite:tr_com gml:id="tr_com.esempio.800804">
+      <cite:tr_com_cod/>
+      <cite:data_ini>2015-12-13Z</cite:data_ini>
+      <cite:fonte>01</cite:fonte>
+      <cite:scala>05</cite:scala>
+      <cite:tr_com_nom/>
+      <cite:tr_com_psu>03</cite:tr_com_psu>
+      <cite:tr_com_tra>
+        <gml:LineString srsDimension="3" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:posList>11.19269246 44.5469156 0 11.19329808 44.54665483 0</gml:posList>
+        </gml:LineString>
+      </cite:tr_com_tra>
+    </cite:tr_com>
+    <cite:tr_com gml:id="tr_com.esempio.800805">
+      <cite:tr_com_cod/>
+      <cite:data_ini>2015-12-13Z</cite:data_ini>
+      <cite:fonte>01</cite:fonte>
+      <cite:scala>05</cite:scala>
+      <cite:tr_com_nom/>
+      <cite:tr_com_psu>03</cite:tr_com_psu>
+      <cite:tr_com_tra>
+        <gml:LineString srsDimension="3" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:posList>11.22875067 44.53368714 0 11.22890386 44.5339237 0</gml:posList>
+        </gml:LineString>
+      </cite:tr_com_tra>
+    </cite:tr_com>
+    <cite:tr_com gml:id="tr_com.esempio.800806">
+      <cite:tr_com_cod/>
+      <cite:data_ini>2015-12-13Z</cite:data_ini>
+      <cite:fonte>01</cite:fonte>
+      <cite:scala>05</cite:scala>
+      <cite:tr_com_nom/>
+      <cite:tr_com_psu>03</cite:tr_com_psu>
+      <cite:tr_com_tra>
+        <gml:LineString srsDimension="3" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:posList>11.19371363 44.547138 0 11.19351569 44.54723337 0 11.1935134 44.54723447 0</gml:posList>
+        </gml:LineString>
+      </cite:tr_com_tra>
+    </cite:tr_com>
+    <cite:tr_com gml:id="tr_com.esempio.800807">
+      <cite:tr_com_cod/>
+      <cite:data_ini>2015-12-13Z</cite:data_ini>
+      <cite:fonte>01</cite:fonte>
+      <cite:scala>05</cite:scala>
+      <cite:tr_com_nom/>
+      <cite:tr_com_psu>03</cite:tr_com_psu>
+      <cite:tr_com_tra>
+        <gml:LineString srsDimension="3" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:posList>11.19367917 44.54709965 0 11.19371363 44.547138 0</gml:posList>
+        </gml:LineString>
+      </cite:tr_com_tra>
+    </cite:tr_com>
+    <cite:tr_com gml:id="tr_com.esempio.800808">
+      <cite:tr_com_cod/>
+      <cite:data_ini>2015-12-13Z</cite:data_ini>
+      <cite:fonte>01</cite:fonte>
+      <cite:scala>05</cite:scala>
+      <cite:tr_com_nom/>
+      <cite:tr_com_psu>02</cite:tr_com_psu>
+      <cite:tr_com_tra>
+        <gml:LineString srsDimension="3" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:posList>11.19105832 44.54801821 0 11.19147245 44.54793206 0</gml:posList>
+        </gml:LineString>
+      </cite:tr_com_tra>
+    </cite:tr_com>
+    <cite:tr_com gml:id="tr_com.esempio.800809">
+      <cite:tr_com_cod/>
+      <cite:data_ini>2015-12-13Z</cite:data_ini>
+      <cite:fonte>01</cite:fonte>
+      <cite:scala>05</cite:scala>
+      <cite:tr_com_nom/>
+      <cite:tr_com_psu>02</cite:tr_com_psu>
+      <cite:tr_com_tra>
+        <gml:LineString srsDimension="3" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:posList>11.19186491 44.54438521 0 11.19184639 44.54435473 0 11.19189349 44.54433885 0 11.19159746 44.54388309 0 11.19162348 44.54387422 0</gml:posList>
+        </gml:LineString>
+      </cite:tr_com_tra>
+    </cite:tr_com>
+    <cite:tr_com gml:id="tr_com.esempio.800810">
+      <cite:tr_com_cod/>
+      <cite:data_ini>2015-12-13Z</cite:data_ini>
+      <cite:fonte>01</cite:fonte>
+      <cite:scala>05</cite:scala>
+      <cite:tr_com_nom/>
+      <cite:tr_com_psu>03</cite:tr_com_psu>
+      <cite:tr_com_tra>
+        <gml:LineString srsDimension="3" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:posList>11.19200936 44.54458303 0 11.19186491 44.54438521 0</gml:posList>
+        </gml:LineString>
+      </cite:tr_com_tra>
+    </cite:tr_com>
+    <cite:tr_com gml:id="tr_com.esempio.800811">
+      <cite:tr_com_cod/>
+      <cite:data_ini>2015-12-13Z</cite:data_ini>
+      <cite:fonte>01</cite:fonte>
+      <cite:scala>05</cite:scala>
+      <cite:tr_com_nom/>
+      <cite:tr_com_psu>03</cite:tr_com_psu>
+      <cite:tr_com_tra>
+        <gml:LineString srsDimension="3" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:posList>11.19208786 44.54455497 0 11.19200936 44.54458303 0</gml:posList>
+        </gml:LineString>
+      </cite:tr_com_tra>
+    </cite:tr_com>
+    <cite:tr_com gml:id="tr_com.esempio.800812">
+      <cite:tr_com_cod/>
+      <cite:data_ini>2015-12-13Z</cite:data_ini>
+      <cite:fonte>01</cite:fonte>
+      <cite:scala>05</cite:scala>
+      <cite:tr_com_nom/>
+      <cite:tr_com_psu>03</cite:tr_com_psu>
+      <cite:tr_com_tra>
+        <gml:LineString srsDimension="3" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:posList>11.19181114 44.54651252 0 11.19177899 44.54646571 0</gml:posList>
+        </gml:LineString>
+      </cite:tr_com_tra>
+    </cite:tr_com>
+    <cite:tr_com gml:id="tr_com.esempio.800813">
+      <cite:tr_com_cod/>
+      <cite:data_ini>2015-12-13Z</cite:data_ini>
+      <cite:fonte>01</cite:fonte>
+      <cite:scala>05</cite:scala>
+      <cite:tr_com_nom/>
+      <cite:tr_com_psu>03</cite:tr_com_psu>
+      <cite:tr_com_tra>
+        <gml:LineString srsDimension="3" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:posList>11.19177899 44.54646571 0 11.19127075 44.54572553 0 11.19130292 44.5456354 0 11.19225179 44.54487297 0 11.19253272 44.54465266 0</gml:posList>
+        </gml:LineString>
+      </cite:tr_com_tra>
+    </cite:tr_com>
+    <cite:tr_com gml:id="tr_com.esempio.800814">
+      <cite:tr_com_cod/>
+      <cite:data_ini>2015-12-13Z</cite:data_ini>
+      <cite:fonte>01</cite:fonte>
+      <cite:scala>05</cite:scala>
+      <cite:tr_com_nom/>
+      <cite:tr_com_psu>03</cite:tr_com_psu>
+      <cite:tr_com_tra>
+        <gml:LineString srsDimension="3" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:posList>11.19299601 44.54610292 0 11.19293203 44.54610946 0</gml:posList>
+        </gml:LineString>
+      </cite:tr_com_tra>
+    </cite:tr_com>
+    <cite:tr_com gml:id="tr_com.esempio.800815">
+      <cite:tr_com_cod/>
+      <cite:data_ini>2015-12-13Z</cite:data_ini>
+      <cite:fonte>01</cite:fonte>
+      <cite:scala>05</cite:scala>
+      <cite:tr_com_nom/>
+      <cite:tr_com_psu>03</cite:tr_com_psu>
+      <cite:tr_com_tra>
+        <gml:LineString srsDimension="3" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:posList>11.19293203 44.54610946 0 11.19280537 44.54615501 0</gml:posList>
+        </gml:LineString>
+      </cite:tr_com_tra>
+    </cite:tr_com>
+  </gml:featureMembers>
+</wfs:FeatureCollection>

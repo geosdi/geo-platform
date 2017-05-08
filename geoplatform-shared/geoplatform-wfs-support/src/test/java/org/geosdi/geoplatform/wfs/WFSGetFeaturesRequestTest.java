@@ -41,19 +41,25 @@ import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequest;
 import org.geosdi.geoplatform.connector.wfs.response.FeatureCollectionDTO;
 import org.geosdi.geoplatform.connector.wfs.response.LayerSchemaDTO;
 import org.geosdi.geoplatform.gui.shared.bean.BBox;
+import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
 import org.geosdi.geoplatform.support.wfs.feature.reader.FeatureSchemaReader;
 import org.geosdi.geoplatform.support.wfs.feature.reader.GPFeatureSchemaReader;
 import org.geosdi.geoplatform.support.wfs.feature.reader.WFSGetFeatureStaxReader;
 import org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType;
 import org.geosdi.geoplatform.xml.xsd.v2001.Schema;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.xml.namespace.QName;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.InputStream;
 import java.math.BigInteger;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Arrays;
 
 /**
@@ -213,9 +219,10 @@ public class WFSGetFeaturesRequestTest {
         logger.info("###################################FEATURE_COLLECTION : {}\n", featureCollection);
     }
 
+    @Ignore(value = "Test to Prepare XML Files")
     @Test
     public void citePeUinsTest() throws Exception {
-        String wfsURL = "http://150.145.133.241/geoserver/wfs";
+        String wfsURL = "http://150.145.133.99:8080/geoserver/wfs";
         QName citePeUins = new QName("cite:pe_uins");
         GPWFSConnectorStore serverConnector = WFSConnectorBuilder.newConnector().withServerUrl(new URL(wfsURL)).build();
         WFSDescribeFeatureTypeRequest<Schema> request = serverConnector.createDescribeFeatureTypeRequest();
@@ -231,11 +238,15 @@ public class WFSGetFeaturesRequestTest {
         }
         layerSchema.setScope(wfsURL);
 
+        GPJAXBContextBuilder.newInstance().marshal(layerSchema, new File("./target/LayerSchemaPeUins.xml"));
+
         WFSGetFeatureRequest getFeatureRequest = serverConnector.createGetFeatureRequest();
         getFeatureRequest.setTypeName(new QName(layerSchema.getTypeName()));
         getFeatureRequest.setSRS("EPSG:4326");
         getFeatureRequest.setResultType(ResultTypeType.RESULTS.value());
 
-        getFeatureRequest.setMaxFeatures(BigInteger.valueOf(50));
+        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get("./target/GetFeaturePeUins.xml"))) {
+            writer.write(getFeatureRequest.formatResponseAsString(2));
+        }
     }
 }

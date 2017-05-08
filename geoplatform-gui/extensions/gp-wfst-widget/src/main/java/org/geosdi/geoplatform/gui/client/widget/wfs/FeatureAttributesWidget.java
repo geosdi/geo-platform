@@ -248,11 +248,8 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel implements 
 
         for (final AttributeDTO att : attributesDTO) {
             final GPSecureStringTextField valueTextField = new GPSecureStringTextField();
-
             valueTextField.setValidator(AttributeCustomFieldsMap.getValidatorForAttributeType(att.getType()));
-
             valueTextField.setAutoValidate(true);
-
             if (att.isDateType()) {
                 FocusHandler focusHandler = new FocusHandler() {
 
@@ -387,7 +384,6 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel implements 
                 }
                 successStatusBarEvent.setText("The value \"" + value + "\" is correct");
                 bus.fireEvent(successStatusBarEvent);
-
                 return value;
             }
 

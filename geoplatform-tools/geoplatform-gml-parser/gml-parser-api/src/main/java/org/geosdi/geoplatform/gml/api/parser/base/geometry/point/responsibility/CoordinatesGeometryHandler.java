@@ -54,21 +54,15 @@ public class CoordinatesGeometryHandler extends BasePointGeometryHandler {
     }
 
     @Override
-    public Point buildGeometry(GeometryFactory geometryFactory,
-            org.geosdi.geoplatform.gml.api.Point gmlGeometry,
+    public Point buildGeometry(GeometryFactory geometryFactory, org.geosdi.geoplatform.gml.api.Point gmlGeometry,
             CoordinateBaseParser parser) throws ParserException {
-
         if (gmlGeometry.isSetCoordinates()) {
-            Coordinate[] coordinates = parser.parseCoordinates(
-                    gmlGeometry.getCoordinates());
-
+            Coordinate[] coordinates = parser.parseCoordinates(gmlGeometry.getCoordinates());
             Preconditions.checkArgument(coordinates.length == 1,
                     "There must be a single coordinate");
-
             return geometryFactory.createPoint(coordinates[0]);
         } else {
-            return super.forwardBuildGeometry(geometryFactory, gmlGeometry,
-                    parser);
+            return super.forwardBuildGeometry(geometryFactory, gmlGeometry, parser);
         }
     }
 }

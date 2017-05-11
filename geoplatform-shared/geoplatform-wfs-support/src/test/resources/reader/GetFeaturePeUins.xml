@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfs:FeatureCollection numberOfFeatures="2"
+  timeStamp="2017-05-08T09:40:07.091Z"
+  xmlns:admin="http://www.geosdi.org/:/admin"
+  xmlns:cite="http://www.opengeospatial.net/cite"
+  xmlns:gml="http://www.opengis.net/gml"
+  xmlns:ogc="http://www.opengis.net/ogc"
+  xmlns:ows="http://www.opengis.net/ows"
+  xmlns:sf="http://www.openplans.org/spearfish"
+  xmlns:tiger="http://www.census.gov"
+  xmlns:topp="http://www.openplans.org/topp"
+  xmlns:wfs="http://www.opengis.net/wfs"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengeospatial.net/cite http://150.145.133.99:8080/geoserver/wfs?service=WFS&amp;version=1.1.0&amp;request=DescribeFeatureType&amp;typeName=cite%3Ape_uins http://www.opengis.net/wfs http://150.145.133.99:8080/geoserver/schemas/wfs/1.1.0/wfs.xsd">
+  <gml:featureMembers>
+    <cite:pe_uins gml:id="pe_uins.fid--4d8013c7_15bd57a1af1_1613">
+      <cite:pe_uins_me_fonte>01</cite:pe_uins_me_fonte>
+      <cite:pe_uins_me_scala>01</cite:pe_uins_me_scala>
+      <cite:pe_uins_pa>01</cite:pe_uins_pa>
+      <cite:pe_uins_es>
+        <gml:MultiSurface srsDimension="2" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:surfaceMember>
+            <gml:Polygon>
+              <gml:exterior>
+                <gml:LinearRing>
+                  <gml:posList>9.06194816 45.46618198 9.06150652 45.46503064 9.06334689 45.46317925 9.0677967 45.46359286 9.06618444 45.46612203 9.06618444 45.46612203 9.06194816 45.46618198</gml:posList>
+                </gml:LinearRing>
+              </gml:exterior>
+            </gml:Polygon>
+          </gml:surfaceMember>
+        </gml:MultiSurface>
+      </cite:pe_uins_es>
+    </cite:pe_uins>
+    <cite:pe_uins gml:id="pe_uins.fid-2bb5de40_15be76be0c7_-7ffb">
+      <cite:pe_uins_me_data_fin>2017-05-03Z</cite:pe_uins_me_data_fin>
+      <cite:pe_uins_me_data_ini>2017-05-04Z</cite:pe_uins_me_data_ini>
+      <cite:pe_uins_me_fonte>01</cite:pe_uins_me_fonte>
+      <cite:pe_uins_me_scala>01</cite:pe_uins_me_scala>
+      <cite:pe_uins_pa>01</cite:pe_uins_pa>
+      <cite:validated>1</cite:validated>
+      <cite:upload_id>01</cite:upload_id>
+      <cite:pe_uins_es>
+        <gml:MultiSurface srsDimension="2" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:surfaceMember>
+            <gml:Polygon>
+              <gml:exterior>
+                <gml:LinearRing>
+                  <gml:posList>9.05802409 45.463707 9.06104962 45.46459492 9.06135003 45.46293946 9.05821721 45.46281907 9.05802409 45.463707</gml:posList>
+                </gml:LinearRing>
+              </gml:exterior>
+            </gml:Polygon>
+          </gml:surfaceMember>
+        </gml:MultiSurface>
+      </cite:pe_uins_es>
+    </cite:pe_uins>
+  </gml:featureMembers>
+</wfs:FeatureCollection>

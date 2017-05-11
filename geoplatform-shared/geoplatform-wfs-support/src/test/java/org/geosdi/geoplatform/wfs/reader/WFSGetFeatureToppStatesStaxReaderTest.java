@@ -18,27 +18,27 @@ import java.nio.file.Paths;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class WFSGetFeatureSiteTRStaxReaderTest {
+public class WFSGetFeatureToppStatesStaxReaderTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(WFSGetFeatureSiteTRStaxReaderTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(WFSGetFeatureToppStatesStaxReaderTest.class);
     //
-    private static LayerSchemaDTO siteTRLayerSchema;
+    private static LayerSchemaDTO toppStatesLayerSchema;
     private static GPJAXBContextBuilder jaxbContextBuilder = GPJAXBContextBuilder.newInstance();
-    private static File getFeatureSiteTR;
+    private static File getFeatureToppStates;
 
     @BeforeClass
     public static void beforeClass() throws Exception {
-        siteTRLayerSchema = jaxbContextBuilder.unmarshal(new File("./src/test/resources/reader/LayerSchemaSiteTR.xml"),
+        toppStatesLayerSchema = jaxbContextBuilder.unmarshal(new File("./src/test/resources/reader/LayerSchemaToppStates.xml"),
                 LayerSchemaDTO.class);
-        getFeatureSiteTR = Paths.get("./src/test/resources/reader/GetFeatureSiteTR.xml").toFile();
-        Assert.assertNotNull("The LayerSchemaDTO for SiteTR must not be null.", siteTRLayerSchema);
-        Assert.assertNotNull("The File getFeatureSiteTR must not be null.", getFeatureSiteTR);
+        getFeatureToppStates = Paths.get("./src/test/resources/reader/GetFeatureToppStates.xml").toFile();
+        Assert.assertNotNull("The LayerSchemaDTO for topp:states must not be null.", toppStatesLayerSchema);
+        Assert.assertNotNull("The File getFeatureToppStates must not be null.", getFeatureToppStates);
     }
 
     @Test
-    public void siteTRStaxReaderTest() throws Exception {
-        WFSGetFeatureStaxReader featureReaderStAX = new WFSGetFeatureStaxReader(siteTRLayerSchema);
-        FeatureCollectionDTO featureCollectionDTO = featureReaderStAX.read(getFeatureSiteTR);
+    public void toppStatesStaxReaderTest() throws Exception {
+        WFSGetFeatureStaxReader featureReaderStAX = new WFSGetFeatureStaxReader(toppStatesLayerSchema);
+        FeatureCollectionDTO featureCollectionDTO = featureReaderStAX.read(getFeatureToppStates);
         for (FeatureDTO featureDTO : featureCollectionDTO.getFeatures()) {
             logger.info("###############################FEATURE : {}\n", featureDTO);
         }

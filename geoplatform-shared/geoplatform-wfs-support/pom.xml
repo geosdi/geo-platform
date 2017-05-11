@@ -15,8 +15,8 @@
 
     <name>Geo-Platform :: == WFS Module Support</name>
     <url>http://maven.apache.org</url>
-    
-    <description>This module was created to have an utility module which can 
+
+    <description>This module was created to have an utility module which can
         be used either in the CXF stack Services or in standalone mode
     </description>
 
@@ -30,7 +30,7 @@
             <artifactId>geoplatform-wfs-api-connector</artifactId>
             <version>${project.version}</version>
         </dependency>
-        
+
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-wfs-connector</artifactId>
@@ -41,17 +41,17 @@
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-base-configurator</artifactId>
         </dependency>
-        
+
         <!-- =========================================================== -->
         <!-- ======================== GUAVA =========================== -->
         <!-- =========================================================== -->
-            
+
         <dependency>
             <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>          
+            <artifactId>guava</artifactId>
         </dependency>
-        
-         <!-- SPRING -->
+
+        <!-- SPRING -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
@@ -85,11 +85,12 @@
             <groupId>org.slf4j</groupId>
             <artifactId>log4j-over-slf4j</artifactId>
         </dependency>
+
         <dependency>
             <groupId>net.java.dev.jsr-275</groupId>
             <artifactId>jsr-275</artifactId>
         </dependency>
-        
+
         <!-- JTS -->
         <dependency>
             <groupId>com.vividsolutions</groupId>
@@ -103,35 +104,67 @@
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
-        
+
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-epsg-hsql</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-jts-wrapper</artifactId>
+            <version>${gt-version}</version>
+            <scope>test</scope>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
-    
+
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>2.4</version>
                 <configuration>
-                    <archive>
-                        <index>true</index>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                        </manifest>
-                        <manifestEntries>
-                            <mode>development</mode>
-                            <url>${project.url}</url>
-                            <key>value</key>
-                        </manifestEntries>
-                    </archive>
+                    <excludes>
+                        <exclude>**/*.xml</exclude>
+                        <exclude>**/*.properties</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <inherited>true</inherited>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <configuration>
+                    <attach>true</attach>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
         </plugins>
     </build>
-    
+
 </project>

@@ -35,11 +35,6 @@
  */
 package org.geosdi.geoplatform.wfs;
 
-import java.io.InputStream;
-import java.net.URL;
-import java.util.Arrays;
-import java.util.List;
-import javax.xml.namespace.QName;
 import org.geosdi.geoplatform.connector.GPWFSConnectorStore;
 import org.geosdi.geoplatform.connector.WFSConnectorBuilder;
 import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequest;
@@ -62,6 +57,12 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.xml.namespace.QName;
+import java.io.InputStream;
+import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -69,10 +70,8 @@ import org.slf4j.LoggerFactory;
  */
 public class WFSTransactionInsertTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(
-            WFSTransactionInsertTest.class);
-    private final static QName TASMANIA_ROADS = new QName(
-            "http://www.openplans.org/topp",
+    private static final Logger logger = LoggerFactory.getLogger(WFSTransactionInsertTest.class);
+    private final static QName TASMANIA_ROADS = new QName("http://www.openplans.org/topp",
             "topp:tasmania_roads", "topp");
     //
     private final String wfsURL = "http://localhost:8080/geoserver/wfs";

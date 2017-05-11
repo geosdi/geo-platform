@@ -130,7 +130,7 @@ public class GPFeatureSchemaReader implements FeatureSchemaReader {
      */
     @Override
     public List<LayerSchemaDTO> getAllFeature(Schema schema) {
-        List<LayerSchemaDTO> layerSchemaList = new ArrayList<LayerSchemaDTO>();
+        List<LayerSchemaDTO> layerSchemaList = new ArrayList<>();
 
         for (TopLevelElement element : schema.getTopLevelElements()) {
             QName typeName = element.getType();

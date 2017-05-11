@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<LayerSchemaDTO>
+    <typeName>admin:donato</typeName>
+    <targetNamespace>http://www.geosdi.org/:/admin</targetNamespace>
+    <scope>http://150.145.133.99:8080/geoserver/wfs</scope>
+    <geometry>
+        <maxOccurs>0</maxOccurs>
+        <minOccurs>0</minOccurs>
+        <name>the_geom</name>
+        <nillable>false</nillable>
+        <type>Point</type>
+    </geometry>
+    <attributes>
+        <attribute>
+            <maxOccurs>1</maxOccurs>
+            <minOccurs>0</minOccurs>
+            <name>donato</name>
+            <nillable>true</nillable>
+            <type>string</type>
+        </attribute>
+    </attributes>
+</LayerSchemaDTO>

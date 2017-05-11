@@ -161,15 +161,19 @@ public class WFSGetFeatureStaxReader extends AbstractStaxStreamReader<FeatureCol
         int eventType = reader().nextTag();
         if (eventType == XMLEvent.START_ELEMENT) {
             AbstractGeometry geometry = jaxbContextBuilder.unmarshal(reader(), AbstractGeometryType.class);
+            /**@TODO The Geometry will always must 2d Dimension??
+             * otherwise the code must be :
+             * <code>WKTWriter wktWriter = new WKTWriter(geometry.isSetSrsDimension() ? geometry.getSrsDimension().intValue() : 2)</code>
+             **/
             WKTWriter wktWriter = new WKTWriter(2);
             logger.trace("@@@@@@@@@@@@@@Geometry : {}\n", geometry);
-            wktWriter.setFormatted(true);
+            wktWriter.setFormatted(Boolean.TRUE);
             try {
                 geometryWKT = wktWriter.writeFormatted(this.sextanteParser.parseGeometry(geometry));
                 logger.trace("@@@@@@@@@@@@@@@@@@@@@@WKT_GEOMETRY : {}\n" + geometryWKT);
             } catch (ParserException ex) {
                 ex.printStackTrace();
-                logger.error("Parse Exception : " + ex);
+                logger.error("########################Parse Exception : " + ex);
             }
         }
         return geometryWKT;

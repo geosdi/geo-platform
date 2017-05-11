@@ -18,27 +18,27 @@ import java.nio.file.Paths;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class WFSGetFeatureSiteTRStaxReaderTest {
+public class WFSGetFeaturePeUinsStaxReaderTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(WFSGetFeatureSiteTRStaxReaderTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(WFSGetFeaturePeUinsStaxReaderTest.class);
     //
-    private static LayerSchemaDTO siteTRLayerSchema;
+    private static LayerSchemaDTO peUinsLayerSchema;
     private static GPJAXBContextBuilder jaxbContextBuilder = GPJAXBContextBuilder.newInstance();
-    private static File getFeatureSiteTR;
+    private static File getFeaturePeUins;
 
     @BeforeClass
     public static void beforeClass() throws Exception {
-        siteTRLayerSchema = jaxbContextBuilder.unmarshal(new File("./src/test/resources/reader/LayerSchemaSiteTR.xml"),
+        peUinsLayerSchema = jaxbContextBuilder.unmarshal(new File("./src/test/resources/reader/LayerSchemaPeUins.xml"),
                 LayerSchemaDTO.class);
-        getFeatureSiteTR = Paths.get("./src/test/resources/reader/GetFeatureSiteTR.xml").toFile();
-        Assert.assertNotNull("The LayerSchemaDTO for SiteTR must not be null.", siteTRLayerSchema);
-        Assert.assertNotNull("The File getFeatureSiteTR must not be null.", getFeatureSiteTR);
+        getFeaturePeUins = Paths.get("./src/test/resources/reader/GetFeaturePeUins.xml").toFile();
+        Assert.assertNotNull("The LayerSchemaDTO for peUins must not be null.", peUinsLayerSchema);
+        Assert.assertNotNull("The File getFeaturePeUins must not be null.", getFeaturePeUins);
     }
 
     @Test
-    public void siteTRStaxReaderTest() throws Exception {
-        WFSGetFeatureStaxReader featureReaderStAX = new WFSGetFeatureStaxReader(siteTRLayerSchema);
-        FeatureCollectionDTO featureCollectionDTO = featureReaderStAX.read(getFeatureSiteTR);
+    public void setPeUinsLayerSchemaStaxReaderTest() throws Exception {
+        WFSGetFeatureStaxReader featureReaderStAX = new WFSGetFeatureStaxReader(peUinsLayerSchema);
+        FeatureCollectionDTO featureCollectionDTO = featureReaderStAX.read(getFeaturePeUins);
         for (FeatureDTO featureDTO : featureCollectionDTO.getFeatures()) {
             logger.info("###############################FEATURE : {}\n", featureDTO);
         }

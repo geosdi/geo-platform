@@ -78,9 +78,7 @@ public class GPWFSServerConnector extends GPAbstractServerConnector
      * @param securityConnector {@link GPSecurityConnector}
      * @param version           the value of WFS version. Must be 1.1.0
      */
-    public GPWFSServerConnector(String urlServer,
-            GPSecurityConnector securityConnector,
-            String version) {
+    public GPWFSServerConnector(String urlServer, GPSecurityConnector securityConnector, String version) {
         this(analyzesServerURL(urlServer), securityConnector,
                 toWFSVersion(version));
     }
@@ -109,9 +107,7 @@ public class GPWFSServerConnector extends GPAbstractServerConnector
      * @param securityConnector {@link GPSecurityConnector}
      * @param theVersion        {@link WFSVersion} WFS version. Must be 1.1.0
      */
-    public GPWFSServerConnector(URL server,
-            GPSecurityConnector securityConnector,
-            WFSVersion theVersion) {
+    public GPWFSServerConnector(URL server, GPSecurityConnector securityConnector, WFSVersion theVersion) {
         super(server, securityConnector);
         this.version = theVersion;
     }
@@ -122,10 +118,8 @@ public class GPWFSServerConnector extends GPAbstractServerConnector
      * @param securityConnector
      * @param theVersion
      */
-    public GPWFSServerConnector(URL server,
-            GPPooledConnectorConfig pooledConnectorConfig,
-            GPSecurityConnector securityConnector,
-            WFSVersion theVersion) {
+    public GPWFSServerConnector(URL server, GPPooledConnectorConfig pooledConnectorConfig,
+            GPSecurityConnector securityConnector, WFSVersion theVersion) {
         super(server, securityConnector, pooledConnectorConfig);
         this.version = theVersion;
     }
@@ -219,5 +213,4 @@ public class GPWFSServerConnector extends GPAbstractServerConnector
         }
         return WFSVersion.V110;
     }
-
 }

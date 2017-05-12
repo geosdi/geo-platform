@@ -90,8 +90,7 @@ class FeatureAttributeRow implements IDateSelectedHandler {
         conditionAttributeField.setValidator(customFields.getValidator());
 
         conditionAttributeField.setAllowBlank(this.attributeDTO.isNillable());
-        conditionAttributeField.setToolTip(
-                "Datatype: " + this.attributeDTO.getType());
+        conditionAttributeField.setToolTip(this.attributeDTO.getName());
 
         if (this.attributeDTO.isDateType()) {
             conditionAttributeField.addHandler(new ClickHandler() {
@@ -103,7 +102,9 @@ class FeatureAttributeRow implements IDateSelectedHandler {
 
             }, ClickEvent.getType());
         }
-
+        conditionAttributeField.setLabelStyle("overflow: hidden;\n" +
+        "text-overflow: ellipsis;\n" +
+        "white-space: nowrap;");
         conditionAttributeField.setFieldLabel(this.attributeDTO.getName());
     }
 

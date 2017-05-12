@@ -245,6 +245,7 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel implements 
     private ColumnModel prepareColumnModel() {
         List<AttributeDTO> attributesDTO = this.layerSchemaBinder.getLayerSchemaDTO().getAttributes();
         List<ColumnConfig> configs = Lists.<ColumnConfig>newArrayListWithCapacity(attributesDTO.size());
+        int width = (getWidth()-2) / attributesDTO.size();
 
         for (final AttributeDTO att : attributesDTO) {
             final GPSecureStringTextField valueTextField = new GPSecureStringTextField();
@@ -270,10 +271,8 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel implements 
             valueColumn.setId(name);
             valueColumn.setHeaderHtml(name);
             valueColumn.setEditor(buildCellEditor(valueTextField));
-            valueColumn.setWidth(100);
-
+            valueColumn.setWidth(width);
             valueColumn.setToolTip("Datatype: " + att.getType());
-
             configs.add(valueColumn);
         }
 

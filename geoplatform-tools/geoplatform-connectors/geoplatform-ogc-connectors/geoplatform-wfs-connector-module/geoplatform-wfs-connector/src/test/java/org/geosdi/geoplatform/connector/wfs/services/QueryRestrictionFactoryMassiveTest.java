@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.connector.wfs.services;
 
-import org.geosdi.geoplatform.connector.server.request.v110.query.repository.QueryRestrictionRepository;
 import org.geosdi.geoplatform.connector.server.request.v110.query.repository.QueryRestrictionStrategy;
 import org.geosdi.geoplatform.gui.shared.wfs.OperatorType;
 import org.junit.Test;
@@ -46,6 +45,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import static org.geosdi.geoplatform.connector.server.request.v110.query.responsibility.ILogicOperatorHandler.QUERY_RESTRICTION_REPOSITORY;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -123,7 +124,7 @@ public class QueryRestrictionFactoryMassiveTest {
 
         @Override
         public QueryRestrictionStrategy call() throws Exception {
-            return QueryRestrictionRepository.getQueryRestrictionStrategy(operator);
+            return QUERY_RESTRICTION_REPOSITORY.getQueryRestrictionStrategy(operator);
         }
     }
 }

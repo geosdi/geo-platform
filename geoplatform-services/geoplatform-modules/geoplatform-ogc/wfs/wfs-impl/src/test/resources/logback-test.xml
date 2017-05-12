@@ -21,5 +21,6 @@
     
     <logger name="org.geosdi.geoplatform.feature.reader.WFSGetFeatureStaxReader" level="debug" />
     <logger name="org.geosdi.geoplatform.feature.reader.FeatureReaderTest" level="debug" />
+    <logger name="org.geosdi.geoplatform.feature.reader.FeatureReaderNetworkTest" level="debug" />
 
 </configuration>

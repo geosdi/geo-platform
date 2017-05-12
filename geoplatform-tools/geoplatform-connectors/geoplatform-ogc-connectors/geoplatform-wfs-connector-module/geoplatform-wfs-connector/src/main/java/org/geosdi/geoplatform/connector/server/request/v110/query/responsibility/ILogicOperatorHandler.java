@@ -35,8 +35,11 @@
  */
 package org.geosdi.geoplatform.connector.server.request.v110.query.responsibility;
 
+import org.geosdi.geoplatform.connector.server.request.v110.query.repository.QueryRestrictionRepository;
+import org.geosdi.geoplatform.connector.server.request.v110.query.repository.WFSQueryRestrictionRepository;
 import org.geosdi.geoplatform.connector.wfs.response.QueryDTO;
 import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
+import org.geosdi.geoplatform.xml.filter.v110.ComparisonOpsType;
 import org.geosdi.geoplatform.xml.filter.v110.FilterType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,6 +51,8 @@ import java.io.StringWriter;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public interface ILogicOperatorHandler {
+
+    WFSQueryRestrictionRepository<ComparisonOpsType> QUERY_RESTRICTION_REPOSITORY = new QueryRestrictionRepository();
 
     /**
      * @param queryDTO

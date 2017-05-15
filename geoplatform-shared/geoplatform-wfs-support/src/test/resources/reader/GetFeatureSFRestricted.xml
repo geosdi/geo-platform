@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfs:FeatureCollection numberOfFeatures="4"
+  timeStamp="2017-05-13T08:38:20.512Z"
+  xmlns:gml="http://www.opengis.net/gml"
+  xmlns:ogc="http://www.opengis.net/ogc"
+  xmlns:ows="http://www.opengis.net/ows"
+  xmlns:sf="http://www.openplans.org/spearfish"
+  xmlns:tiger="http://www.census.gov"
+  xmlns:topp="http://www.openplans.org/topp"
+  xmlns:wfs="http://www.opengis.net/wfs"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wfs http://150.145.141.92:80/geoserver/schemas/wfs/1.1.0/wfs.xsd http://www.openplans.org/spearfish http://150.145.141.92:80/geoserver/wfs?service=WFS&amp;version=1.1.0&amp;request=DescribeFeatureType&amp;typeName=sf%3Arestricted">
+  <gml:featureMembers>
+    <sf:restricted gml:id="restricted.1">
+      <sf:the_geom>
+        <gml:MultiSurface srsDimension="2" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:surfaceMember>
+            <gml:Polygon>
+              <gml:exterior>
+                <gml:LinearRing>
+                  <gml:posList>-103.84407498 44.48202034 -103.84403654 44.48202685 -103.84354197 44.48186402 -103.84267615 44.48159454 -103.84056487 44.48089381 -103.83659672 44.48025149 -103.83654549 44.47715824 -103.84868811 44.47699466 -103.84871279 44.47723232 -103.84876307 44.4780439 -103.8483729 44.47839075 -103.84821532 44.47860234 -103.84603916 44.48011444 -103.84438487 44.48139092 -103.84407498 44.48202034</gml:posList>
+                </gml:LinearRing>
+              </gml:exterior>
+            </gml:Polygon>
+          </gml:surfaceMember>
+        </gml:MultiSurface>
+      </sf:the_geom>
+      <sf:cat>1</sf:cat>
+    </sf:restricted>
+    <sf:restricted gml:id="restricted.2">
+      <sf:the_geom>
+        <gml:MultiSurface srsDimension="2" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:surfaceMember>
+            <gml:Polygon>
+              <gml:exterior>
+                <gml:LinearRing>
+                  <gml:posList>-103.8289575 44.46495057 -103.82910058 44.47422337 -103.8243051 44.47419248 -103.82501305 44.47191043 -103.82616351 44.47090397 -103.82626189 44.46985334 -103.82769679 44.46805226 -103.82798329 44.46762193 -103.8284396 44.46684954 -103.82876017 44.46569788 -103.828814 44.46540972 -103.8289575 44.46495057</gml:posList>
+                </gml:LinearRing>
+              </gml:exterior>
+            </gml:Polygon>
+          </gml:surfaceMember>
+        </gml:MultiSurface>
+      </sf:the_geom>
+      <sf:cat>2</sf:cat>
+    </sf:restricted>
+    <sf:restricted gml:id="restricted.3">
+      <sf:the_geom>
+        <gml:MultiSurface srsDimension="2" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:surfaceMember>
+            <gml:Polygon>
+              <gml:exterior>
+                <gml:LinearRing>
+                  <gml:posList>-103.76667008 44.4044648 -103.74902137 44.40436552 -103.7490764 44.39448281 -103.76668629 44.39447173 -103.76667008 44.4044648</gml:posList>
+                </gml:LinearRing>
+              </gml:exterior>
+            </gml:Polygon>
+          </gml:surfaceMember>
+        </gml:MultiSurface>
+      </sf:the_geom>
+      <sf:cat>4</sf:cat>
+    </sf:restricted>
+    <sf:restricted gml:id="restricted.4">
+      <sf:the_geom>
+        <gml:MultiSurface srsDimension="2" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+          <gml:surfaceMember>
+            <gml:Polygon>
+              <gml:exterior>
+                <gml:LinearRing>
+                  <gml:posList>-103.84024159 44.44534088 -103.79617155 44.44447967 -103.79541051 44.44429257 -103.7941271 44.44394161 -103.79292234 44.44350213 -103.79150181 44.44288153 -103.7886985 44.44126261 -103.78595245 44.43925243 -103.78523538 44.43842645 -103.78290328 44.43551339 -103.78119034 44.43231847 -103.78061853 44.42981678 -103.78062082 44.42972056 -103.80235001 44.40049077 -103.80366168 44.40082134 -103.80538182 44.40126633 -103.8076095 44.40208804 -103.80952372 44.40282381 -103.81493098 44.40548786 -103.81588627 44.40593815 -103.8192025 44.40725261 -103.82353074 44.40947152 -103.82818447 44.41293798 -103.8334234 44.41801905 -103.83468886 44.41955863 -103.83533854 44.42042483 -103.83613041 44.42134753 -103.83926805 44.42551916 -103.84013437 44.42695819 -103.84052413 44.42790409 -103.84130448 44.43354233 -103.84123482 44.43618127 -103.84098914 44.4406675 -103.84024159 44.44534088</gml:posList>
+                </gml:LinearRing>
+              </gml:exterior>
+            </gml:Polygon>
+          </gml:surfaceMember>
+        </gml:MultiSurface>
+      </sf:the_geom>
+      <sf:cat>3</sf:cat>
+    </sf:restricted>
+  </gml:featureMembers>
+</wfs:FeatureCollection>

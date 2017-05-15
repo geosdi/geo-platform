@@ -12,12 +12,22 @@ import javax.xml.transform.Source;
 import java.io.*;
 import java.net.URI;
 import java.net.URL;
+import java.nio.file.Path;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 public interface IGPJAXBContextBuilder {
+
+    /**
+     * @param path
+     * @param type
+     * @param <T>
+     * @return {@link T}
+     * @throws Exception
+     */
+    <T> T unmarshall(Path path, Class<T> type) throws Exception;
 
     /**
      * @param xml
@@ -104,6 +114,13 @@ public interface IGPJAXBContextBuilder {
      * @throws JAXBException
      */
     void marshal(Object jaxbObject, File file) throws JAXBException;
+
+    /**
+     * @param jaxbObject
+     * @param path
+     * @throws Exception
+     */
+    void marshall(Object jaxbObject, Path path) throws Exception;
 
     /**
      * @param jaxbObject

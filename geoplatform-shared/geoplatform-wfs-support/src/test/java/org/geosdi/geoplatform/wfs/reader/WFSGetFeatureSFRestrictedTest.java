@@ -18,27 +18,27 @@ import java.nio.file.Paths;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class WFSGetFeaturePeUinsStaxReaderTest {
+public class WFSGetFeatureSFRestrictedTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(WFSGetFeaturePeUinsStaxReaderTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(WFSGetFeatureSFRestrictedTest.class);
     //
-    private static LayerSchemaDTO peUinsLayerSchema;
+    private static LayerSchemaDTO sfRestrictedLayerSchema;
     private static GPJAXBContextBuilder jaxbContextBuilder = GPJAXBContextBuilder.newInstance();
-    private static File getFeaturePeUins;
+    private static File getFeatureSFRestricted;
 
     @BeforeClass
     public static void beforeClass() throws Exception {
-        peUinsLayerSchema = jaxbContextBuilder.unmarshal(new File("./src/test/resources/reader/LayerSchemaPeUins.xml"),
+        sfRestrictedLayerSchema = jaxbContextBuilder.unmarshal(new File("./src/test/resources/reader/LayerSchemaSFRestricted.xml"),
                 LayerSchemaDTO.class);
-        getFeaturePeUins = Paths.get("./src/test/resources/reader/GetFeaturePeUins.xml").toFile();
-        Assert.assertNotNull("The LayerSchemaDTO for peUins must not be null.", peUinsLayerSchema);
-        Assert.assertNotNull("The File getFeaturePeUins must not be null.", getFeaturePeUins);
+        getFeatureSFRestricted = Paths.get("./src/test/resources/reader/GetFeatureSFRestricted.xml").toFile();
+        Assert.assertNotNull("The LayerSchemaDTO for sfRestricted must not be null.", sfRestrictedLayerSchema);
+        Assert.assertNotNull("The File getFeatureSFRestricted must not be null.", getFeatureSFRestricted);
     }
 
     @Test
-    public void peUinsLayerSchemaStaxReaderTest() throws Exception {
-        WFSGetFeatureStaxReader featureReaderStAX = new WFSGetFeatureStaxReader(peUinsLayerSchema);
-        FeatureCollectionDTO featureCollectionDTO = featureReaderStAX.read(getFeaturePeUins);
+    public void sfRestrictedSchemaStaxReaderTest() throws Exception {
+        WFSGetFeatureStaxReader featureReaderStAX = new WFSGetFeatureStaxReader(sfRestrictedLayerSchema);
+        FeatureCollectionDTO featureCollectionDTO = featureReaderStAX.read(getFeatureSFRestricted);
         for (FeatureDTO featureDTO : featureCollectionDTO.getFeatures()) {
             logger.info("###############################FEATURE : {}\n", featureDTO);
         }

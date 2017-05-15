@@ -105,8 +105,7 @@ public class WFSTransactionInsertTest {
 
         request.setAttributes(Arrays.asList(att, geometry));
 
-        logger.info("\n*** Request TRANSACTION INSERT ***\n{}\n\n",
-                request.showRequestAsString());
+        logger.info("\n*** Request TRANSACTION INSERT ***\n{}\n\n", request.showRequestAsString());
 
         TransactionResponseType response = request.getResponse();
         logger.info("\n*** {}", response.getTransactionResults());
@@ -117,37 +116,24 @@ public class WFSTransactionInsertTest {
         Assert.assertEquals(1, transactionSummary.getTotalInserted().intValue());
         Assert.assertEquals("1.1.0", response.getVersion());
 
-
         logger.info("\n@@@@@@@@@InsertResults {}", response.getInsertResults());
-
         List<LayerSchemaDTO> schemas = featureReaderXSD.read(new URL(wfsURL
                 + "?service=wfs"
                 + "&version=1.1.0"
                 + "&request=DescribeFeatureType"
                 + "&typeName=topp:tasmania_roads").openStream());
-
         Assert.assertNotNull(schemas);
         Assert.assertEquals(1, schemas.size());
-
         LayerSchemaDTO layerSchema = schemas.get(0);
-
         logger.info("\n\n#####################Layer Schema : {}", layerSchema);
-
         QName name = new QName("topp:tasmania_roads");
-
         WFSGetFeatureRequest getRequest = serverConnector.createGetFeatureRequest();
 
         getRequest.setTypeName(name);
         getRequest.setResultType(ResultTypeType.RESULTS.value());
-
-
         InputStream is = getRequest.getResponseAsStream();
-
-        WFSGetFeatureStaxReader featureReaderStAX = new WFSGetFeatureStaxReader(
-                layerSchema);
-
+        WFSGetFeatureStaxReader featureReaderStAX = new WFSGetFeatureStaxReader(layerSchema);
         FeatureCollectionDTO featureCollection = featureReaderStAX.read(is);
-
         logger.info("\n\n@@@@@@@@@@@@@@@@@@@ {}", featureCollection);
     }
 

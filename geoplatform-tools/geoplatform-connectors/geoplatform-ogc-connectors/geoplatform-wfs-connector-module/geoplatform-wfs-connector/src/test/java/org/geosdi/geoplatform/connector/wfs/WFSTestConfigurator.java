@@ -76,5 +76,4 @@ public class WFSTestConfigurator {
     //
     protected static GPWFSConnectorStore serverConnector;
     protected static GPWFSConnectorStore secureServerConnector;
-
 }

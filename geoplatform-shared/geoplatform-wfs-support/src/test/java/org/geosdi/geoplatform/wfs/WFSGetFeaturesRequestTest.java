@@ -70,7 +70,7 @@ import java.math.BigInteger;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.Arrays;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -181,7 +181,7 @@ public class WFSGetFeaturesRequestTest {
         getFeatureRequest.setSRS("EPSG:4326");
         getFeatureRequest.setResultType(ResultTypeType.RESULTS.value());
         getFeatureRequest.setMaxFeatures(BigInteger.valueOf(50));
-        logger.debug("\n\t@@@@@@@@@@@@@@@@@@RESPONSE_AS_STRING : {}", getFeatureRequest.showRequestAsString());
+        logger.debug("@@@@@@@@@@@@@@@@@@RESPONSE_AS_STRING : \n{}\n", getFeatureRequest.showRequestAsString());
         InputStream is = getFeatureRequest.getResponseAsStream();
         WFSGetFeatureStaxReader featureReaderStAX = new WFSGetFeatureStaxReader(layerSchema);
         FeatureCollectionDTO featureCollection = featureReaderStAX.read(is);
@@ -247,8 +247,8 @@ public class WFSGetFeaturesRequestTest {
     @Ignore(value = "Test to Prepare XML Files")
     @Test
     public void generateXMLFilesTest() throws Exception {
-        String wfsURL = "http://150.145.133.99:8080/geoserver/wfs";
-        QName layerQName = new QName("admin:donato");
+        String wfsURL = "http://150.145.141.92/geoserver/wfs";
+        QName layerQName = new QName("sf:restricted");
         GPWFSConnectorStore serverConnector = WFSConnectorBuilder.newConnector().withServerUrl(new URL(wfsURL)).build();
         WFSDescribeFeatureTypeRequest<Schema> request = serverConnector.createDescribeFeatureTypeRequest();
         request.setTypeName(Arrays.asList(layerQName));
@@ -263,7 +263,7 @@ public class WFSGetFeaturesRequestTest {
         }
         layerSchema.setScope(wfsURL);
 
-        GPJAXBContextBuilder.newInstance().marshal(layerSchema, new File("./target/LayerSchemaCreateLayer.xml"));
+        GPJAXBContextBuilder.newInstance().marshal(layerSchema, new File("./target/LayerSchemaSFRestricted.xml"));
 
         WFSGetFeatureRequest getFeatureRequest = serverConnector.createGetFeatureRequest();
         getFeatureRequest.setTypeName(new QName(layerSchema.getTypeName()));
@@ -271,7 +271,7 @@ public class WFSGetFeaturesRequestTest {
         getFeatureRequest.setResultType(ResultTypeType.RESULTS.value());
         String responseAsString = getFeatureRequest.formatResponseAsString(2);
 
-        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get("./target/GetFeatureCreateLayer.xml"))) {
+        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get("./target/GetFeatureSFRestricted.xml"))) {
             writer.write(responseAsString);
         }
     }
@@ -308,5 +308,41 @@ public class WFSGetFeaturesRequestTest {
         Point upperCorner = geometryFactory.createPoint(new Coordinate(1152907.0188525, 5569454.5816494));
         Point targetUpperCorner = (Point) JTS.transform(upperCorner, transform);
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@UPPER_CORNER : {}\n", targetUpperCorner);
+    }
+
+    @Test
+    public void toppTasmaniaRoadsTest() throws Exception {
+        String wfsURL = "http://150.145.141.92/geoserver/wfs";
+        QName TASMANIA_ROADS = new QName("http://www.openplans.org/topp",
+                "tasmania_roads", "topp");
+        GPWFSConnectorStore serverConnector = WFSConnectorBuilder
+                .newConnector()
+                .withServerUrl(new URL(wfsURL))
+                .build();
+        WFSDescribeFeatureTypeRequest<Schema> request = serverConnector.createDescribeFeatureTypeRequest();
+        request.setTypeName(Arrays.asList(TASMANIA_ROADS));
+        Schema response = request.getResponse();
+
+        LayerSchemaDTO layerSchema = featureReaderXSD.getFeature(response, TASMANIA_ROADS.getLocalPart());
+        if (layerSchema == null) {
+            throw new IllegalStateException("The Layer Schema is null.");
+        }
+        layerSchema.setScope(wfsURL);
+        logger.debug("\n\t##################################LAYER_SCHEMA : {}", layerSchema);
+        WFSGetFeatureRequest getFeatureRequest = serverConnector.createGetFeatureRequest();
+        getFeatureRequest.setTypeName(new QName(layerSchema.getTypeName()));
+        getFeatureRequest.setSRS("EPSG:4326");
+        getFeatureRequest.setResultType(ResultTypeType.RESULTS.value());
+        getFeatureRequest.setMaxFeatures(BigInteger.valueOf(50));
+        logger.debug("@@@@@@@@@@@@@@@@@@REQUEST_AS_STRING : \n{}\n", getFeatureRequest.showRequestAsString());
+//        logger.debug("@@@@@@@@@@@@@@@@@@RESPONSE_AS_STRING : \n{}\n", getFeatureRequest.formatResponseAsString(2));
+        InputStream is = getFeatureRequest.getResponseAsStream();
+        WFSGetFeatureStaxReader featureReaderStAX = new WFSGetFeatureStaxReader(layerSchema);
+        FeatureCollectionDTO featureCollection = featureReaderStAX.read(is);
+
+        if (!featureCollection.isFeaturesLoaded()) {
+            featureCollection.setErrorMessage(getFeatureRequest.getResponseAsString());
+        }
+        logger.debug("\n\t@@@@@@@@@@@@@@@@@@@@@@@@@@@FEATURE_COLLECTION_DTO : {}", featureCollection);
     }
 }

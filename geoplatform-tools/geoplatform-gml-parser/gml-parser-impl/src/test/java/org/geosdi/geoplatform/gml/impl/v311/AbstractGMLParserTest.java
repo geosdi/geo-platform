@@ -58,8 +58,7 @@ public abstract class AbstractGMLParserTest {
 
     @BeforeClass
     public static void loadJAXBContext() {
-        jaxbContext = GMLContextFactoryV311.createJAXBContext(
-                GMLContextType.SIMPLE);
+        jaxbContext = GMLContextFactoryV311.createJAXBContext(GMLContextType.SIMPLE);
     }
     //
     protected GeometryFactory geometryFactory = new GeometryFactory();

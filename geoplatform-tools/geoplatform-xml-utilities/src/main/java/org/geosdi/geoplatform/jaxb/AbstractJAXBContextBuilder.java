@@ -13,6 +13,7 @@ import javax.xml.transform.Source;
 import java.io.*;
 import java.net.URI;
 import java.net.URL;
+import java.nio.file.Path;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -21,6 +22,19 @@ import java.net.URL;
 public abstract class AbstractJAXBContextBuilder implements IGPJAXBContextBuilder {
 
     protected AbstractJAXBContextBuilder() {
+    }
+
+    /**
+     * @param path
+     * @param type
+     * @return {@link T}
+     * @throws Exception
+     */
+    @Override
+    public <T> T unmarshall(Path path, Class<T> type) throws Exception {
+        Preconditions.checkArgument((path != null) && (path.toFile().exists() && !(path.toFile().isDirectory())),
+                "The Parameter Path must not be null and relative File must exists and must not a Directory");
+        return unmarshal(path.toFile(), type);
     }
 
     /**
@@ -188,6 +202,17 @@ public abstract class AbstractJAXBContextBuilder implements IGPJAXBContextBuilde
     @Override
     public void marshal(Object jaxbObject, File file) throws JAXBException {
         createMarshaller(jaxbObject).marshal(jaxbObject, file);
+    }
+
+    /**
+     * @param jaxbObject
+     * @param path
+     * @throws Exception
+     */
+    @Override
+    public void marshall(Object jaxbObject, Path path) throws Exception {
+        Preconditions.checkArgument(path != null, "The Parameter path must not be null");
+        marshal(jaxbObject, path.toFile());
     }
 
     /**

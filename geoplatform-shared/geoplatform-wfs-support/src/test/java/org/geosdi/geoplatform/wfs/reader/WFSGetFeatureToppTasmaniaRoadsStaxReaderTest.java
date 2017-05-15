@@ -18,27 +18,27 @@ import java.nio.file.Paths;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class WFSGetFeaturePeUinsStaxReaderTest {
+public class WFSGetFeatureToppTasmaniaRoadsStaxReaderTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(WFSGetFeaturePeUinsStaxReaderTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(WFSGetFeatureToppTasmaniaRoadsStaxReaderTest.class);
     //
-    private static LayerSchemaDTO peUinsLayerSchema;
+    private static LayerSchemaDTO toppTasmaniaRoadsLayerSchema;
     private static GPJAXBContextBuilder jaxbContextBuilder = GPJAXBContextBuilder.newInstance();
-    private static File getFeaturePeUins;
+    private static File getFeatureToppTasmaniaRoads;
 
     @BeforeClass
     public static void beforeClass() throws Exception {
-        peUinsLayerSchema = jaxbContextBuilder.unmarshal(new File("./src/test/resources/reader/LayerSchemaPeUins.xml"),
+        toppTasmaniaRoadsLayerSchema = jaxbContextBuilder.unmarshal(new File("./src/test/resources/reader/LayerSchemaToppTasmaniaRoads.xml"),
                 LayerSchemaDTO.class);
-        getFeaturePeUins = Paths.get("./src/test/resources/reader/GetFeaturePeUins.xml").toFile();
-        Assert.assertNotNull("The LayerSchemaDTO for peUins must not be null.", peUinsLayerSchema);
-        Assert.assertNotNull("The File getFeaturePeUins must not be null.", getFeaturePeUins);
+        getFeatureToppTasmaniaRoads = Paths.get("./src/test/resources/reader/GetFeatureToppTasmaniaRoads.xml").toFile();
+        Assert.assertNotNull("The LayerSchemaDTO for topp:tasmania_roads must not be null.", toppTasmaniaRoadsLayerSchema);
+        Assert.assertNotNull("The File getFeatureToppTasmaniaRoads must not be null.", getFeatureToppTasmaniaRoads);
     }
 
     @Test
-    public void peUinsLayerSchemaStaxReaderTest() throws Exception {
-        WFSGetFeatureStaxReader featureReaderStAX = new WFSGetFeatureStaxReader(peUinsLayerSchema);
-        FeatureCollectionDTO featureCollectionDTO = featureReaderStAX.read(getFeaturePeUins);
+    public void toppTasmaniaRoadsSchemaStaxReaderTest() throws Exception {
+        WFSGetFeatureStaxReader featureReaderStAX = new WFSGetFeatureStaxReader(toppTasmaniaRoadsLayerSchema);
+        FeatureCollectionDTO featureCollectionDTO = featureReaderStAX.read(getFeatureToppTasmaniaRoads);
         for (FeatureDTO featureDTO : featureCollectionDTO.getFeatures()) {
             logger.info("###############################FEATURE : {}\n", featureDTO);
         }

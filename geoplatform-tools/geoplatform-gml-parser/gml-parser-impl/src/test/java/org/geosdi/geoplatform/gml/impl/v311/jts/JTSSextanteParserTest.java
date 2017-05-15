@@ -35,15 +35,12 @@
  */
 package org.geosdi.geoplatform.gml.impl.v311.jts;
 
-import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.Geometry;
-import com.vividsolutions.jts.geom.LineString;
-import com.vividsolutions.jts.geom.LinearRing;
-import com.vividsolutions.jts.geom.Point;
+import com.vividsolutions.jts.geom.*;
 import com.vividsolutions.jts.io.WKTReader;
-import java.io.StringWriter;
 import org.geosdi.geoplatform.gml.impl.v311.AbstractGMLParserTest;
 import org.junit.Test;
+
+import java.io.StringWriter;
 
 /**
  *
@@ -131,7 +128,6 @@ public class JTSSextanteParserTest extends AbstractGMLParserTest {
     
     @Test
     public void testMultiPoint() throws Exception {
-        
         Geometry multiPoint = reader.read("MULTIPOINT ((10 40), (40 30), "
                 + "(20 20), (30 10))");
         
@@ -143,7 +139,6 @@ public class JTSSextanteParserTest extends AbstractGMLParserTest {
     
     @Test
     public void testMultiLineString() throws Exception {
-        
         Geometry multiLineString = reader.read(
                 "MULTILINESTRING ((10 10, 20 20, 10 40), "
                 + "(40 40, 30 30, 40 20, 30 10))");
@@ -156,7 +151,6 @@ public class JTSSextanteParserTest extends AbstractGMLParserTest {
     
     @Test
     public void testMultiPolygon() throws Exception {
-        
         Geometry multiPolygon = reader.read("MULTIPOLYGON (((40 40, 20 45,"
                 + " 45 30, 40 40)), ((20 35, 45 20, 30 5, "
                 + "10 10, 10 30, 20 35), (30 20, 20 25, 20 15, 30 20)))");
@@ -169,7 +163,6 @@ public class JTSSextanteParserTest extends AbstractGMLParserTest {
     
     @Test
     public void testGeometryCollection() throws Exception {
-        
         Geometry geometryCollection = reader.read(
                 "GEOMETRYCOLLECTION(POINT(0 0), "
                 + "POINT(1 0), POINT(1 1), POINT(0 1), LINESTRING(4 6,7 10), "

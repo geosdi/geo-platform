@@ -69,18 +69,21 @@ public class GMLBasePolygonBuilder implements PolygonBuilder {
     protected LinearRing canBuildExteriorPolygon(Polygon polygon) throws ParserException {
         AbstractRingProperty ringProperty = polygon.getExteriorValue();
         AbstractRing ring = ringProperty.getAbstractRing();
+        if ((polygon.isSetSrsDimension()) && !(ring.isSetSrsDimension()))
+            ring.setSrsDimension(polygon.getSrsDimension());
         return ((ring != null) && (ring instanceof org.geosdi.geoplatform.gml.api.LinearRing))
                 ? linearRingParser.parseGeometry((org.geosdi.geoplatform.gml.api.LinearRing) ring)
                 : null;
     }
 
     protected LinearRing[] canBuildInteriorPolygon(Polygon polygon) throws ParserException {
-        List<LinearRing> interiorElements = new ArrayList<LinearRing>(polygon.getInteriorValues().size());
+        List<LinearRing> interiorElements = new ArrayList<>(polygon.getInteriorValues().size());
         for (AbstractRingProperty ringProperty : polygon.getInteriorValues()) {
             AbstractRing ring = ringProperty.getAbstractRing();
+            if ((polygon.isSetSrsDimension()) && !(ring.isSetSrsDimension()))
+                ring.setSrsDimension(polygon.getSrsDimension());
             if ((ring != null) && (ring instanceof LinearRing)) {
-                interiorElements.add(this.linearRingParser.parseGeometry(
-                        (org.geosdi.geoplatform.gml.api.LinearRing) ring));
+                interiorElements.add(this.linearRingParser.parseGeometry((org.geosdi.geoplatform.gml.api.LinearRing) ring));
             }
         }
         return interiorElements.toArray(new LinearRing[interiorElements.size()]);

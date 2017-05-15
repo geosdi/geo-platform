@@ -84,7 +84,7 @@ public abstract class AbstractStaxStreamWriter<T extends Object> implements
      * @throws XMLStreamException
      * @throws IOException
      */
-    public abstract void write(T target, Object output) throws XMLStreamException, Exception;
+    public abstract void write(T target, Object output) throws Exception;
 
     /**
      * @param prefix

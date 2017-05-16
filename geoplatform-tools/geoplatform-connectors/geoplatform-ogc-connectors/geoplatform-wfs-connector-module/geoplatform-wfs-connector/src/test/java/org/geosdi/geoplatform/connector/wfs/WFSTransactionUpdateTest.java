@@ -1,42 +1,39 @@
 /**
- *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
- *
- *   Copyright (C) 2008-2017 geoSDI Group (CNR IMAA - Potenza - ITALY).
- *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
- *
- *   ====================================================================
- *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
- *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * geo-platform
+ * Rich webgis framework
+ * http://geo-platform.org
+ * ====================================================================
+ * <p>
+ * Copyright (C) 2008-2017 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * <p>
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version. This program is distributed in the
+ * hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License
+ * for more details. You should have received a copy of the GNU General
+ * Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * <p>
+ * ====================================================================
+ * <p>
+ * Linking this library statically or dynamically with other modules is
+ * making a combined work based on this library. Thus, the terms and
+ * conditions of the GNU General Public License cover the whole combination.
+ * <p>
+ * As a special exception, the copyright holders of this library give you permission
+ * to link this library with independent modules to produce an executable, regardless
+ * of the license terms of these independent modules, and to copy and distribute
+ * the resulting executable under terms of your choice, provided that you also meet,
+ * for each linked independent module, the terms and conditions of the license of
+ * that module. An independent module is a module which is not derived from or
+ * based on this library. If you modify this library, you may extend this exception
+ * to your version of the library, but you are not obligated to do so. If you do not
+ * wish to do so, delete this exception statement from your version.
  */
 package org.geosdi.geoplatform.connector.wfs;
 
-import java.util.Arrays;
-import javax.xml.namespace.QName;
 import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequest;
 import org.geosdi.geoplatform.connector.server.request.WFSTransactionRequest;
 import org.geosdi.geoplatform.connector.wfs.response.AttributeDTO;
@@ -47,10 +44,11 @@ import org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType;
 import org.geosdi.geoplatform.xml.wfs.v110.TransactionResponseType;
 import org.junit.Test;
 
+import javax.xml.namespace.QName;
+import java.util.Arrays;
+
 /**
- *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -157,67 +155,47 @@ public class WFSTransactionUpdateTest extends WFSTestConfigurator {
 
     @Test
     public void sfRoads() throws Exception {
-        WFSTransactionRequest<TransactionResponseType> request =
-                super.serverConnector.createTransactionRequest();
-
+        WFSTransactionRequest<TransactionResponseType> request = super.serverConnector.createTransactionRequest();
         request.setOperation(TransactionOperation.UPDATE);
         request.setTypeName(sfRoads);
-
         request.setFID("roads.23");
 
         GeometryAttributeDTO geometry = new GeometryAttributeDTO();
         geometry.setName("the_geom");
         geometry.setSrid(new Integer(4326));
-
-        geometry.setValue(
-                "MULTILINESTRING((-103.89135254479997 44.62794736744623,-103.89096632362241 44.627735453174864,-103.89062170872486 44.62730973343466,-103.89002953848615 44.625163198149565,-103.89024101107378 44.62483551115963,-103.89114993132819 44.62388221415969,-103.89139774483179 44.623670144891136))");
-
+        geometry.setValue("MULTILINESTRING((-103.89135254479997 44.62794736744623,-103.89096632362241 44.627735453174864,-103.89062170872486 44.62730973343466,-103.89002953848615 44.625163198149565,-103.89024101107378 44.62483551115963,-103.89114993132819 44.62388221415969,-103.89139774483179 44.623670144891136))");
         request.setAttributes(Arrays.asList(geometry));
 
-        logger.info("\n\nHERE THE REQUEST SF_ROADS ########################## "
-                + "\n {}", request.showRequestAsString());
+        logger.info("HERE THE REQUEST SF_ROADS ########################## \n{}\n", request.showRequestAsString());
 
-        WFSGetFeatureRequest<FeatureCollectionType> requestGet =
-                super.serverConnector.createGetFeatureRequest();
-
+        WFSGetFeatureRequest<FeatureCollectionType> requestGet = super.serverConnector.createGetFeatureRequest();
         requestGet.setResultType(ResultTypeType.RESULTS.value());
         requestGet.setTypeName(sfRoads);
-
         requestGet.setFeatureIDs(Arrays.asList("roads.23"));
-        
-        logger.info("\n\nHERE THE REQUEST GET_FEATURE SF_ROADS ########################## "
-                + "\n {}", requestGet.showRequestAsString());
 
-        logger.info("\n\n\nRESPONSE GET FEATURE SF_ROADS "
-                + "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}",
-                requestGet.getResponseAsString());
-
+        logger.info("HERE THE REQUEST GET_FEATURE SF_ROADS ########################## \n{}\n",
+                requestGet.showRequestAsString());
+        logger.info("RESPONSE GET FEATURE SF_ROADS @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ \n{}\n",
+                requestGet.formatResponseAsString(2));
     }
 
-//    @Test
-//    public void testFiresat() throws Exception {
-//        WFSTransactionRequest<TransactionResponseType> request =
-//                super.serverConnector.createTransactionRequest();
-//
-//        request.setOperation(TransactionOperation.UPDATE);
-//
-//        QName name = new QName(FIRESAT.getLocalPart());
-//        request.setTypeName(name);
-//
-//        request.setFID("firesat.10234");
-//
-//        AttributeDTO att = new AttributeDTO();
-//        att.setName("AREA");
-//        
-//        att.setValue("33");
-//        request.setAttributes(Arrays.asList(att));
-//
-//        // We must avoid transactions on the server,
-//        // but show only the requests generated
-//
-//        logger.info("HERE THE REQUEST ########################## \n {}",
-//                request.showRequestAsString());
-//        
+    @Test
+    public void testFiresat() throws Exception {
+        WFSTransactionRequest<TransactionResponseType> request = super.serverConnector.createTransactionRequest();
+        request.setOperation(TransactionOperation.UPDATE);
+        QName name = new QName(FIRESAT.getLocalPart());
+        request.setTypeName(name);
+        request.setFID("firesat.10234");
+        AttributeDTO att = new AttributeDTO();
+        att.setName("AREA");
+        att.setValue("33");
+        request.setAttributes(Arrays.asList(att));
+
+        // We must avoid transactions on the server,
+        // but show only the requests generated
+
+        logger.info("HERE THE REQUEST ########################## \n{}\n", request.showRequestAsString());
+
 //        TransactionResponseType response = request.getResponse();
 //        logger.info("\n*** {}", response.getTransactionResults());
 //
@@ -226,5 +204,5 @@ public class WFSTransactionUpdateTest extends WFSTestConfigurator {
 //        Assert.assertEquals(0, transactionSummary.getTotalInserted().intValue());
 //        Assert.assertEquals(1, transactionSummary.getTotalUpdated().intValue());
 //        Assert.assertEquals("1.1.0", response.getVersion());
-//    }
+    }
 }

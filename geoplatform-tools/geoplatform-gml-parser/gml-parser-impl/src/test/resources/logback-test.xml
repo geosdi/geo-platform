@@ -15,7 +15,7 @@
     </root>
 
     <logger name="org.geosdi.geoplatform.gml" level="info"/>
-    <logger name="org.geosdi.geoplatform.gml.impl.v311.gml.comparison"
-            level="info"/>
+    <logger name="org.geosdi.geoplatform.gml.impl.v311.gml.comparison" level="info"/>
+    <logger name="org.geosdi.geoplatform.gml.impl.v311.gml.theories.GMLTheoriesSextanteParserTest" level="debug"/>
 
 </configuration>

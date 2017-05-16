@@ -67,14 +67,14 @@ public class GMLTheoriesSextanteParserTest extends AbstractGMLParserTest {
         return new String[]{
                 "MultiCurve.xml", "Point.xml", "GeometryCollection.xml", "LineString.xml",
                 "LinearRing.xml", "MultiLineString.xml", "MultiPoint.xml", "MultiPolygon.xml",
-                "Polygon.xml", "Polygon_1.xml", "MultiSurface.xml", "MultiLineString_1.xml"
+                "Polygon.xml", "Polygon_1.xml", "MultiSurface.xml", "MultiLineString_srsDimension3.xml"
         };
     }
 
     @Theory
     public void testGMLGeometry(String file) throws Exception {
         Geometry geometry = jaxbContext.acquireUnmarshaller().unmarshal(new File(dirFiles.concat(file)));
-        logger.info("############### JTS GEOMETRY : {} \n\n {} - File : {} \n", geometry.getClass().getSimpleName(),
+        logger.debug("############### JTS GEOMETRY : {} \n\n {} - File : {} \n", geometry.getClass().getSimpleName(),
                 WKT_WRITER.writeFormatted(geometry), file);
     }
 }

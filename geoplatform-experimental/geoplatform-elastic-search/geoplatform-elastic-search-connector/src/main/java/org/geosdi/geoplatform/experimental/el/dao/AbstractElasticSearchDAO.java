@@ -59,6 +59,7 @@ import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 import static java.lang.Boolean.TRUE;
+import static org.elasticsearch.action.DocWriteResponse.Result.DELETED;
 
 /**
  * @param <D>
@@ -80,7 +81,7 @@ public abstract class AbstractElasticSearchDAO<D extends Document> extends Pagea
             document.setId(response.getId());
             update(document);
         }
-        logger.debug("##############{} Created : {}\n\n", this.mapper.getDocumentClassName(), response.isCreated());
+        logger.debug("##############{} Created : {}\n\n", this.mapper.getDocumentClassName(), response.getResult());
         return document;
     }
 
@@ -116,7 +117,6 @@ public abstract class AbstractElasticSearchDAO<D extends Document> extends Pagea
         Preconditions.checkArgument((ids != null) && (Iterables.size(ids) > 0));
         MultiGetResponse multiGetResponses = this.elastichSearchClient.prepareMultiGet()
                 .setRealtime(TRUE)
-                .setIgnoreErrorsOnGeneratedFields(TRUE)
                 .add(getIndexName(), getIndexType(), ids).get();
 
         return Arrays.stream(multiGetResponses.getResponses()).filter(response -> !response.isFailed())
@@ -163,7 +163,7 @@ public abstract class AbstractElasticSearchDAO<D extends Document> extends Pagea
         Preconditions.checkArgument(((id != null) && !(id.isEmpty())), "The ID must not be null or an Empty String");
         DeleteResponse response = elastichSearchClient.prepareDelete(getIndexName(), getIndexType(), id).execute()
                 .actionGet();
-        if (response.isFound()) {
+        if (response.getResult() == DELETED) {
             logger.debug("#################Document with ID : {}, " + "was deleted.", id);
         } else {
             logger.debug("#################Document with ID : {}, " + "was not found in ElasticSearch.");

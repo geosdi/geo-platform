@@ -87,7 +87,7 @@ class GPSingleDeleteHandler extends GPAbstractDeleteHandler<ElasticSearchDAO> {
         Preconditions.checkNotNull(searchDAO, "Parameter SearchDAO must not be null.");
         SearchRequestBuilder builder = page.buildPage(searchDAO.client()
                 .prepareSearch(searchDAO.getIndexName()).setTypes(searchDAO.getIndexType()))
-                .setFrom(page.getFrom()).setSize(page.getSize()).setNoFields();
+                .setFrom(page.getFrom()).setSize(page.getSize()).setFetchSource(Boolean.FALSE);
         logger.trace("#########################{} ----------> internalDelete#Builder : \n{}\n",
                 this, builder.toString());
         SearchResponse searchResponse = builder.execute().actionGet();

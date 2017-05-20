@@ -37,12 +37,13 @@ package org.geosdi.geoplatform.experimental.el.search.geoshape;
 
 import com.google.common.base.Preconditions;
 import jdk.nashorn.internal.ir.annotations.Immutable;
-import org.elasticsearch.common.geo.ShapeRelation;
 import org.elasticsearch.common.geo.builders.ShapeBuilder;
 import org.elasticsearch.index.query.GeoShapeQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.geosdi.geoplatform.experimental.el.search.bool.IBooleanSearch;
+
+import java.io.IOException;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -106,13 +107,17 @@ public interface IGPGeoShapeQuerySearch extends IBooleanSearch {
          */
         @Override
         public QueryBuilder buildQuery() {
-            return this.buildGeoShapeQueryBuilder();
+            try {
+                return this.buildGeoShapeQueryBuilder();
+            } catch (Exception ex) {
+                throw new IllegalStateException(ex);
+            }
         }
 
         /**
          * @return {@link GeoShapeQueryBuilder}
          */
-        protected final GeoShapeQueryBuilder buildGeoShapeQueryBuilder() {
+        protected final GeoShapeQueryBuilder buildGeoShapeQueryBuilder() throws IOException {
             switch (this.shapeRelation) {
                 case INTERSECTS:
                     return QueryBuilders.geoIntersectionQuery(this.field, this.shapeBuilder);
@@ -121,7 +126,7 @@ public interface IGPGeoShapeQuerySearch extends IBooleanSearch {
                 case WITHIN:
                     return QueryBuilders.geoWithinQuery(this.field, this.shapeBuilder);
                 case CONTAINS:
-                    return QueryBuilders.geoShapeQuery(this.field, getShapeBuilder(), ShapeRelation.CONTAINS);
+                    return QueryBuilders.geoShapeQuery(this.field, getShapeBuilder());
             }
             return null;
         }

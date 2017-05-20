@@ -86,7 +86,7 @@ class GPElasticSearchDeleteTask implements Callable<BulkResponse> {
         logger.debug("########################Execution of {}\n", this);
         SearchRequestBuilder builder = page.buildPage(searchDAO.client()
                 .prepareSearch(searchDAO.getIndexName()).setTypes(searchDAO.getIndexType()))
-                .setFrom(this.start).setSize(PAGE_SIZE_LIMIT).setNoFields();
+                .setFrom(this.start).setSize(PAGE_SIZE_LIMIT).setFetchSource(Boolean.FALSE);
         logger.trace("#########################{} ----------> call#Builder : \n{}\n",
                 this, builder.toString());
         SearchResponse searchResponse = builder.execute().actionGet();

@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.experimental.el.search.bool;
 
 import net.jcip.annotations.Immutable;
-import org.elasticsearch.index.query.MatchQueryBuilder;
+import org.elasticsearch.index.query.Operator;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 
@@ -52,7 +52,7 @@ public class BooleanMultiMatchSearch extends IBooleanSearch.AbstractBooleanSearc
     private final String[] listaField;
 
     public BooleanMultiMatchSearch(Object theValue, BooleanQueryType theType,
-            MatchQueryBuilder.Operator theOperator, String[] listaField) {
+            Operator theOperator, String[] listaField) {
         super(theValue, theType, theOperator);
         this.listaField = listaField;
     }

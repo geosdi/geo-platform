@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.experimental.el.search.phrase;
 
 import jdk.nashorn.internal.ir.annotations.Immutable;
-import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 
@@ -56,6 +55,6 @@ public class GPPhrasePrefixSearch extends GPPhraseSearch {
      */
     @Override
     public QueryBuilder buildQuery() {
-        return QueryBuilders.matchQuery(field, value).type(MatchQueryBuilder.Type.PHRASE_PREFIX);
+        return QueryBuilders.matchPhrasePrefixQuery(field, value);
     }
 }

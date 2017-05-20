@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.experimental.el.search.bool;
 
 import com.google.common.base.Preconditions;
-import org.elasticsearch.index.query.MatchQueryBuilder;
+import org.elasticsearch.index.query.Operator;
 import org.geosdi.geoplatform.experimental.el.search.IGPQuerySearch;
 
 /**
@@ -71,7 +71,7 @@ public interface IBooleanSearch extends IGPQuerySearch {
         protected Object value;
         protected String field;
         protected final BooleanQueryType type;
-        protected MatchQueryBuilder.Operator operator;
+        protected Operator operator;
 
         public AbstractBooleanSearch(String theField, BooleanQueryType theType) {
             Preconditions.checkArgument(((theField != null) && !(theField.isEmpty())),
@@ -92,7 +92,7 @@ public interface IBooleanSearch extends IGPQuerySearch {
         }
 
         public AbstractBooleanSearch(Object theValue, BooleanQueryType theType,
-                MatchQueryBuilder.Operator theOperator) {
+               Operator theOperator) {
             Preconditions.checkArgument(((theValue != null)), "The Parameter Value must not be null.");
             Preconditions.checkArgument((theType != null), "The Parameter Type must not be null.");
             Preconditions.checkArgument((theOperator != null), "The Parameter Operator must not be null.");
@@ -102,7 +102,7 @@ public interface IBooleanSearch extends IGPQuerySearch {
         }
 
         public AbstractBooleanSearch(Object theValue, String theField, BooleanQueryType theType,
-                MatchQueryBuilder.Operator theOperator) {
+                Operator theOperator) {
             Preconditions.checkArgument(((theValue != null)), "The Parameter Value must not be null.");
             Preconditions.checkArgument((theType != null), "The Parameter Type must not be null.");
             Preconditions.checkArgument((theOperator != null), "The Parameter Operator must not be null.");

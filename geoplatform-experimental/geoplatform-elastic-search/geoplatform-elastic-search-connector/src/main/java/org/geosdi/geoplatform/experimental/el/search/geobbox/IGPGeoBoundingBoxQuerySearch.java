@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.experimental.el.search.geobbox;
 import com.google.common.base.Preconditions;
 import com.vividsolutions.jts.geom.Envelope;
 import net.jcip.annotations.Immutable;
+import org.elasticsearch.common.geo.GeoPoint;
 import org.elasticsearch.index.query.GeoBoundingBoxQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
@@ -89,10 +90,8 @@ public interface IGPGeoBoundingBoxQuerySearch extends IBooleanSearch {
          */
         protected final GeoBoundingBoxQueryBuilder buildGeoBoundingBoxQueryBuilder() {
             return QueryBuilders.geoBoundingBoxQuery(this.field)
-                    .topLeft(this.envelope.getMaxY(), this.envelope.getMinX())
-                    .topRight(this.envelope.getMaxY(), this.envelope.getMaxX())
-                    .bottomLeft(this.envelope.getMinY(), this.envelope.getMinX())
-                    .bottomRight(this.envelope.getMinY(), this.envelope.getMaxX());
+                    .setCorners(new GeoPoint(this.envelope.getMaxY(), this.envelope.getMinX()),
+                            new GeoPoint(this.envelope.getMinY(), this.envelope.getMaxX()));
         }
     }
 }

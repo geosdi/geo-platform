@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.experimental.el.search.bool;
 
 import net.jcip.annotations.Immutable;
-import org.elasticsearch.index.query.MatchQueryBuilder;
+import org.elasticsearch.index.query.Operator;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 
@@ -48,7 +48,7 @@ import org.elasticsearch.index.query.QueryBuilders;
 public class BooleanExactSearch extends IBooleanSearch.AbstractBooleanSearch {
 
     public BooleanExactSearch(String theField, Object theValue, BooleanQueryType theType,
-            MatchQueryBuilder.Operator theOperator) {
+            Operator theOperator) {
         super(theValue, theField, theType, theOperator);
     }
 

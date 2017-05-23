@@ -35,39 +35,26 @@
  */
 package org.geosdi.geoplatform.experimental.mongodb.template;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
-import javax.annotation.Resource;
 import org.geosdi.geoplatform.experimental.mongodb.loader.GPMongoConfigLoader;
 import org.geosdi.geoplatform.experimental.mongodb.model.Address;
 import org.geosdi.geoplatform.experimental.mongodb.repositories.AddressRepository;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.geo.Box;
-import org.springframework.data.geo.Circle;
-import org.springframework.data.geo.Distance;
-import org.springframework.data.geo.Metrics;
-import org.springframework.data.geo.Point;
+import org.springframework.data.geo.*;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
+
+import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
+import java.util.concurrent.*;
 
 /**
  *
@@ -174,7 +161,7 @@ public class GPMongoConfigTest {
         }
 
         logger.info("\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ insertMassiveAddressTest "
-                + ": Executed {} threads in {} Minutes \n", 100,
+                + ": Executed {} Inserts in {} Minutes \n", 4000,
                 TimeUnit.MILLISECONDS.toMinutes(time));
     }
 
@@ -188,8 +175,8 @@ public class GPMongoConfigTest {
         @Override
         public Long call() throws Exception {
             long start = System.currentTimeMillis();
-            List<Address> addresses = new ArrayList<Address>(10000);
-            for (int i = 0; i < 10000; i++) {
+            List<Address> addresses = new ArrayList<Address>(40);
+            for (int i = 0; i < 40; i++) {
                 Address a = new Address("Address" + UUID.randomUUID(),
                         Math.random(), Math.random());
                 addresses.add(a);

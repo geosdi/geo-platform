@@ -60,6 +60,7 @@ import java.util.stream.StreamSupport;
 
 import static java.lang.Boolean.TRUE;
 import static org.elasticsearch.action.DocWriteResponse.Result.DELETED;
+import static org.elasticsearch.common.xcontent.XContentType.JSON;
 
 /**
  * @param <D>
@@ -74,10 +75,10 @@ public abstract class AbstractElasticSearchDAO<D extends Document> extends Pagea
         IndexResponse response;
         if (document.isIdSetted()) {
             response = this.elastichSearchClient.prepareIndex(getIndexName(), getIndexType(), document.getId())
-                    .setSource(this.mapper.writeAsString(document)).get();
+                    .setSource(this.mapper.writeAsString(document), JSON).get();
         } else {
             response = this.elastichSearchClient.prepareIndex(getIndexName(), getIndexType())
-                    .setSource(this.mapper.writeAsString(document)).get();
+                    .setSource(this.mapper.writeAsString(document), JSON).get();
             document.setId(response.getId());
             update(document);
         }
@@ -94,7 +95,7 @@ public abstract class AbstractElasticSearchDAO<D extends Document> extends Pagea
         logger.debug("################Try to Update : {}\n\n", document);
 
         this.elastichSearchClient.prepareUpdate(getIndexName(), getIndexType(), document.getId())
-                .setDoc(this.mapper.writeAsString(document)).get();
+                .setDoc(this.mapper.writeAsString(document), JSON).get();
     }
 
     /**

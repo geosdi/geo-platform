@@ -74,7 +74,6 @@ public final class GPRestProviderFactory {
                         CXFJacksonProvider.class);
                 return new CXFJacksonProvider(new GPJacksonSupport().registerModule(new JodaModule())
                         .configure(WRITE_DATES_AS_TIMESTAMPS_DISABLE)
-                        .configure(GPJsonIncludeFeature.NON_NULL)
                         .configure(GPJsonIncludeFeature.NON_NULL));
 
             case JACKSON_JODA_TIME_WITHOUT_ROOT:

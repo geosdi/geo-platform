@@ -61,6 +61,7 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends GPBas
     @Override
     public <P extends Page> IPageResult<D> find(P page) throws Exception {
         Preconditions.checkArgument((page != null), "Page must not be null.");
+        super.refreshIndex();
         SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient
                 .prepareSearch(getIndexName()).setTypes(getIndexType()));
         logger.trace("#########################Builder : {}\n\n", builder.toString());
@@ -86,6 +87,7 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends GPBas
     public <P extends Page> IPageResult<D> find(P page, String[] includeFields, String[] excludeFields)
             throws Exception {
         Preconditions.checkArgument((page != null), "Page must not be null.");
+        super.refreshIndex();
         SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient
                 .prepareSearch(getIndexName()).setTypes(getIndexType()));
         builder.setFetchSource(includeFields, excludeFields);
@@ -112,6 +114,7 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends GPBas
     public <P extends Page> IPageResult<D> find(P page, String includeField, String excludeField)
             throws Exception {
         Preconditions.checkArgument((page != null), "Page must not be null.");
+        super.refreshIndex();
         SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient
                 .prepareSearch(getIndexName()).setTypes(getIndexType()));
         builder.setFetchSource(includeField, excludeField);
@@ -138,6 +141,7 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends GPBas
             throws Exception {
         Preconditions.checkArgument((page != null), "Page must not be null.");
         Preconditions.checkArgument((aggregationBuilder != null), "AggregationBuilder must not be null.");
+        super.refreshIndex();
         SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient
                 .prepareSearch(getIndexName()).setTypes(getIndexType()))
                 .addAggregation(aggregationBuilder);
@@ -188,6 +192,7 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends GPBas
     @Override
     public <P extends Page> Long count(P page) throws Exception {
         Preconditions.checkArgument((page != null), "Page must not be null.");
+        super.refreshIndex();
         SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient
                 .prepareSearch(getIndexName()).setTypes(getIndexType()));
         logger.trace("#########################Builder : {}\n\n", builder.toString());

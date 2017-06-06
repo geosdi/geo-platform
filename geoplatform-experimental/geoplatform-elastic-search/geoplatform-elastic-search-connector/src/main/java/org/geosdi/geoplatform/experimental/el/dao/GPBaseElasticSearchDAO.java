@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.experimental.el.dao;
 
 import com.google.common.base.Preconditions;
+import org.elasticsearch.action.admin.indices.refresh.RefreshResponse;
 import org.elasticsearch.client.Client;
 import org.geosdi.geoplatform.experimental.el.api.mapper.GPBaseMapper;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
@@ -205,4 +206,12 @@ abstract class GPBaseElasticSearchDAO<D extends Document> implements GPElasticSe
     public final String getJsonRootName() throws Exception {
         return this.mapper.getJsonRootName();
     }
+
+    protected RefreshResponse refreshIndex(){
+        RefreshResponse refreshResponse = this.elastichSearchClient.admin().indices().prepareRefresh(getIndexName()).get();
+        if(refreshResponse.getFailedShards() > 0)
+            throw new IllegalStateException("Problem in Refresh : " + refreshResponse.getShardFailures());
+        return refreshResponse;
+    }
+
 }

@@ -77,7 +77,7 @@ public class GPFeatureInfoWidget extends GeoPlatformWindow implements
 
     @Override
     public void initSize() {
-        super.setHeight(200);
+        super.setHeight(600);
         super.setWidth(400);
     }
 
@@ -88,6 +88,7 @@ public class GPFeatureInfoWidget extends GeoPlatformWindow implements
         super.setResizable(true);
         super.setPlain(true);
         super.setModal(true);
+        super.setPosition(240,60);
         super.setHeadingHtml(FeatureInfoModuleConstants.INSTANCE.GPFeatureInfoWidget_headingText());
     }
 

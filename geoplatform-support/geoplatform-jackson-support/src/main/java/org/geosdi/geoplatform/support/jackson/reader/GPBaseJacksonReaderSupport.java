@@ -108,4 +108,12 @@ public class GPBaseJacksonReaderSupport<T extends Object> implements GPJacksonRe
                 .filter(d -> d != null)
                 .collect(Collectors.toList());
     }
+
+    /**
+     * @return {@link Class<T>}
+     */
+    @Override
+    public Class<T> getEntityClass() {
+        return this.entityClass;
+    }
 }

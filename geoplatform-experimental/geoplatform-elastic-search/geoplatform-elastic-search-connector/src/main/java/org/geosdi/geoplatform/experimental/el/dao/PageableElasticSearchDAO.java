@@ -78,6 +78,32 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends GPBas
 
     /**
      * @param page
+     * @return {@link IPageResult<V>}
+     * @throws Exception
+     */
+    @Override
+    public  <P extends Page, V extends D> IPageResult<V> find(P page, Class<V> subType) throws Exception {
+        Preconditions.checkArgument((page != null), "Page must not be null.");
+        super.refreshIndex();
+        SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient
+                .prepareSearch(getIndexName()).setTypes(getIndexType()));
+        logger.trace("#########################Builder : {}\n\n", builder.toString());
+        SearchResponse searchResponse = builder.get();
+        if (searchResponse.status() != RestStatus.OK) {
+            throw new IllegalStateException("Problem in Search : " + searchResponse.status());
+        }
+        Long total = searchResponse.getHits().getTotalHits();
+        logger.debug("###################TOTAL HITS FOUND : {} .\n\n", total);
+        return new PageResult<V>(total, Stream.of(searchResponse.getHits().getHits())
+                .map(searchHit -> this.readDocument(searchHit))
+                .filter(s -> s != null)
+                .filter(subType::isInstance)
+                .map(s -> (V) s)
+                .collect(Collectors.toList()));
+    }
+
+    /**
+     * @param page
      * @param includeFields
      * @param excludeFields
      * @return {@link IPageResult <D>}

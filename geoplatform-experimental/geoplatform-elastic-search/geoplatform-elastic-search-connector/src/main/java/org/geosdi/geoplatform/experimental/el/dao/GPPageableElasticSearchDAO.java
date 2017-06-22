@@ -63,10 +63,20 @@ public interface GPPageableElasticSearchDAO<D extends Document> {
     /**
      * @param <P>
      * @param page
-     * @return {@link IPageResult <D>}
+     * @return {@link IPageResult<D>}
      * @throws Exception
      */
     <P extends Page> IPageResult<D> find(P page) throws Exception;
+
+    /**
+     * @param page
+     * @param subType
+     * @param <P>
+     * @param <V>
+     * @return {@link IPageResult<V>}
+     * @throws Exception
+     */
+    <P extends Page, V extends D> IPageResult<V> find(P page, Class<V> subType) throws Exception;
 
     /**
      * @param page

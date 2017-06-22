@@ -58,6 +58,11 @@ public interface GPJacksonReaderSupport<T extends Object> {
     Collection<T> readFromDirectory(Path direrctory) throws Exception;
 
     /**
+     * @return {@link Class<T>}
+     */
+    Class<T> getEntityClass();
+
+    /**
      * @param thePath
      * @return {@link T}
      */

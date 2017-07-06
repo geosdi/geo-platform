@@ -137,7 +137,7 @@ public class GPGeocodingServiceTest extends GPBaseConfigTest {
         GeocodingResult[] results = gpGeocodingService.newRequest().address(
                 "Marsicovetere").region("it").await();
         assertNotNull(results);
-        assertEquals("85050 Marsicovetere PZ, Italy",
+        assertEquals("85050 Marsicovetere, Province of Potenza, Italy",
                 results[0].formattedAddress);
     }
 
@@ -157,7 +157,7 @@ public class GPGeocodingServiceTest extends GPBaseConfigTest {
                 .components(ComponentFilter.country("it"), ComponentFilter
                         .postalCode("85050")).await();
         assertNotNull(results);
-        assertEquals("85050 Marsicovetere PZ, Italy",
+        assertEquals("85050 Marsicovetere, Province of Potenza, Italy",
                 results[0].formattedAddress);
     }
 
@@ -167,7 +167,7 @@ public class GPGeocodingServiceTest extends GPBaseConfigTest {
                 "Marsicovetere").bounds(new LatLng(40.373706, 15.821933),
                 new LatLng(40.378703, 15.830559)).await();
         Assert.assertNotNull(results);
-        Assert.assertEquals("85050 Marsicovetere PZ, Italy",
+        Assert.assertEquals("85050 Marsicovetere, Province of Potenza, Italy",
                 results[0].formattedAddress);
     }
 

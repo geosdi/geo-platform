@@ -176,10 +176,10 @@
     </dependencyManagement>
 
     <properties>
-        <spring-version>4.3.9.RELEASE</spring-version>
+        <spring-version>4.3.10.RELEASE</spring-version>
         <spring-support>2.0.8</spring-support>
         <spring-security-version>4.2.3.RELEASE</spring-security-version>
-        <spring-batch.version>3.0.7.RELEASE</spring-batch.version>
+        <spring-batch.version>3.0.8.RELEASE</spring-batch.version>
     </properties>
 
 </project>

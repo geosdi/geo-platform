@@ -1522,7 +1522,7 @@
         <jasypt-version>1.9.2</jasypt-version>
         
         <guava-gwt-version>19.0</guava-gwt-version>
-        <guava-version>21.0</guava-version>
+        <guava-version>23.0</guava-version>
         <guice-version>3.0</guice-version>
         
         <ehcache-version>2.6.3</ehcache-version>

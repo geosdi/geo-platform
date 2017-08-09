@@ -102,6 +102,8 @@ public class GPUserValidatorMultiThreadTest {
         public void run() {
             GPUser gpUser = createGPUser();
             gpUser.setUserName("");
+            gpUser.setPassword(null);
+            gpUser.setRegistrationDate(null);
             if (i % 2 == 0) {
                 logger.info("########################IT_MESSAGE : {}\n", this.gpUserValidator
                         .validate(gpUser, Locale.ITALIAN));

@@ -5,7 +5,7 @@ target/
 .settings
 .classpath
 .project
-.idea
+*.idea
 .class
 
 # ignore demo artifact folders

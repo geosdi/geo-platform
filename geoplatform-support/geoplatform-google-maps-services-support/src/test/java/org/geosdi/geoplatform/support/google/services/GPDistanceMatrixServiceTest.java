@@ -157,13 +157,13 @@ public class GPDistanceMatrixServiceTest extends GPBaseConfigTest {
         Assert.assertTrue((results != null) && (results.length > 0));
         logger.info("###########################Location : {} - Geometry : {} - PlaceID : {}\n",
                 results[0].formattedAddress, results[0].geometry, results[0].placeId);
-        GeocodingResult[] resultsParaguai = gpGeocodingService.newRequest().address("Roma").await();
-        Assert.assertTrue((resultsParaguai != null) && (resultsParaguai.length > 0));
+        GeocodingResult[] resultsRoma = gpGeocodingService.newRequest().address("Roma").region("it").await();
+        Assert.assertTrue((resultsRoma != null) && (resultsRoma.length > 0));
         logger.info("###########################Location : {} - Geometry : {} - PlaceID : {}\n",
-                resultsParaguai[0].formattedAddress, resultsParaguai[0].geometry, resultsParaguai[0].placeId);
+                resultsRoma[0].formattedAddress, resultsRoma[0].geometry, resultsRoma[0].placeId);
         logger.info("################################DISTANCE : {}\n", this.gpDistanceMatrixService
                 .distance(results[0].geometry.location.lat, results[0].geometry.location.lng,
-                        resultsParaguai[0].geometry.location.lat, resultsParaguai[0].geometry.location.lng,
+                        resultsRoma[0].geometry.location.lat, resultsRoma[0].geometry.location.lng,
                         K).doubleValue());
     }
 }

@@ -80,7 +80,7 @@ public class GPGeocodingServiceTest extends GPBaseConfigTest {
         GeocodingResult[] errorResults = gpGeocodingService.newRequest().address("Romaaaaa").await();
         Assert.assertTrue((errorResults.length == 0));
 
-        GeocodingResult[] results = gpGeocodingService.newRequest().address("Roma").await();
+        GeocodingResult[] results = gpGeocodingService.newRequest().address("Roma").region("it").await();
         Assert.assertTrue((results != null) && (results.length > 0));
         logger.info("###########################Location : {} - Geometry : {}\n",
                 results[0].formattedAddress, results[0].geometry);
@@ -146,7 +146,7 @@ public class GPGeocodingServiceTest extends GPBaseConfigTest {
         GeocodingResult[] results = gpGeocodingService.newRequest()
                 .address("1600 Amphitheatre Parkway, Mountain View, CA").await();
         assertNotNull(results);
-        assertEquals("Google Bldg 41, 1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA",
+        assertEquals("Google Bldg 42, 1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA",
                 results[0].formattedAddress);
     }
 

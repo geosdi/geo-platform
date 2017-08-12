@@ -18,7 +18,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring-data-mongodb-version>1.10.4.RELEASE</spring-data-mongodb-version>
+        <spring-data-mongodb-version>1.10.6.RELEASE</spring-data-mongodb-version>
     </properties>
 
     <dependencyManagement>
@@ -98,7 +98,7 @@
         <!-- ===================== HIBERNATE VALIDATOR ================= -->
         <!-- =========================================================== -->
         <dependency>
-            <groupId>org.hibernate</groupId>
+            <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
         </dependency>
 

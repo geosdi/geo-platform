@@ -133,7 +133,7 @@ public class GPUserValidatorTest {
     @Test
     public void registrationDateIsIncorrect() {
         GPUser gpUser = createGPUser();
-        gpUser.setRegistrationDate(LocalDate.of(2017, 9, 2));
+        gpUser.setRegistrationDate(LocalDate.of(2021, 9, 2));
 
         String enMessage = gpUserValidator.validate(gpUser, null);
         Assert.assertNotNull(enMessage);

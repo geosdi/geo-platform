@@ -101,7 +101,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <jackson-version>2.9.0</jackson-version>
+        <jackson-version>2.9.1</jackson-version>
     </properties>
     
 </project>

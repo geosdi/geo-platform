@@ -42,6 +42,7 @@ import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
 import org.geosdi.geoplatform.support.wfs.feature.reader.FeatureSchemaReader;
 import org.geosdi.geoplatform.support.wfs.feature.reader.GPFeatureSchemaReader;
 import org.geosdi.geoplatform.xml.xsd.v2001.Schema;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -59,7 +60,7 @@ public class WFSDescribeFeatureTest {
 
     private static final Logger logger = LoggerFactory.getLogger(WFSDescribeFeatureTest.class);
     //
-    private static final String wfsURL = "http://150.145.141.241/geoserver/wfs";
+    private static final String wfsURL = "http://150.145.141.92/geoserver/wfs";
 
     static {
         try {
@@ -108,6 +109,7 @@ public class WFSDescribeFeatureTest {
         logger.info("######################LAYER_SCHEMA_SF_ROAD_XML : \n{}\n", writer);
     }
 
+    @Ignore(value = "Geoserver is Down")
     @Test
     public void describeSiteTrTest() throws Exception {
         WFSDescribeFeatureTypeRequest<Schema> request = WFSConnectorBuilder

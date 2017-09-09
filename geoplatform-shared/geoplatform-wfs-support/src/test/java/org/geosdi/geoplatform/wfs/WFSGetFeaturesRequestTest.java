@@ -192,6 +192,7 @@ public class WFSGetFeaturesRequestTest {
         logger.debug("\n\t@@@@@@@@@@@@@@@@@@@@@@@@@@@FEATURE_COLLECTION_DTO : {}", featureCollection);
     }
 
+    @Ignore(value = "Geoserver is Down")
     @Test
     public void siteTrTest() throws Exception {
         String wfsURL = "http://150.145.141.241/geoserver/wfs";

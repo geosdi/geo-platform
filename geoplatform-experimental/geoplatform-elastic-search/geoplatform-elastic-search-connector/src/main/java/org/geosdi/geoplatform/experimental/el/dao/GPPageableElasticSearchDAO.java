@@ -34,6 +34,7 @@
  */
 package org.geosdi.geoplatform.experimental.el.dao;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import net.jcip.annotations.Immutable;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.search.SearchRequestBuilder;
@@ -44,6 +45,8 @@ import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.aggregations.AbstractAggregationBuilder;
 import org.elasticsearch.search.sort.SortOrder;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
+import org.geosdi.geoplatform.experimental.el.dao.store.IPageStore;
+import org.geosdi.geoplatform.experimental.el.dao.store.PageStore;
 import org.geosdi.geoplatform.experimental.el.search.bool.IBooleanSearch;
 import org.geosdi.geoplatform.experimental.el.search.date.IGPDateQuerySearch;
 import org.geosdi.geoplatform.experimental.el.search.delete.DeleteByPage;
@@ -151,6 +154,13 @@ public interface GPPageableElasticSearchDAO<D extends Document> {
          */
         List<D> getResults();
 
+        /**
+         * @return {@link IPageStore}
+         */
+        @JsonIgnore
+        default IPageStore toStore() {
+            return new PageStore(getTotal(), getResults());
+        }
     }
 
     /**

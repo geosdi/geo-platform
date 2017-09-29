@@ -35,15 +35,18 @@
  */
 package org.geosdi.geoplatform.ws.wfs;
 
-import java.util.List;
-import java.util.Map;
-import javax.xml.namespace.QName;
 import org.geosdi.geoplatform.connector.wfs.response.FeatureCollectionDTO;
 import org.geosdi.geoplatform.connector.wfs.response.FeatureDTO;
 import org.geosdi.geoplatform.connector.wfs.response.LayerSchemaDTO;
 import org.geosdi.geoplatform.gui.shared.bean.BBox;
 import org.junit.Assert;
 import org.junit.Test;
+
+import javax.xml.namespace.QName;
+import java.util.List;
+import java.util.Map;
+
+import static java.util.Collections.EMPTY_MAP;
 
 /**
  *
@@ -56,11 +59,11 @@ public class WFSGetFeatureWSTest extends WFSAbstractTest {
     @Test
     public void statesFeatureLayerV110() throws Exception {
         String typeName = TOPP_STATES.getLocalPart();
-        LayerSchemaDTO layerSchema = wfsService.describeFeatureType(addressDatastore, typeName);
+        LayerSchemaDTO layerSchema = wfsService.describeFeatureType(addressDatastore, typeName, EMPTY_MAP);
         logger.debug("\n\n\n@@@ {}", layerSchema);
         BBox bBox = new BBox(-75.102613, 40.212597, -72.361859, 41.512517);
 
-        FeatureCollectionDTO fc = wfsService.getFeatureByBBox(layerSchema, bBox);
+        FeatureCollectionDTO fc = wfsService.getFeatureByBBox(layerSchema, bBox, EMPTY_MAP);
 
         this.checkFeatureCollection(fc, typeName, 22, 4);
     }
@@ -70,7 +73,7 @@ public class WFSGetFeatureWSTest extends WFSAbstractTest {
         String typeName = TOPP_STATES.getLocalPart();
         BBox bBox = new BBox(-75.102613, 40.212597, -72.361859, 41.512517);
 
-        FeatureCollectionDTO fc = wfsService.getFeatureByBBoxDirect(addressDatastore, typeName, bBox);
+        FeatureCollectionDTO fc = wfsService.getFeatureByBBoxDirect(addressDatastore, typeName, bBox, EMPTY_MAP);
 
         this.checkFeatureCollection(fc, typeName, 22, 4);
     }
@@ -78,9 +81,7 @@ public class WFSGetFeatureWSTest extends WFSAbstractTest {
     @Test
     public void statesAllFeaturesV110() throws Exception {
         String typeName = TOPP_STATES.getLocalPart();
-
-        FeatureCollectionDTO fc = wfsService.getAllFeatureDirect(addressDatastore, typeName, 10);
-
+        FeatureCollectionDTO fc = wfsService.getAllFeatureDirect(addressDatastore, typeName, 10, EMPTY_MAP);
         this.checkFeatureCollection(fc, typeName, 22, 10);
     }
 

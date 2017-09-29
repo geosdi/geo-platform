@@ -35,7 +35,7 @@
 package org.geosdi.geoplatform.connector;
 
 import org.geosdi.geoplatform.connector.api.GPConnectorStore;
-import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.connector.server.GPServerConnector.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.GPWFSServerConnector;
 import org.geosdi.geoplatform.connector.server.request.WFSDescribeFeatureTypeRequest;
 import org.geosdi.geoplatform.connector.server.request.WFSGetCapabilitiesRequest;
@@ -49,8 +49,7 @@ import java.net.URL;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPWFSConnectorStore extends GPConnectorStore<GPWFSServerConnector>
-        implements WFSConnector {
+public class GPWFSConnectorStore extends GPConnectorStore<GPWFSServerConnector> implements WFSConnector {
 
     /**
      * @param serverURL
@@ -63,8 +62,7 @@ public class GPWFSConnectorStore extends GPConnectorStore<GPWFSServerConnector>
      * @param serverURL
      * @param theVersion
      */
-    public GPWFSConnectorStore(URL serverURL,
-            WFSVersion theVersion) {
+    public GPWFSConnectorStore(URL serverURL, WFSVersion theVersion) {
         this(serverURL, null, theVersion);
     }
 
@@ -73,9 +71,7 @@ public class GPWFSConnectorStore extends GPConnectorStore<GPWFSServerConnector>
      * @param security
      * @param theVersion
      */
-    public GPWFSConnectorStore(URL serverURL,
-            GPSecurityConnector security,
-            WFSVersion theVersion) {
+    public GPWFSConnectorStore(URL serverURL, GPSecurityConnector security, WFSVersion theVersion) {
         super(new GPWFSServerConnector(serverURL, security, theVersion));
     }
 
@@ -85,12 +81,9 @@ public class GPWFSConnectorStore extends GPConnectorStore<GPWFSServerConnector>
      * @param security
      * @param theVersion
      */
-    public GPWFSConnectorStore(URL serverURL,
-            GPServerConnector.GPPooledConnectorConfig pooledConnectorConfig,
-            GPSecurityConnector security,
-            WFSVersion theVersion) {
-        super(new GPWFSServerConnector(serverURL, pooledConnectorConfig,
-                security, theVersion));
+    public GPWFSConnectorStore(URL serverURL, GPPooledConnectorConfig pooledConnectorConfig,
+            GPSecurityConnector security, WFSVersion theVersion) {
+        super(new GPWFSServerConnector(serverURL, pooledConnectorConfig, security, theVersion));
     }
 
     @Override
@@ -117,5 +110,4 @@ public class GPWFSConnectorStore extends GPConnectorStore<GPWFSServerConnector>
     public <T> WFSTransactionRequest<T> createTransactionRequest() {
         return server.createTransactionRequest();
     }
-
 }

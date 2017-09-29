@@ -58,8 +58,9 @@ public class WFSTestConfigurator {
 
     static {
         try {
-            serverConnector = WFSConnectorBuilder.newConnector().withServerUrl(
-                    new URL(wfsURL)).withPooledConnectorConfig(
+            serverConnector = WFSConnectorBuilder.newConnector()
+                    .withServerUrl(new URL(wfsURL))
+                    .withPooledConnectorConfig(
                     new GPServerConnector.BasePooledConnectorConfig(150, 80)).build();
             secureServerConnector = WFSConnectorBuilder.newConnector().withServerUrl(
                     new URL(wfsSecureURL)).withPooledConnectorConfig(

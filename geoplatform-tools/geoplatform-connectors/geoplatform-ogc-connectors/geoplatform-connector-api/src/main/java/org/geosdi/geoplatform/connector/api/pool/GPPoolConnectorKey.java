@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.connector.api.pool;
 
 import net.jcip.annotations.Immutable;
-import org.geosdi.geoplatform.connector.server.GPServerConnector.GPPooledConnectorConfig;
+import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 import org.geosdi.geoplatform.support.httpclient.proxy.HttpClientProxyConfiguration;
 

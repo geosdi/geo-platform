@@ -36,7 +36,6 @@ package org.geosdi.geoplatform.wfs;
 
 import org.geosdi.geoplatform.connector.GPWFSConnectorStore;
 import org.geosdi.geoplatform.connector.WFSConnectorBuilder;
-import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.WFSDescribeFeatureTypeRequest;
 import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
 import org.geosdi.geoplatform.support.wfs.feature.reader.FeatureSchemaReader;
@@ -52,6 +51,8 @@ import java.io.StringWriter;
 import java.net.URL;
 import java.util.Arrays;
 
+import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -65,9 +66,14 @@ public class WFSDescribeFeatureTest {
     static {
         try {
             serverConnector = WFSConnectorBuilder.newConnector().withServerUrl(
-                    new URL(wfsURL)).withPooledConnectorConfig(
-                    new GPServerConnector.BasePooledConnectorConfig(150, 80)).build();
+                    new URL(wfsURL))
+                    .withPooledConnectorConfig(pooledConnectorConfigBuilder()
+                            .withMaxTotalConnections(150)
+                            .withDefaultMaxPerRoute(80)
+                            .withMaxRedirect(20)
+                            .build()).build();
         } catch (Exception ex) {
+            ex.printStackTrace();
             logger.error("#######################EXCEPTION : {}", ex.getMessage());
         }
     }

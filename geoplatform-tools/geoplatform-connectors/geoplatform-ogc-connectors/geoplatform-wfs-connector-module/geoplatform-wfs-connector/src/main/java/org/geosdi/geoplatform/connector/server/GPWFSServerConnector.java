@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.connector.server;
 
 import org.geosdi.geoplatform.connector.WFSVersion;
 import org.geosdi.geoplatform.connector.WFSVersionException;
+import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.request.WFSDescribeFeatureTypeRequest;
 import org.geosdi.geoplatform.connector.server.request.WFSGetCapabilitiesRequest;
 import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequest;
@@ -89,10 +90,8 @@ public class GPWFSServerConnector extends GPAbstractServerConnector
      * @param securityConnector
      * @param version
      */
-    public GPWFSServerConnector(String urlServer,
-            GPPooledConnectorConfig pooledConnectorConfig,
-            GPSecurityConnector securityConnector,
-            String version) {
+    public GPWFSServerConnector(String urlServer, GPPooledConnectorConfig pooledConnectorConfig,
+            GPSecurityConnector securityConnector, String version) {
         this(analyzesServerURL(urlServer), pooledConnectorConfig,
                 securityConnector, toWFSVersion(version));
     }

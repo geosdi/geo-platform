@@ -35,8 +35,8 @@
 package org.geosdi.geoplatform.connector;
 
 import org.geosdi.geoplatform.connector.api.GPConnectorStore;
-import org.geosdi.geoplatform.connector.server.GPServerConnector.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.GPWFSServerConnector;
+import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.request.WFSDescribeFeatureTypeRequest;
 import org.geosdi.geoplatform.connector.server.request.WFSGetCapabilitiesRequest;
 import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequest;
@@ -86,26 +86,45 @@ public class GPWFSConnectorStore extends GPConnectorStore<GPWFSServerConnector> 
         super(new GPWFSServerConnector(serverURL, pooledConnectorConfig, security, theVersion));
     }
 
+    /**
+     * @return {@link WFSVersion}
+     */
     @Override
     public WFSVersion getVersion() {
         return server.getVersion();
     }
 
+    /**
+     * @param <T>
+     * @return {@link WFSGetCapabilitiesRequest<T>}
+     */
     @Override
     public <T> WFSGetCapabilitiesRequest<T> createGetCapabilitiesRequest() {
         return server.createGetCapabilitiesRequest();
     }
 
+    /**
+     * @param <T>
+     * @return {@link WFSDescribeFeatureTypeRequest<T>}
+     */
     @Override
     public <T> WFSDescribeFeatureTypeRequest<T> createDescribeFeatureTypeRequest() {
         return server.createDescribeFeatureTypeRequest();
     }
 
+    /**
+     * @param <T>
+     * @return {@link WFSGetFeatureRequest<T>}
+     */
     @Override
     public <T> WFSGetFeatureRequest<T> createGetFeatureRequest() {
         return server.createGetFeatureRequest();
     }
 
+    /**
+     * @param <T>
+     * @return {@link WFSTransactionRequest<T>}
+     */
     @Override
     public <T> WFSTransactionRequest<T> createTransactionRequest() {
         return server.createTransactionRequest();

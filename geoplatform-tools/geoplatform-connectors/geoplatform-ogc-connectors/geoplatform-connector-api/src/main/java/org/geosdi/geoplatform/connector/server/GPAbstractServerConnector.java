@@ -36,11 +36,16 @@ package org.geosdi.geoplatform.connector.server;
 
 import org.apache.http.HttpHost;
 import org.apache.http.client.CredentialsProvider;
+import org.apache.http.config.RegistryBuilder;
 import org.apache.http.conn.HttpClientConnectionManager;
+import org.apache.http.conn.socket.ConnectionSocketFactory;
+import org.apache.http.conn.socket.PlainConnectionSocketFactory;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
+import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.handler.ConnectorHttpRequestRetryHandler;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 import org.geosdi.geoplatform.support.httpclient.proxy.HttpClientProxyConfiguration;
@@ -51,6 +56,8 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+
+import static org.apache.http.client.config.RequestConfig.custom;
 
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
@@ -143,6 +150,7 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
         try {
             return this.url.toURI();
         } catch (URISyntaxException ex) {
+            ex.printStackTrace();
             logger.error("URISyntaxException @@@@@@@@@@@@@@@ " + ex);
         }
         return null;
@@ -192,28 +200,23 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
         return null;
     }
 
-    private CloseableHttpClient configureProxy() {
-        logger.debug("SetUp Proxy Configuration @@@@@@@@@@@@@@@@ "
-                + proxyConfiguration);
-
+    /**
+     * @return {@link CloseableHttpClient}
+     */
+    protected CloseableHttpClient configureProxy() {
+        logger.debug("SetUp Proxy Configuration @@@@@@@@@@@@@@@@ {}\n", proxyConfiguration);
         String host = this.url.getHost();
-
-        logger.debug("\n\n HOST TO MATCH ######################### {}\n\n",
-                host);
+        logger.debug("\n\n HOST TO MATCH ######################### {}\n\n", host);
 
         if (this.proxyConfiguration.matchServerURL(host)) {
-            logger.debug("@@@@@@@@@@@ Skipping Proxy Configuration for Server : "
-                    + "{}", host);
+            logger.debug("@@@@@@@@@@@ Skipping Proxy Configuration for Server : {}\n", host);
             return createDefaultHttpClient();
         } else {
-            logger.debug("@@@@@@@@@@@@@@@ Setting UP Proxy Configuration for "
-                    + "Server : {}", host);
+            logger.debug("@@@@@@@@@@@@@@@ Setting UP Proxy Configuration for Server : {}\n", host);
             /**
              * TODO HERE THE CODE FOR PROXY AUTHENTICATION *
              */
-            HttpHost proxy = new HttpHost(proxyConfiguration.getProxyUrl(),
-                    proxyConfiguration.getProxyPort());
-
+            HttpHost proxy = new HttpHost(proxyConfiguration.getProxyUrl(), proxyConfiguration.getProxyPort());
             return HttpClients
                     .custom()
                     .setConnectionManager(createClientConnectionManager())
@@ -222,17 +225,32 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
         }
     }
 
-    private CloseableHttpClient createDefaultHttpClient() {
+    /**
+     * @return {@link CloseableHttpClient}
+     */
+    protected CloseableHttpClient createDefaultHttpClient() {
         return HttpClients
                 .custom()
                 .setConnectionManager(createClientConnectionManager())
+                .setDefaultRequestConfig(custom()
+                        .setConnectTimeout(this.pooledConnectorConfig.getConnectionTimeout())
+                        .setConnectionRequestTimeout(this.pooledConnectorConfig.getConnectionTimeout())
+                        .setSocketTimeout(this.pooledConnectorConfig.getConnectionTimeout())
+                        .setMaxRedirects(this.pooledConnectorConfig.getMaxRedirect())
+                        .build())
                 .setDefaultCredentialsProvider(credentialsProvider)
                 .setRetryHandler(new ConnectorHttpRequestRetryHandler(5))
                 .build();
     }
 
-    private HttpClientConnectionManager createClientConnectionManager() {
-        PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager();
+    /**
+     * @return {@link HttpClientConnectionManager}
+     */
+    protected HttpClientConnectionManager createClientConnectionManager() {
+        PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager(RegistryBuilder.<ConnectionSocketFactory>create()
+                .register("http", PlainConnectionSocketFactory.getSocketFactory())
+                .register("https", SSLConnectionSocketFactory.getSocketFactory())
+                .build());
         cm.setMaxTotal(this.pooledConnectorConfig.getMaxTotalConnections());
         cm.setDefaultMaxPerRoute(this.pooledConnectorConfig.getDefaultMaxPerRoute());
         return cm;
@@ -264,5 +282,4 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
                 + " {" + "Server Url = " + url
                 + ", securityConnector = " + securityConnector + '}';
     }
-
 }

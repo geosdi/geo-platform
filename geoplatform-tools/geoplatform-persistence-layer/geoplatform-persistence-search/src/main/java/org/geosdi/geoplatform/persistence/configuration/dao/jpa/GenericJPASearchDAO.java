@@ -61,18 +61,13 @@ public abstract class GenericJPASearchDAO<T extends Object> implements GPBaseSea
     //
     protected Class<T> persistentClass;
     //
+    @PersistenceContext
     protected EntityManager entityManager;
     private FullTextEntityManager ftEntityManager;
 
     public GenericJPASearchDAO(Class<T> thePersistentClass) {
         Preconditions.checkNotNull(thePersistentClass);
         this.persistentClass = thePersistentClass;
-    }
-
-    @PersistenceContext
-    public void setEm(final EntityManager theEntityManager) {
-        Preconditions.checkNotNull(theEntityManager);
-        this.entityManager = theEntityManager;
     }
 
     @Override
@@ -85,7 +80,6 @@ public abstract class GenericJPASearchDAO<T extends Object> implements GPBaseSea
     @Override
     public T persist(T entity) {
         Preconditions.checkNotNull(entity);
-
         this.entityManager.persist(entity);
         return entity;
     }

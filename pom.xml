@@ -1170,7 +1170,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-release-plugin</artifactId>
-                    <version>2.4.1</version>
+                    <version>2.5.3</version>
                     <executions>
                         <execution>
                             <id>default</id>
@@ -1522,7 +1522,7 @@
         <jasypt-version>1.9.2</jasypt-version>
         
         <guava-gwt-version>19.0</guava-gwt-version>
-        <guava-version>23.0</guava-version>
+        <guava-version>23.1-jre</guava-version>
         <guice-version>3.0</guice-version>
         
         <ehcache-version>2.6.3</ehcache-version>

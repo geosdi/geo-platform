@@ -5,14 +5,14 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>geoplatform-persistence-cache</artifactId>
-        <version>1.7-SNAPSHOT</version>
+        <version>1.8-SNAPSHOT</version>
     </parent>
     
     <description>This Module gives Support for Hibernate EhCache</description>
 
     <groupId>org.geosdi</groupId>
     <artifactId>geoplatform-ehcache-support</artifactId>
-    <version>1.7-SNAPSHOT</version>
+    <version>1.8-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Geo-Platform :: == Persistence EhCache Module Support</name>
@@ -20,8 +20,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <hibernate-ehcache-version>5.2.10.Final</hibernate-ehcache-version>
-        <ehcache-version>2.10.3</ehcache-version>
+        <hibernate-ehcache-version>5.2.11.Final</hibernate-ehcache-version>
+        <ehcache-version>2.10.4</ehcache-version>
     </properties>
     
     <repositories>

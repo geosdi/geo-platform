@@ -67,7 +67,7 @@ class GPMongoTemplateConfig {
                 + "Initializing Mongo Template.\n");
 
         MongoTemplate mongoTemplate = new MongoTemplate(gpSpringMongoDBFactory);
-        mongoTemplate.setWriteResultChecking(WriteResultChecking.LOG);
+        mongoTemplate.setWriteResultChecking(WriteResultChecking.NONE);
 
         return mongoTemplate;
     }

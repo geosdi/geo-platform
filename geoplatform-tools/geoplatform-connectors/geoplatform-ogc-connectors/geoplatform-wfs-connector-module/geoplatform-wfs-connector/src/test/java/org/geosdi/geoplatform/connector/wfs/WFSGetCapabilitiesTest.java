@@ -69,4 +69,16 @@ public class WFSGetCapabilitiesTest extends WFSTestConfigurator {
             writer.write(responseAsString);
         }
     }
+
+    @Test
+    public void testHttpsGetCapabilitiesV110() throws Exception {
+        System.setProperty("jsse.enableSNIExtension", "false");
+        WFSGetCapabilitiesRequest<WFSCapabilitiesType> request = this.httpsServerConnector.createGetCapabilitiesRequest();
+        String responseAsString = request.formatResponseAsString(2);
+        logger.info("WFS HTTPS GetCapabilities @@@@@@@@@@@@@@@@@@@@@@@ \n{}\n", responseAsString);
+
+        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get("target/wfsSecureGetCapabilitiesv110.xml"))) {
+            writer.write(responseAsString);
+        }
+    }
 }

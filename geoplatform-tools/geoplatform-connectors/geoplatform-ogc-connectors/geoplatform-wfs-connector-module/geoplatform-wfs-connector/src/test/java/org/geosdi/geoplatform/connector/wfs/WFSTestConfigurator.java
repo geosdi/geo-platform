@@ -55,6 +55,7 @@ public class WFSTestConfigurator {
     //
     private static final String wfsURL = "http://150.145.141.92/geoserver/wfs";
     private static final String wfsSecureURL = "http://150.145.141.180/geoserver/wfs";
+    private static final String wfsHttpsURL = "https://vvf-toscana.geosdi.org/geoserver/wfs";
 
     static {
         try {
@@ -66,12 +67,21 @@ public class WFSTestConfigurator {
                             .withMaxRedirect(20)
                             .build()).build();
             secureServerConnector = WFSConnectorBuilder.newConnector().withServerUrl(
-                    new URL(wfsSecureURL)).withPooledConnectorConfig(pooledConnectorConfigBuilder()
-                    .withMaxTotalConnections(150)
-                    .withDefaultMaxPerRoute(80)
-                    .withMaxRedirect(20)
-                    .build()).withClientSecurity(
-                    new BasicPreemptiveSecurityConnector("admin", "geoservertest")).build();
+                    new URL(wfsSecureURL))
+                    .withPooledConnectorConfig(pooledConnectorConfigBuilder()
+                            .withMaxTotalConnections(150)
+                            .withDefaultMaxPerRoute(80)
+                            .withMaxRedirect(20)
+                            .build())
+                    .withClientSecurity(new BasicPreemptiveSecurityConnector("admin", "geoservertest"))
+                    .build();
+            httpsServerConnector = WFSConnectorBuilder.newConnector()
+                    .withServerUrl(new URL(wfsHttpsURL))
+                    .withPooledConnectorConfig(pooledConnectorConfigBuilder()
+                            .withMaxTotalConnections(30)
+                            .withDefaultMaxPerRoute(10)
+                            .withMaxRedirect(5)
+                            .build()).build();
         } catch (Exception ex) {
             logger.error("#######################EXCEPTION : {}", ex.getMessage());
         }
@@ -83,4 +93,5 @@ public class WFSTestConfigurator {
     //
     protected static GPWFSConnectorStore serverConnector;
     protected static GPWFSConnectorStore secureServerConnector;
+    protected static GPWFSConnectorStore httpsServerConnector;
 }

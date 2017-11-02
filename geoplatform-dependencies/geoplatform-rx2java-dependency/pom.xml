@@ -30,7 +30,7 @@
     </dependencyManagement>
     
     <properties>
-        <rxjava2.version>2.1.5</rxjava2.version>
+        <rxjava2.version>2.1.6</rxjava2.version>
     </properties>
 
 </project>

@@ -48,8 +48,9 @@ import org.geosdi.geoplatform.experimental.el.search.delete.responsibility.IGPDe
 import org.geosdi.geoplatform.experimental.el.search.delete.responsibility.IGPDeleteHandlerManager.GPDeleteHandlerManager;
 
 import java.util.concurrent.CompletableFuture;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -73,7 +74,7 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends GPBas
         logger.debug("###################TOTAL HITS FOUND : {} .\n\n", total);
         return new PageResult<D>(total, Stream.of(searchResponse.getHits().hits())
                 .map(searchHit -> this.readDocument(searchHit))
-                .filter(s -> s != null).collect(Collectors.toList()));
+                .filter(s -> s != null).collect(toList()));
     }
 
     /**
@@ -82,7 +83,7 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends GPBas
      * @throws Exception
      */
     @Override
-    public  <P extends Page, V extends D> IPageResult<V> find(P page, Class<V> subType) throws Exception {
+    public <P extends Page, V extends D> IPageResult<V> find(P page, Class<V> subType) throws Exception {
         Preconditions.checkArgument((page != null), "Page must not be null.");
         super.refreshIndex();
         SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient
@@ -99,14 +100,40 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends GPBas
                 .filter(s -> s != null)
                 .filter(subType::isInstance)
                 .map(s -> (V) s)
-                .collect(Collectors.toList()));
+                .collect(toList()));
+    }
+
+    /**
+     * @param page
+     * @param classe
+     * @return {@link IPageResult<V>}
+     * @throws Exception
+     */
+    @Override
+    public <P extends Page, V extends Document> IPageResult<V> findAndMappingWith(P page, Class<V> classe) throws Exception {
+        Preconditions.checkArgument((page != null), "Page must not be null.");
+        Preconditions.checkNotNull(classe, "The Parameter classe must not be null.");
+        super.refreshIndex();
+        SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient
+                .prepareSearch(getIndexName()).setTypes(getIndexType()));
+        logger.trace("#########################Builder : {}\n\n", builder.toString());
+        SearchResponse searchResponse = builder.get();
+        if (searchResponse.status() != RestStatus.OK) {
+            throw new IllegalStateException("Problem in Search : " + searchResponse.status());
+        }
+        Long total = searchResponse.getHits().getTotalHits();
+        logger.debug("###################TOTAL HITS FOUND : {} .\n\n", total);
+        return new PageResult<V>(total, Stream.of(searchResponse.getHits().getHits())
+                .map(searchHit -> this.readDocument(searchHit, classe))
+                .filter(s -> s != null)
+                .collect(toList()));
     }
 
     /**
      * @param page
      * @param includeFields
      * @param excludeFields
-     * @return {@link IPageResult <D>}
+     * @return {@link IPageResult<D>}
      * @throws Exception
      */
     @Override
@@ -125,7 +152,7 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends GPBas
         logger.debug("###################TOTAL HITS FOUND : {} .\n\n", total);
         return new PageResult<D>(total, Stream.of(searchResponse.getHits().hits())
                 .map(searchHit -> this.readDocument(searchHit))
-                .filter(s -> s != null).collect(Collectors.toList()));
+                .filter(s -> s != null).collect(toList()));
     }
 
     /**
@@ -151,7 +178,7 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends GPBas
         logger.debug("###################TOTAL HITS FOUND : {} .\n\n", total);
         return new PageResult<D>(total, Stream.of(searchResponse.getHits().hits())
                 .map(searchHit -> this.readDocument(searchHit))
-                .filter(s -> s != null).collect(Collectors.toList()));
+                .filter(s -> s != null).collect(toList()));
     }
 
     /**

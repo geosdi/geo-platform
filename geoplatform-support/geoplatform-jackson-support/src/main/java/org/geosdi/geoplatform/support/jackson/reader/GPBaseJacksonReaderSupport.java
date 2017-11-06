@@ -1,6 +1,5 @@
 package org.geosdi.geoplatform.support.jackson.reader;
 
-import com.google.common.base.Preconditions;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import java.io.File;
@@ -12,6 +11,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collection;
 import java.util.stream.Collectors;
+
+import static com.google.common.base.Preconditions.checkArgument;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -27,9 +28,9 @@ public class GPBaseJacksonReaderSupport<T extends Object> implements GPJacksonRe
      * @param theEntityClass
      */
     public GPBaseJacksonReaderSupport(JacksonSupport theJacksonSupport, Class<T> theEntityClass) {
-        Preconditions.checkArgument(theJacksonSupport != null,
+        checkArgument(theJacksonSupport != null,
                 "The Parameter JacksonSupport must not be null.");
-        Preconditions.checkArgument(theEntityClass != null,
+        checkArgument(theEntityClass != null,
                 "The Parameter EntityClass must not be null.");
         this.jacksonSupport = theJacksonSupport;
         this.entityClass = theEntityClass;
@@ -42,7 +43,7 @@ public class GPBaseJacksonReaderSupport<T extends Object> implements GPJacksonRe
      */
     @Override
     public T read(URL url) throws Exception {
-        Preconditions.checkArgument(url != null,
+        checkArgument(url != null,
                 "The Parameter URL must not be null.");
         return this.jacksonSupport.getDefaultMapper().readValue(url, entityClass);
     }
@@ -54,7 +55,7 @@ public class GPBaseJacksonReaderSupport<T extends Object> implements GPJacksonRe
      */
     @Override
     public T read(File file) throws Exception {
-        Preconditions.checkArgument(file != null, "The Parameter File must not be null.");
+        checkArgument(file != null, "The Parameter File must not be null.");
         return this.jacksonSupport.getDefaultMapper().readValue(file, this.entityClass);
     }
 
@@ -65,7 +66,7 @@ public class GPBaseJacksonReaderSupport<T extends Object> implements GPJacksonRe
      */
     @Override
     public T read(InputStream inputStream) throws Exception {
-        Preconditions.checkArgument(inputStream != null,
+        checkArgument(inputStream != null,
                 "The Parameter InputStream must not be null.");
         return this.jacksonSupport.getDefaultMapper().readValue(inputStream, this.entityClass);
     }
@@ -77,7 +78,7 @@ public class GPBaseJacksonReaderSupport<T extends Object> implements GPJacksonRe
      */
     @Override
     public T read(Reader reader) throws Exception {
-        Preconditions.checkArgument(reader != null, "The Parameter Reader must not be null.");
+        checkArgument(reader != null, "The Parameter Reader must not be null.");
         return this.jacksonSupport.getDefaultMapper().readValue(reader, this.entityClass);
     }
 
@@ -88,9 +89,36 @@ public class GPBaseJacksonReaderSupport<T extends Object> implements GPJacksonRe
      */
     @Override
     public T read(String entityAsString) throws Exception {
-        Preconditions.checkArgument((entityAsString != null) && !(entityAsString.isEmpty()),
+        checkArgument((entityAsString != null) && !(entityAsString.isEmpty()),
                 "The Parameter EntityAsString must not be null or Empty.");
         return this.read(new StringReader(entityAsString));
+    }
+
+    /**
+     * @param entityAsString
+     * @param classe
+     * @return {@link Class<V>}
+     * @throws Exception
+     */
+    @Override
+    public <V extends Object> V read(String entityAsString, Class<V> classe) throws Exception {
+        checkArgument((entityAsString != null) && !(entityAsString.isEmpty()),
+                "The Parameter EntityAsString must not be null or Empty.");
+        checkArgument(classe != null, "The Parameter classe must not be null.");
+        return this.read(new StringReader(entityAsString), classe);
+    }
+
+    /**
+     * @param reader
+     * @param classe
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public <V extends Object> V read(Reader reader, Class<V> classe) throws Exception {
+        checkArgument(reader != null, "The Parameter Reader must not be null.");
+        checkArgument(classe != null, "The Parameter classe must not be null.");
+        return this.jacksonSupport.getDefaultMapper().readValue(reader, classe);
     }
 
     /**
@@ -100,7 +128,7 @@ public class GPBaseJacksonReaderSupport<T extends Object> implements GPJacksonRe
      */
     @Override
     public Collection<T> readFromDirectory(Path path) throws Exception {
-        Preconditions.checkArgument((path != null && path.toFile().isDirectory()),
+        checkArgument((path != null && path.toFile().isDirectory()),
                 "The Parameter Path must not be null and must be a Directory");
         return Files.list(path)
                 .filter(p -> p.toFile().getName().endsWith(".json"))

@@ -49,6 +49,8 @@ import javax.annotation.Resource;
 import java.nio.file.Path;
 import java.util.concurrent.ExecutorService;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -81,9 +83,23 @@ abstract class GPBaseElasticSearchDAO<D extends Document> implements GPElasticSe
      */
     @Override
     public D readDocument(String documentAsString) throws Exception {
-        Preconditions.checkArgument(((documentAsString != null) && !(documentAsString.isEmpty())),
+        checkArgument(((documentAsString != null) && !(documentAsString.isEmpty())),
                 "The String to Wrap must not be null or Empty");
         return mapper.read(documentAsString);
+    }
+
+    /**
+     * @param documentAsString
+     * @param classe
+     * @return {@link V}
+     * @throws Exception
+     */
+    @Override
+    public <V extends Document> V readDocument(String documentAsString, Class<V> classe) throws Exception {
+        checkArgument(((documentAsString != null) && !(documentAsString.isEmpty())),
+                "The String to Wrap must not be null or Empty");
+        checkArgument(classe != null, "The Parameter classe must not be null.");
+        return mapper.read(documentAsString, classe);
     }
 
     /**
@@ -93,7 +109,7 @@ abstract class GPBaseElasticSearchDAO<D extends Document> implements GPElasticSe
      */
     @Override
     public D readDocument(Path thePath) {
-        Preconditions.checkArgument((thePath != null) && (thePath.toFile().exists()), "The Parameter thePath must " +
+        checkArgument((thePath != null) && (thePath.toFile().exists()), "The Parameter thePath must " +
                 "not be null and the File must exist.");
         try {
             return this.mapper.read(thePath.toFile());

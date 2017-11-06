@@ -51,6 +51,24 @@ public interface GPJacksonReaderSupport<T extends Object> {
     T read(String entityAsString) throws Exception;
 
     /**
+     * @param entityAsString
+     * @param classe
+     * @param <V>
+     * @return {@link V}
+     * @throws Exception
+     */
+    <V extends Object> V read(String entityAsString, Class<V> classe) throws Exception;
+
+    /**
+     * @param reader
+     * @param classe
+     * @param <V>
+     * @return {@link V}
+     * @throws Exception
+     */
+    <V extends Object> V read(Reader reader, Class<V> classe) throws Exception;
+
+    /**
      * @param direrctory
      * @return {@link Collection<T>}
      * @throws Exception

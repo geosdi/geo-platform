@@ -150,6 +150,37 @@ public class OGCService implements IOGCService {
     }
 
     @Override
+    public ArrayList<? extends GPLayerGrid> getCapabilitiesAuth(
+            String serverUrl, HttpServletRequest httpServletRequest,
+            Long idServer)
+            throws GeoPlatformException {
+        try {
+            HttpSession session = httpServletRequest.getSession();
+            String token = (String) session.getAttribute("GOOGLE_TOKEN");
+            String cookieHeaderValue = httpServletRequest.getHeader("Cookie");
+            String ivUser = httpServletRequest.getHeader("iv-user");
+
+            RequestByID req = new RequestByID(idServer);
+            GSAccount gsAccount = this.sessionUtility.getLoggedAccount(
+                    httpServletRequest).getGsAccount();
+            String authKey = null;
+            if (gsAccount != null) {
+                authKey = gsAccount.getAuthkey();
+            }
+            ServerDTO server = geoPlatformWMSServiceClient.getCapabilitiesAuth(
+                    serverUrl, req, token, authKey,ivUser);
+
+            return dtoServerConverter.createRasterLayerList(
+                    server.getLayerList());
+        } catch (ResourceNotFoundFault ex) {
+            logger.error("Error GetCapabilities: " + ex);
+            throw new GeoPlatformException(ex.getMessage());
+        } catch (GPSessionTimeout timeout) {
+            throw new GeoPlatformException(timeout);
+        }
+    }
+
+    @Override
     public GPServerBeanModel saveServer(Long id, String aliasServerName,
             String urlServer, String organization)
             throws GeoPlatformException {

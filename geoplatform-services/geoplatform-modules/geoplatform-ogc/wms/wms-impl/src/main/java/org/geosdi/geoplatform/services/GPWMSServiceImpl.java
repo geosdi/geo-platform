@@ -44,10 +44,8 @@ import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.RequestByID;
 import org.geosdi.geoplatform.response.RasterLayerDTO;
 import org.geosdi.geoplatform.response.ServerDTO;
-import org.geotools.data.ows.CRSEnvelope;
-import org.geotools.data.ows.Layer;
-import org.geotools.data.ows.StyleImpl;
-import org.geotools.data.ows.WMSCapabilities;
+import org.geosdi.geoplatform.services.httpclient.GeoSDIHttpClient;
+import org.geotools.data.ows.*;
 import org.geotools.data.wms.WebMapServer;
 import org.geotools.ows.ServiceException;
 import org.slf4j.Logger;
@@ -101,6 +99,31 @@ public class GPWMSServiceImpl implements GPWMSService {
     }
 
     @Override
+    public ServerDTO getCapabilitiesAuth(String serverUrl, RequestByID request,
+                                     String token, String authkey, String headers) throws ResourceNotFoundFault {
+        ServerDTO serverDTO;
+        if (request.getId() != null) {
+            GeoPlatformServer server = serverDao.find(request.getId());
+            if (server == null) {
+                throw new ResourceNotFoundFault("Server has been deleted",
+                        request.getId());
+            }
+            serverDTO = new ServerDTO(server);
+        } else {
+            serverDTO = new ServerDTO();
+            serverDTO.setServerUrl(serverUrl);
+        }
+        WMSCapabilities wmsCapabilities = this.getWMSCapabilitiesAuth(
+                serverUrl, token, authkey, headers);
+
+        List<RasterLayerDTO> layers = this.convertToLayerList(
+                wmsCapabilities.getLayer(), serverUrl);
+        serverDTO.setLayerList(layers);
+
+        return serverDTO;
+    }
+
+    @Override
     public ServerDTO getShortServer(String serverUrl)
             throws ResourceNotFoundFault {
         GeoPlatformServer server = serverDao.findByServerUrl(serverUrl);
@@ -127,6 +150,45 @@ public class GPWMSServiceImpl implements GPWMSService {
         try {
             serverURL = new URL(urlServerEdited);
             wms = new WebMapServer(serverURL);
+
+
+
+            cap = wms.getCapabilities();
+
+        } catch (MalformedURLException e) {
+            logger.error("MalformedURLException: " + e);
+            throw new ResourceNotFoundFault("Malformed URL");
+        } catch (ServiceException e) {
+            logger.error("ServiceException: " + e);
+            throw new ResourceNotFoundFault("Invalid URL");
+        } catch (IOException e) {
+            logger.error("IOException: " + e);
+            throw new ResourceNotFoundFault("Inaccessible URL");
+        } catch (Exception e) {
+            logger.error("Exception: " + e);
+            throw new ResourceNotFoundFault("Incorrect URL");
+        }
+        return cap;
+    }
+
+    private WMSCapabilities getWMSCapabilitiesAuth(String serverUrl, String token,
+                                               String authkey, String headers) throws ResourceNotFoundFault {
+        URL serverURL;
+        WebMapServer wms;
+        WMSCapabilities cap = null;
+
+        String urlServerEdited = this.editServerUrl(serverUrl, token, authkey);
+        logger.debug("####################URL Server edited: {}\n", urlServerEdited);
+        logger.info("Forward headers:  "+ headers);
+
+        try {
+            serverURL = new URL(urlServerEdited);
+            GeoSDIHttpClient authClient = new GeoSDIHttpClient();
+            authClient.setHeaders(headers);
+            wms = new WebMapServer(serverURL, authClient);
+
+
+
             cap = wms.getCapabilities();
 
         } catch (MalformedURLException e) {

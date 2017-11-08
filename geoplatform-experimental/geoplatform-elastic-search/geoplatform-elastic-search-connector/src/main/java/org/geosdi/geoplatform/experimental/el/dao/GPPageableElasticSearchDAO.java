@@ -57,6 +57,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
+import static java.util.stream.Stream.of;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -516,7 +518,7 @@ public interface GPPageableElasticSearchDAO<D extends Document> {
                 throws Exception {
             logger.trace("####################Called {} #internalBuildPage with parameters " +
                     "queryList : {} \n\n", getClass().getSimpleName(), this.queryList);
-            Arrays.stream(this.queryList).forEach(q -> buildQuery(q));
+            of(this.queryList).filter(q -> q != null).forEach(q -> buildQuery(q));
             logger.trace("####################{} - Create Query: \n{} \n\n", getClass().getSimpleName(),
                     this.queryBuilder.toString());
             return (Builder) builder.setQuery(queryBuilder);

@@ -71,7 +71,7 @@ public class BasicCapabilitiesCommand implements
         logger.debug("##################### Executing {} Command", this.
                 getClass().getSimpleName());
 
-        ArrayList<? extends GPLayerGrid> capabilitiesResult = this.ogcService.getCapabilities(
+        ArrayList<? extends GPLayerGrid> capabilitiesResult = this.ogcService.getCapabilitiesAuth(
                 request.getServerUrl(), httpServletRequest, request.getIdServer());
 
         logger.debug("##################### FOUND {} ", capabilitiesResult);

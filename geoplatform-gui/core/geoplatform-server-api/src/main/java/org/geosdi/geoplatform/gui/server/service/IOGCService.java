@@ -66,6 +66,10 @@ public interface IOGCService {
             String serverUrl, HttpServletRequest httpServletRequest, Long idServer)
             throws GeoPlatformException;
 
+    public ArrayList<? extends GPLayerGrid> getCapabilitiesAuth(
+            String serverUrl, HttpServletRequest httpServletRequest, Long idServer)
+            throws GeoPlatformException;
+
     public GPServerBeanModel saveServer(Long id, String aliasServerName,
             String urlServer, String organization)
             throws GeoPlatformException;

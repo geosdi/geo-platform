@@ -75,7 +75,7 @@ public class SSOLoginHandler extends AbstractLoginHandler {
                     @Override
                     public void onCommandSuccess(SSOLoginResponse response) {
                         if ((response != null) && (response.getResult() != null)) {
-                            executeXMPPLogin();
+                            //executeXMPPLogin();
                             SecurityGinInjector.MainInjector.getInstance().
                             getPostLoginOperations().
                             executeLoginOperations(response.getResult());

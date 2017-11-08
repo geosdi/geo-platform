@@ -85,6 +85,23 @@ public interface GPWMSService {
             throws ResourceNotFoundFault;
 
     @GET
+    @Path(value = GPServiceRSPathConfig.GET_WMS_CAPABILITIES)
+    @Get
+    @HttpResource(location = "/wms/capabilities/{id}")
+    @WebResult(name = "Capabilities")
+    ServerDTO getCapabilitiesAuth(@QueryParam(value = "serverUrl")
+                              @WebParam(name = "serverUrl") String serverUrl,
+                              @QueryParam(value = "")
+                              @WebParam(name = "request") RequestByID request,
+                              @QueryParam(value = "token")
+                              @WebParam(name = "token") String token,
+                              @QueryParam(value = "authkey")
+                              @WebParam(name = "authkey") String authkey,
+                              @QueryParam(value = "headers")
+                              @WebParam(name = "headers") String headers)
+            throws ResourceNotFoundFault;
+
+    @GET
     @Path(value = GPServiceRSPathConfig.GET_WMS_SERVER_BY_URL)
     @Get
     @HttpResource(location = "/server/{serverUrl}")

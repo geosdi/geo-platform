@@ -49,6 +49,7 @@ import org.geosdi.geoplatform.experimental.el.search.delete.responsibility.IGPDe
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Stream;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static java.util.stream.Collectors.toList;
 
 /**
@@ -61,7 +62,7 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends GPBas
 
     @Override
     public <P extends Page> IPageResult<D> find(P page) throws Exception {
-        Preconditions.checkArgument((page != null), "Page must not be null.");
+        checkArgument((page != null), "Page must not be null.");
         super.refreshIndex();
         SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient
                 .prepareSearch(getIndexName()).setTypes(getIndexType()));
@@ -84,7 +85,7 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends GPBas
      */
     @Override
     public <P extends Page, V extends D> IPageResult<V> find(P page, Class<V> subType) throws Exception {
-        Preconditions.checkArgument((page != null), "Page must not be null.");
+        checkArgument((page != null), "Page must not be null.");
         super.refreshIndex();
         SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient
                 .prepareSearch(getIndexName()).setTypes(getIndexType()));
@@ -111,7 +112,7 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends GPBas
      */
     @Override
     public <P extends Page, V extends Document> IPageResult<V> findAndMappingWith(P page, Class<V> classe) throws Exception {
-        Preconditions.checkArgument((page != null), "Page must not be null.");
+        checkArgument((page != null), "Page must not be null.");
         Preconditions.checkNotNull(classe, "The Parameter classe must not be null.");
         super.refreshIndex();
         SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient
@@ -139,7 +140,7 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends GPBas
     @Override
     public <P extends Page> IPageResult<D> find(P page, String[] includeFields, String[] excludeFields)
             throws Exception {
-        Preconditions.checkArgument((page != null), "Page must not be null.");
+        checkArgument((page != null), "Page must not be null.");
         super.refreshIndex();
         SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient
                 .prepareSearch(getIndexName()).setTypes(getIndexType()));
@@ -151,9 +152,38 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends GPBas
         }
         Long total = searchResponse.getHits().getTotalHits();
         logger.debug("###################TOTAL HITS FOUND : {} .\n\n", total);
-        return new PageResult<D>(total, Stream.of(searchResponse.getHits().hits())
+        return new PageResult<D>(total, Stream.of(searchResponse.getHits().getHits())
                 .map(searchHit -> this.readDocument(searchHit))
                 .filter(s -> s != null).collect(toList()));
+    }
+
+    /**
+     * @param page
+     * @param includeFields
+     * @param excludeFields
+     * @param classe
+     * @return {@link IPageResult<V>}
+     * @throws Exception
+     */
+    @Override
+    public <P extends Page, V extends Document> IPageResult<V> find(P page, String[] includeFields, String[] excludeFields,
+            Class<V> classe) throws Exception {
+        checkArgument((page != null), "Page must not be null.");
+        super.refreshIndex();
+        SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient
+                .prepareSearch(getIndexName()).setTypes(getIndexType()));
+        builder.setFetchSource(includeFields, excludeFields);
+        logger.trace("#########################Builder : {}\n\n", builder.toString());
+        SearchResponse searchResponse = builder.get();
+        if (searchResponse.status() != RestStatus.OK) {
+            throw new IllegalStateException("Problem in Search : " + searchResponse.status());
+        }
+        Long total = searchResponse.getHits().getTotalHits();
+        logger.debug("###################TOTAL HITS FOUND : {} .\n\n", total);
+        return new PageResult<V>(total, Stream.of(searchResponse.getHits().getHits())
+                .map(searchHit -> this.readDocument(searchHit, classe))
+                .filter(s -> s != null)
+                .collect(toList()));
     }
 
     /**
@@ -166,7 +196,7 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends GPBas
     @Override
     public <P extends Page> IPageResult<D> find(P page, String includeField, String excludeField)
             throws Exception {
-        Preconditions.checkArgument((page != null), "Page must not be null.");
+        checkArgument((page != null), "Page must not be null.");
         super.refreshIndex();
         SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient
                 .prepareSearch(getIndexName()).setTypes(getIndexType()));
@@ -192,8 +222,8 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends GPBas
     @Override
     public <P extends Page> SearchResponse find(P page, AbstractAggregationBuilder aggregationBuilder)
             throws Exception {
-        Preconditions.checkArgument((page != null), "Page must not be null.");
-        Preconditions.checkArgument((aggregationBuilder != null), "AggregationBuilder must not be null.");
+        checkArgument((page != null), "Page must not be null.");
+        checkArgument((aggregationBuilder != null), "AggregationBuilder must not be null.");
         super.refreshIndex();
         SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient
                 .prepareSearch(getIndexName()).setTypes(getIndexType()))
@@ -244,7 +274,7 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends GPBas
      */
     @Override
     public <P extends Page> Long count(P page) throws Exception {
-        Preconditions.checkArgument((page != null), "Page must not be null.");
+        checkArgument((page != null), "Page must not be null.");
         super.refreshIndex();
         SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient
                 .prepareSearch(getIndexName()).setTypes(getIndexType()));

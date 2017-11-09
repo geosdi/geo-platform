@@ -156,6 +156,14 @@ public interface GPPageableElasticSearchDAO<D extends Document> {
     <Result extends DeleteByPage.IDeleteByPageResult, P extends Page> CompletableFuture<Result> deleteByPageAsync(P page) throws Exception;
 
     /**
+     * @param page
+     * @param <P>
+     * @return {@link Long}
+     * @throws Exception
+     */
+    <P extends Page> Long count(P page) throws Exception;
+
+    /**
      *
      */
     interface IPageResult<D> {

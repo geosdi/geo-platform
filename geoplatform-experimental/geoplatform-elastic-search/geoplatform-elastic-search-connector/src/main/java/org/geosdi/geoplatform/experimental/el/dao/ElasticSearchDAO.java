@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.experimental.el.dao;
 import com.google.common.base.Preconditions;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexRequestBuilder;
+import org.elasticsearch.action.update.UpdateRequestBuilder;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.search.SearchHit;
 import org.geosdi.geoplatform.experimental.el.api.mapper.GPBaseMapper;
@@ -46,6 +47,9 @@ import org.geosdi.geoplatform.experimental.el.index.GPIndexCreator;
 
 import java.nio.file.Path;
 import java.util.concurrent.ExecutorService;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static org.elasticsearch.common.xcontent.XContentType.JSON;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -175,8 +179,26 @@ public interface ElasticSearchDAO<D extends Document> extends GPPageableElasticS
         try {
             return (document.isIdSetted() ? client()
                     .prepareIndex(getIndexName(), getIndexType(), document.getId())
-                    .setSource(writeDocumentAsString(document)) : client().prepareIndex(getIndexName(), getIndexType())
-                    .setSource(writeDocumentAsString(document)));
+                    .setSource(writeDocumentAsString(document), JSON) : client().prepareIndex(getIndexName(), getIndexType())
+                    .setSource(writeDocumentAsString(document), JSON));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * @param document
+     * @return {@link UpdateRequestBuilder}
+     */
+    default UpdateRequestBuilder prepareUpdateRequestBuilder(D document) {
+        checkArgument(
+                ((document != null) && ((document.getId() != null) && !(document.getId().isEmpty()))),
+                "The {} to Update must" + " not be null or ID must not be null or Empty.",
+                mapper().getDocumentClassName());
+        try {
+            return client().prepareUpdate(getIndexName(), getIndexType(), document.getId())
+                    .setDoc(mapper().writeAsString(document), JSON);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -202,6 +224,12 @@ public interface ElasticSearchDAO<D extends Document> extends GPPageableElasticS
      * @throws Exception
      */
     Client client() throws Exception;
+
+    /**
+     * @param <Mapper>
+     * @return {@link Mapper}
+     */
+    <Mapper extends GPBaseMapper<D>> Mapper mapper();
 
     /**
      * @param <E>

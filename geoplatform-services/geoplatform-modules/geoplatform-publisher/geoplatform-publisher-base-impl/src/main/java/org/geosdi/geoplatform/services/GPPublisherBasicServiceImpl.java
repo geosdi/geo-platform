@@ -879,7 +879,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
         logger.info("Call to analyzeTIFInPreview");
         String userWorkspace = workspace;
         if (userWorkspace == null) {
-            userWorkspace = this.getWorkspace(workspace);
+            userWorkspace = this.getWorkspace(userName);
         }
         String epsg = "EPSG:" + this.getCRSFromGeotiff(file);
         String sld = "raster";

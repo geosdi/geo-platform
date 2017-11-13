@@ -95,7 +95,7 @@ class GPSingleDeleteHandler extends GPAbstractDeleteHandler<ElasticSearchDAO> {
             throw new IllegalStateException("Problem in Search : " + searchResponse.status());
         }
         BulkRequestBuilder bulkRequest = searchDAO.client().prepareBulk();
-        Arrays.stream(searchResponse.getHits().hits())
+        Arrays.stream(searchResponse.getHits().getHits())
                 .map(searchHit -> new DeleteRequest(searchDAO.getIndexName(), searchDAO.getIndexType(),
                         searchHit.getId()))
                 .filter(deleteRequest -> deleteRequest != null)

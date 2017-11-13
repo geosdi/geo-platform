@@ -37,6 +37,8 @@ package org.geosdi.geoplatform.experimental.el.dao;
 import com.google.common.base.Preconditions;
 import org.elasticsearch.action.admin.indices.refresh.RefreshResponse;
 import org.elasticsearch.client.Client;
+import org.elasticsearch.index.reindex.UpdateByQueryAction;
+import org.elasticsearch.index.reindex.UpdateByQueryRequestBuilder;
 import org.geosdi.geoplatform.experimental.el.api.mapper.GPBaseMapper;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
 import org.geosdi.geoplatform.experimental.el.configurator.GPIndexConfigurator;
@@ -57,6 +59,8 @@ import static com.google.common.base.Preconditions.checkArgument;
  */
 abstract class GPBaseElasticSearchDAO<D extends Document> implements GPElasticSearchDAO.GPElasticSearchBaseDAO<D> {
 
+    protected static final String EMPTY_JSON = "{}";
+    //
     protected final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     private GPIndexCreator indexCreator;
@@ -83,7 +87,7 @@ abstract class GPBaseElasticSearchDAO<D extends Document> implements GPElasticSe
      */
     @Override
     public D readDocument(String documentAsString) throws Exception {
-        checkArgument(((documentAsString != null) && !(documentAsString.isEmpty())),
+        checkArgument(((documentAsString != null) && !(documentAsString.isEmpty()) && !(documentAsString.equalsIgnoreCase(EMPTY_JSON))),
                 "The String to Wrap must not be null or Empty");
         return mapper.read(documentAsString);
     }
@@ -96,7 +100,7 @@ abstract class GPBaseElasticSearchDAO<D extends Document> implements GPElasticSe
      */
     @Override
     public <V extends Document> V readDocument(String documentAsString, Class<V> classe) throws Exception {
-        checkArgument(((documentAsString != null) && !(documentAsString.isEmpty())),
+        checkArgument(((documentAsString != null) && !(documentAsString.isEmpty()) && !(documentAsString.equalsIgnoreCase(EMPTY_JSON))),
                 "The String to Wrap must not be null or Empty");
         checkArgument(classe != null, "The Parameter classe must not be null.");
         return mapper.read(documentAsString, classe);
@@ -165,6 +169,14 @@ abstract class GPBaseElasticSearchDAO<D extends Document> implements GPElasticSe
      */
     protected final void deleteIndex() throws Exception {
         this.indexCreator.deleteIndex();
+    }
+
+    /**
+     * @return {@link UpdateByQueryRequestBuilder}
+     */
+    protected final UpdateByQueryRequestBuilder updateByQueryRequestBuilder() throws Exception {
+        checkArgument(this.elastichSearchClient != null, "The ElasticSearchClient must not be null");
+        return UpdateByQueryAction.INSTANCE.newRequestBuilder(this.elastichSearchClient);
     }
 
     /**

@@ -169,7 +169,6 @@
                 <activeByDefault>false</activeByDefault>
             </activation>
             <modules>
-                <module>geoplatform-dependencies</module>
                 <module>geoplatform-experimental</module>
             </modules>
         </profile>

@@ -17,6 +17,7 @@
 
     <modules>
         <module>geoplatform-core</module>
+        <module>sld-validator</module>
         <module>geoplatform-modules</module>
         <module>geoplatform-ws-core</module>
         <module>geoplatform-ws-base-util</module>

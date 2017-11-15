@@ -25,3 +25,4 @@ gwt-unitCache/
 /geoplatform-dependencies/geoplatform-cxf-dependency/geoplatform-cxf-dependency.iml
 /geoplatform-dependencies/geoplatform-dropwizard-dependency/geoplatform-dropwizard-dependency.iml
 /geoplatform-dependencies/geoplatform-httpclient-dependency/geoplatform-httpclient-dependency.iml
+/geoplatform-services/sld-validator/target/

@@ -1522,7 +1522,7 @@
         <gwtVersion>2.7.0</gwtVersion>
         <gxtVersion>2.3.1a-gwt22</gxtVersion>
         
-        <gwtOpenlayersVersion>1.1-SNAPSHOT</gwtOpenlayersVersion>
+        <gwtOpenlayersVersion>1.1.0</gwtOpenlayersVersion>
         
         <cas-version>3.2.1</cas-version>
         

@@ -1538,7 +1538,7 @@
         
         <commons-pool-version>2.4.3</commons-pool-version>
         
-        <geonetwork-version>1.0-SNAPSHOT</geonetwork-version>
+        <geonetwork-version>1.1</geonetwork-version>
         
         <geoserver-manager-version>1.7</geoserver-manager-version>
     </properties>

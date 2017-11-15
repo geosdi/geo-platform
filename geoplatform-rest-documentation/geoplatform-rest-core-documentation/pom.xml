@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -414,21 +413,21 @@
                         <phase>clean</phase>
                         <configuration>
                             <tasks>
-                                <delete dir="${basedir}/src/main/webapp/lib"/>
-                                <delete dir="${basedir}/src/main/webapp/lang"/>
-                                <delete dir="${basedir}/src/main/webapp/css"/>
-                                <delete dir="${basedir}/src/main/webapp/fonts"/>
-                                <delete dir="${basedir}/src/main/webapp/images"/>
-                                <delete file="${basedir}/src/main/webapp/o2c.html"/>
-                                <delete file="${basedir}/src/main/webapp/swagger-ui.js"/>
-                                <delete file="${basedir}/src/main/webapp/swagger-ui.css"/>
-                                <delete file="${basedir}/src/main/webapp/swagger-ui.css.map"/>
-                                <delete file="${basedir}/src/main/webapp/swagger-ui.js.map"/>
-                                <delete file="${basedir}/src/main/webapp/swagger-ui-bundle.js"/>
-                                <delete file="${basedir}/src/main/webapp/swagger-ui-bundle.js.map"/>
-                                <delete file="${basedir}/src/main/webapp/swagger-ui-standalone-preset.js"/>
-                                <delete file="${basedir}/src/main/webapp/swagger-ui-standalone-preset.js.map"/>
-                                <delete file="${basedir}/src/main/webapp/swagger-ui.min.js"/>
+                                <delete dir="${basedir}/src/main/webapp/lib" />
+                                <delete dir="${basedir}/src/main/webapp/lang" />
+                                <delete dir="${basedir}/src/main/webapp/css" />
+                                <delete dir="${basedir}/src/main/webapp/fonts" />
+                                <delete dir="${basedir}/src/main/webapp/images" />
+                                <delete file="${basedir}/src/main/webapp/o2c.html" />
+                                <delete file="${basedir}/src/main/webapp/swagger-ui.js" />
+                                <delete file="${basedir}/src/main/webapp/swagger-ui.css" />
+                                <delete file="${basedir}/src/main/webapp/swagger-ui.css.map" />
+                                <delete file="${basedir}/src/main/webapp/swagger-ui.js.map" />
+                                <delete file="${basedir}/src/main/webapp/swagger-ui-bundle.js" />
+                                <delete file="${basedir}/src/main/webapp/swagger-ui-bundle.js.map" />
+                                <delete file="${basedir}/src/main/webapp/swagger-ui-standalone-preset.js" />
+                                <delete file="${basedir}/src/main/webapp/swagger-ui-standalone-preset.js.map" />
+                                <delete file="${basedir}/src/main/webapp/swagger-ui.min.js" />
                             </tasks>
                         </configuration>
                         <goals>

@@ -4,12 +4,12 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>geoplatform-gml-binding</artifactId>
-        <version>1.9-SNAPSHOT</version>
+        <version>1.8-SNAPSHOT</version>
     </parent>
 
     <groupId>org.geosdi</groupId>
     <artifactId>gml-3.2.0</artifactId>
-    <version>1.9-SNAPSHOT</version>
+    <version>1.8-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Geo-Platform :: == Binding GML 3.2.0 XML Module</name>

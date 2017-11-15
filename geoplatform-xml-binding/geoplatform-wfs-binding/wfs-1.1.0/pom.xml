@@ -5,12 +5,12 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>geoplatform-wfs-binding</artifactId>
-        <version>1.9-SNAPSHOT</version>
+        <version>1.8</version>
     </parent>
   
     <groupId>org.geosdi</groupId>
     <artifactId>wfs-1.1.0</artifactId>
-    <version>1.9-SNAPSHOT</version>
+    <version>1.8</version>
     <packaging>jar</packaging>  
   
     <name>Geo-Platform :: == Binding WFS 1.1.0 XML Module</name>
@@ -48,7 +48,7 @@
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-w3c-xsd-binding</artifactId>
-            <version>1.9-SNAPSHOT</version>
+            <version>1.8</version>
         </dependency>
     </dependencies>
   

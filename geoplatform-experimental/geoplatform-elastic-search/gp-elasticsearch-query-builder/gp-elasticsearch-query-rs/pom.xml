@@ -5,12 +5,12 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>gp-elasticsearch-query-builder</artifactId>
-        <version>1.9-SNAPSHOT</version>
+        <version>1.8</version>
     </parent>
 
     <groupId>org.geosdi</groupId>
     <artifactId>gp-elasticsearch-query-rs</artifactId>
-    <version>1.9-SNAPSHOT</version>
+    <version>1.8</version>
     <packaging>pom</packaging>
 
     <name>Geo-Platform :: == Elastic Search Query REST Module</name>

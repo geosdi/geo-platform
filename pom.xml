@@ -8,7 +8,7 @@
 
     <groupId>org.geosdi</groupId>
     <artifactId>geo-platform</artifactId>
-    <version>1.8</version>
+    <version>1.9-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Geo-Platform :: == GeoSDI Framework</name>
@@ -18,7 +18,7 @@
         <url>https://github.com/geosdi/geo-platform</url>
         <connection>scm:git:git://github.com/geosdi/geo-platform.git</connection>
         <developerConnection>scm:git:git@github.com:geosdi/geo-platform.git</developerConnection>
-      <tag>geo-platform-1.8</tag>
+      <tag>1.8.x</tag>
   </scm>
     
     <mailingLists>

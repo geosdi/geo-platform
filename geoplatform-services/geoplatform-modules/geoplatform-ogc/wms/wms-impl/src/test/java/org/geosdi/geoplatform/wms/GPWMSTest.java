@@ -9,6 +9,7 @@ import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.request.RequestByID;
 import org.geosdi.geoplatform.services.GPWMSService;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -38,7 +39,7 @@ public class GPWMSTest {
     public void setUp() throws Exception {
         Assert.assertNotNull(this.wmsService);
     }
-
+    @Ignore
     @Test
     public void inteserServerTest() throws Exception {
         GPOrganization organization = this.organizationDAO.find(200L);
@@ -53,7 +54,7 @@ public class GPWMSTest {
         this.serverDao.persist(server);
     }
 
-
+    @Ignore
     @Test
     public void loadWmsGetCapabilitiesTest() throws Exception {
 

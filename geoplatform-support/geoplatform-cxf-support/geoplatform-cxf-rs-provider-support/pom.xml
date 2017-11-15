@@ -4,12 +4,12 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>geoplatform-cxf-support</artifactId>
-        <version>1.9-SNAPSHOT</version>
+        <version>1.8</version>
     </parent>
 
     <groupId>org.geosdi</groupId>
     <artifactId>geoplatform-cxf-rs-provider-support</artifactId>
-    <version>1.9-SNAPSHOT</version>
+    <version>1.8</version>
     <packaging>jar</packaging>
 
     <name>Geo-Platform :: == CXF RS Provider Module Support</name>

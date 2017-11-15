@@ -5,12 +5,12 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>core</artifactId>
-        <version>1.9-SNAPSHOT</version>
+        <version>1.8</version>
     </parent>
 	
     <groupId>org.geosdi</groupId>
     <artifactId>geoplatform-cache</artifactId>
-    <version>1.9-SNAPSHOT</version>
+    <version>1.8</version>
     <packaging>jar</packaging>
 
     <name>Geo-Platform :: == Cache</name>

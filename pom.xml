@@ -18,7 +18,7 @@
         <url>https://github.com/geosdi/geo-platform</url>
         <connection>scm:git:git://github.com/geosdi/geo-platform.git</connection>
         <developerConnection>scm:git:git@github.com:geosdi/geo-platform.git</developerConnection>
-      <tag>1.8.x</tag>
+      <tag>1.8</tag>
   </scm>
     
     <mailingLists>

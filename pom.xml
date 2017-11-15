@@ -175,6 +175,15 @@
                 <module>geoplatform-experimental</module>
             </modules>
         </profile>
+        <profile>
+            <id>disable-javadoc-doclint</id>
+            <activation>
+                <jdk>[1.8,)</jdk>
+            </activation>
+            <properties>
+                <additionalparam>-Xdoclint:none</additionalparam>
+            </properties>
+        </profile>
     </profiles>
 
     <developers>

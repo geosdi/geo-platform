@@ -5,12 +5,12 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>extension</artifactId>
-        <version>1.9-SNAPSHOT</version>
+        <version>1.8</version>
     </parent>
   
     <groupId>org.geosdi</groupId>
     <artifactId>gp-wfst-widget</artifactId>
-    <version>1.9-SNAPSHOT</version>
+    <version>1.8</version>
     <packaging>jar</packaging>
   
     <name>Geo-Platform :: == WFS-T Widget</name>

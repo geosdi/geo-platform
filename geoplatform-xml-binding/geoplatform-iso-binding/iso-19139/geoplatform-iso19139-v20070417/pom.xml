@@ -5,12 +5,12 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>iso-19139</artifactId>
-        <version>1.9-SNAPSHOT</version>
+        <version>1.8</version>
     </parent>
 
     <groupId>org.geosdi</groupId>
     <artifactId>geoplatform-iso19139-v20070417</artifactId>
-    <version>1.9-SNAPSHOT</version>
+    <version>1.8</version>
     <packaging>jar</packaging>
 
     <name>Geo-Platform :: == Binding ISO19139 (2007-04-17) XML Module</name>

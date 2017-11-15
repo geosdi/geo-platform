@@ -4,12 +4,12 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>geoplatform-experimental</artifactId>
-        <version>1.9-SNAPSHOT</version>
+        <version>1.8</version>
     </parent>
 
     <groupId>org.geosdi</groupId>
     <artifactId>geoplatform-mongodb</artifactId>
-    <version>1.9-SNAPSHOT</version>
+    <version>1.8</version>
     <packaging>jar</packaging>
 
     <name>Geo-Platform :: == MongoDB Module</name>
@@ -67,7 +67,7 @@
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-logger-support</artifactId>
-            <version>1.9-SNAPSHOT</version>
+            <version>1.8</version>
         </dependency>  
         
         <!-- =========================================================== -->
@@ -76,7 +76,7 @@
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-jasypt-support</artifactId>
-            <version>1.9-SNAPSHOT</version>
+            <version>1.8</version>
         </dependency>
         
         <dependency>

@@ -4,12 +4,12 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>geoplatform-service-delegates</artifactId>
-        <version>1.9-SNAPSHOT</version>
+        <version>1.8-SNAPSHOT</version>
     </parent>
 
     <groupId>org.geosdi</groupId>
     <artifactId>geoplatform-scheduler-delegate</artifactId>
-    <version>1.9-SNAPSHOT</version>
+    <version>1.8-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Geo-Platform :: == Scheduler Delegate Module</name>

@@ -4,12 +4,12 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>plugin</artifactId>
-        <version>1.9-SNAPSHOT</version>
+        <version>1.8-SNAPSHOT</version>
     </parent>
 
     <groupId>org.geosdi</groupId>
     <artifactId>geoplatform-googleanalytics-support</artifactId>
-    <version>1.9-SNAPSHOT</version>
+    <version>1.8-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Geo-Platform :: == Google Analytics Support</name>

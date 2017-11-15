@@ -64,7 +64,7 @@
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-jackson-support</artifactId>
-            <version>1.9-SNAPSHOT</version>
+            <version>1.8-SNAPSHOT</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

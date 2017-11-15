@@ -37,7 +37,7 @@
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-jackson-support</artifactId>
-            <version>1.9-SNAPSHOT</version>
+            <version>1.8-SNAPSHOT</version>
         </dependency>
 
         <!-- =========================================================== -->
@@ -77,7 +77,7 @@
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-logger-support</artifactId>
-            <version>1.9-SNAPSHOT</version>
+            <version>1.8-SNAPSHOT</version>
         </dependency>
 
         <!-- =========================================================== -->
@@ -86,7 +86,7 @@
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-jasypt-support</artifactId>
-            <version>1.9-SNAPSHOT</version>
+            <version>1.8-SNAPSHOT</version>
         </dependency>
 
         <dependency>

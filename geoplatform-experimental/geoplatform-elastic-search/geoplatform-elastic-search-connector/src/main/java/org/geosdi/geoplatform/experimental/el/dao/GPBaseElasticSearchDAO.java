@@ -37,8 +37,6 @@ package org.geosdi.geoplatform.experimental.el.dao;
 import com.google.common.base.Preconditions;
 import org.elasticsearch.action.admin.indices.refresh.RefreshResponse;
 import org.elasticsearch.client.Client;
-import org.elasticsearch.index.reindex.UpdateByQueryAction;
-import org.elasticsearch.index.reindex.UpdateByQueryRequestBuilder;
 import org.geosdi.geoplatform.experimental.el.api.mapper.GPBaseMapper;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
 import org.geosdi.geoplatform.experimental.el.configurator.GPIndexConfigurator;
@@ -169,14 +167,6 @@ abstract class GPBaseElasticSearchDAO<D extends Document> implements GPElasticSe
      */
     protected final void deleteIndex() throws Exception {
         this.indexCreator.deleteIndex();
-    }
-
-    /**
-     * @return {@link UpdateByQueryRequestBuilder}
-     */
-    protected final UpdateByQueryRequestBuilder updateByQueryRequestBuilder() throws Exception {
-        checkArgument(this.elastichSearchClient != null, "The ElasticSearchClient must not be null");
-        return UpdateByQueryAction.INSTANCE.newRequestBuilder(this.elastichSearchClient);
     }
 
     /**

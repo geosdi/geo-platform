@@ -1,74 +1,68 @@
 /**
- *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
- *
- *   Copyright (C) 2008-2017 geoSDI Group (CNR IMAA - Potenza - ITALY).
- *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
- *
- *   ====================================================================
- *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
- *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * geo-platform
+ * Rich webgis framework
+ * http://geo-platform.org
+ * ====================================================================
+ * <p>
+ * Copyright (C) 2008-2017 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * <p>
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version. This program is distributed in the
+ * hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License
+ * for more details. You should have received a copy of the GNU General
+ * Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * <p>
+ * ====================================================================
+ * <p>
+ * Linking this library statically or dynamically with other modules is
+ * making a combined work based on this library. Thus, the terms and
+ * conditions of the GNU General Public License cover the whole combination.
+ * <p>
+ * As a special exception, the copyright holders of this library give you permission
+ * to link this library with independent modules to produce an executable, regardless
+ * of the license terms of these independent modules, and to copy and distribute
+ * the resulting executable under terms of your choice, provided that you also meet,
+ * for each linked independent module, the terms and conditions of the license of
+ * that module. An independent module is a module which is not derived from or
+ * based on this library. If you modify this library, you may extend this exception
+ * to your version of the library, but you are not obligated to do so. If you do not
+ * wish to do so, delete this exception statement from your version.
  */
 package org.geosdi.geoplatform.core.acl;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.Index;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import javax.persistence.*;
+
 /**
- * The <tt>AclEntry</tt> domain class contains entries representing grants 
+ * The <tt>AclEntry</tt> domain class contains entries representing grants
  * (or denials) of a permission on an object instance to a recipient.
- * The aclObject field references the domain class instance (since an instance 
- * can have many granted permissions). The aclSid field references the recipient. 
- * The granting field determines whether the entry grants the permission (true) 
- * or denies it (false). The aceOrder field specifies the position of the entry, 
- * which is important because the entries are evaluated in order and the first 
- * matching entry determines whether access is allowed. The mask field holds the 
- * permission. auditSuccess and auditFailure determine whether to log success 
+ * The aclObject field references the domain class instance (since an instance
+ * can have many granted permissions). The aclSid field references the recipient.
+ * The granting field determines whether the entry grants the permission (true)
+ * or denies it (false). The aceOrder field specifies the position of the entry,
+ * which is important because the entries are evaluated in order and the first
+ * matching entry determines whether access is allowed. The mask field holds the
+ * permission. auditSuccess and auditFailure determine whether to log success
  * and/or failure events (these both default to true).
- * 
+ *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 @Entity
 @Table(name = "acl_entry",
-       uniqueConstraints =
-@UniqueConstraint(columnNames = {"acl_object_identity", "ace_order"}))
+        uniqueConstraints =
+        @UniqueConstraint(columnNames = {"acl_object_identity", "ace_order"}),
+        indexes = {
+                @Index(columnList = "acl_object_identity", name = "ACL_ENTRY_OBJECT_IDENTITY_INDEX"),
+                @Index(columnList = "sid", name = "ACL_ENTRY_SID_INDEX")
+        })
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "entry")
 // TODO: implements AccessControlEntry?
 public class AclEntry {
@@ -80,7 +74,6 @@ public class AclEntry {
     //
     @ManyToOne
     @JoinColumn(name = "acl_object_identity", nullable = false)
-    @Index(name = "ACL_ENTRY_OBJECT_IDENTITY_INDEX")
     private AclObjectIdentity aclObject;
     /**
      * Order wrt AclObjectIdentity.
@@ -91,7 +84,6 @@ public class AclEntry {
     @ManyToOne
     @JoinColumn(name = "sid", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @Index(name = "ACL_ENTRY_SID_INDEX")
     private AclSid aclSid;
     /**
      * Mask of permission type.
@@ -138,6 +130,7 @@ public class AclEntry {
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Getter and setter methods">
+
     /**
      * @return the id
      */
@@ -168,7 +161,6 @@ public class AclEntry {
 
     /**
      * @return the aceOrder
-     * 
      * @see #aceOrder
      */
     public Integer getAceOrder() {
@@ -177,7 +169,6 @@ public class AclEntry {
 
     /**
      * @param aceOrder the aceOrder to set
-     * 
      * @see #aceOrder
      */
     public void setAceOrder(Integer aceOrder) {
@@ -200,7 +191,6 @@ public class AclEntry {
 
     /**
      * @return the mask
-     * 
      * @see #mask
      */
     public Integer getMask() {
@@ -209,7 +199,6 @@ public class AclEntry {
 
     /**
      * @param mask the mask to set
-     * 
      * @see #mask
      */
     public void setMask(Integer mask) {
@@ -218,7 +207,6 @@ public class AclEntry {
 
     /**
      * @return the granting
-     * 
      * @see #granting
      */
     public boolean isGranting() {
@@ -227,7 +215,6 @@ public class AclEntry {
 
     /**
      * @param granting the granting to set
-     * 
      * @see #granting
      */
     public void setGranting(boolean granting) {

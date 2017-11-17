@@ -1,56 +1,56 @@
 /**
- *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
- *
- *   Copyright (C) 2008-2017 geoSDI Group (CNR IMAA - Potenza - ITALY).
- *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
- *
- *   ====================================================================
- *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
- *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * geo-platform
+ * Rich webgis framework
+ * http://geo-platform.org
+ * ====================================================================
+ * <p>
+ * Copyright (C) 2008-2017 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * <p>
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version. This program is distributed in the
+ * hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License
+ * for more details. You should have received a copy of the GNU General
+ * Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * <p>
+ * ====================================================================
+ * <p>
+ * Linking this library statically or dynamically with other modules is
+ * making a combined work based on this library. Thus, the terms and
+ * conditions of the GNU General Public License cover the whole combination.
+ * <p>
+ * As a special exception, the copyright holders of this library give you permission
+ * to link this library with independent modules to produce an executable, regardless
+ * of the license terms of these independent modules, and to copy and distribute
+ * the resulting executable under terms of your choice, provided that you also meet,
+ * for each linked independent module, the terms and conditions of the license of
+ * that module. An independent module is a module which is not derived from or
+ * based on this library. If you modify this library, you may extend this exception
+ * to your version of the library, but you are not obligated to do so. If you do not
+ * wish to do so, delete this exception statement from your version.
  */
 package org.geosdi.geoplatform.model.soap;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.folder.WSAddFolderAndTreeModificationsRequest;
-import org.geosdi.geoplatform.request.folder.WSDeleteFolderAndTreeModifications;
 import org.geosdi.geoplatform.request.folder.WSDDFolderAndTreeModifications;
+import org.geosdi.geoplatform.request.folder.WSDeleteFolderAndTreeModifications;
 import org.geosdi.geoplatform.response.FolderDTO;
 import org.geosdi.geoplatform.response.ProjectDTO;
 import org.geosdi.geoplatform.response.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.response.collection.TreeFolderElements;
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -170,8 +170,7 @@ public class WSFolderTest extends BaseSoapServiceTest {
     public void testDeleteFolder() throws ResourceNotFoundFault {
         // Assert number of folders of ProjectTest before delete
         int totalFolders = gpWSClient.getNumberOfElementsProject(idProjectTest);
-        Assert.assertEquals(
-                "Number of all folders of ProjectTest before deleted",
+        Assert.assertEquals("Number of all folders of ProjectTest before deleted",
                 7, totalFolders); // SetUp() added 2+5 folders
         //
         ProjectDTO projectWithRootFolders = gpWSClient.getProjectWithRootFolders(
@@ -180,9 +179,9 @@ public class WSFolderTest extends BaseSoapServiceTest {
                 projectWithRootFolders);
 
         List<FolderDTO> rootFolderList = projectWithRootFolders.getRootFolders();
+        logger.debug("##########################################FOUND : {}\n\n", rootFolderList.size());
         Assert.assertNotNull("List of root folders is null", rootFolderList);
-        Assert.assertEquals(
-                "Number of root folders of ProjectTest before deleted",
+        Assert.assertEquals("Number of root folders of ProjectTest before deleted",
                 2, rootFolderList.size());
 
         // Delete "rootFolderB" and in cascade "folder3" & "folder4" & "folder5"
@@ -257,8 +256,8 @@ public class WSFolderTest extends BaseSoapServiceTest {
 
         // Adding new folder to project's root            
         long idFolderToTest = gpWSClient.saveAddedFolderAndTreeModifications(new WSAddFolderAndTreeModificationsRequest(
-                        projectTest.getId(),
-                        null, folderToTest, descendantsMapData));
+                projectTest.getId(),
+                null, folderToTest, descendantsMapData));
 
         Assert.assertEquals("totalElementsOfProject after added",
                 totalElementsOfProject + 1,
@@ -269,7 +268,7 @@ public class WSFolderTest extends BaseSoapServiceTest {
 
         // Removing folder from user's root
         boolean checkDelete = gpWSClient.saveDeletedFolderAndTreeModifications(new WSDeleteFolderAndTreeModifications(idFolderToTest,
-                        descendantsMapData));
+                descendantsMapData));
         Assert.assertTrue("Delete NOT done for \"" + nameFolderToTest + "\"",
                 checkDelete);
 
@@ -305,9 +304,9 @@ public class WSFolderTest extends BaseSoapServiceTest {
         // Adding new folder to user's root folder B
         map.put(idRootFolderB, 4);
         long idFolderToTest = gpWSClient.saveAddedFolderAndTreeModifications(new WSAddFolderAndTreeModificationsRequest(
-                        projectTest.getId(),
-                        rootFolderB.getId(), folderToTest,
-                        descendantsMapData));
+                projectTest.getId(),
+                rootFolderB.getId(), folderToTest,
+                descendantsMapData));
 
         Assert.assertEquals("totalElementsOfProject after added",
                 totalElementsOfProject + 1,
@@ -320,7 +319,7 @@ public class WSFolderTest extends BaseSoapServiceTest {
         map.clear();
         map.put(idRootFolderB, 3);
         boolean checkDelete = gpWSClient.saveDeletedFolderAndTreeModifications(new WSDeleteFolderAndTreeModifications(idFolderToTest,
-                        descendantsMapData));
+                descendantsMapData));
         Assert.assertTrue("Delete NOT done for \"" + nameFolderToTest + "\"",
                 checkDelete);
 
@@ -340,7 +339,7 @@ public class WSFolderTest extends BaseSoapServiceTest {
 
         // Move folder 5 between folder 3 and folder 4 (oldPosition < new Position)
         boolean checkDD = gpWSClient.saveDragAndDropFolderAndTreeModifications(new WSDDFolderAndTreeModifications(idFolder5,
-                        super.idRootFolderB, 2, descendantsMapData));
+                super.idRootFolderB, 2, descendantsMapData));
         Assert.assertTrue("Folder 5 doesn't moved to position 2", checkDD);
 
         this.checkState(new int[]{7, 6, 5, 4, 3, 1, 2}, new int[]{2, 3},
@@ -348,7 +347,7 @@ public class WSFolderTest extends BaseSoapServiceTest {
 
         // Move folder 5 after folder 4, in initial position (oldPosition > new Position)
         checkDD = gpWSClient.saveDragAndDropFolderAndTreeModifications(new WSDDFolderAndTreeModifications(idFolder5,
-                        super.idRootFolderB, 1, descendantsMapData));
+                super.idRootFolderB, 1, descendantsMapData));
         Assert.assertTrue("Folder 5 doesn't moved to position 1", checkDD);
 
         this.checkInitialState("after DD II on same parent");
@@ -365,7 +364,7 @@ public class WSFolderTest extends BaseSoapServiceTest {
         map.put(super.idRootFolderB, 2);
         // Move folder 4 between folder 1 and folder 2 (oldPosition < new Position)
         boolean checkDD = gpWSClient.saveDragAndDropFolderAndTreeModifications(new WSDDFolderAndTreeModifications(idFolder4,
-                        super.idRootFolderA, 5, descendantsMapData));
+                super.idRootFolderA, 5, descendantsMapData));
         Assert.assertTrue("Folder 4 doesn't moved to position 5", checkDD);
 
         this.checkState(new int[]{7, 6, 4, 3, 2, 5, 1}, new int[]{3, 2},
@@ -376,7 +375,7 @@ public class WSFolderTest extends BaseSoapServiceTest {
         map.put(super.idRootFolderA, 2);
         map.put(super.idRootFolderB, 3);
         checkDD = gpWSClient.saveDragAndDropFolderAndTreeModifications(new WSDDFolderAndTreeModifications(idFolder4,
-                        super.idRootFolderB, 2, descendantsMapData));
+                super.idRootFolderB, 2, descendantsMapData));
         Assert.assertTrue("Folder 4 doesn't moved to position 2", checkDD);
 
         this.checkInitialState("after DD II on different parent");
@@ -391,7 +390,7 @@ public class WSFolderTest extends BaseSoapServiceTest {
 
         // Move folder B before folder A (oldPosition < new Position)
         boolean checkDD = gpWSClient.saveDragAndDropFolderAndTreeModifications(new WSDDFolderAndTreeModifications(
-                        super.idRootFolderB, null, 7, descendantsMapData));
+                super.idRootFolderB, null, 7, descendantsMapData));
         Assert.assertTrue("Folder B doesn't moved to position 7", checkDD);
 
         this.checkState(new int[]{3, 2, 1, 7, 6, 5, 4}, new int[]{2, 3},
@@ -399,7 +398,7 @@ public class WSFolderTest extends BaseSoapServiceTest {
 
         // Move folder B after folder A, in initial position (oldPosition > new Position)
         checkDD = gpWSClient.saveDragAndDropFolderAndTreeModifications(new WSDDFolderAndTreeModifications(
-                        super.idRootFolderB, null, 4, descendantsMapData));
+                super.idRootFolderB, null, 4, descendantsMapData));
         Assert.assertTrue("Folder 4 doesn't moved to position 4", checkDD);
 
         this.checkInitialState("after DD II on root parent");
@@ -415,8 +414,8 @@ public class WSFolderTest extends BaseSoapServiceTest {
         map.put(idRootFolderA, 6);
         // Move Folder B after Folder 1 (oldPosition < new Position)
         boolean checkDD = gpWSClient.saveDragAndDropFolderAndTreeModifications(new WSDDFolderAndTreeModifications(
-                        super.idRootFolderB, super.idRootFolderA, 6,
-                        descendantsMapData));
+                super.idRootFolderB, super.idRootFolderA, 6,
+                descendantsMapData));
         Assert.assertTrue("Folder B doesn't moved to position 6", checkDD);
 
         this.checkState(new int[]{7, 2, 1, 6, 5, 4, 3}, new int[]{6, 3},
@@ -434,7 +433,7 @@ public class WSFolderTest extends BaseSoapServiceTest {
         map.put(idRootFolderA, 2);
         // Move folder B in initial position (oldPosition > new Position)
         checkDD = gpWSClient.saveDragAndDropFolderAndTreeModifications(new WSDDFolderAndTreeModifications(
-                        super.idRootFolderB, null, 4, descendantsMapData));
+                super.idRootFolderB, null, 4, descendantsMapData));
         Assert.assertTrue("Folder B doesn't moved to position 4", checkDD);
 
         this.checkInitialState("after DD II from root to top");
@@ -450,8 +449,8 @@ public class WSFolderTest extends BaseSoapServiceTest {
         map.put(idRootFolderB, 6);
         // Move Folder A after Folder 3 (oldPosition > new Position)
         boolean checkDD = gpWSClient.saveDragAndDropFolderAndTreeModifications(new WSDDFolderAndTreeModifications(
-                        super.idRootFolderA, super.idRootFolderB, 5,
-                        descendantsMapData));
+                super.idRootFolderA, super.idRootFolderB, 5,
+                descendantsMapData));
         Assert.assertTrue("Folder A doesn't moved to position 5", checkDD);
 
         this.checkState(new int[]{5, 4, 3, 7, 6, 2, 1}, new int[]{2, 6},
@@ -470,7 +469,7 @@ public class WSFolderTest extends BaseSoapServiceTest {
         map.put(idRootFolderB, 3);
         // Move folder A in initial position (oldPosition < new Position)
         checkDD = gpWSClient.saveDragAndDropFolderAndTreeModifications(new WSDDFolderAndTreeModifications(
-                        super.idRootFolderA, null, 7, descendantsMapData));
+                super.idRootFolderA, null, 7, descendantsMapData));
         Assert.assertTrue("Folder B doesn't moved to position 7", checkDD);
 
         this.checkInitialState("after DD II from root to bottom");

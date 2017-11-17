@@ -1,37 +1,36 @@
 /**
- *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
- *
- *   Copyright (C) 2008-2017 geoSDI Group (CNR IMAA - Potenza - ITALY).
- *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
- *
- *   ====================================================================
- *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
- *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * geo-platform
+ * Rich webgis framework
+ * http://geo-platform.org
+ * ====================================================================
+ * <p>
+ * Copyright (C) 2008-2017 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * <p>
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version. This program is distributed in the
+ * hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License
+ * for more details. You should have received a copy of the GNU General
+ * Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * <p>
+ * ====================================================================
+ * <p>
+ * Linking this library statically or dynamically with other modules is
+ * making a combined work based on this library. Thus, the terms and
+ * conditions of the GNU General Public License cover the whole combination.
+ * <p>
+ * As a special exception, the copyright holders of this library give you permission
+ * to link this library with independent modules to produce an executable, regardless
+ * of the license terms of these independent modules, and to copy and distribute
+ * the resulting executable under terms of your choice, provided that you also meet,
+ * for each linked independent module, the terms and conditions of the license of
+ * that module. An independent module is a module which is not derived from or
+ * based on this library. If you modify this library, you may extend this exception
+ * to your version of the library, but you are not obligated to do so. If you do not
+ * wish to do so, delete this exception statement from your version.
  */
 package org.geosdi.geoplatform.initializer;
 
@@ -57,23 +56,25 @@ import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.expression.ParseException;
 import org.springframework.security.acls.domain.BasePermission;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
+ * @email giuseppe.lascaleia@geosdi.org
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:applicationContext-Initializer-Test.xml",
-    "classpath:applicationContext.xml"})
+@ContextConfiguration(locations = {"classpath:applicationContext-Initializer-Test.xml"})
+@ActiveProfiles(value = {"jpa"})
 public abstract class BaseInitializerTest {
 
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -181,7 +182,7 @@ public abstract class BaseInitializerTest {
         List<GPLayer> layers = layerDAO.findAll();
         for (GPLayer layer : layers) {
             logger.trace("\n*** Layer to REMOVE:\n{}\n***", layer);
-            boolean removed = layerDAO.remove(layer);
+            boolean removed = layerDAO.removeById(layer.getId());
             Assert.assertTrue("Old Layer NOT removed", removed);
         }
     }
@@ -201,7 +202,7 @@ public abstract class BaseInitializerTest {
         // Delete before the sub-folders
         for (GPFolder folder : folders) {
             logger.trace("\n*** Folder to REMOVE:\n{}\n***", folder);
-            boolean removed = folderDAO.remove(folder);
+            boolean removed = folderDAO.removeById(folder.getId());
             Assert.assertTrue("Old Folder NOT removed\n" + folder + "\n", removed);
         }
     }
@@ -210,7 +211,7 @@ public abstract class BaseInitializerTest {
         List<GPAccountProject> accountProjectList = accountProjectDAO.findAll();
         for (GPAccountProject up : accountProjectList) {
             logger.trace("\n*** AccountProject to REMOVE:\n{}\n***", up);
-            boolean removed = accountProjectDAO.remove(up);
+            boolean removed = accountProjectDAO.removeById(up.getId());
             Assert.assertTrue("Old AccountProject NOT removed", removed);
         }
     }
@@ -219,7 +220,7 @@ public abstract class BaseInitializerTest {
         List<GPProject> projects = projectDAO.findAll();
         for (GPProject project : projects) {
             logger.trace("\n*** project to REMOVE:\n{}\n***", project);
-            boolean removed = projectDAO.remove(project);
+            boolean removed = projectDAO.removeById(project.getId());
             Assert.assertTrue("Old project NOT removed", removed);
         }
     }
@@ -228,7 +229,7 @@ public abstract class BaseInitializerTest {
         List<GPMessage> messages = messageDAO.findAll();
         for (GPMessage message : messages) {
             logger.trace("\n*** message to REMOVE:\n{}\n***", message);
-            boolean removed = messageDAO.remove(message);
+            boolean removed = messageDAO.removeById(message.getId());
             Assert.assertTrue("Old message NOT removed", removed);
         }
     }
@@ -237,7 +238,7 @@ public abstract class BaseInitializerTest {
         List<GPAuthority> authorities = authorityDAO.findAll();
         for (GPAuthority authority : authorities) {
             logger.trace("\n*** Authority to REMOVE:\n{}\n***", authority);
-            boolean removed = authorityDAO.remove(authority);
+            boolean removed = authorityDAO.removeById(authority.getId());
             Assert.assertTrue("Old Authority NOT removed", removed);
         }
     }
@@ -246,7 +247,7 @@ public abstract class BaseInitializerTest {
         List<GSAccount> accountList = gsAccountDAO.findAll();
         for (GSAccount account : accountList) {
             logger.trace("\n*** GSAccount to REMOVE:\n{}\n***", account);
-            boolean removed = gsAccountDAO.remove(account);
+            boolean removed = gsAccountDAO.removeById(account.getId());
             Assert.assertTrue("Old GSAccount NOT removed", removed);
         }
     }
@@ -255,7 +256,7 @@ public abstract class BaseInitializerTest {
         List<GPAccount> accounts = accountDAO.findAll();
         for (GPAccount account : accounts) {
             logger.trace("\n*** Account to REMOVE:\n{}\n***", account);
-            boolean removed = accountDAO.remove(account);
+            boolean removed = accountDAO.removeById(account.getId());
             Assert.assertTrue("Old Account NOT removed", removed);
         }
     }
@@ -264,7 +265,7 @@ public abstract class BaseInitializerTest {
         List<GeoPlatformServer> servers = serverDAO.findAll();
         for (GeoPlatformServer server : servers) {
             logger.debug("\n*** Server to REMOVE:\n{}\n***", server);
-            boolean ret = serverDAO.remove(server);
+            boolean ret = serverDAO.removeById(server.getId());
             Assert.assertTrue("Old Server NOT removed", ret);
         }
     }
@@ -273,7 +274,7 @@ public abstract class BaseInitializerTest {
         List<GPOrganization> organizations = organizationDAO.findAll();
         for (GPOrganization organization : organizations) {
             logger.trace("\n*** Organization to REMOVE:\n{}\n***", organization);
-            boolean removed = organizationDAO.remove(organization);
+            boolean removed = organizationDAO.removeById(organization.getId());
             Assert.assertTrue("Old Organization NOT removed", removed);
         }
     }
@@ -292,7 +293,7 @@ public abstract class BaseInitializerTest {
         List<AclEntry> entries = entryDAO.findAll();
         for (AclEntry e : entries) {
             logger.trace("\n*** AclEntry to REMOVE:\n{}\n***", e);
-            boolean removed = entryDAO.remove(e);
+            boolean removed = entryDAO.removeById(e.getId());
             Assert.assertTrue("Old AclEntry NOT removed", removed);
         }
     }
@@ -301,7 +302,7 @@ public abstract class BaseInitializerTest {
         List<AclObjectIdentity> objectIdentities = objectIdentityDAO.findAll();
         for (AclObjectIdentity oi : objectIdentities) {
             logger.trace("\n*** AclObjectIdentity to REMOVE:\n{}\n***", oi);
-            boolean removed = objectIdentityDAO.remove(oi);
+            boolean removed = objectIdentityDAO.removeById(oi.getId());
             Assert.assertTrue("Old AclObjectIdentity NOT removed", removed);
         }
     }
@@ -310,7 +311,7 @@ public abstract class BaseInitializerTest {
         List<AclSid> sids = sidDAO.findAll();
         for (AclSid s : sids) {
             logger.trace("\n*** AclSid to REMOVE:\n{}\n***", s);
-            boolean removed = sidDAO.remove(s);
+            boolean removed = sidDAO.removeById(s.getId());
             Assert.assertTrue("Old AclSid NOT removed", removed);
         }
     }
@@ -319,7 +320,7 @@ public abstract class BaseInitializerTest {
         List<AclClass> classes = classDAO.findAll();
         for (AclClass c : classes) {
             logger.trace("\n*** AclClass to REMOVE:\n{}\n***", c);
-            boolean removed = classDAO.remove(c);
+            boolean removed = classDAO.removeById(c.getId());
             Assert.assertTrue("Old AclClass NOT removed", removed);
         }
     }
@@ -328,13 +329,13 @@ public abstract class BaseInitializerTest {
         List<GuiComponent> guiComponents = guiComponentDAO.findAll();
         for (GuiComponent gc : guiComponents) {
             logger.trace("\n*** GuiComponent to REMOVE:\n{}\n***", gc);
-            boolean removed = guiComponentDAO.remove(gc);
+            boolean removed = guiComponentDAO.removeById(gc.getId());
             Assert.assertTrue("Old GuiComponent NOT removed", removed);
         }
     }
     //</editor-fold>
 
-    protected void insertData() throws ParseException {
+    protected void insertData() {
         this.insertOrganizations();
         this.insertServers();
         this.insertAccounts();
@@ -348,7 +349,7 @@ public abstract class BaseInitializerTest {
     //<editor-fold defaultstate="collapsed" desc="Insert data">
     private void insertOrganizations() {
         organizationTest = this.createOwnOrganization();
-        organizationDAO.persist(organizationTest);
+        organizationDAO.save(organizationTest);
         logger.debug("\n*** Organization SAVED:\n{}\n***", organizationTest);
     }
 
@@ -356,7 +357,7 @@ public abstract class BaseInitializerTest {
         // WMS
         GeoPlatformServer server1WMS = createServer1WMS();
         GeoPlatformServer server2WMS = createServer2WMS();
-        serverDAO.persist(server1WMS, server2WMS);
+        serverDAO.persist(Stream.of(server1WMS, server2WMS).collect(toList()));
         logger.debug("\n*** SAVED WMS Server:\n{}\n***", server1WMS);
         logger.debug("\n*** SAVED WMS Server:\n{}\n***", server2WMS);
         // CSW
@@ -443,7 +444,7 @@ public abstract class BaseInitializerTest {
                 new Date(System.currentTimeMillis() - TimeUnit.HOURS.toMillis(1)));
         this.gsUserProject = this.createProject("gp_user_project", false, 0,
                 new Date(System.currentTimeMillis() - TimeUnit.HOURS.toMillis(3)));
-        projectDAO.persist(adminProject, userProject, viewerProject, gsUserProject);
+        projectDAO.persist(Stream.of(adminProject, userProject, viewerProject, gsUserProject).collect(toList()));
         //
         this.insertBindingUserProject(adminTest, adminProject,
                 BasePermission.ADMINISTRATION.getMask(), true);
@@ -456,7 +457,7 @@ public abstract class BaseInitializerTest {
         this.insertBindingUserProject(gsUserTest, gsUserProject,
                 BasePermission.ADMINISTRATION.getMask(), true);
         //
-        accountDAO.merge(adminTest, userTest, viewerTest, gsUserTest);
+        accountDAO.update(Stream.of(adminTest, userTest, viewerTest, gsUserTest).collect(toList()));
     }
 
     private void insertMessages() {
@@ -512,15 +513,15 @@ public abstract class BaseInitializerTest {
         //
         onlyFolders.setNumberOfDescendants(2);
         layerFolder.setNumberOfDescendants(2);
-        folderDAO.persist(onlyFolders, emptySubFolderA, emptySubFolderB, layerFolder);
-        layerDAO.persist(rasterLayer, vectorLayer);
+        folderDAO.persist(Stream.of(onlyFolders, emptySubFolderA, emptySubFolderB, layerFolder).collect(toList()));
+        layerDAO.persist(Stream.of(rasterLayer, vectorLayer).collect(toList()));
 //        styleDAO.persist(rasterLayerStyle1, rasterLayerStyle2);
         //
         viewerProject.setNumberOfElements(6);
-        projectDAO.merge(viewerProject);
+        projectDAO.update(viewerProject);
     }
 
-    private void cloneProject(){
+    private void cloneProject() {
 
 
 /*        GPProject gpProject = projectDAO.findByProjectName("project_admin_k_1");
@@ -537,7 +538,7 @@ public abstract class BaseInitializerTest {
         gsUserTest.setGsAccount(gsAccount);
         this.gsAccountDAO.persist(gsAccount);
         this.gsResourceDAO.persist(resource);
-        accountDAO.merge(gsUserTest);
+        accountDAO.update(gsUserTest);
     }
 
     private GSAccount generateGSAccount(String username) {
@@ -711,7 +712,7 @@ public abstract class BaseInitializerTest {
         return raster;
     }
 
-//    private GPStyle createStyle(String name, GPRasterLayer layer) {
+    //    private GPStyle createStyle(String name, GPRasterLayer layer) {
 //        GPStyle style = new GPStyle();
 //        style.setName(name);
 //        style.setTitle("The " + name);
@@ -809,7 +810,7 @@ public abstract class BaseInitializerTest {
         logger.debug("\n*** AclSid to INSERT:\n{}\n***", user);
         logger.debug("\n*** AclSid to INSERT:\n{}\n***", viewer);
         //
-        sidDAO.persist(superUser, admin, user, viewer);
+        sidDAO.persist(Stream.of(superUser, admin, user, viewer).collect(toList()));
     }
 
     private Map<String, GuiComponent> createGuiComponents() {
@@ -819,7 +820,7 @@ public abstract class BaseInitializerTest {
             gcMap.put(ID, new GuiComponent(ID));
         }
 
-        guiComponentDAO.persist(gcMap.values().toArray(new GuiComponent[gcMap.size()]));
+        guiComponentDAO.persist(gcMap.values());
 
         return gcMap;
     }
@@ -834,7 +835,7 @@ public abstract class BaseInitializerTest {
             objIdMap.put(componentID, new AclObjectIdentity(gcClass, id, superUser));
         }
 
-        objectIdentityDAO.persist(objIdMap.values().toArray(new AclObjectIdentity[objIdMap.size()]));
+        objectIdentityDAO.persist(objIdMap.values());
 
         return objIdMap;
     }
@@ -865,7 +866,7 @@ public abstract class BaseInitializerTest {
             }
         }
         //
-        entryDAO.persist(entriesMap.values().toArray(new AclEntry[entriesMap.size()]));
+        entryDAO.persist(entriesMap.values());
     }
     //</editor-fold>
 }

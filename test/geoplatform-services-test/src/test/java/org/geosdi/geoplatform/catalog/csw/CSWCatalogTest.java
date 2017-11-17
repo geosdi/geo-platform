@@ -65,7 +65,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(locations = {"classpath:applicationContext-Test.xml",
     "classpath*:applicationContext.xml"})
 @TestExecutionListeners(value = {CSWListenerServices.class})
-@ActiveProfiles(profiles = {"dev"})
+@ActiveProfiles(profiles = {"dev", "jpa"})
 public abstract class CSWCatalogTest {
 
     protected Logger logger = LoggerFactory.getLogger(this.getClass());

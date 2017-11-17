@@ -35,11 +35,11 @@
 package org.geosdi.geoplatform.core.model;
 
 import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.*;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -52,7 +52,8 @@ import java.io.Serializable;
 @XmlRootElement(name = "Folder")
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity(name = "Folder")
-@Table(name = "gp_folder")
+@Table(name = "gp_folder", indexes = {
+        @Index(columnList = "name", name = "FOLDER_NAME_INDEX")})
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "folder")
 public class GPFolder implements Serializable {
 
@@ -67,7 +68,6 @@ public class GPFolder implements Serializable {
     private Long id;
     //
     @Column(nullable = false)
-    @Index(name = "FOLDER_NAME_INDEX")
     private String name;
     //
     @ManyToOne(optional = true)
@@ -220,7 +220,6 @@ public class GPFolder implements Serializable {
     }
 
     /**
-     *
      * @return
      */
     public int getLevel() {

@@ -10,33 +10,35 @@
             http://www.springframework.org/schema/util
             http://www.springframework.org/schema/util/spring-util-4.1.xsd"
        default-autowire="byName">
-    
-    <context:component-scan base-package="org.geosdi.geoplatform.scheduler.delegate.impl" />
-    
+
+    <context:component-scan base-package="org.geosdi.geoplatform.scheduler.delegate.impl,
+                                          org.geosdi.geoplatform.scheduler.email"/>
+
     <!-- Define the properties file to use -->
-    <util:properties id="emailProperties" location="classpath:email.properties" />    
-    
+    <util:properties id="emailProperties" location="classpath:email.properties"/>
+
     <bean id="emailTask" class="org.geosdi.geoplatform.scheduler.quartz.task.EmailTask">
-        <property name="mailSender" ref="mailSender" />
-        <property name="velocityEngine" ref="velocityEngine" />
+        <property name="mailSender" ref="mailSender"/>
+        <property name="schedulerVelocityEngine" ref="schedulerVelocityEngine"/>
         <!-- Frontend -->
-        <property name="frontendLink" value="#{emailProperties['email.frontend.link']}" />
-        <property name="frontendLabel" value="#{emailProperties['email.frontend.label']}" />
+        <property name="frontendLink" value="#{emailProperties['email.frontend.link']}"/>
+        <property name="frontendLabel" value="#{emailProperties['email.frontend.label']}"/>
         <!-- Template registration -->
-        <property name="subjectRegistration" value="#{emailProperties['email.subject.registration']}" />
-        <property name="templateRegistration" value="#{emailProperties['email.template.registration']}" />
+        <property name="subjectRegistration" value="#{emailProperties['email.subject.registration']}"/>
+        <property name="templateRegistration" value="#{emailProperties['email.template.registration']}"/>
         <!-- Template user creation notification -->
-        <property name="subjectCreationNotification" value="#{emailProperties['email.subject.creationNotification']}" />
-        <property name="templateCreationNotification" value="#{emailProperties['email.template.creationNotification']}" />
+        <property name="subjectCreationNotification" value="#{emailProperties['email.subject.creationNotification']}"/>
+        <property name="templateCreationNotification"
+                  value="#{emailProperties['email.template.creationNotification']}"/>
         <!-- Template modification -->
-        <property name="subjectModification" value="#{emailProperties['email.subject.modification']}" />
-        <property name="templateModification" value="#{emailProperties['email.template.modification']}" />        
-    </bean>   
-    
+        <property name="subjectModification" value="#{emailProperties['email.subject.modification']}"/>
+        <property name="templateModification" value="#{emailProperties['email.template.modification']}"/>
+    </bean>
+
     <bean id="mailSender"
           class="org.springframework.mail.javamail.JavaMailSenderImpl">
-        <property name="defaultEncoding" value="UTF-8" />
-        
+        <property name="defaultEncoding" value="UTF-8"/>
+
         <!-- GMail via TLS -->
         <!--property name="host" value="smtp.gmail.com" />
         <property name="port" value="587" />
@@ -45,30 +47,17 @@
                 <prop key="mail.smtp.starttls.enable">true</prop>
             </props>
         </property-->
-        
+
         <!-- GMail via SSL -->
-        <property name="host" value="smtp.googlemail.com" />
-        <property name="port" value="465" />
+        <property name="host" value="smtp.googlemail.com"/>
+        <property name="port" value="465"/>
         <property name="javaMailProperties">
             <props>
                 <prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>
             </props>
         </property>
-        
-        <property name="username" value="#{emailProperties['email.username']}" />
-        <property name="password" value="#{emailProperties['email.password']}" />
-    </bean>
-   
-    <bean id="velocityEngine"
-          class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
-        <property name="velocityProperties">
-            <props>
-                <prop key="resource.loader">class</prop>
-                <prop key="class.resource.loader.class">
-                    org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
-                </prop>
-            </props>
-        </property>
-    </bean>
 
+        <property name="username" value="#{emailProperties['email.username']}"/>
+        <property name="password" value="#{emailProperties['email.password']}"/>
+    </bean>
 </beans>

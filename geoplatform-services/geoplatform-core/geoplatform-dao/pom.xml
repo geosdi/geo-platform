@@ -27,87 +27,23 @@
     </dependencyManagement>
 
     <properties>
-        <!-- Keep aligned with src/main/resources/geoplatform_datasource.xml -->
         <db.baseurl>jdbc:postgresql://localhost:5432</db.baseurl>
         <db.url>${db.baseurl}/gp</db.url>
         <db.driverClassName>org.postgresql.Driver</db.driverClassName>
         <db.username>postgres</db.username>
         <db.password>0x,postgres,0x</db.password>
-
         <dataset.file>src/test/resources/bootstrap-db.xml</dataset.file>
     </properties>
 
     <dependencies>
-
-        <!-- APACHE COMMONS -->
-        <dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>commons-collections</groupId>
-            <artifactId>commons-collections</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-model</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>cglib</groupId>
-                    <artifactId>cglib</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-base-configurator</artifactId>
         </dependency>
 
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-sharing</artifactId>
-        </dependency>
-
-        <!-- JASYPT -->
-        <dependency>
-            <groupId>org.jasypt</groupId>
-            <artifactId>jasypt</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.jasypt</groupId>
-            <artifactId>jasypt-spring31</artifactId>
-        </dependency>
-
-        <!-- logging dependencies, delegate all to slf4j and use logback -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>jcl-over-slf4j</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>log4j-over-slf4j</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>dom4j</groupId>
-            <artifactId>dom4j</artifactId>
-        </dependency>
-
-        <!-- AOP -->
-        <dependency>
-            <groupId>aopalliance</groupId>
-            <artifactId>aopalliance</artifactId>
-            <version>1.0</version>
         </dependency>
 
         <!-- SPRING -->
@@ -152,37 +88,52 @@
             <artifactId>spring-beans</artifactId>
         </dependency>
 
-        <!-- HIBERNATE JAVAX PERSISTENCE -->
         <dependency>
-            <groupId>org.hibernate.javax.persistence</groupId>
-            <artifactId>hibernate-jpa-2.0-api</artifactId>
-        </dependency>
-
-        <!-- HIBERNATE-GENERIC-DAO -->
-        <dependency>
-            <groupId>com.googlecode.genericdao</groupId>
-            <artifactId>dao</artifactId>
+            <groupId>com.vividsolutions</groupId>
+            <artifactId>jts</artifactId>
             <exclusions>
                 <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-api</artifactId>
+                    <groupId>xerces</groupId>
+                    <artifactId>xercesImpl</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
 
         <dependency>
-            <groupId>com.googlecode.genericdao</groupId>
-            <artifactId>search-hibernate</artifactId>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-persistence-api</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>com.googlecode.genericdao</groupId>
-            <artifactId>search-jpa-hibernate</artifactId>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-persistence-config</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>com.googlecode.genericdao</groupId>
-            <artifactId>search</artifactId>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-persistence-loader</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-ehcache-support</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.postgis</groupId>
+            <artifactId>postgis-jdbc</artifactId>
+        </dependency>
+
+        <!-- =========================================================== -->
+        <!-- ==================== HIBERNATE SPATIAL ==================== -->
+        <!-- =========================================================== -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-spatial</artifactId>
         </dependency>
 
         <!-- H2 and GEODB -->
@@ -191,31 +142,9 @@
             <artifactId>h2</artifactId>
         </dependency>
 
-        <!--dependency>
-            <groupId>org.hibernatespatial</groupId>
-            <artifactId>hibernate-spatial-h2-geodb</artifactId>
-        </dependency -->
-
-        <!-- POSTGRES - POSTGIS -->
-        <dependency>
-            <groupId>commons-dbcp</groupId>
-            <artifactId>commons-dbcp</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.postgis</groupId>
-            <artifactId>postgis-jdbc</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-        </dependency>
-
-        <!-- HIBERNATE -->
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
         </dependency>
 
         <dependency>
@@ -233,33 +162,31 @@
             <artifactId>javax.el-api</artifactId>
         </dependency>
 
+        <!-- logging dependencies, delegate all to slf4j and use logback -->
         <dependency>
-            <groupId>com.sun.el</groupId>
-            <artifactId>el-ri</artifactId>
-            <version>1.0</version>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>log4j-over-slf4j</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
         </dependency>
 
+        <!-- =========================================================== -->
+        <!-- ============================ TEST ========================= -->
+        <!-- =========================================================== -->
         <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-        </dependency>
-
-        <!-- HIBERNATE-SPATIAL -->
-        <dependency>
-            <groupId>org.hibernatespatial</groupId>
-            <artifactId>hibernate-spatial-postgis</artifactId>
-        </dependency>
-
-        <!-- CGLIB -->
-        <dependency>
-            <groupId>cglib</groupId>
-            <artifactId>cglib-nodep</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.xmlgraphics</groupId>
-            <artifactId>batik-ext</artifactId>
-            <version>1.7</version>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <scope>test</scope>
         </dependency>
 
         <!-- JUnit -->
@@ -269,90 +196,10 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>net.sf.ehcache</groupId>
-            <artifactId>ehcache-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>net.sf.ehcache</groupId>
-            <artifactId>ehcache-terracotta</artifactId>
-        </dependency>
-
     </dependencies>
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>hibernate3-maven-plugin</artifactId>
-                <version>2.2</version>
-                <dependencies>
-
-                    <dependency>
-                        <groupId>org.hibernate</groupId>
-                        <artifactId>hibernate-core</artifactId>
-                        <version>${hibernate-version}</version>
-                    </dependency>
-
-                    <dependency>
-                        <groupId>org.hibernate</groupId>
-                        <artifactId>hibernate-entitymanager</artifactId>
-                        <version>${hibernate-version}</version>
-                        <exclusions>
-                            <exclusion>
-                                <artifactId>asm</artifactId>
-                                <groupId>asm</groupId>
-                            </exclusion>
-                        </exclusions>
-                    </dependency>
-
-                    <dependency>
-                        <groupId>org.hibernate</groupId>
-                        <artifactId>hibernate-tools</artifactId>
-                        <version>3.2.4.GA</version>
-                    </dependency>
-
-                    <dependency>
-                        <groupId>org.hibernate</groupId>
-                        <artifactId>hibernate-validator</artifactId>
-                        <version>4.2.0.Final</version>
-                    </dependency>
-
-                </dependencies>
-
-                <executions>
-                    <execution>
-                        <phase>process-classes</phase>
-                        <goals>
-                            <goal>hbm2ddl</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <components>
-                        <component>
-                            <name>hbm2ddl</name>
-                            <implementation>annotationconfiguration</implementation>
-                            <outputDirectory>target/classes</outputDirectory>
-                        </component>
-                        <component>
-                            <name>hbmdoc</name>
-                        </component>
-                    </components>
-                    <componentProperties>
-                        <configurationfile>/src/test/resources/hibernate.cfg.xml</configurationfile>
-                        <outputfilename>geoplatform-model.ddl</outputfilename>
-
-                        <jdk5>true</jdk5>
-
-                        <drop>false</drop>
-                        <create>true</create>
-                        <export>false</export>
-                        <format>true</format>
-                    </componentProperties>
-                </configuration>
-            </plugin>
-
             <!-- Attach sources ============================================ -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -464,13 +311,13 @@
 
                             <autocommit>true</autocommit>
                             <srcFiles>
-                                <srcFile>target/classes/geoplatform-model.ddl</srcFile>
+                                <srcFile>target/sql/ddl/geoplatform-model-ddl.sql</srcFile>
                             </srcFiles>
                         </configuration>
                         <executions>
                             <execution>
                                 <id>create-db-schema</id>
-                                <phase>compile</phase>
+                                <phase>package</phase>
                                 <goals>
                                     <goal>execute</goal>
                                 </goals>
@@ -585,14 +432,12 @@
                             </dataTypeFactoryName>
                             <format>xml</format>
                             <src>${dataset.file}</src>
-                            <!-- DELETE_ALL operation followed by an INSERT operation -->
                             <type>CLEAN_INSERT</type>
                         </configuration>
                     </plugin>
                 </plugins>
             </build>
         </profile>
-
     </profiles>
 
 </project>

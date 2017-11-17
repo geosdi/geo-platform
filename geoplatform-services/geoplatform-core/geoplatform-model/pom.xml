@@ -28,7 +28,6 @@
     </dependencyManagement>
 
     <dependencies>
-        
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-sharing</artifactId>
@@ -53,48 +52,35 @@
             <groupId>com.vividsolutions</groupId>
             <artifactId>jts</artifactId>
         </dependency>
-        
+
+        <!-- =========================================================== -->
+        <!-- ======================== HIBERNATE ======================== -->
+        <!-- =========================================================== -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
         </dependency>
+
+        <!-- =========================================================== -->
+        <!-- ============== HIBERNATE JAVAX PERSISTENCE ================ -->
+        <!-- =========================================================== -->
         <dependency>
             <groupId>org.hibernate.javax.persistence</groupId>
-            <artifactId>hibernate-jpa-2.0-api</artifactId>
-        </dependency>
-        
-        <!-- HIBERNATE-SPATIAL -->
-        <dependency>
-            <groupId>org.hibernatespatial</groupId>
-            <artifactId>hibernate-spatial-postgis</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-api</artifactId>
-                </exclusion>
-            </exclusions>
+            <artifactId>hibernate-jpa-2.1-api</artifactId>
         </dependency>
 
-        <!-- CGLIB -->
+        <!-- =========================================================== -->
+        <!-- ==================== HIBERNATE SPATIAL ==================== -->
+        <!-- =========================================================== -->
         <dependency>
-            <groupId>cglib</groupId>
-            <artifactId>cglib-nodep</artifactId>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-spatial</artifactId>
         </dependency>
 
-        <!-- Apache Commons -->
         <dependency>
-            <groupId>commons-beanutils</groupId>
-            <artifactId>commons-beanutils</artifactId>
-        </dependency>
-        
-        <dependency>
-            <groupId>net.sf.ehcache</groupId>
-            <artifactId>ehcache-core</artifactId>
-        </dependency>
-        
-        <dependency>
-            <groupId>net.sf.ehcache</groupId>
-            <artifactId>ehcache-terracotta</artifactId>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-ehcache-support</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>

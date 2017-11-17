@@ -1,6 +1,7 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    
+
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>geoplatform-core</artifactId>
@@ -14,7 +15,7 @@
 
     <name>Geo-Platform :: == CORE Initializer</name>
     <url>http://maven.apache.org</url>
-    
+
     <description>
         This Module is responsible to populate with a tests the geoplatform
         database for Service WS Stack.
@@ -25,18 +26,23 @@
     </properties>
 
     <dependencies>
-        
-         <!-- GUAVA -->
+        <!-- GUAVA -->
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-dao</artifactId>
         </dependency>
-        
+
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-base-configurator</artifactId>
+            <scope>test</scope>
+        </dependency>
+
         <!-- GEOTOOLS -->
         <dependency>
             <groupId>org.geotools</groupId>
@@ -83,7 +89,7 @@
             <artifactId>gt-epsg-wkt</artifactId>
             <scope>test</scope>
         </dependency>
-        
+
         <!-- logging dependencies, delegate all to slf4j and use logback -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -101,13 +107,13 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
             <scope>test</scope>
         </dependency>
-        
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

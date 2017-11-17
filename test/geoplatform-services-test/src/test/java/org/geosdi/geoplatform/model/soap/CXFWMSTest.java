@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.model.soap;
 
-import java.text.ParseException;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.RequestByID;
 import org.geosdi.geoplatform.response.ServerDTO;
@@ -47,6 +46,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.text.ParseException;
+
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI
  *
@@ -55,7 +56,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(locations = {"classpath:applicationContext-Test.xml",
     "classpath*:applicationContext.xml"})
 @TestExecutionListeners(value = {WSListenerWMSServices.class})
-@ActiveProfiles(profiles = {"dev"})
+@ActiveProfiles(profiles = {"dev", "jpa"})
 public class CXFWMSTest extends ServiceWMSTest {
 
     @Override

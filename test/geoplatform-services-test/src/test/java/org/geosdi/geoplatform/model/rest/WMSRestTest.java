@@ -58,7 +58,7 @@ import java.text.ParseException;
 @ContextConfiguration(locations = {"classpath:applicationContext-Test.xml",
     "classpath*:applicationContext.xml"})
 @TestExecutionListeners(value = {RSListenerWMSService.class})
-@ActiveProfiles(profiles = {"dev"})
+@ActiveProfiles(profiles = {"dev", "jpa"})
 public class WMSRestTest extends ServiceWMSTest {
 
     @Test

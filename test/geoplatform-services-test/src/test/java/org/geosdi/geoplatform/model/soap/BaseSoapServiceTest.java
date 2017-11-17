@@ -35,8 +35,6 @@
  */
 package org.geosdi.geoplatform.model.soap;
 
-import java.util.ArrayList;
-import java.util.Date;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPOrganization;
 import org.geosdi.geoplatform.core.model.GPProject;
@@ -54,6 +52,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.ArrayList;
+import java.util.Date;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -63,7 +64,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(locations = {"classpath:applicationContext-Test.xml",
     "classpath*:applicationContext.xml"})
 @TestExecutionListeners(value = {WSListenerBasicServices.class})
-@ActiveProfiles(profiles = {"dev"})
+@ActiveProfiles(profiles = {"dev", "jpa"})
 abstract class BaseSoapServiceTest extends ServiceTest {
 
     protected static final String organizationNameTest = "geoSDI_ws_test";

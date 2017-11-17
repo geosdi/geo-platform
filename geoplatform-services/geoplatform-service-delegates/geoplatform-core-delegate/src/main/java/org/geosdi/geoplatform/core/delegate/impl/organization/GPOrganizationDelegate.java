@@ -73,8 +73,6 @@ public class GPOrganizationDelegate implements OrganizationDelegate {
                     organizationID);
         }
         EntityCorrectness.checkOrganizationLog(organization); // TODO assert
-
-        return organizationDao.remove(organization);
+        return organizationDao.removeById(organization.getId());
     }
-
 }

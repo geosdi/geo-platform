@@ -48,6 +48,7 @@
     <logger name="org.geosdi.geoplatform.services.feature.GPTransactionService" level="debug"/><!-- TODO info -->
 
     <logger name="org.geosdi.geoplatform.core.delegate.impl.project.GPProjectDelegate" level="info"/>
+    <logger name="org.geosdi.geoplatform.core.delegate.impl.acl.GPAclDelegate" level="trace"/>
 
     <logger name="org.geosdi.geoplatform.connector.server.request.v202.CatalogGetRecordsV202" level="info"/>
     <logger name="org.geosdi.geoplatform.connector.server.request.v202.responsibility.TextSearchRequest" level="info"/>
@@ -61,7 +62,7 @@
     <logger name="org.geosdi.geoplatform.support.cxf.rs.provider.factory.GPRestProviderFactory" level="debug"/>
     
     <!-- DAOs -->
-    <logger name="org.geosdi.geoplatform.core.dao.impl.GPFolderDAOImpl" level="info"/>
+    <logger name="org.geosdi.geoplatform.core.dao.impl.GPFolderDAOImpl" level="debug"/>
     <logger name="org.geosdi.geoplatform.core.dao.impl.GPLayerDAOImpl" level="info"/>
     <logger name="org.geosdi.geoplatform.core.dao.impl.GPServerDAOImpl" level="info"/>
     <logger name="org.geosdi.geoplatform.services.GPWMSServiceImpl" level="debug"/>

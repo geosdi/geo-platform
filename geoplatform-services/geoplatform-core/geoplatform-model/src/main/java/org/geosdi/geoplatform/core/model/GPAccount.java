@@ -38,19 +38,21 @@ package org.geosdi.geoplatform.core.model;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import java.io.Serializable;
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.security.core.GrantedAuthority;
+
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlTransient;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-import org.springframework.security.core.GrantedAuthority;
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
 
 /**
  *
@@ -65,11 +67,17 @@ import org.springframework.security.core.GrantedAuthority;
     @Type(value = GPApplication.class, name = "GPApplication") })  
 @XmlTransient
 @XmlSeeAlso(value = {GPUser.class, GPApplication.class})
-@Entity(name = "Account")
-@Table(name = "gp_account")
+@Entity
+@Table(name = "gp_account", indexes = {
+        @Index(columnList = "app_id", name = "APPLICATION_ID_INDEX"),
+        @Index(columnList = "user_name", name = "USER_USERNAME_INDEX"),
+        @Index(columnList = "email_address", name = "USER_EMAIL_INDEX")
+})
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "gp_account_type",
         discriminatorType = DiscriminatorType.STRING)
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "account")
+@Cacheable
 public abstract class GPAccount implements Serializable {
 
     /**

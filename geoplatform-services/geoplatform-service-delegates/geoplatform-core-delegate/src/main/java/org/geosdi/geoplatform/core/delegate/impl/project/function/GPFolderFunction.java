@@ -12,13 +12,13 @@ import static org.geosdi.geoplatform.core.binding.IGPFolderBinder.GPFolderBinder
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class GPFolderFunction implements Function<GPFolder,GPFolder>{
+public class GPFolderFunction implements Function<GPFolder, GPFolder> {
 
     private GPProject projectCloned;
     private GPFolderDAO folderDAO;
     private GPFolder folderParent;
 
-    public GPFolderFunction(GPProject projectCloned,GPFolderDAO folderDAO,GPFolder folderParent){
+    public GPFolderFunction(GPProject projectCloned, GPFolderDAO folderDAO, GPFolder folderParent) {
         this.projectCloned = projectCloned;
         this.folderDAO = folderDAO;
         this.folderParent = folderParent;
@@ -33,7 +33,11 @@ public class GPFolderFunction implements Function<GPFolder,GPFolder>{
     @Override
     public GPFolder apply(GPFolder gpFolder) {
         try {
-            GPFolder folderCloned = newGPFolderBinder().withFrom(gpFolder).withParentCloned(folderParent).withProjectCloned(projectCloned).bind();
+            GPFolder folderCloned = newGPFolderBinder()
+                    .withFrom(gpFolder)
+                    .withParentCloned(folderParent)
+                    .withProjectCloned(projectCloned)
+                    .bind();
             folderDAO.persist(folderCloned);
             return folderCloned;
         } catch (Exception e) {

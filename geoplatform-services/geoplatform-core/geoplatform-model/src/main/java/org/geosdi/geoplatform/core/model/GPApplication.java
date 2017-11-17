@@ -35,10 +35,6 @@
  */
 package org.geosdi.geoplatform.core.model;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.Index;
-
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -51,7 +47,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "GPApplication")
 @Entity(name = "Application")
 @DiscriminatorValue("GPApplication")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "application")
 public class GPApplication extends GPAccount {
 
     /**
@@ -60,7 +55,6 @@ public class GPApplication extends GPAccount {
     private static final long serialVersionUID = 726746042410990607L;
     //
     @Column(name = "app_id", unique = true)
-    @Index(name = "APPLICATION_ID_INDEX")
     private String appID;
 
     /**

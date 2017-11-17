@@ -1,70 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:aop="http://www.springframework.org/schema/aop"
-       xmlns:cxf="http://cxf.apache.org/core" 
-       xmlns:jaxws="http://cxf.apache.org/jaxws" 
        xsi:schemaLocation="http://www.springframework.org/schema/beans
             http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
             http://www.springframework.org/schema/context
-            http://www.springframework.org/schema/context/spring-context-3.2.xsd
-            http://www.springframework.org/schema/aop
-            http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
-            http://cxf.apache.org/core
-            http://cxf.apache.org/schemas/core.xsd
-            http://cxf.apache.org/jaxws
-            http://cxf.apache.org/schemas/jaxws.xsd"
+            http://www.springframework.org/schema/context/spring-context-3.2.xsd"
        default-autowire="byName">
 
-    <context:annotation-config />
-	
+    <context:annotation-config/>
 
-    <!--=====================================================================-->
-    <!-- DB related stuff -->
-    <!--=====================================================================-->
-
-    <import resource="classpath*:geoplatform_datasource.xml" />
-
-    <!--=====================================================================-->
-	<!--
-		Need one search processor and one metadata util per persistence unit
-		(i.e. EntityManagerFactory). We're wiring these to the Generic DAOs
-		using an autowire annotation in BaseDAO.
-	-->
-
-    <bean id="searchProcessor" class="com.googlecode.genericdao.search.jpa.JPASearchProcessor">
-        <constructor-arg ref="metadataUtil" />
-    </bean>
-
-    <bean id="metadataUtil" class="com.googlecode.genericdao.search.jpa.hibernate.HibernateMetadataUtil"
-                factory-method="getInstanceForEntityManagerFactory">
-        <constructor-arg ref="entityManagerFactory" />
-    </bean>
-	
-    <!--=====================================================================-->
-    <!-- DAOs -->
-    <!--=====================================================================-->
-
-    <bean id="accountDAO" class="org.geosdi.geoplatform.core.dao.impl.GPAccountDAOImpl" />
-    <bean id="projectDAO" class="org.geosdi.geoplatform.core.dao.impl.GPProjectDAOImpl" />
-    <bean id="accountProjectDAO" class="org.geosdi.geoplatform.core.dao.impl.GPAccountProjectDAOImpl" />
-    <bean id="folderDAO" class="org.geosdi.geoplatform.core.dao.impl.GPFolderDAOImpl" />
-    <bean id="layerDAO" class="org.geosdi.geoplatform.core.dao.impl.GPLayerDAOImpl" />
-    <bean id="viewportDAO" class="org.geosdi.geoplatform.core.dao.impl.GPViewportDAOImpl" />
-<!--    <bean id="styleDAO" class="org.geosdi.geoplatform.core.dao.impl.GPStyleDAOImpl" />-->
-    <bean id="serverDAO" class="org.geosdi.geoplatform.core.dao.impl.GPServerDAOImpl" />
-    <bean id="authorityDAO" class="org.geosdi.geoplatform.core.dao.impl.GPAuthorityDAOImpl" />
-    <bean id="organizationDAO" class="org.geosdi.geoplatform.core.dao.impl.GPOrganizationDAOImpl" />
-    <bean id="messageDAO" class="org.geosdi.geoplatform.core.dao.impl.GPMessageDAOImpl" />
-    <!-- Access Info -->
-    <bean id="gsAccountDAO" class="org.geosdi.geoplatform.core.dao.impl.GSAccountDAOImpl" />
-    <bean id="gsResourceDAO" class="org.geosdi.geoplatform.core.dao.impl.GSResourceDAOImpl" />
-    <!-- ACL -->
-    <bean id="classDAO" class="org.geosdi.geoplatform.core.acl.dao.impl.AclClassDAOImpl" />
-    <bean id="entryDAO" class="org.geosdi.geoplatform.core.acl.dao.impl.AclEntryDAOImpl" />
-    <bean id="objectIdentityDAO" class="org.geosdi.geoplatform.core.acl.dao.impl.AclObjectIdentityDAOImpl" />
-    <bean id="sidDAO" class="org.geosdi.geoplatform.core.acl.dao.impl.AclSidDAOImpl" />
-    <bean id="guiComponentDAO" class="org.geosdi.geoplatform.core.acl.dao.impl.GuiComponentDAOImpl" />
-
+    <context:component-scan base-package="org.geosdi.geoplatform.core.dao.loader"/>
 </beans>

@@ -35,8 +35,6 @@
  */
 package org.geosdi.geoplatform.core.delegate.impl.viewport;
 
-import java.util.ArrayList;
-import java.util.List;
 import org.geosdi.geoplatform.core.dao.GPAccountProjectDAO;
 import org.geosdi.geoplatform.core.dao.GPViewportDAO;
 import org.geosdi.geoplatform.core.delegate.api.viewport.ViewportDelegate;
@@ -50,6 +48,9 @@ import org.geosdi.geoplatform.response.viewport.WSGetViewportResponse;
 import org.geosdi.geoplatform.services.development.EntityCorrectness;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Viewport service delegate.
@@ -140,16 +141,14 @@ public class GPViewportDelegate implements ViewportDelegate {
         }
         EntityCorrectness.checkViewportLog(viewport); // TODO assert
 
-        return viewportDao.remove(viewport);
+        return viewportDao.removeById(viewport.getId());
     }
 
     @Override
     public Long insertViewport(InsertViewportRequest insertViewportReq) throws
             ResourceNotFoundFault, IllegalParameterFault {
         if (insertViewportReq == null) {
-            throw new IllegalParameterFault(
-                    "The InsertViewportRequest must not "
-                    + "be null.");
+            throw new IllegalParameterFault("The InsertViewportRequest must not be null.");
         }
         return insertViewport(insertViewportReq.getAccountProjectID(),
                 insertViewportReq.getViewport());
@@ -203,10 +202,9 @@ public class GPViewportDelegate implements ViewportDelegate {
             throw new ResourceNotFoundFault("AccountProject not found",
                     accountProjectID);
         }
-        List<GPViewport> oldViewportList = this.viewportDao.findByAccountProjectID(
-                accountProjectID);
+        List<GPViewport> oldViewportList = this.viewportDao.findByAccountProjectID(accountProjectID);
         for (GPViewport viewport : oldViewportList) {
-            this.viewportDao.remove(viewport);
+            this.viewportDao.removeById(viewport.getId());
         }
         if (viewportList != null) {
             for (GPViewport viewport : viewportList) {
@@ -227,7 +225,7 @@ public class GPViewportDelegate implements ViewportDelegate {
         orig.setIsDefault(viewport.isIsDefault());
         orig.setZoomLevel(viewport.getZoomLevel());
 
-        viewportDao.merge(orig);
+        viewportDao.update(orig);
         return orig.getId();
     }
 

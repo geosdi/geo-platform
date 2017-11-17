@@ -34,7 +34,6 @@
  */
 package org.geosdi.geoplatform.core.delegate.impl.project;
 
-import com.googlecode.genericdao.search.Search;
 import org.geosdi.geoplatform.core.dao.*;
 import org.geosdi.geoplatform.core.delegate.api.project.ProjectDelegate;
 import org.geosdi.geoplatform.core.delegate.impl.project.function.GPFolderFunction;
@@ -50,7 +49,6 @@ import org.geosdi.geoplatform.request.project.CloneProjectRequest;
 import org.geosdi.geoplatform.request.project.ImportProjectRequest;
 import org.geosdi.geoplatform.request.project.SaveProjectRequest;
 import org.geosdi.geoplatform.response.*;
-import org.geosdi.geoplatform.response.factory.AccountDTOFactory;
 import org.geosdi.geoplatform.services.development.EntityCorrectness;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,14 +60,18 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static java.lang.Boolean.TRUE;
 import static org.geosdi.geoplatform.core.binding.IGPProjectBinder.GPProjectBinder.newGProjectBinder;
+import static org.geosdi.geoplatform.response.FolderDTO.convertToGPFolder;
+import static org.geosdi.geoplatform.response.RasterLayerDTO.convertToGPRasterLayer;
+import static org.geosdi.geoplatform.response.VectorLayerDTO.convertToGPVectorLayer;
+import static org.geosdi.geoplatform.response.factory.AccountDTOFactory.buildShortAccountDTOList;
 
 /**
- * Project service delegate.
+ * <p>Project service delegate.</p>
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
- * @author Michele Santomauro
- * @email michele.santomauro@geosdi.org
+ * @author Michele Santomauro  <michele.santomauro@geosdi.org>
  */
 @Component(value = "gpProjectDelegate")
 public class GPProjectDelegate implements ProjectDelegate {
@@ -126,7 +128,7 @@ public class GPProjectDelegate implements ProjectDelegate {
                     account.getId());
             if (oldDefault != null) {
                 oldDefault.setDefaultProject(false);
-                accountProjectDao.merge(oldDefault);
+                accountProjectDao.update(oldDefault);
             }
         }
 
@@ -156,9 +158,7 @@ public class GPProjectDelegate implements ProjectDelegate {
         origProject.setName(project.getName());
         origProject.setNumberOfElements(project.getNumberOfElements());
         origProject.setShared(project.isShared());
-
-        projectDao.merge(origProject);
-
+        projectDao.update(origProject);
         return origProject.getId();
     }
 
@@ -166,7 +166,6 @@ public class GPProjectDelegate implements ProjectDelegate {
     public Boolean deleteProject(Long projectID) throws ResourceNotFoundFault {
         GPProject project = this.getProjectByID(projectID);
         EntityCorrectness.checkProjectLog(project); // TODO assert
-
         return projectDao.removeById(projectID);
     }
 
@@ -203,8 +202,7 @@ public class GPProjectDelegate implements ProjectDelegate {
         GPProject project = this.getProjectByID(projectID);
         EntityCorrectness.checkProjectLog(project); // TODO assert
         project.setShared(true);
-
-        projectDao.merge(project);
+        projectDao.update(project);
     }
 
     @Override
@@ -221,7 +219,7 @@ public class GPProjectDelegate implements ProjectDelegate {
                 project.getId());
         EntityCorrectness.checkAccountProjectLog(accountOwner); // TODO assert
         accountOwner.setPermissionMask(BasePermission.READ.getMask());
-        accountProjectDao.merge(accountOwner);
+        accountProjectDao.update(accountOwner);
 
         // Set the new owner
         List<GPAccountProject> accounts = accountProjectDao.findNotOwnersByProjectID(
@@ -236,9 +234,7 @@ public class GPProjectDelegate implements ProjectDelegate {
                 break;
             }
         }
-        accountProjectDao.merge(accounts.toArray(
-                new GPAccountProject[accounts.size()]));
-
+        accountProjectDao.update(accounts);
         if (!exist) {
             GPAccountProject ownerProject = new GPAccountProject();
             ownerProject.setAccount(owner);
@@ -247,8 +243,7 @@ public class GPProjectDelegate implements ProjectDelegate {
                     BasePermission.ADMINISTRATION.getMask());
             accountProjectDao.persist(ownerProject);
         }
-
-        return Boolean.TRUE;
+        return TRUE;
     }
 
     @Override
@@ -256,11 +251,8 @@ public class GPProjectDelegate implements ProjectDelegate {
             ResourceNotFoundFault {
         GPProject project = this.getProjectByID(projectID);
         EntityCorrectness.checkProjectLog(project); // TODO assert
-
-        GPAccountProject accountOwner = accountProjectDao.findOwnerByProjectID(
-                projectID);
+        GPAccountProject accountOwner = accountProjectDao.findOwnerByProjectID(projectID);
         EntityCorrectness.checkAccountProjectLog(accountOwner);
-
         return accountOwner;
     }
 
@@ -275,10 +267,8 @@ public class GPProjectDelegate implements ProjectDelegate {
         if (defaultAccountProject == null) {
             return null;
         }
-
         GPProject project = defaultAccountProject.getProject();
         EntityCorrectness.checkProjectLog(project); // TODO assert
-
         return project;
     }
 
@@ -289,7 +279,6 @@ public class GPProjectDelegate implements ProjectDelegate {
         if (project == null) {
             return null;
         }
-
         ProjectDTO projectDTO;
         if (project.isShared()) {
             GPAccountProject ownerProject = accountProjectDao.findOwnerByProjectID(
@@ -300,7 +289,6 @@ public class GPProjectDelegate implements ProjectDelegate {
         } else {
             projectDTO = new ProjectDTO(project, true);
         }
-
         return projectDTO;
     }
 
@@ -339,7 +327,7 @@ public class GPProjectDelegate implements ProjectDelegate {
     public Long updateAccountProject(GPAccountProject accountProject) throws
             ResourceNotFoundFault, IllegalParameterFault {
         EntityCorrectness.checkAccountProject(accountProject); // TODO assert
-        accountProjectDao.merge(accountProject);
+        accountProjectDao.update(accountProject);
 
         return accountProject.getId();
     }
@@ -403,14 +391,8 @@ public class GPProjectDelegate implements ProjectDelegate {
             throws ResourceNotFoundFault {
         GPAccount account = this.getAccountByID(accountID);
         EntityCorrectness.checkAccountLog(account); // TODO assert
-
-        Search searchCriteria = new Search(GPAccountProject.class);
-        searchCriteria.addFilterEqual("account.id", accountID);
-        if (request != null && request.getNameLike() != null) {
-            searchCriteria.addFilterILike("project.name", request.getNameLike());
-        }
-
-        return Long.valueOf(accountProjectDao.count(searchCriteria));
+        return ((request != null) ? this.accountProjectDao.count(accountID, request.getNameLike()).longValue()
+                : this.accountProjectDao.count(accountID, null).longValue());
     }
 
     @Override
@@ -418,7 +400,6 @@ public class GPProjectDelegate implements ProjectDelegate {
             ResourceNotFoundFault {
         GPAccount account = this.getAccountByID(accountID);
         EntityCorrectness.checkAccountLog(account); // TODO assert
-
         return accountProjectDao.findDefaultProjectByAccountID(accountID);
     }
 
@@ -427,50 +408,31 @@ public class GPProjectDelegate implements ProjectDelegate {
             PaginatedSearchRequest request) throws ResourceNotFoundFault {
         GPAccount account = this.getAccountByID(accountID);
         EntityCorrectness.checkAccountLog(account); // TODO assert
-
-        Search searchCriteria = new Search(GPAccountProject.class);
-        searchCriteria.addFilterEqual("account.id", accountID);
-        searchCriteria.addSortDesc("defaultProject"); // First the default Project
-        if (request != null) {
-            searchCriteria.setMaxResults(request.getNum());
-            searchCriteria.setPage(request.getPage());
-
-            if (request.getNameLike() != null) {
-                searchCriteria.addFilterILike("project.name",
-                        request.getNameLike());
-            }
-        }
-
-        List<GPAccountProject> accountProjectList = accountProjectDao.search(
-                searchCriteria);
+        List<GPAccountProject> accountProjectList = ((request != null) ?
+                this.accountProjectDao.searchAccountProjectsByAccountID(request.getPage(), request.getNum(), accountID,
+                        request.getNameLike())
+                : this.accountProjectDao.searchAccountProjectsByAccountID(null, null, accountID, null));
         EntityCorrectness.checkAccountProjectListLog(accountProjectList); // TODO assert
-
-        List<ProjectDTO> projectDTOList = new ArrayList<ProjectDTO>(
-                accountProjectList.size());
+        List<ProjectDTO> projectDTOList = new ArrayList<ProjectDTO>(accountProjectList.size());
         for (GPAccountProject accountProject : accountProjectList) {
             GPProject project = accountProject.getProject();
             EntityCorrectness.checkProjectLog(project); // TODO assert
-
             ProjectDTO projectDTO;
             if (project.isShared()) {
-                GPAccount owner = accountProjectDao.findOwnerByProjectID(
-                        project.getId()).getAccount();
+                GPAccount owner = accountProjectDao.findOwnerByProjectID(project.getId()).getAccount();
                 projectDTO = new ProjectDTO(project,
                         accountProject.isDefaultProject(), owner);
             } else {
-                projectDTO = new ProjectDTO(project,
-                        accountProject.isDefaultProject());
+                projectDTO = new ProjectDTO(project, accountProject.isDefaultProject());
             }
             projectDTOList.add(projectDTO);
         }
-
         return projectDTOList;
     }
 
     @Override
-    public Boolean saveAccountProjectProperties(
-            AccountProjectPropertiesDTO accountProjectProperties) throws
-            ResourceNotFoundFault, IllegalParameterFault {
+    public Boolean saveAccountProjectProperties(AccountProjectPropertiesDTO accountProjectProperties)
+            throws ResourceNotFoundFault, IllegalParameterFault {
         GPProject project = this.getProjectByID(
                 accountProjectProperties.getProjectID());
         EntityCorrectness.checkProjectLog(project); // TODO assert
@@ -482,18 +444,16 @@ public class GPProjectDelegate implements ProjectDelegate {
         project.setName(projectName);
         project.setVersion(version);
         project.setShared(accountProjectProperties.isShared());
-
-        projectDao.merge(project);
+        projectDao.update(project);
 
         if (accountProjectProperties.isDefaultProject()) {
             GPAccount account = this.getAccountByID(
                     accountProjectProperties.getAccountID());
             EntityCorrectness.checkAccountLog(account); // TODO assert
 
-            accountProjectDao.forceAsDefaultProject(account.getId(),
-                    project.getId());
+            accountProjectDao.forceAsDefaultProject(account.getId(), project.getId());
         }
-        return Boolean.TRUE;
+        return TRUE;
     }
 
     @Override
@@ -501,19 +461,13 @@ public class GPProjectDelegate implements ProjectDelegate {
             throws ResourceNotFoundFault {
         GPProject project = this.getProjectByID(projectID);
         EntityCorrectness.checkProjectLog(project); // TODO assert
-
-        List<GPAccountProject> accountProjectList = accountProjectDao.findByProjectID(
-                projectID);
-
-        List<GPAccount> accountList = new ArrayList<GPAccount>(
-                accountProjectList.size());
+        List<GPAccountProject> accountProjectList = accountProjectDao.findByProjectID(projectID);
+        List<GPAccount> accountList = new ArrayList<>(accountProjectList.size());
         for (GPAccountProject accountProject : accountProjectList) {
             GPAccount account = accountProject.getAccount();
             accountList.add(account);
         }
-
-        return new ShortAccountDTOContainer(AccountDTOFactory
-                .buildShortAccountDTOList(accountList));
+        return new ShortAccountDTOContainer(buildShortAccountDTOList(accountList));
     }
 
     @Override
@@ -540,10 +494,7 @@ public class GPProjectDelegate implements ProjectDelegate {
         for (GPAccountProject accountProject : accountProjects) {
             accounts.remove(accountProject.getAccount());
         }
-
-        return new ShortAccountDTOContainer(
-                AccountDTOFactory.buildShortAccountDTOList(
-                        accounts));
+        return new ShortAccountDTOContainer(buildShortAccountDTOList(accounts));
     }
 
     @Override
@@ -551,9 +502,7 @@ public class GPProjectDelegate implements ProjectDelegate {
             PutAccountsProjectRequest apRequest) throws ResourceNotFoundFault,
             IllegalParameterFault {
         if (apRequest == null) {
-            throw new IllegalParameterFault(
-                    "The PutAccountsProjectRequest must "
-                            + "not be null.");
+            throw new IllegalParameterFault("The PutAccountsProjectRequest must not be null.");
         }
         Long projectID = apRequest.getProjectID();
         List<Long> accountIDsProject = apRequest.getAccountIDsProject();
@@ -574,7 +523,7 @@ public class GPProjectDelegate implements ProjectDelegate {
         if (!checkOwner || accountIDsProject.isEmpty()) {
             logger.trace("\n*** The project will be unshare");
             this.unshareProject(project);
-            return Boolean.TRUE;
+            return TRUE;
         }
 
         logger.debug("\n*** Update all relations of sharing");
@@ -609,15 +558,14 @@ public class GPProjectDelegate implements ProjectDelegate {
             logger.trace(
                     "\n*** Delete the relation of sharing for Account \"{}\"",
                     e.getValue().getAccount().getNaturalID());
-            accountProjectDao.remove(e.getValue());
+            accountProjectDao.removeById(e.getValue().getId());
         }
 
         if (!project.isShared() && !accountIDsProject.isEmpty()) {
             project.setShared(true);
-            projectDao.merge(project);
+            projectDao.update(project);
         }
-
-        return Boolean.TRUE;
+        return TRUE;
     }
     //</editor-fold>
 
@@ -631,7 +579,7 @@ public class GPProjectDelegate implements ProjectDelegate {
 
         // Root Folders
         List<GPFolder> rootFolders = folderDao.searchRootFolders(projectID);
-        logger.debug("\n*** rootFolders:\n{}", rootFolders);
+        logger.debug("\n############################### rootFolders:\n{}", rootFolders);
 
         List<FolderDTO> rootFoldersDTO = FolderDTO.convertToFolderDTOList(
                 rootFolders);
@@ -678,10 +626,7 @@ public class GPProjectDelegate implements ProjectDelegate {
         }
 
         // Sub Folders
-        Search searchCriteria = new Search(GPFolder.class);
-        searchCriteria.addFilterEqual("project.id", projectID);
-        searchCriteria.addFilterNotNull("parent.id");
-        List<GPFolder> subFolders = folderDao.search(searchCriteria);
+        List<GPFolder> subFolders = folderDao.searchSubFoders(projectID);
 
         Map<String, GPFolder> subFoldersMap = new HashMap<String, GPFolder>(
                 subFolders.size());
@@ -695,10 +640,7 @@ public class GPProjectDelegate implements ProjectDelegate {
                 subFoldersMap, mapProjectFolders);
 
         // Sub Layers
-        searchCriteria = new Search(GPLayer.class);
-        searchCriteria.addFilterEqual("project.id", projectID);
-        List<GPLayer> subLayers = layerDao.search(searchCriteria);
-
+        List<GPLayer> subLayers = layerDao.searchLayersByProjectID(projectID);
         for (GPLayer layer : subLayers) {
             FolderDTO parent = mapProjectFolders.get(layer.getFolder().getId());
             if (parent == null) { // TODO assert: only for test purpose
@@ -749,10 +691,7 @@ public class GPProjectDelegate implements ProjectDelegate {
                             i -> new GPFolderFunction(projectCloned, folderDao, null).apply(rootFolders.get(i))));
 
             // Sub Folders
-            Search searchCriteria = new Search(GPFolder.class);
-            searchCriteria.addFilterEqual("project.id", cloneProjectRequest.getGpProjectID());
-            searchCriteria.addFilterNotNull("parent.id");
-            List<GPFolder> subFolders = folderDao.search(searchCriteria);
+            List<GPFolder> subFolders = folderDao.searchSubFoders(cloneProjectRequest.getGpProjectID());
             Collections.sort(subFolders, Comparator.comparingInt(f -> f.getLevel()));
 
             IntStream.iterate(0, n -> n + 1).limit(subFolders.size()).boxed().forEach(i ->
@@ -762,10 +701,7 @@ public class GPProjectDelegate implements ProjectDelegate {
             });
 
             // Sub Layers
-            searchCriteria = new Search(GPLayer.class);
-            searchCriteria.addFilterEqual("project.id", cloneProjectRequest.getGpProjectID());
-            List<GPLayer> subLayers = layerDao.search(searchCriteria);
-
+            List<GPLayer> subLayers = layerDao.searchLayersByProjectID(cloneProjectRequest.getGpProjectID());
             IntStream.iterate(0, n -> n + 1).limit(subLayers.size()).boxed().forEach(i -> {
                 new GPLayerFunction(projectCloned, layerDao, folderMap.get(subLayers.get(i).getFolder().getId())).apply(subLayers.get(i));
             });
@@ -801,7 +737,7 @@ public class GPProjectDelegate implements ProjectDelegate {
         position = 0;
         for (int i = rootFolders.size() - 1; i >= 0; i--) {
             FolderDTO folderDTO = rootFolders.get(i);
-            GPFolder folder = FolderDTO.convertToGPFolder(project, null,
+            GPFolder folder = convertToGPFolder(project, null,
                     folderDTO);
 
             List<AbstractElementDTO> childs = folderDTO.getElementList();
@@ -825,7 +761,7 @@ public class GPProjectDelegate implements ProjectDelegate {
         logger.trace("\n\n *** numberOfElements = {} ***\n\n", numberOfElements);
         project.setNumberOfElements(numberOfElements);
         EntityCorrectness.checkProject(project); // TODO assert
-        projectDao.merge(project);
+        projectDao.update(project);
 
         GPAccountProject accountProject = new GPAccountProject();
         accountProject.setAccountAndProject(account, project);
@@ -890,7 +826,6 @@ public class GPProjectDelegate implements ProjectDelegate {
                     this.fillProjectFolders(childsDTO, mapRemaining, mapAll);
                 }
             }
-
         }
         return mapAll;
     }
@@ -908,12 +843,10 @@ public class GPProjectDelegate implements ProjectDelegate {
                 childs.add(childFolder);
             }
         }
-
         // Important: must be execute outer first for otherwise will throw ConcurrentModificationException
         for (String key : childsKeyHit) {
             map.remove(key);
         }
-
         return childs;
     }
 
@@ -926,47 +859,29 @@ public class GPProjectDelegate implements ProjectDelegate {
 
             if (element instanceof FolderDTO) { // Folder
                 FolderDTO folderDTO = (FolderDTO) element;
-                GPFolder folder = FolderDTO.convertToGPFolder(project, parent,
-                        folderDTO);
-
+                GPFolder folder = convertToGPFolder(project, parent, folderDTO);
                 List<AbstractElementDTO> childs = folderDTO.getElementList();
-
-                int descendantsIth = this.persistElementList(project, folder,
-                        childs);
-
+                int descendantsIth = this.persistElementList(project, folder, childs);
                 logger.trace("\n\n*** FOLDER\t{} ***\n\n", folder.getName());
                 logger.trace("\n\n*** Desc = {} + DescIth = {} ***\n",
                         numberOfDescendants, descendantsIth);
                 folder.setNumberOfDescendants(descendantsIth);
-
                 folder.setPosition(++position);
-                logger.trace("*** DescIth {} - pos = {}", folder.getName(),
-                        folder.getPosition());
-
+                logger.trace("*** DescIth {} - pos = {}", folder.getName(), folder.getPosition());
                 EntityCorrectness.checkFolder(folder); // TODO assert
                 folderDao.persist(folder);
-
                 numberOfDescendants += descendantsIth + 1;
-
             } else { // Layer
                 GPLayer layer;
                 if (element instanceof RasterLayerDTO) {
-                    layer = RasterLayerDTO.convertToGPRasterLayer(project,
-                            parent,
-                            (RasterLayerDTO) element);
+                    layer = convertToGPRasterLayer(project, parent, (RasterLayerDTO) element);
                 } else {
-                    layer = VectorLayerDTO.convertToGPVectorLayer(project,
-                            parent,
-                            (VectorLayerDTO) element);
+                    layer = convertToGPVectorLayer(project, parent, (VectorLayerDTO) element);
                 }
-
                 layer.setPosition(++position);
-                logger.trace("*** Layer {} - pos = {}", layer.getTitle(),
-                        layer.getPosition());
-
+                logger.trace("*** Layer {} - pos = {}", layer.getTitle(), layer.getPosition());
                 EntityCorrectness.checkLayer(layer); // TODO assert
                 layerDao.persist(layer);
-
                 numberOfDescendants++;
             }
         }
@@ -984,10 +899,7 @@ public class GPProjectDelegate implements ProjectDelegate {
             logger.debug("\n*** fillExpandedFolder - folder: {}", folder);
             if (folder.isExpanded()) {
                 // Sub Layers
-                Search searchCriteria = new Search(GPLayer.class);
-                searchCriteria.addFilterEqual("project.id", projectID);
-                searchCriteria.addFilterEqual("folder.id", folder.getId());
-                List<GPLayer> subLayers = layerDao.search(searchCriteria);
+                List<GPLayer> subLayers = layerDao.searchLayersByProjectAndFolderID(projectID, folder.getId());
 
                 for (GPLayer layer : subLayers) {
                     ShortLayerDTO layerDTO;
@@ -1000,10 +912,7 @@ public class GPProjectDelegate implements ProjectDelegate {
                 }
 
                 // Sub folders
-                searchCriteria = new Search(GPFolder.class);
-                searchCriteria.addFilterEqual("project.id", projectID);
-                searchCriteria.addFilterEqual("parent.id", folder.getId());
-                List<GPFolder> childs = folderDao.search(searchCriteria);
+                List<GPFolder> childs = folderDao.searchFoldersByProjectAndParentID(projectID, folder.getId());
                 if (childs.size() > 0) {
                     childsDTO = FolderDTO.convertToFolderDTOList(childs);
                     folder.addFolders(childsDTO);
@@ -1021,11 +930,11 @@ public class GPProjectDelegate implements ProjectDelegate {
             List<GPAccountProject> accountProjectList = accountProjectDao.findNotOwnersByProjectID(
                     project.getId());
             for (GPAccountProject accountProject : accountProjectList) {
-                accountProjectDao.remove(accountProject);
+                accountProjectDao.removeById(accountProject.getId());
             }
 
             project.setShared(false);
-            projectDao.merge(project);
+            projectDao.update(project);
         }
     }
 

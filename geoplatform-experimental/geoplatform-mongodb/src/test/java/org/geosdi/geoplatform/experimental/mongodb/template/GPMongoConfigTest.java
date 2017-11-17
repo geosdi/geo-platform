@@ -95,7 +95,7 @@ public class GPMongoConfigTest {
         Assert.assertNotNull("Address Repo must not be NULL",
                 addressRepo);
 
-        addressRepo.save(Stream.of(new Address("A", 0.001, -0.002),
+        addressRepo.saveAll(Stream.of(new Address("A", 0.001, -0.002),
                 new Address("B", 1, 1), new Address("C", 0.5, 0.5),
                 new Address("D", -0.5, -0.5), new Address("Berlin", 13.405838, 52.531261),
                 new Address("Cologne", 6.921272, 50.960157),
@@ -178,7 +178,7 @@ public class GPMongoConfigTest {
                 addresses.add(a);
             }
 
-            addressRepo.save(addresses);
+            addressRepo.saveAll(addresses);
 
             return System.currentTimeMillis() - start;
         }

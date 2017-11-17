@@ -42,8 +42,6 @@
             <list>
                 <value>classpath:gp-ws.properties</value>
                 <value>file:${GP_DATA_DIR}/gp-ws.properties</value>
-                <value>classpath:gp-db.properties</value>
-                <value>file:${GP_DATA_DIR}/gp-db.properties</value>
             </list>
         </property>
         <property name="ignoreResourceNotFound" value="true" />

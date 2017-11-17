@@ -62,7 +62,7 @@ import static org.mockito.Mockito.when;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:appContext-PublisherRestTest.xml"})
-@ActiveProfiles(profiles = {"dev"})
+@ActiveProfiles(profiles = {"dev", "jpa"})
 public abstract class PublisherRestTest extends PublisherBaseTest {
 
     private static final AtomicBoolean flag = new AtomicBoolean(Boolean.FALSE);

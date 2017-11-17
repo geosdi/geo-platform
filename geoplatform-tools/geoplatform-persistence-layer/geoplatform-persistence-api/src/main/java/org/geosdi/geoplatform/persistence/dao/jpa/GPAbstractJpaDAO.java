@@ -80,9 +80,23 @@ public abstract class GPAbstractJpaDAO<T extends Object, ID extends Serializable
      * @param entity
      */
     @Override
-    public void update(T entity) {
+    public <S extends T> S update(T entity) {
         Preconditions.checkNotNull(entity, "Entity to update must not be null.");
-        this.entityManager.merge(entity);
+        return (S) this.entityManager.merge(entity);
+    }
+
+    /**
+     * @param entities
+     * @return {@link Collection<S>}
+     * @throws GPDAOException
+     */
+    @Override
+    public <S extends T> Collection<S> update(Iterable<T> entities) throws GPDAOException {
+        List<S> updateEntities = new ArrayList<>();
+        for (T entity : entities) {
+            updateEntities.add(this.update(entity));
+        }
+        return updateEntities;
     }
 
     /**
@@ -140,7 +154,8 @@ public abstract class GPAbstractJpaDAO<T extends Object, ID extends Serializable
             Root<T> root = criteriaQuery.from(super.getPersistentClass());
             criteriaQuery.select(root);
             criteriaQuery.where(super.getCriteriaBuilder().equal(root.get("id"), id));
-            return entityManager.createQuery(criteriaQuery).getSingleResult();
+            List<T> entities = this.entityManager.createQuery(criteriaQuery).getResultList();
+            return ((entities != null) && !(entities.isEmpty()) ? entities.get(0) : null);
         } catch (HibernateException ex) {
             logger.error("HibernateException : " + ex);
             throw new GPDAOException(ex);

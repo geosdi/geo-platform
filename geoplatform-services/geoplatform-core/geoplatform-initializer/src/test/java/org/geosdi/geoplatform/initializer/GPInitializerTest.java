@@ -35,24 +35,17 @@
  */
 package org.geosdi.geoplatform.initializer;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import org.geosdi.geoplatform.core.model.GPFolder;
-import org.geosdi.geoplatform.core.model.GPLayer;
-import org.geosdi.geoplatform.core.model.GPLayerInfo;
-import org.geosdi.geoplatform.core.model.GPOrganization;
-import org.geosdi.geoplatform.core.model.GPProject;
-import org.geosdi.geoplatform.core.model.GPRasterLayer;
-import org.geosdi.geoplatform.core.model.GPUser;
-import org.geosdi.geoplatform.core.model.GPVectorLayer;
+import org.geosdi.geoplatform.core.model.*;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.security.acls.domain.BasePermission;
+
+import java.util.*;
+import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * This test is not intended to test the business logic but only the correctness
@@ -107,7 +100,7 @@ public class GPInitializerTest extends BaseInitializerTest {
         folderA.setChecked(false);
         folderB.setChecked(true);
         //
-        folderDAO.persist(folderA, folderB);
+        folderDAO.persist(Stream.of(folderA, folderB).collect(toList()));
 
         rasterLayer = super.createRasterLayer(folderB, userPositionTestProject, beginPosition + 30); // 333030
         vectorLayer = super.createVectorLayer(folderB, userPositionTestProject, beginPosition); // 333000
@@ -116,18 +109,18 @@ public class GPInitializerTest extends BaseInitializerTest {
         rasterLayer.setChecked(false);
         vectorLayer.setChecked(true);
         //
-        layerDAO.persist(rasterLayer, vectorLayer);
+        layerDAO.persist(Stream.of(rasterLayer, vectorLayer).collect(toList()));
     }
 
     @After
     public void tearDown() {
         logger.trace("\n\t@@@ " + getClass().getSimpleName() + ".tearDown @@@");
         // Remove user
-        accountDAO.remove(userPositionTest);
+        accountDAO.removeById(userPositionTest.getId());
         // Remove project and his folders and layers
-        projectDAO.remove(userPositionTestProject);
+        projectDAO.removeById(userPositionTestProject.getId());
         // Remove organization
-        organizationDAO.remove(organizationTest);
+        organizationDAO.removeById(organizationTest.getId());
     }
 
     @Test
@@ -175,8 +168,7 @@ public class GPInitializerTest extends BaseInitializerTest {
             layersList.add(rasterLayer4);
             layersList.add(vectorLayer4);
 
-            GPLayer[] layersArray = layersList.toArray(new GPLayer[layersList.size()]);
-            layerDAO.persist(layersArray);
+            layerDAO.persist(layersList);
             Assert.fail("saveAddedLayersAndTreeModifications must throws an exception");
         } catch (Exception ex) {
             logger.trace("Exception from layerDAO because the layer's title must be NONT NULL: {}",

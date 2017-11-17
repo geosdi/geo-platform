@@ -47,14 +47,14 @@ import org.hibernate.criterion.Projections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+
+import static com.google.common.base.Preconditions.checkArgument;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -86,9 +86,9 @@ public abstract class GPAbstractHibernateDAO<T extends Object, ID extends Serial
      * @param entity
      */
     @Override
-    public void update(T entity) {
+    public <S extends T> S update(T entity) {
         Preconditions.checkNotNull(entity, "Entity to update must not be null.");
-        getCurrentSession().merge(entity);
+        return (S) getCurrentSession().merge(entity);
     }
 
     /**
@@ -143,7 +143,41 @@ public abstract class GPAbstractHibernateDAO<T extends Object, ID extends Serial
             Root<T> root = criteriaQuery.from(super.getPersistentClass());
             criteriaQuery.select(root);
             criteriaQuery.where(this.getCriteriaBuilder().equal(root.get("id"), id));
-            return getCurrentSession().createQuery(criteriaQuery).getSingleResult();
+            List<T> entities = getCurrentSession().createQuery(criteriaQuery).getResultList();
+            return ((entities != null) && !(entities.isEmpty()) ? entities.get(0) : null);
+        } catch (HibernateException ex) {
+            logger.error("HibernateException : " + ex);
+            throw new GPDAOException(ex);
+        }
+    }
+
+    /**
+     * @param entities
+     * @return {@link Collection <S>}
+     * @throws GPDAOException
+     */
+    @Override
+    public <S extends T> Collection<S> update(Iterable<T> entities) throws GPDAOException {
+        List<S> updateEntities = new ArrayList<>();
+        for (T entity : entities) {
+            updateEntities.add(this.update(entity));
+        }
+        return updateEntities;
+    }
+
+    /**
+     * @param id
+     * @return {@link Integer}
+     * @throws GPDAOException
+     */
+    @Override
+    public Integer deleteByID(ID id) throws GPDAOException {
+        checkArgument(id != null, "The Parameter ID must not be null.");
+        try {
+            CriteriaDelete<T> criteriaDelete = this.createCriteriaDelete();
+            Root<T> root = criteriaDelete.from(super.getPersistentClass());
+            criteriaDelete.where(this.getCriteriaBuilder().equal(root.get("id"), id));
+            return getCurrentSession().createQuery(criteriaDelete).executeUpdate();
         } catch (HibernateException ex) {
             logger.error("HibernateException : " + ex);
             throw new GPDAOException(ex);
@@ -254,5 +288,19 @@ public abstract class GPAbstractHibernateDAO<T extends Object, ID extends Serial
      */
     protected final CriteriaQuery<T> createCriteriaQuery() {
         return this.getCriteriaBuilder().createQuery(super.getPersistentClass());
+    }
+
+    /**
+     * @return {@link CriteriaDelete<T>}
+     */
+    protected final CriteriaDelete<T> createCriteriaDelete() {
+        return this.getCriteriaBuilder().createCriteriaDelete(this.persistentClass);
+    }
+
+    /**
+     * @return {@link CriteriaUpdate<T>}
+     */
+    protected final CriteriaUpdate<T> createCriteriaUpdate() {
+        return this.getCriteriaBuilder().createCriteriaUpdate(this.persistentClass);
     }
 }

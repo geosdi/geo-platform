@@ -35,8 +35,6 @@
  */
 package org.geosdi.geoplatform.core.delegate.impl.message;
 
-import java.util.Date;
-import java.util.List;
 import org.geosdi.geoplatform.core.dao.GPAccountDAO;
 import org.geosdi.geoplatform.core.dao.GPMessageDAO;
 import org.geosdi.geoplatform.core.delegate.api.message.MessageDelegate;
@@ -50,6 +48,13 @@ import org.geosdi.geoplatform.response.message.GetMessageResponse;
 import org.geosdi.geoplatform.services.development.EntityCorrectness;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import static java.lang.Boolean.TRUE;
+import static org.geosdi.geoplatform.response.MessageDTO.convertToGPMessage;
 
 /**
  * Message service delegate.
@@ -89,32 +94,26 @@ public class GPMessageDelegate implements MessageDelegate {
         EntityCorrectness.checkAccountLog(sender); // TODO assert
 
         int recipientNumber = message.getRecipientIDs().size();
-        GPMessage[] messages = new GPMessage[recipientNumber];
+        List<GPMessage> messages = new ArrayList<>(recipientNumber);
         for (int i = 0; i < recipientNumber; i++) {
             Long recipientID = message.getRecipientIDs().get(i);
-
             // Ignore message where sender and recipiet are the same
             if (recipientID.equals(sender.getId())) {
                 continue;
             }
-
             GPAccount recipient = this.getAccountById(recipientID);
             EntityCorrectness.checkAccountLog(sender); // TODO assert
-
-            messages[i] = MessageDTO.convertToGPMessage(message, sender,
-                    recipient);
+            messages.add(convertToGPMessage(message, sender, recipient));
         }
         messageDao.persist(messages);
-
-        return Boolean.TRUE;
+        return TRUE;
     }
 
     @Override
     public Boolean deleteMessage(Long messageID) throws ResourceNotFoundFault {
         GPMessage message = this.getMessageByID(messageID);
         EntityCorrectness.checkMessageLog(message); // TODO assert
-
-        return messageDao.remove(message);
+        return messageDao.removeById(message.getId());
     }
 
     @Override
@@ -130,11 +129,8 @@ public class GPMessageDelegate implements MessageDelegate {
             throws ResourceNotFoundFault {
         GPAccount recipient = this.getAccountById(recipientID);
         EntityCorrectness.checkAccountLog(recipient); // TODO assert
-
-        List<GPMessage> allMessages = messageDao.findAllMessagesByRecipient(
-                recipientID);
+        List<GPMessage> allMessages = messageDao.findAllMessagesByRecipient(recipientID);
         EntityCorrectness.checkMessageListLog(allMessages); // TODO assert
-
         return new GetMessageResponse(allMessages);
     }
 
@@ -143,11 +139,8 @@ public class GPMessageDelegate implements MessageDelegate {
             throws ResourceNotFoundFault {
         GPAccount recipient = this.getAccountById(recipientID);
         EntityCorrectness.checkAccountLog(recipient); // TODO assert
-
-        List<GPMessage> unreadMessages = messageDao.findUnreadMessagesByRecipient(
-                recipientID);
+        List<GPMessage> unreadMessages = messageDao.findUnreadMessagesByRecipient(recipientID);
         EntityCorrectness.checkMessageListLog(unreadMessages); // TODO assert
-
         return new GetMessageResponse(unreadMessages);
     }
 

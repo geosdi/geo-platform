@@ -35,17 +35,12 @@
  */
 package org.geosdi.geoplatform.catalogws;
 
-import java.util.List;
 import org.geosdi.geoplatform.catalogws.beans.GPCatalogEndPointImpl;
 import org.geosdi.geoplatform.connectors.ws.geonetwork.GPGeonetworkClientTestConnector;
 import org.geosdi.geoplatform.exception.GPCatalogException;
 import org.geosdi.geoplatform.responce.GPCatalogMetadataDTO;
 import org.geosdi.geoplatform.services.GPCatalogFinderService;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,6 +48,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.List;
 
 /**
  *
@@ -62,7 +59,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:applicationContext-Test.xml",
     "classpath*:applicationContext.xml"})
-@ActiveProfiles(profiles = {"dev"})
+@ActiveProfiles(profiles = {"dev", "jpa"})
 public class GPCatalogWSTest {
 
     static final Logger logger = LoggerFactory.getLogger(GPCatalogWSTest.class);

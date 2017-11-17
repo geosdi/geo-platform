@@ -1,58 +1,42 @@
 /**
- *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
- *
- *   Copyright (C) 2008-2017 geoSDI Group (CNR IMAA - Potenza - ITALY).
- *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
- *
- *   ====================================================================
- *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
- *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * geo-platform
+ * Rich webgis framework
+ * http://geo-platform.org
+ * ====================================================================
+ * <p>
+ * Copyright (C) 2008-2017 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * <p>
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version. This program is distributed in the
+ * hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License
+ * for more details. You should have received a copy of the GNU General
+ * Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * <p>
+ * ====================================================================
+ * <p>
+ * Linking this library statically or dynamically with other modules is
+ * making a combined work based on this library. Thus, the terms and
+ * conditions of the GNU General Public License cover the whole combination.
+ * <p>
+ * As a special exception, the copyright holders of this library give you permission
+ * to link this library with independent modules to produce an executable, regardless
+ * of the license terms of these independent modules, and to copy and distribute
+ * the resulting executable under terms of your choice, provided that you also meet,
+ * for each linked independent module, the terms and conditions of the license of
+ * that module. An independent module is a module which is not derived from or
+ * based on this library. If you modify this library, you may extend this exception
+ * to your version of the library, but you are not obligated to do so. If you do not
+ * wish to do so, delete this exception statement from your version.
  */
 package org.geosdi.geoplatform.core.delegate.impl.account;
 
-import com.google.common.base.Preconditions;
-import com.googlecode.genericdao.search.Filter;
-import com.googlecode.genericdao.search.Search;
-import java.util.ArrayList;
-import java.util.List;
-import javax.annotation.Resource;
-import org.geosdi.geoplatform.core.dao.GPAccountDAO;
-import org.geosdi.geoplatform.core.dao.GPAccountProjectDAO;
-import org.geosdi.geoplatform.core.dao.GPAuthorityDAO;
-import org.geosdi.geoplatform.core.dao.GPOrganizationDAO;
-import org.geosdi.geoplatform.core.dao.GPProjectDAO;
+import org.geosdi.geoplatform.core.dao.*;
 import org.geosdi.geoplatform.core.delegate.api.account.AccountDelegate;
-import org.geosdi.geoplatform.core.model.GPAccount;
-import org.geosdi.geoplatform.core.model.GPAccountProject;
-import org.geosdi.geoplatform.core.model.GPApplication;
-import org.geosdi.geoplatform.core.model.GPAuthority;
-import org.geosdi.geoplatform.core.model.GPOrganization;
-import org.geosdi.geoplatform.core.model.GPUser;
+import org.geosdi.geoplatform.core.model.*;
 import org.geosdi.geoplatform.exception.AccountLoginFault;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
@@ -66,13 +50,23 @@ import org.geosdi.geoplatform.response.ShortAccountDTOContainer;
 import org.geosdi.geoplatform.response.UserDTO;
 import org.geosdi.geoplatform.response.authority.GetAuthoritiesResponseWS;
 import org.geosdi.geoplatform.response.authority.GetAuthorityResponse;
-import org.geosdi.geoplatform.response.factory.AccountDTOFactory;
 import org.geosdi.geoplatform.scheduler.delegate.api.SchedulerDelegate;
 import org.geosdi.geoplatform.services.development.EntityCorrectness;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+import static java.lang.Boolean.FALSE;
+import static org.geosdi.geoplatform.exception.AccountLoginFault.LoginFaultType.ACCOUNT_DISABLED;
+import static org.geosdi.geoplatform.exception.AccountLoginFault.LoginFaultType.ACCOUNT_EXPIRED;
+import static org.geosdi.geoplatform.response.factory.AccountDTOFactory.buildShortAccountDTOList;
+import static org.geosdi.geoplatform.response.factory.AccountDTOFactory.buildUserDTOList;
 
 /**
  * Account service delegate.
@@ -104,23 +98,16 @@ public class GPAccountDelegate implements AccountDelegate {
     @Override
     public Long insertAccount(InsertAccountRequest insertAccountRequest)
             throws IllegalParameterFault {
-        Preconditions.checkNotNull(insertAccountRequest,
-                "The InsertAccountRequest "
-                + "must not be null");
-
+        checkNotNull(insertAccountRequest, "The InsertAccountRequest must not be null");
         GPAccount account = insertAccountRequest.getAccount();
         boolean sendEmail = insertAccountRequest.isSendEmail();
-
         EntityCorrectness.checkAccountAndAuthority(account); // TODO assert
 
-        GPOrganization org = organizationDao.findByName(
-                account.getOrganization().getName());
+        GPOrganization org = organizationDao.findByName(account.getOrganization().getName());
         if (org == null) {
-            throw new IllegalParameterFault(
-                    "Account to save have an organization that does not exist");
+            throw new IllegalParameterFault("Account to save have an organization that does not exist");
         }
         account.setOrganization(org);
-
         this.checkDuplicateAccount(account);
 
         String plainPassword = "";
@@ -139,16 +126,13 @@ public class GPAccountDelegate implements AccountDelegate {
             authority.setAccount(account);
             authority.setAccountNaturalID(account.getNaturalID());
         }
-        authorityDao.persist(authorities.toArray(
-                new GPAuthority[authorities.size()]));
-
+        authorityDao.persist(authorities);
         if (sendEmail && account instanceof GPUser) {
             GPUser user = (GPUser) account;
 
             GPUser clonedUser = this.cloneUser(user, plainPassword);
             gpSchedulerDelegate.sendEmailRegistration(clonedUser);
         }
-
         return account.getId();
     }
 
@@ -175,17 +159,13 @@ public class GPAccountDelegate implements AccountDelegate {
             orig.setPassword(this.gpDigester.digest(password));
         }
         this.updateAccount(orig, user);
-
-        this.updateAccountAuthorities(orig.getUsername(),
-                user.getGPAuthorities());
-
-        accountDao.merge(orig);
+        this.updateAccountAuthorities(orig.getUsername(), user.getGPAuthorities());
+        accountDao.update(orig);
         return orig.getId();
     }
 
     @Override
-    public Long updateOwnUser(UserDTO user,
-            String currentPlainPassword, String newPlainPassword)
+    public Long updateOwnUser(UserDTO user, String currentPlainPassword, String newPlainPassword)
             throws ResourceNotFoundFault, IllegalParameterFault {
         if (user.getId() == null) {
             throw new IllegalArgumentException("User \"ID\" must be NOT NULL");
@@ -218,35 +198,26 @@ public class GPAccountDelegate implements AccountDelegate {
         if (name != null) {
             orig.setName(name);
         }
-
-        accountDao.merge(orig);
-
+        accountDao.update(orig);
         // Send an email for modification
         if (passwordChanged || emailChanged) {
-            gpSchedulerDelegate.sendEmailModification(orig, previousEmail,
-                    newPlainPassword);
+            gpSchedulerDelegate.sendEmailModification(orig, previousEmail, newPlainPassword);
         }
         return orig.getId();
     }
 
     @Override
-    public Long updateApplication(GPAccount application)
-            throws ResourceNotFoundFault, IllegalParameterFault {
+    public Long updateApplication(GPAccount application) throws ResourceNotFoundFault, IllegalParameterFault {
         if (application.getId() == null) {
             throw new IllegalArgumentException(
                     "Application \"ID\" must be NOT NULL");
         }
-        GPApplication orig = (GPApplication) this.getAccountById(
-                application.getId());
+        GPApplication orig = (GPApplication) this.getAccountById(application.getId());
         EntityCorrectness.checkAccountLog(orig); // TODO assert
-
         // Set the values (except appID and property not managed)
         this.updateAccount(orig, application);
-
-        this.updateAccountAuthorities(orig.getAppID(),
-                application.getGPAuthorities());
-
-        accountDao.merge(orig);
+        this.updateAccountAuthorities(orig.getAppID(), application.getGPAuthorities());
+        accountDao.update(orig);
         return orig.getId();
     }
 
@@ -259,14 +230,13 @@ public class GPAccountDelegate implements AccountDelegate {
                 accountID);
         for (GPAccountProject accountProject : accountProjectList) {
             // Remove all AccountProject that reference (also of other accounts) by cascading            
-            if (!projectDao.remove(accountProject.getProject())) {
+            if (!projectDao.removeById(accountProject.getProject().getId())) {
                 return false;
             }
         }
-
         // Remove all AccountProject that reference by cascading
         // Only that reference to shared projects
-        return accountDao.remove(account);
+        return accountDao.removeById(account.getId());
     }
 
     @Override
@@ -336,49 +306,36 @@ public class GPAccountDelegate implements AccountDelegate {
             }
         }
         EntityCorrectness.checkAccountLog(user); // TODO assert
-
         if (!user.isAccountNonExpired()) {
-            throw new AccountLoginFault(
-                    AccountLoginFault.LoginFaultType.ACCOUNT_EXPIRED, username);
+            throw new AccountLoginFault(ACCOUNT_EXPIRED, username);
         }
         if (!user.isEnabled()) {
-            throw new AccountLoginFault(
-                    AccountLoginFault.LoginFaultType.ACCOUNT_DISABLED,
-                    username);
+            throw new AccountLoginFault(ACCOUNT_DISABLED, username);
         }
-
         // Check password
         if (!this.gpDigester.matches(user.getPassword(), plainPassword)) {
             throw new IllegalParameterFault("Specified password was incorrect");
         }
-
         // Set authorities
         user.setGPAuthorities(this.getGPAuthorities(user.getNaturalID()));
-
         return user;
     }
 
     @Override
-    public GPApplication getApplication(String appID)
-            throws ResourceNotFoundFault, AccountLoginFault {
+    public GPApplication getApplication(String appID) throws ResourceNotFoundFault, AccountLoginFault {
         GPApplication application = this.getApplicationByAppId(appID);
         EntityCorrectness.checkAccountLog(application); // TODO assert
-
         if (!application.isAccountNonExpired()) {
-            throw new AccountLoginFault(
-                    AccountLoginFault.LoginFaultType.ACCOUNT_EXPIRED, appID);
+            throw new AccountLoginFault(ACCOUNT_EXPIRED, appID);
         }
         if (!application.isEnabled()) {
-            throw new AccountLoginFault(
-                    AccountLoginFault.LoginFaultType.ACCOUNT_DISABLED, appID);
+            throw new AccountLoginFault(ACCOUNT_DISABLED, appID);
         }
-
         return application;
     }
 
     @Override
-    public ApplicationDTO getShortApplicationByAppID(SearchRequest request)
-            throws ResourceNotFoundFault {
+    public ApplicationDTO getShortApplicationByAppID(SearchRequest request) throws ResourceNotFoundFault {
         GPApplication application = this.getApplicationByAppId(
                 request.getNameLike());
         EntityCorrectness.checkAccountLog(application); // TODO assert
@@ -386,45 +343,26 @@ public class GPAccountDelegate implements AccountDelegate {
     }
 
     @Override
-    public SearchUsersResponseWS searchUsers(Long userID,
-            PaginatedSearchRequest request)
-            throws ResourceNotFoundFault {
+    public SearchUsersResponseWS searchUsers(Long userID, PaginatedSearchRequest request) throws ResourceNotFoundFault {
         GPAccount user = this.getAccountById(userID);
         EntityCorrectness.checkAccountLog(user); // TODO assert
 
-        Search searchCriteria = new Search(GPAccount.class);
-        searchCriteria.addFilterNotEqual("id", userID);
-        searchCriteria.setMaxResults(request.getNum());
-        searchCriteria.setPage(request.getPage());
-        searchCriteria.addFilterNotEmpty("username");
-        searchCriteria.addSortAsc("username");
-        searchCriteria.addFilterEqual("organization.name",
-                user.getOrganization().getName());
-
-        String like = request.getNameLike();
-        if (like != null) {
-            searchCriteria.addFilterILike("username", like);
-        }
-
-        List<GPAccount> accountList = accountDao.search(searchCriteria);
+        List<GPAccount> accountList = accountDao.searchPagebleUsersByOrganization(request.getPage(), request.getNum(),
+                user.getOrganization().getName(), userID, request.getNameLike());
         List<GPUser> userList = new ArrayList<>(accountList.size());
         for (GPAccount account : accountList) {
-            account.setGPAuthorities(this.getGPAuthorities(
-                    account.getNaturalID()));
+            account.setGPAuthorities(this.getGPAuthorities(account.getNaturalID()));
             EntityCorrectness.checkAccountAndAuthorityLog(account); // TODO assert
             userList.add((GPUser) account);
         }
-
-        return new SearchUsersResponseWS(AccountDTOFactory.buildUserDTOList(
-                userList));
+        return new SearchUsersResponseWS(buildUserDTOList(userList));
     }
 
     @Override
     public ShortAccountDTOContainer getAllAccounts() {
         List<GPAccount> accountList = accountDao.findAll();
         EntityCorrectness.checkAccountListLog(accountList); // TODO assert
-        return new ShortAccountDTOContainer(AccountDTOFactory
-                .buildShortAccountDTOList(accountList));
+        return new ShortAccountDTOContainer(buildShortAccountDTOList(accountList));
     }
 
     @Override
@@ -432,39 +370,21 @@ public class GPAccountDelegate implements AccountDelegate {
             throws ResourceNotFoundFault {
         GPOrganization org = organizationDao.findByName(organization);
         if (org == null) {
-            throw new ResourceNotFoundFault(
-                    "Organization \"" + organization + "\" not found.");
+            throw new ResourceNotFoundFault("Organization \"" + organization + "\" not found.");
         }
-
         List<GPAccount> accountList = accountDao.findByOrganization(organization);
         EntityCorrectness.checkAccountListLog(accountList); // TODO assert
-
-        return new ShortAccountDTOContainer(AccountDTOFactory
-                .buildShortAccountDTOList(accountList));
+        return new ShortAccountDTOContainer(buildShortAccountDTOList(accountList));
     }
 
     @Override
     public Long getAccountsCount(SearchRequest request) {
-        Search searchCriteria = new Search(GPAccount.class);
-
-        if (request != null && request.getNameLike() != null) {
-            Filter fUsername = Filter.ilike("username", request.getNameLike());
-            Filter fAppId = Filter.ilike("appID", request.getNameLike());
-            searchCriteria.addFilterOr(fUsername, fAppId);
-        }
-        return (long) accountDao.count(searchCriteria);
+        return this.accountDao.countAccounts(request.getNameLike()).longValue();
     }
 
     @Override
     public Long getUsersCount(String organization, SearchRequest request) {
-        Search searchCriteria = new Search(GPAccount.class);
-        searchCriteria.addFilterNotEmpty("username");
-        searchCriteria.addFilterEqual("organization.name", organization);
-
-        if (request != null && request.getNameLike() != null) {
-            searchCriteria.addFilterILike("username", request.getNameLike());
-        }
-        return Long.valueOf(accountDao.count(searchCriteria));
+        return accountDao.countUsers(organization, request.getNameLike()).longValue();
     }
 
     @Override
@@ -472,15 +392,13 @@ public class GPAccountDelegate implements AccountDelegate {
             ResourceNotFoundFault {
         GPAccount account = this.getAccountById(accountNaturalID);
         EntityCorrectness.checkAccountLog(account); // TODO assert
-        return new GetAuthorityResponse(this.getAuthorities(
-                account.getNaturalID()));
+        return new GetAuthorityResponse(this.getAuthorities(account.getNaturalID()));
     }
 
     @Override
     public GetAuthoritiesResponseWS getAuthoritiesDetail(String accountNaturalID)
             throws ResourceNotFoundFault {
-        return new GetAuthoritiesResponseWS(
-                this.getGPAuthorities(accountNaturalID));
+        return new GetAuthoritiesResponseWS(this.getGPAuthorities(accountNaturalID));
     }
 
     @Override
@@ -488,9 +406,8 @@ public class GPAccountDelegate implements AccountDelegate {
             throws ResourceNotFoundFault {
         GPAccount account = this.getAccountById(accountID);
         EntityCorrectness.checkAccountLog(account); // TODO assert
-
         account.setAccountTemporary(true);
-        accountDao.merge(account);
+        accountDao.update(account);
     }
 
     @Override
@@ -498,18 +415,15 @@ public class GPAccountDelegate implements AccountDelegate {
             throws ResourceNotFoundFault, IllegalParameterFault {
         GPAccount account = this.getAccountById(accountID);
         EntityCorrectness.checkAccountLog(account); // TODO assert
-
         if (!account.isAccountTemporary()) {
-            throw new IllegalParameterFault(
-                    "The account must be temporary (ID = " + accountID + ")");
+            throw new IllegalParameterFault("The account must be temporary (ID = " + accountID + ")");
         }
-
-        account.setAccountNonExpired(false);
-        accountDao.merge(account);
+        account.setAccountNonExpired(FALSE);
+        accountDao.update(account);
     }
 
     /**
-     ***************************************************************************
+     * **************************************************************************
      */
     private GPUser cloneUser(GPUser user, String plainPassword) {
         GPUser clonedUser = new GPUser();
@@ -520,7 +434,6 @@ public class GPAccountDelegate implements AccountDelegate {
         clonedUser.setEnabled(user.isEnabled());
         clonedUser.setAccountTemporary(user.isAccountTemporary());
         clonedUser.setPassword(plainPassword);
-
         return clonedUser;
     }
 
@@ -532,14 +445,11 @@ public class GPAccountDelegate implements AccountDelegate {
 
     private List<GPAuthority> getGPAuthorities(String accountNaturalID) throws
             ResourceNotFoundFault {
-        List<GPAuthority> authorities = authorityDao.findShortByAccountNaturalID(
-                accountNaturalID);
+        List<GPAuthority> authorities = authorityDao.findShortByAccountNaturalID(accountNaturalID);
         if (authorities.isEmpty()) {
-            throw new ResourceNotFoundFault(
-                    "Account (naturalID=" + accountNaturalID + ") has no authority");
+            throw new ResourceNotFoundFault("Account (naturalID = " + accountNaturalID + ") has no authority");
         }
         EntityCorrectness.checkAuthorityLog(authorities);
-
         return authorities;
     }
 
@@ -623,7 +533,7 @@ public class GPAccountDelegate implements AccountDelegate {
                     || authority.getTrustedLevel() != origAuthority.getTrustedLevel()) {
                 origAuthority.setAuthority(authority.getAuthority());
                 origAuthority.setTrustedLevel(authority.getTrustedLevel());
-                authorityDao.merge(origAuthority);
+                authorityDao.update(origAuthority);
             }
         }
     }
@@ -642,5 +552,4 @@ public class GPAccountDelegate implements AccountDelegate {
 //        }
         accountToUpdate.setAccountTemporary(account.isAccountTemporary());
     }
-
 }

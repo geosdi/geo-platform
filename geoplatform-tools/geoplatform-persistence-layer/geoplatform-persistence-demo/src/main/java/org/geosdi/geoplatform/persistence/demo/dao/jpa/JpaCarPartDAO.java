@@ -64,7 +64,7 @@ public class JpaCarPartDAO extends GPAbstractJpaDAO<CarPart, Long>
             CriteriaQuery<CarPart> criteriaQuery = super.createCriteriaQuery();
             Root<CarPart> carPartRoot = criteriaQuery.from(super.getPersistentClass());
             criteriaQuery.select(carPartRoot);
-            criteriaQuery.where(super.getCriteriaBuilder().equal(carPartRoot.get("partName"), partName));
+            criteriaQuery.where(super.criteriaBuilder().equal(carPartRoot.get("partName"), partName));
             return entityManager.createQuery(criteriaQuery).getSingleResult();
         } catch (HibernateException ex) {
             logger.error("HibernateException : {}", ex);

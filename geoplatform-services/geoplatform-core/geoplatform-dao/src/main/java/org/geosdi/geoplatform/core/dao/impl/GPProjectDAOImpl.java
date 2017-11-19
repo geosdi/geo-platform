@@ -83,7 +83,7 @@ class GPProjectDAOImpl extends GPAbstractJpaDAO<GPProject, Long> implements GPPr
         checkArgument((projectName != null) && !(projectName.isEmpty()),
                 "The Parameter projectName must not be null or an empty string.");
         try {
-            CriteriaBuilder builder = super.getCriteriaBuilder();
+            CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<GPProject> criteriaQuery = super.createCriteriaQuery();
             Root<GPProject> root = criteriaQuery.from(this.persistentClass);
             criteriaQuery.select(root);

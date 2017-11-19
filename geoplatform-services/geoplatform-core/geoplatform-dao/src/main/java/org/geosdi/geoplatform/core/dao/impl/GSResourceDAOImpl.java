@@ -86,7 +86,7 @@ class GSResourceDAOImpl extends GPAbstractJpaDAO<GSResource, Long> implements GS
         checkArgument(((gsUser != null) && !(gsUser.isEmpty())),
                 "The Parameter gsUser must not be null or an empty string.");
         try {
-            CriteriaBuilder builder = super.getCriteriaBuilder();
+            CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<GSResource> criteriaQuery = super.createCriteriaQuery();
             Root<GSResource> root = criteriaQuery.from(this.persistentClass);
             criteriaQuery.select(root);
@@ -113,7 +113,7 @@ class GSResourceDAOImpl extends GPAbstractJpaDAO<GSResource, Long> implements GS
         checkArgument(((gsUser != null) && !(gsUser.isEmpty())),
                 "The Parameter gsUser must not be null or an empty string.");
         try {
-            CriteriaBuilder builder = super.getCriteriaBuilder();
+            CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<GSResource> criteriaQuery = super.createCriteriaQuery();
             Root<GSResource> root = criteriaQuery.from(this.persistentClass);
             criteriaQuery.select(root);

@@ -81,7 +81,7 @@ class AclEntryDAOImpl extends GPAbstractJpaDAO<AclEntry, Long> implements AclEnt
     public List<AclEntry> findBySid(Long sidId) throws GPDAOException {
         checkArgument(sidId != null, "The Parameter sidId must not be null.");
         try {
-            CriteriaBuilder builder = super.getCriteriaBuilder();
+            CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<AclEntry> criteriaQuery = super.createCriteriaQuery();
             Root<AclEntry> root = criteriaQuery.from(this.persistentClass);
             criteriaQuery.select(root);
@@ -102,7 +102,7 @@ class AclEntryDAOImpl extends GPAbstractJpaDAO<AclEntry, Long> implements AclEnt
     public List<AclEntry> findByObjectIdentity(Long objectIdentityId) throws GPDAOException {
         checkArgument(objectIdentityId != null, "The Parameter objectIdentityId must not be null.");
         try {
-            CriteriaBuilder builder = super.getCriteriaBuilder();
+            CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<AclEntry> criteriaQuery = super.createCriteriaQuery();
             Root<AclEntry> root = criteriaQuery.from(this.persistentClass);
             criteriaQuery.select(root);

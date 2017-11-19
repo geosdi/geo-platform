@@ -82,7 +82,7 @@ class GuiComponentDAOImpl extends GPAbstractJpaDAO<GuiComponent, Long> implement
         checkArgument(((componentId != null) && !(componentId.isEmpty())),
                 "The Parameter componentId must not be null or an empty string.");
         try {
-            CriteriaBuilder builder = super.getCriteriaBuilder();
+            CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<GuiComponent> criteriaQuery = super.createCriteriaQuery();
             Root<GuiComponent> root = criteriaQuery.from(this.persistentClass);
             criteriaQuery.select(root);
@@ -102,7 +102,7 @@ class GuiComponentDAOImpl extends GPAbstractJpaDAO<GuiComponent, Long> implement
     @Override
     public List<String> findAllGuiComponentIDs() throws GPDAOException {
         try {
-            CriteriaBuilder builder = super.getCriteriaBuilder();
+            CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<String> criteriaQuery = builder.createQuery(String.class);
             Root<GuiComponent> root = criteriaQuery.from(this.persistentClass);
             criteriaQuery.select(root.get("componentId"));

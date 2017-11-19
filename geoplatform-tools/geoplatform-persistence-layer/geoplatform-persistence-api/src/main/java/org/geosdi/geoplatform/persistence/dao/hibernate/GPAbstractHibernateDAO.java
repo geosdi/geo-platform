@@ -34,38 +34,31 @@
  */
 package org.geosdi.geoplatform.persistence.dao.hibernate;
 
-import com.google.common.base.Preconditions;
-import org.geosdi.geoplatform.persistence.dao.GPAbstractBaseDAO;
-import org.geosdi.geoplatform.persistence.dao.GPBaseDAO;
 import org.geosdi.geoplatform.persistence.dao.exception.GPDAOException;
-import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Criterion;
-import org.hibernate.criterion.Projections;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.criteria.*;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaDelete;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
+import static java.lang.Boolean.FALSE;
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.StreamSupport.stream;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Transactional
-public abstract class GPAbstractHibernateDAO<T extends Object, ID extends Serializable> extends GPAbstractBaseDAO<T, ID>
-        implements GPBaseDAO<T, ID> {
-
-    @Autowired
-    private SessionFactory sessionFactory;
+public abstract class GPAbstractHibernateDAO<T extends Object, ID extends Serializable> extends GPHibernateCriteriaDAO<T, ID> {
 
     public GPAbstractHibernateDAO(Class<T> thePersistentClass) {
         super(thePersistentClass);
@@ -77,8 +70,8 @@ public abstract class GPAbstractHibernateDAO<T extends Object, ID extends Serial
      */
     @Override
     public T persist(T entity) {
-        Preconditions.checkNotNull(entity, "Entity to persist must not be null.");
-        getCurrentSession().persist(entity);
+        checkNotNull(entity, "Entity to persist must not be null.");
+        currentSession().persist(entity);
         return entity;
     }
 
@@ -86,9 +79,14 @@ public abstract class GPAbstractHibernateDAO<T extends Object, ID extends Serial
      * @param entity
      */
     @Override
-    public <S extends T> S update(T entity) {
-        Preconditions.checkNotNull(entity, "Entity to update must not be null.");
-        return (S) getCurrentSession().merge(entity);
+    public <S extends T> S update(T entity) throws GPDAOException {
+        checkNotNull(entity, "Entity to update must not be null.");
+        try {
+            return (S) currentSession().merge(entity);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new GPDAOException(ex);
+        }
     }
 
     /**
@@ -96,36 +94,33 @@ public abstract class GPAbstractHibernateDAO<T extends Object, ID extends Serial
      * @return {@link Collection<T>}
      */
     @Override
-    public Collection<T> persist(Iterable<T> entities) {
-        List<T> persistedEntities = new ArrayList<>();
-        for (T entity : entities) {
-            persistedEntities.add(this.persist(entity));
+    public Collection<T> persist(Iterable<T> entities) throws GPDAOException {
+        checkArgument(entities != null, "The Parameter Entities must not be null.");
+        try {
+            return stream(entities.spliterator(), FALSE)
+                    .filter(v -> (v != null))
+                    .map(v -> persist(v))
+                    .collect(toList());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new GPDAOException(ex);
         }
-        return persistedEntities;
     }
 
     /**
      * @param id
      */
     @Override
-    public void delete(ID id) {
-        T entity = find(id);
-        getCurrentSession().delete(entity);
-    }
-
-    /**
-     * @param criterion
-     * @return {@link List<T>}
-     * @throws GPDAOException
-     */
-    @Override
-    public List<T> findByCriteria(Criterion... criterion) throws GPDAOException {
+    public void delete(ID id) throws GPDAOException {
+        checkArgument(id != null, "The Parameter ID must not be null.");
         try {
-            Criteria crit = getCurrentSession().createCriteria(persistentClass);
-            Arrays.stream(criterion).forEach(c -> crit.add(c));
-            return crit.list();
-        } catch (HibernateException ex) {
-            logger.error("HibernateException : " + ex);
+            CriteriaBuilder criteriaBuilder = super.criteriaBuilder();
+            CriteriaDelete<T> criteriaDelete = super.createCriteriaDelete();
+            Root<T> root = criteriaDelete.from(this.persistentClass);
+            criteriaDelete.where(criteriaBuilder.equal(root.get("id"), id));
+            this.currentSession().createQuery(criteriaDelete).executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
             throw new GPDAOException(ex);
         }
     }
@@ -137,13 +132,13 @@ public abstract class GPAbstractHibernateDAO<T extends Object, ID extends Serial
      */
     @Override
     public T find(ID id) throws GPDAOException {
-        Preconditions.checkArgument(id != null, "The Parameter ID must not be null.");
+        checkArgument(id != null, "The Parameter ID must not be null.");
         try {
             CriteriaQuery<T> criteriaQuery = this.createCriteriaQuery();
             Root<T> root = criteriaQuery.from(super.getPersistentClass());
             criteriaQuery.select(root);
-            criteriaQuery.where(this.getCriteriaBuilder().equal(root.get("id"), id));
-            List<T> entities = getCurrentSession().createQuery(criteriaQuery).getResultList();
+            criteriaQuery.where(this.criteriaBuilder().equal(root.get("id"), id));
+            List<T> entities = currentSession().createQuery(criteriaQuery).getResultList();
             return ((entities != null) && !(entities.isEmpty()) ? entities.get(0) : null);
         } catch (HibernateException ex) {
             logger.error("HibernateException : " + ex);
@@ -153,16 +148,21 @@ public abstract class GPAbstractHibernateDAO<T extends Object, ID extends Serial
 
     /**
      * @param entities
-     * @return {@link Collection <S>}
+     * @return {@link Collection<S>}
      * @throws GPDAOException
      */
     @Override
     public <S extends T> Collection<S> update(Iterable<T> entities) throws GPDAOException {
-        List<S> updateEntities = new ArrayList<>();
-        for (T entity : entities) {
-            updateEntities.add(this.update(entity));
+        checkArgument(entities != null, "The Parameter entities must not be null.");
+        try {
+            return stream(entities.spliterator(), FALSE)
+                    .filter(e -> (e != null))
+                    .map(e -> (S) this.update(e))
+                    .collect(Collectors.toList());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new GPDAOException(ex);
         }
-        return updateEntities;
     }
 
     /**
@@ -176,8 +176,8 @@ public abstract class GPAbstractHibernateDAO<T extends Object, ID extends Serial
         try {
             CriteriaDelete<T> criteriaDelete = this.createCriteriaDelete();
             Root<T> root = criteriaDelete.from(super.getPersistentClass());
-            criteriaDelete.where(this.getCriteriaBuilder().equal(root.get("id"), id));
-            return getCurrentSession().createQuery(criteriaDelete).executeUpdate();
+            criteriaDelete.where(this.criteriaBuilder().equal(root.get("id"), id));
+            return currentSession().createQuery(criteriaDelete).executeUpdate();
         } catch (HibernateException ex) {
             logger.error("HibernateException : " + ex);
             throw new GPDAOException(ex);
@@ -188,11 +188,16 @@ public abstract class GPAbstractHibernateDAO<T extends Object, ID extends Serial
      * @return {@link List<T>}
      */
     @Override
-    public List<T> findAll() {
-        CriteriaQuery<T> criteriaQuery = this.createCriteriaQuery();
-        Root<T> root = criteriaQuery.from(super.getPersistentClass());
-        criteriaQuery.select(root);
-        return getCurrentSession().createQuery(criteriaQuery).list();
+    public List<T> findAll() throws GPDAOException {
+        try {
+            CriteriaQuery<T> criteriaQuery = this.createCriteriaQuery();
+            Root<T> root = criteriaQuery.from(super.getPersistentClass());
+            criteriaQuery.select(root);
+            return currentSession().createQuery(criteriaQuery).list();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new GPDAOException(ex);
+        }
     }
 
     /**
@@ -207,7 +212,7 @@ public abstract class GPAbstractHibernateDAO<T extends Object, ID extends Serial
             CriteriaQuery<T> criteriaQuery = this.createCriteriaQuery();
             Root<T> root = criteriaQuery.from(super.getPersistentClass());
             criteriaQuery.select(root);
-            return this.getCurrentSession().createQuery(criteriaQuery)
+            return this.currentSession().createQuery(criteriaQuery)
                     .setFirstResult(start)
                     .setMaxResults(end)
                     .getResultList();
@@ -218,89 +223,32 @@ public abstract class GPAbstractHibernateDAO<T extends Object, ID extends Serial
     }
 
     /**
-     * @param start
-     * @param end
-     * @param criterion
-     * @return {@link List<T>}
-     * @throws GPDAOException
+     * @return {@link Integer}
      */
     @Override
-    public List<T> findAll(int start, int end, Criterion... criterion) throws
-            GPDAOException {
+    public Integer removeAll() throws GPDAOException {
         try {
-            Criteria crit = getCurrentSession().createCriteria(persistentClass);
-            Arrays.stream(criterion).forEach(c -> crit.add(c));
-            crit.setFirstResult(start);
-            crit.setMaxResults(end);
-            return crit.list();
-        } catch (HibernateException ex) {
-            logger.error("HibernateException : " + ex);
+            return currentSession().createNativeQuery("delete from "
+                    + persistentClass.getSimpleName()).executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
             throw new GPDAOException(ex);
         }
     }
 
     /**
-     * @return {@link Integer}
-     */
-    @Override
-    public Integer removeAll() {
-        return getCurrentSession().createNativeQuery("delete from "
-                + persistentClass.getSimpleName()).executeUpdate();
-    }
-
-    /**
      * @return {@link Number}
      */
     @Override
-    public Number count() {
-        CriteriaBuilder criteriaBuilder = this.getCriteriaBuilder();
-        CriteriaQuery<Long> criteriaQuery = criteriaBuilder.createQuery(Long.class);
-        criteriaQuery.select(criteriaBuilder.count(criteriaQuery.from(super.getPersistentClass())));
-        return this.getCurrentSession().createQuery(criteriaQuery).getSingleResult();
-    }
-
-    /**
-     * @param criterion
-     * @return {@link Number}
-     */
-    @Override
-    public Number count(Criterion criterion) {
-        return (Number) getCurrentSession().createCriteria(persistentClass).add(criterion)
-                .setProjection(Projections.rowCount()).uniqueResult();
-    }
-
-    /**
-     * @return {@link Session}
-     */
-    protected final Session getCurrentSession() {
-        return this.sessionFactory.getCurrentSession();
-    }
-
-    /**
-     * @return {@link CriteriaBuilder}
-     */
-    protected final CriteriaBuilder getCriteriaBuilder() {
-        return this.sessionFactory.getCriteriaBuilder();
-    }
-
-    /**
-     * @return {@link CriteriaQuery<T>}
-     */
-    protected final CriteriaQuery<T> createCriteriaQuery() {
-        return this.getCriteriaBuilder().createQuery(super.getPersistentClass());
-    }
-
-    /**
-     * @return {@link CriteriaDelete<T>}
-     */
-    protected final CriteriaDelete<T> createCriteriaDelete() {
-        return this.getCriteriaBuilder().createCriteriaDelete(this.persistentClass);
-    }
-
-    /**
-     * @return {@link CriteriaUpdate<T>}
-     */
-    protected final CriteriaUpdate<T> createCriteriaUpdate() {
-        return this.getCriteriaBuilder().createCriteriaUpdate(this.persistentClass);
+    public Number count() throws GPDAOException {
+        try {
+            CriteriaBuilder criteriaBuilder = this.criteriaBuilder();
+            CriteriaQuery<Long> criteriaQuery = criteriaBuilder.createQuery(Long.class);
+            criteriaQuery.select(criteriaBuilder.count(criteriaQuery.from(super.getPersistentClass())));
+            return this.currentSession().createQuery(criteriaQuery).getSingleResult();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new GPDAOException(ex);
+        }
     }
 }

@@ -84,7 +84,7 @@ class GPMessageDAOImpl extends GPAbstractJpaDAO<GPMessage, Long> implements GPMe
     public List<GPMessage> findAllMessagesByRecipient(Long recipientID) throws GPDAOException {
         checkArgument(recipientID != null, "The Parameter recipientID must not be null.");
         try {
-            CriteriaBuilder builder = super.getCriteriaBuilder();
+            CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<GPMessage> criteriaQuery = super.createCriteriaQuery();
             Root<GPMessage> root = criteriaQuery.from(this.persistentClass);
             criteriaQuery.select(root);
@@ -106,7 +106,7 @@ class GPMessageDAOImpl extends GPAbstractJpaDAO<GPMessage, Long> implements GPMe
     public List<GPMessage> findUnreadMessagesByRecipient(Long recipientID) throws GPDAOException {
         checkArgument(recipientID != null, "The Parameter recipientID must not be null.");
         try {
-            CriteriaBuilder builder = super.getCriteriaBuilder();
+            CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<GPMessage> criteriaQuery = super.createCriteriaQuery();
             Root<GPMessage> root = criteriaQuery.from(this.persistentClass);
             criteriaQuery.select(root);
@@ -128,7 +128,7 @@ class GPMessageDAOImpl extends GPAbstractJpaDAO<GPMessage, Long> implements GPMe
     public Boolean markMessageAsRead(Long messageID) throws GPDAOException {
         checkArgument(messageID != null, "The Parameter messageID must not be null.");
         try {
-            CriteriaBuilder builder = super.getCriteriaBuilder();
+            CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaUpdate<GPMessage> criteriaUpdate = super.createCriteriaUpdate();
             Root<GPMessage> root = criteriaUpdate.from(this.persistentClass);
             criteriaUpdate.where(builder.equal(root.get("id"), messageID));

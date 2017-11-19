@@ -70,7 +70,7 @@ public abstract class GPCriteriaJpaDAO<T extends Object, ID extends Serializable
         try {
             CriteriaDelete<T> criteriaDelete = this.createCriteriaDelete();
             Root<T> root = criteriaDelete.from(super.getPersistentClass());
-            criteriaDelete.where(this.getCriteriaBuilder().equal(root.get("id"), id));
+            criteriaDelete.where(this.criteriaBuilder().equal(root.get("id"), id));
             return entityManager.createQuery(criteriaDelete).executeUpdate();
         } catch (HibernateException ex) {
             logger.error("HibernateException : " + ex);
@@ -79,34 +79,67 @@ public abstract class GPCriteriaJpaDAO<T extends Object, ID extends Serializable
     }
 
     /**
-     * @return {@link CriteriaQuery <T>}
+     * @return {@link CriteriaQuery<T>}
      */
     @Override
     public CriteriaQuery<T> createCriteriaQuery() {
-        return this.getCriteriaBuilder().createQuery(this.persistentClass);
+        return this.criteriaBuilder().createQuery(this.persistentClass);
     }
 
     /**
-     * @return {@link CriteriaDelete <T>}
+     * @param classe
+     * @return {@link CriteriaQuery <V>}
+     * @throws Exception
+     */
+    @Override
+    public <V> CriteriaQuery<V> createCriteriaQuery(Class<V> classe) throws Exception {
+        checkArgument(classe != null, "The Parameter classe must not be null.");
+        return criteriaBuilder().createQuery(classe);
+    }
+
+    /**
+     * @return {@link CriteriaDelete<T>}
      */
     @Override
     public CriteriaDelete<T> createCriteriaDelete() {
-        return this.getCriteriaBuilder().createCriteriaDelete(this.persistentClass);
+        return this.criteriaBuilder().createCriteriaDelete(this.persistentClass);
     }
 
     /**
-     * @return {@link CriteriaUpdate <T>}
+     * @param classe
+     * @return {@link CriteriaDelete <V>}
+     * @throws Exception
+     */
+    @Override
+    public <V> CriteriaDelete<V> createCriteriaDelete(Class<V> classe) throws Exception {
+        checkArgument(classe != null, "The Parameter classe must not be null.");
+        return criteriaBuilder().createCriteriaDelete(classe);
+    }
+
+    /**
+     * @return {@link CriteriaUpdate<T>}
      */
     @Override
     public CriteriaUpdate<T> createCriteriaUpdate() {
-        return this.getCriteriaBuilder().createCriteriaUpdate(this.persistentClass);
+        return this.criteriaBuilder().createCriteriaUpdate(this.persistentClass);
+    }
+
+    /**
+     * @param classe
+     * @return {@link CriteriaUpdate <V>}
+     * @throws Exception
+     */
+    @Override
+    public <V> CriteriaUpdate<V> createCriteriaUpdate(Class<V> classe) throws Exception {
+        checkArgument(classe != null, "The Parameter classe must not be null.");
+        return criteriaBuilder().createCriteriaUpdate(classe);
     }
 
     /**
      * @return {@link CriteriaBuilder}
      */
     @Override
-    public CriteriaBuilder getCriteriaBuilder() {
+    public CriteriaBuilder criteriaBuilder() {
         return this.entityManager.getCriteriaBuilder();
     }
 
@@ -141,12 +174,5 @@ public abstract class GPCriteriaJpaDAO<T extends Object, ID extends Serializable
      */
     protected final Session getSession() {
         return (Session) this.entityManager.getDelegate();
-    }
-
-    /**
-     * @return {@link Criteria}
-     */
-    protected final Criteria createCriteria() {
-        return this.getSession().createCriteria(persistentClass);
     }
 }

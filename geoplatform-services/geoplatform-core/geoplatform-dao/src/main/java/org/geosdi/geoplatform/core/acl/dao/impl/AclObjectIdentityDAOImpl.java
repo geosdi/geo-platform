@@ -84,7 +84,7 @@ class AclObjectIdentityDAOImpl extends GPAbstractJpaDAO<AclObjectIdentity, Long>
         checkArgument(objectIdClass != null, "The Parameter objectIdClass must not be null.");
         checkArgument(objectIdIdentity != null, "The Parameter objectIdIdentity must not be null.");
         try {
-            CriteriaBuilder builder = super.getCriteriaBuilder();
+            CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<AclObjectIdentity> criteriaQuery = super.createCriteriaQuery();
             Root<AclObjectIdentity> root = criteriaQuery.from(this.persistentClass);
             criteriaQuery.select(root);

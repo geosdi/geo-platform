@@ -84,7 +84,7 @@ class GPStyleDAOImpl extends GPAbstractJpaDAO<GPStyle, Long> implements GPStyleD
         checkArgument(((styleName != null) && !(styleName.isEmpty())),
                 "The Parameter styleName must not be null or an empty string.");
         try {
-            CriteriaBuilder builder = super.getCriteriaBuilder();
+            CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<GPStyle> criteriaQuery = super.createCriteriaQuery();
             Root<GPStyle> root = criteriaQuery.from(this.persistentClass);
             criteriaQuery.select(root);

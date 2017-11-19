@@ -83,7 +83,7 @@ class AclClassDAOImpl extends GPAbstractJpaDAO<AclClass, Long> implements AclCla
         checkArgument(((clazz != null) && !(clazz.isEmpty())),
                 "The Parameter clazz must not be null or an empty string.");
         try {
-            CriteriaBuilder builder = super.getCriteriaBuilder();
+            CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<AclClass> criteriaQuery = super.createCriteriaQuery();
             Root<AclClass> root = criteriaQuery.from(this.persistentClass);
             criteriaQuery.select(root);

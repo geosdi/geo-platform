@@ -83,7 +83,7 @@ class AclSidDAOImpl extends GPAbstractJpaDAO<AclSid, Long> implements AclSidDAO 
         checkArgument(((sid != null) && !(sid.isEmpty())),
                 "The Parameter sid must not be null or an empty string.");
         try {
-            CriteriaBuilder builder = super.getCriteriaBuilder();
+            CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<AclSid> criteriaQuery = super.createCriteriaQuery();
             Root<AclSid> root = criteriaQuery.from(this.persistentClass);
             criteriaQuery.select(root);
@@ -110,7 +110,7 @@ class AclSidDAOImpl extends GPAbstractJpaDAO<AclSid, Long> implements AclSidDAO 
         checkArgument(((organization != null) && !(organization.isEmpty())),
                 "The Parameter organization must not be null or an empty string.");
         try {
-            CriteriaBuilder builder = super.getCriteriaBuilder();
+            CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<AclSid> criteriaQuery = super.createCriteriaQuery();
             Root<AclSid> root = criteriaQuery.from(this.persistentClass);
             criteriaQuery.select(root);
@@ -135,7 +135,7 @@ class AclSidDAOImpl extends GPAbstractJpaDAO<AclSid, Long> implements AclSidDAO 
         checkArgument(((organization != null) && !(organization.isEmpty())),
                 "The Parameter organization must not be null or an empty string.");
         try {
-            CriteriaBuilder builder = super.getCriteriaBuilder();
+            CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<AclSid> criteriaQuery = super.createCriteriaQuery();
             Root<AclSid> root = criteriaQuery.from(this.persistentClass);
             criteriaQuery.select(root);

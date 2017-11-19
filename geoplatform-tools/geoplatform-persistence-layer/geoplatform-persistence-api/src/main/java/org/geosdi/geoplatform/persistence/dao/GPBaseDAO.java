@@ -35,7 +35,6 @@
 package org.geosdi.geoplatform.persistence.dao;
 
 import org.geosdi.geoplatform.persistence.dao.exception.GPDAOException;
-import org.hibernate.criterion.Criterion;
 
 import java.io.Serializable;
 import java.util.List;
@@ -45,13 +44,12 @@ import java.util.List;
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPBaseDAO<T extends Object, ID extends Serializable>
-        extends GPGenericDAO<T> {
+public interface GPBaseDAO<T extends Object, ID extends Serializable> extends GPGenericDAO<T> {
 
     /**
      * @param id
      */
-    void delete(ID id);
+    void delete(ID id) throws GPDAOException;
 
     /**
      * @param id
@@ -70,7 +68,7 @@ public interface GPBaseDAO<T extends Object, ID extends Serializable>
     /**
      * @return {@link List<T>}
      */
-    List<T> findAll();
+    List<T> findAll() throws GPDAOException;
 
     /**
      * @param start
@@ -81,29 +79,7 @@ public interface GPBaseDAO<T extends Object, ID extends Serializable>
     List<T> findAll(int start, int end) throws GPDAOException;
 
     /**
-     * @param start
-     * @param end
-     * @param criterion
-     * @return {@link List<T>}
-     * @throws GPDAOException
-     */
-    List<T> findAll(int start, int end, Criterion... criterion) throws GPDAOException;
-
-    /**
-     * @param criterion
-     * @return {@link List<T>}
-     * @throws GPDAOException
-     */
-    List<T> findByCriteria(Criterion... criterion) throws GPDAOException;
-
-    /**
      * @return {@link Number}
      */
-    Number count();
-
-    /**
-     * @param criterion
-     * @return {@link Number}
-     */
-    Number count(Criterion criterion);
+    Number count() throws GPDAOException;
 }

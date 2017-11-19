@@ -84,7 +84,7 @@ class GPAccountDAOImpl extends GPAbstractJpaDAO<GPAccount, Long> implements GPAc
         checkArgument((organization != null) && !(organization.isEmpty()),
                 "The Paramater organization must not be null or an Empty String.");
         try {
-            CriteriaBuilder builder = super.getCriteriaBuilder();
+            CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<GPAccount> criteriaQuery = super.createCriteriaQuery();
             Root<GPAccount> root = criteriaQuery.from(super.getPersistentClass());
             criteriaQuery.select(root);
@@ -106,12 +106,12 @@ class GPAccountDAOImpl extends GPAbstractJpaDAO<GPAccount, Long> implements GPAc
         checkArgument((username != null) && !(username.isEmpty()),
                 "The Parameter username must not be null or an empty String.");
         try {
-            CriteriaBuilder builder = super.getCriteriaBuilder();
+            CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<GPAccount> criteriaQuery = super.createCriteriaQuery();
             Root<GPAccount> root = criteriaQuery.from(this.persistentClass);
             Root<GPUser> userRoot = builder.treat(root, GPUser.class);
             criteriaQuery.select(root);
-            criteriaQuery.where(super.getCriteriaBuilder().equal(userRoot.get("username"), username));
+            criteriaQuery.where(super.criteriaBuilder().equal(userRoot.get("username"), username));
             List<GPAccount> accounts = this.entityManager.createQuery(criteriaQuery).getResultList();
             return ((accounts != null) && !(accounts.isEmpty()) ? (GPUser) accounts.get(0) : null);
         } catch (Exception ex) {
@@ -130,12 +130,12 @@ class GPAccountDAOImpl extends GPAbstractJpaDAO<GPAccount, Long> implements GPAc
         checkArgument((email != null) && !(email.isEmpty()),
                 "The Parameter email must not be null or an empty String.");
         try {
-            CriteriaBuilder builder = super.getCriteriaBuilder();
+            CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<GPAccount> criteriaQuery = super.createCriteriaQuery();
             Root<GPAccount> root = criteriaQuery.from(this.persistentClass);
             Root<GPUser> userRoot = builder.treat(root, GPUser.class);
             criteriaQuery.select(root);
-            criteriaQuery.where(super.getCriteriaBuilder().equal(userRoot.get("emailAddress"), email));
+            criteriaQuery.where(super.criteriaBuilder().equal(userRoot.get("emailAddress"), email));
             List<GPAccount> accounts = this.entityManager.createQuery(criteriaQuery).getResultList();
             return ((accounts != null) && !(accounts.isEmpty()) ? (GPUser) accounts.get(0) : null);
         } catch (Exception ex) {
@@ -154,12 +154,12 @@ class GPAccountDAOImpl extends GPAbstractJpaDAO<GPAccount, Long> implements GPAc
         checkArgument((appID != null) && !(appID.isEmpty()), "" +
                 "The Parameter appID must not be null or an empty String.");
         try {
-            CriteriaBuilder builder = super.getCriteriaBuilder();
+            CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<GPAccount> criteriaQuery = super.createCriteriaQuery();
             Root<GPAccount> root = criteriaQuery.from(this.persistentClass);
             Root<GPApplication> applicationRoot = builder.treat(root, GPApplication.class);
             criteriaQuery.select(root);
-            criteriaQuery.where(super.getCriteriaBuilder().equal(applicationRoot.get("appID"), appID));
+            criteriaQuery.where(super.criteriaBuilder().equal(applicationRoot.get("appID"), appID));
             List<GPAccount> applications = this.entityManager.createQuery(criteriaQuery).getResultList();
             return ((applications != null) && !(applications.isEmpty()) ? (GPApplication) applications.get(0) : null);
         } catch (Exception ex) {
@@ -193,7 +193,7 @@ class GPAccountDAOImpl extends GPAbstractJpaDAO<GPAccount, Long> implements GPAc
     @Override
     public Integer expireTempAccount() throws GPDAOException {
         try {
-            CriteriaBuilder builder = super.getCriteriaBuilder();
+            CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaUpdate<GPAccount> criteriaUpdate = super.createCriteriaUpdate();
             Root<GPAccount> root = criteriaUpdate.from(this.persistentClass);
             criteriaUpdate.where(builder.equal(root.get("accountTemporary"), TRUE),
@@ -223,7 +223,7 @@ class GPAccountDAOImpl extends GPAbstractJpaDAO<GPAccount, Long> implements GPAc
                 "The Paramater organizationName must not be null or an Empty String.");
         checkArgument(userID != null, "The Parameter userID must not be null.");
         try {
-            CriteriaBuilder builder = super.getCriteriaBuilder();
+            CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<GPAccount> criteriaQuery = super.createCriteriaQuery();
             Root<GPAccount> root = criteriaQuery.from(this.persistentClass);
             Root<GPUser> userRoot = builder.treat(root, GPUser.class);
@@ -257,7 +257,7 @@ class GPAccountDAOImpl extends GPAbstractJpaDAO<GPAccount, Long> implements GPAc
         checkArgument(((nameLike != null) && !(nameLike.isEmpty())),
                 "The Parameter nameLike must not be null or an empty string.");
         try {
-            CriteriaBuilder builder = super.getCriteriaBuilder();
+            CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<Long> criteriaQuery = builder.createQuery(Long.class);
             Root<GPAccount> root = criteriaQuery.from(this.persistentClass);
             Root<GPUser> userRoot = builder.treat(root, GPUser.class);
@@ -283,7 +283,7 @@ class GPAccountDAOImpl extends GPAbstractJpaDAO<GPAccount, Long> implements GPAc
         checkArgument((organizationName != null) && !(organizationName.isEmpty()),
                 "The Paramater organizationName must not be null or an Empty String.");
         try {
-            CriteriaBuilder builder = super.getCriteriaBuilder();
+            CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<Long> criteriaQuery = builder.createQuery(Long.class);
             Root<GPAccount> root = criteriaQuery.from(this.persistentClass);
             Root<GPUser> userRoot = builder.treat(root, GPUser.class);

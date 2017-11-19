@@ -75,7 +75,7 @@ class GPServerDAOImpl extends GPAbstractJpaDAO<GeoPlatformServer, Long> implemen
         checkArgument(idOrganization != null, "The Parameter idOrganization must not be null.");
         checkArgument(type != null, "The Parameter type must not ne null.");
         try {
-            CriteriaBuilder builder = super.getCriteriaBuilder();
+            CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<GeoPlatformServer> criteriaQuery = super.createCriteriaQuery();
             Root<GeoPlatformServer> root = criteriaQuery.from(this.persistentClass);
             criteriaQuery.select(root);
@@ -97,7 +97,7 @@ class GPServerDAOImpl extends GPAbstractJpaDAO<GeoPlatformServer, Long> implemen
     public List<GeoPlatformServer> findAll(GPCapabilityType type) throws GPDAOException {
         checkArgument(type != null, "The Parameter type must not ne null.");
         try {
-            CriteriaBuilder builder = super.getCriteriaBuilder();
+            CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<GeoPlatformServer> criteriaQuery = super.createCriteriaQuery();
             Root<GeoPlatformServer> root = criteriaQuery.from(this.persistentClass);
             criteriaQuery.select(root);
@@ -129,7 +129,7 @@ class GPServerDAOImpl extends GPAbstractJpaDAO<GeoPlatformServer, Long> implemen
         checkArgument(((serverName != null) && !(serverName.isEmpty())),
                 "The Parameter serveName must not be null or an empty string.");
         try {
-            CriteriaBuilder builder = super.getCriteriaBuilder();
+            CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<GeoPlatformServer> criteriaQuery = super.createCriteriaQuery();
             Root<GeoPlatformServer> root = criteriaQuery.from(this.persistentClass);
             criteriaQuery.select(root);
@@ -151,7 +151,7 @@ class GPServerDAOImpl extends GPAbstractJpaDAO<GeoPlatformServer, Long> implemen
         checkArgument(((serverUrl != null) && !(serverUrl.isEmpty())),
                 "The Parameter serverUrl must not be null or an empty string.");
         try {
-            CriteriaBuilder builder = super.getCriteriaBuilder();
+            CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<GeoPlatformServer> criteriaQuery = super.createCriteriaQuery();
             Root<GeoPlatformServer> root = criteriaQuery.from(this.persistentClass);
             criteriaQuery.select(root);
@@ -177,7 +177,7 @@ class GPServerDAOImpl extends GPAbstractJpaDAO<GeoPlatformServer, Long> implemen
                 "The Parameter organizationName must not ne null or an empty string.");
         checkArgument(type != null, "The Parameter type must not ne null.");
         try {
-            CriteriaBuilder builder = super.getCriteriaBuilder();
+            CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<Long> criteriaQuery = builder.createQuery(Long.class);
             Root<GeoPlatformServer> root = criteriaQuery.from(this.persistentClass);
             List<Predicate> predicates = Lists.newArrayList();
@@ -212,7 +212,7 @@ class GPServerDAOImpl extends GPAbstractJpaDAO<GeoPlatformServer, Long> implemen
                 "The Parameter organizationName must not ne null or an empty string.");
         checkArgument(type != null, "The Parameter type must not ne null.");
         try {
-            CriteriaBuilder builder = super.getCriteriaBuilder();
+            CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<GeoPlatformServer> criteriaQuery = super.createCriteriaQuery();
             Root<GeoPlatformServer> root = criteriaQuery.from(this.persistentClass);
             criteriaQuery.select(root);

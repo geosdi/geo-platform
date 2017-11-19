@@ -81,7 +81,7 @@ class GPViewportDAOImpl extends GPAbstractJpaDAO<GPViewport, Long> implements GP
     public List<GPViewport> findByAccountProjectID(Long accountProjectID) throws GPDAOException {
         checkArgument(accountProjectID != null, "The Parameter accountProjectID must not ne null.");
         try {
-            CriteriaBuilder builder = super.getCriteriaBuilder();
+            CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<GPViewport> criteriaQuery = super.createCriteriaQuery();
             Root<GPViewport> root = criteriaQuery.from(this.persistentClass);
             criteriaQuery.select(root);

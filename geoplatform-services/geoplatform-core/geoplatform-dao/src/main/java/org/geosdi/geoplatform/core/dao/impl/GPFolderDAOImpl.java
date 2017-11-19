@@ -91,7 +91,7 @@ class GPFolderDAOImpl extends GPAbstractJpaDAO<GPFolder, Long> implements GPFold
             CriteriaQuery<GPFolder> criteriaQuery = super.createCriteriaQuery();
             Root<GPFolder> root = criteriaQuery.from(this.persistentClass);
             criteriaQuery.select(root);
-            criteriaQuery.where(super.getCriteriaBuilder().equal(root.get("name"), folderName));
+            criteriaQuery.where(super.criteriaBuilder().equal(root.get("name"), folderName));
             List<GPFolder> folders = this.entityManager.createQuery(criteriaQuery).getResultList();
             return ((folders != null) && !(folders.isEmpty()) ? folders.get(0) : null);
         } catch (Exception ex) {
@@ -111,7 +111,7 @@ class GPFolderDAOImpl extends GPAbstractJpaDAO<GPFolder, Long> implements GPFold
         try {
             CriteriaQuery<GPFolder> criteriaQuery = super.createCriteriaQuery();
             Root<GPFolder> root = criteriaQuery.from(this.persistentClass);
-            CriteriaBuilder builder = super.getCriteriaBuilder();
+            CriteriaBuilder builder = super.criteriaBuilder();
             criteriaQuery.select(root);
             criteriaQuery.where(builder.equal(root.join("project").get("id"), projectID),
                     builder.isNull(root.get("parent")));
@@ -134,7 +134,7 @@ class GPFolderDAOImpl extends GPAbstractJpaDAO<GPFolder, Long> implements GPFold
         try {
             CriteriaQuery<GPFolder> criteriaQuery = super.createCriteriaQuery();
             Root<GPFolder> root = criteriaQuery.from(this.persistentClass);
-            CriteriaBuilder builder = super.getCriteriaBuilder();
+            CriteriaBuilder builder = super.criteriaBuilder();
             criteriaQuery.select(root);
             criteriaQuery.where(builder.equal(root.join("project").get("id"), projectID),
                     builder.isNotNull(root.get("parent")));
@@ -173,7 +173,7 @@ class GPFolderDAOImpl extends GPAbstractJpaDAO<GPFolder, Long> implements GPFold
         checkArgument((deltaValueSecondRange != 0), "The Parameter deltaValueSecondRange must not be 0");
         try {
             // Select the folders of interest (first range)
-            CriteriaBuilder criteriaBuilder = super.getCriteriaBuilder();
+            CriteriaBuilder criteriaBuilder = super.criteriaBuilder();
             CriteriaQuery<GPFolder> criteriaQueryFirstRange = super.createCriteriaQuery();
             Root<GPFolder> rootFirstRange = criteriaQueryFirstRange.from(this.persistentClass);
             criteriaQueryFirstRange.select(rootFirstRange);
@@ -257,7 +257,7 @@ class GPFolderDAOImpl extends GPAbstractJpaDAO<GPFolder, Long> implements GPFold
         checkArgument((beginPosition < endPosition), "The Parameter beginPosition must be lesser than endPosition");
         checkArgument((deltaValue != 0), "The Parameter deltaValue must not be 0");
         try {
-            CriteriaBuilder criteriaBuilder = super.getCriteriaBuilder();
+            CriteriaBuilder criteriaBuilder = super.criteriaBuilder();
             CriteriaQuery<GPFolder> criteriaQuery = super.createCriteriaQuery();
             Root<GPFolder> root = criteriaQuery.from(this.persistentClass);
             criteriaQuery.select(root);
@@ -288,7 +288,7 @@ class GPFolderDAOImpl extends GPAbstractJpaDAO<GPFolder, Long> implements GPFold
         checkArgument((deltaValue != 0), "The Parameter deltaValue must not be 0");
         try {
             // Select the folders of interest (position >= lowerBoundPosition)
-            CriteriaBuilder criteriaBuilder = super.getCriteriaBuilder();
+            CriteriaBuilder criteriaBuilder = super.criteriaBuilder();
             CriteriaQuery<GPFolder> criteriaQuery = super.createCriteriaQuery();
             Root<GPFolder> root = criteriaQuery.from(this.persistentClass);
             criteriaQuery.select(root);
@@ -410,7 +410,7 @@ class GPFolderDAOImpl extends GPAbstractJpaDAO<GPFolder, Long> implements GPFold
         checkArgument(lessOrEqualTo != null, "The Parameter lessOrEqualTo must not be null.");
         checkArgument(greatherOrEqualTo != null, "The Parameter greatherOrEqualTo must not be null.");
         try {
-            CriteriaBuilder builder = super.getCriteriaBuilder();
+            CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<GPFolder> criteriaQuery = super.createCriteriaQuery();
             Root<GPFolder> root = criteriaQuery.from(this.persistentClass);
             criteriaQuery.select(root);
@@ -434,7 +434,7 @@ class GPFolderDAOImpl extends GPAbstractJpaDAO<GPFolder, Long> implements GPFold
     @Override
     public List<GPFolder> searchPagebleFolders(Integer page, Integer size, String name) throws GPDAOException {
         try {
-            CriteriaBuilder builder = super.getCriteriaBuilder();
+            CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<GPFolder> criteriaQuery = super.createCriteriaQuery();
             Root<GPFolder> root = criteriaQuery.from(this.persistentClass);
             criteriaQuery.select(root);
@@ -457,7 +457,7 @@ class GPFolderDAOImpl extends GPAbstractJpaDAO<GPFolder, Long> implements GPFold
     @Override
     public Number countFolders(String name) throws GPDAOException {
         try {
-            CriteriaBuilder builder = super.getCriteriaBuilder();
+            CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<Long> criteriaQuery = builder.createQuery(Long.class);
             Root<GPFolder> root = criteriaQuery.from(this.persistentClass);
             criteriaQuery.select(builder.count(root));
@@ -482,7 +482,7 @@ class GPFolderDAOImpl extends GPAbstractJpaDAO<GPFolder, Long> implements GPFold
     public List<GPFolder> searchPagebleFoldersByParentID(Integer page, Integer size, Long parentID) throws GPDAOException {
         checkArgument(parentID != null, "The Parameter parentID must not be null.");
         try {
-            CriteriaBuilder builder = super.getCriteriaBuilder();
+            CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<GPFolder> criteriaQuery = super.createCriteriaQuery();
             Root<GPFolder> root = criteriaQuery.from(this.persistentClass);
             criteriaQuery.select(root);
@@ -508,7 +508,7 @@ class GPFolderDAOImpl extends GPAbstractJpaDAO<GPFolder, Long> implements GPFold
     public List<GPFolder> searchFoldersByParentID(Long parentID) throws GPDAOException {
         checkArgument(parentID != null, "The Parameter parentID must not be null.");
         try {
-            CriteriaBuilder builder = super.getCriteriaBuilder();
+            CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<GPFolder> criteriaQuery = super.createCriteriaQuery();
             Root<GPFolder> root = criteriaQuery.from(this.persistentClass);
             criteriaQuery.select(root);
@@ -555,7 +555,7 @@ class GPFolderDAOImpl extends GPAbstractJpaDAO<GPFolder, Long> implements GPFold
         checkArgument(projectID != null, "The Parameter projectID must not be null.");
         checkArgument(parentID != null, "The Parameter parentID must not be null.");
         try {
-            CriteriaBuilder builder = super.getCriteriaBuilder();
+            CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<GPFolder> criteriaQuery = super.createCriteriaQuery();
             Root<GPFolder> root = criteriaQuery.from(this.persistentClass);
             criteriaQuery.select(root);

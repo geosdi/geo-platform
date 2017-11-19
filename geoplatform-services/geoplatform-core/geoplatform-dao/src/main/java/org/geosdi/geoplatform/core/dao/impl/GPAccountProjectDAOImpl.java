@@ -82,7 +82,7 @@ class GPAccountProjectDAOImpl extends GPAbstractJpaDAO<GPAccountProject, Long> i
     public Boolean removeByAccountID(Long accountID) throws GPDAOException {
         checkArgument(accountID != null, "The Parameter accountID must not be null.");
         try {
-            CriteriaBuilder builder = super.getCriteriaBuilder();
+            CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaDelete<GPAccountProject> criteriaDelete = super.createCriteriaDelete();
             Root<GPAccountProject> root = criteriaDelete.from(super.getPersistentClass());
             criteriaDelete.where(builder.equal(root.join("account").get("id"), accountID));
@@ -102,7 +102,7 @@ class GPAccountProjectDAOImpl extends GPAbstractJpaDAO<GPAccountProject, Long> i
     public Boolean removeByProjectID(Long projectID) throws GPDAOException {
         checkArgument(projectID != null, "The Parameter projectID must not be null.");
         try {
-            CriteriaBuilder builder = super.getCriteriaBuilder();
+            CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaDelete<GPAccountProject> criteriaDelete = super.createCriteriaDelete();
             Root<GPAccountProject> root = criteriaDelete.from(super.getPersistentClass());
             criteriaDelete.where(builder.equal(root.join("project").get("id"), projectID));
@@ -126,7 +126,7 @@ class GPAccountProjectDAOImpl extends GPAbstractJpaDAO<GPAccountProject, Long> i
         try {
             CriteriaQuery<GPAccountProject> criteriaQuery = super.createCriteriaQuery();
             Root<GPAccountProject> root = criteriaQuery.from(this.persistentClass);
-            CriteriaBuilder criteriaBuilder = super.getCriteriaBuilder();
+            CriteriaBuilder criteriaBuilder = super.criteriaBuilder();
             criteriaQuery.select(root);
             criteriaQuery.where(criteriaBuilder.and(criteriaBuilder.equal(root.join("account").get("id"), accountID),
                     criteriaBuilder.equal(root.join("project").get("id"), projectID)));
@@ -150,7 +150,7 @@ class GPAccountProjectDAOImpl extends GPAbstractJpaDAO<GPAccountProject, Long> i
             CriteriaQuery<GPAccountProject> criteriaQuery = super.createCriteriaQuery();
             Root<GPAccountProject> root = criteriaQuery.from(this.persistentClass);
             criteriaQuery.select(root);
-            CriteriaBuilder criteriaBuilder = super.getCriteriaBuilder();
+            CriteriaBuilder criteriaBuilder = super.criteriaBuilder();
             criteriaQuery.where(criteriaBuilder.and(criteriaBuilder.equal(root.join("account").get("id"), accountID),
                     criteriaBuilder.equal(root.get("defaultProject"), TRUE)));
             List<GPAccountProject> accountProjects = this.entityManager.createQuery(criteriaQuery).getResultList();
@@ -193,7 +193,7 @@ class GPAccountProjectDAOImpl extends GPAbstractJpaDAO<GPAccountProject, Long> i
             CriteriaQuery<GPAccountProject> criteriaQuery = super.createCriteriaQuery();
             Root<GPAccountProject> root = criteriaQuery.from(this.persistentClass);
             criteriaQuery.select(root);
-            criteriaQuery.where(super.getCriteriaBuilder().equal(root.join("account").get("id"), accountID));
+            criteriaQuery.where(super.criteriaBuilder().equal(root.join("account").get("id"), accountID));
             return this.entityManager.createQuery(criteriaQuery).getResultList();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -213,7 +213,7 @@ class GPAccountProjectDAOImpl extends GPAbstractJpaDAO<GPAccountProject, Long> i
             CriteriaQuery<GPAccountProject> criteriaQuery = super.createCriteriaQuery();
             Root<GPAccountProject> root = criteriaQuery.from(this.persistentClass);
             criteriaQuery.select(root);
-            CriteriaBuilder criteriaBuilder = super.getCriteriaBuilder();
+            CriteriaBuilder criteriaBuilder = super.criteriaBuilder();
             criteriaQuery.where(criteriaBuilder.and(criteriaBuilder.equal(root.join("account").get("id"), accountID),
                     criteriaBuilder.equal(root.get("permissionMask"), ADMINISTRATION.getMask())));
             return this.entityManager.createQuery(criteriaQuery).getResultList();
@@ -235,7 +235,7 @@ class GPAccountProjectDAOImpl extends GPAbstractJpaDAO<GPAccountProject, Long> i
             CriteriaQuery<GPAccountProject> criteriaQuery = super.createCriteriaQuery();
             Root<GPAccountProject> root = criteriaQuery.from(this.persistentClass);
             criteriaQuery.select(root);
-            criteriaQuery.where(super.getCriteriaBuilder().equal(root.join("project").get("id"), projectID));
+            criteriaQuery.where(super.criteriaBuilder().equal(root.join("project").get("id"), projectID));
             return this.entityManager.createQuery(criteriaQuery).getResultList();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -255,7 +255,7 @@ class GPAccountProjectDAOImpl extends GPAbstractJpaDAO<GPAccountProject, Long> i
             CriteriaQuery<GPAccountProject> criteriaQuery = super.createCriteriaQuery();
             Root<GPAccountProject> root = criteriaQuery.from(this.persistentClass);
             criteriaQuery.select(root);
-            CriteriaBuilder criteriaBuilder = super.getCriteriaBuilder();
+            CriteriaBuilder criteriaBuilder = super.criteriaBuilder();
             criteriaQuery.where(criteriaBuilder.and(criteriaBuilder.equal(root.join("project").get("id"), projectID),
                     criteriaBuilder.equal(root.get("permissionMask"), ADMINISTRATION.getMask())));
             List<GPAccountProject> accountProjects = this.entityManager.createQuery(criteriaQuery).getResultList();
@@ -278,7 +278,7 @@ class GPAccountProjectDAOImpl extends GPAbstractJpaDAO<GPAccountProject, Long> i
             CriteriaQuery<GPAccountProject> criteriaQuery = super.createCriteriaQuery();
             Root<GPAccountProject> root = criteriaQuery.from(this.persistentClass);
             criteriaQuery.select(root);
-            CriteriaBuilder criteriaBuilder = super.getCriteriaBuilder();
+            CriteriaBuilder criteriaBuilder = super.criteriaBuilder();
             criteriaQuery.where(criteriaBuilder.and(criteriaBuilder.equal(root.join("project").get("id"), projectID),
                     criteriaBuilder.notEqual(root.get("permissionMask"), ADMINISTRATION.getMask())));
             return this.entityManager.createQuery(criteriaQuery).getResultList();
@@ -298,7 +298,7 @@ class GPAccountProjectDAOImpl extends GPAbstractJpaDAO<GPAccountProject, Long> i
     public Number count(Long accountID, String nameProject) throws GPDAOException {
         checkArgument(accountID != null, "The Parameter accountID must not be null.");
         try {
-            CriteriaBuilder builder = super.getCriteriaBuilder();
+            CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<Long> criteriaQuery = builder.createQuery(Long.class);
             Root<GPAccountProject> root = criteriaQuery.from(this.persistentClass);
             criteriaQuery.select(builder.count(root));
@@ -327,7 +327,7 @@ class GPAccountProjectDAOImpl extends GPAbstractJpaDAO<GPAccountProject, Long> i
             String projectName) throws GPDAOException {
         checkArgument(accountID != null, "The Parameter accountID must not be null.");
         try {
-            CriteriaBuilder builder = super.getCriteriaBuilder();
+            CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<GPAccountProject> criteriaQuery = super.createCriteriaQuery();
             Root<GPAccountProject> root = criteriaQuery.from(this.persistentClass);
             criteriaQuery.select(root);

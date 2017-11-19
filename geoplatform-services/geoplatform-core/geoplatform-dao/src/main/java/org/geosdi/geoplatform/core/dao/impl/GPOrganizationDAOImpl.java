@@ -93,7 +93,7 @@ class GPOrganizationDAOImpl extends GPAbstractJpaDAO<GPOrganization, Long> imple
         checkArgument((name != null) && !(name.isEmpty()),
                 "The Parameter name must not be null or an empty string.");
         try {
-            CriteriaBuilder builder = super.getCriteriaBuilder();
+            CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<GPOrganization> criteriaQuery = super.createCriteriaQuery();
             Root<GPOrganization> root = criteriaQuery.from(this.persistentClass);
             criteriaQuery.select(root);

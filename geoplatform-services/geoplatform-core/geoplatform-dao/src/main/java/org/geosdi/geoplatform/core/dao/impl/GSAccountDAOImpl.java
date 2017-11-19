@@ -83,7 +83,7 @@ class GSAccountDAOImpl extends GPAbstractJpaDAO<GSAccount, Long> implements GSAc
         checkArgument(((authkey != null) && !(authkey.isEmpty())),
                 "The Parameter authkey must not be null or an empty string.");
         try {
-            CriteriaBuilder builder = super.getCriteriaBuilder();
+            CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<GSAccount> criteriaQuery = super.createCriteriaQuery();
             Root<GSAccount> root = criteriaQuery.from(this.persistentClass);
             criteriaQuery.select(root);

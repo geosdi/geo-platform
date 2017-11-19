@@ -34,6 +34,9 @@
  */
 package org.geosdi.geoplatform.persistence.dao;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.ToString;
 import net.jcip.annotations.Immutable;
 import org.geosdi.geoplatform.persistence.dao.exception.GPDAOException;
 
@@ -50,20 +53,20 @@ public interface GPGenericDAO<T extends Object> {
      * @param entity
      * @return {@link T}
      */
-    T persist(T entity);
+    T persist(T entity) throws GPDAOException;
 
     /**
      * @param entities
      * @return {@link Collection<T>}
      */
-    Collection<T> persist(Iterable<T> entities);
+    Collection<T> persist(Iterable<T> entities) throws GPDAOException;
 
     /**
      * @param entity
      * @param <S>
      * @return {@link S}
      */
-    <S extends T> S update(T entity);
+    <S extends T> S update(T entity) throws GPDAOException;
 
     /**
      * @param entities
@@ -81,7 +84,7 @@ public interface GPGenericDAO<T extends Object> {
      *
      * @return {@link Integer}
      */
-    Integer removeAll();
+    Integer removeAll() throws GPDAOException;
 
     /**
      *
@@ -104,41 +107,13 @@ public interface GPGenericDAO<T extends Object> {
     /**
      *
      */
+    @AllArgsConstructor
+    @Getter
+    @ToString
     @Immutable
     class GPPageResult<T extends Object> implements IGPPageResult<T> {
 
         private final Long total;
         private final List<T> results;
-
-        public GPPageResult(Long theTotal, List<T> theResults) {
-            this.total = theTotal;
-            this.results = theResults;
-        }
-
-        /**
-         * <p>The Total Results Number</p>
-         *
-         * @return {@link Long}
-         */
-        @Override
-        public Long getTotal() {
-            return this.total;
-        }
-
-        /**
-         * @return {@link List <T>}
-         */
-        @Override
-        public List<T> getResults() {
-            return this.results;
-        }
-
-        @Override
-        public String toString() {
-            return getClass().getSimpleName() + " {" +
-                    " total = " + total +
-                    ", results = " + results +
-                    '}';
-        }
     }
 }

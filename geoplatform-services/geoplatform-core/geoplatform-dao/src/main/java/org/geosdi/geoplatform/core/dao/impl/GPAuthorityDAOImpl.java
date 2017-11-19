@@ -85,7 +85,7 @@ class GPAuthorityDAOImpl extends GPAbstractJpaDAO<GPAuthority, Long> implements 
         try {
             CriteriaDelete<GPAuthority> criteriaDelete = super.createCriteriaDelete();
             Root<GPAuthority> root = criteriaDelete.from(this.persistentClass);
-            criteriaDelete.where(super.getCriteriaBuilder().equal(root.get("accountNaturalID"), accountNaturalID));
+            criteriaDelete.where(super.criteriaBuilder().equal(root.get("accountNaturalID"), accountNaturalID));
             return this.entityManager.createQuery(criteriaDelete).executeUpdate();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -106,7 +106,7 @@ class GPAuthorityDAOImpl extends GPAbstractJpaDAO<GPAuthority, Long> implements 
             CriteriaQuery<GPAuthority> criteriaQuery = super.createCriteriaQuery();
             Root<GPAuthority> root = criteriaQuery.from(this.persistentClass);
             criteriaQuery.select(root);
-            criteriaQuery.where(super.getCriteriaBuilder().equal(root.get("accountNaturalID"), accountNaturalID));
+            criteriaQuery.where(super.criteriaBuilder().equal(root.get("accountNaturalID"), accountNaturalID));
             return this.entityManager.createQuery(criteriaQuery).getResultList();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -123,7 +123,7 @@ class GPAuthorityDAOImpl extends GPAbstractJpaDAO<GPAuthority, Long> implements 
         checkArgument((accountNaturalID != null) && !(accountNaturalID.isEmpty()),
                 "The Parameter accountNaturalID must not be null or an empty string.");
         try {
-            CriteriaBuilder builder = super.getCriteriaBuilder();
+            CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<GPAuthority> criteriaQuery = super.createCriteriaQuery();
             Root<GPAuthority> root = criteriaQuery.from(this.persistentClass);
             criteriaQuery.multiselect(root.get("id"), root.get("authority"), root.get("trustedLevel"),

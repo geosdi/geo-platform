@@ -179,12 +179,8 @@ public abstract class BaseInitializerTest {
 //    }
 //    
     private void removeAllLayers() {
-        List<GPLayer> layers = layerDAO.findAll();
-        for (GPLayer layer : layers) {
-            logger.trace("\n*** Layer to REMOVE:\n{}\n***", layer);
-            boolean removed = layerDAO.removeById(layer.getId());
-            Assert.assertTrue("Old Layer NOT removed", removed);
-        }
+        Integer removed = this.layerDAO.removeAll();
+        logger.debug("###########################LAYERS_REMOVED : {}\n", removed);
     }
 
     private void removeAllFolders() {

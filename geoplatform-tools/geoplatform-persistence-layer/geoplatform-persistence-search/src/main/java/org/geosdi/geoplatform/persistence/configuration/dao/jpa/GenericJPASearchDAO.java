@@ -36,6 +36,7 @@ package org.geosdi.geoplatform.persistence.configuration.dao.jpa;
 
 import com.google.common.base.Preconditions;
 import org.geosdi.geoplatform.persistence.configuration.dao.GPBaseSearchDAO;
+import org.geosdi.geoplatform.persistence.dao.exception.GPDAOException;
 import org.hibernate.Session;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.Search;
@@ -96,8 +97,23 @@ public abstract class GenericJPASearchDAO<T extends Object> implements GPBaseSea
     }
 
     @Override
-    public void update(T entity) {
-        this.entityManager.merge(entity);
+    public <S extends T> S update(T entity) {
+        Preconditions.checkNotNull(entity, "Entity to update must not be null.");
+        return (S) this.entityManager.merge(entity);
+    }
+
+    /**
+     * @param entities
+     * @return {@link Collection<S>}
+     * @throws GPDAOException
+     */
+    @Override
+    public <S extends T> Collection<S> update(Iterable<T> entities) throws GPDAOException {
+        List<S> updateEntities = new ArrayList<>();
+        for (T entity : entities) {
+            updateEntities.add(this.update(entity));
+        }
+        return updateEntities;
     }
 
     @Override
@@ -110,5 +126,4 @@ public abstract class GenericJPASearchDAO<T extends Object> implements GPBaseSea
     protected Session getSession() {
         return (Session) this.entityManager.getDelegate();
     }
-
 }

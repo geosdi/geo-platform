@@ -228,8 +228,7 @@ public abstract class GPAbstractHibernateDAO<T extends Object, ID extends Serial
     @Override
     public Integer removeAll() throws GPDAOException {
         try {
-            return currentSession().createNativeQuery("delete from "
-                    + persistentClass.getSimpleName()).executeUpdate();
+            return currentSession().createQuery("delete from " + persistentClass.getSimpleName()).executeUpdate();
         } catch (Exception ex) {
             ex.printStackTrace();
             throw new GPDAOException(ex);

@@ -39,7 +39,6 @@ import org.geosdi.geoplatform.persistence.dao.jpa.criteria.GPCriteriaJpaDAO;
 import org.hibernate.HibernateException;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
@@ -206,10 +205,13 @@ public abstract class GPAbstractJpaDAO<T extends Object, ID extends Serializable
      * @return {@link Integer}
      */
     @Override
-    public Integer removeAll() {
-        Query q = this.entityManager.createNativeQuery("delete from "
-                + persistentClass.getSimpleName(), persistentClass);
-        return q.executeUpdate();
+    public Integer removeAll() throws GPDAOException {
+        try {
+            return this.entityManager.createQuery("delete from " + persistentClass.getSimpleName()).executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new GPDAOException(ex);
+        }
     }
 
     /**

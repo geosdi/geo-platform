@@ -5,12 +5,12 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>geoplatform-ogc-wms</artifactId>
-        <version>1.7-SNAPSHOT</version>
+        <version>1.7.1</version>
     </parent>
 
     <groupId>org.geosdi</groupId>
     <artifactId>geoplatform-wms-api</artifactId>
-    <version>1.7-SNAPSHOT</version>
+    <version>1.7.1</version>
     <packaging>jar</packaging>
 
     <name>Geo-Platform :: == WMS Module Api</name>

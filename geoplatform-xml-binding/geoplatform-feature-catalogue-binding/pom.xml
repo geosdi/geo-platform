@@ -5,12 +5,12 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>geoplatform-xml-binding</artifactId>
-        <version>1.7-SNAPSHOT</version>
+        <version>1.7.1</version>
     </parent>
 
     <groupId>org.geosdi</groupId>
     <artifactId>geoplatform-feature-catalogue-binding</artifactId>
-    <version>1.7-SNAPSHOT</version>
+    <version>1.7.1</version>
     <packaging>jar</packaging>
 
     <name>Geo-Platform :: == Binding Feature Catalogue XML Module</name>

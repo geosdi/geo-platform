@@ -5,12 +5,12 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>extension</artifactId>
-        <version>1.7-SNAPSHOT</version>
+        <version>1.7.1</version>
     </parent>
 	
     <groupId>org.geosdi</groupId>
     <artifactId>oauth2-widget</artifactId>
-    <version>1.7-SNAPSHOT</version>
+    <version>1.7.1</version>
     <packaging>jar</packaging>
 
     <name>Geo-Platform :: == OAuth2 Widget</name>

@@ -5,12 +5,12 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>geo-platform</artifactId>
-        <version>1.7-SNAPSHOT</version>
+        <version>1.7.1</version>
     </parent>
 
     <groupId>org.geosdi</groupId>
     <artifactId>geoplatform-services</artifactId>
-    <version>1.7-SNAPSHOT</version>
+    <version>1.7.1</version>
     <packaging>pom</packaging>
 
     <name>Geo-Platform :: == All Services Module</name>

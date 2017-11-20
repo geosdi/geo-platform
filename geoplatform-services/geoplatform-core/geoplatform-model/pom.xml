@@ -5,12 +5,12 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>geoplatform-core</artifactId>
-        <version>1.7-SNAPSHOT</version>
+        <version>1.7.1</version>
     </parent>
 
     <groupId>org.geosdi</groupId>
     <artifactId>geoplatform-model</artifactId>
-    <version>1.7-SNAPSHOT</version>
+    <version>1.7.1</version>
     <packaging>jar</packaging>
 
     <name>Geo-Platform :: == CORE Model</name>

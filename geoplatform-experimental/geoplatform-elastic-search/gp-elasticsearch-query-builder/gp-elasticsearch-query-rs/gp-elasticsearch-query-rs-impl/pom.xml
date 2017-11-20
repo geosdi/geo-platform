@@ -4,12 +4,12 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>gp-elasticsearch-query-rs</artifactId>
-        <version>1.7.1</version>
+        <version>1.7-SNAPSHOT</version>
     </parent>
 
     <groupId>org.geosdi</groupId>
     <artifactId>gp-elasticsearch-query-rs-impl</artifactId>
-    <version>1.7.1</version>
+    <version>1.7-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Geo-Platform :: == Elastic Search Query REST Impl Module</name>

@@ -5,12 +5,12 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>geoplatform-elastic-search</artifactId>
-        <version>1.7.1</version>
+        <version>1.7-SNAPSHOT</version>
     </parent>
 
     <groupId>org.geosdi</groupId>
     <artifactId>gp-elasticsearch-query-builder</artifactId>
-    <version>1.7.1</version>
+    <version>1.7-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Geo-Platform :: == Elastic Search Query Builder Module</name>

@@ -4,12 +4,12 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>geoplatform-ws-core</artifactId>
-        <version>1.7.1</version>
+        <version>1.7-SNAPSHOT</version>
     </parent>
     
     <groupId>org.geosdi</groupId>
     <artifactId>geoplatform-ws-webapp</artifactId>
-    <version>1.7.1</version>
+    <version>1.7-SNAPSHOT</version>
     <packaging>war</packaging>
 
     <name>Geo-Platform :: == WS WebApp</name>

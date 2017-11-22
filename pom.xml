@@ -261,6 +261,14 @@
                 <version>${project.version}</version>
             </dependency>
             
+            <dependency>
+                <groupId>org.geosdi</groupId>
+                <artifactId>geoplatform-rx2java-dependency</artifactId>
+                <type>pom</type>
+                <scope>import</scope>
+                <version>${project.version}</version>
+            </dependency>
+            
             <!-- =========================================================== -->
             <!-- GEOPLATFORM-WS MODULES -->
             <!-- =========================================================== -->
@@ -943,6 +951,12 @@
                 <version>${jasypt-version}</version>
             </dependency>
             
+            <dependency>
+                <groupId>de.grundid.opendatalab</groupId>
+                <artifactId>geojson-jackson</artifactId>
+                <version>${geojson-jackson-version}</version>
+            </dependency>
+            
             <!-- EHCACHE -->
             <dependency>
                 <groupId>net.sf.ehcache</groupId>
@@ -1413,6 +1427,7 @@
         <geonetwork-version>1.1</geonetwork-version>
         
         <geoserver-manager-version>1.7</geoserver-manager-version>
+        <geojson-jackson-version>1.8</geojson-jackson-version>
     </properties>
     
 </project>

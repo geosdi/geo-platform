@@ -23,7 +23,6 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <geojson-jackson-version>1.8</geojson-jackson-version>
     </properties>
 
     <dependencyManagement>
@@ -61,7 +60,6 @@
         <dependency>
             <groupId>de.grundid.opendatalab</groupId>
             <artifactId>geojson-jackson</artifactId>
-            <version>${geojson-jackson-version}</version>
         </dependency>
 
         <!-- logging dependencies, delegate all to slf4j and use logback -->

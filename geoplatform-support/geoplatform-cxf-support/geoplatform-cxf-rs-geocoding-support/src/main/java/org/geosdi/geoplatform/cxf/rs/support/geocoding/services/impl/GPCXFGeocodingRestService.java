@@ -15,7 +15,7 @@ import javax.ws.rs.core.Response;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Service(value = "gpCXFGeocodingRestService")
-class GPCXFGeocodingRestService implements IGPCXFGeocodingRestService {
+public class GPCXFGeocodingRestService implements IGPCXFGeocodingRestService {
 
     @Resource(name = "gpCXFGeocodingDelegate")
     private IGPCXFGeocodingDelegate gpCXFGeocodingDelegate;

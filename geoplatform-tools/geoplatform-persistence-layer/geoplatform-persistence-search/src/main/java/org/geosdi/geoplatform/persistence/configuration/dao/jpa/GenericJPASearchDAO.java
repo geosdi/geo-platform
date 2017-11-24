@@ -34,7 +34,6 @@
  */
 package org.geosdi.geoplatform.persistence.configuration.dao.jpa;
 
-import com.google.common.base.Preconditions;
 import org.geosdi.geoplatform.persistence.configuration.dao.GPBaseSearchDAO;
 import org.geosdi.geoplatform.persistence.dao.exception.GPDAOException;
 import org.hibernate.Session;
@@ -46,9 +45,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
+import java.util.stream.StreamSupport;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+import static java.lang.Boolean.FALSE;
+import static java.util.stream.Collectors.toList;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -66,7 +68,7 @@ public abstract class GenericJPASearchDAO<T extends Object> implements GPBaseSea
     private FullTextEntityManager ftEntityManager;
 
     public GenericJPASearchDAO(Class<T> thePersistentClass) {
-        Preconditions.checkNotNull(thePersistentClass);
+        checkNotNull(thePersistentClass);
         this.persistentClass = thePersistentClass;
     }
 
@@ -77,29 +79,44 @@ public abstract class GenericJPASearchDAO<T extends Object> implements GPBaseSea
     }
 
     @Override
-    public T persist(T entity) {
-        Preconditions.checkNotNull(entity);
-        this.entityManager.persist(entity);
-        return entity;
+    public T persist(T entity) throws GPDAOException {
+        checkNotNull(entity);
+        try {
+            this.entityManager.persist(entity);
+            return entity;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new GPDAOException(ex);
+        }
     }
 
     /**
      * @param entities
-     * @return {@link Collection <T>}
+     * @return {@link Collection<T>}
      */
     @Override
-    public Collection<T> persist(Iterable<T> entities) {
-        List<T> persistedEntities = new ArrayList<>();
-        for (T entity : entities) {
-            persistedEntities.add(this.persist(entity));
+    public Collection<T> persist(Iterable<T> entities) throws GPDAOException {
+        checkNotNull(entities != null, "The Parameter entities must not be null.");
+        try {
+            return StreamSupport.stream(entities.spliterator(), FALSE)
+                    .filter(e -> (e != null))
+                    .map(e -> persist(e))
+                    .collect(toList());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new GPDAOException(ex);
         }
-        return persistedEntities;
     }
 
     @Override
-    public <S extends T> S update(T entity) {
-        Preconditions.checkNotNull(entity, "Entity to update must not be null.");
-        return (S) this.entityManager.merge(entity);
+    public <S extends T> S update(T entity) throws GPDAOException {
+        checkNotNull(entity, "Entity to update must not be null.");
+        try {
+            return (S) this.entityManager.merge(entity);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new GPDAOException(ex);
+        }
     }
 
     /**
@@ -109,21 +126,32 @@ public abstract class GenericJPASearchDAO<T extends Object> implements GPBaseSea
      */
     @Override
     public <S extends T> Collection<S> update(Iterable<T> entities) throws GPDAOException {
-        List<S> updateEntities = new ArrayList<>();
-        for (T entity : entities) {
-            updateEntities.add(this.update(entity));
+        checkNotNull(entities != null, "The Parameter entities must not be null.");
+        try {
+            return StreamSupport.stream(entities.spliterator(), FALSE)
+                    .filter(e -> (e != null))
+                    .map(e -> (S) update(e))
+                    .collect(toList());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new GPDAOException(ex);
         }
-        return updateEntities;
     }
 
     @Override
-    public Integer removeAll() {
-        return getSearchManager().createNativeQuery("delete from "
-                + persistentClass.getSimpleName(), persistentClass).
-                executeUpdate();
+    public Integer removeAll() throws GPDAOException {
+        try {
+            return this.entityManager.createQuery("delete from " + persistentClass.getSimpleName()).executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new GPDAOException(ex);
+        }
     }
 
-    protected Session getSession() {
+    /**
+     * @return {@link Session}
+     */
+    protected final Session getSession() {
         return (Session) this.entityManager.getDelegate();
     }
 

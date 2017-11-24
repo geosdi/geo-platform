@@ -44,7 +44,6 @@ import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.StreamSupport;
@@ -103,11 +102,16 @@ public abstract class GPAbstractJpaDAO<T extends Object, ID extends Serializable
      */
     @Override
     public <S extends T> Collection<S> update(Iterable<T> entities) throws GPDAOException {
-        List<S> updateEntities = new ArrayList<>();
-        for (T entity : entities) {
-            updateEntities.add(this.update(entity));
+        checkNotNull(entities != null, "The Parameter entities must not be null.");
+        try {
+            return StreamSupport.stream(entities.spliterator(), FALSE)
+                    .filter(e -> (e != null))
+                    .map(e -> (S) update(e))
+                    .collect(toList());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new GPDAOException(ex);
         }
-        return updateEntities;
     }
 
     /**

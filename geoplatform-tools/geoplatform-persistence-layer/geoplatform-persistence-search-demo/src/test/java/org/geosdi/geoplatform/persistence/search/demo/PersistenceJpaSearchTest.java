@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.persistence.search.demo;
 import org.geosdi.geoplatform.persistence.loader.PersistenceLoaderConfigurer;
 import org.geosdi.geoplatform.persistence.search.demo.dao.jpa.search.ICarSeachDAO;
 import org.geosdi.geoplatform.persistence.search.demo.model.CarSearch;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -67,8 +68,12 @@ public class PersistenceJpaSearchTest {
     public void testSearchLucene() throws Exception {
         insert();
         Assert.assertEquals(100, jpaCarSearchDAO.findByModel("fi*").size());
-//        Integer removed = this.jpaCarSearchDAO.removeAll();
-//        logger.info("#########################FOUND : {}\n", removed);
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        Integer removed = this.jpaCarSearchDAO.removeAll();
+        logger.info("#########################FOUND : {}\n", removed);
     }
 
     private void insert() {

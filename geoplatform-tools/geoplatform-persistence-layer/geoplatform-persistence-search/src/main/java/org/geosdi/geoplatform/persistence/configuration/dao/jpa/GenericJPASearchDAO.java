@@ -46,11 +46,14 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.Collection;
-import java.util.stream.StreamSupport;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.ReentrantLock;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
 import static java.util.stream.Collectors.toList;
+import static java.util.stream.StreamSupport.stream;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -65,17 +68,20 @@ public abstract class GenericJPASearchDAO<T extends Object> implements GPBaseSea
     //
     @PersistenceContext
     protected EntityManager entityManager;
-    private FullTextEntityManager ftEntityManager;
+    private volatile FullTextEntityManager ftEntityManager;
+    private final ReentrantLock lock = new ReentrantLock(TRUE);
 
+    /**
+     * @param thePersistentClass
+     */
     public GenericJPASearchDAO(Class<T> thePersistentClass) {
         checkNotNull(thePersistentClass);
         this.persistentClass = thePersistentClass;
     }
 
     @Override
-    public FullTextEntityManager getSearchManager() {
-        return this.ftEntityManager = (ftEntityManager == null) ?
-                Search.getFullTextEntityManager(entityManager) : ftEntityManager;
+    public final FullTextEntityManager searchManager() throws Exception {
+        return this.ftEntityManager = ((this.ftEntityManager != null) ? this.ftEntityManager : loadFullTextEntityManager());
     }
 
     @Override
@@ -98,7 +104,7 @@ public abstract class GenericJPASearchDAO<T extends Object> implements GPBaseSea
     public Collection<T> persist(Iterable<T> entities) throws GPDAOException {
         checkNotNull(entities != null, "The Parameter entities must not be null.");
         try {
-            return StreamSupport.stream(entities.spliterator(), FALSE)
+            return stream(entities.spliterator(), FALSE)
                     .filter(e -> (e != null))
                     .map(e -> persist(e))
                     .collect(toList());
@@ -128,7 +134,7 @@ public abstract class GenericJPASearchDAO<T extends Object> implements GPBaseSea
     public <S extends T> Collection<S> update(Iterable<T> entities) throws GPDAOException {
         checkNotNull(entities != null, "The Parameter entities must not be null.");
         try {
-            return StreamSupport.stream(entities.spliterator(), FALSE)
+            return stream(entities.spliterator(), FALSE)
                     .filter(e -> (e != null))
                     .map(e -> (S) update(e))
                     .collect(toList());
@@ -153,5 +159,14 @@ public abstract class GenericJPASearchDAO<T extends Object> implements GPBaseSea
      */
     protected final Session getSession() {
         return (Session) this.entityManager.getDelegate();
+    }
+
+    private FullTextEntityManager loadFullTextEntityManager() throws Exception {
+        try {
+            this.lock.tryLock(3l, TimeUnit.SECONDS);
+            return Search.getFullTextEntityManager(entityManager);
+        } finally {
+            this.lock.unlock();
+        }
     }
 }

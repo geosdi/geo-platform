@@ -60,7 +60,7 @@ public class JPACarSearchDAO extends GenericJPASearchDAO<CarSearch> implements I
 
     @Override
     public List<CarSearch> findByModel(String model) throws Exception {
-        FullTextEntityManager ftEntityManager = super.getSearchManager();
+        FullTextEntityManager ftEntityManager = super.searchManager();
         SearchFactory searchFactory = ftEntityManager.getSearchFactory();
         QueryBuilder queryBuilder = searchFactory.buildQueryBuilder().forEntity(persistentClass).get();
         Query luceneQuery = queryBuilder.keyword().wildcard().onField("model").matching(

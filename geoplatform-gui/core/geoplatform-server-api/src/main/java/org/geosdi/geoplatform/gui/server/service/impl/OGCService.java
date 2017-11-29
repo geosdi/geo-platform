@@ -59,6 +59,11 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -120,10 +125,8 @@ public class OGCService implements IOGCService {
     }
 
     @Override
-    public ArrayList<? extends GPLayerGrid> getCapabilities(
-            String serverUrl, HttpServletRequest httpServletRequest,
-            Long idServer)
-            throws GeoPlatformException {
+    public ArrayList<? extends GPLayerGrid> getCapabilities(String serverUrl, HttpServletRequest httpServletRequest,
+            Long idServer) throws GeoPlatformException {
         try {
             HttpSession session = httpServletRequest.getSession();
             String token = (String) session.getAttribute("GOOGLE_TOKEN");
@@ -149,28 +152,29 @@ public class OGCService implements IOGCService {
     }
 
     @Override
-    public ArrayList<? extends GPLayerGrid> getCapabilitiesAuth(
-            String serverUrl, HttpServletRequest httpServletRequest,
-            Long idServer)
-            throws GeoPlatformException {
+    public ArrayList<? extends GPLayerGrid> getCapabilitiesAuth(String serverUrl, HttpServletRequest httpServletRequest,
+            Long idServer) throws GeoPlatformException {
         try {
             HttpSession session = httpServletRequest.getSession();
             String token = (String) session.getAttribute("GOOGLE_TOKEN");
-            String cookieHeaderValue = httpServletRequest.getHeader("Cookie");
-            String ivUser = httpServletRequest.getHeader("iv-user");
+
+            Enumeration<String> headerNames = httpServletRequest.getHeaderNames();
+            List<String> headerKeyValues = Collections.list(headerNames)
+                    .stream()
+                    .filter(key -> ((httpServletRequest.getHeader(key) != null)))
+                    .map(key -> String.join(":", key.concat(httpServletRequest.getHeader(key))))
+                    .collect(toList());
+            String headers = String.join(";", headerKeyValues);
+            logger.info("###########################HEADERS_TO_PASS_TO_SERVICE : {}\n", headers);
 
             RequestByID req = new RequestByID(idServer);
-            GSAccount gsAccount = this.sessionUtility.getLoggedAccount(
-                    httpServletRequest).getGsAccount();
+            GSAccount gsAccount = this.sessionUtility.getLoggedAccount(httpServletRequest).getGsAccount();
             String authKey = null;
             if (gsAccount != null) {
                 authKey = gsAccount.getAuthkey();
             }
-            ServerDTO server = geoPlatformWMSServiceClient.getCapabilitiesAuth(
-                    serverUrl, req, token, authKey,ivUser);
-
-            return dtoServerConverter.createRasterLayerList(
-                    server.getLayerList());
+            ServerDTO server = geoPlatformWMSServiceClient.getCapabilitiesAuth(serverUrl, req, token, authKey, headers);
+            return dtoServerConverter.createRasterLayerList(server.getLayerList());
         } catch (ResourceNotFoundFault ex) {
             logger.error("Error GetCapabilities: " + ex);
             throw new GeoPlatformException(ex.getMessage());

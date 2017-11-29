@@ -44,6 +44,7 @@ import org.geosdi.geoplatform.request.RequestByID;
 import org.geosdi.geoplatform.response.RasterLayerDTO;
 import org.geosdi.geoplatform.response.ServerDTO;
 import org.geosdi.geoplatform.services.httpclient.GeoSDIHttpClient;
+import org.geosdi.geoplatform.services.request.WMSHeaderParam;
 import org.geotools.data.ows.CRSEnvelope;
 import org.geotools.data.ows.Layer;
 import org.geotools.data.ows.StyleImpl;
@@ -56,9 +57,10 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.*;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 public class GPWMSServiceImpl implements GPWMSService {
 
@@ -101,7 +103,7 @@ public class GPWMSServiceImpl implements GPWMSService {
 
     @Override
     public ServerDTO getCapabilitiesAuth(String serverUrl, RequestByID request, String token, String authkey,
-            String headers) throws ResourceNotFoundFault {
+            List<WMSHeaderParam> headers) throws ResourceNotFoundFault {
         ServerDTO serverDTO;
         if (request.getId() != null) {
             GeoPlatformServer server = serverDao.find(request.getId());
@@ -170,8 +172,16 @@ public class GPWMSServiceImpl implements GPWMSService {
         return cap;
     }
 
+    /**
+     * @param serverUrl
+     * @param token
+     * @param authkey
+     * @param headers
+     * @return {@link WMSCapabilities}
+     * @throws ResourceNotFoundFault
+     */
     private WMSCapabilities getWMSCapabilitiesAuth(String serverUrl, String token,
-            String authkey, String headers) throws ResourceNotFoundFault {
+            String authkey, List<WMSHeaderParam> headers) throws ResourceNotFoundFault {
         URL serverURL;
         WebMapServer wms;
         WMSCapabilities cap = null;
@@ -181,12 +191,9 @@ public class GPWMSServiceImpl implements GPWMSService {
         logger.info("Forward headers:  " + headers);
 
         try {
-            Map<String, String> headersMap = Pattern.compile(";").splitAsStream(headers)
-                    .map(v -> v.split(":"))
-                    .collect(Collectors.toMap(parts -> parts[0], parts -> parts[1], (v1, v2) -> v1, LinkedHashMap::new));
             serverURL = new URL(urlServerEdited);
             GeoSDIHttpClient authClient = new GeoSDIHttpClient();
-            authClient.setHeaders(headersMap);
+            authClient.setHeaders(headers);
             wms = new WebMapServer(serverURL, authClient);
             cap = wms.getCapabilities();
         } catch (MalformedURLException e) {

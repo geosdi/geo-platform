@@ -6,6 +6,7 @@ import org.apache.commons.httpclient.methods.InputStreamRequestEntity;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.RequestEntity;
 import org.apache.commons.httpclient.params.HttpConnectionManagerParams;
+import org.geosdi.geoplatform.services.request.WMSHeaderParam;
 import org.geotools.data.ows.HTTPResponse;
 import org.geotools.data.ows.MultithreadedHttpClient;
 import org.geotools.util.logging.Logging;
@@ -15,7 +16,6 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,7 +33,7 @@ public class GeoSDIHttpClient extends MultithreadedHttpClient {
     private HostConfiguration hostConfigNoProxy;
     private Set<String> nonProxyHosts = new HashSet();
 
-    private Map<String, String> headers;
+    private List<WMSHeaderParam> headers;
 
     public GeoSDIHttpClient() {
 
@@ -67,8 +67,8 @@ public class GeoSDIHttpClient extends MultithreadedHttpClient {
         }
 
         LOGGER.info("HEADERS : " + getHeaders());
-        for (Map.Entry<String, String> entry : this.headers.entrySet()) {
-            getMethod.setRequestHeader(entry.getKey(), entry.getValue());
+        for (WMSHeaderParam wmsHeaderParam : this.headers) {
+            getMethod.setRequestHeader(wmsHeaderParam.getHeaderKey(), wmsHeaderParam.getHeaderValue());
         }
 
         int responseCode = this.executeMethod(getMethod);
@@ -83,8 +83,8 @@ public class GeoSDIHttpClient extends MultithreadedHttpClient {
     public HTTPResponse post(URL url, InputStream postContent, String postContentType) throws IOException {
         PostMethod postMethod = new PostMethod(url.toExternalForm());
         System.out.println("Inject OpenAM Cookie");
-        List<String> values = this.headers.entrySet().stream()
-                .map(entry -> String.join("=", entry.getKey(), entry.getValue()))
+        List<String> values = this.headers.stream()
+                .map(value -> String.join("=", value.getHeaderKey(), value.getHeaderValue()))
                 .collect(toList());
         postMethod.setRequestHeader("Cookie", String.join(";", values));
 
@@ -168,11 +168,11 @@ public class GeoSDIHttpClient extends MultithreadedHttpClient {
         }
     }
 
-    public Map<String, String> getHeaders() {
+    public List<WMSHeaderParam> getHeaders() {
         return headers;
     }
 
-    public void setHeaders(Map<String, String> headers) {
+    public void setHeaders(List<WMSHeaderParam> headers) {
         this.headers = headers;
     }
 }

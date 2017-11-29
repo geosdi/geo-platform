@@ -188,21 +188,18 @@ public class GPWMSServiceImpl implements GPWMSService {
             GeoSDIHttpClient authClient = new GeoSDIHttpClient();
             authClient.setHeaders(headersMap);
             wms = new WebMapServer(serverURL, authClient);
-
-
             cap = wms.getCapabilities();
-
         } catch (MalformedURLException e) {
-            logger.error("MalformedURLException: " + e);
+            e.printStackTrace();
             throw new ResourceNotFoundFault("Malformed URL");
         } catch (ServiceException e) {
-            logger.error("ServiceException: " + e);
+            e.printStackTrace();
             throw new ResourceNotFoundFault("Invalid URL");
         } catch (IOException e) {
-            logger.error("IOException: " + e);
+            e.printStackTrace();
             throw new ResourceNotFoundFault("Inaccessible URL");
         } catch (Exception e) {
-            logger.error("Exception: " + e);
+            e.printStackTrace();
             throw new ResourceNotFoundFault("Incorrect URL");
         }
         return cap;

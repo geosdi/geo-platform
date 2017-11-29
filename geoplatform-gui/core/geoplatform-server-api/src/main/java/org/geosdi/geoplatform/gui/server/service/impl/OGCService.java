@@ -162,7 +162,7 @@ public class OGCService implements IOGCService {
             List<String> headerKeyValues = Collections.list(headerNames)
                     .stream()
                     .filter(key -> ((httpServletRequest.getHeader(key) != null)))
-                    .map(key -> String.join(":", key.concat(httpServletRequest.getHeader(key))))
+                    .map(key -> String.join(":", key, httpServletRequest.getHeader(key)))
                     .collect(toList());
             String headers = String.join(";", headerKeyValues);
             logger.info("###########################HEADERS_TO_PASS_TO_SERVICE : {}\n", headers);

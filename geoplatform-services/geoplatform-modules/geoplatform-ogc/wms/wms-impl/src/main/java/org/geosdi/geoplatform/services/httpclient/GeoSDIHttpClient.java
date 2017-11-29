@@ -6,27 +6,22 @@ import org.apache.commons.httpclient.methods.InputStreamRequestEntity;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.RequestEntity;
 import org.apache.commons.httpclient.params.HttpConnectionManagerParams;
-import org.apache.commons.httpclient.protocol.Protocol;
-import org.apache.commons.httpclient.protocol.ProtocolSocketFactory;
 import org.geotools.data.ows.HTTPResponse;
 import org.geotools.data.ows.MultithreadedHttpClient;
 import org.geotools.util.logging.Logging;
-import sun.security.ssl.SSLSocketFactoryImpl;
 
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSocketFactory;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.zip.GZIPInputStream;
+
+import static java.util.stream.Collectors.toList;
 
 public class GeoSDIHttpClient extends MultithreadedHttpClient {
     private static final Logger LOGGER = Logging.getLogger(GeoSDIHttpClient.class);
@@ -38,7 +33,7 @@ public class GeoSDIHttpClient extends MultithreadedHttpClient {
     private HostConfiguration hostConfigNoProxy;
     private Set<String> nonProxyHosts = new HashSet();
 
-    private String headers;
+    private Map<String, String> headers;
 
     public GeoSDIHttpClient() {
 
@@ -70,10 +65,11 @@ public class GeoSDIHttpClient extends MultithreadedHttpClient {
         if (this.tryGzip) {
             getMethod.setRequestHeader("Accept-Encoding", "gzip");
         }
-        //String openAMHeader = getHeaders().substring(getHeaders().indexOf("iPlanetDirectoryPro="), getHeaders().indexOf("*;")+1);
-        LOGGER.info("iv-user: " + getHeaders());
-        getMethod.setRequestHeader("iv-user", getHeaders());
 
+        LOGGER.info("HEADERS : " + getHeaders());
+        for (Map.Entry<String, String> entry : this.headers.entrySet()) {
+            getMethod.setRequestHeader(entry.getKey(), entry.getValue());
+        }
 
         int responseCode = this.executeMethod(getMethod);
         if (200 != responseCode) {
@@ -87,7 +83,10 @@ public class GeoSDIHttpClient extends MultithreadedHttpClient {
     public HTTPResponse post(URL url, InputStream postContent, String postContentType) throws IOException {
         PostMethod postMethod = new PostMethod(url.toExternalForm());
         System.out.println("Inject OpenAM Cookie");
-        postMethod.setRequestHeader("Cookie", getHeaders());
+        List<String> values = this.headers.entrySet().stream()
+                .map(entry -> String.join("=", entry.getKey(), entry.getValue()))
+                .collect(toList());
+        postMethod.setRequestHeader("Cookie", String.join(";", values));
 
         RequestEntity requestEntity = new InputStreamRequestEntity(postContent);
         postMethod.setRequestEntity(requestEntity);
@@ -169,11 +168,11 @@ public class GeoSDIHttpClient extends MultithreadedHttpClient {
         }
     }
 
-    public String getHeaders() {
+    public Map<String, String> getHeaders() {
         return headers;
     }
 
-    public void setHeaders(String headers) {
+    public void setHeaders(Map<String, String> headers) {
         this.headers = headers;
     }
 }

@@ -50,6 +50,7 @@ import org.geosdi.geoplatform.request.server.WSSaveServerRequest;
 import org.geosdi.geoplatform.response.ServerDTO;
 import org.geosdi.geoplatform.services.GPWMSService;
 import org.geosdi.geoplatform.services.GeoPlatformService;
+import org.geosdi.geoplatform.services.request.WMSHeaderParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -159,18 +160,13 @@ public class OGCService implements IOGCService {
             String token = (String) session.getAttribute("GOOGLE_TOKEN");
 
             Enumeration<String> headerNames = httpServletRequest.getHeaderNames();
-            while (headerNames.hasMoreElements()) {
-                String key = headerNames.nextElement();
-                logger.info("#################KEY : {}", key);
-                logger.info("#################VALUE : {}\n", httpServletRequest.getHeader(key));
-            }
-            List<String> headerKeyValues = Collections.list(headerNames)
+
+            List<WMSHeaderParam> headerKeyValues = Collections.list(headerNames)
                     .stream()
                     .filter(key -> ((httpServletRequest.getHeader(key) != null)))
-                    .map(key -> String.join(":", key, httpServletRequest.getHeader(key)))
+                    .map(key -> new WMSHeaderParam(key, httpServletRequest.getHeader(key)))
                     .collect(toList());
-            String headers = String.join(";", headerKeyValues);
-            logger.info("###########################HEADERS_TO_PASS_TO_SERVICE : {}\n", headers);
+            logger.info("###########################HEADERS_TO_PASS_TO_SERVICE : {}\n", headerKeyValues);
 
             RequestByID req = new RequestByID(idServer);
             GSAccount gsAccount = this.sessionUtility.getLoggedAccount(httpServletRequest).getGsAccount();
@@ -178,7 +174,7 @@ public class OGCService implements IOGCService {
             if (gsAccount != null) {
                 authKey = gsAccount.getAuthkey();
             }
-            ServerDTO server = geoPlatformWMSServiceClient.getCapabilitiesAuth(serverUrl, req, token, authKey, headers);
+            ServerDTO server = geoPlatformWMSServiceClient.getCapabilitiesAuth(serverUrl, req, token, authKey, headerKeyValues);
             return dtoServerConverter.createRasterLayerList(server.getLayerList());
         } catch (ResourceNotFoundFault ex) {
             logger.error("Error GetCapabilities: " + ex);

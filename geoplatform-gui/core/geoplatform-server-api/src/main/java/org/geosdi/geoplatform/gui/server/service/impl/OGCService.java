@@ -166,7 +166,7 @@ public class OGCService implements IOGCService {
                     .filter(key -> ((httpServletRequest.getHeader(key) != null)))
                     .map(key -> new WMSHeaderParam(key, httpServletRequest.getHeader(key)))
                     .collect(toList());
-            logger.info("###########################HEADERS_TO_PASS_TO_SERVICE : {}\n", headerKeyValues);
+            logger.trace("###########################HEADERS_TO_PASS_TO_SERVICE : {}\n", headerKeyValues);
 
             RequestByID req = new RequestByID(idServer);
             GSAccount gsAccount = this.sessionUtility.getLoggedAccount(httpServletRequest).getGsAccount();

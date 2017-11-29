@@ -159,6 +159,11 @@ public class OGCService implements IOGCService {
             String token = (String) session.getAttribute("GOOGLE_TOKEN");
 
             Enumeration<String> headerNames = httpServletRequest.getHeaderNames();
+            while (headerNames.hasMoreElements()) {
+                String key = headerNames.nextElement();
+                logger.info("#################KEY : {}", key);
+                logger.info("#################VALUE : {}\n", httpServletRequest.getHeader(key));
+            }
             List<String> headerKeyValues = Collections.list(headerNames)
                     .stream()
                     .filter(key -> ((httpServletRequest.getHeader(key) != null)))

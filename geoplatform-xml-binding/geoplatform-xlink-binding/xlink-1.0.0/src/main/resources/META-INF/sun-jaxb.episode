@@ -1,20 +1,43 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<bindings version="2.1" xmlns="http://java.sun.com/xml/ns/jaxb">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<bindings xmlns="http://java.sun.com/xml/ns/jaxb" if-exists="true" version="2.1">
   <!--
 
-Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-Generato il: 2015.08.25 alle 10:19:44 PM CEST 
+Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.11
+Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a>
+Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+Generato il: 2017.11.30 alle 03:34:58 PM CET
 
   -->
-  <bindings scd="x-schema::tns" xmlns:tns="http://www.w3.org/1999/xlink">
+  <bindings xmlns:tns="http://www.w3.org/1999/xlink" if-exists="true" scd="x-schema::tns">
     <schemaBindings map="false">
       <package name="org.geosdi.geoplatform.xml.xlink.v100"/>
     </schemaBindings>
-    <bindings scd="~tns:typeType">
+    <bindings if-exists="true" scd="~tns:titleEltType">
+      <class ref="org.geosdi.geoplatform.xml.xlink.v100.TitleEltType"/>
+    </bindings>
+    <bindings if-exists="true" scd="~tns:resourceType">
+      <class ref="org.geosdi.geoplatform.xml.xlink.v100.ResourceType"/>
+    </bindings>
+    <bindings if-exists="true" scd="~tns:locatorType">
+      <class ref="org.geosdi.geoplatform.xml.xlink.v100.LocatorType"/>
+    </bindings>
+    <bindings if-exists="true" scd="~tns:arcType">
+      <class ref="org.geosdi.geoplatform.xml.xlink.v100.ArcType"/>
+    </bindings>
+    <bindings if-exists="true" scd="~tns:simple">
+      <class ref="org.geosdi.geoplatform.xml.xlink.v100.Simple"/>
+    </bindings>
+    <bindings if-exists="true" scd="~tns:extended">
+      <class ref="org.geosdi.geoplatform.xml.xlink.v100.Extended"/>
+    </bindings>
+    <bindings if-exists="true" scd="~tns:typeType">
       <typesafeEnumClass ref="org.geosdi.geoplatform.xml.xlink.v100.TypeType"/>
+    </bindings>
+    <bindings if-exists="true" scd="~tns:showType">
+      <typesafeEnumClass ref="org.geosdi.geoplatform.xml.xlink.v100.ShowType"/>
+    </bindings>
+    <bindings if-exists="true" scd="~tns:actuateType">
+      <typesafeEnumClass ref="org.geosdi.geoplatform.xml.xlink.v100.ActuateType"/>
     </bindings>
   </bindings>
 </bindings>
-

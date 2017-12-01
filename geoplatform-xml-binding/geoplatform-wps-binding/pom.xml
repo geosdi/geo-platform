@@ -7,102 +7,15 @@
         <artifactId>geoplatform-xml-binding</artifactId>
         <version>1.9-SNAPSHOT</version>
     </parent>
-
+  
     <groupId>org.geosdi</groupId>
     <artifactId>geoplatform-wps-binding</artifactId>
     <version>1.9-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
 
     <name>Geo-Platform :: == Binding WPS XML Module</name>
-  
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>ows-1.1.0</artifactId>    
-        </dependency>
-        
-        <dependency>
-            <groupId>com.sun.xml.bind</groupId>
-            <artifactId>jaxb-core</artifactId>
-        </dependency>
-        
-        <dependency>
-            <groupId>com.sun.xml.bind</groupId>
-            <artifactId>jaxb-impl</artifactId>        
-        </dependency>
-        
-        <dependency>
-            <groupId>org.jvnet.jaxb2_commons</groupId>
-            <artifactId>jaxb2-basics-runtime</artifactId>
-        </dependency>
-        
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-        </dependency>
-    </dependencies>
-    
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>**/*.xml</exclude>
-                        <exclude>**/*.properties</exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <inherited>true</inherited>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <configuration>
-                    <attach>true</attach>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>jar-no-fork</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
-            </plugin>
-
-            <!-- mvn jaxb2:generate -X -->
-            <plugin>
-                <groupId>org.jvnet.jaxb2.maven2</groupId>
-                <artifactId>maven-jaxb2-plugin</artifactId>
-
-                <configuration>
-                    <schemaIncludes>
-                        <value>wps/*/wpsAll.xsd</value>
-                    </schemaIncludes>
-                    <episodes>
-                        <episode>
-                            <groupId>org.geosdi</groupId>
-                            <artifactId>ows-1.1.0</artifactId>
-                        </episode>
-                    </episodes>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+	
+    <modules>
+        <module>wps-1.0.0</module>
+    </modules>
 </project>

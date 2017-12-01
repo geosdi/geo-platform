@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<bindings xmlns="http://java.sun.com/xml/ns/jaxb" if-exists="true" version="2.1">
+  <!--
+
+Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.11 
+Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
+Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
+Generato il: 2017.12.01 alle 08:55:18 AM CET 
+
+  -->
+  <bindings xmlns:tns="http://www.opengis.net/wps/1.0.0" if-exists="true" scd="x-schema::tns">
+    <schemaBindings map="false">
+      <package name="org.geosdi.geoplatform.xml.wps.v100"/>
+    </schemaBindings>
+    <bindings if-exists="true" scd="tns:ExecuteResponse">
+      <class ref="org.geosdi.geoplatform.xml.wps.v100.ExecuteResponse"/>
+    </bindings>
+    <bindings if-exists="true" scd="tns:Languages">
+      <class ref="org.geosdi.geoplatform.xml.wps.v100.Languages"/>
+    </bindings>
+    <bindings if-exists="true" scd="~tns:InputReferenceType">
+      <class ref="org.geosdi.geoplatform.xml.wps.v100.InputReferenceType"/>
+    </bindings>
+    <bindings if-exists="true" scd="~tns:SupportedCRSsType">
+      <class ref="org.geosdi.geoplatform.xml.wps.v100.SupportedCRSsType"/>
+    </bindings>
+    <bindings if-exists="true" scd="~tns:SupportedUOMsType">
+      <class ref="org.geosdi.geoplatform.xml.wps.v100.SupportedUOMsType"/>
+    </bindings>
+    <bindings if-exists="true" scd="~tns:ProcessDescriptionType">
+      <class ref="org.geosdi.geoplatform.xml.wps.v100.ProcessDescriptionType"/>
+    </bindings>
+    <bindings if-exists="true" scd="tns:DescribeProcess">
+      <class ref="org.geosdi.geoplatform.xml.wps.v100.DescribeProcess"/>
+    </bindings>
+    <bindings if-exists="true" scd="~tns:RequestBaseType">
+      <class ref="org.geosdi.geoplatform.xml.wps.v100.RequestBaseType"/>
+    </bindings>
+    <bindings if-exists="true" scd="tns:WSDL">
+      <class ref="org.geosdi.geoplatform.xml.wps.v100.WSDL"/>
+    </bindings>
+    <bindings if-exists="true" scd="tns:ProcessDescriptions">
+      <class ref="org.geosdi.geoplatform.xml.wps.v100.ProcessDescriptions"/>
+    </bindings>
+    <bindings if-exists="true" scd="~tns:ResponseBaseType">
+      <class ref="org.geosdi.geoplatform.xml.wps.v100.ResponseBaseType"/>
+    </bindings>
+    <bindings if-exists="true" scd="tns:Execute">
+      <class ref="org.geosdi.geoplatform.xml.wps.v100.Execute"/>
+    </bindings>
+    <bindings if-exists="true" scd="~tns:DataInputsType">
+      <class ref="org.geosdi.geoplatform.xml.wps.v100.DataInputsType"/>
+    </bindings>
+    <bindings if-exists="true" scd="~tns:ResponseFormType">
+      <class ref="org.geosdi.geoplatform.xml.wps.v100.ResponseFormType"/>
+    </bindings>
+    <bindings if-exists="true" scd="~tns:ProcessBriefType">
+      <class ref="org.geosdi.geoplatform.xml.wps.v100.ProcessBriefType"/>
+    </bindings>
+    <bindings if-exists="true" scd="~tns:StatusType">
+      <class ref="org.geosdi.geoplatform.xml.wps.v100.StatusType"/>
+    </bindings>
+    <bindings if-exists="true" scd="~tns:OutputDefinitionsType">
+      <class ref="org.geosdi.geoplatform.xml.wps.v100.OutputDefinitionsType"/>
+    </bindings>
+    <bindings if-exists="true" scd="tns:GetCapabilities">
+      <class ref="org.geosdi.geoplatform.xml.wps.v100.GetCapabilities"/>
+    </bindings>
+    <bindings if-exists="true" scd="~tns:WPSCapabilitiesType">
+      <class ref="org.geosdi.geoplatform.xml.wps.v100.WPSCapabilitiesType"/>
+    </bindings>
+    <bindings if-exists="true" scd="~tns:LanguagesType">
+      <class ref="org.geosdi.geoplatform.xml.wps.v100.LanguagesType"/>
+    </bindings>
+    <bindings if-exists="true" scd="tns:ProcessOfferings">
+      <class ref="org.geosdi.geoplatform.xml.wps.v100.ProcessOfferings"/>
+    </bindings>
+    <bindings if-exists="true" scd="~tns:DescriptionType">
+      <class ref="org.geosdi.geoplatform.xml.wps.v100.DescriptionType"/>
+    </bindings>
+    <bindings if-exists="true" scd="~tns:InputDescriptionType">
+      <class ref="org.geosdi.geoplatform.xml.wps.v100.InputDescriptionType"/>
+    </bindings>
+    <bindings if-exists="true" scd="~tns:LiteralInputType">
+      <class ref="org.geosdi.geoplatform.xml.wps.v100.LiteralInputType"/>
+    </bindings>
+    <bindings if-exists="true" scd="~tns:ValuesReferenceType">
+      <class ref="org.geosdi.geoplatform.xml.wps.v100.ValuesReferenceType"/>
+    </bindings>
+    <bindings if-exists="true" scd="~tns:SupportedComplexDataInputType">
+      <class ref="org.geosdi.geoplatform.xml.wps.v100.SupportedComplexDataInputType"/>
+    </bindings>
+    <bindings if-exists="true" scd="~tns:UOMsType">
+      <class ref="org.geosdi.geoplatform.xml.wps.v100.UOMsType"/>
+    </bindings>
+    <bindings if-exists="true" scd="~tns:CRSsType">
+      <class ref="org.geosdi.geoplatform.xml.wps.v100.CRSsType"/>
+    </bindings>
+    <bindings if-exists="true" scd="~tns:SupportedComplexDataType">
+      <class ref="org.geosdi.geoplatform.xml.wps.v100.SupportedComplexDataType"/>
+    </bindings>
+    <bindings if-exists="true" scd="~tns:ComplexDataCombinationType">
+      <class ref="org.geosdi.geoplatform.xml.wps.v100.ComplexDataCombinationType"/>
+    </bindings>
+    <bindings if-exists="true" scd="~tns:ComplexDataCombinationsType">
+      <class ref="org.geosdi.geoplatform.xml.wps.v100.ComplexDataCombinationsType"/>
+    </bindings>
+    <bindings if-exists="true" scd="~tns:ComplexDataDescriptionType">
+      <class ref="org.geosdi.geoplatform.xml.wps.v100.ComplexDataDescriptionType"/>
+    </bindings>
+    <bindings if-exists="true" scd="~tns:OutputDescriptionType">
+      <class ref="org.geosdi.geoplatform.xml.wps.v100.OutputDescriptionType"/>
+    </bindings>
+    <bindings if-exists="true" scd="~tns:LiteralOutputType">
+      <class ref="org.geosdi.geoplatform.xml.wps.v100.LiteralOutputType"/>
+    </bindings>
+    <bindings if-exists="true" scd="~tns:ResponseDocumentType">
+      <class ref="org.geosdi.geoplatform.xml.wps.v100.ResponseDocumentType"/>
+    </bindings>
+    <bindings if-exists="true" scd="~tns:DocumentOutputDefinitionType">
+      <class ref="org.geosdi.geoplatform.xml.wps.v100.DocumentOutputDefinitionType"/>
+    </bindings>
+    <bindings if-exists="true" scd="~tns:OutputDefinitionType">
+      <class ref="org.geosdi.geoplatform.xml.wps.v100.OutputDefinitionType"/>
+    </bindings>
+    <bindings if-exists="true" scd="~tns:InputType">
+      <class ref="org.geosdi.geoplatform.xml.wps.v100.InputType"/>
+    </bindings>
+    <bindings if-exists="true" scd="~tns:DataType">
+      <class ref="org.geosdi.geoplatform.xml.wps.v100.DataType"/>
+    </bindings>
+    <bindings if-exists="true" scd="~tns:ComplexDataType">
+      <class ref="org.geosdi.geoplatform.xml.wps.v100.ComplexDataType"/>
+    </bindings>
+    <bindings if-exists="true" scd="~tns:LiteralDataType">
+      <class ref="org.geosdi.geoplatform.xml.wps.v100.LiteralDataType"/>
+    </bindings>
+    <bindings if-exists="true" scd="~tns:OutputDataType">
+      <class ref="org.geosdi.geoplatform.xml.wps.v100.OutputDataType"/>
+    </bindings>
+    <bindings if-exists="true" scd="~tns:OutputReferenceType">
+      <class ref="org.geosdi.geoplatform.xml.wps.v100.OutputReferenceType"/>
+    </bindings>
+    <bindings if-exists="true" scd="~tns:ProcessStartedType">
+      <class ref="org.geosdi.geoplatform.xml.wps.v100.ProcessStartedType"/>
+    </bindings>
+    <bindings if-exists="true" scd="~tns:ProcessFailedType">
+      <class ref="org.geosdi.geoplatform.xml.wps.v100.ProcessFailedType"/>
+    </bindings>
+  </bindings>
+</bindings>

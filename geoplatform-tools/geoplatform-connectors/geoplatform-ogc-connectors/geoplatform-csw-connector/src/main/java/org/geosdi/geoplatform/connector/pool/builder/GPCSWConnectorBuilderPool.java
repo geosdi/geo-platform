@@ -65,7 +65,7 @@ public class GPCSWConnectorBuilderPool extends AbstractConnectorBuilder<GPCSWCon
 
     @Override
     public GPCatalogConnectorStore build() throws Exception {
-        Preconditions.checkNotNull(serverUrl, "CSW Server URL must not be null.");
+        Preconditions.checkNotNull(serverUrl, "CSW_202 Server URL must not be null.");
         GPPoolConnectorKey keyConnector = super.proxyConfiguration != null
                 ? new GPPoolConnectorKey(
                 serverUrl, pooledConnectorConfig,

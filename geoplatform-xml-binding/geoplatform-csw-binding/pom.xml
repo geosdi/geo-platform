@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-  
+
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>geoplatform-xml-binding</artifactId>
@@ -18,54 +19,60 @@
     <dependencies>
         <dependency>
             <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-xml-context-provider</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.geosdi</groupId>
             <artifactId>gml-3.1.1</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>filter-1.1.0</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>ows-1.0.0</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>gml-3.2.1</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-iso19139-v20070417</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-feature-catalogue-binding</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>com.sun.xml.bind</groupId>
-            <artifactId>jaxb-impl</artifactId>        
+            <artifactId>jaxb-impl</artifactId>
         </dependency>
         <dependency>
             <groupId>com.sun.xml.bind</groupId>
             <artifactId>jaxb-core</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>org.jvnet.jaxb2_commons</groupId>
             <artifactId>jaxb2-basics-runtime</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
     </dependencies>
-    
+
     <build>
         <plugins>
             <plugin>
@@ -134,5 +141,5 @@
             </plugin>
         </plugins>
     </build>
-    
+
 </project>

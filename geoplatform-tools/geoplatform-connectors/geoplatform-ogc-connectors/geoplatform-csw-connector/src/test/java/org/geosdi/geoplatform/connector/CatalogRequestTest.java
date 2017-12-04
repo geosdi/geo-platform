@@ -116,7 +116,7 @@ public class CatalogRequestTest {
                 new Scanner(request).useDelimiter("\\A").next());
 
         assertTrue(request.contains("<csw:GetRecords"));
-        assertTrue(request.contains("service=\"CSW\""));
+        assertTrue(request.contains("service=\"CSW_202\""));
         assertTrue(request.contains("version=\"2.0.2\""));
         assertTrue(request.contains("resultType=\"hits\""));
 
@@ -151,7 +151,7 @@ public class CatalogRequestTest {
                 new Scanner(request).useDelimiter("\\A").next());
 
         assertTrue(request.contains("<csw:GetRecords"));
-        assertTrue(request.contains("service=\"CSW\""));
+        assertTrue(request.contains("service=\"CSW_202\""));
         assertTrue(request.contains("version=\"2.0.2\""));
         assertTrue(request.contains("resultType=\"hits\""));
         assertTrue(request.contains("outputSchema=\"http://www.opengis.net/cat/csw/2.0.2\""));
@@ -200,7 +200,7 @@ public class CatalogRequestTest {
                 new Scanner(request).useDelimiter("\\A").next());
 
         assertTrue(request.contains("<csw:GetRecords"));
-        assertTrue(request.contains("service=\"CSW\""));
+        assertTrue(request.contains("service=\"CSW_202\""));
         assertTrue(request.contains("version=\"2.0.2\""));
         assertTrue(request.contains("resultType=\"results\""));
 
@@ -270,7 +270,7 @@ public class CatalogRequestTest {
                 new Scanner(request).useDelimiter("\\A").next());
 
         assertTrue(request.contains("<csw:GetRecords"));
-        assertTrue(request.contains("service=\"CSW\""));
+        assertTrue(request.contains("service=\"CSW_202\""));
         assertTrue(request.contains("version=\"2.0.2\""));
         assertTrue(request.contains("resultType=\"results\""));
 
@@ -347,7 +347,7 @@ public class CatalogRequestTest {
                 new Scanner(request).useDelimiter("\\A").next());
 
         assertTrue(request.contains("<csw:GetRecords"));
-        assertTrue(request.contains("service=\"CSW\""));
+        assertTrue(request.contains("service=\"CSW_202\""));
         assertTrue(request.contains("version=\"2.0.2\""));
         assertTrue(request.contains("resultType=\"results\""));
 
@@ -423,7 +423,7 @@ public class CatalogRequestTest {
                 new Scanner(request).useDelimiter("\\A").next());
 
         assertTrue(request.contains("<csw:GetRecords"));
-        assertTrue(request.contains("service=\"CSW\""));
+        assertTrue(request.contains("service=\"CSW_202\""));
         assertTrue(request.contains("version=\"2.0.2\""));
         assertTrue(request.contains("resultType=\"results\""));
 
@@ -496,7 +496,7 @@ public class CatalogRequestTest {
                 new Scanner(request).useDelimiter("\\A").next());
 
         assertTrue(request.contains("<csw:GetRecords"));
-        assertTrue(request.contains("service=\"CSW\""));
+        assertTrue(request.contains("service=\"CSW_202\""));
         assertTrue(request.contains("version=\"2.0.2\""));
         assertTrue(request.contains("resultType=\"results\""));
 
@@ -587,7 +587,7 @@ public class CatalogRequestTest {
                 new Scanner(request).useDelimiter("\\A").next());
 
         assertTrue(request.contains("<csw:GetRecords"));
-        assertTrue(request.contains("service=\"CSW\""));
+        assertTrue(request.contains("service=\"CSW_202\""));
         assertTrue(request.contains("version=\"2.0.2\""));
         assertTrue(request.contains("resultType=\"results\""));
 
@@ -666,7 +666,7 @@ public class CatalogRequestTest {
                 new Scanner(request).useDelimiter("\\A").next());
 
         assertTrue(request.contains("<csw:GetRecords"));
-        assertTrue(request.contains("service=\"CSW\""));
+        assertTrue(request.contains("service=\"CSW_202\""));
         assertTrue(request.contains("version=\"2.0.2\""));
         assertTrue(request.contains("resultType=\"results\""));
 
@@ -746,7 +746,7 @@ public class CatalogRequestTest {
                 new Scanner(request).useDelimiter("\\A").next());
 
         assertTrue(request.contains("<csw:GetRecords"));
-        assertTrue(request.contains("service=\"CSW\""));
+        assertTrue(request.contains("service=\"CSW_202\""));
         assertTrue(request.contains("version=\"2.0.2\""));
         assertTrue(request.contains("resultType=\"results\""));
         assertTrue(request.contains("outputSchema=\"http://www.opengis.net/cat/csw/2.0.2\""));

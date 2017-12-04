@@ -49,7 +49,7 @@ public enum ConstraintLanguage {
      * FILTER is an XML encoding of the BNF grammar and is normatively defined 
      * in the Filter Encoding Implementation Specification, version 1.1.0.
      * <p>
-     * All CSW implementations are required to support this filter syntax.
+     * All CSW_202 implementations are required to support this filter syntax.
      */
     FILTER,
     /**

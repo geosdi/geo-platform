@@ -41,5 +41,4 @@ package org.geosdi.geoplatform.connector.server.request;
  * @email  giuseppe.lascaleia@geosdi.org
  */
 public interface WFSGetCapabilitiesRequest<T> extends GPConnectorRequest<T> {
-
 }

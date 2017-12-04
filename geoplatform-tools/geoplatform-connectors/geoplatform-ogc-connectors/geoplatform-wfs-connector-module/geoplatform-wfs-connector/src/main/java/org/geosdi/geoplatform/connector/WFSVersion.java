@@ -36,8 +36,9 @@ package org.geosdi.geoplatform.connector;
 
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 
-import java.util.Arrays;
 import java.util.Optional;
+
+import static java.util.Arrays.stream;
 
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
@@ -67,8 +68,7 @@ public enum WFSVersion implements GPServerConnector.GPServerConnectorVersion {
      * @return {@link WFSVersion}
      */
     public static WFSVersion fromString(String version) {
-        Optional<WFSVersion> optional = Arrays
-                .stream(WFSVersion.values())
+        Optional<WFSVersion> optional = stream(WFSVersion.values())
                 .filter(v -> ((version != null) && !(version.trim().isEmpty()))
                         ? v.getVersion().equalsIgnoreCase(version) : Boolean.FALSE)
                 .findFirst();

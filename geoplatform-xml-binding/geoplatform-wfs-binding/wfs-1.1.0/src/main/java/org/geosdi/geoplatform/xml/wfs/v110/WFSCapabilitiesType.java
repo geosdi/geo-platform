@@ -55,7 +55,7 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 
 /**
  *
- * XML encoded WFS GetCapabilities operation response. This document provides
+ * XML encoded WFS_110 GetCapabilities operation response. This document provides
  * clients with service metadata about a specific service instance, including
  * metadata about the tightly-coupled data served. If the server does not
  * implement the updateSequence parameter, the server shall always return the

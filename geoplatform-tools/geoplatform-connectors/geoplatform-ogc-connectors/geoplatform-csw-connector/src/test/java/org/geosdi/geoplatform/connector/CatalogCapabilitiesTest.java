@@ -162,7 +162,7 @@ public class CatalogCapabilitiesTest {
 
         CatalogGetCapabilitiesRequest<CapabilitiesType> request = serverConnector.createGetCapabilitiesRequest();
         CapabilitiesType response = request.getResponse();
-        logger.info("CSW GET_CAPABILITIES VERSION @@@@@@@@@@@@@@@@@@@@@@@ {}",
+        logger.info("CSW_202 GET_CAPABILITIES VERSION @@@@@@@@@@@@@@@@@@@@@@@ {}",
                 response.getVersion());
 
         List<Operation> operationList = response.getOperationsMetadata().getOperation();
@@ -193,14 +193,14 @@ public class CatalogCapabilitiesTest {
                         snipcPassword)).build();
         CatalogGetCapabilitiesRequest<CapabilitiesType> request = serverConnector.createGetCapabilitiesRequest();
         CapabilitiesType response = request.getResponse();
-        logger.info("CSW SECURE GET_CAPABILITIES VERSION @@@@@@@@@@@@@@@@@@@@@@@ {}", response.getVersion());
+        logger.info("CSW_202 SECURE GET_CAPABILITIES VERSION @@@@@@@@@@@@@@@@@@@@@@@ {}", response.getVersion());
     }
 
     @Test
     public void testGetCapabilitiesRNDTWithConnector() throws Exception {
         try {
             CatalogCapabilities catalogGetCapabilities = catalogCapabilitiesBean.bindUrlWithoutVersionControl(
-                    "http://www.rndt.gov.it/RNDT/CSW?request=GetCapabilities&service=CSW");
+                    "http://www.rndt.gov.it/RNDT/CSW_202?request=GetCapabilities&service=CSW_202");
             logger.info("@@@@@@@@@@@@@@@ CATALOG CAPABILITIES BEAN V_2.0.1 WITHOUT VERSION CONTROL"
                     + "@@@@@@@@@@@@@@@@@@@@@@@ " + catalogGetCapabilities);
         } catch (MalformedURLException ex) {

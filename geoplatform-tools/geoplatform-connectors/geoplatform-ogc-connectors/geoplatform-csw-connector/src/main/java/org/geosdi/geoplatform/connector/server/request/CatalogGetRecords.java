@@ -44,7 +44,7 @@ import org.geosdi.geoplatform.xml.csw.OutputSchema;
 import org.geosdi.geoplatform.xml.csw.TypeName;
 
 /**
- * Abstract class of GetRecords CSW request
+ * Abstract class of GetRecords CSW_202 request
  * 
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -138,7 +138,7 @@ public abstract class CatalogGetRecords<T> extends CatalogCSWRequest<T>
         // TODO GMD list
 //        if (outputSchema != OutputSchema.CSW_V202) {
 //            throw new UnsupportedOperationException("GMD output schema is not supported yet. "
-//                    + "Use CSW output schema.");
+//                    + "Use CSW_202 output schema.");
 //        }
         this.outputSchema = outputSchema;
     }

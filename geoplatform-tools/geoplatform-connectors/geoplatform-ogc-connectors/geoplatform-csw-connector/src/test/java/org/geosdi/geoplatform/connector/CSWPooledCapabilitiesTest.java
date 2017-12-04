@@ -65,7 +65,7 @@ public class CSWPooledCapabilitiesTest {
                 .newConnector()
                 .withServerUrl(new URL("http://www.geoportale.isprambiente.it"
                                 + "/geoportale/csw?request=GetCapabilities"
-                                + "&service=CSW&version=2.0.2")).build();
+                                + "&service=CSW_202&version=2.0.2")).build();
 
         CatalogGetCapabilitiesRequest<CapabilitiesType> request = serverConnector.createGetCapabilitiesRequest();
 
@@ -78,7 +78,7 @@ public class CSWPooledCapabilitiesTest {
         GPCatalogConnectorStore serverConnector = GPCSWConnectorBuilderPool
                 .newConnector()
                 .withServerUrl(new URL("http://catalog.geosdi.org/geonetwork/"
-                                + "srv/en/csw?request=GetCapabilities&service=CSW"
+                                + "srv/en/csw?request=GetCapabilities&service=CSW_202"
                                 + "&version=2.0.2")).build();
 
         CatalogGetCapabilitiesRequest<CapabilitiesType> request = serverConnector.createGetCapabilitiesRequest();

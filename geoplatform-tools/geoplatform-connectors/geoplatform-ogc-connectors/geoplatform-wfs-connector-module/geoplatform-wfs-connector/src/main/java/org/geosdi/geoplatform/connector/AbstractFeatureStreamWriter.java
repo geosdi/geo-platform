@@ -92,7 +92,7 @@ public abstract class AbstractFeatureStreamWriter<T extends Object>
     private void writeStartDocument(QName typeName) throws XMLStreamException {
         writer.writeStartDocument("UTF-8", "1.0");
 
-//        writer.setDefaultNamespace(FeaturesNamespace.WFS.NAMESPACE());
+//        writer.setDefaultNamespace(FeaturesNamespace.WFS_110.NAMESPACE());
         writer.setPrefix(FeaturesNamespace.GML.PREFIX(),
                 FeaturesNamespace.GML.NAMESPACE());
 
@@ -207,7 +207,7 @@ public abstract class AbstractFeatureStreamWriter<T extends Object>
      * @return the service
      */
     public String getService() {
-        return "WFS";
+        return "WFS_110";
     }
 
     @Override

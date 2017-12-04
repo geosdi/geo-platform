@@ -233,7 +233,7 @@ public class CatalogGetRecordsTest {
     public void testGetRecordsRNDTWithConnector() throws Exception {
         GPCatalogConnectorStore rndtServerConnector = GPCSWConnectorBuilder
                 .newConnector()
-                .withServerUrl(new URL("http://www.rndt.gov.it/RNDT/CSW"))
+                .withServerUrl(new URL("http://www.rndt.gov.it/RNDT/CSW_202"))
                 .build();
 
         CatalogGetRecordsRequest<GetRecordsResponseType> request = rndtServerConnector.createGetRecordsRequest();

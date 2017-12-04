@@ -43,15 +43,12 @@
 
 package org.geosdi.geoplatform.xml.csw.v202;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+
+import javax.xml.bind.annotation.*;
 
 
 /**
@@ -68,7 +65,7 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  * &lt;complexType name="RequestBaseType">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;attribute name="service" use="required" type="{http://www.opengis.net/ows}ServiceType" fixed="CSW_202" />
+ *       &lt;attribute name="service" use="required" type="{http://www.opengis.net/ows}ServiceType" fixed="CSW" />
  *       &lt;attribute name="version" use="required" type="{http://www.opengis.net/ows}VersionType" fixed="2.0.2" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -96,7 +93,7 @@ public abstract class RequestBaseType
      * 
      */
     @XmlAttribute(name = "service", required = true)
-    public final static String SERVICE = "CSW_202";
+    public final static String SERVICE = "CSW";
     /**
      * 
      * 

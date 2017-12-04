@@ -63,8 +63,8 @@ public class GPCatalogServerConnector extends GPAbstractServerConnector
      * url and the specific version.
      * <p/>
      *
-     * @param urlServer the String that represent CSW_202 server Url
-     * @param version   the value of CSW_202 version. Must be 2.0.2
+     * @param urlServer the String that represent CSW server Url
+     * @param version   the value of CSW version. Must be 2.0.2
      */
     public GPCatalogServerConnector(String urlServer,
             String version) {
@@ -77,9 +77,9 @@ public class GPCatalogServerConnector extends GPAbstractServerConnector
      * url, {@link GPSecurityConnector} for security and version
      * <p/>
      *
-     * @param urlServer         the String that represent CSW_202 server Url
+     * @param urlServer         the String that represent CSW server Url
      * @param securityConnector {@link GPSecurityConnector}
-     * @param version           the value of CSW_202 version. Must be 2.0.2
+     * @param version           the value of CSW version. Must be 2.0.2
      */
     public GPCatalogServerConnector(String urlServer, GPSecurityConnector securityConnector, String version) {
         this(analyzesServerURL(urlServer), securityConnector, toCSWVersion(
@@ -138,7 +138,7 @@ public class GPCatalogServerConnector extends GPAbstractServerConnector
      *
      * @param server            {@link URL} server url
      * @param securityConnector {@link GPSecurityConnector}
-     * @param theVersion        {@link GPCatalogVersion} CSW_202 version. Must be 2.0.2
+     * @param theVersion        {@link GPCatalogVersion} CSW version. Must be 2.0.2
      */
     public GPCatalogServerConnector(URL server,
             GPSecurityConnector securityConnector,
@@ -188,7 +188,7 @@ public class GPCatalogServerConnector extends GPAbstractServerConnector
                 return new CatalogGetCapabilitiesV202(this);
             default:
                 throw new CatalogVersionException(
-                        "The Version for CSW_202 must be 2.0.2");
+                        "The Version for CSW must be 2.0.2");
         }
     }
 
@@ -206,7 +206,7 @@ public class GPCatalogServerConnector extends GPAbstractServerConnector
                 return new CatalogGetRecordsV202(this);
             default:
                 throw new CatalogVersionException(
-                        "The Version for CSW_202 must be 2.0.2");
+                        "The Version for CSW must be 2.0.2");
         }
     }
 
@@ -223,7 +223,7 @@ public class GPCatalogServerConnector extends GPAbstractServerConnector
                 return new CatalogGetRecordByIdV202(this);
             default:
                 throw new CatalogVersionException(
-                        "The Version for CSW_202 must be 2.0.2");
+                        "The Version for CSW must be 2.0.2");
         }
     }
 
@@ -245,7 +245,7 @@ public class GPCatalogServerConnector extends GPAbstractServerConnector
      */
     private static GPCatalogVersion toCSWVersion(String version) {
         if (!version.equalsIgnoreCase("2.0.2")) {
-            throw new CatalogVersionException("CSW_202 Version must be 2.0.2");
+            throw new CatalogVersionException("CSW Version must be 2.0.2");
         }
         return GPCatalogVersion.V202;
     }

@@ -37,9 +37,6 @@ package org.geosdi.geoplatform.connector;
 
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.io.WKTReader;
-import java.util.List;
-import javax.xml.namespace.QName;
-import javax.xml.stream.XMLStreamException;
 import org.geosdi.geoplatform.connector.server.request.TransactionIdGen;
 import org.geosdi.geoplatform.connector.server.request.WFSTransactionRequest;
 import org.geosdi.geoplatform.connector.server.request.v110.transaction.stax.FeaturesNamespace;
@@ -48,6 +45,10 @@ import org.geosdi.geoplatform.connector.server.request.v110.transaction.stax.WFS
 import org.geosdi.geoplatform.connector.wfs.response.AttributeDTO;
 import org.geosdi.geoplatform.connector.wfs.response.GeometryAttributeDTO;
 import org.geosdi.geoplatform.stax.writer.AbstractStaxStreamWriter;
+
+import javax.xml.namespace.QName;
+import javax.xml.stream.XMLStreamException;
+import java.util.List;
 
 /**
  *
@@ -92,7 +93,7 @@ public abstract class AbstractFeatureStreamWriter<T extends Object>
     private void writeStartDocument(QName typeName) throws XMLStreamException {
         writer.writeStartDocument("UTF-8", "1.0");
 
-//        writer.setDefaultNamespace(FeaturesNamespace.WFS_110.NAMESPACE());
+//        writer.setDefaultNamespace(FeaturesNamespace.WFS.NAMESPACE());
         writer.setPrefix(FeaturesNamespace.GML.PREFIX(),
                 FeaturesNamespace.GML.NAMESPACE());
 

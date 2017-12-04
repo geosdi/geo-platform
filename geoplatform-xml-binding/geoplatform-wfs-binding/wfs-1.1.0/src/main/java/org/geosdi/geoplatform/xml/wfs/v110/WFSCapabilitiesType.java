@@ -41,11 +41,6 @@
 //
 package org.geosdi.geoplatform.xml.wfs.v110;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
 import org.geosdi.geoplatform.xml.filter.v110.FilterCapabilities;
 import org.geosdi.geoplatform.xml.ows.v100.CapabilitiesBaseType;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
@@ -53,9 +48,11 @@ import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 
+import javax.xml.bind.annotation.*;
+
 /**
  *
- * XML encoded WFS_110 GetCapabilities operation response. This document provides
+ * XML encoded WFS GetCapabilities operation response. This document provides
  * clients with service metadata about a specific service instance, including
  * metadata about the tightly-coupled data served. If the server does not
  * implement the updateSequence parameter, the server shall always return the

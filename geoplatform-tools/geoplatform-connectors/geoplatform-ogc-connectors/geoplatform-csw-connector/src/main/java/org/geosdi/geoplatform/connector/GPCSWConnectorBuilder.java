@@ -59,7 +59,7 @@ public class GPCSWConnectorBuilder extends AbstractConnectorBuilder<GPCSWConnect
     @Override
     public GPCatalogConnectorStore build() throws Exception {
         Preconditions.checkArgument(this.serverUrl != null,
-                "Error on CSW_202 Server Connector build: Server URL cannot be null.");
+                "Error on CSW Server Connector build: Server URL cannot be null.");
         GPCatalogVersion v = GPCatalogVersion.fromString(version);
         GPCatalogConnectorStore cswConnector = super.proxyConfiguration != null
                 ? new GPCatalogConnectorStore(serverUrl, pooledConnectorConfig, securityConnector, proxyConfiguration, v)

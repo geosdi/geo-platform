@@ -35,16 +35,6 @@
  */
 package org.geosdi.geoplatform.connector;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.List;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -67,6 +57,17 @@ import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -94,7 +95,7 @@ public class CatalogContextTest {
             HttpClient client = new DefaultHttpClient();
 
             List<NameValuePair> qparams = new ArrayList<NameValuePair>();
-            qparams.add(new BasicNameValuePair("SERVICE", "CSW_202"));
+            qparams.add(new BasicNameValuePair("SERVICE", "CSW"));
             qparams.add(new BasicNameValuePair("REQUEST", "GetCapabilities"));
 
             URI uri = URIUtils.createURI("http", CSW_HOST, -1, CSW_PATH,
@@ -133,10 +134,10 @@ public class CatalogContextTest {
                         content)).getValue();
 
                 logger.info(
-                        "CSW_202 GET_CAPABILITIES VERSION @@@@@@@@@@@@@@@@@@@@@@@ " + cap.getVersion());
+                        "CSW GET_CAPABILITIES VERSION @@@@@@@@@@@@@@@@@@@@@@@ " + cap.getVersion());
 
                 logger.info(
-                        "CSW_202 SERVICE IDENTIFICATION @@@@@@@@@@ " + cap.getServiceIdentification());
+                        "CSW SERVICE IDENTIFICATION @@@@@@@@@@ " + cap.getServiceIdentification());
 
                 String cswFile = "target/csw.xml";
 

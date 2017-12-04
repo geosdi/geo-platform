@@ -71,11 +71,11 @@ public enum IdentifierGenerationOptionType {
 
     /**
      * 
-     *                   The UseExsiting value indicates that WFS_110 should not
+     *                   The UseExsiting value indicates that WFS should not
      *                   generate a new feature identifier for the feature
-     *                   being inserted into the repositry.  Instead, the WFS_110
+     *                   being inserted into the repositry.  Instead, the WFS
      *                   should use the identifier encoded if the feature.  
-     *                   If a duplicate exists then the WFS_110 should raise an
+     *                   If a duplicate exists then the WFS10 should raise an
      *                   exception.
      *                
      * 
@@ -85,11 +85,11 @@ public enum IdentifierGenerationOptionType {
 
     /**
      * 
-     *                   The ReplaceDuplicate value indicates that WFS_110 should
+     *                   The ReplaceDuplicate value indicates that WFS10 should
      *                   not generate a new feature identifier for the feature
-     *                   being inserted into the repositry.  Instead, the WFS_110
+     *                   being inserted into the repositry.  Instead, the WFS10
      *                   should use the identifier encoded if the feature.  
-     *                   If a duplicate exists then the WFS_110 should replace the
+     *                   If a duplicate exists then the WFS10 should replace the
      *                   existing feature instance with the one encoded in the
      *                   Insert action.
      *                
@@ -100,7 +100,7 @@ public enum IdentifierGenerationOptionType {
 
     /**
      * 
-     *                   The GenerateNew value indicates that WFS_110 should
+     *                   The GenerateNew value indicates that WFS10 should
      *                   generate a new unique feature identifier for the
      *                   feature being inserted into the repositry.
      *                

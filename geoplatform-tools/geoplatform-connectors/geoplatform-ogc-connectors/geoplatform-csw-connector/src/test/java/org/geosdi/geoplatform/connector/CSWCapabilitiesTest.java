@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.connector;
 
-import java.net.URL;
 import org.geosdi.geoplatform.connector.server.request.CatalogGetCapabilitiesRequest;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
 import org.geosdi.geoplatform.xml.csw.v202.CapabilitiesType;
@@ -44,6 +43,8 @@ import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.net.URL;
 
 /**
  *
@@ -65,7 +66,7 @@ public class CSWCapabilitiesTest {
                 .newConnector()
                 .withServerUrl(new URL("http://www.geoportale.isprambiente.it"
                                 + "/geoportale/csw?request=GetCapabilities"
-                                + "&service=CSW_202&version=2.0.2")).build();
+                                + "&service=CSW&version=2.0.2")).build();
 
         CatalogGetCapabilitiesRequest<CapabilitiesType> request = serverConnector.createGetCapabilitiesRequest();
 
@@ -78,7 +79,7 @@ public class CSWCapabilitiesTest {
         GPCatalogConnectorStore serverConnector = GPCSWConnectorBuilder
                 .newConnector()
                 .withServerUrl(new URL("http://catalog.geosdi.org/geonetwork/"
-                                + "srv/en/csw?request=GetCapabilities&service=CSW_202"
+                                + "srv/en/csw?request=GetCapabilities&service=CSW"
                                 + "&version=2.0.2")).build();
 
         CatalogGetCapabilitiesRequest<CapabilitiesType> request = serverConnector.createGetCapabilitiesRequest();

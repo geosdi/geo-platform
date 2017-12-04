@@ -35,47 +35,26 @@
  */
 package org.geosdi.geoplatform.connector;
 
-import java.io.StringWriter;
-import java.math.BigInteger;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.List;
-import java.util.Scanner;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.Marshaller;
-import javax.xml.namespace.QName;
 import org.geosdi.geoplatform.connector.jaxb.repository.CSWConnectorJAXBContext;
 import org.geosdi.geoplatform.connector.jaxb.repository.JAXBContextConnectorRepository;
 import org.geosdi.geoplatform.jaxb.GPBaseJAXBContext;
-import org.geosdi.geoplatform.xml.csw.v202.ElementSetNameType;
-import org.geosdi.geoplatform.xml.csw.v202.ElementSetType;
-import org.geosdi.geoplatform.xml.csw.v202.GetRecordsType;
-import org.geosdi.geoplatform.xml.csw.v202.QueryConstraintType;
-import org.geosdi.geoplatform.xml.csw.v202.QueryType;
-import org.geosdi.geoplatform.xml.csw.v202.ResultType;
-import org.geosdi.geoplatform.xml.filter.v110.BBOXType;
-import org.geosdi.geoplatform.xml.filter.v110.BinaryComparisonOpType;
-import org.geosdi.geoplatform.xml.filter.v110.BinaryLogicOpType;
-import org.geosdi.geoplatform.xml.filter.v110.BinarySpatialOpType;
-import org.geosdi.geoplatform.xml.filter.v110.FilterType;
-import org.geosdi.geoplatform.xml.filter.v110.LiteralType;
-import org.geosdi.geoplatform.xml.filter.v110.PropertyIsLikeType;
-import org.geosdi.geoplatform.xml.filter.v110.PropertyNameType;
-import org.geosdi.geoplatform.xml.gml.v311.AbstractGeometryType;
-import org.geosdi.geoplatform.xml.gml.v311.AbstractRingPropertyType;
-import org.geosdi.geoplatform.xml.gml.v311.CoordinatesType;
-import org.geosdi.geoplatform.xml.gml.v311.DirectPositionType;
-import org.geosdi.geoplatform.xml.gml.v311.EnvelopeType;
-import org.geosdi.geoplatform.xml.gml.v311.LinearRingType;
-import org.geosdi.geoplatform.xml.gml.v311.PolygonType;
-import static org.junit.Assert.*;
+import org.geosdi.geoplatform.xml.csw.v202.*;
+import org.geosdi.geoplatform.xml.filter.v110.*;
+import org.geosdi.geoplatform.xml.gml.v311.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.Marshaller;
+import javax.xml.namespace.QName;
+import java.io.StringWriter;
+import java.math.BigInteger;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
+import static org.junit.Assert.assertTrue;
 
 /**
  *
@@ -116,7 +95,7 @@ public class CatalogRequestTest {
                 new Scanner(request).useDelimiter("\\A").next());
 
         assertTrue(request.contains("<csw:GetRecords"));
-        assertTrue(request.contains("service=\"CSW_202\""));
+        assertTrue(request.contains("service=\"CSW\""));
         assertTrue(request.contains("version=\"2.0.2\""));
         assertTrue(request.contains("resultType=\"hits\""));
 
@@ -151,7 +130,7 @@ public class CatalogRequestTest {
                 new Scanner(request).useDelimiter("\\A").next());
 
         assertTrue(request.contains("<csw:GetRecords"));
-        assertTrue(request.contains("service=\"CSW_202\""));
+        assertTrue(request.contains("service=\"CSW\""));
         assertTrue(request.contains("version=\"2.0.2\""));
         assertTrue(request.contains("resultType=\"hits\""));
         assertTrue(request.contains("outputSchema=\"http://www.opengis.net/cat/csw/2.0.2\""));
@@ -200,7 +179,7 @@ public class CatalogRequestTest {
                 new Scanner(request).useDelimiter("\\A").next());
 
         assertTrue(request.contains("<csw:GetRecords"));
-        assertTrue(request.contains("service=\"CSW_202\""));
+        assertTrue(request.contains("service=\"CSW\""));
         assertTrue(request.contains("version=\"2.0.2\""));
         assertTrue(request.contains("resultType=\"results\""));
 
@@ -270,7 +249,7 @@ public class CatalogRequestTest {
                 new Scanner(request).useDelimiter("\\A").next());
 
         assertTrue(request.contains("<csw:GetRecords"));
-        assertTrue(request.contains("service=\"CSW_202\""));
+        assertTrue(request.contains("service=\"CSW\""));
         assertTrue(request.contains("version=\"2.0.2\""));
         assertTrue(request.contains("resultType=\"results\""));
 
@@ -347,7 +326,7 @@ public class CatalogRequestTest {
                 new Scanner(request).useDelimiter("\\A").next());
 
         assertTrue(request.contains("<csw:GetRecords"));
-        assertTrue(request.contains("service=\"CSW_202\""));
+        assertTrue(request.contains("service=\"CSW\""));
         assertTrue(request.contains("version=\"2.0.2\""));
         assertTrue(request.contains("resultType=\"results\""));
 
@@ -423,7 +402,7 @@ public class CatalogRequestTest {
                 new Scanner(request).useDelimiter("\\A").next());
 
         assertTrue(request.contains("<csw:GetRecords"));
-        assertTrue(request.contains("service=\"CSW_202\""));
+        assertTrue(request.contains("service=\"CSW\""));
         assertTrue(request.contains("version=\"2.0.2\""));
         assertTrue(request.contains("resultType=\"results\""));
 
@@ -496,7 +475,7 @@ public class CatalogRequestTest {
                 new Scanner(request).useDelimiter("\\A").next());
 
         assertTrue(request.contains("<csw:GetRecords"));
-        assertTrue(request.contains("service=\"CSW_202\""));
+        assertTrue(request.contains("service=\"CSW\""));
         assertTrue(request.contains("version=\"2.0.2\""));
         assertTrue(request.contains("resultType=\"results\""));
 
@@ -587,7 +566,7 @@ public class CatalogRequestTest {
                 new Scanner(request).useDelimiter("\\A").next());
 
         assertTrue(request.contains("<csw:GetRecords"));
-        assertTrue(request.contains("service=\"CSW_202\""));
+        assertTrue(request.contains("service=\"CSW\""));
         assertTrue(request.contains("version=\"2.0.2\""));
         assertTrue(request.contains("resultType=\"results\""));
 
@@ -666,7 +645,7 @@ public class CatalogRequestTest {
                 new Scanner(request).useDelimiter("\\A").next());
 
         assertTrue(request.contains("<csw:GetRecords"));
-        assertTrue(request.contains("service=\"CSW_202\""));
+        assertTrue(request.contains("service=\"CSW\""));
         assertTrue(request.contains("version=\"2.0.2\""));
         assertTrue(request.contains("resultType=\"results\""));
 
@@ -746,7 +725,7 @@ public class CatalogRequestTest {
                 new Scanner(request).useDelimiter("\\A").next());
 
         assertTrue(request.contains("<csw:GetRecords"));
-        assertTrue(request.contains("service=\"CSW_202\""));
+        assertTrue(request.contains("service=\"CSW\""));
         assertTrue(request.contains("version=\"2.0.2\""));
         assertTrue(request.contains("resultType=\"results\""));
         assertTrue(request.contains("outputSchema=\"http://www.opengis.net/cat/csw/2.0.2\""));

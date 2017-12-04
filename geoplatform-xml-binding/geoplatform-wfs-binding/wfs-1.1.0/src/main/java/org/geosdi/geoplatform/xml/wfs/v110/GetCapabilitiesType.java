@@ -41,25 +41,22 @@
 //
 package org.geosdi.geoplatform.xml.wfs.v110;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 
+import javax.xml.bind.annotation.*;
+
 /**
  *
- * Request to a WFS_110 to perform the GetCapabilities operation. This operation
+ * Request to a WFS to perform the GetCapabilities operation. This operation
  * allows a client to retrieve a Capabilities XML document providing metadata
- * for the specific WFS_110 server.
+ * for the specific WFS server.
  *
  * The GetCapapbilities element is used to request that a Web Feature Service
  * generate an XML document describing the organization providing the service,
- * the WFS_110 operations that the service supports, a list of feature types that
+ * the WFS operations that the service supports, a list of feature types that
  * the service can operate on and list of filtering capabilities that the
  * service support. Such an XML document is called a capabilities document.
  *
@@ -73,7 +70,7 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  * &lt;complexType name="GetCapabilitiesType">
  *   &lt;complexContent>
  *     &lt;extension base="{http://www.opengis.net/ows}GetCapabilitiesType">
- *       &lt;attribute name="service" type="{http://www.opengis.net/ows}ServiceType" default="WFS_110" />
+ *       &lt;attribute name="service" type="{http://www.opengis.net/ows}ServiceType" default="WFS" />
  *     &lt;/extension>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -84,9 +81,7 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 @XmlRootElement(name = "GetCapabilities")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GetCapabilitiesType")
-public class GetCapabilitiesType
-        extends org.geosdi.geoplatform.xml.ows.v100.GetCapabilitiesType
-        implements ToString {
+public class GetCapabilitiesType extends org.geosdi.geoplatform.xml.ows.v100.GetCapabilitiesType implements ToString {
 
     @XmlAttribute(name = "service")
     protected String service;
@@ -102,7 +97,7 @@ public class GetCapabilitiesType
      */
     public String getService() {
         if (service == null) {
-            return "WFS_110";
+            return "WFS";
         } else {
             return service;
         }

@@ -35,7 +35,6 @@
 package org.geosdi.geoplatform.wfs;
 
 import org.geosdi.geoplatform.connector.GPWFSConnectorStore;
-import org.geosdi.geoplatform.connector.WFSConnectorBuilder;
 import org.geosdi.geoplatform.connector.server.request.WFSDescribeFeatureTypeRequest;
 import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
 import org.geosdi.geoplatform.support.wfs.feature.reader.FeatureSchemaReader;
@@ -51,6 +50,7 @@ import java.io.StringWriter;
 import java.net.URL;
 import java.util.Arrays;
 
+import static org.geosdi.geoplatform.connector.WFSConnectorBuilder.newConnector;
 import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
 
 /**
@@ -65,8 +65,7 @@ public class WFSDescribeFeatureTest {
 
     static {
         try {
-            serverConnector = WFSConnectorBuilder.newConnector().withServerUrl(
-                    new URL(wfsURL))
+            serverConnector = newConnector().withServerUrl(new URL(wfsURL))
                     .withPooledConnectorConfig(pooledConnectorConfigBuilder()
                             .withMaxTotalConnections(150)
                             .withDefaultMaxPerRoute(80)
@@ -93,6 +92,9 @@ public class WFSDescribeFeatureTest {
 
         String localPart = statesName.getLocalPart();
         request.setTypeName(Arrays.asList(statesName));
+
+        logger.info("\n{}\n", request.showRequestAsString());
+
         Schema s = request.getResponse();
 
         String name = localPart.substring(localPart.indexOf(":") + 1);
@@ -118,8 +120,8 @@ public class WFSDescribeFeatureTest {
     @Ignore(value = "Geoserver is Down")
     @Test
     public void describeSiteTrTest() throws Exception {
-        WFSDescribeFeatureTypeRequest<Schema> request = WFSConnectorBuilder
-                .newConnector()
+        WFSDescribeFeatureTypeRequest<Schema> request =
+                newConnector()
                 .withServerUrl(new URL("http://150.145.141.241/geoserver/wfs"))
                 .build()
                 .createDescribeFeatureTypeRequest();

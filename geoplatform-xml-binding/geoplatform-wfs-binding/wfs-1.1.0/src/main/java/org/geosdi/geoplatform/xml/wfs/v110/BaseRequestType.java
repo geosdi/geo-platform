@@ -43,20 +43,17 @@
 
 package org.geosdi.geoplatform.xml.wfs.v110;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 
+import javax.xml.bind.annotation.*;
+
 
 /**
  * 
- *             XML encoded WFS_110 operation request base, for all operations
+ *             XML encoded WFS operation request base, for all operations
  *             except GetCapabilities.
  *          
  * 
@@ -68,7 +65,7 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  * &lt;complexType name="BaseRequestType">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;attribute name="service" type="{http://www.opengis.net/ows}ServiceType" default="WFS_110" />
+ *       &lt;attribute name="service" type="{http://www.opengis.net/ows}ServiceType" default="WFS" />
  *       &lt;attribute name="version" type="{http://www.w3.org/2001/XMLSchema}string" default="1.1.0" />
  *       &lt;attribute name="handle" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/restriction>
@@ -114,7 +111,7 @@ public abstract class BaseRequestType
      */
     public final String getService() {
         if (service == null) {
-            return "WFS_110";
+            return "WFS";
         } else {
             return service;
         }

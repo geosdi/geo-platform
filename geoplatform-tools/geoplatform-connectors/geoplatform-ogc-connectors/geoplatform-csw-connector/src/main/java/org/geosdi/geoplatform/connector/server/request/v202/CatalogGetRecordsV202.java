@@ -54,7 +54,7 @@ import org.geosdi.geoplatform.xml.csw.v202.ResultType;
 import org.geosdi.geoplatform.xml.filter.v110.FilterType;
 
 /**
- * GetRecords CSW request 2.0.2 version
+ * GetRecords CSW_202 request 2.0.2 version
  * 
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org

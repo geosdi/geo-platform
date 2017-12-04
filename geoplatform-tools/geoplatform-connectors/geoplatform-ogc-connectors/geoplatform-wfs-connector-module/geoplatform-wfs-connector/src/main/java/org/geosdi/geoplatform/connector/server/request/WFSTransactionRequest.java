@@ -35,13 +35,14 @@
  */
 package org.geosdi.geoplatform.connector.server.request;
 
-import java.util.List;
-import javax.xml.namespace.QName;
 import org.geosdi.geoplatform.connector.wfs.response.AttributeDTO;
 import org.geosdi.geoplatform.gui.shared.wfs.TransactionOperation;
 
+import javax.xml.namespace.QName;
+import java.util.List;
+
 /**
- * WFS Transaction compose of a single operation.
+ * WFS_110 Transaction compose of a single operation.
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */

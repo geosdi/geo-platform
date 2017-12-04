@@ -102,7 +102,7 @@ public class GetCapabilitiesType
      */
     public String getService() {
         if (service == null) {
-            return "CSW";
+            return "CSW_202";
         } else {
             return service;
         }

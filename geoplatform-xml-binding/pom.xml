@@ -15,6 +15,7 @@
     <name>Geo-Platform :: == Binding XML Module</name>
 
     <modules>
+        <module>geoplatform-xml-context-provider</module>
         <module>geoplatform-xlink-binding</module>
         <module>geoplatform-csw-binding</module>
         <module>geoplatform-ebrim-binding</module>

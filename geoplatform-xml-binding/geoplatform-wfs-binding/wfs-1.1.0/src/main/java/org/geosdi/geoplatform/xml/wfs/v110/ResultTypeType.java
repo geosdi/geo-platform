@@ -71,7 +71,7 @@ public enum ResultTypeType {
     /**
      * 
      *                   Indicates that a complete response should be generated
-     *                   by the WFS.  That is, all response feature instances
+     *                   by the WFS_110.  That is, all response feature instances
      *                   should be returned to the client.
      *                
      * 

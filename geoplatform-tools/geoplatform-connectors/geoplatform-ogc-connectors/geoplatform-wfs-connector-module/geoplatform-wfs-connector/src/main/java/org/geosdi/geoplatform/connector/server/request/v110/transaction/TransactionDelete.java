@@ -68,7 +68,7 @@ public class TransactionDelete implements ITransactionOperationStrategy {
     @Override
     public Object getOperation(WFSTransactionRequest request)
             throws Exception {
-        logger.debug("\n\n###################Called getOperation for WFS "
+        logger.debug("\n\n###################Called getOperation for WFS_110 "
                 + "Transaction Delete Operation with Param : {}", request);
 
         assert (request.getTypeName() != null) : "Feature Type Name must "

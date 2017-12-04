@@ -68,7 +68,7 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  * &lt;complexType name="RequestBaseType">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;attribute name="service" use="required" type="{http://www.opengis.net/ows}ServiceType" fixed="CSW" />
+ *       &lt;attribute name="service" use="required" type="{http://www.opengis.net/ows}ServiceType" fixed="CSW_202" />
  *       &lt;attribute name="version" use="required" type="{http://www.opengis.net/ows}VersionType" fixed="2.0.2" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -96,7 +96,7 @@ public abstract class RequestBaseType
      * 
      */
     @XmlAttribute(name = "service", required = true)
-    public final static String SERVICE = "CSW";
+    public final static String SERVICE = "CSW_202";
     /**
      * 
      * 

@@ -43,7 +43,7 @@ import org.geosdi.geoplatform.xml.csw.OutputSchema;
 import org.geosdi.geoplatform.xml.csw.TypeName;
 
 /**
- * API of GetRecords CSW request
+ * API of GetRecords CSW_202 request
  * 
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */

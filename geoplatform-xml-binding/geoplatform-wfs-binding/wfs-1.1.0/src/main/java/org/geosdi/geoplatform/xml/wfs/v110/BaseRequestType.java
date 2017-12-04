@@ -56,7 +56,7 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 
 /**
  * 
- *             XML encoded WFS operation request base, for all operations
+ *             XML encoded WFS_110 operation request base, for all operations
  *             except GetCapabilities.
  *          
  * 
@@ -68,7 +68,7 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  * &lt;complexType name="BaseRequestType">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;attribute name="service" type="{http://www.opengis.net/ows}ServiceType" default="WFS" />
+ *       &lt;attribute name="service" type="{http://www.opengis.net/ows}ServiceType" default="WFS_110" />
  *       &lt;attribute name="version" type="{http://www.w3.org/2001/XMLSchema}string" default="1.1.0" />
  *       &lt;attribute name="handle" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/restriction>
@@ -114,7 +114,7 @@ public abstract class BaseRequestType
      */
     public final String getService() {
         if (service == null) {
-            return "WFS";
+            return "WFS_110";
         } else {
             return service;
         }

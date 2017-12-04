@@ -94,7 +94,7 @@ public class CatalogContextTest {
             HttpClient client = new DefaultHttpClient();
 
             List<NameValuePair> qparams = new ArrayList<NameValuePair>();
-            qparams.add(new BasicNameValuePair("SERVICE", "CSW"));
+            qparams.add(new BasicNameValuePair("SERVICE", "CSW_202"));
             qparams.add(new BasicNameValuePair("REQUEST", "GetCapabilities"));
 
             URI uri = URIUtils.createURI("http", CSW_HOST, -1, CSW_PATH,
@@ -133,10 +133,10 @@ public class CatalogContextTest {
                         content)).getValue();
 
                 logger.info(
-                        "CSW GET_CAPABILITIES VERSION @@@@@@@@@@@@@@@@@@@@@@@ " + cap.getVersion());
+                        "CSW_202 GET_CAPABILITIES VERSION @@@@@@@@@@@@@@@@@@@@@@@ " + cap.getVersion());
 
                 logger.info(
-                        "CSW SERVICE IDENTIFICATION @@@@@@@@@@ " + cap.getServiceIdentification());
+                        "CSW_202 SERVICE IDENTIFICATION @@@@@@@@@@ " + cap.getServiceIdentification());
 
                 String cswFile = "target/csw.xml";
 

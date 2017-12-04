@@ -53,7 +53,7 @@ import org.springframework.beans.factory.annotation.Value;
  */
 public class CatalogGetCapabilitiesBean implements InitializingBean {
 
-    private static final String CSW_CABABILITIES_REQUEST = "?SERVICE=CSW"
+    private static final String CSW_CABABILITIES_REQUEST = "?SERVICE=CSW_202"
             + "&REQUEST=GetCapabilities";
     /**
      * SNIPC Catalog.
@@ -74,7 +74,7 @@ public class CatalogGetCapabilitiesBean implements InitializingBean {
     }
 
     /**
-     * Bind CSW Server URL with Control for Server Version. The standard CSW
+     * Bind CSW_202 Server URL with Control for Server Version. The standard CSW_202
      * Server version must be 2.0.2
      *
      * @param urlServer
@@ -141,7 +141,7 @@ public class CatalogGetCapabilitiesBean implements InitializingBean {
         if (!capabilitiesBean.getServiceIdentification().getServiceTypeVersion().
                 equals(
                 GPCatalogVersion.V202.toString())) {
-            throw new CatalogVersionException("The version of CSW Service "
+            throw new CatalogVersionException("The version of CSW_202 Service "
                     + "must be 2.0.2");
         }
     }

@@ -35,16 +35,17 @@
  */
 package org.geosdi.geoplatform.connector;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import org.geosdi.geoplatform.GPGenericMarshaller;
 import org.geosdi.geoplatform.connector.api.capabilities.model.csw.CatalogCapabilities;
 import org.geosdi.geoplatform.connector.security.CatalogSecurityConnection;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 /**
  *
@@ -53,7 +54,7 @@ import org.springframework.beans.factory.annotation.Value;
  */
 public class CatalogGetCapabilitiesBean implements InitializingBean {
 
-    private static final String CSW_CABABILITIES_REQUEST = "?SERVICE=CSW_202"
+    private static final String CSW_CABABILITIES_REQUEST = "?SERVICE=CSW"
             + "&REQUEST=GetCapabilities";
     /**
      * SNIPC Catalog.

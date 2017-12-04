@@ -48,7 +48,7 @@
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-w3c-xsd-binding</artifactId>
-            <version>1.8-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
   

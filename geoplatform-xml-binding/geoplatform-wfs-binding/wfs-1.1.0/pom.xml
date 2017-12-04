@@ -17,9 +17,16 @@
   
     <dependencies>
         <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-xml-context-provider</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.sun.xml.bind</groupId>
             <artifactId>jaxb-core</artifactId>
         </dependency>
+
         <dependency>
             <groupId>com.sun.xml.bind</groupId>
             <artifactId>jaxb-impl</artifactId>

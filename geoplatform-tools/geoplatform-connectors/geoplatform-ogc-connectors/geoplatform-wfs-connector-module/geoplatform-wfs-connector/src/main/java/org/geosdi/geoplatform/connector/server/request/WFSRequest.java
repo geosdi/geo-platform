@@ -50,7 +50,7 @@ import static org.apache.http.entity.ContentType.APPLICATION_XML;
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public abstract class WFSRequest<T> extends GPPostConnectorRequest<T> {
+public abstract class WFSRequest<T, Request> extends GPPostConnectorRequest<T, Request> {
 
     static {
         wfsContext = JAXBContextConnectorRepository.getProvider(
@@ -72,8 +72,6 @@ public abstract class WFSRequest<T> extends GPPostConnectorRequest<T> {
         marshaller.marshal(request, writer);
         return new StringEntity(writer.toString(), APPLICATION_XML);
     }
-
-    protected abstract Object createRequest() throws Exception;
 
     @Override
     public Marshaller getMarshaller() throws Exception {

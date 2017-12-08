@@ -35,23 +35,18 @@
  */
 package org.geosdi.geoplatform.connector.server.request.v202;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.xml.namespace.QName;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.CatalogGetRecords;
 import org.geosdi.geoplatform.connector.server.request.v202.responsibility.GetRecordsRequestManager;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.xml.csw.OutputSchema;
 import org.geosdi.geoplatform.xml.csw.TypeName;
-import org.geosdi.geoplatform.xml.csw.v202.ElementSetNameType;
-import org.geosdi.geoplatform.xml.csw.v202.ElementSetType;
-import org.geosdi.geoplatform.xml.csw.v202.GetRecordsResponseType;
-import org.geosdi.geoplatform.xml.csw.v202.GetRecordsType;
-import org.geosdi.geoplatform.xml.csw.v202.QueryConstraintType;
-import org.geosdi.geoplatform.xml.csw.v202.QueryType;
-import org.geosdi.geoplatform.xml.csw.v202.ResultType;
+import org.geosdi.geoplatform.xml.csw.v202.*;
 import org.geosdi.geoplatform.xml.filter.v110.FilterType;
+
+import javax.xml.namespace.QName;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * GetRecords CSW_202 request 2.0.2 version
@@ -60,7 +55,7 @@ import org.geosdi.geoplatform.xml.filter.v110.FilterType;
  * @email giuseppe.lascaleia@geosdi.org
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class CatalogGetRecordsV202 extends CatalogGetRecords<GetRecordsResponseType> {
+public class CatalogGetRecordsV202 extends CatalogGetRecords<GetRecordsResponseType, GetRecordsType> {
 
     private GetRecordsRequestManager catalogRequestManager = new GetRecordsRequestManager();
 
@@ -69,7 +64,7 @@ public class CatalogGetRecordsV202 extends CatalogGetRecords<GetRecordsResponseT
     }
 
     @Override
-    protected Object createRequest() throws IllegalParameterFault {
+    protected GetRecordsType createRequest() throws IllegalParameterFault {
         GetRecordsType request = new GetRecordsType();
 
         request.setResultType(resultType != null

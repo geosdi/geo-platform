@@ -53,7 +53,7 @@ import java.util.Arrays;
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class WFSTransactionRequestV110 extends AbstractTransactionRequest<TransactionResponseType> {
+public class WFSTransactionRequestV110 extends AbstractTransactionRequest<TransactionResponseType, TransactionType> {
 
     public WFSTransactionRequestV110(GPServerConnector server) {
         super(server);
@@ -65,17 +65,14 @@ public class WFSTransactionRequestV110 extends AbstractTransactionRequest<Transa
     }
 
     @Override
-    protected Object createRequest() throws Exception {
+    protected TransactionType createRequest() throws Exception {
         if (operation == null) {
             throw new IllegalArgumentException("Transaction Operation " + "must not be null.");
         }
-
         ITransactionOperationStrategy operationStrategy = GPTransactionMediator.getStrategy(operation);
         Object elementType = operationStrategy.getOperation(this);
-
         TransactionType request = new TransactionType();
         request.setInsertOrUpdateOrDelete(Arrays.asList(elementType));
-
         return request;
     }
 

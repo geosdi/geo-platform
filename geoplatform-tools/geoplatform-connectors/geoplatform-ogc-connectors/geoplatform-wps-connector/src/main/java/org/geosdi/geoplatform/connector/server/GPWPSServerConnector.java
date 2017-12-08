@@ -3,7 +3,9 @@ package org.geosdi.geoplatform.connector.server;
 import org.geosdi.geoplatform.connector.WPSVersion;
 import org.geosdi.geoplatform.connector.WPSVersionException;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
+import org.geosdi.geoplatform.connector.server.request.WPSDescribeProcessRequest;
 import org.geosdi.geoplatform.connector.server.request.WPSGetCapabilitiesRequest;
+import org.geosdi.geoplatform.connector.server.request.v100.WPSDescribeProcessRequestV100;
 import org.geosdi.geoplatform.connector.server.request.v100.WPSGetCapabilitiesRequestV100;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 
@@ -84,6 +86,19 @@ public class GPWPSServerConnector extends GPAbstractServerConnector implements G
         switch (this.version) {
             case WPS_100:
                 return new WPSGetCapabilitiesRequestV100(this);
+            default:
+                throw new WPSVersionException("The Version for WPS must be 1.0.0");
+        }
+    }
+
+    /**
+     * @return {@link WPSDescribeProcessRequest}
+     */
+    @Override
+    public WPSDescribeProcessRequest createDescribeProcessRequest() {
+        switch (this.version) {
+            case WPS_100:
+                return new WPSDescribeProcessRequestV100(this);
             default:
                 throw new WPSVersionException("The Version for WPS must be 1.0.0");
         }

@@ -45,6 +45,8 @@ import org.slf4j.LoggerFactory;
 
 import java.net.URI;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 /**
  * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
@@ -53,6 +55,7 @@ public abstract class GPAbstractConnectorRequest<T> implements GPConnectorReques
 
     protected final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
+    private final GPServerConnector serverConnector;
     protected final URI serverURI;
     protected final GPSecurityConnector securityConnector;
     protected final CloseableHttpClient clientConnection;
@@ -60,27 +63,22 @@ public abstract class GPAbstractConnectorRequest<T> implements GPConnectorReques
     private RequestConfig requestConfig;
 
     /**
-     * @param server
+     * @param theServerConnector
      */
-    public GPAbstractConnectorRequest(GPServerConnector server) {
-        this(server.getClientConnection(), server.getURI(), server.getCredentialsProvider(),
-                server.getSecurityConnector());
-    }
-
-    /**
-     * @param theClientConnection
-     * @param theServerURI
-     * @param theCredentialProvider
-     * @param theSecurityConnector
-     */
-    protected GPAbstractConnectorRequest(CloseableHttpClient theClientConnection, URI theServerURI,
-            CredentialsProvider theCredentialProvider, GPSecurityConnector theSecurityConnector) {
-        this.clientConnection = theClientConnection;
-        this.serverURI = theServerURI;
-        this.credentialProvider = theCredentialProvider;
-        this.securityConnector = (theSecurityConnector == null
+    protected GPAbstractConnectorRequest(GPServerConnector theServerConnector)  {
+        checkArgument(theServerConnector != null, "The Parameter GPServerConnector must not be null.");
+        checkArgument(theServerConnector.getCredentialsProvider() != null,
+                "The Parameter CredentialProvider must not be null.");
+        checkArgument(theServerConnector.getURI() != null, "The Parameter Server URI must not be null.");
+        checkArgument(theServerConnector.getClientConnection() != null,
+                "The Parameter Client Connection  must not be null.");
+        this.serverConnector = theServerConnector;
+        this.clientConnection = this.serverConnector.getClientConnection();
+        this.serverURI = this.serverConnector.getURI();
+        this.credentialProvider = this.serverConnector.getCredentialsProvider();
+        this.securityConnector = (this.serverConnector.getSecurityConnector() == null
                 ? GPSecurityConnector.MOCK_SECURITY
-                : theSecurityConnector);
+                : this.serverConnector.getSecurityConnector());
     }
 
     /**

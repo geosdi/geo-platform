@@ -50,7 +50,7 @@ import java.nio.charset.Charset;
  * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public abstract class GPPostConnectorRequest<T> extends PostConnectorRequest<T> {
+public abstract class GPPostConnectorRequest<T, Request> extends PostConnectorRequest<T> {
 
     private static final Charset UTF_8_CHARSERT = Charset.forName("UTF-8");
     private static final String INCORRECT_RESPONSE_MESSAGE = "Connector Server Error: Incorrect Response.";
@@ -59,7 +59,7 @@ public abstract class GPPostConnectorRequest<T> extends PostConnectorRequest<T> 
     /**
      * @param server
      */
-    public GPPostConnectorRequest(GPServerConnector server) {
+    protected GPPostConnectorRequest(GPServerConnector server) {
         super(server);
     }
 
@@ -93,4 +93,10 @@ public abstract class GPPostConnectorRequest<T> extends PostConnectorRequest<T> 
         }
         return response;
     }
+
+    /**
+     * @return {@link Request}
+     * @throws Exception
+     */
+    protected abstract Request createRequest() throws Exception;
 }

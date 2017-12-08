@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wps:ProcessDescriptions service="WPS" version="1.0.0" xml:lang="en"
+  xmlns:ows="http://www.opengis.net/ows/1.1"
+  xmlns:wps="http://www.opengis.net/wps/1.0.0"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wps/1.0.0 http://schemas.opengis.net/wps/1.0.0/wpsAll.xsd">
+  <ProcessDescription statusSupported="true" storeSupported="true" wps:processVersion="1.0.0">
+    <ows:Identifier>vec:Reproject</ows:Identifier>
+    <ows:Title>Reproject Features</ows:Title>
+    <ows:Abstract>Reprojects features into a supplied coordinate reference system.  Can also force a feature collection to have a given CRS.</ows:Abstract>
+    <DataInputs>
+      <Input maxOccurs="1" minOccurs="1">
+        <ows:Identifier>features</ows:Identifier>
+        <ows:Title>features</ows:Title>
+        <ows:Abstract>The feature collection that will be reprojected</ows:Abstract>
+        <ComplexData>
+          <Default>
+            <Format>
+              <MimeType>text/xml; subtype=wfs-collection/1.0</MimeType>
+            </Format>
+          </Default>
+          <Supported>
+            <Format>
+              <MimeType>text/xml; subtype=wfs-collection/1.0</MimeType>
+            </Format>
+            <Format>
+              <MimeType>text/xml; subtype=wfs-collection/1.1</MimeType>
+            </Format>
+            <Format>
+              <MimeType>application/json</MimeType>
+            </Format>
+            <Format>
+              <MimeType>application/wfs-collection-1.0</MimeType>
+            </Format>
+            <Format>
+              <MimeType>application/wfs-collection-1.1</MimeType>
+            </Format>
+            <Format>
+              <MimeType>application/zip</MimeType>
+              <Encoding>base64</Encoding>
+            </Format>
+          </Supported>
+        </ComplexData>
+      </Input>
+      <Input maxOccurs="1" minOccurs="0">
+        <ows:Identifier>forcedCRS</ows:Identifier>
+        <ows:Title>forcedCRS</ows:Title>
+        <ows:Abstract>Coordinate reference system to use for input feature collection (overrides native one)</ows:Abstract>
+        <LiteralData>
+          <ows:AnyValue/>
+        </LiteralData>
+      </Input>
+      <Input maxOccurs="1" minOccurs="0">
+        <ows:Identifier>targetCRS</ows:Identifier>
+        <ows:Title>targetCRS</ows:Title>
+        <ows:Abstract>Target coordinate reference system to use for reprojection</ows:Abstract>
+        <LiteralData>
+          <ows:AnyValue/>
+        </LiteralData>
+      </Input>
+    </DataInputs>
+    <ProcessOutputs>
+      <Output>
+        <ows:Identifier>result</ows:Identifier>
+        <ows:Title>result</ows:Title>
+        <ComplexOutput>
+          <Default>
+            <Format>
+              <MimeType>text/xml; subtype=wfs-collection/1.0</MimeType>
+            </Format>
+          </Default>
+          <Supported>
+            <Format>
+              <MimeType>text/xml; subtype=wfs-collection/1.0</MimeType>
+            </Format>
+            <Format>
+              <MimeType>text/xml; subtype=wfs-collection/1.1</MimeType>
+            </Format>
+            <Format>
+              <MimeType>application/json</MimeType>
+            </Format>
+            <Format>
+              <MimeType>application/wfs-collection-1.0</MimeType>
+            </Format>
+            <Format>
+              <MimeType>application/wfs-collection-1.1</MimeType>
+            </Format>
+            <Format>
+              <MimeType>application/zip</MimeType>
+            </Format>
+          </Supported>
+        </ComplexOutput>
+      </Output>
+    </ProcessOutputs>
+  </ProcessDescription>
+</wps:ProcessDescriptions>

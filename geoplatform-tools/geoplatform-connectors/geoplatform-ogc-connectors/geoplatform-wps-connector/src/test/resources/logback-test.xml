@@ -15,4 +15,6 @@
         <appender-ref ref="STDOUT"/>
     </root>
 
+    <logger name="org.geosdi.geoplatform.connector.wps.WPSDescribeProcessTest" level="debug"/>
+
 </configuration>

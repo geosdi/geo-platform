@@ -15,7 +15,7 @@ import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorCo
  */
 public class WPSTestConfigurator {
 
-    protected static final Logger logger = LoggerFactory.getLogger(WPSTestConfigurator.class);
+    protected final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     private static final String wpsURL = "http://150.145.141.92/geoserver/wps";
     private static final String wpsHttpsURL = "https://vvf-toscana.geosdi.org/geoserver/wps";
@@ -42,7 +42,6 @@ public class WPSTestConfigurator {
                     .build();
         } catch (Exception ex) {
             ex.printStackTrace();
-            logger.error("#######################EXCEPTION : {}", ex.getMessage());
         }
     }
 

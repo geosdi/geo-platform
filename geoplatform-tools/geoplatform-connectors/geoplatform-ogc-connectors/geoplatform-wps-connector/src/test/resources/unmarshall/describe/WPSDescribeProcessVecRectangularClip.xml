@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wps:ProcessDescriptions service="WPS" version="1.0.0" xml:lang="en"
+  xmlns:ows="http://www.opengis.net/ows/1.1"
+  xmlns:wps="http://www.opengis.net/wps/1.0.0"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wps/1.0.0 http://schemas.opengis.net/wps/1.0.0/wpsAll.xsd">
+  <ProcessDescription statusSupported="true" storeSupported="true" wps:processVersion="1.0.0">
+    <ows:Identifier>vec:RectangularClip</ows:Identifier>
+    <ows:Title>Rectangular Clip</ows:Title>
+    <ows:Abstract>Clips (crops) features to the specified rectangular extent</ows:Abstract>
+    <DataInputs>
+      <Input maxOccurs="1" minOccurs="1">
+        <ows:Identifier>features</ows:Identifier>
+        <ows:Title>features</ows:Title>
+        <ows:Abstract>Input feature collection</ows:Abstract>
+        <ComplexData>
+          <Default>
+            <Format>
+              <MimeType>text/xml; subtype=wfs-collection/1.0</MimeType>
+            </Format>
+          </Default>
+          <Supported>
+            <Format>
+              <MimeType>text/xml; subtype=wfs-collection/1.0</MimeType>
+            </Format>
+            <Format>
+              <MimeType>text/xml; subtype=wfs-collection/1.1</MimeType>
+            </Format>
+            <Format>
+              <MimeType>application/json</MimeType>
+            </Format>
+            <Format>
+              <MimeType>application/wfs-collection-1.0</MimeType>
+            </Format>
+            <Format>
+              <MimeType>application/wfs-collection-1.1</MimeType>
+            </Format>
+            <Format>
+              <MimeType>application/zip</MimeType>
+              <Encoding>base64</Encoding>
+            </Format>
+          </Supported>
+        </ComplexData>
+      </Input>
+      <Input maxOccurs="1" minOccurs="1">
+        <ows:Identifier>clip</ows:Identifier>
+        <ows:Title>clip</ows:Title>
+        <ows:Abstract>Bounds of clipping rectangle</ows:Abstract>
+        <BoundingBoxData>
+          <Default>
+            <CRS>EPSG:4326</CRS>
+          </Default>
+          <Supported>
+            <CRS>EPSG:4326</CRS>
+          </Supported>
+        </BoundingBoxData>
+      </Input>
+      <Input maxOccurs="1" minOccurs="0">
+        <ows:Identifier>preserveZ</ows:Identifier>
+        <ows:Title>preserveZ</ows:Title>
+        <ows:Abstract>Attempt to preserve Z values from the original geometry (interpolate value for new points)</ows:Abstract>
+        <LiteralData>
+          <ows:DataType>xs:boolean</ows:DataType>
+          <ows:AnyValue/>
+        </LiteralData>
+      </Input>
+    </DataInputs>
+    <ProcessOutputs>
+      <Output>
+        <ows:Identifier>result</ows:Identifier>
+        <ows:Title>result</ows:Title>
+        <ComplexOutput>
+          <Default>
+            <Format>
+              <MimeType>text/xml; subtype=wfs-collection/1.0</MimeType>
+            </Format>
+          </Default>
+          <Supported>
+            <Format>
+              <MimeType>text/xml; subtype=wfs-collection/1.0</MimeType>
+            </Format>
+            <Format>
+              <MimeType>text/xml; subtype=wfs-collection/1.1</MimeType>
+            </Format>
+            <Format>
+              <MimeType>application/json</MimeType>
+            </Format>
+            <Format>
+              <MimeType>application/wfs-collection-1.0</MimeType>
+            </Format>
+            <Format>
+              <MimeType>application/wfs-collection-1.1</MimeType>
+            </Format>
+            <Format>
+              <MimeType>application/zip</MimeType>
+            </Format>
+          </Supported>
+        </ComplexOutput>
+      </Output>
+    </ProcessOutputs>
+  </ProcessDescription>
+</wps:ProcessDescriptions>

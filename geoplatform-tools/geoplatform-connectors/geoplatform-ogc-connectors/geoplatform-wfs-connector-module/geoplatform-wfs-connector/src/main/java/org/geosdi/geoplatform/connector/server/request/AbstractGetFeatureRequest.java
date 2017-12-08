@@ -46,7 +46,7 @@ import java.util.List;
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public abstract class AbstractGetFeatureRequest<T> extends WFSRequest<T> implements WFSGetFeatureRequest<T> {
+public abstract class AbstractGetFeatureRequest<T, Request> extends WFSRequest<T, Request> implements WFSGetFeatureRequest<T> {
 
     private static final String NAME_GEOMETRY = "the_geom"; // TODO name property geometry is always "the_geom"?
     //

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wps:ProcessDescriptions service="WPS" version="1.0.0" xml:lang="en"
+  xmlns:ows="http://www.opengis.net/ows/1.1"
+  xmlns:wps="http://www.opengis.net/wps/1.0.0"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wps/1.0.0 http://schemas.opengis.net/wps/1.0.0/wpsAll.xsd">
+  <ProcessDescription statusSupported="true" storeSupported="true" wps:processVersion="1.0.0">
+    <ows:Identifier>vec:PointBuffers</ows:Identifier>
+    <ows:Title>Point Buffers</ows:Title>
+    <ows:Abstract>Returns a collection of circular buffer polygons with specified radii centered on a given point</ows:Abstract>
+    <DataInputs>
+      <Input maxOccurs="1" minOccurs="1">
+        <ows:Identifier>center</ows:Identifier>
+        <ows:Title>center</ows:Title>
+        <ows:Abstract>Input point</ows:Abstract>
+        <ComplexData>
+          <Default>
+            <Format>
+              <MimeType>text/xml; subtype=gml/3.1.1</MimeType>
+            </Format>
+          </Default>
+          <Supported>
+            <Format>
+              <MimeType>text/xml; subtype=gml/3.1.1</MimeType>
+            </Format>
+            <Format>
+              <MimeType>text/xml; subtype=gml/2.1.2</MimeType>
+            </Format>
+            <Format>
+              <MimeType>application/wkt</MimeType>
+            </Format>
+            <Format>
+              <MimeType>application/json</MimeType>
+            </Format>
+            <Format>
+              <MimeType>application/gml-3.1.1</MimeType>
+            </Format>
+            <Format>
+              <MimeType>application/gml-2.1.2</MimeType>
+            </Format>
+          </Supported>
+        </ComplexData>
+      </Input>
+      <Input maxOccurs="1" minOccurs="0">
+        <ows:Identifier>crs</ows:Identifier>
+        <ows:Title>crs</ows:Title>
+        <ows:Abstract>Coordinate reference system of the point and the generated buffer polygons</ows:Abstract>
+        <LiteralData>
+          <ows:AnyValue/>
+        </LiteralData>
+      </Input>
+      <Input maxOccurs="2147483647" minOccurs="0">
+        <ows:Identifier>distances</ows:Identifier>
+        <ows:Title>distances</ows:Title>
+        <ows:Abstract>Buffer radius distance, in meters</ows:Abstract>
+        <LiteralData>
+          <ows:DataType>xs:double</ows:DataType>
+          <ows:AnyValue/>
+        </LiteralData>
+      </Input>
+      <Input maxOccurs="1" minOccurs="0">
+        <ows:Identifier>quadrantSegments</ows:Identifier>
+        <ows:Title>quadrantSegments</ows:Title>
+        <ows:Abstract>Number of line segments per quarter-circle to be generated.  Larger numbers produce smoother shapes but larger numbers of vertices. Default is 8</ows:Abstract>
+        <LiteralData>
+          <ows:DataType>xs:int</ows:DataType>
+          <ows:AnyValue/>
+          <DefaultValue>8</DefaultValue>
+        </LiteralData>
+      </Input>
+    </DataInputs>
+    <ProcessOutputs>
+      <Output>
+        <ows:Identifier>buffers</ows:Identifier>
+        <ows:Title>buffers</ows:Title>
+        <ComplexOutput>
+          <Default>
+            <Format>
+              <MimeType>text/xml; subtype=wfs-collection/1.0</MimeType>
+            </Format>
+          </Default>
+          <Supported>
+            <Format>
+              <MimeType>text/xml; subtype=wfs-collection/1.0</MimeType>
+            </Format>
+            <Format>
+              <MimeType>text/xml; subtype=wfs-collection/1.1</MimeType>
+            </Format>
+            <Format>
+              <MimeType>application/json</MimeType>
+            </Format>
+            <Format>
+              <MimeType>application/wfs-collection-1.0</MimeType>
+            </Format>
+            <Format>
+              <MimeType>application/wfs-collection-1.1</MimeType>
+            </Format>
+            <Format>
+              <MimeType>application/zip</MimeType>
+            </Format>
+          </Supported>
+        </ComplexOutput>
+      </Output>
+    </ProcessOutputs>
+  </ProcessDescription>
+</wps:ProcessDescriptions>

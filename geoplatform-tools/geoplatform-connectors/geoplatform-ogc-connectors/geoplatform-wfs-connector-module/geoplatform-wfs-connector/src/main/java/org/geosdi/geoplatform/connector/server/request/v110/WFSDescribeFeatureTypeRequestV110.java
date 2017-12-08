@@ -47,15 +47,14 @@ import org.geosdi.geoplatform.xml.xsd.v2001.Schema;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class WFSDescribeFeatureTypeRequestV110
-        extends AbstractDescribeFeatureTypeRequest<Schema> {
+public class WFSDescribeFeatureTypeRequestV110 extends AbstractDescribeFeatureTypeRequest<Schema, DescribeFeatureTypeType> {
 
     public WFSDescribeFeatureTypeRequestV110(GPServerConnector server) {
         super(server);
     }
 
     @Override
-    protected Object createRequest() throws IllegalArgumentException {
+    protected DescribeFeatureTypeType createRequest() throws IllegalArgumentException {
         DescribeFeatureTypeType request = new DescribeFeatureTypeType();
 
         if ((typeName == null) || (typeName.isEmpty())) {

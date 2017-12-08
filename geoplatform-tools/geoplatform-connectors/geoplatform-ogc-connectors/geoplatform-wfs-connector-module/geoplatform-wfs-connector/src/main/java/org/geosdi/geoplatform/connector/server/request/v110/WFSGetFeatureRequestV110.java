@@ -56,7 +56,7 @@ import java.util.Arrays;
  * @author Giuseppe La Scaleia - <giuseppe.lascaleia@geosdi.org>
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class WFSGetFeatureRequestV110 extends AbstractGetFeatureRequest<FeatureCollectionType> {
+public class WFSGetFeatureRequestV110 extends AbstractGetFeatureRequest<FeatureCollectionType, GetFeatureType> {
 
     private static final org.geosdi.geoplatform.xml.filter.v110.ObjectFactory filterFactory = new org.geosdi.geoplatform.xml.filter.v110.ObjectFactory();
     private static final org.geosdi.geoplatform.xml.gml.v311.ObjectFactory gmlFactory = new org.geosdi.geoplatform.xml.gml.v311.ObjectFactory();
@@ -66,7 +66,7 @@ public class WFSGetFeatureRequestV110 extends AbstractGetFeatureRequest<FeatureC
     }
 
     @Override
-    protected Object createRequest() throws Exception {
+    protected GetFeatureType createRequest() throws Exception {
         if (typeName == null) {
             throw new IllegalArgumentException("typeName must not be null.");
         }

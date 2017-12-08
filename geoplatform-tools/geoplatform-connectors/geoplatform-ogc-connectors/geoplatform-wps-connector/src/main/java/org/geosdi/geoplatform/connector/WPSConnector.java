@@ -1,5 +1,6 @@
 package org.geosdi.geoplatform.connector;
 
+import org.geosdi.geoplatform.connector.server.request.WPSDescribeProcessRequest;
 import org.geosdi.geoplatform.connector.server.request.WPSGetCapabilitiesRequest;
 
 /**
@@ -13,6 +14,12 @@ public interface WPSConnector {
      * @return {@link WPSGetCapabilitiesRequest<T>}
      */
     <T> WPSGetCapabilitiesRequest<T> createGetCapabilitiesRequest();
+
+    /**
+     * @param <T>
+     * @return {@link WPSDescribeProcessRequest<T>}
+     */
+    <T> WPSDescribeProcessRequest<T> createDescribeProcessRequest();
 
     /**
      * @return {@link WPSVersion}

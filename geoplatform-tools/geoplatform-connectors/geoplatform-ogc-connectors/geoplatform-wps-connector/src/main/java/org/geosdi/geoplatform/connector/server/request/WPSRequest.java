@@ -17,7 +17,7 @@ import static org.apache.http.entity.ContentType.APPLICATION_XML;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class WPSRequest<T> extends GPPostConnectorRequest<T> {
+public abstract class WPSRequest<T, Request> extends GPPostConnectorRequest<T, Request> {
 
     static {
         wpsContext = JAXBContextConnectorRepository.getProvider(WPSConnectorJAXBContext.WPS_CONTEXT_KEY);
@@ -45,12 +45,6 @@ public abstract class WPSRequest<T> extends GPPostConnectorRequest<T> {
         marshaller.marshal(request, writer);
         return new StringEntity(writer.toString(), APPLICATION_XML);
     }
-
-    /**
-     * @return {@link Object}
-     * @throws Exception
-     */
-    protected abstract Object createRequest() throws Exception;
 
     @Override
     public Marshaller getMarshaller() throws Exception {

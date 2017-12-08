@@ -43,7 +43,7 @@ import org.geosdi.geoplatform.xml.wfs.v110.WFSCapabilitiesType;
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class WFSGetCapabilitiesRequestV110 extends WFSRequest<WFSCapabilitiesType>
+public class WFSGetCapabilitiesRequestV110 extends WFSRequest<WFSCapabilitiesType, GetCapabilitiesType>
         implements WFSGetCapabilitiesRequest<WFSCapabilitiesType> {
 
     public WFSGetCapabilitiesRequestV110(GPServerConnector server) {
@@ -51,8 +51,7 @@ public class WFSGetCapabilitiesRequestV110 extends WFSRequest<WFSCapabilitiesTyp
     }
 
     @Override
-    protected Object createRequest() {
+    protected GetCapabilitiesType createRequest() {
         return new GetCapabilitiesType();
     }
-
 }

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wps:ProcessDescriptions service="WPS" version="1.0.0" xml:lang="en"
+  xmlns:ows="http://www.opengis.net/ows/1.1"
+  xmlns:wps="http://www.opengis.net/wps/1.0.0"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wps/1.0.0 http://schemas.opengis.net/wps/1.0.0/wpsAll.xsd">
+  <ProcessDescription statusSupported="true" storeSupported="true" wps:processVersion="1.0.0">
+    <ows:Identifier>vec:VectorToRaster</ows:Identifier>
+    <ows:Title>Transform</ows:Title>
+    <ows:Abstract>Converts some or all of a feature collection to a raster grid, using an attribute to specify cell values.</ows:Abstract>
+    <DataInputs>
+      <Input maxOccurs="1" minOccurs="1">
+        <ows:Identifier>features</ows:Identifier>
+        <ows:Title>features</ows:Title>
+        <ows:Abstract>Features to process</ows:Abstract>
+        <ComplexData>
+          <Default>
+            <Format>
+              <MimeType>text/xml; subtype=wfs-collection/1.0</MimeType>
+            </Format>
+          </Default>
+          <Supported>
+            <Format>
+              <MimeType>text/xml; subtype=wfs-collection/1.0</MimeType>
+            </Format>
+            <Format>
+              <MimeType>text/xml; subtype=wfs-collection/1.1</MimeType>
+            </Format>
+            <Format>
+              <MimeType>application/json</MimeType>
+            </Format>
+            <Format>
+              <MimeType>application/wfs-collection-1.0</MimeType>
+            </Format>
+            <Format>
+              <MimeType>application/wfs-collection-1.1</MimeType>
+            </Format>
+            <Format>
+              <MimeType>application/zip</MimeType>
+              <Encoding>base64</Encoding>
+            </Format>
+          </Supported>
+        </ComplexData>
+      </Input>
+      <Input maxOccurs="1" minOccurs="1">
+        <ows:Identifier>rasterWidth</ows:Identifier>
+        <ows:Title>rasterWidth</ows:Title>
+        <ows:Abstract>Width of the output grid in pixels</ows:Abstract>
+        <LiteralData>
+          <ows:DataType>xs:int</ows:DataType>
+          <ows:AllowedValues>
+            <ows:Range ows:rangeClosure="closed-open">
+              <ows:MinimumValue>1.0</ows:MinimumValue>
+            </ows:Range>
+          </ows:AllowedValues>
+        </LiteralData>
+      </Input>
+      <Input maxOccurs="1" minOccurs="1">
+        <ows:Identifier>rasterHeight</ows:Identifier>
+        <ows:Title>rasterHeight</ows:Title>
+        <ows:Abstract>Height of the output grid in pixels</ows:Abstract>
+        <LiteralData>
+          <ows:DataType>xs:int</ows:DataType>
+          <ows:AllowedValues>
+            <ows:Range ows:rangeClosure="closed-open">
+              <ows:MinimumValue>1.0</ows:MinimumValue>
+            </ows:Range>
+          </ows:AllowedValues>
+        </LiteralData>
+      </Input>
+      <Input maxOccurs="1" minOccurs="0">
+        <ows:Identifier>title</ows:Identifier>
+        <ows:Title>title</ows:Title>
+        <ows:Abstract>Title to use for the output grid</ows:Abstract>
+        <LiteralData>
+          <ows:AnyValue/>
+          <DefaultValue>raster</DefaultValue>
+        </LiteralData>
+      </Input>
+      <Input maxOccurs="1" minOccurs="1">
+        <ows:Identifier>attribute</ows:Identifier>
+        <ows:Title>attribute</ows:Title>
+        <ows:Abstract>Attribute name to use for the raster cell values</ows:Abstract>
+        <LiteralData>
+          <ows:AnyValue/>
+        </LiteralData>
+      </Input>
+      <Input maxOccurs="1" minOccurs="0">
+        <ows:Identifier>bounds</ows:Identifier>
+        <ows:Title>bounds</ows:Title>
+        <ows:Abstract>Bounding box of the area to rasterize</ows:Abstract>
+        <BoundingBoxData>
+          <Default>
+            <CRS>EPSG:4326</CRS>
+          </Default>
+          <Supported>
+            <CRS>EPSG:4326</CRS>
+          </Supported>
+        </BoundingBoxData>
+      </Input>
+    </DataInputs>
+    <ProcessOutputs>
+      <Output>
+        <ows:Identifier>result</ows:Identifier>
+        <ows:Title>result</ows:Title>
+        <ComplexOutput>
+          <Default>
+            <Format>
+              <MimeType>image/tiff</MimeType>
+            </Format>
+          </Default>
+          <Supported>
+            <Format>
+              <MimeType>image/tiff</MimeType>
+            </Format>
+            <Format>
+              <MimeType>application/arcgrid</MimeType>
+            </Format>
+          </Supported>
+        </ComplexOutput>
+      </Output>
+    </ProcessOutputs>
+  </ProcessDescription>
+</wps:ProcessDescriptions>

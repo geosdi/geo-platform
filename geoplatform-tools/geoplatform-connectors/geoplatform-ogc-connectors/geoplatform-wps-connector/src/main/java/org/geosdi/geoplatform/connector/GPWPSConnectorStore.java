@@ -3,6 +3,7 @@ package org.geosdi.geoplatform.connector;
 import org.geosdi.geoplatform.connector.api.GPConnectorStore;
 import org.geosdi.geoplatform.connector.server.GPWPSServerConnector;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
+import org.geosdi.geoplatform.connector.server.request.WPSDescribeProcessRequest;
 import org.geosdi.geoplatform.connector.server.request.WPSGetCapabilitiesRequest;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 
@@ -55,6 +56,14 @@ public class GPWPSConnectorStore extends GPConnectorStore<GPWPSServerConnector> 
     @Override
     public <T> WPSGetCapabilitiesRequest<T> createGetCapabilitiesRequest() {
         return this.server.createGetCapabilitiesRequest();
+    }
+
+    /**
+     * @return {@link WPSDescribeProcessRequest<T>}
+     */
+    @Override
+    public <T> WPSDescribeProcessRequest<T> createDescribeProcessRequest() {
+        return this.server.createDescribeProcessRequest();
     }
 
     /**

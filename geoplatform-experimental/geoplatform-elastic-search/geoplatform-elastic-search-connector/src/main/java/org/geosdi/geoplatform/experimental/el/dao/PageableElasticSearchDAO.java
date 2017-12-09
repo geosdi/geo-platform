@@ -208,7 +208,7 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends GPBas
         }
         Long total = searchResponse.getHits().getTotalHits();
         logger.debug("###################TOTAL HITS FOUND : {} .\n\n", total);
-        return new PageResult<D>(total, Stream.of(searchResponse.getHits().hits())
+        return new PageResult<D>(total, Stream.of(searchResponse.getHits().getHits())
                 .map(searchHit -> this.readDocument(searchHit))
                 .filter(s -> s != null).collect(toList()));
     }

@@ -35,7 +35,7 @@
 package org.geosdi.geoplatform.experimental.el.spring.connector;
 
 import org.elasticsearch.client.Client;
-import org.elasticsearch.common.transport.InetSocketTransportAddress;
+import org.elasticsearch.common.transport.TransportAddress;
 import org.elasticsearch.transport.client.PreBuiltTransportClient;
 import org.geosdi.geoplatform.experimental.el.spring.configuration.GPElasticSearchProperties;
 import org.slf4j.Logger;
@@ -65,7 +65,7 @@ class GPElasticSearchConnectorConfig {
         logger.debug("@@@@@@@@@@@@@@@@@@INITIALIZING ELASTIC SEARCH WITH PROPERTIES  : {}\n", gpBaseElasticSearchProperties);
         return new PreBuiltTransportClient(builder()
                 .put("cluster.name", gpBaseElasticSearchProperties.getClusterName()).build())
-                .addTransportAddress(new InetSocketTransportAddress(getByName(gpBaseElasticSearchProperties.getHost()),
+                .addTransportAddress(new TransportAddress(getByName(gpBaseElasticSearchProperties.getHost()),
                         gpBaseElasticSearchProperties.getPort()));
     }
 }

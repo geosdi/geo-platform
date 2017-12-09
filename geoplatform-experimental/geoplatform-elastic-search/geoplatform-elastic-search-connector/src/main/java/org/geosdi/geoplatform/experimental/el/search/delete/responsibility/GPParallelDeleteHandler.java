@@ -78,7 +78,7 @@ class GPParallelDeleteHandler extends AbstractParallelDeleteHandler {
         for (Future<BulkResponse> futureBulk : futureBulks) {
             BulkResponse bulkResponse = futureBulk.get();
             elementsDeleted += bulkResponse.getItems().length;
-            took += bulkResponse.getTookInMillis();
+            took += bulkResponse.getTook().getMillis();
         }
         return (Result) new DeleteByPage.DeleteByPageResult(elementsDeleted, new TimeValue(took, TimeUnit.MILLISECONDS));
     }

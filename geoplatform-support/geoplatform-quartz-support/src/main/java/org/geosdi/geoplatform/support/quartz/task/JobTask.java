@@ -54,11 +54,6 @@ public interface JobTask {
     void run(JobExecutionContext context) throws TaskException;
 
     /**
-     *
-     */
-    void registerTask();
-
-    /**
      * <p>
      * The Base {@link TaskKey} Key Implementation
      * </p>

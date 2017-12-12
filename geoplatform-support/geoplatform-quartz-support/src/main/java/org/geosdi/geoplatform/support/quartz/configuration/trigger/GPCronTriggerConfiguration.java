@@ -49,5 +49,4 @@ public interface GPCronTriggerConfiguration extends Serializable {
      * @return String
      */
     String getCronTriggerExpression();
-
 }

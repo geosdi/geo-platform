@@ -36,7 +36,7 @@ package org.geosdi.geoplatform.gml.api.parser.base.coordinate;
 
 import com.google.common.base.Preconditions;
 import com.vividsolutions.jts.geom.Coordinate;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.geosdi.geoplatform.gml.api.Coord;
 import org.geosdi.geoplatform.gml.api.Coordinates;
 import org.geosdi.geoplatform.gml.api.DirectPosition;

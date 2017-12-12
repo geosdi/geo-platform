@@ -54,5 +54,4 @@ public interface GPTriggerSchedulingConfiguration extends Serializable {
      * @return Integer
      */
     Integer getSchedulingValue();
-
 }

@@ -34,6 +34,8 @@
  */
 package org.geosdi.geoplatform.support.quartz.spring.placeholder;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -44,13 +46,14 @@ import java.net.MalformedURLException;
 import static java.lang.Boolean.TRUE;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Configuration
 class GPQuartzPlaceholderConfig {
 
+    private static final Logger logger = LoggerFactory.getLogger(GPQuartzPlaceholderConfig.class);
+    //
     private static final PlaceholderQuartzResourcesLoader placeholderQuartzResourcesLoader = new PlaceholderQuartzResourcesLoader();
 
     @Bean(name = "gpQuartzPropertyConfigurer")
@@ -58,6 +61,7 @@ class GPQuartzPlaceholderConfig {
             @Value("#{systemProperties['GP_QUARTZ_DATA_DIR']}") String gpQuartzConfigDataDir,
             @Value("#{systemProperties['GP_QUARTZ_FILE_PROP']}") String gpQuartzFileProp)
             throws MalformedURLException {
+        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@INITIALIZING GP_QUARTZ_PLACEHOLDER_CONFIGURER");
 
         PropertySourcesPlaceholderConfigurer gpQuartzPC = new PropertySourcesPlaceholderConfigurer();
         gpQuartzPC.setPlaceholderPrefix("gpQuartzConfigurator{");

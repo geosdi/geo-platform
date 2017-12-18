@@ -17,7 +17,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <elasticsearch-version>6.0.1</elasticsearch-version>
+        <elasticsearch-version>6.1.0</elasticsearch-version>
         <spatial4j.version>0.6</spatial4j.version>
     </properties>
 
@@ -37,7 +37,7 @@
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-jackson-support</artifactId>
-            <version>1.9-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
 
         <!-- =========================================================== -->

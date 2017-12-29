@@ -52,6 +52,13 @@ public class DirectPositionLineGeometryHandler extends BaseGeometryHandler<LineS
         super.setSuccessor(new CoordinatesLineGeometryHandler());
     }
 
+    /**
+     * @param geometryFactory
+     * @param gmlGeometry
+     * @param parser
+     * @return {@link com.vividsolutions.jts.geom.LineString}
+     * @throws ParserException
+     */
     @Override
     public com.vividsolutions.jts.geom.LineString buildGeometry(GeometryFactory geometryFactory,
             LineString gmlGeometry, CoordinateBaseParser parser) throws ParserException {

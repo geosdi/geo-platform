@@ -34,7 +34,6 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.base.geometry.multi.line;
 
-import com.google.common.base.Preconditions;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.LineString;
 import org.geosdi.geoplatform.gml.api.LineStringProperty;
@@ -48,6 +47,9 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -56,16 +58,26 @@ public class GMLBaseMultiLineStringParser extends AbstractGMLBaseParser<MultiLin
 
     private GMLBaseLineStringParser lineStringParser;
 
+    /**
+     * @param theGeometryFactory
+     * @param theSrsParser
+     * @param theLineStringParser
+     */
     public GMLBaseMultiLineStringParser(GeometryFactory theGeometryFactory, AbstractGMLBaseSRSParser theSrsParser,
             GMLBaseLineStringParser theLineStringParser) {
         super(theGeometryFactory, theSrsParser);
         this.lineStringParser = theLineStringParser;
     }
 
+    /**
+     * @param gmlGeometry
+     * @return {@link com.vividsolutions.jts.geom.MultiLineString}
+     * @throws ParserException
+     */
     @Override
     protected com.vividsolutions.jts.geom.MultiLineString canParseGeometry(MultiLineString gmlGeometry)
             throws ParserException {
-        Preconditions.checkState(gmlGeometry.isSetLineStringMember(), "The LineStringMember is not present.");
+        checkState(gmlGeometry.isSetLineStringMember(), "The LineStringMember is not present.");
         List<LineString> lines = new ArrayList<>(gmlGeometry.getLineStringMember().size());
         for (LineStringProperty lineProperty : gmlGeometry.getLineStringMember()) {
             org.geosdi.geoplatform.gml.api.LineString lineString = lineProperty.getLineString();
@@ -76,10 +88,15 @@ public class GMLBaseMultiLineStringParser extends AbstractGMLBaseParser<MultiLin
         return geometryFactory.createMultiLineString(lines.toArray(new LineString[lines.size()]));
     }
 
+    /**
+     * @param propertyType
+     * @return {@link com.vividsolutions.jts.geom.MultiLineString}
+     * @throws ParserException
+     */
     @Override
     public com.vividsolutions.jts.geom.MultiLineString parseGeometry(MultiLineStringProperty propertyType)
             throws ParserException {
-        Preconditions.checkNotNull(propertyType, "The MultiLineString Property must not be null.");
+        checkNotNull(propertyType, "The MultiLineString Property must not be null.");
         if (propertyType.isSetMultiLineString()) {
             return super.parseGeometry(propertyType.getMultiLineString());
         }

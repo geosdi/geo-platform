@@ -1,0 +1,16 @@
+org.geosdi.geoplatform.gml.api.parser.base.parameter.bridge.implementor.CoordinateParserParameter
+org.geosdi.geoplatform.gml.api.parser.base.parameter.bridge.implementor.CurveParserParameter
+org.geosdi.geoplatform.gml.api.parser.base.parameter.bridge.implementor.DefaultSRSParserParameter
+org.geosdi.geoplatform.gml.api.parser.base.parameter.bridge.implementor.GeometryFactoryParameter
+org.geosdi.geoplatform.gml.api.parser.base.parameter.bridge.implementor.LinearRingParserParameter
+org.geosdi.geoplatform.gml.api.parser.base.parameter.bridge.implementor.LineStringParserParameter
+org.geosdi.geoplatform.gml.api.parser.base.parameter.bridge.implementor.MultiCurveParserParameter
+org.geosdi.geoplatform.gml.api.parser.base.parameter.bridge.implementor.MultiGeometryParserParameter
+org.geosdi.geoplatform.gml.api.parser.base.parameter.bridge.implementor.MultiLineStringParserParameter
+org.geosdi.geoplatform.gml.api.parser.base.parameter.bridge.implementor.MultiPointParserParameter
+org.geosdi.geoplatform.gml.api.parser.base.parameter.bridge.implementor.MultiPolygonParserParameter
+org.geosdi.geoplatform.gml.api.parser.base.parameter.bridge.implementor.MultiSurfaceParserParameter
+org.geosdi.geoplatform.gml.api.parser.base.parameter.bridge.implementor.PointParserParameter
+org.geosdi.geoplatform.gml.api.parser.base.parameter.bridge.implementor.PolygonParserParameter
+org.geosdi.geoplatform.gml.api.parser.base.parameter.bridge.implementor.SextanteParserParameter
+org.geosdi.geoplatform.gml.api.parser.base.parameter.bridge.implementor.SRSFormatParameterPatterns

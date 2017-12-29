@@ -41,12 +41,18 @@ import org.geosdi.geoplatform.gml.api.parser.base.geometry.responsibility.BaseGe
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class CoordinatesLineGeometryHandler extends BaseGeometryHandler<LineString, com.vividsolutions.jts.geom.LineString, CoordinateBaseParser> {
 
+    /**
+     * @param geometryFactory
+     * @param gmlGeometry
+     * @param parser
+     * @return {@link com.vividsolutions.jts.geom.LineString}
+     * @throws ParserException
+     */
     @Override
     public com.vividsolutions.jts.geom.LineString buildGeometry(GeometryFactory geometryFactory, LineString gmlGeometry,
             CoordinateBaseParser parser) throws ParserException {

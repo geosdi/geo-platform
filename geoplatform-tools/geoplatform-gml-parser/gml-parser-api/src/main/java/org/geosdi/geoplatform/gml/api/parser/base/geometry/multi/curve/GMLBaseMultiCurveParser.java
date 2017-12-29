@@ -63,6 +63,11 @@ public class GMLBaseMultiCurveParser extends AbstractGMLBaseParser<MultiCurve, M
         super(theGeometryFactory, theSrsParser);
     }
 
+    /**
+     * @param gmlGeometry
+     * @return {@link MultiLineString}
+     * @throws ParserException
+     */
     @Override
     protected MultiLineString canParseGeometry(MultiCurve gmlGeometry) throws ParserException {
         List<LineString> lines = new ArrayList<>();
@@ -73,6 +78,11 @@ public class GMLBaseMultiCurveParser extends AbstractGMLBaseParser<MultiCurve, M
         return geometryFactory.createMultiLineString(lines.toArray(new LineString[lines.size()]));
     }
 
+    /**
+     * @param propertyType
+     * @return {@link MultiLineString}
+     * @throws ParserException
+     */
     @Override
     public MultiLineString parseGeometry(MultiCurveProperty propertyType) throws ParserException {
         Preconditions.checkNotNull(propertyType, "The MultiCurveProperty must not be null.");
@@ -95,14 +105,18 @@ public class GMLBaseMultiCurveParser extends AbstractGMLBaseParser<MultiCurve, M
 
     protected class MultiCurveMember implements MultiCurveBuilder {
 
+        /**
+         * @param lines
+         * @param gmlGeometry
+         * @throws ParserException
+         */
         @Override
         public void buildMember(List<LineString> lines, MultiCurve gmlGeometry) throws ParserException {
-
             if (gmlGeometry.isSetCurveMember()) {
                 List<? extends CurveProperty> curveProperties = gmlGeometry.getCurveMember();
                 for (CurveProperty curveProperty : curveProperties) {
                     AbstractCurve abstractCurve = curveProperty.getAbstractCurve();
-                    if((gmlGeometry.isSetSrsDimension()) && !(abstractCurve.isSetSrsName()))
+                    if ((gmlGeometry.isSetSrsDimension()) && !(abstractCurve.isSetSrsName()))
                         abstractCurve.setSrsDimension(gmlGeometry.getSrsDimension());
                     lineStringHandler.parseGeometry(lines, abstractCurve);
                 }
@@ -113,14 +127,18 @@ public class GMLBaseMultiCurveParser extends AbstractGMLBaseParser<MultiCurve, M
 
     protected class MultiCurveMembers implements MultiCurveBuilder {
 
+        /**
+         * @param lines
+         * @param gmlGeometry
+         * @throws ParserException
+         */
         @Override
         public void buildMember(List<LineString> lines, MultiCurve gmlGeometry) throws ParserException {
-
             if (gmlGeometry.isSetCurveMembers()) {
                 CurveArrayProperty curveArrayProperty = gmlGeometry.getCurveMembers();
                 List<? extends AbstractCurve> abstractCurves = curveArrayProperty.getAbstractCurve();
                 for (AbstractCurve abstractCurve : abstractCurves) {
-                    if((gmlGeometry.isSetSrsDimension()) && !(abstractCurve.isSetSrsName()))
+                    if ((gmlGeometry.isSetSrsDimension()) && !(abstractCurve.isSetSrsName()))
                         abstractCurve.setSrsDimension(gmlGeometry.getSrsDimension());
                     lineStringHandler.parseGeometry(lines, abstractCurve);
                 }

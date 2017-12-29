@@ -50,6 +50,13 @@ public class DirectPositionGeometryHandler extends BasePointGeometryHandler {
         super.setSuccessor(new CoordinatesGeometryHandler());
     }
 
+    /**
+     * @param geometryFactory
+     * @param gmlGeometry
+     * @param parser
+     * @return {@link Point}
+     * @throws ParserException
+     */
     @Override
     public Point buildGeometry(GeometryFactory geometryFactory, org.geosdi.geoplatform.gml.api.Point gmlGeometry,
             CoordinateBaseParser parser) throws ParserException {

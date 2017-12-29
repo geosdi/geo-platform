@@ -34,7 +34,6 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.base.geometry.line;
 
-import com.google.common.base.Preconditions;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import org.geosdi.geoplatform.gml.api.LineString;
 import org.geosdi.geoplatform.gml.api.LineStringProperty;
@@ -48,6 +47,8 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -60,6 +61,12 @@ public class GMLBaseLineStringParser extends AbstractGMLBaseParser<LineString, L
     private GMLBasePointParser pointParser;
     private AbstractGeometryHandler<LineString, com.vividsolutions.jts.geom.LineString, GMLBasePointParser, CoordinateBaseParser> mixedLineHandler;
 
+    /**
+     * @param theGeometryFactory
+     * @param theSrsParser
+     * @param coordinateParser
+     * @param thePointParser
+     */
     public GMLBaseLineStringParser(GeometryFactory theGeometryFactory, AbstractGMLBaseSRSParser theSrsParser,
             CoordinateBaseParser coordinateParser, GMLBasePointParser thePointParser) {
         super(theGeometryFactory, theSrsParser);
@@ -68,17 +75,26 @@ public class GMLBaseLineStringParser extends AbstractGMLBaseParser<LineString, L
         this.mixedLineHandler = new MixedLineGeometryHandler();
     }
 
+    /**
+     * @param gmlGeometry
+     * @return {@link com.vividsolutions.jts.geom.LineString}
+     * @throws ParserException
+     */
     @Override
     protected com.vividsolutions.jts.geom.LineString canParseGeometry(LineString gmlGeometry)
             throws ParserException {
         return this.mixedLineHandler.buildGeometry(geometryFactory, gmlGeometry, pointParser, coordinateParser);
     }
 
+    /**
+     * @param propertyType
+     * @return {@link com.vividsolutions.jts.geom.LineString}
+     * @throws ParserException
+     */
     @Override
     public com.vividsolutions.jts.geom.LineString parseGeometry(LineStringProperty propertyType)
             throws ParserException {
-        Preconditions.checkNotNull(propertyType, "The LineString Property Type "
-                + "must not be null.");
+        checkNotNull(propertyType, "The LineString Property Type must not be null.");
         if (propertyType.isSetLineString()) {
             return super.parseGeometry(propertyType.getLineString());
         }

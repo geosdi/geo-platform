@@ -34,7 +34,6 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.base.geometry.multi.point;
 
-import com.google.common.base.Preconditions;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.Point;
 import org.geosdi.geoplatform.gml.api.MultiPoint;
@@ -49,6 +48,8 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -59,12 +60,22 @@ public class GMLBaseMultiPointParser extends AbstractGMLBaseParser<MultiPoint, M
     private MemberBuilder pointMember = new PointMemberBuilder();
     private MemberBuilder pointMembers = new PointMembersBuilder();
 
+    /**
+     * @param theGeometryFactory
+     * @param theSrsParser
+     * @param thePointParser
+     */
     public GMLBaseMultiPointParser(GeometryFactory theGeometryFactory, AbstractGMLBaseSRSParser theSrsParser,
             GMLBasePointParser thePointParser) {
         super(theGeometryFactory, theSrsParser);
         this.pointParser = thePointParser;
     }
 
+    /**
+     * @param gmlGeometry
+     * @return {@link com.vividsolutions.jts.geom.MultiPoint}
+     * @throws ParserException
+     */
     @Override
     protected com.vividsolutions.jts.geom.MultiPoint canParseGeometry(MultiPoint gmlGeometry) throws ParserException {
         List<Point> points = new ArrayList<>();
@@ -73,14 +84,18 @@ public class GMLBaseMultiPointParser extends AbstractGMLBaseParser<MultiPoint, M
         if (points.isEmpty()) {
             throw new IllegalArgumentException("PointMember and PointMembers can't be both null.");
         }
-        return geometryFactory.createMultiPoint(points.toArray(
-                new Point[points.size()]));
+        return geometryFactory.createMultiPoint(points.toArray(new Point[points.size()]));
     }
 
+    /**
+     * @param propertyType
+     * @return {@link com.vividsolutions.jts.geom.MultiPoint}
+     * @throws ParserException
+     */
     @Override
     public com.vividsolutions.jts.geom.MultiPoint parseGeometry(MultiPointProperty propertyType)
             throws ParserException {
-        Preconditions.checkNotNull(propertyType, "The MultiPoint Property must be not null.");
+        checkNotNull(propertyType, "The MultiPoint Property must be not null.");
         if (propertyType.isSetMultiPoint()) {
             return super.parseGeometry(propertyType.getMultiPoint());
         }
@@ -99,9 +114,13 @@ public class GMLBaseMultiPointParser extends AbstractGMLBaseParser<MultiPoint, M
 
     protected class PointMemberBuilder implements MemberBuilder {
 
+        /**
+         * @param gmlGeometry
+         * @param points
+         * @throws ParserException
+         */
         @Override
         public void builMember(MultiPoint gmlGeometry, List<Point> points) throws ParserException {
-
             if (gmlGeometry.isSetPointMember()) {
                 for (PointProperty property : gmlGeometry.getPointMember()) {
                     org.geosdi.geoplatform.gml.api.Point point = property.getPoint();
@@ -115,9 +134,13 @@ public class GMLBaseMultiPointParser extends AbstractGMLBaseParser<MultiPoint, M
 
     protected class PointMembersBuilder implements MemberBuilder {
 
+        /**
+         * @param gmlGeometry
+         * @param points
+         * @throws ParserException
+         */
         @Override
         public void builMember(MultiPoint gmlGeometry, List<Point> points) throws ParserException {
-
             if (gmlGeometry.isSetPointMembers()) {
                 PointArrayProperty pointArrayProp = gmlGeometry.getPointMembers();
                 for (org.geosdi.geoplatform.gml.api.Point point : pointArrayProp.getPoint()) {

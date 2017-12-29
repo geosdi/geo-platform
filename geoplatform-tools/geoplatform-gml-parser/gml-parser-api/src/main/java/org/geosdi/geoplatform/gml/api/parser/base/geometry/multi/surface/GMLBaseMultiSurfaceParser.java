@@ -34,7 +34,6 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.base.geometry.multi.surface;
 
-import com.google.common.base.Preconditions;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.MultiPolygon;
 import com.vividsolutions.jts.geom.Polygon;
@@ -47,6 +46,9 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -57,25 +59,39 @@ public class GMLBaseMultiSurfaceParser extends AbstractGMLBaseParser<MultiSurfac
     private final SurfaceMemberBuilder surfaceMember = new SurfaceMember();
     private final SurfaceMemberBuilder surfaceMembers = new SurfaceMembers();
 
+    /**
+     * @param theGeometryFactory
+     * @param theSrsParser
+     * @param thePolygonParser
+     */
     public GMLBaseMultiSurfaceParser(GeometryFactory theGeometryFactory, AbstractGMLBaseSRSParser theSrsParser,
             GMLBasePolygonParser thePolygonParser) {
         super(theGeometryFactory, theSrsParser);
         this.polygonParser = thePolygonParser;
     }
 
+    /**
+     * @param gmlGeometry
+     * @return {@link MultiPolygon}
+     * @throws ParserException
+     */
     @Override
     protected MultiPolygon canParseGeometry(MultiSurface gmlGeometry) throws ParserException {
         List<Polygon> polygons = new ArrayList<>();
         this.surfaceMember.buildMember(gmlGeometry, polygons);
         this.surfaceMembers.buildMember(gmlGeometry, polygons);
-        Preconditions.checkArgument(!polygons.isEmpty(), "SurfaceMember and SurfaceMembers can't be both null.");
-        return geometryFactory.createMultiPolygon(polygons.toArray(
-                new Polygon[polygons.size()]));
+        checkArgument(!polygons.isEmpty(), "SurfaceMember and SurfaceMembers can't be both null.");
+        return geometryFactory.createMultiPolygon(polygons.toArray(new Polygon[polygons.size()]));
     }
 
+    /**
+     * @param propertyType
+     * @return {@link MultiPolygon}
+     * @throws ParserException
+     */
     @Override
     public MultiPolygon parseGeometry(MultiSurfaceProperty propertyType) throws ParserException {
-        Preconditions.checkNotNull(propertyType, "The MultiSurface Property must not be null.");
+        checkNotNull(propertyType, "The MultiSurface Property must not be null.");
         if (propertyType.isSetMultiSurface()) {
             return super.parseGeometry(propertyType.getMultiSurface());
         }
@@ -94,9 +110,13 @@ public class GMLBaseMultiSurfaceParser extends AbstractGMLBaseParser<MultiSurfac
 
     protected class SurfaceMember implements SurfaceMemberBuilder {
 
+        /**
+         * @param gmlGeometry
+         * @param polygon
+         * @throws ParserException
+         */
         @Override
         public void buildMember(MultiSurface gmlGeometry, List<Polygon> polygon) throws ParserException {
-
             if (gmlGeometry.isSetSurfaceMember()) {
                 for (SurfaceProperty surfaceProperty : gmlGeometry.getSurfaceMember()) {
                     org.geosdi.geoplatform.gml.api.Polygon abstractSurface = (org.geosdi.geoplatform.gml.api.Polygon) surfaceProperty.getAbstractSurface();
@@ -110,9 +130,13 @@ public class GMLBaseMultiSurfaceParser extends AbstractGMLBaseParser<MultiSurfac
 
     protected class SurfaceMembers implements SurfaceMemberBuilder {
 
+        /**
+         * @param gmlGeometry
+         * @param polygon
+         * @throws ParserException
+         */
         @Override
         public void buildMember(MultiSurface gmlGeometry, List<Polygon> polygon) throws ParserException {
-
             if (gmlGeometry.isSetSurfaceMembers()) {
                 SurfaceArrayProperty surfArrayProperty = gmlGeometry.getSurfaceMembers();
                 for (AbstractSurface surface : surfArrayProperty.getAbstractSurface()) {

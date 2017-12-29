@@ -24,6 +24,21 @@
             <artifactId>gml-api</artifactId>
             <version>${project.version}</version>
         </dependency>
+
+        <!-- =========================================================== -->
+        <!-- ================ GEOPLATFORM BRIDGE SUPPORT =============== -->
+        <!-- =========================================================== -->
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-bridge-support</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.jcip</groupId>
+            <artifactId>jcip-annotations</artifactId>
+            <version>1.0</version>
+        </dependency>
         
         <dependency>
             <groupId>com.sun.xml.bind</groupId>
@@ -53,7 +68,6 @@
         <!-- =========================================================== -->
         <!-- ===================== COMMONS-POOL ======================== -->
         <!-- =========================================================== -->
-        
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-pool2</artifactId>
@@ -64,14 +78,17 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>jcl-over-slf4j</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>log4j-over-slf4j</artifactId>
         </dependency>
+
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>

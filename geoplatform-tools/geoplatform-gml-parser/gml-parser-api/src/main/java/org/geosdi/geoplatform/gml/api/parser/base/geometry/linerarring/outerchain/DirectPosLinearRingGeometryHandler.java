@@ -51,6 +51,13 @@ public class DirectPosLinearRingGeometryHandler extends BaseGeometryHandler<Line
         super.setSuccessor(new CoordinatesLinearRingGeometryHandler());
     }
 
+    /**
+     * @param geometryFactory
+     * @param gmlGeometry
+     * @param parser
+     * @return {@link com.vividsolutions.jts.geom.LinearRing}
+     * @throws ParserException
+     */
     @Override
     public com.vividsolutions.jts.geom.LinearRing buildGeometry(GeometryFactory geometryFactory,
             LinearRing gmlGeometry, CoordinateBaseParser parser) throws ParserException {

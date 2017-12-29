@@ -17,5 +17,9 @@
     <logger name="org.geosdi.geoplatform.gml" level="info"/>
     <logger name="org.geosdi.geoplatform.gml.impl.v311.gml.comparison" level="info"/>
     <logger name="org.geosdi.geoplatform.gml.impl.v311.gml.theories.GMLTheoriesSextanteParserTest" level="debug"/>
+    <logger name="org.geosdi.geoplatform.gml.impl.v311.jts.parameter.bridge.store.JTSParameterValueStore"
+            level="debug"/>
+    <logger name="org.geosdi.geoplatform.gml.api.parser.base.parameter.bridge.store.BaseParameterValueStore"
+            level="debug"/>
 
 </configuration>

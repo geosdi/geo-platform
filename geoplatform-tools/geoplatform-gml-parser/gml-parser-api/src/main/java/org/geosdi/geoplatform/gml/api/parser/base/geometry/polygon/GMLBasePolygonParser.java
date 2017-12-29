@@ -34,7 +34,6 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.base.geometry.polygon;
 
-import com.google.common.base.Preconditions;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.LinearRing;
 import org.geosdi.geoplatform.gml.api.Polygon;
@@ -46,6 +45,8 @@ import org.geosdi.geoplatform.gml.api.parser.base.geometry.polygon.builder.GMLBa
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.polygon.builder.PolygonBuilder;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -55,6 +56,11 @@ public class GMLBasePolygonParser extends AbstractGMLBaseParser<Polygon, Polygon
     private final GMLBaseLinearRingParser linearRingParser;
     private final PolygonBuilder polygonBuilder;
 
+    /**
+     * @param theLinearRingParser
+     * @param theGeometryFactory
+     * @param theSrsParser
+     */
     public GMLBasePolygonParser(GMLBaseLinearRingParser theLinearRingParser, GeometryFactory theGeometryFactory,
             AbstractGMLBaseSRSParser theSrsParser) {
         super(theGeometryFactory, theSrsParser);
@@ -62,6 +68,11 @@ public class GMLBasePolygonParser extends AbstractGMLBaseParser<Polygon, Polygon
         this.polygonBuilder = new GMLBasePolygonBuilder(linearRingParser);
     }
 
+    /**
+     * @param gmlGeometry
+     * @return {@link com.vividsolutions.jts.geom.Polygon}
+     * @throws ParserException
+     */
     @Override
     protected com.vividsolutions.jts.geom.Polygon canParseGeometry(Polygon gmlGeometry)
             throws ParserException {
@@ -70,10 +81,14 @@ public class GMLBasePolygonParser extends AbstractGMLBaseParser<Polygon, Polygon
         return geometryFactory.createPolygon(shell, holes);
     }
 
+    /**
+     * @param propertyType
+     * @return {@link com.vividsolutions.jts.geom.Polygon}
+     * @throws ParserException
+     */
     @Override
     public com.vividsolutions.jts.geom.Polygon parseGeometry(PolygonProperty propertyType) throws ParserException {
-        Preconditions.checkNotNull(propertyType, "The Polygon Property Type "
-                + "must not be null.");
+        checkNotNull(propertyType, "The Polygon Property Type must not be null.");
         if (propertyType.isSetPolygon()) {
             return super.parseGeometry(propertyType.getPolygon());
         }

@@ -48,6 +48,8 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -56,12 +58,22 @@ public class GMLBaseMultiPolygonParser extends AbstractGMLBaseParser<MultiPolygo
 
     private GMLBasePolygonParser polygonParser;
 
+    /**
+     * @param theGeometryFactory
+     * @param theSrsParser
+     * @param thePolygonParser
+     */
     public GMLBaseMultiPolygonParser(GeometryFactory theGeometryFactory, AbstractGMLBaseSRSParser theSrsParser,
             GMLBasePolygonParser thePolygonParser) {
         super(theGeometryFactory, theSrsParser);
         this.polygonParser = thePolygonParser;
     }
 
+    /**
+     * @param gmlGeometry
+     * @return {@link com.vividsolutions.jts.geom.MultiPolygon}
+     * @throws ParserException
+     */
     @Override
     protected com.vividsolutions.jts.geom.MultiPolygon canParseGeometry(MultiPolygon gmlGeometry)
             throws ParserException {
@@ -77,10 +89,16 @@ public class GMLBaseMultiPolygonParser extends AbstractGMLBaseParser<MultiPolygo
         return geometryFactory.createMultiPolygon(polygons.toArray(new Polygon[polygons.size()]));
     }
 
+    /**
+     * @param propertyType
+     * @return {@link com.vividsolutions.jts.geom.MultiPolygon
+     * }
+     * @throws ParserException
+     */
     @Override
     public com.vividsolutions.jts.geom.MultiPolygon parseGeometry(MultiPolygonProperty propertyType)
             throws ParserException {
-        Preconditions.checkNotNull(propertyType, "The MultiPolygonProperty Type must not be null.");
+        checkNotNull(propertyType, "The MultiPolygonProperty Type must not be null.");
         if (propertyType.isSetMultiPolygon()) {
             return super.parseGeometry(propertyType.getMultiPolygon());
         }

@@ -50,6 +50,7 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRepo.getDefaultGeometryFactory;
 import static org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRepo.getDefaultSRSParser;
 
@@ -65,6 +66,10 @@ public class GMLBaseMultiGeometryParser extends AbstractGMLBaseParser<MultiGeome
     private MemberBuilder multiGeometryMember = new MultiGeometryMember();
     private MemberBuilder multiGeometryMembers = new MultiGeometryMembers();
 
+    /**
+     * @param theGeometryFactory
+     * @param theSrsParser
+     */
     public GMLBaseMultiGeometryParser(GeometryFactory theGeometryFactory, AbstractGMLBaseSRSParser theSrsParser) {
         super(theGeometryFactory, theSrsParser);
     }
@@ -73,16 +78,26 @@ public class GMLBaseMultiGeometryParser extends AbstractGMLBaseParser<MultiGeome
         this(getDefaultGeometryFactory(), getDefaultSRSParser());
     }
 
+    /**
+     * @param gmlGeometry
+     * @return {@link GeometryCollection}
+     * @throws ParserException
+     */
     @Override
     protected GeometryCollection canParseGeometry(MultiGeometry gmlGeometry) throws ParserException {
         List<Geometry> geometries = new ArrayList<>();
         this.multiGeometryMember.builMember(gmlGeometry, geometries);
         this.multiGeometryMembers.builMember(gmlGeometry, geometries);
-        Preconditions.checkArgument(!geometries.isEmpty(), "GeometryMember and GeometryMembers can't be both null.");
+        checkArgument(!geometries.isEmpty(), "GeometryMember and GeometryMembers can't be both null.");
         return geometryFactory.createGeometryCollection(geometries.toArray(new Geometry[geometries.size()]));
 
     }
 
+    /**
+     * @param propertyType
+     * @return {@link GeometryCollection}
+     * @throws ParserException
+     */
     @Override
     public GeometryCollection parseGeometry(MultiGeometryProperty propertyType) throws ParserException {
         Preconditions.checkNotNull(propertyType, "The MultiGeometry Property must be not null.");
@@ -107,6 +122,11 @@ public class GMLBaseMultiGeometryParser extends AbstractGMLBaseParser<MultiGeome
 
     protected class MultiGeometryMember implements MemberBuilder {
 
+        /**
+         * @param gmlGeometry
+         * @param geometries
+         * @throws ParserException
+         */
         @Override
         public void builMember(MultiGeometry gmlGeometry, List<Geometry> geometries) throws ParserException {
             if (gmlGeometry.isSetGeometryMember()) {
@@ -122,6 +142,11 @@ public class GMLBaseMultiGeometryParser extends AbstractGMLBaseParser<MultiGeome
 
     protected class MultiGeometryMembers implements MemberBuilder {
 
+        /**
+         * @param gmlGeometry
+         * @param geometries
+         * @throws ParserException
+         */
         @Override
         public void builMember(MultiGeometry gmlGeometry, List<Geometry> geometries) throws ParserException {
             if (gmlGeometry.isSetGeometryMembers()) {

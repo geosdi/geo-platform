@@ -54,9 +54,14 @@ public class InternalDirectPosLinerarRingHandler extends AbstractInternalChainHa
         super.setSuccessor(new InternalCoordLinearRingHandler());
     }
 
+    /**
+     * @param geometryFactory
+     * @param object
+     * @return {@link Point}
+     * @throws ParserException
+     */
     @Override
-    public Point buildGeometry(GeometryFactory geometryFactory,
-            Object object) throws ParserException {
+    public Point buildGeometry(GeometryFactory geometryFactory, Object object) throws ParserException {
         return object instanceof DirectPosition
                 ? geometryFactory.createPoint(coordinateBaseParser.parseCoordinate((DirectPosition) object))
                 : super.forwardBuildGeometry(geometryFactory, object);

@@ -34,7 +34,6 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.base.geometry.point;
 
-import com.google.common.base.Preconditions;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import org.geosdi.geoplatform.gml.api.Point;
 import org.geosdi.geoplatform.gml.api.PointProperty;
@@ -45,6 +44,8 @@ import org.geosdi.geoplatform.gml.api.parser.base.geometry.point.responsibility.
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.point.responsibility.DirectPositionGeometryHandler;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -54,23 +55,36 @@ public class GMLBasePointParser extends AbstractGMLBaseParser<Point, PointProper
     private final CoordinateBaseParser coordinateParser;
     private final BasePointGeometryHandler directPos = new DirectPositionGeometryHandler();
 
+    /**
+     * @param theGeometryFactory
+     * @param theSrsParser
+     * @param theCoordinateBaseParser
+     */
     public GMLBasePointParser(GeometryFactory theGeometryFactory, AbstractGMLBaseSRSParser theSrsParser,
             CoordinateBaseParser theCoordinateBaseParser) {
         super(theGeometryFactory, theSrsParser);
-        Preconditions.checkNotNull(theSrsParser, "The GML Coordinate Parser must not be null.");
+        checkNotNull(theSrsParser, "The GML Coordinate Parser must not be null.");
         this.coordinateParser = theCoordinateBaseParser;
     }
 
+    /**
+     * @param gmlGeometry
+     * @return {@link com.vividsolutions.jts.geom.Point}
+     * @throws ParserException
+     */
     @Override
-    protected com.vividsolutions.jts.geom.Point canParseGeometry(Point gmlGeometry)
-            throws ParserException {
+    protected com.vividsolutions.jts.geom.Point canParseGeometry(Point gmlGeometry) throws ParserException {
         return directPos.buildGeometry(geometryFactory, gmlGeometry, coordinateParser);
     }
 
+    /**
+     * @param propertyType
+     * @return @link com.vividsolutions.jts.geom.Point}
+     * @throws ParserException
+     */
     @Override
-    public com.vividsolutions.jts.geom.Point parseGeometry(PointProperty propertyType)
-            throws ParserException {
-        Preconditions.checkNotNull(propertyType, "The Property Type must not be null.");
+    public com.vividsolutions.jts.geom.Point parseGeometry(PointProperty propertyType) throws ParserException {
+        checkNotNull(propertyType, "The Property Type must not be null.");
         if (propertyType.isSetPoint()) {
             return super.parseGeometry(propertyType.getPoint());
         }

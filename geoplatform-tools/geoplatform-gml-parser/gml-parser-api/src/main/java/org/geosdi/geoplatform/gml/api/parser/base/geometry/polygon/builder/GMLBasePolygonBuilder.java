@@ -52,30 +52,52 @@ public class GMLBasePolygonBuilder implements PolygonBuilder {
 
     private final GMLBaseLinearRingParser linearRingParser;
 
+    /**
+     * @param theLinearRingParser
+     */
     public GMLBasePolygonBuilder(GMLBaseLinearRingParser theLinearRingParser) {
         this.linearRingParser = theLinearRingParser;
     }
 
+    /**
+     * @param polygon
+     * @return {@link LinearRing}
+     * @throws ParserException
+     */
     @Override
     public LinearRing buildExteriorPolygon(Polygon polygon) throws ParserException {
         return polygon.isSetExterior() ? canBuildExteriorPolygon(polygon) : null;
     }
 
+    /**
+     * @param polygon
+     * @return {@link LinearRing[]}
+     * @throws ParserException
+     */
     @Override
     public LinearRing[] buildInteriorPolygon(Polygon polygon) throws ParserException {
         return polygon.isSetInterior() ? canBuildInteriorPolygon(polygon) : null;
     }
 
+    /**
+     * @param polygon
+     * @return {@link LinearRing}
+     * @throws ParserException
+     */
     protected LinearRing canBuildExteriorPolygon(Polygon polygon) throws ParserException {
         AbstractRingProperty ringProperty = polygon.getExteriorValue();
         AbstractRing ring = ringProperty.getAbstractRing();
         if ((polygon.isSetSrsDimension()) && !(ring.isSetSrsDimension()))
             ring.setSrsDimension(polygon.getSrsDimension());
         return ((ring != null) && (ring instanceof org.geosdi.geoplatform.gml.api.LinearRing))
-                ? linearRingParser.parseGeometry((org.geosdi.geoplatform.gml.api.LinearRing) ring)
-                : null;
+                ? linearRingParser.parseGeometry((org.geosdi.geoplatform.gml.api.LinearRing) ring) : null;
     }
 
+    /**
+     * @param polygon
+     * @return {@link LinearRing[]}
+     * @throws ParserException
+     */
     protected LinearRing[] canBuildInteriorPolygon(Polygon polygon) throws ParserException {
         List<LinearRing> interiorElements = new ArrayList<>(polygon.getInteriorValues().size());
         for (AbstractRingProperty ringProperty : polygon.getInteriorValues()) {

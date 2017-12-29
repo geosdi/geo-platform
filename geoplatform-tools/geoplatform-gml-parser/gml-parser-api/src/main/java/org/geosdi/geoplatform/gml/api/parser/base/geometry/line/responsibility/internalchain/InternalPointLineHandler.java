@@ -43,12 +43,10 @@ import org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRep
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class InternalPointLineHandler
-        extends AbstractInternalChainHandler<Point> {
+public class InternalPointLineHandler extends AbstractInternalChainHandler<Point> {
 
     private GMLBasePointParser pointParser = GMLBaseParametersRepo.getDefaultPointParser();
 
@@ -56,6 +54,12 @@ public class InternalPointLineHandler
         super.setSuccessor(new InternalDirectPositionLineHandler());
     }
 
+    /**
+     * @param geometryFactory
+     * @param object
+     * @return {@link Point}
+     * @throws ParserException
+     */
     @Override
     public Point buildGeometry(GeometryFactory geometryFactory, Object object) throws ParserException {
         return object instanceof PointProperty

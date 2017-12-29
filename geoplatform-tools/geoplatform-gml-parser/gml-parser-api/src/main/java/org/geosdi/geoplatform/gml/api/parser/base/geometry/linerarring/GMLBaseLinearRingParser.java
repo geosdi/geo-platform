@@ -34,7 +34,6 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.base.geometry.linerarring;
 
-import com.google.common.base.Preconditions;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import org.geosdi.geoplatform.gml.api.LinearRing;
 import org.geosdi.geoplatform.gml.api.LinearRingProperty;
@@ -46,6 +45,8 @@ import org.geosdi.geoplatform.gml.api.parser.base.geometry.point.GMLBasePointPar
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.responsibility.AbstractGeometryHandler;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -56,6 +57,12 @@ public class GMLBaseLinearRingParser extends AbstractGMLBaseParser<LinearRing, L
     private GMLBasePointParser pointParser;
     private AbstractGeometryHandler<LinearRing, com.vividsolutions.jts.geom.LinearRing, GMLBasePointParser, CoordinateBaseParser> mixedLinearRingHandler;
 
+    /**
+     * @param coordinateParser
+     * @param pointParser
+     * @param theGeometryFactory
+     * @param theSrsParser
+     */
     public GMLBaseLinearRingParser(CoordinateBaseParser coordinateParser, GMLBasePointParser pointParser,
             GeometryFactory theGeometryFactory, AbstractGMLBaseSRSParser theSrsParser) {
         super(theGeometryFactory, theSrsParser);
@@ -64,6 +71,11 @@ public class GMLBaseLinearRingParser extends AbstractGMLBaseParser<LinearRing, L
         this.mixedLinearRingHandler = new MixedLinearRingGeometryHandler();
     }
 
+    /**
+     * @param gmlGeometry
+     * @return {@link com.vividsolutions.jts.geom.LinearRing}
+     * @throws ParserException
+     */
     @Override
     protected com.vividsolutions.jts.geom.LinearRing canParseGeometry(LinearRing gmlGeometry)
             throws ParserException {
@@ -71,11 +83,15 @@ public class GMLBaseLinearRingParser extends AbstractGMLBaseParser<LinearRing, L
                 pointParser, coordinateParser);
     }
 
+    /**
+     * @param propertyType
+     * @return {@link com.vividsolutions.jts.geom.LinearRing}
+     * @throws ParserException
+     */
     @Override
     public com.vividsolutions.jts.geom.LinearRing parseGeometry(LinearRingProperty propertyType)
             throws ParserException {
-        Preconditions.checkNotNull(propertyType, "The LinearRing Property Type "
-                + "must not be null.");
+        checkNotNull(propertyType, "The LinearRing Property Type must not be null.");
         if (propertyType.isSetLinearRing()) {
             return super.parseGeometry(propertyType.getLinearRing());
         }

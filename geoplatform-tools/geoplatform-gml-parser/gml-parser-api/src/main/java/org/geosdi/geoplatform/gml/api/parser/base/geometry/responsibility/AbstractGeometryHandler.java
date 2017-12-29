@@ -68,7 +68,6 @@ public abstract class AbstractGeometryHandler<A extends AbstractGeometry, G exte
      */
     protected G forwarBuildGeometry(GeometryFactory geometryFactory, A gmlGeometry, F firstParser, P secondParser)
             throws ParserException {
-
         return (G) (successor instanceof AbstractGeometryHandler
                 ? ((AbstractGeometryHandler) successor).buildGeometry(
                 geometryFactory, gmlGeometry, firstParser, secondParser)

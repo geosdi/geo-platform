@@ -1,0 +1,12 @@
+org.geosdi.geoplatform.gml.impl.v311.jts.parameter.bridge.implementor.DefaultJTSSRSParserParameter
+org.geosdi.geoplatform.gml.impl.v311.jts.parameter.bridge.implementor.JTSCoordinateParserParameter
+org.geosdi.geoplatform.gml.impl.v311.jts.parameter.bridge.implementor.JTSLinearRingParserParameter
+org.geosdi.geoplatform.gml.impl.v311.jts.parameter.bridge.implementor.JTSLineStringParserParameter
+org.geosdi.geoplatform.gml.impl.v311.jts.parameter.bridge.implementor.JTSMultiGeometryParserParameter
+org.geosdi.geoplatform.gml.impl.v311.jts.parameter.bridge.implementor.JTSMultiLineParserParameter
+org.geosdi.geoplatform.gml.impl.v311.jts.parameter.bridge.implementor.JTSMultiPointParserParameter
+org.geosdi.geoplatform.gml.impl.v311.jts.parameter.bridge.implementor.JTSMultiPolygonParserParameter
+org.geosdi.geoplatform.gml.impl.v311.jts.parameter.bridge.implementor.JTSPointParserParameter
+org.geosdi.geoplatform.gml.impl.v311.jts.parameter.bridge.implementor.JTSPolygonParserParameter
+org.geosdi.geoplatform.gml.impl.v311.jts.parameter.bridge.implementor.JTSSextanteParserParameter
+org.geosdi.geoplatform.gml.impl.v311.jts.parameter.bridge.implementor.ObjectFactoryParameter

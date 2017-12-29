@@ -61,6 +61,14 @@ public class MixedLinearRingGeometryHandler extends AbstractGeometryHandler<Line
         this.internalDirectPosHandler = new InternalDirectPosLinerarRingHandler();
     }
 
+    /**
+     * @param geometryFactory
+     * @param gmlGeometry
+     * @param firstParser
+     * @param secondParser
+     * @return {@link com.vividsolutions.jts.geom.LinearRing}
+     * @throws ParserException
+     */
     @Override
     public com.vividsolutions.jts.geom.LinearRing buildGeometry(GeometryFactory geometryFactory, LinearRing gmlGeometry,
             GMLBasePointParser firstParser, CoordinateBaseParser secondParser) throws ParserException {
@@ -70,12 +78,27 @@ public class MixedLinearRingGeometryHandler extends AbstractGeometryHandler<Line
                 secondParser);
     }
 
+    /**
+     * @param geometryFactory
+     * @param gmlGeometry
+     * @param parser
+     * @return {@link com.vividsolutions.jts.geom.LinearRing}
+     * @throws ParserException
+     */
     @Override
     public com.vividsolutions.jts.geom.LinearRing buildGeometry(GeometryFactory geometryFactory, LinearRing gmlGeometry,
             CoordinateBaseParser parser) throws ParserException {
         return super.forwardBuildGeometry(geometryFactory, gmlGeometry, parser);
     }
 
+    /**
+     * @param geometryFactory
+     * @param gmlGeometry
+     * @param firstParser
+     * @param secondParser
+     * @return {@link com.vividsolutions.jts.geom.LinearRing}
+     * @throws ParserException
+     */
     @Override
     public com.vividsolutions.jts.geom.LinearRing buildLineString(GeometryFactory geometryFactory, LinearRing gmlGeometry,
             GMLBasePointParser firstParser, CoordinateBaseParser secondParser) throws ParserException {

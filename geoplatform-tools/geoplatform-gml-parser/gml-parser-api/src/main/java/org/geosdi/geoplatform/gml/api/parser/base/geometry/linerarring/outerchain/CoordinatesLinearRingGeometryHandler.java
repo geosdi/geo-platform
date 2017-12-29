@@ -46,14 +46,19 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
  */
 public class CoordinatesLinearRingGeometryHandler extends BaseGeometryHandler<LinearRing, com.vividsolutions.jts.geom.LinearRing, CoordinateBaseParser> {
 
+    /**
+     * @param geometryFactory
+     * @param gmlGeometry
+     * @param parser
+     * @return {@link com.vividsolutions.jts.geom.LinearRing}
+     * @throws ParserException
+     */
     @Override
     public com.vividsolutions.jts.geom.LinearRing buildGeometry(GeometryFactory geometryFactory, LinearRing gmlGeometry,
             CoordinateBaseParser parser) throws ParserException {
         if (gmlGeometry.isSetCoordinates()) {
-            return geometryFactory.createLinearRing(parser.parseCoordinates(
-                    gmlGeometry.getCoordinates()));
+            return geometryFactory.createLinearRing(parser.parseCoordinates(gmlGeometry.getCoordinates()));
         }
-        throw new ParserException("There are no Ring in this Chain "
-                + "to parse this GML Geometry : " + gmlGeometry);
+        throw new ParserException("There are no Ring in this Chain to parse this GML Geometry : " + gmlGeometry);
     }
 }

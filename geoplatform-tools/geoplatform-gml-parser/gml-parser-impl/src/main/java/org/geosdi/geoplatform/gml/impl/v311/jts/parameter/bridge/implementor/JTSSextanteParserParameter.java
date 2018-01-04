@@ -55,11 +55,17 @@ public class JTSSextanteParserParameter implements JTSParameterValue<JTSSextante
         return jtsSextanteParser = ((jtsSextanteParser == null) ? new JTSSextanteParserV311() : jtsSextanteParser);
     }
 
+    /**
+     * @return {@link org.geosdi.geoplatform.support.bridge.implementor.GPImplementor.GPImplementorKey<JTSParameterEnum>}
+     */
     @Override
     public GPImplementorKey<JTSParameterEnum> getKey() {
         return DEFAULT_JTS_SEXTANTE_PARSER;
     }
 
+    /**
+     * @return {@link Boolean}
+     */
     @Override
     public Boolean isValid() {
         return TRUE;

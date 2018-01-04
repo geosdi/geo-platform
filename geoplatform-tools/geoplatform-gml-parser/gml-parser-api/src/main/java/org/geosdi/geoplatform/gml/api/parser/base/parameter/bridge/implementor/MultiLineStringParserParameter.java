@@ -58,11 +58,17 @@ public class MultiLineStringParserParameter implements BaseParameterValue<GMLBas
                 getDefaultLineStringParser()) : multiLineStringParser);
     }
 
+    /**
+     * @return {@link org.geosdi.geoplatform.support.bridge.implementor.GPImplementor.GPImplementorKey<BaseParameterEnum>}
+     */
     @Override
     public GPImplementorKey<BaseParameterEnum> getKey() {
         return DEFAULT_MULTI_LINE_STRING_PARSER;
     }
 
+    /**
+     * @return {@link Boolean}
+     */
     @Override
     public Boolean isValid() {
         return TRUE;

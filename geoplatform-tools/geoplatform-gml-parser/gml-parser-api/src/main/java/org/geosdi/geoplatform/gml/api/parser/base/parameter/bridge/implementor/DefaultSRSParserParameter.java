@@ -53,11 +53,17 @@ public class DefaultSRSParserParameter implements BaseParameterValue<DefaultSRSB
         return new DefaultSRSBaseParser(getSRSFormatParameterPatterns());
     }
 
+    /**
+     * @return {@link org.geosdi.geoplatform.support.bridge.implementor.GPImplementor.GPImplementorKey<BaseParameterEnum>}
+     */
     @Override
     public GPImplementorKey<BaseParameterEnum> getKey() {
         return BaseParameterEnum.DEFAULT_SRS_PARSER;
     }
 
+    /**
+     * @return {@link Boolean}
+     */
     @Override
     public Boolean isValid() {
         return TRUE;

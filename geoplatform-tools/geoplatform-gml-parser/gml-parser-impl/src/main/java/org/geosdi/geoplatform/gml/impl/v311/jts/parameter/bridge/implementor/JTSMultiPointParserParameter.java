@@ -59,11 +59,17 @@ public class JTSMultiPointParserParameter implements JTSParameterValue<JTSMultiP
                 getDefaultSRSParser(), getDefaultPointParser()) : jtsMultiPointParser);
     }
 
+    /**
+     * @return {@link org.geosdi.geoplatform.support.bridge.implementor.GPImplementor.GPImplementorKey<JTSParameterEnum>}
+     */
     @Override
     public GPImplementorKey<JTSParameterEnum> getKey() {
         return DEFAULT_JTS_MULTI_POINT_PARSER;
     }
 
+    /**
+     * @return {@link Boolean}
+     */
     @Override
     public Boolean isValid() {
         return TRUE;

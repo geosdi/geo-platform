@@ -57,11 +57,17 @@ public class JTSCoordinateParserParameter implements JTSParameterValue<JTSCoordi
                 new JTSCoordinateParser(getDefaultGmlObjectFactory()) : jtsCoordinateParser);
     }
 
+    /**
+     * @return {@link org.geosdi.geoplatform.support.bridge.implementor.GPImplementor.GPImplementorKey<JTSParameterEnum>}
+     */
     @Override
     public GPImplementorKey<JTSParameterEnum> getKey() {
         return DEFAULT_JTS_COORDINATE_PARSER;
     }
 
+    /**
+     * @return {@link Boolean}
+     */
     @Override
     public Boolean isValid() {
         return TRUE;

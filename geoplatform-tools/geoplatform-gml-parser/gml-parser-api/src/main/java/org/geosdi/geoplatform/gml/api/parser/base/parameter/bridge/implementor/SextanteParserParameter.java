@@ -55,11 +55,18 @@ public class SextanteParserParameter implements BaseParameterValue<GMLBaseSextan
         return sextanteParser = ((sextanteParser == null) ? new GMLBaseSextanteParser() : sextanteParser);
     }
 
+
+    /**
+     * @return {@link org.geosdi.geoplatform.support.bridge.implementor.GPImplementor.GPImplementorKey<BaseParameterEnum>}
+     */
     @Override
     public GPImplementorKey<BaseParameterEnum> getKey() {
         return DEFAULT_SEXTANTE_PARSER;
     }
 
+    /**
+     * @return {@link Boolean}
+     */
     @Override
     public Boolean isValid() {
         return TRUE;

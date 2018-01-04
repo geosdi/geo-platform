@@ -52,11 +52,17 @@ public class GeometryFactoryParameter implements BaseParameterValue<GeometryFact
         return geometryFactory = ((geometryFactory == null) ? new GeometryFactory() : geometryFactory);
     }
 
+    /**
+     * @return {@link org.geosdi.geoplatform.support.bridge.implementor.GPImplementor.GPImplementorKey<BaseParameterEnum>}
+     */
     @Override
     public GPImplementorKey<BaseParameterEnum> getKey() {
         return BaseParameterEnum.DEFAULT_GEOMETRY_FACTORY;
     }
 
+    /**
+     * @return {@link Boolean}
+     */
     @Override
     public Boolean isValid() {
         return Boolean.TRUE;

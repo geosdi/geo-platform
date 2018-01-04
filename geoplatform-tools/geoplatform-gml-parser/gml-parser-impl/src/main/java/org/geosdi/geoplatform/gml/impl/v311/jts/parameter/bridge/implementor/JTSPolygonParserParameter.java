@@ -58,11 +58,17 @@ public class JTSPolygonParserParameter implements JTSParameterValue<JTSPolygonPa
                 getDefaultSRSParser(), getDefaultLinearRingParser()) : jtsPolygonParser);
     }
 
+    /**
+     * @return {@link org.geosdi.geoplatform.support.bridge.implementor.GPImplementor.GPImplementorKey<JTSParameterEnum>}
+     */
     @Override
     public GPImplementorKey<JTSParameterEnum> getKey() {
         return DEFAULT_JTS_POLYGON_PARSER;
     }
 
+    /**
+     * @return {@link Boolean}
+     */
     @Override
     public Boolean isValid() {
         return Boolean.TRUE;

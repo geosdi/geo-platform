@@ -58,11 +58,17 @@ public class JTSMultiGeometryParserParameter implements JTSParameterValue<JTSMul
                         getDefaultSextanteParser()) : jtsMultiGeometryParser);
     }
 
+    /**
+     * @return {@link org.geosdi.geoplatform.support.bridge.implementor.GPImplementor.GPImplementorKey<JTSParameterEnum>}
+     */
     @Override
     public GPImplementorKey<JTSParameterEnum> getKey() {
         return DEFAULT_JTS_MULTI_GEOMETRY_PARSER;
     }
 
+    /**
+     * @return {@link Boolean}
+     */
     @Override
     public Boolean isValid() {
         return TRUE;

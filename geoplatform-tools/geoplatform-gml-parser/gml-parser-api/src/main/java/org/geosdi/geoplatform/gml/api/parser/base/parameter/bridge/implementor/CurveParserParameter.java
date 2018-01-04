@@ -57,11 +57,17 @@ public class CurveParserParameter implements BaseParameterValue<GMLBaseCurvePars
                 getDefaultSRSParser()) : curveParser);
     }
 
+    /**
+     * @return {@link org.geosdi.geoplatform.support.bridge.implementor.GPImplementor.GPImplementorKey<BaseParameterEnum>}
+     */
     @Override
     public GPImplementorKey<BaseParameterEnum> getKey() {
         return DEFAULT_CURVE_PARSER;
     }
 
+    /**
+     * @return {@link Boolean}
+     */
     @Override
     public Boolean isValid() {
         return Boolean.TRUE;

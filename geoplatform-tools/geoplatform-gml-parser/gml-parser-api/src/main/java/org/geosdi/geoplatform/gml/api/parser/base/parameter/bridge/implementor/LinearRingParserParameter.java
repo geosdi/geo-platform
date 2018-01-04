@@ -57,11 +57,17 @@ public class LinearRingParserParameter implements BaseParameterValue<GMLBaseLine
                 getDefaultGeometryFactory(), getDefaultSRSParser()) : linearRingParser);
     }
 
+    /**
+     * @return {@link org.geosdi.geoplatform.support.bridge.implementor.GPImplementor.GPImplementorKey<BaseParameterEnum>}
+     */
     @Override
     public GPImplementorKey<BaseParameterEnum> getKey() {
         return DEFAULT_LINEAR_RING_PARSER;
     }
 
+    /**
+     * @return {@link Boolean}
+     */
     @Override
     public Boolean isValid() {
         return Boolean.TRUE;

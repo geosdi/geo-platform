@@ -58,11 +58,17 @@ public class MultiSurfaceParserParameter implements BaseParameterValue<GMLBaseMu
                 getDefaultPolygonParser()) : multiSurfaceParser);
     }
 
+    /**
+     * @return {@link org.geosdi.geoplatform.support.bridge.implementor.GPImplementor.GPImplementorKey<BaseParameterEnum>}
+     */
     @Override
     public GPImplementorKey<BaseParameterEnum> getKey() {
         return DEFAULT_MULTI_SURFACE_PARSER;
     }
 
+    /**
+     * @return {@link Boolean}
+     */
     @Override
     public Boolean isValid() {
         return TRUE;

@@ -57,11 +57,17 @@ public class MultiCurveParserParameter implements BaseParameterValue<GMLBaseMult
                 ? new GMLBaseMultiCurveParser(getDefaultGeometryFactory(), getDefaultSRSParser()) : multiCurveParser);
     }
 
+    /**
+     * @return {@link org.geosdi.geoplatform.support.bridge.implementor.GPImplementor.GPImplementorKey<BaseParameterEnum>}
+     */
     @Override
     public GPImplementorKey<BaseParameterEnum> getKey() {
         return DEFAULT_MULTI_CURVE_PARSER;
     }
 
+    /**
+     * @return {@link Boolean}
+     */
     @Override
     public Boolean isValid() {
         return Boolean.TRUE;

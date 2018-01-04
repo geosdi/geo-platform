@@ -55,11 +55,17 @@ public class ObjectFactoryParameter implements JTSParameterValue<AbstractGMLObje
         return gmlObjectFactory = ((gmlObjectFactory == null) ? new GMLObjectFactoryV311() : gmlObjectFactory);
     }
 
+    /**
+     * @return {@link org.geosdi.geoplatform.support.bridge.implementor.GPImplementor.GPImplementorKey<JTSParameterEnum>}
+     */
     @Override
     public GPImplementorKey<JTSParameterEnum> getKey() {
         return DEFAULT_OBJECT_FACTORY;
     }
 
+    /**
+     * @return {@link Boolean}
+     */
     @Override
     public Boolean isValid() {
         return Boolean.TRUE;

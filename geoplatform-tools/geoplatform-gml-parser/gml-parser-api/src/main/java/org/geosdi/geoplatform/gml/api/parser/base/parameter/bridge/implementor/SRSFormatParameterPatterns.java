@@ -55,11 +55,18 @@ public class SRSFormatParameterPatterns implements BaseParameterValue<String[]> 
         return patterns;
     }
 
+
+    /**
+     * @return {@link org.geosdi.geoplatform.support.bridge.implementor.GPImplementor.GPImplementorKey<BaseParameterEnum>}
+     */
     @Override
     public GPImplementorKey<BaseParameterEnum> getKey() {
         return DEFAULT_SRS_PARAMETER_FORMAT;
     }
 
+    /**
+     * @return {@link Boolean}
+     */
     @Override
     public Boolean isValid() {
         return TRUE;

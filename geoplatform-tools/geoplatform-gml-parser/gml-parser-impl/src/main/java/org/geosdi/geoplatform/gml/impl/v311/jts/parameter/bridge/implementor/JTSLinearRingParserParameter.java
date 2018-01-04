@@ -57,11 +57,17 @@ public class JTSLinearRingParserParameter implements JTSParameterValue<JTSLinear
                 , getDefaultSRSParser(), getDefaultCoordinateParser()) : jtsLinearRingParser);
     }
 
+    /**
+     * @return {@link org.geosdi.geoplatform.support.bridge.implementor.GPImplementor.GPImplementorKey<JTSParameterEnum>}
+     */
     @Override
     public GPImplementorKey<JTSParameterEnum> getKey() {
         return DEFAULT_JTS_LINEAR_RING_PARSER;
     }
 
+    /**
+     * @return {@link Boolean}
+     */
     @Override
     public Boolean isValid() {
         return TRUE;

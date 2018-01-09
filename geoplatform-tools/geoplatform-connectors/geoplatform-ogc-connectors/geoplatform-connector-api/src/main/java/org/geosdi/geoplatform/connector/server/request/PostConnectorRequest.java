@@ -38,19 +38,19 @@ import com.google.common.io.CharStreams;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.util.EntityUtils;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import static com.google.common.base.Charsets.UTF_8;
+import static org.apache.http.util.EntityUtils.consume;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-abstract class PostConnectorRequest<T> extends GPAbstractConnectorRequest<T> {
+abstract class PostConnectorRequest<T> extends GPAbstractConnectorRequest<T> implements GPJAXBConnectorRequest<T> {
 
     /**
      * @param server
@@ -61,37 +61,31 @@ abstract class PostConnectorRequest<T> extends GPAbstractConnectorRequest<T> {
 
     @Override
     public String getResponseAsString() throws Exception {
-        String content;
-
         HttpPost httpPost = this.getPostMethod();
-        CloseableHttpResponse httpResponse = super.securityConnector
-                .secure(this, httpPost);
+        CloseableHttpResponse httpResponse = super.securityConnector.secure(this, httpPost);
         HttpEntity responseEntity = httpResponse.getEntity();
-
-        if (responseEntity != null) {
-            InputStream is = responseEntity.getContent();
-            content = CharStreams.toString(new InputStreamReader(is, UTF_8));
-            EntityUtils.consume(responseEntity);
-        } else {
-            throw new IllegalStateException(
-                    "Connector Server Error: Connection problem");
+        try {
+            if (responseEntity != null) {
+                InputStream is = responseEntity.getContent();
+                return CharStreams.toString(new InputStreamReader(is, UTF_8));
+            } else {
+                throw new IllegalStateException(CONNECTION_PROBLEM_MESSAGE);
+            }
+        } finally {
+            consume(responseEntity);
         }
-        return content;
     }
 
     @Override
     public InputStream getResponseAsStream() throws Exception {
         HttpPost httpPost = this.getPostMethod();
-        CloseableHttpResponse httpResponse = super.securityConnector
-                .secure(this, httpPost);
+        CloseableHttpResponse httpResponse = super.securityConnector.secure(this, httpPost);
 
         HttpEntity responseEntity = httpResponse.getEntity();
         if (responseEntity != null) {
             return responseEntity.getContent();
-
         } else {
-            throw new IllegalStateException("Connector Server Error: "
-                    + "Connection problem");
+            throw new IllegalStateException(CONNECTION_PROBLEM_MESSAGE);
         }
     }
 

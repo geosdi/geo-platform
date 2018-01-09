@@ -1,0 +1,57 @@
+package org.geosdi.geoplatform.connector.store;
+
+import org.geosdi.geoplatform.connector.GeoserverVersion;
+import org.geosdi.geoplatform.connector.api.GPConnectorStore;
+import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
+import org.geosdi.geoplatform.connector.geoserver.request.about.GPGeoserverAboutVersionRequest;
+import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
+import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
+import org.geosdi.geoplatform.support.jackson.JacksonSupport;
+
+import java.net.URL;
+
+/**
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
+ */
+public class GPGeoserverConnectorStore extends GPConnectorStore<GPGeoserverConnector> implements IGPGeoserverConnectorStore {
+
+    /**
+     * @param server
+     * @param securityConnector
+     * @param theJacksonSupport
+     * @param theVersion
+     */
+    public GPGeoserverConnectorStore(URL server, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport,
+            GeoserverVersion theVersion) {
+        this(server, null, securityConnector, theJacksonSupport, theVersion);
+    }
+
+    /**
+     * @param server
+     * @param pooledConnectorConfig
+     * @param securityConnector
+     * @param theJacksonSupport
+     * @param theVersion
+     */
+    public GPGeoserverConnectorStore(URL server, GPPooledConnectorConfig pooledConnectorConfig,
+            GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, GeoserverVersion theVersion) {
+        super(new GPGeoserverConnector(server, pooledConnectorConfig, securityConnector, theJacksonSupport, theVersion));
+    }
+
+    /**
+     * @return {@link GeoserverVersion}
+     */
+    @Override
+    public GeoserverVersion getVersion() {
+        return this.server.getVersion();
+    }
+
+    /**
+     * @return {@link GPGeoserverAboutVersionRequest}
+     */
+    @Override
+    public GPGeoserverAboutVersionRequest createAboutRequest() {
+        return this.server.createAboutRequest();
+    }
+}

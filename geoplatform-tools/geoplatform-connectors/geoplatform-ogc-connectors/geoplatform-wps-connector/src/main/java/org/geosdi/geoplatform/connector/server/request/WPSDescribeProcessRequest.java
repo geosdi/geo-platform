@@ -6,7 +6,7 @@ import java.util.List;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface WPSDescribeProcessRequest<T> extends GPConnectorRequest<T> {
+public interface WPSDescribeProcessRequest<T> extends GPJAXBConnectorRequest<T> {
 
     /**
      * <p>One or more (mandatory).<br/> One for each desired Process, unordered list</p>

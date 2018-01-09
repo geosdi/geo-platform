@@ -6,8 +6,8 @@ import net.jcip.annotations.Immutable;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public @Immutable
-class BasePooledConnectorConfig implements GPPooledConnectorConfig {
+@Immutable
+public class BasePooledConnectorConfig implements GPPooledConnectorConfig {
 
     private final Integer maxTotalConnections;
     private final Integer defaultMaxPerRoute;

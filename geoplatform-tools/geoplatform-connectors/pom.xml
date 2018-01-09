@@ -18,6 +18,7 @@
     <modules>
         <module>geoplatform-ogc-connectors</module>
         <module>geoplatform-ws-connectors</module>
+        <module>geoplatform-geoserver-connector</module>
     </modules>
     
     <dependencyManagement>

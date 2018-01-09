@@ -45,7 +45,7 @@ import java.util.List;
  * @param <T>
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public interface WFSGetFeatureRequest<T> extends GPConnectorRequest<T> {
+public interface WFSGetFeatureRequest<T> extends GPJAXBConnectorRequest<T> {
 
     /**
      * Gets the value of the type name query property.

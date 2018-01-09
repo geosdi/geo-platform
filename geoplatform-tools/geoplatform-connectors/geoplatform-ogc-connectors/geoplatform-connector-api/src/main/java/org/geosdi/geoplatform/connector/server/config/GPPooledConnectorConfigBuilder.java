@@ -1,6 +1,6 @@
 package org.geosdi.geoplatform.connector.server.config;
 
-import com.google.common.base.Preconditions;
+import static com.google.common.base.Preconditions.checkArgument;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -95,12 +95,9 @@ public interface GPPooledConnectorConfigBuilder {
          */
         @Override
         public GPPooledConnectorConfig build() {
-            Preconditions.checkArgument((maxTotalConnections > 0),
-                    "The Parameter MaxTotalConnections must be greater than zero.");
-            Preconditions.checkArgument((defaultMaxPerRoute > 0),
-                    "The Parameter MaxTotalPerRoute must be greater than zero.");
-            Preconditions.checkArgument(maxRedirect > 0,
-                    "The Parameter MaxRedirect must be greater than 0.");
+            checkArgument((maxTotalConnections > 0), "The Parameter MaxTotalConnections must be greater than zero.");
+            checkArgument((defaultMaxPerRoute > 0), "The Parameter MaxTotalPerRoute must be greater than zero.");
+            checkArgument(maxRedirect > 0, "The Parameter MaxRedirect must be greater than 0.");
             return new BasePooledConnectorConfig(this.maxTotalConnections, this.defaultMaxPerRoute,
                     this.connectionTimeout, this.maxRedirect);
         }

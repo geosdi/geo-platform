@@ -41,20 +41,17 @@ import org.apache.http.util.EntityUtils;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.xml.sax.InputSource;
 
-import javax.xml.bind.*;
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.nio.charset.Charset;
 
 /**
  * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public abstract class GPPostConnectorRequest<T, Request> extends PostConnectorRequest<T> {
-
-    private static final Charset UTF_8_CHARSERT = Charset.forName("UTF-8");
-    private static final String INCORRECT_RESPONSE_MESSAGE = "Connector Server Error: Incorrect Response.";
-    private static final String CONNECTION_PROBLEM_MESSAGE = "Connector Server Error: Connection Problem.";
 
     /**
      * @param server

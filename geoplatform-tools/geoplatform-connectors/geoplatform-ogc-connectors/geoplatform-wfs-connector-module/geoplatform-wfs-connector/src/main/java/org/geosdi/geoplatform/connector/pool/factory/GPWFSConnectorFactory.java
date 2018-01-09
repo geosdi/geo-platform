@@ -51,6 +51,6 @@ public class GPWFSConnectorFactory extends GPPoolConnectorFactory<GPPoolConnecto
     public GPWFSConnectorStore create(GPPoolConnectorKey key) throws Exception {
         checkNotNull(key, "The GPPoolConnectorKey must not be null");
         WFSVersion v = WFSVersion.fromString(key.getVersion());
-        return new GPWFSConnectorStore(key.getServerUrl(), key.getSecurityConnector(), v);
+        return new GPWFSConnectorStore(key.getServerUrl(), key.getPooledConnectorConfig(), key.getSecurityConnector(), v);
     }
 }

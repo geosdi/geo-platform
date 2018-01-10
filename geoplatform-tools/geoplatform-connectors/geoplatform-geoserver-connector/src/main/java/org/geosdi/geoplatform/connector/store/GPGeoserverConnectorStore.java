@@ -4,6 +4,7 @@ import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.api.GPConnectorStore;
 import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
 import org.geosdi.geoplatform.connector.geoserver.request.about.GPGeoserverAboutVersionRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GPGeoserverWorkspacesRequest;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
@@ -51,7 +52,15 @@ public class GPGeoserverConnectorStore extends GPConnectorStore<GPGeoserverConne
      * @return {@link GPGeoserverAboutVersionRequest}
      */
     @Override
-    public GPGeoserverAboutVersionRequest createAboutRequest() {
-        return this.server.createAboutRequest();
+    public GPGeoserverAboutVersionRequest createAboutVersionRequest() {
+        return this.server.createAboutVersionRequest();
+    }
+
+    /**
+     * @return {@link GPGeoserverWorkspacesRequest}
+     */
+    @Override
+    public GPGeoserverWorkspacesRequest createWorkspacesRequest() {
+        return this.server.createWorkspacesRequest();
     }
 }

@@ -50,8 +50,11 @@ public abstract class AbstractSecurityConnector implements GPSecurityConnector {
     private final String password;
     private AuthScope authScope;
 
-    public AbstractSecurityConnector(String theUserName,
-            String thePassword) {
+    /**
+     * @param theUserName
+     * @param thePassword
+     */
+    public AbstractSecurityConnector(String theUserName, String thePassword) {
         this.username = theUserName;
         this.password = thePassword;
     }

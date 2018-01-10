@@ -37,15 +37,16 @@ package org.geosdi.geoplatform.connector.server.request;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.util.EntityUtils;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.xml.sax.InputSource;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
+import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+
+import static org.apache.http.util.EntityUtils.consume;
 
 /**
  * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
@@ -68,13 +69,10 @@ public abstract class GPPostConnectorRequest<T, Request> extends PostConnectorRe
         HttpEntity responseEntity = httpResponse.getEntity();
         if (responseEntity != null) {
             InputStream is = responseEntity.getContent();
-            InputSource inputSource = new InputSource(new InputStreamReader(is, UTF_8_CHARSERT));
-            inputSource.setEncoding(UTF_8_CHARSERT.name());
-
             Unmarshaller unmarshaller = getUnmarshaller();
             Object content = null;
-            try {
-                content = unmarshaller.unmarshal(inputSource.getCharacterStream());
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(is, UTF_8_CHARSERT))) {
+                content = unmarshaller.unmarshal(reader);
             } catch (JAXBException ex) {
                 logger.error("######################JAXBException : ", ex);
             }
@@ -84,7 +82,7 @@ public abstract class GPPostConnectorRequest<T, Request> extends PostConnectorRe
             }
 
             response = ((JAXBElement<T>) content).getValue();
-            EntityUtils.consume(responseEntity);
+            consume(responseEntity);
         } else {
             throw new IllegalStateException(CONNECTION_PROBLEM_MESSAGE);
         }

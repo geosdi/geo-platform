@@ -1,9 +1,12 @@
 package org.geosdi.geoplatform.connector.store;
 
 import org.geosdi.geoplatform.connector.geoserver.request.about.GPGeoserverAboutVersionRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GPGeoserverWorkspacesRequest;
 import org.geosdi.geoplatform.connector.server.security.BasicPreemptiveSecurityConnector;
 import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,6 +19,7 @@ import static org.geosdi.geoplatform.connector.store.GPGeoserverConnectorStoreBu
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class GPGeoserverConnectorStoreTest {
 
     private static final Logger logger = LoggerFactory.getLogger(GPGeoserverConnectorStoreTest.class);
@@ -24,7 +28,7 @@ public class GPGeoserverConnectorStoreTest {
     private static GPGeoserverConnectorStore geoserverConnectorStore;
 
     @BeforeClass
-    public static void beforeClasse() throws Exception {
+    public static void beforeClass() throws Exception {
         geoserverConnectorStore = geoserverConnectorBuilder()
                 .withServerUrl(new URL(geoserverURL))
                 .withPooledConnectorConfig(pooledConnectorConfigBuilder()
@@ -37,8 +41,14 @@ public class GPGeoserverConnectorStoreTest {
     }
 
     @Test
-    public void aboutGeoserverConnectorTest() throws Exception {
-        GPGeoserverAboutVersionRequest aboutRequest = geoserverConnectorStore.createAboutRequest();
-        logger.info("#####################ABOUT_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", aboutRequest.getResponseAsString());
+    public void a_aboutVersionGeoserverConnectorTest() throws Exception {
+        GPGeoserverAboutVersionRequest aboutRequest = geoserverConnectorStore.createAboutVersionRequest();
+        logger.info("#####################ABOUT_VERSION_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", aboutRequest.getResponseAsString());
+    }
+
+    @Test
+    public void b_workspacesGeoserverConnectorTest() throws Exception {
+        GPGeoserverWorkspacesRequest workspacesRequest = geoserverConnectorStore.createWorkspacesRequest();
+        logger.info("####################WORKSPACES_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", workspacesRequest.getResponseAsString());
     }
 }

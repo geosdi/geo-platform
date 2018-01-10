@@ -56,7 +56,7 @@ public interface GPSecurityConnector {
      * @return CloseableHttpResponse
      * @throws {@link IOException}
      */
-    <C extends GPConnectorRequest, H extends HttpUriRequest> CloseableHttpResponse secure(
-            C connectorRequest, H httpRequest) throws IOException;
+    <C extends GPConnectorRequest, H extends HttpUriRequest> CloseableHttpResponse secure(C connectorRequest,
+            H httpRequest) throws IOException;
 
 }

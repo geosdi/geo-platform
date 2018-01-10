@@ -16,5 +16,7 @@
 
     <logger name="org.geosdi.geoplatform.connector.geoserver.request.about.GPGeoserverAboutVersionRequest"
             level="debug"/>
+    <logger name="org.geosdi.geoplatform.connector.geoserver.request.workspaces.GPGeoserverWorkspacesRequest"
+            level="debug"/>
 
 </configuration>

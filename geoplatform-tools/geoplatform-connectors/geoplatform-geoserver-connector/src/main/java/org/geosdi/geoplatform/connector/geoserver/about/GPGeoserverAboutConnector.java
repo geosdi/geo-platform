@@ -19,7 +19,7 @@ import static org.geosdi.geoplatform.connector.GeoserverVersion.fromString;
  */
 public abstract class GPGeoserverAboutConnector extends GPAbstractServerConnector implements IGPGeoserverAboutConnector {
 
-    private final GeoserverVersion version;
+    protected final GeoserverVersion version;
     protected final JacksonSupport jacksonSupport;
 
     /**
@@ -83,7 +83,7 @@ public abstract class GPGeoserverAboutConnector extends GPAbstractServerConnecto
      * @return {@link GPGeoserverAboutVersionRequest}
      */
     @Override
-    public GPGeoserverAboutVersionRequest createAboutRequest() {
+    public GPGeoserverAboutVersionRequest createAboutVersionRequest() {
         switch (version) {
             case V212x:
                 return new GPGeoserverAboutVersionRequest(this, this.jacksonSupport);

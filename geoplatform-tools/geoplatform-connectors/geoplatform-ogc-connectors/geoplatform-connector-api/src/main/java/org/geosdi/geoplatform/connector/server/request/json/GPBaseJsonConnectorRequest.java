@@ -1,16 +1,17 @@
 package org.geosdi.geoplatform.connector.server.request.json;
 
+import com.google.common.io.CharStreams;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.GPAbstractConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
-import org.xml.sax.InputSource;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import static com.google.common.base.Charsets.UTF_8;
 import static com.google.common.base.Preconditions.checkArgument;
 import static org.apache.http.util.EntityUtils.consume;
 
@@ -18,7 +19,7 @@ import static org.apache.http.util.EntityUtils.consume;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-abstract class GPBaseJsonConnectorRequest<T> extends GPAbstractConnectorRequest<T> {
+abstract class GPBaseJsonConnectorRequest<T, H extends HttpUriRequest> extends GPAbstractConnectorRequest<T> {
 
     protected final JacksonSupport jacksonSupport;
     protected final Class<T> classe;
@@ -51,21 +52,15 @@ abstract class GPBaseJsonConnectorRequest<T> extends GPAbstractConnectorRequest<
         if (httpResponse.getStatusLine().getStatusCode() == 401) {
             throw new IllegalStateException("Unauthorized : This request requires HTTP authentication.");
         }
-
         HttpEntity responseEntity = httpResponse.getEntity();
         try {
             if (responseEntity != null) {
-                InputStream is = responseEntity.getContent();
-                InputSource inputSource = new InputSource(new InputStreamReader(is, UTF_8_CHARSERT));
-                inputSource.setEncoding(UTF_8_CHARSERT.name());
-                try {
-                    return this.jacksonSupport.getDefaultMapper().readValue(inputSource.getCharacterStream(), this.classe);
-                } catch (Exception ex) {
-                    throw new IllegalStateException(INCORRECT_RESPONSE_MESSAGE);
-                }
+                return this.jacksonSupport.getDefaultMapper().readValue(responseEntity.getContent(), this.classe);
             } else {
                 throw new IllegalStateException(CONNECTION_PROBLEM_MESSAGE);
             }
+        } catch (Exception ex) {
+            throw new IllegalStateException(INCORRECT_RESPONSE_MESSAGE);
         } finally {
             consume(responseEntity);
         }
@@ -81,7 +76,24 @@ abstract class GPBaseJsonConnectorRequest<T> extends GPAbstractConnectorRequest<
      */
     @Override
     public String getResponseAsString() throws Exception {
-        return this.jacksonSupport.getDefaultMapper().writeValueAsString(getResponse());
+        HttpUriRequest httpMethod = this.prepareHttpMethod();
+        httpMethod.addHeader("Content-Type", "application/json");
+        logger.debug("#############################Executing -------------> {}\n", httpMethod.getURI().toString());
+        CloseableHttpResponse httpResponse = super.securityConnector.secure(this, httpMethod);
+        if (httpResponse.getStatusLine().getStatusCode() == 401) {
+            throw new IllegalStateException("Unauthorized : This request requires HTTP authentication.");
+        }
+        HttpEntity responseEntity = httpResponse.getEntity();
+        try {
+            if (responseEntity != null) {
+                InputStream is = responseEntity.getContent();
+                return CharStreams.toString(new InputStreamReader(is, UTF_8));
+            } else {
+                throw new IllegalStateException(CONNECTION_PROBLEM_MESSAGE);
+            }
+        } finally {
+            consume(responseEntity);
+        }
     }
 
     /**
@@ -95,7 +107,12 @@ abstract class GPBaseJsonConnectorRequest<T> extends GPAbstractConnectorRequest<
     @Override
     public InputStream getResponseAsStream() throws Exception {
         HttpUriRequest httpMethod = this.prepareHttpMethod();
+        httpMethod.addHeader("Content-Type", "application/json");
+        logger.debug("#############################Executing -------------> {}\n", httpMethod.getURI().toString());
         CloseableHttpResponse httpResponse = super.securityConnector.secure(this, httpMethod);
+        if (httpResponse.getStatusLine().getStatusCode() == 401) {
+            throw new IllegalStateException("Unauthorized : This request requires HTTP authentication.");
+        }
         HttpEntity responseEntity = httpResponse.getEntity();
         if (responseEntity != null) {
             return responseEntity.getContent();
@@ -105,8 +122,7 @@ abstract class GPBaseJsonConnectorRequest<T> extends GPAbstractConnectorRequest<
     }
 
     /**
-     * @param <H>
      * @return {@link H}
      */
-    protected abstract <H extends HttpUriRequest> H prepareHttpMethod();
+    protected abstract H prepareHttpMethod();
 }

@@ -13,7 +13,7 @@ public interface IGPGeoserverAboutConnector extends GPServerConnector {
     /**
      * @return {@link GPGeoserverAboutVersionRequest}
      */
-    GPGeoserverAboutVersionRequest createAboutRequest();
+    GPGeoserverAboutVersionRequest createAboutVersionRequest();
 
     /**
      * @return {@link GeoserverVersion}

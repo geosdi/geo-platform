@@ -56,14 +56,25 @@ public abstract class PreemptiveSecurityConnector extends AbstractSecurityConnec
     protected AuthCache authCache;
     protected HttpClientContext localcontext = HttpClientContext.create();
 
-    public PreemptiveSecurityConnector(String theUserName,
-            String thePassword) {
+    /**
+     * @param theUserName
+     * @param thePassword
+     */
+    public PreemptiveSecurityConnector(String theUserName, String thePassword) {
         super(theUserName, thePassword);
     }
 
+    /**
+     * @param connectorRequest
+     * @param httpRequest
+     * @param <C>
+     * @param <H>
+     * @return {@link CloseableHttpResponse}
+     * @throws IOException
+     */
     @Override
-    public <C extends GPConnectorRequest, H extends HttpUriRequest> CloseableHttpResponse secure(
-            C connectorRequest, H httpRequest) throws IOException {
+    public <C extends GPConnectorRequest, H extends HttpUriRequest> CloseableHttpResponse secure(C connectorRequest,
+            H httpRequest) throws IOException {
         super.bindCredentials(connectorRequest.getCredentialsProvider(),
                 connectorRequest.getURI());
         HttpHost targetHost = this.extractHost(connectorRequest.getURI());
@@ -71,6 +82,9 @@ public abstract class PreemptiveSecurityConnector extends AbstractSecurityConnec
         return connectorRequest.getClientConnection().execute(targetHost, httpRequest, localcontext);
     }
 
+    /**
+     * @param targetHost
+     */
     protected void preparePreemptiveParameters(HttpHost targetHost) {
         if (this.authCache == null) {
             this.authCache = new BasicAuthCache();
@@ -79,6 +93,10 @@ public abstract class PreemptiveSecurityConnector extends AbstractSecurityConnec
         }
     }
 
+    /**
+     * @param uri
+     * @return
+     */
     protected HttpHost extractHost(URI uri) {
         if (this.httpHost == null) {
             this.httpHost = new HttpHost(uri.getHost(), this.retrieveNoSetPort(
@@ -115,5 +133,4 @@ public abstract class PreemptiveSecurityConnector extends AbstractSecurityConnec
 
         return port;
     }
-
 }

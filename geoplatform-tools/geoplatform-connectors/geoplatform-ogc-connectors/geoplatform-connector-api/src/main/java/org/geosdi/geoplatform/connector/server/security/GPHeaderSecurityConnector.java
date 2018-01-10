@@ -1,6 +1,5 @@
 package org.geosdi.geoplatform.connector.server.security;
 
-import com.google.common.base.Preconditions;
 import net.jcip.annotations.Immutable;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpUriRequest;
@@ -10,6 +9,8 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.Map;
+
+import static com.google.common.base.Preconditions.checkArgument;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -22,8 +23,11 @@ public class GPHeaderSecurityConnector implements GPSecurityConnector {
     //
     private final Map<String, String> headerParams;
 
+    /**
+     * @param theHeaderParams
+     */
     public GPHeaderSecurityConnector(Map<String, String> theHeaderParams) {
-        Preconditions.checkArgument((theHeaderParams != null) && !(theHeaderParams.isEmpty()),
+        checkArgument((theHeaderParams != null) && !(theHeaderParams.isEmpty()),
                 "The HeaderParams must not be null or Empty Map.");
         this.headerParams = theHeaderParams;
     }

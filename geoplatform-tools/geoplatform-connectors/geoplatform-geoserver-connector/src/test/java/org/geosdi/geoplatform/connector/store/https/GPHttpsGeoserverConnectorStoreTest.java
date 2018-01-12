@@ -1,7 +1,9 @@
 package org.geosdi.geoplatform.connector.store.https;
 
+import org.geosdi.geoplatform.connector.geoserver.request.about.GPGeoserverAboutStatusRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.about.GPGeoserverAboutVersionRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GPGeoserverWorkspacesRequest;
+import org.geosdi.geoplatform.connector.server.exception.UnauthorizedException;
 import org.geosdi.geoplatform.connector.store.GPGeoserverConnectorStore;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -25,7 +27,7 @@ public class GPHttpsGeoserverConnectorStoreTest {
 
     private static final Logger logger = LoggerFactory.getLogger(GPHttpsGeoserverConnectorStoreTest.class);
     //
-    private static final String geoserverURL = "https://iterservice.regione.campania.it/geoserver/rest";
+    private static final String geoserverURL = "https://vvf-toscana.geosdi.org/geoserver/rest";
     private static GPGeoserverConnectorStore httpsGeoserverConnectorStore;
 
     @BeforeClass
@@ -38,19 +40,23 @@ public class GPHttpsGeoserverConnectorStoreTest {
                         .withDefaultMaxPerRoute(10)
                         .withMaxRedirect(2)
                         .build())
-//                .withClientSecurity(new GPHeaderSecurityConnector(ImmutableMap.of("HTTP_USERID", "iter2",
-//                        "Cookie", "amlbcookie=01; iPlanetDirectoryPro=AQIC5wM2LY4SfcxFnOd3x-2Oq7k9S9n3c1QIFJ2WNHJ1rs8.*AAJTSQACMDMAAlNLABMzNjY0NTY0OTEwMTM1Njc5MDc2AAJTMQACMDE.*")))
                 .build();
     }
 
-    @Test
+    @Test(expected = UnauthorizedException.class)
     public void a_aboutHttpsVersionGeoserverConnectorTest() throws Exception {
         GPGeoserverAboutVersionRequest aboutRequest = httpsGeoserverConnectorStore.createAboutVersionRequest();
         logger.info("#####################ABOUT_VERSION_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", aboutRequest.getResponseAsString());
     }
 
-    @Test
-    public void b_workspacesHttpsGeoserverConnectorTest() throws Exception {
+    @Test(expected = UnauthorizedException.class)
+    public void b_aboutHttpsStatusGeoserverConnectorTest() throws Exception {
+        GPGeoserverAboutStatusRequest aboutStatusRequest = httpsGeoserverConnectorStore.createAboutStatusRequest();
+        logger.info("#####################ABOUT_STATUS_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", aboutStatusRequest.getResponseAsString());
+    }
+
+    @Test(expected = UnauthorizedException.class)
+    public void c_workspacesHttpsGeoserverConnectorTest() throws Exception {
         GPGeoserverWorkspacesRequest workspacesRequest = httpsGeoserverConnectorStore.createWorkspacesRequest();
         logger.info("####################WORKSPACES_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", workspacesRequest.getResponse());
     }
@@ -59,6 +65,5 @@ public class GPHttpsGeoserverConnectorStoreTest {
     public static void afterClass() throws Exception {
         System.clearProperty("jsse.enableSNIExtension");
         httpsGeoserverConnectorStore.dispose();
-
     }
 }

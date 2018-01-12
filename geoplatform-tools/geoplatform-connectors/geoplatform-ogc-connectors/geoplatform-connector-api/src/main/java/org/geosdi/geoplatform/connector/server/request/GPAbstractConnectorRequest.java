@@ -39,6 +39,8 @@ import org.apache.http.client.config.CookieSpecs;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.connector.server.exception.ResourceNotFoundException;
+import org.geosdi.geoplatform.connector.server.exception.UnauthorizedException;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -65,7 +67,7 @@ public abstract class GPAbstractConnectorRequest<T> implements GPConnectorReques
     /**
      * @param theServerConnector
      */
-    protected GPAbstractConnectorRequest(GPServerConnector theServerConnector)  {
+    protected GPAbstractConnectorRequest(GPServerConnector theServerConnector) {
         checkArgument(theServerConnector != null, "The Parameter GPServerConnector must not be null.");
         checkArgument(theServerConnector.getCredentialsProvider() != null,
                 "The Parameter CredentialProvider must not be null.");
@@ -94,7 +96,23 @@ public abstract class GPAbstractConnectorRequest<T> implements GPConnectorReques
 
     }
 
-    private RequestConfig createRequestConfig() {
+    /**
+     * @param statusCode
+     * @throws Exception
+     */
+    protected void checkHttpResponseStatus(int statusCode) throws Exception {
+        switch (statusCode) {
+            case 401:
+                throw new UnauthorizedException();
+            case 404:
+                throw new ResourceNotFoundException();
+        }
+    }
+
+    /**
+     * @return {@link RequestConfig}
+     */
+    protected RequestConfig createRequestConfig() {
         return RequestConfig.custom()
                 .setCookieSpec(CookieSpecs.DEFAULT)
                 .setSocketTimeout(8000)
@@ -102,21 +120,33 @@ public abstract class GPAbstractConnectorRequest<T> implements GPConnectorReques
                 .setConnectionRequestTimeout(8000).build();
     }
 
+    /**
+     * @return {@link URI}
+     */
     @Override
     public URI getURI() {
         return this.serverURI;
     }
 
+    /**
+     * @return {@link CloseableHttpClient}
+     */
     @Override
     public CloseableHttpClient getClientConnection() {
         return this.clientConnection;
     }
 
+    /**
+     * @return {@link CredentialsProvider}
+     */
     @Override
     public CredentialsProvider getCredentialsProvider() {
         return this.credentialProvider;
     }
 
+    /**
+     * @throws Exception
+     */
     @Override
     public void shutdown() throws Exception {
         this.clientConnection.close();

@@ -50,6 +50,8 @@ public interface GPConnectorRequest<T> {
     Charset UTF_8_CHARSERT = Charset.forName("UTF-8");
     String INCORRECT_RESPONSE_MESSAGE = "Connector Server Error: Incorrect Response.";
     String CONNECTION_PROBLEM_MESSAGE = "Connector Server Error: Connection Problem.";
+    String UNAUTHORIZED_MESSAGE = "Unauthorized : This request requires HTTP authentication.";
+    String RESOURCE_NOT_FOUND_MESSAGE = "The Resource was not found";
 
     /**
      * @return {@link URI}

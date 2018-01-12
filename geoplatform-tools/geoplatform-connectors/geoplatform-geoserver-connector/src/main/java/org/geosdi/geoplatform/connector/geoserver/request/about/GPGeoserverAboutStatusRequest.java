@@ -1,7 +1,7 @@
 package org.geosdi.geoplatform.connector.geoserver.request.about;
 
 import org.apache.http.client.methods.HttpGet;
-import org.geosdi.geoplatform.connector.geoserver.request.model.about.version.GPGeoserverAboutVersion;
+import org.geosdi.geoplatform.connector.geoserver.request.model.about.status.GPGeoserverAboutStatus;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
@@ -10,14 +10,14 @@ import org.geosdi.geoplatform.support.jackson.JacksonSupport;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPGeoserverAboutVersionRequest extends GPJsonGetConnectorRequest<GPGeoserverAboutVersion> {
+public class GPGeoserverAboutStatusRequest extends GPJsonGetConnectorRequest<GPGeoserverAboutStatus> {
 
     /**
      * @param server
      * @param theJacksonSupport
      */
-    public GPGeoserverAboutVersionRequest(GPServerConnector server, JacksonSupport theJacksonSupport) {
-        super(server, theJacksonSupport, GPGeoserverAboutVersion.class);
+    public GPGeoserverAboutStatusRequest(GPServerConnector server, JacksonSupport theJacksonSupport) {
+        super(server, theJacksonSupport, GPGeoserverAboutStatus.class);
     }
 
     /**
@@ -26,8 +26,8 @@ public class GPGeoserverAboutVersionRequest extends GPJsonGetConnectorRequest<GP
     @Override
     protected HttpGet prepareHttpMethod() {
         String baseURI = this.serverURI.toString();
-        HttpGet httpGet = ((baseURI.endsWith("/") ? new HttpGet(baseURI.concat("about/version.json"))
-                : new HttpGet(baseURI.concat("/about/version.json"))));
+        HttpGet httpGet = ((baseURI.endsWith("/") ? new HttpGet(baseURI.concat("about/status.json"))
+                : new HttpGet(baseURI.concat("/about/status.json"))));
         httpGet.setConfig(super.prepareRequestConfig());
         return httpGet;
     }

@@ -3,7 +3,11 @@ package org.geosdi.geoplatform.connector.store;
 import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.api.GPConnectorStore;
 import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
+import org.geosdi.geoplatform.connector.geoserver.request.about.GPGeoserverAboutStatusRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.about.GPGeoserverAboutVersionRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.layers.GPGeoserverLayersRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GPGeoserverNamespaceRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GPGeoserverNamespacesRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GPGeoserverWorkspacesRequest;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
@@ -57,10 +61,42 @@ public class GPGeoserverConnectorStore extends GPConnectorStore<GPGeoserverConne
     }
 
     /**
+     * @return {@link GPGeoserverAboutStatusRequest}
+     */
+    @Override
+    public GPGeoserverAboutStatusRequest createAboutStatusRequest() {
+        return this.server.createAboutStatusRequest();
+    }
+
+    /**
      * @return {@link GPGeoserverWorkspacesRequest}
      */
     @Override
     public GPGeoserverWorkspacesRequest createWorkspacesRequest() {
         return this.server.createWorkspacesRequest();
+    }
+
+    /**
+     * @return {@link GPGeoserverNamespacesRequest}
+     */
+    @Override
+    public GPGeoserverNamespacesRequest createNamespacesRequest() {
+        return this.server.createNamespacesRequest();
+    }
+
+    /**
+     * @return {@link GPGeoserverNamespaceRequest}
+     */
+    @Override
+    public GPGeoserverNamespaceRequest createNamespaceRequest() {
+        return this.server.createNamespaceRequest();
+    }
+
+    /**
+     * @return {@link GPGeoserverLayersRequest}
+     */
+    @Override
+    public GPGeoserverLayersRequest createLayersRequest() {
+        return this.server.createLayersRequest();
     }
 }

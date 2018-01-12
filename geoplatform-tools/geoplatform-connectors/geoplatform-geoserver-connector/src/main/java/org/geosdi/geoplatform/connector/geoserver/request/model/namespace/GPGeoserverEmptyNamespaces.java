@@ -1,4 +1,4 @@
-package org.geosdi.geoplatform.connector.geoserver.request.model.workspace;
+package org.geosdi.geoplatform.connector.geoserver.request.model.namespace;
 
 import lombok.ToString;
 import org.geosdi.geoplatform.connector.geoserver.request.model.GPGeoserverEmptyResponse;
@@ -12,15 +12,15 @@ import javax.xml.bind.annotation.XmlAccessorType;
  */
 @ToString
 @XmlAccessorType(XmlAccessType.FIELD)
-public class GPGeoserverEmptyWorkspaces implements GPGeoserverEmptyResponse<GPGeoserverWorkspaces> {
+public class GPGeoserverEmptyNamespaces implements GPGeoserverEmptyResponse<GPGeoserverNamespaces> {
 
-    private String workspaces;
+    private String namespaces;
 
     /**
-     * @return {@link GPGeoserverWorkspaces}
+     * @return {@link GPGeoserverEmptyNamespaces}
      */
     @Override
-    public GPGeoserverWorkspaces toModel() {
-        return new GPGeoserverWorkspaces();
+    public GPGeoserverNamespaces toModel() {
+        return new GPGeoserverNamespaces();
     }
 }

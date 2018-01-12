@@ -27,7 +27,9 @@ public class GPGeoserverWorkspacesRequest extends GPGeoserverGetConnectorRequest
     @Override
     protected HttpGet prepareHttpMethod() {
         String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? new HttpGet(baseURI.concat("workspaces.json"))
+        HttpGet httpGet = ((baseURI.endsWith("/") ? new HttpGet(baseURI.concat("workspaces.json"))
                 : new HttpGet(baseURI.concat("/workspaces.json"))));
+        httpGet.setConfig(super.prepareRequestConfig());
+        return httpGet;
     }
 }

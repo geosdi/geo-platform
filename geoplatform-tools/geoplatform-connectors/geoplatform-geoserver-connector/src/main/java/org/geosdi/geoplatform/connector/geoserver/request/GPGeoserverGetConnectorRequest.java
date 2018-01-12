@@ -2,11 +2,11 @@ package org.geosdi.geoplatform.connector.geoserver.request;
 
 import org.geosdi.geoplatform.connector.geoserver.request.model.GPGeoserverEmptyResponse;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.connector.server.exception.IncorrectResponseException;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
-import java.io.IOException;
 import java.io.InputStream;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -46,7 +46,7 @@ public abstract class GPGeoserverGetConnectorRequest<T, E extends GPGeoserverEmp
     public T getResponse() throws Exception {
         try {
             return super.getResponse();
-        } catch (IOException ex) {
+        } catch (IncorrectResponseException ex) {
             return internalResponse(super.getResponseAsStream());
         }
     }
@@ -63,7 +63,7 @@ public abstract class GPGeoserverGetConnectorRequest<T, E extends GPGeoserverEmp
             return emptyJacksonSupport.getDefaultMapper().readValue(inputStream, this.emptyResponse).toModel();
         } catch (Exception ex) {
             ex.printStackTrace();
-            throw new IllegalStateException(INCORRECT_RESPONSE_MESSAGE);
+            throw new IncorrectResponseException();
         } finally {
             inputStream.close();
         }

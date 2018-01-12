@@ -38,6 +38,7 @@ import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.connector.server.exception.IncorrectResponseException;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
@@ -66,6 +67,7 @@ public abstract class GPPostConnectorRequest<T, Request> extends PostConnectorRe
         T response;
         HttpPost httpPost = super.getPostMethod();
         CloseableHttpResponse httpResponse = super.securityConnector.secure(this, httpPost);
+        super.checkHttpResponseStatus(httpResponse.getStatusLine().getStatusCode());
         HttpEntity responseEntity = httpResponse.getEntity();
         if (responseEntity != null) {
             InputStream is = responseEntity.getContent();
@@ -78,13 +80,13 @@ public abstract class GPPostConnectorRequest<T, Request> extends PostConnectorRe
             }
             if ((content == null) || !(content instanceof JAXBElement)) { // ExceptionReport
                 logger.error("#############CONTENT : {} #############\n", content);
-                throw new IllegalStateException(INCORRECT_RESPONSE_MESSAGE);
+                throw new IncorrectResponseException();
             }
 
             response = ((JAXBElement<T>) content).getValue();
             consume(responseEntity);
         } else {
-            throw new IllegalStateException(CONNECTION_PROBLEM_MESSAGE);
+            throw new IncorrectResponseException(CONNECTION_PROBLEM_MESSAGE);
         }
         return response;
     }

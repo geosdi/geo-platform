@@ -5,9 +5,11 @@ import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.connector.server.exception.IncorrectResponseException;
 import org.geosdi.geoplatform.connector.server.request.GPAbstractConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
+import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
@@ -48,19 +50,12 @@ abstract class GPBaseJsonConnectorRequest<T, H extends HttpUriRequest> extends G
         httpMethod.addHeader("Content-Type", "application/json");
         logger.debug("#############################Executing -------------> {}\n", httpMethod.getURI().toString());
         CloseableHttpResponse httpResponse = super.securityConnector.secure(this, httpMethod);
-
-        if (httpResponse.getStatusLine().getStatusCode() == 401) {
-            throw new IllegalStateException("Unauthorized : This request requires HTTP authentication.");
-        }
+        super.checkHttpResponseStatus(httpResponse.getStatusLine().getStatusCode());
         HttpEntity responseEntity = httpResponse.getEntity();
-        try {
-            if (responseEntity != null) {
-                return this.jacksonSupport.getDefaultMapper().readValue(responseEntity.getContent(), this.classe);
-            } else {
-                throw new IllegalStateException(CONNECTION_PROBLEM_MESSAGE);
-            }
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(responseEntity.getContent(), UTF_8_CHARSERT))) {
+            return this.jacksonSupport.getDefaultMapper().readValue(reader, this.classe);
         } catch (Exception ex) {
-            throw new IllegalStateException(INCORRECT_RESPONSE_MESSAGE);
+            throw new IncorrectResponseException(ex);
         } finally {
             consume(responseEntity);
         }
@@ -80,16 +75,14 @@ abstract class GPBaseJsonConnectorRequest<T, H extends HttpUriRequest> extends G
         httpMethod.addHeader("Content-Type", "application/json");
         logger.debug("#############################Executing -------------> {}\n", httpMethod.getURI().toString());
         CloseableHttpResponse httpResponse = super.securityConnector.secure(this, httpMethod);
-        if (httpResponse.getStatusLine().getStatusCode() == 401) {
-            throw new IllegalStateException("Unauthorized : This request requires HTTP authentication.");
-        }
+        super.checkHttpResponseStatus(httpResponse.getStatusLine().getStatusCode());
         HttpEntity responseEntity = httpResponse.getEntity();
         try {
             if (responseEntity != null) {
                 InputStream is = responseEntity.getContent();
                 return CharStreams.toString(new InputStreamReader(is, UTF_8));
             } else {
-                throw new IllegalStateException(CONNECTION_PROBLEM_MESSAGE);
+                throw new IncorrectResponseException(CONNECTION_PROBLEM_MESSAGE);
             }
         } finally {
             consume(responseEntity);
@@ -110,14 +103,12 @@ abstract class GPBaseJsonConnectorRequest<T, H extends HttpUriRequest> extends G
         httpMethod.addHeader("Content-Type", "application/json");
         logger.debug("#############################Executing -------------> {}\n", httpMethod.getURI().toString());
         CloseableHttpResponse httpResponse = super.securityConnector.secure(this, httpMethod);
-        if (httpResponse.getStatusLine().getStatusCode() == 401) {
-            throw new IllegalStateException("Unauthorized : This request requires HTTP authentication.");
-        }
+        super.checkHttpResponseStatus(httpResponse.getStatusLine().getStatusCode());
         HttpEntity responseEntity = httpResponse.getEntity();
         if (responseEntity != null) {
             return responseEntity.getContent();
         } else {
-            throw new IllegalStateException(CONNECTION_PROBLEM_MESSAGE);
+            throw new IncorrectResponseException(CONNECTION_PROBLEM_MESSAGE);
         }
     }
 

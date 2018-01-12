@@ -39,6 +39,7 @@ import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.connector.server.exception.IncorrectResponseException;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -63,13 +64,14 @@ abstract class PostConnectorRequest<T> extends GPAbstractConnectorRequest<T> imp
     public String getResponseAsString() throws Exception {
         HttpPost httpPost = this.getPostMethod();
         CloseableHttpResponse httpResponse = super.securityConnector.secure(this, httpPost);
+        super.checkHttpResponseStatus(httpResponse.getStatusLine().getStatusCode());
         HttpEntity responseEntity = httpResponse.getEntity();
         try {
             if (responseEntity != null) {
                 InputStream is = responseEntity.getContent();
                 return CharStreams.toString(new InputStreamReader(is, UTF_8));
             } else {
-                throw new IllegalStateException(CONNECTION_PROBLEM_MESSAGE);
+                throw new IncorrectResponseException(CONNECTION_PROBLEM_MESSAGE);
             }
         } finally {
             consume(responseEntity);
@@ -80,12 +82,12 @@ abstract class PostConnectorRequest<T> extends GPAbstractConnectorRequest<T> imp
     public InputStream getResponseAsStream() throws Exception {
         HttpPost httpPost = this.getPostMethod();
         CloseableHttpResponse httpResponse = super.securityConnector.secure(this, httpPost);
-
+        super.checkHttpResponseStatus(httpResponse.getStatusLine().getStatusCode());
         HttpEntity responseEntity = httpResponse.getEntity();
         if (responseEntity != null) {
             return responseEntity.getContent();
         } else {
-            throw new IllegalStateException(CONNECTION_PROBLEM_MESSAGE);
+            throw new IncorrectResponseException(CONNECTION_PROBLEM_MESSAGE);
         }
     }
 
@@ -96,7 +98,6 @@ abstract class PostConnectorRequest<T> extends GPAbstractConnectorRequest<T> imp
     protected HttpPost getPostMethod() throws Exception {
         HttpPost postMethod = new HttpPost(super.serverURI);
         postMethod.setConfig(super.prepareRequestConfig());
-
         HttpEntity httpEntity = this.preparePostEntity();
         postMethod.setEntity(httpEntity);
         return postMethod;

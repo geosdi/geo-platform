@@ -8,6 +8,8 @@ import org.geosdi.geoplatform.connector.geoserver.request.about.GPGeoserverAbout
 import org.geosdi.geoplatform.connector.geoserver.request.layers.GPGeoserverLayersRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GPGeoserverNamespaceRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GPGeoserverNamespacesRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.styles.GPGeoserverStyleRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.styles.GPGeoserverStylesRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GPGeoserverWorkspacesRequest;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
@@ -98,5 +100,21 @@ public class GPGeoserverConnectorStore extends GPConnectorStore<GPGeoserverConne
     @Override
     public GPGeoserverLayersRequest createLayersRequest() {
         return this.server.createLayersRequest();
+    }
+
+    /**
+     * @return {@link GPGeoserverStylesRequest}
+     */
+    @Override
+    public GPGeoserverStylesRequest createStylesRequest() {
+        return this.server.createStylesRequest();
+    }
+
+    /**
+     * @return {@link GPGeoserverStyleRequest}
+     */
+    @Override
+    public GPGeoserverStyleRequest createStyleRequest() {
+        return this.server.createStyleRequest();
     }
 }

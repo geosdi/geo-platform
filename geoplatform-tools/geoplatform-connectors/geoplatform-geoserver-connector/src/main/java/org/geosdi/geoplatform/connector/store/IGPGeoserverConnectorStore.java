@@ -6,6 +6,8 @@ import org.geosdi.geoplatform.connector.geoserver.request.about.GPGeoserverAbout
 import org.geosdi.geoplatform.connector.geoserver.request.layers.GPGeoserverLayersRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GPGeoserverNamespaceRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GPGeoserverNamespacesRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.styles.GPGeoserverStyleRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.styles.GPGeoserverStylesRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GPGeoserverWorkspacesRequest;
 
 /**
@@ -48,4 +50,14 @@ public interface IGPGeoserverConnectorStore {
      * @return {@link GPGeoserverLayersRequest}
      */
     GPGeoserverLayersRequest createLayersRequest();
+
+    /**
+     * @return {@link GPGeoserverStylesRequest}
+     */
+    GPGeoserverStylesRequest createStylesRequest();
+
+    /**
+     * @return {@link GPGeoserverStyleRequest}
+     */
+    GPGeoserverStyleRequest createStyleRequest();
 }

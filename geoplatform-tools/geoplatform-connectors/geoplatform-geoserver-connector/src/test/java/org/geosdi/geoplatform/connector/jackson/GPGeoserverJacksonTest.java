@@ -4,9 +4,13 @@ import org.geosdi.geoplatform.connector.geoserver.request.model.about.status.GPG
 import org.geosdi.geoplatform.connector.geoserver.request.model.about.version.GPGeoserverAboutVersion;
 import org.geosdi.geoplatform.connector.geoserver.request.model.layers.GPGeoserverEmptyLayers;
 import org.geosdi.geoplatform.connector.geoserver.request.model.layers.GPGeoserverLayers;
+import org.geosdi.geoplatform.connector.geoserver.request.model.layers.GeoserverLayer;
 import org.geosdi.geoplatform.connector.geoserver.request.model.namespace.GPGeoserverEmptyNamespaces;
 import org.geosdi.geoplatform.connector.geoserver.request.model.namespace.GPGeoserverNamespaces;
 import org.geosdi.geoplatform.connector.geoserver.request.model.namespace.GPGeoserverSingleNamespace;
+import org.geosdi.geoplatform.connector.geoserver.request.model.styles.GPGeoserverEmptyStyles;
+import org.geosdi.geoplatform.connector.geoserver.request.model.styles.GPGeoserverSingleStyle;
+import org.geosdi.geoplatform.connector.geoserver.request.model.styles.GPGeoserverStyles;
 import org.geosdi.geoplatform.connector.geoserver.request.model.workspace.GPGeoserverEmptyWorkspaces;
 import org.geosdi.geoplatform.connector.geoserver.request.model.workspace.GPGeoserverWorkspaces;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
@@ -356,5 +360,159 @@ public class GPGeoserverJacksonTest {
     public void h_unmarshallGeoserverEmptyLayersTest() throws Exception {
         logger.info("#######################GEOSERVER_EMPTY_LAYERS : \n{}\n", emptyJacksonSupport.getDefaultMapper()
                 .readValue(new StringReader("{\"layers\":\"\"}"), GPGeoserverEmptyLayers.class));
+    }
+
+    @Test
+    public void i_unmarshallGeoserverStylesTest() throws Exception {
+        logger.info("#####################GEOSERVER_STYLES : \n{}\n", jacksonSupport.getDefaultMapper()
+                .readValue(new StringReader("{  \n" +
+                        "   \"styles\":{  \n" +
+                        "      \"style\":[  \n" +
+                        "         {  \n" +
+                        "            \"name\":\"Frank\",\n" +
+                        "            \"href\":\"http:\\/\\/150.145.141.92\\/geoserver\\/rest\\/styles\\/Frank.json\"\n" +
+                        "         },\n" +
+                        "         {  \n" +
+                        "            \"name\":\"burg\",\n" +
+                        "            \"href\":\"http:\\/\\/150.145.141.92\\/geoserver\\/rest\\/styles\\/burg.json\"\n" +
+                        "         },\n" +
+                        "         {  \n" +
+                        "            \"name\":\"capitals\",\n" +
+                        "            \"href\":\"http:\\/\\/150.145.141.92\\/geoserver\\/rest\\/styles\\/capitals.json\"\n" +
+                        "         },\n" +
+                        "         {  \n" +
+                        "            \"name\":\"cite_lakes\",\n" +
+                        "            \"href\":\"http:\\/\\/150.145.141.92\\/geoserver\\/rest\\/styles\\/cite_lakes.json\"\n" +
+                        "         },\n" +
+                        "         {  \n" +
+                        "            \"name\":\"dem\",\n" +
+                        "            \"href\":\"http:\\/\\/150.145.141.92\\/geoserver\\/rest\\/styles\\/dem.json\"\n" +
+                        "         },\n" +
+                        "         {  \n" +
+                        "            \"name\":\"generic\",\n" +
+                        "            \"href\":\"http:\\/\\/150.145.141.92\\/geoserver\\/rest\\/styles\\/generic.json\"\n" +
+                        "         },\n" +
+                        "         {  \n" +
+                        "            \"name\":\"giant_polygon\",\n" +
+                        "            \"href\":\"http:\\/\\/150.145.141.92\\/geoserver\\/rest\\/styles\\/giant_polygon.json\"\n" +
+                        "         },\n" +
+                        "         {  \n" +
+                        "            \"name\":\"grass\",\n" +
+                        "            \"href\":\"http:\\/\\/150.145.141.92\\/geoserver\\/rest\\/styles\\/grass.json\"\n" +
+                        "         },\n" +
+                        "         {  \n" +
+                        "            \"name\":\"green\",\n" +
+                        "            \"href\":\"http:\\/\\/150.145.141.92\\/geoserver\\/rest\\/styles\\/green.json\"\n" +
+                        "         },\n" +
+                        "         {  \n" +
+                        "            \"name\":\"line\",\n" +
+                        "            \"href\":\"http:\\/\\/150.145.141.92\\/geoserver\\/rest\\/styles\\/line.json\"\n" +
+                        "         },\n" +
+                        "         {  \n" +
+                        "            \"name\":\"poi\",\n" +
+                        "            \"href\":\"http:\\/\\/150.145.141.92\\/geoserver\\/rest\\/styles\\/poi.json\"\n" +
+                        "         },\n" +
+                        "         {  \n" +
+                        "            \"name\":\"point\",\n" +
+                        "            \"href\":\"http:\\/\\/150.145.141.92\\/geoserver\\/rest\\/styles\\/point.json\"\n" +
+                        "         },\n" +
+                        "         {  \n" +
+                        "            \"name\":\"poly_landmarks\",\n" +
+                        "            \"href\":\"http:\\/\\/150.145.141.92\\/geoserver\\/rest\\/styles\\/poly_landmarks.json\"\n" +
+                        "         },\n" +
+                        "         {  \n" +
+                        "            \"name\":\"polygon\",\n" +
+                        "            \"href\":\"http:\\/\\/150.145.141.92\\/geoserver\\/rest\\/styles\\/polygon.json\"\n" +
+                        "         },\n" +
+                        "         {  \n" +
+                        "            \"name\":\"pophatch\",\n" +
+                        "            \"href\":\"http:\\/\\/150.145.141.92\\/geoserver\\/rest\\/styles\\/pophatch.json\"\n" +
+                        "         },\n" +
+                        "         {  \n" +
+                        "            \"name\":\"population\",\n" +
+                        "            \"href\":\"http:\\/\\/150.145.141.92\\/geoserver\\/rest\\/styles\\/population.json\"\n" +
+                        "         },\n" +
+                        "         {  \n" +
+                        "            \"name\":\"rain\",\n" +
+                        "            \"href\":\"http:\\/\\/150.145.141.92\\/geoserver\\/rest\\/styles\\/rain.json\"\n" +
+                        "         },\n" +
+                        "         {  \n" +
+                        "            \"name\":\"raster\",\n" +
+                        "            \"href\":\"http:\\/\\/150.145.141.92\\/geoserver\\/rest\\/styles\\/raster.json\"\n" +
+                        "         },\n" +
+                        "         {  \n" +
+                        "            \"name\":\"restricted\",\n" +
+                        "            \"href\":\"http:\\/\\/150.145.141.92\\/geoserver\\/rest\\/styles\\/restricted.json\"\n" +
+                        "         },\n" +
+                        "         {  \n" +
+                        "            \"name\":\"simple_roads\",\n" +
+                        "            \"href\":\"http:\\/\\/150.145.141.92\\/geoserver\\/rest\\/styles\\/simple_roads.json\"\n" +
+                        "         },\n" +
+                        "         {  \n" +
+                        "            \"name\":\"simple_streams\",\n" +
+                        "            \"href\":\"http:\\/\\/150.145.141.92\\/geoserver\\/rest\\/styles\\/simple_streams.json\"\n" +
+                        "         },\n" +
+                        "         {  \n" +
+                        "            \"name\":\"tiger_roads\",\n" +
+                        "            \"href\":\"http:\\/\\/150.145.141.92\\/geoserver\\/rest\\/styles\\/tiger_roads.json\"\n" +
+                        "         }\n" +
+                        "      ]\n" +
+                        "   }\n" +
+                        "}"), GPGeoserverStyles.class));
+    }
+
+    @Test
+    public void l_unmarshallGeoserverEmptyStylesTest() throws Exception {
+        logger.info("#######################GEOSERVER_EMPTY_STYLES : \n{}\n", emptyJacksonSupport.getDefaultMapper()
+                .readValue(new StringReader("{\"styles\":\"\"}"), GPGeoserverEmptyStyles.class));
+    }
+
+    @Test
+    public void m_unmarshallGeoserverStyleTest() throws Exception {
+        logger.info("######################GEOSERVER_STYLE : \n{}\n", jacksonSupport.getDefaultMapper()
+                .readValue(new StringReader("{  \n" +
+                        "   \"style\":{  \n" +
+                        "      \"name\":\"Frank\",\n" +
+                        "      \"format\":\"sld\",\n" +
+                        "      \"languageVersion\":{  \n" +
+                        "         \"version\":\"1.0.0\"\n" +
+                        "      },\n" +
+                        "      \"filename\":\"Frank.sld\"\n" +
+                        "   }\n" +
+                        "}"), GPGeoserverSingleStyle.class));
+    }
+
+    @Test
+    public void n_unmarshallGeoserverRasterLayerTest() throws Exception {
+        logger.info("####################GEOSERVER_RASTER_LAYER : \n{}\n", jacksonSupport.getDefaultMapper()
+                .readValue(new StringReader("{  \n" +
+                        "   \"layer\":{  \n" +
+                        "      \"name\":\"Arc_Sample\",\n" +
+                        "      \"path\":\"\\/\",\n" +
+                        "      \"type\":\"RASTER\",\n" +
+                        "      \"defaultStyle\":{  \n" +
+                        "         \"name\":\"rain\",\n" +
+                        "         \"href\":\"http:\\/\\/150.145.141.92\\/geoserver\\/rest\\/styles\\/rain.json\"\n" +
+                        "      },\n" +
+                        "      \"styles\":{  \n" +
+                        "         \"@class\":\"linked-hash-set\",\n" +
+                        "         \"style\":[  \n" +
+                        "            {  \n" +
+                        "               \"name\":\"raster\",\n" +
+                        "               \"href\":\"http:\\/\\/150.145.141.92\\/geoserver\\/rest\\/styles\\/raster.json\"\n" +
+                        "            }\n" +
+                        "         ]\n" +
+                        "      },\n" +
+                        "      \"resource\":{  \n" +
+                        "         \"@class\":\"coverage\",\n" +
+                        "         \"name\":\"Arc_Sample\",\n" +
+                        "         \"href\":\"http:\\/\\/150.145.141.92\\/geoserver\\/rest\\/workspaces\\/nurc\\/coveragestores\\/arcGridSample\\/coverages\\/Arc_Sample.json\"\n" +
+                        "      },\n" +
+                        "      \"attribution\":{  \n" +
+                        "         \"logoWidth\":0,\n" +
+                        "         \"logoHeight\":0\n" +
+                        "      }\n" +
+                        "   }\n" +
+                        "}"), GeoserverLayer.class));
     }
 }

@@ -7,9 +7,12 @@ import org.geosdi.geoplatform.connector.geoserver.request.model.namespace.GPGeos
 import org.geosdi.geoplatform.connector.geoserver.request.model.namespace.IGPGeoserverNamespace;
 import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GPGeoserverNamespaceRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GPGeoserverNamespacesRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.styles.GPGeoserverStyleRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.styles.GPGeoserverStylesRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GPGeoserverWorkspacesRequest;
 import org.geosdi.geoplatform.connector.server.security.BasicPreemptiveSecurityConnector;
 import org.geosdi.geoplatform.connector.store.task.GeoserverNamespaceTask;
+import org.geosdi.geoplatform.connector.store.task.GeoserverStyleTask;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
@@ -95,6 +98,29 @@ public class GPGeoserverConnectorStoreTest {
     public void g_layersGeoserverConnectorTest() throws Exception {
         GPGeoserverLayersRequest layersRequest = geoserverConnectorStore.createLayersRequest();
         logger.info("##################LAYERS_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", layersRequest.getResponseAsString());
+    }
+
+    @Test
+    public void h_stylesGeoserverConnectorTest() throws Exception {
+        GPGeoserverStylesRequest stylesRequest = geoserverConnectorStore.createStylesRequest();
+        logger.info("#################STYLES_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", stylesRequest.getResponseAsString());
+    }
+
+    @Test
+    public void i_styleGeoserverConnectorTest() throws Exception {
+        GPGeoserverStyleRequest styleRequest = geoserverConnectorStore.createStyleRequest();
+        styleRequest.setName("Frank");
+        logger.info("################STYLE_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", styleRequest.getResponseAsString());
+    }
+
+    @Test
+    public void l_styleGeoserverConnectorMultiThreadTest() throws Exception {
+        GPGeoserverStylesRequest stylesRequest = geoserverConnectorStore.createStylesRequest();
+        GPGeoserverStyleRequest styleRequest = geoserverConnectorStore.createStyleRequest();
+        stylesRequest.getResponse().getStyles()
+                .stream()
+                .forEach(value -> new GeoserverStyleTask(styleRequest, value.getName()).start());
+        Thread.sleep(700);
     }
 
     @AfterClass

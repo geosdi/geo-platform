@@ -26,7 +26,12 @@
             level="debug"/>
     <logger name="org.geosdi.geoplatform.connector.geoserver.request.layers.GPGeoserverLayersRequest"
             level="debug"/>
+    <logger name="org.geosdi.geoplatform.connector.geoserver.request.styles.GPGeoserverStylesRequest"
+            level="debug"/>
+    <logger name="org.geosdi.geoplatform.connector.geoserver.request.styles.GPGeoserverStyleRequest"
+            level="debug"/>
     <logger name="org.geosdi.geoplatform.connector.store.GPGeoserverConnectorStore" level="debug"/>
     <logger name="org.geosdi.geoplatform.connector.store.task.GeoserverNamespaceTask" level="debug"/>
+    <logger name="org.geosdi.geoplatform.connector.store.task.GeoserverStyleTask" level="debug"/>
 
 </configuration>

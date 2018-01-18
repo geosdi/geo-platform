@@ -515,4 +515,29 @@ public class GPGeoserverJacksonTest {
                         "   }\n" +
                         "}"), GeoserverLayer.class));
     }
+
+    @Test
+    public void o_unmarshallGeoserverVectorLayerTest() throws Exception {
+        logger.info("#######################GEOSERVER_VECTOR_LAYER : \n{}\n", jacksonSupport.getDefaultMapper()
+                .readValue(new StringReader("{  \n" +
+                        "   \"layer\":{  \n" +
+                        "      \"name\":\"giant_polygon\",\n" +
+                        "      \"path\":\"\\/\",\n" +
+                        "      \"type\":\"VECTOR\",\n" +
+                        "      \"defaultStyle\":{  \n" +
+                        "         \"name\":\"giant_polygon\",\n" +
+                        "         \"href\":\"http:\\/\\/150.145.141.92\\/geoserver\\/rest\\/styles\\/giant_polygon.json\"\n" +
+                        "      },\n" +
+                        "      \"resource\":{  \n" +
+                        "         \"@class\":\"featureType\",\n" +
+                        "         \"name\":\"giant_polygon\",\n" +
+                        "         \"href\":\"http:\\/\\/150.145.141.92\\/geoserver\\/rest\\/workspaces\\/tiger\\/datastores\\/nyc\\/featuretypes\\/giant_polygon.json\"\n" +
+                        "      },\n" +
+                        "      \"attribution\":{  \n" +
+                        "         \"logoWidth\":0,\n" +
+                        "         \"logoHeight\":0\n" +
+                        "      }\n" +
+                        "   }\n" +
+                        "}"), GeoserverLayer.class));
+    }
 }

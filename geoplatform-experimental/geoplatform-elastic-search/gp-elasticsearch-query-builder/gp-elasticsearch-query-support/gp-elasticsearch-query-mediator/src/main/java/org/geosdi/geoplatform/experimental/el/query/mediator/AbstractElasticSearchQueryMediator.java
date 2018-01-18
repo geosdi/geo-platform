@@ -35,13 +35,14 @@
  */
 package org.geosdi.geoplatform.experimental.el.query.mediator;
 
-import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
 import org.geosdi.geoplatform.experimental.el.index.GPBaseIndexCreator;
 import org.geosdi.geoplatform.experimental.el.query.mediator.colleague.decorator.IGPElasticSearchQueryColleagueDecorator;
 
 import javax.annotation.Resource;
 import java.util.Map;
+
+import static com.google.common.base.Preconditions.checkArgument;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -60,7 +61,7 @@ public abstract class AbstractElasticSearchQueryMediator implements GPElasticSea
     @Override
     public IGPElasticSearchQueryColleagueDecorator getQueryColleague(GPBaseIndexCreator.GPIndexSettings queryColleagueKey)
             throws Exception {
-        Preconditions.checkArgument((queryColleagueKey != null), "The Parameter Query Colleague Key must " +
+        checkArgument((queryColleagueKey != null), "The Parameter Query Colleague Key must " +
                 "not be null.");
         return (isQueryColleagueRegistered(queryColleagueKey) ? this.queryColleagueRegistry.get(queryColleagueKey)
                 : null);
@@ -95,7 +96,7 @@ public abstract class AbstractElasticSearchQueryMediator implements GPElasticSea
      */
     @Override
     public void afterPropertiesSet() throws Exception {
-        Preconditions.checkArgument((this.queryColleagueRegistry != null)
+        checkArgument((this.queryColleagueRegistry != null)
                 && !(this.queryColleagueRegistry.isEmpty()), "The Query Colleague Registry must not be " +
                 "null or Emty Map.");
     }

@@ -664,7 +664,7 @@
             <dependency>
                 <groupId>com.sun.mail</groupId>
                 <artifactId>javax.mail</artifactId>
-                <version>1.5.5</version>
+                <version>1.6.0</version>
             </dependency>
 
             <!-- =========================================================== -->
@@ -1546,7 +1546,7 @@
         <jasypt-version>1.9.2</jasypt-version>
         
         <guava-gwt-version>19.0</guava-gwt-version>
-        <guava-version>23.1-jre</guava-version>
+        <guava-version>23.6-jre</guava-version>
         <guice-version>3.0</guice-version>
         
         <ehcache-version>2.6.3</ehcache-version>

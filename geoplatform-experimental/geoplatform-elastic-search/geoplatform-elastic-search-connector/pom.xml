@@ -17,8 +17,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <elasticsearch-version>6.1.1</elasticsearch-version>
-        <spatial4j.version>0.6</spatial4j.version>
+        <elasticsearch-version>6.1.2</elasticsearch-version>
+        <spatial4j.version>0.7</spatial4j.version>
     </properties>
 
     <dependencies>

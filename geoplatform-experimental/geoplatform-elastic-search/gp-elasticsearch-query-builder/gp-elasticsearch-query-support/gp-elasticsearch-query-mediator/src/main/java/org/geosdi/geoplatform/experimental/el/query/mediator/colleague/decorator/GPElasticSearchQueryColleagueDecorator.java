@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.experimental.el.query.mediator.colleague.decorator;
 
-import com.google.common.base.Preconditions;
 import org.geosdi.geoplatform.experimental.el.query.mediator.colleague.GPElasticSearchQueryColleague;
 import org.geosdi.geoplatform.experimental.el.query.mediator.colleague.GPElasticSearchQueryColleague.GPElasticSearchQueryColleagueParams;
 import org.slf4j.Logger;
@@ -43,6 +42,8 @@ import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nullable;
 import java.util.Map;
+
+import static com.google.common.base.Preconditions.checkArgument;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -61,7 +62,7 @@ public class GPElasticSearchQueryColleagueDecorator extends AbstractQueryColleag
      * @return {@link GPElasticSearchQueryColleague}
      */
     public static GPElasticSearchQueryColleagueDecorator of(GPElasticSearchQueryColleague queryColleague) {
-        Preconditions.checkArgument((queryColleague != null), "The Parameter Query Colleague must not be null.");
+        checkArgument((queryColleague != null), "The Parameter Query Colleague must not be null.");
         return new GPElasticSearchQueryColleagueDecorator(queryColleague);
     }
 

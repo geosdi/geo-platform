@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -19,6 +20,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <elasticsearch-version>6.1.2</elasticsearch-version>
         <spatial4j.version>0.7</spatial4j.version>
+        <locationtech.jts.version>1.15.0</locationtech.jts.version>
     </properties>
 
     <dependencies>
@@ -77,7 +79,7 @@
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-logger-support</artifactId>
-            <version>1.9-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
 
         <!-- =========================================================== -->
@@ -86,7 +88,7 @@
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-jasypt-support</artifactId>
-            <version>1.9-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
@@ -130,14 +132,9 @@
         </dependency>
 
         <dependency>
-            <groupId>com.vividsolutions</groupId>
-            <artifactId>jts</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>xerces</groupId>
-                    <artifactId>xercesImpl</artifactId>
-                </exclusion>
-            </exclusions>
+            <groupId>org.locationtech.jts</groupId>
+            <artifactId>jts-core</artifactId>
+            <version>${locationtech.jts.version}</version>
         </dependency>
 
         <!-- =========================================================== -->

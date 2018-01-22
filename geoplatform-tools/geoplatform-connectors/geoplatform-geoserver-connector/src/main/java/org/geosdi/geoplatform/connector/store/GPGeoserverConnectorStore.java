@@ -5,6 +5,7 @@ import org.geosdi.geoplatform.connector.api.GPConnectorStore;
 import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
 import org.geosdi.geoplatform.connector.geoserver.request.about.GPGeoserverAboutStatusRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.about.GPGeoserverAboutVersionRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.layers.GPGeoserverLayerRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.layers.GPGeoserverLayersRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GPGeoserverNamespaceRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GPGeoserverNamespacesRequest;
@@ -100,6 +101,14 @@ public class GPGeoserverConnectorStore extends GPConnectorStore<GPGeoserverConne
     @Override
     public GPGeoserverLayersRequest createLayersRequest() {
         return this.server.createLayersRequest();
+    }
+
+    /**
+     * @return {@link GPGeoserverLayerRequest}
+     */
+    @Override
+    public GPGeoserverLayerRequest createLayerRequest() {
+        return this.server.createLayerRequest();
     }
 
     /**

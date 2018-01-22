@@ -33,5 +33,6 @@
     <logger name="org.geosdi.geoplatform.connector.store.GPGeoserverConnectorStore" level="debug"/>
     <logger name="org.geosdi.geoplatform.connector.store.task.GeoserverNamespaceTask" level="debug"/>
     <logger name="org.geosdi.geoplatform.connector.store.task.GeoserverStyleTask" level="debug"/>
+    <logger name="org.geosdi.geoplatform.connector.store.task.GeoserverLayerTask" level="debug"/>
 
 </configuration>

@@ -1,6 +1,7 @@
 package org.geosdi.geoplatform.connector.geoserver.layers;
 
 import org.geosdi.geoplatform.connector.geoserver.namespaces.IGPGeoserverNamespacesConnector;
+import org.geosdi.geoplatform.connector.geoserver.request.layers.GPGeoserverLayerRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.layers.GPGeoserverLayersRequest;
 
 /**
@@ -13,4 +14,9 @@ public interface IGPGeoserverLayersConnector extends IGPGeoserverNamespacesConne
      * @return {@link GPGeoserverLayersRequest}
      */
     GPGeoserverLayersRequest createLayersRequest();
+
+    /**
+     * @return {@link GPGeoserverLayerRequest}
+     */
+    GPGeoserverLayerRequest createLayerRequest();
 }

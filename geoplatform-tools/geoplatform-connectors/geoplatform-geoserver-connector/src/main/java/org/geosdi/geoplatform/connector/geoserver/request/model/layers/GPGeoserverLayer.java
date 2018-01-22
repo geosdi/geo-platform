@@ -5,6 +5,7 @@ import lombok.ToString;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -17,6 +18,7 @@ public class GPGeoserverLayer implements IGPGeoserverLayer {
 
     private static final long serialVersionUID = -1329679273067502659L;
     //
+    @XmlElement(name = "name")
     private String layerName;
     private String href;
 }

@@ -3,6 +3,7 @@ package org.geosdi.geoplatform.connector.geoserver.layers;
 import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.GeoserverVersionException;
 import org.geosdi.geoplatform.connector.geoserver.namespaces.GPGeoserverNamespacesConnector;
+import org.geosdi.geoplatform.connector.geoserver.request.layers.GPGeoserverLayerRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.layers.GPGeoserverLayersRequest;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
@@ -75,6 +76,19 @@ public abstract class GPGeoserverLayersConnector extends GPGeoserverNamespacesCo
         switch (version) {
             case V212x:
                 return new GPGeoserverLayersRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.12.x");
+        }
+    }
+
+    /**
+     * @return {@link GPGeoserverLayerRequest}
+     */
+    @Override
+    public GPGeoserverLayerRequest createLayerRequest() {
+        switch (version) {
+            case V212x:
+                return new GPGeoserverLayerRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.12.x");
         }

@@ -3,6 +3,7 @@ package org.geosdi.geoplatform.connector.store;
 import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.geoserver.request.about.GPGeoserverAboutStatusRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.about.GPGeoserverAboutVersionRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.layers.GPGeoserverLayerRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.layers.GPGeoserverLayersRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GPGeoserverNamespaceRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GPGeoserverNamespacesRequest;
@@ -50,6 +51,11 @@ public interface IGPGeoserverConnectorStore {
      * @return {@link GPGeoserverLayersRequest}
      */
     GPGeoserverLayersRequest createLayersRequest();
+
+    /**
+     * @return {@link GPGeoserverLayerRequest}
+     */
+    GPGeoserverLayerRequest createLayerRequest();
 
     /**
      * @return {@link GPGeoserverStylesRequest}

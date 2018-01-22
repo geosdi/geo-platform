@@ -34,7 +34,7 @@
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-executor-support</artifactId>
-            <version>1.9-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
 
         <!-- =========================================================== -->
@@ -43,7 +43,7 @@
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-jackson-support</artifactId>
-            <version>1.9-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>

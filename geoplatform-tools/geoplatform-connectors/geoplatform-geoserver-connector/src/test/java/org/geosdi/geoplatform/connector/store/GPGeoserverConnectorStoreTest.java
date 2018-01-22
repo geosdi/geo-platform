@@ -2,6 +2,7 @@ package org.geosdi.geoplatform.connector.store;
 
 import org.geosdi.geoplatform.connector.geoserver.request.about.GPGeoserverAboutStatusRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.about.GPGeoserverAboutVersionRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.layers.GPGeoserverLayerRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.layers.GPGeoserverLayersRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.model.namespace.GPGeoserverNamespaces;
 import org.geosdi.geoplatform.connector.geoserver.request.model.namespace.IGPGeoserverNamespace;
@@ -11,6 +12,7 @@ import org.geosdi.geoplatform.connector.geoserver.request.styles.GPGeoserverStyl
 import org.geosdi.geoplatform.connector.geoserver.request.styles.GPGeoserverStylesRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GPGeoserverWorkspacesRequest;
 import org.geosdi.geoplatform.connector.server.security.BasicPreemptiveSecurityConnector;
+import org.geosdi.geoplatform.connector.store.task.GeoserverLayerTask;
 import org.geosdi.geoplatform.connector.store.task.GeoserverNamespaceTask;
 import org.geosdi.geoplatform.connector.store.task.GeoserverStyleTask;
 import org.junit.AfterClass;
@@ -120,6 +122,30 @@ public class GPGeoserverConnectorStoreTest {
         stylesRequest.getResponse().getStyles()
                 .stream()
                 .forEach(value -> new GeoserverStyleTask(styleRequest, value.getName()).start());
+        Thread.sleep(700);
+    }
+
+    @Test
+    public void m_layerVectorGeoserverConnectorTest() throws Exception {
+        GPGeoserverLayerRequest layerRequest = geoserverConnectorStore.createLayerRequest();
+        layerRequest.setName("giant_polygon");
+        logger.info("##############VECTOR_LAYER_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", layerRequest.getResponseAsString());
+    }
+
+    @Test
+    public void n_layerRasterGeoserverConnectorTest() throws Exception {
+        GPGeoserverLayerRequest layerRequest = geoserverConnectorStore.createLayerRequest();
+        layerRequest.setName("Arc_Sample");
+        logger.info("############RASTER_LAYER_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", layerRequest.getResponseAsString());
+    }
+
+    @Test
+    public void o_layerGeoserverConnectorMultiThreadTest() throws Exception {
+        GPGeoserverLayersRequest layersRequest = geoserverConnectorStore.createLayersRequest();
+        GPGeoserverLayerRequest layerRequest = geoserverConnectorStore.createLayerRequest();
+        layersRequest.getResponse().getLayers()
+                .stream()
+                .forEach(value -> new GeoserverLayerTask(layerRequest, value.getLayerName()).start());
         Thread.sleep(700);
     }
 

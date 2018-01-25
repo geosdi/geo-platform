@@ -1106,6 +1106,7 @@
                         <excludes>
                             <exclude>**/README</exclude>
                             <exclude>**/pom.xml</exclude>
+                            <exclude>**/applicationContext.xml</exclude>
                             <exclude>**/resources/**</exclude>
                             <exclude>**/target/**</exclude>
                             <exclude>**/public/**</exclude>

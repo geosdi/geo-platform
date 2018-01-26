@@ -37,11 +37,13 @@ package org.geosdi.geoplatform.persistence.demo.dao.spring;
 
 import org.geosdi.geoplatform.persistence.dao.spring.GeoPlatformJpaRepository;
 import org.geosdi.geoplatform.persistence.demo.model.Car;
+import org.springframework.stereotype.Repository;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@Repository(value = "springCarDAO")
 public interface SpringCarDAO extends GeoPlatformJpaRepository<Car, Long> {
 
     /**

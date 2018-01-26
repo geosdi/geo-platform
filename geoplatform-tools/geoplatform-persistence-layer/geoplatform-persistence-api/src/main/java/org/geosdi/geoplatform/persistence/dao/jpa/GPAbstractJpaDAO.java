@@ -58,7 +58,7 @@ import static java.util.stream.Collectors.toList;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Transactional(transactionManager = "transactionManager")
+@Transactional(transactionManager = "gpTransactionManager")
 public abstract class GPAbstractJpaDAO<T extends Object, ID extends Serializable> extends GPCriteriaJpaDAO<T, ID>
         implements GPBaseJpaDAO<T, ID> {
 

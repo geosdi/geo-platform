@@ -45,7 +45,7 @@ import java.io.Serializable;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Transactional(transactionManager = "transactionManager")
+@Transactional(transactionManager = "gpTransactionManager")
 public interface GeoPlatformJpaRepository<T extends Object, ID extends Serializable>
         extends JpaRepository<T, ID> {
 

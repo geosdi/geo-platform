@@ -60,5 +60,6 @@
             level="debug"/>
     <logger name="org.geosdi.geoplatform.csv.importer.step.spatial.decorator.CSVBatchGeocoderDecoratorStrategy"
             level="debug"/>
+    <logger name="org.springframework.transaction" level="DEBUG"/>
 
 </configuration>

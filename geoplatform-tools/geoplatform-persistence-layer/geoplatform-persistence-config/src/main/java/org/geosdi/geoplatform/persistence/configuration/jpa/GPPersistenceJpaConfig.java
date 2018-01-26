@@ -85,7 +85,7 @@ class GPPersistenceJpaConfig {
         return gpFactoryBean;
     }
 
-    @Bean(name = "transactionManager")
+    @Bean
     public PlatformTransactionManager gpTransactionManager() {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(this.gpEntityManagerFactory().getObject());

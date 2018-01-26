@@ -91,7 +91,7 @@ import java.util.List;
  * @author Francesco Izzi - CNR IMAA - geoSDI
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  */
-@Transactional // Give atomicity on WS methods
+@Transactional(transactionManager = "gpTransactionManager") // Give atomicity on WS methods
 @WebService(
         endpointInterface = "org.geosdi.geoplatform.services.GeoPlatformService")
 public class GeoPlatformServiceImpl implements GeoPlatformService {

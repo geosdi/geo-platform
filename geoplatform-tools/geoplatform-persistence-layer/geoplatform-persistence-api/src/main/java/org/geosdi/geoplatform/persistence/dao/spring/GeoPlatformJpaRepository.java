@@ -45,7 +45,7 @@ import java.util.Optional;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Transactional
+@Transactional(transactionManager = "transactionManager")
 public interface GeoPlatformJpaRepository<T extends Object, ID extends Serializable>
         extends JpaRepository<T, ID> {
 

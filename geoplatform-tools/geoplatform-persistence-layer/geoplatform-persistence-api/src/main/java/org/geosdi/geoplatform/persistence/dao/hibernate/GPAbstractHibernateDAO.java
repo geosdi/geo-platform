@@ -58,7 +58,7 @@ import static java.util.stream.StreamSupport.stream;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Transactional
+@Transactional(transactionManager = "transactionManager")
 public abstract class GPAbstractHibernateDAO<T extends Object, ID extends Serializable> extends GPHibernateCriteriaDAO<T, ID> {
 
     public GPAbstractHibernateDAO(Class<T> thePersistentClass) {

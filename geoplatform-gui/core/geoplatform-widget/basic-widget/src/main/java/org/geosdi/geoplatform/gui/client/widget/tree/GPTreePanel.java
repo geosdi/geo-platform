@@ -36,6 +36,7 @@ package org.geosdi.geoplatform.gui.client.widget.tree;
 
 import com.extjs.gxt.ui.client.data.ModelData;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import org.geosdi.geoplatform.gui.client.widget.map.event.LayerRangeEventHandler;
 import org.geosdi.geoplatform.gui.client.widget.tree.decorator.GPTreeCheckDecorator;
@@ -189,8 +190,9 @@ public class GPTreePanel<T extends GPBeanTreeModel> extends TreePanel<T> impleme
         List<GPLayerBean> visibleLayers = Lists.<GPLayerBean>newArrayList();
         AbstractRootTreeNode root = (AbstractRootTreeNode) this.getStore().getRootItems().get(
                 0);
-        assert (root != null) : "GPTreePanel on getVisibleLayers():"
-                + " Impossible to retrieve root element";
+        Preconditions.checkArgument(root != null,
+                "GPTreePanel on getVisibleLayers():"
+                        + " Impossible to retrieve root element");
         return this.getVisibleLayersOnTree(root.getChildren(), visibleLayers);
     }
 
@@ -202,9 +204,25 @@ public class GPTreePanel<T extends GPBeanTreeModel> extends TreePanel<T> impleme
         List<GPLayerBean> allLayers = Lists.<GPLayerBean>newArrayList();
         AbstractRootTreeNode root = (AbstractRootTreeNode) this.getStore().getRootItems().get(
                 0);
-        assert (root != null) : "GPTreePanel on getAllLayersOnTree():"
-                + " Impossible to retrieve root element";
+        Preconditions.checkArgument(root != null,
+                "GPTreePanel on getVisibleLayers():"
+                        + " Impossible to retrieve root element");
         return this.getAllLayersOnTree(root.getChildren(), allLayers);
+    }
+
+    /**
+     *
+     * @return {@link List<GPLayerBean>}
+     */
+    @Override
+    public List<GPLayerBean> getAllLayersOnTreeByDataSource(String dataSource) {
+        List<GPLayerBean> allLayers = Lists.<GPLayerBean>newArrayList();
+        AbstractRootTreeNode root = (AbstractRootTreeNode) this.getStore().getRootItems().get(
+                0);
+        Preconditions.checkArgument(root != null,
+                "GPTreePanel on getVisibleLayers():"
+                        + " Impossible to retrieve root element");
+        return this.getAllLayersOnTreeByDataSource(root.getChildren(), allLayers, dataSource);
     }
 
     /**
@@ -238,6 +256,24 @@ public class GPTreePanel<T extends GPBeanTreeModel> extends TreePanel<T> impleme
             if (element instanceof AbstractFolderTreeNode && element.getChildCount() != 0) {
                 this.getAllLayersOnTree(element.getChildren(), allLayers);
             } else if (element instanceof GPLayerTreeModel) {
+                allLayers.add((GPLayerBean) element);
+            }
+        }
+        return allLayers;
+    }
+
+    /**
+     * @param layers
+     * @param allLayers
+     * @return {@link List<GPLayerBean>}
+     */
+    protected List<GPLayerBean> getAllLayersOnTreeByDataSource(List<ModelData> layers,
+                                                   List<GPLayerBean> allLayers, String dataSource) {
+        for (Iterator<ModelData> it = layers.iterator(); it.hasNext(); ) {
+            GPBeanTreeModel element = (GPBeanTreeModel) it.next();
+            if (element instanceof AbstractFolderTreeNode && element.getChildCount() != 0) {
+                this.getAllLayersOnTree(element.getChildren(), allLayers);
+            } else if (element instanceof GPLayerTreeModel && ((GPLayerTreeModel) element).getDataSource().equals(dataSource)) {
                 allLayers.add((GPLayerBean) element);
             }
         }

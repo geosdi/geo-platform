@@ -50,4 +50,6 @@ public interface GPTreeLayerPresenceDecorator {
     
     List<GPLayerBean> getAllLayersOnTree();
 
+    List<GPLayerBean> getAllLayersOnTreeByDataSource(String dataSource);
+
 }

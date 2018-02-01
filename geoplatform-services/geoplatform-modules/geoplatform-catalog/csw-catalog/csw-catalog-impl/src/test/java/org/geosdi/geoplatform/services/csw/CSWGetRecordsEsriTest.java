@@ -36,7 +36,6 @@ package org.geosdi.geoplatform.services.csw;
 
 import org.geosdi.geoplatform.connector.GPCSWConnectorBuilder;
 import org.geosdi.geoplatform.connector.GPCatalogConnectorStore;
-import org.geosdi.geoplatform.connector.server.exception.IncorrectResponseException;
 import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequest;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
 import org.geosdi.geoplatform.gui.responce.TextInfo;
@@ -49,6 +48,7 @@ import org.geosdi.geoplatform.xml.csw.OutputSchema;
 import org.geosdi.geoplatform.xml.csw.TypeName;
 import org.geosdi.geoplatform.xml.csw.v202.*;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -61,7 +61,6 @@ import java.net.URL;
 import java.util.List;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -75,7 +74,8 @@ public class CSWGetRecordsEsriTest {
     //
     private final DublinCoreAnalyzer gpDublinCoreAnalyzer = new DublinCoreAnalyzer.GPDublinCoreAnalyzer();
 
-    @Test(expected = IncorrectResponseException.class)
+    @Ignore(value = "Serve id Down")
+    @Test(expected = Exception.class)
     public void testFullRecordEsri() throws Exception {
         URL url = new URL("http://www.geoportale.isprambiente.it/geoportale"
                 + "/csw/discovery");

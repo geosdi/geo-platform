@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.connector;
 import org.geosdi.geoplatform.connector.server.request.CatalogGetCapabilitiesRequest;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
 import org.geosdi.geoplatform.xml.csw.v202.CapabilitiesType;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -60,6 +61,7 @@ public class CSWCapabilitiesTest {
     private static Logger logger;
     //
 
+    @Ignore(value = "Server is DOWN")
     @Test
     public void cswIspra202GetCapabilitiesTest() throws Exception {
         GPCatalogConnectorStore serverConnector = GPCSWConnectorBuilder

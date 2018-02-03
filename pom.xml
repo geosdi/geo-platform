@@ -1214,7 +1214,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-dependency-plugin</artifactId>
-                    <version>3.0.0</version>
+                    <version>3.0.2</version>
                 </plugin>
                 
                 <plugin>
@@ -1508,6 +1508,9 @@
     </reporting>
     
     <properties>
+        <maven.build.timestamp.format>
+            yyyy-MM-dd'T'HH:mm:ss'Z'
+        </maven.build.timestamp.format>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <netbeans.hint.license>geo-platform</netbeans.hint.license>
  

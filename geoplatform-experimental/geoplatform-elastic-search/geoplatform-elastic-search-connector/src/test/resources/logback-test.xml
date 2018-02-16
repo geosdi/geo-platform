@@ -20,7 +20,8 @@
 
     <logger name="org.geosdi.geoplatform.experimental.el.spring" level="debug"/>
     <logger name="org.geosdi.geoplatform.experimental.el.threadpool.spi.BaseThreadPoolSPIExecutor" level="trace"/>
-    <logger name="org.geosdi.geoplatform.experimental.el.threadpool.spi.spring.SpringThreadPoolSPIExecutor" level="trace"/>
+    <logger name="org.geosdi.geoplatform.experimental.el.threadpool.spi.spring.SpringThreadPoolSPIExecutor"
+            level="trace"/>
 
     <logger name="org.geosdi.geoplatform.experimental.el.crypt.GPElasticSearchPooledPBEStringEncryptorTest"
             level="debug"/>

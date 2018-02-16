@@ -1,37 +1,36 @@
 /**
- *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
- *
- *   Copyright (C) 2008-2018 geoSDI Group (CNR IMAA - Potenza - ITALY).
- *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
- *
- *   ====================================================================
- *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
- *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * geo-platform
+ * Rich webgis framework
+ * http://geo-platform.org
+ * ====================================================================
+ * <p>
+ * Copyright (C) 2008-2018 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * <p>
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version. This program is distributed in the
+ * hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License
+ * for more details. You should have received a copy of the GNU General
+ * Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * <p>
+ * ====================================================================
+ * <p>
+ * Linking this library statically or dynamically with other modules is
+ * making a combined work based on this library. Thus, the terms and
+ * conditions of the GNU General Public License cover the whole combination.
+ * <p>
+ * As a special exception, the copyright holders of this library give you permission
+ * to link this library with independent modules to produce an executable, regardless
+ * of the license terms of these independent modules, and to copy and distribute
+ * the resulting executable under terms of your choice, provided that you also meet,
+ * for each linked independent module, the terms and conditions of the license of
+ * that module. An independent module is a module which is not derived from or
+ * based on this library. If you modify this library, you may extend this exception
+ * to your version of the library, but you are not obligated to do so. If you do not
+ * wish to do so, operation this exception statement from your version.
  */
 package org.geosdi.geoplatform.experimental.el.dao;
 
@@ -50,7 +49,9 @@ import org.geosdi.geoplatform.experimental.el.dao.store.IPageStore;
 import org.geosdi.geoplatform.experimental.el.dao.store.PageStore;
 import org.geosdi.geoplatform.experimental.el.search.bool.IBooleanSearch;
 import org.geosdi.geoplatform.experimental.el.search.date.IGPDateQuerySearch;
-import org.geosdi.geoplatform.experimental.el.search.delete.DeleteByPage;
+import org.geosdi.geoplatform.experimental.el.search.delete.OperationByPage;
+import org.geosdi.geoplatform.experimental.el.search.strategy.IGPOperationAsyncStrategy;
+import org.geosdi.geoplatform.experimental.el.search.strategy.IGPOperationAsyncType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -116,7 +117,7 @@ public interface GPPageableElasticSearchDAO<D extends Document> {
      * @throws Exception
      */
     <P extends Page, V extends Document> IPageResult<V> find(P page, String[] includeFields, String[] excludeFields,
-            Class<V> classe) throws Exception;
+                                                             Class<V> classe) throws Exception;
 
     /**
      * @param page
@@ -145,7 +146,7 @@ public interface GPPageableElasticSearchDAO<D extends Document> {
      * @return {@link BulkResponse}
      * @throws Exception
      */
-    <Result extends DeleteByPage.IDeleteByPageResult, P extends Page> Result deleteByPage(P page) throws Exception;
+    <Result extends OperationByPage.IOperationByPageResult, P extends PageAsync> Result operationByPage(P page) throws Exception;
 
     /**
      * @param page
@@ -153,7 +154,8 @@ public interface GPPageableElasticSearchDAO<D extends Document> {
      * @return {@link CompletableFuture<BulkResponse>}
      * @throws Exception
      */
-    <Result extends DeleteByPage.IDeleteByPageResult, P extends Page> CompletableFuture<Result> deleteByPageAsync(P page) throws Exception;
+    <Result extends OperationByPage.IOperationByPageResult, P extends PageAsync> CompletableFuture<Result> operationByPageAsync(P page) throws Exception;
+
 
     /**
      * @param page
@@ -314,7 +316,7 @@ public interface GPPageableElasticSearchDAO<D extends Document> {
         }
 
         public SortablePage(String field, SortOrder sortOrder, int from,
-                int size) {
+                            int size) {
             super(from, size);
             this.field = field;
             this.sortOrder = sortOrder;
@@ -384,7 +386,7 @@ public interface GPPageableElasticSearchDAO<D extends Document> {
         }
 
         public QueriableSortablePage(String field, SortOrder sortOrder, int from,
-                int size, QueryBuilder query) {
+                                     int size, QueryBuilder query) {
             super(field, sortOrder, from, size);
             this.query = query;
         }
@@ -447,7 +449,7 @@ public interface GPPageableElasticSearchDAO<D extends Document> {
         }
 
         public DateRangeSortablePage(String field, SortOrder sortOrder, int from, int size,
-                IGPDateQuerySearch... theDateQuerySearch) {
+                                     IGPDateQuerySearch... theDateQuerySearch) {
             super(field, sortOrder, from, size);
             this.dateQuerySearch = theDateQuerySearch;
         }
@@ -519,7 +521,7 @@ public interface GPPageableElasticSearchDAO<D extends Document> {
         }
 
         public MultiFieldsSearch(String field, SortOrder sortOrder, int from,
-                int size, IBooleanSearch... queryList) {
+                                 int size, IBooleanSearch... queryList) {
             super(field, sortOrder, from, size);
             this.queryList = queryList;
         }
@@ -549,6 +551,41 @@ public interface GPPageableElasticSearchDAO<D extends Document> {
         @Override
         public BoolQueryBuilder boolQueryBuilder() {
             return this.queryBuilder;
+        }
+    }
+
+    @Immutable
+    class PageAsync extends MultiFieldsSearch {
+
+        protected static final Logger logger = LoggerFactory.getLogger(PageAsync.class);
+        //
+        private final IGPOperationAsyncType.OperationAsyncEnum operationType;
+        private final GPElasticSearchUpdateHandler gpElasticSearchUpdateHandler;
+
+        public PageAsync(int theFrom, int theSize, IGPOperationAsyncType.OperationAsyncEnum operationType, GPElasticSearchUpdateHandler gpElasticSearchUpdateHandler) {
+            super(theFrom, theSize);
+            this.operationType = operationType;
+            this.gpElasticSearchUpdateHandler = gpElasticSearchUpdateHandler;
+        }
+
+        public PageAsync(int from, int size, IGPOperationAsyncType.OperationAsyncEnum operationType, GPElasticSearchUpdateHandler gpElasticSearchUpdateHandler, IBooleanSearch... queryList) {
+            super(null, null, from, size, queryList);
+            this.operationType = operationType;
+            this.gpElasticSearchUpdateHandler = gpElasticSearchUpdateHandler;
+        }
+
+        /**
+         * @return {@link IGPOperationAsyncStrategy.OperationAsyncEnum}
+         */
+        public IGPOperationAsyncType.OperationAsyncEnum getOperationType() {
+            return operationType;
+        }
+
+        /**
+         * @return
+         */
+        public GPElasticSearchUpdateHandler getGpElasticSearchUpdateHandler() {
+            return gpElasticSearchUpdateHandler;
         }
     }
 }

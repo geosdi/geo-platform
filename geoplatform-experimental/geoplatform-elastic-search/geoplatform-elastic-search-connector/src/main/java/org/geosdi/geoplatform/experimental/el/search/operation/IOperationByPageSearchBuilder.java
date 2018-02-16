@@ -32,54 +32,71 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, operation this exception statement from your version.
  */
-package org.geosdi.geoplatform.experimental.el.search.delete.responsibility;
+package org.geosdi.geoplatform.experimental.el.search.operation;
 
 import com.google.common.base.Preconditions;
-import org.geosdi.geoplatform.experimental.el.dao.ElasticSearchDAO;
-import org.geosdi.geoplatform.experimental.el.search.delete.OperationByPage;
-import org.geosdi.geoplatform.experimental.el.search.delete.OperationByPage.IOperationByPageResult;
-import org.geosdi.geoplatform.experimental.el.search.strategy.IGPStrategyRepository;
+import org.geosdi.geoplatform.experimental.el.dao.GPPageableElasticSearchDAO;
 
-import static org.geosdi.geoplatform.experimental.el.search.delete.responsibility.GPElasticSearchOperationHandler.GPElasticSearchDeleteHandlerType.PARALLEL_OPERATION_TYPE;
-import static org.geosdi.geoplatform.experimental.el.search.strategy.IGPOperationAsyncStrategy.AbstractOperationAsyncStrategy.PAGE_SIZE_LIMIT;
+import static org.geosdi.geoplatform.experimental.el.search.operation.OperationByPage.OperationByPageSearch;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-class GPParallelOperationHandler extends AbstractParallelOperationHandler {
-
-    public GPParallelOperationHandler(IGPStrategyRepository strategyRepository) {
-        super(strategyRepository);
-    }
+public interface IOperationByPageSearchBuilder {
 
     /**
-     * @param page
-     * @param searchDAO
-     * @return {@link Result}
+     * @param thePage
+     * @param <P>
+     * @return {@link IOperationByPageSearchBuilder}
+     */
+    <P extends GPPageableElasticSearchDAO.PageAsync> IOperationByPageSearchBuilder withPage(P thePage);
+
+    /**
+     * @return {@link OperationByPage}
      * @throws Exception
      */
-    @Override
-    protected <Result extends IOperationByPageResult, Page extends OperationByPage> Result internalOperation(Page page, ElasticSearchDAO searchDAO) throws Exception {
-        Preconditions.checkNotNull(page, "Parameter Page must not be null.");
-        Preconditions.checkNotNull(searchDAO, "Parameter SearchDAO must not be null.");
-        return this.strategyRepository.getParallelOperation(page.getOperation(), page, searchDAO);
-    }
+    OperationByPage build() throws Exception;
 
     /**
-     * @param page
-     * @return {@link Boolean}
+     *
      */
-    @Override
-    protected <Page extends OperationByPage> Boolean canDoOperation(Page page) {
-        return ((page != null) && (page.getSize() > PAGE_SIZE_LIMIT));
-    }
+    class OperationByPageSearchBuilder implements IOperationByPageSearchBuilder {
 
-    /**
-     * @return {@link TYPE}
-     */
-    @Override
-    public <TYPE extends IGPElasticSearchDeleteHandlerType> TYPE getOperationType() {
-        return (TYPE) PARALLEL_OPERATION_TYPE;
+        private GPPageableElasticSearchDAO.PageAsync page;
+
+        private OperationByPageSearchBuilder() {
+        }
+
+        public static IOperationByPageSearchBuilder newInstance() {
+            return new OperationByPageSearchBuilder();
+        }
+
+        /**
+         * @param thePage
+         * @return {@link IOperationByPageSearchBuilder}
+         */
+        @Override
+        public <P extends GPPageableElasticSearchDAO.PageAsync> IOperationByPageSearchBuilder withPage(P thePage) {
+            this.page = thePage;
+            return self();
+        }
+
+        /**
+         * @return {@link OperationByPage}
+         * @throws Exception
+         */
+        @Override
+        public OperationByPage build() throws Exception {
+            Preconditions.checkNotNull(this.page, "The Parameter Page must not be null.");
+            return new OperationByPageSearch(this.page);
+        }
+
+        /**
+         * @return {@link IOperationByPageSearchBuilder}
+         */
+        protected IOperationByPageSearchBuilder self() {
+            return this;
+        }
     }
 }

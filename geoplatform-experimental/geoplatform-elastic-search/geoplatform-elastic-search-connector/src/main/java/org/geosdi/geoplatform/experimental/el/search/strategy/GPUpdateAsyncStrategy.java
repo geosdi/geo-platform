@@ -7,7 +7,7 @@ import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.rest.RestStatus;
 import org.geosdi.geoplatform.experimental.el.dao.ElasticSearchDAO;
-import org.geosdi.geoplatform.experimental.el.search.delete.OperationByPage;
+import org.geosdi.geoplatform.experimental.el.search.operation.OperationByPage;
 import org.geosdi.geoplatform.experimental.el.search.strategy.function.GPUpdateRequestFunction;
 import org.geosdi.geoplatform.experimental.el.search.strategy.task.GPElasticSearchUpdateTask;
 import org.springframework.stereotype.Component;
@@ -47,7 +47,7 @@ public class GPUpdateAsyncStrategy extends IGPOperationAsyncStrategy.AbstractOpe
 
         BulkRequestBuilder bulkRequest = searchDAO.client().prepareBulk();
         stream(searchResponse.getHits().getHits()).map(searchHit -> searchDAO.readDocument(searchHit))
-                .map(d -> page.getUpdateHandler().updateEntity(d))
+                .map(page::update)
                 .map(new GPUpdateRequestFunction(searchDAO))
                 .filter(updateRequest -> updateRequest != null)
                 .forEach(updateRequest -> bulkRequest.add(updateRequest));

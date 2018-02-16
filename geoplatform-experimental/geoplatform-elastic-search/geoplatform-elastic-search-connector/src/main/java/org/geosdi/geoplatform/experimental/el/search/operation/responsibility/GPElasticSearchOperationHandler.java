@@ -32,33 +32,78 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, operation this exception statement from your version.
  */
-package org.geosdi.geoplatform.experimental.el.search.delete.responsibility;
+package org.geosdi.geoplatform.experimental.el.search.operation.responsibility;
 
 import org.geosdi.geoplatform.experimental.el.dao.ElasticSearchDAO;
-import org.geosdi.geoplatform.experimental.el.search.delete.OperationByPage;
-import org.geosdi.geoplatform.experimental.el.search.delete.OperationByPage.IOperationByPageResult;
-import org.geosdi.geoplatform.experimental.el.search.strategy.IGPStrategyRepository;
+import org.geosdi.geoplatform.experimental.el.search.operation.OperationByPage;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-abstract class AbstractParallelOperationHandler extends GPAbstractOperationHandler<ElasticSearchDAO> {
-
-    public AbstractParallelOperationHandler(IGPStrategyRepository strategyRepository) {
-        super(strategyRepository);
-    }
+public interface GPElasticSearchOperationHandler<SearchDAO extends ElasticSearchDAO> {
 
     /**
      * @param page
      * @param searchDAO
+     * @param <Result>
+     * @param <Page>
      * @return {@link Result}
      * @throws Exception
      */
-    @Override
-    public <Result extends IOperationByPageResult, Page extends OperationByPage> Result operation(Page page,
-                                                                                                  ElasticSearchDAO searchDAO) throws Exception {
-        return (canDoOperation(page) ? internalOperation(page, searchDAO) : super.forwardOperation(page, searchDAO));
+    <Result extends OperationByPage.IOperationByPageResult, Page extends OperationByPage> Result operation(Page page,
+                                                                                                           SearchDAO searchDAO) throws Exception;
+
+    /**
+     * @param theSuccessor
+     * @param <Successor>
+     */
+    <Successor extends GPElasticSearchOperationHandler<SearchDAO>> void setSuccessor(Successor theSuccessor);
+
+    /**
+     * @param <TYPE>
+     * @return {@link TYPE}
+     */
+    <TYPE extends IGPElasticSearchDeleteHandlerType> TYPE getOperationType();
+
+    /**
+     *
+     */
+    enum GPElasticSearchDeleteHandlerType implements IGPElasticSearchDeleteHandlerType {
+
+        PREPARER_OPERATION_TYPE("PREPARER_OPERATION_TYPE_HANDLER"),
+        NOT_PARALLEL_OPERATION_TYPE("NOT_PARALLEL_OPERATION_TYPE_HANDLER"),
+        PARALLEL_OPERATION_TYPE("PARALLEL_OPERATION_TYPE_HANDLER");
+
+        private final String value;
+
+        GPElasticSearchDeleteHandlerType(String value) {
+            this.value = value;
+        }
+
+
+        /**
+         * @return {@link String}
+         */
+        @Override
+        public String getType() {
+            return this.value;
+        }
+
+        @Override
+        public String toString() {
+            return this.value;
+        }
     }
 
+    /**
+     *
+     */
+    interface IGPElasticSearchDeleteHandlerType {
+
+        /**
+         * @return {@link String}
+         */
+        String getType();
+    }
 }

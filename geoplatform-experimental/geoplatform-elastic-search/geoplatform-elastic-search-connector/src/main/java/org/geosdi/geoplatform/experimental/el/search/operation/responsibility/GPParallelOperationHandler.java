@@ -32,27 +32,25 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, operation this exception statement from your version.
  */
-package org.geosdi.geoplatform.experimental.el.search.delete.responsibility;
+package org.geosdi.geoplatform.experimental.el.search.operation.responsibility;
 
 import com.google.common.base.Preconditions;
-import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.geosdi.geoplatform.experimental.el.dao.ElasticSearchDAO;
-import org.geosdi.geoplatform.experimental.el.search.delete.OperationByPage;
-import org.geosdi.geoplatform.experimental.el.search.delete.OperationByPage.IOperationByPageResult;
-import org.geosdi.geoplatform.experimental.el.search.delete.OperationByPage.OperationByPageSearchDecorator;
+import org.geosdi.geoplatform.experimental.el.search.operation.OperationByPage;
+import org.geosdi.geoplatform.experimental.el.search.operation.OperationByPage.IOperationByPageResult;
 import org.geosdi.geoplatform.experimental.el.search.strategy.IGPStrategyRepository;
 
-import static org.geosdi.geoplatform.experimental.el.search.delete.responsibility.GPElasticSearchOperationHandler.GPElasticSearchDeleteHandlerType.PREPARER_OPERATION_TYPE;
+import static org.geosdi.geoplatform.experimental.el.search.operation.responsibility.GPElasticSearchOperationHandler.GPElasticSearchDeleteHandlerType.PARALLEL_OPERATION_TYPE;
+import static org.geosdi.geoplatform.experimental.el.search.strategy.IGPOperationAsyncStrategy.AbstractOperationAsyncStrategy.PAGE_SIZE_LIMIT;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-class GPPrepareOperationHandler extends GPAbstractOperationHandler<ElasticSearchDAO> {
+class GPParallelOperationHandler extends AbstractParallelOperationHandler {
 
-    public GPPrepareOperationHandler(IGPStrategyRepository strategyRepository) {
+    public GPParallelOperationHandler(IGPStrategyRepository strategyRepository) {
         super(strategyRepository);
-        super.setSuccessor(new GPSingleOperationHandler(strategyRepository));
     }
 
     /**
@@ -62,29 +60,10 @@ class GPPrepareOperationHandler extends GPAbstractOperationHandler<ElasticSearch
      * @throws Exception
      */
     @Override
-    public <Result extends IOperationByPageResult, Page extends OperationByPage> Result operation(Page page,
-                                                                                                  ElasticSearchDAO searchDAO
-    ) throws Exception {
-        return (canDoOperation(page) ? internalOperation(page, searchDAO) : super.forwardOperation(page, searchDAO));
-    }
-
-    /**
-     * @param page
-     * @param searchDAO
-     * @return {@link Result}
-     * @throws Exception
-     */
-    @Override
-    protected final <Result extends IOperationByPageResult, Page extends OperationByPage> Result internalOperation(Page page,
-                                                                                                                   ElasticSearchDAO searchDAO) throws Exception {
+    protected <Result extends IOperationByPageResult, Page extends OperationByPage> Result internalOperation(Page page, ElasticSearchDAO searchDAO) throws Exception {
         Preconditions.checkNotNull(page, "Parameter Page must not be null.");
         Preconditions.checkNotNull(searchDAO, "Parameter SearchDAO must not be null.");
-
-        SearchRequestBuilder builder = page.buildPage(searchDAO.client()
-                .prepareSearch(searchDAO.getIndexName()).setTypes(searchDAO.getIndexType()));
-        Long totalElementsToDelete = builder.execute().get().getHits().getTotalHits();
-        return super.forwardOperation(new OperationByPageSearchDecorator(page.getPage(), totalElementsToDelete),
-                searchDAO);
+        return this.strategyRepository.getParallelOperation(page.getOperation(), page, searchDAO);
     }
 
     /**
@@ -93,7 +72,7 @@ class GPPrepareOperationHandler extends GPAbstractOperationHandler<ElasticSearch
      */
     @Override
     protected <Page extends OperationByPage> Boolean canDoOperation(Page page) {
-        return ((page.getSize() != null) && (page.getSize() == 0));
+        return ((page != null) && (page.getSize() > PAGE_SIZE_LIMIT));
     }
 
     /**
@@ -101,6 +80,6 @@ class GPPrepareOperationHandler extends GPAbstractOperationHandler<ElasticSearch
      */
     @Override
     public <TYPE extends IGPElasticSearchDeleteHandlerType> TYPE getOperationType() {
-        return (TYPE) PREPARER_OPERATION_TYPE;
+        return (TYPE) PARALLEL_OPERATION_TYPE;
     }
 }

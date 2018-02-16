@@ -41,9 +41,9 @@ import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.rest.RestStatus;
 import org.elasticsearch.search.aggregations.AbstractAggregationBuilder;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
-import org.geosdi.geoplatform.experimental.el.search.delete.OperationByPage;
-import org.geosdi.geoplatform.experimental.el.search.delete.OperationByPage.OperationByPageSearch;
-import org.geosdi.geoplatform.experimental.el.search.delete.responsibility.IGPOperationHandlerManager;
+import org.geosdi.geoplatform.experimental.el.search.operation.OperationByPage;
+import org.geosdi.geoplatform.experimental.el.search.operation.OperationByPage.OperationByPageSearch;
+import org.geosdi.geoplatform.experimental.el.search.operation.responsibility.IGPOperationHandlerManager;
 
 import javax.annotation.Resource;
 import java.util.concurrent.CompletableFuture;

@@ -1,6 +1,6 @@
-package org.geosdi.geoplatform.experimental.el.search.delete.config;
+package org.geosdi.geoplatform.experimental.el.search.operation.config;
 
-import org.geosdi.geoplatform.experimental.el.search.delete.responsibility.IGPOperationHandlerManager;
+import org.geosdi.geoplatform.experimental.el.search.operation.responsibility.IGPOperationHandlerManager;
 import org.geosdi.geoplatform.experimental.el.search.strategy.IGPStrategyRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

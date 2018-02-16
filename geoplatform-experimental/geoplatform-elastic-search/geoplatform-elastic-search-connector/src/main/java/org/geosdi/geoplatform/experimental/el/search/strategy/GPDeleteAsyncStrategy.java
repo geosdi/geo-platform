@@ -8,7 +8,7 @@ import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.rest.RestStatus;
 import org.geosdi.geoplatform.experimental.el.dao.ElasticSearchDAO;
-import org.geosdi.geoplatform.experimental.el.search.delete.OperationByPage;
+import org.geosdi.geoplatform.experimental.el.search.operation.OperationByPage;
 import org.geosdi.geoplatform.experimental.el.search.strategy.task.GPElasticSearchDeleteTask;
 import org.springframework.stereotype.Component;
 

@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.experimental.el.search.strategy.task;
 import com.google.common.base.Preconditions;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.geosdi.geoplatform.experimental.el.dao.ElasticSearchDAO;
-import org.geosdi.geoplatform.experimental.el.search.delete.OperationByPage;
+import org.geosdi.geoplatform.experimental.el.search.operation.OperationByPage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

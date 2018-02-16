@@ -1,7 +1,7 @@
 package org.geosdi.geoplatform.experimental.el.search.strategy;
 
 import org.geosdi.geoplatform.experimental.el.dao.ElasticSearchDAO;
-import org.geosdi.geoplatform.experimental.el.search.delete.OperationByPage;
+import org.geosdi.geoplatform.experimental.el.search.operation.OperationByPage;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;

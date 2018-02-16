@@ -32,71 +32,33 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, operation this exception statement from your version.
  */
-package org.geosdi.geoplatform.experimental.el.search.delete;
+package org.geosdi.geoplatform.experimental.el.search.operation.responsibility;
 
-import com.google.common.base.Preconditions;
-import org.geosdi.geoplatform.experimental.el.dao.GPPageableElasticSearchDAO;
-
-import static org.geosdi.geoplatform.experimental.el.search.delete.OperationByPage.OperationByPageSearch;
+import org.geosdi.geoplatform.experimental.el.dao.ElasticSearchDAO;
+import org.geosdi.geoplatform.experimental.el.search.operation.OperationByPage;
+import org.geosdi.geoplatform.experimental.el.search.operation.OperationByPage.IOperationByPageResult;
+import org.geosdi.geoplatform.experimental.el.search.strategy.IGPStrategyRepository;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IOperationByPageSearchBuilder {
+abstract class AbstractParallelOperationHandler extends GPAbstractOperationHandler<ElasticSearchDAO> {
+
+    public AbstractParallelOperationHandler(IGPStrategyRepository strategyRepository) {
+        super(strategyRepository);
+    }
 
     /**
-     * @param thePage
-     * @param <P>
-     * @return {@link IOperationByPageSearchBuilder}
-     */
-    <P extends GPPageableElasticSearchDAO.PageAsync> IOperationByPageSearchBuilder withPage(P thePage);
-
-    /**
-     * @return {@link OperationByPage}
+     * @param page
+     * @param searchDAO
+     * @return {@link Result}
      * @throws Exception
      */
-    OperationByPage build() throws Exception;
-
-    /**
-     *
-     */
-    class OperationByPageSearchBuilder implements IOperationByPageSearchBuilder {
-
-        private GPPageableElasticSearchDAO.PageAsync page;
-
-        private OperationByPageSearchBuilder() {
-        }
-
-        public static IOperationByPageSearchBuilder newInstance() {
-            return new OperationByPageSearchBuilder();
-        }
-
-        /**
-         * @param thePage
-         * @return {@link IOperationByPageSearchBuilder}
-         */
-        @Override
-        public <P extends GPPageableElasticSearchDAO.PageAsync> IOperationByPageSearchBuilder withPage(P thePage) {
-            this.page = thePage;
-            return self();
-        }
-
-        /**
-         * @return {@link OperationByPage}
-         * @throws Exception
-         */
-        @Override
-        public OperationByPage build() throws Exception {
-            Preconditions.checkNotNull(this.page, "The Parameter Page must not be null.");
-            return new OperationByPageSearch(this.page);
-        }
-
-        /**
-         * @return {@link IOperationByPageSearchBuilder}
-         */
-        protected IOperationByPageSearchBuilder self() {
-            return this;
-        }
+    @Override
+    public <Result extends IOperationByPageResult, Page extends OperationByPage> Result operation(Page page,
+                                                                                                  ElasticSearchDAO searchDAO) throws Exception {
+        return (canDoOperation(page) ? internalOperation(page, searchDAO) : super.forwardOperation(page, searchDAO));
     }
+
 }

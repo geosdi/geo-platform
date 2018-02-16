@@ -32,15 +32,15 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, operation this exception statement from your version.
  */
-package org.geosdi.geoplatform.experimental.el.search.delete.responsibility;
+package org.geosdi.geoplatform.experimental.el.search.operation.responsibility;
 
 import org.geosdi.geoplatform.experimental.el.dao.ElasticSearchDAO;
-import org.geosdi.geoplatform.experimental.el.search.delete.OperationByPage;
-import org.geosdi.geoplatform.experimental.el.search.delete.OperationByPage.IOperationByPageResult;
+import org.geosdi.geoplatform.experimental.el.search.operation.OperationByPage;
+import org.geosdi.geoplatform.experimental.el.search.operation.OperationByPage.IOperationByPageResult;
 import org.geosdi.geoplatform.experimental.el.search.strategy.IGPStrategyRepository;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-import static org.geosdi.geoplatform.experimental.el.search.delete.responsibility.GPElasticSearchOperationHandler.GPElasticSearchDeleteHandlerType.NOT_PARALLEL_OPERATION_TYPE;
+import static org.geosdi.geoplatform.experimental.el.search.operation.responsibility.GPElasticSearchOperationHandler.GPElasticSearchDeleteHandlerType.NOT_PARALLEL_OPERATION_TYPE;
 import static org.geosdi.geoplatform.experimental.el.search.strategy.IGPOperationAsyncStrategy.AbstractOperationAsyncStrategy.PAGE_SIZE_LIMIT;
 
 /**

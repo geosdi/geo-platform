@@ -49,17 +49,20 @@ import org.geosdi.geoplatform.experimental.el.dao.store.IPageStore;
 import org.geosdi.geoplatform.experimental.el.dao.store.PageStore;
 import org.geosdi.geoplatform.experimental.el.search.bool.IBooleanSearch;
 import org.geosdi.geoplatform.experimental.el.search.date.IGPDateQuerySearch;
-import org.geosdi.geoplatform.experimental.el.search.delete.OperationByPage;
-import org.geosdi.geoplatform.experimental.el.search.strategy.IGPOperationAsyncStrategy;
+import org.geosdi.geoplatform.experimental.el.search.operation.OperationByPage;
 import org.geosdi.geoplatform.experimental.el.search.strategy.IGPOperationAsyncType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static java.util.stream.Stream.of;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -562,27 +565,46 @@ public interface GPPageableElasticSearchDAO<D extends Document> {
         private final IGPOperationAsyncType.OperationAsyncEnum operationType;
         private final GPElasticSearchUpdateHandler gpElasticSearchUpdateHandler;
 
-        public PageAsync(int theFrom, int theSize, IGPOperationAsyncType.OperationAsyncEnum operationType, GPElasticSearchUpdateHandler gpElasticSearchUpdateHandler) {
-            super(theFrom, theSize);
-            this.operationType = operationType;
-            this.gpElasticSearchUpdateHandler = gpElasticSearchUpdateHandler;
-        }
-
-        public PageAsync(int from, int size, IGPOperationAsyncType.OperationAsyncEnum operationType, GPElasticSearchUpdateHandler gpElasticSearchUpdateHandler, IBooleanSearch... queryList) {
-            super(null, null, from, size, queryList);
-            this.operationType = operationType;
-            this.gpElasticSearchUpdateHandler = gpElasticSearchUpdateHandler;
+        /**
+         * @param theFrom
+         * @param theSize
+         * @param theOperationType
+         * @param theGPElasticSearchUpdateHandler
+         */
+        public PageAsync(int theFrom, int theSize, @Nonnull(when = NEVER) IGPOperationAsyncType.OperationAsyncEnum theOperationType,
+                         @Nullable GPElasticSearchUpdateHandler theGPElasticSearchUpdateHandler) {
+            this(theFrom, theSize, theOperationType, theGPElasticSearchUpdateHandler, null);
         }
 
         /**
-         * @return {@link IGPOperationAsyncStrategy.OperationAsyncEnum}
+         * @param from
+         * @param size
+         * @param theOperationType
+         * @param theGPElasticSearchUpdateHandler
+         * @param queryList
+         */
+        public PageAsync(int from, int size, @Nonnull(when = NEVER) IGPOperationAsyncType.OperationAsyncEnum theOperationType,
+                         @Nullable GPElasticSearchUpdateHandler theGPElasticSearchUpdateHandler, IBooleanSearch... queryList) {
+            super(null, null, from, size, queryList);
+            checkArgument(((theOperationType == IGPOperationAsyncType.OperationAsyncEnum.UPDATE_ASYNC) &&
+                            (theGPElasticSearchUpdateHandler != null))
+                    || ((theOperationType == IGPOperationAsyncType.OperationAsyncEnum.DELETE_ASYNC) &&
+                            (theGPElasticSearchUpdateHandler == null)) ,
+                    "The Parameters are wrong.");
+            this.operationType = theOperationType;
+            this.gpElasticSearchUpdateHandler = theGPElasticSearchUpdateHandler;
+        }
+
+
+        /**
+         * @return {@link IGPOperationAsyncType.OperationAsyncEnum}
          */
         public IGPOperationAsyncType.OperationAsyncEnum getOperationType() {
             return operationType;
         }
 
         /**
-         * @return
+         * @return {@link GPElasticSearchUpdateHandler}
          */
         public GPElasticSearchUpdateHandler getGpElasticSearchUpdateHandler() {
             return gpElasticSearchUpdateHandler;

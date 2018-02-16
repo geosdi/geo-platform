@@ -32,21 +32,23 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, operation this exception statement from your version.
  */
-package org.geosdi.geoplatform.experimental.el.search.delete;
+package org.geosdi.geoplatform.experimental.el.search.operation;
 
-import com.google.common.base.Preconditions;
 import net.jcip.annotations.Immutable;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.common.unit.TimeValue;
+import org.geosdi.geoplatform.experimental.el.api.model.Document;
 import org.geosdi.geoplatform.experimental.el.dao.GPElasticSearchUpdateHandler;
 import org.geosdi.geoplatform.experimental.el.dao.GPPageableElasticSearchDAO;
 import org.geosdi.geoplatform.experimental.el.search.strategy.IGPOperationAsyncType;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface OperationByPage {
+public interface OperationByPage extends IOperationByPage<Document>{
 
     /**
      * @param builder
@@ -112,7 +114,7 @@ public interface OperationByPage {
         private final GPPageableElasticSearchDAO.PageAsync page;
 
         public OperationByPageSearch(GPPageableElasticSearchDAO.PageAsync thePage) {
-            Preconditions.checkNotNull(thePage, "The Parameter Page must not be null.");
+            checkNotNull(thePage, "The Parameter Page must not be null.");
             this.page = thePage;
         }
 
@@ -124,6 +126,16 @@ public interface OperationByPage {
         @Override
         public <Builder extends SearchRequestBuilder> Builder buildPage(Builder builder) throws Exception {
             return this.page.buildPage(builder);
+        }
+
+        /**
+         *
+         * @param value
+         * @return
+         */
+        @Override
+        public Document update(Document value) {
+            return this.page.getGpElasticSearchUpdateHandler().updateEntity(value);
         }
 
         /**

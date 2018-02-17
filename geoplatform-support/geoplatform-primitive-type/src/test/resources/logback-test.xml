@@ -24,5 +24,6 @@
     <logger name="org.geosdi.geoplatform.support.primitive.string.responsibility" level="debug"/>
     <logger name="org.geosdi.geoplatform.support.primitive.bridge.finder.GPPrimitiveImplementorFinder"
             level="trace"/>
+    <logger name="org.geosdi.geoplatform.support.primitive.string.responsibility" level="trace"/>
 
 </configuration>

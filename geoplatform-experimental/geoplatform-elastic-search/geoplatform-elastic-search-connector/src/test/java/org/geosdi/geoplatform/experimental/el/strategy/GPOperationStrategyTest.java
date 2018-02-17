@@ -81,5 +81,4 @@ public class GPOperationStrategyTest {
         IGPOperationAsyncStrategy asyncStrategy = this.gpStrategyOperationRepository.getStrategyByType(IGPOperationAsyncType.OperationAsyncEnum.UPDATE_ASYNC);
         Assert.assertTrue("@@@@@@@@@@@@@@@@@@DELETE STRATEGY", asyncStrategy.getStrateyType() == IGPOperationAsyncType.OperationAsyncEnum.UPDATE_ASYNC);
     }
-
 }

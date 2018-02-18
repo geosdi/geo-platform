@@ -35,7 +35,9 @@
 package org.geosdi.geoplatform.support.primitive.string.responsibility;
 
 import org.geosdi.geoplatform.support.primitive.string.responsibility.IGPPrimitiveParserHandlerManager.GPPrimitiveParserHandlerManager;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,6 +45,7 @@ import org.slf4j.LoggerFactory;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@FixMethodOrder(value = MethodSorters.NAME_ASCENDING)
 public class GPPrimitiveParserTest {
 
     private static final Logger logger = LoggerFactory.getLogger(GPPrimitiveParserTest.class);
@@ -50,38 +53,50 @@ public class GPPrimitiveParserTest {
     private static final IGPPrimitiveParserHandlerManager primitiveParserHandlerManager = new GPPrimitiveParserHandlerManager();
 
     @Test
-    public void parseStringTest() throws Exception {
+    public void a_parseStringTest() throws Exception {
         logger.info("#######################PARSE_STRING : {}\n",
                 primitiveParserHandlerManager.parseValue("This is a Simple Test").getSimpleName());
     }
 
     @Test
-    public void parseIntegerTest() throws Exception {
+    public void b_parseIntegerTest() throws Exception {
         logger.info("#######################PARSE_INTEGER : {}\n",
                 primitiveParserHandlerManager.parseValue("34").getSimpleName());
     }
 
     @Test
-    public void parseDoubleTest() throws Exception {
+    public void c_parseDoubleTest() throws Exception {
         logger.info("#######################PARSE_DOUBLE : {}\n",
                 primitiveParserHandlerManager.parseValue("34.89").getSimpleName());
     }
 
     @Test
-    public void parseDateTimeTest() throws Exception {
+    public void d_parseDateTimeTest() throws Exception {
         logger.info("#######################PARSE_DATE_TIME : {}\n",
                 primitiveParserHandlerManager.parseValue("2001-07-04T12:08:56.235-0700").getSimpleName());
     }
 
     @Test
-    public void parseDateTimeAnotherTest() throws Exception {
+    public void e_parseDateTimeAnotherTest() throws Exception {
         logger.info("#######################PARSE_DATE_TIME : {}\n",
                 primitiveParserHandlerManager.parseValue("2016-08-28 14:36:15").getSimpleName());
     }
 
     @Test
-    public void parseDateTime1Test() throws Exception {
+    public void f_parseDateTime1Test() throws Exception {
         logger.info("#######################PARSE_DATE_TIME : {}\n",
                 primitiveParserHandlerManager.parseValue("2010-07-05T11:47:14Z").getSimpleName());
+    }
+
+    @Test
+    public void g_parseNumberTest() throws Exception {
+        logger.info("#######################PARSE_NUMBER : {}\n",
+                primitiveParserHandlerManager.parseValue("1,900,900.23").getSimpleName());
+    }
+
+    @Test
+    public void h_parseNumberTest() throws Exception {
+        logger.info("#######################PARSE_NUMBER : {}\n",
+                primitiveParserHandlerManager.parseValue("1.900.900,23").getSimpleName());
     }
 }

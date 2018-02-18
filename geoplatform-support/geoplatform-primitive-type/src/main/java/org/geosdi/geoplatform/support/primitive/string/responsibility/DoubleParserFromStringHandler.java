@@ -43,7 +43,7 @@ import static org.geosdi.geoplatform.support.primitive.string.responsibility.GPP
 class DoubleParserFromStringHandler extends AbstractPrimitiveParserFromStringHandler<Double> {
 
     public DoubleParserFromStringHandler() {
-        super.setSuccessor(new LongParserFromStringHandler());
+        super.setSuccessor(new NumberParserFromStringHandler());
     }
 
     /**

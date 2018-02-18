@@ -43,6 +43,8 @@ import org.joda.time.format.DateTimeFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
 import static org.geosdi.geoplatform.support.primitive.string.responsibility.GPPrimitiveParserFromStringHandler.IGPPrimitiveParserFromStringType.GPPrimitiveParserFromStringType.TEMPORAL;
 
 /**
@@ -99,12 +101,12 @@ class TemporalParserFromStringHandler extends AbstractPrimitiveParserFromStringH
                 DateTime dateTime = DateTime.parse(value, DateTimeFormat.forPattern(patter).withLocale(locale));
                 logger.debug("##########################PRIMITIVE_PARSER : {} parse value {} as DateTime : {}.\n",
                         getParserType(), value, dateTime);
-                return Boolean.TRUE;
+                return TRUE;
             } catch (Exception ex) {
                 logger.trace("######################ERROR FOR PARSER : {} , trying to parse Value : {} , " +
                         "with Pattern :{} and Locale : {}", getParserType(), value, patter, locale);
             }
         }
-        return Boolean.FALSE;
+        return FALSE;
     }
 }

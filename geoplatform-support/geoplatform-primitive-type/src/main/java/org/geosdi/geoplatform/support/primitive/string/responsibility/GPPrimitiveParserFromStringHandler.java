@@ -81,6 +81,7 @@ public interface GPPrimitiveParserFromStringHandler<Type extends Object> {
         enum GPPrimitiveParserFromStringType implements IGPPrimitiveParserFromStringType {
             INTEGER("Interger"),
             DOUBLE("Double"),
+            NUMBER("Number"),
             LONG("Long"),
             TEMPORAL("Temporal"),
             STRING("String");

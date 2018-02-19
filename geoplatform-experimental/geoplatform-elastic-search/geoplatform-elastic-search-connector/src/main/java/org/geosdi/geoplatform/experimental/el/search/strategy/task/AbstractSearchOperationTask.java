@@ -59,8 +59,13 @@ public abstract class AbstractSearchOperationTask implements Callable<BulkRespon
     protected final int start;
     protected final int taskNumber;
 
+    /**
+     * @param theSearchDAO
+     * @param thePage
+     * @param taskNumber
+     */
     public AbstractSearchOperationTask(ElasticSearchDAO theSearchDAO, OperationByPage thePage,
-                                       int taskNumber) {
+            int taskNumber) {
         Preconditions.checkNotNull(theSearchDAO, "Parameter SearchDAO must not be null.");
         Preconditions.checkNotNull(thePage, "Parameter Page must not be null.");
         this.searchDAO = theSearchDAO;

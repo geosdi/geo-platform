@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.experimental.el.search.operation.responsibility;
 import org.geosdi.geoplatform.experimental.el.dao.ElasticSearchDAO;
 import org.geosdi.geoplatform.experimental.el.search.operation.OperationByPage;
 import org.geosdi.geoplatform.experimental.el.search.operation.OperationByPage.IOperationByPageResult;
-import org.geosdi.geoplatform.experimental.el.search.strategy.IGPStrategyRepository;
+import org.geosdi.geoplatform.experimental.el.search.strategy.GPStrategyRepository;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -45,7 +45,7 @@ import org.geosdi.geoplatform.experimental.el.search.strategy.IGPStrategyReposit
  */
 abstract class AbstractParallelOperationHandler extends GPAbstractOperationHandler<ElasticSearchDAO> {
 
-    public AbstractParallelOperationHandler(IGPStrategyRepository strategyRepository) {
+    public AbstractParallelOperationHandler(GPStrategyRepository strategyRepository) {
         super(strategyRepository);
     }
 

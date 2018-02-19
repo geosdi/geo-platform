@@ -8,21 +8,22 @@ import org.springframework.beans.factory.InitializingBean;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface IGPStrategyRepository extends InitializingBean, IGPStrategyBuildMap {
+public interface GPStrategyRepository extends InitializingBean, GPStrategyRegister {
 
     /**
-     * @param operationAsyncEnum
+     * @param theType
      * @return {@link IGPOperationAsyncStrategy}
      */
-    <GPoperationAsynStrategy extends IGPOperationAsyncStrategy, Type extends IGPOperationAsyncType> GPoperationAsynStrategy getStrategyByType(Type operationAsyncEnum);
+    <GPoperationAsynStrategy extends IGPOperationAsyncStrategy, Type extends IGPOperationAsyncType> GPoperationAsynStrategy getStrategyByType(Type theType);
 
     /**
-     * @param operationAsyncEnum
+     * @param theType
      * @param <Result>
      * @param <Type>
      * @return {@link OperationByPage.IOperationByPageResult}
      */
-    <Result extends OperationByPage.IOperationByPageResult, Type extends IGPOperationAsyncType, Page extends OperationByPage> Result getSingleOperation(Type operationAsyncEnum, Page page, ElasticSearchDAO searchDAO) throws Exception;
+    <Result extends OperationByPage.IOperationByPageResult, Type extends IGPOperationAsyncType, Page extends OperationByPage> Result getSingleOperation(Type theType,
+            Page page, ElasticSearchDAO searchDAO) throws Exception;
 
     /**
      * @param operationAsyncEnum

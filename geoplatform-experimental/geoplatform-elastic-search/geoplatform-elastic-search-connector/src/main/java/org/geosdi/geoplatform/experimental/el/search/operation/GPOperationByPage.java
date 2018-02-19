@@ -7,13 +7,11 @@ import org.geosdi.geoplatform.experimental.el.api.model.Document;
  * @email vito.salvia@gmail.com
  */
 @FunctionalInterface
-public interface IOperationByPage<D extends Document> {
+public interface GPOperationByPage<D extends Document> {
 
     /**
-     *
      * @param value
      * @return {@link D}
      */
     D update(D value);
-
 }

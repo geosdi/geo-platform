@@ -40,7 +40,7 @@ import org.geosdi.geoplatform.experimental.el.dao.ElasticSearchDAO;
 import org.geosdi.geoplatform.experimental.el.search.operation.OperationByPage;
 import org.geosdi.geoplatform.experimental.el.search.operation.OperationByPage.IOperationByPageResult;
 import org.geosdi.geoplatform.experimental.el.search.operation.OperationByPage.OperationByPageSearchDecorator;
-import org.geosdi.geoplatform.experimental.el.search.strategy.IGPStrategyRepository;
+import org.geosdi.geoplatform.experimental.el.search.strategy.GPStrategyRepository;
 
 import static org.geosdi.geoplatform.experimental.el.search.operation.responsibility.GPElasticSearchOperationHandler.GPElasticSearchDeleteHandlerType.PREPARER_OPERATION_TYPE;
 
@@ -50,7 +50,7 @@ import static org.geosdi.geoplatform.experimental.el.search.operation.responsibi
  */
 class GPPrepareOperationHandler extends GPAbstractOperationHandler<ElasticSearchDAO> {
 
-    public GPPrepareOperationHandler(IGPStrategyRepository strategyRepository) {
+    public GPPrepareOperationHandler(GPStrategyRepository strategyRepository) {
         super(strategyRepository);
         super.setSuccessor(new GPSingleOperationHandler(strategyRepository));
     }
@@ -63,8 +63,7 @@ class GPPrepareOperationHandler extends GPAbstractOperationHandler<ElasticSearch
      */
     @Override
     public <Result extends IOperationByPageResult, Page extends OperationByPage> Result operation(Page page,
-                                                                                                  ElasticSearchDAO searchDAO
-    ) throws Exception {
+            ElasticSearchDAO searchDAO) throws Exception {
         return (canDoOperation(page) ? internalOperation(page, searchDAO) : super.forwardOperation(page, searchDAO));
     }
 
@@ -76,7 +75,7 @@ class GPPrepareOperationHandler extends GPAbstractOperationHandler<ElasticSearch
      */
     @Override
     protected final <Result extends IOperationByPageResult, Page extends OperationByPage> Result internalOperation(Page page,
-                                                                                                                   ElasticSearchDAO searchDAO) throws Exception {
+            ElasticSearchDAO searchDAO) throws Exception {
         Preconditions.checkNotNull(page, "Parameter Page must not be null.");
         Preconditions.checkNotNull(searchDAO, "Parameter SearchDAO must not be null.");
 

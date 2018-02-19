@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.experimental.el.search.operation.responsibility;
 import org.geosdi.geoplatform.experimental.el.dao.ElasticSearchDAO;
 import org.geosdi.geoplatform.experimental.el.search.operation.OperationByPage;
 import org.geosdi.geoplatform.experimental.el.search.operation.OperationByPage.IOperationByPageResult;
-import org.geosdi.geoplatform.experimental.el.search.strategy.IGPStrategyRepository;
+import org.geosdi.geoplatform.experimental.el.search.strategy.GPStrategyRepository;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -53,7 +53,7 @@ public interface IGPOperationHandlerManager {
      * @return {@link Result}
      * @throws Exception
      */
-    <Result extends IOperationByPageResult, Page extends OperationByPage, StrategyRepository extends IGPStrategyRepository> Result operation(Page page,
+    <Result extends IOperationByPageResult, Page extends OperationByPage, StrategyRepository extends GPStrategyRepository> Result operation(Page page,
                                                                                                                                              ElasticSearchDAO searchDAO) throws Exception;
 
     /**
@@ -63,7 +63,7 @@ public interface IGPOperationHandlerManager {
 
         private final GPAbstractOperationHandler<ElasticSearchDAO> preparerOperationHandler;
 
-        public GPOperationHandlerManager(IGPStrategyRepository strategyRepository) {
+        public GPOperationHandlerManager(GPStrategyRepository strategyRepository) {
             this.preparerOperationHandler = new GPPrepareOperationHandler(strategyRepository);
         }
 
@@ -74,7 +74,7 @@ public interface IGPOperationHandlerManager {
          * @throws Exception
          */
         @Override
-        public <Result extends IOperationByPageResult, Page extends OperationByPage, StrategyRepository extends IGPStrategyRepository> Result operation(Page page, ElasticSearchDAO searchDAO) throws Exception {
+        public <Result extends IOperationByPageResult, Page extends OperationByPage, StrategyRepository extends GPStrategyRepository> Result operation(Page page, ElasticSearchDAO searchDAO) throws Exception {
             return this.preparerOperationHandler.operation(page, searchDAO);
         }
     }

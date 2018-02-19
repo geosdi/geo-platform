@@ -6,9 +6,42 @@ package org.geosdi.geoplatform.experimental.el.search.strategy;
  */
 public interface IGPOperationAsyncType {
 
-    enum OperationAsyncEnum implements IGPOperationAsyncType {
+    /**
+     * @return {@link String}
+     */
+    String getType();
 
-        DELETE_ASYNC, UPDATE_ASYNC;
+    /**
+     *
+     */
+    enum OperationAsyncType implements IGPOperationAsyncType {
 
+        DELETE("DELETE_ASYNC"),
+        UPDATE("UPDATE_ASYNC");
+
+        private final String type;
+
+        /**
+         * @param theType
+         */
+        OperationAsyncType(String theType) {
+            this.type = theType;
+        }
+
+        /**
+         * @return {@link String}
+         */
+        @Override
+        public String getType() {
+            return this.type;
+        }
+
+        /**
+         * @return {@link String}
+         */
+        @Override
+        public String toString() {
+            return this.type;
+        }
     }
 }

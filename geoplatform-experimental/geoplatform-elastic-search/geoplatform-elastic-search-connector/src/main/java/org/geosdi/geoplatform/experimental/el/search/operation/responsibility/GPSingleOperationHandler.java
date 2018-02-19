@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.experimental.el.search.operation.responsibility;
 import org.geosdi.geoplatform.experimental.el.dao.ElasticSearchDAO;
 import org.geosdi.geoplatform.experimental.el.search.operation.OperationByPage;
 import org.geosdi.geoplatform.experimental.el.search.operation.OperationByPage.IOperationByPageResult;
-import org.geosdi.geoplatform.experimental.el.search.strategy.IGPStrategyRepository;
+import org.geosdi.geoplatform.experimental.el.search.strategy.GPStrategyRepository;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static org.geosdi.geoplatform.experimental.el.search.operation.responsibility.GPElasticSearchOperationHandler.GPElasticSearchDeleteHandlerType.NOT_PARALLEL_OPERATION_TYPE;
@@ -49,7 +49,7 @@ import static org.geosdi.geoplatform.experimental.el.search.strategy.IGPOperatio
  */
 class GPSingleOperationHandler extends GPAbstractOperationHandler<ElasticSearchDAO> {
 
-    public GPSingleOperationHandler(IGPStrategyRepository strategyRepository) {
+    public GPSingleOperationHandler(GPStrategyRepository strategyRepository) {
         super(strategyRepository);
         super.setSuccessor(new GPParallelOperationHandler(strategyRepository));
     }
@@ -73,7 +73,7 @@ class GPSingleOperationHandler extends GPAbstractOperationHandler<ElasticSearchD
      */
     @Override
     protected <Result extends IOperationByPageResult, Page extends OperationByPage> Result internalOperation(Page page,
-                                                                                                             ElasticSearchDAO searchDAO) throws Exception {
+            ElasticSearchDAO searchDAO) throws Exception {
         checkNotNull(page, "Parameter Page must not be null.");
         checkNotNull(searchDAO, "Parameter SearchDAO must not be null.");
         return this.strategyRepository.getSingleOperation(page.getOperation(), page, searchDAO);

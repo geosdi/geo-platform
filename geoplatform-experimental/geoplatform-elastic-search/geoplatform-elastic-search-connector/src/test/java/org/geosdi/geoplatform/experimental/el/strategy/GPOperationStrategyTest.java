@@ -34,9 +34,8 @@
  */
 package org.geosdi.geoplatform.experimental.el.strategy;
 
-import org.geosdi.geoplatform.experimental.el.search.strategy.GPStrategyOperationRepository;
+import org.geosdi.geoplatform.experimental.el.search.strategy.GPStrategyRepository;
 import org.geosdi.geoplatform.experimental.el.search.strategy.IGPOperationAsyncStrategy;
-import org.geosdi.geoplatform.experimental.el.search.strategy.IGPOperationAsyncType;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
@@ -48,6 +47,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
+
+import static org.geosdi.geoplatform.experimental.el.search.strategy.IGPOperationAsyncType.OperationAsyncType.DELETE;
+import static org.geosdi.geoplatform.experimental.el.search.strategy.IGPOperationAsyncType.OperationAsyncType.UPDATE;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -61,8 +63,8 @@ public class GPOperationStrategyTest {
     @GeoPlatformLog
     static Logger logger;
     //
-    @Resource(name = "gpStrategyOperationRepository")
-    private GPStrategyOperationRepository gpStrategyOperationRepository;
+    @Resource(name = "strategyOperationRepository")
+    private GPStrategyRepository gpStrategyOperationRepository;
 
     @Test
     public void a_gpStrategyRepositoryConfigTest() {
@@ -72,13 +74,13 @@ public class GPOperationStrategyTest {
 
     @Test
     public void b_getStrategyType() {
-        IGPOperationAsyncStrategy asyncStrategy = this.gpStrategyOperationRepository.getStrategyByType(IGPOperationAsyncType.OperationAsyncEnum.DELETE_ASYNC);
-        Assert.assertTrue("@@@@@@@@@@@@@@@@@@DELETE STRATEGY", asyncStrategy.getStrateyType() == IGPOperationAsyncType.OperationAsyncEnum.DELETE_ASYNC);
+        IGPOperationAsyncStrategy asyncStrategy = this.gpStrategyOperationRepository.getStrategyByType(DELETE);
+        Assert.assertTrue("@@@@@@@@@@@@@@@@@@DELETE STRATEGY", asyncStrategy.getStrateyType() == DELETE);
     }
 
     @Test
     public void c_getStrategyType() {
-        IGPOperationAsyncStrategy asyncStrategy = this.gpStrategyOperationRepository.getStrategyByType(IGPOperationAsyncType.OperationAsyncEnum.UPDATE_ASYNC);
-        Assert.assertTrue("@@@@@@@@@@@@@@@@@@DELETE STRATEGY", asyncStrategy.getStrateyType() == IGPOperationAsyncType.OperationAsyncEnum.UPDATE_ASYNC);
+        IGPOperationAsyncStrategy asyncStrategy = this.gpStrategyOperationRepository.getStrategyByType(UPDATE);
+        Assert.assertTrue("@@@@@@@@@@@@@@@@@@DELETE STRATEGY", asyncStrategy.getStrateyType() == UPDATE);
     }
 }

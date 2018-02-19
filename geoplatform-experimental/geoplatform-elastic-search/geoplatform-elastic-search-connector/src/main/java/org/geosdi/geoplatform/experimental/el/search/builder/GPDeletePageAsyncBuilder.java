@@ -1,6 +1,6 @@
 package org.geosdi.geoplatform.experimental.el.search.builder;
 
-import org.geosdi.geoplatform.experimental.el.search.strategy.IGPOperationAsyncType;
+import static org.geosdi.geoplatform.experimental.el.search.strategy.IGPOperationAsyncType.OperationAsyncType.DELETE;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -9,11 +9,14 @@ import org.geosdi.geoplatform.experimental.el.search.strategy.IGPOperationAsyncT
 public class GPDeletePageAsyncBuilder extends IGPPageAsyncBuilder.GPPageAsyncBuilder {
 
     private GPDeletePageAsyncBuilder() {
-        super(IGPOperationAsyncType.OperationAsyncType.DELETE);
+        super(DELETE);
     }
 
-    public static <AsyncBuilder extends IGPPageAsyncBuilder> AsyncBuilder gpDeletePageAsyncBuilder() {
+    /**
+     * @param <AsyncBuilder>
+     * @return {@link AsyncBuilder}
+     */
+    public static <AsyncBuilder extends IGPPageAsyncBuilder> AsyncBuilder deletePageAsyncBuilder() {
         return (AsyncBuilder) new GPDeletePageAsyncBuilder();
     }
-
 }

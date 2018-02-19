@@ -26,25 +26,19 @@ public interface IGPPageAsyncBuilder {
     <AsyncBuilder extends IGPPageAsyncBuilder> AsyncBuilder withSize(int theSize);
 
     /**
+     * @param theField
      * @param theSortOrder
      * @param <AsyncBuiler>
      * @return {@link IGPPageAsyncBuilder}
      */
-    <AsyncBuiler extends IGPPageAsyncBuilder> AsyncBuiler withSortOrder(SortOrder theSortOrder);
+    <AsyncBuiler extends IGPPageAsyncBuilder> AsyncBuiler withSortOrder(String theField, SortOrder theSortOrder);
 
     /**
-     * @param theIBooleanSearch
+     * @param theBooleanSearch
      * @param <AsyncBuilder>
      * @return {@link IGPPageAsyncBuilder}
      */
-    <AsyncBuilder extends IGPPageAsyncBuilder> AsyncBuilder withIBooleanSearch(IBooleanSearch... theIBooleanSearch);
-
-    /**
-     * @param theField
-     * @param <AsyncBuilder>
-     * @return {@link IGPPageAsyncBuilder}
-     */
-    <AsyncBuilder extends IGPPageAsyncBuilder> AsyncBuilder withField(String theField);
+    <AsyncBuilder extends IGPPageAsyncBuilder> AsyncBuilder withIBooleanSearch(IBooleanSearch... theBooleanSearch);
 
     /**
      * @return {@link GPPageableAsyncElasticSearchDAO.PageAsync}
@@ -57,7 +51,7 @@ public interface IGPPageAsyncBuilder {
         protected int from;
         protected int size;
         protected SortOrder sortOrder;
-        protected IBooleanSearch[] iBooleanSearch;
+        protected IBooleanSearch[] booleanSearch;
         protected String field;
 
         protected GPPageAsyncBuilder(IGPOperationAsyncType.OperationAsyncType operationAsyncType) {
@@ -92,30 +86,20 @@ public interface IGPPageAsyncBuilder {
          * @return {@link IGPPageAsyncBuilder}
          */
         @Override
-        public <AsyncBuiler extends IGPPageAsyncBuilder> AsyncBuiler withSortOrder(SortOrder theSortOrder) {
+        public <AsyncBuiler extends IGPPageAsyncBuilder> AsyncBuiler withSortOrder(String theField, SortOrder theSortOrder) {
+            this.field = theField;
             this.sortOrder = theSortOrder;
             return self();
         }
 
         /**
-         * @param theIBooleanSearch
+         * @param theBooleanSearch
          * @param <AsyncBuilder>
          * @return {@link IGPPageAsyncBuilder}
          */
         @Override
-        public <AsyncBuilder extends IGPPageAsyncBuilder> AsyncBuilder withIBooleanSearch(IBooleanSearch... theIBooleanSearch) {
-            this.iBooleanSearch = theIBooleanSearch;
-            return self();
-        }
-
-        /**
-         * @param theField
-         * @param <AsyncBuilder>
-         * @return {@link IGPPageAsyncBuilder}
-         */
-        @Override
-        public <AsyncBuilder extends IGPPageAsyncBuilder> AsyncBuilder withField(String theField) {
-            this.field = theField;
+        public <AsyncBuilder extends IGPPageAsyncBuilder> AsyncBuilder withIBooleanSearch(IBooleanSearch... theBooleanSearch) {
+            this.booleanSearch = theBooleanSearch;
             return self();
         }
 
@@ -125,7 +109,7 @@ public interface IGPPageAsyncBuilder {
         @Override
         public GPPageableAsyncElasticSearchDAO.PageAsync build() {
             return new GPPageableAsyncElasticSearchDAO.PageAsync(this.field, this.sortOrder,
-                    this.from, this.size, this.operationAsyncType, this.iBooleanSearch);
+                    this.from, this.size, this.operationAsyncType, this.booleanSearch);
         }
 
         /**

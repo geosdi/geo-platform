@@ -34,18 +34,12 @@
  */
 package org.geosdi.geoplatform.experimental.el.dao;
 
-import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.rest.RestStatus;
 import org.elasticsearch.search.aggregations.AbstractAggregationBuilder;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
-import org.geosdi.geoplatform.experimental.el.search.operation.OperationByPage;
-import org.geosdi.geoplatform.experimental.el.search.operation.OperationByPage.OperationByPageSearch;
-import org.geosdi.geoplatform.experimental.el.search.operation.responsibility.IGPOperationHandlerManager;
 
-import javax.annotation.Resource;
-import java.util.concurrent.CompletableFuture;
 import java.util.stream.Stream;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -56,10 +50,7 @@ import static java.util.stream.Collectors.toList;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class PageableElasticSearchDAO<D extends Document> extends GPBaseElasticSearchDAO<D> {
-
-    @Resource(name = "operationHandlerManager")
-    private IGPOperationHandlerManager operationHandlerManager;
+public abstract class PageableElasticSearchDAO<D extends Document> extends PageableAsyncElasticSearchDAO<D> {
 
     @Override
     public <P extends Page> IPageResult<D> find(P page) throws Exception {
@@ -168,7 +159,7 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends GPBas
      */
     @Override
     public <P extends Page, V extends Document> IPageResult<V> find(P page, String[] includeFields, String[] excludeFields,
-                                                                    Class<V> classe) throws Exception {
+            Class<V> classe) throws Exception {
         checkArgument((page != null), "Page must not be null.");
         super.refreshIndex();
         SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient
@@ -235,37 +226,6 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends GPBas
             throw new IllegalStateException("Problem in Search : " + searchResponse.status());
         }
         return searchResponse;
-    }
-
-    /**
-     * s
-     *
-     * @param page
-     * @throws Exception
-     */
-    @Override
-    public <Result extends OperationByPage.IOperationByPageResult, P extends PageAsync> Result operationByPage(P page) throws Exception {
-        checkNotNull(page, "Parameter Page must not be null.");
-        return operationHandlerManager.operation(new OperationByPageSearch(page), this);
-    }
-
-    /**
-     * @param page
-     * @return {@link CompletableFuture<BulkResponse>}
-     * @throws Exception
-     */
-    @Override
-    public <Result extends OperationByPage.IOperationByPageResult, P extends PageAsync> CompletableFuture<Result> operationByPageAsync(P page) throws Exception {
-        return CompletableFuture.supplyAsync(() -> {
-
-            try {
-                return operationByPage(page);
-            } catch (Exception ex) {
-                logger.error("@@@@@@@@@@@@@@@@@@@@@@@@PageableElasticSearchDAO#operationByPageAsync error : {}\n",
-                        ex.getMessage());
-                throw new IllegalStateException(ex);
-            }
-        }, this.elasticSearchExecutor);
     }
 
     /**

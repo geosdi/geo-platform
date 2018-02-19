@@ -48,7 +48,5 @@ public interface IGPOperationAsyncStrategy {
                 numberTasks += 1;
             return numberTasks;
         }
-
-
     }
 }

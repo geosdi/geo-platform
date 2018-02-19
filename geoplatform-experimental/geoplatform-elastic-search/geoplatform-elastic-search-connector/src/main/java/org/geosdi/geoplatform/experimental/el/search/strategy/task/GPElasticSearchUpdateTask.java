@@ -53,8 +53,13 @@ import static org.geosdi.geoplatform.experimental.el.search.strategy.IGPOperatio
  */
 public class GPElasticSearchUpdateTask extends AbstractSearchOperationTask {
 
+    /**
+     * @param theSearchDAO
+     * @param thePage
+     * @param taskNumber
+     */
     public GPElasticSearchUpdateTask(ElasticSearchDAO theSearchDAO, OperationByPage thePage,
-                                     int taskNumber) {
+            int taskNumber) {
         super(theSearchDAO, thePage, taskNumber);
     }
 

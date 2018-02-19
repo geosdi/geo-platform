@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.experimental.el.search.operation.responsibility;
 import org.geosdi.geoplatform.experimental.el.dao.ElasticSearchDAO;
 import org.geosdi.geoplatform.experimental.el.search.operation.OperationByPage;
 import org.geosdi.geoplatform.experimental.el.search.operation.OperationByPage.IOperationByPageResult;
-import org.geosdi.geoplatform.experimental.el.search.strategy.IGPStrategyRepository;
+import org.geosdi.geoplatform.experimental.el.search.strategy.GPStrategyRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -51,10 +51,10 @@ abstract class GPAbstractOperationHandler<SearchDAO extends ElasticSearchDAO>
         implements GPElasticSearchOperationHandler<SearchDAO> {
 
     protected final Logger logger = LoggerFactory.getLogger(this.getClass());
-    protected final IGPStrategyRepository strategyRepository;
+    protected final GPStrategyRepository strategyRepository;
     protected GPAbstractOperationHandler<SearchDAO> successor;
 
-    public GPAbstractOperationHandler(IGPStrategyRepository thsStrategyRepository) {
+    public GPAbstractOperationHandler(GPStrategyRepository thsStrategyRepository) {
         checkArgument(thsStrategyRepository != null, "The Parameter theStrategyRepository must not be null");
         this.strategyRepository = thsStrategyRepository;
     }
@@ -68,7 +68,7 @@ abstract class GPAbstractOperationHandler<SearchDAO extends ElasticSearchDAO>
      * @throws Exception
      */
     protected <Result extends IOperationByPageResult, Page extends OperationByPage> Result forwardOperation(Page page,
-                                                                                                            SearchDAO searchDAO) throws Exception {
+            SearchDAO searchDAO) throws Exception {
         if (successor != null) {
             return successor.operation(page, searchDAO);
         }
@@ -93,7 +93,7 @@ abstract class GPAbstractOperationHandler<SearchDAO extends ElasticSearchDAO>
      * @throws Exception
      */
     protected abstract <Result extends IOperationByPageResult, Page extends OperationByPage> Result internalOperation(Page page,
-                                                                                                                      SearchDAO searchDAO) throws Exception;
+            SearchDAO searchDAO) throws Exception;
 
     /**
      * @param theSuccessor

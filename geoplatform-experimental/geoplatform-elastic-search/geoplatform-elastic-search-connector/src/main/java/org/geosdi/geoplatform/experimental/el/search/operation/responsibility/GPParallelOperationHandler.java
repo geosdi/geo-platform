@@ -38,7 +38,7 @@ import com.google.common.base.Preconditions;
 import org.geosdi.geoplatform.experimental.el.dao.ElasticSearchDAO;
 import org.geosdi.geoplatform.experimental.el.search.operation.OperationByPage;
 import org.geosdi.geoplatform.experimental.el.search.operation.OperationByPage.IOperationByPageResult;
-import org.geosdi.geoplatform.experimental.el.search.strategy.IGPStrategyRepository;
+import org.geosdi.geoplatform.experimental.el.search.strategy.GPStrategyRepository;
 
 import static org.geosdi.geoplatform.experimental.el.search.operation.responsibility.GPElasticSearchOperationHandler.GPElasticSearchDeleteHandlerType.PARALLEL_OPERATION_TYPE;
 import static org.geosdi.geoplatform.experimental.el.search.strategy.IGPOperationAsyncStrategy.AbstractOperationAsyncStrategy.PAGE_SIZE_LIMIT;
@@ -49,7 +49,7 @@ import static org.geosdi.geoplatform.experimental.el.search.strategy.IGPOperatio
  */
 class GPParallelOperationHandler extends AbstractParallelOperationHandler {
 
-    public GPParallelOperationHandler(IGPStrategyRepository strategyRepository) {
+    public GPParallelOperationHandler(GPStrategyRepository strategyRepository) {
         super(strategyRepository);
     }
 

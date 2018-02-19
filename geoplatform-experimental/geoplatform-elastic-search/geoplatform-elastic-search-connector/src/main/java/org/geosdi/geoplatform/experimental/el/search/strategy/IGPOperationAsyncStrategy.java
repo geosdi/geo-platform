@@ -30,13 +30,17 @@ public interface IGPOperationAsyncStrategy {
     /**
      * @return
      */
-    IGPOperationAsyncType.OperationAsyncEnum getStrateyType();
+    IGPOperationAsyncType.OperationAsyncType getStrateyType();
 
     abstract class AbstractOperationAsyncStrategy implements IGPOperationAsyncStrategy {
 
         public static final Integer PAGE_SIZE_LIMIT = 500;
         protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+        /**
+         * @param totalElements
+         * @return {@link Integer}
+         */
         protected Integer calculateNumberOfTasks(int totalElements) {
             int numberTasks = totalElements / PAGE_SIZE_LIMIT;
             int pageRimaing = PAGE_SIZE_LIMIT - (numberTasks * PAGE_SIZE_LIMIT);
@@ -47,5 +51,4 @@ public interface IGPOperationAsyncStrategy {
 
 
     }
-
 }

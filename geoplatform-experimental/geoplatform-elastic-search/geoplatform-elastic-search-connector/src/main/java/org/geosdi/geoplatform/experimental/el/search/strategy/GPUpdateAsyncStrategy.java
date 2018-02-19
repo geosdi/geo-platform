@@ -25,7 +25,7 @@ import static java.util.Arrays.stream;
  * @email vito.salvia@gmail.com
  */
 @Component(value = "updateAsyncOperation")
-public class GPUpdateAsyncStrategy extends IGPOperationAsyncStrategy.AbstractOperationAsyncStrategy {
+class GPUpdateAsyncStrategy extends IGPOperationAsyncStrategy.AbstractOperationAsyncStrategy {
 
     /**
      * @param <Result>
@@ -84,7 +84,7 @@ public class GPUpdateAsyncStrategy extends IGPOperationAsyncStrategy.AbstractOpe
     }
 
     @Override
-    public IGPOperationAsyncType.OperationAsyncEnum getStrateyType() {
-        return IGPOperationAsyncType.OperationAsyncEnum.UPDATE_ASYNC;
+    public IGPOperationAsyncType.OperationAsyncType getStrateyType() {
+        return IGPOperationAsyncType.OperationAsyncType.UPDATE;
     }
 }

@@ -44,7 +44,7 @@ import org.geosdi.geoplatform.experimental.el.api.model.Document;
 import org.geosdi.geoplatform.experimental.el.configurator.GPIndexConfigurator;
 import org.geosdi.geoplatform.experimental.el.index.GPBaseIndexCreator;
 import org.geosdi.geoplatform.experimental.el.index.GPIndexCreator;
-import org.geosdi.geoplatform.experimental.el.search.strategy.GPStrategyOperationRepository;
+import org.geosdi.geoplatform.experimental.el.search.strategy.GPStrategyRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -67,8 +67,8 @@ abstract class GPBaseElasticSearchDAO<D extends Document> implements GPElasticSe
     protected Client elastichSearchClient;
     @Resource(name = "elasticSearchExecutor")
     protected ExecutorService elasticSearchExecutor;
-    @Resource(name = "gpStrategyOperationRepository")
-    protected GPStrategyOperationRepository gpStrategyOperationRepository;
+    @Resource(name = "strategyOperationRepository")
+    protected GPStrategyRepository gpStrategyOperationRepository;
     //
     private GPIndexCreator indexCreator;
 

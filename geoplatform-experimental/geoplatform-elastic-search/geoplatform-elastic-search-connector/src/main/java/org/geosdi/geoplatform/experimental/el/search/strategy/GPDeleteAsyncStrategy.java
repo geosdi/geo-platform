@@ -19,14 +19,14 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static org.geosdi.geoplatform.experimental.el.search.strategy.IGPOperationAsyncType.OperationAsyncEnum.DELETE_ASYNC;
+import static org.geosdi.geoplatform.experimental.el.search.strategy.IGPOperationAsyncType.OperationAsyncType.DELETE;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
 @Component(value = "deleteAsyncOperation")
-public class GPDeleteAsyncStrategy extends IGPOperationAsyncStrategy.AbstractOperationAsyncStrategy {
+class GPDeleteAsyncStrategy extends IGPOperationAsyncStrategy.AbstractOperationAsyncStrategy {
 
 
     /**
@@ -84,7 +84,7 @@ public class GPDeleteAsyncStrategy extends IGPOperationAsyncStrategy.AbstractOpe
     }
 
     @Override
-    public IGPOperationAsyncType.OperationAsyncEnum getStrateyType() {
-        return DELETE_ASYNC;
+    public IGPOperationAsyncType.OperationAsyncType getStrateyType() {
+        return DELETE;
     }
 }

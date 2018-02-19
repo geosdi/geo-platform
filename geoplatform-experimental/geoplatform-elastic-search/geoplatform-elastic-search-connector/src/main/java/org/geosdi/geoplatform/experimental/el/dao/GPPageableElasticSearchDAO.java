@@ -50,7 +50,7 @@ import org.geosdi.geoplatform.experimental.el.dao.store.PageStore;
 import org.geosdi.geoplatform.experimental.el.search.bool.IBooleanSearch;
 import org.geosdi.geoplatform.experimental.el.search.date.IGPDateQuerySearch;
 import org.geosdi.geoplatform.experimental.el.search.operation.OperationByPage;
-import org.geosdi.geoplatform.experimental.el.search.strategy.IGPOperationAsyncType;
+import org.geosdi.geoplatform.experimental.el.search.strategy.IGPOperationAsyncType.OperationAsyncType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -63,6 +63,8 @@ import java.util.concurrent.CompletableFuture;
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.util.stream.Stream.of;
 import static javax.annotation.meta.When.NEVER;
+import static org.geosdi.geoplatform.experimental.el.search.strategy.IGPOperationAsyncType.OperationAsyncType.DELETE;
+import static org.geosdi.geoplatform.experimental.el.search.strategy.IGPOperationAsyncType.OperationAsyncType.UPDATE;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -120,7 +122,7 @@ public interface GPPageableElasticSearchDAO<D extends Document> {
      * @throws Exception
      */
     <P extends Page, V extends Document> IPageResult<V> find(P page, String[] includeFields, String[] excludeFields,
-                                                             Class<V> classe) throws Exception;
+            Class<V> classe) throws Exception;
 
     /**
      * @param page
@@ -319,7 +321,7 @@ public interface GPPageableElasticSearchDAO<D extends Document> {
         }
 
         public SortablePage(String field, SortOrder sortOrder, int from,
-                            int size) {
+                int size) {
             super(from, size);
             this.field = field;
             this.sortOrder = sortOrder;
@@ -389,7 +391,7 @@ public interface GPPageableElasticSearchDAO<D extends Document> {
         }
 
         public QueriableSortablePage(String field, SortOrder sortOrder, int from,
-                                     int size, QueryBuilder query) {
+                int size, QueryBuilder query) {
             super(field, sortOrder, from, size);
             this.query = query;
         }
@@ -452,7 +454,7 @@ public interface GPPageableElasticSearchDAO<D extends Document> {
         }
 
         public DateRangeSortablePage(String field, SortOrder sortOrder, int from, int size,
-                                     IGPDateQuerySearch... theDateQuerySearch) {
+                IGPDateQuerySearch... theDateQuerySearch) {
             super(field, sortOrder, from, size);
             this.dateQuerySearch = theDateQuerySearch;
         }
@@ -511,28 +513,56 @@ public interface GPPageableElasticSearchDAO<D extends Document> {
         private final IBooleanSearch[] queryList;
         private BoolQueryBuilder queryBuilder = QueryBuilders.boolQuery();
 
+        /**
+         * @param queryList
+         */
         public MultiFieldsSearch(IBooleanSearch... queryList) {
             this(null, null, 0, 0, queryList);
         }
 
+        /**
+         * @param from
+         * @param size
+         * @param queryList
+         */
         public MultiFieldsSearch(int from, int size, IBooleanSearch... queryList) {
             this(null, null, from, size, queryList);
         }
 
+        /**
+         * @param field
+         * @param sortOrder
+         * @param queryList
+         */
         public MultiFieldsSearch(String field, SortOrder sortOrder, IBooleanSearch... queryList) {
             this(field, sortOrder, 0, 0, queryList);
         }
 
-        public MultiFieldsSearch(String field, SortOrder sortOrder, int from,
-                                 int size, IBooleanSearch... queryList) {
+        /**
+         * @param field
+         * @param sortOrder
+         * @param from
+         * @param size
+         * @param queryList
+         */
+        public MultiFieldsSearch(String field, SortOrder sortOrder, int from, int size, IBooleanSearch... queryList) {
             super(field, sortOrder, from, size);
             this.queryList = queryList;
         }
 
+        /**
+         * @return {@link Boolean}
+         */
         private Boolean canBuildPage() {
             return this.queryList != null && (this.queryList.length > 0);
         }
 
+        /**
+         * @param builder
+         * @param <Builder>
+         * @return {@link Builder}
+         * @throws Exception
+         */
         private <Builder extends SearchRequestBuilder> Builder internalBuildPage(Builder builder)
                 throws Exception {
             logger.trace("####################Called {} #internalBuildPage with parameters " +
@@ -543,6 +573,12 @@ public interface GPPageableElasticSearchDAO<D extends Document> {
             return (Builder) builder.setQuery(queryBuilder);
         }
 
+        /**
+         * @param builder
+         * @param <Builder>
+         * @return {@link Builder}
+         * @throws Exception
+         */
         @Override
         public <Builder extends SearchRequestBuilder> Builder buildPage(Builder builder) throws Exception {
             return (canBuildPage() ? internalBuildPage(super.buildPage(builder)) : super.buildPage(builder));
@@ -560,54 +596,50 @@ public interface GPPageableElasticSearchDAO<D extends Document> {
     @Immutable
     class PageAsync extends MultiFieldsSearch {
 
-        protected static final Logger logger = LoggerFactory.getLogger(PageAsync.class);
-        //
-        private final IGPOperationAsyncType.OperationAsyncEnum operationType;
-        private final GPElasticSearchUpdateHandler gpElasticSearchUpdateHandler;
+        private final OperationAsyncType operationType;
+        private final GPElasticSearchUpdateHandler updateHandler;
 
         /**
          * @param theFrom
          * @param theSize
          * @param theOperationType
-         * @param theGPElasticSearchUpdateHandler
+         * @param theUpdateHandler
          */
-        public PageAsync(int theFrom, int theSize, @Nonnull(when = NEVER) IGPOperationAsyncType.OperationAsyncEnum theOperationType,
-                         @Nullable GPElasticSearchUpdateHandler theGPElasticSearchUpdateHandler) {
-            this(theFrom, theSize, theOperationType, theGPElasticSearchUpdateHandler, null);
+        public PageAsync(int theFrom, int theSize, @Nonnull(when = NEVER) OperationAsyncType theOperationType,
+                @Nullable GPElasticSearchUpdateHandler theUpdateHandler) {
+            this(theFrom, theSize, theOperationType, theUpdateHandler, null);
         }
 
         /**
          * @param from
          * @param size
          * @param theOperationType
-         * @param theGPElasticSearchUpdateHandler
+         * @param theUpdateHandler
          * @param queryList
          */
-        public PageAsync(int from, int size, @Nonnull(when = NEVER) IGPOperationAsyncType.OperationAsyncEnum theOperationType,
-                         @Nullable GPElasticSearchUpdateHandler theGPElasticSearchUpdateHandler, IBooleanSearch... queryList) {
+        public PageAsync(int from, int size, @Nonnull(when = NEVER) OperationAsyncType theOperationType,
+                @Nullable GPElasticSearchUpdateHandler theUpdateHandler, IBooleanSearch... queryList) {
             super(null, null, from, size, queryList);
-            checkArgument(((theOperationType == IGPOperationAsyncType.OperationAsyncEnum.UPDATE_ASYNC) &&
-                            (theGPElasticSearchUpdateHandler != null))
-                    || ((theOperationType == IGPOperationAsyncType.OperationAsyncEnum.DELETE_ASYNC) &&
-                            (theGPElasticSearchUpdateHandler == null)) ,
+            checkArgument(((theOperationType == UPDATE) && (theUpdateHandler != null))
+                            || ((theOperationType == DELETE) && (theUpdateHandler == null)),
                     "The Parameters are wrong.");
             this.operationType = theOperationType;
-            this.gpElasticSearchUpdateHandler = theGPElasticSearchUpdateHandler;
+            this.updateHandler = theUpdateHandler;
         }
 
 
         /**
-         * @return {@link IGPOperationAsyncType.OperationAsyncEnum}
+         * @return {@link OperationAsyncType}
          */
-        public IGPOperationAsyncType.OperationAsyncEnum getOperationType() {
+        public OperationAsyncType getOperationType() {
             return operationType;
         }
 
         /**
          * @return {@link GPElasticSearchUpdateHandler}
          */
-        public GPElasticSearchUpdateHandler getGpElasticSearchUpdateHandler() {
-            return gpElasticSearchUpdateHandler;
+        public GPElasticSearchUpdateHandler getUpdateHandler() {
+            return updateHandler;
         }
     }
 }

@@ -40,7 +40,7 @@ import org.elasticsearch.common.unit.TimeValue;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
 import org.geosdi.geoplatform.experimental.el.dao.GPElasticSearchUpdateHandler;
 import org.geosdi.geoplatform.experimental.el.dao.GPPageableElasticSearchDAO;
-import org.geosdi.geoplatform.experimental.el.search.strategy.IGPOperationAsyncType;
+import org.geosdi.geoplatform.experimental.el.search.strategy.IGPOperationAsyncType.OperationAsyncType;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -48,7 +48,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface OperationByPage extends IOperationByPage<Document>{
+public interface OperationByPage extends GPOperationByPage<Document> {
 
     /**
      * @param builder
@@ -70,13 +70,11 @@ public interface OperationByPage extends IOperationByPage<Document>{
     Integer getSize();
 
     /**
-     *
-     * @return {@link IGPOperationAsyncType.OperationAsyncEnum}
+     * @return {@link OperationAsyncType}
      */
-    IGPOperationAsyncType.OperationAsyncEnum getOperation();
+    OperationAsyncType getOperation();
 
     /**
-     *
      * @return {@link GPElasticSearchUpdateHandler}
      */
     GPElasticSearchUpdateHandler getUpdateHandler();
@@ -129,13 +127,12 @@ public interface OperationByPage extends IOperationByPage<Document>{
         }
 
         /**
-         *
          * @param value
          * @return
          */
         @Override
         public Document update(Document value) {
-            return this.page.getGpElasticSearchUpdateHandler().updateEntity(value);
+            return this.page.getUpdateHandler().updateEntity(value);
         }
 
         /**
@@ -155,20 +152,18 @@ public interface OperationByPage extends IOperationByPage<Document>{
         }
 
         /**
-         *
          * @return {@link GPElasticSearchUpdateHandler}
          */
         @Override
         public GPElasticSearchUpdateHandler getUpdateHandler() {
-            return this.page.getGpElasticSearchUpdateHandler();
+            return this.page.getUpdateHandler();
         }
 
         /**
-         *
-         * @return {@link IGPOperationAsyncType.OperationAsyncEnum}
+         * @return {@link OperationAsyncType}
          */
         @Override
-        public IGPOperationAsyncType.OperationAsyncEnum getOperation() {
+        public OperationAsyncType getOperation() {
             return this.page.getOperationType();
         }
 

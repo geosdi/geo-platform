@@ -1,7 +1,7 @@
 package org.geosdi.geoplatform.experimental.el.search.operation.config;
 
 import org.geosdi.geoplatform.experimental.el.search.operation.responsibility.IGPOperationHandlerManager;
-import org.geosdi.geoplatform.experimental.el.search.strategy.IGPStrategyRepository;
+import org.geosdi.geoplatform.experimental.el.search.strategy.GPStrategyRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -12,9 +12,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 class GPOperationHandlerManagerConfig {
 
-    private final IGPStrategyRepository strategyRepository;
+    private final GPStrategyRepository strategyRepository;
 
-    public GPOperationHandlerManagerConfig(IGPStrategyRepository strategyRepository) {
+    public GPOperationHandlerManagerConfig(GPStrategyRepository strategyRepository) {
         this.strategyRepository = strategyRepository;
     }
 

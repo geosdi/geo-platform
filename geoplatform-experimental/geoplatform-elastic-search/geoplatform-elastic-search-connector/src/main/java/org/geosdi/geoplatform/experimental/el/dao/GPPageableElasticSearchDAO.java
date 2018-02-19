@@ -600,6 +600,11 @@ public interface GPPageableElasticSearchDAO<D extends Document> {
         private final GPElasticSearchUpdateHandler updateHandler;
 
         /**
+         * <p>
+         * The Parameter {@link GPElasticSearchUpdateHandler} is optional and must be specified only
+         * if {@link OperationAsyncType} type is {@link OperationAsyncType#UPDATE}.
+         * </p>
+         *
          * @param theFrom
          * @param theSize
          * @param theOperationType
@@ -607,7 +612,7 @@ public interface GPPageableElasticSearchDAO<D extends Document> {
          */
         public PageAsync(int theFrom, int theSize, @Nonnull(when = NEVER) OperationAsyncType theOperationType,
                 @Nullable GPElasticSearchUpdateHandler theUpdateHandler) {
-            this(theFrom, theSize, theOperationType, theUpdateHandler, null);
+            this(null, null, theFrom, theSize, theOperationType, theUpdateHandler, null);
         }
 
         /**
@@ -617,9 +622,9 @@ public interface GPPageableElasticSearchDAO<D extends Document> {
          * @param theUpdateHandler
          * @param queryList
          */
-        public PageAsync(int from, int size, @Nonnull(when = NEVER) OperationAsyncType theOperationType,
+        public PageAsync(String field, SortOrder sortOrder, int from, int size, @Nonnull(when = NEVER) OperationAsyncType theOperationType,
                 @Nullable GPElasticSearchUpdateHandler theUpdateHandler, IBooleanSearch... queryList) {
-            super(null, null, from, size, queryList);
+            super(field, sortOrder, from, size, queryList);
             checkArgument(((theOperationType == UPDATE) && (theUpdateHandler != null))
                             || ((theOperationType == DELETE) && (theUpdateHandler == null)),
                     "The Parameters are wrong.");

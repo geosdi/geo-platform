@@ -2,7 +2,9 @@ package org.geosdi.geoplatform.experimental.el.search.builder;
 
 import org.geosdi.geoplatform.experimental.el.dao.GPElasticSearchUpdateHandler;
 import org.geosdi.geoplatform.experimental.el.dao.GPPageableAsyncElasticSearchDAO;
-import org.geosdi.geoplatform.experimental.el.search.strategy.IGPOperationAsyncType;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static org.geosdi.geoplatform.experimental.el.search.strategy.IGPOperationAsyncType.OperationAsyncType.UPDATE;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -22,10 +24,14 @@ public interface IGPUpdatePageAsyncBuilder extends IGPPageAsyncBuilder {
         private GPElasticSearchUpdateHandler updateHandler;
 
         private GPUpdatePageAsyncBuilder() {
-            super(IGPOperationAsyncType.OperationAsyncType.UPDATE);
+            super(UPDATE);
         }
 
-        public static <UpdateAsyncBuilder extends IGPUpdatePageAsyncBuilder> UpdateAsyncBuilder gpDeletePageAsyncBuilder() {
+        /**
+         * @param <UpdateAsyncBuilder>
+         * @return {@link UpdateAsyncBuilder}
+         */
+        public static <UpdateAsyncBuilder extends IGPUpdatePageAsyncBuilder> UpdateAsyncBuilder updatePageAsyncBuilder() {
             return (UpdateAsyncBuilder) new GPUpdatePageAsyncBuilder();
         }
 
@@ -45,11 +51,9 @@ public interface IGPUpdatePageAsyncBuilder extends IGPPageAsyncBuilder {
          */
         @Override
         public GPPageableAsyncElasticSearchDAO.PageAsync build() {
+            checkArgument((this.updateHandler != null), "The Parameter UpdateHandler must not be null.");
             return new GPPageableAsyncElasticSearchDAO.PageAsync(this.field, this.sortOrder,
-                    this.from, this.size, this.operationAsyncType, this.updateHandler, this.iBooleanSearch);
+                    this.from, this.size, this.operationAsyncType, this.updateHandler, this.booleanSearch);
         }
-
     }
-
-
 }

@@ -8,13 +8,11 @@ import org.geosdi.geoplatform.experimental.el.search.operation.OperationByPage;
 import org.geosdi.geoplatform.experimental.el.search.strategy.IGPOperationAsyncType.OperationAsyncType;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.concurrent.CompletableFuture;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 import static javax.annotation.meta.When.NEVER;
-import static org.geosdi.geoplatform.experimental.el.search.strategy.IGPOperationAsyncType.OperationAsyncType.DELETE;
-import static org.geosdi.geoplatform.experimental.el.search.strategy.IGPOperationAsyncType.OperationAsyncType.UPDATE;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -45,7 +43,21 @@ public interface GPPageableAsyncElasticSearchDAO<D extends Document> {
     class PageAsync extends GPPageableElasticSearchDAO.MultiFieldsSearch {
 
         private final OperationAsyncType operationType;
-        private final GPElasticSearchUpdateHandler updateHandler;
+        private GPElasticSearchUpdateHandler updateHandler;
+
+        /**
+         * @param theField
+         * @param theSortOrder
+         * @param theFrom
+         * @param theSize
+         * @param theOperationType
+         * @param theQueryList
+         */
+        public PageAsync(String theField, SortOrder theSortOrder, int theFrom, int theSize, @Nonnull(when = NEVER) OperationAsyncType theOperationType, IBooleanSearch... theQueryList) {
+            super(theField, theSortOrder, theFrom, theSize, theQueryList);
+            checkNotNull("The Operation Type must not be null", theOperationType != null);
+            this.operationType = theOperationType;
+        }
 
         /**
          * <p>
@@ -58,28 +70,12 @@ public interface GPPageableAsyncElasticSearchDAO<D extends Document> {
          * @param theOperationType
          * @param theUpdateHandler
          */
-        public PageAsync(int theFrom, int theSize, @Nonnull(when = NEVER) OperationAsyncType theOperationType,
-                @Nullable GPElasticSearchUpdateHandler theUpdateHandler) {
-            this(null, null, theFrom, theSize, theOperationType, theUpdateHandler, null);
-        }
-
-        /**
-         * @param from
-         * @param size
-         * @param theOperationType
-         * @param theUpdateHandler
-         * @param queryList
-         */
-        public PageAsync(String field, SortOrder sortOrder, int from, int size, @Nonnull(when = NEVER) OperationAsyncType theOperationType,
-                @Nullable GPElasticSearchUpdateHandler theUpdateHandler, IBooleanSearch... queryList) {
-            super(field, sortOrder, from, size, queryList);
-            checkArgument(((theOperationType == UPDATE) && (theUpdateHandler != null))
-                            || ((theOperationType == DELETE) && (theUpdateHandler == null)),
-                    "The Parameters are wrong.");
-            this.operationType = theOperationType;
+        public PageAsync(String theField, SortOrder theSortOrder, int theFrom, int theSize,
+                         @Nonnull(when = NEVER) OperationAsyncType theOperationType, GPElasticSearchUpdateHandler theUpdateHandler,
+                         IBooleanSearch... theQueryList) {
+            this(theField, theSortOrder, theFrom, theSize, theOperationType, theQueryList);
             this.updateHandler = theUpdateHandler;
         }
-
 
         /**
          * @return {@link OperationAsyncType}

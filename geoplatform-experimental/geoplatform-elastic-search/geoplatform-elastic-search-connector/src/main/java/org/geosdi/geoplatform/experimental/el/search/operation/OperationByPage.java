@@ -111,6 +111,9 @@ public interface OperationByPage extends GPOperationByPage<Document> {
 
         private final GPPageableElasticSearchDAO.PageAsync page;
 
+        /**
+         * @param thePage
+         */
         public OperationByPageSearch(GPPageableElasticSearchDAO.PageAsync thePage) {
             checkNotNull(thePage, "The Parameter Page must not be null.");
             this.page = thePage;

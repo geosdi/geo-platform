@@ -14,12 +14,15 @@ class GPOperationHandlerManagerConfig {
 
     private final GPStrategyRepository strategyRepository;
 
+    /**
+     * @param strategyRepository
+     */
     public GPOperationHandlerManagerConfig(GPStrategyRepository strategyRepository) {
         this.strategyRepository = strategyRepository;
     }
 
     @Bean
-    public IGPOperationHandlerManager gpOperationHandlerManager() {
+    public IGPOperationHandlerManager operationHandlerManager() {
         return new IGPOperationHandlerManager.GPOperationHandlerManager(this.strategyRepository);
     }
 }

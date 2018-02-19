@@ -58,7 +58,7 @@ import static java.util.stream.Collectors.toList;
  */
 public abstract class PageableElasticSearchDAO<D extends Document> extends GPBaseElasticSearchDAO<D> {
 
-    @Resource(name = "gpOperationHandlerManager")
+    @Resource(name = "operationHandlerManager")
     private IGPOperationHandlerManager operationHandlerManager;
 
     @Override

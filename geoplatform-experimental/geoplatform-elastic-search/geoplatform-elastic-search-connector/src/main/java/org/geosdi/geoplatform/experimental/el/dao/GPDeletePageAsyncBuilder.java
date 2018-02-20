@@ -1,4 +1,4 @@
-package org.geosdi.geoplatform.experimental.el.search.builder;
+package org.geosdi.geoplatform.experimental.el.dao;
 
 import static org.geosdi.geoplatform.experimental.el.search.strategy.IGPOperationAsyncType.OperationAsyncType.DELETE;
 

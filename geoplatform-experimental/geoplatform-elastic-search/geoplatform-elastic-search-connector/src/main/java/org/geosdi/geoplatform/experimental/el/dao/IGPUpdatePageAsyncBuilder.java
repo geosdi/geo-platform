@@ -1,7 +1,4 @@
-package org.geosdi.geoplatform.experimental.el.search.builder;
-
-import org.geosdi.geoplatform.experimental.el.dao.GPElasticSearchUpdateHandler;
-import org.geosdi.geoplatform.experimental.el.dao.GPPageableAsyncElasticSearchDAO;
+package org.geosdi.geoplatform.experimental.el.dao;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static org.geosdi.geoplatform.experimental.el.search.strategy.IGPOperationAsyncType.OperationAsyncType.UPDATE;

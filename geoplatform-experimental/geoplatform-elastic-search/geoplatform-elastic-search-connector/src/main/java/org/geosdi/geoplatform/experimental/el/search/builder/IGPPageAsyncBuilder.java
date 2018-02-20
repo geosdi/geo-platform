@@ -1,6 +1,7 @@
-package org.geosdi.geoplatform.experimental.el.dao;
+package org.geosdi.geoplatform.experimental.el.search.builder;
 
 import org.elasticsearch.search.sort.SortOrder;
+import org.geosdi.geoplatform.experimental.el.dao.GPPageableAsyncElasticSearchDAO;
 import org.geosdi.geoplatform.experimental.el.search.bool.IBooleanSearch;
 import org.geosdi.geoplatform.experimental.el.search.strategy.IGPOperationAsyncType;
 
@@ -106,10 +107,7 @@ public interface IGPPageAsyncBuilder {
          * @return {@link GPPageableAsyncElasticSearchDAO.PageAsync }
          */
         @Override
-        public GPPageableAsyncElasticSearchDAO.PageAsync build() {
-            return new GPPageableAsyncElasticSearchDAO.PageAsync(this.field, this.sortOrder,
-                    this.from, this.size, this.operationAsyncType, this.booleanSearch);
-        }
+        public abstract GPPageableAsyncElasticSearchDAO.PageAsync build();
 
         /**
          * @return {@link GPPageAsyncBuilder}

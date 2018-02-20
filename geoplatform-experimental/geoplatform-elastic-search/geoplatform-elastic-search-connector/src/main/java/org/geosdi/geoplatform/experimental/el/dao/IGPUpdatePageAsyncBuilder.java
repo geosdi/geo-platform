@@ -1,5 +1,7 @@
 package org.geosdi.geoplatform.experimental.el.dao;
 
+import org.geosdi.geoplatform.experimental.el.search.builder.IGPPageAsyncBuilder;
+
 import static com.google.common.base.Preconditions.checkArgument;
 import static org.geosdi.geoplatform.experimental.el.search.strategy.IGPOperationAsyncType.OperationAsyncType.UPDATE;
 

@@ -1,6 +1,8 @@
 package org.geosdi.geoplatform.support.primitive.string.responsibility;
 
-import java.text.DecimalFormat;
+import org.geosdi.geoplatform.support.text.spi.finder.GPBaseNumberFormatSupportFinder;
+
+import java.text.NumberFormat;
 import java.text.ParseException;
 
 import static java.lang.Boolean.FALSE;
@@ -13,7 +15,11 @@ import static org.geosdi.geoplatform.support.primitive.string.responsibility.GPP
  */
 public class NumberParserFromStringHandler extends AbstractPrimitiveParserFromStringHandler<Number> {
 
-    private static final DecimalFormat decimalFormat = new DecimalFormat();
+    static {
+        numberFormat = new GPBaseNumberFormatSupportFinder().findNumberFormatSupport().createNumberFormat();
+    }
+
+    private static final NumberFormat numberFormat;
 
     public NumberParserFromStringHandler() {
         super.setSuccessor(new LongParserFromStringHandler());
@@ -52,7 +58,7 @@ public class NumberParserFromStringHandler extends AbstractPrimitiveParserFromSt
     @Override
     protected Boolean canParseValue(String value) {
         try {
-            decimalFormat.parse(value);
+            numberFormat.parse(value);
             return TRUE;
         } catch (ParseException ex) {
             logger.trace("######################ERROR FOR PARSER : {} , trying to parse Value : {}",

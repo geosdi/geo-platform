@@ -43,7 +43,7 @@ public interface IGPOperationAsyncStrategy {
          */
         protected Integer calculateNumberOfTasks(int totalElements) {
             int numberTasks = totalElements / PAGE_SIZE_LIMIT;
-            int pageRimaing = PAGE_SIZE_LIMIT - (numberTasks * PAGE_SIZE_LIMIT);
+            int pageRimaing = totalElements - (numberTasks * PAGE_SIZE_LIMIT);
             if (pageRimaing > 0)
                 numberTasks += 1;
             return numberTasks;

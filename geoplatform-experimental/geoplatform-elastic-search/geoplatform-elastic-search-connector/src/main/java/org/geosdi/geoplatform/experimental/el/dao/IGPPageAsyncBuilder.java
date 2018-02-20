@@ -1,7 +1,6 @@
-package org.geosdi.geoplatform.experimental.el.search.builder;
+package org.geosdi.geoplatform.experimental.el.dao;
 
 import org.elasticsearch.search.sort.SortOrder;
-import org.geosdi.geoplatform.experimental.el.dao.GPPageableAsyncElasticSearchDAO;
 import org.geosdi.geoplatform.experimental.el.search.bool.IBooleanSearch;
 import org.geosdi.geoplatform.experimental.el.search.strategy.IGPOperationAsyncType;
 

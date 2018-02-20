@@ -53,7 +53,7 @@ public interface GPPageableAsyncElasticSearchDAO<D extends Document> {
          * @param theOperationType
          * @param theQueryList
          */
-        public PageAsync(String theField, SortOrder theSortOrder, int theFrom, int theSize, @Nonnull(when = NEVER) OperationAsyncType theOperationType, IBooleanSearch... theQueryList) {
+        protected PageAsync(String theField, SortOrder theSortOrder, int theFrom, int theSize, @Nonnull(when = NEVER) OperationAsyncType theOperationType, IBooleanSearch... theQueryList) {
             super(theField, theSortOrder, theFrom, theSize, theQueryList);
             checkNotNull("The Operation Type must not be null", theOperationType != null);
             this.operationType = theOperationType;
@@ -70,7 +70,7 @@ public interface GPPageableAsyncElasticSearchDAO<D extends Document> {
          * @param theOperationType
          * @param theUpdateHandler
          */
-        public PageAsync(String theField, SortOrder theSortOrder, int theFrom, int theSize,
+        protected PageAsync(String theField, SortOrder theSortOrder, int theFrom, int theSize,
                          @Nonnull(when = NEVER) OperationAsyncType theOperationType, GPElasticSearchUpdateHandler theUpdateHandler,
                          IBooleanSearch... theQueryList) {
             this(theField, theSortOrder, theFrom, theSize, theOperationType, theQueryList);

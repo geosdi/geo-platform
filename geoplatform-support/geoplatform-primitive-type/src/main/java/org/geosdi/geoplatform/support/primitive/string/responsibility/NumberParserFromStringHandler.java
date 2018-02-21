@@ -58,6 +58,9 @@ public class NumberParserFromStringHandler extends AbstractPrimitiveParserFromSt
     @Override
     protected Boolean canParseValue(String value) {
         try {
+            String[] values = value.split(" ");
+            if (values.length > 1)
+                return FALSE;
             numberFormat.parse(value);
             return TRUE;
         } catch (ParseException ex) {

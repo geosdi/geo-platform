@@ -99,4 +99,16 @@ public class GPPrimitiveParserTest {
         logger.info("#######################PARSE_NUMBER : {}\n",
                 primitiveParserHandlerManager.parseValue("1.900.900,23").getSimpleName());
     }
+
+    @Test
+    public void i_parseValueTest() throws Exception {
+        logger.info("###########################PARSE_VALUE : {}\n",
+                primitiveParserHandlerManager.parseValue("44.524768336 11.4832955249"));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void l_parseValueTest() throws Exception {
+        logger.info("###########################PARSE_VALUE : {}\n",
+                primitiveParserHandlerManager.parseValue(null));
+    }
 }

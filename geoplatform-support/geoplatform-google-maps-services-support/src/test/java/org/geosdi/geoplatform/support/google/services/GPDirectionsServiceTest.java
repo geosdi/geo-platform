@@ -82,7 +82,7 @@ public class GPDirectionsServiceTest extends GPBaseConfigTest {
         assertNotNull(routes);
         assertNotNull(routes[0]);
         assertThat(routes[0].overviewPolyline.decodePath().size(), not(0));
-        assertEquals("85100 Potenza PZ, Italy", routes[0].legs[0].startAddress);
+        assertEquals("Province of Potenza, Italy", routes[0].legs[0].startAddress);
         assertEquals("Rome, Metropolitan City of Rome, Italy", routes[0].legs[0].endAddress);
         logger.info("@@@@@@@@@@@@@@@START_ADDRESS : {}\n",
                 routes[0].legs[0].startAddress);

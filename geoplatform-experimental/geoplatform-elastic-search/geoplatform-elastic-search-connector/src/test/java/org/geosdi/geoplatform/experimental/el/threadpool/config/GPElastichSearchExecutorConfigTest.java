@@ -35,8 +35,9 @@
 package org.geosdi.geoplatform.experimental.el.threadpool.config;
 
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
-import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -44,9 +45,11 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.List;
+import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -59,10 +62,21 @@ public class GPElastichSearchExecutorConfigTest {
     @GeoPlatformLog
     static Logger logger;
     //
+    private static List<Callable<String>> tasks;
+    //
     @Resource(name = "elasticSearchExecutor")
     private ExecutorService elasticSearchExecutor;
 
-    @After
+    @BeforeClass
+    public static void beforeClass() throws Exception {
+        tasks = IntStream.iterate(0, n -> n + 1)
+                .limit(1000)
+                .boxed()
+                .map(v -> new Task())
+                .collect(Collectors.toList());
+    }
+
+    @Before
     public void setUp() throws Exception {
         Assert.assertNotNull(this.elasticSearchExecutor);
         Assert.assertTrue(this.elasticSearchExecutor instanceof ThreadPoolExecutor);
@@ -77,5 +91,35 @@ public class GPElastichSearchExecutorConfigTest {
     public void printThreadPoolKeepAliveTest() {
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@KEEP_ALIVE_SECONDS : {}\n",
                 ((ThreadPoolExecutor) this.elasticSearchExecutor).getKeepAliveTime(TimeUnit.SECONDS));
+    }
+
+    @Test
+    public void simpleTest() throws Exception {
+        CompletableFuture.supplyAsync(() -> {
+
+            try {
+                return tasks;
+            } catch (Exception ex) {
+                throw new IllegalStateException(ex);
+            }
+        }, this.elasticSearchExecutor);
+    }
+
+    static class Task implements Callable<String> {
+
+        private static final AtomicInteger counter = new AtomicInteger(0);
+
+        /**
+         * Computes a result, or throws an exception if unable to do so.
+         *
+         * @return computed result
+         * @throws Exception if unable to compute a result
+         */
+        @Override
+        public String call() throws Exception {
+            String name = Thread.currentThread().getName() + counter.incrementAndGet();
+            logger.info("########################CODICE ESEGUITO {}\n", name);
+            return name;
+        }
     }
 }

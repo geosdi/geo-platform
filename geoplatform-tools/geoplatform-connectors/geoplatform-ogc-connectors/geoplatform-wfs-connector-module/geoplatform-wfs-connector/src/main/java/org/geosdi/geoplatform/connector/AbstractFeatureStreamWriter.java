@@ -208,7 +208,7 @@ public abstract class AbstractFeatureStreamWriter<T extends Object>
      * @return the service
      */
     public String getService() {
-        return "WFS_110";
+        return "WFS";
     }
 
     @Override

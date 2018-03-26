@@ -20,7 +20,7 @@
     <!-- Activate @Rest Spring Profile -->
     <context-param>
         <param-name>spring.profiles.active</param-name>
-        <param-value>rest,prod</param-value>
+        <param-value>rest,prod,jpa,GPMailFreeMarkerSupport,notificationProd</param-value>
     </context-param>
 
     <!-- CXF Servlet -->

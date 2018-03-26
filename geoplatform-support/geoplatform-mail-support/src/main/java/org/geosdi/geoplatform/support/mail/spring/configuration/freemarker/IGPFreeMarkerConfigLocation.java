@@ -44,7 +44,8 @@ import org.springframework.core.io.Resource;
 public interface IGPFreeMarkerConfigLocation {
 
     /**
-     * @return {@link Resource}
+     * @return {@link String}
      */
-     Resource getFreeMarkerConfigLocation();
+     String getFreeMarkerConfigLocation();
+
 }

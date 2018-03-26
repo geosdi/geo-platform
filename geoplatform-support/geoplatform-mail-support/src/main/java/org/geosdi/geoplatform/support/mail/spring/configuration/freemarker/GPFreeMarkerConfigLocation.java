@@ -39,7 +39,9 @@ import net.jcip.annotations.Immutable;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.stereotype.Component;
 
 
@@ -59,9 +61,10 @@ public class GPFreeMarkerConfigLocation implements IGPFreeMarkerConfigLocation {
      * @return {@link String}
      */
     @Override
-    public Resource getFreeMarkerConfigLocation() {
+    public String getFreeMarkerConfigLocation() {
         return ((this.freeMarkerConfigLocation != null) && !(this.freeMarkerConfigLocation.isEmpty()))
-                ? new ClassPathResource(this.freeMarkerConfigLocation) : new ClassPathResource("template");
+                ? this.freeMarkerConfigLocation
+                : "template";
     }
 
     @Override

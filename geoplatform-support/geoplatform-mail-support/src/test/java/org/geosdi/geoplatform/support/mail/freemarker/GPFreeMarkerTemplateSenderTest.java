@@ -101,7 +101,7 @@ public class GPFreeMarkerTemplateSenderTest {
     }
 
     @Test
-    @Ignore(value = "Too Mails from Hudson / Jenkins")
+//    @Ignore(value = "Too Mails from Hudson / Jenkins")
     public void sendMailWithFreeMarkerSupport() throws InterruptedException {
         this.gpMailSpringSender.send(new MimeMessagePreparator() {
 
@@ -109,7 +109,7 @@ public class GPFreeMarkerTemplateSenderTest {
             public void prepare(MimeMessage mimeMessage) throws Exception {
                 MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
                 message.setSubject("geoSDI Notification FreeMarker Support");
-                message.setTo("core@geosdi.com");
+                message.setTo(new String[]{"vito.salvia@gmail.com", "glascaleia@gmail.com"});
                 String text = FreeMarkerTemplateUtils.processTemplateIntoString(freeMarkerConfiguration
                         .getTemplate("geoPlatformMailSupport.fm"), null);
                 message.setText(text, Boolean.TRUE);

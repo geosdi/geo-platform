@@ -41,11 +41,15 @@ import org.geosdi.geoplatform.support.mail.spring.configuration.freemarker.IGPFr
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -87,4 +91,5 @@ public class GPFreeMarkerConfigurationTest {
     public void printFreeMarkerConfigLocationTest() throws Exception {
         logger.info("###########################GP_FREEMARKER_CONFIG_LOCATION : {}\n", this.gpFreeMarkerConfigLocation);
     }
+
 }

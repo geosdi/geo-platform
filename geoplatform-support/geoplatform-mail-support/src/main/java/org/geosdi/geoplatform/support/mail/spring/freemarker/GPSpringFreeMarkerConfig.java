@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.support.mail.spring.freemarker;
 
+import freemarker.cache.ClassTemplateLoader;
 import freemarker.template.TemplateExceptionHandler;
 import org.geosdi.geoplatform.support.mail.spring.configuration.freemarker.IGPFreeMarkerConfigLocation;
 import org.slf4j.Logger;
@@ -55,12 +56,12 @@ class GPSpringFreeMarkerConfig {
     private static final Logger logger = LoggerFactory.getLogger(GPSpringFreeMarkerConfig.class);
 
     @Bean(value = "gpFreeMarkerConfiguration")
-    public static freemarker.template.Configuration gpFreeMarkerConfiguration(@Qualifier(value = "gpFreeMarkerConfigLocation") IGPFreeMarkerConfigLocation gpFreeMarkerConfigLocation)
+    public freemarker.template.Configuration gpFreeMarkerConfiguration(@Qualifier(value = "gpFreeMarkerConfigLocation") IGPFreeMarkerConfigLocation gpFreeMarkerConfigLocation)
             throws Exception {
         logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@GP_MAIL_SUPPORT FreeMarkerConfigLocation at --------------> {}\n",
                 gpFreeMarkerConfigLocation);
-        freemarker.template.Configuration freeMarkerConfiguration = new freemarker.template.Configuration(freemarker.template.Configuration.VERSION_2_3_25);
-        freeMarkerConfiguration.setDirectoryForTemplateLoading(gpFreeMarkerConfigLocation.getFreeMarkerConfigLocation().getFile());
+        freemarker.template.Configuration freeMarkerConfiguration = new freemarker.template.Configuration(freemarker.template.Configuration.VERSION_2_3_27);
+        freeMarkerConfiguration.setTemplateLoader(new ClassTemplateLoader(Thread.currentThread().getContextClassLoader(), gpFreeMarkerConfigLocation.getFreeMarkerConfigLocation()));
         freeMarkerConfiguration.setDefaultEncoding("UTF-8");
         freeMarkerConfiguration.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
         freeMarkerConfiguration.setLogTemplateExceptions(Boolean.FALSE);

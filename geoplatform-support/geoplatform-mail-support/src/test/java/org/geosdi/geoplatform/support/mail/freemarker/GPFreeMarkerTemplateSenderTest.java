@@ -101,7 +101,7 @@ public class GPFreeMarkerTemplateSenderTest {
     }
 
     @Test
-//    @Ignore(value = "Too Mails from Hudson / Jenkins")
+    @Ignore(value = "Too Mails from Hudson / Jenkins")
     public void sendMailWithFreeMarkerSupport() throws InterruptedException {
         this.gpMailSpringSender.send(new MimeMessagePreparator() {
 

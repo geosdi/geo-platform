@@ -35,7 +35,6 @@
 package org.geosdi.geoplatform.experimental.el.search.bool;
 
 import net.jcip.annotations.Immutable;
-import org.elasticsearch.index.query.Operator;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 
@@ -46,9 +45,13 @@ import org.elasticsearch.index.query.QueryBuilders;
 @Immutable
 public class BooleanPrefixSearch extends IBooleanSearch.AbstractBooleanSearch {
 
-    public BooleanPrefixSearch(String theField, Object theValue, BooleanQueryType theType,
-                               Operator theOperator) {
-        super(theValue, theField, theType, theOperator);
+    /**
+     * @param theField
+     * @param theValue
+     * @param theType
+     */
+    public BooleanPrefixSearch(String theField, Object theValue, BooleanQueryType theType) {
+        super(theField, theValue, theType);
     }
 
     /**

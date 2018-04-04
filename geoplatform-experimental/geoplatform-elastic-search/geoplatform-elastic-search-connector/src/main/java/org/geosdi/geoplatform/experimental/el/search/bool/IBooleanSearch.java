@@ -60,13 +60,6 @@ public interface IBooleanSearch extends IGPQuerySearch {
     /**
      *
      */
-    enum OperatorType {
-        AND, NOT;
-    }
-
-    /**
-     *
-     */
     abstract class AbstractBooleanSearch implements IBooleanSearch {
         protected final BooleanQueryType type;
         protected Object value;

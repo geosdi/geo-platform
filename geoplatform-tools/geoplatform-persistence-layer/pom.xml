@@ -119,7 +119,7 @@
         <hibernate-version>5.2.16.Final</hibernate-version>
         <hibernate-persistence-version>1.0.0.Final</hibernate-persistence-version>
         <hibernate-commons-annotations-version>5.0.1.Final</hibernate-commons-annotations-version>
-        <spring-data-jpa-version>2.0.5.RELEASE</spring-data-jpa-version>
+        <spring-data-jpa-version>2.0.6.RELEASE</spring-data-jpa-version>
         <jta-version>1.1</jta-version>
     </properties>
 

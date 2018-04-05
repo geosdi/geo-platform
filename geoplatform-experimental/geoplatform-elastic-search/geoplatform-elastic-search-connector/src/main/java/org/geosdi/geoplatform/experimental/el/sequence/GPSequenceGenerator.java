@@ -50,6 +50,7 @@ import javax.annotation.Resource;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
+import static org.elasticsearch.common.xcontent.XContentType.JSON;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -106,11 +107,10 @@ public abstract class GPSequenceGenerator implements IGPSequenceGenerator {
         IndexResponse response = this.elastichSearchClient
                 .prepareIndex(BaseSequenceSettings.GP_SEQUENCE.getSequenceName(),
                         BaseSequenceSettings.GP_SEQUENCE.getSequenceType(), this.gpSequence.getSequenceId())
-                .setSource(mapper.getDefaultMapper().writeValueAsString(this.gpSequence))
+                .setSource(mapper.getDefaultMapper().writeValueAsString(this.gpSequence), JSON)
                 .setVersionType(VersionType.EXTERNAL)
                 .setVersion((isSetInitialValue() ? getInitialValue() : -1l))
                 .get();
-        logger.debug("#################################VERSION : {}\n", response.getVersion());
         this.gpSequence.setVersion(response.getVersion());
         return response.getVersion();
     }
@@ -127,7 +127,7 @@ public abstract class GPSequenceGenerator implements IGPSequenceGenerator {
                 .prepareUpdate(BaseSequenceSettings.GP_SEQUENCE.getSequenceName(),
                         BaseSequenceSettings.GP_SEQUENCE.getSequenceType(),
                         this.gpSequence.getSequenceId())
-                .setDoc(mapper.getDefaultMapper().writeValueAsString(this.gpSequence))
+                .setDoc(mapper.getDefaultMapper().writeValueAsString(this.gpSequence), JSON)
                 .get();
         this.gpSequence.setVersion(updateResponse.getVersion());
         return updateResponse.getVersion();

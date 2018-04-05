@@ -47,7 +47,7 @@ import org.elasticsearch.index.query.QueryBuilders;
 public class BooleanExactSearch extends IBooleanSearch.AbstractBooleanSearch {
 
     public BooleanExactSearch(String theField, Object theValue, BooleanQueryType theType,
-                              Operator theOperator) {
+            Operator theOperator) {
         super(theValue, theField, theType, theOperator);
     }
 

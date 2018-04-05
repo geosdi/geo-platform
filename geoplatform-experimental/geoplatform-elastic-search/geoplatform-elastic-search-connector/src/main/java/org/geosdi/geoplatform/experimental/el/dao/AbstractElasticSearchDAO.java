@@ -207,6 +207,7 @@ public abstract class AbstractElasticSearchDAO<D extends Document> extends Pagea
 
     @Override
     public Long count() {
+        super.refreshIndex();
         return this.elastichSearchClient
                 .prepareSearch(getIndexName())
                 .setTypes(getIndexType())

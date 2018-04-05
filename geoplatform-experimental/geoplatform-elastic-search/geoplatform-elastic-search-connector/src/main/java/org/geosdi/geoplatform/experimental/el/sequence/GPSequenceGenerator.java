@@ -4,7 +4,7 @@
  * http://geo-platform.org
  * ====================================================================
  * <p>
- * Copyright (C) 2008-2018 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2017 geoSDI Group (CNR IMAA - Potenza - ITALY).
  * <p>
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by
@@ -30,15 +30,15 @@
  * that module. An independent module is a module which is not derived from or
  * based on this library. If you modify this library, you may extend this exception
  * to your version of the library, but you are not obligated to do so. If you do not
- * wish to do so, operation this exception statement from your version.
+ * wish to do so, delete this exception statement from your version.
  */
 package org.geosdi.geoplatform.experimental.el.sequence;
 
-import com.google.common.base.Preconditions;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.update.UpdateResponse;
 import org.elasticsearch.client.Client;
+import org.elasticsearch.index.VersionType;
 import org.geosdi.geoplatform.experimental.el.api.mapper.GPElasticSearchMapper;
 import org.geosdi.geoplatform.experimental.el.api.model.sequence.GPSequence;
 import org.geosdi.geoplatform.experimental.el.api.model.sequence.IGPSequence;
@@ -47,6 +47,9 @@ import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import org.slf4j.Logger;
 
 import javax.annotation.Resource;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -104,7 +107,10 @@ public abstract class GPSequenceGenerator implements IGPSequenceGenerator {
                 .prepareIndex(BaseSequenceSettings.GP_SEQUENCE.getSequenceName(),
                         BaseSequenceSettings.GP_SEQUENCE.getSequenceType(), this.gpSequence.getSequenceId())
                 .setSource(mapper.getDefaultMapper().writeValueAsString(this.gpSequence))
+                .setVersionType(VersionType.EXTERNAL)
+                .setVersion((isSetInitialValue() ? getInitialValue() : -1l))
                 .get();
+        logger.debug("#################################VERSION : {}\n", response.getVersion());
         this.gpSequence.setVersion(response.getVersion());
         return response.getVersion();
     }
@@ -158,11 +164,9 @@ public abstract class GPSequenceGenerator implements IGPSequenceGenerator {
      */
     @Override
     public void afterPropertiesSet() throws Exception {
-        Preconditions.checkNotNull(elastichSearchClient, "The ElasticSearch "
-                + "Client must not be null.");
-        Preconditions.checkNotNull(logger, "The GeoPlatform Log must not be "
-                + "null.");
-        Preconditions.checkArgument((getSequenceID() != null) && !(getSequenceID().isEmpty()),
+        checkNotNull(elastichSearchClient, "The ElasticSearch Client must not be null.");
+        checkNotNull(logger, "The GeoPlatform Log must not be null.");
+        checkArgument((getSequenceID() != null) && !(getSequenceID().isEmpty()),
                 "The SequenceID must not be null or an Empty String.");
         this.gpSequence = new GPSequence(getSequenceID());
         if (existSequence()) {

@@ -4,7 +4,7 @@
  * http://geo-platform.org
  * ====================================================================
  * <p>
- * Copyright (C) 2008-2018 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2017 geoSDI Group (CNR IMAA - Potenza - ITALY).
  * <p>
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@
  * that module. An independent module is a module which is not derived from or
  * based on this library. If you modify this library, you may extend this exception
  * to your version of the library, but you are not obligated to do so. If you do not
- * wish to do so, operation this exception statement from your version.
+ * wish to do so, delete this exception statement from your version.
  */
 package org.geosdi.geoplatform.experimental.el.sequence;
 
@@ -63,6 +63,18 @@ public interface IGPSequenceGenerator extends InitializingBean {
      * @return {@link IGPSequence}
      */
     IGPSequence getSequenceModel();
+
+    /**
+     * @return {@link Long}
+     */
+    Long getInitialValue();
+
+    /**
+     * @return {@link Boolean}
+     */
+    default Boolean isSetInitialValue() {
+        return getInitialValue() != null;
+    }
 
     /**
      * @return {@link String}

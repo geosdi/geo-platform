@@ -1,46 +1,42 @@
 /**
- *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
- *
- *   Copyright (C) 2008-2018 geoSDI Group (CNR IMAA - Potenza - ITALY).
- *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
- *
- *   ====================================================================
- *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
- *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * geo-platform
+ * Rich webgis framework
+ * http://geo-platform.org
+ * ====================================================================
+ * <p>
+ * Copyright (C) 2008-2018 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * <p>
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version. This program is distributed in the
+ * hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License
+ * for more details. You should have received a copy of the GNU General
+ * Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * <p>
+ * ====================================================================
+ * <p>
+ * Linking this library statically or dynamically with other modules is
+ * making a combined work based on this library. Thus, the terms and
+ * conditions of the GNU General Public License cover the whole combination.
+ * <p>
+ * As a special exception, the copyright holders of this library give you permission
+ * to link this library with independent modules to produce an executable, regardless
+ * of the license terms of these independent modules, and to copy and distribute
+ * the resulting executable under terms of your choice, provided that you also meet,
+ * for each linked independent module, the terms and conditions of the license of
+ * that module. An independent module is a module which is not derived from or
+ * based on this library. If you modify this library, you may extend this exception
+ * to your version of the library, but you are not obligated to do so. If you do not
+ * wish to do so, delete this exception statement from your version.
  */
 package org.geosdi.geoplatform.gui.client.widget.map;
 
 import com.extjs.gxt.ui.client.Registry;
-
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.geosdi.geoplatform.gui.client.event.IChangeBaseLayerHandler;
 import org.geosdi.geoplatform.gui.client.i18n.MapModuleConstants;
 import org.geosdi.geoplatform.gui.client.widget.MapToolbar;
@@ -80,14 +76,19 @@ import org.gwtopenmaps.openlayers.client.layer.Layer;
 import org.gwtopenmaps.openlayers.client.layer.WMS;
 import org.gwtopenmaps.openlayers.client.layer.WMSOptions;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- *
  */
 public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler {
 
-    private final static Logger logger = Logger.getLogger("");
+    private final static Logger logger = Logger.getLogger("MapLayoutWidget");
     public final static int NUM_ZOOM_LEVEL = 31;
     private MapWidget mapWidget;
     private MapOptions mapOptions;
@@ -208,8 +209,8 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
 
     public void addMeasureControl() {
         MeasureOptions measOpts = new MeasureOptions();
-        measOpts.setPersist(Boolean.TRUE);
-        measOpts.setGeodesic(Boolean.TRUE);
+        measOpts.setPersist(TRUE);
+        measOpts.setGeodesic(TRUE);
         this.measure = new Measure(new PathHandler(), measOpts);
         this.map.addControl(measure);
         this.measure.addMeasureListener(new MeasureListener() {
@@ -218,8 +219,8 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
             public void onMeasure(MeasureEvent eventObject) {
                 Window.alert(
                         MapModuleConstants.INSTANCE.MapLayoutWidget_infoDiscanceText()
-                        + ": " + eventObject.getMeasure() + " "
-                        + eventObject.getUnits());
+                                + ": " + eventObject.getMeasure() + " "
+                                + eventObject.getUnits());
             }
 
         });
@@ -227,8 +228,8 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
 
     public void addMeasureAreaControl() {
         MeasureOptions measOpts = new MeasureOptions();
-        measOpts.setPersist(Boolean.TRUE);
-        measOpts.setGeodesic(Boolean.TRUE);
+        measOpts.setPersist(TRUE);
+        measOpts.setGeodesic(TRUE);
         this.measureArea = new Measure(new PolygonHandler(), measOpts);
         this.map.addControl(measureArea);
         this.measureArea.addMeasureListener(new MeasureListener() {
@@ -237,8 +238,8 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
             public void onMeasure(MeasureEvent eventObject) {
                 Window.alert(
                         MapModuleConstants.INSTANCE.MapLayoutWidget_infoAreaText()
-                        + ": " + eventObject.getMeasure() + " "
-                        + eventObject.getUnits());
+                                + ": " + eventObject.getMeasure() + " "
+                                + eventObject.getUnits());
             }
 
         });
@@ -246,44 +247,42 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
 
     @Override
     public void activateInfo() {
-        this.infoActive = Boolean.TRUE;
+        this.infoActive = TRUE;
         MapHandlerManager.fireEvent(new ActivateFeatureInfoEvent(infoActive));
     }
 
     @Override
     public void deactivateInfo() {
-        this.infoActive = Boolean.FALSE;
+        this.infoActive = FALSE;
         MapHandlerManager.fireEvent(new ActivateFeatureInfoEvent(infoActive));
     }
 
     @Override
     public void activateMeasure() {
         measure.activate();
-        this.measureActive = Boolean.TRUE;
+        this.measureActive = TRUE;
     }
 
     @Override
     public void deactivateMeasure() {
         measure.deactivate();
-        this.measureActive = Boolean.FALSE;
+        this.measureActive = FALSE;
     }
 
     @Override
     public void activateMeasureArea() {
         measureArea.activate();
-        this.measureAreaActive = Boolean.TRUE;
+        this.measureAreaActive = TRUE;
     }
 
     @Override
     public void deactivateMeasureArea() {
         measureArea.deactivate();
-        this.measureAreaActive = Boolean.FALSE;
+        this.measureAreaActive = FALSE;
     }
 
     /**
      * Add Map to the ContentPanel passed from Dispatcher
-     *
-     * @param center
      */
     public void onAddToCenterPanel() {
         LayoutManager.addComponentToCenter(mapWidget);
@@ -548,7 +547,6 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
     }
 
     /**
-     *
      * @param bbox
      */
     @Override
@@ -609,30 +607,30 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
             double scale = this.map.getScale();
 
             Bounds bounds = this.map.getExtent();
-            boolean projectionChanged = Boolean.FALSE;
+            boolean projectionChanged = FALSE;
             if (gpBaseLayer.getProjection().getProjectionCode().equals(
                     GPCoordinateReferenceSystem.WGS_84.getCode())
                     && !this.map.getProjection().equals(
-                            GPCoordinateReferenceSystem.WGS_84.getCode())) {
+                    GPCoordinateReferenceSystem.WGS_84.getCode())) {
                 this.set4326MapOptions();
                 bounds.transform(new Projection(
-                        GPCoordinateReferenceSystem.EPSG_GOOGLE.getCode()),
+                                GPCoordinateReferenceSystem.EPSG_GOOGLE.getCode()),
                         new Projection(
                                 GPCoordinateReferenceSystem.WGS_84.getCode()));
                 switchWMSOptionProjection(GPCoordinateReferenceSystem.WGS_84);
-                projectionChanged = Boolean.TRUE;
+                projectionChanged = TRUE;
             } else if (gpBaseLayer.getProjection().getProjectionCode().equals(
                     GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode())
                     && !this.map.getProjection().equals(
-                            GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode())) {
+                    GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode())) {
                 this.set3857MapOptions();
                 bounds.transform(new Projection(
-                        GPCoordinateReferenceSystem.WGS_84.getCode()),
+                                GPCoordinateReferenceSystem.WGS_84.getCode()),
                         new Projection(
                                 GPCoordinateReferenceSystem.EPSG_GOOGLE.getCode()));
                 switchWMSOptionProjection(
                         GPCoordinateReferenceSystem.GOOGLE_MERCATOR);
-                projectionChanged = Boolean.TRUE;
+                projectionChanged = TRUE;
             }
             Layer newBaseLayer = gpBaseLayer.getGwtOlBaseLayer();
             Layer oldBaseLayer = this.map.getBaseLayer();
@@ -643,7 +641,7 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
             this.map.setOptions(this.mapOptions);
             if (projectionChanged) {
                 this.map.zoomToMaxExtent();
-                this.map.zoomToScale((float) scale, Boolean.TRUE);
+                this.map.zoomToScale((float) scale, TRUE);
                 this.map.zoomTo(zoomLevel);
                 this.map.zoomToExtent(bounds);
             }
@@ -655,9 +653,9 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
             GPHandlerManager.fireEvent(this.changeBaseLayerMapEvent);
         } else {
             GeoPlatformMessage.infoMessage(MapModuleConstants.INSTANCE.
-                    MapLayoutWidget_baseLayerAlreadyDisplayedTitleText(),
+                            MapLayoutWidget_baseLayerAlreadyDisplayedTitleText(),
                     MapModuleConstants.INSTANCE.
-                    MapLayoutWidget_baseLayerAlreadyDisplayedBodyText());
+                            MapLayoutWidget_baseLayerAlreadyDisplayedBodyText());
         }
     }
 

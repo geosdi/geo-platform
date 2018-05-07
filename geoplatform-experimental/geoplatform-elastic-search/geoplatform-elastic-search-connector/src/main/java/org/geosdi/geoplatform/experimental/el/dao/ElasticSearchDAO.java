@@ -34,7 +34,6 @@
  */
 package org.geosdi.geoplatform.experimental.el.dao;
 
-import com.google.common.base.Preconditions;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexRequestBuilder;
 import org.elasticsearch.action.update.UpdateRequestBuilder;
@@ -49,6 +48,7 @@ import java.nio.file.Path;
 import java.util.concurrent.ExecutorService;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 import static org.elasticsearch.common.xcontent.XContentType.JSON;
 
 /**
@@ -115,7 +115,7 @@ public interface ElasticSearchDAO<D extends Document> extends GPPageableElasticS
      */
     default D readDocument(SearchHit searchHit) {
         try {
-            Preconditions.checkNotNull(searchHit, "The SearchHit must not be null.");
+            checkNotNull(searchHit, "The SearchHit must not be null.");
             D document = readDocument(searchHit.getSourceAsString());
             if (!document.isIdSetted())
                 document.setId(searchHit.getId());
@@ -134,8 +134,8 @@ public interface ElasticSearchDAO<D extends Document> extends GPPageableElasticS
      */
     default <V extends Document> V readDocument(SearchHit searchHit, Class<V> classe) {
         try {
-            Preconditions.checkNotNull(searchHit, "The SearchHit must not be null.");
-            Preconditions.checkNotNull(classe, "The Parameter classe must not be null.");
+            checkNotNull(searchHit, "The SearchHit must not be null.");
+            checkNotNull(classe, "The Parameter classe must not be null.");
             V subClass = this.readDocument(searchHit.getSourceAsString(), classe);
             if (!subClass.isIdSetted())
                 subClass.setId(searchHit.getId());
@@ -159,7 +159,7 @@ public interface ElasticSearchDAO<D extends Document> extends GPPageableElasticS
      */
     default D readGetResponse(GetResponse response) {
         try {
-            Preconditions.checkNotNull(response, "The GetResponse must not be null.");
+            checkNotNull(response, "The GetResponse must not be null.");
             D document = readDocument(response.getSourceAsString());
             if (!document.isIdSetted()) {
                 document.setId(response.getId());

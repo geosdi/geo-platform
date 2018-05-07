@@ -48,8 +48,7 @@ import javax.annotation.Resource;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GPAbstractIndexCreator implements GPIndexCreator,
-        InitializingBean {
+public abstract class GPAbstractIndexCreator implements GPIndexCreator, InitializingBean {
 
     @GeoPlatformLog
     protected Logger logger;

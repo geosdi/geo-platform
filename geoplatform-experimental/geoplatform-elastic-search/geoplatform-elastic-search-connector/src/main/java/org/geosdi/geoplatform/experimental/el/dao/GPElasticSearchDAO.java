@@ -34,7 +34,6 @@
  */
 package org.geosdi.geoplatform.experimental.el.dao;
 
-import com.google.common.base.Preconditions;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
@@ -44,6 +43,8 @@ import org.springframework.beans.factory.InitializingBean;
 
 import java.nio.file.Path;
 import java.util.List;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * @param <D> Entity to Persist in ElasticSearch
@@ -116,8 +117,7 @@ public interface GPElasticSearchDAO<D extends Document> extends ElasticSearchDAO
     /**
      * @param <D>
      */
-    interface GPElasticSearchBaseDAO<D extends Document>
-            extends GPElasticSearchDAO<D>, InitializingBean {
+    interface GPElasticSearchBaseDAO<D extends Document> extends GPElasticSearchDAO<D>, InitializingBean {
 
         /**
          * <p>
@@ -162,7 +162,7 @@ public interface GPElasticSearchDAO<D extends Document> extends ElasticSearchDAO
          * @throws Exception
          */
         default <Builder extends SearchRequestBuilder> Long count(Builder builder) throws Exception {
-            Preconditions.checkNotNull(builder, "The Parameter Builder must not be null");
+            checkNotNull(builder, "The Parameter Builder must not be null");
             return builder.execute().get().getHits().getTotalHits();
         }
     }

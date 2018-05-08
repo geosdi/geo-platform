@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.server.service.impl;
 
+import com.google.common.collect.Lists;
 import org.geosdi.geoplatform.core.model.GSAccount;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
@@ -61,11 +62,8 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
-
-import static java.util.stream.Collectors.toList;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -160,14 +158,19 @@ public class OGCService implements IOGCService {
             HttpSession session = httpServletRequest.getSession();
             String token = (String) session.getAttribute("GOOGLE_TOKEN");
 
+            /**@TODO think a way to have this configured**/
+            String authValue = httpServletRequest.getHeader("iv-user");
             Enumeration<String> headerNames = httpServletRequest.getHeaderNames();
-
-            List<WMSHeaderParam> headerKeyValues = Collections.list(headerNames)
-                    .stream()
-                    .filter(key -> ((httpServletRequest.getHeader(key) != null)))
-                    .map(key -> new WMSHeaderParam(key, httpServletRequest.getHeader(key)))
-                    .collect(toList());
-            logger.trace("###########################HEADERS_TO_PASS_TO_SERVICE : {}\n", headerKeyValues);
+            List<WMSHeaderParam> headerParams = Lists.newArrayList();
+            if((authValue != null) && !(authValue.trim().isEmpty())) {
+                headerParams.add(new WMSHeaderParam("iv-user", authValue));
+            }
+//            List<WMSHeaderParam> headerKeyValues = Collections.list(headerNames)
+//                    .stream()
+//                    .filter(key -> ((httpServletRequest.getHeader(key) != null)))
+//                    .map(key -> new WMSHeaderParam(key, httpServletRequest.getHeader(key)))
+//                    .collect(toList());
+            logger.trace("###########################HEADERS_TO_PASS_TO_SERVICE : {}\n", headerParams);
 
             RequestByID req = new RequestByID(idServer);
             GSAccount gsAccount = this.sessionUtility.getLoggedAccount(httpServletRequest).getGsAccount();
@@ -175,7 +178,7 @@ public class OGCService implements IOGCService {
             if (gsAccount != null) {
                 authKey = gsAccount.getAuthkey();
             }
-            ServerDTO server = geoPlatformWMSServiceClient.getCapabilitiesAuth(serverUrl, req, token, authKey, headerKeyValues);
+            ServerDTO server = geoPlatformWMSServiceClient.getCapabilitiesAuth(serverUrl, req, token, authKey, headerParams);
             return dtoServerConverter.createRasterLayerList(server.getLayerList());
         } catch (ResourceNotFoundFault ex) {
             logger.error("Error GetCapabilities: " + ex);

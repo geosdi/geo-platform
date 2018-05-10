@@ -270,7 +270,6 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel implements 
             valueColumn.setId(name);
             valueColumn.setHeaderHtml(name);
             valueColumn.setEditor(buildCellEditor(valueTextField));
-            GWT.log("@@@@@@@@@@@@@@@@@@ "+width);
             valueColumn.setWidth(width);
             valueColumn.setToolTip("Datatype: " + att.getType());
             configs.add(valueColumn);

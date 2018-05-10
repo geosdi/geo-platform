@@ -48,6 +48,7 @@ import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.grid.EditorGrid;
 import com.google.common.collect.Lists;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.FocusEvent;
 import com.google.gwt.event.dom.client.FocusHandler;
 import com.google.gwt.user.client.Timer;
@@ -119,7 +120,6 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel implements 
         this.featureControlBuilder = featureControlBuilder;
         this.featureCRUDProtocol = featureCRUDProtocol;
         super.setMonitorWindowResize(Boolean.TRUE);
-
         addWidgetListener(new WidgetListener() {
 
             @Override
@@ -245,7 +245,7 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel implements 
     private ColumnModel prepareColumnModel() {
         List<AttributeDTO> attributesDTO = this.layerSchemaBinder.getLayerSchemaDTO().getAttributes();
         List<ColumnConfig> configs = Lists.<ColumnConfig>newArrayListWithCapacity(attributesDTO.size());
-        int width = (getWidth() - 2) / attributesDTO.size();
+        int width = (getWidth() - 2) / attributesDTO.size() > 0 ? (getWidth() - 2) / attributesDTO.size() : 0;
 
         for (final AttributeDTO att : attributesDTO) {
             final GPSecureStringTextField valueTextField = new GPSecureStringTextField();
@@ -270,6 +270,7 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel implements 
             valueColumn.setId(name);
             valueColumn.setHeaderHtml(name);
             valueColumn.setEditor(buildCellEditor(valueTextField));
+            GWT.log("@@@@@@@@@@@@@@@@@@ "+width);
             valueColumn.setWidth(width);
             valueColumn.setToolTip("Datatype: " + att.getType());
             configs.add(valueColumn);

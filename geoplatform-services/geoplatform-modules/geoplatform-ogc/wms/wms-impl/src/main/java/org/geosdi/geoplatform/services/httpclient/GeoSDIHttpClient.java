@@ -101,10 +101,11 @@ public class GeoSDIHttpClient extends MultithreadedHttpClient {
             getMethod.setRequestHeader("Accept-Encoding", "gzip");
         }
 
-        LOGGER.info("HEADERS : " + getHeaders());
-        for (WMSHeaderParam wmsHeaderParam : this.headers) {
-            getMethod.setRequestHeader(wmsHeaderParam.getHeaderKey(), wmsHeaderParam.getHeaderValue());
-        }
+        LOGGER.info("HEADERS : " + this.headers);
+        if (this.headers != null)
+            for (WMSHeaderParam wmsHeaderParam : this.headers) {
+                getMethod.setRequestHeader(wmsHeaderParam.getHeaderKey(), wmsHeaderParam.getHeaderValue());
+            }
 
         int responseCode = this.executeMethod(getMethod);
         if (200 != responseCode) {
@@ -115,13 +116,22 @@ public class GeoSDIHttpClient extends MultithreadedHttpClient {
         }
     }
 
+    /**
+     * @param url
+     * @param postContent
+     * @param postContentType
+     * @return {@link HTTPResponse}
+     * @throws IOException
+     */
     public HTTPResponse post(URL url, InputStream postContent, String postContentType) throws IOException {
         PostMethod postMethod = new PostMethod(url.toExternalForm());
-        System.out.println("Inject OpenAM Cookie");
-        List<String> values = this.headers.stream()
-                .map(value -> String.join("=", value.getHeaderKey(), value.getHeaderValue()))
-                .collect(toList());
-        postMethod.setRequestHeader("Cookie", String.join(";", values));
+        LOGGER.info("Inject OpenAM Cookie");
+        if (this.headers != null) {
+            List<String> values = this.headers.stream()
+                    .map(value -> String.join("=", value.getHeaderKey(), value.getHeaderValue()))
+                    .collect(toList());
+            postMethod.setRequestHeader("Cookie", String.join(";", values));
+        }
 
         RequestEntity requestEntity = new InputStreamRequestEntity(postContent);
         postMethod.setRequestEntity(requestEntity);
@@ -133,8 +143,7 @@ public class GeoSDIHttpClient extends MultithreadedHttpClient {
             return new GeoSDIHttpClient.HttpMethodResponse(postMethod);
         }
     }
-
-
+    
     private int executeMethod(HttpMethod method) throws IOException, HttpException {
         String host = method.getURI().getHost();
         if (host != null && this.nonProxyHosts.contains(host.toLowerCase())) {
@@ -203,6 +212,9 @@ public class GeoSDIHttpClient extends MultithreadedHttpClient {
         }
     }
 
+    /**
+     * @return {@link List<WMSHeaderParam>}
+     */
     public List<WMSHeaderParam> getHeaders() {
         return headers;
     }
@@ -214,4 +226,3 @@ public class GeoSDIHttpClient extends MultithreadedHttpClient {
         this.headers = ((headers != null) ? headers : Lists.newArrayList());
     }
 }
-

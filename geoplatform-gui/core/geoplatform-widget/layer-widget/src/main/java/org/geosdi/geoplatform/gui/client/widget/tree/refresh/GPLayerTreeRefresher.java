@@ -45,14 +45,13 @@ import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.command.api.GPClientCommandExecutor;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 
-import javax.inject.Singleton;
 import java.util.logging.Logger;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Singleton
+//@Singleton
 public class GPLayerTreeRefresher implements GPCompositeRefreshHandler {
 
     private static final Logger logger = Logger.getLogger("GPLayerTreeRefresher");

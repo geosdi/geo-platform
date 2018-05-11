@@ -36,12 +36,13 @@
 package org.geosdi.geoplatform.gui.client.model.layout;
 
 import com.google.gwt.core.client.GWT;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.geosdi.geoplatform.gui.client.command.layer.basic.GetLayerLayoutRequest;
 import org.geosdi.geoplatform.gui.client.command.layer.basic.GetLayerLayoutResponse;
 import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
 import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -49,7 +50,8 @@ import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
  */
 public class LayerBeanLayoutFactory {
 
-    protected final static Logger logger = Logger.getLogger("");
+    protected final static Logger logger = Logger.getLogger("LayerBeanLayoutFactory");
+    //
     private static LayerBeanLayout layerBeanLayout;
 
     static {

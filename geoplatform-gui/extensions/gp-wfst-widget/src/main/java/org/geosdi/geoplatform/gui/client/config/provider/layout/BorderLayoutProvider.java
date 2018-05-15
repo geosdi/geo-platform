@@ -42,6 +42,8 @@ import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import javax.inject.Inject;
 import javax.inject.Provider;
+
+import com.google.gwt.core.client.GWT;
 import org.geosdi.geoplatform.gui.client.widget.wfs.IFeatureWidget;
 import org.geosdi.geoplatform.gui.client.widget.wfs.layout.responsibility.FeatureSelectionLayoutHandler;
 

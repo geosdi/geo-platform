@@ -76,6 +76,8 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget, 
     @Inject
     private FeatureSelectionWidget selectionWidget;
     @Inject
+    private LayerSelectionWidget layerSelectionWidget;
+    @Inject
     private FeatureMapWidget mapWidget;
     @Inject
     private FeatureAttributesWidget attributesWidget;
@@ -107,6 +109,7 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget, 
     @Override
     public void addComponent() {
         this.addSelectionWidget();
+        this.addLayerSelectionWidget();
         this.addMapWidget();
         this.addAttributesWidget();
         this.createStatusBar();
@@ -117,7 +120,7 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget, 
 
     @Override
     public void initSize() {
-        super.setSize(1000, 650);
+        super.setSize(1200, 650);
         super.setHeadingHtml("GeoPlatform WFS-T Widget");
         super.setIcon(AbstractImagePrototype.create(BasicWidgetResources.ICONS.vector()));
     }
@@ -140,6 +143,15 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget, 
         layoutData.setCollapsible(true);
 
         super.add(this.selectionWidget, layoutData);
+    }
+
+    private void addLayerSelectionWidget() {
+        BorderLayoutData layoutData = new BorderLayoutData(LayoutRegion.WEST,
+                200);
+        layoutData.setMargins(new Margins(5, 5, 5, 5));
+        layoutData.setCollapsible(true);
+
+        super.add(this.layerSelectionWidget, layoutData);
     }
 
     private void addMapWidget() {
@@ -168,7 +180,6 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget, 
 
     private void createStatusBar() {
         super.setButtonAlign(Style.HorizontalAlignment.LEFT);
-
         super.getButtonBar().add(this.statusBar);
         super.getButtonBar().add(new FillToolItem());
 

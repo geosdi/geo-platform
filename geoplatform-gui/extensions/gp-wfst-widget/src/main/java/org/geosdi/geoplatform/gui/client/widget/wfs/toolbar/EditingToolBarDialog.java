@@ -50,37 +50,41 @@ import org.geosdi.geoplatform.gui.client.config.annotation.GetFeatureToggleButto
 import org.geosdi.geoplatform.gui.client.config.annotation.ReshapeFeatureToggleButton;
 import org.geosdi.geoplatform.gui.client.config.annotation.ResizeFeatureToggleButton;
 import org.geosdi.geoplatform.gui.client.config.annotation.RotateFeatureToggleButton;
+import org.geosdi.geoplatform.gui.client.puregwt.toolbar.IEditingToolbarHandler;
+import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.FeatureSelectionWidgetHandler;
 import org.geosdi.geoplatform.gui.configuration.resources.GeoPlatformStyleInjector;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
 /**
  * @author Francesco Izzi - CNR IMAA geoSDI Group
  * @email francesco.izzi@geosdi.org
  *
  */
-public class EditingToolBarDialog extends Composite {
+public class EditingToolBarDialog extends Composite implements IEditingToolbarHandler {
 
     interface Binder extends UiBinder<Widget, EditingToolBarDialog> {
     }
 
     private static final Binder binder = GWT.create(Binder.class);
+    private final GPEventBus bus;
     //
     @UiField
     FlowPanel toolbarEditorPanel;
 
     @Inject
-    public EditingToolBarDialog(@DragFeatureToggleButton ToggleButton drag,
-            @EditFeatureToggleButton ToggleButton edit,
-            @GetFeatureToggleButton ToggleButton info,
-            @ReshapeFeatureToggleButton ToggleButton reshape,
-            @ResizeFeatureToggleButton ToggleButton resize,
-            @RotateFeatureToggleButton ToggleButton rotate,
-            @EraseFeatureToggleButton ToggleButton erase) {
+    public EditingToolBarDialog(GPEventBus theBus,@DragFeatureToggleButton ToggleButton drag,
+                                @EditFeatureToggleButton ToggleButton edit,
+                                @GetFeatureToggleButton ToggleButton info,
+                                @ReshapeFeatureToggleButton ToggleButton reshape,
+                                @ResizeFeatureToggleButton ToggleButton resize,
+                                @RotateFeatureToggleButton ToggleButton rotate,
+                                @EraseFeatureToggleButton ToggleButton erase) {
 
         GeoPlatformStyleInjector.injectCss(
                 ResourceEditingToolBar.INSTANCE.wfstCss());
 
         initWidget(binder.createAndBindUi(this));
-
+        this.bus = theBus;
         toolbarEditorPanel.add(info);
         toolbarEditorPanel.add(edit);
         toolbarEditorPanel.add(reshape);
@@ -88,7 +92,19 @@ public class EditingToolBarDialog extends Composite {
         toolbarEditorPanel.add(drag);
         toolbarEditorPanel.add(resize);
         toolbarEditorPanel.add(erase);
-
+        toolbarEditorPanel.addStyleName("toolbar-max-padding");
+        bus.addHandler(IEditingToolbarHandler.TYPE, this);
     }
 
+    @Override
+    public void increasePadding() {
+        toolbarEditorPanel.removeStyleName("toolbar-min-padding");
+        toolbarEditorPanel.addStyleName("toolbar-max-padding");
+    }
+
+    @Override
+    public void decreasePadding() {
+        toolbarEditorPanel.removeStyleName("toolbar-max-padding");
+        toolbarEditorPanel.addStyleName("toolbar-min-padding");
+    }
 }

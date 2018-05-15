@@ -47,7 +47,6 @@ import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
 import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.config.annotation.ResetButton;
 import org.geosdi.geoplatform.gui.client.config.annotation.SaveButton;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
@@ -64,12 +63,14 @@ import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
 import javax.inject.Inject;
 
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
+import static org.geosdi.geoplatform.gui.client.BasicWidgetResources.ICONS;
 import static org.geosdi.geoplatform.gui.client.widget.wfs.builder.feature.FeatureAttributesWindowBuilder.RECONFIGURE_STATE;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
- * @email giuseppe.lascaleia@geosdi.org
  */
 public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget, ActionEnableHandler {
 
@@ -94,9 +95,13 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget, 
     private final GPEventBus bus;
     private final ScaleVisibleEvent scaleVisibleEvent = new ScaleVisibleEvent();
 
+    /**
+     * @param theBus
+     * @param theResetButton
+     * @param theSaveButton
+     */
     @Inject
-    public FeatureWidget(GPEventBus theBus, @ResetButton Button theResetButton,
-            @SaveButton Button theSaveButton) {
+    public FeatureWidget(GPEventBus theBus, @ResetButton Button theResetButton, @SaveButton Button theSaveButton) {
         super(true);
         this.bus = theBus;
         this.resetButton = theResetButton;
@@ -111,7 +116,6 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget, 
         this.addAttributesWidget();
         this.createStatusBar();
         this.createEditingBar();
-
         super.setTopComponent(this.featureWidgetBar);
     }
 
@@ -119,80 +123,17 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget, 
     public void initSize() {
         super.setSize(1000, 650);
         super.setHeadingHtml("GeoPlatform WFS-T Widget");
-        super.setIcon(AbstractImagePrototype.create(BasicWidgetResources.ICONS.vector()));
+        super.setIcon(AbstractImagePrototype.create(ICONS.vector()));
     }
 
     @Override
     public void setWindowProperties() {
-        super.setCollapsible(Boolean.FALSE);
-        super.setResizable(Boolean.TRUE);
-        super.setMaximizable(Boolean.TRUE);
-        super.setModal(Boolean.TRUE);
-        super.setPlain(Boolean.TRUE);
-
+        super.setCollapsible(FALSE);
+        super.setResizable(TRUE);
+        super.setMaximizable(TRUE);
+        super.setModal(TRUE);
+        super.setPlain(TRUE);
         super.setLayout(layout);
-    }
-
-    private void addSelectionWidget() {
-        BorderLayoutData layoutData = new BorderLayoutData(LayoutRegion.EAST,
-                300);
-        layoutData.setMargins(new Margins(5, 5, 5, 5));
-        layoutData.setCollapsible(true);
-
-        super.add(this.selectionWidget, layoutData);
-    }
-
-    private void addMapWidget() {
-        BorderLayoutData layoutData = new BorderLayoutData(LayoutRegion.CENTER,
-                700);
-        layoutData.setMargins(new Margins(5));
-
-        super.add(this.mapWidget, layoutData);
-    }
-
-    private void addAttributesWidget() {
-        BorderLayoutData layoutData = new BorderLayoutData(LayoutRegion.SOUTH,
-                150);
-        layoutData.setMargins(new Margins(5, 5, 5, 5));
-        layoutData.setCollapsible(true);
-        layoutData.setSplit(true);
-        layoutData.setMinSize(150);
-        layoutData.setMaxSize(500);
-
-        attributesWidget.setHeaderVisible(true);
-        attributesWidget.getHeader().setText("Feature Attributes");
-        attributesWidget.getHeader().setStyleAttribute("textAlign", "center");
-
-        super.add(this.attributesWidget, layoutData);
-    }
-
-    private void createStatusBar() {
-        super.setButtonAlign(Style.HorizontalAlignment.LEFT);
-
-        super.getButtonBar().add(this.statusBar);
-        super.getButtonBar().add(new FillToolItem());
-
-        super.addButton(resetButton);
-        super.addButton(saveButton);
-
-        this.disableButtons();
-
-        Button close = new Button(ButtonsConstants.INSTANCE.closeText(),
-                AbstractImagePrototype.create(BasicWidgetResources.ICONS.cancel()),
-                new SelectionListener<ButtonEvent>() {
-
-                    @Override
-                    public void componentSelected(ButtonEvent ce) {
-                        hide();
-                    }
-
-                });
-        close.setEnabled(super.isClosable());
-        super.addButton(close);
-    }
-
-    private void createEditingBar() {
-        super.add(editToolbarDialog);
     }
 
     @Override
@@ -200,7 +141,7 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget, 
         this.mapWidget.reset();
         this.attributesWidget.reset();
         this.statusBar.reset();
-        this.scaleVisibleEvent.setActivate(Boolean.TRUE);
+        this.scaleVisibleEvent.setActivate(TRUE);
         MapHandlerManager.fireEvent(scaleVisibleEvent);
     }
 
@@ -208,8 +149,7 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget, 
     public void show() {
         if ((this.layerSchemaBinder.getSelectedLayer() == null)
                 || (this.layerSchemaBinder.getLayerSchemaDTO() == null)) {
-            throw new IllegalArgumentException(
-                    "Both SchemaDTO and GPLayerBean must not be null");
+            throw new IllegalArgumentException("Both SchemaDTO and GPLayerBean must not be null");
         }
         super.show();
     }
@@ -217,11 +157,9 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget, 
     @Override
     protected void afterShow() {
         super.afterShow();
-        this.scaleVisibleEvent.setActivate(Boolean.FALSE);
+        this.scaleVisibleEvent.setActivate(FALSE);
         MapHandlerManager.fireEvent(scaleVisibleEvent);
-
         this.statusBar.setBusy("Loading Layer as WFS");
-
         this.selectionWidget.reconfigureAttributes();
         this.mapWidget.bindLayerSchema();
         this.attributesWidget.reconfigureEditorGrid();
@@ -246,11 +184,61 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget, 
     @Override
     public void manageWidgetsSize() {
         SplitBar bar = attributesWidget.getData("splitBar");
-
         if (bar != null) {
             this.attributesWidget.manageGridHeight();
             this.mapWidget.manageMapSize();
         }
+    }
+
+    private void addSelectionWidget() {
+        BorderLayoutData layoutData = new BorderLayoutData(LayoutRegion.EAST, 300);
+        layoutData.setMargins(new Margins(5, 5, 5, 5));
+        layoutData.setCollapsible(true);
+        super.add(this.selectionWidget, layoutData);
+    }
+
+    private void addMapWidget() {
+        BorderLayoutData layoutData = new BorderLayoutData(LayoutRegion.CENTER, 700);
+        layoutData.setMargins(new Margins(5));
+        super.add(this.mapWidget, layoutData);
+    }
+
+    private void addAttributesWidget() {
+        BorderLayoutData layoutData = new BorderLayoutData(LayoutRegion.SOUTH, 150);
+        layoutData.setMargins(new Margins(5, 5, 5, 5));
+        layoutData.setCollapsible(true);
+        layoutData.setSplit(true);
+        layoutData.setMinSize(150);
+        layoutData.setMaxSize(500);
+        attributesWidget.setHeaderVisible(true);
+        attributesWidget.getHeader().setText("Feature Attributes");
+        attributesWidget.getHeader().setStyleAttribute("textAlign", "center");
+        super.add(this.attributesWidget, layoutData);
+    }
+
+    private void createStatusBar() {
+        super.setButtonAlign(Style.HorizontalAlignment.LEFT);
+        super.getButtonBar().add(this.statusBar);
+        super.getButtonBar().add(new FillToolItem());
+        super.addButton(resetButton);
+        super.addButton(saveButton);
+        this.disableButtons();
+        Button close = new Button(ButtonsConstants.INSTANCE.closeText(),
+                AbstractImagePrototype.create(ICONS.cancel()),
+                new SelectionListener<ButtonEvent>() {
+
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                        hide();
+                    }
+
+                });
+        close.setEnabled(super.isClosable());
+        super.addButton(close);
+    }
+
+    private void createEditingBar() {
+        super.add(editToolbarDialog);
     }
 
     private void disableButtons() {
@@ -262,5 +250,4 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget, 
         resetButton.enable();
         saveButton.enable();
     }
-
 }

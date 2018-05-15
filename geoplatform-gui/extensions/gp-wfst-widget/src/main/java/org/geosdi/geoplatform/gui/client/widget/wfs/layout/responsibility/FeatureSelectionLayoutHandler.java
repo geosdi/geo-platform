@@ -38,7 +38,10 @@ package org.geosdi.geoplatform.gui.client.widget.wfs.layout.responsibility;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.puregwt.map.event.DecreaseWidthEvent;
+import org.geosdi.geoplatform.gui.client.puregwt.toolbar.event.EditingToolbarPaddingEvent;
+import org.geosdi.geoplatform.gui.client.puregwt.toolbar.event.IncreasePaddingEvent;
 import org.geosdi.geoplatform.gui.client.widget.wfs.FeatureSelectionWidget;
+import org.geosdi.geoplatform.gui.client.widget.wfs.LayerSelectionWidget;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
 /**
@@ -51,6 +54,7 @@ public class FeatureSelectionLayoutHandler extends AbstractLayoutHandler {
     @Inject
     private GPEventBus bus;
     private DecreaseWidthEvent event = new DecreaseWidthEvent();
+    private final EditingToolbarPaddingEvent increasePaddingEvent = new IncreasePaddingEvent();
 
     @Inject
     public FeatureSelectionLayoutHandler(
@@ -62,6 +66,7 @@ public class FeatureSelectionLayoutHandler extends AbstractLayoutHandler {
     public void manageLayout(ContentPanel panel) {
         if (canManageLayout(panel.getId())) {
             bus.fireEvent(event);
+            bus.fireEvent(increasePaddingEvent);
         } else {
             super.forwardManageLayout(panel);
         }
@@ -69,7 +74,8 @@ public class FeatureSelectionLayoutHandler extends AbstractLayoutHandler {
 
     @Override
     public boolean canManageLayout(String idPanel) {
-        return idPanel.equalsIgnoreCase(FeatureSelectionWidget.ID);
+        return idPanel.equalsIgnoreCase(FeatureSelectionWidget.ID)
+                 || idPanel.equalsIgnoreCase(LayerSelectionWidget.ID);
     }
 
 }

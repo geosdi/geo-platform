@@ -44,6 +44,7 @@ public enum WFSWidgetNames {
 
     FEATURE_ATTRIBUTES("WFST-FeatureAttributesWidget"),
     FEATURE_SELECTION("WFST-FeatureSelectionWidget"),
+    LAYER_SELECTION("WFST-LayerSelectionWidget"),
     SHOW_FEATURES("WFST-ShowFeatures");
     //
     private String value;

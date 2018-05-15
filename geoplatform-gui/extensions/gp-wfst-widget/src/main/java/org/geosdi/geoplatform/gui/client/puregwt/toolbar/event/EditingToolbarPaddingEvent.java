@@ -33,81 +33,21 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-/* 
-    Document   : wfst
-    Created on : 25-lug-2013, 15.51.19
-    Author     : Francesco Izzi @ geoSDI
-    Description: Override gwt styles.
-*/
+package org.geosdi.geoplatform.gui.client.puregwt.toolbar.event;
 
-.gwt-ToggleButton {
-    background: #130085; /* fallback for IE */
-    background: rgba(0, 60, 136, 0.7);
-    filter: alpha(opacity=100);
-    display: inline-block;
-    color: rgb(255, 255, 255);
-    font-family: arial;
-    font-weight: normal;
-    padding: 1px;
-    text-align: center;
-    text-decoration: none;
-    width: 2.1em;
-    margin-left: 4px;
-}
+import com.google.gwt.event.shared.GwtEvent;
+import org.geosdi.geoplatform.gui.client.puregwt.map.IFeatureMapHandler;
+import org.geosdi.geoplatform.gui.client.puregwt.toolbar.IEditingToolbarHandler;
 
-.gwt-ToggleButton-up {   
-    background: none repeat scroll 0% 0% rgba(0, 60, 136, 0.5);
-    display: inline-block;
-    color: rgb(255, 255, 255);
-    font-family: arial;
-    font-weight: normal;
-    padding: 1px;
-    text-align: center;
-    text-decoration: none;
-    width: 2.1em;
-} 
-.gwt-ToggleButton-down {
-   background: #130085; /* fallback for IE */
-    background: rgba(0, 60, 136, 0.7);
-    filter: alpha(opacity=100);
-    
-} 
-.gwt-ToggleButton-up-hovering {
-     background: #130085; /* fallback for IE */
-    background: rgba(0, 60, 136, 0.7);
-    filter: alpha(opacity=100);
-} 
-.gwt-ToggleButton-down-hovering {
-    background: none repeat scroll 0% 0% rgba(0, 60, 136, 0.5);
-} 
-.gwt-ToggleButton-up-disabled {
-    background: none repeat scroll 0% 0% rgba(0, 60, 136, 0.2);
+/**
+ * @author Vito Salvia- CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
+ */
+public abstract class EditingToolbarPaddingEvent
+        extends GwtEvent<IEditingToolbarHandler> {
 
-} 
-.gwt-ToggleButton-down-disabled {
-
-}
-
-.firstButton{
-    border-radius: 4px 4px 0px 0px;
-    border-color: white;
-    border-bottom: 1px solid white;
-}
-
-.midButton{
-    border-color: white;
-    border-bottom: 1px solid white;
-}
-
-.lastButton{
-    border-radius: 0px 0px 4px 4px;
-    border-color: white;
-}
-
-.toolbar-max-padding{
-        padding: 0 222px;
-}
-
-.toolbar-min-padding{
-        padding: 0 44px;
+    @Override
+    public Type<IEditingToolbarHandler> getAssociatedType() {
+        return IEditingToolbarHandler.TYPE;
+    }
 }

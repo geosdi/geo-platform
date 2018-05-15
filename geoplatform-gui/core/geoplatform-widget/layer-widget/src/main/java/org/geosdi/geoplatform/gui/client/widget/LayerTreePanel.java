@@ -41,6 +41,8 @@ import org.geosdi.geoplatform.gui.client.widget.toolbar.LayerTreeToolbar;
 
 import javax.inject.Inject;
 
+import static java.lang.Boolean.TRUE;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -56,7 +58,7 @@ public class LayerTreePanel extends GeoPlatformContentPanel {
      */
     @Inject
     public LayerTreePanel(LayerTreeWidget theLayerTree, LayerTreeToolbar theTreeToolbar) {
-        super(true);
+        super(TRUE);
         this.layerTree = theLayerTree;
         this.treeToolbar = theTreeToolbar;
     }

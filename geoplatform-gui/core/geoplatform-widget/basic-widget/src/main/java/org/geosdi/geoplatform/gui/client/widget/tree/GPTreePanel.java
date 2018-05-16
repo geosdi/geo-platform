@@ -36,7 +36,6 @@ package org.geosdi.geoplatform.gui.client.widget.tree;
 
 import com.extjs.gxt.ui.client.data.ModelData;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import org.geosdi.geoplatform.gui.client.widget.map.event.LayerRangeEventHandler;
 import org.geosdi.geoplatform.gui.client.widget.tree.decorator.GPTreeCheckDecorator;
@@ -57,8 +56,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 /**
- * @param <T>
  * @author Nazzareno Sileno  <nazzareno.sileno@geosdi.org>
  * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
  */
@@ -188,11 +188,9 @@ public class GPTreePanel<T extends GPBeanTreeModel> extends TreePanel<T> impleme
     @Override
     public List<GPLayerBean> getVisibleLayersOnTree() {
         List<GPLayerBean> visibleLayers = Lists.<GPLayerBean>newArrayList();
-        AbstractRootTreeNode root = (AbstractRootTreeNode) this.getStore().getRootItems().get(
-                0);
-        Preconditions.checkArgument(root != null,
-                "GPTreePanel on getVisibleLayers():"
-                        + " Impossible to retrieve root element");
+        AbstractRootTreeNode root = (AbstractRootTreeNode) this.getStore().getRootItems().get(0);
+        checkArgument(root != null, "GPTreePanel on getVisibleLayers():"
+                + " Impossible to retrieve root element");
         return this.getVisibleLayersOnTree(root.getChildren(), visibleLayers);
     }
 
@@ -200,18 +198,17 @@ public class GPTreePanel<T extends GPBeanTreeModel> extends TreePanel<T> impleme
      * @return {@link List<GPLayerBean>}
      */
     @Override
-    public List<GPLayerBean> getAllLayersOnTree() {
-        List<GPLayerBean> allLayers = Lists.<GPLayerBean>newArrayList();
+    public <T extends GPLayerBean> List<T> getAllLayersOnTree() {
+        List<T> allLayers = Lists.newArrayList();
         AbstractRootTreeNode root = (AbstractRootTreeNode) this.getStore().getRootItems().get(
                 0);
-        Preconditions.checkArgument(root != null,
+        checkArgument(root != null,
                 "GPTreePanel on getVisibleLayers():"
                         + " Impossible to retrieve root element");
         return this.getAllLayersOnTree(root.getChildren(), allLayers);
     }
 
     /**
-     *
      * @return {@link List<GPLayerBean>}
      */
     @Override
@@ -219,7 +216,7 @@ public class GPTreePanel<T extends GPBeanTreeModel> extends TreePanel<T> impleme
         List<GPLayerBean> allLayers = Lists.<GPLayerBean>newArrayList();
         AbstractRootTreeNode root = (AbstractRootTreeNode) this.getStore().getRootItems().get(
                 0);
-        Preconditions.checkArgument(root != null,
+        checkArgument(root != null,
                 "GPTreePanel on getVisibleLayers():"
                         + " Impossible to retrieve root element");
         return this.getAllLayersOnTreeByDataSource(root.getChildren(), allLayers, dataSource);
@@ -249,14 +246,13 @@ public class GPTreePanel<T extends GPBeanTreeModel> extends TreePanel<T> impleme
      * @param allLayers
      * @return {@link List<GPLayerBean>}
      */
-    protected List<GPLayerBean> getAllLayersOnTree(List<ModelData> layers,
-            List<GPLayerBean> allLayers) {
+    protected <T extends GPLayerBean> List<T> getAllLayersOnTree(List<ModelData> layers, List<T> allLayers) {
         for (Iterator<ModelData> it = layers.iterator(); it.hasNext(); ) {
             GPBeanTreeModel element = (GPBeanTreeModel) it.next();
             if (element instanceof AbstractFolderTreeNode && element.getChildCount() != 0) {
                 this.getAllLayersOnTree(element.getChildren(), allLayers);
             } else if (element instanceof GPLayerTreeModel) {
-                allLayers.add((GPLayerBean) element);
+                allLayers.add((T) element);
             }
         }
         return allLayers;
@@ -268,7 +264,7 @@ public class GPTreePanel<T extends GPBeanTreeModel> extends TreePanel<T> impleme
      * @return {@link List<GPLayerBean>}
      */
     protected List<GPLayerBean> getAllLayersOnTreeByDataSource(List<ModelData> layers,
-                                                   List<GPLayerBean> allLayers, String dataSource) {
+            List<GPLayerBean> allLayers, String dataSource) {
         for (Iterator<ModelData> it = layers.iterator(); it.hasNext(); ) {
             GPBeanTreeModel element = (GPBeanTreeModel) it.next();
             if (element instanceof AbstractFolderTreeNode && element.getChildCount() != 0) {

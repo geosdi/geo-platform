@@ -1,38 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-  
+
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>extension</artifactId>
         <version>1.8-SNAPSHOT</version>
     </parent>
-  
+
     <groupId>org.geosdi</groupId>
     <artifactId>gp-wfst-widget</artifactId>
     <version>1.8-SNAPSHOT</version>
     <packaging>jar</packaging>
-  
+
     <name>Geo-Platform :: == WFS-T Widget</name>
-  
+
     <dependencies>
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-wfs-shared</artifactId>
             <version>${project.version}</version>
         </dependency>
-        
+
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-ws-wfs-connector</artifactId>
             <version>${project.version}</version>
         </dependency>
-        
+
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-ws-util</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-sharing</artifactId>
@@ -70,7 +71,7 @@
             <artifactId>basic-widget</artifactId>
             <version>${project.version}</version>
         </dependency>
-        
+
         <!-- TODO  REMOVE SCOPE PROVIDED WITH SPRING 3.2.5.RELEASE-->
         <dependency>
             <groupId>org.geosdi</groupId>
@@ -85,7 +86,7 @@
             <classifier>sources</classifier>
             <version>${project.version}</version>
         </dependency>
-        
+
         <!-- EDITOR API DEPENDENCIES -->
         <dependency>
             <groupId>org.geosdi</groupId>
@@ -99,18 +100,18 @@
             <classifier>sources</classifier>
             <version>${project.version}</version>
         </dependency>
-        
+
         <!-- Dependencies for GWT -->
         <dependency>
             <groupId>com.google.gwt</groupId>
             <artifactId>gwt-user</artifactId>
             <scope>provided</scope>
         </dependency>
-        
+
         <dependency>
             <groupId>com.google.gwt.inject</groupId>
             <artifactId>gin</artifactId>
-        </dependency>        
+        </dependency>
         <dependency>
             <groupId>com.google.inject</groupId>
             <artifactId>guice</artifactId>
@@ -119,12 +120,12 @@
             <groupId>javax.inject</groupId>
             <artifactId>javax.inject</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>com.extjs</groupId>
             <artifactId>gxt</artifactId>
@@ -150,9 +151,9 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-expression</artifactId>
         </dependency>
-        
+
         <dependency>
-            <groupId> org.gwtopenmaps.openlayers</groupId>
+            <groupId>org.gwtopenmaps.openlayers</groupId>
             <artifactId>gwt-openlayers-client</artifactId>
         </dependency>
 
@@ -170,7 +171,7 @@
             <artifactId>log4j-over-slf4j</artifactId>
         </dependency>
     </dependencies>
-    
+
     <build>
         <plugins>
             <!-- ... or ask the plugin to detect them based on gwt modules files and 
@@ -187,13 +188,13 @@
                     </execution>
                 </executions>
             </plugin>
-            
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
             </plugin>
         </plugins>
-            
+
         <!-- TODO: the resources stuff hardcodes paths to source + test directories, 
         we should be able to use some properties here -->
         <resources>
@@ -229,5 +230,5 @@
             </resource>
         </resources>
     </build>
-  
+
 </project>

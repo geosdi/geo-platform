@@ -35,25 +35,14 @@
 package org.geosdi.geoplatform.gui.client.widget.wfs;
 
 import com.extjs.gxt.ui.client.Style;
-import com.extjs.gxt.ui.client.store.ListStore;
-import com.extjs.gxt.ui.client.widget.ListView;
-import com.extjs.gxt.ui.client.widget.form.FormPanel;
-import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
-import com.google.gwt.core.client.GWT;
 import org.geosdi.geoplatform.gui.client.puregwt.map.event.FeatureMapWidthEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.map.event.IncreaseWidthEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.toolbar.event.DecreasePaddingEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.toolbar.event.EditingToolbarPaddingEvent;
-import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.LayerSelectionHandler;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
-import org.geosdi.geoplatform.gui.client.widget.wfs.treegrid.LayerTreeGrid;
-import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
 import javax.inject.Inject;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static java.lang.Boolean.TRUE;
 
@@ -69,18 +58,15 @@ public class LayerSelectionWidget extends GeoPlatformContentPanel {
     //
     private final FeatureMapWidthEvent increaseWidthEvent = new IncreaseWidthEvent();
     private final EditingToolbarPaddingEvent decreasePaddingEvent = new DecreasePaddingEvent();
-    private final LayerTreeGrid layerTreeGrid;
 
     @Inject
-    public LayerSelectionWidget(GPEventBus theBus, LayerTreeGrid layerTreeGrid) {
+    public LayerSelectionWidget(GPEventBus theBus) {
         super(TRUE);
         this.bus = theBus;
-        this.layerTreeGrid = layerTreeGrid;
     }
 
     @Override
     public void addComponent() {
-        super.add(this.layerTreeGrid.asWidget());
     }
 
     @Override
@@ -106,6 +92,5 @@ public class LayerSelectionWidget extends GeoPlatformContentPanel {
     @Override
     protected void onShow() {
         super.onShow();
-        this.layerTreeGrid.buildTree();
     }
 }

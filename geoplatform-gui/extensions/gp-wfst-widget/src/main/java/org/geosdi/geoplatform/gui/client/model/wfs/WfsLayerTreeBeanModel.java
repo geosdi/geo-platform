@@ -13,10 +13,9 @@ import org.geosdi.geoplatform.gui.model.tree.grid.GPTreeGridBeanModel;
 public class WfsLayerTreeBeanModel extends GPTreeGridBeanModel {
 
     /**
-     *
      * @param theLayer
      */
-    public WfsLayerTreeBeanModel(GPRasterBean theLayer){
+    public WfsLayerTreeBeanModel(GPRasterBean theLayer) {
         super(null);
     }
 

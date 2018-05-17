@@ -1,40 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.4.0//EN" "http://google-web-toolkit.googlecode.com/svn/tags/2.4.0/distro-source/core/src/gwt-module.dtd">
+<!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.4.0//EN"
+        "http://google-web-toolkit.googlecode.com/svn/tags/2.4.0/distro-source/core/src/gwt-module.dtd">
 <module>
     <inherits name="com.google.gwt.inject.Inject"/>
     <inherits name="org.geosdi.geoplatform.connector.wfs.WFSSharedUI"/>
-    <inherits name="org.geosdi.geoplatform.gui.GPCASProperties" />
-    
-    <source path="client" />
+    <inherits name="org.geosdi.geoplatform.gui.GPCASProperties"/>
+
+    <source path="client"/>
     <!-- =============================== -->
-    
-    <entry-point class="org.geosdi.geoplatform.gui.client.WFSWidgetUI" />
-    
+
+    <entry-point class="org.geosdi.geoplatform.gui.client.WFSWidgetUI"/>
+
     <replace-with class="org.geosdi.geoplatform.gui.client.command.wfst.cas.basic.CasDescribeFeatureTypeRequest">
         <when-type-is class="org.geosdi.geoplatform.gui.client.command.wfst.basic.DescribeFeatureTypeRequest"/>
         <when-property-is name="security.geoserver" value="gs_cas"/>
     </replace-with>
-    
+
     <replace-with class="org.geosdi.geoplatform.gui.client.command.wfst.cas.basic.CasGetAllFeatureRequest">
         <when-type-is class="org.geosdi.geoplatform.gui.client.command.wfst.basic.GetAllFeatureRequest"/>
         <when-property-is name="security.geoserver" value="gs_cas"/>
     </replace-with>
-    
+
     <replace-with class="org.geosdi.geoplatform.gui.client.command.wfst.cas.basic.CasQueryFeatureRequest">
         <when-type-is class="org.geosdi.geoplatform.gui.client.command.wfst.basic.QueryFeatureRequest"/>
         <when-property-is name="security.geoserver" value="gs_cas"/>
     </replace-with>
-    
+
     <replace-with class="org.geosdi.geoplatform.gui.client.command.wfst.cas.feature.CasInsertFeatureRequest">
         <when-type-is class="org.geosdi.geoplatform.gui.client.command.wfst.feature.InsertFeatureRequest"/>
         <when-property-is name="security.geoserver" value="gs_cas"/>
     </replace-with>
-    
+
     <replace-with class="org.geosdi.geoplatform.gui.client.command.wfst.cas.feature.CasUpdateFeatureGeometryRequest">
         <when-type-is class="org.geosdi.geoplatform.gui.client.command.wfst.feature.UpdateFeatureGeometryRequest"/>
         <when-property-is name="security.geoserver" value="gs_cas"/>
     </replace-with>
-    
+
     <replace-with class="org.geosdi.geoplatform.gui.client.command.wfst.cas.feature.CasEraseFeatureRequest">
         <when-type-is class="org.geosdi.geoplatform.gui.client.command.wfst.feature.EraseFeatureRequest"/>
         <when-property-is name="security.geoserver" value="gs_cas"/>

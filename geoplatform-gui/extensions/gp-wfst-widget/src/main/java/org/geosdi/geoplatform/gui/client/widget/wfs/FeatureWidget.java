@@ -74,6 +74,10 @@ import static org.geosdi.geoplatform.gui.client.widget.wfs.builder.feature.Featu
  */
 public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget, ActionEnableHandler {
 
+    private final Button saveButton;
+    private final Button resetButton;
+    private final GPEventBus bus;
+    private final ScaleVisibleEvent scaleVisibleEvent = new ScaleVisibleEvent();
     @Inject
     private FeatureSelectionWidget selectionWidget;
     @Inject
@@ -92,10 +96,6 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget, 
     private ButtonBar featureWidgetBar;
     @Inject
     private ILayerSchemaBinder layerSchemaBinder;
-    private final Button saveButton;
-    private final Button resetButton;
-    private final GPEventBus bus;
-    private final ScaleVisibleEvent scaleVisibleEvent = new ScaleVisibleEvent();
 
     /**
      * @param theBus
@@ -104,7 +104,7 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget, 
      */
     @Inject
     public FeatureWidget(GPEventBus theBus, @ResetButton Button theResetButton,
-            @SaveButton Button theSaveButton) {
+                         @SaveButton Button theSaveButton) {
         super(TRUE);
         this.bus = theBus;
         this.resetButton = theResetButton;

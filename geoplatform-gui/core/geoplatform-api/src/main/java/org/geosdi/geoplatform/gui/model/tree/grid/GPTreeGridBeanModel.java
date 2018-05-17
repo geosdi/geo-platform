@@ -37,24 +37,23 @@ package org.geosdi.geoplatform.gui.model.tree.grid;
 import com.extjs.gxt.ui.client.data.BaseTreeModel;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.Widget;
-import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static org.geosdi.geoplatform.gui.model.tree.grid.GPTreeGridBeanModel.GPKeyTreeGridModel.LABEL_NODE_VALUE;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GPTreeGridBeanModel<M extends GPLayerBean> extends BaseTreeModel {
+public abstract class GPTreeGridBeanModel<M extends GeoPlatformBeanModel> extends BaseTreeModel {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 4231108213570749653L;
 
     public enum GPKeyTreeGridModel {
 
-        LABEL_NODE_VALUE("labelNode");
+        LABEL_NODE_VALUE("labelNode"),
+        NODE_WIDGET("nodeWidget");
         private String value;
 
         /**
@@ -77,7 +76,7 @@ public abstract class GPTreeGridBeanModel<M extends GPLayerBean> extends BaseTre
      * Creates a new model instance.
      */
     public GPTreeGridBeanModel(M theModel) {
-        checkArgument(theModel != null, "");
+        checkArgument(theModel != null, "The Parameter Model must not be null.");
         this.model = theModel;
     }
 
@@ -93,7 +92,7 @@ public abstract class GPTreeGridBeanModel<M extends GPLayerBean> extends BaseTre
      */
     public void setLabelNode(String labelNode) {
         this.labelNode = labelNode;
-        set(GPKeyTreeGridModel.LABEL_NODE_VALUE.toString(), this.labelNode);
+        set(LABEL_NODE_VALUE.toString(), this.labelNode);
     }
 
     /**

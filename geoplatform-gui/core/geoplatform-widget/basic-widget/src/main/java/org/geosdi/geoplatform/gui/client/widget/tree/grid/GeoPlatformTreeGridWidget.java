@@ -34,10 +34,15 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.tree.grid;
 
+import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
+import com.google.gwt.core.client.GWT;
+import org.geosdi.geoplatform.gui.model.tree.grid.GPTreeGridBeanModel;
 import com.extjs.gxt.ui.client.store.TreeStore;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.treegrid.TreeGrid;
 import org.geosdi.geoplatform.gui.model.tree.grid.GPTreeGridBeanModel;
+
+import java.util.List;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -48,11 +53,12 @@ public abstract class GeoPlatformTreeGridWidget<T extends GPTreeGridBeanModel> {
 
     protected TreeStore<T> store;
     protected TreeGrid<T> tree;
-    protected ColumnModel columnModel;
+    private ColumnModel columnModel;
 
     public GeoPlatformTreeGridWidget() {
         this.store = new TreeStore<T>();
-        this.createColumnModel();
+        this.columnModel = new ColumnModel(this.createColumnModel());
+        this.setStoreProperties();
         this.createTreeGrid();
     }
 
@@ -81,11 +87,24 @@ public abstract class GeoPlatformTreeGridWidget<T extends GPTreeGridBeanModel> {
      * </code>
      *
      */
-    protected abstract void createColumnModel();
+    protected abstract List<ColumnConfig> createColumnModel();
+
+    /**
+     *
+     */
+    protected abstract void setStoreProperties();
 
     /**
      * Set TreeGrid Properties such as Borders, RowHeight etc
      *
      */
     protected abstract void setTreeGridProperties();
+
+    /**
+     *
+     * @return {@link TreeGrid}
+     */
+    public TreeGrid<T> asWidget(){
+        return this.tree;
+    }
 }

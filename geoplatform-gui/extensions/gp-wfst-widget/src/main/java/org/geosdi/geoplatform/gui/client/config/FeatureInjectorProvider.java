@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.config;
 
+import com.extjs.gxt.ui.client.widget.ListView;
 import com.extjs.gxt.ui.client.widget.button.ButtonBar;
 import com.extjs.gxt.ui.client.widget.form.SimpleComboBox;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
@@ -52,6 +53,7 @@ import org.geosdi.geoplatform.gui.client.config.annotation.FeatureAttributeCondi
 import org.geosdi.geoplatform.gui.client.config.annotation.MatchComboField;
 import org.geosdi.geoplatform.gui.client.config.provider.*;
 import org.geosdi.geoplatform.gui.client.config.provider.layout.BorderLayoutProvider;
+import org.geosdi.geoplatform.gui.client.config.provider.listview.LayerListViewProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.window.buttonbar.FeatureWidgetBar;
 import org.geosdi.geoplatform.gui.client.widget.map.control.GotoXYWidget;
 import org.geosdi.geoplatform.gui.client.widget.wfs.dispatcher.DescribeFeatureDispatcher;
@@ -59,6 +61,7 @@ import org.geosdi.geoplatform.gui.client.widget.wfs.dispatcher.GPDescribeFeature
 import org.geosdi.geoplatform.gui.client.widget.wfs.dispatcher.WFSDispatcherProgressBar;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.listener.FeatureSelectListener;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.listener.FeatureUnSelectListener;
+import org.geosdi.geoplatform.gui.client.widget.wfs.treegrid.LayerTreeGrid;
 import org.gwtopenmaps.openlayers.client.LonLat;
 import org.gwtopenmaps.openlayers.client.MapWidget;
 import org.gwtopenmaps.openlayers.client.Style;
@@ -120,6 +123,9 @@ public class FeatureInjectorProvider extends AbstractGinModule {
                 FeatureAttributeConditionFieldListProvider.class).in(Singleton.class);
         bind(SimpleComboBox.class).annotatedWith(MatchComboField.class).
                 toProvider(MatchComboFieldProvider.class).in(Singleton.class);
+
+        bind(LayerTreeGrid.class).toProvider(LayerListViewProvider.class).in(Singleton.class);
+
     }
 
 }

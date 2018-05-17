@@ -35,16 +35,25 @@
 package org.geosdi.geoplatform.gui.client.widget.wfs;
 
 import com.extjs.gxt.ui.client.Style;
+import com.extjs.gxt.ui.client.store.ListStore;
+import com.extjs.gxt.ui.client.widget.ListView;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
+import com.google.gwt.core.client.GWT;
 import org.geosdi.geoplatform.gui.client.puregwt.map.event.FeatureMapWidthEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.map.event.IncreaseWidthEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.toolbar.event.DecreasePaddingEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.toolbar.event.EditingToolbarPaddingEvent;
+import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.LayerSelectionHandler;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
+import org.geosdi.geoplatform.gui.client.widget.wfs.treegrid.LayerTreeGrid;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
 import javax.inject.Inject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static java.lang.Boolean.TRUE;
 
@@ -58,19 +67,20 @@ public class LayerSelectionWidget extends GeoPlatformContentPanel {
     //
     private final GPEventBus bus;
     //
-    private FormPanel formPanel;
     private final FeatureMapWidthEvent increaseWidthEvent = new IncreaseWidthEvent();
     private final EditingToolbarPaddingEvent decreasePaddingEvent = new DecreasePaddingEvent();
+    private final LayerTreeGrid layerTreeGrid;
 
     @Inject
-    public LayerSelectionWidget(GPEventBus theBus) {
+    public LayerSelectionWidget(GPEventBus theBus, LayerTreeGrid layerTreeGrid) {
         super(TRUE);
         this.bus = theBus;
+        this.layerTreeGrid = layerTreeGrid;
     }
 
     @Override
     public void addComponent() {
-        this.createFormPanel();
+        super.add(this.layerTreeGrid.asWidget());
     }
 
     @Override
@@ -93,12 +103,9 @@ public class LayerSelectionWidget extends GeoPlatformContentPanel {
         super.setScrollMode(Style.Scroll.AUTO);
     }
 
-    private void createFormPanel() {
-        this.formPanel = new FormPanel();
-        formPanel.setHeaderVisible(false);
-        formPanel.setBorders(false);
-        formPanel.setBodyBorder(false);
-        formPanel.setLayout(new FlowLayout());
-        super.add(formPanel);
+    @Override
+    protected void onShow() {
+        super.onShow();
+        this.layerTreeGrid.buildTree();
     }
 }

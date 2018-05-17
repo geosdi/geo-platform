@@ -55,16 +55,14 @@ public interface IActionStrategy {
     void showWidget();
 
     /**
-     *
-     * @param widgetType
-     */
-    void setWidgetType(WidgetType widgetType);
-
-    /**
-     *
      * @return {@link WidgetType}
      */
     public WidgetType getWidgetType();
+
+    /**
+     * @param widgetType
+     */
+    void setWidgetType(WidgetType widgetType);
 
     enum WidgetType {
         EDIT_WFS_ACTION, SHOW_FEATURES;
@@ -91,19 +89,18 @@ public interface IActionStrategy {
         }
 
         /**
+         * @return {@link WidgetType}
+         */
+        public WidgetType getWidgetType() {
+            return widgetType;
+        }
+
+        /**
          * @param widgetType
          */
         @Override
         public void setWidgetType(WidgetType widgetType) {
             this.widgetType = widgetType;
-        }
-
-        /**
-         *
-         * @return {@link WidgetType}
-         */
-        public WidgetType getWidgetType() {
-            return widgetType;
         }
     }
 

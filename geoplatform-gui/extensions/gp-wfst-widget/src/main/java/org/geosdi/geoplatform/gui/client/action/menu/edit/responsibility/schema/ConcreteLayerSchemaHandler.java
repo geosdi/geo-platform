@@ -52,10 +52,10 @@ import javax.inject.Inject;
  */
 public class ConcreteLayerSchemaHandler extends LayerSchemaParserHandler {
 
-    @Inject
-    private ILayerSchemaBinder layerSchemaBinder;
     private final IActionStrategy actionStrategy;
     private final GPEventBus bus;
+    @Inject
+    private ILayerSchemaBinder layerSchemaBinder;
 
     @Inject
     public ConcreteLayerSchemaHandler(IActionStrategy actionStrategy, GPEventBus theBus) {

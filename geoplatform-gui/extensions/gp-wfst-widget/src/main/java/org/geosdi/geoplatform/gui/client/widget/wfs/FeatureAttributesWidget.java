@@ -83,29 +83,30 @@ import java.util.List;
 public class FeatureAttributesWidget extends GeoPlatformContentPanel implements FeatureAttributesHandler,
         IDateSelectedHandler {
 
+    public static final String ID = WFSWidgetNames.FEATURE_ATTRIBUTES.name();
+    private static final ColumnModel mockColumnModel;
+
     static {
         mockColumnModel = new ColumnModel(new ArrayList<ColumnConfig>());
     }
 
-    public static final String ID = WFSWidgetNames.FEATURE_ATTRIBUTES.name();
-    private static final ColumnModel mockColumnModel;
-    //
-    @Inject
-    private ILayerSchemaBinder layerSchemaBinder;
     private final GPEventBus bus;
     private final TimeInputWidget timeInputWidget;
-    private ListStore<FeatureDetail> store;
-    private EditorGrid<FeatureDetail> grid;
     //
     private final FeatureMapHeightEvent increaseHeightEvent = new IncreaseHeightEvent();
-    //
-    private String dataAttributeName;
     //
     private final GetFeatureControlBuilder featureControlBuilder;
     private final WFSProtocolCRUDOptions featureCRUDProtocol;
     private final FeatureStatusBarEvent successStatusBarEvent = new FeatureStatusBarEvent("",
             FeatureStatusBarType.STATUS_OK);
     ResetStatusBarEvent resetStatusBarEvent = new ResetStatusBarEvent();
+    //
+    @Inject
+    private ILayerSchemaBinder layerSchemaBinder;
+    private ListStore<FeatureDetail> store;
+    private EditorGrid<FeatureDetail> grid;
+    //
+    private String dataAttributeName;
 
     @Inject
     public FeatureAttributesWidget(GPEventBus bus, TimeInputWidget timeInputWidget, GetFeatureControlBuilder featureControlBuilder, WFSProtocolCRUDOptions featureCRUDProtocol) {
@@ -268,7 +269,7 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel implements 
             valueColumn.setId(name);
             valueColumn.setHeaderHtml(name);
             valueColumn.setEditor(buildCellEditor(valueTextField));
-            valueColumn.setWidth((name.length()+1) * 10);
+            valueColumn.setWidth((name.length() + 1) * 10);
             valueColumn.setToolTip("Datatype: " + att.getType());
             configs.add(valueColumn);
         }

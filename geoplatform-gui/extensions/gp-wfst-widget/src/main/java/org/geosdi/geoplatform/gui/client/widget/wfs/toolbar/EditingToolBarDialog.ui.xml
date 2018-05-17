@@ -38,7 +38,7 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
              xmlns:g='urn:import:com.google.gwt.user.client.ui'
-             xmlns:wfsEdit='urn:org.geosdi.geoplatform.gui.client.widget.wfs.toolbar'>
+>
 
     <ui:style>
         .panel {
@@ -51,7 +51,7 @@
         }
     </ui:style>
 
-    
-    <g:FlowPanel ui:field="toolbarEditorPanel" styleName="{style.panel}" />
-    
+
+    <g:FlowPanel ui:field="toolbarEditorPanel" styleName="{style.panel}"/>
+
 </ui:UiBinder>

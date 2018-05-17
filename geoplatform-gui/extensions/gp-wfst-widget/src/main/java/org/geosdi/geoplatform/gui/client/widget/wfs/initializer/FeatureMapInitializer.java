@@ -65,6 +65,7 @@ import java.util.List;
 public class FeatureMapInitializer implements IFeatureMapInitializer {
 
     private static final ResetToolbarObserverEvent resetToolbarObserver = new ResetToolbarObserverEvent();
+    private final GPEventBus bus;
     //
     @Inject
     private MapWidget mapWidget;
@@ -78,7 +79,6 @@ public class FeatureMapInitializer implements IFeatureMapInitializer {
     private ILayerSchemaBinder layerSchemaBinder;
     @Inject
     private InjectGetFeatureModelEvent injectGetFeatureModelEvent;
-    private final GPEventBus bus;
     private Layer wms;
     private List<GPLayerBean> layers;
     private List<Layer> wmsLayers;

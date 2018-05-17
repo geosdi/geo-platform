@@ -44,6 +44,7 @@ import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreeStore;
 import org.geosdi.geoplatform.gui.client.widget.tree.store.GinTreeStore;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -71,6 +72,7 @@ public class GinTreePanel implements GinTreePanelBuilder {
         return tree = (tree == null) ? new GPTreePanel(store) {
 
             {
+                LayerHandlerManager.addHandler(TYPE, this);
                 super.setIconProvider(new ModelIconProvider<GPBeanTreeModel>() {
 
                     @Override

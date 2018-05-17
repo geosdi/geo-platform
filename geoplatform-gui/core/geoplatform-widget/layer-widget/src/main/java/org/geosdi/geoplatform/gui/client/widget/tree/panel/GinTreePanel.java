@@ -72,7 +72,7 @@ public class GinTreePanel implements GinTreePanelBuilder {
         return tree = (tree == null) ? new GPTreePanel(store) {
 
             {
-                LayerHandlerManager.addHandler(TYPE, this);
+                addLayerRangeEventHandler();
                 super.setIconProvider(new ModelIconProvider<GPBeanTreeModel>() {
 
                     @Override

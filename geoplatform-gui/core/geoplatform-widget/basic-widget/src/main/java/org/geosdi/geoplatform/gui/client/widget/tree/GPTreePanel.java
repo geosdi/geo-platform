@@ -86,6 +86,13 @@ public class GPTreePanel<T extends GPBeanTreeModel> extends TreePanel<T> impleme
     }
 
     /**
+     *
+     */
+    public void addLayerRangeEventHandler (){
+        LayerHandlerManager.addHandler(TYPE, this);
+    }
+
+    /**
      * @param model
      */
     @Override

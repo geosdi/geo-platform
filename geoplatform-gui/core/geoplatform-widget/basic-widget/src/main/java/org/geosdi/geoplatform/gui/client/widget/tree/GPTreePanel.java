@@ -72,7 +72,6 @@ public class GPTreePanel<T extends GPBeanTreeModel> extends TreePanel<T> impleme
      */
     public GPTreePanel(GPTreeStore<T> store) {
         super(store);
-        LayerHandlerManager.addHandler(TYPE, this);
     }
 
     /**

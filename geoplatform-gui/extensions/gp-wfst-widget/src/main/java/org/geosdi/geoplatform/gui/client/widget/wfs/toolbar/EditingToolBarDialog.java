@@ -51,7 +51,6 @@ import javax.inject.Inject;
 /**
  * @author Francesco Izzi - CNR IMAA geoSDI Group
  * @email francesco.izzi@geosdi.org
- *
  */
 public class EditingToolBarDialog extends Composite implements IEditingToolbarHandler {
 
@@ -60,6 +59,7 @@ public class EditingToolBarDialog extends Composite implements IEditingToolbarHa
     //
     @UiField
     FlowPanel toolbarEditorPanel;
+
     @Inject
     public EditingToolBarDialog(GPEventBus theBus, @DragFeatureToggleButton ToggleButton drag,
                                 @EditFeatureToggleButton ToggleButton edit,

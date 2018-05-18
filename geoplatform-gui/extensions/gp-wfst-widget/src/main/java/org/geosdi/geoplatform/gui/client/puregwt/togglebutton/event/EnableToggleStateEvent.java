@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.gui.client.puregwt.togglebutton.event;
 import org.geosdi.geoplatform.gui.client.puregwt.togglebutton.handler.ToggleStateHandler;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */

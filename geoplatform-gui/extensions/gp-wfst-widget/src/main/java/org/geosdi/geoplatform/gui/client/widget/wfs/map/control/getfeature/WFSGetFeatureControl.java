@@ -49,7 +49,6 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
 import javax.inject.Inject;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */

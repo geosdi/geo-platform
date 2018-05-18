@@ -43,7 +43,6 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */

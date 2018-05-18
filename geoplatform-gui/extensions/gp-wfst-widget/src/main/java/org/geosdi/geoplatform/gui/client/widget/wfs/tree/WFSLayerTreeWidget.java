@@ -34,16 +34,15 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.wfs.tree;
 
-import com.google.gwt.core.client.GWT;
-import org.geosdi.geoplatform.gui.client.config.annotation.tree.WFSLayerTreeStore;
 import org.geosdi.geoplatform.gui.client.config.annotation.tree.WFSLayerTree;
+import org.geosdi.geoplatform.gui.client.config.annotation.tree.WFSLayerTreeStore;
 import org.geosdi.geoplatform.gui.client.model.tree.WFSLayerTreeNode;
 import org.geosdi.geoplatform.gui.client.model.tree.WFSRootLayerTreeNode;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.LayerTreeHandler;
-import org.geosdi.geoplatform.gui.client.widget.wfs.tree.properties.WFSTreeBasicProperties;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreeStore;
 import org.geosdi.geoplatform.gui.client.widget.tree.GeoPlatformTreeWidget;
+import org.geosdi.geoplatform.gui.client.widget.wfs.tree.properties.WFSTreeBasicProperties;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
@@ -54,17 +53,16 @@ import java.util.List;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class WFSLayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> implements  LayerTreeHandler {
+public class WFSLayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> implements LayerTreeHandler {
 
-    @Inject
-    private WFSLayerTreeBuilder treeBuilder;
     private final WFSTreeBasicProperties treeProperties;
     private final GPEventBus bus;
+    @Inject
+    private WFSLayerTreeBuilder treeBuilder;
     private WFSRootLayerTreeNode root;
     private List<WFSLayerTreeNode> childrenList;
 
     /**
-     *
      * @param theStore
      * @param theTree
      * @param theTreeProperties
@@ -89,7 +87,7 @@ public class WFSLayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> i
         this.treeProperties.setTreeBasicProperties();
     }
 
-    public void showTree(){
+    public void showTree() {
         this.treeBuilder.buildTree(this.root, this.childrenList);
     }
 

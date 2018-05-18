@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.gui.client.widget.wfs.builder.feature;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.edit.WFSEdit;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */

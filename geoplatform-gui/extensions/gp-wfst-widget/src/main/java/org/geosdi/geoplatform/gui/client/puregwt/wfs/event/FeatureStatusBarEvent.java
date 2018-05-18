@@ -39,7 +39,6 @@ import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.FeatureStatusBarHan
 import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar.FeatureStatusBarType;
 
 /**
- *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class FeatureStatusBarEvent extends GwtEvent<FeatureStatusBarHandler> {

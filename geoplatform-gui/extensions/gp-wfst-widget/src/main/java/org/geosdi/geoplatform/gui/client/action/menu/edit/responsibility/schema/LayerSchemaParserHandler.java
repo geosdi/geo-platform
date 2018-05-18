@@ -38,7 +38,8 @@ import org.geosdi.geoplatform.connector.wfs.response.LayerSchemaDTO;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 
 /**
- F * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * F * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ *
  * @email giuseppe.lascaleia@geosdi.org
  */
 public abstract class LayerSchemaParserHandler {

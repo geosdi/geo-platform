@@ -40,7 +40,6 @@ import org.geosdi.geoplatform.gui.client.command.wfst.WFSTRequest;
 import java.util.List;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */

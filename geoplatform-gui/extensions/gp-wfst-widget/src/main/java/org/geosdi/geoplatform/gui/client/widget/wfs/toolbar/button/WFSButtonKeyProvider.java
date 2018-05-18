@@ -35,7 +35,6 @@
 package org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */

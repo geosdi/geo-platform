@@ -43,7 +43,6 @@ import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import java.util.List;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */

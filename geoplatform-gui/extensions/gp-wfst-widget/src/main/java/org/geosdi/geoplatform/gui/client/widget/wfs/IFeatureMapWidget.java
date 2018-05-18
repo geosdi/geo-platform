@@ -39,7 +39,6 @@ import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.gwtopenmaps.openlayers.client.MapWidget;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -47,7 +46,6 @@ public interface IFeatureMapWidget extends IFeatureMapHandler {
 
     /**
      * Build WMS from {@link GPLayerBean}
-     *
      */
     void bindLayerSchema();
 

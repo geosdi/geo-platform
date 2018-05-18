@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.gui.client.widget.wfs.map.control.edit;
 import org.gwtopenmaps.openlayers.client.control.Control;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */

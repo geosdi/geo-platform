@@ -38,7 +38,6 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import org.geosdi.geoplatform.gui.client.puregwt.map.dispatcher.FeatureDispatcherHandler;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */

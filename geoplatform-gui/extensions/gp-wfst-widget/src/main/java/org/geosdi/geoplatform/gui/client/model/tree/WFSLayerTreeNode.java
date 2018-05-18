@@ -14,7 +14,7 @@ public class WFSLayerTreeNode extends GPLayerTreeModel {
 
     private final GPLayerTreeModel model;
 
-    public WFSLayerTreeNode(GPLayerTreeModel theModel){
+    public WFSLayerTreeNode(GPLayerTreeModel theModel) {
         this.model = theModel;
         super.setAbstractText(this.model.getAbstractText());
         super.setAlias(this.model.getAlias());

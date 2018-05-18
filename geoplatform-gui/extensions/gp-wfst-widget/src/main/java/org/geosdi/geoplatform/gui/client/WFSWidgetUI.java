@@ -46,7 +46,6 @@ import org.geosdi.geoplatform.gui.impl.tree.menu.config.TreeMenuGinInjector;
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- *
  */
 public class WFSWidgetUI implements EntryPoint {
 

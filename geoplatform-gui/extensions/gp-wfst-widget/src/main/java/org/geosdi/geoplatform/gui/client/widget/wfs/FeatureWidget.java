@@ -77,6 +77,8 @@ import static org.geosdi.geoplatform.gui.client.widget.wfs.builder.feature.Featu
  */
 public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget, ActionEnableHandler {
 
+    private final AfterStrategyEditWFSActionEvent afterStrategyEditWFSActionEvent = new AfterStrategyEditWFSActionEvent();
+
     private final Button saveButton;
     private final Button resetButton;
     private final GPEventBus bus;
@@ -159,7 +161,7 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget, 
             throw new IllegalArgumentException(
                     "Both SchemaDTO and GPLayerBean must not be null");
         }
-        this.bus.fireEvent(new AfterStrategyEditWFSActionEvent());
+        this.bus.fireEvent(this.afterStrategyEditWFSActionEvent);
         super.show();
     }
 

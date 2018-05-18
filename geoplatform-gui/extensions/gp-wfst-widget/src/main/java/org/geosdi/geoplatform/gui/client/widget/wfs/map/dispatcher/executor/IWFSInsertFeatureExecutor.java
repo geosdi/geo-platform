@@ -40,7 +40,6 @@ import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.edit.WFSEdit;
 import java.util.List;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */

@@ -41,7 +41,6 @@ import org.geosdi.geoplatform.gui.client.model.wfs.AttributeDetail;
 import java.util.List;
 
 /**
- *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class FeatureConverter {

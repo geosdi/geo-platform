@@ -55,7 +55,6 @@ import static java.util.Collections.EMPTY_MAP;
 import static org.jasig.cas.client.util.AbstractCasFilter.CONST_CAS_ASSERTION;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */

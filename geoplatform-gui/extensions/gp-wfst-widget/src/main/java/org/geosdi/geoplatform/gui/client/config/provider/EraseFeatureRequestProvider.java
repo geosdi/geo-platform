@@ -40,7 +40,6 @@ import org.geosdi.geoplatform.gui.client.command.wfst.feature.EraseFeatureReques
 import javax.inject.Provider;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */

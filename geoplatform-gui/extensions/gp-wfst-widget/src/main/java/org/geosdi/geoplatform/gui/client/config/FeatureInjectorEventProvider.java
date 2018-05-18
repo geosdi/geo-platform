@@ -43,7 +43,6 @@ import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.ShowAttributesWindowE
 import javax.inject.Singleton;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */

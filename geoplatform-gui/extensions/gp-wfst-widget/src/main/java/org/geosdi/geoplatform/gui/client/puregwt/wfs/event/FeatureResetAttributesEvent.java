@@ -38,7 +38,6 @@ import com.google.gwt.event.shared.GwtEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.FeatureAttributesHandler;
 
 /**
- *
  * Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class FeatureResetAttributesEvent extends GwtEvent<FeatureAttributesHandler> {

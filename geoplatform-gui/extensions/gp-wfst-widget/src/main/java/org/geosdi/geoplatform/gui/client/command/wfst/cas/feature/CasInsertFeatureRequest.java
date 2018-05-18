@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.gui.client.command.wfst.cas.feature;
 import org.geosdi.geoplatform.gui.client.command.wfst.feature.InsertFeatureRequest;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */

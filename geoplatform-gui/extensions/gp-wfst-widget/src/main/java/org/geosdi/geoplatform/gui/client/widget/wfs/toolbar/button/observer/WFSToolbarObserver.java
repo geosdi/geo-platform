@@ -38,7 +38,6 @@ import org.geosdi.geoplatform.gui.client.puregwt.observer.handler.ResetToolbarOb
 import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.WFSToggleButton;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */

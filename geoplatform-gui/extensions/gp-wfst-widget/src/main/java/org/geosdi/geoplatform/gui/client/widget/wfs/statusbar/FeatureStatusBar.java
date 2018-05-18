@@ -41,7 +41,6 @@ import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import javax.inject.Inject;
 
 /**
- *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class FeatureStatusBar extends StatusWidget

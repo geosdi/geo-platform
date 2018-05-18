@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.gui.client.widget.wfs.map.dispatcher.executor;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */

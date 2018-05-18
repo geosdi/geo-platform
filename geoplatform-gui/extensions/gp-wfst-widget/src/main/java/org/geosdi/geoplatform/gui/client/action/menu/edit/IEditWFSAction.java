@@ -39,7 +39,6 @@ import org.geosdi.geoplatform.gui.client.widget.wfs.FeatureMapWidget;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -52,7 +51,7 @@ public interface IEditWFSAction {
      * </p>
      *
      * @param layerToExclude {@link GPLayerBean} the Layer on which to make the
-     * WFS-T
+     *                       WFS-T
      */
     void bindLayersTree(GPLayerBean layerToExclude);
 

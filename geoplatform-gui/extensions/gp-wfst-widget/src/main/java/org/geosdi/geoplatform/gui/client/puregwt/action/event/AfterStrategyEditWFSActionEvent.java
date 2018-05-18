@@ -35,14 +35,7 @@
 package org.geosdi.geoplatform.gui.client.puregwt.action.event;
 
 import com.google.gwt.event.shared.GwtEvent;
-import org.geosdi.geoplatform.gui.client.model.tree.WFSLayerTreeNode;
-import org.geosdi.geoplatform.gui.client.model.tree.WFSRootLayerTreeNode;
 import org.geosdi.geoplatform.gui.client.puregwt.action.IEditWFSActionHandler;
-import org.geosdi.geoplatform.gui.client.puregwt.toolbar.IEditingToolbarHandler;
-import org.geosdi.geoplatform.gui.client.puregwt.toolbar.event.EditingToolbarPaddingEvent;
-import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.LayerTreeHandler;
-
-import java.util.List;
 
 /**
  * @author Vito Salvia- CNR IMAA geoSDI Group

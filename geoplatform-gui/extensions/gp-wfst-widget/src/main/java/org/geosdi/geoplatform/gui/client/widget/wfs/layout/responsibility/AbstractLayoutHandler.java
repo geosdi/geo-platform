@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.gui.client.widget.wfs.layout.responsibility;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -52,13 +51,11 @@ public abstract class AbstractLayoutHandler {
     }
 
     /**
-     *
      * @param idPanel
      */
     public abstract void manageLayout(ContentPanel panel);
 
     /**
-     *
      * @param idPanel
      * @return
      */

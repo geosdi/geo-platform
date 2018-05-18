@@ -38,7 +38,6 @@ import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.colleague.WFSCo
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.colleague.WFSMapControlColleague;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */

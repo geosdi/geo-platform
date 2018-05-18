@@ -44,9 +44,8 @@ import javax.inject.Inject;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class FeatureMapWidget extends GeoPlatformContentPanel
         implements IFeatureMapWidget {

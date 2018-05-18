@@ -2,13 +2,9 @@ package org.geosdi.geoplatform.gui.client.model.tree;
 
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.configuration.composite.GPTreeCompositeType;
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
-import org.geosdi.geoplatform.gui.model.tree.AbstractRootTreeNode;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.TreeStatusEnum;
 import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
-
-import java.util.List;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -18,7 +14,7 @@ public class WFSRootLayerTreeNode extends GPBeanTreeModel {
 
     private final GPBeanTreeModel father;
 
-    public WFSRootLayerTreeNode(GPBeanTreeModel theFather){
+    public WFSRootLayerTreeNode(GPBeanTreeModel theFather) {
         this.father = theFather;
         super.setLabel(this.father.getLabel());
         super.setId(this.father.getId());

@@ -39,7 +39,6 @@ import com.google.gwt.event.shared.GwtEvent.Type;
 import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar.FeatureStatusBarType;
 
 /**
- *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public interface FeatureStatusBarHandler extends EventHandler {

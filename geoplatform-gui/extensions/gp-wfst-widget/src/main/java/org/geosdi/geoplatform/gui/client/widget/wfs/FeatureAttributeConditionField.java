@@ -62,7 +62,6 @@ import org.geosdi.geoplatform.gui.shared.wfs.OperatorType;
 import java.util.List;
 
 /**
- *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class FeatureAttributeConditionField extends MultiField implements IFeatureAttributeConditionField {

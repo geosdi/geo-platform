@@ -40,7 +40,6 @@ import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 import java.util.Map;
 
 /**
- *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public abstract class FeatureAttributeValuesDetail extends GeoPlatformBeanModel {

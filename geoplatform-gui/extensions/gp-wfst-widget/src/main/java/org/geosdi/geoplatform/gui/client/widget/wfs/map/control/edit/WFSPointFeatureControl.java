@@ -49,7 +49,6 @@ import javax.inject.Inject;
 import static org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.WFSUndoRedoMediatorHandlerSupport.DISABLE_UNDO_REDO_SUPPORT_EVENT;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */

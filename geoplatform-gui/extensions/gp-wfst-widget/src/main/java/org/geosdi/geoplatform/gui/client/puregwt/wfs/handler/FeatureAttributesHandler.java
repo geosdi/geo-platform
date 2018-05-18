@@ -41,7 +41,6 @@ import org.geosdi.geoplatform.gui.client.model.wfs.FeatureDetail;
 import java.util.List;
 
 /**
- *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public interface FeatureAttributesHandler extends EventHandler {

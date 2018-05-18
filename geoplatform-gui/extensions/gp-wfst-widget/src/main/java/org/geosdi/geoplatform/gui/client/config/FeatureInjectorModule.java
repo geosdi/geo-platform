@@ -54,15 +54,13 @@ import org.geosdi.geoplatform.gui.client.widget.wfs.layout.responsibility.Featur
 import org.geosdi.geoplatform.gui.client.widget.wfs.tree.WFSLayerTreeWidget;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBusImpl;
-import org.gwtopenmaps.openlayers.client.layer.WFS;
 
 import javax.inject.Singleton;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class FeatureInjectorModule extends AbstractGinModule {
 

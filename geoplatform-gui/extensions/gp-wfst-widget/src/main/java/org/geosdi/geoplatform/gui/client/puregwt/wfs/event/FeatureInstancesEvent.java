@@ -41,7 +41,6 @@ import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.FeatureAttributesHa
 import java.util.List;
 
 /**
- *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class FeatureInstancesEvent extends GwtEvent<FeatureAttributesHandler> {

@@ -44,7 +44,6 @@ import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.observer.WFST
 import javax.inject.Inject;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */

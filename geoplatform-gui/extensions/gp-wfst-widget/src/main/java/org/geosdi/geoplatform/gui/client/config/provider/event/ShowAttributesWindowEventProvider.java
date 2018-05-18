@@ -39,7 +39,6 @@ import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.ShowAttributesWindowE
 import javax.inject.Provider;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */

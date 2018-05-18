@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.gui.client.model.wfs;
 import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 
 /**
- *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class AttributeDetail extends GeoPlatformBeanModel {

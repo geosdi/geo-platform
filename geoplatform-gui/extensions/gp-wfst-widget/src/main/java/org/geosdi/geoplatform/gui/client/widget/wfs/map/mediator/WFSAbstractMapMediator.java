@@ -41,7 +41,6 @@ import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.colleague.WFSMa
 import java.util.Map;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */

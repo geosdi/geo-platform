@@ -39,7 +39,6 @@ import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.FeatureSelectionWid
 import org.geosdi.geoplatform.gui.client.widget.wfs.FeatureAttributeConditionField;
 
 /**
- *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class DeleteAttributeConditionEvent extends GwtEvent<FeatureSelectionWidgetHandler> {

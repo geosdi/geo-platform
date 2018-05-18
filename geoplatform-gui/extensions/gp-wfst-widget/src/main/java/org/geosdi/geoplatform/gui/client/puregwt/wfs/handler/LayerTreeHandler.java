@@ -50,7 +50,6 @@ public interface LayerTreeHandler extends EventHandler {
     GwtEvent.Type<LayerTreeHandler> TYPE = new GwtEvent.Type<LayerTreeHandler>();
 
     /**
-     *
      * @param root
      * @param childrenList
      */

@@ -84,7 +84,6 @@ public class FeatureDetail extends FeatureAttributeValuesDetail {
     }
 
     /**
-     *
      * @return the Feature ID
      */
     public String getFeatureID() {

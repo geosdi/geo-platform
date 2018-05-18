@@ -58,7 +58,6 @@ public class QueryFeatureRequest extends GetAllFeatureRequest {
     }
 
     /**
-     *
      * @return {@link Boolean}
      */
     public Boolean isSetQuery() {

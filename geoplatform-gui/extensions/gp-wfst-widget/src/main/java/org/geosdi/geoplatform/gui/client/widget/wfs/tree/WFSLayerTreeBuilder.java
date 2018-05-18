@@ -32,27 +32,49 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.client.puregwt.wfs.handler;
+package org.geosdi.geoplatform.gui.client.widget.wfs.tree;
 
-import com.google.gwt.event.shared.EventHandler;
-import com.google.gwt.event.shared.GwtEvent;
-import org.geosdi.geoplatform.gui.client.model.wfs.WfsLayerTreeBeanModel;
+import org.geosdi.geoplatform.gui.client.config.annotation.tree.WFSLayerTree;
+import org.geosdi.geoplatform.gui.client.config.annotation.tree.WFSLayerTreeStore;
+import org.geosdi.geoplatform.gui.client.model.tree.WFSLayerTreeNode;
+import org.geosdi.geoplatform.gui.client.model.tree.WFSRootLayerTreeNode;
+import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
+import org.geosdi.geoplatform.gui.client.widget.tree.GPTreeStore;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
- * @author Vito Salvia- CNR IMAA geoSDI Group
+ * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface LayerSelectionHandler extends EventHandler {
+@Singleton
+public class WFSLayerTreeBuilder implements IWfsLayerTreeBuilder {
 
-    GwtEvent.Type<LayerSelectionHandler> TYPE = new GwtEvent.Type<LayerSelectionHandler>();
+    private final static Logger logger = Logger.getLogger("WFSLayerTreeBuilder");
+    //
+    private final GPTreeStore store;
+    private final GPTreePanel tree;
+    private WFSRootLayerTreeNode root;
 
-    /**
-     *
-     * @param layerBeans
-     */
-    void populateListView(List<WfsLayerTreeBeanModel> layerBeans);
+    @Inject
+    public WFSLayerTreeBuilder(@WFSLayerTreeStore GPTreeStore theStore, @WFSLayerTree GPTreePanel theTree) {
+        this.store = theStore;
+        this.tree = theTree;
+        this.tree.setExpanded(this.root, Boolean.TRUE);
+    }
 
+    @Override
+    public void buildTree(WFSRootLayerTreeNode root, List<WFSLayerTreeNode> childrenList) {
+        this.root = root;
+        this.root.removeAll();
+        this.store.removeAll();
+        this.store.add(this.root, Boolean.TRUE);
+        this.tree.getStore().insert(this.root, childrenList, 0, Boolean.TRUE);
+        this.tree.setExpanded(this.root, Boolean.TRUE);
+
+    }
 
 }

@@ -32,76 +32,29 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.client.action.menu.strategy;
+package org.geosdi.geoplatform.gui.client.puregwt.wfs.handler;
 
-import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
-import org.geosdi.geoplatform.gui.client.widget.wfs.FeatureWidget;
-import org.geosdi.geoplatform.gui.client.widget.wfs.ShowFeaturesWidget;
+import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent;
+import org.geosdi.geoplatform.gui.client.model.tree.WFSLayerTreeNode;
+import org.geosdi.geoplatform.gui.client.model.tree.WFSRootLayerTreeNode;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 /**
- * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @author Vito Salvia- CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface IActionStrategy {
+public interface LayerTreeHandler extends EventHandler {
+
+    GwtEvent.Type<LayerTreeHandler> TYPE = new GwtEvent.Type<LayerTreeHandler>();
 
     /**
      *
+     * @param root
+     * @param childrenList
      */
-    void showWidget();
+    void buildLayerTree(WFSRootLayerTreeNode root, List<WFSLayerTreeNode> childrenList);
 
-    /**
-     * @return {@link WidgetType}
-     */
-    WidgetType getWidgetType();
-
-    /**
-     * @param widgetType
-     */
-    void setWidgetType(WidgetType widgetType);
-
-    enum WidgetType {
-        EDIT_WFS_ACTION, SHOW_FEATURES;
-    }
-
-    @Singleton
-    class ActionStrategy implements IActionStrategy {
-
-        private Map<WidgetType, GeoPlatformWindow> platformWindowMap = new HashMap<>();
-        private WidgetType widgetType;
-
-        @Inject
-        public ActionStrategy(FeatureWidget theFeatureWidget, ShowFeaturesWidget showFeaturesWidget) {
-            this.platformWindowMap.put(WidgetType.EDIT_WFS_ACTION, theFeatureWidget);
-            this.platformWindowMap.put(WidgetType.SHOW_FEATURES, showFeaturesWidget);
-        }
-
-        /**
-         *
-         */
-        @Override
-        public void showWidget() {
-            this.platformWindowMap.get(this.widgetType).show();
-        }
-
-        /**
-         * @return {@link WidgetType}
-         */
-        public WidgetType getWidgetType() {
-            return this.widgetType;
-        }
-
-        /**
-         * @param widgetType
-         */
-        @Override
-        public void setWidgetType(WidgetType widgetType) {
-            this.widgetType = widgetType;
-        }
-    }
 
 }

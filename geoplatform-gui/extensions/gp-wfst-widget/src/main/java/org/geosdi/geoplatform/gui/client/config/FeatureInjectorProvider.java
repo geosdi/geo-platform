@@ -49,10 +49,16 @@ import org.geosdi.geoplatform.gui.client.command.wfst.feature.InsertFeatureReque
 import org.geosdi.geoplatform.gui.client.command.wfst.feature.UpdateFeatureGeometryRequest;
 import org.geosdi.geoplatform.gui.client.config.annotation.FeatureAttributeConditionFieldList;
 import org.geosdi.geoplatform.gui.client.config.annotation.MatchComboField;
+import org.geosdi.geoplatform.gui.client.config.annotation.tree.WFSLayerTree;
+import org.geosdi.geoplatform.gui.client.config.annotation.tree.WFSLayerTreeStore;
 import org.geosdi.geoplatform.gui.client.config.provider.*;
 import org.geosdi.geoplatform.gui.client.config.provider.layout.BorderLayoutProvider;
+import org.geosdi.geoplatform.gui.client.config.provider.tree.LayerTreePanelProvider;
+import org.geosdi.geoplatform.gui.client.config.provider.tree.LayerTreeStoreProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.window.buttonbar.FeatureWidgetBar;
 import org.geosdi.geoplatform.gui.client.widget.map.control.GotoXYWidget;
+import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
+import org.geosdi.geoplatform.gui.client.widget.tree.GPTreeStore;
 import org.geosdi.geoplatform.gui.client.widget.wfs.dispatcher.DescribeFeatureDispatcher;
 import org.geosdi.geoplatform.gui.client.widget.wfs.dispatcher.GPDescribeFeatureDispatcher;
 import org.geosdi.geoplatform.gui.client.widget.wfs.dispatcher.WFSDispatcherProgressBar;
@@ -112,6 +118,8 @@ public class FeatureInjectorProvider extends AbstractGinModule {
         bind(WFSProtocolCRUDOptions.class).toProvider(FeatureProtocolCRUDOptionsProvider.class).in(Singleton.class);
 
         bind(GotoXYWidget.class).toProvider(WFSGotoXYWigetProvider.class).in(Singleton.class);
+        bind(GPTreePanel.class).annotatedWith(WFSLayerTree.class).toProvider(LayerTreePanelProvider.class).in(Singleton.class);
+        bind(GPTreeStore.class).annotatedWith(WFSLayerTreeStore.class).toProvider(LayerTreeStoreProvider.class).in(Singleton.class);
 
         bind(ButtonBar.class).toProvider(FeatureWidgetBar.class).in(Singleton.class);
 

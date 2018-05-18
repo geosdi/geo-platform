@@ -49,7 +49,7 @@ import org.gwtopenmaps.openlayers.client.layer.WMSParams;
 import javax.inject.Inject;
 
 /**
- * <p>A Special Class that build WMS to display in {@link MapWidget}</p>
+ * <p>A Special Class that showTree WMS to display in {@link MapWidget}</p>
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org

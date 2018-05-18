@@ -32,72 +32,65 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.client.widget.wfs;
+package org.geosdi.geoplatform.gui.client.widget.wfs.tree;
 
-import com.extjs.gxt.ui.client.Style;
-import org.geosdi.geoplatform.gui.client.puregwt.map.event.FeatureMapWidthEvent;
-import org.geosdi.geoplatform.gui.client.puregwt.map.event.IncreaseWidthEvent;
-import org.geosdi.geoplatform.gui.client.puregwt.toolbar.event.DecreasePaddingEvent;
-import org.geosdi.geoplatform.gui.client.puregwt.toolbar.event.EditingToolbarPaddingEvent;
-import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
-import org.geosdi.geoplatform.gui.client.widget.wfs.tree.WFSLayerTreeWidget;
+import com.google.gwt.core.client.GWT;
+import org.geosdi.geoplatform.gui.client.config.annotation.tree.WFSLayerTreeStore;
+import org.geosdi.geoplatform.gui.client.config.annotation.tree.WFSLayerTree;
+import org.geosdi.geoplatform.gui.client.model.tree.WFSLayerTreeNode;
+import org.geosdi.geoplatform.gui.client.model.tree.WFSRootLayerTreeNode;
+import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.LayerTreeHandler;
+import org.geosdi.geoplatform.gui.client.widget.wfs.tree.properties.WFSTreeBasicProperties;
+import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
+import org.geosdi.geoplatform.gui.client.widget.tree.GPTreeStore;
+import org.geosdi.geoplatform.gui.client.widget.tree.GeoPlatformTreeWidget;
+import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
 import javax.inject.Inject;
-import javax.inject.Singleton;
-
-import static java.lang.Boolean.TRUE;
+import java.util.List;
 
 /**
- * @author Vito Salvia- CNR IMAA geoSDI Group
+ * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-@Singleton
-public class LayerSelectionWidget extends GeoPlatformContentPanel {
-
-    public static final String ID = WFSWidgetNames.LAYER_SELECTION.name();
-    //
-    private final GPEventBus bus;
-    private final WFSLayerTreeWidget wfsLayerTreeWidget;
-    //
-    private final FeatureMapWidthEvent increaseWidthEvent = new IncreaseWidthEvent();
-    private final EditingToolbarPaddingEvent decreasePaddingEvent = new DecreasePaddingEvent();
+public class WFSLayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> implements  LayerTreeHandler {
 
     @Inject
-    public LayerSelectionWidget(GPEventBus theBus, WFSLayerTreeWidget theWFSLayerTreeWidget) {
-        super(TRUE);
+    private WFSLayerTreeBuilder treeBuilder;
+    private final WFSTreeBasicProperties treeProperties;
+    private final GPEventBus bus;
+    private WFSRootLayerTreeNode root;
+    private List<WFSLayerTreeNode> childrenList;
+
+    /**
+     *
+     * @param theStore
+     * @param theTree
+     * @param theTreeProperties
+     */
+    @Inject
+    public WFSLayerTreeWidget(GPEventBus theBus, @WFSLayerTreeStore GPTreeStore theStore, @WFSLayerTree GPTreePanel theTree, WFSTreeBasicProperties theTreeProperties) {
+        super(theStore, theTree);
         this.bus = theBus;
-        this.wfsLayerTreeWidget = theWFSLayerTreeWidget;
+        this.treeProperties = theTreeProperties;
+        super.afterPropertiesSet();
+        this.bus.addHandler(LayerTreeHandler.TYPE, this);
     }
 
     @Override
-    public void addComponent() {
-        super.add(this.wfsLayerTreeWidget.getTree());
+    public void buildLayerTree(WFSRootLayerTreeNode root, List<WFSLayerTreeNode> childrenList) {
+        this.root = root;
+        this.childrenList = childrenList;
     }
 
     @Override
-    public void initSize() {
+    public final void setTreePanelProperties() {
+        this.treeProperties.setTreeBasicProperties();
     }
 
-    @Override
-    public void collapse() {
-        this.increaseWidthEvent.setWidth(super.getWidth());
-        this.bus.fireEvent(increaseWidthEvent);
-        this.bus.fireEvent(decreasePaddingEvent);
-        super.collapse();
+    public void showTree(){
+        this.treeBuilder.buildTree(root, childrenList);
     }
 
-    @Override
-    public void setPanelProperties() {
-        super.setId(ID);
-        super.head.setText("Layer Selection");
-        super.setBorders(false);
-        super.setScrollMode(Style.Scroll.AUTO);
-    }
-
-    @Override
-    protected void onShow() {
-        super.onShow();
-        this.wfsLayerTreeWidget.showTree();
-    }
 }

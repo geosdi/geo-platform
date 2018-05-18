@@ -51,8 +51,10 @@ import org.geosdi.geoplatform.gui.client.widget.wfs.initializer.FeatureMapInitia
 import org.geosdi.geoplatform.gui.client.widget.wfs.initializer.IFeatureMapInitializer;
 import org.geosdi.geoplatform.gui.client.widget.wfs.layout.responsibility.FeatureAttributesLayoutHandler;
 import org.geosdi.geoplatform.gui.client.widget.wfs.layout.responsibility.FeatureSelectionLayoutHandler;
+import org.geosdi.geoplatform.gui.client.widget.wfs.tree.WFSLayerTreeWidget;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBusImpl;
+import org.gwtopenmaps.openlayers.client.layer.WFS;
 
 import javax.inject.Singleton;
 
@@ -91,6 +93,8 @@ public class FeatureInjectorModule extends AbstractGinModule {
         bind(FeatureAttributesWindowBuilder.class).asEagerSingleton();
         bind(WFSUndoRedoMediatorHandlerSupport.class).asEagerSingleton();
         bind(WFSFeatureGridBinding.class).asEagerSingleton();
+        bind(WFSLayerTreeWidget.class).in(Singleton.class);
+
 
         requestStaticInjection(AttributeCustomFieldsMap.class);
     }

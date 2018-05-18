@@ -57,6 +57,6 @@ public class LayerTypeHandlerManager {
     }
 
     private void setUpChainElements() {
-        this.rasterType.setSuccessor(describeFeature);
+        this.rasterType.setSuccessor(this.describeFeature);
     }
 }

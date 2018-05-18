@@ -82,7 +82,7 @@ public class ConcreteLayerSchemaHandler extends LayerSchemaParserHandler {
                         layer.getName(), geometryType),
                 SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
 
-        layerSchemaBinder.bind(layer, schemaDTO);
-        actionStrategy.showWidget();
+        this.layerSchemaBinder.bind(layer, schemaDTO);
+        this.actionStrategy.showWidget();
     }
 }

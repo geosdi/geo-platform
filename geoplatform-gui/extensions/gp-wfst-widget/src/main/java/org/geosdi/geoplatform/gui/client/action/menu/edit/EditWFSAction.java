@@ -46,6 +46,7 @@ import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetConstants;
 import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetMessages;
 import org.geosdi.geoplatform.gui.client.model.tree.WFSLayerTreeNode;
 import org.geosdi.geoplatform.gui.client.model.tree.WFSRootLayerTreeNode;
+import org.geosdi.geoplatform.gui.client.puregwt.action.IEditWFSActionHandler;
 import org.geosdi.geoplatform.gui.client.puregwt.map.initializer.event.BindLayersEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.BuildLayerTreeEvent;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
@@ -66,7 +67,7 @@ import java.util.List;
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class EditWFSAction extends MenuBaseAction implements IEditWFSAction {
+public class EditWFSAction extends MenuBaseAction implements IEditWFSAction, IEditWFSActionHandler {
 
     private final TreePanel<GPBeanTreeModel> treePanel;
     private final LayerTypeHandlerManager layerTypeHandlerManager;
@@ -74,6 +75,7 @@ public class EditWFSAction extends MenuBaseAction implements IEditWFSAction {
     private final BindLayersEvent bindLayersEvent = new BindLayersEvent();
     private IActionStrategy actionStrategy;
     private List<WFSLayerTreeNode> childrenList = new ArrayList<>();
+    private GPLayerBean layer;
 
     public EditWFSAction(TreePanel<GPBeanTreeModel> treePanel) {
         super(WFSTWidgetConstants.INSTANCE.EditWFSAction_titleText(),
@@ -82,18 +84,22 @@ public class EditWFSAction extends MenuBaseAction implements IEditWFSAction {
         this.bus = FeatureInjector.MainInjector.getInstance().getEventBus();
         this.layerTypeHandlerManager = FeatureInjector.MainInjector.getInstance().getLayerTypeHandlerManager();
         this.actionStrategy = FeatureInjector.MainInjector.getInstance().getActionStrategy();
+        this.bus.addHandler(IEditWFSActionHandler.TYPE, this);
     }
 
     @Override
     public void componentSelected(MenuEvent e) {
         this.actionStrategy.setWidgetType(IActionStrategy.WidgetType.EDIT_WFS_ACTION);
-        final GPLayerBean layer = (GPLayerBean) this.treePanel.getSelectionModel().getSelectedItem();
-        bindLayersTree(layer);
-
+        this.layer = (GPLayerBean) this.treePanel.getSelectionModel().getSelectedItem();
         LayoutManager.getInstance().getStatusMap().setBusy(
                 WFSTWidgetMessages.INSTANCE.checkingIfLayerIsAVectorMessage(layer.getName()));
         this.layerTypeHandlerManager.forwardLayerType(layer);
-        getAllLayer(layer);
+    }
+
+    @Override
+    public void afterStrategy() {
+        bindLayersTree(this.layer);
+        getAllLayer(this.layer);
     }
 
     /**
@@ -106,7 +112,7 @@ public class EditWFSAction extends MenuBaseAction implements IEditWFSAction {
             WFSRootLayerTreeNode root = new WFSRootLayerTreeNode(treePanel.getStore().getRootItems().get(0));
             this.childrenList.clear();
             for (GPRasterBean gpLayerBean : layers) {
-                this.childrenList.add(new WFSLayerTreeNode((GPLayerTreeModel)gpLayerBean));
+                this.childrenList.add(new WFSLayerTreeNode((GPLayerTreeModel) gpLayerBean));
             }
             this.bus.fireEvent(new BuildLayerTreeEvent(root, this.childrenList));
         }

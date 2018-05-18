@@ -32,63 +32,67 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.model.tree.grid;
+package org.geosdi.geoplatform.gui.client.widget.grid;
 
-import com.extjs.gxt.ui.client.data.BaseTreeModel;
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import com.google.gwt.user.client.ui.Widget;
-import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
+import com.extjs.gxt.ui.client.store.TreeStore;
+import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
+import com.extjs.gxt.ui.client.widget.treegrid.TreeGrid;
+import org.geosdi.geoplatform.gui.model.tree.grid.GPTreeGridBeanModel;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static org.geosdi.geoplatform.gui.model.tree.grid.GPTreeGridBeanModel.GPKeyTreeGridModel.LABEL_NODE_VALUE;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GPTreeGridBeanModel extends BaseTreeModel {
+public abstract class GeoPlatformTreeGridWidget<T extends GPTreeGridBeanModel> {
 
-    private static final long serialVersionUID = 4231108213570749653L;
+    protected TreeStore<T> store;
+    protected TreeGrid<T> tree;
+    private ColumnModel columnModel;
 
-    public enum GPKeyTreeGridModel {
-
-        LABEL_NODE_VALUE("labelNode");
-        private String value;
-
-        /**
-         *
-         */
-        GPKeyTreeGridModel(String theValue) {
-            this.value = theValue;
-        }
-
-        @Override
-        public String toString() {
-            return this.value;
-        }
+    public GeoPlatformTreeGridWidget() {
+        this.createStore();
+        this.columnModel = this.createColumnModel();
+        this.createStore();
+        this.createTreeGrid();
     }
 
-    private String labelNode;
-
-    /**
-     * @return the labelNode
-     */
-    public String getLabelNode() {
-        return labelNode;
+    private void createTreeGrid() {
+        checkArgument(this.columnModel != null, "The Paramater ColumnModel must not be null.");
+        checkArgument(this.store != null, "The Paramater Store must not be null.");
+        this.tree = new TreeGrid<T>(store, columnModel);
+        setTreeGridProperties();
     }
 
     /**
-     * @param labelNode the labelNode to set
-     */
-    public void setLabelNode(String labelNode) {
-        this.labelNode = labelNode;
-        set(LABEL_NODE_VALUE.toString(), this.labelNode);
-    }
-
-    /**
-     * Create Icon for each Node
+     * Create ColumnModel with all Column For Column with GeoPlatform Column
+     * Render we can have this code :
      *
-     * @return AbstractImagePrototype
+     * <code>
+     * ColumnConfig gpColumnRender = new ColumnConfig(
+     * GPKeyTreeGridModel.LABEL_NODE_VALUE.toString(),
+     * "GeoPlatform-Renderer", 150);
+     * <p>
+     * gpColumnRender.setRenderer(new TreeGridCellRenderer<T>());
+     * </code>
      */
-    public abstract AbstractImagePrototype getIcon();
+    protected abstract ColumnModel createColumnModel();
+
+    /**
+     *
+     */
+    protected abstract void createStore();
+
+    /**
+     * Set TreeGrid Properties such as Borders, RowHeight etc
+     */
+    protected abstract void setTreeGridProperties();
+
+    /**
+     * @return {@link TreeGrid}
+     */
+    public TreeGrid<T> asWidget() {
+        return this.tree;
+    }
 }

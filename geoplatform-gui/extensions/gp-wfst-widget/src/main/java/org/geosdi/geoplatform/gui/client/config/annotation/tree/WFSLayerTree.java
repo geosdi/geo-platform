@@ -32,34 +32,21 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.client.puregwt.wfs.event;
+package org.geosdi.geoplatform.gui.client.config.annotation.tree;
 
-import com.google.gwt.event.shared.GwtEvent;
-import org.geosdi.geoplatform.gui.client.model.wfs.WfsLayerTreeBeanModel;
-import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.LayerSelectionHandler;
+import com.google.inject.BindingAnnotation;
 
-import java.util.List;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
- * @author Vito Salvia- CNR IMAA geoSDI Group
- * @email vito.salvia@gmail.com
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public class PopulateLayerListViewEvent extends GwtEvent<LayerSelectionHandler> {
-
-    private final List<WfsLayerTreeBeanModel> layerBeans;
-
-    public PopulateLayerListViewEvent(List<WfsLayerTreeBeanModel> layerBeans) {
-        this.layerBeans = layerBeans;
-    }
-
-    @Override
-    public Type<LayerSelectionHandler> getAssociatedType() {
-        return LayerSelectionHandler.TYPE;
-    }
-
-    @Override
-    protected void dispatch(LayerSelectionHandler handler) {
-        handler.populateListView(this.layerBeans);
-    }
-
+@Target({ElementType.FIELD, ElementType.PARAMETER, ElementType.METHOD})
+@Retention(RetentionPolicy.RUNTIME)
+@BindingAnnotation
+public @interface WFSLayerTree {
 }

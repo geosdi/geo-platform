@@ -32,16 +32,12 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.client.widget.wfs;
+package org.geosdi.geoplatform.gui.client.widget.wfs.tree.properties;
 
 import com.extjs.gxt.ui.client.Style;
-import org.geosdi.geoplatform.gui.client.puregwt.map.event.FeatureMapWidthEvent;
-import org.geosdi.geoplatform.gui.client.puregwt.map.event.IncreaseWidthEvent;
-import org.geosdi.geoplatform.gui.client.puregwt.toolbar.event.DecreasePaddingEvent;
-import org.geosdi.geoplatform.gui.client.puregwt.toolbar.event.EditingToolbarPaddingEvent;
-import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
-import org.geosdi.geoplatform.gui.client.widget.wfs.tree.WFSLayerTreeWidget;
-import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
+import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import org.geosdi.geoplatform.gui.client.config.annotation.tree.WFSLayerTree;
+import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -49,55 +45,24 @@ import javax.inject.Singleton;
 import static java.lang.Boolean.TRUE;
 
 /**
- * @author Vito Salvia- CNR IMAA geoSDI Group
+ * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
 @Singleton
-public class LayerSelectionWidget extends GeoPlatformContentPanel {
+public class WFSTreeBasicProperties implements IWFSTreeBasicProperties {
 
-    public static final String ID = WFSWidgetNames.LAYER_SELECTION.name();
-    //
-    private final GPEventBus bus;
-    private final WFSLayerTreeWidget wfsLayerTreeWidget;
-    //
-    private final FeatureMapWidthEvent increaseWidthEvent = new IncreaseWidthEvent();
-    private final EditingToolbarPaddingEvent decreasePaddingEvent = new DecreasePaddingEvent();
+    private final GPTreePanel tree;
 
     @Inject
-    public LayerSelectionWidget(GPEventBus theBus, WFSLayerTreeWidget theWFSLayerTreeWidget) {
-        super(TRUE);
-        this.bus = theBus;
-        this.wfsLayerTreeWidget = theWFSLayerTreeWidget;
+    public WFSTreeBasicProperties(@WFSLayerTree GPTreePanel theTree) {
+        this.tree = theTree;
     }
 
     @Override
-    public void addComponent() {
-        super.add(this.wfsLayerTreeWidget.getTree());
-    }
-
-    @Override
-    public void initSize() {
-    }
-
-    @Override
-    public void collapse() {
-        this.increaseWidthEvent.setWidth(super.getWidth());
-        this.bus.fireEvent(increaseWidthEvent);
-        this.bus.fireEvent(decreasePaddingEvent);
-        super.collapse();
-    }
-
-    @Override
-    public void setPanelProperties() {
-        super.setId(ID);
-        super.head.setText("Layer Selection");
-        super.setBorders(false);
-        super.setScrollMode(Style.Scroll.AUTO);
-    }
-
-    @Override
-    protected void onShow() {
-        super.onShow();
-        this.wfsLayerTreeWidget.showTree();
+    public void setTreeBasicProperties() {
+        this.tree.getSelectionModel().setSelectionMode(Style.SelectionMode.SINGLE);
+        this.tree.setAutoHeight(TRUE);
+        this.tree.setCheckable(TRUE);
+        this.tree.setCheckStyle(TreePanel.CheckCascade.NONE);
     }
 }

@@ -32,76 +32,21 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.client.action.menu.strategy;
+package org.geosdi.geoplatform.gui.client.config.annotation.tree;
 
-import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
-import org.geosdi.geoplatform.gui.client.widget.wfs.FeatureWidget;
-import org.geosdi.geoplatform.gui.client.widget.wfs.ShowFeaturesWidget;
+import com.google.inject.BindingAnnotation;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
-import java.util.HashMap;
-import java.util.Map;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
- * @author Vito Salvia - CNR IMAA geoSDI Group
- * @email vito.salvia@gmail.com
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IActionStrategy {
-
-    /**
-     *
-     */
-    void showWidget();
-
-    /**
-     * @return {@link WidgetType}
-     */
-    WidgetType getWidgetType();
-
-    /**
-     * @param widgetType
-     */
-    void setWidgetType(WidgetType widgetType);
-
-    enum WidgetType {
-        EDIT_WFS_ACTION, SHOW_FEATURES;
-    }
-
-    @Singleton
-    class ActionStrategy implements IActionStrategy {
-
-        private Map<WidgetType, GeoPlatformWindow> platformWindowMap = new HashMap<>();
-        private WidgetType widgetType;
-
-        @Inject
-        public ActionStrategy(FeatureWidget theFeatureWidget, ShowFeaturesWidget showFeaturesWidget) {
-            this.platformWindowMap.put(WidgetType.EDIT_WFS_ACTION, theFeatureWidget);
-            this.platformWindowMap.put(WidgetType.SHOW_FEATURES, showFeaturesWidget);
-        }
-
-        /**
-         *
-         */
-        @Override
-        public void showWidget() {
-            this.platformWindowMap.get(this.widgetType).show();
-        }
-
-        /**
-         * @return {@link WidgetType}
-         */
-        public WidgetType getWidgetType() {
-            return this.widgetType;
-        }
-
-        /**
-         * @param widgetType
-         */
-        @Override
-        public void setWidgetType(WidgetType widgetType) {
-            this.widgetType = widgetType;
-        }
-    }
-
+@Target({ElementType.FIELD, ElementType.PARAMETER, ElementType.METHOD})
+@Retention(RetentionPolicy.RUNTIME)
+@BindingAnnotation
+public @interface WFSLayerTreeStore {
 }

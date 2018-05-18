@@ -44,14 +44,16 @@ import org.geosdi.geoplatform.gui.client.action.menu.strategy.IActionStrategy;
 import org.geosdi.geoplatform.gui.client.config.FeatureInjector;
 import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetConstants;
 import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetMessages;
-import org.geosdi.geoplatform.gui.client.model.wfs.WfsLayerTreeBeanModel;
+import org.geosdi.geoplatform.gui.client.model.tree.WFSLayerTreeNode;
+import org.geosdi.geoplatform.gui.client.model.tree.WFSRootLayerTreeNode;
 import org.geosdi.geoplatform.gui.client.puregwt.map.initializer.event.BindLayersEvent;
-import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.PopulateLayerListViewEvent;
+import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.BuildLayerTreeEvent;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
 import java.util.ArrayList;
@@ -61,9 +63,8 @@ import java.util.List;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class EditWFSAction extends MenuBaseAction implements IEditWFSAction {
 
@@ -72,7 +73,7 @@ public class EditWFSAction extends MenuBaseAction implements IEditWFSAction {
     private final GPEventBus bus;
     private final BindLayersEvent bindLayersEvent = new BindLayersEvent();
     private IActionStrategy actionStrategy;
-    private List<WfsLayerTreeBeanModel> wfsLayerTreeBeanModels = new ArrayList<>();
+    private List<WFSLayerTreeNode> childrenList = new ArrayList<>();
 
     public EditWFSAction(TreePanel<GPBeanTreeModel> treePanel) {
         super(WFSTWidgetConstants.INSTANCE.EditWFSAction_titleText(),
@@ -96,18 +97,18 @@ public class EditWFSAction extends MenuBaseAction implements IEditWFSAction {
     }
 
     /**
-     *
      * @param layerToExclude
      */
     private void getAllLayer(GPLayerBean layerToExclude) {
         if (this.treePanel instanceof GPTreePanel) {
             List<GPRasterBean> layers = ((GPTreePanel) this.treePanel).getAllLayersOnTree();
             layers.remove(layerToExclude);
-
-//            for (GPRasterBean gpLayerBean : layers) {
-//                this.wfsLayerTreeBeanModels.add(new WfsLayerTreeBeanModel(gpLayerBean));
-//            }
-            this.bus.fireEvent(new PopulateLayerListViewEvent(this.wfsLayerTreeBeanModels));
+            WFSRootLayerTreeNode root = new WFSRootLayerTreeNode(treePanel.getStore().getRootItems().get(0));
+            this.childrenList.clear();
+            for (GPRasterBean gpLayerBean : layers) {
+                this.childrenList.add(new WFSLayerTreeNode((GPLayerTreeModel)gpLayerBean));
+            }
+            this.bus.fireEvent(new BuildLayerTreeEvent(root, this.childrenList));
         }
     }
 

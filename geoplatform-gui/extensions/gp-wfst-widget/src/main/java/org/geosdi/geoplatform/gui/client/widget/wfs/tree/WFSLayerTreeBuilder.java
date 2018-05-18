@@ -57,24 +57,20 @@ public class WFSLayerTreeBuilder implements IWfsLayerTreeBuilder {
     //
     private final GPTreeStore store;
     private final GPTreePanel tree;
-    private WFSRootLayerTreeNode root;
 
     @Inject
     public WFSLayerTreeBuilder(@WFSLayerTreeStore GPTreeStore theStore, @WFSLayerTree GPTreePanel theTree) {
         this.store = theStore;
         this.tree = theTree;
-        this.tree.setExpanded(this.root, Boolean.TRUE);
     }
 
     @Override
     public void buildTree(WFSRootLayerTreeNode root, List<WFSLayerTreeNode> childrenList) {
-        this.root = root;
-        this.root.removeAll();
+        root.removeAll();
         this.store.removeAll();
-        this.store.add(this.root, Boolean.TRUE);
-        this.tree.getStore().insert(this.root, childrenList, 0, Boolean.TRUE);
-        this.tree.setExpanded(this.root, Boolean.TRUE);
-
+        this.store.add(root, Boolean.TRUE);
+        this.tree.getStore().insert(root, childrenList, 0, Boolean.TRUE);
+        this.tree.setExpanded(root, Boolean.TRUE);
     }
 
 }

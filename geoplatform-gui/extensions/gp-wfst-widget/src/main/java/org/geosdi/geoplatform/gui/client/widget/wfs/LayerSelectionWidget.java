@@ -35,6 +35,8 @@
 package org.geosdi.geoplatform.gui.client.widget.wfs;
 
 import com.extjs.gxt.ui.client.Style;
+import com.extjs.gxt.ui.client.event.ComponentEvent;
+import com.extjs.gxt.ui.client.event.ScrollListener;
 import org.geosdi.geoplatform.gui.client.puregwt.map.event.FeatureMapWidthEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.map.event.IncreaseWidthEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.toolbar.event.DecreasePaddingEvent;
@@ -89,11 +91,35 @@ public class LayerSelectionWidget extends GeoPlatformContentPanel {
 
     @Override
     public void setPanelProperties() {
-        super.setId(ID);
+        super.setScrollMode(Style.Scroll.AUTOY);
         super.head.setText("Layer Selection");
-        super.setBorders(false);
-        super.setScrollMode(Style.Scroll.AUTO);
+
+        //This code fix a scroll problem on IE9
+        super.addScrollListener(new ScrollListener() {
+            int posV = 0;
+
+            /**
+             * Fires when a component is scrolled.
+             *
+             * @param ce the component event
+             */
+            @Override
+            public void widgetScrolled(ComponentEvent ce) {
+                if (posV > 9 && LayerSelectionWidget.super.getVScrollPosition() == 0) {
+                    LayerSelectionWidget.super.setVScrollPosition(posV);
+                }
+                posV = LayerSelectionWidget.super.getVScrollPosition();
+            }
+        });
     }
+
+//    @Override
+//    public void setPanelProperties() {
+//        super.setId(ID);
+//        super.head.setText("Layer Selection");
+//        super.setBorders(false);
+//        super.setScrollMode(Style.Scroll.AUTO);
+//    }
 
     @Override
     protected void onShow() {

@@ -90,7 +90,7 @@ public class WFSLayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> i
     }
 
     public void showTree(){
-        this.treeBuilder.buildTree(root, childrenList);
+        this.treeBuilder.buildTree(this.root, this.childrenList);
     }
 
 }

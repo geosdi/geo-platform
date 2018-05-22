@@ -53,9 +53,11 @@ public class BorderLayoutProvider implements Provider<BorderLayout> {
 
     private final FeatureSelectionLayoutHandler selectionLayoutHandler;
 
+    /**
+     * @param theSelectionLayoutHandler
+     */
     @Inject
-    public BorderLayoutProvider(
-            FeatureSelectionLayoutHandler theSelectionLayoutHandler) {
+    public BorderLayoutProvider(FeatureSelectionLayoutHandler theSelectionLayoutHandler) {
         this.selectionLayoutHandler = theSelectionLayoutHandler;
     }
 
@@ -64,25 +66,23 @@ public class BorderLayoutProvider implements Provider<BorderLayout> {
         return new BorderLayout() {
 
             {
-                super.addListener(Events.Expand,
-                        new Listener<BorderLayoutEvent>() {
+                super.addListener(Events.Expand, new Listener<BorderLayoutEvent>() {
 
-                            @Override
-                            public void handleEvent(BorderLayoutEvent be) {
-                                selectionLayoutHandler.manageLayout(be.getPanel());
-                            }
+                    @Override
+                    public void handleEvent(BorderLayoutEvent be) {
+                        selectionLayoutHandler.manageLayout(be.getPanel());
+                    }
 
-                        });
+                });
 
-                super.addListener(Events.AfterLayout,
-                        new Listener<LayoutEvent>() {
+                super.addListener(Events.AfterLayout, new Listener<LayoutEvent>() {
 
-                            @Override
-                            public void handleEvent(LayoutEvent be) {
-                                ((IFeatureWidget) be.getContainer()).manageWidgetsSize();
-                            }
+                    @Override
+                    public void handleEvent(LayoutEvent be) {
+                        ((IFeatureWidget) be.getContainer()).manageWidgetsSize();
+                    }
 
-                        });
+                });
             }
 
         };

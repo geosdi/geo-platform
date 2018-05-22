@@ -44,8 +44,6 @@ import org.geosdi.geoplatform.gui.client.action.menu.strategy.IActionStrategy;
 import org.geosdi.geoplatform.gui.client.config.FeatureInjector;
 import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetConstants;
 import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetMessages;
-import org.geosdi.geoplatform.gui.client.model.tree.WFSLayerTreeNode;
-import org.geosdi.geoplatform.gui.client.model.tree.WFSRootLayerTreeNode;
 import org.geosdi.geoplatform.gui.client.puregwt.action.IEditWFSActionHandler;
 import org.geosdi.geoplatform.gui.client.puregwt.map.initializer.event.BindLayersEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.BuildLayerTreeEvent;
@@ -54,10 +52,8 @@ import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
-import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -74,9 +70,11 @@ public class EditWFSAction extends MenuBaseAction implements IEditWFSAction, IEd
     private final GPEventBus bus;
     private final BindLayersEvent bindLayersEvent = new BindLayersEvent();
     private IActionStrategy actionStrategy;
-    private List<WFSLayerTreeNode> childrenList = new ArrayList<>();
     private GPLayerBean layer;
 
+    /**
+     * @param treePanel
+     */
     public EditWFSAction(TreePanel<GPBeanTreeModel> treePanel) {
         super(WFSTWidgetConstants.INSTANCE.EditWFSAction_titleText(),
                 AbstractImagePrototype.create(BasicWidgetResources.ICONS.vector()));
@@ -102,27 +100,10 @@ public class EditWFSAction extends MenuBaseAction implements IEditWFSAction, IEd
         getAllLayer(this.layer);
     }
 
-    /**
-     * @param layerToExclude
-     */
-    private void getAllLayer(GPLayerBean layerToExclude) {
-        if (this.treePanel instanceof GPTreePanel) {
-            List<GPRasterBean> layers = ((GPTreePanel) this.treePanel).getAllLayersOnTree();
-            layers.remove(layerToExclude);
-            WFSRootLayerTreeNode root = new WFSRootLayerTreeNode(treePanel.getStore().getRootItems().get(0));
-            this.childrenList.clear();
-            for (GPRasterBean gpLayerBean : layers) {
-                this.childrenList.add(new WFSLayerTreeNode((GPLayerTreeModel) gpLayerBean));
-            }
-            this.bus.fireEvent(new BuildLayerTreeEvent(root, this.childrenList));
-        }
-    }
-
     @Override
     public void bindLayersTree(GPLayerBean layerToExclude) {
         if (this.treePanel instanceof GPTreePanel) {
-            List<GPLayerBean> layers = ((GPTreePanel) this.treePanel)
-                    .getVisibleLayersOnTree();
+            List<GPLayerBean> layers = ((GPTreePanel) this.treePanel).getVisibleLayersOnTree();
             layers.remove(layerToExclude);
 
             if (!layers.isEmpty()) {
@@ -144,4 +125,15 @@ public class EditWFSAction extends MenuBaseAction implements IEditWFSAction, IEd
         }
     }
 
+    /**
+     * @param layerToExclude
+     */
+    private void getAllLayer(GPLayerBean layerToExclude) {
+        if (this.treePanel instanceof GPTreePanel) {
+            List<GPRasterBean> layers = ((GPTreePanel) this.treePanel).getAllLayersOnTree();
+            layers.remove(layerToExclude);
+            GPBeanTreeModel root = treePanel.getStore().getRootItems().get(0);
+            this.bus.fireEvent(new BuildLayerTreeEvent(root, layers));
+        }
+    }
 }

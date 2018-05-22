@@ -76,6 +76,8 @@ import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Boolean.TRUE;
+
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
@@ -109,16 +111,16 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel implements 
     private String dataAttributeName;
 
     @Inject
-    public FeatureAttributesWidget(GPEventBus bus, TimeInputWidget timeInputWidget, GetFeatureControlBuilder featureControlBuilder, WFSProtocolCRUDOptions featureCRUDProtocol) {
-        super(Boolean.TRUE);
-
+    public FeatureAttributesWidget(GPEventBus bus, TimeInputWidget timeInputWidget, GetFeatureControlBuilder featureControlBuilder,
+            WFSProtocolCRUDOptions featureCRUDProtocol) {
+        super(TRUE);
         this.bus = bus;
         this.timeInputWidget = timeInputWidget;
         this.bus.addHandlerToSource(IDateSelectedHandler.TYPE, timeInputWidget, this);
         this.bus.addHandler(FeatureAttributesHandler.TYPE, this);
         this.featureControlBuilder = featureControlBuilder;
         this.featureCRUDProtocol = featureCRUDProtocol;
-        super.setMonitorWindowResize(Boolean.TRUE);
+        super.setMonitorWindowResize(TRUE);
         addWidgetListener(new WidgetListener() {
 
             @Override
@@ -175,7 +177,7 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel implements 
 
     @Override
     public void reset() {
-        grid.stopEditing(Boolean.TRUE);
+        grid.stopEditing(TRUE);
         store.removeAll();
 
         bus.fireEvent(new ActionEnableEvent(Boolean.FALSE));
@@ -219,10 +221,10 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel implements 
     private void createEditorGrid() {
         grid = new EditorGrid<FeatureDetail>(store, mockColumnModel);
 
-        grid.setBorders(Boolean.TRUE);
-        grid.setStripeRows(Boolean.TRUE);
-        grid.setColumnLines(Boolean.TRUE);
-        grid.setColumnResize(Boolean.TRUE);
+        grid.setBorders(TRUE);
+        grid.setStripeRows(TRUE);
+        grid.setColumnLines(TRUE);
+        grid.setColumnResize(TRUE);
         grid.setHeight(125);
 
         grid.addStyleName("grid-style");
@@ -347,7 +349,7 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel implements 
         FeatureDetail featureDetail = this.store.findModel(featureID);
         if (featureDetail != null) {
             store.remove(featureDetail);
-            grid.stopEditing(Boolean.TRUE);
+            grid.stopEditing(TRUE);
         }
         this.bus.fireEvent(new FeatureStatusBarEvent("Feature Successfully Deleted", FeatureStatusBarType.STATUS_OK));
         this.bus.fireEvent(new ActionEnableEvent(Boolean.FALSE));

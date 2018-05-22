@@ -36,8 +36,8 @@ package org.geosdi.geoplatform.gui.client.puregwt.wfs.handler;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
-import org.geosdi.geoplatform.gui.client.model.tree.WFSLayerTreeNode;
-import org.geosdi.geoplatform.gui.client.model.tree.WFSRootLayerTreeNode;
+import org.geosdi.geoplatform.gui.model.GPRasterBean;
+import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 import java.util.List;
 
@@ -50,10 +50,8 @@ public interface LayerTreeHandler extends EventHandler {
     GwtEvent.Type<LayerTreeHandler> TYPE = new GwtEvent.Type<LayerTreeHandler>();
 
     /**
-     * @param root
-     * @param childrenList
+     * @param twin
+     * @param childres
      */
-    void buildLayerTree(WFSRootLayerTreeNode root, List<WFSLayerTreeNode> childrenList);
-
-
+    void buildLayerTree(GPBeanTreeModel twin, List<GPRasterBean> childres);
 }

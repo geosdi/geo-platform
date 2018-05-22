@@ -77,7 +77,7 @@ public class GPDirectionsServiceTest extends GPBaseConfigTest {
 
     @Test
     public void gpGetDirectionsTest() throws Exception {
-        DirectionsRoute[] routes = gpDirectionsService.getDirections("Potenza, IT",
+        DirectionsRoute[] routes = gpDirectionsService.getDirections("Province of Potenza, IT",
                 "Roma, IT").mode(TravelMode.DRIVING).await().routes;
         assertNotNull(routes);
         assertNotNull(routes[0]);

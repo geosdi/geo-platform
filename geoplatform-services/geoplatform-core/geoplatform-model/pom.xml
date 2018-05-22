@@ -62,11 +62,11 @@
         </dependency>
 
         <!-- =========================================================== -->
-        <!-- ============== HIBERNATE JAVAX PERSISTENCE ================ -->
+        <!-- =================  JAVAX PERSISTENCE API=================== -->
         <!-- =========================================================== -->
         <dependency>
-            <groupId>org.hibernate.javax.persistence</groupId>
-            <artifactId>hibernate-jpa-2.1-api</artifactId>
+            <groupId>javax.persistence</groupId>
+            <artifactId>javax.persistence-api</artifactId>
         </dependency>
 
         <!-- =========================================================== -->

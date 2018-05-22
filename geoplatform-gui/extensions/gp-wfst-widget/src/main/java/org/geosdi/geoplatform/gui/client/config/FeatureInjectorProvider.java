@@ -55,7 +55,9 @@ import org.geosdi.geoplatform.gui.client.config.provider.*;
 import org.geosdi.geoplatform.gui.client.config.provider.layout.BorderLayoutProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.tree.LayerTreePanelProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.tree.LayerTreeStoreProvider;
+import org.geosdi.geoplatform.gui.client.config.provider.tree.WFSRootLayerTreeNodeProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.window.buttonbar.FeatureWidgetBar;
+import org.geosdi.geoplatform.gui.client.model.tree.WFSRootLayerTreeNode;
 import org.geosdi.geoplatform.gui.client.widget.map.control.GotoXYWidget;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreeStore;
@@ -120,6 +122,7 @@ public class FeatureInjectorProvider extends AbstractGinModule {
         bind(GotoXYWidget.class).toProvider(WFSGotoXYWigetProvider.class).in(Singleton.class);
         bind(GPTreePanel.class).annotatedWith(WFSLayerTree.class).toProvider(LayerTreePanelProvider.class).in(Singleton.class);
         bind(GPTreeStore.class).annotatedWith(WFSLayerTreeStore.class).toProvider(LayerTreeStoreProvider.class).in(Singleton.class);
+        bind(WFSRootLayerTreeNode.class).toProvider(WFSRootLayerTreeNodeProvider.class).in(Singleton.class);
 
         bind(ButtonBar.class).toProvider(FeatureWidgetBar.class).in(Singleton.class);
 

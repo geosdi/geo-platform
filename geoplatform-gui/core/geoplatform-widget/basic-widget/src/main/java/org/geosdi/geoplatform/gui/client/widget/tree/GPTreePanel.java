@@ -80,15 +80,14 @@ public class GPTreePanel<T extends GPBeanTreeModel> extends TreePanel<T> impleme
      * @param oldModel
      * @param newModel
      */
-    public void swapModelInstance(T oldModel,
-            T newModel) {
+    public void swapModelInstance(T oldModel, T newModel) {
         ((GPTreeStore) this.store).swapModelInstance(oldModel, newModel);
     }
 
     /**
      *
      */
-    public void addLayerRangeEventHandler (){
+    public void addLayerRangeEventHandler() {
         LayerHandlerManager.addHandler(TYPE, this);
     }
 

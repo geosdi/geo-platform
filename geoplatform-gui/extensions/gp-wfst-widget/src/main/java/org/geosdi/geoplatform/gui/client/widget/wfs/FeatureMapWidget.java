@@ -42,6 +42,8 @@ import org.gwtopenmaps.openlayers.client.MapWidget;
 
 import javax.inject.Inject;
 
+import static java.lang.Boolean.TRUE;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
@@ -59,7 +61,7 @@ public class FeatureMapWidget extends GeoPlatformContentPanel
 
     @Inject
     public FeatureMapWidget(GPEventBus theBus) {
-        super(Boolean.TRUE);
+        super(TRUE);
 
         this.bus = theBus;
         this.handlerRegistration = this.bus.addHandler(FeatureMapWidget.TYPE,
@@ -69,7 +71,6 @@ public class FeatureMapWidget extends GeoPlatformContentPanel
     @Override
     public void addComponent() {
         this.featureMapInitializer.initMapWidget();
-
         super.add(this.mapWidget);
     }
 

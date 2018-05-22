@@ -14,6 +14,9 @@ public class WFSLayerTreeNode extends GPLayerTreeModel {
 
     private final GPLayerTreeModel model;
 
+    /**
+     * @param theModel
+     */
     public WFSLayerTreeNode(GPLayerTreeModel theModel) {
         this.model = theModel;
         super.setAbstractText(this.model.getAbstractText());
@@ -41,7 +44,6 @@ public class WFSLayerTreeNode extends GPLayerTreeModel {
 
     @Override
     public void setRefreshTime(int refreshTime) {
-
     }
 
     @Override
@@ -56,6 +58,5 @@ public class WFSLayerTreeNode extends GPLayerTreeModel {
 
     @Override
     public void accept(IVisitor visitor) {
-
     }
 }

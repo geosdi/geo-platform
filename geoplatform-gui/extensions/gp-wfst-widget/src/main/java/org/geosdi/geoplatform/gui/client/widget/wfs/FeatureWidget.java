@@ -69,9 +69,8 @@ import static java.lang.Boolean.TRUE;
 import static org.geosdi.geoplatform.gui.client.widget.wfs.builder.feature.FeatureAttributesWindowBuilder.RECONFIGURE_STATE;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
- * @email giuseppe.lascaleia@geosdi.org
  */
 public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget, ActionEnableHandler {
 
@@ -106,8 +105,7 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget, 
      * @param theSaveButton
      */
     @Inject
-    public FeatureWidget(GPEventBus theBus, @ResetButton Button theResetButton,
-                         @SaveButton Button theSaveButton) {
+    public FeatureWidget(GPEventBus theBus, @ResetButton Button theResetButton, @SaveButton Button theSaveButton) {
         super(TRUE);
         this.bus = theBus;
         this.resetButton = theResetButton;
@@ -135,7 +133,7 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget, 
 
     @Override
     public void setWindowProperties() {
-        super.setCollapsible(Boolean.FALSE);
+        super.setCollapsible(FALSE);
         super.setResizable(TRUE);
         super.setMaximizable(TRUE);
         super.setModal(TRUE);
@@ -149,6 +147,7 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget, 
         this.attributesWidget.reset();
         this.statusBar.reset();
         this.scaleVisibleEvent.setActivate(TRUE);
+        this.layerSelectionWidget.reset();
         MapHandlerManager.fireEvent(scaleVisibleEvent);
     }
 
@@ -156,8 +155,7 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget, 
     public void show() {
         if ((this.layerSchemaBinder.getSelectedLayer() == null)
                 || (this.layerSchemaBinder.getLayerSchemaDTO() == null)) {
-            throw new IllegalArgumentException(
-                    "Both SchemaDTO and GPLayerBean must not be null");
+            throw new IllegalArgumentException("Both SchemaDTO and GPLayerBean must not be null");
         }
         this.bus.fireEvent(this.afterStrategyEditWFSActionEvent);
         super.show();
@@ -166,7 +164,7 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget, 
     @Override
     protected void afterShow() {
         super.afterShow();
-        this.scaleVisibleEvent.setActivate(Boolean.FALSE);
+        this.scaleVisibleEvent.setActivate(FALSE);
         MapHandlerManager.fireEvent(scaleVisibleEvent);
         this.statusBar.setBusy("Loading Layer as WFS");
         this.selectionWidget.reconfigureAttributes();
@@ -193,7 +191,6 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget, 
     @Override
     public void manageWidgetsSize() {
         SplitBar bar = attributesWidget.getData("splitBar");
-
         if (bar != null) {
             this.attributesWidget.manageGridHeight();
             this.mapWidget.manageMapSize();
@@ -201,11 +198,9 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget, 
     }
 
     private void addSelectionWidget() {
-        BorderLayoutData layoutData = new BorderLayoutData(LayoutRegion.EAST,
-                300);
+        BorderLayoutData layoutData = new BorderLayoutData(LayoutRegion.EAST, 300);
         layoutData.setMargins(new Margins(5, 5, 5, 5));
         layoutData.setCollapsible(true);
-
         super.add(this.selectionWidget, layoutData);
     }
 

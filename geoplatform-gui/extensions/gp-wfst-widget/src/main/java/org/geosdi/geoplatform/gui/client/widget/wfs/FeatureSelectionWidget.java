@@ -59,6 +59,8 @@ import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import javax.inject.Inject;
 import java.util.List;
 
+import static java.lang.Boolean.TRUE;
+
 /**
  * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
@@ -85,11 +87,11 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel implements I
 
     @Inject
     public FeatureSelectionWidget(GPEventBus theBus,
-                                  @SelectFeaturesButton Button theSelectFeaturesButton,
-                                  @QueryFeatureButton Button theQueryFeatureButton,
-                                  @FeatureAttributeConditionFieldList List theAttributeConditions,
-                                  @MatchComboField SimpleComboBox theMatchComboField) {
-        super(Boolean.TRUE);
+            @SelectFeaturesButton Button theSelectFeaturesButton,
+            @QueryFeatureButton Button theQueryFeatureButton,
+            @FeatureAttributeConditionFieldList List theAttributeConditions,
+            @MatchComboField SimpleComboBox theMatchComboField) {
+        super(TRUE);
         this.bus = theBus;
         this.selectFeaturesButton = theSelectFeaturesButton;
         this.queryFeatureButton = theQueryFeatureButton;

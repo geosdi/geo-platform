@@ -96,8 +96,7 @@ public class LayerSelectionWidget extends GeoPlatformContentPanel {
     }
 
     @Override
-    protected void onShow() {
-        super.onShow();
-        this.wfsLayerTreeWidget.showTree();
+    public void reset() {
+        this.wfsLayerTreeWidget.reset();
     }
 }

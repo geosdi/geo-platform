@@ -35,9 +35,9 @@
 package org.geosdi.geoplatform.gui.client.puregwt.wfs.event;
 
 import com.google.gwt.event.shared.GwtEvent;
-import org.geosdi.geoplatform.gui.client.model.tree.WFSLayerTreeNode;
-import org.geosdi.geoplatform.gui.client.model.tree.WFSRootLayerTreeNode;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.LayerTreeHandler;
+import org.geosdi.geoplatform.gui.model.GPRasterBean;
+import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 import java.util.List;
 
@@ -47,12 +47,16 @@ import java.util.List;
  */
 public class BuildLayerTreeEvent extends GwtEvent<LayerTreeHandler> {
 
-    private final WFSRootLayerTreeNode root;
-    private final List<WFSLayerTreeNode> childrenList;
+    private final GPBeanTreeModel twin;
+    private final List<GPRasterBean> childres;
 
-    public BuildLayerTreeEvent(WFSRootLayerTreeNode root, List<WFSLayerTreeNode> childrenList) {
-        this.root = root;
-        this.childrenList = childrenList;
+    /**
+     * @param theTwin
+     * @param theChildres
+     */
+    public BuildLayerTreeEvent(GPBeanTreeModel theTwin, List<GPRasterBean> theChildres) {
+        this.twin = theTwin;
+        this.childres = theChildres;
     }
 
     @Override
@@ -62,7 +66,7 @@ public class BuildLayerTreeEvent extends GwtEvent<LayerTreeHandler> {
 
     @Override
     protected void dispatch(LayerTreeHandler handler) {
-        handler.buildLayerTree(this.root, this.childrenList);
+        handler.buildLayerTree(this.twin, this.childres);
     }
 
 }

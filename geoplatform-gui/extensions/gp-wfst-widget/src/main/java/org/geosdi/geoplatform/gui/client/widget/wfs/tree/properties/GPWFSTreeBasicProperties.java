@@ -38,7 +38,7 @@ package org.geosdi.geoplatform.gui.client.widget.wfs.tree.properties;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface IWFSTreeBasicProperties {
+public interface GPWFSTreeBasicProperties {
 
     void setTreeBasicProperties();
 }

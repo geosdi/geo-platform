@@ -36,13 +36,12 @@ package org.geosdi.geoplatform.gui.client.widget.wfs.tree;
 
 import org.geosdi.geoplatform.gui.client.config.annotation.tree.WFSLayerTree;
 import org.geosdi.geoplatform.gui.client.config.annotation.tree.WFSLayerTreeStore;
-import org.geosdi.geoplatform.gui.client.model.tree.WFSLayerTreeNode;
-import org.geosdi.geoplatform.gui.client.model.tree.WFSRootLayerTreeNode;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.LayerTreeHandler;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreeStore;
 import org.geosdi.geoplatform.gui.client.widget.tree.GeoPlatformTreeWidget;
 import org.geosdi.geoplatform.gui.client.widget.wfs.tree.properties.WFSTreeBasicProperties;
+import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
@@ -50,17 +49,15 @@ import javax.inject.Inject;
 import java.util.List;
 
 /**
- * @author Vito Salvia - CNR IMAA geoSDI Group
- * @email vito.salvia@gmail.com
+ * @author Vito Salvia <vito.salvia@gmail.com>
+ * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
  */
 public class WFSLayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> implements LayerTreeHandler {
 
-    private final WFSTreeBasicProperties treeProperties;
-    private final GPEventBus bus;
     @Inject
     private WFSLayerTreeBuilder treeBuilder;
-    private WFSRootLayerTreeNode root;
-    private List<WFSLayerTreeNode> childrenList;
+    private final WFSTreeBasicProperties treeProperties;
+    private final GPEventBus bus;
 
     /**
      * @param theStore
@@ -68,7 +65,8 @@ public class WFSLayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> i
      * @param theTreeProperties
      */
     @Inject
-    public WFSLayerTreeWidget(GPEventBus theBus, @WFSLayerTreeStore GPTreeStore theStore, @WFSLayerTree GPTreePanel theTree, WFSTreeBasicProperties theTreeProperties) {
+    public WFSLayerTreeWidget(GPEventBus theBus, @WFSLayerTreeStore GPTreeStore theStore,
+            @WFSLayerTree GPTreePanel theTree, WFSTreeBasicProperties theTreeProperties) {
         super(theStore, theTree);
         this.bus = theBus;
         this.treeProperties = theTreeProperties;
@@ -76,10 +74,13 @@ public class WFSLayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> i
         this.bus.addHandler(LayerTreeHandler.TYPE, this);
     }
 
+    /**
+     * @param twin
+     * @param childres
+     */
     @Override
-    public void buildLayerTree(WFSRootLayerTreeNode root, List<WFSLayerTreeNode> childrenList) {
-        this.root = root;
-        this.childrenList = childrenList;
+    public void buildLayerTree(GPBeanTreeModel twin, List<GPRasterBean> childres) {
+        this.treeBuilder.buildTree(twin, childres);
     }
 
     @Override
@@ -87,8 +88,11 @@ public class WFSLayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> i
         this.treeProperties.setTreeBasicProperties();
     }
 
-    public void showTree() {
-        this.treeBuilder.buildTree(this.root, this.childrenList);
+    @Override
+    protected void registerTree() {
     }
 
+    public void reset() {
+        this.treeBuilder.rebuildTree();
+    }
 }

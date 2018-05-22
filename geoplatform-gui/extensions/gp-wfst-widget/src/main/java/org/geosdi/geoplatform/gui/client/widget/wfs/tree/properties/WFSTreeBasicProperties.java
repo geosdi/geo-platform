@@ -34,14 +34,15 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.wfs.tree.properties;
 
-import com.extjs.gxt.ui.client.Style;
-import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.client.config.annotation.tree.WFSLayerTree;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import static com.extjs.gxt.ui.client.Style.SelectionMode.SINGLE;
+import static com.extjs.gxt.ui.client.widget.treepanel.TreePanel.CheckCascade.NONE;
+import static com.extjs.gxt.ui.client.widget.treepanel.TreePanel.CheckNodes.LEAF;
 import static java.lang.Boolean.TRUE;
 
 /**
@@ -49,10 +50,13 @@ import static java.lang.Boolean.TRUE;
  * @email vito.salvia@gmail.com
  */
 @Singleton
-public class WFSTreeBasicProperties implements IWFSTreeBasicProperties {
+public class WFSTreeBasicProperties implements GPWFSTreeBasicProperties {
 
     private final GPTreePanel tree;
 
+    /**
+     * @param theTree
+     */
     @Inject
     public WFSTreeBasicProperties(@WFSLayerTree GPTreePanel theTree) {
         this.tree = theTree;
@@ -60,9 +64,10 @@ public class WFSTreeBasicProperties implements IWFSTreeBasicProperties {
 
     @Override
     public void setTreeBasicProperties() {
-        this.tree.getSelectionModel().setSelectionMode(Style.SelectionMode.SINGLE);
+        this.tree.getSelectionModel().setSelectionMode(SINGLE);
         this.tree.setAutoHeight(TRUE);
         this.tree.setCheckable(TRUE);
-        this.tree.setCheckStyle(TreePanel.CheckCascade.NONE);
+        this.tree.setCheckStyle(NONE);
+        this.tree.setCheckNodes(LEAF);
     }
 }

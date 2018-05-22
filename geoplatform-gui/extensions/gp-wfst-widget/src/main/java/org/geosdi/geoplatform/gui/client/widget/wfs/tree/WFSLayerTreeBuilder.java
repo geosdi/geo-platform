@@ -34,43 +34,71 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.wfs.tree;
 
+import com.google.gwt.user.client.Timer;
 import org.geosdi.geoplatform.gui.client.config.annotation.tree.WFSLayerTree;
 import org.geosdi.geoplatform.gui.client.config.annotation.tree.WFSLayerTreeStore;
-import org.geosdi.geoplatform.gui.client.model.tree.WFSLayerTreeNode;
 import org.geosdi.geoplatform.gui.client.model.tree.WFSRootLayerTreeNode;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreeStore;
+import org.geosdi.geoplatform.gui.model.GPRasterBean;
+import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.util.List;
 import java.util.logging.Logger;
 
+import static java.lang.Boolean.TRUE;
+
 /**
- * @author Vito Salvia - CNR IMAA geoSDI Group
- * @email vito.salvia@gmail.com
+ * @author Vito Salvia <vito.salvia@gmail.com>
+ * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
  */
 @Singleton
-public class WFSLayerTreeBuilder implements IWfsLayerTreeBuilder {
+public class WFSLayerTreeBuilder implements IWFSLayerTreeBuilder {
 
     private final static Logger logger = Logger.getLogger("WFSLayerTreeBuilder");
     //
     private final GPTreeStore store;
     private final GPTreePanel tree;
+    private final WFSRootLayerTreeNode root;
 
+    /**
+     * @param theStore
+     * @param theTree
+     * @param theRoot
+     */
     @Inject
-    public WFSLayerTreeBuilder(@WFSLayerTreeStore GPTreeStore theStore, @WFSLayerTree GPTreePanel theTree) {
+    public WFSLayerTreeBuilder(@WFSLayerTreeStore GPTreeStore theStore, @WFSLayerTree GPTreePanel theTree,
+            WFSRootLayerTreeNode theRoot) {
         this.store = theStore;
         this.tree = theTree;
+        this.root = theRoot;
+    }
+
+    /**
+     * @param twin
+     * @param childres
+     */
+    @Override
+    public void buildTree(GPBeanTreeModel twin, List<GPRasterBean> childres) {
+        this.root.bind(twin);
+        this.root.addChildrens(childres);
+        this.store.add(this.root, TRUE);
+        Timer t = new Timer() {
+
+            @Override
+            public void run() {
+                tree.setExpanded(root, TRUE);
+            }
+
+        };
+        t.schedule(500);
     }
 
     @Override
-    public void buildTree(WFSRootLayerTreeNode root, List<WFSLayerTreeNode> childrenList) {
-        root.removeAll();
+    public void rebuildTree() {
+        this.root.removeAll();
         this.store.removeAll();
-        this.store.add(root, Boolean.TRUE);
-        this.tree.getStore().insert(root, childrenList, 0, Boolean.TRUE);
-        this.tree.setExpanded(root, Boolean.TRUE);
     }
-
 }

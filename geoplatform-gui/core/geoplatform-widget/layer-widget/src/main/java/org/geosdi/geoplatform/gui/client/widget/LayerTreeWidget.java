@@ -34,6 +34,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget;
 
+import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.TreePanelEvent;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
@@ -55,6 +56,8 @@ import javax.inject.Inject;
  */
 public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> implements IGPBuildTreeHandler, IGPExpandTreeNodeHandler {
 
+    public static final String LAYER_TREE_PANEL = "layerTreePanel";
+    //
     @Inject
     private LayerTreeBuilder treeBuilder;
     private final GPTreeProperties treeProperties;
@@ -95,5 +98,10 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> impl
     @Override
     public void rebuildTree() {
         this.treeBuilder.rebuildTree();
+    }
+
+    @Override
+    protected void registerTree() {
+        Registry.register(LAYER_TREE_PANEL, this.tree);
     }
 }

@@ -34,8 +34,8 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.wfs.tree;
 
-import org.geosdi.geoplatform.gui.client.model.tree.WFSLayerTreeNode;
-import org.geosdi.geoplatform.gui.client.model.tree.WFSRootLayerTreeNode;
+import org.geosdi.geoplatform.gui.model.GPRasterBean;
+import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 import java.util.List;
 
@@ -43,13 +43,13 @@ import java.util.List;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface IWfsLayerTreeBuilder {
+public interface IWFSLayerTreeBuilder {
 
     /**
-     *
-     * @param root
-     * @param childrenList
+     * @param twin
+     * @param childres
      */
-    void buildTree(WFSRootLayerTreeNode root, List<WFSLayerTreeNode> childrenList);
+    void buildTree(GPBeanTreeModel twin, List<GPRasterBean> childres);
 
+    void rebuildTree();
 }

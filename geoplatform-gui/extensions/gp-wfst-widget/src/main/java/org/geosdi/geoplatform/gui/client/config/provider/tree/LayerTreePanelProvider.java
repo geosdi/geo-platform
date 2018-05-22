@@ -34,8 +34,7 @@ public class LayerTreePanelProvider implements Provider<GPTreePanel> {
                 super.setIconProvider(new ModelIconProvider<GPBeanTreeModel>() {
 
                     @Override
-                    public AbstractImagePrototype getIcon(
-                            GPBeanTreeModel model) {
+                    public AbstractImagePrototype getIcon(GPBeanTreeModel model) {
                         return model.getIcon();
                     }
 

@@ -1257,18 +1257,22 @@ Here is an example of CacheManager level resource tuning, which will use up to 4
     </cache>
 
 
-    <!-- Hibernate -->
-    <cache name="org.hibernate.cache.internal.StandardQueryCache"
-           maxElementsInMemory="200"
+    <cache name="org.hibernate.cache.spi.QueryResultsRegion"
+           maxEntriesLocalHeap="1000"
            eternal="false"
-           timeToLiveSeconds="120">
-        <persistence strategy="localTempSwap"/>
+           overflowToDisk="true"
+           diskPersistent="true"
+           timeToIdleSeconds="300"
+           timeToLiveSeconds="600"
+           diskExpiryThreadIntervalSeconds="1"
+           memoryStoreEvictionPolicy="LFU">
     </cache>
 
-    <cache name="org.hibernate.cache.spi.UpdateTimestampsCache"
-           maxElementsInMemory="5000"
-           eternal="true">
-        <persistence strategy="localTempSwap"/>
+    <cache name="org.hibernate.cache.spi.TimestampsRegion"
+           maxEntriesLocalHeap="1000"
+           eternal="true"
+           overflowToDisk="true"
+           diskPersistent="true">
     </cache>
 
 </ehcache>

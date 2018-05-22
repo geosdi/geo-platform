@@ -65,6 +65,7 @@ import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
 import javax.inject.Inject;
 
+import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 import static org.geosdi.geoplatform.gui.client.widget.wfs.builder.feature.FeatureAttributesWindowBuilder.RECONFIGURE_STATE;
 

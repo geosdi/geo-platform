@@ -23,6 +23,10 @@
         <appender-ref ref="STDOUT" />
     </logger>
 
+    <logger name="org.hibernate.cache" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT" />
+    </logger>
+
     <root>
         <level value="info" />
         <appender-ref ref="STDOUT" />

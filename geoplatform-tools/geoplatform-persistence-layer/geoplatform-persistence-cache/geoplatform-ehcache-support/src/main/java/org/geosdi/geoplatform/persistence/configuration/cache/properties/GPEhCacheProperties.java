@@ -38,6 +38,8 @@ package org.geosdi.geoplatform.persistence.configuration.cache.properties;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import static java.lang.Boolean.FALSE;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -68,14 +70,14 @@ public class GPEhCacheProperties {
      * @return the hibUseSecondLevelCache
      */
     public boolean isHibUseSecondLevelCache() {
-        return (hibUseSecondLevelCache == null) ? false : hibUseSecondLevelCache;
+        return (hibUseSecondLevelCache == null) ? FALSE : hibUseSecondLevelCache;
     }
 
     /**
      * @return the hibUseQueryCache
      */
     public boolean isHibUseQueryCache() {
-        return (hibUseQueryCache == null) ? false : hibUseQueryCache;
+        return (hibUseQueryCache == null) ? FALSE : hibUseQueryCache;
     }
 
     /**
@@ -89,14 +91,14 @@ public class GPEhCacheProperties {
      * @return the useStructuredEntries
      */
     public boolean isUseStructuredEntries() {
-        return (useStructuredEntries == null) ? false : useStructuredEntries;
+        return (useStructuredEntries == null) ? FALSE : useStructuredEntries;
     }
 
     @Override
     public String toString() {
         return "GPEhCacheProperties{ " + "hibCacheRegionFactoryClass = "
                 + hibCacheRegionFactoryClass + ", hibUseSecondLevelCache = "
-                + hibUseSecondLevelCache + ", hibUseQueryCache = "
+                + isHibUseSecondLevelCache() + ", hibUseQueryCache = "
                 + hibUseQueryCache + ", ehcacheConfResourceName = "
                 + ehcacheConfResourceName + ", useStructuredEntries = "
                 + useStructuredEntries + '}';

@@ -73,7 +73,7 @@ public class WFSLayerTreeBuilder implements IWFSLayerTreeBuilder {
      */
     @Inject
     public WFSLayerTreeBuilder(@WFSLayerTreeStore GPTreeStore theStore, @WFSLayerTree GPTreePanel theTree,
-            WFSRootLayerTreeNode theRoot) {
+                               WFSRootLayerTreeNode theRoot) {
         this.store = theStore;
         this.tree = theTree;
         this.root = theRoot;

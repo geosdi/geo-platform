@@ -34,8 +34,10 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.wfs.tree.properties;
 
+import com.extjs.gxt.ui.client.event.Events;
 import org.geosdi.geoplatform.gui.client.config.annotation.tree.WFSLayerTree;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
+import org.geosdi.geoplatform.gui.client.widget.wfs.tree.listener.WFSTreeCheckListener;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -53,13 +55,15 @@ import static java.lang.Boolean.TRUE;
 public class WFSTreeBasicProperties implements GPWFSTreeBasicProperties {
 
     private final GPTreePanel tree;
+    private final WFSTreeCheckListener wfsTreeCheckListener;
 
     /**
      * @param theTree
      */
     @Inject
-    public WFSTreeBasicProperties(@WFSLayerTree GPTreePanel theTree) {
+    public WFSTreeBasicProperties(@WFSLayerTree GPTreePanel theTree, WFSTreeCheckListener theWfsTreeCheckListener) {
         this.tree = theTree;
+        this.wfsTreeCheckListener = theWfsTreeCheckListener;
     }
 
     @Override
@@ -69,5 +73,6 @@ public class WFSTreeBasicProperties implements GPWFSTreeBasicProperties {
         this.tree.setCheckable(TRUE);
         this.tree.setCheckStyle(NONE);
         this.tree.setCheckNodes(LEAF);
+        this.tree.addListener(Events.CheckChange, this.wfsTreeCheckListener);
     }
 }

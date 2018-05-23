@@ -50,9 +50,9 @@ import javax.inject.Inject;
  */
 public class FeatureSelectionLayoutHandler extends AbstractLayoutHandler {
 
+    private final EditingToolbarPaddingEvent increasePaddingEvent = new IncreasePaddingEvent();
     @Inject
     private GPEventBus bus;
-    private final EditingToolbarPaddingEvent increasePaddingEvent = new IncreasePaddingEvent();
     private DecreaseWidthEvent event = new DecreaseWidthEvent();
 
     @Inject

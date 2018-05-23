@@ -34,6 +34,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.wfs.initializer;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.Timer;
 import org.geosdi.geoplatform.gui.client.model.binder.ILayerSchemaBinder;
@@ -158,6 +159,8 @@ public class FeatureMapInitializer implements IFeatureMapInitializer {
                 this.mapWidget.getMap().addLayers(this.wmsLayers.toArray(new Layer[this.wmsLayers.size()]));
             }
         }
+        wms.setZIndex(1000);
+        vectorLayer.setZIndex(1001);
         this.mapWidget.getMap().addLayer(wms);
         this.mapWidget.getMap().addLayer(vectorLayer);
         ((WMS) wms).redraw(true);

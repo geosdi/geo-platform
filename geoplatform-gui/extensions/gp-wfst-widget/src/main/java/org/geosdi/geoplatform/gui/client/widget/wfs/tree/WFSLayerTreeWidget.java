@@ -54,10 +54,10 @@ import java.util.List;
  */
 public class WFSLayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> implements LayerTreeHandler {
 
-    @Inject
-    private WFSLayerTreeBuilder treeBuilder;
     private final WFSTreeBasicProperties treeProperties;
     private final GPEventBus bus;
+    @Inject
+    private WFSLayerTreeBuilder treeBuilder;
 
     /**
      * @param theStore
@@ -66,7 +66,7 @@ public class WFSLayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> i
      */
     @Inject
     public WFSLayerTreeWidget(GPEventBus theBus, @WFSLayerTreeStore GPTreeStore theStore,
-            @WFSLayerTree GPTreePanel theTree, WFSTreeBasicProperties theTreeProperties) {
+                              @WFSLayerTree GPTreePanel theTree, WFSTreeBasicProperties theTreeProperties) {
         super(theStore, theTree);
         this.bus = theBus;
         this.treeProperties = theTreeProperties;

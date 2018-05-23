@@ -32,30 +32,15 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.client.config.provider;
+package org.geosdi.geoplatform.gui.client.widget.wfs.map.event;
 
-import com.google.gwt.core.client.GWT;
-import com.google.inject.Provider;
-import org.geosdi.geoplatform.gui.client.widget.wfs.map.WFSMapModel;
-import org.geosdi.geoplatform.gui.factory.baselayer.GPBaseLayerFactory;
-import org.geosdi.geoplatform.gui.factory.map.DefaultMapFactory;
-import org.geosdi.geoplatform.gui.factory.map.GeoPlatformMapFactory;
-import org.geosdi.geoplatform.gui.global.enumeration.BaseLayerValue;
-import org.gwtopenmaps.openlayers.client.MapWidget;
+import com.google.gwt.event.shared.HandlerRegistration;
 
 /**
- * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
  */
-public class MapWidgetProvider implements Provider<MapWidget> {
+public interface WFSHasLayerChangedHandler {
 
-    private final GeoPlatformMapFactory mapFactory = GWT.create(DefaultMapFactory.class);
-    private WFSMapModel mapModel;
-
-    @Override
-    public MapWidget get() {
-        MapWidget mapWidget = this.mapFactory.createMap("100%", "100%",
-                GPBaseLayerFactory.getBaseLayer(BaseLayerValue.OPEN_STREET_MAP));
-        this.mapModel = new WFSMapModel(mapWidget);
-        return mapWidget;
-    }
+    HandlerRegistration addLayerChangedHandler();
 }

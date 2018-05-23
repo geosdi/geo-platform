@@ -87,10 +87,10 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel implements I
 
     @Inject
     public FeatureSelectionWidget(GPEventBus theBus,
-            @SelectFeaturesButton Button theSelectFeaturesButton,
-            @QueryFeatureButton Button theQueryFeatureButton,
-            @FeatureAttributeConditionFieldList List theAttributeConditions,
-            @MatchComboField SimpleComboBox theMatchComboField) {
+                                  @SelectFeaturesButton Button theSelectFeaturesButton,
+                                  @QueryFeatureButton Button theQueryFeatureButton,
+                                  @FeatureAttributeConditionFieldList List theAttributeConditions,
+                                  @MatchComboField SimpleComboBox theMatchComboField) {
         super(TRUE);
         this.bus = theBus;
         this.selectFeaturesButton = theSelectFeaturesButton;

@@ -82,12 +82,12 @@ public class WFSLayerTreeBuilder implements IWFSLayerTreeBuilder {
 
     /**
      * @param twin
-     * @param childres
+     * @param childrens
      */
     @Override
-    public void buildTree(GPBeanTreeModel twin, List<GPRasterBean> childres) {
+    public void buildTree(GPBeanTreeModel twin, List<GPRasterBean> childrens) {
         this.root.bind(twin);
-        this.root.addChildrens(childres);
+        this.root.addChildrens(childrens);
         this.store.add(this.root, TRUE);
         Timer t = new Timer() {
 

@@ -47,9 +47,9 @@ public interface IWFSLayerTreeBuilder {
 
     /**
      * @param twin
-     * @param childres
+     * @param childrens
      */
-    void buildTree(GPBeanTreeModel twin, List<GPRasterBean> childres);
+    void buildTree(GPBeanTreeModel twin, List<GPRasterBean> childrens);
 
     void rebuildTree();
 }

@@ -40,6 +40,8 @@ import org.geosdi.geoplatform.gui.client.config.annotation.tree.WFSLayerTreeStor
 import org.geosdi.geoplatform.gui.client.model.tree.WFSRootLayerTreeNode;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreeStore;
+import org.geosdi.geoplatform.gui.client.widget.wfs.tree.visitor.GPWFSCompositeVisitor;
+import org.geosdi.geoplatform.gui.client.widget.wfs.tree.visitor.WFSVisitorCheck;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
@@ -62,6 +64,7 @@ public class WFSLayerTreeBuilder implements IWFSLayerTreeBuilder {
     private final GPTreeStore store;
     private final GPTreePanel tree;
     private final WFSRootLayerTreeNode root;
+    private final GPWFSCompositeVisitor visitor;
 
     /**
      * @param theStore
@@ -74,6 +77,7 @@ public class WFSLayerTreeBuilder implements IWFSLayerTreeBuilder {
         this.store = theStore;
         this.tree = theTree;
         this.root = theRoot;
+        this.visitor = new WFSVisitorCheck(this.tree);
     }
 
     /**
@@ -89,6 +93,7 @@ public class WFSLayerTreeBuilder implements IWFSLayerTreeBuilder {
 
             @Override
             public void run() {
+                enableTreeCheck();
                 tree.setExpanded(root, TRUE);
             }
 
@@ -100,5 +105,12 @@ public class WFSLayerTreeBuilder implements IWFSLayerTreeBuilder {
     public void rebuildTree() {
         this.root.removeAll();
         this.store.removeAll();
+    }
+
+    /**
+     *
+     */
+    private void enableTreeCheck() {
+        this.root.accept(this.visitor);
     }
 }

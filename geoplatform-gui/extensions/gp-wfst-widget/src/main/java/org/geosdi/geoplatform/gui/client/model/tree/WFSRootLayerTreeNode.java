@@ -1,6 +1,9 @@
 package org.geosdi.geoplatform.gui.client.model.tree;
 
+import com.extjs.gxt.ui.client.data.ModelData;
+import com.google.common.collect.Lists;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import org.geosdi.geoplatform.gui.client.widget.wfs.tree.visitor.GPWFSCompositeVisitor;
 import org.geosdi.geoplatform.gui.configuration.composite.GPTreeCompositeType;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
@@ -64,6 +67,27 @@ public class WFSRootLayerTreeNode extends GPBeanTreeModel implements GPWFSRootLa
 
     @Override
     public void accept(IVisitor visitor) {
+    }
+
+    /**
+     * @param visitor
+     */
+    @Override
+    public void accept(GPWFSCompositeVisitor visitor) {
+        visitor.visit(this);
+    }
+
+    /**
+     * @return {@link Child}
+     */
+    @Override
+    public <Child extends GPWFSLayerTreeNode> List<Child> getChildrens() {
+        List<Child> childrens = Lists.newArrayList();
+        for (ModelData child : super.getChildren()) {
+            if ((child != null) && (child instanceof GPWFSLayerTreeNode))
+                childrens.add((Child) child);
+        }
+        return childrens;
     }
 
     @Override

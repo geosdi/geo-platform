@@ -9,7 +9,7 @@ import java.util.List;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPWFSRootLayerTreeNode {
+public interface GPWFSRootLayerTreeNode extends GPWFSTreeComposite {
 
     /**
      * @param theTwin
@@ -20,4 +20,10 @@ public interface GPWFSRootLayerTreeNode {
      * @param childres
      */
     void addChildrens(List<GPRasterBean> childres);
+
+    /**
+     * @param <Child>
+     * @return {@link List<Child>}
+     */
+    <Child extends GPWFSLayerTreeNode> List<Child> getChildrens();
 }

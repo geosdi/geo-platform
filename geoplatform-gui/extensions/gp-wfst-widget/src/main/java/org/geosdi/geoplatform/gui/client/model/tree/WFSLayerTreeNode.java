@@ -1,6 +1,8 @@
 package org.geosdi.geoplatform.gui.client.model.tree;
 
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import org.geosdi.geoplatform.gui.client.widget.wfs.tree.visitor.GPWFSCompositeVisitor;
+import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.TreeStatusEnum;
 import org.geosdi.geoplatform.gui.model.tree.state.IGPLayerTreeState;
@@ -10,7 +12,7 @@ import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class WFSLayerTreeNode extends GPLayerTreeModel {
+public class WFSLayerTreeNode extends GPLayerTreeModel implements GPWFSLayerTreeNode {
 
     private final GPLayerTreeModel model;
 
@@ -35,6 +37,7 @@ public class WFSLayerTreeNode extends GPLayerTreeModel {
         super.setzIndex(this.model.getzIndex());
         super.setTimeFilter(this.model.getTimeFilter());
         super.setVariableTimeFilter(this.model.getVariableTimeFilter());
+        super.setChecked(this.model.isChecked());
     }
 
     @Override
@@ -58,5 +61,14 @@ public class WFSLayerTreeNode extends GPLayerTreeModel {
 
     @Override
     public void accept(IVisitor visitor) {
+        visitor.visitRaster((GPRasterBean) this.model);
+    }
+
+    /**
+     * @param visitor
+     */
+    @Override
+    public void accept(GPWFSCompositeVisitor visitor) {
+        visitor.visit(this);
     }
 }

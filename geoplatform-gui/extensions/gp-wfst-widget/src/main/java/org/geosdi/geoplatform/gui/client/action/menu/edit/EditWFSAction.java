@@ -96,7 +96,7 @@ public class EditWFSAction extends MenuBaseAction implements IEditWFSAction, IEd
 
     @Override
     public void afterStrategy() {
-        bindLayersTree(this.layer);
+//        bindLayersTree(this.layer);
         getAllLayer(this.layer);
     }
 

@@ -152,15 +152,15 @@ public class FeatureMapInitializer implements IFeatureMapInitializer {
     }
 
     protected void loadLayerOnMap() {
-        if ((this.layers != null) && !(this.layers.isEmpty())) {
-            this.wmsLayers = new ArrayList<>();
-            for (GPLayerBean layer : this.layers) {
-                this.wmsLayers.add(this.mapLayerBuilder.buildLayer(layer));
-                this.mapWidget.getMap().addLayers(this.wmsLayers.toArray(new Layer[this.wmsLayers.size()]));
-            }
-        }
-        wms.setZIndex(1000);
-        vectorLayer.setZIndex(1001);
+//        if ((this.layers != null) && !(this.layers.isEmpty())) {
+//            this.wmsLayers = new ArrayList<>();
+//            for (GPLayerBean layer : this.layers) {
+//                this.wmsLayers.add(this.mapLayerBuilder.buildLayer(layer));
+//                this.mapWidget.getMap().addLayers(this.wmsLayers.toArray(new Layer[this.wmsLayers.size()]));
+//            }
+//        }
+        this.wms.setZIndex(1000);
+        this.vectorLayer.setZIndex(1001);
         this.mapWidget.getMap().addLayer(wms);
         this.mapWidget.getMap().addLayer(vectorLayer);
         ((WMS) wms).redraw(true);

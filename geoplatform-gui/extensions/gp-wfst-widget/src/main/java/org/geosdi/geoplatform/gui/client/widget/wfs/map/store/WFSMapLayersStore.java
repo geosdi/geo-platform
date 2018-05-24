@@ -131,15 +131,13 @@ public class WFSMapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> impl
 
     @Override
     public void displayRaster(GPRasterBean rasterBean) {
-        IGPAccountDetail accountDetail = Registry.get(
-                UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
         final WMS layer;
         if (containsLayer(rasterBean)) {
             layer = (WMS) this.layers.get(rasterBean);
             if (!layer.isVisible() || Integer.parseInt(
                     layer.getZIndex().toString())
                     != rasterBean.getzIndex()) {
-                layer.setZIndex(1001);
+                layer.setZIndex(rasterBean.getzIndex());
                 Scheduler.get().scheduleDeferred(new Command() {
                     @Override
                     public void execute() {
@@ -152,7 +150,7 @@ public class WFSMapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> impl
             layer = (WMS) this.layerBuilder.buildLayer(rasterBean);
             this.layers.put(rasterBean, layer);
             this.mapWidget.getMap().addLayer(layer);
-            layer.setZIndex(1001);
+            layer.setZIndex(rasterBean.getzIndex());
             layer.redraw(true);
         }
     }

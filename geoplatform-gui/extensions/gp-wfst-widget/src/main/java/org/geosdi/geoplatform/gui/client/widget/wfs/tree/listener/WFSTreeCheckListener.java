@@ -16,17 +16,16 @@ import javax.inject.Singleton;
  * @email vito.salvia@gmail.com
  */
 @Singleton
-public class WFSTreeCheckListener implements
-        Listener<TreePanelEvent<GPBeanTreeModel>> {
+public class WFSTreeCheckListener implements Listener<TreePanelEvent<GPBeanTreeModel>> {
 
     @Override
     public void handleEvent(TreePanelEvent<GPBeanTreeModel> be) {
-        GPBeanTreeModel element = be.getItem();
-        if(be.isChecked() && !element.isChecked()) {
+        if(be.isChecked()) {
+            GWT.log("@@@@@@@@@@@@@@@@@CODICE ESEGUITO CHECKED:");
             be.getItem().setChecked(Boolean.TRUE);
             GPHandlerManager.fireEvent(new WFSDisplayLayerMapEvent((WFSLayerTreeNode) be.getItem()));
-        }
-        if(!be.isChecked() && element.isChecked()) {
+        }else{
+            GWT.log("@@@@@@@@@@@@@@@@@CODICE ESEGUITO UNCHECKED:");
             be.getItem().setChecked(Boolean.FALSE);
             GPHandlerManager.fireEvent(new WFSHideLayerMapEvent((WFSLayerTreeNode) be.getItem()));
         }

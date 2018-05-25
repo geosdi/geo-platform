@@ -53,6 +53,8 @@ import org.geosdi.geoplatform.gui.client.config.annotation.SaveButton;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.model.binder.ILayerSchemaBinder;
 import org.geosdi.geoplatform.gui.client.puregwt.action.event.AfterStrategyEditWFSActionEvent;
+import org.geosdi.geoplatform.gui.client.puregwt.map.event.WFSResetStoreEvent;
+import org.geosdi.geoplatform.gui.client.puregwt.wfs.WFSGPHandlerManager;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
 import org.geosdi.geoplatform.gui.client.widget.wfs.builder.feature.FeatureAttributesWindowBuilder;
 import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar;
@@ -150,6 +152,7 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget, 
         this.scaleVisibleEvent.setActivate(TRUE);
         this.layerSelectionWidget.reset();
         MapHandlerManager.fireEvent(scaleVisibleEvent);
+        WFSGPHandlerManager.fireEvent(new WFSResetStoreEvent());
     }
 
     @Override

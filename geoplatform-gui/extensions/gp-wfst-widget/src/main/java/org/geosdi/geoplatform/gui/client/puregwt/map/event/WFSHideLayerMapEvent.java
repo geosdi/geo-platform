@@ -32,35 +32,31 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.client.widget.wfs.map;
+package org.geosdi.geoplatform.gui.client.puregwt.map.event;
 
-import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.event.shared.GwtEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.map.WFSLayerMapChangedHandler;
-import org.geosdi.geoplatform.gui.client.puregwt.wfs.WFSGPHandlerManager;
-import org.geosdi.geoplatform.gui.client.widget.wfs.map.event.WFSHasLayerChangedHandler;
-import org.geosdi.geoplatform.gui.client.widget.wfs.map.store.WFSMapLayersStore;
-import org.geosdi.geoplatform.gui.impl.map.GPMapModel;
-import org.geosdi.geoplatform.gui.impl.map.event.LayerMapChangedHandler;
-import org.geosdi.geoplatform.gui.impl.map.store.IMapLayersStore;
-import org.gwtopenmaps.openlayers.client.MapWidget;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class WFSMapModel extends GPMapModel implements WFSHasLayerChangedHandler {
+public class WFSHideLayerMapEvent extends GwtEvent<WFSLayerMapChangedHandler> {
 
-    public WFSMapModel(MapWidget theMapWidget) {
-        super(theMapWidget);
+    private GPLayerBean layerBean;
+
+    public WFSHideLayerMapEvent(GPLayerBean theLayerBean) {
+        this.layerBean = theLayerBean;
     }
 
     @Override
-    public HandlerRegistration addLayerChangedHandler() {
-        return WFSGPHandlerManager.addHandler(WFSLayerMapChangedHandler.TYPE, (WFSMapLayersStore)this.layersStore);
+    public Type<WFSLayerMapChangedHandler> getAssociatedType() {
+        return WFSLayerMapChangedHandler.TYPE;
     }
 
     @Override
-    protected final IMapLayersStore createStore() {
-        return new WFSMapLayersStore(this.mapWidget);
+    protected void dispatch(WFSLayerMapChangedHandler handler) {
+        handler.onHideLayer(this.layerBean);
     }
 }

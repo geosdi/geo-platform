@@ -43,52 +43,6 @@ import org.gwtopenmaps.openlayers.client.Bounds;
  */
 public class WFSViewportUtility {
 
-//    public static void gotoViewportLocation(Map map, GPClientViewport viewport) {
-//        BBoxClientInfo bbox = viewport.getBbox();
-//        Bounds bounds = generateBoundsFromBBOX(bbox);
-//        LonLat center = bounds.getCenterLonLat();
-//        if (GPApplicationMap.getInstance().getApplicationMap().getMap().getProjection().equals(
-//                GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode())) {
-//            center.transform(GPCoordinateReferenceSystem.WGS_84.getCode(),
-//                    GPCoordinateReferenceSystem.EPSG_GOOGLE.getCode());
-//        }
-//
-//        double zoomLevel = viewport.getZoomLevel();
-//        map.setCenter(center, (int) zoomLevel);
-//    }
-//
-//    public static GPClientViewport generateViewportFromMap(Map map) {
-//        Projection currentProjection = new Projection(map.getProjection());
-//        Projection destinationProjection = new Projection(
-//                GPCoordinateReferenceSystem.WGS_84.getCode());
-//        Bounds bounds = map.getExtent().transform(currentProjection, destinationProjection);
-//        BBoxClientInfo bbox = generateBBOXFromBounds(bounds);
-//        GPClientViewport viewport = new GPClientViewport("VIEWPORT",
-//                "VIEWPORT",
-//                bbox, map.getZoom(), Boolean.FALSE);
-//        return viewport;
-//    }
-//
-//    public static Bounds calculateMaxBound(List<GPLayerBean> layerList, Map map) {
-//        Bounds bound = null;
-//        if (layerList != null || layerList.size() > 0) {
-//            BBoxClientInfo bbox = layerList.get(0).getBbox();
-//            bound = generateBoundsFromBBOX(bbox);
-//            Projection currentProjection = new Projection(layerList.get(0).getCrs());
-//            Projection destinationProjection = new Projection(
-//                    GPCoordinateReferenceSystem.WGS_84.getCode());
-//            bound.transform(currentProjection, destinationProjection);
-//            for (GPLayerBean layerBean : layerList) {
-//                bbox = layerBean.getBbox();
-//                Bounds layerBounds = generateBoundsFromBBOX(bbox);
-//                currentProjection = new Projection(layerBean.getCrs());
-//                layerBounds.transform(currentProjection, destinationProjection);
-//                bound.extend(layerBounds);
-//            }
-//        }
-//        return bound;
-//    }
-
     public static BBoxClientInfo generateBBOXFromBounds(Bounds bounds) {
         return new BBoxClientInfo(bounds.getLowerLeftX(), bounds.getLowerLeftY(),
                 bounds.getUpperRightX(), bounds.getUpperRightY());

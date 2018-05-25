@@ -57,6 +57,7 @@ public class MapWidgetProvider implements Provider<MapWidget> {
         MapWidget mapWidget = this.mapFactory.createMap("100%", "100%",
                 GPBaseLayerFactory.getBaseLayer(OPEN_STREET_MAP));
         this.mapModel = new WFSMapModel(mapWidget);
+        this.mapModel.addLayerChangedHandler();
         return mapWidget;
     }
 }

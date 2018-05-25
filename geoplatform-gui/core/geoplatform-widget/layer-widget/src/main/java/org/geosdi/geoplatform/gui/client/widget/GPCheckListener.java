@@ -85,8 +85,8 @@ public class GPCheckListener implements
         if (isCacheable && !(element instanceof GPRootTreeNode)) {
             be.getItem().setChecked(!element.isChecked());
             IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
-            AbstractMementoOriginalProperties memento = mementoSave.copyOriginalProperties(
-                    element);
+            AbstractMementoOriginalProperties memento = mementoSave.copyOriginalProperties(element);
+            be.getItem().setChecked(!element.isChecked());
             mementoSave.putOriginalPropertiesInCache(memento);
         }
     }

@@ -35,11 +35,11 @@
 package org.geosdi.geoplatform.gui.client.widget.wfs.map;
 
 import com.google.gwt.event.shared.HandlerRegistration;
-import org.geosdi.geoplatform.gui.client.puregwt.map.WFSLayerMapChangedHandler;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.WFSGPHandlerManager;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.event.WFSHasLayerChangedHandler;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.store.WFSMapLayersStore;
 import org.geosdi.geoplatform.gui.impl.map.GPMapModel;
+import org.geosdi.geoplatform.gui.impl.map.event.LayerMapChangedHandler;
 import org.geosdi.geoplatform.gui.impl.map.store.IMapLayersStore;
 import org.gwtopenmaps.openlayers.client.MapWidget;
 
@@ -55,12 +55,11 @@ public class WFSMapModel extends GPMapModel implements WFSHasLayerChangedHandler
 
     @Override
     public HandlerRegistration addLayerChangedHandler() {
-        return WFSGPHandlerManager.addHandler(WFSLayerMapChangedHandler.TYPE, (WFSMapLayersStore)this.layersStore);
+        return WFSGPHandlerManager.addHandler(LayerMapChangedHandler.TYPE, this.layersStore);
     }
 
     @Override
     protected final IMapLayersStore createStore() {
         return new WFSMapLayersStore(this.mapWidget);
     }
-
 }

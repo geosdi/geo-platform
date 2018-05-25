@@ -34,30 +34,18 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.wfs.map.store;
 
-import com.extjs.gxt.ui.client.Registry;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.History;
-import org.geosdi.geoplatform.gui.client.puregwt.map.WFSLayerMapChangedHandler;
-import org.geosdi.geoplatform.gui.client.widget.map.event.LayerRangeEvent;
-import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
-import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 import org.geosdi.geoplatform.gui.impl.map.store.GPMapLayersStore;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.GPVectorBean;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
-import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
-import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
-import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.shared.util.GPSharedUtils;
 import org.gwtopenmaps.openlayers.client.MapWidget;
 import org.gwtopenmaps.openlayers.client.Projection;
 import org.gwtopenmaps.openlayers.client.layer.Layer;
 import org.gwtopenmaps.openlayers.client.layer.WMS;
-import org.gwtopenmaps.openlayers.client.layer.WMSOptions;
-import org.gwtopenmaps.openlayers.client.layer.WMSParams;
 
 import java.util.Map.Entry;
 import java.util.logging.Logger;
@@ -68,7 +56,7 @@ import static java.lang.Integer.parseInt;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class WFSMapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> implements WFSLayerMapChangedHandler {
+public class WFSMapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
 
     protected final static Logger logger = Logger.getLogger("WFSMapLayersStore");
 
@@ -214,12 +202,12 @@ public class WFSMapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> impl
 
     @Override
     public void onChangeStyle(GPRasterBean layerBean,
-                              String newStyle) {
+            String newStyle) {
     }
 
     @Override
     public void onChangeSingleTileRequest(GPRasterBean layerBean,
-                                          boolean singleTileRequest) {
+            boolean singleTileRequest) {
     }
 
     @Override
@@ -253,5 +241,4 @@ public class WFSMapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> impl
     @Override
     public void onChangeBaseLayer(Projection projection) {
     }
-
 }

@@ -34,15 +34,11 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.wfs.map;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.HandlerRegistration;
-import org.geosdi.geoplatform.gui.client.puregwt.map.WFSLayerMapChangedHandler;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.event.WFSHasLayerChangedHandler;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.store.WFSMapLayersStore;
 import org.geosdi.geoplatform.gui.impl.map.GPMapModel;
-import org.geosdi.geoplatform.gui.impl.map.event.LayerMapChangedHandler;
 import org.geosdi.geoplatform.gui.impl.map.store.IMapLayersStore;
-import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.gwtopenmaps.openlayers.client.MapWidget;
 
 /**

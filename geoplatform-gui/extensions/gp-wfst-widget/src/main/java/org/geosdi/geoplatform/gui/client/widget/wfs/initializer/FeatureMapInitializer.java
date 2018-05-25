@@ -34,7 +34,6 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.wfs.initializer;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.Timer;
 import org.geosdi.geoplatform.gui.client.model.binder.ILayerSchemaBinder;
@@ -56,7 +55,6 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
 import org.gwtopenmaps.openlayers.client.layer.WMS;
 
 import javax.inject.Inject;
-import java.util.ArrayList;
 import java.util.List;
 
 /**

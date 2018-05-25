@@ -178,6 +178,7 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
                     != rasterBean.getzIndex()) {
                 layer.setZIndex(rasterBean.getzIndex());
                 Scheduler.get().scheduleDeferred(new Command() {
+
                     @Override
                     public void execute() {
                         layer.setIsVisible(true);
@@ -207,6 +208,7 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
         final Layer layer = getLayer(layerBean);
         if (layer != null) {
             Scheduler.get().scheduleDeferred(new Command() {
+
                 @Override
                 public void execute() {
                     layer.setIsVisible(false);

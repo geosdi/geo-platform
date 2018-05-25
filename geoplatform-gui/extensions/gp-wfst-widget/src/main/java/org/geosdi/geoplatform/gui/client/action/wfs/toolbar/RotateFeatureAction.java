@@ -48,7 +48,7 @@ import org.gwtopenmaps.openlayers.client.control.ModifyFeature;
 public class RotateFeatureAction extends WFSChangeFeatureAction {
 
     public RotateFeatureAction(WFSBaseMapMediator theBaseMapMediator,
-                               WFSToolbarObserver theButtonObserver) {
+            WFSToolbarObserver theButtonObserver) {
         super(theBaseMapMediator, theButtonObserver);
     }
 

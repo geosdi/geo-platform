@@ -47,7 +47,7 @@ public class LayerSchemaHandlerManager {
     private LayerSchemaParserHandler concreteHandler;
 
     public LayerSchemaHandlerManager(LayerSchemaParserHandler nullHandler,
-                                     LayerSchemaParserHandler concreteHandler) {
+            LayerSchemaParserHandler concreteHandler) {
         this.nullHandler = nullHandler;
         this.concreteHandler = concreteHandler;
         setUpChainElements();

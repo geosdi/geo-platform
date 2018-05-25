@@ -48,8 +48,7 @@ import java.util.Map;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GPMapLayersStore<K extends GPLayerBean, T extends Layer>
-        implements IMapLayersStore<T> {
+public abstract class GPMapLayersStore<K extends GPLayerBean, T extends Layer> implements IMapLayersStore<T> {
 
     protected MapWidget mapWidget;
     protected Map<K, T> layers = Maps.<K, T>newHashMap();

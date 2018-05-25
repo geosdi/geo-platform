@@ -73,7 +73,7 @@ public class CasUpdateFeatureGeometryCommand implements
 
     @Override
     public UpdateFeatureGeometryResponse execute(CasUpdateFeatureGeometryRequest request,
-                                                 HttpServletRequest httpServletRequest) {
+            HttpServletRequest httpServletRequest) {
         logger.debug("##################### Executing {} Command", this.getClass().getSimpleName());
         logger.debug("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@REQUEST UPDATE : {}", request);
 

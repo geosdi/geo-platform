@@ -40,8 +40,9 @@ import org.geosdi.geoplatform.gui.client.widget.wfs.map.WFSMapModel;
 import org.geosdi.geoplatform.gui.factory.baselayer.GPBaseLayerFactory;
 import org.geosdi.geoplatform.gui.factory.map.DefaultMapFactory;
 import org.geosdi.geoplatform.gui.factory.map.GeoPlatformMapFactory;
-import org.geosdi.geoplatform.gui.global.enumeration.BaseLayerValue;
 import org.gwtopenmaps.openlayers.client.MapWidget;
+
+import static org.geosdi.geoplatform.gui.global.enumeration.BaseLayerValue.OPEN_STREET_MAP;
 
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
@@ -54,7 +55,7 @@ public class MapWidgetProvider implements Provider<MapWidget> {
     @Override
     public MapWidget get() {
         MapWidget mapWidget = this.mapFactory.createMap("100%", "100%",
-                GPBaseLayerFactory.getBaseLayer(BaseLayerValue.OPEN_STREET_MAP));
+                GPBaseLayerFactory.getBaseLayer(OPEN_STREET_MAP));
         this.mapModel = new WFSMapModel(mapWidget);
         return mapWidget;
     }

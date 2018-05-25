@@ -87,7 +87,6 @@ public class GPCheckListener implements
             IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
             AbstractMementoOriginalProperties memento = mementoSave.copyOriginalProperties(
                     element);
-            be.getItem().setChecked(!element.isChecked());
             mementoSave.putOriginalPropertiesInCache(memento);
         }
     }

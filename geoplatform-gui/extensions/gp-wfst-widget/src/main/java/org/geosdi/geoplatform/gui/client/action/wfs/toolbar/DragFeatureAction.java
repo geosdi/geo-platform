@@ -48,7 +48,7 @@ import org.gwtopenmaps.openlayers.client.control.ModifyFeature;
 public class DragFeatureAction extends WFSChangeFeatureAction {
 
     public DragFeatureAction(WFSBaseMapMediator theBaseMapMediator,
-                             WFSToolbarObserver theButtonObserver) {
+            WFSToolbarObserver theButtonObserver) {
         super(theBaseMapMediator, theButtonObserver);
     }
 

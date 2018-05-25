@@ -51,7 +51,7 @@ public class GetFeatureAction extends BaseWFSToggleAction {
 
     @Inject
     public GetFeatureAction(WFSBaseMapMediator theBaseMapMediator,
-                            WFSToolbarObserver theButtonObserver) {
+            WFSToolbarObserver theButtonObserver) {
         super(theBaseMapMediator, theButtonObserver);
     }
 

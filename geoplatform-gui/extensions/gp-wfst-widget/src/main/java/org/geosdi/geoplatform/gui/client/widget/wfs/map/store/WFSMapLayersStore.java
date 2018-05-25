@@ -34,33 +34,25 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.wfs.map.store;
 
-import com.extjs.gxt.ui.client.Registry;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.History;
 import org.geosdi.geoplatform.gui.client.puregwt.map.WFSLayerMapChangedHandler;
-import org.geosdi.geoplatform.gui.client.widget.map.event.LayerRangeEvent;
-import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
-import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 import org.geosdi.geoplatform.gui.impl.map.store.GPMapLayersStore;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.GPVectorBean;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
-import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
-import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.shared.util.GPSharedUtils;
 import org.gwtopenmaps.openlayers.client.MapWidget;
 import org.gwtopenmaps.openlayers.client.Projection;
 import org.gwtopenmaps.openlayers.client.layer.Layer;
 import org.gwtopenmaps.openlayers.client.layer.WMS;
-import org.gwtopenmaps.openlayers.client.layer.WMSOptions;
-import org.gwtopenmaps.openlayers.client.layer.WMSParams;
 
 import java.util.Map.Entry;
 import java.util.logging.Logger;
+
+import static java.lang.Integer.parseInt;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -68,26 +60,36 @@ import java.util.logging.Logger;
  */
 public class WFSMapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> implements WFSLayerMapChangedHandler {
 
-    protected final static Logger logger = Logger.getLogger("");
+    protected final static Logger logger = Logger.getLogger("WFSMapLayersStore");
 
     private final WFSMapLayerBuilder layerBuilder;
 
+    /**
+     * @param theMapWidget
+     */
     public WFSMapLayersStore(MapWidget theMapWidget) {
         super(theMapWidget);
         this.layerBuilder = new WFSMapLayerBuilder(theMapWidget);
-        GPHandlerManager.addHandler(WFSLayerMapChangedHandler.TYPE,this);
+        GPHandlerManager.addHandler(WFSLayerMapChangedHandler.TYPE, this);
     }
 
+    /**
+     * @param key
+     * @return {@link Boolean}
+     */
     @Override
     public boolean containsLayer(GPLayerBean key) {
         return this.layers.containsKey(key);
     }
 
+    /**
+     * @param value
+     * @return {@link GPLayerBean}
+     */
     @Override
     public GPLayerBean getLayer(Layer value) {
         GPLayerBean layerToReturn = null;
-        for (Entry<GPLayerBean, Layer> layer : GPSharedUtils.safeCollection(
-                this.layers.entrySet())) {
+        for (Entry<GPLayerBean, Layer> layer : GPSharedUtils.safeCollection(this.layers.entrySet())) {
             if (layer.getValue().getId().equals(value.getId())) {
                 layerToReturn = layer.getKey();
                 break;
@@ -96,26 +98,42 @@ public class WFSMapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> impl
         return layerToReturn;
     }
 
+    /**
+     * @param key
+     * @return {@link Layer}
+     */
     @Override
     public Layer getLayer(GPLayerBean key) {
         return this.layers.get(key);
     }
 
+    /**
+     * @param layerBean
+     */
     @Override
     public void onDisplayLayer(GPLayerBean layerBean) {
         super.displayLayer(layerBean);
     }
 
+    /**
+     * @param layerBean
+     */
     @Override
     public void onHideLayer(GPLayerBean layerBean) {
         this.hideLayer(layerBean);
     }
 
+    /**
+     * @param layerBean
+     */
     @Override
     public void onRemoveLayer(GPLayerBean layerBean) {
         this.removeLayer(layerBean);
     }
 
+    /**
+     * @param layer
+     */
     @Override
     public void reloadLayer(GPLayerBean layer) {
         WMS wmsLayer = (WMS) this.layers.get(layer);
@@ -125,33 +143,37 @@ public class WFSMapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> impl
         }
     }
 
+    /**
+     * @param vectorBean
+     */
     @Override
     public void displayVector(GPVectorBean vectorBean) {
     }
 
+    /**
+     * @param rasterBean
+     */
     @Override
     public void displayRaster(GPRasterBean rasterBean) {
         final WMS layer;
         if (containsLayer(rasterBean)) {
             layer = (WMS) this.layers.get(rasterBean);
-            if (!layer.isVisible() || Integer.parseInt(
-                    layer.getZIndex().toString())
-                    != rasterBean.getzIndex()) {
+            if (!layer.isVisible() || parseInt(layer.getZIndex().toString()) != rasterBean.getzIndex()) {
                 layer.setZIndex(rasterBean.getzIndex());
                 Scheduler.get().scheduleDeferred(new Command() {
+
                     @Override
                     public void execute() {
                         layer.setIsVisible(true);
-                        layer.redraw(true);
+                        mapWidget.getMap().addLayer(layer);
                     }
                 });
             }
         } else {
             layer = (WMS) this.layerBuilder.buildLayer(rasterBean);
             this.layers.put(rasterBean, layer);
-            this.mapWidget.getMap().addLayer(layer);
             layer.setZIndex(rasterBean.getzIndex());
-            layer.redraw(true);
+            this.mapWidget.getMap().addLayer(layer);
         }
     }
 
@@ -160,9 +182,11 @@ public class WFSMapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> impl
         final Layer layer = getLayer(layerBean);
         if (layer != null) {
             Scheduler.get().scheduleDeferred(new Command() {
+
                 @Override
                 public void execute() {
                     layer.setIsVisible(false);
+                    mapWidget.getMap().removeLayer(layer);
                 }
             });
         }
@@ -179,46 +203,78 @@ public class WFSMapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> impl
     public void removeLayer(GPLayerBean layerBean) {
     }
 
+    /**
+     * @param layerBean
+     * @param newStyle
+     */
     @Override
-    public void onChangeStyle(GPRasterBean layerBean,
-                              String newStyle) {
+    public void onChangeStyle(GPRasterBean layerBean, String newStyle) {
     }
 
+    /**
+     * @param layerBean
+     * @param singleTileRequest
+     */
     @Override
-    public void onChangeSingleTileRequest(GPRasterBean layerBean,
-                                          boolean singleTileRequest) {
+    public void onChangeSingleTileRequest(GPRasterBean layerBean, boolean singleTileRequest) {
     }
 
+    /**
+     * @param layerBean
+     */
     @Override
     public void onChangeCqlFilter(GPLayerTreeModel layerBean) {
     }
 
+    /**
+     * @param layerBean
+     */
     @Override
     public void onChangeTimeFilter(GPLayerTreeModel layerBean) {
     }
 
+    /**
+     * @param layerBean
+     */
     @Override
     public void changeOpacity(GPRasterBean layerBean) {
     }
 
+    /**
+     * @param layerBean
+     * @param maxScale
+     */
     @Override
     public void changeMaxScale(GPRasterBean layerBean, Float maxScale) {
     }
 
+    /**
+     * @param layerBean
+     * @param minScale
+     */
     @Override
     public void changeMinScale(GPRasterBean layerBean, Float minScale) {
     }
 
     @Override
     public void resetStore() {
+        for (Layer layer : layers.values()) {
+            this.mapWidget.getMap().removeLayer(layer);
+        }
+        this.layers.clear();
     }
 
+    /**
+     * @param layerBean
+     */
     @Override
     public void onReloadLayer(GPLayerBean layerBean) {
     }
 
+    /**
+     * @param projection
+     */
     @Override
     public void onChangeBaseLayer(Projection projection) {
     }
-
 }

@@ -46,7 +46,7 @@ public abstract class BaseWFSToggleAction extends WFSToggleAction {
     protected final WFSToolbarObserver buttonObserver;
 
     public BaseWFSToggleAction(WFSBaseMapMediator theBaseMapMediator,
-                               WFSToolbarObserver theButtonObserver) {
+            WFSToolbarObserver theButtonObserver) {
         super(theBaseMapMediator);
 
         this.buttonObserver = theButtonObserver;

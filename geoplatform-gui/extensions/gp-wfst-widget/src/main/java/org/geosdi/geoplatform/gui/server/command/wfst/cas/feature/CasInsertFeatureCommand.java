@@ -72,7 +72,7 @@ public class CasInsertFeatureCommand implements
 
     @Override
     public InsertFeatureResponse execute(CasInsertFeatureRequest request,
-                                         HttpServletRequest httpServletRequest) {
+            HttpServletRequest httpServletRequest) {
         logger.debug("##################### Executing {} Command", this.getClass().getSimpleName());
         Assertion casAssertion = null;
         if (httpServletRequest != null) {

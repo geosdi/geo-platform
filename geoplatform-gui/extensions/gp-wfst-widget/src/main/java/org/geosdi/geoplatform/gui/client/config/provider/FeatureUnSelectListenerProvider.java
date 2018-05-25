@@ -55,7 +55,7 @@ public class FeatureUnSelectListenerProvider implements
 
     @Inject
     public FeatureUnSelectListenerProvider(Vector theVectorLayer, GPEventBus bus,
-                                           IFeatureIdBinder theFidBinder) {
+            IFeatureIdBinder theFidBinder) {
         this.vectorLayer = theVectorLayer;
         this.bus = bus;
         this.fidBinder = theFidBinder;

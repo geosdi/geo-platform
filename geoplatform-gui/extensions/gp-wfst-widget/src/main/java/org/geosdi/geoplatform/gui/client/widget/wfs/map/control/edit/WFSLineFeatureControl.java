@@ -66,7 +66,7 @@ public class WFSLineFeatureControl extends DrawEditorLineFeature implements
 
     @Inject
     public WFSLineFeatureControl(Vector vector, ILayerSchemaBinder layerSchemaBinder,
-                                 WFSEditFeatureRepository editFeatureRepository) {
+            WFSEditFeatureRepository editFeatureRepository) {
         super(vector, true, layerSchemaBinder);
         editFeatureRepository.bindWFSEditFeatureControl(this);
     }

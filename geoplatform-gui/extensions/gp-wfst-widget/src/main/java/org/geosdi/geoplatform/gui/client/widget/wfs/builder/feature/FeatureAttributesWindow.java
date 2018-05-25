@@ -81,7 +81,7 @@ class FeatureAttributesWindow extends GeoPlatformWindow implements
     private boolean resetEditorSource = true;
 
     protected FeatureAttributesWindow(GPEventBus theBus,
-                                      ILayerSchemaBinder theLayerSchemaBinder) {
+            ILayerSchemaBinder theLayerSchemaBinder) {
         super(Boolean.TRUE);
 
         this.bus = theBus;

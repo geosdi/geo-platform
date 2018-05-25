@@ -54,7 +54,7 @@ public class WFSCasUtility {
     }
 
     public static String appendProxyTicketToURL(String url,
-                                                Assertion casAssertion) throws Exception {
+            Assertion casAssertion) throws Exception {
         if (casAssertion == null) {
             throw new NullPointerException("Cas Assertion must not be null.");
         }

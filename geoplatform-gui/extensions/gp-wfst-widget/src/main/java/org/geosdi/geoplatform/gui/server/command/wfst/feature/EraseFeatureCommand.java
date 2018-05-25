@@ -66,7 +66,7 @@ public class EraseFeatureCommand implements
 
     @Override
     public EraseFeatureResponse execute(EraseFeatureRequest request,
-                                        HttpServletRequest httpServletRequest) {
+            HttpServletRequest httpServletRequest) {
         logger.debug("##################### Executing {} Command", this.getClass().getSimpleName());
         if (request.getFid() == null) {
             logger.error("##############Feature FID is NULL.");

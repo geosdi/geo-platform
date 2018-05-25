@@ -56,7 +56,7 @@ public class FeatureWidgetBar implements Provider<ButtonBar> {
 
     @Inject
     public FeatureWidgetBar(@WFSGotoXYButton Button theWFSGoToXYButton,
-                            @WFSUndoButton Button theWFSUndoButton, @WFSRedoButton Button theWFSRedoButton) {
+            @WFSUndoButton Button theWFSUndoButton, @WFSRedoButton Button theWFSRedoButton) {
         this.wfsGoToXYButton = theWFSGoToXYButton;
         this.wfsUndoButton = theWFSUndoButton;
         this.wfsRedoButton = theWFSRedoButton;

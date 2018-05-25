@@ -64,10 +64,17 @@ public final class WFSUndoRedoMediatorHandlerSupport {
         addUndoRedoMediatorHandler(wfsUndoRedoMediator);
     }
 
+    /**
+     * @param event
+     */
     public static void fireUndoRedoEvent(WFSUndoRedoEvent event) {
         bus.fireEvent(event);
     }
 
+    /**
+     * @param wfsUndoRedoMediator
+     * @return {@link HandlerRegistration}
+     */
     protected HandlerRegistration addUndoRedoMediatorHandler(WFSUndoRedoMediator wfsUndoRedoMediator) {
         return bus.addHandler(TYPE, wfsUndoRedoMediator);
     }

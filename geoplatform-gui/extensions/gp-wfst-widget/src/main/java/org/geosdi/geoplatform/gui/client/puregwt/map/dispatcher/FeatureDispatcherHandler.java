@@ -58,10 +58,10 @@ public interface FeatureDispatcherHandler extends EventHandler {
     GwtEvent.Type<FeatureDispatcherHandler> TYPE = new GwtEvent.Type<FeatureDispatcherHandler>();
 
     void insertFeature(WFSEdit editorSource,
-                       List<AttributeDTO> featureAttributes);
+            List<AttributeDTO> featureAttributes);
 
     void updateGeometry(VectorFeature modifiedFeature, String wktGeometry,
-                        VectorFeature oldFeature);
+            VectorFeature oldFeature);
 
     void eraseFeature(VectorFeature feature);
 

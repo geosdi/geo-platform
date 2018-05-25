@@ -73,7 +73,7 @@ public class CasDescribeFeatureTypeCommand implements
 
     @Override
     public DescribeFeatureTypeResponse execute(CasDescribeFeatureTypeRequest request,
-                                               HttpServletRequest httpServletRequest) {
+            HttpServletRequest httpServletRequest) {
         logger.debug("##################### Executing {} Command", this.getClass().getSimpleName());
 
         Assertion casAssertion = null;

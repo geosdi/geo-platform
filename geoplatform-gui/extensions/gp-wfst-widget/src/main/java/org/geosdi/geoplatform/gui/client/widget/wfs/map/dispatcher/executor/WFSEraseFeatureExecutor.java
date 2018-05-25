@@ -156,7 +156,7 @@ public class WFSEraseFeatureExecutor extends WFSDispatcherExecutor implements
     }
 
     final void manageEraseFeatureCommandSuccess(Boolean result,
-                                                VectorFeature feature) {
+            VectorFeature feature) {
         progressBar.hide();
         if (result) {
             vector.removeFeature(feature);

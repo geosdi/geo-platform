@@ -48,7 +48,7 @@ public abstract class WFSChangeFeatureAction extends BaseWFSToggleAction
         implements WFSChangeFeature {
 
     public WFSChangeFeatureAction(WFSBaseMapMediator theBaseMapMediator,
-                                  WFSToolbarObserver theButtonObserver) {
+            WFSToolbarObserver theButtonObserver) {
         super(theBaseMapMediator, theButtonObserver);
     }
 

@@ -90,7 +90,7 @@ public class ShowFeaturesWidget extends GeoPlatformWindow
 
     @Inject
     public ShowFeaturesWidget(GPEventBus theBus, WFSTWidgetMessages i18n,
-                              ILayerSchemaBinder layerSchemaBinder, @GetAllFeaturesButton Button getAllFeatureButton) {
+            ILayerSchemaBinder layerSchemaBinder, @GetAllFeaturesButton Button getAllFeatureButton) {
         super(true);
         this.i18n = i18n;
         this.layerSchemaBinder = layerSchemaBinder;

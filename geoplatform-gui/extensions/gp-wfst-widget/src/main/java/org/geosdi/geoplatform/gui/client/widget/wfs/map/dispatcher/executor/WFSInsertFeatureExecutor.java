@@ -79,7 +79,7 @@ public class WFSInsertFeatureExecutor extends WFSDispatcherExecutor implements
 
     @Override
     public void insertFeature(final WFSEdit editorSource,
-                              List<AttributeDTO> featureAttributes) {
+            List<AttributeDTO> featureAttributes) {
         progressBar.show();
 
         setUpRequest(editorSource, featureAttributes);
@@ -132,7 +132,7 @@ public class WFSInsertFeatureExecutor extends WFSDispatcherExecutor implements
     }
 
     final void manageInsertFeatureCommandSuccess(Boolean result,
-                                                 WFSEdit editorSource) {
+            WFSEdit editorSource) {
         progressBar.hide();
         if (result) {
             FeatureAttributesWindowBuilder.fireAttributesWindowEvent(
@@ -146,7 +146,7 @@ public class WFSInsertFeatureExecutor extends WFSDispatcherExecutor implements
     }
 
     final void manageInsertFeatureCommandFailure(Throwable exception,
-                                                 WFSEdit editorSource) {
+            WFSEdit editorSource) {
         String errorMessage = "Error on WFS Insert Feature request";
         GeoPlatformMessage.errorMessage(
                 "WFS Service Error",

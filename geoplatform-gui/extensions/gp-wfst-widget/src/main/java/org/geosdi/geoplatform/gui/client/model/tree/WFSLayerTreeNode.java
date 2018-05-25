@@ -41,10 +41,10 @@ public class WFSLayerTreeNode extends GPLayerTreeModel implements GPWFSLayerTree
         super.setTimeFilter(this.model.getTimeFilter());
         super.setVariableTimeFilter(this.model.getVariableTimeFilter());
         super.setChecked(this.model.isChecked());
-        if(theModel instanceof GPRasterBean){
-            this.minScale = ((GPRasterBean)theModel).getMinScale();
-            this.maxScale = ((GPRasterBean)theModel).getMaxScale();
-            this.opacity = ((GPRasterBean)theModel).getOpacity();
+        if (theModel instanceof GPRasterBean) {
+            this.minScale = ((GPRasterBean) theModel).getMinScale();
+            this.maxScale = ((GPRasterBean) theModel).getMaxScale();
+            this.opacity = ((GPRasterBean) theModel).getOpacity();
         }
     }
 
@@ -80,23 +80,23 @@ public class WFSLayerTreeNode extends GPLayerTreeModel implements GPWFSLayerTree
     }
 
     @Override
-    public void setSingleTileRequest(boolean singleTileRequest) {
-
-    }
-
-    @Override
     public boolean isSingleTileRequest() {
         return false;
     }
 
     @Override
-    public void setOpacity(float opacity) {
+    public void setSingleTileRequest(boolean singleTileRequest) {
 
     }
 
     @Override
     public float getOpacity() {
         return this.opacity;
+    }
+
+    @Override
+    public void setOpacity(float opacity) {
+
     }
 
     @Override

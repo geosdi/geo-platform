@@ -63,7 +63,7 @@ public class WFSPointFeatureHandler extends PointEditorHandler {
      */
     @Override
     protected void manageUpdatedFeature(VectorFeature modifiedFeature,
-                                        VectorFeature oldFeature) {
+            VectorFeature oldFeature) {
         Geometry geom = modifiedFeature.getGeometry().clone();
         event.setModifiedFeature(modifiedFeature);
         event.setOldFeature(oldFeature);

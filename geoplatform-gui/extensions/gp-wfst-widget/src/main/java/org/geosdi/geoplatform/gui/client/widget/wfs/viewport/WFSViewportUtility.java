@@ -34,17 +34,8 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.wfs.viewport;
 
-import org.geosdi.geoplatform.gui.configuration.map.client.GPClientViewport;
-import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
-import org.geosdi.geoplatform.gui.factory.map.GPApplicationMap;
-import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.gwtopenmaps.openlayers.client.Bounds;
-import org.gwtopenmaps.openlayers.client.LonLat;
-import org.gwtopenmaps.openlayers.client.Map;
-import org.gwtopenmaps.openlayers.client.Projection;
-
-import java.util.List;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group

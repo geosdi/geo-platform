@@ -32,35 +32,47 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.client.widget.wfs.map;
+package org.geosdi.geoplatform.gui.client.puregwt.wfs;
 
+import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.gwt.event.shared.HandlerRegistration;
-import org.geosdi.geoplatform.gui.client.puregwt.map.WFSLayerMapChangedHandler;
-import org.geosdi.geoplatform.gui.client.puregwt.wfs.WFSGPHandlerManager;
-import org.geosdi.geoplatform.gui.client.widget.wfs.map.event.WFSHasLayerChangedHandler;
-import org.geosdi.geoplatform.gui.client.widget.wfs.map.store.WFSMapLayersStore;
-import org.geosdi.geoplatform.gui.impl.map.GPMapModel;
-import org.geosdi.geoplatform.gui.impl.map.store.IMapLayersStore;
-import org.gwtopenmaps.openlayers.client.MapWidget;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBusImpl;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class WFSMapModel extends GPMapModel implements WFSHasLayerChangedHandler {
+public class WFSGPHandlerManager {
 
-    public WFSMapModel(MapWidget theMapWidget) {
-        super(theMapWidget);
+    private static WFSGPHandlerManager INSTANCE = new WFSGPHandlerManager();
+    private GPEventBus eventBus;
+
+    private WFSGPHandlerManager() {
+        this.eventBus = new GPEventBusImpl();
     }
 
-    @Override
-    public HandlerRegistration addLayerChangedHandler() {
-        return WFSGPHandlerManager.addHandler(WFSLayerMapChangedHandler.TYPE, (WFSMapLayersStore)this.layersStore);
+    public static WFSGPHandlerManager getInstance() {
+        return INSTANCE;
     }
 
-    @Override
-    protected final IMapLayersStore createStore() {
-        return new WFSMapLayersStore(this.mapWidget);
+    public static <T extends EventHandler> HandlerRegistration addHandler(
+            Type<T> type, T handler) {
+        return INSTANCE.eventBus.addHandler(type, handler);
     }
 
+    public static <T extends EventHandler> HandlerRegistration addHandlerToSource(
+            Type<T> type, Object source, T handler) {
+        return INSTANCE.eventBus.addHandlerToSource(type, source, handler);
+    }
+
+    public static void fireEvent(GwtEvent<?> event) {
+        INSTANCE.eventBus.fireEvent(event);
+    }
+
+    public static void fireEventFromSource(GwtEvent<?> event, Object source) {
+        INSTANCE.eventBus.fireEventFromSource(event, source);
+    }
 }

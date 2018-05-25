@@ -2,6 +2,7 @@ package org.geosdi.geoplatform.gui.client.widget.wfs.tree.listener;
 
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.TreePanelEvent;
+import com.google.gwt.core.client.GWT;
 import org.geosdi.geoplatform.gui.client.model.tree.WFSLayerTreeNode;
 import org.geosdi.geoplatform.gui.client.puregwt.map.event.WFSDisplayLayerMapEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.map.event.WFSHideLayerMapEvent;

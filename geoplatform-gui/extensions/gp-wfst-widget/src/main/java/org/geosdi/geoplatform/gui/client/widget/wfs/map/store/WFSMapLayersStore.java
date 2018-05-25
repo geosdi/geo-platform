@@ -34,20 +34,30 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.wfs.map.store;
 
+import com.extjs.gxt.ui.client.Registry;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.History;
 import org.geosdi.geoplatform.gui.client.puregwt.map.WFSLayerMapChangedHandler;
+import org.geosdi.geoplatform.gui.client.widget.map.event.LayerRangeEvent;
+import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
+import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 import org.geosdi.geoplatform.gui.impl.map.store.GPMapLayersStore;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.GPVectorBean;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.shared.util.GPSharedUtils;
 import org.gwtopenmaps.openlayers.client.MapWidget;
 import org.gwtopenmaps.openlayers.client.Projection;
 import org.gwtopenmaps.openlayers.client.layer.Layer;
 import org.gwtopenmaps.openlayers.client.layer.WMS;
+import org.gwtopenmaps.openlayers.client.layer.WMSOptions;
+import org.gwtopenmaps.openlayers.client.layer.WMSParams;
 
 import java.util.Map.Entry;
 import java.util.logging.Logger;
@@ -70,7 +80,6 @@ public class WFSMapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> impl
     public WFSMapLayersStore(MapWidget theMapWidget) {
         super(theMapWidget);
         this.layerBuilder = new WFSMapLayerBuilder(theMapWidget);
-        GPHandlerManager.addHandler(WFSLayerMapChangedHandler.TYPE, this);
     }
 
     /**
@@ -203,78 +212,46 @@ public class WFSMapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> impl
     public void removeLayer(GPLayerBean layerBean) {
     }
 
-    /**
-     * @param layerBean
-     * @param newStyle
-     */
     @Override
-    public void onChangeStyle(GPRasterBean layerBean, String newStyle) {
+    public void onChangeStyle(GPRasterBean layerBean,
+                              String newStyle) {
     }
 
-    /**
-     * @param layerBean
-     * @param singleTileRequest
-     */
     @Override
-    public void onChangeSingleTileRequest(GPRasterBean layerBean, boolean singleTileRequest) {
+    public void onChangeSingleTileRequest(GPRasterBean layerBean,
+                                          boolean singleTileRequest) {
     }
 
-    /**
-     * @param layerBean
-     */
     @Override
     public void onChangeCqlFilter(GPLayerTreeModel layerBean) {
     }
 
-    /**
-     * @param layerBean
-     */
     @Override
     public void onChangeTimeFilter(GPLayerTreeModel layerBean) {
     }
 
-    /**
-     * @param layerBean
-     */
     @Override
     public void changeOpacity(GPRasterBean layerBean) {
     }
 
-    /**
-     * @param layerBean
-     * @param maxScale
-     */
     @Override
     public void changeMaxScale(GPRasterBean layerBean, Float maxScale) {
     }
 
-    /**
-     * @param layerBean
-     * @param minScale
-     */
     @Override
     public void changeMinScale(GPRasterBean layerBean, Float minScale) {
     }
 
     @Override
     public void resetStore() {
-        for (Layer layer : layers.values()) {
-            this.mapWidget.getMap().removeLayer(layer);
-        }
-        this.layers.clear();
     }
 
-    /**
-     * @param layerBean
-     */
     @Override
     public void onReloadLayer(GPLayerBean layerBean) {
     }
 
-    /**
-     * @param projection
-     */
     @Override
     public void onChangeBaseLayer(Projection projection) {
     }
+
 }

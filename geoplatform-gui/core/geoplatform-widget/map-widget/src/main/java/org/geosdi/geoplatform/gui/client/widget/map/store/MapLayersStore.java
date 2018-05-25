@@ -71,8 +71,8 @@ import java.util.logging.Logger;
  */
 public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
 
-    protected final static Logger logger = Logger.getLogger("");
-
+    protected final static Logger logger = Logger.getLogger("MapLayersStore");
+    //
     private final MapLayerBuilder layerBuilder;
     private final DisplayLegendEvent displayLegendEvent = new DisplayLegendEvent();
     private final HideLegendEvent hideLegendEvent = new HideLegendEvent();

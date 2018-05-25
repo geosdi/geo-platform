@@ -58,13 +58,11 @@ public class MapModel extends GPMapModel implements HasLayerChangedHandler {
 
     @Override
     public HandlerRegistration addLayerChangedHandler() {
-        return GPHandlerManager.addHandler(LayerMapChangedHandler.TYPE,
-                this.layersStore);
+        return GPHandlerManager.addHandler(LayerMapChangedHandler.TYPE, this.layersStore);
     }
 
     @Override
     protected final IMapLayersStore createStore() {
         return new MapLayersStore(this.mapWidget);
     }
-
 }

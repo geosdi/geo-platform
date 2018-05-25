@@ -58,20 +58,38 @@ public class WFSGPHandlerManager {
         return INSTANCE;
     }
 
-    public static <T extends EventHandler> HandlerRegistration addHandler(
-            Type<T> type, T handler) {
+    /**
+     * @param type
+     * @param handler
+     * @param <T>
+     * @return {@link HandlerRegistration}
+     */
+    public static <T extends EventHandler> HandlerRegistration addHandler(Type<T> type, T handler) {
         return INSTANCE.eventBus.addHandler(type, handler);
     }
 
-    public static <T extends EventHandler> HandlerRegistration addHandlerToSource(
-            Type<T> type, Object source, T handler) {
+    /**
+     * @param type
+     * @param source
+     * @param handler
+     * @param <T>
+     * @return {@link HandlerRegistration}
+     */
+    public static <T extends EventHandler> HandlerRegistration addHandlerToSource(Type<T> type, Object source, T handler) {
         return INSTANCE.eventBus.addHandlerToSource(type, source, handler);
     }
 
+    /**
+     * @param event
+     */
     public static void fireEvent(GwtEvent<?> event) {
         INSTANCE.eventBus.fireEvent(event);
     }
 
+    /**
+     * @param event
+     * @param source
+     */
     public static void fireEventFromSource(GwtEvent<?> event, Object source) {
         INSTANCE.eventBus.fireEventFromSource(event, source);
     }

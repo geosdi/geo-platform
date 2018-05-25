@@ -40,18 +40,23 @@ import org.gwtopenmaps.openlayers.client.MapWidget;
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- *
  */
 public abstract class GPMapModel {
 
     protected MapWidget mapWidget;
     protected IMapLayersStore layersStore;
 
+    /**
+     * @param theMapWidget
+     */
     public GPMapModel(MapWidget theMapWidget) {
         this.mapWidget = theMapWidget;
         this.layersStore = createStore();
     }
 
+    /**
+     * @return {@link IMapLayersStore}
+     */
     protected abstract IMapLayersStore createStore();
 
     /**
@@ -60,5 +65,4 @@ public abstract class GPMapModel {
     public IMapLayersStore getLayersStore() {
         return layersStore;
     }
-
 }

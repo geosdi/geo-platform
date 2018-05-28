@@ -74,5 +74,6 @@ public class WFSTreeBasicProperties implements GPWFSTreeBasicProperties {
         this.tree.setCheckStyle(NONE);
         this.tree.setCheckNodes(LEAF);
         this.tree.addListener(Events.CheckChange, this.wfsTreeCheckListener);
+        this.tree.addStyleName("layer_tree");
     }
 }

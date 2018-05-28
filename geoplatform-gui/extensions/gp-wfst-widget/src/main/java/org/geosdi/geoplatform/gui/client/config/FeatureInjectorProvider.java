@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.config;
 import com.extjs.gxt.ui.client.widget.button.ButtonBar;
 import com.extjs.gxt.ui.client.widget.form.SimpleComboBox;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
+import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.google.gwt.inject.client.AbstractGinModule;
 import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.DescribeFeatureTypeHandler;
 import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.LayerTypeHandlerManager;
@@ -51,11 +52,13 @@ import org.geosdi.geoplatform.gui.client.config.annotation.FeatureAttributeCondi
 import org.geosdi.geoplatform.gui.client.config.annotation.MatchComboField;
 import org.geosdi.geoplatform.gui.client.config.annotation.tree.WFSLayerTree;
 import org.geosdi.geoplatform.gui.client.config.annotation.tree.WFSLayerTreeStore;
+import org.geosdi.geoplatform.gui.client.config.annotation.tree.WFSTreeMenu;
 import org.geosdi.geoplatform.gui.client.config.provider.*;
 import org.geosdi.geoplatform.gui.client.config.provider.layout.BorderLayoutProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.tree.LayerTreePanelProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.tree.LayerTreeStoreProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.tree.WFSRootLayerTreeNodeProvider;
+import org.geosdi.geoplatform.gui.client.config.provider.tree.menu.WFSTreeMenuProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.window.buttonbar.FeatureWidgetBar;
 import org.geosdi.geoplatform.gui.client.model.tree.WFSRootLayerTreeNode;
 import org.geosdi.geoplatform.gui.client.widget.map.control.GotoXYWidget;
@@ -130,6 +133,9 @@ public class FeatureInjectorProvider extends AbstractGinModule {
                 FeatureAttributeConditionFieldListProvider.class).in(Singleton.class);
         bind(SimpleComboBox.class).annotatedWith(MatchComboField.class).
                 toProvider(MatchComboFieldProvider.class).in(Singleton.class);
+
+        bind(Menu.class).annotatedWith(WFSTreeMenu.class).toProvider(WFSTreeMenuProvider.class).in(Singleton.class);
+
 
     }
 

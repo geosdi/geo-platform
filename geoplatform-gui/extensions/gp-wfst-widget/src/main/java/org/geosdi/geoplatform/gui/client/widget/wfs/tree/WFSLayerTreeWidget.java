@@ -34,6 +34,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.wfs.tree;
 
+import com.google.gwt.core.client.GWT;
 import org.geosdi.geoplatform.gui.client.config.annotation.tree.WFSLayerTree;
 import org.geosdi.geoplatform.gui.client.config.annotation.tree.WFSLayerTreeStore;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.LayerTreeHandler;

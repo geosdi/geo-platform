@@ -35,12 +35,20 @@
 package org.geosdi.geoplatform.gui.client.widget.wfs;
 
 import com.google.gwt.event.shared.HandlerRegistration;
+import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.GWFSPMapToolsHandler;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
 import org.geosdi.geoplatform.gui.client.widget.wfs.initializer.IFeatureMapInitializer;
+import org.geosdi.geoplatform.gui.client.widget.wfs.viewport.WFSViewportUtility;
+import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
+import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
+import org.gwtopenmaps.openlayers.client.Bounds;
 import org.gwtopenmaps.openlayers.client.MapWidget;
+import org.gwtopenmaps.openlayers.client.Projection;
 
 import javax.inject.Inject;
+
+import java.util.logging.Level;
 
 import static java.lang.Boolean.TRUE;
 
@@ -48,14 +56,13 @@ import static java.lang.Boolean.TRUE;
  * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class FeatureMapWidget extends GeoPlatformContentPanel implements IFeatureMapWidget {
+public class FeatureMapWidget extends GeoPlatformContentPanel implements IFeatureMapWidget, GWFSPMapToolsHandler {
 
     @Inject
     private MapWidget mapWidget;
     @Inject
     private IFeatureMapInitializer featureMapInitializer;
     private final GPEventBus bus;
-    private final HandlerRegistration handlerRegistration;
 
     /**
      * @param theBus
@@ -64,7 +71,8 @@ public class FeatureMapWidget extends GeoPlatformContentPanel implements IFeatur
     public FeatureMapWidget(GPEventBus theBus) {
         super(TRUE);
         this.bus = theBus;
-        this.handlerRegistration = this.bus.addHandler(TYPE, this);
+        this.bus.addHandler(IFeatureMapWidget.TYPE, this);
+        this.bus.addHandler(GWFSPMapToolsHandler.TYPE, this);
     }
 
     @Override
@@ -127,6 +135,20 @@ public class FeatureMapWidget extends GeoPlatformContentPanel implements IFeatur
         this.mapWidget.setHeight(String.valueOf(super.getHeight()));
         updateSize();
         super.layout();
+    }
+
+    @Override
+    public void onZoomToMaxExtend(BBoxClientInfo bbox, String crs) {
+        Bounds b = WFSViewportUtility.generateBoundsFromBBOX(bbox);
+        if (!this.mapWidget.getMap().getProjection().equals(crs)) {
+            if (this.mapWidget.getMap().getProjection().equals(
+                    GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode())) {
+                b.transform(new Projection(crs),
+                        new Projection(
+                                GPCoordinateReferenceSystem.EPSG_GOOGLE.getCode()));
+            }
+        }
+        this.mapWidget.getMap().zoomToExtent(b);
     }
 
     protected void manageMapSize() {

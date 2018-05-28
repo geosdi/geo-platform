@@ -36,6 +36,7 @@ package org.geosdi.geoplatform.gui.client.config;
 
 import com.google.gwt.inject.client.AbstractGinModule;
 import org.geosdi.geoplatform.gui.client.action.menu.strategy.IActionStrategy;
+import org.geosdi.geoplatform.gui.client.action.menu.tree.WFSZoomToLayerExtentAction;
 import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetConstants;
 import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetMessages;
 import org.geosdi.geoplatform.gui.client.model.binder.FeatureIdBinder;
@@ -92,6 +93,7 @@ public class FeatureInjectorModule extends AbstractGinModule {
         bind(WFSUndoRedoMediatorHandlerSupport.class).asEagerSingleton();
         bind(WFSFeatureGridBinding.class).asEagerSingleton();
         bind(WFSLayerTreeWidget.class).in(Singleton.class);
+        bind(WFSZoomToLayerExtentAction.class).in(Singleton.class);
 
 
         requestStaticInjection(AttributeCustomFieldsMap.class);

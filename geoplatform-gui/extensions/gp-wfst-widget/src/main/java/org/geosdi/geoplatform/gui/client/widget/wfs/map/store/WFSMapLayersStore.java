@@ -36,7 +36,6 @@ package org.geosdi.geoplatform.gui.client.widget.wfs.map.store;
 
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.user.client.Command;
-import org.geosdi.geoplatform.gui.client.puregwt.map.WFSLayerMapChangedHandler;
 import org.geosdi.geoplatform.gui.impl.map.store.GPMapLayersStore;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
@@ -57,7 +56,7 @@ import static java.lang.Integer.parseInt;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class WFSMapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> implements WFSLayerMapChangedHandler {
+public class WFSMapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
 
     protected final static Logger logger = Logger.getLogger("WFSMapLayersStore");
 

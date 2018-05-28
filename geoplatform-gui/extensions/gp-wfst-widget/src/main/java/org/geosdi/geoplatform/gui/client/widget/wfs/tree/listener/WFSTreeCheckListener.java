@@ -2,13 +2,10 @@ package org.geosdi.geoplatform.gui.client.widget.wfs.tree.listener;
 
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.TreePanelEvent;
-import org.geosdi.geoplatform.gui.client.model.tree.WFSLayerTreeNode;
-import org.geosdi.geoplatform.gui.client.puregwt.map.event.WFSDisplayLayerMapEvent;
-import org.geosdi.geoplatform.gui.client.puregwt.map.event.WFSHideLayerMapEvent;
-import org.geosdi.geoplatform.gui.client.puregwt.wfs.WFSGPHandlerManager;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.WFSGPHandlerManager;
 import org.geosdi.geoplatform.gui.impl.map.event.DisplayLayerMapEvent;
 import org.geosdi.geoplatform.gui.impl.map.event.HideLayerMapEvent;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 import javax.inject.Singleton;
@@ -27,10 +24,10 @@ public class WFSTreeCheckListener implements Listener<TreePanelEvent<GPBeanTreeM
     public void handleEvent(TreePanelEvent<GPBeanTreeModel> be) {
         if (be.isChecked()) {
             be.getItem().setChecked(TRUE);
-            WFSGPHandlerManager.fireEvent(new WFSDisplayLayerMapEvent((WFSLayerTreeNode) be.getItem()));
+            WFSGPHandlerManager.fireEvent(new DisplayLayerMapEvent((GPLayerBean) be.getItem()));
         } else {
             be.getItem().setChecked(FALSE);
-            WFSGPHandlerManager.fireEvent(new WFSHideLayerMapEvent((WFSLayerTreeNode) be.getItem()));
+            WFSGPHandlerManager.fireEvent(new HideLayerMapEvent((GPLayerBean) be.getItem()));
         }
     }
 }

@@ -53,7 +53,6 @@ import org.geosdi.geoplatform.gui.client.config.annotation.SaveButton;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.model.binder.ILayerSchemaBinder;
 import org.geosdi.geoplatform.gui.client.puregwt.action.event.AfterStrategyEditWFSActionEvent;
-import org.geosdi.geoplatform.gui.client.puregwt.map.event.WFSResetStoreEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.WFSGPHandlerManager;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
 import org.geosdi.geoplatform.gui.client.widget.wfs.builder.feature.FeatureAttributesWindowBuilder;
@@ -63,6 +62,7 @@ import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableEvent;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableHandler;
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.event.ScaleVisibleEvent;
+import org.geosdi.geoplatform.gui.impl.map.event.ResetMapStoreEvent;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
 import javax.inject.Inject;
@@ -151,7 +151,7 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget, 
         this.scaleVisibleEvent.setActivate(TRUE);
         this.layerSelectionWidget.reset();
         MapHandlerManager.fireEvent(scaleVisibleEvent);
-        WFSGPHandlerManager.fireEvent(new WFSResetStoreEvent());
+        WFSGPHandlerManager.fireEvent(new ResetMapStoreEvent());
     }
 
     @Override

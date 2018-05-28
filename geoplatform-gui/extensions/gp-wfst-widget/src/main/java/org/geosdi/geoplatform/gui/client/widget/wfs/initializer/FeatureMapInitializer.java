@@ -67,6 +67,8 @@ public class FeatureMapInitializer implements IFeatureMapInitializer {
 
     private static final Logger logger = Logger.getLogger("FeatureMapInitializer");
     private static final ResetToolbarObserverEvent resetToolbarObserver = new ResetToolbarObserverEvent();
+    private static final int WMS_Z_INDEX = 1000;
+    private static final int VECTOR_LAYER_Z_INDEX = 1001;
     //
     @Inject
     private MapWidget mapWidget;
@@ -158,8 +160,8 @@ public class FeatureMapInitializer implements IFeatureMapInitializer {
     protected void loadLayerOnMap() {
         this.mapWidget.getMap().addLayer(wms);
         this.mapWidget.getMap().addLayer(vectorLayer);
-        this.wms.setZIndex(1000);
-        this.vectorLayer.setZIndex(1001);
+        this.wms.setZIndex(WMS_Z_INDEX);
+        this.vectorLayer.setZIndex(VECTOR_LAYER_Z_INDEX);
         ((WMS) wms).redraw(true);
         Bounds bb = ((WMS) this.wms).getOptions().getMaxExtent();
         this.mapWidget.getMap().zoomToExtent(bb);

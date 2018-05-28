@@ -36,7 +36,7 @@ package org.geosdi.geoplatform.gui.client.puregwt.wfs.event;
 
 import com.google.gwt.event.shared.GwtEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.LayerTreeHandler;
-import org.geosdi.geoplatform.gui.model.GPRasterBean;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 import java.util.List;
@@ -48,13 +48,13 @@ import java.util.List;
 public class BuildLayerTreeEvent extends GwtEvent<LayerTreeHandler> {
 
     private final GPBeanTreeModel twin;
-    private final List<GPRasterBean> childres;
+    private final List<GPLayerBean> childres;
 
     /**
      * @param theTwin
      * @param theChildres
      */
-    public BuildLayerTreeEvent(GPBeanTreeModel theTwin, List<GPRasterBean> theChildres) {
+    public BuildLayerTreeEvent(GPBeanTreeModel theTwin, List<GPLayerBean> theChildres) {
         this.twin = theTwin;
         this.childres = theChildres;
     }

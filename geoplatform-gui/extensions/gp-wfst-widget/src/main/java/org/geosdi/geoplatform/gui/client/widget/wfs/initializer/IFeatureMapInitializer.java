@@ -50,5 +50,4 @@ public interface IFeatureMapInitializer extends IFeatureMapInitializerHandler {
     void initMapWidget();
 
     HandlerRegistration addFeatureMapInitializerHandler();
-
 }

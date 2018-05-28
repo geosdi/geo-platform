@@ -36,7 +36,7 @@ package org.geosdi.geoplatform.gui.client.puregwt.wfs.handler;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
-import org.geosdi.geoplatform.gui.model.GPRasterBean;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 import java.util.List;
@@ -53,5 +53,5 @@ public interface LayerTreeHandler extends EventHandler {
      * @param twin
      * @param childres
      */
-    void buildLayerTree(GPBeanTreeModel twin, List<GPRasterBean> childres);
+    void buildLayerTree(GPBeanTreeModel twin, List<GPLayerBean> childres);
 }

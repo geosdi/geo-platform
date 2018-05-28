@@ -55,6 +55,9 @@ import org.gwtopenmaps.openlayers.client.layer.WMSParams;
 
 import java.util.logging.Level;
 
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
+
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
@@ -74,7 +77,7 @@ public class WFSMapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean> {
         if (!rasterBean.getStyles().isEmpty()) {
             wmsParams.setStyles(rasterBean.getStyles().get(0).getStyleString());
         }
-        wmsParams.setTransparent(Boolean.TRUE);
+        wmsParams.setTransparent(TRUE);
         final String cqlFilter = rasterBean.getCqlFilter();
         if (GPSharedUtils.isNotEmpty(cqlFilter)) {
             wmsParams.setCQLFilter(rasterBean.getCqlFilter());
@@ -92,9 +95,9 @@ public class WFSMapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean> {
             wmsOption.setMaxExtent(bbox);
         }
 
-        wmsOption.setIsBaseLayer(Boolean.FALSE);
-        wmsOption.setDisplayInLayerSwitcher(Boolean.FALSE);
-        wmsOption.setDisplayOutsideMaxExtent(Boolean.TRUE);
+        wmsOption.setIsBaseLayer(FALSE);
+        wmsOption.setDisplayInLayerSwitcher(FALSE);
+        wmsOption.setDisplayOutsideMaxExtent(TRUE);
         wmsOption.setBuffer(0);
         wmsOption.setRatio(1);
 
@@ -112,13 +115,9 @@ public class WFSMapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean> {
             wmsOption.setMinScale(rasterBean.getMinScale());
         }
 
-        WMS layer = new WMS(rasterBean.getLabel(), rasterBean.getDataSource(),
-                wmsParams, wmsOption);
-
+        WMS layer = new WMS(rasterBean.getLabel(), rasterBean.getDataSource(), wmsParams, wmsOption);
         layer.setOpacity(rasterBean.getOpacity());
-
         layer.setSingleTile(rasterBean.isSingleTileRequest());
-
         return layer;
     }
 
@@ -140,7 +139,7 @@ public class WFSMapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean> {
         this.addAuthTuple(wmsParams);
         wmsParams.setLayers(vectorBean.getName());
         wmsParams.setStyles("");
-        wmsParams.setTransparent(Boolean.TRUE);
+        wmsParams.setTransparent(TRUE);
         final String cqlFilter = vectorBean.getCqlFilter();
         if (GPSharedUtils.isNotEmpty(cqlFilter)) {
             wmsParams.setCQLFilter(vectorBean.getCqlFilter());

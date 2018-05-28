@@ -77,12 +77,6 @@ import static org.geosdi.geoplatform.gui.client.widget.wfs.builder.feature.Featu
  */
 public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget, ActionEnableHandler {
 
-    private final AfterStrategyEditWFSActionEvent afterStrategyEditWFSActionEvent = new AfterStrategyEditWFSActionEvent();
-
-    private final Button saveButton;
-    private final Button resetButton;
-    private final GPEventBus bus;
-    private final ScaleVisibleEvent scaleVisibleEvent = new ScaleVisibleEvent();
     @Inject
     private FeatureSelectionWidget selectionWidget;
     @Inject
@@ -101,6 +95,11 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget, 
     private ButtonBar featureWidgetBar;
     @Inject
     private ILayerSchemaBinder layerSchemaBinder;
+    private final Button saveButton;
+    private final Button resetButton;
+    private final GPEventBus bus;
+    private final ScaleVisibleEvent scaleVisibleEvent = new ScaleVisibleEvent();
+    private final AfterStrategyEditWFSActionEvent afterStrategyEditWFSActionEvent = new AfterStrategyEditWFSActionEvent();
 
     /**
      * @param theBus
@@ -161,7 +160,6 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget, 
                 || (this.layerSchemaBinder.getLayerSchemaDTO() == null)) {
             throw new IllegalArgumentException("Both SchemaDTO and GPLayerBean must not be null");
         }
-        this.bus.fireEvent(this.afterStrategyEditWFSActionEvent);
         super.show();
     }
 
@@ -173,6 +171,7 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget, 
         this.statusBar.setBusy("Loading Layer as WFS");
         this.selectionWidget.reconfigureAttributes();
         this.mapWidget.bindLayerSchema();
+        this.bus.fireEvent(this.afterStrategyEditWFSActionEvent);
         this.attributesWidget.reconfigureEditorGrid();
         FeatureAttributesWindowBuilder.fireAttributesWindowEvent(RECONFIGURE_STATE);
     }

@@ -41,7 +41,7 @@ import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreeStore;
 import org.geosdi.geoplatform.gui.client.widget.tree.GeoPlatformTreeWidget;
 import org.geosdi.geoplatform.gui.client.widget.wfs.tree.properties.WFSTreeBasicProperties;
-import org.geosdi.geoplatform.gui.model.GPRasterBean;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
@@ -79,7 +79,7 @@ public class WFSLayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> i
      * @param childres
      */
     @Override
-    public void buildLayerTree(GPBeanTreeModel twin, List<GPRasterBean> childres) {
+    public void buildLayerTree(GPBeanTreeModel twin, List<GPLayerBean> childres) {
         this.treeBuilder.buildTree(twin, childres);
     }
 

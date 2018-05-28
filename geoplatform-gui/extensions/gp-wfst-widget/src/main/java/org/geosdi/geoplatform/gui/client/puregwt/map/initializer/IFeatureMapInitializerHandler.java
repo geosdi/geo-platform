@@ -48,9 +48,9 @@ import java.util.List;
  */
 public interface IFeatureMapInitializerHandler extends EventHandler {
 
-    public static final RedrawWMSLayerEvent REDRAW_EVENT = new RedrawWMSLayerEvent();
+    RedrawWMSLayerEvent REDRAW_EVENT = new RedrawWMSLayerEvent();
     //
-    GwtEvent.Type<IFeatureMapInitializerHandler> TYPE = new GwtEvent.Type<IFeatureMapInitializerHandler>();
+    GwtEvent.Type<IFeatureMapInitializerHandler> TYPE = new GwtEvent.Type<>();
 
     void redrawWMSLayer();
 
@@ -60,5 +60,4 @@ public interface IFeatureMapInitializerHandler extends EventHandler {
      * @param theLayers
      */
     void bindLayers(List<GPLayerBean> theLayers);
-
 }

@@ -1,6 +1,6 @@
 package org.geosdi.geoplatform.gui.client.model.tree;
 
-import org.geosdi.geoplatform.gui.model.GPRasterBean;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 import java.util.List;
@@ -19,7 +19,7 @@ public interface GPWFSRootLayerTreeNode extends GPWFSTreeComposite {
     /**
      * @param childres
      */
-    void addChildrens(List<GPRasterBean> childres);
+    void addChildrens(List<GPLayerBean> childres);
 
     /**
      * @param <Child>

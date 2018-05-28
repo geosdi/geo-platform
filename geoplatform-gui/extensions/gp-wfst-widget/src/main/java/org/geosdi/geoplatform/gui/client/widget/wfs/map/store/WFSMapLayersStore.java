@@ -34,30 +34,19 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.wfs.map.store;
 
-import com.extjs.gxt.ui.client.Registry;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.History;
 import org.geosdi.geoplatform.gui.client.puregwt.map.WFSLayerMapChangedHandler;
-import org.geosdi.geoplatform.gui.client.widget.map.event.LayerRangeEvent;
-import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
-import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 import org.geosdi.geoplatform.gui.impl.map.store.GPMapLayersStore;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.GPVectorBean;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
-import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
-import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
-import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.shared.util.GPSharedUtils;
 import org.gwtopenmaps.openlayers.client.MapWidget;
 import org.gwtopenmaps.openlayers.client.Projection;
 import org.gwtopenmaps.openlayers.client.layer.Layer;
 import org.gwtopenmaps.openlayers.client.layer.WMS;
-import org.gwtopenmaps.openlayers.client.layer.WMSOptions;
-import org.gwtopenmaps.openlayers.client.layer.WMSParams;
 
 import java.util.Map.Entry;
 import java.util.logging.Logger;
@@ -174,15 +163,19 @@ public class WFSMapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> impl
                     @Override
                     public void execute() {
                         layer.setIsVisible(true);
-                        mapWidget.getMap().addLayer(layer);
+                        layer.redraw(true);
+                        logger.fine("#####################LAYER_ZINDEX : " + layer.getZIndex().toString());
                     }
                 });
             }
         } else {
             layer = (WMS) this.layerBuilder.buildLayer(rasterBean);
             this.layers.put(rasterBean, layer);
-            layer.setZIndex(rasterBean.getzIndex());
             this.mapWidget.getMap().addLayer(layer);
+            layer.setZIndex(rasterBean.getzIndex());
+            logger.fine("#####################LAYER_ZINDEX : " + layer.getZIndex().toString());
+            logger.fine("########################LAYER_VISIBILITY : "
+                    + this.mapWidget.getMap().getLayerByName(rasterBean.getLabel()).isVisible());
         }
     }
 
@@ -195,7 +188,6 @@ public class WFSMapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> impl
                 @Override
                 public void execute() {
                     layer.setIsVisible(false);
-                    mapWidget.getMap().removeLayer(layer);
                 }
             });
         }
@@ -270,7 +262,7 @@ public class WFSMapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> impl
     @Override
     public void resetStore() {
         for (Layer layer : layers.values()) {
-            if(this.mapWidget.getMap().getLayer(layer.getId()) != null) {
+            if (this.mapWidget.getMap().getLayer(layer.getId()) != null) {
                 this.mapWidget.getMap().removeLayer(layer);
             }
         }

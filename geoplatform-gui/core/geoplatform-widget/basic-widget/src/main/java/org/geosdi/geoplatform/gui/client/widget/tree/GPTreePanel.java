@@ -205,11 +205,9 @@ public class GPTreePanel<T extends GPBeanTreeModel> extends TreePanel<T> impleme
     @Override
     public <T extends GPLayerBean> List<T> getAllLayersOnTree() {
         List<T> allLayers = Lists.newArrayList();
-        AbstractRootTreeNode root = (AbstractRootTreeNode) this.getStore().getRootItems().get(
-                0);
-        checkArgument(root != null,
-                "GPTreePanel on getVisibleLayers():"
-                        + " Impossible to retrieve root element");
+        AbstractRootTreeNode root = (AbstractRootTreeNode) this.getStore().getRootItems().get(0);
+        checkArgument(root != null, "GPTreePanel on getVisibleLayers() :"
+                + " Impossible to retrieve root element");
         return this.getAllLayersOnTree(root.getChildren(), allLayers);
     }
 

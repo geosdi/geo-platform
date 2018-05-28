@@ -43,20 +43,20 @@ import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.LayerTy
 import org.geosdi.geoplatform.gui.client.action.menu.strategy.IActionStrategy;
 import org.geosdi.geoplatform.gui.client.config.FeatureInjector;
 import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetConstants;
-import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetMessages;
 import org.geosdi.geoplatform.gui.client.puregwt.action.IEditWFSActionHandler;
 import org.geosdi.geoplatform.gui.client.puregwt.map.initializer.event.BindLayersEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.BuildLayerTreeEvent;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
-import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import static org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetMessages.INSTANCE;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -89,8 +89,7 @@ public class EditWFSAction extends MenuBaseAction implements IEditWFSAction, IEd
     public void componentSelected(MenuEvent e) {
         this.actionStrategy.setWidgetType(IActionStrategy.WidgetType.EDIT_WFS_ACTION);
         this.layer = (GPLayerBean) this.treePanel.getSelectionModel().getSelectedItem();
-        LayoutManager.getInstance().getStatusMap().setBusy(
-                WFSTWidgetMessages.INSTANCE.checkingIfLayerIsAVectorMessage(layer.getName()));
+        LayoutManager.getInstance().getStatusMap().setBusy(INSTANCE.checkingIfLayerIsAVectorMessage(layer.getName()));
         this.layerTypeHandlerManager.forwardLayerType(layer);
     }
 
@@ -130,7 +129,7 @@ public class EditWFSAction extends MenuBaseAction implements IEditWFSAction, IEd
      */
     private void getAllLayer(GPLayerBean layerToExclude) {
         if (this.treePanel instanceof GPTreePanel) {
-            List<GPRasterBean> layers = ((GPTreePanel) this.treePanel).getAllLayersOnTree();
+            List<GPLayerBean> layers = ((GPTreePanel) this.treePanel).getAllLayersOnTree();
             layers.remove(layerToExclude);
             GPBeanTreeModel root = treePanel.getStore().getRootItems().get(0);
             this.bus.fireEvent(new BuildLayerTreeEvent(root, layers));

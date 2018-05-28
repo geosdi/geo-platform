@@ -42,7 +42,6 @@ import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureStatusBarEvent
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.InjectGetFeatureModelEvent;
 import org.geosdi.geoplatform.gui.client.widget.wfs.builder.FeatureMapLayerBuilder;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.getfeature.WFSGetFeatureControl;
-import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar;
 import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.WFSButtonKeyProvider;
 import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.WFSToggleButton;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
@@ -56,6 +55,9 @@ import org.gwtopenmaps.openlayers.client.layer.WMS;
 
 import javax.inject.Inject;
 import java.util.List;
+import java.util.logging.Logger;
+
+import static org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar.FeatureStatusBarType.STATUS_OK;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -63,8 +65,8 @@ import java.util.List;
  */
 public class FeatureMapInitializer implements IFeatureMapInitializer {
 
+    private static final Logger logger = Logger.getLogger("FeatureMapInitializer");
     private static final ResetToolbarObserverEvent resetToolbarObserver = new ResetToolbarObserverEvent();
-    private final GPEventBus bus;
     //
     @Inject
     private MapWidget mapWidget;
@@ -81,7 +83,11 @@ public class FeatureMapInitializer implements IFeatureMapInitializer {
     private Layer wms;
     private List<GPLayerBean> layers;
     private List<Layer> wmsLayers;
+    private final GPEventBus bus;
 
+    /**
+     * @param theBus
+     */
     @Inject
     public FeatureMapInitializer(GPEventBus theBus) {
         this.bus = theBus;
@@ -150,17 +156,10 @@ public class FeatureMapInitializer implements IFeatureMapInitializer {
     }
 
     protected void loadLayerOnMap() {
-//        if ((this.layers != null) && !(this.layers.isEmpty())) {
-//            this.wmsLayers = new ArrayList<>();
-//            for (GPLayerBean layer : this.layers) {
-//                this.wmsLayers.add(this.mapLayerBuilder.buildLayer(layer));
-//                this.mapWidget.getMap().addLayers(this.wmsLayers.toArray(new Layer[this.wmsLayers.size()]));
-//            }
-//        }
-        this.wms.setZIndex(1000);
-        this.vectorLayer.setZIndex(1001);
         this.mapWidget.getMap().addLayer(wms);
         this.mapWidget.getMap().addLayer(vectorLayer);
+        this.wms.setZIndex(1000);
+        this.vectorLayer.setZIndex(1001);
         ((WMS) wms).redraw(true);
         Bounds bb = ((WMS) this.wms).getOptions().getMaxExtent();
         this.mapWidget.getMap().zoomToExtent(bb);
@@ -168,7 +167,6 @@ public class FeatureMapInitializer implements IFeatureMapInitializer {
     }
 
     protected void notifyStatus() {
-        this.bus.fireEvent(new FeatureStatusBarEvent("WFS Layer loaded",
-                FeatureStatusBar.FeatureStatusBarType.STATUS_OK));
+        this.bus.fireEvent(new FeatureStatusBarEvent("WFS Layer loaded", STATUS_OK));
     }
 }

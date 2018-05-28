@@ -81,6 +81,7 @@ import java.util.logging.Logger;
 
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
+import static org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem.WGS_84;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -118,8 +119,7 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
     private void setBaseMapOptions() {
         this.mapOptions = new MapOptions();
         this.mapOptions.setNumZoomLevels(MapLayoutWidget.NUM_ZOOM_LEVEL);
-        this.mapOptions.setDisplayProjection(new Projection(
-                GPCoordinateReferenceSystem.WGS_84.getCode()));
+        this.mapOptions.setDisplayProjection(new Projection(WGS_84.getCode()));
         IGPAccountDetail accountDetail = Registry.get(
                 UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
         String baseLayerKey = accountDetail.getBaseLayer();
@@ -135,7 +135,7 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
 //            Registry.register(GlobalRegistryEnum.BASE_LAYER.getValue(), baseLayer.getBaseLayerEnumName().toString());
         }
         if (baseLayer.getProjection().getProjectionCode().equals(
-                GPCoordinateReferenceSystem.WGS_84.getCode())) {
+                WGS_84.getCode())) {
             set4326MapOptions();
         } else {
             set3857MapOptions();
@@ -183,8 +183,7 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
     private void initMapWidget() {
         this.mapWidget = new MapWidget("100%", "100%", mapOptions);
         this.map = mapWidget.getMap();
-        this.mapWidget.getElement().getFirstChildElement().getStyle().setZIndex(
-                0);
+        this.mapWidget.getElement().getFirstChildElement().getStyle().setZIndex(0);
         this.map.addControl(new MousePosition());
         this.addMeasureControl();
         this.addMeasureAreaControl();
@@ -310,7 +309,7 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
             LonLat center = new LonLat(13.375, 42.329);
             if (map.getProjection().equals(
                     GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode())) {
-                center.transform(GPCoordinateReferenceSystem.WGS_84.getCode(),
+                center.transform(WGS_84.getCode(),
                         GPCoordinateReferenceSystem.EPSG_GOOGLE.getCode());
             }
             float zoomLevel = 5;
@@ -609,15 +608,15 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
             Bounds bounds = this.map.getExtent();
             boolean projectionChanged = FALSE;
             if (gpBaseLayer.getProjection().getProjectionCode().equals(
-                    GPCoordinateReferenceSystem.WGS_84.getCode())
+                    WGS_84.getCode())
                     && !this.map.getProjection().equals(
-                    GPCoordinateReferenceSystem.WGS_84.getCode())) {
+                    WGS_84.getCode())) {
                 this.set4326MapOptions();
                 bounds.transform(new Projection(
                                 GPCoordinateReferenceSystem.EPSG_GOOGLE.getCode()),
                         new Projection(
-                                GPCoordinateReferenceSystem.WGS_84.getCode()));
-                switchWMSOptionProjection(GPCoordinateReferenceSystem.WGS_84);
+                                WGS_84.getCode()));
+                switchWMSOptionProjection(WGS_84);
                 projectionChanged = TRUE;
             } else if (gpBaseLayer.getProjection().getProjectionCode().equals(
                     GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode())
@@ -625,7 +624,7 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
                     GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode())) {
                 this.set3857MapOptions();
                 bounds.transform(new Projection(
-                                GPCoordinateReferenceSystem.WGS_84.getCode()),
+                                WGS_84.getCode()),
                         new Projection(
                                 GPCoordinateReferenceSystem.EPSG_GOOGLE.getCode()));
                 switchWMSOptionProjection(

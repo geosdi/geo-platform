@@ -45,27 +45,26 @@ import javax.inject.Inject;
 import static java.lang.Boolean.TRUE;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
- * @email giuseppe.lascaleia@geosdi.org
  */
-public class FeatureMapWidget extends GeoPlatformContentPanel
-        implements IFeatureMapWidget {
+public class FeatureMapWidget extends GeoPlatformContentPanel implements IFeatureMapWidget {
 
-    private final GPEventBus bus;
-    private final HandlerRegistration handlerRegistration;
     @Inject
     private MapWidget mapWidget;
     @Inject
     private IFeatureMapInitializer featureMapInitializer;
+    private final GPEventBus bus;
+    private final HandlerRegistration handlerRegistration;
 
+    /**
+     * @param theBus
+     */
     @Inject
     public FeatureMapWidget(GPEventBus theBus) {
         super(TRUE);
-
         this.bus = theBus;
-        this.handlerRegistration = this.bus.addHandler(FeatureMapWidget.TYPE,
-                this);
+        this.handlerRegistration = this.bus.addHandler(TYPE, this);
     }
 
     @Override

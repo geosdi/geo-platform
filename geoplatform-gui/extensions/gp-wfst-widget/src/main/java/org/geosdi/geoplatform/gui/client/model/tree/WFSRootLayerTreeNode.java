@@ -5,7 +5,7 @@ import com.google.common.collect.Lists;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.client.widget.wfs.tree.visitor.GPWFSCompositeVisitor;
 import org.geosdi.geoplatform.gui.configuration.composite.GPTreeCompositeType;
-import org.geosdi.geoplatform.gui.model.GPRasterBean;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.TreeStatusEnum;
@@ -39,9 +39,9 @@ public class WFSRootLayerTreeNode extends GPBeanTreeModel implements GPWFSRootLa
      * @param childres
      */
     @Override
-    public void addChildrens(List<GPRasterBean> childres) {
+    public void addChildrens(List<GPLayerBean> childres) {
         checkArgument(childres != null, "The Parameter childrens must not be null.");
-        for (GPRasterBean layer : childres) {
+        for (GPLayerBean layer : childres) {
             if (layer instanceof GPLayerTreeModel) {
                 WFSLayerTreeNode child = new WFSLayerTreeNode((GPLayerTreeModel) layer);
                 child.setParent(this);

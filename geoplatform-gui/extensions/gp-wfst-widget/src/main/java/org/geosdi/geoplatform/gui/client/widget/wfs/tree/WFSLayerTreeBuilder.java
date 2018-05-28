@@ -42,7 +42,7 @@ import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreeStore;
 import org.geosdi.geoplatform.gui.client.widget.wfs.tree.visitor.GPWFSCompositeVisitor;
 import org.geosdi.geoplatform.gui.client.widget.wfs.tree.visitor.WFSVisitorCheck;
-import org.geosdi.geoplatform.gui.model.GPRasterBean;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 import javax.inject.Inject;
@@ -57,7 +57,7 @@ import static java.lang.Boolean.TRUE;
  * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
  */
 @Singleton
-public class WFSLayerTreeBuilder implements IWFSLayerTreeBuilder {
+public class WFSLayerTreeBuilder implements GPWFSLayerTreeBuilder {
 
     private final static Logger logger = Logger.getLogger("WFSLayerTreeBuilder");
     //
@@ -85,7 +85,7 @@ public class WFSLayerTreeBuilder implements IWFSLayerTreeBuilder {
      * @param childrens
      */
     @Override
-    public void buildTree(GPBeanTreeModel twin, List<GPRasterBean> childrens) {
+    public void buildTree(GPBeanTreeModel twin, List<GPLayerBean> childrens) {
         this.root.bind(twin);
         this.root.addChildrens(childrens);
         this.store.add(this.root, TRUE);

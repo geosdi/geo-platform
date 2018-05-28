@@ -35,8 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.configuration;
 
-import java.util.List;
-import org.geosdi.geoplatform.gui.configuration.composite.GPTreeCompositeType;
 import org.geosdi.geoplatform.gui.configuration.composite.menu.store.SingleSelectionCompositeKey;
 import org.geosdi.geoplatform.gui.impl.tree.menu.store.TreeMenuStore;
 import org.junit.Assert;
@@ -47,6 +45,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.List;
+
+import static org.geosdi.geoplatform.gui.configuration.composite.GPTreeCompositeType.COMPOSITE;
+import static org.geosdi.geoplatform.gui.configuration.composite.GPTreeCompositeType.ROOT;
 
 /**
  *
@@ -69,22 +72,15 @@ public class GPTreeMenuStoreLoaderTest {
     
     @Test
     public void treeMenuRootLoader() {
-        List<? extends GPMenuGenericTool> tools = geoPlatformTreeMenuStore.getTools(
-                new SingleSelectionCompositeKey(GPTreeCompositeType.ROOT));
-        
+        List<? extends GPMenuGenericTool> tools = geoPlatformTreeMenuStore.getTools(new SingleSelectionCompositeKey(ROOT));
         Assert.assertEquals(4, tools.size());
-        
-        logger.info("ROOT TREE MENU @@@@@@@@@@@@@@@@@@@@@@@@@@ \n\n {} \n",
-                tools);
+        logger.info("ROOT TREE MENU @@@@@@@@@@@@@@@@@@@@@@@@@@ \n\n {} \n", tools);
     }
     
     @Test
     public void treeMenuCompositeLoader() {
-        List<? extends GPMenuGenericTool> tools = geoPlatformTreeMenuStore.getTools(
-                new SingleSelectionCompositeKey(GPTreeCompositeType.COMPOSITE));
-        
+        List<? extends GPMenuGenericTool> tools = geoPlatformTreeMenuStore.getTools(new SingleSelectionCompositeKey(COMPOSITE));
         Assert.assertEquals(4, tools.size());
-        
         logger.info("COMPOSITE TREE MENU @@@@@@@@@@@@@@@ \n\n {} \n", tools);
     }
 }

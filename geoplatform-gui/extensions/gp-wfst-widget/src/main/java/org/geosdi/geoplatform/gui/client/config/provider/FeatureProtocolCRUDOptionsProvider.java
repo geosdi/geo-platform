@@ -66,7 +66,7 @@ public class FeatureProtocolCRUDOptionsProvider implements
 
     @Inject
     public FeatureProtocolCRUDOptionsProvider(GPEventBus theBus,
-            ILayerSchemaBinder layerSchemaBinder) {
+                                              ILayerSchemaBinder layerSchemaBinder) {
         this.bus = theBus;
         this.layerSchemaBinder = layerSchemaBinder;
     }

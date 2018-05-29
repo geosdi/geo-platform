@@ -63,7 +63,7 @@ public class WFSPolygonFeatureControl extends DrawEditorPolygonFeature
 
     @Inject
     public WFSPolygonFeatureControl(Vector vector, ILayerSchemaBinder layerSchemaBinder,
-            WFSEditFeatureRepository editFeatureRepository) {
+                                    WFSEditFeatureRepository editFeatureRepository) {
         super(vector, true, layerSchemaBinder);
         editFeatureRepository.bindWFSEditFeatureControl(this);
     }

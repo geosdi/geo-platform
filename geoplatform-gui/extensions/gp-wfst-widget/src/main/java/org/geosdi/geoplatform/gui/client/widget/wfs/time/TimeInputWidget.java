@@ -76,8 +76,8 @@ public class TimeInputWidget extends GeoPlatformWindow {
     }
 
     private void addDateAndTimeToContainer(LayoutContainer layoutContainer,
-            String dataLabel,
-            String timeLabel) {
+                                           String dataLabel,
+                                           String timeLabel) {
         final DateField dateField = new DateField();
         dateField.setFieldLabel(dataLabel);
         dateField.setData("text", "Enter the date");

@@ -63,7 +63,7 @@ public class WFSFeatureDispatcher extends AbstractFeatureDispatcher {
 
     @Override
     public void updateGeometry(final VectorFeature modifiedFeature,
-            String wktGeometry, final VectorFeature oldFeature) {
+                               String wktGeometry, final VectorFeature oldFeature) {
 
         this.updateGeometryExecutor.executeGeometryUpdate(modifiedFeature,
                 wktGeometry, oldFeature);
@@ -71,7 +71,7 @@ public class WFSFeatureDispatcher extends AbstractFeatureDispatcher {
 
     @Override
     public void insertFeature(WFSEdit editorSource,
-            List<AttributeDTO> featureAttributes) {
+                              List<AttributeDTO> featureAttributes) {
         this.insertFeatureExecutor.insertFeature(editorSource, featureAttributes);
     }
 

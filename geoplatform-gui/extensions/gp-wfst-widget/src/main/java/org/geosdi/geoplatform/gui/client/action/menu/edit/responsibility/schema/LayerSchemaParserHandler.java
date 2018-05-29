@@ -54,10 +54,10 @@ public abstract class LayerSchemaParserHandler {
     }
 
     public abstract void layerSchemaParser(LayerSchemaDTO schemaDTO,
-            GPLayerBean layer);
+                                           GPLayerBean layer);
 
     protected void forwardLayerSchema(LayerSchemaDTO schemaDTO,
-            GPLayerBean layer) {
+                                      GPLayerBean layer) {
         if (successor != null) {
             successor.layerSchemaParser(schemaDTO, layer);
         }

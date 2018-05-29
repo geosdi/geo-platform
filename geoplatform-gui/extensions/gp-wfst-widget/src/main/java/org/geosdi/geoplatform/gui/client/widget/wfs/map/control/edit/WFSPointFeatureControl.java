@@ -61,7 +61,7 @@ public class WFSPointFeatureControl extends DrawEditorPointFeature implements
 
     @Inject
     public WFSPointFeatureControl(Vector vector, ILayerSchemaBinder layerSchemaBinder,
-            WFSEditFeatureRepository editFeatureRepository) {
+                                  WFSEditFeatureRepository editFeatureRepository) {
         super(vector, true, layerSchemaBinder);
         editFeatureRepository.bindWFSEditFeatureControl(this);
     }

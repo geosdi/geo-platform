@@ -51,7 +51,7 @@ public class NullLayerSchemaHandler extends LayerSchemaParserHandler {
 
     @Override
     public void layerSchemaParser(LayerSchemaDTO schemaDTO,
-            GPLayerBean layer) {
+                                  GPLayerBean layer) {
         if (schemaDTO == null) {
             this.showAlertMessage(layer);
         } else {

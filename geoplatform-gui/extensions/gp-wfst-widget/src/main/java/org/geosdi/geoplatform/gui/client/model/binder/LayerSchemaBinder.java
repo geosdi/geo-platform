@@ -56,7 +56,7 @@ public class LayerSchemaBinder implements ILayerSchemaBinder {
 
     @Override
     public void bind(GPLayerBean theSelectedLayer,
-            LayerSchemaDTO theLayerSchemaDTO) {
+                     LayerSchemaDTO theLayerSchemaDTO) {
         this.selectedLayer = theSelectedLayer;
         this.layerSchemaDTO = theLayerSchemaDTO;
         this.reloadLayerMapEvent = new ReloadLayerMapEvent(theSelectedLayer);

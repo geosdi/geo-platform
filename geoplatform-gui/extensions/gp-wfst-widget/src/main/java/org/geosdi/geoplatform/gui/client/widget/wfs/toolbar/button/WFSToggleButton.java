@@ -65,7 +65,7 @@ public class WFSToggleButton extends ToggleButton implements WFSEditorButton {
     }
 
     public WFSToggleButton(Image upImage, WFSToggleAction theAction,
-            String theId, boolean isForceReset) {
+                           String theId, boolean isForceReset) {
         super(upImage, theAction);
         this.id = theId;
         this.forceReset = isForceReset;

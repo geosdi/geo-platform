@@ -34,7 +34,6 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.wfs;
 
-import com.google.gwt.event.shared.HandlerRegistration;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.GWFSPMapToolsHandler;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
 import org.geosdi.geoplatform.gui.client.widget.wfs.initializer.IFeatureMapInitializer;
@@ -48,8 +47,6 @@ import org.gwtopenmaps.openlayers.client.Projection;
 
 import javax.inject.Inject;
 
-import java.util.logging.Level;
-
 import static java.lang.Boolean.TRUE;
 
 /**
@@ -58,11 +55,11 @@ import static java.lang.Boolean.TRUE;
  */
 public class FeatureMapWidget extends GeoPlatformContentPanel implements IFeatureMapWidget, GWFSPMapToolsHandler {
 
+    private final GPEventBus bus;
     @Inject
     private MapWidget mapWidget;
     @Inject
     private IFeatureMapInitializer featureMapInitializer;
-    private final GPEventBus bus;
 
     /**
      * @param theBus

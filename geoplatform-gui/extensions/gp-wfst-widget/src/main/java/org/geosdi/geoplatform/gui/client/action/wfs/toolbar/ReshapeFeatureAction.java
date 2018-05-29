@@ -48,7 +48,7 @@ import org.gwtopenmaps.openlayers.client.control.ModifyFeature;
 public class ReshapeFeatureAction extends WFSChangeFeatureAction {
 
     public ReshapeFeatureAction(WFSBaseMapMediator theBaseMapMediator,
-            WFSToolbarObserver theButtonObserver) {
+                                WFSToolbarObserver theButtonObserver) {
         super(theBaseMapMediator, theButtonObserver);
     }
 

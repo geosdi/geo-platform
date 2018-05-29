@@ -63,9 +63,9 @@ public class WFSDispatcherExecutor {
     protected WFSDispatcherProgressBar progressBar;
 
     public WFSDispatcherExecutor(FeatureStatusBarEvent theLoadingEvent,
-            FeatureStatusBarEvent theSuccessEvent,
-            FeatureStatusBarEvent theStatusNotOk,
-            FeatureStatusBarEvent theFailedEvent) {
+                                 FeatureStatusBarEvent theSuccessEvent,
+                                 FeatureStatusBarEvent theStatusNotOk,
+                                 FeatureStatusBarEvent theFailedEvent) {
         this.successEvent = theSuccessEvent;
         this.loadingEvent = theLoadingEvent;
         this.statusNotOk = theStatusNotOk;

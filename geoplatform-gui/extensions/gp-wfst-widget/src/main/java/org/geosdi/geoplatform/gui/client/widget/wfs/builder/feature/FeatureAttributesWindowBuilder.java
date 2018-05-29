@@ -57,7 +57,7 @@ public final class FeatureAttributesWindowBuilder implements
 
     @Inject
     public FeatureAttributesWindowBuilder(GPEventBus theBus,
-            ILayerSchemaBinder theLayerSchemaBinder) {
+                                          ILayerSchemaBinder theLayerSchemaBinder) {
 
         this.attributesWindow = new FeatureAttributesWindow(theBus,
                 theLayerSchemaBinder);

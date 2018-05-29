@@ -60,7 +60,7 @@ public class CasQueryFeatureCommand implements
 
     @Override
     public QueryFeatureResponse execute(CasQueryFeatureRequest request,
-            HttpServletRequest httpServletRequest) {
+                                        HttpServletRequest httpServletRequest) {
         logger.debug("##################### Executing {} Command", this.getClass().getSimpleName());
 
 

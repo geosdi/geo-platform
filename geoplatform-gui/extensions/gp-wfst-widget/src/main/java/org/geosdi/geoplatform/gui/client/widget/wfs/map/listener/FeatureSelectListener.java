@@ -61,7 +61,7 @@ public class FeatureSelectListener extends AbstractFeatureListener implements
     private final IFeatureIdBinder fidBinder;
 
     public FeatureSelectListener(Vector theVectorLayer, GPEventBus bus,
-            IFeatureIdBinder theFidBinder) {
+                                 IFeatureIdBinder theFidBinder) {
         super(theVectorLayer, bus);
         this.fidBinder = theFidBinder;
     }

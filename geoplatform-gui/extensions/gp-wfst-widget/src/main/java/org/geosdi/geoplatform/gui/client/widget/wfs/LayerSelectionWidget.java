@@ -96,12 +96,6 @@ public class LayerSelectionWidget extends GeoPlatformContentPanel {
     }
 
     @Override
-    protected void afterRender() {
-        super.afterRender();
-        this.wfsLayerTreeWidget.addContextMenu();
-    }
-
-    @Override
     public void reset() {
         this.wfsLayerTreeWidget.reset();
     }

@@ -67,7 +67,7 @@ public interface IWFSLayerService {
      * @throws GeoPlatformException
      */
     FeatureCollectionDTO getAllFeature(String serverUrl, String typeName, int maxFeatures,
-            Map<String, String> headerParams) throws GeoPlatformException;
+                                       Map<String, String> headerParams) throws GeoPlatformException;
 
     /**
      * @param serverUrl
@@ -79,7 +79,7 @@ public interface IWFSLayerService {
      * @throws GeoPlatformException
      */
     FeatureCollectionDTO getFeaturesByQuery(String serverUrl, String typeName, int maxFeatures,
-            QueryDTO queryDTO, Map<String, String> headerParams) throws GeoPlatformException;
+                                            QueryDTO queryDTO, Map<String, String> headerParams) throws GeoPlatformException;
 
     /**
      * @param serverURL
@@ -91,7 +91,7 @@ public interface IWFSLayerService {
      * @throws GeoPlatformException
      */
     boolean transactionUpdate(String serverURL, String typeName, String fid,
-            List<? extends AttributeDTO> attributes, Map<String, String> headerParams) throws GeoPlatformException;
+                              List<? extends AttributeDTO> attributes, Map<String, String> headerParams) throws GeoPlatformException;
 
     /**
      * @param serverURL
@@ -103,7 +103,7 @@ public interface IWFSLayerService {
      * @throws GeoPlatformException
      */
     boolean transactionInsert(String serverURL, String typeName, String targetNamespace, List<AttributeDTO> attributes,
-            Map<String, String> headerParams) throws GeoPlatformException;
+                              Map<String, String> headerParams) throws GeoPlatformException;
 
     /**
      * @param serverURL

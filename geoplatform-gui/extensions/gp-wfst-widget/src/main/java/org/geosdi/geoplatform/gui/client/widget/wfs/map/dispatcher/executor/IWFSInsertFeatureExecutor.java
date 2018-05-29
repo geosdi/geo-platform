@@ -46,6 +46,6 @@ import java.util.List;
 public interface IWFSInsertFeatureExecutor {
 
     void insertFeature(WFSEdit editorSource,
-            List<AttributeDTO> featureAttributes);
+                       List<AttributeDTO> featureAttributes);
 
 }

@@ -62,12 +62,12 @@ public class EditingToolBarDialog extends Composite implements IEditingToolbarHa
 
     @Inject
     public EditingToolBarDialog(GPEventBus theBus, @DragFeatureToggleButton ToggleButton drag,
-            @EditFeatureToggleButton ToggleButton edit,
-            @GetFeatureToggleButton ToggleButton info,
-            @ReshapeFeatureToggleButton ToggleButton reshape,
-            @ResizeFeatureToggleButton ToggleButton resize,
-            @RotateFeatureToggleButton ToggleButton rotate,
-            @EraseFeatureToggleButton ToggleButton erase) {
+                                @EditFeatureToggleButton ToggleButton edit,
+                                @GetFeatureToggleButton ToggleButton info,
+                                @ReshapeFeatureToggleButton ToggleButton reshape,
+                                @ResizeFeatureToggleButton ToggleButton resize,
+                                @RotateFeatureToggleButton ToggleButton rotate,
+                                @EraseFeatureToggleButton ToggleButton erase) {
 
         GeoPlatformStyleInjector.injectCss(
                 ResourceEditingToolBar.INSTANCE.wfstCss());

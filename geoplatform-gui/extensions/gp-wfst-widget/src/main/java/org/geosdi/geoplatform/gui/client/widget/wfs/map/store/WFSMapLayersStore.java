@@ -209,7 +209,7 @@ public class WFSMapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
      */
     @Override
     public void onChangeStyle(GPRasterBean layerBean,
-            String newStyle) {
+                              String newStyle) {
     }
 
     /**
@@ -218,7 +218,7 @@ public class WFSMapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
      */
     @Override
     public void onChangeSingleTileRequest(GPRasterBean layerBean,
-            boolean singleTileRequest) {
+                                          boolean singleTileRequest) {
     }
 
     /**

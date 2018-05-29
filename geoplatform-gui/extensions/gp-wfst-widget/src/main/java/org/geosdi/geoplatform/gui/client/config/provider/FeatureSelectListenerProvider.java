@@ -55,7 +55,7 @@ public class FeatureSelectListenerProvider implements
 
     @Inject
     public FeatureSelectListenerProvider(Vector theVectorLayer, GPEventBus bus,
-            IFeatureIdBinder theFidBinder) {
+                                         IFeatureIdBinder theFidBinder) {
         this.vectorLayer = theVectorLayer;
         this.bus = bus;
         this.fidBinder = theFidBinder;

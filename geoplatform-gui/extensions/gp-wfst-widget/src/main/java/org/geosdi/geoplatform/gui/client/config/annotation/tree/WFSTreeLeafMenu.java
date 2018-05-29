@@ -32,54 +32,21 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.client.widget.wfs.tree.properties;
+package org.geosdi.geoplatform.gui.client.config.annotation.tree;
 
-import com.extjs.gxt.ui.client.event.Events;
-import com.extjs.gxt.ui.client.widget.menu.Menu;
-import org.geosdi.geoplatform.gui.client.config.annotation.tree.WFSLayerTree;
-import org.geosdi.geoplatform.gui.client.config.annotation.tree.WFSTreeLeafMenu;
-import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
-import org.geosdi.geoplatform.gui.client.widget.wfs.tree.listener.WFSTreeCheckListener;
+import com.google.inject.BindingAnnotation;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
-import static com.extjs.gxt.ui.client.Style.SelectionMode.SINGLE;
-import static com.extjs.gxt.ui.client.widget.treepanel.TreePanel.CheckCascade.NONE;
-import static com.extjs.gxt.ui.client.widget.treepanel.TreePanel.CheckNodes.LEAF;
-import static java.lang.Boolean.TRUE;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
- * @author Vito Salvia - CNR IMAA geoSDI Group
- * @email vito.salvia@gmail.com
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-@Singleton
-public class WFSTreeBasicProperties implements GPWFSTreeBasicProperties {
-
-    private final GPTreePanel tree;
-    private final WFSTreeCheckListener wfsTreeCheckListener;
-    @Inject
-    @WFSTreeLeafMenu
-    private Menu leafMenu;
-
-    /**
-     * @param theTree
-     */
-    @Inject
-    public WFSTreeBasicProperties(@WFSLayerTree GPTreePanel theTree, WFSTreeCheckListener theWfsTreeCheckListener) {
-        this.tree = theTree;
-        this.wfsTreeCheckListener = theWfsTreeCheckListener;
-    }
-
-    @Override
-    public void setTreeBasicProperties() {
-        this.tree.getSelectionModel().setSelectionMode(SINGLE);
-        this.tree.setAutoHeight(TRUE);
-        this.tree.setCheckable(TRUE);
-        this.tree.setCheckStyle(NONE);
-        this.tree.setCheckNodes(LEAF);
-        this.tree.addListener(Events.CheckChange, this.wfsTreeCheckListener);
-        this.tree.addStyleName("layer_tree");
-        this.tree.setContextMenu(this.leafMenu);
-    }
+@Target({ElementType.FIELD, ElementType.PARAMETER, ElementType.METHOD})
+@Retention(RetentionPolicy.RUNTIME)
+@BindingAnnotation
+public @interface WFSTreeLeafMenu {
 }

@@ -48,5 +48,5 @@ import java.lang.annotation.Target;
 @Target({ElementType.FIELD, ElementType.PARAMETER, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @BindingAnnotation
-public @interface WFSTreeMenu {
+public @interface WFSTreeRootMenu {
 }

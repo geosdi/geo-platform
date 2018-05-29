@@ -34,13 +34,16 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.wfs.tree;
 
+import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.google.gwt.core.client.GWT;
 import org.geosdi.geoplatform.gui.client.config.annotation.tree.WFSLayerTree;
 import org.geosdi.geoplatform.gui.client.config.annotation.tree.WFSLayerTreeStore;
+import org.geosdi.geoplatform.gui.client.config.annotation.tree.WFSTreeLeafMenu;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.LayerTreeHandler;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreeStore;
 import org.geosdi.geoplatform.gui.client.widget.tree.GeoPlatformTreeWidget;
+import org.geosdi.geoplatform.gui.client.widget.wfs.tree.activator.GPWFSTreeMenuActivator;
 import org.geosdi.geoplatform.gui.client.widget.wfs.tree.properties.WFSTreeBasicProperties;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
@@ -59,6 +62,9 @@ public class WFSLayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> i
     private final GPEventBus bus;
     @Inject
     private WFSLayerTreeBuilder treeBuilder;
+    @Inject
+    private GPWFSTreeMenuActivator gpwfsTreeMenuActivator;
+
 
     /**
      * @param theStore
@@ -87,6 +93,10 @@ public class WFSLayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> i
     @Override
     public final void setTreePanelProperties() {
         this.treeProperties.setTreeBasicProperties();
+    }
+
+    public void addContextMenu(){
+        this.gpwfsTreeMenuActivator.activeTreeContextMenu();
     }
 
     @Override

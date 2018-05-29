@@ -48,6 +48,13 @@ public class SingleSelectionCompositeKey extends StoreCompositeKey {
     private GPTreeCompositeType compositeType;
 
     /**
+     * <p>Only For Serialization Purpose</p>
+     */
+    public SingleSelectionCompositeKey() {
+        this(null);
+    }
+
+    /**
      * @param compositeType
      */
     public SingleSelectionCompositeKey(GPTreeCompositeType compositeType) {

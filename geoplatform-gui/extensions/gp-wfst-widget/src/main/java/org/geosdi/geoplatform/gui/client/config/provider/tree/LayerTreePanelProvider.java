@@ -5,6 +5,7 @@ import com.extjs.gxt.ui.client.data.ModelIconProvider;
 import com.extjs.gxt.ui.client.data.ModelStringProvider;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.client.config.annotation.tree.WFSLayerTreeStore;
+import org.geosdi.geoplatform.gui.client.model.tree.WFSLayerTreeNode;
 import org.geosdi.geoplatform.gui.client.model.tree.WFSRootLayerTreeNode;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreeStore;
@@ -53,6 +54,12 @@ public class LayerTreePanelProvider implements Provider<GPTreePanel> {
             @Override
             protected boolean hasChildren(ModelData model) {
                 return model instanceof WFSRootLayerTreeNode;
+            }
+
+            @Override
+            protected void onShowContextMenu(int x, int y) {
+                if (this.getSelectionModel().getSelectedItem() instanceof WFSLayerTreeNode)
+                    super.onShowContextMenu(x, y);
             }
 
         };

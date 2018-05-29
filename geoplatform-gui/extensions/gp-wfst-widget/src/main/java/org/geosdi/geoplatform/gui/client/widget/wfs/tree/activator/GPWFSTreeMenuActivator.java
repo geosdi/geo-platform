@@ -34,16 +34,10 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.wfs.tree.activator;
 
-import com.extjs.gxt.ui.client.Style;
-import com.extjs.gxt.ui.client.event.BaseEvent;
-import com.extjs.gxt.ui.client.event.Events;
-import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
-import com.google.gwt.core.client.GWT;
 import org.geosdi.geoplatform.gui.client.config.annotation.tree.WFSLayerTree;
 import org.geosdi.geoplatform.gui.client.config.annotation.tree.WFSTreeLeafMenu;
 import org.geosdi.geoplatform.gui.client.config.annotation.tree.WFSTreeRootMenu;
-import org.geosdi.geoplatform.gui.client.model.tree.WFSLayerTreeNode;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
@@ -55,7 +49,7 @@ import javax.inject.Singleton;
  * @email vito.salvia@gmail.com
  */
 @Singleton
-public class GPWFSTreeMenuActivator  {
+public class GPWFSTreeMenuActivator {
 
     private final GPTreePanel tree;
     private final GPEventBus bus;
@@ -73,20 +67,21 @@ public class GPWFSTreeMenuActivator  {
     }
 
     public void activeTreeContextMenu() {
-        tree.addListener(Events.OnContextMenu, new Listener() {
-
-            @Override
-            public void handleEvent(BaseEvent be) {
-                if(tree.getSelectionModel().getSelectedItem() instanceof WFSLayerTreeNode )
-                    tree.setContextMenu(leafMenu);
-                else{
-                    rootMenu.hide(Boolean.TRUE);
-                    rootMenu.setVisible(Boolean.FALSE);
-                    tree.setContextMenu(rootMenu);
-
-                }
-            }
-
-        });
+//        tree.addListener(Events.OnContextMenu, new Listener() {
+//
+//            @Override
+//            public void handleEvent(BaseEvent be) {
+//                if (tree.getSelectionModel().getSelectedItem() instanceof WFSLayerTreeNode) {
+//                    tree.setContextMenu(leafMenu);
+//                } else {
+//                    tree.setContextMenu(null);
+////                    rootMenu.hide(Boolean.TRUE);
+////                    rootMenu.setVisible(Boolean.FALSE);
+////                    tree.setContextMenu(rootMenu);
+//
+//                }
+//            }
+//
+//        });
     }
 }

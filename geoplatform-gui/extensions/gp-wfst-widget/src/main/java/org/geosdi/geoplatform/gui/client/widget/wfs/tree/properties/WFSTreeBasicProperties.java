@@ -56,11 +56,11 @@ import static java.lang.Boolean.TRUE;
 @Singleton
 public class WFSTreeBasicProperties implements GPWFSTreeBasicProperties {
 
-    private final GPTreePanel tree;
-    private final WFSTreeCheckListener wfsTreeCheckListener;
     @Inject
     @WFSTreeLeafMenu
     private Menu leafMenu;
+    private final GPTreePanel tree;
+    private final WFSTreeCheckListener wfsTreeCheckListener;
 
     /**
      * @param theTree

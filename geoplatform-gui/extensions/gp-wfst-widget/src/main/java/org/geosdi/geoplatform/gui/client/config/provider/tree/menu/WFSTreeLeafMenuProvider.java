@@ -5,6 +5,7 @@ import com.extjs.gxt.ui.client.data.ModelIconProvider;
 import com.extjs.gxt.ui.client.data.ModelStringProvider;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.extjs.gxt.ui.client.widget.menu.MenuItem;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.client.action.menu.tree.WFSZoomToLayerExtentAction;
 import org.geosdi.geoplatform.gui.client.config.annotation.tree.WFSLayerTreeStore;
@@ -20,12 +21,12 @@ import javax.inject.Provider;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class WFSTreeMenuProvider implements Provider<Menu> {
+public class WFSTreeLeafMenuProvider implements Provider<Menu> {
 
     private final WFSZoomToLayerExtentAction wfsZoomToLayerExtentAction;
 
     @Inject
-    public WFSTreeMenuProvider(WFSZoomToLayerExtentAction wfsZoomToLayerExtentAction) {
+    public WFSTreeLeafMenuProvider(WFSZoomToLayerExtentAction wfsZoomToLayerExtentAction) {
         this.wfsZoomToLayerExtentAction = wfsZoomToLayerExtentAction;
     }
 

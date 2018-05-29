@@ -32,77 +32,61 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.client.widget.wfs;
+package org.geosdi.geoplatform.gui.client.widget.wfs.tree.activator;
 
 import com.extjs.gxt.ui.client.Style;
-import org.geosdi.geoplatform.gui.client.puregwt.map.event.FeatureMapWidthEvent;
-import org.geosdi.geoplatform.gui.client.puregwt.map.event.IncreaseWidthEvent;
-import org.geosdi.geoplatform.gui.client.puregwt.toolbar.event.DecreasePaddingEvent;
-import org.geosdi.geoplatform.gui.client.puregwt.toolbar.event.EditingToolbarPaddingEvent;
-import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
-import org.geosdi.geoplatform.gui.client.widget.wfs.tree.WFSLayerTreeWidget;
+import com.extjs.gxt.ui.client.event.BaseEvent;
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.widget.menu.Menu;
+import com.google.gwt.core.client.GWT;
+import org.geosdi.geoplatform.gui.client.config.annotation.tree.WFSLayerTree;
+import org.geosdi.geoplatform.gui.client.config.annotation.tree.WFSTreeLeafMenu;
+import org.geosdi.geoplatform.gui.client.config.annotation.tree.WFSTreeRootMenu;
+import org.geosdi.geoplatform.gui.client.model.tree.WFSLayerTreeNode;
+import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import static java.lang.Boolean.TRUE;
-
 /**
- * @author Vito Salvia- CNR IMAA geoSDI Group
+ * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
 @Singleton
-public class LayerSelectionWidget extends GeoPlatformContentPanel {
+public class GPWFSTreeMenuActivator  {
 
-    public static final String ID = WFSWidgetNames.LAYER_SELECTION.name();
-    //
+    private final GPTreePanel tree;
     private final GPEventBus bus;
-    private final WFSLayerTreeWidget wfsLayerTreeWidget;
-    //
-    private final FeatureMapWidthEvent increaseWidthEvent = new IncreaseWidthEvent();
-    private final EditingToolbarPaddingEvent decreasePaddingEvent = new DecreasePaddingEvent();
+    @Inject
+    @WFSTreeLeafMenu
+    private Menu leafMenu;
+    @Inject
+    @WFSTreeRootMenu
+    private Menu rootMenu;
 
     @Inject
-    public LayerSelectionWidget(GPEventBus theBus, WFSLayerTreeWidget theWFSLayerTreeWidget) {
-        super(TRUE);
+    public GPWFSTreeMenuActivator(@WFSLayerTree GPTreePanel theTree, GPEventBus theBus) {
+        this.tree = theTree;
         this.bus = theBus;
-        this.wfsLayerTreeWidget = theWFSLayerTreeWidget;
     }
 
-    @Override
-    public void addComponent() {
-        super.add(this.wfsLayerTreeWidget.getTree());
-    }
+    public void activeTreeContextMenu() {
+        tree.addListener(Events.OnContextMenu, new Listener() {
 
-    @Override
-    public void initSize() {
-    }
+            @Override
+            public void handleEvent(BaseEvent be) {
+                if(tree.getSelectionModel().getSelectedItem() instanceof WFSLayerTreeNode )
+                    tree.setContextMenu(leafMenu);
+                else{
+                    rootMenu.hide(Boolean.TRUE);
+                    rootMenu.setVisible(Boolean.FALSE);
+                    tree.setContextMenu(rootMenu);
 
-    @Override
-    public void collapse() {
-        this.increaseWidthEvent.setWidth(super.getWidth());
-        this.bus.fireEvent(increaseWidthEvent);
-        this.bus.fireEvent(decreasePaddingEvent);
-        super.collapse();
-    }
+                }
+            }
 
-    @Override
-    public void setPanelProperties() {
-        super.setId(ID);
-        super.setScrollMode(Style.Scroll.AUTO);
-        super.setBorders(false);
-        super.head.setText("Layer Selection");
-    }
-
-    @Override
-    protected void afterRender() {
-        super.afterRender();
-        this.wfsLayerTreeWidget.addContextMenu();
-    }
-
-    @Override
-    public void reset() {
-        this.wfsLayerTreeWidget.reset();
+        });
     }
 }

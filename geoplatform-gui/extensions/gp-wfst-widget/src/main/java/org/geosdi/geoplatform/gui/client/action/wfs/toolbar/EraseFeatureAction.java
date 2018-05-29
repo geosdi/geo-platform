@@ -51,7 +51,7 @@ public class EraseFeatureAction extends BaseWFSToggleAction {
 
     @Inject
     public EraseFeatureAction(WFSBaseMapMediator theBaseMapMediator,
-            WFSToolbarObserver theButtonObserver) {
+                              WFSToolbarObserver theButtonObserver) {
         super(theBaseMapMediator, theButtonObserver);
     }
 

@@ -112,7 +112,7 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel implements 
 
     @Inject
     public FeatureAttributesWidget(GPEventBus bus, TimeInputWidget timeInputWidget, GetFeatureControlBuilder featureControlBuilder,
-            WFSProtocolCRUDOptions featureCRUDProtocol) {
+                                   WFSProtocolCRUDOptions featureCRUDProtocol) {
         super(TRUE);
         this.bus = bus;
         this.timeInputWidget = timeInputWidget;

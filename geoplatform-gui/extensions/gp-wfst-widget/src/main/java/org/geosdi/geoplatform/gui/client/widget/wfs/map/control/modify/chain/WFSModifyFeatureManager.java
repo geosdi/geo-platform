@@ -47,7 +47,7 @@ public class WFSModifyFeatureManager implements IWFSModifyFeatureManager {
     private WFSPointFeatureHandler wfsPointHandler;
 
     public WFSModifyFeatureManager(Vector theVector,
-            WFSPointFeatureHandler theWfsPointHandler) {
+                                   WFSPointFeatureHandler theWfsPointHandler) {
         this.vector = theVector;
         this.wfsPointHandler = theWfsPointHandler;
     }

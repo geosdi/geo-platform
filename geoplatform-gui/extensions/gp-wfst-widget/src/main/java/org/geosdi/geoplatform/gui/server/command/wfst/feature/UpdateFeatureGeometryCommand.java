@@ -67,7 +67,7 @@ public class UpdateFeatureGeometryCommand implements
 
     @Override
     public UpdateFeatureGeometryResponse execute(UpdateFeatureGeometryRequest request,
-            HttpServletRequest httpServletRequest) {
+                                                 HttpServletRequest httpServletRequest) {
         logger.debug("##################### Executing {} Command", this.getClass().getSimpleName());
         if ((request.getFid() == null) || (request.getFid().equals(""))) {
             throw new GeoPlatformException("Feature ID must not be null or Empty String");

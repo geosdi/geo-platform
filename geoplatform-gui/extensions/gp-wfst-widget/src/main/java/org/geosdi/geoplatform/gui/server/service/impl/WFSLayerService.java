@@ -90,7 +90,7 @@ public class WFSLayerService implements IWFSLayerService {
      */
     @Override
     public FeatureCollectionDTO getAllFeature(String serverUrl, String typeName, int maxFeatures,
-            Map<String, String> headerParams) throws GeoPlatformException {
+                                              Map<String, String> headerParams) throws GeoPlatformException {
         logger.info("#####################################EXECUTING : getAllFeature");
         try {
             return geoPlatformWFSClient.getAllFeatureDirect(serverUrl, typeName, maxFeatures, headerParams);
@@ -112,7 +112,7 @@ public class WFSLayerService implements IWFSLayerService {
      */
     @Override
     public boolean transactionUpdate(String serverURL, String typeName, String fid,
-            List<? extends AttributeDTO> attributes, Map<String, String> headerParams) throws GeoPlatformException {
+                                     List<? extends AttributeDTO> attributes, Map<String, String> headerParams) throws GeoPlatformException {
         try {
             return this.geoPlatformWFSClient.transactionUpdate(serverURL, typeName, fid, attributes, headerParams);
         } catch (Exception ex) {
@@ -151,7 +151,7 @@ public class WFSLayerService implements IWFSLayerService {
      */
     @Override
     public boolean transactionInsert(String serverURL, String typeName, String targetNamespace,
-            List<AttributeDTO> attributes, Map<String, String> headerParams) throws GeoPlatformException {
+                                     List<AttributeDTO> attributes, Map<String, String> headerParams) throws GeoPlatformException {
         try {
             return this.geoPlatformWFSClient.transactionInsert(serverURL, typeName, targetNamespace, attributes, headerParams);
         } catch (Exception ex) {
@@ -171,7 +171,7 @@ public class WFSLayerService implements IWFSLayerService {
      */
     @Override
     public FeatureCollectionDTO getFeaturesByQuery(String serverUrl, String typeName, int maxFeatures,
-            QueryDTO queryDTO, Map<String, String> headerParams) throws GeoPlatformException {
+                                                   QueryDTO queryDTO, Map<String, String> headerParams) throws GeoPlatformException {
         logger.info("#####################################EXECUTING : getFeaturesByQuery");
         try {
             return this.geoPlatformWFSClient.getFeaturesByQueryDirect(serverUrl, typeName, maxFeatures, queryDTO, headerParams);

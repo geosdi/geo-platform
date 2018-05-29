@@ -75,7 +75,7 @@ public class WFSUpdateGeometryExecutor extends WFSDispatcherExecutor implements
 
     @Override
     public void executeGeometryUpdate(final VectorFeature modifiedFeature,
-            String wktGeometry, final VectorFeature oldFeature) {
+                                      String wktGeometry, final VectorFeature oldFeature) {
         progressBar.show();
 
         setUpRequest(modifiedFeature, wktGeometry);
@@ -108,7 +108,7 @@ public class WFSUpdateGeometryExecutor extends WFSDispatcherExecutor implements
     }
 
     final void setUpRequest(VectorFeature modifiedFeature,
-            String wktGeometry) {
+                            String wktGeometry) {
         bus.fireEvent(loadingEvent);
 
         updateGeometryRequest.setFid(fidBinder.getFID());
@@ -137,7 +137,7 @@ public class WFSUpdateGeometryExecutor extends WFSDispatcherExecutor implements
     }
 
     final void manageUpdateGeometryCommandSuccess(Boolean result,
-            VectorFeature modifiedFeature, VectorFeature oldFeature) {
+                                                  VectorFeature modifiedFeature, VectorFeature oldFeature) {
         progressBar.hide();
         if (result) {
             fireEvents();

@@ -43,6 +43,6 @@ import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 public interface IWFSUpdateGeometryExecutor {
 
     void executeGeometryUpdate(final VectorFeature modifiedFeature,
-            String wktGeometry, final VectorFeature oldFeature);
+                               String wktGeometry, final VectorFeature oldFeature);
 
 }

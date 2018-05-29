@@ -57,7 +57,7 @@ public class WFSMultiPolygonFeatureHandler extends MultiPolygonEditorHandler {
 
     @Override
     protected void manageUpdatedFeature(VectorFeature modifiedFeature,
-            VectorFeature oldFeature) {
+                                        VectorFeature oldFeature) {
         Geometry geom = modifiedFeature.getGeometry().clone();
 //        String wktGeometry = modifyEditorControl.getWKTEditorConverter().convertGeometry(
 //                geom, new Projection(

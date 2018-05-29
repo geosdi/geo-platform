@@ -77,7 +77,7 @@ public class CasGetAllFeatureCommand implements
 
     @Override
     public GetAllFeatureResponse execute(CasGetAllFeatureRequest request,
-            HttpServletRequest httpServletRequest) {
+                                         HttpServletRequest httpServletRequest) {
         logger.debug("##################### Executing {} Command", this.getClass().getSimpleName());
         Assertion casAssertion = null;
         if (httpServletRequest != null) {

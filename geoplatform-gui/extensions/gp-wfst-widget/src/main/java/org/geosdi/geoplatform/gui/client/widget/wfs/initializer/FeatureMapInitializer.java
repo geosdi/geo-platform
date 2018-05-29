@@ -69,6 +69,7 @@ public class FeatureMapInitializer implements IFeatureMapInitializer {
     private static final ResetToolbarObserverEvent resetToolbarObserver = new ResetToolbarObserverEvent();
     private static final int WMS_Z_INDEX = 1000;
     private static final int VECTOR_LAYER_Z_INDEX = 1001;
+    private final GPEventBus bus;
     //
     @Inject
     private MapWidget mapWidget;
@@ -85,7 +86,6 @@ public class FeatureMapInitializer implements IFeatureMapInitializer {
     private Layer wms;
     private List<GPLayerBean> layers;
     private List<Layer> wmsLayers;
-    private final GPEventBus bus;
 
     /**
      * @param theBus

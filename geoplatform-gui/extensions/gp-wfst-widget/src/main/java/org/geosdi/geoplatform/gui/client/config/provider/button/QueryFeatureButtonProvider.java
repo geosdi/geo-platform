@@ -81,8 +81,8 @@ public class QueryFeatureButtonProvider implements Provider<Button> {
 
     @Inject
     public QueryFeatureButtonProvider(GPEventBus theBus, ILayerSchemaBinder theLayerSchemaBinder,
-            @MatchComboField SimpleComboBox matchComboField,
-            @FeatureAttributeConditionFieldList List attributeConditions) {
+                                      @MatchComboField SimpleComboBox matchComboField,
+                                      @FeatureAttributeConditionFieldList List attributeConditions) {
         this.bus = theBus;
         this.layerSchemaBinder = theLayerSchemaBinder;
         this.matchComboField = matchComboField;

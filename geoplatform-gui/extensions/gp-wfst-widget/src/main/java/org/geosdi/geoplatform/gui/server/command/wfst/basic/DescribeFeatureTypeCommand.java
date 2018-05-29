@@ -65,7 +65,7 @@ public class DescribeFeatureTypeCommand implements
 
     @Override
     public DescribeFeatureTypeResponse execute(DescribeFeatureTypeRequest request,
-            HttpServletRequest httpServletRequest) {
+                                               HttpServletRequest httpServletRequest) {
         logger.debug("##################### Executing {} Command", this.getClass().getSimpleName());
         String http_userid = httpServletRequest.getHeader("http_userid");
         Map<String, String> headerParams = new HashMap<>();

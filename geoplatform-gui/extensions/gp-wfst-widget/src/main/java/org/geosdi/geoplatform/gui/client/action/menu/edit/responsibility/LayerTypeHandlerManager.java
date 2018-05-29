@@ -46,7 +46,7 @@ public class LayerTypeHandlerManager {
     private LayerTypeHandler rasterType;
 
     public LayerTypeHandlerManager(LayerTypeHandler theDescribeFeature,
-            LayerTypeHandler theRasterType) {
+                                   LayerTypeHandler theRasterType) {
         this.describeFeature = theDescribeFeature;
         this.rasterType = theRasterType;
         setUpChainElements();

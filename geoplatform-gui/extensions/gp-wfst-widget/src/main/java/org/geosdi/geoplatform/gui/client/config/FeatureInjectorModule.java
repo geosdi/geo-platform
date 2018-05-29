@@ -53,7 +53,6 @@ import org.geosdi.geoplatform.gui.client.widget.wfs.initializer.IFeatureMapIniti
 import org.geosdi.geoplatform.gui.client.widget.wfs.layout.responsibility.FeatureAttributesLayoutHandler;
 import org.geosdi.geoplatform.gui.client.widget.wfs.layout.responsibility.FeatureSelectionLayoutHandler;
 import org.geosdi.geoplatform.gui.client.widget.wfs.tree.WFSLayerTreeWidget;
-import org.geosdi.geoplatform.gui.client.widget.wfs.tree.activator.GPWFSTreeMenuActivator;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBusImpl;
 
@@ -95,8 +94,6 @@ public class FeatureInjectorModule extends AbstractGinModule {
         bind(WFSFeatureGridBinding.class).asEagerSingleton();
         bind(WFSLayerTreeWidget.class).in(Singleton.class);
         bind(WFSZoomToLayerExtentAction.class).in(Singleton.class);
-        bind(GPWFSTreeMenuActivator.class).in(Singleton.class);
-
 
         requestStaticInjection(AttributeCustomFieldsMap.class);
     }

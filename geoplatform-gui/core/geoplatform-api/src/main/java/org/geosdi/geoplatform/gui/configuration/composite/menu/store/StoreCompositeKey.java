@@ -46,7 +46,7 @@ public abstract class StoreCompositeKey implements Serializable {
 
     private static final long serialVersionUID = -2401990359769249039L;
     //
-    protected final GPTreeMenuType treeMenuType;
+    protected GPTreeMenuType treeMenuType;
 
     public StoreCompositeKey(GPTreeMenuType theTreeMenuType) {
         this.treeMenuType = theTreeMenuType;

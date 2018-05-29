@@ -48,6 +48,13 @@ public class MultiSelectionCompositeKey extends StoreCompositeKey {
     private MultiSelectionElementType multiSelectionType;
 
     /**
+     * <p>Only for Serialization Purpose</p>
+     */
+    public MultiSelectionCompositeKey() {
+        this(null);
+    }
+
+    /**
      * @param theMultiSelectionType
      */
     public MultiSelectionCompositeKey(MultiSelectionElementType theMultiSelectionType) {

@@ -27,11 +27,6 @@
             <version>${project.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>javax.transaction</groupId>
-            <artifactId>jta</artifactId>
-        </dependency>
-
         <!-- =========================================================== -->
         <!-- ================ GEOPLATFORM C3P0 Support ================= -->
         <!-- =========================================================== -->

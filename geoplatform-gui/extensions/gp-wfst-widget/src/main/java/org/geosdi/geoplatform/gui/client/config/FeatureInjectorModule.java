@@ -69,6 +69,8 @@ public class FeatureInjectorModule extends AbstractGinModule {
     protected void configure() {
         bind(GPEventBus.class).to(GPEventBusImpl.class).in(Singleton.class);
         bind(FeatureWidget.class).in(Singleton.class);
+        bind(WFSAccordionWidget.class).in(Singleton.class);
+        bind(GeocodingWidget.class).in(Singleton.class);
         bind(FeatureAttributesWidget.class).in(Singleton.class);
         bind(ShowFeatureAttributesWidget.class).in(Singleton.class);
         bind(ShowFeaturesWidget.class).in(Singleton.class);

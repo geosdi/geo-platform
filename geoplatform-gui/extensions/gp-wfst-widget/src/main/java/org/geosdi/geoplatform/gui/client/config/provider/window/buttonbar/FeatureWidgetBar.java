@@ -34,12 +34,14 @@
  */
 package org.geosdi.geoplatform.gui.client.config.provider.window.buttonbar;
 
+import com.extjs.gxt.ui.client.widget.HorizontalPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.button.ButtonBar;
 import com.extjs.gxt.ui.client.widget.toolbar.SeparatorToolItem;
 import org.geosdi.geoplatform.gui.client.config.annotation.buttonbar.WFSGotoXYButton;
 import org.geosdi.geoplatform.gui.client.config.annotation.buttonbar.WFSRedoButton;
 import org.geosdi.geoplatform.gui.client.config.annotation.buttonbar.WFSUndoButton;
+import org.geosdi.geoplatform.gui.client.config.annotation.geocoding.WFSGeocodingTextField;
 
 import javax.inject.Inject;
 import javax.inject.Provider;

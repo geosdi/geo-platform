@@ -74,7 +74,6 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel implements I
     private final SimpleComboBox<String> matchComboField;
     private final Button selectFeaturesButton;
     private final Button queryFeatureButton;
-    private final FeatureMapWidthEvent increaseWidthEvent = new IncreaseWidthEvent();
     //
     @Inject
     private ILayerSchemaBinder layerSchemaBinder;
@@ -122,18 +121,12 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel implements I
     }
 
     @Override
-    public void collapse() {
-        this.increaseWidthEvent.setWidth(super.getWidth());
-        this.bus.fireEvent(increaseWidthEvent);
-        super.collapse();
-    }
-
-    @Override
     public void setPanelProperties() {
         super.setId(ID);
         super.head.setText("Feature Selection");
         super.setBorders(false);
         super.setScrollMode(Style.Scroll.AUTO);
+        super.setAnimCollapse(Boolean.FALSE);
     }
 
     @Override

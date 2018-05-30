@@ -35,6 +35,7 @@
 package org.geosdi.geoplatform.gui.client.config;
 
 import com.extjs.gxt.ui.client.widget.button.ButtonBar;
+import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.SimpleComboBox;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
@@ -50,11 +51,15 @@ import org.geosdi.geoplatform.gui.client.command.wfst.feature.InsertFeatureReque
 import org.geosdi.geoplatform.gui.client.command.wfst.feature.UpdateFeatureGeometryRequest;
 import org.geosdi.geoplatform.gui.client.config.annotation.FeatureAttributeConditionFieldList;
 import org.geosdi.geoplatform.gui.client.config.annotation.MatchComboField;
+import org.geosdi.geoplatform.gui.client.config.annotation.geocoding.WFSGeocodingFieldSet;
+import org.geosdi.geoplatform.gui.client.config.annotation.geocoding.WFSGeocodingTextField;
 import org.geosdi.geoplatform.gui.client.config.annotation.tree.WFSLayerTree;
 import org.geosdi.geoplatform.gui.client.config.annotation.tree.WFSLayerTreeStore;
 import org.geosdi.geoplatform.gui.client.config.annotation.tree.WFSTreeLeafMenu;
 import org.geosdi.geoplatform.gui.client.config.provider.*;
+import org.geosdi.geoplatform.gui.client.config.provider.fieldset.GeocodingFieldsetProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.layout.BorderLayoutProvider;
+import org.geosdi.geoplatform.gui.client.config.provider.text.GeocodingTextFieldProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.tree.LayerTreePanelProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.tree.LayerTreeStoreProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.tree.WFSRootLayerTreeNodeProvider;
@@ -69,6 +74,7 @@ import org.geosdi.geoplatform.gui.client.widget.wfs.dispatcher.GPDescribeFeature
 import org.geosdi.geoplatform.gui.client.widget.wfs.dispatcher.WFSDispatcherProgressBar;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.listener.FeatureSelectListener;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.listener.FeatureUnSelectListener;
+import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextField;
 import org.gwtopenmaps.openlayers.client.LonLat;
 import org.gwtopenmaps.openlayers.client.MapWidget;
 import org.gwtopenmaps.openlayers.client.Style;
@@ -135,6 +141,8 @@ public class FeatureInjectorProvider extends AbstractGinModule {
                 toProvider(MatchComboFieldProvider.class).in(Singleton.class);
 
         bind(Menu.class).annotatedWith(WFSTreeLeafMenu.class).toProvider(WFSTreeLeafMenuProvider.class).in(Singleton.class);
+        bind(GPSecureStringTextField.class).annotatedWith(WFSGeocodingTextField.class).toProvider(GeocodingTextFieldProvider.class).in(Singleton.class);
+        bind(FieldSet.class).annotatedWith(WFSGeocodingFieldSet.class).toProvider(GeocodingFieldsetProvider.class).in(Singleton.class);
 
 
     }

@@ -125,4 +125,10 @@ public interface WFSTWidgetConstants extends ConstantsWithLookup {
 
     @DefaultStringValue("Get all Features")
     String getAllFeatures();
+
+    @DefaultStringValue("Insert the address")
+    String searchAddressLabel();
+
+    @DefaultStringValue("Search")
+    String searchLabel();
 }

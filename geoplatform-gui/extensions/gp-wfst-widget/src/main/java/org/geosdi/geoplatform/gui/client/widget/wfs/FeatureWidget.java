@@ -83,7 +83,7 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget, 
     private final ScaleVisibleEvent scaleVisibleEvent = new ScaleVisibleEvent();
     private final AfterStrategyEditWFSActionEvent afterStrategyEditWFSActionEvent = new AfterStrategyEditWFSActionEvent();
     @Inject
-    private FeatureSelectionWidget selectionWidget;
+    private WFSAccordionWidget accordionWidget;
     @Inject
     private LayerSelectionWidget layerSelectionWidget;
     @Inject
@@ -169,7 +169,7 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget, 
         this.scaleVisibleEvent.setActivate(FALSE);
         MapHandlerManager.fireEvent(scaleVisibleEvent);
         this.statusBar.setBusy("Loading Layer as WFS");
-        this.selectionWidget.reconfigureAttributes();
+        this.accordionWidget.reconfigureAttributes();
         this.mapWidget.bindLayerSchema();
         this.bus.fireEvent(this.afterStrategyEditWFSActionEvent);
         this.attributesWidget.reconfigureEditorGrid();
@@ -204,7 +204,7 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget, 
         BorderLayoutData layoutData = new BorderLayoutData(LayoutRegion.EAST, 300);
         layoutData.setMargins(new Margins(5, 5, 5, 5));
         layoutData.setCollapsible(true);
-        super.add(this.selectionWidget, layoutData);
+        super.add(this.accordionWidget, layoutData);
     }
 
     private void addLayerSelectionWidget() {

@@ -2183,4 +2183,11 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     String getGSUserByAuthkey(@WebParam(name = "authkey") String authkey);
     // </editor-fold>
 
+    @Get
+    @GET
+    @WebResult(name = "address")
+    @Path(value = GPServiceRSPathConfig.SEARCH_ADDRESS_PATH)
+    List<AddressDTO> gpSearchAddress(
+            @WebParam(name = "address")@QueryParam(value = "address") String address) throws Exception;
+
 }

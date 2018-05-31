@@ -123,6 +123,16 @@
             <artifactId>geoplatform-swagger-support</artifactId>
             <version>${project.version}</version>
         </dependency>
+
+        <!-- =========================================================== -->
+        <!-- =============== GP NOMINATIM SERVICE SUPPORT ============== -->
+        <!-- =========================================================== -->
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>gp-nominatim-support</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>

@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.services;
 
+import com.google.common.base.Preconditions;
+import fr.dudie.nominatim.model.Address;
 import org.geosdi.geoplatform.core.dao.GSAccountDAO;
 import org.geosdi.geoplatform.core.dao.GSResourceDAO;
 import org.geosdi.geoplatform.core.delegate.api.account.AccountDelegate;
@@ -51,6 +53,7 @@ import org.geosdi.geoplatform.exception.AccountLoginFault;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.shared.GPLayerType;
+import org.geosdi.geoplatform.nominatim.spring.connector.IGPNominatimConnector;
 import org.geosdi.geoplatform.request.*;
 import org.geosdi.geoplatform.request.folder.InsertFolderRequest;
 import org.geosdi.geoplatform.request.folder.WSAddFolderAndTreeModificationsRequest;
@@ -83,6 +86,9 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import javax.jws.WebService;
 import java.util.List;
+
+import static java.util.Locale.forLanguageTag;
+import static java.util.stream.Collectors.toList;
 
 /**
  * Web Service implementation of {@link GeoPlatformService} endpoint.
@@ -120,6 +126,8 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     private ViewportDelegate gpViewportDelegate;
     @Resource(name = "gpSchedulerDelegate")
     private SchedulerDelegate gpSchedulerDelegate;
+    @Resource(name = "gpNominatimConnector")
+    private IGPNominatimConnector nominatimConnector;
 
     // <editor-fold defaultstate="collapsed" desc="Organization">
     // =========================================================================
@@ -1002,5 +1010,20 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     public String getGSUserByAuthkey(String authkey) {
         return this.gsAccountDAO.findGSUserNameByAuthkey(authkey).getGsuser();
     }
+
     // </editor-fold>
+
+    @Override
+    public List<AddressDTO> gpSearchAddress(String address) throws Exception{
+        if (address == null || address.isEmpty()) {
+            throw new ResourceNotFoundFault("The parameter Address must not be null or empty string.");
+        }
+//        Preconditions.checkArgument(address != null && !address.isEmpty(),
+//                "The parameter Address must not be null or empty string.");
+        List<Address> nominatimResults = this.nominatimConnector.searchAddresses(address);
+        return  (nominatimResults.stream()
+                .filter(value -> value != null)
+                .map(value -> new AddressDTO(value.getDisplayName(), value.getLongitude(), value.getLatitude()))
+                .collect(toList()));
+    }
 }

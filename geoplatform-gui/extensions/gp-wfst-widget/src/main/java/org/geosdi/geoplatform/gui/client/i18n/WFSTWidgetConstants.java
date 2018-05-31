@@ -131,4 +131,7 @@ public interface WFSTWidgetConstants extends ConstantsWithLookup {
 
     @DefaultStringValue("Search")
     String searchLabel();
+
+    @DefaultStringValue("Location")
+    String locationLabel();
 }

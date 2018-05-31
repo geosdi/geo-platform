@@ -46,12 +46,8 @@ import javax.ws.rs.core.MediaType;
 import java.util.List;
 
 /**
- * Public interface to define the service operations mapped via REST and SOAP
- * using {@link http://cxf.apache.org/} Framework.
- *
- * @author Giuseppe La Scaleia - CNR IMAA - geoSDI
- * @author Francesco Izzi - CNR IMAA - geoSDI
- * @author Nazzareno Sileno - CNR IMAA - geoSDI
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
  */
 @CrossOriginResourceSharing(
         allowOrigins = {

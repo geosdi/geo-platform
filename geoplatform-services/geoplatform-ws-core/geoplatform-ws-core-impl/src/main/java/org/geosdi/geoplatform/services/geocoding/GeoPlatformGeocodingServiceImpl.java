@@ -48,11 +48,8 @@ import java.util.List;
 import static java.util.stream.Collectors.toList;
 
 /**
- * Web Service implementation of {@link GeoPlatformService} endpoint.
- *
- * @author Giuseppe La Scaleia - CNR IMAA - geoSDI
- * @author Francesco Izzi - CNR IMAA - geoSDI
- * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
  */
 @Service(value = "geoPlatformGeocodingService")
 public class GeoPlatformGeocodingServiceImpl implements GeoPlatformGeocodingService {

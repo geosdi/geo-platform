@@ -17,5 +17,5 @@
     <context:annotation-config />
 
     <bean id="geoPlatformService" class="org.geosdi.geoplatform.services.GeoPlatformServiceImpl" />
-    
+
 </beans>

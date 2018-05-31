@@ -22,7 +22,9 @@
     <!-- ====================================================================-->
 
     <context:component-scan base-package="org.geosdi.geoplatform.configurator.cxf.server, 
-                                          org.geosdi.geoplatform.services.rs.config"/>
+                                          org.geosdi.geoplatform.services.rs.config,
+                                          org.geosdi.geoplatform.services.geocoding,
+                                          org.geosdi.geoplatform.nominatim.spring"/>
 
     <!-- Load CXF modules from cxf.jar -->
     <import resource="classpath:META-INF/cxf/cxf.xml"/>
@@ -56,5 +58,5 @@
             <ref bean="serverSecurityOutInterceptorBean"/>
         </jaxws:outInterceptors>
     </jaxws:endpoint>
-    
+
 </beans>

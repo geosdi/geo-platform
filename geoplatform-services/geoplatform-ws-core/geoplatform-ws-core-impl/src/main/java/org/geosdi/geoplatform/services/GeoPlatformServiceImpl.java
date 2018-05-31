@@ -1013,17 +1013,17 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
 
     // </editor-fold>
 
-    @Override
-    public List<AddressDTO> gpSearchAddress(String address) throws Exception{
-        if (address == null || address.isEmpty()) {
-            throw new ResourceNotFoundFault("The parameter Address must not be null or empty string.");
-        }
-//        Preconditions.checkArgument(address != null && !address.isEmpty(),
-//                "The parameter Address must not be null or empty string.");
-        List<Address> nominatimResults = this.nominatimConnector.searchAddresses(address);
-        return  (nominatimResults.stream()
-                .filter(value -> value != null)
-                .map(value -> new AddressDTO(value.getDisplayName(), value.getLongitude(), value.getLatitude()))
-                .collect(toList()));
-    }
+//    @Override
+//    public List<AddressDTO> gpSearchAddress(String address) throws Exception{
+//        if (address == null || address.isEmpty()) {
+//            throw new ResourceNotFoundFault("The parameter Address must not be null or empty string.");
+//        }
+////        Preconditions.checkArgument(address != null && !address.isEmpty(),
+////                "The parameter Address must not be null or empty string.");
+//        List<Address> nominatimResults = this.nominatimConnector.searchAddresses(address);
+//        return  (nominatimResults.stream()
+//                .filter(value -> value != null)
+//                .map(value -> new AddressDTO(value.getDisplayName(), value.getLongitude(), value.getLatitude()))
+//                .collect(toList()));
+//    }
 }

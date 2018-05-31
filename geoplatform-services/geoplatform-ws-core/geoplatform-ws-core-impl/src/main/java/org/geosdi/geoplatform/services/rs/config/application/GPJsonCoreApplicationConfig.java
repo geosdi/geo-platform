@@ -60,4 +60,5 @@ class GPJsonCoreApplicationConfig {
     final class GPJsonCoreApplication extends Application {
     }
 
+
 }

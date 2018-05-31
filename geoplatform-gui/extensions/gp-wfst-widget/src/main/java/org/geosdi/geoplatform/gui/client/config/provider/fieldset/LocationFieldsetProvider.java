@@ -32,62 +32,35 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.client.widget.wfs;
+package org.geosdi.geoplatform.gui.client.config.provider.fieldset;
 
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
-import com.extjs.gxt.ui.client.widget.form.FormPanel;
-import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
-import org.geosdi.geoplatform.gui.client.config.annotation.geocoding.WFSGeocodingFieldSet;
-import org.geosdi.geoplatform.gui.client.config.annotation.geocoding.WFSGeocodingFormPanel;
-import org.geosdi.geoplatform.gui.client.config.annotation.geocoding.WFSGeocodingTextField;
-import org.geosdi.geoplatform.gui.client.config.annotation.geocoding.WFSLocationFieldSet;
-import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
-import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextField;
+import com.extjs.gxt.ui.client.widget.layout.FormLayout;
+import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetConstants;
 
 import javax.inject.Inject;
-
-import static java.lang.Boolean.TRUE;
+import javax.inject.Provider;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class GeocodingWidget extends GeoPlatformContentPanel{
+public class LocationFieldsetProvider implements Provider<FieldSet> {
+
+    private WFSTWidgetConstants wfstWidgetConstants;
 
     @Inject
-    @WFSGeocodingTextField
-    private GPSecureStringTextField geocodingField;
-    @Inject
-    @WFSGeocodingFieldSet
-    private FieldSet searchFieldSet;
-    @Inject
-    @WFSLocationFieldSet
-    private FieldSet locationFieldSet;
-    @Inject
-    @WFSGeocodingFormPanel
-    private FormPanel formPanel;
-
-    @Inject
-    public GeocodingWidget() {
-        super(TRUE);
+    public LocationFieldsetProvider(WFSTWidgetConstants wfstWidgetConstants) {
+        this.wfstWidgetConstants = wfstWidgetConstants;
     }
 
     @Override
-    public void addComponent() {
-        this.formPanel.add(this.searchFieldSet);
-        this.formPanel.add(this.locationFieldSet);
-        this.searchFieldSet.add(this.geocodingField);
-        super.add(this.formPanel);
-    }
-
-    @Override
-    public void initSize() {
-    }
-
-    @Override
-    public void setPanelProperties() {
-        super.head.setText("Geocoding");
-        super.setAnimCollapse(Boolean.FALSE);
+    public FieldSet get() {
+        FieldSet locations = new FieldSet();
+        locations.setHeadingHtml(
+                this.wfstWidgetConstants.locationLabel());
+        locations.setCollapsible(true);
+        return locations;
     }
 
 }

@@ -36,6 +36,7 @@ package org.geosdi.geoplatform.gui.client.config;
 
 import com.extjs.gxt.ui.client.widget.button.ButtonBar;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
+import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.SimpleComboBox;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
@@ -52,12 +53,16 @@ import org.geosdi.geoplatform.gui.client.command.wfst.feature.UpdateFeatureGeome
 import org.geosdi.geoplatform.gui.client.config.annotation.FeatureAttributeConditionFieldList;
 import org.geosdi.geoplatform.gui.client.config.annotation.MatchComboField;
 import org.geosdi.geoplatform.gui.client.config.annotation.geocoding.WFSGeocodingFieldSet;
+import org.geosdi.geoplatform.gui.client.config.annotation.geocoding.WFSGeocodingFormPanel;
 import org.geosdi.geoplatform.gui.client.config.annotation.geocoding.WFSGeocodingTextField;
+import org.geosdi.geoplatform.gui.client.config.annotation.geocoding.WFSLocationFieldSet;
 import org.geosdi.geoplatform.gui.client.config.annotation.tree.WFSLayerTree;
 import org.geosdi.geoplatform.gui.client.config.annotation.tree.WFSLayerTreeStore;
 import org.geosdi.geoplatform.gui.client.config.annotation.tree.WFSTreeLeafMenu;
 import org.geosdi.geoplatform.gui.client.config.provider.*;
 import org.geosdi.geoplatform.gui.client.config.provider.fieldset.GeocodingFieldsetProvider;
+import org.geosdi.geoplatform.gui.client.config.provider.fieldset.GeocodingFormPanelProvider;
+import org.geosdi.geoplatform.gui.client.config.provider.fieldset.LocationFieldsetProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.layout.BorderLayoutProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.text.GeocodingTextFieldProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.tree.LayerTreePanelProvider;
@@ -143,6 +148,8 @@ public class FeatureInjectorProvider extends AbstractGinModule {
         bind(Menu.class).annotatedWith(WFSTreeLeafMenu.class).toProvider(WFSTreeLeafMenuProvider.class).in(Singleton.class);
         bind(GPSecureStringTextField.class).annotatedWith(WFSGeocodingTextField.class).toProvider(GeocodingTextFieldProvider.class).in(Singleton.class);
         bind(FieldSet.class).annotatedWith(WFSGeocodingFieldSet.class).toProvider(GeocodingFieldsetProvider.class).in(Singleton.class);
+        bind(FormPanel.class).annotatedWith(WFSGeocodingFormPanel.class).toProvider(GeocodingFormPanelProvider.class).in(Singleton.class);
+        bind(FieldSet.class).annotatedWith(WFSLocationFieldSet.class).toProvider(LocationFieldsetProvider.class).in(Singleton.class);
 
 
     }

@@ -34,6 +34,10 @@
  */
 package org.geosdi.geoplatform.gui.client.config.provider.text;
 
+import com.extjs.gxt.ui.client.event.ComponentEvent;
+import com.extjs.gxt.ui.client.event.KeyListener;
+import com.google.gwt.event.dom.client.KeyCodes;
+import org.geosdi.geoplatform.gui.client.delegate.IWFSGeocodingDelegate;
 import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetConstants;
 import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextField;
 
@@ -46,18 +50,48 @@ import javax.inject.Provider;
  */
 public class GeocodingTextFieldProvider implements Provider<GPSecureStringTextField> {
 
+    private final IWFSGeocodingDelegate geocodingDelegate;
     private WFSTWidgetConstants wfstWidgetConstants;
 
     @Inject
-    public GeocodingTextFieldProvider(WFSTWidgetConstants wfstWidgetConstants) {
+    public GeocodingTextFieldProvider(WFSTWidgetConstants wfstWidgetConstants,
+                                      IWFSGeocodingDelegate theGeocodingDelegate) {
         this.wfstWidgetConstants = wfstWidgetConstants;
+        this.geocodingDelegate = theGeocodingDelegate;
     }
 
     @Override
     public GPSecureStringTextField get() {
-        GPSecureStringTextField geocoding = new GPSecureStringTextField();
+        final GPSecureStringTextField geocoding = new GPSecureStringTextField();
         geocoding.setFieldLabel("Find");
         geocoding.setEmptyText(this.wfstWidgetConstants.searchAddressLabel());
+
+        geocoding.addKeyListener(new KeyListener() {
+
+            @Override
+            public void componentKeyUp(ComponentEvent event) {
+                if (((event.getKeyCode() == KeyCodes.KEY_BACKSPACE)
+                        || (event.getKeyCode() == KeyCodes.KEY_DELETE))
+                        && (geocoding.getValue() == null)) {
+//                    removeMarkersOnMap();
+//                    cleanUpTheStore();
+                }
+            }
+
+            @Override
+            public void componentKeyPress(ComponentEvent event) {
+                if ((event.getKeyCode() == KeyCodes.KEY_ENTER)
+                        && (!geocoding.getValue().equals(""))) {
+                    geocodingDelegate.searchAddress(geocoding.getValue());
+//                    ComboBox<GPGeocodingServiceBean> comboBox = (ComboBox<GPGeocodingServiceBean>) searchFieldSet.getItemByItemId(
+//                            "geocodingServiceSelector");
+//                    GPGeocodingServiceBean selectedBean = comboBox.getValue();
+//                    String selectedGeocodingService = selectedBean.getGeocodingService();
+//                    operation.onBeginGeocodingSearch(search.getValue());
+                }
+            }
+
+        });
         return geocoding;
     }
 

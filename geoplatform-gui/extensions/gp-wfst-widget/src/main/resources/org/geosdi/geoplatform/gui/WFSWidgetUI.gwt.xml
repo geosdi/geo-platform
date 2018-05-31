@@ -5,6 +5,7 @@
     <inherits name="com.google.gwt.inject.Inject"/>
     <inherits name="org.geosdi.geoplatform.connector.wfs.WFSSharedUI"/>
     <inherits name="org.geosdi.geoplatform.gui.GPCASProperties"/>
+    <inherits name="org.fusesource.restygwt.RestyGWT"/>
 
     <source path="client"/>
     <!-- =============================== -->

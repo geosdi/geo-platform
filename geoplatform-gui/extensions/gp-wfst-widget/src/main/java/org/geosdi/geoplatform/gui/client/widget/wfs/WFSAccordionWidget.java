@@ -1,7 +1,6 @@
 package org.geosdi.geoplatform.gui.client.widget.wfs;
 
 import com.extjs.gxt.ui.client.widget.layout.AccordionLayout;
-import com.google.gwt.core.client.GWT;
 import org.geosdi.geoplatform.gui.client.puregwt.map.event.FeatureMapWidthEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.map.event.IncreaseWidthEvent;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
@@ -41,7 +40,7 @@ public class WFSAccordionWidget extends GeoPlatformContentPanel {
         super.collapse();
     }
 
-    public void reconfigureAttributes(){
+    public void reconfigureAttributes() {
         this.selectionWidget.reconfigureAttributes();
     }
 

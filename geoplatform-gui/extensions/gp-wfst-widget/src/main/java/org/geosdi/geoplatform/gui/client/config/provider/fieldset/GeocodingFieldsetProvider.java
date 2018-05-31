@@ -34,11 +34,9 @@
  */
 package org.geosdi.geoplatform.gui.client.config.provider.fieldset;
 
-import com.extjs.gxt.ui.client.widget.HorizontalPanel;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetConstants;
-import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextField;
 
 import javax.inject.Inject;
 import javax.inject.Provider;

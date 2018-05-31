@@ -48,8 +48,6 @@ import org.geosdi.geoplatform.gui.client.config.annotation.QueryFeatureButton;
 import org.geosdi.geoplatform.gui.client.config.annotation.SelectFeaturesButton;
 import org.geosdi.geoplatform.gui.client.model.binder.ILayerSchemaBinder;
 import org.geosdi.geoplatform.gui.client.model.wfs.AttributeDetail;
-import org.geosdi.geoplatform.gui.client.puregwt.map.event.FeatureMapWidthEvent;
-import org.geosdi.geoplatform.gui.client.puregwt.map.event.IncreaseWidthEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureMaskAttributesEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.FeatureSelectionWidgetHandler;
 import org.geosdi.geoplatform.gui.client.util.FeatureConverter;

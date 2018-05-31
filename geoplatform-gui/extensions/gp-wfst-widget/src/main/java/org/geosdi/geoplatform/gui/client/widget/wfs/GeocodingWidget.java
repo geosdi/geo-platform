@@ -36,7 +36,6 @@ package org.geosdi.geoplatform.gui.client.widget.wfs;
 
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
-import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import org.geosdi.geoplatform.gui.client.config.annotation.geocoding.WFSGeocodingFieldSet;
 import org.geosdi.geoplatform.gui.client.config.annotation.geocoding.WFSGeocodingFormPanel;
 import org.geosdi.geoplatform.gui.client.config.annotation.geocoding.WFSGeocodingTextField;
@@ -52,7 +51,7 @@ import static java.lang.Boolean.TRUE;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class GeocodingWidget extends GeoPlatformContentPanel{
+public class GeocodingWidget extends GeoPlatformContentPanel {
 
     @Inject
     @WFSGeocodingTextField

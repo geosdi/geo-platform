@@ -50,18 +50,22 @@ import java.util.List;
  * @email vito.salvia@gmail.com
  */
 @CrossOriginResourceSharing(
-        allowOrigins = {
-                "http://127.0.0.1:9001"
-        },
+        allowAllOrigins = true,
+//        allowOrigins = {
+//                "http://172.20.10.12:9001",
+//                "http://150.145.133.87:9001"
+//        },
         allowCredentials = true,
         maxAge = 1,
         allowHeaders = {
-                "X-custom-1", "X-custom-2"
+                "authorization", "content-type", "X-HTTP-Method-Override"
         },
         exposeHeaders = {
-                "X-custom-3", "X-custom-4"
+                "authorization", "content-type", "X-HTTP-Method-Override"
         }
 )
+
+
 @Path(value = GPServiceRSPathConfig.DEFAULT_GEOCODING_RS_SERVICE_PATH)
 @Api(value = GPServiceRSPathConfig.GP_GEOCODING_SERVICE_RS_PATH,
         description = "GeoPlatform Geocoding REST Service Core")

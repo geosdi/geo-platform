@@ -327,6 +327,13 @@ public final class GPServiceRSPathConfig {
     public static final String SAVE_SERVER_PATH = SERVERS_PATH + "saveServer";
 
     /**
+     * GEOCODING
+     */
+    private static final String GEOCODING_PATH = "/geocoding/";
+    public static final String SEARCH_ADDRESS_PATH = GEOCODING_PATH
+            + "searchAddress";
+
+    /**
      * WMS CAPABILITIES PATH
      */
     public static final String WMS_SERVICE_RS_PATH = "/jsonWMS";

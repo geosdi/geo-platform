@@ -61,7 +61,7 @@ import org.geosdi.geoplatform.gui.client.config.annotation.tree.WFSLayerTreeStor
 import org.geosdi.geoplatform.gui.client.config.annotation.tree.WFSTreeLeafMenu;
 import org.geosdi.geoplatform.gui.client.config.provider.*;
 import org.geosdi.geoplatform.gui.client.config.provider.fieldset.GeocodingFieldsetProvider;
-import org.geosdi.geoplatform.gui.client.config.provider.fieldset.GeocodingFormPanelProvider;
+import org.geosdi.geoplatform.gui.client.config.provider.form.GeocodingFormPanelProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.fieldset.LocationFieldsetProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.layout.BorderLayoutProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.text.GeocodingTextFieldProvider;

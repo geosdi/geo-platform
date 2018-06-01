@@ -32,27 +32,30 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.client.config.provider.fieldset;
+package org.geosdi.geoplatform.gui.client.puregwt.geocoding.event;
 
-import com.extjs.gxt.ui.client.widget.form.FormPanel;
-import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
-
-import javax.inject.Provider;
+import com.google.gwt.event.shared.GwtEvent;
+import org.geosdi.geoplatform.gui.client.puregwt.geocoding.IGeocodingGridHandler;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class GeocodingFormPanelProvider implements Provider<FormPanel> {
+public class UpdateGeocodingGridHeightEvent extends GwtEvent<IGeocodingGridHandler> {
 
-    @Override
-    public FormPanel get() {
-        FormPanel formPanel = new FormPanel();
-        formPanel.setAutoHeight(Boolean.TRUE);
-        formPanel.setHeaderVisible(false);
-        formPanel.setFrame(true);
-        formPanel.setLayout(new FlowLayout());
-        return formPanel;
+    private final int height;
+
+    public UpdateGeocodingGridHeightEvent(int height) {
+        this.height = height;
     }
 
+    @Override
+    public Type<IGeocodingGridHandler> getAssociatedType() {
+        return IGeocodingGridHandler.TYPE;
+    }
+
+    @Override
+    protected void dispatch(IGeocodingGridHandler handler) {
+        handler.updateHeight(this.height);
+    }
 }

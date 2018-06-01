@@ -3,10 +3,16 @@ package org.geosdi.geoplatform.gui.client.delegate;
 import com.google.gwt.core.client.GWT;
 import org.fusesource.restygwt.client.Method;
 import org.fusesource.restygwt.client.MethodCallback;
+import org.geosdi.geoplatform.gui.client.model.geocoding.WFSAddressDTO;
+import org.geosdi.geoplatform.gui.client.puregwt.geocoding.GeocodingHandlerManager;
+import org.geosdi.geoplatform.gui.client.puregwt.geocoding.event.ClearGeocodingGridEvent;
+import org.geosdi.geoplatform.gui.client.puregwt.geocoding.event.PopulateGeocodingGridEvent;
+import org.geosdi.geoplatform.gui.client.puregwt.geocoding.event.UnMaskGeocodingGridEvent;
 import org.geosdi.geoplatform.gui.client.service.WFSGeocodingService;
 import org.geosdi.geoplatform.gui.client.service.response.WFSAddressStore;
-
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import javax.inject.Singleton;
+import java.util.List;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -15,6 +21,8 @@ import javax.inject.Singleton;
 @Singleton
 public class WFSGeocodingDelegate implements IWFSGeocodingDelegate {
 
+    private static final UnMaskGeocodingGridEvent UN_MASK_GEOCODING_GRID_EVENT = new UnMaskGeocodingGridEvent();
+    private static final ClearGeocodingGridEvent CLEAR_GEOCODING_GRID_EVENT = new ClearGeocodingGridEvent();
     static WFSGeocodingService wfsGeocodingService = GWT.create(WFSGeocodingService.class);
 
     @Override
@@ -22,12 +30,14 @@ public class WFSGeocodingDelegate implements IWFSGeocodingDelegate {
         wfsGeocodingService.searchAddress(address, new MethodCallback<WFSAddressStore>() {
             @Override
             public void onFailure(Method method, Throwable throwable) {
-                GWT.log("@@@@@@@@@ERROR: " + method.getResponse().getText());
+                GeocodingHandlerManager.fireEvent(CLEAR_GEOCODING_GRID_EVENT);
+                GeocodingHandlerManager.fireEvent(UN_MASK_GEOCODING_GRID_EVENT);
+                GeoPlatformMessage.errorMessage("Error",method.getResponse().getText());
             }
 
             @Override
             public void onSuccess(Method method, WFSAddressStore wfsAddressStore) {
-                GWT.log("@@@@@@SUCCESS: " + wfsAddressStore);
+                GeocodingHandlerManager.fireEvent(new PopulateGeocodingGridEvent(wfsAddressStore));
             }
         });
     }

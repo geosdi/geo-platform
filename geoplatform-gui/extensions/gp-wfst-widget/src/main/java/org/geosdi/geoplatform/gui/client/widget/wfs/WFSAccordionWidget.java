@@ -4,6 +4,7 @@ import com.extjs.gxt.ui.client.widget.layout.AccordionLayout;
 import org.geosdi.geoplatform.gui.client.puregwt.map.event.FeatureMapWidthEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.map.event.IncreaseWidthEvent;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
+import org.geosdi.geoplatform.gui.client.widget.wfs.geocoding.WFSGeocodingWidget;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
 import javax.inject.Inject;
@@ -19,7 +20,7 @@ public class WFSAccordionWidget extends GeoPlatformContentPanel {
     @Inject
     private FeatureSelectionWidget selectionWidget;
     @Inject
-    private GeocodingWidget geocodingWidget;
+    private WFSGeocodingWidget WFSGeocodingWidget;
     @Inject
     private GPEventBus bus;
 
@@ -29,7 +30,7 @@ public class WFSAccordionWidget extends GeoPlatformContentPanel {
 
     @Override
     public void addComponent() {
-        this.add(this.geocodingWidget);
+        this.add(this.WFSGeocodingWidget);
         this.add(this.selectionWidget);
     }
 

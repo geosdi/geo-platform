@@ -39,7 +39,10 @@ import com.extjs.gxt.ui.client.event.KeyListener;
 import com.google.gwt.event.dom.client.KeyCodes;
 import org.geosdi.geoplatform.gui.client.delegate.IWFSGeocodingDelegate;
 import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetConstants;
+import org.geosdi.geoplatform.gui.client.puregwt.geocoding.GeocodingHandlerManager;
+import org.geosdi.geoplatform.gui.client.puregwt.geocoding.event.MaskGeocodingGridEvent;
 import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextField;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
@@ -50,14 +53,15 @@ import javax.inject.Provider;
  */
 public class GeocodingTextFieldProvider implements Provider<GPSecureStringTextField> {
 
+    private static final MaskGeocodingGridEvent MASK_GEOCODING_GRID_EVENT = new MaskGeocodingGridEvent();
+
     private final IWFSGeocodingDelegate geocodingDelegate;
-    private WFSTWidgetConstants wfstWidgetConstants;
+    private final WFSTWidgetConstants wfstWidgetConstants;
 
     @Inject
-    public GeocodingTextFieldProvider(WFSTWidgetConstants wfstWidgetConstants,
-                                      IWFSGeocodingDelegate theGeocodingDelegate) {
+    public GeocodingTextFieldProvider(IWFSGeocodingDelegate geocodingDelegate, WFSTWidgetConstants wfstWidgetConstants) {
+        this.geocodingDelegate = geocodingDelegate;
         this.wfstWidgetConstants = wfstWidgetConstants;
-        this.geocodingDelegate = theGeocodingDelegate;
     }
 
     @Override
@@ -82,6 +86,7 @@ public class GeocodingTextFieldProvider implements Provider<GPSecureStringTextFi
             public void componentKeyPress(ComponentEvent event) {
                 if ((event.getKeyCode() == KeyCodes.KEY_ENTER)
                         && (!geocoding.getValue().equals(""))) {
+                    GeocodingHandlerManager.fireEvent(MASK_GEOCODING_GRID_EVENT);
                     geocodingDelegate.searchAddress(geocoding.getValue());
 //                    ComboBox<GPGeocodingServiceBean> comboBox = (ComboBox<GPGeocodingServiceBean>) searchFieldSet.getItemByItemId(
 //                            "geocodingServiceSelector");

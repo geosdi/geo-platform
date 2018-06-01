@@ -50,6 +50,8 @@ import org.geosdi.geoplatform.gui.client.widget.wfs.*;
 import org.geosdi.geoplatform.gui.client.widget.wfs.binding.grid.WFSFeatureGridBinding;
 import org.geosdi.geoplatform.gui.client.widget.wfs.builder.AttributeCustomFieldsMap;
 import org.geosdi.geoplatform.gui.client.widget.wfs.builder.feature.FeatureAttributesWindowBuilder;
+import org.geosdi.geoplatform.gui.client.widget.wfs.geocoding.WFSGeocodingGridWidget;
+import org.geosdi.geoplatform.gui.client.widget.wfs.geocoding.WFSGeocodingWidget;
 import org.geosdi.geoplatform.gui.client.widget.wfs.initializer.FeatureMapInitializer;
 import org.geosdi.geoplatform.gui.client.widget.wfs.initializer.IFeatureMapInitializer;
 import org.geosdi.geoplatform.gui.client.widget.wfs.layout.responsibility.FeatureAttributesLayoutHandler;
@@ -72,7 +74,8 @@ public class FeatureInjectorModule extends AbstractGinModule {
         bind(GPEventBus.class).to(GPEventBusImpl.class).in(Singleton.class);
         bind(FeatureWidget.class).in(Singleton.class);
         bind(WFSAccordionWidget.class).in(Singleton.class);
-        bind(GeocodingWidget.class).in(Singleton.class);
+        bind(WFSGeocodingGridWidget.class).in(Singleton.class);
+        bind(WFSGeocodingWidget.class).in(Singleton.class);
         bind(FeatureAttributesWidget.class).in(Singleton.class);
         bind(ShowFeatureAttributesWidget.class).in(Singleton.class);
         bind(ShowFeaturesWidget.class).in(Singleton.class);

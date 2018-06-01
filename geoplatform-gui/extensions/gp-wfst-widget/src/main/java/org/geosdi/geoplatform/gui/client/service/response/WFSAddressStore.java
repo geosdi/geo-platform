@@ -13,12 +13,12 @@ import java.util.List;
 public class WFSAddressStore {
 
     @JsonProperty(value = "AddressDTO")
-    public List<WFSAddressDTO> addressStore = new ArrayList();
+    public List<WFSAddressDTO> results = new ArrayList();
 
     @Override
     public String toString() {
         return "WFSAddressStore{" +
-                "addressStore=" + addressStore +
+                "results=" + results +
                 '}';
     }
 }

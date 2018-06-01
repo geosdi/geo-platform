@@ -32,61 +32,47 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.client.widget.wfs;
+package org.geosdi.geoplatform.gui.client.puregwt.geocoding;
 
-import com.extjs.gxt.ui.client.widget.form.FieldSet;
-import com.extjs.gxt.ui.client.widget.form.FormPanel;
-import org.geosdi.geoplatform.gui.client.config.annotation.geocoding.WFSGeocodingFieldSet;
-import org.geosdi.geoplatform.gui.client.config.annotation.geocoding.WFSGeocodingFormPanel;
-import org.geosdi.geoplatform.gui.client.config.annotation.geocoding.WFSGeocodingTextField;
-import org.geosdi.geoplatform.gui.client.config.annotation.geocoding.WFSLocationFieldSet;
-import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
-import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextField;
+import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent.Type;
+import org.geosdi.geoplatform.gui.client.model.geocoding.WFSAddressDTO;
+import org.geosdi.geoplatform.gui.client.service.response.WFSAddressStore;
 
-import javax.inject.Inject;
-
-import static java.lang.Boolean.TRUE;
+import java.util.List;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class GeocodingWidget extends GeoPlatformContentPanel {
+public interface IGeocodingGridHandler extends EventHandler {
 
-    @Inject
-    @WFSGeocodingTextField
-    private GPSecureStringTextField geocodingField;
-    @Inject
-    @WFSGeocodingFieldSet
-    private FieldSet searchFieldSet;
-    @Inject
-    @WFSLocationFieldSet
-    private FieldSet locationFieldSet;
-    @Inject
-    @WFSGeocodingFormPanel
-    private FormPanel formPanel;
+    Type<IGeocodingGridHandler> TYPE = new Type<IGeocodingGridHandler>();
 
-    @Inject
-    public GeocodingWidget() {
-        super(TRUE);
-    }
+    /**
+     *
+     * @param wfsAddressStore
+     */
+    void populateGrid(WFSAddressStore wfsAddressStore);
 
-    @Override
-    public void addComponent() {
-        this.formPanel.add(this.searchFieldSet);
-        this.formPanel.add(this.locationFieldSet);
-        this.searchFieldSet.add(this.geocodingField);
-        super.add(this.formPanel);
-    }
+    /**
+     *
+     */
+    void unMaskGrid();
 
-    @Override
-    public void initSize() {
-    }
+    /**
+     *
+     */
+    void maskGrid();
 
-    @Override
-    public void setPanelProperties() {
-        super.head.setText("Geocoding");
-        super.setAnimCollapse(Boolean.FALSE);
-    }
+    /**
+     *
+     */
+    void clearStore();
 
+    /**
+     *
+     * @param height
+     */
+    void updateHeight(int height);
 }

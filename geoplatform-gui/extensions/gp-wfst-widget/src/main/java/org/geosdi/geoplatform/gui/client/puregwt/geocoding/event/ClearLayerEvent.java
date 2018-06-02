@@ -32,18 +32,25 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.client.icons;
+package org.geosdi.geoplatform.gui.client.puregwt.geocoding.event;
 
-import com.google.gwt.resources.client.ClientBundle;
-import com.google.gwt.resources.client.ImageResource;
+import com.google.gwt.event.shared.GwtEvent;
+import org.geosdi.geoplatform.gui.client.model.geocoding.WFSAddressGeocoding;
+import org.geosdi.geoplatform.gui.client.puregwt.geocoding.IWFSLayerMarkerGridHandler;
 
 /**
- * @author Vito Salvia- CNR IMAA geoSDI Group
+ * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface WFSIcons extends ClientBundle {
+public class ClearLayerEvent extends GwtEvent<IWFSLayerMarkerGridHandler> {
 
-    @Source("zoom.png")
-    ImageResource zoomToMaxExtend();
+    @Override
+    public Type<IWFSLayerMarkerGridHandler> getAssociatedType() {
+        return IWFSLayerMarkerGridHandler.TYPE;
+    }
 
+    @Override
+    protected void dispatch(IWFSLayerMarkerGridHandler handler) {
+        handler.clearLayer();
+    }
 }

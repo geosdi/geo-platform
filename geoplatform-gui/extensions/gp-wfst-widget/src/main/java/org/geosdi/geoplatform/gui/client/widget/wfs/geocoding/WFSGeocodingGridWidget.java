@@ -47,6 +47,7 @@ import org.geosdi.geoplatform.gui.client.model.geocoding.WFSAddressDTO;
 import org.geosdi.geoplatform.gui.client.model.geocoding.WFSAddressGeocoding;
 import org.geosdi.geoplatform.gui.client.puregwt.geocoding.GeocodingHandlerManager;
 import org.geosdi.geoplatform.gui.client.puregwt.geocoding.IGeocodingGridHandler;
+import org.geosdi.geoplatform.gui.client.puregwt.geocoding.event.AddMarkerEvent;
 import org.geosdi.geoplatform.gui.client.service.response.WFSAddressStore;
 import org.geosdi.geoplatform.gui.client.widget.grid.GeoPlatformGridWidget;
 
@@ -97,6 +98,7 @@ public class WFSGeocodingGridWidget extends GeoPlatformGridWidget<WFSAddressGeoc
 
             @Override
             public void handleEvent(BaseEvent be) {
+                GeocodingHandlerManager.fireEvent(new AddMarkerEvent(grid.getSelectionModel().getSelectedItem()));
             }
 
         });

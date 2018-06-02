@@ -6,7 +6,7 @@ package org.geosdi.geoplatform.gui.client.model.geocoding;
  */
 public enum WFSAddressGeocodingKeyValue {
 
-    DESCRIPTION("description");
+    DESCRIPTION("description"), LONGITUDE("lon"), LATITUDE("lat");
 
     private final String value;
 

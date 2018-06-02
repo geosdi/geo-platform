@@ -54,6 +54,7 @@ import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.model.binder.ILayerSchemaBinder;
 import org.geosdi.geoplatform.gui.client.puregwt.action.event.AfterStrategyEditWFSActionEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.geocoding.GeocodingHandlerManager;
+import org.geosdi.geoplatform.gui.client.puregwt.geocoding.event.ClearLayerEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.geocoding.event.ResetGeocodingWidgetEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.WFSGPHandlerManager;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
@@ -83,6 +84,7 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget, 
     private final Button resetButton;
     private final GPEventBus bus;
     private final ScaleVisibleEvent scaleVisibleEvent = new ScaleVisibleEvent();
+    private final ClearLayerEvent clearLayerEvent = new ClearLayerEvent();
     private final ResetGeocodingWidgetEvent resetGeocodingWidgetEvent = new ResetGeocodingWidgetEvent();
     private final AfterStrategyEditWFSActionEvent afterStrategyEditWFSActionEvent = new AfterStrategyEditWFSActionEvent();
     @Inject
@@ -156,6 +158,8 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget, 
         MapHandlerManager.fireEvent(scaleVisibleEvent);
         WFSGPHandlerManager.fireEvent(new ResetMapStoreEvent());
         GeocodingHandlerManager.fireEvent(resetGeocodingWidgetEvent);
+        GeocodingHandlerManager.fireEvent(resetGeocodingWidgetEvent);
+        GeocodingHandlerManager.fireEvent(clearLayerEvent);
     }
 
     @Override

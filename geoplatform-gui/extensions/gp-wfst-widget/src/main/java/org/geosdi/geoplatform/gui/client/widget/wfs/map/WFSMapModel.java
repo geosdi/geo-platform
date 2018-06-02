@@ -34,23 +34,40 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.wfs.map;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.HandlerRegistration;
+import org.geosdi.geoplatform.gui.client.model.geocoding.WFSAddressGeocoding;
+import org.geosdi.geoplatform.gui.client.puregwt.geocoding.GeocodingHandlerManager;
+import org.geosdi.geoplatform.gui.client.puregwt.geocoding.IWFSLayerMarkerGridHandler;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.WFSGPHandlerManager;
+import org.geosdi.geoplatform.gui.client.widget.map.marker.advanced.GeocodingVectorMarker;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.event.WFSHasLayerChangedHandler;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.layer.WFSGeocodingVectorMarker;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.store.WFSMapLayersStore;
+import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
 import org.geosdi.geoplatform.gui.impl.map.GPMapModel;
 import org.geosdi.geoplatform.gui.impl.map.event.LayerMapChangedHandler;
 import org.geosdi.geoplatform.gui.impl.map.store.IMapLayersStore;
+import org.gwtopenmaps.openlayers.client.LonLat;
 import org.gwtopenmaps.openlayers.client.MapWidget;
+import org.gwtopenmaps.openlayers.client.layer.Layer;
+
+import static org.geosdi.geoplatform.gui.client.model.geocoding.WFSAddressGeocodingKeyValue.LATITUDE;
+import static org.geosdi.geoplatform.gui.client.model.geocoding.WFSAddressGeocodingKeyValue.LONGITUDE;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class WFSMapModel extends GPMapModel implements WFSHasLayerChangedHandler {
+public class WFSMapModel extends GPMapModel implements WFSHasLayerChangedHandler,IWFSLayerMarkerGridHandler {
+
+    private final WFSGeocodingVectorMarker geocodingVectorMarker;
+    private boolean registered;
 
     public WFSMapModel(MapWidget theMapWidget) {
         super(theMapWidget);
+        this.geocodingVectorMarker = new WFSGeocodingVectorMarker(this.mapWidget.getMap(),"WFSGeocoding-Marker-Vector-Layer");
+        GeocodingHandlerManager.addHandler(IWFSLayerMarkerGridHandler.TYPE, this);
     }
 
     @Override
@@ -62,4 +79,27 @@ public class WFSMapModel extends GPMapModel implements WFSHasLayerChangedHandler
     protected final IMapLayersStore createStore() {
         return new WFSMapLayersStore(this.mapWidget);
     }
+
+    @Override
+    public void addMarker(WFSAddressGeocoding wfsAddressGeocoding) {
+        if(!this.registered)
+            this.mapWidget.getMap().addLayer(this.geocodingVectorMarker.getMarkerLayer());
+        this.registered = Boolean.TRUE;
+        this.geocodingVectorMarker.removeMarker();
+        LonLat center = new LonLat((double)wfsAddressGeocoding.get(LONGITUDE.getValue()), (double)wfsAddressGeocoding.get(LATITUDE.getValue()));
+//        if (this.map.getProjection().equals(
+//                GPCoordinateReferenceSystem.WGS_84.getCode())) {
+        center.transform(GPCoordinateReferenceSystem.WGS_84.getCode(),
+                GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode());
+//        }
+        this.geocodingVectorMarker.addMarker(center, Boolean.TRUE);
+    }
+
+    @Override
+    public void clearLayer() {
+        this.geocodingVectorMarker.removeMarker();
+        this.mapWidget.getMap().removeLayer(this.geocodingVectorMarker.getMarkerLayer());
+        this.registered = Boolean.FALSE;
+    }
+
 }

@@ -35,13 +35,22 @@
 package org.geosdi.geoplatform.gui.client.config.provider;
 
 import com.google.gwt.core.client.GWT;
+import com.google.inject.Inject;
 import com.google.inject.Provider;
+import org.geosdi.geoplatform.gui.client.model.geocoding.WFSAddressGeocoding;
+import org.geosdi.geoplatform.gui.client.puregwt.geocoding.GeocodingHandlerManager;
+import org.geosdi.geoplatform.gui.client.puregwt.geocoding.IWFSLayerMarkerGridHandler;
+import org.geosdi.geoplatform.gui.client.widget.map.marker.advanced.GeocodingVectorMarker;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.WFSMapModel;
+import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
 import org.geosdi.geoplatform.gui.factory.baselayer.GPBaseLayerFactory;
 import org.geosdi.geoplatform.gui.factory.map.DefaultMapFactory;
 import org.geosdi.geoplatform.gui.factory.map.GeoPlatformMapFactory;
+import org.gwtopenmaps.openlayers.client.LonLat;
 import org.gwtopenmaps.openlayers.client.MapWidget;
 
+import static org.geosdi.geoplatform.gui.client.model.geocoding.WFSAddressGeocodingKeyValue.LATITUDE;
+import static org.geosdi.geoplatform.gui.client.model.geocoding.WFSAddressGeocodingKeyValue.LONGITUDE;
 import static org.geosdi.geoplatform.gui.global.enumeration.BaseLayerValue.OPEN_STREET_MAP;
 
 /**
@@ -61,4 +70,6 @@ public class MapWidgetProvider implements Provider<MapWidget> {
         this.mapModel.addLayerChangedHandler();
         return mapWidget;
     }
+
+
 }

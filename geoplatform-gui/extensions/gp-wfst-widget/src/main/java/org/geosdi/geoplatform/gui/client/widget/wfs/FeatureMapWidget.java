@@ -34,6 +34,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.wfs;
 
+import com.google.gwt.core.client.GWT;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.GWFSPMapToolsHandler;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
 import org.geosdi.geoplatform.gui.client.widget.wfs.initializer.IFeatureMapInitializer;

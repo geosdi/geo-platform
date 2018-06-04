@@ -36,9 +36,12 @@ package org.geosdi.geoplatform.gui.client.widget.wfs.map;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.Timer;
 import org.geosdi.geoplatform.gui.client.model.geocoding.WFSAddressGeocoding;
 import org.geosdi.geoplatform.gui.client.puregwt.geocoding.GeocodingHandlerManager;
 import org.geosdi.geoplatform.gui.client.puregwt.geocoding.IWFSLayerMarkerGridHandler;
+import org.geosdi.geoplatform.gui.client.puregwt.map.event.FeatureMapWidthEvent;
+import org.geosdi.geoplatform.gui.client.puregwt.map.event.IncreaseWidthEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.WFSGPHandlerManager;
 import org.geosdi.geoplatform.gui.client.widget.map.marker.advanced.GeocodingVectorMarker;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.event.WFSHasLayerChangedHandler;
@@ -48,6 +51,7 @@ import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReference
 import org.geosdi.geoplatform.gui.impl.map.GPMapModel;
 import org.geosdi.geoplatform.gui.impl.map.event.LayerMapChangedHandler;
 import org.geosdi.geoplatform.gui.impl.map.store.IMapLayersStore;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.gwtopenmaps.openlayers.client.LonLat;
 import org.gwtopenmaps.openlayers.client.MapWidget;
 import org.gwtopenmaps.openlayers.client.layer.Layer;
@@ -63,11 +67,14 @@ public class WFSMapModel extends GPMapModel implements WFSHasLayerChangedHandler
 
     private final WFSGeocodingVectorMarker geocodingVectorMarker;
     private boolean registered;
+    private final FeatureMapWidthEvent increaseWidthEvent = new IncreaseWidthEvent();
+    private final GPEventBus bus;
 
-    public WFSMapModel(MapWidget theMapWidget) {
+    public WFSMapModel(GPEventBus theBus,MapWidget theMapWidget) {
         super(theMapWidget);
         this.geocodingVectorMarker = new WFSGeocodingVectorMarker(this.mapWidget.getMap(),"WFSGeocoding-Marker-Vector-Layer");
         GeocodingHandlerManager.addHandler(IWFSLayerMarkerGridHandler.TYPE, this);
+        this.bus = theBus;
     }
 
     @Override
@@ -87,11 +94,8 @@ public class WFSMapModel extends GPMapModel implements WFSHasLayerChangedHandler
         this.registered = Boolean.TRUE;
         this.geocodingVectorMarker.removeMarker();
         LonLat center = new LonLat((double)wfsAddressGeocoding.get(LONGITUDE.getValue()), (double)wfsAddressGeocoding.get(LATITUDE.getValue()));
-//        if (this.map.getProjection().equals(
-//                GPCoordinateReferenceSystem.WGS_84.getCode())) {
         center.transform(GPCoordinateReferenceSystem.WGS_84.getCode(),
                 GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode());
-//        }
         this.geocodingVectorMarker.addMarker(center, Boolean.TRUE);
     }
 

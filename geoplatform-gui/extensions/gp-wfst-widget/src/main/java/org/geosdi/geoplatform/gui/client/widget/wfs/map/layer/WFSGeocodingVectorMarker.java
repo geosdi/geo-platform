@@ -63,13 +63,13 @@ public class WFSGeocodingVectorMarker extends GPVectorMarkerLayer {
     @Override
     public void buildMarkerLayer() {
         this.markerLayer = new Vector(super.markerLayerName);
-        this.markerLayer.setZIndex(982);
+        this.markerLayer.setZIndex(1002);
     }
 
     @Override
     public void addMarker(LonLat lonlat, boolean isSetCenter) {
         if (isSetCenter) {
-            map.setCenter(lonlat, 14);
+            map.setCenter(lonlat, 12);
         }
         super.drawFeature(lonlat);
     }

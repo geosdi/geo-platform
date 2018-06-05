@@ -5,13 +5,14 @@ import org.fusesource.restygwt.client.Method;
 import org.fusesource.restygwt.client.MethodCallback;
 import org.geosdi.geoplatform.gui.client.model.geocoding.WFSAddressDTO;
 import org.geosdi.geoplatform.gui.client.puregwt.geocoding.GeocodingHandlerManager;
-import org.geosdi.geoplatform.gui.client.puregwt.geocoding.event.ClearGeocodingGridEvent;
-import org.geosdi.geoplatform.gui.client.puregwt.geocoding.event.ClearLayerEvent;
-import org.geosdi.geoplatform.gui.client.puregwt.geocoding.event.PopulateGeocodingGridEvent;
-import org.geosdi.geoplatform.gui.client.puregwt.geocoding.event.UnMaskGeocodingGridEvent;
+import org.geosdi.geoplatform.gui.client.puregwt.geocoding.event.*;
+import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.WFSZoomEvent;
 import org.geosdi.geoplatform.gui.client.service.WFSGeocodingService;
 import org.geosdi.geoplatform.gui.client.service.response.WFSAddressStore;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
+
+import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.util.List;
 
@@ -24,8 +25,13 @@ public class WFSGeocodingDelegate implements IWFSGeocodingDelegate {
 
     private static final UnMaskGeocodingGridEvent UN_MASK_GEOCODING_GRID_EVENT = new UnMaskGeocodingGridEvent();
     private static final ClearGeocodingGridEvent CLEAR_GEOCODING_GRID_EVENT = new ClearGeocodingGridEvent();
+    private static final WFSZoomEvent WFS_ZOOM_EVENT = new WFSZoomEvent();
+    private static final RemoveMarkerEvent REMOVE_MARKER_EVENT = new RemoveMarkerEvent();
+    //
     private static final ClearLayerEvent CLEAR_LAYER_EVENT = new ClearLayerEvent();
     static WFSGeocodingService wfsGeocodingService = GWT.create(WFSGeocodingService.class);
+    @Inject
+    private GPEventBus eventBus;
 
     @Override
     public void searchAddress(String address) {
@@ -40,8 +46,9 @@ public class WFSGeocodingDelegate implements IWFSGeocodingDelegate {
 
             @Override
             public void onSuccess(Method method, WFSAddressStore wfsAddressStore) {
+                GeocodingHandlerManager.fireEvent(REMOVE_MARKER_EVENT);
+                eventBus.fireEvent(WFS_ZOOM_EVENT);
                 GeocodingHandlerManager.fireEvent(new PopulateGeocodingGridEvent(wfsAddressStore));
-//                GeocodingHandlerManager.fireEvent(CLEAR_LAYER_EVENT);
             }
         });
     }

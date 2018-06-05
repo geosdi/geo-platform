@@ -58,4 +58,9 @@ public interface IWFSLayerMarkerGridHandler extends EventHandler {
      *
      */
     void clearLayer();
+
+    /***
+     *
+     */
+    void removeMarker();
 }

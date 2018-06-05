@@ -137,16 +137,21 @@ public class FeatureMapWidget extends GeoPlatformContentPanel implements IFeatur
 
     @Override
     public void onZoomToMaxExtend(BBoxClientInfo bbox, String crs) {
-        Bounds b = WFSViewportUtility.generateBoundsFromBBOX(bbox);
+        Bounds bounds = WFSViewportUtility.generateBoundsFromBBOX(bbox);
         if (!this.mapWidget.getMap().getProjection().equals(crs)) {
             if (this.mapWidget.getMap().getProjection().equals(
                     GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode())) {
-                b.transform(new Projection(crs),
+                bounds.transform(new Projection(crs),
                         new Projection(
                                 GPCoordinateReferenceSystem.EPSG_GOOGLE.getCode()));
             }
         }
-        this.mapWidget.getMap().zoomToExtent(b);
+        this.mapWidget.getMap().zoomToExtent(bounds);
+    }
+
+    @Override
+    public void onZoom() {
+        this.featureMapInitializer.zoomOnBounds();
     }
 
     protected void manageMapSize() {

@@ -32,22 +32,26 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.client.puregwt.wfs.handler;
+package org.geosdi.geoplatform.gui.client.puregwt.wfs.event;
 
-import com.google.gwt.event.shared.EventHandler;
-import com.google.gwt.event.shared.GwtEvent.Type;
+import com.google.gwt.event.shared.GwtEvent;
+import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.GWFSPMapToolsHandler;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
 
 /**
  * @author Vito Salvia- CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface GWFSPMapToolsHandler extends EventHandler {
+public class WFSZoomEvent extends GwtEvent<GWFSPMapToolsHandler> {
 
-    Type<GWFSPMapToolsHandler> TYPE = new Type<GWFSPMapToolsHandler>();
+    @Override
+    public Type<GWFSPMapToolsHandler> getAssociatedType() {
+        return GWFSPMapToolsHandler.TYPE;
+    }
 
-    void onZoomToMaxExtend(BBoxClientInfo bbox, String crs);
-
-    void onZoom();
+    @Override
+    protected void dispatch(GWFSPMapToolsHandler handler) {
+        handler.onZoom();
+    }
 
 }

@@ -67,14 +67,11 @@ public class WFSMapModel extends GPMapModel implements WFSHasLayerChangedHandler
 
     private final WFSGeocodingVectorMarker geocodingVectorMarker;
     private boolean registered;
-    private final FeatureMapWidthEvent increaseWidthEvent = new IncreaseWidthEvent();
-    private final GPEventBus bus;
 
-    public WFSMapModel(GPEventBus theBus,MapWidget theMapWidget) {
+    public WFSMapModel(MapWidget theMapWidget) {
         super(theMapWidget);
         this.geocodingVectorMarker = new WFSGeocodingVectorMarker(this.mapWidget.getMap(),"WFSGeocoding-Marker-Vector-Layer");
         GeocodingHandlerManager.addHandler(IWFSLayerMarkerGridHandler.TYPE, this);
-        this.bus = theBus;
     }
 
     @Override
@@ -106,4 +103,8 @@ public class WFSMapModel extends GPMapModel implements WFSHasLayerChangedHandler
         this.registered = Boolean.FALSE;
     }
 
+    @Override
+    public void removeMarker() {
+        this.geocodingVectorMarker.removeMarker();
+    }
 }

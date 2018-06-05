@@ -61,15 +61,13 @@ public class MapWidgetProvider implements Provider<MapWidget> {
 
     private final GeoPlatformMapFactory mapFactory = GWT.create(DefaultMapFactory.class);
     private WFSMapModel mapModel;
-    @Inject
-    private GPEventBus bus;
 
     @Override
     public MapWidget get() {
         MapWidget mapWidget = this.mapFactory.createMap("100%", "100%",
                 GPBaseLayerFactory.getBaseLayer(OPEN_STREET_MAP), -1);
         mapWidget.getElement().getFirstChildElement().getStyle().setZIndex(0);
-        this.mapModel = new WFSMapModel(this.bus,mapWidget);
+        this.mapModel = new WFSMapModel(mapWidget);
         this.mapModel.addLayerChangedHandler();
         return mapWidget;
     }

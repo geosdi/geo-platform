@@ -51,6 +51,6 @@ public class ClearGeocodingGridEvent extends GwtEvent<IGeocodingGridHandler> {
 
     @Override
     protected void dispatch(IGeocodingGridHandler handler) {
-        handler.maskGrid();
+        handler.clearStore();
     }
 }

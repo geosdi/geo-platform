@@ -49,5 +49,7 @@ public interface IFeatureMapInitializer extends IFeatureMapInitializerHandler {
 
     void initMapWidget();
 
+    void zoomOnBounds();
+
     HandlerRegistration addFeatureMapInitializerHandler();
 }

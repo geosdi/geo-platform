@@ -17,9 +17,9 @@ public interface GPWFSRootLayerTreeNode extends GPWFSTreeComposite {
     void bind(GPBeanTreeModel theTwin);
 
     /**
-     * @param childres
+     * @param childrens
      */
-    void addChildrens(List<GPLayerBean> childres);
+    void addChildrens(List<GPLayerBean> childrens);
 
     /**
      * @param <Child>

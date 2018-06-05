@@ -41,7 +41,7 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
  * @author Vito Salvia- CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class GPModelKeyProvider implements ModelKeyProvider<GPBeanTreeModel> {
+public class GPWFSModelKeyProvider implements ModelKeyProvider<GPBeanTreeModel> {
 
     @Override
     public String getKey(GPBeanTreeModel model) {

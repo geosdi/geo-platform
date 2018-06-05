@@ -36,12 +36,12 @@ public class WFSRootLayerTreeNode extends GPBeanTreeModel implements GPWFSRootLa
     }
 
     /**
-     * @param childres
+     * @param childrens
      */
     @Override
-    public void addChildrens(List<GPLayerBean> childres) {
-        checkArgument(childres != null, "The Parameter childrens must not be null.");
-        for (GPLayerBean layer : childres) {
+    public void addChildrens(List<GPLayerBean> childrens) {
+        checkArgument(childrens != null, "The Parameter childrens must not be null.");
+        for (GPLayerBean layer : childrens) {
             if (layer instanceof GPLayerTreeModel) {
                 WFSLayerTreeNode child = new WFSLayerTreeNode((GPLayerTreeModel) layer);
                 child.setParent(this);

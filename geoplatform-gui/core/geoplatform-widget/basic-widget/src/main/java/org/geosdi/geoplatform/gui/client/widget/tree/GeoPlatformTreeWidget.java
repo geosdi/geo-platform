@@ -34,7 +34,6 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.tree;
 
-import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel.CheckCascade;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
@@ -78,7 +77,7 @@ public abstract class GeoPlatformTreeWidget<T extends GPBeanTreeModel> {
     /**
      * Sets the cascading behavior for check tree (defaults to PARENTS). When
      * using CHILDREN, it is important to note that the cascade will only be
-     * applied to rendered nodes. {@link #setAutoLoad(boolean)} can be used to
+     * applied to rendered nodes. {@link com.extjs.gxt.ui.client.widget.treepanel.TreePanel#setAutoLoad(boolean)} can be used to
      * fully render the tree on render. <p> Valid values are: <ul> <li>NONE - no
      * cascading</li> <li>PARENTS - cascade to parents</li> <li>CHILDREN -
      * cascade to children</li> </ul>

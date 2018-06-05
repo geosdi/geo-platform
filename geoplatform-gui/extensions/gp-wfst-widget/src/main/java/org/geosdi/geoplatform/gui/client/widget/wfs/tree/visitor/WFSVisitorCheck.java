@@ -40,7 +40,8 @@ public class WFSVisitorCheck implements GPWFSCompositeVisitor {
     @Override
     public <Child extends GPWFSLayerTreeNode> void visit(Child child) {
         checkArgument(child != null, "The Parameter layerTreeNode must not be null.");
-        if (child.isChecked())
+        if (child.isChecked()) {
             this.tree.setChecked(child, TRUE);
+        }
     }
 }

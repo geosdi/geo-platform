@@ -9,6 +9,7 @@ import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 import javax.inject.Singleton;
+import java.util.logging.Logger;
 
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
@@ -20,8 +21,11 @@ import static java.lang.Boolean.TRUE;
 @Singleton
 public class WFSTreeCheckListener implements Listener<TreePanelEvent<GPBeanTreeModel>> {
 
+    private final Logger logger = Logger.getLogger("WFSTreeCheckListener");
+
     @Override
     public void handleEvent(TreePanelEvent<GPBeanTreeModel> be) {
+        logger.info("####################WFS.CheckChange on Layer : " + be.getItem().getLabel());
         if (be.isChecked()) {
             be.getItem().setChecked(TRUE);
             WFSGPHandlerManager.fireEvent(new DisplayLayerMapEvent((GPLayerBean) be.getItem()));

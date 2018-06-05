@@ -67,7 +67,7 @@ public class WFSLayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> i
      */
     @Inject
     public WFSLayerTreeWidget(GPEventBus theBus, @WFSLayerTreeStore GPTreeStore theStore,
-                              @WFSLayerTree GPTreePanel theTree, WFSTreeBasicProperties theTreeProperties) {
+            @WFSLayerTree GPTreePanel theTree, WFSTreeBasicProperties theTreeProperties) {
         super(theStore, theTree);
         this.bus = theBus;
         this.treeProperties = theTreeProperties;
@@ -88,10 +88,6 @@ public class WFSLayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> i
     public final void setTreePanelProperties() {
         this.treeProperties.setTreeBasicProperties();
     }
-
-//    public void addContextMenu(){
-//        this.gpwfsTreeMenuActivator.activeTreeContextMenu();
-//    }
 
     @Override
     protected void registerTree() {

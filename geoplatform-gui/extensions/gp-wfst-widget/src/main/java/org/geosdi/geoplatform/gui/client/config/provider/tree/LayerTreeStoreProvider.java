@@ -1,6 +1,6 @@
 package org.geosdi.geoplatform.gui.client.config.provider.tree;
 
-import org.geosdi.geoplatform.gui.client.model.GPModelKeyProvider;
+import org.geosdi.geoplatform.gui.client.model.GPWFSModelKeyProvider;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreeStore;
 
 import javax.inject.Provider;
@@ -15,7 +15,7 @@ public class LayerTreeStoreProvider implements Provider<GPTreeStore> {
     public GPTreeStore get() {
         return new GPTreeStore() {
             {
-                super.setKeyProvider(new GPModelKeyProvider());
+                super.setKeyProvider(new GPWFSModelKeyProvider());
             }
         };
     }

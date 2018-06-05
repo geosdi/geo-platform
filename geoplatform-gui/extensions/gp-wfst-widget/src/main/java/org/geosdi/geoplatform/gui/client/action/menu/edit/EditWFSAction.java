@@ -59,9 +59,8 @@ import java.util.List;
 import static org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetMessages.INSTANCE;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
- * @email giuseppe.lascaleia@geosdi.org
  */
 public class EditWFSAction extends MenuBaseAction implements IEditWFSAction, IEditWFSActionHandler {
 

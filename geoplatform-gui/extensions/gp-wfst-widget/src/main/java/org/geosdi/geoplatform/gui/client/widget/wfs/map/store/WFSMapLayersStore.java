@@ -155,6 +155,7 @@ public class WFSMapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
         final WMS layer;
         if (containsLayer(rasterBean)) {
             layer = (WMS) this.layers.get(rasterBean);
+            logger.fine("################################LAYER_RETRIVED_FROM_CACHE : " + layer.getName());
             if (!layer.isVisible() || parseInt(layer.getZIndex().toString()) != rasterBean.getzIndex()) {
                 layer.setZIndex(rasterBean.getzIndex());
                 Scheduler.get().scheduleDeferred(new Command() {
@@ -163,18 +164,17 @@ public class WFSMapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
                     public void execute() {
                         layer.setIsVisible(true);
                         layer.redraw(true);
-                        logger.fine("#####################LAYER_ZINDEX : " + layer.getZIndex().toString());
+                        logger.info("#####################LAYER_ZINDEX : " + layer.getZIndex().toString());
                     }
                 });
             }
         } else {
             layer = (WMS) this.layerBuilder.buildLayer(rasterBean);
+            logger.fine("################################LAYER_ADDED_IN_CACHE : " + layer.getName());
             this.layers.put(rasterBean, layer);
             this.mapWidget.getMap().addLayer(layer);
             layer.setZIndex(rasterBean.getzIndex());
-            logger.fine("#####################LAYER_ZINDEX : " + layer.getZIndex().toString());
-            logger.fine("########################LAYER_VISIBILITY : "
-                    + this.mapWidget.getMap().getLayerByName(rasterBean.getLabel()).isVisible());
+            layer.redraw(true);
         }
     }
 
@@ -209,7 +209,7 @@ public class WFSMapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
      */
     @Override
     public void onChangeStyle(GPRasterBean layerBean,
-                              String newStyle) {
+            String newStyle) {
     }
 
     /**
@@ -218,7 +218,7 @@ public class WFSMapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
      */
     @Override
     public void onChangeSingleTileRequest(GPRasterBean layerBean,
-                                          boolean singleTileRequest) {
+            boolean singleTileRequest) {
     }
 
     /**

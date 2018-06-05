@@ -40,7 +40,10 @@ import com.google.gwt.event.dom.client.KeyCodes;
 import org.geosdi.geoplatform.gui.client.delegate.IWFSGeocodingDelegate;
 import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetConstants;
 import org.geosdi.geoplatform.gui.client.puregwt.geocoding.GeocodingHandlerManager;
+import org.geosdi.geoplatform.gui.client.puregwt.geocoding.event.ClearGeocodingGridEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.geocoding.event.MaskGeocodingGridEvent;
+import org.geosdi.geoplatform.gui.client.puregwt.geocoding.event.RemoveMarkerEvent;
+import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.WFSZoomEvent;
 import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextField;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
@@ -54,9 +57,14 @@ import javax.inject.Provider;
 public class GeocodingTextFieldProvider implements Provider<GPSecureStringTextField> {
 
     private static final MaskGeocodingGridEvent MASK_GEOCODING_GRID_EVENT = new MaskGeocodingGridEvent();
-
+    private static final RemoveMarkerEvent REMOVE_MARKER_EVENT = new RemoveMarkerEvent();
+    private static final ClearGeocodingGridEvent CLEAR_GEOCODING_GRID_EVENT = new ClearGeocodingGridEvent();
+    private static final WFSZoomEvent WFS_ZOOM_EVENT = new WFSZoomEvent();
+    //
     private final IWFSGeocodingDelegate geocodingDelegate;
     private final WFSTWidgetConstants wfstWidgetConstants;
+    @Inject
+    private GPEventBus eventBus;
 
     @Inject
     public GeocodingTextFieldProvider(IWFSGeocodingDelegate geocodingDelegate, WFSTWidgetConstants wfstWidgetConstants) {
@@ -77,8 +85,9 @@ public class GeocodingTextFieldProvider implements Provider<GPSecureStringTextFi
                 if (((event.getKeyCode() == KeyCodes.KEY_BACKSPACE)
                         || (event.getKeyCode() == KeyCodes.KEY_DELETE))
                         && (geocoding.getValue() == null)) {
-//                    removeMarkersOnMap();
-//                    cleanUpTheStore();
+                    GeocodingHandlerManager.fireEvent(REMOVE_MARKER_EVENT);
+                    GeocodingHandlerManager.fireEvent(CLEAR_GEOCODING_GRID_EVENT);
+                    eventBus.fireEvent(WFS_ZOOM_EVENT);
                 }
             }
 
@@ -88,11 +97,6 @@ public class GeocodingTextFieldProvider implements Provider<GPSecureStringTextFi
                         && (!geocoding.getValue().equals(""))) {
                     GeocodingHandlerManager.fireEvent(MASK_GEOCODING_GRID_EVENT);
                     geocodingDelegate.searchAddress(geocoding.getValue());
-//                    ComboBox<GPGeocodingServiceBean> comboBox = (ComboBox<GPGeocodingServiceBean>) searchFieldSet.getItemByItemId(
-//                            "geocodingServiceSelector");
-//                    GPGeocodingServiceBean selectedBean = comboBox.getValue();
-//                    String selectedGeocodingService = selectedBean.getGeocodingService();
-//                    operation.onBeginGeocodingSearch(search.getValue());
                 }
             }
 

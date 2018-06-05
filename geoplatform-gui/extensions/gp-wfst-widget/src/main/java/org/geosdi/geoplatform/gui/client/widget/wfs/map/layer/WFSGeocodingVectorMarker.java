@@ -69,7 +69,7 @@ public class WFSGeocodingVectorMarker extends GPVectorMarkerLayer {
     @Override
     public void addMarker(LonLat lonlat, boolean isSetCenter) {
         if (isSetCenter) {
-            map.setCenter(lonlat, 12);
+            map.setCenter(lonlat, 14);
         }
         super.drawFeature(lonlat);
     }

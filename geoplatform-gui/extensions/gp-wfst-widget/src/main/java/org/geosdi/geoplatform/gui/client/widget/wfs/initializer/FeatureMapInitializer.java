@@ -86,6 +86,7 @@ public class FeatureMapInitializer implements IFeatureMapInitializer {
     private Layer wms;
     private List<GPLayerBean> layers;
     private List<Layer> wmsLayers;
+    private Bounds bb;
 
     /**
      * @param theBus
@@ -163,9 +164,13 @@ public class FeatureMapInitializer implements IFeatureMapInitializer {
         this.wms.setZIndex(WMS_Z_INDEX);
         this.vectorLayer.setZIndex(VECTOR_LAYER_Z_INDEX);
         ((WMS) wms).redraw(true);
-        Bounds bb = ((WMS) this.wms).getOptions().getMaxExtent();
-        this.mapWidget.getMap().zoomToExtent(bb);
+        this.bb = ((WMS) this.wms).getOptions().getMaxExtent();
+        this.mapWidget.getMap().zoomToExtent(this.bb);
         WFSToggleButton.fireToggleStateEvent(WFSButtonKeyProvider.GET_FEATURE.name());
+    }
+
+    public void zoomOnBounds(){
+        this.mapWidget.getMap().zoomToExtent(this.bb);
     }
 
     protected void notifyStatus() {

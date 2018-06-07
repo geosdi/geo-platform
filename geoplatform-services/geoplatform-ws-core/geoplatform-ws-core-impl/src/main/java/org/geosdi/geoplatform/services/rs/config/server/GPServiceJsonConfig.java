@@ -45,7 +45,6 @@ import org.geosdi.geoplatform.configurator.bootstrap.cxf.Rest;
 import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.exception.rs.mapper.GPExceptionFaultMapper;
-import org.geosdi.geoplatform.services.geocoding.GeoPlatformGeocodingService;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.geosdi.geoplatform.support.cxf.rs.provider.configurator.GPRestProviderType;
 import org.geosdi.geoplatform.support.cxf.rs.provider.factory.GPRestProviderFactory;
@@ -79,7 +78,6 @@ class GPServiceJsonConfig {
     @Required
     public static JAXRSServerFactoryBean geoplatformServiceJSON(@Qualifier(
             value = "geoPlatformService") GeoPlatformService geoPlatformService,
-            @Qualifier(value = "geoPlatformGeocodingService") GeoPlatformGeocodingService geoPlatformGeocodingService,
             @Qualifier(value = "gpJsonCoreApplication") Application gpJsonCoreApplication,
             @Value("configurator{cxf_rest_provider_type}") GPRestProviderType providerType,
             @Qualifier(value = "gpCoreSwaggerRestConfiguration") GPSwaggerRestConfiguration gpCoreSwaggerRestConfiguration,
@@ -94,7 +92,7 @@ class GPServiceJsonConfig {
         List<? extends Object> providers;
 
         if (gpCoreSwaggerRestConfiguration.isSwaggerConfigured()) {
-            serviceBeans = Arrays.asList(new Object[]{geoPlatformService,geoPlatformGeocodingService,
+            serviceBeans = Arrays.asList(new Object[]{geoPlatformService,
                 gpCoreSwaggerRestConfiguration.getSwaggerApiListingResource()});
             providers = Arrays.asList(
                     new Object[]{createProvider(providerType),
@@ -102,7 +100,7 @@ class GPServiceJsonConfig {
                         new GPExceptionFaultMapper(),
                         gpCrossResourceSharingFilter});
         } else {
-            serviceBeans = Arrays.asList(new Object[]{geoPlatformService, geoPlatformGeocodingService});
+            serviceBeans = Arrays.asList(new Object[]{geoPlatformService});
             providers = Arrays.asList(
                     new Object[]{createProvider(providerType),
                         new GPExceptionFaultMapper(),

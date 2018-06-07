@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.puregwt.geocoding;
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
 import org.geosdi.geoplatform.gui.client.model.geocoding.WFSAddressDTO;
+import org.geosdi.geoplatform.gui.client.service.response.FeatureCollectionResponse;
 import org.geosdi.geoplatform.gui.client.service.response.WFSAddressStore;
 
 import java.util.List;
@@ -51,9 +52,9 @@ public interface IGeocodingGridHandler extends EventHandler {
 
     /**
      *
-     * @param wfsAddressStore
+     * @param featureCollectionResponse
      */
-    void populateGrid(WFSAddressStore wfsAddressStore);
+    void populateGrid(FeatureCollectionResponse featureCollectionResponse);
 
     /**
      *

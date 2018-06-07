@@ -8,6 +8,8 @@ import org.geosdi.geoplatform.gui.client.puregwt.geocoding.GeocodingHandlerManag
 import org.geosdi.geoplatform.gui.client.puregwt.geocoding.event.*;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.WFSZoomEvent;
 import org.geosdi.geoplatform.gui.client.service.WFSGeocodingService;
+import org.geosdi.geoplatform.gui.client.service.request.GPGeocodingAddressRequestDTO;
+import org.geosdi.geoplatform.gui.client.service.response.FeatureCollectionResponse;
 import org.geosdi.geoplatform.gui.client.service.response.WFSAddressStore;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
@@ -33,9 +35,13 @@ public class WFSGeocodingDelegate implements IWFSGeocodingDelegate {
     @Inject
     private GPEventBus eventBus;
 
+    /**
+     *
+     * @param gpGeocodingAddressRequestDTO
+     */
     @Override
-    public void searchAddress(String address) {
-        wfsGeocodingService.searchAddress(address, new MethodCallback<WFSAddressStore>() {
+    public void searchAddress(GPGeocodingAddressRequestDTO gpGeocodingAddressRequestDTO) {
+        wfsGeocodingService.searchAddress(gpGeocodingAddressRequestDTO, new MethodCallback<FeatureCollectionResponse>() {
             @Override
             public void onFailure(Method method, Throwable throwable) {
                 GeocodingHandlerManager.fireEvent(CLEAR_GEOCODING_GRID_EVENT);
@@ -45,10 +51,10 @@ public class WFSGeocodingDelegate implements IWFSGeocodingDelegate {
             }
 
             @Override
-            public void onSuccess(Method method, WFSAddressStore wfsAddressStore) {
+            public void onSuccess(Method method, FeatureCollectionResponse featureCollectionResponse) {
                 GeocodingHandlerManager.fireEvent(REMOVE_MARKER_EVENT);
                 eventBus.fireEvent(WFS_ZOOM_EVENT);
-                GeocodingHandlerManager.fireEvent(new PopulateGeocodingGridEvent(wfsAddressStore));
+                GeocodingHandlerManager.fireEvent(new PopulateGeocodingGridEvent(featureCollectionResponse));
             }
         });
     }

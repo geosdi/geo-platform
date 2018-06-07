@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.config.provider.text;
 import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.KeyListener;
 import com.google.gwt.event.dom.client.KeyCodes;
+import com.google.gwt.i18n.client.LocaleInfo;
 import org.geosdi.geoplatform.gui.client.delegate.IWFSGeocodingDelegate;
 import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetConstants;
 import org.geosdi.geoplatform.gui.client.puregwt.geocoding.GeocodingHandlerManager;
@@ -44,6 +45,8 @@ import org.geosdi.geoplatform.gui.client.puregwt.geocoding.event.ClearGeocodingG
 import org.geosdi.geoplatform.gui.client.puregwt.geocoding.event.MaskGeocodingGridEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.geocoding.event.RemoveMarkerEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.WFSZoomEvent;
+import org.geosdi.geoplatform.gui.client.service.request.GPGeocodingAddressRequestDTO;
+import org.geosdi.geoplatform.gui.client.service.response.FeatureCollectionResponse;
 import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextField;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
@@ -96,7 +99,7 @@ public class GeocodingTextFieldProvider implements Provider<GPSecureStringTextFi
                 if ((event.getKeyCode() == KeyCodes.KEY_ENTER)
                         && (!geocoding.getValue().equals(""))) {
                     GeocodingHandlerManager.fireEvent(MASK_GEOCODING_GRID_EVENT);
-                    geocodingDelegate.searchAddress(geocoding.getValue());
+                    geocodingDelegate.searchAddress(new GPGeocodingAddressRequestDTO(LocaleInfo.getCurrentLocale().getLocaleName(),geocoding.getValue()));
                 }
             }
 

@@ -353,6 +353,18 @@
 
             <dependency>
                 <groupId>org.geosdi</groupId>
+                <artifactId>gp-geocoding-rs-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.geosdi</groupId>
+                <artifactId>gp-geocoding-rs-impl</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.geosdi</groupId>
                 <artifactId>csv-importer-rs-api</artifactId>
                 <version>${project.version}</version>
             </dependency>

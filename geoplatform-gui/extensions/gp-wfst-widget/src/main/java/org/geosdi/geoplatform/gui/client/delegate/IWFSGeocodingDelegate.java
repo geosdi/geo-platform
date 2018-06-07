@@ -1,5 +1,7 @@
 package org.geosdi.geoplatform.gui.client.delegate;
 
+import org.geosdi.geoplatform.gui.client.service.request.GPGeocodingAddressRequestDTO;
+
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
@@ -7,8 +9,8 @@ package org.geosdi.geoplatform.gui.client.delegate;
 public interface IWFSGeocodingDelegate {
 
     /**
-     * @param address
+     * @param gpGeocodingAddressRequestDTO
      */
-    void searchAddress(String address);
+    void searchAddress(GPGeocodingAddressRequestDTO gpGeocodingAddressRequestDTO);
 
 }

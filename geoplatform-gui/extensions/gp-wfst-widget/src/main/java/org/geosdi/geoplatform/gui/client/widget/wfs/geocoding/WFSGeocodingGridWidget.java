@@ -43,12 +43,12 @@ import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.google.gwt.user.client.ui.Widget;
 import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetConstants;
-import org.geosdi.geoplatform.gui.client.model.geocoding.WFSAddressDTO;
 import org.geosdi.geoplatform.gui.client.model.geocoding.WFSAddressGeocoding;
 import org.geosdi.geoplatform.gui.client.puregwt.geocoding.GeocodingHandlerManager;
 import org.geosdi.geoplatform.gui.client.puregwt.geocoding.IGeocodingGridHandler;
 import org.geosdi.geoplatform.gui.client.puregwt.geocoding.event.AddMarkerEvent;
-import org.geosdi.geoplatform.gui.client.service.response.WFSAddressStore;
+import org.geosdi.geoplatform.gui.client.service.response.FeatureCollectionResponse;
+import org.geosdi.geoplatform.gui.client.service.response.FeatureDTO;
 import org.geosdi.geoplatform.gui.client.widget.grid.GeoPlatformGridWidget;
 
 import javax.inject.Inject;
@@ -79,10 +79,10 @@ public class WFSGeocodingGridWidget extends GeoPlatformGridWidget<WFSAddressGeoc
     }
 
     @Override
-    public void populateGrid(WFSAddressStore wfsAddressStore) {
+    public void populateGrid(FeatureCollectionResponse featureCollectionResponse) {
         clearStore();
-        for(WFSAddressDTO wfsAddressDTO : wfsAddressStore.results){
-            this.store.add(new WFSAddressGeocoding(wfsAddressDTO));
+        for(FeatureDTO featureDTO : featureCollectionResponse.featureCollectionDTOS){
+            this.store.add(new WFSAddressGeocoding(featureDTO));
         }
         unMaskGrid();
     }

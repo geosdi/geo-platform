@@ -40,6 +40,7 @@ import org.geosdi.geoplatform.gui.client.puregwt.geocoding.IGeocodingGridHandler
 import org.geosdi.geoplatform.gui.client.puregwt.map.IFeatureMapHandler;
 import org.geosdi.geoplatform.gui.client.puregwt.map.event.FeatureMapHeightEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.map.initializer.IFeatureMapInitializerHandler;
+import org.geosdi.geoplatform.gui.client.service.response.FeatureCollectionResponse;
 import org.geosdi.geoplatform.gui.client.service.response.WFSAddressStore;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 
@@ -51,10 +52,10 @@ import java.util.List;
  */
 public class PopulateGeocodingGridEvent extends GwtEvent<IGeocodingGridHandler> {
 
-    private final WFSAddressStore wfsAddressStore;
+    private final FeatureCollectionResponse featureCollectionResponse;
 
-    public PopulateGeocodingGridEvent(WFSAddressStore wfsAddressStore) {
-        this.wfsAddressStore = wfsAddressStore;
+    public PopulateGeocodingGridEvent(FeatureCollectionResponse featureCollectionResponse) {
+        this.featureCollectionResponse = featureCollectionResponse;
     }
 
     @Override
@@ -64,6 +65,6 @@ public class PopulateGeocodingGridEvent extends GwtEvent<IGeocodingGridHandler> 
 
     @Override
     protected void dispatch(IGeocodingGridHandler handler) {
-        handler.populateGrid(this.wfsAddressStore);
+        handler.populateGrid(this.featureCollectionResponse);
     }
 }

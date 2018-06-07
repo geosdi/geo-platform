@@ -35,8 +35,6 @@
  */
 package org.geosdi.geoplatform.services;
 
-import com.google.common.base.Preconditions;
-import fr.dudie.nominatim.model.Address;
 import org.geosdi.geoplatform.core.dao.GSAccountDAO;
 import org.geosdi.geoplatform.core.dao.GSResourceDAO;
 import org.geosdi.geoplatform.core.delegate.api.account.AccountDelegate;
@@ -53,7 +51,6 @@ import org.geosdi.geoplatform.exception.AccountLoginFault;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.shared.GPLayerType;
-import org.geosdi.geoplatform.nominatim.spring.connector.IGPNominatimConnector;
 import org.geosdi.geoplatform.request.*;
 import org.geosdi.geoplatform.request.folder.InsertFolderRequest;
 import org.geosdi.geoplatform.request.folder.WSAddFolderAndTreeModificationsRequest;
@@ -126,8 +123,6 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     private ViewportDelegate gpViewportDelegate;
     @Resource(name = "gpSchedulerDelegate")
     private SchedulerDelegate gpSchedulerDelegate;
-    @Resource(name = "gpNominatimConnector")
-    private IGPNominatimConnector nominatimConnector;
 
     // <editor-fold defaultstate="collapsed" desc="Organization">
     // =========================================================================

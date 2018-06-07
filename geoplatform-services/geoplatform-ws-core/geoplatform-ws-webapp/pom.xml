@@ -461,6 +461,29 @@
         </profile>
 
         <!-- =============================================================== -->
+        <!-- ================== GEOPLATFORM LAYER BUILDER ================== -->
+        <!-- =============================================================== -->
+        <profile>
+            <id>geocoding</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+                <property>
+                    <name>full</name>
+                </property>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>org.geosdi</groupId>
+                    <artifactId>gp-geocoding-rs-api</artifactId>
+                </dependency>
+                <dependency>
+                    <groupId>org.geosdi</groupId>
+                    <artifactId>gp-geocoding-rs-impl</artifactId>
+                </dependency>
+            </dependencies>
+        </profile>
+
+        <!-- =============================================================== -->
         <!-- ================== GEOPLATFORM CSV IMPORTER  ================== -->
         <!-- =============================================================== -->
         <profile>

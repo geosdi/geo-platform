@@ -45,8 +45,6 @@ public final class GPServiceRSPathConfig {
     public static final String DEFAULT_RS_SERVICE_PATH = "/";
 
     public static final String GP_CORE_SERVICE_RS_PATH = "/jsonCore";
-    public static final String GP_GEOCODING_SERVICE_RS_PATH = "/jsonCoreGeocoding";
-    public static final String DEFAULT_GEOCODING_RS_SERVICE_PATH = DEFAULT_RS_SERVICE_PATH + "geocoding";
     public static final String GP_SECURE_CORE_SERVICE_RS_PATH = "/jsonSecureCore";
 
     /**

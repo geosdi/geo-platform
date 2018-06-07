@@ -22,9 +22,7 @@
     <!-- ====================================================================-->
 
     <context:component-scan base-package="org.geosdi.geoplatform.configurator.cxf.server, 
-                                          org.geosdi.geoplatform.services.rs.config,
-                                          org.geosdi.geoplatform.services.geocoding,
-                                          org.geosdi.geoplatform.nominatim.spring"/>
+                                          org.geosdi.geoplatform.services.rs.config"/>
 
     <!-- Load CXF modules from cxf.jar -->
     <import resource="classpath:META-INF/cxf/cxf.xml"/>

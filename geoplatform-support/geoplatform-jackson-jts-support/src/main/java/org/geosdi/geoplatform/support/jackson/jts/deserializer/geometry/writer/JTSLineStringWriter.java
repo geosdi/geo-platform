@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.support.jackson.jts.deserializer.geometry.writer;
 
-import com.vividsolutions.jts.geom.LineString;
+import org.locationtech.jts.geom.LineString;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

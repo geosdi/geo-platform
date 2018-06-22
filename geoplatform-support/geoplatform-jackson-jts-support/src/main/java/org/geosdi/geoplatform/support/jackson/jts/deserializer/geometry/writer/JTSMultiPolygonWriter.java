@@ -41,7 +41,7 @@ import org.geojson.MultiPolygon;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class JTSMultiPolygonWriter extends JTSBaseWriter<MultiPolygon, com.vividsolutions.jts.geom.MultiPolygon> {
+public class JTSMultiPolygonWriter extends JTSBaseWriter<MultiPolygon, org.locationtech.jts.geom.MultiPolygon> {
 
     /**
      * @return {@link Class<MultiPolygon>}
@@ -53,11 +53,11 @@ public class JTSMultiPolygonWriter extends JTSBaseWriter<MultiPolygon, com.vivid
 
     /**
      * @param multiPolygon
-     * @return {@link com.vividsolutions.jts.geom.MultiPolygon}
+     * @return {@link org.locationtech.jts.geom.MultiPolygon}
      * @throws Exception
      */
     @Override
-    public com.vividsolutions.jts.geom.MultiPolygon buildJTSGeometry(MultiPolygon multiPolygon)
+    public org.locationtech.jts.geom.MultiPolygon buildJTSGeometry(MultiPolygon multiPolygon)
             throws Exception {
         logger.trace(":::::::::::::::{} is creating JTS MultiPolygon for GeoJson MultiPolygon : {}\n",
                 this, multiPolygon);

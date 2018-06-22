@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.jts.geometry.polygon;
 
-import com.vividsolutions.jts.geom.LinearRing;
+import org.locationtech.jts.geom.LinearRing;
 import org.geosdi.geoplatform.gml.api.Polygon;
 import org.geosdi.geoplatform.gml.api.PolygonProperty;
 import org.geosdi.geoplatform.gml.api.jaxb.AbstractGMLObjectFactory;
@@ -52,7 +52,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class JTSPolygonParser extends AbstractJTSParser<Polygon, PolygonProperty, com.vividsolutions.jts.geom.Polygon> {
+public class JTSPolygonParser extends AbstractJTSParser<Polygon, PolygonProperty, org.locationtech.jts.geom.Polygon> {
 
     private JTSLinearRingParser linearRingParser;
 
@@ -73,7 +73,7 @@ public class JTSPolygonParser extends AbstractJTSParser<Polygon, PolygonProperty
      * @throws ParserException
      */
     @Override
-    protected Polygon canParseGeometry(com.vividsolutions.jts.geom.Polygon jtsGeometry) throws ParserException {
+    protected Polygon canParseGeometry(org.locationtech.jts.geom.Polygon jtsGeometry) throws ParserException {
         Polygon polygon = gmlObjectFactory.createPolygonType();
         LinearRing extertiorRing = (LinearRing) jtsGeometry.getExteriorRing();
         polygon.setExteriorValue(gmlObjectFactory.createExterior(linearRingParser.parseProperty(extertiorRing)));
@@ -90,7 +90,7 @@ public class JTSPolygonParser extends AbstractJTSParser<Polygon, PolygonProperty
      * @throws ParserException
      */
     @Override
-    public PolygonProperty parseProperty(com.vividsolutions.jts.geom.Polygon jtsGeometry) throws ParserException {
+    public PolygonProperty parseProperty(org.locationtech.jts.geom.Polygon jtsGeometry) throws ParserException {
         checkNotNull(jtsGeometry, "The JTS Polygon Geometry must not be null.");
         PolygonProperty polygonProperty = gmlObjectFactory.createPolygonPropertyType();
         polygonProperty.setPolygon(super.parseGeometry(jtsGeometry));
@@ -103,7 +103,7 @@ public class JTSPolygonParser extends AbstractJTSParser<Polygon, PolygonProperty
      * @throws ParserException
      */
     @Override
-    public JAXBElement<? extends Polygon> buildJAXBElement(com.vividsolutions.jts.geom.Polygon geometry)
+    public JAXBElement<? extends Polygon> buildJAXBElement(org.locationtech.jts.geom.Polygon geometry)
             throws ParserException {
         return gmlObjectFactory.createPolygon(super.parseGeometry(geometry));
     }

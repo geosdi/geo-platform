@@ -35,12 +35,12 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.base.geometry.polygon.builder;
 
-import com.vividsolutions.jts.geom.LinearRing;
 import org.geosdi.geoplatform.gml.api.AbstractRing;
 import org.geosdi.geoplatform.gml.api.AbstractRingProperty;
 import org.geosdi.geoplatform.gml.api.Polygon;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.linerarring.GMLBaseLinearRingParser;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
+import org.locationtech.jts.geom.LinearRing;
 
 import java.util.ArrayList;
 import java.util.List;

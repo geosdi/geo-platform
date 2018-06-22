@@ -52,7 +52,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class JTSLineStringParser extends AbstractJTSParser<LineString, LineStringProperty, com.vividsolutions.jts.geom.LineString> {
+public class JTSLineStringParser extends AbstractJTSParser<LineString, LineStringProperty, org.locationtech.jts.geom.LineString> {
 
     private CoordinateParser coordinateParser;
 
@@ -73,10 +73,9 @@ public class JTSLineStringParser extends AbstractJTSParser<LineString, LineStrin
      * @throws ParserException
      */
     @Override
-    protected LineString canParseGeometry(com.vividsolutions.jts.geom.LineString jtsGeometry) throws ParserException {
+    protected LineString canParseGeometry(org.locationtech.jts.geom.LineString jtsGeometry) throws ParserException {
         LineString lineString = gmlObjectFactory.createLineStringType();
-        for (DirectPosition directPosition : coordinateParser.parseCoordinates(
-                jtsGeometry.getCoordinates())) {
+        for (DirectPosition directPosition : coordinateParser.parseCoordinates(jtsGeometry.getCoordinates())) {
             JAXBElement<? extends DirectPosition> element = gmlObjectFactory.createPos(directPosition);
             lineString.getPosOrPointPropertyOrPointRep().add(element);
         }
@@ -89,7 +88,7 @@ public class JTSLineStringParser extends AbstractJTSParser<LineString, LineStrin
      * @throws ParserException
      */
     @Override
-    public LineStringProperty parseProperty(com.vividsolutions.jts.geom.LineString jtsGeometry) throws ParserException {
+    public LineStringProperty parseProperty(org.locationtech.jts.geom.LineString jtsGeometry) throws ParserException {
         checkNotNull(jtsGeometry, "The JTS LineString Geometry must not be null.");
         LineStringProperty lineStringProperty = gmlObjectFactory.createLineStringPropertyType();
         lineStringProperty.setLineString(super.parseGeometry(jtsGeometry));
@@ -102,7 +101,7 @@ public class JTSLineStringParser extends AbstractJTSParser<LineString, LineStrin
      * @throws ParserException
      */
     @Override
-    public JAXBElement<? extends LineString> buildJAXBElement(com.vividsolutions.jts.geom.LineString geometry)
+    public JAXBElement<? extends LineString> buildJAXBElement(org.locationtech.jts.geom.LineString geometry)
             throws ParserException {
         return gmlObjectFactory.createLineString(super.parseGeometry(geometry));
     }

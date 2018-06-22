@@ -35,11 +35,11 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.base.geometry.linerarring.outerchain;
 
-import com.vividsolutions.jts.geom.GeometryFactory;
-import com.vividsolutions.jts.geom.LinearRing;
 import org.geosdi.geoplatform.gml.api.parser.base.coordinate.CoordinateBaseParser;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.point.GMLBasePointParser;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
+import org.locationtech.jts.geom.GeometryFactory;
+import org.locationtech.jts.geom.LinearRing;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.base.geometry.multi.curve.responsibility;
 
-import com.vividsolutions.jts.geom.LineString;
+import org.locationtech.jts.geom.LineString;
 import org.geosdi.geoplatform.gml.api.AbstractCurve;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 import org.slf4j.Logger;

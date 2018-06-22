@@ -35,12 +35,12 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.jts.geometry.sextante;
 
-import com.vividsolutions.jts.geom.Geometry;
 import org.geosdi.geoplatform.gml.api.AbstractGeometry;
 import org.geosdi.geoplatform.gml.api.GeometryProperty;
 import org.geosdi.geoplatform.gml.api.jaxb.AbstractGMLObjectFactory;
 import org.geosdi.geoplatform.gml.api.parser.base.GMLBaseVersion;
 import org.geosdi.geoplatform.gml.api.parser.jts.JTSParser;
+import org.locationtech.jts.geom.Geometry;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.jaxb.spatial.adapter;
 
-import com.vividsolutions.jts.geom.GeometryCollection;
+import org.locationtech.jts.geom.GeometryCollection;
 
 /**
  *

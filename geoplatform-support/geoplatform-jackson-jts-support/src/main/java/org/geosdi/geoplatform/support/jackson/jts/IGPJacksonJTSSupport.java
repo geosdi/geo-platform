@@ -49,12 +49,12 @@ public interface IGPJacksonJTSSupport extends JacksonSupport {
      * @return
      * @throws Exception
      */
-    Geometry convertJtsGeometryToGeoJson(com.vividsolutions.jts.geom.Geometry theGeom) throws Exception;
+    Geometry convertJtsGeometryToGeoJson(org.locationtech.jts.geom.Geometry theGeom) throws Exception;
 
     /**
      * @param theGeoJsonGeometry
-     * @return {@link com.vividsolutions.jts.geom.Geometry}
+     * @return {@link org.locationtech.jts.geom.Geometry}
      * @throws Exception
      */
-    com.vividsolutions.jts.geom.Geometry convertGeoJsonGeometryToJts(Geometry theGeoJsonGeometry) throws Exception;
+    org.locationtech.jts.geom.Geometry convertGeoJsonGeometryToJts(Geometry theGeoJsonGeometry) throws Exception;
 }

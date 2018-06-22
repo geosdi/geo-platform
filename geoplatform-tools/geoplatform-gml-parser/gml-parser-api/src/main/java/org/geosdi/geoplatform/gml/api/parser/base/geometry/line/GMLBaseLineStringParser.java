@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.base.geometry.line;
 
-import com.vividsolutions.jts.geom.GeometryFactory;
 import org.geosdi.geoplatform.gml.api.LineString;
 import org.geosdi.geoplatform.gml.api.LineStringProperty;
 import org.geosdi.geoplatform.gml.api.parser.base.AbstractGMLBaseParser;
@@ -45,6 +44,7 @@ import org.geosdi.geoplatform.gml.api.parser.base.geometry.line.responsibility.o
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.point.GMLBasePointParser;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.responsibility.AbstractGeometryHandler;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
+import org.locationtech.jts.geom.GeometryFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -54,13 +54,13 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GMLBaseLineStringParser extends AbstractGMLBaseParser<LineString, LineStringProperty, com.vividsolutions.jts.geom.LineString> {
+public class GMLBaseLineStringParser extends AbstractGMLBaseParser<LineString, LineStringProperty, org.locationtech.jts.geom.LineString> {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     private CoordinateBaseParser coordinateParser;
     private GMLBasePointParser pointParser;
-    private AbstractGeometryHandler<LineString, com.vividsolutions.jts.geom.LineString, GMLBasePointParser, CoordinateBaseParser> mixedLineHandler;
+    private AbstractGeometryHandler<LineString, org.locationtech.jts.geom.LineString, GMLBasePointParser, CoordinateBaseParser> mixedLineHandler;
 
     /**
      * @param theGeometryFactory
@@ -78,22 +78,22 @@ public class GMLBaseLineStringParser extends AbstractGMLBaseParser<LineString, L
 
     /**
      * @param gmlGeometry
-     * @return {@link com.vividsolutions.jts.geom.LineString}
+     * @return {@link org.locationtech.jts.geom.LineString}
      * @throws ParserException
      */
     @Override
-    protected com.vividsolutions.jts.geom.LineString canParseGeometry(LineString gmlGeometry)
+    protected org.locationtech.jts.geom.LineString canParseGeometry(LineString gmlGeometry)
             throws ParserException {
         return this.mixedLineHandler.buildGeometry(geometryFactory, gmlGeometry, pointParser, coordinateParser);
     }
 
     /**
      * @param propertyType
-     * @return {@link com.vividsolutions.jts.geom.LineString}
+     * @return {@link org.locationtech.jts.geom.LineString}
      * @throws ParserException
      */
     @Override
-    public com.vividsolutions.jts.geom.LineString parseGeometry(LineStringProperty propertyType)
+    public org.locationtech.jts.geom.LineString parseGeometry(LineStringProperty propertyType)
             throws ParserException {
         checkNotNull(propertyType, "The LineString Property Type must not be null.");
         if (propertyType.isSetLineString()) {

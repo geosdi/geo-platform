@@ -35,10 +35,10 @@
  */
 package org.geosdi.geoplatform.gml.api.jaxb.context;
 
-import com.vividsolutions.jts.geom.Geometry;
 import org.geosdi.geoplatform.gml.api.AbstractGeometry;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 import org.geosdi.geoplatform.gml.api.parser.jts.geometry.sextante.JTSSextanteParser;
+import org.locationtech.jts.geom.Geometry;
 
 import javax.xml.bind.JAXBElement;
 

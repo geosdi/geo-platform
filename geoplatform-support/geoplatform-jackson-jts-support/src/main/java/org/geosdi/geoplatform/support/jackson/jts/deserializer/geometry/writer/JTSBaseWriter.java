@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.support.jackson.jts.deserializer.geometry.writer;
 
-import com.vividsolutions.jts.geom.Geometry;
+import org.locationtech.jts.geom.Geometry;
 import org.geojson.GeoJsonObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

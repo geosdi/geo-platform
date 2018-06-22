@@ -35,12 +35,12 @@
  */
 package org.geosdi.geoplatform.gml.api.jaxb.context;
 
-import com.vividsolutions.jts.geom.Geometry;
 import org.geosdi.geoplatform.gml.api.AbstractGeometry;
 import org.geosdi.geoplatform.gml.api.PropertyType;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.sextante.GMLBaseSextanteParser;
 import org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRepo;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
+import org.locationtech.jts.geom.Geometry;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBIntrospector;

@@ -35,19 +35,19 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.base.geometry.line.responsibility.outerchain;
 
-import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.GeometryFactory;
 import org.geosdi.geoplatform.gml.api.DirectPositionList;
 import org.geosdi.geoplatform.gml.api.LineString;
 import org.geosdi.geoplatform.gml.api.parser.base.coordinate.CoordinateBaseParser;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.responsibility.BaseGeometryHandler;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.GeometryFactory;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class DirectPositionLineGeometryHandler extends BaseGeometryHandler<LineString, com.vividsolutions.jts.geom.LineString, CoordinateBaseParser> {
+public class DirectPositionLineGeometryHandler extends BaseGeometryHandler<LineString, org.locationtech.jts.geom.LineString, CoordinateBaseParser> {
 
     public DirectPositionLineGeometryHandler() {
         super.setSuccessor(new CoordinatesLineGeometryHandler());
@@ -57,11 +57,11 @@ public class DirectPositionLineGeometryHandler extends BaseGeometryHandler<LineS
      * @param geometryFactory
      * @param gmlGeometry
      * @param parser
-     * @return {@link com.vividsolutions.jts.geom.LineString}
+     * @return {@link org.locationtech.jts.geom.LineString}
      * @throws ParserException
      */
     @Override
-    public com.vividsolutions.jts.geom.LineString buildGeometry(GeometryFactory geometryFactory,
+    public org.locationtech.jts.geom.LineString buildGeometry(GeometryFactory geometryFactory,
             LineString gmlGeometry, CoordinateBaseParser parser) throws ParserException {
         if (gmlGeometry.isSetPosList()) {
             DirectPositionList directPositionList = gmlGeometry.getPosList();

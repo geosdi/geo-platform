@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gml.impl.v311.jts.sextante;
 
-import com.vividsolutions.jts.geom.Geometry;
 import org.geosdi.geoplatform.gml.api.AbstractGeometry;
 import org.geosdi.geoplatform.gml.api.GeometryProperty;
 import org.geosdi.geoplatform.gml.api.jaxb.AbstractGMLObjectFactory;
@@ -43,6 +42,7 @@ import org.geosdi.geoplatform.gml.api.parser.base.GMLBaseVersion;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 import org.geosdi.geoplatform.gml.api.parser.jts.geometry.sextante.JTSSextanteParser;
 import org.geosdi.geoplatform.gml.impl.v311.jts.sextante.responsibility.JTSSextantePointHandler;
+import org.locationtech.jts.geom.Geometry;
 
 import javax.xml.bind.JAXBElement;
 

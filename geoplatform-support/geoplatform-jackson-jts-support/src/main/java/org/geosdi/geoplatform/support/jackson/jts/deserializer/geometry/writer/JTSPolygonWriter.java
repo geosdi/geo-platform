@@ -41,7 +41,7 @@ import org.geojson.Polygon;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class JTSPolygonWriter extends JTSBaseWriter<Polygon, com.vividsolutions.jts.geom.Polygon> {
+public class JTSPolygonWriter extends JTSBaseWriter<Polygon, org.locationtech.jts.geom.Polygon> {
 
     /**
      * @return {@link Class<Polygon>}
@@ -53,11 +53,11 @@ public class JTSPolygonWriter extends JTSBaseWriter<Polygon, com.vividsolutions.
 
     /**
      * @param polygon
-     * @return {@link com.vividsolutions.jts.geom.Polygon}
+     * @return {@link org.locationtech.jts.geom.Polygon}
      * @throws Exception
      */
     @Override
-    public com.vividsolutions.jts.geom.Polygon buildJTSGeometry(Polygon polygon) throws Exception {
+    public org.locationtech.jts.geom.Polygon buildJTSGeometry(Polygon polygon) throws Exception {
         logger.trace(":::::::::::::::{} is creating JTS Polygon for GeoJson Polygon : {}\n", this, polygon);
         return GEOMETRY_FACTORY.createPolygon(JTS_COORDINATE_WRITER.buildJTSLinearRing(polygon.getExteriorRing()),
                 JTS_COORDINATE_WRITER.buildJTSLinearRings(polygon.getInteriorRings()));

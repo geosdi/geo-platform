@@ -41,7 +41,7 @@ import org.geojson.Point;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class JTSPointWriter extends JTSBaseWriter<Point, com.vividsolutions.jts.geom.Point> {
+public class JTSPointWriter extends JTSBaseWriter<Point, org.locationtech.jts.geom.Point> {
 
     /**
      * @return {@link Class<Point>}
@@ -53,11 +53,11 @@ public class JTSPointWriter extends JTSBaseWriter<Point, com.vividsolutions.jts.
 
     /**
      * @param point
-     * @return {@link com.vividsolutions.jts.geom.Point}
+     * @return {@link org.locationtech.jts.geom.Point}
      * @throws Exception
      */
     @Override
-    public com.vividsolutions.jts.geom.Point buildJTSGeometry(Point point) throws Exception {
+    public org.locationtech.jts.geom.Point buildJTSGeometry(Point point) throws Exception {
         logger.trace(":::::::::::::::{} is creating JTS Point for GeoJson Point : {}\n", this, point);
         return GEOMETRY_FACTORY.createPoint(JTS_COORDINATE_WRITER.buildJTSCoordinate(point.getCoordinates()));
     }

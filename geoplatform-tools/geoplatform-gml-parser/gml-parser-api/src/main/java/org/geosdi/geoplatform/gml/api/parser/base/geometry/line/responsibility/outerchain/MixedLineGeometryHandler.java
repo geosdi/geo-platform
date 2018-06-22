@@ -35,14 +35,14 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.base.geometry.line.responsibility.outerchain;
 
-import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.GeometryFactory;
 import org.geosdi.geoplatform.gml.api.LineString;
 import org.geosdi.geoplatform.gml.api.parser.base.coordinate.CoordinateBaseParser;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.line.responsibility.internalchain.InternalPointLineHandler;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.point.GMLBasePointParser;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.responsibility.AbstractGeometryHandler;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.GeometryFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -54,7 +54,7 @@ import java.util.List;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class MixedLineGeometryHandler extends AbstractGeometryHandler<LineString, com.vividsolutions.jts.geom.LineString, GMLBasePointParser, CoordinateBaseParser>
+public class MixedLineGeometryHandler extends AbstractGeometryHandler<LineString, org.locationtech.jts.geom.LineString, GMLBasePointParser, CoordinateBaseParser>
         implements MixedLineHandler {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -70,11 +70,11 @@ public class MixedLineGeometryHandler extends AbstractGeometryHandler<LineString
      * @param gmlGeometry
      * @param firstParser
      * @param secondParser
-     * @return {@link com.vividsolutions.jts.geom.LineString}
+     * @return {@link org.locationtech.jts.geom.LineString}
      * @throws ParserException
      */
     @Override
-    public com.vividsolutions.jts.geom.LineString buildGeometry(GeometryFactory geometryFactory, LineString gmlGeometry,
+    public org.locationtech.jts.geom.LineString buildGeometry(GeometryFactory geometryFactory, LineString gmlGeometry,
             GMLBasePointParser firstParser, CoordinateBaseParser secondParser) throws ParserException {
         return gmlGeometry.isSetPosOrPointPropertyOrPointRep()
                 ? buildLineString(geometryFactory, gmlGeometry, firstParser,
@@ -86,11 +86,11 @@ public class MixedLineGeometryHandler extends AbstractGeometryHandler<LineString
      * @param geometryFactory
      * @param gmlGeometry
      * @param parser
-     * @return {@link com.vividsolutions.jts.geom.LineString}
+     * @return {@link org.locationtech.jts.geom.LineString}
      * @throws ParserException
      */
     @Override
-    public com.vividsolutions.jts.geom.LineString buildGeometry(GeometryFactory geometryFactory,
+    public org.locationtech.jts.geom.LineString buildGeometry(GeometryFactory geometryFactory,
             LineString gmlGeometry, CoordinateBaseParser parser) throws ParserException {
         return super.forwardBuildGeometry(geometryFactory, gmlGeometry, parser);
     }
@@ -100,11 +100,11 @@ public class MixedLineGeometryHandler extends AbstractGeometryHandler<LineString
      * @param gmlGeometry
      * @param firstParser
      * @param secondParser
-     * @return {@link com.vividsolutions.jts.geom.LineString}
+     * @return {@link org.locationtech.jts.geom.LineString}
      * @throws ParserException
      */
     @Override
-    public com.vividsolutions.jts.geom.LineString buildLineString(GeometryFactory geometryFactory,
+    public org.locationtech.jts.geom.LineString buildLineString(GeometryFactory geometryFactory,
             LineString gmlGeometry, GMLBasePointParser firstParser, CoordinateBaseParser secondParser)
             throws ParserException {
         List<Coordinate> coordinates = new ArrayList<>();

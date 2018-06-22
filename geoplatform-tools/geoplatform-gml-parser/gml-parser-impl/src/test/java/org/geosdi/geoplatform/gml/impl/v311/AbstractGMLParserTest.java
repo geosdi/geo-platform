@@ -35,13 +35,13 @@
  */
 package org.geosdi.geoplatform.gml.impl.v311;
 
-import com.vividsolutions.jts.geom.GeometryFactory;
-import com.vividsolutions.jts.io.WKTReader;
 import org.geosdi.geoplatform.gml.api.jaxb.context.GMLJAXBContext;
 import org.geosdi.geoplatform.gml.impl.v311.jaxb.context.factory.GMLContextFactoryV311;
 import org.geosdi.geoplatform.gml.impl.v311.jaxb.context.factory.GMLContextType;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.locationtech.jts.geom.GeometryFactory;
+import org.locationtech.jts.io.WKTReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

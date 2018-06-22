@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.base.parameter.bridge.implementor;
 
-import com.vividsolutions.jts.geom.GeometryFactory;
+import org.locationtech.jts.geom.GeometryFactory;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

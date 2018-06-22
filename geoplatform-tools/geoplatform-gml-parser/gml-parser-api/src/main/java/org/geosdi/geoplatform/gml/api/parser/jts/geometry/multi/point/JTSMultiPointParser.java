@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.jts.geometry.multi.point;
 
-import com.vividsolutions.jts.geom.Point;
+import org.locationtech.jts.geom.Point;
 import org.geosdi.geoplatform.gml.api.MultiPoint;
 import org.geosdi.geoplatform.gml.api.MultiPointProperty;
 import org.geosdi.geoplatform.gml.api.jaxb.AbstractGMLObjectFactory;
@@ -52,7 +52,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class JTSMultiPointParser extends AbstractJTSParser<MultiPoint, MultiPointProperty, com.vividsolutions.jts.geom.MultiPoint> {
+public class JTSMultiPointParser extends AbstractJTSParser<MultiPoint, MultiPointProperty, org.locationtech.jts.geom.MultiPoint> {
 
     private JTSPointParser pointParser;
 
@@ -73,7 +73,7 @@ public class JTSMultiPointParser extends AbstractJTSParser<MultiPoint, MultiPoin
      * @throws ParserException
      */
     @Override
-    protected MultiPoint canParseGeometry(com.vividsolutions.jts.geom.MultiPoint jtsGeometry) throws ParserException {
+    protected MultiPoint canParseGeometry(org.locationtech.jts.geom.MultiPoint jtsGeometry) throws ParserException {
         MultiPoint multiPoint = gmlObjectFactory.createMultiPointType();
         for (int i = 0; i < jtsGeometry.getNumGeometries(); i++) {
             Point point = (Point) jtsGeometry.getGeometryN(i);
@@ -88,7 +88,7 @@ public class JTSMultiPointParser extends AbstractJTSParser<MultiPoint, MultiPoin
      * @throws ParserException
      */
     @Override
-    public MultiPointProperty parseProperty(com.vividsolutions.jts.geom.MultiPoint jtsGeometry) throws ParserException {
+    public MultiPointProperty parseProperty(org.locationtech.jts.geom.MultiPoint jtsGeometry) throws ParserException {
         checkNotNull(jtsGeometry, "The JTS MultiPoint Geometry must not be null.");
         MultiPointProperty multiPointProperty = gmlObjectFactory.createMultiPointPropertyType();
         multiPointProperty.setMultiPoint(super.parseGeometry(jtsGeometry));
@@ -101,7 +101,7 @@ public class JTSMultiPointParser extends AbstractJTSParser<MultiPoint, MultiPoin
      * @throws ParserException
      */
     @Override
-    public JAXBElement<? extends MultiPoint> buildJAXBElement(com.vividsolutions.jts.geom.MultiPoint geometry)
+    public JAXBElement<? extends MultiPoint> buildJAXBElement(org.locationtech.jts.geom.MultiPoint geometry)
             throws ParserException {
         return gmlObjectFactory.createMultiPoint(super.parseGeometry(geometry));
     }

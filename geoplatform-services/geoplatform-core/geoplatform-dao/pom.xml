@@ -162,12 +162,6 @@
         <dependency>
             <groupId>com.googlecode.genericdao</groupId>
             <artifactId>dao</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-api</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <dependency>

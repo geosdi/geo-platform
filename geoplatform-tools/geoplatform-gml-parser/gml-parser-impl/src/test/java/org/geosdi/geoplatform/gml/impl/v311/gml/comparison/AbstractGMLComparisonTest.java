@@ -35,11 +35,11 @@
  */
 package org.geosdi.geoplatform.gml.impl.v311.gml.comparison;
 
-import com.vividsolutions.jts.geom.Geometry;
 import org.geosdi.geoplatform.gml.api.jaxb.context.GMLJAXBContext;
 import org.geosdi.geoplatform.gml.api.jaxb.context.GMLUnmarshaller;
 import org.geosdi.geoplatform.gml.impl.v311.jaxb.context.pool.GMLJAXBContextPooledV311;
 import org.junit.BeforeClass;
+import org.locationtech.jts.geom.Geometry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

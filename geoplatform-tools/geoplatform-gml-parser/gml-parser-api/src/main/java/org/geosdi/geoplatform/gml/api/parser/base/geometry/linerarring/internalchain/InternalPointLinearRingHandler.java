@@ -35,12 +35,12 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.base.geometry.linerarring.internalchain;
 
-import com.vividsolutions.jts.geom.GeometryFactory;
-import com.vividsolutions.jts.geom.Point;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.point.GMLBasePointParser;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.responsibility.AbstractInternalChainHandler;
 import org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRepo;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
+import org.locationtech.jts.geom.GeometryFactory;
+import org.locationtech.jts.geom.Point;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

@@ -35,13 +35,13 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.base.geometry.sextante.responsability;
 
-import com.vividsolutions.jts.geom.Geometry;
 import org.geosdi.geoplatform.gml.api.AbstractGeometricAggregate;
 import org.geosdi.geoplatform.gml.api.AbstractGeometry;
 import org.geosdi.geoplatform.gml.api.MultiGeometryProperty;
 import org.geosdi.geoplatform.gml.api.PropertyType;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.collection.GMLBaseGeometryCollectionParser;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
+import org.locationtech.jts.geom.Geometry;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

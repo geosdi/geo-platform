@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.jaxb.spatial.adapter;
 
-import com.vividsolutions.jts.geom.MultiLineString;
+import org.locationtech.jts.geom.MultiLineString;
 
 /**
  *

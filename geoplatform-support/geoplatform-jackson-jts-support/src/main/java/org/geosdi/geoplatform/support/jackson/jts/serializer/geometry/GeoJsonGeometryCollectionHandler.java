@@ -36,8 +36,8 @@
 package org.geosdi.geoplatform.support.jackson.jts.serializer.geometry;
 
 import com.fasterxml.jackson.core.JsonGenerator;
-import com.vividsolutions.jts.geom.Geometry;
-import com.vividsolutions.jts.geom.GeometryCollection;
+import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.geom.GeometryCollection;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

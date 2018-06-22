@@ -35,9 +35,9 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.base.geometry.responsibility;
 
-import com.vividsolutions.jts.geom.Geometry;
-import com.vividsolutions.jts.geom.GeometryFactory;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
+import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.geom.GeometryFactory;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

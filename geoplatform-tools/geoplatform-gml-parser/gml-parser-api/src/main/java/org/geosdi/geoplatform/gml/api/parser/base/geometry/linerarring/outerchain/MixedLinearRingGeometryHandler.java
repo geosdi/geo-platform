@@ -35,14 +35,14 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.base.geometry.linerarring.outerchain;
 
-import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.GeometryFactory;
 import org.geosdi.geoplatform.gml.api.LinearRing;
 import org.geosdi.geoplatform.gml.api.parser.base.coordinate.CoordinateBaseParser;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.linerarring.internalchain.InternalDirectPosLinerarRingHandler;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.point.GMLBasePointParser;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.responsibility.AbstractGeometryHandler;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.GeometryFactory;
 
 import javax.xml.bind.JAXBElement;
 import java.util.ArrayList;
@@ -52,7 +52,7 @@ import java.util.List;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class MixedLinearRingGeometryHandler extends AbstractGeometryHandler<LinearRing, com.vividsolutions.jts.geom.LinearRing, GMLBasePointParser, CoordinateBaseParser>
+public class MixedLinearRingGeometryHandler extends AbstractGeometryHandler<LinearRing, org.locationtech.jts.geom.LinearRing, GMLBasePointParser, CoordinateBaseParser>
         implements MixedLineraRingHandler {
 
     private InternalDirectPosLinerarRingHandler internalDirectPosHandler;
@@ -67,11 +67,11 @@ public class MixedLinearRingGeometryHandler extends AbstractGeometryHandler<Line
      * @param gmlGeometry
      * @param firstParser
      * @param secondParser
-     * @return {@link com.vividsolutions.jts.geom.LinearRing}
+     * @return {@link org.locationtech.jts.geom.LinearRing}
      * @throws ParserException
      */
     @Override
-    public com.vividsolutions.jts.geom.LinearRing buildGeometry(GeometryFactory geometryFactory, LinearRing gmlGeometry,
+    public org.locationtech.jts.geom.LinearRing buildGeometry(GeometryFactory geometryFactory, LinearRing gmlGeometry,
             GMLBasePointParser firstParser, CoordinateBaseParser secondParser) throws ParserException {
         return gmlGeometry.isSetPosOrPointPropertyOrPointRep()
                 ? buildLineString(geometryFactory, gmlGeometry, firstParser,
@@ -83,11 +83,11 @@ public class MixedLinearRingGeometryHandler extends AbstractGeometryHandler<Line
      * @param geometryFactory
      * @param gmlGeometry
      * @param parser
-     * @return {@link com.vividsolutions.jts.geom.LinearRing}
+     * @return {@link org.locationtech.jts.geom.LinearRing}
      * @throws ParserException
      */
     @Override
-    public com.vividsolutions.jts.geom.LinearRing buildGeometry(GeometryFactory geometryFactory, LinearRing gmlGeometry,
+    public org.locationtech.jts.geom.LinearRing buildGeometry(GeometryFactory geometryFactory, LinearRing gmlGeometry,
             CoordinateBaseParser parser) throws ParserException {
         return super.forwardBuildGeometry(geometryFactory, gmlGeometry, parser);
     }
@@ -97,11 +97,11 @@ public class MixedLinearRingGeometryHandler extends AbstractGeometryHandler<Line
      * @param gmlGeometry
      * @param firstParser
      * @param secondParser
-     * @return {@link com.vividsolutions.jts.geom.LinearRing}
+     * @return {@link org.locationtech.jts.geom.LinearRing}
      * @throws ParserException
      */
     @Override
-    public com.vividsolutions.jts.geom.LinearRing buildLineString(GeometryFactory geometryFactory, LinearRing gmlGeometry,
+    public org.locationtech.jts.geom.LinearRing buildLineString(GeometryFactory geometryFactory, LinearRing gmlGeometry,
             GMLBasePointParser firstParser, CoordinateBaseParser secondParser) throws ParserException {
         List<Coordinate> coordinates = new ArrayList<Coordinate>();
         for (JAXBElement<?> element : gmlGeometry.getPosOrPointPropertyOrPointRep()) {

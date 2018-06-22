@@ -35,9 +35,9 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.base.geometry.polygon.builder;
 
-import com.vividsolutions.jts.geom.LinearRing;
 import org.geosdi.geoplatform.gml.api.Polygon;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
+import org.locationtech.jts.geom.LinearRing;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

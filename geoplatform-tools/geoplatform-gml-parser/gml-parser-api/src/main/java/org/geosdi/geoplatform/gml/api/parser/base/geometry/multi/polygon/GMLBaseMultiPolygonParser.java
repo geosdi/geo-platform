@@ -35,9 +35,6 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.base.geometry.multi.polygon;
 
-import com.google.common.base.Preconditions;
-import com.vividsolutions.jts.geom.GeometryFactory;
-import com.vividsolutions.jts.geom.Polygon;
 import org.geosdi.geoplatform.gml.api.MultiPolygon;
 import org.geosdi.geoplatform.gml.api.MultiPolygonProperty;
 import org.geosdi.geoplatform.gml.api.PolygonProperty;
@@ -45,17 +42,20 @@ import org.geosdi.geoplatform.gml.api.parser.base.AbstractGMLBaseParser;
 import org.geosdi.geoplatform.gml.api.parser.base.AbstractGMLBaseSRSParser;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.polygon.GMLBasePolygonParser;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
+import org.locationtech.jts.geom.GeometryFactory;
+import org.locationtech.jts.geom.Polygon;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GMLBaseMultiPolygonParser extends AbstractGMLBaseParser<MultiPolygon, MultiPolygonProperty, com.vividsolutions.jts.geom.MultiPolygon> {
+public class GMLBaseMultiPolygonParser extends AbstractGMLBaseParser<MultiPolygon, MultiPolygonProperty, org.locationtech.jts.geom.MultiPolygon> {
 
     private GMLBasePolygonParser polygonParser;
 
@@ -72,14 +72,13 @@ public class GMLBaseMultiPolygonParser extends AbstractGMLBaseParser<MultiPolygo
 
     /**
      * @param gmlGeometry
-     * @return {@link com.vividsolutions.jts.geom.MultiPolygon}
+     * @return {@link org.locationtech.jts.geom.MultiPolygon}
      * @throws ParserException
      */
     @Override
-    protected com.vividsolutions.jts.geom.MultiPolygon canParseGeometry(MultiPolygon gmlGeometry)
+    protected org.locationtech.jts.geom.MultiPolygon canParseGeometry(MultiPolygon gmlGeometry)
             throws ParserException {
-        Preconditions.checkArgument(gmlGeometry.isSetPolygonMember(),
-                "The Polygon Member Property must not be null.");
+        checkArgument(gmlGeometry.isSetPolygonMember(), "The Polygon Member Property must not be null.");
         List<Polygon> polygons = new ArrayList<>(gmlGeometry.getPolygonMember().size());
         for (PolygonProperty polygonProperty : gmlGeometry.getPolygonMember()) {
             if ((gmlGeometry.isSetSrsDimension()) && (polygonProperty.isSetPolygon())
@@ -92,12 +91,12 @@ public class GMLBaseMultiPolygonParser extends AbstractGMLBaseParser<MultiPolygo
 
     /**
      * @param propertyType
-     * @return {@link com.vividsolutions.jts.geom.MultiPolygon
+     * @return {@link org.locationtech.jts.geom.MultiPolygon}
      * }
      * @throws ParserException
      */
     @Override
-    public com.vividsolutions.jts.geom.MultiPolygon parseGeometry(MultiPolygonProperty propertyType)
+    public org.locationtech.jts.geom.MultiPolygon parseGeometry(MultiPolygonProperty propertyType)
             throws ParserException {
         checkNotNull(propertyType, "The MultiPolygonProperty Type must not be null.");
         if (propertyType.isSetMultiPolygon()) {

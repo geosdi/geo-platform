@@ -52,7 +52,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class JTSPointParser extends AbstractJTSParser<Point, PointProperty, com.vividsolutions.jts.geom.Point> {
+public class JTSPointParser extends AbstractJTSParser<Point, PointProperty, org.locationtech.jts.geom.Point> {
 
     private CoordinateParser coordinateParser;
 
@@ -73,7 +73,7 @@ public class JTSPointParser extends AbstractJTSParser<Point, PointProperty, com.
      * @throws ParserException
      */
     @Override
-    protected Point canParseGeometry(com.vividsolutions.jts.geom.Point jtsGeometry) throws ParserException {
+    protected Point canParseGeometry(org.locationtech.jts.geom.Point jtsGeometry) throws ParserException {
         Point point = gmlObjectFactory.createPointType();
         if (!jtsGeometry.isEmpty()) {
             DirectPosition directPosition = coordinateParser.parseCoordinate(jtsGeometry.getCoordinate());
@@ -88,7 +88,7 @@ public class JTSPointParser extends AbstractJTSParser<Point, PointProperty, com.
      * @throws ParserException
      */
     @Override
-    public PointProperty parseProperty(com.vividsolutions.jts.geom.Point jtsGeometry) throws ParserException {
+    public PointProperty parseProperty(org.locationtech.jts.geom.Point jtsGeometry) throws ParserException {
         checkNotNull(jtsGeometry, "The JTS Point must not be null.");
         PointProperty pointProperty = gmlObjectFactory.createPointPropertyType();
         pointProperty.setPoint(super.parseGeometry(jtsGeometry));
@@ -101,7 +101,7 @@ public class JTSPointParser extends AbstractJTSParser<Point, PointProperty, com.
      * @throws ParserException
      */
     @Override
-    public JAXBElement<? extends Point> buildJAXBElement(com.vividsolutions.jts.geom.Point geometry)
+    public JAXBElement<? extends Point> buildJAXBElement(org.locationtech.jts.geom.Point geometry)
             throws ParserException {
         return gmlObjectFactory.createPoint(super.parseGeometry(geometry));
     }

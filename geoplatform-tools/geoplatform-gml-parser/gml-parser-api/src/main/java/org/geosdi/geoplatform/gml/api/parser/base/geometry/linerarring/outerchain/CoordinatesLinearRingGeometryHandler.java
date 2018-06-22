@@ -35,27 +35,27 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.base.geometry.linerarring.outerchain;
 
-import com.vividsolutions.jts.geom.GeometryFactory;
 import org.geosdi.geoplatform.gml.api.LinearRing;
 import org.geosdi.geoplatform.gml.api.parser.base.coordinate.CoordinateBaseParser;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.responsibility.BaseGeometryHandler;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
+import org.locationtech.jts.geom.GeometryFactory;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class CoordinatesLinearRingGeometryHandler extends BaseGeometryHandler<LinearRing, com.vividsolutions.jts.geom.LinearRing, CoordinateBaseParser> {
+public class CoordinatesLinearRingGeometryHandler extends BaseGeometryHandler<LinearRing, org.locationtech.jts.geom.LinearRing, CoordinateBaseParser> {
 
     /**
      * @param geometryFactory
      * @param gmlGeometry
      * @param parser
-     * @return {@link com.vividsolutions.jts.geom.LinearRing}
+     * @return {@link org.locationtech.jts.geom.LinearRing}
      * @throws ParserException
      */
     @Override
-    public com.vividsolutions.jts.geom.LinearRing buildGeometry(GeometryFactory geometryFactory, LinearRing gmlGeometry,
+    public org.locationtech.jts.geom.LinearRing buildGeometry(GeometryFactory geometryFactory, LinearRing gmlGeometry,
             CoordinateBaseParser parser) throws ParserException {
         if (gmlGeometry.isSetCoordinates()) {
             return geometryFactory.createLinearRing(parser.parseCoordinates(gmlGeometry.getCoordinates()));

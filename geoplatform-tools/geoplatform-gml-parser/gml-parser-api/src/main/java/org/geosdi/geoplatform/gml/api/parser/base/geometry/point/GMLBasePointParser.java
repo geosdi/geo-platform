@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.base.geometry.point;
 
-import com.vividsolutions.jts.geom.GeometryFactory;
 import org.geosdi.geoplatform.gml.api.Point;
 import org.geosdi.geoplatform.gml.api.PointProperty;
 import org.geosdi.geoplatform.gml.api.parser.base.AbstractGMLBaseParser;
@@ -44,6 +43,7 @@ import org.geosdi.geoplatform.gml.api.parser.base.coordinate.CoordinateBaseParse
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.point.responsibility.BasePointGeometryHandler;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.point.responsibility.DirectPositionGeometryHandler;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
+import org.locationtech.jts.geom.GeometryFactory;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -51,7 +51,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GMLBasePointParser extends AbstractGMLBaseParser<Point, PointProperty, com.vividsolutions.jts.geom.Point> {
+public class GMLBasePointParser extends AbstractGMLBaseParser<Point, PointProperty, org.locationtech.jts.geom.Point> {
 
     private final CoordinateBaseParser coordinateParser;
     private final BasePointGeometryHandler directPos = new DirectPositionGeometryHandler();
@@ -70,11 +70,11 @@ public class GMLBasePointParser extends AbstractGMLBaseParser<Point, PointProper
 
     /**
      * @param gmlGeometry
-     * @return {@link com.vividsolutions.jts.geom.Point}
+     * @return {@link org.locationtech.jts.geom.Point}
      * @throws ParserException
      */
     @Override
-    protected com.vividsolutions.jts.geom.Point canParseGeometry(Point gmlGeometry) throws ParserException {
+    protected org.locationtech.jts.geom.Point canParseGeometry(Point gmlGeometry) throws ParserException {
         return directPos.buildGeometry(geometryFactory, gmlGeometry, coordinateParser);
     }
 
@@ -84,7 +84,7 @@ public class GMLBasePointParser extends AbstractGMLBaseParser<Point, PointProper
      * @throws ParserException
      */
     @Override
-    public com.vividsolutions.jts.geom.Point parseGeometry(PointProperty propertyType) throws ParserException {
+    public org.locationtech.jts.geom.Point parseGeometry(PointProperty propertyType) throws ParserException {
         checkNotNull(propertyType, "The Property Type must not be null.");
         if (propertyType.isSetPoint()) {
             return super.parseGeometry(propertyType.getPoint());

@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.base.geometry.sextante.responsability;
 
-import com.vividsolutions.jts.geom.Geometry;
 import org.geosdi.geoplatform.gml.api.AbstractGeometry;
 import org.geosdi.geoplatform.gml.api.MultiLineString;
 import org.geosdi.geoplatform.gml.api.MultiLineStringProperty;
@@ -43,6 +42,7 @@ import org.geosdi.geoplatform.gml.api.PropertyType;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.multi.line.GMLBaseMultiLineStringParser;
 import org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRepo;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
+import org.locationtech.jts.geom.Geometry;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

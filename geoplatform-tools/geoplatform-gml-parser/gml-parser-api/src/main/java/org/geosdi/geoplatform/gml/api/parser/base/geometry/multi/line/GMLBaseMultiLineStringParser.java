@@ -35,8 +35,8 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.base.geometry.multi.line;
 
-import com.vividsolutions.jts.geom.GeometryFactory;
-import com.vividsolutions.jts.geom.LineString;
+import org.locationtech.jts.geom.GeometryFactory;
+import org.locationtech.jts.geom.LineString;
 import org.geosdi.geoplatform.gml.api.LineStringProperty;
 import org.geosdi.geoplatform.gml.api.MultiLineString;
 import org.geosdi.geoplatform.gml.api.MultiLineStringProperty;
@@ -55,7 +55,7 @@ import static com.google.common.base.Preconditions.checkState;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GMLBaseMultiLineStringParser extends AbstractGMLBaseParser<MultiLineString, MultiLineStringProperty, com.vividsolutions.jts.geom.MultiLineString> {
+public class GMLBaseMultiLineStringParser extends AbstractGMLBaseParser<MultiLineString, MultiLineStringProperty, org.locationtech.jts.geom.MultiLineString> {
 
     private GMLBaseLineStringParser lineStringParser;
 
@@ -72,11 +72,11 @@ public class GMLBaseMultiLineStringParser extends AbstractGMLBaseParser<MultiLin
 
     /**
      * @param gmlGeometry
-     * @return {@link com.vividsolutions.jts.geom.MultiLineString}
+     * @return {@link org.locationtech.jts.geom.MultiLineString}
      * @throws ParserException
      */
     @Override
-    protected com.vividsolutions.jts.geom.MultiLineString canParseGeometry(MultiLineString gmlGeometry)
+    protected org.locationtech.jts.geom.MultiLineString canParseGeometry(MultiLineString gmlGeometry)
             throws ParserException {
         checkState(gmlGeometry.isSetLineStringMember(), "The LineStringMember is not present.");
         List<LineString> lines = new ArrayList<>(gmlGeometry.getLineStringMember().size());
@@ -91,11 +91,11 @@ public class GMLBaseMultiLineStringParser extends AbstractGMLBaseParser<MultiLin
 
     /**
      * @param propertyType
-     * @return {@link com.vividsolutions.jts.geom.MultiLineString}
+     * @return {@link org.locationtech.jts.geom.MultiLineString}
      * @throws ParserException
      */
     @Override
-    public com.vividsolutions.jts.geom.MultiLineString parseGeometry(MultiLineStringProperty propertyType)
+    public org.locationtech.jts.geom.MultiLineString parseGeometry(MultiLineStringProperty propertyType)
             throws ParserException {
         checkNotNull(propertyType, "The MultiLineString Property must not be null.");
         if (propertyType.isSetMultiLineString()) {

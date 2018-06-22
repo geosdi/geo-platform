@@ -35,9 +35,9 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.base.geometry.multi.surface;
 
-import com.vividsolutions.jts.geom.GeometryFactory;
-import com.vividsolutions.jts.geom.MultiPolygon;
-import com.vividsolutions.jts.geom.Polygon;
+import org.locationtech.jts.geom.GeometryFactory;
+import org.locationtech.jts.geom.MultiPolygon;
+import org.locationtech.jts.geom.Polygon;
 import org.geosdi.geoplatform.gml.api.*;
 import org.geosdi.geoplatform.gml.api.parser.base.AbstractGMLBaseParser;
 import org.geosdi.geoplatform.gml.api.parser.base.AbstractGMLBaseSRSParser;

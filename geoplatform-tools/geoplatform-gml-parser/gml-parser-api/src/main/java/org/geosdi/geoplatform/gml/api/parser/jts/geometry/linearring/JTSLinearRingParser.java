@@ -52,7 +52,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class JTSLinearRingParser extends AbstractJTSParser<LinearRing, AbstractRingProperty, com.vividsolutions.jts.geom.LinearRing> {
+public class JTSLinearRingParser extends AbstractJTSParser<LinearRing, AbstractRingProperty, org.locationtech.jts.geom.LinearRing> {
 
     private CoordinateParser coordinateParser;
 
@@ -73,7 +73,7 @@ public class JTSLinearRingParser extends AbstractJTSParser<LinearRing, AbstractR
      * @throws ParserException
      */
     @Override
-    protected LinearRing canParseGeometry(com.vividsolutions.jts.geom.LinearRing jtsGeometry) throws ParserException {
+    protected LinearRing canParseGeometry(org.locationtech.jts.geom.LinearRing jtsGeometry) throws ParserException {
         LinearRing linearRing = gmlObjectFactory.createLinearRingType();
         for (DirectPosition directPosition : coordinateParser.parseCoordinates(jtsGeometry.getCoordinates())) {
             JAXBElement<? extends DirectPosition> element = gmlObjectFactory.createPos(directPosition);
@@ -88,7 +88,7 @@ public class JTSLinearRingParser extends AbstractJTSParser<LinearRing, AbstractR
      * @throws ParserException
      */
     @Override
-    public AbstractRingProperty parseProperty(com.vividsolutions.jts.geom.LinearRing jtsGeometry) throws ParserException {
+    public AbstractRingProperty parseProperty(org.locationtech.jts.geom.LinearRing jtsGeometry) throws ParserException {
         checkNotNull(jtsGeometry, "The JTS LinearRing geometry must not be null.");
         AbstractRingProperty ringProperty = gmlObjectFactory.createAbstractRingPropertyType();
         ringProperty.setRing(gmlObjectFactory.createLinearRing(super.parseGeometry(jtsGeometry)));
@@ -101,7 +101,7 @@ public class JTSLinearRingParser extends AbstractJTSParser<LinearRing, AbstractR
      * @throws ParserException
      */
     @Override
-    public JAXBElement<? extends LinearRing> buildJAXBElement(com.vividsolutions.jts.geom.LinearRing geometry)
+    public JAXBElement<? extends LinearRing> buildJAXBElement(org.locationtech.jts.geom.LinearRing geometry)
             throws ParserException {
         return gmlObjectFactory.createLinearRing(super.parseGeometry(geometry));
     }

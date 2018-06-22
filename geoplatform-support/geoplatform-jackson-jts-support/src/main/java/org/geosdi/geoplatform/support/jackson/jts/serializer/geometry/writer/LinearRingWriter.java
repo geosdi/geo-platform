@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.support.jackson.jts.serializer.geometry.writer;
 
-import com.vividsolutions.jts.geom.LinearRing;
+import org.locationtech.jts.geom.LinearRing;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

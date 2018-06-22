@@ -35,8 +35,8 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.base.geometry.polygon;
 
-import com.vividsolutions.jts.geom.GeometryFactory;
-import com.vividsolutions.jts.geom.LinearRing;
+import org.locationtech.jts.geom.GeometryFactory;
+import org.locationtech.jts.geom.LinearRing;
 import org.geosdi.geoplatform.gml.api.Polygon;
 import org.geosdi.geoplatform.gml.api.PolygonProperty;
 import org.geosdi.geoplatform.gml.api.parser.base.AbstractGMLBaseParser;
@@ -52,7 +52,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GMLBasePolygonParser extends AbstractGMLBaseParser<Polygon, PolygonProperty, com.vividsolutions.jts.geom.Polygon> {
+public class GMLBasePolygonParser extends AbstractGMLBaseParser<Polygon, PolygonProperty, org.locationtech.jts.geom.Polygon> {
 
     private final GMLBaseLinearRingParser linearRingParser;
     private final PolygonBuilder polygonBuilder;
@@ -71,11 +71,11 @@ public class GMLBasePolygonParser extends AbstractGMLBaseParser<Polygon, Polygon
 
     /**
      * @param gmlGeometry
-     * @return {@link com.vividsolutions.jts.geom.Polygon}
+     * @return {@link org.locationtech.jts.geom.Polygon}
      * @throws ParserException
      */
     @Override
-    protected com.vividsolutions.jts.geom.Polygon canParseGeometry(Polygon gmlGeometry)
+    protected org.locationtech.jts.geom.Polygon canParseGeometry(Polygon gmlGeometry)
             throws ParserException {
         LinearRing shell = this.polygonBuilder.buildExteriorPolygon(gmlGeometry);
         LinearRing[] holes = this.polygonBuilder.buildInteriorPolygon(gmlGeometry);
@@ -84,11 +84,11 @@ public class GMLBasePolygonParser extends AbstractGMLBaseParser<Polygon, Polygon
 
     /**
      * @param propertyType
-     * @return {@link com.vividsolutions.jts.geom.Polygon}
+     * @return {@link org.locationtech.jts.geom.Polygon}
      * @throws ParserException
      */
     @Override
-    public com.vividsolutions.jts.geom.Polygon parseGeometry(PolygonProperty propertyType) throws ParserException {
+    public org.locationtech.jts.geom.Polygon parseGeometry(PolygonProperty propertyType) throws ParserException {
         checkNotNull(propertyType, "The Polygon Property Type must not be null.");
         if (propertyType.isSetPolygon()) {
             return super.parseGeometry(propertyType.getPolygon());

@@ -41,7 +41,7 @@ import org.geojson.MultiPoint;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class JTSMultiPointWriter extends JTSBaseWriter<MultiPoint, com.vividsolutions.jts.geom.MultiPoint> {
+public class JTSMultiPointWriter extends JTSBaseWriter<MultiPoint, org.locationtech.jts.geom.MultiPoint> {
 
     /**
      * @return {@link Class<MultiPoint>}
@@ -53,11 +53,11 @@ public class JTSMultiPointWriter extends JTSBaseWriter<MultiPoint, com.vividsolu
 
     /**
      * @param multiPoint
-     * @return {@link com.vividsolutions.jts.geom.MultiPoint}
+     * @return {@link org.locationtech.jts.geom.MultiPoint}
      * @throws Exception
      */
     @Override
-    public com.vividsolutions.jts.geom.MultiPoint buildJTSGeometry(MultiPoint multiPoint) throws Exception {
+    public org.locationtech.jts.geom.MultiPoint buildJTSGeometry(MultiPoint multiPoint) throws Exception {
         logger.trace(":::::::::::::::{} is creating JTS MultiPoint for GeoJson MultiPoint : {}\n", this, multiPoint);
         return GEOMETRY_FACTORY.createMultiPoint(JTS_COORDINATE_WRITER.buildJTSPoints(multiPoint.getCoordinates()));
     }

@@ -35,13 +35,13 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.base.geometry.sextante;
 
-import com.vividsolutions.jts.geom.Geometry;
 import org.geosdi.geoplatform.gml.api.AbstractGeometry;
 import org.geosdi.geoplatform.gml.api.PropertyType;
 import org.geosdi.geoplatform.gml.api.parser.base.GMLBaseParser;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.sextante.responsability.SextanteGeometryHandler;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.sextante.responsability.SextantePointHandler;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
+import org.locationtech.jts.geom.Geometry;
 
 /**
  * <p>This class represents the Sextante to parse All GML Geometry in JTS

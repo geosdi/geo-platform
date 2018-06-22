@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.base.parameter;
 
-import com.vividsolutions.jts.geom.GeometryFactory;
 import org.geosdi.geoplatform.gml.api.parser.base.DefaultSRSBaseParser;
 import org.geosdi.geoplatform.gml.api.parser.base.coordinate.CoordinateBaseParser;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.curve.GMLBaseCurveParser;
@@ -53,6 +52,7 @@ import org.geosdi.geoplatform.gml.api.parser.base.geometry.sextante.GMLBaseSexta
 import org.geosdi.geoplatform.gml.api.parser.base.parameter.bridge.implementor.BaseParameterValue;
 import org.geosdi.geoplatform.gml.api.parser.base.parameter.bridge.store.BaseParameterValueStore;
 import org.geosdi.geoplatform.support.bridge.store.GPImplementorStore;
+import org.locationtech.jts.geom.GeometryFactory;
 
 import static org.geosdi.geoplatform.gml.api.parser.base.parameter.bridge.implementor.BaseParameterEnum.*;
 

@@ -35,12 +35,12 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.base.geometry.collection;
 
-import com.vividsolutions.jts.geom.GeometryCollection;
 import org.geosdi.geoplatform.gml.api.*;
 import org.geosdi.geoplatform.gml.api.parser.base.GMLBaseParser;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.collection.responsability.GeometryCollectionHandler;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.collection.responsability.MultiPointCollectionHandler;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
+import org.locationtech.jts.geom.GeometryCollection;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 

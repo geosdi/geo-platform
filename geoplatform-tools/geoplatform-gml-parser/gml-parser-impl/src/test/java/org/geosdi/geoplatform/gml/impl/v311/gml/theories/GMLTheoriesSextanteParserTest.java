@@ -35,14 +35,14 @@
  */
 package org.geosdi.geoplatform.gml.impl.v311.gml.theories;
 
-import com.vividsolutions.jts.geom.Geometry;
-import com.vividsolutions.jts.io.WKTWriter;
 import org.geosdi.geoplatform.gml.impl.v311.AbstractGMLParserTest;
 import org.junit.BeforeClass;
 import org.junit.experimental.theories.DataPoints;
 import org.junit.experimental.theories.Theories;
 import org.junit.experimental.theories.Theory;
 import org.junit.runner.RunWith;
+import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.io.WKTWriter;
 
 import java.io.File;
 import java.io.IOException;

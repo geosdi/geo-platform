@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.jts.geometry.multi.polygon;
 
-import com.vividsolutions.jts.geom.Polygon;
+import org.locationtech.jts.geom.Polygon;
 import org.geosdi.geoplatform.gml.api.MultiPolygon;
 import org.geosdi.geoplatform.gml.api.MultiPolygonProperty;
 import org.geosdi.geoplatform.gml.api.jaxb.AbstractGMLObjectFactory;
@@ -52,7 +52,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class JTSMultiPolygonParser extends AbstractJTSParser<MultiPolygon, MultiPolygonProperty, com.vividsolutions.jts.geom.MultiPolygon> {
+public class JTSMultiPolygonParser extends AbstractJTSParser<MultiPolygon, MultiPolygonProperty, org.locationtech.jts.geom.MultiPolygon> {
 
     private JTSPolygonParser polygonParser;
 
@@ -73,7 +73,7 @@ public class JTSMultiPolygonParser extends AbstractJTSParser<MultiPolygon, Multi
      * @throws ParserException
      */
     @Override
-    protected MultiPolygon canParseGeometry(com.vividsolutions.jts.geom.MultiPolygon jtsGeometry) throws ParserException {
+    protected MultiPolygon canParseGeometry(org.locationtech.jts.geom.MultiPolygon jtsGeometry) throws ParserException {
         MultiPolygon multiPolygon = gmlObjectFactory.createMultiPolygonType();
         for (int i = 0; i < jtsGeometry.getNumGeometries(); i++) {
             Polygon polygon = (Polygon) jtsGeometry.getGeometryN(i);
@@ -88,7 +88,7 @@ public class JTSMultiPolygonParser extends AbstractJTSParser<MultiPolygon, Multi
      * @throws ParserException
      */
     @Override
-    public MultiPolygonProperty parseProperty(com.vividsolutions.jts.geom.MultiPolygon jtsGeometry) throws ParserException {
+    public MultiPolygonProperty parseProperty(org.locationtech.jts.geom.MultiPolygon jtsGeometry) throws ParserException {
         checkNotNull(jtsGeometry, "The MultiPolygon JTS Geometry must not be null.");
         MultiPolygonProperty multiPolygonProperty = gmlObjectFactory.createMultiPolygonPropertyType();
         multiPolygonProperty.setMultiPolygon(super.parseGeometry(jtsGeometry));
@@ -101,7 +101,7 @@ public class JTSMultiPolygonParser extends AbstractJTSParser<MultiPolygon, Multi
      * @throws ParserException
      */
     @Override
-    public JAXBElement<? extends MultiPolygon> buildJAXBElement(com.vividsolutions.jts.geom.MultiPolygon geometry)
+    public JAXBElement<? extends MultiPolygon> buildJAXBElement(org.locationtech.jts.geom.MultiPolygon geometry)
             throws ParserException {
         return gmlObjectFactory.createMultiPolygon(super.parseGeometry(geometry));
     }

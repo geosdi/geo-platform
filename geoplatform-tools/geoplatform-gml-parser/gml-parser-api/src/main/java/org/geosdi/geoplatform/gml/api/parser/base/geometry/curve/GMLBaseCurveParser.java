@@ -35,8 +35,8 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.base.geometry.curve;
 
-import com.vividsolutions.jts.geom.GeometryFactory;
-import com.vividsolutions.jts.geom.LineString;
+import org.locationtech.jts.geom.GeometryFactory;
+import org.locationtech.jts.geom.LineString;
 import org.geosdi.geoplatform.gml.api.AbstractCurveSegment;
 import org.geosdi.geoplatform.gml.api.Curve;
 import org.geosdi.geoplatform.gml.api.CurveSegmentArrayProperty;

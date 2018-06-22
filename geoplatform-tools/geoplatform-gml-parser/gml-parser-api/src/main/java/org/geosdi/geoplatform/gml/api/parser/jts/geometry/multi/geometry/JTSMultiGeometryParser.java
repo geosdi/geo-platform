@@ -35,8 +35,8 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.jts.geometry.multi.geometry;
 
-import com.vividsolutions.jts.geom.Geometry;
-import com.vividsolutions.jts.geom.GeometryCollection;
+import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.geom.GeometryCollection;
 import org.geosdi.geoplatform.gml.api.MultiGeometry;
 import org.geosdi.geoplatform.gml.api.MultiGeometryProperty;
 import org.geosdi.geoplatform.gml.api.jaxb.AbstractGMLObjectFactory;

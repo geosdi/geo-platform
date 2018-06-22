@@ -35,9 +35,9 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.jts.coordinate;
 
-import com.vividsolutions.jts.geom.Coordinate;
 import org.geosdi.geoplatform.gml.api.DirectPosition;
 import org.geosdi.geoplatform.gml.api.DirectPositionList;
+import org.locationtech.jts.geom.Coordinate;
 
 import java.util.List;
 

@@ -35,9 +35,9 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.base.geometry.point.responsibility;
 
-import com.vividsolutions.jts.geom.Point;
 import org.geosdi.geoplatform.gml.api.parser.base.coordinate.CoordinateBaseParser;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.responsibility.BaseGeometryHandler;
+import org.locationtech.jts.geom.Point;
 
 /**
  *

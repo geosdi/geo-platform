@@ -36,9 +36,9 @@
 package org.geosdi.geoplatform.gml.api.parser.base.geometry.multi.geometry;
 
 import com.google.common.base.Preconditions;
-import com.vividsolutions.jts.geom.Geometry;
-import com.vividsolutions.jts.geom.GeometryCollection;
-import com.vividsolutions.jts.geom.GeometryFactory;
+import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.geom.GeometryCollection;
+import org.locationtech.jts.geom.GeometryFactory;
 import org.geosdi.geoplatform.gml.api.*;
 import org.geosdi.geoplatform.gml.api.parser.base.AbstractGMLBaseParser;
 import org.geosdi.geoplatform.gml.api.parser.base.AbstractGMLBaseSRSParser;

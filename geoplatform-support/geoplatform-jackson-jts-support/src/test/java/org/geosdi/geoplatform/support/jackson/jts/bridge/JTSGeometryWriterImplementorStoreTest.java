@@ -108,4 +108,16 @@ public class JTSGeometryWriterImplementorStoreTest {
         logger.info("###################Found : {} for key {}\n",
                 store.getImplementorByKey(GeometryCollection.class), GeometryCollection.class);
     }
+
+    @Test
+    public void jtsGeometryFeatureColletionWriterTest() throws Exception {
+        logger.info("###################Found : {} for key {}\n",
+                store.getImplementorByKey(FeatureCollection.class), FeatureCollection.class);
+    }
+
+    @Test
+    public void jtsGeometryFeatureWriterTest() throws Exception {
+        logger.info("###################Found : {} for key {}\n",
+                store.getImplementorByKey(Feature.class), Feature.class);
+    }
 }

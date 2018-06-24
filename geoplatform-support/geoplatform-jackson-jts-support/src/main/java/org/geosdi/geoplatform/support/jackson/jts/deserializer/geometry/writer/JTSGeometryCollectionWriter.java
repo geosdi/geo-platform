@@ -42,6 +42,7 @@ import org.locationtech.jts.geom.Geometry;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Boolean.TRUE;
 import static org.geosdi.geoplatform.support.jackson.jts.deserializer.IGPJTSDeserializer.JTS_GEOMETRY_WRITER_IMPLEMENTOR_STORE;
 
 /**
@@ -73,7 +74,7 @@ public class JTSGeometryCollectionWriter extends JTSBaseWriter<GeometryCollectio
             JTSGeometryWriterImplementor jtsGeometryWriterImplementor = JTS_GEOMETRY_WRITER_IMPLEMENTOR_STORE.getImplementorByKey(geoJsonObject.getClass());
             geometries.add(jtsGeometryWriterImplementor.buildJTSGeometry(geoJsonObject));
         }
-        return GEOMETRY_FACTORY.createGeometryCollection(geometries.toArray(new Geometry[geometries.size()]));
+        return GEOMETRY_FACTORY.createGeometryCollection(geometries.stream().toArray(size -> new Geometry[size]));
     }
 
     /**
@@ -85,6 +86,6 @@ public class JTSGeometryCollectionWriter extends JTSBaseWriter<GeometryCollectio
      */
     @Override
     public Boolean isImplementorValid() {
-        return Boolean.TRUE;
+        return TRUE;
     }
 }

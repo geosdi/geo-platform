@@ -47,8 +47,8 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
+import static java.util.stream.StreamSupport.stream;
 import static org.geosdi.geoplatform.support.jackson.jts.deserializer.geometry.writer.bridge.finder.JTSGeometryWriterImplementorFinder.getAllJTSGeometryWriterImplementors;
 import static org.geosdi.geoplatform.support.jackson.jts.deserializer.geometry.writer.bridge.finder.JTSGeometryWriterImplementorFinder.getValidJTSGeometryWriterImplementors;
 
@@ -65,7 +65,7 @@ public class JTSGeometryWriterImplementorStore implements ImplementorStore<JTSGe
     private static final Map<Object, JTSGeometryWriterImplementor> jtsGeometryWriterImplementors;
 
     static {
-        jtsGeometryWriterImplementors = StreamSupport.stream(getValidJTSGeometryWriterImplementors().spliterator(),
+        jtsGeometryWriterImplementors = stream(getValidJTSGeometryWriterImplementors().spliterator(),
                 Boolean.FALSE).collect(Collectors.toMap(JTSGeometryWriterImplementor::getKey, value -> value));
 
         logger.debug("@@@@@@@@@@@@@@@@@@@@@@{} up with {} values.\n\n", JTSGeometryWriterImplementorStore.class.getSimpleName(),

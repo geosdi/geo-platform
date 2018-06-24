@@ -34,7 +34,9 @@
  */
 package org.geosdi.geoplatform.support.jackson.jts.deserializer;
 
+import org.geojson.Feature;
 import org.geojson.GeoJsonObject;
+import org.geosdi.geoplatform.support.jackson.jts.deserializer.geometry.writer.bridge.implementor.JTSGeometryWriterImplementor;
 import org.locationtech.jts.geom.Geometry;
 
 /**
@@ -51,7 +53,9 @@ public class JTSGeometryDeserializer extends GPJTSDeserializer<Geometry, GeoJson
     @Override
     public Geometry parseGeometry(GeoJsonObject geoJsonObject) {
         try {
-            return super.getJTSGeometryImplementorWriter(geoJsonObject).buildJTSGeometry(geoJsonObject);
+            return ((geoJsonObject instanceof Feature) ?
+                    forFeature(geoJsonObject).buildJTSGeometry((Feature) geoJsonObject)
+                    : super.getJTSGeometryImplementorWriter(geoJsonObject).buildJTSGeometry(geoJsonObject));
         } catch (Exception ex) {
             logger.error(":::::::::::::::::::::{} - Error : {}", super.getDeserializerName(), ex.getMessage());
             ex.printStackTrace();
@@ -65,11 +69,21 @@ public class JTSGeometryDeserializer extends GPJTSDeserializer<Geometry, GeoJson
      */
     @Override
     public Boolean canParseGeometry(GeoJsonObject geoJsonObject) {
-        return geoJsonObject instanceof GeoJsonObject;
+        return ((geoJsonObject instanceof GeoJsonObject) || (geoJsonObject instanceof Feature));
     }
 
     @Override
     public Class<Geometry> handledType() {
         return Geometry.class;
+    }
+
+    /**
+     * @param geoJsonObject
+     * @return {@link JTSGeometryWriterImplementor<Feature, Geometry>}
+     * @throws Exception
+     */
+    JTSGeometryWriterImplementor<Feature, Geometry> forFeature(GeoJsonObject geoJsonObject)
+            throws Exception {
+        return JTS_GEOMETRY_WRITER_IMPLEMENTOR_STORE.getImplementorByKey(geoJsonObject.getClass());
     }
 }

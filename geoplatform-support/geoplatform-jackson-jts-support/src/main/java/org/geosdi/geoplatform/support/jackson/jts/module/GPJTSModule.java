@@ -47,7 +47,7 @@ import org.locationtech.jts.geom.*;
 public class GPJTSModule extends SimpleModule {
 
     public GPJTSModule() {
-        super("GPJTSModule", new Version(1, 8, 0, "SNAPSHOT", "org.geosdi", "geoplatform-jackson-jts-support"));
+        super("GPJTSModule", new Version(1, 9, 0, "SNAPSHOT", "org.geosdi", "geoplatform-jackson-jts-support"));
         super.addSerializer(Geometry.class, new GPGeoJsonSerializer());
         super.addDeserializer(Geometry.class, new JTSGeometryDeserializer());
         super.addDeserializer(Point.class, new JTSPointDeserializer());

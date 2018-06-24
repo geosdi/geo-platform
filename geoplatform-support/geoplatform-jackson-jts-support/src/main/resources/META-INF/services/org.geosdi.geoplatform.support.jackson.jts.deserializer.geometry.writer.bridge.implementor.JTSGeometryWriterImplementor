@@ -6,3 +6,5 @@ org.geosdi.geoplatform.support.jackson.jts.deserializer.geometry.writer.JTSMulti
 org.geosdi.geoplatform.support.jackson.jts.deserializer.geometry.writer.JTSMultiLineStringWriter
 org.geosdi.geoplatform.support.jackson.jts.deserializer.geometry.writer.JTSMultiPolygonWriter
 org.geosdi.geoplatform.support.jackson.jts.deserializer.geometry.writer.JTSGeometryCollectionWriter
+org.geosdi.geoplatform.support.jackson.jts.deserializer.geometry.writer.JTSFeatureCollectionWriter
+org.geosdi.geoplatform.support.jackson.jts.deserializer.geometry.writer.JTSFeatureWriter

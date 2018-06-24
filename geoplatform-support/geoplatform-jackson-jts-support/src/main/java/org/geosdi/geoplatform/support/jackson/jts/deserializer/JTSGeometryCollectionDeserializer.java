@@ -34,7 +34,9 @@
  */
 package org.geosdi.geoplatform.support.jackson.jts.deserializer;
 
+import org.geojson.FeatureCollection;
 import org.geojson.GeoJsonObject;
+import org.geosdi.geoplatform.support.jackson.jts.deserializer.geometry.writer.bridge.implementor.JTSGeometryWriterImplementor;
 import org.locationtech.jts.geom.GeometryCollection;
 
 /**
@@ -51,8 +53,9 @@ public class JTSGeometryCollectionDeserializer extends GPJTSDeserializer<Geometr
     @Override
     public GeometryCollection parseGeometry(GeoJsonObject geoJsonObject) {
         try {
-            return super.getJTSGeometryImplementorWriter(geoJsonObject)
-                    .buildJTSGeometry((org.geojson.GeometryCollection) geoJsonObject);
+            return ((geoJsonObject instanceof FeatureCollection) ? forFeatureCollection(geoJsonObject)
+                    .buildJTSGeometry((FeatureCollection) geoJsonObject) : super.getJTSGeometryImplementorWriter(geoJsonObject)
+                    .buildJTSGeometry((org.geojson.GeometryCollection) geoJsonObject));
         } catch (Exception ex) {
             logger.error(":::::::::::::::::::::{} - Error : {}", super.getDeserializerName(), ex.getMessage());
             ex.printStackTrace();
@@ -66,11 +69,21 @@ public class JTSGeometryCollectionDeserializer extends GPJTSDeserializer<Geometr
      */
     @Override
     public Boolean canParseGeometry(GeoJsonObject geoJsonObject) {
-        return geoJsonObject instanceof org.geojson.GeometryCollection;
+        return ((geoJsonObject instanceof org.geojson.GeometryCollection) || (geoJsonObject instanceof FeatureCollection));
     }
 
     @Override
     public Class<GeometryCollection> handledType() {
         return GeometryCollection.class;
+    }
+
+    /**
+     * @param geoJsonObject
+     * @return {@link JTSGeometryWriterImplementor<FeatureCollection, GeometryCollection>}
+     * @throws Exception
+     */
+    JTSGeometryWriterImplementor<FeatureCollection, GeometryCollection> forFeatureCollection(GeoJsonObject geoJsonObject)
+            throws Exception {
+        return JTS_GEOMETRY_WRITER_IMPLEMENTOR_STORE.getImplementorByKey(geoJsonObject.getClass());
     }
 }

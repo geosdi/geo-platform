@@ -146,7 +146,7 @@ public class GPGeocodingServiceTest extends GPBaseConfigTest {
         GeocodingResult[] results = gpGeocodingService.newRequest()
                 .address("1600 Amphitheatre Parkway, Mountain View, CA").await();
         assertNotNull(results);
-        assertEquals("Google Building 41, 1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA",
+        assertEquals("1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA",
                 results[0].formattedAddress);
     }
 

@@ -614,7 +614,7 @@
             <dependency>
                 <groupId>commons-beanutils</groupId>
                 <artifactId>commons-beanutils</artifactId>
-                <version>1.8.3</version>
+                <version>1.9.3</version>
             </dependency>
             <dependency>
                 <groupId>commons-collections</groupId>
@@ -632,8 +632,8 @@
             <!-- =========================================================== -->
             <dependency>
                 <groupId>org.apache.velocity</groupId>
-                <artifactId>velocity</artifactId>
-                <version>1.7</version>
+                <artifactId>velocity-engine-core</artifactId>
+                <version>2.0</version>
             </dependency>
 
             <dependency>
@@ -1414,7 +1414,7 @@
         <ubl-version>2.0</ubl-version>
         <jetty-version>9.4.6.v20170531</jetty-version>
 
-        <postgresql-version>42.1.4</postgresql-version>
+        <postgresql-version>42.2.2</postgresql-version>
         <postgis-jdbc-version>2.2.1</postgis-jdbc-version>
 
         <cglib-version>3.2.4</cglib-version>
@@ -1439,7 +1439,7 @@
         
         <ehcache-version>2.10.4</ehcache-version>
         
-        <commons-pool-version>2.5.0</commons-pool-version>
+        <commons-pool-version>2.6.0</commons-pool-version>
         
         <geonetwork-version>1.1</geonetwork-version>
         

@@ -61,6 +61,7 @@
    
     <bean id="velocityEngine"
           class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
+        <property name="overrideLogging" value="false" />
         <property name="velocityProperties">
             <props>
                 <prop key="resource.loader">class</prop>

@@ -37,6 +37,8 @@ package org.geosdi.geoplatform.support.mail.spring.velocity;
 
 import java.io.IOException;
 import java.util.Properties;
+
+import org.apache.commons.logging.impl.Log4JLogger;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.exception.VelocityException;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
@@ -73,6 +75,7 @@ class GPSpringVelocityEngineConfig {
 
         VelocityEngineFactory factory = new VelocityEngineFactory();
         Properties props = new Properties();
+        factory.setOverrideLogging(Boolean.FALSE);
         props.put("resource.loader", "class");
         props.put("class.resource.loader.class",
                 "org.apache.velocity.runtime.resource.loader."

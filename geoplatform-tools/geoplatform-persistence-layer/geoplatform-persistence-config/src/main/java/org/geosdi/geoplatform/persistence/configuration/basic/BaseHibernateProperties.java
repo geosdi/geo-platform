@@ -84,6 +84,7 @@ public class BaseHibernateProperties implements PersistenceHibernateStrategy {
                 this.put("hibernate.hbm2ddl.auto", gpHibernateProperties.getHibHbm2ddlAuto());
                 this.put("hibernate.show_sql", gpHibernateProperties.isHibShowSql());
                 this.put("hibernate.generate_statistics", gpHibernateProperties.isHibGenerateStatistics());
+                this.put("hibernate.jdbc.time_zone", "UTC");
 
                 if (gpHibernateProperties.getHibDefaultSchema() != null) {
                     this.put("hibernate.default_schema", gpHibernateProperties.getHibDefaultSchema());

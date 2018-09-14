@@ -43,6 +43,7 @@ package org.geosdi.geoplatform.support.cxf.rs.provider.configurator;
 public enum GPRestProviderType {
 
     JACKSON,
+    JACKSON_WITHOUT_ROOT,
     JACKSON_JODA_TIME,
     JACKSON_JODA_TIME_WITHOUT_ROOT,
     JETTYSON,

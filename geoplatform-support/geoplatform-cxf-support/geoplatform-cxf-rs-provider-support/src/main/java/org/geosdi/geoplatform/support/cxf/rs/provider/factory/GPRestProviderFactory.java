@@ -43,6 +43,8 @@ import org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Locale;
+
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 
 /**
@@ -75,7 +77,8 @@ public final class GPRestProviderFactory {
                         ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
                         WRAP_ROOT_VALUE_DISABLE,
                         INDENT_OUTPUT_ENABLE)
-                        .configure(GPJsonIncludeFeature.NON_NULL));
+                        .configure(GPJsonIncludeFeature.NON_NULL)
+                        .setLocale(Locale.getDefault()));
 
             case JACKSON_JODA_TIME:
                 logger.debug("\n\n############################### RestProviderFactory "
@@ -83,7 +86,8 @@ public final class GPRestProviderFactory {
                         CXFJacksonProvider.class);
                 return new CXFJacksonProvider(new GPJacksonSupport().registerModule(new JodaModule())
                         .configure(WRITE_DATES_AS_TIMESTAMPS_DISABLE)
-                        .configure(GPJsonIncludeFeature.NON_NULL));
+                        .configure(GPJsonIncludeFeature.NON_NULL)
+                        .setLocale(Locale.getDefault()));
 
             case JACKSON_JODA_TIME_WITHOUT_ROOT:
                 logger.debug("\n\n############################### RestProviderFactory "
@@ -96,7 +100,8 @@ public final class GPRestProviderFactory {
                         INDENT_OUTPUT_ENABLE)
                         .registerModule(new JodaModule())
                         .configure(WRITE_DATES_AS_TIMESTAMPS_DISABLE)
-                        .configure(GPJsonIncludeFeature.NON_NULL));
+                        .configure(GPJsonIncludeFeature.NON_NULL)
+                        .setLocale(Locale.getDefault()));
 
             case JETTYSON:
                 logger.debug("\n\n############################### "

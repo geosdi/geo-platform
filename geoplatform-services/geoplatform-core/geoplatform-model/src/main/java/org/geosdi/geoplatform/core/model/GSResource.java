@@ -35,11 +35,11 @@
  */
 package org.geosdi.geoplatform.core.model;
 
-import com.vividsolutions.jts.geom.MultiPolygon;
 import org.geosdi.geoplatform.core.model.adapter.MultiPolygonAdapter;
 import org.geosdi.geoplatform.core.model.enums.GrantType;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.*;
+import org.locationtech.jts.geom.MultiPolygon;
 
 import javax.persistence.*;
 import javax.persistence.Entity;

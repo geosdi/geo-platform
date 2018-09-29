@@ -16,9 +16,17 @@
     <name>Geo-Platform :: == GeoNetwork Catalog Module Api</name>
 
     <dependencies>
+        <dependency>
+            <groupId>javax.xml.ws</groupId>
+            <artifactId>jaxws-api</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>javax.jws</groupId>
+            <artifactId>javax.jws-api</artifactId>
+        </dependency>
         
         <!-- GEOPLATFORM -->
-       
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-model</artifactId>

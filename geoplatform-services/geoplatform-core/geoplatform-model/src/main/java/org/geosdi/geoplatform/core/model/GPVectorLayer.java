@@ -35,9 +35,9 @@
  */
 package org.geosdi.geoplatform.core.model;
 
-import com.vividsolutions.jts.geom.Geometry;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.locationtech.jts.geom.Geometry;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;

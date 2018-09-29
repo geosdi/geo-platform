@@ -26,6 +26,11 @@
             <artifactId>geoplatform-persistence-cache-api</artifactId>
             <version>${project.version}</version>
         </dependency>
+        
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>javax.annotation-api</artifactId>
+        </dependency>
 
         <!-- =========================================================== -->
         <!-- ================ GEOPLATFORM C3P0 Support ================= -->

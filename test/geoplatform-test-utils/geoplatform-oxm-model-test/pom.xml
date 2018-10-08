@@ -90,7 +90,7 @@
 
     <build>
         <plugins>
-            <!--plugin>
+            <plugin>
                 <groupId>org.jibx</groupId>
                 <artifactId>jibx-maven-plugin</artifactId>
                 <version>${jibx-version}</version>
@@ -128,7 +128,7 @@
                         <version>6.2</version>
                     </dependency>
                 </dependencies>
-            </plugin-->
+            </plugin>
 
 
             <plugin>

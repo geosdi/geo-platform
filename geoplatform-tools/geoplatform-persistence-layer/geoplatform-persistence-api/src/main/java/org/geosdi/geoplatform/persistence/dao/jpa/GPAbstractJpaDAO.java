@@ -177,7 +177,10 @@ public abstract class GPAbstractJpaDAO<T extends Object, ID extends Serializable
     @Override
     public List<T> findAll() throws GPDAOException {
         try {
-            return this.entityManager.createQuery("from " + this.persistentClass.getName()).getResultList();
+            CriteriaQuery<T> criteriaQuery = super.createCriteriaQuery();
+            Root<T> root = criteriaQuery.from(this.persistentClass);
+            criteriaQuery.select(root);
+            return this.entityManager.createQuery(criteriaQuery).getResultList();
         } catch (Exception ex) {
             ex.printStackTrace();
             throw new GPDAOException(ex);
@@ -194,7 +197,7 @@ public abstract class GPAbstractJpaDAO<T extends Object, ID extends Serializable
     public List<T> findAll(int start, int end) throws GPDAOException {
         try {
             CriteriaQuery<T> criteriaQuery = super.createCriteriaQuery();
-            Root<T> root = criteriaQuery.from(super.getPersistentClass());
+            Root<T> root = criteriaQuery.from(this.persistentClass);
             criteriaQuery.select(root);
             return this.entityManager.createQuery(criteriaQuery)
                     .setFirstResult(start)

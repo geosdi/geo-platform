@@ -1,37 +1,36 @@
 /**
- *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
- *
- *   Copyright (C) 2008-2018 geoSDI Group (CNR IMAA - Potenza - ITALY).
- *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
- *
- *   ====================================================================
- *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
- *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * geo-platform
+ * Rich webgis framework
+ * http://geo-platform.org
+ * ====================================================================
+ * <p>
+ * Copyright (C) 2008-2018 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * <p>
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version. This program is distributed in the
+ * hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License
+ * for more details. You should have received a copy of the GNU General
+ * Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * <p>
+ * ====================================================================
+ * <p>
+ * Linking this library statically or dynamically with other modules is
+ * making a combined work based on this library. Thus, the terms and
+ * conditions of the GNU General Public License cover the whole combination.
+ * <p>
+ * As a special exception, the copyright holders of this library give you permission
+ * to link this library with independent modules to produce an executable, regardless
+ * of the license terms of these independent modules, and to copy and distribute
+ * the resulting executable under terms of your choice, provided that you also meet,
+ * for each linked independent module, the terms and conditions of the license of
+ * that module. An independent module is a module which is not derived from or
+ * based on this library. If you modify this library, you may extend this exception
+ * to your version of the library, but you are not obligated to do so. If you do not
+ * wish to do so, delete this exception statement from your version.
  */
 package org.geosdi.geoplatform.support.jackson.reader;
 
@@ -42,12 +41,12 @@ import java.io.InputStream;
 import java.io.Reader;
 import java.io.StringReader;
 import java.net.URL;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collection;
-import java.util.stream.Collectors;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static java.nio.file.Files.list;
+import static java.util.stream.Collectors.toList;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -63,10 +62,8 @@ public class GPBaseJacksonReaderSupport<T extends Object> implements GPJacksonRe
      * @param theEntityClass
      */
     public GPBaseJacksonReaderSupport(JacksonSupport theJacksonSupport, Class<T> theEntityClass) {
-        checkArgument(theJacksonSupport != null,
-                "The Parameter JacksonSupport must not be null.");
-        checkArgument(theEntityClass != null,
-                "The Parameter EntityClass must not be null.");
+        checkArgument(theJacksonSupport != null, "The Parameter JacksonSupport must not be null.");
+        checkArgument(theEntityClass != null, "The Parameter EntityClass must not be null.");
         this.jacksonSupport = theJacksonSupport;
         this.entityClass = theEntityClass;
     }
@@ -78,8 +75,7 @@ public class GPBaseJacksonReaderSupport<T extends Object> implements GPJacksonRe
      */
     @Override
     public T read(URL url) throws Exception {
-        checkArgument(url != null,
-                "The Parameter URL must not be null.");
+        checkArgument(url != null, "The Parameter URL must not be null.");
         return this.jacksonSupport.getDefaultMapper().readValue(url, entityClass);
     }
 
@@ -101,8 +97,7 @@ public class GPBaseJacksonReaderSupport<T extends Object> implements GPJacksonRe
      */
     @Override
     public T read(InputStream inputStream) throws Exception {
-        checkArgument(inputStream != null,
-                "The Parameter InputStream must not be null.");
+        checkArgument(inputStream != null, "The Parameter InputStream must not be null.");
         return this.jacksonSupport.getDefaultMapper().readValue(inputStream, this.entityClass);
     }
 
@@ -124,8 +119,7 @@ public class GPBaseJacksonReaderSupport<T extends Object> implements GPJacksonRe
      */
     @Override
     public T read(String entityAsString) throws Exception {
-        checkArgument((entityAsString != null) && !(entityAsString.isEmpty()),
-                "The Parameter EntityAsString must not be null or Empty.");
+        checkArgument((entityAsString != null) && !(entityAsString.isEmpty()), "The Parameter EntityAsString must not be null or Empty.");
         return this.read(new StringReader(entityAsString));
     }
 
@@ -137,8 +131,7 @@ public class GPBaseJacksonReaderSupport<T extends Object> implements GPJacksonRe
      */
     @Override
     public <V extends Object> V read(String entityAsString, Class<V> classe) throws Exception {
-        checkArgument((entityAsString != null) && !(entityAsString.isEmpty()),
-                "The Parameter EntityAsString must not be null or Empty.");
+        checkArgument((entityAsString != null) && !(entityAsString.trim().isEmpty()), "The Parameter EntityAsString must not be null or Empty.");
         checkArgument(classe != null, "The Parameter classe must not be null.");
         return this.read(new StringReader(entityAsString), classe);
     }
@@ -163,13 +156,12 @@ public class GPBaseJacksonReaderSupport<T extends Object> implements GPJacksonRe
      */
     @Override
     public Collection<T> readFromDirectory(Path path) throws Exception {
-        checkArgument((path != null && path.toFile().isDirectory()),
-                "The Parameter Path must not be null and must be a Directory");
-        return Files.list(path)
-                .filter(p -> p.toFile().getName().endsWith(".json"))
+        checkArgument((path != null && path.toFile().isDirectory()), "The Parameter Path must not be null and must be a Directory");
+        return list(path)
+                .filter(p -> !(p.toFile().isDirectory()) && (p.toFile().getName().endsWith(".json")))
                 .map(p -> this.read(p))
                 .filter(d -> d != null)
-                .collect(Collectors.toList());
+                .collect(toList());
     }
 
     /**

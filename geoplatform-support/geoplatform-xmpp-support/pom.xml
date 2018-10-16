@@ -17,7 +17,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <smack.version>4.2.4</smack.version>
+        <smack.version>4.3.1</smack.version>
     </properties>
 
     <dependencies>

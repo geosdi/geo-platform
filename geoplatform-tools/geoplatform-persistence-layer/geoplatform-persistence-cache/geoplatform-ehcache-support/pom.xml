@@ -19,7 +19,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <hibernate-ehcache-version>5.3.6.Final</hibernate-ehcache-version>
+        <hibernate-ehcache-version>5.3.7.Final</hibernate-ehcache-version>
         <ehcache-version>2.10.5</ehcache-version>
     </properties>
     

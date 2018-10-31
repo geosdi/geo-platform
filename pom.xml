@@ -1301,8 +1301,8 @@
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.8.0</version>
                     <configuration>
-                        <source>1.8</source>
-                        <target>1.8</target>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
                         <debug>true</debug>
                         <encoding>UTF-8</encoding>
                         <!-- Added comment because we have some problem on Windows Vista -->
@@ -1339,8 +1339,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.0</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                     <debug>true</debug>
                     <encoding>UTF-8</encoding>
                     <!-- Added comment because we have some problem on Windows Vista -->
@@ -1570,6 +1570,9 @@
     </reporting>
     
     <properties>
+        <java.version>1.8</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
         <maven.build.timestamp.format>
             yyyy-MM-dd'T'HH:mm:ss'Z'
         </maven.build.timestamp.format>

@@ -41,6 +41,8 @@ import org.geosdi.geoplatform.threadpool.support.factory.GPDefaultThreadFactory;
 import java.util.Queue;
 import java.util.concurrent.*;
 
+import static java.lang.Boolean.FALSE;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -135,7 +137,7 @@ abstract class GPDefaultThreadPoolConfigBuilder implements GPThreadPoolConfigBui
      * @return {@link Boolean}
      */
     protected static Boolean defaultIsDaemon() {
-        return Boolean.FALSE;
+        return FALSE;
     }
 
     /**

@@ -21,11 +21,11 @@
 
     <dependencies>
         <!-- =========================================================== -->
-        <!-- =========================== SPRING ======================== -->
+        <!-- ======================== GUAVA =========================== -->
         <!-- =========================================================== -->
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
         </dependency>
 
         <dependency>

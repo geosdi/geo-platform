@@ -72,7 +72,8 @@ public class GPGeoJsonSerializer extends JsonSerializer<Geometry> {
             this.geoJsonPointHandler.parseGeometry(geometry, gen);
         } catch (Exception ex) {
             logger.error("::::::::::::::::::::::::ERROR : {}\n", ex.getMessage());
-            ex.printStackTrace();
+            ex.printStackTrace(System.err);
+            System.err.flush();
             throw new IllegalStateException(ex);
         }
     }

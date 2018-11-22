@@ -34,8 +34,7 @@
  */
 package org.geosdi.geoplatform.experimental.el.index;
 
-import com.google.common.base.Preconditions;
-import org.elasticsearch.action.admin.indices.mapping.put.PutMappingResponse;
+import org.elasticsearch.action.support.master.AcknowledgedResponse;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
@@ -43,6 +42,9 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.InitializingBean;
 
 import javax.annotation.Resource;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -109,11 +111,11 @@ public abstract class GPAbstractIndexCreator implements GPIndexCreator, Initiali
 
     /**
      * @param xContentBuilder
-     * @return
+     * @return {@link AcknowledgedResponse}
      * @throws Exception
      */
-    protected PutMappingResponse putMapping(XContentBuilder xContentBuilder) throws Exception {
-        Preconditions.checkNotNull(xContentBuilder, "The XContentBuilder must not be null");
+    protected AcknowledgedResponse putMapping(XContentBuilder xContentBuilder) throws Exception {
+        checkNotNull(xContentBuilder, "The XContentBuilder must not be null");
         return this.elastichSearchClient
                 .admin()
                 .indices()
@@ -133,22 +135,13 @@ public abstract class GPAbstractIndexCreator implements GPIndexCreator, Initiali
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        Preconditions.checkNotNull(elastichSearchClient, "The ElasticSearch "
-                + "Client must not be null.");
-
-        Preconditions.checkNotNull(logger, "The GeoPlatform Log must not be "
-                + "null.");
-
-        Preconditions.checkArgument((this.getIndexSettings() != null),
-                "The Index Settings must not be null.");
-
-        Preconditions.checkArgument((this.getIndexName() != null)
-                || !(this.getIndexName().isEmpty()), "The Index Name must not be"
-                + " null or an empty String.");
-
-        Preconditions.checkArgument((this.getIndexType() != null)
-                || !(this.getIndexType().isEmpty()), "The Index Type must not be"
-                + " null or an empty String.");
+        checkNotNull(elastichSearchClient, "The ElasticSearch Client must not be null.");
+        checkNotNull(logger, "The GeoPlatform Log must not be null.");
+        checkArgument((this.getIndexSettings() != null), "The Index Settings must not be null.");
+        checkArgument((this.getIndexName() != null) || !(this.getIndexName().isEmpty()),
+                "The Index Name must not be null or an empty String.");
+        checkArgument((this.getIndexType() != null) || !(this.getIndexType().isEmpty()),
+                "The Index Type must not be null or an empty String.");
     }
 
     @Override

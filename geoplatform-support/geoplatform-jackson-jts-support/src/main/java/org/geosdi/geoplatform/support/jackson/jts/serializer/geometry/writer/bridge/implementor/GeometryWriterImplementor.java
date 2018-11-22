@@ -43,8 +43,7 @@ import org.locationtech.jts.geom.Geometry;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeometryWriterImplementor<JTS extends Geometry, GEOJSON extends GeoJsonObject>
-        extends Implementor<Class<JTS>> {
+public interface GeometryWriterImplementor<JTS extends Geometry, GEOJSON extends GeoJsonObject> extends Implementor<Class<JTS>> {
 
     /**
      * @param geometry

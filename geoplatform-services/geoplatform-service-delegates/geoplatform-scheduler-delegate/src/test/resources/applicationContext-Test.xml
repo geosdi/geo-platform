@@ -11,27 +11,8 @@
             http://www.springframework.org/schema/util/spring-util-4.1.xsd"
        default-autowire="byName">
     
-    <context:component-scan base-package="org.geosdi.geoplatform.scheduler.delegate.impl" />
-    
     <!-- Define the properties file to use -->
-    <util:properties id="emailProperties" location="classpath:email.properties" />    
-    
-    <bean id="emailTask" class="org.geosdi.geoplatform.scheduler.quartz.task.EmailTask">
-        <property name="mailSender" ref="mailSender" />
-        <property name="velocityEngine" ref="velocityEngine" />
-        <!-- Frontend -->
-        <property name="frontendLink" value="#{emailProperties['email.frontend.link']}" />
-        <property name="frontendLabel" value="#{emailProperties['email.frontend.label']}" />
-        <!-- Template registration -->
-        <property name="subjectRegistration" value="#{emailProperties['email.subject.registration']}" />
-        <property name="templateRegistration" value="#{emailProperties['email.template.registration']}" />
-        <!-- Template user creation notification -->
-        <property name="subjectCreationNotification" value="#{emailProperties['email.subject.creationNotification']}" />
-        <property name="templateCreationNotification" value="#{emailProperties['email.template.creationNotification']}" />
-        <!-- Template modification -->
-        <property name="subjectModification" value="#{emailProperties['email.subject.modification']}" />
-        <property name="templateModification" value="#{emailProperties['email.template.modification']}" />        
-    </bean>   
+    <util:properties id="emailProperties" location="classpath:email.properties" />
     
     <bean id="mailSender"
           class="org.springframework.mail.javamail.JavaMailSenderImpl">
@@ -52,7 +33,7 @@
         <property name="javaMailProperties">
             <props>
                 <prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>
-                <prop key="mail.smtp.starttls.enable">true</prop>
+                <prop key="mail.smtp.starttls.enable">false</prop>
                 <prop key="mail.smtp.auth">true</prop>
                 <prop key="mail.debug">true</prop>
             </props>

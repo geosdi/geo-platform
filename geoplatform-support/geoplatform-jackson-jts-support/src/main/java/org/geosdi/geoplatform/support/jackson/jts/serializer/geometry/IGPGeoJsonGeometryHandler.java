@@ -35,20 +35,20 @@
 package org.geosdi.geoplatform.support.jackson.jts.serializer.geometry;
 
 import com.fasterxml.jackson.core.JsonGenerator;
-import org.locationtech.jts.geom.Geometry;
+import org.geosdi.geoplatform.support.jackson.jts.adapter.GPJTSGeometryAdapter;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGPGeoJsonGeometryHandler<G extends Geometry> {
+public interface IGPGeoJsonGeometryHandler<G extends GPJTSGeometryAdapter> {
 
     /**
-     * @param geometry
+     * @param geometryAdapter
      * @param jsonGenerator
      * @throws Exception
      */
-    void parseGeometry(Geometry geometry, JsonGenerator jsonGenerator) throws Exception;
+    void parseGeometry(GPJTSGeometryAdapter geometryAdapter, JsonGenerator jsonGenerator) throws Exception;
 
     /**
      * @return

@@ -34,48 +34,43 @@
  */
 package org.geosdi.geoplatform.support.jackson.jts.serializer.geometry.writer;
 
+import org.geosdi.geoplatform.support.jackson.jts.adapter.JTSMultiPointAdapter;
 import org.geosdi.geoplatform.support.jackson.jts.serializer.geometry.GeoJsonGeometryType;
 import org.locationtech.jts.geom.MultiPoint;
 
+import static java.lang.Boolean.TRUE;
 import static org.geosdi.geoplatform.support.jackson.jts.serializer.geometry.GeoJsonGeometryType.GeoJsonGeometryEnumType.MULTI_POINT;
+import static org.geosdi.geoplatform.support.jackson.jts.serializer.geometry.writer.bridge.implementor.GeometryWriterImplementor.GeometryWriterImplementorKey.forClass;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class MultiPointWriter extends BaseWriter<MultiPoint, org.geojson.MultiPoint> {
-
-    /**
-     * @return {@link Class<MultiPoint>}
-     */
-    @Override
-    public Class<MultiPoint> getKey() {
-        return MultiPoint.class;
-    }
+public class MultiPointWriter extends BaseWriter<JTSMultiPointAdapter, org.geojson.MultiPoint> {
 
     /**
      * <p>
-     * Specify if {@link org.geosdi.geoplatform.support.jackson.jts.bridge.implementor.Implementor} is valid or not
+     * Specify if {@link org.geosdi.geoplatform.support.bridge.implementor.GPImplementor} is valid or not
      * </p>
      *
      * @return {@link Boolean}
      */
     @Override
-    public Boolean isImplementorValid() {
-        return Boolean.TRUE;
+    public Boolean isValid() {
+        return TRUE;
     }
 
     /**
-     * @param geometry
-     * @return
+     * @param geometryAdapter
+     * @return {@link org.geojson.MultiPoint}
      * @throws Exception
      */
     @Override
-    public org.geojson.MultiPoint buildGeoJsonGeometry(MultiPoint geometry) throws Exception {
+    public org.geojson.MultiPoint buildGeoJsonGeometry(JTSMultiPointAdapter geometryAdapter) throws Exception {
         logger.trace(":::::::::::::::::::Called {}#buildGeoJsonGeometry for JTS_GEOMETRY : {}\n",
-                super.toString(), geometry);
+                super.toString(), geometryAdapter);
         org.geojson.MultiPoint multiPoint = new org.geojson.MultiPoint();
-        multiPoint.setCoordinates(COORDINATE_WRITER.buildMultiPointCoordinate(geometry));
+        multiPoint.setCoordinates(COORDINATE_WRITER.buildMultiPointCoordinate(geometryAdapter));
         return multiPoint;
     }
 
@@ -85,5 +80,13 @@ public class MultiPointWriter extends BaseWriter<MultiPoint, org.geojson.MultiPo
     @Override
     public GeoJsonGeometryType getGeometryType() {
         return MULTI_POINT;
+    }
+
+    /**
+     * @return {@link GeometryWriterImplementorKey}
+     */
+    @Override
+    protected GeometryWriterImplementorKey prepareKey() {
+        return forClass(JTSMultiPointAdapter.class);
     }
 }

@@ -37,19 +37,13 @@ package org.geosdi.geoplatform.support.jackson.jts.deserializer.geometry.writer;
 import org.geojson.LineString;
 import org.locationtech.jts.geom.LinearRing;
 
+import static org.geosdi.geoplatform.support.jackson.jts.deserializer.geometry.writer.bridge.implementor.JTSGeometryWriterImplementor.JTSGeometryWriterImplementorKey.forClass;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class JTSLinearRingWriter extends AbstractJTSLineWriter<LinearRing, GeoJsonLinearRing> {
-
-    /**
-     * @return {@link Class<GeoJsonLinearRing>}
-     */
-    @Override
-    public Class<GeoJsonLinearRing> getKey() {
-        return GeoJsonLinearRing.class;
-    }
 
     /**
      * @param lineString
@@ -61,5 +55,13 @@ public class JTSLinearRingWriter extends AbstractJTSLineWriter<LinearRing, GeoJs
         logger.trace(":::::::::::::::{} is creating JTS LinearRing for GeoJson LineString : {}\n", this, lineString);
         return GEOMETRY_FACTORY.createLinearRing(JTS_COORDINATE_WRITER
                 .buildJTSCoordinates(lineString.getCoordinates()));
+    }
+
+    /**
+     * @return {@link JTSGeometryWriterImplementorKey}
+     */
+    @Override
+    protected JTSGeometryWriterImplementorKey prepareKey() {
+        return forClass(GeoJsonLinearRing.class);
     }
 }

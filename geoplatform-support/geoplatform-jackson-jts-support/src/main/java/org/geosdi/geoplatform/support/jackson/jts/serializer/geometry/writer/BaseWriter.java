@@ -38,7 +38,7 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import org.geojson.Crs;
 import org.geojson.GeoJsonObject;
 import org.geojson.jackson.CrsType;
-import org.locationtech.jts.geom.Geometry;
+import org.geosdi.geoplatform.support.jackson.jts.adapter.GPJTSGeometryAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -49,10 +49,12 @@ import java.util.Map;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class BaseWriter<JTS extends Geometry, GEOJSON extends GeoJsonObject>
+public abstract class BaseWriter<JTS extends GPJTSGeometryAdapter, GEOJSON extends GeoJsonObject>
         implements GeometryWriter<JTS, GEOJSON> {
 
     protected static final Logger logger = LoggerFactory.getLogger(BaseWriter.class);
+    //
+    private GeometryWriterImplementorKey key;
 
     /**
      * @param geometry
@@ -65,6 +67,19 @@ public abstract class BaseWriter<JTS extends Geometry, GEOJSON extends GeoJsonOb
         geoJsonGeometry.setCrs(writeGeometryCrs(geometry));
         jsonGenerator.writeObject(geoJsonGeometry);
     }
+
+    /**
+     * @return {@link org.geosdi.geoplatform.support.bridge.implementor.GPImplementor.GPImplementorKey<Class<?>>}
+     */
+    @Override
+    public final GeometryWriterImplementorKey getKey() {
+        return ((this.key != null) ? this.key : prepareKey());
+    }
+
+    /**
+     * @return {@link GeometryWriterImplementorKey}
+     */
+    protected abstract GeometryWriterImplementorKey prepareKey();
 
     /**
      * @param geometry

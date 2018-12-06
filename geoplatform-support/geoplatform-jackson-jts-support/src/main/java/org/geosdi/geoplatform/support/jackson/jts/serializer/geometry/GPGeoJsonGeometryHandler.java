@@ -35,35 +35,37 @@
 package org.geosdi.geoplatform.support.jackson.jts.serializer.geometry;
 
 import com.fasterxml.jackson.core.JsonGenerator;
-import org.geosdi.geoplatform.support.jackson.jts.bridge.store.ImplementorStore;
+import org.geosdi.geoplatform.support.bridge.store.GPImplementorStore;
+import org.geosdi.geoplatform.support.jackson.jts.adapter.GPJTSGeometryAdapter;
 import org.geosdi.geoplatform.support.jackson.jts.serializer.geometry.writer.GeometryWriter;
 import org.geosdi.geoplatform.support.jackson.jts.serializer.geometry.writer.bridge.implementor.GeometryWriterImplementor;
-import org.locationtech.jts.geom.Geometry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static org.geosdi.geoplatform.support.jackson.jts.serializer.geometry.writer.bridge.implementor.GeometryWriterImplementor.GeometryWriterImplementorKey.forClass;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GPGeoJsonGeometryHandler<G extends Geometry> implements IGPGeoJsonGeometryHandler<G> {
+public abstract class GPGeoJsonGeometryHandler<G extends GPJTSGeometryAdapter> implements IGPGeoJsonGeometryHandler<G> {
 
-    private static final ImplementorStore<GeometryWriterImplementor> store = GeometryWriter.GEOMETRY_WRITER_IMPLEMENTOR_STORE;
+    private static final GPImplementorStore<GeometryWriterImplementor<?, ?>> store = GeometryWriter.GEOMETRY_WRITER_IMPLEMENTOR_STORE;
     //
     protected final Logger logger = LoggerFactory.getLogger(this.getClass());
-    private IGPGeoJsonGeometryHandler successor;
+    private IGPGeoJsonGeometryHandler<G> successor;
 
     /**
-     * @param geometry
+     * @param geometryAdapter
      * @param jsonGenerator
      * @throws Exception
      */
-    protected void forwardParseGeometry(Geometry geometry, JsonGenerator jsonGenerator)
+    protected void forwardParseGeometry(GPJTSGeometryAdapter geometryAdapter, JsonGenerator jsonGenerator)
             throws Exception {
         if (successor != null) {
-            successor.parseGeometry(geometry, jsonGenerator);
+            successor.parseGeometry(geometryAdapter, jsonGenerator);
         } else {
-            throw new IllegalStateException("Geometry : " + geometry + " can't be parsed as GeoJson Geometry");
+            throw new IllegalStateException("Geometry : " + geometryAdapter + " can't be parsed as GeoJson Geometry");
         }
     }
 
@@ -72,14 +74,14 @@ public abstract class GPGeoJsonGeometryHandler<G extends Geometry> implements IG
      * @throws Exception
      */
     protected GeometryWriterImplementor getGeometryWriterImplementor() throws Exception {
-        return store.getImplementorByKey(getCompatibleGeometry());
+        return store.getImplementorByKey(forClass(getCompatibleGeometry()));
     }
 
     /**
-     * @param geometry
+     * @param geometryAdapter
      * @return {@link Boolean}
      */
-    protected abstract Boolean canParseGeometry(Geometry geometry);
+    protected abstract Boolean canParseGeometry(GPJTSGeometryAdapter geometryAdapter);
 
     /**
      * @param theSuccessor

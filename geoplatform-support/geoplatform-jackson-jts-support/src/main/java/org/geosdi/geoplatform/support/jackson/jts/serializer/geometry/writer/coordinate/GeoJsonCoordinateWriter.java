@@ -35,12 +35,18 @@
 package org.geosdi.geoplatform.support.jackson.jts.serializer.geometry.writer.coordinate;
 
 import org.geojson.LngLatAlt;
-import org.locationtech.jts.geom.*;
+import org.geosdi.geoplatform.support.jackson.jts.adapter.*;
+import org.geosdi.geoplatform.support.jackson.jts.adapter.coordinate.GPJTSCoordinateAdapter;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import javax.annotation.Nonnull;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Objects;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static java.util.Arrays.stream;
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.IntStream.iterate;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -49,71 +55,75 @@ import java.util.stream.Collectors;
 public class GeoJsonCoordinateWriter implements IGeoJsonCoordinateWriter {
 
     /**
-     * @param coordinate
+     * @param coordinateAdapter
      * @return {@link LngLatAlt}
      */
     @Override
-    public LngLatAlt buildPointCoordinate(Coordinate coordinate) {
-        return new LngLatAlt(coordinate.x, coordinate.y);
+    public LngLatAlt buildPointCoordinate(@Nonnull(when = NEVER) GPJTSCoordinateAdapter coordinateAdapter) {
+        checkArgument(coordinateAdapter != null, "The Parameter coordinateAdapter must not be null.");
+        return new LngLatAlt(coordinateAdapter.x(), coordinateAdapter.y());
     }
 
     /**
-     * @param lineString
-     * @return {@link List <LngLatAlt>}
+     * @param lineStringAdapter
+     * @return {@link List<LngLatAlt>}
      */
     @Override
-    public List<LngLatAlt> buildLineStringCoordinate(LineString lineString) {
-        return Arrays.stream(lineString.getCoordinates())
-                .filter(coordinate -> coordinate != null)
+    public List<LngLatAlt> buildLineStringCoordinate(AbstractJTSLineStringAdapter lineStringAdapter) {
+        return stream(lineStringAdapter.getCoordinates())
+                .filter(Objects::nonNull)
                 .map(coordinate -> buildPointCoordinate(coordinate))
-                .collect(Collectors.toList());
+                .collect(toList());
     }
 
     /**
-     * @param polygon
+     * @param polygonAdapter
      * @return {@link List<LngLatAlt>}
      */
     @Override
-    public List<LngLatAlt> buildPolygonExteriorRing(Polygon polygon) {
-        return buildLineStringCoordinate(polygon.getExteriorRing());
+    public List<LngLatAlt> buildPolygonExteriorRing(@Nonnull(when = NEVER) JTSPolygonAdapter polygonAdapter) {
+        return buildLineStringCoordinate(polygonAdapter.getExteriorRing());
     }
 
     /**
-     * @param polygon
+     * @param polygonAdapter
      * @return {@link List<LngLatAlt>}
      */
     @Override
-    public List<List<LngLatAlt>> buildPolygonInteriorRing(Polygon polygon) {
-        List<List<LngLatAlt>> coordinates = new ArrayList<>();
-        for (int i = 0; i < polygon.getNumInteriorRing(); i++) {
-            coordinates.add(buildLineStringCoordinate(polygon.getInteriorRingN(i)));
-        }
-        return coordinates;
+    public List<List<LngLatAlt>> buildPolygonInteriorRing(@Nonnull(when = NEVER) JTSPolygonAdapter polygonAdapter) {
+        checkArgument(polygonAdapter != null, "The Parameter polygonAdapter must not be null.");
+        return iterate(0, n -> n + 1)
+                .limit(polygonAdapter.getNumInteriorRing())
+                .boxed()
+                .map(i -> buildLineStringCoordinate(polygonAdapter.getInteriorRingN(i)))
+                .collect(toList());
     }
 
     /**
-     * @param multiPoint
+     * @param multiPointAdapter
      * @return {@link List<LngLatAlt>}
      */
     @Override
-    public List<LngLatAlt> buildMultiPointCoordinate(MultiPoint multiPoint) {
-        List<LngLatAlt> coordinates = new ArrayList<>();
-        for (int i = 0; i < multiPoint.getNumGeometries(); i++) {
-            coordinates.add(buildPointCoordinate(multiPoint.getGeometryN(i).getCoordinate()));
-        }
-        return coordinates;
+    public List<LngLatAlt> buildMultiPointCoordinate(@Nonnull(when = NEVER) JTSMultiPointAdapter multiPointAdapter) {
+        checkArgument(multiPointAdapter != null, "The Parameter multiPointAdapter must not be null.");
+        return iterate(0, n -> n + 1)
+                .limit(multiPointAdapter.getNumGeometries())
+                .boxed()
+                .map(i -> buildPointCoordinate(multiPointAdapter.getGeometryN(i).getCoordinate()))
+                .collect(toList());
     }
 
     /**
-     * @param multiLineString
+     * @param multiLineStringAdapter
      * @return {@link List<LngLatAlt>}
      */
     @Override
-    public List<List<LngLatAlt>> buildMultiLineStringCoordinate(MultiLineString multiLineString) {
-        List<List<LngLatAlt>> coordinates = new ArrayList<>();
-        for (int i = 0; i < multiLineString.getNumGeometries(); i++) {
-            coordinates.add(buildLineStringCoordinate((LineString) multiLineString.getGeometryN(i)));
-        }
-        return coordinates;
+    public List<List<LngLatAlt>> buildMultiLineStringCoordinate(@Nonnull(when = NEVER) JTSMultiLinestringAdapter multiLineStringAdapter) {
+        checkArgument(multiLineStringAdapter != null, "The Parameter multiLineStringAdapter must not be null.");
+        return iterate(0, n -> n + 1)
+                .limit(multiLineStringAdapter.getNumGeometries())
+                .boxed()
+                .map(i -> buildLineStringCoordinate((JTSLineStringAdapter) multiLineStringAdapter.getGeometryN(i)))
+                .collect(toList());
     }
 }

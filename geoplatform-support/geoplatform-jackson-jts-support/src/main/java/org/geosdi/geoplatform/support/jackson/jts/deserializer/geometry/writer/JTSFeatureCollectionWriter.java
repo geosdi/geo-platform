@@ -10,6 +10,7 @@ import java.util.Objects;
 import java.util.function.Function;
 
 import static java.lang.Boolean.TRUE;
+import static org.geosdi.geoplatform.support.jackson.jts.deserializer.geometry.writer.bridge.implementor.JTSGeometryWriterImplementor.JTSGeometryWriterImplementorKey.forClass;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -18,14 +19,6 @@ import static java.lang.Boolean.TRUE;
 public class JTSFeatureCollectionWriter extends JTSBaseWriter<FeatureCollection, GeometryCollection> {
 
     static final Function<GeoJsonObject, Geometry> GEOJSON_TO_JTS_GEOMETRY_FUNCTION = new GeoJsonToJTSGeometryFunction();
-
-    /**
-     * @return {@link FeatureCollection}
-     */
-    @Override
-    public Class<FeatureCollection> getKey() {
-        return FeatureCollection.class;
-    }
 
     /**
      * @param featureCollection
@@ -46,13 +39,21 @@ public class JTSFeatureCollectionWriter extends JTSBaseWriter<FeatureCollection,
 
     /**
      * <p>
-     * Specify if {@link org.geosdi.geoplatform.support.jackson.jts.bridge.implementor.Implementor} is valid or not
+     * Specify if {@link org.geosdi.geoplatform.support.bridge.implementor.GPImplementor} is valid or not
      * </p>
      *
      * @return {@link Boolean}
      */
     @Override
-    public Boolean isImplementorValid() {
+    public Boolean isValid() {
         return TRUE;
+    }
+
+    /**
+     * @return {@link JTSGeometryWriterImplementorKey}
+     */
+    @Override
+    protected JTSGeometryWriterImplementorKey prepareKey() {
+        return forClass(FeatureCollection.class);
     }
 }

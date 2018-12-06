@@ -36,14 +36,18 @@ package org.geosdi.geoplatform.support.jackson.jts.serializer.geometry.writer.br
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import org.geojson.GeoJsonObject;
-import org.geosdi.geoplatform.support.jackson.jts.bridge.implementor.Implementor;
-import org.locationtech.jts.geom.Geometry;
+import org.geosdi.geoplatform.support.bridge.implementor.GPImplementor;
+import org.geosdi.geoplatform.support.jackson.jts.adapter.GPJTSGeometryAdapter;
+
+import java.util.Objects;
+
+import static com.google.common.base.Preconditions.checkArgument;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeometryWriterImplementor<JTS extends Geometry, GEOJSON extends GeoJsonObject> extends Implementor<Class<JTS>> {
+public interface GeometryWriterImplementor<JTS extends GPJTSGeometryAdapter, GEOJSON extends GeoJsonObject> extends GPImplementor<Class<JTS>> {
 
     /**
      * @param geometry
@@ -58,4 +62,55 @@ public interface GeometryWriterImplementor<JTS extends Geometry, GEOJSON extends
      * @throws Exception
      */
     GEOJSON buildGeoJsonGeometry(JTS geometry) throws Exception;
+
+    class GeometryWriterImplementorKey implements GPImplementorKey<Class<?>> {
+
+        private static final long serialVersionUID = -8373644750944159128L;
+        //
+        private final Class<?> classe;
+
+        /**
+         * @param theClasse
+         */
+        public GeometryWriterImplementorKey(Class<?> theClasse) {
+            checkArgument(theClasse != null, "The Parameter theClasse must not be null.");
+            this.classe = theClasse;
+        }
+
+        /**
+         * @return {@link Class<?>}
+         */
+        @Override
+        public Class<?> getImplementorKey() {
+            return this.classe;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof GeometryWriterImplementorKey)) return false;
+            GeometryWriterImplementorKey that = (GeometryWriterImplementorKey) o;
+            return Objects.equals(classe, that.classe);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(classe);
+        }
+
+        @Override
+        public String toString() {
+            return this.getClass().getSimpleName() + "{" +
+                    "classe = " + classe +
+                    '}';
+        }
+
+        /**
+         * @param theClasse
+         * @return {@link GeometryWriterImplementorKey}
+         */
+        public static GeometryWriterImplementorKey forClass(Class<?> theClasse) {
+            return new GeometryWriterImplementorKey(theClasse);
+        }
+    }
 }

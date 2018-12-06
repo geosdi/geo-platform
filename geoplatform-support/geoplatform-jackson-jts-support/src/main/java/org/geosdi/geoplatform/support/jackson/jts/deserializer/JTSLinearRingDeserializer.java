@@ -45,6 +45,8 @@ import org.locationtech.jts.geom.LinearRing;
  */
 public class JTSLinearRingDeserializer extends GPJTSDeserializer<LinearRing, LineString> {
 
+    private static final GeoJsonObject KEY = new GeoJsonLinearRing();
+
     /**
      * @param geoJsonObject
      * @return {@link LinearRing}
@@ -53,8 +55,7 @@ public class JTSLinearRingDeserializer extends GPJTSDeserializer<LinearRing, Lin
     @Override
     public LinearRing parseGeometry(GeoJsonObject geoJsonObject) {
         try {
-            return super.getJTSGeometryImplementorWriter(new GeoJsonLinearRing())
-                    .buildJTSGeometry((org.geojson.LineString) geoJsonObject);
+            return super.getJTSGeometryImplementorWriter(KEY).buildJTSGeometry((org.geojson.LineString) geoJsonObject);
         } catch (Exception ex) {
             logger.error(":::::::::::::::::::::{} - Error : {}", super.getDeserializerName(), ex.getMessage());
             ex.printStackTrace();

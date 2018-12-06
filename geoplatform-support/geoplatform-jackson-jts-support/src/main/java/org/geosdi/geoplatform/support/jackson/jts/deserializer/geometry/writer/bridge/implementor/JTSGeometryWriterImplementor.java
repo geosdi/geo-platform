@@ -35,15 +35,18 @@
 package org.geosdi.geoplatform.support.jackson.jts.deserializer.geometry.writer.bridge.implementor;
 
 import org.geojson.GeoJsonObject;
-import org.geosdi.geoplatform.support.jackson.jts.bridge.implementor.Implementor;
+import org.geosdi.geoplatform.support.bridge.implementor.GPImplementor;
 import org.locationtech.jts.geom.Geometry;
+
+import java.util.Objects;
+
+import static com.google.common.base.Preconditions.checkArgument;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface JTSGeometryWriterImplementor<GEOJSON extends GeoJsonObject, JTS extends Geometry>
-        extends Implementor<Class<GEOJSON>> {
+public interface JTSGeometryWriterImplementor<GEOJSON extends GeoJsonObject, JTS extends Geometry> extends GPImplementor<Class<GEOJSON>> {
 
     /**
      * @param geojson
@@ -51,4 +54,53 @@ public interface JTSGeometryWriterImplementor<GEOJSON extends GeoJsonObject, JTS
      * @throws Exception
      */
     JTS buildJTSGeometry(GEOJSON geojson) throws Exception;
+
+    class JTSGeometryWriterImplementorKey implements GPImplementor.GPImplementorKey<Class<?>> {
+
+        private final Class<?> classe;
+
+        /**
+         * @param theClasse
+         */
+        public JTSGeometryWriterImplementorKey(Class<?> theClasse) {
+            checkArgument(theClasse != null, "The Parameter theClasse must not be null.");
+            this.classe = theClasse;
+        }
+
+        /**
+         * @return {@link Class<?>}
+         */
+        @Override
+        public Class<?> getImplementorKey() {
+            return this.classe;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof JTSGeometryWriterImplementorKey)) return false;
+            JTSGeometryWriterImplementorKey that = (JTSGeometryWriterImplementorKey) o;
+            return Objects.equals(classe, that.classe);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(classe);
+        }
+
+        @Override
+        public String toString() {
+            return this.getClass().getSimpleName() + "{" +
+                    "classe = " + classe +
+                    '}';
+        }
+
+        /**
+         * @param theClasse
+         * @return {@link JTSGeometryWriterImplementorKey}
+         */
+        public static JTSGeometryWriterImplementorKey forClass(Class<?> theClasse) {
+            return new JTSGeometryWriterImplementorKey(theClasse);
+        }
+    }
 }

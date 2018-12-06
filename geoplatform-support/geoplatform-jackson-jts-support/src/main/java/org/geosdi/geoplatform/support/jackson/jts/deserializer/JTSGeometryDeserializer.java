@@ -39,6 +39,8 @@ import org.geojson.GeoJsonObject;
 import org.geosdi.geoplatform.support.jackson.jts.deserializer.geometry.writer.bridge.implementor.JTSGeometryWriterImplementor;
 import org.locationtech.jts.geom.Geometry;
 
+import static org.geosdi.geoplatform.support.jackson.jts.deserializer.geometry.writer.bridge.implementor.JTSGeometryWriterImplementor.JTSGeometryWriterImplementorKey.forClass;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -84,6 +86,6 @@ public class JTSGeometryDeserializer extends GPJTSDeserializer<Geometry, GeoJson
      */
     JTSGeometryWriterImplementor<Feature, Geometry> forFeature(GeoJsonObject geoJsonObject)
             throws Exception {
-        return JTS_GEOMETRY_WRITER_IMPLEMENTOR_STORE.getImplementorByKey(geoJsonObject.getClass());
+        return (JTSGeometryWriterImplementor<Feature, Geometry>) JTS_GEOMETRY_WRITER_IMPLEMENTOR_STORE.getImplementorByKey(forClass(geoJsonObject.getClass()));
     }
 }

@@ -35,13 +35,12 @@
  */
 package org.geosdi.geoplatform.support.primitive.bridge.store;
 
-import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
-import org.geosdi.geoplatform.support.primitive.bridge.finder.GPPrimitiveImplementorFinder;
-import org.geosdi.geoplatform.support.primitive.bridge.implementor.PrimitiveImplementor;
 import org.geosdi.geoplatform.support.bridge.finder.GPImplementorFinder;
 import org.geosdi.geoplatform.support.bridge.implementor.GPImplementor;
+import org.geosdi.geoplatform.support.primitive.bridge.finder.GPPrimitiveImplementorFinder;
 import org.geosdi.geoplatform.support.primitive.bridge.implementor.GPPrimitiveImplementor;
+import org.geosdi.geoplatform.support.primitive.bridge.implementor.PrimitiveImplementor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -49,6 +48,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
+
+import static com.google.common.base.Preconditions.checkArgument;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -76,7 +77,7 @@ public class GPPrimitiveImplementorStore implements PrimitiveImplementorStore<Pr
      */
     @Override
     public Boolean isPrimitiveOrWrapper(Class<?> classe) throws Exception {
-        Preconditions.checkArgument(classe != null, "The Parameter classe must not be null.");
+        checkArgument(classe != null, "The Parameter classe must not be null.");
         return primitiveImplementors.containsKey(PrimitiveImplementor.PrimitiveImplementorKey.forClass(classe));
     }
 
@@ -86,7 +87,7 @@ public class GPPrimitiveImplementorStore implements PrimitiveImplementorStore<Pr
      */
     @Override
     public PrimitiveImplementor getPrimitiveImplementorForClass(Class<?> classe) {
-        Preconditions.checkArgument(classe != null, "The Parameter classe must not be null.");
+        checkArgument(classe != null, "The Parameter classe must not be null.");
         return primitiveImplementors.get(PrimitiveImplementor.PrimitiveImplementorKey.forClass(classe));
     }
 
@@ -97,7 +98,7 @@ public class GPPrimitiveImplementorStore implements PrimitiveImplementorStore<Pr
      */
     @Override
     public PrimitiveImplementor getImplementorByKey(GPImplementor.GPImplementorKey key) throws Exception {
-        Preconditions.checkArgument((key != null), "The Parameter key must not be null");
+        checkArgument((key != null), "The Parameter key must not be null");
         return primitiveImplementors.get(key);
     }
 

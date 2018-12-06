@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -17,12 +18,13 @@
 
     <description>
         This Module gives support to manage JTS and GeoJson Geometries.
-        Serialitation : JTS ----- TO -----&gt; GeoJson Geometry.
-        Deserialization : GeoJson ----- TO -----&gt; JTS Geometry.
+        Serialitation : JTS(Both Locationteach and Vividisolutions) ----- TO -----&gt; GeoJson Geometry.
+        Deserialization : GeoJson ----- TO -----&gt; JTS(Locationteach) Geometry.
     </description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jts.vividsolutions.version>1.13</jts.vividsolutions.version>
     </properties>
 
     <dependencyManagement>
@@ -39,12 +41,29 @@
 
     <dependencies>
         <!-- =========================================================== -->
+        <!-- ================ GEOPLATFORM BRIDGE SUPPORT =============== -->
+        <!-- =========================================================== -->
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-bridge-support</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- =========================================================== -->
         <!-- =============== GEOPLATFORM JACKSON SUPPORT =============== -->
         <!-- =========================================================== -->
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-jackson-support</artifactId>
             <version>${project.version}</version>
+        </dependency>
+
+        <!-- =========================================================== -->
+        <!-- ======================== LOMBOK =========================== -->
+        <!-- =========================================================== -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
         </dependency>
 
         <dependency>
@@ -55,6 +74,12 @@
         <dependency>
             <groupId>org.locationtech.jts</groupId>
             <artifactId>jts-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.vividsolutions</groupId>
+            <artifactId>jts</artifactId>
+            <version>${jts.vividsolutions.version}</version>
         </dependency>
 
         <dependency>

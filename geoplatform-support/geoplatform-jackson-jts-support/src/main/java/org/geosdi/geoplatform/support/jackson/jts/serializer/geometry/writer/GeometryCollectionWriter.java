@@ -34,53 +34,47 @@
  */
 package org.geosdi.geoplatform.support.jackson.jts.serializer.geometry.writer;
 
+import org.geosdi.geoplatform.support.jackson.jts.adapter.GPJTSGeometryAdapter;
+import org.geosdi.geoplatform.support.jackson.jts.adapter.JTSGeometryCollectionAdapter;
 import org.geosdi.geoplatform.support.jackson.jts.serializer.geometry.GeoJsonGeometryType;
 import org.geosdi.geoplatform.support.jackson.jts.serializer.geometry.writer.bridge.implementor.GeometryWriterImplementor;
-import org.locationtech.jts.geom.Geometry;
-import org.locationtech.jts.geom.GeometryCollection;
 
+import static java.lang.Boolean.TRUE;
 import static org.geosdi.geoplatform.support.jackson.jts.serializer.geometry.GeoJsonGeometryType.GeoJsonGeometryEnumType.GEOMETRY_COLLECTION;
+import static org.geosdi.geoplatform.support.jackson.jts.serializer.geometry.writer.bridge.implementor.GeometryWriterImplementor.GeometryWriterImplementorKey.forClass;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GeometryCollectionWriter extends BaseWriter<GeometryCollection, org.geojson.GeometryCollection> {
-
-    /**
-     * @return {@link Class<GeometryCollection>}
-     */
-    @Override
-    public Class<GeometryCollection> getKey() {
-        return GeometryCollection.class;
-    }
+public class GeometryCollectionWriter extends BaseWriter<JTSGeometryCollectionAdapter, org.geojson.GeometryCollection> {
 
     /**
      * <p>
-     * Specify if {@link org.geosdi.geoplatform.support.jackson.jts.bridge.implementor.Implementor} is valid or not
+     * Specify if {@link org.geosdi.geoplatform.support.bridge.implementor.GPImplementor} is valid or not
      * </p>
      *
      * @return {@link Boolean}
      */
     @Override
-    public Boolean isImplementorValid() {
-        return Boolean.TRUE;
+    public Boolean isValid() {
+        return TRUE;
     }
 
     /**
-     * @param geometry
+     * @param geometryAdapter
      * @return
      * @throws Exception
      */
     @Override
-    public org.geojson.GeometryCollection buildGeoJsonGeometry(GeometryCollection geometry) throws Exception {
+    public org.geojson.GeometryCollection buildGeoJsonGeometry(JTSGeometryCollectionAdapter geometryAdapter) throws Exception {
         logger.trace(":::::::::::::::::::Called {}#buildGeoJsonGeometry for JTS_GEOMETRY : {}\n",
-                super.toString(), geometry);
+                super.toString(), geometryAdapter);
         org.geojson.GeometryCollection geometryCollection = new org.geojson.GeometryCollection();
-        for (int i = 0; i < geometry.getNumGeometries(); i++) {
-            Geometry theGeom = geometry.getGeometryN(i);
-            GeometryWriterImplementor implementor = GEOMETRY_WRITER_IMPLEMENTOR_STORE.getImplementorByKey(theGeom.getClass());
-            geometryCollection.add(implementor.buildGeoJsonGeometry(theGeom));
+        for (int i = 0; i < geometryAdapter.getNumGeometries(); i++) {
+            GPJTSGeometryAdapter theGeomAdapter = geometryAdapter.getGeometryN(i);
+            GeometryWriterImplementor implementor = GEOMETRY_WRITER_IMPLEMENTOR_STORE.getImplementorByKey(forClass(theGeomAdapter.getClass()));
+            geometryCollection.add(implementor.buildGeoJsonGeometry(theGeomAdapter));
         }
         return geometryCollection;
     }
@@ -91,5 +85,13 @@ public class GeometryCollectionWriter extends BaseWriter<GeometryCollection, org
     @Override
     public GeoJsonGeometryType getGeometryType() {
         return GEOMETRY_COLLECTION;
+    }
+
+    /**
+     * @return {@link GeometryWriterImplementorKey}
+     */
+    @Override
+    protected GeometryWriterImplementorKey prepareKey() {
+        return forClass(JTSGeometryCollectionAdapter.class);
     }
 }

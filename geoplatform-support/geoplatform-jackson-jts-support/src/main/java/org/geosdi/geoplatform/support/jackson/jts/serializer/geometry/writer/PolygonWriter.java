@@ -34,48 +34,43 @@
  */
 package org.geosdi.geoplatform.support.jackson.jts.serializer.geometry.writer;
 
+import org.geosdi.geoplatform.support.jackson.jts.adapter.JTSPolygonAdapter;
 import org.geosdi.geoplatform.support.jackson.jts.serializer.geometry.GeoJsonGeometryType;
 import org.locationtech.jts.geom.Polygon;
 
+import static java.lang.Boolean.TRUE;
 import static org.geosdi.geoplatform.support.jackson.jts.serializer.geometry.GeoJsonGeometryType.GeoJsonGeometryEnumType.POLYGON;
+import static org.geosdi.geoplatform.support.jackson.jts.serializer.geometry.writer.bridge.implementor.GeometryWriterImplementor.GeometryWriterImplementorKey.forClass;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class PolygonWriter extends BaseWriter<Polygon, org.geojson.Polygon> {
-
-    /**
-     * @return {@link Class<Polygon>}
-     */
-    @Override
-    public Class<Polygon> getKey() {
-        return Polygon.class;
-    }
+public class PolygonWriter extends BaseWriter<JTSPolygonAdapter, org.geojson.Polygon> {
 
     /**
      * <p>
-     * Specify if {@link org.geosdi.geoplatform.support.jackson.jts.bridge.implementor.Implementor} is valid or not
+     * Specify if {@link org.geosdi.geoplatform.support.bridge.implementor.GPImplementor} is valid or not
      * </p>
      *
      * @return {@link Boolean}
      */
     @Override
-    public Boolean isImplementorValid() {
-        return Boolean.TRUE;
+    public Boolean isValid() {
+        return TRUE;
     }
 
     /**
-     * @param geometry
-     * @return
+     * @param geometryAdapter
+     * @return {@link org.geojson.Polygon}
      * @throws Exception
      */
     @Override
-    public org.geojson.Polygon buildGeoJsonGeometry(Polygon geometry) throws Exception {
+    public org.geojson.Polygon buildGeoJsonGeometry(JTSPolygonAdapter geometryAdapter) throws Exception {
         org.geojson.Polygon polygon = new org.geojson.Polygon();
-        polygon.setExteriorRing(COORDINATE_WRITER.buildPolygonExteriorRing(geometry));
-        if (geometry.getNumInteriorRing() > 0)
-            COORDINATE_WRITER.buildPolygonInteriorRing(geometry).stream()
+        polygon.setExteriorRing(COORDINATE_WRITER.buildPolygonExteriorRing(geometryAdapter));
+        if (geometryAdapter.getNumInteriorRing() > 0)
+            COORDINATE_WRITER.buildPolygonInteriorRing(geometryAdapter).stream()
                     .forEach(interiorRing -> polygon.addInteriorRing(interiorRing));
         return polygon;
     }
@@ -86,5 +81,13 @@ public class PolygonWriter extends BaseWriter<Polygon, org.geojson.Polygon> {
     @Override
     public GeoJsonGeometryType getGeometryType() {
         return POLYGON;
+    }
+
+    /**
+     * @return {@link GeometryWriterImplementorKey}
+     */
+    @Override
+    protected GeometryWriterImplementorKey prepareKey() {
+        return forClass(JTSPolygonAdapter.class);
     }
 }

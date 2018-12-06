@@ -47,6 +47,8 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
+import static org.geosdi.geoplatform.support.jackson.jts.deserializer.geometry.writer.bridge.implementor.JTSGeometryWriterImplementor.JTSGeometryWriterImplementorKey.forClass;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -75,6 +77,6 @@ abstract class GPJTSDeserializer<JTS extends Geometry, GEOJSON extends GeoJsonOb
      */
     protected JTSGeometryWriterImplementor<GEOJSON, JTS> getJTSGeometryImplementorWriter(GeoJsonObject geoJsonObject)
             throws Exception {
-        return JTS_GEOMETRY_WRITER_IMPLEMENTOR_STORE.getImplementorByKey(geoJsonObject.getClass());
+        return (JTSGeometryWriterImplementor<GEOJSON, JTS>) JTS_GEOMETRY_WRITER_IMPLEMENTOR_STORE.getImplementorByKey(forClass(geoJsonObject.getClass()));
     }
 }

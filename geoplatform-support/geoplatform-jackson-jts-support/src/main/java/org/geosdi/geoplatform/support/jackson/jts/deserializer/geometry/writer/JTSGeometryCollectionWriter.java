@@ -44,20 +44,13 @@ import java.util.List;
 
 import static java.lang.Boolean.TRUE;
 import static org.geosdi.geoplatform.support.jackson.jts.deserializer.IGPJTSDeserializer.JTS_GEOMETRY_WRITER_IMPLEMENTOR_STORE;
+import static org.geosdi.geoplatform.support.jackson.jts.deserializer.geometry.writer.bridge.implementor.JTSGeometryWriterImplementor.JTSGeometryWriterImplementorKey.forClass;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class JTSGeometryCollectionWriter extends JTSBaseWriter<GeometryCollection, org.locationtech.jts.geom.GeometryCollection> {
-
-    /**
-     * @return {@link Class<GeometryCollection>}
-     */
-    @Override
-    public Class<GeometryCollection> getKey() {
-        return GeometryCollection.class;
-    }
 
     /**
      * @param geometryCollection
@@ -71,7 +64,7 @@ public class JTSGeometryCollectionWriter extends JTSBaseWriter<GeometryCollectio
                 this, geometryCollection);
         List<Geometry> geometries = new ArrayList<>(geometryCollection.getGeometries().size());
         for (GeoJsonObject geoJsonObject : geometryCollection.getGeometries()) {
-            JTSGeometryWriterImplementor jtsGeometryWriterImplementor = JTS_GEOMETRY_WRITER_IMPLEMENTOR_STORE.getImplementorByKey(geoJsonObject.getClass());
+            JTSGeometryWriterImplementor jtsGeometryWriterImplementor = JTS_GEOMETRY_WRITER_IMPLEMENTOR_STORE.getImplementorByKey(forClass(geoJsonObject.getClass()));
             geometries.add(jtsGeometryWriterImplementor.buildJTSGeometry(geoJsonObject));
         }
         return GEOMETRY_FACTORY.createGeometryCollection(geometries.stream().toArray(size -> new Geometry[size]));
@@ -79,13 +72,21 @@ public class JTSGeometryCollectionWriter extends JTSBaseWriter<GeometryCollectio
 
     /**
      * <p>
-     * Specify if {@link org.geosdi.geoplatform.support.jackson.jts.bridge.implementor.Implementor} is valid or not
+     * Specify if {@link org.geosdi.geoplatform.support.bridge.implementor.GPImplementor} is valid or not
      * </p>
      *
      * @return {@link Boolean}
      */
     @Override
-    public Boolean isImplementorValid() {
+    public Boolean isValid() {
         return TRUE;
+    }
+
+    /**
+     * @return {@link JTSGeometryWriterImplementorKey}
+     */
+    @Override
+    protected JTSGeometryWriterImplementorKey prepareKey() {
+        return forClass(GeometryCollection.class);
     }
 }

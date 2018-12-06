@@ -35,8 +35,7 @@
 package org.geosdi.geoplatform.support.jackson.jts.deserializer;
 
 import org.geojson.GeoJsonObject;
-import org.geosdi.geoplatform.support.jackson.jts.bridge.store.ImplementorStore;
-import org.geosdi.geoplatform.support.jackson.jts.deserializer.geometry.writer.bridge.implementor.JTSGeometryWriterImplementor;
+import org.geosdi.geoplatform.support.jackson.jts.deserializer.geometry.writer.bridge.store.GPJTSGeometryWriterImplementorStore;
 import org.geosdi.geoplatform.support.jackson.jts.deserializer.geometry.writer.bridge.store.JTSGeometryWriterImplementorStore;
 import org.locationtech.jts.geom.Geometry;
 
@@ -46,7 +45,7 @@ import org.locationtech.jts.geom.Geometry;
  */
 public interface IGPJTSDeserializer<G extends Geometry> {
 
-    ImplementorStore<JTSGeometryWriterImplementor> JTS_GEOMETRY_WRITER_IMPLEMENTOR_STORE = new JTSGeometryWriterImplementorStore();
+    GPJTSGeometryWriterImplementorStore JTS_GEOMETRY_WRITER_IMPLEMENTOR_STORE = new JTSGeometryWriterImplementorStore();
 
     /**
      * @param geoJsonObject

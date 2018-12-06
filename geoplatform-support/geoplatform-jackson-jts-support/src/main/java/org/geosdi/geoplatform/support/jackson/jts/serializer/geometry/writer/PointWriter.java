@@ -34,47 +34,41 @@
  */
 package org.geosdi.geoplatform.support.jackson.jts.serializer.geometry.writer;
 
+import org.geosdi.geoplatform.support.jackson.jts.adapter.JTSPointAdapter;
 import org.geosdi.geoplatform.support.jackson.jts.serializer.geometry.GeoJsonGeometryType;
-import org.locationtech.jts.geom.Point;
 
+import static java.lang.Boolean.TRUE;
 import static org.geosdi.geoplatform.support.jackson.jts.serializer.geometry.GeoJsonGeometryType.GeoJsonGeometryEnumType.POINT;
+import static org.geosdi.geoplatform.support.jackson.jts.serializer.geometry.writer.bridge.implementor.GeometryWriterImplementor.GeometryWriterImplementorKey.forClass;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class PointWriter extends BaseWriter<Point, org.geojson.Point> {
-
-    /**
-     * @return {@link Class<Point>}
-     */
-    @Override
-    public Class<Point> getKey() {
-        return Point.class;
-    }
+public class PointWriter extends BaseWriter<JTSPointAdapter, org.geojson.Point> {
 
     /**
      * <p>
-     * Specify if {@link org.geosdi.geoplatform.support.jackson.jts.bridge.implementor.Implementor} is valid or not
+     * Specify if {@link org.geosdi.geoplatform.support.bridge.implementor.GPImplementor} is valid or not
      * </p>
      *
      * @return {@link Boolean}
      */
     @Override
-    public Boolean isImplementorValid() {
-        return Boolean.TRUE;
+    public Boolean isValid() {
+        return TRUE;
     }
 
     /**
-     * @param geometry
-     * @return
+     * @param geometryAdapter
+     * @return {@link org.geojson.Point}
      * @throws Exception
      */
     @Override
-    public org.geojson.Point buildGeoJsonGeometry(Point geometry) throws Exception {
+    public org.geojson.Point buildGeoJsonGeometry(JTSPointAdapter geometryAdapter) throws Exception {
         logger.trace(":::::::::::::::::::Called {}#buildGeoJsonGeometry for JTS_GEOMETRY : {}\n",
-                super.toString(), geometry);
-        return new org.geojson.Point(COORDINATE_WRITER.buildPointCoordinate(geometry.getCoordinate()));
+                super.toString(), geometryAdapter);
+        return new org.geojson.Point(COORDINATE_WRITER.buildPointCoordinate(geometryAdapter.getCoordinate()));
     }
 
     /**
@@ -83,5 +77,13 @@ public class PointWriter extends BaseWriter<Point, org.geojson.Point> {
     @Override
     public GeoJsonGeometryType getGeometryType() {
         return POINT;
+    }
+
+    /**
+     * @return {@link GeometryWriterImplementorKey}
+     */
+    @Override
+    protected GeometryWriterImplementorKey prepareKey() {
+        return forClass(JTSPointAdapter.class);
     }
 }

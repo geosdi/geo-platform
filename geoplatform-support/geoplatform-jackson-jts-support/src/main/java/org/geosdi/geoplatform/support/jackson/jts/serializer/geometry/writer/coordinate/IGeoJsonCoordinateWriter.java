@@ -35,9 +35,16 @@
 package org.geosdi.geoplatform.support.jackson.jts.serializer.geometry.writer.coordinate;
 
 import org.geojson.LngLatAlt;
-import org.locationtech.jts.geom.*;
+import org.geosdi.geoplatform.support.jackson.jts.adapter.AbstractJTSLineStringAdapter;
+import org.geosdi.geoplatform.support.jackson.jts.adapter.JTSMultiLinestringAdapter;
+import org.geosdi.geoplatform.support.jackson.jts.adapter.JTSMultiPointAdapter;
+import org.geosdi.geoplatform.support.jackson.jts.adapter.JTSPolygonAdapter;
+import org.geosdi.geoplatform.support.jackson.jts.adapter.coordinate.GPJTSCoordinateAdapter;
 
+import javax.annotation.Nonnull;
 import java.util.List;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -46,38 +53,38 @@ import java.util.List;
 public interface IGeoJsonCoordinateWriter {
 
     /**
-     * @param coordinate
+     * @param coordinateAdapter
      * @return {@link LngLatAlt}
      */
-    LngLatAlt buildPointCoordinate(Coordinate coordinate);
+    <JTSCoordinateAdapter extends GPJTSCoordinateAdapter> LngLatAlt buildPointCoordinate(@Nonnull(when = NEVER) JTSCoordinateAdapter coordinateAdapter);
 
     /**
-     * @param lineString
+     * @param lineStringAdapter
      * @return {@link List<LngLatAlt>}
      */
-    List<LngLatAlt> buildLineStringCoordinate(LineString lineString);
+    <JTSLineStringAdapter extends AbstractJTSLineStringAdapter> List<LngLatAlt> buildLineStringCoordinate(@Nonnull(when = NEVER) JTSLineStringAdapter lineStringAdapter);
 
     /**
-     * @param polygon
+     * @param polygonAdapter
      * @return {@link List<LngLatAlt>}
      */
-    List<LngLatAlt> buildPolygonExteriorRing(Polygon polygon);
+    List<LngLatAlt> buildPolygonExteriorRing(@Nonnull(when = NEVER) JTSPolygonAdapter polygonAdapter);
 
     /**
-     * @param polygon
+     * @param polygonAdapter
      * @return {@link List<LngLatAlt>}
      */
-    List<List<LngLatAlt>> buildPolygonInteriorRing(Polygon polygon);
+    List<List<LngLatAlt>> buildPolygonInteriorRing(@Nonnull(when = NEVER) JTSPolygonAdapter polygonAdapter);
 
     /**
-     * @param multiPoint
+     * @param multiPointAdapter
      * @return {@link List<LngLatAlt>}
      */
-    List<LngLatAlt> buildMultiPointCoordinate(MultiPoint multiPoint);
+    List<LngLatAlt> buildMultiPointCoordinate(@Nonnull(when = NEVER) JTSMultiPointAdapter multiPointAdapter);
 
     /**
-     * @param multiLineString
+     * @param multiLineStringAdapter
      * @return {@link List<LngLatAlt>}
      */
-    List<List<LngLatAlt>> buildMultiLineStringCoordinate(MultiLineString multiLineString);
+    List<List<LngLatAlt>> buildMultiLineStringCoordinate(@Nonnull(when = NEVER) JTSMultiLinestringAdapter multiLineStringAdapter);
 }

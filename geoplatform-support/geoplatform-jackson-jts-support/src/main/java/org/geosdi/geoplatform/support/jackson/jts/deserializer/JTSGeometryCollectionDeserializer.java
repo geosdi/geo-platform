@@ -84,6 +84,6 @@ public class JTSGeometryCollectionDeserializer extends GPJTSDeserializer<Geometr
      */
     JTSGeometryWriterImplementor<FeatureCollection, GeometryCollection> forFeatureCollection(GeoJsonObject geoJsonObject)
             throws Exception {
-        return JTS_GEOMETRY_WRITER_IMPLEMENTOR_STORE.getImplementorByKey(geoJsonObject.getClass());
+        return (JTSGeometryWriterImplementor<FeatureCollection, GeometryCollection>) JTS_GEOMETRY_WRITER_IMPLEMENTOR_STORE.getImplementorByKey(geoJsonObject.getClass());
     }
 }

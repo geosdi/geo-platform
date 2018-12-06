@@ -32,13 +32,13 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.support.jackson.jts.bridge;
+package org.geosdi.geoplatform.support.jackson.jts.bridge.store;
 
-import org.geosdi.geoplatform.support.jackson.jts.bridge.store.ImplementorStore;
+import org.geosdi.geoplatform.support.jackson.jts.adapter.*;
 import org.geosdi.geoplatform.support.jackson.jts.serializer.geometry.writer.GeometryWriter;
 import org.geosdi.geoplatform.support.jackson.jts.serializer.geometry.writer.bridge.implementor.GeometryWriterImplementor;
+import org.geosdi.geoplatform.support.jackson.jts.serializer.geometry.writer.bridge.store.GPGeometryWriterImplementorStore;
 import org.junit.Test;
-import org.locationtech.jts.geom.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -52,58 +52,51 @@ public class GeometryWriterImplementorStoreTest {
 
     private static final Logger logger = LoggerFactory.getLogger(GeometryWriterImplementorStoreTest.class);
     //
-    private static final ImplementorStore<GeometryWriterImplementor> store = GeometryWriter.GEOMETRY_WRITER_IMPLEMENTOR_STORE;
+    private static final GPGeometryWriterImplementorStore store = GeometryWriter.GEOMETRY_WRITER_IMPLEMENTOR_STORE;
 
     @Test
     public void getAllGeometryWriterImplementorTest() throws Exception {
-        Set<GeometryWriterImplementor> implementors = store.getAllImplementors();
+        Set<GeometryWriterImplementor<?, ?>> implementors = store.getAllImplementors();
         logger.info("######################GEOMETRY_WRITER_IMPLEMENTORS : {}\n", implementors);
     }
 
     @Test
     public void pointGeometryWriterTest() throws Exception {
-        logger.info("###################Found : {} for key {}\n", store.getImplementorByKey(Point.class), Point.class);
+        logger.info("###################Found : {} for key {}\n", store.getImplementorByKey(JTSPointAdapter.class), JTSPointAdapter.class);
     }
 
     @Test
     public void lineStringGeometryWriterTest() throws Exception {
-        logger.info("###################Found : {} for key {}\n",
-                store.getImplementorByKey(LineString.class), LineString.class);
+        logger.info("###################Found : {} for key {}\n", store.getImplementorByKey(JTSLineStringAdapter.class), JTSLineStringAdapter.class);
     }
 
     @Test
     public void linearRingGeometryWriterTest() throws Exception {
-        logger.info("###################Found : {} for key {}\n",
-                store.getImplementorByKey(LinearRing.class), LinearRing.class);
+        logger.info("###################Found : {} for key {}\n", store.getImplementorByKey(JTSLinearRingAdapter.class), JTSLinearRingAdapter.class);
     }
 
     @Test
     public void polygonGeometryWriterTest() throws Exception {
-        logger.info("###################Found : {} for key {}\n",
-                store.getImplementorByKey(Polygon.class), Polygon.class);
+        logger.info("###################Found : {} for key {}\n", store.getImplementorByKey(JTSPolygonAdapter.class), JTSPolygonAdapter.class);
     }
 
     @Test
     public void multiPointGeometryWriterTest() throws Exception {
-        logger.info("###################Found : {} for key {}\n",
-                store.getImplementorByKey(MultiPoint.class), MultiPoint.class);
+        logger.info("###################Found : {} for key {}\n", store.getImplementorByKey(JTSMultiPointAdapter.class), JTSMultiPointAdapter.class);
     }
 
     @Test
     public void multiLineStringGeometryWriterTest() throws Exception {
-        logger.info("###################Found : {} for key {}\n",
-                store.getImplementorByKey(MultiLineString.class), MultiLineString.class);
+        logger.info("###################Found : {} for key {}\n", store.getImplementorByKey(JTSMultiLinestringAdapter.class), JTSMultiLinestringAdapter.class);
     }
 
     @Test
     public void multiPolygonGeometryWriterTest() throws Exception {
-        logger.info("###################Found : {} for key {}\n",
-                store.getImplementorByKey(MultiPolygon.class), MultiPolygon.class);
+        logger.info("###################Found : {} for key {}\n", store.getImplementorByKey(JTSMultiPolygonAdapter.class), JTSMultiPolygonAdapter.class);
     }
 
     @Test
     public void geometryCollectionWriterTest() throws Exception {
-        logger.info("###################Found : {} for key {}\n",
-                store.getImplementorByKey(GeometryCollection.class), GeometryCollection.class);
+        logger.info("###################Found : {} for key {}\n", store.getImplementorByKey(JTSGeometryCollectionAdapter.class), JTSGeometryCollectionAdapter.class);
     }
 }

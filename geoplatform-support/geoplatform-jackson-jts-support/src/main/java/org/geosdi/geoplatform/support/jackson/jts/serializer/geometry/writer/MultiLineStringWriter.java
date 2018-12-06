@@ -34,48 +34,43 @@
  */
 package org.geosdi.geoplatform.support.jackson.jts.serializer.geometry.writer;
 
+import org.geosdi.geoplatform.support.jackson.jts.adapter.JTSMultiLinestringAdapter;
 import org.geosdi.geoplatform.support.jackson.jts.serializer.geometry.GeoJsonGeometryType;
 import org.locationtech.jts.geom.MultiLineString;
 
+import static java.lang.Boolean.TRUE;
 import static org.geosdi.geoplatform.support.jackson.jts.serializer.geometry.GeoJsonGeometryType.GeoJsonGeometryEnumType.MULTI_LINE_STRING;
+import static org.geosdi.geoplatform.support.jackson.jts.serializer.geometry.writer.bridge.implementor.GeometryWriterImplementor.GeometryWriterImplementorKey.forClass;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class MultiLineStringWriter extends BaseWriter<MultiLineString, org.geojson.MultiLineString> {
-
-    /**
-     * @return {@link Class<MultiLineString>}
-     */
-    @Override
-    public Class<MultiLineString> getKey() {
-        return MultiLineString.class;
-    }
+public class MultiLineStringWriter extends BaseWriter<JTSMultiLinestringAdapter, org.geojson.MultiLineString> {
 
     /**
      * <p>
-     * Specify if {@link org.geosdi.geoplatform.support.jackson.jts.bridge.implementor.Implementor} is valid or not
+     * Specify if {@link org.geosdi.geoplatform.support.bridge.implementor.GPImplementor} is valid or not
      * </p>
      *
      * @return {@link Boolean}
      */
     @Override
-    public Boolean isImplementorValid() {
-        return Boolean.TRUE;
+    public Boolean isValid() {
+        return TRUE;
     }
 
     /**
-     * @param geometry
-     * @return
+     * @param geometryAdapter
+     * @return {@link org.geojson.MultiLineString}
      * @throws Exception
      */
     @Override
-    public org.geojson.MultiLineString buildGeoJsonGeometry(MultiLineString geometry) throws Exception {
+    public org.geojson.MultiLineString buildGeoJsonGeometry(JTSMultiLinestringAdapter geometryAdapter) throws Exception {
         logger.trace(":::::::::::::::::::Called {}#buildGeoJsonGeometry for JTS_GEOMETRY : {}\n",
-                super.toString(), geometry);
+                super.toString(), geometryAdapter);
         org.geojson.MultiLineString multiLineString = new org.geojson.MultiLineString();
-        multiLineString.setCoordinates(COORDINATE_WRITER.buildMultiLineStringCoordinate(geometry));
+        multiLineString.setCoordinates(COORDINATE_WRITER.buildMultiLineStringCoordinate(geometryAdapter));
         return multiLineString;
     }
 
@@ -85,5 +80,13 @@ public class MultiLineStringWriter extends BaseWriter<MultiLineString, org.geojs
     @Override
     public GeoJsonGeometryType getGeometryType() {
         return MULTI_LINE_STRING;
+    }
+
+    /**
+     * @return {@link GeometryWriterImplementorKey}
+     */
+    @Override
+    protected GeometryWriterImplementorKey prepareKey() {
+        return forClass(JTSMultiLinestringAdapter.class);
     }
 }

@@ -107,12 +107,12 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
      * @return {@link GPGeoserverStylesRequest}
      */
     @Override
-    public GPGeoserverStylesRequest createStylesRequest() {
+    public GPGeoserverStylesRequest loadStylesRequest() {
         switch (version) {
-            case V212x:
+            case V214x:
                 return new GPGeoserverStylesRequest(this, this.jacksonSupport);
             default:
-                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.12.x");
+                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.14.x");
         }
     }
 
@@ -120,12 +120,12 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
      * @return {@link GPGeoserverStyleRequest}
      */
     @Override
-    public GPGeoserverStyleRequest createStyleRequest() {
+    public GPGeoserverStyleRequest loadStyleRequest() {
         switch (version) {
-            case V212x:
+            case V214x:
                 return new GPGeoserverStyleRequest(this, this.jacksonSupport);
             default:
-                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.12.x");
+                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.14.x");
         }
     }
 }

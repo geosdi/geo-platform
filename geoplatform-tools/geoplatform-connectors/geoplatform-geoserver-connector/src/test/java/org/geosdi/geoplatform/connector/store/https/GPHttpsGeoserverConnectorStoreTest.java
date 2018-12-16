@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.connector.store.https;
 
 import org.geosdi.geoplatform.connector.geoserver.request.about.GPGeoserverAboutStatusRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.about.GPGeoserverAboutVersionRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GPGeoserverWorkspacesRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GPGeoserverLoadWorkspacesRequest;
 import org.geosdi.geoplatform.connector.server.exception.UnauthorizedException;
 import org.geosdi.geoplatform.connector.store.GPGeoserverConnectorStore;
 import org.junit.AfterClass;
@@ -92,7 +92,7 @@ public class GPHttpsGeoserverConnectorStoreTest {
 
     @Test(expected = UnauthorizedException.class)
     public void c_workspacesHttpsGeoserverConnectorTest() throws Exception {
-        GPGeoserverWorkspacesRequest workspacesRequest = httpsGeoserverConnectorStore.createWorkspacesRequest();
+        GPGeoserverLoadWorkspacesRequest workspacesRequest = httpsGeoserverConnectorStore.createWorkspacesRequest();
         logger.info("####################WORKSPACES_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", workspacesRequest.getResponse());
     }
 

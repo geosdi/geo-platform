@@ -38,7 +38,7 @@ package org.geosdi.geoplatform.connector.geoserver.worksapce;
 import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.GeoserverVersionException;
 import org.geosdi.geoplatform.connector.geoserver.about.GPGeoserverAboutConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GPGeoserverWorkspacesRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GPGeoserverLoadWorkspacesRequest;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
@@ -103,15 +103,15 @@ public abstract class GPGeoserverWorkspacesConnector extends GPGeoserverAboutCon
     }
 
     /**
-     * @return {@link GPGeoserverWorkspacesRequest}
+     * @return {@link GPGeoserverLoadWorkspacesRequest}
      */
     @Override
-    public GPGeoserverWorkspacesRequest createWorkspacesRequest() {
+    public GPGeoserverLoadWorkspacesRequest loadWorkspacesRequest() {
         switch (version) {
-            case V212x:
-                return new GPGeoserverWorkspacesRequest(this, this.jacksonSupport);
+            case V214x:
+                return new GPGeoserverLoadWorkspacesRequest(this, this.jacksonSupport);
             default:
-                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.12.x");
+                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.14.x");
         }
     }
 }

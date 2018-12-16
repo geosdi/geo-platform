@@ -18,7 +18,7 @@
             level="debug"/>
     <logger name="org.geosdi.geoplatform.connector.geoserver.request.about.GPGeoserverAboutStatusRequest"
             level="debug"/>
-    <logger name="org.geosdi.geoplatform.connector.geoserver.request.workspaces.GPGeoserverWorkspacesRequest"
+    <logger name="org.geosdi.geoplatform.connector.geoserver.request.workspaces.GPGeoserverLoadWorkspacesRequest"
             level="debug"/>
     <logger name="org.geosdi.geoplatform.connector.geoserver.request.namespaces.GPGeoserverNamespaceRequest"
             level="debug"/>

@@ -42,8 +42,11 @@ import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
+import javax.annotation.Nonnull;
+
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.ThreadLocal.withInitial;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -58,7 +61,7 @@ public class GPGeoserverStyleRequest extends GPJsonGetConnectorRequest<GPGeoserv
      * @param server
      * @param theJacksonSupport
      */
-    public GPGeoserverStyleRequest(GPServerConnector server, JacksonSupport theJacksonSupport) {
+    public GPGeoserverStyleRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport, GPGeoserverSingleStyle.class);
         this.name = withInitial(() -> null);
     }
@@ -83,8 +86,7 @@ public class GPGeoserverStyleRequest extends GPJsonGetConnectorRequest<GPGeoserv
     @Override
     protected HttpGet prepareHttpMethod() {
         String styleName = this.name.get();
-        checkArgument(((styleName != null) && !(styleName.isEmpty())),
-                "The Parameter Style Name must not be null or an Empty String.");
+        checkArgument(((styleName != null) && !(styleName.trim().isEmpty())), "The Parameter Style Name must not be null or an Empty String.");
         String baseURI = this.serverURI.toString();
         HttpGet httpGet = ((baseURI.endsWith("/") ? new HttpGet(baseURI.concat("styles/").concat(styleName).concat(".json"))
                 : new HttpGet(baseURI.concat("/styles/").concat(styleName).concat(".json"))));

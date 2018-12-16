@@ -42,6 +42,10 @@ import org.geosdi.geoplatform.connector.geoserver.request.model.layers.GPGeoserv
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
+import javax.annotation.Nonnull;
+
+import static javax.annotation.meta.When.NEVER;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -52,7 +56,7 @@ public class GPGeoserverLayersRequest extends GPGeoserverGetConnectorRequest<GPG
      * @param server
      * @param theJacksonSupport
      */
-    public GPGeoserverLayersRequest(GPServerConnector server, JacksonSupport theJacksonSupport) {
+    public GPGeoserverLayersRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport, GPGeoserverLayers.class, GPGeoserverEmptyLayers.class);
     }
 

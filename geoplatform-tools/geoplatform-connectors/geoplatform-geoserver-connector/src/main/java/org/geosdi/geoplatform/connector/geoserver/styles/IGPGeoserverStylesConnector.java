@@ -48,10 +48,10 @@ public interface IGPGeoserverStylesConnector extends IGPGeoserverLayersConnector
     /**
      * @return {@link GPGeoserverStylesRequest}
      */
-    GPGeoserverStylesRequest createStylesRequest();
+    GPGeoserverStylesRequest loadStylesRequest();
 
     /**
      * @return {@link GPGeoserverStyleRequest}
      */
-    GPGeoserverStyleRequest createStyleRequest();
+    GPGeoserverStyleRequest loadStyleRequest();
 }

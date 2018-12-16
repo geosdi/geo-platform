@@ -32,12 +32,14 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.request.about;
+package org.geosdi.geoplatform.connector.geoserver.request.workspaces;
 
+import net.jcip.annotations.ThreadSafe;
 import org.apache.http.client.methods.HttpGet;
-import org.geosdi.geoplatform.connector.geoserver.request.model.about.status.GPGeoserverAboutStatus;
+import org.geosdi.geoplatform.connector.geoserver.request.GPGeoserverGetConnectorRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.model.workspace.GPGeoserverEmptyWorkspaces;
+import org.geosdi.geoplatform.connector.geoserver.request.model.workspace.GPGeoserverWorkspaces;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
@@ -48,14 +50,15 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPGeoserverAboutStatusRequest extends GPJsonGetConnectorRequest<GPGeoserverAboutStatus> {
+@ThreadSafe
+public class GPGeoserverLoadWorkspacesRequest extends GPGeoserverGetConnectorRequest<GPGeoserverWorkspaces, GPGeoserverEmptyWorkspaces> {
 
     /**
      * @param server
      * @param theJacksonSupport
      */
-    public GPGeoserverAboutStatusRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
-        super(server, theJacksonSupport, GPGeoserverAboutStatus.class);
+    public GPGeoserverLoadWorkspacesRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+        super(server, theJacksonSupport, GPGeoserverWorkspaces.class, GPGeoserverEmptyWorkspaces.class);
     }
 
     /**
@@ -64,8 +67,8 @@ public class GPGeoserverAboutStatusRequest extends GPJsonGetConnectorRequest<GPG
     @Override
     protected HttpGet prepareHttpMethod() {
         String baseURI = this.serverURI.toString();
-        HttpGet httpGet = ((baseURI.endsWith("/") ? new HttpGet(baseURI.concat("about/status.json"))
-                : new HttpGet(baseURI.concat("/about/status.json"))));
+        HttpGet httpGet = ((baseURI.endsWith("/") ? new HttpGet(baseURI.concat("workspaces.json"))
+                : new HttpGet(baseURI.concat("/workspaces.json"))));
         httpGet.setConfig(super.prepareRequestConfig());
         return httpGet;
     }

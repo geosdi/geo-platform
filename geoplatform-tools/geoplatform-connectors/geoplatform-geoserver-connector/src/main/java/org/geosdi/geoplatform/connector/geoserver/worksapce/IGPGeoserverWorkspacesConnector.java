@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.connector.geoserver.worksapce;
 
 import org.geosdi.geoplatform.connector.geoserver.about.IGPGeoserverAboutConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GPGeoserverWorkspacesRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GPGeoserverLoadWorkspacesRequest;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -45,7 +45,7 @@ import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GPGeoserver
 public interface IGPGeoserverWorkspacesConnector extends IGPGeoserverAboutConnector {
 
     /**
-     * @return {@link GPGeoserverWorkspacesRequest}
+     * @return {@link GPGeoserverLoadWorkspacesRequest}
      */
-    GPGeoserverWorkspacesRequest createWorkspacesRequest();
+    GPGeoserverLoadWorkspacesRequest loadWorkspacesRequest();
 }

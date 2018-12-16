@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.request.styles;
 
+import net.jcip.annotations.ThreadSafe;
 import org.apache.http.client.methods.HttpGet;
 import org.geosdi.geoplatform.connector.geoserver.request.GPGeoserverGetConnectorRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.model.styles.GPGeoserverEmptyStyles;
@@ -42,17 +43,22 @@ import org.geosdi.geoplatform.connector.geoserver.request.model.styles.GPGeoserv
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
+import javax.annotation.Nonnull;
+
+import static javax.annotation.meta.When.NEVER;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@ThreadSafe
 public class GPGeoserverStylesRequest extends GPGeoserverGetConnectorRequest<GPGeoserverStyles, GPGeoserverEmptyStyles> {
 
     /**
      * @param server
      * @param theJacksonSupport
      */
-    public GPGeoserverStylesRequest(GPServerConnector server, JacksonSupport theJacksonSupport) {
+    public GPGeoserverStylesRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport, GPGeoserverStyles.class, GPGeoserverEmptyStyles.class);
     }
 

@@ -109,10 +109,10 @@ public abstract class GPGeoserverLayersConnector extends GPGeoserverNamespacesCo
     @Override
     public GPGeoserverLayersRequest createLayersRequest() {
         switch (version) {
-            case V212x:
+            case V214x:
                 return new GPGeoserverLayersRequest(this, this.jacksonSupport);
             default:
-                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.12.x");
+                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.14.x");
         }
     }
 
@@ -122,10 +122,10 @@ public abstract class GPGeoserverLayersConnector extends GPGeoserverNamespacesCo
     @Override
     public GPGeoserverLayerRequest createLayerRequest() {
         switch (version) {
-            case V212x:
+            case V214x:
                 return new GPGeoserverLayerRequest(this, this.jacksonSupport);
             default:
-                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.12.x");
+                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.14.x");
         }
     }
 }

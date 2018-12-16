@@ -45,7 +45,7 @@ import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GPGeoserver
 import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GPGeoserverNamespacesRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.styles.GPGeoserverStyleRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.styles.GPGeoserverStylesRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GPGeoserverWorkspacesRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GPGeoserverLoadWorkspacesRequest;
 import org.geosdi.geoplatform.connector.server.security.BasicPreemptiveSecurityConnector;
 import org.geosdi.geoplatform.connector.store.task.GeoserverLayerTask;
 import org.geosdi.geoplatform.connector.store.task.GeoserverNamespaceTask;
@@ -102,7 +102,7 @@ public class GPGeoserverConnectorStoreTest {
 
     @Test
     public void c_workspacesGeoserverConnectorTest() throws Exception {
-        GPGeoserverWorkspacesRequest workspacesRequest = geoserverConnectorStore.createWorkspacesRequest();
+        GPGeoserverLoadWorkspacesRequest workspacesRequest = geoserverConnectorStore.createWorkspacesRequest();
         logger.info("####################WORKSPACES_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", workspacesRequest.getResponseAsString());
     }
 
@@ -139,21 +139,21 @@ public class GPGeoserverConnectorStoreTest {
 
     @Test
     public void h_stylesGeoserverConnectorTest() throws Exception {
-        GPGeoserverStylesRequest stylesRequest = geoserverConnectorStore.createStylesRequest();
+        GPGeoserverStylesRequest stylesRequest = geoserverConnectorStore.laodStylesRequest();
         logger.info("#################STYLES_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", stylesRequest.getResponseAsString());
     }
 
     @Test
     public void i_styleGeoserverConnectorTest() throws Exception {
-        GPGeoserverStyleRequest styleRequest = geoserverConnectorStore.createStyleRequest();
+        GPGeoserverStyleRequest styleRequest = geoserverConnectorStore.loadStyleRequest();
         styleRequest.setName("Frank");
         logger.info("################STYLE_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", styleRequest.getResponseAsString());
     }
 
     @Test
     public void l_styleGeoserverConnectorMultiThreadTest() throws Exception {
-        GPGeoserverStylesRequest stylesRequest = geoserverConnectorStore.createStylesRequest();
-        GPGeoserverStyleRequest styleRequest = geoserverConnectorStore.createStyleRequest();
+        GPGeoserverStylesRequest stylesRequest = geoserverConnectorStore.laodStylesRequest();
+        GPGeoserverStyleRequest styleRequest = geoserverConnectorStore.loadStyleRequest();
         stylesRequest.getResponse().getStyles()
                 .stream()
                 .forEach(value -> new GeoserverStyleTask(styleRequest, value.getName()).start());

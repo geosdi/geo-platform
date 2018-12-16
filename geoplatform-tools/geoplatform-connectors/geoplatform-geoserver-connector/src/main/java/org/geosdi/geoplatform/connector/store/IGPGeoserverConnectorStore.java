@@ -44,7 +44,7 @@ import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GPGeoserver
 import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GPGeoserverNamespacesRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.styles.GPGeoserverStyleRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.styles.GPGeoserverStylesRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GPGeoserverWorkspacesRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GPGeoserverLoadWorkspacesRequest;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -68,9 +68,9 @@ public interface IGPGeoserverConnectorStore {
     GPGeoserverAboutStatusRequest createAboutStatusRequest();
 
     /**
-     * @return {@link GPGeoserverWorkspacesRequest}
+     * @return {@link GPGeoserverLoadWorkspacesRequest}
      */
-    GPGeoserverWorkspacesRequest createWorkspacesRequest();
+    GPGeoserverLoadWorkspacesRequest createWorkspacesRequest();
 
     /**
      * @return {@link GPGeoserverNamespacesRequest}
@@ -95,10 +95,10 @@ public interface IGPGeoserverConnectorStore {
     /**
      * @return {@link GPGeoserverStylesRequest}
      */
-    GPGeoserverStylesRequest createStylesRequest();
+    GPGeoserverStylesRequest laodStylesRequest();
 
     /**
      * @return {@link GPGeoserverStyleRequest}
      */
-    GPGeoserverStyleRequest createStyleRequest();
+    GPGeoserverStyleRequest loadStyleRequest();
 }

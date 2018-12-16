@@ -46,7 +46,7 @@ import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GPGeoserver
 import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GPGeoserverNamespacesRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.styles.GPGeoserverStyleRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.styles.GPGeoserverStylesRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GPGeoserverWorkspacesRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GPGeoserverLoadWorkspacesRequest;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
@@ -107,11 +107,11 @@ public class GPGeoserverConnectorStore extends GPConnectorStore<GPGeoserverConne
     }
 
     /**
-     * @return {@link GPGeoserverWorkspacesRequest}
+     * @return {@link GPGeoserverLoadWorkspacesRequest}
      */
     @Override
-    public GPGeoserverWorkspacesRequest createWorkspacesRequest() {
-        return this.server.createWorkspacesRequest();
+    public GPGeoserverLoadWorkspacesRequest createWorkspacesRequest() {
+        return this.server.loadWorkspacesRequest();
     }
 
     /**
@@ -150,15 +150,15 @@ public class GPGeoserverConnectorStore extends GPConnectorStore<GPGeoserverConne
      * @return {@link GPGeoserverStylesRequest}
      */
     @Override
-    public GPGeoserverStylesRequest createStylesRequest() {
-        return this.server.createStylesRequest();
+    public GPGeoserverStylesRequest laodStylesRequest() {
+        return this.server.loadStylesRequest();
     }
 
     /**
      * @return {@link GPGeoserverStyleRequest}
      */
     @Override
-    public GPGeoserverStyleRequest createStyleRequest() {
-        return this.server.createStyleRequest();
+    public GPGeoserverStyleRequest loadStyleRequest() {
+        return this.server.loadStyleRequest();
     }
 }

@@ -42,8 +42,11 @@ import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
+import javax.annotation.Nonnull;
+
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.ThreadLocal.withInitial;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -58,7 +61,7 @@ public class GPGeoserverNamespaceRequest extends GPJsonGetConnectorRequest<GPGeo
      * @param server
      * @param theJacksonSupport
      */
-    public GPGeoserverNamespaceRequest(GPServerConnector server, JacksonSupport theJacksonSupport) {
+    public GPGeoserverNamespaceRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport, GPGeoserverSingleNamespace.class);
         this.prefix = withInitial(() -> null);
     }

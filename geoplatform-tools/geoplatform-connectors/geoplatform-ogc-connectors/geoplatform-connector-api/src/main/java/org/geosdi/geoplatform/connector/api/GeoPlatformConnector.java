@@ -35,11 +35,12 @@
  */
 package org.geosdi.geoplatform.connector.api;
 
+import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
+
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Date;
-import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 
 /**
  *

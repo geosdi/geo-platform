@@ -34,7 +34,7 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.request;
 
-import org.geosdi.geoplatform.connector.geoserver.request.model.GPGeoserverEmptyResponse;
+import org.geosdi.geoplatform.connector.geoserver.model.GPGeoserverEmptyResponse;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.exception.IncorrectResponseException;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
@@ -63,13 +63,10 @@ public abstract class GPGeoserverGetConnectorRequest<T, E extends GPGeoserverEmp
     /**
      * @param server
      * @param theJacksonSupport
-     * @param theClasse
-     * @param emptyResponse
      */
-    public GPGeoserverGetConnectorRequest(GPServerConnector server, JacksonSupport theJacksonSupport, Class<T> theClasse,
-            Class<E> emptyResponse) {
-        super(server, theJacksonSupport, theClasse);
-        this.emptyResponse = emptyResponse;
+    public GPGeoserverGetConnectorRequest(GPServerConnector server, JacksonSupport theJacksonSupport) {
+        super(server, theJacksonSupport);
+        this.emptyResponse = forEmptyResponse();
     }
 
     /**
@@ -102,4 +99,9 @@ public abstract class GPGeoserverGetConnectorRequest<T, E extends GPGeoserverEmp
             inputStream.close();
         }
     }
+
+    /**
+     * @return {@link Class<E>}
+     */
+    protected abstract Class<E> forEmptyResponse();
 }

@@ -92,7 +92,7 @@ public class GPHttpsGeoserverConnectorStoreTest {
 
     @Test(expected = UnauthorizedException.class)
     public void c_workspacesHttpsGeoserverConnectorTest() throws Exception {
-        GPGeoserverLoadWorkspacesRequest workspacesRequest = httpsGeoserverConnectorStore.createWorkspacesRequest();
+        GPGeoserverLoadWorkspacesRequest workspacesRequest = httpsGeoserverConnectorStore.loadWorkspacesRequest();
         logger.info("####################WORKSPACES_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", workspacesRequest.getResponse());
     }
 

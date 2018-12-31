@@ -35,8 +35,7 @@
 package org.geosdi.geoplatform.connector.geoserver.request.layers;
 
 import net.jcip.annotations.ThreadSafe;
-import org.apache.http.client.methods.HttpGet;
-import org.geosdi.geoplatform.connector.geoserver.request.model.layers.GeoserverLayer;
+import org.geosdi.geoplatform.connector.geoserver.model.layers.GeoserverLayer;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
@@ -61,7 +60,7 @@ public class GPGeoserverLayerRequest extends GPJsonGetConnectorRequest<Geoserver
      * @param theJacksonSupport
      */
     public GPGeoserverLayerRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
-        super(server, theJacksonSupport, GeoserverLayer.class);
+        super(server, theJacksonSupport);
         this.name = withInitial(() -> null);
     }
 
@@ -80,16 +79,22 @@ public class GPGeoserverLayerRequest extends GPJsonGetConnectorRequest<Geoserver
     }
 
     /**
-     * @return {@link HttpGet}
+     * @return {@link String}
      */
     @Override
-    protected HttpGet prepareHttpMethod() {
+    protected String createUriPath() throws Exception {
         String layerName = this.name.get();
         checkArgument(((layerName != null) && !(layerName.trim().isEmpty())), "The Parameter Name must not be null or an Empty String.");
         String baseURI = this.serverURI.toString();
-        HttpGet httpGet = ((baseURI.endsWith("/") ? new HttpGet(baseURI.concat("layers/").concat(layerName).concat(".json"))
-                : new HttpGet(baseURI.concat("/layers/").concat(layerName).concat(".json"))));
-        httpGet.setConfig(super.prepareRequestConfig());
-        return httpGet;
+        return ((baseURI.endsWith("/") ? baseURI.concat("layers/").concat(layerName).concat(".json")
+                : baseURI.concat("/layers/").concat(layerName).concat(".json")));
+    }
+
+    /**
+     * @return {@link Class<GeoserverLayer>}
+     */
+    @Override
+    protected Class<GeoserverLayer> forClass() {
+        return GeoserverLayer.class;
     }
 }

@@ -40,7 +40,7 @@ import org.geosdi.geoplatform.connector.pool.key.GPPoolGeoserverConnectorKey;
 import org.geosdi.geoplatform.connector.store.GPGeoserverConnectorStore;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-import static org.geosdi.geoplatform.connector.GeoserverVersion.fromString;
+import static org.geosdi.geoplatform.connector.store.GPGeoserverConnectorStoreBuilder.geoserverConnectorBuilder;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -56,7 +56,12 @@ public class GPGeoserverConnectorFactory extends GPPoolConnectorFactory<GPPoolGe
     @Override
     public GPGeoserverConnectorStore create(GPPoolGeoserverConnectorKey key) throws Exception {
         checkNotNull(key, "The GPPoolGeoserverConnectorKey must not be null");
-        return new GPGeoserverConnectorStore(key.getServerUrl(), key.getPooledConnectorConfig(), key.getSecurityConnector(),
-                key.getJacksonSupport(), fromString(key.getVersion()));
+        return geoserverConnectorBuilder()
+                .withServerUrl(key.getServerUrl())
+                .withPooledConnectorConfig(key.getPooledConnectorConfig())
+                .withClientSecurity(key.getSecurityConnector())
+                .withJacksoSupport(key.getJacksonSupport())
+                .withVersion(key.getVersion())
+                .build();
     }
 }

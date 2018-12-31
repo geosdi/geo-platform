@@ -1,70 +1,71 @@
 /**
- *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
- *
- *   Copyright (C) 2008-2018 geoSDI Group (CNR IMAA - Potenza - ITALY).
- *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
- *
- *   ====================================================================
- *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
- *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * geo-platform
+ * Rich webgis framework
+ * http://geo-platform.org
+ * ====================================================================
+ * <p>
+ * Copyright (C) 2008-2018 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * <p>
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version. This program is distributed in the
+ * hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License
+ * for more details. You should have received a copy of the GNU General
+ * Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * <p>
+ * ====================================================================
+ * <p>
+ * Linking this library statically or dynamically with other modules is
+ * making a combined work based on this library. Thus, the terms and
+ * conditions of the GNU General Public License cover the whole combination.
+ * <p>
+ * As a special exception, the copyright holders of this library give you permission
+ * to link this library with independent modules to produce an executable, regardless
+ * of the license terms of these independent modules, and to copy and distribute
+ * the resulting executable under terms of your choice, provided that you also meet,
+ * for each linked independent module, the terms and conditions of the license of
+ * that module. An independent module is a module which is not derived from or
+ * based on this library. If you modify this library, you may extend this exception
+ * to your version of the library, but you are not obligated to do so. If you do not
+ * wish to do so, delete this exception statement from your version.
  */
 package org.geosdi.geoplatform.connector.jackson;
 
-import org.geosdi.geoplatform.connector.geoserver.request.model.about.status.GPGeoserverAboutStatus;
-import org.geosdi.geoplatform.connector.geoserver.request.model.about.version.GPGeoserverAboutVersion;
-import org.geosdi.geoplatform.connector.geoserver.request.model.layers.GPGeoserverEmptyLayers;
-import org.geosdi.geoplatform.connector.geoserver.request.model.layers.GPGeoserverLayers;
-import org.geosdi.geoplatform.connector.geoserver.request.model.layers.GeoserverLayer;
-import org.geosdi.geoplatform.connector.geoserver.request.model.namespace.GPGeoserverEmptyNamespaces;
-import org.geosdi.geoplatform.connector.geoserver.request.model.namespace.GPGeoserverNamespaces;
-import org.geosdi.geoplatform.connector.geoserver.request.model.namespace.GPGeoserverSingleNamespace;
-import org.geosdi.geoplatform.connector.geoserver.request.model.styles.GPGeoserverEmptyStyles;
-import org.geosdi.geoplatform.connector.geoserver.request.model.styles.GPGeoserverSingleStyle;
-import org.geosdi.geoplatform.connector.geoserver.request.model.styles.GPGeoserverStyles;
-import org.geosdi.geoplatform.connector.geoserver.request.model.workspace.GPGeoserverEmptyWorkspaces;
-import org.geosdi.geoplatform.connector.geoserver.request.model.workspace.GPGeoserverWorkspaces;
+import org.geosdi.geoplatform.connector.geoserver.model.about.status.GPGeoserverAboutStatus;
+import org.geosdi.geoplatform.connector.geoserver.model.about.version.GPGeoserverAboutVersion;
+import org.geosdi.geoplatform.connector.geoserver.model.datastores.GPGeoserverLoadDatastore;
+import org.geosdi.geoplatform.connector.geoserver.model.datastores.GPGeoserverLoadDatastores;
+import org.geosdi.geoplatform.connector.geoserver.model.layers.GPGeoserverEmptyLayers;
+import org.geosdi.geoplatform.connector.geoserver.model.layers.GPGeoserverLayers;
+import org.geosdi.geoplatform.connector.geoserver.model.layers.GeoserverLayer;
+import org.geosdi.geoplatform.connector.geoserver.model.namespace.GPGeoserverEmptyNamespaces;
+import org.geosdi.geoplatform.connector.geoserver.model.namespace.GPGeoserverNamespaces;
+import org.geosdi.geoplatform.connector.geoserver.model.namespace.GPGeoserverSingleNamespace;
+import org.geosdi.geoplatform.connector.geoserver.model.styles.GPGeoserverEmptyStyles;
+import org.geosdi.geoplatform.connector.geoserver.model.styles.GPGeoserverSingleStyle;
+import org.geosdi.geoplatform.connector.geoserver.model.styles.GPGeoserverStyles;
+import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverEmptyWorkspaces;
+import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverWorkspaces;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
-import org.junit.runners.MethodSorters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.StringReader;
 
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
+import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@FixMethodOrder(value = NAME_ASCENDING)
 public class GPGeoserverJacksonTest {
 
     private static final Logger logger = LoggerFactory.getLogger(GPGeoserverJacksonTest.class);
@@ -574,5 +575,53 @@ public class GPGeoserverJacksonTest {
                         "      }\n" +
                         "   }\n" +
                         "}"), GeoserverLayer.class));
+    }
+
+    @Test
+    public void p_unmarshallGeoserverLoadDatastoresTest() throws Exception {
+        logger.info("#######################GEOSERVER_LOAD_DATASTORES_RESPONSE : \n{}\n", jacksonSupport.getDefaultMapper()
+                .readValue(new StringReader("{  \n" +
+                        "   \"dataStores\":{  \n" +
+                        "      \"dataStore\":[  \n" +
+                        "         {  \n" +
+                        "            \"name\":\"states_shapefile\",\n" +
+                        "            \"href\":\"http:\\/\\/150.145.141.92\\/geoserver\\/rest\\/workspaces\\/topp\\/datastores\\/states_shapefile.json\"\n" +
+                        "         },\n" +
+                        "         {  \n" +
+                        "            \"name\":\"taz_shapes\",\n" +
+                        "            \"href\":\"http:\\/\\/150.145.141.92\\/geoserver\\/rest\\/workspaces\\/topp\\/datastores\\/taz_shapes.json\"\n" +
+                        "         }\n" +
+                        "      ]\n" +
+                        "   }\n" +
+                        "}"), GPGeoserverLoadDatastores.class));
+    }
+
+    @Test
+    public void q_unmarshallGeoserverLoadDatastoreTest() throws Exception {
+        logger.info("#######################GEOSERVER_LOAD_DATASTORES_RESPONSE : \n{}\n", jacksonSupport.getDefaultMapper()
+                .readValue(new StringReader("{  \n" +
+                        "   \"dataStore\":{  \n" +
+                        "      \"name\":\"sf\",\n" +
+                        "      \"enabled\":true,\n" +
+                        "      \"workspace\":{  \n" +
+                        "         \"name\":\"sf\",\n" +
+                        "         \"href\":\"http://localhost:8080/geoserver/rest/workspaces/sf.json\"\n" +
+                        "      },\n" +
+                        "      \"connectionParameters\":{  \n" +
+                        "         \"entry\":[  \n" +
+                        "            {  \n" +
+                        "               \"@key\":\"url\",\n" +
+                        "               \"$\":\"file:data/sf\"\n" +
+                        "            },\n" +
+                        "            {  \n" +
+                        "               \"@key\":\"namespace\",\n" +
+                        "               \"$\":\"http://www.openplans.org/spearfish\"\n" +
+                        "            }\n" +
+                        "         ]\n" +
+                        "      },\n" +
+                        "      \"_default\":false,\n" +
+                        "      \"featureTypes\":\"http://localhost:8080/geoserver/rest/workspaces/sf/datastores/sf/featuretypes.json\"\n" +
+                        "   }\n" +
+                        "}"), GPGeoserverLoadDatastore.class));
     }
 }

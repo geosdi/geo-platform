@@ -67,15 +67,11 @@ abstract class GPBaseJsonConnectorRequest<T, H extends HttpUriRequest> extends G
     /**
      * @param theServerConnector
      * @param theJacksonSupport
-     * @param theClasse
      */
-    public GPBaseJsonConnectorRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector,
-            @Nonnull(when = NEVER) JacksonSupport theJacksonSupport, @Nonnull(when = NEVER) Class<T> theClasse) {
+    protected GPBaseJsonConnectorRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(theServerConnector);
-        checkArgument(theJacksonSupport != null, "The Parameter JacksonSupport must not be null.");
-        checkArgument(theClasse != null, "The Parameter classe must not be null.");
-        this.jacksonSupport = theJacksonSupport;
-        this.classe = theClasse;
+        checkArgument((this.jacksonSupport = theJacksonSupport) != null, "The Parameter JacksonSupport must not be null.");
+        checkArgument((this.classe = forClass()) != null, "The Parameter classe must not be null.");
     }
 
     /**
@@ -88,10 +84,12 @@ abstract class GPBaseJsonConnectorRequest<T, H extends HttpUriRequest> extends G
         httpMethod.addHeader("Content-Type", "application/json");
         logger.debug("#############################Executing -------------> {}\n", httpMethod.getURI().toString());
         CloseableHttpResponse httpResponse = super.securityConnector.secure(this, httpMethod);
-        super.checkHttpResponseStatus(httpResponse.getStatusLine().getStatusCode());
+        int statusCode = httpResponse.getStatusLine().getStatusCode();
+        logger.debug("###############################STATUS_CODE : {} for Request : {}\n", statusCode, this.getClass().getSimpleName());
+        super.checkHttpResponseStatus(statusCode);
         HttpEntity responseEntity = httpResponse.getEntity();
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(responseEntity.getContent(), UTF_8_CHARSERT))) {
-            return this.jacksonSupport.getDefaultMapper().readValue(reader, this.classe);
+            return readInternal(reader);
         } catch (Exception ex) {
             throw new IncorrectResponseException(ex);
         } finally {
@@ -114,7 +112,9 @@ abstract class GPBaseJsonConnectorRequest<T, H extends HttpUriRequest> extends G
         httpMethod.addHeader("Content-Type", "application/json");
         logger.debug("#############################Executing -------------> {}\n", httpMethod.getURI().toString());
         CloseableHttpResponse httpResponse = super.securityConnector.secure(this, httpMethod);
-        super.checkHttpResponseStatus(httpResponse.getStatusLine().getStatusCode());
+        int statusCode = httpResponse.getStatusLine().getStatusCode();
+        logger.debug("###############################STATUS_CODE : {} for Request : {}\n", statusCode, this.getClass().getSimpleName());
+        super.checkHttpResponseStatus(statusCode);
         HttpEntity responseEntity = httpResponse.getEntity();
         try {
             if (responseEntity != null) {
@@ -143,7 +143,9 @@ abstract class GPBaseJsonConnectorRequest<T, H extends HttpUriRequest> extends G
         httpMethod.addHeader("Content-Type", "application/json");
         logger.debug("#############################Executing -------------> {}\n", httpMethod.getURI().toString());
         CloseableHttpResponse httpResponse = super.securityConnector.secure(this, httpMethod);
-        super.checkHttpResponseStatus(httpResponse.getStatusLine().getStatusCode());
+        int statusCode = httpResponse.getStatusLine().getStatusCode();
+        logger.debug("###############################STATUS_CODE : {} for Request : {}\n", statusCode, this.getClass().getSimpleName());
+        super.checkHttpResponseStatus(statusCode);
         HttpEntity responseEntity = httpResponse.getEntity();
         try {
             if (responseEntity != null) {
@@ -159,7 +161,37 @@ abstract class GPBaseJsonConnectorRequest<T, H extends HttpUriRequest> extends G
     }
 
     /**
+     * @return
+     * @throws Exception
+     */
+    protected String checkUriPath() throws Exception {
+        String uriPath = createUriPath();
+        checkArgument((uriPath != null) && !(uriPath.trim().isEmpty()),
+                "The Parameter uriPath for " + getClass().getSimpleName() + " must not be null or an Empty String.");
+        return uriPath;
+    }
+
+    /**
+     * @param reader
+     * @return {@link T}
+     * @throws Exception
+     */
+    protected T readInternal(BufferedReader reader) throws Exception {
+        return this.jacksonSupport.getDefaultMapper().readValue(reader, this.classe);
+    }
+
+    /**
+     * @return {@link String}
+     */
+    protected abstract String createUriPath() throws Exception;
+
+    /**
      * @return {@link H}
      */
-    protected abstract H prepareHttpMethod();
+    protected abstract H prepareHttpMethod() throws Exception;
+
+    /**
+     * @return {@link Class<T>}
+     */
+    protected abstract Class<T> forClass();
 }

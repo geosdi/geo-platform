@@ -34,8 +34,7 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.request.about;
 
-import org.apache.http.client.methods.HttpGet;
-import org.geosdi.geoplatform.connector.geoserver.request.model.about.version.GPGeoserverAboutVersion;
+import org.geosdi.geoplatform.connector.geoserver.model.about.version.GPGeoserverAboutVersion;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
@@ -55,18 +54,23 @@ public class GPGeoserverAboutVersionRequest extends GPJsonGetConnectorRequest<GP
      * @param theJacksonSupport
      */
     public GPGeoserverAboutVersionRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
-        super(server, theJacksonSupport, GPGeoserverAboutVersion.class);
+        super(server, theJacksonSupport);
     }
 
     /**
-     * @return {@link HttpGet}
+     * @return {@link String}
      */
     @Override
-    protected HttpGet prepareHttpMethod() {
+    protected String createUriPath() throws Exception {
         String baseURI = this.serverURI.toString();
-        HttpGet httpGet = ((baseURI.endsWith("/") ? new HttpGet(baseURI.concat("about/version.json"))
-                : new HttpGet(baseURI.concat("/about/version.json"))));
-        httpGet.setConfig(super.prepareRequestConfig());
-        return httpGet;
+        return ((baseURI.endsWith("/") ? baseURI.concat("about/version.json") : baseURI.concat("/about/version.json")));
+    }
+
+    /**
+     * @return {@link Class<GPGeoserverAboutVersion>}
+     */
+    @Override
+    protected Class<GPGeoserverAboutVersion> forClass() {
+        return GPGeoserverAboutVersion.class;
     }
 }

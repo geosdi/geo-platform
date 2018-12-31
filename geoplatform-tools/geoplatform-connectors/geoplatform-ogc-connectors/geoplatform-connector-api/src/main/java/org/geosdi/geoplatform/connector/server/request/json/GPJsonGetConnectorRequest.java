@@ -51,10 +51,19 @@ public abstract class GPJsonGetConnectorRequest<T> extends GPBaseJsonConnectorRe
     /**
      * @param server
      * @param theJacksonSupport
-     * @param theClasse
      */
-    public GPJsonGetConnectorRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport,
-            @Nonnull(when = NEVER) Class<T> theClasse) {
-        super(server, theJacksonSupport, theClasse);
+    public GPJsonGetConnectorRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+        super(server, theJacksonSupport);
+    }
+
+    /**
+     * @return {@link HttpGet}
+     */
+    @Override
+    protected HttpGet prepareHttpMethod() throws Exception {
+        String uriPath = super.checkUriPath();
+        HttpGet httpGet = new HttpGet(uriPath);
+        httpGet.setConfig(super.prepareRequestConfig());
+        return httpGet;
     }
 }

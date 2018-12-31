@@ -32,7 +32,7 @@
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-ws-base-util</artifactId>
-            <version>1.8-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>

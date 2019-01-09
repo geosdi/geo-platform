@@ -33,26 +33,24 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.styles;
+package org.geosdi.geoplatform.connector.geoserver.request.styles;
 
-import org.geosdi.geoplatform.connector.geoserver.layers.IGPGeoserverLayersConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.styles.GPGeoserverStyleRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.styles.GPGeoserverStylesRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverStyleRequest;
+import org.geosdi.geoplatform.connector.geoserver.model.styles.GPGeoserverSingleStyle;
+import org.geosdi.geoplatform.connector.server.request.GPConnectorRequest;
+
+import javax.annotation.Nonnull;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGPGeoserverStylesConnector extends IGPGeoserverLayersConnector {
+public interface GeoserverStyleRequest extends GPConnectorRequest<GPGeoserverSingleStyle> {
 
     /**
-     * @return {@link GPGeoserverStylesRequest}
+     * @param theStyleName
+     * @return {@link GeoserverStyleRequest}
      */
-    GPGeoserverStylesRequest loadStylesRequest();
-
-    /**
-     * @return {@link GPGeoserverStyleRequest}
-     */
-    GeoserverStyleRequest loadStyleRequest();
+    GeoserverStyleRequest withStyleName(@Nonnull(when = NEVER) String theStyleName);
 }

@@ -52,9 +52,9 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverStyleRequest extends GPJsonGetConnectorRequest<GPGeoserverSingleStyle> {
+public class GPGeoserverStyleRequest extends GPJsonGetConnectorRequest<GPGeoserverSingleStyle> implements GeoserverStyleRequest {
 
-    private final ThreadLocal<String> name;
+    private final ThreadLocal<String> styleName;
 
     /**
      * @param server
@@ -62,21 +62,15 @@ public class GPGeoserverStyleRequest extends GPJsonGetConnectorRequest<GPGeoserv
      */
     public GPGeoserverStyleRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport);
-        this.name = withInitial(() -> null);
+        this.styleName = withInitial(() -> null);
     }
 
     /**
-     * @return {@link String}
+     * @param theStyleName
      */
-    public String getName() {
-        return this.name.get();
-    }
-
-    /**
-     * @param theName
-     */
-    public void setName(String theName) {
-        this.name.set(theName);
+    public GeoserverStyleRequest withStyleName(@Nonnull(when = NEVER) String theStyleName) {
+        this.styleName.set(theStyleName);
+        return this;
     }
 
     /**
@@ -84,7 +78,7 @@ public class GPGeoserverStyleRequest extends GPJsonGetConnectorRequest<GPGeoserv
      */
     @Override
     protected String createUriPath() throws Exception {
-        String styleName = this.name.get();
+        String styleName = this.styleName.get();
         checkArgument(((styleName != null) && !(styleName.trim().isEmpty())), "The Parameter Style Name must not be null or an Empty String.");
         String baseURI = this.serverURI.toString();
         return ((baseURI.endsWith("/") ? baseURI.concat("styles/").concat(styleName).concat(".json")

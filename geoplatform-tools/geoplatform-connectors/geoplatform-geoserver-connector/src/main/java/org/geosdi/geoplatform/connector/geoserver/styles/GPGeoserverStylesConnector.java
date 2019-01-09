@@ -40,6 +40,7 @@ import org.geosdi.geoplatform.connector.GeoserverVersionException;
 import org.geosdi.geoplatform.connector.geoserver.layers.GPGeoserverLayersConnector;
 import org.geosdi.geoplatform.connector.geoserver.request.styles.GPGeoserverStyleRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.styles.GPGeoserverStylesRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverStyleRequest;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
@@ -120,7 +121,7 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
      * @return {@link GPGeoserverStyleRequest}
      */
     @Override
-    public GPGeoserverStyleRequest loadStyleRequest() {
+    public GeoserverStyleRequest loadStyleRequest() {
         switch (version) {
             case V214x:
                 return new GPGeoserverStyleRequest(this, this.jacksonSupport);

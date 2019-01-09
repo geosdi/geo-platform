@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.store.task;
 
-import org.geosdi.geoplatform.connector.geoserver.request.styles.GPGeoserverStyleRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverStyleRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -52,7 +52,7 @@ public class GeoserverStyleTask extends Thread {
     private static final Logger logger = LoggerFactory.getLogger(GeoserverStyleTask.class);
     //
     private final AtomicInteger counter = new AtomicInteger(0);
-    private final GPGeoserverStyleRequest styleRequest;
+    private final GeoserverStyleRequest styleRequest;
     private final String styleName;
 
     /**
@@ -62,7 +62,7 @@ public class GeoserverStyleTask extends Thread {
      * name. Automatically generated names are of the form
      * {@code "Thread-"+}<i>n</i>, where <i>n</i> is an integer.
      */
-    public GeoserverStyleTask(GPGeoserverStyleRequest theStyleRequest, String theStyleName) {
+    public GeoserverStyleTask(GeoserverStyleRequest theStyleRequest, String theStyleName) {
         checkArgument(theStyleRequest != null, "The Parameter StyleRequest must not be null.");
         checkArgument(((theStyleName != null) && !(theStyleName.isEmpty())),
                 "The Parameter style name must not be null or an Empty String.");

@@ -45,8 +45,8 @@ import org.geosdi.geoplatform.connector.geoserver.request.layers.GPGeoserverLaye
 import org.geosdi.geoplatform.connector.geoserver.request.layers.GPGeoserverLayersRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GPGeoserverNamespaceRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GPGeoserverNamespacesRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.styles.GPGeoserverStyleRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.styles.GPGeoserverStylesRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverStyleRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.*;
 import org.geosdi.geoplatform.connector.store.task.GeoserverLayerTask;
 import org.geosdi.geoplatform.connector.store.task.GeoserverNamespaceTask;
@@ -119,7 +119,7 @@ public class GPGeoserverConnectorStoreTest extends GPBaseGeoserverConnectorStore
 
     @Test
     public void i_styleGeoserverConnectorTest() throws Exception {
-        GPGeoserverStyleRequest styleRequest = geoserverConnectorStore.loadStyleRequest();
+        GeoserverStyleRequest styleRequest = geoserverConnectorStore.loadStyleRequest();
         styleRequest.withStyleName("Frank");
         logger.info("################STYLE_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", styleRequest.getResponseAsString());
     }
@@ -127,7 +127,7 @@ public class GPGeoserverConnectorStoreTest extends GPBaseGeoserverConnectorStore
     @Test
     public void l_styleGeoserverConnectorMultiThreadTest() throws Exception {
         GPGeoserverStylesRequest stylesRequest = geoserverConnectorStore.loadStylesRequest();
-        GPGeoserverStyleRequest styleRequest = geoserverConnectorStore.loadStyleRequest();
+        GeoserverStyleRequest styleRequest = geoserverConnectorStore.loadStyleRequest();
         stylesRequest.getResponse().getStyles()
                 .stream()
                 .forEach(value -> new GeoserverStyleTask(styleRequest, value.getName()).start());

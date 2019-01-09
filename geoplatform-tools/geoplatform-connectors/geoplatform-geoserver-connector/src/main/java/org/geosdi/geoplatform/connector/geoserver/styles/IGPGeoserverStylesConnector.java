@@ -5,7 +5,7 @@
  *    http://geo-platform.org
  *   ====================================================================
  *
- *   Copyright (C) 2008-2018 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ *   Copyright (C) 2008-2019 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  *   This program is free software: you can redistribute it and/or modify it
  *   under the terms of the GNU General Public License as published by
@@ -36,8 +36,8 @@
 package org.geosdi.geoplatform.connector.geoserver.styles;
 
 import org.geosdi.geoplatform.connector.geoserver.layers.IGPGeoserverLayersConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.styles.GPGeoserverStyleRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.styles.GPGeoserverStylesRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverStyleRequest;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -51,7 +51,7 @@ public interface IGPGeoserverStylesConnector extends IGPGeoserverLayersConnector
     GPGeoserverStylesRequest loadStylesRequest();
 
     /**
-     * @return {@link GPGeoserverStyleRequest}
+     * @return {@link GeoserverStyleRequest}
      */
-    GPGeoserverStyleRequest loadStyleRequest();
+    GeoserverStyleRequest loadStyleRequest();
 }

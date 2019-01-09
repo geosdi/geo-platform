@@ -5,7 +5,7 @@
  *    http://geo-platform.org
  *   ====================================================================
  *
- *   Copyright (C) 2008-2018 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ *   Copyright (C) 2008-2019 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  *   This program is free software: you can redistribute it and/or modify it
  *   under the terms of the GNU General Public License as published by
@@ -80,7 +80,7 @@ public class GeoserverLayerTask extends Thread {
     @Override
     public void run() {
         try {
-            this.layerRequest.setName(this.layerName);
+            this.layerRequest.withName(this.layerName);
             logger.debug("#############################{} produces ---------> \n{}\n", currentThread().getName()
                     .concat(" - ").concat("" + this.counter.getAndIncrement()), this.layerRequest.getResponseAsString());
         } catch (Exception ex) {

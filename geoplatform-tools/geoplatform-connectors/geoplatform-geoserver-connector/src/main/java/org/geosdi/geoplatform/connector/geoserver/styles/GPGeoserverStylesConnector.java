@@ -5,7 +5,7 @@
  *    http://geo-platform.org
  *   ====================================================================
  *
- *   Copyright (C) 2008-2018 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ *   Copyright (C) 2008-2019 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  *   This program is free software: you can redistribute it and/or modify it
  *   under the terms of the GNU General Public License as published by
@@ -40,6 +40,7 @@ import org.geosdi.geoplatform.connector.GeoserverVersionException;
 import org.geosdi.geoplatform.connector.geoserver.layers.GPGeoserverLayersConnector;
 import org.geosdi.geoplatform.connector.geoserver.request.styles.GPGeoserverStyleRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.styles.GPGeoserverStylesRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverStyleRequest;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
@@ -117,10 +118,10 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
     }
 
     /**
-     * @return {@link GPGeoserverStyleRequest}
+     * @return {@link GeoserverStyleRequest}
      */
     @Override
-    public GPGeoserverStyleRequest loadStyleRequest() {
+    public GeoserverStyleRequest loadStyleRequest() {
         switch (version) {
             case V214x:
                 return new GPGeoserverStyleRequest(this, this.jacksonSupport);

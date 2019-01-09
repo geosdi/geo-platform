@@ -5,7 +5,7 @@
  *    http://geo-platform.org
  *   ====================================================================
  *
- *   Copyright (C) 2008-2018 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ *   Copyright (C) 2008-2019 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  *   This program is free software: you can redistribute it and/or modify it
  *   under the terms of the GNU General Public License as published by
@@ -85,7 +85,7 @@ public class GeoserverStyleTask extends Thread {
     @Override
     public void run() {
         try {
-            this.styleRequest.setName(this.styleName);
+            this.styleRequest.withStyleName(this.styleName);
             logger.debug("#############################{} produces ---------> \n{}\n", currentThread().getName()
                     .concat(" - ").concat("" + this.counter.getAndIncrement()), this.styleRequest.getResponseAsString());
         } catch (Exception ex) {

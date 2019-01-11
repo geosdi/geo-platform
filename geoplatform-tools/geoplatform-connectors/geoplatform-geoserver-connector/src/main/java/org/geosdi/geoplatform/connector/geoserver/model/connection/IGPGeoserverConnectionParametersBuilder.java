@@ -32,37 +32,37 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.response.collection;
+package org.geosdi.geoplatform.connector.geoserver.model.connection;
 
-import javax.xml.bind.annotation.adapters.XmlAdapter;
+import javax.annotation.Nonnull;
+import javax.annotation.meta.When;
+import java.io.Serializable;
 import java.util.Map;
-
-import static java.util.stream.Collectors.toMap;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GenericMapAdapter<K, V> extends XmlAdapter<GenericMapType<K, V>, Map<K, V>> {
+public interface IGPGeoserverConnectionParametersBuilder extends Serializable {
 
     /**
-     * @param genericMapType
-     * @return {@link Map<K, V>}
-     * @throws Exception
+     * @return {@link Map<String, String>}
      */
-    @Override
-    public Map<K, V> unmarshal(GenericMapType<K, V> genericMapType) throws Exception {
-        return genericMapType.getEntry().stream()
-                .collect(toMap(k -> k.getKey(), v -> v.getValue()));
-    }
+    Map<String, String> build();
 
     /**
-     * @param v
-     * @return {@link GenericMapAdapter<K, V>}
+     * @param theParam
+     * @param <Param>
+     * @return {@link IGPGeoserverConnectionParametersBuilder}
      * @throws Exception
      */
-    @Override
-    public GenericMapType<K, V> marshal(Map<K, V> v) throws Exception {
-        return new GenericMapType<>(v);
-    }
+    <Param extends IGPGeoserverConnectionParam> IGPGeoserverConnectionParametersBuilder addParam(@Nonnull(when = When.NEVER) Param theParam) throws Exception;
+
+    /**
+     * @param theParams
+     * @param <Param>
+     * @return {@link IGPGeoserverConnectionParametersBuilder}
+     * @throws Exception
+     */
+    <Param extends IGPGeoserverConnectionParam> IGPGeoserverConnectionParametersBuilder addParams(@Nonnull(when = When.NEVER) Param... theParams) throws Exception;
 }

@@ -32,37 +32,77 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.response.collection;
+package org.geosdi.geoplatform.connector.geoserver.model.connection;
 
-import javax.xml.bind.annotation.adapters.XmlAdapter;
+import com.google.common.collect.Maps;
+import lombok.ToString;
+
+import javax.annotation.Nonnull;
+import javax.annotation.meta.When;
 import java.util.Map;
 
+import static com.google.common.base.Preconditions.checkArgument;
+import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toMap;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GenericMapAdapter<K, V> extends XmlAdapter<GenericMapType<K, V>, Map<K, V>> {
+@ToString
+public class GPGeoserverConnectionParametersBuilder implements IGPGeoserverConnectionParametersBuilder {
 
-    /**
-     * @param genericMapType
-     * @return {@link Map<K, V>}
-     * @throws Exception
-     */
-    @Override
-    public Map<K, V> unmarshal(GenericMapType<K, V> genericMapType) throws Exception {
-        return genericMapType.getEntry().stream()
-                .collect(toMap(k -> k.getKey(), v -> v.getValue()));
+    private static final long serialVersionUID = -5744680926370539432L;
+    //
+    private Map<String, String> params = Maps.newHashMap();
+
+    private GPGeoserverConnectionParametersBuilder() {
     }
 
     /**
-     * @param v
-     * @return {@link GenericMapAdapter<K, V>}
+     * @return
+     */
+    public static IGPGeoserverConnectionParametersBuilder connectionParametersBuilder() {
+        return new GPGeoserverConnectionParametersBuilder();
+    }
+
+    /**
+     * @param theParam
+     * @param <Param>
+     * @return
      * @throws Exception
      */
     @Override
-    public GenericMapType<K, V> marshal(Map<K, V> v) throws Exception {
-        return new GenericMapType<>(v);
+    public <Param extends IGPGeoserverConnectionParam> IGPGeoserverConnectionParametersBuilder addParam(@Nonnull(when = When.NEVER) Param theParam) throws Exception {
+        checkArgument(theParam != null, "The Parameter param must not be null.");
+        this.params.put(theParam.getKey(), theParam.getValue());
+        return self();
+    }
+
+    /**
+     * @param theParams
+     * @return {@link IGPGeoserverConnectionParametersBuilder}
+     * @throws Exception
+     */
+    @Override
+    public <Param extends IGPGeoserverConnectionParam> IGPGeoserverConnectionParametersBuilder addParams(@Nonnull(when = When.NEVER) Param... theParams) throws Exception {
+        checkArgument(theParams != null, "The Parameter params must not be null.");
+        this.params.putAll(stream(theParams).collect(toMap(k -> k.getKey(), v -> v.getValue())));
+        return self();
+    }
+
+    /**
+     * @return {@link Map<String, String>}
+     */
+    @Override
+    public Map<String, String> build() {
+        return this.params;
+    }
+
+    /**
+     * @return {@link IGPGeoserverConnectionParametersBuilder}
+     */
+    protected IGPGeoserverConnectionParametersBuilder self() {
+        return this;
     }
 }

@@ -46,20 +46,10 @@ public interface GeoserverDeleteWorkspaceRequest extends GPConnectorRequest<Bool
     /**
      * @param theWorkspaceName
      */
-    void setWorkspaceName(String theWorkspaceName);
-
-    /**
-     * @return {@link String}
-     */
-    String getWorkspaceName();
+    GeoserverDeleteWorkspaceRequest withWorkspaceName(String theWorkspaceName);
 
     /**
      * @param theRecurse
      */
-    void setRecurse(Boolean theRecurse);
-
-    /**
-     * @return {@link Boolean}
-     */
-    Boolean isRecurse();
+    GeoserverDeleteWorkspaceRequest withRecurse(Boolean theRecurse);
 }

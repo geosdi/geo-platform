@@ -53,8 +53,8 @@ public class LongIntegerMapAdapter extends GenericMapAdapter<Long, Integer> {
     }
 
     @Override
-    public Map<Long, Integer> unmarshal(GenericMapType<Long, Integer> v) throws
+    public Map<Long, Integer> unmarshal(GenericMapType<Long, Integer> genericMapType) throws
             Exception {
-        return super.unmarshal(v);
+        return super.unmarshal(genericMapType);
     }
 }

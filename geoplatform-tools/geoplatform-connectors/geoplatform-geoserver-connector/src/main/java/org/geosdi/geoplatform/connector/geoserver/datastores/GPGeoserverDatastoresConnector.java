@@ -142,6 +142,19 @@ public abstract class GPGeoserverDatastoresConnector extends GPGeoserverStylesCo
     }
 
     /**
+     * @return {@link GeoserverUpdateDatastoreRequest}
+     */
+    @Override
+    public GeoserverUpdateDatastoreRequest updateDatastoreRequest() {
+        switch (version) {
+            case V214x:
+                return new GPGeoserverUpdateDatastoreRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.14.x");
+        }
+    }
+
+    /**
      * @return {@link GeoserverDeleteDatastoreRequest}
      */
     @Override

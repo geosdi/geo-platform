@@ -45,29 +45,14 @@ import org.geosdi.geoplatform.connector.server.request.GPConnectorRequest;
 public interface GeoserverLoadDatastoreRequest extends GPConnectorRequest<GPGeoserverLoadDatastore> {
 
     /**
-     * @return {@link String}
-     */
-    String getWorkspaceName();
-
-    /**
      * @param theWorkspaceName
      */
-    void setWorkspaceName(String theWorkspaceName);
-
-    /**
-     * @return {@link String}
-     */
-    String geStoreName();
+    GeoserverLoadDatastoreRequest withWorkspaceName(String theWorkspaceName);
 
     /**
      * @param theStoreName
      */
-    void setStoreName(String theStoreName);
-
-    /**
-     * @return {@link Boolean}
-     */
-    Boolean isQuietNotFound();
+    GeoserverLoadDatastoreRequest withStoreName(String theStoreName);
 
     /**
      * <p>The quietOnNotFound parameter avoids logging an exception when the data store is not present.
@@ -76,5 +61,5 @@ public interface GeoserverLoadDatastoreRequest extends GPConnectorRequest<GPGeos
      *
      * @param theQuietNotFound
      */
-    void setQuietNotFound(Boolean theQuietNotFound);
+    GeoserverLoadDatastoreRequest withQuietNotFound(Boolean theQuietNotFound);
 }

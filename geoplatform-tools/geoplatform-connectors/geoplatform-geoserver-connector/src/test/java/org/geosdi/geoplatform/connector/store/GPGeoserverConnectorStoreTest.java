@@ -55,6 +55,8 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import static java.lang.Boolean.TRUE;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -185,8 +187,8 @@ public class GPGeoserverConnectorStoreTest extends GPBaseGeoserverConnectorStore
     @Test
     public void s_deleteWorkspaceGeoserverConnectorTest() throws Exception {
         GeoserverDeleteWorkspaceRequest deleteWorkspaceRequest = geoserverConnectorStore.deleteWorkspaceRequest();
-        deleteWorkspaceRequest.setWorkspaceName("workspace_test");
-        deleteWorkspaceRequest.setRecurse(Boolean.TRUE);
+        deleteWorkspaceRequest.withWorkspaceName("workspace_test");
+        deleteWorkspaceRequest.withRecurse(TRUE);
         logger.info("###########################DELETE_WORKSPACE_RESPONSE : {}\n", deleteWorkspaceRequest.getResponse());
     }
 }

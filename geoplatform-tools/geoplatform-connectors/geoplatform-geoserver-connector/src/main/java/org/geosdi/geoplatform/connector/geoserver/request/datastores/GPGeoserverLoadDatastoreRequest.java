@@ -71,43 +71,21 @@ public class GPGeoserverLoadDatastoreRequest extends GPJsonGetConnectorRequest<G
     }
 
     /**
-     * @return {@link String}
-     */
-    @Override
-    public String getWorkspaceName() {
-        return this.workspaceName.get();
-    }
-
-    /**
      * @param theWorkspaceName
      */
     @Override
-    public void setWorkspaceName(String theWorkspaceName) {
+    public GeoserverLoadDatastoreRequest withWorkspaceName(String theWorkspaceName) {
         this.workspaceName.set(theWorkspaceName);
-    }
-
-    /**
-     * @return {@link String}
-     */
-    @Override
-    public String geStoreName() {
-        return this.storeName.get();
+        return this;
     }
 
     /**
      * @param theStoreName
      */
     @Override
-    public void setStoreName(String theStoreName) {
+    public GeoserverLoadDatastoreRequest withStoreName(String theStoreName) {
         this.storeName.set(theStoreName);
-    }
-
-    /**
-     * @return {@link Boolean}
-     */
-    @Override
-    public Boolean isQuietNotFound() {
-        return this.quietNotFound.get();
+        return this;
     }
 
     /**
@@ -118,8 +96,9 @@ public class GPGeoserverLoadDatastoreRequest extends GPJsonGetConnectorRequest<G
      * @param theQuietNotFound
      */
     @Override
-    public void setQuietNotFound(Boolean theQuietNotFound) {
+    public GeoserverLoadDatastoreRequest withQuietNotFound(Boolean theQuietNotFound) {
         this.quietNotFound.set((theQuietNotFound != null) ? theQuietNotFound : FALSE);
+        return this;
     }
 
     /**

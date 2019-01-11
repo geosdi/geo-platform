@@ -55,6 +55,8 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import static java.lang.Boolean.TRUE;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -137,14 +139,14 @@ public class GPGeoserverConnectorStoreTest extends GPBaseGeoserverConnectorStore
     @Test
     public void m_layerVectorGeoserverConnectorTest() throws Exception {
         GPGeoserverLayerRequest layerRequest = geoserverConnectorStore.loadLayerRequest();
-        layerRequest.setName("giant_polygon");
+        layerRequest.withName("giant_polygon");
         logger.info("##############VECTOR_LAYER_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", layerRequest.getResponseAsString());
     }
 
     @Test
     public void n_layerRasterGeoserverConnectorTest() throws Exception {
         GPGeoserverLayerRequest layerRequest = geoserverConnectorStore.loadLayerRequest();
-        layerRequest.setName("Arc_Sample");
+        layerRequest.withName("Arc_Sample");
         logger.info("############RASTER_LAYER_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", layerRequest.getResponseAsString());
     }
 
@@ -161,8 +163,9 @@ public class GPGeoserverConnectorStoreTest extends GPBaseGeoserverConnectorStore
     @Test
     public void p_createWorkspaceGeoserverConnectorTest() throws Exception {
         GeoserverCreateWorkspaceRequest createWorkspaceRequest = geoserverConnectorStore.createWorkspaceRequest();
-        createWorkspaceRequest.setWorkspaceBody(new GeoserverCreateWorkspaceBody("workspace_test"));
-        logger.info("############CREATE_WORKSPACE_RESPONSE : {}", createWorkspaceRequest.getResponseAsString());
+        logger.info("############CREATE_WORKSPACE_RESPONSE : {}", createWorkspaceRequest
+                .withWorkspaceBody(new GeoserverCreateWorkspaceBody("workspace_test"))
+                .getResponseAsString());
     }
 
     @Test
@@ -184,7 +187,8 @@ public class GPGeoserverConnectorStoreTest extends GPBaseGeoserverConnectorStore
     @Test
     public void s_deleteWorkspaceGeoserverConnectorTest() throws Exception {
         GeoserverDeleteWorkspaceRequest deleteWorkspaceRequest = geoserverConnectorStore.deleteWorkspaceRequest();
-        deleteWorkspaceRequest.setWorkspaceName("workspace_test");
+        deleteWorkspaceRequest.withWorkspaceName("workspace_test");
+        deleteWorkspaceRequest.withRecurse(TRUE);
         logger.info("###########################DELETE_WORKSPACE_RESPONSE : {}\n", deleteWorkspaceRequest.getResponse());
     }
 }

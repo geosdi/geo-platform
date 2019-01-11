@@ -37,10 +37,7 @@ package org.geosdi.geoplatform.connector.geoserver.datastores;
 
 import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.GeoserverVersionException;
-import org.geosdi.geoplatform.connector.geoserver.request.datastores.GPGeoserverLoadDatastoreRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.datastores.GPGeoserverLoadDatastoresRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.datastores.GeoserverLoadDatastoreRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.datastores.GeoserverLoadDatastoresRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.datastores.*;
 import org.geosdi.geoplatform.connector.geoserver.styles.GPGeoserverStylesConnector;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
@@ -126,6 +123,45 @@ public abstract class GPGeoserverDatastoresConnector extends GPGeoserverStylesCo
         switch (version) {
             case V214x:
                 return new GPGeoserverLoadDatastoreRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.14.x");
+        }
+    }
+
+    /**
+     * @return {@link GeoserverCreateDatastoreRequest}
+     */
+    @Override
+    public GeoserverCreateDatastoreRequest createDatastoreRequest() {
+        switch (version) {
+            case V214x:
+                return new GPGeoserverCreateDatastoreRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.14.x");
+        }
+    }
+
+    /**
+     * @return {@link GeoserverUpdateDatastoreRequest}
+     */
+    @Override
+    public GeoserverUpdateDatastoreRequest updateDatastoreRequest() {
+        switch (version) {
+            case V214x:
+                return new GPGeoserverUpdateDatastoreRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.14.x");
+        }
+    }
+
+    /**
+     * @return {@link GeoserverDeleteDatastoreRequest}
+     */
+    @Override
+    public GeoserverDeleteDatastoreRequest deleteDatastoreRequest() {
+        switch (version) {
+            case V214x:
+                return new GPGeoserverDeleteDatastoreRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.14.x");
         }

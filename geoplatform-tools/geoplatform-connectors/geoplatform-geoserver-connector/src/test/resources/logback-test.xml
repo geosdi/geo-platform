@@ -14,17 +14,7 @@
         <appender-ref ref="STDOUT"/>
     </root>
 
-    <logger name="org.geosdi.geoplatform.connector.geoserver.request.about.GPGeoserverAboutVersionRequest" level="debug"/>
-    <logger name="org.geosdi.geoplatform.connector.geoserver.request.about.GPGeoserverAboutStatusRequest" level="debug"/>
-    <logger name="org.geosdi.geoplatform.connector.geoserver.request.workspaces.GPGeoserverLoadWorkspacesRequest" level="debug"/>
-    <logger name="org.geosdi.geoplatform.connector.geoserver.request.namespaces.GPGeoserverNamespaceRequest" level="debug"/>
-    <logger name="org.geosdi.geoplatform.connector.geoserver.request.namespaces.GPGeoserverNamespacesRequest" level="debug"/>
-    <logger name="org.geosdi.geoplatform.connector.geoserver.request.layers.GPGeoserverLayersRequest" level="debug"/>
-    <logger name="org.geosdi.geoplatform.connector.geoserver.request.styles.GPGeoserverStylesRequest" level="debug"/>
-    <logger name="org.geosdi.geoplatform.connector.geoserver.request.styles.GPGeoserverStyleRequest" level="debug"/>
-    <logger name="org.geosdi.geoplatform.connector.geoserver.request.workspaces.GPGeoserverCreateWorkspaceRequest" level="debug"/>
-    <logger name="org.geosdi.geoplatform.connector.geoserver.request.workspaces.GPGeoserverDeleteWorkspaceRequest" level="debug"/>
-    <logger name="org.geosdi.geoplatform.connector.geoserver.request.workspaces.GPGeoserverUpdateWorkspaceRequest" level="debug"/>
+    <logger name="org.geosdi.geoplatform.connector.geoserver.request" level="debug"/>
     <logger name="org.geosdi.geoplatform.connector.store.GPGeoserverConnectorStore" level="debug"/>
     <logger name="org.geosdi.geoplatform.connector.store.task.GeoserverNamespaceTask" level="debug"/>
     <logger name="org.geosdi.geoplatform.connector.store.task.GeoserverStyleTask" level="debug"/>

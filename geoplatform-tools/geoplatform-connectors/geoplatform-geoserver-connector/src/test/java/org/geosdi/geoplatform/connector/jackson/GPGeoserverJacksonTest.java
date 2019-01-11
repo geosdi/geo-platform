@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.connector.jackson;
 
 import org.geosdi.geoplatform.connector.geoserver.model.about.status.GPGeoserverAboutStatus;
 import org.geosdi.geoplatform.connector.geoserver.model.about.version.GPGeoserverAboutVersion;
+import org.geosdi.geoplatform.connector.geoserver.model.datastores.GPGeoserverCreateDatastoreBody;
 import org.geosdi.geoplatform.connector.geoserver.model.datastores.GPGeoserverLoadDatastore;
 import org.geosdi.geoplatform.connector.geoserver.model.datastores.GPGeoserverLoadDatastores;
 import org.geosdi.geoplatform.connector.geoserver.model.layers.GPGeoserverEmptyLayers;
@@ -624,5 +625,35 @@ public class GPGeoserverJacksonTest {
                         "      \"featureTypes\":\"http://localhost:8080/geoserver/rest/workspaces/sf/datastores/sf/featuretypes.json\"\n" +
                         "   }\n" +
                         "}"), GPGeoserverLoadDatastore.class));
+    }
+
+    @Test
+    public void r_unmarshallGeoserverCreateDatastoreTest() throws Exception {
+        logger.info("#######################GEOSERVER_CREATE_DATASTORE_RESPONSE : \n{}\n", jacksonSupport.getDefaultMapper()
+                .readValue(new StringReader("{  \n" +
+                        "   \"dataStore\":{  \n" +
+                        "      \"name\":\"sf\",\n" +
+                        "      \"enabled\":true,\n" +
+                        "      \"description\":\"description_test\",\n" +
+                        "      \"workspace\":{  \n" +
+                        "         \"name\":\"sf\",\n" +
+                        "         \"href\":\"http://localhost:8080/geoserver/rest/workspaces/sf.json\"\n" +
+                        "      },\n" +
+                        "      \"connectionParameters\":{  \n" +
+                        "         \"entry\":[  \n" +
+                        "            {  \n" +
+                        "               \"@key\":\"url\",\n" +
+                        "               \"$\":\"file:data/sf\"\n" +
+                        "            },\n" +
+                        "            {  \n" +
+                        "               \"@key\":\"namespace\",\n" +
+                        "               \"$\":\"http://www.openplans.org/spearfish\"\n" +
+                        "            }\n" +
+                        "         ]\n" +
+                        "      },\n" +
+                        "      \"_default\":false,\n" +
+                        "      \"featureTypes\":\"http://localhost:8080/geoserver/rest/workspaces/sf/datastores/sf/featuretypes.json\"\n" +
+                        "   }\n" +
+                        "}"), GPGeoserverCreateDatastoreBody.class));
     }
 }

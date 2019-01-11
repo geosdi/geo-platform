@@ -39,6 +39,8 @@ import net.jcip.annotations.ThreadSafe;
 import org.apache.http.HttpEntity;
 import org.apache.http.entity.StringEntity;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverCreateWorkspaceBody;
+import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverCreateWorkspaceResponse;
+import org.geosdi.geoplatform.connector.geoserver.model.workspace.IGPGeoserverCreareWorkspaceResponse;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.exception.ResourceNotFoundException;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonPostConnectorRequest;
@@ -59,7 +61,7 @@ import static org.apache.http.entity.ContentType.APPLICATION_JSON;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverCreateWorkspaceRequest extends GPJsonPostConnectorRequest<String> implements GeoserverCreateWorkspaceRequest {
+public class GPGeoserverCreateWorkspaceRequest extends GPJsonPostConnectorRequest<IGPGeoserverCreareWorkspaceResponse> implements GeoserverCreateWorkspaceRequest {
 
     private final ThreadLocal<GPGeoserverCreateWorkspaceBody> workspaceBody;
     private final ThreadLocal<Boolean> defaultWorkspace;
@@ -76,35 +78,21 @@ public class GPGeoserverCreateWorkspaceRequest extends GPJsonPostConnectorReques
     }
 
     /**
-     * @return {@link GPGeoserverCreateWorkspaceBody}
-     */
-    @Override
-    public GPGeoserverCreateWorkspaceBody getWorkspaceBody() {
-        return this.workspaceBody.get();
-    }
-
-    /**
      * @param theWorkspaceBody
      */
     @Override
-    public void setWorkspaceBody(GPGeoserverCreateWorkspaceBody theWorkspaceBody) {
+    public GeoserverCreateWorkspaceRequest withWorkspaceBody(GPGeoserverCreateWorkspaceBody theWorkspaceBody) {
         this.workspaceBody.set(theWorkspaceBody);
-    }
-
-    /**
-     * @return {@link Boolean}
-     */
-    @Override
-    public Boolean isDefaultWorkspace() {
-        return this.defaultWorkspace.get();
+        return this;
     }
 
     /**
      * @param theDefaultWorkspace
      */
     @Override
-    public void setDefaultWorkspace(Boolean theDefaultWorkspace) {
+    public GeoserverCreateWorkspaceRequest withDefaultWorkspace(Boolean theDefaultWorkspace) {
         this.defaultWorkspace.set(theDefaultWorkspace != null ? theDefaultWorkspace : FALSE);
+        return this;
     }
 
     /**
@@ -122,12 +110,14 @@ public class GPGeoserverCreateWorkspaceRequest extends GPJsonPostConnectorReques
 
     /**
      * @param reader
-     * @return {@link String}
+     * @return {@link IGPGeoserverCreareWorkspaceResponse}
      * @throws Exception
      */
     @Override
-    protected String readInternal(BufferedReader reader) throws Exception {
-        return reader.lines().collect(joining());
+    protected IGPGeoserverCreareWorkspaceResponse readInternal(BufferedReader reader) throws Exception {
+        return GPGeoserverCreateWorkspaceResponse.builder()
+                .workspaceName(reader.lines().collect(joining()))
+                .build();
     }
 
     /**
@@ -153,10 +143,10 @@ public class GPGeoserverCreateWorkspaceRequest extends GPJsonPostConnectorReques
     }
 
     /**
-     * @return {@link Class<String>}
+     * @return {@link Class<IGPGeoserverCreareWorkspaceResponse>}
      */
     @Override
-    protected Class<String> forClass() {
-        return String.class;
+    protected Class<IGPGeoserverCreareWorkspaceResponse> forClass() {
+        return IGPGeoserverCreareWorkspaceResponse.class;
     }
 }

@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.datastores;
 
-import org.geosdi.geoplatform.connector.geoserver.model.connection.GPGeoserverConnectionParameters;
+import org.geosdi.geoplatform.connector.geoserver.model.connection.GPGeoserverConnectionParametersBuilder;
 
 import java.io.Serializable;
 
@@ -61,9 +61,9 @@ public interface IGPGeoserverLoadDatastore extends Serializable {
     IGPGeoserverDatastoreWorkspace getWorkspace();
 
     /**
-     * @return {@link GPGeoserverConnectionParameters}
+     * @return {@link GPGeoserverConnectionParametersBuilder}
      */
-    GPGeoserverConnectionParameters getConnectionParameters();
+    GPGeoserverConnectionParametersBuilder getConnectionParameters();
 
     /**
      * @return {@link Boolean}

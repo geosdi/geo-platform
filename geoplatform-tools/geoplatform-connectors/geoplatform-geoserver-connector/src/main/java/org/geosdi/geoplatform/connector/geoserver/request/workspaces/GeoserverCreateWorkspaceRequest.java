@@ -36,31 +36,25 @@
 package org.geosdi.geoplatform.connector.geoserver.request.workspaces;
 
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverCreateWorkspaceBody;
+import org.geosdi.geoplatform.connector.geoserver.model.workspace.IGPGeoserverCreareWorkspaceResponse;
 import org.geosdi.geoplatform.connector.server.request.GPConnectorRequest;
+
+import javax.annotation.Nonnull;
+import javax.annotation.meta.When;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoserverCreateWorkspaceRequest extends GPConnectorRequest<String> {
-
-    /**
-     * @return {@link GPGeoserverCreateWorkspaceBody}
-     */
-    GPGeoserverCreateWorkspaceBody getWorkspaceBody();
+public interface GeoserverCreateWorkspaceRequest extends GPConnectorRequest<IGPGeoserverCreareWorkspaceResponse> {
 
     /**
      * @param theWorkspaceBody
      */
-    void setWorkspaceBody(GPGeoserverCreateWorkspaceBody theWorkspaceBody);
-
-    /**
-     * @return {@link Boolean}
-     */
-    Boolean isDefaultWorkspace();
+    GeoserverCreateWorkspaceRequest withWorkspaceBody(@Nonnull(when = When.NEVER) GPGeoserverCreateWorkspaceBody theWorkspaceBody);
 
     /**
      * @param theDefaultWorkspace
      */
-    void setDefaultWorkspace(Boolean theDefaultWorkspace);
+    GeoserverCreateWorkspaceRequest withDefaultWorkspace(Boolean theDefaultWorkspace);
 }

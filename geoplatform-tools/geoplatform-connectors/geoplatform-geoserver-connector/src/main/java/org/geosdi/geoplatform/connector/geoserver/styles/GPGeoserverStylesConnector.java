@@ -118,7 +118,7 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
     }
 
     /**
-     * @return {@link GPGeoserverStyleRequest}
+     * @return {@link GeoserverStyleRequest}
      */
     @Override
     public GeoserverStyleRequest loadStyleRequest() {

@@ -52,7 +52,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverLayerRequest extends GPJsonGetConnectorRequest<GeoserverLayer> {
+public class GPGeoserverLayerRequest extends GPJsonGetConnectorRequest<GeoserverLayer> implements GeoserverLayerRequest {
 
     private final ThreadLocal<String> name;
 
@@ -66,17 +66,11 @@ public class GPGeoserverLayerRequest extends GPJsonGetConnectorRequest<Geoserver
     }
 
     /**
-     * @return {@link String}
-     */
-    public String getName() {
-        return this.name.get();
-    }
-
-    /**
      * @param theName
      */
-    public void setName(String theName) {
+    public GeoserverLayerRequest withName(@Nonnull(when = NEVER) String theName) {
         this.name.set(theName);
+        return this;
     }
 
     /**

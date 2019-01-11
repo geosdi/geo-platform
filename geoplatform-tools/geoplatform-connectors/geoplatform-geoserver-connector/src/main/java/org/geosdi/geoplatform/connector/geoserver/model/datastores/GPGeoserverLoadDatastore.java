@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.connector.geoserver.model.datastores;
 
 import lombok.Getter;
 import lombok.ToString;
-import org.geosdi.geoplatform.connector.geoserver.model.connection.GPGeoserverConnectionParameters;
+import org.geosdi.geoplatform.connector.geoserver.model.connection.GPGeoserverConnectionParametersBuilder;
 
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -60,7 +60,7 @@ public class GPGeoserverLoadDatastore implements IGPGeoserverLoadDatastore {
     private String name;
     private boolean enabled;
     private IGPGeoserverDatastoreWorkspace workspace;
-    private GPGeoserverConnectionParameters connectionParameters;
+    private GPGeoserverConnectionParametersBuilder connectionParameters;
     @XmlElement(name = "_default")
     private boolean isDefault;
     private String featureTypes;

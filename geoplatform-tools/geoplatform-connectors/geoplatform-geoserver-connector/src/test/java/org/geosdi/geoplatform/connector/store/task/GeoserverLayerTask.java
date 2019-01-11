@@ -80,7 +80,7 @@ public class GeoserverLayerTask extends Thread {
     @Override
     public void run() {
         try {
-            this.layerRequest.setName(this.layerName);
+            this.layerRequest.withName(this.layerName);
             logger.debug("#############################{} produces ---------> \n{}\n", currentThread().getName()
                     .concat(" - ").concat("" + this.counter.getAndIncrement()), this.layerRequest.getResponseAsString());
         } catch (Exception ex) {

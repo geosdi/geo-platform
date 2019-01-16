@@ -60,20 +60,6 @@ public class GPGeoserverConnectionParam implements IGPGeoserverConnectionParam {
     private String key;
     private String value;
 
-//    /**
-//     * @param theKey
-//     * @param theValue
-//     */
-//    @JsonCreator
-//    public GPGeoserverConnectionParam(@Nonnull(when = When.NEVER) @JsonProperty(value = "@key") String theKey,
-//            @Nonnull(when = When.NEVER) @JsonProperty(value = "$") String theValue) {
-//        checkArgument((theKey != null) && !(theKey.trim().isEmpty()), "The Parameter key must not be null or an empty String.");
-//        checkArgument((theValue != null) && !(theValue.trim().isEmpty()), "The Parameter value must not be null or an empty String.");
-//        this.key = theKey;
-//        this.value = theValue;
-//    }
-
-
     /**
      * @return {@link String}
      */

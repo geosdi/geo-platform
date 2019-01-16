@@ -19,5 +19,6 @@
     <logger name="org.geosdi.geoplatform.connector.store.task.GeoserverNamespaceTask" level="debug"/>
     <logger name="org.geosdi.geoplatform.connector.store.task.GeoserverStyleTask" level="debug"/>
     <logger name="org.geosdi.geoplatform.connector.store.task.GeoserverLayerTask" level="debug"/>
+    <logger name="org.geosdi.geoplatform.connector.store.task.GeoserverWorkspaceLayersTask" level="debug"/>
 
 </configuration>

@@ -52,7 +52,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverLayerRequest extends GPJsonGetConnectorRequest<GeoserverLayer> implements GeoserverLayerRequest {
+public class GPGeoserverLoadLayerRequest extends GPJsonGetConnectorRequest<GeoserverLayer> implements GeoserverLoadLayerRequest {
 
     private final ThreadLocal<String> name;
 
@@ -60,7 +60,7 @@ public class GPGeoserverLayerRequest extends GPJsonGetConnectorRequest<Geoserver
      * @param server
      * @param theJacksonSupport
      */
-    public GPGeoserverLayerRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+    public GPGeoserverLoadLayerRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport);
         this.name = withInitial(() -> null);
     }
@@ -68,7 +68,7 @@ public class GPGeoserverLayerRequest extends GPJsonGetConnectorRequest<Geoserver
     /**
      * @param theName
      */
-    public GeoserverLayerRequest withName(@Nonnull(when = NEVER) String theName) {
+    public GeoserverLoadLayerRequest withName(@Nonnull(when = NEVER) String theName) {
         this.name.set(theName);
         return this;
     }
@@ -81,8 +81,7 @@ public class GPGeoserverLayerRequest extends GPJsonGetConnectorRequest<Geoserver
         String layerName = this.name.get();
         checkArgument(((layerName != null) && !(layerName.trim().isEmpty())), "The Parameter Name must not be null or an Empty String.");
         String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("layers/").concat(layerName).concat(".json")
-                : baseURI.concat("/layers/").concat(layerName).concat(".json")));
+        return ((baseURI.endsWith("/") ? baseURI.concat("layers/").concat(layerName) : baseURI.concat("/layers/").concat(layerName)));
     }
 
     /**

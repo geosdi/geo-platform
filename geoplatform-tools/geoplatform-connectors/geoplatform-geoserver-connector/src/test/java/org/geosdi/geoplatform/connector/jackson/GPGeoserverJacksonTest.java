@@ -1,37 +1,36 @@
 /**
- *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
- *
- *   Copyright (C) 2008-2019 geoSDI Group (CNR IMAA - Potenza - ITALY).
- *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
- *
- *   ====================================================================
- *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
- *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * geo-platform
+ * Rich webgis framework
+ * http://geo-platform.org
+ * ====================================================================
+ * <p>
+ * Copyright (C) 2008-2019 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * <p>
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version. This program is distributed in the
+ * hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License
+ * for more details. You should have received a copy of the GNU General
+ * Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * <p>
+ * ====================================================================
+ * <p>
+ * Linking this library statically or dynamically with other modules is
+ * making a combined work based on this library. Thus, the terms and
+ * conditions of the GNU General Public License cover the whole combination.
+ * <p>
+ * As a special exception, the copyright holders of this library give you permission
+ * to link this library with independent modules to produce an executable, regardless
+ * of the license terms of these independent modules, and to copy and distribute
+ * the resulting executable under terms of your choice, provided that you also meet,
+ * for each linked independent module, the terms and conditions of the license of
+ * that module. An independent module is a module which is not derived from or
+ * based on this library. If you modify this library, you may extend this exception
+ * to your version of the library, but you are not obligated to do so. If you do not
+ * wish to do so, delete this exception statement from your version.
  */
 package org.geosdi.geoplatform.connector.jackson;
 
@@ -51,6 +50,7 @@ import org.geosdi.geoplatform.connector.geoserver.model.styles.GPGeoserverSingle
 import org.geosdi.geoplatform.connector.geoserver.model.styles.GPGeoserverStyles;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverEmptyWorkspaces;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverWorkspaces;
+import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGeoserverCoverageInfo;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import org.junit.FixMethodOrder;
@@ -655,5 +655,124 @@ public class GPGeoserverJacksonTest {
                         "      \"featureTypes\":\"http://localhost:8080/geoserver/rest/workspaces/sf/datastores/sf/featuretypes.json\"\n" +
                         "   }\n" +
                         "}"), GPGeoserverCreateDatastoreBody.class));
+    }
+
+    @Test
+    public void s_unmarshallGeoserverCoverageInfoTest() throws Exception {
+        GPGeoserverCoverageInfo coverageInfo = jacksonSupport.getDefaultMapper()
+                .readValue(new StringReader("{  \n" +
+                        "   \"coverage\":{  \n" +
+                        "      \"abstract\":\"Digital elevation model for the Spearfish region.\\r\\n\\r\\nsfdem is a Tagged Image File Format with Geographic information\",\n" +
+                        "      \"defaultInterpolationMethod\":\"nearest neighbor\",\n" +
+                        "      \"description\":\"Generated from sfdem\",\n" +
+                        "      \"dimensions\":{  \n" +
+                        "         \"coverageDimension\":[  \n" +
+                        "            {  \n" +
+                        "               \"description\":\"GridSampleDimension[-9.999999933815813E36,-9.999999933815813E36]\",\n" +
+                        "               \"name\":\"GRAY_INDEX\",\n" +
+                        "               \"range\":{  \n" +
+                        "                  \"max\":-9.999999933815813e+36,\n" +
+                        "                  \"min\":-9.999999933815813e+36\n" +
+                        "               }\n" +
+                        "            }\n" +
+                        "         ]\n" +
+                        "      },\n" +
+                        "      \"enabled\":true,\n" +
+                        "      \"grid\":{  \n" +
+                        "         \"@dimension\":\"2\",\n" +
+                        "         \"crs\":\"EPSG:26713\",\n" +
+                        "         \"range\":{  \n" +
+                        "            \"high\":\"634 477\",\n" +
+                        "            \"low\":\"0 0\"\n" +
+                        "         },\n" +
+                        "         \"transform\":{  \n" +
+                        "            \"scaleX\":30,\n" +
+                        "            \"scaleY\":-30,\n" +
+                        "            \"shearX\":0,\n" +
+                        "            \"shearY\":0,\n" +
+                        "            \"translateX\":589995,\n" +
+                        "            \"translateY\":4927995\n" +
+                        "         }\n" +
+                        "      },\n" +
+                        "      \"interpolationMethods\":{  \n" +
+                        "         \"string\":[  \n" +
+                        "            \"nearest neighbor\",\n" +
+                        "            \"bilinear\",\n" +
+                        "            \"bicubic\"\n" +
+                        "         ]\n" +
+                        "      },\n" +
+                        "      \"keywords\":{  \n" +
+                        "         \"string\":[  \n" +
+                        "            \"WCS\",\n" +
+                        "            \"sfdem\",\n" +
+                        "            \"sfdem\"\n" +
+                        "         ]\n" +
+                        "      },\n" +
+                        "      \"latLonBoundingBox\":{  \n" +
+                        "         \"crs\":\"EPSG:4326\",\n" +
+                        "         \"maxx\":-103.62940739432703,\n" +
+                        "         \"maxy\":44.5016011535299,\n" +
+                        "         \"minx\":-103.87108701853181,\n" +
+                        "         \"miny\":44.370187074132616\n" +
+                        "      },\n" +
+                        "      \"metadata\":{  \n" +
+                        "         \"entry\":{  \n" +
+                        "            \"$\":\"sfdem_sfdem\",\n" +
+                        "            \"@key\":\"dirName\"\n" +
+                        "         }\n" +
+                        "      },\n" +
+                        "      \"name\":\"sfdem\",\n" +
+                        "      \"namespace\":{  \n" +
+                        "         \"href\":\"http://localhost:/geoserver/restng/namespaces/sf.json\",\n" +
+                        "         \"name\":\"sf\"\n" +
+                        "      },\n" +
+                        "      \"nativeBoundingBox\":{  \n" +
+                        "         \"crs\":{  \n" +
+                        "            \"$\":\"EPSG:26713\",\n" +
+                        "            \"@class\":\"projected\"\n" +
+                        "         },\n" +
+                        "         \"maxx\":609000,\n" +
+                        "         \"maxy\":4928010,\n" +
+                        "         \"minx\":589980,\n" +
+                        "         \"miny\":4913700\n" +
+                        "      },\n" +
+                        "      \"nativeCRS\":{  \n" +
+                        "         \"$\":\"PROJCS[\\\"NAD27 / UTM zone 13N\\\", \\n  GEOGCS[\\\"NAD27\\\", \\n    DATUM[\\\"North American Datum 1927\\\", \\n      SPHEROID[\\\"Clarke 1866\\\", 6378206.4, 294.9786982138982, AUTHORITY[\\\"EPSG\\\",\\\"7008\\\"]], \\n      TOWGS84[2.478, 149.752, 197.726, 0.526, -0.498, 0.501, 0.685], \\n      AUTHORITY[\\\"EPSG\\\",\\\"6267\\\"]], \\n    PRIMEM[\\\"Greenwich\\\", 0.0, AUTHORITY[\\\"EPSG\\\",\\\"8901\\\"]], \\n    UNIT[\\\"degree\\\", 0.017453292519943295], \\n    AXIS[\\\"Geodetic longitude\\\", EAST], \\n    AXIS[\\\"Geodetic latitude\\\", NORTH], \\n    AUTHORITY[\\\"EPSG\\\",\\\"4267\\\"]], \\n  PROJECTION[\\\"Transverse_Mercator\\\"], \\n  PARAMETER[\\\"central_meridian\\\", -105.0], \\n  PARAMETER[\\\"latitude_of_origin\\\", 0.0], \\n  PARAMETER[\\\"scale_factor\\\", 0.9996], \\n  PARAMETER[\\\"false_easting\\\", 500000.0], \\n  PARAMETER[\\\"false_northing\\\", 0.0], \\n  UNIT[\\\"m\\\", 1.0], \\n  AXIS[\\\"Easting\\\", EAST], \\n  AXIS[\\\"Northing\\\", NORTH], \\n  AUTHORITY[\\\"EPSG\\\",\\\"26713\\\"]]\",\n" +
+                        "         \"@class\":\"projected\"\n" +
+                        "      },\n" +
+                        "      \"nativeFormat\":\"GeoTIFF\",\n" +
+                        "      \"nativeName\":\"sfdem\",\n" +
+                        "      \"requestSRS\":{  \n" +
+                        "         \"string\":[  \n" +
+                        "            \"EPSG:26713\"\n" +
+                        "         ]\n" +
+                        "      },\n" +
+                        "      \"responseSRS\":{  \n" +
+                        "         \"string\":[  \n" +
+                        "            \"EPSG:26713\"\n" +
+                        "         ]\n" +
+                        "      },\n" +
+                        "      \"srs\":\"EPSG:26713\",\n" +
+                        "      \"store\":{  \n" +
+                        "         \"@class\":\"coverageStore\",\n" +
+                        "         \"href\":\"http://localhost:/geoserver/restng/workspaces/sf/coveragestores/sfdem.json\",\n" +
+                        "         \"name\":\"sf:sfdem\"\n" +
+                        "      },\n" +
+                        "      \"supportedFormats\":{  \n" +
+                        "         \"string\":[  \n" +
+                        "            \"ARCGRID\",\n" +
+                        "            \"IMAGEMOSAIC\",\n" +
+                        "            \"GTOPO30\",\n" +
+                        "            \"GEOTIFF\",\n" +
+                        "            \"GIF\",\n" +
+                        "            \"PNG\",\n" +
+                        "            \"JPEG\",\n" +
+                        "            \"TIFF\"\n" +
+                        "         ]\n" +
+                        "      },\n" +
+                        "      \"title\":\"Spearfish elevation\"\n" +
+                        "   }\n" +
+                        "}"), GPGeoserverCoverageInfo.class);
+        logger.info("##########################GEOSERVER_COVERAGE_INFO : {}\n", coverageInfo);
     }
 }

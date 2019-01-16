@@ -45,11 +45,11 @@ import javax.annotation.meta.When;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoserverLayerRequest extends GPConnectorRequest<GeoserverLayer> {
+public interface GeoserverLoadLayerRequest extends GPConnectorRequest<GeoserverLayer> {
 
     /**
      * @param theName
-     * @return {@link GeoserverLayerRequest}
+     * @return {@link GeoserverLoadLayerRequest}
      */
-    GeoserverLayerRequest withName(@Nonnull(when = When.NEVER) String theName);
+    GeoserverLoadLayerRequest withName(@Nonnull(when = When.NEVER) String theName);
 }

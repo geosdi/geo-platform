@@ -38,8 +38,11 @@ package org.geosdi.geoplatform.connector.geoserver.model.layers;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import java.util.Arrays;
 import java.util.Optional;
+
+import static java.lang.Boolean.FALSE;
+import static java.util.Arrays.stream;
+import static java.util.Optional.empty;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -74,11 +77,10 @@ public enum GeoserverLayerType {
      */
     @JsonCreator
     public static GeoserverLayerType forType(String type) {
-        Optional<GeoserverLayerType> optional = Arrays
-                .stream(GeoserverLayerType.values())
+        Optional<GeoserverLayerType> optional = stream(GeoserverLayerType.values())
                 .filter(v -> ((type != null) && !(type.trim().isEmpty()))
-                        ? v.getType().equalsIgnoreCase(type) : Boolean.FALSE)
+                        ? v.getType().equalsIgnoreCase(type) : FALSE)
                 .findFirst();
-        return ((optional != null) && !(optional.equals(Optional.empty()))) ? optional.get() : null;
+        return ((optional != null) && !(optional.equals(empty()))) ? optional.get() : null;
     }
 }

@@ -117,7 +117,7 @@ public class WSProjectTest extends BaseSoapServiceTest {
         Long idRasterRootFolderA = super.createAndInsertRasterLayer(
                 super.rootFolderA, titleRaster + nameRootFolderA,
                 nameRaster + nameRootFolderA, "", 15, "", "");
-        rasterRootFolderA = gpWSClient.getRasterLayer(idRasterRootFolderA);
+        rasterRootFolderA = gpWSClient.getRasterLayer(idRasterRootFolderA).getRasterLayer();
         this.fixture.put(rasterRootFolderA.getName(), rasterRootFolderA);
         // "rootFolderA" ---> "folder1(A|B|C)"
         Long idFolder1A = super.createAndInsertFolder(nameFolder1A, projectTest,
@@ -133,7 +133,7 @@ public class WSProjectTest extends BaseSoapServiceTest {
         Long idRasterFolder1B = super.createAndInsertRasterLayer(folder1B,
                 titleRaster + nameFolder1B,
                 nameRaster + nameFolder1B, "", 4, "", "");
-        rasterFolder1B = gpWSClient.getRasterLayer(idRasterFolder1B);
+        rasterFolder1B = gpWSClient.getRasterLayer(idRasterFolder1B).getRasterLayer();
         this.fixture.put(rasterFolder1B.getName(), rasterFolder1B);
         //
         Long idFolder1C = super.createAndInsertFolder(nameFolder1C, projectTest,
@@ -160,7 +160,7 @@ public class WSProjectTest extends BaseSoapServiceTest {
         Long idRasterFolder2C = super.createAndInsertRasterLayer(folder2C,
                 titleRaster + nameFolder2C,
                 nameRaster + nameFolder2C, "", 6, "", "");
-        rasterFolder2C = gpWSClient.getRasterLayer(idRasterFolder2C);
+        rasterFolder2C = gpWSClient.getRasterLayer(idRasterFolder2C).getRasterLayer();
         this.fixture.put(rasterFolder2C.getName(), rasterFolder2C);
         //
         // "folder2A" ---> "folder3(A|B|C)"
@@ -172,7 +172,7 @@ public class WSProjectTest extends BaseSoapServiceTest {
         Long idVectorFolder3A = super.createAndInsertVectorLayer(folder3A,
                 titleVector + nameFolder3A,
                 nameVector + nameFolder3A, "", 11, "", "");
-        vectorFolder3A = gpWSClient.getVectorLayer(idVectorFolder3A);
+        vectorFolder3A = gpWSClient.getVectorLayer(idVectorFolder3A).getVectorLayer();
         this.fixture.put(vectorFolder3A.getName(), vectorFolder3A);
         //
         Long idFolder3B = super.createAndInsertFolder(nameFolder3B, projectTest,
@@ -192,7 +192,7 @@ public class WSProjectTest extends BaseSoapServiceTest {
         Long idVectorRootFolderB = super.createAndInsertVectorLayer(
                 super.rootFolderB, titleVector + nameRootFolderB,
                 nameVector + nameRootFolderB, "", 1, "", "");
-        vectorRootFolderB = gpWSClient.getVectorLayer(idVectorRootFolderB);
+        vectorRootFolderB = gpWSClient.getVectorLayer(idVectorRootFolderB).getVectorLayer();
         this.fixture.put(vectorRootFolderB.getName(), vectorRootFolderB);
         //
         super.rootFolderB.setNumberOfDescendants(1);

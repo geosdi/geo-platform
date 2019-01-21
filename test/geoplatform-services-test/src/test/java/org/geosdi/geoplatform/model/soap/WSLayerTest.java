@@ -35,16 +35,7 @@
  */
 package org.geosdi.geoplatform.model.soap;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import org.geosdi.geoplatform.core.model.GPBBox;
-import org.geosdi.geoplatform.core.model.GPLayer;
-import org.geosdi.geoplatform.core.model.GPLayerInfo;
-import org.geosdi.geoplatform.core.model.GPRasterLayer;
-import org.geosdi.geoplatform.core.model.GPVectorLayer;
+import org.geosdi.geoplatform.core.model.*;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.shared.GPLayerType;
@@ -59,6 +50,8 @@ import org.geosdi.geoplatform.response.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.response.collection.TreeFolderElements;
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.*;
 
 /**
  *
@@ -99,12 +92,12 @@ public class WSLayerTest extends BaseSoapServiceTest {
         idRaster1 = createAndInsertRasterLayer(rootFolderA, titleRaster1,
                 "name_" + titleRaster1,
                 "abstract_" + titleRaster1, 5, spatialReferenceSystem, urlServer);
-        raster1 = gpWSClient.getRasterLayer(idRaster1);
+        raster1 = gpWSClient.getRasterLayer(idRaster1).getRasterLayer();
         // "rootFolderA" ---> "vectorLayer1"
         idVector1 = createAndInsertVectorLayer(rootFolderA, titleVector1,
                 "name_" + titleVector1,
                 "abstract_" + titleVector1, 4, spatialReferenceSystem, urlServer);
-        vector1 = gpWSClient.getVectorLayer(idVector1);
+        vector1 = gpWSClient.getVectorLayer(idVector1).getVectorLayer();
         //
         rootFolderA.setPosition(6);
         rootFolderA.setNumberOfDescendants(2);
@@ -114,12 +107,12 @@ public class WSLayerTest extends BaseSoapServiceTest {
         idRaster2 = createAndInsertRasterLayer(rootFolderB, titleRaster2,
                 "name_" + titleRaster2,
                 "abstract_" + titleRaster2, 2, spatialReferenceSystem, urlServer);
-        raster2 = gpWSClient.getRasterLayer(idRaster2);
+        raster2 = gpWSClient.getRasterLayer(idRaster2).getRasterLayer();
         // "rootFolderB" ---> "vectorLayer2"
         idVector2 = createAndInsertVectorLayer(rootFolderB, titleVector2,
                 "name_" + titleVector2,
                 "abstract_" + titleVector2, 1, spatialReferenceSystem, urlServer);
-        vector2 = gpWSClient.getVectorLayer(idVector2);
+        vector2 = gpWSClient.getVectorLayer(idVector2).getVectorLayer();
         //
         rootFolderB.setPosition(3);
         rootFolderB.setNumberOfDescendants(2);
@@ -138,13 +131,13 @@ public class WSLayerTest extends BaseSoapServiceTest {
         this.checkState(new int[]{8, 5, 4, 3, 2, 1}, new int[]{4, 2},
                 "after add layers");
 
-        GPLayer newRasterLayer3 = gpWSClient.getRasterLayer(idList.get(0));
+        GPLayer newRasterLayer3 = gpWSClient.getRasterLayer(idList.get(0)).getRasterLayer();
         Assert.assertEquals("title of newRasterLayer3", titleRaster3,
                 newRasterLayer3.getTitle());
         Assert.assertEquals("position of newRasterLayer3", 7,
                 newRasterLayer3.getPosition());
 
-        GPLayer newVectorLayer3 = gpWSClient.getVectorLayer(idList.get(1));
+        GPLayer newVectorLayer3 = gpWSClient.getVectorLayer(idList.get(1)).getVectorLayer();
         Assert.assertEquals("title of newVectorLayer3", titleVector3,
                 newVectorLayer3.getTitle());
         Assert.assertEquals("position of newVectorLayer3", 6,
@@ -424,7 +417,7 @@ public class WSLayerTest extends BaseSoapServiceTest {
             Assert.fail("Add layer must fail because title value is null");
         } catch (IllegalParameterFault e) {
             try {
-                raster1 = gpWSClient.getRasterLayer(idRaster1);
+                raster1 = gpWSClient.getRasterLayer(idRaster1).getRasterLayer();
                 Assert.fail("rasterLayer1 must not exist");
             } catch (ResourceNotFoundFault rnf) {
             }
@@ -551,13 +544,13 @@ public class WSLayerTest extends BaseSoapServiceTest {
         Assert.assertEquals("Number of descendant of root folder A - " + info, 2,
                 rootFolderA.getNumberOfDescendants());
 
-        raster1 = gpWSClient.getRasterLayer(idRaster1);
+        raster1 = gpWSClient.getRasterLayer(idRaster1).getRasterLayer();
         Assert.assertEquals("Position of raster layer 1 - " + info, 5,
                 raster1.getPosition());
         Assert.assertEquals("Parent of raster layer 1 - " + info, idRootFolderA,
                 raster1.getFolder().getId().longValue());
 
-        vector1 = gpWSClient.getVectorLayer(idVector1);
+        vector1 = gpWSClient.getVectorLayer(idVector1).getVectorLayer();
         Assert.assertEquals("Position of vector layer 1 - " + info, 4,
                 vector1.getPosition());
         Assert.assertEquals("Parent of vector layer 1 - " + info, idRootFolderA,
@@ -571,13 +564,13 @@ public class WSLayerTest extends BaseSoapServiceTest {
         Assert.assertEquals("Number of descendant of root folder B - " + info, 2,
                 rootFolderB.getNumberOfDescendants());
 
-        raster2 = gpWSClient.getRasterLayer(idRaster2);
+        raster2 = gpWSClient.getRasterLayer(idRaster2).getRasterLayer();
         Assert.assertEquals("Position of raster layer 2 - " + info, 2,
                 raster2.getPosition());
         Assert.assertEquals("Parent of raster layer 2 - " + info, idRootFolderB,
                 raster2.getFolder().getId().longValue());
 
-        vector2 = gpWSClient.getVectorLayer(idVector2);
+        vector2 = gpWSClient.getVectorLayer(idVector2).getVectorLayer();
         Assert.assertEquals("Position of vector layer 2 - " + info, 1,
                 vector2.getPosition());
         Assert.assertEquals("Parent of vector layer 2 - " + info, idRootFolderB,
@@ -601,11 +594,11 @@ public class WSLayerTest extends BaseSoapServiceTest {
         Assert.assertEquals("Number of descendant of root folder A - " + info,
                 numberOfDescendants[0], rootFolderA.getNumberOfDescendants());
 
-        raster1 = gpWSClient.getRasterLayer(idRaster1);
+        raster1 = gpWSClient.getRasterLayer(idRaster1).getRasterLayer();
         Assert.assertEquals("Position of raster layer 1 - " + info, positions[1],
                 raster1.getPosition());
 
-        vector1 = gpWSClient.getVectorLayer(idVector1);
+        vector1 = gpWSClient.getVectorLayer(idVector1).getVectorLayer();
         Assert.assertEquals("Position of vector layer 1 - " + info, positions[2],
                 vector1.getPosition());
 
@@ -617,11 +610,11 @@ public class WSLayerTest extends BaseSoapServiceTest {
         Assert.assertEquals("Number of descendant of root folder B - " + info,
                 numberOfDescendants[1], rootFolderB.getNumberOfDescendants());
 
-        raster2 = gpWSClient.getRasterLayer(idRaster2);
+        raster2 = gpWSClient.getRasterLayer(idRaster2).getRasterLayer();
         Assert.assertEquals("Position of raster layer 2 - " + info, positions[4],
                 raster2.getPosition());
 
-        vector2 = gpWSClient.getVectorLayer(idVector2);
+        vector2 = gpWSClient.getVectorLayer(idVector2).getVectorLayer();
         Assert.assertEquals("Position of vector layer 2 - " + info, positions[5],
                 vector2.getPosition());
     }

@@ -33,66 +33,74 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.response;
+package org.geosdi.geoplatform.core.model;
+
+import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import java.io.Serializable;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-//@XmlRootElement
+//@XmlRootElement(name = "ShortAuthority")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class ShortProjectDTO implements Serializable {
+public class GPShortAuthority implements IGPShortAuthority {
 
-    private static final long serialVersionUID = -2692298561415328918L;
+    private static final long serialVersionUID = -515147481078251895L;
     //
-    private Integer version;
-    private Integer numberOfElements;
+    private final Long id;
+    private final String authority;
+    private final GPTrustedLevel trustedLevel;
+    private final String accountNaturalID;
 
-    public ShortProjectDTO() {
-    }
-
-    public ShortProjectDTO(Integer theVersion, Integer theNumberOfElements) {
-        this.version = theVersion;
-        this.numberOfElements = theNumberOfElements;
-    }
-
-    /**
-     * @return {@link Integer}
-     */
-    public Integer getVersion() {
-        return version;
+    public GPShortAuthority(Long theID, String theAuthority, GPTrustedLevel theTrustedLevel, String theAccountNaturalID) {
+        this.id = theID;
+        this.authority = theAuthority;
+        this.trustedLevel = theTrustedLevel;
+        this.accountNaturalID = theAccountNaturalID;
     }
 
     /**
-     * @param version
+     * @return {@link Long}
      */
-    public void setVersion(Integer version) {
-        this.version = version;
+    @Override
+    public Long getId() {
+        return this.id;
     }
 
     /**
-     * @return {@link Integer}
+     * @return {@link String}
      */
-    public Integer getNumberOfElements() {
-        return numberOfElements;
+    @Override
+    public String getAuthority() {
+        return this.authority;
     }
 
     /**
-     * @param numberOfElements
+     * @return {@link GPTrustedLevel}
      */
-    public void setNumberOfElements(Integer numberOfElements) {
-        this.numberOfElements = numberOfElements;
+    @Override
+    public GPTrustedLevel getTrustedLevel() {
+        return this.trustedLevel;
+    }
+
+    /**
+     * @return {@link String}
+     */
+    @Override
+    public String getAccountNaturalID() {
+        return this.accountNaturalID;
     }
 
     @Override
     public String toString() {
-        return getClass().getName() + "{" +
-                " version = " + version +
-                ", numberOfElements = " + numberOfElements +
+        return getClass().getSimpleName() + "{" +
+                "  id = " + id +
+                ", authority = '" + authority + '\'' +
+                ", trustedLevel = " + trustedLevel +
+                ", accountNaturalID = '" + accountNaturalID + '\'' +
                 '}';
     }
 }

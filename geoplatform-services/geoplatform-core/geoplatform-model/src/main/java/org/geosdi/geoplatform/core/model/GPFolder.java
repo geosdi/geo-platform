@@ -43,14 +43,13 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
 /**
  * @author Francesco Izzi - geoSDI
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-@XmlRootElement(name = "Folder")
+//@XmlRootElement(name = "Folder")
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity(name = "Folder")
 @Table(name = "gp_folder")

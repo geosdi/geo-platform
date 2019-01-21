@@ -35,34 +35,27 @@
  */
 package org.geosdi.geoplatform.core.model;
 
-import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.Index;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+
+import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import java.io.Serializable;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-@XmlRootElement(name = "Viewport")
+//@XmlRootElement(name = "Viewport")
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity(name = "Viewport")
-@Table(name = "gp_viewport")
+@Table(name = "gp_viewport", indexes = {
+        @Index(columnList = "name", name = "VIEWPORT_NAME_INDEX"),
+        @Index(columnList = "account_project_id", name = "ACCOUNT_PROJECT_ID_INDEX")
+})
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "viewport")
 public class GPViewport implements Serializable {
 
@@ -74,7 +67,6 @@ public class GPViewport implements Serializable {
     private Long id;
     //
     @Column(nullable = false)
-    @Index(name = "VIEWPORT_NAME_INDEX")
     private String name;
     //
     @Column
@@ -92,7 +84,6 @@ public class GPViewport implements Serializable {
     @ManyToOne(optional = true)
     @JoinColumn(name = "account_project_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @Index(name = "ACCOUNT_PROJECT_ID_INDEX")
     private GPAccountProject accountProject;
 
     public GPViewport() {

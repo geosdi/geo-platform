@@ -43,13 +43,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author giuseppe
  *
  */
-@XmlRootElement(name = "GPUser")
+//@XmlRootElement(name = "GPUser")
 @Entity(name = "User")
 @DiscriminatorValue("GPUser")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "user")

@@ -45,10 +45,7 @@ import org.geosdi.geoplatform.request.layer.WSAddLayerAndTreeModificationsReques
 import org.geosdi.geoplatform.request.layer.WSAddLayersAndTreeModificationsRequest;
 import org.geosdi.geoplatform.request.layer.WSDDLayerAndTreeModificationsRequest;
 import org.geosdi.geoplatform.request.layer.WSDeleteLayerAndTreeModificationsRequest;
-import org.geosdi.geoplatform.response.GetDataSourceResponse;
-import org.geosdi.geoplatform.response.RasterPropertiesDTO;
-import org.geosdi.geoplatform.response.ShortLayerDTO;
-import org.geosdi.geoplatform.response.ShortLayerDTOContainer;
+import org.geosdi.geoplatform.response.*;
 import org.geosdi.geoplatform.response.collection.LongListStore;
 
 /**
@@ -199,7 +196,7 @@ public interface GPLayerResource {
      *
      * @throws Exception if raster Layer not found
      */
-    GPRasterLayer getRasterLayer(Long layerID) throws Exception;
+    GPRasterLayerResponse getRasterLayer(Long layerID) throws Exception;
 
     /**
      * Retrieve a vector Layer by ID.
@@ -209,7 +206,7 @@ public interface GPLayerResource {
      *
      * @throws Exception if vector Layer not found
      */
-    GPVectorLayer getVectorLayer(Long layerID) throws Exception;
+    GPVectorLayerResponse getVectorLayer(Long layerID) throws Exception;
 
     /**
      * Retrieve a Layer by ID.

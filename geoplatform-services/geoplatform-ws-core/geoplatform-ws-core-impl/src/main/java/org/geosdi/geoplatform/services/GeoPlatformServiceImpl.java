@@ -215,12 +215,12 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public UserDTO getShortUser(Long userID) throws ResourceNotFoundFault {
+    public UserDTOResponse getShortUser(Long userID) throws ResourceNotFoundFault {
         return gpAccountDelegate.getShortUser(userID);
     }
 
     @Override
-    public UserDTO getShortUserByUsername(SearchRequest request)
+    public UserDTOResponse getShortUserByUsername(SearchRequest request)
             throws ResourceNotFoundFault {
         return gpAccountDelegate.getShortUserByUsername(request);
     }
@@ -761,13 +761,13 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public GPRasterLayer getRasterLayer(Long layerID)
+    public GPRasterLayerResponse getRasterLayer(Long layerID)
             throws ResourceNotFoundFault {
         return gpLayerDelegate.getRasterLayer(layerID);
     }
 
     @Override
-    public GPVectorLayer getVectorLayer(Long layerID)
+    public GPVectorLayerResponse getVectorLayer(Long layerID)
             throws ResourceNotFoundFault {
         return gpLayerDelegate.getVectorLayer(layerID);
     }

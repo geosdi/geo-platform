@@ -42,13 +42,12 @@ import org.hibernate.annotations.Index;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-@XmlRootElement(name = "GPApplication")
+//@XmlRootElement(name = "GPApplication")
 @Entity(name = "Application")
 @DiscriminatorValue("GPApplication")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "application")

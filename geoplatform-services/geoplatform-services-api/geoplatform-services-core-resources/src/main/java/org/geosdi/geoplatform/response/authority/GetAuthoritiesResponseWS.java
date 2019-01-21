@@ -35,21 +35,18 @@
  */
 package org.geosdi.geoplatform.response.authority;
 
+import org.geosdi.geoplatform.core.model.GPAuthority;
+
+import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
-import org.geosdi.geoplatform.core.model.GPAuthority;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@XmlRootElement(name = "GetAuthoritiesResponseWS")
+//@XmlRootElement(name = "GetAuthoritiesResponseWS")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class GetAuthoritiesResponseWS implements Serializable {
 

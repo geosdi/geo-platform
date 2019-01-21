@@ -37,12 +37,11 @@ package org.geosdi.geoplatform.response.collection;
 
 import java.util.HashMap;
 import java.util.Map;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-@XmlRootElement
+//@XmlRootElement
 public class GuiComponentsPermissionMapData {
 
     private Map<String, Boolean> map = new HashMap<String, Boolean>();

@@ -42,14 +42,13 @@ import org.hibernate.annotations.Index;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Date;
 
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-@XmlRootElement(name = "GPProject")
+//@XmlRootElement(name = "GPProject")
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity(name = "Project")
 @Table(name = "gp_project")

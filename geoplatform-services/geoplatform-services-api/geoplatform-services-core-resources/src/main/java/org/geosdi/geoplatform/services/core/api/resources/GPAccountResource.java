@@ -41,7 +41,7 @@ import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.response.SearchUsersResponseWS;
 import org.geosdi.geoplatform.response.ShortAccountDTOContainer;
-import org.geosdi.geoplatform.response.UserDTO;
+import org.geosdi.geoplatform.response.UserDTOResponse;
 import org.geosdi.geoplatform.response.authority.GetAuthoritiesResponseWS;
 import org.geosdi.geoplatform.response.authority.GetAuthorityResponse;
 
@@ -128,7 +128,7 @@ public interface GPAccountResource {
      *
      * @throws Exception if User not found
      */
-    UserDTO getShortUser(Long userID) throws Exception;
+    UserDTOResponse getShortUser(Long userID) throws Exception;
 
     /**
      * Retrieve a User by username.
@@ -139,7 +139,7 @@ public interface GPAccountResource {
      *
      * @throws Exception if User not found
      */
-    UserDTO getShortUserByUsername(SearchRequest request) throws Exception;
+    UserDTOResponse getShortUserByUsername(SearchRequest request) throws Exception;
 
     /**
      * Search Users and their Authorities in paginated way. The Users are

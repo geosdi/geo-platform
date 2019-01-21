@@ -42,7 +42,6 @@ import org.geosdi.geoplatform.core.model.GPProject;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -53,7 +52,7 @@ import java.util.List;
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-@XmlRootElement(name = "FolderDTO")
+//@XmlRootElement(name = "FolderDTO")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class FolderDTO extends AbstractElementDTO {
 

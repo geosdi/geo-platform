@@ -36,12 +36,6 @@
 package org.geosdi.geoplatform.response;
 
 import com.google.common.collect.Lists;
-import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
 import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
@@ -49,11 +43,17 @@ import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.gui.shared.GPLayerType;
 import org.geosdi.geoplatform.gui.shared.util.GPSharedUtils;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlType;
+import java.util.List;
+
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI
  *
  */
-@XmlRootElement
+//@XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(propOrder = {"id", "name", "position", "shared", "checked", "title",
     "alias", "urlServer", "srs", "abstractText", "layerType", "bbox", "cached",

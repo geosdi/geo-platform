@@ -94,8 +94,9 @@ import java.util.List;
  * @author Nazzareno Sileno - CNR IMAA - geoSDI
  */
 @CrossOriginResourceSharing(
+        allowAllOrigins = true,
         allowOrigins = {
-                "http://127.0.0.1:9001"
+                "*"
         },
         allowCredentials = true,
         maxAge = 1,

@@ -41,14 +41,13 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-@XmlRootElement(name = "Organization")
+//@XmlRootElement(name = "Organization")
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity(name = "Organization")
 @Table(name = "gp_organization", indexes = {

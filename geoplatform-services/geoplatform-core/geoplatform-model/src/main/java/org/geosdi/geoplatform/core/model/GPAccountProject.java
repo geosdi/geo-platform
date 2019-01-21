@@ -49,7 +49,7 @@ import java.io.Serializable;
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-@XmlRootElement(name = "GPAccountProject")
+//@XmlRootElement(name = "GPAccountProject")
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 @Table(name = "gp_account_project", uniqueConstraints = {

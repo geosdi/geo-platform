@@ -45,7 +45,6 @@ import org.springframework.security.core.GrantedAuthority;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
 /**
@@ -54,7 +53,7 @@ import java.io.Serializable;
  * @author Francesco Izzi - CNR IMAA - geoSDI Group
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-@XmlRootElement(name = "Authority")
+//@XmlRootElement(name = "Authority")
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity(name = "Authority")
 @Table(name = "gp_authority", indexes = {

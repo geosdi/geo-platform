@@ -39,13 +39,12 @@ import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@XmlRootElement(name = "ShortAuthority")
+//@XmlRootElement(name = "ShortAuthority")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class GPShortAuthority implements IGPShortAuthority {
 

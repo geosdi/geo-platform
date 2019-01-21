@@ -43,7 +43,7 @@ import java.util.ArrayList;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@XmlRootElement
+//@XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class GetDataSourceResponse implements Serializable {
 

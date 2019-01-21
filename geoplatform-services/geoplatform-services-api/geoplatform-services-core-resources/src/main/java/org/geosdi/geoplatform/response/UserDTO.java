@@ -35,10 +35,11 @@
  */
 package org.geosdi.geoplatform.response;
 
+import org.geosdi.geoplatform.core.model.GPUser;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.geosdi.geoplatform.core.model.GPUser;
 
 /**
  * @author giuseppe
@@ -48,6 +49,8 @@ import org.geosdi.geoplatform.core.model.GPUser;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class UserDTO extends ShortAccountDTO {
 
+    private static final long serialVersionUID = -446698209575459028L;
+    //
     private String name;
     private String username;
     private String emailAddress;

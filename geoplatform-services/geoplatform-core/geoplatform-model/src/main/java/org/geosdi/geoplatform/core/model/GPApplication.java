@@ -38,13 +38,12 @@ package org.geosdi.geoplatform.core.model;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-@XmlRootElement(name = "GPApplication")
+//@XmlRootElement(name = "GPApplication")
 @Entity(name = "Application")
 @DiscriminatorValue("GPApplication")
 public class GPApplication extends GPAccount {

@@ -44,10 +44,7 @@ import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.InsertAccountRequest;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.SearchRequest;
-import org.geosdi.geoplatform.response.ApplicationDTO;
-import org.geosdi.geoplatform.response.SearchUsersResponseWS;
-import org.geosdi.geoplatform.response.ShortAccountDTOContainer;
-import org.geosdi.geoplatform.response.UserDTO;
+import org.geosdi.geoplatform.response.*;
 import org.geosdi.geoplatform.response.authority.GetAuthoritiesResponseWS;
 import org.geosdi.geoplatform.response.authority.GetAuthorityResponse;
 import org.geosdi.geoplatform.services.core.api.resources.GPAccountResource;
@@ -84,13 +81,13 @@ public interface AccountDelegate extends GPAccountResource {
             ResourceNotFoundFault;
 
     @Override
-    UserDTO getShortUser(Long userID) throws ResourceNotFoundFault;
+    UserDTOResponse getShortUser(Long userID) throws ResourceNotFoundFault;
 
     ApplicationDTO getShortApplication(Long applicationID) throws
             ResourceNotFoundFault;
 
     @Override
-    UserDTO getShortUserByUsername(SearchRequest request)
+    UserDTOResponse getShortUserByUsername(SearchRequest request)
             throws ResourceNotFoundFault;
 
     @Override

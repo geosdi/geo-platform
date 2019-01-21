@@ -45,10 +45,7 @@ import org.geosdi.geoplatform.jasypt.support.GPDigesterConfigurator;
 import org.geosdi.geoplatform.request.InsertAccountRequest;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.SearchRequest;
-import org.geosdi.geoplatform.response.ApplicationDTO;
-import org.geosdi.geoplatform.response.SearchUsersResponseWS;
-import org.geosdi.geoplatform.response.ShortAccountDTOContainer;
-import org.geosdi.geoplatform.response.UserDTO;
+import org.geosdi.geoplatform.response.*;
 import org.geosdi.geoplatform.response.authority.GetAuthoritiesResponseWS;
 import org.geosdi.geoplatform.response.authority.GetAuthorityResponse;
 import org.geosdi.geoplatform.scheduler.delegate.api.SchedulerDelegate;
@@ -257,10 +254,10 @@ public class GPAccountDelegate implements AccountDelegate {
     }
 
     @Override
-    public UserDTO getShortUser(Long userID) throws ResourceNotFoundFault {
+    public UserDTOResponse getShortUser(Long userID) throws ResourceNotFoundFault {
         GPUser user = (GPUser) this.getAccountById(userID);
         EntityCorrectness.checkAccountLog(user); // TODO assert
-        return new UserDTO(user);
+        return new UserDTOResponse(new UserDTO(user));
     }
 
     @Override
@@ -273,11 +270,11 @@ public class GPAccountDelegate implements AccountDelegate {
     }
 
     @Override
-    public UserDTO getShortUserByUsername(SearchRequest request)
+    public UserDTOResponse getShortUserByUsername(SearchRequest request)
             throws ResourceNotFoundFault {
         GPUser user = this.getUserByUsername(request.getNameLike());
         EntityCorrectness.checkAccountLog(user); // TODO assert
-        return new UserDTO(user);
+        return new UserDTOResponse(new UserDTO(user));
     }
 
     @Override

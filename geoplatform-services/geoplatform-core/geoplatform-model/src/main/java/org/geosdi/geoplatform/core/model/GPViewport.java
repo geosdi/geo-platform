@@ -36,22 +36,20 @@
 package org.geosdi.geoplatform.core.model;
 
 import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.*;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.Index;
-import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-@XmlRootElement(name = "Viewport")
+//@XmlRootElement(name = "Viewport")
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity(name = "Viewport")
 @Table(name = "gp_viewport", indexes = {

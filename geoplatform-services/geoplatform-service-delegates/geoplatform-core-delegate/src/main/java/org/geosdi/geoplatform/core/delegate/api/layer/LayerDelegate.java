@@ -35,23 +35,12 @@
  */
 package org.geosdi.geoplatform.core.delegate.api.layer;
 
-import org.geosdi.geoplatform.core.model.GPBBox;
-import org.geosdi.geoplatform.core.model.GPLayer;
-import org.geosdi.geoplatform.core.model.GPLayerInfo;
-import org.geosdi.geoplatform.core.model.GPRasterLayer;
-import org.geosdi.geoplatform.core.model.GPVectorLayer;
+import org.geosdi.geoplatform.core.model.*;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.shared.GPLayerType;
-import org.geosdi.geoplatform.request.layer.InsertLayerRequest;
-import org.geosdi.geoplatform.request.layer.WSAddLayerAndTreeModificationsRequest;
-import org.geosdi.geoplatform.request.layer.WSAddLayersAndTreeModificationsRequest;
-import org.geosdi.geoplatform.request.layer.WSDDLayerAndTreeModificationsRequest;
-import org.geosdi.geoplatform.request.layer.WSDeleteLayerAndTreeModificationsRequest;
-import org.geosdi.geoplatform.response.GetDataSourceResponse;
-import org.geosdi.geoplatform.response.RasterPropertiesDTO;
-import org.geosdi.geoplatform.response.ShortLayerDTO;
-import org.geosdi.geoplatform.response.ShortLayerDTOContainer;
+import org.geosdi.geoplatform.request.layer.*;
+import org.geosdi.geoplatform.response.*;
 import org.geosdi.geoplatform.response.collection.LongListStore;
 import org.geosdi.geoplatform.services.core.api.resources.GPLayerResource;
 
@@ -111,11 +100,11 @@ public interface LayerDelegate extends GPLayerResource {
     GPLayer getLayerDetail(Long layerID) throws ResourceNotFoundFault;
 
     @Override
-    GPRasterLayer getRasterLayer(Long layerID) throws
+    GPRasterLayerResponse getRasterLayer(Long layerID) throws
             ResourceNotFoundFault;
 
     @Override
-    GPVectorLayer getVectorLayer(Long layerID) throws
+    GPVectorLayerResponse getVectorLayer(Long layerID) throws
             ResourceNotFoundFault;
     
     @Override

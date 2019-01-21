@@ -36,13 +36,11 @@
 package org.geosdi.geoplatform.core.model;
 
 import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.*;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.Index;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
 /**
@@ -50,7 +48,7 @@ import java.io.Serializable;
  * @email giuseppe.lascaleia@geosdi.org
  *
  */
-@XmlRootElement(name = "Server")
+//@XmlRootElement(name = "Server")
 @Entity
 @Table(name = "gp_server", indexes = {
         @Index(columnList = "server_url", name = "SERVER_URL_INDEX"),

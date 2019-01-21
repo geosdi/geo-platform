@@ -35,21 +35,21 @@
  */
 package org.geosdi.geoplatform.response.message;
 
-import java.io.Serializable;
-import java.util.List;
+import org.geosdi.geoplatform.core.model.GPMessage;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
-import org.geosdi.geoplatform.core.model.GPMessage;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@XmlRootElement
+//@XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class GetMessageResponse implements Serializable {
 

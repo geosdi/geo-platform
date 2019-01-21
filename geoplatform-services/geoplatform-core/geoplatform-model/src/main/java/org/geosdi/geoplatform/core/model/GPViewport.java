@@ -36,10 +36,10 @@
 package org.geosdi.geoplatform.core.model;
 
 import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.annotations.*;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -52,10 +52,7 @@ import java.io.Serializable;
 //@XmlRootElement(name = "Viewport")
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity(name = "Viewport")
-@Table(name = "gp_viewport", indexes = {
-        @Index(columnList = "name", name = "VIEWPORT_NAME_INDEX"),
-        @Index(columnList = "account_project_id", name = "ACCOUNT_PROJECT_ID_INDEX")
-})
+@Table(name = "gp_viewport")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "viewport")
 public class GPViewport implements Serializable {
 
@@ -67,6 +64,7 @@ public class GPViewport implements Serializable {
     private Long id;
     //
     @Column(nullable = false)
+    @Index(name = "VIEWPORT_NAME_INDEX")
     private String name;
     //
     @Column
@@ -84,6 +82,7 @@ public class GPViewport implements Serializable {
     @ManyToOne(optional = true)
     @JoinColumn(name = "account_project_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
+    @Index(name = "ACCOUNT_PROJECT_ID_INDEX")
     private GPAccountProject accountProject;
 
     public GPViewport() {

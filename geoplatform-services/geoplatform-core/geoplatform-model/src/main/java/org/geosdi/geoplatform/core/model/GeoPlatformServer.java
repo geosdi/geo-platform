@@ -36,10 +36,10 @@
 package org.geosdi.geoplatform.core.model;
 
 import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.annotations.*;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -50,9 +50,7 @@ import java.io.Serializable;
  */
 //@XmlRootElement(name = "Server")
 @Entity
-@Table(name = "gp_server", indexes = {
-        @Index(columnList = "server_url", name = "SERVER_URL_INDEX"),
-        @Index(columnList = "name", name = "SERVER_NAME_INDEX")})
+@Table(name = "gp_server")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "server")
 public class GeoPlatformServer implements Serializable {
 
@@ -67,9 +65,11 @@ public class GeoPlatformServer implements Serializable {
     private Long id;
     //
     @Column(name = "server_url", nullable = false, unique = true)
+    @Index(name = "SERVER_URL_INDEX")
     private String serverUrl;
     //
     @Column
+    @Index(name = "SERVER_NAME_INDEX")
     private String name;
     //
     @Column(name = "alias_name")
@@ -88,21 +88,6 @@ public class GeoPlatformServer implements Serializable {
     @ManyToOne(optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private GPOrganization organization;
-
-    public GeoPlatformServer() {
-    }
-
-    public GeoPlatformServer(Long id, String serverUrl, String name, String aliasName, String title,
-            String abstractServer, GPCapabilityType serverType, GPOrganization organization) {
-        this.id = id;
-        this.serverUrl = serverUrl;
-        this.name = name;
-        this.aliasName = aliasName;
-        this.title = title;
-        this.abstractServer = abstractServer;
-        this.serverType = serverType;
-        this.organization = organization;
-    }
 
     /**
      * @return the id

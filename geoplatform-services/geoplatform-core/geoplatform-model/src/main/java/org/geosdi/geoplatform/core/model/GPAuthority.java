@@ -35,27 +35,17 @@
  */
 package org.geosdi.geoplatform.core.model;
 
-import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
 import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.Index;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.annotations.*;
 import org.springframework.security.core.GrantedAuthority;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import java.io.Serializable;
 
 /**
  * @todo Analyze deletion of accountNaturalID field or account field.
@@ -63,7 +53,7 @@ import org.springframework.security.core.GrantedAuthority;
  * @author Francesco Izzi - CNR IMAA - geoSDI Group
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-@XmlRootElement(name = "Authority")
+//@XmlRootElement(name = "Authority")
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity(name = "Authority")
 @Table(name = "gp_authority")

@@ -1,74 +1,61 @@
 /**
- *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
- *
- *   Copyright (C) 2008-2019 geoSDI Group (CNR IMAA - Potenza - ITALY).
- *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
- *
- *   ====================================================================
- *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
- *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * geo-platform
+ * Rich webgis framework
+ * http://geo-platform.org
+ * ====================================================================
+ * <p>
+ * Copyright (C) 2008-2019 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * <p>
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version. This program is distributed in the
+ * hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License
+ * for more details. You should have received a copy of the GNU General
+ * Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * <p>
+ * ====================================================================
+ * <p>
+ * Linking this library statically or dynamically with other modules is
+ * making a combined work based on this library. Thus, the terms and
+ * conditions of the GNU General Public License cover the whole combination.
+ * <p>
+ * As a special exception, the copyright holders of this library give you permission
+ * to link this library with independent modules to produce an executable, regardless
+ * of the license terms of these independent modules, and to copy and distribute
+ * the resulting executable under terms of your choice, provided that you also meet,
+ * for each linked independent module, the terms and conditions of the license of
+ * that module. An independent module is a module which is not derived from or
+ * based on this library. If you modify this library, you may extend this exception
+ * to your version of the library, but you are not obligated to do so. If you do not
+ * wish to do so, delete this exception statement from your version.
  */
 package org.geosdi.geoplatform.core.delegate.impl.layer;
 
 import com.google.common.collect.Lists;
 import com.googlecode.genericdao.search.Filter;
 import com.googlecode.genericdao.search.Search;
-import java.util.ArrayList;
-import java.util.List;
 import org.geosdi.geoplatform.core.dao.GPFolderDAO;
 import org.geosdi.geoplatform.core.dao.GPLayerDAO;
 import org.geosdi.geoplatform.core.dao.GPProjectDAO;
 import org.geosdi.geoplatform.core.delegate.api.layer.LayerDelegate;
-import org.geosdi.geoplatform.core.model.GPBBox;
-import org.geosdi.geoplatform.core.model.GPFolder;
-import org.geosdi.geoplatform.core.model.GPLayer;
-import org.geosdi.geoplatform.core.model.GPLayerInfo;
-import org.geosdi.geoplatform.core.model.GPProject;
-import org.geosdi.geoplatform.core.model.GPRasterLayer;
-import org.geosdi.geoplatform.core.model.GPVectorLayer;
+import org.geosdi.geoplatform.core.model.*;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.shared.GPLayerType;
 import org.geosdi.geoplatform.gui.shared.util.GPSharedUtils;
-import org.geosdi.geoplatform.request.layer.InsertLayerRequest;
-import org.geosdi.geoplatform.request.layer.WSAddLayerAndTreeModificationsRequest;
-import org.geosdi.geoplatform.request.layer.WSAddLayersAndTreeModificationsRequest;
-import org.geosdi.geoplatform.request.layer.WSDDLayerAndTreeModificationsRequest;
-import org.geosdi.geoplatform.request.layer.WSDeleteLayerAndTreeModificationsRequest;
-import org.geosdi.geoplatform.response.GetDataSourceResponse;
-import org.geosdi.geoplatform.response.RasterPropertiesDTO;
-import org.geosdi.geoplatform.response.ShortLayerDTO;
-import org.geosdi.geoplatform.response.ShortLayerDTOContainer;
+import org.geosdi.geoplatform.request.layer.*;
+import org.geosdi.geoplatform.response.*;
 import org.geosdi.geoplatform.response.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.response.collection.LongListStore;
 import org.geosdi.geoplatform.services.development.EntityCorrectness;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Layer service delegate.
@@ -91,7 +78,7 @@ public class GPLayerDelegate implements LayerDelegate {
         if (layerRequest == null) {
             throw new IllegalParameterFault(
                     "The InsertLayerRequest must not be "
-                    + "null.");
+                            + "null.");
         }
 
         GPLayer layer = layerRequest.getLayer();
@@ -144,7 +131,7 @@ public class GPLayerDelegate implements LayerDelegate {
         if (addLayerRequest == null) {
             throw new IllegalParameterFault(
                     "The WSAddLayerAndTreeModificationsRequest "
-                    + "must not be null.");
+                            + "must not be null.");
         }
         Long projectID = addLayerRequest.getProjectID();
         Long parentID = addLayerRequest.getParentFolderID();
@@ -240,7 +227,7 @@ public class GPLayerDelegate implements LayerDelegate {
         if (deleteLayerRequest == null) {
             throw new IllegalArgumentException(
                     "The WSDeleteLayerAndTreeModificationsRequest "
-                    + "must not be null.");
+                            + "must not be null.");
         }
         Long layerID = deleteLayerRequest.getLayerID();
         GPWebServiceMapData descendantsMapData = deleteLayerRequest.getDescendantsMapData();
@@ -316,7 +303,7 @@ public class GPLayerDelegate implements LayerDelegate {
         if (ddLayerReq == null) {
             throw new IllegalParameterFault(
                     "The WSDDLayerAndTreeModificationsRequest "
-                    + "must not be null.");
+                            + "must not be null.");
         }
         Long layerMovedID = ddLayerReq.getLayerMovedID();
         Long newParentID = ddLayerReq.getNewParentID();
@@ -429,19 +416,19 @@ public class GPLayerDelegate implements LayerDelegate {
     }
 
     @Override
-    public GPRasterLayer getRasterLayer(Long layerID) throws
+    public GPRasterLayerResponse getRasterLayer(Long layerID) throws
             ResourceNotFoundFault {
         GPLayer layer = this.getLayerDetail(layerID);
         GPRasterLayer raster = this.rasterLayer(layer);
-        return raster;
+        return new GPRasterLayerResponse(raster);
     }
 
     @Override
-    public GPVectorLayer getVectorLayer(Long layerID) throws
+    public GPVectorLayerResponse getVectorLayer(Long layerID) throws
             ResourceNotFoundFault {
         GPLayer layer = this.getLayerDetail(layerID);
         GPVectorLayer vector = this.vectorLayer(layer);
-        return vector;
+        return new GPVectorLayerResponse(vector);
     }
 
     @Override

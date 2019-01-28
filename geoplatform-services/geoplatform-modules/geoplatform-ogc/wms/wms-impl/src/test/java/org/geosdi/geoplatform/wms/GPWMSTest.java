@@ -78,8 +78,6 @@ public class GPWMSTest {
     @Test
     public void inteserServerTest() throws Exception {
         GPOrganization organization = this.organizationDAO.find(200L);
-
-
         GeoPlatformServer server = new GeoPlatformServer();
         server.setServerUrl("https://vvf-toscana.geosdi.org/geoserver/ows?service=wms&version=1.3.0&request=GetCapabilities");
         server.setName("Test Server");

@@ -1,0 +1,6 @@
+<?xml version="1.0" ?>
+     <xml-java-binding-schema xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+  xmlns:ci="http://jaxb.dev.java.net/plugin/listener-injector">
+         <options package="org.geosdi.geoplatform.wms.v111" />
+            <xjc:serializable/>
+</xml-java-binding-schema>

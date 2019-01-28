@@ -29,6 +29,7 @@
         <module>geoplatform-sld-binding</module>
         <module>geoplatform-wmc-binding</module>
         <module>geoplatform-wps-binding</module>
+        <module>geoplatform-wms-binding</module>
     </modules>
     
     <dependencyManagement>

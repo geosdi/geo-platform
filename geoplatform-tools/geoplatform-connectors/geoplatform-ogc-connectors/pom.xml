@@ -20,6 +20,7 @@
         <module>geoplatform-csw-connector</module>
         <module>geoplatform-wfs-connector-module</module>
         <module>geoplatform-wps-connector</module>
+        <module>geoplatform-wms-connector</module>
     </modules>
 
     <dependencies>

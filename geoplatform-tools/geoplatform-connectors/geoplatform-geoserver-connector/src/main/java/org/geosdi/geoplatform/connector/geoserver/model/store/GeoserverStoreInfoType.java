@@ -2,7 +2,6 @@ package org.geosdi.geoplatform.connector.geoserver.model.store;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import org.geosdi.geoplatform.connector.geoserver.model.layers.GeoserverLayerType;
 
 import java.util.Optional;
 
@@ -40,7 +39,7 @@ public enum GeoserverStoreInfoType {
 
     /**
      * @param type
-     * @return {@link GeoserverLayerType}
+     * @return {@link GeoserverStoreInfoType}
      */
     @JsonCreator
     public static GeoserverStoreInfoType forType(String type) {

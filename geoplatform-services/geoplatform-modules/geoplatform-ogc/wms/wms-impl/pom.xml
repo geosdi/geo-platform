@@ -34,6 +34,12 @@
             <artifactId>geoplatform-cxf-rs-provider-support</artifactId>
             <version>${project.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>wms-1.1.1</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         
         <dependency>
             <groupId>org.geosdi</groupId>

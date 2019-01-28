@@ -161,7 +161,7 @@ public class GPWMSServiceImpl implements GPWMSService {
         if (index != -1) {
             serverURL = serverURL.substring(0, index);
         }
-        String decribeLayerUrl = serverURL.concat("?request=DescribeLayer&version=1.1.1&layers=").concat(layerName);
+        String decribeLayerUrl = serverURL.concat("?service=WMS&request=DescribeLayer&version=1.1.1&layers=").concat(layerName);
         logger.info("#########################DESCRIBE_LAYER_URL : {}\n", decribeLayerUrl);
         try {
             HttpClient httpClient = new HttpClient();

@@ -46,7 +46,7 @@ import java.util.List;
  * @email francesco.izzi@geosdi.org
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-@XmlRootElement(name = "LayerSchemaDTO")
+//@XmlRootElement(name = "LayerSchemaDTO")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(propOrder = {"typeName", "targetNamespace", "scope",
     "geometry", "attributes"})

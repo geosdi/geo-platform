@@ -49,11 +49,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author Francesco Izzi - CNR IMAA geoSDI Group
+ * @author Francesco Izzi <francesco.izzi@geosdi.org>
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email francesco.izzi@geosdi.org
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
  */
 @WebService(endpointInterface = "org.geosdi.geoplatform.services.GPWFSService")
 public class GPWFSServiceImpl implements GPWFSService {

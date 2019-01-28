@@ -16,6 +16,25 @@
     <name>Geo-Platform :: == WFS Module Api</name>
 
     <dependencies>
+        <!-- CXF -->
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxrs</artifactId>
+        </dependency>
+
+        <!-- =========================================================== -->
+        <!-- ======================= JAX-RS: CORS =====================  -->
+        <!-- =========================================================== -->
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-rs-security-cors</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>å
         
         <dependency>
             <groupId>org.geosdi</groupId>
@@ -62,6 +81,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
+            <scope>test</scope>
         </dependency>
 
         <!-- CXF -->

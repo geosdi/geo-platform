@@ -67,10 +67,10 @@ public class GPDescribeFeatureService extends AbstractFeatureService implements 
             throw new IllegalArgumentException(
                     "typeName must contain the char \":\"");
         }
-        if (!this.wfsConfigurator.matchDefaultDataSource(serverURL)) {
-            throw new IllegalStateException("Edit Mode cannot be applied to "
-                    + "the server with url : " + serverURL);
-        }
+//        if (!this.wfsConfigurator.matchDefaultDataSource(serverURL)) {
+//            throw new IllegalStateException("Edit Mode cannot be applied to "
+//                    + "the server with url : " + serverURL);
+//        }
 
         LayerSchemaDTO layerSchema;
         try {

@@ -58,7 +58,7 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
      * @param theJacksonSupport
      * @param version
      */
-    public GPGeoserverStylesConnector(String urlServer, JacksonSupport theJacksonSupport, String version) {
+    protected GPGeoserverStylesConnector(String urlServer, JacksonSupport theJacksonSupport, String version) {
         super(urlServer, theJacksonSupport, version);
     }
 
@@ -68,7 +68,7 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
      * @param theJacksonSupport
      * @param version
      */
-    public GPGeoserverStylesConnector(String urlServer, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, String version) {
+    protected GPGeoserverStylesConnector(String urlServer, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, String version) {
         super(urlServer, securityConnector, theJacksonSupport, version);
     }
 
@@ -79,7 +79,7 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
      * @param theJacksonSupport
      * @param version
      */
-    public GPGeoserverStylesConnector(String urlServer, GPPooledConnectorConfig pooledConnectorConfig, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, String version) {
+    protected GPGeoserverStylesConnector(String urlServer, GPPooledConnectorConfig pooledConnectorConfig, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, String version) {
         super(urlServer, pooledConnectorConfig, securityConnector, theJacksonSupport, version);
     }
 
@@ -89,7 +89,7 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
      * @param theJacksonSupport
      * @param theVersion
      */
-    public GPGeoserverStylesConnector(URL server, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, GeoserverVersion theVersion) {
+    protected GPGeoserverStylesConnector(URL server, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, GeoserverVersion theVersion) {
         super(server, securityConnector, theJacksonSupport, theVersion);
     }
 
@@ -100,7 +100,7 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
      * @param theJacksonSupport
      * @param theVersion
      */
-    public GPGeoserverStylesConnector(URL server, GPPooledConnectorConfig pooledConnectorConfig, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, GeoserverVersion theVersion) {
+    protected GPGeoserverStylesConnector(URL server, GPPooledConnectorConfig pooledConnectorConfig, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, GeoserverVersion theVersion) {
         super(server, pooledConnectorConfig, securityConnector, theJacksonSupport, theVersion);
     }
 

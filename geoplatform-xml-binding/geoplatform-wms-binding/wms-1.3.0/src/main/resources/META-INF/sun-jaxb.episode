@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<bindings xmlns="http://java.sun.com/xml/ns/jaxb" if-exists="true" version="2.1">
+  <!--
+
+Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.11 
+Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
+Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
+Generato il: 2019.01.25 alle 09:55:42 AM CET 
+
+  -->
+  <bindings xmlns:tns="http://www.opengis.net/wms" if-exists="true" scd="x-schema::tns">
+    <schemaBindings map="false">
+      <package name="org.geosdi.geoplatform.wms.v130"/>
+    </schemaBindings>
+    <bindings if-exists="true" scd="tns:WMS_Capabilities">
+      <class ref="org.geosdi.geoplatform.wms.v130.WMSCapabilities"/>
+    </bindings>
+    <bindings if-exists="true" scd="tns:Service">
+      <class ref="org.geosdi.geoplatform.wms.v130.Service"/>
+    </bindings>
+    <bindings if-exists="true" scd="tns:KeywordList">
+      <class ref="org.geosdi.geoplatform.wms.v130.KeywordList"/>
+    </bindings>
+    <bindings if-exists="true" scd="tns:Keyword">
+      <class ref="org.geosdi.geoplatform.wms.v130.Keyword"/>
+    </bindings>
+    <bindings if-exists="true" scd="tns:OnlineResource">
+      <class ref="org.geosdi.geoplatform.wms.v130.OnlineResource"/>
+    </bindings>
+    <bindings if-exists="true" scd="tns:ContactInformation">
+      <class ref="org.geosdi.geoplatform.wms.v130.ContactInformation"/>
+    </bindings>
+    <bindings if-exists="true" scd="tns:ContactPersonPrimary">
+      <class ref="org.geosdi.geoplatform.wms.v130.ContactPersonPrimary"/>
+    </bindings>
+    <bindings if-exists="true" scd="tns:ContactAddress">
+      <class ref="org.geosdi.geoplatform.wms.v130.ContactAddress"/>
+    </bindings>
+    <bindings if-exists="true" scd="tns:Capability">
+      <class ref="org.geosdi.geoplatform.wms.v130.Capability"/>
+    </bindings>
+    <bindings if-exists="true" scd="tns:Request">
+      <class ref="org.geosdi.geoplatform.wms.v130.Request"/>
+    </bindings>
+    <bindings if-exists="true" scd="~tns:OperationType">
+      <class ref="org.geosdi.geoplatform.wms.v130.OperationType"/>
+    </bindings>
+    <bindings if-exists="true" scd="tns:Exception">
+      <class ref="org.geosdi.geoplatform.wms.v130.Exception"/>
+    </bindings>
+    <bindings if-exists="true" scd="tns:Layer">
+      <class ref="org.geosdi.geoplatform.wms.v130.Layer"/>
+    </bindings>
+    <bindings if-exists="true" scd="tns:EX_GeographicBoundingBox">
+      <class ref="org.geosdi.geoplatform.wms.v130.EXGeographicBoundingBox"/>
+    </bindings>
+    <bindings if-exists="true" scd="tns:BoundingBox">
+      <class ref="org.geosdi.geoplatform.wms.v130.BoundingBox"/>
+    </bindings>
+    <bindings if-exists="true" scd="tns:Dimension">
+      <class ref="org.geosdi.geoplatform.wms.v130.Dimension"/>
+    </bindings>
+    <bindings if-exists="true" scd="tns:Attribution">
+      <class ref="org.geosdi.geoplatform.wms.v130.Attribution"/>
+    </bindings>
+    <bindings if-exists="true" scd="tns:LogoURL">
+      <class ref="org.geosdi.geoplatform.wms.v130.LogoURL"/>
+    </bindings>
+    <bindings if-exists="true" scd="tns:AuthorityURL">
+      <class ref="org.geosdi.geoplatform.wms.v130.AuthorityURL"/>
+    </bindings>
+    <bindings if-exists="true" scd="tns:Identifier">
+      <class ref="org.geosdi.geoplatform.wms.v130.Identifier"/>
+    </bindings>
+    <bindings if-exists="true" scd="tns:MetadataURL">
+      <class ref="org.geosdi.geoplatform.wms.v130.MetadataURL"/>
+    </bindings>
+    <bindings if-exists="true" scd="tns:DataURL">
+      <class ref="org.geosdi.geoplatform.wms.v130.DataURL"/>
+    </bindings>
+    <bindings if-exists="true" scd="tns:FeatureListURL">
+      <class ref="org.geosdi.geoplatform.wms.v130.FeatureListURL"/>
+    </bindings>
+    <bindings if-exists="true" scd="tns:Style">
+      <class ref="org.geosdi.geoplatform.wms.v130.Style"/>
+    </bindings>
+    <bindings if-exists="true" scd="tns:LegendURL">
+      <class ref="org.geosdi.geoplatform.wms.v130.LegendURL"/>
+    </bindings>
+    <bindings if-exists="true" scd="tns:StyleSheetURL">
+      <class ref="org.geosdi.geoplatform.wms.v130.StyleSheetURL"/>
+    </bindings>
+    <bindings if-exists="true" scd="tns:StyleURL">
+      <class ref="org.geosdi.geoplatform.wms.v130.StyleURL"/>
+    </bindings>
+    <bindings if-exists="true" scd="tns:DCPType">
+      <class ref="org.geosdi.geoplatform.wms.v130.DCPType"/>
+    </bindings>
+    <bindings if-exists="true" scd="tns:HTTP">
+      <class ref="org.geosdi.geoplatform.wms.v130.HTTP"/>
+    </bindings>
+    <bindings if-exists="true" scd="tns:Get">
+      <class ref="org.geosdi.geoplatform.wms.v130.Get"/>
+    </bindings>
+    <bindings if-exists="true" scd="tns:Post">
+      <class ref="org.geosdi.geoplatform.wms.v130.Post"/>
+    </bindings>
+  </bindings>
+</bindings>

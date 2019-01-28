@@ -5,8 +5,6 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.GPGeoserverFeatureTypesStoreInfo;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.store.GPGeoserverCoverageStoreInfo;
 
-import java.io.Serializable;
-
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -18,17 +16,7 @@ import java.io.Serializable;
 @JsonSubTypes({
         @JsonSubTypes.Type(value = GPGeoserverFeatureTypesStoreInfo.class, name = "dataStore"),
         @JsonSubTypes.Type(value = GPGeoserverCoverageStoreInfo.class, name = "coverageStore")})
-public interface GPGeoserverStoreInfo extends Serializable {
-
-    /**
-     * @return {@link String}
-     */
-    String getName();
-
-    /**
-     * @return {@link String}
-     */
-    String getHref();
+public interface GPGeoserverStoreInfo extends IGPGeoserverStore {
 
     /**
      * @return {@link GeoserverStoreInfoType}

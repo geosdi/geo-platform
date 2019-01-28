@@ -39,6 +39,7 @@ import org.apache.cxf.interceptor.LoggingInInterceptor;
 import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
 import org.apache.cxf.message.Message;
+import org.apache.cxf.rs.security.cors.CrossOriginResourceSharingFilter;
 import org.geosdi.geoplatform.configurator.bootstrap.cxf.Rest;
 import org.geosdi.geoplatform.services.GPWMSService;
 import org.geosdi.geoplatform.support.cxf.rs.provider.configurator.GPRestProviderType;
@@ -51,6 +52,8 @@ import org.springframework.context.annotation.Configuration;
 import javax.ws.rs.core.Application;
 import javax.ws.rs.ext.RuntimeDelegate;
 import java.util.Arrays;
+
+import static java.util.Arrays.asList;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -72,13 +75,14 @@ class GPWMSServiceJsonConfig {
     public static JAXRSServerFactoryBean gpWMSServiceJson(@Qualifier(value = "wmsService") GPWMSService wmsService,
             @Qualifier(value = "gpJsonWMSApplication") Application gpJsonWMSApplication,
             @Value("configurator{cxf_rest_provider_type}") GPRestProviderType providerType,
+            @Qualifier(value = "wmsCrossResourceSharingFilter") CrossOriginResourceSharingFilter wmsCrossResourceSharingFilter,
             @Qualifier(value = "serverLoggingInInterceptorBean") LoggingInInterceptor serverLogInInterceptor,
             @Qualifier(value = "serverLoggingOutInterceptorBean") LoggingOutInterceptor serverLogOutInterceptor) {
         JAXRSServerFactoryBean factory = RuntimeDelegate.getInstance().createEndpoint(
                 gpJsonWMSApplication, JAXRSServerFactoryBean.class);
         factory.setServiceBean(wmsService);
         factory.setAddress(factory.getAddress());
-        factory.setProvider(GPRestProviderFactory.createProvider(providerType));
+        factory.setProviders(asList(GPRestProviderFactory.createProvider(providerType), wmsCrossResourceSharingFilter));
         factory.setInInterceptors(Arrays.<Interceptor<? extends Message>>asList(serverLogInInterceptor));
         factory.setOutInterceptors(Arrays.<Interceptor<? extends Message>>asList(serverLogOutInterceptor));
         return factory;

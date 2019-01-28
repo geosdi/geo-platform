@@ -32,65 +32,30 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.wms;
+package org.geosdi.geoplatform.services.rs.config.application;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.geosdi.geoplatform.configurator.bootstrap.cxf.Rest;
+import org.geosdi.geoplatform.services.rs.path.GPWFSServiceRSPathConfig;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.regex.Pattern;
-
-import static java.util.stream.Collectors.toList;
-import static java.util.stream.Collectors.toMap;
+import javax.ws.rs.ApplicationPath;
+import javax.ws.rs.core.Application;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class SimpleHeadersTest {
+@Rest
+@Configuration
+class GPJsonWFSApplicationConfig {
 
-    private static final Logger logger = LoggerFactory.getLogger(SimpleHeadersTest.class);
-    //
-    private static String value;
-
-    @BeforeClass
-    public static void beforeClaas() throws Exception {
-        value = "key1:value1;key2:value2;key3:value3";
+    @Bean
+    public GPJsonWFSApplication gpJsonWFSApplication() {
+        return new GPJsonWFSApplication();
     }
 
-    @Test
-    public void spitTest() throws Exception {
-        Map<String, String> headers = Pattern.compile(";").splitAsStream(value)
-                .map(v -> v.split(":"))
-                .collect(toMap(parts -> parts[0], parts -> parts[1], (v1, v2) -> v1, LinkedHashMap::new));
-        logger.info("######################HEADERS : {}\n", headers);
-        List<String> values = headers.entrySet().stream()
-                .map(entry -> String.join("=", entry.getKey(), entry.getValue()))
-                .collect(toList());
-        logger.info("######################ALL_STRING : {}\n", String.join(";", values));
-    }
-
-    @Test
-    public void simpleTest() throws Exception {
-        Map<String, String> map = new HashMap<>();
-        map.put("key", "value");
-        map.put("ke1", "value1");
-        map.put("key2", "value2");
-        logger.info("{}\n", map);
-    }
-
-    @Test
-    public void convertStringToMapTest() throws Exception {
-        String value = "{key2=value2, ke1=value1, key=value}";
-        value = value.replace("{", "").replace("}", "");
-        Map<String, String> map = Pattern.compile(",").splitAsStream(value)
-                .map(v -> v.split("="))
-                .collect(toMap(parts -> parts[0], parts -> parts[1], (v1, v2) -> v1, LinkedHashMap::new));
-        logger.info("{}\n", map);
+    @ApplicationPath(value = GPWFSServiceRSPathConfig.WFS_SERVICE_RS_PATH)
+    final class GPJsonWFSApplication extends Application {
     }
 }

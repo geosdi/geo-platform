@@ -25,6 +25,26 @@
             <groupId>javax.jws</groupId>
             <artifactId>javax.jws-api</artifactId>
         </dependency>
+
+        <!-- CXF -->
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxrs</artifactId>
+        </dependency>
+
+        <!-- =========================================================== -->
+        <!-- ======================= JAX-RS: CORS =====================  -->
+        <!-- =========================================================== -->
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-rs-security-cors</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
         
         <dependency>
             <groupId>org.geosdi</groupId>
@@ -71,6 +91,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
+            <scope>test</scope>
         </dependency>
 
         <!-- CXF -->

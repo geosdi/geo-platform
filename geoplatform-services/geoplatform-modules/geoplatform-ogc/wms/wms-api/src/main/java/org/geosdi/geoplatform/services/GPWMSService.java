@@ -35,6 +35,7 @@
 package org.geosdi.geoplatform.services;
 
 import org.apache.cxf.annotations.FastInfoset;
+import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
 import org.codehaus.jra.Get;
 import org.codehaus.jra.HttpResource;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
@@ -58,6 +59,20 @@ import java.util.List;
  * @author Francesco Izzi - CNR IMAA geoSDI Group
  * @email francesco.izzi@geosdi.org
  */
+@CrossOriginResourceSharing(
+        allowAllOrigins = true,
+        allowOrigins = {
+                "*"
+        },
+        allowCredentials = true,
+        maxAge = 1,
+        allowHeaders = {
+                "X-custom-1", "X-custom-2"
+        },
+        exposeHeaders = {
+                "X-custom-3", "X-custom-4"
+        }
+)
 @Path(value = GPServiceRSPathConfig.DEFAULT_RS_SERVICE_PATH)
 @Consumes(value = {MediaType.APPLICATION_JSON})
 @Produces(value = {MediaType.APPLICATION_JSON})

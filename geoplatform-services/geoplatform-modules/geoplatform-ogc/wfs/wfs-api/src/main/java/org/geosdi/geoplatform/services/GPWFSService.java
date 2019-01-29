@@ -152,8 +152,8 @@ public interface GPWFSService {
     @Get
     FeatureCollectionDTO getAllFeatureDirect(@QueryParam(value = "serverURL") @WebParam(name = "serverURL") String serverURL,
             @QueryParam(value = "typeName") @WebParam(name = "typeName") String typeName,
-            @DefaultValue(value = "30") @QueryParam(value = "maxFeatures") @WebParam(name = "maxFeatures") int maxFeatures,
-            @WebParam(name = "headerParams") Map<String, String> headerParams)
+            @QueryParam(value = "maxFeatures") @DefaultValue(value = "30") @WebParam(name = "maxFeatures") int maxFeatures,
+            @QueryParam(value = "headerParams") @WebParam(name = "headerParams") Map<String, String> headerParams)
             throws Exception;
 
     /**

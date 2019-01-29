@@ -221,7 +221,6 @@ public class GPWFSServiceImpl implements GPWFSService {
             return gpGetFeatureService.getFeature(layerSchema, maxFeatures, headerParams);
         } catch (Exception ex) {
             logger.error("##################GetAllFeatures Request error - " + "Cause : " + ex.getMessage());
-
             throw new SoapFault(ex.getMessage(), SoapFault.FAULT_CODE_SERVER);
         }
     }

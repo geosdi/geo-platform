@@ -146,11 +146,11 @@ public class GPGetFeatureService extends AbstractFeatureService implements GetFe
 
         String serverURL = layerSchema.getScope();
         assert (serverURL != null);
-        serverURL = serverURL.replace("wms", "wfs");
-        if (!this.wfsConfigurator.matchDefaultDataSource(serverURL)) {
-            throw new IllegalStateException(
-                    "Edit Mode cannot be applied to the server with url " + wfsConfigurator.getDefaultWFSDataSource());
-        }
+        serverURL = serverURL.replace("ows", "wfs").replace("wms", "wfs");
+//        if (!this.wfsConfigurator.matchDefaultDataSource(serverURL)) {
+//            throw new IllegalStateException(
+//                    "Edit Mode cannot be applied to the server with url " + wfsConfigurator.getDefaultWFSDataSource());
+//        }
 
         GPWFSConnectorStore serverConnector = ((headerParams != null) && (headerParams.size() > 0)) ?
                 super.createWFSConnector(serverURL, headerParams) : super.createWFSConnector(serverURL);

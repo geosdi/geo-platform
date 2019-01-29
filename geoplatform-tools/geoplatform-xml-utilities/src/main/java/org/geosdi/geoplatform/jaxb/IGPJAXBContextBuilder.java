@@ -65,44 +65,44 @@ public interface IGPJAXBContextBuilder {
     <T> T unmarshall(Path path, Class<T> type) throws Exception;
 
     /**
-     * @param xml
+     * @param file
      * @param type
      * @param <T>
      * @return {@link T}
      */
-    <T> T unmarshal(File xml, Class<T> type);
+    <T> T unmarshal(File file, Class<T> type);
 
     /**
-     * @param xml
+     * @param url
      * @param type
      * @param <T>
      * @return {@link T}
      */
-    <T> T unmarshal(URL xml, Class<T> type);
+    <T> T unmarshal(URL url, Class<T> type);
 
     /**
-     * @param xml
+     * @param uri
      * @param type
      * @param <T>
      * @return {@link T}
      */
-    <T> T unmarshal(URI xml, Class<T> type);
+    <T> T unmarshal(URI uri, Class<T> type);
 
     /**
-     * @param xml
+     * @param source
      * @param type
      * @param <T>
      * @return {@link T}
      */
-    <T> T unmarshal(Source xml, Class<T> type);
+    <T> T unmarshal(Source source, Class<T> type);
 
     /**
-     * @param xml
+     * @param xmlStreamReader
      * @param type
      * @param <T>
      * @return {@link T}
      */
-    <T> T unmarshal(XMLStreamReader xml, Class<T> type);
+    <T> T unmarshal(XMLStreamReader xmlStreamReader, Class<T> type);
 
     /**
      * @param reader
@@ -113,28 +113,28 @@ public interface IGPJAXBContextBuilder {
     <T> T unmarshal(Reader reader, Class<T> type);
 
     /**
-     * @param xml
+     * @param xmlEventReader
      * @param type
      * @param <T>
      * @return {@link T}
      */
-    <T> T unmarshal(XMLEventReader xml, Class<T> type);
+    <T> T unmarshal(XMLEventReader xmlEventReader, Class<T> type);
 
     /**
-     * @param xml
+     * @param node
      * @param type
      * @param <T>
      * @return {@link T}
      */
-    <T> T unmarshal(Node xml, Class<T> type);
+    <T> T unmarshal(Node node, Class<T> type);
 
     /**
-     * @param xml
+     * @param inputStream
      * @param type
      * @param <T>
      * @return {@link T}
      */
-    <T> T unmarshal(InputStream xml, Class<T> type);
+    <T> T unmarshal(InputStream inputStream, Class<T> type);
 
     /**
      * @param jaxbObject

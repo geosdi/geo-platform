@@ -147,9 +147,12 @@ public interface GPWFSService {
      * @return {@link FeatureCollectionDTO}
      * @throws Exception
      */
+    @GET
+    @Path(value = GPWFSServiceRSPathConfig.GET_ALL_FEATURE_DIRECET_RS_PATH)
     @Get
-    FeatureCollectionDTO getAllFeatureDirect(@WebParam(name = "serverURL") String serverURL,
-            @WebParam(name = "typeName") String typeName, @WebParam(name = "maxFeatures") int maxFeatures,
+    FeatureCollectionDTO getAllFeatureDirect(@QueryParam(value = "serverURL") @WebParam(name = "serverURL") String serverURL,
+            @QueryParam(value = "typeName") @WebParam(name = "typeName") String typeName,
+            @DefaultValue(value = "30") @QueryParam(value = "maxFeatures") @WebParam(name = "maxFeatures") int maxFeatures,
             @WebParam(name = "headerParams") Map<String, String> headerParams)
             throws Exception;
 

@@ -14,4 +14,7 @@
         <appender-ref ref="STDOUT"/>
     </root>
 
+    <logger name="org.geosdi.geoplatform.connector.wms.WMSV111UnmarshallTest" level="debug"/>
+    <logger name="org.geosdi.geoplatform.connector.wms.WMSV130UnmarshallTest" level="debug"/>
+
 </configuration>

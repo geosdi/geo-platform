@@ -44,6 +44,7 @@ import javax.jws.WebParam;
 import javax.jws.WebService;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
 import java.util.Map;
 
@@ -147,14 +148,25 @@ public interface GPWFSService {
      * @return {@link FeatureCollectionDTO}
      * @throws Exception
      */
-    @GET
-    @Path(value = GPWFSServiceRSPathConfig.GET_ALL_FEATURE_DIRECET_RS_PATH)
     @Get
-    FeatureCollectionDTO getAllFeatureDirect(@QueryParam(value = "serverURL") @WebParam(name = "serverURL") String serverURL,
-            @QueryParam(value = "typeName") @WebParam(name = "typeName") String typeName,
-            @QueryParam(value = "maxFeatures") @DefaultValue(value = "30") @WebParam(name = "maxFeatures") int maxFeatures,
-            @QueryParam(value = "headerParams") @WebParam(name = "headerParams") Map<String, String> headerParams)
-            throws Exception;
+    FeatureCollectionDTO getAllFeatureDirect(@WebParam(name = "serverURL") String serverURL,
+            @WebParam(name = "typeName") String typeName, @WebParam(name = "maxFeatures") int maxFeatures,
+            @WebParam(name = "headerParams") Map<String, String> headerParams) throws Exception;
+
+    /**
+     * @param serverURL
+     * @param typeName
+     * @param maxFeatures
+     * @param headerParams
+     * @return {@link Response}
+     * @throws Exception
+     */
+    @GET
+    @Path(value = GPWFSServiceRSPathConfig.GET_GEOJSON_FEATURES_RS_PATH)
+    Response getGeoJsonFeatures(@QueryParam(value = "serverURL") String serverURL,
+            @QueryParam(value = "typeName") String typeName,
+            @QueryParam(value = "maxFeatures") @DefaultValue(value = "30") int maxFeatures,
+            @QueryParam(value = "headerParams") Map<String, String> headerParams) throws Exception;
 
     /**
      * @param serverURL

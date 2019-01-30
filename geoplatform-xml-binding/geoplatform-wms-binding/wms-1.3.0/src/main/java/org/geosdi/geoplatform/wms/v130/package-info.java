@@ -5,5 +5,10 @@
 // Generato il: 2019.01.25 alle 11:53:13 AM CET 
 //
 
-@javax.xml.bind.annotation.XmlSchema(namespace = "http://www.opengis.net/wms", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
+@javax.xml.bind.annotation.XmlSchema(namespace = "http://www.opengis.net/wms",
+        elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED,
+        xmlns = {@XmlNs(prefix = "wms",
+                namespaceURI = "http://www.opengis.net/wms")})
 package org.geosdi.geoplatform.wms.v130;
+
+import javax.xml.bind.annotation.XmlNs;

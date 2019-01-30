@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE WMS_DescribeLayerResponse SYSTEM
+        "http://rsdi.regione.basilicata.it:80/rbgeoserver2016/schemas/wms/1.1.1/WMS_DescribeLayerResponse.dtd">
+<WMS_DescribeLayerResponse version="1.1.1">
+    <LayerDescription name="suolo:carta_granulometrica_2_550"
+                      wfs="http://rsdi.regione.basilicata.it:80/rbgeoserver2016/wfs?"
+                      owsURL="http://rsdi.regione.basilicata.it:80/rbgeoserver2016/wfs?" owsType="WFS">
+        <Query typeName="suolo:carta_granulometrica_2_550"/>
+    </LayerDescription>
+</WMS_DescribeLayerResponse>

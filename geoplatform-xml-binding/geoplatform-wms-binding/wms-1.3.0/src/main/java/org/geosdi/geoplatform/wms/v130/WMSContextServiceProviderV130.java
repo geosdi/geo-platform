@@ -16,7 +16,7 @@ public class WMSContextServiceProviderV130 extends GPContextServiceProvider {
 
     protected WMSContextServiceProviderV130() {
         super(join(":", "org.geosdi.geoplatform.xml.xlink.v100",
-                "org.geosdi.geoplatform.wms.130"), of(org.geosdi.geoplatform.xml.xlink.v100.ObjectFactory.class,
+                "org.geosdi.geoplatform.wms.v130"), of(org.geosdi.geoplatform.xml.xlink.v100.ObjectFactory.class,
                 ObjectFactory.class).toArray(size -> new Class[size]));
     }
 

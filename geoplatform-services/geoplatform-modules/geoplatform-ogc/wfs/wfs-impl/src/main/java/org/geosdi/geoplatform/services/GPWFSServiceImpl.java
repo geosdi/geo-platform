@@ -45,6 +45,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.jws.WebService;
+import javax.ws.rs.core.Response;
 import java.util.List;
 import java.util.Map;
 
@@ -169,6 +170,20 @@ public class GPWFSServiceImpl implements GPWFSService {
             Map<String, String> headerParams) throws Exception {
         LayerSchemaDTO layerSchema = this.describeFeatureType(serverURL, typeName, headerParams);
         return this.getAllFeature(layerSchema, maxFeatures, headerParams);
+    }
+
+    /**
+     * @param serverURL
+     * @param typeName
+     * @param maxFeatures
+     * @param headerParams
+     * @return {@link Response}
+     * @throws Exception
+     */
+    @Override
+    public Response getGeoJsonFeatures(String serverURL, String typeName, int maxFeatures, Map<String, String> headerParams)
+            throws Exception {
+        return Response.ok(this.gpGetFeatureService.getFeature(serverURL, typeName, maxFeatures, headerParams)).build();
     }
 
     /**

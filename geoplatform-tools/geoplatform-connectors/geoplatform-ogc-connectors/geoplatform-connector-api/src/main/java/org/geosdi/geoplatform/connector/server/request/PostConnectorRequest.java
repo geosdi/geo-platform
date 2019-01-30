@@ -65,7 +65,7 @@ abstract class PostConnectorRequest<T> extends GPAbstractConnectorRequest<T> imp
 
     @Override
     public String getResponseAsString() throws Exception {
-        HttpPost httpPost = this.getPostMethod();
+        HttpPost httpPost = this.preparePostMethod();
         CloseableHttpResponse httpResponse = super.securityConnector.secure(this, httpPost);
         super.checkHttpResponseStatus(httpResponse.getStatusLine().getStatusCode());
         HttpEntity responseEntity = httpResponse.getEntity();
@@ -84,7 +84,7 @@ abstract class PostConnectorRequest<T> extends GPAbstractConnectorRequest<T> imp
 
     @Override
     public InputStream getResponseAsStream() throws Exception {
-        HttpPost httpPost = this.getPostMethod();
+        HttpPost httpPost = this.preparePostMethod();
         CloseableHttpResponse httpResponse = super.securityConnector.secure(this, httpPost);
         super.checkHttpResponseStatus(httpResponse.getStatusLine().getStatusCode());
         HttpEntity responseEntity = httpResponse.getEntity();
@@ -105,7 +105,7 @@ abstract class PostConnectorRequest<T> extends GPAbstractConnectorRequest<T> imp
      * @return {@link HttpPost}
      * @throws Exception
      */
-    protected HttpPost getPostMethod() throws Exception {
+    protected HttpPost preparePostMethod() throws Exception {
         HttpPost postMethod = new HttpPost(super.serverURI);
         postMethod.setConfig(super.prepareRequestConfig());
         HttpEntity httpEntity = this.preparePostEntity();

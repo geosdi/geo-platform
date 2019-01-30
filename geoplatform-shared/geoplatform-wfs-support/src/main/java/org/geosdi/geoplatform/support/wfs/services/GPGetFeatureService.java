@@ -34,6 +34,7 @@
  */
 package org.geosdi.geoplatform.support.wfs.services;
 
+import org.geojson.FeatureCollection;
 import org.geosdi.geoplatform.connector.GPWFSConnectorStore;
 import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequest;
 import org.geosdi.geoplatform.connector.wfs.response.FeatureCollectionDTO;
@@ -41,6 +42,8 @@ import org.geosdi.geoplatform.connector.wfs.response.FeatureDTO;
 import org.geosdi.geoplatform.connector.wfs.response.LayerSchemaDTO;
 import org.geosdi.geoplatform.connector.wfs.response.QueryDTO;
 import org.geosdi.geoplatform.gui.shared.bean.BBox;
+import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
+import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import org.geosdi.geoplatform.support.wfs.feature.reader.WFSGetFeatureStaxReader;
 import org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType;
 
@@ -53,12 +56,20 @@ import java.util.List;
 import java.util.Map;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
+import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class GPGetFeatureService extends AbstractFeatureService implements GetFeaureService {
+
+    private static final JacksonSupport JACKSON_SUPPORT = new GPJacksonSupport(UNWRAP_ROOT_VALUE_DISABLE,
+            FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
+            ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
+            WRAP_ROOT_VALUE_DISABLE,
+            INDENT_OUTPUT_ENABLE, NON_NULL);
 
     /**
      * @param layerSchema
@@ -111,6 +122,34 @@ public class GPGetFeatureService extends AbstractFeatureService implements GetFe
     }
 
     /**
+     * @param serverURL
+     * @param typeName
+     * @param maxFeatures
+     * @param headerParams
+     * @return {@link FeatureCollection}
+     * @throws Exception
+     */
+    @Override
+    public FeatureCollection getFeature(String serverURL, String typeName, int maxFeatures, Map<String, String> headerParams)
+            throws Exception {
+        maxFeatures = (maxFeatures > 0) ? maxFeatures : 100;
+        if ((serverURL == null) || (serverURL.trim().isEmpty())) {
+            throw new IllegalArgumentException("The Parameter serverURL must not be null or an empty string.");
+        }
+        serverURL = serverURL.replace("ows", "wfs").replace("wms", "wfs");
+        GPWFSConnectorStore serverConnector = ((headerParams != null) && (headerParams.size() > 0)) ?
+                super.createWFSConnector(serverURL, headerParams) : super.createWFSConnector(serverURL);
+        WFSGetFeatureRequest request = serverConnector.createGetFeatureRequest();
+        request.setMaxFeatures(BigInteger.valueOf(maxFeatures));
+        QName qName = new QName(typeName);
+        request.setTypeName(qName);
+        request.setSRS("EPSG:4326");
+        request.setOutputFormat("json");
+        request.setResultType(ResultTypeType.RESULTS.value());
+        return JACKSON_SUPPORT.getDefaultMapper().readValue(request.getResponseAsStream(), FeatureCollection.class);
+    }
+
+    /**
      * @param layerSchema
      * @param maxFeatures
      * @param queryDTO
@@ -145,7 +184,9 @@ public class GPGetFeatureService extends AbstractFeatureService implements GetFe
         }
 
         String serverURL = layerSchema.getScope();
-        assert (serverURL != null);
+        if ((serverURL == null) || (serverURL.trim().isEmpty())) {
+            throw new IllegalArgumentException("The Parameter serverURL must not be null or an empty string.");
+        }
         serverURL = serverURL.replace("ows", "wfs").replace("wms", "wfs");
 //        if (!this.wfsConfigurator.matchDefaultDataSource(serverURL)) {
 //            throw new IllegalStateException(
@@ -169,19 +210,17 @@ public class GPGetFeatureService extends AbstractFeatureService implements GetFe
      * @throws Exception
      */
     private FeatureCollectionDTO getFeatureCollection(WFSGetFeatureRequest request, LayerSchemaDTO layerSchema) throws Exception {
-        FeatureCollectionDTO featureCollection = null;
         try {
             InputStream is = request.getResponseAsStream();
             if (is == null) { // TODO check if the is can be null
                 logger.error("\n### The layer \"{}\" isn't a feature ###", layerSchema.getTypeName());
             }
             final WFSGetFeatureStaxReader featureReaderStAX = new WFSGetFeatureStaxReader(layerSchema);
-            featureCollection = featureReaderStAX.read(is);
+            return featureReaderStAX.read(is);
         } catch (IOException ex) {
             ex.printStackTrace();
             throw new IllegalStateException(
                     "Error to execute the WFS GetFeature for the layer " + layerSchema.getTypeName());
         }
-        return featureCollection;
     }
 }

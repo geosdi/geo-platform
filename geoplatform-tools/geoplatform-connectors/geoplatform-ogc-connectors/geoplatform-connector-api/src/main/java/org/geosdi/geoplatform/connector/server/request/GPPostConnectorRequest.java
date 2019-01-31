@@ -34,20 +34,7 @@
  */
 package org.geosdi.geoplatform.connector.server.request;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpPost;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.connector.server.exception.IncorrectResponseException;
-
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-
-import static org.apache.http.util.EntityUtils.consume;
 
 /**
  * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
@@ -60,38 +47,6 @@ public abstract class GPPostConnectorRequest<T, Request> extends PostConnectorRe
      */
     protected GPPostConnectorRequest(GPServerConnector server) {
         super(server);
-    }
-
-    @Override
-    public T getResponse() throws Exception {
-        HttpPost httpPost = super.preparePostMethod();
-        CloseableHttpResponse httpResponse = super.securityConnector.secure(this, httpPost);
-        super.checkHttpResponseStatus(httpResponse.getStatusLine().getStatusCode());
-        HttpEntity responseEntity = httpResponse.getEntity();
-        try {
-            if (responseEntity != null) {
-                InputStream is = responseEntity.getContent();
-                Unmarshaller unmarshaller = getUnmarshaller();
-                Object content;
-                try (BufferedReader reader = new BufferedReader(new InputStreamReader(is, UTF_8_CHARSERT))) {
-                    content = unmarshaller.unmarshal(reader);
-                } catch (JAXBException ex) {
-                    ex.printStackTrace();
-                    logger.error("######################JAXBException : {}", ex);
-                    throw new IllegalStateException(ex);
-                }
-                if ((content == null)) { // ExceptionReport
-                    logger.error("#############CONTENT : {} #############\n", content);
-                    throw new IncorrectResponseException();
-                }
-                return ((content instanceof JAXBElement) ? ((JAXBElement<T>) content).getValue() : (T) content);
-            } else {
-                throw new IncorrectResponseException(CONNECTION_PROBLEM_MESSAGE);
-            }
-        } finally {
-            consume(responseEntity);
-            httpResponse.close();
-        }
     }
 
     /**

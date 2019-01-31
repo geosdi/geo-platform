@@ -37,11 +37,11 @@ package org.geosdi.geoplatform.connector.jaxb.repository;
 import org.geosdi.geoplatform.jaxb.GPBaseJAXBContext;
 import org.geosdi.geoplatform.jaxb.provider.GeoPlatformJAXBContextProvider;
 import org.geosdi.geoplatform.jaxb.repository.GeoPlatformJAXBContextRepository;
-import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nonnull;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.String.format;
 import static javax.annotation.meta.When.NEVER;
 
 /**
@@ -58,32 +58,36 @@ public class ConnectorJAXBContextRepository extends GeoPlatformJAXBContextReposi
     @Override
     public <P extends GPBaseJAXBContext> P lookUpJAXBContext(@Nonnull(when = NEVER) GeoPlatformJAXBContextKey key) {
         checkArgument(key != null, "The Parameter key must not be null.");
-        logger.debug("\n\n##############################CALLED lookUpJAXBContext with Key : {}\n", key);
-        Object jaxbContext = null;
+        logger.debug("##############################CALLED lookUpJAXBContext with Key : {}\n", key);
         try {
             Class<?> classe = key.getJAXBContextClass();
-            jaxbContext = classe.newInstance();
-
+            Object jaxbContext = classe.newInstance();
             if (!(jaxbContext instanceof GeoPlatformJAXBContextProvider)) {
-                throw new IllegalArgumentException("The class " + jaxbContext.getClass().getName()
+                throw new IllegalArgumentException("The class : " + jaxbContext.getClass().getName()
                         + " is not an instance of GeoPlatformJAXBContextProvider");
             }
             super.registerProvider(key, ((GeoPlatformJAXBContextProvider) jaxbContext).getJAXBProvider());
-        } catch (InstantiationException | IllegalAccessException ex) {
-            LoggerFactory.getLogger(GeoPlatformJAXBContextRepository.class).error(
-                    String.format("Failed to Initialize JAXBContext for Class %s: @@@@@@@@@@@@@@@@@ %s", ConnectorJAXBContextRepository.class.getName(), ex));
+            return (((GeoPlatformJAXBContextProvider) jaxbContext).getJAXBProvider());
+        } catch (Exception ex) {
+            logger.error(format("Failed to Initialize JAXBContext for Class %s: @@@@@@@@@@@@@@@@@ %s",
+                    ConnectorJAXBContextRepository.class.getName(), ex));
+            throw new IllegalStateException(ex);
         }
-        return (((GeoPlatformJAXBContextProvider) jaxbContext).getJAXBProvider());
     }
 
+    /**
+     * @return {@link String}
+     */
     @Override
     public String getRepositoryName() {
         return getClass().getName();
     }
 
+    /**
+     * @return {@link String}
+     */
     @Override
     public String toString() {
         return getRepositoryName();
     }
-
 }

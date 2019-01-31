@@ -125,6 +125,5 @@ public abstract class GeoPlatformJAXBContextRepository implements JAXBContextRep
             return getClass().getName()
                     + " : privatekey = " + super.intKey();
         }
-
     }
 }

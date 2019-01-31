@@ -63,9 +63,9 @@ public abstract class GPJsonPostConnectorRequest<T> extends GPBaseJsonConnectorR
      */
     @Override
     protected HttpPost prepareHttpMethod() throws Exception {
-        String uriPath = super.checkUriPath();
+        String uriPath = this.checkUriPath();
         HttpPost httpPost = new HttpPost(uriPath);
-        httpPost.setConfig(super.prepareRequestConfig());
+        httpPost.setConfig(this.prepareRequestConfig());
         HttpEntity httpEntity = this.prepareHttpEntity();
         if (httpEntity != null)
             httpPost.setEntity(httpEntity);

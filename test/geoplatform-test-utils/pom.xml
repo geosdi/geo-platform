@@ -14,15 +14,6 @@
     <packaging>pom</packaging>
 
     <name>Geo-Platform :: == Utils Tests Module</name>
-
-    <repositories>
-		<!-- geoSDI -->
-        <repository>
-            <id>geosdi</id>
-            <name>geoSDI Repository</name>
-            <url>http://repo.geosdi.org</url>
-        </repository>
-    </repositories>
     
     <modules>
         <module>geoplatform-oxm-model-test</module>

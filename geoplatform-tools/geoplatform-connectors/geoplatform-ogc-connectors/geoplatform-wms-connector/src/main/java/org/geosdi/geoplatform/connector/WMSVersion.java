@@ -4,6 +4,7 @@ import org.geosdi.geoplatform.connector.server.GPServerConnector;
 
 import java.util.Optional;
 
+import static java.lang.Boolean.FALSE;
 import static java.util.Arrays.stream;
 
 /**
@@ -41,7 +42,7 @@ public enum WMSVersion implements GPServerConnector.GPServerConnectorVersion {
     public static WMSVersion forValue(String version) {
         Optional<WMSVersion> optional = stream(WMSVersion.values())
                 .filter(v -> ((version != null) && !(version.trim().isEmpty()))
-                        ? v.getVersion().equalsIgnoreCase(version) : Boolean.FALSE)
+                        ? v.getVersion().equalsIgnoreCase(version) : FALSE)
                 .findFirst();
         return ((optional != null) && !(optional.equals(Optional.empty()))) ? optional.get() : WMSVersion.V111;
     }

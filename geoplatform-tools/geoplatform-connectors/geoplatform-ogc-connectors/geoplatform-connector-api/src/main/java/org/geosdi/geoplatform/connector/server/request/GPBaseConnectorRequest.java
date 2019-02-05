@@ -18,6 +18,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import static com.google.common.base.Charsets.UTF_8;
+import static com.google.common.base.Preconditions.checkArgument;
 import static javax.annotation.meta.When.NEVER;
 import static org.apache.http.util.EntityUtils.consume;
 
@@ -41,26 +42,12 @@ abstract class GPBaseConnectorRequest<T, H extends HttpUriRequest> extends GPAbs
     @Override
     public T getResponse() throws Exception {
         HttpUriRequest httpUriRequest = this.prepareHttpMethod();
-        CloseableHttpResponse httpResponse = super.securityConnector.secure(this, httpUriRequest);
+        CloseableHttpResponse httpResponse = this.securityConnector.secure(this, httpUriRequest);
         super.checkHttpResponseStatus(httpResponse.getStatusLine().getStatusCode());
         HttpEntity responseEntity = httpResponse.getEntity();
         try {
             if (responseEntity != null) {
-                InputStream is = responseEntity.getContent();
-                Unmarshaller unmarshaller = getUnmarshaller();
-                Object content;
-                try (BufferedReader reader = new BufferedReader(new InputStreamReader(is, UTF_8_CHARSERT))) {
-                    content = unmarshaller.unmarshal(reader);
-                } catch (JAXBException ex) {
-                    ex.printStackTrace();
-                    logger.error("######################JAXBException : {}", ex);
-                    throw new IllegalStateException(ex);
-                }
-                if ((content == null)) { // ExceptionReport
-                    logger.error("#############CONTENT : {} #############\n", content);
-                    throw new IncorrectResponseException();
-                }
-                return ((content instanceof JAXBElement) ? ((JAXBElement<T>) content).getValue() : (T) content);
+                return this.readInternal(responseEntity.getContent());
             } else {
                 throw new IncorrectResponseException(CONNECTION_PROBLEM_MESSAGE);
             }
@@ -113,6 +100,28 @@ abstract class GPBaseConnectorRequest<T, H extends HttpUriRequest> extends GPAbs
         } finally {
             consume(responseEntity);
             httpResponse.close();
+        }
+    }
+
+    /**
+     * @param inputStream
+     * @return {@link T}
+     * @throws Exception
+     */
+    protected T readInternal(@Nonnull(when = NEVER) InputStream inputStream) throws Exception {
+        checkArgument(inputStream != null, "The Parameter inputStream must not be null.");
+        Unmarshaller unmarshaller = getUnmarshaller();
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, UTF_8_CHARSERT))) {
+            Object content = unmarshaller.unmarshal(reader);
+            if ((content == null)) { // ExceptionReport
+                logger.error("#############CONTENT : {} #############\n", content);
+                throw new IncorrectResponseException();
+            }
+            return ((content instanceof JAXBElement) ? ((JAXBElement<T>) content).getValue() : (T) content);
+        } catch (JAXBException ex) {
+            ex.printStackTrace();
+            logger.error("######################JAXBException : {}", ex);
+            throw new IllegalStateException(ex);
         }
     }
 

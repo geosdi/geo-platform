@@ -4,9 +4,9 @@ import org.apache.http.client.methods.HttpGet;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 
 import javax.annotation.Nonnull;
-import javax.annotation.meta.When;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -17,7 +17,7 @@ abstract class GetConnectorRequest<T> extends GPBaseConnectorRequest<T, HttpGet>
     /**
      * @param theServerConnector
      */
-    protected GetConnectorRequest(@Nonnull(when = When.NEVER) GPServerConnector theServerConnector) {
+    protected GetConnectorRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector) {
         super(theServerConnector);
     }
 

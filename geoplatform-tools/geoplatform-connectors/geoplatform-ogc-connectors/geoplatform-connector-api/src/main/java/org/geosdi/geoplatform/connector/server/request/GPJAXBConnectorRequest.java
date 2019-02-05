@@ -96,12 +96,4 @@ public interface GPJAXBConnectorRequest<T> extends GPConnectorRequest<T> {
      * @throws Exception
      */
     Unmarshaller getUnmarshaller() throws Exception;
-
-    /**
-     * Show the XML Object created for the Request to send to Server
-     *
-     * @return Request as a String
-     * @throws Exception
-     */
-    String showRequestAsString() throws Exception;
 }

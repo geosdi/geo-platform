@@ -54,4 +54,12 @@ public abstract class GPPostConnectorRequest<T, Request> extends PostConnectorRe
      * @throws Exception
      */
     protected abstract Request createRequest() throws Exception;
+
+    /**
+     * Show the XML Object created for the Request to send to Server
+     *
+     * @return Request as a String
+     * @throws Exception
+     */
+    public abstract String showRequestAsString() throws Exception;
 }

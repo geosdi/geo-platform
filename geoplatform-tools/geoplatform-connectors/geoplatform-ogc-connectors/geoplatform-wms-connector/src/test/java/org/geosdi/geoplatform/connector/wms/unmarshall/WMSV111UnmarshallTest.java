@@ -1,4 +1,4 @@
-package org.geosdi.geoplatform.connector.wms;
+package org.geosdi.geoplatform.connector.wms.unmarshall;
 
 import org.geosdi.geoplatform.connector.jaxb.context.WMSJAXBContext;
 import org.geosdi.geoplatform.connector.jaxb.repository.JAXBContextConnectorRepository;

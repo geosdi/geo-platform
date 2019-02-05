@@ -152,10 +152,8 @@ public abstract class GeoPlatformJAXBContext extends GPBaseJAXBContext {
      **/
     protected Marshaller createMarshaller() throws Exception {
         Marshaller marshaller = this.jaxbContext.createMarshaller();
-
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
         marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
-
         return marshaller;
     }
 

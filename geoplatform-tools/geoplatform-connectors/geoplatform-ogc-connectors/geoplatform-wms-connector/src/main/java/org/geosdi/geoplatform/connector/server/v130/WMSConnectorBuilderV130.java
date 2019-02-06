@@ -18,7 +18,7 @@ public class WMSConnectorBuilderV130 extends AbstractConnectorBuilder<WMSConnect
     /**
      * @return {@link WMSConnectorBuilderV130}
      */
-    public static WMSConnectorBuilderV130 wmsConnectorBuilderV111() {
+    public static WMSConnectorBuilderV130 wmsConnectorBuilderV130() {
         return new WMSConnectorBuilderV130();
     }
 

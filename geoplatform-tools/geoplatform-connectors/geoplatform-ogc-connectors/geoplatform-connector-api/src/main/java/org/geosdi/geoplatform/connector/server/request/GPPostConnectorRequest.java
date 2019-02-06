@@ -40,7 +40,7 @@ import org.geosdi.geoplatform.connector.server.GPServerConnector;
  * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public abstract class GPPostConnectorRequest<T, Request> extends PostConnectorRequest<T> {
+public abstract class GPPostConnectorRequest<T, Request> extends PostConnectorRequest<T> implements IGPostConnectorRequest<T> {
 
     /**
      * @param server
@@ -54,12 +54,4 @@ public abstract class GPPostConnectorRequest<T, Request> extends PostConnectorRe
      * @throws Exception
      */
     protected abstract Request createRequest() throws Exception;
-
-    /**
-     * Show the XML Object created for the Request to send to Server
-     *
-     * @return Request as a String
-     * @throws Exception
-     */
-    public abstract String showRequestAsString() throws Exception;
 }

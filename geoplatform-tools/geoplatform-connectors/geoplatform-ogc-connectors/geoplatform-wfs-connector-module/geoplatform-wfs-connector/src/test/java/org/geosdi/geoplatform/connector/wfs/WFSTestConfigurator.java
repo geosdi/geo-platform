@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.connector.wfs;
 
 import org.geosdi.geoplatform.connector.GPWFSConnectorStore;
-import org.geosdi.geoplatform.connector.WFSConnectorBuilder;
 import org.geosdi.geoplatform.connector.server.security.BasicPreemptiveSecurityConnector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,6 +43,7 @@ import org.slf4j.LoggerFactory;
 import javax.xml.namespace.QName;
 import java.net.URL;
 
+import static org.geosdi.geoplatform.connector.WFSConnectorBuilder.newConnector;
 import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
 
 /**
@@ -60,14 +60,14 @@ public class WFSTestConfigurator {
 
     static {
         try {
-            serverConnector = WFSConnectorBuilder.newConnector()
+            serverConnector = newConnector()
                     .withServerUrl(new URL(wfsURL))
                     .withPooledConnectorConfig(pooledConnectorConfigBuilder()
                             .withMaxTotalConnections(150)
                             .withDefaultMaxPerRoute(80)
                             .withMaxRedirect(20)
                             .build()).build();
-            secureServerConnector = WFSConnectorBuilder.newConnector().withServerUrl(
+            secureServerConnector = newConnector().withServerUrl(
                     new URL(wfsSecureURL))
                     .withPooledConnectorConfig(pooledConnectorConfigBuilder()
                             .withMaxTotalConnections(150)
@@ -76,7 +76,7 @@ public class WFSTestConfigurator {
                             .build())
                     .withClientSecurity(new BasicPreemptiveSecurityConnector("admin", "geoservertest"))
                     .build();
-            httpsServerConnector = WFSConnectorBuilder.newConnector()
+            httpsServerConnector = newConnector()
                     .withServerUrl(new URL(wfsHttpsURL))
                     .withPooledConnectorConfig(pooledConnectorConfigBuilder()
                             .withMaxTotalConnections(30)

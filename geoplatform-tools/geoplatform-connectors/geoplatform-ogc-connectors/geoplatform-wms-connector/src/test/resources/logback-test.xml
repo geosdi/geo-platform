@@ -17,5 +17,6 @@
     <logger name="org.geosdi.geoplatform.connector.wms.WMSV111UnmarshallTest" level="debug"/>
     <logger name="org.geosdi.geoplatform.connector.wms.WMSV130UnmarshallTest" level="debug"/>
     <logger name="org.geosdi.geoplatform.connector.jaxb.repository.ConnectorJAXBContextRepository" level="debug"/>
+    <logger name="org.geosdi.geoplatform.connector.pool.factory.v111.GPWMSConnectorFactoryV111" level="trace"/>
 
 </configuration>

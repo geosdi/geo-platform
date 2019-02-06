@@ -48,7 +48,7 @@ public interface GPWMSConnectorBuilder {
          */
         @Override
         public GPWMSConnectorBuilderV130 wmsConnectorBuilderV130() {
-            return WMSConnectorBuilderV130.wmsConnectorBuilderV111();
+            return WMSConnectorBuilderV130.wmsConnectorBuilderV130();
         }
     }
 }

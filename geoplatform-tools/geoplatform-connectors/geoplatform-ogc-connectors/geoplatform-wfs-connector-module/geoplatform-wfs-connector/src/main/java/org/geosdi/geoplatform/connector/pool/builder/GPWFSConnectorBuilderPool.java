@@ -50,7 +50,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public class GPWFSConnectorBuilderPool extends AbstractConnectorBuilder<GPWFSConnectorBuilderPool, GPWFSConnectorStore> {
 
     static {
-        wfsConnectorPool = new GenericKeyedObjectPool<>(new GPWFSConnectorFactory(), new GPPoolConnectorConfig());
+        wfsConnectorPool = new GenericKeyedObjectPool<GPPoolConnectorKey, GPWFSConnectorStore>(new GPWFSConnectorFactory(), new GPPoolConnectorConfig());
     }
 
     private static final GenericKeyedObjectPool<GPPoolConnectorKey, GPWFSConnectorStore> wfsConnectorPool;
@@ -62,6 +62,10 @@ public class GPWFSConnectorBuilderPool extends AbstractConnectorBuilder<GPWFSCon
         return new GPWFSConnectorBuilderPool();
     }
 
+    /**
+     * @return {@link GPWFSConnectorStore}
+     * @throws Exception
+     */
     @Override
     public GPWFSConnectorStore build() throws Exception {
         checkNotNull(serverUrl, "WFS_110 Server URL must not be null.");

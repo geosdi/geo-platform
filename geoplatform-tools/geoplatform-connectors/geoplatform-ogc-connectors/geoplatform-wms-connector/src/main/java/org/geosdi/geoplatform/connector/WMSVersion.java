@@ -44,6 +44,6 @@ public enum WMSVersion implements GPServerConnector.GPServerConnectorVersion {
                 .filter(v -> ((version != null) && !(version.trim().isEmpty()))
                         ? v.getVersion().equalsIgnoreCase(version) : FALSE)
                 .findFirst();
-        return ((optional != null) && !(optional.equals(Optional.empty()))) ? optional.get() : WMSVersion.V111;
+        return ((optional != null) && !(optional.equals(Optional.empty()))) ? optional.get() : null;
     }
 }

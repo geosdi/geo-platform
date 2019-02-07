@@ -64,7 +64,6 @@ public class WPSTestConfigurator {
                             .withDefaultMaxPerRoute(20)
                             .withMaxRedirect(10)
                             .build())
-                    .withVersion("1.0.0")
                     .build();
             wpsHttpsServerConnector = newWPSConnectorBuilder()
                     .withServerUrl(new URL(wpsHttpsURL))
@@ -73,7 +72,6 @@ public class WPSTestConfigurator {
                             .withDefaultMaxPerRoute(10)
                             .withMaxRedirect(5)
                             .build())
-                    .withVersion("1.0.0")
                     .build();
         } catch (Exception ex) {
             ex.printStackTrace();

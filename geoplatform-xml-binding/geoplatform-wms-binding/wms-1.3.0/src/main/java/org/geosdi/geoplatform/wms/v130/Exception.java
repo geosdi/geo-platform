@@ -81,7 +81,7 @@ public class Exception implements ToString2
     }
 
     public String toString() {
-        final ToStringStrategy2 strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy2 strategy = JAXBToStringStrategy.INSTANCE2;
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();

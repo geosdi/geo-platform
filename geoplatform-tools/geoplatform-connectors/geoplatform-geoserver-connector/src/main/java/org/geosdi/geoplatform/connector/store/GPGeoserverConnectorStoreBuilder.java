@@ -70,6 +70,15 @@ public final class GPGeoserverConnectorStoreBuilder extends AbstractConnectorBui
     }
 
     /**
+     * @param theVersion
+     * @return {@link GPGeoserverConnectorStoreBuilder}
+     */
+    @Override
+    public GPGeoserverConnectorStoreBuilder withVersion(String theVersion) {
+        return super.withVersion(theVersion);
+    }
+
+    /**
      * @return {@link GPGeoserverConnectorStore}
      * @throws Exception
      */

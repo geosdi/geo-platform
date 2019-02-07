@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.connector;
 import org.geosdi.geoplatform.connector.api.AbstractConnectorBuilder;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static org.geosdi.geoplatform.connector.WPSVersion.WPS_100;
 import static org.geosdi.geoplatform.connector.WPSVersion.toWPSVersion;
 
 /**
@@ -47,6 +48,7 @@ import static org.geosdi.geoplatform.connector.WPSVersion.toWPSVersion;
 public final class WPSConnectorBuilder extends AbstractConnectorBuilder<WPSConnectorBuilder, GPWPSConnectorStore> {
 
     protected WPSConnectorBuilder() {
+        this.withVersion(WPS_100.getVersion());
     }
 
     /**

@@ -1,6 +1,5 @@
 package org.geosdi.geoplatform.connector.store.coveragestores;
 
-import org.geosdi.geoplatform.connector.geoserver.request.coveragestores.GeoserverDeleteCoverageStoreRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.coveragestores.GeoserverLoadCoverageStoreRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.coveragestores.GeoserverLoadCoverageStoresRequest;
 import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreTest;
@@ -58,24 +57,24 @@ public class GPGeoserverCoverageStoresConnectorStoreTest extends GPBaseGeoserver
         logger.info("###############################LOAD_COVERAGE_RESPONSE : {}\n", loadCoverageStoreRequest.getResponse());
     }
 
-    @Test
-    public void g_createCoverageStoreConnectorTest() throws Exception {
+//    @Test
+//    public void g_createCoverageStoreConnectorTest() throws Exception {
 //        GeoserverCreateCoverageStoreRequest createCoverageStoreRequest = geoserverConnectorStore.createCoverageStoreRequest();
 //        createCoverageStoreRequest.withWorkspace("nurc")
 //                .withBody(new GPGeoserverCoverageStoreBody("test_1", "Description Test",
 //                        "nurc", GPCoverageStoreType.GEOTIFF, "file:path/file.tiff", FALSE));
 //        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@CREATE_COVERAGE_STORE_RESPONSE : {}\n", createCoverageStoreRequest.getResponseAsString());
-    }
+//    }
 
-    @Test
-    public void h_updateCoverageStoreConnectorTest() throws Exception {
+//    @Test
+//    public void h_updateCoverageStoreConnectorTest() throws Exception {
+//
+//    }
 
-    }
-
-    @Test
-    public void i_deleteCoverageStoreConnectorTest() throws Exception {
-        GeoserverDeleteCoverageStoreRequest deleteCoverageStoreRequest = geoserverConnectorStore.deleteCoverageStoreRequest();
-        deleteCoverageStoreRequest.withWorkspace("nurc").withCoverageStore("test_1");
-        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@DELETE_COVERAGE_STORE_RESPONSE : {}\n", deleteCoverageStoreRequest.getResponse());
-    }
+//    @Test
+//    public void i_deleteCoverageStoreConnectorTest() throws Exception {
+//        GeoserverDeleteCoverageStoreRequest deleteCoverageStoreRequest = geoserverConnectorStore.deleteCoverageStoreRequest();
+//        deleteCoverageStoreRequest.withWorkspace("nurc").withCoverageStore("test_1");
+//        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@DELETE_COVERAGE_STORE_RESPONSE : {}\n", deleteCoverageStoreRequest.getResponse());
+//    }
 }

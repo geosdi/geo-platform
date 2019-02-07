@@ -31,7 +31,7 @@ public class VendorSpecificCapabilities implements Serializable, ToString2
     private final static long serialVersionUID = 1L;
 
     public String toString() {
-        final ToStringStrategy2 strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy2 strategy = JAXBToStringStrategy.INSTANCE2;
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();

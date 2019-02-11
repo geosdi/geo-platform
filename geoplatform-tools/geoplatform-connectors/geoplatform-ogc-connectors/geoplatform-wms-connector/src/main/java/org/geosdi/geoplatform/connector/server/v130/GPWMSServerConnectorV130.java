@@ -15,7 +15,7 @@ import static org.geosdi.geoplatform.connector.WMSVersion.V130;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPWMSServerConnectorV130 extends GPBaseWMSServerConnector<WMSGetCapabilitiesV130Request> implements IGPWMSServerConnectorV130<WMSGetCapabilitiesV130Request> {
+public class GPWMSServerConnectorV130 extends GPBaseWMSServerConnector<WMSGetCapabilitiesV130Request, GPWMSGetFeatureInfoV130Request<Object>> implements IGPWMSServerConnectorV130<WMSGetCapabilitiesV130Request> {
 
     /**
      * @param server
@@ -33,5 +33,13 @@ public class GPWMSServerConnectorV130 extends GPBaseWMSServerConnector<WMSGetCap
     @Override
     public WMSGetCapabilitiesV130Request createGetCapabilitiesRequest() {
         return new WMSGetCapabilitiesV130Request(this);
+    }
+
+    /**
+     * @return {@link GPWMSGetFeatureInfoV130Request<Object>}
+     */
+    @Override
+    public GPWMSGetFeatureInfoV130Request<Object> createGetFeatureInfoRequest() {
+        return new WMSGetFeatureInfoV130Request(this);
     }
 }

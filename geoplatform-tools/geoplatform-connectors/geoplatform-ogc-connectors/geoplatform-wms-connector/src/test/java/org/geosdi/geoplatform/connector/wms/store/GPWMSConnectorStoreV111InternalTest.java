@@ -1,6 +1,8 @@
 package org.geosdi.geoplatform.connector.wms.store;
 
+import org.geosdi.geoplatform.connector.server.request.*;
 import org.geosdi.geoplatform.connector.server.v111.GPWMSDescribeLayerV111Request;
+import org.geosdi.geoplatform.connector.server.v111.GPWMSGetFeatureInfoV111Request;
 import org.geosdi.geoplatform.connector.server.v111.IGPWMSConnectorStoreV111;
 import org.geosdi.geoplatform.connector.server.v111.WMSGetCapabilitiesV111Request;
 import org.junit.BeforeClass;
@@ -10,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.URL;
+import java.util.Arrays;
 
 import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
 import static org.geosdi.geoplatform.connector.server.store.GPWMSConnectorBuilder.WMSConnectorBuilder.wmsConnectorBuilder;
@@ -20,9 +23,9 @@ import static org.junit.runners.MethodSorters.NAME_ASCENDING;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @FixMethodOrder(value = NAME_ASCENDING)
-public class GPWMSConnectorStoreV111Test {
+public class GPWMSConnectorStoreV111InternalTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(GPWMSConnectorStoreV111Test.class);
+    private static final Logger logger = LoggerFactory.getLogger(GPWMSConnectorStoreV111InternalTest.class);
     //
     private static IGPWMSConnectorStoreV111 wmsServerConnector;
 
@@ -30,10 +33,10 @@ public class GPWMSConnectorStoreV111Test {
     public static void beforeClass() throws Exception {
         wmsServerConnector = wmsConnectorBuilder()
                 .wmsConnectorBuilderV111()
-                .withServerUrl(new URL("http://rsdi.regione.basilicata.it:80/rbgeoserver2016/wms"))
+                .withServerUrl(new URL("http://150.145.141.180/geoserver/wms"))
                 .withPooledConnectorConfig(pooledConnectorConfigBuilder()
-                        .withMaxTotalConnections(40)
-                        .withDefaultMaxPerRoute(20)
+                        .withMaxTotalConnections(20)
+                        .withDefaultMaxPerRoute(8)
                         .withMaxRedirect(5)
                         .build()).build();
     }
@@ -45,9 +48,20 @@ public class GPWMSConnectorStoreV111Test {
     }
 
     @Test
-    public void b_wmsDescribeLayerV11Test() throws Exception {
+    public void b_wmsDescribeLayerV111Test() throws Exception {
         GPWMSDescribeLayerV111Request wmsDescribeLayerRequest = wmsServerConnector.createDescribeLayerRequest();
         logger.info("##########################WMS_DESCRIBE_LAYER_RESPONSE_V111 : {}\n", wmsDescribeLayerRequest
-                .withLayers("siti_protetti:zsc", "retenatura:zsc", "rete_natura_2000:zsc").getResponse());
+                .withLayers("sf:sfdem", "sf:roads", "sf:restricted").getResponse());
+    }
+
+    @Test
+    public void c_wmsGetFeatureInfoV111Test() throws Exception {
+        GPWMSGetFeatureInfoV111Request<Object> wmsGetFeatureInfoRequest = wmsServerConnector.createGetFeatureInfoRequest();
+        GPWMSBoundingBox wmsBoundinBox = new WMSBoundingBox(-130d, 24d, -66d, 50d);
+        GPWMSGetMapBaseRequest wmsGetMapBaseRequest = new WMSGetMapBaseRequest(wmsBoundinBox, Arrays.asList("topp:states"),
+                "EPSG:4326", "550", "250");
+        logger.info("##################################WMS_GET_FEATURE_INFO_V111_RESPONSE : {}\n", wmsGetFeatureInfoRequest.withQueryLayers("topp:states")
+                .withWMSGetMapRequest(wmsGetMapBaseRequest)
+                .withInfoFormat(WMSFeatureInfoFormat.TEXT_PLAIN).withX(170).withY(160).getResponse());
     }
 }

@@ -20,34 +20,35 @@ import static org.junit.runners.MethodSorters.NAME_ASCENDING;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @FixMethodOrder(value = NAME_ASCENDING)
-public class GPWMSConnectorStoreV111Test {
+public class GPWMSConnectorStoreEsriEdificiV111Test {
 
-    private static final Logger logger = LoggerFactory.getLogger(GPWMSConnectorStoreV111Test.class);
+    private static final Logger logger = LoggerFactory.getLogger(GPWMSConnectorStoreEsriEdificiV111Test.class);
     //
-    private static IGPWMSConnectorStoreV111 wmsServerConnector;
+    private static IGPWMSConnectorStoreV111 wmsServerConnectorMinisteroAmbiente;
 
     @BeforeClass
     public static void beforeClass() throws Exception {
-        wmsServerConnector = wmsConnectorBuilder()
+        wmsServerConnectorMinisteroAmbiente = wmsConnectorBuilder()
                 .wmsConnectorBuilderV111()
-                .withServerUrl(new URL("http://rsdi.regione.basilicata.it:80/rbgeoserver2016/wms"))
+                .withServerUrl(new URL("http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Edifici.map"))
                 .withPooledConnectorConfig(pooledConnectorConfigBuilder()
                         .withMaxTotalConnections(40)
                         .withDefaultMaxPerRoute(20)
-                        .withMaxRedirect(5)
+                        .withMaxRedirect(10)
                         .build()).build();
     }
 
+
     @Test
-    public void a_wmsGetCapabilitiesV111Test() throws Exception {
-        WMSGetCapabilitiesV111Request wmsGetCapabilitiesRequest = wmsServerConnector.createGetCapabilitiesRequest();
-        logger.debug("###############################WMS_GET_CAPABILITIES_V111_RESPONSE : {}\n", wmsGetCapabilitiesRequest.getResponseAsString());
+    public void a_wmsGetCapabilitiesV111MinisteroAmbienteTest() throws Exception {
+        WMSGetCapabilitiesV111Request wmsGetCapabilitiesRequest = wmsServerConnectorMinisteroAmbiente.createGetCapabilitiesRequest();
+        logger.info("###############################WMS_GET_CAPABILITIES_V111_EDIFICI_RESPONSE : {}\n", wmsGetCapabilitiesRequest.getResponseAsString());
     }
 
     @Test
-    public void b_wmsDescribeLayerV11Test() throws Exception {
-        GPWMSDescribeLayerV111Request wmsDescribeLayerRequest = wmsServerConnector.createDescribeLayerRequest();
-        logger.info("##########################WMS_DESCRIBE_LAYER_RESPONSE_V111 : {}\n", wmsDescribeLayerRequest
-                .withLayers("siti_protetti:zsc", "retenatura:zsc", "rete_natura_2000:zsc").getResponse());
+    public void b_wmsDescribeLayerV111MinisteroAmbienteTest() throws Exception {
+        GPWMSDescribeLayerV111Request wmsDescribeLayerRequest = wmsServerConnectorMinisteroAmbiente.createDescribeLayerRequest();
+        logger.info("##########################WMS_DESCRIBE_LAYER_RESPONSE_V111_EDIFICI_RESPONSE : {}\n", wmsDescribeLayerRequest
+                .withLayers("ED.EDIFICATO.CAPOLUOGHI.", "ED.EDIFICATO.CAPOLUOGHI").getResponse());
     }
 }

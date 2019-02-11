@@ -29,7 +29,14 @@ public abstract class GPBaseWMSGetCapabilitiesRequest<T> extends GPWMSBaseGetReq
      */
     @Override
     protected String createUriPath() throws Exception {
-        String baseURI = this.serverURI.toString();
-        return baseURI.concat(WMS_GET_CAPABILITIES_BASE_REQUEST).concat(this.version.getVersion());
+        return this.buildGetCapabilitiesURL(this.serverURI.toString());
+    }
+
+    /**
+     * @return {@link WMSVersion}
+     */
+    @Override
+    public WMSVersion getVersion() {
+        return this.version;
     }
 }

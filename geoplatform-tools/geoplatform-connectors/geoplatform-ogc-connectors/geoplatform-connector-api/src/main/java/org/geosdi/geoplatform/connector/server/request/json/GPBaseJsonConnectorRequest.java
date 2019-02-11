@@ -100,7 +100,7 @@ abstract class GPBaseJsonConnectorRequest<T, H extends HttpUriRequest> extends G
 
     /**
      * <p>
-     * Method to generate Response AS a {@link String} string.
+     * Method to generate Response AS a {@link String} value.
      * </p>
      *
      * @return {@link String}
@@ -118,8 +118,7 @@ abstract class GPBaseJsonConnectorRequest<T, H extends HttpUriRequest> extends G
         HttpEntity responseEntity = httpResponse.getEntity();
         try {
             if (responseEntity != null) {
-                InputStream is = responseEntity.getContent();
-                return CharStreams.toString(new InputStreamReader(is, UTF_8));
+                return CharStreams.toString(new InputStreamReader(responseEntity.getContent(), UTF_8));
             } else {
                 throw new IncorrectResponseException(CONNECTION_PROBLEM_MESSAGE);
             }

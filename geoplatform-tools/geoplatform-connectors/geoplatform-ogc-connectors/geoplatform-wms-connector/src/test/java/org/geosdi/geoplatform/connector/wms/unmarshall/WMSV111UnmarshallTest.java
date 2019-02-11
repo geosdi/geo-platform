@@ -46,6 +46,7 @@ public class WMSV111UnmarshallTest {
     private static final GPBaseJAXBContext wmsContext;
     private static File wmsGetCapabilitiesFile;
     private static File wmsDescribeLayerFile;
+    private static File wmsGetCapabilitiesMinisteroAmbiente;
 
     @BeforeClass
     public static void beforeClass() throws Exception {
@@ -59,6 +60,9 @@ public class WMSV111UnmarshallTest {
         String describeLayerFileName = of(basePath, "src", "test", "resources", "describeLayer-111.xml")
                 .collect(joining(separator));
         wmsDescribeLayerFile = new File(describeLayerFileName);
+        String wmsGetCapabilitiesMinisteroAmbienteFileName = of(basePath, "src", "test", "resources", "ogc_v1.1.1.xml")
+                .collect(joining(separator));
+        wmsGetCapabilitiesMinisteroAmbiente = new File(wmsGetCapabilitiesMinisteroAmbienteFileName);
         spf.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", FALSE);
         spf.setFeature("http://xml.org/sax/features/validation", FALSE);
     }
@@ -81,9 +85,21 @@ public class WMSV111UnmarshallTest {
         InputSource inputSource = new InputSource(new FileReader(wmsDescribeLayerFile));
         SAXSource source = new SAXSource(xmlReader, inputSource);
         WMSDescribeLayerResponse wmsDescribeLayerResponse = (WMSDescribeLayerResponse) wmsContext.acquireUnmarshaller().unmarshal(source);
-        logger.info("#######################WMSDescribeLayerResponseV111 : {}\n", wmsDescribeLayerResponse);
+        logger.debug("#######################WMSDescribeLayerResponseV111 : {}\n", wmsDescribeLayerResponse);
         StringWriter writer = new StringWriter();
         wmsContext.acquireMarshaller().marshal(wmsDescribeLayerResponse, writer);
-        logger.debug("######################WMSDescribeLayerResponseV111-String : \n{}\n", writer);
+        logger.info("######################WMSDescribeLayerResponseV111-String : \n{}\n", writer);
+    }
+
+    @Test
+    public void c_unmarshallWMSGetCapabilitiesV111Test() throws Exception {
+        XMLReader xmlReader = spf.newSAXParser().getXMLReader();
+        InputSource inputSource = new InputSource(new FileReader(wmsGetCapabilitiesMinisteroAmbiente));
+        SAXSource source = new SAXSource(xmlReader, inputSource);
+        WMTMSCapabilities wmsCapabilities = (WMTMSCapabilities) wmsContext.acquireUnmarshaller().unmarshal(source);
+        logger.debug("#######################WMSGetCapabilitiesV111_Ministero_Ambiente : {}\n", wmsCapabilities);
+        StringWriter writer = new StringWriter();
+        wmsContext.acquireMarshaller().marshal(wmsCapabilities, writer);
+        logger.info("######################WMSGetCapabilitiesV111_Ministero_Ambiente-String : \n{}\n", writer);
     }
 }

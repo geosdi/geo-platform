@@ -3,6 +3,7 @@ package org.geosdi.geoplatform.connector.server;
 import org.geosdi.geoplatform.connector.WMSVersion;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.request.GPWMSGetCapabilitiesRequest;
+import org.geosdi.geoplatform.connector.server.request.GPWMSGetFeatureInfoRequest;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 
 import javax.annotation.Nonnull;
@@ -16,7 +17,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GPBaseWMSServerConnector<WMSGetCapabilities extends GPWMSGetCapabilitiesRequest<?>> extends GPAbstractServerConnector implements GPWMSServerConnector<WMSGetCapabilities> {
+public abstract class GPBaseWMSServerConnector<WMSGetCapabilities extends GPWMSGetCapabilitiesRequest<?>, WMSGetFeatureInfo extends GPWMSGetFeatureInfoRequest<?, ?>> extends GPAbstractServerConnector implements GPWMSServerConnector<WMSGetCapabilities, WMSGetFeatureInfo> {
 
     private final WMSVersion version;
 

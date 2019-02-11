@@ -63,6 +63,7 @@ public abstract class GPGetConnectorRequest<T> extends GetConnectorRequest<T> {
         String uriPath = this.checkUriPath();
         checkArgument((uriPath != null) && !(uriPath.trim().isEmpty()),
                 "The Parameter uriPath must not be null or an empty string.");
+        logger.debug("#########################URI_PATH : {}\n", uriPath);
         HttpGet httpGet = new HttpGet(uriPath);
         httpGet.setConfig(this.prepareRequestConfig());
         return httpGet;

@@ -12,6 +12,11 @@ public interface IGPWMSServerConnectorV111<WMSGetCapabilities> {
     WMSGetCapabilities createGetCapabilitiesRequest();
 
     /**
+     * @return {@link GPWMSGetFeatureInfoV111Request<Object>}
+     */
+    GPWMSGetFeatureInfoV111Request<Object> createGetFeatureInfoRequest();
+
+    /**
      * @return {@link GPWMSDescribeLayerV111Request}
      */
     GPWMSDescribeLayerV111Request createDescribeLayerRequest();

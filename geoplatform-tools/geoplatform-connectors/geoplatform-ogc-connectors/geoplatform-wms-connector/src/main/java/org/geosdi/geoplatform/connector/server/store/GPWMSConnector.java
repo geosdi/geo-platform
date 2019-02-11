@@ -7,12 +7,17 @@ import org.geosdi.geoplatform.connector.api.GeoPlatformConnector;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPWMSConnector<WMSGetCapabilities> extends GeoPlatformConnector {
+public interface GPWMSConnector<WMSGetCapabilities, WMSGetFeatureInfo> extends GeoPlatformConnector {
 
     /**
      * @return {@link WMSGetCapabilities}
      */
     WMSGetCapabilities createGetCapabilitiesRequest();
+
+    /**
+     * @return {@link WMSGetFeatureInfo}
+     */
+    WMSGetFeatureInfo createGetFeatureInfoRequest();
 
     /**
      * @return {@link Version}

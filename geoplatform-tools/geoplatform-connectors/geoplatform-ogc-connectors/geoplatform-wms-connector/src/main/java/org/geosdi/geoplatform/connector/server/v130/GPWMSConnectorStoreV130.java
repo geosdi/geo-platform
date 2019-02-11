@@ -14,7 +14,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPWMSConnectorStoreV130 extends GPWMSConnectorStore<WMSGetCapabilitiesV130Request, GPWMSServerConnectorV130> implements IGPWMSConnectorStoreV130 {
+public class GPWMSConnectorStoreV130 extends GPWMSConnectorStore<WMSGetCapabilitiesV130Request, GPWMSGetFeatureInfoV130Request<Object>, GPWMSServerConnectorV130> implements IGPWMSConnectorStoreV130 {
 
     /**
      * @param server
@@ -32,5 +32,13 @@ public class GPWMSConnectorStoreV130 extends GPWMSConnectorStore<WMSGetCapabilit
     @Override
     public WMSGetCapabilitiesV130Request createGetCapabilitiesRequest() {
         return this.server.createGetCapabilitiesRequest();
+    }
+
+    /**
+     * @return {@link GPWMSGetFeatureInfoV130Request<Object>}
+     */
+    @Override
+    public GPWMSGetFeatureInfoV130Request<Object> createGetFeatureInfoRequest() {
+        return this.server.createGetFeatureInfoRequest();
     }
 }

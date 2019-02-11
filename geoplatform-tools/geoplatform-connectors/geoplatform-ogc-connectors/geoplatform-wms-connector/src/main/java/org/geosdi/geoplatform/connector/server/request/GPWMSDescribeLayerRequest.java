@@ -9,7 +9,7 @@ import javax.annotation.meta.When;
  */
 public interface GPWMSDescribeLayerRequest<T> extends GPConnectorRequest<T> {
 
-    String WMS_DESCRIBE_LAYER_BASE_REQUEST = "?SERVICE=WMS&REQUEST=DescribeLayer&VERSION=${version}&layers=${layers}";
+    String WMS_DESCRIBE_LAYER_BASE_REQUEST = "${start}SERVICE=WMS&REQUEST=DescribeLayer&VERSION=${version}&layers=${layers}";
 
     /**
      * @param theLayers

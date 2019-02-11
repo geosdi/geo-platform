@@ -57,7 +57,10 @@ public abstract class GPBaseWMSDescribeLayerRequest<T> extends GPWMSBaseGetReque
                 .collect(joining(","));
         checkArgument((layersKVP != null) && !(layersKVP.trim().isEmpty()), "The Parameter layersKVP must not be null");
         String baseURI = this.serverURI.toString();
-        return baseURI.concat(WMS_DESCRIBE_LAYER_BASE_REQUEST.replace("${version}", this.version.getVersion())
-                .replace("${layers}", layersKVP));
+        return (baseURI.contains("?") ?
+                baseURI.concat(WMS_DESCRIBE_LAYER_BASE_REQUEST.replace("${start}", "&").replace("${version}", this.version.getVersion())
+                        .replace("${layers}", layersKVP))
+                : baseURI.concat(WMS_DESCRIBE_LAYER_BASE_REQUEST.replace("${start}", "?").replace("${version}", this.version.getVersion())
+                .replace("${layers}", layersKVP)));
     }
 }

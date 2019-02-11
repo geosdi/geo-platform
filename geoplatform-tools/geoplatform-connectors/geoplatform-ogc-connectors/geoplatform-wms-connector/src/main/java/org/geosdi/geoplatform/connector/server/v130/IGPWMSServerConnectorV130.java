@@ -10,4 +10,9 @@ public interface IGPWMSServerConnectorV130<WMSGetCapabilities> {
      * @return {@link WMSGetCapabilities}
      */
     WMSGetCapabilities createGetCapabilitiesRequest();
+
+    /**
+     * @return {@link GPWMSGetFeatureInfoV130Request<Object>}
+     */
+    GPWMSGetFeatureInfoV130Request<Object> createGetFeatureInfoRequest();
 }

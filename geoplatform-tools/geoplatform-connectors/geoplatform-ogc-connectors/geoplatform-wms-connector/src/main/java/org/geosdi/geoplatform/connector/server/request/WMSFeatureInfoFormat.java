@@ -29,17 +29,17 @@ public enum WMSFeatureInfoFormat implements GPWMSFeatureInfoFormat {
         this.format = theFormat;
     }
 
+    @Override
+    public WMSFeatureInfoFormat getImplementorKey() {
+        return this;
+    }
+
     /**
      * @return
      */
     @JsonValue
     @Override
     public String getFormat() {
-        return this.format;
-    }
-
-    @Override
-    public String toString() {
         return this.format;
     }
 

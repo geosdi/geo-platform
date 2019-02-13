@@ -58,10 +58,11 @@ public class GPWMSConnectorStoreV111InternalTest {
     public void c_wmsGetFeatureInfoV111Test() throws Exception {
         GPWMSGetFeatureInfoV111Request<Object> wmsGetFeatureInfoRequest = wmsServerConnector.createGetFeatureInfoRequest();
         GPWMSBoundingBox wmsBoundinBox = new WMSBoundingBox(-130d, 24d, -66d, 50d);
-        GPWMSGetMapBaseRequest wmsGetMapBaseRequest = new WMSGetMapBaseRequest(wmsBoundinBox, Arrays.asList("topp:states"),
+        GPWMSGetMapBaseRequest wmsGetMapBaseRequest = new WMSGetMapBaseRequest(wmsBoundinBox, Arrays.asList("topp:states", "topp:states"),
                 "EPSG:4326", "550", "250");
-        logger.info("##################################WMS_GET_FEATURE_INFO_V111_RESPONSE : {}\n", wmsGetFeatureInfoRequest.withQueryLayers("topp:states")
+        logger.info("##################################WMS_GET_FEATURE_INFO_V111_RESPONSE : {}\n", wmsGetFeatureInfoRequest.withQueryLayers("topp:states", "topp:states")
                 .withWMSGetMapRequest(wmsGetMapBaseRequest)
-                .withInfoFormat(WMSFeatureInfoFormat.TEXT_PLAIN).withX(170).withY(160).getResponse());
+                .withFeatureCount(2)
+                .withInfoFormat(WMSFeatureInfoFormat.GML).withX(170).withY(160).getResponse());
     }
 }

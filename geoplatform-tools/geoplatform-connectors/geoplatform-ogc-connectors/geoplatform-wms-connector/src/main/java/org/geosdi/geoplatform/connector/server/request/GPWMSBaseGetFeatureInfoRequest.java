@@ -2,6 +2,8 @@ package org.geosdi.geoplatform.connector.server.request;
 
 import net.jcip.annotations.ThreadSafe;
 import org.geosdi.geoplatform.connector.WMSVersion;
+import org.geosdi.geoplatform.connector.bridge.store.GPWMSGetFeatureInfoReaderStore;
+import org.geosdi.geoplatform.connector.bridge.store.WMSGetFeatureInfoReaderStore;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.jaxb.GPBaseJAXBContext;
 
@@ -22,13 +24,15 @@ import static javax.annotation.meta.When.NEVER;
 @ThreadSafe
 public abstract class GPWMSBaseGetFeatureInfoRequest<T, R extends GPWMSGetFeatureInfoRequest> extends GPWMSBaseGetRequest<T> implements GPWMSGetFeatureInfoRequest<T, R> {
 
-    private final WMSVersion version;
-    private final ThreadLocal<GPWMSGetMapBaseRequest> wmsGetMapBaseRequest;
-    private final ThreadLocal<String[]> queryLayers;
-    private final ThreadLocal<WMSFeatureInfoFormat> infoFormat;
-    private final ThreadLocal<Integer> x;
-    private final ThreadLocal<Integer> y;
-    private final ThreadLocal<Integer> featureCount;
+    protected static final WMSGetFeatureInfoReaderStore store = new GPWMSGetFeatureInfoReaderStore();
+    //
+    protected final WMSVersion version;
+    protected final ThreadLocal<GPWMSGetMapBaseRequest> wmsGetMapBaseRequest;
+    protected final ThreadLocal<String[]> queryLayers;
+    protected final ThreadLocal<WMSFeatureInfoFormat> infoFormat;
+    protected final ThreadLocal<Integer> x;
+    protected final ThreadLocal<Integer> y;
+    protected final ThreadLocal<Integer> featureCount;
 
     /**
      * @param server

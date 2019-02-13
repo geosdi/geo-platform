@@ -20,5 +20,7 @@
     <logger name="org.geosdi.geoplatform.connector.pool.factory.v111.GPWMSConnectorFactoryV111" level="trace"/>
     <logger name="org.geosdi.geoplatform.connector.server.v111" level="debug"/>
     <logger name="org.geosdi.geoplatform.connector.server.v130" level="debug"/>
+    <logger name="org.geosdi.geoplatform.connector.bridge.store.GPWMSGetFeatureInfoReaderStore" level="debug"/>
+    <logger name="org.geosdi.geoplatform.connector.bridge.finder.GPWMSGetFeatureInfoReaderFinder" level="trace"/>
 
 </configuration>

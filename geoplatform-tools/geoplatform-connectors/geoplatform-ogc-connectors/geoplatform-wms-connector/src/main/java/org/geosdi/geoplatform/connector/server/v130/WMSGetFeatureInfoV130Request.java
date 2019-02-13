@@ -1,6 +1,5 @@
 package org.geosdi.geoplatform.connector.server.v130;
 
-import com.google.common.io.CharStreams;
 import net.jcip.annotations.ThreadSafe;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.GPWMSBaseGetFeatureInfoRequest;
@@ -8,9 +7,7 @@ import org.geosdi.geoplatform.connector.server.request.GPWMSBaseGetFeatureInfoRe
 import javax.annotation.Nonnull;
 import javax.annotation.meta.When;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 
-import static com.google.common.base.Charsets.UTF_8;
 import static javax.annotation.meta.When.NEVER;
 import static org.geosdi.geoplatform.connector.server.v130.GPWMSJAXBContextV130.WMS_JAXB_CONTEXT_V130;
 
@@ -35,7 +32,7 @@ public class WMSGetFeatureInfoV130Request extends GPWMSBaseGetFeatureInfoRequest
      */
     @Override
     protected Object readInternal(@Nonnull(when = NEVER) InputStream inputStream) throws Exception {
-        return CharStreams.toString(new InputStreamReader(inputStream, UTF_8));
+        return store.getImplementorByKey(this.infoFormat.get()).read(inputStream);
     }
 
     /**

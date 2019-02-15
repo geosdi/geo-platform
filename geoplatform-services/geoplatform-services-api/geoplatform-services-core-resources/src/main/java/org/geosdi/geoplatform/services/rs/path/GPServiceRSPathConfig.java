@@ -336,6 +336,7 @@ public final class GPServiceRSPathConfig {
     public static final String GET_WMS_SERVER_BY_URL = "/getServerByUrl";
     public static final String GET_WMS_CAPABILITIES = "/getCapabilities";
     public static final String GET_LAYER_TYPE = "/getLayerType";
+    public static final String WMS_GET_FEATURE_INFO_PATH = "/wmsGetFeatureInfo";
 
     private GPServiceRSPathConfig() {
     }

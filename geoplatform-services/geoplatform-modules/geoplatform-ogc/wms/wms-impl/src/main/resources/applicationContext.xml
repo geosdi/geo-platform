@@ -14,8 +14,6 @@
     
     <context:annotation-config />
     
-    <bean id="wmsService" class="org.geosdi.geoplatform.services.GPWMSServiceImpl">
-        <property name="serverDao" ref="serverDAO" />
-    </bean>
+    <bean id="wmsService" class="org.geosdi.geoplatform.services.GPWMSServiceImpl"/>
 
 </beans>

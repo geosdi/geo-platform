@@ -57,6 +57,7 @@ import java.util.List;
 import java.util.Map;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 
 /**
@@ -117,7 +118,7 @@ public class WFSGetFeatureStaxReader extends AbstractStaxStreamReader<FeatureCol
                     super.goToEndTag(geometryName);
                     this.readAttributes(feature, name, attributeNames, TRUE, prefix, geometryName);
                 } else if ((attributeNames != null) && (attributeNames.contains(reader.getLocalName()))) {
-                    this.readAttributes(feature, name, attributeNames, Boolean.FALSE, prefix, geometryName);
+                    this.readAttributes(feature, name, attributeNames, FALSE, prefix, geometryName);
                 }
             }
             reader.next();

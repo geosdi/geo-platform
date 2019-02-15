@@ -4,7 +4,6 @@ import com.google.common.collect.Lists;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.geojson.FeatureCollection;
 
 import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -25,14 +24,14 @@ public class WMSGetFeatureInfoResponse implements GPWMSGetFeatureInfoResponse {
 
     private static final long serialVersionUID = 8513460200609874662L;
     //
-    private List<FeatureCollection> features = Lists.newArrayList();
+    private List<Object> features = Lists.newArrayList();
 
     /**
-     * @param theFeatureCollection
+     * @param theFeature
      */
     @Override
-    public void addFeatureCollection(@Nonnull(when = NEVER) FeatureCollection theFeatureCollection) {
-        if (theFeatureCollection != null)
-            this.features.add(theFeatureCollection);
+    public void addFeature(@Nonnull(when = NEVER) Object theFeature) {
+        if (theFeature != null)
+            this.features.add(theFeature);
     }
 }

@@ -44,7 +44,6 @@ import org.geosdi.geoplatform.response.ServerDTO;
 import org.geosdi.geoplatform.services.request.GPWMSGetFeatureInfoRequest;
 import org.geosdi.geoplatform.services.request.WMSHeaderParam;
 import org.geosdi.geoplatform.services.response.GPLayerTypeResponse;
-import org.geosdi.geoplatform.services.response.WMSGetFeatureInfoResponse;
 import org.geosdi.geoplatform.services.rs.path.GPServiceRSPathConfig;
 
 import javax.jws.WebParam;
@@ -138,6 +137,6 @@ public interface GPWMSService {
      */
     @POST
     @Path(value = GPServiceRSPathConfig.WMS_GET_FEATURE_INFO_PATH)
-    WMSGetFeatureInfoResponse wmsGetFeatureInfo(GPWMSGetFeatureInfoRequest request) throws Exception;
+    Response wmsGetFeatureInfo(GPWMSGetFeatureInfoRequest request) throws Exception;
     // </editor-fold>
 }

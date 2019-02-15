@@ -1,17 +1,16 @@
 package org.geosdi.geoplatform.services.request;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import org.geosdi.geoplatform.services.request.adapter.GPWMSGetFeatureInfoPointAdapter;
 
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@XmlTransient
-@XmlSeeAlso(value = WMSGetFeatureInfoPoint.class)
+@XmlJavaTypeAdapter(value = GPWMSGetFeatureInfoPointAdapter.class)
 @JsonDeserialize(as = WMSGetFeatureInfoPoint.class)
 public interface GPWMSGetFeatureInfoPoint extends Serializable {
 

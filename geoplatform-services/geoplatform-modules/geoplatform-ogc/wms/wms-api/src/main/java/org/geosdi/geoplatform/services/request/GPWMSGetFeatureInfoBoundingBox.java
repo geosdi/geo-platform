@@ -2,17 +2,17 @@ package org.geosdi.geoplatform.services.request;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.geosdi.geoplatform.connector.server.request.GPWMSBoundingBox;
+import org.geosdi.geoplatform.services.request.adapter.GPWMSGetFeatureInfoBoundingBoxAdpter;
 
-import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@XmlTransient
-@XmlSeeAlso(value = {WMSGetFeatureInfoBoundingBox.class})
+@XmlJavaTypeAdapter(value = GPWMSGetFeatureInfoBoundingBoxAdpter.class)
 @JsonDeserialize(as = WMSGetFeatureInfoBoundingBox.class)
 public interface GPWMSGetFeatureInfoBoundingBox extends Serializable {
 

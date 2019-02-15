@@ -37,10 +37,10 @@ public class GPWMSGetFeatureInfoRequest extends GPWMSRequest {
     private String height;
     @NotNull(message = "{wms_bbox_not_null}")
     @Valid
-    private WMSGetFeatureInfoBoundingBox boundingBox;
+    private GPWMSGetFeatureInfoBoundingBox boundingBox;
     @NotNull(message = "{wms_point_not_null}")
     @Valid
-    private WMSGetFeatureInfoPoint point;
+    private GPWMSGetFeatureInfoPoint point;
     @NotNull(message = "{wms_get_feature_info_elements_not_null}")
     private List<@Valid GPWMSGetFeatureInfoElement> wmsFeatureInfoElements;
 }

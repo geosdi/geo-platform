@@ -75,6 +75,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 
 import javax.annotation.Resource;
+import javax.jws.WebMethod;
 import javax.ws.rs.core.Response;
 import javax.xml.bind.JAXBContext;
 import javax.xml.parsers.SAXParserFactory;
@@ -227,6 +228,7 @@ public class GPWMSServiceImpl implements GPWMSService {
      * @return {@link Response}
      * @throws Exception
      */
+    @WebMethod(exclude = true)
     @Override
     public Response wmsGetFeatureInfo(GPWMSGetFeatureInfoRequest request) throws Exception {
         if (request == null) {

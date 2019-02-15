@@ -75,7 +75,6 @@ import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 
 import javax.annotation.Resource;
-import javax.jws.WebMethod;
 import javax.ws.rs.core.Response;
 import javax.xml.bind.JAXBContext;
 import javax.xml.parsers.SAXParserFactory;
@@ -228,9 +227,8 @@ public class GPWMSServiceImpl implements GPWMSService {
      * @return {@link Response}
      * @throws Exception
      */
-    @WebMethod(exclude = true)
     @Override
-    public WMSGetFeatureInfoResponse wmsGetFeatureInfo(GPWMSGetFeatureInfoRequest request) throws Exception {
+    public Response wmsGetFeatureInfo(GPWMSGetFeatureInfoRequest request) throws Exception {
         if (request == null) {
             throw new IllegalParameterFault(this.wmsMessageSource.getMessage("gp_wms_request.valid",
                     new Object[]{"GPWMSGetFeatureInfoRequest"}, ENGLISH));
@@ -253,6 +251,7 @@ public class GPWMSServiceImpl implements GPWMSService {
                 GPWMSGetMapBaseRequest wmsGetMapBaseRequest = new WMSGetMapBaseRequest(request.getBoundingBox().toWMSBoundingBox(),
                         wmsGetFeatureInfoElement.getLayers(), request.getCrs(), request.getWidth(), request.getHeight());
                 FeatureCollection featureCollection = (FeatureCollection) wmsGetFeatureInfoV111Request
+                        .withWMSGetMapRequest(wmsGetMapBaseRequest)
                         .withFeatureCount(20)
                         .withQueryLayers(wmsGetFeatureInfoElement.getLayers().stream().toArray(s -> new String[s]))
                         .withX(request.getPoint().getX())
@@ -260,12 +259,12 @@ public class GPWMSServiceImpl implements GPWMSService {
                         .withInfoFormat(WMSFeatureInfoFormat.JSON)
                         .getResponse();
                 logger.debug("########################FOUND : {}\n", featureCollection);
-                wmsGetFeatureInfoResponse.addFeatureCollection(featureCollection);
+                wmsGetFeatureInfoResponse.addFeature(featureCollection);
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
         }
-        return wmsGetFeatureInfoResponse;
+        return Response.ok(wmsGetFeatureInfoResponse).build();
     }
 
     private boolean isURLServerAlreadyExists(String serverUrl) {

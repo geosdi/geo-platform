@@ -1,33 +1,36 @@
 {
-  "crs": "EPSG:4326",
-  "width": "256",
-  "height": "256",
-  "boundingBox": {
-    "minx": -82.06792594360869,
-    "miny": 35.02655390844236,
-    "maxx": -82.06781624389134,
-    "maxy": 35.02664373997006
-  },
-  "point": {
-    "x": 98,
-    "y": 34
-  },
-  "wmsFeatureInfoElements": [
-    {
-      "wmsServerURL": "http://150.145.141.180/geoserver/wms",
-      "layers": [
-        "topp:states",
-        "siti_protetti:zsc",
-        "retenatura:zsc"
-      ]
+  "GPWMSGetFeatureInfoRequest": {
+    "lang": "en",
+    "crs": "EPSG:4326",
+    "width": "256",
+    "height": "256",
+    "boundingBox": {
+      "minx": -82.06792594360869,
+      "miny": 35.02655390844236,
+      "maxx": -82.06781624389134,
+      "maxy": 35.02664373997006
     },
-    {
-      "wmsServerURL": "http://150.145.141.180/geoserver/wms",
-      "layers": [
-        "topp:states",
-        "siti_protetti:zsc",
-        "retenatura:zsc"
-      ]
-    }
-  ]
+    "point": {
+      "x": 98,
+      "y": 34
+    },
+    "wmsFeatureInfoElements": [
+      {
+        "wmsServerURL": "http://150.145.141.180/geoserver/wms",
+        "layers": [
+          "topp:states",
+          "siti_protetti:zsc",
+          "retenatura:zsc"
+        ]
+      },
+      {
+        "wmsServerURL": "http://150.145.141.180/geoserver/wms",
+        "layers": [
+          "topp:states",
+          "siti_protetti:zsc",
+          "retenatura:zsc"
+        ]
+      }
+    ]
+  }
 }

@@ -1,7 +1,5 @@
 package org.geosdi.geoplatform.services.response;
 
-import org.geojson.FeatureCollection;
-
 import javax.annotation.Nonnull;
 import javax.annotation.meta.When;
 import java.io.Serializable;
@@ -14,12 +12,12 @@ import java.util.List;
 public interface GPWMSGetFeatureInfoResponse extends Serializable {
 
     /**
-     * @return {@link List<FeatureCollection>}
+     * @return {@link List<Object>}
      */
-    List<FeatureCollection> getFeatures();
+    List<Object> getFeatures();
 
     /**
-     * @param theFeatureCollection
+     * @param theFeature
      */
-    void addFeatureCollection(@Nonnull(when = When.NEVER) FeatureCollection theFeatureCollection);
+    void addFeature(@Nonnull(when = When.NEVER) Object theFeature);
 }

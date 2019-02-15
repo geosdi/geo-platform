@@ -32,7 +32,7 @@
         <jaxws:inInterceptors>
             <ref bean="serverLoggingInInterceptorBean"/>
             <ref bean="serverSecurityInInterceptorBean"/>
-        </jaxws:inInterceptors>        
+        </jaxws:inInterceptors>
         <jaxws:outInterceptors>
             <ref bean="serverLoggingOutInterceptorBean"/>
             <ref bean="serverSecurityOutInterceptorBean"/>

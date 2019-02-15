@@ -27,10 +27,10 @@ public class GPWMSRequestMapperTest {
 
     private static final Logger logger = LoggerFactory.getLogger(GPWMSRequestMapperTest.class);
     //
-    private static final GPJacksonSupport jacksonSupport = new GPJacksonSupport(UNWRAP_ROOT_VALUE_DISABLE,
+    private static final GPJacksonSupport jacksonSupport = new GPJacksonSupport(UNWRAP_ROOT_VALUE_ENABLE,
             FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
             ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
-            WRAP_ROOT_VALUE_DISABLE,
+            WRAP_ROOT_VALUE_ENABLE,
             INDENT_OUTPUT_ENABLE)
             .configure(NON_NULL);
 
@@ -44,26 +44,29 @@ public class GPWMSRequestMapperTest {
     public void b_readGPWMSGetFeatureInfoRequestFromStringTest() throws Exception {
         GPWMSGetFeatureInfoRequest wmsGetFeatureInfoRequest = jacksonSupport
                 .getDefaultMapper().readValue(new StringReader("{\n" +
-                        "  \"crs\" : \"EPSG:4326\",\n" +
-                        "  \"width\" : \"256\",\n" +
-                        "  \"height\" : \"256\",\n" +
-                        "  \"boundingBox\" : {\n" +
-                        "    \"minx\" : -82.06792594360869,\n" +
-                        "    \"miny\" : 35.02655390844236,\n" +
-                        "    \"maxx\" : -82.06781624389134,\n" +
-                        "    \"maxy\" : 35.02664373997006\n" +
-                        "  },\n" +
-                        "  \"point\" : {\n" +
-                        "    \"x\" : 98,\n" +
-                        "    \"y\" : 34\n" +
-                        "  },\n" +
-                        "  \"wmsFeatureInfoElements\" : [ {\n" +
-                        "    \"wmsServerURL\" : \"http://150.145.141.180/geoserver/wms\",\n" +
-                        "    \"layers\" : [ \"topp:states\", \"siti_protetti:zsc\", \"retenatura:zsc\" ]\n" +
-                        "  }, {\n" +
-                        "    \"wmsServerURL\" : \"http://150.145.141.180/geoserver/wms\",\n" +
-                        "    \"layers\" : [ \"topp:states\", \"siti_protetti:zsc\", \"retenatura:zsc\" ]\n" +
-                        "  } ]\n" +
+                        "  \"GPWMSGetFeatureInfoRequest\" : {\n" +
+                        "    \"lang\" : \"en\",\n" +
+                        "    \"crs\" : \"EPSG:4326\",\n" +
+                        "    \"width\" : \"256\",\n" +
+                        "    \"height\" : \"256\",\n" +
+                        "    \"boundingBox\" : {\n" +
+                        "      \"minx\" : -82.06792594360869,\n" +
+                        "      \"miny\" : 35.02655390844236,\n" +
+                        "      \"maxx\" : -82.06781624389134,\n" +
+                        "      \"maxy\" : 35.02664373997006\n" +
+                        "    },\n" +
+                        "    \"point\" : {\n" +
+                        "      \"x\" : 98,\n" +
+                        "      \"y\" : 34\n" +
+                        "    },\n" +
+                        "    \"wmsFeatureInfoElements\" : [ {\n" +
+                        "      \"wmsServerURL\" : \"http://150.145.141.180/geoserver/wms\",\n" +
+                        "      \"layers\" : [ \"topp:states\", \"siti_protetti:zsc\", \"retenatura:zsc\" ]\n" +
+                        "    }, {\n" +
+                        "      \"wmsServerURL\" : \"http://150.145.141.180/geoserver/wms\",\n" +
+                        "      \"layers\" : [ \"topp:states\", \"siti_protetti:zsc\", \"retenatura:zsc\" ]\n" +
+                        "    } ]\n" +
+                        "  }\n" +
                         "}"), GPWMSGetFeatureInfoRequest.class);
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@GP_WMS_GET_FEATURE_INFO_REQUEST_FROM_STRING : {}\n",
                 wmsGetFeatureInfoRequest);

@@ -2,14 +2,17 @@ package org.geosdi.geoplatform.services.request;
 
 import org.geosdi.geoplatform.hibernate.validator.support.request.GPI18NRequestValidator;
 
+import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlTransient;
+
 import static java.util.Locale.ENGLISH;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-//@XmlTransient
-//@XmlSeeAlso(value = {GPWMSGetFeatureInfoRequest.class})
+@XmlTransient
+@XmlSeeAlso(value = {GPWMSGetFeatureInfoRequest.class})
 public abstract class GPWMSRequest implements GPI18NRequestValidator {
 
     private static final long serialVersionUID = -7835983957131722680L;

@@ -8,8 +8,8 @@ import lombok.ToString;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
 /**
@@ -20,7 +20,8 @@ import java.util.List;
 @Setter
 @ToString
 @NoArgsConstructor
-@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "GPWMSGetFeatureInfoRequest")
+@XmlAccessorType
 public class GPWMSGetFeatureInfoRequest extends GPWMSRequest {
 
     private static final long serialVersionUID = 5591882782946299016L;
@@ -36,10 +37,10 @@ public class GPWMSGetFeatureInfoRequest extends GPWMSRequest {
     private String height;
     @NotNull(message = "{wms_bbox_not_null}")
     @Valid
-    private GPWMSGetFeatureInfoBoundingBox boundingBox;
+    private WMSGetFeatureInfoBoundingBox boundingBox;
     @NotNull(message = "{wms_point_not_null}")
     @Valid
-    private GPWMSGetFeatureInfoPoint point;
+    private WMSGetFeatureInfoPoint point;
     @NotNull(message = "{wms_get_feature_info_elements_not_null}")
     private List<@Valid GPWMSGetFeatureInfoElement> wmsFeatureInfoElements;
 }

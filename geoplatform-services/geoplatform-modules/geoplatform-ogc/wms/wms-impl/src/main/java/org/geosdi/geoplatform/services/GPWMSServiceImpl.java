@@ -37,18 +37,30 @@ package org.geosdi.geoplatform.services;
 import com.google.common.collect.Lists;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
+import org.geojson.FeatureCollection;
+import org.geosdi.geoplatform.connector.server.request.GPWMSGetMapBaseRequest;
+import org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat;
+import org.geosdi.geoplatform.connector.server.request.WMSGetMapBaseRequest;
+import org.geosdi.geoplatform.connector.server.v111.GPWMSGetFeatureInfoV111Request;
+import org.geosdi.geoplatform.connector.server.v111.IGPWMSConnectorStoreV111;
 import org.geosdi.geoplatform.core.dao.GPServerDAO;
 import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPLayerInfo;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
+import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.exception.ServerInternalFault;
+import org.geosdi.geoplatform.hibernate.validator.support.GPI18NValidator;
+import org.geosdi.geoplatform.hibernate.validator.support.request.GPI18NRequestValidator;
 import org.geosdi.geoplatform.request.RequestByID;
 import org.geosdi.geoplatform.response.RasterLayerDTO;
 import org.geosdi.geoplatform.response.ServerDTO;
 import org.geosdi.geoplatform.services.httpclient.GeoSDIHttpClient;
+import org.geosdi.geoplatform.services.request.GPWMSGetFeatureInfoElement;
+import org.geosdi.geoplatform.services.request.GPWMSGetFeatureInfoRequest;
 import org.geosdi.geoplatform.services.request.WMSHeaderParam;
 import org.geosdi.geoplatform.services.response.GPLayerTypeResponse;
+import org.geosdi.geoplatform.services.response.WMSGetFeatureInfoResponse;
 import org.geosdi.geoplatform.wms.v111.WMSDescribeLayerResponse;
 import org.geotools.data.ows.CRSEnvelope;
 import org.geotools.data.ows.Layer;
@@ -58,9 +70,13 @@ import org.geotools.data.wms.WebMapServer;
 import org.geotools.ows.ServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.MessageSource;
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 
+import javax.annotation.Resource;
+import javax.jws.WebMethod;
+import javax.ws.rs.core.Response;
 import javax.xml.bind.JAXBContext;
 import javax.xml.parsers.SAXParserFactory;
 import javax.xml.transform.sax.SAXSource;
@@ -76,24 +92,38 @@ import java.util.Map;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.FALSE;
+import static java.util.Locale.ENGLISH;
+import static java.util.Locale.forLanguageTag;
+import static org.geosdi.geoplatform.connector.pool.builder.v111.GPWMSConnectorBuilderPoolV111.wmsConnectorBuilderPoolV111;
+import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
 
 public class GPWMSServiceImpl implements GPWMSService {
 
+    private static final Logger logger = LoggerFactory.getLogger(GPWMSServiceImpl.class);
+    //
     private final static String EPSG_4326 = "EPSG:4326";
     private final static String EPSG_3857 = "EPSG:3857";
     private final static String EPSG_GOOGLE = "EPSG:900913";
-    private Logger logger = LoggerFactory.getLogger(
-            GPWMSServiceImpl.class);
-    // DAO
-    private GPServerDAO serverDao;
     private static final String GEB = "earthbuilder.google.com";
+    // DAO
+    @Resource(name = "serverDAO")
+    private GPServerDAO serverDao;
+    @Resource(name = "wmsMessageSource")
+    private MessageSource wmsMessageSource;
+    @Resource(name = "wmsRequestValidator")
+    private GPI18NValidator<GPI18NRequestValidator, String> wmsRequestValidator;
 
-    public GPWMSServiceImpl() {
-    }
-
+    /**
+     * @param serverUrl
+     * @param request
+     * @param token
+     * @param authkey
+     * @return {@link ServerDTO}
+     * @throws ResourceNotFoundFault
+     */
     @Override
-    public ServerDTO getCapabilities(String serverUrl, RequestByID request,
-            String token, String authkey) throws ResourceNotFoundFault {
+    public ServerDTO getCapabilities(String serverUrl, RequestByID request, String token, String authkey)
+            throws ResourceNotFoundFault {
         ServerDTO serverDTO;
         if (request.getId() != null) {
             GeoPlatformServer server = serverDao.find(request.getId());
@@ -112,6 +142,15 @@ public class GPWMSServiceImpl implements GPWMSService {
         return serverDTO;
     }
 
+    /**
+     * @param serverUrl
+     * @param request
+     * @param token
+     * @param authkey
+     * @param headers
+     * @return {@link ServerDTO}
+     * @throws ResourceNotFoundFault
+     */
     @Override
     public ServerDTO getCapabilitiesAuth(String serverUrl, RequestByID request, String token, String authkey,
             List<WMSHeaderParam> headers) throws ResourceNotFoundFault {
@@ -182,6 +221,51 @@ public class GPWMSServiceImpl implements GPWMSService {
             ex.printStackTrace();
             throw new ServerInternalFault(ex.getMessage());
         }
+    }
+
+    /**
+     * @param request
+     * @return {@link Response}
+     * @throws Exception
+     */
+    @WebMethod(exclude = true)
+    @Override
+    public WMSGetFeatureInfoResponse wmsGetFeatureInfo(GPWMSGetFeatureInfoRequest request) throws Exception {
+        if (request == null) {
+            throw new IllegalParameterFault(this.wmsMessageSource.getMessage("gp_wms_request.valid",
+                    new Object[]{"GPWMSGetFeatureInfoRequest"}, ENGLISH));
+        }
+        logger.trace("##########################Validating Request -------------------> {}\n", request);
+        String message = this.wmsRequestValidator.validate(request, forLanguageTag(request.getLang()));
+        if (message != null)
+            throw new IllegalParameterFault(message);
+        WMSGetFeatureInfoResponse wmsGetFeatureInfoResponse = new WMSGetFeatureInfoResponse();
+        for (GPWMSGetFeatureInfoElement wmsGetFeatureInfoElement : request.getWmsFeatureInfoElements()) {
+            try {
+                IGPWMSConnectorStoreV111 wmsServerConnector = wmsConnectorBuilderPoolV111()
+                        .withServerUrl(new URL(wmsGetFeatureInfoElement.getWmsServerURL()))
+                        .withPooledConnectorConfig(pooledConnectorConfigBuilder()
+                                .withMaxTotalConnections(60)
+                                .withDefaultMaxPerRoute(30)
+                                .withMaxRedirect(15)
+                                .build()).build();
+                GPWMSGetFeatureInfoV111Request<Object> wmsGetFeatureInfoV111Request = wmsServerConnector.createGetFeatureInfoRequest();
+                GPWMSGetMapBaseRequest wmsGetMapBaseRequest = new WMSGetMapBaseRequest(request.getBoundingBox().toWMSBoundingBox(),
+                        wmsGetFeatureInfoElement.getLayers(), request.getCrs(), request.getWidth(), request.getHeight());
+                FeatureCollection featureCollection = (FeatureCollection) wmsGetFeatureInfoV111Request
+                        .withFeatureCount(20)
+                        .withQueryLayers(wmsGetFeatureInfoElement.getLayers().stream().toArray(s -> new String[s]))
+                        .withX(request.getPoint().getX())
+                        .withY(request.getPoint().getY())
+                        .withInfoFormat(WMSFeatureInfoFormat.JSON)
+                        .getResponse();
+                logger.debug("########################FOUND : {}\n", featureCollection);
+                wmsGetFeatureInfoResponse.addFeatureCollection(featureCollection);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+        return wmsGetFeatureInfoResponse;
     }
 
     private boolean isURLServerAlreadyExists(String serverUrl) {
@@ -451,9 +535,4 @@ public class GPWMSServiceImpl implements GPWMSService {
         double tmp = Math.PI / 4.0 + y / 2.0;
         return 20037508.34 * Math.log(Math.tan(tmp)) / Math.PI;
     }
-
-    public void setServerDao(GPServerDAO serverDao) {
-        this.serverDao = serverDao;
-    }
-
 }

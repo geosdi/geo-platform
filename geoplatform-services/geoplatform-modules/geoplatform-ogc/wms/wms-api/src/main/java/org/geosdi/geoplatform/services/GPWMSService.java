@@ -41,8 +41,10 @@ import org.codehaus.jra.HttpResource;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.RequestByID;
 import org.geosdi.geoplatform.response.ServerDTO;
+import org.geosdi.geoplatform.services.request.GPWMSGetFeatureInfoRequest;
 import org.geosdi.geoplatform.services.request.WMSHeaderParam;
 import org.geosdi.geoplatform.services.response.GPLayerTypeResponse;
+import org.geosdi.geoplatform.services.response.WMSGetFeatureInfoResponse;
 import org.geosdi.geoplatform.services.rs.path.GPServiceRSPathConfig;
 
 import javax.jws.WebParam;
@@ -50,6 +52,7 @@ import javax.jws.WebResult;
 import javax.jws.WebService;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 /**
@@ -93,14 +96,9 @@ public interface GPWMSService {
     @HttpResource(location = "/wms/capabilities/{id}")
     @WebResult(name = "Capabilities")
     ServerDTO getCapabilities(@QueryParam(value = "serverUrl")
-    @WebParam(name = "serverUrl") String serverUrl,
-            @QueryParam(value = "")
-            @WebParam(name = "request") RequestByID request,
-            @QueryParam(value = "token")
-            @WebParam(name = "token") String token,
-            @QueryParam(value = "authkey")
-            @WebParam(name = "authkey") String authkey)
-            throws ResourceNotFoundFault;
+    @WebParam(name = "serverUrl") String serverUrl, @QueryParam(value = "") @WebParam(name = "request") RequestByID request,
+            @QueryParam(value = "token") @WebParam(name = "token") String token,
+            @QueryParam(value = "authkey") @WebParam(name = "authkey") String authkey) throws ResourceNotFoundFault;
 
     @GET
     @Path(value = GPServiceRSPathConfig.GET_WMS_CAPABILITIES)
@@ -108,24 +106,18 @@ public interface GPWMSService {
     @HttpResource(location = "/wms/capabilities/{id}")
     @WebResult(name = "Capabilities")
     ServerDTO getCapabilitiesAuth(@QueryParam(value = "serverUrl")
-    @WebParam(name = "serverUrl") String serverUrl,
-            @QueryParam(value = "")
-            @WebParam(name = "request") RequestByID request,
-            @QueryParam(value = "token")
-            @WebParam(name = "token") String token,
-            @QueryParam(value = "authkey")
-            @WebParam(name = "authkey") String authkey,
-            @QueryParam(value = "headers")
-            @WebParam(name = "headers") List<WMSHeaderParam> headers)
-            throws ResourceNotFoundFault;
+    @WebParam(name = "serverUrl") String serverUrl, @QueryParam(value = "") @WebParam(name = "request") RequestByID request,
+            @QueryParam(value = "token") @WebParam(name = "token") String token,
+            @QueryParam(value = "authkey") @WebParam(name = "authkey") String authkey,
+            @QueryParam(value = "headers") @WebParam(name = "headers") List<WMSHeaderParam> headers) throws ResourceNotFoundFault;
 
     @GET
     @Path(value = GPServiceRSPathConfig.GET_WMS_SERVER_BY_URL)
     @Get
     @HttpResource(location = "/server/{serverUrl}")
     @WebResult(name = "Servers")
-    ServerDTO getShortServer(@QueryParam(value = "serverUrl")
-    @WebParam(name = "serverUrl") String serverUrl) throws ResourceNotFoundFault;
+    ServerDTO getShortServer(@QueryParam(value = "serverUrl") @WebParam(name = "serverUrl") String serverUrl)
+            throws ResourceNotFoundFault;
 
     /**
      * @param serverURL
@@ -137,7 +129,15 @@ public interface GPWMSService {
     @Path(value = GPServiceRSPathConfig.GET_LAYER_TYPE)
     @Get
     GPLayerTypeResponse getLayerType(@QueryParam(value = "serverURL") @WebParam(name = "serverURL") String serverURL,
-            @QueryParam(value = "layerName") @WebParam(name = "layerName") String layerName)
-            throws Exception;
+            @QueryParam(value = "layerName") @WebParam(name = "layerName") String layerName) throws Exception;
+
+    /**
+     * @param request
+     * @return {@link Response}
+     * @throws Exception
+     */
+    @POST
+    @Path(value = GPServiceRSPathConfig.WMS_GET_FEATURE_INFO_PATH)
+    WMSGetFeatureInfoResponse wmsGetFeatureInfo(GPWMSGetFeatureInfoRequest request) throws Exception;
     // </editor-fold>
 }

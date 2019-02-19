@@ -43,6 +43,9 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import java.io.InputStream;
 
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -54,10 +57,10 @@ public class XmlStreamReaderBuilder implements GPXmlStreamReaderBuilder {
 
     private XmlStreamReaderBuilder() {
         this.factory = XMLInputFactory.newInstance();
-        factory.setProperty(XMLInputFactory.IS_COALESCING, Boolean.FALSE);
-        factory.setProperty(XMLInputFactory.IS_NAMESPACE_AWARE, Boolean.TRUE);
+        factory.setProperty(XMLInputFactory.IS_COALESCING, FALSE);
+        factory.setProperty(XMLInputFactory.IS_NAMESPACE_AWARE, TRUE);
         factory.setProperty("http://java.sun.com/xml/stream/"
-                + "properties/report-cdata-event", Boolean.TRUE);
+                + "properties/report-cdata-event", TRUE);
     }
 
     /**

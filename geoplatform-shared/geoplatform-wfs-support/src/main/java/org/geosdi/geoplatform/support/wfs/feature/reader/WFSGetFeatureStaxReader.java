@@ -78,11 +78,19 @@ public class WFSGetFeatureStaxReader extends AbstractStaxStreamReader<FeatureCol
     //
     private final GMLBaseSextanteParser sextanteParser = GMLBaseParametersRepo.getDefaultSextanteParser();
 
+    /**
+     * @param layerSchema
+     */
     public WFSGetFeatureStaxReader(LayerSchemaDTO layerSchema) {
         checkArgument(layerSchema != null, "The LayerSchema must not be null.");
         this.layerSchema = layerSchema;
     }
 
+    /**
+     * @param o
+     * @return {@link FeatureCollectionDTO}
+     * @throws Exception
+     */
     @Override
     public FeatureCollectionDTO read(Object o) throws Exception {
         XMLStreamReader reader = super.acquireReader(o);

@@ -62,7 +62,6 @@ public abstract class StreamBuildHandler<S extends Closeable> {
         if (successor != null) {
             return successor.buildStream(o);
         }
-
         return null;
     }
 

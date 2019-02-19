@@ -33,6 +33,12 @@
             <artifactId>geojson-jackson</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-xml-utilities</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
         <!-- =========================================================== -->
         <!-- ================ GEOPLATFORM BRIDGE SUPPORT =============== -->
         <!-- =========================================================== -->

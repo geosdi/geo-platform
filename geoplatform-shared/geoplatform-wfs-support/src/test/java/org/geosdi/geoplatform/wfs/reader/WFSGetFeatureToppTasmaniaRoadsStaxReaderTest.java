@@ -63,9 +63,9 @@ public class WFSGetFeatureToppTasmaniaRoadsStaxReaderTest {
 
     @BeforeClass
     public static void beforeClass() throws Exception {
-        toppTasmaniaRoadsLayerSchema = jaxbContextBuilder.unmarshal(new File("./src/test/resources/reader/LayerSchemaToppTasmaniaRoads.xml"),
+        toppTasmaniaRoadsLayerSchema = jaxbContextBuilder.unmarshal(new File("./src/test/resources/xmlStreamReader/LayerSchemaToppTasmaniaRoads.xml"),
                 LayerSchemaDTO.class);
-        getFeatureToppTasmaniaRoads = Paths.get("./src/test/resources/reader/GetFeatureToppTasmaniaRoads.xml").toFile();
+        getFeatureToppTasmaniaRoads = Paths.get("./src/test/resources/xmlStreamReader/GetFeatureToppTasmaniaRoads.xml").toFile();
         Assert.assertNotNull("The LayerSchemaDTO for topp:tasmania_roads must not be null.", toppTasmaniaRoadsLayerSchema);
         Assert.assertNotNull("The File getFeatureToppTasmaniaRoads must not be null.", getFeatureToppTasmaniaRoads);
     }

@@ -41,6 +41,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nonnull;
+import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.events.XMLEvent;
@@ -66,7 +67,7 @@ public abstract class AbstractStaxStreamReader<T> implements GeoPlatformStaxRead
 
     protected final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
-    private ThreadLocal<XMLStreamReader> reader = new ThreadLocal<>();
+    private ThreadLocal<XMLStreamReader> xmlStreamReader = new ThreadLocal<>();
     private StreamReaderBuildHandler streamBuilder = new InputStreamBuildHandler();
     private XmlStreamReaderBuilder xmlStreamBuilder = XmlStreamReaderBuilder.newInstance();
     private ThreadLocal<InputStream> stream = new ThreadLocal<>();
@@ -93,12 +94,12 @@ public abstract class AbstractStaxStreamReader<T> implements GeoPlatformStaxRead
         this.reset();
         checkNotNull(o, "The Object passed to " + "acquire Reader must not be null.");
         this.stream.set(streamBuilder.buildStream(o));
-        this.reader.set((this.stream.get() != null) ? xmlStreamBuilder.build(stream.get()) : xmlStreamBuilder.build(o));
-        return this.reader.get();
+        this.xmlStreamReader.set((this.stream.get() != null) ? xmlStreamBuilder.build(stream.get()) : xmlStreamBuilder.build(o));
+        return this.xmlStreamReader.get();
     }
 
     /**
-     * Close the {@link XMLStreamReader} reader and the {@link InputStream}
+     * Close the {@link XMLStreamReader} xmlStreamReader and the {@link InputStream}
      * stream
      *
      * @throws XMLStreamException
@@ -115,12 +116,12 @@ public abstract class AbstractStaxStreamReader<T> implements GeoPlatformStaxRead
      * @throws XMLStreamException
      */
     protected void goToEndTag(String tagName) throws Exception {
-        int eventType = reader().getEventType();
-        while (reader().hasNext()) {
-            if (eventType == XMLEvent.END_ELEMENT && tagName.equalsIgnoreCase(reader().getLocalName())) {
+        int eventType = xmlStreamReader().getEventType();
+        while (xmlStreamReader().hasNext()) {
+            if (eventType == XMLEvent.END_ELEMENT && tagName.equalsIgnoreCase(xmlStreamReader().getLocalName())) {
                 return;
             }
-            eventType = reader().next();
+            eventType = xmlStreamReader().next();
         }
         throw new XMLStreamException("Tag Name '" + tagName + "' not found.");
     }
@@ -135,7 +136,7 @@ public abstract class AbstractStaxStreamReader<T> implements GeoPlatformStaxRead
     protected Boolean isTagName(@Nonnull(when = NEVER) String prefix, @Nonnull(when = NEVER) String localName) throws Exception {
         checkArgument((prefix != null), "The Parameter prefix must not be null.");
         checkArgument((localName != null), "The Parameter localName must not be null.");
-        return ((prefix.equals(reader().getPrefix()) && localName.equals(reader().getLocalName())) ? TRUE : FALSE);
+        return ((prefix.equals(xmlStreamReader().getPrefix()) && localName.equals(xmlStreamReader().getLocalName())) ? TRUE : FALSE);
     }
 
     /**
@@ -145,20 +146,20 @@ public abstract class AbstractStaxStreamReader<T> implements GeoPlatformStaxRead
      */
     protected Boolean isTagPrefix(@Nonnull(when = NEVER) String prefix) throws Exception {
         checkArgument((prefix != null), "The Parameter prefix must not be null.");
-        return prefix.equalsIgnoreCase(reader.get().getPrefix());
+        return prefix.equalsIgnoreCase(xmlStreamReader.get().getPrefix());
     }
 
     /**
-     * Close both {@link XMLStreamReader} reader and {@link InputStream} stream
-     * used to build the reader
+     * Close both {@link XMLStreamReader} xmlStreamReader and {@link InputStream} stream
+     * used to build the xmlStreamReader
      *
      * @throws XMLStreamException
      * @throws IOException
      */
     protected void reset() throws XMLStreamException, IOException {
-        if ((reader != null) && (reader.get() != null)) {
-            reader.get().close();
-            this.reader.set(null);
+        if ((xmlStreamReader != null) && (xmlStreamReader.get() != null)) {
+            xmlStreamReader.get().close();
+            this.xmlStreamReader.set(null);
         }
         if ((stream != null) && (stream.get() != null)) {
             stream.get().close();
@@ -169,9 +170,18 @@ public abstract class AbstractStaxStreamReader<T> implements GeoPlatformStaxRead
     /**
      * @return {@link XMLStreamReader}
      */
-    protected final XMLStreamReader reader() throws Exception {
-        checkArgument(this.reader.get() != null, "The XMLStreamReader must not be null");
-        return this.reader.get();
+    protected final XMLStreamReader xmlStreamReader() throws Exception {
+        checkArgument(this.xmlStreamReader.get() != null, "The XMLStreamReader must not be null");
+        return this.xmlStreamReader.get();
+    }
+
+    /**
+     * @return {@link XMLEventReader}
+     * @throws Exception
+     */
+    protected final XMLEventReader xmlEventReader() throws Exception {
+        checkArgument(this.xmlStreamReader.get() != null, "The XMLStreamReader must not be null");
+        return xmlStreamBuilder.build(this.xmlStreamReader.get());
     }
 
     /**
@@ -179,5 +189,5 @@ public abstract class AbstractStaxStreamReader<T> implements GeoPlatformStaxRead
      * @return {@link T}
      * @throws Exception
      */
-    public abstract T read(Object o) throws Exception;
+    public abstract T read(@Nonnull(when = NEVER) Object o) throws Exception;
 }

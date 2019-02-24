@@ -63,9 +63,9 @@ public class WFSGetFeatureCreateLayerStaxReaderTest {
 
     @BeforeClass
     public static void beforeClass() throws Exception {
-        createLayerSchema = jaxbContextBuilder.unmarshal(new File("./src/test/resources/reader/LayerSchemaCreateLayer.xml"),
+        createLayerSchema = jaxbContextBuilder.unmarshal(new File("./src/test/resources/xmlStreamReader/LayerSchemaCreateLayer.xml"),
                 LayerSchemaDTO.class);
-        getFeatureCreateLayer = Paths.get("./src/test/resources/reader/GetFeatureCreateLayer.xml").toFile();
+        getFeatureCreateLayer = Paths.get("./src/test/resources/xmlStreamReader/GetFeatureCreateLayer.xml").toFile();
         assertNotNull("The LayerSchemaDTO for createLayer must not be null.", createLayerSchema);
         assertNotNull("The File getFeatureCreateLayer must not be null.", getFeatureCreateLayer);
     }

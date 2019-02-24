@@ -29,8 +29,15 @@
         </dependency>
 
         <dependency>
-            <groupId>de.grundid.opendatalab</groupId>
-            <artifactId>geojson-jackson</artifactId>
+            <groupId>org.geosdi</groupId>
+            <artifactId>gml-2.1.2</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-jackson-jts-support</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
@@ -95,6 +102,12 @@
             <artifactId>commons-io</artifactId>
         </dependency>
 
+        <!-- JTS -->
+        <dependency>
+            <groupId>org.locationtech.jts</groupId>
+            <artifactId>jts-core</artifactId>
+        </dependency>
+
         <!-- logging dependencies, delegate all to slf4j and use logback -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -116,13 +129,6 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- JTS -->
-        <dependency>
-            <groupId>org.locationtech.jts</groupId>
-            <artifactId>jts-core</artifactId>
             <scope>test</scope>
         </dependency>
 

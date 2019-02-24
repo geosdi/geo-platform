@@ -54,12 +54,12 @@ public class GPWMSConnectorStoreV111PrositTest {
     @Test
     public void c_wmsGetFeatureInfoV111Test() throws Exception {
         GPWMSGetFeatureInfoV111Request<Object> wmsGetFeatureInfoRequest = wmsServerConnector.createGetFeatureInfoRequest();
-        GPWMSBoundingBox wmsBoundinBox = new WMSBoundingBox(-82.06792594360869, 35.02655390844236, -82.06781624389134, 35.02664373997006);
-        GPWMSGetMapBaseRequest wmsGetMapBaseRequest = new WMSGetMapBaseRequest(wmsBoundinBox, Arrays.asList("topp:states"),
+        GPWMSBoundingBox wmsBoundinBox = new WMSBoundingBox(15.824662897187245, 40.97210836426291, 15.836561468047133, 40.98109151703362);
+        GPWMSGetMapBaseRequest wmsGetMapBaseRequest = new WMSGetMapBaseRequest(wmsBoundinBox, Arrays.asList("admin:admin_shp_vigneti_catastali", "admin:admin_shp_oliveti_catastali"),
                 "EPSG:4326", "256", "256");
-        logger.info("##################################WMS_GET_FEATURE_INFO_V111_RESPONSE : {}\n", wmsGetFeatureInfoRequest.withQueryLayers("topp:states")
+        logger.info("##################################WMS_GET_FEATURE_INFO_V111_RESPONSE : {}\n", wmsGetFeatureInfoRequest.withQueryLayers("admin:admin_shp_vigneti_catastali", "admin:admin_shp_oliveti_catastali")
                 .withWMSGetMapRequest(wmsGetMapBaseRequest)
-                .withFeatureCount(2)
-                .withInfoFormat(WMSFeatureInfoFormat.GML).withX(73).withY(103).getResponse());
+                .withFeatureCount(8)
+                .withInfoFormat(WMSFeatureInfoFormat.GML).withX(154).withY(230).getResponse());
     }
 }

@@ -1,7 +1,8 @@
 package org.geosdi.geoplatform.connector.bridge.implementor.gml;
 
-import com.google.common.io.CharStreams;
 import org.geosdi.geoplatform.connector.bridge.implementor.GPWMSGetFeatureInfoReader;
+import org.geosdi.geoplatform.connector.reader.stax.GPWMSGetFeatureInfoStaxReader;
+import org.geosdi.geoplatform.connector.reader.stax.WMSGetFeatureInfoStaxReader;
 import org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +24,8 @@ import static org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoForm
 public class GPWMSGetFeatureInfoGmlReader implements GPWMSGetFeatureInfoReader<Object> {
 
     private static final Logger logger = LoggerFactory.getLogger(GPWMSGetFeatureInfoGmlReader.class);
+    //
+    private static final WMSGetFeatureInfoStaxReader wmsGetFeatureInfoStaxReader = new GPWMSGetFeatureInfoStaxReader();
 
     /**
      * <p>For the moment this Reader returns a {@link String}.Must be implement a Reader with Stax</p>
@@ -35,7 +38,7 @@ public class GPWMSGetFeatureInfoGmlReader implements GPWMSGetFeatureInfoReader<O
     public Object read(@Nonnull(when = NEVER) InputStream inputStream) throws Exception {
         checkArgument(inputStream != null, "The Parameter inputStream must not be null.");
         logger.debug("##########################Executing {}#read.", this);
-        return CharStreams.toString(new InputStreamReader(inputStream, UTF_8));
+        return wmsGetFeatureInfoStaxReader.read(new InputStreamReader(inputStream, UTF_8));
     }
 
     /**

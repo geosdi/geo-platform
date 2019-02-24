@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfs:FeatureCollection xmlns="http://www.opengis.net/wfs" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:gml="http://www.opengis.net/gml" xmlns:admin="http://www.geosdi.org/admin"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xsi:schemaLocation="http://www.geosdi.org/admin https://prosit.geosdi.org/geoserver/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=admin%3Aadmin_shp_vigneti_catastali,admin%3Aadmin_shp_oliveti_catastali http://www.opengis.net/wfs https://prosit.geosdi.org/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd">
+    <gml:boundedBy>
+        <gml:null>unknown</gml:null>
+    </gml:boundedBy>
+    <gml:featureMember>
+        <admin:admin_shp_vigneti_catastali fid="admin_shp_vigneti_catastali.131654">
+            <admin:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:32633">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        569906.76659643,4536125.23165532 569907.15849701,4536126.58710725
+                                        570003.71127722,4536109.37534061 569978.8469995,4536082.0201152
+                                        569987.02999951,4536099.5621152 569906.76659643,4536125.23165532
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </admin:the_geom>
+            <admin:COMUNE>L738</admin:COMUNE>
+            <admin:SEZIONE/>
+            <admin:FOGLIO>33</admin:FOGLIO>
+            <admin:ALLEGATO/>
+            <admin:SVILUPPO/>
+            <admin:NUMERO>302</admin:NUMERO>
+            <admin:LIVELLO>PARTICELLE</admin:LIVELLO>
+            <admin:DATA>2015-11-30</admin:DATA>
+            <admin:VISUALIZZA/>
+            <admin:cl_agr_ty>01</admin:cl_agr_ty>
+        </admin:admin_shp_vigneti_catastali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_oliveti_catastali fid="admin_shp_oliveti_catastali.262856">
+            <admin:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:32633">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        569989.66658286,4536080.76217259 569989.29573658,4536083.5220921
+                                        570029.69196243,4536131.48736666 569989.66658286,4536080.76217259
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </admin:the_geom>
+            <admin:COMUNE>L738</admin:COMUNE>
+            <admin:SEZIONE/>
+            <admin:FOGLIO>34</admin:FOGLIO>
+            <admin:ALLEGATO/>
+            <admin:SVILUPPO/>
+            <admin:NUMERO/>
+            <admin:LIVELLO>STRADE</admin:LIVELLO>
+            <admin:DATA>2015-11-30</admin:DATA>
+            <admin:VISUALIZZA/>
+            <admin:cl_agr_ty>04</admin:cl_agr_ty>
+        </admin:admin_shp_oliveti_catastali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_oliveti_catastali fid="admin_shp_oliveti_catastali.265310">
+            <admin:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        569895.71767619,4536087.01716705 569906.76659643,4536125.23165532
+                                        569987.02999951,4536099.5621152 569964.86999951,4536065.9961152
+                                        569947.96799951,4536057.3151152 569895.71767619,4536087.01716705
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        570006.87411071,4536105.54553145 570002.70573246,4536099.80012634
+                                        569985.56139969,4536081.01569629 570006.87411071,4536105.54553145
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        569970.02329807,4536064.73627365 569968.10240404,4536062.74085731
+                                        569964.78202863,4536059.48583026 569970.02329807,4536064.73627365
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        569963.13328051,4536057.86953118 569954.83199951,4536051.38111519
+                                        569948.91370913,4536053.8446532 569963.13328051,4536057.86953118
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </admin:the_geom>
+            <admin:COMUNE>L738</admin:COMUNE>
+            <admin:SEZIONE/>
+            <admin:FOGLIO>33</admin:FOGLIO>
+            <admin:ALLEGATO/>
+            <admin:SVILUPPO/>
+            <admin:NUMERO>302</admin:NUMERO>
+            <admin:LIVELLO>PARTICELLE</admin:LIVELLO>
+            <admin:DATA>2015-11-30</admin:DATA>
+            <admin:VISUALIZZA/>
+            <admin:cl_agr_ty>04</admin:cl_agr_ty>
+        </admin:admin_shp_oliveti_catastali>
+    </gml:featureMember>
+</wfs:FeatureCollection>

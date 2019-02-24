@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gml:MultiPolygon xmlns:gml="http://www.opengis.net/gml" srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+    <gml:polygonMember>
+        <gml:Polygon>
+            <gml:outerBoundaryIs>
+                <gml:LinearRing>
+                    <gml:coordinates decimal="." cs="," ts=" ">569895.71767619,4536087.01716705
+                        569906.76659643,4536125.23165532 569987.02999951,4536099.5621152
+                        569964.86999951,4536065.9961152 569947.96799951,4536057.3151152
+                        569895.71767619,4536087.01716705
+                    </gml:coordinates>
+                </gml:LinearRing>
+            </gml:outerBoundaryIs>
+        </gml:Polygon>
+    </gml:polygonMember>
+    <gml:polygonMember>
+        <gml:Polygon>
+            <gml:outerBoundaryIs>
+                <gml:LinearRing>
+                    <gml:coordinates decimal="." cs="," ts=" ">570006.87411071,4536105.54553145
+                        570002.70573246,4536099.80012634 569985.56139969,4536081.01569629
+                        570006.87411071,4536105.54553145
+                    </gml:coordinates>
+                </gml:LinearRing>
+            </gml:outerBoundaryIs>
+        </gml:Polygon>
+    </gml:polygonMember>
+    <gml:polygonMember>
+        <gml:Polygon>
+            <gml:outerBoundaryIs>
+                <gml:LinearRing>
+                    <gml:coordinates decimal="." cs="," ts=" ">569970.02329807,4536064.73627365
+                        569968.10240404,4536062.74085731 569964.78202863,4536059.48583026
+                        569970.02329807,4536064.73627365
+                    </gml:coordinates>
+                </gml:LinearRing>
+            </gml:outerBoundaryIs>
+        </gml:Polygon>
+    </gml:polygonMember>
+    <gml:polygonMember>
+        <gml:Polygon>
+            <gml:outerBoundaryIs>
+                <gml:LinearRing>
+                    <gml:coordinates decimal="." cs="," ts=" ">569963.13328051,4536057.86953118
+                        569954.83199951,4536051.38111519 569948.91370913,4536053.8446532
+                        569963.13328051,4536057.86953118
+                    </gml:coordinates>
+                </gml:LinearRing>
+            </gml:outerBoundaryIs>
+        </gml:Polygon>
+    </gml:polygonMember>
+</gml:MultiPolygon>

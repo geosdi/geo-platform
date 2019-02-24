@@ -163,7 +163,7 @@ public abstract class AbstractJAXBContextBuilder implements IGPJAXBContextBuilde
      */
     @Override
     public <T> T unmarshal(Reader reader, Class<T> type) {
-        checkArgument(reader != null, "The Parameter reader must not be null.");
+        checkArgument(reader != null, "The Parameter xmlStreamReader must not be null.");
         try {
             Object item = getContext(type).createUnmarshaller().unmarshal(new StreamSource(reader), type);
             return (item instanceof JAXBElement) ? ((JAXBElement<T>) item).getValue() : (T) item;

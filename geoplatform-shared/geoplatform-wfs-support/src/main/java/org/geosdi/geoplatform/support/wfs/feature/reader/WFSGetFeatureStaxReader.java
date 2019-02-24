@@ -141,9 +141,9 @@ public class WFSGetFeatureStaxReader extends AbstractStaxStreamReader<FeatureCol
      * @throws Exception
      */
     private FeatureCollectionDTO readInfo(FeatureCollectionDTO fc) throws Exception {
-        String numberOfFeatures = reader().getAttributeValue(null, "numberOfFeatures");
+        String numberOfFeatures = xmlStreamReader().getAttributeValue(null, "numberOfFeatures");
         fc.setNumberOfFeatures(Integer.parseInt(numberOfFeatures));
-        String timeStamp = reader().getAttributeValue(null, "timeStamp");
+        String timeStamp = xmlStreamReader().getAttributeValue(null, "timeStamp");
         fc.setTimeStamp(DatatypeConverter.parseDate(timeStamp).getTime());
         logger.trace("@@@@@@@@@@@@@@@@@@ Read info @@@\nfeature: {} - time: {}\n", numberOfFeatures, timeStamp);
         return fc;
@@ -154,7 +154,7 @@ public class WFSGetFeatureStaxReader extends AbstractStaxStreamReader<FeatureCol
      * @throws Exception
      */
     private FeatureDTO readFID() throws Exception {
-        String featureID = reader().getAttributeValue("http://www.opengis.net/gml", "id");
+        String featureID = xmlStreamReader().getAttributeValue("http://www.opengis.net/gml", "id");
         logger.trace("@@@@@@@@@@@@@@@ FEATURE_ID: {} @@@", featureID);
         return new FeatureDTO(featureID);
     }
@@ -166,9 +166,9 @@ public class WFSGetFeatureStaxReader extends AbstractStaxStreamReader<FeatureCol
     private String readGeometry() throws Exception {
         String geometryWKT = null;
 
-        int eventType = reader().nextTag();
+        int eventType = xmlStreamReader().nextTag();
         if (eventType == XMLEvent.START_ELEMENT) {
-            AbstractGeometry geometry = jaxbContextBuilder.unmarshal(reader(), AbstractGeometryType.class);
+            AbstractGeometry geometry = jaxbContextBuilder.unmarshal(xmlStreamReader(), AbstractGeometryType.class);
             /**@TODO The Geometry will always must 2d Dimension??
              * otherwise the code must be :
              * <code>WKTWriter wktWriter = new WKTWriter(geometry.isSetSrsDimension() ? geometry.getSrsDimension().intValue() : 2)</code>
@@ -208,10 +208,10 @@ public class WFSGetFeatureStaxReader extends AbstractStaxStreamReader<FeatureCol
         FeatureAttributesMap fMap = new FeatureAttributesMap();
         fMap.setAttributesMap(map);
 
-        int eventType = ((nextTag) ? reader().nextTag() : reader().getEventType());
-        while (reader().hasNext()) {
+        int eventType = ((nextTag) ? xmlStreamReader().nextTag() : xmlStreamReader().getEventType());
+        while (xmlStreamReader().hasNext()) {
             if (eventType == XMLEvent.END_ELEMENT) {
-                String localName = reader().getLocalName();
+                String localName = xmlStreamReader().getLocalName();
                 if (localName.equals(featureName)) {
                     break;
                 }
@@ -223,19 +223,19 @@ public class WFSGetFeatureStaxReader extends AbstractStaxStreamReader<FeatureCol
                     feature.setGeometry(geometryWKT);
                     super.goToEndTag(geometryName);
                 } else {
-                    String localName = reader().getLocalName();
+                    String localName = xmlStreamReader().getLocalName();
                     logger.trace("################LOCAL_NAME : {}\n", localName);
 
-                    eventType = reader().next();
+                    eventType = xmlStreamReader().next();
                     if (eventType == XMLEvent.CHARACTERS) {
-                        String attributeValue = reader().getText();
+                        String attributeValue = xmlStreamReader().getText();
                         map.put(localName, attributeValue);
                         logger.trace("@@@@@@@@@@@@@@@@@@Attribute : LocalName :'{}': AttributeValue : {} @@@\n",
                                 localName, attributeValue);
                         super.goToEndTag(localName);
                     }
                 }
-                eventType = reader().nextTag();
+                eventType = xmlStreamReader().nextTag();
             }
         }
         feature.setAttributes(fMap);

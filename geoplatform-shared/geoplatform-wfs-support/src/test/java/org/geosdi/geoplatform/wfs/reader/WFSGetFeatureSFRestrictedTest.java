@@ -63,9 +63,9 @@ public class WFSGetFeatureSFRestrictedTest {
 
     @BeforeClass
     public static void beforeClass() throws Exception {
-        sfRestrictedLayerSchema = jaxbContextBuilder.unmarshal(new File("./src/test/resources/reader/LayerSchemaSFRestricted.xml"),
+        sfRestrictedLayerSchema = jaxbContextBuilder.unmarshal(new File("./src/test/resources/xmlStreamReader/LayerSchemaSFRestricted.xml"),
                 LayerSchemaDTO.class);
-        getFeatureSFRestricted = Paths.get("./src/test/resources/reader/GetFeatureSFRestricted.xml").toFile();
+        getFeatureSFRestricted = Paths.get("./src/test/resources/xmlStreamReader/GetFeatureSFRestricted.xml").toFile();
         Assert.assertNotNull("The LayerSchemaDTO for sfRestricted must not be null.", sfRestrictedLayerSchema);
         Assert.assertNotNull("The File getFeatureSFRestricted must not be null.", getFeatureSFRestricted);
     }

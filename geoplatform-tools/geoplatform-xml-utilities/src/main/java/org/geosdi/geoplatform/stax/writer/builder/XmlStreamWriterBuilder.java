@@ -80,7 +80,7 @@ public class XmlStreamWriterBuilder {
      *
      * @param o
      *
-     * @return {@link XMLStreamWriter} reader
+     * @return {@link XMLStreamWriter} xmlStreamReader
      *
      * @throws XMLStreamException
      */

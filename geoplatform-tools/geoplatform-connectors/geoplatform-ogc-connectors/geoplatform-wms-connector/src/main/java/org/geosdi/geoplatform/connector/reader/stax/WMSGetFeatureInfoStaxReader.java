@@ -49,7 +49,7 @@ public abstract class WMSGetFeatureInfoStaxReader extends AbstractStaxStreamRead
                     .map(v -> v.split(TYPE_NAME_SEPARATOR))
                     .filter(values -> ((values[0] != null) && !(values[0].trim().isEmpty()) && (values[1] != null) && !(values[1].trim().isEmpty())))
                     .map(values -> new WMSFeatureType(values[0], values[1]))
-                    .collect(toMap(k -> k.getName(), identity()));
+                    .collect(toMap(k -> k.getName(), identity(), (oldVal, newVal) -> oldVal));
         }
     };
     //

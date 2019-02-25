@@ -96,6 +96,7 @@ import static java.util.Locale.ENGLISH;
 import static java.util.Locale.forLanguageTag;
 import static org.geosdi.geoplatform.connector.pool.builder.v111.GPWMSConnectorBuilderPoolV111.wmsConnectorBuilderPoolV111;
 import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
+import static org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat.GML;
 
 public class GPWMSServiceImpl implements GPWMSService {
 
@@ -258,7 +259,7 @@ public class GPWMSServiceImpl implements GPWMSService {
                         .withQueryLayers(wmsGetFeatureInfoElement.getLayers().stream().toArray(s -> new String[s]))
                         .withX(request.getPoint().getX())
                         .withY(request.getPoint().getY())
-                        .withInfoFormat(WMSFeatureInfoFormat.JSON)
+                        .withInfoFormat(GML)
                         .getResponse();
                 logger.debug("########################FOUND : {}\n", featureCollection);
                 wmsGetFeatureInfoResponse.addFeature(featureCollection);

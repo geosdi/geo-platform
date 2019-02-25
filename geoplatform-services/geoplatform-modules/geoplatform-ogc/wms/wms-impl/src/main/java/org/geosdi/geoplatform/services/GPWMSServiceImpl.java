@@ -39,7 +39,6 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.geojson.FeatureCollection;
 import org.geosdi.geoplatform.connector.server.request.GPWMSGetMapBaseRequest;
-import org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat;
 import org.geosdi.geoplatform.connector.server.request.WMSGetMapBaseRequest;
 import org.geosdi.geoplatform.connector.server.v111.GPWMSGetFeatureInfoV111Request;
 import org.geosdi.geoplatform.connector.server.v111.IGPWMSConnectorStoreV111;

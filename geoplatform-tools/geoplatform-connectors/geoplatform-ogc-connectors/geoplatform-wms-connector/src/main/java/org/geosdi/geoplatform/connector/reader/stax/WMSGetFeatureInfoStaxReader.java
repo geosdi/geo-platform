@@ -29,6 +29,7 @@ import static javax.annotation.meta.When.NEVER;
  */
 public abstract class WMSGetFeatureInfoStaxReader extends AbstractStaxStreamReader<FeatureCollection> {
 
+    private static final String SCHEMA_LOCATION_NAMESPACE_URI = "http://www.w3.org/2001/XMLSchema-instance";
     private static final String SCHEMA_LOCATION_KEY = "schemaLocation";
     public static final String TYPE_NAME_KEY = "typeName=";
     private static final String TYPES_NAME_SEPARATOR = ",";
@@ -59,7 +60,7 @@ public abstract class WMSGetFeatureInfoStaxReader extends AbstractStaxStreamRead
      * @throws Exception
      */
     protected void loadTypeNames() throws Exception {
-        String schemaLocation = xmlStreamReader().getAttributeValue(null, SCHEMA_LOCATION_KEY);
+        String schemaLocation = xmlStreamReader().getAttributeValue(SCHEMA_LOCATION_NAMESPACE_URI, SCHEMA_LOCATION_KEY);
         if ((schemaLocation != null) && !(schemaLocation.trim().isEmpty())) {
             schemaLocation = URLDecoder.decode(schemaLocation, UTF_8.name());
             int index = schemaLocation.indexOf(TYPE_NAME_KEY);

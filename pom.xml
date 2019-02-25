@@ -135,16 +135,6 @@
             <name>Open Source Geospatial Foundation Repository</name>
             <url>https://repo.boundlessgeo.com/release/</url>
         </repository-->
-
-        <!-- TERRACOTTA -->
-        <repository>
-            <id>terracotta-repository</id>
-            <!--<url>http://www.terracotta.org/download/reflector/releases</url>-->
-            <url>http://repo.terracotta.org/maven2</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-        </repository>
         
         <!-- GWTQUERY-UI PLUGIN -->
         <repository>

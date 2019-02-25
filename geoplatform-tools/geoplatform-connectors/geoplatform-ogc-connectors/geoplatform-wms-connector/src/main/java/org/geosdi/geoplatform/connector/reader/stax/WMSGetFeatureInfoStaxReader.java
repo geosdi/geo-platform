@@ -73,7 +73,11 @@ public abstract class WMSGetFeatureInfoStaxReader extends AbstractStaxStreamRead
                     this.typeNames.set(featureTypeReader.read(typeName));
                 }
                 logger.debug("########################TYPES_NAME : {}", this.typeNames.get());
+            } else {
+                logger.debug("#####################TYPE_NAME NOT FOUND.\n");
             }
+        } else {
+            logger.debug("#######################SCHEMA_LOCATION IS NULL.\n");
         }
     }
 

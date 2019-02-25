@@ -63,9 +63,9 @@ public class WFSGetFeatureSiteTRStaxReaderTest {
 
     @BeforeClass
     public static void beforeClass() throws Exception {
-        siteTRLayerSchema = jaxbContextBuilder.unmarshal(new File("./src/test/resources/xmlStreamReader/LayerSchemaSiteTR.xml"),
+        siteTRLayerSchema = jaxbContextBuilder.unmarshal(new File("./src/test/resources/reader/LayerSchemaSiteTR.xml"),
                 LayerSchemaDTO.class);
-        getFeatureSiteTR = Paths.get("./src/test/resources/xmlStreamReader/GetFeatureSiteTR.xml").toFile();
+        getFeatureSiteTR = Paths.get("./src/test/resources/reader/GetFeatureSiteTR.xml").toFile();
         Assert.assertNotNull("The LayerSchemaDTO for SiteTR must not be null.", siteTRLayerSchema);
         Assert.assertNotNull("The File getFeatureSiteTR must not be null.", getFeatureSiteTR);
     }

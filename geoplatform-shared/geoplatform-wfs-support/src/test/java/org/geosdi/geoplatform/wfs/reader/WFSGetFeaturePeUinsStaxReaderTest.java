@@ -63,9 +63,9 @@ public class WFSGetFeaturePeUinsStaxReaderTest {
 
     @BeforeClass
     public static void beforeClass() throws Exception {
-        peUinsLayerSchema = jaxbContextBuilder.unmarshal(new File("./src/test/resources/xmlStreamReader/LayerSchemaPeUins.xml"),
+        peUinsLayerSchema = jaxbContextBuilder.unmarshal(new File("./src/test/resources/reader/LayerSchemaPeUins.xml"),
                 LayerSchemaDTO.class);
-        getFeaturePeUins = Paths.get("./src/test/resources/xmlStreamReader/GetFeaturePeUins.xml").toFile();
+        getFeaturePeUins = Paths.get("./src/test/resources/reader/GetFeaturePeUins.xml").toFile();
         Assert.assertNotNull("The LayerSchemaDTO for peUins must not be null.", peUinsLayerSchema);
         Assert.assertNotNull("The File getFeaturePeUins must not be null.", getFeaturePeUins);
     }

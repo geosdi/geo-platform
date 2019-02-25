@@ -63,9 +63,9 @@ public class WFSGetFeatureToppStatesStaxReaderTest {
 
     @BeforeClass
     public static void beforeClass() throws Exception {
-        toppStatesLayerSchema = jaxbContextBuilder.unmarshal(new File("./src/test/resources/xmlStreamReader/LayerSchemaToppStates.xml"),
+        toppStatesLayerSchema = jaxbContextBuilder.unmarshal(new File("./src/test/resources/reader/LayerSchemaToppStates.xml"),
                 LayerSchemaDTO.class);
-        getFeatureToppStates = Paths.get("./src/test/resources/xmlStreamReader/GetFeatureToppStates.xml").toFile();
+        getFeatureToppStates = Paths.get("./src/test/resources/reader/GetFeatureToppStates.xml").toFile();
         Assert.assertNotNull("The LayerSchemaDTO for topp:states must not be null.", toppStatesLayerSchema);
         Assert.assertNotNull("The File getFeatureToppStates must not be null.", getFeatureToppStates);
     }

@@ -63,7 +63,7 @@ public class WFSGetFeatureUnmarshallerTheoriesTest {
     @BeforeClass
     public static void buildDirFiles() throws IOException {
         dirFiles = new File(".").getCanonicalPath() + File.separator
-                + "src/test/resources/xmlStreamReader/";
+                + "src/test/resources/reader/";
     }
 
     @DataPoints

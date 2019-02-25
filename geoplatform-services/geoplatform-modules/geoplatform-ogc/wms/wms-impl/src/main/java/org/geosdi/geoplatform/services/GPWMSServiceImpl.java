@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.services;
 import com.google.common.collect.Lists;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
+import org.geojson.Feature;
 import org.geojson.FeatureCollection;
 import org.geosdi.geoplatform.connector.server.request.GPWMSGetMapBaseRequest;
 import org.geosdi.geoplatform.connector.server.request.WMSGetMapBaseRequest;
@@ -84,10 +85,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.FALSE;
@@ -263,6 +262,14 @@ public class GPWMSServiceImpl implements GPWMSService {
                 logger.debug("########################FOUND : {}\n", featureCollection);
                 wmsGetFeatureInfoResponse.addFeature(featureCollection);
             } catch (Exception ex) {
+                FeatureCollection featureCollection = new FeatureCollection();
+                Feature feature = new Feature();
+                feature.setId("Error for : ".concat(wmsGetFeatureInfoElement.getWmsServerURL()));
+                Map<String, Object> properties = new LinkedHashMap<>();
+                properties.put("LAYERS_IN_ERROR", wmsGetFeatureInfoElement.getLayers().stream().collect(Collectors.joining(",")));
+                properties.put("ERROR_MESSAGE", ex.getMessage());
+                featureCollection.add(feature);
+                wmsGetFeatureInfoResponse.addFeature(featureCollection);
                 ex.printStackTrace();
             }
         }

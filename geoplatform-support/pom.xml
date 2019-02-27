@@ -34,6 +34,7 @@
         <module>geoplatform-c3p0-support</module>
         <module>geoplatform-hibernate-validator-support</module>
         <module>geoplatform-executor-support</module>
+        <module>geoplatform-jaxb-validation-support</module>
     </modules>
 
 </project>

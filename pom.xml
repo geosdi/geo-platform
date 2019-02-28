@@ -137,14 +137,13 @@
         </repository-->
         
         <!-- TERRACOTTA -->
-        <repository>
+        <!--repository>
             <id>terracotta-repository</id>
-            <!--<url>http://www.terracotta.org/download/reflector/releases</url>-->
             <url>http://repo.terracotta.org/maven2</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
-        </repository>
+        </repository-->
         
         <!-- GWTQUERY-UI PLUGIN -->
         <repository>
@@ -1116,14 +1115,14 @@
             <!-- EHCACHE -->
             <dependency>
                 <groupId>net.sf.ehcache</groupId>
-                <artifactId>ehcache-core</artifactId>
+                <artifactId>ehcache</artifactId>
                 <version>${ehcache-version}</version>
             </dependency>
-            <dependency>
+            <!--dependency>
                 <groupId>net.sf.ehcache</groupId>
                 <artifactId>ehcache-terracotta</artifactId>
                 <version>${ehcache-version}</version>
-            </dependency>
+            </dependency-->
         
             <!-- GWTQUERY-UI PLUGIN -->
             <dependency>
@@ -1590,7 +1589,7 @@
 
         <aspectj-version>1.8.9</aspectj-version>
         <ubl-version>2.0</ubl-version>
-        <jetty-version>9.4.6.v20170531</jetty-version>
+        <jetty-version>9.4.15.v20190215</jetty-version>
 
         <postgresql-version>9.4-1200-jdbc41</postgresql-version>
         <postgis-jdbc-version>1.5.2</postgis-jdbc-version>
@@ -1617,7 +1616,7 @@
         <guava-version>27.0.1-jre</guava-version>
         <guice-version>3.0</guice-version>
         
-        <ehcache-version>2.6.3</ehcache-version>
+        <ehcache-version>2.10.6</ehcache-version>
         
         <commons-pool-version>2.6.0</commons-pool-version>
         

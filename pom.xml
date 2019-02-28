@@ -1478,7 +1478,7 @@
 
         <aspectj-version>1.8.9</aspectj-version>
         <ubl-version>2.0</ubl-version>
-        <jetty-version>9.4.6.v20170531</jetty-version>
+        <jetty-version>9.4.15.v20190215</jetty-version>
 
         <postgresql-version>42.2.2</postgresql-version>
         <postgis-jdbc-version>2.2.1</postgis-jdbc-version>
@@ -1503,7 +1503,7 @@
         <guava-version>27.0.1-jre</guava-version>
         <guice-version>3.0</guice-version>
         
-        <ehcache-version>2.10.4</ehcache-version>
+        <ehcache-version>2.10.6</ehcache-version>
         
         <commons-pool-version>2.6.1</commons-pool-version>
         

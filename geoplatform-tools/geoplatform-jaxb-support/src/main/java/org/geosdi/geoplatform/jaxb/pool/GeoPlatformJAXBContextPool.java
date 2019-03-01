@@ -58,8 +58,7 @@ import java.util.Map;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GeoPlatformJAXBContextPool
-        extends GeoPlatformJAXBContext implements IJAXBContextPool {
+public abstract class GeoPlatformJAXBContextPool extends GeoPlatformJAXBContext implements IJAXBContextPool {
 
     private final GenericObjectPool<Marshaller> marshallerPool;
     private final GenericObjectPool<Unmarshaller> unmarshallerPool;
@@ -151,6 +150,9 @@ public abstract class GeoPlatformJAXBContextPool
         this.unmarshallerPool = new GenericObjectPool<Unmarshaller>(new GPUnmarshallerFactory(jaxbContext), new GeoPlatformJAXBConfig());
     }
 
+    /**
+     * @param theJaxbContext
+     */
     public GeoPlatformJAXBContextPool(JAXBContext theJaxbContext) {
         super(theJaxbContext);
         this.marshallerPool = new GenericObjectPool<Marshaller>(new GPMarshallerFactory(jaxbContext), new GeoPlatformJAXBConfig());

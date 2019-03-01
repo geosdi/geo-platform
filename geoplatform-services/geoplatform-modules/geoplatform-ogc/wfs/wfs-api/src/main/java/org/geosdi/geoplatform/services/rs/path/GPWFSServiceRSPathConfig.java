@@ -14,6 +14,7 @@ public final class GPWFSServiceRSPathConfig {
     public static final String WFS_SERVICE_RS_PATH = "/jsonWFS";
     public static final String DESCRIBE_FEATURE_TYPE_RS_PATH = "/describeFeatureType";
     public static final String GET_GEOJSON_FEATURES_RS_PATH = "/getGeoJsonFeatures";
+    public static final String WFS_SEARCH_FEATURES_RS_PATH = "/searchFeatures";
 
     private GPWFSServiceRSPathConfig() {
     }

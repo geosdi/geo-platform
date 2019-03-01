@@ -47,6 +47,7 @@ import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import org.geosdi.geoplatform.support.wfs.feature.reader.WFSGetFeatureStaxReader;
 import org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType;
 
+import javax.annotation.Nonnull;
 import javax.xml.namespace.QName;
 import java.io.IOException;
 import java.io.InputStream;
@@ -56,6 +57,7 @@ import java.util.List;
 import java.util.Map;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
 
@@ -80,7 +82,7 @@ public class GPGetFeatureService extends AbstractFeatureService implements GetFe
      */
     @Override
     public FeatureDTO getFeature(LayerSchemaDTO layerSchema, String fid, Map<String, String> headerParams) throws Exception {
-        checkArgument((fid != null) && !(fid.isEmpty()), "The Parameter FID must not be null or an Empty String.");
+        checkArgument((fid != null) && !(fid.trim().isEmpty()), "The Parameter FID must not be null or an Empty String.");
         WFSGetFeatureRequest request = this.createRequest(layerSchema, headerParams);
         request.setFeatureIDs(Arrays.asList(fid));
         FeatureCollectionDTO featureCollection = this.getFeatureCollection(request, layerSchema);
@@ -132,10 +134,9 @@ public class GPGetFeatureService extends AbstractFeatureService implements GetFe
     @Override
     public FeatureCollection getFeature(String serverURL, String typeName, int maxFeatures, Map<String, String> headerParams)
             throws Exception {
+        checkArgument((serverURL != null) && !(serverURL.trim().isEmpty()), "The Parameter serverURL must not be null or an empty string.");
+        checkArgument((typeName != null) && !(typeName.trim().isEmpty()), "The Parameter typeName must not be null or an empty string.");
         maxFeatures = (maxFeatures > 0) ? maxFeatures : 100;
-        if ((serverURL == null) || (serverURL.trim().isEmpty())) {
-            throw new IllegalArgumentException("The Parameter serverURL must not be null or an empty string.");
-        }
         serverURL = serverURL.replace("ows", "wfs").replace("wms", "wfs");
         GPWFSConnectorStore serverConnector = ((headerParams != null) && (headerParams.size() > 0)) ?
                 super.createWFSConnector(serverURL, headerParams) : super.createWFSConnector(serverURL);
@@ -143,6 +144,32 @@ public class GPGetFeatureService extends AbstractFeatureService implements GetFe
         request.setMaxFeatures(BigInteger.valueOf(maxFeatures));
         QName qName = new QName(typeName);
         request.setTypeName(qName);
+        request.setSRS("EPSG:4326");
+        request.setOutputFormat("json");
+        request.setResultType(ResultTypeType.RESULTS.value());
+        return JACKSON_SUPPORT.getDefaultMapper().readValue(request.getResponseAsStream(), FeatureCollection.class);
+    }
+
+    /**
+     * @param serverURL
+     * @param typeName
+     * @param maxFeatures
+     * @param queryDTO
+     * @return {@link FeatureCollection}
+     * @throws Exception
+     */
+    @Override
+    public FeatureCollection searchFeatures(@Nonnull(when = NEVER) String serverURL, @Nonnull(when = NEVER) String typeName, int maxFeatures, QueryDTO queryDTO) throws Exception {
+        checkArgument((serverURL != null) && !(serverURL.trim().isEmpty()), "The Parameter serverURL must not be null or an empty string.");
+        checkArgument((typeName != null) && !(typeName.trim().isEmpty()), "The Parameter typeName must not be null or an empty string.");
+        maxFeatures = (maxFeatures > 0) ? maxFeatures : 100;
+        serverURL = serverURL.replace("ows", "wfs").replace("wms", "wfs");
+        GPWFSConnectorStore serverConnector = super.createWFSConnector(serverURL);
+        WFSGetFeatureRequest request = serverConnector.createGetFeatureRequest();
+        request.setMaxFeatures(BigInteger.valueOf(maxFeatures));
+        QName qName = new QName(typeName);
+        request.setTypeName(qName);
+        request.setQueryDTO(queryDTO);
         request.setSRS("EPSG:4326");
         request.setOutputFormat("json");
         request.setResultType(ResultTypeType.RESULTS.value());

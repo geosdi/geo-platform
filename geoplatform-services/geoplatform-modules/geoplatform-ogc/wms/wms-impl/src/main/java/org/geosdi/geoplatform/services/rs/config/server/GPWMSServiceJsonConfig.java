@@ -41,6 +41,7 @@ import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
 import org.apache.cxf.message.Message;
 import org.apache.cxf.rs.security.cors.CrossOriginResourceSharingFilter;
 import org.geosdi.geoplatform.configurator.bootstrap.cxf.Rest;
+import org.geosdi.geoplatform.exception.rs.mapper.GPExceptionFaultMapper;
 import org.geosdi.geoplatform.services.GPWMSService;
 import org.geosdi.geoplatform.support.cxf.rs.provider.configurator.GPRestProviderType;
 import org.geosdi.geoplatform.support.cxf.rs.provider.factory.GPRestProviderFactory;
@@ -82,7 +83,7 @@ class GPWMSServiceJsonConfig {
                 gpJsonWMSApplication, JAXRSServerFactoryBean.class);
         factory.setServiceBean(wmsService);
         factory.setAddress(factory.getAddress());
-        factory.setProviders(asList(GPRestProviderFactory.createProvider(providerType), wmsCrossResourceSharingFilter));
+        factory.setProviders(asList(GPRestProviderFactory.createProvider(providerType), new GPExceptionFaultMapper(), wmsCrossResourceSharingFilter));
         factory.setInInterceptors(Arrays.<Interceptor<? extends Message>>asList(serverLogInInterceptor));
         factory.setOutInterceptors(Arrays.<Interceptor<? extends Message>>asList(serverLogOutInterceptor));
         return factory;

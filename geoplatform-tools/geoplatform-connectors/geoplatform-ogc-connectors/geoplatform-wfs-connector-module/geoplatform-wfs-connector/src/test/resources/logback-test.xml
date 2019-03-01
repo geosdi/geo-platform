@@ -19,11 +19,8 @@
     <logger name="org.geosdi.geoplatform.connector.wfs.jaxb.unmarshall" level="debug"/>
     <logger name="org.geosdi.geoplatform.connector.server.request.v110.query.repository.QueryRestrictionRepository"
             level="debug"/>
-
     <logger name="org.geosdi.geoplatform.connector.server.request.v110.query.responsibility.ILogicOperatorHandler"
             level="trace"/>
     <logger name="org.geosdi.geoplatform.connector.server.request.v110.query.responsibility" level="debug"/>
     <logger name="org.geosdi.geoplatform.connector.wfs.services.QueryRestrictionFactoryMassiveTest" level="info"/>
-
-
 </configuration>

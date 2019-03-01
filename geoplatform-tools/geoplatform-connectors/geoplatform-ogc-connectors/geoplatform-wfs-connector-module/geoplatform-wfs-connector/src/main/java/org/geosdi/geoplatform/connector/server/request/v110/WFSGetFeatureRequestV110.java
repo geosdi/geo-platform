@@ -36,7 +36,6 @@ package org.geosdi.geoplatform.connector.server.request.v110;
 
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.AbstractGetFeatureRequest;
-import org.geosdi.geoplatform.connector.server.request.v110.query.responsibility.ILogicOperatorHandler;
 import org.geosdi.geoplatform.gui.shared.bean.BBox;
 import org.geosdi.geoplatform.xml.filter.v110.BBOXType;
 import org.geosdi.geoplatform.xml.filter.v110.FilterType;
@@ -53,6 +52,7 @@ import javax.xml.bind.JAXBElement;
 import java.util.Arrays;
 
 import static java.util.stream.Collectors.toList;
+import static org.geosdi.geoplatform.connector.server.request.v110.query.responsibility.ILogicOperatorHandler.WFSQueryRestrictionsBuilder.builder;
 
 /**
  * @author Giuseppe La Scaleia - <giuseppe.lascaleia@geosdi.org>
@@ -112,8 +112,7 @@ public class WFSGetFeatureRequestV110 extends AbstractGetFeatureRequest<FeatureC
                 filterType = new FilterType();
                 query.setFilter(filterType);
             }
-            ILogicOperatorHandler.WFSQueryRestrictionsBuilder.builder()
-                    .withFilterType(filterType)
+            builder().withFilterType(filterType)
                     .withQueryDTO(queryDTO)
                     .build();
         }

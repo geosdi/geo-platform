@@ -44,6 +44,8 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Map;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -60,17 +62,17 @@ public class GPDescribeFeatureService extends AbstractFeatureService implements 
     @Override
     public LayerSchemaDTO describeFeatureType(String serverURL, String typeName, Map<String, String> headerParams)
             throws Exception {
+        checkArgument((serverURL != null) && !(serverURL.trim().isEmpty()), "The Parameter serverURL must not be null or an empty string.");
+        checkArgument((typeName != null) && !(typeName.trim().isEmpty()), "The Parameter typeName must not be null or an empty string.");
         logger.debug("\n*** WFS DescribeFeatureType for layer {} ***", typeName);
         serverURL = serverURL.replace("ows", "wfs").replace("wms", "wfs");
         if (!typeName.contains(":")) {
-            throw new IllegalArgumentException(
-                    "typeName must contain the char \":\"");
+            throw new IllegalArgumentException("typeName must contain the char \":\"");
         }
 //        if (!this.wfsConfigurator.matchDefaultDataSource(serverURL)) {
 //            throw new IllegalStateException("Edit Mode cannot be applied to "
 //                    + "the server with url : " + serverURL);
 //        }
-
         LayerSchemaDTO layerSchema;
         try {
             GPWFSConnectorStore serverConnector = ((headerParams != null) && (headerParams.size() > 0)) ?
@@ -88,8 +90,7 @@ public class GPDescribeFeatureService extends AbstractFeatureService implements 
             }
         } catch (IOException ex) {
             ex.printStackTrace();
-            throw new IllegalStateException("Error to execute the WFS "
-                    + "DescribeFeatureType for the layer " + typeName);
+            throw new IllegalStateException("Error to execute the WFS DescribeFeatureType for the layer " + typeName);
         }
         return layerSchema;
     }

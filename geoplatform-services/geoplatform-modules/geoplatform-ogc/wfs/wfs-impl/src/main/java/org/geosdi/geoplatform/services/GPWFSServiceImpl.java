@@ -36,18 +36,27 @@ package org.geosdi.geoplatform.services;
 
 import org.apache.cxf.binding.soap.SoapFault;
 import org.geosdi.geoplatform.connector.wfs.response.*;
+import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.gui.shared.bean.BBox;
+import org.geosdi.geoplatform.hibernate.validator.support.GPI18NValidator;
+import org.geosdi.geoplatform.hibernate.validator.support.request.GPI18NRequestValidator;
+import org.geosdi.geoplatform.services.request.GPWFSSearchFeaturesRequest;
 import org.geosdi.geoplatform.support.wfs.services.DescribeFeatureService;
 import org.geosdi.geoplatform.support.wfs.services.GetFeaureService;
 import org.geosdi.geoplatform.support.wfs.services.TransactionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 
+import javax.annotation.Resource;
 import javax.jws.WebService;
 import javax.ws.rs.core.Response;
 import java.util.List;
 import java.util.Map;
+
+import static java.util.Locale.ENGLISH;
+import static java.util.Locale.forLanguageTag;
 
 /**
  * @author Francesco Izzi <francesco.izzi@geosdi.org>
@@ -67,6 +76,10 @@ public class GPWFSServiceImpl implements GPWFSService {
     //
     @Autowired
     private TransactionService gpTransactionService;
+    @Resource(name = "wfsMessageSource")
+    private MessageSource wfsMessageSource;
+    @Resource(name = "wfsRequestValidator")
+    private GPI18NValidator<GPI18NRequestValidator, String> wfsRequestValidator;
 
     /**
      * @param serverURL
@@ -184,6 +197,30 @@ public class GPWFSServiceImpl implements GPWFSService {
     public Response getGeoJsonFeatures(String serverURL, String typeName, int maxFeatures, Map<String, String> headerParams)
             throws Exception {
         return Response.ok(this.gpGetFeatureService.getFeature(serverURL, typeName, maxFeatures, headerParams)).build();
+    }
+
+    /**
+     * @param request
+     * @return {@link Response}
+     * @throws Exception
+     */
+    @Override
+    public Response searchFeatures(GPWFSSearchFeaturesRequest request) throws Exception {
+        if (request == null) {
+            throw new IllegalParameterFault(this.wfsMessageSource.getMessage("gp_wfs_request.valid",
+                    new Object[]{"GPWFSSearchFeaturesRequest"}, ENGLISH));
+        }
+        logger.trace("##########################Validating Request -------------------> {}\n", request);
+        String message = this.wfsRequestValidator.validate(request, forLanguageTag(request.getLang()));
+        if (message != null)
+            throw new IllegalParameterFault(message);
+        try {
+            return Response.ok(this.gpGetFeatureService.searchFeatures(request.getServerURL(), request.getTypeName(),
+                    request.getMaxFeatures(), request.getQueryDTO())).build();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new IllegalParameterFault(ex.getMessage());
+        }
     }
 
     /**

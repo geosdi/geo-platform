@@ -41,7 +41,10 @@ import org.geosdi.geoplatform.connector.wfs.response.LayerSchemaDTO;
 import org.geosdi.geoplatform.connector.wfs.response.QueryDTO;
 import org.geosdi.geoplatform.gui.shared.bean.BBox;
 
+import javax.annotation.Nonnull;
 import java.util.Map;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -87,6 +90,16 @@ public interface GetFeaureService {
     FeatureCollection getFeature(String serverURL, String typeName, int maxFeatures, Map<String, String> headerParams) throws Exception;
 
     /**
+     * @param serverURL
+     * @param typeName
+     * @param maxFeatures
+     * @param queryDTO
+     * @return {@link FeatureCollection}
+     * @throws Exception
+     */
+    FeatureCollection searchFeatures(@Nonnull(when = NEVER) String serverURL, @Nonnull(when = NEVER) String typeName, int maxFeatures, QueryDTO queryDTO) throws Exception;
+
+    /**
      * @param layerSchema
      * @param maxFeatures
      * @param queryDTO
@@ -94,6 +107,5 @@ public interface GetFeaureService {
      * @return {@link FeatureCollectionDTO}
      * @throws Exception
      */
-    FeatureCollectionDTO getFeature(LayerSchemaDTO layerSchema, int maxFeatures, QueryDTO queryDTO,
-            Map<String, String> headerParams) throws Exception;
+    FeatureCollectionDTO getFeature(LayerSchemaDTO layerSchema, int maxFeatures, QueryDTO queryDTO, Map<String, String> headerParams) throws Exception;
 }

@@ -1,6 +1,6 @@
 package org.geosdi.geoplatform.connector.parser;
 
-import org.geojson.Geometry;
+import org.geojson.GeoJsonObject;
 import org.geosdi.geoplatform.xml.gml.v212.AbstractGeometryType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +25,7 @@ public interface GPWMSGml2GeoJsonParser {
      * @return {@link GeoJsonGeometry}
      * @throws Exception
      */
-    <GeoJsonGeometry extends Geometry> GeoJsonGeometry parse(@Nonnull(when = NEVER) XMLStreamReader theReader) throws Exception;
+    <GeoJsonGeometry extends GeoJsonObject> GeoJsonGeometry parse(@Nonnull(when = NEVER) XMLStreamReader theReader) throws Exception;
 
     interface GPWMSSRSParser {
 

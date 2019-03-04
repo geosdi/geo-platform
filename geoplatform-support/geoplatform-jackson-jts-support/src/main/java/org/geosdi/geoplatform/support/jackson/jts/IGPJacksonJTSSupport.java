@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.support.jackson.jts;
 
+import org.geojson.GeoJsonObject;
 import org.geojson.Geometry;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
@@ -49,7 +50,7 @@ public interface IGPJacksonJTSSupport extends JacksonSupport {
      * @return
      * @throws Exception
      */
-    Geometry convertJtsGeometryToGeoJson(org.locationtech.jts.geom.Geometry theGeom) throws Exception;
+    GeoJsonObject convertJtsGeometryToGeoJson(org.locationtech.jts.geom.Geometry theGeom) throws Exception;
 
     /**
      * @param theGeoJsonGeometry

@@ -42,11 +42,9 @@ import org.geosdi.geoplatform.services.request.GPWMSGetFeatureInfoRequest;
 import org.geosdi.geoplatform.services.request.WMSGetFeatureInfoBoundingBox;
 import org.geosdi.geoplatform.services.request.WMSGetFeatureInfoPoint;
 import org.junit.Assert;
-import org.junit.FixMethodOrder;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.MethodSorters;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -63,8 +61,7 @@ import java.util.Arrays;
 @ContextConfiguration(locations = {"classpath:applicationContext-Test.xml",
         "classpath*:applicationContext.xml"})
 @TestExecutionListeners(value = {RSListenerWMSService.class})
-@ActiveProfiles(profiles = {"dev", "jpa"})
-@FixMethodOrder(value = MethodSorters.NAME_ASCENDING)
+@ActiveProfiles(profiles = {"dev"})
 public class WMSRestTest extends ServiceWMSTest {
 
     @Test
@@ -73,7 +70,7 @@ public class WMSRestTest extends ServiceWMSTest {
     }
 
     @Test
-    public void a_testRestGetCapabilities() throws Exception {
+    public void testRestGetCapabilities() throws Exception {
         ServerDTO serverDTO = gpWMSClient.getShortServer(serverUrlGeoSDI);
         Assert.assertNotNull(serverDTO);
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@ SERVER_DTO @@@@@@@@@@@@@@@@@@\n{}", serverDTO);
@@ -84,7 +81,7 @@ public class WMSRestTest extends ServiceWMSTest {
 
     @Ignore(value = "Server is DOWN.")
     @Test
-    public void b_testRestExternalGetCapabilities() throws Exception {
+    public void testRestExternalGetCapabilities() throws Exception {
         ServerDTO serverDTO = gpWMSClient.getCapabilities("http://sgi1.isprambiente.it/arcgis/services/servizi/" +
                         "geologia500k/MapServer/WMSServer?request=GetCapabilities&service=WMS", new RequestByID(),
                 null, null);
@@ -92,7 +89,7 @@ public class WMSRestTest extends ServiceWMSTest {
     }
 
     @Test
-    public void c_wmsGetFeatureInfoTest() throws Exception {
+    public void wmsGetFeatureInfoTest() throws Exception {
         GPWMSGetFeatureInfoRequest wmsGetFeatureInfoRequest = new GPWMSGetFeatureInfoRequest();
         wmsGetFeatureInfoRequest.setCrs("EPSG:4326");
         wmsGetFeatureInfoRequest.setWidth("550");

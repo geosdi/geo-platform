@@ -54,8 +54,7 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- *
- *         A Point is defined by a single coordinate tuple.
+ * A Point is defined by a single coordinate tuple.
  *
  *
  * <p>Classe Java per PointType complex type.
@@ -76,15 +75,13 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- *
- *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PointType", propOrder = {
         "coord",
         "coordinates"
 })
-
+@XmlRootElement(name = "Point")
 public class PointType extends AbstractGeometryType implements ToString {
 
     protected CoordType coord;
@@ -93,10 +90,8 @@ public class PointType extends AbstractGeometryType implements ToString {
     /**
      * Recupera il valore della proprietà coord.
      *
-     * @return
-     *     possible object is
-     *     {@link CoordType }
-     *
+     * @return possible object is
+     * {@link CoordType }
      */
     public CoordType getCoord() {
         return coord;
@@ -105,10 +100,8 @@ public class PointType extends AbstractGeometryType implements ToString {
     /**
      * Imposta il valore della proprietà coord.
      *
-     * @param value
-     *     allowed object is
-     *     {@link CoordType }
-     *
+     * @param value allowed object is
+     *              {@link CoordType }
      */
     public void setCoord(CoordType value) {
         this.coord = value;
@@ -121,10 +114,8 @@ public class PointType extends AbstractGeometryType implements ToString {
     /**
      * Recupera il valore della proprietà coordinates.
      *
-     * @return
-     *     possible object is
-     *     {@link CoordinatesType }
-     *
+     * @return possible object is
+     * {@link CoordinatesType }
      */
     public CoordinatesType getCoordinates() {
         return coordinates;
@@ -133,10 +124,8 @@ public class PointType extends AbstractGeometryType implements ToString {
     /**
      * Imposta il valore della proprietà coordinates.
      *
-     * @param value
-     *     allowed object is
-     *     {@link CoordinatesType }
-     *
+     * @param value allowed object is
+     *              {@link CoordinatesType }
      */
     public void setCoordinates(CoordinatesType value) {
         this.coordinates = value;

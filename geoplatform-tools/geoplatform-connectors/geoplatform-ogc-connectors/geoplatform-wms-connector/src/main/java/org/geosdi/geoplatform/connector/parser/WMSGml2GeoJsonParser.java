@@ -1,5 +1,6 @@
 package org.geosdi.geoplatform.connector.parser;
 
+import org.geojson.GeoJsonObject;
 import org.geojson.Geometry;
 import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
 import org.geosdi.geoplatform.support.jackson.jts.GPJacksonJTSSupport;
@@ -39,7 +40,7 @@ public class WMSGml2GeoJsonParser implements GPWMSGml2GeoJsonParser {
      * @throws Exception
      */
     @Override
-    public Geometry parse(@Nonnull(when = NEVER) XMLStreamReader theReader) throws Exception {
+    public GeoJsonObject parse(@Nonnull(when = NEVER) XMLStreamReader theReader) throws Exception {
         checkArgument(theReader != null, "The Parameter reader must not be null.");
         AbstractGeometryType gmlGeometry = jaxbContextBuilder.unmarshal(theReader, GeometryCollectionType.class);
         logger.trace("################################GML2_GEOMETRY : {}\n", gmlGeometry);

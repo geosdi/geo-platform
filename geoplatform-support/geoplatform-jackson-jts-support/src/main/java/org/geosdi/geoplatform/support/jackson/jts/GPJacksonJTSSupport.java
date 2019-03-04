@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.support.jackson.jts;
 
+import org.geojson.GeoJsonObject;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.jts.module.GPJTSModule;
 import org.geosdi.geoplatform.support.jackson.property.JacksonSupportConfigFeature;
@@ -69,10 +70,10 @@ public class GPJacksonJTSSupport extends GPJacksonSupport implements IGPJacksonJ
      * @throws Exception
      */
     @Override
-    public org.geojson.Geometry convertJtsGeometryToGeoJson(Geometry theGeom) throws Exception {
+    public GeoJsonObject convertJtsGeometryToGeoJson(Geometry theGeom) throws Exception {
         checkArgument(theGeom != null, "The Parameter Geometry must not be null.");
         String geometryGeoJsonString = super.getDefaultMapper().writeValueAsString(theGeom);
-        return super.getDefaultMapper().readValue(geometryGeoJsonString, org.geojson.Geometry.class);
+        return super.getDefaultMapper().readValue(geometryGeoJsonString, GeoJsonObject.class);
     }
 
     /**

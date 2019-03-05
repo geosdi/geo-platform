@@ -37,6 +37,7 @@ public class GPWMSGetFeatureInfoStaxReaderTest {
     private static File file1;
     private static File file2;
     private static File file3;
+    private static File file4;
 
     @BeforeClass
     public static void beforeClass() throws Exception {
@@ -46,6 +47,7 @@ public class GPWMSGetFeatureInfoStaxReaderTest {
         file1 = new File(basePath.concat("geoserver-GetFeatureInfo.xml"));
         file2 = new File(basePath.concat("geoserver-GetFeatureInfo1.xml"));
         file3 = new File(basePath.concat("geoserver-GetFeatureInfo-Point.xml"));
+        file4 = new File(basePath.concat("geoserver-GetFeatureInfo-MultiLineString.xml"));
     }
 
     @Test
@@ -70,5 +72,11 @@ public class GPWMSGetFeatureInfoStaxReaderTest {
     public void d_wmsGetFeatureInfoStaxReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_ADMIN_TEMPO : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoStaxReader.read(file3)));
+    }
+
+    @Test
+    public void e_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_TIGER_ROADS : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(file4)));
     }
 }

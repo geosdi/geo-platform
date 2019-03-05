@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gml:MultiLineString xmlns:gml="http://www.opengis.net/gml" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+    <gml:lineStringMember>
+        <gml:LineString>
+            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                -74.000504,40.715673 -74.000524,40.716069
+            </gml:coordinates>
+        </gml:LineString>
+    </gml:lineStringMember>
+</gml:MultiLineString>

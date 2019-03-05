@@ -23,5 +23,6 @@
     <logger name="org.geosdi.geoplatform.connector.bridge.store.GPWMSGetFeatureInfoReaderStore" level="debug"/>
     <logger name="org.geosdi.geoplatform.connector.bridge.finder.GPWMSGetFeatureInfoReaderFinder" level="trace"/>
     <logger name="org.geosdi.geoplatform.connector.reader.stax.GPWMSGetFeatureInfoStaxReader" level="trace"/>
+    <logger name="org.geosdi.geoplatform.connector.parser.WMSGml2GeoJsonParser" level="trace"/>
 
 </configuration>

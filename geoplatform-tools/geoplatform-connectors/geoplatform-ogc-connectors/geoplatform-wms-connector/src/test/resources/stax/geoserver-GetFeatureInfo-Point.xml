@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfs:FeatureCollection xmlns="http://www.opengis.net/wfs" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:gml="http://www.opengis.net/gml" xmlns:admin="http://www.geosdi.org/admin"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xsi:schemaLocation="http://www.geosdi.org/admin https://prosit.geosdi.org/geoserver/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=admin%3Atempo http://www.opengis.net/wfs https://prosit.geosdi.org/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd">
+    <gml:boundedBy>
+        <gml:null>unknown</gml:null>
+    </gml:boundedBy>
+    <gml:featureMember>
+        <admin:tempo fid="tempo.4">
+            <admin:temp>2019-03-04T03:30:00</admin:temp>
+            <admin:string>testo7</admin:string>
+            <admin:num>9.0</admin:num>
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        16.08862305,40.48758157
+                    </gml:coordinates>
+                </gml:Point>
+            </admin:the_geom>
+        </admin:tempo>
+    </gml:featureMember>
+</wfs:FeatureCollection>

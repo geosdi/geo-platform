@@ -6,7 +6,6 @@ import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
 import org.geosdi.geoplatform.support.jackson.jts.GPJacksonJTSSupport;
 import org.geosdi.geoplatform.support.jackson.jts.IGPJacksonJTSSupport;
 import org.geosdi.geoplatform.xml.gml.v212.AbstractGeometryType;
-import org.geosdi.geoplatform.xml.gml.v212.GeometryCollectionType;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.PrecisionModel;
 import org.locationtech.jts.io.gml2.GMLReader;
@@ -42,7 +41,7 @@ public class WMSGml2GeoJsonParser implements GPWMSGml2GeoJsonParser {
     @Override
     public GeoJsonObject parse(@Nonnull(when = NEVER) XMLStreamReader theReader) throws Exception {
         checkArgument(theReader != null, "The Parameter reader must not be null.");
-        AbstractGeometryType gmlGeometry = jaxbContextBuilder.unmarshal(theReader, GeometryCollectionType.class);
+        AbstractGeometryType gmlGeometry = jaxbContextBuilder.unmarshal(theReader, AbstractGeometryType.class);
         logger.trace("################################GML2_GEOMETRY : {}\n", gmlGeometry);
         StringWriter writer = new StringWriter();
         jaxbContextBuilder.marshal(gmlGeometry, writer);

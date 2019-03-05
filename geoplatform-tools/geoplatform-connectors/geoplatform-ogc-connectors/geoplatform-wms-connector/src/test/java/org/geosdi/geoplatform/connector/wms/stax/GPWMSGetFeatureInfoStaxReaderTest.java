@@ -36,19 +36,16 @@ public class GPWMSGetFeatureInfoStaxReaderTest {
     private static File file;
     private static File file1;
     private static File file2;
+    private static File file3;
 
     @BeforeClass
     public static void beforeClass() throws Exception {
-        String basePath = new File(".").getCanonicalPath();
-        String fileName = of(basePath, "src", "test", "resources", "stax", "geoserver-Vigneti-GetFeatureInfo.xml")
-                .collect(joining(separator));
-        file = new File(fileName);
-        String fileName1 = of(basePath, "src", "test", "resources", "stax", "geoserver-GetFeatureInfo.xml")
-                .collect(joining(separator));
-        file1 = new File(fileName1);
-        String fileName2 = of(basePath, "src", "test", "resources", "stax", "geoserver-GetFeatureInfo1.xml")
-                .collect(joining(separator));
-        file2 = new File(fileName2);
+        String basePath = of(new File(".").getCanonicalPath(), "src", "test", "resources", "stax")
+                .collect(joining(separator, "", separator));
+        file = new File(basePath.concat("geoserver-Vigneti-GetFeatureInfo.xml"));
+        file1 = new File(basePath.concat("geoserver-GetFeatureInfo.xml"));
+        file2 = new File(basePath.concat("geoserver-GetFeatureInfo1.xml"));
+        file3 = new File(basePath.concat("geoserver-GetFeatureInfo-Point.xml"));
     }
 
     @Test
@@ -67,5 +64,11 @@ public class GPWMSGetFeatureInfoStaxReaderTest {
     public void c_wmsGetFeatureInfoStaxReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_STATES_1 : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoStaxReader.read(file2)));
+    }
+
+    @Test
+    public void d_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_ADMIN_TEMPO : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(file3)));
     }
 }

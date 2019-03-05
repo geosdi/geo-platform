@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfs:FeatureCollection xmlns="http://www.opengis.net/wfs" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:gml="http://www.opengis.net/gml" xmlns:tiger="http://www.census.gov"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xsi:schemaLocation="http://www.census.gov http://150.145.141.180:80/geoserver/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=tiger%3Atiger_roads http://www.opengis.net/wfs http://150.145.141.180:80/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd">
+    <gml:boundedBy>
+        <gml:null>unknown</gml:null>
+    </gml:boundedBy>
+    <gml:featureMember>
+        <tiger:tiger_roads fid="tiger_roads.100">
+            <tiger:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                -74.000504,40.715673 -74.000524,40.716069
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </tiger:the_geom>
+            <tiger:CFCC>A41</tiger:CFCC>
+            <tiger:NAME>Baxter St</tiger:NAME>
+        </tiger:tiger_roads>
+    </gml:featureMember>
+    <gml:featureMember>
+        <tiger:tiger_roads fid="tiger_roads.5610">
+            <tiger:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                -74.000443,40.714833 -73.999533,40.714962
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </tiger:the_geom>
+            <tiger:CFCC>A41</tiger:CFCC>
+            <tiger:NAME>Mosco St</tiger:NAME>
+        </tiger:tiger_roads>
+    </gml:featureMember>
+</wfs:FeatureCollection>

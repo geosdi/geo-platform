@@ -11,7 +11,6 @@ import org.hibernate.validator.constraints.Range;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -21,7 +20,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Setter
 @ToString
 @NoArgsConstructor
-@XmlRootElement(name = "GPWFSSearchFeaturesRequest")
 @XmlAccessorType
 public class GPWFSSearchFeaturesRequest extends GPWFSRequest {
 

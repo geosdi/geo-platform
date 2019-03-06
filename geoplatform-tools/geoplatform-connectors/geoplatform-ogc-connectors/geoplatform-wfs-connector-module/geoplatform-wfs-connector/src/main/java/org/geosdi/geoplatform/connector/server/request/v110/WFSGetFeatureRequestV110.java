@@ -115,6 +115,9 @@ public class WFSGetFeatureRequestV110 extends AbstractGetFeatureRequest<FeatureC
             builder().withFilterType(filterType)
                     .withQueryDTO(queryDTO)
                     .build();
+        } else {
+            logger.info("#########################QUERY_DTO PROBLEM. {}\n\n", super.getQueryDTO());
+            logger.info("##########################{}\n", super.getQueryDTO());
         }
 
         request.setResultType(resultType != null ? ResultTypeType.fromValue(resultType) : ResultTypeType.RESULTS);

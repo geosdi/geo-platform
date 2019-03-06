@@ -173,6 +173,7 @@ public class GPGetFeatureService extends AbstractFeatureService implements GetFe
         request.setSRS("EPSG:4326");
         request.setOutputFormat("json");
         request.setResultType(ResultTypeType.RESULTS.value());
+        logger.info("#############################REQUEST_AS_STRING : {}\n", request.showRequestAsString());
         return JACKSON_SUPPORT.getDefaultMapper().readValue(request.getResponseAsStream(), FeatureCollection.class);
     }
 

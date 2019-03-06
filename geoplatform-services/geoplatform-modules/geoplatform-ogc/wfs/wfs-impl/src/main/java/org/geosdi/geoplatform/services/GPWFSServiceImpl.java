@@ -215,6 +215,7 @@ public class GPWFSServiceImpl implements GPWFSService {
         if (message != null)
             throw new IllegalParameterFault(message);
         try {
+            logger.info("########################ECCOLA : {}\n", request.getQueryDTO());
             return Response.ok(this.gpGetFeatureService.searchFeatures(request.getServerURL(), request.getTypeName(),
                     request.getMaxFeatures(), request.getQueryDTO())).build();
         } catch (Exception ex) {

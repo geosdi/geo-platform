@@ -64,10 +64,10 @@ import java.util.Map;
         allowCredentials = true,
         maxAge = 1,
         allowHeaders = {
-                "X-custom-1", "X-custom-2"
+                "authorization", "content-type", "X-HTTP-Method-Override"
         },
         exposeHeaders = {
-                "X-custom-3", "X-custom-4"
+                "authorization", "content-type", "X-HTTP-Method-Override"
         }
 )
 @Path(value = GPWFSServiceRSPathConfig.DEFAULT_WFS_RS_SERVICE_PATH)

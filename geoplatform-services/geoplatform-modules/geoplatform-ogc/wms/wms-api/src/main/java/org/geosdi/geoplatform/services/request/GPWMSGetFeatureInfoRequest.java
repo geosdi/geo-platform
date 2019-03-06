@@ -9,7 +9,6 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
 /**
@@ -20,7 +19,6 @@ import java.util.List;
 @Setter
 @ToString
 @NoArgsConstructor
-@XmlRootElement(name = "GPWMSGetFeatureInfoRequest")
 @XmlAccessorType
 public class GPWMSGetFeatureInfoRequest extends GPWMSRequest {
 

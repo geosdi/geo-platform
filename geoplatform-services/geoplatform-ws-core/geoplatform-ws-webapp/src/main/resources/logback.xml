@@ -65,5 +65,6 @@
     <logger name="org.geosdi.geoplatform.connector.server.v111" level="debug"/>
     <logger name="org.geosdi.geoplatform.connector.server.v130" level="debug"/>
     <logger name="org.geosdi.geoplatform.connector.reader.stax.GPWMSGetFeatureInfoStaxReader" level="trace"/>
+    <logger name="org.geosdi.geoplatform.connector.server.request.v110.query.responsibility" level="trace"/>
 
 </configuration>

@@ -148,7 +148,7 @@ public interface ILogicOperatorHandler {
             if (logger.isTraceEnabled()) {
                 StringWriter writer = new StringWriter();
                 jaxbContextBuilder.marshal(this.filterType, writer);
-                logger.trace("########################FILTER_TYPE_XML : \n{}\n", writer);
+                logger.info("########################FILTER_TYPE_XML : \n{}\n", writer);
             }
             return this.filterType;
         }

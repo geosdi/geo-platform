@@ -1,37 +1,36 @@
 /**
- *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
- *
- *   Copyright (C) 2008-2019 geoSDI Group (CNR IMAA - Potenza - ITALY).
- *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
- *
- *   ====================================================================
- *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
- *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * geo-platform
+ * Rich webgis framework
+ * http://geo-platform.org
+ * ====================================================================
+ * <p>
+ * Copyright (C) 2008-2019 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * <p>
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version. This program is distributed in the
+ * hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License
+ * for more details. You should have received a copy of the GNU General
+ * Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * <p>
+ * ====================================================================
+ * <p>
+ * Linking this library statically or dynamically with other modules is
+ * making a combined work based on this library. Thus, the terms and
+ * conditions of the GNU General Public License cover the whole combination.
+ * <p>
+ * As a special exception, the copyright holders of this library give you permission
+ * to link this library with independent modules to produce an executable, regardless
+ * of the license terms of these independent modules, and to copy and distribute
+ * the resulting executable under terms of your choice, provided that you also meet,
+ * for each linked independent module, the terms and conditions of the license of
+ * that module. An independent module is a module which is not derived from or
+ * based on this library. If you modify this library, you may extend this exception
+ * to your version of the library, but you are not obligated to do so. If you do not
+ * wish to do so, delete this exception statement from your version.
  */
 package org.geosdi.geoplatform.connector;
 
@@ -57,7 +56,6 @@ import java.util.*;
 import static org.junit.Assert.assertTrue;
 
 /**
- *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class CatalogRequestTest {
@@ -91,16 +89,13 @@ public class CatalogRequestTest {
         marshaller.marshal(getRecords, writer);
 
         String request = writer.toString();
-        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n{}",
-                new Scanner(request).useDelimiter("\\A").next());
+        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n{}", request);
 
         assertTrue(request.contains("<csw:GetRecords"));
         assertTrue(request.contains("service=\"CSW\""));
         assertTrue(request.contains("version=\"2.0.2\""));
         assertTrue(request.contains("resultType=\"hits\""));
-
         assertTrue(request.contains("<csw:Query typeNames=\"csw:Record\""));
-
         assertTrue(request.contains("</csw:GetRecords>"));
     }
 
@@ -126,19 +121,16 @@ public class CatalogRequestTest {
         marshaller.marshal(getRecords, writer);
 
         String request = writer.toString();
-        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n{}",
-                new Scanner(request).useDelimiter("\\A").next());
+        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n{}", request);
 
         assertTrue(request.contains("<csw:GetRecords"));
         assertTrue(request.contains("service=\"CSW\""));
         assertTrue(request.contains("version=\"2.0.2\""));
         assertTrue(request.contains("resultType=\"hits\""));
         assertTrue(request.contains("outputSchema=\"http://www.opengis.net/cat/csw/2.0.2\""));
-
         assertTrue(request.contains("<csw:Query typeNames=\"csw:Record\""));
         assertTrue(request.contains("<csw:ElementSetName>brief</csw:ElementSetName>"));
         assertTrue(request.contains("</csw:Query>"));
-
         assertTrue(request.contains("</csw:GetRecords>"));
     }
 
@@ -175,32 +167,22 @@ public class CatalogRequestTest {
         marshaller.marshal(getRecords, writer);
 
         String request = writer.toString();
-        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n{}",
-                new Scanner(request).useDelimiter("\\A").next());
-
+        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n{}", request);
         assertTrue(request.contains("<csw:GetRecords"));
         assertTrue(request.contains("service=\"CSW\""));
         assertTrue(request.contains("version=\"2.0.2\""));
         assertTrue(request.contains("resultType=\"results\""));
-
         assertTrue(request.contains("<csw:Query typeNames=\"gmd:MD_Metadata\""));
         assertTrue(request.contains("<csw:ElementSetName>summary</csw:ElementSetName>"));
-
         assertTrue(request.contains("<csw:Constraint version=\"1.1.0\">"));
-
         assertTrue(request.contains("<ogc:Filter>"));
-
         assertTrue(request.contains("<ogc:PropertyIsLike wildCard=\"%\" singleChar=\".\" escapeChar=\"\\\">"));
         assertTrue(request.contains("<ogc:PropertyName>AnyText</ogc:PropertyName>"));
         assertTrue(request.contains("<ogc:Literal>%venezia%</ogc:Literal>"));
         assertTrue(request.contains("</ogc:PropertyIsLike>"));
-
         assertTrue(request.contains("</ogc:Filter>"));
-
         assertTrue(request.contains("</csw:Constraint>"));
-
         assertTrue(request.contains("</csw:Query>"));
-
         assertTrue(request.contains("</csw:GetRecords>"));
     }
 
@@ -245,41 +227,29 @@ public class CatalogRequestTest {
         marshaller.marshal(getRecords, writer);
 
         String request = writer.toString();
-        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n{}",
-                new Scanner(request).useDelimiter("\\A").next());
+        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n{}", request);
 
         assertTrue(request.contains("<csw:GetRecords"));
         assertTrue(request.contains("service=\"CSW\""));
         assertTrue(request.contains("version=\"2.0.2\""));
         assertTrue(request.contains("resultType=\"results\""));
-
         assertTrue(request.contains("<csw:Query typeNames=\"gmd:MD_Metadata\""));
         assertTrue(request.contains("<csw:ElementSetName>summary</csw:ElementSetName>"));
-
         assertTrue(request.contains("<csw:Constraint version=\"1.1.0\">"));
-
         assertTrue(request.contains("<ogc:Filter>"));
-
         assertTrue(request.contains("<ogc:Or>"));
-
         assertTrue(request.contains("<ogc:PropertyIsLike wildCard=\"%\" singleChar=\".\" escapeChar=\"\\\">"));
         assertTrue(request.contains("<ogc:PropertyName>dc:title</ogc:PropertyName>"));
         assertTrue(request.contains("<ogc:Literal>%limiti%</ogc:Literal>"));
         assertTrue(request.contains("</ogc:PropertyIsLike>"));
-
         assertTrue(request.contains("<ogc:PropertyIsLike wildCard=\"%\" singleChar=\".\" escapeChar=\"\\\">"));
         assertTrue(request.contains("<ogc:PropertyName>dc:abstract</ogc:PropertyName>"));
         assertTrue(request.contains("<ogc:Literal>%italia%</ogc:Literal>"));
         assertTrue(request.contains("</ogc:PropertyIsLike>"));
-
         assertTrue(request.contains("</ogc:Or>"));
-
         assertTrue(request.contains("</ogc:Filter>"));
-
         assertTrue(request.contains("</csw:Constraint>"));
-
         assertTrue(request.contains("</csw:Query>"));
-
         assertTrue(request.contains("</csw:GetRecords>"));
     }
 
@@ -322,41 +292,29 @@ public class CatalogRequestTest {
         marshaller.marshal(getRecords, writer);
 
         String request = writer.toString();
-        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n{}",
-                new Scanner(request).useDelimiter("\\A").next());
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n{}", request);
 
         assertTrue(request.contains("<csw:GetRecords"));
         assertTrue(request.contains("service=\"CSW\""));
         assertTrue(request.contains("version=\"2.0.2\""));
         assertTrue(request.contains("resultType=\"results\""));
-
         assertTrue(request.contains("<csw:Query typeNames=\"gmd:MD_Metadata\""));
         assertTrue(request.contains("<csw:ElementSetName>summary</csw:ElementSetName>"));
-
         assertTrue(request.contains("<csw:Constraint version=\"1.1.0\">"));
-
         assertTrue(request.contains("<ogc:Filter>"));
-
         assertTrue(request.contains("<ogc:Or>"));
-
         assertTrue(request.contains("<ogc:PropertyIsLike wildCard=\"%\" singleChar=\".\" escapeChar=\"\\\">"));
         assertTrue(request.contains("<ogc:PropertyName>dc:title</ogc:PropertyName>"));
         assertTrue(request.contains("<ogc:Literal>%limiti%</ogc:Literal>"));
         assertTrue(request.contains("</ogc:PropertyIsLike>"));
-
         assertTrue(request.contains("<ogc:PropertyIsEqualTo>"));
         assertTrue(request.contains("<ogc:PropertyName>dc:subject</ogc:PropertyName>"));
         assertTrue(request.contains("<ogc:Literal>GEOSERVER</ogc:Literal>"));
         assertTrue(request.contains("</ogc:PropertyIsEqualTo>"));
-
         assertTrue(request.contains("</ogc:Or>"));
-
         assertTrue(request.contains("</ogc:Filter>"));
-
         assertTrue(request.contains("</csw:Constraint>"));
-
         assertTrue(request.contains("</csw:Query>"));
-
         assertTrue(request.contains("</csw:GetRecords>"));
     }
 
@@ -398,38 +356,26 @@ public class CatalogRequestTest {
         marshaller.marshal(getRecords, writer);
 
         String request = writer.toString();
-        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n{}",
-                new Scanner(request).useDelimiter("\\A").next());
+        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n{}", request);
 
         assertTrue(request.contains("<csw:GetRecords"));
         assertTrue(request.contains("service=\"CSW\""));
         assertTrue(request.contains("version=\"2.0.2\""));
         assertTrue(request.contains("resultType=\"results\""));
-
         assertTrue(request.contains("<csw:Query typeNames=\"gmd:MD_Metadata\""));
         assertTrue(request.contains("<csw:ElementSetName>summary</csw:ElementSetName>"));
-
         assertTrue(request.contains("<csw:Constraint version=\"1.1.0\">"));
-
         assertTrue(request.contains("<ogc:Filter>"));
-
         assertTrue(request.contains("<ogc:BBOX>"));
-
         assertTrue(request.contains("<ogc:PropertyName>ows:BoundingBox</ogc:PropertyName>"));
-
         assertTrue(request.contains("<gml:Envelope>"));
         assertTrue(request.contains("<gml:lowerCorner>6.624 36.6492</gml:lowerCorner>"));
         assertTrue(request.contains("<gml:upperCorner>18.5144 47.0946</gml:upperCorner>"));
         assertTrue(request.contains("</gml:Envelope>"));
-
         assertTrue(request.contains("</ogc:BBOX>"));
-
         assertTrue(request.contains("</ogc:Filter>"));
-
         assertTrue(request.contains("</csw:Constraint>"));
-
         assertTrue(request.contains("</csw:Query>"));
-
         assertTrue(request.contains("</csw:GetRecords>"));
     }
 
@@ -471,38 +417,26 @@ public class CatalogRequestTest {
         marshaller.marshal(getRecords, writer);
 
         String request = writer.toString();
-        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n{}",
-                new Scanner(request).useDelimiter("\\A").next());
+        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n{}", request);
 
         assertTrue(request.contains("<csw:GetRecords"));
         assertTrue(request.contains("service=\"CSW\""));
         assertTrue(request.contains("version=\"2.0.2\""));
         assertTrue(request.contains("resultType=\"results\""));
-
         assertTrue(request.contains("<csw:Query typeNames=\"gmd:MD_Metadata\""));
         assertTrue(request.contains("<csw:ElementSetName>summary</csw:ElementSetName>"));
-
         assertTrue(request.contains("<csw:Constraint version=\"1.1.0\">"));
-
         assertTrue(request.contains("<ogc:Filter>"));
-
         assertTrue(request.contains("<ogc:Contains>"));
-
         assertTrue(request.contains("<ogc:PropertyName>ows:BoundingBox</ogc:PropertyName>"));
-
         assertTrue(request.contains("<gml:Envelope>"));
         assertTrue(request.contains("<gml:lowerCorner>6.624 36.6492</gml:lowerCorner>"));
         assertTrue(request.contains("<gml:upperCorner>18.5144 47.0946</gml:upperCorner>"));
         assertTrue(request.contains("</gml:Envelope>"));
-
         assertTrue(request.contains("</ogc:Contains>"));
-
         assertTrue(request.contains("</ogc:Filter>"));
-
         assertTrue(request.contains("</csw:Constraint>"));
-
         assertTrue(request.contains("</csw:Query>"));
-
         assertTrue(request.contains("</csw:GetRecords>"));
     }
 
@@ -514,7 +448,6 @@ public class CatalogRequestTest {
 
         QueryType query = new QueryType();
         getRecords.setAbstractQuery(query);
-
         query.setTypeNames(Arrays.asList(QName.valueOf("gmd:MD_Metadata")));
 
         ElementSetNameType elementSetNameType = new ElementSetNameType();
@@ -562,25 +495,18 @@ public class CatalogRequestTest {
         marshaller.marshal(getRecords, writer);
 
         String request = writer.toString();
-        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n{}",
-                new Scanner(request).useDelimiter("\\A").next());
+        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n{}", request);
 
         assertTrue(request.contains("<csw:GetRecords"));
         assertTrue(request.contains("service=\"CSW\""));
         assertTrue(request.contains("version=\"2.0.2\""));
         assertTrue(request.contains("resultType=\"results\""));
-
         assertTrue(request.contains("<csw:Query typeNames=\"gmd:MD_Metadata\""));
         assertTrue(request.contains("<csw:ElementSetName>summary</csw:ElementSetName>"));
-
         assertTrue(request.contains("<csw:Constraint version=\"1.1.0\">"));
-
         assertTrue(request.contains("<ogc:Filter>"));
-
         assertTrue(request.contains("<ogc:Contains>"));
-
         assertTrue(request.contains("<ogc:PropertyName>ows:BoundingBox</ogc:PropertyName>"));
-
         assertTrue(request.contains("<gml:Polygon srsName=\"EPSG:4326\">"));
         assertTrue(request.contains("<gml:exterior>"));
         assertTrue(request.contains("<gml:LinearRing>"));
@@ -588,15 +514,10 @@ public class CatalogRequestTest {
         assertTrue(request.contains("</gml:LinearRing>"));
         assertTrue(request.contains("</gml:exterior>"));
         assertTrue(request.contains("</gml:Polygon>"));
-
         assertTrue(request.contains("</ogc:Contains>"));
-
         assertTrue(request.contains("</ogc:Filter>"));
-
         assertTrue(request.contains("</csw:Constraint>"));
-
         assertTrue(request.contains("</csw:Query>"));
-
         assertTrue(request.contains("</csw:GetRecords>"));
     }
 
@@ -641,41 +562,29 @@ public class CatalogRequestTest {
         marshaller.marshal(getRecords, writer);
 
         String request = writer.toString();
-        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n{}",
-                new Scanner(request).useDelimiter("\\A").next());
+        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n{}", request);
 
         assertTrue(request.contains("<csw:GetRecords"));
         assertTrue(request.contains("service=\"CSW\""));
         assertTrue(request.contains("version=\"2.0.2\""));
         assertTrue(request.contains("resultType=\"results\""));
-
         assertTrue(request.contains("<csw:Query typeNames=\"gmd:MD_Metadata\""));
         assertTrue(request.contains("<csw:ElementSetName>summary</csw:ElementSetName>"));
-
         assertTrue(request.contains("<csw:Constraint version=\"1.1.0\">"));
-
         assertTrue(request.contains("<ogc:Filter>"));
-
         assertTrue(request.contains("<ogc:And>"));
-
         assertTrue(request.contains("<ogc:PropertyIsGreaterThanOrEqualTo>"));
         assertTrue(request.contains("<ogc:PropertyName>TempExtent_begin</ogc:PropertyName>"));
         assertTrue(request.contains("<ogc:Literal>2000-01-01T00:00:00Z</ogc:Literal>"));
         assertTrue(request.contains("</ogc:PropertyIsGreaterThanOrEqualTo>"));
-
         assertTrue(request.contains("<ogc:PropertyIsLessThanOrEqualTo>"));
         assertTrue(request.contains("<ogc:PropertyName>TempExtent_end</ogc:PropertyName>"));
         assertTrue(request.contains("<ogc:Literal>2012-01-01T00:00:00Z</ogc:Literal>"));
         assertTrue(request.contains("</ogc:PropertyIsLessThanOrEqualTo>"));
-
         assertTrue(request.contains("</ogc:And>"));
-
         assertTrue(request.contains("</ogc:Filter>"));
-
         assertTrue(request.contains("</csw:Constraint>"));
-
         assertTrue(request.contains("</csw:Query>"));
-
         assertTrue(request.contains("</csw:GetRecords>"));
     }
 
@@ -721,8 +630,7 @@ public class CatalogRequestTest {
         marshaller.marshal(getRecords, writer);
 
         String request = writer.toString();
-        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n{}",
-                new Scanner(request).useDelimiter("\\A").next());
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n{}", request);
 
         assertTrue(request.contains("<csw:GetRecords"));
         assertTrue(request.contains("service=\"CSW\""));
@@ -731,20 +639,14 @@ public class CatalogRequestTest {
         assertTrue(request.contains("outputSchema=\"http://www.opengis.net/cat/csw/2.0.2\""));
         assertTrue(request.contains("startPosition=\"1\""));
         assertTrue(request.contains("maxRecords=\"10\""));
-
         assertTrue(request.contains("<csw:Query typeNames=\"gmd:MD_Metadata\""));
         assertTrue(request.contains("<csw:ElementSetName>full</csw:ElementSetName>"));
-
         assertTrue(request.contains("<csw:Constraint version=\"1.1.0\">"));
-
         assertTrue(request.contains("<csw:CqlText>AnyText LIKE '%venezia%' "
                 + "AND TempExtent_begin AFTER 2000-01-01T00:00:00Z "
                 + "AND TempExtent_end BEFORE 2012-01-01T00:00:00Z</csw:CqlText>"));
-
         assertTrue(request.contains("</csw:Constraint>"));
-
         assertTrue(request.contains("</csw:Query>"));
-
         assertTrue(request.contains("</csw:GetRecords>"));
     }
 

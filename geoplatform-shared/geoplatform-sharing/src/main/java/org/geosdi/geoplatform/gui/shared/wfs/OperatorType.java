@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.gui.shared.wfs;
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public enum OperatorType {
+public enum OperatorType implements WFSOperatorType {
 
     CONTAINS("contains"),
     ENDS_WITH("ends with"),
@@ -54,13 +54,24 @@ public enum OperatorType {
     //    AFTER("after");
     private final String symbol;
 
+    /**
+     * @param symbol
+     */
     OperatorType(String symbol) {
         this.symbol = symbol;
     }
 
+    /**
+     * @return {@link String}
+     */
+    @Override
+    public String getSymbol() {
+        return this.symbol;
+    }
+
     @Override
     public String toString() {
-        return this.symbol;
+        return this.name();
     }
 
     /**

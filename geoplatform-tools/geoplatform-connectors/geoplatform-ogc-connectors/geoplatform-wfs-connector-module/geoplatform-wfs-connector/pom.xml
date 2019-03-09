@@ -26,11 +26,19 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
         </dependency>
+
+        <!-- =========================================================== -->
+        <!-- ================ GEOPLATFORM BRIDGE SUPPORT =============== -->
+        <!-- =========================================================== -->
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-bridge-support</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         
         <!-- =========================================================== -->
         <!-- ===================== COMMONS-POOL ======================== -->
         <!-- =========================================================== -->
-        
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-pool2</artifactId>

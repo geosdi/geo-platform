@@ -66,25 +66,39 @@ public class QueryDTO implements Serializable {
                 this.matchOperator : OperatorType.EQUAL.toString());
     }
 
-    public void setMatchOperator(String matchOperator) {
-        this.matchOperator = matchOperator;
+    /**
+     * @param theMatchOperator
+     */
+    public void setMatchOperator(String theMatchOperator) {
+        this.matchOperator = theMatchOperator;
     }
 
+    /**
+     * @return {@link List<QueryRestrictionDTO>}
+     */
     public List<QueryRestrictionDTO> getQueryRestrictionList() {
         return queryRestrictionList;
     }
 
-    public void setQueryRestrictionList(List<QueryRestrictionDTO> queryRestrictionList) {
-        this.queryRestrictionList = queryRestrictionList;
+    /**
+     * @param theQueryRestrictionList
+     */
+    public void setQueryRestrictionList(List<QueryRestrictionDTO> theQueryRestrictionList) {
+        this.queryRestrictionList = theQueryRestrictionList;
     }
 
+    /**
+     * @return {@link Boolean}
+     */
     public boolean isSetQueryRestrictionList() {
         return ((this.queryRestrictionList != null) && !(this.queryRestrictionList.isEmpty()));
     }
 
     @Override
     public String toString() {
-        return "QueryDTO {" + "matchOperator = " + matchOperator + ", queryRestrictionList = " + queryRestrictionList +
+        return "QueryDTO {"
+                + "matchOperator = " + matchOperator
+                + ", queryRestrictionList = " + queryRestrictionList +
                 '}';
     }
 }

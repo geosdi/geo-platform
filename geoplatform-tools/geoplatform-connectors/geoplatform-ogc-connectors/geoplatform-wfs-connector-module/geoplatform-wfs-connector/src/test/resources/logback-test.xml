@@ -18,7 +18,7 @@
             level="debug"/>
     <logger name="org.geosdi.geoplatform.connector.wfs.jaxb.unmarshall" level="debug"/>
     <logger name="org.geosdi.geoplatform.connector.server.request.v110.query.repository.QueryRestrictionRepository"
-            level="debug"/>
+            level="trace"/>
     <logger name="org.geosdi.geoplatform.connector.server.request.v110.query.responsibility.ILogicOperatorHandler"
             level="trace"/>
     <logger name="org.geosdi.geoplatform.connector.server.request.v110.query.responsibility" level="debug"/>

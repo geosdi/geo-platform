@@ -396,8 +396,7 @@ public class AttributeCustomFieldsMap {
                 })));
 
 
-        CUSTOM_FIELD_MAP = Collections.<String, AttributeCustomFields>unmodifiableMap(
-                map);
+        CUSTOM_FIELD_MAP = Collections.<String, AttributeCustomFields>unmodifiableMap(map);
     }
 
     private AttributeCustomFieldsMap() {

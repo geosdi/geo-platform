@@ -43,9 +43,11 @@ import org.geosdi.geoplatform.xml.filter.v110.FilterType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.Nonnull;
 import java.io.StringWriter;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -70,19 +72,19 @@ public interface ILogicOperatorHandler {
     /**
      *
      */
-    interface IWFSQueryRestricrionsBuilder {
+    interface IWFSQueryRestrictionsBuilder {
 
         /**
-         * @param queryDTO
+         * @param theQueryDTO
          * @return the Builder
          */
-        IWFSQueryRestricrionsBuilder withQueryDTO(QueryDTO queryDTO);
+        IWFSQueryRestrictionsBuilder withQueryDTO(@Nonnull(when = NEVER) QueryDTO theQueryDTO);
 
         /**
-         * @param filterType
+         * @param theFilterType
          * @return the Builder
          */
-        IWFSQueryRestricrionsBuilder withFilterType(FilterType filterType);
+        IWFSQueryRestrictionsBuilder withFilterType(FilterType theFilterType);
 
         /**
          * @return {@link FilterType}
@@ -93,7 +95,7 @@ public interface ILogicOperatorHandler {
     /**
      *
      */
-    class WFSQueryRestrictionsBuilder implements IWFSQueryRestricrionsBuilder {
+    class WFSQueryRestrictionsBuilder implements IWFSQueryRestrictionsBuilder {
 
         static {
             jaxbContextBuilder = GPJAXBContextBuilder.newInstance();
@@ -112,28 +114,31 @@ public interface ILogicOperatorHandler {
         private WFSQueryRestrictionsBuilder() {
         }
 
-        public static IWFSQueryRestricrionsBuilder builder() {
+        /**
+         * @return {@link IWFSQueryRestrictionsBuilder}
+         */
+        public static IWFSQueryRestrictionsBuilder builder() {
             return new WFSQueryRestrictionsBuilder();
         }
 
         /**
-         * @param queryDTO
+         * @param theQueryDTO
          * @return the Builder
          */
         @Override
-        public IWFSQueryRestricrionsBuilder withQueryDTO(QueryDTO queryDTO) {
-            this.queryDTO = queryDTO;
-            return this;
+        public IWFSQueryRestrictionsBuilder withQueryDTO(@Nonnull(when = NEVER) QueryDTO theQueryDTO) {
+            this.queryDTO = theQueryDTO;
+            return self();
         }
 
         /**
-         * @param filterType
+         * @param theFilterType
          * @return the Builder
          */
         @Override
-        public IWFSQueryRestricrionsBuilder withFilterType(FilterType filterType) {
-            this.filterType = filterType;
-            return this;
+        public IWFSQueryRestrictionsBuilder withFilterType(FilterType theFilterType) {
+            this.filterType = theFilterType;
+            return self();
         }
 
         /**
@@ -142,15 +147,21 @@ public interface ILogicOperatorHandler {
         @Override
         public FilterType build() throws Exception {
             checkArgument(this.queryDTO != null, "The Parameter queryDTO must not be null.");
-            checkArgument(this.filterType != null, "The Parameter filterType must not be null.");
             orOperator.buildLogicFilterOperator(this.queryDTO, (this.filterType = (this.filterType == null
                     ? new FilterType() : this.filterType)));
             if (logger.isTraceEnabled()) {
                 StringWriter writer = new StringWriter();
                 jaxbContextBuilder.marshal(this.filterType, writer);
-                logger.info("########################FILTER_TYPE_XML : \n{}\n", writer);
+                logger.trace("########################FILTER_TYPE_XML : \n{}\n", writer);
             }
             return this.filterType;
+        }
+
+        /**
+         * @return {@link IWFSQueryRestrictionsBuilder}
+         */
+        protected IWFSQueryRestrictionsBuilder self() {
+            return this;
         }
     }
 }

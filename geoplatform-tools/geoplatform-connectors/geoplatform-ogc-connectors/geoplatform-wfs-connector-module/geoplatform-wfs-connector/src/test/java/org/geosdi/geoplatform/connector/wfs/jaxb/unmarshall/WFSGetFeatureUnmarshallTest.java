@@ -48,6 +48,10 @@ import javax.xml.bind.JAXBException;
 import java.io.File;
 import java.io.StringWriter;
 
+import static java.io.File.separator;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Stream.of;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -74,21 +78,13 @@ public class WFSGetFeatureUnmarshallTest {
 
     @BeforeClass
     public static void loadFile() throws Exception {
-        String wfsGetFeatureIsEqualToFileString = new File(".").getCanonicalPath() + File.separator +
-                "src/test/resources/unmarshall/wfsGetFeatureIsEqualTov110.xml";
-        wfsGetFeatureIsEqualToFile = new File(wfsGetFeatureIsEqualToFileString);
-        String wfsMathGetFeatureFileString = new File(".").getCanonicalPath() + File.separator +
-                "src/test/resources/unmarshall/wfsMathGetFeaturev110.xml";
-        wfsMathGetFeatureFile = new File(wfsMathGetFeatureFileString);
-        String wfsGetFeatureBBOXFileString = new File(".").getCanonicalPath() + File.separator +
-                "src/test/resources/unmarshall/wfsGetFeatureBBOXv110.xml";
-        wfsGetFeatureBBOXFile = new File(wfsGetFeatureBBOXFileString);
-        String wfsGetFeatureBetweenFileString = new File(".").getCanonicalPath() + File.separator +
-                "src/test/resources/unmarshall/wfsGetFeatureBetweenv110.xml";
-        wfsGetFeatureBetweenFile = new File(wfsGetFeatureBetweenFileString);
-        String wfsGetFeatureIntersectsFileString = new File(".").getCanonicalPath() + File.separator +
-                "src/test/resources/unmarshall/wfsGetFeatureIntersectsv110.xml";
-        wfsGetFeatureIntersectsFile = new File(wfsGetFeatureIntersectsFileString);
+        String basePath = of(new File(".").getCanonicalPath(), "src", "test", "resources", "unmarshall")
+                .collect(joining(separator, "", separator));
+        wfsGetFeatureIsEqualToFile = new File(basePath.concat("wfsGetFeatureIsEqualTov110.xml"));
+        wfsMathGetFeatureFile = new File(basePath.concat("wfsMathGetFeaturev110.xml"));
+        wfsGetFeatureBBOXFile = new File(basePath.concat("wfsGetFeatureBBOXv110.xml"));
+        wfsGetFeatureBetweenFile = new File(basePath.concat("wfsGetFeatureBetweenv110.xml"));
+        wfsGetFeatureIntersectsFile = new File(basePath.concat("wfsGetFeatureIntersectsv110.xml"));
     }
 
     @Test

@@ -35,6 +35,7 @@
 package org.geosdi.geoplatform.connector.server.request.v110.query.repository;
 
 import org.geosdi.geoplatform.connector.wfs.response.QueryRestrictionDTO;
+import org.geosdi.geoplatform.gui.shared.wfs.OperatorType;
 import org.geosdi.geoplatform.xml.filter.v110.BinaryComparisonOpType;
 
 import javax.xml.bind.JAXBElement;
@@ -46,6 +47,12 @@ import static java.lang.Boolean.TRUE;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public abstract class GenericBinaryStrategy extends BaseBinaryStrategy {
+
+    private final QueryRestrictionStrategyKey key;
+
+    protected GenericBinaryStrategy() {
+        this.key = QueryRestrictionStrategyKey.forStrategy(this);
+    }
 
     /**
      * @param queryRestrictionDTO
@@ -61,8 +68,16 @@ public abstract class GenericBinaryStrategy extends BaseBinaryStrategy {
      * @return {@link Boolean}
      */
     @Override
-    public final Boolean isValidStrategy() {
+    public final Boolean isValid() {
         return TRUE;
+    }
+
+    /**
+     * @return {@link GPImplementorKey<org.geosdi.geoplatform.gui.shared.wfs.OperatorType>}
+     */
+    @Override
+    public GPImplementorKey<OperatorType> getKey() {
+        return this.key;
     }
 
     /**
@@ -74,7 +89,7 @@ public abstract class GenericBinaryStrategy extends BaseBinaryStrategy {
     @Override
     public String toString() {
         return getClass().getSimpleName() + " { " +
-                " isValidStrategy = " + isValidStrategy() +
+                " isValidStrategy = " + isValid() +
                 " , forOperatorType = " + forOperatorType() +
                 " }";
     }

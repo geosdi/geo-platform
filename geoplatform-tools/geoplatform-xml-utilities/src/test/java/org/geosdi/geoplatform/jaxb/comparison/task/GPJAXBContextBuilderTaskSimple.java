@@ -46,6 +46,9 @@ import java.io.File;
 import java.io.StringWriter;
 import java.util.concurrent.Callable;
 
+import static java.io.File.separator;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.jaxb.GPJAXBContextBuilderTest.createAttributes;
 
 /**
@@ -57,6 +60,7 @@ public class GPJAXBContextBuilderTaskSimple implements Callable<Long> {
     private static final Logger logger = LoggerFactory.getLogger(GPJAXBContextBuilderTaskSimple.class);
     //
     private static final IGPJAXBContextBuilder GP_JAXB_CONTEXT_BUILDER = GPJAXBContextBuilder.newInstance();
+    private static final String pathFile = of(".", "src", "test", "resources", "Car.xml").collect(joining(separator));
 
     /**
      * Computes a result, or throws an exception if unable to do so.
@@ -68,7 +72,7 @@ public class GPJAXBContextBuilderTaskSimple implements Callable<Long> {
     public Long call() throws Exception {
         long start = System.currentTimeMillis();
         logger.debug("###########################UNMARSHALL_CAR_FROM_FILE_SIMPLE : {}\n", GP_JAXB_CONTEXT_BUILDER
-                .unmarshal(new File("./src/test/resources/Car.xml"), Car.class));
+                .unmarshal(new File(pathFile), Car.class));
         AttributeStore attributeStore = new AttributeStore();
         attributeStore.setAttributes(createAttributes(25));
         StringWriter writer = new StringWriter();

@@ -40,9 +40,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.xml.stream.XMLStreamException;
 import java.io.File;
-import java.io.IOException;
 
 /**
  *
@@ -56,7 +54,7 @@ public class GoogleStaxReaderTest {
     private GoogleGeocodingStaxReader googleReader = new GoogleGeocodingStaxReader();
 
     @Test
-    public void readFromFile() throws IOException, XMLStreamException {
+    public void readFromFile() throws Exception {
         String pathFile = new File(".").getCanonicalPath() + File.separator
                 + "src/test/resources/googleGeocodeExample.xml";
 
@@ -65,7 +63,7 @@ public class GoogleStaxReaderTest {
     }
 
     @Test
-    public void readFromString() throws IOException, XMLStreamException {
+    public void readFromString() throws Exception {
         logger.info("Result from String @@@@@@@@@@@@@@@@@@@@@@@@@ "
                 + googleReader.read(fileAsString()));
     }

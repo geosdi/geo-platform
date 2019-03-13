@@ -44,6 +44,8 @@ import org.geosdi.geoplatform.xml.filter.v110.UnaryLogicOpType;
 import javax.xml.bind.JAXBElement;
 import java.util.List;
 
+import static org.geosdi.geoplatform.gui.shared.wfs.LogicOperatorType.NONE;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -88,7 +90,7 @@ public class NotOperatorHandler extends LogicOperatorHandler {
      */
     @Override
     protected String getOperatorValue() {
-        return LogicOperatorType.NONE.name();
+        return NONE.name();
     }
 
     /**

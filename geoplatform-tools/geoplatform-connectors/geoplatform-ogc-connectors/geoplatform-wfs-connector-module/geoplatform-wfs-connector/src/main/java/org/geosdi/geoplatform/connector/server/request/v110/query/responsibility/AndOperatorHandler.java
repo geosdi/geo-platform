@@ -36,7 +36,6 @@ package org.geosdi.geoplatform.connector.server.request.v110.query.responsibilit
 
 import org.geosdi.geoplatform.connector.wfs.response.QueryDTO;
 import org.geosdi.geoplatform.connector.wfs.response.QueryRestrictionDTO;
-import org.geosdi.geoplatform.gui.shared.wfs.LogicOperatorType;
 import org.geosdi.geoplatform.gui.shared.wfs.OperatorType;
 import org.geosdi.geoplatform.xml.filter.v110.BinaryLogicOpType;
 import org.geosdi.geoplatform.xml.filter.v110.ComparisonOpsType;
@@ -44,6 +43,8 @@ import org.geosdi.geoplatform.xml.filter.v110.FilterType;
 
 import javax.xml.bind.JAXBElement;
 import java.util.List;
+
+import static org.geosdi.geoplatform.gui.shared.wfs.LogicOperatorType.ALL;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -96,6 +97,6 @@ public class AndOperatorHandler extends LogicOperatorHandler {
      */
     @Override
     protected String getOperatorValue() {
-        return LogicOperatorType.ALL.name();
+        return ALL.name();
     }
 }

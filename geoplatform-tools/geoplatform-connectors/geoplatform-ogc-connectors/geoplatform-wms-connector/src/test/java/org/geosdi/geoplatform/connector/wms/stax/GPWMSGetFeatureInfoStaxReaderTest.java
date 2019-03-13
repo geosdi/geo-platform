@@ -38,6 +38,16 @@ public class GPWMSGetFeatureInfoStaxReaderTest {
     private static File file2;
     private static File file3;
     private static File file4;
+    private static File file5;
+    private static File file6;
+    private static File file7;
+    private static File file8;
+    private static File file9;
+    private static File file10;
+    private static File file11;
+    private static File file12;
+    private static File file13;
+    private static File file14;
 
     @BeforeClass
     public static void beforeClass() throws Exception {
@@ -48,6 +58,16 @@ public class GPWMSGetFeatureInfoStaxReaderTest {
         file2 = new File(basePath.concat("geoserver-GetFeatureInfo1.xml"));
         file3 = new File(basePath.concat("geoserver-GetFeatureInfo-Point.xml"));
         file4 = new File(basePath.concat("geoserver-GetFeatureInfo-MultiLineString.xml"));
+        file5 = new File(basePath.concat("spearfish-GetFeatureInfo.xml"));
+        file6 = new File(basePath.concat("tasmaniaRoads-GetFeatureInfo.xml"));
+        file7 = new File(basePath.concat("tasmaniaStates-GetFeatureInfo.xml"));
+        file8 = new File(basePath.concat("tiger_ny-GetFeatureInfo.xml"));
+        file9 = new File(basePath.concat("sfdem-GetFeatureInfo.xml"));
+        file10 = new File(basePath.concat("nurcAPk50095-GetFeatureInfo.xml"));
+        file11 = new File(basePath.concat("nurcArcSample-GetFeatureInfo.xml"));
+        file12 = new File(basePath.concat("comuni-GetFeatureInfo.xml"));
+        file13 = new File(basePath.concat("parchiNaturali-GetFeatureInfo.xml"));
+        file14 = new File(basePath.concat("retiRiserve-GetFeatureInfo.xml"));
     }
 
     @Test
@@ -78,5 +98,65 @@ public class GPWMSGetFeatureInfoStaxReaderTest {
     public void e_wmsGetFeatureInfoStaxReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_TIGER_ROADS : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoStaxReader.read(file4)));
+    }
+
+    @Test
+    public void f_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_SPEARFISH : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(file5)));
+    }
+
+    @Test
+    public void g_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_TASMANIA_ROADS : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(file6)));
+    }
+
+    @Test
+    public void h_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_TASMANIA_STATES : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(file7)));
+    }
+
+    @Test
+    public void i_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_TYGER_NY : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(file8)));
+    }
+
+    @Test
+    public void l_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_SF_DEM : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(file9)));
+    }
+
+    @Test
+    public void m_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_NURC_APk50095 : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(file10)));
+    }
+
+    @Test
+    public void n_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_NURC_ARC_SAMPLE : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(file11)));
+    }
+
+    @Test
+    public void o_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_COMUNI : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(file12)));
+    }
+
+    @Test
+    public void p_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_PARCHI_NATURALI : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(file13)));
+    }
+
+    @Test
+    public void q_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_RETI_RISERVE : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(file14)));
     }
 }

@@ -106,71 +106,53 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
     @Test
     public void statesHits() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
-
         request.setResultType(ResultTypeType.HITS.value());
         request.setTypeName(statesName);
-
         FeatureCollectionType response = request.getResponse();
-        logger.info("@@@@@@@@@@@@@@@ STATES Features Found : " + "@@@@@@@@@@@@@@@@@ {}\n\n",
-                response.getNumberOfFeatures());
+        logger.info("@@@@@@@@@@@@@@@ STATES Features Found : " + "@@@@@@@@@@@@@@@@@ {}\n\n", response.getNumberOfFeatures());
     }
 
     @Test
     public void statesHitsQueryRestrictions() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
-
         request.setResultType(ResultTypeType.HITS.value());
         request.setTypeName(statesName);
         request.setQueryDTO(queryDTOAnd);
-
         logger.info("######################\n{}\n", request.showRequestAsString());
-
         FeatureCollectionType response = request.getResponse();
-        logger.info("#############################statesHitsQueryRestrictions#Features {}\n",
-                response.getNumberOfFeatures().intValue());
+        logger.info("#############################statesHitsQueryRestrictions#Features {}\n", response.getNumberOfFeatures().intValue());
     }
 
     @Test
     public void secureStatesHits() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = secureServerConnector.createGetFeatureRequest();
-
         request.setResultType(ResultTypeType.HITS.value());
         request.setTypeName(statesName);
-
         FeatureCollectionType response = request.getResponse();
-        logger.info("@@@@@@@@@@@@@@@ SECURE STATES Features Found : " + "@@@@@@@@@@@@@@@@@ {}\n\n",
-                response.getNumberOfFeatures());
+        logger.info("@@@@@@@@@@@@@@@ SECURE STATES Features Found : " + "@@@@@@@@@@@@@@@@@ {}\n\n", response.getNumberOfFeatures());
     }
 
     @Test
     public void secureStatesHitsQueryRestrictions() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = secureServerConnector.createGetFeatureRequest();
-
         request.setResultType(ResultTypeType.HITS.value());
         request.setTypeName(statesName);
         request.setQueryDTO(queryDTOAnd);
-
         logger.info("######################\n{}\n", request.showRequestAsString());
-
         FeatureCollectionType response = request.getResponse();
-        logger.info("###############################secureStatesHitsQueryRestrictions#Features {}\n",
-                response.getNumberOfFeatures().intValue());
+        logger.info("###############################secureStatesHitsQueryRestrictions#Features {}\n", response.getNumberOfFeatures().intValue());
     }
 
     @Test
     public void statesResults() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
-
         request.setResultType(ResultTypeType.RESULTS.value());
         request.setTypeName(statesName);
         request.setMaxFeatures(BigInteger.ONE);
-
         logger.info("RESPONSE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}\n", request.getResponseAsString());
-
         FeatureCollectionType response = request.getResponse();
         logger.info("xxxxxxxxxxx {}", response.getNumberOfFeatures());
         logger.info("xxxxxxxxxxx {}", response.getTimeStamp());
-
         FeatureArrayPropertyType featureMembers = response.getFeatureMembers();
         logger.info("----------- {}", featureMembers.isSetFeature());
         logger.info("----------- {}", featureMembers.getFeature());
@@ -182,41 +164,31 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
     @Test
     public void statesFeatureIDs() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
-
         request.setResultType(ResultTypeType.RESULTS.value());
         request.setTypeName(statesName);
-
         request.setFeatureIDs(Arrays.asList("states.1", "states.49"));
-
         logger.info("RESPONSE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}\n", request.getResponseAsString());
-
         FeatureCollectionType response = request.getResponse();
-        logger.info("#############################statesFeatureIDs#Features : {}\n",
-                response.getNumberOfFeatures().intValue());
+        logger.info("#############################statesFeatureIDs#Features : {}\n", response.getNumberOfFeatures().intValue());
     }
 
     @Test
     public void statesBBox() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
-
         request.setResultType(ResultTypeType.RESULTS.value());
         request.setTypeName(statesName);
         request.setPropertyNames(Arrays.asList(new String[]{"STATE_NAME", "PERSONS"}));
         request.setBBox(new BBox(-75.102613, 40.212597, -72.361859, 41.512517));
         request.setSRS("EPSG:4326");
-
         logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@RESPONSE_AS_STRING : \n{}\n", request.getResponseAsString());
-
         FeatureCollectionType response = request.getResponse();
-        logger.info("##################################statesBBox#Features : {}\n",
-                response.getNumberOfFeatures().intValue());
+        logger.info("##################################statesBBox#Features : {}\n", response.getNumberOfFeatures().intValue());
     }
 
     @Test
     public void statesContainsRestrictionTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
-
         request.setTypeName(statesName);
         request.setResultType(ResultTypeType.HITS.value());
         request.setQueryDTO(GPJAXBContextBuilder.newInstance()
@@ -240,16 +212,13 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
                         "</QueryDTO>"), QueryDTO.class));
 
         logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
-
         FeatureCollectionType response = request.getResponse();
-        logger.info("##############################statesContainsRestrictionTest#Features : {}\n",
-                response.getNumberOfFeatures().intValue());
+        logger.info("##############################statesContainsRestrictionTest#Features : {}\n", response.getNumberOfFeatures().intValue());
     }
 
     @Test
     public void statesSecureContainsRestrictionTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = secureServerConnector.createGetFeatureRequest();
-
         request.setTypeName(statesName);
         request.setResultType(ResultTypeType.HITS.value());
         request.setQueryDTO(GPJAXBContextBuilder.newInstance()
@@ -271,18 +240,14 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
                         "        </queryRestriction>\n" +
                         "    </queryRestrictionList>\n" +
                         "</QueryDTO>"), QueryDTO.class));
-
         logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
-
         FeatureCollectionType response = request.getResponse();
-        logger.info("###################################statesSecureContainsRestrictionTest#Features : {}\n",
-                response.getNumberOfFeatures().intValue());
+        logger.info("###################################statesSecureContainsRestrictionTest#Features : {}\n", response.getNumberOfFeatures().intValue());
     }
 
     @Test
     public void statesNotContainsRestrictionTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
-
         request.setTypeName(statesName);
         request.setResultType(ResultTypeType.HITS.value());
         request.setQueryDTO(GPJAXBContextBuilder.newInstance()
@@ -306,16 +271,13 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
                         "</QueryDTO>"), QueryDTO.class));
 
         logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
-
         FeatureCollectionType response = request.getResponse();
-        logger.info("##################################statesNotContainsRestrictionTest#Features : {}\n",
-                response.getNumberOfFeatures().intValue());
+        logger.info("##################################statesNotContainsRestrictionTest#Features : {}\n", response.getNumberOfFeatures().intValue());
     }
 
     @Test
     public void statesSecureNotContainsRestrictionTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = secureServerConnector.createGetFeatureRequest();
-
         request.setTypeName(statesName);
         request.setResultType(ResultTypeType.HITS.value());
         request.setQueryDTO(GPJAXBContextBuilder.newInstance()
@@ -337,18 +299,14 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
                         "        </queryRestriction>\n" +
                         "    </queryRestrictionList>\n" +
                         "</QueryDTO>"), QueryDTO.class));
-
         logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
-
         FeatureCollectionType response = request.getResponse();
-        logger.info("#####################################statesSecureNotContainsRestrictionTest#Features {}\n",
-                response.getNumberOfFeatures().intValue());
+        logger.info("#####################################statesSecureNotContainsRestrictionTest#Features {}\n", response.getNumberOfFeatures().intValue());
     }
 
     @Test
     public void statesGreatherThanRestrictionTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
-
         request.setTypeName(statesName);
         request.setResultType(ResultTypeType.HITS.value());
         request.setQueryDTO(GPJAXBContextBuilder.newInstance()
@@ -371,16 +329,13 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
                         "    </queryRestrictionList>\n" +
                         "</QueryDTO>"), QueryDTO.class));
         logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
-
         FeatureCollectionType response = request.getResponse();
-        logger.info("#########################################statesGreatherThanRestrictionTest#Features : {}\n",
-                response.getNumberOfFeatures().intValue());
+        logger.info("#########################################statesGreatherThanRestrictionTest#Features : {}\n", response.getNumberOfFeatures().intValue());
     }
 
     @Test
     public void statesSecureGreatherThanRestrictionTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = secureServerConnector.createGetFeatureRequest();
-
         request.setTypeName(statesName);
         request.setResultType(ResultTypeType.HITS.value());
         request.setQueryDTO(GPJAXBContextBuilder.newInstance()
@@ -403,7 +358,6 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
                         "    </queryRestrictionList>\n" +
                         "</QueryDTO>"), QueryDTO.class));
         logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
-
         FeatureCollectionType response = request.getResponse();
         logger.info("#############################statesSecureGreatherThanRestrictionTest#Features : {}\n",
                 response.getNumberOfFeatures().intValue());
@@ -412,7 +366,6 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
     @Test
     public void statesNotGreatherThanRestrictionTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
-
         request.setTypeName(statesName);
         request.setResultType(ResultTypeType.HITS.value());
         request.setQueryDTO(GPJAXBContextBuilder.newInstance()
@@ -435,7 +388,6 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
                         "    </queryRestrictionList>\n" +
                         "</QueryDTO>"), QueryDTO.class));
         logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
-
         FeatureCollectionType response = request.getResponse();
         logger.info("##################################statesNotGreatherThanRestrictionTest#Features {}\n",
                 response.getNumberOfFeatures().intValue());
@@ -444,7 +396,6 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
     @Test
     public void statesSecureNotGreatherThanRestrictionTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = secureServerConnector.createGetFeatureRequest();
-
         request.setTypeName(statesName);
         request.setResultType(ResultTypeType.HITS.value());
         request.setQueryDTO(GPJAXBContextBuilder.newInstance()
@@ -467,9 +418,7 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
                         "    </queryRestrictionList>\n" +
                         "</QueryDTO>"), QueryDTO.class));
         logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
-
         FeatureCollectionType response = request.getResponse();
-        logger.info("########################################statesSecureNotGreatherThanRestrictionTest#Features : {}\n",
-                response.getNumberOfFeatures().intValue());
+        logger.info("########################################statesSecureNotGreatherThanRestrictionTest#Features : {}\n", response.getNumberOfFeatures().intValue());
     }
 }

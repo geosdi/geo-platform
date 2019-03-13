@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfs:FeatureCollection xmlns="http://www.opengis.net/wfs" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:gml="http://www.opengis.net/gml" xmlns:topp="http://www.openplans.org/topp"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xsi:schemaLocation="http://www.opengis.net/wfs http://150.145.141.180:80/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd http://www.openplans.org/topp http://150.145.141.180:80/geoserver/topp/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=topp%3Atasmania_roads">
+    <gml:boundedBy>
+        <gml:null>unknown</gml:null>
+    </gml:boundedBy>
+    <gml:featureMember>
+        <topp:tasmania_roads fid="tasmania_roads.4">
+            <topp:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                147.522247,-41.859921 147.551865,-41.927834 147.597321,-42.017418 147.578644,-42.113216
+                                147.541656,-42.217743 147.468674,-42.22662
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </topp:the_geom>
+            <topp:TYPE>highway</topp:TYPE>
+        </topp:tasmania_roads>
+    </gml:featureMember>
+    <gml:featureMember>
+        <topp:tasmania_roads fid="tasmania_roads.11">
+            <topp:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                147.300583,-41.637878 147.372009,-41.695503 147.402588,-41.725574 147.444061,-41.749676
+                                147.490433,-41.782482 147.506866,-41.795624 147.522919,-41.835609 147.522247,-41.859921
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </topp:the_geom>
+            <topp:TYPE>highway</topp:TYPE>
+        </topp:tasmania_roads>
+    </gml:featureMember>
+</wfs:FeatureCollection>

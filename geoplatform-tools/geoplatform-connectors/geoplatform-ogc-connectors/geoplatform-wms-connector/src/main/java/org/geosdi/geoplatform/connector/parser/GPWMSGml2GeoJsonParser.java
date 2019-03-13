@@ -60,7 +60,7 @@ public interface GPWMSGml2GeoJsonParser {
                 if (srsName != null) {
                     for (String pattern : patterns) {
                         try {
-                            final MessageFormat format = new MessageFormat(pattern);
+                            MessageFormat format = new MessageFormat(pattern);
                             Object[] codearray = format.parse(srsName);
                             if (codearray.length > 0) {
                                 jtsGeometry.setSRID(((Number) codearray[0]).intValue());
@@ -71,8 +71,7 @@ public interface GPWMSGml2GeoJsonParser {
                             }
                         } catch (ParseException e) {
                             //only trace the ParserException and continues the cycle
-                            logger.trace("DefaultSRSBaseParser - Parser "
-                                    + "Exception @@@@@@@@@@@@@@@@@ " + e);
+                            logger.trace("DefaultSRSBaseParser - Parser Exception @@@@@@@@@@@@@@@@@ " + e);
                         }
                     }
 

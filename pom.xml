@@ -1275,6 +1275,7 @@
                 <configuration>
                     <encoding>UTF-8</encoding>
                     <skipTests>false</skipTests>
+                    <reportFormat>plain</reportFormat>
                     <argLine>-Xms512m -Xmx1024m -XX:MaxPermSize=512m</argLine>
                 </configuration>
                 <dependencies>
@@ -1481,7 +1482,7 @@
         <jetty-version>9.4.15.v20190215</jetty-version>
 
         <postgresql-version>42.2.2</postgresql-version>
-        <postgis-jdbc-version>2.2.1</postgis-jdbc-version>
+        <postgis-jdbc-version>2.3.0</postgis-jdbc-version>
 
         <cglib-version>3.2.4</cglib-version>
 

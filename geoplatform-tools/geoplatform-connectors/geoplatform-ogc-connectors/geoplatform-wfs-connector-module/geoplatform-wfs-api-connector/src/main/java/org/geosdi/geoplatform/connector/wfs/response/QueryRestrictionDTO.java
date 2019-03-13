@@ -36,9 +36,7 @@ package org.geosdi.geoplatform.connector.wfs.response;
 
 import org.geosdi.geoplatform.gui.shared.wfs.OperatorType;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 
 /**
@@ -51,6 +49,9 @@ public class QueryRestrictionDTO implements Serializable {
 
     private static final long serialVersionUID = -4485358825188935756L;
     //
+    @XmlElementRefs(value = {
+            @XmlElementRef(type = AttributeDTO.class, name = "attribute"),
+            @XmlElementRef(type = GeometryAttributeDTO.class, name = "geometryAttribute")})
     private AttributeDTO attribute;
     private OperatorType operator;
     private String restriction;
@@ -62,14 +63,14 @@ public class QueryRestrictionDTO implements Serializable {
     }
 
     /**
-     * @param attribute
-     * @param operator
-     * @param restriction
+     * @param theAttribute
+     * @param theOperator
+     * @param theRestriction
      */
-    public QueryRestrictionDTO(AttributeDTO attribute, OperatorType operator, String restriction) {
-        this.attribute = attribute;
-        this.operator = operator;
-        this.restriction = restriction;
+    public QueryRestrictionDTO(AttributeDTO theAttribute, OperatorType theOperator, String theRestriction) {
+        this.attribute = theAttribute;
+        this.operator = theOperator;
+        this.restriction = theRestriction;
     }
 
     /**

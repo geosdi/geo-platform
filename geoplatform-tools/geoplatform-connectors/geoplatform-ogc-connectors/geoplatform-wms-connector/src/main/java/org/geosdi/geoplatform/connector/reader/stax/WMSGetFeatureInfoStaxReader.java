@@ -10,7 +10,9 @@ import org.geosdi.geoplatform.connector.reader.featuretype.WMSFeatureType;
 import org.geosdi.geoplatform.stax.reader.AbstractStaxStreamReader;
 
 import javax.annotation.Nonnull;
+import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.XMLEvent;
+import java.io.IOException;
 import java.net.URLDecoder;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -20,7 +22,9 @@ import static java.lang.ThreadLocal.withInitial;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static java.util.function.Function.identity;
 import static java.util.regex.Pattern.compile;
+import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toMap;
+import static java.util.stream.Stream.of;
 import static javax.annotation.meta.When.NEVER;
 
 /**
@@ -50,11 +54,12 @@ public abstract class WMSGetFeatureInfoStaxReader extends AbstractStaxStreamRead
                     .map(v -> v.split(TYPE_NAME_SEPARATOR))
                     .filter(values -> ((values[0] != null) && !(values[0].trim().isEmpty()) && (values[1] != null) && !(values[1].trim().isEmpty())))
                     .map(values -> new WMSFeatureType(values[0], values[1]))
-                    .collect(toMap(k -> k.getName(), identity(), (oldVal, newVal) -> oldVal));
+                    .collect(toMap(k -> k.getName(), identity(), (oldVal, newVal) -> oldVal, LinkedHashMap::new));
         }
     };
     //
     private final ThreadLocal<Map<String, GPWMSFeatureType>> typeNames = withInitial(() -> null);
+    private final ThreadLocal<String> previousGeometry = withInitial(() -> null);
 
     /**
      * @throws Exception
@@ -76,6 +81,7 @@ public abstract class WMSGetFeatureInfoStaxReader extends AbstractStaxStreamRead
                 logger.debug("########################TYPES_NAME : {}", this.typeNames.get());
             } else {
                 logger.debug("#####################TYPE_NAME NOT FOUND.\n");
+                this.typeNames.set(new LinkedHashMap<>());
             }
         } else {
             logger.debug("#######################SCHEMA_LOCATION IS NULL.\n");
@@ -90,10 +96,23 @@ public abstract class WMSGetFeatureInfoStaxReader extends AbstractStaxStreamRead
         if (eventType == XMLEvent.START_ELEMENT) {
             logger.debug("################TRYING TO READ XML.");
             Map<String, GPWMSFeatureType> featureTypes = this.typeNames.get();
-            checkArgument((featureTypes != null) && !(featureTypes.isEmpty()), "Impossible Read XML featureTypes is null or empty.");
+            checkArgument((featureTypes != null), "Impossible Read XML featureTypes is null.");
             readFeatureID(featureTypes, feature);
             super.goToEndTag("featureMember");
         }
+    }
+
+    /**
+     * Close both {@link javax.xml.stream.XMLStreamReader} xmlStreamReader and {@link java.io.InputStream} stream
+     * used to build the xmlStreamReader
+     *
+     * @throws XMLStreamException
+     * @throws IOException
+     */
+    @Override
+    protected void reset() throws XMLStreamException, IOException {
+        super.reset();
+        this.previousGeometry.set(null);
     }
 
     /**
@@ -106,11 +125,11 @@ public abstract class WMSGetFeatureInfoStaxReader extends AbstractStaxStreamRead
         String prefix = xmlStreamReader().getPrefix();
         String name = xmlStreamReader().getLocalName();
         logger.trace("##############################PREFIX : {} - NAME : {}\n", prefix, name);
-        GPWMSFeatureType featureType = featureTypes.get(name);
+        GPWMSFeatureType featureType = featureTypes.computeIfAbsent(name, value -> new WMSFeatureType(prefix, name));
         if ((featureType != null) && (super.isTagName(prefix, name))) {
             String featureID = xmlStreamReader().getAttributeValue(null, "fid");
-            feature.setId(featureID);
-            logger.trace("#####################FEATURE_ID : {}", featureID);
+            feature.setId((featureID != null) && !(featureID.trim().isEmpty()) ? featureID : of(prefix, name).collect(joining(":")));
+            logger.trace("#####################FEATURE_ID : {}", feature.getId());
             readInternal(featureType, feature);
         }
     }
@@ -133,17 +152,18 @@ public abstract class WMSGetFeatureInfoStaxReader extends AbstractStaxStreamRead
                 String localName = xmlStreamReader().getLocalName();
                 if ((featureType != null) && (super.isTagPrefix(featureType.getPrefix()))) {
                     eventType = xmlStreamReader().next();
-                    if ((eventType == XMLEvent.CHARACTERS) && !(localName.equalsIgnoreCase("the_geom"))) {
+                    if (eventType == XMLEvent.CHARACTERS) {
+                        this.previousGeometry.set(localName);
                         String attributeValue = xmlStreamReader().getText();
                         featureProperties.put(localName, attributeValue);
                         logger.trace("##########################ATTRIBUTE_NAME : {} - ATTRIBUTE_VALUE : {}\n", localName, attributeValue);
                     } else if (eventType == XMLEvent.END_ELEMENT) {
                         featureProperties.put(localName, null);
                     } else if (super.isTagPrefix("gml")) {
-                        this.readGeometry(feature);
+                        this.readGeometry(feature, featureProperties);
                     }
                 } else if (super.isTagPrefix("gml")) {
-                    this.readGeometry(feature);
+                    this.readGeometry(feature, featureProperties);
                 }
             }
             eventType = xmlStreamReader().next();
@@ -155,9 +175,12 @@ public abstract class WMSGetFeatureInfoStaxReader extends AbstractStaxStreamRead
      * @param feature
      * @throws Exception
      */
-    void readGeometry(Feature feature) throws Exception {
+    void readGeometry(Feature feature, Map<String, Object> featureProperties) throws Exception {
         String localName = xmlStreamReader().getLocalName();
-        logger.trace("@@@@@@@@@@@@@@@@@@@@FOUND GEOMETRY : {}\n", localName);
+        logger.trace("@@@@@@@@@@@@@@@@@@@@FOUND GEOMETRY : {} \n", localName);
         feature.setGeometry(GML2_GEO_JSON_PARSER.parse(xmlStreamReader()));
+        if (featureProperties.containsKey(this.previousGeometry.get())) {
+            featureProperties.remove(this.previousGeometry.get());
+        }
     }
 }

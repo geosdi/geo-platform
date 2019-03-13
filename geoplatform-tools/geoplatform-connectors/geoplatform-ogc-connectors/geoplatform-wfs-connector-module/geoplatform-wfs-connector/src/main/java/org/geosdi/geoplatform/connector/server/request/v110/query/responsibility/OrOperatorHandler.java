@@ -44,6 +44,8 @@ import org.geosdi.geoplatform.xml.filter.v110.FilterType;
 import javax.xml.bind.JAXBElement;
 import java.util.List;
 
+import static org.geosdi.geoplatform.gui.shared.wfs.LogicOperatorType.ANY;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -95,6 +97,6 @@ public class OrOperatorHandler extends LogicOperatorHandler {
      */
     @Override
     protected String getOperatorValue() {
-        return LogicOperatorType.ANY.name();
+        return ANY.name();
     }
 }

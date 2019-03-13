@@ -17,7 +17,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-abstract class GPWMSGetFeatureInfoTextReader implements GPWMSGetFeatureInfoReader<String> {
+public abstract class GPWMSGetFeatureInfoTextReader implements GPWMSGetFeatureInfoReader<String> {
 
     protected static final Logger logger = LoggerFactory.getLogger(GPWMSGetFeatureInfoTextReader.class);
 

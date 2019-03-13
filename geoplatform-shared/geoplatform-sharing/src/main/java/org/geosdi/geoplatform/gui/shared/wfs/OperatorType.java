@@ -36,6 +36,7 @@ package org.geosdi.geoplatform.gui.shared.wfs;
 
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
+ * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
  */
 public enum OperatorType implements WFSOperatorType {
 
@@ -49,9 +50,7 @@ public enum OperatorType implements WFSOperatorType {
     LESS_OR_EQUAL("<="),
     GREATER_OR_EQUAL(">="),
     LIKE("like");
-    //
-    //    BEFORE("before"),
-    //    AFTER("after");
+
     private final String symbol;
 
     /**

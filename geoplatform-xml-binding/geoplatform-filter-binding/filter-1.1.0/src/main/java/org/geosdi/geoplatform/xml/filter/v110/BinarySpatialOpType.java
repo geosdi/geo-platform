@@ -8,12 +8,6 @@
 
 package org.geosdi.geoplatform.xml.filter.v110;
 
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlType;
 import org.geosdi.geoplatform.xml.gml.v311.AbstractGeometryType;
 import org.geosdi.geoplatform.xml.gml.v311.EnvelopeType;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
@@ -21,12 +15,15 @@ import org.jvnet.jaxb2_commons.lang.ToString2;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy2;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.annotation.*;
+
 
 /**
  * <p>Classe Java per BinarySpatialOpType complex type.
- * 
+ *
  * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
- * 
+ *
  * <pre>
  * &lt;complexType name="BinarySpatialOpType"&gt;
  *   &lt;complexContent&gt;
@@ -42,19 +39,14 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "BinarySpatialOpType", propOrder = {
-    "propertyName",
-    "geometry",
-    "envelope"
+        "propertyName",
+        "geometry",
+        "envelope"
 })
-public class BinarySpatialOpType
-    extends SpatialOpsType
-    implements ToString2
-{
+public class BinarySpatialOpType extends SpatialOpsType implements ToString2 {
 
     @XmlElement(name = "PropertyName", required = true)
     protected PropertyNameType propertyName;
@@ -65,11 +57,9 @@ public class BinarySpatialOpType
 
     /**
      * Recupera il valore della proprietà propertyName.
-     * 
-     * @return
-     *     possible object is
-     *     {@link PropertyNameType }
-     *     
+     *
+     * @return possible object is
+     * {@link PropertyNameType }
      */
     public PropertyNameType getPropertyName() {
         return propertyName;
@@ -77,27 +67,23 @@ public class BinarySpatialOpType
 
     /**
      * Imposta il valore della proprietà propertyName.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link PropertyNameType }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link PropertyNameType }
      */
     public void setPropertyName(PropertyNameType value) {
         this.propertyName = value;
     }
 
     public boolean isSetPropertyName() {
-        return (this.propertyName!= null);
+        return (this.propertyName != null);
     }
 
     /**
      * Recupera il valore della proprietà geometry.
-     * 
-     * @return
-     *     possible object is
-     *     {@link JAXBElement }{@code <}{@link AbstractGeometryType }{@code >}
-     *     
+     *
+     * @return possible object is
+     * {@link JAXBElement }{@code <}{@link AbstractGeometryType }{@code >}
      */
     public JAXBElement<AbstractGeometryType> getGeometry() {
         return geometry;
@@ -105,27 +91,23 @@ public class BinarySpatialOpType
 
     /**
      * Imposta il valore della proprietà geometry.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link AbstractGeometryType }{@code >}
-     *     
+     *
+     * @param value allowed object is
+     *              {@link JAXBElement }{@code <}{@link AbstractGeometryType }{@code >}
      */
     public void setGeometry(JAXBElement<AbstractGeometryType> value) {
         this.geometry = value;
     }
 
     public boolean isSetGeometry() {
-        return (this.geometry!= null);
+        return (this.geometry != null);
     }
 
     /**
      * Recupera il valore della proprietà envelope.
-     * 
-     * @return
-     *     possible object is
-     *     {@link JAXBElement }{@code <}{@link EnvelopeType }{@code >}
-     *     
+     *
+     * @return possible object is
+     * {@link JAXBElement }{@code <}{@link EnvelopeType }{@code >}
      */
     public JAXBElement<EnvelopeType> getEnvelope() {
         return envelope;
@@ -133,18 +115,16 @@ public class BinarySpatialOpType
 
     /**
      * Imposta il valore della proprietà envelope.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link EnvelopeType }{@code >}
-     *     
+     *
+     * @param value allowed object is
+     *              {@link JAXBElement }{@code <}{@link EnvelopeType }{@code >}
      */
     public void setEnvelope(JAXBElement<EnvelopeType> value) {
         this.envelope = value;
     }
 
     public boolean isSetEnvelope() {
-        return (this.envelope!= null);
+        return (this.envelope != null);
     }
 
     public String toString() {

@@ -50,4 +50,11 @@ public class GPWMSGetFeatureInfoReaderStoreTest {
         Assert.assertNotNull(gmlGetFeatureReader);
         logger.info("################################GML_READER : {}\n", gmlGetFeatureReader);
     }
+
+    @Test
+    public void e_loadWMSGetFeatureReaderASGmlStringTest() throws Exception {
+        GPWMSGetFeatureInfoReader<?> gmlGetFeatureReader = store.getImplementorByKey(GML_AS_STRING);
+        Assert.assertNotNull(gmlGetFeatureReader);
+        logger.info("################################GML_STRING_READER : {}\n", gmlGetFeatureReader);
+    }
 }

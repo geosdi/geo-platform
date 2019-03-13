@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfs:FeatureCollection xmlns="http://www.opengis.net/wfs" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:gml="http://www.opengis.net/gml" xmlns:nurc="http://www.nurc.nato.int"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xsi:schemaLocation="http://www.opengis.net/wfs http://150.145.141.92:80/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd">
+    <gml:boundedBy>
+        <gml:null>unknown</gml:null>
+    </gml:boundedBy>
+    <gml:featureMember>
+        <nurc:Arc_Sample fid="">
+            <nurc:precip30min>2228.0</nurc:precip30min>
+        </nurc:Arc_Sample>
+    </gml:featureMember>
+</wfs:FeatureCollection>

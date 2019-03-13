@@ -8,22 +8,19 @@
 
 package org.geosdi.geoplatform.xml.filter.v110;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString2;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy2;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 
+import javax.xml.bind.annotation.*;
+
 
 /**
  * <p>Classe Java per PropertyIsLikeType complex type.
- * 
+ *
  * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
- * 
+ *
  * <pre>
  * &lt;complexType name="PropertyIsLikeType"&gt;
  *   &lt;complexContent&gt;
@@ -39,18 +36,13 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PropertyIsLikeType", propOrder = {
-    "propertyName",
-    "literal"
+        "propertyName",
+        "literal"
 })
-public class PropertyIsLikeType
-    extends ComparisonOpsType
-    implements ToString2
-{
+public class PropertyIsLikeType extends ComparisonOpsType implements ToString2 {
 
     @XmlElement(name = "PropertyName", required = true)
     protected PropertyNameType propertyName;
@@ -65,11 +57,9 @@ public class PropertyIsLikeType
 
     /**
      * Recupera il valore della proprietà propertyName.
-     * 
-     * @return
-     *     possible object is
-     *     {@link PropertyNameType }
-     *     
+     *
+     * @return possible object is
+     * {@link PropertyNameType }
      */
     public PropertyNameType getPropertyName() {
         return propertyName;
@@ -77,27 +67,23 @@ public class PropertyIsLikeType
 
     /**
      * Imposta il valore della proprietà propertyName.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link PropertyNameType }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link PropertyNameType }
      */
     public void setPropertyName(PropertyNameType value) {
         this.propertyName = value;
     }
 
     public boolean isSetPropertyName() {
-        return (this.propertyName!= null);
+        return (this.propertyName != null);
     }
 
     /**
      * Recupera il valore della proprietà literal.
-     * 
-     * @return
-     *     possible object is
-     *     {@link LiteralType }
-     *     
+     *
+     * @return possible object is
+     * {@link LiteralType }
      */
     public LiteralType getLiteral() {
         return literal;
@@ -105,27 +91,23 @@ public class PropertyIsLikeType
 
     /**
      * Imposta il valore della proprietà literal.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link LiteralType }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link LiteralType }
      */
     public void setLiteral(LiteralType value) {
         this.literal = value;
     }
 
     public boolean isSetLiteral() {
-        return (this.literal!= null);
+        return (this.literal != null);
     }
 
     /**
      * Recupera il valore della proprietà wildCard.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getWildCard() {
         return wildCard;
@@ -133,27 +115,23 @@ public class PropertyIsLikeType
 
     /**
      * Imposta il valore della proprietà wildCard.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setWildCard(String value) {
         this.wildCard = value;
     }
 
     public boolean isSetWildCard() {
-        return (this.wildCard!= null);
+        return (this.wildCard != null);
     }
 
     /**
      * Recupera il valore della proprietà singleChar.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getSingleChar() {
         return singleChar;
@@ -161,27 +139,23 @@ public class PropertyIsLikeType
 
     /**
      * Imposta il valore della proprietà singleChar.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSingleChar(String value) {
         this.singleChar = value;
     }
 
     public boolean isSetSingleChar() {
-        return (this.singleChar!= null);
+        return (this.singleChar != null);
     }
 
     /**
      * Recupera il valore della proprietà escapeChar.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getEscapeChar() {
         return escapeChar;
@@ -189,18 +163,16 @@ public class PropertyIsLikeType
 
     /**
      * Imposta il valore della proprietà escapeChar.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setEscapeChar(String value) {
         this.escapeChar = value;
     }
 
     public boolean isSetEscapeChar() {
-        return (this.escapeChar!= null);
+        return (this.escapeChar != null);
     }
 
     public String toString() {

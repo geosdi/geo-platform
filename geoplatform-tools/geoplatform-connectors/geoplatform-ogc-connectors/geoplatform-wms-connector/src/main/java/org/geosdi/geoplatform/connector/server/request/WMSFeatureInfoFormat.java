@@ -30,6 +30,9 @@ public enum WMSFeatureInfoFormat implements GPWMSFeatureInfoFormat {
         this.format = theFormat;
     }
 
+    /**
+     * @return {@link WMSFeatureInfoFormat}
+     */
     @Override
     public WMSFeatureInfoFormat getImplementorKey() {
         return this;
@@ -52,7 +55,7 @@ public enum WMSFeatureInfoFormat implements GPWMSFeatureInfoFormat {
     public static WMSFeatureInfoFormat forFormat(String format) {
         Optional<WMSFeatureInfoFormat> optional = stream(WMSFeatureInfoFormat.values())
                 .filter(v -> ((format != null) && !(format.trim().isEmpty()))
-                        ? v.getFormat().equalsIgnoreCase(format) : FALSE)
+                        ? v.format.equalsIgnoreCase(format) : FALSE)
                 .findFirst();
         return ((optional != null) && !(optional.equals(empty()))) ? optional.get() : null;
     }

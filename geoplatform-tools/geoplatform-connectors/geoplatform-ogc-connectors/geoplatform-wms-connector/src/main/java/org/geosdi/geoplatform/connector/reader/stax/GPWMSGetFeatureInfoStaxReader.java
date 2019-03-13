@@ -26,20 +26,23 @@ public class GPWMSGetFeatureInfoStaxReader extends WMSGetFeatureInfoStaxReader {
     public FeatureCollection read(@Nonnull(when = NEVER) Object object) throws Exception {
         XMLStreamReader reader = this.acquireReader(object);
         FeatureCollection featureCollection = new FeatureCollection();
-        while (reader.hasNext()) {
-            int evenType = reader.getEventType();
-            if (evenType == XMLEvent.START_ELEMENT) {
-                if (super.isTagName("wfs", "FeatureCollection")) {
-                    this.loadTypeNames();
-                } else if (super.isTagName("gml", "featureMember")) {
-                    Feature feature = new Feature();
-                    this.readFeatures(feature);
-                    featureCollection.add(feature);
+        try {
+            while (reader.hasNext()) {
+                int evenType = reader.getEventType();
+                if (evenType == XMLEvent.START_ELEMENT) {
+                    if (super.isTagName("wfs", "FeatureCollection")) {
+                        this.loadTypeNames();
+                    } else if (super.isTagName("gml", "featureMember")) {
+                        Feature feature = new Feature();
+                        this.readFeatures(feature);
+                        featureCollection.add(feature);
+                    }
                 }
+                reader.next();
             }
-            reader.next();
+            return featureCollection;
+        } finally {
+            this.dispose();
         }
-        this.dispose();
-        return featureCollection;
     }
 }

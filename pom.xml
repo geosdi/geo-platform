@@ -1366,6 +1366,7 @@
                 <configuration>
                     <encoding>UTF-8</encoding>
                     <skipTests>false</skipTests>
+                    <reportFormat>plain</reportFormat>
                     <argLine>-Xms512m -Xmx1024m -XX:MaxPermSize=512m</argLine>
                 </configuration>
             </plugin>

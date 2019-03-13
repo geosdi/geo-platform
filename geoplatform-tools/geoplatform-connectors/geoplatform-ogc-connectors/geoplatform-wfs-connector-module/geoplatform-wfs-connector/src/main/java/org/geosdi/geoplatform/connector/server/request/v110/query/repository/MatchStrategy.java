@@ -47,12 +47,12 @@ import static java.lang.Boolean.TRUE;
 
 /**
  * <p>This class is for
- * <ul>
- * <li>{@link org.geosdi.geoplatform.gui.shared.wfs.OperatorType#STARTS_WITH} operator</li>
- * <li>{@link org.geosdi.geoplatform.gui.shared.wfs.OperatorType#CONTAINS} operator</li>
- * <li>{@link org.geosdi.geoplatform.gui.shared.wfs.OperatorType#ENDS_WITH} operator</li>
- * <li>{@link org.geosdi.geoplatform.gui.shared.wfs.OperatorType#LIKE} operator</li>
- * </ul>
+ *      <ul>
+ *          <li>{@link org.geosdi.geoplatform.gui.shared.wfs.OperatorType#STARTS_WITH} operator</li>
+ *          <li>{@link org.geosdi.geoplatform.gui.shared.wfs.OperatorType#CONTAINS} operator</li>
+ *          <li>{@link org.geosdi.geoplatform.gui.shared.wfs.OperatorType#ENDS_WITH} operator</li>
+ *          <li>{@link org.geosdi.geoplatform.gui.shared.wfs.OperatorType#LIKE} operator</li>
+ *      </ul>
  * </p>
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

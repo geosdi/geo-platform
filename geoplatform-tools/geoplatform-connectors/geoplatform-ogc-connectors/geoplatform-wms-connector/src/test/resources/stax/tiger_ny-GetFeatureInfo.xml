@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfs:FeatureCollection xmlns="http://www.opengis.net/wfs" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:gml="http://www.opengis.net/gml" xmlns:tiger="http://www.census.gov"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xsi:schemaLocation="http://www.census.gov http://150.145.141.180:80/geoserver/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=tiger%3Agiant_polygon,tiger%3Apoly_landmarks,tiger%3Atiger_roads http://www.opengis.net/wfs http://150.145.141.180:80/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd">
+    <gml:boundedBy>
+        <gml:null>unknown</gml:null>
+    </gml:boundedBy>
+    <gml:featureMember>
+        <tiger:giant_polygon fid="giant_polygon.1">
+            <tiger:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        -180,-90 -180,90 180,90 180,-90 -180,-90
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </tiger:the_geom>
+        </tiger:giant_polygon>
+    </gml:featureMember>
+    <gml:featureMember>
+        <tiger:poly_landmarks fid="poly_landmarks.27">
+            <tiger:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        -73.94981,40.817887 -73.948001,40.819593 -73.947905,40.821158
+                                        -73.947937,40.821173 -73.947273,40.821748 -73.946149,40.821251
+                                        -73.946499,40.820692 -73.946828,40.819985 -73.947179,40.819294
+                                        -73.947443,40.818653 -73.947772,40.817913 -73.948145,40.817206
+                                        -73.948366,40.816433 -73.948696,40.815709 -73.949855,40.813819
+                                        -73.950423,40.813179 -73.950968,40.812604 -73.951724,40.812985
+                                        -73.951331,40.813545 -73.950829,40.814201 -73.949648,40.815943
+                                        -73.950119,40.817015 -73.94981,40.817887
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </tiger:the_geom>
+            <tiger:LAND>36.0</tiger:LAND>
+            <tiger:CFCC>D85</tiger:CFCC>
+            <tiger:LANAME>St Nicholas Park</tiger:LANAME>
+        </tiger:poly_landmarks>
+    </gml:featureMember>
+    <gml:featureMember>
+        <tiger:tiger_roads fid="tiger_roads.443">
+            <tiger:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                -73.946596,40.818996 -73.947179,40.819294
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </tiger:the_geom>
+            <tiger:CFCC>A41</tiger:CFCC>
+            <tiger:NAME>W 138th St</tiger:NAME>
+        </tiger:tiger_roads>
+    </gml:featureMember>
+    <gml:featureMember>
+        <tiger:tiger_roads fid="tiger_roads.1162">
+            <tiger:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                -73.946149,40.821251 -73.947273,40.821748
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </tiger:the_geom>
+            <tiger:CFCC>A41</tiger:CFCC>
+            <tiger:NAME>W 141st St</tiger:NAME>
+        </tiger:tiger_roads>
+    </gml:featureMember>
+    <gml:featureMember>
+        <tiger:tiger_roads fid="tiger_roads.1164">
+            <tiger:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                -73.946499,40.820692 -73.946149,40.821251
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </tiger:the_geom>
+            <tiger:CFCC>A41</tiger:CFCC>
+            <tiger:NAME>St Nicholas Ave</tiger:NAME>
+        </tiger:tiger_roads>
+    </gml:featureMember>
+    <gml:featureMember>
+        <tiger:tiger_roads fid="tiger_roads.1165">
+            <tiger:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                -73.945635,40.820211 -73.946499,40.820692
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </tiger:the_geom>
+            <tiger:CFCC>A41</tiger:CFCC>
+            <tiger:NAME>W 140th St</tiger:NAME>
+        </tiger:tiger_roads>
+    </gml:featureMember>
+    <gml:featureMember>
+        <tiger:tiger_roads fid="tiger_roads.1166">
+            <tiger:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                -73.945197,40.820852 -73.946149,40.821251
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </tiger:the_geom>
+            <tiger:CFCC>A41</tiger:CFCC>
+            <tiger:NAME>W 141st St</tiger:NAME>
+        </tiger:tiger_roads>
+    </gml:featureMember>
+    <gml:featureMember>
+        <tiger:tiger_roads fid="tiger_roads.1172">
+            <tiger:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                -73.946137,40.81962 -73.946828,40.819985
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </tiger:the_geom>
+            <tiger:CFCC>A41</tiger:CFCC>
+            <tiger:NAME>W 139th St</tiger:NAME>
+        </tiger:tiger_roads>
+    </gml:featureMember>
+    <gml:featureMember>
+        <tiger:tiger_roads fid="tiger_roads.1173">
+            <tiger:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                -73.944709,40.819055 -73.946137,40.81962
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </tiger:the_geom>
+            <tiger:CFCC>A41</tiger:CFCC>
+            <tiger:NAME>W 139th St</tiger:NAME>
+        </tiger:tiger_roads>
+    </gml:featureMember>
+    <gml:featureMember>
+        <tiger:tiger_roads fid="tiger_roads.4116">
+            <tiger:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                -73.946828,40.819985 -73.946499,40.820692
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </tiger:the_geom>
+            <tiger:CFCC>A41</tiger:CFCC>
+            <tiger:NAME>St Nicholas Ave</tiger:NAME>
+        </tiger:tiger_roads>
+    </gml:featureMember>
+    <gml:featureMember>
+        <tiger:tiger_roads fid="tiger_roads.4117">
+            <tiger:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                -73.947179,40.819294 -73.946828,40.819985
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </tiger:the_geom>
+            <tiger:CFCC>A41</tiger:CFCC>
+            <tiger:NAME>St Nicholas Ave</tiger:NAME>
+        </tiger:tiger_roads>
+    </gml:featureMember>
+    <gml:featureMember>
+        <tiger:tiger_roads fid="tiger_roads.4121">
+            <tiger:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                -73.94981,40.817887 -73.948001,40.819593 -73.947905,40.821158 -73.947937,40.821173
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </tiger:the_geom>
+            <tiger:CFCC>A41</tiger:CFCC>
+            <tiger:NAME>St Nicholas Ter</tiger:NAME>
+        </tiger:tiger_roads>
+    </gml:featureMember>
+    <gml:featureMember>
+        <tiger:tiger_roads fid="tiger_roads.4135">
+            <tiger:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                -73.946596,40.818996 -73.946137,40.81962
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </tiger:the_geom>
+            <tiger:CFCC>A41</tiger:CFCC>
+            <tiger:NAME>Edgecombe Ave</tiger:NAME>
+        </tiger:tiger_roads>
+    </gml:featureMember>
+    <gml:featureMember>
+        <tiger:tiger_roads fid="tiger_roads.4137">
+            <tiger:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                -73.945635,40.820211 -73.946137,40.81962
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </tiger:the_geom>
+            <tiger:CFCC>A41</tiger:CFCC>
+            <tiger:NAME>Edgecombe Ave</tiger:NAME>
+        </tiger:tiger_roads>
+    </gml:featureMember>
+</wfs:FeatureCollection>

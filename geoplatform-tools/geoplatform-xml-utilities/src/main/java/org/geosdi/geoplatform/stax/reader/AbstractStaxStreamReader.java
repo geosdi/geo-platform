@@ -75,22 +75,22 @@ public abstract class AbstractStaxStreamReader<T> implements GeoPlatformStaxRead
     /**
      * <p> Method to Acquire a valid {@link XMLStreamReader} Reader.
      * The possible Objets are :
-     * <ol>
-     * <li>{@link File}</li>
-     * <li>{@link Reader}</li>
-     * <li>{@link InputStream}</li>
-     * <li>{@link URL}</li>
-     * <li>{@link URI}</li>
-     * <li>{@link XMLStreamReader}</li>
-     * <li>{@link Source}</li>
-     * <li>{@link String}</li>
-     * </ol>
+     *      <ol>
+     *          <li>{@link File}</li>
+     *          <li>{@link Reader}</li>
+     *          <li>{@link InputStream}</li>
+     *          <li>{@link URL}</li>
+     *          <li>{@link URI}</li>
+     *          <li>{@link XMLStreamReader}</li>
+     *          <li>{@link Source}</li>
+     *          <li>{@link String}</li>
+     *      </ol>
      * </p>
      *
      * @param o
      */
     @Override
-    public XMLStreamReader acquireReader(Object o) throws XMLStreamException, IOException {
+    public XMLStreamReader acquireReader(@Nonnull(when = NEVER) Object o) throws Exception {
         this.reset();
         checkNotNull(o, "The Object passed to " + "acquire Reader must not be null.");
         this.stream.set(streamBuilder.buildStream(o));
@@ -99,14 +99,12 @@ public abstract class AbstractStaxStreamReader<T> implements GeoPlatformStaxRead
     }
 
     /**
-     * Close the {@link XMLStreamReader} xmlStreamReader and the {@link InputStream}
-     * stream
+     * <p>Close the {@link XMLStreamReader} xmlStreamReader and the {@link InputStream} stream.</p>
      *
-     * @throws XMLStreamException
-     * @throws IOException
+     * @throws Exception
      */
     @Override
-    public void dispose() throws XMLStreamException, IOException {
+    public void dispose() throws Exception {
         this.reset();
         logger.debug("#########################Called {}#dispose.", this.getClass().getSimpleName());
     }

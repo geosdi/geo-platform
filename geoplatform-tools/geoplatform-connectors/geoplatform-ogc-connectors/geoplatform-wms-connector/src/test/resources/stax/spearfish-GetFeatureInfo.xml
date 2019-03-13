@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfs:FeatureCollection xmlns="http://www.opengis.net/wfs" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:sf="http://www.openplans.org/spearfish" xmlns:gml="http://www.opengis.net/gml"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xsi:schemaLocation="http://www.opengis.net/wfs http://150.145.141.180:80/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd http://www.openplans.org/spearfish http://150.145.141.180:80/geoserver/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=sf%3Aroads">
+    <gml:boundedBy>
+        <gml:null>unknown</gml:null>
+    </gml:boundedBy>
+    <gml:featureMember>
+        <sf:sfdem fid="">
+            <sf:GRAY_INDEX>1191.0</sf:GRAY_INDEX>
+        </sf:sfdem>
+    </gml:featureMember>
+    <gml:featureMember>
+        <sf:roads fid="roads.499">
+            <sf:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#26713">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                601786.72168512,4923061.5829057 601760.18885221,4923098.33495681
+                                601650.97926454,4923396.86158654 601622.3997043,4923488.12269768
+                                601448.34058201,4923806.58440768 601323.194581,4923968.07387177
+                                601308.86326188,4923992.93472103 601290.95349408,4924011.64096444
+                                601232.05567532,4924090.90582151 601207.84390555,4924126.02417488
+                                601168.83854505,4924174.39112979 601152.68704701,4924198.61770999
+                                601122.29709359,4924240.37603786 601080.06721499,4924302.75125318
+                                600996.20902499,4924428.12027916 600946.68295341,4924489.17993518
+                                600906.3196856,4924548.52486876 600563.31418852,4925022.41496242
+                                600518.66256378,4925083.53731335 600438.06758512,4925191.84428657
+                                600347.51476936,4925316.51634858 600287.46757092,4925397.06881269
+                                600254.9620021,4925441.18351323 600225.34564982,4925483.54182319
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </sf:the_geom>
+            <sf:cat>2</sf:cat>
+            <sf:label>primary highway, hard surface</sf:label>
+        </sf:roads>
+    </gml:featureMember>
+    <gml:featureMember>
+        <sf:roads fid="roads.639">
+            <sf:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#26713">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                602025.53420931,4921931.4049597 601995.38520822,4922091.00090801
+                                601964.67956771,4922301.9628418 601921.56908094,4922578.12703113
+                                601786.72168512,4923061.5829057
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </sf:the_geom>
+            <sf:cat>2</sf:cat>
+            <sf:label>primary highway, hard surface</sf:label>
+        </sf:roads>
+    </gml:featureMember>
+    <gml:featureMember>
+        <sf:roads fid="roads.640">
+            <sf:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#26713">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                601786.72168512,4923061.5829057 601767.074897,4923132.02071486
+                                601712.21370433,4923325.567937 601693.16066417,4923386.40867777
+                                601650.04858004,4923518.41035832 601612.53063674,4923593.67419636
+                                601447.07349134,4923858.4910405 601428.48476987,4923882.68627325
+                                601397.48585847,4923921.1729436
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </sf:the_geom>
+            <sf:cat>2</sf:cat>
+            <sf:label>primary highway, hard surface</sf:label>
+        </sf:roads>
+    </gml:featureMember>
+</wfs:FeatureCollection>

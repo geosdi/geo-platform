@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfs:FeatureCollection xmlns="http://www.opengis.net/wfs" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:gml="http://www.opengis.net/gml" xmlns:WEBGIS="http://lifeten/webgis"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xsi:schemaLocation="http://lifeten/webgis http://webgis.muse.it:80/geoserver/WEBGIS/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=WEBGIS%3Areti_riserve http://www.opengis.net/wfs http://webgis.muse.it:80/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd">
+    <gml:boundedBy>
+        <gml:null>unknown</gml:null>
+    </gml:boundedBy>
+    <gml:featureMember>
+        <WEBGIS:reti_riserve fid="reti_riserve.5">
+            <WEBGIS:gid>5</WEBGIS:gid>
+            <WEBGIS:name>Rete di Riserve Monte Bondone-Soprassasso</WEBGIS:name>
+            <WEBGIS:area>5222.63496233</WEBGIS:area>
+            <WEBGIS:wkb_geometry>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#25832">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:25832">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1.55494078,-17.09878873 3.33891273,-19.06683016 6.62920576,-19.74653309
+                                        8.58913671,-23.83499328 14.88574617,-31.09658168 16.80419964,-34.65189108
+                                        15.77623079,-36.65915548 17.40442199,-37.1808015 17.929016,-31.55667483
+                                        19.82124577,-29.53945907 21.75623418,-20.69633079 24.66230003,-16.15661232
+                                        22.96188358,-11.36121643 25.29771418,-13.0023189 28.85384741,-9.53259129
+                                        27.62081327,-7.37018259 29.02292018,-8.4996875 27.53633694,-0.9919847
+                                        26.22871541,0.4252362 27.11023193,5.15437052 25.5131088,5.52771684
+                                        25.76641769,6.78678375 24.41171361,7.64609679 28.21499016,7.80041586
+                                        28.25102272,9.42452819 26.95469138,8.465216 27.39540961,10.81422504
+                                        26.28572692,8.81268876 25.36273293,9.34676186 27.19318688,13.75434554
+                                        25.19161831,15.42923413 24.77676346,12.91949831 22.95151421,12.58760794
+                                        27.00717881,17.35591669 26.62195073,19.06410596 28.54288644,22.92572343
+                                        24.82220452,32.02462622 23.38590671,31.38264142 26.32304064,24.79395989
+                                        24.81575869,23.51469898 24.42804837,20.86841093 18.35648225,15.30370122
+                                        13.17243807,16.54034113 11.16902784,16.03155908 9.94824477,13.85813106
+                                        6.08995851,19.82375966 5.19823277,30.43279517 2.08770217,38.28156302
+                                        0.46703778,35.72663341 0.47764736,29.88071251 -1.34832254,25.22381058
+                                        -1.0298748,14.39900022 -2.40587812,4.73092754 -1.51567375,3.30846397
+                                        -4.2381337,1.80124385 -2.5436426,-2.68881485 -4.52387189,-10.37933162
+                                        -2.05039692,-12.55761397 -3.13898054,-19.14445085 -1.75320839,-19.58027237
+                                        -1.93493259,-21.28618012 0.17173094,-20.15415096 1.55494078,-17.09878873
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                            <gml:innerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        2.32791922,-15.73880036 4.29930052,-13.72677873 2.79914501,-12.86732006
+                                        6.21282954,-14.20352222 5.94170455,-15.08433994 4.20581605,-14.34594819
+                                        4.70903074,-16.49714339 2.32791922,-15.73880036
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:innerBoundaryIs>
+                            <gml:innerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        25.67513521,-8.20289392 23.08487471,-7.90954691 22.73880201,-6.35922036
+                                        24.7688363,-4.32418922 25.88040068,-4.88399025 25.67513521,-8.20289392
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:innerBoundaryIs>
+                            <gml:innerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        9.78109373,-17.3065054 8.6288526,-14.85497297 9.12397998,-11.93038632
+                                        7.07588938,-9.5974451 9.06448622,-9.5722026 9.90088197,-7.21236841
+                                        12.11748484,-10.82636663 10.83296418,-13.86231155 8.91615219,-15.01574829
+                                        10.72610762,-16.40573641 12.06928128,-15.96510911 10.67774392,-17.50985318
+                                        12.00550366,-18.98556872 14.21906378,-17.43548488 14.16401403,-21.54074105
+                                        10.65824631,-19.9647351 9.78109373,-17.3065054
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:innerBoundaryIs>
+                            <gml:innerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        19.04698617,-5.35869493 20.0479306,-8.03469147 19.07244918,-8.62920095
+                                        14.27991876,-4.07326903 13.8081725,-0.54198854 8.01802066,7.52221435
+                                        8.96699814,8.37545949 14.36551611,3.48331685 13.44896794,3.03467991
+                                        19.04698617,-5.35869493
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:innerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </WEBGIS:wkb_geometry>
+            <WEBGIS:layername>Reti delle riserve</WEBGIS:layername>
+        </WEBGIS:reti_riserve>
+    </gml:featureMember>
+</wfs:FeatureCollection>

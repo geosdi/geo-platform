@@ -63,7 +63,7 @@ public class GPWMSConnectorStoreV111InternalTest {
         logger.info("##################################WMS_GET_FEATURE_INFO_V111_RESPONSE : {}\n", wmsGetFeatureInfoRequest.withQueryLayers("topp:states", "topp:states")
                 .withWMSGetMapRequest(wmsGetMapBaseRequest)
                 .withFeatureCount(2)
-                .withInfoFormat(WMSFeatureInfoFormat.GML).withX(170).withY(160).getResponse());
+                .withInfoFormat(WMSFeatureInfoFormat.GML_AS_STRING).withX(170).withY(160).getResponse());
     }
 
     @Test

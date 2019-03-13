@@ -54,7 +54,7 @@ import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 public class WFSContextComparisonTest extends AbstractWFSComparisonTest {
 
     @Test
-    public void wfsPooledDescribeFeatureTest() throws Exception {
+    public void a_wfsPooledDescribeFeatureTest() throws Exception {
         logger.info("WFSPooledDescribeFeatureTest : Executed {} threads in {} s \n",
                 super.defineNumThreads(),
                 TimeUnit.MILLISECONDS.toSeconds(executeMultiThreadsTasks(
@@ -63,7 +63,7 @@ public class WFSContextComparisonTest extends AbstractWFSComparisonTest {
     }
 
     @Test
-    public void wfsSimpleDescribeFeatureTest() throws Exception {
+    public void b_wfsSimpleDescribeFeatureTest() throws Exception {
         logger.info("WFSSimpleDescribeFeatureTest : Executed {} threads in {} s \n",
                 super.defineNumThreads(),
                 TimeUnit.MILLISECONDS.toSeconds(executeMultiThreadsTasks(
@@ -73,7 +73,7 @@ public class WFSContextComparisonTest extends AbstractWFSComparisonTest {
 
 
     @Test
-    public void wfsPooledDescribeFeatureSecureTest() throws Exception {
+    public void c_wfsPooledDescribeFeatureSecureTest() throws Exception {
         logger.info("WFSPooledDescribeFeatureSecureTest : Executed {} threads in {} s \n",
                 super.defineNumThreads(),
                 TimeUnit.MILLISECONDS.toSeconds(executeMultiThreadsTasks(
@@ -82,7 +82,7 @@ public class WFSContextComparisonTest extends AbstractWFSComparisonTest {
     }
 
     @Test
-    public void wfsSimpleDescribeFeatureSecureTest() throws Exception {
+    public void d_wfsSimpleDescribeFeatureSecureTest() throws Exception {
         logger.info("WFSSimpleDescribeFeatureSecureTest : Executed {} threads in {} s \n",
                 super.defineNumThreads(),
                 TimeUnit.MILLISECONDS.toSeconds(executeMultiThreadsTasks(
@@ -91,7 +91,7 @@ public class WFSContextComparisonTest extends AbstractWFSComparisonTest {
     }
 
     @Test
-    public void wfsPooledGetCapabilitiesTest() throws Exception {
+    public void e_wfsPooledGetCapabilitiesTest() throws Exception {
         logger.info("WFSPooledGetCapabilitiesTest : Executed {} threads in {} s \n",
                 super.defineNumThreads(),
                 TimeUnit.MILLISECONDS.toSeconds(executeMultiThreadsTasks(
@@ -100,7 +100,7 @@ public class WFSContextComparisonTest extends AbstractWFSComparisonTest {
     }
 
     @Test
-    public void wfsSimpleGetCapabilitiesTest() throws Exception {
+    public void f_wfsSimpleGetCapabilitiesTest() throws Exception {
         logger.info("WFSSimpleGetCapabilitiesTest : Executed {} threads in {} s \n",
                 super.defineNumThreads(),
                 TimeUnit.MILLISECONDS.toSeconds(executeMultiThreadsTasks(
@@ -109,7 +109,7 @@ public class WFSContextComparisonTest extends AbstractWFSComparisonTest {
     }
 
     @Test
-    public void wfsPooledGetCapabilitiesSecureTest() throws Exception {
+    public void g_wfsPooledGetCapabilitiesSecureTest() throws Exception {
         logger.info("WFSPooledGetCapabilitiesSecureTest : Executed {} threads in {} s \n",
                 super.defineNumThreads(),
                 TimeUnit.MILLISECONDS.toSeconds(executeMultiThreadsTasks(
@@ -118,7 +118,7 @@ public class WFSContextComparisonTest extends AbstractWFSComparisonTest {
     }
 
     @Test
-    public void wfsSimpleGetCapabilitiesSecureTest() throws Exception {
+    public void h_wfsSimpleGetCapabilitiesSecureTest() throws Exception {
         logger.info("WFSSimpleGetCapabilitiesSecureTest : Executed {} threads in {} s \n",
                 super.defineNumThreads(),
                 TimeUnit.MILLISECONDS.toSeconds(executeMultiThreadsTasks(

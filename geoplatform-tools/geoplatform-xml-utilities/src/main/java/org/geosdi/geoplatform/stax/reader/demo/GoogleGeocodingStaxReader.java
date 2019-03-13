@@ -36,10 +36,8 @@ package org.geosdi.geoplatform.stax.reader.demo;
 
 import org.geosdi.geoplatform.stax.reader.AbstractStaxStreamReader;
 
-import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.events.XMLEvent;
-import java.io.IOException;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -50,8 +48,7 @@ public class GoogleGeocodingStaxReader extends AbstractStaxStreamReader<StringBu
     /**
      * @param o
      * @return {@link StringBuilder}
-     * @throws XMLStreamException
-     * @throws IOException
+     * @throws Exception
      */
     @Override
     public StringBuilder read(Object o) throws Exception {

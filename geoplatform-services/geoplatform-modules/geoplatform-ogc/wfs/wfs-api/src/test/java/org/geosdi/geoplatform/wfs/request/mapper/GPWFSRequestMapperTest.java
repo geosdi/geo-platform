@@ -52,13 +52,14 @@ public class GPWFSRequestMapperTest {
                         "    \"matchOperator\" : \"ALL\",\n" +
                         "    \"queryRestriction\" : [ {\n" +
                         "      \"attribute\" : {\n" +
-                        "        \"type\" : \"double\",\n" +
-                        "        \"name\" : \"WORKERS\",\n" +
-                        "        \"value\" : \"\",\n" +
-                        "        \"maxOccurs\" : 1,\n" +
-                        "        \"minOccurs\" : 0,\n" +
-                        "        \"nillable\" : true,\n" +
-                        "        \"dateType\" : false\n" +
+                        "        \"attribute\" : {\n" +
+                        "          \"type\" : \"double\",\n" +
+                        "          \"name\" : \"WORKERS\",\n" +
+                        "          \"value\" : \"\",\n" +
+                        "          \"maxOccurs\" : 1,\n" +
+                        "          \"minOccurs\" : 0,\n" +
+                        "          \"nillable\" : true\n" +
+                        "        }\n" +
                         "      },\n" +
                         "      \"operator\" : \"LESS_OR_EQUAL\",\n" +
                         "      \"restriction\" : \"0.25\"\n" +

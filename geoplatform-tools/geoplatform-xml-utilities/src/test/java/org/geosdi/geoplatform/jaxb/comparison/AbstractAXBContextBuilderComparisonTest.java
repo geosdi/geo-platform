@@ -43,8 +43,9 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.concurrent.*;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -60,16 +61,14 @@ public class AbstractAXBContextBuilderComparisonTest {
 
     long executeMultiThreadsTasks(GPJAXBContextBuilderTaskType taskType) throws Exception {
         long time = 0;
-
         int numThreads = defineNumThreads();
-        ExecutorService executor = Executors.newFixedThreadPool(12,
-                new GPJAXBContextBuilderComparisonThreadFactory());
+        ExecutorService executor = Executors.newFixedThreadPool(12, new GPJAXBContextBuilderComparisonThreadFactory());
 
         List<Callable<Long>> tasks = IntStream.iterate(0, n -> n + 1)
                 .limit(numThreads)
                 .boxed()
                 .map(new GPJAXBContextBuilderTaskFunction(taskType))
-                .collect(Collectors.toList());
+                .collect(toList());
 
         List<Future<Long>> results = executor.invokeAll(tasks);
         executor.shutdown();

@@ -1,24 +1,23 @@
 {
-  "lang": "en",
-  "serverURL": "http://150.145.141.180/geoserver/wfs",
-  "typeName": "topp:states",
-  "maxFeatures": 30,
-  "queryDTO": {
-    "matchOperator": "ALL",
-    "queryRestriction": [
-      {
-        "attribute": {
-          "type": "double",
-          "name": "WORKERS",
-          "value": "",
-          "maxOccurs": 1,
-          "minOccurs": 0,
-          "nillable": true,
-          "dateType": false
-        },
-        "operator": "LESS_OR_EQUAL",
-        "restriction": "0.25"
-      }
-    ]
+  "lang" : "en",
+  "serverURL" : "http://150.145.141.180/geoserver/wfs",
+  "typeName" : "topp:states",
+  "maxFeatures" : 30,
+  "queryDTO" : {
+    "matchOperator" : "ALL",
+    "queryRestriction" : [ {
+      "attribute" : {
+        "attribute" : {
+          "type" : "double",
+          "name" : "WORKERS",
+          "value" : "",
+          "maxOccurs" : 1,
+          "minOccurs" : 0,
+          "nillable" : true
+        }
+      },
+      "operator" : "LESS_OR_EQUAL",
+      "restriction" : "0.25"
+    } ]
   }
 }

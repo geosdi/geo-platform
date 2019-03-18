@@ -40,6 +40,7 @@ import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.gui.shared.bean.BBox;
 import org.geosdi.geoplatform.hibernate.validator.support.GPI18NValidator;
 import org.geosdi.geoplatform.hibernate.validator.support.request.GPI18NRequestValidator;
+import org.geosdi.geoplatform.services.request.GPWFSSearchFeaturesByBboxRequest;
 import org.geosdi.geoplatform.services.request.GPWFSSearchFeaturesRequest;
 import org.geosdi.geoplatform.support.wfs.services.DescribeFeatureService;
 import org.geosdi.geoplatform.support.wfs.services.GetFeaureService;
@@ -196,7 +197,12 @@ public class GPWFSServiceImpl implements GPWFSService {
     @Override
     public Response getGeoJsonFeatures(String serverURL, String typeName, int maxFeatures, Map<String, String> headerParams)
             throws Exception {
-        return Response.ok(this.gpGetFeatureService.getFeature(serverURL, typeName, maxFeatures, headerParams)).build();
+        try {
+            return Response.ok(this.gpGetFeatureService.getFeature(serverURL, typeName, maxFeatures, headerParams)).build();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new IllegalParameterFault(ex.getMessage());
+        }
     }
 
     /**
@@ -217,6 +223,30 @@ public class GPWFSServiceImpl implements GPWFSService {
         try {
             return Response.ok(this.gpGetFeatureService.searchFeatures(request.getServerURL(), request.getTypeName(),
                     request.getMaxFeatures(), request.getQueryDTO())).build();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new IllegalParameterFault(ex.getMessage());
+        }
+    }
+
+    /**
+     * @param request
+     * @return {@link Response}
+     * @throws Exception
+     */
+    @Override
+    public Response searchFeaturesByBbox(GPWFSSearchFeaturesByBboxRequest request) throws Exception {
+        if (request == null) {
+            throw new IllegalParameterFault(this.wfsMessageSource.getMessage("gp_wfs_request.valid",
+                    new Object[]{"GPWFSSearchFeaturesByBboxRequest"}, ENGLISH));
+        }
+        logger.trace("##########################Validating Request -------------------> {}\n", request);
+        String message = this.wfsRequestValidator.validate(request, forLanguageTag(request.getLang()));
+        if (message != null)
+            throw new IllegalParameterFault(message);
+        try {
+            LayerSchemaDTO layerSchemaDTO = this.describeFeatureType(request.getServerURL(), request.getTypeName(), null);
+            return Response.ok(this.gpGetFeatureService.searchFeaturesByBbox(layerSchemaDTO, request.getBBox())).build();
         } catch (Exception ex) {
             ex.printStackTrace();
             throw new IllegalParameterFault(ex.getMessage());

@@ -4,8 +4,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.geosdi.geoplatform.connector.wfs.response.QueryDTO;
+import org.geosdi.geoplatform.gui.shared.bean.BBox;
 
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessorType;
 
 /**
@@ -17,9 +18,10 @@ import javax.xml.bind.annotation.XmlAccessorType;
 @ToString(callSuper = true)
 @NoArgsConstructor
 @XmlAccessorType
-public class GPWFSSearchFeaturesRequest extends WFSBaseSearchFeaturesRequest {
+public class GPWFSSearchFeaturesByBboxRequest extends WFSBaseSearchFeaturesRequest {
 
-    private static final long serialVersionUID = 1016214439970867351L;
+    private static final long serialVersionUID = 602981407339605893L;
     //
-    private QueryDTO queryDTO;
+    @NotNull(message = "{wfs_bbox_not_null}")
+    private BBox bBox;
 }

@@ -48,6 +48,10 @@ public class GPWMSGetFeatureInfoStaxReaderTest {
     private static File file12;
     private static File file13;
     private static File file14;
+    private static File file15;
+    private static File file16;
+    private static File file17;
+    private static File file18;
 
     @BeforeClass
     public static void beforeClass() throws Exception {
@@ -68,6 +72,10 @@ public class GPWMSGetFeatureInfoStaxReaderTest {
         file12 = new File(basePath.concat("comuni-GetFeatureInfo.xml"));
         file13 = new File(basePath.concat("parchiNaturali-GetFeatureInfo.xml"));
         file14 = new File(basePath.concat("retiRiserve-GetFeatureInfo.xml"));
+        file15 = new File(basePath.concat("linee-GetFeatureInfo.xml"));
+        file16 = new File(basePath.concat("azioniPunto-GetFeatureInfo.xml"));
+        file17 = new File(basePath.concat("comuniBasilicata-GetFeatureInfo.xml"));
+        file18 = new File(basePath.concat("corine-GetFeatureInfo.xml"));
     }
 
     @Test
@@ -158,5 +166,29 @@ public class GPWMSGetFeatureInfoStaxReaderTest {
     public void q_wmsGetFeatureInfoStaxReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_RETI_RISERVE : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoStaxReader.read(file14)));
+    }
+
+    @Test
+    public void r_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_LINEE : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(file15)));
+    }
+
+    @Test
+    public void s_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_AZIONI_PUNTO : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(file16)));
+    }
+
+    @Test
+    public void t_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_COMUNI_BASILICATA : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(file17)));
+    }
+
+    @Test
+    public void u_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_CORINE : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(file18)));
     }
 }

@@ -1,0 +1,1319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfs:FeatureCollection xmlns="http://www.opengis.net/wfs" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:gml="http://www.opengis.net/gml" xmlns:WEBGIS="http://lifeten/webgis"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xsi:schemaLocation="http://lifeten/webgis http://webgis.muse.it:80/geoserver/WEBGIS/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=WEBGIS%3Aazioni_punto http://www.opengis.net/wfs http://webgis.muse.it:80/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd">
+    <gml:boundedBy>
+        <gml:null>unknown</gml:null>
+    </gml:boundedBy>
+    <gml:featureMember>
+        <WEBGIS:azioni_punto fid="azioni_punto.fid--33a0c341_1697ba78b75_-646a">
+            <WEBGIS:id>1</WEBGIS:id>
+            <WEBGIS:gid>1</WEBGIS:gid>
+            <WEBGIS:cod_azione>AA</WEBGIS:cod_azione>
+            <WEBGIS:azione>AA04</WEBGIS:azione>
+            <WEBGIS:denominaz>Creare o ripristinare specchi d'acqua anche per anfibi</WEBGIS:denominaz>
+            <WEBGIS:nat2000>false</WEBGIS:nat2000>
+            <WEBGIS:rnp>false</WEBGIS:rnp>
+            <WEBGIS:rl>true</WEBGIS:rl>
+            <WEBGIS:hs>true</WEBGIS:hs>
+            <WEBGIS:corr_eco>false</WEBGIS:corr_eco>
+            <WEBGIS:afe>false</WEBGIS:afe>
+            <WEBGIS:ext>false</WEBGIS:ext>
+            <WEBGIS:prior_az>1</WEBGIS:prior_az>
+            <WEBGIS:prior_int>1</WEBGIS:prior_int>
+            <WEBGIS:c_com_cat>385</WEBGIS:c_com_cat>
+            <WEBGIS:den_cat>Terlago</WEBGIS:den_cat>
+            <WEBGIS:c_num_part>2504</WEBGIS:c_num_part>
+            <WEBGIS:costo_uni>5000.0</WEBGIS:costo_uni>
+            <WEBGIS:costo_tot>5000.0</WEBGIS:costo_tot>
+            <WEBGIS:note>Dimensioni 3x3 m con sponde e fondale in pietra - Azione prevista da PDG e Accordo di
+                programma
+            </WEBGIS:note>
+            <WEBGIS:proprieta>PROPRIETA' PRIVATA</WEBGIS:proprieta>
+            <WEBGIS:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32632">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        -0.72707172,1.80075732
+                    </gml:coordinates>
+                </gml:Point>
+            </WEBGIS:geom>
+            <WEBGIS:com_valle>Comunita della Valle dei Laghi</WEBGIS:com_valle>
+            <WEBGIS:comune>Terlago</WEBGIS:comune>
+            <WEBGIS:ato>Bondone</WEBGIS:ato>
+            <WEBGIS:rr>Rete di Riserve Alpi Ledrensi</WEBGIS:rr>
+            <WEBGIS:files/>
+        </WEBGIS:azioni_punto>
+    </gml:featureMember>
+    <gml:featureMember>
+        <WEBGIS:azioni_punto fid="azioni_punto.fid--33a0c341_1697ba78b75_-6469">
+            <WEBGIS:id>2</WEBGIS:id>
+            <WEBGIS:gid>1</WEBGIS:gid>
+            <WEBGIS:cod_azione>AA</WEBGIS:cod_azione>
+            <WEBGIS:azione>AA04</WEBGIS:azione>
+            <WEBGIS:denominaz>Creare o ripristinare specchi d'acqua anche per anfibi</WEBGIS:denominaz>
+            <WEBGIS:nat2000>false</WEBGIS:nat2000>
+            <WEBGIS:rnp>false</WEBGIS:rnp>
+            <WEBGIS:rl>true</WEBGIS:rl>
+            <WEBGIS:hs>true</WEBGIS:hs>
+            <WEBGIS:corr_eco>false</WEBGIS:corr_eco>
+            <WEBGIS:afe>false</WEBGIS:afe>
+            <WEBGIS:ext>false</WEBGIS:ext>
+            <WEBGIS:prior_az>1</WEBGIS:prior_az>
+            <WEBGIS:prior_int>1</WEBGIS:prior_int>
+            <WEBGIS:c_com_cat>385</WEBGIS:c_com_cat>
+            <WEBGIS:den_cat>Terlago</WEBGIS:den_cat>
+            <WEBGIS:c_num_part>2504</WEBGIS:c_num_part>
+            <WEBGIS:costo_uni>5000.0</WEBGIS:costo_uni>
+            <WEBGIS:costo_tot>5000.0</WEBGIS:costo_tot>
+            <WEBGIS:note>Dimensioni 3x3 m con sponde e fondale in pietra - Azione prevista da PDG e Accordo di
+                programma
+            </WEBGIS:note>
+            <WEBGIS:proprieta>PROPRIETA' PRIVATA</WEBGIS:proprieta>
+            <WEBGIS:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32632">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        -0.72707172,1.80075732
+                    </gml:coordinates>
+                </gml:Point>
+            </WEBGIS:geom>
+            <WEBGIS:com_valle>Comunita della Valle dei Laghi</WEBGIS:com_valle>
+            <WEBGIS:comune>Terlago</WEBGIS:comune>
+            <WEBGIS:ato>Bondone</WEBGIS:ato>
+            <WEBGIS:rr>Rete di Riserve Basso Sarca</WEBGIS:rr>
+            <WEBGIS:files/>
+        </WEBGIS:azioni_punto>
+    </gml:featureMember>
+    <gml:featureMember>
+        <WEBGIS:azioni_punto fid="azioni_punto.fid--33a0c341_1697ba78b75_-6468">
+            <WEBGIS:id>3</WEBGIS:id>
+            <WEBGIS:gid>1</WEBGIS:gid>
+            <WEBGIS:cod_azione>AA</WEBGIS:cod_azione>
+            <WEBGIS:azione>AA04</WEBGIS:azione>
+            <WEBGIS:denominaz>Creare o ripristinare specchi d'acqua anche per anfibi</WEBGIS:denominaz>
+            <WEBGIS:nat2000>false</WEBGIS:nat2000>
+            <WEBGIS:rnp>false</WEBGIS:rnp>
+            <WEBGIS:rl>true</WEBGIS:rl>
+            <WEBGIS:hs>true</WEBGIS:hs>
+            <WEBGIS:corr_eco>false</WEBGIS:corr_eco>
+            <WEBGIS:afe>false</WEBGIS:afe>
+            <WEBGIS:ext>false</WEBGIS:ext>
+            <WEBGIS:prior_az>1</WEBGIS:prior_az>
+            <WEBGIS:prior_int>1</WEBGIS:prior_int>
+            <WEBGIS:c_com_cat>385</WEBGIS:c_com_cat>
+            <WEBGIS:den_cat>Terlago</WEBGIS:den_cat>
+            <WEBGIS:c_num_part>2504</WEBGIS:c_num_part>
+            <WEBGIS:costo_uni>5000.0</WEBGIS:costo_uni>
+            <WEBGIS:costo_tot>5000.0</WEBGIS:costo_tot>
+            <WEBGIS:note>Dimensioni 3x3 m con sponde e fondale in pietra - Azione prevista da PDG e Accordo di
+                programma
+            </WEBGIS:note>
+            <WEBGIS:proprieta>PROPRIETA' PRIVATA</WEBGIS:proprieta>
+            <WEBGIS:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32632">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        -0.72707172,1.80075732
+                    </gml:coordinates>
+                </gml:Point>
+            </WEBGIS:geom>
+            <WEBGIS:com_valle>Comunita della Valle dei Laghi</WEBGIS:com_valle>
+            <WEBGIS:comune>Terlago</WEBGIS:comune>
+            <WEBGIS:ato>Bondone</WEBGIS:ato>
+            <WEBGIS:rr>Rete di Riserve Monte Bondone</WEBGIS:rr>
+            <WEBGIS:files/>
+        </WEBGIS:azioni_punto>
+    </gml:featureMember>
+    <gml:featureMember>
+        <WEBGIS:azioni_punto fid="azioni_punto.fid--33a0c341_1697ba78b75_-6467">
+            <WEBGIS:id>4</WEBGIS:id>
+            <WEBGIS:gid>2</WEBGIS:gid>
+            <WEBGIS:cod_azione>AA</WEBGIS:cod_azione>
+            <WEBGIS:azione>AA04</WEBGIS:azione>
+            <WEBGIS:denominaz>Creare o ripristinare specchi d'acqua anche per anfibi</WEBGIS:denominaz>
+            <WEBGIS:nat2000>false</WEBGIS:nat2000>
+            <WEBGIS:rnp>false</WEBGIS:rnp>
+            <WEBGIS:rl>true</WEBGIS:rl>
+            <WEBGIS:hs>true</WEBGIS:hs>
+            <WEBGIS:corr_eco>false</WEBGIS:corr_eco>
+            <WEBGIS:afe>false</WEBGIS:afe>
+            <WEBGIS:ext>false</WEBGIS:ext>
+            <WEBGIS:prior_az>1</WEBGIS:prior_az>
+            <WEBGIS:prior_int>1</WEBGIS:prior_int>
+            <WEBGIS:c_com_cat>385</WEBGIS:c_com_cat>
+            <WEBGIS:den_cat>Terlago</WEBGIS:den_cat>
+            <WEBGIS:c_num_part>2499/3</WEBGIS:c_num_part>
+            <WEBGIS:costo_uni>5000.0</WEBGIS:costo_uni>
+            <WEBGIS:costo_tot>5000.0</WEBGIS:costo_tot>
+            <WEBGIS:note>Dimensioni 3x3 m con sponde e fondale in pietra - Azione prevista da PDG e Accordo di
+                programma
+            </WEBGIS:note>
+            <WEBGIS:proprieta>PROPRIETA' PRIVATA</WEBGIS:proprieta>
+            <WEBGIS:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32632">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        -0.45173897,1.47426039
+                    </gml:coordinates>
+                </gml:Point>
+            </WEBGIS:geom>
+            <WEBGIS:com_valle>Comunita della Valle dei Laghi</WEBGIS:com_valle>
+            <WEBGIS:comune>Terlago</WEBGIS:comune>
+            <WEBGIS:ato>Bondone</WEBGIS:ato>
+            <WEBGIS:rr>Rete di Riserve Alpi Ledrensi</WEBGIS:rr>
+            <WEBGIS:files/>
+        </WEBGIS:azioni_punto>
+    </gml:featureMember>
+    <gml:featureMember>
+        <WEBGIS:azioni_punto fid="azioni_punto.fid--33a0c341_1697ba78b75_-6466">
+            <WEBGIS:id>5</WEBGIS:id>
+            <WEBGIS:gid>2</WEBGIS:gid>
+            <WEBGIS:cod_azione>AA</WEBGIS:cod_azione>
+            <WEBGIS:azione>AA04</WEBGIS:azione>
+            <WEBGIS:denominaz>Creare o ripristinare specchi d'acqua anche per anfibi</WEBGIS:denominaz>
+            <WEBGIS:nat2000>false</WEBGIS:nat2000>
+            <WEBGIS:rnp>false</WEBGIS:rnp>
+            <WEBGIS:rl>true</WEBGIS:rl>
+            <WEBGIS:hs>true</WEBGIS:hs>
+            <WEBGIS:corr_eco>false</WEBGIS:corr_eco>
+            <WEBGIS:afe>false</WEBGIS:afe>
+            <WEBGIS:ext>false</WEBGIS:ext>
+            <WEBGIS:prior_az>1</WEBGIS:prior_az>
+            <WEBGIS:prior_int>1</WEBGIS:prior_int>
+            <WEBGIS:c_com_cat>385</WEBGIS:c_com_cat>
+            <WEBGIS:den_cat>Terlago</WEBGIS:den_cat>
+            <WEBGIS:c_num_part>2499/3</WEBGIS:c_num_part>
+            <WEBGIS:costo_uni>5000.0</WEBGIS:costo_uni>
+            <WEBGIS:costo_tot>5000.0</WEBGIS:costo_tot>
+            <WEBGIS:note>Dimensioni 3x3 m con sponde e fondale in pietra - Azione prevista da PDG e Accordo di
+                programma
+            </WEBGIS:note>
+            <WEBGIS:proprieta>PROPRIETA' PRIVATA</WEBGIS:proprieta>
+            <WEBGIS:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32632">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        -0.45173897,1.47426039
+                    </gml:coordinates>
+                </gml:Point>
+            </WEBGIS:geom>
+            <WEBGIS:com_valle>Comunita della Valle dei Laghi</WEBGIS:com_valle>
+            <WEBGIS:comune>Terlago</WEBGIS:comune>
+            <WEBGIS:ato>Bondone</WEBGIS:ato>
+            <WEBGIS:rr>Rete di Riserve Basso Sarca</WEBGIS:rr>
+            <WEBGIS:files/>
+        </WEBGIS:azioni_punto>
+    </gml:featureMember>
+    <gml:featureMember>
+        <WEBGIS:azioni_punto fid="azioni_punto.fid--33a0c341_1697ba78b75_-6465">
+            <WEBGIS:id>6</WEBGIS:id>
+            <WEBGIS:gid>2</WEBGIS:gid>
+            <WEBGIS:cod_azione>AA</WEBGIS:cod_azione>
+            <WEBGIS:azione>AA04</WEBGIS:azione>
+            <WEBGIS:denominaz>Creare o ripristinare specchi d'acqua anche per anfibi</WEBGIS:denominaz>
+            <WEBGIS:nat2000>false</WEBGIS:nat2000>
+            <WEBGIS:rnp>false</WEBGIS:rnp>
+            <WEBGIS:rl>true</WEBGIS:rl>
+            <WEBGIS:hs>true</WEBGIS:hs>
+            <WEBGIS:corr_eco>false</WEBGIS:corr_eco>
+            <WEBGIS:afe>false</WEBGIS:afe>
+            <WEBGIS:ext>false</WEBGIS:ext>
+            <WEBGIS:prior_az>1</WEBGIS:prior_az>
+            <WEBGIS:prior_int>1</WEBGIS:prior_int>
+            <WEBGIS:c_com_cat>385</WEBGIS:c_com_cat>
+            <WEBGIS:den_cat>Terlago</WEBGIS:den_cat>
+            <WEBGIS:c_num_part>2499/3</WEBGIS:c_num_part>
+            <WEBGIS:costo_uni>5000.0</WEBGIS:costo_uni>
+            <WEBGIS:costo_tot>5000.0</WEBGIS:costo_tot>
+            <WEBGIS:note>Dimensioni 3x3 m con sponde e fondale in pietra - Azione prevista da PDG e Accordo di
+                programma
+            </WEBGIS:note>
+            <WEBGIS:proprieta>PROPRIETA' PRIVATA</WEBGIS:proprieta>
+            <WEBGIS:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32632">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        -0.45173897,1.47426039
+                    </gml:coordinates>
+                </gml:Point>
+            </WEBGIS:geom>
+            <WEBGIS:com_valle>Comunita della Valle dei Laghi</WEBGIS:com_valle>
+            <WEBGIS:comune>Terlago</WEBGIS:comune>
+            <WEBGIS:ato>Bondone</WEBGIS:ato>
+            <WEBGIS:rr>Rete di Riserve Monte Bondone</WEBGIS:rr>
+            <WEBGIS:files/>
+        </WEBGIS:azioni_punto>
+    </gml:featureMember>
+    <gml:featureMember>
+        <WEBGIS:azioni_punto fid="azioni_punto.fid--33a0c341_1697ba78b75_-6464">
+            <WEBGIS:id>7</WEBGIS:id>
+            <WEBGIS:gid>3</WEBGIS:gid>
+            <WEBGIS:cod_azione>AA</WEBGIS:cod_azione>
+            <WEBGIS:azione>AA04</WEBGIS:azione>
+            <WEBGIS:denominaz>Creare o ripristinare specchi d'acqua anche per anfibi</WEBGIS:denominaz>
+            <WEBGIS:nat2000>false</WEBGIS:nat2000>
+            <WEBGIS:rnp>false</WEBGIS:rnp>
+            <WEBGIS:rl>true</WEBGIS:rl>
+            <WEBGIS:hs>true</WEBGIS:hs>
+            <WEBGIS:corr_eco>false</WEBGIS:corr_eco>
+            <WEBGIS:afe>false</WEBGIS:afe>
+            <WEBGIS:ext>false</WEBGIS:ext>
+            <WEBGIS:prior_az>1</WEBGIS:prior_az>
+            <WEBGIS:prior_int>1</WEBGIS:prior_int>
+            <WEBGIS:c_com_cat>385</WEBGIS:c_com_cat>
+            <WEBGIS:den_cat>Terlago</WEBGIS:den_cat>
+            <WEBGIS:c_num_part>2478</WEBGIS:c_num_part>
+            <WEBGIS:costo_uni>10000.0</WEBGIS:costo_uni>
+            <WEBGIS:costo_tot>10000.0</WEBGIS:costo_tot>
+            <WEBGIS:note>Pulizia specchio d'acqua con allargamento, circa 30x10 m - Azione prevista da PDG e Accordo di
+                programma
+            </WEBGIS:note>
+            <WEBGIS:proprieta>PROPRIETA' PRIVATA</WEBGIS:proprieta>
+            <WEBGIS:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32632">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        0.69199209,0.55077756
+                    </gml:coordinates>
+                </gml:Point>
+            </WEBGIS:geom>
+            <WEBGIS:com_valle>Comunita della Valle dei Laghi</WEBGIS:com_valle>
+            <WEBGIS:comune>Terlago</WEBGIS:comune>
+            <WEBGIS:ato>Bondone</WEBGIS:ato>
+            <WEBGIS:rr>Rete di Riserve Alpi Ledrensi</WEBGIS:rr>
+            <WEBGIS:files/>
+        </WEBGIS:azioni_punto>
+    </gml:featureMember>
+    <gml:featureMember>
+        <WEBGIS:azioni_punto fid="azioni_punto.fid--33a0c341_1697ba78b75_-6463">
+            <WEBGIS:id>8</WEBGIS:id>
+            <WEBGIS:gid>3</WEBGIS:gid>
+            <WEBGIS:cod_azione>AA</WEBGIS:cod_azione>
+            <WEBGIS:azione>AA04</WEBGIS:azione>
+            <WEBGIS:denominaz>Creare o ripristinare specchi d'acqua anche per anfibi</WEBGIS:denominaz>
+            <WEBGIS:nat2000>false</WEBGIS:nat2000>
+            <WEBGIS:rnp>false</WEBGIS:rnp>
+            <WEBGIS:rl>true</WEBGIS:rl>
+            <WEBGIS:hs>true</WEBGIS:hs>
+            <WEBGIS:corr_eco>false</WEBGIS:corr_eco>
+            <WEBGIS:afe>false</WEBGIS:afe>
+            <WEBGIS:ext>false</WEBGIS:ext>
+            <WEBGIS:prior_az>1</WEBGIS:prior_az>
+            <WEBGIS:prior_int>1</WEBGIS:prior_int>
+            <WEBGIS:c_com_cat>385</WEBGIS:c_com_cat>
+            <WEBGIS:den_cat>Terlago</WEBGIS:den_cat>
+            <WEBGIS:c_num_part>2478</WEBGIS:c_num_part>
+            <WEBGIS:costo_uni>10000.0</WEBGIS:costo_uni>
+            <WEBGIS:costo_tot>10000.0</WEBGIS:costo_tot>
+            <WEBGIS:note>Pulizia specchio d'acqua con allargamento, circa 30x10 m - Azione prevista da PDG e Accordo di
+                programma
+            </WEBGIS:note>
+            <WEBGIS:proprieta>PROPRIETA' PRIVATA</WEBGIS:proprieta>
+            <WEBGIS:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32632">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        0.69199209,0.55077756
+                    </gml:coordinates>
+                </gml:Point>
+            </WEBGIS:geom>
+            <WEBGIS:com_valle>Comunita della Valle dei Laghi</WEBGIS:com_valle>
+            <WEBGIS:comune>Terlago</WEBGIS:comune>
+            <WEBGIS:ato>Bondone</WEBGIS:ato>
+            <WEBGIS:rr>Rete di Riserve Basso Sarca</WEBGIS:rr>
+            <WEBGIS:files/>
+        </WEBGIS:azioni_punto>
+    </gml:featureMember>
+    <gml:featureMember>
+        <WEBGIS:azioni_punto fid="azioni_punto.fid--33a0c341_1697ba78b75_-6462">
+            <WEBGIS:id>9</WEBGIS:id>
+            <WEBGIS:gid>3</WEBGIS:gid>
+            <WEBGIS:cod_azione>AA</WEBGIS:cod_azione>
+            <WEBGIS:azione>AA04</WEBGIS:azione>
+            <WEBGIS:denominaz>Creare o ripristinare specchi d'acqua anche per anfibi</WEBGIS:denominaz>
+            <WEBGIS:nat2000>false</WEBGIS:nat2000>
+            <WEBGIS:rnp>false</WEBGIS:rnp>
+            <WEBGIS:rl>true</WEBGIS:rl>
+            <WEBGIS:hs>true</WEBGIS:hs>
+            <WEBGIS:corr_eco>false</WEBGIS:corr_eco>
+            <WEBGIS:afe>false</WEBGIS:afe>
+            <WEBGIS:ext>false</WEBGIS:ext>
+            <WEBGIS:prior_az>1</WEBGIS:prior_az>
+            <WEBGIS:prior_int>1</WEBGIS:prior_int>
+            <WEBGIS:c_com_cat>385</WEBGIS:c_com_cat>
+            <WEBGIS:den_cat>Terlago</WEBGIS:den_cat>
+            <WEBGIS:c_num_part>2478</WEBGIS:c_num_part>
+            <WEBGIS:costo_uni>10000.0</WEBGIS:costo_uni>
+            <WEBGIS:costo_tot>10000.0</WEBGIS:costo_tot>
+            <WEBGIS:note>Pulizia specchio d'acqua con allargamento, circa 30x10 m - Azione prevista da PDG e Accordo di
+                programma
+            </WEBGIS:note>
+            <WEBGIS:proprieta>PROPRIETA' PRIVATA</WEBGIS:proprieta>
+            <WEBGIS:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32632">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        0.69199209,0.55077756
+                    </gml:coordinates>
+                </gml:Point>
+            </WEBGIS:geom>
+            <WEBGIS:com_valle>Comunita della Valle dei Laghi</WEBGIS:com_valle>
+            <WEBGIS:comune>Terlago</WEBGIS:comune>
+            <WEBGIS:ato>Bondone</WEBGIS:ato>
+            <WEBGIS:rr>Rete di Riserve Monte Bondone</WEBGIS:rr>
+            <WEBGIS:files/>
+        </WEBGIS:azioni_punto>
+    </gml:featureMember>
+    <gml:featureMember>
+        <WEBGIS:azioni_punto fid="azioni_punto.fid--33a0c341_1697ba78b75_-6461">
+            <WEBGIS:id>10</WEBGIS:id>
+            <WEBGIS:gid>4</WEBGIS:gid>
+            <WEBGIS:cod_azione>AA</WEBGIS:cod_azione>
+            <WEBGIS:azione>AA04</WEBGIS:azione>
+            <WEBGIS:denominaz>Creare o ripristinare specchi d'acqua anche per anfibi</WEBGIS:denominaz>
+            <WEBGIS:nat2000>false</WEBGIS:nat2000>
+            <WEBGIS:rnp>false</WEBGIS:rnp>
+            <WEBGIS:rl>true</WEBGIS:rl>
+            <WEBGIS:hs>true</WEBGIS:hs>
+            <WEBGIS:corr_eco>false</WEBGIS:corr_eco>
+            <WEBGIS:afe>false</WEBGIS:afe>
+            <WEBGIS:ext>false</WEBGIS:ext>
+            <WEBGIS:prior_az>1</WEBGIS:prior_az>
+            <WEBGIS:prior_int>1</WEBGIS:prior_int>
+            <WEBGIS:c_com_cat>385</WEBGIS:c_com_cat>
+            <WEBGIS:den_cat>Terlago</WEBGIS:den_cat>
+            <WEBGIS:c_num_part>2419</WEBGIS:c_num_part>
+            <WEBGIS:costo_uni>10000.0</WEBGIS:costo_uni>
+            <WEBGIS:costo_tot>10000.0</WEBGIS:costo_tot>
+            <WEBGIS:note>Pulizia specchio d'acqua con allargamento, circa 30x10 m - Azione prevista da PDG e Accordo di
+                programma
+            </WEBGIS:note>
+            <WEBGIS:proprieta>PROPRIETA' PRIVATA</WEBGIS:proprieta>
+            <WEBGIS:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32632">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1.06338134,1.73195596
+                    </gml:coordinates>
+                </gml:Point>
+            </WEBGIS:geom>
+            <WEBGIS:com_valle>Comunita della Valle dei Laghi</WEBGIS:com_valle>
+            <WEBGIS:comune>Terlago</WEBGIS:comune>
+            <WEBGIS:ato>Bondone</WEBGIS:ato>
+            <WEBGIS:rr>Rete di Riserve Alpi Ledrensi</WEBGIS:rr>
+            <WEBGIS:files/>
+        </WEBGIS:azioni_punto>
+    </gml:featureMember>
+    <gml:featureMember>
+        <WEBGIS:azioni_punto fid="azioni_punto.fid--33a0c341_1697ba78b75_-6460">
+            <WEBGIS:id>11</WEBGIS:id>
+            <WEBGIS:gid>4</WEBGIS:gid>
+            <WEBGIS:cod_azione>AA</WEBGIS:cod_azione>
+            <WEBGIS:azione>AA04</WEBGIS:azione>
+            <WEBGIS:denominaz>Creare o ripristinare specchi d'acqua anche per anfibi</WEBGIS:denominaz>
+            <WEBGIS:nat2000>false</WEBGIS:nat2000>
+            <WEBGIS:rnp>false</WEBGIS:rnp>
+            <WEBGIS:rl>true</WEBGIS:rl>
+            <WEBGIS:hs>true</WEBGIS:hs>
+            <WEBGIS:corr_eco>false</WEBGIS:corr_eco>
+            <WEBGIS:afe>false</WEBGIS:afe>
+            <WEBGIS:ext>false</WEBGIS:ext>
+            <WEBGIS:prior_az>1</WEBGIS:prior_az>
+            <WEBGIS:prior_int>1</WEBGIS:prior_int>
+            <WEBGIS:c_com_cat>385</WEBGIS:c_com_cat>
+            <WEBGIS:den_cat>Terlago</WEBGIS:den_cat>
+            <WEBGIS:c_num_part>2419</WEBGIS:c_num_part>
+            <WEBGIS:costo_uni>10000.0</WEBGIS:costo_uni>
+            <WEBGIS:costo_tot>10000.0</WEBGIS:costo_tot>
+            <WEBGIS:note>Pulizia specchio d'acqua con allargamento, circa 30x10 m - Azione prevista da PDG e Accordo di
+                programma
+            </WEBGIS:note>
+            <WEBGIS:proprieta>PROPRIETA' PRIVATA</WEBGIS:proprieta>
+            <WEBGIS:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32632">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1.06338134,1.73195596
+                    </gml:coordinates>
+                </gml:Point>
+            </WEBGIS:geom>
+            <WEBGIS:com_valle>Comunita della Valle dei Laghi</WEBGIS:com_valle>
+            <WEBGIS:comune>Terlago</WEBGIS:comune>
+            <WEBGIS:ato>Bondone</WEBGIS:ato>
+            <WEBGIS:rr>Rete di Riserve Basso Sarca</WEBGIS:rr>
+            <WEBGIS:files/>
+        </WEBGIS:azioni_punto>
+    </gml:featureMember>
+    <gml:featureMember>
+        <WEBGIS:azioni_punto fid="azioni_punto.fid--33a0c341_1697ba78b75_-645f">
+            <WEBGIS:id>12</WEBGIS:id>
+            <WEBGIS:gid>4</WEBGIS:gid>
+            <WEBGIS:cod_azione>AA</WEBGIS:cod_azione>
+            <WEBGIS:azione>AA04</WEBGIS:azione>
+            <WEBGIS:denominaz>Creare o ripristinare specchi d'acqua anche per anfibi</WEBGIS:denominaz>
+            <WEBGIS:nat2000>false</WEBGIS:nat2000>
+            <WEBGIS:rnp>false</WEBGIS:rnp>
+            <WEBGIS:rl>true</WEBGIS:rl>
+            <WEBGIS:hs>true</WEBGIS:hs>
+            <WEBGIS:corr_eco>false</WEBGIS:corr_eco>
+            <WEBGIS:afe>false</WEBGIS:afe>
+            <WEBGIS:ext>false</WEBGIS:ext>
+            <WEBGIS:prior_az>1</WEBGIS:prior_az>
+            <WEBGIS:prior_int>1</WEBGIS:prior_int>
+            <WEBGIS:c_com_cat>385</WEBGIS:c_com_cat>
+            <WEBGIS:den_cat>Terlago</WEBGIS:den_cat>
+            <WEBGIS:c_num_part>2419</WEBGIS:c_num_part>
+            <WEBGIS:costo_uni>10000.0</WEBGIS:costo_uni>
+            <WEBGIS:costo_tot>10000.0</WEBGIS:costo_tot>
+            <WEBGIS:note>Pulizia specchio d'acqua con allargamento, circa 30x10 m - Azione prevista da PDG e Accordo di
+                programma
+            </WEBGIS:note>
+            <WEBGIS:proprieta>PROPRIETA' PRIVATA</WEBGIS:proprieta>
+            <WEBGIS:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32632">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1.06338134,1.73195596
+                    </gml:coordinates>
+                </gml:Point>
+            </WEBGIS:geom>
+            <WEBGIS:com_valle>Comunita della Valle dei Laghi</WEBGIS:com_valle>
+            <WEBGIS:comune>Terlago</WEBGIS:comune>
+            <WEBGIS:ato>Bondone</WEBGIS:ato>
+            <WEBGIS:rr>Rete di Riserve Monte Bondone</WEBGIS:rr>
+            <WEBGIS:files/>
+        </WEBGIS:azioni_punto>
+    </gml:featureMember>
+    <gml:featureMember>
+        <WEBGIS:azioni_punto fid="azioni_punto.fid--33a0c341_1697ba78b75_-645e">
+            <WEBGIS:id>13</WEBGIS:id>
+            <WEBGIS:gid>5</WEBGIS:gid>
+            <WEBGIS:cod_azione>AA</WEBGIS:cod_azione>
+            <WEBGIS:azione>AA04</WEBGIS:azione>
+            <WEBGIS:denominaz>Creare o ripristinare specchi d'acqua anche per anfibi</WEBGIS:denominaz>
+            <WEBGIS:nat2000>false</WEBGIS:nat2000>
+            <WEBGIS:rnp>false</WEBGIS:rnp>
+            <WEBGIS:rl>false</WEBGIS:rl>
+            <WEBGIS:hs>false</WEBGIS:hs>
+            <WEBGIS:corr_eco>false</WEBGIS:corr_eco>
+            <WEBGIS:afe>false</WEBGIS:afe>
+            <WEBGIS:ext>true</WEBGIS:ext>
+            <WEBGIS:prior_az>1</WEBGIS:prior_az>
+            <WEBGIS:prior_int>2</WEBGIS:prior_int>
+            <WEBGIS:c_com_cat>385</WEBGIS:c_com_cat>
+            <WEBGIS:den_cat>Terlago</WEBGIS:den_cat>
+            <WEBGIS:c_num_part>1106/2</WEBGIS:c_num_part>
+            <WEBGIS:costo_uni>1000.0</WEBGIS:costo_uni>
+            <WEBGIS:costo_tot>1000.0</WEBGIS:costo_tot>
+            <WEBGIS:note>Realizzazione vasca in cemento e pietra (3x0,5 m) con rampa di risalita, sfruttando canale già
+                esistente con sponda in cemento - Azione prevista da PDG e Accordo di programma
+            </WEBGIS:note>
+            <WEBGIS:proprieta>PROPRIETA' PUBBLICA COMUNALE</WEBGIS:proprieta>
+            <WEBGIS:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32632">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        -0.28437555,6.77052048
+                    </gml:coordinates>
+                </gml:Point>
+            </WEBGIS:geom>
+            <WEBGIS:com_valle>Comunita della Valle dei Laghi</WEBGIS:com_valle>
+            <WEBGIS:comune>Terlago</WEBGIS:comune>
+            <WEBGIS:ato>Bondone</WEBGIS:ato>
+            <WEBGIS:rr>Rete di Riserve Alpi Ledrensi</WEBGIS:rr>
+            <WEBGIS:files/>
+        </WEBGIS:azioni_punto>
+    </gml:featureMember>
+    <gml:featureMember>
+        <WEBGIS:azioni_punto fid="azioni_punto.fid--33a0c341_1697ba78b75_-645d">
+            <WEBGIS:id>14</WEBGIS:id>
+            <WEBGIS:gid>5</WEBGIS:gid>
+            <WEBGIS:cod_azione>AA</WEBGIS:cod_azione>
+            <WEBGIS:azione>AA04</WEBGIS:azione>
+            <WEBGIS:denominaz>Creare o ripristinare specchi d'acqua anche per anfibi</WEBGIS:denominaz>
+            <WEBGIS:nat2000>false</WEBGIS:nat2000>
+            <WEBGIS:rnp>false</WEBGIS:rnp>
+            <WEBGIS:rl>false</WEBGIS:rl>
+            <WEBGIS:hs>false</WEBGIS:hs>
+            <WEBGIS:corr_eco>false</WEBGIS:corr_eco>
+            <WEBGIS:afe>false</WEBGIS:afe>
+            <WEBGIS:ext>true</WEBGIS:ext>
+            <WEBGIS:prior_az>1</WEBGIS:prior_az>
+            <WEBGIS:prior_int>2</WEBGIS:prior_int>
+            <WEBGIS:c_com_cat>385</WEBGIS:c_com_cat>
+            <WEBGIS:den_cat>Terlago</WEBGIS:den_cat>
+            <WEBGIS:c_num_part>1106/2</WEBGIS:c_num_part>
+            <WEBGIS:costo_uni>1000.0</WEBGIS:costo_uni>
+            <WEBGIS:costo_tot>1000.0</WEBGIS:costo_tot>
+            <WEBGIS:note>Realizzazione vasca in cemento e pietra (3x0,5 m) con rampa di risalita, sfruttando canale già
+                esistente con sponda in cemento - Azione prevista da PDG e Accordo di programma
+            </WEBGIS:note>
+            <WEBGIS:proprieta>PROPRIETA' PUBBLICA COMUNALE</WEBGIS:proprieta>
+            <WEBGIS:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32632">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        -0.28437555,6.77052048
+                    </gml:coordinates>
+                </gml:Point>
+            </WEBGIS:geom>
+            <WEBGIS:com_valle>Comunita della Valle dei Laghi</WEBGIS:com_valle>
+            <WEBGIS:comune>Terlago</WEBGIS:comune>
+            <WEBGIS:ato>Bondone</WEBGIS:ato>
+            <WEBGIS:rr>Rete di Riserve Basso Sarca</WEBGIS:rr>
+            <WEBGIS:files/>
+        </WEBGIS:azioni_punto>
+    </gml:featureMember>
+    <gml:featureMember>
+        <WEBGIS:azioni_punto fid="azioni_punto.fid--33a0c341_1697ba78b75_-645c">
+            <WEBGIS:id>15</WEBGIS:id>
+            <WEBGIS:gid>5</WEBGIS:gid>
+            <WEBGIS:cod_azione>AA</WEBGIS:cod_azione>
+            <WEBGIS:azione>AA04</WEBGIS:azione>
+            <WEBGIS:denominaz>Creare o ripristinare specchi d'acqua anche per anfibi</WEBGIS:denominaz>
+            <WEBGIS:nat2000>false</WEBGIS:nat2000>
+            <WEBGIS:rnp>false</WEBGIS:rnp>
+            <WEBGIS:rl>false</WEBGIS:rl>
+            <WEBGIS:hs>false</WEBGIS:hs>
+            <WEBGIS:corr_eco>false</WEBGIS:corr_eco>
+            <WEBGIS:afe>false</WEBGIS:afe>
+            <WEBGIS:ext>true</WEBGIS:ext>
+            <WEBGIS:prior_az>1</WEBGIS:prior_az>
+            <WEBGIS:prior_int>2</WEBGIS:prior_int>
+            <WEBGIS:c_com_cat>385</WEBGIS:c_com_cat>
+            <WEBGIS:den_cat>Terlago</WEBGIS:den_cat>
+            <WEBGIS:c_num_part>1106/2</WEBGIS:c_num_part>
+            <WEBGIS:costo_uni>1000.0</WEBGIS:costo_uni>
+            <WEBGIS:costo_tot>1000.0</WEBGIS:costo_tot>
+            <WEBGIS:note>Realizzazione vasca in cemento e pietra (3x0,5 m) con rampa di risalita, sfruttando canale già
+                esistente con sponda in cemento - Azione prevista da PDG e Accordo di programma
+            </WEBGIS:note>
+            <WEBGIS:proprieta>PROPRIETA' PUBBLICA COMUNALE</WEBGIS:proprieta>
+            <WEBGIS:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32632">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        -0.28437555,6.77052048
+                    </gml:coordinates>
+                </gml:Point>
+            </WEBGIS:geom>
+            <WEBGIS:com_valle>Comunita della Valle dei Laghi</WEBGIS:com_valle>
+            <WEBGIS:comune>Terlago</WEBGIS:comune>
+            <WEBGIS:ato>Bondone</WEBGIS:ato>
+            <WEBGIS:rr>Rete di Riserve Monte Bondone</WEBGIS:rr>
+            <WEBGIS:files/>
+        </WEBGIS:azioni_punto>
+    </gml:featureMember>
+    <gml:featureMember>
+        <WEBGIS:azioni_punto fid="azioni_punto.fid--33a0c341_1697ba78b75_-645b">
+            <WEBGIS:id>24</WEBGIS:id>
+            <WEBGIS:gid>10</WEBGIS:gid>
+            <WEBGIS:cod_azione>AA</WEBGIS:cod_azione>
+            <WEBGIS:azione>AA04</WEBGIS:azione>
+            <WEBGIS:denominaz>Creare o ripristinare specchi d'acqua anche per anfibi</WEBGIS:denominaz>
+            <WEBGIS:nat2000>false</WEBGIS:nat2000>
+            <WEBGIS:rnp>false</WEBGIS:rnp>
+            <WEBGIS:rl>true</WEBGIS:rl>
+            <WEBGIS:hs>true</WEBGIS:hs>
+            <WEBGIS:corr_eco>false</WEBGIS:corr_eco>
+            <WEBGIS:afe>false</WEBGIS:afe>
+            <WEBGIS:ext>false</WEBGIS:ext>
+            <WEBGIS:prior_az>1</WEBGIS:prior_az>
+            <WEBGIS:prior_int>1</WEBGIS:prior_int>
+            <WEBGIS:c_com_cat>385</WEBGIS:c_com_cat>
+            <WEBGIS:den_cat>Terlago</WEBGIS:den_cat>
+            <WEBGIS:c_num_part>2376/1</WEBGIS:c_num_part>
+            <WEBGIS:costo_uni>5000.0</WEBGIS:costo_uni>
+            <WEBGIS:costo_tot>5000.0</WEBGIS:costo_tot>
+            <WEBGIS:note>Dimensioni 3x3 m con sponde e fondale in pietra - Azione prevista da PDG e Accordo di
+                programma
+            </WEBGIS:note>
+            <WEBGIS:proprieta>PROPRIETA' PRIVATA</WEBGIS:proprieta>
+            <WEBGIS:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32632">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1.01837993,1.80503161
+                    </gml:coordinates>
+                </gml:Point>
+            </WEBGIS:geom>
+            <WEBGIS:com_valle>Comunita della Valle dei Laghi</WEBGIS:com_valle>
+            <WEBGIS:comune>Terlago</WEBGIS:comune>
+            <WEBGIS:ato>Bondone</WEBGIS:ato>
+            <WEBGIS:rr>Rete di Riserve Alpi Ledrensi</WEBGIS:rr>
+            <WEBGIS:files/>
+        </WEBGIS:azioni_punto>
+    </gml:featureMember>
+    <gml:featureMember>
+        <WEBGIS:azioni_punto fid="azioni_punto.fid--33a0c341_1697ba78b75_-645a">
+            <WEBGIS:id>25</WEBGIS:id>
+            <WEBGIS:gid>10</WEBGIS:gid>
+            <WEBGIS:cod_azione>AA</WEBGIS:cod_azione>
+            <WEBGIS:azione>AA04</WEBGIS:azione>
+            <WEBGIS:denominaz>Creare o ripristinare specchi d'acqua anche per anfibi</WEBGIS:denominaz>
+            <WEBGIS:nat2000>false</WEBGIS:nat2000>
+            <WEBGIS:rnp>false</WEBGIS:rnp>
+            <WEBGIS:rl>true</WEBGIS:rl>
+            <WEBGIS:hs>true</WEBGIS:hs>
+            <WEBGIS:corr_eco>false</WEBGIS:corr_eco>
+            <WEBGIS:afe>false</WEBGIS:afe>
+            <WEBGIS:ext>false</WEBGIS:ext>
+            <WEBGIS:prior_az>1</WEBGIS:prior_az>
+            <WEBGIS:prior_int>1</WEBGIS:prior_int>
+            <WEBGIS:c_com_cat>385</WEBGIS:c_com_cat>
+            <WEBGIS:den_cat>Terlago</WEBGIS:den_cat>
+            <WEBGIS:c_num_part>2376/1</WEBGIS:c_num_part>
+            <WEBGIS:costo_uni>5000.0</WEBGIS:costo_uni>
+            <WEBGIS:costo_tot>5000.0</WEBGIS:costo_tot>
+            <WEBGIS:note>Dimensioni 3x3 m con sponde e fondale in pietra - Azione prevista da PDG e Accordo di
+                programma
+            </WEBGIS:note>
+            <WEBGIS:proprieta>PROPRIETA' PRIVATA</WEBGIS:proprieta>
+            <WEBGIS:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32632">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1.01837993,1.80503161
+                    </gml:coordinates>
+                </gml:Point>
+            </WEBGIS:geom>
+            <WEBGIS:com_valle>Comunita della Valle dei Laghi</WEBGIS:com_valle>
+            <WEBGIS:comune>Terlago</WEBGIS:comune>
+            <WEBGIS:ato>Bondone</WEBGIS:ato>
+            <WEBGIS:rr>Rete di Riserve Basso Sarca</WEBGIS:rr>
+            <WEBGIS:files/>
+        </WEBGIS:azioni_punto>
+    </gml:featureMember>
+    <gml:featureMember>
+        <WEBGIS:azioni_punto fid="azioni_punto.fid--33a0c341_1697ba78b75_-6459">
+            <WEBGIS:id>26</WEBGIS:id>
+            <WEBGIS:gid>10</WEBGIS:gid>
+            <WEBGIS:cod_azione>AA</WEBGIS:cod_azione>
+            <WEBGIS:azione>AA04</WEBGIS:azione>
+            <WEBGIS:denominaz>Creare o ripristinare specchi d'acqua anche per anfibi</WEBGIS:denominaz>
+            <WEBGIS:nat2000>false</WEBGIS:nat2000>
+            <WEBGIS:rnp>false</WEBGIS:rnp>
+            <WEBGIS:rl>true</WEBGIS:rl>
+            <WEBGIS:hs>true</WEBGIS:hs>
+            <WEBGIS:corr_eco>false</WEBGIS:corr_eco>
+            <WEBGIS:afe>false</WEBGIS:afe>
+            <WEBGIS:ext>false</WEBGIS:ext>
+            <WEBGIS:prior_az>1</WEBGIS:prior_az>
+            <WEBGIS:prior_int>1</WEBGIS:prior_int>
+            <WEBGIS:c_com_cat>385</WEBGIS:c_com_cat>
+            <WEBGIS:den_cat>Terlago</WEBGIS:den_cat>
+            <WEBGIS:c_num_part>2376/1</WEBGIS:c_num_part>
+            <WEBGIS:costo_uni>5000.0</WEBGIS:costo_uni>
+            <WEBGIS:costo_tot>5000.0</WEBGIS:costo_tot>
+            <WEBGIS:note>Dimensioni 3x3 m con sponde e fondale in pietra - Azione prevista da PDG e Accordo di
+                programma
+            </WEBGIS:note>
+            <WEBGIS:proprieta>PROPRIETA' PRIVATA</WEBGIS:proprieta>
+            <WEBGIS:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32632">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1.01837993,1.80503161
+                    </gml:coordinates>
+                </gml:Point>
+            </WEBGIS:geom>
+            <WEBGIS:com_valle>Comunita della Valle dei Laghi</WEBGIS:com_valle>
+            <WEBGIS:comune>Terlago</WEBGIS:comune>
+            <WEBGIS:ato>Bondone</WEBGIS:ato>
+            <WEBGIS:rr>Rete di Riserve Monte Bondone</WEBGIS:rr>
+            <WEBGIS:files/>
+        </WEBGIS:azioni_punto>
+    </gml:featureMember>
+    <gml:featureMember>
+        <WEBGIS:azioni_punto fid="azioni_punto.fid--33a0c341_1697ba78b75_-6456">
+            <WEBGIS:id>39</WEBGIS:id>
+            <WEBGIS:gid>16</WEBGIS:gid>
+            <WEBGIS:cod_azione>AA</WEBGIS:cod_azione>
+            <WEBGIS:azione>AA04</WEBGIS:azione>
+            <WEBGIS:denominaz>Creare o ripristinare specchi d'acqua anche per anfibi</WEBGIS:denominaz>
+            <WEBGIS:nat2000>false</WEBGIS:nat2000>
+            <WEBGIS:rnp>false</WEBGIS:rnp>
+            <WEBGIS:rl>false</WEBGIS:rl>
+            <WEBGIS:hs>false</WEBGIS:hs>
+            <WEBGIS:corr_eco>false</WEBGIS:corr_eco>
+            <WEBGIS:afe>false</WEBGIS:afe>
+            <WEBGIS:ext>true</WEBGIS:ext>
+            <WEBGIS:prior_az>1</WEBGIS:prior_az>
+            <WEBGIS:prior_int>4</WEBGIS:prior_int>
+            <WEBGIS:c_com_cat>50</WEBGIS:c_com_cat>
+            <WEBGIS:den_cat>Cadine</WEBGIS:den_cat>
+            <WEBGIS:c_num_part>457/1</WEBGIS:c_num_part>
+            <WEBGIS:costo_uni>5000.0</WEBGIS:costo_uni>
+            <WEBGIS:costo_tot>5000.0</WEBGIS:costo_tot>
+            <WEBGIS:note>Area suggerita al forum del 19/10/2015 - Azione prevista da PDG e Accordo di programma
+            </WEBGIS:note>
+            <WEBGIS:proprieta>PROPRIETA' PUBBLICA COMUNALE</WEBGIS:proprieta>
+            <WEBGIS:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32632">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        7.77184879,6.08698754
+                    </gml:coordinates>
+                </gml:Point>
+            </WEBGIS:geom>
+            <WEBGIS:com_valle>Territorio dell Adige</WEBGIS:com_valle>
+            <WEBGIS:comune>Trento</WEBGIS:comune>
+            <WEBGIS:ato>Bondone</WEBGIS:ato>
+            <WEBGIS:rr>Rete di Riserve Alpi Ledrensi</WEBGIS:rr>
+            <WEBGIS:files/>
+        </WEBGIS:azioni_punto>
+    </gml:featureMember>
+    <gml:featureMember>
+        <WEBGIS:azioni_punto fid="azioni_punto.fid--33a0c341_1697ba78b75_-6455">
+            <WEBGIS:id>40</WEBGIS:id>
+            <WEBGIS:gid>16</WEBGIS:gid>
+            <WEBGIS:cod_azione>AA</WEBGIS:cod_azione>
+            <WEBGIS:azione>AA04</WEBGIS:azione>
+            <WEBGIS:denominaz>Creare o ripristinare specchi d'acqua anche per anfibi</WEBGIS:denominaz>
+            <WEBGIS:nat2000>false</WEBGIS:nat2000>
+            <WEBGIS:rnp>false</WEBGIS:rnp>
+            <WEBGIS:rl>false</WEBGIS:rl>
+            <WEBGIS:hs>false</WEBGIS:hs>
+            <WEBGIS:corr_eco>false</WEBGIS:corr_eco>
+            <WEBGIS:afe>false</WEBGIS:afe>
+            <WEBGIS:ext>true</WEBGIS:ext>
+            <WEBGIS:prior_az>1</WEBGIS:prior_az>
+            <WEBGIS:prior_int>4</WEBGIS:prior_int>
+            <WEBGIS:c_com_cat>50</WEBGIS:c_com_cat>
+            <WEBGIS:den_cat>Cadine</WEBGIS:den_cat>
+            <WEBGIS:c_num_part>457/1</WEBGIS:c_num_part>
+            <WEBGIS:costo_uni>5000.0</WEBGIS:costo_uni>
+            <WEBGIS:costo_tot>5000.0</WEBGIS:costo_tot>
+            <WEBGIS:note>Area suggerita al forum del 19/10/2015 - Azione prevista da PDG e Accordo di programma
+            </WEBGIS:note>
+            <WEBGIS:proprieta>PROPRIETA' PUBBLICA COMUNALE</WEBGIS:proprieta>
+            <WEBGIS:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32632">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        7.77184879,6.08698754
+                    </gml:coordinates>
+                </gml:Point>
+            </WEBGIS:geom>
+            <WEBGIS:com_valle>Territorio dell Adige</WEBGIS:com_valle>
+            <WEBGIS:comune>Trento</WEBGIS:comune>
+            <WEBGIS:ato>Bondone</WEBGIS:ato>
+            <WEBGIS:rr>Rete di Riserve Monte Bondone</WEBGIS:rr>
+            <WEBGIS:files/>
+        </WEBGIS:azioni_punto>
+    </gml:featureMember>
+    <gml:featureMember>
+        <WEBGIS:azioni_punto fid="azioni_punto.fid--33a0c341_1697ba78b75_-6452">
+            <WEBGIS:id>43</WEBGIS:id>
+            <WEBGIS:gid>18</WEBGIS:gid>
+            <WEBGIS:cod_azione>AA</WEBGIS:cod_azione>
+            <WEBGIS:azione>AA04</WEBGIS:azione>
+            <WEBGIS:denominaz>Creare o ripristinare specchi d'acqua anche per anfibi</WEBGIS:denominaz>
+            <WEBGIS:nat2000>false</WEBGIS:nat2000>
+            <WEBGIS:rnp>false</WEBGIS:rnp>
+            <WEBGIS:rl>false</WEBGIS:rl>
+            <WEBGIS:hs>false</WEBGIS:hs>
+            <WEBGIS:corr_eco>false</WEBGIS:corr_eco>
+            <WEBGIS:afe>false</WEBGIS:afe>
+            <WEBGIS:ext>true</WEBGIS:ext>
+            <WEBGIS:prior_az>1</WEBGIS:prior_az>
+            <WEBGIS:prior_int>4</WEBGIS:prior_int>
+            <WEBGIS:c_com_cat>385</WEBGIS:c_com_cat>
+            <WEBGIS:den_cat>Terlago</WEBGIS:den_cat>
+            <WEBGIS:c_num_part>1903/1</WEBGIS:c_num_part>
+            <WEBGIS:costo_uni>5000.0</WEBGIS:costo_uni>
+            <WEBGIS:costo_tot>5000.0</WEBGIS:costo_tot>
+            <WEBGIS:note>Area proposta dal sindaco di Terlago - Azione prevista da PDG e Accordo di programma
+            </WEBGIS:note>
+            <WEBGIS:proprieta>PROPRIETA' PRIVATA</WEBGIS:proprieta>
+            <WEBGIS:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32632">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        6.50313003,2.80680767
+                    </gml:coordinates>
+                </gml:Point>
+            </WEBGIS:geom>
+            <WEBGIS:com_valle>Comunita della Valle dei Laghi</WEBGIS:com_valle>
+            <WEBGIS:comune>Terlago</WEBGIS:comune>
+            <WEBGIS:ato>Bondone</WEBGIS:ato>
+            <WEBGIS:rr>Rete di Riserve Alpi Ledrensi</WEBGIS:rr>
+            <WEBGIS:files/>
+        </WEBGIS:azioni_punto>
+    </gml:featureMember>
+    <gml:featureMember>
+        <WEBGIS:azioni_punto fid="azioni_punto.fid--33a0c341_1697ba78b75_-6451">
+            <WEBGIS:id>44</WEBGIS:id>
+            <WEBGIS:gid>18</WEBGIS:gid>
+            <WEBGIS:cod_azione>AA</WEBGIS:cod_azione>
+            <WEBGIS:azione>AA04</WEBGIS:azione>
+            <WEBGIS:denominaz>Creare o ripristinare specchi d'acqua anche per anfibi</WEBGIS:denominaz>
+            <WEBGIS:nat2000>false</WEBGIS:nat2000>
+            <WEBGIS:rnp>false</WEBGIS:rnp>
+            <WEBGIS:rl>false</WEBGIS:rl>
+            <WEBGIS:hs>false</WEBGIS:hs>
+            <WEBGIS:corr_eco>false</WEBGIS:corr_eco>
+            <WEBGIS:afe>false</WEBGIS:afe>
+            <WEBGIS:ext>true</WEBGIS:ext>
+            <WEBGIS:prior_az>1</WEBGIS:prior_az>
+            <WEBGIS:prior_int>4</WEBGIS:prior_int>
+            <WEBGIS:c_com_cat>385</WEBGIS:c_com_cat>
+            <WEBGIS:den_cat>Terlago</WEBGIS:den_cat>
+            <WEBGIS:c_num_part>1903/1</WEBGIS:c_num_part>
+            <WEBGIS:costo_uni>5000.0</WEBGIS:costo_uni>
+            <WEBGIS:costo_tot>5000.0</WEBGIS:costo_tot>
+            <WEBGIS:note>Area proposta dal sindaco di Terlago - Azione prevista da PDG e Accordo di programma
+            </WEBGIS:note>
+            <WEBGIS:proprieta>PROPRIETA' PRIVATA</WEBGIS:proprieta>
+            <WEBGIS:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32632">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        6.50313003,2.80680767
+                    </gml:coordinates>
+                </gml:Point>
+            </WEBGIS:geom>
+            <WEBGIS:com_valle>Comunita della Valle dei Laghi</WEBGIS:com_valle>
+            <WEBGIS:comune>Terlago</WEBGIS:comune>
+            <WEBGIS:ato>Bondone</WEBGIS:ato>
+            <WEBGIS:rr>Rete di Riserve Basso Sarca</WEBGIS:rr>
+            <WEBGIS:files/>
+        </WEBGIS:azioni_punto>
+    </gml:featureMember>
+    <gml:featureMember>
+        <WEBGIS:azioni_punto fid="azioni_punto.fid--33a0c341_1697ba78b75_-6450">
+            <WEBGIS:id>45</WEBGIS:id>
+            <WEBGIS:gid>18</WEBGIS:gid>
+            <WEBGIS:cod_azione>AA</WEBGIS:cod_azione>
+            <WEBGIS:azione>AA04</WEBGIS:azione>
+            <WEBGIS:denominaz>Creare o ripristinare specchi d'acqua anche per anfibi</WEBGIS:denominaz>
+            <WEBGIS:nat2000>false</WEBGIS:nat2000>
+            <WEBGIS:rnp>false</WEBGIS:rnp>
+            <WEBGIS:rl>false</WEBGIS:rl>
+            <WEBGIS:hs>false</WEBGIS:hs>
+            <WEBGIS:corr_eco>false</WEBGIS:corr_eco>
+            <WEBGIS:afe>false</WEBGIS:afe>
+            <WEBGIS:ext>true</WEBGIS:ext>
+            <WEBGIS:prior_az>1</WEBGIS:prior_az>
+            <WEBGIS:prior_int>4</WEBGIS:prior_int>
+            <WEBGIS:c_com_cat>385</WEBGIS:c_com_cat>
+            <WEBGIS:den_cat>Terlago</WEBGIS:den_cat>
+            <WEBGIS:c_num_part>1903/1</WEBGIS:c_num_part>
+            <WEBGIS:costo_uni>5000.0</WEBGIS:costo_uni>
+            <WEBGIS:costo_tot>5000.0</WEBGIS:costo_tot>
+            <WEBGIS:note>Area proposta dal sindaco di Terlago - Azione prevista da PDG e Accordo di programma
+            </WEBGIS:note>
+            <WEBGIS:proprieta>PROPRIETA' PRIVATA</WEBGIS:proprieta>
+            <WEBGIS:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32632">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        6.50313003,2.80680767
+                    </gml:coordinates>
+                </gml:Point>
+            </WEBGIS:geom>
+            <WEBGIS:com_valle>Comunita della Valle dei Laghi</WEBGIS:com_valle>
+            <WEBGIS:comune>Terlago</WEBGIS:comune>
+            <WEBGIS:ato>Bondone</WEBGIS:ato>
+            <WEBGIS:rr>Rete di Riserve Monte Bondone</WEBGIS:rr>
+            <WEBGIS:files/>
+        </WEBGIS:azioni_punto>
+    </gml:featureMember>
+    <gml:featureMember>
+        <WEBGIS:azioni_punto fid="azioni_punto.fid--33a0c341_1697ba78b75_-644f">
+            <WEBGIS:id>46</WEBGIS:id>
+            <WEBGIS:gid>19</WEBGIS:gid>
+            <WEBGIS:cod_azione>AA</WEBGIS:cod_azione>
+            <WEBGIS:azione>AA04</WEBGIS:azione>
+            <WEBGIS:denominaz>Creare o ripristinare specchi d'acqua anche per anfibi</WEBGIS:denominaz>
+            <WEBGIS:nat2000>false</WEBGIS:nat2000>
+            <WEBGIS:rnp>false</WEBGIS:rnp>
+            <WEBGIS:rl>false</WEBGIS:rl>
+            <WEBGIS:hs>false</WEBGIS:hs>
+            <WEBGIS:corr_eco>false</WEBGIS:corr_eco>
+            <WEBGIS:afe>false</WEBGIS:afe>
+            <WEBGIS:ext>true</WEBGIS:ext>
+            <WEBGIS:prior_az>1</WEBGIS:prior_az>
+            <WEBGIS:prior_int>4</WEBGIS:prior_int>
+            <WEBGIS:c_com_cat>385</WEBGIS:c_com_cat>
+            <WEBGIS:den_cat>Terlago</WEBGIS:den_cat>
+            <WEBGIS:c_num_part>1905</WEBGIS:c_num_part>
+            <WEBGIS:costo_uni>5000.0</WEBGIS:costo_uni>
+            <WEBGIS:costo_tot>5000.0</WEBGIS:costo_tot>
+            <WEBGIS:note>Area proposta dal sindaco di Terlago - Azione prevista da PDG e Accordo di programma
+            </WEBGIS:note>
+            <WEBGIS:proprieta>PROPRIETA' PUBBLICA COMUNALE</WEBGIS:proprieta>
+            <WEBGIS:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32632">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        6.14788391,3.43845955
+                    </gml:coordinates>
+                </gml:Point>
+            </WEBGIS:geom>
+            <WEBGIS:com_valle>Comunita della Valle dei Laghi</WEBGIS:com_valle>
+            <WEBGIS:comune>Terlago</WEBGIS:comune>
+            <WEBGIS:ato>Bondone</WEBGIS:ato>
+            <WEBGIS:rr>Rete di Riserve Alpi Ledrensi</WEBGIS:rr>
+            <WEBGIS:files/>
+        </WEBGIS:azioni_punto>
+    </gml:featureMember>
+    <gml:featureMember>
+        <WEBGIS:azioni_punto fid="azioni_punto.fid--33a0c341_1697ba78b75_-644e">
+            <WEBGIS:id>47</WEBGIS:id>
+            <WEBGIS:gid>19</WEBGIS:gid>
+            <WEBGIS:cod_azione>AA</WEBGIS:cod_azione>
+            <WEBGIS:azione>AA04</WEBGIS:azione>
+            <WEBGIS:denominaz>Creare o ripristinare specchi d'acqua anche per anfibi</WEBGIS:denominaz>
+            <WEBGIS:nat2000>false</WEBGIS:nat2000>
+            <WEBGIS:rnp>false</WEBGIS:rnp>
+            <WEBGIS:rl>false</WEBGIS:rl>
+            <WEBGIS:hs>false</WEBGIS:hs>
+            <WEBGIS:corr_eco>false</WEBGIS:corr_eco>
+            <WEBGIS:afe>false</WEBGIS:afe>
+            <WEBGIS:ext>true</WEBGIS:ext>
+            <WEBGIS:prior_az>1</WEBGIS:prior_az>
+            <WEBGIS:prior_int>4</WEBGIS:prior_int>
+            <WEBGIS:c_com_cat>385</WEBGIS:c_com_cat>
+            <WEBGIS:den_cat>Terlago</WEBGIS:den_cat>
+            <WEBGIS:c_num_part>1905</WEBGIS:c_num_part>
+            <WEBGIS:costo_uni>5000.0</WEBGIS:costo_uni>
+            <WEBGIS:costo_tot>5000.0</WEBGIS:costo_tot>
+            <WEBGIS:note>Area proposta dal sindaco di Terlago - Azione prevista da PDG e Accordo di programma
+            </WEBGIS:note>
+            <WEBGIS:proprieta>PROPRIETA' PUBBLICA COMUNALE</WEBGIS:proprieta>
+            <WEBGIS:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32632">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        6.14788391,3.43845955
+                    </gml:coordinates>
+                </gml:Point>
+            </WEBGIS:geom>
+            <WEBGIS:com_valle>Comunita della Valle dei Laghi</WEBGIS:com_valle>
+            <WEBGIS:comune>Terlago</WEBGIS:comune>
+            <WEBGIS:ato>Bondone</WEBGIS:ato>
+            <WEBGIS:rr>Rete di Riserve Basso Sarca</WEBGIS:rr>
+            <WEBGIS:files/>
+        </WEBGIS:azioni_punto>
+    </gml:featureMember>
+    <gml:featureMember>
+        <WEBGIS:azioni_punto fid="azioni_punto.fid--33a0c341_1697ba78b75_-644d">
+            <WEBGIS:id>48</WEBGIS:id>
+            <WEBGIS:gid>19</WEBGIS:gid>
+            <WEBGIS:cod_azione>AA</WEBGIS:cod_azione>
+            <WEBGIS:azione>AA04</WEBGIS:azione>
+            <WEBGIS:denominaz>Creare o ripristinare specchi d'acqua anche per anfibi</WEBGIS:denominaz>
+            <WEBGIS:nat2000>false</WEBGIS:nat2000>
+            <WEBGIS:rnp>false</WEBGIS:rnp>
+            <WEBGIS:rl>false</WEBGIS:rl>
+            <WEBGIS:hs>false</WEBGIS:hs>
+            <WEBGIS:corr_eco>false</WEBGIS:corr_eco>
+            <WEBGIS:afe>false</WEBGIS:afe>
+            <WEBGIS:ext>true</WEBGIS:ext>
+            <WEBGIS:prior_az>1</WEBGIS:prior_az>
+            <WEBGIS:prior_int>4</WEBGIS:prior_int>
+            <WEBGIS:c_com_cat>385</WEBGIS:c_com_cat>
+            <WEBGIS:den_cat>Terlago</WEBGIS:den_cat>
+            <WEBGIS:c_num_part>1905</WEBGIS:c_num_part>
+            <WEBGIS:costo_uni>5000.0</WEBGIS:costo_uni>
+            <WEBGIS:costo_tot>5000.0</WEBGIS:costo_tot>
+            <WEBGIS:note>Area proposta dal sindaco di Terlago - Azione prevista da PDG e Accordo di programma
+            </WEBGIS:note>
+            <WEBGIS:proprieta>PROPRIETA' PUBBLICA COMUNALE</WEBGIS:proprieta>
+            <WEBGIS:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32632">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        6.14788391,3.43845955
+                    </gml:coordinates>
+                </gml:Point>
+            </WEBGIS:geom>
+            <WEBGIS:com_valle>Comunita della Valle dei Laghi</WEBGIS:com_valle>
+            <WEBGIS:comune>Terlago</WEBGIS:comune>
+            <WEBGIS:ato>Bondone</WEBGIS:ato>
+            <WEBGIS:rr>Rete di Riserve Monte Bondone</WEBGIS:rr>
+            <WEBGIS:files/>
+        </WEBGIS:azioni_punto>
+    </gml:featureMember>
+    <gml:featureMember>
+        <WEBGIS:azioni_punto fid="azioni_punto.fid--33a0c341_1697ba78b75_-644c">
+            <WEBGIS:id>49</WEBGIS:id>
+            <WEBGIS:gid>20</WEBGIS:gid>
+            <WEBGIS:cod_azione>AA</WEBGIS:cod_azione>
+            <WEBGIS:azione>AA04</WEBGIS:azione>
+            <WEBGIS:denominaz>Creare o ripristinare specchi d'acqua anche per anfibi</WEBGIS:denominaz>
+            <WEBGIS:nat2000>false</WEBGIS:nat2000>
+            <WEBGIS:rnp>false</WEBGIS:rnp>
+            <WEBGIS:rl>false</WEBGIS:rl>
+            <WEBGIS:hs>false</WEBGIS:hs>
+            <WEBGIS:corr_eco>false</WEBGIS:corr_eco>
+            <WEBGIS:afe>false</WEBGIS:afe>
+            <WEBGIS:ext>true</WEBGIS:ext>
+            <WEBGIS:prior_az>1</WEBGIS:prior_az>
+            <WEBGIS:prior_int>4</WEBGIS:prior_int>
+            <WEBGIS:c_com_cat>385</WEBGIS:c_com_cat>
+            <WEBGIS:den_cat>Terlago</WEBGIS:den_cat>
+            <WEBGIS:c_num_part>1906/1</WEBGIS:c_num_part>
+            <WEBGIS:costo_uni>5000.0</WEBGIS:costo_uni>
+            <WEBGIS:costo_tot>5000.0</WEBGIS:costo_tot>
+            <WEBGIS:note>Area proposta dal sindaco di Terlago - Azione prevista da PDG e Accordo di programma
+            </WEBGIS:note>
+            <WEBGIS:proprieta>PROPRIETA' PUBBLICA COMUNALE</WEBGIS:proprieta>
+            <WEBGIS:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32632">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        5.47894079,4.307821
+                    </gml:coordinates>
+                </gml:Point>
+            </WEBGIS:geom>
+            <WEBGIS:com_valle>Comunita della Valle dei Laghi</WEBGIS:com_valle>
+            <WEBGIS:comune>Terlago</WEBGIS:comune>
+            <WEBGIS:ato>Bondone</WEBGIS:ato>
+            <WEBGIS:rr>Rete di Riserve Alpi Ledrensi</WEBGIS:rr>
+            <WEBGIS:files/>
+        </WEBGIS:azioni_punto>
+    </gml:featureMember>
+    <gml:featureMember>
+        <WEBGIS:azioni_punto fid="azioni_punto.fid--33a0c341_1697ba78b75_-644b">
+            <WEBGIS:id>50</WEBGIS:id>
+            <WEBGIS:gid>20</WEBGIS:gid>
+            <WEBGIS:cod_azione>AA</WEBGIS:cod_azione>
+            <WEBGIS:azione>AA04</WEBGIS:azione>
+            <WEBGIS:denominaz>Creare o ripristinare specchi d'acqua anche per anfibi</WEBGIS:denominaz>
+            <WEBGIS:nat2000>false</WEBGIS:nat2000>
+            <WEBGIS:rnp>false</WEBGIS:rnp>
+            <WEBGIS:rl>false</WEBGIS:rl>
+            <WEBGIS:hs>false</WEBGIS:hs>
+            <WEBGIS:corr_eco>false</WEBGIS:corr_eco>
+            <WEBGIS:afe>false</WEBGIS:afe>
+            <WEBGIS:ext>true</WEBGIS:ext>
+            <WEBGIS:prior_az>1</WEBGIS:prior_az>
+            <WEBGIS:prior_int>4</WEBGIS:prior_int>
+            <WEBGIS:c_com_cat>385</WEBGIS:c_com_cat>
+            <WEBGIS:den_cat>Terlago</WEBGIS:den_cat>
+            <WEBGIS:c_num_part>1906/1</WEBGIS:c_num_part>
+            <WEBGIS:costo_uni>5000.0</WEBGIS:costo_uni>
+            <WEBGIS:costo_tot>5000.0</WEBGIS:costo_tot>
+            <WEBGIS:note>Area proposta dal sindaco di Terlago - Azione prevista da PDG e Accordo di programma
+            </WEBGIS:note>
+            <WEBGIS:proprieta>PROPRIETA' PUBBLICA COMUNALE</WEBGIS:proprieta>
+            <WEBGIS:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32632">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        5.47894079,4.307821
+                    </gml:coordinates>
+                </gml:Point>
+            </WEBGIS:geom>
+            <WEBGIS:com_valle>Comunita della Valle dei Laghi</WEBGIS:com_valle>
+            <WEBGIS:comune>Terlago</WEBGIS:comune>
+            <WEBGIS:ato>Bondone</WEBGIS:ato>
+            <WEBGIS:rr>Rete di Riserve Basso Sarca</WEBGIS:rr>
+            <WEBGIS:files/>
+        </WEBGIS:azioni_punto>
+    </gml:featureMember>
+    <gml:featureMember>
+        <WEBGIS:azioni_punto fid="azioni_punto.fid--33a0c341_1697ba78b75_-644a">
+            <WEBGIS:id>51</WEBGIS:id>
+            <WEBGIS:gid>20</WEBGIS:gid>
+            <WEBGIS:cod_azione>AA</WEBGIS:cod_azione>
+            <WEBGIS:azione>AA04</WEBGIS:azione>
+            <WEBGIS:denominaz>Creare o ripristinare specchi d'acqua anche per anfibi</WEBGIS:denominaz>
+            <WEBGIS:nat2000>false</WEBGIS:nat2000>
+            <WEBGIS:rnp>false</WEBGIS:rnp>
+            <WEBGIS:rl>false</WEBGIS:rl>
+            <WEBGIS:hs>false</WEBGIS:hs>
+            <WEBGIS:corr_eco>false</WEBGIS:corr_eco>
+            <WEBGIS:afe>false</WEBGIS:afe>
+            <WEBGIS:ext>true</WEBGIS:ext>
+            <WEBGIS:prior_az>1</WEBGIS:prior_az>
+            <WEBGIS:prior_int>4</WEBGIS:prior_int>
+            <WEBGIS:c_com_cat>385</WEBGIS:c_com_cat>
+            <WEBGIS:den_cat>Terlago</WEBGIS:den_cat>
+            <WEBGIS:c_num_part>1906/1</WEBGIS:c_num_part>
+            <WEBGIS:costo_uni>5000.0</WEBGIS:costo_uni>
+            <WEBGIS:costo_tot>5000.0</WEBGIS:costo_tot>
+            <WEBGIS:note>Area proposta dal sindaco di Terlago - Azione prevista da PDG e Accordo di programma
+            </WEBGIS:note>
+            <WEBGIS:proprieta>PROPRIETA' PUBBLICA COMUNALE</WEBGIS:proprieta>
+            <WEBGIS:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32632">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        5.47894079,4.307821
+                    </gml:coordinates>
+                </gml:Point>
+            </WEBGIS:geom>
+            <WEBGIS:com_valle>Comunita della Valle dei Laghi</WEBGIS:com_valle>
+            <WEBGIS:comune>Terlago</WEBGIS:comune>
+            <WEBGIS:ato>Bondone</WEBGIS:ato>
+            <WEBGIS:rr>Rete di Riserve Monte Bondone</WEBGIS:rr>
+            <WEBGIS:files/>
+        </WEBGIS:azioni_punto>
+    </gml:featureMember>
+    <gml:featureMember>
+        <WEBGIS:azioni_punto fid="azioni_punto.fid--33a0c341_1697ba78b75_-6447">
+            <WEBGIS:id>56</WEBGIS:id>
+            <WEBGIS:gid>23</WEBGIS:gid>
+            <WEBGIS:cod_azione>CH</WEBGIS:cod_azione>
+            <WEBGIS:azione>CH01</WEBGIS:azione>
+            <WEBGIS:denominaz>Interventi a favore dei chirotteri</WEBGIS:denominaz>
+            <WEBGIS:nat2000>true</WEBGIS:nat2000>
+            <WEBGIS:rnp>false</WEBGIS:rnp>
+            <WEBGIS:rl>false</WEBGIS:rl>
+            <WEBGIS:hs>false</WEBGIS:hs>
+            <WEBGIS:corr_eco>false</WEBGIS:corr_eco>
+            <WEBGIS:afe>false</WEBGIS:afe>
+            <WEBGIS:ext>false</WEBGIS:ext>
+            <WEBGIS:prior_az>3</WEBGIS:prior_az>
+            <WEBGIS:prior_int>2</WEBGIS:prior_int>
+            <WEBGIS:c_com_cat>385</WEBGIS:c_com_cat>
+            <WEBGIS:den_cat>Terlago</WEBGIS:den_cat>
+            <WEBGIS:c_num_part>2798</WEBGIS:c_num_part>
+            <WEBGIS:costo_uni>1000.0</WEBGIS:costo_uni>
+            <WEBGIS:costo_tot>1000.0</WEBGIS:costo_tot>
+            <WEBGIS:note>Migliorare e incrementare rifugi per chirotteri - Regolamentare accesso alla grotta
+            </WEBGIS:note>
+            <WEBGIS:proprieta>PROPRIETA' PUBBLICA COMUNALE</WEBGIS:proprieta>
+            <WEBGIS:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32632">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        4.2150358,-2.56185008
+                    </gml:coordinates>
+                </gml:Point>
+            </WEBGIS:geom>
+            <WEBGIS:com_valle>Comunita della Valle dei Laghi</WEBGIS:com_valle>
+            <WEBGIS:zsc>IT3120087: Laghi e abisso di Lamar</WEBGIS:zsc>
+            <WEBGIS:comune>Terlago</WEBGIS:comune>
+            <WEBGIS:ato>Bondone</WEBGIS:ato>
+            <WEBGIS:rr>Rete di Riserve Alpi Ledrensi</WEBGIS:rr>
+            <WEBGIS:files/>
+        </WEBGIS:azioni_punto>
+    </gml:featureMember>
+    <gml:featureMember>
+        <WEBGIS:azioni_punto fid="azioni_punto.fid--33a0c341_1697ba78b75_-6446">
+            <WEBGIS:id>57</WEBGIS:id>
+            <WEBGIS:gid>23</WEBGIS:gid>
+            <WEBGIS:cod_azione>CH</WEBGIS:cod_azione>
+            <WEBGIS:azione>CH01</WEBGIS:azione>
+            <WEBGIS:denominaz>Interventi a favore dei chirotteri</WEBGIS:denominaz>
+            <WEBGIS:nat2000>true</WEBGIS:nat2000>
+            <WEBGIS:rnp>false</WEBGIS:rnp>
+            <WEBGIS:rl>false</WEBGIS:rl>
+            <WEBGIS:hs>false</WEBGIS:hs>
+            <WEBGIS:corr_eco>false</WEBGIS:corr_eco>
+            <WEBGIS:afe>false</WEBGIS:afe>
+            <WEBGIS:ext>false</WEBGIS:ext>
+            <WEBGIS:prior_az>3</WEBGIS:prior_az>
+            <WEBGIS:prior_int>2</WEBGIS:prior_int>
+            <WEBGIS:c_com_cat>385</WEBGIS:c_com_cat>
+            <WEBGIS:den_cat>Terlago</WEBGIS:den_cat>
+            <WEBGIS:c_num_part>2798</WEBGIS:c_num_part>
+            <WEBGIS:costo_uni>1000.0</WEBGIS:costo_uni>
+            <WEBGIS:costo_tot>1000.0</WEBGIS:costo_tot>
+            <WEBGIS:note>Migliorare e incrementare rifugi per chirotteri - Regolamentare accesso alla grotta
+            </WEBGIS:note>
+            <WEBGIS:proprieta>PROPRIETA' PUBBLICA COMUNALE</WEBGIS:proprieta>
+            <WEBGIS:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32632">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        4.2150358,-2.56185008
+                    </gml:coordinates>
+                </gml:Point>
+            </WEBGIS:geom>
+            <WEBGIS:com_valle>Comunita della Valle dei Laghi</WEBGIS:com_valle>
+            <WEBGIS:zsc>IT3120087: Laghi e abisso di Lamar</WEBGIS:zsc>
+            <WEBGIS:comune>Terlago</WEBGIS:comune>
+            <WEBGIS:ato>Bondone</WEBGIS:ato>
+            <WEBGIS:rr>Rete di Riserve Basso Sarca</WEBGIS:rr>
+            <WEBGIS:files/>
+        </WEBGIS:azioni_punto>
+    </gml:featureMember>
+    <gml:featureMember>
+        <WEBGIS:azioni_punto fid="azioni_punto.fid--33a0c341_1697ba78b75_-6445">
+            <WEBGIS:id>58</WEBGIS:id>
+            <WEBGIS:gid>23</WEBGIS:gid>
+            <WEBGIS:cod_azione>CH</WEBGIS:cod_azione>
+            <WEBGIS:azione>CH01</WEBGIS:azione>
+            <WEBGIS:denominaz>Interventi a favore dei chirotteri</WEBGIS:denominaz>
+            <WEBGIS:nat2000>true</WEBGIS:nat2000>
+            <WEBGIS:rnp>false</WEBGIS:rnp>
+            <WEBGIS:rl>false</WEBGIS:rl>
+            <WEBGIS:hs>false</WEBGIS:hs>
+            <WEBGIS:corr_eco>false</WEBGIS:corr_eco>
+            <WEBGIS:afe>false</WEBGIS:afe>
+            <WEBGIS:ext>false</WEBGIS:ext>
+            <WEBGIS:prior_az>3</WEBGIS:prior_az>
+            <WEBGIS:prior_int>2</WEBGIS:prior_int>
+            <WEBGIS:c_com_cat>385</WEBGIS:c_com_cat>
+            <WEBGIS:den_cat>Terlago</WEBGIS:den_cat>
+            <WEBGIS:c_num_part>2798</WEBGIS:c_num_part>
+            <WEBGIS:costo_uni>1000.0</WEBGIS:costo_uni>
+            <WEBGIS:costo_tot>1000.0</WEBGIS:costo_tot>
+            <WEBGIS:note>Migliorare e incrementare rifugi per chirotteri - Regolamentare accesso alla grotta
+            </WEBGIS:note>
+            <WEBGIS:proprieta>PROPRIETA' PUBBLICA COMUNALE</WEBGIS:proprieta>
+            <WEBGIS:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32632">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        4.2150358,-2.56185008
+                    </gml:coordinates>
+                </gml:Point>
+            </WEBGIS:geom>
+            <WEBGIS:com_valle>Comunita della Valle dei Laghi</WEBGIS:com_valle>
+            <WEBGIS:zsc>IT3120087: Laghi e abisso di Lamar</WEBGIS:zsc>
+            <WEBGIS:comune>Terlago</WEBGIS:comune>
+            <WEBGIS:ato>Bondone</WEBGIS:ato>
+            <WEBGIS:rr>Rete di Riserve Monte Bondone</WEBGIS:rr>
+            <WEBGIS:files/>
+        </WEBGIS:azioni_punto>
+    </gml:featureMember>
+    <gml:featureMember>
+        <WEBGIS:azioni_punto fid="azioni_punto.fid--33a0c341_1697ba78b75_-6444">
+            <WEBGIS:id>617</WEBGIS:id>
+            <WEBGIS:gid>559</WEBGIS:gid>
+            <WEBGIS:cod_azione>AA</WEBGIS:cod_azione>
+            <WEBGIS:azione>AA04</WEBGIS:azione>
+            <WEBGIS:denominaz>Creare o ripristinare specchi d'acqua anche per anfibi</WEBGIS:denominaz>
+            <WEBGIS:nat2000>false</WEBGIS:nat2000>
+            <WEBGIS:rnp>true</WEBGIS:rnp>
+            <WEBGIS:rl>false</WEBGIS:rl>
+            <WEBGIS:hs>false</WEBGIS:hs>
+            <WEBGIS:corr_eco>false</WEBGIS:corr_eco>
+            <WEBGIS:afe>false</WEBGIS:afe>
+            <WEBGIS:ext>false</WEBGIS:ext>
+            <WEBGIS:prior_az>2</WEBGIS:prior_az>
+            <WEBGIS:prior_int>1</WEBGIS:prior_int>
+            <WEBGIS:c_com_cat>185</WEBGIS:c_com_cat>
+            <WEBGIS:den_cat>Lavis</WEBGIS:den_cat>
+            <WEBGIS:c_num_part>3503/1</WEBGIS:c_num_part>
+            <WEBGIS:costo_uni>0.0</WEBGIS:costo_uni>
+            <WEBGIS:costo_tot>2000.0</WEBGIS:costo_tot>
+            <WEBGIS:note>l'importo indicato r quello complessivo</WEBGIS:note>
+            <WEBGIS:proprieta>PROPRIETA' PUBBLICA PROVINCIALE</WEBGIS:proprieta>
+            <WEBGIS:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32632">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        9.39549762,-2.91048476
+                    </gml:coordinates>
+                </gml:Point>
+            </WEBGIS:geom>
+            <WEBGIS:com_valle>Comunita Rotaliana - Konigsberg</WEBGIS:com_valle>
+            <WEBGIS:zsc>IT3120053: Foci dell'Avisio</WEBGIS:zsc>
+            <WEBGIS:comune>Lavis</WEBGIS:comune>
+            <WEBGIS:files/>
+        </WEBGIS:azioni_punto>
+    </gml:featureMember>
+    <gml:featureMember>
+        <WEBGIS:azioni_punto fid="azioni_punto.fid--33a0c341_1697ba78b75_-6443">
+            <WEBGIS:id>618</WEBGIS:id>
+            <WEBGIS:gid>560</WEBGIS:gid>
+            <WEBGIS:cod_azione>AA</WEBGIS:cod_azione>
+            <WEBGIS:azione>AA04</WEBGIS:azione>
+            <WEBGIS:denominaz>Creare o ripristinare specchi d'acqua anche per anfibi</WEBGIS:denominaz>
+            <WEBGIS:nat2000>false</WEBGIS:nat2000>
+            <WEBGIS:rnp>true</WEBGIS:rnp>
+            <WEBGIS:rl>false</WEBGIS:rl>
+            <WEBGIS:hs>false</WEBGIS:hs>
+            <WEBGIS:corr_eco>false</WEBGIS:corr_eco>
+            <WEBGIS:afe>false</WEBGIS:afe>
+            <WEBGIS:ext>false</WEBGIS:ext>
+            <WEBGIS:prior_az>2</WEBGIS:prior_az>
+            <WEBGIS:prior_int>1</WEBGIS:prior_int>
+            <WEBGIS:c_com_cat>161</WEBGIS:c_com_cat>
+            <WEBGIS:den_cat>Gardolo</WEBGIS:den_cat>
+            <WEBGIS:c_num_part>1799</WEBGIS:c_num_part>
+            <WEBGIS:costo_uni>0.0</WEBGIS:costo_uni>
+            <WEBGIS:costo_tot>2000.0</WEBGIS:costo_tot>
+            <WEBGIS:note>l'importo indicato r quello complessivo</WEBGIS:note>
+            <WEBGIS:proprieta>PROPRIETA' PUBBLICA PROVINCIALE</WEBGIS:proprieta>
+            <WEBGIS:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32632">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        9.79713092,-0.59016341
+                    </gml:coordinates>
+                </gml:Point>
+            </WEBGIS:geom>
+            <WEBGIS:com_valle>Territorio dell Adige</WEBGIS:com_valle>
+            <WEBGIS:zsc>IT3120053: Foci dell'Avisio</WEBGIS:zsc>
+            <WEBGIS:comune>Trento</WEBGIS:comune>
+            <WEBGIS:rr>Rete di Riserve Monte Bondone</WEBGIS:rr>
+            <WEBGIS:files/>
+        </WEBGIS:azioni_punto>
+    </gml:featureMember>
+</wfs:FeatureCollection>

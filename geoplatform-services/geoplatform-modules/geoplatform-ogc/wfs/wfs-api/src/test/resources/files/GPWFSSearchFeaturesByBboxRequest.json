@@ -1,0 +1,12 @@
+{
+  "lang" : "en",
+  "serverURL" : "http://150.145.141.180/geoserver/wfs",
+  "typeName" : "topp:states",
+  "maxFeatures" : 30,
+  "bbox" : {
+    "minX" : 0.0,
+    "minY" : 0.0,
+    "maxX" : 0.0,
+    "maxY" : 0.0
+  }
+}

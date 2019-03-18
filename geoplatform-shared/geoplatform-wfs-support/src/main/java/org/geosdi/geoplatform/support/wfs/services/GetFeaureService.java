@@ -72,6 +72,14 @@ public interface GetFeaureService {
 
     /**
      * @param layerSchema
+     * @param bBox
+     * @return {@link FeatureCollection}
+     * @throws Exception
+     */
+    FeatureCollection searchFeaturesByBbox(@Nonnull(when = NEVER) LayerSchemaDTO layerSchema, @Nonnull(when = NEVER) BBox bBox) throws Exception;
+
+    /**
+     * @param layerSchema
      * @param maxFeatures
      * @param headerParams
      * @return {@link FeatureCollectionDTO}

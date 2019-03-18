@@ -38,6 +38,7 @@ import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
 import org.codehaus.jra.Get;
 import org.geosdi.geoplatform.connector.wfs.response.*;
 import org.geosdi.geoplatform.gui.shared.bean.BBox;
+import org.geosdi.geoplatform.services.request.GPWFSSearchFeaturesByBboxRequest;
 import org.geosdi.geoplatform.services.request.GPWFSSearchFeaturesRequest;
 import org.geosdi.geoplatform.services.rs.path.GPWFSServiceRSPathConfig;
 
@@ -177,6 +178,15 @@ public interface GPWFSService {
     @POST
     @Path(value = GPWFSServiceRSPathConfig.WFS_SEARCH_FEATURES_RS_PATH)
     Response searchFeatures(GPWFSSearchFeaturesRequest request) throws Exception;
+
+    /**
+     * @param request
+     * @return {@link Response}
+     * @throws Exception
+     */
+    @POST
+    @Path(value = GPWFSServiceRSPathConfig.WFS_SEARCH_FEATURES_BY_BBOX_RS_PATH)
+    Response searchFeaturesByBbox(GPWFSSearchFeaturesByBboxRequest request) throws Exception;
 
     /**
      * @param serverURL

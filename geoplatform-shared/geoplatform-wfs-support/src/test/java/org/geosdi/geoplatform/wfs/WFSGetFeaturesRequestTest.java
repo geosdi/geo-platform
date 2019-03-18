@@ -167,7 +167,7 @@ public class WFSGetFeaturesRequestTest {
         if (!featureCollection.isFeaturesLoaded()) {
             featureCollection.setErrorMessage(getFeatureRequest.getResponseAsString());
         }
-        logger.debug("\n\t@@@@@@@@@@@@@@@@@@@@@@@@@@@FEATURE_COLLECTION_DTO : {}", featureCollection);
+        logger.debug("\n\t@@@@@@@@@@@@@@@@@@@@@@@@@@@FEATURE_COLLECTION_DTO : {}", featureCollection.getNumberOfFeatures());
     }
 
     @Test

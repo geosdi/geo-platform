@@ -1,42 +1,22 @@
-package org.geosdi.geoplatform.i18n.validator;
+package org.geosdi.geoplatform.wfs.request.validator;
 
-import org.geosdi.geoplatform.hibernate.validator.support.GPI18NValidator;
-import org.geosdi.geoplatform.hibernate.validator.support.request.GPI18NRequestValidator;
+import org.geosdi.geoplatform.connector.wfs.response.QueryDTO;
+import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
 import org.geosdi.geoplatform.services.request.GPWFSSearchFeaturesRequest;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.junit.runners.MethodSorters;
 
-import javax.annotation.Resource;
+import java.io.StringReader;
 import java.util.Locale;
-
-import static org.geosdi.geoplatform.wfs.request.validator.GPWFSSearchFeaturesRequestValidatorTest.createWFSSearchFeaturesRequest;
-import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@RunWith(value = SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:applicationContext-Request-Validator-Test.xml"})
-@FixMethodOrder(value = NAME_ASCENDING)
-public class GPWFSRequestValidatorConfigTest {
-
-    private static final Logger logger = LoggerFactory.getLogger(GPWFSRequestValidatorConfigTest.class);
-    //
-    @Resource(name = "wfsRequestValidator")
-    private GPI18NValidator<GPI18NRequestValidator, String> wfsRequestValidator;
-
-    @Before
-    public void setUp() throws Exception {
-        Assert.assertNotNull("GPWFSRequestValidator must not be null.", this.wfsRequestValidator);
-    }
+@FixMethodOrder(value = MethodSorters.NAME_ASCENDING)
+public class GPWFSSearchFeaturesRequestValidatorTest extends GPWFSRequestValidatorTest {
 
     @Test
     public void a_wfsServerURLIsNullTest() throws Exception {
@@ -134,5 +114,39 @@ public class GPWFSRequestValidatorConfigTest {
         String enMessage = wfsRequestValidator.validate(request, Locale.ENGLISH);
         Assert.assertNotNull(enMessage);
         logger.info("#########################WFS_TYPE_NAME_EN_IS_ALLOWED_MESSAGE : {}\n", enMessage);
+    }
+
+    /**
+     * @return {@link GPWFSSearchFeaturesRequest}
+     */
+    public static GPWFSSearchFeaturesRequest createWFSSearchFeaturesRequest() {
+        return new GPWFSSearchFeaturesRequest() {
+
+            {
+                super.setServerURL("http://150.145.141.180/geoserver/wfs");
+                super.setTypeName("topp:states");
+                super.setMaxFeatures(30);
+                super.setQueryDTO(GPJAXBContextBuilder.newInstance()
+                        .unmarshal(new StringReader(
+                                "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                                        "<QueryDTO>\n" +
+                                        "    <matchOperator>ALL</matchOperator>\n" +
+                                        "    <queryRestrictionList>\n" +
+                                        "        <queryRestriction>\n" +
+                                        "            <attribute>\n" +
+                                        "                <maxOccurs>1</maxOccurs>\n" +
+                                        "                <minOccurs>0</minOccurs>\n" +
+                                        "                <name>WORKERS</name>\n" +
+                                        "                <nillable>true</nillable>\n" +
+                                        "                <type>double</type>\n" +
+                                        "                <value></value>\n" +
+                                        "            </attribute>\n" +
+                                        "            <operator>LESS_OR_EQUAL</operator>\n" +
+                                        "            <restriction>0.25</restriction>\n" +
+                                        "        </queryRestriction>\n" +
+                                        "    </queryRestrictionList>\n" +
+                                        "</QueryDTO>"), QueryDTO.class));
+            }
+        };
     }
 }

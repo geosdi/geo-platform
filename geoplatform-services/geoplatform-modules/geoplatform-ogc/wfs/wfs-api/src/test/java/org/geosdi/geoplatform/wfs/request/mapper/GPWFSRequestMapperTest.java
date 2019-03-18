@@ -1,5 +1,6 @@
 package org.geosdi.geoplatform.wfs.request.mapper;
 
+import org.geosdi.geoplatform.services.request.GPWFSSearchFeaturesByBboxRequest;
 import org.geosdi.geoplatform.services.request.GPWFSSearchFeaturesRequest;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.junit.FixMethodOrder;
@@ -16,7 +17,8 @@ import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
-import static org.geosdi.geoplatform.wfs.request.validator.GPWFSRequestValidatorTest.createWFSGetFeatureRequest;
+import static org.geosdi.geoplatform.wfs.request.validator.GPWFSSearchFeaturesByBboxRequestValidatorTest.createWFSSearchFeaturesByBboxRequest;
+import static org.geosdi.geoplatform.wfs.request.validator.GPWFSSearchFeaturesRequestValidatorTest.createWFSSearchFeaturesRequest;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -37,7 +39,7 @@ public class GPWFSRequestMapperTest {
     @Test
     public void a_writeGPWFSSearchFeaturesRequestAsStringTest() throws Exception {
         logger.info("##################################GP_WFS_SEARCH_FEATURES_REQUEST_AS_STRING : \n{}\n",
-                jacksonSupport.getDefaultMapper().writeValueAsString(createWFSGetFeatureRequest()));
+                jacksonSupport.getDefaultMapper().writeValueAsString(createWFSSearchFeaturesRequest()));
     }
 
     @Test
@@ -73,17 +75,59 @@ public class GPWFSRequestMapperTest {
     @Test
     public void d_writeGPWFSSearchFeaturesRequestAsFileTest() throws Exception {
         jacksonSupport.getDefaultMapper().writeValue(new File("./target/GPWFSSearchFeaturesRequest.json"),
-                createWFSGetFeatureRequest());
+                createWFSSearchFeaturesRequest());
     }
 
     @Test
     public void d_readGPWFSSearchFeaturesRequestFromFileTest() throws Exception {
-        String filePath = of(new File("./").getCanonicalPath(), "src", "test", "resources",
+        String filePath = of(new File(".").getCanonicalPath(), "src", "test", "resources",
                 "files", "GPWFSSearchFeaturesRequest.json")
                 .collect(joining(separator));
         GPWFSSearchFeaturesRequest wfsSearchFeaturesRequest = jacksonSupport.getDefaultMapper()
                 .readValue(new File(filePath), GPWFSSearchFeaturesRequest.class);
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@GP_WFS_SEARCH_FEATURES_REQUEST_FROM_FILE : {}\n",
                 wfsSearchFeaturesRequest);
+    }
+
+    @Test
+    public void e_writeGPWFSSearchFeaturesByBboxRequestAsStringTest() throws Exception {
+        logger.info("##################################GP_WFS_SEARCH_FEATURES_BY_BBOX_REQUEST_AS_STRING : \n{}\n",
+                jacksonSupport.getDefaultMapper().writeValueAsString(createWFSSearchFeaturesByBboxRequest()));
+    }
+
+    @Test
+    public void f_readGPWFSSearchFeaturesByBboxRequestFromStringTest() throws Exception {
+        GPWFSSearchFeaturesByBboxRequest wfsSearchFeaturesByBboxRequest = jacksonSupport
+                .getDefaultMapper().readValue(new StringReader("{\n" +
+                        "  \"lang\" : \"en\",\n" +
+                        "  \"serverURL\" : \"http://150.145.141.180/geoserver/wfs\",\n" +
+                        "  \"typeName\" : \"topp:states\",\n" +
+                        "  \"maxFeatures\" : 30,\n" +
+                        "  \"bbox\" : {\n" +
+                        "    \"minX\" : 0.0,\n" +
+                        "    \"minY\" : 0.0,\n" +
+                        "    \"maxX\" : 0.0,\n" +
+                        "    \"maxY\" : 0.0\n" +
+                        "  }\n" +
+                        "}"), GPWFSSearchFeaturesByBboxRequest.class);
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@GP_WFS_SEARCH_FEATURES_BY_BBOX_REQUEST_FROM_STRING : {}\n",
+                wfsSearchFeaturesByBboxRequest);
+    }
+
+    @Test
+    public void g_writeGPWFSSearchFeaturesByBboxRequestAsFileTest() throws Exception {
+        jacksonSupport.getDefaultMapper().writeValue(new File("./target/GPWFSSearchFeaturesByBboxRequest.json"),
+                createWFSSearchFeaturesByBboxRequest());
+    }
+
+    @Test
+    public void h_readGPWFSSearchFeaturesByBboxRequestFromFileTest() throws Exception {
+        String filePath = of(new File(".").getCanonicalPath(), "src", "test", "resources",
+                "files", "GPWFSSearchFeaturesByBboxRequest.json")
+                .collect(joining(separator));
+        GPWFSSearchFeaturesByBboxRequest wfsSearchFeaturesByBboxRequest = jacksonSupport.getDefaultMapper()
+                .readValue(new File(filePath), GPWFSSearchFeaturesByBboxRequest.class);
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@GP_WFS_SEARCH_FEATURES_BY_BBOX_REQUEST_FROM_FILE : {}\n",
+                wfsSearchFeaturesByBboxRequest);
     }
 }

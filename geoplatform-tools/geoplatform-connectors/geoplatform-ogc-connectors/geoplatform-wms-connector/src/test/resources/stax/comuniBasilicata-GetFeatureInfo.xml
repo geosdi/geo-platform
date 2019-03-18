@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfs:FeatureCollection xmlns="http://www.opengis.net/wfs" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:gml="http://www.opengis.net/gml" xmlns:admin="http://www.geosdi.org/admin"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xsi:schemaLocation="http://www.geosdi.org/admin https://prosit.geosdi.org/geoserver/admin/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=admin%3Aadmin_shp_comuni http://www.opengis.net/wfs https://prosit.geosdi.org/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd">
+    <gml:boundedBy>
+        <gml:null>unknown</gml:null>
+    </gml:boundedBy>
+    <gml:featureMember>
+        <admin:admin_shp_comuni fid="admin_shp_comuni.7">
+            <admin:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#32632">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:32632">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1080589.58221844,4495163.02789343 1080949.32805213,4494565.53257219
+                                        1081962.19423557,4494626.15534555 1082904.43341919,4493124.54203935
+                                        1081911.315629,4492206.67681515 1081403.69318517,4491062.18778501
+                                        1080915.44227628,4487948.21615966 1081218.56384503,4487496.71965152
+                                        1079918.82281367,4485999.9850798 1079183.58005797,4486450.23231573
+                                        1078588.337049,4487490.72408945 1078739.71299485,4488858.71172443
+                                        1079239.08445399,4489376.70630823 1078304.21815759,4489651.20543358
+                                        1076955.98277017,4491288.06818761 1076858.36313872,4494001.54435624
+                                        1076263.37120368,4495704.03029821 1077034.36701155,4497266.51522378
+                                        1077963.85867327,4497170.01453527 1080589.58221844,4495163.02789343
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </admin:the_geom>
+            <admin:COD_REG>17</admin:COD_REG>
+            <admin:COD_CM>0</admin:COD_CM>
+            <admin:COD_PRO>76</admin:COD_PRO>
+            <admin:PRO_COM>76046</admin:PRO_COM>
+            <admin:COMUNE>MARSICOVETERE</admin:COMUNE>
+            <admin:NOME_TED/>
+            <admin:FLAG_CM>2</admin:FLAG_CM>
+            <admin:Shape_Leng>30899.3456466</admin:Shape_Leng>
+            <admin:Shape_Area>3.8012300675E7</admin:Shape_Area>
+        </admin:admin_shp_comuni>
+    </gml:featureMember>
+</wfs:FeatureCollection>

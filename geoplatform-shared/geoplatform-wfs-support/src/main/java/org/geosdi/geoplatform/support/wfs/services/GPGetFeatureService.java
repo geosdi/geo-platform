@@ -109,6 +109,23 @@ public class GPGetFeatureService extends AbstractFeatureService implements GetFe
 
     /**
      * @param layerSchema
+     * @param bBox
+     * @return {@link FeatureCollection}
+     * @throws Exception
+     */
+    @Override
+    public FeatureCollection searchFeaturesByBbox(@Nonnull(when = NEVER) LayerSchemaDTO layerSchema, @Nonnull(when = NEVER) BBox bBox) throws Exception {
+        checkArgument(layerSchema != null, "The Parameter layerSchema must not be null.");
+        checkArgument(bBox != null, "The Parameter bBox must not be null.");
+        WFSGetFeatureRequest request = this.createRequest(layerSchema, null);
+        request.setBBox(bBox);
+        request.setOutputFormat("json");
+        logger.debug("#################################REQUEST_AS_STRING : {}\n", request.showRequestAsString());
+        return JACKSON_SUPPORT.getDefaultMapper().readValue(request.getResponseAsStream(), FeatureCollection.class);
+    }
+
+    /**
+     * @param layerSchema
      * @param maxFeatures
      * @param headerParams
      * @return {@link FeatureCollectionDTO}
@@ -205,7 +222,7 @@ public class GPGetFeatureService extends AbstractFeatureService implements GetFe
     private WFSGetFeatureRequest createRequest(LayerSchemaDTO layerSchema, Map<String, String> headerParams) throws Exception {
         checkArgument(layerSchema != null, "The Parameter LayerSchema must not be null.");
         String typeName = layerSchema.getTypeName();
-        assert (typeName != null);
+        checkArgument((typeName != null) && !(typeName.trim().isEmpty()), "The Parameter typeName must not be null or an empty string.");
         logger.debug("\n*** WFS GetFeature for layer {} ***", typeName);
         if (!typeName.contains(":")) {
             throw new IllegalArgumentException("typeName must contain the char \":\"");
@@ -226,6 +243,7 @@ public class GPGetFeatureService extends AbstractFeatureService implements GetFe
         WFSGetFeatureRequest request = serverConnector.createGetFeatureRequest();
         QName qName = new QName(typeName);
         request.setTypeName(qName);
+        request.setGeometryName((layerSchema.getGeometry() != null ? layerSchema.getGeometry().getName() : null));
         request.setSRS("EPSG:4326");
         request.setResultType(ResultTypeType.RESULTS.value());
         return request;

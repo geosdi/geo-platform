@@ -1,5 +1,6 @@
 package org.geosdi.geoplatform.wfs.request.mapper;
 
+import org.geosdi.geoplatform.services.request.GPWFSSearchFeaturesByBboxAndQueryRequest;
 import org.geosdi.geoplatform.services.request.GPWFSSearchFeaturesByBboxRequest;
 import org.geosdi.geoplatform.services.request.GPWFSSearchFeaturesRequest;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
@@ -17,6 +18,7 @@ import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
+import static org.geosdi.geoplatform.wfs.request.validator.GPWFSSearchFeaturesByBboxRequestValidatorTest.createWFSSearchFeaturesByBboxAndQueryRequest;
 import static org.geosdi.geoplatform.wfs.request.validator.GPWFSSearchFeaturesByBboxRequestValidatorTest.createWFSSearchFeaturesByBboxRequest;
 import static org.geosdi.geoplatform.wfs.request.validator.GPWFSSearchFeaturesRequestValidatorTest.createWFSSearchFeaturesRequest;
 
@@ -129,5 +131,47 @@ public class GPWFSRequestMapperTest {
                 .readValue(new File(filePath), GPWFSSearchFeaturesByBboxRequest.class);
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@GP_WFS_SEARCH_FEATURES_BY_BBOX_REQUEST_FROM_FILE : {}\n",
                 wfsSearchFeaturesByBboxRequest);
+    }
+
+    @Test
+    public void i_writeGPWFSSearchFeaturesByBboxAndQueryRequestAsStringTest() throws Exception {
+        logger.info("##################################GP_WFS_SEARCH_FEATURES_REQUEST_AS_STRING : \n{}\n",
+                jacksonSupport.getDefaultMapper().writeValueAsString(createWFSSearchFeaturesByBboxAndQueryRequest()));
+    }
+
+    @Test
+    public void l_readGPWFSSearchFeaturesByBboxAndQueryTest() throws Exception {
+        GPWFSSearchFeaturesByBboxAndQueryRequest wfsSearchFeaturesByBboxAndQueryRequest = jacksonSupport
+                .getDefaultMapper().readValue(new StringReader("{\n" +
+                        "  \"lang\" : \"en\",\n" +
+                        "  \"serverURL\" : \"http://150.145.141.92/geoserver/wfs\",\n" +
+                        "  \"typeName\" : \"topp:states\",\n" +
+                        "  \"maxFeatures\" : 50,\n" +
+                        "  \"queryDTO\" : {\n" +
+                        "    \"matchOperator\" : \"ALL\",\n" +
+                        "    \"queryRestriction\" : [ {\n" +
+                        "      \"attribute\" : {\n" +
+                        "        \"attribute\" : {\n" +
+                        "          \"type\" : \"double\",\n" +
+                        "          \"name\" : \"WORKERS\",\n" +
+                        "          \"value\" : \"\",\n" +
+                        "          \"maxOccurs\" : 1,\n" +
+                        "          \"minOccurs\" : 0,\n" +
+                        "          \"nillable\" : true\n" +
+                        "        }\n" +
+                        "      },\n" +
+                        "      \"operator\" : \"LESS_OR_EQUAL\",\n" +
+                        "      \"restriction\" : \"0.25\"\n" +
+                        "    } ]\n" +
+                        "  },\n" +
+                        "  \"bbox\" : {\n" +
+                        "    \"minX\" : -75.102613,\n" +
+                        "    \"minY\" : 40.212597,\n" +
+                        "    \"maxX\" : -72.361859,\n" +
+                        "    \"maxY\" : 41.512517\n" +
+                        "  }\n" +
+                        "}"), GPWFSSearchFeaturesByBboxAndQueryRequest.class);
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@GP_WFS_SEARCH_FEATURES_BY_BBOX_REQUEST_FROM_STRING : {}\n",
+                wfsSearchFeaturesByBboxAndQueryRequest);
     }
 }

@@ -1,12 +1,16 @@
 package org.geosdi.geoplatform.wfs.request.validator;
 
+import org.geosdi.geoplatform.connector.wfs.response.QueryDTO;
 import org.geosdi.geoplatform.gui.shared.bean.BBox;
+import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
+import org.geosdi.geoplatform.services.request.GPWFSSearchFeaturesByBboxAndQueryRequest;
 import org.geosdi.geoplatform.services.request.GPWFSSearchFeaturesByBboxRequest;
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import java.io.StringReader;
 import java.util.Locale;
 
 /**
@@ -138,6 +142,41 @@ public class GPWFSSearchFeaturesByBboxRequestValidatorTest extends GPWFSRequestV
                 super.setServerURL("http://150.145.141.92/geoserver/wfs");
                 super.setTypeName("topp:states");
                 super.setMaxFeatures(50);
+                super.setBBox(new BBox(-75.102613, 40.212597, -72.361859, 41.512517));
+            }
+        };
+    }
+
+    /**
+     * @return {@link GPWFSSearchFeaturesByBboxRequest}
+     */
+    public static GPWFSSearchFeaturesByBboxAndQueryRequest createWFSSearchFeaturesByBboxAndQueryRequest() {
+        return new GPWFSSearchFeaturesByBboxAndQueryRequest() {
+
+            {
+                super.setServerURL("http://150.145.141.92/geoserver/wfs");
+                super.setTypeName("topp:states");
+                super.setMaxFeatures(50);
+                super.setQueryDTO(GPJAXBContextBuilder.newInstance()
+                        .unmarshal(new StringReader(
+                                "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                                        "<QueryDTO>\n" +
+                                        "    <matchOperator>ALL</matchOperator>\n" +
+                                        "    <queryRestrictionList>\n" +
+                                        "        <queryRestriction>\n" +
+                                        "            <attribute>\n" +
+                                        "                <maxOccurs>1</maxOccurs>\n" +
+                                        "                <minOccurs>0</minOccurs>\n" +
+                                        "                <name>WORKERS</name>\n" +
+                                        "                <nillable>true</nillable>\n" +
+                                        "                <type>double</type>\n" +
+                                        "                <value></value>\n" +
+                                        "            </attribute>\n" +
+                                        "            <operator>LESS_OR_EQUAL</operator>\n" +
+                                        "            <restriction>0.25</restriction>\n" +
+                                        "        </queryRestriction>\n" +
+                                        "    </queryRestrictionList>\n" +
+                                        "</QueryDTO>"), QueryDTO.class));
                 super.setBBox(new BBox(-75.102613, 40.212597, -72.361859, 41.512517));
             }
         };

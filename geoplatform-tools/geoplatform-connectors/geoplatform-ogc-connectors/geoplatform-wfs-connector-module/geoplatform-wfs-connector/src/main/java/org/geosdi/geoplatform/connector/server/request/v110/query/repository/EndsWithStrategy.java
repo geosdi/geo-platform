@@ -45,7 +45,7 @@ public class EndsWithStrategy extends MatchStrategy {
 
     @Override
     protected Object matchExpression(String content) {
-        return content.concat("%");
+        return "%".concat(content);
     }
 
     /**

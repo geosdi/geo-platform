@@ -81,9 +81,21 @@ public class AndOperatorHandler extends LogicOperatorHandler {
         logger.debug("##################{} builds : {} " + (elements.size() > 1 ? "elements" : "element") + "\n",
                 getFilterName(), elements.size());
         if (elements.size() == 1) {
-            JAXBElement<ComparisonOpsType> opsTypeJAXBElement = (JAXBElement<ComparisonOpsType>) elements.get(0);
-            filter.setComparisonOps(opsTypeJAXBElement);
+            if (filter.isSetSpatialOps()) {
+                elements.add(filter.getSpatialOps());
+                filter.setSpatialOps(null);
+                BinaryLogicOpType and = new BinaryLogicOpType();
+                and.setComparisonOpsOrSpatialOpsOrLogicOps(elements);
+                filter.setLogicOps(filterFactory.createAnd(and));
+            } else {
+                JAXBElement<ComparisonOpsType> opsTypeJAXBElement = (JAXBElement<ComparisonOpsType>) elements.get(0);
+                filter.setComparisonOps(opsTypeJAXBElement);
+            }
         } else if (elements.size() > 1) {
+            if (filter.isSetSpatialOps()) {
+                elements.add(filter.getSpatialOps());
+                filter.setSpatialOps(null);
+            }
             BinaryLogicOpType and = new BinaryLogicOpType();
             and.setComparisonOpsOrSpatialOpsOrLogicOps(elements);
             filter.setLogicOps(filterFactory.createAnd(and));

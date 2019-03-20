@@ -48,6 +48,7 @@ import org.geosdi.geoplatform.support.wfs.feature.reader.WFSGetFeatureStaxReader
 import org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.xml.namespace.QName;
 import java.io.IOException;
 import java.io.InputStream;
@@ -126,6 +127,24 @@ public class GPGetFeatureService extends AbstractFeatureService implements GetFe
 
     /**
      * @param layerSchema
+     * @param queryDTO
+     * @param bBox
+     * @return {@link FeatureCollection}
+     * @throws Exception
+     */
+    @Override
+    public FeatureCollection searchFeaturesByBboxAndQuery(@Nonnull(when = NEVER) LayerSchemaDTO layerSchema, @Nullable QueryDTO queryDTO, @Nullable BBox bBox) throws Exception {
+        checkArgument(layerSchema != null, "The Parameter layerSchema must not be null.");
+        WFSGetFeatureRequest request = this.createRequest(layerSchema, null);
+        request.setBBox(bBox);
+        request.setQueryDTO(queryDTO);
+        request.setOutputFormat("json");
+        logger.debug("#################################REQUEST_AS_STRING : {}\n", request.showRequestAsString());
+        return JACKSON_SUPPORT.getDefaultMapper().readValue(request.getResponseAsStream(), FeatureCollection.class);
+    }
+
+    /**
+     * @param layerSchema
      * @param maxFeatures
      * @param headerParams
      * @return {@link FeatureCollectionDTO}
@@ -176,7 +195,7 @@ public class GPGetFeatureService extends AbstractFeatureService implements GetFe
      * @throws Exception
      */
     @Override
-    public FeatureCollection searchFeatures(@Nonnull(when = NEVER) String serverURL, @Nonnull(when = NEVER) String typeName, int maxFeatures, QueryDTO queryDTO) throws Exception {
+    public FeatureCollection searchFeatures(@Nonnull(when = NEVER) String serverURL, @Nonnull(when = NEVER) String typeName, int maxFeatures, @Nullable QueryDTO queryDTO) throws Exception {
         checkArgument((serverURL != null) && !(serverURL.trim().isEmpty()), "The Parameter serverURL must not be null or an empty string.");
         checkArgument((typeName != null) && !(typeName.trim().isEmpty()), "The Parameter typeName must not be null or an empty string.");
         maxFeatures = (maxFeatures > 0) ? maxFeatures : 100;

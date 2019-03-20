@@ -12,7 +12,8 @@ import static java.util.Locale.ENGLISH;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @XmlTransient
-@XmlSeeAlso(value = {GPWFSSearchFeaturesRequest.class, GPWFSSearchFeaturesByBboxRequest.class})
+@XmlSeeAlso(value = {GPWFSSearchFeaturesRequest.class, GPWFSSearchFeaturesByBboxRequest.class,
+        GPWFSSearchFeaturesByBboxAndQueryRequest.class})
 public abstract class GPWFSRequest implements GPI18NRequestValidator {
 
     private static final long serialVersionUID = -7835983957131722680L;

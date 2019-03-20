@@ -16,6 +16,7 @@ public final class GPWFSServiceRSPathConfig {
     public static final String GET_GEOJSON_FEATURES_RS_PATH = "/getGeoJsonFeatures";
     public static final String WFS_SEARCH_FEATURES_RS_PATH = "/searchFeatures";
     public static final String WFS_SEARCH_FEATURES_BY_BBOX_RS_PATH = "/searchFeaturesByBbox";
+    public static final String WFS_SEARCH_FEATURES_BY_BBOX_AND_QUERY_RS_PATH = "/searchFeaturesByBboxAndQuery";
 
     private GPWFSServiceRSPathConfig() {
     }

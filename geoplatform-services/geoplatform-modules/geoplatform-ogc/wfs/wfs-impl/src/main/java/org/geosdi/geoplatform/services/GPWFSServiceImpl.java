@@ -40,6 +40,7 @@ import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.gui.shared.bean.BBox;
 import org.geosdi.geoplatform.hibernate.validator.support.GPI18NValidator;
 import org.geosdi.geoplatform.hibernate.validator.support.request.GPI18NRequestValidator;
+import org.geosdi.geoplatform.services.request.GPWFSSearchFeaturesByBboxAndQueryRequest;
 import org.geosdi.geoplatform.services.request.GPWFSSearchFeaturesByBboxRequest;
 import org.geosdi.geoplatform.services.request.GPWFSSearchFeaturesRequest;
 import org.geosdi.geoplatform.support.wfs.services.DescribeFeatureService;
@@ -247,6 +248,30 @@ public class GPWFSServiceImpl implements GPWFSService {
         try {
             LayerSchemaDTO layerSchemaDTO = this.describeFeatureType(request.getServerURL(), request.getTypeName(), null);
             return Response.ok(this.gpGetFeatureService.searchFeaturesByBbox(layerSchemaDTO, request.getBBox())).build();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new IllegalParameterFault(ex.getMessage());
+        }
+    }
+
+    /**
+     * @param request
+     * @return {@link Response}
+     * @throws Exception
+     */
+    @Override
+    public Response searchFeaturesByBboxAndQuery(GPWFSSearchFeaturesByBboxAndQueryRequest request) throws Exception {
+        if (request == null) {
+            throw new IllegalParameterFault(this.wfsMessageSource.getMessage("gp_wfs_request.valid",
+                    new Object[]{"GPWFSSearchFeaturesByBboxAndQueryRequest"}, ENGLISH));
+        }
+        logger.trace("##########################Validating Request -------------------> {}\n", request);
+        String message = this.wfsRequestValidator.validate(request, forLanguageTag(request.getLang()));
+        if (message != null)
+            throw new IllegalParameterFault(message);
+        try {
+            LayerSchemaDTO layerSchemaDTO = this.describeFeatureType(request.getServerURL(), request.getTypeName(), null);
+            return Response.ok(this.gpGetFeatureService.searchFeaturesByBboxAndQuery(layerSchemaDTO, request.getQueryDTO(), request.getBBox())).build();
         } catch (Exception ex) {
             ex.printStackTrace();
             throw new IllegalParameterFault(ex.getMessage());

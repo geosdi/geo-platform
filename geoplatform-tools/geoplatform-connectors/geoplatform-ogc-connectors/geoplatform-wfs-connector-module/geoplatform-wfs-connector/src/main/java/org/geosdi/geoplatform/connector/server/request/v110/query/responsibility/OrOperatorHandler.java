@@ -81,9 +81,21 @@ public class OrOperatorHandler extends LogicOperatorHandler {
         logger.debug("##################{} builds : {} " + (elements.size() > 1 ? "elements" : "element") + "\n",
                 getFilterName(), elements.size());
         if (elements.size() == 1) {
-            JAXBElement<ComparisonOpsType> element = (JAXBElement<ComparisonOpsType>) elements.get(0);
-            filter.setComparisonOps(element);
+            if (filter.isSetSpatialOps()) {
+                elements.add(filter.getSpatialOps());
+                filter.setSpatialOps(null);
+                BinaryLogicOpType or = new BinaryLogicOpType();
+                or.setComparisonOpsOrSpatialOpsOrLogicOps(elements);
+                filter.setLogicOps(filterFactory.createOr(or));
+            } else {
+                JAXBElement<ComparisonOpsType> element = (JAXBElement<ComparisonOpsType>) elements.get(0);
+                filter.setComparisonOps(element);
+            }
         } else if (elements.size() > 1) {
+            if (filter.isSetSpatialOps()) {
+                elements.add(filter.getSpatialOps());
+                filter.setSpatialOps(null);
+            }
             BinaryLogicOpType or = new BinaryLogicOpType();
             or.setComparisonOpsOrSpatialOpsOrLogicOps(elements);
             filter.setLogicOps(filterFactory.createOr(or));

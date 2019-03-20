@@ -42,6 +42,7 @@ import org.geosdi.geoplatform.connector.wfs.response.QueryDTO;
 import org.geosdi.geoplatform.gui.shared.bean.BBox;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.Map;
 
 import static javax.annotation.meta.When.NEVER;
@@ -80,6 +81,16 @@ public interface GetFeaureService {
 
     /**
      * @param layerSchema
+     * @param queryDTO
+     * @param bBox
+     * @return {@link FeatureCollection}
+     * @throws Exception
+     */
+    FeatureCollection searchFeaturesByBboxAndQuery(@Nonnull(when = NEVER) LayerSchemaDTO layerSchema, @Nullable QueryDTO queryDTO, @Nullable BBox bBox) throws Exception;
+
+
+    /**
+     * @param layerSchema
      * @param maxFeatures
      * @param headerParams
      * @return {@link FeatureCollectionDTO}
@@ -105,7 +116,7 @@ public interface GetFeaureService {
      * @return {@link FeatureCollection}
      * @throws Exception
      */
-    FeatureCollection searchFeatures(@Nonnull(when = NEVER) String serverURL, @Nonnull(when = NEVER) String typeName, int maxFeatures, QueryDTO queryDTO) throws Exception;
+    FeatureCollection searchFeatures(@Nonnull(when = NEVER) String serverURL, @Nonnull(when = NEVER) String typeName, int maxFeatures, @Nullable QueryDTO queryDTO) throws Exception;
 
     /**
      * @param layerSchema

@@ -41,9 +41,13 @@ import org.geosdi.geoplatform.xml.filter.v110.BinaryLogicOpType;
 import org.geosdi.geoplatform.xml.filter.v110.FilterType;
 import org.geosdi.geoplatform.xml.filter.v110.UnaryLogicOpType;
 
+import javax.annotation.Nonnull;
 import javax.xml.bind.JAXBElement;
+import java.util.ArrayList;
 import java.util.List;
 
+import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
 import static org.geosdi.geoplatform.gui.shared.wfs.LogicOperatorType.NONE;
 
 /**
@@ -79,7 +83,8 @@ public class NotOperatorHandler extends LogicOperatorHandler {
         List<JAXBElement<?>> elements = super.buildJAXBElementList(queryRestrictionDTOs);
         logger.debug("##################{} builds : {} " + (elements.size() > 1 ? "elements" : "element") + "\n",
                 getFilterName(), elements.size());
-        UnaryLogicOpType unaryLogicOpType = ((elements.size() == 1) ? createComparisonOps(elements.get(0)) : createLogicOps(elements));
+        UnaryLogicOpType unaryLogicOpType = ((elements.size() == 1)
+                ? createComparisonOps(elements.get(0), filter) : createLogicOps(elements, filter));
         filter.setLogicOps(filterFactory.createNot(unaryLogicOpType));
     }
 
@@ -97,17 +102,37 @@ public class NotOperatorHandler extends LogicOperatorHandler {
      * @param element
      * @return {@link UnaryLogicOpType}
      */
-    protected UnaryLogicOpType createComparisonOps(JAXBElement element) {
-        UnaryLogicOpType unaryLogicOpType = new UnaryLogicOpType();
-        unaryLogicOpType.setComparisonOps(element);
-        return unaryLogicOpType;
+    protected UnaryLogicOpType createComparisonOps(@Nonnull(when = NEVER) JAXBElement element, @Nonnull(when = NEVER) FilterType filter) {
+        checkArgument(element != null, "The Parameter element must not be null.");
+        checkArgument(filter != null, "The Parameter filter must not be null.");
+        if (filter.isSetSpatialOps()) {
+            List<JAXBElement<?>> elements = new ArrayList<>(2);
+            elements.add(filter.getSpatialOps());
+            filter.setSpatialOps(null);
+            elements.add(element);
+            UnaryLogicOpType unaryLogicOpType = new UnaryLogicOpType();
+            BinaryLogicOpType and = new BinaryLogicOpType();
+            and.setComparisonOpsOrSpatialOpsOrLogicOps(elements);
+            unaryLogicOpType.setLogicOps(filterFactory.createAnd(and));
+            return unaryLogicOpType;
+        } else {
+            UnaryLogicOpType unaryLogicOpType = new UnaryLogicOpType();
+            unaryLogicOpType.setComparisonOps(element);
+            return unaryLogicOpType;
+        }
     }
 
     /**
      * @param elements
      * @return {@link UnaryLogicOpType}
      */
-    protected UnaryLogicOpType createLogicOps(List<JAXBElement<?>> elements) {
+    protected UnaryLogicOpType createLogicOps(@Nonnull(when = NEVER) List<JAXBElement<?>> elements, @Nonnull(when = NEVER) FilterType filter) {
+        checkArgument(elements != null, "The Parameter elements must not be null.");
+        checkArgument(filter != null, "The Parameter filter must not be null.");
+        if (filter.isSetSpatialOps()) {
+            elements.add(filter.getSpatialOps());
+            filter.setSpatialOps(null);
+        }
         UnaryLogicOpType unaryLogicOpType = new UnaryLogicOpType();
         BinaryLogicOpType and = new BinaryLogicOpType();
         and.setComparisonOpsOrSpatialOpsOrLogicOps(elements);

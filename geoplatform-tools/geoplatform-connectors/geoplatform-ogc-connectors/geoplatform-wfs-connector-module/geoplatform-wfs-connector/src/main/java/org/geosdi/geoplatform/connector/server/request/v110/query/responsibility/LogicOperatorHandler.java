@@ -34,6 +34,7 @@
  */
 package org.geosdi.geoplatform.connector.server.request.v110.query.responsibility;
 
+import com.google.common.collect.Lists;
 import org.geosdi.geoplatform.connector.server.request.v110.query.repository.QueryRestrictionStrategy;
 import org.geosdi.geoplatform.connector.wfs.response.QueryDTO;
 import org.geosdi.geoplatform.connector.wfs.response.QueryRestrictionDTO;
@@ -43,9 +44,14 @@ import org.geosdi.geoplatform.xml.filter.v110.ObjectFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.Nullable;
 import javax.xml.bind.JAXBElement;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -78,23 +84,35 @@ public abstract class LogicOperatorHandler implements ILogicOperatorHandler {
     }
 
     /**
-     * @param queryRestrictionDTOs
+     * @param theQueryRestrictions
      * @return {@link List<JAXBElement<?>>}
      */
-    protected List<JAXBElement<?>> buildJAXBElementList(List<QueryRestrictionDTO> queryRestrictionDTOs) {
-        List<JAXBElement<?>> elements = new ArrayList<>(queryRestrictionDTOs.size());
-        for (QueryRestrictionDTO queryRestrictionDTO : queryRestrictionDTOs) {
+    protected List<JAXBElement<?>> buildJAXBElementList(List<QueryRestrictionDTO> theQueryRestrictions) {
+        Collection<QueryRestrictionDTO> queryRestrictions = cleanUp(theQueryRestrictions);
+        List<JAXBElement<?>> elements = new ArrayList<>(queryRestrictions.size());
+        for (QueryRestrictionDTO queryRestrictionDTO : queryRestrictions) {
             OperatorType operatorType = queryRestrictionDTO.getOperator();
-            if (operatorType != null) {
-                QueryRestrictionStrategy<?> queryRestrictionStrategy = QUERY_RESTRICTION_REPOSITORY.getQueryRestrictionStrategy(operatorType);
-                if (queryRestrictionStrategy != null) {
-                    elements.add(queryRestrictionStrategy.create(queryRestrictionDTO));
-                } else {
-                    logger.debug("###############{} doesn't found QueryRestrictionStrategy<?> for " + "OperatorType : {}\n", getFilterName(), operatorType);
-                }
+            QueryRestrictionStrategy<?> queryRestrictionStrategy = QUERY_RESTRICTION_REPOSITORY.getQueryRestrictionStrategy(operatorType);
+            if (queryRestrictionStrategy != null) {
+                elements.add(queryRestrictionStrategy.create(queryRestrictionDTO));
+            } else {
+                logger.debug("###############{} doesn't found QueryRestrictionStrategy<?> for OperatorType : {}\n", getFilterName(), operatorType);
             }
         }
         return elements;
+    }
+
+    /**
+     * @param theQueryRestrictions
+     * @return {@link Collection<QueryRestrictionDTO>}
+     */
+    Collection<QueryRestrictionDTO> cleanUp(@Nullable Collection<QueryRestrictionDTO> theQueryRestrictions) {
+        return (theQueryRestrictions != null ? theQueryRestrictions.stream()
+                .filter(Objects::nonNull)
+                .filter(r -> r.getOperator() != null)
+                .filter(r -> (r.getAttribute() != null) && (r.getAttribute().getName() != null))
+                .filter(r -> r.getRestriction() != null)
+                .collect(toList()) : Lists.newArrayList());
     }
 
 

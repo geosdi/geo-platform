@@ -1,4 +1,4 @@
-package org.geosdi.geoplatform.connector.wfs;
+package org.geosdi.geoplatform.connector.wfs.prosit;
 
 import org.geosdi.geoplatform.connector.GPWFSConnectorStore;
 import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequest;

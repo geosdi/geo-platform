@@ -115,10 +115,13 @@ public class GPGetFeatureService extends AbstractFeatureService implements GetFe
      * @throws Exception
      */
     @Override
-    public FeatureCollection searchFeaturesByBbox(@Nonnull(when = NEVER) LayerSchemaDTO layerSchema, @Nonnull(when = NEVER) BBox bBox) throws Exception {
+    public FeatureCollection searchFeaturesByBbox(@Nonnull(when = NEVER) LayerSchemaDTO layerSchema, @Nonnull(when = NEVER) BBox bBox,
+            int maxFeatures) throws Exception {
         checkArgument(layerSchema != null, "The Parameter layerSchema must not be null.");
         checkArgument(bBox != null, "The Parameter bBox must not be null.");
+        maxFeatures = (maxFeatures > 0) ? maxFeatures : 100;
         WFSGetFeatureRequest request = this.createRequest(layerSchema, null);
+        request.setMaxFeatures(BigInteger.valueOf(maxFeatures));
         request.setBBox(bBox);
         request.setOutputFormat("json");
         logger.debug("#################################REQUEST_AS_STRING : {}\n", request.showRequestAsString());
@@ -133,10 +136,12 @@ public class GPGetFeatureService extends AbstractFeatureService implements GetFe
      * @throws Exception
      */
     @Override
-    public FeatureCollection searchFeaturesByBboxAndQuery(@Nonnull(when = NEVER) LayerSchemaDTO layerSchema, @Nullable QueryDTO queryDTO, @Nullable BBox bBox) throws Exception {
+    public FeatureCollection searchFeaturesByBboxAndQuery(@Nonnull(when = NEVER) LayerSchemaDTO layerSchema, @Nullable QueryDTO queryDTO, @Nullable BBox bBox, int maxFeatures) throws Exception {
         checkArgument(layerSchema != null, "The Parameter layerSchema must not be null.");
+        maxFeatures = (maxFeatures > 0) ? maxFeatures : 100;
         WFSGetFeatureRequest request = this.createRequest(layerSchema, null);
         request.setBBox(bBox);
+        request.setMaxFeatures(BigInteger.valueOf(maxFeatures));
         request.setQueryDTO(queryDTO);
         request.setOutputFormat("json");
         logger.debug("#################################REQUEST_AS_STRING : {}\n", request.showRequestAsString());

@@ -271,7 +271,8 @@ public class GPWFSServiceImpl implements GPWFSService {
             throw new IllegalParameterFault(message);
         try {
             LayerSchemaDTO layerSchemaDTO = this.describeFeatureType(request.getServerURL(), request.getTypeName(), null);
-            return Response.ok(this.gpGetFeatureService.searchFeaturesByBboxAndQuery(layerSchemaDTO, request.getQueryDTO(), request.getBBox())).build();
+            return Response.ok(this.gpGetFeatureService.searchFeaturesByBboxAndQuery(layerSchemaDTO, request.getQueryDTO(),
+                    request.getBBox(), request.getMaxFeatures())).build();
         } catch (Exception ex) {
             ex.printStackTrace();
             throw new IllegalParameterFault(ex.getMessage());

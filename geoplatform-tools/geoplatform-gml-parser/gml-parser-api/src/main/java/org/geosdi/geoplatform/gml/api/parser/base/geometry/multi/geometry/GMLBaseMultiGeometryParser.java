@@ -35,16 +35,15 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.base.geometry.multi.geometry;
 
-import com.google.common.base.Preconditions;
-import org.locationtech.jts.geom.Geometry;
-import org.locationtech.jts.geom.GeometryCollection;
-import org.locationtech.jts.geom.GeometryFactory;
 import org.geosdi.geoplatform.gml.api.*;
 import org.geosdi.geoplatform.gml.api.parser.base.AbstractGMLBaseParser;
 import org.geosdi.geoplatform.gml.api.parser.base.AbstractGMLBaseSRSParser;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.sextante.GMLBaseSextanteParser;
 import org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRepo;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
+import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.geom.GeometryCollection;
+import org.locationtech.jts.geom.GeometryFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -52,6 +51,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 import static org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRepo.getDefaultGeometryFactory;
 import static org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRepo.getDefaultSRSParser;
 
@@ -59,7 +59,7 @@ import static org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParame
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GMLBaseMultiGeometryParser extends AbstractGMLBaseParser<MultiGeometry, MultiGeometryProperty, GeometryCollection> {
+public class GMLBaseMultiGeometryParser extends AbstractGMLBaseParser<MultiGeometry, MultiGeometryProperty, GeometryCollection, org.geojson.GeometryCollection> {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
@@ -101,7 +101,7 @@ public class GMLBaseMultiGeometryParser extends AbstractGMLBaseParser<MultiGeome
      */
     @Override
     public GeometryCollection parseGeometry(MultiGeometryProperty propertyType) throws ParserException {
-        Preconditions.checkNotNull(propertyType, "The MultiGeometry Property must be not null.");
+        checkNotNull(propertyType, "The MultiGeometry Property must be not null.");
         if (propertyType.isSetGeometricAggregate()) {
             AbstractGeometricAggregate geometryAggregate = propertyType.getAbstractGeometricAggregate();
             if (geometryAggregate instanceof MultiGeometry) {
@@ -109,6 +109,26 @@ public class GMLBaseMultiGeometryParser extends AbstractGMLBaseParser<MultiGeome
             }
         }
         throw new ParserException("There is no GML MultiGeometry to parse.");
+    }
+
+    /**
+     * @param gmlGeometry
+     * @return {@link org.geojson.GeometryCollection}
+     * @throws ParserException
+     */
+    @Override
+    protected org.geojson.GeometryCollection canParseGeometryAsGeoJson(MultiGeometry gmlGeometry) throws ParserException {
+        return null;
+    }
+
+    /**
+     * @param propertyType
+     * @return {@link org.geojson.GeometryCollection}
+     * @throws ParserException
+     */
+    @Override
+    public org.geojson.GeometryCollection parseGeometryAsGeoJson(MultiGeometryProperty propertyType) throws ParserException {
+        return null;
     }
 
     protected interface MemberBuilder {

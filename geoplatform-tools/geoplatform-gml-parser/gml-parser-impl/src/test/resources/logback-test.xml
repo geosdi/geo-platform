@@ -21,5 +21,8 @@
             level="debug"/>
     <logger name="org.geosdi.geoplatform.gml.api.parser.base.parameter.bridge.store.BaseParameterValueStore"
             level="debug"/>
+    <logger name="org.geosdi.geoplatform.gml.api.parser.base.geometry.polygon" level="debug"/>
+    <logger name="org.geosdi.geoplatform.gml.api.parser.base.geometry.line" level="debug"/>
+    <logger name="org.geosdi.geoplatform.gml.api.parser.base.geometry.linerarring" level="debug"/>
 
 </configuration>

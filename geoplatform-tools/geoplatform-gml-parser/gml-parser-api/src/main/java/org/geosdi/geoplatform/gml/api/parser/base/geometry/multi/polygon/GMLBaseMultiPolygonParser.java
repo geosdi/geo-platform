@@ -55,7 +55,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GMLBaseMultiPolygonParser extends AbstractGMLBaseParser<MultiPolygon, MultiPolygonProperty, org.locationtech.jts.geom.MultiPolygon> {
+public class GMLBaseMultiPolygonParser extends AbstractGMLBaseParser<MultiPolygon, MultiPolygonProperty, org.locationtech.jts.geom.MultiPolygon, org.geojson.MultiPolygon> {
 
     private GMLBasePolygonParser polygonParser;
 
@@ -103,5 +103,25 @@ public class GMLBaseMultiPolygonParser extends AbstractGMLBaseParser<MultiPolygo
             return super.parseGeometry(propertyType.getMultiPolygon());
         }
         throw new ParserException("There is no GML MultiPolygon to Parse.");
+    }
+
+    /**
+     * @param gmlGeometry
+     * @return {@link org.geojson.MultiPolygon}
+     * @throws ParserException
+     */
+    @Override
+    protected org.geojson.MultiPolygon canParseGeometryAsGeoJson(MultiPolygon gmlGeometry) throws ParserException {
+        return null;
+    }
+
+    /**
+     * @param propertyType
+     * @return {@link org.geojson.MultiPolygon}
+     * @throws ParserException
+     */
+    @Override
+    public org.geojson.MultiPolygon parseGeometryAsGeoJson(MultiPolygonProperty propertyType) throws ParserException {
+        return null;
     }
 }

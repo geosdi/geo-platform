@@ -38,6 +38,7 @@ import org.geosdi.geoplatform.connector.wfs.response.QueryDTO;
 import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
 import org.geosdi.geoplatform.xml.filter.v110.FilterType;
 import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,11 +50,13 @@ import static java.io.File.separator;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.connector.server.request.v110.query.responsibility.ILogicOperatorHandler.WFSQueryRestrictionsBuilder.builder;
+import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@FixMethodOrder(value = NAME_ASCENDING)
 public class QueryRestrictionsBuilderTest {
 
     private final static Logger logger = LoggerFactory.getLogger(QueryRestrictionsBuilderTest.class);
@@ -79,28 +82,28 @@ public class QueryRestrictionsBuilderTest {
     }
 
     @Test
-    public void wfsQueryRestrictionsBuilderAndTest() throws Exception {
+    public void a_wfsQueryRestrictionsBuilderAndTest() throws Exception {
         logger.info("##################FILTER_CREATED_AND : {}\n", builder().withFilterType(new FilterType())
                 .withQueryDTO(queryDTOAnd)
                 .build());
     }
 
     @Test
-    public void wfsQueryRestrictionsBuilderOrTest() throws Exception {
+    public void b_wfsQueryRestrictionsBuilderOrTest() throws Exception {
         logger.info("##################FILTER_CREATED_OR : {}\n", builder().withFilterType(new FilterType())
                 .withQueryDTO(queryDTOOr)
                 .build());
     }
 
     @Test
-    public void wfsQueryRestrictionsBuilderNotTest() throws Exception {
+    public void c_wfsQueryRestrictionsBuilderNotTest() throws Exception {
         logger.info("##################FILTER_CREATED_NOT : {}\n", builder().withFilterType(new FilterType())
                 .withQueryDTO(queryDTONot)
                 .build());
     }
 
     @Test
-    public void wfsQueryRestrictionsBuilderNotStringTest() throws Exception {
+    public void d_wfsQueryRestrictionsBuilderNotStringTest() throws Exception {
         logger.info("##################FILTER_CREATED_NOT_FROM_STRING : {}\n", builder().withFilterType(new FilterType())
                 .withQueryDTO(GPJAXBContextBuilder.newInstance()
                         .unmarshal(new StringReader(
@@ -126,7 +129,7 @@ public class QueryRestrictionsBuilderTest {
     }
 
     @Test
-    public void wfsQueryRestrictionsBuilderAndGreatherTest() throws Exception {
+    public void e_wfsQueryRestrictionsBuilderAndGreatherTest() throws Exception {
         logger.info("##################FILTER_CREATED_GREATHER : {}\n", builder().withFilterType(new FilterType())
                 .withQueryDTO(GPJAXBContextBuilder.newInstance()
                         .unmarshal(new StringReader(
@@ -152,7 +155,7 @@ public class QueryRestrictionsBuilderTest {
     }
 
     @Test
-    public void wfsQueryRestrictionsBuilderAndGreatherOrEqualTest() throws Exception {
+    public void f_wfsQueryRestrictionsBuilderAndGreatherOrEqualTest() throws Exception {
         logger.info("##################FILTER_CREATED_GREATHER_OR_EQUAL : {}\n", builder().withFilterType(new FilterType())
                 .withQueryDTO(GPJAXBContextBuilder.newInstance()
                         .unmarshal(new StringReader(
@@ -178,7 +181,7 @@ public class QueryRestrictionsBuilderTest {
     }
 
     @Test
-    public void wfsQueryRestrictionsBuilderOrGreatherTest() throws Exception {
+    public void g_wfsQueryRestrictionsBuilderOrGreatherTest() throws Exception {
         logger.info("##################FILTER_CREATED_GREATHER : {}\n", builder().withFilterType(new FilterType())
                 .withQueryDTO(GPJAXBContextBuilder.newInstance()
                         .unmarshal(new StringReader(
@@ -204,7 +207,7 @@ public class QueryRestrictionsBuilderTest {
     }
 
     @Test
-    public void wfsQueryRestrictionsBuilderNotGreatherTest() throws Exception {
+    public void h_wfsQueryRestrictionsBuilderNotGreatherTest() throws Exception {
         logger.info("##################FILTER_CREATED_NOT_GREATHER : {}\n", builder().withFilterType(new FilterType())
                 .withQueryDTO(GPJAXBContextBuilder.newInstance()
                         .unmarshal(new StringReader(
@@ -230,7 +233,7 @@ public class QueryRestrictionsBuilderTest {
     }
 
     @Test
-    public void wfsQueryRestrictionsBuilderOrGreatherOrEqualTest() throws Exception {
+    public void i_wfsQueryRestrictionsBuilderOrGreatherOrEqualTest() throws Exception {
         logger.info("##################FILTER_CREATED_GREATHER_OR_EQUAL : {}\n", builder().withFilterType(new FilterType())
                 .withQueryDTO(GPJAXBContextBuilder.newInstance()
                         .unmarshal(new StringReader(
@@ -256,7 +259,7 @@ public class QueryRestrictionsBuilderTest {
     }
 
     @Test
-    public void wfsQueryRestrictionsBuilderNotGreatherOrEqualTest() throws Exception {
+    public void l_wfsQueryRestrictionsBuilderNotGreatherOrEqualTest() throws Exception {
         logger.info("##################FILTER_CREATED_NOT_GREATHER_OR_EQUAL : {}\n", builder().withFilterType(new FilterType())
                 .withQueryDTO(GPJAXBContextBuilder.newInstance()
                         .unmarshal(new StringReader(
@@ -282,7 +285,7 @@ public class QueryRestrictionsBuilderTest {
     }
 
     @Test
-    public void wfsQueryRestrictionsBuilderAndLessTest() throws Exception {
+    public void m_wfsQueryRestrictionsBuilderAndLessTest() throws Exception {
         logger.info("##################FILTER_CREATED_LESS : {}\n", builder().withFilterType(new FilterType())
                 .withQueryDTO(GPJAXBContextBuilder.newInstance()
                         .unmarshal(new StringReader(
@@ -308,7 +311,7 @@ public class QueryRestrictionsBuilderTest {
     }
 
     @Test
-    public void wfsQueryRestrictionsBuilderAndLessOrEqualTest() throws Exception {
+    public void n_wfsQueryRestrictionsBuilderAndLessOrEqualTest() throws Exception {
         logger.info("##################FILTER_CREATED_LESS_OR_EQUAL : {}\n", builder().withFilterType(new FilterType())
                 .withQueryDTO(GPJAXBContextBuilder.newInstance()
                         .unmarshal(new StringReader(
@@ -334,7 +337,7 @@ public class QueryRestrictionsBuilderTest {
     }
 
     @Test
-    public void wfsQueryRestrictionsBuilderOrLessTest() throws Exception {
+    public void o_wfsQueryRestrictionsBuilderOrLessTest() throws Exception {
         logger.info("##################FILTER_CREATED_LESS : {}\n", builder().withFilterType(new FilterType())
                 .withQueryDTO(GPJAXBContextBuilder.newInstance()
                         .unmarshal(new StringReader(
@@ -360,7 +363,7 @@ public class QueryRestrictionsBuilderTest {
     }
 
     @Test
-    public void wfsQueryRestrictionsBuilderNotLessTest() throws Exception {
+    public void p_wfsQueryRestrictionsBuilderNotLessTest() throws Exception {
         logger.info("##################FILTER_CREATED_NOT_LESS : {}\n", builder().withFilterType(new FilterType())
                 .withQueryDTO(GPJAXBContextBuilder.newInstance()
                         .unmarshal(new StringReader(
@@ -386,7 +389,7 @@ public class QueryRestrictionsBuilderTest {
     }
 
     @Test
-    public void wfsQueryRestrictionsBuilderOrLessOrEqualTest() throws Exception {
+    public void q_wfsQueryRestrictionsBuilderOrLessOrEqualTest() throws Exception {
         logger.info("##################FILTER_CREATED_LESS_OR_EQUAL : {}\n", builder().withFilterType(new FilterType())
                 .withQueryDTO(GPJAXBContextBuilder.newInstance()
                         .unmarshal(new StringReader(
@@ -412,7 +415,7 @@ public class QueryRestrictionsBuilderTest {
     }
 
     @Test
-    public void wfsQueryRestrictionsBuilderNotLessOrEqualTest() throws Exception {
+    public void r_wfsQueryRestrictionsBuilderNotLessOrEqualTest() throws Exception {
         logger.info("##################FILTER_CREATED_NOT_LESS_OR_EQUAL : {}\n", builder().withFilterType(new FilterType())
                 .withQueryDTO(GPJAXBContextBuilder.newInstance()
                         .unmarshal(new StringReader(
@@ -438,7 +441,7 @@ public class QueryRestrictionsBuilderTest {
     }
 
     @Test
-    public void wfsQueryRestrictionsBuilderAndEqualTest() throws Exception {
+    public void s_wfsQueryRestrictionsBuilderAndEqualTest() throws Exception {
         logger.info("##################FILTER_CREATED_EQUAL : {}\n", builder().withFilterType(new FilterType())
                 .withQueryDTO(GPJAXBContextBuilder.newInstance()
                         .unmarshal(new StringReader(
@@ -464,7 +467,7 @@ public class QueryRestrictionsBuilderTest {
     }
 
     @Test
-    public void wfsQueryRestrictionsBuilderOrEqualTest() throws Exception {
+    public void t_wfsQueryRestrictionsBuilderOrEqualTest() throws Exception {
         logger.info("##################FILTER_CREATED_EQUAL : {}\n", builder().withFilterType(new FilterType())
                 .withQueryDTO(GPJAXBContextBuilder.newInstance()
                         .unmarshal(new StringReader(
@@ -490,7 +493,7 @@ public class QueryRestrictionsBuilderTest {
     }
 
     @Test
-    public void wfsQueryRestrictionsBuilderAndContainsTest() throws Exception {
+    public void u_wfsQueryRestrictionsBuilderAndContainsTest() throws Exception {
         logger.info("##################FILTER_CREATED_CONTAINS : {}\n", builder().withFilterType(new FilterType())
                 .withQueryDTO(GPJAXBContextBuilder.newInstance()
                         .unmarshal(new StringReader(
@@ -516,7 +519,7 @@ public class QueryRestrictionsBuilderTest {
     }
 
     @Test
-    public void wfsQueryRestrictionsBuilderOrContainsTest() throws Exception {
+    public void v_wfsQueryRestrictionsBuilderOrContainsTest() throws Exception {
         logger.info("##################FILTER_CREATED_CONTAINS : {}\n", builder().withFilterType(new FilterType())
                 .withQueryDTO(GPJAXBContextBuilder.newInstance()
                         .unmarshal(new StringReader(
@@ -542,7 +545,7 @@ public class QueryRestrictionsBuilderTest {
     }
 
     @Test
-    public void wfsQueryRestrictionsBuilderNotContainsTest() throws Exception {
+    public void w_wfsQueryRestrictionsBuilderNotContainsTest() throws Exception {
         logger.info("##################FILTER_CREATED_NOT_CONTAINS : {}\n", builder().withFilterType(new FilterType())
                 .withQueryDTO(GPJAXBContextBuilder.newInstance()
                         .unmarshal(new StringReader(
@@ -568,7 +571,7 @@ public class QueryRestrictionsBuilderTest {
     }
 
     @Test
-    public void wfsQueryRestrictionsBuilderAndStartWithTest() throws Exception {
+    public void x_wfsQueryRestrictionsBuilderAndStartWithTest() throws Exception {
         logger.info("##################FILTER_CREATED_START_WITH : {}\n", builder().withFilterType(new FilterType())
                 .withQueryDTO(GPJAXBContextBuilder.newInstance()
                         .unmarshal(new StringReader(
@@ -594,7 +597,7 @@ public class QueryRestrictionsBuilderTest {
     }
 
     @Test
-    public void wfsQueryRestrictionsBuilderOrStartWithTest() throws Exception {
+    public void y_wfsQueryRestrictionsBuilderOrStartWithTest() throws Exception {
         logger.info("##################FILTER_CREATED_START_WITH : {}\n", builder().withFilterType(new FilterType())
                 .withQueryDTO(GPJAXBContextBuilder.newInstance()
                         .unmarshal(new StringReader(
@@ -620,7 +623,7 @@ public class QueryRestrictionsBuilderTest {
     }
 
     @Test
-    public void wfsQueryRestrictionsBuilderNotStartWithTest() throws Exception {
+    public void z_wfsQueryRestrictionsBuilderNotStartWithTest() throws Exception {
         logger.info("##################FILTER_CREATED_NOT_START_WITH : {}\n", builder().withFilterType(new FilterType())
                 .withQueryDTO(GPJAXBContextBuilder.newInstance()
                         .unmarshal(new StringReader(
@@ -642,6 +645,13 @@ public class QueryRestrictionsBuilderTest {
                                         "        </queryRestriction>\n" +
                                         "    </queryRestrictionList>\n" +
                                         "</QueryDTO>"), QueryDTO.class))
+                .build());
+    }
+
+    @Test
+    public void j_wfsQueryRestrictionsBuilderEmptyQueryTest() throws Exception {
+        logger.info("##################FILTER_CREATED : {}\n", builder().withFilterType(new FilterType())
+                .withQueryDTO(new QueryDTO())
                 .build());
     }
 }

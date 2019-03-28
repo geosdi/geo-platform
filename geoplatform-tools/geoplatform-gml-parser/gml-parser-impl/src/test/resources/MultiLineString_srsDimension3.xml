@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<gml:MultiLineString xmlns:ns2="http://www.w3.org/1999/xlink" xmlns:ns4="http://www.w3.org/2001/SMIL20/Language" xmlns:ns3="http://www.w3.org/2001/SMIL20/" xmlns:gml="http://www.opengis.net/gml" srsDimension="3" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+<gml:MultiLineString xmlns:gml="http://www.opengis.net/gml" srsDimension="3"
+                     srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
     <gml:lineStringMember>
         <gml:LineString>
-            <gml:posList>146.468582 -41.241478 -41.241478 146.574768 -41.251186 -41.251186 146.640411 -41.255154 -41.255154 146.766129 -41.332348 -41.332348 146.794189 -41.34417 -41.34417 146.822174 -41.362988 -41.362988 146.863434 -41.380234 -41.380234 146.899521 -41.379452 -41.379452 146.929504 -41.378227 -41.378227 147.008041 -41.356079 -41.356079 147.098343 -41.362919 -41.362919</gml:posList>
+            <gml:posList>146.468582 -41.241478 -41.241478 146.574768 -41.251186 -41.251186 146.640411 -41.255154
+                -41.255154 146.766129 -41.332348 -41.332348 146.794189 -41.34417 -41.34417 146.822174 -41.362988
+                -41.362988 146.863434 -41.380234 -41.380234 146.899521 -41.379452 -41.379452 146.929504 -41.378227
+                -41.378227 147.008041 -41.356079 -41.356079 147.098343 -41.362919 -41.362919
+            </gml:posList>
         </gml:LineString>
     </gml:lineStringMember>
 </gml:MultiLineString>

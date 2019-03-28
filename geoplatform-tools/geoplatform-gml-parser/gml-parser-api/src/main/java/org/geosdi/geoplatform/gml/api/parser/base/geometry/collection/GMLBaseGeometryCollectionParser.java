@@ -46,12 +46,12 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * <p>This Class permits to parse this kinds of GML Geometries :
- * <ul>
- * <li>{@link MultiPoint}</li>
- * <li>{@link MultiLineString}</li>
- * <li>{@link MultiPolygon}</li>
- * <li>{@link MultiGeometry}</li>
- * </ul>
+ *      <ul>
+ *          <li>{@link MultiPoint}</li>
+ *          <li>{@link MultiLineString}</li>
+ *          <li>{@link MultiPolygon}</li>
+ *          <li>{@link MultiGeometry}</li>
+ *      </ul>
  * </p>
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

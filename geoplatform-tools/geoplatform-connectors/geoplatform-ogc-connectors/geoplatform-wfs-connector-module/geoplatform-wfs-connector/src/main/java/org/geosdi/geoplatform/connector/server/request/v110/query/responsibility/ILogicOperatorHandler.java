@@ -44,6 +44,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.io.StringWriter;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -84,7 +85,7 @@ public interface ILogicOperatorHandler {
          * @param theFilterType
          * @return the Builder
          */
-        IWFSQueryRestrictionsBuilder withFilterType(FilterType theFilterType);
+        IWFSQueryRestrictionsBuilder withFilterType(@Nullable FilterType theFilterType);
 
         /**
          * @return {@link FilterType}
@@ -136,7 +137,7 @@ public interface ILogicOperatorHandler {
          * @return the Builder
          */
         @Override
-        public IWFSQueryRestrictionsBuilder withFilterType(FilterType theFilterType) {
+        public IWFSQueryRestrictionsBuilder withFilterType(@Nullable FilterType theFilterType) {
             this.filterType = theFilterType;
             return self();
         }

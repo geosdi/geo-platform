@@ -54,7 +54,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GMLBaseMultiSurfaceParser extends AbstractGMLBaseParser<MultiSurface, MultiSurfaceProperty, MultiPolygon> {
+public class GMLBaseMultiSurfaceParser extends AbstractGMLBaseParser<MultiSurface, MultiSurfaceProperty, MultiPolygon, org.geojson.MultiPolygon> {
 
     private final GMLBasePolygonParser polygonParser;
     private final SurfaceMemberBuilder surfaceMember = new SurfaceMember();
@@ -97,6 +97,26 @@ public class GMLBaseMultiSurfaceParser extends AbstractGMLBaseParser<MultiSurfac
             return super.parseGeometry(propertyType.getMultiSurface());
         }
         throw new ParserException("There is no GML MultiSurface Geometry to parse.");
+    }
+
+    /**
+     * @param gmlGeometry
+     * @return {@link org.geojson.MultiPolygon}
+     * @throws ParserException
+     */
+    @Override
+    protected org.geojson.MultiPolygon canParseGeometryAsGeoJson(MultiSurface gmlGeometry) throws ParserException {
+        return null;
+    }
+
+    /**
+     * @param propertyType
+     * @return {@link org.geojson.MultiPolygon}
+     * @throws ParserException
+     */
+    @Override
+    public org.geojson.MultiPolygon parseGeometryAsGeoJson(MultiSurfaceProperty propertyType) throws ParserException {
+        return null;
     }
 
     protected interface SurfaceMemberBuilder {

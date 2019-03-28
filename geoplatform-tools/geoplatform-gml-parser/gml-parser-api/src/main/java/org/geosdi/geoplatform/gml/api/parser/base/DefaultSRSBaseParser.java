@@ -34,6 +34,8 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.base;
 
+import org.geojson.Crs;
+import org.geojson.jackson.CrsType;
 import org.geosdi.geoplatform.gml.api.AbstractGeometry;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 import org.locationtech.jts.geom.Geometry;
@@ -43,6 +45,8 @@ import org.slf4j.LoggerFactory;
 import javax.annotation.Nonnull;
 import java.text.MessageFormat;
 import java.text.ParseException;
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static javax.annotation.meta.When.NEVER;
@@ -72,10 +76,10 @@ public class DefaultSRSBaseParser extends AbstractGMLBaseSRSParser {
         checkNotNull(gmlGeometry, "The Gml Geometry must not be null");
         checkNotNull(jtsGeometry, "The JTS Geometry must not be null");
         String srsName = gmlGeometry.getSrsName();
-        if (srsName != null) {
+        if ((srsName != null) && !(srsName.trim().isEmpty())) {
             for (String pattern : patterns) {
                 try {
-                    final MessageFormat format = new MessageFormat(pattern);
+                    MessageFormat format = new MessageFormat(pattern);
                     Object[] codearray = format.parse(srsName);
                     if (codearray.length > 0) {
                         jtsGeometry.setSRID(((Number) codearray[0]).intValue());
@@ -86,18 +90,41 @@ public class DefaultSRSBaseParser extends AbstractGMLBaseSRSParser {
                     }
                 } catch (ParseException e) {
                     //only trace the ParserException and continues the cycle
-                    logger.trace("DefaultSRSBaseParser - Parser "
-                            + "Exception @@@@@@@@@@@@@@@@@ " + e);
+                    logger.trace("DefaultSRSBaseParser - Parser Exception @@@@@@@@@@@@@@@@@ {}\n", e);
                 }
             }
+        }
+    }
 
-            if (jtsGeometry.getUserData() != null) {
-                throw new ParserException(MessageFormat.format(
-                        "Could not parse SRS name [{0}].",
-                        srsName));
-            } else {
-                jtsGeometry.setUserData(srsName);
+    /**
+     * @param gmlGeometry
+     * @return {@link Crs}
+     * @throws ParserException
+     */
+    @Override
+    public Crs parseSRS(@Nonnull(when = NEVER) AbstractGeometry gmlGeometry) throws ParserException {
+        checkNotNull(gmlGeometry, "The Gml Geometry must not be null");
+        String srsName = gmlGeometry.getSrsName();
+        if ((srsName != null) && !(srsName.trim().isEmpty())) {
+            for (String pattern : patterns) {
+                try {
+                    MessageFormat format = new MessageFormat(pattern);
+                    Object[] codearray = format.parse(srsName);
+                    if (codearray.length > 0) {
+                        int srsId = ((Number) codearray[0]).intValue();
+                        Crs crs = new Crs();
+                        crs.setType(CrsType.name);
+                        Map<String, Object> properties = new HashMap<>();
+                        properties.put("name", "EPSG:" + ((srsId != 0) ? srsId : 4326));
+                        crs.setProperties(properties);
+                        return crs;
+                    }
+                } catch (ParseException e) {
+                    //only trace the ParserException and continues the cycle
+                    logger.trace("DefaultSRSBaseParser - Parser Exception @@@@@@@@@@@@@@@@@ " + e);
+                }
             }
         }
+        return null;
     }
 }

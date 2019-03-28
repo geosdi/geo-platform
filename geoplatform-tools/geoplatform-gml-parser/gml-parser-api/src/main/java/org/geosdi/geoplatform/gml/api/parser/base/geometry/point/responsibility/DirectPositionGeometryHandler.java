@@ -70,4 +70,22 @@ public class DirectPositionGeometryHandler extends BasePointGeometryHandler {
             return super.forwardBuildGeometry(geometryFactory, gmlGeometry, parser);
         }
     }
+
+    /**
+     * @param gmlGeometry
+     * @param parser
+     * @return {@link org.geojson.Point}
+     * @throws ParserException
+     */
+    @Override
+    public org.geojson.Point buildGeometryAsGeoJson(org.geosdi.geoplatform.gml.api.Point gmlGeometry, CoordinateBaseParser parser) throws ParserException {
+        if (gmlGeometry.isSetPos()) {
+            DirectPosition directPosition = gmlGeometry.getPos();
+            if ((gmlGeometry.isSetSrsDimension()) && !(directPosition.isSetSrsDimension()))
+                directPosition.setSrsDimension(gmlGeometry.getSrsDimension());
+            return new org.geojson.Point(parser.parseCoordinateAsGeoJson(directPosition));
+        } else {
+            return super.forwardBuildGeometryAsGeoJson(gmlGeometry, parser);
+        }
+    }
 }

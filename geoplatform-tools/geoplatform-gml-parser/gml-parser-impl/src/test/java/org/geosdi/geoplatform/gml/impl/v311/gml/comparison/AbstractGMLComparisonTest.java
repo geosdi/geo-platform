@@ -1,37 +1,36 @@
 /**
- *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
- *
- *   Copyright (C) 2008-2019 geoSDI Group (CNR IMAA - Potenza - ITALY).
- *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
- *
- *   ====================================================================
- *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
- *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * geo-platform
+ * Rich webgis framework
+ * http://geo-platform.org
+ * ====================================================================
+ * <p>
+ * Copyright (C) 2008-2019 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * <p>
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version. This program is distributed in the
+ * hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License
+ * for more details. You should have received a copy of the GNU General
+ * Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * <p>
+ * ====================================================================
+ * <p>
+ * Linking this library statically or dynamically with other modules is
+ * making a combined work based on this library. Thus, the terms and
+ * conditions of the GNU General Public License cover the whole combination.
+ * <p>
+ * As a special exception, the copyright holders of this library give you permission
+ * to link this library with independent modules to produce an executable, regardless
+ * of the license terms of these independent modules, and to copy and distribute
+ * the resulting executable under terms of your choice, provided that you also meet,
+ * for each linked independent module, the terms and conditions of the license of
+ * that module. An independent module is a module which is not derived from or
+ * based on this library. If you modify this library, you may extend this exception
+ * to your version of the library, but you are not obligated to do so. If you do not
+ * wish to do so, delete this exception statement from your version.
  */
 package org.geosdi.geoplatform.gml.impl.v311.gml.comparison;
 
@@ -49,6 +48,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Stream;
+
+import static java.io.File.separator;
+import static java.util.stream.Collectors.joining;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -108,36 +111,19 @@ public abstract class AbstractGMLComparisonTest {
 
     @BeforeClass
     public static void loadFile() throws Exception {
-        String pointfileString = new File(".").getCanonicalPath() + File.separator
-                + "src/test/resources/Point.xml";
+        String basePath = Stream.of(new File(".").getCanonicalPath(), "src", "test", "resources")
+                .collect(joining(separator, "", separator));
+        String pointfileString = basePath.concat("Point.xml");
         pointFile = new File(pointfileString);
-        String lineStringfileString = new File(".").getCanonicalPath() + File.separator
-                + "src/test/resources/LineString.xml";
-        lineStringFile = new File(lineStringfileString);
-        String linearRingfileString = new File(".").getCanonicalPath() + File.separator
-                + "src/test/resources/LinearRing.xml";
-        linearRingFile = new File(linearRingfileString);
-        String polygonfileString = new File(".").getCanonicalPath() + File.separator
-                + "src/test/resources/Polygon.xml";
-        polygonFile = new File(polygonfileString);
-        String multiPointfileString = new File(".").getCanonicalPath() + File.separator
-                + "src/test/resources/MultiPoint.xml";
-        multiPointFile = new File(multiPointfileString);
-        String multiLineStringfileString = new File(".").getCanonicalPath() + File.separator
-                + "src/test/resources/MultiLineString.xml";
-        multiLineStringFile = new File(multiLineStringfileString);
-        String multiPolygonfileString = new File(".").getCanonicalPath() + File.separator
-                + "src/test/resources/MultiPolygon.xml";
-        multiPolygonFile = new File(multiPolygonfileString);
-        String multiCurvefileString = new File(".").getCanonicalPath() + File.separator
-                + "src/test/resources/MultiCurve.xml";
-        multiCurveFile = new File(multiCurvefileString);
-        String multiSurfacefileString = new File(".").getCanonicalPath() + File.separator
-                + "src/test/resources/MultiSurface.xml";
-        multiSurfaceFile = new File(multiSurfacefileString);
-        String geometryCollectionfileString = new File(".").getCanonicalPath() + File.separator
-                + "src/test/resources/GeometryCollection.xml";
-        geometryCollectionFile = new File(geometryCollectionfileString);
+        lineStringFile = new File(basePath.concat("LineString.xml"));
+        linearRingFile = new File(basePath.concat("LinearRing.xml"));
+        polygonFile = new File(basePath.concat("Polygon.xml"));
+        multiPointFile = new File(basePath.concat("MultiPoint.xml"));
+        multiLineStringFile = new File(basePath.concat("MultiLineString.xml"));
+        multiPolygonFile = new File(basePath.concat("MultiPolygon.xml"));
+        multiCurveFile = new File(basePath.concat("MultiCurve.xml"));
+        multiSurfaceFile = new File(basePath.concat("MultiSurface.xml"));
+        geometryCollectionFile = new File(basePath.concat("GeometryCollection.xml"));
     }
 
     protected int defineNumThreads() {
@@ -173,7 +159,7 @@ public abstract class AbstractGMLComparisonTest {
     }
 
     private void fillTasksList(GMLJAXBContext jaxbContext, List<GMLPointSextanteTask> tasks,
-                               GMLTaskType gmlTaskType, int numThreads) {
+            GMLTaskType gmlTaskType, int numThreads) {
         switch (gmlTaskType) {
             case POINT_SIMPLE:
                 for (int i = 0; i < numThreads; i++)

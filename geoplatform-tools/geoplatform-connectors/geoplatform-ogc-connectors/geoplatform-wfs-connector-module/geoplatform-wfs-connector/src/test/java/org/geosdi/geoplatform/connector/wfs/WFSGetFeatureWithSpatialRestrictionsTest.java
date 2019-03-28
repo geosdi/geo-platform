@@ -10,6 +10,7 @@ import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 
+import javax.xml.namespace.QName;
 import java.io.StringReader;
 import java.util.Arrays;
 
@@ -186,5 +187,17 @@ public class WFSGetFeatureWithSpatialRestrictionsTest extends WFSTestConfigurato
         request.setSRS("EPSG:4326");
         logger.info("######################\n{}\n", request.showRequestAsString());
         logger.info("#############################e_stateQueryRestrictionNotInBboxTest#ResponseAsString {}\n", request.formatResponseAsString(2));
+    }
+
+    @Test
+    public void f_queryWithBboxTest() throws Exception {
+        WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
+        request.setResultType(ResultTypeType.RESULTS.value());
+        request.setTypeName(new QName("topp:admin_shp_com2016_wgs84_g"));
+        request.setBBox(new BBox(16.13123416900635, 40.83818500873241, 16.138143539428714, 40.84040902994519));
+        request.setSRS("EPSG:4326");
+        logger.info("######################\n{}\n", request.showRequestAsString());
+        FeatureCollectionType response = request.getResponse();
+        logger.info("########################FEATURES : {}\n", response.getNumberOfFeatures());
     }
 }

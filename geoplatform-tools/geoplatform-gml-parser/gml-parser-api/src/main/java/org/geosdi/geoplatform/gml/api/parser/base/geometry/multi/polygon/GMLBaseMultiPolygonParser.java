@@ -87,7 +87,9 @@ public class GMLBaseMultiPolygonParser extends AbstractGMLBaseParser<MultiPolygo
                 polygonProperty.getPolygon().setSrsDimension(gmlGeometry.getSrsDimension());
             polygons.add(polygonParser.parseGeometry(polygonProperty));
         }
-        return geometryFactory.createMultiPolygon(polygons.toArray(new Polygon[polygons.size()]));
+        org.locationtech.jts.geom.MultiPolygon multiPolygon = this.geometryFactory.createMultiPolygon(polygons.toArray(new Polygon[polygons.size()]));
+        this.srsParser.parseSRS(gmlGeometry, multiPolygon);
+        return multiPolygon;
     }
 
     /**
@@ -112,7 +114,16 @@ public class GMLBaseMultiPolygonParser extends AbstractGMLBaseParser<MultiPolygo
      */
     @Override
     protected org.geojson.MultiPolygon canParseGeometryAsGeoJson(MultiPolygon gmlGeometry) throws ParserException {
-        return null;
+        checkArgument(gmlGeometry.isSetPolygonMember(), "The Polygon Member Property must not be null.");
+        org.geojson.MultiPolygon multiPolygon = new org.geojson.MultiPolygon();
+        for (PolygonProperty polygonProperty : gmlGeometry.getPolygonMember()) {
+            if ((gmlGeometry.isSetSrsDimension()) && (polygonProperty.isSetPolygon())
+                    && !(polygonProperty.getPolygon().isSetSrsDimension()))
+                polygonProperty.getPolygon().setSrsDimension(gmlGeometry.getSrsDimension());
+            multiPolygon.add(polygonParser.parseGeometryAsGeoJson(polygonProperty));
+        }
+        multiPolygon.setCrs(this.srsParser.parseSRS(gmlGeometry));
+        return multiPolygon;
     }
 
     /**
@@ -122,6 +133,10 @@ public class GMLBaseMultiPolygonParser extends AbstractGMLBaseParser<MultiPolygo
      */
     @Override
     public org.geojson.MultiPolygon parseGeometryAsGeoJson(MultiPolygonProperty propertyType) throws ParserException {
-        return null;
+        checkNotNull(propertyType, "The MultiPolygonProperty Type must not be null.");
+        if (propertyType.isSetMultiPolygon()) {
+            return super.parseGeometryAsGeoJson(propertyType.getMultiPolygon());
+        }
+        throw new ParserException("There is no GML MultiPolygon to Parse.");
     }
 }

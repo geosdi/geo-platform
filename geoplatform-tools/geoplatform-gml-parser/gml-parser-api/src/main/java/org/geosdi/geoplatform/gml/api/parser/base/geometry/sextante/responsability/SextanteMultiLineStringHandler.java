@@ -53,7 +53,7 @@ class SextanteMultiLineStringHandler extends SextanteGeometryHandler {
     private GMLBaseMultiLineStringParser multiLineStringParser = GMLBaseParametersRepo.getDefaultMultiLineStringParser();
 
     SextanteMultiLineStringHandler() {
-        super.setSuccessor(new SextanteMultiCurveHandler());
+        super.setSuccessor(new SextanteCurveHandler());
     }
 
     /**

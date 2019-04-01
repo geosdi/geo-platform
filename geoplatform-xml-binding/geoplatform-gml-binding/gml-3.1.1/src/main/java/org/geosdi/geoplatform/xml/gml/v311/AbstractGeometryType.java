@@ -41,20 +41,16 @@
 //
 package org.geosdi.geoplatform.xml.gml.v311;
 
-import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
 import org.geosdi.geoplatform.gml.api.AbstractGeometry;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+
+import javax.xml.bind.annotation.*;
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * All geometry elements are derived directly or indirectly from this abstract
@@ -92,8 +88,7 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
     AbstractGeometricPrimitiveType.class,
     AbstractGeometricAggregateType.class
 })
-public abstract class AbstractGeometryType extends AbstractGMLType
-        implements ToString, AbstractGeometry {
+public abstract class AbstractGeometryType extends AbstractGMLType implements ToString, AbstractGeometry {
 
     @XmlAttribute(name = "gid")
     protected String gid;

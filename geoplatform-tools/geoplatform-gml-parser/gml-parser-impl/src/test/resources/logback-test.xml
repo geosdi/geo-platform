@@ -24,5 +24,6 @@
     <logger name="org.geosdi.geoplatform.gml.api.parser.base.geometry.polygon" level="debug"/>
     <logger name="org.geosdi.geoplatform.gml.api.parser.base.geometry.line" level="debug"/>
     <logger name="org.geosdi.geoplatform.gml.api.parser.base.geometry.linerarring" level="debug"/>
+    <logger name="org.geosdi.geoplatform.gml.impl.v311.geojson.theories.GMLTheoriesGeoJsonSexanteParserTest" level="debug"/>
 
 </configuration>

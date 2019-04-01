@@ -458,15 +458,12 @@
         </profile>
 
         <!-- =============================================================== -->
-        <!-- ================== GEOPLATFORM LAYER BUILDER ================== -->
+        <!-- =============== GEOPLATFORM GEOCDING RS SUPPORT =============== -->
         <!-- =============================================================== -->
         <profile>
             <id>geocoding</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
-                <!--property>
-                    <name>full</name>
-                </property-->
             </activation>
             <dependencies>
                 <dependency>

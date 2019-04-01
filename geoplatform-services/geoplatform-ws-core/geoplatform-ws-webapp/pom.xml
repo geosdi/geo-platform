@@ -464,9 +464,9 @@
             <id>geocoding</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
-                <property>
+                <!--property>
                     <name>full</name>
-                </property>
+                </property-->
             </activation>
             <dependencies>
                 <dependency>

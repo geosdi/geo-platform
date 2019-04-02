@@ -5,7 +5,6 @@ import org.geosdi.geoplatform.gml.api.jaxb.context.GMLJAXBContext;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.sextante.GMLBaseSextanteParser;
 import org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRepo;
 import org.geosdi.geoplatform.gml.impl.v311.jaxb.context.factory.GMLContextFactoryV311;
-import org.geosdi.geoplatform.gml.impl.v311.jaxb.context.factory.GMLContextType;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.xml.gml.v311.AbstractGeometryType;
 import org.junit.BeforeClass;
@@ -23,6 +22,7 @@ import java.io.IOException;
 import static java.io.File.separator;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
+import static org.geosdi.geoplatform.gml.impl.v311.jaxb.context.factory.GMLContextType.SIMPLE;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 
 /**
@@ -34,7 +34,7 @@ public class GMLTheoriesGeoJsonSexanteParserTest {
 
     private static final Logger logger = LoggerFactory.getLogger(GMLTheoriesGeoJsonSexanteParserTest.class);
     //
-    private static final GMLJAXBContext gmlJAXBContext = GMLContextFactoryV311.createJAXBContext(GMLContextType.SIMPLE);
+    private static final GMLJAXBContext gmlJAXBContext = GMLContextFactoryV311.createJAXBContext(SIMPLE);
     private static final ObjectMapper mapper = new GPJacksonSupport(UNWRAP_ROOT_VALUE_DISABLE,
             FAIL_ON_UNKNOW_PROPERTIES_DISABLE, ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE, WRAP_ROOT_VALUE_DISABLE,
             INDENT_OUTPUT_ENABLE).getDefaultMapper();
@@ -49,15 +49,14 @@ public class GMLTheoriesGeoJsonSexanteParserTest {
 
     @DataPoints
     public static String[] data() {
-        return new String[]{
-                "MultiCurve.xml", "Point.xml", "GeometryCollection.xml", "LineString.xml",
-                "LinearRing.xml", "MultiLineString.xml", "MultiPoint.xml", "MultiPolygon.xml",
-                "Polygon.xml", "Polygon_1.xml", "MultiSurface.xml", "MultiLineString_srsDimension3.xml", "Curve.xml"
+        return new String[]{"MultiCurve.xml", "Point.xml", "GeometryCollection.xml", "LineString.xml", "LinearRing.xml",
+                "MultiLineString.xml", "MultiPoint.xml", "MultiPolygon.xml", "Polygon.xml", "Polygon_1.xml",
+                "MultiSurface.xml", "MultiLineString_srsDimension3.xml", "Curve.xml"
         };
     }
 
     @Theory
-    public void testGMLGeometry(String file) throws Exception {
+    public void geoJsonGeometryParserTest(String file) throws Exception {
         JAXBElement<AbstractGeometryType> jaxbElement = (JAXBElement<AbstractGeometryType>) gmlJAXBContext.acquireDefaultUnmarshaller().unmarshal(new File(dirFiles.concat(file)));
         AbstractGeometryType abstractGeometryType = jaxbElement.getValue();
         logger.debug("#######################################GML Geometry : {} -- GeoJson Geometry \n\n{}\n\n for File : {}\n",

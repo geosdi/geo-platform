@@ -507,6 +507,9 @@
             <id>layerBuilder</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
+                <property>
+                    <name>full</name>
+                </property>
             </activation>
             <dependencies>
                 <dependency>
@@ -527,6 +530,9 @@
             <id>geocoding</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
+                <property>
+                    <name>full</name>
+                </property>
             </activation>
             <dependencies>
                 <dependency>

@@ -48,6 +48,7 @@ import org.geosdi.geoplatform.stax.reader.AbstractStaxStreamReader;
 import org.geosdi.geoplatform.xml.gml.v311.AbstractGeometryType;
 import org.locationtech.jts.io.WKTWriter;
 
+import javax.annotation.Nonnull;
 import javax.xml.bind.DatatypeConverter;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.events.XMLEvent;
@@ -59,6 +60,7 @@ import java.util.Map;
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - <giuseppe.lascaleia@geosdi.org>
@@ -75,15 +77,14 @@ public class WFSGetFeatureStaxReader extends AbstractStaxStreamReader<FeatureCol
     private static final GPJAXBContextBuilder jaxbContextBuilder;
     //
     private final LayerSchemaDTO layerSchema;
-    //
     private final GMLBaseSextanteParser sextanteParser = GMLBaseParametersRepo.getDefaultSextanteParser();
 
     /**
-     * @param layerSchema
+     * @param theLayerSchema
      */
-    public WFSGetFeatureStaxReader(LayerSchemaDTO layerSchema) {
-        checkArgument(layerSchema != null, "The LayerSchema must not be null.");
-        this.layerSchema = layerSchema;
+    public WFSGetFeatureStaxReader(@Nonnull(when = NEVER) LayerSchemaDTO theLayerSchema) {
+        checkArgument(theLayerSchema != null, "The LayerSchema must not be null.");
+        this.layerSchema = theLayerSchema;
     }
 
     /**

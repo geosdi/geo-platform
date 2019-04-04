@@ -183,9 +183,9 @@ public abstract class AbstractStaxStreamReader<T> implements GeoPlatformStaxRead
     }
 
     /**
-     * @param o
+     * @param object
      * @return {@link T}
      * @throws Exception
      */
-    public abstract T read(@Nonnull(when = NEVER) Object o) throws Exception;
+    public abstract T read(@Nonnull(when = NEVER) Object object) throws Exception;
 }

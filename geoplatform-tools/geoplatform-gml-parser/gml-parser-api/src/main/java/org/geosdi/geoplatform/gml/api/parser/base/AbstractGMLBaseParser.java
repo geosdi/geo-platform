@@ -47,6 +47,7 @@ import org.slf4j.LoggerFactory;
 import javax.annotation.Nonnull;
 import javax.annotation.meta.When;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
@@ -78,6 +79,7 @@ public abstract class AbstractGMLBaseParser<A extends AbstractGeometry, P extend
     @Override
     public G parseGeometry(A gmlGeometry) throws ParserException {
         G geometry = canParseGeometry(gmlGeometry);
+        checkArgument(geometry != null, "The Parameter JTS Geometry must not be null.");
         this.srsParser.parseSRS(gmlGeometry, geometry);
         return geometry;
     }

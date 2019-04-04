@@ -46,13 +46,13 @@ import javax.xml.stream.events.XMLEvent;
 public class GoogleGeocodingStaxReader extends AbstractStaxStreamReader<StringBuilder> {
 
     /**
-     * @param o
+     * @param object
      * @return {@link StringBuilder}
      * @throws Exception
      */
     @Override
-    public StringBuilder read(Object o) throws Exception {
-        XMLStreamReader reader = super.acquireReader(o);
+    public StringBuilder read(Object object) throws Exception {
+        XMLStreamReader reader = super.acquireReader(object);
         StringBuilder builder = new StringBuilder();
         while (reader.hasNext()) {
             int evenType = reader.getEventType();

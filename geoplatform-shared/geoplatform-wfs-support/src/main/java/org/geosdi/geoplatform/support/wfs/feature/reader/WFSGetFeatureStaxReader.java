@@ -36,15 +36,10 @@ package org.geosdi.geoplatform.support.wfs.feature.reader;
 
 import org.geosdi.geoplatform.connector.wfs.response.FeatureCollectionDTO;
 import org.geosdi.geoplatform.connector.wfs.response.FeatureDTO;
-import org.geosdi.geoplatform.connector.wfs.response.GeometryAttributeDTO;
 import org.geosdi.geoplatform.connector.wfs.response.LayerSchemaDTO;
 import org.geosdi.geoplatform.connector.wfs.response.collection.FeatureAttributesMap;
 import org.geosdi.geoplatform.gml.api.AbstractGeometry;
-import org.geosdi.geoplatform.gml.api.parser.base.geometry.sextante.GMLBaseSextanteParser;
-import org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRepo;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
-import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
-import org.geosdi.geoplatform.stax.reader.AbstractStaxStreamReader;
 import org.geosdi.geoplatform.xml.gml.v311.AbstractGeometryType;
 import org.locationtech.jts.io.WKTWriter;
 
@@ -67,73 +62,56 @@ import static javax.annotation.meta.When.NEVER;
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  * @TODO Try to have this class @ThreadSafe
  */
-public class WFSGetFeatureStaxReader extends AbstractStaxStreamReader<FeatureCollectionDTO> {
-
-    static {
-        jaxbContextBuilder = GPJAXBContextBuilder.newInstance();
-    }
-
-    //
-    private static final GPJAXBContextBuilder jaxbContextBuilder;
-    //
-    private final LayerSchemaDTO layerSchema;
-    private final GMLBaseSextanteParser sextanteParser = GMLBaseParametersRepo.getDefaultSextanteParser();
+public class WFSGetFeatureStaxReader extends WFSBaseGetFeatureStaxReader<FeatureDTO, String, FeatureCollectionDTO> {
 
     /**
      * @param theLayerSchema
      */
     public WFSGetFeatureStaxReader(@Nonnull(when = NEVER) LayerSchemaDTO theLayerSchema) {
-        checkArgument(theLayerSchema != null, "The LayerSchema must not be null.");
-        this.layerSchema = theLayerSchema;
+        super(theLayerSchema);
     }
 
     /**
-     * @param o
+     * @param reader
+     * @param geometryName
+     * @param attributeNames
      * @return {@link FeatureCollectionDTO}
      * @throws Exception
      */
     @Override
-    public FeatureCollectionDTO read(Object o) throws Exception {
-        XMLStreamReader reader = super.acquireReader(o);
+    protected FeatureCollectionDTO internalRead(XMLStreamReader reader, String geometryName, List<String> attributeNames) throws Exception {
         String typeName = layerSchema.getTypeName();
-        if ((typeName == null) || !(typeName.contains(":"))) {
-            throw new IllegalStateException("Type Name must not be null or must be WORKSPACE:LAYER.");
-        }
+        checkArgument((typeName != null) && (typeName.contains(":")), "Type Name must not be null or must be WORKSPACE:LAYER.");
         String prefix = typeName.substring(0, typeName.indexOf(":"));
         String name = typeName.substring(typeName.indexOf(":") + 1);
+        checkArgument((prefix != null) && !(prefix.trim().isEmpty()), "The Parameter Prefix must not be null or an empty string.");
+        checkArgument((name != null) && !(name.trim().isEmpty()), "The Parameter Name must not be null or an empty string.");
         logger.trace("\n@@@@@@ Read feature {}:{} @@@@@@", prefix, name);
-
-        GeometryAttributeDTO geometryAtt = layerSchema.getGeometry();
-        String geometryName = geometryAtt.getName();
-        if ((geometryAtt == null) || (geometryName == null) || (geometryName.isEmpty())) {
-            throw new IllegalStateException("The Geometry Attribute must not be null or " +
-                    "Geometry Name must not be null or an Empty String.");
-        }
-        List<String> attributeNames = layerSchema.getAttributeNames();
         FeatureCollectionDTO fc = new FeatureCollectionDTO();
         FeatureDTO feature = null;
-        while (reader.hasNext()) {
-            int evenType = reader.getEventType();
-            if (evenType == XMLEvent.START_ELEMENT) {
-                if (super.isTagName("wfs", "FeatureCollection")) {
-                    this.readInfo(fc);
-                } else if (super.isTagName(prefix, name)) {
-                    feature = this.readFID();
-                    fc.addFeature(feature);
-                } else if (super.isTagName(prefix, geometryName)) {
-                    String geometryWKT = this.readGeometry();
-                    feature.setGeometry(geometryWKT);
-
-                    super.goToEndTag(geometryName);
-                    this.readAttributes(feature, name, attributeNames, TRUE, prefix, geometryName);
-                } else if ((attributeNames != null) && (attributeNames.contains(reader.getLocalName()))) {
-                    this.readAttributes(feature, name, attributeNames, FALSE, prefix, geometryName);
+        try {
+            while (reader.hasNext()) {
+                int evenType = reader.getEventType();
+                if (evenType == XMLEvent.START_ELEMENT) {
+                    if (super.isTagName("wfs", "FeatureCollection")) {
+                        this.readInfo(fc);
+                    } else if (super.isTagName(prefix, name)) {
+                        feature = this.readFID();
+                        fc.addFeature(feature);
+                    } else if (super.isTagName(prefix, geometryName)) {
+                        feature.setGeometry(this.readGeometry());
+                        super.goToEndTag(geometryName);
+                        this.readAttributes(feature, name, attributeNames, TRUE, prefix, geometryName);
+                    } else if ((attributeNames != null) && (attributeNames.contains(reader.getLocalName()))) {
+                        this.readAttributes(feature, name, attributeNames, FALSE, prefix, geometryName);
+                    }
                 }
+                reader.next();
             }
-            reader.next();
+            return fc;
+        } finally {
+            super.dispose();
         }
-        super.dispose();
-        return fc;
     }
 
     /**
@@ -141,7 +119,7 @@ public class WFSGetFeatureStaxReader extends AbstractStaxStreamReader<FeatureCol
      * @return {@link FeatureCollectionDTO}
      * @throws Exception
      */
-    private FeatureCollectionDTO readInfo(FeatureCollectionDTO fc) throws Exception {
+    protected FeatureCollectionDTO readInfo(FeatureCollectionDTO fc) throws Exception {
         String numberOfFeatures = xmlStreamReader().getAttributeValue(null, "numberOfFeatures");
         fc.setNumberOfFeatures(Integer.parseInt(numberOfFeatures));
         String timeStamp = xmlStreamReader().getAttributeValue(null, "timeStamp");
@@ -154,7 +132,7 @@ public class WFSGetFeatureStaxReader extends AbstractStaxStreamReader<FeatureCol
      * @return {@link FeatureDTO}
      * @throws Exception
      */
-    private FeatureDTO readFID() throws Exception {
+    protected FeatureDTO readFID() throws Exception {
         String featureID = xmlStreamReader().getAttributeValue("http://www.opengis.net/gml", "id");
         logger.trace("@@@@@@@@@@@@@@@ FEATURE_ID: {} @@@", featureID);
         return new FeatureDTO(featureID);
@@ -164,7 +142,7 @@ public class WFSGetFeatureStaxReader extends AbstractStaxStreamReader<FeatureCol
      * @return {@link String}
      * @throws Exception
      */
-    private String readGeometry() throws Exception {
+    protected String readGeometry() throws Exception {
         String geometryWKT = null;
 
         int eventType = xmlStreamReader().nextTag();
@@ -195,7 +173,7 @@ public class WFSGetFeatureStaxReader extends AbstractStaxStreamReader<FeatureCol
      * @return {@link FeatureAttributesMap}
      * @throws Exception
      */
-    private void readAttributes(FeatureDTO feature, String featureName, List<String> attributeNames, Boolean nextTag,
+    protected void readAttributes(FeatureDTO feature, String featureName, List<String> attributeNames, Boolean nextTag,
             String prefix, String geometryName) throws Exception {
         checkArgument(feature != null, "The Parameter Feature must not be null.");
 
@@ -220,8 +198,7 @@ public class WFSGetFeatureStaxReader extends AbstractStaxStreamReader<FeatureCol
 
             if (eventType == XMLEvent.START_ELEMENT) {
                 if (super.isTagName(prefix, geometryName)) {
-                    String geometryWKT = this.readGeometry();
-                    feature.setGeometry(geometryWKT);
+                    feature.setGeometry(this.readGeometry());
                     super.goToEndTag(geometryName);
                 } else {
                     String localName = xmlStreamReader().getLocalName();

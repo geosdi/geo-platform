@@ -33,9 +33,14 @@ import static javax.annotation.meta.When.NEVER;
  */
 public abstract class WMSGetFeatureInfoStaxReader extends AbstractStaxStreamReader<FeatureCollection> {
 
+    protected static final String WFS_PREFIX = "wfs";
+    protected static final String FEATURE_COLLECTION_LOCAL_NAME = "FeatureCollection";
+    protected static final String GML_PREFIX = "gml";
+    protected static final String FEATURE_MEMBER_LOCAL_NAME = "featureMember";
+    private static final String FID_LOCAL_NAME = "fid";
     private static final String SCHEMA_LOCATION_NAMESPACE_URI = "http://www.w3.org/2001/XMLSchema-instance";
     private static final String SCHEMA_LOCATION_KEY = "schemaLocation";
-    public static final String TYPE_NAME_KEY = "typeName=";
+    private static final String TYPE_NAME_KEY = "typeName=";
     private static final String TYPES_NAME_SEPARATOR = ",";
     private static final String TYPE_NAME_SEPARATOR = ":";
     private static final GPWMSGml2GeoJsonParser GML2_GEO_JSON_PARSER = new WMSGml2GeoJsonParser();
@@ -98,7 +103,7 @@ public abstract class WMSGetFeatureInfoStaxReader extends AbstractStaxStreamRead
             Map<String, GPWMSFeatureType> featureTypes = this.typeNames.get();
             checkArgument((featureTypes != null), "Impossible Read XML featureTypes is null.");
             readFeatureID(featureTypes, feature);
-            super.goToEndTag("featureMember");
+            super.goToEndTag(FEATURE_MEMBER_LOCAL_NAME);
         }
     }
 
@@ -119,7 +124,7 @@ public abstract class WMSGetFeatureInfoStaxReader extends AbstractStaxStreamRead
      * @throws Exception
      */
     void readFeatureID(Map<String, GPWMSFeatureType> featureTypes, Feature feature) throws Exception {
-        if (super.isTagName("gml", "featureMember")) {
+        if (super.isTagName(GML_PREFIX, FEATURE_MEMBER_LOCAL_NAME)) {
             xmlStreamReader().nextTag();
         }
         String prefix = xmlStreamReader().getPrefix();
@@ -127,7 +132,7 @@ public abstract class WMSGetFeatureInfoStaxReader extends AbstractStaxStreamRead
         logger.trace("##############################PREFIX : {} - NAME : {}\n", prefix, name);
         GPWMSFeatureType featureType = featureTypes.computeIfAbsent(name, value -> new WMSFeatureType(prefix, name));
         if ((featureType != null) && (super.isTagName(prefix, name))) {
-            String featureID = xmlStreamReader().getAttributeValue(null, "fid");
+            String featureID = xmlStreamReader().getAttributeValue(null, FID_LOCAL_NAME);
             feature.setId((featureID != null) && !(featureID.trim().isEmpty()) ? featureID : of(prefix, name).collect(joining(":")));
             logger.trace("#####################FEATURE_ID : {}", feature.getId());
             readInternal(featureType, feature);
@@ -159,10 +164,10 @@ public abstract class WMSGetFeatureInfoStaxReader extends AbstractStaxStreamRead
                         logger.trace("##########################ATTRIBUTE_NAME : {} - ATTRIBUTE_VALUE : {}\n", localName, attributeValue);
                     } else if (eventType == XMLEvent.END_ELEMENT) {
                         featureProperties.put(localName, null);
-                    } else if (super.isTagPrefix("gml")) {
+                    } else if (super.isTagPrefix(GML_PREFIX)) {
                         this.readGeometry(feature, featureProperties);
                     }
-                } else if (super.isTagPrefix("gml")) {
+                } else if (super.isTagPrefix(GML_PREFIX)) {
                     this.readGeometry(feature, featureProperties);
                 }
             }

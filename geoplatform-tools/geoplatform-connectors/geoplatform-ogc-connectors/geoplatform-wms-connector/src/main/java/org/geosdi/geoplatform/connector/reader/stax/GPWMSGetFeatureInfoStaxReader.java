@@ -30,9 +30,9 @@ public class GPWMSGetFeatureInfoStaxReader extends WMSGetFeatureInfoStaxReader {
             while (reader.hasNext()) {
                 int evenType = reader.getEventType();
                 if (evenType == XMLEvent.START_ELEMENT) {
-                    if (super.isTagName("wfs", "FeatureCollection")) {
+                    if (super.isTagName(WFS_PREFIX, FEATURE_COLLECTION_LOCAL_NAME)) {
                         this.loadTypeNames();
-                    } else if (super.isTagName("gml", "featureMember")) {
+                    } else if (super.isTagName(GML_PREFIX, FEATURE_MEMBER_LOCAL_NAME)) {
                         Feature feature = new Feature();
                         this.readFeatures(feature);
                         featureCollection.add(feature);

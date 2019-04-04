@@ -46,7 +46,10 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.nio.file.Paths;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+import static java.io.File.separator;
 import static org.junit.Assert.assertNotNull;
 
 /**
@@ -63,9 +66,10 @@ public class WFSGetFeatureCreateLayerStaxReaderTest {
 
     @BeforeClass
     public static void beforeClass() throws Exception {
-        createLayerSchema = jaxbContextBuilder.unmarshal(new File("./src/test/resources/reader/LayerSchemaCreateLayer.xml"),
-                LayerSchemaDTO.class);
-        getFeatureCreateLayer = Paths.get("./src/test/resources/reader/GetFeatureCreateLayer.xml").toFile();
+        String basePath = Stream.of(new File(".").getCanonicalPath(), "src", "test", "resources", "reader")
+                .collect(Collectors.joining(separator, "", separator));
+        createLayerSchema = jaxbContextBuilder.unmarshal(new File(basePath.concat("LayerSchemaCreateLayer.xml")), LayerSchemaDTO.class);
+        getFeatureCreateLayer = Paths.get(basePath.concat("GetFeatureCreateLayer.xml")).toFile();
         assertNotNull("The LayerSchemaDTO for createLayer must not be null.", createLayerSchema);
         assertNotNull("The File getFeatureCreateLayer must not be null.", getFeatureCreateLayer);
     }

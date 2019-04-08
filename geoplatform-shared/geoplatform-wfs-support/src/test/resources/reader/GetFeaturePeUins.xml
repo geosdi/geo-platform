@@ -8,9 +8,6 @@
                        xsi:schemaLocation="http://www.opengeospatial.net/cite http://150.145.133.99:8080/geoserver/wfs?service=WFS&amp;version=1.1.0&amp;request=DescribeFeatureType&amp;typeName=cite%3Ape_uins http://www.opengis.net/wfs http://150.145.133.99:8080/geoserver/schemas/wfs/1.1.0/wfs.xsd">
     <gml:featureMembers>
         <cite:pe_uins gml:id="pe_uins.fid--4d8013c7_15bd57a1af1_1613">
-            <cite:pe_uins_me_fonte>01</cite:pe_uins_me_fonte>
-            <cite:pe_uins_me_scala>01</cite:pe_uins_me_scala>
-            <cite:pe_uins_pa>01</cite:pe_uins_pa>
             <cite:pe_uins_es>
                 <gml:MultiSurface srsDimension="2" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
                     <gml:surfaceMember>
@@ -27,6 +24,9 @@
                     </gml:surfaceMember>
                 </gml:MultiSurface>
             </cite:pe_uins_es>
+            <cite:pe_uins_me_fonte>01</cite:pe_uins_me_fonte>
+            <cite:pe_uins_me_scala>01</cite:pe_uins_me_scala>
+            <cite:pe_uins_pa>01</cite:pe_uins_pa>
         </cite:pe_uins>
         <cite:pe_uins gml:id="pe_uins.fid-2bb5de40_15be76be0c7_-7ffb">
             <cite:pe_uins_me_data_fin>2017-05-03Z</cite:pe_uins_me_data_fin>

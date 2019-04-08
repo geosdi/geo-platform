@@ -16,7 +16,7 @@
     </root>
 
     <logger name="org.geosdi.geoplatform.support.wfs.feature.reader.WFSGetFeatureStaxReader" level="debug"/>
-
+    <logger name="org.geosdi.geoplatform.support.wfs.feature.reader.geojson.GPWFSGetFeatureGeoJsonStaxReader" level="trace"/>
     <logger name="org.geosdi.geoplatform.wfs.WFSGetFeaturesRequestTest" level="debug"/>
 
 </configuration>

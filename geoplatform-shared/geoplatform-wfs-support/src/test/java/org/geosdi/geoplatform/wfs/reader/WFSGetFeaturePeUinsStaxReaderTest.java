@@ -42,20 +42,25 @@ import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import org.geosdi.geoplatform.support.wfs.feature.reader.WFSGetFeatureStaxReader;
+import org.geosdi.geoplatform.support.wfs.feature.reader.geojson.GPWFSGetFeatureGeoJsonStaxReader;
 import org.geosdi.geoplatform.support.wfs.feature.reader.geojson.WFSGetFeatureGeoJsonStaxReader;
-import org.junit.*;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
+import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StopWatch;
 
 import java.io.File;
 import java.nio.file.Paths;
-import java.util.stream.Stream;
 
 import static java.io.File.separator;
 import static java.util.stream.Collectors.joining;
+import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
@@ -79,12 +84,12 @@ public class WFSGetFeaturePeUinsStaxReaderTest {
 
     @BeforeClass
     public static void beforeClass() throws Exception {
-        String basePath = Stream.of(new File(".").getCanonicalPath(), "src", "test", "resources", "reader")
+        String basePath = of(new File(".").getCanonicalPath(), "src", "test", "resources", "reader")
                 .collect(joining(separator, "", separator));
         peUinsLayerSchema = jaxbContextBuilder.unmarshal(new File(basePath.concat("LayerSchemaPeUins.xml")), LayerSchemaDTO.class);
         getFeaturePeUins = Paths.get(basePath.concat("GetFeaturePeUins.xml")).toFile();
-        Assert.assertNotNull("The LayerSchemaDTO for peUins must not be null.", peUinsLayerSchema);
-        Assert.assertNotNull("The File getFeaturePeUins must not be null.", getFeaturePeUins);
+        assertNotNull("The LayerSchemaDTO for peUins must not be null.", peUinsLayerSchema);
+        assertNotNull("The File getFeaturePeUins must not be null.", getFeaturePeUins);
     }
 
     @AfterClass
@@ -110,6 +115,16 @@ public class WFSGetFeaturePeUinsStaxReaderTest {
         FeatureCollection featureCollection = featureGeoJsonStaxReader.read(getFeaturePeUins);
         stopWatch.stop();
         logger.info("####################FEATURE_COLLECTION : \n{}\n", JACKSON_SUPPORT
+                .getDefaultMapper().writeValueAsString(featureCollection));
+    }
+
+    @Test
+    public void c_peUinsGeoJsonStaxReaderTest() throws Exception {
+        stopWatch.start("wfsGetFeatureGeoJsonWithoutSchema");
+        GPWFSGetFeatureGeoJsonStaxReader geoJsonStaxReader = new GPWFSGetFeatureGeoJsonStaxReader();
+        FeatureCollection featureCollection = geoJsonStaxReader.read(getFeaturePeUins);
+        stopWatch.stop();
+        logger.info("####################FEATURE_COLLECTION_WITHOUT_LAYER_SCHEMA : \n{}\n", JACKSON_SUPPORT
                 .getDefaultMapper().writeValueAsString(featureCollection));
     }
 }

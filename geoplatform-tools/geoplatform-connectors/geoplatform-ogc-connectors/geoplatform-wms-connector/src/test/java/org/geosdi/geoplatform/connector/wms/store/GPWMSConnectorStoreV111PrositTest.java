@@ -6,6 +6,7 @@ import org.geosdi.geoplatform.connector.server.v111.GPWMSGetFeatureInfoV111Reque
 import org.geosdi.geoplatform.connector.server.v111.IGPWMSConnectorStoreV111;
 import org.geosdi.geoplatform.connector.server.v111.WMSGetCapabilitiesV111Request;
 import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,11 +16,13 @@ import java.util.Arrays;
 
 import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
 import static org.geosdi.geoplatform.connector.server.store.GPWMSConnectorBuilder.WMSConnectorBuilder.wmsConnectorBuilder;
+import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@FixMethodOrder(value = NAME_ASCENDING)
 public class GPWMSConnectorStoreV111PrositTest {
 
     private static final Logger logger = LoggerFactory.getLogger(GPWMSConnectorStoreV111PrositTest.class);

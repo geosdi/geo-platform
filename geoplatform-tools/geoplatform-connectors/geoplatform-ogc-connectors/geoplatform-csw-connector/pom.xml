@@ -81,12 +81,6 @@
             <artifactId>geoplatform-oxm</artifactId>
         </dependency>
         
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-xml-utilities</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        
         <!-- SPRING -->
         <dependency>
             <groupId>org.springframework</groupId>

@@ -90,20 +90,6 @@
             <artifactId>jsr-275</artifactId>
         </dependency>
 
-        <!-- =========================================================== -->
-        <!-- =============== GEOPLATFORM JACKSON SUPPORT =============== -->
-        <!-- =========================================================== -->
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-jackson-support</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>de.grundid.opendatalab</groupId>
-            <artifactId>geojson-jackson</artifactId>
-        </dependency>
-
         <!-- JTS -->
         <dependency>
             <groupId>org.locationtech.jts</groupId>

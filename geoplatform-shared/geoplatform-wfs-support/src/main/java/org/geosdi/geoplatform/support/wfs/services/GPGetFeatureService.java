@@ -42,10 +42,9 @@ import org.geosdi.geoplatform.connector.wfs.response.FeatureDTO;
 import org.geosdi.geoplatform.connector.wfs.response.LayerSchemaDTO;
 import org.geosdi.geoplatform.connector.wfs.response.QueryDTO;
 import org.geosdi.geoplatform.gui.shared.bean.BBox;
-import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
-import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import org.geosdi.geoplatform.support.wfs.feature.reader.WFSGetFeatureStaxReader;
-import org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType;
+import org.geosdi.geoplatform.support.wfs.feature.reader.geojson.GPWFSGetFeatureGeoJsonStaxReader;
+import org.geosdi.geoplatform.support.wfs.feature.reader.geojson.WFSGetFeatureGeoJsonStaxReader;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -59,8 +58,7 @@ import java.util.Map;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static javax.annotation.meta.When.NEVER;
-import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
-import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
+import static org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType.RESULTS;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -68,11 +66,7 @@ import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeatu
  */
 public class GPGetFeatureService extends AbstractFeatureService implements GetFeaureService {
 
-    private static final JacksonSupport JACKSON_SUPPORT = new GPJacksonSupport(UNWRAP_ROOT_VALUE_DISABLE,
-            FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
-            ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
-            WRAP_ROOT_VALUE_DISABLE,
-            INDENT_OUTPUT_ENABLE, NON_NULL);
+    private static final GPWFSGetFeatureGeoJsonStaxReader wfsGetFeatureGeoJsonStaxReader = new GPWFSGetFeatureGeoJsonStaxReader();
 
     /**
      * @param layerSchema
@@ -123,9 +117,9 @@ public class GPGetFeatureService extends AbstractFeatureService implements GetFe
         WFSGetFeatureRequest request = this.createRequest(layerSchema, null);
         request.setMaxFeatures(BigInteger.valueOf(maxFeatures));
         request.setBBox(bBox);
-        request.setOutputFormat("json");
         logger.debug("#################################REQUEST_AS_STRING : {}\n", request.showRequestAsString());
-        return JACKSON_SUPPORT.getDefaultMapper().readValue(request.getResponseAsStream(), FeatureCollection.class);
+        WFSGetFeatureGeoJsonStaxReader geoJsonStaxReader = new WFSGetFeatureGeoJsonStaxReader(layerSchema);
+        return geoJsonStaxReader.read(request.getResponseAsStream());
     }
 
     /**
@@ -143,9 +137,9 @@ public class GPGetFeatureService extends AbstractFeatureService implements GetFe
         request.setBBox(bBox);
         request.setMaxFeatures(BigInteger.valueOf(maxFeatures));
         request.setQueryDTO(queryDTO);
-        request.setOutputFormat("json");
         logger.debug("#################################REQUEST_AS_STRING : {}\n", request.showRequestAsString());
-        return JACKSON_SUPPORT.getDefaultMapper().readValue(request.getResponseAsStream(), FeatureCollection.class);
+        WFSGetFeatureGeoJsonStaxReader geoJsonStaxReader = new WFSGetFeatureGeoJsonStaxReader(layerSchema);
+        return geoJsonStaxReader.read(request.getResponseAsStream());
     }
 
     /**
@@ -186,9 +180,8 @@ public class GPGetFeatureService extends AbstractFeatureService implements GetFe
         QName qName = new QName(typeName);
         request.setTypeName(qName);
         request.setSRS("EPSG:4326");
-        request.setOutputFormat("json");
-        request.setResultType(ResultTypeType.RESULTS.value());
-        return JACKSON_SUPPORT.getDefaultMapper().readValue(request.getResponseAsStream(), FeatureCollection.class);
+        request.setResultType(RESULTS.value());
+        return wfsGetFeatureGeoJsonStaxReader.read(request.getResponseAsStream());
     }
 
     /**
@@ -212,10 +205,9 @@ public class GPGetFeatureService extends AbstractFeatureService implements GetFe
         request.setTypeName(qName);
         request.setQueryDTO(queryDTO);
         request.setSRS("EPSG:4326");
-        request.setOutputFormat("json");
-        request.setResultType(ResultTypeType.RESULTS.value());
+        request.setResultType(RESULTS.value());
         logger.debug("#################################REQUEST_AS_STRING : {}\n", request.showRequestAsString());
-        return JACKSON_SUPPORT.getDefaultMapper().readValue(request.getResponseAsStream(), FeatureCollection.class);
+        return wfsGetFeatureGeoJsonStaxReader.read(request.getResponseAsStream());
     }
 
     /**
@@ -230,7 +222,6 @@ public class GPGetFeatureService extends AbstractFeatureService implements GetFe
     public FeatureCollectionDTO getFeature(LayerSchemaDTO layerSchema, int maxFeatures, QueryDTO queryDTO,
             Map<String, String> headerParams) throws Exception {
         maxFeatures = (maxFeatures > 0) ? maxFeatures : 100;
-
         WFSGetFeatureRequest request = this.createRequest(layerSchema, headerParams);
         request.setMaxFeatures(BigInteger.valueOf(maxFeatures));
         request.setQueryDTO(queryDTO);
@@ -269,7 +260,7 @@ public class GPGetFeatureService extends AbstractFeatureService implements GetFe
         request.setTypeName(qName);
         request.setGeometryName((layerSchema.getGeometry() != null ? layerSchema.getGeometry().getName() : null));
         request.setSRS("EPSG:4326");
-        request.setResultType(ResultTypeType.RESULTS.value());
+        request.setResultType(RESULTS.value());
         return request;
     }
 

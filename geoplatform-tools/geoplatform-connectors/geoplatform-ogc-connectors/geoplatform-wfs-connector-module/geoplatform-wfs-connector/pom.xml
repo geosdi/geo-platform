@@ -79,13 +79,7 @@
             <artifactId>geoplatform-w3c-xsd-binding</artifactId>
             <version>${project.version}</version>
         </dependency>
-        
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-xml-utilities</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        
+
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>gml-parser-api</artifactId>

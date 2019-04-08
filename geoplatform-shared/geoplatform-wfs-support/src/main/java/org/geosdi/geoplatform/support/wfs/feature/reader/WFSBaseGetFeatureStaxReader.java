@@ -33,11 +33,9 @@ public abstract class WFSBaseGetFeatureStaxReader<F, G, R> extends AbstractStaxS
     public final R read(@Nonnull(when = NEVER) Object object) throws Exception {
         XMLStreamReader reader = super.acquireReader(object);
         GeometryAttributeDTO geometryAtt = layerSchema.getGeometry();
+        checkArgument(geometryAtt != null, "The Parameter geometryAttribute must not be null.");
         String geometryName = geometryAtt.getName();
-        if ((geometryAtt == null) || (geometryName == null) || (geometryName.trim().isEmpty())) {
-            throw new IllegalStateException("The Geometry Attribute must not be null or " +
-                    "Geometry Name must not be null or an Empty String.");
-        }
+        checkArgument((geometryName != null) && !(geometryName.trim().isEmpty()), "The Parameter geometryName must not be null or an empty string.");
         return this.internalRead(reader, geometryName, layerSchema.getAttributeNames());
     }
 

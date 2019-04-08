@@ -16,9 +16,9 @@ import static javax.annotation.meta.When.NEVER;
 @Getter
 @ToString
 @Immutable
-public class WMSFeatureType implements GPWMSFeatureType {
+public class GPFeatureType implements IGPFeatureType {
 
-    private static final long serialVersionUID = -2096404960642022019L;
+    private static final long serialVersionUID = -4334244381048021735L;
     //
     private final String prefix;
     private final String name;
@@ -27,7 +27,7 @@ public class WMSFeatureType implements GPWMSFeatureType {
      * @param thePrefix
      * @param theName
      */
-    public WMSFeatureType(@Nonnull(when = NEVER) String thePrefix, @Nonnull(when = NEVER) String theName) {
+    public GPFeatureType(@Nonnull(when = NEVER) String thePrefix, @Nonnull(when = NEVER) String theName) {
         checkArgument((thePrefix != null) && !(thePrefix.trim().isEmpty()), "The Parameter prefix must not be null or an empty string.");
         checkArgument((theName != null) && !(theName.trim().isEmpty()), "The Parameter name must not be null or an empty string.");
         this.prefix = thePrefix;

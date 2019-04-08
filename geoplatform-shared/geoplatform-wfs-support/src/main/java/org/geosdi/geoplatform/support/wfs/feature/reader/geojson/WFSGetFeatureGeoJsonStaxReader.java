@@ -100,7 +100,7 @@ public class WFSGetFeatureGeoJsonStaxReader extends WFSBaseGetFeatureStaxReader<
             AbstractGeometry geometry = jaxbContextBuilder.unmarshal(xmlStreamReader(), AbstractGeometryType.class);
             try {
                 geoJsonGeometry = this.sextanteParser.parseGeometryAsGeoJson(geometry);
-                logger.trace("@@@@@@@@@@@@@@@@@@@@@@GEO_JSON_GEOMETRY : {}\n" + geometry);
+                logger.trace("@@@@@@@@@@@@@@@@@@@@@@GEO_JSON_GEOMETRY : {}\n", geometry);
             } catch (ParserException ex) {
                 ex.printStackTrace();
                 logger.error("########################Parse Exception : " + ex);

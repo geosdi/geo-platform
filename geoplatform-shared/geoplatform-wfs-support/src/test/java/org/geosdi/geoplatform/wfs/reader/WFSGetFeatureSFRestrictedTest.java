@@ -42,6 +42,7 @@ import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import org.geosdi.geoplatform.support.wfs.feature.reader.WFSGetFeatureStaxReader;
+import org.geosdi.geoplatform.support.wfs.feature.reader.geojson.GPWFSGetFeatureGeoJsonStaxReader;
 import org.geosdi.geoplatform.support.wfs.feature.reader.geojson.WFSGetFeatureGeoJsonStaxReader;
 import org.junit.*;
 import org.slf4j.Logger;
@@ -110,6 +111,16 @@ public class WFSGetFeatureSFRestrictedTest {
         FeatureCollection featureCollection = featureGeoJsonStaxReader.read(getFeatureSFRestricted);
         stopWatch.stop();
         logger.info("####################FEATURE_COLLECTION : \n{}\n", JACKSON_SUPPORT
+                .getDefaultMapper().writeValueAsString(featureCollection));
+    }
+
+    @Test
+    public void c_sfRestrictedGeoJsonStaxReaderTest() throws Exception {
+        stopWatch.start("wfsGetFeatureGeoJsonWithoutSchema");
+        GPWFSGetFeatureGeoJsonStaxReader geoJsonStaxReader = new GPWFSGetFeatureGeoJsonStaxReader();
+        FeatureCollection featureCollection = geoJsonStaxReader.read(getFeatureSFRestricted);
+        stopWatch.stop();
+        logger.info("####################FEATURE_COLLECTION_WITHOUT_LAYER_SCHEMA : \n{}\n", JACKSON_SUPPORT
                 .getDefaultMapper().writeValueAsString(featureCollection));
     }
 }

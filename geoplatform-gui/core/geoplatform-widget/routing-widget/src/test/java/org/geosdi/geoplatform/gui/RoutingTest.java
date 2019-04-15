@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui;
 
 import org.geosdi.geoplatform.gui.server.service.IRoutingService;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -57,6 +58,7 @@ public class RoutingTest {
 	@Autowired
 	private IRoutingService routingService;
 
+	@Ignore(value = "Machine is down")
 	@Test
 	public void test() {
 		long startTime = System.currentTimeMillis();

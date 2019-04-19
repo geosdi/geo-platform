@@ -46,7 +46,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.io.IOException;
 
 import static java.io.File.separator;
 import static java.util.stream.Collectors.joining;
@@ -65,7 +64,7 @@ public class QueryRestrictionsTheoriesBuilderTest {
     private static String dirFiles;
 
     @BeforeClass
-    public static void buildDirFiles() throws IOException {
+    public static void buildDirFiles() throws Exception {
         dirFiles = of(new File(".").getCanonicalPath(), "src", "test", "resources", "unmarshall", "query")
                 .collect(joining(separator, "", separator));
     }

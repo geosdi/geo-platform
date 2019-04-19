@@ -1052,7 +1052,7 @@ Here is an example of CacheManager level resource tuning, which will use up to 4
     -->
     <cache name="carPartCacheRegion"
            maxEntriesLocalHeap="10000"
-           maxEntriesLocalDisk="1000"
+           maxEntriesLocalDisk="100000"
            eternal="false"
            diskSpoolBufferSizeMB="20"
            timeToIdleSeconds="300"
@@ -1079,7 +1079,7 @@ Here is an example of CacheManager level resource tuning, which will use up to 4
            memoryStoreEvictionPolicy="LFU">
     </cache>
 
-    <cache name="org.hibernate.cache.spi.QueryResultsRegion"
+    <cache name="default-query-results-region"
            maxEntriesLocalHeap="1000"
            eternal="false"
            overflowToDisk="true"
@@ -1090,7 +1090,7 @@ Here is an example of CacheManager level resource tuning, which will use up to 4
            memoryStoreEvictionPolicy="LFU">
     </cache>
 
-    <cache name="org.hibernate.cache.spi.TimestampsRegion"
+    <cache name="default-update-timestamps-region"
            maxEntriesLocalHeap="1000"
            eternal="true"
            overflowToDisk="true"

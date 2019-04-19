@@ -55,16 +55,16 @@ public class WFSGetFeatureMultiThreadStaxReaderTest {
         CountDownLatch doneSignal = new CountDownLatch(files.size());
         AtomicInteger counter = new AtomicInteger(0);
         files.stream()
-                .map(v -> new Thread(new WFSGetFeatureIStaxReaderTask(v, startSignal, doneSignal, counter)))
+                .map(v -> new Thread(new WFSGetFeatureStaxReaderTask(v, startSignal, doneSignal, counter)))
                 .forEach(Thread::start);
         startSignal.countDown();
         doneSignal.await();
         assertTrue(counter.get() == 5);
     }
 
-    protected static class WFSGetFeatureIStaxReaderTask implements Runnable {
+    protected static class WFSGetFeatureStaxReaderTask implements Runnable {
 
-        private static final Logger logger = LoggerFactory.getLogger(WFSGetFeatureIStaxReaderTask.class);
+        private static final Logger logger = LoggerFactory.getLogger(WFSGetFeatureStaxReaderTask.class);
         //
         private final String fileName;
         private final CountDownLatch startSignal;
@@ -76,7 +76,7 @@ public class WFSGetFeatureMultiThreadStaxReaderTest {
          * @param theStartSignal
          * @param theDoneSignal
          */
-        public WFSGetFeatureIStaxReaderTask(@Nonnull(when = NEVER) String theFileName, @Nonnull(when = NEVER) CountDownLatch theStartSignal,
+        public WFSGetFeatureStaxReaderTask(@Nonnull(when = NEVER) String theFileName, @Nonnull(when = NEVER) CountDownLatch theStartSignal,
                 @Nonnull(when = NEVER) CountDownLatch theDoneSignal, @Nonnull(when = NEVER) AtomicInteger theCounter) {
             checkArgument((theFileName != null) && !(theFileName.trim().isEmpty()), "The Parameter fileName must not be null or an empty string.");
             checkArgument(theStartSignal != null, "The Parameter startSignal must not be null.");

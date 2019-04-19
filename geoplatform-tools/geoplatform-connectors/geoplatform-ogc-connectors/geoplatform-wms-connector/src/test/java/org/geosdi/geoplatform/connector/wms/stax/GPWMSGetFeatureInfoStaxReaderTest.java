@@ -52,6 +52,12 @@ public class GPWMSGetFeatureInfoStaxReaderTest {
     private static File file16;
     private static File file17;
     private static File file18;
+    private static File file19;
+    private static File file20;
+    private static File file21;
+    private static File file22;
+    private static File file23;
+    private static File file24;
 
     @BeforeClass
     public static void beforeClass() throws Exception {
@@ -76,6 +82,12 @@ public class GPWMSGetFeatureInfoStaxReaderTest {
         file16 = new File(basePath.concat("azioniPunto-GetFeatureInfo.xml"));
         file17 = new File(basePath.concat("comuniBasilicata-GetFeatureInfo.xml"));
         file18 = new File(basePath.concat("corine-GetFeatureInfo.xml"));
+        file19 = new File(basePath.concat("airports.xml"));
+        file20 = new File(basePath.concat("geologia.xml"));
+        file21 = new File(basePath.concat("livelloEdifici.xml"));
+        file22 = new File(basePath.concat("volumetria.xml"));
+        file23 = new File(basePath.concat("livelloEdifici1.xml"));
+        file24 = new File(basePath.concat("masw.xml"));
     }
 
     @Test
@@ -190,5 +202,41 @@ public class GPWMSGetFeatureInfoStaxReaderTest {
     public void u_wmsGetFeatureInfoStaxReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_CORINE : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoStaxReader.read(file18)));
+    }
+
+    @Test
+    public void v_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_AIRPORTS : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(file19)));
+    }
+
+    @Test
+    public void w_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_GEOLOGIA : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(file20)));
+    }
+
+    @Test
+    public void x_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_LIVELLO_EDIFICI : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(file21)));
+    }
+
+    @Test
+    public void y_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_VOLUMETRIA : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(file22)));
+    }
+
+    @Test
+    public void z_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_LIVELLO_EDIFICI_1 : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(file23)));
+    }
+
+    @Test
+    public void z_a_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_MASW : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(file24)));
     }
 }

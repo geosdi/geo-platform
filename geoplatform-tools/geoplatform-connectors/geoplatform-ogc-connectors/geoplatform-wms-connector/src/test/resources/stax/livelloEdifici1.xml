@@ -1,0 +1,568 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfs:FeatureCollection xmlns="http://www.opengis.net/wfs" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:gml="http://www.opengis.net/gml" xmlns:smart="http://www.geosdi.org/:/smart"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xsi:schemaLocation="http://www.opengis.net/wfs https://smartcities-matera-clara.imaa.cnr.it/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd http://www.geosdi.org/:/smart https://smartcities-matera-clara.imaa.cnr.it/geoserver/smart/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=smart%3Alivello_risonanza_edifici">
+    <gml:boundedBy>
+        <gml:null>unknown</gml:null>
+    </gml:boundedBy>
+    <gml:featureMember>
+        <smart:livello_risonanza_edifici fid="livello_risonanza_edifici.462">
+            <smart:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:32633">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        635069.70099906,4503935.1411148 635057.92599906,4503943.7471148
+                                        635070.21899906,4503952.6251148 635078.34599906,4503941.4001148
+                                        635069.70099906,4503935.1411148
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </smart:the_geom>
+            <smart:CLASSID>9683a5ca-bf17-4e89-9246-b40c6e612502</smart:CLASSID>
+            <smart:ALTEZZA_VO>14.896</smart:ALTEZZA_VO>
+            <smart:NOME_COM>MATERA</smart:NOME_COM>
+            <smart:Ts>0.247</smart:Ts>
+            <smart:X_centroid>635068.1374</smart:X_centroid>
+            <smart:Y_centroid>4503942.569</smart:Y_centroid>
+            <smart:f0_HVSR>4.049</smart:f0_HVSR>
+            <smart:f0_b>4.01109</smart:f0_b>
+            <smart:f0_s>4.12852</smart:f0_s>
+            <smart:f1_s>1.64091</smart:f1_s>
+            <smart:f2_s>7.2161</smart:f2_s>
+            <smart:f1_b>2.76972</smart:f1_b>
+            <smart:f2_b>7.26901</smart:f2_b>
+            <smart:Danger_2>75 - 100 % - 449 - 11.09%</smart:Danger_2>
+            <smart:CLASSREF>8dafcf3e-b8cb-43a8-a8d9-1281b5ace8c0</smart:CLASSREF>
+            <smart:SCRIL>NC5</smart:SCRIL>
+            <smart:EDIFC_USO>01</smart:EDIFC_USO>
+            <smart:USO>residenziale</smart:USO>
+            <smart:EDIFC_TY>01</smart:EDIFC_TY>
+            <smart:TIPOLOGIA>generica</smart:TIPOLOGIA>
+            <smart:EDIFC_SOT>01</smart:EDIFC_SOT>
+            <smart:SOTTERRANE>non sotterraneo</smart:SOTTERRANE>
+            <smart:EDIFC_MON>0.0</smart:EDIFC_MON>
+            <smart:EDIFC_STAT>03</smart:EDIFC_STAT>
+            <smart:STATO>costruito</smart:STATO>
+            <smart:NOME_EDIF/>
+            <smart:PROVIN_IST>077</smart:PROVIN_IST>
+            <smart:NOME_PROV>MATERA</smart:NOME_PROV>
+            <smart:COMUNE_IST>17077014</smart:COMUNE_IST>
+            <smart:NOME_COM_1>MATERA</smart:NOME_COM_1>
+            <smart:TIPO_MATER>Muratura portante</smart:TIPO_MATER>
+            <smart:ANNI_EPOCA>1946 1960</smart:ANNI_EPOCA>
+            <smart:Age>[2]_1946_1960</smart:Age>
+            <smart:Type>Masonry</smart:Type>
+            <smart:Use>Residential</smart:Use>
+        </smart:livello_risonanza_edifici>
+    </gml:featureMember>
+    <gml:featureMember>
+        <smart:livello_risonanza_edifici fid="livello_risonanza_edifici.1237">
+            <smart:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:32633">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        635081.04799906,4503917.7431148 635081.41599906,4503907.3971148
+                                        635053.77499906,4503915.4141148 635056.94699906,4503923.4941148
+                                        635081.04799906,4503917.7431148
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </smart:the_geom>
+            <smart:CLASSID>2d3d9d95-688c-458b-8a18-3da935eb3b25</smart:CLASSID>
+            <smart:ALTEZZA_VO>10.856</smart:ALTEZZA_VO>
+            <smart:NOME_COM>MATERA</smart:NOME_COM>
+            <smart:Ts>0.18</smart:Ts>
+            <smart:X_centroid>635070.8379</smart:X_centroid>
+            <smart:Y_centroid>4503916.268</smart:Y_centroid>
+            <smart:f0_HVSR>5.556</smart:f0_HVSR>
+            <smart:f0_b>5.50379</smart:f0_b>
+            <smart:f0_s>4.61836</smart:f0_s>
+            <smart:f1_s>1.64714</smart:f1_s>
+            <smart:f2_s>8.37104</smart:f2_s>
+            <smart:f1_b>3.41049</smart:f1_b>
+            <smart:f2_b>14.25053</smart:f2_b>
+            <smart:Danger_2>50 - 75 % - 1468 - 36.25 %</smart:Danger_2>
+            <smart:CLASSREF>3f49ea47-948e-4007-91df-dd13563d18b2</smart:CLASSREF>
+            <smart:SCRIL>NC5</smart:SCRIL>
+            <smart:EDIFC_USO>01</smart:EDIFC_USO>
+            <smart:USO>residenziale</smart:USO>
+            <smart:EDIFC_TY>01</smart:EDIFC_TY>
+            <smart:TIPOLOGIA>generica</smart:TIPOLOGIA>
+            <smart:EDIFC_SOT>01</smart:EDIFC_SOT>
+            <smart:SOTTERRANE>non sotterraneo</smart:SOTTERRANE>
+            <smart:EDIFC_MON>0.0</smart:EDIFC_MON>
+            <smart:EDIFC_STAT>03</smart:EDIFC_STAT>
+            <smart:STATO>costruito</smart:STATO>
+            <smart:NOME_EDIF/>
+            <smart:PROVIN_IST>077</smart:PROVIN_IST>
+            <smart:NOME_PROV>MATERA</smart:NOME_PROV>
+            <smart:COMUNE_IST>17077014</smart:COMUNE_IST>
+            <smart:NOME_COM_1>MATERA</smart:NOME_COM_1>
+            <smart:TIPO_MATER>Calcestruzzo armato a piano terra chiuso</smart:TIPO_MATER>
+            <smart:ANNI_EPOCA>1961 1970</smart:ANNI_EPOCA>
+            <smart:Age>[3]_1961_1970</smart:Age>
+            <smart:Type>Reinforced Concrete</smart:Type>
+            <smart:Use>Residential</smart:Use>
+        </smart:livello_risonanza_edifici>
+    </gml:featureMember>
+    <gml:featureMember>
+        <smart:livello_risonanza_edifici fid="livello_risonanza_edifici.2097">
+            <smart:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:32633">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        635046.86099906,4503931.1251148 635047.66899906,4503917.8331148
+                                        635033.25199906,4503938.6041148 635046.86099906,4503931.1251148
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </smart:the_geom>
+            <smart:CLASSID>0eb06ec9-f38c-4737-a4f8-f1f8a04bfac2</smart:CLASSID>
+            <smart:ALTEZZA_VO>17.016</smart:ALTEZZA_VO>
+            <smart:NOME_COM>MATERA</smart:NOME_COM>
+            <smart:Ts>0.282</smart:Ts>
+            <smart:X_centroid>635042.8836</smart:X_centroid>
+            <smart:Y_centroid>4503930.685</smart:Y_centroid>
+            <smart:f0_HVSR>3.546</smart:f0_HVSR>
+            <smart:f0_b>3.51135</smart:f0_b>
+            <smart:f0_s>4.26458</smart:f0_s>
+            <smart:f1_s>1.74303</smart:f1_s>
+            <smart:f2_s>7.54054</smart:f2_s>
+            <smart:f1_b>2.52098</smart:f1_b>
+            <smart:f2_b>5.78335</smart:f2_b>
+            <smart:Danger_2>100 % - 585 - 14.45 %</smart:Danger_2>
+            <smart:CLASSREF>2cb5bbdf-3723-4d47-99cf-6ebc587bb85b</smart:CLASSREF>
+            <smart:SCRIL>NC5</smart:SCRIL>
+            <smart:EDIFC_USO>01</smart:EDIFC_USO>
+            <smart:USO>residenziale</smart:USO>
+            <smart:EDIFC_TY>01</smart:EDIFC_TY>
+            <smart:TIPOLOGIA>generica</smart:TIPOLOGIA>
+            <smart:EDIFC_SOT>01</smart:EDIFC_SOT>
+            <smart:SOTTERRANE>non sotterraneo</smart:SOTTERRANE>
+            <smart:EDIFC_MON>0.0</smart:EDIFC_MON>
+            <smart:EDIFC_STAT>03</smart:EDIFC_STAT>
+            <smart:STATO>costruito</smart:STATO>
+            <smart:NOME_EDIF/>
+            <smart:PROVIN_IST>077</smart:PROVIN_IST>
+            <smart:NOME_PROV>MATERA</smart:NOME_PROV>
+            <smart:COMUNE_IST>17077014</smart:COMUNE_IST>
+            <smart:NOME_COM_1>MATERA</smart:NOME_COM_1>
+            <smart:TIPO_MATER>Muratura portante</smart:TIPO_MATER>
+            <smart:ANNI_EPOCA>1946 1960</smart:ANNI_EPOCA>
+            <smart:Age>[2]_1946_1960</smart:Age>
+            <smart:Type>Masonry</smart:Type>
+            <smart:Use>Residential</smart:Use>
+        </smart:livello_risonanza_edifici>
+    </gml:featureMember>
+    <gml:featureMember>
+        <smart:livello_risonanza_edifici fid="livello_risonanza_edifici.2378">
+            <smart:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:32633">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        635068.11799906,4503955.5271148 635057.92599906,4503943.7471148
+                                        635052.24099906,4503951.5981148 635068.11799906,4503955.5271148
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </smart:the_geom>
+            <smart:CLASSID>9d0e5bef-4a5b-4ce5-b311-a7e4b6d027ff</smart:CLASSID>
+            <smart:ALTEZZA_VO>17.516</smart:ALTEZZA_VO>
+            <smart:NOME_COM>MATERA</smart:NOME_COM>
+            <smart:Ts>0.291</smart:Ts>
+            <smart:X_centroid>635061.2293</smart:X_centroid>
+            <smart:Y_centroid>4503952.117</smart:Y_centroid>
+            <smart:f0_HVSR>3.436</smart:f0_HVSR>
+            <smart:f0_b>3.41112</smart:f0_b>
+            <smart:f0_s>4.12852</smart:f0_s>
+            <smart:f1_s>1.64091</smart:f1_s>
+            <smart:f2_s>7.2161</smart:f2_s>
+            <smart:f1_b>2.46867</smart:f1_b>
+            <smart:f2_b>5.51748</smart:f2_b>
+            <smart:Danger_2>100 % - 585 - 14.45 %</smart:Danger_2>
+            <smart:CLASSREF>8dafcf3e-b8cb-43a8-a8d9-1281b5ace8c0</smart:CLASSREF>
+            <smart:SCRIL>NC5</smart:SCRIL>
+            <smart:EDIFC_USO>01</smart:EDIFC_USO>
+            <smart:USO>residenziale</smart:USO>
+            <smart:EDIFC_TY>01</smart:EDIFC_TY>
+            <smart:TIPOLOGIA>generica</smart:TIPOLOGIA>
+            <smart:EDIFC_SOT>01</smart:EDIFC_SOT>
+            <smart:SOTTERRANE>non sotterraneo</smart:SOTTERRANE>
+            <smart:EDIFC_MON>0.0</smart:EDIFC_MON>
+            <smart:EDIFC_STAT>03</smart:EDIFC_STAT>
+            <smart:STATO>costruito</smart:STATO>
+            <smart:NOME_EDIF/>
+            <smart:PROVIN_IST>077</smart:PROVIN_IST>
+            <smart:NOME_PROV>MATERA</smart:NOME_PROV>
+            <smart:COMUNE_IST>17077014</smart:COMUNE_IST>
+            <smart:NOME_COM_1>MATERA</smart:NOME_COM_1>
+            <smart:TIPO_MATER>Muratura portante</smart:TIPO_MATER>
+            <smart:ANNI_EPOCA>1946 1960</smart:ANNI_EPOCA>
+            <smart:Age>[2]_1946_1960</smart:Age>
+            <smart:Type>Masonry</smart:Type>
+            <smart:Use>Residential</smart:Use>
+        </smart:livello_risonanza_edifici>
+    </gml:featureMember>
+    <gml:featureMember>
+        <smart:livello_risonanza_edifici fid="livello_risonanza_edifici.2629">
+            <smart:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:32633">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        635067.47199906,4503974.0441148 635055.04999906,4503965.7501148
+                                        635046.27399906,4503978.89311479 635062.70699906,4503989.8771148
+                                        635067.47199906,4503974.0441148
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </smart:the_geom>
+            <smart:CLASSID>a1466653-3baf-4814-8817-31ce1239240e</smart:CLASSID>
+            <smart:ALTEZZA_VO>16.976</smart:ALTEZZA_VO>
+            <smart:NOME_COM>MATERA</smart:NOME_COM>
+            <smart:Ts>0.282</smart:Ts>
+            <smart:X_centroid>635058.63</smart:X_centroid>
+            <smart:Y_centroid>4503977.491</smart:Y_centroid>
+            <smart:f0_HVSR>3.546</smart:f0_HVSR>
+            <smart:f0_b>3.51962</smart:f0_b>
+            <smart:f0_s>3.94149</smart:f0_s>
+            <smart:f1_s>1.69181</smart:f1_s>
+            <smart:f2_s>6.73538</smart:f2_s>
+            <smart:f1_b>2.52526</smart:f1_b>
+            <smart:f2_b>5.80574</smart:f2_b>
+            <smart:Danger_2>100 % - 585 - 14.45 %</smart:Danger_2>
+            <smart:CLASSREF>93402ae1-7990-4eb7-a884-e7e0eec74db6</smart:CLASSREF>
+            <smart:SCRIL>NC5</smart:SCRIL>
+            <smart:EDIFC_USO>01</smart:EDIFC_USO>
+            <smart:USO>residenziale</smart:USO>
+            <smart:EDIFC_TY>01</smart:EDIFC_TY>
+            <smart:TIPOLOGIA>generica</smart:TIPOLOGIA>
+            <smart:EDIFC_SOT>01</smart:EDIFC_SOT>
+            <smart:SOTTERRANE>non sotterraneo</smart:SOTTERRANE>
+            <smart:EDIFC_MON>0.0</smart:EDIFC_MON>
+            <smart:EDIFC_STAT>03</smart:EDIFC_STAT>
+            <smart:STATO>costruito</smart:STATO>
+            <smart:NOME_EDIF/>
+            <smart:PROVIN_IST>077</smart:PROVIN_IST>
+            <smart:NOME_PROV>MATERA</smart:NOME_PROV>
+            <smart:COMUNE_IST>17077014</smart:COMUNE_IST>
+            <smart:NOME_COM_1>MATERA</smart:NOME_COM_1>
+            <smart:TIPO_MATER>Altro (Calcestruzzo armato e muratura portante, legno, ferro, etc)</smart:TIPO_MATER>
+            <smart:ANNI_EPOCA>1946 1960</smart:ANNI_EPOCA>
+            <smart:Age>[2]_1946_1960</smart:Age>
+            <smart:Type>Other</smart:Type>
+            <smart:Use>Residential</smart:Use>
+        </smart:livello_risonanza_edifici>
+    </gml:featureMember>
+    <gml:featureMember>
+        <smart:livello_risonanza_edifici fid="livello_risonanza_edifici.2945">
+            <smart:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:32633">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        635038.80599906,4503942.4951148 635049.99299906,4503950.0871148
+                                        635061.52099906,4503933.4781148 635052.07799906,4503923.7611148
+                                        635038.80599906,4503942.4951148
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </smart:the_geom>
+            <smart:CLASSID>64c0b786-fef4-4ce5-9208-9d964b4cd77e</smart:CLASSID>
+            <smart:ALTEZZA_VO>16.376</smart:ALTEZZA_VO>
+            <smart:NOME_COM>MATERA</smart:NOME_COM>
+            <smart:Ts>0.272</smart:Ts>
+            <smart:X_centroid>635050.1355</smart:X_centroid>
+            <smart:Y_centroid>4503937.788</smart:Y_centroid>
+            <smart:f0_HVSR>3.676</smart:f0_HVSR>
+            <smart:f0_b>3.64858</smart:f0_b>
+            <smart:f0_s>4.26458</smart:f0_s>
+            <smart:f1_s>1.74303</smart:f1_s>
+            <smart:f2_s>7.54054</smart:f2_s>
+            <smart:f1_b>2.59124</smart:f1_b>
+            <smart:f2_b>6.16358</smart:f2_b>
+            <smart:Danger_2>100 % - 585 - 14.45 %</smart:Danger_2>
+            <smart:CLASSREF>2cb5bbdf-3723-4d47-99cf-6ebc587bb85b</smart:CLASSREF>
+            <smart:SCRIL>NC5</smart:SCRIL>
+            <smart:EDIFC_USO>01</smart:EDIFC_USO>
+            <smart:USO>residenziale</smart:USO>
+            <smart:EDIFC_TY>01</smart:EDIFC_TY>
+            <smart:TIPOLOGIA>generica</smart:TIPOLOGIA>
+            <smart:EDIFC_SOT>01</smart:EDIFC_SOT>
+            <smart:SOTTERRANE>non sotterraneo</smart:SOTTERRANE>
+            <smart:EDIFC_MON>0.0</smart:EDIFC_MON>
+            <smart:EDIFC_STAT>03</smart:EDIFC_STAT>
+            <smart:STATO>costruito</smart:STATO>
+            <smart:NOME_EDIF/>
+            <smart:PROVIN_IST>077</smart:PROVIN_IST>
+            <smart:NOME_PROV>MATERA</smart:NOME_PROV>
+            <smart:COMUNE_IST>17077014</smart:COMUNE_IST>
+            <smart:NOME_COM_1>MATERA</smart:NOME_COM_1>
+            <smart:TIPO_MATER>Muratura portante</smart:TIPO_MATER>
+            <smart:ANNI_EPOCA>1946 1960</smart:ANNI_EPOCA>
+            <smart:Age>[2]_1946_1960</smart:Age>
+            <smart:Type>Masonry</smart:Type>
+            <smart:Use>Residential</smart:Use>
+        </smart:livello_risonanza_edifici>
+    </gml:featureMember>
+    <gml:featureMember>
+        <smart:livello_risonanza_edifici fid="livello_risonanza_edifici.2993">
+            <smart:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:32633">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        635030.64999906,4503957.2411148 635026.26899906,4503963.8851148
+                                        635041.04799906,4503979.8311148 635051.82799906,4503963.4831148
+                                        635030.64999906,4503957.2411148
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </smart:the_geom>
+            <smart:CLASSID>e4fe171a-169c-448b-952d-bc3aa68fa642</smart:CLASSID>
+            <smart:ALTEZZA_VO>10.356</smart:ALTEZZA_VO>
+            <smart:NOME_COM>MATERA</smart:NOME_COM>
+            <smart:Ts>0.172</smart:Ts>
+            <smart:X_centroid>635038.7475</smart:X_centroid>
+            <smart:Y_centroid>4503965.114</smart:Y_centroid>
+            <smart:f0_HVSR>5.814</smart:f0_HVSR>
+            <smart:f0_b>5.76952</smart:f0_b>
+            <smart:f0_s>4.26458</smart:f0_s>
+            <smart:f1_s>1.74303</smart:f1_s>
+            <smart:f2_s>7.54054</smart:f2_s>
+            <smart:f1_b>3.51096</smart:f1_b>
+            <smart:f2_b>16.17421</smart:f2_b>
+            <smart:Danger_2>50 - 75 % - 1468 - 36.25 %</smart:Danger_2>
+            <smart:CLASSREF>4a2464fd-aeab-4aa8-b1dc-03820707734c</smart:CLASSREF>
+            <smart:SCRIL>NC5</smart:SCRIL>
+            <smart:EDIFC_USO>01</smart:EDIFC_USO>
+            <smart:USO>residenziale</smart:USO>
+            <smart:EDIFC_TY>01</smart:EDIFC_TY>
+            <smart:TIPOLOGIA>generica</smart:TIPOLOGIA>
+            <smart:EDIFC_SOT>01</smart:EDIFC_SOT>
+            <smart:SOTTERRANE>non sotterraneo</smart:SOTTERRANE>
+            <smart:EDIFC_MON>0.0</smart:EDIFC_MON>
+            <smart:EDIFC_STAT>03</smart:EDIFC_STAT>
+            <smart:STATO>costruito</smart:STATO>
+            <smart:NOME_EDIF/>
+            <smart:PROVIN_IST>077</smart:PROVIN_IST>
+            <smart:NOME_PROV>MATERA</smart:NOME_PROV>
+            <smart:COMUNE_IST>17077014</smart:COMUNE_IST>
+            <smart:NOME_COM_1>MATERA</smart:NOME_COM_1>
+            <smart:TIPO_MATER>Muratura portante</smart:TIPO_MATER>
+            <smart:ANNI_EPOCA>1946 1960</smart:ANNI_EPOCA>
+            <smart:Age>[2]_1946_1960</smart:Age>
+            <smart:Type>Masonry</smart:Type>
+            <smart:Use>Residential</smart:Use>
+        </smart:livello_risonanza_edifici>
+    </gml:featureMember>
+    <gml:featureMember>
+        <smart:livello_risonanza_edifici fid="livello_risonanza_edifici.3231">
+            <smart:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:32633">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        635046.76699906,4503889.3331148 635051.38099906,4503863.2791148
+                                        635003.10699906,4503891.7601148 635024.54199906,4503929.6521148
+                                        635034.49799906,4503920.7851148 635016.25899906,4503897.5711148
+                                        635046.76699906,4503889.3331148
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </smart:the_geom>
+            <smart:CLASSID>5ee4aca4-0fec-45fc-8cef-233ac5b904a0</smart:CLASSID>
+            <smart:ALTEZZA_VO>17.136</smart:ALTEZZA_VO>
+            <smart:NOME_COM>MATERA</smart:NOME_COM>
+            <smart:Ts>0.284</smart:Ts>
+            <smart:X_centroid>635028.9994</smart:X_centroid>
+            <smart:Y_centroid>4503893.14</smart:Y_centroid>
+            <smart:f0_HVSR>3.521</smart:f0_HVSR>
+            <smart:f0_b>3.48676</smart:f0_b>
+            <smart:f0_s>4.62897</smart:f0_s>
+            <smart:f1_s>1.70499</smart:f1_s>
+            <smart:f2_s>8.46189</smart:f2_s>
+            <smart:f1_b>2.50823</smart:f1_b>
+            <smart:f2_b>5.71723</smart:f2_b>
+            <smart:Danger_2>100 % - 585 - 14.45 %</smart:Danger_2>
+            <smart:CLASSREF>2b7cfdf9-b349-4df8-9741-5b19da36628b</smart:CLASSREF>
+            <smart:SCRIL>NC5</smart:SCRIL>
+            <smart:EDIFC_USO>01</smart:EDIFC_USO>
+            <smart:USO>residenziale</smart:USO>
+            <smart:EDIFC_TY>01</smart:EDIFC_TY>
+            <smart:TIPOLOGIA>generica</smart:TIPOLOGIA>
+            <smart:EDIFC_SOT>01</smart:EDIFC_SOT>
+            <smart:SOTTERRANE>non sotterraneo</smart:SOTTERRANE>
+            <smart:EDIFC_MON>0.0</smart:EDIFC_MON>
+            <smart:EDIFC_STAT>03</smart:EDIFC_STAT>
+            <smart:STATO>costruito</smart:STATO>
+            <smart:NOME_EDIF/>
+            <smart:PROVIN_IST>077</smart:PROVIN_IST>
+            <smart:NOME_PROV>MATERA</smart:NOME_PROV>
+            <smart:COMUNE_IST>17077014</smart:COMUNE_IST>
+            <smart:NOME_COM_1>MATERA</smart:NOME_COM_1>
+            <smart:TIPO_MATER>Calcestruzzo armato a piano terra chiuso</smart:TIPO_MATER>
+            <smart:ANNI_EPOCA>1961 1970</smart:ANNI_EPOCA>
+            <smart:Age>[3]_1961_1970</smart:Age>
+            <smart:Type>Reinforced Concrete</smart:Type>
+            <smart:Use>Residential</smart:Use>
+        </smart:livello_risonanza_edifici>
+    </gml:featureMember>
+    <gml:featureMember>
+        <smart:livello_risonanza_edifici fid="livello_risonanza_edifici.3733">
+            <smart:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:32633">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        635023.01499906,4503943.4961148 635013.03699906,4503946.3711148
+                                        635023.70699906,4503945.1191148 635023.03399906,4503957.4471148
+                                        635031.77699906,4503950.0501148 635023.01499906,4503943.4961148
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </smart:the_geom>
+            <smart:CLASSID>41820319-57e4-41dc-ba3b-f90a0c3d0d9d</smart:CLASSID>
+            <smart:ALTEZZA_VO>18.116</smart:ALTEZZA_VO>
+            <smart:NOME_COM>MATERA</smart:NOME_COM>
+            <smart:Ts>0.301</smart:Ts>
+            <smart:X_centroid>635022.1406</smart:X_centroid>
+            <smart:Y_centroid>4503948.775</smart:Y_centroid>
+            <smart:f0_HVSR>3.322</smart:f0_HVSR>
+            <smart:f0_b>3.29814</smart:f0_b>
+            <smart:f0_s>4.26458</smart:f0_s>
+            <smart:f1_s>1.74303</smart:f1_s>
+            <smart:f2_s>7.54054</smart:f2_s>
+            <smart:f1_b>2.4087</smart:f1_b>
+            <smart:f2_b>5.22905</smart:f2_b>
+            <smart:Danger_2>100 % - 585 - 14.45 %</smart:Danger_2>
+            <smart:CLASSREF>419b8595-bf4d-4c24-99ca-3fb6f2825756</smart:CLASSREF>
+            <smart:SCRIL>NC5</smart:SCRIL>
+            <smart:EDIFC_USO>01</smart:EDIFC_USO>
+            <smart:USO>residenziale</smart:USO>
+            <smart:EDIFC_TY>01</smart:EDIFC_TY>
+            <smart:TIPOLOGIA>generica</smart:TIPOLOGIA>
+            <smart:EDIFC_SOT>01</smart:EDIFC_SOT>
+            <smart:SOTTERRANE>non sotterraneo</smart:SOTTERRANE>
+            <smart:EDIFC_MON>0.0</smart:EDIFC_MON>
+            <smart:EDIFC_STAT>03</smart:EDIFC_STAT>
+            <smart:STATO>costruito</smart:STATO>
+            <smart:NOME_EDIF/>
+            <smart:PROVIN_IST>077</smart:PROVIN_IST>
+            <smart:NOME_PROV>MATERA</smart:NOME_PROV>
+            <smart:COMUNE_IST>17077014</smart:COMUNE_IST>
+            <smart:NOME_COM_1>MATERA</smart:NOME_COM_1>
+            <smart:TIPO_MATER>Muratura portante</smart:TIPO_MATER>
+            <smart:ANNI_EPOCA>1946 1960</smart:ANNI_EPOCA>
+            <smart:Age>[2]_1946_1960</smart:Age>
+            <smart:Type>Masonry</smart:Type>
+            <smart:Use>Residential</smart:Use>
+        </smart:livello_risonanza_edifici>
+    </gml:featureMember>
+    <gml:featureMember>
+        <smart:livello_risonanza_edifici fid="livello_risonanza_edifici.3969">
+            <smart:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:32633">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        635077.56299906,4503925.35911479 635067.93399906,4503932.53111479
+                                        635078.95999906,4503940.5621148 635088.01699906,4503928.1271148
+                                        635077.56299906,4503925.35911479
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </smart:the_geom>
+            <smart:CLASSID>2b6bff87-8a76-4852-bd2a-af28af6c0ae6</smart:CLASSID>
+            <smart:ALTEZZA_VO>17.496</smart:ALTEZZA_VO>
+            <smart:NOME_COM>MATERA</smart:NOME_COM>
+            <smart:Ts>0.29</smart:Ts>
+            <smart:X_centroid>635078.5521</smart:X_centroid>
+            <smart:Y_centroid>4503931.423</smart:Y_centroid>
+            <smart:f0_HVSR>3.448</smart:f0_HVSR>
+            <smart:f0_b>3.41502</smart:f0_b>
+            <smart:f0_s>4.12852</smart:f0_s>
+            <smart:f1_s>1.64091</smart:f1_s>
+            <smart:f2_s>7.2161</smart:f2_s>
+            <smart:f1_b>2.47072</smart:f1_b>
+            <smart:f2_b>5.52764</smart:f2_b>
+            <smart:Danger_2>100 % - 585 - 14.45 %</smart:Danger_2>
+            <smart:CLASSREF>c1ac1a63-f049-4fe5-8aa2-2efde6e5d236</smart:CLASSREF>
+            <smart:SCRIL>NC5</smart:SCRIL>
+            <smart:EDIFC_USO>01</smart:EDIFC_USO>
+            <smart:USO>residenziale</smart:USO>
+            <smart:EDIFC_TY>01</smart:EDIFC_TY>
+            <smart:TIPOLOGIA>generica</smart:TIPOLOGIA>
+            <smart:EDIFC_SOT>01</smart:EDIFC_SOT>
+            <smart:SOTTERRANE>non sotterraneo</smart:SOTTERRANE>
+            <smart:EDIFC_MON>0.0</smart:EDIFC_MON>
+            <smart:EDIFC_STAT>03</smart:EDIFC_STAT>
+            <smart:STATO>costruito</smart:STATO>
+            <smart:NOME_EDIF/>
+            <smart:PROVIN_IST>077</smart:PROVIN_IST>
+            <smart:NOME_PROV>MATERA</smart:NOME_PROV>
+            <smart:COMUNE_IST>17077014</smart:COMUNE_IST>
+            <smart:NOME_COM_1>MATERA</smart:NOME_COM_1>
+            <smart:TIPO_MATER>Muratura portante</smart:TIPO_MATER>
+            <smart:ANNI_EPOCA>1946 1960</smart:ANNI_EPOCA>
+            <smart:Age>[2]_1946_1960</smart:Age>
+            <smart:Type>Masonry</smart:Type>
+            <smart:Use>Residential</smart:Use>
+        </smart:livello_risonanza_edifici>
+    </gml:featureMember>
+</wfs:FeatureCollection>

@@ -3,7 +3,6 @@ package org.geosdi.geoplatform.connector.wms.stax.multithread;
 import org.geosdi.geoplatform.connector.reader.stax.GPWMSGetFeatureInfoStaxReader;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -24,6 +23,7 @@ import static java.util.stream.Stream.of;
 import static javax.annotation.meta.When.NEVER;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -31,6 +31,8 @@ import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeatu
  */
 public class WMSGetFeatureInfoMultiThreadStaxReaderTest {
 
+    private static final Logger logger = LoggerFactory.getLogger(WMSGetFeatureInfoMultiThreadStaxReaderTest.class);
+    //
     private static List<String> files;
     private static final JacksonSupport JACKSON_SUPPORT = new GPJacksonSupport(UNWRAP_ROOT_VALUE_DISABLE,
             FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
@@ -49,7 +51,8 @@ public class WMSGetFeatureInfoMultiThreadStaxReaderTest {
                 "tiger_ny-GetFeatureInfo.xml", "sfdem-GetFeatureInfo.xml", "nurcAPk50095-GetFeatureInfo.xml",
                 "nurcArcSample-GetFeatureInfo.xml", "comuni-GetFeatureInfo.xml", "parchiNaturali-GetFeatureInfo.xml",
                 "retiRiserve-GetFeatureInfo.xml", "linee-GetFeatureInfo.xml", "azioniPunto-GetFeatureInfo.xml",
-                "comuniBasilicata-GetFeatureInfo.xml", "corine-GetFeatureInfo.xml")
+                "comuniBasilicata-GetFeatureInfo.xml", "corine-GetFeatureInfo.xml", "airports.xml",
+                "geologia.xml", "livelloEdifici.xml", "volumetria.xml", "livelloEdifici1.xml", "masw.xml")
                 .map(v -> basePath.concat(v))
                 .collect(toCollection(LinkedList::new));
     }
@@ -64,7 +67,8 @@ public class WMSGetFeatureInfoMultiThreadStaxReaderTest {
                 .forEach(Thread::start);
         startSignal.countDown();
         doneSignal.await();
-        Assert.assertTrue(counter.get() == 19);
+        assertTrue(counter.get() == 25);
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@{} process {} files", this.getClass().getSimpleName(), counter.get());
     }
 
     protected static class WMSGetFeatureInfoStaxReaderTask implements Runnable {
@@ -81,7 +85,7 @@ public class WMSGetFeatureInfoMultiThreadStaxReaderTest {
          * @param theStartSignal
          * @param theDoneSignal
          */
-        public WMSGetFeatureInfoStaxReaderTask(@Nonnull(when = NEVER) String theFileName, @Nonnull(when = NEVER) CountDownLatch theStartSignal,
+        WMSGetFeatureInfoStaxReaderTask(@Nonnull(when = NEVER) String theFileName, @Nonnull(when = NEVER) CountDownLatch theStartSignal,
                 @Nonnull(when = NEVER) CountDownLatch theDoneSignal, @Nonnull(when = NEVER) AtomicInteger theCounter) {
             checkArgument((theFileName != null) && !(theFileName.trim().isEmpty()), "The Parameter fileName must not be null or an empty string.");
             checkArgument(theStartSignal != null, "The Parameter startSignal must not be null.");

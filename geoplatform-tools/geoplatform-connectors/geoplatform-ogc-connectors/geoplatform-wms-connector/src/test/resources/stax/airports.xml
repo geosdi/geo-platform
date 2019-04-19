@@ -1,0 +1,1207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfs:FeatureCollection xmlns="http://www.opengis.net/wfs" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:gml="http://www.opengis.net/gml" xmlns:admin="http://www.geosdi.org/:/admin"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xsi:schemaLocation="http://www.geosdi.org/:/admin https://smartcities-matera-clara.imaa.cnr.it/geoserver/admin/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=admin%3Aairport098 http://www.opengis.net/wfs https://smartcities-matera-clara.imaa.cnr.it/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd">
+    <gml:boundedBy>
+        <gml:null>unknown</gml:null>
+    </gml:boundedBy>
+    <gml:featureMember>
+        <admin:airport098 fid="airport098.17949">
+            <admin:continent>AF</admin:continent>
+            <admin:iso_country>CF</admin:iso_country>
+            <admin:iata_code>IMO</admin:iata_code>
+            <admin:ident>FEFZ</admin:ident>
+            <admin:latitude>5.050000191</admin:latitude>
+            <admin:elevation_ft>1995.0</admin:elevation_ft>
+            <admin:municipality>Zemio</admin:municipality>
+            <admin:type>small_airport</admin:type>
+            <admin:local_code/>
+            <admin:name>Zemio Airport</admin:name>
+            <admin:iso_region>CF-HM</admin:iso_region>
+            <admin:gps_code>FEFZ</admin:gps_code>
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        25.14999962,5.05000019
+                    </gml:coordinates>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:longitude>25.14999962</admin:longitude>
+        </admin:airport098>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:airport098 fid="airport098.17951">
+            <admin:continent>AF</admin:continent>
+            <admin:iso_country>CF</admin:iso_country>
+            <admin:iata_code/>
+            <admin:ident>FEGB</admin:ident>
+            <admin:latitude>5.433000088</admin:latitude>
+            <admin:elevation_ft>2264.0</admin:elevation_ft>
+            <admin:municipality>Bambouli</admin:municipality>
+            <admin:type>small_airport</admin:type>
+            <admin:local_code/>
+            <admin:name>Bambouli Airport</admin:name>
+            <admin:iso_region>CF-HM</admin:iso_region>
+            <admin:gps_code>FEGB</admin:gps_code>
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        27.21699905,5.43300009
+                    </gml:coordinates>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:longitude>27.21699905</admin:longitude>
+        </admin:airport098>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:airport098 fid="airport098.17957">
+            <admin:continent>AF</admin:continent>
+            <admin:iso_country>CF</admin:iso_country>
+            <admin:iata_code>MKI</admin:iata_code>
+            <admin:ident>FEGE</admin:ident>
+            <admin:latitude>5.333010197</admin:latitude>
+            <admin:elevation_ft>1969.0</admin:elevation_ft>
+            <admin:municipality>Mboki</admin:municipality>
+            <admin:type>small_airport</admin:type>
+            <admin:local_code/>
+            <admin:name>M'Boki Airport</admin:name>
+            <admin:iso_region>CF-HM</admin:iso_region>
+            <admin:gps_code>FEGE</admin:gps_code>
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        25.93190002,5.3330102
+                    </gml:coordinates>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:longitude>25.93190002</admin:longitude>
+        </admin:airport098>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:airport098 fid="airport098.17962">
+            <admin:continent>AF</admin:continent>
+            <admin:iso_country>CF</admin:iso_country>
+            <admin:iata_code/>
+            <admin:ident>FEFB</admin:ident>
+            <admin:latitude>5.403888889</admin:latitude>
+            <admin:elevation_ft>0.0</admin:elevation_ft>
+            <admin:municipality>Obo</admin:municipality>
+            <admin:type>small_airport</admin:type>
+            <admin:local_code/>
+            <admin:name>Poste Airport</admin:name>
+            <admin:iso_region>CF-HM</admin:iso_region>
+            <admin:gps_code>FEFB</admin:gps_code>
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        26.48722222,5.40388889
+                    </gml:coordinates>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:longitude>26.48722222</admin:longitude>
+        </admin:airport098>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:airport098 fid="airport098.19049">
+            <admin:continent>AF</admin:continent>
+            <admin:iso_country>CD</admin:iso_country>
+            <admin:iata_code/>
+            <admin:ident>FZJA</admin:ident>
+            <admin:latitude>2.782219887</admin:latitude>
+            <admin:elevation_ft>0.0</admin:elevation_ft>
+            <admin:municipality/>
+            <admin:type>closed</admin:type>
+            <admin:local_code/>
+            <admin:name>Isiro-Ville</admin:name>
+            <admin:iso_region>CD-OR</admin:iso_region>
+            <admin:gps_code>FZJA</admin:gps_code>
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        27.62579918,2.78221989
+                    </gml:coordinates>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:longitude>27.62579918</admin:longitude>
+        </admin:airport098>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:airport098 fid="airport098.19051">
+            <admin:continent>AF</admin:continent>
+            <admin:iso_country>CD</admin:iso_country>
+            <admin:iata_code/>
+            <admin:ident>FZJB</admin:ident>
+            <admin:latitude>3.23300004</admin:latitude>
+            <admin:elevation_ft>2874.0</admin:elevation_ft>
+            <admin:municipality>Doko</admin:municipality>
+            <admin:type>small_airport</admin:type>
+            <admin:local_code/>
+            <admin:name>Doko Airport</admin:name>
+            <admin:iso_region>CD-OR</admin:iso_region>
+            <admin:gps_code>FZJB</admin:gps_code>
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        29.56699944,3.23300004
+                    </gml:coordinates>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:longitude>29.56699944</admin:longitude>
+        </admin:airport098>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:airport098 fid="airport098.19053">
+            <admin:continent>AF</admin:continent>
+            <admin:iso_country>CD</admin:iso_country>
+            <admin:iata_code/>
+            <admin:ident>FZJC</admin:ident>
+            <admin:latitude>3.599999905</admin:latitude>
+            <admin:elevation_ft>2378.0</admin:elevation_ft>
+            <admin:municipality>Dungu-Uye</admin:municipality>
+            <admin:type>small_airport</admin:type>
+            <admin:local_code/>
+            <admin:name>Dungu-Uye Airport</admin:name>
+            <admin:iso_region>CD-OR</admin:iso_region>
+            <admin:gps_code>FZJC</admin:gps_code>
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        28.89999962,3.59999991
+                    </gml:coordinates>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:longitude>28.89999962</admin:longitude>
+        </admin:airport098>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:airport098 fid="airport098.19055">
+            <admin:continent>AF</admin:continent>
+            <admin:iso_country>CD</admin:iso_country>
+            <admin:iata_code/>
+            <admin:ident>FZJD</admin:ident>
+            <admin:latitude>4.732999802</admin:latitude>
+            <admin:elevation_ft>2378.0</admin:elevation_ft>
+            <admin:municipality>Doruma</admin:municipality>
+            <admin:type>small_airport</admin:type>
+            <admin:local_code/>
+            <admin:name>Doruma Airport</admin:name>
+            <admin:iso_region>CD-OR</admin:iso_region>
+            <admin:gps_code>FZJD</admin:gps_code>
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        27.68300056,4.7329998
+                    </gml:coordinates>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:longitude>27.68300056</admin:longitude>
+        </admin:airport098>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:airport098 fid="airport098.19057">
+            <admin:continent>AF</admin:continent>
+            <admin:iso_country>CD</admin:iso_country>
+            <admin:iata_code/>
+            <admin:ident>FZJF</admin:ident>
+            <admin:latitude>3.900000095</admin:latitude>
+            <admin:elevation_ft>3051.0</admin:elevation_ft>
+            <admin:municipality>Aba</admin:municipality>
+            <admin:type>small_airport</admin:type>
+            <admin:local_code/>
+            <admin:name>Aba Airport</admin:name>
+            <admin:iso_region>CD-OR</admin:iso_region>
+            <admin:gps_code>FZJF</admin:gps_code>
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">30.25,3.9000001
+                    </gml:coordinates>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:longitude>30.25</admin:longitude>
+        </admin:airport098>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:airport098 fid="airport098.19059">
+            <admin:continent>AF</admin:continent>
+            <admin:iso_country>CD</admin:iso_country>
+            <admin:iata_code>IRP</admin:iata_code>
+            <admin:ident>FZJH</admin:ident>
+            <admin:latitude>2.827610016</admin:latitude>
+            <admin:elevation_ft>2438.0</admin:elevation_ft>
+            <admin:municipality/>
+            <admin:type>medium_airport</admin:type>
+            <admin:local_code/>
+            <admin:name>Matari Airport</admin:name>
+            <admin:iso_region>CD-OR</admin:iso_region>
+            <admin:gps_code>FZJH</admin:gps_code>
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        27.5883007,2.82761002
+                    </gml:coordinates>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:longitude>27.5883007</admin:longitude>
+        </admin:airport098>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:airport098 fid="airport098.19061">
+            <admin:continent>AF</admin:continent>
+            <admin:iso_country>CD</admin:iso_country>
+            <admin:iata_code/>
+            <admin:ident>FZJI</admin:ident>
+            <admin:latitude>3.016940117</admin:latitude>
+            <admin:elevation_ft>3199.0</admin:elevation_ft>
+            <admin:municipality>Watsa</admin:municipality>
+            <admin:type>small_airport</admin:type>
+            <admin:local_code/>
+            <admin:name>Watsa Airport</admin:name>
+            <admin:iso_region>CD-OR</admin:iso_region>
+            <admin:gps_code>FZJI</admin:gps_code>
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        29.55920029,3.01694012
+                    </gml:coordinates>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:longitude>29.55920029</admin:longitude>
+        </admin:airport098>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:airport098 fid="airport098.19063">
+            <admin:continent>AF</admin:continent>
+            <admin:iso_country>CD</admin:iso_country>
+            <admin:iata_code/>
+            <admin:ident>FZJK</admin:ident>
+            <admin:latitude>3.73300004</admin:latitude>
+            <admin:elevation_ft>2690.0</admin:elevation_ft>
+            <admin:municipality>Faradje</admin:municipality>
+            <admin:type>small_airport</admin:type>
+            <admin:local_code/>
+            <admin:name>Faradje Airport</admin:name>
+            <admin:iso_region>CD-OR</admin:iso_region>
+            <admin:gps_code>FZJK</admin:gps_code>
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        29.70000076,3.73300004
+                    </gml:coordinates>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:longitude>29.70000076</admin:longitude>
+        </admin:airport098>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:airport098 fid="airport098.19067">
+            <admin:continent>AF</admin:continent>
+            <admin:iso_country>CD</admin:iso_country>
+            <admin:iata_code/>
+            <admin:ident>FZJR</admin:ident>
+            <admin:latitude>2.73300004</admin:latitude>
+            <admin:elevation_ft>4429.0</admin:elevation_ft>
+            <admin:municipality>Kere Kere</admin:municipality>
+            <admin:type>small_airport</admin:type>
+            <admin:local_code/>
+            <admin:name>Kere Kere Airport</admin:name>
+            <admin:iso_region>CD-OR</admin:iso_region>
+            <admin:gps_code>FZJR</admin:gps_code>
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        30.53300095,2.73300004
+                    </gml:coordinates>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:longitude>30.53300095</admin:longitude>
+        </admin:airport098>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:airport098 fid="airport098.19069">
+            <admin:continent>AF</admin:continent>
+            <admin:iso_country>CD</admin:iso_country>
+            <admin:iata_code>BUX</admin:iata_code>
+            <admin:ident>FZKA</admin:ident>
+            <admin:latitude>1.565719962</admin:latitude>
+            <admin:elevation_ft>4045.0</admin:elevation_ft>
+            <admin:municipality/>
+            <admin:type>medium_airport</admin:type>
+            <admin:local_code/>
+            <admin:name>Bunia Airport</admin:name>
+            <admin:iso_region>CD-OR</admin:iso_region>
+            <admin:gps_code>FZKA</admin:gps_code>
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        30.2208004,1.56571996
+                    </gml:coordinates>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:longitude>30.2208004</admin:longitude>
+        </admin:airport098>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:airport098 fid="airport098.19071">
+            <admin:continent>AF</admin:continent>
+            <admin:iso_country>CD</admin:iso_country>
+            <admin:iata_code/>
+            <admin:ident>FZKB</admin:ident>
+            <admin:latitude>3.650000095</admin:latitude>
+            <admin:elevation_ft>2050.0</admin:elevation_ft>
+            <admin:municipality>Bambili-Dingila</admin:municipality>
+            <admin:type>small_airport</admin:type>
+            <admin:local_code/>
+            <admin:name>Bambili-Dingila Airport</admin:name>
+            <admin:iso_region>CD-OR</admin:iso_region>
+            <admin:gps_code>FZKB</admin:gps_code>
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        26.11700058,3.6500001
+                    </gml:coordinates>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:longitude>26.11700058</admin:longitude>
+        </admin:airport098>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:airport098 fid="airport098.19073">
+            <admin:continent>AF</admin:continent>
+            <admin:iso_country>CD</admin:iso_country>
+            <admin:iata_code/>
+            <admin:ident>FZKC</admin:ident>
+            <admin:latitude>2.167000055</admin:latitude>
+            <admin:elevation_ft>2555.0</admin:elevation_ft>
+            <admin:municipality>Mahagi</admin:municipality>
+            <admin:type>small_airport</admin:type>
+            <admin:local_code/>
+            <admin:name>Mahagi Airport</admin:name>
+            <admin:iso_region>CD-OR</admin:iso_region>
+            <admin:gps_code>FZKC</admin:gps_code>
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        31.14999962,2.16700006
+                    </gml:coordinates>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:longitude>31.14999962</admin:longitude>
+        </admin:airport098>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:airport098 fid="airport098.19075">
+            <admin:continent>AF</admin:continent>
+            <admin:iso_country>CD</admin:iso_country>
+            <admin:iata_code/>
+            <admin:ident>FZKF</admin:ident>
+            <admin:latitude>1.817000031</admin:latitude>
+            <admin:elevation_ft>4593.0</admin:elevation_ft>
+            <admin:municipality>Kilomines</admin:municipality>
+            <admin:type>small_airport</admin:type>
+            <admin:local_code/>
+            <admin:name>Kilomines Airport</admin:name>
+            <admin:iso_region>CD-OR</admin:iso_region>
+            <admin:gps_code>FZKF</admin:gps_code>
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        30.2329998,1.81700003
+                    </gml:coordinates>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:longitude>30.2329998</admin:longitude>
+        </admin:airport098>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:airport098 fid="airport098.19077">
+            <admin:continent>AF</admin:continent>
+            <admin:iso_country>CD</admin:iso_country>
+            <admin:iata_code/>
+            <admin:ident>FZKI</admin:ident>
+            <admin:latitude>2.032999992</admin:latitude>
+            <admin:elevation_ft>3642.0</admin:elevation_ft>
+            <admin:municipality>Yedi</admin:municipality>
+            <admin:type>small_airport</admin:type>
+            <admin:local_code/>
+            <admin:name>Yedi Airport</admin:name>
+            <admin:iso_region>CD-OR</admin:iso_region>
+            <admin:gps_code>FZKI</admin:gps_code>
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        24.79999924,2.03299999
+                    </gml:coordinates>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:longitude>24.79999924</admin:longitude>
+        </admin:airport098>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:airport098 fid="airport098.19079">
+            <admin:continent>AF</admin:continent>
+            <admin:iso_country>CD</admin:iso_country>
+            <admin:iata_code>BZU</admin:iata_code>
+            <admin:ident>FZKJ</admin:ident>
+            <admin:latitude>2.818350077</admin:latitude>
+            <admin:elevation_ft>1378.0</admin:elevation_ft>
+            <admin:municipality/>
+            <admin:type>medium_airport</admin:type>
+            <admin:local_code/>
+            <admin:name>Buta Zega Airport</admin:name>
+            <admin:iso_region>CD-OR</admin:iso_region>
+            <admin:gps_code>FZKJ</admin:gps_code>
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        24.79369926,2.81835008
+                    </gml:coordinates>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:longitude>24.79369926</admin:longitude>
+        </admin:airport098>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:airport098 fid="airport098.19083">
+            <admin:continent>AF</admin:continent>
+            <admin:iso_country>CD</admin:iso_country>
+            <admin:iata_code/>
+            <admin:ident>FZKO</admin:ident>
+            <admin:latitude>4.028999805</admin:latitude>
+            <admin:elevation_ft>2133.0</admin:elevation_ft>
+            <admin:municipality>Ango</admin:municipality>
+            <admin:type>small_airport</admin:type>
+            <admin:local_code/>
+            <admin:name>Ango Airport</admin:name>
+            <admin:iso_region>CD-OR</admin:iso_region>
+            <admin:gps_code>FZKO</admin:gps_code>
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        25.86199951,4.02899981
+                    </gml:coordinates>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:longitude>25.86199951</admin:longitude>
+        </admin:airport098>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:airport098 fid="airport098.20193">
+            <admin:continent>AF</admin:continent>
+            <admin:iso_country>UG</admin:iso_country>
+            <admin:iata_code/>
+            <admin:ident>HUAJ</admin:ident>
+            <admin:latitude>3.339230061</admin:latitude>
+            <admin:elevation_ft>2611.0</admin:elevation_ft>
+            <admin:municipality>Adjumani</admin:municipality>
+            <admin:type>small_airport</admin:type>
+            <admin:local_code/>
+            <admin:name>Adjumani Airport</admin:name>
+            <admin:iso_region>UG-301</admin:iso_region>
+            <admin:gps_code>HUAJ</admin:gps_code>
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        31.76469994,3.33923006
+                    </gml:coordinates>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:longitude>31.76469994</admin:longitude>
+        </admin:airport098>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:airport098 fid="airport098.20195">
+            <admin:continent>AF</admin:continent>
+            <admin:iso_country>UG</admin:iso_country>
+            <admin:iata_code>RUA</admin:iata_code>
+            <admin:ident>HUAR</admin:ident>
+            <admin:latitude>3.049999952</admin:latitude>
+            <admin:elevation_ft>3951.0</admin:elevation_ft>
+            <admin:municipality>Arua</admin:municipality>
+            <admin:type>medium_airport</admin:type>
+            <admin:local_code/>
+            <admin:name>Arua Airport</admin:name>
+            <admin:iso_region>UG-303</admin:iso_region>
+            <admin:gps_code>HUAR</admin:gps_code>
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        30.91699982,3.04999995
+                    </gml:coordinates>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:longitude>30.91699982</admin:longitude>
+        </admin:airport098>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:airport098 fid="airport098.20199">
+            <admin:continent>AF</admin:continent>
+            <admin:iso_country>UG</admin:iso_country>
+            <admin:iata_code>ULU</admin:iata_code>
+            <admin:ident>HUGU</admin:ident>
+            <admin:latitude>2.805560112</admin:latitude>
+            <admin:elevation_ft>3510.0</admin:elevation_ft>
+            <admin:municipality>Gulu</admin:municipality>
+            <admin:type>medium_airport</admin:type>
+            <admin:local_code/>
+            <admin:name>Gulu Airport</admin:name>
+            <admin:iso_region>UG-304</admin:iso_region>
+            <admin:gps_code>HUGU</admin:gps_code>
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        32.27180099,2.80556011
+                    </gml:coordinates>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:longitude>32.27180099</admin:longitude>
+        </admin:airport098>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:airport098 fid="airport098.20207">
+            <admin:continent>AF</admin:continent>
+            <admin:iso_country>UG</admin:iso_country>
+            <admin:iata_code>KBG</admin:iata_code>
+            <admin:ident>HUKF</admin:ident>
+            <admin:latitude>2.326390028</admin:latitude>
+            <admin:elevation_ft>2365.0</admin:elevation_ft>
+            <admin:municipality>Kabalega Falls</admin:municipality>
+            <admin:type>small_airport</admin:type>
+            <admin:local_code/>
+            <admin:name>Kabalega Falls Airport</admin:name>
+            <admin:iso_region>UG-409</admin:iso_region>
+            <admin:gps_code>HUKF</admin:gps_code>
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        31.49780083,2.32639003
+                    </gml:coordinates>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:longitude>31.49780083</admin:longitude>
+        </admin:airport098>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:airport098 fid="airport098.20214">
+            <admin:continent>AF</admin:continent>
+            <admin:iso_country>UG</admin:iso_country>
+            <admin:iata_code>KCU</admin:iata_code>
+            <admin:ident>HUMI</admin:ident>
+            <admin:latitude>1.758059978</admin:latitude>
+            <admin:elevation_ft>3850.0</admin:elevation_ft>
+            <admin:municipality>Masindi</admin:municipality>
+            <admin:type>small_airport</admin:type>
+            <admin:local_code/>
+            <admin:name>Masindi Airport</admin:name>
+            <admin:iso_region>UG-409</admin:iso_region>
+            <admin:gps_code>HUMI</admin:gps_code>
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        31.73670006,1.75805998
+                    </gml:coordinates>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:longitude>31.73670006</admin:longitude>
+        </admin:airport098>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:airport098 fid="airport098.20216">
+            <admin:continent>AF</admin:continent>
+            <admin:iso_country>UG</admin:iso_country>
+            <admin:iata_code>PAF</admin:iata_code>
+            <admin:ident>HUPA</admin:ident>
+            <admin:latitude>2.202222</admin:latitude>
+            <admin:elevation_ft>0.0</admin:elevation_ft>
+            <admin:municipality/>
+            <admin:type>small_airport</admin:type>
+            <admin:local_code/>
+            <admin:name>Pakuba Airport</admin:name>
+            <admin:iso_region>UG-U-A</admin:iso_region>
+            <admin:gps_code>HUPA</admin:gps_code>
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        31.554444,2.202222
+                    </gml:coordinates>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:longitude>31.554444</admin:longitude>
+        </admin:airport098>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:airport098 fid="airport098.20103">
+            <admin:continent>AF</admin:continent>
+            <admin:iso_country>SS</admin:iso_country>
+            <admin:iata_code/>
+            <admin:ident>HSRJ</admin:ident>
+            <admin:latitude>8.461110115</admin:latitude>
+            <admin:elevation_ft>1788.0</admin:elevation_ft>
+            <admin:municipality>Raga</admin:municipality>
+            <admin:type>small_airport</admin:type>
+            <admin:local_code/>
+            <admin:name>Raga Airport</admin:name>
+            <admin:iso_region>SS-14</admin:iso_region>
+            <admin:gps_code>HSRJ</admin:gps_code>
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        25.68110085,8.46111012
+                    </gml:coordinates>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:longitude>25.68110085</admin:longitude>
+        </admin:airport098>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:airport098 fid="airport098.20107">
+            <admin:continent>AF</admin:continent>
+            <admin:iso_country>SS</admin:iso_country>
+            <admin:iata_code>JUB</admin:iata_code>
+            <admin:ident>HSSJ</admin:ident>
+            <admin:latitude>4.872010231</admin:latitude>
+            <admin:elevation_ft>1513.0</admin:elevation_ft>
+            <admin:municipality>Juba</admin:municipality>
+            <admin:type>large_airport</admin:type>
+            <admin:local_code/>
+            <admin:name>Juba International Airport</admin:name>
+            <admin:iso_region>SS-17</admin:iso_region>
+            <admin:gps_code>HSSJ</admin:gps_code>
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        31.60110092,4.87201023
+                    </gml:coordinates>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:longitude>31.60110092</admin:longitude>
+        </admin:airport098>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:airport098 fid="airport098.20114">
+            <admin:continent>AF</admin:continent>
+            <admin:iso_country>SS</admin:iso_country>
+            <admin:iata_code/>
+            <admin:ident>HSTO</admin:ident>
+            <admin:latitude>7.267000198</admin:latitude>
+            <admin:elevation_ft>1413.0</admin:elevation_ft>
+            <admin:municipality>Tong</admin:municipality>
+            <admin:type>small_airport</admin:type>
+            <admin:local_code/>
+            <admin:name>Tong Airport</admin:name>
+            <admin:iso_region>SS-21</admin:iso_region>
+            <admin:gps_code>HSTO</admin:gps_code>
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        28.9829998,7.2670002
+                    </gml:coordinates>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:longitude>28.9829998</admin:longitude>
+        </admin:airport098>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:airport098 fid="airport098.20116">
+            <admin:continent>AF</admin:continent>
+            <admin:iso_country>SS</admin:iso_country>
+            <admin:iata_code/>
+            <admin:ident>HSTU</admin:ident>
+            <admin:latitude>5.599999905</admin:latitude>
+            <admin:elevation_ft>2230.0</admin:elevation_ft>
+            <admin:municipality>Tumbura</admin:municipality>
+            <admin:type>small_airport</admin:type>
+            <admin:local_code/>
+            <admin:name>Tumbura Airport</admin:name>
+            <admin:iso_region>SS-16</admin:iso_region>
+            <admin:gps_code>HSTU</admin:gps_code>
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        27.45000076,5.59999991
+                    </gml:coordinates>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:longitude>27.45000076</admin:longitude>
+        </admin:airport098>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:airport098 fid="airport098.20117">
+            <admin:continent>AF</admin:continent>
+            <admin:iso_country>SS</admin:iso_country>
+            <admin:iata_code>WUU</admin:iata_code>
+            <admin:ident>HSWW</admin:ident>
+            <admin:latitude>7.725830078</admin:latitude>
+            <admin:elevation_ft>1529.0</admin:elevation_ft>
+            <admin:municipality>Wau</admin:municipality>
+            <admin:type>medium_airport</admin:type>
+            <admin:local_code/>
+            <admin:name>Wau Airport</admin:name>
+            <admin:iso_region>SS-14</admin:iso_region>
+            <admin:gps_code>HSWW</admin:gps_code>
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        27.97500038,7.72583008
+                    </gml:coordinates>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:longitude>27.97500038</admin:longitude>
+        </admin:airport098>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:airport098 fid="airport098.20118">
+            <admin:continent>AF</admin:continent>
+            <admin:iso_country>SS</admin:iso_country>
+            <admin:iata_code/>
+            <admin:ident>HSYA</admin:ident>
+            <admin:latitude>4.567220211</admin:latitude>
+            <admin:elevation_ft>2375.0</admin:elevation_ft>
+            <admin:municipality>Yambio</admin:municipality>
+            <admin:type>small_airport</admin:type>
+            <admin:local_code/>
+            <admin:name>Yambio Airport</admin:name>
+            <admin:iso_region>SS-16</admin:iso_region>
+            <admin:gps_code>HSYA</admin:gps_code>
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        28.4239006,4.56722021
+                    </gml:coordinates>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:longitude>28.4239006</admin:longitude>
+        </admin:airport098>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:airport098 fid="airport098.20119">
+            <admin:continent>AF</admin:continent>
+            <admin:iso_country>SS</admin:iso_country>
+            <admin:iata_code/>
+            <admin:ident>HSYE</admin:ident>
+            <admin:latitude>4.130281601</admin:latitude>
+            <admin:elevation_ft>2000.0</admin:elevation_ft>
+            <admin:municipality>Yei</admin:municipality>
+            <admin:type>small_airport</admin:type>
+            <admin:local_code/>
+            <admin:name>Yei Airport</admin:name>
+            <admin:iso_region>SS-17</admin:iso_region>
+            <admin:gps_code>HSYE</admin:gps_code>
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        30.72807312,4.1302816
+                    </gml:coordinates>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:longitude>30.72807312</admin:longitude>
+        </admin:airport098>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:airport098 fid="airport098.20120">
+            <admin:continent>AF</admin:continent>
+            <admin:iso_country>SS</admin:iso_country>
+            <admin:iata_code/>
+            <admin:ident>HSYL</admin:ident>
+            <admin:latitude>6.566999912</admin:latitude>
+            <admin:elevation_ft>1424.0</admin:elevation_ft>
+            <admin:municipality>Yirol</admin:municipality>
+            <admin:type>small_airport</admin:type>
+            <admin:local_code/>
+            <admin:name>Yirol Airport</admin:name>
+            <admin:iso_region>SS-18</admin:iso_region>
+            <admin:gps_code>HSYL</admin:gps_code>
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">30.5,6.56699991
+                    </gml:coordinates>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:longitude>30.5</admin:longitude>
+        </admin:airport098>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:airport098 fid="airport098.20068">
+            <admin:continent>AF</admin:continent>
+            <admin:iso_country>SS</admin:iso_country>
+            <admin:iata_code/>
+            <admin:ident>HSBR</admin:ident>
+            <admin:latitude>6.195865</admin:latitude>
+            <admin:elevation_ft>1394.0</admin:elevation_ft>
+            <admin:municipality>Bor</admin:municipality>
+            <admin:type>small_airport</admin:type>
+            <admin:local_code/>
+            <admin:name>Bor Airport</admin:name>
+            <admin:iso_region>SS-20</admin:iso_region>
+            <admin:gps_code>HSBR</admin:gps_code>
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        31.600485,6.195865
+                    </gml:coordinates>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:longitude>31.600485</admin:longitude>
+        </admin:airport098>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:airport098 fid="airport098.20091">
+            <admin:continent>AF</admin:continent>
+            <admin:iso_country>SS</admin:iso_country>
+            <admin:iata_code/>
+            <admin:ident>HSKJ</admin:ident>
+            <admin:latitude>3.917000055</admin:latitude>
+            <admin:elevation_ft>2500.0</admin:elevation_ft>
+            <admin:municipality>Kago Kaju</admin:municipality>
+            <admin:type>small_airport</admin:type>
+            <admin:local_code/>
+            <admin:name>Kago Kaju Airport</admin:name>
+            <admin:iso_region>SS-17</admin:iso_region>
+            <admin:gps_code>HSKJ</admin:gps_code>
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        31.66699982,3.91700006
+                    </gml:coordinates>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:longitude>31.66699982</admin:longitude>
+        </admin:airport098>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:airport098 fid="airport098.20098">
+            <admin:continent>AF</admin:continent>
+            <admin:iso_country>SS</admin:iso_country>
+            <admin:iata_code/>
+            <admin:ident>HSMD</admin:ident>
+            <admin:latitude>4.916999817</admin:latitude>
+            <admin:elevation_ft>1901.0</admin:elevation_ft>
+            <admin:municipality>Marida</admin:municipality>
+            <admin:type>small_airport</admin:type>
+            <admin:local_code/>
+            <admin:name>Marida Airport</admin:name>
+            <admin:iso_region>SS-16</admin:iso_region>
+            <admin:gps_code>HSMD</admin:gps_code>
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        29.46699905,4.91699982
+                    </gml:coordinates>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:longitude>29.46699905</admin:longitude>
+        </admin:airport098>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:airport098 fid="airport098.20100">
+            <admin:continent>AF</admin:continent>
+            <admin:iso_country>SS</admin:iso_country>
+            <admin:iata_code>RBX</admin:iata_code>
+            <admin:ident>HSMK</admin:ident>
+            <admin:latitude>6.824999809</admin:latitude>
+            <admin:elevation_ft>1378.0</admin:elevation_ft>
+            <admin:municipality>Rumbek</admin:municipality>
+            <admin:type>small_airport</admin:type>
+            <admin:local_code/>
+            <admin:name>Rumbek Airport</admin:name>
+            <admin:iso_region>SS-18</admin:iso_region>
+            <admin:gps_code>HSMK</admin:gps_code>
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        29.66900063,6.82499981
+                    </gml:coordinates>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:longitude>29.66900063</admin:longitude>
+        </admin:airport098>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:airport098 fid="airport098.20111">
+            <admin:continent>AF</admin:continent>
+            <admin:iso_country>SS</admin:iso_country>
+            <admin:iata_code/>
+            <admin:ident>HSNM</admin:ident>
+            <admin:latitude>3.617000103</admin:latitude>
+            <admin:elevation_ft>2059.0</admin:elevation_ft>
+            <admin:municipality>Nimuli</admin:municipality>
+            <admin:type>small_airport</admin:type>
+            <admin:local_code/>
+            <admin:name>Nimuli Airport</admin:name>
+            <admin:iso_region>SS-19</admin:iso_region>
+            <admin:gps_code>HSNM</admin:gps_code>
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        32.13299942,3.6170001
+                    </gml:coordinates>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:longitude>32.13299942</admin:longitude>
+        </admin:airport098>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:airport098 fid="airport098.38406">
+            <admin:continent>AF</admin:continent>
+            <admin:iso_country>SS</admin:iso_country>
+            <admin:iata_code/>
+            <admin:ident>SS-0001</admin:ident>
+            <admin:latitude>7.454049761</admin:latitude>
+            <admin:elevation_ft>0.0</admin:elevation_ft>
+            <admin:municipality/>
+            <admin:type>small_airport</admin:type>
+            <admin:local_code/>
+            <admin:name>Ajuini Airstrip</admin:name>
+            <admin:iso_region>SS-20</admin:iso_region>
+            <admin:gps_code/>
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        31.41265869,7.45404976
+                    </gml:coordinates>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:longitude>31.41265869</admin:longitude>
+        </admin:airport098>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:airport098 fid="airport098.38408">
+            <admin:continent>AF</admin:continent>
+            <admin:iso_country>SS</admin:iso_country>
+            <admin:iata_code/>
+            <admin:ident>SS-0002</admin:ident>
+            <admin:latitude>7.47779351</admin:latitude>
+            <admin:elevation_ft>0.0</admin:elevation_ft>
+            <admin:municipality/>
+            <admin:type>small_airport</admin:type>
+            <admin:local_code/>
+            <admin:name>Duk Payuel Airstrip</admin:name>
+            <admin:iso_region>SS-20</admin:iso_region>
+            <admin:gps_code/>
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        31.51496887,7.47779351
+                    </gml:coordinates>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:longitude>31.51496887</admin:longitude>
+        </admin:airport098>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:airport098 fid="airport098.38410">
+            <admin:continent>AF</admin:continent>
+            <admin:iso_country>SS</admin:iso_country>
+            <admin:iata_code/>
+            <admin:ident>SS-0003</admin:ident>
+            <admin:latitude>7.600151115</admin:latitude>
+            <admin:elevation_ft>0.0</admin:elevation_ft>
+            <admin:municipality/>
+            <admin:type>small_airport</admin:type>
+            <admin:local_code/>
+            <admin:name>Duk Kwenyakwol Airstrip</admin:name>
+            <admin:iso_region>SS-20</admin:iso_region>
+            <admin:gps_code/>
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        31.45179749,7.60015112
+                    </gml:coordinates>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:longitude>31.45179749</admin:longitude>
+        </admin:airport098>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:airport098 fid="airport098.38412">
+            <admin:continent>AF</admin:continent>
+            <admin:iso_country>SS</admin:iso_country>
+            <admin:iata_code/>
+            <admin:ident>SS-0004</admin:ident>
+            <admin:latitude>7.746628014</admin:latitude>
+            <admin:elevation_ft>0.0</admin:elevation_ft>
+            <admin:municipality/>
+            <admin:type>small_airport</admin:type>
+            <admin:local_code/>
+            <admin:name>Panjut Airstrip</admin:name>
+            <admin:iso_region>SS-20</admin:iso_region>
+            <admin:gps_code/>
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        31.69126511,7.74662801
+                    </gml:coordinates>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:longitude>31.69126511</admin:longitude>
+        </admin:airport098>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:airport098 fid="airport098.38414">
+            <admin:continent>AF</admin:continent>
+            <admin:iso_country>SS</admin:iso_country>
+            <admin:iata_code/>
+            <admin:ident>SS-0005</admin:ident>
+            <admin:latitude>7.739313876</admin:latitude>
+            <admin:elevation_ft>0.0</admin:elevation_ft>
+            <admin:municipality/>
+            <admin:type>small_airport</admin:type>
+            <admin:local_code/>
+            <admin:name>Duk Fadiat Airstrip</admin:name>
+            <admin:iso_region>SS-20</admin:iso_region>
+            <admin:gps_code/>
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        31.40029907,7.73931388
+                    </gml:coordinates>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:longitude>31.40029907</admin:longitude>
+        </admin:airport098>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:airport098 fid="airport098.38416">
+            <admin:continent>AF</admin:continent>
+            <admin:iso_country>SS</admin:iso_country>
+            <admin:iata_code/>
+            <admin:ident>SS-0006</admin:ident>
+            <admin:latitude>8.189678628</admin:latitude>
+            <admin:elevation_ft>0.0</admin:elevation_ft>
+            <admin:municipality/>
+            <admin:type>small_airport</admin:type>
+            <admin:local_code/>
+            <admin:name>Waat Airstrip</admin:name>
+            <admin:iso_region>SS-23</admin:iso_region>
+            <admin:gps_code/>
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        32.15318441,8.18967863
+                    </gml:coordinates>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:longitude>32.15318441</admin:longitude>
+        </admin:airport098>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:airport098 fid="airport098.38418">
+            <admin:continent>AF</admin:continent>
+            <admin:iso_country>SS</admin:iso_country>
+            <admin:iata_code/>
+            <admin:ident>SS-0007</admin:ident>
+            <admin:latitude>8.041297818</admin:latitude>
+            <admin:elevation_ft>0.0</admin:elevation_ft>
+            <admin:municipality/>
+            <admin:type>small_airport</admin:type>
+            <admin:local_code/>
+            <admin:name>Pieri Airstrip</admin:name>
+            <admin:iso_region>SS-23</admin:iso_region>
+            <admin:gps_code/>
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        32.02986717,8.04129782
+                    </gml:coordinates>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:longitude>32.02986717</admin:longitude>
+        </admin:airport098>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:airport098 fid="airport098.38420">
+            <admin:continent>AF</admin:continent>
+            <admin:iso_country>SS</admin:iso_country>
+            <admin:iata_code/>
+            <admin:ident>SS-0008</admin:ident>
+            <admin:latitude>7.905763917</admin:latitude>
+            <admin:elevation_ft>0.0</admin:elevation_ft>
+            <admin:municipality/>
+            <admin:type>small_airport</admin:type>
+            <admin:local_code/>
+            <admin:name>Yuai Airstrip</admin:name>
+            <admin:iso_region>SS-23</admin:iso_region>
+            <admin:gps_code/>
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        31.88764572,7.90576392
+                    </gml:coordinates>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:longitude>31.88764572</admin:longitude>
+        </admin:airport098>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:airport098 fid="airport098.38422">
+            <admin:continent>AF</admin:continent>
+            <admin:iso_country>SS</admin:iso_country>
+            <admin:iata_code/>
+            <admin:ident>SS-0009</admin:ident>
+            <admin:latitude>7.988007628</admin:latitude>
+            <admin:elevation_ft>0.0</admin:elevation_ft>
+            <admin:municipality/>
+            <admin:type>small_airport</admin:type>
+            <admin:local_code/>
+            <admin:name>Turuk Airstrip</admin:name>
+            <admin:iso_region>SS-23</admin:iso_region>
+            <admin:gps_code/>
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        31.96755409,7.98800763
+                    </gml:coordinates>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:longitude>31.96755409</admin:longitude>
+        </admin:airport098>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:airport098 fid="airport098.38424">
+            <admin:continent>AF</admin:continent>
+            <admin:iso_country>SS</admin:iso_country>
+            <admin:iata_code/>
+            <admin:ident>SS-0010</admin:ident>
+            <admin:latitude>8.415234373</admin:latitude>
+            <admin:elevation_ft>0.0</admin:elevation_ft>
+            <admin:municipality/>
+            <admin:type>small_airport</admin:type>
+            <admin:local_code/>
+            <admin:name>Mogok Airstrip</admin:name>
+            <admin:iso_region>SS-20</admin:iso_region>
+            <admin:gps_code/>
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        31.33317947,8.41523437
+                    </gml:coordinates>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:longitude>31.33317947</admin:longitude>
+        </admin:airport098>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:airport098 fid="airport098.38426">
+            <admin:continent>AF</admin:continent>
+            <admin:iso_country>SS</admin:iso_country>
+            <admin:iata_code/>
+            <admin:ident>SS-0011</admin:ident>
+            <admin:latitude>8.130524061</admin:latitude>
+            <admin:elevation_ft>0.0</admin:elevation_ft>
+            <admin:municipality/>
+            <admin:type>small_airport</admin:type>
+            <admin:local_code/>
+            <admin:name>Ayod Airstrips</admin:name>
+            <admin:iso_region>SS-20</admin:iso_region>
+            <admin:gps_code/>
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        31.40725136,8.13052406
+                    </gml:coordinates>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:longitude>31.40725136</admin:longitude>
+        </admin:airport098>
+    </gml:featureMember>
+</wfs:FeatureCollection>

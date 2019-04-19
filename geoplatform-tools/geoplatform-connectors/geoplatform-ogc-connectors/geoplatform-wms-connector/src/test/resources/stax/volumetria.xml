@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfs:FeatureCollection xmlns="http://www.opengis.net/wfs" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:gml="http://www.opengis.net/gml" xmlns:smart="http://www.geosdi.org/:/smart"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xsi:schemaLocation="http://www.opengis.net/wfs https://smartcities-matera-clara.imaa.cnr.it/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd http://www.geosdi.org/:/smart https://smartcities-matera-clara.imaa.cnr.it/geoserver/smart/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=smart%3Avolumetrica">
+    <gml:boundedBy>
+        <gml:null>unknown</gml:null>
+    </gml:boundedBy>
+    <gml:featureMember>
+        <smart:volumetrica fid="volumetrica.1930">
+            <smart:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:32633">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        635384.34199906,4502981.69511478 635395.96699906,4503001.56411478
+                                        635407.42199906,4502994.74711478 635384.34199906,4502981.69511478
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </smart:the_geom>
+            <smart:CLASSID>5ed98157-f42f-485a-b9e7-e34a54cf31cc</smart:CLASSID>
+            <smart:PORZIONE>01</smart:PORZIONE>
+            <smart:TIPO_PORZ>al suolo</smart:TIPO_PORZ>
+            <smart:ALTEZZA_VO>12.3</smart:ALTEZZA_VO>
+            <smart:CEDIUV>1af886a2-7608-40e6-9612-46c3308910e4</smart:CEDIUV>
+            <smart:PROVIN_IST>077</smart:PROVIN_IST>
+            <smart:NOME_PROV>MATERA</smart:NOME_PROV>
+            <smart:COMUNE_IST>17077014</smart:COMUNE_IST>
+            <smart:NOME_COM>MATERA</smart:NOME_COM>
+        </smart:volumetrica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <smart:volumetrica fid="volumetrica.4019">
+            <smart:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:32633">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        635519.68499905,4502980.85511479 635522.07699905,4503000.09811479
+                                        635577.76999905,4502985.98011479 635519.68499905,4502980.85511479
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </smart:the_geom>
+            <smart:CLASSID>5ee75536-3f4d-4d2c-9791-50d8ee28f48e</smart:CLASSID>
+            <smart:PORZIONE>01</smart:PORZIONE>
+            <smart:TIPO_PORZ>al suolo</smart:TIPO_PORZ>
+            <smart:ALTEZZA_VO>17.85</smart:ALTEZZA_VO>
+            <smart:CEDIUV>9a2ad8f2-9cf3-4227-a019-cb3646bee531</smart:CEDIUV>
+            <smart:PROVIN_IST>077</smart:PROVIN_IST>
+            <smart:NOME_PROV>MATERA</smart:NOME_PROV>
+            <smart:COMUNE_IST>17077014</smart:COMUNE_IST>
+            <smart:NOME_COM>MATERA</smart:NOME_COM>
+        </smart:volumetrica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <smart:volumetrica fid="volumetrica.9143">
+            <smart:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:32633">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        635454.19099905,4503082.39211479 635472.53899906,4503123.92211479
+                                        635487.33599905,4503123.60511479 635467.32599905,4503087.59111478
+                                        635505.22399905,4503078.44711479 635454.19099905,4503082.39211479
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </smart:the_geom>
+            <smart:CLASSID>fa38a474-dca6-44f8-b8f9-11c3e81c85fe</smart:CLASSID>
+            <smart:PORZIONE>01</smart:PORZIONE>
+            <smart:TIPO_PORZ>al suolo</smart:TIPO_PORZ>
+            <smart:ALTEZZA_VO>21.74</smart:ALTEZZA_VO>
+            <smart:CEDIUV>c924f91e-2af8-4d6a-b56c-8b102d08f52a</smart:CEDIUV>
+            <smart:PROVIN_IST>077</smart:PROVIN_IST>
+            <smart:NOME_PROV>MATERA</smart:NOME_PROV>
+            <smart:COMUNE_IST>17077014</smart:COMUNE_IST>
+            <smart:NOME_COM>MATERA</smart:NOME_COM>
+        </smart:volumetrica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <smart:volumetrica fid="volumetrica.11045">
+            <smart:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:32633">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        635569.80099906,4503054.14911479 635538.38899905,4503051.29211478
+                                        635536.38399905,4503078.44611479 635569.80099906,4503054.14911479
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </smart:the_geom>
+            <smart:CLASSID>03b58ed9-6a00-44ce-a826-197de28028ea</smart:CLASSID>
+            <smart:PORZIONE>01</smart:PORZIONE>
+            <smart:TIPO_PORZ>al suolo</smart:TIPO_PORZ>
+            <smart:ALTEZZA_VO>9.45</smart:ALTEZZA_VO>
+            <smart:CEDIUV>27c3cf5d-c865-4217-98b6-d3970edefb90</smart:CEDIUV>
+            <smart:PROVIN_IST>077</smart:PROVIN_IST>
+            <smart:NOME_PROV>MATERA</smart:NOME_PROV>
+            <smart:COMUNE_IST>17077014</smart:COMUNE_IST>
+            <smart:NOME_COM>MATERA</smart:NOME_COM>
+        </smart:volumetrica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <smart:volumetrica fid="volumetrica.15255">
+            <smart:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:32633">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        635517.79699905,4503023.18811478 635557.95599905,4503038.94811479
+                                        635560.03899905,4503014.03511479 635517.79699905,4503023.18811478
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </smart:the_geom>
+            <smart:CLASSID>18e623ac-f2a3-411c-9821-95f2061479bf</smart:CLASSID>
+            <smart:PORZIONE>01</smart:PORZIONE>
+            <smart:TIPO_PORZ>al suolo</smart:TIPO_PORZ>
+            <smart:ALTEZZA_VO>25.65</smart:ALTEZZA_VO>
+            <smart:CEDIUV>f435fb96-f65a-42a7-a0bb-66cdb35dc6b6</smart:CEDIUV>
+            <smart:PROVIN_IST>077</smart:PROVIN_IST>
+            <smart:NOME_PROV>MATERA</smart:NOME_PROV>
+            <smart:COMUNE_IST>17077014</smart:COMUNE_IST>
+            <smart:NOME_COM>MATERA</smart:NOME_COM>
+        </smart:volumetrica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <smart:volumetrica fid="volumetrica.17164">
+            <smart:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:32633">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        635451.98399905,4503010.12611479 635464.20799906,4503029.97211478
+                                        635497.13599905,4503032.83811479 635451.98399905,4503010.12611479
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </smart:the_geom>
+            <smart:CLASSID>d0579241-8297-4597-aa06-38384afd0525</smart:CLASSID>
+            <smart:PORZIONE>01</smart:PORZIONE>
+            <smart:TIPO_PORZ>al suolo</smart:TIPO_PORZ>
+            <smart:ALTEZZA_VO>21.25</smart:ALTEZZA_VO>
+            <smart:CEDIUV>bfbba83a-9f64-456c-a20f-a59af12420c8</smart:CEDIUV>
+            <smart:PROVIN_IST>077</smart:PROVIN_IST>
+            <smart:NOME_PROV>MATERA</smart:NOME_PROV>
+            <smart:COMUNE_IST>17077014</smart:COMUNE_IST>
+            <smart:NOME_COM>MATERA</smart:NOME_COM>
+        </smart:volumetrica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <smart:volumetrica fid="volumetrica.17581">
+            <smart:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:32633">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        635514.42499906,4503126.18011479 635483.74299906,4503139.78711479
+                                        635508.79899906,4503175.10411479 635514.42499906,4503126.18011479
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </smart:the_geom>
+            <smart:CLASSID>fcdce070-94c5-4290-82e4-caf058e062a8</smart:CLASSID>
+            <smart:PORZIONE>01</smart:PORZIONE>
+            <smart:TIPO_PORZ>al suolo</smart:TIPO_PORZ>
+            <smart:ALTEZZA_VO>10.22</smart:ALTEZZA_VO>
+            <smart:CEDIUV>b79913c0-eef1-4bbe-b308-a937915bb67d</smart:CEDIUV>
+            <smart:PROVIN_IST>077</smart:PROVIN_IST>
+            <smart:NOME_PROV>MATERA</smart:NOME_PROV>
+            <smart:COMUNE_IST>17077014</smart:COMUNE_IST>
+            <smart:NOME_COM>MATERA</smart:NOME_COM>
+        </smart:volumetrica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <smart:volumetrica fid="volumetrica.22157">
+            <smart:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:32633">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        635519.68499905,4502980.85511479 635504.05299905,4502982.51411478
+                                        635507.70199905,4503007.07811478 635519.68499905,4502980.85511479
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </smart:the_geom>
+            <smart:CLASSID>65d13685-aa32-4e68-b8c2-fb4df572272c</smart:CLASSID>
+            <smart:PORZIONE>01</smart:PORZIONE>
+            <smart:TIPO_PORZ>al suolo</smart:TIPO_PORZ>
+            <smart:ALTEZZA_VO>20.8</smart:ALTEZZA_VO>
+            <smart:CEDIUV>d78cbff6-70ad-4b58-830d-87a38d6a04fc</smart:CEDIUV>
+            <smart:PROVIN_IST>077</smart:PROVIN_IST>
+            <smart:NOME_PROV>MATERA</smart:NOME_PROV>
+            <smart:COMUNE_IST>17077014</smart:COMUNE_IST>
+            <smart:NOME_COM>MATERA</smart:NOME_COM>
+        </smart:volumetrica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <smart:volumetrica fid="volumetrica.23325">
+            <smart:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:32633">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        635337.73199906,4503047.93911478 635349.22499906,4503069.61511479
+                                        635366.30899906,4503067.31111479 635337.73199906,4503047.93911478
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </smart:the_geom>
+            <smart:CLASSID>c086c8ba-ad95-4845-836b-ec1404abae8c</smart:CLASSID>
+            <smart:PORZIONE>01</smart:PORZIONE>
+            <smart:TIPO_PORZ>al suolo</smart:TIPO_PORZ>
+            <smart:ALTEZZA_VO>32.19</smart:ALTEZZA_VO>
+            <smart:CEDIUV>432f3ba3-94d4-47c8-b4a8-4455fb4c7978</smart:CEDIUV>
+            <smart:PROVIN_IST>077</smart:PROVIN_IST>
+            <smart:NOME_PROV>MATERA</smart:NOME_PROV>
+            <smart:COMUNE_IST>17077014</smart:COMUNE_IST>
+            <smart:NOME_COM>MATERA</smart:NOME_COM>
+        </smart:volumetrica>
+    </gml:featureMember>
+</wfs:FeatureCollection>

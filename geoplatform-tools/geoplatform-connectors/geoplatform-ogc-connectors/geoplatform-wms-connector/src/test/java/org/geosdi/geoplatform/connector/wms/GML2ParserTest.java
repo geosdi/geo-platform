@@ -26,14 +26,8 @@ import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 public class GML2ParserTest {
 
     private static final Logger logger = LoggerFactory.getLogger(GML2ParserTest.class);
-
     //
-    static {
-        jaxbContextBuilder = GPJAXBContextBuilder.newInstance();
-    }
-
-    //
-    private static final GPJAXBContextBuilder jaxbContextBuilder;
+    private static final GPJAXBContextBuilder jaxbContextBuilder = GPJAXBContextBuilder.newInstance();
     private static File file;
     private static File file1;
     private static File file2;

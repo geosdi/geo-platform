@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfs:FeatureCollection xmlns="http://www.opengis.net/wfs" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:gml="http://www.opengis.net/gml" xmlns:smart="http://www.geosdi.org/:/smart"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xsi:schemaLocation="http://www.opengis.net/wfs https://smartcities-matera-clara.imaa.cnr.it/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd http://www.geosdi.org/:/smart https://smartcities-matera-clara.imaa.cnr.it/geoserver/smart/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=smart%3Amasw">
+    <gml:boundedBy>
+        <gml:null>unknown</gml:null>
+    </gml:boundedBy>
+    <gml:featureMember>
+        <smart:masw fid="masw.5">
+            <smart:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        636690.46982136,4500920.45735309
+                    </gml:coordinates>
+                </gml:Point>
+            </smart:the_geom>
+            <smart:MASW>M4</smart:MASW>
+            <smart:Descrizion>Prova sismica MASW, pregressa</smart:Descrizion>
+            <smart:Criticita>Aree non critiche</smart:Criticita>
+            <smart:Microzonaz>ZONA 1 - Zone Stabili</smart:Microzonaz>
+            <smart:Geologica>Calcareniti (Tufo) di Gravina</smart:Geologica>
+            <smart:Image/>
+        </smart:masw>
+    </gml:featureMember>
+    <gml:featureMember>
+        <smart:masw fid="masw.6">
+            <smart:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        636495.54913457,4500802.11144307
+                    </gml:coordinates>
+                </gml:Point>
+            </smart:the_geom>
+            <smart:MASW>M2</smart:MASW>
+            <smart:Descrizion>Prova sismica MASW, pregressa</smart:Descrizion>
+            <smart:Criticita/>
+            <smart:Microzonaz/>
+            <smart:Geologica>Calcareniti (Tufo) di Gravina</smart:Geologica>
+            <smart:Image/>
+        </smart:masw>
+    </gml:featureMember>
+    <gml:featureMember>
+        <smart:masw fid="masw.7">
+            <smart:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        636568.81415303,4500843.76699807
+                    </gml:coordinates>
+                </gml:Point>
+            </smart:the_geom>
+            <smart:MASW>M03</smart:MASW>
+            <smart:Descrizion>Prova sismica MASW_RU, 2012</smart:Descrizion>
+            <smart:Criticita>Aree non critiche</smart:Criticita>
+            <smart:Microzonaz>ZONA 1 - Zone Stabili</smart:Microzonaz>
+            <smart:Geologica>Calcareniti (Tufo) di Gravina</smart:Geologica>
+            <smart:Image/>
+        </smart:masw>
+    </gml:featureMember>
+</wfs:FeatureCollection>

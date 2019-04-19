@@ -28,8 +28,6 @@ public class GPWMSGetFeatureInfoGmlReader implements GPWMSGetFeatureInfoReader<O
     private static final WMSGetFeatureInfoStaxReader wmsGetFeatureInfoStaxReader = new GPWMSGetFeatureInfoStaxReader();
 
     /**
-     * <p>For the moment this Reader returns a {@link String}.Must be implement a Reader with Stax</p>
-     *
      * @param inputStream
      * @return {@link Object}
      * @throws Exception

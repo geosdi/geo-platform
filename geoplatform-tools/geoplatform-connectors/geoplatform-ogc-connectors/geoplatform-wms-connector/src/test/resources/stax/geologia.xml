@@ -1,0 +1,817 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfs:FeatureCollection xmlns="http://www.opengis.net/wfs" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:gml="http://www.opengis.net/gml" xmlns:smart="http://www.geosdi.org/:/smart"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xsi:schemaLocation="http://www.opengis.net/wfs https://smartcities-matera-clara.imaa.cnr.it/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd http://www.geosdi.org/:/smart https://smartcities-matera-clara.imaa.cnr.it/geoserver/smart/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=smart%3Ageologia">
+    <gml:boundedBy>
+        <gml:null>unknown</gml:null>
+    </gml:boundedBy>
+    <gml:featureMember>
+        <smart:geologia fid="geologia.3">
+            <smart:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        635870.76046903,4504266.28106229 635593.64543054,4504390.14486602
+                                        635549.80345368,4504080.16356478 635482.03581159,4504025.8937898
+                                        635441.68136353,4504075.98896671 635277.20219937,4504138.60793783
+                                        635263.9826388,4504007.80386481 635385.32428952,4503928.34734811
+                                        635686.73027055,4503850.56067064 635806.54123531,4503710.29417531
+                                        635884.46706605,4503665.48682264 635973.80346486,4503490.98862309
+                                        636086.65676616,4503432.82255658 636135.56914027,4503357.88852113
+                                        636101.89404913,4503324.21342999 636159.08604276,4503276.55343529
+                                        636226.99283812,4503159.52553592 636308.25834732,4503113.04834401
+                                        636320.64298827,4503073.3896623 636432.66136996,4503052.65582519
+                                        636367.95509979,4502895.41263102 636249.67482099,4502807.32861163
+                                        636336.92392077,4502754.58952261 636304.70993895,4502668.59280227
+                                        636338.52418336,4502581.83073894 636331.77524981,4502518.51600146
+                                        636357.44902797,4502455.27084062 636432.45264006,4502380.96299488
+                                        636508.9869381,4502368.16089412 636674.02271534,4502261.7086432
+                                        636698.93115053,4502203.96003649 636664.42113977,4502131.73948979
+                                        636717.02107552,4502055.90095809 636690.99941418,4502040.31579194
+                                        636718.83006802,4501992.23833744 636698.23538418,4501940.47332131
+                                        636772.54322992,4501872.42737268 636875.79495565,4501661.19271008
+                                        637037.14317126,4501616.80281721 637054.25902337,4501556.68860493
+                                        637081.11560432,4501543.39946772 637082.50713701,4501517.93441946
+                                        636988.71783358,4501506.38469812 636992.19666531,4501476.18843871
+                                        637096.42246392,4501464.9170239 637169.61708351,4501368.20550183
+                                        637228.47891637,4501325.20714165 637281.35715866,4501324.78968185
+                                        637317.67616191,4501269.82414052 637390.8707815,4501276.78180398
+                                        637457.2468909,4501341.90553395 637604.19274314,4501336.89601626
+                                        637687.68470465,4501369.04042145 637687.54555138,4499647.29702194
+                                        636759.11493945,4499647.01871541 636496.67187378,4500188.04662596
+                                        636332.47101615,4500477.2071193 636198.04895813,4500628.60587616
+                                        636189.1431489,4500694.56452575 635074.52546281,4500699.81756166
+                                        635069.79425166,4500828.11687584 635023.5953663,4500889.06600774
+                                        635000.94817174,4501016.80870884 635017.26389255,4501211.03188429
+                                        635046.76438561,4501262.24028735 635253.1286838,4501239.55830448
+                                        635447.94326064,4501296.19368503 635433.33412456,4501099.94024531
+                                        635514.16272232,4501195.47933151 635605.32560808,4501365.70074299
+                                        635647.07158883,4501283.32200763 635645.95836268,4501199.41258632
+                                        635755.61113879,4501135.26292923 635820.45656223,4501197.04698075
+                                        635809.88091377,4501316.71879224 635920.47297445,4501498.41817346
+                                        635984.79657312,4501445.71387276 635991.05847024,4501400.76736682
+                                        636164.72175017,4501361.24783837 636294.55175031,4501276.64265071
+                                        636349.37813836,4501265.92784899 636484.35680946,4501474.24029294
+                                        636560.33449443,4501490.52122544 636610.15136479,4501529.62329407
+                                        636652.03649882,4501652.77393729 636674.16186862,4501816.83564165
+                                        636569.44903356,4502154.07358949 636380.33974075,4502330.79824135
+                                        636104.67711452,4502470.78643013 636093.96231279,4502614.25345065
+                                        635995.44179821,4502809.48548731 635782.11983657,4502946.2731509
+                                        635763.75160504,4503088.34863873 635819.96952578,4503142.89672025
+                                        635899.91307892,4503173.3712862 635962.18416688,4503448.54687599
+                                        635941.3111765,4503490.98862309 635919.04665344,4503490.29285674
+                                        635878.55305211,4503597.30172074 635696.26226949,4503801.02210681
+                                        635566.29311608,4503863.7802312 635401.39649211,4503783.48879489
+                                        635292.30032907,4503764.98141009 635161.35710278,4503784.60202104
+                                        634563.62423504,4504141.46057984 634377.99377396,4504314.56724669
+                                        634268.06269131,4504366.33226283 634205.58287345,4504285.76251998
+                                        634318.15786821,4504149.25316291 634307.8605263,4504107.36802889
+                                        634021.48309833,4503937.18358069 633876.20708531,4503885.97517763
+                                        633810.94420207,4503776.04409499 633821.79815707,4503740.42085808
+                                        634015.49950776,4503634.38606697 633975.00590643,4503536.2830122
+                                        633924.63242299,4503490.29285673 633807.60452361,4503490.15370346
+                                        633888.31341973,4503302.15763681 633911.96947549,4503126.1287513
+                                        633738.44534883,4503108.87374593 633504.38955008,4503036.16616278
+                                        633357.44369783,4503017.38047145 633207.7147802,4502903.41394399
+                                        632335.71081891,4502902.99648418 632306.90609219,4502952.39589474
+                                        632311.35899681,4505060.56792274 632334.61498692,4505352.80718217
+                                        632393.75512632,4505355.59024755 632681.3849337,4505499.05726807
+                                        632745.25628425,4505587.14128746 632881.18301354,4505681.76308969
+                                        632974.01583348,4505657.67541613 633065.68304955,4505461.95634303
+                                        633137.97317289,4505027.03280023 633343.50255146,4504744.41251053
+                                        633516.19175851,4504584.38625098 633592.86520982,4504568.66193156
+                                        633683.59314132,4504593.84867328 634049.56623925,4504780.17490071
+                                        634168.95974421,4504898.0377197 634143.77300249,4504994.67966514
+                                        634213.34963707,4505217.18574255 634262.60989436,4505256.84442427
+                                        634362.6610949,4505270.34229138 634480.66306716,4505234.16244139
+                                        634650.29090228,4505124.92712509 634754.5167009,4505087.63404895
+                                        634930.94347712,4504956.44078264 634828.52667113,4504938.49001094
+                                        634834.78856823,4504906.3456058 634958.63497765,4504876.28849969
+                                        635149.69241601,4504883.52446968 635265.88539564,4504859.65968404
+                                        635392.16698727,4504803.65049326 635493.2618372,4504709.23500024
+                                        635534.45120483,4504712.5746787 635770.01350215,4504451.28533366
+                                        635817.74307348,4504314.7759766 635870.76046903,4504266.28106229
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                            <gml:innerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        633609.4502683,4504057.4815819 633508.42499488,4504001.68112096
+                                        633397.38068608,4503978.99913809 633194.63437289,4504018.93612634
+                                        633177.79682732,4503935.72247137 633247.09515537,4503893.83733735
+                                        633445.11025741,4503925.70343599 633609.4502683,4504057.4815819
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:innerBoundaryIs>
+                            <gml:innerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        633154.83653791,4503918.46746599 633083.45091082,4503899.96008119
+                                        633097.78369755,4503839.4284091 633148.71379407,4503850.69982391
+                                        633178.77090021,4503893.97649062 633154.83653791,4503918.46746599
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:innerBoundaryIs>
+                            <gml:innerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        633378.73414801,4503744.38672626 633364.95797436,4503668.96565437
+                                        633402.94681685,4503655.32863399 633378.73414801,4503744.38672626
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:innerBoundaryIs>
+                            <gml:innerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        633421.73250819,4503625.13237457 633390.35344599,4503570.23640989
+                                        633406.35607194,4503490.36243338 633397.58941599,4503562.72213335
+                                        633421.73250819,4503625.13237457
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:innerBoundaryIs>
+                            <gml:innerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        635103.90419676,4500905.93834163 635095.41584734,4500866.00135337
+                                        635118.79359657,4500853.33840588 635137.02267483,4500879.91668029
+                                        635103.90419676,4500905.93834163
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:innerBoundaryIs>
+                            <gml:innerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        635645.62787366,4500923.05419374 635711.16906344,4500901.90289682
+                                        635778.79755226,4500939.05681969 635742.33939574,4500954.08537276
+                                        635645.62787366,4500923.05419374
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:innerBoundaryIs>
+                            <gml:innerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        635845.79985137,4501115.43358837 635820.61310965,4501034.86384552
+                                        635872.37812578,4501029.15856148 635845.79985137,4501115.43358837
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:innerBoundaryIs>
+                            <gml:innerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        636451.9514919,4501281.4434385 636335.41062896,4501121.48675558
+                                        636443.81102565,4501213.46706651 636451.9514919,4501281.4434385
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:innerBoundaryIs>
+                            <gml:innerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        636545.11460561,4501230.02630554 636481.10410179,4501228.35646631
+                                        636352.24817453,4501099.22223252 636356.28361934,4501057.05879196
+                                        636416.11952508,4501043.00431177 636515.335806,4501116.75554443
+                                        636482.49563448,4501168.24225403 636545.11460561,4501230.02630554
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:innerBoundaryIs>
+                            <gml:innerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        636678.24079881,4501358.89962695 636660.98579343,4501400.92391424
+                                        636620.77049864,4501378.52023791 636636.63397133,4501343.73192061
+                                        636678.24079881,4501358.89962695
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:innerBoundaryIs>
+                            <gml:innerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        637593.86930998,4500554.03711804 637615.0206069,4500600.51430995
+                                        637569.30875797,4500671.96951367 637524.77971184,4500645.6695458
+                                        637593.86930998,4500554.03711804
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:innerBoundaryIs>
+                            <gml:innerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        636927.35993895,4501247.15955181 636863.9060482,4501266.64100949
+                                        636772.62150362,4501218.07651855 636709.30676615,4501033.42013035
+                                        636725.72685191,4500926.13295982 636830.5092636,4500761.37548912
+                                        636959.08688432,4500648.52218782 636977.59426912,4500509.64722518
+                                        637027.68944602,4500459.55204828 637085.577206,4500435.0610729
+                                        637077.36716312,4500522.03186614 637109.78987483,4500569.6222842
+                                        637111.45971406,4500635.99839359 637139.70782771,4500647.2698084
+                                        637193.97760269,4500534.13820056 637320.88538417,4500547.4969144
+                                        637345.37635955,4500360.47492063 637457.1164347,4500378.14738581
+                                        637462.26510565,4500310.10143719 637253.53520189,4500227.44439529
+                                        637204.13579133,4500120.4355313 637274.82565208,4500081.8204991
+                                        637431.92969297,4499896.05088476 637595.43478425,4499824.80441094
+                                        637651.93101154,4499961.73122781 637599.88768887,4500200.79654424
+                                        637616.02946809,4500353.16937399 637531.98089351,4500439.58355415
+                                        637492.7396716,4500589.72993159 637448.90639181,4500619.64788446
+                                        637350.94249031,4500634.39813099 637325.75574859,4500667.09914925
+                                        637324.64252244,4500756.43554806 637275.52141842,4500847.72009264
+                                        637280.67008938,4500902.5464807 637123.28774194,4501143.28163637
+                                        636987.33499796,4501194.76834596 636927.35993895,4501247.15955181
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:innerBoundaryIs>
+                            <gml:innerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        635395.89749004,4504289.25597689 635369.01739035,4504326.58237125
+                                        635288.75927277,4504339.321755 635234.99907337,4504313.33341216
+                                        635213.34212101,4504260.84715114 635239.33046384,4504194.85714335
+                                        635280.60606717,4504187.46830078 635395.89749004,4504289.25597689
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:innerBoundaryIs>
+                            <gml:innerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        636050.95660211,4503420.62109638 636028.15310521,4503393.486209
+                                        636057.32629398,4503360.23641744 636072.23137296,4503376.54282863
+                                        636050.95660211,4503420.62109638
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:innerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        633122.3268554,4503903.05624144 633129.28451886,4503888.44514817
+                                        633113.69935271,4503878.14780625 633122.3268554,4503903.05624144
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        633314.8454033,4503951.29024336 633284.30126072,4503943.77596683
+                                        633260.15816852,4503929.99979318 633314.8454033,4503951.29024336
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </smart:the_geom>
+            <smart:Depositi>Marini</smart:Depositi>
+            <smart:Descrizion>Calcareniti (Tufo) di Gravina</smart:Descrizion>
+            <smart:Descriptio>Gravina calcarenite (tuff)</smart:Descriptio>
+        </smart:geologia>
+    </gml:featureMember>
+    <gml:featureMember>
+        <smart:geologia fid="geologia.12">
+            <smart:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        637626.04850347,4500138.03841985 637607.05408223,4500123.35774994
+                                        637552.64515398,4500187.50740703 637626.04850347,4500138.03841985
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        635103.90419676,4500905.93834163 635137.02267483,4500879.91668029
+                                        635118.79359657,4500853.33840588 635095.41584734,4500866.00135337
+                                        635103.90419676,4500905.93834163
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        635645.62787366,4500923.05419374 635742.33939574,4500954.08537276
+                                        635778.79755226,4500939.05681969 635711.16906344,4500901.90289682
+                                        635645.62787366,4500923.05419374
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        636456.05651334,4501266.90192187 636443.81102565,4501213.46706651
+                                        636335.41062896,4501121.48675558 636426.2081371,4501268.50218447
+                                        636447.77689382,4501287.00956927 636456.05651334,4501266.90192187
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        636676.98841939,4501355.55994849 636636.63397133,4501343.73192061
+                                        636620.77049864,4501378.52023791 636660.98579343,4501400.92391424
+                                        636676.98841939,4501355.55994849
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        635872.37812578,4501029.15856148 635820.61310965,4501034.86384552
+                                        635845.79985137,4501115.43358837 635872.37812578,4501029.15856148
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        636545.11460561,4501230.02630554 636482.49563448,4501168.24225403
+                                        636515.335806,4501116.75554443 636416.11952508,4501043.00431177
+                                        636356.28361934,4501057.05879196 636352.24817453,4501099.22223252
+                                        636481.10410179,4501228.35646631 636545.11460561,4501230.02630554
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        634371.71556979,4501741.8494237 634411.23509823,4501696.90291776
+                                        634343.32830288,4501650.28657258 634328.85636288,4501709.56586525
+                                        634371.71556979,4501741.8494237
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        634314.0865479,4501916.68246079 634340.80397558,4501901.79306098
+                                        634360.90944873,4501896.64656431 634313.59733721,4501874.79950105
+                                        634314.0865479,4501916.68246079
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        635374.26269171,4502083.05323971 635338.50030153,4502064.96331472
+                                        635277.63703518,4502101.45824102 635325.28973372,4502076.15340707
+                                        635374.26269171,4502083.05323971
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        635063.31362133,4502091.79122582 635082.00603812,4502041.6725363
+                                        635039.56429102,4501980.37552123 635024.19064209,4502040.1579916
+                                        635063.31362133,4502091.79122582
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        634382.93480211,4501485.82480257 634453.34635631,4501488.74702123
+                                        634461.27809266,4501431.13756779 634401.58134018,4501401.21961492
+                                        634365.95810327,4501434.68597615 634350.99912684,4501406.22913261
+                                        634349.19013434,4501518.31709093 634373.75068635,4501520.12608343
+                                        634382.93480211,4501485.82480257
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        637082.50713701,4501517.93441946 637147.3264692,4501488.72962709
+                                        637062.05160644,4501460.60327256 636992.19666531,4501476.18843871
+                                        637008.060138,4501519.32595215 637082.50713701,4501517.93441946
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        634938.75644458,4502631.73023153 634952.95007804,4502625.05087461
+                                        634944.46172862,4502611.41385423 634924.84111767,4502618.78897749
+                                        634938.75644458,4502631.73023153
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        634798.68998208,4502354.03683728 634820.95450515,4502332.60723383
+                                        634820.5109541,4502292.56153207 634783.10481594,4502321.8924321
+                                        634798.68998208,4502354.03683728
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        634863.58323947,4502616.79952061 634872.34989543,4502594.67415081
+                                        634704.94851261,4502256.11424691 634690.33741935,4502279.90945594
+                                        634718.2224299,4502339.49966918 634688.86109011,4502432.87151279
+                                        634638.60719153,4502465.22682217 634643.61670922,4502534.24684368
+                                        634625.6659375,4502546.90979118 634627.19662346,4502518.383371
+                                        634569.86547656,4502496.67546101 634540.22583023,4502510.59078792
+                                        634511.90813995,4502555.81560041 634537.1644583,4502592.69121674
+                                        634506.58117884,4502584.087631 634522.65338143,4502627.64260425
+                                        634669.18612243,4502597.03975639 634863.58323947,4502616.79952061
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        634134.78973485,4503316.69915343 634171.24789138,4503314.47270112
+                                        634164.56853446,4503249.48812441 634123.24001351,4503218.59609866
+                                        634154.68865235,4503236.68602365 634134.78973485,4503316.69915343
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        634680.27055002,4502205.00368599 634659.67586618,4502163.25770524
+                                        634644.36900657,4502172.72012754 634663.01554464,4502210.8481233
+                                        634680.27055002,4502205.00368599
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        635203.68436876,4502241.74369127 635113.78112724,4502136.28792821
+                                        634968.23568342,4502108.39574608 635046.56693908,4502129.37885556
+                                        635184.74839189,4502250.72832894 635265.61013095,4502265.39944615
+                                        635203.68436876,4502241.74369127
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        634413.58330965,4503572.114979 634372.4635186,4503522.15895536
+                                        634329.32600516,4503517.70605075 634413.58330965,4503572.114979
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        633421.73250819,4503625.13237457 633397.58941599,4503562.72213335
+                                        633406.35607194,4503490.36243338 633390.35344599,4503570.23640989
+                                        633421.73250819,4503625.13237457
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        633378.73414801,4503744.38672626 633369.13257244,4503725.60103492
+                                        633402.94681685,4503655.32863399 633364.95797436,4503668.96565437
+                                        633378.73414801,4503744.38672626
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        633061.60384756,4503894.39395043 633065.77844564,4503867.11990967
+                                        633051.44565891,4503859.18817333 633061.60384756,4503894.39395043
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        636021.01905031,4503942.17146681 636046.62521164,4503895.80010998
+                                        635988.53362177,4503758.46955324 635855.15227398,4503828.15398231
+                                        635899.74011708,4503871.46788703 635921.26967561,4503963.19144998
+                                        635979.1064778,4503968.79677883 636021.01905031,4503942.17146681
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                            <gml:innerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        635951.23907585,4503870.76722096 635908.43474648,4503834.96955265
+                                        635960.92100749,4503838.66397394 635951.23907585,4503870.76722096
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:innerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        635718.07650491,4504319.5757102 635733.87334075,4504301.61317912
+                                        635706.86584721,4504231.4191747 635713.6177206,4504172.05364645
+                                        635682.15144275,4504184.02866717 635668.39290831,4504276.13441164
+                                        635691.8333744,4504320.34007322 635718.07650491,4504319.5757102
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        633751.71175675,4505223.04893409 633752.36964462,4505159.22840593
+                                        633722.17338521,4505155.88872747 633751.71175675,4505223.04893409
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        633684.44328161,4505547.80738764 633711.2302859,4505462.2281272
+                                        633684.21933104,4505350.85985174 633667.38178547,4505362.54872635
+                                        633666.89474903,4505520.00065042 633684.44328161,4505547.80738764
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        633785.08588343,4505635.92619524 633825.57948471,4505641.35317273
+                                        633883.39766798,4505483.83167221 633861.41145148,4505452.80049322
+                                        633807.55913637,4505460.03646321 633747.58407743,4505369.44768508
+                                        633731.85975803,4505389.90321562 633764.14331644,4505458.78408379
+                                        633842.76491343,4505533.37023598 633785.08588343,4505635.92619524
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        635397.04403458,4504284.79719258 635280.60606717,4504187.46830078
+                                        635239.33046384,4504194.85714335 635213.34212101,4504260.84715114
+                                        635234.99907337,4504313.33341216 635288.75927277,4504339.321755
+                                        635369.01739035,4504326.58237125 635397.04403458,4504284.79719258
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        633101.54083582,4503910.11826984 633149.54871368,4503922.36375753
+                                        633178.77090021,4503893.97649062 633145.79157541,4503848.33421833
+                                        633097.78369755,4503839.4284091 633079.83292582,4503869.62466851
+                                        633101.54083582,4503910.11826984
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        635798.46201633,4503949.36921862 635864.32463028,4503892.55156713
+                                        635835.02404767,4503848.72808705 635722.28050154,4503906.94707076
+                                        635781.64602978,4503970.00702029 635798.46201633,4503949.36921862
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        633601.65768523,4504062.49109959 633445.11025741,4503925.70343599
+                                        633247.09515537,4503893.83733735 633177.79682732,4503935.72247137
+                                        633194.63437289,4504018.93612634 633397.38068608,4503978.99913809
+                                        633512.04297988,4504003.07265365 633601.65768523,4504062.49109959
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        634366.18993483,4505865.45951248 634348.37831639,4505804.37122738
+                                        634328.47939892,4505814.66856929 634339.47250718,4505846.11720809
+                                        634235.38586195,4505801.72731527 634217.01763044,4505816.06010198
+                                        634366.18993483,4505865.45951248
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        634442.58507952,4505755.38927669 634462.76230352,4505727.55862288
+                                        634451.35173546,4505691.65707948 634422.12954897,4505697.77982331
+                                        634442.58507952,4505755.38927669
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        634423.10362185,4505689.70893371 634463.3189166,4505664.24388548
+                                        634455.94379334,4505587.8487408 634397.36026709,4505567.11490371
+                                        634423.10362185,4505689.70893371
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        634212.2864193,4505634.32593265 634244.98743752,4505718.93112021
+                                        634268.92179979,4505727.83692942 634239.97791983,4505632.79524669
+                                        634212.2864193,4505634.32593265
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        634083.9987916,4503361.64565937 634083.30302526,4503234.59872461
+                                        634162.34208215,4503210.24690251 634121.15271447,4503188.39983925
+                                        634059.6469695,4503233.20719192 634083.9987916,4503361.64565937
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        636060.38374608,4503412.34049694 636072.48616063,4503371.19228745
+                                        636057.32629398,4503360.23641744 636028.15310521,4503393.486209
+                                        636060.38374608,4503412.34049694
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        634183.68367899,4506624.28545581 634291.2053738,4506451.09270541
+                                        634307.6231377,4506408.58242389 634207.50409536,4506522.92042246
+                                        634138.16836033,4506549.74587597 634132.15828605,4506588.88465241
+                                        634180.97181621,4506558.24793228 634163.16147412,4506617.32256487
+                                        634183.68367899,4506624.28545581
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </smart:the_geom>
+            <smart:Depositi>no</smart:Depositi>
+            <smart:Descrizion>Riporto</smart:Descrizion>
+            <smart:Descriptio>Landfill</smart:Descriptio>
+        </smart:geologia>
+    </gml:featureMember>
+</wfs:FeatureCollection>

@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.net.URLDecoder;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.ThreadLocal.withInitial;
@@ -54,6 +55,8 @@ public abstract class GPGetFeatureGeoJsonStaxReader extends AbstractStaxStreamRe
             checkArgument((value != null) && !(value.trim().isEmpty()), "The Parameter value must not be null or an empty string.");
             return compile(TYPES_NAME_SEPARATOR).splitAsStream(value)
                     .map(v -> v.split(TYPE_NAME_SEPARATOR))
+                    .filter(Objects::nonNull)
+                    .filter(values -> values.length == 2)
                     .filter(values -> ((values[0] != null) && !(values[0].trim().isEmpty()) && (values[1] != null) && !(values[1].trim().isEmpty())))
                     .map(values -> new GPFeatureType(values[0], values[1]))
                     .collect(toMap(k -> k.getName(), identity(), (oldVal, newVal) -> oldVal, LinkedHashMap::new));
@@ -140,7 +143,7 @@ public abstract class GPGetFeatureGeoJsonStaxReader extends AbstractStaxStreamRe
      * @param featureType
      * @throws Exception
      */
-    void readInternal(IGPFeatureType featureType, Feature feature) throws Exception {
+    final void readInternal(IGPFeatureType featureType, Feature feature) throws Exception {
         logger.trace("#######################TRY TO READ ATTRIBUTES OF : {}\n", featureType.getName());
         Map<String, Object> featureProperties = new LinkedHashMap<>();
         int eventType = xmlStreamReader().nextTag();
@@ -177,7 +180,7 @@ public abstract class GPGetFeatureGeoJsonStaxReader extends AbstractStaxStreamRe
      * @param feature
      * @throws Exception
      */
-    void readGeometry(Feature feature, Map<String, Object> featureProperties) throws Exception {
+    final void readGeometry(Feature feature, Map<String, Object> featureProperties) throws Exception {
         String localName = xmlStreamReader().getLocalName();
         logger.trace("@@@@@@@@@@@@@@@@@@@@FOUND GEOMETRY : {} \n", localName);
         feature.setGeometry(this.internalReadGeometry(xmlStreamReader()));

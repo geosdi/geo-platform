@@ -1,0 +1,453 @@
+<?xml version='1.0' encoding="ISO-8859-1" standalone="no" ?>
+<!DOCTYPE WMT_MS_Capabilities SYSTEM "http://schemas.opengis.net/wms/1.1.1/WMS_MS_Capabilities.dtd"
+ [
+ <!ELEMENT VendorSpecificCapabilities EMPTY>
+ ]>  <!-- end of DOCTYPE declaration -->
+
+<WMT_MS_Capabilities version="1.1.1">
+
+<!-- MapServer version 6.4.1 OUTPUT=GIF OUTPUT=PNG OUTPUT=JPEG OUTPUT=KML SUPPORTS=PROJ SUPPORTS=GD SUPPORTS=AGG SUPPORTS=FREETYPE SUPPORTS=CAIRO SUPPORTS=SVG_SYMBOLS SUPPORTS=SVGCAIRO SUPPORTS=ICONV SUPPORTS=FRIBIDI SUPPORTS=WMS_SERVER SUPPORTS=WMS_CLIENT SUPPORTS=WFS_SERVER SUPPORTS=WFS_CLIENT SUPPORTS=WCS_SERVER SUPPORTS=SOS_SERVER SUPPORTS=FASTCGI SUPPORTS=THREADS SUPPORTS=GEOS INPUT=JPEG INPUT=POSTGIS INPUT=OGR INPUT=GDAL INPUT=SHAPEFILE -->
+
+<Service>
+  <Name>OGC:WMS</Name>
+  <Title>Catalogo frane</Title>
+  <Abstract>Nel 2008, nell&#39;ambito del Piano Straordinario di Telerilevamento (PST), la Direzione generale per la tutela del territorio e delle risorse idriche ha avviato, in collaborazione con le Regioni, un&#39;attività di raccolta dei dati appartenenti all&#39;inventario IFFI che le Regioni stesse, con proprie risorse, continuano ad aggiornare. Pertanto, al fine di fornire un quadro completo ed aggiornato (2009) sulla distribuzione dei fenomeni franosi sono stati predisposti strati informativi organizzati secondo le geometrie e alcune tipologie di movimento a partire dai database regionali, opportunamente omogeneizzati. Risoluzione 1:25.000.</Abstract>
+  <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Catalogo_Frane.map&amp;"/>
+  <ContactInformation>
+    <ContactPersonPrimary>
+      <ContactPerson>Geoportale Nazionale - Ministero dell&#39;Ambiente e della Tutela del Territorio e del Mare</ContactPerson>
+      <ContactOrganization>Geoportale Nazionale - Ministero dell&#39;Ambiente e della Tutela del Territorio e del Mare</ContactOrganization>
+    </ContactPersonPrimary>
+      <ContactPosition>distributor</ContactPosition>
+    <ContactAddress>
+        <AddressType>Postale</AddressType>
+        <Address>Via Cristoforo Colombo, 44</Address>
+        <City>Roma</City>
+        <StateOrProvince>RM</StateOrProvince>
+        <PostCode>00147</PostCode>
+        <Country>Italia</Country>
+    </ContactAddress>
+      <ContactVoiceTelephone>+390657223140</ContactVoiceTelephone>
+  <ContactElectronicMailAddress>pcn@minambiente.it</ContactElectronicMailAddress>
+  </ContactInformation>
+  <Fees>Nessuna condizione applicata</Fees>
+  <AccessConstraints>Nessuno</AccessConstraints>
+</Service>
+
+<Capability>
+  <Request>
+    <GetCapabilities>
+      <Format>application/vnd.ogc.wms_xml</Format>
+      <DCPType>
+        <HTTP>
+          <Get><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Catalogo_Frane.map&amp;"/></Get>
+          <Post><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Catalogo_Frane.map&amp;"/></Post>
+        </HTTP>
+      </DCPType>
+    </GetCapabilities>
+    <GetMap>
+      <Format>image/png</Format>
+      <Format>image/jpeg</Format>
+      <Format>image/gif</Format>
+      <Format>image/png; mode=8bit</Format>
+      <Format>application/x-pdf</Format>
+      <Format>image/svg+xml</Format>
+      <Format>image/tiff</Format>
+      <Format>application/vnd.google-earth.kml+xml</Format>
+      <Format>application/vnd.google-earth.kmz</Format>
+      <DCPType>
+        <HTTP>
+          <Get><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Catalogo_Frane.map&amp;"/></Get>
+          <Post><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Catalogo_Frane.map&amp;"/></Post>
+        </HTTP>
+      </DCPType>
+    </GetMap>
+    <GetFeatureInfo>
+      <Format>text/plain</Format>
+      <Format>application/vnd.ogc.gml</Format>
+      <DCPType>
+        <HTTP>
+          <Get><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Catalogo_Frane.map&amp;"/></Get>
+          <Post><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Catalogo_Frane.map&amp;"/></Post>
+        </HTTP>
+      </DCPType>
+    </GetFeatureInfo>
+    <DescribeLayer>
+      <Format>text/xml</Format>
+      <DCPType>
+        <HTTP>
+          <Get><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Catalogo_Frane.map&amp;"/></Get>
+          <Post><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Catalogo_Frane.map&amp;"/></Post>
+        </HTTP>
+      </DCPType>
+    </DescribeLayer>
+    <GetLegendGraphic>
+      <Format>image/png</Format>
+      <Format>image/jpeg</Format>
+      <Format>image/gif</Format>
+      <Format>image/png; mode=8bit</Format>
+      <DCPType>
+        <HTTP>
+          <Get><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Catalogo_Frane.map&amp;"/></Get>
+          <Post><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Catalogo_Frane.map&amp;"/></Post>
+        </HTTP>
+      </DCPType>
+    </GetLegendGraphic>
+    <GetStyles>
+      <Format>text/xml</Format>
+      <DCPType>
+        <HTTP>
+          <Get><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Catalogo_Frane.map&amp;"/></Get>
+          <Post><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Catalogo_Frane.map&amp;"/></Post>
+        </HTTP>
+      </DCPType>
+    </GetStyles>
+  </Request>
+  <Exception>
+    <Format>application/vnd.ogc.se_xml</Format>
+    <Format>application/vnd.ogc.se_inimage</Format>
+    <Format>application/vnd.ogc.se_blank</Format>
+  </Exception>
+  <VendorSpecificCapabilities />
+  <UserDefinedSymbolization SupportSLD="1" UserLayer="0" UserStyle="1" RemoteWFS="0"/>
+  <Layer>
+    <Name>RN.CATALOGO_FRANE</Name>
+    <Title>Catalogo frane</Title>
+    <Abstract>Nel 2008, nell&#39;ambito del Piano Straordinario di Telerilevamento (PST), la Direzione generale per la tutela del territorio e delle risorse idriche ha avviato, in collaborazione con le Regioni, un&#39;attività di raccolta dei dati appartenenti all&#39;inventario IFFI che le Regioni stesse, con proprie risorse, continuano ad aggiornare. Pertanto, al fine di fornire un quadro completo ed aggiornato (2009) sulla distribuzione dei fenomeni franosi sono stati predisposti strati informativi organizzati secondo le geometrie e alcune tipologie di movimento a partire dai database regionali, opportunamente omogeneizzati. Risoluzione 1:25.000.</Abstract>
+    <SRS>EPSG:4326</SRS>
+    <SRS>EPSG:32632</SRS>
+    <SRS>EPSG:32633</SRS>
+    <SRS>EPSG:4258</SRS>
+    <SRS>EPSG:3004</SRS>
+    <SRS>EPSG:3003</SRS>
+    <SRS>EPSG:4265</SRS>
+    <SRS>EPSG:4806</SRS>
+    <SRS>EPSG:21781</SRS>
+    <SRS>EPSG:900913</SRS>
+    <SRS>EPSG:3857</SRS>
+    <SRS>EPSG:2056</SRS>
+    <LatLonBoundingBox minx="6" miny="34.5" maxx="19" maxy="49" />
+    <BoundingBox SRS="EPSG:4326"
+                minx="6" miny="34.5" maxx="19" maxy="49" />
+    <BoundingBox SRS="EPSG:32632"
+                minx="224545" miny="3.8176e+006" maxx="1.41971e+006" maxy="5.47582e+006" />
+    <BoundingBox SRS="EPSG:32633"
+                minx="-327451" miny="3.8176e+006" maxx="867321" maxy="5.4666e+006" />
+    <BoundingBox SRS="EPSG:4258"
+                minx="6" miny="34.5" maxx="19" maxy="49" />
+    <BoundingBox SRS="EPSG:3004"
+                minx="1.69251e+006" miny="3.81766e+006" maxx="2.88734e+006" maxy="5.46671e+006" />
+    <BoundingBox SRS="EPSG:3003"
+                minx="1.22453e+006" miny="3.81766e+006" maxx="2.41975e+006" maxy="5.47593e+006" />
+    <BoundingBox SRS="EPSG:4265"
+                minx="6" miny="34.5" maxx="19" maxy="49" />
+    <BoundingBox SRS="EPSG:4806"
+                minx="-6.45199" miny="34.4994" maxx="6.54763" maxy="48.9993" />
+    <BoundingBox SRS="EPSG:21781"
+                minx="464700" miny="-1.19366e+006" maxx="1.68218e+006" maxy="490123" />
+    <BoundingBox SRS="EPSG:900913"
+                minx="667917" miny="4.09614e+006" maxx="2.11507e+006" maxy="6.27486e+006" />
+    <BoundingBox SRS="EPSG:3857"
+                minx="667917" miny="4.09614e+006" maxx="2.11507e+006" maxy="6.27486e+006" />
+    <BoundingBox SRS="EPSG:2056"
+                minx="2.4647e+006" miny="-193662" maxx="3.68218e+006" maxy="1.49012e+006" />
+    <AuthorityURL name="www.pcn.minambiente.it">
+      <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="www.pcn.minambiente.it"/>
+    </AuthorityURL>
+    <Layer queryable="1" opaque="0" cascaded="0">
+        <Name>RN.CATALOGO_FRANE.POLIGONALI</Name>
+        <Title>Catalogo frane - Frane poligonali</Title>
+        <Abstract>Lo strato informativo Frane poligonali rappresenta frane di dimensioni inferiori all&#39;ettaro: in funzione della scala della base topografica utilizzata per il rilevamento si è introdotto un valore minimo dell&#39;area cartografabile (scala=1:5.000 area minima=400 m2, scala=1:10.000 area minima=1600 m2; scala=1:25.000 area minima=10.000 m2 ). La tabella associata contiene le seguenti informazioni principali: IDFRANA, codice identificativo della frana; TIPO, indica se il fenomeno è una frana, un&#39;area di espansione o un poligono isolato non contenente il PIFF (1 = frana, 2= area di espansione, 3 = poligono isolato). Lo strato informativo è visualizzabile per scale superiori a 1:250.000.</Abstract>
+        <KeywordList>
+            <Keyword>Zone a rischio naturale</Keyword>
+            <Keyword> Dinamica naturale</Keyword>
+            <Keyword> Frana</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4326</SRS>
+        <SRS>EPSG:32632</SRS>
+        <SRS>EPSG:32633</SRS>
+        <SRS>EPSG:4258</SRS>
+        <SRS>EPSG:3004</SRS>
+        <SRS>EPSG:3003</SRS>
+        <SRS>EPSG:4265</SRS>
+        <SRS>EPSG:4806</SRS>
+        <LatLonBoundingBox minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4326"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:32632"
+                    minx="224545" miny="3.8176e+006" maxx="1.41971e+006" maxy="5.47582e+006" />
+        <BoundingBox SRS="EPSG:32633"
+                    minx="-327451" miny="3.8176e+006" maxx="867321" maxy="5.4666e+006" />
+        <BoundingBox SRS="EPSG:4258"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:3004"
+                    minx="1.69251e+006" miny="3.81766e+006" maxx="2.88734e+006" maxy="5.46671e+006" />
+        <BoundingBox SRS="EPSG:3003"
+                    minx="1.22453e+006" miny="3.81766e+006" maxx="2.41975e+006" maxy="5.47593e+006" />
+        <BoundingBox SRS="EPSG:4265"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4806"
+                    minx="-6.45199" miny="34.4994" maxx="6.54763" maxy="48.9993" />
+        <Identifier authority="www.pcn.minambiente.it">m_amte:299FN3:6595283c-6a16-434b-cc1e-2f78d5922095</Identifier>
+        <MetadataURL type="ISO19115:2003">
+          <Format>text/xml</Format>
+          <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://www.pcn.minambiente.it/geoportal/csw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;outputSchema=http%3A%2F%2Fwww.isotc211.org%2F2005%2Fgmd&amp;elementSetName=full&amp;ID=m_amte:299FN3:f648aeba-b80b-40a1-d608-c45c1db2b48e"/>
+        </MetadataURL>
+        <Style>
+          <Name>GN:Predefinito</Name>
+          <Title>GN:Predefinito</Title>
+          <LegendURL width="237" height="165">
+             <Format>image/png</Format>
+             <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Catalogo_Frane.map&amp;version=1.1.1&amp;service=WMS&amp;request=GetLegendGraphic&amp;layer=RN.CATALOGO_FRANE.POLIGONALI&amp;format=image/png&amp;STYLE=GN:Predefinito"/>
+          </LegendURL>
+        </Style>
+        <ScaleHint min="0" max="93.5442840805569" />
+    </Layer>
+    <Layer queryable="1" opaque="0" cascaded="0">
+        <Name>RN.CATALOGO_FRANE.DGPV</Name>
+        <Title>Catalogo frane - Deformazioni Gravitative Profonde di Versante (DGPV) </Title>
+        <Abstract>Lo strato informativo Deformazioni Gravitative Profonde di Versante (DGPV) rappresenta tutte le frane poligonali classificate come aree soggette a deformazione gravitativa profonda di versante. Lo strato informativo riporta quei fenomeni franosi con superficie significativa e cartografabile alla scala 1:25.000 (dimensione minima= 1ha). La tabella associata contiene le seguenti informazioni principali: IDFRANA, codice identificativo della frana; TIPO, indica la tipologia di area franosa (8 = DGVP). Lo strato informativo è visualizzabile per scale superiori a 1:250.000.</Abstract>
+        <KeywordList>
+            <Keyword>Zone a rischio naturale</Keyword>
+            <Keyword> Dinamica naturale</Keyword>
+            <Keyword> Frana</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4326</SRS>
+        <SRS>EPSG:32632</SRS>
+        <SRS>EPSG:32633</SRS>
+        <SRS>EPSG:4258</SRS>
+        <SRS>EPSG:3004</SRS>
+        <SRS>EPSG:3003</SRS>
+        <SRS>EPSG:4265</SRS>
+        <SRS>EPSG:4806</SRS>
+        <LatLonBoundingBox minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4326"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:32632"
+                    minx="224545" miny="3.8176e+006" maxx="1.41971e+006" maxy="5.47582e+006" />
+        <BoundingBox SRS="EPSG:32633"
+                    minx="-327451" miny="3.8176e+006" maxx="867321" maxy="5.4666e+006" />
+        <BoundingBox SRS="EPSG:4258"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:3004"
+                    minx="1.69251e+006" miny="3.81766e+006" maxx="2.88734e+006" maxy="5.46671e+006" />
+        <BoundingBox SRS="EPSG:3003"
+                    minx="1.22453e+006" miny="3.81766e+006" maxx="2.41975e+006" maxy="5.47593e+006" />
+        <BoundingBox SRS="EPSG:4265"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4806"
+                    minx="-6.45199" miny="34.4994" maxx="6.54763" maxy="48.9993" />
+        <Identifier authority="www.pcn.minambiente.it">m_amte:299FN3:eaa8d492-fb4a-4fac-c6c1-95fd201d2906</Identifier>
+        <MetadataURL type="ISO19115:2003">
+          <Format>text/xml</Format>
+          <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://www.pcn.minambiente.it/geoportal/csw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;outputSchema=http%3A%2F%2Fwww.isotc211.org%2F2005%2Fgmd&amp;elementSetName=full&amp;ID=m_amte:299FN3:bced7a41-2ca7-4df5-c142-e95aafab0f8c"/>
+        </MetadataURL>
+        <Style>
+          <Name>GN:Predefinito</Name>
+          <Title>GN:Predefinito</Title>
+          <LegendURL width="77" height="25">
+             <Format>image/png</Format>
+             <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Catalogo_Frane.map&amp;version=1.1.1&amp;service=WMS&amp;request=GetLegendGraphic&amp;layer=RN.CATALOGO_FRANE.DGPV&amp;format=image/png&amp;STYLE=GN:Predefinito"/>
+          </LegendURL>
+        </Style>
+        <ScaleHint min="0" max="93.5442840805569" />
+    </Layer>
+    <Layer queryable="1" opaque="0" cascaded="0">
+        <Name>RN.CATALOGO_FRANE.AREE.FRANE.DIFFUSE</Name>
+        <Title>Catalogo frane - Aree soggette a franosità diffuse</Title>
+        <Abstract>Lo strato informativo Aree rappresenta tutte le frane poligonali classificate come: aree soggette a crolli/ribaltamenti diffusi; aree soggette a sprofondamenti diffusi; aree soggette a frane superficiali diffuse. Lo strato informativo riporta quei fenomeni franosi con superficie significativa e cartografabile alla scala 1:25.000 (dimensione minima= 1ha). La tabella associata contiene le seguenti informazioni principali: IDFRANA, codice identificativo della frana; TIPO, indica la tipologia di area franosa (9 = Aree soggette a crolli/ ribaltamenti diffusi; 10 = Aree soggette a sprofondamenti diffusi; 11 = Aree soggette a frane superficiali diffuse). Lo strato informativo è visualizzabile per scale superiori a 1:250.000.</Abstract>
+        <KeywordList>
+            <Keyword>Zone a rischio naturale</Keyword>
+            <Keyword> Dinamica naturale</Keyword>
+            <Keyword> Frana</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4326</SRS>
+        <SRS>EPSG:32632</SRS>
+        <SRS>EPSG:32633</SRS>
+        <SRS>EPSG:4258</SRS>
+        <SRS>EPSG:3004</SRS>
+        <SRS>EPSG:3003</SRS>
+        <SRS>EPSG:4265</SRS>
+        <SRS>EPSG:4806</SRS>
+        <LatLonBoundingBox minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4326"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:32632"
+                    minx="224545" miny="3.8176e+006" maxx="1.41971e+006" maxy="5.47582e+006" />
+        <BoundingBox SRS="EPSG:32633"
+                    minx="-327451" miny="3.8176e+006" maxx="867321" maxy="5.4666e+006" />
+        <BoundingBox SRS="EPSG:4258"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:3004"
+                    minx="1.69251e+006" miny="3.81766e+006" maxx="2.88734e+006" maxy="5.46671e+006" />
+        <BoundingBox SRS="EPSG:3003"
+                    minx="1.22453e+006" miny="3.81766e+006" maxx="2.41975e+006" maxy="5.47593e+006" />
+        <BoundingBox SRS="EPSG:4265"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4806"
+                    minx="-6.45199" miny="34.4994" maxx="6.54763" maxy="48.9993" />
+        <Identifier authority="www.pcn.minambiente.it">m_amte:299FN3:d674babe-b3e2-4669-f279-6e3b0b50b405</Identifier>
+        <MetadataURL type="ISO19115:2003">
+          <Format>text/xml</Format>
+          <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://www.pcn.minambiente.it/geoportal/csw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;outputSchema=http%3A%2F%2Fwww.isotc211.org%2F2005%2Fgmd&amp;elementSetName=full&amp;ID=m_amte:299FN3:a39c7888-254e-4a3e-f295-07dfdaa0dfe2"/>
+        </MetadataURL>
+        <Style>
+          <Name>GN:Predefinito</Name>
+          <Title>GN:Predefinito</Title>
+          <LegendURL width="271" height="65">
+             <Format>image/png</Format>
+             <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Catalogo_Frane.map&amp;version=1.1.1&amp;service=WMS&amp;request=GetLegendGraphic&amp;layer=RN.CATALOGO_FRANE.AREE.FRANE.DIFFUSE&amp;format=image/png&amp;STYLE=GN:Predefinito"/>
+          </LegendURL>
+        </Style>
+        <ScaleHint min="0" max="93.5442840805569" />
+    </Layer>
+    <Layer queryable="1" opaque="0" cascaded="0">
+        <Name>RN.CATALOGO_FRANE.DIREZIONI</Name>
+        <Title>Catalogo frane - Direzioni</Title>
+        <Abstract>Lo strato informativo Direzioni rappresenta le direzioni di scorrimento per tutti i fenomeni franosi contenuti negli strati informativi Frane poligonali, Deformazioni Gravitative Profonde di Versante (DGPV), Aree. La tabella associata contiene la seguente informazione principale: IDFRANA, codice identificativo della frana. Lo strato informativo è visualizzabile per scale superiori a 1:250.000.</Abstract>
+        <KeywordList>
+            <Keyword>Zone a rischio naturale</Keyword>
+            <Keyword> Dinamica naturale</Keyword>
+            <Keyword> Frana</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4326</SRS>
+        <SRS>EPSG:32632</SRS>
+        <SRS>EPSG:32633</SRS>
+        <SRS>EPSG:4258</SRS>
+        <SRS>EPSG:3004</SRS>
+        <SRS>EPSG:3003</SRS>
+        <SRS>EPSG:4265</SRS>
+        <SRS>EPSG:4806</SRS>
+        <LatLonBoundingBox minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4326"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:32632"
+                    minx="224545" miny="3.8176e+006" maxx="1.41971e+006" maxy="5.47582e+006" />
+        <BoundingBox SRS="EPSG:32633"
+                    minx="-327451" miny="3.8176e+006" maxx="867321" maxy="5.4666e+006" />
+        <BoundingBox SRS="EPSG:4258"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:3004"
+                    minx="1.69251e+006" miny="3.81766e+006" maxx="2.88734e+006" maxy="5.46671e+006" />
+        <BoundingBox SRS="EPSG:3003"
+                    minx="1.22453e+006" miny="3.81766e+006" maxx="2.41975e+006" maxy="5.47593e+006" />
+        <BoundingBox SRS="EPSG:4265"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4806"
+                    minx="-6.45199" miny="34.4994" maxx="6.54763" maxy="48.9993" />
+        <Identifier authority="www.pcn.minambiente.it">m_amte:299FN3:102183ae-6812-4286-a65b-2f8868943521</Identifier>
+        <MetadataURL type="ISO19115:2003">
+          <Format>text/xml</Format>
+          <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://www.pcn.minambiente.it/geoportal/csw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;outputSchema=http%3A%2F%2Fwww.isotc211.org%2F2005%2Fgmd&amp;elementSetName=full&amp;ID=m_amte:299FN3:600cc327-f2e4-4932-c00e-60d45d0a090d"/>
+        </MetadataURL>
+        <Style>
+          <Name>GN:Predefinito</Name>
+          <Title>GN:Predefinito</Title>
+          <LegendURL width="88" height="25">
+             <Format>image/png</Format>
+             <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Catalogo_Frane.map&amp;version=1.1.1&amp;service=WMS&amp;request=GetLegendGraphic&amp;layer=RN.CATALOGO_FRANE.DIREZIONI&amp;format=image/png&amp;STYLE=GN:Predefinito"/>
+          </LegendURL>
+        </Style>
+        <ScaleHint min="0" max="93.5442840805569" />
+    </Layer>
+    <Layer queryable="1" opaque="0" cascaded="0">
+        <Name>RN.CATALOGO_FRANE.LINEARI</Name>
+        <Title>Catalogo frane - Frane lineari</Title>
+        <Abstract>Lo strato informativo Frane lineari rappresenta i fenomeni franosi la cui lunghezza è molto maggiore della larghezza e quest&#39;ultima è così piccola da non essere cartografabile a scala 1:25.000. Sono comunque esclusi tutti quei fenomeni classificati come aree soggette a crolli/ribaltamenti diffusi, aree soggette a sprofondamenti diffusi, aree soggette a frane superficiali diffuse, DGPV. La tabella associata contiene la seguente informazione principale: IDFRANA, codice identificativo della frana. Lo strato informativo è visualizzabile per scale superiori a 1:250.000.</Abstract>
+        <KeywordList>
+            <Keyword>Zone a rischio naturale</Keyword>
+            <Keyword> Dinamica naturale</Keyword>
+            <Keyword> Frana</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4326</SRS>
+        <SRS>EPSG:32632</SRS>
+        <SRS>EPSG:32633</SRS>
+        <SRS>EPSG:4258</SRS>
+        <SRS>EPSG:3004</SRS>
+        <SRS>EPSG:3003</SRS>
+        <SRS>EPSG:4265</SRS>
+        <SRS>EPSG:4806</SRS>
+        <LatLonBoundingBox minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4326"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:32632"
+                    minx="224545" miny="3.8176e+006" maxx="1.41971e+006" maxy="5.47582e+006" />
+        <BoundingBox SRS="EPSG:32633"
+                    minx="-327451" miny="3.8176e+006" maxx="867321" maxy="5.4666e+006" />
+        <BoundingBox SRS="EPSG:4258"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:3004"
+                    minx="1.69251e+006" miny="3.81766e+006" maxx="2.88734e+006" maxy="5.46671e+006" />
+        <BoundingBox SRS="EPSG:3003"
+                    minx="1.22453e+006" miny="3.81766e+006" maxx="2.41975e+006" maxy="5.47593e+006" />
+        <BoundingBox SRS="EPSG:4265"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4806"
+                    minx="-6.45199" miny="34.4994" maxx="6.54763" maxy="48.9993" />
+        <Identifier authority="www.pcn.minambiente.it">m_amte:299FN3:5902e8dd-af86-40ff-da13-1b4f1dd5e96f</Identifier>
+        <MetadataURL type="ISO19115:2003">
+          <Format>text/xml</Format>
+          <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://www.pcn.minambiente.it/geoportal/csw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;outputSchema=http%3A%2F%2Fwww.isotc211.org%2F2005%2Fgmd&amp;elementSetName=full&amp;ID=m_amte:299FN3:2b7dfce8-abec-4179-cf69-091bc0886c84"/>
+        </MetadataURL>
+        <Style>
+          <Name>GN:Predefinito</Name>
+          <Title>GN:Predefinito</Title>
+          <LegendURL width="88" height="25">
+             <Format>image/png</Format>
+             <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Catalogo_Frane.map&amp;version=1.1.1&amp;service=WMS&amp;request=GetLegendGraphic&amp;layer=RN.CATALOGO_FRANE.LINEARI&amp;format=image/png&amp;STYLE=GN:Predefinito"/>
+          </LegendURL>
+        </Style>
+        <ScaleHint min="0" max="93.5442840805569" />
+    </Layer>
+    <Layer queryable="1" opaque="0" cascaded="0">
+        <Name>RN.CATALOGO_FRANE.PIFF</Name>
+        <Title>Catalogo frane - Punti Identificativi Fenomeni Franosi (PIFF)</Title>
+        <Abstract>Lo strato informativo Punti Identificativi Fenomeni Franosi (PIFF) rappresenta i punti più elevati del coronamento della frana. La tabella associata contiene le seguenti informazioni: LATITUDI, Latitudine espressa in gradi decimali (ED50); LONGITU, Longitudine gradi decimali (ED50); X-COORD, coordinata piana espressa in metri (UTM-32); Y-COORD, coordinata piana espressa in metri (UTM-32); DIREZIONE, direzione di movimento nel punto sommitale (lo 0 coincide con il nord e l&#39;angolo è calcolato in senso orario; per fenomeni franosi di tipo sprofondamento assume valore 999); TIPO, Tipo di frana (0=n.d., 1=Crollo/ribaltamento, 2=Scivolamento rotazionale/traslativo, 3=Espansione, 4=Colamento lento, 5=Colamento rapido, 6=Sprofondamento, 7=Complesso, 8=DGPV, 9=Aree soggette a crolli/ribaltamenti diffusi, 10=Aree soggette a sprofondamenti diffusi, 11=Aree soggette a frane superficiali diffuse); PUNTI, definisce se la frana è presente solo in questo strato informativo (topologia puntuale); LINEE, definisce se la frana è presente nello strato informativo FRANE LINEARI (topologia lineare); POLIGONI, definisce se la frana è presente nello strato informativo FRANE (topologia poligonale); REGIONE; PROVINCIA; IDFRANA, identificativo unico della frana; coord_system_originale, sistema di riferimento originale dello strato informativo. Lo strato informativo è visualizzabile per scale superiori a 1:250.000.</Abstract>
+        <KeywordList>
+            <Keyword>Zone a rischio naturale</Keyword>
+            <Keyword> Dinamica naturale</Keyword>
+            <Keyword> Frana</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4326</SRS>
+        <SRS>EPSG:32632</SRS>
+        <SRS>EPSG:32633</SRS>
+        <SRS>EPSG:4258</SRS>
+        <SRS>EPSG:3004</SRS>
+        <SRS>EPSG:3003</SRS>
+        <SRS>EPSG:4265</SRS>
+        <SRS>EPSG:4806</SRS>
+        <LatLonBoundingBox minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4326"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:32632"
+                    minx="224545" miny="3.8176e+006" maxx="1.41971e+006" maxy="5.47582e+006" />
+        <BoundingBox SRS="EPSG:32633"
+                    minx="-327451" miny="3.8176e+006" maxx="867321" maxy="5.4666e+006" />
+        <BoundingBox SRS="EPSG:4258"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:3004"
+                    minx="1.69251e+006" miny="3.81766e+006" maxx="2.88734e+006" maxy="5.46671e+006" />
+        <BoundingBox SRS="EPSG:3003"
+                    minx="1.22453e+006" miny="3.81766e+006" maxx="2.41975e+006" maxy="5.47593e+006" />
+        <BoundingBox SRS="EPSG:4265"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4806"
+                    minx="-6.45199" miny="34.4994" maxx="6.54763" maxy="48.9993" />
+        <Identifier authority="www.pcn.minambiente.it">m_amte:299FN3:0f33cfa3-c90b-4686-df48-7b933c52433c</Identifier>
+        <MetadataURL type="ISO19115:2003">
+          <Format>text/xml</Format>
+          <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://www.pcn.minambiente.it/geoportal/csw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;outputSchema=http%3A%2F%2Fwww.isotc211.org%2F2005%2Fgmd&amp;elementSetName=full&amp;ID=m_amte:299FN3:ca7b9c7f-194d-4416-cb45-af9ddfc8c64a"/>
+        </MetadataURL>
+        <Style>
+          <Name>GN:Predefinito</Name>
+          <Title>GN:Predefinito</Title>
+          <LegendURL width="58" height="25">
+             <Format>image/png</Format>
+             <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Catalogo_Frane.map&amp;version=1.1.1&amp;service=WMS&amp;request=GetLegendGraphic&amp;layer=RN.CATALOGO_FRANE.PIFF&amp;format=image/png&amp;STYLE=GN:Predefinito"/>
+          </LegendURL>
+        </Style>
+        <ScaleHint min="0" max="93.5442840805569" />
+    </Layer>
+  </Layer>
+</Capability>
+</WMT_MS_Capabilities>

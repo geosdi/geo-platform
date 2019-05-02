@@ -21,13 +21,14 @@ public abstract class WMSGetFeatureInfoStaxReader extends GPGetFeatureGeoJsonSta
     private static final String FID_LOCAL_NAME = "fid";
     private static final GPWMSGml2GeoJsonParser GML2_GEO_JSON_PARSER = new WMSGml2GeoJsonParser();
 
-    protected WMSGetFeatureInfoStaxReader() {
+    WMSGetFeatureInfoStaxReader() {
         super(FID_LOCAL_NAME);
     }
 
     /**
      * @throws Exception
      */
+    @Override
     protected void readFeatures(Feature feature) throws Exception {
         super.readFeatures(feature);
         super.goToEndTag(FEATURE_MEMBER_LOCAL_NAME);

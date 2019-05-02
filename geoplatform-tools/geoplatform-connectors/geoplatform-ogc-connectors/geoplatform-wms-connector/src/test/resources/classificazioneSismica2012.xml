@@ -1,0 +1,214 @@
+<?xml version='1.0' encoding="ISO-8859-1" standalone="no" ?>
+<!DOCTYPE WMT_MS_Capabilities SYSTEM "http://schemas.opengis.net/wms/1.1.1/WMS_MS_Capabilities.dtd"
+ [
+ <!ELEMENT VendorSpecificCapabilities EMPTY>
+ ]>  <!-- end of DOCTYPE declaration -->
+
+<WMT_MS_Capabilities version="1.1.1">
+
+<!-- MapServer version 6.4.1 OUTPUT=GIF OUTPUT=PNG OUTPUT=JPEG OUTPUT=KML SUPPORTS=PROJ SUPPORTS=GD SUPPORTS=AGG SUPPORTS=FREETYPE SUPPORTS=CAIRO SUPPORTS=SVG_SYMBOLS SUPPORTS=SVGCAIRO SUPPORTS=ICONV SUPPORTS=FRIBIDI SUPPORTS=WMS_SERVER SUPPORTS=WMS_CLIENT SUPPORTS=WFS_SERVER SUPPORTS=WFS_CLIENT SUPPORTS=WCS_SERVER SUPPORTS=SOS_SERVER SUPPORTS=FASTCGI SUPPORTS=THREADS SUPPORTS=GEOS INPUT=JPEG INPUT=POSTGIS INPUT=OGR INPUT=GDAL INPUT=SHAPEFILE -->
+
+<Service>
+  <Name>OGC:WMS</Name>
+  <Title>Classificazione sismica dei comuni italiani al 2012</Title>
+  <Abstract>Classificazione dei comuni italiani in base al rischio sismico al 2012. Nel 2003 sono stati emanati i criteri di nuova classificazione sismica del territorio nazionale, basati sugli studi e le elaborazioni più recenti relative alla pericolosità sismica del territorio, ossia sull&#39;analisi della probabilità che il territorio venga interessato in un certo intervallo di tempo (generalmente 50 anni) da un evento che superi una determinata soglia di intensità o magnitudo. A tal fine è stata pubblicata l&#39;Ordinanza del Presidente del Consiglio dei Ministri n. 3274 del 20 marzo 2003, sulla Gazzetta Ufficiale n. 105 dell8 maggio 2003.  Un aggiornamento dello studio di pericolosità di riferimento nazionale (Gruppo di Lavoro, 2004), previsto dall&#39;opcm 3274/03, è stato adottato con l&#39;Ordinanza del Presidente del Consiglio dei Ministri n. 3519 del 28 aprile 2006. Il nuovo studio di pericolosità, allegato all&#39;OPCM n. 3519, ha fornito alle Regioni uno strumento aggiornato per la classificazione del proprio territorio, introducendo degli intervalli di accelerazione (ag), con probabilità di superamento pari al 10% in 50 anni, da attribuire alle 4 zone sismiche.  Zona sismica 1: ag &gt; 0.25; Zona sismica  2:  0.15 &lt; ag &lt;= 0.25; Zona sismica  3:  0.05 &lt; ag &lt;= 0.15; Zona sismica 4: ag &lt;= 0.05. Nel rispetto degli indirizzi e criteri stabiliti a livello nazionale, alcune Regioni hanno classificato il territorio nelle quattro zone proposte, altre Regioni hanno classificato diversamente il proprio territorio, ad esempio adottando solo tre zone (zona 1, 2 e 3) e introducendo, in alcuni casi, delle sottozone per meglio adattare le norme alle caratteristiche di sismicità. Per il dettaglio e significato delle zonazioni di ciascuna Regione, si rimanda alle disposizioni normative regionali. Risoluzione 1:25.000</Abstract>
+  <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Classificazione_sismica_2012.map&amp;"/>
+  <ContactInformation>
+    <ContactPersonPrimary>
+      <ContactPerson>Geoportale Nazionale - Ministero dell&#39;Ambiente e della Tutela del Territorio e del Mare</ContactPerson>
+      <ContactOrganization>Geoportale Nazionale - Ministero dell&#39;Ambiente e della Tutela del Territorio e del Mare</ContactOrganization>
+    </ContactPersonPrimary>
+      <ContactPosition>distributor</ContactPosition>
+    <ContactAddress>
+        <AddressType>Postale</AddressType>
+        <Address>Via Cristoforo Colombo, 44</Address>
+        <City>Roma</City>
+        <StateOrProvince>RM</StateOrProvince>
+        <PostCode>00147</PostCode>
+        <Country>Italia</Country>
+    </ContactAddress>
+      <ContactVoiceTelephone>+390657223140</ContactVoiceTelephone>
+  <ContactElectronicMailAddress>pcn@minambiente.it</ContactElectronicMailAddress>
+  </ContactInformation>
+  <Fees>Nessuna condizione applicata</Fees>
+  <AccessConstraints>Nessuno</AccessConstraints>
+</Service>
+
+<Capability>
+  <Request>
+    <GetCapabilities>
+      <Format>application/vnd.ogc.wms_xml</Format>
+      <DCPType>
+        <HTTP>
+          <Get><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Classificazione_sismica_2012.map&amp;"/></Get>
+          <Post><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Classificazione_sismica_2012.map&amp;"/></Post>
+        </HTTP>
+      </DCPType>
+    </GetCapabilities>
+    <GetMap>
+      <Format>image/png</Format>
+      <Format>image/jpeg</Format>
+      <Format>image/gif</Format>
+      <Format>image/png; mode=8bit</Format>
+      <Format>application/x-pdf</Format>
+      <Format>image/svg+xml</Format>
+      <Format>image/tiff</Format>
+      <Format>application/vnd.google-earth.kml+xml</Format>
+      <Format>application/vnd.google-earth.kmz</Format>
+      <DCPType>
+        <HTTP>
+          <Get><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Classificazione_sismica_2012.map&amp;"/></Get>
+          <Post><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Classificazione_sismica_2012.map&amp;"/></Post>
+        </HTTP>
+      </DCPType>
+    </GetMap>
+    <GetFeatureInfo>
+      <Format>text/plain</Format>
+      <Format>application/vnd.ogc.gml</Format>
+      <DCPType>
+        <HTTP>
+          <Get><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Classificazione_sismica_2012.map&amp;"/></Get>
+          <Post><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Classificazione_sismica_2012.map&amp;"/></Post>
+        </HTTP>
+      </DCPType>
+    </GetFeatureInfo>
+    <DescribeLayer>
+      <Format>text/xml</Format>
+      <DCPType>
+        <HTTP>
+          <Get><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Classificazione_sismica_2012.map&amp;"/></Get>
+          <Post><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Classificazione_sismica_2012.map&amp;"/></Post>
+        </HTTP>
+      </DCPType>
+    </DescribeLayer>
+    <GetLegendGraphic>
+      <Format>image/png</Format>
+      <Format>image/jpeg</Format>
+      <Format>image/gif</Format>
+      <Format>image/png; mode=8bit</Format>
+      <DCPType>
+        <HTTP>
+          <Get><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Classificazione_sismica_2012.map&amp;"/></Get>
+          <Post><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Classificazione_sismica_2012.map&amp;"/></Post>
+        </HTTP>
+      </DCPType>
+    </GetLegendGraphic>
+    <GetStyles>
+      <Format>text/xml</Format>
+      <DCPType>
+        <HTTP>
+          <Get><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Classificazione_sismica_2012.map&amp;"/></Get>
+          <Post><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Classificazione_sismica_2012.map&amp;"/></Post>
+        </HTTP>
+      </DCPType>
+    </GetStyles>
+  </Request>
+  <Exception>
+    <Format>application/vnd.ogc.se_xml</Format>
+    <Format>application/vnd.ogc.se_inimage</Format>
+    <Format>application/vnd.ogc.se_blank</Format>
+  </Exception>
+  <VendorSpecificCapabilities />
+  <UserDefinedSymbolization SupportSLD="1" UserLayer="0" UserStyle="1" RemoteWFS="0"/>
+  <Layer>
+    <Name>RN.ZONERISCHIO.CLASSIFICAZIONE_SISMICA</Name>
+    <Title>Classificazione sismica dei comuni italiani al 2012</Title>
+    <Abstract>Classificazione dei comuni italiani in base al rischio sismico al 2012. Nel 2003 sono stati emanati i criteri di nuova classificazione sismica del territorio nazionale, basati sugli studi e le elaborazioni più recenti relative alla pericolosità sismica del territorio, ossia sull&#39;analisi della probabilità che il territorio venga interessato in un certo intervallo di tempo (generalmente 50 anni) da un evento che superi una determinata soglia di intensità o magnitudo. A tal fine è stata pubblicata l&#39;Ordinanza del Presidente del Consiglio dei Ministri n. 3274 del 20 marzo 2003, sulla Gazzetta Ufficiale n. 105 dell8 maggio 2003.  Un aggiornamento dello studio di pericolosità di riferimento nazionale (Gruppo di Lavoro, 2004), previsto dall&#39;opcm 3274/03, è stato adottato con l&#39;Ordinanza del Presidente del Consiglio dei Ministri n. 3519 del 28 aprile 2006. Il nuovo studio di pericolosità, allegato all&#39;OPCM n. 3519, ha fornito alle Regioni uno strumento aggiornato per la classificazione del proprio territorio, introducendo degli intervalli di accelerazione (ag), con probabilità di superamento pari al 10% in 50 anni, da attribuire alle 4 zone sismiche.  Zona sismica 1: ag &gt; 0.25; Zona sismica  2:  0.15 &lt; ag &lt;= 0.25; Zona sismica  3:  0.05 &lt; ag &lt;= 0.15; Zona sismica 4: ag &lt;= 0.05. Nel rispetto degli indirizzi e criteri stabiliti a livello nazionale, alcune Regioni hanno classificato il territorio nelle quattro zone proposte, altre Regioni hanno classificato diversamente il proprio territorio, ad esempio adottando solo tre zone (zona 1, 2 e 3) e introducendo, in alcuni casi, delle sottozone per meglio adattare le norme alle caratteristiche di sismicità. Per il dettaglio e significato delle zonazioni di ciascuna Regione, si rimanda alle disposizioni normative regionali. Risoluzione 1:25.000</Abstract>
+    <SRS>EPSG:4326</SRS>
+    <SRS>EPSG:32632</SRS>
+    <SRS>EPSG:32633</SRS>
+    <SRS>EPSG:4258</SRS>
+    <SRS>EPSG:3004</SRS>
+    <SRS>EPSG:3003</SRS>
+    <SRS>EPSG:4265</SRS>
+    <SRS>EPSG:4806</SRS>
+    <SRS>EPSG:21781</SRS>
+    <SRS>EPSG:900913</SRS>
+    <SRS>EPSG:3857</SRS>
+    <SRS>EPSG:2056</SRS>
+    <SRS>EPSG:3035</SRS>
+    <LatLonBoundingBox minx="6" miny="34.5" maxx="19" maxy="49" />
+    <BoundingBox SRS="EPSG:4326"
+                minx="6" miny="34.5" maxx="19" maxy="49" />
+    <BoundingBox SRS="EPSG:32632"
+                minx="224545" miny="3.8176e+006" maxx="1.41971e+006" maxy="5.47582e+006" />
+    <BoundingBox SRS="EPSG:32633"
+                minx="-327451" miny="3.8176e+006" maxx="867321" maxy="5.4666e+006" />
+    <BoundingBox SRS="EPSG:4258"
+                minx="6" miny="34.5" maxx="19" maxy="49" />
+    <BoundingBox SRS="EPSG:3004"
+                minx="1.69251e+006" miny="3.81766e+006" maxx="2.88734e+006" maxy="5.46671e+006" />
+    <BoundingBox SRS="EPSG:3003"
+                minx="1.22453e+006" miny="3.81766e+006" maxx="2.41975e+006" maxy="5.47593e+006" />
+    <BoundingBox SRS="EPSG:4265"
+                minx="6" miny="34.5" maxx="19" maxy="49" />
+    <BoundingBox SRS="EPSG:4806"
+                minx="-6.45199" miny="34.4994" maxx="6.54763" maxy="48.9993" />
+    <BoundingBox SRS="EPSG:21781"
+                minx="464700" miny="-1.19366e+006" maxx="1.68218e+006" maxy="490123" />
+    <BoundingBox SRS="EPSG:900913"
+                minx="667917" miny="4.09614e+006" maxx="2.11507e+006" maxy="6.27486e+006" />
+    <BoundingBox SRS="EPSG:3857"
+                minx="667917" miny="4.09614e+006" maxx="2.11507e+006" maxy="6.27486e+006" />
+    <BoundingBox SRS="EPSG:2056"
+                minx="2.4647e+006" miny="-193662" maxx="3.68218e+006" maxy="1.49012e+006" />
+    <BoundingBox SRS="EPSG:3035"
+                minx="3.94963e+006" miny="1.273e+006" maxx="5.15491e+006" maxy="2.91653e+006" />
+    <AuthorityURL name="www.pcn.minambiente.it">
+      <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="www.pcn.minambiente.it"/>
+    </AuthorityURL>
+    <Layer queryable="1" opaque="0" cascaded="0">
+        <Name>RN.ZONERISCHIO.CLASSIFICAZIONESISMICA</Name>
+        <Title>Classificazione sismica dei comuni italiani al 2012</Title>
+        <Abstract>Classificazione dei comuni italiani in base al rischio sismico al 2012. La tabella associata contiene le seguenti informazioni: CODICE_ISTAT, codice ISTAT del comune; COMUNE, nome del comune (ISTAT 2001); PROVINCIA, nome della provincia (ISTAT 2001); REGIONE, nome della regione; COD_REGIONE, codice della regione; COD_PROVINCIA, codice della Provincia, COD_COMUNE, codice del comune, ALTITUDINE, altitudine del centro del capoluogo comunale in m slm; SUPERFICIE, superficie del territorio comunale in kmq; POPOLAZIONE_20101230, popolazione residente al 30/12/2010; CLASSIFICAZIONE, zona o sottozona sismica in cui è stato classificato il territorio comunale; NORMATIVA, contiene il tipo di Atto regionale o provinciale di recepimento della normativa sismica al 2010; NUMERO, contiene il numero della delibera di recepimento della normativa sismica al 2012; DATA, riporta la data della delibera di recepimento della normativa sismica al 2012; DESCRIZIONE, riporta la descrizione del livello di pericolosità associato ad ogni zona; Ag, riporta, per ciascuna zona, il range e/o il valore dell&#39;accelerazione orizzontale massima su suolo rigido e pianeggiante, che ha una probabilità del 10% di essere superata in un intervallo di tempo di 50 anni.</Abstract>
+        <KeywordList>
+            <Keyword>Zone a rischio naturale</Keyword>
+            <Keyword> Attività  sismica</Keyword>
+            <Keyword> Terremoto</Keyword>
+            <Keyword> Classificazione sismica</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4326</SRS>
+        <SRS>EPSG:32632</SRS>
+        <SRS>EPSG:32633</SRS>
+        <SRS>EPSG:4258</SRS>
+        <SRS>EPSG:3004</SRS>
+        <SRS>EPSG:3003</SRS>
+        <SRS>EPSG:4265</SRS>
+        <SRS>EPSG:4806</SRS>
+        <SRS>EPSG:3035</SRS>
+        <LatLonBoundingBox minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4326"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:32632"
+                    minx="224545" miny="3.8176e+006" maxx="1.41971e+006" maxy="5.47582e+006" />
+        <BoundingBox SRS="EPSG:32633"
+                    minx="-327451" miny="3.8176e+006" maxx="867321" maxy="5.4666e+006" />
+        <BoundingBox SRS="EPSG:4258"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:3004"
+                    minx="1.69251e+006" miny="3.81766e+006" maxx="2.88734e+006" maxy="5.46671e+006" />
+        <BoundingBox SRS="EPSG:3003"
+                    minx="1.22453e+006" miny="3.81766e+006" maxx="2.41975e+006" maxy="5.47593e+006" />
+        <BoundingBox SRS="EPSG:4265"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4806"
+                    minx="-6.45199" miny="34.4994" maxx="6.54763" maxy="48.9993" />
+        <BoundingBox SRS="EPSG:3035"
+                    minx="3.94963e+006" miny="1.273e+006" maxx="5.15491e+006" maxy="2.91653e+006" />
+        <Identifier authority="www.pcn.minambiente.it">m_amte:299FN3:ce45fcd2-fb82-426b-d5e8-160fcc4ec050</Identifier>
+        <MetadataURL type="ISO19115:2003">
+          <Format>text/xml</Format>
+          <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://www.pcn.minambiente.it/geoportal/csw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;outputSchema=http%3A%2F%2Fwww.isotc211.org%2F2005%2Fgmd&amp;elementSetName=full&amp;ID=m_amte:299FN3:c43e8c5c-d732-4b52-d71a-808bf0269a74"/>
+        </MetadataURL>
+        <Style>
+          <Name>GN:Predefinito</Name>
+          <Title>GN:Predefinito</Title>
+          <LegendURL width="510" height="305">
+             <Format>image/png</Format>
+             <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Classificazione_sismica_2012.map&amp;version=1.1.1&amp;service=WMS&amp;request=GetLegendGraphic&amp;layer=RN.ZONERISCHIO.CLASSIFICAZIONESISMICA&amp;format=image/png&amp;STYLE=GN:Predefinito"/>
+          </LegendURL>
+        </Style>
+    </Layer>
+  </Layer>
+</Capability>
+</WMT_MS_Capabilities>

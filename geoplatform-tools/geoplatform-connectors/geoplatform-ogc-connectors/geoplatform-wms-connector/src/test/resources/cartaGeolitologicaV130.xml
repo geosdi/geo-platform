@@ -1,0 +1,335 @@
+<WMS_Capabilities xmlns="http://www.opengis.net/wms" xmlns:sld="http://www.opengis.net/sld"
+                  xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  version="1.3.0" xmlns:inspire_common="http://inspire.ec.europa.eu/schemas/common/1.0"
+                  xmlns:inspire_vs="http://inspire.ec.europa.eu/schemas/inspire_vs/1.0"
+                  xsi:schemaLocation="http://www.opengis.net/wms http://schemas.opengis.net/wms/1.3.0/capabilities_1_3_0.xsd  http://www.opengis.net/sld http://schemas.opengis.net/sld/1.1.0/sld_capabilities.xsd    http://inspire.ec.europa.eu/schemas/inspire_vs/1.0 http://inspire.ec.europa.eu/schemas/inspire_vs/1.0/inspire_vs.xsd">
+
+
+    <Service>
+        <Name>WMS</Name>
+        <Title>Carta geologica d'Italia</Title>
+        <Abstract>Carta geologica d'Italia alla scala 1:500.000. La legenda &#232; stata ricostruita a partire dalla
+            versione cartacea. Risoluzione 1:500.000.
+        </Abstract>
+        <KeywordList>
+            <Keyword vocabulary="ISO">infoMapAccessService</Keyword>
+            <Keyword vocabulary="GEMET">Geologia</Keyword>
+            <Keyword vocabulary="GEMET">Dinamica naturale</Keyword>
+            <Keyword vocabulary="GEMET">Suolo</Keyword>
+            <Keyword vocabulary="GEMET">Geologia</Keyword>
+        </KeywordList>
+        <OnlineResource
+                xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Carta_geologica.map&amp;"/>
+        <ContactInformation>
+            <ContactPersonPrimary>
+                <ContactPerson>Geoportale Nazionale - Ministero dell'Ambiente e della Tutela del Territorio e del Mare
+                </ContactPerson>
+                <ContactOrganization>Geoportale Nazionale - Ministero dell'Ambiente e della Tutela del Territorio e del
+                    Mare
+                </ContactOrganization>
+            </ContactPersonPrimary>
+            <ContactPosition>distributor</ContactPosition>
+            <ContactAddress>
+                <AddressType>Postale</AddressType>
+                <Address>Via Cristoforo Colombo, 44</Address>
+                <City>Roma</City>
+                <StateOrProvince>RM</StateOrProvince>
+                <PostCode>00147</PostCode>
+                <Country>Italia</Country>
+            </ContactAddress>
+            <ContactVoiceTelephone>+390657223140</ContactVoiceTelephone>
+            <ContactElectronicMailAddress>pcn@minambiente.it</ContactElectronicMailAddress>
+        </ContactInformation>
+        <Fees>Nessuna condizione applicata</Fees>
+        <AccessConstraints>Nessuno</AccessConstraints>
+        <MaxWidth>2048</MaxWidth>
+        <MaxHeight>2048</MaxHeight>
+    </Service>
+
+    <Capability>
+        <Request>
+            <GetCapabilities>
+                <Format>text/xml</Format>
+                <DCPType>
+                    <HTTP>
+                        <Get>
+                            <OnlineResource
+                                    xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Carta_geologica.map&amp;"/>
+                        </Get>
+                        <Post>
+                            <OnlineResource
+                                    xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Carta_geologica.map&amp;"/>
+                        </Post>
+                    </HTTP>
+                </DCPType>
+            </GetCapabilities>
+            <GetMap>
+                <Format>image/png</Format>
+                <Format>image/jpeg</Format>
+                <Format>image/gif</Format>
+                <Format>image/png; mode=8bit</Format>
+                <Format>application/x-pdf</Format>
+                <Format>image/svg+xml</Format>
+                <Format>image/tiff</Format>
+                <Format>application/vnd.google-earth.kml+xml</Format>
+                <Format>application/vnd.google-earth.kmz</Format>
+                <DCPType>
+                    <HTTP>
+                        <Get>
+                            <OnlineResource
+                                    xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Carta_geologica.map&amp;"/>
+                        </Get>
+                        <Post>
+                            <OnlineResource
+                                    xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Carta_geologica.map&amp;"/>
+                        </Post>
+                    </HTTP>
+                </DCPType>
+            </GetMap>
+            <GetFeatureInfo>
+                <Format>text/plain</Format>
+                <Format>application/vnd.ogc.gml</Format>
+                <DCPType>
+                    <HTTP>
+                        <Get>
+                            <OnlineResource
+                                    xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Carta_geologica.map&amp;"/>
+                        </Get>
+                        <Post>
+                            <OnlineResource
+                                    xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Carta_geologica.map&amp;"/>
+                        </Post>
+                    </HTTP>
+                </DCPType>
+            </GetFeatureInfo>
+            <sld:DescribeLayer>
+                <Format>text/xml</Format>
+                <DCPType>
+                    <HTTP>
+                        <Get>
+                            <OnlineResource
+                                    xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Carta_geologica.map&amp;"/>
+                        </Get>
+                        <Post>
+                            <OnlineResource
+                                    xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Carta_geologica.map&amp;"/>
+                        </Post>
+                    </HTTP>
+                </DCPType>
+            </sld:DescribeLayer>
+            <sld:GetLegendGraphic>
+                <Format>image/png</Format>
+                <Format>image/jpeg</Format>
+                <Format>image/gif</Format>
+                <Format>image/png; mode=8bit</Format>
+                <DCPType>
+                    <HTTP>
+                        <Get>
+                            <OnlineResource
+                                    xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Carta_geologica.map&amp;"/>
+                        </Get>
+                        <Post>
+                            <OnlineResource
+                                    xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Carta_geologica.map&amp;"/>
+                        </Post>
+                    </HTTP>
+                </DCPType>
+            </sld:GetLegendGraphic>
+        </Request>
+        <Exception>
+            <Format>XML</Format>
+            <Format>INIMAGE</Format>
+            <Format>BLANK</Format>
+        </Exception>
+        <inspire_vs:ExtendedCapabilities>
+            <inspire_common:ResourceLocator xsi:type="inspire_common:resourceLocatorType">
+                <inspire_common:URL>
+                    http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Carta_geologica.map
+                </inspire_common:URL>
+                <inspire_common:MediaType>application/vnd.ogc.wms_xml</inspire_common:MediaType>
+            </inspire_common:ResourceLocator>
+            <inspire_common:ResourceType>service</inspire_common:ResourceType>
+            <inspire_common:TemporalReference>
+                <inspire_common:DateOfCreation>2012-02-08</inspire_common:DateOfCreation>
+            </inspire_common:TemporalReference>
+            <inspire_common:TemporalReference>
+                <inspire_common:DateOfPublication>2012-02-08</inspire_common:DateOfPublication>
+            </inspire_common:TemporalReference>
+            <inspire_common:TemporalReference>
+                <inspire_common:DateOfLastRevision>2013-01-23</inspire_common:DateOfLastRevision>
+            </inspire_common:TemporalReference>
+            <inspire_common:Conformity>
+                <inspire_common:Specification>
+                    <inspire_common:Title>REGOLAMENTO (UE) N. 1089/2010 DELLA COMMISSIONE del 23 novembre 2010 recante
+                        attuazione della direttiva 2007/2/CE del Parlamento europeo e del Consiglio per quanto riguarda
+                        l'interoperabilit&#224; dei set di dati territoriali e dei servizi di dati territoriali
+                    </inspire_common:Title>
+                    <inspire_common:DateOfPublication>2010-12-08</inspire_common:DateOfPublication>
+                    <inspire_common:URI>OJ:L:2010:323:0011:0102:IT:PDF</inspire_common:URI>
+                    <inspire_common:ResourceLocator>
+                        <inspire_common:URL>
+                            http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2010:323:0011:0102:IT:PDF
+                        </inspire_common:URL>
+                        <inspire_common:MediaType>application/pdf</inspire_common:MediaType>
+                    </inspire_common:ResourceLocator>
+                </inspire_common:Specification>
+                <inspire_common:Degree>notConformant</inspire_common:Degree>
+            </inspire_common:Conformity>
+            <inspire_common:MetadataPointOfContact>
+                <inspire_common:OrganisationName>Ministero dell'Ambiente e della Tutela del Territorio e del Mare -
+                    Geoportale Nazionale
+                </inspire_common:OrganisationName>
+                <inspire_common:EmailAddress>pcn@minambiente.it</inspire_common:EmailAddress>
+            </inspire_common:MetadataPointOfContact>
+            <inspire_common:MetadataDate>2009-09-02</inspire_common:MetadataDate>
+            <inspire_common:SpatialDataServiceType>view</inspire_common:SpatialDataServiceType>
+            <inspire_common:MandatoryKeyword>
+                <inspire_common:KeywordValue>infoMapAccessService</inspire_common:KeywordValue>
+            </inspire_common:MandatoryKeyword>
+            <inspire_common:Keyword xsi:type="inspire_common:inspireTheme_ita">
+                <inspire_common:OriginatingControlledVocabulary>
+                    <inspire_common:Title>GEMET - INSPIRE themes</inspire_common:Title>
+                    <inspire_common:DateOfPublication>2008-06-01</inspire_common:DateOfPublication>
+                </inspire_common:OriginatingControlledVocabulary>
+                <inspire_common:KeywordValue>Geologia</inspire_common:KeywordValue>
+            </inspire_common:Keyword>
+            <inspire_common:Keyword>
+                <inspire_common:KeywordValue>Informazioni geoscientifiche</inspire_common:KeywordValue>
+            </inspire_common:Keyword>
+            <inspire_common:Keyword>
+                <inspire_common:OriginatingControlledVocabulary>
+                    <inspire_common:Title>GEMET - Themes, version 2.4</inspire_common:Title>
+                    <inspire_common:DateOfPublication>2010-01-13</inspire_common:DateOfPublication>
+                </inspire_common:OriginatingControlledVocabulary>
+                <inspire_common:KeywordValue>Dinamica naturale</inspire_common:KeywordValue>
+            </inspire_common:Keyword>
+            <inspire_common:Keyword>
+                <inspire_common:OriginatingControlledVocabulary>
+                    <inspire_common:Title>GEMET - Themes, version 2.4</inspire_common:Title>
+                    <inspire_common:DateOfPublication>2010-01-13</inspire_common:DateOfPublication>
+                </inspire_common:OriginatingControlledVocabulary>
+                <inspire_common:KeywordValue>Suolo</inspire_common:KeywordValue>
+            </inspire_common:Keyword>
+            <inspire_common:Keyword>
+                <inspire_common:OriginatingControlledVocabulary>
+                    <inspire_common:Title>GEMET - Concepts, version 2.4</inspire_common:Title>
+                    <inspire_common:DateOfPublication>2010-01-13</inspire_common:DateOfPublication>
+                </inspire_common:OriginatingControlledVocabulary>
+                <inspire_common:KeywordValue>Geologia</inspire_common:KeywordValue>
+            </inspire_common:Keyword>
+            <inspire_common:SupportedLanguages>
+                <inspire_common:DefaultLanguage>
+                    <inspire_common:Language>ita</inspire_common:Language>
+                </inspire_common:DefaultLanguage>
+                <inspire_common:SupportedLanguage>
+                    <inspire_common:Language>ita</inspire_common:Language>
+                </inspire_common:SupportedLanguage>
+            </inspire_common:SupportedLanguages>
+            <inspire_common:ResponseLanguage>
+                <inspire_common:Language>ita</inspire_common:Language>
+            </inspire_common:ResponseLanguage>
+        </inspire_vs:ExtendedCapabilities>
+        <sld:UserDefinedSymbolization InlineFeature="0" RemoteWCS="0" RemoteWFS="0" SupportSLD="1" UserLayer="0"
+                                      UserStyle="1"/>
+        <Layer>
+            <Title>Carta geologica d'Italia</Title>
+            <Abstract>Carta geologica d'Italia alla scala 1:500.000. La legenda &#232; stata ricostruita a partire dalla
+                versione cartacea. Risoluzione 1:500.000.
+            </Abstract>
+            <CRS>EPSG:4326</CRS>
+            <CRS>EPSG:32632</CRS>
+            <CRS>EPSG:32633</CRS>
+            <CRS>EPSG:4258</CRS>
+            <CRS>EPSG:3004</CRS>
+            <CRS>EPSG:3003</CRS>
+            <CRS>EPSG:4265</CRS>
+            <CRS>EPSG:4806</CRS>
+            <CRS>EPSG:21781</CRS>
+            <CRS>EPSG:900913</CRS>
+            <CRS>EPSG:3857</CRS>
+            <CRS>EPSG:2056</CRS>
+            <CRS>EPSG:3035</CRS>
+            <EX_GeographicBoundingBox>
+                <westBoundLongitude>6</westBoundLongitude>
+                <eastBoundLongitude>19</eastBoundLongitude>
+                <southBoundLatitude>34.5</southBoundLatitude>
+                <northBoundLatitude>49</northBoundLatitude>
+            </EX_GeographicBoundingBox>
+            <BoundingBox CRS="EPSG:4326" maxx="49" maxy="19" minx="34.5" miny="6"/>
+            <BoundingBox CRS="EPSG:32632" maxx="1.41971e+006" maxy="5.47582e+006" minx="224545" miny="3.8176e+006"/>
+            <BoundingBox CRS="EPSG:32633" maxx="867321" maxy="5.4666e+006" minx="-327451" miny="3.8176e+006"/>
+            <BoundingBox CRS="EPSG:4258" maxx="49" maxy="19" minx="34.5" miny="6"/>
+            <BoundingBox CRS="EPSG:3004" maxx="2.88734e+006" maxy="5.46671e+006" minx="1.69251e+006"
+                         miny="3.81766e+006"/>
+            <BoundingBox CRS="EPSG:3003" maxx="2.41975e+006" maxy="5.47593e+006" minx="1.22453e+006"
+                         miny="3.81766e+006"/>
+            <BoundingBox CRS="EPSG:4265" maxx="49" maxy="19" minx="34.5" miny="6"/>
+            <BoundingBox CRS="EPSG:4806" maxx="48.9993" maxy="6.54763" minx="34.4994" miny="-6.45199"/>
+            <BoundingBox CRS="EPSG:21781" maxx="1.68218e+006" maxy="490123" minx="464700" miny="-1.19366e+006"/>
+            <BoundingBox CRS="EPSG:900913" maxx="2.11507e+006" maxy="6.27486e+006" minx="667917" miny="4.09614e+006"/>
+            <BoundingBox CRS="EPSG:3857" maxx="2.11507e+006" maxy="6.27486e+006" minx="667917" miny="4.09614e+006"/>
+            <BoundingBox CRS="EPSG:2056" maxx="3.68218e+006" maxy="1.49012e+006" minx="2.4647e+006" miny="-193662"/>
+            <BoundingBox CRS="EPSG:3035" maxx="2.91653e+006" maxy="5.15491e+006" minx="1.273e+006" miny="3.94963e+006"/>
+            <AuthorityURL name="www.pcn.minambiente.it">
+                <OnlineResource xlink:href="www.pcn.minambiente.it"/>
+            </AuthorityURL>
+            <Layer cascaded="0" opaque="0" queryable="1">
+                <Name>GE.CARTAGEOLOGICA</Name>
+                <Title>Carta geologica</Title>
+                <Abstract>Carta geologica d'Italia alla scala 1:500.000. La legenda &#232; stata ricostruita a partire
+                    dalla versione cartacea. Risoluzione 1:500.000.
+                </Abstract>
+                <KeywordList>
+                    <Keyword>Geologia</Keyword>
+                    <Keyword>Dinamica naturale</Keyword>
+                    <Keyword>Suolo</Keyword>
+                </KeywordList>
+                <CRS>EPSG:4326</CRS>
+                <CRS>EPSG:32632</CRS>
+                <CRS>EPSG:32633</CRS>
+                <CRS>EPSG:4258</CRS>
+                <CRS>EPSG:3004</CRS>
+                <CRS>EPSG:3003</CRS>
+                <CRS>EPSG:4265</CRS>
+                <CRS>EPSG:4806</CRS>
+                <CRS>EPSG:3035</CRS>
+                <EX_GeographicBoundingBox>
+                    <westBoundLongitude>5</westBoundLongitude>
+                    <eastBoundLongitude>19</eastBoundLongitude>
+                    <southBoundLatitude>34.5</southBoundLatitude>
+                    <northBoundLatitude>49</northBoundLatitude>
+                </EX_GeographicBoundingBox>
+                <BoundingBox CRS="EPSG:4326" maxx="49" maxy="19" minx="34.5" miny="5"/>
+                <BoundingBox CRS="EPSG:32632" maxx="1.41971e+006" maxy="5.47582e+006" minx="132679" miny="3.8176e+006"/>
+                <BoundingBox CRS="EPSG:32633" maxx="867321" maxy="5.47582e+006" minx="-419706" miny="3.8176e+006"/>
+                <BoundingBox CRS="EPSG:4258" maxx="49" maxy="19" minx="34.5" miny="5"/>
+                <BoundingBox CRS="EPSG:3004" maxx="2.88734e+006" maxy="5.47593e+006" minx="1.60025e+006"
+                             miny="3.81766e+006"/>
+                <BoundingBox CRS="EPSG:3003" maxx="2.41975e+006" maxy="5.47593e+006" minx="1.13266e+006"
+                             miny="3.81766e+006"/>
+                <BoundingBox CRS="EPSG:4265" maxx="49" maxy="19" minx="34.5" miny="5"/>
+                <BoundingBox CRS="EPSG:4806" maxx="48.9993" maxy="6.54763" minx="34.4994" miny="-7.45196"/>
+                <BoundingBox CRS="EPSG:3035" maxx="2.91653e+006" maxy="5.15491e+006" minx="1.273e+006"
+                             miny="3.85691e+006"/>
+                <Identifier authority="www.pcn.minambiente.it">m_amte:299FN3:395f81bd-fdcb-4c64-bcbd-6df334b1233f
+                </Identifier>
+                <MetadataURL type="ISO19115:2003">
+                    <Format>text/xml</Format>
+                    <OnlineResource
+                            xlink:href="http://www.pcn.minambiente.it/geoportal/csw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;outputSchema=http%3A%2F%2Fwww.isotc211.org%2F2005%2Fgmd&amp;elementSetName=full&amp;ID=m_amte:299FN3:77136f53-cde9-4b3d-b19c-64aafe36e1dd"
+                            xlink:type="simple"/>
+                </MetadataURL>
+                <Style>
+                    <Name>GN:Predefinito</Name>
+                    <Title>GN:Predefinito</Title>
+                    <LegendURL height="2565" width="495">
+                        <Format>image/png</Format>
+                        <OnlineResource
+                                xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Carta_geologica.map&amp;version=1.3.0&amp;service=WMS&amp;request=GetLegendGraphic&amp;sld_version=1.1.0&amp;layer=GE.CARTAGEOLOGICA&amp;format=image/png&amp;STYLE=GN:Predefinito"
+                                xlink:type="simple"/>
+                    </LegendURL>
+                </Style>
+            </Layer>
+        </Layer>
+    </Capability>
+</WMS_Capabilities>

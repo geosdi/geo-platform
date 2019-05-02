@@ -47,22 +47,27 @@ public class WMSV111UnmarshallTest {
     private static File wmsGetCapabilitiesFile;
     private static File wmsDescribeLayerFile;
     private static File wmsGetCapabilitiesMinisteroAmbiente;
+    private static File wmsGetCapabilitiesIncendi;
+    private static File wmsGetCapabilitiesCartaFitoclimatica;
+    private static File wmsGetCapabilitiesCartaGeolitologica;
+    private static File wmsGetCapabilitiesCatalogoFrane;
+    private static File wmsGetCapabilitiesClassificazioneSismica;
 
     @BeforeClass
     public static void beforeClass() throws Exception {
         Assert.assertNotNull(wmsContext);
         Assert.assertTrue(wmsContext instanceof WMSJAXBContext);
         Assert.assertTrue(((WMSJAXBContext) wmsContext).getVersion() == V111);
-        String basePath = new File(".").getCanonicalPath();
-        String fileName = of(basePath, "src", "test", "resources", "getcapabilities_1.1.1.xml")
-                .collect(joining(separator));
-        wmsGetCapabilitiesFile = new File(fileName);
-        String describeLayerFileName = of(basePath, "src", "test", "resources", "describeLayer-111.xml")
-                .collect(joining(separator));
-        wmsDescribeLayerFile = new File(describeLayerFileName);
-        String wmsGetCapabilitiesMinisteroAmbienteFileName = of(basePath, "src", "test", "resources", "ogc_v1.1.1.xml")
-                .collect(joining(separator));
-        wmsGetCapabilitiesMinisteroAmbiente = new File(wmsGetCapabilitiesMinisteroAmbienteFileName);
+        String basePath = of(new File(".").getCanonicalPath(), "src", "test", "resources")
+                .collect(joining(separator, "", separator));
+        wmsGetCapabilitiesFile = new File(basePath.concat("getcapabilities_1.1.1.xml"));
+        wmsDescribeLayerFile = new File(basePath.concat("describeLayer-111.xml"));
+        wmsGetCapabilitiesMinisteroAmbiente = new File(basePath.concat("ogc_v1.1.1.xml"));
+        wmsGetCapabilitiesIncendi = new File(basePath.concat("ogc.xml"));
+        wmsGetCapabilitiesCartaFitoclimatica = new File(basePath.concat("cartaFitoclimatica.xml"));
+        wmsGetCapabilitiesCartaGeolitologica = new File(basePath.concat("cartaGeolitologica.xml"));
+        wmsGetCapabilitiesCatalogoFrane = new File(basePath.concat("catalogoFrane.xml"));
+        wmsGetCapabilitiesClassificazioneSismica = new File(basePath.concat("classificazioneSismica2012.xml"));
         spf.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", FALSE);
         spf.setFeature("http://xml.org/sax/features/validation", FALSE);
     }
@@ -101,5 +106,65 @@ public class WMSV111UnmarshallTest {
         StringWriter writer = new StringWriter();
         wmsContext.acquireMarshaller().marshal(wmsCapabilities, writer);
         logger.info("######################WMSGetCapabilitiesV111_Ministero_Ambiente-String : \n{}\n", writer);
+    }
+
+    @Test
+    public void d_unmarshallWMSGetCapabilitiesV111Test() throws Exception {
+        XMLReader xmlReader = spf.newSAXParser().getXMLReader();
+        InputSource inputSource = new InputSource(new FileReader(wmsGetCapabilitiesIncendi));
+        SAXSource source = new SAXSource(xmlReader, inputSource);
+        WMTMSCapabilities wmsCapabilities = (WMTMSCapabilities) wmsContext.acquireUnmarshaller().unmarshal(source);
+        logger.debug("#######################WMSGetCapabilitiesV111_INCENDI_BOSCHIVI : {}\n", wmsCapabilities);
+        StringWriter writer = new StringWriter();
+        wmsContext.acquireMarshaller().marshal(wmsCapabilities, writer);
+        logger.info("######################WMSGetCapabilitiesV111_INCENDI_BOSCHIVI-String : \n{}\n", writer);
+    }
+
+    @Test
+    public void e_unmarshallWMSGetCapabilitiesV111Test() throws Exception {
+        XMLReader xmlReader = spf.newSAXParser().getXMLReader();
+        InputSource inputSource = new InputSource(new FileReader(wmsGetCapabilitiesCartaFitoclimatica));
+        SAXSource source = new SAXSource(xmlReader, inputSource);
+        WMTMSCapabilities wmsCapabilities = (WMTMSCapabilities) wmsContext.acquireUnmarshaller().unmarshal(source);
+        logger.debug("#######################WMSGetCapabilitiesV111_CARTA_FITOCLIMATICA : {}\n", wmsCapabilities);
+        StringWriter writer = new StringWriter();
+        wmsContext.acquireMarshaller().marshal(wmsCapabilities, writer);
+        logger.info("######################WMSGetCapabilitiesV111_CARTA_FITOCLIMATICA-String : \n{}\n", writer);
+    }
+
+    @Test
+    public void f_unmarshallWMSGetCapabilitiesV111Test() throws Exception {
+        XMLReader xmlReader = spf.newSAXParser().getXMLReader();
+        InputSource inputSource = new InputSource(new FileReader(wmsGetCapabilitiesCartaGeolitologica));
+        SAXSource source = new SAXSource(xmlReader, inputSource);
+        WMTMSCapabilities wmsCapabilities = (WMTMSCapabilities) wmsContext.acquireUnmarshaller().unmarshal(source);
+        logger.debug("#######################WMSGetCapabilitiesV111_CARTA_GEOLOGICA : {}\n", wmsCapabilities);
+        StringWriter writer = new StringWriter();
+        wmsContext.acquireMarshaller().marshal(wmsCapabilities, writer);
+        logger.info("######################WMSGetCapabilitiesV111_CARTA_GEOLOGICA-String : \n{}\n", writer);
+    }
+
+    @Test
+    public void g_unmarshallWMSGetCapabilitiesV111Test() throws Exception {
+        XMLReader xmlReader = spf.newSAXParser().getXMLReader();
+        InputSource inputSource = new InputSource(new FileReader(wmsGetCapabilitiesCatalogoFrane));
+        SAXSource source = new SAXSource(xmlReader, inputSource);
+        WMTMSCapabilities wmsCapabilities = (WMTMSCapabilities) wmsContext.acquireUnmarshaller().unmarshal(source);
+        logger.debug("#######################WMSGetCapabilitiesV111_CATALOGO_FRANE : {}\n", wmsCapabilities);
+        StringWriter writer = new StringWriter();
+        wmsContext.acquireMarshaller().marshal(wmsCapabilities, writer);
+        logger.info("######################WMSGetCapabilitiesV111_CATALOGO_FRANE-String : \n{}\n", writer);
+    }
+
+    @Test
+    public void h_unmarshallWMSGetCapabilitiesV111Test() throws Exception {
+        XMLReader xmlReader = spf.newSAXParser().getXMLReader();
+        InputSource inputSource = new InputSource(new FileReader(wmsGetCapabilitiesClassificazioneSismica));
+        SAXSource source = new SAXSource(xmlReader, inputSource);
+        WMTMSCapabilities wmsCapabilities = (WMTMSCapabilities) wmsContext.acquireUnmarshaller().unmarshal(source);
+        logger.debug("#######################WMSGetCapabilitiesV111_CLASSIFICAZIONE_SISMICA : {}\n", wmsCapabilities);
+        StringWriter writer = new StringWriter();
+        wmsContext.acquireMarshaller().marshal(wmsCapabilities, writer);
+        logger.info("######################WMSGetCapabilitiesV111_CLASSIFICAZIONE_SISMICA-String : \n{}\n", writer);
     }
 }

@@ -1,0 +1,1813 @@
+<?xml version='1.0' encoding="ISO-8859-1" standalone="no" ?>
+<!DOCTYPE WMT_MS_Capabilities SYSTEM "http://schemas.opengis.net/wms/1.1.1/WMS_MS_Capabilities.dtd"
+ [
+ <!ELEMENT VendorSpecificCapabilities EMPTY>
+ ]>  <!-- end of DOCTYPE declaration -->
+
+<WMT_MS_Capabilities version="1.1.1">
+
+<!-- MapServer version 6.4.1 OUTPUT=GIF OUTPUT=PNG OUTPUT=JPEG OUTPUT=KML SUPPORTS=PROJ SUPPORTS=GD SUPPORTS=AGG SUPPORTS=FREETYPE SUPPORTS=CAIRO SUPPORTS=SVG_SYMBOLS SUPPORTS=SVGCAIRO SUPPORTS=ICONV SUPPORTS=FRIBIDI SUPPORTS=WMS_SERVER SUPPORTS=WMS_CLIENT SUPPORTS=WFS_SERVER SUPPORTS=WFS_CLIENT SUPPORTS=WCS_SERVER SUPPORTS=SOS_SERVER SUPPORTS=FASTCGI SUPPORTS=THREADS SUPPORTS=GEOS INPUT=JPEG INPUT=POSTGIS INPUT=OGR INPUT=GDAL INPUT=SHAPEFILE -->
+
+<Service>
+  <Name>OGC:WMS</Name>
+  <Title>Progetto incendi - cartografia anti incendi boschivi (AIB) nei Parchi nazionali</Title>
+  <Abstract>Il progetto mette a disposizione una serie di strati informativi relativi alle aree dei Parchi Nazionali, necessari per le attivitè di pianificazione Anti Incendi Boschivi (AIB), e derivanti dai seguenti progetti: supporto tecnico-scientifico alla Pianificazione Anti Incendi Boschivi (P. AIB) nei Parchi Nazionali Italiani; sistema per il monitoraggio e la mappatura per le aree percorse da incendio nei Parchi Nazionali attraverso l&#39;utilizzo dei dati da satellite. Queste informazioni, disponibili presso il Ministeo dell&#39;Ambiente e della tutela del Territorio e del Mare, sono funzionali alla redazione e gestione dei piani antincendi boschivi dei Parchi nazionali, prevista dalla vigente normativa (L. 353/2000).</Abstract>
+  <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Progetto_Antincendi_Boschivi_PNZ.map&amp;"/>
+  <ContactInformation>
+    <ContactPersonPrimary>
+      <ContactPerson>Geoportale Nazionale - Ministero dell&#39;Ambiente e della Tutela del Territorio e del Mare</ContactPerson>
+      <ContactOrganization>Geoportale Nazionale - Ministero dell&#39;Ambiente e della Tutela del Territorio e del Mare</ContactOrganization>
+    </ContactPersonPrimary>
+      <ContactPosition>distributor</ContactPosition>
+    <ContactAddress>
+        <AddressType>Postale</AddressType>
+        <Address>Via Cristoforo Colombo, 44</Address>
+        <City>Roma</City>
+        <StateOrProvince>RM</StateOrProvince>
+        <PostCode>00147</PostCode>
+        <Country>Italia</Country>
+    </ContactAddress>
+      <ContactVoiceTelephone>+390657223140</ContactVoiceTelephone>
+  <ContactElectronicMailAddress>pcn@minambiente.it</ContactElectronicMailAddress>
+  </ContactInformation>
+  <Fees>Nessuna condizione applicata</Fees>
+  <AccessConstraints>Nessuno</AccessConstraints>
+</Service>
+
+<Capability>
+  <Request>
+    <GetCapabilities>
+      <Format>application/vnd.ogc.wms_xml</Format>
+      <DCPType>
+        <HTTP>
+          <Get><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Progetto_Antincendi_Boschivi_PNZ.map&amp;"/></Get>
+          <Post><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Progetto_Antincendi_Boschivi_PNZ.map&amp;"/></Post>
+        </HTTP>
+      </DCPType>
+    </GetCapabilities>
+    <GetMap>
+      <Format>image/png</Format>
+      <Format>image/jpeg</Format>
+      <Format>image/gif</Format>
+      <Format>image/png; mode=8bit</Format>
+      <Format>application/x-pdf</Format>
+      <Format>image/svg+xml</Format>
+      <Format>image/tiff</Format>
+      <Format>application/vnd.google-earth.kml+xml</Format>
+      <Format>application/vnd.google-earth.kmz</Format>
+      <DCPType>
+        <HTTP>
+          <Get><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Progetto_Antincendi_Boschivi_PNZ.map&amp;"/></Get>
+          <Post><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Progetto_Antincendi_Boschivi_PNZ.map&amp;"/></Post>
+        </HTTP>
+      </DCPType>
+    </GetMap>
+    <GetFeatureInfo>
+      <Format>text/plain</Format>
+      <Format>application/vnd.ogc.gml</Format>
+      <DCPType>
+        <HTTP>
+          <Get><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Progetto_Antincendi_Boschivi_PNZ.map&amp;"/></Get>
+          <Post><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Progetto_Antincendi_Boschivi_PNZ.map&amp;"/></Post>
+        </HTTP>
+      </DCPType>
+    </GetFeatureInfo>
+    <DescribeLayer>
+      <Format>text/xml</Format>
+      <DCPType>
+        <HTTP>
+          <Get><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Progetto_Antincendi_Boschivi_PNZ.map&amp;"/></Get>
+          <Post><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Progetto_Antincendi_Boschivi_PNZ.map&amp;"/></Post>
+        </HTTP>
+      </DCPType>
+    </DescribeLayer>
+    <GetLegendGraphic>
+      <Format>image/png</Format>
+      <Format>image/jpeg</Format>
+      <Format>image/gif</Format>
+      <Format>image/png; mode=8bit</Format>
+      <DCPType>
+        <HTTP>
+          <Get><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Progetto_Antincendi_Boschivi_PNZ.map&amp;"/></Get>
+          <Post><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Progetto_Antincendi_Boschivi_PNZ.map&amp;"/></Post>
+        </HTTP>
+      </DCPType>
+    </GetLegendGraphic>
+    <GetStyles>
+      <Format>text/xml</Format>
+      <DCPType>
+        <HTTP>
+          <Get><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Progetto_Antincendi_Boschivi_PNZ.map&amp;"/></Get>
+          <Post><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Progetto_Antincendi_Boschivi_PNZ.map&amp;"/></Post>
+        </HTTP>
+      </DCPType>
+    </GetStyles>
+  </Request>
+  <Exception>
+    <Format>application/vnd.ogc.se_xml</Format>
+    <Format>application/vnd.ogc.se_inimage</Format>
+    <Format>application/vnd.ogc.se_blank</Format>
+  </Exception>
+  <VendorSpecificCapabilities />
+  <UserDefinedSymbolization SupportSLD="1" UserLayer="0" UserStyle="1" RemoteWFS="0"/>
+  <Layer>
+    <Name>RN.ANTINCENDIBOSCHIVI</Name>
+    <Title>Progetto incendi - cartografia anti incendi boschivi (AIB) nei Parchi nazionali</Title>
+    <Abstract>Il progetto mette a disposizione una serie di strati informativi relativi alle aree dei Parchi Nazionali, necessari per le attivitè di pianificazione Anti Incendi Boschivi (AIB), e derivanti dai seguenti progetti: supporto tecnico-scientifico alla Pianificazione Anti Incendi Boschivi (P. AIB) nei Parchi Nazionali Italiani; sistema per il monitoraggio e la mappatura per le aree percorse da incendio nei Parchi Nazionali attraverso l&#39;utilizzo dei dati da satellite. Queste informazioni, disponibili presso il Ministeo dell&#39;Ambiente e della tutela del Territorio e del Mare, sono funzionali alla redazione e gestione dei piani antincendi boschivi dei Parchi nazionali, prevista dalla vigente normativa (L. 353/2000).</Abstract>
+    <SRS>EPSG:4326</SRS>
+    <SRS>EPSG:32632</SRS>
+    <SRS>EPSG:32633</SRS>
+    <SRS>EPSG:4258</SRS>
+    <SRS>EPSG:3004</SRS>
+    <SRS>EPSG:3003</SRS>
+    <SRS>EPSG:4265</SRS>
+    <SRS>EPSG:4806</SRS>
+    <SRS>EPSG:21781</SRS>
+    <SRS>EPSG:900913</SRS>
+    <SRS>EPSG:3857</SRS>
+    <SRS>EPSG:2056</SRS>
+    <LatLonBoundingBox minx="6" miny="34.5" maxx="19" maxy="49" />
+    <BoundingBox SRS="EPSG:4326"
+                minx="6" miny="34.5" maxx="19" maxy="49" />
+    <BoundingBox SRS="EPSG:32632"
+                minx="224545" miny="3.8176e+006" maxx="1.41971e+006" maxy="5.47582e+006" />
+    <BoundingBox SRS="EPSG:32633"
+                minx="-327451" miny="3.8176e+006" maxx="867321" maxy="5.4666e+006" />
+    <BoundingBox SRS="EPSG:4258"
+                minx="6" miny="34.5" maxx="19" maxy="49" />
+    <BoundingBox SRS="EPSG:3004"
+                minx="1.69251e+006" miny="3.81766e+006" maxx="2.88734e+006" maxy="5.46671e+006" />
+    <BoundingBox SRS="EPSG:3003"
+                minx="1.22453e+006" miny="3.81766e+006" maxx="2.41975e+006" maxy="5.47593e+006" />
+    <BoundingBox SRS="EPSG:4265"
+                minx="6" miny="34.5" maxx="19" maxy="49" />
+    <BoundingBox SRS="EPSG:4806"
+                minx="-6.45199" miny="34.4994" maxx="6.54763" maxy="48.9993" />
+    <BoundingBox SRS="EPSG:21781"
+                minx="464700" miny="-1.19366e+006" maxx="1.68218e+006" maxy="490123" />
+    <BoundingBox SRS="EPSG:900913"
+                minx="667917" miny="4.09614e+006" maxx="2.11507e+006" maxy="6.27486e+006" />
+    <BoundingBox SRS="EPSG:3857"
+                minx="667917" miny="4.09614e+006" maxx="2.11507e+006" maxy="6.27486e+006" />
+    <BoundingBox SRS="EPSG:2056"
+                minx="2.4647e+006" miny="-193662" maxx="3.68218e+006" maxy="1.49012e+006" />
+    <AuthorityURL name="www.pcn.minambiente.it">
+      <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="www.pcn.minambiente.it"/>
+    </AuthorityURL>
+    <!-- WARNING: Both wms_identifier_authority and wms_identifier_value must be set to output an Identifier -->
+<!-- WARNING: Some mandatory elements for 'MetadataURL' are missing in this context. -->
+    <Layer>
+      <Name>CARTOGRAFIA.ANTINCENDI.BOSCHIVI</Name>
+      <Title>CARTOGRAFIA ANTINCENDI BOSCHIVI (AIB)</Title>
+      <Abstract>CARTOGRAFIA.ANTINCENDI.BOSCHIVI</Abstract>
+    <Style>
+       <Name>default</Name>
+       <Title>default</Title>
+       <LegendURL width="327" height="1365">
+          <Format>image/png</Format>
+          <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Progetto_Antincendi_Boschivi_PNZ.map&amp;version=1.1.1&amp;service=WMS&amp;request=GetLegendGraphic&amp;layer=CARTOGRAFIA.ANTINCENDI.BOSCHIVI&amp;format=image/png&amp;STYLE=default"/>
+       </LegendURL>
+    </Style>
+      <Layer queryable="1" opaque="0" cascaded="0">
+        <Name>RN.ANTINCENDIBOSCHIVI.ZONEROSSEPRIOR</Name>
+        <Title>AIB - Zone rosse prioritarie</Title>
+        <Abstract>La cartografia individua le aree di intervento prioritario, per caratteri di sensibilità, pregio e rarità degli habitat, nella pianificazione AIB dei Parchi Nazionali. Lo strato è visualizzabile a scale superiori a 1:250.000.</Abstract>
+        <KeywordList>
+            <Keyword>Rischio naturale</Keyword>
+            <Keyword> Disastri</Keyword>
+            <Keyword> Incidenti</Keyword>
+            <Keyword> Rischi</Keyword>
+            <Keyword> Incendio</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4326</SRS>
+        <SRS>EPSG:32632</SRS>
+        <SRS>EPSG:32633</SRS>
+        <SRS>EPSG:4258</SRS>
+        <SRS>EPSG:3004</SRS>
+        <SRS>EPSG:3003</SRS>
+        <SRS>EPSG:4265</SRS>
+        <SRS>EPSG:4806</SRS>
+        <LatLonBoundingBox minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4326"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:32632"
+                    minx="224545" miny="3.8176e+006" maxx="1.41971e+006" maxy="5.47582e+006" />
+        <BoundingBox SRS="EPSG:32633"
+                    minx="-327451" miny="3.8176e+006" maxx="867321" maxy="5.4666e+006" />
+        <BoundingBox SRS="EPSG:4258"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:3004"
+                    minx="1.69251e+006" miny="3.81766e+006" maxx="2.88734e+006" maxy="5.46671e+006" />
+        <BoundingBox SRS="EPSG:3003"
+                    minx="1.22453e+006" miny="3.81766e+006" maxx="2.41975e+006" maxy="5.47593e+006" />
+        <BoundingBox SRS="EPSG:4265"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4806"
+                    minx="-6.45199" miny="34.4994" maxx="6.54763" maxy="48.9993" />
+        <Identifier authority="www.pcn.minambiente.it">m_amte:299FN3:8eefb8b6-3e60-4e46-c5ce-ef6051eb8be9</Identifier>
+        <MetadataURL type="ISO19115:2003">
+          <Format>text/xml</Format>
+          <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://www.pcn.minambiente.it/geoportal/csw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;outputSchema=http%3A%2F%2Fwww.isotc211.org%2F2005%2Fgmd&amp;elementSetName=full&amp;ID=m_amte:299FN3:468e02b1-d783-400f-fd83-b9ae2b6a47ca"/>
+        </MetadataURL>
+        <Style>
+          <Name>GN:Predefinito</Name>
+          <Title>GN:Predefinito</Title>
+          <LegendURL width="160" height="25">
+             <Format>image/png</Format>
+             <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Progetto_Antincendi_Boschivi_PNZ.map&amp;version=1.1.1&amp;service=WMS&amp;request=GetLegendGraphic&amp;layer=RN.ANTINCENDIBOSCHIVI.ZONEROSSEPRIOR&amp;format=image/png&amp;STYLE=GN:Predefinito"/>
+          </LegendURL>
+        </Style>
+        <ScaleHint min="0.374177136322228" max="93.5439099034206" />
+      </Layer>
+      <Layer queryable="1" opaque="0" cascaded="0">
+        <Name>RN.ANTINCENDIBOSCHIVI.ZONIZZAZIONEPNZ</Name>
+        <Title>AIB - Zonizzazione dei Parchi Nazionali</Title>
+        <Abstract>Suddivisione del territorio dei Parchi nazionali in aree omogenee con determinate caratteristiche e in ognuna delle quali vigono divieti diversi. Lo strato è visualizzabile a scale superiori a 1:500.000.</Abstract>
+        <KeywordList>
+            <Keyword>Rischio naturale</Keyword>
+            <Keyword> Disastri</Keyword>
+            <Keyword> Incidenti</Keyword>
+            <Keyword> Rischi</Keyword>
+            <Keyword> Incendio</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4326</SRS>
+        <SRS>EPSG:32632</SRS>
+        <SRS>EPSG:32633</SRS>
+        <SRS>EPSG:4258</SRS>
+        <SRS>EPSG:3004</SRS>
+        <SRS>EPSG:3003</SRS>
+        <SRS>EPSG:4265</SRS>
+        <SRS>EPSG:4806</SRS>
+        <LatLonBoundingBox minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4326"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:32632"
+                    minx="224545" miny="3.8176e+006" maxx="1.41971e+006" maxy="5.47582e+006" />
+        <BoundingBox SRS="EPSG:32633"
+                    minx="-327451" miny="3.8176e+006" maxx="867321" maxy="5.4666e+006" />
+        <BoundingBox SRS="EPSG:4258"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:3004"
+                    minx="1.69251e+006" miny="3.81766e+006" maxx="2.88734e+006" maxy="5.46671e+006" />
+        <BoundingBox SRS="EPSG:3003"
+                    minx="1.22453e+006" miny="3.81766e+006" maxx="2.41975e+006" maxy="5.47593e+006" />
+        <BoundingBox SRS="EPSG:4265"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4806"
+                    minx="-6.45199" miny="34.4994" maxx="6.54763" maxy="48.9993" />
+        <Identifier authority="www.pcn.minambiente.it">m_amte:299FN3:f432c4cd-2ae1-4e40-ef1e-cada3b01a641</Identifier>
+        <MetadataURL type="ISO19115:2003">
+          <Format>text/xml</Format>
+          <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://www.pcn.minambiente.it/geoportal/csw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;outputSchema=http%3A%2F%2Fwww.isotc211.org%2F2005%2Fgmd&amp;elementSetName=full&amp;ID=m_amte:299FN3:48ce2a5f-d6d6-4ebf-bdfb-a9dfe7f10375"/>
+        </MetadataURL>
+        <Style>
+          <Name>GN:Predefinito</Name>
+          <Title>GN:Predefinito</Title>
+          <LegendURL width="327" height="105">
+             <Format>image/png</Format>
+             <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Progetto_Antincendi_Boschivi_PNZ.map&amp;version=1.1.1&amp;service=WMS&amp;request=GetLegendGraphic&amp;layer=RN.ANTINCENDIBOSCHIVI.ZONIZZAZIONEPNZ&amp;format=image/png&amp;STYLE=GN:Predefinito"/>
+          </LegendURL>
+        </Style>
+        <ScaleHint min="0.374177136322228" max="187.088193983978" />
+      </Layer>
+      <Layer queryable="1" opaque="0" cascaded="0">
+        <Name>RN.ANTINCENDIBOSCHIVI.INCENDISATELLITE</Name>
+        <Title>AIB - Incendi 2001-2005 (test da satellite)</Title>
+        <Abstract>Perimetri degli incendi boschivi rilevati tramite elaborazione di immagini satellitari Terra-ASTER e SPOT del periodo 2001-2005 su tutti i Parchi Nazionali italiani. Lo strato è visualizzabile a scale superiori a 1:250.000.</Abstract>
+        <KeywordList>
+            <Keyword>Rischio naturale</Keyword>
+            <Keyword> Disastri</Keyword>
+            <Keyword> Incidenti</Keyword>
+            <Keyword> Rischi</Keyword>
+            <Keyword> Incendio</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4326</SRS>
+        <SRS>EPSG:32632</SRS>
+        <SRS>EPSG:32633</SRS>
+        <SRS>EPSG:4258</SRS>
+        <SRS>EPSG:3004</SRS>
+        <SRS>EPSG:3003</SRS>
+        <SRS>EPSG:4265</SRS>
+        <SRS>EPSG:4806</SRS>
+        <LatLonBoundingBox minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4326"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:32632"
+                    minx="224545" miny="3.8176e+006" maxx="1.41971e+006" maxy="5.47582e+006" />
+        <BoundingBox SRS="EPSG:32633"
+                    minx="-327451" miny="3.8176e+006" maxx="867321" maxy="5.4666e+006" />
+        <BoundingBox SRS="EPSG:4258"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:3004"
+                    minx="1.69251e+006" miny="3.81766e+006" maxx="2.88734e+006" maxy="5.46671e+006" />
+        <BoundingBox SRS="EPSG:3003"
+                    minx="1.22453e+006" miny="3.81766e+006" maxx="2.41975e+006" maxy="5.47593e+006" />
+        <BoundingBox SRS="EPSG:4265"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4806"
+                    minx="-6.45199" miny="34.4994" maxx="6.54763" maxy="48.9993" />
+        <Identifier authority="www.pcn.minambiente.it">m_amte:299FN3:f9134aee-6efd-4b26-e569-ea57b1073688</Identifier>
+        <MetadataURL type="ISO19115:2003">
+          <Format>text/xml</Format>
+          <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://www.pcn.minambiente.it/geoportal/csw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;outputSchema=http%3A%2F%2Fwww.isotc211.org%2F2005%2Fgmd&amp;elementSetName=full&amp;ID=m_amte:299FN3:6a3bf67a-470f-43d1-80c9-79bb7cb36b27"/>
+        </MetadataURL>
+        <Style>
+          <Name>GN:Predefinito</Name>
+          <Title>GN:Predefinito</Title>
+          <LegendURL width="102" height="105">
+             <Format>image/png</Format>
+             <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Progetto_Antincendi_Boschivi_PNZ.map&amp;version=1.1.1&amp;service=WMS&amp;request=GetLegendGraphic&amp;layer=RN.ANTINCENDIBOSCHIVI.INCENDISATELLITE&amp;format=image/png&amp;STYLE=GN:Predefinito"/>
+          </LegendURL>
+        </Style>
+      </Layer>
+      <Layer queryable="1" opaque="0" cascaded="0">
+        <Name>RN.ANTINCENDIBOSCHIVI.INCENDI-2007</Name>
+        <Title>AIB - Incendi 2007 (rilievo da terra)</Title>
+        <Abstract>Perimetri degli incendi boschivi rilevati da terra nell&#39;anno 2007 su tutti i Parchi Nazionali italiani.</Abstract>
+        <KeywordList>
+            <Keyword>Rischio naturale</Keyword>
+            <Keyword> Disastri</Keyword>
+            <Keyword> Incidenti</Keyword>
+            <Keyword> Rischi</Keyword>
+            <Keyword> Incendio</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4326</SRS>
+        <SRS>EPSG:32632</SRS>
+        <SRS>EPSG:32633</SRS>
+        <SRS>EPSG:4258</SRS>
+        <SRS>EPSG:3004</SRS>
+        <SRS>EPSG:3003</SRS>
+        <SRS>EPSG:4265</SRS>
+        <SRS>EPSG:4806</SRS>
+        <LatLonBoundingBox minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4326"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:32632"
+                    minx="224545" miny="3.8176e+006" maxx="1.41971e+006" maxy="5.47582e+006" />
+        <BoundingBox SRS="EPSG:32633"
+                    minx="-327451" miny="3.8176e+006" maxx="867321" maxy="5.4666e+006" />
+        <BoundingBox SRS="EPSG:4258"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:3004"
+                    minx="1.69251e+006" miny="3.81766e+006" maxx="2.88734e+006" maxy="5.46671e+006" />
+        <BoundingBox SRS="EPSG:3003"
+                    minx="1.22453e+006" miny="3.81766e+006" maxx="2.41975e+006" maxy="5.47593e+006" />
+        <BoundingBox SRS="EPSG:4265"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4806"
+                    minx="-6.45199" miny="34.4994" maxx="6.54763" maxy="48.9993" />
+        <Identifier authority="www.pcn.minambiente.it">m_amte:299FN3:85278bb0-20f5-4ef1-e012-afa59e28eb67</Identifier>
+        <MetadataURL type="ISO19115:2003">
+          <Format>text/xml</Format>
+          <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://www.pcn.minambiente.it/geoportal/csw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;outputSchema=http%3A%2F%2Fwww.isotc211.org%2F2005%2Fgmd&amp;elementSetName=full&amp;ID=m_amte:299FN3:cc27f7d2-b344-49f1-8ce5-e92a0c390e64"/>
+        </MetadataURL>
+        <Style>
+          <Name>GN:Predefinito</Name>
+          <Title>GN:Predefinito</Title>
+          <LegendURL width="111" height="25">
+             <Format>image/png</Format>
+             <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Progetto_Antincendi_Boschivi_PNZ.map&amp;version=1.1.1&amp;service=WMS&amp;request=GetLegendGraphic&amp;layer=RN.ANTINCENDIBOSCHIVI.INCENDI-2007&amp;format=image/png&amp;STYLE=GN:Predefinito"/>
+          </LegendURL>
+        </Style>
+      </Layer>
+      <Layer queryable="1" opaque="0" cascaded="0">
+        <Name>RN.ANTINCENDIBOSCHIVI.INCENDI-2008</Name>
+        <Title>AIB - Incendi 2008 (rilievo da terra)</Title>
+        <Abstract>Perimetri degli incendi boschivi rilevati da terra nell&#39;anno 2008 su tutti i Parchi Nazionali italiani.</Abstract>
+        <KeywordList>
+            <Keyword>Rischio naturale</Keyword>
+            <Keyword> Disastri</Keyword>
+            <Keyword> Incidenti</Keyword>
+            <Keyword> Rischi</Keyword>
+            <Keyword> Incendio</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4326</SRS>
+        <SRS>EPSG:32632</SRS>
+        <SRS>EPSG:32633</SRS>
+        <SRS>EPSG:4258</SRS>
+        <SRS>EPSG:3004</SRS>
+        <SRS>EPSG:3003</SRS>
+        <SRS>EPSG:4265</SRS>
+        <SRS>EPSG:4806</SRS>
+        <LatLonBoundingBox minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4326"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:32632"
+                    minx="224545" miny="3.8176e+006" maxx="1.41971e+006" maxy="5.47582e+006" />
+        <BoundingBox SRS="EPSG:32633"
+                    minx="-327451" miny="3.8176e+006" maxx="867321" maxy="5.4666e+006" />
+        <BoundingBox SRS="EPSG:4258"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:3004"
+                    minx="1.69251e+006" miny="3.81766e+006" maxx="2.88734e+006" maxy="5.46671e+006" />
+        <BoundingBox SRS="EPSG:3003"
+                    minx="1.22453e+006" miny="3.81766e+006" maxx="2.41975e+006" maxy="5.47593e+006" />
+        <BoundingBox SRS="EPSG:4265"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4806"
+                    minx="-6.45199" miny="34.4994" maxx="6.54763" maxy="48.9993" />
+        <Identifier authority="www.pcn.minambiente.it">m_amte:299FN3:85278bb0-20f5-4ef1-e012-afa59e28eb67</Identifier>
+        <MetadataURL type="ISO19115:2003">
+          <Format>text/xml</Format>
+          <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://www.pcn.minambiente.it/geoportal/csw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;outputSchema=http%3A%2F%2Fwww.isotc211.org%2F2005%2Fgmd&amp;elementSetName=full&amp;ID=m_amte:299FN3:cc27f7d2-b344-49f1-8ce5-e92a0c390e64"/>
+        </MetadataURL>
+        <Style>
+          <Name>GN:Predefinito</Name>
+          <Title>GN:Predefinito</Title>
+          <LegendURL width="111" height="25">
+             <Format>image/png</Format>
+             <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Progetto_Antincendi_Boschivi_PNZ.map&amp;version=1.1.1&amp;service=WMS&amp;request=GetLegendGraphic&amp;layer=RN.ANTINCENDIBOSCHIVI.INCENDI-2008&amp;format=image/png&amp;STYLE=GN:Predefinito"/>
+          </LegendURL>
+        </Style>
+      </Layer>
+      <Layer queryable="1" opaque="0" cascaded="0">
+        <Name>RN.ANTINCENDIBOSCHIVI.INCENDI-2009</Name>
+        <Title>AIB - Incendi 2009 (rilievo da terra)</Title>
+        <Abstract>Perimetri degli incendi boschivi rilevati da terra nell&#39;anno 2009 su tutti i Parchi Nazionali italiani.</Abstract>
+        <KeywordList>
+            <Keyword>Rischio naturale</Keyword>
+            <Keyword> Disastri</Keyword>
+            <Keyword> Incidenti</Keyword>
+            <Keyword> Rischi</Keyword>
+            <Keyword> Incendio</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4326</SRS>
+        <SRS>EPSG:32632</SRS>
+        <SRS>EPSG:32633</SRS>
+        <SRS>EPSG:4258</SRS>
+        <SRS>EPSG:3004</SRS>
+        <SRS>EPSG:3003</SRS>
+        <SRS>EPSG:4265</SRS>
+        <SRS>EPSG:4806</SRS>
+        <LatLonBoundingBox minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4326"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:32632"
+                    minx="224545" miny="3.8176e+006" maxx="1.41971e+006" maxy="5.47582e+006" />
+        <BoundingBox SRS="EPSG:32633"
+                    minx="-327451" miny="3.8176e+006" maxx="867321" maxy="5.4666e+006" />
+        <BoundingBox SRS="EPSG:4258"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:3004"
+                    minx="1.69251e+006" miny="3.81766e+006" maxx="2.88734e+006" maxy="5.46671e+006" />
+        <BoundingBox SRS="EPSG:3003"
+                    minx="1.22453e+006" miny="3.81766e+006" maxx="2.41975e+006" maxy="5.47593e+006" />
+        <BoundingBox SRS="EPSG:4265"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4806"
+                    minx="-6.45199" miny="34.4994" maxx="6.54763" maxy="48.9993" />
+        <Identifier authority="www.pcn.minambiente.it">m_amte:299FN3:85278bb0-20f5-4ef1-e012-afa59e28eb67</Identifier>
+        <MetadataURL type="ISO19115:2003">
+          <Format>text/xml</Format>
+          <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://www.pcn.minambiente.it/geoportal/csw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;outputSchema=http%3A%2F%2Fwww.isotc211.org%2F2005%2Fgmd&amp;elementSetName=full&amp;ID=m_amte:299FN3:cc27f7d2-b344-49f1-8ce5-e92a0c390e64"/>
+        </MetadataURL>
+        <Style>
+          <Name>GN:Predefinito</Name>
+          <Title>GN:Predefinito</Title>
+          <LegendURL width="111" height="25">
+             <Format>image/png</Format>
+             <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Progetto_Antincendi_Boschivi_PNZ.map&amp;version=1.1.1&amp;service=WMS&amp;request=GetLegendGraphic&amp;layer=RN.ANTINCENDIBOSCHIVI.INCENDI-2009&amp;format=image/png&amp;STYLE=GN:Predefinito"/>
+          </LegendURL>
+        </Style>
+      </Layer>
+      <Layer queryable="1" opaque="0" cascaded="0">
+        <Name>RN.ANTINCENDIBOSCHIVI.INCENDI-2010_01</Name>
+        <Title>AIB - Incendi 2010 (rilievo da terra)</Title>
+        <Abstract>Perimetri degli incendi boschivi rilevati da terra nell&#39;anno 2010 su tutti i Parchi Nazionali italiani.</Abstract>
+        <KeywordList>
+            <Keyword>Rischio naturale</Keyword>
+            <Keyword> Disastri</Keyword>
+            <Keyword> Incidenti</Keyword>
+            <Keyword> Rischi</Keyword>
+            <Keyword> Incendio</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4326</SRS>
+        <SRS>EPSG:32632</SRS>
+        <SRS>EPSG:32633</SRS>
+        <SRS>EPSG:4258</SRS>
+        <SRS>EPSG:3004</SRS>
+        <SRS>EPSG:3003</SRS>
+        <SRS>EPSG:4265</SRS>
+        <SRS>EPSG:4806</SRS>
+        <LatLonBoundingBox minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4326"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:32632"
+                    minx="224545" miny="3.8176e+006" maxx="1.41971e+006" maxy="5.47582e+006" />
+        <BoundingBox SRS="EPSG:32633"
+                    minx="-327451" miny="3.8176e+006" maxx="867321" maxy="5.4666e+006" />
+        <BoundingBox SRS="EPSG:4258"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:3004"
+                    minx="1.69251e+006" miny="3.81766e+006" maxx="2.88734e+006" maxy="5.46671e+006" />
+        <BoundingBox SRS="EPSG:3003"
+                    minx="1.22453e+006" miny="3.81766e+006" maxx="2.41975e+006" maxy="5.47593e+006" />
+        <BoundingBox SRS="EPSG:4265"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4806"
+                    minx="-6.45199" miny="34.4994" maxx="6.54763" maxy="48.9993" />
+        <Identifier authority="www.pcn.minambiente.it">m_amte:299FN3:85278bb0-20f5-4ef1-e012-afa59e28eb67</Identifier>
+        <MetadataURL type="ISO19115:2003">
+          <Format>text/xml</Format>
+          <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://www.pcn.minambiente.it/geoportal/csw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;outputSchema=http%3A%2F%2Fwww.isotc211.org%2F2005%2Fgmd&amp;elementSetName=full&amp;ID=m_amte:299FN3:cc27f7d2-b344-49f1-8ce5-e92a0c390e64"/>
+        </MetadataURL>
+        <Style>
+          <Name>GN:Predefinito</Name>
+          <Title>GN:Predefinito</Title>
+          <LegendURL width="111" height="25">
+             <Format>image/png</Format>
+             <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Progetto_Antincendi_Boschivi_PNZ.map&amp;version=1.1.1&amp;service=WMS&amp;request=GetLegendGraphic&amp;layer=RN.ANTINCENDIBOSCHIVI.INCENDI-2010_01&amp;format=image/png&amp;STYLE=GN:Predefinito"/>
+          </LegendURL>
+        </Style>
+      </Layer>
+      <Layer queryable="1" opaque="0" cascaded="0">
+        <Name>RN.ANTINCENDIBOSCHIVI.INCENDI-2010_02</Name>
+        <Title>AIB - Incendi 2011 (rilievo da terra)</Title>
+        <Abstract>Perimetri degli incendi boschivi rilevati da terra nell&#39;anno 2011 su tutti i Parchi Nazionali italiani.</Abstract>
+        <KeywordList>
+            <Keyword>Rischio naturale</Keyword>
+            <Keyword> Disastri</Keyword>
+            <Keyword> Incidenti</Keyword>
+            <Keyword> Rischi</Keyword>
+            <Keyword> Incendio</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4326</SRS>
+        <SRS>EPSG:32632</SRS>
+        <SRS>EPSG:32633</SRS>
+        <SRS>EPSG:4258</SRS>
+        <SRS>EPSG:3004</SRS>
+        <SRS>EPSG:3003</SRS>
+        <SRS>EPSG:4265</SRS>
+        <SRS>EPSG:4806</SRS>
+        <LatLonBoundingBox minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4326"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:32632"
+                    minx="224545" miny="3.8176e+006" maxx="1.41971e+006" maxy="5.47582e+006" />
+        <BoundingBox SRS="EPSG:32633"
+                    minx="-327451" miny="3.8176e+006" maxx="867321" maxy="5.4666e+006" />
+        <BoundingBox SRS="EPSG:4258"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:3004"
+                    minx="1.69251e+006" miny="3.81766e+006" maxx="2.88734e+006" maxy="5.46671e+006" />
+        <BoundingBox SRS="EPSG:3003"
+                    minx="1.22453e+006" miny="3.81766e+006" maxx="2.41975e+006" maxy="5.47593e+006" />
+        <BoundingBox SRS="EPSG:4265"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4806"
+                    minx="-6.45199" miny="34.4994" maxx="6.54763" maxy="48.9993" />
+        <Identifier authority="www.pcn.minambiente.it">m_amte:299FN3:85278bb0-20f5-4ef1-e012-afa59e28eb67</Identifier>
+        <MetadataURL type="ISO19115:2003">
+          <Format>text/xml</Format>
+          <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://www.pcn.minambiente.it/geoportal/csw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;outputSchema=http%3A%2F%2Fwww.isotc211.org%2F2005%2Fgmd&amp;elementSetName=full&amp;ID=m_amte:299FN3:cc27f7d2-b344-49f1-8ce5-e92a0c390e64"/>
+        </MetadataURL>
+        <Style>
+          <Name>GN:Predefinito</Name>
+          <Title>GN:Predefinito</Title>
+          <LegendURL width="109" height="25">
+             <Format>image/png</Format>
+             <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Progetto_Antincendi_Boschivi_PNZ.map&amp;version=1.1.1&amp;service=WMS&amp;request=GetLegendGraphic&amp;layer=RN.ANTINCENDIBOSCHIVI.INCENDI-2010_02&amp;format=image/png&amp;STYLE=GN:Predefinito"/>
+          </LegendURL>
+        </Style>
+      </Layer>
+      <Layer queryable="1" opaque="0" cascaded="0">
+        <Name>RN.ANTINCENDIBOSCHIVI.INCENDI-2012</Name>
+        <Title>AIB - Incendi 2012 (rilievo da terra)</Title>
+        <Abstract>Perimetri degli incendi boschivi rilevati da terra nell&#39;anno 2012 su tutti i Parchi Nazionali italiani.</Abstract>
+        <KeywordList>
+            <Keyword>Rischio naturale</Keyword>
+            <Keyword> Disastri</Keyword>
+            <Keyword> Incidenti</Keyword>
+            <Keyword> Rischi</Keyword>
+            <Keyword> Incendio</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4326</SRS>
+        <SRS>EPSG:32632</SRS>
+        <SRS>EPSG:32633</SRS>
+        <SRS>EPSG:4258</SRS>
+        <SRS>EPSG:3004</SRS>
+        <SRS>EPSG:3003</SRS>
+        <SRS>EPSG:4265</SRS>
+        <SRS>EPSG:4806</SRS>
+        <LatLonBoundingBox minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4326"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:32632"
+                    minx="224545" miny="3.8176e+006" maxx="1.41971e+006" maxy="5.47582e+006" />
+        <BoundingBox SRS="EPSG:32633"
+                    minx="-327451" miny="3.8176e+006" maxx="867321" maxy="5.4666e+006" />
+        <BoundingBox SRS="EPSG:4258"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:3004"
+                    minx="1.69251e+006" miny="3.81766e+006" maxx="2.88734e+006" maxy="5.46671e+006" />
+        <BoundingBox SRS="EPSG:3003"
+                    minx="1.22453e+006" miny="3.81766e+006" maxx="2.41975e+006" maxy="5.47593e+006" />
+        <BoundingBox SRS="EPSG:4265"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4806"
+                    minx="-6.45199" miny="34.4994" maxx="6.54763" maxy="48.9993" />
+        <Identifier authority="www.pcn.minambiente.it">m_amte:299FN3:85278bb0-20f5-4ef1-e012-afa59e28eb67</Identifier>
+        <MetadataURL type="ISO19115:2003">
+          <Format>text/xml</Format>
+          <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://www.pcn.minambiente.it/geoportal/csw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;outputSchema=http%3A%2F%2Fwww.isotc211.org%2F2005%2Fgmd&amp;elementSetName=full&amp;ID=m_amte:299FN3:cc27f7d2-b344-49f1-8ce5-e92a0c390e64"/>
+        </MetadataURL>
+        <Style>
+          <Name>GN:Predefinito</Name>
+          <Title>GN:Predefinito</Title>
+          <LegendURL width="111" height="25">
+             <Format>image/png</Format>
+             <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Progetto_Antincendi_Boschivi_PNZ.map&amp;version=1.1.1&amp;service=WMS&amp;request=GetLegendGraphic&amp;layer=RN.ANTINCENDIBOSCHIVI.INCENDI-2012&amp;format=image/png&amp;STYLE=GN:Predefinito"/>
+          </LegendURL>
+        </Style>
+      </Layer>
+      <Layer queryable="1" opaque="0" cascaded="0">
+        <Name>RN.ANTINCENDIBOSCHIVI.INCENDI-2013</Name>
+        <Title>AIB - Incendi 2013 (rilievo da terra)</Title>
+        <Abstract>Perimetri degli incendi boschivi rilevati da terra nell&#39;anno 2013 su tutti i Parchi Nazionali italiani.</Abstract>
+        <KeywordList>
+            <Keyword>Rischio naturale</Keyword>
+            <Keyword> Disastri</Keyword>
+            <Keyword> Incidenti</Keyword>
+            <Keyword> Rischi</Keyword>
+            <Keyword> Incendio</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4326</SRS>
+        <SRS>EPSG:32632</SRS>
+        <SRS>EPSG:32633</SRS>
+        <SRS>EPSG:4258</SRS>
+        <SRS>EPSG:3004</SRS>
+        <SRS>EPSG:3003</SRS>
+        <SRS>EPSG:4265</SRS>
+        <SRS>EPSG:4806</SRS>
+        <LatLonBoundingBox minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4326"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:32632"
+                    minx="224545" miny="3.8176e+006" maxx="1.41971e+006" maxy="5.47582e+006" />
+        <BoundingBox SRS="EPSG:32633"
+                    minx="-327451" miny="3.8176e+006" maxx="867321" maxy="5.4666e+006" />
+        <BoundingBox SRS="EPSG:4258"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:3004"
+                    minx="1.69251e+006" miny="3.81766e+006" maxx="2.88734e+006" maxy="5.46671e+006" />
+        <BoundingBox SRS="EPSG:3003"
+                    minx="1.22453e+006" miny="3.81766e+006" maxx="2.41975e+006" maxy="5.47593e+006" />
+        <BoundingBox SRS="EPSG:4265"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4806"
+                    minx="-6.45199" miny="34.4994" maxx="6.54763" maxy="48.9993" />
+        <Identifier authority="www.pcn.minambiente.it">m_amte:299FN3:85278bb0-20f5-4ef1-e012-afa59e28eb67</Identifier>
+        <MetadataURL type="ISO19115:2003">
+          <Format>text/xml</Format>
+          <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://www.pcn.minambiente.it/geoportal/csw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;outputSchema=http%3A%2F%2Fwww.isotc211.org%2F2005%2Fgmd&amp;elementSetName=full&amp;ID=m_amte:299FN3:cc27f7d2-b344-49f1-8ce5-e92a0c390e64"/>
+        </MetadataURL>
+        <Style>
+          <Name>GN:Predefinito</Name>
+          <Title>GN:Predefinito</Title>
+          <LegendURL width="111" height="25">
+             <Format>image/png</Format>
+             <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Progetto_Antincendi_Boschivi_PNZ.map&amp;version=1.1.1&amp;service=WMS&amp;request=GetLegendGraphic&amp;layer=RN.ANTINCENDIBOSCHIVI.INCENDI-2013&amp;format=image/png&amp;STYLE=GN:Predefinito"/>
+          </LegendURL>
+        </Style>
+      </Layer>
+      <Layer queryable="1" opaque="0" cascaded="0">
+        <Name>RN.ANTINCENDIBOSCHIVI.INCENDI-2014</Name>
+        <Title>AIB - Incendi 2014 (rilievo da terra)</Title>
+        <Abstract>Perimetri degli incendi boschivi rilevati da terra nell&#39;anno 2014 su tutti i Parchi Nazionali italiani.</Abstract>
+        <KeywordList>
+            <Keyword>Rischio naturale</Keyword>
+            <Keyword> Disastri</Keyword>
+            <Keyword> Incidenti</Keyword>
+            <Keyword> Rischi</Keyword>
+            <Keyword> Incendio</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4326</SRS>
+        <SRS>EPSG:32632</SRS>
+        <SRS>EPSG:32633</SRS>
+        <SRS>EPSG:4258</SRS>
+        <SRS>EPSG:3004</SRS>
+        <SRS>EPSG:3003</SRS>
+        <SRS>EPSG:4265</SRS>
+        <SRS>EPSG:4806</SRS>
+        <LatLonBoundingBox minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4326"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:32632"
+                    minx="224545" miny="3.8176e+006" maxx="1.41971e+006" maxy="5.47582e+006" />
+        <BoundingBox SRS="EPSG:32633"
+                    minx="-327451" miny="3.8176e+006" maxx="867321" maxy="5.4666e+006" />
+        <BoundingBox SRS="EPSG:4258"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:3004"
+                    minx="1.69251e+006" miny="3.81766e+006" maxx="2.88734e+006" maxy="5.46671e+006" />
+        <BoundingBox SRS="EPSG:3003"
+                    minx="1.22453e+006" miny="3.81766e+006" maxx="2.41975e+006" maxy="5.47593e+006" />
+        <BoundingBox SRS="EPSG:4265"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4806"
+                    minx="-6.45199" miny="34.4994" maxx="6.54763" maxy="48.9993" />
+        <Identifier authority="www.pcn.minambiente.it">m_amte:299FN3:85278bb0-20f5-4ef1-e012-afa59e28eb67</Identifier>
+        <MetadataURL type="ISO19115:2003">
+          <Format>text/xml</Format>
+          <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://www.pcn.minambiente.it/geoportal/csw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;outputSchema=http%3A%2F%2Fwww.isotc211.org%2F2005%2Fgmd&amp;elementSetName=full&amp;ID=m_amte:299FN3:cc27f7d2-b344-49f1-8ce5-e92a0c390e64"/>
+        </MetadataURL>
+        <Style>
+          <Name>GN:Predefinito</Name>
+          <Title>GN:Predefinito</Title>
+          <LegendURL width="111" height="25">
+             <Format>image/png</Format>
+             <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Progetto_Antincendi_Boschivi_PNZ.map&amp;version=1.1.1&amp;service=WMS&amp;request=GetLegendGraphic&amp;layer=RN.ANTINCENDIBOSCHIVI.INCENDI-2014&amp;format=image/png&amp;STYLE=GN:Predefinito"/>
+          </LegendURL>
+        </Style>
+      </Layer>
+      <Layer queryable="1" opaque="0" cascaded="0">
+        <Name>RN.ANTINCENDIBOSCHIVI.INCENDI-2015</Name>
+        <Title>AIB - Incendi 2015 (rilievo da terra)</Title>
+        <Abstract>Perimetri degli incendi boschivi rilevati da terra nell&#39;anno 2015 su tutti i Parchi Nazionali italiani.</Abstract>
+        <KeywordList>
+            <Keyword>Rischio naturale</Keyword>
+            <Keyword> Disastri</Keyword>
+            <Keyword> Incidenti</Keyword>
+            <Keyword> Rischi</Keyword>
+            <Keyword> Incendio</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4326</SRS>
+        <SRS>EPSG:32632</SRS>
+        <SRS>EPSG:32633</SRS>
+        <SRS>EPSG:4258</SRS>
+        <SRS>EPSG:3004</SRS>
+        <SRS>EPSG:3003</SRS>
+        <SRS>EPSG:4265</SRS>
+        <SRS>EPSG:4806</SRS>
+        <LatLonBoundingBox minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4326"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:32632"
+                    minx="224545" miny="3.8176e+006" maxx="1.41971e+006" maxy="5.47582e+006" />
+        <BoundingBox SRS="EPSG:32633"
+                    minx="-327451" miny="3.8176e+006" maxx="867321" maxy="5.4666e+006" />
+        <BoundingBox SRS="EPSG:4258"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:3004"
+                    minx="1.69251e+006" miny="3.81766e+006" maxx="2.88734e+006" maxy="5.46671e+006" />
+        <BoundingBox SRS="EPSG:3003"
+                    minx="1.22453e+006" miny="3.81766e+006" maxx="2.41975e+006" maxy="5.47593e+006" />
+        <BoundingBox SRS="EPSG:4265"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4806"
+                    minx="-6.45199" miny="34.4994" maxx="6.54763" maxy="48.9993" />
+        <Identifier authority="www.pcn.minambiente.it">m_amte:299FN3:85278bb0-20f5-4ef1-e012-afa59e28eb67</Identifier>
+        <MetadataURL type="ISO19115:2003">
+          <Format>text/xml</Format>
+          <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://www.pcn.minambiente.it/geoportal/csw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;outputSchema=http%3A%2F%2Fwww.isotc211.org%2F2005%2Fgmd&amp;elementSetName=full&amp;ID=m_amte:299FN3:cc27f7d2-b344-49f1-8ce5-e92a0c390e64"/>
+        </MetadataURL>
+        <Style>
+          <Name>GN:Predefinito</Name>
+          <Title>GN:Predefinito</Title>
+          <LegendURL width="111" height="25">
+             <Format>image/png</Format>
+             <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Progetto_Antincendi_Boschivi_PNZ.map&amp;version=1.1.1&amp;service=WMS&amp;request=GetLegendGraphic&amp;layer=RN.ANTINCENDIBOSCHIVI.INCENDI-2015&amp;format=image/png&amp;STYLE=GN:Predefinito"/>
+          </LegendURL>
+        </Style>
+      </Layer>
+      <Layer queryable="1" opaque="0" cascaded="0">
+        <Name>RN.ANTINCENDIBOSCHIVI.INCENDI-2016</Name>
+        <Title>AIB - Incendi 2016 (rilievo da terra)</Title>
+        <Abstract>Perimetri degli incendi boschivi rilevati da terra nell&#39;anno 2016 su tutti i Parchi Nazionali italiani.</Abstract>
+        <KeywordList>
+            <Keyword>Rischio naturale</Keyword>
+            <Keyword> Disastri</Keyword>
+            <Keyword> Incidenti</Keyword>
+            <Keyword> Rischi</Keyword>
+            <Keyword> Incendio</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4326</SRS>
+        <SRS>EPSG:32632</SRS>
+        <SRS>EPSG:32633</SRS>
+        <SRS>EPSG:4258</SRS>
+        <SRS>EPSG:3004</SRS>
+        <SRS>EPSG:3003</SRS>
+        <SRS>EPSG:4265</SRS>
+        <SRS>EPSG:4806</SRS>
+        <LatLonBoundingBox minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4326"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:32632"
+                    minx="224545" miny="3.8176e+006" maxx="1.41971e+006" maxy="5.47582e+006" />
+        <BoundingBox SRS="EPSG:32633"
+                    minx="-327451" miny="3.8176e+006" maxx="867321" maxy="5.4666e+006" />
+        <BoundingBox SRS="EPSG:4258"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:3004"
+                    minx="1.69251e+006" miny="3.81766e+006" maxx="2.88734e+006" maxy="5.46671e+006" />
+        <BoundingBox SRS="EPSG:3003"
+                    minx="1.22453e+006" miny="3.81766e+006" maxx="2.41975e+006" maxy="5.47593e+006" />
+        <BoundingBox SRS="EPSG:4265"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4806"
+                    minx="-6.45199" miny="34.4994" maxx="6.54763" maxy="48.9993" />
+        <Identifier authority="www.pcn.minambiente.it">m_amte:299FN3:85278bb0-20f5-4ef1-e012-afa59e28eb67</Identifier>
+        <MetadataURL type="ISO19115:2003">
+          <Format>text/xml</Format>
+          <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://www.pcn.minambiente.it/geoportal/csw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;outputSchema=http%3A%2F%2Fwww.isotc211.org%2F2005%2Fgmd&amp;elementSetName=full&amp;ID=m_amte:299FN3:cc27f7d2-b344-49f1-8ce5-e92a0c390e64"/>
+        </MetadataURL>
+        <Style>
+          <Name>GN:Predefinito</Name>
+          <Title>GN:Predefinito</Title>
+          <LegendURL width="111" height="25">
+             <Format>image/png</Format>
+             <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Progetto_Antincendi_Boschivi_PNZ.map&amp;version=1.1.1&amp;service=WMS&amp;request=GetLegendGraphic&amp;layer=RN.ANTINCENDIBOSCHIVI.INCENDI-2016&amp;format=image/png&amp;STYLE=GN:Predefinito"/>
+          </LegendURL>
+        </Style>
+      </Layer>
+      <Layer queryable="1" opaque="0" cascaded="0">
+        <Name>RN.ANTINCENDIBOSCHIVI.USOSUOLO.AREE-2007</Name>
+        <Title>AIB -  Uso del suolo aree incendiate 2007</Title>
+        <Abstract>Perimetri degli incendi boschivi rilevati da terra nell&#39;anno 2007, su tutti i Parchi Nazionali italiani, suddivisi in aree boscate e non.</Abstract>
+        <KeywordList>
+            <Keyword>Rischio naturale</Keyword>
+            <Keyword> Disastri</Keyword>
+            <Keyword> Incidenti</Keyword>
+            <Keyword> Rischi</Keyword>
+            <Keyword> Incendio</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4326</SRS>
+        <SRS>EPSG:32632</SRS>
+        <SRS>EPSG:32633</SRS>
+        <SRS>EPSG:4258</SRS>
+        <SRS>EPSG:3004</SRS>
+        <SRS>EPSG:3003</SRS>
+        <SRS>EPSG:4265</SRS>
+        <SRS>EPSG:4806</SRS>
+        <LatLonBoundingBox minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4326"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:32632"
+                    minx="224545" miny="3.8176e+006" maxx="1.41971e+006" maxy="5.47582e+006" />
+        <BoundingBox SRS="EPSG:32633"
+                    minx="-327451" miny="3.8176e+006" maxx="867321" maxy="5.4666e+006" />
+        <BoundingBox SRS="EPSG:4258"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:3004"
+                    minx="1.69251e+006" miny="3.81766e+006" maxx="2.88734e+006" maxy="5.46671e+006" />
+        <BoundingBox SRS="EPSG:3003"
+                    minx="1.22453e+006" miny="3.81766e+006" maxx="2.41975e+006" maxy="5.47593e+006" />
+        <BoundingBox SRS="EPSG:4265"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4806"
+                    minx="-6.45199" miny="34.4994" maxx="6.54763" maxy="48.9993" />
+        <Identifier authority="www.pcn.minambiente.it">m_amte:299FN3:c3b29840-59c8-4982-ca39-623d5a5155a4</Identifier>
+        <MetadataURL type="ISO19115:2003">
+          <Format>text/xml</Format>
+          <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://www.pcn.minambiente.it/geoportal/csw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;outputSchema=http%3A%2F%2Fwww.isotc211.org%2F2005%2Fgmd&amp;elementSetName=full&amp;ID=m_amte:299FN3:02ddd5df-f91a-4767-86dd-1993df9c65c5"/>
+        </MetadataURL>
+        <Style>
+          <Name>GN:Predefinito</Name>
+          <Title>GN:Predefinito</Title>
+          <LegendURL width="117" height="45">
+             <Format>image/png</Format>
+             <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Progetto_Antincendi_Boschivi_PNZ.map&amp;version=1.1.1&amp;service=WMS&amp;request=GetLegendGraphic&amp;layer=RN.ANTINCENDIBOSCHIVI.USOSUOLO.AREE-2007&amp;format=image/png&amp;STYLE=GN:Predefinito"/>
+          </LegendURL>
+        </Style>
+      </Layer>
+      <Layer queryable="1" opaque="0" cascaded="0">
+        <Name>RN.ANTINCENDIBOSCHIVI.USOSUOLO.AREE-2008</Name>
+        <Title>AIB -  Uso del suolo aree incendiate 2008</Title>
+        <Abstract>Perimetri degli incendi boschivi rilevati da terra nell&#39;anno 2008, su tutti i Parchi Nazionali italiani, suddivisi in aree boscate e non.</Abstract>
+        <KeywordList>
+            <Keyword>Rischio naturale</Keyword>
+            <Keyword> Disastri</Keyword>
+            <Keyword> Incidenti</Keyword>
+            <Keyword> Rischi</Keyword>
+            <Keyword> Incendio</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4326</SRS>
+        <SRS>EPSG:32632</SRS>
+        <SRS>EPSG:32633</SRS>
+        <SRS>EPSG:4258</SRS>
+        <SRS>EPSG:3004</SRS>
+        <SRS>EPSG:3003</SRS>
+        <SRS>EPSG:4265</SRS>
+        <SRS>EPSG:4806</SRS>
+        <LatLonBoundingBox minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4326"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:32632"
+                    minx="224545" miny="3.8176e+006" maxx="1.41971e+006" maxy="5.47582e+006" />
+        <BoundingBox SRS="EPSG:32633"
+                    minx="-327451" miny="3.8176e+006" maxx="867321" maxy="5.4666e+006" />
+        <BoundingBox SRS="EPSG:4258"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:3004"
+                    minx="1.69251e+006" miny="3.81766e+006" maxx="2.88734e+006" maxy="5.46671e+006" />
+        <BoundingBox SRS="EPSG:3003"
+                    minx="1.22453e+006" miny="3.81766e+006" maxx="2.41975e+006" maxy="5.47593e+006" />
+        <BoundingBox SRS="EPSG:4265"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4806"
+                    minx="-6.45199" miny="34.4994" maxx="6.54763" maxy="48.9993" />
+        <Identifier authority="www.pcn.minambiente.it">m_amte:299FN3:c3b29840-59c8-4982-ca39-623d5a5155a4</Identifier>
+        <MetadataURL type="ISO19115:2003">
+          <Format>text/xml</Format>
+          <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://www.pcn.minambiente.it/geoportal/csw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;outputSchema=http%3A%2F%2Fwww.isotc211.org%2F2005%2Fgmd&amp;elementSetName=full&amp;ID=m_amte:299FN3:02ddd5df-f91a-4767-86dd-1993df9c65c5"/>
+        </MetadataURL>
+        <Style>
+          <Name>GN:Predefinito</Name>
+          <Title>GN:Predefinito</Title>
+          <LegendURL width="117" height="45">
+             <Format>image/png</Format>
+             <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Progetto_Antincendi_Boschivi_PNZ.map&amp;version=1.1.1&amp;service=WMS&amp;request=GetLegendGraphic&amp;layer=RN.ANTINCENDIBOSCHIVI.USOSUOLO.AREE-2008&amp;format=image/png&amp;STYLE=GN:Predefinito"/>
+          </LegendURL>
+        </Style>
+      </Layer>
+      <Layer queryable="1" opaque="0" cascaded="0">
+        <Name>RN.ANTINCENDIBOSCHIVI.USOSUOLO.AREE-2009</Name>
+        <Title>AIB -  Uso del suolo aree incendiate 2009</Title>
+        <Abstract>Perimetri degli incendi boschivi rilevati da terra nell&#39;anno 2009, su tutti i Parchi Nazionali italiani, suddivisi in aree boscate e non.</Abstract>
+        <KeywordList>
+            <Keyword>Rischio naturale</Keyword>
+            <Keyword> Disastri</Keyword>
+            <Keyword> Incidenti</Keyword>
+            <Keyword> Rischi</Keyword>
+            <Keyword> Incendio</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4326</SRS>
+        <SRS>EPSG:32632</SRS>
+        <SRS>EPSG:32633</SRS>
+        <SRS>EPSG:4258</SRS>
+        <SRS>EPSG:3004</SRS>
+        <SRS>EPSG:3003</SRS>
+        <SRS>EPSG:4265</SRS>
+        <SRS>EPSG:4806</SRS>
+        <LatLonBoundingBox minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4326"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:32632"
+                    minx="224545" miny="3.8176e+006" maxx="1.41971e+006" maxy="5.47582e+006" />
+        <BoundingBox SRS="EPSG:32633"
+                    minx="-327451" miny="3.8176e+006" maxx="867321" maxy="5.4666e+006" />
+        <BoundingBox SRS="EPSG:4258"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:3004"
+                    minx="1.69251e+006" miny="3.81766e+006" maxx="2.88734e+006" maxy="5.46671e+006" />
+        <BoundingBox SRS="EPSG:3003"
+                    minx="1.22453e+006" miny="3.81766e+006" maxx="2.41975e+006" maxy="5.47593e+006" />
+        <BoundingBox SRS="EPSG:4265"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4806"
+                    minx="-6.45199" miny="34.4994" maxx="6.54763" maxy="48.9993" />
+        <Identifier authority="www.pcn.minambiente.it">m_amte:299FN3:c3b29840-59c8-4982-ca39-623d5a5155a4</Identifier>
+        <MetadataURL type="ISO19115:2003">
+          <Format>text/xml</Format>
+          <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://www.pcn.minambiente.it/geoportal/csw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;outputSchema=http%3A%2F%2Fwww.isotc211.org%2F2005%2Fgmd&amp;elementSetName=full&amp;ID=m_amte:299FN3:02ddd5df-f91a-4767-86dd-1993df9c65c5"/>
+        </MetadataURL>
+        <Style>
+          <Name>GN:Predefinito</Name>
+          <Title>GN:Predefinito</Title>
+          <LegendURL width="117" height="45">
+             <Format>image/png</Format>
+             <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Progetto_Antincendi_Boschivi_PNZ.map&amp;version=1.1.1&amp;service=WMS&amp;request=GetLegendGraphic&amp;layer=RN.ANTINCENDIBOSCHIVI.USOSUOLO.AREE-2009&amp;format=image/png&amp;STYLE=GN:Predefinito"/>
+          </LegendURL>
+        </Style>
+      </Layer>
+      <Layer queryable="1" opaque="0" cascaded="0">
+        <Name>RN.ANTINCENDIBOSCHIVI.USOSUOLO.AREE-2010</Name>
+        <Title>AIB -  Uso del suolo aree incendiate 2010</Title>
+        <Abstract>Perimetri degli incendi boschivi rilevati da terra nell&#39;anno 2010, su tutti i Parchi Nazionali italiani, suddivisi in aree boscate e non.</Abstract>
+        <KeywordList>
+            <Keyword>Rischio naturale</Keyword>
+            <Keyword> Disastri</Keyword>
+            <Keyword> Incidenti</Keyword>
+            <Keyword> Rischi</Keyword>
+            <Keyword> Incendio</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4326</SRS>
+        <SRS>EPSG:32632</SRS>
+        <SRS>EPSG:32633</SRS>
+        <SRS>EPSG:4258</SRS>
+        <SRS>EPSG:3004</SRS>
+        <SRS>EPSG:3003</SRS>
+        <SRS>EPSG:4265</SRS>
+        <SRS>EPSG:4806</SRS>
+        <LatLonBoundingBox minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4326"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:32632"
+                    minx="224545" miny="3.8176e+006" maxx="1.41971e+006" maxy="5.47582e+006" />
+        <BoundingBox SRS="EPSG:32633"
+                    minx="-327451" miny="3.8176e+006" maxx="867321" maxy="5.4666e+006" />
+        <BoundingBox SRS="EPSG:4258"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:3004"
+                    minx="1.69251e+006" miny="3.81766e+006" maxx="2.88734e+006" maxy="5.46671e+006" />
+        <BoundingBox SRS="EPSG:3003"
+                    minx="1.22453e+006" miny="3.81766e+006" maxx="2.41975e+006" maxy="5.47593e+006" />
+        <BoundingBox SRS="EPSG:4265"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4806"
+                    minx="-6.45199" miny="34.4994" maxx="6.54763" maxy="48.9993" />
+        <Identifier authority="www.pcn.minambiente.it">m_amte:299FN3:c3b29840-59c8-4982-ca39-623d5a5155a4</Identifier>
+        <MetadataURL type="ISO19115:2003">
+          <Format>text/xml</Format>
+          <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://www.pcn.minambiente.it/geoportal/csw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;outputSchema=http%3A%2F%2Fwww.isotc211.org%2F2005%2Fgmd&amp;elementSetName=full&amp;ID=m_amte:299FN3:02ddd5df-f91a-4767-86dd-1993df9c65c5"/>
+        </MetadataURL>
+        <Style>
+          <Name>GN:Predefinito</Name>
+          <Title>GN:Predefinito</Title>
+          <LegendURL width="117" height="45">
+             <Format>image/png</Format>
+             <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Progetto_Antincendi_Boschivi_PNZ.map&amp;version=1.1.1&amp;service=WMS&amp;request=GetLegendGraphic&amp;layer=RN.ANTINCENDIBOSCHIVI.USOSUOLO.AREE-2010&amp;format=image/png&amp;STYLE=GN:Predefinito"/>
+          </LegendURL>
+        </Style>
+      </Layer>
+      <Layer queryable="1" opaque="0" cascaded="0">
+        <Name>RN.ANTINCENDIBOSCHIVI.USOSUOLO.AREE-2011</Name>
+        <Title>AIB -  Uso del suolo aree incendiate 2011</Title>
+        <Abstract>Perimetri degli incendi boschivi rilevati da terra nell&#39;anno 2011 (con diverso uso del suolo: &#39;boscato&#39; e &#39;non boscato&#39;) su tutti i Parchi Nazionali italiani.</Abstract>
+        <KeywordList>
+            <Keyword>Rischio naturale</Keyword>
+            <Keyword> Disastri</Keyword>
+            <Keyword> Incidenti</Keyword>
+            <Keyword> Rischi</Keyword>
+            <Keyword> Incendio</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4326</SRS>
+        <SRS>EPSG:32632</SRS>
+        <SRS>EPSG:32633</SRS>
+        <SRS>EPSG:4258</SRS>
+        <SRS>EPSG:3004</SRS>
+        <SRS>EPSG:3003</SRS>
+        <SRS>EPSG:4265</SRS>
+        <SRS>EPSG:4806</SRS>
+        <LatLonBoundingBox minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4326"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:32632"
+                    minx="224545" miny="3.8176e+006" maxx="1.41971e+006" maxy="5.47582e+006" />
+        <BoundingBox SRS="EPSG:32633"
+                    minx="-327451" miny="3.8176e+006" maxx="867321" maxy="5.4666e+006" />
+        <BoundingBox SRS="EPSG:4258"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:3004"
+                    minx="1.69251e+006" miny="3.81766e+006" maxx="2.88734e+006" maxy="5.46671e+006" />
+        <BoundingBox SRS="EPSG:3003"
+                    minx="1.22453e+006" miny="3.81766e+006" maxx="2.41975e+006" maxy="5.47593e+006" />
+        <BoundingBox SRS="EPSG:4265"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4806"
+                    minx="-6.45199" miny="34.4994" maxx="6.54763" maxy="48.9993" />
+        <Identifier authority="www.pcn.minambiente.it">m_amte:299FN3:c3b29840-59c8-4982-ca39-623d5a5155a4</Identifier>
+        <MetadataURL type="ISO19115:2003">
+          <Format>text/xml</Format>
+          <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://www.pcn.minambiente.it/geoportal/csw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;outputSchema=http%3A%2F%2Fwww.isotc211.org%2F2005%2Fgmd&amp;elementSetName=full&amp;ID=m_amte:299FN3:02ddd5df-f91a-4767-86dd-1993df9c65c5"/>
+        </MetadataURL>
+        <Style>
+          <Name>GN:Predefinito</Name>
+          <Title>GN:Predefinito</Title>
+          <LegendURL width="117" height="45">
+             <Format>image/png</Format>
+             <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Progetto_Antincendi_Boschivi_PNZ.map&amp;version=1.1.1&amp;service=WMS&amp;request=GetLegendGraphic&amp;layer=RN.ANTINCENDIBOSCHIVI.USOSUOLO.AREE-2011&amp;format=image/png&amp;STYLE=GN:Predefinito"/>
+          </LegendURL>
+        </Style>
+      </Layer>
+      <Layer queryable="1" opaque="0" cascaded="0">
+        <Name>RN.ANTINCENDIBOSCHIVI.USOSUOLO.AREE-2012</Name>
+        <Title>AIB -  Uso del suolo aree incendiate 2012</Title>
+        <Abstract>Perimetri degli incendi boschivi rilevati da terra nell&#39;anno 2012 (con diverso uso del suolo: &#39;boscato&#39; e &#39;non boscato&#39;) su tutti i Parchi Nazionali italiani.</Abstract>
+        <KeywordList>
+            <Keyword>Rischio naturale</Keyword>
+            <Keyword> Disastri</Keyword>
+            <Keyword> Incidenti</Keyword>
+            <Keyword> Rischi</Keyword>
+            <Keyword> Incendio</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4326</SRS>
+        <SRS>EPSG:32632</SRS>
+        <SRS>EPSG:32633</SRS>
+        <SRS>EPSG:4258</SRS>
+        <SRS>EPSG:3004</SRS>
+        <SRS>EPSG:3003</SRS>
+        <SRS>EPSG:4265</SRS>
+        <SRS>EPSG:4806</SRS>
+        <LatLonBoundingBox minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4326"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:32632"
+                    minx="224545" miny="3.8176e+006" maxx="1.41971e+006" maxy="5.47582e+006" />
+        <BoundingBox SRS="EPSG:32633"
+                    minx="-327451" miny="3.8176e+006" maxx="867321" maxy="5.4666e+006" />
+        <BoundingBox SRS="EPSG:4258"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:3004"
+                    minx="1.69251e+006" miny="3.81766e+006" maxx="2.88734e+006" maxy="5.46671e+006" />
+        <BoundingBox SRS="EPSG:3003"
+                    minx="1.22453e+006" miny="3.81766e+006" maxx="2.41975e+006" maxy="5.47593e+006" />
+        <BoundingBox SRS="EPSG:4265"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4806"
+                    minx="-6.45199" miny="34.4994" maxx="6.54763" maxy="48.9993" />
+        <Identifier authority="www.pcn.minambiente.it">m_amte:299FN3:c3b29840-59c8-4982-ca39-623d5a5155a4</Identifier>
+        <MetadataURL type="ISO19115:2003">
+          <Format>text/xml</Format>
+          <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://www.pcn.minambiente.it/geoportal/csw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;outputSchema=http%3A%2F%2Fwww.isotc211.org%2F2005%2Fgmd&amp;elementSetName=full&amp;ID=m_amte:299FN3:02ddd5df-f91a-4767-86dd-1993df9c65c5"/>
+        </MetadataURL>
+        <Style>
+          <Name>GN:Predefinito</Name>
+          <Title>GN:Predefinito</Title>
+          <LegendURL width="117" height="45">
+             <Format>image/png</Format>
+             <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Progetto_Antincendi_Boschivi_PNZ.map&amp;version=1.1.1&amp;service=WMS&amp;request=GetLegendGraphic&amp;layer=RN.ANTINCENDIBOSCHIVI.USOSUOLO.AREE-2012&amp;format=image/png&amp;STYLE=GN:Predefinito"/>
+          </LegendURL>
+        </Style>
+      </Layer>
+      <Layer queryable="1" opaque="0" cascaded="0">
+        <Name>RN.ANTINCENDIBOSCHIVI.USOSUOLO.AREE-2013</Name>
+        <Title>AIB -  Uso del suolo aree incendiate 2013</Title>
+        <Abstract>Perimetri degli incendi boschivi rilevati da terra nell&#39;anno 2013 (con diverso uso del suolo: &#39;boscato&#39; e &#39;non boscato&#39;) su tutti i Parchi Nazionali italiani.</Abstract>
+        <KeywordList>
+            <Keyword>Rischio naturale</Keyword>
+            <Keyword> Disastri</Keyword>
+            <Keyword> Incidenti</Keyword>
+            <Keyword> Rischi</Keyword>
+            <Keyword> Incendio</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4326</SRS>
+        <SRS>EPSG:32632</SRS>
+        <SRS>EPSG:32633</SRS>
+        <SRS>EPSG:4258</SRS>
+        <SRS>EPSG:3004</SRS>
+        <SRS>EPSG:3003</SRS>
+        <SRS>EPSG:4265</SRS>
+        <SRS>EPSG:4806</SRS>
+        <LatLonBoundingBox minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4326"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:32632"
+                    minx="224545" miny="3.8176e+006" maxx="1.41971e+006" maxy="5.47582e+006" />
+        <BoundingBox SRS="EPSG:32633"
+                    minx="-327451" miny="3.8176e+006" maxx="867321" maxy="5.4666e+006" />
+        <BoundingBox SRS="EPSG:4258"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:3004"
+                    minx="1.69251e+006" miny="3.81766e+006" maxx="2.88734e+006" maxy="5.46671e+006" />
+        <BoundingBox SRS="EPSG:3003"
+                    minx="1.22453e+006" miny="3.81766e+006" maxx="2.41975e+006" maxy="5.47593e+006" />
+        <BoundingBox SRS="EPSG:4265"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4806"
+                    minx="-6.45199" miny="34.4994" maxx="6.54763" maxy="48.9993" />
+        <Identifier authority="www.pcn.minambiente.it">m_amte:299FN3:c3b29840-59c8-4982-ca39-623d5a5155a4</Identifier>
+        <MetadataURL type="ISO19115:2003">
+          <Format>text/xml</Format>
+          <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://www.pcn.minambiente.it/geoportal/csw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;outputSchema=http%3A%2F%2Fwww.isotc211.org%2F2005%2Fgmd&amp;elementSetName=full&amp;ID=m_amte:299FN3:02ddd5df-f91a-4767-86dd-1993df9c65c5"/>
+        </MetadataURL>
+        <Style>
+          <Name>GN:Predefinito</Name>
+          <Title>GN:Predefinito</Title>
+          <LegendURL width="117" height="45">
+             <Format>image/png</Format>
+             <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Progetto_Antincendi_Boschivi_PNZ.map&amp;version=1.1.1&amp;service=WMS&amp;request=GetLegendGraphic&amp;layer=RN.ANTINCENDIBOSCHIVI.USOSUOLO.AREE-2013&amp;format=image/png&amp;STYLE=GN:Predefinito"/>
+          </LegendURL>
+        </Style>
+      </Layer>
+      <Layer queryable="1" opaque="0" cascaded="0">
+        <Name>RN.ANTINCENDIBOSCHIVI.USOSUOLO.AREE-2014</Name>
+        <Title>AIB -  Uso del suolo aree incendiate 2014</Title>
+        <Abstract>Perimetri degli incendi boschivi rilevati da terra nell&#39;anno 2014 (con diverso uso del suolo: &#39;boscato&#39; e &#39;non boscato&#39;) su tutti i Parchi Nazionali italiani.</Abstract>
+        <KeywordList>
+            <Keyword>Rischio naturale</Keyword>
+            <Keyword> Disastri</Keyword>
+            <Keyword> Incidenti</Keyword>
+            <Keyword> Rischi</Keyword>
+            <Keyword> Incendio</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4326</SRS>
+        <SRS>EPSG:32632</SRS>
+        <SRS>EPSG:32633</SRS>
+        <SRS>EPSG:4258</SRS>
+        <SRS>EPSG:3004</SRS>
+        <SRS>EPSG:3003</SRS>
+        <SRS>EPSG:4265</SRS>
+        <SRS>EPSG:4806</SRS>
+        <LatLonBoundingBox minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4326"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:32632"
+                    minx="224545" miny="3.8176e+006" maxx="1.41971e+006" maxy="5.47582e+006" />
+        <BoundingBox SRS="EPSG:32633"
+                    minx="-327451" miny="3.8176e+006" maxx="867321" maxy="5.4666e+006" />
+        <BoundingBox SRS="EPSG:4258"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:3004"
+                    minx="1.69251e+006" miny="3.81766e+006" maxx="2.88734e+006" maxy="5.46671e+006" />
+        <BoundingBox SRS="EPSG:3003"
+                    minx="1.22453e+006" miny="3.81766e+006" maxx="2.41975e+006" maxy="5.47593e+006" />
+        <BoundingBox SRS="EPSG:4265"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4806"
+                    minx="-6.45199" miny="34.4994" maxx="6.54763" maxy="48.9993" />
+        <Identifier authority="www.pcn.minambiente.it">m_amte:299FN3:c3b29840-59c8-4982-ca39-623d5a5155a4</Identifier>
+        <MetadataURL type="ISO19115:2003">
+          <Format>text/xml</Format>
+          <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://www.pcn.minambiente.it/geoportal/csw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;outputSchema=http%3A%2F%2Fwww.isotc211.org%2F2005%2Fgmd&amp;elementSetName=full&amp;ID=m_amte:299FN3:02ddd5df-f91a-4767-86dd-1993df9c65c5"/>
+        </MetadataURL>
+        <Style>
+          <Name>GN:Predefinito</Name>
+          <Title>GN:Predefinito</Title>
+          <LegendURL width="117" height="45">
+             <Format>image/png</Format>
+             <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Progetto_Antincendi_Boschivi_PNZ.map&amp;version=1.1.1&amp;service=WMS&amp;request=GetLegendGraphic&amp;layer=RN.ANTINCENDIBOSCHIVI.USOSUOLO.AREE-2014&amp;format=image/png&amp;STYLE=GN:Predefinito"/>
+          </LegendURL>
+        </Style>
+      </Layer>
+      <Layer queryable="1" opaque="0" cascaded="0">
+        <Name>RN.ANTINCENDIBOSCHIVI.USOSUOLO.AREE-2015</Name>
+        <Title>AIB -  Uso del suolo aree incendiate 2015</Title>
+        <Abstract>Perimetri degli incendi boschivi rilevati da terra nell&#39;anno 2015 (con diverso uso del suolo: &#39;boscato&#39; e &#39;non boscato&#39;) su tutti i Parchi Nazionali italiani.</Abstract>
+        <KeywordList>
+            <Keyword>Rischio naturale</Keyword>
+            <Keyword> Disastri</Keyword>
+            <Keyword> Incidenti</Keyword>
+            <Keyword> Rischi</Keyword>
+            <Keyword> Incendio</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4326</SRS>
+        <SRS>EPSG:32632</SRS>
+        <SRS>EPSG:32633</SRS>
+        <SRS>EPSG:4258</SRS>
+        <SRS>EPSG:3004</SRS>
+        <SRS>EPSG:3003</SRS>
+        <SRS>EPSG:4265</SRS>
+        <SRS>EPSG:4806</SRS>
+        <LatLonBoundingBox minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4326"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:32632"
+                    minx="224545" miny="3.8176e+006" maxx="1.41971e+006" maxy="5.47582e+006" />
+        <BoundingBox SRS="EPSG:32633"
+                    minx="-327451" miny="3.8176e+006" maxx="867321" maxy="5.4666e+006" />
+        <BoundingBox SRS="EPSG:4258"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:3004"
+                    minx="1.69251e+006" miny="3.81766e+006" maxx="2.88734e+006" maxy="5.46671e+006" />
+        <BoundingBox SRS="EPSG:3003"
+                    minx="1.22453e+006" miny="3.81766e+006" maxx="2.41975e+006" maxy="5.47593e+006" />
+        <BoundingBox SRS="EPSG:4265"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4806"
+                    minx="-6.45199" miny="34.4994" maxx="6.54763" maxy="48.9993" />
+        <Identifier authority="www.pcn.minambiente.it">m_amte:299FN3:c3b29840-59c8-4982-ca39-623d5a5155a4</Identifier>
+        <MetadataURL type="ISO19115:2003">
+          <Format>text/xml</Format>
+          <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://www.pcn.minambiente.it/geoportal/csw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;outputSchema=http%3A%2F%2Fwww.isotc211.org%2F2005%2Fgmd&amp;elementSetName=full&amp;ID=m_amte:299FN3:02ddd5df-f91a-4767-86dd-1993df9c65c5"/>
+        </MetadataURL>
+        <Style>
+          <Name>GN:Predefinito</Name>
+          <Title>GN:Predefinito</Title>
+          <LegendURL width="117" height="45">
+             <Format>image/png</Format>
+             <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Progetto_Antincendi_Boschivi_PNZ.map&amp;version=1.1.1&amp;service=WMS&amp;request=GetLegendGraphic&amp;layer=RN.ANTINCENDIBOSCHIVI.USOSUOLO.AREE-2015&amp;format=image/png&amp;STYLE=GN:Predefinito"/>
+          </LegendURL>
+        </Style>
+      </Layer>
+      <Layer queryable="1" opaque="0" cascaded="0">
+        <Name>RN.ANTINCENDIBOSCHIVI.USOSUOLO.AREE-2016</Name>
+        <Title>AIB -  Uso del suolo aree incendiate 2016</Title>
+        <Abstract>Perimetri degli incendi boschivi rilevati da terra nell&#39;anno 2016 (con diverso uso del suolo: &#39;boscato&#39; e &#39;non boscato&#39;) su tutti i Parchi Nazionali italiani.</Abstract>
+        <KeywordList>
+            <Keyword>Rischio naturale</Keyword>
+            <Keyword> Disastri</Keyword>
+            <Keyword> Incidenti</Keyword>
+            <Keyword> Rischi</Keyword>
+            <Keyword> Incendio</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4326</SRS>
+        <SRS>EPSG:32632</SRS>
+        <SRS>EPSG:32633</SRS>
+        <SRS>EPSG:4258</SRS>
+        <SRS>EPSG:3004</SRS>
+        <SRS>EPSG:3003</SRS>
+        <SRS>EPSG:4265</SRS>
+        <SRS>EPSG:4806</SRS>
+        <LatLonBoundingBox minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4326"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:32632"
+                    minx="224545" miny="3.8176e+006" maxx="1.41971e+006" maxy="5.47582e+006" />
+        <BoundingBox SRS="EPSG:32633"
+                    minx="-327451" miny="3.8176e+006" maxx="867321" maxy="5.4666e+006" />
+        <BoundingBox SRS="EPSG:4258"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:3004"
+                    minx="1.69251e+006" miny="3.81766e+006" maxx="2.88734e+006" maxy="5.46671e+006" />
+        <BoundingBox SRS="EPSG:3003"
+                    minx="1.22453e+006" miny="3.81766e+006" maxx="2.41975e+006" maxy="5.47593e+006" />
+        <BoundingBox SRS="EPSG:4265"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4806"
+                    minx="-6.45199" miny="34.4994" maxx="6.54763" maxy="48.9993" />
+        <Identifier authority="www.pcn.minambiente.it">m_amte:299FN3:c3b29840-59c8-4982-ca39-623d5a5155a4</Identifier>
+        <MetadataURL type="ISO19115:2003">
+          <Format>text/xml</Format>
+          <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://www.pcn.minambiente.it/geoportal/csw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;outputSchema=http%3A%2F%2Fwww.isotc211.org%2F2005%2Fgmd&amp;elementSetName=full&amp;ID=m_amte:299FN3:02ddd5df-f91a-4767-86dd-1993df9c65c5"/>
+        </MetadataURL>
+        <Style>
+          <Name>GN:Predefinito</Name>
+          <Title>GN:Predefinito</Title>
+          <LegendURL width="117" height="45">
+             <Format>image/png</Format>
+             <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Progetto_Antincendi_Boschivi_PNZ.map&amp;version=1.1.1&amp;service=WMS&amp;request=GetLegendGraphic&amp;layer=RN.ANTINCENDIBOSCHIVI.USOSUOLO.AREE-2016&amp;format=image/png&amp;STYLE=GN:Predefinito"/>
+          </LegendURL>
+        </Style>
+      </Layer>
+      <Layer queryable="1" opaque="0" cascaded="0">
+        <Name>RN.ANTINCENDIBOSCHIVI.HABITATRISCHIO</Name>
+        <Title>AIB - Habitat a rischio</Title>
+        <Abstract>Carta derivata dalla sovrapposizione, all&#39;interno dei Parchi nazionali, degli habitat, prioritari e non, con le zone a rischio incendi alto e molto alto. La tabella associata contiene le seguenti informazioni principali: RISCHIO, classi di rischio alto e molto alto per habitat prioritari e non prioritari. Lo strato è visualizzabile a scale superiori a 1:250.000.</Abstract>
+        <KeywordList>
+            <Keyword>Rischio naturale</Keyword>
+            <Keyword> Disastri</Keyword>
+            <Keyword> Incidenti</Keyword>
+            <Keyword> Rischi</Keyword>
+            <Keyword> Incendio</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4326</SRS>
+        <SRS>EPSG:32632</SRS>
+        <SRS>EPSG:32633</SRS>
+        <SRS>EPSG:4258</SRS>
+        <SRS>EPSG:3004</SRS>
+        <SRS>EPSG:3003</SRS>
+        <SRS>EPSG:4265</SRS>
+        <SRS>EPSG:4806</SRS>
+        <LatLonBoundingBox minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4326"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:32632"
+                    minx="224545" miny="3.8176e+006" maxx="1.41971e+006" maxy="5.47582e+006" />
+        <BoundingBox SRS="EPSG:32633"
+                    minx="-327451" miny="3.8176e+006" maxx="867321" maxy="5.4666e+006" />
+        <BoundingBox SRS="EPSG:4258"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:3004"
+                    minx="1.69251e+006" miny="3.81766e+006" maxx="2.88734e+006" maxy="5.46671e+006" />
+        <BoundingBox SRS="EPSG:3003"
+                    minx="1.22453e+006" miny="3.81766e+006" maxx="2.41975e+006" maxy="5.47593e+006" />
+        <BoundingBox SRS="EPSG:4265"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4806"
+                    minx="-6.45199" miny="34.4994" maxx="6.54763" maxy="48.9993" />
+        <Identifier authority="www.pcn.minambiente.it">m_amte:299FN3:0ca9e759-7bc1-4981-dd16-94f200f0d66e</Identifier>
+        <MetadataURL type="ISO19115:2003">
+          <Format>text/xml</Format>
+          <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://www.pcn.minambiente.it/geoportal/csw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;outputSchema=http%3A%2F%2Fwww.isotc211.org%2F2005%2Fgmd&amp;elementSetName=full&amp;ID=m_amte:299FN3:67888d8a-8b76-412d-d14c-01e1278f1f2f"/>
+        </MetadataURL>
+        <Style>
+          <Name>GN:Predefinito</Name>
+          <Title>GN:Predefinito</Title>
+          <LegendURL width="274" height="85">
+             <Format>image/png</Format>
+             <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Progetto_Antincendi_Boschivi_PNZ.map&amp;version=1.1.1&amp;service=WMS&amp;request=GetLegendGraphic&amp;layer=RN.ANTINCENDIBOSCHIVI.HABITATRISCHIO&amp;format=image/png&amp;STYLE=GN:Predefinito"/>
+          </LegendURL>
+        </Style>
+        <ScaleHint min="9.35405423091937" max="93.5439099034206" />
+      </Layer>
+      <Layer queryable="1" opaque="0" cascaded="0">
+        <Name>RN.ANTINCENDIBOSCHIVI.RISCHIOINCENDIGEN</Name>
+        <Title>AIB - Rischio incendi generale</Title>
+        <Abstract>Carta descrittiva dei fattori predisponenti che contribuiscono a determinare il livello di rischio di incendio del periodo più critico (invernale o estivo) del territorio dei Parchi Nazionali italiani. E&#39; stato elaborato uno strato informativo in cui la variabile presa in esame è classificata sulla base del grado di rischio. Sono stati ottenuti così tanti strati informativi quanti sono i fattori di rischio presi in esame. Le variabili considerate come fattori ambientali predisponenti il rischio d&#39;incendio sono state il clima, l&#39;uso del suolo e l&#39;assetto topografico (pendenza, esposizione, altitudine), ritenute responsabili nel determinare sia l&#39;insorgere degli incendi sia il comportamento del fuoco. Mediante una funzione di sovrapposizione (overlay), i singoli strati sono stati ponderati per la produzione della carta finale del rischio d&#39;incendio, secondo i coefficienti stabiliti dal modello, differenziando l&#39;analisi per le due stagioni di massima manifestazione dle fenomeno, inverno ed estate. La tabella associata contiene le seguenti informazioni: RISCHIO, valore del rischio incendio variabile da 1 a 5; PERIODO, periodo di massima manifestazione del rischio. Lo strato è visualizzabile a scale superiori a 1:250.000.</Abstract>
+        <KeywordList>
+            <Keyword>Rischio naturale</Keyword>
+            <Keyword> Disastri</Keyword>
+            <Keyword> Incidenti</Keyword>
+            <Keyword> Rischi</Keyword>
+            <Keyword> Incendio</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4326</SRS>
+        <SRS>EPSG:32632</SRS>
+        <SRS>EPSG:32633</SRS>
+        <SRS>EPSG:4258</SRS>
+        <SRS>EPSG:3004</SRS>
+        <SRS>EPSG:3003</SRS>
+        <SRS>EPSG:4265</SRS>
+        <SRS>EPSG:4806</SRS>
+        <LatLonBoundingBox minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4326"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:32632"
+                    minx="224545" miny="3.8176e+006" maxx="1.41971e+006" maxy="5.47582e+006" />
+        <BoundingBox SRS="EPSG:32633"
+                    minx="-327451" miny="3.8176e+006" maxx="867321" maxy="5.4666e+006" />
+        <BoundingBox SRS="EPSG:4258"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:3004"
+                    minx="1.69251e+006" miny="3.81766e+006" maxx="2.88734e+006" maxy="5.46671e+006" />
+        <BoundingBox SRS="EPSG:3003"
+                    minx="1.22453e+006" miny="3.81766e+006" maxx="2.41975e+006" maxy="5.47593e+006" />
+        <BoundingBox SRS="EPSG:4265"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4806"
+                    minx="-6.45199" miny="34.4994" maxx="6.54763" maxy="48.9993" />
+        <Identifier authority="www.pcn.minambiente.it">m_amte:299FN3:94befb62-f172-4abe-b7d9-496e188a6b86</Identifier>
+        <MetadataURL type="ISO19115:2003">
+          <Format>text/xml</Format>
+          <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://www.pcn.minambiente.it/geoportal/csw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;outputSchema=http%3A%2F%2Fwww.isotc211.org%2F2005%2Fgmd&amp;elementSetName=full&amp;ID=m_amte:299FN3:cf673376-8386-4c25-ab76-7c17ae9200af"/>
+        </MetadataURL>
+        <Style>
+          <Name>GN:Predefinito</Name>
+          <Title>GN:Predefinito</Title>
+          <LegendURL width="46" height="105">
+             <Format>image/png</Format>
+             <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Progetto_Antincendi_Boschivi_PNZ.map&amp;version=1.1.1&amp;service=WMS&amp;request=GetLegendGraphic&amp;layer=RN.ANTINCENDIBOSCHIVI.RISCHIOINCENDIGEN&amp;format=image/png&amp;STYLE=GN:Predefinito"/>
+          </LegendURL>
+        </Style>
+        <ScaleHint min="0.374177136322228" max="93.5439099034206" />
+      </Layer>
+      <Layer queryable="1" opaque="0" cascaded="0">
+        <Name>RN.ANTINCENDIBOSCHIVI.RISCHIOINCENDIEST</Name>
+        <Title>AIB - Rischio incendi periodo estivo</Title>
+        <Abstract>Carta descrittiva dei fattori predisponenti che contribuiscono a determinare il livello di rischio di incendio del periodo estivo del territorio dei Parchi Nazionali italiani. E&#39; stato elaborato uno strato informativo in cui la variabile presa in esame è classificata sulla base del grado di rischio. Sono stati ottenuti così tanti strati informativi quanti sono i fattori di rischio presi in esame. Le variabili considerate come fattori ambientali predisponenti il rischio d&#39;incendio sono state il clima, l&#39;uso del suolo e l&#39;assetto topografico (pendenza, esposizione, altitudine), ritenute responsabili nel determinare sia l&#39;insorgere degli incendi sia il comportamento del fuoco. La tabella associata contiene le seguenti informazioni: RISCHIO, valore del rischio incendio variabile da 1 a 5. Lo strato è visualizzabile a scale superiori a 1:250000.</Abstract>
+        <KeywordList>
+            <Keyword>Rischio naturale</Keyword>
+            <Keyword> Disastri</Keyword>
+            <Keyword> Incidenti</Keyword>
+            <Keyword> Rischi</Keyword>
+            <Keyword> Incendio</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4326</SRS>
+        <SRS>EPSG:32632</SRS>
+        <SRS>EPSG:32633</SRS>
+        <SRS>EPSG:4258</SRS>
+        <SRS>EPSG:3004</SRS>
+        <SRS>EPSG:3003</SRS>
+        <SRS>EPSG:4265</SRS>
+        <SRS>EPSG:4806</SRS>
+        <LatLonBoundingBox minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4326"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:32632"
+                    minx="224545" miny="3.8176e+006" maxx="1.41971e+006" maxy="5.47582e+006" />
+        <BoundingBox SRS="EPSG:32633"
+                    minx="-327451" miny="3.8176e+006" maxx="867321" maxy="5.4666e+006" />
+        <BoundingBox SRS="EPSG:4258"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:3004"
+                    minx="1.69251e+006" miny="3.81766e+006" maxx="2.88734e+006" maxy="5.46671e+006" />
+        <BoundingBox SRS="EPSG:3003"
+                    minx="1.22453e+006" miny="3.81766e+006" maxx="2.41975e+006" maxy="5.47593e+006" />
+        <BoundingBox SRS="EPSG:4265"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4806"
+                    minx="-6.45199" miny="34.4994" maxx="6.54763" maxy="48.9993" />
+        <Identifier authority="www.pcn.minambiente.it">m_amte:299FN3:3203d9c3-d876-4881-8589-9dddfc3a21f2</Identifier>
+        <MetadataURL type="ISO19115:2003">
+          <Format>text/xml</Format>
+          <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://www.pcn.minambiente.it/geoportal/csw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;outputSchema=http%3A%2F%2Fwww.isotc211.org%2F2005%2Fgmd&amp;elementSetName=full&amp;ID=m_amte:299FN3:408000e2-8a33-4acd-a05a-b3bf77dd9924"/>
+        </MetadataURL>
+        <Style>
+          <Name>GN:Predefinito</Name>
+          <Title>GN:Predefinito</Title>
+          <LegendURL width="46" height="105">
+             <Format>image/png</Format>
+             <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Progetto_Antincendi_Boschivi_PNZ.map&amp;version=1.1.1&amp;service=WMS&amp;request=GetLegendGraphic&amp;layer=RN.ANTINCENDIBOSCHIVI.RISCHIOINCENDIEST&amp;format=image/png&amp;STYLE=GN:Predefinito"/>
+          </LegendURL>
+        </Style>
+        <ScaleHint min="0.374177136322228" max="93.5439099034206" />
+      </Layer>
+      <Layer queryable="1" opaque="0" cascaded="0">
+        <Name>RN.ANTINCENDIBOSCHIVI.RISCHIOINCENDIINV</Name>
+        <Title>AIB - Rischio incendi periodo invernale</Title>
+        <Abstract>Carta descrittiva dei fattori predisponenti che contribuiscono a determinare il livello di rischio di incendio del periodo invernale del territorio dei Parchi Nazionali italiani. E&#39; stato elaborato uno strato informativo in cui la variabile presa in esame è classificata sulla base del grado di rischio. Sono stati ottenuti così tanti strati informativi quanti sono i fattori di rischio presi in esame. Le variabili considerate come fattori ambientali predisponenti il rischio d&#39;incendio sono state il clima, l&#39;uso del suolo e l&#39;assetto topografico (pendenza, esposizione, altitudine), ritenute responsabili nel determinare sia l&#39;insorgere degli incendi sia il comportamento del fuoco. La tabella associata contiene le seguenti informazioni: RISCHIO, valore del rischio incendio variabile da 1 a 5. Lo strato è visualizzabile a scale superiori a 1:250.000.</Abstract>
+        <KeywordList>
+            <Keyword>Rischio naturale</Keyword>
+            <Keyword> Disastri</Keyword>
+            <Keyword> Incidenti</Keyword>
+            <Keyword> Rischi</Keyword>
+            <Keyword> Incendio</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4326</SRS>
+        <SRS>EPSG:32632</SRS>
+        <SRS>EPSG:32633</SRS>
+        <SRS>EPSG:4258</SRS>
+        <SRS>EPSG:3004</SRS>
+        <SRS>EPSG:3003</SRS>
+        <SRS>EPSG:4265</SRS>
+        <SRS>EPSG:4806</SRS>
+        <LatLonBoundingBox minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4326"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:32632"
+                    minx="224545" miny="3.8176e+006" maxx="1.41971e+006" maxy="5.47582e+006" />
+        <BoundingBox SRS="EPSG:32633"
+                    minx="-327451" miny="3.8176e+006" maxx="867321" maxy="5.4666e+006" />
+        <BoundingBox SRS="EPSG:4258"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:3004"
+                    minx="1.69251e+006" miny="3.81766e+006" maxx="2.88734e+006" maxy="5.46671e+006" />
+        <BoundingBox SRS="EPSG:3003"
+                    minx="1.22453e+006" miny="3.81766e+006" maxx="2.41975e+006" maxy="5.47593e+006" />
+        <BoundingBox SRS="EPSG:4265"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4806"
+                    minx="-6.45199" miny="34.4994" maxx="6.54763" maxy="48.9993" />
+        <Identifier authority="www.pcn.minambiente.it">m_amte:299FN3:24430277-caaa-4b03-ba6d-ee4a2a84ea3b</Identifier>
+        <MetadataURL type="ISO19115:2003">
+          <Format>text/xml</Format>
+          <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://www.pcn.minambiente.it/geoportal/csw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;outputSchema=http%3A%2F%2Fwww.isotc211.org%2F2005%2Fgmd&amp;elementSetName=full&amp;ID=m_amte:299FN3:e7e8b6c8-a109-4fb6-b3bc-861740e00a82"/>
+        </MetadataURL>
+        <Style>
+          <Name>GN:Predefinito</Name>
+          <Title>GN:Predefinito</Title>
+          <LegendURL width="46" height="105">
+             <Format>image/png</Format>
+             <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Progetto_Antincendi_Boschivi_PNZ.map&amp;version=1.1.1&amp;service=WMS&amp;request=GetLegendGraphic&amp;layer=RN.ANTINCENDIBOSCHIVI.RISCHIOINCENDIINV&amp;format=image/png&amp;STYLE=GN:Predefinito"/>
+          </LegendURL>
+        </Style>
+        <ScaleHint min="0.374177136322228" max="93.5439099034206" />
+      </Layer>
+      <Layer queryable="1" opaque="0" cascaded="0">
+        <Name>RN.ANTINCENDIBOSCHIVI.MODELLICOMBUSTIBILE</Name>
+        <Title>AIB - Modelli di combustibile</Title>
+        <Abstract>Carta distributiva dei modelli di combustibile, che fornisce una stima del comportamento dell&#39;incendio, specialmente su vaste aree, sulla base della descrizione dello strato di vegetazione più vicino al suolo percorribile dall&#39;incendio. La tabella associata contiene le seguenti informazioni principali: COMB, numero modello combustibile; DESC, descrizione del modello di combustibile. Lo strato è visualizzabile a scale superiori a 1:250.000.</Abstract>
+        <KeywordList>
+            <Keyword>Rischio naturale</Keyword>
+            <Keyword> Disastri</Keyword>
+            <Keyword> Incidenti</Keyword>
+            <Keyword> Rischi</Keyword>
+            <Keyword> Incendio</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4326</SRS>
+        <SRS>EPSG:32632</SRS>
+        <SRS>EPSG:32633</SRS>
+        <SRS>EPSG:4258</SRS>
+        <SRS>EPSG:3004</SRS>
+        <SRS>EPSG:3003</SRS>
+        <SRS>EPSG:4265</SRS>
+        <SRS>EPSG:4806</SRS>
+        <LatLonBoundingBox minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4326"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:32632"
+                    minx="224545" miny="3.8176e+006" maxx="1.41971e+006" maxy="5.47582e+006" />
+        <BoundingBox SRS="EPSG:32633"
+                    minx="-327451" miny="3.8176e+006" maxx="867321" maxy="5.4666e+006" />
+        <BoundingBox SRS="EPSG:4258"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:3004"
+                    minx="1.69251e+006" miny="3.81766e+006" maxx="2.88734e+006" maxy="5.46671e+006" />
+        <BoundingBox SRS="EPSG:3003"
+                    minx="1.22453e+006" miny="3.81766e+006" maxx="2.41975e+006" maxy="5.47593e+006" />
+        <BoundingBox SRS="EPSG:4265"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4806"
+                    minx="-6.45199" miny="34.4994" maxx="6.54763" maxy="48.9993" />
+        <Identifier authority="www.pcn.minambiente.it">m_amte:299FN3:02877423-effc-4263-d049-677194d97e6f</Identifier>
+        <MetadataURL type="ISO19115:2003">
+          <Format>text/xml</Format>
+          <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://www.pcn.minambiente.it/geoportal/csw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;outputSchema=http%3A%2F%2Fwww.isotc211.org%2F2005%2Fgmd&amp;elementSetName=full&amp;ID=m_amte:299FN3:4168a1a3-3b3e-475e-cb8e-9a161a702e83"/>
+        </MetadataURL>
+        <Style>
+          <Name>GN:Predefinito</Name>
+          <Title>GN:Predefinito</Title>
+          <LegendURL width="101" height="165">
+             <Format>image/png</Format>
+             <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Progetto_Antincendi_Boschivi_PNZ.map&amp;version=1.1.1&amp;service=WMS&amp;request=GetLegendGraphic&amp;layer=RN.ANTINCENDIBOSCHIVI.MODELLICOMBUSTIBILE&amp;format=image/png&amp;STYLE=GN:Predefinito"/>
+          </LegendURL>
+        </Style>
+        <ScaleHint min="0.374177136322228" max="93.5439099034206" />
+      </Layer>
+    </Layer>
+    <Layer>
+      <Name>PARCHI.E.AREE.PROTETTE</Name>
+      <Title>PARCHI E AREE PROTETTE</Title>
+      <Abstract>PARCHI.E.AREE.PROTETTE</Abstract>
+    <Style>
+       <Name>default</Name>
+       <Title>default</Title>
+       <LegendURL width="176" height="85">
+          <Format>image/png</Format>
+          <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Progetto_Antincendi_Boschivi_PNZ.map&amp;version=1.1.1&amp;service=WMS&amp;request=GetLegendGraphic&amp;layer=PARCHI.E.AREE.PROTETTE&amp;format=image/png&amp;STYLE=default"/>
+       </LegendURL>
+    </Style>
+      <Layer queryable="1" opaque="0" cascaded="0">
+        <Name>SP.SITIPROTETTI.EUAP</Name>
+        <Title>Parchi nazionali e Riserve statali ( VI Elenco Ufficiale)</Title>
+        <Abstract>VI Elenco ufficiale aree protette. La tabella associata contiene le seguenti informazioni: area_mq superficie espressa in metri quadri; perimeter: lunghezza del perimetro dell&#39;area; hectares: superficie espressa in ettari; codiceap: codice area protetta; tipo: tipo di area protetta; nome_gazz: nome dell&#39;are protetta riportato un Gazzetta Ufficiale; sup_ha_g_u: superficie terrestre dell&#39;area protetta riportata in Gazzetta Ufficiale espressa in ettari; sup_sea_g: superficie marina dell&#39;area protetta riportata in Gazzetta Ufficiale espressa in ettari; id: identificativo univoco dell&#39;area riportato in Gazzetta Ufficiale.</Abstract>
+        <KeywordList>
+            <Keyword>Siti protetti</Keyword>
+            <Keyword> Aree naturali</Keyword>
+            <Keyword> Paesaggio</Keyword>
+            <Keyword> Ecosistemi</Keyword>
+            <Keyword> Elenco Ufficiale Aree Protette</Keyword>
+            <Keyword> EUAP</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4326</SRS>
+        <SRS>EPSG:32632</SRS>
+        <SRS>EPSG:32633</SRS>
+        <SRS>EPSG:4258</SRS>
+        <SRS>EPSG:3004</SRS>
+        <SRS>EPSG:3003</SRS>
+        <SRS>EPSG:4265</SRS>
+        <SRS>EPSG:4806</SRS>
+        <LatLonBoundingBox minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4326"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:32632"
+                    minx="224545" miny="3.8176e+006" maxx="1.41971e+006" maxy="5.47582e+006" />
+        <BoundingBox SRS="EPSG:32633"
+                    minx="-327451" miny="3.8176e+006" maxx="867321" maxy="5.4666e+006" />
+        <BoundingBox SRS="EPSG:4258"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:3004"
+                    minx="1.69251e+006" miny="3.81766e+006" maxx="2.88734e+006" maxy="5.46671e+006" />
+        <BoundingBox SRS="EPSG:3003"
+                    minx="1.22453e+006" miny="3.81766e+006" maxx="2.41975e+006" maxy="5.47593e+006" />
+        <BoundingBox SRS="EPSG:4265"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4806"
+                    minx="-6.45199" miny="34.4994" maxx="6.54763" maxy="48.9993" />
+        <Identifier authority="www.pcn.minambiente.it">m_amte:299FN3:48419c13-b5f0-41c4-db67-311a69a82aa9</Identifier>
+        <MetadataURL type="ISO19115:2003">
+          <Format>text/xml</Format>
+          <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://www.pcn.minambiente.it/geoportal/csw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;outputSchema=http%3A%2F%2Fwww.isotc211.org%2F2005%2Fgmd&amp;elementSetName=full&amp;ID=m_amte:299FN3:48419c13-b5f0-41c4-db67-311a69a82aa9"/>
+        </MetadataURL>
+        <Style>
+          <Name>GN:Predefinito</Name>
+          <Title>GN:Predefinito</Title>
+          <LegendURL width="176" height="45">
+             <Format>image/png</Format>
+             <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Progetto_Antincendi_Boschivi_PNZ.map&amp;version=1.1.1&amp;service=WMS&amp;request=GetLegendGraphic&amp;layer=SP.SITIPROTETTI.EUAP&amp;format=image/png&amp;STYLE=GN:Predefinito"/>
+          </LegendURL>
+        </Style>
+      </Layer>
+      <Layer queryable="1" opaque="0" cascaded="0">
+        <Name>SP.SITIPROTETTI.ZPS</Name>
+        <Title>Zone di Protezione Speciale (ZPS)</Title>
+        <Abstract>Zone di Protezione Speciale presenti sul territorio italiano aggiornate al 2016. La tabella associata contiene le seguenti informazioni: CODICE - Codice identificativo del sito; TIPO_SITO - Codice per le relazioni del sito con altri siti Natura2000; DENOMINAZI - Denominazione del sito; REG_BIOG - Regione biogeografica del sito; REGIONE - Regione di appartenenza del sito; AGGIORN - Data aggiornamento del sito; FUSO - Fuso di appartenenza del sito; AREA - Area del sito espressa in metri quadri; PERIMETER - Perimetro del sito in metri; HECTARES - Area del sito espressa in ettari; LEGEND - campo di controllo per la gestione della stampa; SUP_GU - Superficie da Gazzetta Ufficiale. Lo strato è visualizzabile a scale superiori a 1:1.000.000.</Abstract>
+        <KeywordList>
+            <Keyword>Siti protetti</Keyword>
+            <Keyword> Aree naturali</Keyword>
+            <Keyword> Paesaggio</Keyword>
+            <Keyword> Ecosistemi</Keyword>
+            <Keyword> Rete Natura 2000</Keyword>
+            <Keyword> Zone di Protezione Speciale</Keyword>
+            <Keyword> ZPS</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4326</SRS>
+        <SRS>EPSG:32632</SRS>
+        <SRS>EPSG:32633</SRS>
+        <SRS>EPSG:4258</SRS>
+        <SRS>EPSG:3004</SRS>
+        <SRS>EPSG:3003</SRS>
+        <SRS>EPSG:4265</SRS>
+        <SRS>EPSG:4806</SRS>
+        <LatLonBoundingBox minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4326"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:32632"
+                    minx="224545" miny="3.8176e+006" maxx="1.41971e+006" maxy="5.47582e+006" />
+        <BoundingBox SRS="EPSG:32633"
+                    minx="-327451" miny="3.8176e+006" maxx="867321" maxy="5.4666e+006" />
+        <BoundingBox SRS="EPSG:4258"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:3004"
+                    minx="1.69251e+006" miny="3.81766e+006" maxx="2.88734e+006" maxy="5.46671e+006" />
+        <BoundingBox SRS="EPSG:3003"
+                    minx="1.22453e+006" miny="3.81766e+006" maxx="2.41975e+006" maxy="5.47593e+006" />
+        <BoundingBox SRS="EPSG:4265"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4806"
+                    minx="-6.45199" miny="34.4994" maxx="6.54763" maxy="48.9993" />
+        <Identifier authority="www.pcn.minambiente.it">m_amte:8HCH2C:596efa0b-21cc-476b-aec3-75a13fbc465c</Identifier>
+        <MetadataURL type="ISO19115:2003">
+          <Format>text/xml</Format>
+          <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://www.pcn.minambiente.it/geoportal/csw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;outputSchema=http%3A%2F%2Fwww.isotc211.org%2F2005%2Fgmd&amp;elementSetName=full&amp;ID=m_amte:8HCH2C:b893826b-213d-419a-c9a9-5c383f990ecc"/>
+        </MetadataURL>
+        <Style>
+          <Name>GN:Predefinito</Name>
+          <Title>GN:Predefinito</Title>
+          <LegendURL width="64" height="25">
+             <Format>image/png</Format>
+             <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Progetto_Antincendi_Boschivi_PNZ.map&amp;version=1.1.1&amp;service=WMS&amp;request=GetLegendGraphic&amp;layer=SP.SITIPROTETTI.ZPS&amp;format=image/png&amp;STYLE=GN:Predefinito"/>
+          </LegendURL>
+        </Style>
+      </Layer>
+      <Layer queryable="1" opaque="0" cascaded="0">
+        <Name>SP.SITIPROTETTI.SIC</Name>
+        <Title>Siti di Importanza Comunitaria (SIC)</Title>
+        <Abstract>Siti di Importanza Comunitaria e Zone Speciali di Conservazione (ZSC) presenti sul territorio italiano aggiornati a gennaio 2016. La tabella associata contiene le seguenti informazioni: CODICE - Codice identificativo del sito; COD_REG - Codice identificativo delle regioni; TIPO_SITO - Codice per le relazioni del sito con altri siti Natura2000; DENOMINAZI - Denominazione del sito; REG_BIOG - Regione biogeografica del sito; REGIONE - Regione di appartenenza del sito; AGGIORN - Data aggiornamento del sito; FUSO - Fuso di appartenenza del sito; AREA_mq - Area del sito espressa in metri quadri; PERIMETER - Perimetro del sito in metri; HECTARES - Area del sito espressa in ettari; LEGEND - campo di controllo per la gestione della stampa; SUP_GU - Superficie da Gazzetta Ufficiale. Lo strato è visualizzabile a scale superiori a 1:1.000.000.</Abstract>
+        <KeywordList>
+            <Keyword>Siti protetti</Keyword>
+            <Keyword> Aree naturali</Keyword>
+            <Keyword> Paesaggio</Keyword>
+            <Keyword> Ecosistemi</Keyword>
+            <Keyword> Rete Natura 2000</Keyword>
+            <Keyword> Siti di Importanza Comunitaria</Keyword>
+            <Keyword> SIC</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4326</SRS>
+        <SRS>EPSG:32632</SRS>
+        <SRS>EPSG:32633</SRS>
+        <SRS>EPSG:4258</SRS>
+        <SRS>EPSG:3004</SRS>
+        <SRS>EPSG:3003</SRS>
+        <SRS>EPSG:4265</SRS>
+        <SRS>EPSG:4806</SRS>
+        <LatLonBoundingBox minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4326"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:32632"
+                    minx="224545" miny="3.8176e+006" maxx="1.41971e+006" maxy="5.47582e+006" />
+        <BoundingBox SRS="EPSG:32633"
+                    minx="-327451" miny="3.8176e+006" maxx="867321" maxy="5.4666e+006" />
+        <BoundingBox SRS="EPSG:4258"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:3004"
+                    minx="1.69251e+006" miny="3.81766e+006" maxx="2.88734e+006" maxy="5.46671e+006" />
+        <BoundingBox SRS="EPSG:3003"
+                    minx="1.22453e+006" miny="3.81766e+006" maxx="2.41975e+006" maxy="5.47593e+006" />
+        <BoundingBox SRS="EPSG:4265"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4806"
+                    minx="-6.45199" miny="34.4994" maxx="6.54763" maxy="48.9993" />
+        <Identifier authority="www.pcn.minambiente.it">m_amte:8HCH2C:0f2dd3e7-e7e5-4b35-cdb0-5e6b5af581eb</Identifier>
+        <MetadataURL type="ISO19115:2003">
+          <Format>text/xml</Format>
+          <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://www.pcn.minambiente.it/geoportal/csw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;outputSchema=http%3A%2F%2Fwww.isotc211.org%2F2005%2Fgmd&amp;elementSetName=full&amp;ID=m_amte:8HCH2C:40ca03e6-f9aa-440f-9d5f-dd196f2fb029"/>
+        </MetadataURL>
+        <Style>
+          <Name>GN:Predefinito</Name>
+          <Title>GN:Predefinito</Title>
+          <LegendURL width="59" height="25">
+             <Format>image/png</Format>
+             <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Progetto_Antincendi_Boschivi_PNZ.map&amp;version=1.1.1&amp;service=WMS&amp;request=GetLegendGraphic&amp;layer=SP.SITIPROTETTI.SIC&amp;format=image/png&amp;STYLE=GN:Predefinito"/>
+          </LegendURL>
+        </Style>
+      </Layer>
+    </Layer>
+    <Layer>
+      <Name>USO.SUOLO</Name>
+      <Title>USO DEL SUOLO</Title>
+      <Abstract>USO.SUOLO</Abstract>
+    <Style>
+       <Name>default</Name>
+       <Title>default</Title>
+       <LegendURL width="112" height="25">
+          <Format>image/png</Format>
+          <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Progetto_Antincendi_Boschivi_PNZ.map&amp;version=1.1.1&amp;service=WMS&amp;request=GetLegendGraphic&amp;layer=USO.SUOLO&amp;format=image/png&amp;STYLE=default"/>
+       </LegendURL>
+    </Style>
+      <Layer queryable="1" opaque="0" cascaded="0">
+        <Name>RN.ANTINCENDIBOSCHIVI.VEGETAZIONE.PNZ</Name>
+        <Title>AIB - Vegetazione nei Parchi Nazionali</Title>
+        <Abstract>Cartografia della distribuzione della vegetazione per le classi del IV livello inerenti ai territori boscati e seminativi del Corine Land Cover 2000. La tabella associata contiene le seguenti informazioni principali: DESC, descrizione lella serie vegetazionale associata. Lo strato è visualizzabile a scale superiori a 1:250.000.</Abstract>
+        <KeywordList>
+            <Keyword>Rischio naturale</Keyword>
+            <Keyword> Disastri</Keyword>
+            <Keyword> Incidenti</Keyword>
+            <Keyword> Rischi</Keyword>
+            <Keyword> Incendio</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4326</SRS>
+        <SRS>EPSG:32632</SRS>
+        <SRS>EPSG:32633</SRS>
+        <SRS>EPSG:4258</SRS>
+        <SRS>EPSG:3004</SRS>
+        <SRS>EPSG:3003</SRS>
+        <SRS>EPSG:4265</SRS>
+        <SRS>EPSG:4806</SRS>
+        <LatLonBoundingBox minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4326"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:32632"
+                    minx="224545" miny="3.8176e+006" maxx="1.41971e+006" maxy="5.47582e+006" />
+        <BoundingBox SRS="EPSG:32633"
+                    minx="-327451" miny="3.8176e+006" maxx="867321" maxy="5.4666e+006" />
+        <BoundingBox SRS="EPSG:4258"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:3004"
+                    minx="1.69251e+006" miny="3.81766e+006" maxx="2.88734e+006" maxy="5.46671e+006" />
+        <BoundingBox SRS="EPSG:3003"
+                    minx="1.22453e+006" miny="3.81766e+006" maxx="2.41975e+006" maxy="5.47593e+006" />
+        <BoundingBox SRS="EPSG:4265"
+                    minx="6" miny="34.5" maxx="19" maxy="49" />
+        <BoundingBox SRS="EPSG:4806"
+                    minx="-6.45199" miny="34.4994" maxx="6.54763" maxy="48.9993" />
+        <Identifier authority="www.pcn.minambiente.it">m_amte:299FN3:bff274ba-0386-4b46-eb74-9192b8bd61ef</Identifier>
+        <MetadataURL type="ISO19115:2003">
+          <Format>text/xml</Format>
+          <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://www.pcn.minambiente.it/geoportal/csw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;outputSchema=http%3A%2F%2Fwww.isotc211.org%2F2005%2Fgmd&amp;elementSetName=full&amp;ID=m_amte:299FN3:2d16fb84-4e88-4480-ae1f-0cf03c068233"/>
+        </MetadataURL>
+        <Style>
+          <Name>GN:Predefinito</Name>
+          <Title>GN:Predefinito</Title>
+          <LegendURL width="112" height="25">
+             <Format>image/png</Format>
+             <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Progetto_Antincendi_Boschivi_PNZ.map&amp;version=1.1.1&amp;service=WMS&amp;request=GetLegendGraphic&amp;layer=RN.ANTINCENDIBOSCHIVI.VEGETAZIONE.PNZ&amp;format=image/png&amp;STYLE=GN:Predefinito"/>
+          </LegendURL>
+        </Style>
+        <ScaleHint min="0.374177136322228" max="93.5439099034206" />
+      </Layer>
+    </Layer>
+  </Layer>
+</Capability>
+</WMT_MS_Capabilities>

@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.support.mail.configuration.properties;
 
-import com.google.common.base.Preconditions;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  *
@@ -161,7 +161,7 @@ public class GPBaseSMTPProperties implements SMTPMailProperties {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        Preconditions.checkNotNull(host, "Host must not be bull");
+        checkNotNull(host, "Host must not be bull");
     }
 
     @Override

@@ -104,7 +104,7 @@ public class SMTPMailSpringPropertiesTest {
         this.gpMailSpringSender.send(mimeMessage -> {
             MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
             message.setSubject("Notification");
-            message.setTo("core@geosdi.org");
+            message.setTo("giuseppe.lascaleia@geosdi.org");
             VelocityContext velocityContext = new VelocityContext(new HashMap());
             StringWriter writer = new StringWriter();
             gpSpringVelocityEngine.mergeTemplate("template/"

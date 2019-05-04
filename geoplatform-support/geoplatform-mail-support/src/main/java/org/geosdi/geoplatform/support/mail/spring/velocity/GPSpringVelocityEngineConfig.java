@@ -39,7 +39,6 @@ import org.apache.velocity.exception.VelocityException;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
 import org.geosdi.geoplatform.support.mail.spring.configuration.velocity.IGPVelocityParserPollSize;
 import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -59,9 +58,14 @@ class GPSpringVelocityEngineConfig {
     @GeoPlatformLog
     static Logger logger;
 
+    /**
+     * @param gpVelocityParserPollSize
+     * @return {@link VelocityEngine}
+     * @throws VelocityException
+     * @throws IOException
+     */
     @Bean(name = "gpSpringVelocityEngine")
     @Scope(value = "prototype")
-    @Autowired
     public VelocityEngine gpVelocityEngine(@Qualifier(value = "gpVelocityParserPollSize") IGPVelocityParserPollSize gpVelocityParserPollSize)
             throws VelocityException, IOException {
         logger.debug("\n\n@@@@@@@@@@@@@@@@@@@CONFIGURING VELOCITY POOL PARSER with : {}\n\n", gpVelocityParserPollSize);

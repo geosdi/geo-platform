@@ -37,21 +37,22 @@ package org.geosdi.geoplatform.support.mail.spring.jasypt.crypt;
 import org.geosdi.geoplatform.jasypt.support.BasePooledPBEStringEncryptorDecorator;
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 import org.jasypt.encryption.pbe.config.PBEConfig;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Configuration
 class GPMailPooledPBEStringEncryptorConfig {
 
+    /**
+     * @param mailPBEConfig
+     * @return {@link PooledPBEStringEncryptor}
+     */
     @Bean(name = "gpMailPooledPBEStringEncryptor")
-    @Autowired
     public PooledPBEStringEncryptor gpMailPooledPBEStringEncryptor(@Qualifier(value = "mailPBEConfig") PBEConfig mailPBEConfig) {
         BasePooledPBEStringEncryptorDecorator bpbe = new BasePooledPBEStringEncryptorDecorator();
         bpbe.setPbeConfig(mailPBEConfig);

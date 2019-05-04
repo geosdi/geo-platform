@@ -34,7 +34,6 @@
  */
 package org.geosdi.geoplatform.support.mail.spring.sender;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -44,15 +43,17 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import javax.mail.Session;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Configuration
 class GPMailSenderConfig {
 
+    /**
+     * @param gpMailSpringSession
+     * @return {@link JavaMailSender}
+     */
     @Bean(name = "gpMailSpringSender")
-    @Autowired
     public JavaMailSender gpMailSender(@Qualifier(value = "gpMailSpringSession") Session gpMailSpringSession) {
         JavaMailSenderImpl jms = new JavaMailSenderImpl();
         jms.setSession(gpMailSpringSession);

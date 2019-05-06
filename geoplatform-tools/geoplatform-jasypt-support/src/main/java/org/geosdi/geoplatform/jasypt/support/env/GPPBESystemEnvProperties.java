@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.jasypt.support.env;
 
-import com.google.common.base.Preconditions;
+import static com.google.common.base.Preconditions.checkArgument;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -56,7 +56,7 @@ public interface GPPBESystemEnvProperties {
         private final String propertyEnvName;
 
         public GPBasePBESystemEnvProperties(String thePropertyEnvName) {
-            Preconditions.checkArgument((thePropertyEnvName != null) && !(thePropertyEnvName.isEmpty()),
+            checkArgument((thePropertyEnvName != null) && !(thePropertyEnvName.isEmpty()),
                     "The parameter PropertyEnvName must not be null or an Empty String.");
             this.propertyEnvName = thePropertyEnvName;
         }

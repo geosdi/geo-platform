@@ -107,6 +107,7 @@ public class GeoPlatformCoreDaoTest {
     @Test
     public void findAccountByUserNameTest() throws Exception {
         logger.info("################################FOUND : {}\n", this.accountDAO.findByUsername("admin"));
+
     }
 
     @Test

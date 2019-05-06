@@ -188,7 +188,7 @@ public class GPGeoserverConnectorStoreTest extends GPBaseGeoserverConnectorStore
     @Test
     public void s_deleteWorkspaceGeoserverConnectorTest() throws Exception {
         GeoserverDeleteWorkspaceRequest deleteWorkspaceRequest = geoserverConnectorStore.deleteWorkspaceRequest();
-        deleteWorkspaceRequest.withWorkspaceName("workspace_test");
+        deleteWorkspaceRequest.withWorkspaceName("workspace_test_1");
         deleteWorkspaceRequest.withRecurse(TRUE);
         logger.info("###########################DELETE_WORKSPACE_RESPONSE : {}\n", deleteWorkspaceRequest.getResponse());
     }

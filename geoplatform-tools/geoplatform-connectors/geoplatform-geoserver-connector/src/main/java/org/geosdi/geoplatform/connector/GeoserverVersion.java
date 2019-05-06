@@ -48,7 +48,7 @@ import static java.util.Arrays.stream;
  */
 public enum GeoserverVersion implements GPServerConnector.GPServerConnectorVersion {
 
-    V214x("2.14.x");
+    V215x("2.15.x");
 
     private String version;
 
@@ -81,6 +81,6 @@ public enum GeoserverVersion implements GPServerConnector.GPServerConnectorVersi
                 .filter(v -> ((version != null) && !(version.trim().isEmpty()))
                         ? v.getVersion().equalsIgnoreCase(version) : FALSE)
                 .findFirst();
-        return ((optional != null) && (optional.isPresent()) ? optional.get() : GeoserverVersion.V214x);
+        return ((optional != null) && (optional.isPresent()) ? optional.get() : GeoserverVersion.V215x);
     }
 }

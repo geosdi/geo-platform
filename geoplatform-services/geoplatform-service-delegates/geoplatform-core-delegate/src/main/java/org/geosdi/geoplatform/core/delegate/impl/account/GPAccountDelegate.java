@@ -1,58 +1,44 @@
 /**
- *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
- *
- *   Copyright (C) 2008-2019 geoSDI Group (CNR IMAA - Potenza - ITALY).
- *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
- *
- *   ====================================================================
- *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
- *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * geo-platform
+ * Rich webgis framework
+ * http://geo-platform.org
+ * ====================================================================
+ * <p>
+ * Copyright (C) 2008-2019 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * <p>
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version. This program is distributed in the
+ * hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License
+ * for more details. You should have received a copy of the GNU General
+ * Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * <p>
+ * ====================================================================
+ * <p>
+ * Linking this library statically or dynamically with other modules is
+ * making a combined work based on this library. Thus, the terms and
+ * conditions of the GNU General Public License cover the whole combination.
+ * <p>
+ * As a special exception, the copyright holders of this library give you permission
+ * to link this library with independent modules to produce an executable, regardless
+ * of the license terms of these independent modules, and to copy and distribute
+ * the resulting executable under terms of your choice, provided that you also meet,
+ * for each linked independent module, the terms and conditions of the license of
+ * that module. An independent module is a module which is not derived from or
+ * based on this library. If you modify this library, you may extend this exception
+ * to your version of the library, but you are not obligated to do so. If you do not
+ * wish to do so, delete this exception statement from your version.
  */
 package org.geosdi.geoplatform.core.delegate.impl.account;
 
-import com.google.common.base.Preconditions;
 import com.googlecode.genericdao.search.Filter;
 import com.googlecode.genericdao.search.Search;
-import java.util.ArrayList;
-import java.util.List;
-import javax.annotation.Resource;
-import org.geosdi.geoplatform.core.dao.GPAccountDAO;
-import org.geosdi.geoplatform.core.dao.GPAccountProjectDAO;
-import org.geosdi.geoplatform.core.dao.GPAuthorityDAO;
-import org.geosdi.geoplatform.core.dao.GPOrganizationDAO;
-import org.geosdi.geoplatform.core.dao.GPProjectDAO;
+import org.geosdi.geoplatform.core.dao.*;
 import org.geosdi.geoplatform.core.delegate.api.account.AccountDelegate;
-import org.geosdi.geoplatform.core.model.GPAccount;
-import org.geosdi.geoplatform.core.model.GPAccountProject;
-import org.geosdi.geoplatform.core.model.GPApplication;
-import org.geosdi.geoplatform.core.model.GPAuthority;
-import org.geosdi.geoplatform.core.model.GPOrganization;
-import org.geosdi.geoplatform.core.model.GPUser;
+import org.geosdi.geoplatform.core.model.*;
 import org.geosdi.geoplatform.exception.AccountLoginFault;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
@@ -70,6 +56,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+import static java.lang.Boolean.TRUE;
 
 /**
  * Account service delegate.
@@ -99,12 +92,8 @@ public class GPAccountDelegate implements AccountDelegate {
     private GPDigesterConfigurator gpDigester;
 
     @Override
-    public Long insertAccount(InsertAccountRequest insertAccountRequest)
-            throws IllegalParameterFault {
-        Preconditions.checkNotNull(insertAccountRequest,
-                "The InsertAccountRequest "
-                + "must not be null");
-
+    public Long insertAccount(InsertAccountRequest insertAccountRequest) throws IllegalParameterFault {
+        checkNotNull(insertAccountRequest, "The InsertAccountRequest must not be null");
         GPAccount account = insertAccountRequest.getAccount();
         boolean sendEmail = insertAccountRequest.isSendEmail();
 
@@ -150,8 +139,7 @@ public class GPAccountDelegate implements AccountDelegate {
     }
 
     @Override
-    public Long updateUser(GPUser user)
-            throws ResourceNotFoundFault, IllegalParameterFault {
+    public Long updateUser(GPUser user) throws ResourceNotFoundFault, IllegalParameterFault {
         if (user == null || user.getId() == null) {
             throw new IllegalArgumentException("User \"ID\" must be NOT NULL");
         }
@@ -320,9 +308,7 @@ public class GPAccountDelegate implements AccountDelegate {
     }
 
     @Override
-    public GPUser getUserDetailByUsernameAndPassword(String username,
-            String plainPassword)
-            throws ResourceNotFoundFault, IllegalParameterFault,
+    public GPUser getUserDetailByUsernameAndPassword(String username, String plainPassword) throws ResourceNotFoundFault, IllegalParameterFault,
             AccountLoginFault {
         GPUser user = accountDao.findByUsername(username);
         if (user == null) {
@@ -411,9 +397,43 @@ public class GPAccountDelegate implements AccountDelegate {
             EntityCorrectness.checkAccountAndAuthorityLog(account); // TODO assert
             userList.add((GPUser) account);
         }
+        return new SearchUsersResponseWS(AccountDTOFactory.buildUserDTOList(userList));
+    }
 
-        return new SearchUsersResponseWS(AccountDTOFactory.buildUserDTOList(
-                userList));
+    /**
+     * @param userID
+     * @param request
+     * @return {@link SearchUsersResponseWS}
+     * @throws ResourceNotFoundFault
+     */
+    @Override
+    public SearchUsersResponseWS searchEnabledUsers(Long userID, PaginatedSearchRequest request) throws ResourceNotFoundFault {
+        GPAccount user = this.getAccountById(userID);
+        EntityCorrectness.checkAccountLog(user); // TODO assert
+
+        Search searchCriteria = new Search(GPAccount.class);
+        searchCriteria.addFilterNotEqual("id", userID);
+        searchCriteria.setMaxResults(request.getNum());
+        searchCriteria.setPage(request.getPage());
+        searchCriteria.addFilterNotEmpty("username");
+        searchCriteria.addSortAsc("username");
+        searchCriteria.addFilterEqual("organization.name", user.getOrganization().getName());
+        searchCriteria.addFilterEqual("enabled", TRUE);
+
+        String like = request.getNameLike();
+        if (like != null) {
+            searchCriteria.addFilterILike("username", like);
+        }
+
+        List<GPAccount> accountList = accountDao.search(searchCriteria);
+        List<GPUser> userList = new ArrayList<>(accountList.size());
+        for (GPAccount account : accountList) {
+            account.setGPAuthorities(this.getGPAuthorities(
+                    account.getNaturalID()));
+            EntityCorrectness.checkAccountAndAuthorityLog(account); // TODO assert
+            userList.add((GPUser) account);
+        }
+        return new SearchUsersResponseWS(AccountDTOFactory.buildUserDTOList(userList));
     }
 
     @Override
@@ -506,7 +526,7 @@ public class GPAccountDelegate implements AccountDelegate {
     }
 
     /**
-     ***************************************************************************
+     * **************************************************************************
      */
     private GPUser cloneUser(GPUser user, String plainPassword) {
         GPUser clonedUser = new GPUser();

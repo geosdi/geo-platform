@@ -100,6 +100,7 @@ public final class GPServiceRSPathConfig {
     public static final String DELETE_ACCOUNT_PATH = ACCOUNTS_PATH
             + "deleteAccount";
     public static final String SEARCH_USERS_PATH = ACCOUNTS_PATH + "searchUsers";
+    public static final String SEARCH_ENABLED_USERS_PATH = ACCOUNTS_PATH + "searchEnabledUsers";
     public static final String GET_USERS_COUNT_PATH = ACCOUNTS_PATH
             + "getUsersCount";
     public static final String FORCE_TEMPORARY_ACCOUNT_PATH = ACCOUNTS_PATH

@@ -87,7 +87,7 @@ import java.util.List;
 
 /**
  * Public interface to define the service operations mapped via REST and SOAP
- * using {@link http://cxf.apache.org/} Framework.
+ * using {http://cxf.apache.org/} Framework.
  *
  * @author Giuseppe La Scaleia - CNR IMAA - geoSDI
  * @author Francesco Izzi - CNR IMAA - geoSDI
@@ -176,14 +176,16 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @POST
     @Path(value = GPServiceRSPathConfig.INSERT_ACCOUNT_PATH)
     @Override
-    Long insertAccount(
-            @WebParam(name = "InsertAccountRequest") InsertAccountRequest insertAccountRequest)
+    Long insertAccount(@WebParam(name = "InsertAccountRequest") InsertAccountRequest insertAccountRequest)
             throws IllegalParameterFault;
 
+    /**
+     * @param emailRecipient
+     * @param userNameToNotify
+     * @throws IllegalParameterFault
+     */
     @Post
-    void sendCASNewUserNotification(List<String> emailRecipient,
-            String userNameToNotify)
-            throws IllegalParameterFault;
+    void sendCASNewUserNotification(List<String> emailRecipient, String userNameToNotify) throws IllegalParameterFault;
 
     /**
      * Update a User and his Authorities.
@@ -198,8 +200,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @Path(value = GPServiceRSPathConfig.UPDATE_USER_PATH)
     @Put
     @Override
-    Long updateUser(@WebParam(name = "User") GPUser user)
-            throws ResourceNotFoundFault, IllegalParameterFault;
+    Long updateUser(@WebParam(name = "User") GPUser user) throws ResourceNotFoundFault, IllegalParameterFault;
 
     /**
      * Update a User, also his password. If password or email is changed will be
@@ -214,11 +215,8 @@ public interface GeoPlatformService extends GPCoreServiceApi {
      *                               currentPlainPassword is wrong
      */
     @Put
-    Long updateOwnUser(
-            @WebParam(name = "User") UserDTO user,
-            @WebParam(name = "currentPlainPassword") String currentPlainPassword,
-            @WebParam(name = "newPlainPassword") String newPlainPassword)
-            throws ResourceNotFoundFault, IllegalParameterFault;
+    Long updateOwnUser(@WebParam(name = "User") UserDTO user, @WebParam(name = "currentPlainPassword") String currentPlainPassword,
+            @WebParam(name = "newPlainPassword") String newPlainPassword) throws ResourceNotFoundFault, IllegalParameterFault;
 
     /**
      * Update an Application and his Authorities.
@@ -230,9 +228,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
      *                               standard Application to a temporary Application
      */
     @Post
-    Long updateApplication(
-            @WebParam(name = "application") GPApplication application)
-            throws ResourceNotFoundFault, IllegalParameterFault;
+    Long updateApplication(@WebParam(name = "application") GPApplication application) throws ResourceNotFoundFault, IllegalParameterFault;
 
     /**
      * Delete an Account by ID. Delete his Authorities, the owner Project and
@@ -246,9 +242,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @Path(value = GPServiceRSPathConfig.DELETE_ACCOUNT_PATH)
     @Delete
     @Override
-    Boolean deleteAccount(@WebParam(name = "accountID")
-    @QueryParam(value = "accountID") Long accountID)
-            throws ResourceNotFoundFault;
+    Boolean deleteAccount(@WebParam(name = "accountID") @QueryParam(value = "accountID") Long accountID) throws ResourceNotFoundFault;
 
     /**
      * Retrieve a User by ID.
@@ -266,10 +260,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @Path(value = GPServiceRSPathConfig.GET_USER_DETAIL_BY_ID_PATH)
     @WebResult(name = "user")
     @Override
-    GPUser getUserDetail(@WebParam(name = "userID")
-    @PathParam(value = "userID")
-    @ApiParam(name = "userID", value = "The ID of user to fetch",
-            required = true) Long userID)
+    GPUser getUserDetail(@WebParam(name = "userID") @PathParam(value = "userID") @ApiParam(name = "userID", value = "The ID of user to fetch", required = true) Long userID)
             throws ResourceNotFoundFault;
 
     /**
@@ -415,10 +406,18 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @Path(value = GPServiceRSPathConfig.SEARCH_USERS_PATH)
     @WebResult(name = "searchUserResponse")
     @Override
-    SearchUsersResponseWS searchUsers(@WebParam(name = "userID")
-    @QueryParam(value = "userID") Long userID,
-            @QueryParam("") PaginatedSearchRequest request)
-            throws ResourceNotFoundFault;
+    SearchUsersResponseWS searchUsers(@WebParam(name = "userID") @QueryParam(value = "userID") Long userID,
+            @QueryParam("") PaginatedSearchRequest request) throws ResourceNotFoundFault;
+
+    /**
+     * @param userID
+     * @param request
+     * @return {@link SearchUsersResponseWS}
+     * @throws ResourceNotFoundFault
+     */
+    @GET
+    @Path(value = GPServiceRSPathConfig.SEARCH_ENABLED_USERS_PATH)
+    SearchUsersResponseWS searchEnabledUsers(@QueryParam(value = "userID") Long userID, @QueryParam("") PaginatedSearchRequest request) throws ResourceNotFoundFault;
 
     /**
      * Retrieve all Accounts.

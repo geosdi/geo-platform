@@ -158,9 +158,8 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget, 
         this.layerSelectionWidget.reset();
         MapHandlerManager.fireEvent(scaleVisibleEvent);
         WFSGPHandlerManager.fireEvent(new ResetMapStoreEvent());
-        GeocodingHandlerManager.fireEvent(resetGeocodingWidgetEvent);
-        GeocodingHandlerManager.fireEvent(resetGeocodingWidgetEvent);
-        GeocodingHandlerManager.fireEvent(clearLayerEvent);
+        GeocodingHandlerManager.fireEvent(this.resetGeocodingWidgetEvent);
+        GeocodingHandlerManager.fireEvent(this.clearLayerEvent);
     }
 
     @Override

@@ -87,8 +87,7 @@ public class WFSMapModel extends GPMapModel implements WFSHasLayerChangedHandler
 
     @Override
     public void addMarker(WFSAddressGeocoding wfsAddressGeocoding) {
-        if(!this.registered)
-            this.mapWidget.getMap().addLayer(this.geocodingVectorMarker.getMarkerLayer());
+        this.mapWidget.getMap().addLayer(this.geocodingVectorMarker.getMarkerLayer());
         this.registered = Boolean.TRUE;
         this.geocodingVectorMarker.removeMarker();
         LonLat center = new LonLat((double)wfsAddressGeocoding.get(LONGITUDE.getValue()), (double)wfsAddressGeocoding.get(LATITUDE.getValue()));
@@ -100,7 +99,8 @@ public class WFSMapModel extends GPMapModel implements WFSHasLayerChangedHandler
     @Override
     public void clearLayer() {
         this.geocodingVectorMarker.removeMarker();
-        this.mapWidget.getMap().removeLayer(this.geocodingVectorMarker.getMarkerLayer());
+        if(this.mapWidget.getMap().getLayerByName("WFSGeocoding-Marker-Vector-Layer") != null)
+            this.mapWidget.getMap().removeLayer(this.geocodingVectorMarker.getMarkerLayer());
         this.registered = Boolean.FALSE;
     }
 

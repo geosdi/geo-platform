@@ -67,7 +67,6 @@ import static org.geosdi.geoplatform.gui.client.model.geocoding.WFSAddressGeocod
 public class WFSMapModel extends GPMapModel implements WFSHasLayerChangedHandler,IWFSLayerMarkerGridHandler {
 
     private final WFSGeocodingVectorMarker geocodingVectorMarker;
-    private boolean registered;
 
     public WFSMapModel(MapWidget theMapWidget) {
         super(theMapWidget);
@@ -88,7 +87,6 @@ public class WFSMapModel extends GPMapModel implements WFSHasLayerChangedHandler
     @Override
     public void addMarker(WFSAddressGeocoding wfsAddressGeocoding) {
         this.mapWidget.getMap().addLayer(this.geocodingVectorMarker.getMarkerLayer());
-        this.registered = Boolean.TRUE;
         this.geocodingVectorMarker.removeMarker();
         LonLat center = new LonLat((double)wfsAddressGeocoding.get(LONGITUDE.getValue()), (double)wfsAddressGeocoding.get(LATITUDE.getValue()));
         center.transform(GPCoordinateReferenceSystem.WGS_84.getCode(),
@@ -101,7 +99,6 @@ public class WFSMapModel extends GPMapModel implements WFSHasLayerChangedHandler
         this.geocodingVectorMarker.removeMarker();
         if(this.mapWidget.getMap().getLayerByName("WFSGeocoding-Marker-Vector-Layer") != null)
             this.mapWidget.getMap().removeLayer(this.geocodingVectorMarker.getMarkerLayer());
-        this.registered = Boolean.FALSE;
     }
 
     @Override

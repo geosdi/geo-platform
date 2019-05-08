@@ -45,6 +45,7 @@ import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import com.extjs.gxt.ui.client.widget.form.TextArea;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
+import com.google.gwt.core.client.GWT;
 import org.geosdi.geoplatform.gui.client.i18n.LayerFiltersModuleConstants;
 import org.geosdi.geoplatform.gui.client.model.GPUniqueValues;
 import org.geosdi.geoplatform.gui.client.widget.cql.button.BBOXCQLButton;
@@ -55,17 +56,24 @@ import org.geosdi.geoplatform.gui.client.widget.cql.combobox.CQLLayerAttributesC
 import org.geosdi.geoplatform.gui.client.widget.cql.combobox.CQLLogicalOperatorComboBox;
 import org.geosdi.geoplatform.gui.client.widget.cql.combobox.CQLUniqueValuesComboBox;
 import org.geosdi.geoplatform.gui.client.widget.cql.combobox.LogicalOperator;
+import org.geosdi.geoplatform.gui.client.widget.cql.enumeration.CQLOperatorEnum;
 import org.geosdi.geoplatform.gui.client.widget.tab.GeoPlatformTabItem;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerAttributes;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerAttributes.GPAttributeKey;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.logging.Logger;
+
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
 public class CQLFilterAdvancedTab extends GeoPlatformTabItem implements ICQLFilterTab {
+
+    final static Logger logger = Logger.getLogger("CQLFilterAdvancedTab");
 
     private TextArea filterTextArea;
     private GPTreePanel<GPBeanTreeModel> treePanel;
@@ -152,8 +160,7 @@ public class CQLFilterAdvancedTab extends GeoPlatformTabItem implements ICQLFilt
             public void selectionChanged(SelectionChangedEvent<CQLOperatorValue> se) {
                 CQLOperatorValue cQLOperatorValue = se.getSelectedItem();
                 if (cQLOperatorValue != null) {
-                    insertTextIntoFilterArea(cQLOperatorValue.get(
-                            CQLOperatorValue.LimitConditionEnum.OPERATOR.toString()).toString());
+                    insertTextIntoFilterArea(((CQLOperatorEnum)cQLOperatorValue.get(CQLOperatorValue.LimitConditionEnum.OPERATOR.toString())).getValue());
                     operatorComboBox.reset();
                 }
             }

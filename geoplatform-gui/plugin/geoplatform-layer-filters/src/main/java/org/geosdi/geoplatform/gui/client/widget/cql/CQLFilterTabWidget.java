@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.cql;
 
+import com.google.gwt.core.client.GWT;
 import org.geosdi.geoplatform.gui.client.i18n.LayerFiltersModuleConstants;
 import org.geosdi.geoplatform.gui.client.widget.tab.GeoPlatformTabWidget;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;

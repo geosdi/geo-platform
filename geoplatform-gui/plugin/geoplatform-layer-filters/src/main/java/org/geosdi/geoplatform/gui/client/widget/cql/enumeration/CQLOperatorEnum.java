@@ -52,7 +52,7 @@ public enum CQLOperatorEnum implements ICQLOperator {
 
         @Override
         public String getValue() {
-            return "=";
+            return super.symbol;
         }
     }, NOT_EQUAL("<>") {
         @Override
@@ -62,7 +62,7 @@ public enum CQLOperatorEnum implements ICQLOperator {
 
         @Override
         public String getValue() {
-            return "<>";
+            return super.symbol;
         }
     },
     LESS("<") {
@@ -73,7 +73,7 @@ public enum CQLOperatorEnum implements ICQLOperator {
 
         @Override
         public String getValue() {
-            return "<";
+            return super.symbol;
         }
     }, GREATER(">") {
         @Override
@@ -83,7 +83,7 @@ public enum CQLOperatorEnum implements ICQLOperator {
 
         @Override
         public String getValue() {
-            return ">";
+            return super.symbol;
         }
     },
     LESS_OR_EQUAL("<=") {
@@ -94,7 +94,7 @@ public enum CQLOperatorEnum implements ICQLOperator {
 
         @Override
         public String getValue() {
-            return "<=";
+            return super.symbol;
         }
     },
     GREATER_OR_EQUAL(">=") {
@@ -105,7 +105,7 @@ public enum CQLOperatorEnum implements ICQLOperator {
 
         @Override
         public String getValue() {
-            return ">=";
+            return super.symbol;
         }
     },
     LIKE("like") {

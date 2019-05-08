@@ -135,6 +135,8 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget, 
     @Override
     public void initSize() {
         super.setSize(1200, 650);
+        super.setMinHeight(560);
+        super.setMinWidth(800);
         super.setHeadingHtml("GeoPlatform WFS-T Widget");
         super.setIcon(AbstractImagePrototype.create(BasicWidgetResources.ICONS.vector()));
     }

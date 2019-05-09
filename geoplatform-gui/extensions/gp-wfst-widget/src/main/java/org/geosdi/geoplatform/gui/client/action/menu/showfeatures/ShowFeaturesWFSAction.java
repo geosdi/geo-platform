@@ -39,17 +39,28 @@ import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.LayerTypeHandlerManager;
 import org.geosdi.geoplatform.gui.client.action.menu.strategy.IActionStrategy;
+import org.geosdi.geoplatform.gui.client.command.datasource.CheckDataSourceRequest;
+import org.geosdi.geoplatform.gui.client.command.datasource.CheckDataSourceResponse;
 import org.geosdi.geoplatform.gui.client.config.FeatureInjector;
+import org.geosdi.geoplatform.gui.client.i18n.BasicWidgetModuleMessages;
 import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetConstants;
 import org.geosdi.geoplatform.gui.client.widget.wfs.ShowFeaturesWidget;
+import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
+
+import static org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetMessages.INSTANCE;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -62,6 +73,7 @@ public class ShowFeaturesWFSAction extends MenuBaseAction {
     private final LayerTypeHandlerManager layerTypeHandlerManager;
     private IActionStrategy actionStrategy;
     private ShowFeaturesWidget showFeaturesWidget;
+    private final CheckDataSourceRequest checkDataSourceRequest = GWT.<CheckDataSourceRequest>create(CheckDataSourceRequest.class);
 
     public ShowFeaturesWFSAction(TreePanel<GPBeanTreeModel> treePanel) {
         super(WFSTWidgetConstants.INSTANCE.showFeaturesTitleText(),
@@ -81,9 +93,33 @@ public class ShowFeaturesWFSAction extends MenuBaseAction {
      */
     @Override
     public void componentSelected(MenuEvent e) {
-        this.actionStrategy.setWidgetType(IActionStrategy.WidgetType.SHOW_FEATURES);
-        final GPLayerBean layer = (GPLayerBean) this.treePanel.getSelectionModel().getSelectedItem();
-        this.layerTypeHandlerManager.forwardLayerType(layer);
+        GPBeanTreeModel itemSelected = this.treePanel.getSelectionModel().getSelectedItem();
+        this.checkDataSourceRequest.setDatasource(((GPLayerTreeModel)itemSelected).getDataSource());
+
+        ClientCommandDispatcher.getInstance().execute(new GPClientCommand<CheckDataSourceResponse>() {
+            {
+                super.setCommandRequest(checkDataSourceRequest);
+            }
+
+            @Override
+            public void onCommandSuccess(final CheckDataSourceResponse response) {
+                if (response.getResult()) {
+                    actionStrategy.setWidgetType(IActionStrategy.WidgetType.SHOW_FEATURES);
+                    final GPLayerBean layer = (GPLayerBean) treePanel.getSelectionModel().getSelectedItem();
+                    layerTypeHandlerManager.forwardLayerType(layer);
+                } else
+                    GeoPlatformMessage.errorMessage(BasicWidgetModuleMessages.INSTANCE.errorDataSource(),
+                            BasicWidgetModuleMessages.INSTANCE.datasourceNotMatches());
+            }
+
+            @Override
+            public void onCommandFailure(Throwable exception) {
+                GeoPlatformMessage.errorMessage(BasicWidgetModuleMessages.INSTANCE.errorDataSource(), exception.getMessage());
+            }
+        });
+
+
+
     }
 
 

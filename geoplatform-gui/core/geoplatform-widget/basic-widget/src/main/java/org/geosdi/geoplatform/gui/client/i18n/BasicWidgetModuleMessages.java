@@ -44,7 +44,7 @@ import com.google.gwt.i18n.client.Messages;
  */
 public interface BasicWidgetModuleMessages extends Messages {
 
-    public BasicWidgetModuleMessages INSTANCE = GWT.create(BasicWidgetModuleMessages.class);
+   BasicWidgetModuleMessages INSTANCE = GWT.create(BasicWidgetModuleMessages.class);
 
 
     String datasourceNotMatches();

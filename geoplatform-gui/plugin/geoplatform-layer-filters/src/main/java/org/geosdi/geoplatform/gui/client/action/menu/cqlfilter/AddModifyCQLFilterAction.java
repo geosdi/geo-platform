@@ -36,13 +36,27 @@
 package org.geosdi.geoplatform.gui.client.action.menu.cqlfilter;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.json.client.JSONObject;
+import com.google.gwt.json.client.JSONParser;
+import com.google.gwt.json.client.JSONValue;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.LayerFiltersResources;
+import org.geosdi.geoplatform.gui.client.command.datasource.CheckDataSourceRequest;
+import org.geosdi.geoplatform.gui.client.command.datasource.CheckDataSourceResponse;
+import org.geosdi.geoplatform.gui.client.i18n.BasicWidgetModuleMessages;
+import org.geosdi.geoplatform.gui.client.i18n.LayerFiltersModuleMessages;
 import org.geosdi.geoplatform.gui.client.widget.cql.CQLFilterWidget;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
+import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
+
+import static org.geotools.gml3.GML.boundingBox;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -52,6 +66,7 @@ public class AddModifyCQLFilterAction extends MenuBaseAction {
 
     private GPTreePanel<GPBeanTreeModel> treePanel;
     private CQLFilterWidget cqlFilterWidget;
+    private final CheckDataSourceRequest checkDataSourceRequest = GWT.<CheckDataSourceRequest>create(CheckDataSourceRequest.class);
 
     public AddModifyCQLFilterAction(GPTreePanel<GPBeanTreeModel> treePanel) {
         super("AddModifyCQLFilter", AbstractImagePrototype.create(
@@ -62,10 +77,32 @@ public class AddModifyCQLFilterAction extends MenuBaseAction {
 
     @Override
     public void componentSelected(MenuEvent ce) {
-        GPBeanTreeModel itemSelected = this.treePanel.getSelectionModel().getSelectedItem();
+        final GPBeanTreeModel itemSelected = this.treePanel.getSelectionModel().getSelectedItem();
         if (itemSelected instanceof AbstractFolderTreeNode) {
             throw new IllegalArgumentException("The CQL Filter can't be applied to a folder");
         }
-        cqlFilterWidget.show();
+        this.checkDataSourceRequest.setDatasource(((GPLayerTreeModel)itemSelected).getDataSource());
+        ClientCommandDispatcher.getInstance().execute(new GPClientCommand<CheckDataSourceResponse>() {
+            {
+                super.setCommandRequest(checkDataSourceRequest);
+            }
+
+            @Override
+            public void onCommandSuccess(final CheckDataSourceResponse response) {
+                if(response.getResult())
+                    cqlFilterWidget.show();
+                else
+                    GeoPlatformMessage.errorMessage(BasicWidgetModuleMessages.INSTANCE.errorDataSource(),
+                            BasicWidgetModuleMessages.INSTANCE.datasourceNotMatches());
+            }
+
+            @Override
+            public void onCommandFailure(Throwable exception) {
+                GeoPlatformMessage.errorMessage("", exception.getMessage());
+            }
+        });
+
+
+
     }
 }

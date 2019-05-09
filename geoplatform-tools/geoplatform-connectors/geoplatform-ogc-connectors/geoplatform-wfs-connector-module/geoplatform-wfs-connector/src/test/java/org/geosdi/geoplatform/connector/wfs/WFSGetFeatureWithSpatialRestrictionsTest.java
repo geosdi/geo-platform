@@ -123,7 +123,7 @@ public class WFSGetFeatureWithSpatialRestrictionsTest extends WFSTestConfigurato
         request.setSRS("EPSG:4326");
         logger.info("######################\n{}\n", request.showRequestAsString());
         FeatureCollectionType response = request.getResponse();
-        Assert.assertTrue(response.getNumberOfFeatures().intValue() == 46);
+        Assert.assertTrue(response.getNumberOfFeatures().intValue() == 47);
         logger.info("#############################c_stateQueryRestrictionsNotInBboxTest#ResponseAsString {}\n", request.formatResponseAsString(2));
     }
 
@@ -154,7 +154,7 @@ public class WFSGetFeatureWithSpatialRestrictionsTest extends WFSTestConfigurato
                         "</QueryDTO>"), QueryDTO.class));
         logger.info("######################\n{}\n", request.showRequestAsString());
         FeatureCollectionType response = request.getResponse();
-        Assert.assertTrue(response.getNumberOfFeatures().intValue() == 23);
+        Assert.assertTrue(response.getNumberOfFeatures().intValue() == 24);
         logger.info("#############################d_stateQueryRestrictionsNotTest#ResponseAsString {}\n", request.formatResponseAsString(2));
     }
 

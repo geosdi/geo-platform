@@ -98,11 +98,8 @@ public class AddModifyCQLFilterAction extends MenuBaseAction {
 
             @Override
             public void onCommandFailure(Throwable exception) {
-                GeoPlatformMessage.errorMessage("", exception.getMessage());
+                GeoPlatformMessage.errorMessage(BasicWidgetModuleMessages.INSTANCE.errorDataSource(), exception.getMessage());
             }
         });
-
-
-
     }
 }

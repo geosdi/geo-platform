@@ -77,6 +77,7 @@ public class CQLFilterAdvancedTab extends GeoPlatformTabItem implements ICQLFilt
 
     private TextArea filterTextArea;
     private GPTreePanel<GPBeanTreeModel> treePanel;
+    private Boolean isString;
 
     public CQLFilterAdvancedTab(String title, GPTreePanel<GPBeanTreeModel> treePanel) {
         super(title, Boolean.TRUE);
@@ -104,8 +105,11 @@ public class CQLFilterAdvancedTab extends GeoPlatformTabItem implements ICQLFilt
             public void selectionChanged(SelectionChangedEvent<GPUniqueValues> se) {
                 GPUniqueValues gpUniqueValues = se.getSelectedItem();
                 if (gpUniqueValues != null) {
-                    insertTextIntoFilterArea(gpUniqueValues.get(
-                            GPUniqueValues.GPUniqueValueKey.UNIQUE_VALUE.toString()).toString());
+                    String uniqueValue = gpUniqueValues.get(
+                            GPUniqueValues.GPUniqueValueKey.UNIQUE_VALUE.toString()).toString();
+                    if(isString)
+                        uniqueValue =  "'".concat(uniqueValue).concat("'");
+                    insertTextIntoFilterArea(uniqueValue);
                     uniqueValueComboBox.reset();
                 }
             }
@@ -124,6 +128,8 @@ public class CQLFilterAdvancedTab extends GeoPlatformTabItem implements ICQLFilt
                             GPAttributeKey.ATTRIBUTE_VALUE.toString()).toString());
                     attributesComboBox.reset();
                     uniqueValueComboBox.setEnabled(true);
+                    isString = layerAttribute.get(
+                            GPAttributeKey.ATTRIBUTE_TYPE.toString()).toString().equals("java.lang.String");
                     uniqueValueComboBox.setLayerAttribute(layerAttribute.get(
                             GPAttributeKey.ATTRIBUTE_VALUE.toString()).toString());
                 }

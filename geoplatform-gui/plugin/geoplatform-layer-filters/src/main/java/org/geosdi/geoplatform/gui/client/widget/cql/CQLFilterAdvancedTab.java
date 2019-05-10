@@ -311,11 +311,12 @@ public class CQLFilterAdvancedTab extends GeoPlatformTabItem implements ICQLFilt
     }
 
     private void insertTextIntoFilterArea(String text) {
+        GWT.log(text);
         String oldText = filterTextArea.getValue();
         StringBuilder newText = new StringBuilder();
         if (oldText != null && !oldText.isEmpty()) {
             newText.append(oldText.substring(0, filterTextArea.getCursorPos()));
-            newText.append(text);
+            newText.append(" "+text);
             newText.append(oldText.substring(filterTextArea.getCursorPos()));
         } else {
             newText.append(text);

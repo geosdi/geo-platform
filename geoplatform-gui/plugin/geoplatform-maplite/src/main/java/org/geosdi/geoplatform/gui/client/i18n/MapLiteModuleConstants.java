@@ -48,7 +48,7 @@ public interface MapLiteModuleConstants extends Constants {
     public static final MapLiteModuleConstants INSTANCE
             = GWT.create(MapLiteModuleConstants.class);
 
-    @DefaultStringValue("http://maplite.geosdi.org/maplite/")
+    @DefaultStringValue("https://prosit.geosdi.org/maplite/#/view/dashboard")
     String MAP_LITE_APPLICATION_URL();
     
     
@@ -57,11 +57,29 @@ public interface MapLiteModuleConstants extends Constants {
      */
     @DefaultStringValue("Click to open the mapLite project")
     String GPMapLiteExportProjectWidget_linkText();
+
+    @DefaultStringValue("Share on Socials")
+    String GPMapLiteExportProjectWidget_socialText();
+
+    @DefaultStringValue("Generate IFrame Code")
+    String GPMapLiteExportProjectWidget_frameText();
+
+    @DefaultStringValue("Height")
+    String GPMapLiteExportProjectWidget_heightText();
+
+    @DefaultStringValue("Width")
+    String GPMapLiteExportProjectWidget_widthText();
     
     /**
      * start ExportMapLiteProjectAction
      */
     @DefaultStringValue("Generate MapLite link")
     String ExportMapLiteProjectAction_tooltipText();
+
+    @DefaultStringValue("Create")
+    String CreateMapLiteFrame_createText();
+
+    @DefaultStringValue("IFrame Code")
+    String ExportMapLiteProjectAction_iframeCode();
 
 }

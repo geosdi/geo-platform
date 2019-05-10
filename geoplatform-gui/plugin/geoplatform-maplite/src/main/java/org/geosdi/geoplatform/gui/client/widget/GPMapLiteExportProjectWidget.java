@@ -35,21 +35,9 @@
  */
 package org.geosdi.geoplatform.gui.client.widget;
 
-import com.extjs.gxt.ui.client.Registry;
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.ui.Anchor;
-import com.google.gwt.user.client.ui.HTMLPanel;
-import com.google.gwt.user.client.ui.VerticalPanel;
-import org.geosdi.geoplatform.gui.client.i18n.MapLiteModuleConstants;
-import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
-import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
-import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
-import org.geosdi.geoplatform.gui.factory.map.GPApplicationMap;
-import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
-import org.gwtopenmaps.openlayers.client.LonLat;
-import org.gwtopenmaps.openlayers.client.Map;
+import org.geosdi.geoplatform.gui.client.puregwt.event.WindowShowEvent;
+import org.geosdi.geoplatform.gui.client.widget.tab.MapLiteTabWidget;
+import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -57,13 +45,9 @@ import org.gwtopenmaps.openlayers.client.Map;
  */
 public class GPMapLiteExportProjectWidget extends GeoPlatformWindow {
 
-    private final short ABOUT_WIDTH = 300;
-    private final short ABOUT_HEIGHT = 180;
-
-    private final String shareJSScriptPath = GWT.getModuleBaseURL() + "share42/share42.js";
-    private HTMLPanel sharePanel;
-    private Anchor mapLiteAnchor;
-    private VerticalPanel vp;
+    private final short WIDTH = 380;
+    private final short HEIGHT = 210;
+    private MapLiteTabWidget mapLiteTabWidget;
 
     public GPMapLiteExportProjectWidget() {
         super(true);
@@ -71,51 +55,13 @@ public class GPMapLiteExportProjectWidget extends GeoPlatformWindow {
 
     @Override
     public void addComponent() {
-        mapLiteAnchor = new Anchor(MapLiteModuleConstants.INSTANCE.GPMapLiteExportProjectWidget_linkText());
-        mapLiteAnchor.addClickHandler(new ClickHandler() {
-
-            @Override
-            public void onClick(ClickEvent event) {
-                mapLiteAnchor.setHref(generateMapLiteURL());
-            }
-
-        });
-        mapLiteAnchor.setTarget("_blank");
-        vp = new VerticalPanel();
-        vp.setSpacing(5);
-        vp.add(mapLiteAnchor);
-        sharePanel = new HTMLPanel("<div class=\"share42init\" data-tile=\"Map Lite\" data-url=\"" + generateMapLiteURL() + "\"></div>"
-                + "<script type=\"text/javascript\" src=\"" + shareJSScriptPath + "\"></script>");
-        vp.add(sharePanel);
-        super.add(vp);
-    }
-
-    private String generateMapLiteURL() {
-        IGPAccountDetail accountDetail = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
-        GPClientProject clientProject = (GPClientProject) Registry.get(UserSessionEnum.CURRENT_PROJECT_ON_TREE.name());
-        StringBuilder mapLiteURL = new StringBuilder();
-        mapLiteURL.append(MapLiteModuleConstants.INSTANCE.MAP_LITE_APPLICATION_URL());
-        mapLiteURL.append("?mapID=");
-        mapLiteURL.append(clientProject.getId());
-        mapLiteURL.append("-");
-        mapLiteURL.append(accountDetail.getId());
-        mapLiteURL.append("&x=");
-        Map map = GPApplicationMap.getInstance().getApplicationMap().getMap();
-        LonLat lonLat = map.getCenter();
-        lonLat.transform(map.getProjection(), GPCoordinateReferenceSystem.WGS_84.getCode());
-        mapLiteURL.append(lonLat.lon());
-        mapLiteURL.append("&y=");
-        mapLiteURL.append(lonLat.lat());
-        mapLiteURL.append("&zoom=");
-        mapLiteURL.append(map.getZoom());
-        mapLiteURL.append("&baseMap=");
-        mapLiteURL.append(accountDetail.getBaseLayer());
-        return mapLiteURL.toString();
+        this.mapLiteTabWidget = new MapLiteTabWidget();
+        super.add(this.mapLiteTabWidget);
     }
 
     @Override
     public void initSize() {
-        super.setSize(ABOUT_WIDTH + 10, ABOUT_HEIGHT + 10);
+        super.setSize(WIDTH , HEIGHT );
     }
 
     @Override
@@ -128,15 +74,7 @@ public class GPMapLiteExportProjectWidget extends GeoPlatformWindow {
     @Override
     public void show() {
         super.show();
-        vp.remove(sharePanel);
-        sharePanel = new HTMLPanel("<div class=\"share42init\" data-tile=\"Map Lite\" data-url=\"" + generateMapLiteURL() + "\"></div>"
-                + "<script type=\"text/javascript\" src=\"" + shareJSScriptPath + "\"></script>");
-        vp.add(sharePanel);
-        updateSocialLinks();
+        WidgetPropertiesHandlerManager.fireEvent(new WindowShowEvent());
     }
-
-    private static native void updateSocialLinks() /*-{
-     $wnd.share42();
-     }-*/;
 
 }

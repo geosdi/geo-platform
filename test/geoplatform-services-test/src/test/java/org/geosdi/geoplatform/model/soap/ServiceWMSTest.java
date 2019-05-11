@@ -47,7 +47,7 @@ import org.slf4j.LoggerFactory;
  */
 public abstract class ServiceWMSTest {
     
-    public static final String serverUrlGeoSDI = "http://150.145.141.124/geoserver/wms";
+    public static final String serverUrlGeoSDI = "http://150.145.141.92/geoserver/wms";
 
     protected static final Logger logger = LoggerFactory.getLogger(ServiceWMSTest.class);
     //

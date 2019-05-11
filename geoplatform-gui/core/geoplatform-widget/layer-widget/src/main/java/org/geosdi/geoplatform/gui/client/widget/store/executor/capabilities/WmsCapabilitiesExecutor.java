@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.store.executor.capabilities;
 
-import java.util.List;
 import org.geosdi.geoplatform.gui.client.widget.store.executor.LayerTreeStoreExecutor;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.client.widget.tree.store.GPTreeStoreOperations;
@@ -44,6 +43,8 @@ import org.geosdi.geoplatform.gui.model.GPVectorBean;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.grid.event.DeselectGridElementEvent;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
+
+import java.util.List;
 
 /**
  *
@@ -61,8 +62,7 @@ public class WmsCapabilitiesExecutor extends LayerTreeStoreExecutor implements
 
     @Override
     public void addRasterLayersFromCapabilities(List<GPRasterBean> layers) {
-        super.addRasterLayers(layers,
-                GPTreeStoreOperations.LAYERS_FROM_WMS_CAPABILITIES);
+        super.addRasterLayers(layers, GPTreeStoreOperations.LAYERS_FROM_WMS_CAPABILITIES);
         LayerHandlerManager.fireEvent(deselectGridElement);
     }
 

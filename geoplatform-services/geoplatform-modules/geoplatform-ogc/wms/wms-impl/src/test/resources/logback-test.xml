@@ -18,4 +18,7 @@
         <appender-ref ref="STDOUT"/>
     </logger>
 
+    <logger name="org.geosdi.geoplatform.services.builder.GPWMSCapabilitesBuilder" level="debug"/>
+    <logger name="org.geosdi.geoplatform.services.builder.GPRasterLayerDTOBuilder" level="debug"/>
+
 </configuration>

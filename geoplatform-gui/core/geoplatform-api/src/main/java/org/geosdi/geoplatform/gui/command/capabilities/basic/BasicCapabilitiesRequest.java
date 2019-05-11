@@ -78,6 +78,6 @@ public class BasicCapabilitiesRequest implements GPCommandRequest {
 
     @Override
     public String toString() {
-        return "CASCapabilitiesRequest{" + "serverUrl=" + serverUrl + ", idServer=" + idServer + '}';
+        return "BasicCapabilitiesRequest{" + "serverUrl=" + serverUrl + ", idServer=" + idServer + '}';
     }
 }

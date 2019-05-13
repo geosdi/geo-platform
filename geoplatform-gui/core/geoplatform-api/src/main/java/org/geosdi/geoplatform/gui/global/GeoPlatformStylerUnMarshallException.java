@@ -41,36 +41,21 @@ import java.io.Serializable;
  * @author giuseppe
  * 
  */
-public class GeoPlatformException extends RuntimeException
+public class GeoPlatformStylerUnMarshallException extends GeoPlatformException
         implements Serializable {
 
     private static final long serialVersionUID = -573700062406606079L;
-    protected String message;
-    protected Throwable e;
 
-    public GeoPlatformException() {
+    public GeoPlatformStylerUnMarshallException() {
     }
 
-    public GeoPlatformException(String message) {
+    public GeoPlatformStylerUnMarshallException(String message) {
         this.message = message;
     }
 
-    @Override
-    public Throwable getCause() {
-        return e;
-    }
-
-    public GeoPlatformException(Throwable e) {
+    public GeoPlatformStylerUnMarshallException(Throwable e) {
         super(e);
         this.e = e;
     }
 
-    @Override
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
 }

@@ -116,11 +116,6 @@
         </repository>
 
         <!-- OSGEO -->
-        <!-- repository>
-            <id>maven2-repository.dev.java.net</id>
-            <name>Java.net repository</name>
-            <url>http://download.java.net/maven/2</url>
-        </repository -->
         <repository>
             <id>osgeo</id>
             <name>Open Source Geospatial Foundation Repository</name>
@@ -130,11 +125,20 @@
             </snapshots>
         </repository>
         
-        <!--repository>
+        <repository>
             <id>boundlessgeo</id>
             <name>Open Source Geospatial Foundation Repository</name>
             <url>https://repo.boundlessgeo.com/release/</url>
-        </repository-->
+        </repository>
+        
+        <repository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>boundless</id>
+            <name>Boundless Maven Repository</name>
+            <url>http://repo.boundlessgeo.com/main</url>
+        </repository>
         
         <!-- TERRACOTTA -->
         <!--repository>

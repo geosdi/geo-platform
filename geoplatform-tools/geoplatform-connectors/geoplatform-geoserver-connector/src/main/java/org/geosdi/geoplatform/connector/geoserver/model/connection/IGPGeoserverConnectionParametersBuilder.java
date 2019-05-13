@@ -35,9 +35,10 @@
 package org.geosdi.geoplatform.connector.geoserver.model.connection;
 
 import javax.annotation.Nonnull;
-import javax.annotation.meta.When;
 import java.io.Serializable;
 import java.util.Map;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -56,7 +57,7 @@ public interface IGPGeoserverConnectionParametersBuilder extends Serializable {
      * @return {@link IGPGeoserverConnectionParametersBuilder}
      * @throws Exception
      */
-    <Param extends IGPGeoserverConnectionParam> IGPGeoserverConnectionParametersBuilder addParam(@Nonnull(when = When.NEVER) Param theParam) throws Exception;
+    <Param extends IGPGeoserverConnectionParam> IGPGeoserverConnectionParametersBuilder addParam(@Nonnull(when = NEVER) Param theParam) throws Exception;
 
     /**
      * @param theParams
@@ -64,5 +65,5 @@ public interface IGPGeoserverConnectionParametersBuilder extends Serializable {
      * @return {@link IGPGeoserverConnectionParametersBuilder}
      * @throws Exception
      */
-    <Param extends IGPGeoserverConnectionParam> IGPGeoserverConnectionParametersBuilder addParams(@Nonnull(when = When.NEVER) Param... theParams) throws Exception;
+    <Param extends IGPGeoserverConnectionParam> IGPGeoserverConnectionParametersBuilder addParams(@Nonnull(when = NEVER) Param... theParams) throws Exception;
 }

@@ -38,12 +38,16 @@ import com.google.common.collect.Maps;
 import lombok.ToString;
 
 import javax.annotation.Nonnull;
-import javax.annotation.meta.When;
+import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 import static java.util.Arrays.stream;
+import static java.util.Collections.unmodifiableMap;
 import static java.util.stream.Collectors.toMap;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -54,7 +58,7 @@ public class GPGeoserverConnectionParametersBuilder implements IGPGeoserverConne
 
     private static final long serialVersionUID = -5744680926370539432L;
     //
-    private Map<String, String> params = Maps.newHashMap();
+    private final Map<String, String> params = Maps.newLinkedHashMap();
 
     private GPGeoserverConnectionParametersBuilder() {
     }
@@ -73,8 +77,9 @@ public class GPGeoserverConnectionParametersBuilder implements IGPGeoserverConne
      * @throws Exception
      */
     @Override
-    public <Param extends IGPGeoserverConnectionParam> IGPGeoserverConnectionParametersBuilder addParam(@Nonnull(when = When.NEVER) Param theParam) throws Exception {
+    public <Param extends IGPGeoserverConnectionParam> IGPGeoserverConnectionParametersBuilder addParam(@Nonnull(when = NEVER) Param theParam) throws Exception {
         checkArgument(theParam != null, "The Parameter param must not be null.");
+        checkNotNull((theParam.getKey() != null) && !(theParam.getKey().trim().isEmpty()), "The Parameter key must not be null or an empty string.");
         this.params.put(theParam.getKey(), theParam.getValue());
         return self();
     }
@@ -85,9 +90,12 @@ public class GPGeoserverConnectionParametersBuilder implements IGPGeoserverConne
      * @throws Exception
      */
     @Override
-    public <Param extends IGPGeoserverConnectionParam> IGPGeoserverConnectionParametersBuilder addParams(@Nonnull(when = When.NEVER) Param... theParams) throws Exception {
+    public <Param extends IGPGeoserverConnectionParam> IGPGeoserverConnectionParametersBuilder addParams(@Nonnull(when = NEVER) Param... theParams) throws Exception {
         checkArgument(theParams != null, "The Parameter params must not be null.");
-        this.params.putAll(stream(theParams).collect(toMap(k -> k.getKey(), v -> v.getValue())));
+        this.params.putAll(stream(theParams)
+                .filter(Objects::nonNull)
+                .filter(param -> (param.getKey() != null) && !(param.getKey().trim().isEmpty()))
+                .collect(toMap(IGPGeoserverConnectionParam::getKey, IGPGeoserverConnectionParam::getValue, (v1, v2) -> v2, LinkedHashMap::new)));
         return self();
     }
 
@@ -96,7 +104,7 @@ public class GPGeoserverConnectionParametersBuilder implements IGPGeoserverConne
      */
     @Override
     public Map<String, String> build() {
-        return this.params;
+        return unmodifiableMap(this.params);
     }
 
     /**

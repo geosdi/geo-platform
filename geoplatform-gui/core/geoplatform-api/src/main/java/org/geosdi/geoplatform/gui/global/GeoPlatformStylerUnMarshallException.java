@@ -50,7 +50,7 @@ public class GeoPlatformStylerUnMarshallException extends GeoPlatformException
     }
 
     public GeoPlatformStylerUnMarshallException(String message) {
-        this.message = message;
+        super(message);
     }
 
     public GeoPlatformStylerUnMarshallException(Throwable e) {

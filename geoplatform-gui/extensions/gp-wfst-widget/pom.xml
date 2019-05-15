@@ -17,6 +17,20 @@
     <name>Geo-Platform :: == WFS-T Widget</name>
 
     <dependencies>
+
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>map-widget</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>map-widget</artifactId>
+            <classifier>sources</classifier>
+            <version>${project.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-wfs-shared</artifactId>

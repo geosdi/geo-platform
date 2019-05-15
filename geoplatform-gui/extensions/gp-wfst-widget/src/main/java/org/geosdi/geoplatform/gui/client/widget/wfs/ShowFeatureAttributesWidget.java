@@ -56,6 +56,7 @@ import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar.F
 import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.geosdi.geoplatform.gui.puregwt.geocoding.GPGeocodingHandlerManager;
+import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
@@ -69,6 +70,7 @@ public class ShowFeatureAttributesWidget extends GeoPlatformContentPanel {
 
     public static final String ID = WFSWidgetNames.SHOW_FEATURES.name();
     private static final ColumnModel mockColumnModel;
+    private VectorFeature currentFeature;
 
     static {
         mockColumnModel = new ColumnModel(new ArrayList<ColumnConfig>());
@@ -142,7 +144,7 @@ public class ShowFeatureAttributesWidget extends GeoPlatformContentPanel {
     public void reset() {
         store.removeAll();
         super.setVScrollPosition(0);
-        this.mapLayoutWidget.clearMap();
+        this.mapLayoutWidget.eraseFeatures();
     }
 
     private void createStore() {
@@ -170,8 +172,10 @@ public class ShowFeatureAttributesWidget extends GeoPlatformContentPanel {
 
             @Override
             public void handleEvent(BaseEvent be) {
-                mapLayoutWidget.clearMap();
-                mapLayoutWidget.drawFeature(grid.getSelectionModel().getSelectedItem().getVectorFeature());
+                if(currentFeature != null)
+                    mapLayoutWidget.eraseFeature(currentFeature);
+                currentFeature = grid.getSelectionModel().getSelectedItem().getVectorFeature();
+                mapLayoutWidget.drawFeature(currentFeature);
             }
 
         });

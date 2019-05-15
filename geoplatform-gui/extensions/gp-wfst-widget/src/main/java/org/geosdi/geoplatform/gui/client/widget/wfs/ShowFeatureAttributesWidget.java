@@ -35,22 +35,27 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.wfs;
 
+import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.Style;
 import com.extjs.gxt.ui.client.data.ModelKeyProvider;
-import com.extjs.gxt.ui.client.event.ComponentEvent;
-import com.extjs.gxt.ui.client.event.WidgetListener;
+import com.extjs.gxt.ui.client.event.*;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.google.common.collect.Lists;
+import com.google.gwt.core.client.GWT;
 import org.geosdi.geoplatform.connector.wfs.response.AttributeDTO;
+import org.geosdi.geoplatform.gui.client.MapRegistryEnum;
 import org.geosdi.geoplatform.gui.client.model.binder.ILayerSchemaBinder;
 import org.geosdi.geoplatform.gui.client.model.wfs.FeatureDetail;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureStatusBarEvent;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
+import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
 import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar.FeatureStatusBarType;
+import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
+import org.geosdi.geoplatform.gui.puregwt.geocoding.GPGeocodingHandlerManager;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
@@ -75,6 +80,7 @@ public class ShowFeatureAttributesWidget extends GeoPlatformContentPanel {
     private ILayerSchemaBinder layerSchemaBinder;
     private ListStore<FeatureDetail> store;
     private Grid<FeatureDetail> grid;
+    private MapLayoutWidget mapLayoutWidget;
 
     @Inject
     public ShowFeatureAttributesWidget(GPEventBus bus) {
@@ -92,6 +98,8 @@ public class ShowFeatureAttributesWidget extends GeoPlatformContentPanel {
             }
 
         });
+        this.mapLayoutWidget = Registry.get(
+                MapRegistryEnum.MAP_LAYOUT_WIDGET.toString());
     }
 
     public void reconfigureEditorGrid() {
@@ -134,6 +142,7 @@ public class ShowFeatureAttributesWidget extends GeoPlatformContentPanel {
     public void reset() {
         store.removeAll();
         super.setVScrollPosition(0);
+        this.mapLayoutWidget.clearMap();
     }
 
     private void createStore() {
@@ -148,14 +157,26 @@ public class ShowFeatureAttributesWidget extends GeoPlatformContentPanel {
     }
 
     private void createGrid() {
-        grid = new Grid<FeatureDetail>(store, mockColumnModel);
-        grid.setBorders(Boolean.TRUE);
-        grid.setStripeRows(Boolean.TRUE);
-        grid.setColumnLines(Boolean.TRUE);
-        grid.setColumnResize(Boolean.TRUE);
-        grid.setHeight(295);
-        grid.getSelectionModel().setSelectionMode(Style.SelectionMode.SIMPLE);
-        super.add(grid);
+        this.grid = new Grid<FeatureDetail>(store, mockColumnModel);
+        this.grid.setBorders(Boolean.TRUE);
+        this.grid.setStripeRows(Boolean.TRUE);
+        this.grid.setColumnLines(Boolean.TRUE);
+        this.grid.setColumnResize(Boolean.TRUE);
+        this.grid.setHeight(295);
+        this.grid.getSelectionModel().setSelectionMode(Style.SelectionMode.SINGLE);
+
+
+        grid.addListener(Events.CellClick, new Listener<BaseEvent>() {
+
+            @Override
+            public void handleEvent(BaseEvent be) {
+                mapLayoutWidget.clearMap();
+                mapLayoutWidget.drawFeature(grid.getSelectionModel().getSelectedItem().getVectorFeature());
+            }
+
+        });
+
+        super.add(this.grid);
     }
 
     private ColumnModel prepareColumnModel() {
@@ -193,9 +214,9 @@ public class ShowFeatureAttributesWidget extends GeoPlatformContentPanel {
 
     public void maskAttributes(boolean mask) {
         if (mask) {
-            grid.mask("Retrieving feature attributes");
+            this.grid.mask("Retrieving feature attributes");
         } else {
-            grid.unmask();
+            this.grid.unmask();
         }
     }
 

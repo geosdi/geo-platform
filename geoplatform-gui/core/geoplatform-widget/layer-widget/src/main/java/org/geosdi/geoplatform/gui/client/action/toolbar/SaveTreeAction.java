@@ -83,8 +83,7 @@ public class SaveTreeAction extends ToolbarLayerTreeAction
         LayerHandlerManager.addHandler(GPPeekCacheEventHandler.TYPE, this);
 
         this.savePlugin = savePlugin;
-        Boolean permission = GPAccountLogged.getInstance().
-                hasComponentPermission(savePlugin.getId());
+        Boolean permission = GPAccountLogged.getInstance().hasComponentPermission(savePlugin.getId());
         if (permission) { // Observ only if the pemission is true
             IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
             mementoSave.getObservable().addObserver(this);

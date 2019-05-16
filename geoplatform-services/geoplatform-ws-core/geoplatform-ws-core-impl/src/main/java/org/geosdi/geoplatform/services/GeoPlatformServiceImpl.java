@@ -716,11 +716,9 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public LongListStore saveAddedLayersAndTreeModifications(
-            WSAddLayersAndTreeModificationsRequest addLayersRequest)
+    public LongListStore saveAddedLayersAndTreeModifications(WSAddLayersAndTreeModificationsRequest addLayersRequest)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        return gpLayerDelegate.saveAddedLayersAndTreeModifications(
-                addLayersRequest);
+        return gpLayerDelegate.saveAddedLayersAndTreeModifications(addLayersRequest);
     }
 
     @Override

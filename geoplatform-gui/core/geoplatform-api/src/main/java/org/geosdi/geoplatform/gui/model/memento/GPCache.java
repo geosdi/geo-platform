@@ -45,7 +45,7 @@ import java.util.logging.Logger;
 public class GPCache<T> extends ArrayList<T> {
 
     private static final long serialVersionUID = 6490859516090670592L;
-    protected final static Logger logger = Logger.getLogger("");
+    protected final static Logger logger = Logger.getLogger("GPCache");
 
     /**
      *

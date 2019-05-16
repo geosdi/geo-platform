@@ -47,6 +47,8 @@ import org.geosdi.geoplatform.response.*;
 import org.geosdi.geoplatform.response.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.response.collection.LongListStore;
 import org.geosdi.geoplatform.services.development.EntityCorrectness;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -56,6 +58,7 @@ import java.util.List;
 import static java.lang.Boolean.TRUE;
 import static java.util.stream.Collectors.toList;
 import static org.geosdi.geoplatform.response.ShortLayerDTO.convertToShortLayerDTOList;
+import static org.geosdi.geoplatform.services.development.EntityCorrectness.checkLayer;
 
 /**
  * Layer service delegate.
@@ -63,8 +66,10 @@ import static org.geosdi.geoplatform.response.ShortLayerDTO.convertToShortLayerD
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 @Component(value = "gpLayerDelegate")
-public class GPLayerDelegate implements LayerDelegate {
+class GPLayerDelegate implements LayerDelegate {
 
+    private static final Logger logger = LoggerFactory.getLogger(GPLayerDelegate.class);
+    //
     @Autowired
     private GPProjectDAO projectDao;
     @Autowired
@@ -73,13 +78,12 @@ public class GPLayerDelegate implements LayerDelegate {
     private GPLayerDAO layerDao;
 
     @Override
-    public Long insertLayer(InsertLayerRequest layerRequest) throws
-            IllegalParameterFault {
+    public Long insertLayer(InsertLayerRequest layerRequest) throws IllegalParameterFault {
         if (layerRequest == null) {
             throw new IllegalParameterFault("The InsertLayerRequest must not be null.");
         }
         GPLayer layer = layerRequest.getLayer();
-        EntityCorrectness.checkLayer(layer); // TODO assert
+        checkLayer(layer); // TODO assert
         layerDao.persist(layer);
         return layer.getId();
     }
@@ -87,7 +91,7 @@ public class GPLayerDelegate implements LayerDelegate {
     @Override
     public Long updateRasterLayer(GPRasterLayer layer)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        EntityCorrectness.checkLayer(layer); // TODO assert
+        checkLayer(layer); // TODO assert
         GPRasterLayer orig = (GPRasterLayer) this.getLayerDetail(layer.getId());
         orig.setLayerInfo(layer.getLayerInfo());
         this.updateLayer(orig, layer);
@@ -98,7 +102,7 @@ public class GPLayerDelegate implements LayerDelegate {
     @Override
     public Long updateVectorLayer(GPVectorLayer layer)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        EntityCorrectness.checkLayer(layer); // TODO assert
+        checkLayer(layer); // TODO assert
         GPVectorLayer orig = (GPVectorLayer) this.getLayerDetail(layer.getId());
         orig.setGeometry(layer.getGeometry());
         this.updateLayer(orig, layer);
@@ -139,7 +143,7 @@ public class GPLayerDelegate implements LayerDelegate {
         EntityCorrectness.checkFolderLog(parent); // TODO assert
         layer.setFolder(parent);
 
-        EntityCorrectness.checkLayer(layer); // TODO assert
+        checkLayer(layer); // TODO assert
 
         int newPosition = layer.getPosition();
         int increment = 1;
@@ -153,8 +157,7 @@ public class GPLayerDelegate implements LayerDelegate {
     }
 
     @Override
-    public LongListStore saveAddedLayersAndTreeModifications(
-            WSAddLayersAndTreeModificationsRequest addLayersRequest)
+    public LongListStore saveAddedLayersAndTreeModifications(WSAddLayersAndTreeModificationsRequest addLayersRequest)
             throws ResourceNotFoundFault, IllegalParameterFault {
         Long projectID = addLayersRequest.getProjectID();
         Long parentID = addLayersRequest.getParentFolderID();
@@ -180,7 +183,7 @@ public class GPLayerDelegate implements LayerDelegate {
         for (GPLayer layer : layers) {
             layer.setProject(project);
             layer.setFolder(parent);
-            EntityCorrectness.checkLayer(layer); // TODO assert
+            checkLayer(layer); // TODO assert
         }
 
         int newPosition = layers.get(layers.size() - 1).getPosition();
@@ -371,24 +374,21 @@ public class GPLayerDelegate implements LayerDelegate {
     }
 
     @Override
-    public GPRasterLayerResponse getRasterLayer(Long layerID) throws
-            ResourceNotFoundFault {
+    public GPRasterLayerResponse getRasterLayer(Long layerID) throws ResourceNotFoundFault {
         GPLayer layer = this.getLayerDetail(layerID);
         GPRasterLayer raster = this.rasterLayer(layer);
         return new GPRasterLayerResponse(raster);
     }
 
     @Override
-    public GPVectorLayerResponse getVectorLayer(Long layerID) throws
-            ResourceNotFoundFault {
+    public GPVectorLayerResponse getVectorLayer(Long layerID) throws ResourceNotFoundFault {
         GPLayer layer = this.getLayerDetail(layerID);
         GPVectorLayer vector = this.vectorLayer(layer);
         return new GPVectorLayerResponse(vector);
     }
 
     @Override
-    public ShortLayerDTO getShortLayer(Long layerID) throws
-            ResourceNotFoundFault {
+    public ShortLayerDTO getShortLayer(Long layerID) throws ResourceNotFoundFault {
         GPLayer layer = this.getLayerDetail(layerID);
         ShortLayerDTO layerDTO = new ShortLayerDTO(layer);
         return layerDTO;

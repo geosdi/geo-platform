@@ -108,6 +108,9 @@ public class ShowFeaturesWidget extends GeoPlatformWindow
     @Override
     public void initSize() {
         super.setSize(1000, 400);
+        super.setPosition(super.getParent().getOffsetWidth()-1000,
+                super.getParent().getOffsetHeight()- 400);
+
         super.setHeadingHtml(i18n.labelShowFeature(size));
         super.setIcon(AbstractImagePrototype.create(BasicWidgetResources.ICONS.vector()));
     }
@@ -165,6 +168,7 @@ public class ShowFeaturesWidget extends GeoPlatformWindow
         super.afterShow();
         this.statusBar.setBusy("Loading Features");
         this.attributesWidget.reconfigureEditorGrid();
+        super.setZIndex(100000000);
     }
 
     @Override

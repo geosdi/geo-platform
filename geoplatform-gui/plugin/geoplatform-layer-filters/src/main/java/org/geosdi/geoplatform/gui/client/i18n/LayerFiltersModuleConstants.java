@@ -283,4 +283,9 @@ public interface LayerFiltersModuleConstants extends Constants {
     @DefaultStringValue("Unique Value")
     String CQLFilterAdvancedTab_uniqueOperatorTooltipText();
 
+    @DefaultStringValue("Guide to create CQL Filter")
+    String CQLFilterAdvancedTab_cqlGuideTooltipText();
+
+    @DefaultStringValue("CQL Filter Guide")
+    String CQLFilterAdvancedTab_cqlGuideHeaderText();
 }

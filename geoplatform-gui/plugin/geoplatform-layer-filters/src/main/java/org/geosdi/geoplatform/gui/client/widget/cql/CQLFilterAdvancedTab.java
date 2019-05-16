@@ -46,6 +46,8 @@ import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import com.extjs.gxt.ui.client.widget.form.TextArea;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.i18n.LayerFiltersModuleConstants;
 import org.geosdi.geoplatform.gui.client.model.GPUniqueValues;
 import org.geosdi.geoplatform.gui.client.widget.cql.button.BBOXCQLButton;
@@ -78,6 +80,7 @@ public class CQLFilterAdvancedTab extends GeoPlatformTabItem implements ICQLFilt
     private TextArea filterTextArea;
     private GPTreePanel<GPBeanTreeModel> treePanel;
     private Boolean isString;
+    private GuideFilterWidget guideFilterWidget;
 
     public CQLFilterAdvancedTab(String title, GPTreePanel<GPBeanTreeModel> treePanel) {
         super(title, Boolean.TRUE);
@@ -94,7 +97,7 @@ public class CQLFilterAdvancedTab extends GeoPlatformTabItem implements ICQLFilt
         setSize(CQLFilterTabWidget.TAB_WIDGET_WIDTH,
                 CQLFilterTabWidget.TAB_WIDGET_HEIGHT);
         this.filterTextArea = new TextArea();
-
+        this.guideFilterWidget = new GuideFilterWidget(Boolean.TRUE);
         HorizontalPanel uniqueValuePanel = new HorizontalPanel();
         uniqueValuePanel.setSpacing(2);
         final CQLUniqueValuesComboBox uniqueValueComboBox = new CQLUniqueValuesComboBox(this.treePanel);
@@ -280,6 +283,9 @@ public class CQLFilterAdvancedTab extends GeoPlatformTabItem implements ICQLFilt
         doesNotExistOperator.setTitle(LayerFiltersModuleConstants.INSTANCE.CQLFilterAdvancedTab_doesNotExistOperatorTooltipText());
         symbolPanel.add(doesNotExistOperator);
 
+
+
+
         HorizontalPanel spatialPanel = new HorizontalPanel();
         spatialPanel.setSpacing(2);
         BetweenCQLButton betweenCQLButton = new BetweenCQLButton(filterTextArea);
@@ -306,6 +312,16 @@ public class CQLFilterAdvancedTab extends GeoPlatformTabItem implements ICQLFilt
         spatialPanel.add(excludeOperator);
         TimeCQLButton timeCQLButton = new TimeCQLButton(filterTextArea);
         spatialPanel.add(timeCQLButton);
+
+        Button infoButton = new Button("",
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.info()), new SelectionListener<ButtonEvent>() {
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                guideFilterWidget.show();
+            }
+        });
+        infoButton.setTitle(LayerFiltersModuleConstants.INSTANCE.CQLFilterAdvancedTab_cqlGuideTooltipText());
+        spatialPanel.add(infoButton);
 
         super.add(symbolPanel);
         super.add(spatialPanel);

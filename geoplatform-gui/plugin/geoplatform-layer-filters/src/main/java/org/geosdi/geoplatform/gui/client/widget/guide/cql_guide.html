@@ -1,0 +1,197 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+    <title>Untitled Document</title>
+</head>
+<link rel="stylesheet" href="https://docs.geoserver.org/stable/en/user/_static/default.css" type="text/css" />
+<!-- <link rel="stylesheet" href="https://docs.geoserver.org/stable/en/user/_static/blueprint/screen.css" type="text/css" media="screen, projection" />-->
+<!--  <link rel="stylesheet" href="https://docs.geoserver.org/stable/en/user/_static/blueprint/print.css" type="text/css" media="print" /> -->
+<!--  &lt;!&ndash;[if IE]>-->
+<!--  <link rel="stylesheet" href="https://docs.geoserver.org/stable/en/user/_static/blueprint/ie.css" type="text/css" media="screen, projection" />-->
+<!--  <![endif]&ndash;&gt;-->
+<!--  <link rel="stylesheet" href="https://docs.geoserver.org/stable/en/user/_static/default.css" type="text/css" />-->
+<!--  <link rel="stylesheet" href="https://docs.geoserver.org/stable/en/user/_static/pygments.css" type="text/css" />-->
+<!--  <style>-->
+<!--  body{ background-color: white !important; color:black !important; font-size:24px !important; border-bottom: 2px solid #39C  !important;;}-->
+<!--  </style>-->
+
+<body>
+
+<body class="tutorials/cql/cql_tutorial">
+
+<div id="main1" style="background-color:#FFF">
+    <div class="wrap selfclear">
+        <div id="content">
+
+
+            <div class="section" id="cql-and-ecql">
+                <div class="section" id="getting-started">
+                    <h2>Intro<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
+                    <p>
+
+                        Questo tutorial introduce il linguaggio CQL tramite esempi.</p>
+
+                </div>
+
+                <div class="section" id="simple-comparisons">
+                    <h2>Confronti Semplici<a class="headerlink" href="#simple-comparisons"
+                                             title="Permalink to this headline">¶</a></h2>
+                    <p>In CQL le operazioni e i confronti aritmetici sono espressi tramite testo semplice.
+                        <code class="docutils literal"><span class="pre">PERSONS</span> <span class="pre">&gt;</span>
+                            <span class="pre">15000000</span></code> selezionerà gli stati che hanno più di 15 milioni
+                        di abitanti:</p>
+                    <div class="figure align-center" id="id2">
+                        <img alt="https://docs.geoserver.org/stable/en/user/_images/more15M.png"
+                             src="https://docs.geoserver.org/stable/en/user/_images/more15M.png"/>
+                        <p class="caption"><span class="caption-text"><em>PERSONS &gt; 15000000</em></span></p>
+                    </div>
+
+                    <p>L'elenco completo degli operatori di confronto è: <code class="docutils literal"><span
+                            class="pre">=</span></code>, <code class="docutils literal"><span
+                            class="pre">&lt;&gt;</span></code>, <code class="docutils literal"><span
+                            class="pre">&gt;</span></code>, <code class="docutils literal"><span
+                            class="pre">&gt;=</span></code>, <code class="docutils literal"><span
+                            class="pre">&lt;</span></code>, <code class="docutils literal"><span
+                            class="pre">&lt;=</span></code>.</p>
+                    <p>Per selezionare un intervallo di valori è possibile utilizzare l'operatore BETWEEN: <code
+                            class="docutils literal"><span class="pre">PERSONS</span> <span class="pre">BETWEEN</span>
+                        <span class="pre">1000000</span> <span class="pre">AND</span> <span
+                                class="pre">3000000</span></code>:</p>
+                    <div class="figure align-center" id="id3">
+                        <img alt="https://docs.geoserver.org/stable/en/user/_images/between.png"
+                             src="https://docs.geoserver.org/stable/en/user/_images/between.png"/>
+                        <p class="caption"><span
+                                class="caption-text"><em>PERSONS BETWEEN 1000000 AND 3000000</em></span></p>
+                    </div>
+                    <p>Gli operatori di confronto supportano anche i valori di testo. Ad esempio, per selezionare solo
+                        lo stato della California, il filtro è
+                        <code class="docutils literal"><span class="pre">STATE_NAME</span> <span class="pre">=</span>
+                            <span class="pre">'California'</span></code>.
+                        È possibile effettuare confronti di testo più generali utilizzando l'operatore <code
+                                class="docutils literal"><span class="pre">LIKE</span></code> . <code
+                                class="docutils literal"><span class="pre">STATE_NAME</span> <span
+                                class="pre">LIKE</span> <span class="pre">'N%'</span></code> strae tutti gli stati che
+                        iniziano con una "N":</p>
+                    <div class="figure align-center" id="id4">
+                        <img alt="https://docs.geoserver.org/stable/en/user/_images/startn.png"
+                             src="https://docs.geoserver.org/stable/en/user/_images/startn.png"/>
+                        <p class="caption"><span class="caption-text"><em>STATE_NAME LIKE ‘N%’</em></span></p>
+                    </div>
+                    <p>È anche possibile confrontare due attributi tra loro. <code class="docutils literal"><span
+                            class="pre">MALE</span> <span class="pre">&gt;</span> <span class="pre">FEMALE</span></code>
+                        seleziona gli stati in cui la popolazione maschile supera quella femminile:</p>
+                    <div class="figure align-center" id="id5">
+                        <img alt="https://docs.geoserver.org/stable/en/user/_images/malefemale.png"
+                             src="https://docs.geoserver.org/stable/en/user/_images/malefemale.png"/>
+                        <p class="caption"><span class="caption-text"><em>MALE &gt; FEMALE</em></span></p>
+                    </div>
+                    <p>Le espressioni aritmetiche possono essere calcolate usando gli operatori <code
+                            class="docutils literal"><span class="pre">+,</span> <span class="pre">-,</span> <span
+                            class="pre">*,</span> <span class="pre">/</span></code>.
+                        Il filtro <code class="docutils literal"><span class="pre">UNEMPLOY</span> <span
+                                class="pre">/</span> <span class="pre">(EMPLOYED</span> <span class="pre">+</span> <span
+                                class="pre">UNEMPLOY)</span> <span class="pre">&gt;</span> <span class="pre">0.07</span></code>
+                        eleziona tutti gli stati il ​​cui tasso di disoccupazione è superiore al 7%</p>
+                    <div class="figure align-center" id="id6">
+                        <img alt="https://docs.geoserver.org/stable/en/user/_images/employ.png"
+                             src="https://docs.geoserver.org/stable/en/user/_images/employ.png"/>
+                        <p class="caption"><span
+                                class="caption-text"><em>UNEMPLOY / (EMPLOYED + UNEMPLOY) &gt; 0.07</em></span></p>
+                    </div>
+                </div>
+                <div class="section" id="id-and-list-comparisons">
+                    <h2>Confronto di Identificativi ed Elenchi<a class="headerlink" href="#id-and-list-comparisons"
+                                                                 title="Permalink to this headline">¶</a></h2>
+                    <p>Se vogliamo estrarre solo gli stati con ID di caratteristiche specifiche, possiamo usare
+                        l'operatore <code class="docutils literal"><span class="pre">IN</span></code> senza specificare
+                        alcun attributo, come in <code class="docutils literal"><span class="pre">IN</span> <span
+                                class="pre">('states.1',</span> <span class="pre">'states.12')</span></code>:</p>
+                    <div class="figure align-center" id="id7">
+                        <img alt="https://docs.geoserver.org/stable/en/user/_images/idfilter.png"
+                             src="https://docs.geoserver.org/stable/en/user/_images/idfilter.png"/>
+                        <p class="caption"><span class="caption-text"><em>IN (‘states.1’, ‘states.12’)</em></span></p>
+                    </div>
+                    <p>Se invece vogliamo estrarre gli stati il ​​cui nome è in una lista data, possiamo usare
+                        l'operatore <code class="docutils literal"><span class="pre">IN</span></code> specificando un
+                        nome di attributo, come in <code class="docutils literal"><span class="pre">STATE_NAME</span>
+                            <span class="pre">IN</span> <span class="pre">('New</span> <span class="pre">York',</span>
+                            <span class="pre">'California',</span> <span class="pre">'Montana',</span> <span
+                                    class="pre">'Texas')</span></code>:</p>
+                    <div class="figure align-center" id="id8">
+                        <img alt="https://docs.geoserver.org/stable/en/user/_images/statenames.png"
+                             src="https://docs.geoserver.org/stable/en/user/_images/statenames.png"/>
+                        <p class="caption"><span class="caption-text"><em>STATE_NAME IN (‘New York’, ‘California’, ‘Montana’, ‘Texas’)</em></span>
+                        </p>
+                    </div>
+                </div>
+                <div class="section" id="filter-functions">
+                    <h2>Funzioni filtro<a class="headerlink" href="#filter-functions"
+                                          title="Permalink to this headline">¶</a></h2>
+                    <p>CQL / ECQL può utilizzare una qualsiasi delle funzioni di filtro disponibili in GeoServer. Ciò
+                        aumenta notevolmente la potenza delle espressioni CQL.
+                    </p>
+                    <p>
+                        Ad esempio, supponiamo di voler trovare tutti gli stati il ​​cui nome contiene una "m",
+                        indipendentemente dalle maiuscole, possiamo usare <code class="docutils literal"><span
+                            class="pre">strToLowerCase</span></code> per trasformare tutti i nomi di stato in minuscolo
+                        e quindi utilizzare un confronto LIKE: <code class="docutils literal"><span class="pre">strToLowerCase(STATE_NAME)</span>
+                        <span class="pre">like</span> <span class="pre">'%m%'</span></code>:</p>
+                    <div class="figure align-center" id="id9">
+                        <img alt="https://docs.geoserver.org/stable/en/user/_images/mstates.png"
+                             src="https://docs.geoserver.org/stable/en/user/_images/mstates.png"/>
+                        <p class="caption"><span
+                                class="caption-text"><em>strToLowerCase(STATE_NAME) like ‘%m%’</em></span></p>
+                    </div>
+                </div>
+                <div class="section" id="geometric-filters">
+                    <h2>Filtri Geometrici<a class="headerlink" href="#geometric-filters"
+                                            title="Permalink to this headline">¶</a></h2>
+                    <p>CQL offre un set completo di funzionalità di filtro geometrico. Supponiamo, ad esempio, di
+                        visualizzare solo gli stati che intersecano il riquadro di delimitazione (-90,40, -60,45). Il
+                        filtro sarà <code class="docutils literal"><span class="pre">BBOX(the_geom,</span> <span
+                                class="pre">-90,</span> <span class="pre">40,</span> <span class="pre">-60,</span> <span
+                                class="pre">45)</span></code></p>
+                    <div class="figure align-center" id="id10">
+                        <img alt="https://docs.geoserver.org/stable/en/user/_images/bbox.png"
+                             src="https://docs.geoserver.org/stable/en/user/_images/bbox.png"/>
+                        <p class="caption"><span class="caption-text"><em>BBOX(the_geom, -90, 40, -60, 45)</em></span>
+                        </p>
+                    </div>
+                    <p>Al contrario, è possibile selezionare gli stati che <em>non</em> intersecano il riquadro di
+                        delimitazione con il filtro: <code class="docutils literal"><span
+                                class="pre">DISJOINT(the_geom,</span> <span class="pre">POLYGON((-90</span> <span
+                                class="pre">40,</span> <span class="pre">-90</span> <span class="pre">45,</span> <span
+                                class="pre">-60</span> <span class="pre">45,</span> <span class="pre">-60</span> <span
+                                class="pre">40,</span> <span class="pre">-90</span> <span
+                                class="pre">40)))</span></code>:</p>
+                    <div class="figure align-center" id="id11">
+                        <img alt="https://docs.geoserver.org/stable/en/user/_images/disjoint.png"
+                             src="https://docs.geoserver.org/stable/en/user/_images/disjoint.png"/>
+                        <p class="caption"><span class="caption-text"><em>DISJOINT(the_geom, POLYGON((-90 40, -90 45, -60 45, -60 40, -90 40)))</em></span>
+                        </p>
+                    </div>
+                    <p>L'elenco completo dei predicati geometrici è: <code class="docutils literal"><span class="pre">EQUALS</span></code>,
+                        <code class="docutils literal"><span class="pre">DISJOINT</span></code>, <code
+                                class="docutils literal"><span class="pre">INTERSECTS</span></code>, <code
+                                class="docutils literal"><span class="pre">TOUCHES</span></code>, <code
+                                class="docutils literal"><span class="pre">CROSSES</span></code>, <code
+                                class="docutils literal"><span class="pre">WITHIN</span></code>, <code
+                                class="docutils literal"><span class="pre">CONTAINS</span></code>, <code
+                                class="docutils literal"><span class="pre">OVERLAPS</span></code>, <code
+                                class="docutils literal"><span class="pre">RELATE</span></code>, <code
+                                class="docutils literal"><span class="pre">DWITHIN</span></code>, <code
+                                class="docutils literal"><span class="pre">BEYOND</span></code>.</p>
+                </div>
+            </div>
+
+
+        </div><!-- /#content> -->
+
+    </div><!-- /.wrap> -->
+</div><!-- /#main -->
+
+
+</body>
+</html>

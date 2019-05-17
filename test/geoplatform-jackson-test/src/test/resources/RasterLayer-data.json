@@ -23,7 +23,7 @@
         "cached": false,
         "singleTileRequest": false,
         "opacity": 1.0,
-        "styles": [],
+        "styles": null,
         "layerInfo": {
             "queryable": false,
             "keywords": "keyword_test_rs"

@@ -1,62 +1,62 @@
 {
-    "InsertLayerRequest": {
-        "layer": {
-            "type": "GPRaster",
-            "id": null,
-            "title": "raster_1_rs",
-            "name": "name_raster_1_rs",
-            "alias": null,
-            "abstractText": "abstract_raster_1_rs",
-            "urlServer": "http://www.geosdi.org/test_rs",
-            "srs": "Geographic coordinate system",
-            "cqlFilter": null,
-            "timeFilter": null,
-            "bbox": {
-                "minX": 10.0,
-                "minY": 10.0,
-                "maxX": 20.0,
-                "maxY": 20.0
-            },
-            "layerType": "WMS",
-            "position": 5,
-            "checked": false,
-            "shared": false,
-            "cached": false,
-            "singleTileRequest": false,
-            "opacity": 1.0,
-            "styles": [],
-            "layerInfo": {
-                "queryable": false,
-                "keywords": "keyword_test_rs"
-            },
-            "maxScale": null,
-            "minScale": null,
-            "folder": {
-                "id": 16250,
-                "name": "rootFolderA",
-                "parent": null,
-                "project": {
-                    "id": 6250,
-                    "name": "project_test_rs",
-                    "numberOfElements": 2,
-                    "creationDate": "2014-12-19T18:34:11.762+0100",
-                    "version": 1,
-                    "shared": false
-                },
-                "numberOfDescendants": 0,
-                "position": 2,
-                "checked": false,
-                "shared": false,
-                "expanded": false
-            },
-            "project": {
-                "id": 6250,
-                "name": "project_test_rs",
-                "numberOfElements": 2,
-                "creationDate": "2014-12-19T18:34:11.762+0100",
-                "version": 1,
-                "shared": false
-            }
-        }
+  "InsertLayerRequest": {
+    "layer": {
+      "type": "GPRaster",
+      "id": null,
+      "title": "raster_1_rs",
+      "name": "name_raster_1_rs",
+      "alias": null,
+      "abstractText": "abstract_raster_1_rs",
+      "urlServer": "http://www.geosdi.org/test_rs",
+      "srs": "Geographic coordinate system",
+      "cqlFilter": null,
+      "timeFilter": null,
+      "bbox": {
+        "minX": 10.0,
+        "minY": 10.0,
+        "maxX": 20.0,
+        "maxY": 20.0
+      },
+      "layerType": "WMS",
+      "position": 5,
+      "checked": false,
+      "shared": false,
+      "cached": false,
+      "singleTileRequest": false,
+      "opacity": 1.0,
+      "styles": "pippo.sld,test.sld",
+      "layerInfo": {
+        "queryable": false,
+        "keywords": "keyword_test_rs"
+      },
+      "maxScale": null,
+      "minScale": null,
+      "folder": {
+        "id": 16250,
+        "name": "rootFolderA",
+        "parent": null,
+        "project": {
+          "id": 6250,
+          "name": "project_test_rs",
+          "numberOfElements": 2,
+          "creationDate": "2014-12-19T18:34:11.762+0100",
+          "version": 1,
+          "shared": false
+        },
+        "numberOfDescendants": 0,
+        "position": 2,
+        "checked": false,
+        "shared": false,
+        "expanded": false
+      },
+      "project": {
+        "id": 6250,
+        "name": "project_test_rs",
+        "numberOfElements": 2,
+        "creationDate": "2014-12-19T18:34:11.762+0100",
+        "version": 1,
+        "shared": false
+      }
     }
+  }
 }

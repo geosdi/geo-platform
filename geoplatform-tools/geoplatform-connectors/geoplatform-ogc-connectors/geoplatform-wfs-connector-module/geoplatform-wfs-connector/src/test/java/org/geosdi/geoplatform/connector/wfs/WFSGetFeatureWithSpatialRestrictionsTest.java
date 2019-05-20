@@ -6,7 +6,6 @@ import org.geosdi.geoplatform.gui.shared.bean.BBox;
 import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
 import org.geosdi.geoplatform.xml.wfs.v110.FeatureCollectionType;
 import org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType;
-import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 
@@ -14,6 +13,7 @@ import javax.xml.namespace.QName;
 import java.io.StringReader;
 import java.util.Arrays;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
@@ -33,7 +33,7 @@ public class WFSGetFeatureWithSpatialRestrictionsTest extends WFSTestConfigurato
         request.setSRS("EPSG:4326");
         logger.info("######################\n{}\n", request.showRequestAsString());
         FeatureCollectionType response = request.getResponse();
-        Assert.assertTrue(response.getNumberOfFeatures().intValue() == 4);
+        assertTrue(response.getNumberOfFeatures().intValue() == 4);
         logger.info("#############################a_stateQueryBboxTest#ResponseAsString {}\n", request.formatResponseAsString(2));
     }
 
@@ -78,7 +78,7 @@ public class WFSGetFeatureWithSpatialRestrictionsTest extends WFSTestConfigurato
         request.setSRS("EPSG:4326");
         logger.info("######################\n{}\n", request.showRequestAsString());
         FeatureCollectionType response = request.getResponse();
-        Assert.assertTrue(response.getNumberOfFeatures().intValue() == 3);
+        assertTrue(response.getNumberOfFeatures().intValue() == 3);
         logger.info("#############################a_stateQueryBboxTest#ResponseAsString {}\n", request.formatResponseAsString(2));
     }
 
@@ -123,7 +123,7 @@ public class WFSGetFeatureWithSpatialRestrictionsTest extends WFSTestConfigurato
         request.setSRS("EPSG:4326");
         logger.info("######################\n{}\n", request.showRequestAsString());
         FeatureCollectionType response = request.getResponse();
-        Assert.assertTrue(response.getNumberOfFeatures().intValue() == 47);
+        assertTrue(response.getNumberOfFeatures().intValue() == 46);
         logger.info("#############################c_stateQueryRestrictionsNotInBboxTest#ResponseAsString {}\n", request.formatResponseAsString(2));
     }
 
@@ -154,7 +154,7 @@ public class WFSGetFeatureWithSpatialRestrictionsTest extends WFSTestConfigurato
                         "</QueryDTO>"), QueryDTO.class));
         logger.info("######################\n{}\n", request.showRequestAsString());
         FeatureCollectionType response = request.getResponse();
-        Assert.assertTrue(response.getNumberOfFeatures().intValue() == 24);
+        assertTrue(response.getNumberOfFeatures().intValue() == 23);
         logger.info("#############################d_stateQueryRestrictionsNotTest#ResponseAsString {}\n", request.formatResponseAsString(2));
     }
 

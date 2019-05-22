@@ -1,42 +1,40 @@
 /**
- *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
- *
- *   Copyright (C) 2008-2019 geoSDI Group (CNR IMAA - Potenza - ITALY).
- *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
- *
- *   ====================================================================
- *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
- *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * geo-platform
+ * Rich webgis framework
+ * http://geo-platform.org
+ * ====================================================================
+ * <p>
+ * Copyright (C) 2008-2019 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * <p>
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version. This program is distributed in the
+ * hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License
+ * for more details. You should have received a copy of the GNU General
+ * Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * <p>
+ * ====================================================================
+ * <p>
+ * Linking this library statically or dynamically with other modules is
+ * making a combined work based on this library. Thus, the terms and
+ * conditions of the GNU General Public License cover the whole combination.
+ * <p>
+ * As a special exception, the copyright holders of this library give you permission
+ * to link this library with independent modules to produce an executable, regardless
+ * of the license terms of these independent modules, and to copy and distribute
+ * the resulting executable under terms of your choice, provided that you also meet,
+ * for each linked independent module, the terms and conditions of the license of
+ * that module. An independent module is a module which is not derived from or
+ * based on this library. If you modify this library, you may extend this exception
+ * to your version of the library, but you are not obligated to do so. If you do not
+ * wish to do so, delete this exception statement from your version.
  */
 package org.geosdi.geoplatform.experimental.openam.support.config.connector.secure;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.base.Preconditions;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -65,6 +63,8 @@ import javax.annotation.Resource;
 import java.net.URI;
 import java.net.URLDecoder;
 
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 import static org.geosdi.geoplatform.experimental.openam.api.connector.request.parameter.RequestParameter.RequestParameterType.ACTION_LOGOUT;
 import static org.geosdi.geoplatform.experimental.openam.support.connector.request.BaseOpenAMRequest.OpenAMRequestType.AUTHENTICATE;
 import static org.geosdi.geoplatform.experimental.openam.support.connector.request.BaseOpenAMRequest.OpenAMRequestType.LOGOUT;
@@ -92,7 +92,7 @@ public abstract class OpenAMAuthorizedConnector implements BaseOpenAMConnector {
             .configure(GPJsonIncludeFeature.NON_NULL).getDefaultMapper();
 
     protected OpenAMAuthorizedConnector(GPConnectorSettings theOpenAMConnectorSettings) {
-        Preconditions.checkNotNull(theOpenAMConnectorSettings, "The OpenAMConnectorSettings must not be null.");
+        checkNotNull(theOpenAMConnectorSettings, "The OpenAMConnectorSettings must not be null.");
         this.openAMConnectorSettings = theOpenAMConnectorSettings;
         PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager();
         cm.setMaxTotal(this.openAMConnectorSettings.getMaxTotalConnections());
@@ -110,13 +110,11 @@ public abstract class OpenAMAuthorizedConnector implements BaseOpenAMConnector {
      */
     @Override
     public IOpenAMAuthenticate authenticate() throws Exception {
-        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@TRYING TO AUTHENTICATE WITH " + "OPENAM_CONNECTOR_SETTINGS : {}\n",
-                this.openAMConnectorSettings);
+        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@TRYING TO AUTHENTICATE WITH " + "OPENAM_CONNECTOR_SETTINGS : {}\n", this.openAMConnectorSettings);
         IOpenAMAuthenticateRequest authenticateRequest = this.openAMRequestMediator.getRequest(AUTHENTICATE);
         URI authenticateURI = this.buildURI(openAMConnectorSettings, authenticateRequest).build();
 
-        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@OPENAM_AUTHENTICATE_TOKEN_CONNECTOR_URI : {}\n",
-                URLDecoder.decode(authenticateURI.toString(), "UTF-8"));
+        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@OPENAM_AUTHENTICATE_TOKEN_CONNECTOR_URI : {}\n", URLDecoder.decode(authenticateURI.toString(), "UTF-8"));
 
         HttpPost httpPost = new HttpPost(authenticateURI);
         httpPost.addHeader("Content-Type", "application/json");
@@ -142,13 +140,10 @@ public abstract class OpenAMAuthorizedConnector implements BaseOpenAMConnector {
      */
     @Override
     public IOpenAMAuthenticate authenticate(String userName, String password) throws Exception {
-        Preconditions.checkArgument((userName != null) && !(userName.isEmpty()), "The Parameter UserName must " +
-                "not be null or an Empty String.");
-        Preconditions.checkArgument((password != null) && !(password.isEmpty()), "The Parameter Password must " +
-                "not be null or an Empty String.");
+        checkArgument((userName != null) && !(userName.isEmpty()), "The Parameter UserName must not be null or an Empty String.");
+        checkArgument((password != null) && !(password.isEmpty()), "The Parameter Password must not be null or an Empty String.");
 
-        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@TRYING TO AUTHENTICATE WITH " + "OPENAM_CONNECTOR_SETTINGS : {}\n",
-                this.openAMConnectorSettings);
+        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@TRYING TO AUTHENTICATE WITH " + "OPENAM_CONNECTOR_SETTINGS : {}\n", this.openAMConnectorSettings);
         IOpenAMAuthenticateRequest authenticateRequest = this.openAMRequestMediator.getRequest(AUTHENTICATE);
         URI authenticateURI = this.buildURI(openAMConnectorSettings, authenticateRequest).build();
 
@@ -178,14 +173,12 @@ public abstract class OpenAMAuthorizedConnector implements BaseOpenAMConnector {
      */
     @Override
     public IOpenAMLogout logout(String tokenId) throws Exception {
-        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@TRYING TO LOGOUT WITH " + "OPENAM_CONNECTOR_SETTINGS : {} " +
-                " and tokenId : {}\n", this.openAMConnectorSettings, tokenId);
+        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@TRYING TO LOGOUT WITH " + "OPENAM_CONNECTOR_SETTINGS : {}  and tokenId : {}\n", this.openAMConnectorSettings, tokenId);
         OpenAMLogoutRequest openAMLogoutRequest = this.openAMRequestMediator.getRequest(LOGOUT);
         URI logoutURI = openAMLogoutRequest.addRequestParameter(this.buildURI(openAMConnectorSettings,
                 openAMLogoutRequest), this.requestParameterMediator.getRequest(ACTION_LOGOUT)).build();
 
-        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@OPENAM_LOGOUT_CONNECTOR_URI : {}\n",
-                URLDecoder.decode(logoutURI.toString(), "UTF-8"));
+        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@OPENAM_LOGOUT_CONNECTOR_URI : {}\n", URLDecoder.decode(logoutURI.toString(), "UTF-8"));
 
         HttpPost httpPost = new HttpPost(logoutURI);
         httpPost.addHeader("Content-Type", "application/json");

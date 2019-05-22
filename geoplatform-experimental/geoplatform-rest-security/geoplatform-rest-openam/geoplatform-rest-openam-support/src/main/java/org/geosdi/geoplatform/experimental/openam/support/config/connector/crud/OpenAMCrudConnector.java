@@ -64,6 +64,7 @@ import org.geosdi.geoplatform.experimental.rs.security.connector.settings.GPConn
 import java.net.URI;
 import java.net.URLDecoder;
 
+import static com.google.common.base.Preconditions.checkNotNull;
 import static org.geosdi.geoplatform.experimental.openam.api.connector.request.parameter.RequestParameter.RequestParameterType.ACTION_CREATE_USER;
 import static org.geosdi.geoplatform.experimental.openam.support.connector.request.BaseOpenAMRequest.OpenAMRequestType.*;
 
@@ -84,7 +85,7 @@ public abstract class OpenAMCrudConnector extends OpenAMAuthorizedConnector {
      */
     @Override
     public IOpenAMUserResponse createUser(IOpenAMUser openAMUser) throws Exception {
-        Preconditions.checkNotNull(openAMUser, "The OpenAMUser must not be null");
+        checkNotNull(openAMUser, "The OpenAMUser must not be null");
         logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@TRYING TO CREATE USER {}  WITH " +
                 "OPENAM_CONNECTOR_SETTINGS : {} \n", openAMUser, this.openAMConnectorSettings);
 
@@ -128,7 +129,7 @@ public abstract class OpenAMCrudConnector extends OpenAMAuthorizedConnector {
      */
     @Override
     public IOpenAMUserResponse updateUser(IOpenAMUser openAMUser) throws Exception {
-        Preconditions.checkNotNull(openAMUser, "The OpenAMUser must not be null");
+        checkNotNull(openAMUser, "The OpenAMUser must not be null");
         Preconditions.checkArgument((openAMUser.getUserName() != null) && !(openAMUser.getUserName().isEmpty()),
                 "The OpenAm UserName must not be null or an Empty String.");
         logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@TRYING TO Update USER {}  WITH " +
@@ -172,7 +173,7 @@ public abstract class OpenAMCrudConnector extends OpenAMAuthorizedConnector {
     public IOpenAMDeleteResponse deleteUser(String userName) throws Exception {
         IOpenAMAuthenticate openAMAuthenticate = null;
         try {
-            Preconditions.checkNotNull(userName, "The UserName must not be null");
+            checkNotNull(userName, "The UserName must not be null");
             logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@TRYING TO Delete USER with UserName: {}  WITH " +
                     "OPENAM_CONNECTOR_SETTINGS : {} \n", userName, this.openAMConnectorSettings);
 
@@ -219,7 +220,7 @@ public abstract class OpenAMCrudConnector extends OpenAMAuthorizedConnector {
     @Override
     public IOpenAMGroupResponse updateGroupAddingUser(IOpenAMGroup group)
             throws Exception {
-        Preconditions.checkNotNull(group, "The group must not be null");
+        checkNotNull(group, "The group must not be null");
 
         logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@TRYING TO UPDATE GROUP : {} adding USER WITH " +
                 "OPENAM_CONNECTOR_SETTINGS : {} \n", group, this.openAMConnectorSettings);

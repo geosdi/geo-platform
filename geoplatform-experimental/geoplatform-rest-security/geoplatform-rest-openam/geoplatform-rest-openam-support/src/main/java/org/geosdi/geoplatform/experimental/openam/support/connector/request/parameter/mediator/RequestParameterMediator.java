@@ -35,11 +35,12 @@
  */
 package org.geosdi.geoplatform.experimental.openam.support.connector.request.parameter.mediator;
 
-import com.google.common.base.Preconditions;
 import org.geosdi.geoplatform.experimental.openam.api.connector.request.parameter.RequestParameter;
 import org.geosdi.geoplatform.experimental.openam.api.connector.request.parameter.mediator.IRequestParameterMediator;
 
 import java.util.EnumMap;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -60,7 +61,7 @@ public class RequestParameterMediator implements IRequestParameterMediator {
      */
     @Override
     public RequestParameter getRequest(RequestParameter.RequestParameterType type) throws Exception {
-        Preconditions.checkNotNull(type, "The Parameter Type must not be null.");
+        checkNotNull(type, "The Parameter Type must not be null.");
         return this.store.get(type);
     }
 
@@ -73,6 +74,6 @@ public class RequestParameterMediator implements IRequestParameterMediator {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        Preconditions.checkNotNull(this.store, "The OpenAmRequestParameter Store must not be null.");
+        checkNotNull(this.store, "The OpenAmRequestParameter Store must not be null.");
     }
 }

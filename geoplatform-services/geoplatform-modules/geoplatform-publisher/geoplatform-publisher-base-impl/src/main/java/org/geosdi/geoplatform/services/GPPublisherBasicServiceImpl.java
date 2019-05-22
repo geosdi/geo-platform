@@ -41,9 +41,11 @@ import it.geosolutions.geoserver.rest.GeoServerRESTReader;
 import it.geosolutions.geoserver.rest.decoder.*;
 import it.geosolutions.geoserver.rest.decoder.RESTFeatureType.Attribute;
 import it.geosolutions.geoserver.rest.decoder.utils.NameLinkElem;
+import it.geosolutions.geoserver.rest.encoder.GSLayerEncoder;
 import it.geosolutions.geoserver.rest.encoder.GSResourceEncoder;
 import it.geosolutions.geoserver.rest.encoder.coverage.GSCoverageEncoder;
 import org.apache.commons.httpclient.NameValuePair;
+import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.shared.publisher.LayerPublishAction;
 import org.geosdi.geoplatform.gui.shared.util.GPSharedUtils;
@@ -278,6 +280,31 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
     public Boolean publishAllofPreview(PublishRequest publishRequest) throws
             ResourceNotFoundFault, FileNotFoundException {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public Boolean updateLayerStyle(String workspace, String layerName, String styleToPublish, String styleName, boolean isDefault) throws ResourceNotFoundFault {
+        RESTLayer restLayer = this.restReader.getLayer(workspace, layerName);
+        if (restLayer == null) {
+            throw new ResourceNotFoundFault("The layer: " + layerName + " with workspace: "+ workspace +" does not exists");
+        }
+       boolean result =  this.publishStyle(styleToPublish, styleName, Boolean.TRUE);
+        if(!result){
+            throw new IllegalParameterFault("The Style with name " + styleName + " is not published." );
+        }
+        GSLayerEncoder gsLayerEncoder = new GSLayerEncoder();
+        if(isDefault)
+            gsLayerEncoder.setDefaultStyle(styleName);
+        else
+            gsLayerEncoder.addStyle(styleName);
+        RESTStyleList restStyleList = restLayer.getStyles();
+        if(restStyleList != null) {
+            for (String styleToAdd : restStyleList.getNames()) {
+                gsLayerEncoder.addStyle(styleToAdd);
+            }
+        }
+        this.restPublisher.configureLayer(workspace, layerName, gsLayerEncoder);
+        return Boolean.TRUE;
     }
 
     /**

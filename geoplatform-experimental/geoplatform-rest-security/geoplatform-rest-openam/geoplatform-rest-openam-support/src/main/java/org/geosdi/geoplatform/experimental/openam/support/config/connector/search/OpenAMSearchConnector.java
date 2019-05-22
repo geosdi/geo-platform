@@ -34,7 +34,6 @@
  */
 package org.geosdi.geoplatform.experimental.openam.support.config.connector.search;
 
-import com.google.common.base.Preconditions;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.URIBuilder;
@@ -48,6 +47,7 @@ import org.geosdi.geoplatform.experimental.rs.security.connector.settings.GPConn
 import java.net.URI;
 import java.net.URLDecoder;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static org.geosdi.geoplatform.experimental.openam.support.connector.request.BaseOpenAMRequest.OpenAMRequestType.SEARCH_USERS;
 
 /**
@@ -67,10 +67,8 @@ public abstract class OpenAMSearchConnector extends OpenAMCrudConnector {
      */
     @Override
     public OpenAMSearchUsersResult searchOpenAMUserByUid(String uid) throws Exception {
-        Preconditions.checkArgument((uid != null) && !(uid.isEmpty()), "The UID Parameter must not be " +
-                "null or an empty String.");
-        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@TRYING TO Search USER by UID : {}  WITH " +
-                "OPENAM_CONNECTOR_SETTINGS : {} \n", uid, this.openAMConnectorSettings);
+        checkArgument((uid != null) && !(uid.isEmpty()), "The UID Parameter must not be null or an empty String.");
+        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@TRYING TO Search USER by UID : {}  WITH OPENAM_CONNECTOR_SETTINGS : {} \n", uid, this.openAMConnectorSettings);
 
         OpenAMSearchUsersRequest openAMSearchUsersRequest = this.openAMRequestMediator.getRequest(SEARCH_USERS);
         URIBuilder uriBuilder = super.buildURI(this.openAMConnectorSettings, openAMSearchUsersRequest);
@@ -94,8 +92,7 @@ public abstract class OpenAMSearchConnector extends OpenAMCrudConnector {
         }
         this.logout(openAMAuthenticate.getTokenId());
         OpenAMSearchUsersResult result = this.openAMReader.readValue(response.getEntity().getContent(), OpenAMSearchUsersResult.class);
-        logger.trace(":::::::::::::::::::::::::::OPENAM_SEARCH_USERS_RESULT_AS_STRING : \n{}\n",
-                this.openAMReader.writeValueAsString(result));
+        logger.trace(":::::::::::::::::::::::::::OPENAM_SEARCH_USERS_RESULT_AS_STRING : \n{}\n", this.openAMReader.writeValueAsString(result));
         return result;
     }
 }

@@ -67,6 +67,8 @@ public class CheckDataSourceCommand implements
 
         logger.debug("##################### Executing {} Command", this.
                 getClass().getSimpleName());
-        return new CheckDataSourceResponse(this.geoserverUrl.matches(request.getDatasource().substring(0,request.getDatasource().indexOf("wms"))));
+        logger.info("############### GeoServer url: {}", this.geoserverUrl);
+        logger.info("############### Layer DataSource url: {}", this.geoserverUrl.equalsIgnoreCase(request.getDatasource().substring(0,request.getDatasource().indexOf("wms"))));
+        return new CheckDataSourceResponse(this.geoserverUrl.equalsIgnoreCase(request.getDatasource().substring(0,request.getDatasource().indexOf("wms"))));
     }
 }

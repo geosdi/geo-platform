@@ -283,12 +283,19 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
     }
 
     @Override
-    public Boolean updateLayerStyle(String workspace, String layerName, String styleToPublish, String styleName, boolean isDefault) throws ResourceNotFoundFault {
+    public Boolean updateLayerStyle(String workspace, String layerName, String styleToPublish, String styleName, boolean isDefault
+            , boolean override) throws ResourceNotFoundFault {
         RESTLayer restLayer = this.restReader.getLayer(workspace, layerName);
         if (restLayer == null) {
             throw new ResourceNotFoundFault("The layer: " + layerName + " with workspace: "+ workspace +" does not exists");
         }
-       boolean result =  this.publishStyle(styleToPublish, styleName, Boolean.TRUE);
+        boolean result;
+        if(!override)
+            result =  this.publishStyle(styleToPublish, styleName, Boolean.TRUE);
+        else
+            result =  this.updateStyle(styleToPublish, styleName, Boolean.FALSE);
+
+
         if(!result){
             throw new IllegalParameterFault("The Style with name " + styleName + " is not published." );
         }

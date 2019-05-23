@@ -51,6 +51,5 @@ public class MapLitePluginResourcesConfigurator extends GPResourcesConfigurator<
 
     @Override
     public final void configure() {
-        super.injectJavascript(configurator.getResources().share42JS());
     }
 }

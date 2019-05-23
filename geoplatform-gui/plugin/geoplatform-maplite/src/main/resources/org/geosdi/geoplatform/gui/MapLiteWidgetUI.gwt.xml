@@ -3,6 +3,9 @@
 <module>
     <source path="client" />
     
-    <entry-point class="org.geosdi.geoplatform.gui.client.MapLiteWidgetUI" />   
+    <entry-point class="org.geosdi.geoplatform.gui.client.MapLiteWidgetUI" />
+
+    <inherits name='com.google.gwt.user.theme.standard.Standard' />
+    <stylesheet src="MapliteStyle.css" />
     
 </module>

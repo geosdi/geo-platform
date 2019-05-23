@@ -35,9 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget;
 
-import org.geosdi.geoplatform.gui.client.puregwt.event.WindowShowEvent;
 import org.geosdi.geoplatform.gui.client.widget.tab.MapLiteTabWidget;
-import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -71,10 +69,5 @@ public class GPMapLiteExportProjectWidget extends GeoPlatformWindow {
         super.setResizable(Boolean.FALSE);
     }
 
-    @Override
-    public void show() {
-        super.show();
-        WidgetPropertiesHandlerManager.fireEvent(new WindowShowEvent());
-    }
 
 }

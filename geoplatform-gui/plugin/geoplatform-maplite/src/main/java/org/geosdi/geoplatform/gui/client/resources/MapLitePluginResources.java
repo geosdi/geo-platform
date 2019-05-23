@@ -44,8 +44,7 @@ import com.google.gwt.resources.client.TextResource;
  */
 public interface MapLitePluginResources extends ClientBundle {
 
-    public static final MapLitePluginResources RESOURCES = GWT.create(MapLitePluginResources.class);
+    MapLitePluginResources RESOURCES = GWT.create(MapLitePluginResources.class);
 
-    @Source(value = "share42/share42.js")
-    TextResource share42JS();
+
 }

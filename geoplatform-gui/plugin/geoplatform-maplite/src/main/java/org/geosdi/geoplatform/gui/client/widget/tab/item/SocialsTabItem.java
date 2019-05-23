@@ -35,46 +35,27 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.tab.item;
 
-import com.extjs.gxt.ui.client.Registry;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Anchor;
-import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.i18n.MapLiteModuleConstants;
-import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
-import org.geosdi.geoplatform.gui.client.puregwt.IWidgetHandler;
 import org.geosdi.geoplatform.gui.client.widget.tab.GeoPlatformTabItem;
 import org.geosdi.geoplatform.gui.client.widget.tab.Utility;
-import org.geosdi.geoplatform.gui.client.widget.tab.binding.GPLayerDisplayBinding;
-import org.geosdi.geoplatform.gui.client.widget.tab.layers.GenericTabItem;
-import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
-import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
-import org.geosdi.geoplatform.gui.factory.map.GPApplicationMap;
-import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
-import org.geosdi.geoplatform.gui.model.GPLayerBean;
-import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;
-import org.gwtopenmaps.openlayers.client.LonLat;
-import org.gwtopenmaps.openlayers.client.Map;
 
 /**
  *
  * @author Salvia Vito - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class SocialsTabItem extends GeoPlatformTabItem implements IWidgetHandler {
+public class SocialsTabItem extends GeoPlatformTabItem {
 
-        private final String shareJSScriptPath = GWT.getModuleBaseURL() + "share42/share42.js";
-    private HTMLPanel sharePanel;
     private Anchor mapLiteAnchor;
     private VerticalPanel vp;
 
     public SocialsTabItem() {
         super(MapLiteModuleConstants.INSTANCE.GPMapLiteExportProjectWidget_socialText(),
                 Boolean.TRUE);
-        WidgetPropertiesHandlerManager.addHandler(IWidgetHandler.TYPE, this);
     }
 
     @Override
@@ -89,33 +70,22 @@ public class SocialsTabItem extends GeoPlatformTabItem implements IWidgetHandler
 
         });
         mapLiteAnchor.setTarget("_blank");
+        mapLiteAnchor.addStyleName("textLink");
         vp = new VerticalPanel();
         vp.setSpacing(5);
         vp.add(mapLiteAnchor);
-        sharePanel = new HTMLPanel("<div class=\"share42init\" data-tile=\"Map Lite\" data-url=\"" + Utility.generateMapLiteURL() + "\"></div>"
-                + "<script type=\"text/javascript\" src=\"" + shareJSScriptPath + "\"></script>");
-        vp.add(sharePanel);
+        vp.setBorderWidth(0);
         super.add(vp);
-        super.setHeight(210);
+        super.setBorders(Boolean.FALSE);
+//        super.setHeight(210);
     }
 
 
 
-    private static native void updateSocialLinks() /*-{
-     $wnd.share42();
-     }-*/;
 
     @Override
     public final void subclassCallToInit() {
         super.init();
     }
 
-    @Override
-    public void afterShow() {
-                    vp.remove(sharePanel);
-            sharePanel = new HTMLPanel("<div class=\"share42init\" data-tile=\"Map Lite\" data-url=\"" + Utility.generateMapLiteURL() + "\"></div>"
-                    + "<script type=\"text/javascript\" src=\"" + shareJSScriptPath + "\"></script>");
-            vp.add(sharePanel);
-            updateSocialLinks();
-    }
 }

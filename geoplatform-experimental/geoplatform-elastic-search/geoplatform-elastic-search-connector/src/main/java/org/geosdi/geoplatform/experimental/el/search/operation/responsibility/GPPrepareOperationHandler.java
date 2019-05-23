@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.experimental.el.search.operation.responsibility;
 
-import com.google.common.base.Preconditions;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.geosdi.geoplatform.experimental.el.dao.ElasticSearchDAO;
 import org.geosdi.geoplatform.experimental.el.search.operation.OperationByPage;
@@ -43,6 +42,7 @@ import org.geosdi.geoplatform.experimental.el.search.operation.OperationByPage.I
 import org.geosdi.geoplatform.experimental.el.search.operation.OperationByPage.OperationByPageSearchDecorator;
 import org.geosdi.geoplatform.experimental.el.search.strategy.GPStrategyRepository;
 
+import static com.google.common.base.Preconditions.checkNotNull;
 import static org.geosdi.geoplatform.experimental.el.search.operation.responsibility.GPElasticSearchOperationHandler.GPElasticSearchDeleteHandlerType.PREPARER_OPERATION_TYPE;
 
 /**
@@ -77,12 +77,12 @@ class GPPrepareOperationHandler extends GPAbstractOperationHandler<ElasticSearch
     @Override
     protected final <Result extends IOperationByPageResult, Page extends OperationByPage> Result internalOperation(Page page,
             ElasticSearchDAO searchDAO) throws Exception {
-        Preconditions.checkNotNull(page, "Parameter Page must not be null.");
-        Preconditions.checkNotNull(searchDAO, "Parameter SearchDAO must not be null.");
+        checkNotNull(page, "Parameter Page must not be null.");
+        checkNotNull(searchDAO, "Parameter SearchDAO must not be null.");
 
         SearchRequestBuilder builder = page.buildPage(searchDAO.client()
                 .prepareSearch(searchDAO.getIndexName()).setTypes(searchDAO.getIndexType()));
-        Long totalElementsToDelete = builder.execute().get().getHits().getTotalHits();
+        Long totalElementsToDelete = builder.execute().get().getHits().getTotalHits().value;
         return super.forwardOperation(new OperationByPageSearchDecorator(page.getPage(), totalElementsToDelete),
                 searchDAO);
     }

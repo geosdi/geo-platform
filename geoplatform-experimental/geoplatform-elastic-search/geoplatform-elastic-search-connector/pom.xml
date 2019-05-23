@@ -18,7 +18,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <elasticsearch-version>6.5.4</elasticsearch-version>
+        <elasticsearch-version>7.1.0</elasticsearch-version>
         <spatial4j.version>0.7</spatial4j.version>
     </properties>
 
@@ -47,6 +47,11 @@
         <dependency>
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>javax.annotation-api</artifactId>
         </dependency>
 
         <!-- =========================================================== -->

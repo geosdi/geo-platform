@@ -212,7 +212,7 @@ public abstract class AbstractElasticSearchDAO<D extends Document> extends Pagea
         return this.elastichSearchClient
                 .prepareSearch(getIndexName())
                 .setTypes(getIndexType())
-                .get().getHits().getTotalHits();
+                .get().getHits().getTotalHits().value;
     }
 
     /**
@@ -226,7 +226,7 @@ public abstract class AbstractElasticSearchDAO<D extends Document> extends Pagea
                 .prepareSearch(getIndexName())
                 .setQuery(queryBuilder)
                 .setTypes(getIndexType())
-                .get().getHits().getTotalHits();
+                .get().getHits().getTotalHits().value;
     }
 
     @Override

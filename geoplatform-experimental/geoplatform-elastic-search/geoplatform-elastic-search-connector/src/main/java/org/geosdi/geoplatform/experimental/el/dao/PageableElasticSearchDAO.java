@@ -64,7 +64,7 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends Pagea
         if (searchResponse.status() != RestStatus.OK) {
             throw new IllegalStateException("Problem in Search : " + searchResponse.status());
         }
-        Long total = searchResponse.getHits().getTotalHits();
+        Long total = searchResponse.getHits().getTotalHits().value;
         logger.debug("###################TOTAL HITS FOUND : {} .\n\n", total);
         return new PageResult<D>(total, Stream.of(searchResponse.getHits().getHits())
                 .map(searchHit -> this.readDocument(searchHit))
@@ -87,7 +87,7 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends Pagea
         if (searchResponse.status() != RestStatus.OK) {
             throw new IllegalStateException("Problem in Search : " + searchResponse.status());
         }
-        Long total = searchResponse.getHits().getTotalHits();
+        Long total = searchResponse.getHits().getTotalHits().value;
         logger.debug("###################TOTAL HITS FOUND : {} .\n\n", total);
         return new PageResult<V>(total, Stream.of(searchResponse.getHits().getHits())
                 .map(searchHit -> this.readDocument(searchHit))
@@ -115,7 +115,7 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends Pagea
         if (searchResponse.status() != RestStatus.OK) {
             throw new IllegalStateException("Problem in Search : " + searchResponse.status());
         }
-        Long total = searchResponse.getHits().getTotalHits();
+        Long total = searchResponse.getHits().getTotalHits().value;
         logger.debug("###################TOTAL HITS FOUND : {} .\n\n", total);
         return new PageResult<V>(total, Stream.of(searchResponse.getHits().getHits())
                 .map(searchHit -> this.readDocument(searchHit, classe))
@@ -143,7 +143,7 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends Pagea
         if (searchResponse.status() != RestStatus.OK) {
             throw new IllegalStateException("Problem in Search : " + searchResponse.status());
         }
-        Long total = searchResponse.getHits().getTotalHits();
+        Long total = searchResponse.getHits().getTotalHits().value;
         logger.debug("###################TOTAL HITS FOUND : {} .\n\n", total);
         return new PageResult<D>(total, Stream.of(searchResponse.getHits().getHits())
                 .map(searchHit -> this.readDocument(searchHit))
@@ -171,7 +171,7 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends Pagea
         if (searchResponse.status() != RestStatus.OK) {
             throw new IllegalStateException("Problem in Search : " + searchResponse.status());
         }
-        Long total = searchResponse.getHits().getTotalHits();
+        Long total = searchResponse.getHits().getTotalHits().value;
         logger.debug("###################TOTAL HITS FOUND : {} .\n\n", total);
         return new PageResult<V>(total, Stream.of(searchResponse.getHits().getHits())
                 .map(searchHit -> this.readDocument(searchHit, classe))
@@ -199,7 +199,7 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends Pagea
         if (searchResponse.status() != RestStatus.OK) {
             throw new IllegalStateException("Problem in Search : " + searchResponse.status());
         }
-        Long total = searchResponse.getHits().getTotalHits();
+        Long total = searchResponse.getHits().getTotalHits().value;
         logger.debug("###################TOTAL HITS FOUND : {} .\n\n", total);
         return new PageResult<D>(total, Stream.of(searchResponse.getHits().getHits())
                 .map(searchHit -> this.readDocument(searchHit))
@@ -245,6 +245,6 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends Pagea
         if (searchResponse.status() != RestStatus.OK) {
             throw new IllegalStateException("Problem in Search : " + searchResponse.status());
         }
-        return searchResponse.getHits().getTotalHits();
+        return searchResponse.getHits().getTotalHits().value;
     }
 }

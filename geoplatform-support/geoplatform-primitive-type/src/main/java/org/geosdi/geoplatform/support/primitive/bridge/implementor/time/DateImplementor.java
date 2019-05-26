@@ -37,8 +37,9 @@ package org.geosdi.geoplatform.support.primitive.bridge.implementor.time;
 
 import java.util.Date;
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.toSet;
+import static java.util.stream.Stream.of;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -55,7 +56,7 @@ public class DateImplementor extends GPTimeImplementor<Date> {
      */
     @Override
     protected Set<PrimitiveImplementorKey> prepareKey() {
-        return Stream.of(PrimitiveImplementorKey.forClass(Date.class), PrimitiveImplementorKey.forClass(Date[].class))
-                .collect(Collectors.toSet());
+        return of(PrimitiveImplementorKey.forClass(Date.class), PrimitiveImplementorKey.forClass(Date[].class))
+                .collect(toSet());
     }
 }

@@ -35,11 +35,12 @@
  */
 package org.geosdi.geoplatform.support.primitive.bridge.implementor;
 
-import com.google.common.base.Preconditions;
 import org.geosdi.geoplatform.support.bridge.implementor.GPImplementor;
 import org.geosdi.geoplatform.support.primitive.operator.GPOperator;
 
 import java.util.Set;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -78,7 +79,7 @@ public interface PrimitiveImplementor<P extends Object> extends GPImplementor<Se
         private final Class<?> classe;
 
         public PrimitiveImplementorKey(Class<?> theClasse) {
-            Preconditions.checkNotNull(theClasse != null, "The Parameter classe must not be null.");
+            checkNotNull(theClasse != null, "The Parameter classe must not be null.");
             this.classe = theClasse;
         }
 

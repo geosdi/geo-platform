@@ -83,12 +83,10 @@ public class LongParserFromStringHandler extends AbstractPrimitiveParserFromStri
     protected Boolean canParseValue(String value) {
         try {
             Long.parseLong(value);
-            logger.debug("##########################PRIMITIVE_PARSER : {} parse value as Long : {}\n",
-                    getParserType(), value);
+            logger.debug("##########################PRIMITIVE_PARSER : {} parse value as Long : {}\n", getParserType(), value);
             return TRUE;
         } catch (NumberFormatException ex) {
-            logger.trace("######################ERROR FOR PARSER : {} , trying to parse Value : {}",
-                    getParserType(), value);
+            logger.trace("######################ERROR FOR PARSER : {} , trying to parse Value : {}", getParserType(), value);
             return FALSE;
         }
     }

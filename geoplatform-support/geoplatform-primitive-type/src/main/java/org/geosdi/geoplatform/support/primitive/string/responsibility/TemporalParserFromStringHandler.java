@@ -60,7 +60,7 @@ class TemporalParserFromStringHandler extends AbstractPrimitiveParserFromStringH
     private static final GPTemporalPatternImplementor temporalPatternImplementor;
 
     public TemporalParserFromStringHandler() {
-        super.setSuccessor(new DefaultParserFromStringHandler());
+        super.setSuccessor(new NumberParserFromStringHandler());
     }
 
     /**

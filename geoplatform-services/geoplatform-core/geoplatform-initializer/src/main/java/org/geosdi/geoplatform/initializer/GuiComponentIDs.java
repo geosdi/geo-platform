@@ -271,7 +271,7 @@ public class GuiComponentIDs {
         mapUser.put(EXPORT_PROJECT, Boolean.TRUE);
         mapUser.put(IMPORT_PROJECT, Boolean.TRUE);
         mapUser.put(PREVIEW_KML, Boolean.TRUE);
-        mapUser.put(LAYER_STYLER, Boolean.TRUE);
+        mapUser.put(LAYER_STYLER, Boolean.FALSE);
         mapUser.put(MAP_LITE_EXPORTER, Boolean.TRUE);
         mapUser.put(OPEN_CATALOG_FINDER, Boolean.TRUE);
         //
@@ -331,7 +331,7 @@ public class GuiComponentIDs {
         mapViewer.put(EXPORT_PROJECT, Boolean.FALSE);
         mapViewer.put(IMPORT_PROJECT, Boolean.FALSE);
         mapViewer.put(PREVIEW_KML, Boolean.TRUE);
-        mapViewer.put(LAYER_STYLER, Boolean.TRUE);
+        mapViewer.put(LAYER_STYLER, Boolean.FALSE);
         mapViewer.put(MAP_LITE_EXPORTER, Boolean.TRUE);
         mapViewer.put(OPEN_CATALOG_FINDER, Boolean.TRUE);
         //

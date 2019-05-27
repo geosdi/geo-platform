@@ -58,7 +58,7 @@ public interface MapLiteModuleConstants extends Constants {
     @DefaultStringValue("Click to open the mapLite project")
     String GPMapLiteExportProjectWidget_linkText();
 
-    @DefaultStringValue("Share on Socials")
+    @DefaultStringValue("MapLite Link")
     String GPMapLiteExportProjectWidget_socialText();
 
     @DefaultStringValue("Generate IFrame Code")

@@ -166,12 +166,13 @@
                         <id>remove-build-files</id>
                         <phase>clean</phase>
                         <configuration>
-                            <tasks>
+                            <target>
                                 <delete dir="war/feature_demo" />
                                 <delete dir="war/WEB-INF/deploy" />
                                 <delete dir="war/WEB-INF/lib" />
                                 <delete dir="gwt-unitCache" />
-                            </tasks>
+                                <delete dir="target" />
+                            </target>
                         </configuration>
                         <goals>
                             <goal>run</goal>

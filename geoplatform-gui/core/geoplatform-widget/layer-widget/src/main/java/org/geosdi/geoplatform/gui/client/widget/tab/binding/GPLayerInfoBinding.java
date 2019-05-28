@@ -1,45 +1,40 @@
 /**
- *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
- *
- *   Copyright (C) 2008-2019 geoSDI Group (CNR IMAA - Potenza - ITALY).
- *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
- *
- *   ====================================================================
- *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
- *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * geo-platform
+ * Rich webgis framework
+ * http://geo-platform.org
+ * ====================================================================
+ * <p>
+ * Copyright (C) 2008-2019 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * <p>
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version. This program is distributed in the
+ * hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License
+ * for more details. You should have received a copy of the GNU General
+ * Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * <p>
+ * ====================================================================
+ * <p>
+ * Linking this library statically or dynamically with other modules is
+ * making a combined work based on this library. Thus, the terms and
+ * conditions of the GNU General Public License cover the whole combination.
+ * <p>
+ * As a special exception, the copyright holders of this library give you permission
+ * to link this library with independent modules to produce an executable, regardless
+ * of the license terms of these independent modules, and to copy and distribute
+ * the resulting executable under terms of your choice, provided that you also meet,
+ * for each linked independent module, the terms and conditions of the license of
+ * that module. An independent module is a module which is not derived from or
+ * based on this library. If you modify this library, you may extend this exception
+ * to your version of the library, but you are not obligated to do so. If you do not
+ * wish to do so, delete this exception statement from your version.
  */
 package org.geosdi.geoplatform.gui.client.widget.tab.binding;
 
-import com.extjs.gxt.ui.client.event.ComponentEvent;
-import com.extjs.gxt.ui.client.event.Events;
-import com.extjs.gxt.ui.client.event.FieldEvent;
-import com.extjs.gxt.ui.client.event.KeyListener;
-import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.event.*;
 import com.extjs.gxt.ui.client.store.Record;
 import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
@@ -49,9 +44,9 @@ import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.AbstractMementoOriginalProperties;
 import org.geosdi.geoplatform.gui.client.puregwt.decorator.event.TreeChangeLabelEvent;
-import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextField;
 import org.geosdi.geoplatform.gui.client.widget.binding.GeoPlatformBindingWidget;
 import org.geosdi.geoplatform.gui.client.widget.form.binding.GPFieldBinding;
+import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextField;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel.GPLayerKeyValue;
@@ -61,7 +56,6 @@ import org.geosdi.geoplatform.gui.puregwt.layers.event.ReloadLegendEvent;
 import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -82,8 +76,7 @@ public class GPLayerInfoBinding extends GeoPlatformBindingWidget<GPLayerBean> {
         titleField = new GPSecureStringTextField();
         titleField.setId(GPLayerKeyValue.TITLE.toString());
         titleField.setName(GPLayerKeyValue.TITLE.toString());
-        titleField.setFieldLabel(LayerModuleConstants.INSTANCE.
-                GPLayerInfoBinding_titleLabelText());
+        titleField.setFieldLabel(LayerModuleConstants.INSTANCE.GPLayerInfoBinding_titleLabelText());
 
         titleField.addListener(Events.Change, new Listener<FieldEvent>() {
 
@@ -99,8 +92,7 @@ public class GPLayerInfoBinding extends GeoPlatformBindingWidget<GPLayerBean> {
         abstractField = new GPSecureStringTextField();
         abstractField.setId(GPLayerKeyValue.ABSTRACT.toString());
         abstractField.setName(GPLayerKeyValue.ABSTRACT.toString());
-        abstractField.setFieldLabel(LayerModuleConstants.INSTANCE.
-                GPLayerInfoBinding_abstractLabelText());
+        abstractField.setFieldLabel(LayerModuleConstants.INSTANCE.GPLayerInfoBinding_abstractLabelText());
 
         abstractField.addListener(Events.Change, new Listener<FieldEvent>() {
 
@@ -123,11 +115,9 @@ public class GPLayerInfoBinding extends GeoPlatformBindingWidget<GPLayerBean> {
             @Override
             public void componentKeyDown(ComponentEvent event) {
                 super.componentKeyDown(event);
-                if (event.getKeyCode() == KeyCodes.KEY_ENTER
-                        && !aliasField.getValue().isEmpty()) {
+                if (event.getKeyCode() == KeyCodes.KEY_ENTER && !aliasField.getValue().isEmpty()) {
                     getModel().setAlias(aliasField.getValue());
-                    LayerHandlerManager.fireEvent(new ReloadLegendEvent(
-                            getModel()));
+                    LayerHandlerManager.fireEvent(new ReloadLegendEvent(getModel()));
                 }
             }
 
@@ -138,8 +128,7 @@ public class GPLayerInfoBinding extends GeoPlatformBindingWidget<GPLayerBean> {
         serverField = new GPSecureStringTextField();
         serverField.setId(GPLayerKeyValue.SERVER.toString());
         serverField.setName(GPLayerKeyValue.SERVER.toString());
-        serverField.setFieldLabel(LayerModuleConstants.INSTANCE.
-                GPLayerInfoBinding_serverLabelText());
+        serverField.setFieldLabel(LayerModuleConstants.INSTANCE.GPLayerInfoBinding_serverLabelText());
 
         serverField.addListener(Events.Change, new Listener<FieldEvent>() {
 
@@ -157,17 +146,14 @@ public class GPLayerInfoBinding extends GeoPlatformBindingWidget<GPLayerBean> {
 
     @Override
     public void addFieldsBinding() {
-        this.formBinding.addFieldBinding(
-                new GPLayerAliasFieldBinding(aliasField,
-                        GPLayerKeyValue.ALIAS.toString()));
+        this.formBinding.addFieldBinding(new GPLayerAliasFieldBinding(aliasField, GPLayerKeyValue.ALIAS.toString()));
     }
 
     /**
      * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
      * @email giuseppe.lascaleia@geosdi.org
-     *
+     * <p>
      * Internal Class GPLayerAliasFieldBinding to map bi-directional Binding
-     *
      */
     private class GPLayerAliasFieldBinding extends GPFieldBinding {
 
@@ -179,8 +165,7 @@ public class GPLayerInfoBinding extends GeoPlatformBindingWidget<GPLayerBean> {
         public void setModelProperty(Object val) {
             //Copying the value on memento before changes
             IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
-            AbstractMementoOriginalProperties memento = mementoSave.copyOriginalProperties(
-                    (GPLayerTreeModel) model);
+            AbstractMementoOriginalProperties memento = mementoSave.copyOriginalProperties((GPLayerTreeModel) model);
             ((GPLayerBean) model).setAlias(val != null ? (String) val : "");
             mementoSave.putOriginalPropertiesInCache(memento);
             WidgetPropertiesHandlerManager.fireEvent(labelEvent);
@@ -189,7 +174,5 @@ public class GPLayerInfoBinding extends GeoPlatformBindingWidget<GPLayerBean> {
         @Override
         public void setRecordProperty(Record r, Object val) {
         }
-
     }
-
 }

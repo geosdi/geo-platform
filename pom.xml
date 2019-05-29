@@ -87,11 +87,11 @@
             <url>http://repo.spring.io/snapshot</url>
         </repository>
         
-        <!--repository>
+        <repository>
             <id>sonatype-oss-public</id>
             <name>Nexus Release Repository</name>
             <url>https://oss.sonatype.org/content/groups/public/</url>
-        </repository-->
+        </repository>
 
         <repository>
             <id>sonatype-oss-repo</id>
@@ -109,11 +109,11 @@
             </snapshots>
         </repository>
         
-        <!--repository>
+        <repository>
             <id>boundlessgeo</id>
             <name>Open Source Geospatial Foundation Repository</name>
             <url>https://repo.boundlessgeo.com/release/</url>
-        </repository-->
+        </repository>
         
         <repository>
             <snapshots>

@@ -1316,11 +1316,6 @@
                 </plugin>
                 
                 <plugin>
-                    <artifactId>maven-clean-plugin</artifactId>
-                    <version>3.1.0</version>
-                </plugin>
-                
-                <plugin>
                     <artifactId>maven-antrun-plugin</artifactId>
                     <version>1.8</version>
                 </plugin>
@@ -1361,6 +1356,11 @@
                     <meminitial>64M</meminitial>
                     <maxmem>1512M</maxmem>
                 </configuration>
+            </plugin>
+            
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>3.1.0</version>
             </plugin>
 
             <plugin>

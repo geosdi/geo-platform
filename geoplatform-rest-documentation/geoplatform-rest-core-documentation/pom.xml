@@ -341,7 +341,7 @@
                         <id>remove-build-files</id>
                         <phase>clean</phase>
                         <configuration>
-                            <tasks>
+                            <target>
                                 <delete dir="${basedir}/src/main/webapp/lib" />
                                 <delete dir="${basedir}/src/main/webapp/lang" />
                                 <delete dir="${basedir}/src/main/webapp/css" />
@@ -357,7 +357,8 @@
                                 <delete file="${basedir}/src/main/webapp/swagger-ui-standalone-preset.js" />
                                 <delete file="${basedir}/src/main/webapp/swagger-ui-standalone-preset.js.map" />
                                 <delete file="${basedir}/src/main/webapp/swagger-ui.min.js" />
-                            </tasks>
+                                <delete dir="target" />
+                            </target>
                         </configuration>
                         <goals>
                             <goal>run</goal>

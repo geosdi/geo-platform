@@ -87,11 +87,11 @@
             <url>http://repo.spring.io/snapshot</url>
         </repository>
         
-        <repository>
+        <!--repository>
             <id>sonatype-oss-public</id>
             <name>Nexus Release Repository</name>
             <url>https://oss.sonatype.org/content/groups/public/</url>
-        </repository>
+        </repository-->
 
         <repository>
             <id>sonatype-oss-repo</id>
@@ -109,11 +109,11 @@
             </snapshots>
         </repository>
         
-        <repository>
+        <!--repository>
             <id>boundlessgeo</id>
             <name>Open Source Geospatial Foundation Repository</name>
             <url>https://repo.boundlessgeo.com/release/</url>
-        </repository>
+        </repository-->
         
         <repository>
             <snapshots>
@@ -1225,11 +1225,6 @@
                 </plugin>
                 
                 <plugin>
-                    <artifactId>maven-clean-plugin</artifactId>
-                    <version>3.1.0</version>
-                </plugin>
-                
-                <plugin>
                     <artifactId>maven-antrun-plugin</artifactId>
                     <version>1.8</version>
                 </plugin>
@@ -1270,6 +1265,11 @@
                     <meminitial>64M</meminitial>
                     <maxmem>1512M</maxmem>
                 </configuration>
+            </plugin>
+            
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>3.1.0</version>
             </plugin>
 
             <plugin>

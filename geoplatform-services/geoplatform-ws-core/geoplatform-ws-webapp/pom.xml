@@ -599,9 +599,10 @@
                         <id>remove-build-files</id>
                         <phase>clean</phase>
                         <configuration>
-                            <tasks>
+                            <target>
                                 <delete file="velocity.log" />
-                            </tasks>
+                                <delete dir="target" />
+                            </target>
                         </configuration>
                         <goals>
                             <goal>run</goal>

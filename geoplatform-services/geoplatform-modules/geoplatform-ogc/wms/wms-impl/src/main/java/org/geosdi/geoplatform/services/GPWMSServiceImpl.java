@@ -78,12 +78,12 @@ import java.net.URL;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.FALSE;
 import static java.util.Locale.ENGLISH;
 import static java.util.Locale.forLanguageTag;
+import static java.util.stream.Collectors.joining;
 import static org.geosdi.geoplatform.connector.pool.builder.v111.GPWMSConnectorBuilderPoolV111.wmsConnectorBuilderPoolV111;
 import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
 import static org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat.GML;
@@ -234,13 +234,13 @@ public class GPWMSServiceImpl implements GPWMSService {
                 GPWMSGetFeatureInfoV111Request<Object> wmsGetFeatureInfoV111Request = wmsServerConnector.createGetFeatureInfoRequest();
                 GPWMSGetMapBaseRequest wmsGetMapBaseRequest = new WMSGetMapBaseRequest(request.getBoundingBox().toWMSBoundingBox(),
                         wmsGetFeatureInfoElement.getLayers(), request.getCrs(), request.getWidth(), request.getHeight());
-                FeatureCollection featureCollection = (FeatureCollection) wmsGetFeatureInfoV111Request
+                Object featureCollection = wmsGetFeatureInfoV111Request
                         .withWMSGetMapRequest(wmsGetMapBaseRequest)
                         .withFeatureCount(20)
                         .withQueryLayers(wmsGetFeatureInfoElement.getLayers().stream().toArray(s -> new String[s]))
                         .withX(request.getPoint().getX())
                         .withY(request.getPoint().getY())
-                        .withInfoFormat(GML)
+                        .withInfoFormat((request.getFormat() != null) ? request.getFormat().toWMSFeatureInfoFormat() : GML)
                         .getResponse();
                 logger.debug("########################FOUND : {}\n", featureCollection);
                 wmsGetFeatureInfoResponse.addFeature(featureCollection);
@@ -249,7 +249,7 @@ public class GPWMSServiceImpl implements GPWMSService {
                 Feature feature = new Feature();
                 feature.setId("Error for : ".concat(wmsGetFeatureInfoElement.getWmsServerURL()));
                 Map<String, Object> properties = new LinkedHashMap<>();
-                properties.put("LAYERS_IN_ERROR", wmsGetFeatureInfoElement.getLayers().stream().collect(Collectors.joining(",")));
+                properties.put("LAYERS_IN_ERROR", wmsGetFeatureInfoElement.getLayers().stream().collect(joining(",")));
                 properties.put("ERROR_MESSAGE", ex.getMessage());
                 featureCollection.add(feature);
                 wmsGetFeatureInfoResponse.addFeature(featureCollection);

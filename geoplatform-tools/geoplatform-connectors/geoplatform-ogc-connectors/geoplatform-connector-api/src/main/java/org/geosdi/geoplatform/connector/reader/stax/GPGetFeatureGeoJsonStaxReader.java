@@ -42,6 +42,7 @@ public abstract class GPGetFeatureGeoJsonStaxReader extends AbstractStaxStreamRe
     protected static final String TYPE_NAME_KEY = "typeName=";
     protected static final String TYPES_NAME_SEPARATOR = ",";
     protected static final String TYPE_NAME_SEPARATOR = ":";
+    protected static final String FEATURE_NAME_KEY = "FEATURE_NAME";
     private static final GPFeatureTypeReader featureTypeReader = new GPFeatureTypeReader() {
 
         /**
@@ -146,7 +147,7 @@ public abstract class GPGetFeatureGeoJsonStaxReader extends AbstractStaxStreamRe
     final void readInternal(IGPFeatureType featureType, Feature feature) throws Exception {
         logger.trace("#######################TRY TO READ ATTRIBUTES OF : {}\n", featureType.getName());
         Map<String, Object> featureProperties = new LinkedHashMap<>();
-        featureProperties.put("FEATURE_NAME", featureType.getName());
+        featureProperties.put(FEATURE_NAME_KEY, featureType.getName());
         int eventType = xmlStreamReader().nextTag();
         while (xmlStreamReader().hasNext()) {
             if (eventType == XMLEvent.END_ELEMENT) {

@@ -11,6 +11,8 @@ import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessorType;
 import java.util.List;
 
+import static org.geosdi.geoplatform.services.request.WMSGetFeatureInfoResponseFormat.GEOJSON;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -41,4 +43,5 @@ public class GPWMSGetFeatureInfoRequest extends GPWMSRequest {
     private GPWMSGetFeatureInfoPoint point;
     @NotNull(message = "{wms_get_feature_info_elements_not_null}")
     private List<@Valid GPWMSGetFeatureInfoElement> wmsFeatureInfoElements;
+    private WMSGetFeatureInfoResponseFormat format = GEOJSON;
 }

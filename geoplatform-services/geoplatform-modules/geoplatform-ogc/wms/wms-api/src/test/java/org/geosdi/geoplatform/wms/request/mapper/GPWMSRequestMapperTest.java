@@ -64,8 +64,9 @@ public class GPWMSRequestMapperTest {
                         "  }, {\n" +
                         "    \"wmsServerURL\" : \"http://150.145.141.180/geoserver/wms\",\n" +
                         "    \"layers\" : [ \"topp:states\", \"siti_protetti:zsc\", \"retenatura:zsc\" ]\n" +
-                        "  } ]\n" +
-                        "}\n"), GPWMSGetFeatureInfoRequest.class);
+                        "  } ],\n" +
+                        "  \"format\" : \"GEOJSON\"\n" +
+                        "}"), GPWMSGetFeatureInfoRequest.class);
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@GP_WMS_GET_FEATURE_INFO_REQUEST_FROM_STRING : {}\n",
                 wmsGetFeatureInfoRequest);
     }

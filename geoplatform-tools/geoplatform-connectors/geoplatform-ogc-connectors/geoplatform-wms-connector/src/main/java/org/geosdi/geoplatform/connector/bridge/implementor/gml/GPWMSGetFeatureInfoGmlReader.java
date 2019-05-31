@@ -23,9 +23,9 @@ import static org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoForm
  */
 public class GPWMSGetFeatureInfoGmlReader implements GPWMSGetFeatureInfoReader<Object> {
 
-    protected static final Logger logger = LoggerFactory.getLogger(GPWMSGetFeatureInfoGmlReader.class);
+    protected final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
-    private static final WMSGetFeatureInfoStaxReader wmsGetFeatureInfoStaxReader = new GPWMSGetFeatureInfoStaxReader();
+    protected static final WMSGetFeatureInfoStaxReader wmsGetFeatureInfoStaxReader = new GPWMSGetFeatureInfoStaxReader();
 
     /**
      * @param inputStream

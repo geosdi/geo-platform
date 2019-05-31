@@ -3,3 +3,4 @@ org.geosdi.geoplatform.connector.bridge.implementor.text.GPWMSGetFeatureInfoText
 org.geosdi.geoplatform.connector.bridge.implementor.geojson.GPWMSGetFeatureInfoGeoJsonReader
 org.geosdi.geoplatform.connector.bridge.implementor.gml.GPWMSGetFeatureInfoGmlReader
 org.geosdi.geoplatform.connector.bridge.implementor.gml.GPWMSGetFeatureInfoGmlStringReader
+org.geosdi.geoplatform.connector.bridge.implementor.gml.GPWMSGetFeatureInfoGmlStoreReader

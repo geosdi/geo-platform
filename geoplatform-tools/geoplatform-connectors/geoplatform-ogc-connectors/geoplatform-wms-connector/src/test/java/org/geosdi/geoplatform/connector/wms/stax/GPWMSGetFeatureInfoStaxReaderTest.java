@@ -106,6 +106,7 @@ public class GPWMSGetFeatureInfoStaxReaderTest {
     public void c_wmsGetFeatureInfoStaxReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_STATES_1 : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoStaxReader.read(file2)));
+
     }
 
     @Test

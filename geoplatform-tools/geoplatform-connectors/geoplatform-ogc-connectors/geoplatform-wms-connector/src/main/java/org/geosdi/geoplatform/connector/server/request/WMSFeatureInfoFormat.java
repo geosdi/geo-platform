@@ -19,6 +19,7 @@ public enum WMSFeatureInfoFormat implements GPWMSFeatureInfoFormat {
     TEXT_HTML("text/html"),
     JSON("application/json"),
     GML("application/vnd.ogc.gml"),
+    GML_AS_STORE(GML.format),
     GML_AS_STRING(GML.format);
 
     private final String format;

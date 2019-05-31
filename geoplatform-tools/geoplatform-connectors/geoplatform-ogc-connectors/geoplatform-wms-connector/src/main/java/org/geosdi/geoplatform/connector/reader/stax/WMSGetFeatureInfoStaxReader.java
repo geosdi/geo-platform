@@ -44,4 +44,11 @@ public abstract class WMSGetFeatureInfoStaxReader extends GPGetFeatureGeoJsonSta
         checkArgument(streamReader != null, "The Parameter streamReader must not be null.");
         return GML2_GEO_JSON_PARSER.parse(xmlStreamReader());
     }
+
+    /**
+     * @param object
+     * @return {@link GPStaxFeatureStore}
+     * @throws Exception
+     */
+    public abstract <FeatureStore extends GPStaxFeatureStore> FeatureStore readAsStore(@Nonnull(when = NEVER) Object object) throws Exception;
 }

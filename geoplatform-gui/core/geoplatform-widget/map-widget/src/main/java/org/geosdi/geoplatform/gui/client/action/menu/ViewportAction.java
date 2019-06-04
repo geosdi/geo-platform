@@ -43,11 +43,15 @@ import org.geosdi.geoplatform.gui.client.i18n.MapModuleConstants;
 import org.geosdi.geoplatform.gui.client.widget.viewport.ViewportWidget;
 import org.gwtopenmaps.openlayers.client.Map;
 
+import java.util.logging.Logger;
+
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
 public class ViewportAction extends MenuBaseAction {
+
+    final static Logger logger = Logger.getLogger("ViewportAction");
 
     private ViewportWidget viewportWidget;
     private Map map;
@@ -62,6 +66,7 @@ public class ViewportAction extends MenuBaseAction {
     public void componentSelected(MenuEvent ce) {
         if(this.viewportWidget == null)
             this.viewportWidget = new ViewportWidget(Boolean.TRUE, this.map);
+        logger.info("#######################"+this.viewportWidget);
         this.viewportWidget.show();
     }
 }

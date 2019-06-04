@@ -50,15 +50,18 @@ import org.gwtopenmaps.openlayers.client.Map;
 public class ViewportAction extends MenuBaseAction {
 
     private ViewportWidget viewportWidget;
+    private Map map;
 
     public ViewportAction(Map map) {
         super(MapModuleConstants.INSTANCE.ViewportAction_titleText(), 
                 AbstractImagePrototype.create(BasicWidgetResources.ICONS.viewport()));
-        this.viewportWidget = new ViewportWidget(Boolean.TRUE, map);
+        this.map = map;
     }
 
     @Override
     public void componentSelected(MenuEvent ce) {
+        if(this.viewportWidget != null)
+            this.viewportWidget = new ViewportWidget(Boolean.TRUE, this.map);
         this.viewportWidget.show();
     }
 }

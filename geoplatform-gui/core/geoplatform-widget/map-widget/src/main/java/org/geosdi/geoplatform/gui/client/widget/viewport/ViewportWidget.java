@@ -108,12 +108,6 @@ public class ViewportWidget extends GeoPlatformWindow implements
     }
 
     @Override
-    public void finalizeInitOperations() {
-        super.finalizeInitOperations();
-
-    }
-
-    @Override
     public void show() {
         ViewportWidget.super.show();
         this.centralPanel.mask(

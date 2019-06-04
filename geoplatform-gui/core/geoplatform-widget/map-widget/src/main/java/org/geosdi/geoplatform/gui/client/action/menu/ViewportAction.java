@@ -60,7 +60,7 @@ public class ViewportAction extends MenuBaseAction {
 
     @Override
     public void componentSelected(MenuEvent ce) {
-        if(this.viewportWidget != null)
+        if(this.viewportWidget == null)
             this.viewportWidget = new ViewportWidget(Boolean.TRUE, this.map);
         this.viewportWidget.show();
     }

@@ -61,14 +61,13 @@ public class ViewportAction extends MenuBaseAction {
         super(MapModuleConstants.INSTANCE.ViewportAction_titleText(), 
                 AbstractImagePrototype.create(BasicWidgetResources.ICONS.viewport()));
         this.map = map;
+        this.viewportWidget = new ViewportWidget(Boolean.TRUE, this.map);
         logger.info("######################MENU");
     }
 
     @Override
     public void componentSelected(MenuEvent ce) {
         logger.info("######################TOOLBAR");
-        if(this.viewportWidget == null)
-            this.viewportWidget = new ViewportWidget(Boolean.TRUE, this.map);
         this.viewportWidget.show();
     }
 }

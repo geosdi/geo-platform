@@ -100,10 +100,6 @@ public class ShowFeaturesWFSAction extends MenuBaseAction {
     public void componentSelected(MenuEvent e) {
         GPBeanTreeModel itemSelected = this.treePanel.getSelectionModel().getSelectedItem();
         this.checkDataSourceRequest.setDatasource(((GPLayerTreeModel)itemSelected).getDataSource());
-        logger.info("###########REQUEST: "+this.checkDataSourceRequest);
-        logger.info("###########FEATURE WIDGET: "+this.showFeaturesWidget);
-        logger.info("###########ACTION STRATEGY: "+this.actionStrategy);
-        logger.info("###########HANDLER MANAGER: "+this.layerTypeHandlerManager);
         ClientCommandDispatcher.getInstance().execute(new GPClientCommand<CheckDataSourceResponse>() {
             {
                 super.setCommandRequest(checkDataSourceRequest);

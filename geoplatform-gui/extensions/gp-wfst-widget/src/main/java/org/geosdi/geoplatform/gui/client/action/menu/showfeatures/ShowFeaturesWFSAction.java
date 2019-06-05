@@ -60,6 +60,8 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
+import java.util.logging.Logger;
+
 import static org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetMessages.INSTANCE;
 
 /**
@@ -73,7 +75,9 @@ public class ShowFeaturesWFSAction extends MenuBaseAction {
     private final LayerTypeHandlerManager layerTypeHandlerManager;
     private IActionStrategy actionStrategy;
     private ShowFeaturesWidget showFeaturesWidget;
-    private final CheckDataSourceRequest checkDataSourceRequest = GWT.<CheckDataSourceRequest>create(CheckDataSourceRequest.class);
+    private final CheckDataSourceRequest checkDataSourceRequest;
+    final static Logger logger = Logger.getLogger("ShowFeaturesWFSAction");
+
 
     public ShowFeaturesWFSAction(TreePanel<GPBeanTreeModel> treePanel) {
         super(WFSTWidgetConstants.INSTANCE.showFeaturesTitleText(),
@@ -83,6 +87,7 @@ public class ShowFeaturesWFSAction extends MenuBaseAction {
         this.showFeaturesWidget = FeatureInjector.MainInjector.getInstance().getShowElementsWidget();
         this.layerTypeHandlerManager = FeatureInjector.MainInjector.getInstance().getLayerTypeHandlerManager();
         this.actionStrategy = FeatureInjector.MainInjector.getInstance().getActionStrategy();
+        this.checkDataSourceRequest =  GWT.<CheckDataSourceRequest>create(CheckDataSourceRequest.class);
     }
 
     /**
@@ -95,7 +100,10 @@ public class ShowFeaturesWFSAction extends MenuBaseAction {
     public void componentSelected(MenuEvent e) {
         GPBeanTreeModel itemSelected = this.treePanel.getSelectionModel().getSelectedItem();
         this.checkDataSourceRequest.setDatasource(((GPLayerTreeModel)itemSelected).getDataSource());
-
+        logger.info("###########REQUEST: "+this.checkDataSourceRequest);
+        logger.info("###########FEATURE WIDGET: "+this.showFeaturesWidget);
+        logger.info("###########ACTION STRATEGY: "+this.actionStrategy);
+        logger.info("###########HANDLER MANAGER: "+this.layerTypeHandlerManager);
         ClientCommandDispatcher.getInstance().execute(new GPClientCommand<CheckDataSourceResponse>() {
             {
                 super.setCommandRequest(checkDataSourceRequest);

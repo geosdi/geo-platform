@@ -40,6 +40,8 @@ import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.common.collect.Lists;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import java.util.List;
+import java.util.logging.Logger;
+
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
@@ -54,13 +56,16 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
  */
 public class CreateLayerViewportAction extends MenuBaseAction {
 
+    final static Logger logger = Logger.getLogger("CreateLayerViewportAction");
+
     private TreePanel treePanel;
-    private CreateViewportEvent createViewportEvent = new CreateViewportEvent();
+    private final CreateViewportEvent createViewportEvent;
 
     public CreateLayerViewportAction(final TreePanel treePanel) {
         super("CreateLayerViewport", 
                 AbstractImagePrototype.create(BasicWidgetResources.ICONS.viewport()));
         this.treePanel = treePanel;
+        this.createViewportEvent = new CreateViewportEvent();
     }
 
     @Override
@@ -73,9 +78,9 @@ public class CreateLayerViewportAction extends MenuBaseAction {
                     + "take only layer and not folder");
         } else {
             layerList = Lists.newArrayList((GPLayerBean) item);
-            createViewportEvent.setLayerList(layerList);
-            createViewportEvent.setViewportName(((GPLayerBean) item).getLabel());
-            MapHandlerManager.fireEvent(createViewportEvent);
+            this.createViewportEvent.setLayerList(layerList);
+            this.createViewportEvent.setViewportName(((GPLayerBean) item).getLabel());
+            MapHandlerManager.fireEvent(this.createViewportEvent);
         }
     }
 

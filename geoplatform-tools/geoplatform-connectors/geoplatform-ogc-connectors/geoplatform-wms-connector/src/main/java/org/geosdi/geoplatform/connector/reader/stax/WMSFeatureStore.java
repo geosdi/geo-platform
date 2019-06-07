@@ -8,12 +8,11 @@ import javax.annotation.Nonnull;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Stream;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.util.stream.Collectors.toList;
+import static java.util.stream.Stream.of;
 import static javax.annotation.meta.When.NEVER;
-import static org.geosdi.geoplatform.connector.reader.stax.GPGetFeatureGeoJsonStaxReader.FEATURE_NAME_KEY;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -21,11 +20,20 @@ import static org.geosdi.geoplatform.connector.reader.stax.GPGetFeatureGeoJsonSt
  */
 @Getter
 @ToString
-public class GPWMSFeatureStore implements GPStaxFeatureStore {
+public abstract class WMSFeatureStore<K extends Object> implements GPStaxFeatureStore<K> {
 
-    private static final long serialVersionUID = 8043547109663983346L;
+    private static final long serialVersionUID = 7246174437706791817L;
     //
-    private final Map<String, List<Feature>> store = new HashMap<>();
+    private final K key;
+    private final Map<K, List<Feature>> store = new HashMap<>();
+
+    /**
+     * @param theKey
+     */
+    protected WMSFeatureStore(@Nonnull(when = NEVER) K theKey) {
+        checkArgument(theKey != null, "The Parameter key must not be null.");
+        this.key = theKey;
+    }
 
     /**
      * @param feature
@@ -34,13 +42,13 @@ public class GPWMSFeatureStore implements GPStaxFeatureStore {
     @Override
     public void addFeature(@Nonnull(when = NEVER) Feature feature) throws Exception {
         checkArgument(feature != null, "The Parameter feature must not be null.");
-        String featureNameKey = (String) feature.getProperties().get(FEATURE_NAME_KEY);
-        if (this.store.containsKey(featureNameKey)) {
-            List<Feature> features = this.store.get(featureNameKey);
+        K featureKey = (K) feature.getProperties().get(this.key);
+        if (this.store.containsKey(featureKey)) {
+            List<Feature> features = this.store.get(featureKey);
             features.add(feature);
         } else {
-            this.store.put(featureNameKey, Stream.of(feature).collect(toList()));
+            this.store.put(featureKey, of(feature).collect(toList()));
         }
-        feature.getProperties().remove(FEATURE_NAME_KEY);
+        feature.getProperties().remove(this.key);
     }
 }

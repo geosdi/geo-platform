@@ -1,0 +1,407 @@
+{
+  "key" : "FEATURE_NAME",
+  "store" : {
+    "azioni_linea" : [ {
+      "type" : "Feature",
+      "properties" : {
+        "id" : "3356",
+        "gid" : "3164",
+        "cod_azione" : "EP",
+        "azione" : "EP01",
+        "denominaz" : "Piantumazione siepi/filari/alberi isolati",
+        "nat2000" : "true",
+        "rnp" : "false",
+        "rl" : "false",
+        "hs" : "true",
+        "corr_eco" : "false",
+        "afe" : "false",
+        "ext" : "false",
+        "prior_az" : "2",
+        "prior_int" : "2",
+        "c_com_cat" : "340",
+        "den_cat" : "Savignano 1^",
+        "c_num_part" : "463/2",
+        "lun_ml" : "78",
+        "costo_uni" : "8.7",
+        "costo_tot" : "681.449667608",
+        "proprieta" : "PROPRIETA' PRIVATA",
+        "com_valle" : "Comunita della Vallagarina",
+        "zsc" : "IT3120086: Servis",
+        "comune" : "Pomarolo",
+        "ato" : "Rovereto-Vallagarina",
+        "files" : null
+      },
+      "geometry" : {
+        "type" : "LineString",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:32632"
+          }
+        },
+        "coordinates" : [ [ 659932.843744, 5089387.15212701 ], [ 659949.861744, 5089391.793327 ], [ 659967.597444, 5089396.630327 ], [ 660000.601044, 5089409.303727 ], [ 660007.090344, 5089411.795627 ] ]
+      },
+      "id" : "azioni_linea.fid--33a0c341_1697ba78b75_-6835"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id" : "3357",
+        "gid" : "3165",
+        "cod_azione" : "EP",
+        "azione" : "EP01",
+        "denominaz" : "Piantumazione siepi/filari/alberi isolati",
+        "nat2000" : "false",
+        "rnp" : "false",
+        "rl" : "false",
+        "hs" : "true",
+        "corr_eco" : "false",
+        "afe" : "false",
+        "ext" : "false",
+        "prior_az" : "2",
+        "prior_int" : "2",
+        "c_com_cat" : "340",
+        "den_cat" : "Savignano 1^",
+        "c_num_part" : "655/1",
+        "lun_ml" : "106",
+        "costo_uni" : "8.7",
+        "costo_tot" : "917.976529621",
+        "proprieta" : "PROPRIETA' PUBBLICA COMUNALE",
+        "com_valle" : "Comunita della Vallagarina",
+        "comune" : "Pomarolo",
+        "ato" : "Rovereto-Vallagarina",
+        "files" : null
+      },
+      "geometry" : {
+        "type" : "LineString",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:32632"
+          }
+        },
+        "coordinates" : [ [ 659793.197044, 5089464.558027 ], [ 659786.601544, 5089494.837627 ], [ 659786.301144, 5089496.216527 ], [ 659786.246244, 5089496.468327 ], [ 659785.168244, 5089502.993327 ], [ 659782.476244, 5089519.286727 ], [ 659781.884244, 5089522.869827 ], [ 659781.335444, 5089526.191427 ], [ 659780.510044, 5089531.187427 ], [ 659780.243344, 5089532.801727 ], [ 659780.119144, 5089537.770127 ], [ 659779.908944, 5089546.177027 ], [ 659779.646644, 5089556.669727 ], [ 659779.611444, 5089558.077127 ], [ 659779.333144, 5089567.539327 ], [ 659779.295544, 5089568.819227 ] ]
+      },
+      "id" : "azioni_linea.fid--33a0c341_1697ba78b75_-6834"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id" : "3358",
+        "gid" : "3166",
+        "cod_azione" : "EP",
+        "azione" : "EP01",
+        "denominaz" : "Piantumazione siepi/filari/alberi isolati",
+        "nat2000" : "false",
+        "rnp" : "false",
+        "rl" : "false",
+        "hs" : "true",
+        "corr_eco" : "false",
+        "afe" : "false",
+        "ext" : "false",
+        "prior_az" : "2",
+        "prior_int" : "2",
+        "c_com_cat" : "282",
+        "den_cat" : "Pomarolo 1^",
+        "c_num_part" : "363",
+        "lun_ml" : "124",
+        "costo_uni" : "8.7",
+        "costo_tot" : "1081.91003843",
+        "proprieta" : "PROPRIETA' PRIVATA",
+        "com_valle" : "Comunita della Vallagarina",
+        "comune" : "Pomarolo",
+        "ato" : "Rovereto-Vallagarina",
+        "files" : null
+      },
+      "geometry" : {
+        "type" : "LineString",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:32632"
+          }
+        },
+        "coordinates" : [ [ 658832.414844, 5088785.596927 ], [ 658858.638144, 5088815.927427 ], [ 658882.965744, 5088850.049227 ], [ 658910.452744, 5088882.275427 ] ]
+      },
+      "id" : "azioni_linea.fid--33a0c341_1697ba78b75_-6833"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id" : "3360",
+        "gid" : "3168",
+        "cod_azione" : "EP",
+        "azione" : "EP01",
+        "denominaz" : "Piantumazione siepi/filari/alberi isolati",
+        "nat2000" : "false",
+        "rnp" : "false",
+        "rl" : "false",
+        "hs" : "true",
+        "corr_eco" : "false",
+        "afe" : "false",
+        "ext" : "false",
+        "prior_az" : "2",
+        "prior_int" : "2",
+        "c_com_cat" : "282",
+        "den_cat" : "Pomarolo 1^",
+        "c_num_part" : "356/1",
+        "lun_ml" : "50",
+        "costo_uni" : "8.7",
+        "costo_tot" : "435.627486625",
+        "proprieta" : "PROPRIETA' PRIVATA",
+        "com_valle" : "Comunita della Vallagarina",
+        "comune" : "Pomarolo",
+        "ato" : "Rovereto-Vallagarina",
+        "files" : null
+      },
+      "geometry" : {
+        "type" : "LineString",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:32632"
+          }
+        },
+        "coordinates" : [ [ 658818.197444, 5088508.831027 ], [ 658849.791744, 5088523.048427 ], [ 658862.429444, 5088531.894827 ] ]
+      },
+      "id" : "azioni_linea.fid--33a0c341_1697ba78b75_-6831"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id" : "3361",
+        "gid" : "3169",
+        "cod_azione" : "EP",
+        "azione" : "EP01",
+        "denominaz" : "Piantumazione siepi/filari/alberi isolati",
+        "nat2000" : "false",
+        "rnp" : "false",
+        "rl" : "false",
+        "hs" : "true",
+        "corr_eco" : "false",
+        "afe" : "false",
+        "ext" : "false",
+        "prior_az" : "2",
+        "prior_int" : "2",
+        "c_com_cat" : "340",
+        "den_cat" : "Savignano 1^",
+        "c_num_part" : "282/3",
+        "lun_ml" : "48",
+        "costo_uni" : "8.7",
+        "costo_tot" : "413.834302203",
+        "proprieta" : "PROPRIETA' PRIVATA",
+        "com_valle" : "Comunita della Vallagarina",
+        "comune" : "Pomarolo",
+        "ato" : "Rovereto-Vallagarina",
+        "files" : null
+      },
+      "geometry" : {
+        "type" : "LineString",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:32632"
+          }
+        },
+        "coordinates" : [ [ 659090.066244, 5089131.554327 ], [ 659111.550344, 5089124.287627 ], [ 659134.930144, 5089115.757227 ] ]
+      },
+      "id" : "azioni_linea.fid--33a0c341_1697ba78b75_-6830"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id" : "3362",
+        "gid" : "3170",
+        "cod_azione" : "EP",
+        "azione" : "EP01",
+        "denominaz" : "Piantumazione siepi/filari/alberi isolati",
+        "nat2000" : "false",
+        "rnp" : "false",
+        "rl" : "false",
+        "hs" : "true",
+        "corr_eco" : "false",
+        "afe" : "false",
+        "ext" : "false",
+        "prior_az" : "2",
+        "prior_int" : "2",
+        "c_com_cat" : "282",
+        "den_cat" : "Pomarolo 1^",
+        "c_num_part" : "437",
+        "lun_ml" : "13",
+        "costo_uni" : "8.7",
+        "costo_tot" : "116.513408285",
+        "proprieta" : "PROPRIETA' PRIVATA",
+        "com_valle" : "Comunita della Vallagarina",
+        "comune" : "Pomarolo",
+        "ato" : "Rovereto-Vallagarina",
+        "files" : null
+      },
+      "geometry" : {
+        "type" : "LineString",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:32632"
+          }
+        },
+        "coordinates" : [ [ 659338.081344, 5088654.480627 ], [ 659336.994844, 5088641.132427 ] ]
+      },
+      "id" : "azioni_linea.fid--33a0c341_1697ba78b75_-682f"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id" : "3363",
+        "gid" : "3171",
+        "cod_azione" : "EP",
+        "azione" : "EP01",
+        "denominaz" : "Piantumazione siepi/filari/alberi isolati",
+        "nat2000" : "false",
+        "rnp" : "false",
+        "rl" : "false",
+        "hs" : "true",
+        "corr_eco" : "false",
+        "afe" : "false",
+        "ext" : "false",
+        "prior_az" : "2",
+        "prior_int" : "2",
+        "c_com_cat" : "282",
+        "den_cat" : "Pomarolo 1^",
+        "c_num_part" : "444",
+        "lun_ml" : "32",
+        "costo_uni" : "8.7",
+        "costo_tot" : "275.848313967",
+        "proprieta" : "PROPRIETA' PRIVATA",
+        "com_valle" : "Comunita della Vallagarina",
+        "comune" : "Pomarolo",
+        "ato" : "Rovereto-Vallagarina",
+        "files" : null
+      },
+      "geometry" : {
+        "type" : "LineString",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:32632"
+          }
+        },
+        "coordinates" : [ [ 659331.825644, 5088577.625127 ], [ 659331.446544, 5088572.967427 ], [ 659330.160644, 5088545.964427 ] ]
+      },
+      "id" : "azioni_linea.fid--33a0c341_1697ba78b75_-682e"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id" : "3369",
+        "gid" : "3177",
+        "cod_azione" : "EP",
+        "azione" : "EP01",
+        "denominaz" : "Piantumazione siepi/filari/alberi isolati",
+        "nat2000" : "false",
+        "rnp" : "false",
+        "rl" : "false",
+        "hs" : "true",
+        "corr_eco" : "false",
+        "afe" : "false",
+        "ext" : "false",
+        "prior_az" : "2",
+        "prior_int" : "2",
+        "c_com_cat" : "340",
+        "den_cat" : "Savignano 1^",
+        "c_num_part" : "140/6",
+        "lun_ml" : "10",
+        "costo_uni" : "8.7",
+        "costo_tot" : "89.004317321",
+        "proprieta" : "PROPRIETA' PRIVATA",
+        "com_valle" : "Comunita della Vallagarina",
+        "comune" : "Pomarolo",
+        "ato" : "Rovereto-Vallagarina",
+        "files" : null
+      },
+      "geometry" : {
+        "type" : "LineString",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:32632"
+          }
+        },
+        "coordinates" : [ [ 659460.351244, 5089172.626927 ], [ 659469.781344, 5089168.660327 ] ]
+      },
+      "id" : "azioni_linea.fid--33a0c341_1697ba78b75_-6828"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id" : "3370",
+        "gid" : "3178",
+        "cod_azione" : "EP",
+        "azione" : "EP01",
+        "denominaz" : "Piantumazione siepi/filari/alberi isolati",
+        "nat2000" : "false",
+        "rnp" : "false",
+        "rl" : "false",
+        "hs" : "true",
+        "corr_eco" : "false",
+        "afe" : "false",
+        "ext" : "false",
+        "prior_az" : "2",
+        "prior_int" : "2",
+        "c_com_cat" : "340",
+        "den_cat" : "Savignano 1^",
+        "c_num_part" : "140/2",
+        "lun_ml" : "105",
+        "costo_uni" : "8.7",
+        "costo_tot" : "911.025774486",
+        "proprieta" : "PROPRIETA' PRIVATA",
+        "com_valle" : "Comunita della Vallagarina",
+        "comune" : "Pomarolo",
+        "ato" : "Rovereto-Vallagarina",
+        "files" : null
+      },
+      "geometry" : {
+        "type" : "LineString",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:32632"
+          }
+        },
+        "coordinates" : [ [ 659469.781344, 5089168.660327 ], [ 659500.160044, 5089155.881927 ], [ 659537.757244, 5089137.241327 ], [ 659562.400744, 5089120.496327 ] ]
+      },
+      "id" : "azioni_linea.fid--33a0c341_1697ba78b75_-6827"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id" : "3378",
+        "gid" : "3186",
+        "cod_azione" : "EP",
+        "azione" : "EP01",
+        "denominaz" : "Piantumazione siepi/filari/alberi isolati",
+        "nat2000" : "false",
+        "rnp" : "false",
+        "rl" : "false",
+        "hs" : "true",
+        "corr_eco" : "false",
+        "afe" : "false",
+        "ext" : "false",
+        "prior_az" : "2",
+        "prior_int" : "2",
+        "c_com_cat" : "282",
+        "den_cat" : "Pomarolo 1^",
+        "c_num_part" : "148/3",
+        "lun_ml" : "26",
+        "costo_uni" : "8.7",
+        "costo_tot" : "223.912729355",
+        "proprieta" : "PROPRIETA' PUBBLICA COMUNALE",
+        "com_valle" : "Comunita della Vallagarina",
+        "comune" : "Pomarolo",
+        "ato" : "Rovereto-Vallagarina",
+        "files" : null
+      },
+      "geometry" : {
+        "type" : "LineString",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:32632"
+          }
+        },
+        "coordinates" : [ [ 658660.947644, 5088056.120827 ], [ 658684.843944, 5088065.679327 ] ]
+      },
+      "id" : "azioni_linea.fid--33a0c341_1697ba78b75_-681f"
+    } ]
+  }
+}

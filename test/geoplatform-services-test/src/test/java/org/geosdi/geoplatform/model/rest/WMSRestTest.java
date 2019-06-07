@@ -37,10 +37,7 @@ package org.geosdi.geoplatform.model.rest;
 import org.geosdi.geoplatform.model.soap.ServiceWMSTest;
 import org.geosdi.geoplatform.request.RequestByID;
 import org.geosdi.geoplatform.response.ServerDTO;
-import org.geosdi.geoplatform.services.request.GPWMSGetFeatureInfoElement;
-import org.geosdi.geoplatform.services.request.GPWMSGetFeatureInfoRequest;
-import org.geosdi.geoplatform.services.request.WMSGetFeatureInfoBoundingBox;
-import org.geosdi.geoplatform.services.request.WMSGetFeatureInfoPoint;
+import org.geosdi.geoplatform.services.request.*;
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Ignore;
@@ -54,6 +51,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.ws.rs.core.Response;
 import java.util.Arrays;
+
+import static org.geosdi.geoplatform.services.request.WMSGetFeatureInfoResponseFormat.FEATURE_STORE;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -107,6 +106,7 @@ public class WMSRestTest extends ServiceWMSTest {
         point.setX(170);
         point.setY(160);
         wmsGetFeatureInfoRequest.setPoint(point);
+        wmsGetFeatureInfoRequest.setFormat(FEATURE_STORE);
         GPWMSGetFeatureInfoElement wmsGetFeatureInfoElement = new GPWMSGetFeatureInfoElement();
         wmsGetFeatureInfoElement.setWmsServerURL("http://150.145.141.180/geoserver/wms");
         wmsGetFeatureInfoElement.setLayers(Arrays.asList("topp:states", "topp:states"));

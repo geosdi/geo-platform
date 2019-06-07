@@ -1,0 +1,306 @@
+{
+  "key" : "FEATURE_NAME",
+  "store" : {
+    "livello_risonanza_edifici" : [ {
+      "type" : "Feature",
+      "properties" : {
+        "CLASSID" : "a598e635-d99b-4f0b-8026-1ad1ca29bfa9",
+        "ALTEZZA_VO" : "17.68",
+        "NOME_COM" : "MATERA",
+        "T" : "0.293",
+        "X_centroid" : "635196.6244",
+        "Y_centroid" : "4503852.359",
+        "f0_HVSR" : "3.413",
+        "f0_b" : "3.37948",
+        "f0_s" : "4.89596",
+        "f1_s" : "1.67417",
+        "f2_s" : "8.3913",
+        "f1_b" : "2.45199",
+        "f2_b" : "5.43552",
+        "Danger_2" : "100 % - 585 - 14.45 %",
+        "CLASSREF" : "90550ab2-4770-48a4-b0d8-b9cd9f4dd456",
+        "SCRIL" : "NC5",
+        "EDIFC_USO" : "01",
+        "USO" : "residenziale",
+        "EDIFC_TY" : "01",
+        "TIPOLOGIA" : "generica",
+        "EDIFC_SOT" : "01",
+        "SOTTERRANE" : "non sotterraneo",
+        "EDIFC_MON" : "0.0",
+        "EDIFC_STAT" : "03",
+        "STATO" : "costruito",
+        "NOME_EDIF" : null,
+        "PROVIN_IST" : "077",
+        "NOME_PROV" : "MATERA",
+        "COMUNE_IST" : "17077014",
+        "NOME_COM_1" : "MATERA",
+        "TIPOMATER" : "Muratura portante",
+        "ANNIEPOCA" : "1946 1960",
+        "Age" : "[2]_1946_1960",
+        "Type" : "Masonry",
+        "Use" : "Residential"
+      },
+      "geometry" : {
+        "type" : "MultiPolygon",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:32633"
+          }
+        },
+        "coordinates" : [ [ [ [ 635200.59999906, 4503847.7081148 ], [ 635191.83499906, 4503834.5451148 ], [ 635182.91499906, 4503839.6011148 ], [ 635198.02199906, 4503868.1021148 ], [ 635210.11099906, 4503863.03311479 ], [ 635200.59999906, 4503847.7081148 ] ] ] ]
+      },
+      "id" : "livello_risonanza_edifici.8"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "CLASSID" : "d17f8d94-7a00-431e-b0ce-e8a8678c4def",
+        "ALTEZZA_VO" : "12.916",
+        "NOME_COM" : "MATERA",
+        "T" : "0.214",
+        "X_centroid" : "635157.3779",
+        "Y_centroid" : "4503848.492",
+        "f0_HVSR" : "4.673",
+        "f0_b" : "4.62598",
+        "f0_s" : "4.89596",
+        "f1_s" : "1.67417",
+        "f2_s" : "8.3913",
+        "f1_b" : "3.0507",
+        "f2_b" : "9.56504",
+        "Danger_2" : "75 - 100 % - 449 - 11.09%",
+        "CLASSREF" : "5e2216df-9d26-4c5c-ac57-30e80f862e9f",
+        "SCRIL" : "NC5",
+        "EDIFC_USO" : "01",
+        "USO" : "residenziale",
+        "EDIFC_TY" : "01",
+        "TIPOLOGIA" : "generica",
+        "EDIFC_SOT" : "01",
+        "SOTTERRANE" : "non sotterraneo",
+        "EDIFC_MON" : "0.0",
+        "EDIFC_STAT" : "03",
+        "STATO" : "costruito",
+        "NOME_EDIF" : null,
+        "PROVIN_IST" : "077",
+        "NOME_PROV" : "MATERA",
+        "COMUNE_IST" : "17077014",
+        "NOME_COM_1" : "MATERA",
+        "TIPOMATER" : "Muratura portante",
+        "ANNIEPOCA" : "1946 1960",
+        "Age" : "[2]_1946_1960",
+        "Type" : "Masonry",
+        "Use" : "Residential"
+      },
+      "geometry" : {
+        "type" : "MultiPolygon",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:32633"
+          }
+        },
+        "coordinates" : [ [ [ [ 635149.87699906, 4503847.2321148 ], [ 635155.96399906, 4503860.7071148 ], [ 635167.32599906, 4503854.04011479 ], [ 635158.87899906, 4503837.6501148 ], [ 635149.87699906, 4503847.2321148 ] ] ] ]
+      },
+      "id" : "livello_risonanza_edifici.518"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "CLASSID" : "9d13de2c-bf08-460f-9edf-4fc46c81eee0",
+        "ALTEZZA_VO" : "7.76",
+        "NOME_COM" : "MATERA",
+        "T" : "0.129",
+        "X_centroid" : "635178.2015",
+        "Y_centroid" : "4503840.146",
+        "f0_HVSR" : "7.752",
+        "f0_b" : "7.69963",
+        "f0_s" : "4.89596",
+        "f1_s" : "1.67417",
+        "f2_s" : "8.3913",
+        "f1_b" : "4.14464",
+        "f2_b" : "54.12002",
+        "Danger_2" : "50 - 75 % - 1468 - 36.25 %",
+        "CLASSREF" : "90550ab2-4770-48a4-b0d8-b9cd9f4dd456",
+        "SCRIL" : "NC5",
+        "EDIFC_USO" : "01",
+        "USO" : "residenziale",
+        "EDIFC_TY" : "01",
+        "TIPOLOGIA" : "generica",
+        "EDIFC_SOT" : "01",
+        "SOTTERRANE" : "non sotterraneo",
+        "EDIFC_MON" : "0.0",
+        "EDIFC_STAT" : "03",
+        "STATO" : "costruito",
+        "NOME_EDIF" : null,
+        "PROVIN_IST" : "077",
+        "NOME_PROV" : "MATERA",
+        "COMUNE_IST" : "17077014",
+        "NOME_COM_1" : "MATERA",
+        "TIPOMATER" : "Muratura portante",
+        "ANNIEPOCA" : "1946 1960",
+        "Age" : "[2]_1946_1960",
+        "Type" : "Masonry",
+        "Use" : "Residential"
+      },
+      "geometry" : {
+        "type" : "MultiPolygon",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:32633"
+          }
+        },
+        "coordinates" : [ [ [ [ 635184.74599906, 4503832.24011479 ], [ 635168.22599906, 4503836.52911479 ], [ 635176.50799906, 4503850.5201148 ], [ 635184.74599906, 4503832.24011479 ] ] ] ]
+      },
+      "id" : "livello_risonanza_edifici.773"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "CLASSID" : "73f0da17-3e70-4640-bb23-fae4def5767b",
+        "ALTEZZA_VO" : "12.0",
+        "NOME_COM" : "MATERA",
+        "T" : "0.199",
+        "X_centroid" : "635185.9665",
+        "Y_centroid" : "4503856.171",
+        "f0_HVSR" : "5.025",
+        "f0_b" : "4.9791",
+        "f0_s" : "4.89596",
+        "f1_s" : "1.67417",
+        "f2_s" : "8.3913",
+        "f1_b" : "3.20087",
+        "f2_b" : "11.20265",
+        "Danger_2" : "75 - 100 % - 449 - 11.09%",
+        "CLASSREF" : "90550ab2-4770-48a4-b0d8-b9cd9f4dd456",
+        "SCRIL" : "NC5",
+        "EDIFC_USO" : "01",
+        "USO" : "residenziale",
+        "EDIFC_TY" : "01",
+        "TIPOLOGIA" : "generica",
+        "EDIFC_SOT" : "01",
+        "SOTTERRANE" : "non sotterraneo",
+        "EDIFC_MON" : "0.0",
+        "EDIFC_STAT" : "03",
+        "STATO" : "costruito",
+        "NOME_EDIF" : null,
+        "PROVIN_IST" : "077",
+        "NOME_PROV" : "MATERA",
+        "COMUNE_IST" : "17077014",
+        "NOME_COM_1" : "MATERA",
+        "TIPOMATER" : "Muratura portante",
+        "ANNIEPOCA" : "1946 1960",
+        "Age" : "[2]_1946_1960",
+        "Type" : "Masonry",
+        "Use" : "Residential"
+      },
+      "geometry" : {
+        "type" : "MultiPolygon",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:32633"
+          }
+        },
+        "coordinates" : [ [ [ [ 635176.50799906, 4503850.5201148 ], [ 635186.63899906, 4503868.2751148 ], [ 635194.30199906, 4503863.2291148 ], [ 635186.25999906, 4503844.9091148 ], [ 635176.50799906, 4503850.5201148 ] ] ] ]
+      },
+      "id" : "livello_risonanza_edifici.1809"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "CLASSID" : "239969b9-042e-4af5-bcf1-94f4c5c453b0",
+        "ALTEZZA_VO" : "18.156",
+        "NOME_COM" : "MATERA",
+        "T" : "0.301",
+        "X_centroid" : "635159.164",
+        "Y_centroid" : "4503866.165",
+        "f0_HVSR" : "3.322",
+        "f0_b" : "3.29088",
+        "f0_s" : "4.89596",
+        "f1_s" : "1.67417",
+        "f2_s" : "8.3913",
+        "f1_b" : "2.4048",
+        "f2_b" : "5.21089",
+        "Danger_2" : "100 % - 585 - 14.45 %",
+        "CLASSREF" : "411b9ee0-8f88-4bc0-8c19-2d050b53fa0c",
+        "SCRIL" : "NC5",
+        "EDIFC_USO" : "01",
+        "USO" : "residenziale",
+        "EDIFC_TY" : "01",
+        "TIPOLOGIA" : "generica",
+        "EDIFC_SOT" : "01",
+        "SOTTERRANE" : "non sotterraneo",
+        "EDIFC_MON" : "0.0",
+        "EDIFC_STAT" : "03",
+        "STATO" : "costruito",
+        "NOME_EDIF" : null,
+        "PROVIN_IST" : "077",
+        "NOME_PROV" : "MATERA",
+        "COMUNE_IST" : "17077014",
+        "NOME_COM_1" : "MATERA",
+        "TIPOMATER" : "Muratura portante",
+        "ANNIEPOCA" : "1946 1960",
+        "Age" : "[2]_1946_1960",
+        "Type" : "Masonry",
+        "Use" : "Residential"
+      },
+      "geometry" : {
+        "type" : "MultiPolygon",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:32633"
+          }
+        },
+        "coordinates" : [ [ [ [ 635137.89599906, 4503859.7351148 ], [ 635157.83099906, 4503881.2301148 ], [ 635176.10099906, 4503870.5591148 ], [ 635166.96399906, 4503854.08911479 ], [ 635147.85799906, 4503865.0621148 ], [ 635143.19999906, 4503850.6171148 ], [ 635137.89599906, 4503859.7351148 ] ] ] ]
+      },
+      "id" : "livello_risonanza_edifici.2655"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "CLASSID" : "d5b9b9a1-834b-4045-8925-26a584dcbbf3",
+        "ALTEZZA_VO" : "17.94",
+        "NOME_COM" : "MATERA",
+        "T" : "0.298",
+        "X_centroid" : "635202.2264",
+        "Y_centroid" : "4503872.582",
+        "f0_HVSR" : "3.356",
+        "f0_b" : "3.3305",
+        "f0_s" : "3.36798",
+        "f1_s" : "1.38147",
+        "f2_s" : "5.24522",
+        "f1_b" : "2.42599",
+        "f2_b" : "5.31048",
+        "Danger_2" : "50 - 75 % - 1468 - 36.25 %",
+        "CLASSREF" : "d7229b31-2bb8-4a76-a7d1-3fd928a7a169",
+        "SCRIL" : "NC5",
+        "EDIFC_USO" : "01",
+        "USO" : "residenziale",
+        "EDIFC_TY" : "01",
+        "TIPOLOGIA" : "generica",
+        "EDIFC_SOT" : "01",
+        "SOTTERRANE" : "non sotterraneo",
+        "EDIFC_MON" : "0.0",
+        "EDIFC_STAT" : "03",
+        "STATO" : "costruito",
+        "NOME_EDIF" : null,
+        "PROVIN_IST" : "077",
+        "NOME_PROV" : "MATERA",
+        "COMUNE_IST" : "17077014",
+        "NOME_COM_1" : "MATERA",
+        "TIPOMATER" : "Muratura portante",
+        "ANNIEPOCA" : "1946 1960",
+        "Age" : "[2]_1946_1960",
+        "Type" : "Masonry",
+        "Use" : "Residential"
+      },
+      "geometry" : {
+        "type" : "MultiPolygon",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:32633"
+          }
+        },
+        "coordinates" : [ [ [ [ 635186.63899906, 4503868.2751148 ], [ 635199.09099906, 4503886.1601148 ], [ 635218.81399906, 4503870.1831148 ], [ 635209.53899906, 4503859.74311479 ], [ 635186.63899906, 4503868.2751148 ] ] ] ]
+      },
+      "id" : "livello_risonanza_edifici.3091"
+    } ]
+  }
+}

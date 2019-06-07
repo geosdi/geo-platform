@@ -1,0 +1,24 @@
+{
+  "key" : "FEATURE_NAME",
+  "store" : {
+    "tempo" : [ {
+      "type" : "Feature",
+      "properties" : {
+        "temp" : "2019-03-04T03:30:00",
+        "string" : "testo7",
+        "num" : "9.0"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 16.08862305, 40.48758157 ]
+      },
+      "id" : "tempo.4"
+    } ]
+  }
+}

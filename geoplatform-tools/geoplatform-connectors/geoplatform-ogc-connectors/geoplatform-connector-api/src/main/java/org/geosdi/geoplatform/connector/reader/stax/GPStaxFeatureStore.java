@@ -12,7 +12,7 @@ import java.util.Map;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPStaxFeatureStore extends Serializable {
+public interface GPStaxFeatureStore<K extends Object> extends Serializable {
 
     /**
      * @param feature
@@ -23,5 +23,5 @@ public interface GPStaxFeatureStore extends Serializable {
     /**
      * @return {@link Map<String, List<Feature>}
      */
-    Map<String, List<Feature>> getStore();
+    Map<K, List<Feature>> getStore();
 }

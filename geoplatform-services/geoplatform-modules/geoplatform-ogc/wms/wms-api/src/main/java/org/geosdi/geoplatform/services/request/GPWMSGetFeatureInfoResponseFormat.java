@@ -14,4 +14,9 @@ public interface GPWMSGetFeatureInfoResponseFormat extends Serializable {
      * @return {@link WMSFeatureInfoFormat}
      */
     WMSFeatureInfoFormat toWMSFeatureInfoFormat();
+
+    /**
+     * @return {@link GPWMSGetFeatureInfoReponseErrorStrategy}
+     */
+    GPWMSGetFeatureInfoReponseErrorStrategy toWMSGetFeatureInfoResponseErrorStrategy();
 }

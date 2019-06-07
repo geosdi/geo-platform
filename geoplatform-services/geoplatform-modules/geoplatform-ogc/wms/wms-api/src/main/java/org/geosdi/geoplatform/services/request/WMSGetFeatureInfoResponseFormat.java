@@ -25,6 +25,14 @@ public enum WMSGetFeatureInfoResponseFormat implements GPWMSGetFeatureInfoRespon
         public WMSFeatureInfoFormat toWMSFeatureInfoFormat() {
             return GML;
         }
+
+        /**
+         * @return {@link GPWMSGetFeatureInfoReponseErrorStrategy}
+         */
+        @Override
+        public GPWMSGetFeatureInfoReponseErrorStrategy toWMSGetFeatureInfoResponseErrorStrategy() {
+            return new WMSGeoJsonResponseErrorStrategy();
+        }
     },
     FEATURE_STORE {
         /**
@@ -33,6 +41,14 @@ public enum WMSGetFeatureInfoResponseFormat implements GPWMSGetFeatureInfoRespon
         @Override
         public WMSFeatureInfoFormat toWMSFeatureInfoFormat() {
             return GML_AS_STORE;
+        }
+
+        /**
+         * @return {@link GPWMSGetFeatureInfoReponseErrorStrategy}
+         */
+        @Override
+        public GPWMSGetFeatureInfoReponseErrorStrategy toWMSGetFeatureInfoResponseErrorStrategy() {
+            return new WMSFeatureStoreResponseErrorStrategy();
         }
     };
 

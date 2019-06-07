@@ -1,0 +1,38 @@
+{
+  "key" : "FEATURE_NAME",
+  "store" : {
+    "tasmania_roads" : [ {
+      "type" : "Feature",
+      "properties" : {
+        "TYPE" : "highway"
+      },
+      "geometry" : {
+        "type" : "MultiLineString",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ [ 147.522247, -41.859921 ], [ 147.551865, -41.927834 ], [ 147.597321, -42.017418 ], [ 147.578644, -42.113216 ], [ 147.541656, -42.217743 ], [ 147.468674, -42.22662 ] ] ]
+      },
+      "id" : "tasmania_roads.4"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "TYPE" : "highway"
+      },
+      "geometry" : {
+        "type" : "MultiLineString",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ [ 147.300583, -41.637878 ], [ 147.372009, -41.695503 ], [ 147.402588, -41.725574 ], [ 147.444061, -41.749676 ], [ 147.490433, -41.782482 ], [ 147.506866, -41.795624 ], [ 147.522919, -41.835609 ], [ 147.522247, -41.859921 ] ] ]
+      },
+      "id" : "tasmania_roads.11"
+    } ]
+  }
+}

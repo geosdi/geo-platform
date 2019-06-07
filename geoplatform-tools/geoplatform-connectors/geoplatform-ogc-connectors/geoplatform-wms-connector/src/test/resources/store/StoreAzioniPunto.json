@@ -1,0 +1,1402 @@
+{
+  "key" : "FEATURE_NAME",
+  "store" : {
+    "azioni_punto" : [ {
+      "type" : "Feature",
+      "properties" : {
+        "id" : "1",
+        "gid" : "1",
+        "cod_azione" : "AA",
+        "azione" : "AA04",
+        "denominaz" : "Creare o ripristinare specchi d'acqua anche per anfibi",
+        "nat2000" : "false",
+        "rnp" : "false",
+        "rl" : "true",
+        "hs" : "true",
+        "corr_eco" : "false",
+        "afe" : "false",
+        "ext" : "false",
+        "prior_az" : "1",
+        "prior_int" : "1",
+        "c_com_cat" : "385",
+        "den_cat" : "Terlago",
+        "c_num_part" : "2504",
+        "costo_uni" : "5000.0",
+        "costo_tot" : "5000.0",
+        "note" : "Dimensioni 3x3 m con sponde e fondale in pietra - Azione prevista da PDG e Accordo di\n                programma",
+        "proprieta" : "PROPRIETA' PRIVATA",
+        "com_valle" : "Comunita della Valle dei Laghi",
+        "comune" : "Terlago",
+        "ato" : "Bondone",
+        "rr" : "Rete di Riserve Alpi Ledrensi",
+        "files" : null
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:32632"
+          }
+        },
+        "coordinates" : [ -0.72707172, 1.80075732 ]
+      },
+      "id" : "azioni_punto.fid--33a0c341_1697ba78b75_-646a"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id" : "2",
+        "gid" : "1",
+        "cod_azione" : "AA",
+        "azione" : "AA04",
+        "denominaz" : "Creare o ripristinare specchi d'acqua anche per anfibi",
+        "nat2000" : "false",
+        "rnp" : "false",
+        "rl" : "true",
+        "hs" : "true",
+        "corr_eco" : "false",
+        "afe" : "false",
+        "ext" : "false",
+        "prior_az" : "1",
+        "prior_int" : "1",
+        "c_com_cat" : "385",
+        "den_cat" : "Terlago",
+        "c_num_part" : "2504",
+        "costo_uni" : "5000.0",
+        "costo_tot" : "5000.0",
+        "note" : "Dimensioni 3x3 m con sponde e fondale in pietra - Azione prevista da PDG e Accordo di\n                programma",
+        "proprieta" : "PROPRIETA' PRIVATA",
+        "com_valle" : "Comunita della Valle dei Laghi",
+        "comune" : "Terlago",
+        "ato" : "Bondone",
+        "rr" : "Rete di Riserve Basso Sarca",
+        "files" : null
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:32632"
+          }
+        },
+        "coordinates" : [ -0.72707172, 1.80075732 ]
+      },
+      "id" : "azioni_punto.fid--33a0c341_1697ba78b75_-6469"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id" : "3",
+        "gid" : "1",
+        "cod_azione" : "AA",
+        "azione" : "AA04",
+        "denominaz" : "Creare o ripristinare specchi d'acqua anche per anfibi",
+        "nat2000" : "false",
+        "rnp" : "false",
+        "rl" : "true",
+        "hs" : "true",
+        "corr_eco" : "false",
+        "afe" : "false",
+        "ext" : "false",
+        "prior_az" : "1",
+        "prior_int" : "1",
+        "c_com_cat" : "385",
+        "den_cat" : "Terlago",
+        "c_num_part" : "2504",
+        "costo_uni" : "5000.0",
+        "costo_tot" : "5000.0",
+        "note" : "Dimensioni 3x3 m con sponde e fondale in pietra - Azione prevista da PDG e Accordo di\n                programma",
+        "proprieta" : "PROPRIETA' PRIVATA",
+        "com_valle" : "Comunita della Valle dei Laghi",
+        "comune" : "Terlago",
+        "ato" : "Bondone",
+        "rr" : "Rete di Riserve Monte Bondone",
+        "files" : null
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:32632"
+          }
+        },
+        "coordinates" : [ -0.72707172, 1.80075732 ]
+      },
+      "id" : "azioni_punto.fid--33a0c341_1697ba78b75_-6468"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id" : "4",
+        "gid" : "2",
+        "cod_azione" : "AA",
+        "azione" : "AA04",
+        "denominaz" : "Creare o ripristinare specchi d'acqua anche per anfibi",
+        "nat2000" : "false",
+        "rnp" : "false",
+        "rl" : "true",
+        "hs" : "true",
+        "corr_eco" : "false",
+        "afe" : "false",
+        "ext" : "false",
+        "prior_az" : "1",
+        "prior_int" : "1",
+        "c_com_cat" : "385",
+        "den_cat" : "Terlago",
+        "c_num_part" : "2499/3",
+        "costo_uni" : "5000.0",
+        "costo_tot" : "5000.0",
+        "note" : "Dimensioni 3x3 m con sponde e fondale in pietra - Azione prevista da PDG e Accordo di\n                programma",
+        "proprieta" : "PROPRIETA' PRIVATA",
+        "com_valle" : "Comunita della Valle dei Laghi",
+        "comune" : "Terlago",
+        "ato" : "Bondone",
+        "rr" : "Rete di Riserve Alpi Ledrensi",
+        "files" : null
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:32632"
+          }
+        },
+        "coordinates" : [ -0.45173897, 1.47426039 ]
+      },
+      "id" : "azioni_punto.fid--33a0c341_1697ba78b75_-6467"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id" : "5",
+        "gid" : "2",
+        "cod_azione" : "AA",
+        "azione" : "AA04",
+        "denominaz" : "Creare o ripristinare specchi d'acqua anche per anfibi",
+        "nat2000" : "false",
+        "rnp" : "false",
+        "rl" : "true",
+        "hs" : "true",
+        "corr_eco" : "false",
+        "afe" : "false",
+        "ext" : "false",
+        "prior_az" : "1",
+        "prior_int" : "1",
+        "c_com_cat" : "385",
+        "den_cat" : "Terlago",
+        "c_num_part" : "2499/3",
+        "costo_uni" : "5000.0",
+        "costo_tot" : "5000.0",
+        "note" : "Dimensioni 3x3 m con sponde e fondale in pietra - Azione prevista da PDG e Accordo di\n                programma",
+        "proprieta" : "PROPRIETA' PRIVATA",
+        "com_valle" : "Comunita della Valle dei Laghi",
+        "comune" : "Terlago",
+        "ato" : "Bondone",
+        "rr" : "Rete di Riserve Basso Sarca",
+        "files" : null
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:32632"
+          }
+        },
+        "coordinates" : [ -0.45173897, 1.47426039 ]
+      },
+      "id" : "azioni_punto.fid--33a0c341_1697ba78b75_-6466"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id" : "6",
+        "gid" : "2",
+        "cod_azione" : "AA",
+        "azione" : "AA04",
+        "denominaz" : "Creare o ripristinare specchi d'acqua anche per anfibi",
+        "nat2000" : "false",
+        "rnp" : "false",
+        "rl" : "true",
+        "hs" : "true",
+        "corr_eco" : "false",
+        "afe" : "false",
+        "ext" : "false",
+        "prior_az" : "1",
+        "prior_int" : "1",
+        "c_com_cat" : "385",
+        "den_cat" : "Terlago",
+        "c_num_part" : "2499/3",
+        "costo_uni" : "5000.0",
+        "costo_tot" : "5000.0",
+        "note" : "Dimensioni 3x3 m con sponde e fondale in pietra - Azione prevista da PDG e Accordo di\n                programma",
+        "proprieta" : "PROPRIETA' PRIVATA",
+        "com_valle" : "Comunita della Valle dei Laghi",
+        "comune" : "Terlago",
+        "ato" : "Bondone",
+        "rr" : "Rete di Riserve Monte Bondone",
+        "files" : null
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:32632"
+          }
+        },
+        "coordinates" : [ -0.45173897, 1.47426039 ]
+      },
+      "id" : "azioni_punto.fid--33a0c341_1697ba78b75_-6465"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id" : "7",
+        "gid" : "3",
+        "cod_azione" : "AA",
+        "azione" : "AA04",
+        "denominaz" : "Creare o ripristinare specchi d'acqua anche per anfibi",
+        "nat2000" : "false",
+        "rnp" : "false",
+        "rl" : "true",
+        "hs" : "true",
+        "corr_eco" : "false",
+        "afe" : "false",
+        "ext" : "false",
+        "prior_az" : "1",
+        "prior_int" : "1",
+        "c_com_cat" : "385",
+        "den_cat" : "Terlago",
+        "c_num_part" : "2478",
+        "costo_uni" : "10000.0",
+        "costo_tot" : "10000.0",
+        "note" : "Pulizia specchio d'acqua con allargamento, circa 30x10 m - Azione prevista da PDG e Accordo di\n                programma",
+        "proprieta" : "PROPRIETA' PRIVATA",
+        "com_valle" : "Comunita della Valle dei Laghi",
+        "comune" : "Terlago",
+        "ato" : "Bondone",
+        "rr" : "Rete di Riserve Alpi Ledrensi",
+        "files" : null
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:32632"
+          }
+        },
+        "coordinates" : [ 0.69199209, 0.55077756 ]
+      },
+      "id" : "azioni_punto.fid--33a0c341_1697ba78b75_-6464"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id" : "8",
+        "gid" : "3",
+        "cod_azione" : "AA",
+        "azione" : "AA04",
+        "denominaz" : "Creare o ripristinare specchi d'acqua anche per anfibi",
+        "nat2000" : "false",
+        "rnp" : "false",
+        "rl" : "true",
+        "hs" : "true",
+        "corr_eco" : "false",
+        "afe" : "false",
+        "ext" : "false",
+        "prior_az" : "1",
+        "prior_int" : "1",
+        "c_com_cat" : "385",
+        "den_cat" : "Terlago",
+        "c_num_part" : "2478",
+        "costo_uni" : "10000.0",
+        "costo_tot" : "10000.0",
+        "note" : "Pulizia specchio d'acqua con allargamento, circa 30x10 m - Azione prevista da PDG e Accordo di\n                programma",
+        "proprieta" : "PROPRIETA' PRIVATA",
+        "com_valle" : "Comunita della Valle dei Laghi",
+        "comune" : "Terlago",
+        "ato" : "Bondone",
+        "rr" : "Rete di Riserve Basso Sarca",
+        "files" : null
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:32632"
+          }
+        },
+        "coordinates" : [ 0.69199209, 0.55077756 ]
+      },
+      "id" : "azioni_punto.fid--33a0c341_1697ba78b75_-6463"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id" : "9",
+        "gid" : "3",
+        "cod_azione" : "AA",
+        "azione" : "AA04",
+        "denominaz" : "Creare o ripristinare specchi d'acqua anche per anfibi",
+        "nat2000" : "false",
+        "rnp" : "false",
+        "rl" : "true",
+        "hs" : "true",
+        "corr_eco" : "false",
+        "afe" : "false",
+        "ext" : "false",
+        "prior_az" : "1",
+        "prior_int" : "1",
+        "c_com_cat" : "385",
+        "den_cat" : "Terlago",
+        "c_num_part" : "2478",
+        "costo_uni" : "10000.0",
+        "costo_tot" : "10000.0",
+        "note" : "Pulizia specchio d'acqua con allargamento, circa 30x10 m - Azione prevista da PDG e Accordo di\n                programma",
+        "proprieta" : "PROPRIETA' PRIVATA",
+        "com_valle" : "Comunita della Valle dei Laghi",
+        "comune" : "Terlago",
+        "ato" : "Bondone",
+        "rr" : "Rete di Riserve Monte Bondone",
+        "files" : null
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:32632"
+          }
+        },
+        "coordinates" : [ 0.69199209, 0.55077756 ]
+      },
+      "id" : "azioni_punto.fid--33a0c341_1697ba78b75_-6462"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id" : "10",
+        "gid" : "4",
+        "cod_azione" : "AA",
+        "azione" : "AA04",
+        "denominaz" : "Creare o ripristinare specchi d'acqua anche per anfibi",
+        "nat2000" : "false",
+        "rnp" : "false",
+        "rl" : "true",
+        "hs" : "true",
+        "corr_eco" : "false",
+        "afe" : "false",
+        "ext" : "false",
+        "prior_az" : "1",
+        "prior_int" : "1",
+        "c_com_cat" : "385",
+        "den_cat" : "Terlago",
+        "c_num_part" : "2419",
+        "costo_uni" : "10000.0",
+        "costo_tot" : "10000.0",
+        "note" : "Pulizia specchio d'acqua con allargamento, circa 30x10 m - Azione prevista da PDG e Accordo di\n                programma",
+        "proprieta" : "PROPRIETA' PRIVATA",
+        "com_valle" : "Comunita della Valle dei Laghi",
+        "comune" : "Terlago",
+        "ato" : "Bondone",
+        "rr" : "Rete di Riserve Alpi Ledrensi",
+        "files" : null
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:32632"
+          }
+        },
+        "coordinates" : [ 1.06338134, 1.73195596 ]
+      },
+      "id" : "azioni_punto.fid--33a0c341_1697ba78b75_-6461"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id" : "11",
+        "gid" : "4",
+        "cod_azione" : "AA",
+        "azione" : "AA04",
+        "denominaz" : "Creare o ripristinare specchi d'acqua anche per anfibi",
+        "nat2000" : "false",
+        "rnp" : "false",
+        "rl" : "true",
+        "hs" : "true",
+        "corr_eco" : "false",
+        "afe" : "false",
+        "ext" : "false",
+        "prior_az" : "1",
+        "prior_int" : "1",
+        "c_com_cat" : "385",
+        "den_cat" : "Terlago",
+        "c_num_part" : "2419",
+        "costo_uni" : "10000.0",
+        "costo_tot" : "10000.0",
+        "note" : "Pulizia specchio d'acqua con allargamento, circa 30x10 m - Azione prevista da PDG e Accordo di\n                programma",
+        "proprieta" : "PROPRIETA' PRIVATA",
+        "com_valle" : "Comunita della Valle dei Laghi",
+        "comune" : "Terlago",
+        "ato" : "Bondone",
+        "rr" : "Rete di Riserve Basso Sarca",
+        "files" : null
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:32632"
+          }
+        },
+        "coordinates" : [ 1.06338134, 1.73195596 ]
+      },
+      "id" : "azioni_punto.fid--33a0c341_1697ba78b75_-6460"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id" : "12",
+        "gid" : "4",
+        "cod_azione" : "AA",
+        "azione" : "AA04",
+        "denominaz" : "Creare o ripristinare specchi d'acqua anche per anfibi",
+        "nat2000" : "false",
+        "rnp" : "false",
+        "rl" : "true",
+        "hs" : "true",
+        "corr_eco" : "false",
+        "afe" : "false",
+        "ext" : "false",
+        "prior_az" : "1",
+        "prior_int" : "1",
+        "c_com_cat" : "385",
+        "den_cat" : "Terlago",
+        "c_num_part" : "2419",
+        "costo_uni" : "10000.0",
+        "costo_tot" : "10000.0",
+        "note" : "Pulizia specchio d'acqua con allargamento, circa 30x10 m - Azione prevista da PDG e Accordo di\n                programma",
+        "proprieta" : "PROPRIETA' PRIVATA",
+        "com_valle" : "Comunita della Valle dei Laghi",
+        "comune" : "Terlago",
+        "ato" : "Bondone",
+        "rr" : "Rete di Riserve Monte Bondone",
+        "files" : null
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:32632"
+          }
+        },
+        "coordinates" : [ 1.06338134, 1.73195596 ]
+      },
+      "id" : "azioni_punto.fid--33a0c341_1697ba78b75_-645f"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id" : "13",
+        "gid" : "5",
+        "cod_azione" : "AA",
+        "azione" : "AA04",
+        "denominaz" : "Creare o ripristinare specchi d'acqua anche per anfibi",
+        "nat2000" : "false",
+        "rnp" : "false",
+        "rl" : "false",
+        "hs" : "false",
+        "corr_eco" : "false",
+        "afe" : "false",
+        "ext" : "true",
+        "prior_az" : "1",
+        "prior_int" : "2",
+        "c_com_cat" : "385",
+        "den_cat" : "Terlago",
+        "c_num_part" : "1106/2",
+        "costo_uni" : "1000.0",
+        "costo_tot" : "1000.0",
+        "note" : "Realizzazione vasca in cemento e pietra (3x0,5 m) con rampa di risalita, sfruttando canale già\n                esistente con sponda in cemento - Azione prevista da PDG e Accordo di programma",
+        "proprieta" : "PROPRIETA' PUBBLICA COMUNALE",
+        "com_valle" : "Comunita della Valle dei Laghi",
+        "comune" : "Terlago",
+        "ato" : "Bondone",
+        "rr" : "Rete di Riserve Alpi Ledrensi",
+        "files" : null
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:32632"
+          }
+        },
+        "coordinates" : [ -0.28437555, 6.77052048 ]
+      },
+      "id" : "azioni_punto.fid--33a0c341_1697ba78b75_-645e"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id" : "14",
+        "gid" : "5",
+        "cod_azione" : "AA",
+        "azione" : "AA04",
+        "denominaz" : "Creare o ripristinare specchi d'acqua anche per anfibi",
+        "nat2000" : "false",
+        "rnp" : "false",
+        "rl" : "false",
+        "hs" : "false",
+        "corr_eco" : "false",
+        "afe" : "false",
+        "ext" : "true",
+        "prior_az" : "1",
+        "prior_int" : "2",
+        "c_com_cat" : "385",
+        "den_cat" : "Terlago",
+        "c_num_part" : "1106/2",
+        "costo_uni" : "1000.0",
+        "costo_tot" : "1000.0",
+        "note" : "Realizzazione vasca in cemento e pietra (3x0,5 m) con rampa di risalita, sfruttando canale già\n                esistente con sponda in cemento - Azione prevista da PDG e Accordo di programma",
+        "proprieta" : "PROPRIETA' PUBBLICA COMUNALE",
+        "com_valle" : "Comunita della Valle dei Laghi",
+        "comune" : "Terlago",
+        "ato" : "Bondone",
+        "rr" : "Rete di Riserve Basso Sarca",
+        "files" : null
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:32632"
+          }
+        },
+        "coordinates" : [ -0.28437555, 6.77052048 ]
+      },
+      "id" : "azioni_punto.fid--33a0c341_1697ba78b75_-645d"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id" : "15",
+        "gid" : "5",
+        "cod_azione" : "AA",
+        "azione" : "AA04",
+        "denominaz" : "Creare o ripristinare specchi d'acqua anche per anfibi",
+        "nat2000" : "false",
+        "rnp" : "false",
+        "rl" : "false",
+        "hs" : "false",
+        "corr_eco" : "false",
+        "afe" : "false",
+        "ext" : "true",
+        "prior_az" : "1",
+        "prior_int" : "2",
+        "c_com_cat" : "385",
+        "den_cat" : "Terlago",
+        "c_num_part" : "1106/2",
+        "costo_uni" : "1000.0",
+        "costo_tot" : "1000.0",
+        "note" : "Realizzazione vasca in cemento e pietra (3x0,5 m) con rampa di risalita, sfruttando canale già\n                esistente con sponda in cemento - Azione prevista da PDG e Accordo di programma",
+        "proprieta" : "PROPRIETA' PUBBLICA COMUNALE",
+        "com_valle" : "Comunita della Valle dei Laghi",
+        "comune" : "Terlago",
+        "ato" : "Bondone",
+        "rr" : "Rete di Riserve Monte Bondone",
+        "files" : null
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:32632"
+          }
+        },
+        "coordinates" : [ -0.28437555, 6.77052048 ]
+      },
+      "id" : "azioni_punto.fid--33a0c341_1697ba78b75_-645c"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id" : "24",
+        "gid" : "10",
+        "cod_azione" : "AA",
+        "azione" : "AA04",
+        "denominaz" : "Creare o ripristinare specchi d'acqua anche per anfibi",
+        "nat2000" : "false",
+        "rnp" : "false",
+        "rl" : "true",
+        "hs" : "true",
+        "corr_eco" : "false",
+        "afe" : "false",
+        "ext" : "false",
+        "prior_az" : "1",
+        "prior_int" : "1",
+        "c_com_cat" : "385",
+        "den_cat" : "Terlago",
+        "c_num_part" : "2376/1",
+        "costo_uni" : "5000.0",
+        "costo_tot" : "5000.0",
+        "note" : "Dimensioni 3x3 m con sponde e fondale in pietra - Azione prevista da PDG e Accordo di\n                programma",
+        "proprieta" : "PROPRIETA' PRIVATA",
+        "com_valle" : "Comunita della Valle dei Laghi",
+        "comune" : "Terlago",
+        "ato" : "Bondone",
+        "rr" : "Rete di Riserve Alpi Ledrensi",
+        "files" : null
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:32632"
+          }
+        },
+        "coordinates" : [ 1.01837993, 1.80503161 ]
+      },
+      "id" : "azioni_punto.fid--33a0c341_1697ba78b75_-645b"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id" : "25",
+        "gid" : "10",
+        "cod_azione" : "AA",
+        "azione" : "AA04",
+        "denominaz" : "Creare o ripristinare specchi d'acqua anche per anfibi",
+        "nat2000" : "false",
+        "rnp" : "false",
+        "rl" : "true",
+        "hs" : "true",
+        "corr_eco" : "false",
+        "afe" : "false",
+        "ext" : "false",
+        "prior_az" : "1",
+        "prior_int" : "1",
+        "c_com_cat" : "385",
+        "den_cat" : "Terlago",
+        "c_num_part" : "2376/1",
+        "costo_uni" : "5000.0",
+        "costo_tot" : "5000.0",
+        "note" : "Dimensioni 3x3 m con sponde e fondale in pietra - Azione prevista da PDG e Accordo di\n                programma",
+        "proprieta" : "PROPRIETA' PRIVATA",
+        "com_valle" : "Comunita della Valle dei Laghi",
+        "comune" : "Terlago",
+        "ato" : "Bondone",
+        "rr" : "Rete di Riserve Basso Sarca",
+        "files" : null
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:32632"
+          }
+        },
+        "coordinates" : [ 1.01837993, 1.80503161 ]
+      },
+      "id" : "azioni_punto.fid--33a0c341_1697ba78b75_-645a"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id" : "26",
+        "gid" : "10",
+        "cod_azione" : "AA",
+        "azione" : "AA04",
+        "denominaz" : "Creare o ripristinare specchi d'acqua anche per anfibi",
+        "nat2000" : "false",
+        "rnp" : "false",
+        "rl" : "true",
+        "hs" : "true",
+        "corr_eco" : "false",
+        "afe" : "false",
+        "ext" : "false",
+        "prior_az" : "1",
+        "prior_int" : "1",
+        "c_com_cat" : "385",
+        "den_cat" : "Terlago",
+        "c_num_part" : "2376/1",
+        "costo_uni" : "5000.0",
+        "costo_tot" : "5000.0",
+        "note" : "Dimensioni 3x3 m con sponde e fondale in pietra - Azione prevista da PDG e Accordo di\n                programma",
+        "proprieta" : "PROPRIETA' PRIVATA",
+        "com_valle" : "Comunita della Valle dei Laghi",
+        "comune" : "Terlago",
+        "ato" : "Bondone",
+        "rr" : "Rete di Riserve Monte Bondone",
+        "files" : null
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:32632"
+          }
+        },
+        "coordinates" : [ 1.01837993, 1.80503161 ]
+      },
+      "id" : "azioni_punto.fid--33a0c341_1697ba78b75_-6459"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id" : "39",
+        "gid" : "16",
+        "cod_azione" : "AA",
+        "azione" : "AA04",
+        "denominaz" : "Creare o ripristinare specchi d'acqua anche per anfibi",
+        "nat2000" : "false",
+        "rnp" : "false",
+        "rl" : "false",
+        "hs" : "false",
+        "corr_eco" : "false",
+        "afe" : "false",
+        "ext" : "true",
+        "prior_az" : "1",
+        "prior_int" : "4",
+        "c_com_cat" : "50",
+        "den_cat" : "Cadine",
+        "c_num_part" : "457/1",
+        "costo_uni" : "5000.0",
+        "costo_tot" : "5000.0",
+        "note" : "Area suggerita al forum del 19/10/2015 - Azione prevista da PDG e Accordo di programma\n            ",
+        "proprieta" : "PROPRIETA' PUBBLICA COMUNALE",
+        "com_valle" : "Territorio dell Adige",
+        "comune" : "Trento",
+        "ato" : "Bondone",
+        "rr" : "Rete di Riserve Alpi Ledrensi",
+        "files" : null
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:32632"
+          }
+        },
+        "coordinates" : [ 7.77184879, 6.08698754 ]
+      },
+      "id" : "azioni_punto.fid--33a0c341_1697ba78b75_-6456"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id" : "40",
+        "gid" : "16",
+        "cod_azione" : "AA",
+        "azione" : "AA04",
+        "denominaz" : "Creare o ripristinare specchi d'acqua anche per anfibi",
+        "nat2000" : "false",
+        "rnp" : "false",
+        "rl" : "false",
+        "hs" : "false",
+        "corr_eco" : "false",
+        "afe" : "false",
+        "ext" : "true",
+        "prior_az" : "1",
+        "prior_int" : "4",
+        "c_com_cat" : "50",
+        "den_cat" : "Cadine",
+        "c_num_part" : "457/1",
+        "costo_uni" : "5000.0",
+        "costo_tot" : "5000.0",
+        "note" : "Area suggerita al forum del 19/10/2015 - Azione prevista da PDG e Accordo di programma\n            ",
+        "proprieta" : "PROPRIETA' PUBBLICA COMUNALE",
+        "com_valle" : "Territorio dell Adige",
+        "comune" : "Trento",
+        "ato" : "Bondone",
+        "rr" : "Rete di Riserve Monte Bondone",
+        "files" : null
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:32632"
+          }
+        },
+        "coordinates" : [ 7.77184879, 6.08698754 ]
+      },
+      "id" : "azioni_punto.fid--33a0c341_1697ba78b75_-6455"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id" : "43",
+        "gid" : "18",
+        "cod_azione" : "AA",
+        "azione" : "AA04",
+        "denominaz" : "Creare o ripristinare specchi d'acqua anche per anfibi",
+        "nat2000" : "false",
+        "rnp" : "false",
+        "rl" : "false",
+        "hs" : "false",
+        "corr_eco" : "false",
+        "afe" : "false",
+        "ext" : "true",
+        "prior_az" : "1",
+        "prior_int" : "4",
+        "c_com_cat" : "385",
+        "den_cat" : "Terlago",
+        "c_num_part" : "1903/1",
+        "costo_uni" : "5000.0",
+        "costo_tot" : "5000.0",
+        "note" : "Area proposta dal sindaco di Terlago - Azione prevista da PDG e Accordo di programma\n            ",
+        "proprieta" : "PROPRIETA' PRIVATA",
+        "com_valle" : "Comunita della Valle dei Laghi",
+        "comune" : "Terlago",
+        "ato" : "Bondone",
+        "rr" : "Rete di Riserve Alpi Ledrensi",
+        "files" : null
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:32632"
+          }
+        },
+        "coordinates" : [ 6.50313003, 2.80680767 ]
+      },
+      "id" : "azioni_punto.fid--33a0c341_1697ba78b75_-6452"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id" : "44",
+        "gid" : "18",
+        "cod_azione" : "AA",
+        "azione" : "AA04",
+        "denominaz" : "Creare o ripristinare specchi d'acqua anche per anfibi",
+        "nat2000" : "false",
+        "rnp" : "false",
+        "rl" : "false",
+        "hs" : "false",
+        "corr_eco" : "false",
+        "afe" : "false",
+        "ext" : "true",
+        "prior_az" : "1",
+        "prior_int" : "4",
+        "c_com_cat" : "385",
+        "den_cat" : "Terlago",
+        "c_num_part" : "1903/1",
+        "costo_uni" : "5000.0",
+        "costo_tot" : "5000.0",
+        "note" : "Area proposta dal sindaco di Terlago - Azione prevista da PDG e Accordo di programma\n            ",
+        "proprieta" : "PROPRIETA' PRIVATA",
+        "com_valle" : "Comunita della Valle dei Laghi",
+        "comune" : "Terlago",
+        "ato" : "Bondone",
+        "rr" : "Rete di Riserve Basso Sarca",
+        "files" : null
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:32632"
+          }
+        },
+        "coordinates" : [ 6.50313003, 2.80680767 ]
+      },
+      "id" : "azioni_punto.fid--33a0c341_1697ba78b75_-6451"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id" : "45",
+        "gid" : "18",
+        "cod_azione" : "AA",
+        "azione" : "AA04",
+        "denominaz" : "Creare o ripristinare specchi d'acqua anche per anfibi",
+        "nat2000" : "false",
+        "rnp" : "false",
+        "rl" : "false",
+        "hs" : "false",
+        "corr_eco" : "false",
+        "afe" : "false",
+        "ext" : "true",
+        "prior_az" : "1",
+        "prior_int" : "4",
+        "c_com_cat" : "385",
+        "den_cat" : "Terlago",
+        "c_num_part" : "1903/1",
+        "costo_uni" : "5000.0",
+        "costo_tot" : "5000.0",
+        "note" : "Area proposta dal sindaco di Terlago - Azione prevista da PDG e Accordo di programma\n            ",
+        "proprieta" : "PROPRIETA' PRIVATA",
+        "com_valle" : "Comunita della Valle dei Laghi",
+        "comune" : "Terlago",
+        "ato" : "Bondone",
+        "rr" : "Rete di Riserve Monte Bondone",
+        "files" : null
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:32632"
+          }
+        },
+        "coordinates" : [ 6.50313003, 2.80680767 ]
+      },
+      "id" : "azioni_punto.fid--33a0c341_1697ba78b75_-6450"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id" : "46",
+        "gid" : "19",
+        "cod_azione" : "AA",
+        "azione" : "AA04",
+        "denominaz" : "Creare o ripristinare specchi d'acqua anche per anfibi",
+        "nat2000" : "false",
+        "rnp" : "false",
+        "rl" : "false",
+        "hs" : "false",
+        "corr_eco" : "false",
+        "afe" : "false",
+        "ext" : "true",
+        "prior_az" : "1",
+        "prior_int" : "4",
+        "c_com_cat" : "385",
+        "den_cat" : "Terlago",
+        "c_num_part" : "1905",
+        "costo_uni" : "5000.0",
+        "costo_tot" : "5000.0",
+        "note" : "Area proposta dal sindaco di Terlago - Azione prevista da PDG e Accordo di programma\n            ",
+        "proprieta" : "PROPRIETA' PUBBLICA COMUNALE",
+        "com_valle" : "Comunita della Valle dei Laghi",
+        "comune" : "Terlago",
+        "ato" : "Bondone",
+        "rr" : "Rete di Riserve Alpi Ledrensi",
+        "files" : null
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:32632"
+          }
+        },
+        "coordinates" : [ 6.14788391, 3.43845955 ]
+      },
+      "id" : "azioni_punto.fid--33a0c341_1697ba78b75_-644f"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id" : "47",
+        "gid" : "19",
+        "cod_azione" : "AA",
+        "azione" : "AA04",
+        "denominaz" : "Creare o ripristinare specchi d'acqua anche per anfibi",
+        "nat2000" : "false",
+        "rnp" : "false",
+        "rl" : "false",
+        "hs" : "false",
+        "corr_eco" : "false",
+        "afe" : "false",
+        "ext" : "true",
+        "prior_az" : "1",
+        "prior_int" : "4",
+        "c_com_cat" : "385",
+        "den_cat" : "Terlago",
+        "c_num_part" : "1905",
+        "costo_uni" : "5000.0",
+        "costo_tot" : "5000.0",
+        "note" : "Area proposta dal sindaco di Terlago - Azione prevista da PDG e Accordo di programma\n            ",
+        "proprieta" : "PROPRIETA' PUBBLICA COMUNALE",
+        "com_valle" : "Comunita della Valle dei Laghi",
+        "comune" : "Terlago",
+        "ato" : "Bondone",
+        "rr" : "Rete di Riserve Basso Sarca",
+        "files" : null
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:32632"
+          }
+        },
+        "coordinates" : [ 6.14788391, 3.43845955 ]
+      },
+      "id" : "azioni_punto.fid--33a0c341_1697ba78b75_-644e"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id" : "48",
+        "gid" : "19",
+        "cod_azione" : "AA",
+        "azione" : "AA04",
+        "denominaz" : "Creare o ripristinare specchi d'acqua anche per anfibi",
+        "nat2000" : "false",
+        "rnp" : "false",
+        "rl" : "false",
+        "hs" : "false",
+        "corr_eco" : "false",
+        "afe" : "false",
+        "ext" : "true",
+        "prior_az" : "1",
+        "prior_int" : "4",
+        "c_com_cat" : "385",
+        "den_cat" : "Terlago",
+        "c_num_part" : "1905",
+        "costo_uni" : "5000.0",
+        "costo_tot" : "5000.0",
+        "note" : "Area proposta dal sindaco di Terlago - Azione prevista da PDG e Accordo di programma\n            ",
+        "proprieta" : "PROPRIETA' PUBBLICA COMUNALE",
+        "com_valle" : "Comunita della Valle dei Laghi",
+        "comune" : "Terlago",
+        "ato" : "Bondone",
+        "rr" : "Rete di Riserve Monte Bondone",
+        "files" : null
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:32632"
+          }
+        },
+        "coordinates" : [ 6.14788391, 3.43845955 ]
+      },
+      "id" : "azioni_punto.fid--33a0c341_1697ba78b75_-644d"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id" : "49",
+        "gid" : "20",
+        "cod_azione" : "AA",
+        "azione" : "AA04",
+        "denominaz" : "Creare o ripristinare specchi d'acqua anche per anfibi",
+        "nat2000" : "false",
+        "rnp" : "false",
+        "rl" : "false",
+        "hs" : "false",
+        "corr_eco" : "false",
+        "afe" : "false",
+        "ext" : "true",
+        "prior_az" : "1",
+        "prior_int" : "4",
+        "c_com_cat" : "385",
+        "den_cat" : "Terlago",
+        "c_num_part" : "1906/1",
+        "costo_uni" : "5000.0",
+        "costo_tot" : "5000.0",
+        "note" : "Area proposta dal sindaco di Terlago - Azione prevista da PDG e Accordo di programma\n            ",
+        "proprieta" : "PROPRIETA' PUBBLICA COMUNALE",
+        "com_valle" : "Comunita della Valle dei Laghi",
+        "comune" : "Terlago",
+        "ato" : "Bondone",
+        "rr" : "Rete di Riserve Alpi Ledrensi",
+        "files" : null
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:32632"
+          }
+        },
+        "coordinates" : [ 5.47894079, 4.307821 ]
+      },
+      "id" : "azioni_punto.fid--33a0c341_1697ba78b75_-644c"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id" : "50",
+        "gid" : "20",
+        "cod_azione" : "AA",
+        "azione" : "AA04",
+        "denominaz" : "Creare o ripristinare specchi d'acqua anche per anfibi",
+        "nat2000" : "false",
+        "rnp" : "false",
+        "rl" : "false",
+        "hs" : "false",
+        "corr_eco" : "false",
+        "afe" : "false",
+        "ext" : "true",
+        "prior_az" : "1",
+        "prior_int" : "4",
+        "c_com_cat" : "385",
+        "den_cat" : "Terlago",
+        "c_num_part" : "1906/1",
+        "costo_uni" : "5000.0",
+        "costo_tot" : "5000.0",
+        "note" : "Area proposta dal sindaco di Terlago - Azione prevista da PDG e Accordo di programma\n            ",
+        "proprieta" : "PROPRIETA' PUBBLICA COMUNALE",
+        "com_valle" : "Comunita della Valle dei Laghi",
+        "comune" : "Terlago",
+        "ato" : "Bondone",
+        "rr" : "Rete di Riserve Basso Sarca",
+        "files" : null
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:32632"
+          }
+        },
+        "coordinates" : [ 5.47894079, 4.307821 ]
+      },
+      "id" : "azioni_punto.fid--33a0c341_1697ba78b75_-644b"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id" : "51",
+        "gid" : "20",
+        "cod_azione" : "AA",
+        "azione" : "AA04",
+        "denominaz" : "Creare o ripristinare specchi d'acqua anche per anfibi",
+        "nat2000" : "false",
+        "rnp" : "false",
+        "rl" : "false",
+        "hs" : "false",
+        "corr_eco" : "false",
+        "afe" : "false",
+        "ext" : "true",
+        "prior_az" : "1",
+        "prior_int" : "4",
+        "c_com_cat" : "385",
+        "den_cat" : "Terlago",
+        "c_num_part" : "1906/1",
+        "costo_uni" : "5000.0",
+        "costo_tot" : "5000.0",
+        "note" : "Area proposta dal sindaco di Terlago - Azione prevista da PDG e Accordo di programma\n            ",
+        "proprieta" : "PROPRIETA' PUBBLICA COMUNALE",
+        "com_valle" : "Comunita della Valle dei Laghi",
+        "comune" : "Terlago",
+        "ato" : "Bondone",
+        "rr" : "Rete di Riserve Monte Bondone",
+        "files" : null
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:32632"
+          }
+        },
+        "coordinates" : [ 5.47894079, 4.307821 ]
+      },
+      "id" : "azioni_punto.fid--33a0c341_1697ba78b75_-644a"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id" : "56",
+        "gid" : "23",
+        "cod_azione" : "CH",
+        "azione" : "CH01",
+        "denominaz" : "Interventi a favore dei chirotteri",
+        "nat2000" : "true",
+        "rnp" : "false",
+        "rl" : "false",
+        "hs" : "false",
+        "corr_eco" : "false",
+        "afe" : "false",
+        "ext" : "false",
+        "prior_az" : "3",
+        "prior_int" : "2",
+        "c_com_cat" : "385",
+        "den_cat" : "Terlago",
+        "c_num_part" : "2798",
+        "costo_uni" : "1000.0",
+        "costo_tot" : "1000.0",
+        "note" : "Migliorare e incrementare rifugi per chirotteri - Regolamentare accesso alla grotta\n            ",
+        "proprieta" : "PROPRIETA' PUBBLICA COMUNALE",
+        "com_valle" : "Comunita della Valle dei Laghi",
+        "zsc" : "IT3120087: Laghi e abisso di Lamar",
+        "comune" : "Terlago",
+        "ato" : "Bondone",
+        "rr" : "Rete di Riserve Alpi Ledrensi",
+        "files" : null
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:32632"
+          }
+        },
+        "coordinates" : [ 4.2150358, -2.56185008 ]
+      },
+      "id" : "azioni_punto.fid--33a0c341_1697ba78b75_-6447"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id" : "57",
+        "gid" : "23",
+        "cod_azione" : "CH",
+        "azione" : "CH01",
+        "denominaz" : "Interventi a favore dei chirotteri",
+        "nat2000" : "true",
+        "rnp" : "false",
+        "rl" : "false",
+        "hs" : "false",
+        "corr_eco" : "false",
+        "afe" : "false",
+        "ext" : "false",
+        "prior_az" : "3",
+        "prior_int" : "2",
+        "c_com_cat" : "385",
+        "den_cat" : "Terlago",
+        "c_num_part" : "2798",
+        "costo_uni" : "1000.0",
+        "costo_tot" : "1000.0",
+        "note" : "Migliorare e incrementare rifugi per chirotteri - Regolamentare accesso alla grotta\n            ",
+        "proprieta" : "PROPRIETA' PUBBLICA COMUNALE",
+        "com_valle" : "Comunita della Valle dei Laghi",
+        "zsc" : "IT3120087: Laghi e abisso di Lamar",
+        "comune" : "Terlago",
+        "ato" : "Bondone",
+        "rr" : "Rete di Riserve Basso Sarca",
+        "files" : null
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:32632"
+          }
+        },
+        "coordinates" : [ 4.2150358, -2.56185008 ]
+      },
+      "id" : "azioni_punto.fid--33a0c341_1697ba78b75_-6446"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id" : "58",
+        "gid" : "23",
+        "cod_azione" : "CH",
+        "azione" : "CH01",
+        "denominaz" : "Interventi a favore dei chirotteri",
+        "nat2000" : "true",
+        "rnp" : "false",
+        "rl" : "false",
+        "hs" : "false",
+        "corr_eco" : "false",
+        "afe" : "false",
+        "ext" : "false",
+        "prior_az" : "3",
+        "prior_int" : "2",
+        "c_com_cat" : "385",
+        "den_cat" : "Terlago",
+        "c_num_part" : "2798",
+        "costo_uni" : "1000.0",
+        "costo_tot" : "1000.0",
+        "note" : "Migliorare e incrementare rifugi per chirotteri - Regolamentare accesso alla grotta\n            ",
+        "proprieta" : "PROPRIETA' PUBBLICA COMUNALE",
+        "com_valle" : "Comunita della Valle dei Laghi",
+        "zsc" : "IT3120087: Laghi e abisso di Lamar",
+        "comune" : "Terlago",
+        "ato" : "Bondone",
+        "rr" : "Rete di Riserve Monte Bondone",
+        "files" : null
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:32632"
+          }
+        },
+        "coordinates" : [ 4.2150358, -2.56185008 ]
+      },
+      "id" : "azioni_punto.fid--33a0c341_1697ba78b75_-6445"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id" : "617",
+        "gid" : "559",
+        "cod_azione" : "AA",
+        "azione" : "AA04",
+        "denominaz" : "Creare o ripristinare specchi d'acqua anche per anfibi",
+        "nat2000" : "false",
+        "rnp" : "true",
+        "rl" : "false",
+        "hs" : "false",
+        "corr_eco" : "false",
+        "afe" : "false",
+        "ext" : "false",
+        "prior_az" : "2",
+        "prior_int" : "1",
+        "c_com_cat" : "185",
+        "den_cat" : "Lavis",
+        "c_num_part" : "3503/1",
+        "costo_uni" : "0.0",
+        "costo_tot" : "2000.0",
+        "note" : "l'importo indicato r quello complessivo",
+        "proprieta" : "PROPRIETA' PUBBLICA PROVINCIALE",
+        "com_valle" : "Comunita Rotaliana - Konigsberg",
+        "zsc" : "IT3120053: Foci dell'Avisio",
+        "comune" : "Lavis",
+        "files" : null
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:32632"
+          }
+        },
+        "coordinates" : [ 9.39549762, -2.91048476 ]
+      },
+      "id" : "azioni_punto.fid--33a0c341_1697ba78b75_-6444"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id" : "618",
+        "gid" : "560",
+        "cod_azione" : "AA",
+        "azione" : "AA04",
+        "denominaz" : "Creare o ripristinare specchi d'acqua anche per anfibi",
+        "nat2000" : "false",
+        "rnp" : "true",
+        "rl" : "false",
+        "hs" : "false",
+        "corr_eco" : "false",
+        "afe" : "false",
+        "ext" : "false",
+        "prior_az" : "2",
+        "prior_int" : "1",
+        "c_com_cat" : "161",
+        "den_cat" : "Gardolo",
+        "c_num_part" : "1799",
+        "costo_uni" : "0.0",
+        "costo_tot" : "2000.0",
+        "note" : "l'importo indicato r quello complessivo",
+        "proprieta" : "PROPRIETA' PUBBLICA PROVINCIALE",
+        "com_valle" : "Territorio dell Adige",
+        "zsc" : "IT3120053: Foci dell'Avisio",
+        "comune" : "Trento",
+        "rr" : "Rete di Riserve Monte Bondone",
+        "files" : null
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:32632"
+          }
+        },
+        "coordinates" : [ 9.79713092, -0.59016341 ]
+      },
+      "id" : "azioni_punto.fid--33a0c341_1697ba78b75_-6443"
+    } ]
+  }
+}

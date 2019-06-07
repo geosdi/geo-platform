@@ -34,71 +34,23 @@
  */
 package org.geosdi.geoplatform.services;
 
-import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.methods.GetMethod;
-import org.geojson.Feature;
-import org.geojson.FeatureCollection;
-import org.geosdi.geoplatform.connector.server.request.GPWMSGetMapBaseRequest;
-import org.geosdi.geoplatform.connector.server.request.WMSGetMapBaseRequest;
-import org.geosdi.geoplatform.connector.server.v111.GPWMSGetFeatureInfoV111Request;
-import org.geosdi.geoplatform.connector.server.v111.IGPWMSConnectorStoreV111;
-import org.geosdi.geoplatform.core.dao.GPServerDAO;
-import org.geosdi.geoplatform.core.model.GeoPlatformServer;
-import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
-import org.geosdi.geoplatform.exception.ServerInternalFault;
-import org.geosdi.geoplatform.hibernate.validator.support.GPI18NValidator;
-import org.geosdi.geoplatform.hibernate.validator.support.request.GPI18NRequestValidator;
 import org.geosdi.geoplatform.request.RequestByID;
-import org.geosdi.geoplatform.response.RasterLayerDTO;
 import org.geosdi.geoplatform.response.ServerDTO;
-import org.geosdi.geoplatform.services.builder.GPWMSCapabilitesBuilder;
-import org.geosdi.geoplatform.services.builder.IGPWMSCapabilitesBuilder;
-import org.geosdi.geoplatform.services.request.GPWMSGetFeatureInfoElement;
+import org.geosdi.geoplatform.services.delegate.GPWMSDelagate;
 import org.geosdi.geoplatform.services.request.GPWMSGetFeatureInfoRequest;
 import org.geosdi.geoplatform.services.request.WMSHeaderParam;
 import org.geosdi.geoplatform.services.response.GPLayerTypeResponse;
-import org.geosdi.geoplatform.services.response.WMSGetFeatureInfoResponse;
-import org.geosdi.geoplatform.wms.v111.WMSDescribeLayerResponse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.context.MessageSource;
-import org.xml.sax.InputSource;
-import org.xml.sax.XMLReader;
 
 import javax.annotation.Resource;
 import javax.jws.WebMethod;
 import javax.ws.rs.core.Response;
-import javax.xml.bind.JAXBContext;
-import javax.xml.parsers.SAXParserFactory;
-import javax.xml.transform.sax.SAXSource;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
-
-import static com.google.common.base.Preconditions.checkArgument;
-import static java.lang.Boolean.FALSE;
-import static java.util.Locale.ENGLISH;
-import static java.util.Locale.forLanguageTag;
-import static java.util.stream.Collectors.joining;
-import static org.geosdi.geoplatform.connector.pool.builder.v111.GPWMSConnectorBuilderPoolV111.wmsConnectorBuilderPoolV111;
-import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
-import static org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat.GML;
 
 public class GPWMSServiceImpl implements GPWMSService {
 
-    private static final Logger logger = LoggerFactory.getLogger(GPWMSServiceImpl.class);
-    // DAO
-    @Resource(name = "serverDAO")
-    private GPServerDAO serverDao;
-    @Resource(name = "wmsMessageSource")
-    private MessageSource wmsMessageSource;
-    @Resource(name = "wmsRequestValidator")
-    private GPI18NValidator<GPI18NRequestValidator, String> wmsRequestValidator;
-    private IGPWMSCapabilitesBuilder wmsCapabilitiesBuilder = new GPWMSCapabilitesBuilder();
+    @Resource(name = "wmsDelegate")
+    private GPWMSDelagate wmsDelegate;
 
     /**
      * @param serverUrl
@@ -109,22 +61,8 @@ public class GPWMSServiceImpl implements GPWMSService {
      * @throws ResourceNotFoundFault
      */
     @Override
-    public ServerDTO getCapabilities(String serverUrl, RequestByID request, String token, String authkey)
-            throws ResourceNotFoundFault {
-        ServerDTO serverDTO;
-        if (request.getId() != null) {
-            GeoPlatformServer server = serverDao.find(request.getId());
-            if (server == null) {
-                throw new ResourceNotFoundFault("Server has been deleted", request.getId());
-            }
-            serverDTO = new ServerDTO(server);
-        } else {
-            serverDTO = new ServerDTO();
-            serverDTO.setServerUrl(serverUrl);
-        }
-        List<RasterLayerDTO> layers = this.wmsCapabilitiesBuilder.loadWMSCapabilities(serverUrl, token, authkey);
-        serverDTO.setLayerList(layers);
-        return serverDTO;
+    public ServerDTO getCapabilities(String serverUrl, RequestByID request, String token, String authkey) throws ResourceNotFoundFault {
+        return this.wmsDelegate.getCapabilities(serverUrl, request, token, authkey);
     }
 
     /**
@@ -137,31 +75,18 @@ public class GPWMSServiceImpl implements GPWMSService {
      * @throws ResourceNotFoundFault
      */
     @Override
-    public ServerDTO getCapabilitiesAuth(String serverUrl, RequestByID request, String token, String authkey,
-            List<WMSHeaderParam> headers) throws ResourceNotFoundFault {
-        ServerDTO serverDTO;
-        if (request.getId() != null) {
-            GeoPlatformServer server = serverDao.find(request.getId());
-            if (server == null) {
-                throw new ResourceNotFoundFault("Server has been deleted", request.getId());
-            }
-            serverDTO = new ServerDTO(server);
-        } else {
-            serverDTO = new ServerDTO();
-            serverDTO.setServerUrl(serverUrl);
-        }
-        List<RasterLayerDTO> layers = this.wmsCapabilitiesBuilder.loadWMSCapabilitiesAuth(serverUrl, token, authkey, headers);
-        serverDTO.setLayerList(layers);
-        return serverDTO;
+    public ServerDTO getCapabilitiesAuth(String serverUrl, RequestByID request, String token, String authkey, List<WMSHeaderParam> headers) throws ResourceNotFoundFault {
+        return this.wmsDelegate.getCapabilitiesAuth(serverUrl, request, token, authkey, headers);
     }
 
+    /**
+     * @param serverUrl
+     * @return {@link ServerDTO}
+     * @throws ResourceNotFoundFault
+     */
     @Override
     public ServerDTO getShortServer(String serverUrl) throws ResourceNotFoundFault {
-        GeoPlatformServer server = serverDao.findByServerUrl(serverUrl);
-        if (server == null) {
-            throw new ResourceNotFoundFault("Server not found " + serverUrl);
-        }
-        return new ServerDTO(server);
+        return this.wmsDelegate.getShortServer(serverUrl);
     }
 
     /**
@@ -172,37 +97,7 @@ public class GPWMSServiceImpl implements GPWMSService {
      */
     @Override
     public GPLayerTypeResponse getLayerType(String serverURL, String layerName) throws Exception {
-        checkArgument((serverURL != null) && !(serverURL.trim().isEmpty()),
-                "The Parameter serverURL must not be null or an empty string.");
-        checkArgument((layerName != null) && !(layerName.trim().isEmpty()),
-                "The Parameter layerName must not be null or an empty string.");
-        logger.debug("###########################TRYING TO RETRIEVE LAYER_TYPE with serverURL : {} - layerName : {]\n",
-                serverURL, layerName);
-        int index = serverURL.indexOf("?");
-        if (index != -1) {
-            serverURL = serverURL.substring(0, index);
-        }
-        String decribeLayerUrl = serverURL.concat("?service=WMS&request=DescribeLayer&version=1.1.1&layers=").concat(layerName);
-        logger.info("#########################DESCRIBE_LAYER_URL : {}\n", decribeLayerUrl);
-        try {
-            HttpClient httpClient = new HttpClient();
-            GetMethod getMethod = new GetMethod(decribeLayerUrl);
-            httpClient.executeMethod(getMethod);
-            InputStream inputStream = getMethod.getResponseBodyAsStream();
-            SAXParserFactory spf = SAXParserFactory.newInstance();
-            spf.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", FALSE);
-            spf.setFeature("http://xml.org/sax/features/validation", FALSE);
-
-            XMLReader xmlReader = spf.newSAXParser().getXMLReader();
-            InputSource inputSource = new InputSource(new InputStreamReader(inputStream));
-            SAXSource source = new SAXSource(xmlReader, inputSource);
-            JAXBContext jaxbContext = JAXBContext.newInstance(WMSDescribeLayerResponse.class);
-            WMSDescribeLayerResponse describeLayerResponse = (WMSDescribeLayerResponse) jaxbContext.createUnmarshaller().unmarshal(source);
-            return new GPLayerTypeResponse(describeLayerResponse);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            throw new ServerInternalFault(ex.getMessage());
-        }
+        return this.wmsDelegate.getLayerType(serverURL, layerName);
     }
 
     /**
@@ -213,49 +108,6 @@ public class GPWMSServiceImpl implements GPWMSService {
     @WebMethod(exclude = true)
     @Override
     public Response wmsGetFeatureInfo(GPWMSGetFeatureInfoRequest request) throws Exception {
-        if (request == null) {
-            throw new IllegalParameterFault(this.wmsMessageSource.getMessage("gp_wms_request.valid",
-                    new Object[]{"GPWMSGetFeatureInfoRequest"}, ENGLISH));
-        }
-        logger.trace("##########################Validating Request -------------------> {}\n", request);
-        String message = this.wmsRequestValidator.validate(request, forLanguageTag(request.getLang()));
-        if (message != null)
-            throw new IllegalParameterFault(message);
-        WMSGetFeatureInfoResponse wmsGetFeatureInfoResponse = new WMSGetFeatureInfoResponse();
-        for (GPWMSGetFeatureInfoElement wmsGetFeatureInfoElement : request.getWmsFeatureInfoElements()) {
-            try {
-                IGPWMSConnectorStoreV111 wmsServerConnector = wmsConnectorBuilderPoolV111()
-                        .withServerUrl(new URL(wmsGetFeatureInfoElement.getWmsServerURL()))
-                        .withPooledConnectorConfig(pooledConnectorConfigBuilder()
-                                .withMaxTotalConnections(60)
-                                .withDefaultMaxPerRoute(30)
-                                .withMaxRedirect(15)
-                                .build()).build();
-                GPWMSGetFeatureInfoV111Request<Object> wmsGetFeatureInfoV111Request = wmsServerConnector.createGetFeatureInfoRequest();
-                GPWMSGetMapBaseRequest wmsGetMapBaseRequest = new WMSGetMapBaseRequest(request.getBoundingBox().toWMSBoundingBox(),
-                        wmsGetFeatureInfoElement.getLayers(), request.getCrs(), request.getWidth(), request.getHeight());
-                Object featureCollection = wmsGetFeatureInfoV111Request
-                        .withWMSGetMapRequest(wmsGetMapBaseRequest)
-                        .withFeatureCount(20)
-                        .withQueryLayers(wmsGetFeatureInfoElement.getLayers().stream().toArray(s -> new String[s]))
-                        .withX(request.getPoint().getX())
-                        .withY(request.getPoint().getY())
-                        .withInfoFormat((request.getFormat() != null) ? request.getFormat().toWMSFeatureInfoFormat() : GML)
-                        .getResponse();
-                logger.debug("########################FOUND : {}\n", featureCollection);
-                wmsGetFeatureInfoResponse.addFeature(featureCollection);
-            } catch (Exception ex) {
-                FeatureCollection featureCollection = new FeatureCollection();
-                Feature feature = new Feature();
-                feature.setId("Error for : ".concat(wmsGetFeatureInfoElement.getWmsServerURL()));
-                Map<String, Object> properties = new LinkedHashMap<>();
-                properties.put("LAYERS_IN_ERROR", wmsGetFeatureInfoElement.getLayers().stream().collect(joining(",")));
-                properties.put("ERROR_MESSAGE", ex.getMessage());
-                featureCollection.add(feature);
-                wmsGetFeatureInfoResponse.addFeature(featureCollection);
-                ex.printStackTrace();
-            }
-        }
-        return Response.ok(wmsGetFeatureInfoResponse).build();
+        return Response.ok(this.wmsDelegate.wmsGetFeatureInfo(request)).build();
     }
 }

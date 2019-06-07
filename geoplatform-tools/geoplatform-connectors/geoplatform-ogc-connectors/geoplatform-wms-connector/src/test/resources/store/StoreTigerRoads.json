@@ -1,0 +1,40 @@
+{
+  "key" : "FEATURE_NAME",
+  "store" : {
+    "tiger_roads" : [ {
+      "type" : "Feature",
+      "properties" : {
+        "CFCC" : "A41",
+        "NAME" : "Baxter St"
+      },
+      "geometry" : {
+        "type" : "MultiLineString",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ [ -74.000504, 40.715673 ], [ -74.000524, 40.716069 ] ] ]
+      },
+      "id" : "tiger_roads.100"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "CFCC" : "A41",
+        "NAME" : "Mosco St"
+      },
+      "geometry" : {
+        "type" : "MultiLineString",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ [ -74.000443, 40.714833 ], [ -73.999533, 40.714962 ] ] ]
+      },
+      "id" : "tiger_roads.5610"
+    } ]
+  }
+}

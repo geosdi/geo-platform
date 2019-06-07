@@ -1,0 +1,69 @@
+{
+  "key" : "FEATURE_NAME",
+  "store" : {
+    "masw" : [ {
+      "type" : "Feature",
+      "properties" : {
+        "MASW" : "M4",
+        "Descrizion" : "Prova sismica MASW, pregressa",
+        "Criticita" : "Aree non critiche",
+        "Microzonaz" : "ZONA 1 - Zone Stabili",
+        "Geologica" : "Calcareniti (Tufo) di Gravina",
+        "Image" : null
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:32633"
+          }
+        },
+        "coordinates" : [ 636690.46982136, 4500920.45735309 ]
+      },
+      "id" : "masw.5"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "MASW" : "M2",
+        "Descrizion" : "Prova sismica MASW, pregressa",
+        "Criticita" : null,
+        "Microzonaz" : null,
+        "Geologica" : "Calcareniti (Tufo) di Gravina",
+        "Image" : null
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:32633"
+          }
+        },
+        "coordinates" : [ 636495.54913457, 4500802.11144307 ]
+      },
+      "id" : "masw.6"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "MASW" : "M03",
+        "Descrizion" : "Prova sismica MASW_RU, 2012",
+        "Criticita" : "Aree non critiche",
+        "Microzonaz" : "ZONA 1 - Zone Stabili",
+        "Geologica" : "Calcareniti (Tufo) di Gravina",
+        "Image" : null
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:32633"
+          }
+        },
+        "coordinates" : [ 636568.81415303, 4500843.76699807 ]
+      },
+      "id" : "masw.7"
+    } ]
+  }
+}

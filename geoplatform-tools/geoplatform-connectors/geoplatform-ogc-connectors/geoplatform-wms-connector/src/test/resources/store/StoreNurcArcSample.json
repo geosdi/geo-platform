@@ -1,0 +1,13 @@
+{
+  "key" : "FEATURE_NAME",
+  "store" : {
+    "Arc_Sample" : [ {
+      "type" : "Feature",
+      "properties" : {
+        "precip30min" : "2228.0"
+      },
+      "geometry" : null,
+      "id" : "nurc:Arc_Sample"
+    } ]
+  }
+}

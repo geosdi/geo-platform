@@ -15,6 +15,7 @@ import java.net.URL;
 import java.util.Arrays;
 
 import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
+import static org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat.GML;
 import static org.geosdi.geoplatform.connector.server.store.GPWMSConnectorBuilder.WMSConnectorBuilder.wmsConnectorBuilder;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
@@ -63,7 +64,7 @@ public class GPWMSConnectorStoreV111PrositTest {
         logger.info("##################################WMS_GET_FEATURE_INFO_V111_RESPONSE : {}\n", wmsGetFeatureInfoRequest.withQueryLayers("admin:admin_shp_vigneti_catastali", "admin:admin_shp_oliveti_catastali")
                 .withWMSGetMapRequest(wmsGetMapBaseRequest)
                 .withFeatureCount(8)
-                .withInfoFormat(WMSFeatureInfoFormat.GML).withX(154).withY(230).getResponse());
+                .withInfoFormat(GML).withX(154).withY(230).getResponse());
     }
 
     @Test
@@ -75,7 +76,7 @@ public class GPWMSConnectorStoreV111PrositTest {
         logger.info("##################################WMS_GET_FEATURE_INFO_V111_RESPONSE : {}\n", wmsGetFeatureInfoRequest.withQueryLayers("topp:states")
                 .withWMSGetMapRequest(wmsGetMapBaseRequest)
                 .withFeatureCount(8)
-                .withInfoFormat(WMSFeatureInfoFormat.GML).withX(61).withY(209).getResponse());
+                .withInfoFormat(GML).withX(61).withY(209).getResponse());
     }
 
     @Test
@@ -87,6 +88,6 @@ public class GPWMSConnectorStoreV111PrositTest {
         logger.info("##################################WMS_GET_FEATURE_INFO_V111_RESPONSE : {}\n", wmsGetFeatureInfoRequest.withQueryLayers("admin:tempo")
                 .withWMSGetMapRequest(wmsGetMapBaseRequest)
                 .withFeatureCount(8)
-                .withInfoFormat(WMSFeatureInfoFormat.GML).withX(50).withY(50).getResponse());
+                .withInfoFormat(GML).withX(50).withY(50).getResponse());
     }
 }

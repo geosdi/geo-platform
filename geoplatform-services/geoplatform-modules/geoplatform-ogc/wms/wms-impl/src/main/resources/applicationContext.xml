@@ -11,6 +11,8 @@
 
     <context:annotation-config/>
 
+    <context:component-scan base-package="org.geosdi.geoplatform.services.delegate"/>
+
     <bean id="wmsService" class="org.geosdi.geoplatform.services.GPWMSServiceImpl"/>
 
 </beans>

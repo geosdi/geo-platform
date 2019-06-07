@@ -1,0 +1,15 @@
+{
+  "key" : "FEATURE_NAME",
+  "store" : {
+    "Pk50095" : [ {
+      "type" : "Feature",
+      "properties" : {
+        "Red_band" : "254.0",
+        "Green_band" : "254.0",
+        "Blue_band" : "254.0"
+      },
+      "geometry" : null,
+      "id" : "nurc:Pk50095"
+    } ]
+  }
+}

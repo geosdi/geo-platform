@@ -1,8 +1,6 @@
 package org.geosdi.geoplatform.connector.wms.stax.multithread;
 
 import org.geosdi.geoplatform.connector.reader.stax.GPWMSGetFeatureInfoStaxReader;
-import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
-import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,32 +12,25 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static javax.annotation.meta.When.NEVER;
-import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
-import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
 import static org.junit.Assert.assertTrue;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class WMSGetFeatureInfoMultiThreadStaxReaderTest extends GPWMSGetFeatureMultiThreadTest {
+public class GPWMSFeatureStoreMultiThreadStaxReaderTest extends GPWMSGetFeatureMultiThreadTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(WMSGetFeatureInfoMultiThreadStaxReaderTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(GPWMSFeatureStoreMultiThreadStaxReaderTest.class);
     //
-    private static final JacksonSupport JACKSON_SUPPORT = new GPJacksonSupport(UNWRAP_ROOT_VALUE_DISABLE,
-            FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
-            ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
-            WRAP_ROOT_VALUE_DISABLE,
-            INDENT_OUTPUT_ENABLE, NON_NULL);
     private static final GPWMSGetFeatureInfoStaxReader wmsGetFeatureInfoStaxReader = new GPWMSGetFeatureInfoStaxReader();
 
     @Test
-    public void wmsGetFeatureInfoMultiThreadStaxReaderTest() throws Exception {
+    public void wmsFeatureStoreMultiThreadStaxReaderTest() throws Exception {
         CountDownLatch startSignal = new CountDownLatch(1);
         CountDownLatch doneSignal = new CountDownLatch(files.size());
         AtomicInteger counter = new AtomicInteger(0);
         files.stream()
-                .map(v -> new Thread(new WMSGetFeatureInfoStaxReaderTask(v, startSignal, doneSignal, counter)))
+                .map(v -> new Thread(new WMSFeatureStoreStaxReaderTask(v, startSignal, doneSignal, counter)))
                 .forEach(Thread::start);
         startSignal.countDown();
         doneSignal.await();
@@ -47,9 +38,9 @@ public class WMSGetFeatureInfoMultiThreadStaxReaderTest extends GPWMSGetFeatureM
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@{} process {} files", this.getClass().getSimpleName(), counter.get());
     }
 
-    static class WMSGetFeatureInfoStaxReaderTask implements Runnable {
+    static class WMSFeatureStoreStaxReaderTask implements Runnable {
 
-        private static final Logger logger = LoggerFactory.getLogger(WMSGetFeatureInfoStaxReaderTask.class);
+        private static final Logger logger = LoggerFactory.getLogger(WMSGetFeatureInfoMultiThreadStaxReaderTest.WMSGetFeatureInfoStaxReaderTask.class);
         //
         private final String fileName;
         private final CountDownLatch startSignal;
@@ -61,7 +52,7 @@ public class WMSGetFeatureInfoMultiThreadStaxReaderTest extends GPWMSGetFeatureM
          * @param theStartSignal
          * @param theDoneSignal
          */
-        WMSGetFeatureInfoStaxReaderTask(@Nonnull(when = NEVER) String theFileName, @Nonnull(when = NEVER) CountDownLatch theStartSignal,
+        WMSFeatureStoreStaxReaderTask(@Nonnull(when = NEVER) String theFileName, @Nonnull(when = NEVER) CountDownLatch theStartSignal,
                 @Nonnull(when = NEVER) CountDownLatch theDoneSignal, @Nonnull(when = NEVER) AtomicInteger theCounter) {
             checkArgument((theFileName != null) && !(theFileName.trim().isEmpty()), "The Parameter fileName must not be null or an empty string.");
             checkArgument(theStartSignal != null, "The Parameter startSignal must not be null.");
@@ -88,8 +79,8 @@ public class WMSGetFeatureInfoMultiThreadStaxReaderTest extends GPWMSGetFeatureM
         public void run() {
             try {
                 startSignal.await();
-                logger.info("#######################FEATURE_COLLECTION : \n{}\n for File : {}\n", JACKSON_SUPPORT.getDefaultMapper()
-                        .writeValueAsString(wmsGetFeatureInfoStaxReader.read(new File(fileName))), fileName);
+                logger.info("#######################FEATURE_STORE : \n{}\n for File : {}\n",
+                        wmsGetFeatureInfoStaxReader.readAsStore(new File(fileName)), fileName);
                 this.counter.incrementAndGet();
                 doneSignal.countDown();
             } catch (Exception ex) {

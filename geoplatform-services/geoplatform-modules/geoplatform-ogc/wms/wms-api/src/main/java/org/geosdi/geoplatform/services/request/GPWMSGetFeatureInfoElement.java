@@ -28,4 +28,11 @@ public class GPWMSGetFeatureInfoElement implements Serializable {
     private String wmsServerURL;
     @GPWMSGetFeatureInfoLayersAllowed
     private List<String> layers;
+
+    /**
+     * @return {@link String[]}
+     */
+    public String[] toLayers() {
+        return (this.layers != null) ? this.layers.stream().toArray(s -> new String[s]) : new String[0];
+    }
 }

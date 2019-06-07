@@ -1,0 +1,244 @@
+{
+  "key" : "FEATURE_NAME",
+  "store" : {
+    "giant_polygon" : [ {
+      "type" : "Feature",
+      "properties" : { },
+      "geometry" : {
+        "type" : "MultiPolygon",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ [ [ -180.0, -90.0 ], [ -180.0, 90.0 ], [ 180.0, 90.0 ], [ 180.0, -90.0 ], [ -180.0, -90.0 ] ] ] ]
+      },
+      "id" : "giant_polygon.1"
+    } ],
+    "poly_landmarks" : [ {
+      "type" : "Feature",
+      "properties" : {
+        "LAND" : "36.0",
+        "CFCC" : "D85",
+        "LANAME" : "St Nicholas Park"
+      },
+      "geometry" : {
+        "type" : "MultiPolygon",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ [ [ -73.94981, 40.817887 ], [ -73.948001, 40.819593 ], [ -73.947905, 40.821158 ], [ -73.947937, 40.821173 ], [ -73.947273, 40.821748 ], [ -73.946149, 40.821251 ], [ -73.946499, 40.820692 ], [ -73.946828, 40.819985 ], [ -73.947179, 40.819294 ], [ -73.947443, 40.818653 ], [ -73.947772, 40.817913 ], [ -73.948145, 40.817206 ], [ -73.948366, 40.816433 ], [ -73.948696, 40.815709 ], [ -73.949855, 40.813819 ], [ -73.950423, 40.813179 ], [ -73.950968, 40.812604 ], [ -73.951724, 40.812985 ], [ -73.951331, 40.813545 ], [ -73.950829, 40.814201 ], [ -73.949648, 40.815943 ], [ -73.950119, 40.817015 ], [ -73.94981, 40.817887 ] ] ] ]
+      },
+      "id" : "poly_landmarks.27"
+    } ],
+    "tiger_roads" : [ {
+      "type" : "Feature",
+      "properties" : {
+        "CFCC" : "A41",
+        "NAME" : "W 138th St"
+      },
+      "geometry" : {
+        "type" : "MultiLineString",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ [ -73.946596, 40.818996 ], [ -73.947179, 40.819294 ] ] ]
+      },
+      "id" : "tiger_roads.443"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "CFCC" : "A41",
+        "NAME" : "W 141st St"
+      },
+      "geometry" : {
+        "type" : "MultiLineString",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ [ -73.946149, 40.821251 ], [ -73.947273, 40.821748 ] ] ]
+      },
+      "id" : "tiger_roads.1162"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "CFCC" : "A41",
+        "NAME" : "St Nicholas Ave"
+      },
+      "geometry" : {
+        "type" : "MultiLineString",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ [ -73.946499, 40.820692 ], [ -73.946149, 40.821251 ] ] ]
+      },
+      "id" : "tiger_roads.1164"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "CFCC" : "A41",
+        "NAME" : "W 140th St"
+      },
+      "geometry" : {
+        "type" : "MultiLineString",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ [ -73.945635, 40.820211 ], [ -73.946499, 40.820692 ] ] ]
+      },
+      "id" : "tiger_roads.1165"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "CFCC" : "A41",
+        "NAME" : "W 141st St"
+      },
+      "geometry" : {
+        "type" : "MultiLineString",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ [ -73.945197, 40.820852 ], [ -73.946149, 40.821251 ] ] ]
+      },
+      "id" : "tiger_roads.1166"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "CFCC" : "A41",
+        "NAME" : "W 139th St"
+      },
+      "geometry" : {
+        "type" : "MultiLineString",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ [ -73.946137, 40.81962 ], [ -73.946828, 40.819985 ] ] ]
+      },
+      "id" : "tiger_roads.1172"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "CFCC" : "A41",
+        "NAME" : "W 139th St"
+      },
+      "geometry" : {
+        "type" : "MultiLineString",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ [ -73.944709, 40.819055 ], [ -73.946137, 40.81962 ] ] ]
+      },
+      "id" : "tiger_roads.1173"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "CFCC" : "A41",
+        "NAME" : "St Nicholas Ave"
+      },
+      "geometry" : {
+        "type" : "MultiLineString",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ [ -73.946828, 40.819985 ], [ -73.946499, 40.820692 ] ] ]
+      },
+      "id" : "tiger_roads.4116"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "CFCC" : "A41",
+        "NAME" : "St Nicholas Ave"
+      },
+      "geometry" : {
+        "type" : "MultiLineString",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ [ -73.947179, 40.819294 ], [ -73.946828, 40.819985 ] ] ]
+      },
+      "id" : "tiger_roads.4117"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "CFCC" : "A41",
+        "NAME" : "St Nicholas Ter"
+      },
+      "geometry" : {
+        "type" : "MultiLineString",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ [ -73.94981, 40.817887 ], [ -73.948001, 40.819593 ], [ -73.947905, 40.821158 ], [ -73.947937, 40.821173 ] ] ]
+      },
+      "id" : "tiger_roads.4121"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "CFCC" : "A41",
+        "NAME" : "Edgecombe Ave"
+      },
+      "geometry" : {
+        "type" : "MultiLineString",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ [ -73.946596, 40.818996 ], [ -73.946137, 40.81962 ] ] ]
+      },
+      "id" : "tiger_roads.4135"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "CFCC" : "A41",
+        "NAME" : "Edgecombe Ave"
+      },
+      "geometry" : {
+        "type" : "MultiLineString",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ [ -73.945635, 40.820211 ], [ -73.946137, 40.81962 ] ] ]
+      },
+      "id" : "tiger_roads.4137"
+    } ]
+  }
+}

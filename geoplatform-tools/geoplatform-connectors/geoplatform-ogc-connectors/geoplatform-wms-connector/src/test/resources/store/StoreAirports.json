@@ -1,0 +1,1406 @@
+{
+  "key" : "FEATURE_NAME",
+  "store" : {
+    "airport098" : [ {
+      "type" : "Feature",
+      "properties" : {
+        "continent" : "AF",
+        "iso_country" : "CF",
+        "iata_code" : "IMO",
+        "ident" : "FEFZ",
+        "latitude" : "5.050000191",
+        "elevation_ft" : "1995.0",
+        "municipality" : "Zemio",
+        "type" : "small_airport",
+        "local_code" : null,
+        "name" : "Zemio Airport",
+        "iso_region" : "CF-HM",
+        "gps_code" : "FEFZ",
+        "longitude" : "25.14999962"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 25.14999962, 5.05000019 ]
+      },
+      "id" : "airport098.17949"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "continent" : "AF",
+        "iso_country" : "CF",
+        "iata_code" : null,
+        "ident" : "FEGB",
+        "latitude" : "5.433000088",
+        "elevation_ft" : "2264.0",
+        "municipality" : "Bambouli",
+        "type" : "small_airport",
+        "local_code" : null,
+        "name" : "Bambouli Airport",
+        "iso_region" : "CF-HM",
+        "gps_code" : "FEGB",
+        "longitude" : "27.21699905"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 27.21699905, 5.43300009 ]
+      },
+      "id" : "airport098.17951"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "continent" : "AF",
+        "iso_country" : "CF",
+        "iata_code" : "MKI",
+        "ident" : "FEGE",
+        "latitude" : "5.333010197",
+        "elevation_ft" : "1969.0",
+        "municipality" : "Mboki",
+        "type" : "small_airport",
+        "local_code" : null,
+        "name" : "M'Boki Airport",
+        "iso_region" : "CF-HM",
+        "gps_code" : "FEGE",
+        "longitude" : "25.93190002"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 25.93190002, 5.3330102 ]
+      },
+      "id" : "airport098.17957"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "continent" : "AF",
+        "iso_country" : "CF",
+        "iata_code" : null,
+        "ident" : "FEFB",
+        "latitude" : "5.403888889",
+        "elevation_ft" : "0.0",
+        "municipality" : "Obo",
+        "type" : "small_airport",
+        "local_code" : null,
+        "name" : "Poste Airport",
+        "iso_region" : "CF-HM",
+        "gps_code" : "FEFB",
+        "longitude" : "26.48722222"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 26.48722222, 5.40388889 ]
+      },
+      "id" : "airport098.17962"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "continent" : "AF",
+        "iso_country" : "CD",
+        "iata_code" : null,
+        "ident" : "FZJA",
+        "latitude" : "2.782219887",
+        "elevation_ft" : "0.0",
+        "municipality" : null,
+        "type" : "closed",
+        "local_code" : null,
+        "name" : "Isiro-Ville",
+        "iso_region" : "CD-OR",
+        "gps_code" : "FZJA",
+        "longitude" : "27.62579918"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 27.62579918, 2.78221989 ]
+      },
+      "id" : "airport098.19049"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "continent" : "AF",
+        "iso_country" : "CD",
+        "iata_code" : null,
+        "ident" : "FZJB",
+        "latitude" : "3.23300004",
+        "elevation_ft" : "2874.0",
+        "municipality" : "Doko",
+        "type" : "small_airport",
+        "local_code" : null,
+        "name" : "Doko Airport",
+        "iso_region" : "CD-OR",
+        "gps_code" : "FZJB",
+        "longitude" : "29.56699944"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 29.56699944, 3.23300004 ]
+      },
+      "id" : "airport098.19051"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "continent" : "AF",
+        "iso_country" : "CD",
+        "iata_code" : null,
+        "ident" : "FZJC",
+        "latitude" : "3.599999905",
+        "elevation_ft" : "2378.0",
+        "municipality" : "Dungu-Uye",
+        "type" : "small_airport",
+        "local_code" : null,
+        "name" : "Dungu-Uye Airport",
+        "iso_region" : "CD-OR",
+        "gps_code" : "FZJC",
+        "longitude" : "28.89999962"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 28.89999962, 3.59999991 ]
+      },
+      "id" : "airport098.19053"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "continent" : "AF",
+        "iso_country" : "CD",
+        "iata_code" : null,
+        "ident" : "FZJD",
+        "latitude" : "4.732999802",
+        "elevation_ft" : "2378.0",
+        "municipality" : "Doruma",
+        "type" : "small_airport",
+        "local_code" : null,
+        "name" : "Doruma Airport",
+        "iso_region" : "CD-OR",
+        "gps_code" : "FZJD",
+        "longitude" : "27.68300056"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 27.68300056, 4.7329998 ]
+      },
+      "id" : "airport098.19055"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "continent" : "AF",
+        "iso_country" : "CD",
+        "iata_code" : null,
+        "ident" : "FZJF",
+        "latitude" : "3.900000095",
+        "elevation_ft" : "3051.0",
+        "municipality" : "Aba",
+        "type" : "small_airport",
+        "local_code" : null,
+        "name" : "Aba Airport",
+        "iso_region" : "CD-OR",
+        "gps_code" : "FZJF",
+        "longitude" : "30.25"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 30.25, 3.9000001 ]
+      },
+      "id" : "airport098.19057"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "continent" : "AF",
+        "iso_country" : "CD",
+        "iata_code" : "IRP",
+        "ident" : "FZJH",
+        "latitude" : "2.827610016",
+        "elevation_ft" : "2438.0",
+        "municipality" : null,
+        "type" : "medium_airport",
+        "local_code" : null,
+        "name" : "Matari Airport",
+        "iso_region" : "CD-OR",
+        "gps_code" : "FZJH",
+        "longitude" : "27.5883007"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 27.5883007, 2.82761002 ]
+      },
+      "id" : "airport098.19059"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "continent" : "AF",
+        "iso_country" : "CD",
+        "iata_code" : null,
+        "ident" : "FZJI",
+        "latitude" : "3.016940117",
+        "elevation_ft" : "3199.0",
+        "municipality" : "Watsa",
+        "type" : "small_airport",
+        "local_code" : null,
+        "name" : "Watsa Airport",
+        "iso_region" : "CD-OR",
+        "gps_code" : "FZJI",
+        "longitude" : "29.55920029"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 29.55920029, 3.01694012 ]
+      },
+      "id" : "airport098.19061"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "continent" : "AF",
+        "iso_country" : "CD",
+        "iata_code" : null,
+        "ident" : "FZJK",
+        "latitude" : "3.73300004",
+        "elevation_ft" : "2690.0",
+        "municipality" : "Faradje",
+        "type" : "small_airport",
+        "local_code" : null,
+        "name" : "Faradje Airport",
+        "iso_region" : "CD-OR",
+        "gps_code" : "FZJK",
+        "longitude" : "29.70000076"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 29.70000076, 3.73300004 ]
+      },
+      "id" : "airport098.19063"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "continent" : "AF",
+        "iso_country" : "CD",
+        "iata_code" : null,
+        "ident" : "FZJR",
+        "latitude" : "2.73300004",
+        "elevation_ft" : "4429.0",
+        "municipality" : "Kere Kere",
+        "type" : "small_airport",
+        "local_code" : null,
+        "name" : "Kere Kere Airport",
+        "iso_region" : "CD-OR",
+        "gps_code" : "FZJR",
+        "longitude" : "30.53300095"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 30.53300095, 2.73300004 ]
+      },
+      "id" : "airport098.19067"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "continent" : "AF",
+        "iso_country" : "CD",
+        "iata_code" : "BUX",
+        "ident" : "FZKA",
+        "latitude" : "1.565719962",
+        "elevation_ft" : "4045.0",
+        "municipality" : null,
+        "type" : "medium_airport",
+        "local_code" : null,
+        "name" : "Bunia Airport",
+        "iso_region" : "CD-OR",
+        "gps_code" : "FZKA",
+        "longitude" : "30.2208004"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 30.2208004, 1.56571996 ]
+      },
+      "id" : "airport098.19069"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "continent" : "AF",
+        "iso_country" : "CD",
+        "iata_code" : null,
+        "ident" : "FZKB",
+        "latitude" : "3.650000095",
+        "elevation_ft" : "2050.0",
+        "municipality" : "Bambili-Dingila",
+        "type" : "small_airport",
+        "local_code" : null,
+        "name" : "Bambili-Dingila Airport",
+        "iso_region" : "CD-OR",
+        "gps_code" : "FZKB",
+        "longitude" : "26.11700058"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 26.11700058, 3.6500001 ]
+      },
+      "id" : "airport098.19071"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "continent" : "AF",
+        "iso_country" : "CD",
+        "iata_code" : null,
+        "ident" : "FZKC",
+        "latitude" : "2.167000055",
+        "elevation_ft" : "2555.0",
+        "municipality" : "Mahagi",
+        "type" : "small_airport",
+        "local_code" : null,
+        "name" : "Mahagi Airport",
+        "iso_region" : "CD-OR",
+        "gps_code" : "FZKC",
+        "longitude" : "31.14999962"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 31.14999962, 2.16700006 ]
+      },
+      "id" : "airport098.19073"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "continent" : "AF",
+        "iso_country" : "CD",
+        "iata_code" : null,
+        "ident" : "FZKF",
+        "latitude" : "1.817000031",
+        "elevation_ft" : "4593.0",
+        "municipality" : "Kilomines",
+        "type" : "small_airport",
+        "local_code" : null,
+        "name" : "Kilomines Airport",
+        "iso_region" : "CD-OR",
+        "gps_code" : "FZKF",
+        "longitude" : "30.2329998"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 30.2329998, 1.81700003 ]
+      },
+      "id" : "airport098.19075"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "continent" : "AF",
+        "iso_country" : "CD",
+        "iata_code" : null,
+        "ident" : "FZKI",
+        "latitude" : "2.032999992",
+        "elevation_ft" : "3642.0",
+        "municipality" : "Yedi",
+        "type" : "small_airport",
+        "local_code" : null,
+        "name" : "Yedi Airport",
+        "iso_region" : "CD-OR",
+        "gps_code" : "FZKI",
+        "longitude" : "24.79999924"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 24.79999924, 2.03299999 ]
+      },
+      "id" : "airport098.19077"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "continent" : "AF",
+        "iso_country" : "CD",
+        "iata_code" : "BZU",
+        "ident" : "FZKJ",
+        "latitude" : "2.818350077",
+        "elevation_ft" : "1378.0",
+        "municipality" : null,
+        "type" : "medium_airport",
+        "local_code" : null,
+        "name" : "Buta Zega Airport",
+        "iso_region" : "CD-OR",
+        "gps_code" : "FZKJ",
+        "longitude" : "24.79369926"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 24.79369926, 2.81835008 ]
+      },
+      "id" : "airport098.19079"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "continent" : "AF",
+        "iso_country" : "CD",
+        "iata_code" : null,
+        "ident" : "FZKO",
+        "latitude" : "4.028999805",
+        "elevation_ft" : "2133.0",
+        "municipality" : "Ango",
+        "type" : "small_airport",
+        "local_code" : null,
+        "name" : "Ango Airport",
+        "iso_region" : "CD-OR",
+        "gps_code" : "FZKO",
+        "longitude" : "25.86199951"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 25.86199951, 4.02899981 ]
+      },
+      "id" : "airport098.19083"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "continent" : "AF",
+        "iso_country" : "UG",
+        "iata_code" : null,
+        "ident" : "HUAJ",
+        "latitude" : "3.339230061",
+        "elevation_ft" : "2611.0",
+        "municipality" : "Adjumani",
+        "type" : "small_airport",
+        "local_code" : null,
+        "name" : "Adjumani Airport",
+        "iso_region" : "UG-301",
+        "gps_code" : "HUAJ",
+        "longitude" : "31.76469994"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 31.76469994, 3.33923006 ]
+      },
+      "id" : "airport098.20193"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "continent" : "AF",
+        "iso_country" : "UG",
+        "iata_code" : "RUA",
+        "ident" : "HUAR",
+        "latitude" : "3.049999952",
+        "elevation_ft" : "3951.0",
+        "municipality" : "Arua",
+        "type" : "medium_airport",
+        "local_code" : null,
+        "name" : "Arua Airport",
+        "iso_region" : "UG-303",
+        "gps_code" : "HUAR",
+        "longitude" : "30.91699982"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 30.91699982, 3.04999995 ]
+      },
+      "id" : "airport098.20195"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "continent" : "AF",
+        "iso_country" : "UG",
+        "iata_code" : "ULU",
+        "ident" : "HUGU",
+        "latitude" : "2.805560112",
+        "elevation_ft" : "3510.0",
+        "municipality" : "Gulu",
+        "type" : "medium_airport",
+        "local_code" : null,
+        "name" : "Gulu Airport",
+        "iso_region" : "UG-304",
+        "gps_code" : "HUGU",
+        "longitude" : "32.27180099"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 32.27180099, 2.80556011 ]
+      },
+      "id" : "airport098.20199"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "continent" : "AF",
+        "iso_country" : "UG",
+        "iata_code" : "KBG",
+        "ident" : "HUKF",
+        "latitude" : "2.326390028",
+        "elevation_ft" : "2365.0",
+        "municipality" : "Kabalega Falls",
+        "type" : "small_airport",
+        "local_code" : null,
+        "name" : "Kabalega Falls Airport",
+        "iso_region" : "UG-409",
+        "gps_code" : "HUKF",
+        "longitude" : "31.49780083"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 31.49780083, 2.32639003 ]
+      },
+      "id" : "airport098.20207"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "continent" : "AF",
+        "iso_country" : "UG",
+        "iata_code" : "KCU",
+        "ident" : "HUMI",
+        "latitude" : "1.758059978",
+        "elevation_ft" : "3850.0",
+        "municipality" : "Masindi",
+        "type" : "small_airport",
+        "local_code" : null,
+        "name" : "Masindi Airport",
+        "iso_region" : "UG-409",
+        "gps_code" : "HUMI",
+        "longitude" : "31.73670006"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 31.73670006, 1.75805998 ]
+      },
+      "id" : "airport098.20214"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "continent" : "AF",
+        "iso_country" : "UG",
+        "iata_code" : "PAF",
+        "ident" : "HUPA",
+        "latitude" : "2.202222",
+        "elevation_ft" : "0.0",
+        "municipality" : null,
+        "type" : "small_airport",
+        "local_code" : null,
+        "name" : "Pakuba Airport",
+        "iso_region" : "UG-U-A",
+        "gps_code" : "HUPA",
+        "longitude" : "31.554444"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 31.554444, 2.202222 ]
+      },
+      "id" : "airport098.20216"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "continent" : "AF",
+        "iso_country" : "SS",
+        "iata_code" : null,
+        "ident" : "HSRJ",
+        "latitude" : "8.461110115",
+        "elevation_ft" : "1788.0",
+        "municipality" : "Raga",
+        "type" : "small_airport",
+        "local_code" : null,
+        "name" : "Raga Airport",
+        "iso_region" : "SS-14",
+        "gps_code" : "HSRJ",
+        "longitude" : "25.68110085"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 25.68110085, 8.46111012 ]
+      },
+      "id" : "airport098.20103"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "continent" : "AF",
+        "iso_country" : "SS",
+        "iata_code" : "JUB",
+        "ident" : "HSSJ",
+        "latitude" : "4.872010231",
+        "elevation_ft" : "1513.0",
+        "municipality" : "Juba",
+        "type" : "large_airport",
+        "local_code" : null,
+        "name" : "Juba International Airport",
+        "iso_region" : "SS-17",
+        "gps_code" : "HSSJ",
+        "longitude" : "31.60110092"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 31.60110092, 4.87201023 ]
+      },
+      "id" : "airport098.20107"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "continent" : "AF",
+        "iso_country" : "SS",
+        "iata_code" : null,
+        "ident" : "HSTO",
+        "latitude" : "7.267000198",
+        "elevation_ft" : "1413.0",
+        "municipality" : "Tong",
+        "type" : "small_airport",
+        "local_code" : null,
+        "name" : "Tong Airport",
+        "iso_region" : "SS-21",
+        "gps_code" : "HSTO",
+        "longitude" : "28.9829998"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 28.9829998, 7.2670002 ]
+      },
+      "id" : "airport098.20114"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "continent" : "AF",
+        "iso_country" : "SS",
+        "iata_code" : null,
+        "ident" : "HSTU",
+        "latitude" : "5.599999905",
+        "elevation_ft" : "2230.0",
+        "municipality" : "Tumbura",
+        "type" : "small_airport",
+        "local_code" : null,
+        "name" : "Tumbura Airport",
+        "iso_region" : "SS-16",
+        "gps_code" : "HSTU",
+        "longitude" : "27.45000076"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 27.45000076, 5.59999991 ]
+      },
+      "id" : "airport098.20116"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "continent" : "AF",
+        "iso_country" : "SS",
+        "iata_code" : "WUU",
+        "ident" : "HSWW",
+        "latitude" : "7.725830078",
+        "elevation_ft" : "1529.0",
+        "municipality" : "Wau",
+        "type" : "medium_airport",
+        "local_code" : null,
+        "name" : "Wau Airport",
+        "iso_region" : "SS-14",
+        "gps_code" : "HSWW",
+        "longitude" : "27.97500038"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 27.97500038, 7.72583008 ]
+      },
+      "id" : "airport098.20117"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "continent" : "AF",
+        "iso_country" : "SS",
+        "iata_code" : null,
+        "ident" : "HSYA",
+        "latitude" : "4.567220211",
+        "elevation_ft" : "2375.0",
+        "municipality" : "Yambio",
+        "type" : "small_airport",
+        "local_code" : null,
+        "name" : "Yambio Airport",
+        "iso_region" : "SS-16",
+        "gps_code" : "HSYA",
+        "longitude" : "28.4239006"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 28.4239006, 4.56722021 ]
+      },
+      "id" : "airport098.20118"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "continent" : "AF",
+        "iso_country" : "SS",
+        "iata_code" : null,
+        "ident" : "HSYE",
+        "latitude" : "4.130281601",
+        "elevation_ft" : "2000.0",
+        "municipality" : "Yei",
+        "type" : "small_airport",
+        "local_code" : null,
+        "name" : "Yei Airport",
+        "iso_region" : "SS-17",
+        "gps_code" : "HSYE",
+        "longitude" : "30.72807312"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 30.72807312, 4.1302816 ]
+      },
+      "id" : "airport098.20119"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "continent" : "AF",
+        "iso_country" : "SS",
+        "iata_code" : null,
+        "ident" : "HSYL",
+        "latitude" : "6.566999912",
+        "elevation_ft" : "1424.0",
+        "municipality" : "Yirol",
+        "type" : "small_airport",
+        "local_code" : null,
+        "name" : "Yirol Airport",
+        "iso_region" : "SS-18",
+        "gps_code" : "HSYL",
+        "longitude" : "30.5"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 30.5, 6.56699991 ]
+      },
+      "id" : "airport098.20120"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "continent" : "AF",
+        "iso_country" : "SS",
+        "iata_code" : null,
+        "ident" : "HSBR",
+        "latitude" : "6.195865",
+        "elevation_ft" : "1394.0",
+        "municipality" : "Bor",
+        "type" : "small_airport",
+        "local_code" : null,
+        "name" : "Bor Airport",
+        "iso_region" : "SS-20",
+        "gps_code" : "HSBR",
+        "longitude" : "31.600485"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 31.600485, 6.195865 ]
+      },
+      "id" : "airport098.20068"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "continent" : "AF",
+        "iso_country" : "SS",
+        "iata_code" : null,
+        "ident" : "HSKJ",
+        "latitude" : "3.917000055",
+        "elevation_ft" : "2500.0",
+        "municipality" : "Kago Kaju",
+        "type" : "small_airport",
+        "local_code" : null,
+        "name" : "Kago Kaju Airport",
+        "iso_region" : "SS-17",
+        "gps_code" : "HSKJ",
+        "longitude" : "31.66699982"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 31.66699982, 3.91700006 ]
+      },
+      "id" : "airport098.20091"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "continent" : "AF",
+        "iso_country" : "SS",
+        "iata_code" : null,
+        "ident" : "HSMD",
+        "latitude" : "4.916999817",
+        "elevation_ft" : "1901.0",
+        "municipality" : "Marida",
+        "type" : "small_airport",
+        "local_code" : null,
+        "name" : "Marida Airport",
+        "iso_region" : "SS-16",
+        "gps_code" : "HSMD",
+        "longitude" : "29.46699905"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 29.46699905, 4.91699982 ]
+      },
+      "id" : "airport098.20098"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "continent" : "AF",
+        "iso_country" : "SS",
+        "iata_code" : "RBX",
+        "ident" : "HSMK",
+        "latitude" : "6.824999809",
+        "elevation_ft" : "1378.0",
+        "municipality" : "Rumbek",
+        "type" : "small_airport",
+        "local_code" : null,
+        "name" : "Rumbek Airport",
+        "iso_region" : "SS-18",
+        "gps_code" : "HSMK",
+        "longitude" : "29.66900063"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 29.66900063, 6.82499981 ]
+      },
+      "id" : "airport098.20100"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "continent" : "AF",
+        "iso_country" : "SS",
+        "iata_code" : null,
+        "ident" : "HSNM",
+        "latitude" : "3.617000103",
+        "elevation_ft" : "2059.0",
+        "municipality" : "Nimuli",
+        "type" : "small_airport",
+        "local_code" : null,
+        "name" : "Nimuli Airport",
+        "iso_region" : "SS-19",
+        "gps_code" : "HSNM",
+        "longitude" : "32.13299942"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 32.13299942, 3.6170001 ]
+      },
+      "id" : "airport098.20111"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "continent" : "AF",
+        "iso_country" : "SS",
+        "iata_code" : null,
+        "ident" : "SS-0001",
+        "latitude" : "7.454049761",
+        "elevation_ft" : "0.0",
+        "municipality" : null,
+        "type" : "small_airport",
+        "local_code" : null,
+        "name" : "Ajuini Airstrip",
+        "iso_region" : "SS-20",
+        "gps_code" : null,
+        "longitude" : "31.41265869"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 31.41265869, 7.45404976 ]
+      },
+      "id" : "airport098.38406"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "continent" : "AF",
+        "iso_country" : "SS",
+        "iata_code" : null,
+        "ident" : "SS-0002",
+        "latitude" : "7.47779351",
+        "elevation_ft" : "0.0",
+        "municipality" : null,
+        "type" : "small_airport",
+        "local_code" : null,
+        "name" : "Duk Payuel Airstrip",
+        "iso_region" : "SS-20",
+        "gps_code" : null,
+        "longitude" : "31.51496887"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 31.51496887, 7.47779351 ]
+      },
+      "id" : "airport098.38408"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "continent" : "AF",
+        "iso_country" : "SS",
+        "iata_code" : null,
+        "ident" : "SS-0003",
+        "latitude" : "7.600151115",
+        "elevation_ft" : "0.0",
+        "municipality" : null,
+        "type" : "small_airport",
+        "local_code" : null,
+        "name" : "Duk Kwenyakwol Airstrip",
+        "iso_region" : "SS-20",
+        "gps_code" : null,
+        "longitude" : "31.45179749"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 31.45179749, 7.60015112 ]
+      },
+      "id" : "airport098.38410"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "continent" : "AF",
+        "iso_country" : "SS",
+        "iata_code" : null,
+        "ident" : "SS-0004",
+        "latitude" : "7.746628014",
+        "elevation_ft" : "0.0",
+        "municipality" : null,
+        "type" : "small_airport",
+        "local_code" : null,
+        "name" : "Panjut Airstrip",
+        "iso_region" : "SS-20",
+        "gps_code" : null,
+        "longitude" : "31.69126511"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 31.69126511, 7.74662801 ]
+      },
+      "id" : "airport098.38412"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "continent" : "AF",
+        "iso_country" : "SS",
+        "iata_code" : null,
+        "ident" : "SS-0005",
+        "latitude" : "7.739313876",
+        "elevation_ft" : "0.0",
+        "municipality" : null,
+        "type" : "small_airport",
+        "local_code" : null,
+        "name" : "Duk Fadiat Airstrip",
+        "iso_region" : "SS-20",
+        "gps_code" : null,
+        "longitude" : "31.40029907"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 31.40029907, 7.73931388 ]
+      },
+      "id" : "airport098.38414"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "continent" : "AF",
+        "iso_country" : "SS",
+        "iata_code" : null,
+        "ident" : "SS-0006",
+        "latitude" : "8.189678628",
+        "elevation_ft" : "0.0",
+        "municipality" : null,
+        "type" : "small_airport",
+        "local_code" : null,
+        "name" : "Waat Airstrip",
+        "iso_region" : "SS-23",
+        "gps_code" : null,
+        "longitude" : "32.15318441"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 32.15318441, 8.18967863 ]
+      },
+      "id" : "airport098.38416"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "continent" : "AF",
+        "iso_country" : "SS",
+        "iata_code" : null,
+        "ident" : "SS-0007",
+        "latitude" : "8.041297818",
+        "elevation_ft" : "0.0",
+        "municipality" : null,
+        "type" : "small_airport",
+        "local_code" : null,
+        "name" : "Pieri Airstrip",
+        "iso_region" : "SS-23",
+        "gps_code" : null,
+        "longitude" : "32.02986717"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 32.02986717, 8.04129782 ]
+      },
+      "id" : "airport098.38418"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "continent" : "AF",
+        "iso_country" : "SS",
+        "iata_code" : null,
+        "ident" : "SS-0008",
+        "latitude" : "7.905763917",
+        "elevation_ft" : "0.0",
+        "municipality" : null,
+        "type" : "small_airport",
+        "local_code" : null,
+        "name" : "Yuai Airstrip",
+        "iso_region" : "SS-23",
+        "gps_code" : null,
+        "longitude" : "31.88764572"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 31.88764572, 7.90576392 ]
+      },
+      "id" : "airport098.38420"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "continent" : "AF",
+        "iso_country" : "SS",
+        "iata_code" : null,
+        "ident" : "SS-0009",
+        "latitude" : "7.988007628",
+        "elevation_ft" : "0.0",
+        "municipality" : null,
+        "type" : "small_airport",
+        "local_code" : null,
+        "name" : "Turuk Airstrip",
+        "iso_region" : "SS-23",
+        "gps_code" : null,
+        "longitude" : "31.96755409"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 31.96755409, 7.98800763 ]
+      },
+      "id" : "airport098.38422"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "continent" : "AF",
+        "iso_country" : "SS",
+        "iata_code" : null,
+        "ident" : "SS-0010",
+        "latitude" : "8.415234373",
+        "elevation_ft" : "0.0",
+        "municipality" : null,
+        "type" : "small_airport",
+        "local_code" : null,
+        "name" : "Mogok Airstrip",
+        "iso_region" : "SS-20",
+        "gps_code" : null,
+        "longitude" : "31.33317947"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 31.33317947, 8.41523437 ]
+      },
+      "id" : "airport098.38424"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "continent" : "AF",
+        "iso_country" : "SS",
+        "iata_code" : null,
+        "ident" : "SS-0011",
+        "latitude" : "8.130524061",
+        "elevation_ft" : "0.0",
+        "municipality" : null,
+        "type" : "small_airport",
+        "local_code" : null,
+        "name" : "Ayod Airstrips",
+        "iso_region" : "SS-20",
+        "gps_code" : null,
+        "longitude" : "31.40725136"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 31.40725136, 8.13052406 ]
+      },
+      "id" : "airport098.38426"
+    } ]
+  }
+}

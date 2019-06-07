@@ -1,19 +1,10 @@
 package org.geosdi.geoplatform.connector.wms.stax;
 
-import org.geosdi.geoplatform.connector.reader.stax.GPWMSGetFeatureInfoStaxReader;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
-import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import java.io.File;
-
-import static java.io.File.separator;
-import static java.util.stream.Collectors.joining;
-import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
@@ -23,72 +14,13 @@ import static org.junit.runners.MethodSorters.NAME_ASCENDING;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @FixMethodOrder(value = NAME_ASCENDING)
-public class GPWMSGetFeatureInfoStaxReaderTest {
+public class GPWMSGetFeatureInfoStaxReaderTest extends WMSGetFeatureInfoStaxReaderTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(GPWMSGetFeatureInfoStaxReaderTest.class);
-    //
-    private static final JacksonSupport JACKSON_SUPPORT = new GPJacksonSupport(UNWRAP_ROOT_VALUE_DISABLE,
+    protected static final JacksonSupport JACKSON_SUPPORT = new GPJacksonSupport(UNWRAP_ROOT_VALUE_DISABLE,
             FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
             ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
             WRAP_ROOT_VALUE_DISABLE,
             INDENT_OUTPUT_ENABLE, NON_NULL);
-    private static final GPWMSGetFeatureInfoStaxReader wmsGetFeatureInfoStaxReader = new GPWMSGetFeatureInfoStaxReader();
-    private static File file;
-    private static File file1;
-    private static File file2;
-    private static File file3;
-    private static File file4;
-    private static File file5;
-    private static File file6;
-    private static File file7;
-    private static File file8;
-    private static File file9;
-    private static File file10;
-    private static File file11;
-    private static File file12;
-    private static File file13;
-    private static File file14;
-    private static File file15;
-    private static File file16;
-    private static File file17;
-    private static File file18;
-    private static File file19;
-    private static File file20;
-    private static File file21;
-    private static File file22;
-    private static File file23;
-    private static File file24;
-
-    @BeforeClass
-    public static void beforeClass() throws Exception {
-        String basePath = of(new File(".").getCanonicalPath(), "src", "test", "resources", "stax")
-                .collect(joining(separator, "", separator));
-        file = new File(basePath.concat("geoserver-Vigneti-GetFeatureInfo.xml"));
-        file1 = new File(basePath.concat("geoserver-GetFeatureInfo.xml"));
-        file2 = new File(basePath.concat("geoserver-GetFeatureInfo1.xml"));
-        file3 = new File(basePath.concat("geoserver-GetFeatureInfo-Point.xml"));
-        file4 = new File(basePath.concat("geoserver-GetFeatureInfo-MultiLineString.xml"));
-        file5 = new File(basePath.concat("spearfish-GetFeatureInfo.xml"));
-        file6 = new File(basePath.concat("tasmaniaRoads-GetFeatureInfo.xml"));
-        file7 = new File(basePath.concat("tasmaniaStates-GetFeatureInfo.xml"));
-        file8 = new File(basePath.concat("tiger_ny-GetFeatureInfo.xml"));
-        file9 = new File(basePath.concat("sfdem-GetFeatureInfo.xml"));
-        file10 = new File(basePath.concat("nurcAPk50095-GetFeatureInfo.xml"));
-        file11 = new File(basePath.concat("nurcArcSample-GetFeatureInfo.xml"));
-        file12 = new File(basePath.concat("comuni-GetFeatureInfo.xml"));
-        file13 = new File(basePath.concat("parchiNaturali-GetFeatureInfo.xml"));
-        file14 = new File(basePath.concat("retiRiserve-GetFeatureInfo.xml"));
-        file15 = new File(basePath.concat("linee-GetFeatureInfo.xml"));
-        file16 = new File(basePath.concat("azioniPunto-GetFeatureInfo.xml"));
-        file17 = new File(basePath.concat("comuniBasilicata-GetFeatureInfo.xml"));
-        file18 = new File(basePath.concat("corine-GetFeatureInfo.xml"));
-        file19 = new File(basePath.concat("airports.xml"));
-        file20 = new File(basePath.concat("geologia.xml"));
-        file21 = new File(basePath.concat("livelloEdifici.xml"));
-        file22 = new File(basePath.concat("volumetria.xml"));
-        file23 = new File(basePath.concat("livelloEdifici1.xml"));
-        file24 = new File(basePath.concat("masw.xml"));
-    }
 
     @Test
     public void a_wmsGetFeatureInfoStaxReaderTest() throws Exception {

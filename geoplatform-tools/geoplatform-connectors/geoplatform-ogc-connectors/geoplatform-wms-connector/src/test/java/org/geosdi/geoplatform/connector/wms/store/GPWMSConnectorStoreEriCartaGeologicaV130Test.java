@@ -3,6 +3,7 @@ package org.geosdi.geoplatform.connector.wms.store;
 import org.geosdi.geoplatform.connector.server.v130.IGPWMSConnectorStoreV130;
 import org.geosdi.geoplatform.connector.server.v130.WMSGetCapabilitiesV130Request;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +35,7 @@ public class GPWMSConnectorStoreEriCartaGeologicaV130Test {
                         .build()).build();
     }
 
-
+    @Ignore(value = "Server is Down")
     @Test
     public void wmsGetCapabilitiesV130CartaFitoclimaticaTest() throws Exception {
         WMSGetCapabilitiesV130Request wmsGetCapabilitiesRequest = wmsServerConnectorMinisteroAmbiente.createGetCapabilitiesRequest();

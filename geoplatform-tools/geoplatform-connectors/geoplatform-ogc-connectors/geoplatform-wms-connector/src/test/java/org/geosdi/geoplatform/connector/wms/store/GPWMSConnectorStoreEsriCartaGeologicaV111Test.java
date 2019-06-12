@@ -5,6 +5,7 @@ import org.geosdi.geoplatform.connector.server.v111.IGPWMSConnectorStoreV111;
 import org.geosdi.geoplatform.connector.server.v111.WMSGetCapabilitiesV111Request;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,13 +39,14 @@ public class GPWMSConnectorStoreEsriCartaGeologicaV111Test {
                         .build()).build();
     }
 
-
+    @Ignore(value = "Server is Down")
     @Test
     public void a_wmsGetCapabilitiesV111CartaGeologicaTest() throws Exception {
         WMSGetCapabilitiesV111Request wmsGetCapabilitiesRequest = wmsServerConnectorMinisteroAmbiente.createGetCapabilitiesRequest();
         logger.info("###############################WMS_GET_CAPABILITIES_V111_CARTA_GEOLOGICA_RESPONSE : {}\n", wmsGetCapabilitiesRequest.getResponseAsString());
     }
 
+    @Ignore(value = "Server is Down")
     @Test
     public void b_wmsDescribeLayerV111CartaGeologicaTest() throws Exception {
         GPWMSDescribeLayerV111Request wmsDescribeLayerRequest = wmsServerConnectorMinisteroAmbiente.createDescribeLayerRequest();

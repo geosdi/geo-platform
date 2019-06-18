@@ -314,17 +314,12 @@ public abstract class AbstractJAXBContextBuilder implements IGPJAXBContextBuilde
      * @return {@link Marshaller}
      */
     protected Marshaller createMarshaller(Object jaxbObject) {
-        checkArgument(jaxbObject != null,
-                "The Parameter jaxbObject must not be null.");
+        checkArgument(jaxbObject != null, "The Parameter jaxbObject must not be null.");
         try {
-            JAXBContext context = ((jaxbObject instanceof JAXBElement)
-                    ? getContext(((JAXBElement<?>) jaxbObject).getDeclaredType())
-                    : getContext(jaxbObject.getClass()));
-
+            JAXBContext context = ((jaxbObject instanceof JAXBElement) ? getContext(((JAXBElement<?>) jaxbObject).getDeclaredType()) : getContext(jaxbObject.getClass()));
             Marshaller marshaller = context.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
             marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
-
             return marshaller;
         } catch (JAXBException e) {
             throw new DataBindingException(e);

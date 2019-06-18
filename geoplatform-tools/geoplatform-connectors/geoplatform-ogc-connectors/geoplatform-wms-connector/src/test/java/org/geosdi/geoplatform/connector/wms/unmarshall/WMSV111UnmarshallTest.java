@@ -52,6 +52,9 @@ public class WMSV111UnmarshallTest {
     private static File wmsGetCapabilitiesCartaGeolitologica;
     private static File wmsGetCapabilitiesCatalogoFrane;
     private static File wmsGetCapabilitiesClassificazioneSismica;
+    private static File wmsGetCapabilitiesIspraCoste;
+    private static File wmsGetCapabilitiesIspra;
+    private static File wmsGetCapabilitiesIspraNatura;
 
     @BeforeClass
     public static void beforeClass() throws Exception {
@@ -68,6 +71,9 @@ public class WMSV111UnmarshallTest {
         wmsGetCapabilitiesCartaGeolitologica = new File(basePath.concat("cartaGeolitologica.xml"));
         wmsGetCapabilitiesCatalogoFrane = new File(basePath.concat("catalogoFrane.xml"));
         wmsGetCapabilitiesClassificazioneSismica = new File(basePath.concat("classificazioneSismica2012.xml"));
+        wmsGetCapabilitiesIspraCoste = new File(basePath.concat("WMSIspraCoste.xml"));
+        wmsGetCapabilitiesIspra = new File(basePath.concat("WMSIspraGetCapabilities.xml"));
+        wmsGetCapabilitiesIspraNatura = new File(basePath.concat("WMSIspraNatura.xml"));
         spf.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", FALSE);
         spf.setFeature("http://xml.org/sax/features/validation", FALSE);
     }
@@ -166,5 +172,41 @@ public class WMSV111UnmarshallTest {
         StringWriter writer = new StringWriter();
         wmsContext.acquireMarshaller().marshal(wmsCapabilities, writer);
         logger.info("######################WMSGetCapabilitiesV111_CLASSIFICAZIONE_SISMICA-String : \n{}\n", writer);
+    }
+
+    @Test
+    public void i_unmarshallWMSGetCapabilitiesV111Test() throws Exception {
+        XMLReader xmlReader = spf.newSAXParser().getXMLReader();
+        InputSource inputSource = new InputSource(new FileReader(wmsGetCapabilitiesIspraCoste));
+        SAXSource source = new SAXSource(xmlReader, inputSource);
+        WMTMSCapabilities wmsCapabilities = (WMTMSCapabilities) wmsContext.acquireUnmarshaller().unmarshal(source);
+        logger.debug("#######################WMSGetCapabilitiesV111_ISPRA_COSTE : {}\n", wmsCapabilities);
+        StringWriter writer = new StringWriter();
+        wmsContext.acquireMarshaller().marshal(wmsCapabilities, writer);
+        logger.info("######################WMSGetCapabilitiesV111_ISPRA_COSTE-String : \n{}\n", writer);
+    }
+
+    @Test
+    public void l_unmarshallWMSGetCapabilitiesV111Test() throws Exception {
+        XMLReader xmlReader = spf.newSAXParser().getXMLReader();
+        InputSource inputSource = new InputSource(new FileReader(wmsGetCapabilitiesIspra));
+        SAXSource source = new SAXSource(xmlReader, inputSource);
+        WMTMSCapabilities wmsCapabilities = (WMTMSCapabilities) wmsContext.acquireUnmarshaller().unmarshal(source);
+        logger.debug("#######################WMSGetCapabilitiesV111_ISPRA : {}\n", wmsCapabilities);
+        StringWriter writer = new StringWriter();
+        wmsContext.acquireMarshaller().marshal(wmsCapabilities, writer);
+        logger.info("######################WMSGetCapabilitiesV111_ISPRA-String : \n{}\n", writer);
+    }
+
+    @Test
+    public void m_unmarshallWMSGetCapabilitiesV111Test() throws Exception {
+        XMLReader xmlReader = spf.newSAXParser().getXMLReader();
+        InputSource inputSource = new InputSource(new FileReader(wmsGetCapabilitiesIspraNatura));
+        SAXSource source = new SAXSource(xmlReader, inputSource);
+        WMTMSCapabilities wmsCapabilities = (WMTMSCapabilities) wmsContext.acquireUnmarshaller().unmarshal(source);
+        logger.debug("#######################WMSGetCapabilitiesV111_ISPRA_NATURA : {}\n", wmsCapabilities);
+        StringWriter writer = new StringWriter();
+        wmsContext.acquireMarshaller().marshal(wmsCapabilities, writer);
+        logger.info("######################WMSGetCapabilitiesV111_ISPRA_NATURA-String : \n{}\n", writer);
     }
 }

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE WMT_MS_Capabilities SYSTEM "http://schemas.opengis.net/wms/1.1.1/WMS_MS_Capabilities.dtd">
+<WMT_MS_Capabilities version="1.1.1">
+    <Service>
+        <Name>WMS</Name>
+        <Title>OGC:WMS</Title>
+        <Abstract>OGC:WMS</Abstract>
+        <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple"
+                        xlink:href="http://www.geoservices.isprambiente.it/arcgis/services/Raster/imp_mosaico_2009/ImageServer/WMSServer"/>
+        <ContactInformation>
+            <ContactPersonPrimary>
+            </ContactPersonPrimary>
+            <ContactAddress>
+            </ContactAddress>
+        </ContactInformation>
+    </Service>
+    <Capability>
+        <Request>
+            <GetCapabilities>
+                <Format>application/vnd.ogc.wms_xml</Format>
+                <DCPType>
+                    <HTTP>
+                        <Get>
+                            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple"
+                                            xlink:href="http://www.geoservices.isprambiente.it/arcgis/services/Raster/imp_mosaico_2009/ImageServer/WMSServer"/>
+                        </Get>
+                    </HTTP>
+                </DCPType>
+            </GetCapabilities>
+            <GetMap>
+                <Format>image/tiff</Format>
+                <Format>image/png</Format>
+                <Format>image/png24</Format>
+                <Format>image/png32</Format>
+                <Format>image/bmp</Format>
+                <Format>image/jpeg</Format>
+                <Format>image/svg</Format>
+                <Format>image/bil</Format>
+                <DCPType>
+                    <HTTP>
+                        <Get>
+                            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple"
+                                            xlink:href="http://www.geoservices.isprambiente.it/arcgis/services/Raster/imp_mosaico_2009/ImageServer/WMSServer"/>
+                        </Get>
+                    </HTTP>
+                </DCPType>
+            </GetMap>
+            <GetStyles>
+                <Format>application/vnd.ogc.sld+xml</Format>
+                <DCPType>
+                    <HTTP>
+                        <Get>
+                            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple"
+                                            xlink:href="http://www.geoservices.isprambiente.it/arcgis/services/Raster/imp_mosaico_2009/ImageServer/WMSServer"/>
+                        </Get>
+                    </HTTP>
+                </DCPType>
+            </GetStyles>
+        </Request>
+        <Exception>
+            <Format>application/vnd.ogc.se_xml</Format>
+            <Format>application/vnd.ogc.se_inimage</Format>
+            <Format>application/vnd.ogc.se_blank</Format>
+        </Exception>
+        <Layer>
+            <Name>0</Name>
+            <Title>imp_mosaico_2009</Title>
+            <Abstract>2009</Abstract>
+            <SRS>EPSG:4326</SRS>
+            <SRS>EPSG:0</SRS>
+            <LatLonBoundingBox minx="6.536374" miny="35.213484" maxx="19.617479" maxy="47.139262"/>
+            <BoundingBox SRS="EPSG:4326" minx="6.536374" miny="35.213484" maxx="19.617479" maxy="47.139262"/>
+            <BoundingBox SRS="EPSG:0" minx="313100.000000" miny="3933320.000000" maxx="1312260.000000"
+                         maxy="5220640.000000"/>
+        </Layer>
+    </Capability>
+</WMT_MS_Capabilities>

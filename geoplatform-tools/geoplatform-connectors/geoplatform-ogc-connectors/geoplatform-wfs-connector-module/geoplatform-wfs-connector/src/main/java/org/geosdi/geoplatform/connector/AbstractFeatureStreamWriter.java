@@ -36,9 +36,7 @@ package org.geosdi.geoplatform.connector;
 
 import org.geosdi.geoplatform.connector.server.request.TransactionIdGen;
 import org.geosdi.geoplatform.connector.server.request.WFSTransactionRequest;
-import org.geosdi.geoplatform.connector.server.request.v110.transaction.stax.FeaturesNamespace;
 import org.geosdi.geoplatform.connector.server.request.v110.transaction.stax.TransactionParameters;
-import org.geosdi.geoplatform.connector.server.request.v110.transaction.stax.WFSTransactionParam;
 import org.geosdi.geoplatform.connector.wfs.response.AttributeDTO;
 import org.geosdi.geoplatform.connector.wfs.response.GeometryAttributeDTO;
 import org.geosdi.geoplatform.stax.writer.AbstractStaxStreamWriter;
@@ -52,6 +50,8 @@ import java.util.List;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static javax.annotation.meta.When.NEVER;
+import static org.geosdi.geoplatform.connector.server.request.v110.transaction.stax.FeaturesNamespace.*;
+import static org.geosdi.geoplatform.connector.server.request.v110.transaction.stax.WFSTransactionParam.*;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -98,72 +98,39 @@ public abstract class AbstractFeatureStreamWriter<T extends Object> extends Abst
 
     private void writeStartDocument(QName typeName) throws XMLStreamException {
         writer.writeStartDocument("UTF-8", "1.0");
-
 //        writer.setDefaultNamespace(FeaturesNamespace.WFS.NAMESPACE());
-        writer.setPrefix(FeaturesNamespace.GML.PREFIX(),
-                FeaturesNamespace.GML.NAMESPACE());
-
-        writer.setPrefix(FeaturesNamespace.XSI.PREFIX(),
-                FeaturesNamespace.XSI.NAMESPACE());
-        writer.setPrefix(FeaturesNamespace.WFS.PREFIX(),
-                FeaturesNamespace.WFS.NAMESPACE());
-        writer.setPrefix(FeaturesNamespace.OGC.PREFIX(),
-                FeaturesNamespace.OGC.NAMESPACE());
-        writer.setPrefix(FeaturesNamespace.XS.PREFIX(),
-                FeaturesNamespace.XS.NAMESPACE());
-
+        writer.setPrefix(GML.PREFIX(), GML.NAMESPACE());
+        writer.setPrefix(XSI.PREFIX(), XSI.NAMESPACE());
+        writer.setPrefix(WFS.PREFIX(), WFS.NAMESPACE());
+        writer.setPrefix(OGC.PREFIX(), OGC.NAMESPACE());
+        writer.setPrefix(XS.PREFIX(), XS.NAMESPACE());
         writer.setPrefix(typeName.getPrefix(), typeName.getNamespaceURI());
     }
 
-    private <T extends WFSTransactionRequest> void writeTransactionRequest(
-            T request) throws XMLStreamException, Exception {
-
-        writer.writeStartElement(FeaturesNamespace.WFS.PREFIX(),
-                TransactionParameters.getParam(WFSTransactionParam.TRANSACTION),
-                FeaturesNamespace.WFS.NAMESPACE());
+    private <T extends WFSTransactionRequest> void writeTransactionRequest(T request) throws XMLStreamException, Exception {
+        writer.writeStartElement(WFS.PREFIX(), TransactionParameters.getParam(TRANSACTION), WFS.NAMESPACE());
         writer.writeAttribute("service", this.getService());
         writer.writeAttribute("version", this.getWfsVersion());
-
         this.writeTransactionInsert(request);
-
         writer.writeEndElement();
     }
 
-    private void writeTransactionInsert(WFSTransactionRequest request)
-            throws XMLStreamException, Exception {
-        writer.writeStartElement(FeaturesNamespace.WFS.PREFIX(),
-                TransactionParameters.getParam(
-                        WFSTransactionParam.TRANSACTION_INSERT),
-                FeaturesNamespace.WFS.NAMESPACE());
-
+    private void writeTransactionInsert(WFSTransactionRequest request) throws XMLStreamException, Exception {
+        writer.writeStartElement(WFS.PREFIX(), TransactionParameters.getParam(TRANSACTION_INSERT), WFS.NAMESPACE());
         TransactionIdGen idGen = request.getTransactionIdGen();
 
         if (idGen != null) {
-            writer.writeAttribute(FeaturesNamespace.WFS.PREFIX(),
-                    FeaturesNamespace.WFS.NAMESPACE(),
-                    TransactionParameters.getParam(
-                            WFSTransactionParam.ID_GEN),
-                    idGen.value());
+            writer.writeAttribute(WFS.PREFIX(), WFS.NAMESPACE(), TransactionParameters.getParam(ID_GEN), idGen.value());
         }
-
         String inputFormat = request.getInputFormat();
-
         if (inputFormat != null) {
-            writer.writeAttribute(FeaturesNamespace.WFS.PREFIX(),
-                    FeaturesNamespace.WFS.NAMESPACE(),
-                    TransactionParameters.getParam(
-                            WFSTransactionParam.INPUT_FORMAT),
-                    inputFormat);
+            writer.writeAttribute(WFS.PREFIX(), WFS.NAMESPACE(), TransactionParameters.getParam(INPUT_FORMAT), inputFormat);
         }
 
         String srsName = request.getSRS();
 
         if (srsName != null) {
-            writer.writeAttribute(FeaturesNamespace.WFS.PREFIX(),
-                    FeaturesNamespace.WFS.NAMESPACE(),
-                    TransactionParameters.getParam(
-                            WFSTransactionParam.SRS_NAME),
-                    srsName);
+            writer.writeAttribute(WFS.PREFIX(), WFS.NAMESPACE(), TransactionParameters.getParam(SRS_NAME), srsName);
         }
 
         this.writeFeature(request);
@@ -171,29 +138,22 @@ public abstract class AbstractFeatureStreamWriter<T extends Object> extends Abst
         writer.writeEndElement();
     }
 
-    private void writeFeature(WFSTransactionRequest request)
-            throws XMLStreamException, Exception {
+    private void writeFeature(WFSTransactionRequest request) throws XMLStreamException, Exception {
         QName typeName = request.getTypeName();
-
         writer.writeStartElement(typeName.getLocalPart());
-
         List<AttributeDTO> attributes = request.getAttributes();
         for (AttributeDTO attributeDTO : attributes) {
             if (attributeDTO instanceof GeometryAttributeDTO) {
-                writeGeometryAttribute((GeometryAttributeDTO) attributeDTO,
-                        typeName);
+                writeGeometryAttribute((GeometryAttributeDTO) attributeDTO, typeName);
             } else {
                 writeAttribute(attributeDTO, typeName);
             }
         }
-
         writer.writeEndElement();
     }
 
-    private void writeAttribute(AttributeDTO attribute,
-            QName typeName) throws XMLStreamException {
-        super.writeElement(typeName.getPrefix() + ":" + attribute.getName(),
-                attribute.getValue());
+    private void writeAttribute(AttributeDTO attribute, QName typeName) throws XMLStreamException {
+        super.writeElement(typeName.getPrefix() + ":" + attribute.getName(), attribute.getValue());
     }
 
     /**
@@ -223,5 +183,4 @@ public abstract class AbstractFeatureStreamWriter<T extends Object> extends Abst
                 + ", wfsVersion = " + wfsVersion
                 + ", gmlVersion = " + gmlVersion + '}';
     }
-
 }

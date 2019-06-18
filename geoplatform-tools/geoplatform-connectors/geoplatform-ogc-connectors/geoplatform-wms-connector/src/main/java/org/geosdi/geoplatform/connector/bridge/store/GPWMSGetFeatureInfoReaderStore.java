@@ -9,13 +9,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static java.util.function.Function.identity;
+import static java.util.Collections.unmodifiableCollection;
+import static java.util.Collections.unmodifiableSet;
+import static org.geosdi.geoplatform.connector.bridge.store.WMSGetFeatureInfoReaderStore.of;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -30,11 +30,8 @@ public class GPWMSGetFeatureInfoReaderStore implements WMSGetFeatureInfoReaderSt
     private static final Map<WMSFeatureInfoFormat, GPWMSGetFeatureInfoReader<?>> wmsGetFeatureInfoReaders;
 
     static {
-        wmsGetFeatureInfoReaders = finder.getValidImplementors()
-                .stream()
-                .collect(Collectors.toMap(k -> k.getKey().getImplementorKey(), identity()));
-        logger.debug("@@@@@@@@@@@@@@@@@@@@@@{} up with {} values.\n\n", GPWMSGetFeatureInfoReaderStore.class.getSimpleName(),
-                wmsGetFeatureInfoReaders.size());
+        wmsGetFeatureInfoReaders = of(finder.getValidImplementors());
+        logger.debug("@@@@@@@@@@@@@@@@@@@@@@{} up with {} values.\n\n", GPWMSGetFeatureInfoReaderStore.class.getSimpleName(), wmsGetFeatureInfoReaders.size());
     }
 
     /**
@@ -54,7 +51,7 @@ public class GPWMSGetFeatureInfoReaderStore implements WMSGetFeatureInfoReaderSt
      */
     @Override
     public Set<GPWMSGetFeatureInfoReader<?>> getAllImplementors() {
-        return Collections.unmodifiableSet(finder.getAllImplementors());
+        return unmodifiableSet(finder.getAllImplementors());
     }
 
     /**
@@ -62,6 +59,6 @@ public class GPWMSGetFeatureInfoReaderStore implements WMSGetFeatureInfoReaderSt
      */
     @Override
     public Collection<GPWMSGetFeatureInfoReader<?>> getValidImplementors() {
-        return Collections.unmodifiableCollection(finder.getValidImplementors());
+        return unmodifiableCollection(finder.getValidImplementors());
     }
 }

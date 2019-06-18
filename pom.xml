@@ -500,6 +500,12 @@
                 <artifactId>quartz</artifactId>
                 <version>2.3.1</version>
             </dependency>
+            
+            <dependency>
+                <groupId>org.apache.bcel</groupId>
+                <artifactId>bcel</artifactId>
+                <version>${bcel.version}</version>
+            </dependency>
 
             <!-- =========================================================== -->
             <!-- 4J -->
@@ -1511,6 +1517,7 @@
         <gwtOpenlayersVersion>1.1.0</gwtOpenlayersVersion>
         
         <cas-version>3.2.1</cas-version>
+        <bcel.version>6.3.1</bcel.version>
         
         <jasypt-version>1.9.2</jasypt-version>
         

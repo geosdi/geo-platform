@@ -10,12 +10,13 @@ import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nonnull;
 import java.io.File;
-import java.util.Arrays;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 import static java.io.File.separator;
+import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
 import static javax.annotation.meta.When.NEVER;
@@ -41,6 +42,7 @@ public class GPWMSFeatureStoreUnmarshallerMultiThreadTest {
         checkArgument(dirFiles.exists(), "The Directory dirFiles doesn't exist.");
         checkArgument(dirFiles.isDirectory(), "The Parameter dirFiles must be a directory.");
         files = dirFiles.listFiles();
+        checkNotNull(files != null, "The Parameter files must not be null.");
     }
 
     @Test
@@ -48,7 +50,7 @@ public class GPWMSFeatureStoreUnmarshallerMultiThreadTest {
         CountDownLatch startSignal = new CountDownLatch(1);
         CountDownLatch doneSignal = new CountDownLatch(files.length);
         AtomicInteger counter = new AtomicInteger(0);
-        Arrays.stream(files)
+        stream(files)
                 .map(v -> new Thread(new WMSFeatureStoreUnmarshallerTask(v, startSignal, doneSignal, counter)))
                 .forEach(Thread::start);
         startSignal.countDown();

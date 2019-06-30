@@ -20,5 +20,9 @@
     <logger name="org.geosdi.geoplatform.connector.store.task.GeoserverStyleTask" level="debug"/>
     <logger name="org.geosdi.geoplatform.connector.store.task.GeoserverLayerTask" level="debug"/>
     <logger name="org.geosdi.geoplatform.connector.store.task.GeoserverWorkspaceLayersTask" level="debug"/>
+    <logger name="org.geosdi.geoplatform.connector.geoserver.model.datastores.body.builder.db.postgis.IGPPostgisDatastoreBodyBuilder"
+            level="trace"/>
+    <logger name="org.geosdi.geoplatform.connector.geoserver.model.datastores.body.builder.db.geopkg.IGPGeopackageDatastoreBodyBuilder"
+            level="trace"/>
 
 </configuration>

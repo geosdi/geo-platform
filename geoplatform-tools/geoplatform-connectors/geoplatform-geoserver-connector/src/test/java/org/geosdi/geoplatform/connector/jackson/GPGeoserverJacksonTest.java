@@ -36,9 +36,9 @@ package org.geosdi.geoplatform.connector.jackson;
 
 import org.geosdi.geoplatform.connector.geoserver.model.about.status.GPGeoserverAboutStatus;
 import org.geosdi.geoplatform.connector.geoserver.model.about.version.GPGeoserverAboutVersion;
-import org.geosdi.geoplatform.connector.geoserver.model.datastores.GPGeoserverCreateDatastoreBody;
 import org.geosdi.geoplatform.connector.geoserver.model.datastores.GPGeoserverLoadDatastore;
 import org.geosdi.geoplatform.connector.geoserver.model.datastores.GPGeoserverLoadDatastores;
+import org.geosdi.geoplatform.connector.geoserver.model.datastores.body.GPGeoserverCreateDatastoreBody;
 import org.geosdi.geoplatform.connector.geoserver.model.layers.GPGeoserverEmptyLayers;
 import org.geosdi.geoplatform.connector.geoserver.model.layers.GPGeoserverLayers;
 import org.geosdi.geoplatform.connector.geoserver.model.layers.GeoserverLayer;

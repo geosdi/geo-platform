@@ -32,11 +32,10 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.datastores;
+package org.geosdi.geoplatform.connector.geoserver.model.datastores.body;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 import org.geosdi.geoplatform.connector.geoserver.model.connection.IGPGeoserverConnectionParam;
@@ -49,8 +48,10 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Map;
+import java.util.Objects;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 import static java.lang.Boolean.TRUE;
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toMap;
@@ -61,7 +62,6 @@ import static javax.xml.bind.annotation.XmlAccessType.FIELD;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Builder(builderMethodName = "datastoreBodyBuilder")
 @ToString
 @Getter
 @XmlRootElement(name = "dataStore")
@@ -76,14 +76,15 @@ public class GPGeoserverCreateDatastoreBody implements IGPGeoserverCreateDatasto
     @XmlJavaTypeAdapter(value = GPGeoserverConnectionMapParamAdapter.class)
     private Map<String, String> connectionParameters;
 
-    GPGeoserverCreateDatastoreBody() {
-    }
-
     /**
      * @param theName
      * @param theConnectionParameters
      */
-    GPGeoserverCreateDatastoreBody(String theName, String theDescription, Boolean theEnabled, Map<String, String> theConnectionParameters) {
+    @JsonCreator
+    GPGeoserverCreateDatastoreBody(@Nonnull(when = NEVER) @JsonProperty(value = "name") String theName, @Nullable @JsonProperty(value = "description") String theDescription,
+            @Nullable @JsonProperty(value = "enabled") Boolean theEnabled, @Nonnull(when = NEVER) @JsonProperty(value = "connectionParameters") Map<String, String> theConnectionParameters) {
+        checkArgument((theName != null) && !(theName.trim().isEmpty()), "The Parameter name must not be null or an empty string.");
+        checkArgument(theConnectionParameters != null, "The Parameter connectionParameters must not be null.");
         this.name = theName;
         this.description = theDescription;
         this.enabled = ((theEnabled != null) ? theEnabled : TRUE);
@@ -106,6 +107,9 @@ public class GPGeoserverCreateDatastoreBody implements IGPGeoserverCreateDatasto
      */
     @Override
     public <Param extends IGPGeoserverConnectionParam> GPGeoserverCreateDatastoreBody addParam(@Nonnull(when = NEVER) Param theParam) throws Exception {
+        checkNotNull(theParam, "The Parameter param must not be null.");
+        checkArgument((theParam.getKey() != null) && !(theParam.getKey().trim().isEmpty()), "The Parameter key must not be null or an empty string.");
+        checkArgument((theParam.getValue() != null) && !(theParam.getValue().trim().isEmpty()), "The Parameter value must not be null or an empty string.");
         this.connectionParameters.put(theParam.getKey(), theParam.getValue());
         return this;
     }
@@ -117,23 +121,12 @@ public class GPGeoserverCreateDatastoreBody implements IGPGeoserverCreateDatasto
      */
     @Override
     public <Param extends IGPGeoserverConnectionParam> GPGeoserverCreateDatastoreBody addParams(@Nonnull(when = When.NEVER) Param... theParams) throws Exception {
-        this.connectionParameters.putAll(stream(theParams).collect(toMap(k -> k.getKey(), v -> v.getValue())));
+        checkNotNull(theParams, "The Parameter params must not be null");
+        this.connectionParameters.putAll(stream(theParams)
+                .filter(Objects::nonNull)
+                .filter(param -> (param.getKey() != null) && !(param.getKey().trim().isEmpty()))
+                .filter(param -> (param.getValue() != null) && !(param.getValue().trim().isEmpty()))
+                .collect(toMap(k -> k.getKey(), v -> v.getValue())));
         return this;
-    }
-
-    /**
-     * @param theName
-     * @param theDescription
-     * @param theEnabled
-     * @param theConnectionParameters
-     * @return {@link IGPGeoserverCreateDatastoreBody}
-     */
-    @JsonCreator
-    protected static IGPGeoserverCreateDatastoreBody creator(@Nonnull(when = NEVER) @JsonProperty(value = "name") String theName,
-            @Nullable @JsonProperty(value = "description") String theDescription, @Nullable @JsonProperty(value = "enabled") Boolean theEnabled,
-            @Nonnull(when = NEVER) @JsonProperty(value = "connectionParameters") Map<String, String> theConnectionParameters) {
-        checkArgument((theName != null) && !(theName.trim().isEmpty()), "The Parameter name must not be null or an empty string.");
-        checkArgument(theConnectionParameters != null, "The Parameter connectionParameters must not be null.");
-        return new GPGeoserverCreateDatastoreBody(theName, theDescription, theEnabled, theConnectionParameters);
     }
 }

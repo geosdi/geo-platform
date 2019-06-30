@@ -5,7 +5,6 @@ import org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat;
 import org.geosdi.geoplatform.support.bridge.store.GPImplementorStore;
 
 import javax.annotation.Nonnull;
-import javax.annotation.meta.When;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -13,6 +12,7 @@ import java.util.Set;
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.toMap;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -23,7 +23,7 @@ public interface WMSGetFeatureInfoReaderStore extends GPImplementorStore<GPWMSGe
     /**
      * @return {@link Map<WMSFeatureInfoFormat, GPWMSGetFeatureInfoReader<?>}
      */
-    static Map<WMSFeatureInfoFormat, GPWMSGetFeatureInfoReader<?>> of(@Nonnull(when = When.NEVER) Set<GPWMSGetFeatureInfoReader<?>> wmsFeatureInforReaders) {
+    static Map<WMSFeatureInfoFormat, GPWMSGetFeatureInfoReader<?>> of(@Nonnull(when = NEVER) Set<GPWMSGetFeatureInfoReader<?>> wmsFeatureInforReaders) {
         checkArgument(wmsFeatureInforReaders != null, "The Parameter wmsGetFeatureInfoReaders must not be null.");
         return wmsFeatureInforReaders.stream()
                 .filter(Objects::nonNull)

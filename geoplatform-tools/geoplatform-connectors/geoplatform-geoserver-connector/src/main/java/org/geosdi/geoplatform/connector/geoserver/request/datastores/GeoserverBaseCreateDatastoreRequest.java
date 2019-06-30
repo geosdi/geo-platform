@@ -1,6 +1,6 @@
 package org.geosdi.geoplatform.connector.geoserver.request.datastores;
 
-import org.geosdi.geoplatform.connector.geoserver.model.datastores.IGPGeoserverCreateDatastoreBody;
+import org.geosdi.geoplatform.connector.geoserver.model.datastores.body.IGPGeoserverCreateDatastoreBody;
 import org.geosdi.geoplatform.connector.server.request.GPConnectorRequest;
 
 import javax.annotation.Nonnull;

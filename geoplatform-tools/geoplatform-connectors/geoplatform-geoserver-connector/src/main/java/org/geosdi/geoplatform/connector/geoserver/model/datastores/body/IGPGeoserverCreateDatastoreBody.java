@@ -32,16 +32,17 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.datastores;
+package org.geosdi.geoplatform.connector.geoserver.model.datastores.body;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.geosdi.geoplatform.connector.geoserver.model.connection.GPGeoserverConnectionParametersBuilder;
 import org.geosdi.geoplatform.connector.geoserver.model.connection.IGPGeoserverConnectionParam;
 
 import javax.annotation.Nonnull;
-import javax.annotation.meta.When;
 import java.io.Serializable;
 import java.util.Map;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -76,7 +77,7 @@ public interface IGPGeoserverCreateDatastoreBody extends Serializable {
      * @return {@link IGPGeoserverCreateDatastoreBody}
      * @throws Exception
      */
-    <Param extends IGPGeoserverConnectionParam> IGPGeoserverCreateDatastoreBody addParam(@Nonnull(when = When.NEVER) Param theParam) throws Exception;
+    <Param extends IGPGeoserverConnectionParam> IGPGeoserverCreateDatastoreBody addParam(@Nonnull(when = NEVER) Param theParam) throws Exception;
 
     /**
      * @param theParams
@@ -84,5 +85,16 @@ public interface IGPGeoserverCreateDatastoreBody extends Serializable {
      * @return {@link IGPGeoserverCreateDatastoreBody}
      * @throws Exception
      */
-    <Param extends IGPGeoserverConnectionParam> IGPGeoserverCreateDatastoreBody addParams(@Nonnull(when = When.NEVER) Param... theParams) throws Exception;
+    <Param extends IGPGeoserverConnectionParam> IGPGeoserverCreateDatastoreBody addParams(@Nonnull(when = NEVER) Param... theParams) throws Exception;
+
+    /**
+     * @param theName
+     * @param theDescription
+     * @param theEnabled
+     * @param theConnectionParameters
+     * @return {@link IGPGeoserverCreateDatastoreBody}
+     */
+    static IGPGeoserverCreateDatastoreBody of(String theName, String theDescription, Boolean theEnabled, Map<String, String> theConnectionParameters) {
+        return new GPGeoserverCreateDatastoreBody(theName, theDescription, theEnabled, theConnectionParameters);
+    }
 }

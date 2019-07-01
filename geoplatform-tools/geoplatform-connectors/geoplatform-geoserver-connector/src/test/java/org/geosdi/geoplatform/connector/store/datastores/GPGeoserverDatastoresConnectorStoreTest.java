@@ -35,20 +35,28 @@
 package org.geosdi.geoplatform.connector.store.datastores;
 
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverWorkspaces;
+import org.geosdi.geoplatform.connector.geoserver.model.workspace.GeoserverCreateWorkspaceBody;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.IGPGeoserverWorkspace;
+import org.geosdi.geoplatform.connector.geoserver.request.datastores.GeoserverCreateDatastoreRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.datastores.GeoserverLoadDatastoreRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.datastores.GeoserverLoadDatastoresRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.datastores.GeoserverUpdateDatastoreRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GPGeoserverLoadWorkspacesRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GeoserverCreateWorkspaceRequest;
 import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreTest;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
-import org.junit.runners.MethodSorters;
+
+import static java.lang.Boolean.TRUE;
+import static org.geosdi.geoplatform.connector.geoserver.model.datastores.body.builder.db.postgis.IGPPostgisDatastoreBodyBuilder.GPPostgisDatastoreBodyBuilder.postgisDatastoreBodyBuilder;
+import static org.junit.Assert.assertTrue;
+import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@FixMethodOrder(NAME_ASCENDING)
 public class GPGeoserverDatastoresConnectorStoreTest extends GPBaseGeoserverConnectorStoreTest {
 
     @Test
@@ -79,63 +87,60 @@ public class GPGeoserverDatastoresConnectorStoreTest extends GPBaseGeoserverConn
 
     @Test
     public void d_createGeoserverDatastoreConnectorTest() throws Exception {
-//        GeoserverCreateWorkspaceRequest createWorkspaceRequest = geoserverConnectorStore.createWorkspaceRequest();
-//        createWorkspaceRequest.withWorkspaceBody(new GeoserverCreateWorkspaceBody("workspace_test_5"));
-//        logger.info("############CREATE_WORKSPACE_RESPONSE : {}", createWorkspaceRequest.getResponseAsString());
-//        GeoserverCreateDatastoreRequest createDatastoreRequest = geoserverConnectorStore.createDatastoreRequest();
-//        createDatastoreRequest.withWorkspaceName("workspace_test_5")
-//                .withDatastoreBody(datastoreBodyBuilder().name("datastore_test")
-//                        .description(null).enabled(null)
-//                        .connectionParameters(connectionParametersBuilder().addParams(new GPGeoserverConnectionParam("host", "localhost"),
-//                                new GPGeoserverConnectionParam("port", "5432"),
-//                                new GPGeoserverConnectionParam("database", "gp"),
-//                                new GPGeoserverConnectionParam("user", "postgres"),
-//                                new GPGeoserverConnectionParam("passwd", "0x,postgres,0x"),
-//                                new GPGeoserverConnectionParam("dbtype", "postgis")).build()).build());
-//        logger.info("####################CREATE_DATASTORE_RESPONSE : \n{}\n", createDatastoreRequest.getResponse());
-//        logger.info("####################CREATE_DATASTORE_RESPONSE : \n{}\n", createDatastoreRequest
-//                .withDatastoreBody(new GPGeoserverCreateDatastoreBody("datastore_test_1", null, null,
-//                        connectionParametersBuilder().addParams(new GPGeoserverConnectionParam("host", "localhost"),
-//                                new GPGeoserverConnectionParam("port", "5432"),
-//                                new GPGeoserverConnectionParam("database", "gp"),
-//                                new GPGeoserverConnectionParam("user", "postgres"),
-//                                new GPGeoserverConnectionParam("passwd", "0x,postgres,0x"),
-//                                new GPGeoserverConnectionParam("dbtype", "postgis")).build())).getResponse());
-//        assertTrue(geoserverConnectorStore.deleteDatastoreRequest().withWorkspaceName("workspace_test_5").withDatastoreName("datastore_test").getResponse());
-//        assertTrue(geoserverConnectorStore.deleteDatastoreRequest().withWorkspaceName("workspace_test_5").withDatastoreName("datastore_test_1").getResponse());
-//        assertTrue(geoserverConnectorStore.deleteWorkspaceRequest().withWorkspaceName("workspace_test_5").getResponse());
+        GeoserverCreateWorkspaceRequest createWorkspaceRequest = geoserverConnectorStore.createWorkspaceRequest();
+        createWorkspaceRequest.withWorkspaceBody(new GeoserverCreateWorkspaceBody("workspace_test_5"));
+        logger.info("############CREATE_WORKSPACE_RESPONSE : {}", createWorkspaceRequest.getResponseAsString());
+        GeoserverCreateDatastoreRequest createDatastoreRequest = geoserverConnectorStore.createDatastoreRequest();
+        createDatastoreRequest.withWorkspaceName("workspace_test_5")
+                .withDatastoreBody(postgisDatastoreBodyBuilder().withName("datastore_test")
+                        .withHost("localhost")
+                        .withPort(5432)
+                        .withDatabase("gp")
+                        .withUser("postgres")
+                        .withPassword("0x,postgres,0x")
+                        .build());
+        logger.info("####################CREATE_DATASTORE_RESPONSE : \n{}\n", createDatastoreRequest.getResponse());
+        logger.info("####################CREATE_DATASTORE_RESPONSE : \n{}\n", createDatastoreRequest
+                .withDatastoreBody(postgisDatastoreBodyBuilder().withName("datastore_test_1")
+                        .withHost("localhost")
+                        .withPort(5432)
+                        .withDatabase("gp")
+                        .withUser("postgres")
+                        .withPassword("0x,postgres,0x")
+                        .build()).getResponse());
+        assertTrue(geoserverConnectorStore.deleteDatastoreRequest().withWorkspaceName("workspace_test_5").withDatastoreName("datastore_test").getResponse());
+        assertTrue(geoserverConnectorStore.deleteDatastoreRequest().withWorkspaceName("workspace_test_5").withDatastoreName("datastore_test_1").getResponse());
+        assertTrue(geoserverConnectorStore.deleteWorkspaceRequest().withWorkspaceName("workspace_test_5").getResponse());
     }
 
     @Test
     public void e_updateGeoserverDatastoreConnectorTest() throws Exception {
-//        GeoserverCreateWorkspaceRequest createWorkspaceRequest = geoserverConnectorStore.createWorkspaceRequest();
-//        createWorkspaceRequest.withWorkspaceBody(new GeoserverCreateWorkspaceBody("workspace_test_6"));
-//        logger.info("############CREATE_WORKSPACE_RESPONSE : {}", createWorkspaceRequest.getResponseAsString());
-//        GeoserverCreateDatastoreRequest createDatastoreRequest = geoserverConnectorStore.createDatastoreRequest();
-//        createDatastoreRequest.withWorkspaceName("workspace_test_6")
-//                .withDatastoreBody(datastoreBodyBuilder().name("datastore_test_2")
-//                        .description(null).enabled(null)
-//                        .connectionParameters(connectionParametersBuilder().addParams(new GPGeoserverConnectionParam("host", "localhost"),
-//                                new GPGeoserverConnectionParam("port", "5432"),
-//                                new GPGeoserverConnectionParam("database", "gp"),
-//                                new GPGeoserverConnectionParam("user", "postgres"),
-//                                new GPGeoserverConnectionParam("passwd", "0x,postgres,0x"),
-//                                new GPGeoserverConnectionParam("dbtype", "postgis")).build()).build());
-//        logger.info("####################CREATE_DATASTORE_RESPONSE : \n{}\n", createDatastoreRequest.getResponse());
-//        GeoserverUpdateDatastoreRequest updateDatastoreRequest = geoserverConnectorStore.updateDatastoreRequest();
-//        updateDatastoreRequest.withWorkspaceName("workspace_test_6").withStoreName("datastore_test_2")
-//                .withDatastoreBody(datastoreBodyBuilder().name("datastore_test_2")
-//                        .description("DESCRIPTION_TEST").enabled(FALSE)
-//                        .connectionParameters(connectionParametersBuilder().addParams(new GPGeoserverConnectionParam("host", "localhost"),
-//                                new GPGeoserverConnectionParam("port", "2700"),
-//                                new GPGeoserverConnectionParam("database", "test"),
-//                                new GPGeoserverConnectionParam("user", "postgres"),
-//                                new GPGeoserverConnectionParam("passwd", "admin"),
-//                                new GPGeoserverConnectionParam("dbtype", "postgis")).build()).build());
-//        logger.info("############################UPDATE_DATASTORE_RESPONSE : {}\n", updateDatastoreRequest.getResponse());
-//        GeoserverLoadDatastoreRequest loadDatastoreRequest = geoserverConnectorStore.loadDatastoreRequest();
-//        logger.info("################################DATASTORE_UPDATED : {}\n", loadDatastoreRequest
-//                .withWorkspaceName("workspace_test_6").withStoreName("datastore_test_2").getResponse());
-//        assertTrue(geoserverConnectorStore.deleteWorkspaceRequest().withWorkspaceName("workspace_test_6").withRecurse(TRUE).getResponse());
+        GeoserverCreateWorkspaceRequest createWorkspaceRequest = geoserverConnectorStore.createWorkspaceRequest();
+        createWorkspaceRequest.withWorkspaceBody(new GeoserverCreateWorkspaceBody("workspace_test_6"));
+        logger.info("############CREATE_WORKSPACE_RESPONSE : {}", createWorkspaceRequest.getResponseAsString());
+        GeoserverCreateDatastoreRequest createDatastoreRequest = geoserverConnectorStore.createDatastoreRequest();
+        createDatastoreRequest.withWorkspaceName("workspace_test_6")
+                .withDatastoreBody(postgisDatastoreBodyBuilder().withName("datastore_test_2")
+                        .withHost("localhost")
+                        .withPort(5432)
+                        .withDatabase("gp")
+                        .withUser("postgres")
+                        .withPassword("0x,postgres,0x").build());
+        logger.info("####################CREATE_DATASTORE_RESPONSE : \n{}\n", createDatastoreRequest.getResponse());
+        GeoserverUpdateDatastoreRequest updateDatastoreRequest = geoserverConnectorStore.updateDatastoreRequest();
+        updateDatastoreRequest.withWorkspaceName("workspace_test_6").withStoreName("datastore_test_2")
+                .withDatastoreBody(postgisDatastoreBodyBuilder().withName("datastore_test_2")
+                        .withCreateDatabase("DESCRIPTION_TEST").withEnabled(Boolean.FALSE)
+                        .withHost("localhost")
+                        .withPort(2700)
+                        .withDatabase("test")
+                        .withUser("postgres")
+                        .withPassword("admin")
+                        .build());
+        logger.info("############################UPDATE_DATASTORE_RESPONSE : {}\n", updateDatastoreRequest.getResponse());
+        GeoserverLoadDatastoreRequest loadDatastoreRequest = geoserverConnectorStore.loadDatastoreRequest();
+        logger.info("################################DATASTORE_UPDATED : {}\n", loadDatastoreRequest
+                .withWorkspaceName("workspace_test_6").withStoreName("datastore_test_2").getResponse());
+        assertTrue(geoserverConnectorStore.deleteWorkspaceRequest().withWorkspaceName("workspace_test_6").withRecurse(TRUE).getResponse());
     }
 }

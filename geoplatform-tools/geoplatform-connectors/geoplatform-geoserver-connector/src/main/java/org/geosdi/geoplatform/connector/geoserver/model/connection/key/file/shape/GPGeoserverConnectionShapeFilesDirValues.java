@@ -13,8 +13,7 @@ import static java.lang.Boolean.TRUE;
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toList;
 import static javax.annotation.meta.When.NEVER;
-import static org.geosdi.geoplatform.connector.geoserver.model.connection.key.GPGeoserverConnectionKeyLevel.program;
-import static org.geosdi.geoplatform.connector.geoserver.model.connection.key.GPGeoserverConnectionKeyLevel.user;
+import static org.geosdi.geoplatform.connector.geoserver.model.connection.key.GPGeoserverConnectionKeyLevel.*;
 import static org.geosdi.geoplatform.connector.geoserver.model.connection.key.IGPGeoserverConnectionKey.of;
 
 /**
@@ -24,6 +23,7 @@ import static org.geosdi.geoplatform.connector.geoserver.model.connection.key.IG
 public enum GPGeoserverConnectionShapeFilesDirValues implements IGPGeoserverConnectionKey {
 
     URL(of("url", "URL to a .shp file", user, "URL", TRUE, null)),
+    FSTYPE(of("fstype", "Enable using a setting of 'shape’.", advanced, "String", FALSE, "shape")),
     FILETYPE(of("filetype", "Discriminator for directory stores", program, "String", FALSE, "shapefile"));
 
     private final IGPGeoserverConnectionKey key;

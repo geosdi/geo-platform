@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 
-import static org.geosdi.geoplatform.connector.geoserver.model.datastores.body.builder.db.geopkg.IGPGeopackageDatastoreBodyBuilder.GPGeopackageDatastoreBodyBuilder.geopackageDatastoreBodyBuilder;
+import static org.geosdi.geoplatform.connector.geoserver.model.datastores.body.builder.file.shape.IGPShapeFilesDirDatastoreBodyBuilder.GPShapeFilesDirDatastoreBodyBuilder.shapeFilesDirDatastoreBodyBuilder;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
@@ -19,9 +19,9 @@ import static org.junit.runners.MethodSorters.NAME_ASCENDING;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @FixMethodOrder(value = NAME_ASCENDING)
-public class GPGeopackageDatastoreBodyBuilderTest {
+public class GPShapeFilesDirDatastoreBodyBuilderTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(GPGeopackageDatastoreBodyBuilderTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(GPShapeFilesDirDatastoreBodyBuilderTest.class);
     //
     private static final JacksonSupport jacksonSupport = new GPJacksonSupport(UNWRAP_ROOT_VALUE_ENABLE,
             FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
@@ -30,19 +30,19 @@ public class GPGeopackageDatastoreBodyBuilderTest {
             INDENT_OUTPUT_ENABLE);
 
     @Test
-    public void a_buildDatastoreGeopackageTest() throws Exception {
-        IGPGeoserverCreateDatastoreBody createDatastoreBody = geopackageDatastoreBodyBuilder()
-                .withName("DATASTORE_TEST")
-                .withDatabase(new File("/Users/glascaleia/db.gpkg"))
+    public void a_buildShapeFilesDirDatastoreBodyTest() throws Exception {
+        IGPGeoserverCreateDatastoreBody createDatastoreBody = shapeFilesDirDatastoreBodyBuilder()
+                .withName("DATASTORE_SHAPE_FILES_DIR_TEST")
+                .withUrl(new File("/home/geosdi/shape").toURI().toURL())
                 .build();
         logger.info("###########################GEOSERVER_CREATE_DATASTORE_BODY : \n{}\n", jacksonSupport
                 .getDefaultMapper().writeValueAsString(createDatastoreBody));
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void b_buildDatastoreGeopackageTest() throws Exception {
-        IGPGeoserverCreateDatastoreBody createDatastoreBody = geopackageDatastoreBodyBuilder()
-                .withName("DATASTORE_TEST_1")
+    public void b_buildShapeFilesDirDatastoreBodyTest() throws Exception {
+        IGPGeoserverCreateDatastoreBody createDatastoreBody = shapeFilesDirDatastoreBodyBuilder()
+                .withName("DATASTORE_SHAPE_FILES_DIR_TEST_1")
                 .build();
     }
 }

@@ -27,7 +27,6 @@ public enum GPGeoserverConnectionFileValues implements IGPGeoserverConnectionKey
     NAMESPACE(of("namespace", "URI to a the namespace", advanced, "URI", FALSE, null)),
     CHARSET(of("charset", "Character used to decode strings from the DBF file", advanced, "Charset", FALSE, forName("ISO-8859-1"))),
     CREATE_SPATIAL_INDEX(of("create spatial index", "enable/disable the automatic creation of spatial index", advanced, "Boolean", FALSE, TRUE)),
-    FSTYPE(of("fstype", "Enable using a setting of 'shape’.", advanced, "String", FALSE, "shape")),
     ENABLE_SPATIAL_INDEX(of("enable spatial index", "enable/disable the use of spatial index for local shapefiles", advanced, "Boolean", FALSE, TRUE)),
     MEMORY_MAPPED_BUFFER(of("memory mapped buffer", "enable/disable the use of memory-mapped io", advanced, "Boolean", FALSE, FALSE));
 

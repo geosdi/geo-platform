@@ -40,12 +40,17 @@ import org.apache.http.entity.StringEntity;
 import org.geosdi.geoplatform.connector.geoserver.model.datastores.GPGeoserverCreateDatastoreResponse;
 import org.geosdi.geoplatform.connector.geoserver.model.datastores.IGPGeoserverCreateDatastoreResponse;
 import org.geosdi.geoplatform.connector.geoserver.model.datastores.body.IGPGeoserverCreateDatastoreBody;
+import org.geosdi.geoplatform.connector.geoserver.model.datastores.body.builder.db.geopkg.IGPGeopackageDatastoreBodyBuilder;
+import org.geosdi.geoplatform.connector.geoserver.model.datastores.body.builder.db.postgis.IGPPostgisDatastoreBodyBuilder;
+import org.geosdi.geoplatform.connector.geoserver.model.datastores.body.builder.file.shape.IGPShapeFileDatastoreBodyBuilder;
+import org.geosdi.geoplatform.connector.geoserver.model.datastores.body.builder.file.shape.IGPShapeFilesDirDatastoreBodyBuilder;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonPostConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
 import java.io.BufferedReader;
+import java.util.Map;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.ThreadLocal.withInitial;
@@ -85,6 +90,16 @@ public class GPGeoserverCreateDatastoreRequest extends GPJsonPostConnectorReques
 
 
     /**
+     * <p>
+     *      <ul>To create {@link IGPGeoserverCreateDatastoreBody} see :
+     *          <li>{@link IGPPostgisDatastoreBodyBuilder.GPPostgisDatastoreBodyBuilder#postgisDatastoreBodyBuilder()}</li>
+     *          <li>{@link IGPGeopackageDatastoreBodyBuilder.GPGeopackageDatastoreBodyBuilder#geopackageDatastoreBodyBuilder()}</li>
+     *          <li>{@link IGPShapeFileDatastoreBodyBuilder.GPShapeFileDatastoreBodyBuilder#shapeFileDatastoreBodyBuilder()}</li>
+     *          <li>{@link IGPShapeFilesDirDatastoreBodyBuilder.GPShapeFilesDirDatastoreBodyBuilder#shapeFilesDirDatastoreBodyBuilder()}</li>
+     *          <li>{@link IGPGeoserverCreateDatastoreBody#of(String, String, Boolean, Map)}</li>
+     *      </ul>
+     * </p>
+     *
      * @param theDatastoreBody
      */
     @Override

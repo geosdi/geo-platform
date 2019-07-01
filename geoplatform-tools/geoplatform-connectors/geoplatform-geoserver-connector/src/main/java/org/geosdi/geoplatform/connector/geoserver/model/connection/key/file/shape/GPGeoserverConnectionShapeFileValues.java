@@ -8,10 +8,12 @@ import javax.annotation.Nonnull;
 import java.util.List;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toList;
 import static javax.annotation.meta.When.NEVER;
+import static org.geosdi.geoplatform.connector.geoserver.model.connection.key.GPGeoserverConnectionKeyLevel.advanced;
 import static org.geosdi.geoplatform.connector.geoserver.model.connection.key.GPGeoserverConnectionKeyLevel.user;
 import static org.geosdi.geoplatform.connector.geoserver.model.connection.key.IGPGeoserverConnectionKey.of;
 
@@ -21,7 +23,8 @@ import static org.geosdi.geoplatform.connector.geoserver.model.connection.key.IG
  */
 public enum GPGeoserverConnectionShapeFileValues implements IGPGeoserverConnectionKey {
 
-    URL(of("url", "URL to a .shp file", user, "URL", TRUE, null));
+    URL(of("url", "URL to a .shp file", user, "URL", TRUE, null)),
+    FSTYPE(of("fstype", "Enable using a setting of 'shape’.", advanced, "String", FALSE, "shape"));
 
     private final IGPGeoserverConnectionKey key;
 

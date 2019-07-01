@@ -24,5 +24,7 @@
             level="trace"/>
     <logger name="org.geosdi.geoplatform.connector.geoserver.model.datastores.body.builder.db.geopkg.IGPGeopackageDatastoreBodyBuilder"
             level="trace"/>
+    <logger name="org.geosdi.geoplatform.connector.geoserver.model.datastores.body.builder.file.shape.IGPShapeFileDatastoreBodyBuilder"
+            level="trace"/>
 
 </configuration>

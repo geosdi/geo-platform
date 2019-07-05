@@ -48,8 +48,7 @@ public abstract class GPBaseConfigTest {
 
     @BeforeClass
     public static void beforeClass() {
-        System.setProperty(GP_GOOGLE_SERVICES_FILE_KEY,
-                "gp-googleservices-test.prop");
+        System.setProperty(GP_GOOGLE_SERVICES_FILE_KEY, "gp-googleservices-test.prop");
     }
 
     @AfterClass

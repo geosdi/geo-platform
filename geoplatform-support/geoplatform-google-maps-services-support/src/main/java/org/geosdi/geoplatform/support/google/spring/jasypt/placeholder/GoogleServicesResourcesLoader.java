@@ -33,43 +33,35 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.support.google.spring.placeholder;
+package org.geosdi.geoplatform.support.google.spring.jasypt.placeholder;
+
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 
 import java.net.MalformedURLException;
-import org.springframework.beans.factory.annotation.Required;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Configuration
-class GoogleServicesPlaceholderConfig {
+class GoogleServicesResourcesLoader {
 
-    private static final GoogleServicesResourcesLoader googleServicesResourcesLoader = new GoogleServicesResourcesLoader();
+    protected Resource[] loadResources(String gpConfigDataDir,
+            String gpGoogleServicesFileProp) throws MalformedURLException {
 
-    @Bean(name = "gpGoogleServicesPropertyConfigurer")
-    @Required
-    public static PropertySourcesPlaceholderConfigurer gpGoogleServicesPropertyConfigurer(
-            @Value("#{systemProperties['GP_DATA_DIR']}") String gpConfigDataDir,
-            @Value("#{systemProperties['GP_GOOGLE_SERVICES_FILE_PROP']}") String gpGoogleServicesFileProp)
-            throws MalformedURLException {
+        String fileToSearch = ((gpGoogleServicesFileProp != null)
+                && (!gpGoogleServicesFileProp.isEmpty())) ? ((gpGoogleServicesFileProp.contains("."))
+                && (gpGoogleServicesFileProp.endsWith(".properties"))) ? gpGoogleServicesFileProp
+                : (gpGoogleServicesFileProp.contains(".")) ? gpGoogleServicesFileProp.substring(0, gpGoogleServicesFileProp.indexOf(".")) + ".properties"
+                : gpGoogleServicesFileProp + ".properties" : "gp-googleservices.properties";
 
-        PropertySourcesPlaceholderConfigurer gpGSPC = new PropertySourcesPlaceholderConfigurer();
-        gpGSPC.setPlaceholderPrefix("gpGoogleServicesConfigurator{");
-        gpGSPC.setPlaceholderSuffix("}");
-        gpGSPC.setNullValue("@null");
+        Resource[] resources = new Resource[]{new ClassPathResource(fileToSearch),
+            new UrlResource("file:" + gpConfigDataDir
+            + "/" + fileToSearch)};
 
-        gpGSPC.setLocations(googleServicesResourcesLoader
-                .loadResources(gpConfigDataDir, gpGoogleServicesFileProp));
-        gpGSPC.setIgnoreResourceNotFound(Boolean.TRUE);
-        gpGSPC.setIgnoreUnresolvablePlaceholders(Boolean.TRUE);
-
-        return gpGSPC;
+        return resources;
     }
 
 }

@@ -9,7 +9,8 @@
        default-autowire="byName">
 
     <context:component-scan base-package="org.geosdi.geoplatform.logger.support.spring.config,
-                                          org.geosdi.geoplatform.support.google.spring.placeholder,
+                                          org.geosdi.geoplatform.cxf.rs.support.geocoding.spring.configuration.jasypt.peb,
+                                          org.geosdi.geoplatform.support.google.spring.jasypt,
                                           org.geosdi.geoplatform.support.google.spring.configuration,
                                           org.geosdi.geoplatform.support.google.spring.services.context,
                                           org.geosdi.geoplatform.support.google.spring.services.geocoding,

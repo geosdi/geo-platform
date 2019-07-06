@@ -6,7 +6,6 @@ import org.geosdi.geoplatform.connector.geoserver.model.connection.key.db.GPGeos
 
 import javax.annotation.Nonnull;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.FALSE;
@@ -98,12 +97,20 @@ public enum GPGeoserverConnectionPostGISValues implements IGPGeoserverConnection
     }
 
     /**
+     * @return {@link String}
+     */
+    @Override
+    public String toString() {
+        return this.key.toString();
+    }
+
+    /**
      * @return {@link List<IGPGeoserverConnectionKey>}
      */
     public static List<IGPGeoserverConnectionKey> requiredValues() {
         List<IGPGeoserverConnectionKey> postgisRequiredValues = stream(GPGeoserverConnectionPostGISValues.values())
                 .filter(IGPGeoserverConnectionKey::isRequired)
-                .collect(Collectors.toList());
+                .collect(toList());
         postgisRequiredValues.addAll(GPGeoserverConnectionDatabaseValues.requiredValues());
         return postgisRequiredValues;
     }

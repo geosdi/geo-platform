@@ -34,6 +34,7 @@ public class GPPostgisDatastoreBodyBuilderTest {
                 .withUser("postgres")
                 .withPassword("&&postgres!!")
                 .withDatabase("db_test")
+                .withCreateDatabaseParams("This is a simple Test")
                 .build();
         logger.info("###########################GEOSERVER_CREATE_DATASTORE_BODY : \n{}\n", jacksonSupport
                 .getDefaultMapper().writeValueAsString(createDatastoreBody));

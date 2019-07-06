@@ -130,7 +130,7 @@ public class GPGeoserverDatastoresConnectorStoreTest extends GPBaseGeoserverConn
         GeoserverUpdateDatastoreRequest updateDatastoreRequest = geoserverConnectorStore.updateDatastoreRequest();
         updateDatastoreRequest.withWorkspaceName("workspace_test_6").withStoreName("datastore_test_2")
                 .withDatastoreBody(postgisDatastoreBodyBuilder().withName("datastore_test_2")
-                        .withCreateDatabase("DESCRIPTION_TEST").withEnabled(Boolean.FALSE)
+                        .withDescription("DESCRIPTION_TEST").withEnabled(Boolean.FALSE)
                         .withHost("localhost")
                         .withPort(2700)
                         .withDatabase("test")

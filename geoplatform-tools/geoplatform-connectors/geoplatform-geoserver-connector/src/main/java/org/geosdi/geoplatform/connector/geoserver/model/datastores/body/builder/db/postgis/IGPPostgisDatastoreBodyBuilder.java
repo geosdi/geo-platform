@@ -21,7 +21,7 @@ import static org.geosdi.geoplatform.connector.geoserver.model.datastores.Geoser
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGPPostgisDatastoreBodyBuilder extends GPGeoserverDatastoreBodyDatabaseBuilder<IGPPostgisDatastoreBodyBuilder> {
+public interface IGPPostgisDatastoreBodyBuilder extends GPGeoserverDatastoreBodyDatabaseBuilder<IGPPostgisDatastoreBodyBuilder>, IGPBasePostgisDatastoreBodyBuilder<IGPPostgisDatastoreBodyBuilder> {
 
     /**
      * @param thePort
@@ -30,20 +30,12 @@ public interface IGPPostgisDatastoreBodyBuilder extends GPGeoserverDatastoreBody
     IGPPostgisDatastoreBodyBuilder withPort(@Nonnull(when = NEVER) Integer thePort);
 
     /**
-     * <p>Support on the fly geometry simplification</p>
-     *
-     * @param theSupportOnTheFlyGeometrySemplification
-     * @return {@link IGPPostgisDatastoreBodyBuilder}
-     */
-    IGPPostgisDatastoreBodyBuilder withSupportOnTheFlyGeometrySemplification(@Nullable Boolean theSupportOnTheFlyGeometrySemplification);
-
-    /**
      * <p>Creates the database if it does not exist yet</p>
      *
      * @param theCreateDatabase
      * @return {@link IGPPostgisDatastoreBodyBuilder}
      */
-    IGPPostgisDatastoreBodyBuilder withCreateDatabase(@Nullable String theCreateDatabase);
+    IGPPostgisDatastoreBodyBuilder withCreateDatabase(@Nullable Boolean theCreateDatabase);
 
     /**
      * <p>Extra specifications appeneded to the CREATE DATABASE command</p>
@@ -62,40 +54,12 @@ public interface IGPPostgisDatastoreBodyBuilder extends GPGeoserverDatastoreBody
     IGPPostgisDatastoreBodyBuilder withMaxOpenPreparedStatements(@Nullable Integer theMaxOpenPreparedStatements);
 
     /**
-     * <p>Set to true to have a set of filter functions be translated directly in SQL. Due to differences in the type
-     * systems the result might not be the same as evaluating them in memory, including the SQL failing with errors
-     * while the in memory version works fine. However this allows to push more of the filter into the database,
-     * increasing performance.the postgis table.
-     * </p>
-     *
-     * @param theEncodeFunctions
-     * @return {@link IGPPostgisDatastoreBodyBuilder}
-     */
-    IGPPostgisDatastoreBodyBuilder withEncodeFunctions(@Nullable Boolean theEncodeFunctions);
-
-    /**
      * <p>Null or Empty Strings not permitted. Default Value is : localhost</p>
      *
      * @param theHost
      * @return {@link IGPPostgisDatastoreBodyBuilder}
      */
     IGPPostgisDatastoreBodyBuilder withHost(@Nonnull(when = NEVER) String theHost);
-
-    /**
-     * <p>Perform only primary filter on bbox.</p>
-     *
-     * @param theLooseBbox
-     * @return {@link IGPPostgisDatastoreBodyBuilder}
-     */
-    IGPPostgisDatastoreBodyBuilder withLooseBbox(@Nullable Boolean theLooseBbox);
-
-    /**
-     * <p>Use the spatial index information to quickly get an estimate of the data bounds.</p>
-     *
-     * @param theEstimatedExtends
-     * @return {@link IGPPostgisDatastoreBodyBuilder}
-     */
-    IGPPostgisDatastoreBodyBuilder withEstimatedExtends(@Nullable Boolean theEstimatedExtends);
 
     /**
      * @param theDatabase
@@ -110,22 +74,6 @@ public interface IGPPostgisDatastoreBodyBuilder extends GPGeoserverDatastoreBody
      * @return {@link IGPPostgisDatastoreBodyBuilder}
      */
     IGPPostgisDatastoreBodyBuilder withTestWhileIdle(@Nullable Boolean theTestWhileIdle);
-
-    /**
-     * <p>Use prepared statements.</p>
-     *
-     * @param thePreparedStatements
-     * @return {@link IGPPostgisDatastoreBodyBuilder}
-     */
-    IGPPostgisDatastoreBodyBuilder withPreparedStatements(@Nullable Boolean thePreparedStatements);
-
-    /**
-     * <p>The Schema to use. Default value is : public.</p>
-     *
-     * @param theSchema
-     * @return {@link IGPPostgisDatastoreBodyBuilder}
-     */
-    IGPPostgisDatastoreBodyBuilder withSchema(@Nullable String theSchema);
 
     /**
      * <p>User name to login as.</p>
@@ -187,8 +135,8 @@ public interface IGPPostgisDatastoreBodyBuilder extends GPGeoserverDatastoreBody
          * @return {@link IGPPostgisDatastoreBodyBuilder}
          */
         @Override
-        public IGPPostgisDatastoreBodyBuilder withCreateDatabase(@Nullable String theCreateDatabase) {
-            this.connectionParameters.compute(CREATE_DATABASE.getConnectionKey(), (k, v) -> ((theCreateDatabase != null) && !(theCreateDatabase.trim().isEmpty())) ? theCreateDatabase : v);
+        public IGPPostgisDatastoreBodyBuilder withCreateDatabase(@Nullable Boolean theCreateDatabase) {
+            this.connectionParameters.compute(CREATE_DATABASE.getConnectionKey(), (k, v) -> (theCreateDatabase != null) ? theCreateDatabase.toString() : v);
             return self();
         }
 
@@ -340,10 +288,10 @@ public interface IGPPostgisDatastoreBodyBuilder extends GPGeoserverDatastoreBody
          */
         @Override
         protected void checkConnectionParameters() throws Exception {
-            for (IGPGeoserverConnectionKey connectionKey : requiredValues) {
-                logger.trace("@@@@@@@@@@@@@@@@@@@@@@@@@{} tries to check if : {} is present in connectionParameters.", this, connectionKey);
-                String value = this.connectionParameters.get(connectionKey.getConnectionKey());
-                checkArgument((value != null) && !(value.trim().isEmpty()), "For the Key : " + connectionKey.getConnectionKey()
+            for (IGPGeoserverConnectionKey key : requiredValues) {
+                logger.trace("@@@@@@@@@@@@@@@@@@@@@@@@@{} tries to check if : {} is present in connectionParameters.", this, key);
+                String value = this.connectionParameters.get(key.getConnectionKey());
+                checkArgument((value != null) && !(value.trim().isEmpty()), "For the Key : " + key.getConnectionKey()
                         + ", the value must not be null or an empty string.");
             }
         }

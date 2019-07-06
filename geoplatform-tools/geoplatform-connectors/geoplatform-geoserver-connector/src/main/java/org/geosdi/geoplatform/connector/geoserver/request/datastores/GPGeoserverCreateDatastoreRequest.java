@@ -42,8 +42,10 @@ import org.geosdi.geoplatform.connector.geoserver.model.datastores.IGPGeoserverC
 import org.geosdi.geoplatform.connector.geoserver.model.datastores.body.IGPGeoserverCreateDatastoreBody;
 import org.geosdi.geoplatform.connector.geoserver.model.datastores.body.builder.db.geopkg.IGPGeopackageDatastoreBodyBuilder;
 import org.geosdi.geoplatform.connector.geoserver.model.datastores.body.builder.db.postgis.IGPPostgisDatastoreBodyBuilder;
+import org.geosdi.geoplatform.connector.geoserver.model.datastores.body.builder.db.postgis.jndi.IGPPostgisJndiDatastoreBuilder;
 import org.geosdi.geoplatform.connector.geoserver.model.datastores.body.builder.file.shape.IGPShapeFileDatastoreBodyBuilder;
 import org.geosdi.geoplatform.connector.geoserver.model.datastores.body.builder.file.shape.IGPShapeFilesDirDatastoreBodyBuilder;
+import org.geosdi.geoplatform.connector.geoserver.model.datastores.body.builder.wfs.IGPWFSDatastoreBodyBuilder;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonPostConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
@@ -93,9 +95,11 @@ public class GPGeoserverCreateDatastoreRequest extends GPJsonPostConnectorReques
      * <p>
      *      <ul>To create {@link IGPGeoserverCreateDatastoreBody} see :
      *          <li>{@link IGPPostgisDatastoreBodyBuilder.GPPostgisDatastoreBodyBuilder#postgisDatastoreBodyBuilder()}</li>
+     *          <li>{@link IGPPostgisJndiDatastoreBuilder.GPPostgisJndiDatastoreBuilder#postgisJndiDatastoreBuilder()}</li>
      *          <li>{@link IGPGeopackageDatastoreBodyBuilder.GPGeopackageDatastoreBodyBuilder#geopackageDatastoreBodyBuilder()}</li>
      *          <li>{@link IGPShapeFileDatastoreBodyBuilder.GPShapeFileDatastoreBodyBuilder#shapeFileDatastoreBodyBuilder()}</li>
      *          <li>{@link IGPShapeFilesDirDatastoreBodyBuilder.GPShapeFilesDirDatastoreBodyBuilder#shapeFilesDirDatastoreBodyBuilder()}</li>
+     *          <li>{@link IGPWFSDatastoreBodyBuilder.GPWFSDatastoreBodyBuilder#wfsDatastoreBodyBuilder()}</li>
      *          <li>{@link IGPGeoserverCreateDatastoreBody#of(String, String, Boolean, Map)}</li>
      *      </ul>
      * </p>

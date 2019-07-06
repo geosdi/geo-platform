@@ -3,8 +3,10 @@ package org.geosdi.geoplatform.connector.geoserver.request.datastores;
 import org.geosdi.geoplatform.connector.geoserver.model.datastores.body.IGPGeoserverCreateDatastoreBody;
 import org.geosdi.geoplatform.connector.geoserver.model.datastores.body.builder.db.geopkg.IGPGeopackageDatastoreBodyBuilder;
 import org.geosdi.geoplatform.connector.geoserver.model.datastores.body.builder.db.postgis.IGPPostgisDatastoreBodyBuilder;
+import org.geosdi.geoplatform.connector.geoserver.model.datastores.body.builder.db.postgis.jndi.IGPPostgisJndiDatastoreBuilder;
 import org.geosdi.geoplatform.connector.geoserver.model.datastores.body.builder.file.shape.IGPShapeFileDatastoreBodyBuilder;
 import org.geosdi.geoplatform.connector.geoserver.model.datastores.body.builder.file.shape.IGPShapeFilesDirDatastoreBodyBuilder;
+import org.geosdi.geoplatform.connector.geoserver.model.datastores.body.builder.wfs.IGPWFSDatastoreBodyBuilder;
 import org.geosdi.geoplatform.connector.server.request.GPConnectorRequest;
 
 import javax.annotation.Nonnull;
@@ -28,9 +30,11 @@ public interface GeoserverBaseCreateDatastoreRequest<Request extends GeoserverBa
      * <p>
      *      <ul>To create {@link IGPGeoserverCreateDatastoreBody} see :
      *          <li>{@link IGPPostgisDatastoreBodyBuilder.GPPostgisDatastoreBodyBuilder#postgisDatastoreBodyBuilder()}</li>
+     *          <li>{@link IGPPostgisJndiDatastoreBuilder.GPPostgisJndiDatastoreBuilder#postgisJndiDatastoreBuilder()}</li>
      *          <li>{@link IGPGeopackageDatastoreBodyBuilder.GPGeopackageDatastoreBodyBuilder#geopackageDatastoreBodyBuilder()}</li>
      *          <li>{@link IGPShapeFileDatastoreBodyBuilder.GPShapeFileDatastoreBodyBuilder#shapeFileDatastoreBodyBuilder()}</li>
      *          <li>{@link IGPShapeFilesDirDatastoreBodyBuilder.GPShapeFilesDirDatastoreBodyBuilder#shapeFilesDirDatastoreBodyBuilder()}</li>
+     *          <li>{@link IGPWFSDatastoreBodyBuilder.GPWFSDatastoreBodyBuilder#wfsDatastoreBodyBuilder()}</li>
      *          <li>{@link IGPGeoserverCreateDatastoreBody#of(String, String, Boolean, Map)}</li>
      *      </ul>
      * </p>

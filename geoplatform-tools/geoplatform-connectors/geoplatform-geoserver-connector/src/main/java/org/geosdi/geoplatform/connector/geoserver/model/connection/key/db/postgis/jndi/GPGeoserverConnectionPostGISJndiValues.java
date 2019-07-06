@@ -1,40 +1,35 @@
-package org.geosdi.geoplatform.connector.geoserver.model.connection.key.file;
+package org.geosdi.geoplatform.connector.geoserver.model.connection.key.db.postgis.jndi;
 
 import org.geosdi.geoplatform.connector.geoserver.model.connection.key.GPGeoserverConnectionKeyLevel;
 import org.geosdi.geoplatform.connector.geoserver.model.connection.key.IGPGeoserverConnectionKey;
 
 import javax.annotation.Nonnull;
 import java.util.List;
+import java.util.stream.Stream;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
-import static java.nio.charset.Charset.forName;
-import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toList;
 import static javax.annotation.meta.When.NEVER;
 import static org.geosdi.geoplatform.connector.geoserver.model.connection.key.GPGeoserverConnectionKeyLevel.advanced;
 import static org.geosdi.geoplatform.connector.geoserver.model.connection.key.IGPGeoserverConnectionKey.of;
+import static org.geosdi.geoplatform.connector.geoserver.model.connection.key.db.GPGeoserverConnectionDatabaseValues.*;
+import static org.geosdi.geoplatform.connector.geoserver.model.connection.key.db.postgis.GPGeoserverConnectionPostGISValues.*;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public enum GPGeoserverConnectionFileValues implements IGPGeoserverConnectionKey {
+public enum GPGeoserverConnectionPostGISJndiValues implements IGPGeoserverConnectionKey {
 
-    CACHE_ADN_REUSE_MEMORY_MAPS(of("cache and reuse memory maps", "Only memory map a file one, then cache and reuse the map", advanced, "Boolean", FALSE, TRUE)),
-    NAMESPACE(of("namespace", "URI to a the namespace", advanced, "URI", FALSE, null)),
-    CHARSET(of("charset", "Character used to decode strings from the DBF file", advanced, "Charset", FALSE, forName("ISO-8859-1"))),
-    CREATE_SPATIAL_INDEX(of("create spatial index", "enable/disable the automatic creation of spatial index", advanced, "Boolean", FALSE, TRUE)),
-    ENABLE_SPATIAL_INDEX(of("enable spatial index", "enable/disable the use of spatial index for local shapefiles", advanced, "Boolean", FALSE, TRUE)),
-    MEMORY_MAPPED_BUFFER(of("memory mapped buffer", "enable/disable the use of memory-mapped io", advanced, "Boolean", FALSE, FALSE));
+    JNDI_REFERENCE_MAME(of("jndiReferenceName", "Java Naming and Directory Interface DataSource", advanced, "String", TRUE, null));
 
     private final IGPGeoserverConnectionKey key;
 
     /**
      * @param theKey
      */
-    GPGeoserverConnectionFileValues(@Nonnull(when = NEVER) IGPGeoserverConnectionKey theKey) {
+    GPGeoserverConnectionPostGISJndiValues(@Nonnull(when = NEVER) IGPGeoserverConnectionKey theKey) {
         checkArgument(theKey != null, "The Parameter key must not be null.");
         this.key = theKey;
     }
@@ -88,12 +83,7 @@ public enum GPGeoserverConnectionFileValues implements IGPGeoserverConnectionKey
     }
 
     /**
-     * Returns the name of this enum constant, as contained in the
-     * declaration.  This method may be overridden, though it typically
-     * isn't necessary or desirable.  An enum type should override this
-     * method when a more "programmer-friendly" string form exists.
-     *
-     * @return the name of this enum constant
+     * @return {@link String}
      */
     @Override
     public String toString() {
@@ -104,8 +94,7 @@ public enum GPGeoserverConnectionFileValues implements IGPGeoserverConnectionKey
      * @return {@link List<IGPGeoserverConnectionKey>}
      */
     public static List<IGPGeoserverConnectionKey> requiredValues() {
-        return stream(GPGeoserverConnectionFileValues.values())
-                .filter(IGPGeoserverConnectionKey::isRequired)
+        return Stream.of(JNDI_REFERENCE_MAME, DBTYPE)
                 .collect(toList());
     }
 
@@ -113,8 +102,8 @@ public enum GPGeoserverConnectionFileValues implements IGPGeoserverConnectionKey
      * @return {@link List<IGPGeoserverConnectionKey>}
      */
     public static List<IGPGeoserverConnectionKey> defaultValues() {
-        return stream(GPGeoserverConnectionFileValues.values())
-                .filter(v -> v.getDefaultValue() != null)
+        return Stream.of(DBTYPE, SCHEMA, FETCH_SIZE, BATCH_INSERT_SIZE, EXPOSE_PRIMARY_KEYS,
+                LOOSE_BBOX, ESTIMATED_EXTENDS, PREPARED_STATEMENTS, ENCODE_FUNCTIONS, SUPPORT_ON_THE_FLY_GEOMETRY_SEMPLIFICATION)
                 .collect(toList());
     }
 }

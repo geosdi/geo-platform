@@ -6,5 +6,5 @@ package org.geosdi.geoplatform.connector.geoserver.model.datastores;
  */
 public enum GeoserverDatastoreType {
 
-    SHAPEFILE, SHAPEFILES_DIRECTORY, POSTGIS, GEOPACKAGE;
+    SHAPEFILE, SHAPEFILES_DIRECTORY, POSTGIS, GEOPACKAGE, POSTGIS_JNDI, WFS;
 }

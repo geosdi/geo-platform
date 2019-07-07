@@ -22,9 +22,19 @@ public interface IGPGeoserverCoverageInfo extends IGPGeoserverResourceInfo {
     String getDefaultInterpolationMethod();
 
     /**
+     * @param theDefaultInterpolationMethod
+     */
+    void setDefaultInterpolationMethod(String theDefaultInterpolationMethod);
+
+    /**
      * @return {@link IGPCoverageDimensions}
      */
     IGPCoverageDimensions getDimensions();
+
+    /**
+     * @param theDimensions
+     */
+    void setDimensions(IGPCoverageDimensions theDimensions);
 
     /**
      * @return {@link IGPCoverageGrid}
@@ -32,9 +42,19 @@ public interface IGPGeoserverCoverageInfo extends IGPGeoserverResourceInfo {
     IGPCoverageGrid getGrid();
 
     /**
+     * @param theGrid
+     */
+    void setGrid(IGPCoverageGrid theGrid);
+
+    /**
      * @return {@link IGPGeoserverCRS}
      */
     IGPGeoserverCRS getNativeCRS();
+
+    /**
+     * @param theNativeCRS
+     */
+    void setNativeCRS(IGPGeoserverCRS theNativeCRS);
 
     /**
      * @return {@link IGPCoverageInterpolationMethod}
@@ -42,9 +62,19 @@ public interface IGPGeoserverCoverageInfo extends IGPGeoserverResourceInfo {
     IGPCoverageInterpolationMethod getInterpolationMethod();
 
     /**
+     * @param theInterpolationMethod
+     */
+    void setInterpolationMethod(IGPCoverageInterpolationMethod theInterpolationMethod);
+
+    /**
      * @return {@link String}
      */
     String getNativeFormat();
+
+    /**
+     * @param theNativeFormat
+     */
+    void setNativeFormat(String theNativeFormat);
 
     /**
      * @return {@link GPGeoserverRequestSRS}
@@ -52,7 +82,17 @@ public interface IGPGeoserverCoverageInfo extends IGPGeoserverResourceInfo {
     GPGeoserverRequestSRS getRequestSRS();
 
     /**
+     * @param theRequestSRS
+     */
+    void setRequestSRS(GPGeoserverRequestSRS theRequestSRS);
+
+    /**
      * @return {@link IGPGeoserverSupportedFormat}
      */
     IGPGeoserverSupportedFormat getSupportedFormats();
+
+    /**
+     * @param theSupportedFormats
+     */
+    void setSupportedFormats(IGPGeoserverSupportedFormat theSupportedFormats);
 }

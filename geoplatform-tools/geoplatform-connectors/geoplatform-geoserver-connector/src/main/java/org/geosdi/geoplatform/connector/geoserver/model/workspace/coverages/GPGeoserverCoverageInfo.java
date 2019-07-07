@@ -1,6 +1,7 @@
 package org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages;
 
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 import org.geosdi.geoplatform.connector.geoserver.model.GPGeoserverResourceInfo;
 import org.geosdi.geoplatform.connector.geoserver.model.crs.IGPGeoserverCRS;
@@ -19,6 +20,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@Setter
 @Getter
 @ToString(callSuper = true)
 @XmlRootElement(name = "coverage")

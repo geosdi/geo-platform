@@ -1,6 +1,7 @@
 package org.geosdi.geoplatform.connector.geoserver.model;
 
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 import org.geosdi.geoplatform.connector.geoserver.model.bbox.GPGeoserverLatLonBoundingBox;
 import org.geosdi.geoplatform.connector.geoserver.model.bbox.GPGeoserverNativeBoundingBox;
@@ -21,6 +22,7 @@ import java.util.Map;
  */
 @XmlTransient
 @Getter
+@Setter
 @ToString
 public abstract class GPGeoserverResourceInfo implements IGPGeoserverResourceInfo {
 

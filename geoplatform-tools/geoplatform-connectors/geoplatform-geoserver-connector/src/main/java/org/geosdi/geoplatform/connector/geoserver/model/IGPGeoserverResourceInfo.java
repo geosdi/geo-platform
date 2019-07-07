@@ -22,9 +22,16 @@ public interface IGPGeoserverResourceInfo extends Serializable {
     GPGeoserverStoreInfo getStore();
 
     /**
+     * @param theStore
+     */
+    void setStore(GPGeoserverStoreInfo theStore);
+
+    /**
      * @return {@link String}
      */
     String getAbstractText();
+
+    void setAbstractText(String theAbstractText);
 
     /**
      * @return {@link String}
@@ -32,20 +39,29 @@ public interface IGPGeoserverResourceInfo extends Serializable {
     String getNativeName();
 
     /**
+     * @param theNativeName
+     */
+    void setNativeName(String theNativeName);
+
+    /**
      * @return {@link String}
      */
     String getName();
+
+    /**
+     * @param theName
+     */
+    void setName(String theName);
 
     /**
      * @return {@link String}
      */
     String getTitle();
 
-//    /**
-//     * @param <MetadataLink>
-//     * @return {@link List<MetadataLink>}
-//     */
-//    <MetadataLink extends IGPGeoserverMetadataLink> List<MetadataLink> getMetadataLinks();
+    /**
+     * @param theTitle
+     */
+    void setTitle(String theTitle);
 
     /**
      * @return {@link String}
@@ -53,9 +69,20 @@ public interface IGPGeoserverResourceInfo extends Serializable {
     String getSrs();
 
     /**
+     * @param theSrs
+     */
+    void setSrs(String theSrs);
+
+    /**
      * @return {@link Namespace}
      */
     <Namespace extends IGPGeoserverNamespace> Namespace getNamespace();
+
+    /**
+     * @param theNamespace
+     * @param <Namespace>
+     */
+    <Namespace extends IGPGeoserverNamespace> void setNamespace(Namespace theNamespace);
 
     /**
      * @return {@link Boolean}
@@ -63,9 +90,19 @@ public interface IGPGeoserverResourceInfo extends Serializable {
     boolean isEnabled();
 
     /**
+     * @param theEnabled
+     */
+    void setEnabled(boolean theEnabled);
+
+    /**
      * @return {@link Map<String, String>}
      */
     Map<String, String> getMetadata();
+
+    /**
+     * @param theMetadata
+     */
+    void setMetadata(Map<String, String> theMetadata);
 
     /**
      * @return {@link IGPGeoserverKeyword}
@@ -73,9 +110,19 @@ public interface IGPGeoserverResourceInfo extends Serializable {
     IGPGeoserverKeyword getKeywords();
 
     /**
+     * @param theKeywords
+     */
+    void setKeywords(IGPGeoserverKeyword theKeywords);
+
+    /**
      * @return {@link GPGeoserverLatLonBoundingBox}
      */
     GPGeoserverLatLonBoundingBox getLatLonBoundingBox();
+
+    /**
+     * @param theLatLonBoundingBox
+     */
+    void setLatLonBoundingBox(GPGeoserverLatLonBoundingBox theLatLonBoundingBox);
 
     /**
      * @return {@link GPGeoserverNativeBoundingBox}
@@ -83,7 +130,17 @@ public interface IGPGeoserverResourceInfo extends Serializable {
     GPGeoserverNativeBoundingBox getNativeBoundingBox();
 
     /**
+     * @param theNativeBoundingBox
+     */
+    void setNativeBoundingBox(GPGeoserverNativeBoundingBox theNativeBoundingBox);
+
+    /**
      * @return {@link GPGeoserverResponseSRS}
      */
     GPGeoserverResponseSRS getResponseSRS();
+
+    /**
+     * @param theResponseSRS
+     */
+    void setResponseSRS(GPGeoserverResponseSRS theResponseSRS);
 }

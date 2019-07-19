@@ -1,7 +1,7 @@
 package org.geosdi.geoplatform.connector.geoserver.model;
 
+import org.geosdi.geoplatform.connector.geoserver.model.bbox.GPGeoserverBoundingBox;
 import org.geosdi.geoplatform.connector.geoserver.model.bbox.GPGeoserverLatLonBoundingBox;
-import org.geosdi.geoplatform.connector.geoserver.model.bbox.GPGeoserverNativeBoundingBox;
 import org.geosdi.geoplatform.connector.geoserver.model.keyword.IGPGeoserverKeyword;
 import org.geosdi.geoplatform.connector.geoserver.model.namespace.IGPGeoserverNamespace;
 import org.geosdi.geoplatform.connector.geoserver.model.srs.GPGeoserverResponseSRS;
@@ -14,7 +14,7 @@ import java.util.Map;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGPGeoserverResourceInfo extends Serializable {
+public interface IGPGeoserverResourceInfo<NativeBoundingBox extends GPGeoserverBoundingBox<?>> extends Serializable {
 
     /**
      * @return {@link GPGeoserverStoreInfo}
@@ -125,14 +125,14 @@ public interface IGPGeoserverResourceInfo extends Serializable {
     void setLatLonBoundingBox(GPGeoserverLatLonBoundingBox theLatLonBoundingBox);
 
     /**
-     * @return {@link GPGeoserverNativeBoundingBox}
+     * @return {@link NativeBoundingBox}
      */
-    GPGeoserverNativeBoundingBox getNativeBoundingBox();
+    NativeBoundingBox getNativeBoundingBox();
 
     /**
      * @param theNativeBoundingBox
      */
-    void setNativeBoundingBox(GPGeoserverNativeBoundingBox theNativeBoundingBox);
+    void setNativeBoundingBox(NativeBoundingBox theNativeBoundingBox);
 
     /**
      * @return {@link GPGeoserverResponseSRS}

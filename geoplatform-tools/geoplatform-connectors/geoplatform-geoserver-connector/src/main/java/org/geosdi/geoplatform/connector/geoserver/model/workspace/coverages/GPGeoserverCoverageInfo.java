@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.geosdi.geoplatform.connector.geoserver.model.GPGeoserverResourceInfo;
+import org.geosdi.geoplatform.connector.geoserver.model.bbox.GPGeoserverNativeBoundingBox;
 import org.geosdi.geoplatform.connector.geoserver.model.crs.IGPGeoserverCRS;
 import org.geosdi.geoplatform.connector.geoserver.model.format.IGPGeoserverSupportedFormat;
 import org.geosdi.geoplatform.connector.geoserver.model.srs.GPGeoserverRequestSRS;
@@ -25,7 +26,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @ToString(callSuper = true)
 @XmlRootElement(name = "coverage")
 @XmlAccessorType(value = XmlAccessType.FIELD)
-public class GPGeoserverCoverageInfo extends GPGeoserverResourceInfo implements IGPGeoserverCoverageInfo {
+public class GPGeoserverCoverageInfo extends GPGeoserverResourceInfo<GPGeoserverNativeBoundingBox> implements IGPGeoserverCoverageInfo {
 
     private static final long serialVersionUID = 2534762636718172525L;
     //

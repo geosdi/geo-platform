@@ -3,8 +3,8 @@ package org.geosdi.geoplatform.connector.geoserver.model;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.geosdi.geoplatform.connector.geoserver.model.bbox.GPGeoserverBoundingBox;
 import org.geosdi.geoplatform.connector.geoserver.model.bbox.GPGeoserverLatLonBoundingBox;
-import org.geosdi.geoplatform.connector.geoserver.model.bbox.GPGeoserverNativeBoundingBox;
 import org.geosdi.geoplatform.connector.geoserver.model.keyword.IGPGeoserverKeyword;
 import org.geosdi.geoplatform.connector.geoserver.model.metadata.adapter.GPGeoserverMetadataMapAdapter;
 import org.geosdi.geoplatform.connector.geoserver.model.namespace.IGPGeoserverNamespace;
@@ -24,7 +24,7 @@ import java.util.Map;
 @Getter
 @Setter
 @ToString
-public abstract class GPGeoserverResourceInfo implements IGPGeoserverResourceInfo {
+public abstract class GPGeoserverResourceInfo<NativeBoundingBox extends GPGeoserverBoundingBox<?>> implements IGPGeoserverResourceInfo<NativeBoundingBox> {
 
     private static final long serialVersionUID = -2589320136857111299L;
     //
@@ -41,6 +41,6 @@ public abstract class GPGeoserverResourceInfo implements IGPGeoserverResourceInf
     private Map<String, String> metadata;
     private IGPGeoserverKeyword keywords;
     private GPGeoserverLatLonBoundingBox latLonBoundingBox;
-    private GPGeoserverNativeBoundingBox nativeBoundingBox;
+    private NativeBoundingBox nativeBoundingBox;
     private GPGeoserverResponseSRS responseSRS;
 }

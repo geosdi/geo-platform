@@ -41,7 +41,7 @@ import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRe
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
-import java.io.InputStream;
+import java.io.*;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
@@ -52,7 +52,7 @@ import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEn
  */
 public abstract class GPGeoserverGetConnectorRequest<T, E extends GPGeoserverEmptyResponse<T>> extends GPJsonGetConnectorRequest<T> {
 
-    private static final JacksonSupport emptyJacksonSupport = new GPJacksonSupport(UNWRAP_ROOT_VALUE_DISABLE,
+    protected static final JacksonSupport emptyJacksonSupport = new GPJacksonSupport(UNWRAP_ROOT_VALUE_DISABLE,
             FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
             ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
             WRAP_ROOT_VALUE_DISABLE,
@@ -64,9 +64,9 @@ public abstract class GPGeoserverGetConnectorRequest<T, E extends GPGeoserverEmp
      * @param server
      * @param theJacksonSupport
      */
-    public GPGeoserverGetConnectorRequest(GPServerConnector server, JacksonSupport theJacksonSupport) {
+    protected GPGeoserverGetConnectorRequest(GPServerConnector server, JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport);
-        this.emptyResponse = forEmptyResponse();
+        checkArgument(((this.emptyResponse = forEmptyResponse()) != null), "The emptyResponse class must not be null.");
     }
 
     /**
@@ -75,10 +75,11 @@ public abstract class GPGeoserverGetConnectorRequest<T, E extends GPGeoserverEmp
      */
     @Override
     public T getResponse() throws Exception {
+        String responseAsString = super.getResponseAsString();
         try {
-            return super.getResponse();
-        } catch (IncorrectResponseException ex) {
-            return internalResponse(super.getResponseAsStream());
+            return readInternal(new BufferedReader(new StringReader(responseAsString)));
+        } catch (Exception ex) {
+            return internalResponse(new ByteArrayInputStream(responseAsString.getBytes()));
         }
     }
 
@@ -91,13 +92,23 @@ public abstract class GPGeoserverGetConnectorRequest<T, E extends GPGeoserverEmp
     protected final <IS extends InputStream> T internalResponse(IS inputStream) throws Exception {
         checkArgument(inputStream != null, "The Parameter InputStream must not be null.");
         try {
-            return emptyJacksonSupport.getDefaultMapper().readValue(inputStream, this.emptyResponse).toModel();
+            return this.internalReadResponse(inputStream).toModel();
         } catch (Exception ex) {
             ex.printStackTrace();
             throw new IncorrectResponseException(ex);
         } finally {
             inputStream.close();
         }
+    }
+
+    /**
+     * @param inputStream
+     * @param <IS>
+     * @return {@link T}
+     * @throws Exception
+     */
+    protected <IS extends InputStream> E internalReadResponse(IS inputStream) throws Exception {
+        return emptyJacksonSupport.getDefaultMapper().readValue(inputStream, this.emptyResponse);
     }
 
     /**

@@ -14,9 +14,19 @@ public interface IGPGeoserverBoundingBox<CRS extends Object> extends Serializabl
     CRS getCrs();
 
     /**
+     * @param theCrs
+     */
+    void setCrs(CRS theCrs);
+
+    /**
      * @return {@link Double}
      */
     Double getMaxx();
+
+    /**
+     * @param theMaxx
+     */
+    void setMaxx(Double theMaxx);
 
     /**
      * @return {@link Double}
@@ -24,12 +34,27 @@ public interface IGPGeoserverBoundingBox<CRS extends Object> extends Serializabl
     Double getMaxy();
 
     /**
+     * @param theMaxy
+     */
+    void setMaxy(Double theMaxy);
+
+    /**
      * @return {@link Double}
      */
     Double getMinx();
 
     /**
+     * @param theMinx
+     */
+    void setMinx(Double theMinx);
+
+    /**
      * @return {@link Double}
      */
     Double getMiny();
+
+    /**
+     * @param theMiny
+     */
+    void setMiny(Double theMiny);
 }

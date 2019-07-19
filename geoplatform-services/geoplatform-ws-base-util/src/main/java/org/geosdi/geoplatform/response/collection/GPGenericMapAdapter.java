@@ -10,8 +10,7 @@ import static java.util.stream.Collectors.toMap;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GPGenericMapAdapter<K, V, Entry extends GPGenericEntryType<K, V>, MapType extends GPGenericMapType<K, V, Entry>>
-        extends XmlAdapter<MapType, Map<K, V>> {
+public abstract class GPGenericMapAdapter<K, V, Entry extends GPGenericEntryType<K, V>, MapType extends GPGenericMapType<K, V, Entry>> extends XmlAdapter<MapType, Map<K, V>> {
 
     /**
      * Convert a value type to a bound type.

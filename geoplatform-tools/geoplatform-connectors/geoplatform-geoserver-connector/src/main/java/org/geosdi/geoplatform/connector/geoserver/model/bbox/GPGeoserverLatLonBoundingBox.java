@@ -1,12 +1,14 @@
 package org.geosdi.geoplatform.connector.geoserver.model.bbox;
 
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@Setter
 @Getter
 @ToString(callSuper = true)
 public class GPGeoserverLatLonBoundingBox extends GPGeoserverBoundingBox<String> {

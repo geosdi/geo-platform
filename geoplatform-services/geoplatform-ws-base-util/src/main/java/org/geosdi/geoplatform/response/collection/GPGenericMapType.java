@@ -7,7 +7,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -31,7 +32,7 @@ public abstract class GPGenericMapType<K, V, Entry extends GPGenericEntryType<K,
         this.entry = map.entrySet()
                 .stream()
                 .map(entry -> toEntry(entry))
-                .collect(Collectors.toList());
+                .collect(toList());
     }
 
     /**

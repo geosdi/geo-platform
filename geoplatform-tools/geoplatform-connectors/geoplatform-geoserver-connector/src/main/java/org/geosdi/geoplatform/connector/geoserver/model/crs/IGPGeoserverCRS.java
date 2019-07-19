@@ -15,7 +15,6 @@ public interface IGPGeoserverCRS extends Serializable {
      * @return {@link String}
      */
     String getValue();
-
     /**
      * @return {@link String}
      */

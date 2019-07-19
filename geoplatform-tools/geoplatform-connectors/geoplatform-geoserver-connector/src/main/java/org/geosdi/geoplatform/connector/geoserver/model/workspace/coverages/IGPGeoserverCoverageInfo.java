@@ -2,6 +2,7 @@ package org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.geosdi.geoplatform.connector.geoserver.model.IGPGeoserverResourceInfo;
+import org.geosdi.geoplatform.connector.geoserver.model.bbox.GPGeoserverNativeBoundingBox;
 import org.geosdi.geoplatform.connector.geoserver.model.crs.IGPGeoserverCRS;
 import org.geosdi.geoplatform.connector.geoserver.model.format.IGPGeoserverSupportedFormat;
 import org.geosdi.geoplatform.connector.geoserver.model.srs.GPGeoserverRequestSRS;
@@ -14,7 +15,7 @@ import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.inte
  * @email giuseppe.lascaleia@geosdi.org
  */
 @JsonDeserialize(as = GPGeoserverCoverageInfo.class)
-public interface IGPGeoserverCoverageInfo extends IGPGeoserverResourceInfo {
+public interface IGPGeoserverCoverageInfo extends IGPGeoserverResourceInfo<GPGeoserverNativeBoundingBox> {
 
     /**
      * @return {@link String}

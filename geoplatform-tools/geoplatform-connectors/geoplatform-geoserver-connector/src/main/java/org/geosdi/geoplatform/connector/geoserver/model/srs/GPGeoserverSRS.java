@@ -13,4 +13,9 @@ public interface GPGeoserverSRS extends Serializable {
      * @return {@link List<String>}
      */
     List<String> getValues();
+
+    /**
+     * @param theValues
+     */
+    void setValues(List<String> theValues);
 }

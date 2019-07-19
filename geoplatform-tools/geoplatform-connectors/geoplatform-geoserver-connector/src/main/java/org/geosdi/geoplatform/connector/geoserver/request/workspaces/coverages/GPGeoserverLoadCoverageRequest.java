@@ -72,11 +72,9 @@ public class GPGeoserverLoadCoverageRequest extends GPJsonGetConnectorRequest<GP
     @Override
     protected String createUriPath() throws Exception {
         String workspace = this.workspace.get();
-        checkArgument((workspace != null) && !(workspace.trim().isEmpty()),
-                "The Parameter workspace must not be null or an empty string");
+        checkArgument((workspace != null) && !(workspace.trim().isEmpty()), "The Parameter workspace must not be null or an empty string");
         String coverage = this.coverage.get();
-        checkArgument((coverage != null) && !(coverage.trim().isEmpty()),
-                "The Parameter coverage must not be null or an empty string.");
+        checkArgument((coverage != null) && !(coverage.trim().isEmpty()), "The Parameter coverage must not be null or an empty string.");
         coverage = coverage.concat(".json");
         String quietOnNotFound = this.quietOnNotFound.get().toString();
         String baseURI = this.serverURI.toString();

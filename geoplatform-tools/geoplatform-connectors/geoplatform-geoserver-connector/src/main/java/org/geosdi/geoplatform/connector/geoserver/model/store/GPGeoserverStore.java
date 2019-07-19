@@ -1,6 +1,7 @@
 package org.geosdi.geoplatform.connector.geoserver.model.store;
 
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 /**
@@ -8,6 +9,7 @@ import lombok.ToString;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Getter
+@Setter
 @ToString
 public class GPGeoserverStore implements IGPGeoserverStore {
 

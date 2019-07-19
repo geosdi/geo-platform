@@ -39,6 +39,7 @@ import org.geosdi.geoplatform.connector.geoserver.model.about.version.GPGeoserve
 import org.geosdi.geoplatform.connector.geoserver.model.datastores.GPGeoserverLoadDatastore;
 import org.geosdi.geoplatform.connector.geoserver.model.datastores.GPGeoserverLoadDatastores;
 import org.geosdi.geoplatform.connector.geoserver.model.datastores.body.GPGeoserverCreateDatastoreBody;
+import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.GPGeoserverFeatureTypeInfo;
 import org.geosdi.geoplatform.connector.geoserver.model.layers.GPGeoserverEmptyLayers;
 import org.geosdi.geoplatform.connector.geoserver.model.layers.GPGeoserverLayers;
 import org.geosdi.geoplatform.connector.geoserver.model.layers.GeoserverLayer;
@@ -58,6 +59,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.io.StringReader;
 
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
@@ -72,12 +74,12 @@ public class GPGeoserverJacksonTest {
 
     private static final Logger logger = LoggerFactory.getLogger(GPGeoserverJacksonTest.class);
     //
-    private static final JacksonSupport jacksonSupport = new GPJacksonSupport(UNWRAP_ROOT_VALUE_ENABLE,
+    protected static final JacksonSupport jacksonSupport = new GPJacksonSupport(UNWRAP_ROOT_VALUE_ENABLE,
             FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
             ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
             WRAP_ROOT_VALUE_ENABLE,
             INDENT_OUTPUT_ENABLE);
-    private static final JacksonSupport emptyJacksonSupport = new GPJacksonSupport(UNWRAP_ROOT_VALUE_DISABLE,
+    protected static final JacksonSupport emptyJacksonSupport = new GPJacksonSupport(UNWRAP_ROOT_VALUE_DISABLE,
             FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
             ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
             WRAP_ROOT_VALUE_DISABLE,
@@ -774,5 +776,266 @@ public class GPGeoserverJacksonTest {
                         "   }\n" +
                         "}"), GPGeoserverCoverageInfo.class);
         logger.info("##########################GEOSERVER_COVERAGE_INFO : {}\n", coverageInfo);
+    }
+
+    @Test
+    public void t_unmarshallGeoserverFeatureTypeInfoTest() throws Exception {
+        GPGeoserverFeatureTypeInfo featureTypeInfo = emptyJacksonSupport.getDefaultMapper()
+                .readValue(new StringReader("{\n" +
+                        "  \"name\": \"poi\",\n" +
+                        "  \"nativeName\": \"poi\",\n" +
+                        "  \"namespace\": {\n" +
+                        "    \"name\": \"tiger\",\n" +
+                        "    \"href\": \"http://localhost:8080/geoserver/rest/namespaces/tiger.json\"\n" +
+                        "  },\n" +
+                        "  \"title\": \"Manhattan (NY) points of interest\",\n" +
+                        "  \"abstract\": \"Points of interest in New York, New York (on Manhattan). One of the attributes contains the name of a file with a picture of the point of interest.\",\n" +
+                        "  \"keywords\": {\n" +
+                        "    \"string\": [\n" +
+                        "      \"poi\",\n" +
+                        "      \"Manhattan\",\n" +
+                        "      \"DS_poi\",\n" +
+                        "      \"points_of_interest\",\n" +
+                        "      \"sampleKeyword\\\\@language=ab\\\\;\",\n" +
+                        "      \"area of effect\\\\@language=bg\\\\;\\\\@vocabulary=technical\\\\;\",\n" +
+                        "      \"Привет\\\\@language=ru\\\\;\\\\@vocabulary=friendly\\\\;\"\n" +
+                        "    ]\n" +
+                        "  },\n" +
+                        "  \"metadataLinks\": {\n" +
+                        "    \"metadataLink\": [\n" +
+                        "      {\n" +
+                        "        \"type\": \"text/plain\",\n" +
+                        "        \"metadataType\": \"FGDC\",\n" +
+                        "        \"content\": \"www.google.com\"\n" +
+                        "      }\n" +
+                        "    ]\n" +
+                        "  },\n" +
+                        "  \"dataLinks\": {\n" +
+                        "    \"org.geoserver.catalog.impl.DataLinkInfoImpl\": [\n" +
+                        "      {\n" +
+                        "        \"type\": \"text/plain\",\n" +
+                        "        \"content\": \"http://www.google.com\"\n" +
+                        "      }\n" +
+                        "    ]\n" +
+                        "  },\n" +
+                        "  \"nativeCRS\": \"GEOGCS[\\\"WGS 84\\\", \\n  DATUM[\\\"World Geodetic System 1984\\\", \\n    SPHEROID[\\\"WGS 84\\\", 6378137.0, 298.257223563, AUTHORITY[\\\"EPSG\\\",\\\"7030\\\"]], \\n    AUTHORITY[\\\"EPSG\\\",\\\"6326\\\"]], \\n  PRIMEM[\\\"Greenwich\\\", 0.0, AUTHORITY[\\\"EPSG\\\",\\\"8901\\\"]], \\n  UNIT[\\\"degree\\\", 0.017453292519943295], \\n  AXIS[\\\"Geodetic longitude\\\", EAST], \\n  AXIS[\\\"Geodetic latitude\\\", NORTH], \\n  AUTHORITY[\\\"EPSG\\\",\\\"4326\\\"]]\",\n" +
+                        "  \"srs\": \"EPSG:4326\",\n" +
+                        "  \"nativeBoundingBox\": {\n" +
+                        "    \"minx\": -74.0118315772888,\n" +
+                        "    \"maxx\": -74.00153046439813,\n" +
+                        "    \"miny\": 40.70754683896324,\n" +
+                        "    \"maxy\": 40.719885123828675,\n" +
+                        "    \"crs\": \"EPSG:4326\"\n" +
+                        "  },\n" +
+                        "  \"latLonBoundingBox\": {\n" +
+                        "    \"minx\": -74.0118315772888,\n" +
+                        "    \"maxx\": -74.00857344353275,\n" +
+                        "    \"miny\": 40.70754683896324,\n" +
+                        "    \"maxy\": 40.711945649065406,\n" +
+                        "    \"crs\": \"EPSG:4326\"\n" +
+                        "  },\n" +
+                        "  \"projectionPolicy\": \"REPROJECT_TO_DECLARED\",\n" +
+                        "  \"enabled\": true,\n" +
+                        "  \"metadata\": {\n" +
+                        "    \"entry\": [\n" +
+                        "      {\n" +
+                        "        \"@key\": \"kml.regionateStrategy\",\n" +
+                        "        \"$\": \"external-sorting\"\n" +
+                        "      },\n" +
+                        "      {\n" +
+                        "        \"@key\": \"kml.regionateFeatureLimit\",\n" +
+                        "        \"$\": \"15\"\n" +
+                        "      },\n" +
+                        "      {\n" +
+                        "        \"@key\": \"cacheAgeMax\",\n" +
+                        "        \"$\": \"3000\"\n" +
+                        "      },\n" +
+                        "      {\n" +
+                        "        \"@key\": \"cachingEnabled\",\n" +
+                        "        \"$\": \"true\"\n" +
+                        "      },\n" +
+                        "      {\n" +
+                        "        \"@key\": \"kml.regionateAttribute\",\n" +
+                        "        \"$\": \"NAME\"\n" +
+                        "      },\n" +
+                        "      {\n" +
+                        "        \"@key\": \"indexingEnabled\",\n" +
+                        "        \"$\": \"false\"\n" +
+                        "      },\n" +
+                        "      {\n" +
+                        "        \"@key\": \"dirName\",\n" +
+                        "        \"$\": \"DS_poi_poi\"\n" +
+                        "      }\n" +
+                        "    ]\n" +
+                        "  },\n" +
+                        "  \"store\": {\n" +
+                        "    \"@class\": \"dataStore\",\n" +
+                        "    \"name\": \"tiger:nyc\",\n" +
+                        "    \"href\": \"http://localhost:8080/geoserver/rest/workspaces/tiger/datastores/nyc.json\"\n" +
+                        "  },\n" +
+                        "  \"cqlFilter\": \"INCLUDE\",\n" +
+                        "  \"maxFeatures\": 100,\n" +
+                        "  \"numDecimals\": 6,\n" +
+                        "  \"responseSRS\": {\n" +
+                        "    \"string\": [\n" +
+                        "      4326\n" +
+                        "    ]\n" +
+                        "  },\n" +
+                        "  \"overridingServiceSRS\": true,\n" +
+                        "  \"skipNumberMatched\": true,\n" +
+                        "  \"circularArcPresent\": true,\n" +
+                        "  \"linearizationTolerance\": 10,\n" +
+                        "  \"attributes\": {\n" +
+                        "    \"attribute\": [\n" +
+                        "      {\n" +
+                        "        \"name\": \"the_geom\",\n" +
+                        "        \"minOccurs\": 0,\n" +
+                        "        \"maxOccurs\": 1,\n" +
+                        "        \"nillable\": true,\n" +
+                        "        \"binding\": \"org.locationtech.jts.geom.Point\"\n" +
+                        "      },\n" +
+                        "      {},\n" +
+                        "      {},\n" +
+                        "      {}\n" +
+                        "    ]\n" +
+                        "  }\n" +
+                        "}"), GPGeoserverFeatureTypeInfo.class);
+        logger.info("##########################GEOSERVER_FEATURE_TYPE_INFO : {}\n", featureTypeInfo);
+        emptyJacksonSupport.getDefaultMapper().writeValue(new File("./target/FeatureType.json"), featureTypeInfo);
+    }
+
+    @Test
+    public void u_unmarshallerGeoserverFeatureTypeInfoTest() throws Exception {
+        GPGeoserverFeatureTypeInfo featureTypeInfo = jacksonSupport.getDefaultMapper()
+                .readValue(new StringReader("{  \n" +
+                        "   \"featureType\":{  \n" +
+                        "      \"name\":\"admin_shp_com2016_wgs84_g\",\n" +
+                        "      \"nativeName\":\"admin_shp_com2016_wgs84_g\",\n" +
+                        "      \"namespace\":{  \n" +
+                        "         \"name\":\"topp\",\n" +
+                        "         \"href\":\"http:\\/\\/150.145.141.92\\/geoserver\\/rest\\/namespaces\\/topp.json\"\n" +
+                        "      },\n" +
+                        "      \"title\":\"admin_shp_com2016_wgs84_g\",\n" +
+                        "      \"keywords\":{  \n" +
+                        "         \"string\":[  \n" +
+                        "            \"features\",\n" +
+                        "            \"admin_shp_com2016_wgs84_g\"\n" +
+                        "         ]\n" +
+                        "      },\n" +
+                        "      \"nativeCRS\":{  \n" +
+                        "         \"@class\":\"projected\",\n" +
+                        "         \"$\":\"PROJCS[\\\"WGS 84 \\/ UTM zone 32N\\\", \\n  GEOGCS[\\\"WGS 84\\\", \\n    DATUM[\\\"World Geodetic System 1984\\\", \\n      SPHEROID[\\\"WGS 84\\\", 6378137.0, 298.257223563, AUTHORITY[\\\"EPSG\\\",\\\"7030\\\"]], \\n      AUTHORITY[\\\"EPSG\\\",\\\"6326\\\"]], \\n    PRIMEM[\\\"Greenwich\\\", 0.0, AUTHORITY[\\\"EPSG\\\",\\\"8901\\\"]], \\n    UNIT[\\\"degree\\\", 0.017453292519943295], \\n    AXIS[\\\"Geodetic longitude\\\", EAST], \\n    AXIS[\\\"Geodetic latitude\\\", NORTH], \\n    AUTHORITY[\\\"EPSG\\\",\\\"4326\\\"]], \\n  PROJECTION[\\\"Transverse_Mercator\\\"], \\n  PARAMETER[\\\"central_meridian\\\", 9.0], \\n  PARAMETER[\\\"latitude_of_origin\\\", 0.0], \\n  PARAMETER[\\\"scale_factor\\\", 0.9996], \\n  PARAMETER[\\\"false_easting\\\", 500000.0], \\n  PARAMETER[\\\"false_northing\\\", 0.0], \\n  UNIT[\\\"m\\\", 1.0], \\n  AXIS[\\\"Easting\\\", EAST], \\n  AXIS[\\\"Northing\\\", NORTH], \\n  AUTHORITY[\\\"EPSG\\\",\\\"32632\\\"]]\"\n" +
+                        "      },\n" +
+                        "      \"srs\":\"EPSG:32632\",\n" +
+                        "      \"nativeBoundingBox\":{  \n" +
+                        "         \"minx\":308285.5625,\n" +
+                        "         \"maxx\":1317009.875,\n" +
+                        "         \"miny\":3927413.75,\n" +
+                        "         \"maxy\":5226724.5,\n" +
+                        "         \"crs\":{  \n" +
+                        "            \"@class\":\"projected\",\n" +
+                        "            \"$\":\"EPSG:32632\"\n" +
+                        "         }\n" +
+                        "      },\n" +
+                        "      \"latLonBoundingBox\":{  \n" +
+                        "         \"minx\":6.470380147450785,\n" +
+                        "         \"maxx\":19.68919647853578,\n" +
+                        "         \"miny\":35.157041522374975,\n" +
+                        "         \"maxy\":47.193590190960194,\n" +
+                        "         \"crs\":\"EPSG:4326\"\n" +
+                        "      },\n" +
+                        "      \"projectionPolicy\":\"FORCE_DECLARED\",\n" +
+                        "      \"enabled\":true,\n" +
+                        "      \"store\":{  \n" +
+                        "         \"@class\":\"dataStore\",\n" +
+                        "         \"name\":\"topp:com\",\n" +
+                        "         \"href\":\"http:\\/\\/150.145.141.92\\/geoserver\\/rest\\/workspaces\\/topp\\/datastores\\/com.json\"\n" +
+                        "      },\n" +
+                        "      \"serviceConfiguration\":false,\n" +
+                        "      \"maxFeatures\":0,\n" +
+                        "      \"numDecimals\":0,\n" +
+                        "      \"padWithZeros\":false,\n" +
+                        "      \"forcedDecimal\":false,\n" +
+                        "      \"overridingServiceSRS\":false,\n" +
+                        "      \"skipNumberMatched\":false,\n" +
+                        "      \"circularArcPresent\":false,\n" +
+                        "      \"attributes\":{  \n" +
+                        "         \"attribute\":[  \n" +
+                        "            {  \n" +
+                        "               \"name\":\"the_geom\",\n" +
+                        "               \"minOccurs\":0,\n" +
+                        "               \"maxOccurs\":1,\n" +
+                        "               \"nillable\":true,\n" +
+                        "               \"binding\":\"org.locationtech.jts.geom.MultiPolygon\"\n" +
+                        "            },\n" +
+                        "            {  \n" +
+                        "               \"name\":\"COD_REG\",\n" +
+                        "               \"minOccurs\":0,\n" +
+                        "               \"maxOccurs\":1,\n" +
+                        "               \"nillable\":true,\n" +
+                        "               \"binding\":\"java.lang.Integer\"\n" +
+                        "            },\n" +
+                        "            {  \n" +
+                        "               \"name\":\"COD_CM\",\n" +
+                        "               \"minOccurs\":0,\n" +
+                        "               \"maxOccurs\":1,\n" +
+                        "               \"nillable\":true,\n" +
+                        "               \"binding\":\"java.lang.Integer\"\n" +
+                        "            },\n" +
+                        "            {  \n" +
+                        "               \"name\":\"COD_PRO\",\n" +
+                        "               \"minOccurs\":0,\n" +
+                        "               \"maxOccurs\":1,\n" +
+                        "               \"nillable\":true,\n" +
+                        "               \"binding\":\"java.lang.Integer\"\n" +
+                        "            },\n" +
+                        "            {  \n" +
+                        "               \"name\":\"PRO_COM\",\n" +
+                        "               \"minOccurs\":0,\n" +
+                        "               \"maxOccurs\":1,\n" +
+                        "               \"nillable\":true,\n" +
+                        "               \"binding\":\"java.lang.Long\"\n" +
+                        "            },\n" +
+                        "            {  \n" +
+                        "               \"name\":\"COMUNE\",\n" +
+                        "               \"minOccurs\":0,\n" +
+                        "               \"maxOccurs\":1,\n" +
+                        "               \"nillable\":true,\n" +
+                        "               \"binding\":\"java.lang.String\"\n" +
+                        "            },\n" +
+                        "            {  \n" +
+                        "               \"name\":\"NOME_TED\",\n" +
+                        "               \"minOccurs\":0,\n" +
+                        "               \"maxOccurs\":1,\n" +
+                        "               \"nillable\":true,\n" +
+                        "               \"binding\":\"java.lang.String\"\n" +
+                        "            },\n" +
+                        "            {  \n" +
+                        "               \"name\":\"FLAG_CM\",\n" +
+                        "               \"minOccurs\":0,\n" +
+                        "               \"maxOccurs\":1,\n" +
+                        "               \"nillable\":true,\n" +
+                        "               \"binding\":\"java.lang.Integer\"\n" +
+                        "            },\n" +
+                        "            {  \n" +
+                        "               \"name\":\"SHAPE_Leng\",\n" +
+                        "               \"minOccurs\":0,\n" +
+                        "               \"maxOccurs\":1,\n" +
+                        "               \"nillable\":true,\n" +
+                        "               \"binding\":\"java.lang.Double\"\n" +
+                        "            },\n" +
+                        "            {  \n" +
+                        "               \"name\":\"SHAPE_Area\",\n" +
+                        "               \"minOccurs\":0,\n" +
+                        "               \"maxOccurs\":1,\n" +
+                        "               \"nillable\":true,\n" +
+                        "               \"binding\":\"java.lang.Double\"\n" +
+                        "            }\n" +
+                        "         ]\n" +
+                        "      }\n" +
+                        "   }\n" +
+                        "}"), GPGeoserverFeatureTypeInfo.class);
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@GEOSERVER_FEATURE_TYPE_INFO : {}\n", featureTypeInfo);
+        jacksonSupport.getDefaultMapper().writeValue(new File("./target/FeatureType.json"), featureTypeInfo);
     }
 }

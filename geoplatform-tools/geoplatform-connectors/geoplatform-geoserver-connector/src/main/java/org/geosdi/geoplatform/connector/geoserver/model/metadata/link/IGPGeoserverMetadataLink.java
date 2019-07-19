@@ -17,12 +17,27 @@ public interface IGPGeoserverMetadataLink extends Serializable {
     String getType();
 
     /**
+     * @param theType
+     */
+    void setType(String theType);
+
+    /**
      * @return {@link String}
      */
     String getMetadataType();
 
     /**
+     * @param theMetadataType
+     */
+    void setMetadataType(String theMetadataType);
+
+    /**
      * @return {@link String}
      */
     String getContent();
+
+    /**
+     * @param theContent
+     */
+    void setContent(String theContent);
 }

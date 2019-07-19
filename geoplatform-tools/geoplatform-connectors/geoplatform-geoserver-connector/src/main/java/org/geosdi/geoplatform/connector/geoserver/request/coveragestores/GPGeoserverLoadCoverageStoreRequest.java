@@ -58,11 +58,9 @@ public class GPGeoserverLoadCoverageStoreRequest extends GPJsonGetConnectorReque
     @Override
     protected String createUriPath() throws Exception {
         String workspace = this.workspace.get();
-        checkArgument((workspace != null) && !(workspace.trim().isEmpty()),
-                "The Parameter workspace must not be null or an empty string.");
+        checkArgument((workspace != null) && !(workspace.trim().isEmpty()), "The Parameter workspace must not be null or an empty string.");
         String store = this.store.get();
-        checkArgument((store != null) && !(store.trim().isEmpty()),
-                "The Parameter store must not be null or an empty string.");
+        checkArgument((store != null) && !(store.trim().isEmpty()), "The Parameter store must not be null or an empty string.");
         String baseURI = this.serverURI.toString();
         return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/coveragestores/").concat(store)
                 : baseURI.concat("/workspaces/").concat(workspace).concat("/coveragestores/").concat(store)));

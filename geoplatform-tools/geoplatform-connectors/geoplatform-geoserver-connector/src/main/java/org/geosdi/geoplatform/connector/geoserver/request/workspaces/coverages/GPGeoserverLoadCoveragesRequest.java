@@ -67,8 +67,7 @@ public class GPGeoserverLoadCoveragesRequest extends GPGeoserverGetConnectorRequ
     @Override
     protected String createUriPath() throws Exception {
         String workspace = this.workspace.get();
-        checkArgument((workspace != null) && !(workspace.trim().isEmpty()),
-                "The Parameter workspace must not ne null or an empty string.");
+        checkArgument((workspace != null) && !(workspace.trim().isEmpty()), "The Parameter workspace must not ne null or an empty string.");
         String queryList = this.queryList.get();
         String baseURI = this.serverURI.toString();
         return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/coverages.json").concat("?list=").concat(queryList)

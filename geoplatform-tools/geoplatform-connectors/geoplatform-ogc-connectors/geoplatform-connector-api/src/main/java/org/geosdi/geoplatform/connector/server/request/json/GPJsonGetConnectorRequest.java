@@ -40,7 +40,6 @@ import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
 
-import static com.google.common.base.Preconditions.checkArgument;
 import static javax.annotation.meta.When.NEVER;
 
 /**
@@ -53,7 +52,7 @@ public abstract class GPJsonGetConnectorRequest<T> extends GPBaseJsonConnectorRe
      * @param server
      * @param theJacksonSupport
      */
-    public GPJsonGetConnectorRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+    protected GPJsonGetConnectorRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport);
     }
 

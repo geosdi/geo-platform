@@ -36,13 +36,13 @@
 package org.geosdi.geoplatform.connector.store;
 
 import org.geosdi.geoplatform.connector.GeoserverVersion;
-import org.geosdi.geoplatform.connector.store.coveragestores.GPGeoserverCoverageStoresConnectorStore;
+import org.geosdi.geoplatform.connector.store.featuretypes.GPGeoserverFeatureTypesConnectorStore;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGPGeoserverConnectorStore extends GPGeoserverCoverageStoresConnectorStore {
+public interface IGPGeoserverConnectorStore extends GPGeoserverFeatureTypesConnectorStore {
 
     /**
      * @return {@link GeoserverVersion}

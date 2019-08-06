@@ -110,7 +110,7 @@ public abstract class GPGeoserverLayersConnector extends GPGeoserverNamespacesCo
             case V215x:
                 return new GPGeoserverLayersRequest(this, this.jacksonSupport);
             default:
-                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.14.x");
+                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");
         }
     }
 
@@ -123,7 +123,7 @@ public abstract class GPGeoserverLayersConnector extends GPGeoserverNamespacesCo
             case V215x:
                 return new GPGeoserverLoadLayerRequest(this, this.jacksonSupport);
             default:
-                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.14.x");
+                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");
         }
     }
 
@@ -136,7 +136,7 @@ public abstract class GPGeoserverLayersConnector extends GPGeoserverNamespacesCo
             case V215x:
                 return new GPGeoserverLoadWorkspaceLayersRequest(this, this.jacksonSupport);
             default:
-                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.14.x");
+                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");
         }
     }
 
@@ -149,7 +149,7 @@ public abstract class GPGeoserverLayersConnector extends GPGeoserverNamespacesCo
             case V215x:
                 return new GPGeoserverLoadWorkspaceLayerRequest(this, this.jacksonSupport);
             default:
-                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.14.x");
+                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");
         }
     }
 }

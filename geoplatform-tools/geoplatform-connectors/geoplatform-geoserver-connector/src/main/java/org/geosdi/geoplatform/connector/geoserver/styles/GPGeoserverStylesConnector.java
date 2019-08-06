@@ -113,7 +113,7 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
             case V215x:
                 return new GPGeoserverStylesRequest(this, this.jacksonSupport);
             default:
-                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.14.x");
+                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");
         }
     }
 
@@ -126,7 +126,7 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
             case V215x:
                 return new GPGeoserverStyleRequest(this, this.jacksonSupport);
             default:
-                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.14.x");
+                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");
         }
     }
 }

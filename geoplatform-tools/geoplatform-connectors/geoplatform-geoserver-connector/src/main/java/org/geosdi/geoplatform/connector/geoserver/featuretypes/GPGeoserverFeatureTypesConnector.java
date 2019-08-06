@@ -3,10 +3,7 @@ package org.geosdi.geoplatform.connector.geoserver.featuretypes;
 import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.GeoserverVersionException;
 import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPGeoserverCoverageStoresConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.featuretypes.GPGeoserverLoadWorkspaceDatastoreFeatureTypesRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.featuretypes.GPGeoserverLoadWorkspaceFeatureTypesRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.featuretypes.GeoserverLoadWorkspaceDatastoreFeatureTypesRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.featuretypes.GeoserverLoadWorkspaceFeatureTypesRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.featuretypes.*;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
@@ -79,7 +76,7 @@ public abstract class GPGeoserverFeatureTypesConnector extends GPGeoserverCovera
             case V215x:
                 return new GPGeoserverLoadWorkspaceFeatureTypesRequest(this, this.jacksonSupport);
             default:
-                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.14.x");
+                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");
         }
     }
 
@@ -92,7 +89,33 @@ public abstract class GPGeoserverFeatureTypesConnector extends GPGeoserverCovera
             case V215x:
                 return new GPGeoserverLoadWorkspaceDatastoreFeatureTypesRequest(this, this.jacksonSupport);
             default:
-                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.14.x");
+                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");
+        }
+    }
+
+    /**
+     * @return {@link GeoserverCreateFeatureTypeRequest}
+     */
+    @Override
+    public GeoserverCreateFeatureTypeRequest createFeatureTypeRequest() {
+        switch (version) {
+            case V215x:
+                return new GPGeoserverCreateFeatureTypeRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");
+        }
+    }
+
+    /**
+     * @return {@link GeoserverDeleteFeatureTypeRequest}
+     */
+    @Override
+    public GeoserverDeleteFeatureTypeRequest deleteFeatureTypeRequest() {
+        switch (version) {
+            case V215x:
+                return new GPGeoserverDeleteFeatureTypeRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");
         }
     }
 }

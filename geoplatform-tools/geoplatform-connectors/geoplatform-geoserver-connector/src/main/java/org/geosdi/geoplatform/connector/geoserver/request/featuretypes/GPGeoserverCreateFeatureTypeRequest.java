@@ -1,15 +1,20 @@
 package org.geosdi.geoplatform.connector.geoserver.request.featuretypes;
 
+import com.google.common.io.CharStreams;
 import net.jcip.annotations.ThreadSafe;
 import org.apache.http.HttpEntity;
 import org.apache.http.entity.StringEntity;
 import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.IGPGeoserverFeatureTypeInfo;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonPostConnectorRequest;
+import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
+import java.io.BufferedReader;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
 import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
 import static org.apache.http.entity.ContentType.APPLICATION_JSON;
@@ -19,7 +24,7 @@ import static org.apache.http.entity.ContentType.APPLICATION_JSON;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverCreateFeatureTypeRequest extends GPJsonPostConnectorRequest<String> implements GeoserverCreateFeatureTypeRequest {
+public class GPGeoserverCreateFeatureTypeRequest extends GPJsonPostConnectorRequest<Boolean> implements GeoserverCreateFeatureTypeRequest {
 
     private final ThreadLocal<String> workspace;
     private final ThreadLocal<String> store;
@@ -27,9 +32,10 @@ public class GPGeoserverCreateFeatureTypeRequest extends GPJsonPostConnectorRequ
 
     /**
      * @param theServerConnector
+     * @param theJacksonSupport
      */
-    public GPGeoserverCreateFeatureTypeRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector) {
-        super(theServerConnector, JACKSON_SUPPORT);
+    public GPGeoserverCreateFeatureTypeRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+        super(theServerConnector, theJacksonSupport);
         this.workspace = withInitial(() -> null);
         this.store = withInitial(() -> null);
         this.featureTypeBody = withInitial(() -> null);
@@ -92,10 +98,21 @@ public class GPGeoserverCreateFeatureTypeRequest extends GPJsonPostConnectorRequ
     }
 
     /**
-     * @return {@link Class<String>}
+     * @param reader
+     * @return {@link Boolean}
+     * @throws Exception
      */
     @Override
-    protected Class<String> forClass() {
-        return String.class;
+    protected Boolean readInternal(BufferedReader reader) throws Exception {
+        String value = CharStreams.toString(reader);
+        return ((value != null) && (value.trim().isEmpty()) ? TRUE : FALSE);
+    }
+
+    /**
+     * @return {@link Class<Boolean>}
+     */
+    @Override
+    protected Class<Boolean> forClass() {
+        return Boolean.class;
     }
 }

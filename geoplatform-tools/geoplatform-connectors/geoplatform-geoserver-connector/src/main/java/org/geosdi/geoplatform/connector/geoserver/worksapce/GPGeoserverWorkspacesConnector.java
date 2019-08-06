@@ -111,7 +111,7 @@ public abstract class GPGeoserverWorkspacesConnector extends GPGeoserverAboutCon
             case V215x:
                 return new GPGeoserverLoadWorkspacesRequest(this, this.jacksonSupport);
             default:
-                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.14.x");
+                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");
         }
     }
 
@@ -124,7 +124,7 @@ public abstract class GPGeoserverWorkspacesConnector extends GPGeoserverAboutCon
             case V215x:
                 return new GPGeoserverLoadWorkspaceRequest(this, this.jacksonSupport);
             default:
-                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.14.x");
+                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");
         }
     }
 
@@ -137,7 +137,7 @@ public abstract class GPGeoserverWorkspacesConnector extends GPGeoserverAboutCon
             case V215x:
                 return new GPGeoserverCreateWorkspaceRequest(this, this.jacksonSupport);
             default:
-                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.14.x");
+                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");
         }
     }
 
@@ -150,7 +150,7 @@ public abstract class GPGeoserverWorkspacesConnector extends GPGeoserverAboutCon
             case V215x:
                 return new GPGeoserverDeleteWorkspaceRequest(this, this.jacksonSupport);
             default:
-                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.14.x");
+                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");
         }
     }
 
@@ -163,7 +163,7 @@ public abstract class GPGeoserverWorkspacesConnector extends GPGeoserverAboutCon
             case V215x:
                 return new GPGeoserverUpdateWorkspaceRequest(this, this.jacksonSupport);
             default:
-                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.14.x");
+                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");
         }
     }
 }

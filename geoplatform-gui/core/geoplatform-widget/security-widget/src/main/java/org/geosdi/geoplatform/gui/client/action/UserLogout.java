@@ -98,11 +98,9 @@ public class UserLogout extends MenuBaseAction {
             @Override
             public void onCommandSuccess(InvalidateSessionResponse response) {
 //                Window.Location.reload();
-                com.google.gwt.user.client.Window.open("https://sso.protezionecivile.it:443/OpenAM/UI/Logout?goto=https%3A%2F%2Fservizi.protezionecivile.it%2F",
-                        null,"_self");
 //                String url = GWT.getHostPageBaseURL() + "/cas/logout";
 //                Window.open(url, null, "_self");
-                response.executeInvalidateSession();
+                closeSession(response);
             }
 
             @Override
@@ -112,4 +110,9 @@ public class UserLogout extends MenuBaseAction {
             }
         });
     }
+
+    protected void closeSession(InvalidateSessionResponse response) {
+        response.executeInvalidateSession();
+    }
+
 }

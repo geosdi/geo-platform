@@ -40,8 +40,10 @@ import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.widget.Dialog;
+import com.extjs.gxt.ui.client.widget.Window;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import com.google.gwt.user.client.ui.Frame;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.command.session.InvalidateSessionRequest;
@@ -57,6 +59,8 @@ import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
  * @email nazzareno.sileno@geosdi.org
  */
 public class UserLogout extends MenuBaseAction {
+
+
 
     public UserLogout() {
         super(SecurityModuleConstants.INSTANCE.UserLogout_tileText(),
@@ -94,6 +98,8 @@ public class UserLogout extends MenuBaseAction {
             @Override
             public void onCommandSuccess(InvalidateSessionResponse response) {
 //                Window.Location.reload();
+                com.google.gwt.user.client.Window.open("https://sso.protezionecivile.it:443/OpenAM/UI/Logout?goto=https%3A%2F%2Fservizi.protezionecivile.it%2F",
+                        null,"_self");
 //                String url = GWT.getHostPageBaseURL() + "/cas/logout";
 //                Window.open(url, null, "_self");
                 response.executeInvalidateSession();

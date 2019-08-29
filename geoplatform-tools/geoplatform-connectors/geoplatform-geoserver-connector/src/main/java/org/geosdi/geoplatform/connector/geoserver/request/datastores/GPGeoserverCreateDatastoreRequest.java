@@ -40,12 +40,12 @@ import org.apache.http.entity.StringEntity;
 import org.geosdi.geoplatform.connector.geoserver.model.datastores.GPGeoserverCreateDatastoreResponse;
 import org.geosdi.geoplatform.connector.geoserver.model.datastores.IGPGeoserverCreateDatastoreResponse;
 import org.geosdi.geoplatform.connector.geoserver.model.datastores.body.IGPGeoserverCreateDatastoreBody;
-import org.geosdi.geoplatform.connector.geoserver.model.datastores.body.builder.db.geopkg.IGPGeopackageDatastoreBodyBuilder;
-import org.geosdi.geoplatform.connector.geoserver.model.datastores.body.builder.db.postgis.IGPPostgisDatastoreBodyBuilder;
-import org.geosdi.geoplatform.connector.geoserver.model.datastores.body.builder.db.postgis.jndi.IGPPostgisJndiDatastoreBuilder;
-import org.geosdi.geoplatform.connector.geoserver.model.datastores.body.builder.file.shape.IGPShapeFileDatastoreBodyBuilder;
-import org.geosdi.geoplatform.connector.geoserver.model.datastores.body.builder.file.shape.IGPShapeFilesDirDatastoreBodyBuilder;
-import org.geosdi.geoplatform.connector.geoserver.model.datastores.body.builder.wfs.IGPWFSDatastoreBodyBuilder;
+import org.geosdi.geoplatform.connector.geoserver.model.datastores.body.builder.db.geopkg.IGPGeopackageDatastoreBodyBuilder.GPGeopackageDatastoreBodyBuilder;
+import org.geosdi.geoplatform.connector.geoserver.model.datastores.body.builder.db.postgis.IGPPostgisDatastoreBodyBuilder.GPPostgisDatastoreBodyBuilder;
+import org.geosdi.geoplatform.connector.geoserver.model.datastores.body.builder.db.postgis.jndi.IGPPostgisJndiDatastoreBuilder.GPPostgisJndiDatastoreBuilder;
+import org.geosdi.geoplatform.connector.geoserver.model.datastores.body.builder.file.shape.IGPShapeFileDatastoreBodyBuilder.GPShapeFileDatastoreBodyBuilder;
+import org.geosdi.geoplatform.connector.geoserver.model.datastores.body.builder.file.shape.IGPShapeFilesDirDatastoreBodyBuilder.GPShapeFilesDirDatastoreBodyBuilder;
+import org.geosdi.geoplatform.connector.geoserver.model.datastores.body.builder.wfs.IGPWFSDatastoreBodyBuilder.GPWFSDatastoreBodyBuilder;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonPostConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
@@ -94,12 +94,12 @@ public class GPGeoserverCreateDatastoreRequest extends GPJsonPostConnectorReques
     /**
      * <p>
      *      <ul>To create {@link IGPGeoserverCreateDatastoreBody} see :
-     *          <li>{@link IGPPostgisDatastoreBodyBuilder.GPPostgisDatastoreBodyBuilder#postgisDatastoreBodyBuilder()}</li>
-     *          <li>{@link IGPPostgisJndiDatastoreBuilder.GPPostgisJndiDatastoreBuilder#postgisJndiDatastoreBuilder()}</li>
-     *          <li>{@link IGPGeopackageDatastoreBodyBuilder.GPGeopackageDatastoreBodyBuilder#geopackageDatastoreBodyBuilder()}</li>
-     *          <li>{@link IGPShapeFileDatastoreBodyBuilder.GPShapeFileDatastoreBodyBuilder#shapeFileDatastoreBodyBuilder()}</li>
-     *          <li>{@link IGPShapeFilesDirDatastoreBodyBuilder.GPShapeFilesDirDatastoreBodyBuilder#shapeFilesDirDatastoreBodyBuilder()}</li>
-     *          <li>{@link IGPWFSDatastoreBodyBuilder.GPWFSDatastoreBodyBuilder#wfsDatastoreBodyBuilder()}</li>
+     *          <li>{@link GPPostgisDatastoreBodyBuilder#postgisDatastoreBodyBuilder()}</li>
+     *          <li>{@link GPPostgisJndiDatastoreBuilder#postgisJndiDatastoreBuilder()}</li>
+     *          <li>{@link GPGeopackageDatastoreBodyBuilder#geopackageDatastoreBodyBuilder()}</li>
+     *          <li>{@link GPShapeFileDatastoreBodyBuilder#shapeFileDatastoreBodyBuilder()}</li>
+     *          <li>{@link GPShapeFilesDirDatastoreBodyBuilder#shapeFilesDirDatastoreBodyBuilder()}</li>
+     *          <li>{@link GPWFSDatastoreBodyBuilder#wfsDatastoreBodyBuilder()}</li>
      *          <li>{@link IGPGeoserverCreateDatastoreBody#of(String, String, Boolean, Map)}</li>
      *      </ul>
      * </p>

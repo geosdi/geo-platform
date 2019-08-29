@@ -68,8 +68,7 @@ public interface IGPPostgisJndiDatastoreBuilder extends IGPBasePostgisDatastoreB
             for (IGPGeoserverConnectionKey key : requiredValues) {
                 logger.trace("@@@@@@@@@@@@@@@@@@@@@@@@@{} tries to check if : {} is present in connectionParameters.", this, key);
                 String value = this.connectionParameters.get(key.getConnectionKey());
-                checkArgument((value != null) && !(value.trim().isEmpty()), "For the Key : " + key.getConnectionKey()
-                        + ", the value must not be null or an empty string.");
+                checkArgument((value != null) && !(value.trim().isEmpty()), "For the Key : " + key.getConnectionKey() + ", the value must not be null or an empty string.");
             }
         }
 

@@ -38,7 +38,7 @@ import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
-import org.geosdi.geoplatform.connector.store.featuretypes.GeoserverFeatureTypesConnectorStore;
+import org.geosdi.geoplatform.connector.store.settings.GeoserverSettingsConnectorStore;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import java.net.URL;
@@ -47,7 +47,7 @@ import java.net.URL;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPGeoserverConnectorStore extends GeoserverFeatureTypesConnectorStore implements IGPGeoserverConnectorStore {
+public class GPGeoserverConnectorStore extends GeoserverSettingsConnectorStore implements IGPGeoserverConnectorStore {
 
     /**
      * @param server

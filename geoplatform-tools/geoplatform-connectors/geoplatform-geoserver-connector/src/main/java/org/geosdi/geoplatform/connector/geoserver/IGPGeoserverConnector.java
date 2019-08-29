@@ -34,11 +34,11 @@
  */
 package org.geosdi.geoplatform.connector.geoserver;
 
-import org.geosdi.geoplatform.connector.geoserver.featuretypes.IGPGeoserverFeatureTypesConnector;
+import org.geosdi.geoplatform.connector.geoserver.security.IGPGeoserverSecurityConnector;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGPGeoserverConnector extends IGPGeoserverFeatureTypesConnector {
+public interface IGPGeoserverConnector extends IGPGeoserverSecurityConnector {
 }

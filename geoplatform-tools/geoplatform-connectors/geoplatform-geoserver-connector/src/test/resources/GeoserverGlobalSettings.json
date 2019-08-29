@@ -1,0 +1,46 @@
+{
+  "global" : {
+    "settings" : {
+      "id" : "SettingsInfoImpl-68f6c583:154ca420c47:-8000",
+      "contact" : {
+        "addressCity" : "Potenza",
+        "addressCountry" : "Italy",
+        "addressType" : "Work",
+        "contactEmail" : "giuseppe.lascaleia@geosdi.org",
+        "contactOrganization" : "geoSDI",
+        "contactPerson" : "Giuseppe La Scaleia",
+        "contactPosition" : "Senior Java Developer"
+      },
+      "charset" : "UTF-8",
+      "numDecimals" : 8,
+      "onlineResource" : "http://www.geosdi.org",
+      "verbose" : false,
+      "verboseExceptions" : false,
+      "localWorkspaceIncludesPrefix" : false
+    },
+    "jai" : {
+      "allowInterpolation" : false,
+      "recycling" : false,
+      "tilePriority" : 5,
+      "tileThreads" : 7,
+      "memoryCapacity" : 0.5,
+      "memoryThreshold" : 0.75,
+      "imageIOCache" : false,
+      "pngAcceleration" : true,
+      "jpegAcceleration" : true,
+      "allowNativeMosaic" : false,
+      "allowNativeWarp" : false
+    },
+    "coverageAccess" : {
+      "maxPoolSize" : 10,
+      "corePoolSize" : 5,
+      "keepAliveTime" : 30000,
+      "queueType" : "UNBOUNDED",
+      "imageIOCacheThreshold" : 10240
+    },
+    "updateSequence" : 180,
+    "featureTypeCacheSize" : 0,
+    "globalServices" : true,
+    "xmlPostRequestLogBufferSize" : 1024
+  }
+}

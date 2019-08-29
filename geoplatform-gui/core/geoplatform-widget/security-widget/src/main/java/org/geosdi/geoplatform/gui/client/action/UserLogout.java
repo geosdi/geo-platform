@@ -85,7 +85,7 @@ public class UserLogout extends MenuBaseAction {
         });
     }
 
-    protected void invalidateSession() {
+    private void invalidateSession() {
         final InvalidateSessionRequest invalidateSessionRequest = GWT.create(InvalidateSessionRequest.class);
         ClientCommandDispatcher.getInstance().execute(
                 new GPClientCommand<InvalidateSessionResponse>() {

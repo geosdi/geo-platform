@@ -2,7 +2,6 @@ package org.geosdi.geoplatform.support.google.services.crypt;
 
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,6 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -30,7 +30,7 @@ public class GoogleServicePooledPBEStringEncryptorTest {
 
     @Before
     public void setUp() throws Exception {
-        Assert.assertNotNull(this.googleServicePooledPBEStringEncryptor);
+        assertNotNull(this.googleServicePooledPBEStringEncryptor);
     }
 
     @Test

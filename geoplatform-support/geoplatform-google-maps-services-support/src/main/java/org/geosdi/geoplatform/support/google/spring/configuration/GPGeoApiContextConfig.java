@@ -35,10 +35,11 @@
  */
 package org.geosdi.geoplatform.support.google.spring.configuration;
 
-import com.google.common.base.Preconditions;
 import net.jcip.annotations.Immutable;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
+import static com.google.common.base.Preconditions.checkArgument;
 
 /**
  *
@@ -69,14 +70,12 @@ public class GPGeoApiContextConfig implements GeoApiContextConfig {
 
     @Override
     public Long getConnectionTimeout() {
-        return this.connectionTimeout = ((this.connectionTimeout != null)
-                ? this.connectionTimeout : 10);
+        return this.connectionTimeout = ((this.connectionTimeout != null) ? this.connectionTimeout : 10);
     }
 
     @Override
     public Long getReadTimeout() {
-        return this.readTimeout = ((this.readTimeout != null)
-                ? this.readTimeout : 10);
+        return this.readTimeout = ((this.readTimeout != null) ? this.readTimeout : 10);
     }
 
     @Override
@@ -86,20 +85,17 @@ public class GPGeoApiContextConfig implements GeoApiContextConfig {
 
     @Override
     public Long getRetryTimeout() {
-        return this.retryTimeout = ((this.retryTimeout != null)
-                ? this.retryTimeout : 60);
+        return this.retryTimeout = ((this.retryTimeout != null) ? this.retryTimeout : 60);
     }
 
     @Override
     public Integer getQueryRateLimit() {
-        return this.queryRateLimit = ((this.queryRateLimit != null)
-                ? this.queryRateLimit : 10);
+        return this.queryRateLimit = ((this.queryRateLimit != null) ? this.queryRateLimit : 10);
     }
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        Preconditions.checkArgument((this.apiKey != null)
-                || !(this.apiKey.isEmpty()), "The Parameter ApiKey must not be "
+        checkArgument((this.apiKey != null) || !(this.apiKey.trim().isEmpty()), "The Parameter ApiKey must not be "
                 + "null or an Empty String");
     }
 

@@ -35,9 +35,9 @@
  */
 package org.geosdi.geoplatform.experimental.el.search.bool;
 
-import com.google.common.base.Preconditions;
 import org.elasticsearch.index.query.QueryBuilder;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static org.elasticsearch.index.query.QueryBuilders.matchAllQuery;
 
 /**
@@ -49,7 +49,7 @@ public class BooleanAllMatchSearch implements IBooleanSearch {
     private final BooleanQueryType type;
 
     public BooleanAllMatchSearch(BooleanQueryType theType) {
-        Preconditions.checkArgument((theType != null), "The Parameter Type must not be null.");
+        checkArgument((theType != null), "The Parameter Type must not be null.");
         this.type = theType;
     }
 

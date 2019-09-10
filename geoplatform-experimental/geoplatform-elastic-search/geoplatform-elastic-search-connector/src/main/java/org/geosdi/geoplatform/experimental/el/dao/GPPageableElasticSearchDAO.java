@@ -1,37 +1,36 @@
 /**
- *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
- *
- *   Copyright (C) 2008-2019 geoSDI Group (CNR IMAA - Potenza - ITALY).
- *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
- *
- *   ====================================================================
- *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
- *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * geo-platform
+ * Rich webgis framework
+ * http://geo-platform.org
+ * ====================================================================
+ * <p>
+ * Copyright (C) 2008-2019 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * <p>
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version. This program is distributed in the
+ * hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License
+ * for more details. You should have received a copy of the GNU General
+ * Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * <p>
+ * ====================================================================
+ * <p>
+ * Linking this library statically or dynamically with other modules is
+ * making a combined work based on this library. Thus, the terms and
+ * conditions of the GNU General Public License cover the whole combination.
+ * <p>
+ * As a special exception, the copyright holders of this library give you permission
+ * to link this library with independent modules to produce an executable, regardless
+ * of the license terms of these independent modules, and to copy and distribute
+ * the resulting executable under terms of your choice, provided that you also meet,
+ * for each linked independent module, the terms and conditions of the license of
+ * that module. An independent module is a module which is not derived from or
+ * based on this library. If you modify this library, you may extend this exception
+ * to your version of the library, but you are not obligated to do so. If you do not
+ * wish to do so, delete this exception statement from your version.
  */
 package org.geosdi.geoplatform.experimental.el.dao;
 
@@ -181,8 +180,7 @@ public interface GPPageableElasticSearchDAO<D extends Document> extends GPPageab
          * @return {@link SearchRequestBuilder} Builder
          * @throws Exception
          */
-        <Builder extends SearchRequestBuilder> Builder buildPage(Builder builder)
-                throws Exception;
+        <Builder extends SearchRequestBuilder> Builder buildPage(Builder builder) throws Exception;
     }
 
     /**
@@ -194,6 +192,11 @@ public interface GPPageableElasticSearchDAO<D extends Document> extends GPPageab
          * @return {@link BoolQueryBuilder}
          */
         BoolQueryBuilder boolQueryBuilder();
+
+        /**
+         * @return {@link String}
+         */
+        String printQueryAsJson();
 
         /**
          * @param search
@@ -251,17 +254,25 @@ public interface GPPageableElasticSearchDAO<D extends Document> extends GPPageab
             return (this.size > 0);
         }
 
-        private <Builder extends SearchRequestBuilder> Builder internalBuildPage(Builder builder)
-                throws Exception {
-            logger.trace("####################Called {} #internalBuildPage with parameters " +
-                    "from : {} - size : {}\n\n", getClass().getSimpleName(), from, size);
-
+        /**
+         * @param builder
+         * @param <Builder>
+         * @return {@link Builder}
+         * @throws Exception
+         */
+        private <Builder extends SearchRequestBuilder> Builder internalBuildPage(Builder builder) throws Exception {
+            logger.trace("####################Called {} #internalBuildPage with parameters from : {} - size : {}\n\n", getClass().getSimpleName(), from, size);
             return (Builder) ((this.from >= 0) ? builder.setFrom(this.from).setSize(this.size) : builder.setSize(this.size));
         }
 
+        /**
+         * @param builder
+         * @param <Builder>
+         * @return {@link Builder}
+         * @throws Exception
+         */
         @Override
-        public <Builder extends SearchRequestBuilder> Builder buildPage(Builder builder)
-                throws Exception {
+        public <Builder extends SearchRequestBuilder> Builder buildPage(Builder builder) throws Exception {
             return (canBuildPage() ? this.internalBuildPage(builder) : builder);
         }
 
@@ -294,8 +305,7 @@ public interface GPPageableElasticSearchDAO<D extends Document> extends GPPageab
             this(field, sortOrder, 0, 0);
         }
 
-        public SortablePage(String field, SortOrder sortOrder, int from,
-                int size) {
+        public SortablePage(String field, SortOrder sortOrder, int from, int size) {
             super(from, size);
             this.field = field;
             this.sortOrder = sortOrder;
@@ -352,14 +362,27 @@ public interface GPPageableElasticSearchDAO<D extends Document> extends GPPageab
 
         private final QueryBuilder query;
 
+        /**
+         * @param query
+         */
         public QueriableSortablePage(QueryBuilder query) {
             this(0, 0, query);
         }
 
+        /**
+         * @param field
+         * @param sortOrder
+         * @param query
+         */
         public QueriableSortablePage(String field, SortOrder sortOrder, QueryBuilder query) {
             this(field, sortOrder, 0, 0, query);
         }
 
+        /**
+         * @param from
+         * @param size
+         * @param query
+         */
         public QueriableSortablePage(int from, int size, QueryBuilder query) {
             this(null, null, from, size, query);
         }
@@ -452,10 +475,14 @@ public interface GPPageableElasticSearchDAO<D extends Document> extends GPPageab
             return ((this.dateQuerySearch != null) && (this.dateQuerySearch.length > 0));
         }
 
-        private <Builder extends SearchRequestBuilder> Builder internalBuildPage(Builder builder)
-                throws Exception {
-            logger.trace("####################Called {} #internalBuildPage with parameters " +
-                    "dateQuerySearch : {} \n\n", getClass().getSimpleName(), this.dateQuerySearch);
+        /**
+         * @param builder
+         * @param <Builder>
+         * @return {@link Builder}
+         * @throws Exception
+         */
+        private <Builder extends SearchRequestBuilder> Builder internalBuildPage(Builder builder) throws Exception {
+            logger.trace("####################Called {} #internalBuildPage with parameters dateQuerySearch : {} \n\n", getClass().getSimpleName(), this.dateQuerySearch);
             Arrays.stream(this.dateQuerySearch)
                     .filter(q -> q != null)
                     .forEach(q -> buildQuery(q));
@@ -464,9 +491,23 @@ public interface GPPageableElasticSearchDAO<D extends Document> extends GPPageab
             return builder;
         }
 
+        /**
+         * @param builder
+         * @param <Builder>
+         * @return {@link Builder}
+         * @throws Exception
+         */
         @Override
         public <Builder extends SearchRequestBuilder> Builder buildPage(Builder builder) throws Exception {
             return (canBuildPage() ? internalBuildPage(super.buildPage(builder)) : super.buildPage(builder));
+        }
+
+        /**
+         * @return {@link String}
+         */
+        @Override
+        public String printQueryAsJson() {
+            return null;
         }
 
         @Override
@@ -537,13 +578,10 @@ public interface GPPageableElasticSearchDAO<D extends Document> extends GPPageab
          * @return {@link Builder}
          * @throws Exception
          */
-        private <Builder extends SearchRequestBuilder> Builder internalBuildPage(Builder builder)
-                throws Exception {
-            logger.trace("####################Called {} #internalBuildPage with parameters " +
-                    "queryList : {} \n\n", getClass().getSimpleName(), this.queryList);
+        private <Builder extends SearchRequestBuilder> Builder internalBuildPage(Builder builder) throws Exception {
+            logger.trace("####################Called {} #internalBuildPage with parameters queryList : {} \n\n", getClass().getSimpleName(), this.queryList);
             of(this.queryList).filter(q -> q != null).forEach(q -> buildQuery(q));
-            logger.trace("####################{} - Create Query: \n{} \n\n", getClass().getSimpleName(),
-                    this.queryBuilder.toString());
+            logger.trace("####################{} - Create Query: \n{} \n\n", getClass().getSimpleName(), this.queryBuilder.toString());
             return (Builder) builder.setQuery(queryBuilder);
         }
 
@@ -556,6 +594,15 @@ public interface GPPageableElasticSearchDAO<D extends Document> extends GPPageab
         @Override
         public <Builder extends SearchRequestBuilder> Builder buildPage(Builder builder) throws Exception {
             return (canBuildPage() ? internalBuildPage(super.buildPage(builder)) : super.buildPage(builder));
+        }
+
+        /**
+         * @return {@link String}
+         */
+        @Override
+        public String printQueryAsJson() {
+            of(this.queryList).filter(q -> q != null).forEach(q -> buildQuery(q));
+            return boolQueryBuilder().toString();
         }
 
         /**

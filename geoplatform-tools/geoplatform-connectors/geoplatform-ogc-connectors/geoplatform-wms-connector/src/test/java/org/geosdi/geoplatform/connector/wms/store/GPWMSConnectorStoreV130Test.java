@@ -36,7 +36,7 @@ public class GPWMSConnectorStoreV130Test {
                         .build()).build();
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void a_wmsGetCapabilitiesV130Test() throws Exception {
         WMSGetCapabilitiesV130Request wmsGetCapabilitiesRequest = wmsServerConnector.createGetCapabilitiesRequest();
         WMSCapabilities wmsCapabilities = wmsGetCapabilitiesRequest.getResponse();

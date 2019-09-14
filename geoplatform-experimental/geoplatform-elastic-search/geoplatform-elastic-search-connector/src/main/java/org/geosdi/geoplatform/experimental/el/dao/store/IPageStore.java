@@ -47,7 +47,7 @@ import java.util.List;
  */
 @JsonDeserialize(as = PageStore.class)
 @JsonSerialize(as = PageStore.class)
-public interface IPageStore extends Serializable {
+public interface IPageStore<T> extends Serializable {
 
     /**
      * @return {@link Long}
@@ -57,5 +57,5 @@ public interface IPageStore extends Serializable {
     /**
      * @return {@link List}
      */
-    List getResults();
+    List<T> getResults();
 }

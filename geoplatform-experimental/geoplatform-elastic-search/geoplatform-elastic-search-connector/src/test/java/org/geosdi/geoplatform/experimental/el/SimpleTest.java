@@ -23,6 +23,7 @@ public class SimpleTest {
     public void test() throws Exception {
         GPGeodistanceQuerySearch geodistanceQuerySearch = new GPGeodistanceQuerySearch("location", new GeoPoint(40, 15), 34d, DistanceUnit.METERS, null);
         MultiFieldsSearch multiFieldsSearch = new MultiFieldsSearch(new BooleanAllMatchSearch(MUST), geodistanceQuerySearch);
+        multiFieldsSearch.printQueryAsJson();
         logger.info("{}\n", multiFieldsSearch.printQueryAsJson());
     }
 }

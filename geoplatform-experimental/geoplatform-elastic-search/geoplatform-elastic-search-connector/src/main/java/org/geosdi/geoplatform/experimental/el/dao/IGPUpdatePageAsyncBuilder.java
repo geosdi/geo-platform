@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.experimental.el.dao;
 
+import org.geosdi.geoplatform.experimental.el.dao.GPPageableAsyncElasticSearchDAO.PageAsync;
 import org.geosdi.geoplatform.experimental.el.search.builder.IGPPageAsyncBuilder;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -81,13 +82,12 @@ public interface IGPUpdatePageAsyncBuilder extends IGPPageAsyncBuilder {
         }
 
         /**
-         * @return {@link GPPageableAsyncElasticSearchDAO.PageAsync }
+         * @return {@link PageAsync }
          */
         @Override
-        public GPPageableAsyncElasticSearchDAO.PageAsync build() {
+        public PageAsync build() {
             checkArgument((this.updateHandler != null), "The Parameter UpdateHandler must not be null.");
-            return new GPPageableAsyncElasticSearchDAO.PageAsync(this.field, this.sortOrder,
-                    this.from, this.size, this.operationAsyncType, this.updateHandler, this.booleanSearch);
+            return new PageAsync(this.field, this.sortOrder, this.from, this.size, this.operationAsyncType, this.updateHandler, this.booleanSearch);
         }
     }
 }

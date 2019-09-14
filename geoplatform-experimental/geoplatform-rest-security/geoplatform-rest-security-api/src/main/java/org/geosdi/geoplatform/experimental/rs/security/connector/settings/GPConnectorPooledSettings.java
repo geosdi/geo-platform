@@ -39,6 +39,8 @@ import org.springframework.beans.factory.InitializingBean;
 
 import java.io.Serializable;
 
+import static java.lang.Integer.valueOf;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -59,13 +61,13 @@ public interface GPConnectorPooledSettings extends InitializingBean, Serializabl
      * @return {@link Integer}
      */
     default Integer defaultMaxTotalConnections() {
-        return Integer.valueOf(400);
+        return valueOf(400);
     }
 
     /**
      * @return {@link Integer}
      */
     default Integer defaultMaxPerRoute() {
-        return Integer.valueOf(60);
+        return valueOf(60);
     }
 }

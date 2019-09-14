@@ -65,5 +65,4 @@ public interface GPIndexConfigurator {
      * Order all {@link GPIndexCreator} Defined</p>
      */
     void order();
-
 }

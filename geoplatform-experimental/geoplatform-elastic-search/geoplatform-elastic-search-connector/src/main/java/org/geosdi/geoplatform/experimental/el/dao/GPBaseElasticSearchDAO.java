@@ -86,8 +86,7 @@ abstract class GPBaseElasticSearchDAO<D extends Document> implements GPElasticSe
      */
     @Override
     public D readDocument(String documentAsString) throws Exception {
-        checkArgument(((documentAsString != null) && !(documentAsString.isEmpty()) && !(documentAsString.equalsIgnoreCase(EMPTY_JSON))),
-                "The String to Wrap must not be null or Empty");
+        checkArgument(((documentAsString != null) && !(documentAsString.isEmpty()) && !(documentAsString.equalsIgnoreCase(EMPTY_JSON))), "The String to Wrap must not be null or Empty");
         return mapper.read(documentAsString);
     }
 
@@ -99,8 +98,7 @@ abstract class GPBaseElasticSearchDAO<D extends Document> implements GPElasticSe
      */
     @Override
     public <V extends Document> V readDocument(String documentAsString, Class<V> classe) throws Exception {
-        checkArgument(((documentAsString != null) && !(documentAsString.isEmpty()) && !(documentAsString.equalsIgnoreCase(EMPTY_JSON))),
-                "The String to Wrap must not be null or Empty");
+        checkArgument(((documentAsString != null) && !(documentAsString.isEmpty()) && !(documentAsString.equalsIgnoreCase(EMPTY_JSON))), "The String to Wrap must not be null or Empty");
         checkArgument(classe != null, "The Parameter classe must not be null.");
         return mapper.read(documentAsString, classe);
     }
@@ -112,8 +110,7 @@ abstract class GPBaseElasticSearchDAO<D extends Document> implements GPElasticSe
      */
     @Override
     public D readDocument(Path thePath) {
-        checkArgument((thePath != null) && (thePath.toFile().exists()), "The Parameter thePath must " +
-                "not be null and the File must exist.");
+        checkArgument((thePath != null) && (thePath.toFile().exists()), "The Parameter thePath must not be null and the File must exist.");
         try {
             return this.mapper.read(thePath.toFile());
         } catch (Exception ex) {

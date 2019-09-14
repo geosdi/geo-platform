@@ -45,7 +45,6 @@ import org.jasypt.spring31.properties.EncryptablePropertySourcesPlaceholderConfi
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -64,7 +63,6 @@ class OpenAMConnectorPlaceholderConfig {
     private static final OpenAMConnectorResourcesLoader openAMConnectorResourcesLoader = new OpenAMConnectorResourcesLoader();
 
     @Bean(name = "openAMConnectorConfigurator")
-    @Required
     public static EncryptablePropertySourcesPlaceholderConfigurer openAMConnectorPropertyConfigurer(
             @Qualifier(value = "openAMPooledPBEStringEncryptor") PooledPBEStringEncryptor openAMPooledPBEStringEncryptor,
             @Value("#{systemProperties['OPENAM_CONNECTOR_DATA_DIR']}") String openAMConnectorConfigDataDir,

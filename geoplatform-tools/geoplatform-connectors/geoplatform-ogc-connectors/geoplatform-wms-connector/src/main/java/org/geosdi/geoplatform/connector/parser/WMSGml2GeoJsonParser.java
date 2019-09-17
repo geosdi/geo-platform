@@ -53,7 +53,7 @@ public class WMSGml2GeoJsonParser implements GPWMSGml2GeoJsonParser {
         GMLReader gmlReader = new GMLReader();
         com.vividsolutions.jts.geom.Geometry jtsGeometry = gmlReader.read(new StringReader(writer.toString()), GEOMETRY_FACTORY);
         srsParser.parseSRS(gmlGeometry, jtsGeometry);
-        if (jtsGeometry.getSRID() != 4326) {
+        if ((jtsGeometry.getSRID() != 4326) && (jtsGeometry.getSRID() != 0)) {
             CoordinateReferenceSystem sourceCRS = CRS.decode("EPSG:" + jtsGeometry.getSRID());
             CoordinateReferenceSystem targetCRS = CRS.decode("EPSG:4326");
             MathTransform transform = CRS.findMathTransform(sourceCRS, targetCRS, TRUE);

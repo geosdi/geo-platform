@@ -1,5 +1,6 @@
 package org.geosdi.geoplatform.connector.parser;
 
+import com.vividsolutions.jts.geom.Geometry;
 import org.geojson.GeoJsonObject;
 import org.geosdi.geoplatform.xml.gml.v212.AbstractGeometryType;
 import org.slf4j.Logger;
@@ -35,6 +36,13 @@ public interface GPWMSGml2GeoJsonParser {
          * @throws Exception
          */
         void parseSRS(@Nonnull(when = NEVER) AbstractGeometryType gmlGeometry, @Nonnull(when = NEVER) org.locationtech.jts.geom.Geometry jtsGeometry) throws Exception;
+
+        /**
+         * @param gmlGeometry
+         * @param vividiSolutionGeometry
+         * @throws Exception
+         */
+        void parseSRS(@Nonnull(when = NEVER) AbstractGeometryType gmlGeometry, @Nonnull(when = NEVER) Geometry vividiSolutionGeometry) throws Exception;
 
         class WMSSRSParser implements GPWMSSRSParser {
 
@@ -79,6 +87,42 @@ public interface GPWMSGml2GeoJsonParser {
                         throw new IllegalStateException(MessageFormat.format("Could not parse SRS name [{0}].", srsName));
                     } else {
                         jtsGeometry.setUserData(srsName);
+                    }
+                }
+            }
+
+            /**
+             * @param gmlGeometry
+             * @param vividiSolutionGeometry
+             * @throws Exception
+             */
+            @Override
+            public void parseSRS(@Nonnull(when = NEVER) AbstractGeometryType gmlGeometry, @Nonnull(when = NEVER) Geometry vividiSolutionGeometry) throws Exception {
+                checkNotNull(gmlGeometry, "The Gml Geometry must not be null");
+                checkNotNull(vividiSolutionGeometry, "The JTS Geometry must not be null");
+                String srsName = gmlGeometry.getSrsName();
+                if (srsName != null) {
+                    for (String pattern : patterns) {
+                        try {
+                            MessageFormat format = new MessageFormat(pattern);
+                            Object[] codearray = format.parse(srsName);
+                            if (codearray.length > 0) {
+                                vividiSolutionGeometry.setSRID(((Number) codearray[0]).intValue());
+                                if (vividiSolutionGeometry.getUserData() == null) {
+                                    vividiSolutionGeometry.setUserData(srsName);
+                                    return;
+                                }
+                            }
+                        } catch (ParseException e) {
+                            //only trace the ParserException and continues the cycle
+                            logger.trace("DefaultSRSBaseParser - Parser Exception @@@@@@@@@@@@@@@@@ " + e);
+                        }
+                    }
+
+                    if (vividiSolutionGeometry.getUserData() != null) {
+                        throw new IllegalStateException(MessageFormat.format("Could not parse SRS name [{0}].", srsName));
+                    } else {
+                        vividiSolutionGeometry.setUserData(srsName);
                     }
                 }
             }

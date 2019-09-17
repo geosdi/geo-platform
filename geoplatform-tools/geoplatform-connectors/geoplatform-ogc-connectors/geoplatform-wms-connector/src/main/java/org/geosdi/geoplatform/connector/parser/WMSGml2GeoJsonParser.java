@@ -1,14 +1,18 @@
 package org.geosdi.geoplatform.connector.parser;
 
+import com.vividsolutions.jts.geom.GeometryFactory;
+import com.vividsolutions.jts.geom.PrecisionModel;
+import com.vividsolutions.jts.io.gml2.GMLReader;
 import org.geojson.GeoJsonObject;
 import org.geojson.Geometry;
 import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
 import org.geosdi.geoplatform.support.jackson.jts.GPJacksonJTSSupport;
 import org.geosdi.geoplatform.support.jackson.jts.IGPJacksonJTSSupport;
 import org.geosdi.geoplatform.xml.gml.v212.AbstractGeometryType;
-import org.locationtech.jts.geom.GeometryFactory;
-import org.locationtech.jts.geom.PrecisionModel;
-import org.locationtech.jts.io.gml2.GMLReader;
+import org.geotools.geometry.jts.JTS;
+import org.geotools.referencing.CRS;
+import org.opengis.referencing.crs.CoordinateReferenceSystem;
+import org.opengis.referencing.operation.MathTransform;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,6 +22,7 @@ import java.io.StringReader;
 import java.io.StringWriter;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.Boolean.TRUE;
 import static javax.annotation.meta.When.NEVER;
 
 /**
@@ -46,8 +51,15 @@ public class WMSGml2GeoJsonParser implements GPWMSGml2GeoJsonParser {
         StringWriter writer = new StringWriter();
         jaxbContextBuilder.marshal(gmlGeometry, writer);
         GMLReader gmlReader = new GMLReader();
-        org.locationtech.jts.geom.Geometry jtsGeometry = gmlReader.read(new StringReader(writer.toString()), GEOMETRY_FACTORY);
+        com.vividsolutions.jts.geom.Geometry jtsGeometry = gmlReader.read(new StringReader(writer.toString()), GEOMETRY_FACTORY);
         srsParser.parseSRS(gmlGeometry, jtsGeometry);
-        return JACKSON_JTS_SUPPORT.convertJtsGeometryToGeoJson(jtsGeometry);
+        if (jtsGeometry.getSRID() != 4326) {
+            CoordinateReferenceSystem sourceCRS = CRS.decode("EPSG:" + jtsGeometry.getSRID());
+            CoordinateReferenceSystem targetCRS = CRS.decode("EPSG:4326");
+            MathTransform transform = CRS.findMathTransform(sourceCRS, targetCRS, TRUE);
+            com.vividsolutions.jts.geom.Geometry translate = JTS.transform(jtsGeometry, transform);
+            return JACKSON_JTS_SUPPORT.convertVividisolutionGeometryToGeoJson(translate);
+        }
+        return JACKSON_JTS_SUPPORT.convertVividisolutionGeometryToGeoJson(jtsGeometry);
     }
 }

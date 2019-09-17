@@ -1,6 +1,9 @@
 package org.geosdi.geoplatform.connector.wms.store;
 
-import org.geosdi.geoplatform.connector.server.request.*;
+import org.geosdi.geoplatform.connector.server.request.GPWMSBoundingBox;
+import org.geosdi.geoplatform.connector.server.request.GPWMSGetMapBaseRequest;
+import org.geosdi.geoplatform.connector.server.request.WMSBoundingBox;
+import org.geosdi.geoplatform.connector.server.request.WMSGetMapBaseRequest;
 import org.geosdi.geoplatform.connector.server.v111.GPWMSDescribeLayerV111Request;
 import org.geosdi.geoplatform.connector.server.v111.GPWMSGetFeatureInfoV111Request;
 import org.geosdi.geoplatform.connector.server.v111.IGPWMSConnectorStoreV111;

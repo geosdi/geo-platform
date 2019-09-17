@@ -10,6 +10,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
 import static javax.annotation.meta.When.NEVER;
 
@@ -73,9 +74,9 @@ public class WMSGetMapBaseRequest implements GPWMSGetMapBaseRequest {
         String layersWMSKeyValuePair = this.layers.stream()
                 .filter(Objects::nonNull)
                 .filter(value -> !value.trim().isEmpty())
-                .collect(Collectors.joining(",", "LAYERS=", ""));
+                .collect(joining(",", "LAYERS=", ""));
         return of(layersWMSKeyValuePair, "SRS=".concat(this.srs), this.boundingBox.toWMSKeyValuePair(), "WIDTH=".concat(this.width),
                 "HEIGHT=".concat(this.height))
-                .collect(Collectors.joining("&"));
+                .collect(joining("&"));
     }
 }

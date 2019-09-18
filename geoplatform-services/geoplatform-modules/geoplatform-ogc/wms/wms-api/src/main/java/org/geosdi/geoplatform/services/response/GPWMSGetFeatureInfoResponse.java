@@ -1,9 +1,16 @@
 package org.geosdi.geoplatform.services.response;
 
+import lombok.Getter;
+import lombok.ToString;
+import net.jcip.annotations.Immutable;
+
 import javax.annotation.Nonnull;
-import javax.annotation.meta.When;
+import javax.xml.bind.annotation.XmlAccessorType;
 import java.io.Serializable;
 import java.util.List;
+
+import static javax.annotation.meta.When.NEVER;
+import static javax.xml.bind.annotation.XmlAccessType.FIELD;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -19,5 +26,48 @@ public interface GPWMSGetFeatureInfoResponse extends Serializable {
     /**
      * @param theFeature
      */
-    void addFeature(@Nonnull(when = When.NEVER) Object theFeature);
+    void addFeature(@Nonnull(when = NEVER) Object theFeature);
+
+    interface GPWMSGetFeatureInfoObjectResponse extends Serializable {
+
+        /**
+         * @return {@link Object}
+         */
+        Object getResponse();
+
+        /**
+         * @return {@link String}
+         */
+        String getLayerName();
+
+        /**
+         * @param theResponse
+         * @param theLayerName
+         * @return {@link GPWMSGetFeatureInfoObjectResponse}
+         */
+        static GPWMSGetFeatureInfoObjectResponse toResponse(Object theResponse, String theLayerName) {
+            return new WMSGetFeatureInfoObjectResponse(theResponse, theLayerName);
+        }
+
+        @ToString
+        @Getter
+        @Immutable
+        @XmlAccessorType(FIELD)
+        class WMSGetFeatureInfoObjectResponse implements GPWMSGetFeatureInfoObjectResponse {
+
+            private static final long serialVersionUID = -985006208177418887L;
+            //
+            private final Object response;
+            private final String layerName;
+
+            /**
+             * @param theResponse
+             * @param theLayerName
+             */
+            WMSGetFeatureInfoObjectResponse(Object theResponse, String theLayerName) {
+                this.response = theResponse;
+                this.layerName = theLayerName;
+            }
+        }
+    }
 }

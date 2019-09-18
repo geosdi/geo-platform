@@ -523,6 +523,18 @@ public interface LayerModuleConstants extends Constants {
     @DefaultStringValue("Insert Name for Project (required)")
     String ProjectBindingWidget_projectFieldNameEmptyText();
 
+    @DefaultStringValue("Project Description")
+    String ProjectBindingWidget_projectFielDescriptionLabelText();
+
+    @DefaultStringValue("Insert Description for Project (required)")
+    String ProjectBindingWidget_projectFieldDescriptionEmptyText();
+
+    @DefaultStringValue("Project Path Image")
+    String ProjectBindingWidget_projectFielPathImageLabelText();
+
+    @DefaultStringValue("Insert Path Image for Project (required)")
+    String ProjectBindingWidget_projectFieldPathImageEmptyText();
+
     @DefaultStringValue("Project Settings")
     String ProjectBindingWidget_fieldSetHeadingText();
 

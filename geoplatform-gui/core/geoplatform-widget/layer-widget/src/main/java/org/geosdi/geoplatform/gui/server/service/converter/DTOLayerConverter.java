@@ -282,12 +282,12 @@ public class DTOLayerConverter {
         GPProject project = new GPProject();
         project.setName(clientProject.getName());
         project.setShared(clientProject.isShared());
+        project.setDescription(clientProject.getDescription());
+        project.setImagePath(clientProject.getPathImage());
         return project;
     }
 
-    public AccountProjectPropertiesDTO convertToAccountProjectPropertiesDTO(
-            Long accountID,
-            GPClientProject project) {
+    public AccountProjectPropertiesDTO convertToAccountProjectPropertiesDTO(Long accountID, GPClientProject project) {
         AccountProjectPropertiesDTO dto = new AccountProjectPropertiesDTO();
         dto.setAccountID(accountID);
         dto.setProjectID(project.getId());
@@ -295,6 +295,8 @@ public class DTOLayerConverter {
         dto.setProjectVersion(project.getVersion());
         dto.setDefaultProject(project.isDefaultProject());
         dto.setShared(project.isShared());
+        dto.setProjectDescription(project.getDescription());
+        dto.setPathImage(project.getPathImage());
         return dto;
     }
 
@@ -307,12 +309,13 @@ public class DTOLayerConverter {
         clientProject.setCreationDate(dateFormatter.format(projectDTO.getCreationDate()));
         clientProject.setDefaultProject(projectDTO.isDefaultProject());
         clientProject.setShared(projectDTO.isShared());
+        clientProject.setDescription(projectDTO.getDescription());
+        clientProject.setPathImage(projectDTO.getImagePath());
         ShortAccountDTO owner = projectDTO.getOwner();
         if (owner != null && owner instanceof UserDTO) {
             clientProject.setOwner(this.convertToGPSimpleUser((UserDTO) owner));
         }
-        clientProject.setRootFolders(this.convertOnlyFolders(
-                projectDTO.getRootFolders()));
+        clientProject.setRootFolders(this.convertOnlyFolders(projectDTO.getRootFolders()));
         return clientProject;
     }
 

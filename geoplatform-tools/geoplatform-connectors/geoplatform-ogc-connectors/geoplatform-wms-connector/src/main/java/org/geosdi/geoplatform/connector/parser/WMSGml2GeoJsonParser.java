@@ -24,6 +24,7 @@ import java.io.StringWriter;
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.TRUE;
 import static javax.annotation.meta.When.NEVER;
+import static org.geotools.referencing.CRS.decode;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -53,13 +54,20 @@ public class WMSGml2GeoJsonParser implements GPWMSGml2GeoJsonParser {
         GMLReader gmlReader = new GMLReader();
         com.vividsolutions.jts.geom.Geometry jtsGeometry = gmlReader.read(new StringReader(writer.toString()), GEOMETRY_FACTORY);
         srsParser.parseSRS(gmlGeometry, jtsGeometry);
-        if ((jtsGeometry.getSRID() != 4326) && (jtsGeometry.getSRID() != 0)) {
-            CoordinateReferenceSystem sourceCRS = CRS.decode("EPSG:" + jtsGeometry.getSRID());
-            CoordinateReferenceSystem targetCRS = CRS.decode("EPSG:4326");
-            MathTransform transform = CRS.findMathTransform(sourceCRS, targetCRS, TRUE);
-            com.vividsolutions.jts.geom.Geometry translate = JTS.transform(jtsGeometry, transform);
-            return JACKSON_JTS_SUPPORT.convertVividisolutionGeometryToGeoJson(translate);
-        }
-        return JACKSON_JTS_SUPPORT.convertVividisolutionGeometryToGeoJson(jtsGeometry);
+        return (jtsGeometry.getSRID() != 4326) && (jtsGeometry.getSRID() != 0) ? this.transform(jtsGeometry) : JACKSON_JTS_SUPPORT.convertVividisolutionGeometryToGeoJson(jtsGeometry);
+    }
+
+    /**
+     * @param toTransform
+     * @return {@link GeoJsonObject}
+     * @throws Exception
+     */
+    protected final GeoJsonObject transform(@Nonnull(when = NEVER) com.vividsolutions.jts.geom.Geometry toTransform) throws Exception {
+        checkArgument(toTransform != null, "The Parameter Geometry toTransform must not be null.");
+        CoordinateReferenceSystem sourceCRS = decode("EPSG:" + toTransform.getSRID(), TRUE);
+        CoordinateReferenceSystem targetCRS = decode("EPSG:4326", TRUE);
+        MathTransform transform = CRS.findMathTransform(sourceCRS, targetCRS, TRUE);
+        com.vividsolutions.jts.geom.Geometry translate = JTS.transform(toTransform, transform);
+        return JACKSON_JTS_SUPPORT.convertVividisolutionGeometryToGeoJson(translate);
     }
 }

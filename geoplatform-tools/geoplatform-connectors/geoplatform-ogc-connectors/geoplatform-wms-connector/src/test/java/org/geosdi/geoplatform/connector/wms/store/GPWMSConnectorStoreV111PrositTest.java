@@ -8,6 +8,7 @@ import org.geosdi.geoplatform.connector.server.v111.GPWMSDescribeLayerV111Reques
 import org.geosdi.geoplatform.connector.server.v111.GPWMSGetFeatureInfoV111Request;
 import org.geosdi.geoplatform.connector.server.v111.IGPWMSConnectorStoreV111;
 import org.geosdi.geoplatform.connector.server.v111.WMSGetCapabilitiesV111Request;
+import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -20,6 +21,7 @@ import java.util.Arrays;
 import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
 import static org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat.GML;
 import static org.geosdi.geoplatform.connector.server.store.GPWMSConnectorBuilder.WMSConnectorBuilder.wmsConnectorBuilder;
+import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
@@ -32,6 +34,9 @@ public class GPWMSConnectorStoreV111PrositTest {
     private static final Logger logger = LoggerFactory.getLogger(GPWMSConnectorStoreV111PrositTest.class);
     //
     private static IGPWMSConnectorStoreV111 wmsServerConnector;
+    private static final GPJacksonSupport JACKSON_SUPPORT = new GPJacksonSupport(UNWRAP_ROOT_VALUE_DISABLE,
+            FAIL_ON_UNKNOW_PROPERTIES_DISABLE, ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE, WRAP_ROOT_VALUE_DISABLE,
+            INDENT_OUTPUT_ENABLE);
 
     @BeforeClass
     public static void beforeClass() throws Exception {
@@ -64,10 +69,11 @@ public class GPWMSConnectorStoreV111PrositTest {
         GPWMSBoundingBox wmsBoundinBox = new WMSBoundingBox(15.824662897187245, 40.97210836426291, 15.836561468047133, 40.98109151703362);
         GPWMSGetMapBaseRequest wmsGetMapBaseRequest = new WMSGetMapBaseRequest(wmsBoundinBox, Arrays.asList("admin:admin_shp_vigneti_catastali", "admin:admin_shp_oliveti_catastali"),
                 "EPSG:4326", "256", "256");
-        logger.info("##################################WMS_GET_FEATURE_INFO_V111_RESPONSE : {}\n", wmsGetFeatureInfoRequest.withQueryLayers("admin:admin_shp_vigneti_catastali", "admin:admin_shp_oliveti_catastali")
+        Object response = wmsGetFeatureInfoRequest.withQueryLayers("admin:admin_shp_vigneti_catastali", "admin:admin_shp_oliveti_catastali")
                 .withWMSGetMapRequest(wmsGetMapBaseRequest)
                 .withFeatureCount(8)
-                .withInfoFormat(GML).withX(154).withY(230).getResponse());
+                .withInfoFormat(GML).withX(154).withY(230).getResponse();
+        logger.info("##################################WMS_GET_FEATURE_INFO_V111_RESPONSE : \n{}\n", JACKSON_SUPPORT.getDefaultMapper().writeValueAsString(response));
     }
 
     @Test

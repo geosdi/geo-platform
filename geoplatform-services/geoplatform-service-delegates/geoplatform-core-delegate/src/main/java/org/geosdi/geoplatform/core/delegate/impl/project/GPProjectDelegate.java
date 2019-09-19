@@ -453,15 +453,10 @@ public class GPProjectDelegate implements ProjectDelegate {
 
             ProjectDTO projectDTO;
             if (project.isShared()) {
-<<<<<<< HEAD
                 GPAccount owner = accountProjectDao.findOwnerByProjectID(
                         project.getId()).getAccount();
                 projectDTO = new ProjectDTO(project,
                         accountProject.isDefaultProject(), owner);
-=======
-                GPAccount owner = accountProjectDao.findOwnerByProjectID(project.getId()).getAccount();
-                projectDTO = new ProjectDTO(project, accountProject.isDefaultProject(), owner);
->>>>>>> 3bfde475f... Added both Description and Image Path for Project
             } else {
                 projectDTO = new ProjectDTO(project,
                         accountProject.isDefaultProject());

@@ -36,10 +36,10 @@ package org.geosdi.geoplatform.connectors.ws.basic.rest;
 
 import org.geosdi.geoplatform.configurator.bootstrap.cxf.Rest;
 import org.geosdi.geoplatform.services.GeoPlatformService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import javax.annotation.Resource;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -49,7 +49,8 @@ import javax.annotation.Resource;
 @Rest
 class BasicRestClientConnectorConfig {
 
-    @Resource(name = "gpBasicRestClientConnector")
+    @Autowired
+    @Qualifier(value = "gpBasicRestClientConnector")
     private GPBasicRestClientConnector gpBasicRestClientConnector;
 
     @Bean

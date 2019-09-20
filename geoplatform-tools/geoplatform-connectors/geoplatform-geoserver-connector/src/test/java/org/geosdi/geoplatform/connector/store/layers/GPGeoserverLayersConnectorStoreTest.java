@@ -84,6 +84,6 @@ public class GPGeoserverLayersConnectorStoreTest extends GPBaseGeoserverConnecto
         for (IGPGeoserverWorkspace geoserverWorkspace : geoserverWorkspaces.getWorkspaces()) {
             new GeoserverWorkspaceLayersTask(loadWorkspaceLayersRequest, geoserverWorkspace.getWorkspaceName()).start();
         }
-        sleep(700);
+        sleep(1000);
     }
 }

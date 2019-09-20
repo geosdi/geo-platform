@@ -30,6 +30,11 @@
             <artifactId>geoplatform-async-api-support</artifactId>
             <version>${project.version}</version>
         </dependency>
+        
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>javax.annotation-api</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>

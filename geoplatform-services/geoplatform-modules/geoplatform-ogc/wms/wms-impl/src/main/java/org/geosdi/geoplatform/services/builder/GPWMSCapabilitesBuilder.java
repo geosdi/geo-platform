@@ -6,9 +6,9 @@ import org.geosdi.geoplatform.response.ServerDTO;
 import org.geosdi.geoplatform.services.builder.GPRasterLayerDTOBuilder.RasterLayerDTOBuilder;
 import org.geosdi.geoplatform.services.httpclient.GeoSDIHttpClient;
 import org.geosdi.geoplatform.services.request.WMSHeaderParam;
-import org.geotools.data.ows.WMSCapabilities;
-import org.geotools.data.wms.WebMapServer;
 import org.geotools.ows.ServiceException;
+import org.geotools.ows.wms.WMSCapabilities;
+import org.geotools.ows.wms.WebMapServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -62,6 +62,7 @@ public class GPWMSCapabilitesBuilder implements IGPWMSCapabilitesBuilder {
             logger.error("IOException: {}", e.getMessage());
             throw new ResourceNotFoundFault("Inaccessible URL");
         } catch (Exception e) {
+            e.printStackTrace();
             logger.error("Exception: {}", e.getMessage());
             throw new ResourceNotFoundFault("Incorrect URL");
         }

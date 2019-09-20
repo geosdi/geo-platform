@@ -115,7 +115,7 @@
         <dependency>
             <groupId>org.geotools</groupId>
             <artifactId>gt-jts-wrapper</artifactId>
-            <version>15.4</version>
+            <version>21.2</version>
         </dependency>
 
         <dependency>

@@ -35,12 +35,13 @@
  */
 package org.geosdi.geoplatform.configurator.cxf.server;
 
-import javax.annotation.Resource;
 import org.apache.cxf.interceptor.LoggingInInterceptor;
 import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor;
 import org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor;
 import org.geosdi.geoplatform.support.cxf.server.ServerInterceptorStrategyFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -53,7 +54,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 class ServerInterceptorBean {
 
-    @Resource(name = "serverInterceptorStrategyFactory")
+    @Autowired
+    @Qualifier(value = "serverInterceptorStrategyFactory")
     private ServerInterceptorStrategyFactory factory;
 
     @Bean

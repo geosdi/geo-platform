@@ -35,13 +35,14 @@
  */
 package org.geosdi.geoplatform.response;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.geosdi.geoplatform.core.model.GPStyle;
+import org.geotools.ows.wms.StyleImpl;
+
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.geosdi.geoplatform.core.model.GPStyle;
-import org.geotools.data.ows.StyleImpl;
 
 /**
  * @todo for future use

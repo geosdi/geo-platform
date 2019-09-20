@@ -57,6 +57,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import static java.lang.Boolean.TRUE;
+import static java.lang.Thread.sleep;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -105,7 +106,7 @@ public class GPGeoserverConnectorStoreTest extends GPBaseGeoserverConnectorStore
         for (IGPGeoserverNamespace namespace : namespaces.getNamespaces()) {
             new GeoserverNamespaceTask(namespaceRequest, namespace.getName()).start();
         }
-        Thread.sleep(500);
+        sleep(1000);
     }
 
     @Test
@@ -134,7 +135,7 @@ public class GPGeoserverConnectorStoreTest extends GPBaseGeoserverConnectorStore
         stylesRequest.getResponse().getStyles()
                 .stream()
                 .forEach(value -> new GeoserverStyleTask(styleRequest, value.getName()).start());
-        Thread.sleep(700);
+        sleep(1000);
     }
 
     @Test
@@ -158,7 +159,7 @@ public class GPGeoserverConnectorStoreTest extends GPBaseGeoserverConnectorStore
         layersRequest.getResponse().getLayers()
                 .stream()
                 .forEach(value -> new GeoserverLayerTask(layerRequest, value.getLayerName()).start());
-        Thread.sleep(700);
+        sleep(1000);
     }
 
     @Test

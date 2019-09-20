@@ -48,7 +48,6 @@ import org.geosdi.geoplatform.support.cxf.rs.provider.configurator.GPRestProvide
 import org.geosdi.geoplatform.support.cxf.rs.provider.factory.GPRestProviderFactory;
 import org.geosdi.geoplatform.support.cxf.rs.provider.jettyson.GPJSONProvider;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -68,7 +67,6 @@ import java.util.Map;
 class GPBasicRestServerConfig {
 
     @Bean(name = "gpBasicRestServer")
-    @Required
     public static Server gpBasicRestServer(@Qualifier(
             value = "geoPlatformService") GeoPlatformService geoPlatformService,
             @Value("configurator{webservice_rs_test_endpoint_address}") String basicRestAddress,

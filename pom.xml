@@ -855,18 +855,13 @@
             </dependency>
             <dependency>
                 <groupId>org.geotools</groupId>
-                <artifactId>gt-wfs</artifactId>
-                <version>${gt-version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.geotools</groupId>
                 <artifactId>gt-wps</artifactId>
                 <version>${gt-version}</version>
             </dependency>
             <dependency>
                 <groupId>org.geotools</groupId>
                 <artifactId>gt-api</artifactId>
-                <version>${gt-version}</version>
+                <version>20.5</version>
             </dependency>
             <dependency>
                 <groupId>org.geotools</groupId>
@@ -905,8 +900,13 @@
             </dependency>
             <dependency>
                 <groupId>org.geotools</groupId>
-                <artifactId>gt-coveragetools</artifactId>
+                <artifactId>gt-xml</artifactId>
                 <version>${gt-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.geotools</groupId>
+                <artifactId>gt-coveragetools</artifactId>
+                <version>15.4</version>
                 <exclusions>
                     <exclusion>
                         <groupId>net.sf.ehcache</groupId>
@@ -1509,7 +1509,7 @@
         <jai-version>1.1.3</jai-version>
         <jai-imageio-version>1.1</jai-imageio-version>
         <geoapi-version>2.3-M1</geoapi-version>
-        <gt-version>15.4</gt-version>
+        <gt-version>21.2</gt-version>
 
         <gwtVersion>2.7.0</gwtVersion>
         <gxtVersion>2.3.1a-gwt22</gxtVersion>

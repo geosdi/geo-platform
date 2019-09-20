@@ -35,9 +35,9 @@
  */
 package org.geosdi.geoplatform.connectors.ws.geonetwork;
 
-import javax.annotation.Resource;
 import org.geosdi.geoplatform.configurator.bootstrap.Production;
 import org.geosdi.geoplatform.services.GPCatalogFinderService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -50,7 +50,7 @@ import org.springframework.context.annotation.Configuration;
 @Production
 public class GeonetworkClientConnectorConfiguration {
 
-    @Resource
+    @Autowired
     private GPGeonetworkClientConnector gpGeonetworkClientConnector;
 
     @Bean

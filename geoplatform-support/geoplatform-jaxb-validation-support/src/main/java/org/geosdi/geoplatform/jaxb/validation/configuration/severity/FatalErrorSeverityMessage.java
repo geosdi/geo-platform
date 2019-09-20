@@ -1,6 +1,6 @@
 package org.geosdi.geoplatform.jaxb.validation.configuration.severity;
 
-import jdk.nashorn.internal.ir.annotations.Immutable;
+import net.jcip.annotations.Immutable;
 import org.geosdi.geoplatform.jaxb.validation.configuration.ISeverityType.SeverityType;
 import org.geosdi.geoplatform.jaxb.validation.configuration.ValidationMessage;
 

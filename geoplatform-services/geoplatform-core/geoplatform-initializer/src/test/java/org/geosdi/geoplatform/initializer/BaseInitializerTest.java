@@ -46,7 +46,7 @@ import org.geosdi.geoplatform.gui.shared.GPMessageCommandType;
 import org.geosdi.geoplatform.gui.shared.GPRole;
 import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 import org.geosdi.geoplatform.jasypt.support.GPDigesterConfigurator;
-import org.geotools.data.ows.Layer;
+import org.geotools.ows.wms.Layer;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
 import org.locationtech.jts.geom.GeometryFactory;

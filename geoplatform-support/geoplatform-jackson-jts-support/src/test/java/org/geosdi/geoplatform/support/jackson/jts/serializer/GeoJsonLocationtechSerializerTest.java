@@ -44,6 +44,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.io.StringReader;
 
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
@@ -241,5 +242,21 @@ public class GeoJsonLocationtechSerializerTest {
         GeometryFactory geometryFactory = new GeometryFactory(new PrecisionModel(), 4326);
         Geometry geometry = geometryFactory.toGeometry(envelope);
         logger.info("##########################\n{}\n", mapper.writeValueAsString(geometry));
+    }
+
+    @Test
+    public void n_createMultiPolygonTest() throws Exception {
+        Geometry multiPolygon = reader.read(new StringReader("MULTIPOLYGON (((569895.71767619 4536087.01716705, 569906.76659643 4536125.23165532," +
+                " 569987.02999951 4536099.5621152, 569964.86999951 4536065.9961152, 569947.96799951 4536057.3151152," +
+                " 569895.71767619 4536087.01716705)), ((570006.87411071 4536105.54553145, 570002.70573246 4536099.80012634," +
+                " 569985.56139969 4536081.01569629, 570006.87411071 4536105.54553145)), " +
+                "((569970.02329807 4536064.73627365, 569968.10240404 4536062.74085731, 569964.78202863 4536059.48583026," +
+                " 569970.02329807 4536064.73627365)), ((569963.13328051 4536057.86953118, 569954.83199951 4536051.38111519," +
+                " 569948.91370913 4536053.8446532, 569963.13328051 4536057.86953118)))"));
+        multiPolygon.setSRID(32633);
+        String multiPolygonGeoJsonString = mapper.writeValueAsString(multiPolygon);
+        logger.info(":::::::::::::::::::::::GEO_JSON_MULTI_POLYGON_VIGNETI : \n{}\n", multiPolygonGeoJsonString);
+        org.geojson.MultiPolygon p = mapper.readValue(multiPolygonGeoJsonString, org.geojson.MultiPolygon.class);
+        mapper.writeValue(new File("./target/MultiPolygonVigneti.json"), p);
     }
 }

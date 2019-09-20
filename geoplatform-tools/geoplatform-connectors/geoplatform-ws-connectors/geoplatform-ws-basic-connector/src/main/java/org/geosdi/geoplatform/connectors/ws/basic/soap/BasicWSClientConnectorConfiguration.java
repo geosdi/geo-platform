@@ -35,9 +35,10 @@
  */
 package org.geosdi.geoplatform.connectors.ws.basic.soap;
 
-import javax.annotation.Resource;
 import org.geosdi.geoplatform.configurator.bootstrap.Production;
 import org.geosdi.geoplatform.services.GeoPlatformService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -50,7 +51,8 @@ import org.springframework.context.annotation.Configuration;
 @Production
 class BasicWSClientConnectorConfiguration {
 
-    @Resource(name = "gpBasicWSClientConnector")
+    @Autowired
+    @Qualifier(value = "gpBasicWSClientConnector")
     private GPBasicWSClientConnector gpBasicWSClientConnector;
 
     @Bean

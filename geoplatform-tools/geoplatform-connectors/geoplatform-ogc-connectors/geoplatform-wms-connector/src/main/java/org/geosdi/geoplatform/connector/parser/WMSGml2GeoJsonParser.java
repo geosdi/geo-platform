@@ -1,8 +1,5 @@
 package org.geosdi.geoplatform.connector.parser;
 
-import com.vividsolutions.jts.geom.GeometryFactory;
-import com.vividsolutions.jts.geom.PrecisionModel;
-import com.vividsolutions.jts.io.gml2.GMLReader;
 import org.geojson.GeoJsonObject;
 import org.geojson.Geometry;
 import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
@@ -11,6 +8,9 @@ import org.geosdi.geoplatform.support.jackson.jts.IGPJacksonJTSSupport;
 import org.geosdi.geoplatform.xml.gml.v212.AbstractGeometryType;
 import org.geotools.geometry.jts.JTS;
 import org.geotools.referencing.CRS;
+import org.locationtech.jts.geom.GeometryFactory;
+import org.locationtech.jts.geom.PrecisionModel;
+import org.locationtech.jts.io.gml2.GMLReader;
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
 import org.opengis.referencing.operation.MathTransform;
 import org.slf4j.Logger;
@@ -52,9 +52,9 @@ public class WMSGml2GeoJsonParser implements GPWMSGml2GeoJsonParser {
         StringWriter writer = new StringWriter();
         jaxbContextBuilder.marshal(gmlGeometry, writer);
         GMLReader gmlReader = new GMLReader();
-        com.vividsolutions.jts.geom.Geometry jtsGeometry = gmlReader.read(new StringReader(writer.toString()), GEOMETRY_FACTORY);
+        org.locationtech.jts.geom.Geometry jtsGeometry = gmlReader.read(new StringReader(writer.toString()), GEOMETRY_FACTORY);
         srsParser.parseSRS(gmlGeometry, jtsGeometry);
-        return (jtsGeometry.getSRID() != 4326) && (jtsGeometry.getSRID() != 0) ? this.transform(jtsGeometry) : JACKSON_JTS_SUPPORT.convertVividisolutionGeometryToGeoJson(jtsGeometry);
+        return (jtsGeometry.getSRID() != 4326) && (jtsGeometry.getSRID() != 0) ? this.transform(jtsGeometry) : JACKSON_JTS_SUPPORT.convertJtsGeometryToGeoJson(jtsGeometry);
     }
 
     /**
@@ -62,12 +62,12 @@ public class WMSGml2GeoJsonParser implements GPWMSGml2GeoJsonParser {
      * @return {@link GeoJsonObject}
      * @throws Exception
      */
-    protected final GeoJsonObject transform(@Nonnull(when = NEVER) com.vividsolutions.jts.geom.Geometry toTransform) throws Exception {
+    protected final GeoJsonObject transform(@Nonnull(when = NEVER) org.locationtech.jts.geom.Geometry toTransform) throws Exception {
         checkArgument(toTransform != null, "The Parameter Geometry toTransform must not be null.");
         CoordinateReferenceSystem sourceCRS = decode("EPSG:" + toTransform.getSRID(), TRUE);
         CoordinateReferenceSystem targetCRS = decode("EPSG:4326", TRUE);
         MathTransform transform = CRS.findMathTransform(sourceCRS, targetCRS, TRUE);
-        com.vividsolutions.jts.geom.Geometry translate = JTS.transform(toTransform, transform);
-        return JACKSON_JTS_SUPPORT.convertVividisolutionGeometryToGeoJson(translate);
+        org.locationtech.jts.geom.Geometry translate = JTS.transform(toTransform, transform);
+        return JACKSON_JTS_SUPPORT.convertJtsGeometryToGeoJson(translate);
     }
 }

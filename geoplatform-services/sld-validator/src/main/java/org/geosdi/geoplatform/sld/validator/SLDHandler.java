@@ -34,13 +34,14 @@
  */
 package org.geosdi.geoplatform.sld.validator;
 
-import org.geotools.data.DataUtilities;
 import org.geotools.factory.CommonFactoryFinder;
 import org.geotools.sld.v1_1.SLDConfiguration;
 import org.geotools.styling.*;
+import org.geotools.util.URLs;
 import org.geotools.util.Version;
 import org.geotools.util.logging.Logging;
-import org.geotools.xml.Parser;
+import org.geotools.xml.styling.SLDParser;
+import org.geotools.xsd.Parser;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
 import org.xmlpull.v1.XmlPullParser;
@@ -146,7 +147,7 @@ public class SLDHandler {
     private Parser createSld11Parser(Object input, ResourceLocator resourceLocator, EntityResolver entityResolver) {
         if (resourceLocator == null && input instanceof File) {
             // setup for resolution of relative paths
-            final java.net.URL surl = DataUtilities.fileToURL((File) input);
+            final java.net.URL surl = URLs.fileToUrl((File) input);
             DefaultResourceLocator defResourceLocator = new DefaultResourceLocator();
             defResourceLocator.setSourceUrl(surl);
             resourceLocator = defResourceLocator;
@@ -264,7 +265,7 @@ public class SLDHandler {
      * Turns input into a Reader.
      *
      * @param input A {@link Reader}, {@link java.io.InputStream}, {@link File},
-     * or {@link Resource}.
+     *              or {@link Resource}.
      */
     protected Reader toReader(Object input) throws IOException {
         if (input instanceof Reader) {
@@ -291,11 +292,10 @@ public class SLDHandler {
      * that can be used to preparse some of the xml document, resetting it back
      * to its original state for actual parsing.
      *
-     * @param stream The original xml stream.
+     * @param stream       The original xml stream.
      * @param xmlLookahead The number of bytes to support for parse. If more
-     * than this number of bytes are preparsed the stream can not be properly
-     * reset.
-     *
+     *                     than this number of bytes are preparsed the stream can not be properly
+     *                     reset.
      * @return The buffered reader.
      * @throws IOException
      */
@@ -326,11 +326,10 @@ public class SLDHandler {
      * be used to preparse some of the xml document, resetting it back to its
      * original state for actual parsing.
      *
-     * @param reader The original xml reader.
+     * @param reader       The original xml reader.
      * @param xmlLookahead The number of bytes to support for parse. If more
-     * than this number of bytes are preparsed the stream can not be properly
-     * reset.
-     *
+     *                     than this number of bytes are preparsed the stream can not be properly
+     *                     reset.
      * @return The buffered reader.
      * @throws IOException
      */

@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.connector;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 
 import javax.annotation.Nonnull;
+import java.util.Objects;
 import java.util.Optional;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -50,7 +51,14 @@ import static javax.annotation.meta.When.NEVER;
  */
 public enum GeoserverVersion implements GPServerConnector.GPServerConnectorVersion {
 
-    V215x("2.15.x");
+    /**
+     * <p>Maintenance Version.</p>
+     */
+    V215x("2.15.3"),
+    /**
+     *<p>Stable Version.</p>
+     */
+    V216x("2.16.0");
 
     private final String version;
 
@@ -81,9 +89,10 @@ public enum GeoserverVersion implements GPServerConnector.GPServerConnectorVersi
      */
     public static GeoserverVersion fromString(String version) {
         Optional<GeoserverVersion> optional = stream(GeoserverVersion.values())
+                .filter(Objects::nonNull)
                 .filter(v -> ((version != null) && !(version.trim().isEmpty()))
                         ? v.getVersion().equalsIgnoreCase(version) : FALSE)
                 .findFirst();
-        return ((optional != null) && (optional.isPresent()) ? optional.get() : GeoserverVersion.V215x);
+        return ((optional != null) && (optional.isPresent()) ? optional.get() : GeoserverVersion.V216x);
     }
 }

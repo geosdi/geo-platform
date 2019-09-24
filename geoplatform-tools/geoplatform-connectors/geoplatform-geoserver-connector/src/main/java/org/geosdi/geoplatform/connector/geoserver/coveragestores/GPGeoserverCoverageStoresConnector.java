@@ -74,6 +74,7 @@ public abstract class GPGeoserverCoverageStoresConnector extends GPGeoserverData
     public GeoserverLoadCoverageStoresRequest loadCoverageStoresRequest() {
         switch (version) {
             case V215x:
+            case V216x:
                 return new GPGeoserverLoadCoverageStoresRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");
@@ -87,6 +88,7 @@ public abstract class GPGeoserverCoverageStoresConnector extends GPGeoserverData
     public GeoserverLoadCoverageStoreRequest loadCoverageStoreRequest() {
         switch (version) {
             case V215x:
+            case V216x:
                 return new GPGeoserverLoadCoverageStoreRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");
@@ -100,6 +102,7 @@ public abstract class GPGeoserverCoverageStoresConnector extends GPGeoserverData
     public GeoserverCreateCoverageStoreRequest createCoverageStoreRequest() {
         switch (version) {
             case V215x:
+            case V216x:
                 return new GPGeoserverCreateCoverageStoreRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");
@@ -113,6 +116,7 @@ public abstract class GPGeoserverCoverageStoresConnector extends GPGeoserverData
     public GeoserverDeleteCoverageStoreRequest deleteCoverageStoreRequest() {
         switch (version) {
             case V215x:
+            case V216x:
                 return new GPGeoserverDeleteCoverageStoreRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");
@@ -126,6 +130,7 @@ public abstract class GPGeoserverCoverageStoresConnector extends GPGeoserverData
     public GeoserverUpdateCoverageStoreRequest updateCoverageStoreRequest() {
         switch (version) {
             case V215x:
+            case V216x:
                 return new GPGeoserverUpdateCoverageStoreRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");

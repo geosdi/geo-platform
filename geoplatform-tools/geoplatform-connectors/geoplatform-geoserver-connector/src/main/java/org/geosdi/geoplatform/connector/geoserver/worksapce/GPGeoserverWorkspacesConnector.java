@@ -109,6 +109,7 @@ public abstract class GPGeoserverWorkspacesConnector extends GPGeoserverAboutCon
     public GPGeoserverLoadWorkspacesRequest loadWorkspacesRequest() {
         switch (version) {
             case V215x:
+            case V216x:
                 return new GPGeoserverLoadWorkspacesRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");
@@ -122,6 +123,7 @@ public abstract class GPGeoserverWorkspacesConnector extends GPGeoserverAboutCon
     public GPGeoserverLoadWorkspaceRequest loadWorkspaceRequest() {
         switch (version) {
             case V215x:
+            case V216x:
                 return new GPGeoserverLoadWorkspaceRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");
@@ -135,6 +137,7 @@ public abstract class GPGeoserverWorkspacesConnector extends GPGeoserverAboutCon
     public GeoserverCreateWorkspaceRequest createWorkspaceRequest() {
         switch (version) {
             case V215x:
+            case V216x:
                 return new GPGeoserverCreateWorkspaceRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");
@@ -148,6 +151,7 @@ public abstract class GPGeoserverWorkspacesConnector extends GPGeoserverAboutCon
     public GeoserverDeleteWorkspaceRequest deleteWorkspaceRequest() {
         switch (version) {
             case V215x:
+            case V216x:
                 return new GPGeoserverDeleteWorkspaceRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");
@@ -161,6 +165,7 @@ public abstract class GPGeoserverWorkspacesConnector extends GPGeoserverAboutCon
     public GeoserverUpdateWorkspaceRequest updateWorkspaceRequest() {
         switch (version) {
             case V215x:
+            case V216x:
                 return new GPGeoserverUpdateWorkspaceRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");

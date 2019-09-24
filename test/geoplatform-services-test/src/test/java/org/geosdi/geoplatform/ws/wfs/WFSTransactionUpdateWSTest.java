@@ -71,7 +71,7 @@ public class WFSTransactionUpdateWSTest extends WFSAbstractTest {
         Assert.assertNotNull(att1);
         Assert.assertNotNull(att2);
 
-        BBox bbox = new BBox(-75.102613, 40.212597, -75.102613, 40.212597);
+        BBox bbox = new BBox(-75.102613, 40.212597, -75.361859, 40.512517);
         FeatureCollectionDTO featureCollection = wfsService.getFeatureByBBoxDirect(addressDatastore, typeName, bbox, EMPTY_MAP);
         Assert.assertEquals(1, featureCollection.getNumberOfFeatures());
         Assert.assertNotNull(featureCollection.getFeatures());

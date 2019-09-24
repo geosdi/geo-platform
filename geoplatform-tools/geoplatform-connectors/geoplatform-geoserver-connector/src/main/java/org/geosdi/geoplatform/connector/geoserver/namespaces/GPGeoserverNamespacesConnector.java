@@ -109,6 +109,7 @@ public abstract class GPGeoserverNamespacesConnector extends GPGeoserverCoverage
     public GPGeoserverNamespacesRequest createNamespacesRequest() {
         switch (version) {
             case V215x:
+            case V216x:
                 return new GPGeoserverNamespacesRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");
@@ -122,6 +123,7 @@ public abstract class GPGeoserverNamespacesConnector extends GPGeoserverCoverage
     public GPGeoserverNamespaceRequest createNamespaceRequest() {
         switch (version) {
             case V215x:
+            case V216x:
                 return new GPGeoserverNamespaceRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");

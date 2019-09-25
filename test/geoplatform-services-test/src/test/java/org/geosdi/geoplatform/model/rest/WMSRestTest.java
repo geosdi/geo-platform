@@ -37,7 +37,10 @@ package org.geosdi.geoplatform.model.rest;
 import org.geosdi.geoplatform.model.soap.ServiceWMSTest;
 import org.geosdi.geoplatform.request.RequestByID;
 import org.geosdi.geoplatform.response.ServerDTO;
-import org.geosdi.geoplatform.services.request.*;
+import org.geosdi.geoplatform.services.request.GPWMSGetFeatureInfoElement;
+import org.geosdi.geoplatform.services.request.GPWMSGetFeatureInfoRequest;
+import org.geosdi.geoplatform.services.request.WMSGetFeatureInfoBoundingBox;
+import org.geosdi.geoplatform.services.request.WMSGetFeatureInfoPoint;
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Ignore;
@@ -52,6 +55,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import javax.ws.rs.core.Response;
 import java.util.Arrays;
 
+import static java.util.stream.Collectors.toSet;
+import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.services.request.WMSGetFeatureInfoResponseFormat.FEATURE_STORE;
 
 /**
@@ -109,7 +114,7 @@ public class WMSRestTest extends ServiceWMSTest {
         wmsGetFeatureInfoRequest.setFormat(FEATURE_STORE);
         GPWMSGetFeatureInfoElement wmsGetFeatureInfoElement = new GPWMSGetFeatureInfoElement();
         wmsGetFeatureInfoElement.setWmsServerURL("http://150.145.141.180/geoserver/wms");
-        wmsGetFeatureInfoElement.setLayers(Arrays.asList("topp:states", "topp:states"));
+        wmsGetFeatureInfoElement.setLayers(of("topp:states", "topp:states").collect(toSet()));
         wmsGetFeatureInfoRequest.setWmsFeatureInfoElements(Arrays.asList(wmsGetFeatureInfoElement));
         Response response = gpWMSClient.wmsGetFeatureInfo(wmsGetFeatureInfoRequest);
         Assert.assertTrue(response.getStatus() == 200);

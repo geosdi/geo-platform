@@ -37,9 +37,12 @@ package org.geosdi.geoplatform.support.jackson.jts.serializer.geometry.writer;
 
 import org.geosdi.geoplatform.support.jackson.jts.adapter.JTSMultiPointAdapter;
 import org.geosdi.geoplatform.support.jackson.jts.serializer.geometry.GeoJsonGeometryType;
-import org.locationtech.jts.geom.MultiPoint;
 
+import javax.annotation.Nonnull;
+
+import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.TRUE;
+import static javax.annotation.meta.When.NEVER;
 import static org.geosdi.geoplatform.support.jackson.jts.serializer.geometry.GeoJsonGeometryType.GeoJsonGeometryEnumType.MULTI_POINT;
 import static org.geosdi.geoplatform.support.jackson.jts.serializer.geometry.writer.bridge.implementor.GeometryWriterImplementor.GeometryWriterImplementorKey.forClass;
 
@@ -67,9 +70,9 @@ public class MultiPointWriter extends BaseWriter<JTSMultiPointAdapter, org.geojs
      * @throws Exception
      */
     @Override
-    public org.geojson.MultiPoint buildGeoJsonGeometry(JTSMultiPointAdapter geometryAdapter) throws Exception {
-        logger.trace(":::::::::::::::::::Called {}#buildGeoJsonGeometry for JTS_GEOMETRY : {}\n",
-                super.toString(), geometryAdapter);
+    public org.geojson.MultiPoint buildGeoJsonGeometry(@Nonnull(when = NEVER) JTSMultiPointAdapter geometryAdapter) throws Exception {
+        checkArgument(geometryAdapter != null, "The Parameter geometryAdapter must not be null.");
+        logger.trace(":::::::::::::::::::Called {}#buildGeoJsonGeometry for JTS_GEOMETRY : {}\n", super.toString(), geometryAdapter);
         org.geojson.MultiPoint multiPoint = new org.geojson.MultiPoint();
         multiPoint.setCoordinates(COORDINATE_WRITER.buildMultiPointCoordinate(geometryAdapter));
         return multiPoint;

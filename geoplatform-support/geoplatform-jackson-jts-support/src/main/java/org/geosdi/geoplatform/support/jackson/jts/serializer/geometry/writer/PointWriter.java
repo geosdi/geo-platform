@@ -38,7 +38,11 @@ package org.geosdi.geoplatform.support.jackson.jts.serializer.geometry.writer;
 import org.geosdi.geoplatform.support.jackson.jts.adapter.JTSPointAdapter;
 import org.geosdi.geoplatform.support.jackson.jts.serializer.geometry.GeoJsonGeometryType;
 
+import javax.annotation.Nonnull;
+
+import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.TRUE;
+import static javax.annotation.meta.When.NEVER;
 import static org.geosdi.geoplatform.support.jackson.jts.serializer.geometry.GeoJsonGeometryType.GeoJsonGeometryEnumType.POINT;
 import static org.geosdi.geoplatform.support.jackson.jts.serializer.geometry.writer.bridge.implementor.GeometryWriterImplementor.GeometryWriterImplementorKey.forClass;
 
@@ -66,9 +70,9 @@ public class PointWriter extends BaseWriter<JTSPointAdapter, org.geojson.Point> 
      * @throws Exception
      */
     @Override
-    public org.geojson.Point buildGeoJsonGeometry(JTSPointAdapter geometryAdapter) throws Exception {
-        logger.trace(":::::::::::::::::::Called {}#buildGeoJsonGeometry for JTS_GEOMETRY : {}\n",
-                super.toString(), geometryAdapter);
+    public org.geojson.Point buildGeoJsonGeometry(@Nonnull(when = NEVER) JTSPointAdapter geometryAdapter) throws Exception {
+        checkArgument(geometryAdapter != null, "The Parameter geometryAdapter must not be null.");
+        logger.trace(":::::::::::::::::::Called {}#buildGeoJsonGeometry for JTS_GEOMETRY : {}\n", super.toString(), geometryAdapter);
         return new org.geojson.Point(COORDINATE_WRITER.buildPointCoordinate(geometryAdapter.getCoordinate()));
     }
 

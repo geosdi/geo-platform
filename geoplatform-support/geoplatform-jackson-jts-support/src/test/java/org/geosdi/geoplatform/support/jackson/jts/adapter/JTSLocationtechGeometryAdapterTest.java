@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.support.jackson.jts.adapter;
 
 import org.geosdi.geoplatform.support.jackson.jts.adapter.coordinate.GPJTSCoordinateAdapter;
-import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.locationtech.jts.geom.*;
@@ -44,6 +43,7 @@ import org.locationtech.jts.io.WKTReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
@@ -64,8 +64,8 @@ public class JTSLocationtechGeometryAdapterTest {
         Point point = geometryFactory.createPoint(ptc);
         point.setSRID(4326);
         GPJTSGeometryAdapter pointAdapter = JTSGeometryAdapter.adapt(point);
-        Assert.assertTrue(pointAdapter instanceof JTSPointAdapter);
-        Assert.assertTrue(pointAdapter.getSRID() == 4326);
+        assertTrue(pointAdapter instanceof JTSPointAdapter);
+        assertTrue(pointAdapter.getSRID() == 4326);
         GPJTSCoordinateAdapter coordinateAdapter = pointAdapter.getCoordinate();
         logger.info("########################COORDINATE[x : {} - y : {}]\n", coordinateAdapter.x(), coordinateAdapter.y());
     }
@@ -84,9 +84,9 @@ public class JTSLocationtechGeometryAdapterTest {
         LineString lineString = geometryFactory.createLineString(lsc);
         lineString.setSRID(4326);
         GPJTSGeometryAdapter lineStringAdapter = JTSGeometryAdapter.adapt(lineString);
-        Assert.assertTrue(lineStringAdapter instanceof JTSLineStringAdapter);
-        Assert.assertTrue(lineStringAdapter.getSRID() == 4326);
-        Assert.assertTrue(lineStringAdapter.getCoordinates().length == 8);
+        assertTrue(lineStringAdapter instanceof JTSLineStringAdapter);
+        assertTrue(lineStringAdapter.getSRID() == 4326);
+        assertTrue(lineStringAdapter.getCoordinates().length == 8);
     }
 
     @Test
@@ -105,9 +105,9 @@ public class JTSLocationtechGeometryAdapterTest {
         LinearRing linearRing = geometryFactory.createLinearRing(lrc);
         linearRing.setSRID(4326);
         GPJTSGeometryAdapter linearRingAdapter = JTSGeometryAdapter.adapt(linearRing);
-        Assert.assertTrue(linearRingAdapter instanceof JTSLinearRingAdapter);
-        Assert.assertTrue(linearRingAdapter.getSRID() == 4326);
-        Assert.assertTrue(linearRingAdapter.getCoordinates().length == 10);
+        assertTrue(linearRingAdapter instanceof JTSLinearRingAdapter);
+        assertTrue(linearRingAdapter.getSRID() == 4326);
+        assertTrue(linearRingAdapter.getCoordinates().length == 10);
     }
 
     @Test
@@ -116,11 +116,11 @@ public class JTSLocationtechGeometryAdapterTest {
                 + " 45 45, 35 10), (20 30, 35 35, 30 20, 20 30))");
         polygon.setSRID(4326);
         GPJTSGeometryAdapter geometryAdapter = JTSGeometryAdapter.adapt(polygon);
-        Assert.assertTrue(geometryAdapter instanceof JTSPolygonAdapter);
-        Assert.assertTrue(geometryAdapter.getSRID() == 4326);
+        assertTrue(geometryAdapter instanceof JTSPolygonAdapter);
+        assertTrue(geometryAdapter.getSRID() == 4326);
         JTSPolygonAdapter polygonAdapter = (JTSPolygonAdapter) geometryAdapter;
-        Assert.assertTrue(polygonAdapter.getNumInteriorRing() == 1);
-        Assert.assertTrue(polygonAdapter.getInteriorRingN(0) instanceof JTSLineStringAdapter);
+        assertTrue(polygonAdapter.getNumInteriorRing() == 1);
+        assertTrue(polygonAdapter.getInteriorRingN(0) instanceof JTSLineStringAdapter);
     }
 
     @Test
@@ -129,14 +129,14 @@ public class JTSLocationtechGeometryAdapterTest {
                 + "(20 20), (30 10))");
         multiPoint.setSRID(4326);
         GPJTSGeometryAdapter geometryAdapter = JTSGeometryAdapter.adapt(multiPoint);
-        Assert.assertTrue(geometryAdapter instanceof JTSMultiPointAdapter);
-        Assert.assertTrue(geometryAdapter.getSRID() == 4326);
+        assertTrue(geometryAdapter instanceof JTSMultiPointAdapter);
+        assertTrue(geometryAdapter.getSRID() == 4326);
         JTSMultiPointAdapter multiPointAdapter = (JTSMultiPointAdapter) geometryAdapter;
-        Assert.assertTrue(multiPointAdapter.getNumGeometries() == 4);
-        Assert.assertTrue(multiPointAdapter.getGeometryN(0) instanceof JTSPointAdapter);
-        Assert.assertTrue(multiPointAdapter.getGeometryN(1) instanceof JTSPointAdapter);
-        Assert.assertTrue(multiPointAdapter.getGeometryN(2) instanceof JTSPointAdapter);
-        Assert.assertTrue(multiPointAdapter.getGeometryN(3) instanceof JTSPointAdapter);
+        assertTrue(multiPointAdapter.getNumGeometries() == 4);
+        assertTrue(multiPointAdapter.getGeometryN(0) instanceof JTSPointAdapter);
+        assertTrue(multiPointAdapter.getGeometryN(1) instanceof JTSPointAdapter);
+        assertTrue(multiPointAdapter.getGeometryN(2) instanceof JTSPointAdapter);
+        assertTrue(multiPointAdapter.getGeometryN(3) instanceof JTSPointAdapter);
     }
 
     @Test
@@ -145,12 +145,12 @@ public class JTSLocationtechGeometryAdapterTest {
                 + "(40 40, 30 30, 40 20, 30 10))");
         multiLineString.setSRID(4326);
         GPJTSGeometryAdapter geometryAdapter = JTSGeometryAdapter.adapt(multiLineString);
-        Assert.assertTrue(geometryAdapter instanceof JTSMultiLinestringAdapter);
-        Assert.assertTrue(geometryAdapter.getSRID() == 4326);
+        assertTrue(geometryAdapter instanceof JTSMultiLinestringAdapter);
+        assertTrue(geometryAdapter.getSRID() == 4326);
         JTSMultiLinestringAdapter multiLinestringAdapter = (JTSMultiLinestringAdapter) geometryAdapter;
-        Assert.assertTrue(multiLinestringAdapter.getNumGeometries() == 2);
-        Assert.assertTrue(multiLinestringAdapter.getGeometryN(0) instanceof JTSLineStringAdapter);
-        Assert.assertTrue(multiLinestringAdapter.getGeometryN(1) instanceof JTSLineStringAdapter);
+        assertTrue(multiLinestringAdapter.getNumGeometries() == 2);
+        assertTrue(multiLinestringAdapter.getGeometryN(0) instanceof JTSLineStringAdapter);
+        assertTrue(multiLinestringAdapter.getGeometryN(1) instanceof JTSLineStringAdapter);
     }
 
     @Test
@@ -160,12 +160,12 @@ public class JTSLocationtechGeometryAdapterTest {
                 + "10 10, 10 30, 20 35), (30 20, 20 25, 20 15, 30 20)))");
         multiPolygon.setSRID(4326);
         GPJTSGeometryAdapter geometryAdapter = JTSGeometryAdapter.adapt(multiPolygon);
-        Assert.assertTrue(geometryAdapter instanceof JTSMultiPolygonAdapter);
-        Assert.assertTrue(geometryAdapter.getSRID() == 4326);
+        assertTrue(geometryAdapter instanceof JTSMultiPolygonAdapter);
+        assertTrue(geometryAdapter.getSRID() == 4326);
         JTSMultiPolygonAdapter multiPolygonAdapter = (JTSMultiPolygonAdapter) geometryAdapter;
-        Assert.assertTrue(multiPolygonAdapter.getNumGeometries() == 2);
-        Assert.assertTrue(multiPolygonAdapter.getGeometryN(0) instanceof JTSPolygonAdapter);
-        Assert.assertTrue(multiPolygonAdapter.getGeometryN(1) instanceof JTSPolygonAdapter);
+        assertTrue(multiPolygonAdapter.getNumGeometries() == 2);
+        assertTrue(multiPolygonAdapter.getGeometryN(0) instanceof JTSPolygonAdapter);
+        assertTrue(multiPolygonAdapter.getGeometryN(1) instanceof JTSPolygonAdapter);
     }
 
     @Test
@@ -177,17 +177,17 @@ public class JTSLocationtechGeometryAdapterTest {
                 + " 7 12, 9 11, 11 12, 13 11, 13 9, 11 7, 7 7))");
         geometryCollection.setSRID(4326);
         GPJTSGeometryAdapter geometryAdapter = JTSGeometryAdapter.adapt(geometryCollection);
-        Assert.assertTrue(geometryAdapter instanceof JTSGeometryCollectionAdapter);
-        Assert.assertTrue(geometryAdapter.getSRID() == 4326);
+        assertTrue(geometryAdapter instanceof JTSGeometryCollectionAdapter);
+        assertTrue(geometryAdapter.getSRID() == 4326);
         JTSGeometryCollectionAdapter geometryCollectionAdapter = (JTSGeometryCollectionAdapter) geometryAdapter;
-        Assert.assertTrue(geometryCollectionAdapter.getNumGeometries() == 7);
-        Assert.assertTrue(geometryCollectionAdapter.getGeometryN(0) instanceof JTSPointAdapter);
-        Assert.assertTrue(geometryCollectionAdapter.getGeometryN(1) instanceof JTSPointAdapter);
-        Assert.assertTrue(geometryCollectionAdapter.getGeometryN(2) instanceof JTSPointAdapter);
-        Assert.assertTrue(geometryCollectionAdapter.getGeometryN(3) instanceof JTSPointAdapter);
-        Assert.assertTrue(geometryCollectionAdapter.getGeometryN(4) instanceof JTSLineStringAdapter);
-        Assert.assertTrue(geometryCollectionAdapter.getGeometryN(5) instanceof JTSPolygonAdapter);
-        Assert.assertTrue(geometryCollectionAdapter.getGeometryN(6) instanceof JTSLinearRingAdapter);
+        assertTrue(geometryCollectionAdapter.getNumGeometries() == 7);
+        assertTrue(geometryCollectionAdapter.getGeometryN(0) instanceof JTSPointAdapter);
+        assertTrue(geometryCollectionAdapter.getGeometryN(1) instanceof JTSPointAdapter);
+        assertTrue(geometryCollectionAdapter.getGeometryN(2) instanceof JTSPointAdapter);
+        assertTrue(geometryCollectionAdapter.getGeometryN(3) instanceof JTSPointAdapter);
+        assertTrue(geometryCollectionAdapter.getGeometryN(4) instanceof JTSLineStringAdapter);
+        assertTrue(geometryCollectionAdapter.getGeometryN(5) instanceof JTSPolygonAdapter);
+        assertTrue(geometryCollectionAdapter.getGeometryN(6) instanceof JTSLinearRingAdapter);
     }
 
     @Test
@@ -238,15 +238,15 @@ public class JTSLocationtechGeometryAdapterTest {
                 linearRing, lineString, polygon, multiPoint, multiPolygon, geometryCollection}, geometryFactory);
         geometryCollectionComplex.setSRID(4326);
         GPJTSGeometryAdapter geometryAdapter = JTSGeometryAdapter.adapt(geometryCollectionComplex);
-        Assert.assertTrue(geometryAdapter instanceof JTSGeometryCollectionAdapter);
-        Assert.assertTrue(geometryAdapter.getSRID() == 4326);
-        Assert.assertTrue(geometryAdapter.getNumGeometries() == 7);
-        Assert.assertTrue(geometryAdapter.getGeometryN(0) instanceof JTSPointAdapter);
-        Assert.assertTrue(geometryAdapter.getGeometryN(1) instanceof JTSLinearRingAdapter);
-        Assert.assertTrue(geometryAdapter.getGeometryN(2) instanceof JTSLineStringAdapter);
-        Assert.assertTrue(geometryAdapter.getGeometryN(3) instanceof JTSPolygonAdapter);
-        Assert.assertTrue(geometryAdapter.getGeometryN(4) instanceof JTSMultiPointAdapter);
-        Assert.assertTrue(geometryAdapter.getGeometryN(5) instanceof JTSMultiPolygonAdapter);
-        Assert.assertTrue(geometryAdapter.getGeometryN(6) instanceof JTSGeometryCollectionAdapter);
+        assertTrue(geometryAdapter instanceof JTSGeometryCollectionAdapter);
+        assertTrue(geometryAdapter.getSRID() == 4326);
+        assertTrue(geometryAdapter.getNumGeometries() == 7);
+        assertTrue(geometryAdapter.getGeometryN(0) instanceof JTSPointAdapter);
+        assertTrue(geometryAdapter.getGeometryN(1) instanceof JTSLinearRingAdapter);
+        assertTrue(geometryAdapter.getGeometryN(2) instanceof JTSLineStringAdapter);
+        assertTrue(geometryAdapter.getGeometryN(3) instanceof JTSPolygonAdapter);
+        assertTrue(geometryAdapter.getGeometryN(4) instanceof JTSMultiPointAdapter);
+        assertTrue(geometryAdapter.getGeometryN(5) instanceof JTSMultiPolygonAdapter);
+        assertTrue(geometryAdapter.getGeometryN(6) instanceof JTSGeometryCollectionAdapter);
     }
 }

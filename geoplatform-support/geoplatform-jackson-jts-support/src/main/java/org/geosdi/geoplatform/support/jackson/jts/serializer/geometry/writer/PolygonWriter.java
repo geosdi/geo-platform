@@ -37,9 +37,12 @@ package org.geosdi.geoplatform.support.jackson.jts.serializer.geometry.writer;
 
 import org.geosdi.geoplatform.support.jackson.jts.adapter.JTSPolygonAdapter;
 import org.geosdi.geoplatform.support.jackson.jts.serializer.geometry.GeoJsonGeometryType;
-import org.locationtech.jts.geom.Polygon;
 
+import javax.annotation.Nonnull;
+
+import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.TRUE;
+import static javax.annotation.meta.When.NEVER;
 import static org.geosdi.geoplatform.support.jackson.jts.serializer.geometry.GeoJsonGeometryType.GeoJsonGeometryEnumType.POLYGON;
 import static org.geosdi.geoplatform.support.jackson.jts.serializer.geometry.writer.bridge.implementor.GeometryWriterImplementor.GeometryWriterImplementorKey.forClass;
 
@@ -67,7 +70,8 @@ public class PolygonWriter extends BaseWriter<JTSPolygonAdapter, org.geojson.Pol
      * @throws Exception
      */
     @Override
-    public org.geojson.Polygon buildGeoJsonGeometry(JTSPolygonAdapter geometryAdapter) throws Exception {
+    public org.geojson.Polygon buildGeoJsonGeometry(@Nonnull(when = NEVER) JTSPolygonAdapter geometryAdapter) throws Exception {
+        checkArgument(geometryAdapter != null, "The Parameter geometryAdapter must not be null.");
         org.geojson.Polygon polygon = new org.geojson.Polygon();
         polygon.setExteriorRing(COORDINATE_WRITER.buildPolygonExteriorRing(geometryAdapter));
         if (geometryAdapter.getNumInteriorRing() > 0)

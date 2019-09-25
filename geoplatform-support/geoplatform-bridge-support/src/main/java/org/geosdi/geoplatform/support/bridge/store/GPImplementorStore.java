@@ -37,9 +37,12 @@ package org.geosdi.geoplatform.support.bridge.store;
 
 import org.geosdi.geoplatform.support.bridge.implementor.GPImplementor;
 
+import javax.annotation.Nonnull;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Set;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -52,7 +55,7 @@ public interface GPImplementorStore<I extends GPImplementor<?>> extends Serializ
      * @return {@link I}
      * @throws Exception
      */
-    I getImplementorByKey(GPImplementor.GPImplementorKey key) throws Exception;
+    I getImplementorByKey(@Nonnull(when = NEVER) GPImplementor.GPImplementorKey key) throws Exception;
 
     /**
      * @return {@link Set<I>}

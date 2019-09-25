@@ -40,6 +40,10 @@ import org.geosdi.geoplatform.support.bridge.store.GPImplementorStore;
 import org.geosdi.geoplatform.support.jackson.jts.adapter.GPJTSGeometryAdapter;
 import org.geosdi.geoplatform.support.jackson.jts.serializer.geometry.writer.bridge.implementor.GeometryWriterImplementor;
 
+import javax.annotation.Nonnull;
+
+import static javax.annotation.meta.When.NEVER;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -51,5 +55,5 @@ public interface GPGeometryWriterImplementorStore extends GPImplementorStore<Geo
      * @return {@link GeometryWriterImplementor<? extends GPJTSGeometryAdapter, ? extends GeoJsonObject>}
      * @throws Exception
      */
-    GeometryWriterImplementor<? extends GPJTSGeometryAdapter, ? extends GeoJsonObject> getImplementorByKey(Class<?> key) throws Exception;
+    GeometryWriterImplementor<? extends GPJTSGeometryAdapter, ? extends GeoJsonObject> getImplementorByKey(@Nonnull(when = NEVER) Class<?> key) throws Exception;
 }

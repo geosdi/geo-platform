@@ -5,7 +5,7 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import javax.validation.Payload;
 import java.lang.annotation.*;
-import java.util.List;
+import java.util.Set;
 
 import static java.lang.Boolean.FALSE;
 
@@ -34,11 +34,11 @@ public @interface GPWMSGetFeatureInfoLayersAllowed {
      */
     Class<? extends Payload>[] payload() default {};
 
-    class GPWMSGetFeatureInfoLayersAllowedValidator implements ConstraintValidator<GPWMSGetFeatureInfoLayersAllowed, List<String>> {
+    class GPWMSGetFeatureInfoLayersAllowedValidator implements ConstraintValidator<GPWMSGetFeatureInfoLayersAllowed, Set<String>> {
 
         /**
          * Initializes the validator in preparation for
-         * {@link #isValid(Object, ConstraintValidatorContext)} calls.
+         * {@link #isValid(Set, ConstraintValidatorContext)} calls.
          * The constraint annotation for a given constraint declaration
          * is passed.
          * <p>
@@ -65,7 +65,7 @@ public @interface GPWMSGetFeatureInfoLayersAllowed {
          * @return {@code false} if {@code value} does not pass the constraint
          */
         @Override
-        public boolean isValid(List<String> value, ConstraintValidatorContext context) {
+        public boolean isValid(Set<String> value, ConstraintValidatorContext context) {
             if (value == null) {
                 context.disableDefaultConstraintViolation();
                 context.buildConstraintViolationWithTemplate("{wms_get_feature_info_layers_allowed_not_null}")

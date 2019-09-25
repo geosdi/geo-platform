@@ -16,7 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import javax.annotation.Resource;
 import java.util.Locale;
 
-import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toSet;
 import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.wms.request.validator.GPWMSRequestValidatorTest.createWMSGetFeatureRequest;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
@@ -214,7 +214,7 @@ public class GPWMSRequestValidatorConfigTest {
     @Test
     public void p_wmsGetFeatureInfoElementOneLayerIsNullTest() throws Exception {
         GPWMSGetFeatureInfoRequest request = createWMSGetFeatureRequest();
-        request.getWmsFeatureInfoElements().get(0).setLayers(of("", null, "retenatura:zsc").collect(toList()));
+        request.getWmsFeatureInfoElements().get(0).setLayers(of("", null, "retenatura:zsc").collect(toSet()));
         String itMessage = wmsRequestValidator.validate(request, Locale.ITALIAN);
         Assert.assertNotNull(itMessage);
         logger.info("#########################WMS_GET_FEATURE_INFO_ELEMENT_LAYERS_IT_IS_NULL_MESSAGE : {}\n", itMessage);

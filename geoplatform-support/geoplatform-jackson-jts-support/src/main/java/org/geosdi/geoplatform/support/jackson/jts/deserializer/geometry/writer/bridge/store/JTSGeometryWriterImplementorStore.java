@@ -47,8 +47,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.*;
+import java.util.function.Function;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static java.util.Collections.unmodifiableCollection;
+import static java.util.Collections.unmodifiableSet;
 import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.toMap;
 import static org.geosdi.geoplatform.support.jackson.jts.deserializer.geometry.writer.bridge.implementor.JTSGeometryWriterImplementor.JTSGeometryWriterImplementorKey.forClass;
@@ -70,7 +73,7 @@ public class JTSGeometryWriterImplementorStore implements GPJTSGeometryWriterImp
         jtsGeometryWriterImplementors = finder.getValidImplementors()
                 .stream()
                 .filter(Objects::nonNull)
-                .collect(toMap(k -> k.getKey(), identity()));
+                .collect(toMap((Function<JTSGeometryWriterImplementor<? extends GeoJsonObject, ? extends Geometry>, Object>) GPImplementor::getKey, identity()));
         logger.debug("@@@@@@@@@@@@@@@@@@@@@@{} up with {} values.\n\n", JTSGeometryWriterImplementorStore.class.getSimpleName(),
                 jtsGeometryWriterImplementors.size());
     }
@@ -104,7 +107,7 @@ public class JTSGeometryWriterImplementorStore implements GPJTSGeometryWriterImp
      */
     @Override
     public Set<JTSGeometryWriterImplementor<? extends GeoJsonObject, ? extends Geometry>> getAllImplementors() {
-        return Collections.unmodifiableSet(finder.getAllImplementors());
+        return unmodifiableSet(finder.getAllImplementors());
     }
 
     /**
@@ -112,6 +115,6 @@ public class JTSGeometryWriterImplementorStore implements GPJTSGeometryWriterImp
      */
     @Override
     public Collection<JTSGeometryWriterImplementor<? extends GeoJsonObject, ? extends Geometry>> getValidImplementors() {
-        return Collections.unmodifiableCollection(jtsGeometryWriterImplementors.values());
+        return unmodifiableCollection(jtsGeometryWriterImplementors.values());
     }
 }

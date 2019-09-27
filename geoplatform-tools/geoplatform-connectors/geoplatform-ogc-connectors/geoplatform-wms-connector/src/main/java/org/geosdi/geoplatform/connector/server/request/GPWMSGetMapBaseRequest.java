@@ -1,6 +1,6 @@
 package org.geosdi.geoplatform.connector.server.request;
 
-import java.util.Set;
+import java.util.Collection;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -15,9 +15,9 @@ public interface GPWMSGetMapBaseRequest extends GPWMSKeyValuePair {
     <BoundingBox extends GPWMSBoundingBox> BoundingBox getBoundingBox();
 
     /**
-     * @return {@link Set<String>}
+     * @return {@link Collection<String>}
      */
-    Set<String> getLayers();
+    Collection<String> getLayers();
 
     /**
      * @return {@link String}

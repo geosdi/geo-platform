@@ -1,15 +1,16 @@
 package org.geosdi.geoplatform.wms.request.mapper;
 
+import org.geosdi.geoplatform.services.request.GPWMSGetFeatureInfoElement;
 import org.geosdi.geoplatform.services.request.GPWMSGetFeatureInfoRequest;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
-import org.junit.runners.MethodSorters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.StringReader;
+import java.util.Arrays;
 import java.util.stream.Stream;
 
 import static java.io.File.separator;
@@ -17,12 +18,13 @@ import static java.util.stream.Collectors.joining;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
 import static org.geosdi.geoplatform.wms.request.validator.GPWMSRequestValidatorTest.createWMSGetFeatureRequest;
+import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@FixMethodOrder(value = MethodSorters.NAME_ASCENDING)
+@FixMethodOrder(value = NAME_ASCENDING)
 public class GPWMSRequestMapperTest {
 
     private static final Logger logger = LoggerFactory.getLogger(GPWMSRequestMapperTest.class);
@@ -60,31 +62,30 @@ public class GPWMSRequestMapperTest {
                         "  },\n" +
                         "  \"wmsFeatureInfoElements\" : [ {\n" +
                         "    \"wmsServerURL\" : \"http://150.145.141.180/geoserver/wms\",\n" +
-                        "    \"layers\" : [ \"topp:states\", \"siti_protetti:zsc\", \"retenatura:zsc\" ]\n" +
+                        "    \"layers\" : [ \"topp:states\", \"topp:states\", \"siti_protetti:zsc\", \"retenatura:zsc\", \"retenatura:zsc\" ]\n" +
                         "  }, {\n" +
                         "    \"wmsServerURL\" : \"http://150.145.141.180/geoserver/wms\",\n" +
-                        "    \"layers\" : [ \"topp:states\", \"siti_protetti:zsc\", \"retenatura:zsc\" ]\n" +
+                        "    \"layers\" : [ \"topp:states\", \"topp:states\", \"siti_protetti:zsc\", \"retenatura:zsc\", \"retenatura:zsc\" ]\n" +
                         "  } ],\n" +
                         "  \"format\" : \"GEOJSON\"\n" +
                         "}"), GPWMSGetFeatureInfoRequest.class);
-        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@GP_WMS_GET_FEATURE_INFO_REQUEST_FROM_STRING : {}\n",
-                wmsGetFeatureInfoRequest);
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@GP_WMS_GET_FEATURE_INFO_REQUEST_FROM_STRING : {}\n", wmsGetFeatureInfoRequest);
+        for (GPWMSGetFeatureInfoElement wmsGetFeatureInfoElement : wmsGetFeatureInfoRequest.getWmsFeatureInfoElements()) {
+            logger.info("{}\n", Arrays.toString(wmsGetFeatureInfoElement.toLayers()));
+        }
     }
 
     @Test
     public void c_writeGPWMSGetFeatureInfoRequestAsFileTest() throws Exception {
-        jacksonSupport.getDefaultMapper().writeValue(new File("./target/GPWMSGetFeatureInfoRequest.json"),
-                createWMSGetFeatureRequest());
+        jacksonSupport.getDefaultMapper().writeValue(new File("./target/GPWMSGetFeatureInfoRequest.json"), createWMSGetFeatureRequest());
     }
 
     @Test
     public void d_readGPWMSGetFeatureInfoRequestFromFileTest() throws Exception {
-        String filePath = Stream.of(new File("./").getCanonicalPath(), "src", "test", "resources",
-                "files", "GPWMSGetFeatureInfoRequest.json")
+        String filePath = Stream.of(new File("./").getCanonicalPath(), "src", "test", "resources", "files", "GPWMSGetFeatureInfoRequest.json")
                 .collect(joining(separator));
         GPWMSGetFeatureInfoRequest wmsGetFeatureInfoRequest = jacksonSupport.getDefaultMapper()
                 .readValue(new File(filePath), GPWMSGetFeatureInfoRequest.class);
-        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@GP_WMS_GET_FEATURE_INFO_REQUEST_FROM_FILE : {}\n",
-                wmsGetFeatureInfoRequest);
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@GP_WMS_GET_FEATURE_INFO_REQUEST_FROM_FILE : {}\n", wmsGetFeatureInfoRequest);
     }
 }

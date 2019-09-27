@@ -9,7 +9,7 @@ import org.geosdi.geoplatform.services.request.annotation.GPWMSGetFeatureInfoLay
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -27,12 +27,12 @@ public class GPWMSGetFeatureInfoElement implements Serializable {
     @NotNull(message = "{wms_server_url_not_null}")
     private String wmsServerURL;
     @GPWMSGetFeatureInfoLayersAllowed
-    private Set<String> layers;
+    private List<String> layers;
 
     /**
      * @return {@link String[]}
      */
     public String[] toLayers() {
-        return (this.layers != null) ? this.layers.stream().toArray(s -> new String[s]) : new String[0];
+        return (this.layers != null) ? this.layers.stream().distinct().toArray(s -> new String[s]) : new String[0];
     }
 }

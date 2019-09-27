@@ -5,8 +5,11 @@ import lombok.ToString;
 import net.jcip.annotations.Immutable;
 
 import javax.annotation.Nonnull;
+import java.util.stream.Collectors;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Stream.of;
 import static javax.annotation.meta.When.NEVER;
 
 /**
@@ -32,8 +35,7 @@ public class WMSBoundingBox implements GPWMSBoundingBox {
      * @param theMaxx
      * @param theMaxy
      */
-    public WMSBoundingBox(@Nonnull(when = NEVER) Double theMinx, @Nonnull(when = NEVER) Double theMiny,
-            @Nonnull(when = NEVER) Double theMaxx, @Nonnull(when = NEVER) Double theMaxy) {
+    public WMSBoundingBox(@Nonnull(when = NEVER) Double theMinx, @Nonnull(when = NEVER) Double theMiny, @Nonnull(when = NEVER) Double theMaxx, @Nonnull(when = NEVER) Double theMaxy) {
         checkArgument(theMinx != null, "The Parameter minx must not be null.");
         checkArgument(theMiny != null, "The Parameter miny must not be null.");
         checkArgument(theMaxx != null, "The Parameter maxx must not be null.");
@@ -53,7 +55,7 @@ public class WMSBoundingBox implements GPWMSBoundingBox {
     }
 
     String toInternalWMSKeyValuePair() {
-        return "BBOX=".concat(this.minx.toString()).concat(",").concat(this.miny.toString())
-                .concat(",").concat(this.maxx.toString()).concat(",").concat(this.maxy.toString());
+        return of("BBOX", of(this.minx.toString(), this.miny.toString(), this.maxx.toString(), this.maxy.toString()).collect(joining(",")))
+                .collect(Collectors.joining("="));
     }
 }

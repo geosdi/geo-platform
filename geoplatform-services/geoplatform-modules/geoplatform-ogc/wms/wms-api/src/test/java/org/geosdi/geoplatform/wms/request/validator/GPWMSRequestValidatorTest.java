@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
 import java.util.Arrays;
 import java.util.Locale;
 
-import static java.util.stream.Collectors.toSet;
+import static java.util.stream.Collectors.toList;
 import static java.util.stream.Stream.of;
 
 /**
@@ -213,7 +213,7 @@ public class GPWMSRequestValidatorTest {
     @Test
     public void p_wmsGetFeatureInfoElementOneLayerIsNullTest() throws Exception {
         GPWMSGetFeatureInfoRequest request = createWMSGetFeatureRequest();
-        request.getWmsFeatureInfoElements().get(0).setLayers(of("", null, "retenatura:zsc").collect(toSet()));
+        request.getWmsFeatureInfoElements().get(0).setLayers(of("", null, "retenatura:zsc").collect(toList()));
         String itMessage = wmsRequestValidator.validate(request, Locale.ITALIAN);
         Assert.assertNotNull(itMessage);
         logger.info("#########################WMS_GET_FEATURE_INFO_ELEMENT_LAYERS_IT_IS_NULL_MESSAGE : {}\n", itMessage);
@@ -338,7 +338,7 @@ public class GPWMSRequestValidatorTest {
         return new GPWMSGetFeatureInfoElement() {
             {
                 super.setWmsServerURL("http://150.145.141.180/geoserver/wms");
-                super.setLayers(of("topp:states", "topp:states", "siti_protetti:zsc", "retenatura:zsc", "retenatura:zsc").collect(toSet()));
+                super.setLayers(of("topp:states", "topp:states", "siti_protetti:zsc", "retenatura:zsc", "retenatura:zsc").collect(toList()));
             }
         };
     }

@@ -9,7 +9,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static java.util.stream.Collectors.toSet;
+import static java.util.stream.Collectors.toList;
 import static java.util.stream.Stream.of;
 import static org.junit.Assert.assertTrue;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
@@ -33,9 +33,17 @@ public class WMSGetMapBaseRequestTest {
 
     @Test
     public void b_wmsGetMapKeyValuePairTest() throws Exception {
-        GPWMSGetMapBaseRequest wmsGetMapBaseRequest = new WMSGetMapBaseRequest(wmsBoundinBox, of("topp:states").collect(toSet()),
+        GPWMSGetMapBaseRequest wmsGetMapBaseRequest = new WMSGetMapBaseRequest(wmsBoundinBox, of("topp:states", null, "", "topp:states").collect(toList()),
                 "EPSG:4326", "550", "250");
         assertTrue(wmsGetMapBaseRequest.toWMSKeyValuePair().equalsIgnoreCase("LAYERS=topp:states&SRS=EPSG:4326&BBOX=-130.0,24.0,-66.0,50.0&WIDTH=550&HEIGHT=250"));
+        logger.info("#########################GET_MAP_KVP : {}\n", wmsGetMapBaseRequest.toWMSKeyValuePair());
+    }
+
+    @Test
+    public void c_wmsGetMapKeyValuePairTest() throws Exception {
+        GPWMSGetMapBaseRequest wmsGetMapBaseRequest = new WMSGetMapBaseRequest(wmsBoundinBox, of("topp:states", null, "", "topp:states", "siti_protetti:zsc", "retenatura:zsc", "retenatura:zsc").collect(toList()),
+                "EPSG:4326", "550", "250");
+        assertTrue(wmsGetMapBaseRequest.toWMSKeyValuePair().equalsIgnoreCase("LAYERS=topp:states,siti_protetti:zsc,retenatura:zsc&SRS=EPSG:4326&BBOX=-130.0,24.0,-66.0,50.0&WIDTH=550&HEIGHT=250"));
         logger.info("#########################GET_MAP_KVP : {}\n", wmsGetMapBaseRequest.toWMSKeyValuePair());
     }
 }

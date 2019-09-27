@@ -1128,7 +1128,7 @@
                         <dependency>
                             <groupId>org.ow2.asm</groupId>
                             <artifactId>asm</artifactId>
-                            <version>7.0-beta</version>
+                            <version>7.1</version>
                         </dependency>
                     </dependencies>
                 </plugin>
@@ -1205,7 +1205,7 @@
                     <dependency>
                         <groupId>org.ow2.asm</groupId>
                         <artifactId>asm</artifactId>
-                        <version>7.0-beta</version>
+                        <version>7.1</version>
                     </dependency>
                 </dependencies>
             </plugin>
@@ -1402,7 +1402,7 @@
 
         <aspectj-version>1.8.9</aspectj-version>
         <ubl-version>2.0</ubl-version>
-        <jetty-version>9.4.19.v20190610</jetty-version>
+        <jetty-version>9.4.20.v20190813</jetty-version>
 
         <postgresql-version>42.2.6</postgresql-version>
         <postgis-jdbc-version>2.3.0</postgis-jdbc-version>
@@ -1419,7 +1419,7 @@
         <gwtOpenlayersVersion>1.1.0</gwtOpenlayersVersion>
         
         <cas-version>3.2.1</cas-version>
-        <bcel.version>6.3.1</bcel.version>
+        <bcel.version>6.4.0</bcel.version>
         
         <jasypt-version>1.9.3</jasypt-version>
         

@@ -55,7 +55,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import javax.ws.rs.core.Response;
 import java.util.Arrays;
 
-import static java.util.stream.Collectors.toSet;
+import static java.util.stream.Collectors.toList;
 import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.services.request.WMSGetFeatureInfoResponseFormat.FEATURE_STORE;
 
@@ -114,7 +114,7 @@ public class WMSRestTest extends ServiceWMSTest {
         wmsGetFeatureInfoRequest.setFormat(FEATURE_STORE);
         GPWMSGetFeatureInfoElement wmsGetFeatureInfoElement = new GPWMSGetFeatureInfoElement();
         wmsGetFeatureInfoElement.setWmsServerURL("http://150.145.141.180/geoserver/wms");
-        wmsGetFeatureInfoElement.setLayers(of("topp:states", "topp:states").collect(toSet()));
+        wmsGetFeatureInfoElement.setLayers(of("topp:states", "topp:states").collect(toList()));
         wmsGetFeatureInfoRequest.setWmsFeatureInfoElements(Arrays.asList(wmsGetFeatureInfoElement));
         Response response = gpWMSClient.wmsGetFeatureInfo(wmsGetFeatureInfoRequest);
         Assert.assertTrue(response.getStatus() == 200);

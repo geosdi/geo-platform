@@ -45,6 +45,7 @@ public abstract class WMSGetFeatureInfoStaxReaderTest {
     protected static File file22;
     protected static File file23;
     protected static File file24;
+    protected static File file25;
 
     @BeforeClass
     public static void beforeClass() throws Exception {
@@ -75,5 +76,6 @@ public abstract class WMSGetFeatureInfoStaxReaderTest {
         file22 = new File(basePath.concat("volumetria.xml"));
         file23 = new File(basePath.concat("livelloEdifici1.xml"));
         file24 = new File(basePath.concat("masw.xml"));
+        file25 = new File(basePath.concat("CF_zonepianificazione_mappeinterattive.xml"));
     }
 }

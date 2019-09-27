@@ -196,13 +196,41 @@
             </modules>
         </profile>
         <profile>
-            <id>disable-javadoc-doclint</id>
+            <id>develop</id>
             <activation>
-                <jdk>[1.8,)</jdk>
+                <activeByDefault>false</activeByDefault>
             </activation>
-            <properties>
-                <additionalparam>-Xdoclint:none</additionalparam>
-            </properties>
+            <build>
+                <plugins>
+                    <!-- compilation -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <configuration>
+                            <source>${java.version}</source>
+                            <target>${java.version}</target>
+                            <debug>true</debug>
+                            <encoding>UTF-8</encoding>
+                            <!-- Added comment because we have some problem on Windows Vista -->
+                            <!--fork>true</fork-->
+                            <meminitial>64M</meminitial>
+                            <maxmem>1512M</maxmem>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>default-testCompile</id>
+                                <phase>test-compile</phase>
+                                <goals>
+                                    <goal>testCompile</goal>
+                                </goals>
+                                <configuration>
+                                    <skip>true</skip>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
         </profile>
     </profiles>
 

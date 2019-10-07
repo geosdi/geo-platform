@@ -4,6 +4,7 @@ import org.geojson.Feature;
 import org.geojson.GeoJsonObject;
 import org.geosdi.geoplatform.connector.parser.GPWMSGml2GeoJsonParser;
 import org.geosdi.geoplatform.connector.parser.WMSGml2GeoJsonParser;
+import org.geosdi.geoplatform.stax.reader.builder.GPXmlStreamReaderBuilder;
 
 import javax.annotation.Nonnull;
 import javax.xml.stream.XMLStreamReader;
@@ -21,8 +22,11 @@ public abstract class WMSGetFeatureInfoStaxReader extends GPGetFeatureGeoJsonSta
     private static final String FID_LOCAL_NAME = "fid";
     private static final GPWMSGml2GeoJsonParser GML2_GEO_JSON_PARSER = new WMSGml2GeoJsonParser();
 
-    WMSGetFeatureInfoStaxReader() {
-        super(FID_LOCAL_NAME);
+    /**
+     * @param theXmlStreamBuilder
+     */
+    WMSGetFeatureInfoStaxReader(@Nonnull(when = NEVER) GPXmlStreamReaderBuilder theXmlStreamBuilder) {
+        super(theXmlStreamBuilder, FID_LOCAL_NAME);
     }
 
     /**

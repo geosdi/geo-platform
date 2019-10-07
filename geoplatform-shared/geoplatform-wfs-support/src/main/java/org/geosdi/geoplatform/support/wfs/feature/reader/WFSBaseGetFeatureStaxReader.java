@@ -3,6 +3,7 @@ package org.geosdi.geoplatform.support.wfs.feature.reader;
 import org.geosdi.geoplatform.connector.wfs.response.GeometryAttributeDTO;
 import org.geosdi.geoplatform.connector.wfs.response.LayerSchemaDTO;
 import org.geosdi.geoplatform.stax.reader.AbstractStaxStreamReader;
+import org.geosdi.geoplatform.stax.reader.builder.GPXmlStreamReaderBuilder;
 
 import javax.annotation.Nonnull;
 import javax.xml.stream.XMLStreamReader;
@@ -19,7 +20,12 @@ public abstract class WFSBaseGetFeatureStaxReader<F, G, R> extends AbstractStaxS
 
     protected final LayerSchemaDTO layerSchema;
 
-    protected WFSBaseGetFeatureStaxReader(@Nonnull(when = NEVER) LayerSchemaDTO theLayerSchema) {
+    /**
+     * @param theXmlStreamBuilder
+     * @param theLayerSchema
+     */
+    protected WFSBaseGetFeatureStaxReader(@Nonnull(when = NEVER) GPXmlStreamReaderBuilder theXmlStreamBuilder, @Nonnull(when = NEVER) LayerSchemaDTO theLayerSchema) {
+        super(theXmlStreamBuilder);
         checkArgument(theLayerSchema != null, "The LayerSchema must not be null.");
         this.layerSchema = theLayerSchema;
     }

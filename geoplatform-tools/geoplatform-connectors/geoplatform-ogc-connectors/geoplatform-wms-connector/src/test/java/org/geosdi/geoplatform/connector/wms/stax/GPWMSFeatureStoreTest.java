@@ -197,4 +197,25 @@ public class GPWMSFeatureStoreTest extends WMSGetFeatureInfoStaxReaderTest {
         logger.info("#######################FEATURE_STORE_MASW : {}\n", wmsFeatureStore);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File("./target/StoreMasw.json"), wmsFeatureStore);
     }
+
+    @Test
+    public void z_b_wmsFeatureStoreReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxReader.readAsStore(file25);
+        logger.info("#######################FEATURE_STORE_CF_zonepianificazione_mappeinterattive : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File("./target/StoreCF_zonepianificazione_mappeinterattive.json"), wmsFeatureStore);
+    }
+
+    @Test
+    public void z_c_wmsFeatureStoreReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxReader.readAsStore(file26);
+        logger.info("#######################FEATURE_STORE_PianoCampiFlegrei : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File("./target/StorePianoCampiFlegrei.json"), wmsFeatureStore);
+    }
+
+    @Test
+    public void z_d_wmsFeatureStoreReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxReader.readAsStore(file27);
+        logger.info("#######################FEATURE_STORE_PianiCampiFlegrei : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File("./target/StorePianiCampiFlegrei.json"), wmsFeatureStore);
+    }
 }

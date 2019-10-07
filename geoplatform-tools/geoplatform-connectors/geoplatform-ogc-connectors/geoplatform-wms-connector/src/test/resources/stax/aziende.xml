@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfs:FeatureCollection xmlns="http://www.opengis.net/wfs" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:gml="http://www.opengis.net/gml" xmlns:rsdi="http://www.opengeospatial.net/rsdi"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xsi:schemaLocation="http://www.opengeospatial.net/rsdi http://rsdi.regione.basilicata.it:80/geoserver/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=rsdi:coordinate_aziende http://www.opengis.net/wfs http://rsdi.regione.basilicata.it:80/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd">
+    <gml:boundedBy>
+        <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                653349.80863186,4475479.92050597 653952.79831163,4476058.90919488
+            </gml:coordinates>
+        </gml:Box>
+    </gml:boundedBy>
+    <gml:featureMember>
+        <rsdi:coordinate_aziende fid="coordinate_aziende.1">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        653349.80863186,4475842.9119577 653349.80863186,4475842.9119577
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <rsdi:layer>Unknown Point Feature</rsdi:layer>
+            <rsdi:n__>1.0</rsdi:n__>
+            <rsdi:ditta>ANDREOLI Maria Angela</rsdi:ditta>
+            <rsdi:data_doman>09/28/2011</rsdi:data_doman>
+            <rsdi:n__prot_>936.0</rsdi:n__prot_>
+            <rsdi:comune>Bernalda</rsdi:comune>
+            <rsdi:data_del_c>02/20/2012</rsdi:data_del_c>
+            <rsdi:esito>POSITIVO</rsdi:esito>
+            <rsdi:coordinate>X 2673360 Y 4475849</rsdi:coordinate>
+            <rsdi:x>2673360</rsdi:x>
+            <rsdi:y>4475849</rsdi:y>
+            <rsdi:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        653349.80863186,4475842.9119577
+                    </gml:coordinates>
+                </gml:Point>
+            </rsdi:the_geom>
+        </rsdi:coordinate_aziende>
+    </gml:featureMember>
+    <gml:featureMember>
+        <rsdi:coordinate_aziende fid="coordinate_aziende.9">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        653952.79831163,4475479.92050597 653952.79831163,4475479.92050597
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <rsdi:layer>Unknown Point Feature</rsdi:layer>
+            <rsdi:n__>9.0</rsdi:n__>
+            <rsdi:ditta>DI PIERRO Michela</rsdi:ditta>
+            <rsdi:data_doman>09/07/2011</rsdi:data_doman>
+            <rsdi:n__prot_>877.0</rsdi:n__prot_>
+            <rsdi:comune>Bernalda Montescaglioso</rsdi:comune>
+            <rsdi:data_del_c>11/16/2011</rsdi:data_del_c>
+            <rsdi:esito>POSITIVO</rsdi:esito>
+            <rsdi:coordinate>X 2673963 Y 4475486</rsdi:coordinate>
+            <rsdi:x>2673963</rsdi:x>
+            <rsdi:y>4475486</rsdi:y>
+            <rsdi:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        653952.79831163,4475479.92050597
+                    </gml:coordinates>
+                </gml:Point>
+            </rsdi:the_geom>
+        </rsdi:coordinate_aziende>
+    </gml:featureMember>
+    <gml:featureMember>
+        <rsdi:coordinate_aziende fid="coordinate_aziende.17">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        653811.79932663,4476058.90919488 653811.79932663,4476058.90919488
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <rsdi:layer>Unknown Point Feature</rsdi:layer>
+            <rsdi:n__>17.0</rsdi:n__>
+            <rsdi:ditta>PERNA Anna Maria</rsdi:ditta>
+            <rsdi:data_doman>09/07/2011</rsdi:data_doman>
+            <rsdi:n__prot_>885.0</rsdi:n__prot_>
+            <rsdi:comune>Bernalda Montescaglioso</rsdi:comune>
+            <rsdi:data_del_c>12/01/2011</rsdi:data_del_c>
+            <rsdi:esito>POSITIVO</rsdi:esito>
+            <rsdi:coordinate>X 2673822 Y 4476065</rsdi:coordinate>
+            <rsdi:x>2673822</rsdi:x>
+            <rsdi:y>4476065</rsdi:y>
+            <rsdi:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        653811.79932663,4476058.90919488
+                    </gml:coordinates>
+                </gml:Point>
+            </rsdi:the_geom>
+        </rsdi:coordinate_aziende>
+    </gml:featureMember>
+</wfs:FeatureCollection>

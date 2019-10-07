@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.connector.jaxb.repository;
 import org.geosdi.geoplatform.jaxb.GPBaseJAXBContext;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -53,10 +52,19 @@ public final class JAXBContextConnectorRepository {
     private JAXBContextConnectorRepository() {
     }
 
+    /**
+     * @param key
+     * @param provider
+     */
     public static void registerProvider(ConnectorJAXBContextRepository.GeoPlatformJAXBContextKey key, Object provider) {
         INSTANCE.registerProvider(key, provider);
     }
 
+    /**
+     * @param key
+     * @param <P>
+     * @return {@link P}
+     */
     public static <P extends GPBaseJAXBContext> P getProvider(ConnectorJAXBContextRepository.GeoPlatformJAXBContextKey key) {
         return INSTANCE.getProvider(key);
     }

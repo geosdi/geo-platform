@@ -4,7 +4,6 @@ import org.geosdi.geoplatform.connector.jaxb.context.WMSJAXBContext;
 import org.geosdi.geoplatform.connector.jaxb.repository.JAXBContextConnectorRepository;
 import org.geosdi.geoplatform.jaxb.GPBaseJAXBContext;
 import org.geosdi.geoplatform.wms.v111.WMTMSCapabilities;
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.experimental.theories.DataPoints;
 import org.junit.experimental.theories.Theories;
@@ -28,6 +27,8 @@ import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.connector.WMSVersion.V111;
 import static org.geosdi.geoplatform.connector.jaxb.repository.WMSConnectorJAXBContextV111.WMS_CONTEXT_KEY_V111;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -48,9 +49,9 @@ public class WMSGetCapabilitiesV111UnmarshallTheoriesTest {
 
     @BeforeClass
     public static void beforeClass() throws Exception {
-        Assert.assertNotNull(wmsContext);
-        Assert.assertTrue(wmsContext instanceof WMSJAXBContext);
-        Assert.assertTrue(((WMSJAXBContext) wmsContext).getVersion() == V111);
+        assertNotNull(wmsContext);
+        assertTrue(wmsContext instanceof WMSJAXBContext);
+        assertTrue(((WMSJAXBContext) wmsContext).getVersion() == V111);
         dirFiles = of(new File(".").getCanonicalPath(), "src", "test", "resources")
                 .collect(joining(separator, "", separator));
         spf.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", FALSE);

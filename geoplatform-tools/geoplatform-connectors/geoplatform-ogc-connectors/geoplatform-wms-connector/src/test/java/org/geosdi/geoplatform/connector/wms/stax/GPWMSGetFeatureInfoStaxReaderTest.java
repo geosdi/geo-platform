@@ -5,6 +5,8 @@ import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 
+import java.io.File;
+
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
@@ -177,5 +179,60 @@ public class GPWMSGetFeatureInfoStaxReaderTest extends WMSGetFeatureInfoStaxRead
     public void z_b_wmsGetFeatureInfoStaxReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_CF_zonepianificazione_mappeinterattive : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoStaxReader.read(file25)));
+    }
+
+    @Test
+    public void z_c_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_PianoCampiFlegrei : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(file26)));
+    }
+
+    @Test
+    public void z_d_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_PianiCampiFlegrei : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(file27)));
+    }
+
+    @Test
+    public void z_e_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_rsdi_alt_300_a_400 : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(file28)));
+    }
+
+    @Test
+    public void z_f_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_aziende : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(file29)));
+    }
+
+    @Test
+    public void z_g_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_EneaClipFilled : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(file30)));
+    }
+
+    @Test
+    public void z_h_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_test : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(file31)));
+    }
+
+    @Test
+    public void z_i_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_ParchiBasilicata : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(file32)));
+    }
+
+    @Test
+    public void z_j_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_CentriAbitati : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(file33)));
+    }
+
+    @Test
+    public void z_k_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File("./target/MobileBeni.json"), wmsGetFeatureInfoStaxReader.read(file34));
+//        logger.info("#######################FEATURE_COLLECTION_mobileBeni : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+//                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(file34)));
     }
 }

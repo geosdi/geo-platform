@@ -47,7 +47,7 @@ import java.util.function.Supplier;
  */
 public class XMLStreamReaderSupplier implements Supplier<XMLStreamReader> {
 
-    private static final XmlStreamReaderBuilder xmlStreamBuilder = XmlStreamReaderBuilder.newInstance();
+    private static final XmlStreamReaderBuilder xmlStreamBuilder = XmlStreamReaderBuilder.jdkDefaultInstance();
     //
     private final InputStream stream;
     private final Object o;

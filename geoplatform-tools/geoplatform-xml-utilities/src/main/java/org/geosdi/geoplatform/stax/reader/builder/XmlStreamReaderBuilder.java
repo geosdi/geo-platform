@@ -34,75 +34,47 @@
  */
 package org.geosdi.geoplatform.stax.reader.builder;
 
-import org.geosdi.geoplatform.stax.reader.builder.xmlreaderchain.AbstractReaderBuildHandler;
-import org.geosdi.geoplatform.stax.reader.builder.xmlreaderchain.XmlStreamReaderHandler;
-
 import javax.annotation.Nonnull;
-import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
-import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.XMLStreamReader;
-import java.io.InputStream;
 
-import static com.google.common.base.Preconditions.checkArgument;
-import static java.lang.Boolean.FALSE;
-import static java.lang.Boolean.TRUE;
+import java.util.Map;
+
 import static javax.annotation.meta.When.NEVER;
+import static org.geosdi.geoplatform.stax.reader.factory.XMLInputFactoryJDKBuilder.JDK_BUILDER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class XmlStreamReaderBuilder implements GPXmlStreamReaderBuilder {
+public class XmlStreamReaderBuilder extends BaseXmlStreamReaderBuilder<XMLInputFactory> {
 
-    private XMLInputFactory factory;
-    private XmlStreamReaderHandler readerHandler = new XmlStreamReaderHandler();
+    /**
+     * @param theFactory
+     */
+    XmlStreamReaderBuilder(@Nonnull(when = NEVER) XMLInputFactory theFactory) {
+        super(theFactory);
+    }
 
-    XmlStreamReaderBuilder() {
-        this.factory = XMLInputFactory.newInstance();
-        factory.setProperty(XMLInputFactory.IS_COALESCING, FALSE);
-        factory.setProperty(XMLInputFactory.IS_NAMESPACE_AWARE, TRUE);
-        factory.setProperty("http://java.sun.com/xml/stream/properties/report-cdata-event", TRUE);
+    /**
+     * Create a {@link XMLInputFactory} with these properties :
+     * <p>
+     *     <ul>
+     *         <li>Enable {@link XMLInputFactory#IS_COALESCING} property.</li>
+     *         <li>Enable {@link XMLInputFactory#IS_NAMESPACE_AWARE} property.</li>
+     *         <li>Enable "http://java.sun.com/xml/stream/properties/report-cdata-event" property.</li>
+     *     </ul>
+     * </p>
+     *
+     * @return {@link XmlStreamReaderBuilder}
+     */
+    public static XmlStreamReaderBuilder jdkDefaultInstance() {
+        return new XmlStreamReaderBuilder(JDK_BUILDER.defaultFactory());
     }
 
     /**
      * @return {@link XmlStreamReaderBuilder}
      */
-    public static XmlStreamReaderBuilder newInstance() {
-        return new XmlStreamReaderBuilder();
-    }
-
-    /**
-     * @param stream
-     * @return {@link XMLStreamReader}
-     * @throws XMLStreamException
-     */
-    @Override
-    public XMLStreamReader build(@Nonnull(when = NEVER) InputStream stream) throws XMLStreamException {
-        checkArgument(stream != null, "The Parameter inputStream must not be null.");
-        return factory.createXMLStreamReader(stream);
-    }
-
-    /**
-     * <p>Build XmlStreamReader from generic Object using a special chain see {@link AbstractReaderBuildHandler}</p>
-     *
-     * @param o
-     * @return {@link XMLStreamReader}
-     * @throws XMLStreamException
-     */
-    @Override
-    public XMLStreamReader build(@Nonnull(when = NEVER) Object o) throws XMLStreamException {
-        return readerHandler.buildXmlReader(o, factory);
-    }
-
-    /**
-     * @param xmlStreamReader
-     * @return {@link XMLEventReader}
-     * @throws Exception
-     */
-    @Override
-    public XMLEventReader build(@Nonnull(when = NEVER) XMLStreamReader xmlStreamReader) throws Exception {
-        checkArgument(xmlStreamReader != null, "The Parameter xmlStreamReader must not be null.");
-        return factory.createXMLEventReader(xmlStreamReader);
+    public static XmlStreamReaderBuilder jdkWithProp(@Nonnull(when = NEVER) Map<String, Object> theProp) {
+        return new XmlStreamReaderBuilder(JDK_BUILDER.withProp(theProp));
     }
 }

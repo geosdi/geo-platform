@@ -4,6 +4,7 @@ import org.geojson.Feature;
 import org.geojson.GeoJsonObject;
 import org.geosdi.geoplatform.connector.reader.stax.GPGetFeatureGeoJsonStaxReader;
 import org.geosdi.geoplatform.gml.api.AbstractGeometry;
+import org.geosdi.geoplatform.stax.reader.builder.GPXmlStreamReaderBuilder;
 import org.geosdi.geoplatform.support.wfs.feature.reader.GPWFSGetFeatureStaxReader;
 import org.geosdi.geoplatform.xml.gml.v311.AbstractGeometryType;
 
@@ -21,8 +22,11 @@ public abstract class WFSBaseGetFeatureGeoJsonStaxReader extends GPGetFeatureGeo
     protected static final String FEATURE_MEMBERS_LOCAL_NAME = "featureMembers";
     private static final String ID_LOCAL_NAME = "id";
 
-    protected WFSBaseGetFeatureGeoJsonStaxReader() {
-        super(ID_LOCAL_NAME);
+    /**
+     * @param theXmlStreamBuilder
+     */
+    protected WFSBaseGetFeatureGeoJsonStaxReader(@Nonnull(when = NEVER) GPXmlStreamReaderBuilder theXmlStreamBuilder) {
+        super(theXmlStreamBuilder, ID_LOCAL_NAME);
     }
 
     /**

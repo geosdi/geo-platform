@@ -29,7 +29,8 @@ public enum XMLInputFactoryJDKBuilder implements GPXMLInputFactoryJDKBuilder {
         @Override
         public <F extends XMLInputFactory> F withProp(@Nonnull(when = NEVER) Map<String, Object> theProp) {
             checkArgument((theProp != null) && !(theProp.isEmpty()), "The Parameter prop must not be null or an empty Map.");
-            XMLInputFactory factory = XMLInputFactory.newDefaultFactory();
+            System.setProperty("javax.xml.stream.XMLInputFactory", "com.sun.xml.internal.stream.XMLInputFactoryImpl");
+            XMLInputFactory factory = XMLInputFactory.newFactory();
             Map<String, Object> properties = theProp.entrySet().stream()
                     .filter(Objects::nonNull)
                     .filter(entry -> (entry.getKey() != null) && !(entry.getKey().trim().isEmpty()))
@@ -46,7 +47,8 @@ public enum XMLInputFactoryJDKBuilder implements GPXMLInputFactoryJDKBuilder {
          */
         @Override
         public <F extends XMLInputFactory> F defaultFactory() {
-            XMLInputFactory factory = XMLInputFactory.newDefaultFactory();
+            System.setProperty("javax.xml.stream.XMLInputFactory", "com.sun.xml.internal.stream.XMLInputFactoryImpl");
+            XMLInputFactory factory = XMLInputFactory.newFactory();
             factory.setProperty(IS_COALESCING, TRUE);
             factory.setProperty(IS_NAMESPACE_AWARE, TRUE);
             factory.setProperty("http://java.sun.com/xml/stream/properties/report-cdata-event", TRUE);

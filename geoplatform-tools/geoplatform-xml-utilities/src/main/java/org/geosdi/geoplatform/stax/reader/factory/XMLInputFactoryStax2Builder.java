@@ -48,6 +48,7 @@ public enum XMLInputFactoryStax2Builder implements GPXMLInputFactoryStax2Builder
          */
         @Override
         public <F extends XMLInputFactory2> F configureForXmlConformance() {
+            System.setProperty("javax.xml.stream.XMLInputFactory", "com.ctc.wstx.stax.WstxInputFactory");
             XMLInputFactory2 factory = (XMLInputFactory2) WstxInputFactory.newInstance();
             factory.configureForXmlConformance();
             logger.debug("###########################{}#Creates : {}\n", this.getClass().getSimpleName(), factory);
@@ -84,6 +85,7 @@ public enum XMLInputFactoryStax2Builder implements GPXMLInputFactoryStax2Builder
          */
         @Override
         public <F extends XMLInputFactory2> F configureForConvenience() {
+            System.setProperty("javax.xml.stream.XMLInputFactory", "com.ctc.wstx.stax.WstxInputFactory");
             XMLInputFactory2 factory = (XMLInputFactory2) WstxInputFactory.newInstance();
             factory.configureForConvenience();
             logger.debug("###########################{}#Creates : {}\n", this.getClass().getSimpleName(), factory);
@@ -123,6 +125,7 @@ public enum XMLInputFactoryStax2Builder implements GPXMLInputFactoryStax2Builder
          */
         @Override
         public <F extends XMLInputFactory2> F configureForSpeed() {
+            System.setProperty("javax.xml.stream.XMLInputFactory", "com.ctc.wstx.stax.WstxInputFactory");
             XMLInputFactory2 factory = (XMLInputFactory2) WstxInputFactory.newInstance();
             factory.configureForSpeed();
             logger.debug("###########################{}#Creates : {}\n", this.getClass().getSimpleName(), factory);
@@ -153,6 +156,7 @@ public enum XMLInputFactoryStax2Builder implements GPXMLInputFactoryStax2Builder
          */
         @Override
         public <F extends XMLInputFactory2> F configureForLowMemUsage() {
+            System.setProperty("javax.xml.stream.XMLInputFactory", "com.ctc.wstx.stax.WstxInputFactory");
             XMLInputFactory2 factory = (XMLInputFactory2) WstxInputFactory.newInstance();
             factory.configureForLowMemUsage();
             logger.debug("###########################{}#Creates : {}\n", this.getClass().getSimpleName(), factory);
@@ -192,6 +196,7 @@ public enum XMLInputFactoryStax2Builder implements GPXMLInputFactoryStax2Builder
          */
         @Override
         public <F extends XMLInputFactory2> F configureForRoundTripping() {
+            System.setProperty("javax.xml.stream.XMLInputFactory", "com.ctc.wstx.stax.WstxInputFactory");
             XMLInputFactory2 factory = (XMLInputFactory2) WstxInputFactory.newInstance();
             factory.configureForRoundTripping();
             logger.debug("###########################{}#Creates : {}\n", this.getClass().getSimpleName(), factory);
@@ -205,6 +210,7 @@ public enum XMLInputFactoryStax2Builder implements GPXMLInputFactoryStax2Builder
         @Override
         public <F extends XMLInputFactory> F withProp(@Nonnull(when = NEVER) Map<String, Object> theProp) {
             checkArgument((theProp != null) && !(theProp.isEmpty()), "The Parameter prop must not be null or an empty Map.");
+            System.setProperty("javax.xml.stream.XMLInputFactory", "com.ctc.wstx.stax.WstxInputFactory");
             XMLInputFactory2 factory = (XMLInputFactory2) WstxInputFactory.newInstance();
             Map<String, Object> properties = theProp.entrySet().stream()
                     .filter(Objects::nonNull)
@@ -244,6 +250,7 @@ public enum XMLInputFactoryStax2Builder implements GPXMLInputFactoryStax2Builder
          */
         @Override
         public <F extends XMLInputFactory2> F configureForXmlConformance() {
+            System.setProperty("javax.xml.stream.XMLInputFactory", "com.fasterxml.aalto.stax.InputFactoryImpl");
             InputFactoryImpl factory = new InputFactoryImpl();
             factory.configureForXmlConformance();
             logger.debug("###########################{}#Creates : {}\n", this.getClass().getSimpleName(), factory);
@@ -280,6 +287,7 @@ public enum XMLInputFactoryStax2Builder implements GPXMLInputFactoryStax2Builder
          */
         @Override
         public <F extends XMLInputFactory2> F configureForConvenience() {
+            System.setProperty("javax.xml.stream.XMLInputFactory", "com.fasterxml.aalto.stax.InputFactoryImpl");
             InputFactoryImpl factory = new InputFactoryImpl();
             factory.configureForConvenience();
             logger.debug("###########################{}#Creates : {}\n", this.getClass().getSimpleName(), factory);
@@ -319,6 +327,7 @@ public enum XMLInputFactoryStax2Builder implements GPXMLInputFactoryStax2Builder
          */
         @Override
         public <F extends XMLInputFactory2> F configureForSpeed() {
+            System.setProperty("javax.xml.stream.XMLInputFactory", "com.fasterxml.aalto.stax.InputFactoryImpl");
             InputFactoryImpl factory = new InputFactoryImpl();
             factory.configureForSpeed();
             logger.debug("###########################{}#Creates : {}\n", this.getClass().getSimpleName(), factory);
@@ -349,6 +358,7 @@ public enum XMLInputFactoryStax2Builder implements GPXMLInputFactoryStax2Builder
          */
         @Override
         public <F extends XMLInputFactory2> F configureForLowMemUsage() {
+            System.setProperty("javax.xml.stream.XMLInputFactory", "com.fasterxml.aalto.stax.InputFactoryImpl");
             InputFactoryImpl factory = new InputFactoryImpl();
             factory.configureForLowMemUsage();
             logger.debug("###########################{}#Creates : {}\n", this.getClass().getSimpleName(), factory);
@@ -388,6 +398,7 @@ public enum XMLInputFactoryStax2Builder implements GPXMLInputFactoryStax2Builder
          */
         @Override
         public <F extends XMLInputFactory2> F configureForRoundTripping() {
+            System.setProperty("javax.xml.stream.XMLInputFactory", "com.fasterxml.aalto.stax.InputFactoryImpl");
             InputFactoryImpl factory = new InputFactoryImpl();
             factory.configureForRoundTripping();
             logger.debug("###########################{}#Creates : {}\n", this.getClass().getSimpleName(), factory);
@@ -401,6 +412,7 @@ public enum XMLInputFactoryStax2Builder implements GPXMLInputFactoryStax2Builder
         @Override
         public <F extends XMLInputFactory> F withProp(@Nonnull(when = NEVER) Map<String, Object> theProp) {
             checkArgument((theProp != null) && !(theProp.isEmpty()), "The Parameter prop must not be null or an empty Map.");
+            System.setProperty("javax.xml.stream.XMLInputFactory", "com.fasterxml.aalto.stax.InputFactoryImpl");
             InputFactoryImpl factory = new InputFactoryImpl();
             Map<String, Object> properties = theProp.entrySet().stream()
                     .filter(Objects::nonNull)

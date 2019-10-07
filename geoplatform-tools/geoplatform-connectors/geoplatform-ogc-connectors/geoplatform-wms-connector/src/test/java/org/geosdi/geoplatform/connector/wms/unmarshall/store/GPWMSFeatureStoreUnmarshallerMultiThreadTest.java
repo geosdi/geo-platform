@@ -55,7 +55,7 @@ public class GPWMSFeatureStoreUnmarshallerMultiThreadTest {
                 .forEach(Thread::start);
         startSignal.countDown();
         doneSignal.await();
-        assertTrue(counter.get() == 25);
+        assertTrue(counter.get() == 28);
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@{} process {} files", this.getClass().getSimpleName(), counter.get());
     }
 

@@ -46,4 +46,32 @@ public class WMSGetMapBaseRequestTest {
         assertTrue(wmsGetMapBaseRequest.toWMSKeyValuePair().equalsIgnoreCase("LAYERS=topp:states,siti_protetti:zsc,retenatura:zsc&SRS=EPSG:4326&BBOX=-130.0,24.0,-66.0,50.0&WIDTH=550&HEIGHT=250"));
         logger.info("#########################GET_MAP_KVP : {}\n", wmsGetMapBaseRequest.toWMSKeyValuePair());
     }
+
+    @Test
+    public void d_wmsGetMapKeyValuePairTest() throws Exception {
+        GPWMSGetMapBaseRequest wmsGetMapBaseRequest = new WMSGetMapBaseRequest(wmsBoundinBox, of("test", null, "prova", "", "topp:states", null, "", "topp:states", "siti_protetti:zsc", "retenatura:zsc", "retenatura:zsc").collect(toList()),
+                "EPSG:4326", "550", "250");
+        assertTrue(wmsGetMapBaseRequest.toWMSKeyValuePair().equalsIgnoreCase("LAYERS=test,prova,topp:states,siti_protetti:zsc,retenatura:zsc&SRS=EPSG:4326&BBOX=-130.0,24.0,-66.0,50.0&WIDTH=550&HEIGHT=250"));
+        logger.info("#########################GET_MAP_KVP : {}\n", wmsGetMapBaseRequest.toWMSKeyValuePair());
+    }
+
+    @Test
+    public void e_wmsGetMapKeyValuePairTest() throws Exception {
+        GPWMSGetMapBaseRequest wmsGetMapBaseRequest = new WMSGetMapBaseRequest(wmsBoundinBox, of("test","test", null, "prova", "test", "", "topp:states", null, "prova", "topp:states", "siti_protetti:zsc", "retenatura:zsc", "retenatura:zsc").collect(toList()),
+                "EPSG:32632", "550", "250");
+        assertTrue(wmsGetMapBaseRequest.toWMSKeyValuePair().equalsIgnoreCase("LAYERS=test,prova,topp:states,siti_protetti:zsc,retenatura:zsc&SRS=EPSG:32632&BBOX=-130.0,24.0,-66.0,50.0&WIDTH=550&HEIGHT=250"));
+        logger.info("#########################GET_MAP_KVP : {}\n", wmsGetMapBaseRequest.toWMSKeyValuePair());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void f_wmsGetMapKeyValuePairTest() throws Exception {
+        GPWMSGetMapBaseRequest wmsGetMapBaseRequest = new WMSGetMapBaseRequest(wmsBoundinBox, of("","", null, "", "", "", "", null, "", "", "", "", "").collect(toList()),
+                "EPSG:32632", "550", "250");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void g_wmsGetMapKeyValuePairTest() throws Exception {
+        GPWMSGetMapBaseRequest wmsGetMapBaseRequest = new WMSGetMapBaseRequest(null, of("","", null, "", "", "", "", null, "", "", "", "", "").collect(toList()),
+                "EPSG:32632", "550", "250");
+    }
 }

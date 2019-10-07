@@ -9,6 +9,7 @@ import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.events.XMLEvent;
 
 import static javax.annotation.meta.When.NEVER;
+import static org.geosdi.geoplatform.stax.reader.builder.XmlStreamReaderBuilder.jdkDefaultInstance;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -16,6 +17,10 @@ import static javax.annotation.meta.When.NEVER;
  */
 @ThreadSafe
 public class GPWMSGetFeatureInfoStaxReader extends WMSGetFeatureInfoStaxReader {
+
+    public GPWMSGetFeatureInfoStaxReader() {
+        super(jdkDefaultInstance());
+    }
 
     /**
      * @param object

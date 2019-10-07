@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfs:FeatureCollection xmlns="http://www.opengis.net/wfs" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:gml="http://www.opengis.net/gml"
+                       xmlns:mobile="http://servizi.protezionecivile.it/mobile_data/"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xsi:schemaLocation="http://www.opengis.net/wfs https://servizi.protezionecivile.it/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd http://servizi.protezionecivile.it/mobile_data/ https://servizi.protezionecivile.it/geoserver/mobile/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=mobile%3Abeni">
+    <gml:boundedBy>
+        <gml:null>unknown</gml:null>
+    </gml:boundedBy>
+    <gml:featureMember>
+        <mobile:beni fid="beni.1">
+            <mobile:denominazione>Test gs</mobile:denominazione>
+            <mobile:tipo_di_bene>altro</mobile:tipo_di_bene>
+            <mobile:tipo_altro>Rudere</mobile:tipo_altro>
+            <mobile:descrizione>Capannone dismesso e bonificato</mobile:descrizione>
+            <mobile:foto>&lt;a href=javascript:void(0)
+                onclick=window.open('http://servizi.protezionecivile.it/survey/view/binaryData?blobKey=esercitazione%5B%40version%3Dnull+and+%40uiVersion%3Dnull%5D%2Fdata[@key=uuid:4270bbaf-4c6c-459e-9e56-936412b2cf33]/Foto','popup','width=600,height=500,resizable=yes,toolbar=no,directories=no,menubar=no,location=no,status=no,left=150,top=150');
+                return=false&gt;
+                &lt;img
+                src="http://servizi.protezionecivile.it/survey/view/binaryData?blobKey=esercitazione%5B%40version%3Dnull+and+%40uiVersion%3Dnull%5D%2Fdata[@key=uuid:4270bbaf-4c6c-459e-9e56-936412b2cf33]/Foto&amp;previewImage=true"&gt;&lt;/a&gt;
+            </mobile:foto>
+            <mobile:scheda>&lt;a href=javascript:void(0)
+                onclick=window.open('http://servizi.protezionecivile.it/survey/view/binaryData?blobKey=esercitazione%5B%40version%3Dnull+and+%40uiVersion%3Dnull%5D%2Fdata[@key=uuid:4270bbaf-4c6c-459e-9e56-936412b2cf33]/Allegato_scheda_interventi','popup','width=600,height=500,resizable=yes,toolbar=no,directories=no,menubar=no,location=no,status=no,left=150,top=150');
+                return=false&gt;
+                &lt;img
+                src="http://servizi.protezionecivile.it/survey/view/binaryData?blobKey=esercitazione%5B%40version%3Dnull+and+%40uiVersion%3Dnull%5D%2Fdata[@key=uuid:4270bbaf-4c6c-459e-9e56-936412b2cf33]/Allegato_scheda_interventi&amp;previewImage=true"&gt;&lt;/a&gt;
+            </mobile:scheda>
+            <mobile:riferimento>L. A.</mobile:riferimento>
+            <mobile:data_creazione>2019-10-04</mobile:data_creazione>
+            <mobile:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.7235799,40.6016225
+                    </gml:coordinates>
+                </gml:Point>
+            </mobile:the_geom>
+            <mobile:accuratezza>17.509</mobile:accuratezza>
+        </mobile:beni>
+    </gml:featureMember>
+</wfs:FeatureCollection>

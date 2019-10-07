@@ -34,36 +34,74 @@
  */
 package org.geosdi.geoplatform.stax.reader;
 
+import org.geosdi.geoplatform.stax.reader.demo.GoogleGeocodingAaltoReader;
 import org.geosdi.geoplatform.stax.reader.demo.GoogleGeocodingStaxReader;
+import org.geosdi.geoplatform.stax.reader.demo.GoogleGeocodingWoodstoxReader;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.StopWatch;
 
 import java.io.File;
 
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
+import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@FixMethodOrder(value = NAME_ASCENDING)
 public class GoogleStaxReaderTest {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private static final Logger logger = LoggerFactory.getLogger(GoogleStaxReaderTest.class);
     //
-    private GoogleGeocodingStaxReader googleReader = new GoogleGeocodingStaxReader();
+    private static final StopWatch stopWatch = new StopWatch("GoogleStaxComparison");
+    private static final GoogleGeocodingStaxReader googleStaxReader = new GoogleGeocodingStaxReader();
+    private static final GoogleGeocodingWoodstoxReader googleWoodstoxReader = new GoogleGeocodingWoodstoxReader();
+    private static final GoogleGeocodingAaltoReader googleAaltoReader = new GoogleGeocodingAaltoReader();
+    private static String pathFile;
 
-    @Test
-    public void readFromFile() throws Exception {
-        String pathFile = of(new File(".").getCanonicalPath(), "src", "test", "resources", "googleGeocodeExample.xml")
+    @BeforeClass
+    public static void beforeClass() throws Exception {
+        pathFile = of(new File(".").getCanonicalPath(), "src", "test", "resources", "googleGeocodeExample.xml")
                 .collect(joining(File.separator));
-        logger.info("Result from File @@@@@@@@@@@@@@@@@@@@ {}\n", googleReader.read(new File(pathFile)).toString());
+    }
+
+    @AfterClass
+    public static void afterClass() throws Exception {
+        logger.info("{}\n", stopWatch.prettyPrint());
     }
 
     @Test
-    public void readFromString() throws Exception {
-        logger.info("Result from String @@@@@@@@@@@@@@@@@@@@@@@@@ {}\n", googleReader.read(fileAsString()));
+    public void a_staxReadFromFile() throws Exception {
+        stopWatch.start("googleStaxReader");
+        logger.info("#################GoolgeStaxReader Result from File @@@@@@@@@@@@@@@@@@@@ {}\n", googleStaxReader.read(new File(pathFile)).toString());
+        stopWatch.stop();
+        stopWatch.start("googleAaltoReader");
+        logger.info("#################GoolgeAaltoReader Result from File @@@@@@@@@@@@@@@@@@@@ {}\n", googleAaltoReader.read(new File(pathFile)).toString());
+        stopWatch.stop();
+        stopWatch.start("googleWoodstoxReader");
+        logger.info("#################GoolgeWoodstoxReader Result from File @@@@@@@@@@@@@@@@@@@@ {}\n", googleWoodstoxReader.read(new File(pathFile)).toString());
+        stopWatch.stop();
+
+    }
+
+    @Test
+    public void b_readFromString() throws Exception {
+        stopWatch.start("googleStaxReaderFromString");
+        logger.info("Result from String @@@@@@@@@@@@@@@@@@@@@@@@@ {}\n", googleStaxReader.read(fileAsString()));
+        stopWatch.stop();
+        stopWatch.start("googleAaltoReaderFromString");
+        logger.info("Result from String @@@@@@@@@@@@@@@@@@@@@@@@@ {}\n", googleAaltoReader.read(fileAsString()));
+        stopWatch.stop();
+        stopWatch.start("googleWoodstoxReaderFromString");
+        logger.info("Result from String @@@@@@@@@@@@@@@@@@@@@@@@@ {}\n", googleWoodstoxReader.read(fileAsString()));
+        stopWatch.stop();
     }
 
     private String fileAsString() {

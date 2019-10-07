@@ -22,6 +22,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 import static javax.annotation.meta.When.NEVER;
+import static org.geosdi.geoplatform.stax.reader.builder.XmlStreamReaderBuilder.jdkDefaultInstance;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -33,7 +34,7 @@ public class WFSGetFeatureGeoJsonStaxReader extends WFSBaseGetFeatureStaxReader<
      * @param theLayerSchema
      */
     public WFSGetFeatureGeoJsonStaxReader(@Nonnull(when = NEVER) LayerSchemaDTO theLayerSchema) {
-        super(theLayerSchema);
+        super(jdkDefaultInstance(), theLayerSchema);
     }
 
     /**

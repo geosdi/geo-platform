@@ -85,8 +85,7 @@ public class JTSGeometryDeserializer extends GPJTSDeserializer<Geometry, GeoJson
      * @return {@link JTSGeometryWriterImplementor<Feature, Geometry>}
      * @throws Exception
      */
-    JTSGeometryWriterImplementor<Feature, Geometry> forFeature(GeoJsonObject geoJsonObject)
-            throws Exception {
+    JTSGeometryWriterImplementor<Feature, Geometry> forFeature(GeoJsonObject geoJsonObject) throws Exception {
         return (JTSGeometryWriterImplementor<Feature, Geometry>) JTS_GEOMETRY_WRITER_IMPLEMENTOR_STORE.getImplementorByKey(forClass(geoJsonObject.getClass()));
     }
 }

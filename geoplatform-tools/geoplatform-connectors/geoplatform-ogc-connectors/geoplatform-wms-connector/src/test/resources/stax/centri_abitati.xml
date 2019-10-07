@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfs:FeatureCollection xmlns="http://www.opengis.net/wfs" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:topp="http://www.openplans.org/topp" xmlns:gml="http://www.opengis.net/gml"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xsi:schemaLocation="http://www.openplans.org/topp http://rsdi.regione.basilicata.it:80/geoserver/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=topp:centri_abitati http://www.opengis.net/wfs http://rsdi.regione.basilicata.it:80/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd">
+    <gml:boundedBy>
+        <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">15.79775012,40.36673758
+                15.81137649,40.38282645
+            </gml:coordinates>
+        </gml:Box>
+    </gml:boundedBy>
+    <gml:featureMember>
+        <topp:centri_abitati fid="centri_abitati.426">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.79775012,40.36673758 15.80074962,40.36963483
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <topp:cod_amm>17076046</topp:cod_amm>
+            <topp:quota>0</topp:quota>
+            <topp:cod_pro>76</topp:cod_pro>
+            <topp:cod_com>46</topp:cod_com>
+            <topp:comune>MARSICOVETERE</topp:comune>
+            <topp:localita>ARBUSTO</topp:localita>
+            <topp:regione>17</topp:regione>
+            <topp:shape_area>4.0E-6</topp:shape_area>
+            <topp:shape_len>0.010246</topp:shape_len>
+            <topp:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        15.79775012,40.36867333 15.79808749,40.36894133 15.79850124,40.36885845
+                                        15.79862324,40.3692517 15.79929874,40.36963483 15.79973224,40.3693977
+                                        15.79915299,40.36867145 15.79963399,40.36864308 15.80074962,40.36770433
+                                        15.80039299,40.36753645 15.80066237,40.36717408 15.80020649,40.36673758
+                                        15.79989837,40.3669627 15.79977612,40.36701945 15.79932149,40.3674107
+                                        15.79908087,40.36759133 15.79858799,40.36818745 15.79838712,40.36801933
+                                        15.79775012,40.36867333 15.79775012,40.36867333
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </topp:the_geom>
+        </topp:centri_abitati>
+    </gml:featureMember>
+    <gml:featureMember>
+        <topp:centri_abitati fid="centri_abitati.416">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.80110224,40.37324845 15.80808274,40.38282645
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <topp:cod_amm>17076046</topp:cod_amm>
+            <topp:quota>0</topp:quota>
+            <topp:cod_pro>76</topp:cod_pro>
+            <topp:cod_com>46</topp:cod_com>
+            <topp:comune>MARSICOVETERE</topp:comune>
+            <topp:localita>MARSICOVETERE - CENTRO</topp:localita>
+            <topp:regione>17</topp:regione>
+            <topp:shape_area>1.6E-5</topp:shape_area>
+            <topp:shape_len>0.035689</topp:shape_len>
+            <topp:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        15.80325199,40.37324845 15.80338312,40.3734972 15.80351124,40.37373258
+                                        15.80361699,40.3746487 15.80381049,40.37506483 15.80391062,40.37534233
+                                        15.80396237,40.3755057 15.80356824,40.37661345 15.80344949,40.37684995
+                                        15.80339974,40.37691133 15.80339837,40.37714533 15.80346187,40.37730808
+                                        15.80346474,40.37768595 15.80346537,40.3789592 15.80340312,40.37905733
+                                        15.80262262,40.37925195 15.80238562,40.37935145 15.80230974,40.37999933
+                                        15.80225312,40.3802547 15.80219874,40.38041533 15.80165012,40.38024083
+                                        15.80112837,40.38146845 15.80110224,40.38167695 15.80153474,40.38176395
+                                        15.80152424,40.38270945 15.80152437,40.38282645 15.80230974,40.38269458
+                                        15.80247062,40.38207308 15.80285937,40.3820772 15.80319374,40.38199445
+                                        15.80325537,40.38190533 15.80315674,40.3817447 15.80336999,40.38164208
+                                        15.80364312,40.38166645 15.80357912,40.3813822 15.80347462,40.38104645
+                                        15.80309124,40.38097908 15.80287149,40.38091558 15.80283774,40.38056658
+                                        15.80283712,40.3804587 15.80374299,40.3804412 15.80391749,40.38042183
+                                        15.80412837,40.37878058 15.80493637,40.37885883 15.80529487,40.3788107
+                                        15.80539749,40.37876408 15.80536337,40.37865808 15.80507974,40.37841395
+                                        15.80447174,40.37798633 15.80430824,40.37789708 15.80438362,40.3769972
+                                        15.80444024,40.37674183 15.80474074,40.37668808 15.80483474,40.37668708
+                                        15.80489374,40.37668808 15.80485712,40.37644283 15.80476624,40.3762277
+                                        15.80472799,40.37621195 15.80453362,40.37522008 15.80458799,40.37505933
+                                        15.80491674,40.37470245 15.80505924,40.37461308 15.80517987,40.37462845
+                                        15.80530224,40.3746752 15.80521924,40.37513458 15.80769312,40.37492983
+                                        15.80796974,40.37487308 15.80808274,40.37482583 15.80804324,40.3744502
+                                        15.80795199,40.3742307 15.80664299,40.37373658 15.80612374,40.3736052
+                                        15.80570774,40.37379633 15.80559937,40.3738882 15.80550799,40.37391608
+                                        15.80507687,40.37362208 15.80518387,40.37338633 15.80524999,40.37334195
+                                        15.80325199,40.37324845 15.80325199,40.37324845
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </topp:the_geom>
+        </topp:centri_abitati>
+    </gml:featureMember>
+    <gml:featureMember>
+        <topp:centri_abitati fid="centri_abitati.422">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.80693012,40.36935683 15.81137649,40.37367645
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <topp:cod_amm>17076046</topp:cod_amm>
+            <topp:quota>0</topp:quota>
+            <topp:cod_pro>76</topp:cod_pro>
+            <topp:cod_com>46</topp:cod_com>
+            <topp:comune>MARSICOVETERE</topp:comune>
+            <topp:localita>ARENARA</topp:localita>
+            <topp:regione>17</topp:regione>
+            <topp:shape_area>7.0E-6</topp:shape_area>
+            <topp:shape_len>0.016197</topp:shape_len>
+            <topp:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        15.81085849,40.36935683 15.80975949,40.3702272 15.80922074,40.37060108
+                                        15.80864324,40.3709412 15.80804949,40.3712507 15.80752387,40.3715067
+                                        15.80715412,40.37169058 15.80693012,40.37193333 15.80722862,40.37242858
+                                        15.80764687,40.37214295 15.80800749,40.3717527 15.80806237,40.37184395
+                                        15.80801987,40.37210733 15.80792599,40.37245933 15.80814049,40.37318458
+                                        15.80880199,40.37367645 15.80919549,40.3734957 15.80948124,40.37352833
+                                        15.80982299,40.3733012 15.80976012,40.37244545 15.81034524,40.37218145
+                                        15.81050999,40.3713662 15.80960399,40.37136583 15.80962812,40.37102245
+                                        15.81022749,40.37043358 15.81137649,40.3696952 15.81085849,40.36935683
+                                        15.81085849,40.36935683
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </topp:the_geom>
+        </topp:centri_abitati>
+    </gml:featureMember>
+</wfs:FeatureCollection>

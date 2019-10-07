@@ -35,8 +35,9 @@
  */
 package org.geosdi.geoplatform.stax.reader.builder.streamchain;
 
-import java.io.InputStream;
 import org.geosdi.geoplatform.stax.StreamBuildHandler;
+
+import java.io.InputStream;
 
 /**
  *

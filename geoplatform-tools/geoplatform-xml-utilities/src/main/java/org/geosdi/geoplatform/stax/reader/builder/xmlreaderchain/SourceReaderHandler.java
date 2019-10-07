@@ -57,10 +57,6 @@ public class SourceReaderHandler extends AbstractReaderBuildHandler {
      */
     @Override
     public XMLStreamReader buildXmlReader(Object o, XMLInputFactory factory) throws XMLStreamException {
-        if (o instanceof Source) {
-            return factory.createXMLStreamReader((Source) o);
-        } else {
-            return super.forwardBuildXmlReader(o, factory);
-        }
+        return ((o instanceof Source) ? factory.createXMLStreamReader((Source) o) : super.forwardBuildXmlReader(o, factory));
     }
 }

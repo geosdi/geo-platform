@@ -42,6 +42,8 @@ import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nonnull;
 import java.io.File;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.io.File.separator;
@@ -71,14 +73,19 @@ public class GoogleStaxReaderMultiThreadTest {
 
     @Test
     public void googleStaxReaderMultiThreadTest() throws Exception {
+        CountDownLatch startSignal = new CountDownLatch(1);
+        CountDownLatch doneSignal = new CountDownLatch(20);
+        AtomicInteger counter = new AtomicInteger(0);
         for (int i = 0; i < 20; i++) {
             if (i % 2 == 0) {
-                new GoogleStaxReaderTask(i, "GoogleStaxReaderTask", file).start();
+                new GoogleStaxReaderTask(i, "GoogleStaxReaderTask", file, startSignal, doneSignal, counter).start();
             } else {
-                new GoogleStaxReaderTask(i, "GoogleStaxReaderTask", file1).start();
+                new GoogleStaxReaderTask(i, "GoogleStaxReaderTask", file1, startSignal, doneSignal, counter).start();
             }
         }
-        Thread.sleep(500);
+        startSignal.countDown();
+        doneSignal.await();
+        logger.info("#############################{} process {} files", this.getClass().getSimpleName(), counter.get());
     }
 
     static class GoogleStaxReaderTask extends Thread {
@@ -86,6 +93,9 @@ public class GoogleStaxReaderMultiThreadTest {
         private final Integer count;
         private final String taskName;
         private final File file;
+        private final CountDownLatch startSignal;
+        private final CountDownLatch doneSignal;
+        private final AtomicInteger counter;
 
         /**
          * @param theCount
@@ -93,13 +103,20 @@ public class GoogleStaxReaderMultiThreadTest {
          * @param theFile
          */
         GoogleStaxReaderTask(@Nonnull(when = NEVER) Integer theCount, @Nonnull(when = NEVER) String theTaskName,
-                @Nonnull(when = NEVER) File theFile) {
+                @Nonnull(when = NEVER) File theFile, @Nonnull(when = NEVER) CountDownLatch theStartSignal,
+                @Nonnull(when = NEVER) CountDownLatch theDoneSignal, @Nonnull(when = NEVER) AtomicInteger theCounter) {
             checkArgument(theCount != null, "The Parameter count must not be null.");
             checkArgument((theTaskName != null) && !(theTaskName.trim().isEmpty()), "The Parameter taskName must not be null or an empty string.");
             checkArgument(theFile != null, "The Parameter file must not be null.");
+            checkArgument(theStartSignal != null, "The Parameter startSignal must not be null.");
+            checkArgument(theDoneSignal != null, "The Parameter doneSignal must not be null.");
+            checkArgument(theCounter != null, "The Parameter counter must not be null.");
             this.count = theCount;
             this.taskName = theTaskName;
             this.file = theFile;
+            this.startSignal = theStartSignal;
+            this.doneSignal = theDoneSignal;
+            this.counter = theCounter;
         }
 
         /**
@@ -117,10 +134,12 @@ public class GoogleStaxReaderMultiThreadTest {
         @Override
         public void run() {
             try {
+                startSignal.await();
                 logger.debug("###########################{} begin execution.\n", "#".concat(this.taskName + " - " + count));
-
                 logger.debug("{} Result from File @@@@@@@@@@@@@@@@@@@@ \n{}\n",
                         "#".concat(this.taskName + " - " + count), googleStaxReader.read(this.file).toString());
+                this.counter.incrementAndGet();
+                doneSignal.countDown();
             } catch (Exception ex) {
                 ex.printStackTrace();
             }

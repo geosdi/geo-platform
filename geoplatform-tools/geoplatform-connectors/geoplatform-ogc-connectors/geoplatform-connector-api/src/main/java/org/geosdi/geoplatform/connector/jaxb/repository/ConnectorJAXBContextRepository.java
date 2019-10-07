@@ -61,16 +61,14 @@ public class ConnectorJAXBContextRepository extends GeoPlatformJAXBContextReposi
         logger.debug("##############################CALLED lookUpJAXBContext with Key : {}\n", key);
         try {
             Class<?> classe = key.getJAXBContextClass();
-            Object jaxbContext = classe.newInstance();
+            Object jaxbContext = classe.getDeclaredConstructor().newInstance();
             if (!(jaxbContext instanceof GeoPlatformJAXBContextProvider)) {
-                throw new IllegalArgumentException("The class : " + jaxbContext.getClass().getName()
-                        + " is not an instance of GeoPlatformJAXBContextProvider");
+                throw new IllegalArgumentException("The class : " + jaxbContext.getClass().getName() + " is not an instance of GeoPlatformJAXBContextProvider");
             }
             super.registerProvider(key, ((GeoPlatformJAXBContextProvider) jaxbContext).getJAXBProvider());
             return (((GeoPlatformJAXBContextProvider) jaxbContext).getJAXBProvider());
         } catch (Exception ex) {
-            logger.error(format("Failed to Initialize JAXBContext for Class %s: @@@@@@@@@@@@@@@@@ %s",
-                    ConnectorJAXBContextRepository.class.getName(), ex));
+            logger.error(format("Failed to Initialize JAXBContext for Class %s: @@@@@@@@@@@@@@@@@ %s", ConnectorJAXBContextRepository.class.getName(), ex));
             throw new IllegalStateException(ex);
         }
     }

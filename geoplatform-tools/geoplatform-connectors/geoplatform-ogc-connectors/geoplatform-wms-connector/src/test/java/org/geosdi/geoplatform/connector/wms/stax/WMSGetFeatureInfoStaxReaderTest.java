@@ -46,6 +46,15 @@ public abstract class WMSGetFeatureInfoStaxReaderTest {
     protected static File file23;
     protected static File file24;
     protected static File file25;
+    protected static File file26;
+    protected static File file27;
+    protected static File file28;
+    protected static File file29;
+    protected static File file30;
+    protected static File file31;
+    protected static File file32;
+    protected static File file33;
+    protected static File file34;
 
     @BeforeClass
     public static void beforeClass() throws Exception {
@@ -77,5 +86,14 @@ public abstract class WMSGetFeatureInfoStaxReaderTest {
         file23 = new File(basePath.concat("livelloEdifici1.xml"));
         file24 = new File(basePath.concat("masw.xml"));
         file25 = new File(basePath.concat("CF_zonepianificazione_mappeinterattive.xml"));
+        file26 = new File(basePath.concat("PianoCampiFlegrei.xml"));
+        file27 = new File(basePath.concat("PianiCampiFlegrei.xml"));
+        file28 = new File(basePath.concat("rsdi_alt_300_a_400.xml"));
+        file29 = new File(basePath.concat("aziende.xml"));
+        file30 = new File(basePath.concat("EneaClipFilled.xml"));
+        file31 = new File(basePath.concat("test.xml"));
+        file32 = new File(basePath.concat("ParchiBasilicata.xml"));
+        file33 = new File(basePath.concat("centri_abitati.xml"));
+        file34 = new File(basePath.concat("mobileBeni.xml"));
     }
 }

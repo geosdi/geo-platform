@@ -7,6 +7,7 @@ import org.geosdi.geoplatform.connector.reader.featuretype.GPFeatureType;
 import org.geosdi.geoplatform.connector.reader.featuretype.GPFeatureTypeReader;
 import org.geosdi.geoplatform.connector.reader.featuretype.IGPFeatureType;
 import org.geosdi.geoplatform.stax.reader.AbstractStaxStreamReader;
+import org.geosdi.geoplatform.stax.reader.builder.GPXmlStreamReaderBuilder;
 
 import javax.annotation.Nonnull;
 import javax.xml.stream.XMLStreamException;
@@ -43,6 +44,7 @@ public abstract class GPGetFeatureGeoJsonStaxReader extends AbstractStaxStreamRe
     protected static final String TYPES_NAME_SEPARATOR = ",";
     protected static final String TYPE_NAME_SEPARATOR = ":";
     protected static final String FEATURE_NAME_KEY = "FEATURE_NAME";
+    private static final String BOUNDING_BY_PREFIX = "boundedBy";
     private static final GPFeatureTypeReader featureTypeReader = new GPFeatureTypeReader() {
 
         /**
@@ -69,9 +71,11 @@ public abstract class GPGetFeatureGeoJsonStaxReader extends AbstractStaxStreamRe
     private final String fidLocalName;
 
     /**
+     * @param theXmlStreamBuilder
      * @param theFidLocalName
      */
-    protected GPGetFeatureGeoJsonStaxReader(@Nonnull(when = NEVER) String theFidLocalName) {
+    protected GPGetFeatureGeoJsonStaxReader(@Nonnull(when = NEVER) GPXmlStreamReaderBuilder theXmlStreamBuilder, @Nonnull(when = NEVER) String theFidLocalName) {
+        super(theXmlStreamBuilder);
         checkArgument((theFidLocalName != null) && !(theFidLocalName.trim().isEmpty()), "The Parameter fidLocalName must not be null or an empty string.");
         this.fidLocalName = theFidLocalName;
     }
@@ -167,10 +171,16 @@ public abstract class GPGetFeatureGeoJsonStaxReader extends AbstractStaxStreamRe
                     } else if (eventType == XMLEvent.END_ELEMENT) {
                         featureProperties.put(localName, null);
                     } else if (super.isTagPrefix(GML_PREFIX)) {
-                        this.readGeometry(feature, featureProperties);
+                        if (super.isTagName(GML_PREFIX, BOUNDING_BY_PREFIX))
+                            super.goToEndTag(BOUNDING_BY_PREFIX);
+                        else
+                            this.readGeometry(feature, featureProperties);
                     }
                 } else if (super.isTagPrefix(GML_PREFIX)) {
-                    this.readGeometry(feature, featureProperties);
+                    if (super.isTagName(GML_PREFIX, BOUNDING_BY_PREFIX))
+                        super.goToEndTag(BOUNDING_BY_PREFIX);
+                    else
+                        this.readGeometry(feature, featureProperties);
                 }
             }
             eventType = xmlStreamReader().next();

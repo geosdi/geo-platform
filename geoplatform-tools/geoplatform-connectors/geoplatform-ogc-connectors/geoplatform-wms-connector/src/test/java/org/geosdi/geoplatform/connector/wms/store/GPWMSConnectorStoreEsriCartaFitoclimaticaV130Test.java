@@ -17,9 +17,9 @@ import static org.geosdi.geoplatform.connector.server.store.GPWMSConnectorBuilde
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPWMSConnectorStoreEriCartaGeologicaV130Test {
+public class GPWMSConnectorStoreEsriCartaFitoclimaticaV130Test {
 
-    private static final Logger logger = LoggerFactory.getLogger(GPWMSConnectorStoreEriCartaGeologicaV130Test.class);
+    private static final Logger logger = LoggerFactory.getLogger(GPWMSConnectorStoreEsriCartaFitoclimaticaV130Test.class);
     //
     private static IGPWMSConnectorStoreV130 wmsServerConnectorMinisteroAmbiente;
 
@@ -27,7 +27,7 @@ public class GPWMSConnectorStoreEriCartaGeologicaV130Test {
     public static void beforeClass() throws Exception {
         wmsServerConnectorMinisteroAmbiente = wmsConnectorBuilder()
                 .wmsConnectorBuilderV130()
-                .withServerUrl(new URL("http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Carta_geologica.map"))
+                .withServerUrl(new URL("http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Carta_fitoclimatica.map"))
                 .withPooledConnectorConfig(pooledConnectorConfigBuilder()
                         .withMaxTotalConnections(40)
                         .withDefaultMaxPerRoute(20)
@@ -39,6 +39,6 @@ public class GPWMSConnectorStoreEriCartaGeologicaV130Test {
     @Test
     public void wmsGetCapabilitiesV130CartaFitoclimaticaTest() throws Exception {
         WMSGetCapabilitiesV130Request wmsGetCapabilitiesRequest = wmsServerConnectorMinisteroAmbiente.createGetCapabilitiesRequest();
-        logger.info("###############################WMS_GET_CAPABILITIES_V130_CARTA_GEOLOGICA_RESPONSE : \n{}\n", wmsGetCapabilitiesRequest.getResponseAsString());
+        logger.info("###############################WMS_GET_CAPABILITIES_V130_CARTA_FITOCLIMATICA_RESPONSE : \n{}\n", wmsGetCapabilitiesRequest.getResponseAsString());
     }
 }

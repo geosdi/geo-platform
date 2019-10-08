@@ -35,7 +35,12 @@
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-logger-support</artifactId>
-            <version>1.9-SNAPSHOT</version>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>javax.annotation-api</artifactId>
         </dependency>
 
         <!-- =========================================================== -->

@@ -8,6 +8,9 @@ import javax.xml.stream.XMLInputFactory;
  */
 public interface GPXMLInputFactoryJDKBuilder extends GPXMLInputFactoryBuilder {
 
+    String XML_INPUT_FACTORY_KEY = "javax.xml.stream.XMLInputFactory";
+    String XML_INPUT_FACTORY_VALUE = "com.sun.xml.internal.stream.XMLInputFactoryImpl";
+
     /**
      * @param <F>
      * @return {@link F}

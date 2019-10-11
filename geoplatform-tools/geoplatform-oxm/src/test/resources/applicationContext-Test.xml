@@ -48,38 +48,32 @@
            http://www.springframework.org/schema/context/spring-context-3.2.xsd"
        default-autowire="byName">
 
-    <context:annotation-config />
+    <context:annotation-config/>
 
     <bean id="castor" class="org.geosdi.geoplatform.oxm.castor.GPCastorMarshaller">
-        <property name="marshaller" ref="castorMarshaller" />
-    </bean>
-    
-    <bean id="jibx" class="org.geosdi.geoplatform.oxm.jibx.GPJibxMarshaller">
-        <property name="marshaller" ref="jibxMarshaller" />
-    </bean>
-	
-    <bean id="jax" class="org.geosdi.geoplatform.oxm.jaxb.GPJaxbMarshaller">
-        <property name="marshaller" ref="jaxb" />
-    </bean>
-	
-    <bean id="xtream" class="org.geosdi.geoplatform.oxm.xtream.GPXStreamMarshaller">
-        <property name="marshaller" ref="xStreamMarshaller" />
+        <constructor-arg value="mapping.xml"/>
     </bean>
 
-    <bean id="castorMarshaller" class="org.springframework.oxm.castor.CastorMarshaller">
-        <property name="mappingLocation"
-                  value="classpath:mapping.xml" />
+    <bean id="jibx" class="org.geosdi.geoplatform.oxm.jibx.GPJibxMarshaller">
+        <property name="marshaller" ref="jibxMarshaller"/>
+    </bean>
+
+    <bean id="jax" class="org.geosdi.geoplatform.oxm.jaxb.GPJaxbMarshaller">
+        <property name="marshaller" ref="jaxb"/>
+    </bean>
+
+    <bean id="xtream" class="org.geosdi.geoplatform.oxm.xtream.GPXStreamMarshaller">
+        <property name="marshaller" ref="xStreamMarshaller"/>
     </bean>
 
     <oxm:jaxb2-marshaller id="jaxb">
-        <oxm:class-to-be-bound
-            name="org.geosdi.geoplatform.mock.ClassToXMLMap" />
+        <oxm:class-to-be-bound name="org.geosdi.geoplatform.mock.ClassToXMLMap"/>
     </oxm:jaxb2-marshaller>
 
     <bean id="xStreamMarshaller" class="org.springframework.oxm.xstream.XStreamMarshaller">
-        <property name="autodetectAnnotations" value="true" />
+        <property name="autodetectAnnotations" value="true"/>
     </bean>
-    
+
     <oxm:jibx-marshaller id="jibxMarshaller" target-class="org.geosdi.geoplatform.mock.ClassToXMLMap"/>
 
 </beans>

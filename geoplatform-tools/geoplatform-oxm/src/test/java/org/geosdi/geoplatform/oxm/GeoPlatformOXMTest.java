@@ -34,8 +34,10 @@
  */
 package org.geosdi.geoplatform.oxm;
 
+import org.exolab.castor.xml.Marshaller;
 import org.geosdi.geoplatform.GPGenericMarshaller;
 import org.geosdi.geoplatform.mock.ClassToXMLMap;
+import org.geosdi.geoplatform.oxm.castor.IGPCastorMarshaller;
 import org.geosdi.geoplatform.oxm.jaxb.GenericJaxbMarshaller;
 import org.junit.Assert;
 import org.junit.Before;
@@ -47,12 +49,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.xml.sax.InputSource;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+
+import static org.junit.Assert.assertNotNull;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -63,8 +66,7 @@ public class GeoPlatformOXMTest {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     @Autowired
-    @Qualifier(value = "castor")
-    private GPGenericMarshaller castor;
+    private IGPCastorMarshaller castor;
     //
     @Autowired
     private GenericJaxbMarshaller jax;
@@ -90,12 +92,11 @@ public class GeoPlatformOXMTest {
     public void testCastor() throws Exception {
         String castorFile = "target/castor.xml";
         File f = new File(castorFile);
-
-        castor.marshal(message, f);
-
-        ClassToXMLMap castorMap = (ClassToXMLMap) castor.unmarshal(f);
-        Assert.assertNotNull(castorMap);
-
+        Marshaller marshaller = castor.createMarshaller();
+        marshaller.setWriter(new FileWriter(f));
+        marshaller.marshal(message);
+        ClassToXMLMap castorMap = (ClassToXMLMap) castor.createUnmarshaller().unmarshal(new InputSource(new InputStreamReader(new FileInputStream(f))));
+        assertNotNull(castorMap);
         logger.info("CASTOR BEAN  ******************** {}", castorMap + "\n");
 
     }
@@ -104,12 +105,9 @@ public class GeoPlatformOXMTest {
     public void testJaxB() throws Exception {
         String jaxbFile = "target/jaxb.xml";
         File f = new File(jaxbFile);
-
         jax.marshal(message, f);
-
         ClassToXMLMap jaxbMap = (ClassToXMLMap) jax.unmarshal(f);
-        Assert.assertNotNull(jaxbMap);
-
+        assertNotNull(jaxbMap);
         logger.info("JAX BEAN ***************** {}", jaxbMap + "\n");
     }
 
@@ -117,14 +115,9 @@ public class GeoPlatformOXMTest {
     public void testXStream() throws Exception {
         String xtreamFile = "target/xtream.xml";
         File f = new File(xtreamFile);
-
         xtream.marshal(message, f);
-
-        ClassToXMLMap xstreamMap = (ClassToXMLMap) xtream.
-                unmarshal(f);
-
-        Assert.assertNotNull(xstreamMap);
-
+        ClassToXMLMap xstreamMap = (ClassToXMLMap) xtream.unmarshal(f);
+        assertNotNull(xstreamMap);
         logger.info("XSTREAM BEAN *************** {}", xstreamMap + "\n");
     }
 
@@ -132,14 +125,9 @@ public class GeoPlatformOXMTest {
     public void testJibx() throws IOException {
         String jibxFile = "target/jibx.xml";
         File f = new File(jibxFile);
-
         jibx.marshal(message, f);
-
         ClassToXMLMap jibxMap = (ClassToXMLMap) jibx.unmarshal(f);
-
-        Assert.assertNotNull(jibxMap);
-
+        assertNotNull(jibxMap);
         logger.info("JIXB BEAN *************** {}", jibxMap + "\n");
     }
-
 }

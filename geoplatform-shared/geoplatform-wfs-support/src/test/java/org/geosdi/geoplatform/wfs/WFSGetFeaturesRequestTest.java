@@ -64,19 +64,20 @@ import org.opengis.referencing.operation.MathTransform;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.InputStream;
-import java.io.StringReader;
+import java.io.*;
 import java.math.BigInteger;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
 
+import static java.math.BigInteger.valueOf;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
+import static org.geosdi.geoplatform.wfs.WFSDescribeFeatureTest.gpJAXBContextBuilder;
+import static org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType.RESULTS;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -102,6 +103,10 @@ public class WFSGetFeaturesRequestTest {
             ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
             WRAP_ROOT_VALUE_DISABLE,
             INDENT_OUTPUT_ENABLE, NON_NULL);
+    private static char[] hex_table = {
+            '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+            'a', 'b', 'c', 'd', 'e', 'f'
+    };
 
     @Ignore(value = "Geoserver is Down")
     @Test
@@ -113,7 +118,7 @@ public class WFSGetFeaturesRequestTest {
         Schema response = request.getResponse();
 
         LayerSchemaDTO layerSchema = featureReaderXSD.getFeature(response, informationName);
-        if (layerSchema == null) {
+        if(layerSchema == null) {
             throw new IllegalStateException("The Layer Schema is null.");
         }
         layerSchema.setScope(wfsURL);
@@ -122,14 +127,14 @@ public class WFSGetFeaturesRequestTest {
         WFSGetFeatureRequest getFeatureRequest = serverConnector.createGetFeatureRequest();
         getFeatureRequest.setTypeName(new QName(layerSchema.getTypeName()));
         getFeatureRequest.setSRS("EPSG:4326");
-        getFeatureRequest.setResultType(ResultTypeType.RESULTS.value());
-        getFeatureRequest.setMaxFeatures(BigInteger.valueOf(50));
+        getFeatureRequest.setResultType(RESULTS.value());
+        getFeatureRequest.setMaxFeatures(valueOf(50));
 
         logger.debug("\n\t@@@@@@@@@@@@@@@@@@RESPONSE_AS_STRING : {}", getFeatureRequest.getResponseAsString());
         InputStream is = getFeatureRequest.getResponseAsStream();
         WFSGetFeatureStaxReader featureReaderStAX = new WFSGetFeatureStaxReader(layerSchema);
         FeatureCollectionDTO featureCollection = featureReaderStAX.read(is);
-        if (!featureCollection.isFeaturesLoaded()) {
+        if(!featureCollection.isFeaturesLoaded()) {
             featureCollection.setErrorMessage(getFeatureRequest.getResponseAsString());
         }
         logger.debug("\n\t@@@@@@@@@@@@@@@@@@@@@@@@@@@FEATURE_COLLECTION_DTO : {}", featureCollection);
@@ -147,7 +152,7 @@ public class WFSGetFeaturesRequestTest {
         request.setTypeName(Arrays.asList(states));
         Schema response = request.getResponse();
         LayerSchemaDTO layerSchema = featureReaderXSD.getFeature(response, statesName);
-        if (layerSchema == null) {
+        if(layerSchema == null) {
             throw new IllegalStateException("The Layer Schema is null.");
         }
         layerSchema.setScope(wfsURL);
@@ -157,14 +162,14 @@ public class WFSGetFeaturesRequestTest {
         getFeatureRequest.setPropertyNames(Arrays.asList(new String[]{"STATE_NAME", "PERSONS"}));
         getFeatureRequest.setBBox(new BBox(-75.102613, 40.212597, -72.361859, 41.512517));
         getFeatureRequest.setSRS("EPSG:4326");
-        getFeatureRequest.setResultType(ResultTypeType.RESULTS.value());
+        getFeatureRequest.setResultType(RESULTS.value());
 
-        getFeatureRequest.setMaxFeatures(BigInteger.valueOf(50));
+        getFeatureRequest.setMaxFeatures(valueOf(50));
         logger.debug("\n\t@@@@@@@@@@@@@@@@@@RESPONSE_AS_STRING : {}", getFeatureRequest.getResponseAsString());
         InputStream is = getFeatureRequest.getResponseAsStream();
         WFSGetFeatureStaxReader featureReaderStAX = new WFSGetFeatureStaxReader(layerSchema);
         FeatureCollectionDTO featureCollection = featureReaderStAX.read(is);
-        if (!featureCollection.isFeaturesLoaded()) {
+        if(!featureCollection.isFeaturesLoaded()) {
             featureCollection.setErrorMessage(getFeatureRequest.getResponseAsString());
         }
         logger.debug("\n\t@@@@@@@@@@@@@@@@@@@@@@@@@@@FEATURE_COLLECTION_DTO : {}", featureCollection.getNumberOfFeatures());
@@ -182,7 +187,7 @@ public class WFSGetFeaturesRequestTest {
         Schema response = request.getResponse();
 
         LayerSchemaDTO layerSchema = featureReaderXSD.getFeature(response, tigerRoadsName);
-        if (layerSchema == null) {
+        if(layerSchema == null) {
             throw new IllegalStateException("The Layer Schema is null.");
         }
         layerSchema.setScope(wfsURL);
@@ -190,14 +195,14 @@ public class WFSGetFeaturesRequestTest {
         WFSGetFeatureRequest getFeatureRequest = serverConnector.createGetFeatureRequest();
         getFeatureRequest.setTypeName(new QName(layerSchema.getTypeName()));
         getFeatureRequest.setSRS("EPSG:4326");
-        getFeatureRequest.setResultType(ResultTypeType.RESULTS.value());
-        getFeatureRequest.setMaxFeatures(BigInteger.valueOf(50));
+        getFeatureRequest.setResultType(RESULTS.value());
+        getFeatureRequest.setMaxFeatures(valueOf(50));
         logger.debug("@@@@@@@@@@@@@@@@@@RESPONSE_AS_STRING : \n{}\n", getFeatureRequest.showRequestAsString());
         InputStream is = getFeatureRequest.getResponseAsStream();
         WFSGetFeatureStaxReader featureReaderStAX = new WFSGetFeatureStaxReader(layerSchema);
         FeatureCollectionDTO featureCollection = featureReaderStAX.read(is);
 
-        if (!featureCollection.isFeaturesLoaded()) {
+        if(!featureCollection.isFeaturesLoaded()) {
             featureCollection.setErrorMessage(getFeatureRequest.getResponseAsString());
         }
         logger.debug("\n\t@@@@@@@@@@@@@@@@@@@@@@@@@@@FEATURE_COLLECTION_DTO : {}", featureCollection);
@@ -220,7 +225,7 @@ public class WFSGetFeaturesRequestTest {
         String name = localPart.substring(localPart.indexOf(":") + 1);
 
         LayerSchemaDTO layerSchema = featureReaderXSD.getFeature(response, name);
-        if (layerSchema == null) {
+        if(layerSchema == null) {
             throw new IllegalStateException("The Layer Schema is null.");
         }
         layerSchema.setScope(wfsURL);
@@ -228,16 +233,16 @@ public class WFSGetFeaturesRequestTest {
         WFSGetFeatureRequest getFeatureRequest = serverConnector.createGetFeatureRequest();
         getFeatureRequest.setTypeName(new QName(layerSchema.getTypeName()));
         getFeatureRequest.setSRS("EPSG:4326");
-        getFeatureRequest.setResultType(ResultTypeType.RESULTS.value());
+        getFeatureRequest.setResultType(RESULTS.value());
 
-        getFeatureRequest.setMaxFeatures(BigInteger.valueOf(50));
+        getFeatureRequest.setMaxFeatures(valueOf(50));
         logger.debug("@@@@@@@@@@@@@@@@@@REQUEST_AS_STRING : \n{}\n", getFeatureRequest.showRequestAsString());
         logger.debug("######################RESPONSE_AS_STRING : \n{}\n", getFeatureRequest.formatResponseAsString(2));
 
         InputStream is = getFeatureRequest.getResponseAsStream();
         WFSGetFeatureStaxReader featureReaderStAX = new WFSGetFeatureStaxReader(layerSchema);
         FeatureCollectionDTO featureCollection = featureReaderStAX.read(is);
-        if (!featureCollection.isFeaturesLoaded()) {
+        if(!featureCollection.isFeaturesLoaded()) {
             featureCollection.setErrorMessage(getFeatureRequest.getResponseAsString());
         }
         logger.info("###################################FEATURE_COLLECTION : {}\n", featureCollection);
@@ -250,7 +255,7 @@ public class WFSGetFeaturesRequestTest {
 
         InputStream si = getFeatureRequest.getResponseAsStream();
         FeatureCollectionDTO featureCollectionByBBOX = featureReaderStAX.read(si);
-        if (!featureCollectionByBBOX.isFeaturesLoaded()) {
+        if(!featureCollectionByBBOX.isFeaturesLoaded()) {
             featureCollectionByBBOX.setErrorMessage(getFeatureRequest.getResponseAsString());
         }
         logger.info("###################################FEATURE_COLLECTION_BY_BBOX : {}\n", featureCollectionByBBOX);
@@ -270,7 +275,7 @@ public class WFSGetFeaturesRequestTest {
         String name = localPart.substring(localPart.indexOf(":") + 1);
 
         LayerSchemaDTO layerSchema = featureReaderXSD.getFeature(response, name);
-        if (layerSchema == null) {
+        if(layerSchema == null) {
             throw new IllegalStateException("The Layer Schema is null.");
         }
         layerSchema.setScope(wfsURL);
@@ -280,7 +285,7 @@ public class WFSGetFeaturesRequestTest {
         WFSGetFeatureRequest getFeatureRequest = serverConnector.createGetFeatureRequest();
         getFeatureRequest.setTypeName(new QName(layerSchema.getTypeName()));
         getFeatureRequest.setSRS("EPSG:4326");
-        getFeatureRequest.setResultType(ResultTypeType.RESULTS.value());
+        getFeatureRequest.setResultType(RESULTS.value());
         String responseAsString = getFeatureRequest.formatResponseAsString(2);
 
         try (BufferedWriter writer = Files.newBufferedWriter(Paths.get("./target/GetFeatureSFRestricted.xml"))) {
@@ -336,7 +341,7 @@ public class WFSGetFeaturesRequestTest {
         Schema response = request.getResponse();
 
         LayerSchemaDTO layerSchema = featureReaderXSD.getFeature(response, TASMANIA_ROADS.getLocalPart());
-        if (layerSchema == null) {
+        if(layerSchema == null) {
             throw new IllegalStateException("The Layer Schema is null.");
         }
         layerSchema.setScope(wfsURL);
@@ -344,15 +349,15 @@ public class WFSGetFeaturesRequestTest {
         WFSGetFeatureRequest getFeatureRequest = serverConnector.createGetFeatureRequest();
         getFeatureRequest.setTypeName(new QName(layerSchema.getTypeName()));
         getFeatureRequest.setSRS("EPSG:4326");
-        getFeatureRequest.setResultType(ResultTypeType.RESULTS.value());
-        getFeatureRequest.setMaxFeatures(BigInteger.valueOf(50));
+        getFeatureRequest.setResultType(RESULTS.value());
+        getFeatureRequest.setMaxFeatures(valueOf(50));
         logger.debug("@@@@@@@@@@@@@@@@@@REQUEST_AS_STRING : \n{}\n", getFeatureRequest.showRequestAsString());
 //        logger.debug("@@@@@@@@@@@@@@@@@@RESPONSE_AS_STRING : \n{}\n", getFeatureRequest.formatResponseAsString(2));
         InputStream is = getFeatureRequest.getResponseAsStream();
         WFSGetFeatureStaxReader featureReaderStAX = new WFSGetFeatureStaxReader(layerSchema);
         FeatureCollectionDTO featureCollection = featureReaderStAX.read(is);
 
-        if (!featureCollection.isFeaturesLoaded()) {
+        if(!featureCollection.isFeaturesLoaded()) {
             featureCollection.setErrorMessage(getFeatureRequest.getResponseAsString());
         }
         logger.debug("\n\t@@@@@@@@@@@@@@@@@@@@@@@@@@@FEATURE_COLLECTION_DTO : {}", featureCollection);
@@ -369,12 +374,55 @@ public class WFSGetFeaturesRequestTest {
         getFeatureRequest.setTypeName(states);
         getFeatureRequest.setSRS("EPSG:4326");
         getFeatureRequest.setOutputFormat("json");
-        getFeatureRequest.setResultType(ResultTypeType.RESULTS.value());
+        getFeatureRequest.setResultType(RESULTS.value());
 
-        getFeatureRequest.setMaxFeatures(BigInteger.valueOf(50));
+        getFeatureRequest.setMaxFeatures(valueOf(50));
         logger.debug("\n\t@@@@@@@@@@@@@@@@@@RESPONSE_AS_JSON_STRING : {}", getFeatureRequest.getResponseAsString());
         InputStream is = getFeatureRequest.getResponseAsStream();
         logger.trace("###########################GEOJSON_FEATURE_COLLECTION : {}\n", JACKSON_SUPPORT
                 .getDefaultMapper().readValue(is, FeatureCollection.class));
+    }
+
+    @Test
+    public void percorsiNavetteTest() throws Exception {
+        String wfsURL = "http://mappe-dpc.protezionecivile.it/gssitdpc/wfs";
+        GPWFSConnectorStore serverConnector = WFSConnectorBuilder
+                .newConnector()
+                .withServerUrl(new URL(wfsURL))
+                .build();
+        QName percorsiNavette = new QName("PianoCampiFlegrei:lcavarra_shp_cf_percorsinavette");
+        String localPart = percorsiNavette.getLocalPart();
+        String name = localPart.substring(localPart.indexOf(":") + 1);
+        WFSDescribeFeatureTypeRequest<Schema> request = serverConnector.createDescribeFeatureTypeRequest();
+        request.setTypeName(Arrays.asList(percorsiNavette));
+        Schema response = request.getResponse();
+        logger.info("#################SCHEMA : {}\n", response);
+
+        LayerSchemaDTO layerSchema = featureReaderXSD.getFeature(response, name);
+        if(layerSchema == null) {
+            throw new IllegalStateException("The Layer Schema is null.");
+        }
+        layerSchema.setScope(wfsURL);
+        logger.debug("\n\t##################################LAYER_SCHEMA : {}", layerSchema);
+        WFSGetFeatureRequest getFeatureRequest = serverConnector.createGetFeatureRequest();
+        getFeatureRequest.setTypeName(new QName(layerSchema.getTypeName()));
+        getFeatureRequest.setSRS("EPSG:4326");
+        getFeatureRequest.setResultType(RESULTS.value());
+        getFeatureRequest.setMaxFeatures(valueOf(50));
+        logger.debug("@@@@@@@@@@@@@@@@@@RESPONSE_AS_STRING : \n{}\n", getFeatureRequest.showRequestAsString());
+        InputStream is = getFeatureRequest.getResponseAsStream();
+        WFSGetFeatureStaxReader featureReaderStAX = new WFSGetFeatureStaxReader(layerSchema);
+        FeatureCollectionDTO featureCollection = featureReaderStAX.read(is);
+
+        if(!featureCollection.isFeaturesLoaded()) {
+            featureCollection.setErrorMessage(getFeatureRequest.getResponseAsString());
+        }
+        JAXBElement<FeatureCollectionDTO> root = new JAXBElement<>(percorsiNavette, FeatureCollectionDTO.class, featureCollection);
+        gpJAXBContextBuilder.marshal(root, new File("./target/PercorsiNavette.xml"));
+        getFeatureRequest.setOutputFormat("json");
+        InputStream isJson = getFeatureRequest.getResponseAsStream();
+        FeatureCollection featureCollectionJson = JACKSON_SUPPORT
+                .getDefaultMapper().readValue(isJson, FeatureCollection.class);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File("./target/PercorsiNavette.json"), featureCollectionJson);
     }
 }

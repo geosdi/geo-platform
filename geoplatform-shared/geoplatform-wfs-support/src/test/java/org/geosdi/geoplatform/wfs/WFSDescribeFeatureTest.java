@@ -85,7 +85,7 @@ public class WFSDescribeFeatureTest {
     private static final QName sfRoads = new QName("sf:roads");
     //
     private static GPWFSConnectorStore serverConnector;
-    private static final GPJAXBContextBuilder gpJAXBContextBuilder = GPJAXBContextBuilder.newInstance();
+    protected static final GPJAXBContextBuilder gpJAXBContextBuilder = GPJAXBContextBuilder.newInstance();
     private static final FeatureSchemaReader schemaReader = new GPFeatureSchemaReader();
 
     @Test
@@ -134,5 +134,24 @@ public class WFSDescribeFeatureTest {
         StringWriter writer = new StringWriter();
         gpJAXBContextBuilder.marshal(schemaReader.getFeature(s, name), writer);
         logger.info("######################LAYER_SCHEMA_SITE_COM_XML : \n{}\n", writer);
+    }
+
+    @Test
+    public void describeLayerPercorsiNavetteTest() throws Exception {
+        WFSDescribeFeatureTypeRequest<Schema> request =
+                newConnector()
+                        .withServerUrl(new URL("http://mappe-dpc.protezionecivile.it/gssitdpc/wfs"))
+                        .build()
+                        .createDescribeFeatureTypeRequest();
+        QName percorsiNavette = new QName("PianoCampiFlegrei:lcavarra_shp_cf_percorsinavette");
+        String localPart = percorsiNavette.getLocalPart();
+        request.setTypeName(Arrays.asList(percorsiNavette));
+        logger.debug("#########################SCHEMA_AS_STRING : \n{}\n", request.formatResponseAsString(2));
+        Schema s = request.getResponse();
+        String name = localPart.substring(localPart.indexOf(":") + 1);
+        JAXBElement<LayerSchemaDTO> root = new JAXBElement<>(percorsiNavette, LayerSchemaDTO.class, schemaReader.getFeature(s, name));
+        StringWriter writer = new StringWriter();
+        gpJAXBContextBuilder.marshal(root, writer);
+        logger.info("######################LAYER_SCHEMA_PERCORSI_NAVETTE_XML : \n{}\n", writer);
     }
 }

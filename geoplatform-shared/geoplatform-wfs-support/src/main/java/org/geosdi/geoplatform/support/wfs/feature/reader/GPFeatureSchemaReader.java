@@ -1,37 +1,36 @@
 /**
- *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
- *
- *   Copyright (C) 2008-2019 geoSDI Group (CNR IMAA - Potenza - ITALY).
- *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
- *
- *   ====================================================================
- *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
- *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * geo-platform
+ * Rich webgis framework
+ * http://geo-platform.org
+ * ====================================================================
+ * <p>
+ * Copyright (C) 2008-2019 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * <p>
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version. This program is distributed in the
+ * hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License
+ * for more details. You should have received a copy of the GNU General
+ * Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * <p>
+ * ====================================================================
+ * <p>
+ * Linking this library statically or dynamically with other modules is
+ * making a combined work based on this library. Thus, the terms and
+ * conditions of the GNU General Public License cover the whole combination.
+ * <p>
+ * As a special exception, the copyright holders of this library give you permission
+ * to link this library with independent modules to produce an executable, regardless
+ * of the license terms of these independent modules, and to copy and distribute
+ * the resulting executable under terms of your choice, provided that you also meet,
+ * for each linked independent module, the terms and conditions of the license of
+ * that module. An independent module is a module which is not derived from or
+ * based on this library. If you modify this library, you may extend this exception
+ * to your version of the library, but you are not obligated to do so. If you do not
+ * wish to do so, delete this exception statement from your version.
  */
 package org.geosdi.geoplatform.support.wfs.feature.reader;
 
@@ -132,10 +131,9 @@ public class GPFeatureSchemaReader implements FeatureSchemaReader {
     @Override
     public List<LayerSchemaDTO> getAllFeature(Schema schema) {
         List<LayerSchemaDTO> layerSchemaList = new ArrayList<>();
-
         for (TopLevelElement element : schema.getTopLevelElements()) {
             QName typeName = element.getType();
-            if (typeName != null) {
+            if(typeName != null) {
                 LayerSchemaDTO layerSchema = this.getFeature(schema, element.getName());
                 layerSchemaList.add(layerSchema);
             } else {
@@ -154,9 +152,9 @@ public class GPFeatureSchemaReader implements FeatureSchemaReader {
     public LayerSchemaDTO getFeature(Schema schema, String name) {
         LayerSchemaDTO layerSchema = null;
         TopLevelElement element = schema.getTopLevelElement(name);
-        if (element != null) {
+        if(element != null) {
             QName typeName = element.getType();
-            if (typeName != null) {
+            if(typeName != null) {
                 TopLevelComplexType type = schema.getTopLevelComplexType(
                         typeName.getLocalPart());
                 List<Element> elementAttributes = this.getElementAttributes(type);
@@ -169,9 +167,8 @@ public class GPFeatureSchemaReader implements FeatureSchemaReader {
                 List<AttributeDTO> attributes = new ArrayList<>(elementAttributes.size() - 1);
                 for (Element attributeElement : elementAttributes) {
                     AttributeDTO attribute = this.getAttribute(attributeElement);
-                    GeometryAttributeDTO geometryAttribute = this.getGeometryAttribute(
-                            attribute);
-                    if (geometryAttribute == null) {
+                    GeometryAttributeDTO geometryAttribute = this.getGeometryAttribute(attribute);
+                    if(geometryAttribute == null) {
                         attributes.add(attribute);
                     } else {
                         layerSchema.setGeometry(geometryAttribute);
@@ -186,13 +183,13 @@ public class GPFeatureSchemaReader implements FeatureSchemaReader {
     }
 
     private List<Element> getElementAttributes(TopLevelComplexType type) {
-        if (type != null) {
+        if(type != null) {
             ComplexContent content = type.getComplexContent();
-            if (content != null) {
+            if(content != null) {
                 ExtensionType ext = content.getExtension();
-                if (ext != null) {
+                if(ext != null) {
                     ExplicitGroup sequence = ext.getSequence();
-                    if (sequence != null) {
+                    if(sequence != null) {
                         return sequence.getElements();
                     }
                 }
@@ -204,9 +201,9 @@ public class GPFeatureSchemaReader implements FeatureSchemaReader {
     private AttributeDTO getAttribute(Element attributeElement) {
         QName elementType = attributeElement.getType();
 
-        if (elementType == null && attributeElement.getSimpleType() != null) {
+        if(elementType == null && attributeElement.getSimpleType() != null) {
             LocalSimpleType simpleType = attributeElement.getSimpleType();
-            if (simpleType.getRestriction() != null) {
+            if(simpleType.getRestriction() != null) {
                 elementType = simpleType.getRestriction().getBase();
             }
         }
@@ -229,7 +226,7 @@ public class GPFeatureSchemaReader implements FeatureSchemaReader {
 
     private GeometryAttributeDTO getGeometryAttribute(AttributeDTO attribute) {
         String type = attribute.getType();
-        if (!GeometryBinding.isGMLGeometricType(type)) {
+        if(!GeometryBinding.isGMLGeometricType(type)) {
             return null;
         }
         GeometryAttributeDTO geometryAttribute = new GeometryAttributeDTO();

@@ -21,6 +21,7 @@ import java.util.Arrays;
 
 import static org.geosdi.geoplatform.connector.WFSConnectorBuilder.newConnector;
 import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -63,7 +64,7 @@ public class GPWFSGetFeatureLayerTempoTest {
         request.setQueryDTO(queryDTO);
         logger.info("######################\n{}\n", request.showRequestAsString());
         FeatureCollectionType response = request.getResponse();
-        Assert.assertTrue(response.getNumberOfFeatures().intValue() == 7);
+        assertTrue(response.getNumberOfFeatures().intValue() == 7);
     }
 
     @Test
@@ -81,7 +82,7 @@ public class GPWFSGetFeatureLayerTempoTest {
         request.setQueryDTO(queryDTO);
         logger.info("######################\n{}\n", request.showRequestAsString());
         FeatureCollectionType response = request.getResponse();
-        Assert.assertTrue(response.getNumberOfFeatures().intValue() == 0);
+        assertTrue(response.getNumberOfFeatures().intValue() == 0);
     }
 
     @Test
@@ -99,7 +100,7 @@ public class GPWFSGetFeatureLayerTempoTest {
         request.setQueryDTO(queryDTO);
         logger.info("######################\n{}\n", request.showRequestAsString());
         FeatureCollectionType response = request.getResponse();
-        Assert.assertTrue(response.getNumberOfFeatures().intValue() == 1);
+        assertTrue(response.getNumberOfFeatures().intValue() == 1);
     }
 
     @Test
@@ -117,7 +118,7 @@ public class GPWFSGetFeatureLayerTempoTest {
         request.setQueryDTO(queryDTO);
         logger.info("######################\n{}\n", request.showRequestAsString());
         FeatureCollectionType response = request.getResponse();
-        Assert.assertTrue(response.getNumberOfFeatures().intValue() == 1);
+        assertTrue(response.getNumberOfFeatures().intValue() == 1);
     }
 
     @Test
@@ -135,6 +136,6 @@ public class GPWFSGetFeatureLayerTempoTest {
         request.setQueryDTO(queryDTO);
         logger.info("######################\n{}\n", request.showRequestAsString());
         FeatureCollectionType response = request.getResponse();
-        Assert.assertTrue(response.getNumberOfFeatures().intValue() == 7);
+        assertTrue(response.getNumberOfFeatures().intValue() == 7);
     }
 }

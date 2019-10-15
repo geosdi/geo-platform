@@ -143,7 +143,7 @@ public class WFSDescribeFeatureTest {
                         .withServerUrl(new URL("http://mappe-dpc.protezionecivile.it/gssitdpc/wfs"))
                         .build()
                         .createDescribeFeatureTypeRequest();
-        QName percorsiNavette = new QName("PianoCampiFlegrei:lcavarra_shp_cf_percorsinavette");
+        QName percorsiNavette = new QName("PianoCampiFlegrei:CF_PercorsiNavette");
         String localPart = percorsiNavette.getLocalPart();
         request.setTypeName(Arrays.asList(percorsiNavette));
         logger.debug("#########################SCHEMA_AS_STRING : \n{}\n", request.formatResponseAsString(2));

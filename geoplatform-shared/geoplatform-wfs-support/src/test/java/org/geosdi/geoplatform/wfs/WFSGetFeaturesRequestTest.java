@@ -390,7 +390,7 @@ public class WFSGetFeaturesRequestTest {
                 .newConnector()
                 .withServerUrl(new URL(wfsURL))
                 .build();
-        QName percorsiNavette = new QName("PianoCampiFlegrei:lcavarra_shp_cf_percorsinavette");
+        QName percorsiNavette = new QName("PianoCampiFlegrei:CF_PercorsiNavette");
         String localPart = percorsiNavette.getLocalPart();
         String name = localPart.substring(localPart.indexOf(":") + 1);
         WFSDescribeFeatureTypeRequest<Schema> request = serverConnector.createDescribeFeatureTypeRequest();

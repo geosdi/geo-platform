@@ -1,6 +1,7 @@
 package org.geosdi.geoplatform.stax.reader.factory;
 
 import com.ctc.wstx.stax.WstxInputFactory;
+import com.fasterxml.aalto.AsyncXMLInputFactory;
 import com.fasterxml.aalto.stax.InputFactoryImpl;
 import org.codehaus.stax2.XMLInputFactory2;
 import org.slf4j.Logger;

@@ -1,5 +1,6 @@
 package org.geosdi.geoplatform.connector.server.request;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.ToString;
 import net.jcip.annotations.Immutable;
@@ -14,6 +15,7 @@ import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Stream.of;
 import static javax.annotation.meta.When.NEVER;
+import static lombok.AccessLevel.NONE;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -31,6 +33,7 @@ public class WMSGetMapBaseRequest implements GPWMSGetMapBaseRequest {
     private final String srs;
     private final String width;
     private final String height;
+    @Getter(NONE)
     private String wmsGetMapKeyValuePair;
 
     /**

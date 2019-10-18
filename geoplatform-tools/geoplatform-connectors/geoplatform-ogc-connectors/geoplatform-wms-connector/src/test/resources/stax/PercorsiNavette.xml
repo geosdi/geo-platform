@@ -1,0 +1,1257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfs:FeatureCollection xmlns="http://www.opengis.net/wfs" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:PianoCampiFlegrei="http://PianoCampiFlegrei" xmlns:gml="http://www.opengis.net/gml"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xsi:schemaLocation="http://www.opengis.net/wfs http://mappe-dpc.protezionecivile.it/gssitdpc/schemas/wfs/1.0.0/WFS-basic.xsd http://PianoCampiFlegrei http://mappe-dpc.protezionecivile.it/gssitdpc/PianoCampiFlegrei/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=PianoCampiFlegrei%3ACF_PercorsiNavette">
+    <gml:boundedBy>
+        <gml:null>unknown</gml:null>
+    </gml:boundedBy>
+    <gml:featureMember>
+        <PianoCampiFlegrei:CF_PercorsiNavette fid="CF_PercorsiNavette.42">
+            <PianoCampiFlegrei:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString srsName="EPSG:4326">
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                14.19035443,40.83359179 14.19452297,40.83531279 14.19304241,40.83588019
+                                14.19122185,40.83531899 14.19113441,40.83315439
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </PianoCampiFlegrei:the_geom>
+            <PianoCampiFlegrei:id>386</PianoCampiFlegrei:id>
+            <PianoCampiFlegrei:n_percorso>28</PianoCampiFlegrei:n_percorso>
+            <PianoCampiFlegrei:da_A_att>Pozzuoli, Via Artiaco - uscita tangenziale</PianoCampiFlegrei:da_A_att>
+            <PianoCampiFlegrei:a_A_inc>Napoli, Stazione ferroviaria Centrale, Piazza Garibaldi
+            </PianoCampiFlegrei:a_A_inc>
+            <PianoCampiFlegrei:percorrenz>Andata</PianoCampiFlegrei:percorrenz>
+            <PianoCampiFlegrei:lungh_a>958.50993757</PianoCampiFlegrei:lungh_a>
+            <PianoCampiFlegrei:lungh_r>0.0</PianoCampiFlegrei:lungh_r>
+            <PianoCampiFlegrei:tempo_a>3</PianoCampiFlegrei:tempo_a>
+            <PianoCampiFlegrei:tempo_r>0</PianoCampiFlegrei:tempo_r>
+            <PianoCampiFlegrei:n_tip_stra>Svincolo uscita A56</PianoCampiFlegrei:n_tip_stra>
+            <PianoCampiFlegrei:bus_necess>0</PianoCampiFlegrei:bus_necess>
+            <PianoCampiFlegrei:Velocita>20</PianoCampiFlegrei:Velocita>
+            <PianoCampiFlegrei:id_strade/>
+            <PianoCampiFlegrei:da_ID_AA>29</PianoCampiFlegrei:da_ID_AA>
+            <PianoCampiFlegrei:a_Cod_AI>I-02</PianoCampiFlegrei:a_Cod_AI>
+            <PianoCampiFlegrei:n_percor_1>28</PianoCampiFlegrei:n_percor_1>
+        </PianoCampiFlegrei:CF_PercorsiNavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PianoCampiFlegrei:CF_PercorsiNavette fid="CF_PercorsiNavette.48">
+            <PianoCampiFlegrei:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString srsName="EPSG:4326">
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                14.19826251,40.83650135 14.18915126,40.83323235 14.1858683,40.83322653
+                                14.17425591,40.83930387 14.16663645,40.83965607
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </PianoCampiFlegrei:the_geom>
+            <PianoCampiFlegrei:id>398</PianoCampiFlegrei:id>
+            <PianoCampiFlegrei:n_percorso>28</PianoCampiFlegrei:n_percorso>
+            <PianoCampiFlegrei:da_A_att>Pozzuoli, Via Artiaco - uscita tangenziale</PianoCampiFlegrei:da_A_att>
+            <PianoCampiFlegrei:a_A_inc>Napoli, Stazione ferroviaria Centrale, Piazza Garibaldi
+            </PianoCampiFlegrei:a_A_inc>
+            <PianoCampiFlegrei:percorrenz>Ritorno</PianoCampiFlegrei:percorrenz>
+            <PianoCampiFlegrei:lungh_a>0.0</PianoCampiFlegrei:lungh_a>
+            <PianoCampiFlegrei:lungh_r>2977.66438561</PianoCampiFlegrei:lungh_r>
+            <PianoCampiFlegrei:tempo_a>0</PianoCampiFlegrei:tempo_a>
+            <PianoCampiFlegrei:tempo_r>3</PianoCampiFlegrei:tempo_r>
+            <PianoCampiFlegrei:n_tip_stra>A56 "Tangenziale di Napoli"</PianoCampiFlegrei:n_tip_stra>
+            <PianoCampiFlegrei:bus_necess>0</PianoCampiFlegrei:bus_necess>
+            <PianoCampiFlegrei:Velocita>60</PianoCampiFlegrei:Velocita>
+            <PianoCampiFlegrei:id_strade>063TANGENZIALE EST B</PianoCampiFlegrei:id_strade>
+            <PianoCampiFlegrei:da_ID_AA>29</PianoCampiFlegrei:da_ID_AA>
+            <PianoCampiFlegrei:a_Cod_AI>I-02</PianoCampiFlegrei:a_Cod_AI>
+            <PianoCampiFlegrei:n_percor_1>28</PianoCampiFlegrei:n_percor_1>
+        </PianoCampiFlegrei:CF_PercorsiNavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PianoCampiFlegrei:CF_PercorsiNavette fid="CF_PercorsiNavette.50">
+            <PianoCampiFlegrei:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString srsName="EPSG:4326">
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                14.19035443,40.83359179 14.185149,40.83317732 14.17418536,40.83924854
+                                14.16654732,40.83959786
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </PianoCampiFlegrei:the_geom>
+            <PianoCampiFlegrei:id>385</PianoCampiFlegrei:id>
+            <PianoCampiFlegrei:n_percorso>28</PianoCampiFlegrei:n_percorso>
+            <PianoCampiFlegrei:da_A_att>Pozzuoli, Via Artiaco - uscita tangenziale</PianoCampiFlegrei:da_A_att>
+            <PianoCampiFlegrei:a_A_inc>Napoli, Stazione ferroviaria Centrale, Piazza Garibaldi
+            </PianoCampiFlegrei:a_A_inc>
+            <PianoCampiFlegrei:percorrenz>Andata</PianoCampiFlegrei:percorrenz>
+            <PianoCampiFlegrei:lungh_a>2241.04785395</PianoCampiFlegrei:lungh_a>
+            <PianoCampiFlegrei:lungh_r>0.0</PianoCampiFlegrei:lungh_r>
+            <PianoCampiFlegrei:tempo_a>2</PianoCampiFlegrei:tempo_a>
+            <PianoCampiFlegrei:tempo_r>0</PianoCampiFlegrei:tempo_r>
+            <PianoCampiFlegrei:n_tip_stra>A56 "Tangenziale di Napoli"</PianoCampiFlegrei:n_tip_stra>
+            <PianoCampiFlegrei:bus_necess>0</PianoCampiFlegrei:bus_necess>
+            <PianoCampiFlegrei:Velocita>60</PianoCampiFlegrei:Velocita>
+            <PianoCampiFlegrei:id_strade>063TANGENZIALE EST B</PianoCampiFlegrei:id_strade>
+            <PianoCampiFlegrei:da_ID_AA>29</PianoCampiFlegrei:da_ID_AA>
+            <PianoCampiFlegrei:a_Cod_AI>I-02</PianoCampiFlegrei:a_Cod_AI>
+            <PianoCampiFlegrei:n_percor_1>28</PianoCampiFlegrei:n_percor_1>
+        </PianoCampiFlegrei:CF_PercorsiNavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PianoCampiFlegrei:CF_PercorsiNavette fid="CF_PercorsiNavette.54">
+            <PianoCampiFlegrei:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString srsName="EPSG:4326">
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                14.19836608,40.83665853 14.19472958,40.83568208 14.19027044,40.83617351
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </PianoCampiFlegrei:the_geom>
+            <PianoCampiFlegrei:id>300</PianoCampiFlegrei:id>
+            <PianoCampiFlegrei:n_percorso>22</PianoCampiFlegrei:n_percorso>
+            <PianoCampiFlegrei:da_A_att>Napoli - Soccavo, S1 - Polifunzionale Soccavo, Viale Adriano
+            </PianoCampiFlegrei:da_A_att>
+            <PianoCampiFlegrei:a_A_inc>Napoli, Stazione ferroviaria Centrale, Piazza Garibaldi
+            </PianoCampiFlegrei:a_A_inc>
+            <PianoCampiFlegrei:percorrenz>Ritorno</PianoCampiFlegrei:percorrenz>
+            <PianoCampiFlegrei:lungh_a>0.0</PianoCampiFlegrei:lungh_a>
+            <PianoCampiFlegrei:lungh_r>748.06812766</PianoCampiFlegrei:lungh_r>
+            <PianoCampiFlegrei:tempo_a>0</PianoCampiFlegrei:tempo_a>
+            <PianoCampiFlegrei:tempo_r>2</PianoCampiFlegrei:tempo_r>
+            <PianoCampiFlegrei:n_tip_stra>Svicolo uscita A56</PianoCampiFlegrei:n_tip_stra>
+            <PianoCampiFlegrei:bus_necess>0</PianoCampiFlegrei:bus_necess>
+            <PianoCampiFlegrei:Velocita>20</PianoCampiFlegrei:Velocita>
+            <PianoCampiFlegrei:id_strade/>
+            <PianoCampiFlegrei:da_ID_AA>24</PianoCampiFlegrei:da_ID_AA>
+            <PianoCampiFlegrei:a_Cod_AI>I-02</PianoCampiFlegrei:a_Cod_AI>
+            <PianoCampiFlegrei:n_percor_1>22</PianoCampiFlegrei:n_percor_1>
+        </PianoCampiFlegrei:CF_PercorsiNavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PianoCampiFlegrei:CF_PercorsiNavette fid="CF_PercorsiNavette.57">
+            <PianoCampiFlegrei:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString srsName="EPSG:4326">
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                14.1902921,40.83618086 14.19111922,40.83324857
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </PianoCampiFlegrei:the_geom>
+            <PianoCampiFlegrei:id>305</PianoCampiFlegrei:id>
+            <PianoCampiFlegrei:n_percorso>23</PianoCampiFlegrei:n_percorso>
+            <PianoCampiFlegrei:da_A_att>Napoli - Soccavo, S2 - Piazza Giovanni XXIII</PianoCampiFlegrei:da_A_att>
+            <PianoCampiFlegrei:a_A_inc>Napoli, Stazione ferroviaria Centrale, Piazza Garibaldi
+            </PianoCampiFlegrei:a_A_inc>
+            <PianoCampiFlegrei:percorrenz>Andata</PianoCampiFlegrei:percorrenz>
+            <PianoCampiFlegrei:lungh_a>335.2628138</PianoCampiFlegrei:lungh_a>
+            <PianoCampiFlegrei:lungh_r>0.0</PianoCampiFlegrei:lungh_r>
+            <PianoCampiFlegrei:tempo_a>1</PianoCampiFlegrei:tempo_a>
+            <PianoCampiFlegrei:tempo_r>0</PianoCampiFlegrei:tempo_r>
+            <PianoCampiFlegrei:n_tip_stra>Urbana - V.Cintia</PianoCampiFlegrei:n_tip_stra>
+            <PianoCampiFlegrei:bus_necess>0</PianoCampiFlegrei:bus_necess>
+            <PianoCampiFlegrei:Velocita>20</PianoCampiFlegrei:Velocita>
+            <PianoCampiFlegrei:id_strade>063VIA CINTHIA C</PianoCampiFlegrei:id_strade>
+            <PianoCampiFlegrei:da_ID_AA>25</PianoCampiFlegrei:da_ID_AA>
+            <PianoCampiFlegrei:a_Cod_AI>I-02</PianoCampiFlegrei:a_Cod_AI>
+            <PianoCampiFlegrei:n_percor_1>23</PianoCampiFlegrei:n_percor_1>
+        </PianoCampiFlegrei:CF_PercorsiNavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PianoCampiFlegrei:CF_PercorsiNavette fid="CF_PercorsiNavette.62">
+            <PianoCampiFlegrei:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString srsName="EPSG:4326">
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                14.19113441,40.83315439 14.19127477,40.8279393 14.19345399,40.82290627
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </PianoCampiFlegrei:the_geom>
+            <PianoCampiFlegrei:id>387</PianoCampiFlegrei:id>
+            <PianoCampiFlegrei:n_percorso>28</PianoCampiFlegrei:n_percorso>
+            <PianoCampiFlegrei:da_A_att>Pozzuoli, Via Artiaco - uscita tangenziale</PianoCampiFlegrei:da_A_att>
+            <PianoCampiFlegrei:a_A_inc>Napoli, Stazione ferroviaria Centrale, Piazza Garibaldi
+            </PianoCampiFlegrei:a_A_inc>
+            <PianoCampiFlegrei:percorrenz>Andata</PianoCampiFlegrei:percorrenz>
+            <PianoCampiFlegrei:lungh_a>1177.04153151</PianoCampiFlegrei:lungh_a>
+            <PianoCampiFlegrei:lungh_r>0.0</PianoCampiFlegrei:lungh_r>
+            <PianoCampiFlegrei:tempo_a>4</PianoCampiFlegrei:tempo_a>
+            <PianoCampiFlegrei:tempo_r>0</PianoCampiFlegrei:tempo_r>
+            <PianoCampiFlegrei:n_tip_stra>Urbana - V.Cintia; V.Claudio; V.Giulio Cesare</PianoCampiFlegrei:n_tip_stra>
+            <PianoCampiFlegrei:bus_necess>0</PianoCampiFlegrei:bus_necess>
+            <PianoCampiFlegrei:Velocita>20</PianoCampiFlegrei:Velocita>
+            <PianoCampiFlegrei:id_strade>063VIA CINHIA</PianoCampiFlegrei:id_strade>
+            <PianoCampiFlegrei:da_ID_AA>29</PianoCampiFlegrei:da_ID_AA>
+            <PianoCampiFlegrei:a_Cod_AI>I-02</PianoCampiFlegrei:a_Cod_AI>
+            <PianoCampiFlegrei:n_percor_1>28</PianoCampiFlegrei:n_percor_1>
+        </PianoCampiFlegrei:CF_PercorsiNavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PianoCampiFlegrei:CF_PercorsiNavette fid="CF_PercorsiNavette.70">
+            <PianoCampiFlegrei:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString srsName="EPSG:4326">
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                14.19035149,40.83373567 14.19439327,40.83526898 14.19127363,40.83539758
+                                14.19103001,40.83317894
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </PianoCampiFlegrei:the_geom>
+            <PianoCampiFlegrei:id>367</PianoCampiFlegrei:id>
+            <PianoCampiFlegrei:n_percorso>27</PianoCampiFlegrei:n_percorso>
+            <PianoCampiFlegrei:da_A_att>Pozzuoli, Via Antonino Pio - Toiano</PianoCampiFlegrei:da_A_att>
+            <PianoCampiFlegrei:a_A_inc>Napoli, Stazione ferroviaria Centrale, Piazza Garibaldi
+            </PianoCampiFlegrei:a_A_inc>
+            <PianoCampiFlegrei:percorrenz>Andata</PianoCampiFlegrei:percorrenz>
+            <PianoCampiFlegrei:lungh_a>958.50993757</PianoCampiFlegrei:lungh_a>
+            <PianoCampiFlegrei:lungh_r>0.0</PianoCampiFlegrei:lungh_r>
+            <PianoCampiFlegrei:tempo_a>3</PianoCampiFlegrei:tempo_a>
+            <PianoCampiFlegrei:tempo_r>0</PianoCampiFlegrei:tempo_r>
+            <PianoCampiFlegrei:n_tip_stra>Svincolo uscita A56</PianoCampiFlegrei:n_tip_stra>
+            <PianoCampiFlegrei:bus_necess>0</PianoCampiFlegrei:bus_necess>
+            <PianoCampiFlegrei:Velocita>20</PianoCampiFlegrei:Velocita>
+            <PianoCampiFlegrei:id_strade/>
+            <PianoCampiFlegrei:da_ID_AA>28</PianoCampiFlegrei:da_ID_AA>
+            <PianoCampiFlegrei:a_Cod_AI>I-02</PianoCampiFlegrei:a_Cod_AI>
+            <PianoCampiFlegrei:n_percor_1>27</PianoCampiFlegrei:n_percor_1>
+        </PianoCampiFlegrei:CF_PercorsiNavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PianoCampiFlegrei:CF_PercorsiNavette fid="CF_PercorsiNavette.73">
+            <PianoCampiFlegrei:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString srsName="EPSG:4326">
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                14.19836608,40.83665853 14.19218403,40.83591585 14.19092433,40.83501087
+                                14.19108179,40.83325753
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </PianoCampiFlegrei:the_geom>
+            <PianoCampiFlegrei:id>202</PianoCampiFlegrei:id>
+            <PianoCampiFlegrei:n_percorso>16</PianoCampiFlegrei:n_percorso>
+            <PianoCampiFlegrei:da_A_att>Napoli - Fuorigrotta, F2 - via GB Marino alt. curva A
+            </PianoCampiFlegrei:da_A_att>
+            <PianoCampiFlegrei:a_A_inc>Afragola, Stazione ferroviaria di Napoli Afragola, Via Arena
+            </PianoCampiFlegrei:a_A_inc>
+            <PianoCampiFlegrei:percorrenz>Ritorno</PianoCampiFlegrei:percorrenz>
+            <PianoCampiFlegrei:lungh_a>0.0</PianoCampiFlegrei:lungh_a>
+            <PianoCampiFlegrei:lungh_r>897.13237739</PianoCampiFlegrei:lungh_r>
+            <PianoCampiFlegrei:tempo_a>0</PianoCampiFlegrei:tempo_a>
+            <PianoCampiFlegrei:tempo_r>3</PianoCampiFlegrei:tempo_r>
+            <PianoCampiFlegrei:n_tip_stra>Svincolo uscita A56</PianoCampiFlegrei:n_tip_stra>
+            <PianoCampiFlegrei:bus_necess>0</PianoCampiFlegrei:bus_necess>
+            <PianoCampiFlegrei:Velocita>20</PianoCampiFlegrei:Velocita>
+            <PianoCampiFlegrei:id_strade>063VIA CINTHIA B</PianoCampiFlegrei:id_strade>
+            <PianoCampiFlegrei:da_ID_AA>16</PianoCampiFlegrei:da_ID_AA>
+            <PianoCampiFlegrei:a_Cod_AI>I-03</PianoCampiFlegrei:a_Cod_AI>
+            <PianoCampiFlegrei:n_percor_1>16</PianoCampiFlegrei:n_percor_1>
+        </PianoCampiFlegrei:CF_PercorsiNavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PianoCampiFlegrei:CF_PercorsiNavette fid="CF_PercorsiNavette.79">
+            <PianoCampiFlegrei:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString srsName="EPSG:4326">
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                14.19108119,40.83326999 14.19122155,40.82805491 14.19336141,40.82296951
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </PianoCampiFlegrei:the_geom>
+            <PianoCampiFlegrei:id>276</PianoCampiFlegrei:id>
+            <PianoCampiFlegrei:n_percorso>21</PianoCampiFlegrei:n_percorso>
+            <PianoCampiFlegrei:da_A_att>Napoli - Pianura, P1 - Campo basket Via Nabucco</PianoCampiFlegrei:da_A_att>
+            <PianoCampiFlegrei:a_A_inc>Napoli, Stazione ferroviaria Centrale, Piazza Garibaldi
+            </PianoCampiFlegrei:a_A_inc>
+            <PianoCampiFlegrei:percorrenz>Andata</PianoCampiFlegrei:percorrenz>
+            <PianoCampiFlegrei:lungh_a>1177.04153123</PianoCampiFlegrei:lungh_a>
+            <PianoCampiFlegrei:lungh_r>0.0</PianoCampiFlegrei:lungh_r>
+            <PianoCampiFlegrei:tempo_a>4</PianoCampiFlegrei:tempo_a>
+            <PianoCampiFlegrei:tempo_r>0</PianoCampiFlegrei:tempo_r>
+            <PianoCampiFlegrei:n_tip_stra>Urbana - V.Cintia; V.Claudio; V.Giulio Cesare</PianoCampiFlegrei:n_tip_stra>
+            <PianoCampiFlegrei:bus_necess>0</PianoCampiFlegrei:bus_necess>
+            <PianoCampiFlegrei:Velocita>20</PianoCampiFlegrei:Velocita>
+            <PianoCampiFlegrei:id_strade>063VIA CINHIA</PianoCampiFlegrei:id_strade>
+            <PianoCampiFlegrei:da_ID_AA>19</PianoCampiFlegrei:da_ID_AA>
+            <PianoCampiFlegrei:a_Cod_AI>I-02</PianoCampiFlegrei:a_Cod_AI>
+            <PianoCampiFlegrei:n_percor_1>21</PianoCampiFlegrei:n_percor_1>
+        </PianoCampiFlegrei:CF_PercorsiNavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PianoCampiFlegrei:CF_PercorsiNavette fid="CF_PercorsiNavette.89">
+            <PianoCampiFlegrei:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString srsName="EPSG:4326">
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                14.19108119,40.83326999 14.19122155,40.82805491 14.19336141,40.82296951
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </PianoCampiFlegrei:the_geom>
+            <PianoCampiFlegrei:id>243</PianoCampiFlegrei:id>
+            <PianoCampiFlegrei:n_percorso>19</PianoCampiFlegrei:n_percorso>
+            <PianoCampiFlegrei:da_A_att>Napoli - Pianura, P2 - Area attrezzata Via Mandela</PianoCampiFlegrei:da_A_att>
+            <PianoCampiFlegrei:a_A_inc>Napoli, Stazione ferroviaria Centrale, Piazza Garibaldi
+            </PianoCampiFlegrei:a_A_inc>
+            <PianoCampiFlegrei:percorrenz>Andata</PianoCampiFlegrei:percorrenz>
+            <PianoCampiFlegrei:lungh_a>1177.0415259</PianoCampiFlegrei:lungh_a>
+            <PianoCampiFlegrei:lungh_r>0.0</PianoCampiFlegrei:lungh_r>
+            <PianoCampiFlegrei:tempo_a>4</PianoCampiFlegrei:tempo_a>
+            <PianoCampiFlegrei:tempo_r>0</PianoCampiFlegrei:tempo_r>
+            <PianoCampiFlegrei:n_tip_stra>Urbana - V.Cintia; V.Claudio; V.Giulio Cesare</PianoCampiFlegrei:n_tip_stra>
+            <PianoCampiFlegrei:bus_necess>0</PianoCampiFlegrei:bus_necess>
+            <PianoCampiFlegrei:Velocita>20</PianoCampiFlegrei:Velocita>
+            <PianoCampiFlegrei:id_strade>063VIA CINHIA</PianoCampiFlegrei:id_strade>
+            <PianoCampiFlegrei:da_ID_AA>20</PianoCampiFlegrei:da_ID_AA>
+            <PianoCampiFlegrei:a_Cod_AI>I-02</PianoCampiFlegrei:a_Cod_AI>
+            <PianoCampiFlegrei:n_percor_1>19</PianoCampiFlegrei:n_percor_1>
+        </PianoCampiFlegrei:CF_PercorsiNavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PianoCampiFlegrei:CF_PercorsiNavette fid="CF_PercorsiNavette.81">
+            <PianoCampiFlegrei:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString srsName="EPSG:4326">
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                14.16696138,40.85321401 14.1835435,40.84718411 14.18397727,40.84469032
+                                14.19023776,40.83617801
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </PianoCampiFlegrei:the_geom>
+            <PianoCampiFlegrei:id>257</PianoCampiFlegrei:id>
+            <PianoCampiFlegrei:n_percorso>20</PianoCampiFlegrei:n_percorso>
+            <PianoCampiFlegrei:da_A_att>Napoli - Pianura, P3 - Via Torricelli esterno parchi Falcone e Borsellino
+            </PianoCampiFlegrei:da_A_att>
+            <PianoCampiFlegrei:a_A_inc>Napoli, Stazione ferroviaria Centrale, Piazza Garibaldi
+            </PianoCampiFlegrei:a_A_inc>
+            <PianoCampiFlegrei:percorrenz>Andata / Ritorno</PianoCampiFlegrei:percorrenz>
+            <PianoCampiFlegrei:lungh_a>2949.77626135</PianoCampiFlegrei:lungh_a>
+            <PianoCampiFlegrei:lungh_r>2949.77626135</PianoCampiFlegrei:lungh_r>
+            <PianoCampiFlegrei:tempo_a>6</PianoCampiFlegrei:tempo_a>
+            <PianoCampiFlegrei:tempo_r>6</PianoCampiFlegrei:tempo_r>
+            <PianoCampiFlegrei:n_tip_stra>Urbana - V.Montagna Spaccata; V.Cintia</PianoCampiFlegrei:n_tip_stra>
+            <PianoCampiFlegrei:bus_necess>0</PianoCampiFlegrei:bus_necess>
+            <PianoCampiFlegrei:Velocita>30</PianoCampiFlegrei:Velocita>
+            <PianoCampiFlegrei:id_strade>063SP MONTAGNA SPACCATA F-G, 063VIA CINTHIA A-B</PianoCampiFlegrei:id_strade>
+            <PianoCampiFlegrei:da_ID_AA>21</PianoCampiFlegrei:da_ID_AA>
+            <PianoCampiFlegrei:a_Cod_AI>I-02</PianoCampiFlegrei:a_Cod_AI>
+            <PianoCampiFlegrei:n_percor_1>20</PianoCampiFlegrei:n_percor_1>
+        </PianoCampiFlegrei:CF_PercorsiNavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PianoCampiFlegrei:CF_PercorsiNavette fid="CF_PercorsiNavette.120">
+            <PianoCampiFlegrei:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString srsName="EPSG:4326">
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                14.19831429,40.83657994 14.19213225,40.83583726 14.19087255,40.83493228
+                                14.19103001,40.83317894
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </PianoCampiFlegrei:the_geom>
+            <PianoCampiFlegrei:id>328</PianoCampiFlegrei:id>
+            <PianoCampiFlegrei:n_percorso>24</PianoCampiFlegrei:n_percorso>
+            <PianoCampiFlegrei:da_A_att>Napoli - Bagnoli, B1 - Viale della Liberazione</PianoCampiFlegrei:da_A_att>
+            <PianoCampiFlegrei:a_A_inc>Napoli, Stazione ferroviaria Centrale, Piazza Garibaldi
+            </PianoCampiFlegrei:a_A_inc>
+            <PianoCampiFlegrei:percorrenz>Ritorno</PianoCampiFlegrei:percorrenz>
+            <PianoCampiFlegrei:lungh_a>0.0</PianoCampiFlegrei:lungh_a>
+            <PianoCampiFlegrei:lungh_r>897.13237902</PianoCampiFlegrei:lungh_r>
+            <PianoCampiFlegrei:tempo_a>0</PianoCampiFlegrei:tempo_a>
+            <PianoCampiFlegrei:tempo_r>3</PianoCampiFlegrei:tempo_r>
+            <PianoCampiFlegrei:n_tip_stra>Svincolo uscita A56</PianoCampiFlegrei:n_tip_stra>
+            <PianoCampiFlegrei:bus_necess>0</PianoCampiFlegrei:bus_necess>
+            <PianoCampiFlegrei:Velocita>20</PianoCampiFlegrei:Velocita>
+            <PianoCampiFlegrei:id_strade>063VIA CINTHIA B</PianoCampiFlegrei:id_strade>
+            <PianoCampiFlegrei:da_ID_AA>11</PianoCampiFlegrei:da_ID_AA>
+            <PianoCampiFlegrei:a_Cod_AI>I-02</PianoCampiFlegrei:a_Cod_AI>
+            <PianoCampiFlegrei:n_percor_1>24</PianoCampiFlegrei:n_percor_1>
+        </PianoCampiFlegrei:CF_PercorsiNavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PianoCampiFlegrei:CF_PercorsiNavette fid="CF_PercorsiNavette.147">
+            <PianoCampiFlegrei:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString srsName="EPSG:4326">
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                14.19035149,40.83373567 14.19439327,40.83526898 14.19127363,40.83539758
+                                14.19103001,40.83317894
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </PianoCampiFlegrei:the_geom>
+            <PianoCampiFlegrei:id>352</PianoCampiFlegrei:id>
+            <PianoCampiFlegrei:n_percorso>26</PianoCampiFlegrei:n_percorso>
+            <PianoCampiFlegrei:da_A_att>Pozzuoli, Via Libero Bovio - Monteruscello</PianoCampiFlegrei:da_A_att>
+            <PianoCampiFlegrei:a_A_inc>Napoli, Stazione ferroviaria Centrale, Piazza Garibaldi
+            </PianoCampiFlegrei:a_A_inc>
+            <PianoCampiFlegrei:percorrenz>Andata</PianoCampiFlegrei:percorrenz>
+            <PianoCampiFlegrei:lungh_a>958.50993777</PianoCampiFlegrei:lungh_a>
+            <PianoCampiFlegrei:lungh_r>0.0</PianoCampiFlegrei:lungh_r>
+            <PianoCampiFlegrei:tempo_a>3</PianoCampiFlegrei:tempo_a>
+            <PianoCampiFlegrei:tempo_r>0</PianoCampiFlegrei:tempo_r>
+            <PianoCampiFlegrei:n_tip_stra>Svincolo uscita A56</PianoCampiFlegrei:n_tip_stra>
+            <PianoCampiFlegrei:bus_necess>0</PianoCampiFlegrei:bus_necess>
+            <PianoCampiFlegrei:Velocita>20</PianoCampiFlegrei:Velocita>
+            <PianoCampiFlegrei:id_strade/>
+            <PianoCampiFlegrei:da_ID_AA>27</PianoCampiFlegrei:da_ID_AA>
+            <PianoCampiFlegrei:a_Cod_AI>I-02</PianoCampiFlegrei:a_Cod_AI>
+            <PianoCampiFlegrei:n_percor_1>26</PianoCampiFlegrei:n_percor_1>
+        </PianoCampiFlegrei:CF_PercorsiNavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PianoCampiFlegrei:CF_PercorsiNavette fid="CF_PercorsiNavette.159">
+            <PianoCampiFlegrei:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString srsName="EPSG:4326">
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                14.16692863,40.8532289 14.1835435,40.84718411 14.18397727,40.84469032
+                                14.19023776,40.83617801
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </PianoCampiFlegrei:the_geom>
+            <PianoCampiFlegrei:id>274</PianoCampiFlegrei:id>
+            <PianoCampiFlegrei:n_percorso>21</PianoCampiFlegrei:n_percorso>
+            <PianoCampiFlegrei:da_A_att>Napoli - Pianura, P1 - Campo basket Via Nabucco</PianoCampiFlegrei:da_A_att>
+            <PianoCampiFlegrei:a_A_inc>Napoli, Stazione ferroviaria Centrale, Piazza Garibaldi
+            </PianoCampiFlegrei:a_A_inc>
+            <PianoCampiFlegrei:percorrenz>Andata / Ritorno</PianoCampiFlegrei:percorrenz>
+            <PianoCampiFlegrei:lungh_a>2953.07576733</PianoCampiFlegrei:lungh_a>
+            <PianoCampiFlegrei:lungh_r>2953.08218293</PianoCampiFlegrei:lungh_r>
+            <PianoCampiFlegrei:tempo_a>6</PianoCampiFlegrei:tempo_a>
+            <PianoCampiFlegrei:tempo_r>6</PianoCampiFlegrei:tempo_r>
+            <PianoCampiFlegrei:n_tip_stra>Urbana - V.Montagna Spaccata; V.Cintia</PianoCampiFlegrei:n_tip_stra>
+            <PianoCampiFlegrei:bus_necess>0</PianoCampiFlegrei:bus_necess>
+            <PianoCampiFlegrei:Velocita>30</PianoCampiFlegrei:Velocita>
+            <PianoCampiFlegrei:id_strade>063SP MONTAGNA SPACCATA F-G, 063VIA CINTHIA A-B</PianoCampiFlegrei:id_strade>
+            <PianoCampiFlegrei:da_ID_AA>19</PianoCampiFlegrei:da_ID_AA>
+            <PianoCampiFlegrei:a_Cod_AI>I-02</PianoCampiFlegrei:a_Cod_AI>
+            <PianoCampiFlegrei:n_percor_1>21</PianoCampiFlegrei:n_percor_1>
+        </PianoCampiFlegrei:CF_PercorsiNavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PianoCampiFlegrei:CF_PercorsiNavette fid="CF_PercorsiNavette.167">
+            <PianoCampiFlegrei:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString srsName="EPSG:4326">
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                14.19836608,40.83665853 14.19472958,40.83568208 14.19027044,40.83617351
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </PianoCampiFlegrei:the_geom>
+            <PianoCampiFlegrei:id>314</PianoCampiFlegrei:id>
+            <PianoCampiFlegrei:n_percorso>23</PianoCampiFlegrei:n_percorso>
+            <PianoCampiFlegrei:da_A_att>Napoli - Soccavo, S2 - Piazza Giovanni XXIII</PianoCampiFlegrei:da_A_att>
+            <PianoCampiFlegrei:a_A_inc>Napoli, Stazione ferroviaria Centrale, Piazza Garibaldi
+            </PianoCampiFlegrei:a_A_inc>
+            <PianoCampiFlegrei:percorrenz>Ritorno</PianoCampiFlegrei:percorrenz>
+            <PianoCampiFlegrei:lungh_a>0.0</PianoCampiFlegrei:lungh_a>
+            <PianoCampiFlegrei:lungh_r>748.06812676</PianoCampiFlegrei:lungh_r>
+            <PianoCampiFlegrei:tempo_a>0</PianoCampiFlegrei:tempo_a>
+            <PianoCampiFlegrei:tempo_r>2</PianoCampiFlegrei:tempo_r>
+            <PianoCampiFlegrei:n_tip_stra>Svicolo uscita A56</PianoCampiFlegrei:n_tip_stra>
+            <PianoCampiFlegrei:bus_necess>0</PianoCampiFlegrei:bus_necess>
+            <PianoCampiFlegrei:Velocita>20</PianoCampiFlegrei:Velocita>
+            <PianoCampiFlegrei:id_strade/>
+            <PianoCampiFlegrei:da_ID_AA>25</PianoCampiFlegrei:da_ID_AA>
+            <PianoCampiFlegrei:a_Cod_AI>I-02</PianoCampiFlegrei:a_Cod_AI>
+            <PianoCampiFlegrei:n_percor_1>23</PianoCampiFlegrei:n_percor_1>
+        </PianoCampiFlegrei:CF_PercorsiNavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PianoCampiFlegrei:CF_PercorsiNavette fid="CF_PercorsiNavette.176">
+            <PianoCampiFlegrei:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString srsName="EPSG:4326">
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                14.19836608,40.83665853 14.19218403,40.83591585 14.19092433,40.83501087
+                                14.19108179,40.83325753
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </PianoCampiFlegrei:the_geom>
+            <PianoCampiFlegrei:id>220</PianoCampiFlegrei:id>
+            <PianoCampiFlegrei:n_percorso>17</PianoCampiFlegrei:n_percorso>
+            <PianoCampiFlegrei:da_A_att>Napoli - Fuorigrotta, F3 - Piazzale antistante Stazione Campi Flegrei
+            </PianoCampiFlegrei:da_A_att>
+            <PianoCampiFlegrei:a_A_inc>Afragola, Stazione ferroviaria di Napoli Afragola, Via Arena
+            </PianoCampiFlegrei:a_A_inc>
+            <PianoCampiFlegrei:percorrenz>Ritorno</PianoCampiFlegrei:percorrenz>
+            <PianoCampiFlegrei:lungh_a>0.0</PianoCampiFlegrei:lungh_a>
+            <PianoCampiFlegrei:lungh_r>897.13238032</PianoCampiFlegrei:lungh_r>
+            <PianoCampiFlegrei:tempo_a>0</PianoCampiFlegrei:tempo_a>
+            <PianoCampiFlegrei:tempo_r>3</PianoCampiFlegrei:tempo_r>
+            <PianoCampiFlegrei:n_tip_stra>Svincolo uscita A56</PianoCampiFlegrei:n_tip_stra>
+            <PianoCampiFlegrei:bus_necess>0</PianoCampiFlegrei:bus_necess>
+            <PianoCampiFlegrei:Velocita>20</PianoCampiFlegrei:Velocita>
+            <PianoCampiFlegrei:id_strade>063VIA CINTHIA B</PianoCampiFlegrei:id_strade>
+            <PianoCampiFlegrei:da_ID_AA>17</PianoCampiFlegrei:da_ID_AA>
+            <PianoCampiFlegrei:a_Cod_AI>I-03</PianoCampiFlegrei:a_Cod_AI>
+            <PianoCampiFlegrei:n_percor_1>17</PianoCampiFlegrei:n_percor_1>
+        </PianoCampiFlegrei:CF_PercorsiNavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PianoCampiFlegrei:CF_PercorsiNavette fid="CF_PercorsiNavette.241">
+            <PianoCampiFlegrei:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString srsName="EPSG:4326">
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                14.19109661,40.83323289 14.19123697,40.8280178 14.19337682,40.82293241
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </PianoCampiFlegrei:the_geom>
+            <PianoCampiFlegrei:id>238</PianoCampiFlegrei:id>
+            <PianoCampiFlegrei:n_percorso>18</PianoCampiFlegrei:n_percorso>
+            <PianoCampiFlegrei:da_A_att>Napoli - Fuorigrotta, F1 - Piazza Italia - largo Lala
+            </PianoCampiFlegrei:da_A_att>
+            <PianoCampiFlegrei:a_A_inc>Afragola, Stazione ferroviaria di Napoli Afragola, Via Arena
+            </PianoCampiFlegrei:a_A_inc>
+            <PianoCampiFlegrei:percorrenz>Ritorno</PianoCampiFlegrei:percorrenz>
+            <PianoCampiFlegrei:lungh_a>0.0</PianoCampiFlegrei:lungh_a>
+            <PianoCampiFlegrei:lungh_r>1177.0424872</PianoCampiFlegrei:lungh_r>
+            <PianoCampiFlegrei:tempo_a>0</PianoCampiFlegrei:tempo_a>
+            <PianoCampiFlegrei:tempo_r>4</PianoCampiFlegrei:tempo_r>
+            <PianoCampiFlegrei:n_tip_stra>Urbana - V.Cintia; V.Claudio; V.Giulio Cesare</PianoCampiFlegrei:n_tip_stra>
+            <PianoCampiFlegrei:bus_necess>0</PianoCampiFlegrei:bus_necess>
+            <PianoCampiFlegrei:Velocita>20</PianoCampiFlegrei:Velocita>
+            <PianoCampiFlegrei:id_strade>063VIA CINHIA</PianoCampiFlegrei:id_strade>
+            <PianoCampiFlegrei:da_ID_AA>18</PianoCampiFlegrei:da_ID_AA>
+            <PianoCampiFlegrei:a_Cod_AI>I-03</PianoCampiFlegrei:a_Cod_AI>
+            <PianoCampiFlegrei:n_percor_1>18</PianoCampiFlegrei:n_percor_1>
+        </PianoCampiFlegrei:CF_PercorsiNavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PianoCampiFlegrei:CF_PercorsiNavette fid="CF_PercorsiNavette.214">
+            <PianoCampiFlegrei:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString srsName="EPSG:4326">
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                14.19035033,40.83373512 14.1852753,40.83327866 14.17418041,40.83928746
+                                14.16663645,40.83965607
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </PianoCampiFlegrei:the_geom>
+            <PianoCampiFlegrei:id>366</PianoCampiFlegrei:id>
+            <PianoCampiFlegrei:n_percorso>27</PianoCampiFlegrei:n_percorso>
+            <PianoCampiFlegrei:da_A_att>Pozzuoli, Via Antonino Pio - Toiano</PianoCampiFlegrei:da_A_att>
+            <PianoCampiFlegrei:a_A_inc>Napoli, Stazione ferroviaria Centrale, Piazza Garibaldi
+            </PianoCampiFlegrei:a_A_inc>
+            <PianoCampiFlegrei:percorrenz>Andata</PianoCampiFlegrei:percorrenz>
+            <PianoCampiFlegrei:lungh_a>2241.04785747</PianoCampiFlegrei:lungh_a>
+            <PianoCampiFlegrei:lungh_r>0.0</PianoCampiFlegrei:lungh_r>
+            <PianoCampiFlegrei:tempo_a>2</PianoCampiFlegrei:tempo_a>
+            <PianoCampiFlegrei:tempo_r>0</PianoCampiFlegrei:tempo_r>
+            <PianoCampiFlegrei:n_tip_stra>A56 "Tangenziale di Napoli"</PianoCampiFlegrei:n_tip_stra>
+            <PianoCampiFlegrei:bus_necess>0</PianoCampiFlegrei:bus_necess>
+            <PianoCampiFlegrei:Velocita>60</PianoCampiFlegrei:Velocita>
+            <PianoCampiFlegrei:id_strade>063TANGENZIALE EST B</PianoCampiFlegrei:id_strade>
+            <PianoCampiFlegrei:da_ID_AA>28</PianoCampiFlegrei:da_ID_AA>
+            <PianoCampiFlegrei:a_Cod_AI>I-02</PianoCampiFlegrei:a_Cod_AI>
+            <PianoCampiFlegrei:n_percor_1>27</PianoCampiFlegrei:n_percor_1>
+        </PianoCampiFlegrei:CF_PercorsiNavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PianoCampiFlegrei:CF_PercorsiNavette fid="CF_PercorsiNavette.251">
+            <PianoCampiFlegrei:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString srsName="EPSG:4326">
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                14.19108179,40.83325753 14.19122214,40.82804244 14.19283362,40.82372599
+                                14.193362,40.82295704 14.1946679,40.82341636 14.19427112,40.82273042
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </PianoCampiFlegrei:the_geom>
+            <PianoCampiFlegrei:id>221</PianoCampiFlegrei:id>
+            <PianoCampiFlegrei:n_percorso>17</PianoCampiFlegrei:n_percorso>
+            <PianoCampiFlegrei:da_A_att>Napoli - Fuorigrotta, F3 - Piazzale antistante Stazione Campi Flegrei
+            </PianoCampiFlegrei:da_A_att>
+            <PianoCampiFlegrei:a_A_inc>Afragola, Stazione ferroviaria di Napoli Afragola, Via Arena
+            </PianoCampiFlegrei:a_A_inc>
+            <PianoCampiFlegrei:percorrenz>Ritorno</PianoCampiFlegrei:percorrenz>
+            <PianoCampiFlegrei:lungh_a>0.0</PianoCampiFlegrei:lungh_a>
+            <PianoCampiFlegrei:lungh_r>1416.7162944</PianoCampiFlegrei:lungh_r>
+            <PianoCampiFlegrei:tempo_a>0</PianoCampiFlegrei:tempo_a>
+            <PianoCampiFlegrei:tempo_r>4</PianoCampiFlegrei:tempo_r>
+            <PianoCampiFlegrei:n_tip_stra>Urbana - V.Cintia; V.Claudio; V.Giulio Cesare</PianoCampiFlegrei:n_tip_stra>
+            <PianoCampiFlegrei:bus_necess>0</PianoCampiFlegrei:bus_necess>
+            <PianoCampiFlegrei:Velocita>20</PianoCampiFlegrei:Velocita>
+            <PianoCampiFlegrei:id_strade>063VIA CINHIA, 063VIA DIOCLEZIANO B</PianoCampiFlegrei:id_strade>
+            <PianoCampiFlegrei:da_ID_AA>17</PianoCampiFlegrei:da_ID_AA>
+            <PianoCampiFlegrei:a_Cod_AI>I-03</PianoCampiFlegrei:a_Cod_AI>
+            <PianoCampiFlegrei:n_percor_1>17</PianoCampiFlegrei:n_percor_1>
+        </PianoCampiFlegrei:CF_PercorsiNavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PianoCampiFlegrei:CF_PercorsiNavette fid="CF_PercorsiNavette.255">
+            <PianoCampiFlegrei:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString srsName="EPSG:4326">
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                14.16692863,40.8532289 14.1835435,40.84718411 14.18397727,40.84469032
+                                14.19023776,40.83617801
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </PianoCampiFlegrei:the_geom>
+            <PianoCampiFlegrei:id>241</PianoCampiFlegrei:id>
+            <PianoCampiFlegrei:n_percorso>19</PianoCampiFlegrei:n_percorso>
+            <PianoCampiFlegrei:da_A_att>Napoli - Pianura, P2 - Area attrezzata Via Mandela</PianoCampiFlegrei:da_A_att>
+            <PianoCampiFlegrei:a_A_inc>Napoli, Stazione ferroviaria Centrale, Piazza Garibaldi
+            </PianoCampiFlegrei:a_A_inc>
+            <PianoCampiFlegrei:percorrenz>Andata / Ritorno</PianoCampiFlegrei:percorrenz>
+            <PianoCampiFlegrei:lungh_a>2953.0757716</PianoCampiFlegrei:lungh_a>
+            <PianoCampiFlegrei:lungh_r>2953.08218293</PianoCampiFlegrei:lungh_r>
+            <PianoCampiFlegrei:tempo_a>6</PianoCampiFlegrei:tempo_a>
+            <PianoCampiFlegrei:tempo_r>6</PianoCampiFlegrei:tempo_r>
+            <PianoCampiFlegrei:n_tip_stra>Urbana - V.Montagna Spaccata; V.Cintia</PianoCampiFlegrei:n_tip_stra>
+            <PianoCampiFlegrei:bus_necess>0</PianoCampiFlegrei:bus_necess>
+            <PianoCampiFlegrei:Velocita>30</PianoCampiFlegrei:Velocita>
+            <PianoCampiFlegrei:id_strade>063SP MONTAGNA SPACCATA F-G, 063VIA CINTHIA A-B</PianoCampiFlegrei:id_strade>
+            <PianoCampiFlegrei:da_ID_AA>20</PianoCampiFlegrei:da_ID_AA>
+            <PianoCampiFlegrei:a_Cod_AI>I-02</PianoCampiFlegrei:a_Cod_AI>
+            <PianoCampiFlegrei:n_percor_1>19</PianoCampiFlegrei:n_percor_1>
+        </PianoCampiFlegrei:CF_PercorsiNavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PianoCampiFlegrei:CF_PercorsiNavette fid="CF_PercorsiNavette.259">
+            <PianoCampiFlegrei:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString srsName="EPSG:4326">
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                14.19831429,40.83657994 14.18920304,40.83331094 14.18588324,40.83327093
+                                14.17423217,40.83936606 14.16668821,40.83973467
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </PianoCampiFlegrei:the_geom>
+            <PianoCampiFlegrei:id>344</PianoCampiFlegrei:id>
+            <PianoCampiFlegrei:n_percorso>25</PianoCampiFlegrei:n_percorso>
+            <PianoCampiFlegrei:da_A_att>Napoli - Bagnoli, B2 - Parcheggio ippodromo</PianoCampiFlegrei:da_A_att>
+            <PianoCampiFlegrei:a_A_inc>Napoli, Stazione ferroviaria Centrale, Piazza Garibaldi
+            </PianoCampiFlegrei:a_A_inc>
+            <PianoCampiFlegrei:percorrenz>Ritorno</PianoCampiFlegrei:percorrenz>
+            <PianoCampiFlegrei:lungh_a>0.0</PianoCampiFlegrei:lungh_a>
+            <PianoCampiFlegrei:lungh_r>2977.66437947</PianoCampiFlegrei:lungh_r>
+            <PianoCampiFlegrei:tempo_a>0</PianoCampiFlegrei:tempo_a>
+            <PianoCampiFlegrei:tempo_r>3</PianoCampiFlegrei:tempo_r>
+            <PianoCampiFlegrei:n_tip_stra>A56 "Tangenziale di Napoli"</PianoCampiFlegrei:n_tip_stra>
+            <PianoCampiFlegrei:bus_necess>0</PianoCampiFlegrei:bus_necess>
+            <PianoCampiFlegrei:Velocita>60</PianoCampiFlegrei:Velocita>
+            <PianoCampiFlegrei:id_strade>063TANGENZIALE EST B</PianoCampiFlegrei:id_strade>
+            <PianoCampiFlegrei:da_ID_AA>12</PianoCampiFlegrei:da_ID_AA>
+            <PianoCampiFlegrei:a_Cod_AI>I-02</PianoCampiFlegrei:a_Cod_AI>
+            <PianoCampiFlegrei:n_percor_1>25</PianoCampiFlegrei:n_percor_1>
+        </PianoCampiFlegrei:CF_PercorsiNavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PianoCampiFlegrei:CF_PercorsiNavette fid="CF_PercorsiNavette.260">
+            <PianoCampiFlegrei:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString srsName="EPSG:4326">
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                14.19108119,40.83326999 14.19122155,40.82805491 14.19336141,40.82296951
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </PianoCampiFlegrei:the_geom>
+            <PianoCampiFlegrei:id>368</PianoCampiFlegrei:id>
+            <PianoCampiFlegrei:n_percorso>27</PianoCampiFlegrei:n_percorso>
+            <PianoCampiFlegrei:da_A_att>Pozzuoli, Via Antonino Pio - Toiano</PianoCampiFlegrei:da_A_att>
+            <PianoCampiFlegrei:a_A_inc>Napoli, Stazione ferroviaria Centrale, Piazza Garibaldi
+            </PianoCampiFlegrei:a_A_inc>
+            <PianoCampiFlegrei:percorrenz>Andata</PianoCampiFlegrei:percorrenz>
+            <PianoCampiFlegrei:lungh_a>1177.04153151</PianoCampiFlegrei:lungh_a>
+            <PianoCampiFlegrei:lungh_r>0.0</PianoCampiFlegrei:lungh_r>
+            <PianoCampiFlegrei:tempo_a>4</PianoCampiFlegrei:tempo_a>
+            <PianoCampiFlegrei:tempo_r>0</PianoCampiFlegrei:tempo_r>
+            <PianoCampiFlegrei:n_tip_stra>Urbana - V.Cintia; V.Claudio; V.Giulio Cesare</PianoCampiFlegrei:n_tip_stra>
+            <PianoCampiFlegrei:bus_necess>0</PianoCampiFlegrei:bus_necess>
+            <PianoCampiFlegrei:Velocita>20</PianoCampiFlegrei:Velocita>
+            <PianoCampiFlegrei:id_strade>063VIA CINHIA</PianoCampiFlegrei:id_strade>
+            <PianoCampiFlegrei:da_ID_AA>28</PianoCampiFlegrei:da_ID_AA>
+            <PianoCampiFlegrei:a_Cod_AI>I-02</PianoCampiFlegrei:a_Cod_AI>
+            <PianoCampiFlegrei:n_percor_1>27</PianoCampiFlegrei:n_percor_1>
+        </PianoCampiFlegrei:CF_PercorsiNavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PianoCampiFlegrei:CF_PercorsiNavette fid="CF_PercorsiNavette.264">
+            <PianoCampiFlegrei:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString srsName="EPSG:4326">
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                14.19108119,40.83326999 14.19122155,40.82805491 14.19336141,40.82296951
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </PianoCampiFlegrei:the_geom>
+            <PianoCampiFlegrei:id>259</PianoCampiFlegrei:id>
+            <PianoCampiFlegrei:n_percorso>20</PianoCampiFlegrei:n_percorso>
+            <PianoCampiFlegrei:da_A_att>Napoli - Pianura, P3 - Via Torricelli esterno parchi Falcone e Borsellino
+            </PianoCampiFlegrei:da_A_att>
+            <PianoCampiFlegrei:a_A_inc>Napoli, Stazione ferroviaria Centrale, Piazza Garibaldi
+            </PianoCampiFlegrei:a_A_inc>
+            <PianoCampiFlegrei:percorrenz>Andata</PianoCampiFlegrei:percorrenz>
+            <PianoCampiFlegrei:lungh_a>1177.04153123</PianoCampiFlegrei:lungh_a>
+            <PianoCampiFlegrei:lungh_r>0.0</PianoCampiFlegrei:lungh_r>
+            <PianoCampiFlegrei:tempo_a>4</PianoCampiFlegrei:tempo_a>
+            <PianoCampiFlegrei:tempo_r>0</PianoCampiFlegrei:tempo_r>
+            <PianoCampiFlegrei:n_tip_stra>Urbana - V.Cintia; V.Claudio; V.Giulio Cesare</PianoCampiFlegrei:n_tip_stra>
+            <PianoCampiFlegrei:bus_necess>0</PianoCampiFlegrei:bus_necess>
+            <PianoCampiFlegrei:Velocita>20</PianoCampiFlegrei:Velocita>
+            <PianoCampiFlegrei:id_strade>063VIA CINHIA</PianoCampiFlegrei:id_strade>
+            <PianoCampiFlegrei:da_ID_AA>21</PianoCampiFlegrei:da_ID_AA>
+            <PianoCampiFlegrei:a_Cod_AI>I-02</PianoCampiFlegrei:a_Cod_AI>
+            <PianoCampiFlegrei:n_percor_1>20</PianoCampiFlegrei:n_percor_1>
+        </PianoCampiFlegrei:CF_PercorsiNavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PianoCampiFlegrei:CF_PercorsiNavette fid="CF_PercorsiNavette.266">
+            <PianoCampiFlegrei:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString srsName="EPSG:4326">
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                14.19104578,40.83316919 14.19123346,40.8318396 14.17411836,40.82209174
+                                14.17436403,40.82136551
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </PianoCampiFlegrei:the_geom>
+            <PianoCampiFlegrei:id>329</PianoCampiFlegrei:id>
+            <PianoCampiFlegrei:n_percorso>24</PianoCampiFlegrei:n_percorso>
+            <PianoCampiFlegrei:da_A_att>Napoli - Bagnoli, B1 - Viale della Liberazione</PianoCampiFlegrei:da_A_att>
+            <PianoCampiFlegrei:a_A_inc>Napoli, Stazione ferroviaria Centrale, Piazza Garibaldi
+            </PianoCampiFlegrei:a_A_inc>
+            <PianoCampiFlegrei:percorrenz>Ritorno</PianoCampiFlegrei:percorrenz>
+            <PianoCampiFlegrei:lungh_a>0.0</PianoCampiFlegrei:lungh_a>
+            <PianoCampiFlegrei:lungh_r>2035.95342988</PianoCampiFlegrei:lungh_r>
+            <PianoCampiFlegrei:tempo_a>0</PianoCampiFlegrei:tempo_a>
+            <PianoCampiFlegrei:tempo_r>6</PianoCampiFlegrei:tempo_r>
+            <PianoCampiFlegrei:n_tip_stra>Urbana - V.Terracina</PianoCampiFlegrei:n_tip_stra>
+            <PianoCampiFlegrei:bus_necess>0</PianoCampiFlegrei:bus_necess>
+            <PianoCampiFlegrei:Velocita>20</PianoCampiFlegrei:Velocita>
+            <PianoCampiFlegrei:id_strade>063VIA TERRACINA A-B-C-D</PianoCampiFlegrei:id_strade>
+            <PianoCampiFlegrei:da_ID_AA>11</PianoCampiFlegrei:da_ID_AA>
+            <PianoCampiFlegrei:a_Cod_AI>I-02</PianoCampiFlegrei:a_Cod_AI>
+            <PianoCampiFlegrei:n_percor_1>24</PianoCampiFlegrei:n_percor_1>
+        </PianoCampiFlegrei:CF_PercorsiNavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PianoCampiFlegrei:CF_PercorsiNavette fid="CF_PercorsiNavette.268">
+            <PianoCampiFlegrei:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString srsName="EPSG:4326">
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                14.19836608,40.83665853 14.19472958,40.83568208 14.19027044,40.83617351
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </PianoCampiFlegrei:the_geom>
+            <PianoCampiFlegrei:id>270</PianoCampiFlegrei:id>
+            <PianoCampiFlegrei:n_percorso>20</PianoCampiFlegrei:n_percorso>
+            <PianoCampiFlegrei:da_A_att>Napoli - Pianura, P3 - Via Torricelli esterno parchi Falcone e Borsellino
+            </PianoCampiFlegrei:da_A_att>
+            <PianoCampiFlegrei:a_A_inc>Napoli, Stazione ferroviaria Centrale, Piazza Garibaldi
+            </PianoCampiFlegrei:a_A_inc>
+            <PianoCampiFlegrei:percorrenz>Ritorno</PianoCampiFlegrei:percorrenz>
+            <PianoCampiFlegrei:lungh_a>0.0</PianoCampiFlegrei:lungh_a>
+            <PianoCampiFlegrei:lungh_r>748.06812766</PianoCampiFlegrei:lungh_r>
+            <PianoCampiFlegrei:tempo_a>0</PianoCampiFlegrei:tempo_a>
+            <PianoCampiFlegrei:tempo_r>2</PianoCampiFlegrei:tempo_r>
+            <PianoCampiFlegrei:n_tip_stra>Svicolo uscita A56</PianoCampiFlegrei:n_tip_stra>
+            <PianoCampiFlegrei:bus_necess>0</PianoCampiFlegrei:bus_necess>
+            <PianoCampiFlegrei:Velocita>20</PianoCampiFlegrei:Velocita>
+            <PianoCampiFlegrei:id_strade/>
+            <PianoCampiFlegrei:da_ID_AA>21</PianoCampiFlegrei:da_ID_AA>
+            <PianoCampiFlegrei:a_Cod_AI>I-02</PianoCampiFlegrei:a_Cod_AI>
+            <PianoCampiFlegrei:n_percor_1>20</PianoCampiFlegrei:n_percor_1>
+        </PianoCampiFlegrei:CF_PercorsiNavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PianoCampiFlegrei:CF_PercorsiNavette fid="CF_PercorsiNavette.270">
+            <PianoCampiFlegrei:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString srsName="EPSG:4326">
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                14.19108119,40.83326999 14.19122155,40.82805491 14.19336141,40.82296951
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </PianoCampiFlegrei:the_geom>
+            <PianoCampiFlegrei:id>353</PianoCampiFlegrei:id>
+            <PianoCampiFlegrei:n_percorso>26</PianoCampiFlegrei:n_percorso>
+            <PianoCampiFlegrei:da_A_att>Pozzuoli, Via Libero Bovio - Monteruscello</PianoCampiFlegrei:da_A_att>
+            <PianoCampiFlegrei:a_A_inc>Napoli, Stazione ferroviaria Centrale, Piazza Garibaldi
+            </PianoCampiFlegrei:a_A_inc>
+            <PianoCampiFlegrei:percorrenz>Andata</PianoCampiFlegrei:percorrenz>
+            <PianoCampiFlegrei:lungh_a>1177.04153151</PianoCampiFlegrei:lungh_a>
+            <PianoCampiFlegrei:lungh_r>0.0</PianoCampiFlegrei:lungh_r>
+            <PianoCampiFlegrei:tempo_a>4</PianoCampiFlegrei:tempo_a>
+            <PianoCampiFlegrei:tempo_r>0</PianoCampiFlegrei:tempo_r>
+            <PianoCampiFlegrei:n_tip_stra>Urbana - V.Cintia; V.Claudio; V.Giulio Cesare</PianoCampiFlegrei:n_tip_stra>
+            <PianoCampiFlegrei:bus_necess>0</PianoCampiFlegrei:bus_necess>
+            <PianoCampiFlegrei:Velocita>20</PianoCampiFlegrei:Velocita>
+            <PianoCampiFlegrei:id_strade>063VIA CINHIA</PianoCampiFlegrei:id_strade>
+            <PianoCampiFlegrei:da_ID_AA>27</PianoCampiFlegrei:da_ID_AA>
+            <PianoCampiFlegrei:a_Cod_AI>I-02</PianoCampiFlegrei:a_Cod_AI>
+            <PianoCampiFlegrei:n_percor_1>26</PianoCampiFlegrei:n_percor_1>
+        </PianoCampiFlegrei:CF_PercorsiNavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PianoCampiFlegrei:CF_PercorsiNavette fid="CF_PercorsiNavette.280">
+            <PianoCampiFlegrei:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString srsName="EPSG:4326">
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                14.19108179,40.83325753 14.19100915,40.82972013 14.19591487,40.82898098
+                                14.19498283,40.82716933
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </PianoCampiFlegrei:the_geom>
+            <PianoCampiFlegrei:id>203</PianoCampiFlegrei:id>
+            <PianoCampiFlegrei:n_percorso>16</PianoCampiFlegrei:n_percorso>
+            <PianoCampiFlegrei:da_A_att>Napoli - Fuorigrotta, F2 - via GB Marino alt. curva A
+            </PianoCampiFlegrei:da_A_att>
+            <PianoCampiFlegrei:a_A_inc>Afragola, Stazione ferroviaria di Napoli Afragola, Via Arena
+            </PianoCampiFlegrei:a_A_inc>
+            <PianoCampiFlegrei:percorrenz>Ritorno</PianoCampiFlegrei:percorrenz>
+            <PianoCampiFlegrei:lungh_a>0.0</PianoCampiFlegrei:lungh_a>
+            <PianoCampiFlegrei:lungh_r>1047.65767561</PianoCampiFlegrei:lungh_r>
+            <PianoCampiFlegrei:tempo_a>0</PianoCampiFlegrei:tempo_a>
+            <PianoCampiFlegrei:tempo_r>3</PianoCampiFlegrei:tempo_r>
+            <PianoCampiFlegrei:n_tip_stra/>
+            <PianoCampiFlegrei:bus_necess>0</PianoCampiFlegrei:bus_necess>
+            <PianoCampiFlegrei:Velocita>20</PianoCampiFlegrei:Velocita>
+            <PianoCampiFlegrei:id_strade>063VIA CINHIA, 063STRADA0663 B</PianoCampiFlegrei:id_strade>
+            <PianoCampiFlegrei:da_ID_AA>16</PianoCampiFlegrei:da_ID_AA>
+            <PianoCampiFlegrei:a_Cod_AI>I-03</PianoCampiFlegrei:a_Cod_AI>
+            <PianoCampiFlegrei:n_percor_1>16</PianoCampiFlegrei:n_percor_1>
+        </PianoCampiFlegrei:CF_PercorsiNavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PianoCampiFlegrei:CF_PercorsiNavette fid="CF_PercorsiNavette.284">
+            <PianoCampiFlegrei:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString srsName="EPSG:4326">
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                14.19831429,40.83657994 14.18920304,40.83331094 14.18588324,40.83327093
+                                14.17423217,40.83936606 14.16668821,40.83973467
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </PianoCampiFlegrei:the_geom>
+            <PianoCampiFlegrei:id>379</PianoCampiFlegrei:id>
+            <PianoCampiFlegrei:n_percorso>27</PianoCampiFlegrei:n_percorso>
+            <PianoCampiFlegrei:da_A_att>Pozzuoli, Via Antonino Pio - Toiano</PianoCampiFlegrei:da_A_att>
+            <PianoCampiFlegrei:a_A_inc>Napoli, Stazione ferroviaria Centrale, Piazza Garibaldi
+            </PianoCampiFlegrei:a_A_inc>
+            <PianoCampiFlegrei:percorrenz>Ritorno</PianoCampiFlegrei:percorrenz>
+            <PianoCampiFlegrei:lungh_a>0.0</PianoCampiFlegrei:lungh_a>
+            <PianoCampiFlegrei:lungh_r>2977.66438699</PianoCampiFlegrei:lungh_r>
+            <PianoCampiFlegrei:tempo_a>0</PianoCampiFlegrei:tempo_a>
+            <PianoCampiFlegrei:tempo_r>3</PianoCampiFlegrei:tempo_r>
+            <PianoCampiFlegrei:n_tip_stra>A56 "Tangenziale di Napoli"</PianoCampiFlegrei:n_tip_stra>
+            <PianoCampiFlegrei:bus_necess>0</PianoCampiFlegrei:bus_necess>
+            <PianoCampiFlegrei:Velocita>60</PianoCampiFlegrei:Velocita>
+            <PianoCampiFlegrei:id_strade>063TANGENZIALE EST B</PianoCampiFlegrei:id_strade>
+            <PianoCampiFlegrei:da_ID_AA>28</PianoCampiFlegrei:da_ID_AA>
+            <PianoCampiFlegrei:a_Cod_AI>I-02</PianoCampiFlegrei:a_Cod_AI>
+            <PianoCampiFlegrei:n_percor_1>27</PianoCampiFlegrei:n_percor_1>
+        </PianoCampiFlegrei:CF_PercorsiNavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PianoCampiFlegrei:CF_PercorsiNavette fid="CF_PercorsiNavette.291">
+            <PianoCampiFlegrei:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString srsName="EPSG:4326">
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                14.19836608,40.83665853 14.19472958,40.83568208 14.19027044,40.83617351
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </PianoCampiFlegrei:the_geom>
+            <PianoCampiFlegrei:id>287</PianoCampiFlegrei:id>
+            <PianoCampiFlegrei:n_percorso>21</PianoCampiFlegrei:n_percorso>
+            <PianoCampiFlegrei:da_A_att>Napoli - Pianura, P1 - Campo basket Via Nabucco</PianoCampiFlegrei:da_A_att>
+            <PianoCampiFlegrei:a_A_inc>Napoli, Stazione ferroviaria Centrale, Piazza Garibaldi
+            </PianoCampiFlegrei:a_A_inc>
+            <PianoCampiFlegrei:percorrenz>Ritorno</PianoCampiFlegrei:percorrenz>
+            <PianoCampiFlegrei:lungh_a>0.0</PianoCampiFlegrei:lungh_a>
+            <PianoCampiFlegrei:lungh_r>748.06812766</PianoCampiFlegrei:lungh_r>
+            <PianoCampiFlegrei:tempo_a>0</PianoCampiFlegrei:tempo_a>
+            <PianoCampiFlegrei:tempo_r>2</PianoCampiFlegrei:tempo_r>
+            <PianoCampiFlegrei:n_tip_stra>Svicolo uscita A56</PianoCampiFlegrei:n_tip_stra>
+            <PianoCampiFlegrei:bus_necess>0</PianoCampiFlegrei:bus_necess>
+            <PianoCampiFlegrei:Velocita>20</PianoCampiFlegrei:Velocita>
+            <PianoCampiFlegrei:id_strade/>
+            <PianoCampiFlegrei:da_ID_AA>19</PianoCampiFlegrei:da_ID_AA>
+            <PianoCampiFlegrei:a_Cod_AI>I-02</PianoCampiFlegrei:a_Cod_AI>
+            <PianoCampiFlegrei:n_percor_1>21</PianoCampiFlegrei:n_percor_1>
+        </PianoCampiFlegrei:CF_PercorsiNavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PianoCampiFlegrei:CF_PercorsiNavette fid="CF_PercorsiNavette.327">
+            <PianoCampiFlegrei:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString srsName="EPSG:4326">
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                14.19114618,40.83315553 14.19128642,40.82794105 14.19342513,40.82285808
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </PianoCampiFlegrei:the_geom>
+            <PianoCampiFlegrei:id>292</PianoCampiFlegrei:id>
+            <PianoCampiFlegrei:n_percorso>22</PianoCampiFlegrei:n_percorso>
+            <PianoCampiFlegrei:da_A_att>Napoli - Soccavo, S1 - Polifunzionale Soccavo, Viale Adriano
+            </PianoCampiFlegrei:da_A_att>
+            <PianoCampiFlegrei:a_A_inc>Napoli, Stazione ferroviaria Centrale, Piazza Garibaldi
+            </PianoCampiFlegrei:a_A_inc>
+            <PianoCampiFlegrei:percorrenz>Andata</PianoCampiFlegrei:percorrenz>
+            <PianoCampiFlegrei:lungh_a>1176.68797335</PianoCampiFlegrei:lungh_a>
+            <PianoCampiFlegrei:lungh_r>0.0</PianoCampiFlegrei:lungh_r>
+            <PianoCampiFlegrei:tempo_a>4</PianoCampiFlegrei:tempo_a>
+            <PianoCampiFlegrei:tempo_r>0</PianoCampiFlegrei:tempo_r>
+            <PianoCampiFlegrei:n_tip_stra>Urbana - V.Cintia; V.Claudio; V.Giulio Cesare</PianoCampiFlegrei:n_tip_stra>
+            <PianoCampiFlegrei:bus_necess>0</PianoCampiFlegrei:bus_necess>
+            <PianoCampiFlegrei:Velocita>20</PianoCampiFlegrei:Velocita>
+            <PianoCampiFlegrei:id_strade>063VIA CINHIA</PianoCampiFlegrei:id_strade>
+            <PianoCampiFlegrei:da_ID_AA>24</PianoCampiFlegrei:da_ID_AA>
+            <PianoCampiFlegrei:a_Cod_AI>I-02</PianoCampiFlegrei:a_Cod_AI>
+            <PianoCampiFlegrei:n_percor_1>22</PianoCampiFlegrei:n_percor_1>
+        </PianoCampiFlegrei:CF_PercorsiNavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PianoCampiFlegrei:CF_PercorsiNavette fid="CF_PercorsiNavette.328">
+            <PianoCampiFlegrei:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString srsName="EPSG:4326">
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                14.19115794,40.83315668 14.19129807,40.82794279 14.19343564,40.82286224
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </PianoCampiFlegrei:the_geom>
+            <PianoCampiFlegrei:id>306</PianoCampiFlegrei:id>
+            <PianoCampiFlegrei:n_percorso>23</PianoCampiFlegrei:n_percorso>
+            <PianoCampiFlegrei:da_A_att>Napoli - Soccavo, S2 - Piazza Giovanni XXIII</PianoCampiFlegrei:da_A_att>
+            <PianoCampiFlegrei:a_A_inc>Napoli, Stazione ferroviaria Centrale, Piazza Garibaldi
+            </PianoCampiFlegrei:a_A_inc>
+            <PianoCampiFlegrei:percorrenz>Andata</PianoCampiFlegrei:percorrenz>
+            <PianoCampiFlegrei:lungh_a>1176.33440951</PianoCampiFlegrei:lungh_a>
+            <PianoCampiFlegrei:lungh_r>0.0</PianoCampiFlegrei:lungh_r>
+            <PianoCampiFlegrei:tempo_a>4</PianoCampiFlegrei:tempo_a>
+            <PianoCampiFlegrei:tempo_r>0</PianoCampiFlegrei:tempo_r>
+            <PianoCampiFlegrei:n_tip_stra>Urbana - V.Cintia; V.Claudio; V.Giulio Cesare</PianoCampiFlegrei:n_tip_stra>
+            <PianoCampiFlegrei:bus_necess>0</PianoCampiFlegrei:bus_necess>
+            <PianoCampiFlegrei:Velocita>20</PianoCampiFlegrei:Velocita>
+            <PianoCampiFlegrei:id_strade>063VIA CINHIA</PianoCampiFlegrei:id_strade>
+            <PianoCampiFlegrei:da_ID_AA>25</PianoCampiFlegrei:da_ID_AA>
+            <PianoCampiFlegrei:a_Cod_AI>I-02</PianoCampiFlegrei:a_Cod_AI>
+            <PianoCampiFlegrei:n_percor_1>23</PianoCampiFlegrei:n_percor_1>
+        </PianoCampiFlegrei:CF_PercorsiNavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PianoCampiFlegrei:CF_PercorsiNavette fid="CF_PercorsiNavette.353">
+            <PianoCampiFlegrei:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString srsName="EPSG:4326">
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                14.19027044,40.83617351 14.19109653,40.83324332
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </PianoCampiFlegrei:the_geom>
+            <PianoCampiFlegrei:id>275</PianoCampiFlegrei:id>
+            <PianoCampiFlegrei:n_percorso>21</PianoCampiFlegrei:n_percorso>
+            <PianoCampiFlegrei:da_A_att>Napoli - Pianura, P1 - Campo basket Via Nabucco</PianoCampiFlegrei:da_A_att>
+            <PianoCampiFlegrei:a_A_inc>Napoli, Stazione ferroviaria Centrale, Piazza Garibaldi
+            </PianoCampiFlegrei:a_A_inc>
+            <PianoCampiFlegrei:percorrenz>Andata</PianoCampiFlegrei:percorrenz>
+            <PianoCampiFlegrei:lungh_a>335.01308831</PianoCampiFlegrei:lungh_a>
+            <PianoCampiFlegrei:lungh_r>0.0</PianoCampiFlegrei:lungh_r>
+            <PianoCampiFlegrei:tempo_a>1</PianoCampiFlegrei:tempo_a>
+            <PianoCampiFlegrei:tempo_r>0</PianoCampiFlegrei:tempo_r>
+            <PianoCampiFlegrei:n_tip_stra>Urbana - V.Cintia</PianoCampiFlegrei:n_tip_stra>
+            <PianoCampiFlegrei:bus_necess>0</PianoCampiFlegrei:bus_necess>
+            <PianoCampiFlegrei:Velocita>20</PianoCampiFlegrei:Velocita>
+            <PianoCampiFlegrei:id_strade>063VIA CINTHIA C</PianoCampiFlegrei:id_strade>
+            <PianoCampiFlegrei:da_ID_AA>19</PianoCampiFlegrei:da_ID_AA>
+            <PianoCampiFlegrei:a_Cod_AI>I-02</PianoCampiFlegrei:a_Cod_AI>
+            <PianoCampiFlegrei:n_percor_1>21</PianoCampiFlegrei:n_percor_1>
+        </PianoCampiFlegrei:CF_PercorsiNavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PianoCampiFlegrei:CF_PercorsiNavette fid="CF_PercorsiNavette.380">
+            <PianoCampiFlegrei:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString srsName="EPSG:4326">
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                14.19035033,40.83373512 14.1852753,40.83327866 14.17418041,40.83928746
+                                14.16663645,40.83965607
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </PianoCampiFlegrei:the_geom>
+            <PianoCampiFlegrei:id>351</PianoCampiFlegrei:id>
+            <PianoCampiFlegrei:n_percorso>26</PianoCampiFlegrei:n_percorso>
+            <PianoCampiFlegrei:da_A_att>Pozzuoli, Via Libero Bovio - Monteruscello</PianoCampiFlegrei:da_A_att>
+            <PianoCampiFlegrei:a_A_inc>Napoli, Stazione ferroviaria Centrale, Piazza Garibaldi
+            </PianoCampiFlegrei:a_A_inc>
+            <PianoCampiFlegrei:percorrenz>Andata</PianoCampiFlegrei:percorrenz>
+            <PianoCampiFlegrei:lungh_a>2241.04785747</PianoCampiFlegrei:lungh_a>
+            <PianoCampiFlegrei:lungh_r>0.0</PianoCampiFlegrei:lungh_r>
+            <PianoCampiFlegrei:tempo_a>2</PianoCampiFlegrei:tempo_a>
+            <PianoCampiFlegrei:tempo_r>0</PianoCampiFlegrei:tempo_r>
+            <PianoCampiFlegrei:n_tip_stra>A56 "Tangenziale di Napoli"</PianoCampiFlegrei:n_tip_stra>
+            <PianoCampiFlegrei:bus_necess>0</PianoCampiFlegrei:bus_necess>
+            <PianoCampiFlegrei:Velocita>60</PianoCampiFlegrei:Velocita>
+            <PianoCampiFlegrei:id_strade>063TANGENZIALE EST B</PianoCampiFlegrei:id_strade>
+            <PianoCampiFlegrei:da_ID_AA>27</PianoCampiFlegrei:da_ID_AA>
+            <PianoCampiFlegrei:a_Cod_AI>I-02</PianoCampiFlegrei:a_Cod_AI>
+            <PianoCampiFlegrei:n_percor_1>26</PianoCampiFlegrei:n_percor_1>
+        </PianoCampiFlegrei:CF_PercorsiNavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PianoCampiFlegrei:CF_PercorsiNavette fid="CF_PercorsiNavette.382">
+            <PianoCampiFlegrei:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString srsName="EPSG:4326">
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                14.19836608,40.83665853 14.19472958,40.83568208 14.19027044,40.83617351
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </PianoCampiFlegrei:the_geom>
+            <PianoCampiFlegrei:id>254</PianoCampiFlegrei:id>
+            <PianoCampiFlegrei:n_percorso>19</PianoCampiFlegrei:n_percorso>
+            <PianoCampiFlegrei:da_A_att>Napoli - Pianura, P2 - Area attrezzata Via Mandela</PianoCampiFlegrei:da_A_att>
+            <PianoCampiFlegrei:a_A_inc>Napoli, Stazione ferroviaria Centrale, Piazza Garibaldi
+            </PianoCampiFlegrei:a_A_inc>
+            <PianoCampiFlegrei:percorrenz>Ritorno</PianoCampiFlegrei:percorrenz>
+            <PianoCampiFlegrei:lungh_a>0.0</PianoCampiFlegrei:lungh_a>
+            <PianoCampiFlegrei:lungh_r>748.06812766</PianoCampiFlegrei:lungh_r>
+            <PianoCampiFlegrei:tempo_a>0</PianoCampiFlegrei:tempo_a>
+            <PianoCampiFlegrei:tempo_r>2</PianoCampiFlegrei:tempo_r>
+            <PianoCampiFlegrei:n_tip_stra>Svicolo uscita A56</PianoCampiFlegrei:n_tip_stra>
+            <PianoCampiFlegrei:bus_necess>0</PianoCampiFlegrei:bus_necess>
+            <PianoCampiFlegrei:Velocita>20</PianoCampiFlegrei:Velocita>
+            <PianoCampiFlegrei:id_strade/>
+            <PianoCampiFlegrei:da_ID_AA>20</PianoCampiFlegrei:da_ID_AA>
+            <PianoCampiFlegrei:a_Cod_AI>I-02</PianoCampiFlegrei:a_Cod_AI>
+            <PianoCampiFlegrei:n_percor_1>19</PianoCampiFlegrei:n_percor_1>
+        </PianoCampiFlegrei:CF_PercorsiNavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PianoCampiFlegrei:CF_PercorsiNavette fid="CF_PercorsiNavette.421">
+            <PianoCampiFlegrei:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString srsName="EPSG:4326">
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                14.19027044,40.83617351 14.19109653,40.83324332
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </PianoCampiFlegrei:the_geom>
+            <PianoCampiFlegrei:id>258</PianoCampiFlegrei:id>
+            <PianoCampiFlegrei:n_percorso>20</PianoCampiFlegrei:n_percorso>
+            <PianoCampiFlegrei:da_A_att>Napoli - Pianura, P3 - Via Torricelli esterno parchi Falcone e Borsellino
+            </PianoCampiFlegrei:da_A_att>
+            <PianoCampiFlegrei:a_A_inc>Napoli, Stazione ferroviaria Centrale, Piazza Garibaldi
+            </PianoCampiFlegrei:a_A_inc>
+            <PianoCampiFlegrei:percorrenz>Andata</PianoCampiFlegrei:percorrenz>
+            <PianoCampiFlegrei:lungh_a>335.01308789</PianoCampiFlegrei:lungh_a>
+            <PianoCampiFlegrei:lungh_r>0.0</PianoCampiFlegrei:lungh_r>
+            <PianoCampiFlegrei:tempo_a>1</PianoCampiFlegrei:tempo_a>
+            <PianoCampiFlegrei:tempo_r>0</PianoCampiFlegrei:tempo_r>
+            <PianoCampiFlegrei:n_tip_stra>Urbana - V.Cintia</PianoCampiFlegrei:n_tip_stra>
+            <PianoCampiFlegrei:bus_necess>0</PianoCampiFlegrei:bus_necess>
+            <PianoCampiFlegrei:Velocita>20</PianoCampiFlegrei:Velocita>
+            <PianoCampiFlegrei:id_strade>063VIA CINTHIA C</PianoCampiFlegrei:id_strade>
+            <PianoCampiFlegrei:da_ID_AA>21</PianoCampiFlegrei:da_ID_AA>
+            <PianoCampiFlegrei:a_Cod_AI>I-02</PianoCampiFlegrei:a_Cod_AI>
+            <PianoCampiFlegrei:n_percor_1>20</PianoCampiFlegrei:n_percor_1>
+        </PianoCampiFlegrei:CF_PercorsiNavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PianoCampiFlegrei:CF_PercorsiNavette fid="CF_PercorsiNavette.464">
+            <PianoCampiFlegrei:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString srsName="EPSG:4326">
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                14.19831429,40.83657994 14.19213225,40.83583726 14.19087255,40.83493228
+                                14.19103001,40.83317894
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </PianoCampiFlegrei:the_geom>
+            <PianoCampiFlegrei:id>237</PianoCampiFlegrei:id>
+            <PianoCampiFlegrei:n_percorso>18</PianoCampiFlegrei:n_percorso>
+            <PianoCampiFlegrei:da_A_att>Napoli - Fuorigrotta, F1 - Piazza Italia - largo Lala
+            </PianoCampiFlegrei:da_A_att>
+            <PianoCampiFlegrei:a_A_inc>Afragola, Stazione ferroviaria di Napoli Afragola, Via Arena
+            </PianoCampiFlegrei:a_A_inc>
+            <PianoCampiFlegrei:percorrenz>Ritorno</PianoCampiFlegrei:percorrenz>
+            <PianoCampiFlegrei:lungh_a>0.0</PianoCampiFlegrei:lungh_a>
+            <PianoCampiFlegrei:lungh_r>897.13238032</PianoCampiFlegrei:lungh_r>
+            <PianoCampiFlegrei:tempo_a>0</PianoCampiFlegrei:tempo_a>
+            <PianoCampiFlegrei:tempo_r>3</PianoCampiFlegrei:tempo_r>
+            <PianoCampiFlegrei:n_tip_stra>Svincolo uscita A56</PianoCampiFlegrei:n_tip_stra>
+            <PianoCampiFlegrei:bus_necess>0</PianoCampiFlegrei:bus_necess>
+            <PianoCampiFlegrei:Velocita>20</PianoCampiFlegrei:Velocita>
+            <PianoCampiFlegrei:id_strade>063VIA CINTHIA B</PianoCampiFlegrei:id_strade>
+            <PianoCampiFlegrei:da_ID_AA>18</PianoCampiFlegrei:da_ID_AA>
+            <PianoCampiFlegrei:a_Cod_AI>I-03</PianoCampiFlegrei:a_Cod_AI>
+            <PianoCampiFlegrei:n_percor_1>18</PianoCampiFlegrei:n_percor_1>
+        </PianoCampiFlegrei:CF_PercorsiNavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PianoCampiFlegrei:CF_PercorsiNavette fid="CF_PercorsiNavette.473">
+            <PianoCampiFlegrei:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString srsName="EPSG:4326">
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                14.19028127,40.83617719 14.19110788,40.83324594
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </PianoCampiFlegrei:the_geom>
+            <PianoCampiFlegrei:id>291</PianoCampiFlegrei:id>
+            <PianoCampiFlegrei:n_percorso>22</PianoCampiFlegrei:n_percorso>
+            <PianoCampiFlegrei:da_A_att>Napoli - Soccavo, S1 - Polifunzionale Soccavo, Viale Adriano
+            </PianoCampiFlegrei:da_A_att>
+            <PianoCampiFlegrei:a_A_inc>Napoli, Stazione ferroviaria Centrale, Piazza Garibaldi
+            </PianoCampiFlegrei:a_A_inc>
+            <PianoCampiFlegrei:percorrenz>Andata</PianoCampiFlegrei:percorrenz>
+            <PianoCampiFlegrei:lungh_a>335.13795048</PianoCampiFlegrei:lungh_a>
+            <PianoCampiFlegrei:lungh_r>0.0</PianoCampiFlegrei:lungh_r>
+            <PianoCampiFlegrei:tempo_a>1</PianoCampiFlegrei:tempo_a>
+            <PianoCampiFlegrei:tempo_r>0</PianoCampiFlegrei:tempo_r>
+            <PianoCampiFlegrei:n_tip_stra>Urbana - V.Cintia</PianoCampiFlegrei:n_tip_stra>
+            <PianoCampiFlegrei:bus_necess>0</PianoCampiFlegrei:bus_necess>
+            <PianoCampiFlegrei:Velocita>20</PianoCampiFlegrei:Velocita>
+            <PianoCampiFlegrei:id_strade>063VIA CINTHIA C</PianoCampiFlegrei:id_strade>
+            <PianoCampiFlegrei:da_ID_AA>24</PianoCampiFlegrei:da_ID_AA>
+            <PianoCampiFlegrei:a_Cod_AI>I-02</PianoCampiFlegrei:a_Cod_AI>
+            <PianoCampiFlegrei:n_percor_1>22</PianoCampiFlegrei:n_percor_1>
+        </PianoCampiFlegrei:CF_PercorsiNavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PianoCampiFlegrei:CF_PercorsiNavette fid="CF_PercorsiNavette.494">
+            <PianoCampiFlegrei:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString srsName="EPSG:4326">
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                14.19027044,40.83617351 14.19109653,40.83324332
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </PianoCampiFlegrei:the_geom>
+            <PianoCampiFlegrei:id>242</PianoCampiFlegrei:id>
+            <PianoCampiFlegrei:n_percorso>19</PianoCampiFlegrei:n_percorso>
+            <PianoCampiFlegrei:da_A_att>Napoli - Pianura, P2 - Area attrezzata Via Mandela</PianoCampiFlegrei:da_A_att>
+            <PianoCampiFlegrei:a_A_inc>Napoli, Stazione ferroviaria Centrale, Piazza Garibaldi
+            </PianoCampiFlegrei:a_A_inc>
+            <PianoCampiFlegrei:percorrenz>Andata</PianoCampiFlegrei:percorrenz>
+            <PianoCampiFlegrei:lungh_a>335.01309263</PianoCampiFlegrei:lungh_a>
+            <PianoCampiFlegrei:lungh_r>0.0</PianoCampiFlegrei:lungh_r>
+            <PianoCampiFlegrei:tempo_a>1</PianoCampiFlegrei:tempo_a>
+            <PianoCampiFlegrei:tempo_r>0</PianoCampiFlegrei:tempo_r>
+            <PianoCampiFlegrei:n_tip_stra>Urbana - V.Cintia</PianoCampiFlegrei:n_tip_stra>
+            <PianoCampiFlegrei:bus_necess>0</PianoCampiFlegrei:bus_necess>
+            <PianoCampiFlegrei:Velocita>20</PianoCampiFlegrei:Velocita>
+            <PianoCampiFlegrei:id_strade>063VIA CINTHIA C</PianoCampiFlegrei:id_strade>
+            <PianoCampiFlegrei:da_ID_AA>20</PianoCampiFlegrei:da_ID_AA>
+            <PianoCampiFlegrei:a_Cod_AI>I-02</PianoCampiFlegrei:a_Cod_AI>
+            <PianoCampiFlegrei:n_percor_1>19</PianoCampiFlegrei:n_percor_1>
+        </PianoCampiFlegrei:CF_PercorsiNavette>
+    </gml:featureMember>
+</wfs:FeatureCollection>

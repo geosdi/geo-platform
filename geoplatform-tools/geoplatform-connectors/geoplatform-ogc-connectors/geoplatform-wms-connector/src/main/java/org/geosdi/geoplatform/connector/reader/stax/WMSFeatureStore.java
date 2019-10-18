@@ -43,12 +43,23 @@ public abstract class WMSFeatureStore<K extends Object> implements GPStaxFeature
     public void addFeature(@Nonnull(when = NEVER) Feature feature) throws Exception {
         checkArgument(feature != null, "The Parameter feature must not be null.");
         K featureKey = (K) feature.getProperties().get(this.key);
-        if (this.store.containsKey(featureKey)) {
+        if(this.store.containsKey(featureKey)) {
             List<Feature> features = this.store.get(featureKey);
             features.add(feature);
         } else {
             this.store.put(featureKey, of(feature).collect(toList()));
         }
         feature.getProperties().remove(this.key);
+    }
+
+    /**
+     * @param theKey
+     * @return {@link List<Feature>}
+     * @throws Exception
+     */
+    @Override
+    public List<Feature> getFeaturesByKey(@Nonnull(when = NEVER) K theKey) throws Exception {
+        checkArgument(theKey != null, "The Parameter key must not be null.");
+        return this.store.get(theKey);
     }
 }

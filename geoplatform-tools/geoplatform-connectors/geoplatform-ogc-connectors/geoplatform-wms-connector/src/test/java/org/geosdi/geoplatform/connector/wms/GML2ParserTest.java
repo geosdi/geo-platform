@@ -16,6 +16,7 @@ import java.io.FileReader;
 import static java.io.File.separator;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
+import static org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder.newInstance;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
@@ -27,7 +28,7 @@ public class GML2ParserTest {
 
     private static final Logger logger = LoggerFactory.getLogger(GML2ParserTest.class);
     //
-    private static final GPJAXBContextBuilder jaxbContextBuilder = GPJAXBContextBuilder.newInstance();
+    private static final GPJAXBContextBuilder jaxbContextBuilder = newInstance();
     private static File file;
     private static File file1;
     private static File file2;

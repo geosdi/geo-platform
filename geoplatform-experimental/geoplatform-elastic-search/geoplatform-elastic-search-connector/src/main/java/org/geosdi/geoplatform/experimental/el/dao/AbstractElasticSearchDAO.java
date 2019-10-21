@@ -81,10 +81,12 @@ public abstract class AbstractElasticSearchDAO<D extends Document> extends Pagea
         IndexResponse response;
         if (document.isIdSetted()) {
             response = this.elastichSearchClient.prepareIndex(getIndexName(), getIndexType(), document.getId())
-                    .setSource(this.mapper.writeAsString(document), JSON).get();
+                    .setSource(this.mapper.writeAsString(document), JSON)
+                    .get();
         } else {
             response = this.elastichSearchClient.prepareIndex(getIndexName(), getIndexType())
-                    .setSource(this.mapper.writeAsString(document), JSON).get();
+                    .setSource(this.mapper.writeAsString(document), JSON)
+                    .get();
             document.setId(response.getId());
             update(document);
         }
@@ -98,10 +100,12 @@ public abstract class AbstractElasticSearchDAO<D extends Document> extends Pagea
      */
     @Override
     public void update(D document) throws Exception {
-        checkArgument(((document != null) && ((document.getId() != null) && !(document.getId().isEmpty()))), "The {} to Update must" + " not be null or ID must not be null or Empty.", this.mapper.getDocumentClassName());
+        checkArgument(((document != null) && ((document.getId() != null) && !(document.getId()
+                .isEmpty()))), "The {} to Update must  not be null or ID must not be null or Empty.", this.mapper.getDocumentClassName());
         logger.debug("################Try to Update : {}\n\n", document);
         this.elastichSearchClient.prepareUpdate(getIndexName(), getIndexType(), document.getId())
-                .setDoc(this.mapper.writeAsString(document), JSON).get();
+                .setDoc(this.mapper.writeAsString(document), JSON)
+                .get();
     }
 
     /**
@@ -124,7 +128,8 @@ public abstract class AbstractElasticSearchDAO<D extends Document> extends Pagea
         checkArgument((ids != null) && (Iterables.size(ids) > 0));
         MultiGetResponse multiGetResponses = this.elastichSearchClient.prepareMultiGet()
                 .setRealtime(TRUE)
-                .add(getIndexName(), getIndexType(), ids).get();
+                .add(getIndexName(), getIndexType(), ids)
+                .get();
         return stream(multiGetResponses.getResponses()).filter(response -> !response.isFailed())
                 .map(r -> readGetResponse(r.getResponse()))
                 .filter(d -> ((condition != null) ? ((d != null) && (condition.test(d))) : d != null))
@@ -180,9 +185,12 @@ public abstract class AbstractElasticSearchDAO<D extends Document> extends Pagea
      */
     @Override
     public BulkResponse persist(Path direrctory) throws Exception {
-        checkArgument((direrctory != null) && (direrctory.toFile().isDirectory()), "The Parameter Directory must not be null and must be a Directory.");
+        checkArgument((direrctory != null) && (direrctory.toFile()
+                .isDirectory()), "The Parameter Directory must not be null and must be a Directory.");
         return this.persist(Files.list(direrctory)
-                .filter(path -> path.toFile().getName().endsWith(".json"))
+                .filter(path -> path.toFile()
+                        .getName()
+                        .endsWith(".json"))
                 .map(path -> super.readDocument(path))
                 .filter(d -> d != null)
                 .collect(Collectors.toList()));
@@ -190,8 +198,11 @@ public abstract class AbstractElasticSearchDAO<D extends Document> extends Pagea
 
     @Override
     public void delete(String id) {
-        checkArgument(((id != null) && !(id.trim().isEmpty())), "The ID must not be null or an Empty String");
-        DeleteResponse response = elastichSearchClient.prepareDelete(getIndexName(), getIndexType(), id).execute().actionGet();
+        checkArgument(((id != null) && !(id.trim()
+                .isEmpty())), "The ID must not be null or an Empty String");
+        DeleteResponse response = elastichSearchClient.prepareDelete(getIndexName(), getIndexType(), id)
+                .execute()
+                .actionGet();
         if (response.getResult() == DELETED) {
             logger.debug("#################Document with ID : {}, " + "was deleted.", id);
         } else {
@@ -201,18 +212,21 @@ public abstract class AbstractElasticSearchDAO<D extends Document> extends Pagea
 
     @Override
     public D find(String id) throws Exception {
-        checkArgument((id != null) && !(id.trim().isEmpty()), "The ElasticSearch ID must not be null or an Empty String");
-        GetResponse existResponse = elastichSearchClient.prepareGet(getIndexName(), getIndexType(), id).get();
+        checkArgument((id != null) && !(id.trim()
+                .isEmpty()), "The ElasticSearch ID must not be null or an Empty String");
+        GetResponse existResponse = elastichSearchClient.prepareGet(getIndexName(), getIndexType(), id)
+                .get();
         return (existResponse.isExists()) ? readGetResponse(existResponse) : null;
     }
 
     @Override
     public Long count() {
         super.refreshIndex();
-        return this.elastichSearchClient
-                .prepareSearch(getIndexName())
+        return this.elastichSearchClient.prepareSearch(getIndexName())
                 .setTypes(getIndexType())
-                .get().getHits().getTotalHits().value;
+                .get()
+                .getHits()
+                .getTotalHits().value;
     }
 
     /**
@@ -222,11 +236,12 @@ public abstract class AbstractElasticSearchDAO<D extends Document> extends Pagea
      */
     @Override
     public Long count(QueryBuilder queryBuilder) throws Exception {
-        return this.elastichSearchClient
-                .prepareSearch(getIndexName())
+        return this.elastichSearchClient.prepareSearch(getIndexName())
                 .setQuery(queryBuilder)
                 .setTypes(getIndexType())
-                .get().getHits().getTotalHits().value;
+                .get()
+                .getHits()
+                .getTotalHits().value;
     }
 
     @Override
@@ -235,14 +250,22 @@ public abstract class AbstractElasticSearchDAO<D extends Document> extends Pagea
                 .setIndices(getIndexName())
                 .setTypes(getIndexType())
                 .setScroll(new TimeValue(60000))
-                .setSize(100).execute().actionGet();
+                .setSize(100)
+                .execute()
+                .actionGet();
         while (true) {
-            Stream.of(searchResponse.getHits().getHits()).forEach(document -> {
-                this.elastichSearchClient.delete(new DeleteRequest(getIndexName(), getIndexType(),
-                        document.getId())).actionGet();
-            });
-            searchResponse = this.elastichSearchClient.prepareSearchScroll(searchResponse.getScrollId()).setScroll(new TimeValue(60000)).execute().actionGet();
-            if (searchResponse.getHits().getHits().length == 0) {
+            Stream.of(searchResponse.getHits()
+                    .getHits())
+                    .forEach(document -> {
+                        this.elastichSearchClient.delete(new DeleteRequest(getIndexName(), getIndexType(), document.getId()))
+                                .actionGet();
+                    });
+            searchResponse = this.elastichSearchClient.prepareSearchScroll(searchResponse.getScrollId())
+                    .setScroll(new TimeValue(60000))
+                    .execute()
+                    .actionGet();
+            if (searchResponse.getHits()
+                    .getHits().length == 0) {
                 break;
             }
         }

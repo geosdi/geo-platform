@@ -61,8 +61,7 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends Pagea
     public <P extends Page> IPageResult<D> find(P page) throws Exception {
         checkArgument((page != null), "Page must not be null.");
         super.refreshIndex();
-        SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient
-                .prepareSearch(getIndexName()).setTypes(getIndexType()));
+        SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient.prepareSearch(getIndexName()).setTypes(getIndexType()));
         logger.trace("#########################Builder : {}\n\n", builder.toString());
         SearchResponse searchResponse = builder.get();
         if (searchResponse.status() != RestStatus.OK) {
@@ -70,10 +69,7 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends Pagea
         }
         Long total = searchResponse.getHits().getTotalHits().value;
         logger.debug("###################TOTAL HITS FOUND : {} .\n\n", total);
-        return new PageResult<D>(total, of(searchResponse.getHits().getHits())
-                .map(searchHit -> this.readDocument(searchHit))
-                .filter(s -> s != null)
-                .collect(toList()));
+        return new PageResult<D>(total, of(searchResponse.getHits().getHits()).map(searchHit -> this.readDocument(searchHit)).filter(s -> s != null).collect(toList()));
     }
 
     /**
@@ -85,8 +81,7 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends Pagea
     public <P extends Page, V extends D> IPageResult<V> find(P page, Class<V> subType) throws Exception {
         checkArgument((page != null), "Page must not be null.");
         super.refreshIndex();
-        SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient
-                .prepareSearch(getIndexName()).setTypes(getIndexType()));
+        SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient.prepareSearch(getIndexName()).setTypes(getIndexType()));
         logger.trace("#########################Builder : {}\n\n", builder.toString());
         SearchResponse searchResponse = builder.get();
         if (searchResponse.status() != RestStatus.OK) {
@@ -94,12 +89,7 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends Pagea
         }
         Long total = searchResponse.getHits().getTotalHits().value;
         logger.debug("###################TOTAL HITS FOUND : {} .\n\n", total);
-        return new PageResult<V>(total, of(searchResponse.getHits().getHits())
-                .map(searchHit -> this.readDocument(searchHit))
-                .filter(s -> s != null)
-                .filter(subType::isInstance)
-                .map(s -> (V) s)
-                .collect(toList()));
+        return new PageResult<V>(total, of(searchResponse.getHits().getHits()).map(searchHit -> this.readDocument(searchHit)).filter(s -> s != null).filter(subType::isInstance).map(s -> (V) s).collect(toList()));
     }
 
     /**
@@ -113,8 +103,7 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends Pagea
         checkArgument((page != null), "Page must not be null.");
         checkNotNull(classe, "The Parameter classe must not be null.");
         super.refreshIndex();
-        SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient
-                .prepareSearch(getIndexName()).setTypes(getIndexType()));
+        SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient.prepareSearch(getIndexName()).setTypes(getIndexType()));
         logger.trace("#########################Builder : {}\n\n", builder.toString());
         SearchResponse searchResponse = builder.get();
         if (searchResponse.status() != RestStatus.OK) {
@@ -122,10 +111,7 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends Pagea
         }
         Long total = searchResponse.getHits().getTotalHits().value;
         logger.debug("###################TOTAL HITS FOUND : {} .\n\n", total);
-        return new PageResult<V>(total, of(searchResponse.getHits().getHits())
-                .map(searchHit -> this.readDocument(searchHit, classe))
-                .filter(s -> s != null)
-                .collect(toList()));
+        return new PageResult<V>(total, of(searchResponse.getHits().getHits()).map(searchHit -> this.readDocument(searchHit, classe)).filter(s -> s != null).collect(toList()));
     }
 
     /**
@@ -139,8 +125,7 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends Pagea
     public <P extends Page> IPageResult<D> find(P page, String[] includeFields, String[] excludeFields) throws Exception {
         checkArgument((page != null), "Page must not be null.");
         super.refreshIndex();
-        SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient
-                .prepareSearch(getIndexName()).setTypes(getIndexType()));
+        SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient.prepareSearch(getIndexName()).setTypes(getIndexType()));
         builder.setFetchSource(includeFields, excludeFields);
         logger.trace("#########################Builder : {}\n\n", builder.toString());
         SearchResponse searchResponse = builder.get();
@@ -149,9 +134,7 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends Pagea
         }
         Long total = searchResponse.getHits().getTotalHits().value;
         logger.debug("###################TOTAL HITS FOUND : {} .\n\n", total);
-        return new PageResult<D>(total, of(searchResponse.getHits().getHits())
-                .map(searchHit -> this.readDocument(searchHit))
-                .filter(s -> s != null).collect(toList()));
+        return new PageResult<D>(total, of(searchResponse.getHits().getHits()).map(searchHit -> this.readDocument(searchHit)).filter(s -> s != null).collect(toList()));
     }
 
     /**
@@ -166,8 +149,7 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends Pagea
     public <P extends Page, V extends Document> IPageResult<V> find(P page, String[] includeFields, String[] excludeFields, Class<V> classe) throws Exception {
         checkArgument((page != null), "Page must not be null.");
         super.refreshIndex();
-        SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient
-                .prepareSearch(getIndexName()).setTypes(getIndexType()));
+        SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient.prepareSearch(getIndexName()).setTypes(getIndexType()));
         builder.setFetchSource(includeFields, excludeFields);
         logger.trace("#########################Builder : {}\n\n", builder.toString());
         SearchResponse searchResponse = builder.get();
@@ -176,10 +158,7 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends Pagea
         }
         Long total = searchResponse.getHits().getTotalHits().value;
         logger.debug("###################TOTAL HITS FOUND : {} .\n\n", total);
-        return new PageResult<V>(total, of(searchResponse.getHits().getHits())
-                .map(searchHit -> this.readDocument(searchHit, classe))
-                .filter(s -> s != null)
-                .collect(toList()));
+        return new PageResult<V>(total, of(searchResponse.getHits().getHits()).map(searchHit -> this.readDocument(searchHit, classe)).filter(s -> s != null).collect(toList()));
     }
 
     /**
@@ -193,8 +172,7 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends Pagea
     public <P extends Page> IPageResult<D> find(P page, String includeField, String excludeField) throws Exception {
         checkArgument((page != null), "Page must not be null.");
         super.refreshIndex();
-        SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient
-                .prepareSearch(getIndexName()).setTypes(getIndexType()));
+        SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient.prepareSearch(getIndexName()).setTypes(getIndexType()));
         builder.setFetchSource(includeField, excludeField);
         logger.trace("#########################Builder : {}\n\n", builder.toString());
         SearchResponse searchResponse = builder.get();
@@ -203,9 +181,7 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends Pagea
         }
         Long total = searchResponse.getHits().getTotalHits().value;
         logger.debug("###################TOTAL HITS FOUND : {} .\n\n", total);
-        return new PageResult<D>(total, of(searchResponse.getHits().getHits())
-                .map(searchHit -> this.readDocument(searchHit))
-                .filter(s -> s != null).collect(toList()));
+        return new PageResult<D>(total, of(searchResponse.getHits().getHits()).map(searchHit -> this.readDocument(searchHit)).filter(s -> s != null).collect(toList()));
     }
 
     /**
@@ -219,9 +195,7 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends Pagea
         checkArgument((page != null), "Page must not be null.");
         checkArgument((aggregationBuilder != null), "AggregationBuilder must not be null.");
         super.refreshIndex();
-        SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient
-                .prepareSearch(getIndexName()).setTypes(getIndexType()))
-                .addAggregation(aggregationBuilder);
+        SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient.prepareSearch(getIndexName()).setTypes(getIndexType())).addAggregation(aggregationBuilder);
         logger.trace("#########################Builder : {}\n\n", builder.toString());
         SearchResponse searchResponse = builder.get();
         if (searchResponse.status() != RestStatus.OK) {
@@ -239,8 +213,7 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends Pagea
     public <P extends Page> Long count(P page) throws Exception {
         checkArgument((page != null), "Page must not be null.");
         super.refreshIndex();
-        SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient
-                .prepareSearch(getIndexName()).setTypes(getIndexType()));
+        SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient.prepareSearch(getIndexName()).setTypes(getIndexType()));
         logger.trace("#########################Builder : {}\n\n", builder.toString());
         SearchResponse searchResponse = builder.get();
         if (searchResponse.status() != RestStatus.OK) {

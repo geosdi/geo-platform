@@ -218,4 +218,81 @@ public class GPWMSFeatureStoreTest extends WMSGetFeatureInfoStaxReaderTest {
         logger.info("#######################FEATURE_STORE_PianiCampiFlegrei : {}\n", wmsFeatureStore);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File("./target/StorePianiCampiFlegrei.json"), wmsFeatureStore);
     }
+
+    @Test
+    public void z_e_wmsFeatureStoreReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxReader.readAsStore(storage.find("rsdi_alt_300_a_400.xml"));
+        logger.info("#######################FEATURE_STORE_rsdi_alt_300_a_400 : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File("./target/StoreRsdi_alt_300_a_400.json"), wmsFeatureStore);
+    }
+
+    @Test
+    public void z_f_wmsFeatureStoreReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxReader.readAsStore(storage.find("aziende.xml"));
+        logger.info("#######################FEATURE_STORE_aziende : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File("./target/StoreAziende.json"), wmsFeatureStore);
+    }
+
+    @Test
+    public void z_g_wmsFeatureStoreReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxReader.readAsStore(storage.find("EneaClipFilled.xml"));
+        logger.info("#######################FEATURE_STORE_EneaClipFilled : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File("./target/StoreEneaClipFilled.json"), wmsFeatureStore);
+    }
+
+    @Test
+    public void z_h_wmsFeatureStoreReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxReader.readAsStore(storage.find("test.xml"));
+        logger.info("#######################FEATURE_STORE_test : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File("./target/StoreTest.json"), wmsFeatureStore);
+    }
+
+    @Test
+    public void z_i_wmsFeatureStoreReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxReader.readAsStore(storage.find("ParchiBasilicata.xml"));
+        logger.info("#######################FEATURE_STORE_ParchiBasilicata : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File("./target/StoreParchiBasilicata.json"), wmsFeatureStore);
+    }
+
+    @Test
+    public void z_l_wmsFeatureStoreReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxReader.readAsStore(storage.find("centri_abitati.xml"));
+        logger.info("#######################FEATURE_STORE_CentriAbitati : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File("./target/StoreCentriAbitati.json"), wmsFeatureStore);
+    }
+
+    @Test
+    public void z_m_wmsFeatureStoreReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxReader.readAsStore(storage.find("mobileBeni.xml"));
+        logger.info("#######################FEATURE_STORE_MobiliBeni : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File("./target/StoreMobiliBeni.json"), wmsFeatureStore);
+    }
+
+    @Test
+    public void z_n_wmsFeatureStoreReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxReader.readAsStore(storage.find("PercorsiNavette.xml"));
+        logger.info("#######################FEATURE_STORE_PercorsiNavette : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File("./target/StorePercorsiNavette.json"), wmsFeatureStore);
+    }
+
+    @Test
+    public void z_o_wmsFeatureStoreReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxReader.readAsStore(storage.find("aggregatiStrutturali.xml"));
+        logger.info("#######################FEATURE_STORE_AggregatiStrutturali : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File("./target/StoreAggregatiStrutturali.json"), wmsFeatureStore);
+    }
+
+    @Test
+    public void z_p_wmsFeatureStoreReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxReader.readAsStore(storage.find("aggregati_zrvesuvioflegrei.xml"));
+        logger.info("#######################FEATURE_STORE_aggregati_zrvesuvioflegrei : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File("./target/StoreAggregati_zrvesuvioflegrei.json"), wmsFeatureStore);
+    }
+
+    @Test
+    public void z_q_wmsFeatureStoreReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxReader.readAsStore(storage.find("exeflegrei_esiti_c_danni.xml"));
+        logger.info("#######################FEATURE_STORE_exeflegrei_esiti_c_danni : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File("./target/StoreExeflegrei_esiti_c_danni.json"), wmsFeatureStore);
+    }
 }

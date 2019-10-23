@@ -24,5 +24,6 @@ public class WMSGetFeatureInfoWoodstoxReaderTest extends WMSGetFeatureInfoReader
             ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
             WRAP_ROOT_VALUE_DISABLE,
             INDENT_OUTPUT_ENABLE, NON_NULL);
+    //
     protected static final GPWMSGetFeatureInfoStax2Reader wmsGetFeatureInfoWoodstoxReader = woodstoxConfigureForSpeed();
 }

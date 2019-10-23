@@ -67,8 +67,7 @@ public class QueryRestrictionsBuilderTest {
 
     @BeforeClass
     public static void beforeClass() throws Exception {
-        String basePath = of(new File(".").getCanonicalPath(), "src", "test", "resources",
-                "unmarshall", "query")
+        String basePath = of(new File(".").getCanonicalPath(), "src", "test", "resources", "unmarshall", "query")
                 .collect(joining(separator, "", separator));
         File queryDTOAndFile = new File(basePath.concat("wfsQueryAnd.xml"));
         queryDTOAnd = GPJAXBContextBuilder.newInstance().unmarshal(queryDTOAndFile, QueryDTO.class);

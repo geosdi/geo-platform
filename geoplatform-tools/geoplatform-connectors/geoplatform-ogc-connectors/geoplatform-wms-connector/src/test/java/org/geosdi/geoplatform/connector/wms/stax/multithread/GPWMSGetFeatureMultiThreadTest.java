@@ -23,18 +23,17 @@ public abstract class GPWMSGetFeatureMultiThreadTest {
     public static void beforeClass() throws Exception {
         String basePath = of(new File(".").getCanonicalPath(), "src", "test", "resources", "stax")
                 .collect(joining(separator, "", separator));
-        files = of("geoserver-Vigneti-GetFeatureInfo.xml", "geoserver-GetFeatureInfo.xml", "geoserver-GetFeatureInfo1.xml",
-                "geoserver-GetFeatureInfo-Point.xml", "geoserver-GetFeatureInfo-MultiLineString.xml",
-                "spearfish-GetFeatureInfo.xml", "tasmaniaRoads-GetFeatureInfo.xml", "tasmaniaStates-GetFeatureInfo.xml",
-                "tiger_ny-GetFeatureInfo.xml", "sfdem-GetFeatureInfo.xml", "nurcAPk50095-GetFeatureInfo.xml",
-                "nurcArcSample-GetFeatureInfo.xml", "comuni-GetFeatureInfo.xml", "parchiNaturali-GetFeatureInfo.xml",
-                "retiRiserve-GetFeatureInfo.xml", "linee-GetFeatureInfo.xml", "azioniPunto-GetFeatureInfo.xml",
-                "comuniBasilicata-GetFeatureInfo.xml", "corine-GetFeatureInfo.xml", "airports.xml",
-                "geologia.xml", "livelloEdifici.xml", "volumetria.xml", "livelloEdifici1.xml", "masw.xml",
-                "PianoCampiFlegrei.xml", "CF_zonepianificazione_mappeinterattive.xml", "aziende.xml",
-                "centri_abitati.xml", "EneaClipFilled.xml", "MixedFeatures.xml", "ParchiBasilicata.xml",
-                "rsdi_alt_300_a_400.xml")
-                .map(v -> basePath.concat(v))
+        files = of("geoserver-Vigneti-GetFeatureInfo.xml", "geoserver-GetFeatureInfo.xml",
+                "geoserver-GetFeatureInfo1.xml", "geoserver-GetFeatureInfo-Point.xml",
+                "geoserver-GetFeatureInfo-MultiLineString.xml", "spearfish-GetFeatureInfo.xml",
+                "tasmaniaRoads-GetFeatureInfo.xml", "tasmaniaStates-GetFeatureInfo.xml", "tiger_ny-GetFeatureInfo.xml",
+                "sfdem-GetFeatureInfo.xml", "nurcAPk50095-GetFeatureInfo.xml", "nurcArcSample-GetFeatureInfo.xml",
+                "comuni-GetFeatureInfo.xml", "parchiNaturali-GetFeatureInfo.xml", "retiRiserve-GetFeatureInfo.xml",
+                "linee-GetFeatureInfo.xml", "azioniPunto-GetFeatureInfo.xml", "comuniBasilicata-GetFeatureInfo.xml",
+                "corine-GetFeatureInfo.xml", "airports.xml", "geologia.xml", "livelloEdifici.xml", "volumetria.xml",
+                "livelloEdifici1.xml", "masw.xml", "PianoCampiFlegrei.xml",
+                "CF_zonepianificazione_mappeinterattive.xml", "aziende.xml", "centri_abitati.xml", "EneaClipFilled.xml",
+                "MixedFeatures.xml", "ParchiBasilicata.xml", "rsdi_alt_300_a_400.xml").map(v -> basePath.concat(v))
                 .collect(toCollection(LinkedList::new));
     }
 }

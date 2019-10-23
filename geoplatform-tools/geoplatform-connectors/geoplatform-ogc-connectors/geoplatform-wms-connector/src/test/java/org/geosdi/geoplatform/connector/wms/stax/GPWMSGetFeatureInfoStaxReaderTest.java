@@ -17,10 +17,8 @@ import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 public class GPWMSGetFeatureInfoStaxReaderTest extends WMSGetFeatureInfoStaxReaderTest {
 
     protected static final JacksonSupport JACKSON_SUPPORT = new GPJacksonSupport(UNWRAP_ROOT_VALUE_DISABLE,
-            FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
-            ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
-            WRAP_ROOT_VALUE_DISABLE,
-            INDENT_OUTPUT_ENABLE, NON_NULL);
+            FAIL_ON_UNKNOW_PROPERTIES_DISABLE, ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
+            WRAP_ROOT_VALUE_DISABLE, INDENT_OUTPUT_ENABLE, NON_NULL);
 
     @Test
     public void a_wmsGetFeatureInfoStaxReaderTest() throws Exception {
@@ -128,7 +126,7 @@ public class GPWMSGetFeatureInfoStaxReaderTest extends WMSGetFeatureInfoStaxRead
     @Test
     public void t_wmsGetFeatureInfoStaxReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_COMUNI_BASILICATA : {}\n", JACKSON_SUPPORT.getDefaultMapper()
-                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(storage.find("comuniBasilicata-GetFeatureInfo.xml"))));
+                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(storage.find("comuniBasilicata-GetFeatureInfo" + ".xml"))));
     }
 
     @Test
@@ -175,7 +173,8 @@ public class GPWMSGetFeatureInfoStaxReaderTest extends WMSGetFeatureInfoStaxRead
 
     @Test
     public void z_b_wmsGetFeatureInfoStaxReaderTest() throws Exception {
-        logger.info("#######################FEATURE_COLLECTION_CF_zonepianificazione_mappeinterattive : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+        logger.info("#######################FEATURE_COLLECTION_CF_zonepianificazione_mappeinterattive : {}\n", JACKSON_SUPPORT
+                .getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoStaxReader.read(storage.find("CF_zonepianificazione_mappeinterattive.xml"))));
     }
 
@@ -237,5 +236,23 @@ public class GPWMSGetFeatureInfoStaxReaderTest extends WMSGetFeatureInfoStaxRead
     public void z_l_wmsGetFeatureInfoStaxReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_PercorsiNavette : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoStaxReader.read(storage.find("PercorsiNavette.xml"))));
+    }
+
+    @Test
+    public void z_m_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_aggregatiStrutturali : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(storage.find("aggregatiStrutturali.xml"))));
+    }
+
+    @Test
+    public void z_n_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_aggregati_zrvesuvioflegrei : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(storage.find("aggregati_zrvesuvioflegrei.xml"))));
+    }
+
+    @Test
+    public void z_0_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_exeflegrei_esiti_c_danni : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(storage.find("exeflegrei_esiti_c_danni.xml"))));
     }
 }

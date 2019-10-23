@@ -1,6 +1,7 @@
 package org.geosdi.geoplatform.connector.wms.stax.multithread;
 
 import org.geosdi.geoplatform.connector.reader.stax.GPWMSGetFeatureInfoStaxReader;
+import org.geosdi.geoplatform.connector.wms.stax.multithread.WMSGetFeatureInfoMultiThreadStaxReaderTest.WMSGetFeatureInfoStaxReaderTask;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,8 +30,7 @@ public class GPWMSFeatureStoreMultiThreadStaxReaderTest extends GPWMSGetFeatureM
         CountDownLatch startSignal = new CountDownLatch(1);
         CountDownLatch doneSignal = new CountDownLatch(files.size());
         AtomicInteger counter = new AtomicInteger(0);
-        files.stream()
-                .map(v -> new Thread(new WMSFeatureStoreStaxReaderTask(v, startSignal, doneSignal, counter)))
+        files.stream().map(v -> new Thread(new WMSFeatureStoreStaxReaderTask(v, startSignal, doneSignal, counter)))
                 .forEach(Thread::start);
         startSignal.countDown();
         doneSignal.await();
@@ -40,7 +40,7 @@ public class GPWMSFeatureStoreMultiThreadStaxReaderTest extends GPWMSGetFeatureM
 
     static class WMSFeatureStoreStaxReaderTask implements Runnable {
 
-        private static final Logger logger = LoggerFactory.getLogger(WMSGetFeatureInfoMultiThreadStaxReaderTest.WMSGetFeatureInfoStaxReaderTask.class);
+        private static final Logger logger = LoggerFactory.getLogger(WMSGetFeatureInfoStaxReaderTask.class);
         //
         private final String fileName;
         private final CountDownLatch startSignal;
@@ -52,9 +52,11 @@ public class GPWMSFeatureStoreMultiThreadStaxReaderTest extends GPWMSGetFeatureM
          * @param theStartSignal
          * @param theDoneSignal
          */
-        WMSFeatureStoreStaxReaderTask(@Nonnull(when = NEVER) String theFileName, @Nonnull(when = NEVER) CountDownLatch theStartSignal,
+        WMSFeatureStoreStaxReaderTask(@Nonnull(when = NEVER) String theFileName,
+                @Nonnull(when = NEVER) CountDownLatch theStartSignal,
                 @Nonnull(when = NEVER) CountDownLatch theDoneSignal, @Nonnull(when = NEVER) AtomicInteger theCounter) {
-            checkArgument((theFileName != null) && !(theFileName.trim().isEmpty()), "The Parameter fileName must not be null or an empty string.");
+            checkArgument((theFileName != null) && !(theFileName.trim().isEmpty()),
+                    "The Parameter fileName must not be null or an empty string.");
             checkArgument(theStartSignal != null, "The Parameter startSignal must not be null.");
             checkArgument(theDoneSignal != null, "The Parameter doneSignal must not be null.");
             checkArgument(theCounter != null, "The Parameter counter must not be null.");

@@ -165,7 +165,8 @@ public class GPWMSGetFeatureInfoWoodstoxReaderTest extends WMSGetFeatureInfoWood
 
     @Test
     public void z_b_wmsGetFeatureInfoWoodstoxReaderTest() throws Exception {
-        logger.info("#######################FEATURE_COLLECTION_CF_zonepianificazione_mappeinterattive : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+        logger.info("#######################FEATURE_COLLECTION_CF_zonepianificazione_mappeinterattive : {}\n", JACKSON_SUPPORT
+                .getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoWoodstoxReader.read(storage.find("CF_zonepianificazione_mappeinterattive.xml"))));
     }
 
@@ -227,5 +228,23 @@ public class GPWMSGetFeatureInfoWoodstoxReaderTest extends WMSGetFeatureInfoWood
     public void z_l_wmsGetFeatureInfoWoodstoxReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_PercorsiNavette : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoWoodstoxReader.read(storage.find("PercorsiNavette.xml"))));
+    }
+
+    @Test
+    public void z_m_wmsGetFeatureInfoWoodstoxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_aggregatiStrutturali : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoWoodstoxReader.read(storage.find("aggregatiStrutturali.xml"))));
+    }
+
+    @Test
+    public void z_n_wmsGetFeatureInfoWoodstoxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_aggregati_zrvesuvioflegrei : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoWoodstoxReader.read(storage.find("aggregati_zrvesuvioflegrei.xml"))));
+    }
+
+    @Test
+    public void z_0_wmsGetFeatureInfoWoodstoxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_exeflegrei_esiti_c_danni : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoWoodstoxReader.read(storage.find("exeflegrei_esiti_c_danni.xml"))));
     }
 }

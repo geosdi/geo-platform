@@ -1,0 +1,1355 @@
+<wfs:FeatureCollection xmlns="http://www.opengis.net/wfs" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:gml="http://www.opengis.net/gml" xmlns:ExeFlegrei2019="http://ExeFlegrei2019"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xsi:schemaLocation="http://ExeFlegrei2019 http://mappe-dpc.protezionecivile.it/gssitdpc/ExeFlegrei2019/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=ExeFlegrei2019%3Aexe2019_AggregatiStrutturali http://www.opengis.net/wfs http://mappe-dpc.protezionecivile.it/gssitdpc/schemas/wfs/1.0.0/WFS-basic.xsd">
+    <gml:boundedBy>
+        <gml:null>unknown</gml:null>
+    </gml:boundedBy>
+    <gml:featureMember>
+        <ExeFlegrei2019:exe2019_AggregatiStrutturali fid="exe2019_AggregatiStrutturali.23308">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#25833">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        433673.1,4527418.219 433661.52,4527401.429 433649.85,4527409.869
+                                        433654.83,4527416.819 433650.84,4527419.979 433657.8,4527427.929
+                                        433673.1,4527418.219
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:IDAG>15063049000001099400</ExeFlegrei2019:IDAG>
+            <ExeFlegrei2019:Label>10994</ExeFlegrei2019:Label>
+            <ExeFlegrei2019:Comune>Napoli</ExeFlegrei2019:Comune>
+        </ExeFlegrei2019:exe2019_AggregatiStrutturali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ExeFlegrei2019:exe2019_AggregatiStrutturali fid="exe2019_AggregatiStrutturali.23309">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#25833">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        433631.009,4527473.309 433628.059,4527461.809 433626.779,4527462.029
+                                        433625.429,4527458.459 433617.339,4527460.739 433617.929,4527462.139
+                                        433612.039,4527463.549 433613.989,4527468.759 433611.599,4527469.239
+                                        433614.869,4527482.959 433628.099,4527480.009 433627.509,4527478.339
+                                        433629.809,4527477.879 433628.509,4527473.679 433631.009,4527473.309
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:IDAG>15063049000001099500</ExeFlegrei2019:IDAG>
+            <ExeFlegrei2019:Label>10995</ExeFlegrei2019:Label>
+            <ExeFlegrei2019:Comune>Napoli</ExeFlegrei2019:Comune>
+        </ExeFlegrei2019:exe2019_AggregatiStrutturali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ExeFlegrei2019:exe2019_AggregatiStrutturali fid="exe2019_AggregatiStrutturali.23310">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#25833">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        433660.026,4527572.629 433651.737,4527542.079 433647.507,4527526.489
+                                        433645.138,4527517.769 433631.018,4527525.889 433632.748,4527531.029
+                                        433630.218,4527531.759 433635.147,4527546.839 433639.207,4527546.299
+                                        433638.537,4527544.059 433642.987,4527544.109 433647.067,4527556.369
+                                        433633.507,4527563.599 433639.566,4527581.449 433660.026,4527572.629
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:IDAG>15063049000001099600</ExeFlegrei2019:IDAG>
+            <ExeFlegrei2019:Label>10996</ExeFlegrei2019:Label>
+            <ExeFlegrei2019:Comune>Napoli</ExeFlegrei2019:Comune>
+        </ExeFlegrei2019:exe2019_AggregatiStrutturali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ExeFlegrei2019:exe2019_AggregatiStrutturali fid="exe2019_AggregatiStrutturali.23311">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#25833">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        433568.548,4527465.064 433572.59,4527464.599 433573,4527465.769
+                                        433576.21,4527465.309 433574.69,4527460.239 433577.225,4527459.801
+                                        433584.58,4527458.529 433583.55,4527452.579 433558.08,4527454.969
+                                        433544.61,4527456.239 433546.11,4527464.419 433558.46,4527461.829
+                                        433559.14,4527463.149 433558.12,4527463.489 433558.65,4527464.949
+                                        433557.19,4527465.479 433558.16,4527469.509 433567.48,4527468.599
+                                        433566.68,4527465.279 433568.548,4527465.064
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:IDAG>15063049000001099700</ExeFlegrei2019:IDAG>
+            <ExeFlegrei2019:Label>10997</ExeFlegrei2019:Label>
+            <ExeFlegrei2019:Comune>Napoli</ExeFlegrei2019:Comune>
+        </ExeFlegrei2019:exe2019_AggregatiStrutturali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ExeFlegrei2019:exe2019_AggregatiStrutturali fid="exe2019_AggregatiStrutturali.23312">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#25833">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        433771.198,4527502.039 433778.027,4527496.129 433775.967,4527493.489
+                                        433777.667,4527492.559 433773.337,4527488.139 433776.507,4527485.479
+                                        433770.427,4527476.249 433771.917,4527474.389 433766.027,4527466.439
+                                        433747.578,4527441.559 433732.189,4527420.819 433716.199,4527433.099
+                                        433724.377,4527444.412 433721.151,4527446.596 433727.845,4527456.188
+                                        433728.741,4527455.425 433730.968,4527453.529 433733.708,4527451.459
+                                        433734.038,4527451.209 433752.317,4527474.269 433757.177,4527480.399
+                                        433752.737,4527483.879 433760.617,4527491.829 433760.047,4527492.849
+                                        433766.757,4527501.209 433767.687,4527500.069 433770.077,4527503.009
+                                        433771.198,4527502.039
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:IDAG>15063049000001099800</ExeFlegrei2019:IDAG>
+            <ExeFlegrei2019:Label>10998</ExeFlegrei2019:Label>
+            <ExeFlegrei2019:Comune>Napoli</ExeFlegrei2019:Comune>
+        </ExeFlegrei2019:exe2019_AggregatiStrutturali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ExeFlegrei2019:exe2019_AggregatiStrutturali fid="exe2019_AggregatiStrutturali.23313">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#25833">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        433862.152,4527638.919 433861.613,4527633.998 433860.853,4527627.029
+                                        433887.053,4527623.688 433887.113,4527623.678 433886.303,4527613.308
+                                        433883.403,4527613.808 433882.413,4527602.388 433884.123,4527602.178
+                                        433883.113,4527597.618 433880.647,4527589.293 433880.48,4527588.727
+                                        433856.854,4527592.515 433856.36,4527588.247 433845.634,4527590.939
+                                        433845.991,4527588.264 433838.354,4527588.956 433840.163,4527593.817
+                                        433845.705,4527593.931 433849.213,4527628.468 433850.003,4527635.519
+                                        433850.444,4527635.464 433853.293,4527635.109 433855.382,4527650.119
+                                        433861.932,4527649.619 433860.193,4527639.128 433862.152,4527638.919
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                            <gml:innerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        433853.75,4527599.209 433866.626,4527597.643 433867.061,4527601.906
+                                        433873.064,4527600.427 433874.804,4527610.954 433855.577,4527613.651
+                                        433853.75,4527599.209
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:innerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:IDAG>15063049000001099900</ExeFlegrei2019:IDAG>
+            <ExeFlegrei2019:Label>10999</ExeFlegrei2019:Label>
+            <ExeFlegrei2019:Comune>Napoli</ExeFlegrei2019:Comune>
+        </ExeFlegrei2019:exe2019_AggregatiStrutturali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ExeFlegrei2019:exe2019_AggregatiStrutturali fid="exe2019_AggregatiStrutturali.23314">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#25833">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        433934.21,4527760.638 433933.09,4527746.638 433928.41,4527746.918
+                                        433928.29,4527746.058 433915.06,4527747.058 433911.98,4527748.738
+                                        433913.1,4527762.988 433920.86,4527762.128 433931.6,4527760.928
+                                        433934.21,4527760.638
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:IDAG>15063049000001100000</ExeFlegrei2019:IDAG>
+            <ExeFlegrei2019:Label>11000</ExeFlegrei2019:Label>
+            <ExeFlegrei2019:Comune>Napoli</ExeFlegrei2019:Comune>
+        </ExeFlegrei2019:exe2019_AggregatiStrutturali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ExeFlegrei2019:exe2019_AggregatiStrutturali fid="exe2019_AggregatiStrutturali.23315">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#25833">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        433935.46,4527776.658 433933.75,4527764.508 433929.29,4527765.308
+                                        433929.18,4527764.218 433915.3,4527765.818 433914.09,4527767.098
+                                        433915.36,4527778.778 433922.61,4527778.018 433932.01,4527777.028
+                                        433935.46,4527776.658
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:IDAG>15063049000001100100</ExeFlegrei2019:IDAG>
+            <ExeFlegrei2019:Label>11001</ExeFlegrei2019:Label>
+            <ExeFlegrei2019:Comune>Napoli</ExeFlegrei2019:Comune>
+        </ExeFlegrei2019:exe2019_AggregatiStrutturali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ExeFlegrei2019:exe2019_AggregatiStrutturali fid="exe2019_AggregatiStrutturali.23316">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#25833">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        433925.351,4527090.534 433922.852,4527085.154 433921.47,4527085.796
+                                        433919.238,4527080.99 433918.566,4527081.302 433916.67,4527077.22
+                                        433913.457,4527078.712 433912.886,4527077.485 433915.995,4527076.041
+                                        433914.627,4527073.096 433910.826,4527074.862 433908.227,4527069.265
+                                        433905.562,4527070.502 433904.493,4527070.998 433903.755,4527069.408
+                                        433896.715,4527072.458 433900.325,4527082.868 433896.655,4527083.258
+                                        433898.025,4527087.668 433885.015,4527090.238 433882.895,4527079.268
+                                        433891.985,4527077.548 433889.995,4527073.108 433895.705,4527070.468
+                                        433895.159,4527068.939 433892.015,4527060.138 433888.395,4527061.148
+                                        433886.575,4527054.538 433862.585,4527062.958 433863.285,4527064.698
+                                        433859.735,4527066.178 433868.745,4527082.708 433871.795,4527088.288
+                                        433872.745,4527087.948 433874.035,4527090.638 433880.585,4527088.188
+                                        433885.574,4527097.338 433900.431,4527094.835 433905.524,4527093.978
+                                        433914.464,4527092.468 433925.351,4527090.534
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:IDAG>15063049000001100200</ExeFlegrei2019:IDAG>
+            <ExeFlegrei2019:Label>11002</ExeFlegrei2019:Label>
+            <ExeFlegrei2019:Comune>Napoli</ExeFlegrei2019:Comune>
+        </ExeFlegrei2019:exe2019_AggregatiStrutturali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ExeFlegrei2019:exe2019_AggregatiStrutturali fid="exe2019_AggregatiStrutturali.23317">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#25833">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        433951.781,4527056.193 433951.387,4527054.738 433947.907,4527056.078
+                                        433947.106,4527049.048 433942.166,4527048.298 433943.606,4527029.298
+                                        433932.446,4527029.628 433932.297,4527025.758 433932.107,4527021.058
+                                        433944.486,4527018.348 433942.707,4527003.458 433920.406,4527007.278
+                                        433920.387,4527007.28 433921.737,4527026.228 433916.627,4527026.638
+                                        433914.267,4527008.208 433891.606,4527011.906 433891.587,4527011.908
+                                        433891.588,4527011.914 433891.59,4527011.926 433893.877,4527029.058
+                                        433895.227,4527039.188 433895.317,4527039.898 433896.586,4527050.598
+                                        433906.206,4527051.078 433905.617,4527037.298 433902.637,4527037.868
+                                        433901.577,4527027.708 433901.527,4527027.248 433907.027,4527026.138
+                                        433908.367,4527034.308 433913.197,4527034.348 433913.336,4527044.218
+                                        433911.386,4527044.298 433911.586,4527046.948 433914.076,4527046.978
+                                        433914.746,4527051.507 433914.765,4527051.508 433920.716,4527051.988
+                                        433919.726,4527041.998 433918.746,4527034.608 433920.066,4527034.728
+                                        433921.246,4527040.978 433925.786,4527040.308 433925.746,4527041.088
+                                        433932.676,4527040.828 433933.036,4527045.428 433929.076,4527045.188
+                                        433929.056,4527047.518 433923.646,4527046.908 433923.956,4527052.516
+                                        433936.026,4527055.738 433942.159,4527065.477 433942.175,4527065.472
+                                        433953.476,4527062.458 433953.043,4527060.859 433951.781,4527056.193
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                            <gml:innerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        433934.068,4527038.084 433933.99,4527036.33 433933.934,4527036.332
+                                        433933.915,4527035.909 433930.041,4527036.081 433929.876,4527032.374
+                                        433938.485,4527031.992 433938.746,4527037.876 433934.068,4527038.084
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:innerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:IDAG>15063049000001100300</ExeFlegrei2019:IDAG>
+            <ExeFlegrei2019:Label>11003</ExeFlegrei2019:Label>
+            <ExeFlegrei2019:Comune>Napoli</ExeFlegrei2019:Comune>
+        </ExeFlegrei2019:exe2019_AggregatiStrutturali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ExeFlegrei2019:exe2019_AggregatiStrutturali fid="exe2019_AggregatiStrutturali.23318">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#25833">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        433877.977,4526982.498 433876.468,4526955.148 433873.608,4526945.388
+                                        433868.628,4526943.628 433869.597,4526971.348 433858.758,4526969.728
+                                        433858.898,4526959.618 433858.988,4526953.098 433862.238,4526953.308
+                                        433862.428,4526948.658 433865.788,4526942.728 433860.938,4526941.668
+                                        433850.448,4526941.388 433840.878,4526941.698 433833.056,4526942.221
+                                        433828.009,4526942.558 433826.295,4526943.117 433822.638,4526944.309
+                                        433821.894,4526944.552 433821.629,4526944.638 433821.639,4526944.686
+                                        433823.818,4526955.378 433824.788,4526960.158 433814.188,4526960.808
+                                        433815.388,4526971.278 433839.658,4526969.098 433838.548,4526956.528
+                                        433840.428,4526956.138 433840.258,4526950.998 433843.128,4526951.198
+                                        433842.228,4526967.098 433849.578,4526967.948 433852.127,4526983.368
+                                        433869.827,4526982.778 433877.977,4526982.498
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:IDAG>15063049000001100400</ExeFlegrei2019:IDAG>
+            <ExeFlegrei2019:Label>11004</ExeFlegrei2019:Label>
+            <ExeFlegrei2019:Comune>Napoli</ExeFlegrei2019:Comune>
+        </ExeFlegrei2019:exe2019_AggregatiStrutturali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ExeFlegrei2019:exe2019_AggregatiStrutturali fid="exe2019_AggregatiStrutturali.23319">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#25833">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        433919.558,4526930.498 433930.238,4526924.178 433938.458,4526918.998
+                                        433959.459,4526911.398 433956.008,4526902.548 433954.358,4526903.028
+                                        433953.988,4526902.698 433941.658,4526905.528 433942.558,4526908.288
+                                        433938.858,4526909.298 433934.488,4526898.468 433940.638,4526896.468
+                                        433941.148,4526897.268 433943.828,4526896.368 433944.188,4526898.948
+                                        433950.258,4526896.868 433948.168,4526889.238 433946.428,4526889.948
+                                        433942.569,4526881.778 433935.139,4526884.855 433929.031,4526887.385
+                                        433926.199,4526888.558 433926.849,4526890.036 433930.618,4526898.604
+                                        433928.858,4526899.318 433930.574,4526903.55 433932.738,4526908.888
+                                        433928.798,4526910.128 433931.398,4526914.818 433915.848,4526924.208
+                                        433915.568,4526923.668 433912.538,4526917.778 433919.058,4526916.248
+                                        433917.808,4526914.488 433920.658,4526913.288 433918.228,4526908.208
+                                        433915.918,4526909.438 433913.518,4526905.368 433909.458,4526907.768
+                                        433908.758,4526905.798 433903.709,4526907.768 433907.358,4526919.108
+                                        433892.848,4526922.008 433893.198,4526928.708 433895.268,4526936.728
+                                        433903.768,4526934.428 433913.218,4526932.328 433918.848,4526930.708
+                                        433919.558,4526930.498
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:IDAG>15063049000001100500</ExeFlegrei2019:IDAG>
+            <ExeFlegrei2019:Label>11005</ExeFlegrei2019:Label>
+            <ExeFlegrei2019:Comune>Napoli</ExeFlegrei2019:Comune>
+        </ExeFlegrei2019:exe2019_AggregatiStrutturali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ExeFlegrei2019:exe2019_AggregatiStrutturali fid="exe2019_AggregatiStrutturali.23320">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#25833">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        433957.322,4526736.138 433955.342,4526721.617 433953.992,4526711.667
+                                        433949.721,4526696.884 433938.991,4526700.033 433941.639,4526709.055
+                                        433946.826,4526707.533 433948.511,4526713.276 433940.292,4526715.688
+                                        433941.212,4526719.768 433937.142,4526720.457 433937.812,4526723.048
+                                        433933.412,4526723.618 433932.812,4526723.698 433931.623,4526712.918
+                                        433939.533,4526711.458 433938.733,4526706.368 433936.233,4526706.808
+                                        433935.113,4526699.918 433928.003,4526700.928 433927.343,4526694.238
+                                        433930.953,4526693.528 433928.943,4526682.917 433924.343,4526683.998
+                                        433923.174,4526671.128 433916.594,4526672.247 433916.184,4526669.128
+                                        433909.224,4526670.398 433910.214,4526676.408 433914.904,4526675.448
+                                        433915.334,4526677.518 433912.134,4526678.678 433913.033,4526683.068
+                                        433916.173,4526682.498 433916.492,4526686.229 433917.113,4526693.498
+                                        433919.893,4526692.968 433919.993,4526698.988 433922.963,4526698.718
+                                        433924.253,4526709.128 433926.282,4526725.448 433931.762,4526724.508
+                                        433932.122,4526728.878 433938.582,4526727.488 433941.542,4526726.858
+                                        433941.072,4526723.098 433944.122,4526722.688 433946.372,4526737.707
+                                        433957.322,4526736.138
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:IDAG>15063049000001100600</ExeFlegrei2019:IDAG>
+            <ExeFlegrei2019:Label>11006</ExeFlegrei2019:Label>
+            <ExeFlegrei2019:Comune>Napoli</ExeFlegrei2019:Comune>
+        </ExeFlegrei2019:exe2019_AggregatiStrutturali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ExeFlegrei2019:exe2019_AggregatiStrutturali fid="exe2019_AggregatiStrutturali.23321">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#25833">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        433953.017,4526995.178 433952.807,4526991.048 433951.086,4526991.208
+                                        433951.076,4526987.868 433952.627,4526987.778 433950.006,4526975.308
+                                        433943.716,4526975.408 433943.946,4526977.928 433938.957,4526978.108
+                                        433939.606,4526983.298 433939.266,4526983.327 433937.946,4526969.376
+                                        433932.582,4526969.883 433933.612,4526980.785 433931.146,4526981.018
+                                        433931.434,4526984.065 433926.646,4526984.518 433928.286,4526997.258
+                                        433940.376,4526996.238 433953.017,4526995.178
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:IDAG>15063049000001100700</ExeFlegrei2019:IDAG>
+            <ExeFlegrei2019:Label>11007</ExeFlegrei2019:Label>
+            <ExeFlegrei2019:Comune>Napoli</ExeFlegrei2019:Comune>
+        </ExeFlegrei2019:exe2019_AggregatiStrutturali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ExeFlegrei2019:exe2019_AggregatiStrutturali fid="exe2019_AggregatiStrutturali.23322">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#25833">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        434021.381,4526700.279 434020.477,4526694.378 434017.24,4526694.874
+                                        434016.464,4526689.802 434019.534,4526689.332 434018.223,4526680.761
+                                        434015.152,4526681.231 434014.753,4526678.627 434007.863,4526679.887
+                                        434010.973,4526704.157 434018.613,4526703.847 434018.143,4526700.775
+                                        434021.381,4526700.279
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:IDAG>15063049000001100800</ExeFlegrei2019:IDAG>
+            <ExeFlegrei2019:Label>11008</ExeFlegrei2019:Label>
+            <ExeFlegrei2019:Comune>Napoli</ExeFlegrei2019:Comune>
+        </ExeFlegrei2019:exe2019_AggregatiStrutturali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ExeFlegrei2019:exe2019_AggregatiStrutturali fid="exe2019_AggregatiStrutturali.23323">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#25833">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        434017.904,4526742.12 434016.998,4526737.218 434013.475,4526737.869
+                                        434013.342,4526737.147 433998.702,4526739.567 434000.212,4526753.707
+                                        434000.656,4526753.669 434013.242,4526752.607 434012.022,4526744.397
+                                        434014.672,4526744.347 434014.381,4526742.771 434017.904,4526742.12
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:IDAG>15063049000001100900</ExeFlegrei2019:IDAG>
+            <ExeFlegrei2019:Label>11009</ExeFlegrei2019:Label>
+            <ExeFlegrei2019:Comune>Napoli</ExeFlegrei2019:Comune>
+        </ExeFlegrei2019:exe2019_AggregatiStrutturali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ExeFlegrei2019:exe2019_AggregatiStrutturali fid="exe2019_AggregatiStrutturali.23324">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#25833">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        434007.498,4526909.587 434005.828,4526902.987 433992.949,4526904.308
+                                        433993.948,4526913.988 434003.328,4526912.747 434007.498,4526909.587
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:IDAG>15063049000001101000</ExeFlegrei2019:IDAG>
+            <ExeFlegrei2019:Label>11010</ExeFlegrei2019:Label>
+            <ExeFlegrei2019:Comune>Napoli</ExeFlegrei2019:Comune>
+        </ExeFlegrei2019:exe2019_AggregatiStrutturali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ExeFlegrei2019:exe2019_AggregatiStrutturali fid="exe2019_AggregatiStrutturali.23325">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#25833">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        434022.286,4527010.487 434020.326,4526997.657 434002.556,4527000.578
+                                        434005.646,4527012.207 434022.286,4527010.487
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:IDAG>15063049000001101100</ExeFlegrei2019:IDAG>
+            <ExeFlegrei2019:Label>11011</ExeFlegrei2019:Label>
+            <ExeFlegrei2019:Comune>Napoli</ExeFlegrei2019:Comune>
+        </ExeFlegrei2019:exe2019_AggregatiStrutturali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ExeFlegrei2019:exe2019_AggregatiStrutturali fid="exe2019_AggregatiStrutturali.23326">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#25833">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        434022.7,4527270.128 434023.109,4527265.431 434028.853,4527265.931
+                                        434029.265,4527261.198 434023.521,4527260.698 434025.661,4527236.098
+                                        434020.071,4527235.948 434018.44,4527260.368 434019.36,4527260.558
+                                        434018.95,4527264.898 434020.12,4527264.798 434019.14,4527269.648
+                                        434022.7,4527270.128
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:IDAG>15063049000001101200</ExeFlegrei2019:IDAG>
+            <ExeFlegrei2019:Label>11012</ExeFlegrei2019:Label>
+            <ExeFlegrei2019:Comune>Napoli</ExeFlegrei2019:Comune>
+        </ExeFlegrei2019:exe2019_AggregatiStrutturali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ExeFlegrei2019:exe2019_AggregatiStrutturali fid="exe2019_AggregatiStrutturali.23327">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#25833">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        434015.5,4527254.268 434015.051,4527240.718 434006.851,4527241.618
+                                        434007.251,4527239.458 434001.511,4527239.138 434001.341,4527252.588
+                                        434007.431,4527251.988 434007.35,4527254.078 434015.5,4527254.268
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:IDAG>15063049000001101300</ExeFlegrei2019:IDAG>
+            <ExeFlegrei2019:Label>11013</ExeFlegrei2019:Label>
+            <ExeFlegrei2019:Comune>Napoli</ExeFlegrei2019:Comune>
+        </ExeFlegrei2019:exe2019_AggregatiStrutturali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ExeFlegrei2019:exe2019_AggregatiStrutturali fid="exe2019_AggregatiStrutturali.23328">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#25833">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        434025.982,4527629.138 434024.022,4527612.728 434008.842,4527615.048
+                                        434011.072,4527630.538 434013.229,4527630.335 434025.982,4527629.138
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:IDAG>15063049000001101400</ExeFlegrei2019:IDAG>
+            <ExeFlegrei2019:Label>11014</ExeFlegrei2019:Label>
+            <ExeFlegrei2019:Comune>Napoli</ExeFlegrei2019:Comune>
+        </ExeFlegrei2019:exe2019_AggregatiStrutturali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ExeFlegrei2019:exe2019_AggregatiStrutturali fid="exe2019_AggregatiStrutturali.23329">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#25833">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        434015.628,4527350.528 434028.138,4527339.528 434030.438,4527341.958
+                                        434034.918,4527338.218 434034.018,4527336.158 434036.528,4527333.818
+                                        434031.049,4527327.448 434010.338,4527344.938 434015.628,4527350.528
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:IDAG>15063049000001101500</ExeFlegrei2019:IDAG>
+            <ExeFlegrei2019:Label>11015</ExeFlegrei2019:Label>
+            <ExeFlegrei2019:Comune>Napoli</ExeFlegrei2019:Comune>
+        </ExeFlegrei2019:exe2019_AggregatiStrutturali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ExeFlegrei2019:exe2019_AggregatiStrutturali fid="exe2019_AggregatiStrutturali.23330">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#25833">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        434039.453,4527412.854 434035.837,4527404.528 434032.447,4527405.958
+                                        434028.867,4527394.848 434022.137,4527386.558 434009.317,4527393.718
+                                        434012.327,4527403.638 434018.425,4527413.083 434018.317,4527413.138
+                                        434021.257,4527416.988 434039.461,4527414.611 434040.176,4527414.518
+                                        434039.453,4527412.854
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:IDAG>15063049000001101600</ExeFlegrei2019:IDAG>
+            <ExeFlegrei2019:Label>11016</ExeFlegrei2019:Label>
+            <ExeFlegrei2019:Comune>Napoli</ExeFlegrei2019:Comune>
+        </ExeFlegrei2019:exe2019_AggregatiStrutturali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ExeFlegrei2019:exe2019_AggregatiStrutturali fid="exe2019_AggregatiStrutturali.23331">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#25833">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        433999.128,4527388.338 434012.278,4527376.738 434013.878,4527378.108
+                                        434019.178,4527373.528 434013.315,4527367.635 434009.408,4527363.708
+                                        433991.068,4527378.268 433999.128,4527388.338
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:IDAG>15063049000001101700</ExeFlegrei2019:IDAG>
+            <ExeFlegrei2019:Label>11017</ExeFlegrei2019:Label>
+            <ExeFlegrei2019:Comune>Napoli</ExeFlegrei2019:Comune>
+        </ExeFlegrei2019:exe2019_AggregatiStrutturali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ExeFlegrei2019:exe2019_AggregatiStrutturali fid="exe2019_AggregatiStrutturali.23332">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#25833">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        434000.711,4525671.887 433997.425,4525670.597 433990.375,4525688.567
+                                        433988.085,4525694.267 433989.565,4525694.837 433989.275,4525695.577
+                                        434000.275,4525699.387 434001.195,4525694.887 434003.595,4525689.686
+                                        434008.444,4525677.893 434009.495,4525675.337 434000.711,4525671.887
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:IDAG>15063049000001101800</ExeFlegrei2019:IDAG>
+            <ExeFlegrei2019:Label>11018</ExeFlegrei2019:Label>
+            <ExeFlegrei2019:Comune>Napoli</ExeFlegrei2019:Comune>
+        </ExeFlegrei2019:exe2019_AggregatiStrutturali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ExeFlegrei2019:exe2019_AggregatiStrutturali fid="exe2019_AggregatiStrutturali.23333">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#25833">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        434032.105,4525685.796 434019.405,4525680.716 434017.671,4525685.06
+                                        434010.214,4525703.736 434020.152,4525707.706 434022.904,4525708.806
+                                        434028.909,4525693.789 434032.105,4525685.796
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:IDAG>15063049000001101900</ExeFlegrei2019:IDAG>
+            <ExeFlegrei2019:Label>11019</ExeFlegrei2019:Label>
+            <ExeFlegrei2019:Comune>Napoli</ExeFlegrei2019:Comune>
+        </ExeFlegrei2019:exe2019_AggregatiStrutturali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ExeFlegrei2019:exe2019_AggregatiStrutturali fid="exe2019_AggregatiStrutturali.23334">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#25833">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        434025.619,4525990.257 434025.559,4525976.727 434010.608,4525977.117
+                                        434010.698,4525982.557 434005.818,4525982.127 434006.688,4525991.107
+                                        434006.228,4525991.194 434006.452,4525996.185 434011.226,4525995.971
+                                        434010.999,4525990.913 434025.619,4525990.257
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:IDAG>15063049000001102000</ExeFlegrei2019:IDAG>
+            <ExeFlegrei2019:Label>11020</ExeFlegrei2019:Label>
+            <ExeFlegrei2019:Comune>Napoli</ExeFlegrei2019:Comune>
+        </ExeFlegrei2019:exe2019_AggregatiStrutturali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ExeFlegrei2019:exe2019_AggregatiStrutturali fid="exe2019_AggregatiStrutturali.23335">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#25833">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        433764.546,4525739.667 433763.707,4525733.277 433762.58,4525733.424
+                                        433760.325,4525733.72 433745.687,4525735.637 433745.067,4525730.887
+                                        433740.587,4525730.277 433739.037,4525736.117 433739.927,4525742.887
+                                        433764.546,4525739.667
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:IDAG>15063049000001102100</ExeFlegrei2019:IDAG>
+            <ExeFlegrei2019:Label>11021</ExeFlegrei2019:Label>
+            <ExeFlegrei2019:Comune>Napoli</ExeFlegrei2019:Comune>
+        </ExeFlegrei2019:exe2019_AggregatiStrutturali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ExeFlegrei2019:exe2019_AggregatiStrutturali fid="exe2019_AggregatiStrutturali.23336">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#25833">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        433584.085,4525891.308 433591.525,4525886.208 433593.935,4525889.738
+                                        433605.515,4525881.778 433599.375,4525872.838 433580.355,4525885.898
+                                        433584.085,4525891.308
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:IDAG>15063049000001102200</ExeFlegrei2019:IDAG>
+            <ExeFlegrei2019:Label>11022</ExeFlegrei2019:Label>
+            <ExeFlegrei2019:Comune>Napoli</ExeFlegrei2019:Comune>
+        </ExeFlegrei2019:exe2019_AggregatiStrutturali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ExeFlegrei2019:exe2019_AggregatiStrutturali fid="exe2019_AggregatiStrutturali.23337">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#25833">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        433574.376,4525874.878 433585.516,4525865.748 433581.666,4525861.058
+                                        433583.366,4525859.658 433579.096,4525854.428 433576.016,4525856.958
+                                        433576.966,4525858.138 433567.626,4525865.808 433567.766,4525867.248
+                                        433568.266,4525868.648 433571.086,4525872.818 433572.206,4525872.238
+                                        433574.376,4525874.878
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:IDAG>15063049000001102300</ExeFlegrei2019:IDAG>
+            <ExeFlegrei2019:Label>11023</ExeFlegrei2019:Label>
+            <ExeFlegrei2019:Comune>Napoli</ExeFlegrei2019:Comune>
+        </ExeFlegrei2019:exe2019_AggregatiStrutturali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ExeFlegrei2019:exe2019_AggregatiStrutturali fid="exe2019_AggregatiStrutturali.23338">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#25833">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        433546.166,4525869.168 433546.536,4525867.688 433549.336,4525868.388
+                                        433550.716,4525862.748 433551.886,4525863.038 433552.836,4525859.218
+                                        433551.886,4525858.988 433553.486,4525852.498 433543.726,4525850.108
+                                        433540.027,4525865.155 433539.446,4525867.518 433546.166,4525869.168
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:IDAG>15063049000001102400</ExeFlegrei2019:IDAG>
+            <ExeFlegrei2019:Label>11024</ExeFlegrei2019:Label>
+            <ExeFlegrei2019:Comune>Napoli</ExeFlegrei2019:Comune>
+        </ExeFlegrei2019:exe2019_AggregatiStrutturali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ExeFlegrei2019:exe2019_AggregatiStrutturali fid="exe2019_AggregatiStrutturali.23339">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#25833">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        433582.747,4525805.958 433583.097,4525805.038 433584.177,4525805.118
+                                        433585.167,4525791.338 433583.827,4525791.238 433583.907,4525790.098
+                                        433572.948,4525789.668 433572.707,4525790.498 433566.948,4525790.078
+                                        433565.967,4525803.558 433570.817,4525803.898 433570.727,4525805.078
+                                        433582.747,4525805.958
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:IDAG>15063049000001102500</ExeFlegrei2019:IDAG>
+            <ExeFlegrei2019:Label>11025</ExeFlegrei2019:Label>
+            <ExeFlegrei2019:Comune>Napoli</ExeFlegrei2019:Comune>
+        </ExeFlegrei2019:exe2019_AggregatiStrutturali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ExeFlegrei2019:exe2019_AggregatiStrutturali fid="exe2019_AggregatiStrutturali.23340">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#25833">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        433553.898,4525780.398 433544.038,4525770.338 433527.748,4525786.288
+                                        433537.608,4525796.348 433541.432,4525792.604 433553.898,4525780.398
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:IDAG>15063049000001102600</ExeFlegrei2019:IDAG>
+            <ExeFlegrei2019:Label>11026</ExeFlegrei2019:Label>
+            <ExeFlegrei2019:Comune>Napoli</ExeFlegrei2019:Comune>
+        </ExeFlegrei2019:exe2019_AggregatiStrutturali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ExeFlegrei2019:exe2019_AggregatiStrutturali fid="exe2019_AggregatiStrutturali.23341">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#25833">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        433559.482,4525608.238 433559.862,4525605.438 433562.562,4525605.808
+                                        433564.362,4525592.528 433561.817,4525592.402 433553.622,4525591.998
+                                        433553.142,4525603.328 433553.952,4525603.758 433553.452,4525607.428
+                                        433559.482,4525608.238
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:IDAG>15063049000001102700</ExeFlegrei2019:IDAG>
+            <ExeFlegrei2019:Label>11027</ExeFlegrei2019:Label>
+            <ExeFlegrei2019:Comune>Napoli</ExeFlegrei2019:Comune>
+        </ExeFlegrei2019:exe2019_AggregatiStrutturali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ExeFlegrei2019:exe2019_AggregatiStrutturali fid="exe2019_AggregatiStrutturali.23342">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#25833">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        433606.982,4525586.448 433608.722,4525569.348 433594.872,4525567.948
+                                        433594.612,4525570.408 433584.642,4525569.388 433584.482,4525571.008
+                                        433583.162,4525571.068 433582.342,4525571.098 433582.272,4525571.758
+                                        433580.783,4525571.626 433564.553,4525570.168 433563.983,4525573.668
+                                        433562.983,4525573.668 433562.762,4525579.758 433563.652,4525581.008
+                                        433564.732,4525581.468 433581.232,4525582.978 433581.212,4525582.168
+                                        433582.672,4525582.308 433582.512,4525583.958 433606.982,4525586.448
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:IDAG>15063049000001102800</ExeFlegrei2019:IDAG>
+            <ExeFlegrei2019:Label>11028</ExeFlegrei2019:Label>
+            <ExeFlegrei2019:Comune>Napoli</ExeFlegrei2019:Comune>
+        </ExeFlegrei2019:exe2019_AggregatiStrutturali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ExeFlegrei2019:exe2019_AggregatiStrutturali fid="exe2019_AggregatiStrutturali.23343">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#25833">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        433960.472,4525832.317 433939.672,4525832.227 433939.552,4525860.327
+                                        433960.351,4525860.407 433960.472,4525832.317
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:IDAG>15063049000001102900</ExeFlegrei2019:IDAG>
+            <ExeFlegrei2019:Label>11029</ExeFlegrei2019:Label>
+            <ExeFlegrei2019:Comune>Napoli</ExeFlegrei2019:Comune>
+        </ExeFlegrei2019:exe2019_AggregatiStrutturali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ExeFlegrei2019:exe2019_AggregatiStrutturali fid="exe2019_AggregatiStrutturali.23344">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#25833">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        433979.225,4525677.947 433984.045,4525674.587 433986.206,4525668.957
+                                        433973.956,4525664.277 433967.056,4525661.817 433964.816,4525668.497
+                                        433971.505,4525670.707 433970.136,4525674.297 433972.196,4525675.087
+                                        433971.506,4525676.887 433968.836,4525675.877 433965.015,4525685.887
+                                        433974.235,4525689.413 433976.965,4525690.457 433979.245,4525684.487
+                                        433978.455,4525679.927 433979.225,4525677.947
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:IDAG>15063049000001103000</ExeFlegrei2019:IDAG>
+            <ExeFlegrei2019:Label>11030</ExeFlegrei2019:Label>
+            <ExeFlegrei2019:Comune>Napoli</ExeFlegrei2019:Comune>
+        </ExeFlegrei2019:exe2019_AggregatiStrutturali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ExeFlegrei2019:exe2019_AggregatiStrutturali fid="exe2019_AggregatiStrutturali.23345">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#25833">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        434002.218,4525967.597 434000.469,4525957.487 433998.439,4525957.557
+                                        433997.859,4525954.817 433995.339,4525955.487 433993.579,4525952.847
+                                        433992.699,4525951.647 433989.679,4525951.447 433989.469,4525948.957
+                                        433985.899,4525948.887 433985.759,4525946.457 433976.399,4525949.267
+                                        433977.672,4525955.839 433978.569,4525960.467 433984.059,4525959.377
+                                        433983.999,4525957.117 433986.569,4525957.067 433986.519,4525958.157
+                                        433986.949,4525959.027 433988.069,4525960.237 433988.999,4525960.277
+                                        433990.629,4525960.347 433991.649,4525960.237 433992.219,4525965.237
+                                        433990.249,4525965.777 433990.789,4525969.607 433991.339,4525969.557
+                                        434002.218,4525967.597
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:IDAG>15063049000001103100</ExeFlegrei2019:IDAG>
+            <ExeFlegrei2019:Label>11031</ExeFlegrei2019:Label>
+            <ExeFlegrei2019:Comune>Napoli</ExeFlegrei2019:Comune>
+        </ExeFlegrei2019:exe2019_AggregatiStrutturali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ExeFlegrei2019:exe2019_AggregatiStrutturali fid="exe2019_AggregatiStrutturali.23346">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#25833">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        433794.951,4525976.877 433795.121,4525968.067 433799.191,4525967.957
+                                        433798.901,4525969.807 433809.711,4525969.527 433809.751,4525961.317
+                                        433808.741,4525961.347 433808.701,4525954.587 433779.721,4525954.168
+                                        433778.711,4525969.208 433786.331,4525969.058 433785.911,4525977.428
+                                        433794.951,4525976.877
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:IDAG>15063049000001103200</ExeFlegrei2019:IDAG>
+            <ExeFlegrei2019:Label>11032</ExeFlegrei2019:Label>
+            <ExeFlegrei2019:Comune>Napoli</ExeFlegrei2019:Comune>
+        </ExeFlegrei2019:exe2019_AggregatiStrutturali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ExeFlegrei2019:exe2019_AggregatiStrutturali fid="exe2019_AggregatiStrutturali.23347">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#25833">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        433650.283,4525966.988 433652.143,4525954.158 433655.678,4525954.465
+                                        433655.897,4525951.944 433647.577,4525951.222 433647.358,4525953.742
+                                        433640.053,4525953.108 433638.063,4525965.468 433641.863,4525965.941
+                                        433650.283,4525966.988
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:IDAG>15063049000001103300</ExeFlegrei2019:IDAG>
+            <ExeFlegrei2019:Label>11033</ExeFlegrei2019:Label>
+            <ExeFlegrei2019:Comune>Napoli</ExeFlegrei2019:Comune>
+        </ExeFlegrei2019:exe2019_AggregatiStrutturali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ExeFlegrei2019:exe2019_AggregatiStrutturali fid="exe2019_AggregatiStrutturali.23348">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#25833">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        433658.952,4525975.208 433645.463,4525974.488 433642.922,4525998.318
+                                        433657.052,4525998.918 433658.952,4525975.208
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:IDAG>15063049000001103400</ExeFlegrei2019:IDAG>
+            <ExeFlegrei2019:Label>11034</ExeFlegrei2019:Label>
+            <ExeFlegrei2019:Comune>Napoli</ExeFlegrei2019:Comune>
+        </ExeFlegrei2019:exe2019_AggregatiStrutturali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ExeFlegrei2019:exe2019_AggregatiStrutturali fid="exe2019_AggregatiStrutturali.23351">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#25833">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        433711.067,4525971.67 433712.902,4525958.698 433708.962,4525958.148
+                                        433708.922,4525959.238 433704.902,4525958.448 433704.782,4525959.598
+                                        433701.172,4525958.448 433701.142,4525959.218 433696.332,4525958.948
+                                        433696.399,4525958.545 433690.414,4525957.543 433689.608,4525962.357
+                                        433695.594,4525963.359 433694.528,4525969.721 433694.472,4525970.058
+                                        433711.032,4525971.918 433711.067,4525971.67
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:IDAG>15063049000001103700</ExeFlegrei2019:IDAG>
+            <ExeFlegrei2019:Label>11037</ExeFlegrei2019:Label>
+            <ExeFlegrei2019:Comune>Napoli</ExeFlegrei2019:Comune>
+        </ExeFlegrei2019:exe2019_AggregatiStrutturali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ExeFlegrei2019:exe2019_AggregatiStrutturali fid="exe2019_AggregatiStrutturali.23352">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#25833">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        433741.972,4525964.568 433722.352,4525961.418 433719.251,4525983.688
+                                        433739.601,4525986.088 433741.972,4525964.568
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:IDAG>15063049000001103800</ExeFlegrei2019:IDAG>
+            <ExeFlegrei2019:Label>11038</ExeFlegrei2019:Label>
+            <ExeFlegrei2019:Comune>Napoli</ExeFlegrei2019:Comune>
+        </ExeFlegrei2019:exe2019_AggregatiStrutturali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ExeFlegrei2019:exe2019_AggregatiStrutturali fid="exe2019_AggregatiStrutturali.23353">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#25833">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        433819.34,4525986.907 433816.171,4525969.597 433812.301,4525969.727
+                                        433812.561,4525973.957 433811.081,4525974.047 433812.32,4525979.927
+                                        433804.951,4525980.847 433795.441,4525982.027 433795.401,4525981.457
+                                        433795.261,4525979.597 433786.991,4525980.858 433787.891,4525991.588
+                                        433795.97,4525990.387 433805.9,4525988.907 433819.34,4525986.907
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:IDAG>15063049000001103900</ExeFlegrei2019:IDAG>
+            <ExeFlegrei2019:Label>11039</ExeFlegrei2019:Label>
+            <ExeFlegrei2019:Comune>Napoli</ExeFlegrei2019:Comune>
+        </ExeFlegrei2019:exe2019_AggregatiStrutturali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ExeFlegrei2019:exe2019_AggregatiStrutturali fid="exe2019_AggregatiStrutturali.23354">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#25833">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        433507.189,4527081.309 433507.449,4527074.119 433505.609,4527074.189
+                                        433507.048,4527058.739 433499.556,4527058.933 433498.059,4527081.459
+                                        433507.189,4527081.309
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:IDAG>15063049000001104000</ExeFlegrei2019:IDAG>
+            <ExeFlegrei2019:Label>11040</ExeFlegrei2019:Label>
+            <ExeFlegrei2019:Comune>Napoli</ExeFlegrei2019:Comune>
+        </ExeFlegrei2019:exe2019_AggregatiStrutturali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ExeFlegrei2019:exe2019_AggregatiStrutturali fid="exe2019_AggregatiStrutturali.23355">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#25833">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        433520.699,4527080.209 433520.409,4527073.829 433510.299,4527073.909
+                                        433510.319,4527067.129 433507.629,4527067.139 433508.749,4527074.779
+                                        433508.069,4527081.799 433520.699,4527080.209
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:IDAG>15063049000001104100</ExeFlegrei2019:IDAG>
+            <ExeFlegrei2019:Label>11041</ExeFlegrei2019:Label>
+            <ExeFlegrei2019:Comune>Napoli</ExeFlegrei2019:Comune>
+        </ExeFlegrei2019:exe2019_AggregatiStrutturali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ExeFlegrei2019:exe2019_AggregatiStrutturali fid="exe2019_AggregatiStrutturali.23356">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#25833">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        433539.898,4527093.419 433539.729,4527090.999 433530.369,4527091.419
+                                        433529.719,4527084.299 433529.146,4527084.318 433526.561,4527084.403
+                                        433519.369,4527084.639 433519.979,4527089.962 433521.788,4527105.739
+                                        433540.418,4527105.109 433539.438,4527101.289 433542.718,4527100.909
+                                        433541.728,4527094.469 433539.898,4527093.419
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:IDAG>15063049000001104200</ExeFlegrei2019:IDAG>
+            <ExeFlegrei2019:Label>11042</ExeFlegrei2019:Label>
+            <ExeFlegrei2019:Comune>Napoli</ExeFlegrei2019:Comune>
+        </ExeFlegrei2019:exe2019_AggregatiStrutturali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ExeFlegrei2019:exe2019_AggregatiStrutturali fid="exe2019_AggregatiStrutturali.23357">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#25833">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        433532.648,4527122.679 433539.488,4527118.259 433539.378,4527108.569
+                                        433532.788,4527109.759 433532.198,4527110.989 433530.228,4527110.839
+                                        433529.928,4527107.349 433522.788,4527107.369 433523.608,4527111.459
+                                        433518.338,4527111.059 433515.849,4527090.029 433514.469,4527090.549
+                                        433514.089,4527088.969 433506.079,4527089.349 433507.169,4527101.939
+                                        433510.969,4527101.099 433514.168,4527121.349 433530.758,4527118.719
+                                        433530.908,4527120.499 433532.548,4527120.279 433532.648,4527122.679
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:IDAG>15063049000001104300</ExeFlegrei2019:IDAG>
+            <ExeFlegrei2019:Label>11043</ExeFlegrei2019:Label>
+            <ExeFlegrei2019:Comune>Napoli</ExeFlegrei2019:Comune>
+        </ExeFlegrei2019:exe2019_AggregatiStrutturali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ExeFlegrei2019:exe2019_AggregatiStrutturali fid="exe2019_AggregatiStrutturali.23358">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#25833">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        433284.286,4526745.886 433284.754,4526742.848 433289.049,4526743.51
+                                        433291.489,4526733.73 433281.82,4526732.64 433279.969,4526742.11
+                                        433279.26,4526742.001 433278.791,4526745.039 433284.286,4526745.886
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:IDAG>15063049000001104400</ExeFlegrei2019:IDAG>
+            <ExeFlegrei2019:Label>11044</ExeFlegrei2019:Label>
+            <ExeFlegrei2019:Comune>Napoli</ExeFlegrei2019:Comune>
+        </ExeFlegrei2019:exe2019_AggregatiStrutturali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ExeFlegrei2019:exe2019_AggregatiStrutturali fid="exe2019_AggregatiStrutturali.23359">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#25833">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        433295.439,4526731.06 433297.07,4526716.21 433304.55,4526718.12
+                                        433305.05,4526715.26 433299.51,4526714.77 433299.33,4526714.359
+                                        433297.04,4526709.14 433287.77,4526713.03 433290.58,4526718.82
+                                        433288.11,4526718.78 433285.97,4526730.13 433295.439,4526731.06
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:IDAG>15063049000001104500</ExeFlegrei2019:IDAG>
+            <ExeFlegrei2019:Label>11045</ExeFlegrei2019:Label>
+            <ExeFlegrei2019:Comune>Napoli</ExeFlegrei2019:Comune>
+        </ExeFlegrei2019:exe2019_AggregatiStrutturali>
+    </gml:featureMember>
+</wfs:FeatureCollection>

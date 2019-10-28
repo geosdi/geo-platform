@@ -26,19 +26,21 @@ public interface IGPWMSSAXSourceBuilder {
 
     class GPWMSSAXSourceBuilder implements IGPWMSSAXSourceBuilder {
 
+        private static final String LOAD_EXTERNAL_DTD_FEATURE = "http://apache.org/xml/features/nonvalidating/load-external-dtd";
+        private static final String VALIDATION_FEATURE = "http://xml.org/sax/features/validation";
         private static final SAXParserFactory spf = SAXParserFactory.newInstance();
 
         static {
             try {
-                spf.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", FALSE);
-                spf.setFeature("http://xml.org/sax/features/validation", FALSE);
+                spf.setFeature(LOAD_EXTERNAL_DTD_FEATURE, FALSE);
+                spf.setFeature(VALIDATION_FEATURE, FALSE);
             } catch (Exception ex) {
                 ex.printStackTrace();
                 throw new IllegalStateException(ex);
             }
         }
 
-        protected GPWMSSAXSourceBuilder() {
+        GPWMSSAXSourceBuilder() {
         }
 
         /**

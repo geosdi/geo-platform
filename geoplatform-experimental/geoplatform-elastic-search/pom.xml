@@ -36,6 +36,7 @@
         <module>geoplatform-elastic-search-api</module>
         <module>geoplatform-elastic-search-connector</module>
         <module>gp-elasticsearch-query-builder</module>
+        <module>geoplatform-elastic-search-rs-connector</module>
     </modules>
 
 </project>

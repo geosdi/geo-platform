@@ -27,3 +27,5 @@ gwt-unitCache/
 /geoplatform-dependencies/geoplatform-dropwizard-dependency/geoplatform-dropwizard-dependency.iml
 /geoplatform-dependencies/geoplatform-httpclient-dependency/geoplatform-httpclient-dependency.iml
 /geoplatform-services/sld-validator/target/
+/geoplatform-experimental/geoplatform-elastic-search-rs-connector/geoplatform-elastic-search-rs-connector.iml
+/geoplatform-experimental/geoplatform-elastic-search-rs-connector/target

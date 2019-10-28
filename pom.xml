@@ -1566,7 +1566,7 @@
         <gwtOpenlayersVersion>1.1.0</gwtOpenlayersVersion>
         
         <cas-version>3.2.1</cas-version>
-        <bcel.version>6.3.1</bcel.version>
+        <bcel.version>6.4.1</bcel.version>
         
         <jasypt-version>1.9.3</jasypt-version>
         

@@ -21,5 +21,7 @@
 
     <logger name="org.geosdi.geoplatform.experimental.el.rest.spring.jasypt.pbe.config.GPElasticSearchRestPBEConfig"
             level="debug"/>
+    <logger name="org.geosdi.geoplatform.experimental.el.rest.client.GPElasticSearchRestHighLeveClientConfig"
+            level="trace"/>
 
 </configuration>

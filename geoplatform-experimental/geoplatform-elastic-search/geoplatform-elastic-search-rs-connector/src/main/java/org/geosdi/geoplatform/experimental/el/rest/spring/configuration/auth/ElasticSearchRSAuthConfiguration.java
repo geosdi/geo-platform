@@ -2,6 +2,7 @@ package org.geosdi.geoplatform.experimental.el.rest.spring.configuration.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.ToString;
 import net.jcip.annotations.Immutable;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.CredentialsProvider;
@@ -16,6 +17,7 @@ import static org.apache.http.auth.AuthScope.ANY;
 @Immutable
 @Getter
 @AllArgsConstructor
+@ToString
 class ElasticSearchRSAuthConfiguration implements GPElasticSearchRSAuthConfiguration {
 
     private static final long serialVersionUID = 7474263806645962645L;

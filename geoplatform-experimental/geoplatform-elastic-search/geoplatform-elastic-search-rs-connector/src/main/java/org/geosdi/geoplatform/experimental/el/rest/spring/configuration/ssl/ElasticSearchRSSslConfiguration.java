@@ -2,6 +2,7 @@ package org.geosdi.geoplatform.experimental.el.rest.spring.configuration.ssl;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.ToString;
 import net.jcip.annotations.Immutable;
 
 /**
@@ -11,6 +12,7 @@ import net.jcip.annotations.Immutable;
 @Immutable
 @AllArgsConstructor
 @Getter
+@ToString
 class ElasticSearchRSSslConfiguration implements GPElasticSearchRSSslConfiguration {
 
     private static final long serialVersionUID = 2890968262483730771L;

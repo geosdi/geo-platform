@@ -1,5 +1,7 @@
 package org.geosdi.geoplatform.experimental.el.rest.spring.configuration.base;
 
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 import net.jcip.annotations.Immutable;
 import org.apache.http.HttpHost;
@@ -17,19 +19,27 @@ import static java.util.stream.Stream.of;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Immutable
-@ToString(of = {"httpHosts", "connectionTimeout", "socketTimeout", "maxTotalConnections", "defaultMaxPerRoute",
-        "maxRedirects", "authConfig", "sslConfig"})
+@ToString(of = {"httpHosts", "connectionTimeout", "socketTimeout", "maxTotalConnections", "defaultMaxPerRoute", "maxRedirects", "authConfig", "sslConfig"})
+@RequiredArgsConstructor
 class ElasticSearchRSBaseConfiguration implements GPElasticSearchRSBaseConfiguration {
 
     private static final long serialVersionUID = 1493541089790319103L;
     //
+    @NonNull
     private String httpHost;
+    @NonNull
     private Integer connectionTimeout;
+    @NonNull
     private Integer socketTimeout;
+    @NonNull
     private Integer maxTotalConnections;
+    @NonNull
     private Integer defaultMaxPerRoute;
+    @NonNull
     private Integer maxRedirects;
+    @NonNull
     private GPElasticSearchRSAuthConfiguration authConfig;
+    @NonNull
     private GPElasticSearchRSSslConfiguration sslConfig;
     private HttpHost[] httpHosts;
 
@@ -38,8 +48,8 @@ class ElasticSearchRSBaseConfiguration implements GPElasticSearchRSBaseConfigura
      */
     @Override
     public HttpHost[] getHttpHosts() {
-        return this.httpHosts = ((this.httpHosts != null) ? this.httpHosts : of(this.httpHost.split(";"))
-                        .filter(value -> (value != null) && !(value.trim().isEmpty()))
+        return this.httpHosts = ((this.httpHosts != null) ? this.httpHosts :
+                of(this.httpHost.split(";")).filter(value -> (value != null) && !(value.trim().isEmpty()))
                         .map(HttpHost::create).toArray(HttpHost[]::new));
     }
 
@@ -117,9 +127,13 @@ class ElasticSearchRSBaseConfiguration implements GPElasticSearchRSBaseConfigura
      */
     @Override
     public void afterPropertiesSet() throws Exception {
-        checkArgument((this.httpHost != null) && !(this.httpHost.trim().isEmpty()), "The Parameter httpHost must not be null or an empty string.");
-        if (this.sslConfig.isSetSecureSocketLayer())
-            checkArgument(((this.sslConfig.getKeyStorePassword() != null) && !(this.sslConfig.getKeyStorePassword().trim().isEmpty())),
-                    "The KeyStorePassword Parameter must not be null or an empty value.");
+        checkArgument((this.httpHost != null) && !(this.httpHost.trim()
+                .isEmpty()), "The Parameter httpHost must not be null or an empty string.");
+        checkArgument(this.authConfig != null, "The Parameter authConfig must not be null.");
+        checkArgument(this.sslConfig != null, "The Parameter sslConfig must not be null.");
+        if (this.sslConfig.isSetSecureSocketLayer()) {
+            checkArgument(((this.sslConfig.getKeyStorePassword() != null) && !(this.sslConfig.getKeyStorePassword()
+                    .trim().isEmpty())), "The KeyStorePassword Parameter must not be null or an empty value.");
+        }
     }
 }

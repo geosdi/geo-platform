@@ -35,10 +35,13 @@
  */
 package org.geosdi.geoplatform.threadpool.support.factory;
 
+import javax.annotation.Nullable;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import static java.lang.Boolean.FALSE;
 import static java.lang.Thread.MAX_PRIORITY;
+import static java.lang.Thread.NORM_PRIORITY;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -51,17 +54,21 @@ public class GPDefaultThreadFactory implements GPThreadFactorySupport {
     private final Boolean isDaemon;
     private final Integer priority;
 
+    public GPDefaultThreadFactory() {
+        this(null, null, null);
+    }
+
     /**
      * @param theThreadNamePrefix
      * @param theIsDaemon
      * @param thePriority
      */
-    public GPDefaultThreadFactory(String theThreadNamePrefix, Boolean theIsDaemon, Integer thePriority) {
-        this.threadNamePrefix = ((theThreadNamePrefix != null) && !(theThreadNamePrefix.isEmpty())) ?
-                theThreadNamePrefix : "GPElasticSearchTaskExecutor - ";
-        this.isDaemon = (theIsDaemon != null) ? theIsDaemon : Boolean.FALSE;
+    public GPDefaultThreadFactory(@Nullable String theThreadNamePrefix, @Nullable Boolean theIsDaemon, @Nullable Integer thePriority) {
+        this.threadNamePrefix = ((theThreadNamePrefix != null) && !(theThreadNamePrefix.trim().isEmpty()))
+                ? theThreadNamePrefix : "GPTaskExecutor#";
+        this.isDaemon = (theIsDaemon != null) ? theIsDaemon : FALSE;
         this.priority = ((thePriority != null) && ((thePriority <= MAX_PRIORITY)
-                && (thePriority >= Thread.MIN_PRIORITY))) ? thePriority : Thread.NORM_PRIORITY;
+                && (thePriority >= Thread.MIN_PRIORITY))) ? thePriority : NORM_PRIORITY;
     }
 
     /**

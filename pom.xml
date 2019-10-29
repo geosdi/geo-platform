@@ -892,7 +892,7 @@
             <dependency>
                 <groupId>com.h2database</groupId>
                 <artifactId>h2</artifactId>
-                <version>1.4.199</version>
+                <version>1.4.200</version>
             </dependency>
             
             <dependency>
@@ -1547,7 +1547,7 @@
 
         <aspectj-version>1.8.9</aspectj-version>
         <ubl-version>2.0</ubl-version>
-        <jetty-version>9.4.19.v20190610</jetty-version>
+        <jetty-version>9.4.21.v20190926</jetty-version>
 
         <postgresql-version>9.4-1200-jdbc41</postgresql-version>
         <postgis-jdbc-version>1.5.2</postgis-jdbc-version>

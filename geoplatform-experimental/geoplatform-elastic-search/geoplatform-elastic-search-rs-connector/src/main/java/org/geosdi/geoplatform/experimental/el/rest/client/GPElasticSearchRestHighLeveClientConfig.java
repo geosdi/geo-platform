@@ -33,7 +33,6 @@ import static java.lang.Thread.NORM_PRIORITY;
 import static java.nio.file.Files.copy;
 import static java.nio.file.Files.createTempFile;
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
-import static javax.net.ssl.TrustManagerFactory.getDefaultAlgorithm;
 import static org.apache.http.impl.nio.reactor.IOReactorConfig.custom;
 import static org.apache.http.nio.conn.NoopIOSessionStrategy.INSTANCE;
 import static org.apache.http.nio.conn.ssl.SSLIOSessionStrategy.getDefaultStrategy;
@@ -87,9 +86,7 @@ class GPElasticSearchRestHighLeveClientConfig {
                     .setConnectTimeout(this.elasticSearchRSBaseConfiguration.getConnectionTimeout())
                     .setSoTimeout(this.elasticSearchRSBaseConfiguration.getSocketTimeout())
                     .build(), new GPDecoratorThreadFactory(new GPDefaultThreadFactory("GPElasticSearchRestTask#", FALSE, NORM_PRIORITY))), RegistryBuilder.<SchemeIOSessionStrategy>create()
-                    .register("http", INSTANCE)
-                    .register("https", getDefaultStrategy())
-                    .build());
+                    .register("http", INSTANCE).register("https", getDefaultStrategy()).build());
             cm.setMaxTotal(elasticSearchRSBaseConfiguration.getMaxTotalConnections());
             cm.setDefaultMaxPerRoute(elasticSearchRSBaseConfiguration.getDefaultMaxPerRoute());
             return cm;
@@ -104,10 +101,14 @@ class GPElasticSearchRestHighLeveClientConfig {
      * @param httpAsyncClientBuilder
      */
     void secure(HttpAsyncClientBuilder httpAsyncClientBuilder) {
+        if (this.elasticSearchRSBaseConfiguration.getAuthConfig().isSetAuth()) {
+            logger.debug("#####################Trying to setting Credential Provider with Auth : {}\n", this.elasticSearchRSBaseConfiguration.getAuthConfig().toString());
+            httpAsyncClientBuilder.setDefaultCredentialsProvider(elasticSearchRSBaseConfiguration.getAuthConfig().toCredentialProvider());
+        }
         try {
             if (this.elasticSearchRSBaseConfiguration.getSslConfig().isSetSecureSocketLayer()) {
                 SSLContext sslContext = SSLContext.getInstance("SSL");
-                TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance(getDefaultAlgorithm());
+                TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
                 KeyStore keyStore = KeyStore.getInstance(KeyStore.getDefaultType());
                 try (InputStream inputStream = Files.newInputStream(loadTrustStore())) {
                     keyStore.load(inputStream, this.elasticSearchRSBaseConfiguration.getSslConfig()

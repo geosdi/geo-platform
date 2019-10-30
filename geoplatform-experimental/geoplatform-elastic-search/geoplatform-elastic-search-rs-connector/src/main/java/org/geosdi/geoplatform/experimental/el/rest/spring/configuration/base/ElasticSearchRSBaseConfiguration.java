@@ -49,7 +49,9 @@ class ElasticSearchRSBaseConfiguration implements GPElasticSearchRSBaseConfigura
     @Override
     public HttpHost[] getHttpHosts() {
         return this.httpHosts = ((this.httpHosts != null) ? this.httpHosts :
-                of(this.httpHost.split(";")).filter(value -> (value != null) && !(value.trim().isEmpty()))
+                of(this.httpHost.split(";"))
+                        .filter(value -> (value != null) && !(value.trim().isEmpty()))
+                        .map(value -> (value.endsWith("/") ? value.substring(0, value.lastIndexOf("/")) : value))
                         .map(HttpHost::create).toArray(HttpHost[]::new));
     }
 

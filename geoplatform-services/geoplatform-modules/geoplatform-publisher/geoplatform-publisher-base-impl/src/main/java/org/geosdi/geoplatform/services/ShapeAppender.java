@@ -53,6 +53,7 @@ import org.geotools.filter.text.cql2.CQLException;
 import org.geotools.filter.text.ecql.ECQLCompiler;
 import org.geotools.jdbc.*;
 import org.geotools.referencing.CRS;
+import org.geotools.util.URLs;
 import org.geotools.util.factory.Hints;
 import org.opengis.feature.simple.SimpleFeature;
 import org.opengis.feature.simple.SimpleFeatureType;
@@ -88,8 +89,7 @@ import java.util.zip.ZipFile;
 @Configuration
 public class ShapeAppender {
 
-    private Logger logger = LoggerFactory.getLogger(
-            ShapeAppender.class);
+    private static final Logger logger = LoggerFactory.getLogger(ShapeAppender.class);
 
     private List<PrimaryKeyColumn> pks;
     private Boolean isPkGenerated;
@@ -480,8 +480,9 @@ public class ShapeAppender {
      * uses the original source attribute definition, if not overridden by
      * configuration.
      *
-     * @param attr
+     * @param attributeName
      * @param crs crs to use for geometric attributes
+     * @param schema
      * @return
      */
     private AttributeDescriptor buildSchemaAttribute(String attributeName,
@@ -622,8 +623,7 @@ public class ShapeAppender {
         updateTask("Connecting to source DataStore");
 //        String fileType = getFileType(fileEvent); == shp
         FeatureConfiguration sourceFeature = configuration.getSourceFeature();
-        sourceFeature.getDataStore()
-                .put("url", DataUtilities.fileToURL(shpFile));
+        sourceFeature.getDataStore().put("url", URLs.fileToUrl(shpFile));
         DataStore source = createDataStore(sourceFeature);
         // if no typeName is configured, takes the first one registered in store
         if (sourceFeature.getTypeName() == null) {

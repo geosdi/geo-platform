@@ -32,42 +32,55 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.experimental.el.rest.spring.jasypt.pbe.config;
+package org.geosdi.geoplatform.experimental.el.rest.api.info;
 
-import org.geosdi.geoplatform.experimental.el.rest.spring.jasypt.pbe.properties.GPElasticSearchRestPBEProperties;
-import org.jasypt.encryption.pbe.config.PBEConfig;
-import org.jasypt.encryption.pbe.config.SimpleStringPBEConfig;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import lombok.Getter;
+import lombok.ToString;
+import net.jcip.annotations.Immutable;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Configuration
-class GPElasticSearchRestPBEConfig {
+@Getter
+@ToString
+@Immutable
+class ElasticSearchRestVersion implements GPElasticSearchRestVersion {
 
-
-    private static final Logger logger = LoggerFactory.getLogger(GPElasticSearchRestPBEConfig.class);
+    private static final long serialVersionUID = -9171041654298700896L;
+    //
+    private final String number;
+    private final String buildFlavor;
+    private final String buildType;
+    private final String buildHash;
+    private final String buildDate;
+    private final boolean snapshot;
+    private final String luceneVersion;
+    private final String minimumWireCompatibilityVersion;
+    private final String minimumIndexCompatibilityVersion;
 
     /**
-     * @param elasticSearchRestPBEProperties
-     * @return {@link PBEConfig}
+     * @param theNumber
+     * @param theBuildFlavor
+     * @param theBuildType
+     * @param theBuildHash
+     * @param theBuildDate
+     * @param theSnapshot
+     * @param theLuceneVersion
+     * @param theMinimumWireCompatibilityVersion
+     * @param theMinimumIndexCompatibilityVersion
      */
-    @Bean
-    public PBEConfig elasticSearchRestPBEConfig(GPElasticSearchRestPBEProperties elasticSearchRestPBEProperties) {
-        logger.debug("####################################GP_ELASTICSEARCH_REST_PBE_PASSWORD : {}\n\n", elasticSearchRestPBEProperties
-                .getPassword());
-        return new SimpleStringPBEConfig() {
-
-            {
-                super.setPassword(elasticSearchRestPBEProperties.getPassword());
-                super.setPoolSize(2);
-                super.setAlgorithm("PBEWithMD5AndDES");
-            }
-
-        };
+    ElasticSearchRestVersion(String theNumber, String theBuildFlavor, String theBuildType, String theBuildHash,
+            String theBuildDate, boolean theSnapshot, String theLuceneVersion,
+            String theMinimumWireCompatibilityVersion, String theMinimumIndexCompatibilityVersion) {
+        this.number = theNumber;
+        this.buildFlavor = theBuildFlavor;
+        this.buildType = theBuildType;
+        this.buildHash = theBuildHash;
+        this.buildDate = theBuildDate;
+        this.snapshot = theSnapshot;
+        this.luceneVersion = theLuceneVersion;
+        this.minimumWireCompatibilityVersion = theMinimumWireCompatibilityVersion;
+        this.minimumIndexCompatibilityVersion = theMinimumIndexCompatibilityVersion;
     }
 }

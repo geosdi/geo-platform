@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -20,6 +21,13 @@
             <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>geoplatform-cxf-dependency</artifactId>
+                <type>pom</type>
+                <scope>import</scope>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.geosdi</groupId>
+                <artifactId>geoplatform-hibernate-validator-dependency</artifactId>
                 <type>pom</type>
                 <scope>import</scope>
                 <version>${project.version}</version>
@@ -49,6 +57,21 @@
         <dependency>
             <groupId>com.sun.xml.fastinfoset</groupId>
             <artifactId>FastInfoset</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>jakarta.el</artifactId>
         </dependency>
 
         <dependency>
@@ -177,7 +200,7 @@
             <groupId>javax.ws.rs</groupId>
             <artifactId>javax.ws.rs-api</artifactId>
         </dependency>
-        
+
         <!-- =============================================================== -->
         <!-- ==================== GEOPLATFORM WFS ====================== -->
         <!-- =============================================================== -->
@@ -310,8 +333,8 @@
                         <phase>clean</phase>
                         <configuration>
                             <target>
-                                <delete file="velocity.log" />
-                                <delete dir="target" />
+                                <delete file="velocity.log"/>
+                                <delete dir="target"/>
                             </target>
                         </configuration>
                         <goals>

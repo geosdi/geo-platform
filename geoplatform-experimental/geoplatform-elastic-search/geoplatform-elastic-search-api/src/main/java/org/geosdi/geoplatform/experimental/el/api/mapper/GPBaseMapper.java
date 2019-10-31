@@ -51,6 +51,10 @@ public abstract class GPBaseMapper<D extends Document> extends GPBaseJacksonMapp
 
     private final String jsonRootName;
 
+    /**
+     * @param theDocumentClass
+     * @param theReader
+     */
     public GPBaseMapper(Class<D> theDocumentClass, JacksonSupport theReader) {
         super(theDocumentClass, theReader);
         this.jsonRootName = findJsonRootName();
@@ -74,11 +78,13 @@ public abstract class GPBaseMapper<D extends Document> extends GPBaseJacksonMapp
      */
     private String findJsonRootName() {
         XmlRootElement xmlRootElement = AnnotationUtils.findAnnotation(this.entityClass, XmlRootElement.class);
-        if (xmlRootElement != null)
+        if (xmlRootElement != null) {
             return xmlRootElement.name();
+        }
         JsonRootName jsonRootName = AnnotationUtils.findAnnotation(this.entityClass, JsonRootName.class);
-        if (jsonRootName != null)
+        if (jsonRootName != null) {
             return jsonRootName.value();
+        }
         return "";
     }
 }

@@ -32,76 +32,28 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.experimental.el.rest.api.info;
+package org.geosdi.geoplatform.experimental.el.rest.api.mapper;
 
-import org.elasticsearch.client.core.MainResponse;
+import org.geosdi.geoplatform.experimental.el.api.mapper.GPBaseMapper;
+import org.geosdi.geoplatform.experimental.el.api.model.Document;
+import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
-import java.io.Serializable;
+import javax.annotation.Nullable;
 
-import static com.google.common.base.Preconditions.checkArgument;
 import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPElasticSearchRestVersion extends Serializable {
+public abstract class GPElasticSearchRestMapper<D extends Document> extends GPBaseMapper<D> {
 
     /**
-     * @return {@link String}
+     * @param theDocumentClass
+     * @param theReader
      */
-    String getNumber();
-
-    /**
-     * @return {@link String}
-     */
-    String getBuildFlavor();
-
-    /**
-     * @return {@link String}
-     */
-    String getBuildType();
-
-    /**
-     * @return {@link String}
-     */
-    String getBuildHash();
-
-    /**
-     * @return {@link String}
-     */
-    String getBuildDate();
-
-    /**
-     * @return {@link Boolean}
-     */
-    boolean isSnapshot();
-
-    /**
-     * @return {@link String}
-     */
-    String getLuceneVersion();
-
-    /**
-     * @return {@link String}
-     */
-    String getMinimumWireCompatibilityVersion();
-
-    /**
-     * @return {@link String}
-     */
-    String getMinimumIndexCompatibilityVersion();
-
-    /**
-     * @param version
-     * @return {@link GPElasticSearchRestVersion}
-     */
-    static GPElasticSearchRestVersion of(@Nonnull(when = NEVER) MainResponse.Version version) {
-        checkArgument(version != null, "The Parameter version must not be null.");
-        return new ElasticSearchRestVersion(version.getNumber(), version.getBuildFlavor(), version
-                .getBuildType(), version.getBuildHash(), version.getBuildDate(), version.isSnapshot(), version
-                .getLuceneVersion(), version.getMinimumWireCompatibilityVersion(), version
-                .getMinimumIndexCompatibilityVersion());
+    public GPElasticSearchRestMapper(@Nonnull(when = NEVER) Class<D> theDocumentClass, @Nullable JacksonSupport theReader) {
+        super(theDocumentClass, theReader);
     }
 }

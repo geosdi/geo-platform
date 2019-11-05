@@ -32,17 +32,40 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.experimental.el.rest.spring.configuration.ssl;
+package org.geosdi.geoplatform.experimental.el.rest.api.index.settings;
 
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import org.geosdi.geoplatform.experimental.el.api.model.Document;
+import org.geosdi.geoplatform.experimental.el.api.model.GPElasticSearchIndex;
+import org.geosdi.geoplatform.experimental.el.index.GPBaseIndexCreator;
+
+import javax.annotation.Nonnull;
+import javax.annotation.meta.When;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.Boolean.TRUE;
+import static org.springframework.core.annotation.AnnotationUtils.findAnnotation;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Configuration
-@ComponentScan(value = {"org.geosdi.geoplatform.experimental.el.rest.spring.jasypt",
-        "org.geosdi.geoplatform.experimental.el.rest.spring.configuration.ssl"})
-class GPElasticSearchRestSslConfigTest {
+public interface GPElasticSearchRestIndexSettings extends GPBaseIndexCreator.GPBaseIndexSettings {
+
+    /**
+     * @return {@link Boolean}
+     */
+    boolean isCreateMapping();
+
+    /**
+     * @param theDocumentClass
+     * @return {@link GPElasticSearchRestIndexSettings}
+     * @throws Exception
+     */
+    static <D extends Document> GPElasticSearchRestIndexSettings of(@Nonnull(when = When.NEVER) Class<D> theDocumentClass) throws Exception {
+        checkArgument(theDocumentClass != null, "The Parameter documentClass must not be null.");
+        GPElasticSearchIndex value = findAnnotation(theDocumentClass, GPElasticSearchIndex.class);
+        return ((value != null) ? new ElasticSearchRestIndexSettings((value.name().trim().isEmpty() ?
+                theDocumentClass.getSimpleName().toLowerCase().concat("_index") : value.name()), value.createMapping())
+                : new ElasticSearchRestIndexSettings(theDocumentClass.getSimpleName().concat("_index"), TRUE));
+    }
 }

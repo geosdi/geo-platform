@@ -34,10 +34,11 @@
  */
 package org.geosdi.geoplatform.experimental.el.api.mapper;
 
-import com.google.common.base.Preconditions;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
+import org.geosdi.geoplatform.support.jackson.function.GPJacksonCheck;
 import org.geosdi.geoplatform.support.jackson.mapper.GPJacksonMapper;
 
+import javax.annotation.Nonnull;
 import java.io.File;
 import java.io.InputStream;
 import java.io.Reader;
@@ -46,6 +47,7 @@ import java.nio.file.Path;
 import java.util.Collection;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @param <D>
@@ -59,35 +61,35 @@ public interface GPElasticSearchMapper<D extends Document> extends GPJacksonMapp
      * @return D
      * @throws Exception
      */
-    D read(URL url) throws Exception;
+    D read(@Nonnull(when = NEVER) URL url) throws Exception;
 
     /**
      * @param file
      * @return D
      * @throws Exception
      */
-    D read(File file) throws Exception;
+    D read(@Nonnull(when = NEVER) File file) throws Exception;
 
     /**
      * @param in
      * @return D
      * @throws Exception
      */
-    D read(InputStream in) throws Exception;
+    D read(@Nonnull(when = NEVER) InputStream in) throws Exception;
 
     /**
      * @param r
      * @return D
      * @throws Exception
      */
-    D read(Reader r) throws Exception;
+    D read(@Nonnull(when = NEVER) Reader r) throws Exception;
 
     /**
      * @param s
      * @return D
      * @throws Exception
      */
-    D read(String s) throws Exception;
+    D read(@Nonnull(when = NEVER) String s) throws Exception;
 
     /**
      * @param entityAsString
@@ -96,7 +98,7 @@ public interface GPElasticSearchMapper<D extends Document> extends GPJacksonMapp
      * @return {@link V}
      * @throws Exception
      */
-    <V extends Object> V read(String entityAsString, Class<V> classe) throws Exception;
+    <V extends Object> V read(@Nonnull(when = NEVER) String entityAsString, @Nonnull(when = NEVER) Class<V> classe) throws Exception;
 
     /**
      * @param reader
@@ -105,14 +107,21 @@ public interface GPElasticSearchMapper<D extends Document> extends GPJacksonMapp
      * @return
      * @throws Exception
      */
-    <V extends Object> V read(Reader reader, Class<V> classe) throws Exception;
+    <V extends Object> V read(@Nonnull(when = NEVER) Reader reader, @Nonnull(when = NEVER) Class<V> classe) throws Exception;
 
     /**
      * @param document
      * @return
      * @throws Exception
      */
-    String writeAsString(D document) throws Exception;
+    String writeAsString(@Nonnull(when = NEVER) D document) throws Exception;
+
+    /**
+     * @param theCheck
+     * @return {@link String}
+     * @throws Exception
+     */
+    String writeAsString(@Nonnull(when = NEVER) GPJacksonCheck<D> theCheck) throws Exception;
 
     /**
      * @return {@link String} Name of Document Class
@@ -124,7 +133,7 @@ public interface GPElasticSearchMapper<D extends Document> extends GPJacksonMapp
      * @param document
      * @throws Exception
      */
-    void write(File file, D document) throws Exception;
+    void write(@Nonnull(when = NEVER)File file, @Nonnull(when = NEVER) D document) throws Exception;
 
     /**
      * @param direrctory
@@ -137,14 +146,14 @@ public interface GPElasticSearchMapper<D extends Document> extends GPJacksonMapp
      * @param thePath
      * @return {@link D}
      */
-    default D read(Path thePath) {
+    default D read(@Nonnull(when = NEVER) Path thePath) {
         checkArgument((thePath != null) && (thePath.toFile().exists()), "The Parameter Path must not be null and the Associated File must exist.");
         try {
             return this.read(thePath.toFile());
         } catch (Exception ex) {
             ex.printStackTrace();
+            throw new IllegalStateException(ex);
         }
-        return null;
     }
 
     /**

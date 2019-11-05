@@ -544,7 +544,7 @@
             <dependency>
                 <groupId>org.quartz-scheduler</groupId>
                 <artifactId>quartz</artifactId>
-                <version>2.3.1</version>
+                <version>2.3.2</version>
             </dependency>
             
             <dependency>
@@ -1244,7 +1244,7 @@
                     <encoding>UTF-8</encoding>
                     <skipTests>false</skipTests>
                     <reportFormat>plain</reportFormat>
-                    <argLine>-Xms512m -Xmx1024m -XX:MaxPermSize=512m</argLine>
+                    <argLine>-Xms512m -Xmx1024m</argLine>
                 </configuration>
                 <dependencies>
                     <dependency>
@@ -1479,7 +1479,7 @@
         <geonetwork-version>1.1</geonetwork-version>
         
         <geoserver-manager-version>1.7</geoserver-manager-version>
-        <geojson-jackson-version>1.8.1</geojson-jackson-version>
+        <geojson-jackson-version>1.12</geojson-jackson-version>
     </properties>
     
 </project>

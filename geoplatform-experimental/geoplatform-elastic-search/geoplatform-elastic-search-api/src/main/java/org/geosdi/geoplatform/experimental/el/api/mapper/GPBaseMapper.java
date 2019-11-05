@@ -38,9 +38,13 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import org.geosdi.geoplatform.support.jackson.mapper.GPBaseJacksonMapper;
-import org.springframework.core.annotation.AnnotationUtils;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import static javax.annotation.meta.When.NEVER;
+import static org.springframework.core.annotation.AnnotationUtils.findAnnotation;
 
 /**
  * @param <D>
@@ -55,7 +59,7 @@ public abstract class GPBaseMapper<D extends Document> extends GPBaseJacksonMapp
      * @param theDocumentClass
      * @param theReader
      */
-    public GPBaseMapper(Class<D> theDocumentClass, JacksonSupport theReader) {
+    protected GPBaseMapper(@Nonnull(when = NEVER) Class<D> theDocumentClass, @Nullable JacksonSupport theReader) {
         super(theDocumentClass, theReader);
         this.jsonRootName = findJsonRootName();
     }
@@ -76,14 +80,14 @@ public abstract class GPBaseMapper<D extends Document> extends GPBaseJacksonMapp
     /**
      * @return {@link String}
      */
-    private String findJsonRootName() {
-        XmlRootElement xmlRootElement = AnnotationUtils.findAnnotation(this.entityClass, XmlRootElement.class);
-        if (xmlRootElement != null) {
-            return xmlRootElement.name();
+    protected String findJsonRootName() {
+        XmlRootElement xmlRootElement = findAnnotation(this.entityClass, XmlRootElement.class);
+        if ((xmlRootElement != null) && !(xmlRootElement.name().trim().isEmpty())) {
+            return xmlRootElement.name().concat(".");
         }
-        JsonRootName jsonRootName = AnnotationUtils.findAnnotation(this.entityClass, JsonRootName.class);
-        if (jsonRootName != null) {
-            return jsonRootName.value();
+        JsonRootName jsonRootName = findAnnotation(this.entityClass, JsonRootName.class);
+        if ((jsonRootName != null) && !(jsonRootName.value().trim().isEmpty())) {
+            return jsonRootName.value().concat(".");
         }
         return "";
     }

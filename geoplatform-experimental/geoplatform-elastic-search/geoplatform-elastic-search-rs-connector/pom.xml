@@ -24,6 +24,15 @@
 
     <dependencies>
         <!-- =========================================================== -->
+        <!-- ============= GEOPLATFORM ELASTIC SEARCH API ============== -->
+        <!-- =========================================================== -->
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-elastic-search-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- =========================================================== -->
         <!-- =========================== SPRING ======================== -->
         <!-- =========================================================== -->
         <dependency>
@@ -65,28 +74,8 @@
         </dependency>
 
         <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-executor-support</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <!-- =========================================================== -->
-        <!-- ========================== GUAVA ========================== -->
-        <!-- =========================================================== -->
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>javax.annotation</groupId>
             <artifactId>javax.annotation-api</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>net.jcip</groupId>
-            <artifactId>jcip-annotations</artifactId>
-            <version>1.0</version>
         </dependency>
 
         <!-- =========================================================== -->

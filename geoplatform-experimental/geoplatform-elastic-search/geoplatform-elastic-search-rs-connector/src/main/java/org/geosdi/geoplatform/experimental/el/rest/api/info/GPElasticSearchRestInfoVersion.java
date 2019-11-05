@@ -32,15 +32,12 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.support.jackson.reader;
+package org.geosdi.geoplatform.experimental.el.rest.api.info;
+
+import org.elasticsearch.client.core.MainResponse;
 
 import javax.annotation.Nonnull;
-import java.io.File;
-import java.io.InputStream;
-import java.io.Reader;
-import java.net.URL;
-import java.nio.file.Path;
-import java.util.Collection;
+import java.io.Serializable;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static javax.annotation.meta.When.NEVER;
@@ -49,87 +46,62 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPJacksonReaderSupport<T extends Object> {
+public interface GPElasticSearchRestInfoVersion extends Serializable {
 
     /**
-     * @param url
-     * @return {@link T}
-     * @throws Exception
+     * @return {@link String}
      */
-    T read(@Nonnull(when = NEVER) URL url) throws Exception;
+    String getNumber();
 
     /**
-     * @param file
-     * @return {@link T}
-     * @throws Exception
+     * @return {@link String}
      */
-    T read(@Nonnull(when = NEVER) File file) throws Exception;
+    String getBuildFlavor();
 
     /**
-     * @param inputStream
-     * @return {@link T}
-     * @throws Exception
+     * @return {@link String}
      */
-    T read(@Nonnull(when = NEVER) InputStream inputStream) throws Exception;
+    String getBuildType();
 
     /**
-     * @param reader
-     * @return {@link T+}
-     * @throws Exception
+     * @return {@link String}
      */
-    T read(@Nonnull(when = NEVER) Reader reader) throws Exception;
+    String getBuildHash();
 
     /**
-     * @param entityAsString
-     * @return {@link T}
-     * @throws Exception
+     * @return {@link String}
      */
-    T read(@Nonnull(when = NEVER) String entityAsString) throws Exception;
+    String getBuildDate();
 
     /**
-     * @param entityAsString
-     * @param classe
-     * @param <V>
-     * @return {@link V}
-     * @throws Exception
+     * @return {@link Boolean}
      */
-    <V extends Object> V read(@Nonnull(when = NEVER) String entityAsString,
-            @Nonnull(when = NEVER) Class<V> classe) throws Exception;
+    boolean isSnapshot();
 
     /**
-     * @param reader
-     * @param classe
-     * @param <V>
-     * @return {@link V}
-     * @throws Exception
+     * @return {@link String}
      */
-    <V extends Object> V read(@Nonnull(when = NEVER) Reader reader,
-            @Nonnull(when = NEVER) Class<V> classe) throws Exception;
+    String getLuceneVersion();
 
     /**
-     * @param direrctory
-     * @return {@link Collection<T>}
-     * @throws Exception
+     * @return {@link String}
      */
-    Collection<T> readFromDirectory(@Nonnull(when = NEVER) Path direrctory) throws Exception;
+    String getMinimumWireCompatibilityVersion();
 
     /**
-     * @return {@link Class<T>}
+     * @return {@link String}
      */
-    Class<T> getEntityClass();
+    String getMinimumIndexCompatibilityVersion();
 
     /**
-     * @param thePath
-     * @return {@link T}
+     * @param version
+     * @return {@link GPElasticSearchRestInfoVersion}
      */
-    default T read(@Nonnull(when = NEVER) Path thePath) {
-        checkArgument((thePath != null) && (thePath.toFile()
-                .exists()), "The Parameter Path must not be null and the Associated File must exist.");
-        try {
-            return this.read(thePath.toFile());
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return null;
+    static GPElasticSearchRestInfoVersion of(@Nonnull(when = NEVER) MainResponse.Version version) {
+        checkArgument(version != null, "The Parameter version must not be null.");
+        return new ElasticSearchRestInfoVersion(version.getNumber(), version.getBuildFlavor(), version
+                .getBuildType(), version.getBuildHash(), version.getBuildDate(), version.isSnapshot(), version
+                .getLuceneVersion(), version.getMinimumWireCompatibilityVersion(), version
+                .getMinimumIndexCompatibilityVersion());
     }
 }

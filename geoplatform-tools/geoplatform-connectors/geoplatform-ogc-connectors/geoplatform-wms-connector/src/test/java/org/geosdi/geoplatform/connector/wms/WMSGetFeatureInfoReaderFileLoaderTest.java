@@ -24,8 +24,8 @@ public class WMSGetFeatureInfoReaderFileLoaderTest {
 
     @BeforeClass
     public static void beforeClass() throws Exception {
-        String basePath = of(new File(".").getCanonicalPath(), "src", "test", "resources", "stax").collect(
-                joining(separator, "", separator));
+        String basePath = of(new File(".").getCanonicalPath(), "src", "test", "resources", "stax")
+                .collect(joining(separator, "", separator));
         storage = IGPConnectorFileStorage.of(of("geoserver-Vigneti-GetFeatureInfo.xml", "geoserver-GetFeatureInfo.xml",
                 "geoserver-GetFeatureInfo1.xml", "geoserver-GetFeatureInfo-Point.xml",
                 "geoserver-GetFeatureInfo-MultiLineString.xml", "spearfish-GetFeatureInfo.xml",
@@ -38,8 +38,8 @@ public class WMSGetFeatureInfoReaderFileLoaderTest {
                 "PianoCampiFlegrei.xml", "PianiCampiFlegrei.xml", "rsdi_alt_300_a_400.xml", "aziende.xml",
                 "EneaClipFilled.xml", "test.xml", "ParchiBasilicata.xml", "centri_abitati.xml", "mobileBeni.xml",
                 "PercorsiNavette.xml", "aggregatiStrutturali.xml", "aggregati_zrvesuvioflegrei.xml",
-                "exeflegrei_esiti_c_danni.xml").map(
-                value -> new GPConnectorFile(value, new File(basePath.concat(value))))
+                "exeflegrei_esiti_c_danni.xml")
+                .map(value -> new GPConnectorFile(value, new File(basePath.concat(value))))
                 .collect(toMap(IGPConnectorFile::getKey, identity(), (v1, v2) -> v1, LinkedHashMap::new)));
     }
 }

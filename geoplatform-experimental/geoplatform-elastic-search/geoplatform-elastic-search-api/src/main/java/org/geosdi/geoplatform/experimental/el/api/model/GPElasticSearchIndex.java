@@ -32,17 +32,30 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.experimental.el.rest.spring.configuration.ssl;
+package org.geosdi.geoplatform.experimental.el.api.model;
 
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Configuration
-@ComponentScan(value = {"org.geosdi.geoplatform.experimental.el.rest.spring.jasypt",
-        "org.geosdi.geoplatform.experimental.el.rest.spring.configuration.ssl"})
-class GPElasticSearchRestSslConfigTest {
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface GPElasticSearchIndex {
+
+    /**
+     * @return {@link String}
+     */
+    String name();
+
+    /**
+     * <p>Value to create Mapping for {@link Document} with {@link GPElasticSearchIndex} Annotation.</p>
+     *
+     * @return {@link Boolean}
+     */
+    boolean createMapping() default true;
 }

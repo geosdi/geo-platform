@@ -57,7 +57,7 @@ public interface GPElasticSearchRestInfo extends Serializable {
      * @param <Version>
      * @return {@link Version}
      */
-    <Version extends GPElasticSearchRestVersion> Version getVersion();
+    <Version extends GPElasticSearchRestInfoVersion> Version getVersion();
 
     /**
      * @return {@link String}
@@ -80,7 +80,7 @@ public interface GPElasticSearchRestInfo extends Serializable {
      */
     static GPElasticSearchRestInfo of(@Nonnull(when = When.NEVER) MainResponse mainResponse) {
         checkArgument(mainResponse != null, "The Parameter mainResponse must not be null.");
-        return new ElasticSearchRestInfo(mainResponse.getNodeName(), GPElasticSearchRestVersion
+        return new ElasticSearchRestInfo(mainResponse.getNodeName(), GPElasticSearchRestInfoVersion
                 .of(mainResponse.getVersion()), mainResponse.getClusterName(), mainResponse
                 .getClusterUuid(), mainResponse.getTagline());
     }

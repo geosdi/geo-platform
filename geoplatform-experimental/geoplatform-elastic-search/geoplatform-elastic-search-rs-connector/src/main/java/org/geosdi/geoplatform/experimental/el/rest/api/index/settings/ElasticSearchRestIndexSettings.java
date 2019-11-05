@@ -32,17 +32,32 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.experimental.el.rest.spring.configuration.ssl;
+package org.geosdi.geoplatform.experimental.el.rest.api.index.settings;
 
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
+import net.jcip.annotations.Immutable;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Configuration
-@ComponentScan(value = {"org.geosdi.geoplatform.experimental.el.rest.spring.jasypt",
-        "org.geosdi.geoplatform.experimental.el.rest.spring.configuration.ssl"})
-class GPElasticSearchRestSslConfigTest {
+@Immutable
+@Getter
+@ToString
+@EqualsAndHashCode(of = {"indexName"})
+class ElasticSearchRestIndexSettings implements GPElasticSearchRestIndexSettings {
+
+    private final String indexName;
+    private final boolean createMapping;
+
+    /**
+     * @param theIndexName
+     * @param theCreateMapping
+     */
+    ElasticSearchRestIndexSettings(String theIndexName, boolean theCreateMapping) {
+        this.indexName = theIndexName;
+        this.createMapping = theCreateMapping;
+    }
 }

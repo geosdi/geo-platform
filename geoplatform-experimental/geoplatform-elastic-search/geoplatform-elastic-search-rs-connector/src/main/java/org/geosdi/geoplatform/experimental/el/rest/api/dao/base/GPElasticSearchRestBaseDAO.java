@@ -32,55 +32,61 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.experimental.el.rest.api.info;
+package org.geosdi.geoplatform.experimental.el.rest.api.dao.base;
 
-import lombok.Getter;
-import lombok.ToString;
-import net.jcip.annotations.Immutable;
+import org.elasticsearch.client.RestClient;
+import org.elasticsearch.client.RestHighLevelClient;
+import org.geosdi.geoplatform.experimental.el.api.model.Document;
+import org.geosdi.geoplatform.experimental.el.rest.api.index.settings.GPElasticSearchRestIndexSettings;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Getter
-@ToString
-@Immutable
-class ElasticSearchRestVersion implements GPElasticSearchRestVersion {
-
-    private static final long serialVersionUID = -9171041654298700896L;
-    //
-    private final String number;
-    private final String buildFlavor;
-    private final String buildType;
-    private final String buildHash;
-    private final String buildDate;
-    private final boolean snapshot;
-    private final String luceneVersion;
-    private final String minimumWireCompatibilityVersion;
-    private final String minimumIndexCompatibilityVersion;
+public interface GPElasticSearchRestBaseDAO<D extends Document> {
 
     /**
-     * @param theNumber
-     * @param theBuildFlavor
-     * @param theBuildType
-     * @param theBuildHash
-     * @param theBuildDate
-     * @param theSnapshot
-     * @param theLuceneVersion
-     * @param theMinimumWireCompatibilityVersion
-     * @param theMinimumIndexCompatibilityVersion
+     * @return {@link Boolean}
+     * @throws Exception
      */
-    ElasticSearchRestVersion(String theNumber, String theBuildFlavor, String theBuildType, String theBuildHash,
-            String theBuildDate, boolean theSnapshot, String theLuceneVersion,
-            String theMinimumWireCompatibilityVersion, String theMinimumIndexCompatibilityVersion) {
-        this.number = theNumber;
-        this.buildFlavor = theBuildFlavor;
-        this.buildType = theBuildType;
-        this.buildHash = theBuildHash;
-        this.buildDate = theBuildDate;
-        this.snapshot = theSnapshot;
-        this.luceneVersion = theLuceneVersion;
-        this.minimumWireCompatibilityVersion = theMinimumWireCompatibilityVersion;
-        this.minimumIndexCompatibilityVersion = theMinimumIndexCompatibilityVersion;
+    Boolean isUpElasticSearchCluster() throws Exception;
+
+    /**
+     * @param <Settings>
+     * @return {@link Settings}
+     * @throws Exception
+     */
+    <Settings extends GPElasticSearchRestIndexSettings> Settings getSettings() throws Exception;
+
+    /**
+     * @return {@link String}
+     */
+    default String getIndexName() throws Exception {
+        return getSettings().getIndexName();
     }
+
+    /**
+     * @return {@link Boolean}
+     * @throws Exception
+     */
+    default Boolean isCreateMapping() throws Exception {
+        return getSettings().isCreateMapping();
+    }
+
+    /**
+     * @return {@link RestHighLevelClient}
+     */
+    RestHighLevelClient highLevelClient();
+
+    /**
+     * @return {@link RestClient}
+     */
+    default RestClient lowLevelClient() {
+        return highLevelClient().getLowLevelClient();
+    }
+
+    /**
+     * @throws Exception
+     */
+    void destroy() throws Exception;
 }

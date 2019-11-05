@@ -32,17 +32,17 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.experimental.el.rest.spring.configuration.ssl;
-
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+package org.geosdi.geoplatform.support.jackson.function;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Configuration
-@ComponentScan(value = {"org.geosdi.geoplatform.experimental.el.rest.spring.jasypt",
-        "org.geosdi.geoplatform.experimental.el.rest.spring.configuration.ssl"})
-class GPElasticSearchRestSslConfigTest {
+@FunctionalInterface
+public interface GPJacksonCheck<R> {
+
+    /**
+     * @return {@link R}
+     */
+    R apply();
 }

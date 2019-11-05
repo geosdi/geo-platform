@@ -14,8 +14,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GPWMSConnectorBuilderPool<Builder extends GPWMSConnectorBuilderPool, Store extends GPWMSConnector>
-        extends AbstractConnectorBuilder<Builder, Store> {
+public abstract class GPWMSConnectorBuilderPool<Builder extends GPWMSConnectorBuilderPool, Store extends GPWMSConnector> extends AbstractConnectorBuilder<Builder, Store> {
 
     protected GPWMSConnectorBuilderPool() {
     }
@@ -33,7 +32,7 @@ public abstract class GPWMSConnectorBuilderPool<Builder extends GPWMSConnectorBu
 
     /**
      * @param key
-     * @return
+     * @return {@link Store}
      * @throws Exception
      */
     protected abstract Store internalBuild(@Nonnull(when = NEVER) GPPoolConnectorKey key) throws Exception;

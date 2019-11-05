@@ -85,8 +85,7 @@ class GPElasticSearchRestHighLeveClientConfig {
     /**
      * @param theElasticSearchRSBaseConfiguration
      */
-    GPElasticSearchRestHighLeveClientConfig(
-            @Qualifier(value = "elasticSearchRSBaseConfiguration") GPElasticSearchRSBaseConfiguration theElasticSearchRSBaseConfiguration) {
+    GPElasticSearchRestHighLeveClientConfig(@Qualifier(value = "elasticSearchRSBaseConfiguration") GPElasticSearchRSBaseConfiguration theElasticSearchRSBaseConfiguration) {
         checkArgument(theElasticSearchRSBaseConfiguration != null, "The Parameter elasticSearchRestBaseConfiguration must not be null.");
         this.elasticSearchRSBaseConfiguration = theElasticSearchRSBaseConfiguration;
     }
@@ -95,7 +94,7 @@ class GPElasticSearchRestHighLeveClientConfig {
      * @return {@link RestHighLevelClient}
      * @throws Exception
      */
-    @Bean(destroyMethod = "close")
+    @Bean
     public RestHighLevelClient elasticSearchRestHighLevelClient() throws Exception {
         logger.trace("#####################Trying to build RestHighLevelClient with : {}\n", elasticSearchRSBaseConfiguration);
         RestClientBuilder restClientBuilder = RestClient.builder(elasticSearchRSBaseConfiguration.getHttpHosts());
@@ -121,7 +120,9 @@ class GPElasticSearchRestHighLeveClientConfig {
                     .setConnectTimeout(this.elasticSearchRSBaseConfiguration.getConnectionTimeout())
                     .setSoTimeout(this.elasticSearchRSBaseConfiguration.getSocketTimeout())
                     .build(), new GPDecoratorThreadFactory(new GPDefaultThreadFactory("GPElasticSearchRestTask#", FALSE, NORM_PRIORITY))), RegistryBuilder.<SchemeIOSessionStrategy>create()
-                    .register("http", INSTANCE).register("https", getDefaultStrategy()).build());
+                    .register("http", INSTANCE)
+                    .register("https", getDefaultStrategy())
+                    .build());
             cm.setMaxTotal(elasticSearchRSBaseConfiguration.getMaxTotalConnections());
             cm.setDefaultMaxPerRoute(elasticSearchRSBaseConfiguration.getDefaultMaxPerRoute());
             return cm;

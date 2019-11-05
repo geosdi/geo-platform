@@ -63,6 +63,7 @@ public interface GPIndexCreator extends GPBaseIndexCreator, Ordered {
     /**
      * @return {@link String}
      */
+    @Deprecated
     default String getIndexType() {
         return getIndexSettings().getIndexType();
     }

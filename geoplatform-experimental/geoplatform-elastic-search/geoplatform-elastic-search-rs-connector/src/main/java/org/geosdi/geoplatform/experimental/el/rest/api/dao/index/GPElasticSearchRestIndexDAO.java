@@ -32,15 +32,17 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.support.jackson.reader;
+package org.geosdi.geoplatform.experimental.el.rest.api.dao.index;
+
+import org.elasticsearch.action.ActionListener;
+import org.elasticsearch.action.support.master.AcknowledgedResponse;
+import org.elasticsearch.client.indices.GetMappingsRequest;
+import org.elasticsearch.client.indices.PutMappingRequest;
+import org.elasticsearch.common.xcontent.XContentBuilder;
+import org.geosdi.geoplatform.experimental.el.api.model.Document;
+import org.geosdi.geoplatform.experimental.el.rest.api.dao.base.GPElasticSearchRestBaseDAO;
 
 import javax.annotation.Nonnull;
-import java.io.File;
-import java.io.InputStream;
-import java.io.Reader;
-import java.net.URL;
-import java.nio.file.Path;
-import java.util.Collection;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static javax.annotation.meta.When.NEVER;
@@ -49,87 +51,58 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPJacksonReaderSupport<T extends Object> {
+public interface GPElasticSearchRestIndexDAO<D extends Document> extends GPElasticSearchRestBaseDAO<D> {
 
     /**
-     * @param url
-     * @return {@link T}
+     * @return {@link Boolean}
      * @throws Exception
      */
-    T read(@Nonnull(when = NEVER) URL url) throws Exception;
+    Boolean createIndex() throws Exception;
 
     /**
-     * @param file
-     * @return {@link T}
+     * @return {@link Boolean}
      * @throws Exception
      */
-    T read(@Nonnull(when = NEVER) File file) throws Exception;
+    Boolean deleteIndex() throws Exception;
 
     /**
-     * @param inputStream
-     * @return {@link T}
+     * @return {@link Boolean}
      * @throws Exception
      */
-    T read(@Nonnull(when = NEVER) InputStream inputStream) throws Exception;
+    Boolean existIndex() throws Exception;
 
     /**
-     * @param reader
-     * @return {@link T+}
+     * @param theXContentBuilder
+     * @return {@link Boolean}
      * @throws Exception
      */
-    T read(@Nonnull(when = NEVER) Reader reader) throws Exception;
+    Boolean putMapping(@Nonnull(when = NEVER) XContentBuilder theXContentBuilder) throws Exception;
 
     /**
-     * @param entityAsString
-     * @return {@link T}
+     * @param theXContentBuilder
+     * @param theActionListener
      * @throws Exception
      */
-    T read(@Nonnull(when = NEVER) String entityAsString) throws Exception;
+    void putMappingAsync(@Nonnull(when = NEVER) XContentBuilder theXContentBuilder, @Nonnull(when = NEVER) ActionListener<AcknowledgedResponse> theActionListener) throws Exception;
 
     /**
-     * @param entityAsString
-     * @param classe
-     * @param <V>
-     * @return {@link V}
+     * @return {@link PutMappingRequest}
      * @throws Exception
      */
-    <V extends Object> V read(@Nonnull(when = NEVER) String entityAsString,
-            @Nonnull(when = NEVER) Class<V> classe) throws Exception;
+    default PutMappingRequest createPutMappingRequest(@Nonnull(when = NEVER) XContentBuilder theXContentBuilder) throws Exception {
+        checkArgument(theXContentBuilder != null, "The Parameter xContentBuilder must not be null.");
+        return new PutMappingRequest(this.getIndexName()) {
+            {
+                this.source(theXContentBuilder);
+            }
+        };
+    }
 
     /**
-     * @param reader
-     * @param classe
-     * @param <V>
-     * @return {@link V}
+     * @return {@link GetMappingsRequest}
      * @throws Exception
      */
-    <V extends Object> V read(@Nonnull(when = NEVER) Reader reader,
-            @Nonnull(when = NEVER) Class<V> classe) throws Exception;
-
-    /**
-     * @param direrctory
-     * @return {@link Collection<T>}
-     * @throws Exception
-     */
-    Collection<T> readFromDirectory(@Nonnull(when = NEVER) Path direrctory) throws Exception;
-
-    /**
-     * @return {@link Class<T>}
-     */
-    Class<T> getEntityClass();
-
-    /**
-     * @param thePath
-     * @return {@link T}
-     */
-    default T read(@Nonnull(when = NEVER) Path thePath) {
-        checkArgument((thePath != null) && (thePath.toFile()
-                .exists()), "The Parameter Path must not be null and the Associated File must exist.");
-        try {
-            return this.read(thePath.toFile());
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return null;
+    default GetMappingsRequest createGetMappingRequest() throws Exception {
+        return new GetMappingsRequest().indices(this.getIndexName());
     }
 }

@@ -32,17 +32,14 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.experimental.el.rest.spring.configuration.ssl;
+package org.geosdi.geoplatform.experimental.el.rest.api.dao;
 
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import org.geosdi.geoplatform.experimental.el.api.model.Document;
+import org.geosdi.geoplatform.experimental.el.rest.api.dao.index.GPElasticSearchRestIndexDAO;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Configuration
-@ComponentScan(value = {"org.geosdi.geoplatform.experimental.el.rest.spring.jasypt",
-        "org.geosdi.geoplatform.experimental.el.rest.spring.configuration.ssl"})
-class GPElasticSearchRestSslConfigTest {
+public interface GPElasticSearchRestDAO<D extends Document> extends GPElasticSearchRestIndexDAO<D> {
 }

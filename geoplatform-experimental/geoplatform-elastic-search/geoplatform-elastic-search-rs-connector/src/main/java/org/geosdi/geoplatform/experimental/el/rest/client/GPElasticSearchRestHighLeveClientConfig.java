@@ -150,8 +150,7 @@ class GPElasticSearchRestHighLeveClientConfig {
                         .getInstance(TrustManagerFactory.getDefaultAlgorithm());
                 KeyStore keyStore = KeyStore.getInstance(KeyStore.getDefaultType());
                 try (InputStream inputStream = Files.newInputStream(loadTrustStore())) {
-                    keyStore.load(inputStream, this.elasticSearchRSBaseConfiguration.getSslConfig()
-                            .getKeyStorePassword().toCharArray());
+                    keyStore.load(inputStream, this.elasticSearchRSBaseConfiguration.getSslConfig().getKeyStorePassword().toCharArray());
                 }
                 trustManagerFactory.init(keyStore);
                 sslContext.init(null, trustManagerFactory.getTrustManagers(), new SecureRandom());
@@ -168,8 +167,7 @@ class GPElasticSearchRestHighLeveClientConfig {
      * @throws Exception
      */
     Path loadTrustStore() throws Exception {
-        InputStream inputStream = this.getClass().getClassLoader()
-                .getResourceAsStream(this.elasticSearchRSBaseConfiguration.getSslConfig().getKeyStorePath());
+        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(this.elasticSearchRSBaseConfiguration.getSslConfig().getKeyStorePath());
         File targetFile = createTempFile("gp_elasticsearch_rest_trust_store", "ts").toFile();
         copy(inputStream, targetFile.toPath(), REPLACE_EXISTING);
         return targetFile.toPath();

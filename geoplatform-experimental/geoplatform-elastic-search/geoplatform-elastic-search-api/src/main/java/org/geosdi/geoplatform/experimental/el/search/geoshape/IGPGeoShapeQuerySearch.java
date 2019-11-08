@@ -72,7 +72,7 @@ public interface IGPGeoShapeQuerySearch extends IBooleanSearch {
      *
      */
     @Immutable
-    class GPGeoShapeQuerySearch extends IBooleanSearch.AbstractBooleanSearch implements IGPGeoShapeQuerySearch {
+    class GPGeoShapeQuerySearch extends AbstractBooleanSearch implements IGPGeoShapeQuerySearch {
 
         private final GPShapeRelation shapeRelation;
         private final ShapeBuilder shapeBuilder;

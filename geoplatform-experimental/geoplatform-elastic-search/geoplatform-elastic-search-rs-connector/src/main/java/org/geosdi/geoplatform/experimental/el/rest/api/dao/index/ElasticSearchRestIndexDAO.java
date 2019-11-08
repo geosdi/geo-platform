@@ -35,15 +35,15 @@
 package org.geosdi.geoplatform.experimental.el.rest.api.dao.index;
 
 import org.elasticsearch.action.ActionListener;
+import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
 import org.elasticsearch.action.support.master.AcknowledgedResponse;
 import org.elasticsearch.client.indices.CreateIndexRequest;
+import org.elasticsearch.client.indices.CreateIndexResponse;
 import org.elasticsearch.client.indices.GetIndexRequest;
-import org.elasticsearch.client.indices.PutMappingRequest;
 import org.elasticsearch.common.Strings;
 import org.elasticsearch.common.xcontent.XContentBuilder;
-import org.geosdi.geoplatform.experimental.el.api.function.GPElasticSearchCheck;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
-import org.geosdi.geoplatform.experimental.el.rest.api.dao.base.ElasticSearchRestBaseDAO;
+import org.geosdi.geoplatform.experimental.el.rest.api.dao.mapping.ElasticSeachRestMappingDAO;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 
 import javax.annotation.Nonnull;
@@ -51,6 +51,7 @@ import javax.annotation.Nullable;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
 import static javax.annotation.meta.When.NEVER;
 import static org.elasticsearch.client.RequestOptions.DEFAULT;
 
@@ -58,7 +59,7 @@ import static org.elasticsearch.client.RequestOptions.DEFAULT;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class ElasticSearchRestIndexDAO<D extends Document> extends ElasticSearchRestBaseDAO<D> implements GPElasticSearchRestIndexDAO<D> {
+public abstract class ElasticSearchRestIndexDAO<D extends Document> extends ElasticSeachRestMappingDAO<D> implements GPElasticSearchRestIndexDAO<D> {
 
     /**
      * @param theEntityClass
@@ -75,7 +76,7 @@ public abstract class ElasticSearchRestIndexDAO<D extends Document> extends Elas
     @Override
     public Boolean createIndex() throws Exception {
         if (!existIndex()) {
-            logger.debug("###############################Called {}#createIndex with Param : {}\n", getIndexName());
+            logger.debug("###############################Called {}#createIndex with Param : {}\n", this.getClass().getSimpleName(), getIndexName());
             CreateIndexRequest createIndexRequest = new CreateIndexRequest(this.getIndexName());
             XContentBuilder xContentBuilder = this.preparePutMapping();
             if ((this.isCreateMapping()) && (xContentBuilder != null)) {
@@ -90,12 +91,46 @@ public abstract class ElasticSearchRestIndexDAO<D extends Document> extends Elas
     }
 
     /**
+     * @param theActionListener
+     * @throws Exception
+     */
+    @Override
+    public void createIndexAsync(@Nonnull(when = NEVER) ActionListener<CreateIndexResponse> theActionListener) throws Exception {
+        checkArgument(theActionListener != null, "The Parameter actionListener must not be null.");
+        if (!existIndex()) {
+            logger.debug("###############################Called {}#createIndexAsync with Param : {}\n", this.getClass().getSimpleName(), getIndexName());
+            CreateIndexRequest createIndexRequest = new CreateIndexRequest(this.getIndexName());
+            XContentBuilder xContentBuilder = this.preparePutMapping();
+            if ((this.isCreateMapping()) && (xContentBuilder != null)) {
+                logger.debug("#####################TRYING TO PUT MAPPING with SOURCE : \n{}\n",
+                        Strings.toString(xContentBuilder));
+                createIndexRequest.source(xContentBuilder);
+            }
+            this.elasticSearchRestHighLevelClient.indices().createAsync(createIndexRequest, DEFAULT, theActionListener);
+        } else {
+            logger.debug("##############################Index with name : {}, already exist.", this.getIndexName());
+        }
+    }
+
+    /**
      * @return {@link Boolean}
      * @throws Exception
      */
     @Override
     public Boolean deleteIndex() throws Exception {
-        return null;
+        logger.debug("###############################Called {}#deleteIndex with Param : {}\n", this.getClass().getSimpleName(), getIndexName());
+        return this.elasticSearchRestHighLevelClient.indices().delete(new DeleteIndexRequest(this.getIndexName()), DEFAULT).isAcknowledged();
+    }
+
+    /**
+     * @param theActionListener
+     * @throws Exception
+     */
+    @Override
+    public void deleteIndexAsync(@Nonnull(when = NEVER) ActionListener<AcknowledgedResponse> theActionListener) throws Exception {
+        checkArgument(theActionListener != null, "The Parameter actionListener must not be null.");
+        logger.debug("###############################Called {}#deleteIndexAsync with Param : {}\n", this.getClass().getSimpleName(), getIndexName());
+        this.elasticSearchRestHighLevelClient.indices().deleteAsync(new DeleteIndexRequest(this.getIndexName()), DEFAULT, theActionListener);
     }
 
     /**
@@ -104,42 +139,7 @@ public abstract class ElasticSearchRestIndexDAO<D extends Document> extends Elas
      */
     @Override
     public Boolean existIndex() throws Exception {
-        GetIndexRequest indexRequest = new GetIndexRequest(this.getIndexName());
-        return this.elasticSearchRestHighLevelClient.indices().exists(indexRequest, DEFAULT);
-    }
-
-    /**
-     * @param theXContentBuilder
-     * @return {@link Boolean}
-     * @throws Exception
-     */
-    @Override
-    public Boolean putMapping(@Nonnull(when = NEVER) XContentBuilder theXContentBuilder) throws Exception {
-        return this.putMapping(theXContentBuilder, this::createPutMappingRequest).isAcknowledged();
-    }
-
-    /**
-     * @param theXContentBuilder
-     * @param theActionListener
-     * @throws Exception
-     */
-    @Override
-    public void putMappingAsync(@Nonnull(when = NEVER) XContentBuilder theXContentBuilder, @Nonnull(when = NEVER) ActionListener<AcknowledgedResponse> theActionListener) throws Exception {
-        checkArgument(theActionListener != null, "The Parameter actionListener must not be null.");
-        GPElasticSearchCheck<PutMappingRequest, XContentBuilder, Exception> putMappingCheck = this::createPutMappingRequest;
-        this.elasticSearchRestHighLevelClient.indices().putMappingAsync(putMappingCheck.apply(theXContentBuilder), DEFAULT, theActionListener);
-    }
-
-    /**
-     * @param theXContentBuilder
-     * @param theCheck
-     * @return {@link AcknowledgedResponse}
-     * @throws Exception
-     */
-    protected <Request extends PutMappingRequest, Builder extends XContentBuilder, E extends Exception> AcknowledgedResponse putMapping(@Nonnull(when = NEVER) Builder theXContentBuilder,
-            @Nonnull(when = NEVER) GPElasticSearchCheck<Request, Builder, E> theCheck) throws Exception {
-        checkArgument(theCheck != null, "The Parameter theCheck must not be null.");
-        return this.elasticSearchRestHighLevelClient.indices().putMapping(theCheck.apply(theXContentBuilder), DEFAULT);
+        return this.elasticSearchRestHighLevelClient.indices().exists(new GetIndexRequest(this.getIndexName()).humanReadable(TRUE), DEFAULT);
     }
 
     /**
@@ -152,9 +152,10 @@ public abstract class ElasticSearchRestIndexDAO<D extends Document> extends Elas
             if ((!createIndex()) && (this.getSettings().isCreateMapping())) {
                 logger.debug("#######################Trying to create mapping for {}\n", this.elasticSearchRestMapper.getDocumentClassName());
                 XContentBuilder builder = this.preparePutMapping();
-                if(builder != null) {
+                if (builder != null) {
                     AcknowledgedResponse putMappingResponse = this.putMapping(builder, this::createPutMappingRequest);
-                    logger.debug("##########################" + ((putMappingResponse.isAcknowledged()) ? "PUT_MAPPING_STATUS IS OK.\n" : "PUT_MAPPING NOT CREATED.\n"));
+                    logger.debug("########################## {}\n", ((putMappingResponse.isAcknowledged()) ? "PUT_MAPPING_STATUS IS OK." : "PUT_MAPPING NOT CREATED."));
+                    logger.debug("::::::::::::::::::::::GET_MAPPING_AS_STRING:::::::::::::: : \n{}\n", this.loadMappingAsString());
                 } else {
                     logger.debug("#########################There is no XContentBuilder defined so skip PutMapping.\n");
                 }
@@ -163,15 +164,4 @@ public abstract class ElasticSearchRestIndexDAO<D extends Document> extends Elas
             logger.debug("####################Can't putMapping for : {}, because ElasticSearch is down.\n", this.elasticSearchRestMapper.getDocumentClassName());
         }
     }
-
-    /**
-     * <p>
-     * This method must be used for manual Put Mapping.
-     * </p>
-     *
-     * @return {@link XContentBuilder}
-     * @throws Exception
-     * @TODO think a way to have Introspection to build dinamically Put Mapping.
-     */
-    protected abstract XContentBuilder preparePutMapping() throws Exception;
 }

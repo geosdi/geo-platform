@@ -32,70 +32,48 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.experimental.el.search.date;
+package org.geosdi.geoplatform.experimental.el.search.geobbox;
 
-import jdk.nashorn.internal.ir.annotations.Immutable;
+import lombok.Getter;
+import net.jcip.annotations.Immutable;
+import org.elasticsearch.common.geo.GeoPoint;
+import org.elasticsearch.index.query.GeoBoundingBoxQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
-import org.elasticsearch.index.query.QueryBuilders;
 import org.geosdi.geoplatform.experimental.el.search.bool.IBooleanSearch;
-import org.joda.time.DateTime;
+import org.locationtech.jts.geom.Envelope;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static org.elasticsearch.index.query.QueryBuilders.geoBoundingBoxQuery;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGPDateQuerySearch extends IBooleanSearch {
+public interface IGPGeoBoundingBoxQuerySearch extends IBooleanSearch {
 
     /**
-     * @return {@link DateTime}
+     * @return {@link Envelope}
      */
-    DateTime getDateTo();
-
-    /**
-     * @return {@link DateTime}
-     */
-    DateTime getDateFrom();
+    Envelope getEnvelope();
 
     /**
      *
      */
     @Immutable
-    class GPDateQuerySearch extends IBooleanSearch.AbstractBooleanSearch implements IGPDateQuerySearch {
+    @Getter
+    class GPGeoBoundingBoxQuerySearch extends AbstractBooleanSearch implements IGPGeoBoundingBoxQuerySearch {
 
-        private final DateTime dateTo;
-        private final DateTime dateFrom;
+        private final Envelope envelope;
 
         /**
          * @param theField
-         * @param theBooleanQueryType
-         * @param theDateFrom
-         * @param theDateTo
+         * @param theType
+         * @param theEnvelope
          */
-        public GPDateQuerySearch(String theField, BooleanQueryType theBooleanQueryType, DateTime theDateFrom, DateTime theDateTo) {
-            super(theField, theBooleanQueryType);
-            checkArgument((theDateTo != null), "The Parameter DateTo must not be null.");
-            checkArgument((theDateFrom != null), "The Parameter DateFrom must not be null.");
-            checkArgument((theDateFrom.isBefore(theDateTo)), "The Parameter DateFrom must be after DateTo.");
-            this.dateTo = theDateTo;
-            this.dateFrom = theDateFrom;
-        }
-
-        /**
-         * @return {@link DateTime}
-         */
-        @Override
-        public DateTime getDateTo() {
-            return this.dateTo;
-        }
-
-        /**
-         * @return {@link DateTime}
-         */
-        @Override
-        public DateTime getDateFrom() {
-            return this.dateFrom;
+        public GPGeoBoundingBoxQuerySearch(String theField, BooleanQueryType theType, Envelope theEnvelope) {
+            super(theField, theType);
+            checkArgument(theEnvelope != null, "The Parameter Envelope must not be null.");
+            this.envelope = theEnvelope;
         }
 
         /**
@@ -103,7 +81,16 @@ public interface IGPDateQuerySearch extends IBooleanSearch {
          */
         @Override
         public QueryBuilder buildQuery() {
-            return QueryBuilders.rangeQuery(field).gte(dateFrom).lte(dateTo);
+            return this.buildGeoBoundingBoxQueryBuilder();
+        }
+
+        /**
+         * @return {@link GeoBoundingBoxQueryBuilder}
+         */
+        protected final GeoBoundingBoxQueryBuilder buildGeoBoundingBoxQueryBuilder() {
+            return geoBoundingBoxQuery(this.field)
+                    .setCorners(new GeoPoint(this.envelope.getMaxY(), this.envelope.getMinX()),
+                            new GeoPoint(this.envelope.getMinY(), this.envelope.getMaxX()));
         }
     }
 }

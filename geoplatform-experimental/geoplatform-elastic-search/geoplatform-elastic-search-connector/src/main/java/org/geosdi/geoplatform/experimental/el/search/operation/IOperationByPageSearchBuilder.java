@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.experimental.el.search.operation;
 
 import com.google.common.base.Preconditions;
-import org.geosdi.geoplatform.experimental.el.dao.GPPageableElasticSearchDAO;
+import org.geosdi.geoplatform.experimental.el.dao.GPPageableAsyncElasticSearchDAO;
 
 import static org.geosdi.geoplatform.experimental.el.search.operation.OperationByPage.OperationByPageSearch;
 
@@ -51,7 +51,7 @@ public interface IOperationByPageSearchBuilder {
      * @param <P>
      * @return {@link IOperationByPageSearchBuilder}
      */
-    <P extends GPPageableElasticSearchDAO.PageAsync> IOperationByPageSearchBuilder withPage(P thePage);
+    <P extends GPPageableAsyncElasticSearchDAO.PageAsync> IOperationByPageSearchBuilder withPage(P thePage);
 
     /**
      * @return {@link OperationByPage}
@@ -64,7 +64,7 @@ public interface IOperationByPageSearchBuilder {
      */
     class OperationByPageSearchBuilder implements IOperationByPageSearchBuilder {
 
-        private GPPageableElasticSearchDAO.PageAsync page;
+        private GPPageableAsyncElasticSearchDAO.PageAsync page;
 
         private OperationByPageSearchBuilder() {
         }
@@ -78,7 +78,7 @@ public interface IOperationByPageSearchBuilder {
          * @return {@link IOperationByPageSearchBuilder}
          */
         @Override
-        public <P extends GPPageableElasticSearchDAO.PageAsync> IOperationByPageSearchBuilder withPage(P thePage) {
+        public <P extends GPPageableAsyncElasticSearchDAO.PageAsync> IOperationByPageSearchBuilder withPage(P thePage) {
             this.page = thePage;
             return self();
         }

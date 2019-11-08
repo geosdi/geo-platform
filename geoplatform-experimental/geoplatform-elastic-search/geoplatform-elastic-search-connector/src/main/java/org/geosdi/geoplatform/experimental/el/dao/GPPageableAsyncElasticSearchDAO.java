@@ -45,7 +45,6 @@ import org.geosdi.geoplatform.experimental.el.search.strategy.IGPOperationAsyncT
 import javax.annotation.Nonnull;
 import java.util.concurrent.CompletableFuture;
 
-import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static javax.annotation.meta.When.NEVER;
 
@@ -53,7 +52,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPPageableAsyncElasticSearchDAO<D extends Document> {
+public interface GPPageableAsyncElasticSearchDAO<D extends Document> extends GPPageableElasticSearchDAO<D> {
 
     /**
      * @param page

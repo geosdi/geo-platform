@@ -93,31 +93,9 @@
             <version>1.0</version>
         </dependency>
 
-        <!-- =========================================================== -->
-        <!-- ======================== LOMBOK =========================== -->
-        <!-- =========================================================== -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
-        </dependency>
-
-        <!-- =========================================================== -->
-        <!-- ====================== ELASTIC SEARCH ===================== -->
-        <!-- =========================================================== -->
-        <dependency>
-            <groupId>org.elasticsearch</groupId>
-            <artifactId>elasticsearch</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.fasterxml.jackson.dataformat</groupId>
-                    <artifactId>jackson-dataformat-smile</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <!-- =========================================================== -->
@@ -126,25 +104,6 @@
         <dependency>
             <groupId>org.elasticsearch.client</groupId>
             <artifactId>elasticsearch-rest-high-level-client</artifactId>
-        </dependency>
-
-        <!-- =========================================================== -->
-        <!-- ====================== SPATIAL SUPPORT ==================== -->
-        <!-- =========================================================== -->
-        <dependency>
-            <groupId>org.locationtech.spatial4j</groupId>
-            <artifactId>spatial4j</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.locationtech.jts</groupId>
-            <artifactId>jts-core</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>xerces</groupId>
-                    <artifactId>xercesImpl</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <!-- =========================================================== -->

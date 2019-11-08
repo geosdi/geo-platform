@@ -38,13 +38,19 @@ package org.geosdi.geoplatform.support.jackson.reader;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.model.SimpleBean;
 import org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature;
-import org.junit.Assert;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.net.URL;
+import java.util.stream.Stream;
 
+import static java.io.File.separator;
+import static java.util.stream.Collectors.joining;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -52,11 +58,10 @@ import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEn
  */
 public class SimpleBeanJacksonReaderTest {
 
+    private static final Logger logger = LoggerFactory.getLogger(SimpleBeanJacksonReaderTest.class);
+    //
     private static final GPJacksonReaderSupport<SimpleBean> JACKSON_READER_SUPPORT = new GPBaseJacksonReaderSupport<>(new GPJacksonSupport(UNWRAP_ROOT_VALUE_DISABLE,
-            FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
-            ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
-            WRAP_ROOT_VALUE_DISABLE,
-            INDENT_OUTPUT_ENABLE)
+            FAIL_ON_UNKNOW_PROPERTIES_DISABLE, ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE, WRAP_ROOT_VALUE_DISABLE, INDENT_OUTPUT_ENABLE)
             .configure(WRITE_DATES_AS_TIMESTAMPS_DISABLE)
             .configure(GPJsonIncludeFeature.NON_NULL),
             SimpleBean.class);
@@ -64,11 +69,11 @@ public class SimpleBeanJacksonReaderTest {
     @Test
     public void readJsonFromURLTest() throws Exception {
         SimpleBean simpleBean = JACKSON_READER_SUPPORT.read(new URL("https://httpbin.org/get?color=red&shape=square"));
-        System.out.println("" + simpleBean.getHeaders().size());
-        Assert.assertNotNull(simpleBean);
-        Assert.assertTrue(simpleBean.getArguments().size() == 2);
-        Assert.assertNotNull(simpleBean.getOrigin());
-        Assert.assertNotNull(simpleBean.getUrl());
+        logger.info("#######################HEADERS_SIZE : {}", simpleBean.getHeaders().size());
+        assertNotNull(simpleBean);
+        assertTrue(simpleBean.getArguments().size() == 2);
+        assertNotNull(simpleBean.getOrigin());
+        assertNotNull(simpleBean.getUrl());
     }
 
     @Test
@@ -89,12 +94,15 @@ public class SimpleBeanJacksonReaderTest {
                 "  \"origin\": \"82.61.27.192\", \n" +
                 "  \"url\": \"https://httpbin.org/get?color=red&shape=square\"\n" +
                 "}");
-        Assert.assertNotNull(simpleBean);
+        assertNotNull(simpleBean);
     }
 
     @Test
     public void readJsonFromFileTest() throws Exception {
-        SimpleBean simpleBean = JACKSON_READER_SUPPORT.read(new File("./src/test/resources/simple_bean.json"));
-        Assert.assertNotNull(simpleBean);
+        SimpleBean simpleBean = JACKSON_READER_SUPPORT.read(new File(Stream
+                .of(new File(".").getAbsolutePath(), "src", "test", "resources", "simple_bean.json")
+                .collect(joining(separator))));
+        assertNotNull(simpleBean);
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@SIMPLE_BEAN from File : {}\n", simpleBean);
     }
 }

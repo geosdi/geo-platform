@@ -32,15 +32,16 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.experimental.el.rest.api.mapper;
+package org.geosdi.geoplatform.experimental.el.search.date;
 
-import org.geosdi.geoplatform.experimental.el.api.function.GPElasticSearchCheck;
-import org.geosdi.geoplatform.experimental.el.api.mapper.GPBaseMapper;
-import org.geosdi.geoplatform.experimental.el.api.model.Document;
-import org.geosdi.geoplatform.support.jackson.JacksonSupport;
+import jdk.nashorn.internal.ir.annotations.Immutable;
+import lombok.Getter;
+import org.elasticsearch.index.query.QueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
+import org.geosdi.geoplatform.experimental.el.search.bool.IBooleanSearch;
+import org.joda.time.DateTime;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static javax.annotation.meta.When.NEVER;
@@ -49,42 +50,47 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GPElasticSearchRestMapper<D extends Document> extends GPBaseMapper<D> {
+public interface IGPDateQuerySearch extends IBooleanSearch {
 
     /**
-     * @param theDocumentClass
-     * @param theReader
+     * @return {@link DateTime}
      */
-    public GPElasticSearchRestMapper(@Nonnull(when = NEVER) Class<D> theDocumentClass, @Nullable JacksonSupport theReader) {
-        super(theDocumentClass, theReader);
-    }
+    DateTime getDateTo();
 
     /**
-     * @param theMapperName
-     * @param theMapperNameCheck
-     * @return {@link String}
-     * @throws Exception
+     * @return {@link DateTime}
      */
-    protected String mapperName(String theMapperName, @Nonnull(when = NEVER) GPElasticSearchCheck<String, String, Exception> theMapperNameCheck) throws Exception {
-        checkArgument(theMapperNameCheck != null, "The Parameter mapperNameCheck must not null");
-        return theMapperNameCheck.apply(theMapperName);
-    }
+    DateTime getDateFrom();
 
-    /**
-     *
-     * @param theElasticSearchDAOName
-     * @return {@link String}
-     */
-    protected String createMapperName(String theElasticSearchDAOName) {
-        return this.getClass()
-                .getSimpleName() + "{\n"
-                + "elasticSearchRestDAO = " + theElasticSearchDAOName + "\n"
-                + ", documentClass = " + this.getDocumentClassName() + "\n"
-                + "}";
-    }
+    @Getter
+    @Immutable
+    class GPDateQuerySearch extends AbstractBooleanSearch implements IGPDateQuerySearch {
 
-    @Override
-    public String toString() {
-        return this.getMapperName();
+        private final DateTime dateTo;
+        private final DateTime dateFrom;
+
+        /**
+         * @param theField
+         * @param theBooleanQueryType
+         * @param theDateFrom
+         * @param theDateTo
+         */
+        public GPDateQuerySearch(@Nonnull(when = NEVER) String theField, @Nonnull(when = NEVER) BooleanQueryType theBooleanQueryType,
+                @Nonnull(when = NEVER) DateTime theDateFrom, @Nonnull(when = NEVER) DateTime theDateTo) {
+            super(theField, theBooleanQueryType);
+            checkArgument((theDateTo != null), "The Parameter DateTo must not be null.");
+            checkArgument((theDateFrom != null), "The Parameter DateFrom must not be null.");
+            checkArgument((theDateFrom.isBefore(theDateTo)), "The Parameter DateFrom must be after DateTo.");
+            this.dateTo = theDateTo;
+            this.dateFrom = theDateFrom;
+        }
+
+        /**
+         * @return {@link QueryBuilder}
+         */
+        @Override
+        public QueryBuilder buildQuery() {
+            return QueryBuilders.rangeQuery(field).gte(dateFrom).lte(dateTo);
+        }
     }
 }

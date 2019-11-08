@@ -32,15 +32,19 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.experimental.el.rest.api.mapper;
+package org.geosdi.geoplatform.experimental.el.rest.api.dao.mapping;
 
-import org.geosdi.geoplatform.experimental.el.api.function.GPElasticSearchCheck;
-import org.geosdi.geoplatform.experimental.el.api.mapper.GPBaseMapper;
+import org.elasticsearch.action.ActionListener;
+import org.elasticsearch.action.support.master.AcknowledgedResponse;
+import org.elasticsearch.client.indices.GetMappingsResponse;
+import org.elasticsearch.client.indices.PutMappingRequest;
+import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
-import org.geosdi.geoplatform.support.jackson.JacksonSupport;
+import org.geosdi.geoplatform.experimental.el.rest.api.dao.base.GPElasticSearchRestBaseDAO;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+
+import java.util.Map;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static javax.annotation.meta.When.NEVER;
@@ -49,42 +53,60 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GPElasticSearchRestMapper<D extends Document> extends GPBaseMapper<D> {
+public interface GPElasticSeachRestMappingDAO<D extends Document> extends GPElasticSearchRestBaseDAO<D> {
 
     /**
-     * @param theDocumentClass
-     * @param theReader
+     * @param theXContentBuilder
+     * @return {@link Boolean}
+     * @throws Exception
      */
-    public GPElasticSearchRestMapper(@Nonnull(when = NEVER) Class<D> theDocumentClass, @Nullable JacksonSupport theReader) {
-        super(theDocumentClass, theReader);
+    Boolean putMapping(@Nonnull(when = NEVER) XContentBuilder theXContentBuilder) throws Exception;
+
+    /**
+     * @param theXContentBuilder
+     * @param theActionListener
+     * @throws Exception
+     */
+    void putMappingAsync(@Nonnull(when = NEVER) XContentBuilder theXContentBuilder, @Nonnull(when = NEVER) ActionListener<AcknowledgedResponse> theActionListener) throws Exception;
+
+    /**
+     * @return {@link GetMappingsResponse}
+     * @throws Exception
+     */
+    GetMappingsResponse getMapping() throws Exception;
+
+    /**
+     * @param theActionListener
+     * @throws Exception
+     */
+    void getMappingAsync(@Nonnull(when = NEVER) ActionListener<GetMappingsResponse> theActionListener) throws Exception;
+
+    /**
+     * @return {@link PutMappingRequest}
+     * @throws Exception
+     */
+    default PutMappingRequest createPutMappingRequest(@Nonnull(when = NEVER) XContentBuilder theXContentBuilder) throws Exception {
+        checkArgument(theXContentBuilder != null, "The Parameter xContentBuilder must not be null.");
+        return new PutMappingRequest(this.getIndexName()) {
+            {
+                this.source(theXContentBuilder);
+            }
+        };
     }
 
     /**
-     * @param theMapperName
-     * @param theMapperNameCheck
+     * @return {@link Map<String, Object>}
+     * @throws Exception
+     */
+    default Map<String, Object> loadMappingAsMap() throws Exception {
+        return this.getMapping().mappings().get(this.getIndexName()).sourceAsMap();
+    }
+
+    /**
      * @return {@link String}
      * @throws Exception
      */
-    protected String mapperName(String theMapperName, @Nonnull(when = NEVER) GPElasticSearchCheck<String, String, Exception> theMapperNameCheck) throws Exception {
-        checkArgument(theMapperNameCheck != null, "The Parameter mapperNameCheck must not null");
-        return theMapperNameCheck.apply(theMapperName);
-    }
-
-    /**
-     *
-     * @param theElasticSearchDAOName
-     * @return {@link String}
-     */
-    protected String createMapperName(String theElasticSearchDAOName) {
-        return this.getClass()
-                .getSimpleName() + "{\n"
-                + "elasticSearchRestDAO = " + theElasticSearchDAOName + "\n"
-                + ", documentClass = " + this.getDocumentClassName() + "\n"
-                + "}";
-    }
-
-    @Override
-    public String toString() {
-        return this.getMapperName();
+    default String loadMappingAsString() throws Exception {
+        return getMapping().mappings().get(this.getIndexName()).source().string();
     }
 }

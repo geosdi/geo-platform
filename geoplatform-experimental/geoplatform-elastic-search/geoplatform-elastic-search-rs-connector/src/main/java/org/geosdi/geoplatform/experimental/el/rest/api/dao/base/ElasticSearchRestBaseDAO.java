@@ -67,13 +67,20 @@ public abstract class ElasticSearchRestBaseDAO<D extends Document> implements GP
      * @param theEntityClass
      * @param theJacksonSupport
      */
-    protected ElasticSearchRestBaseDAO(@Nonnull(when = NEVER) Class<D> theEntityClass,
-            @Nullable GPJacksonSupport theJacksonSupport) {
+    protected ElasticSearchRestBaseDAO(@Nonnull(when = NEVER) Class<D> theEntityClass, @Nullable GPJacksonSupport theJacksonSupport) {
         this.elasticSearchRestMapper = new GPElasticSearchRestMapper<D>(theEntityClass, theJacksonSupport) {
+
+            private String mapperName;
 
             @Override
             public String getMapperName() {
-                return ElasticSearchRestBaseDAO.class.getSimpleName();
+                try {
+                    return this.mapperName = ((this.mapperName != null) ? this.mapperName :
+                            this.mapperName(ElasticSearchRestBaseDAO.this.getClass().getSimpleName(), this::createMapperName));
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    throw new IllegalStateException(ex);
+                }
             }
         };
         this.settingsCheck = GPElasticSearchRestIndexSettings::of;
@@ -122,6 +129,7 @@ public abstract class ElasticSearchRestBaseDAO<D extends Document> implements GP
      */
     @PostConstruct
     protected void onStartUp() throws Exception {
-        checkArgument(this.elasticSearchRestHighLevelClient != null, "The Parameter elasticSearchRestHighLevelClient must not be null.");
+        checkArgument(this.elasticSearchRestHighLevelClient != null,
+                "The Parameter elasticSearchRestHighLevelClient must not be null.");
     }
 }

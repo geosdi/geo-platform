@@ -42,7 +42,7 @@ public interface IGPGeodistanceQuerySearch extends IBooleanSearch {
      */
     GeoDistance getGeoDistance();
 
-    class GPGeodistanceQuerySearch extends IBooleanSearch.AbstractBooleanSearch implements IGPGeodistanceQuerySearch {
+    class GPGeodistanceQuerySearch extends AbstractBooleanSearch implements IGPGeodistanceQuerySearch {
 
         private final GeoPoint geoPoint;
         private final double distance;
@@ -57,8 +57,7 @@ public interface IGPGeodistanceQuerySearch extends IBooleanSearch {
          * @param theGeoDistance
          */
         public GPGeodistanceQuerySearch(@Nonnull(when = NEVER) String theField, @Nonnull(when = NEVER) GeoPoint theGeoPoint,
-                double theDistance, @Nullable DistanceUnit theDistanceUnit,
-                @Nullable GeoDistance theGeoDistance) {
+                double theDistance, @Nullable DistanceUnit theDistanceUnit, @Nullable GeoDistance theGeoDistance) {
             super(theField, FILTER);
             checkArgument(theGeoPoint != null, "The Parameter geoPoint must not be null.");
             checkArgument(theDistance > 0, "The Parameter distance must be greather than zero.");

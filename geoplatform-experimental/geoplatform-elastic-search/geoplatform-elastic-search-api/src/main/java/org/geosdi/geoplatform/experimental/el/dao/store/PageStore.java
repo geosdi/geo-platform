@@ -40,9 +40,10 @@ import lombok.Getter;
 import lombok.ToString;
 import net.jcip.annotations.Immutable;
 
-import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import java.util.List;
+
+import static javax.xml.bind.annotation.XmlAccessType.FIELD;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -50,7 +51,7 @@ import java.util.List;
  */
 @Getter
 @ToString
-@XmlAccessorType(value = XmlAccessType.FIELD)
+@XmlAccessorType(value = FIELD)
 @Immutable
 public class PageStore<T> implements IPageStore<T> {
 

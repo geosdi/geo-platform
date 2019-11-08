@@ -36,22 +36,19 @@ package org.geosdi.geoplatform.experimental.el.rest.api.dao.index;
 
 import org.elasticsearch.action.ActionListener;
 import org.elasticsearch.action.support.master.AcknowledgedResponse;
-import org.elasticsearch.client.indices.GetMappingsRequest;
-import org.elasticsearch.client.indices.PutMappingRequest;
-import org.elasticsearch.common.xcontent.XContentBuilder;
+import org.elasticsearch.client.indices.CreateIndexResponse;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
-import org.geosdi.geoplatform.experimental.el.rest.api.dao.base.GPElasticSearchRestBaseDAO;
+import org.geosdi.geoplatform.experimental.el.rest.api.dao.mapping.GPElasticSeachRestMappingDAO;
 
 import javax.annotation.Nonnull;
 
-import static com.google.common.base.Preconditions.checkArgument;
 import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPElasticSearchRestIndexDAO<D extends Document> extends GPElasticSearchRestBaseDAO<D> {
+public interface GPElasticSearchRestIndexDAO<D extends Document> extends GPElasticSeachRestMappingDAO<D> {
 
     /**
      * @return {@link Boolean}
@@ -60,49 +57,26 @@ public interface GPElasticSearchRestIndexDAO<D extends Document> extends GPElast
     Boolean createIndex() throws Exception;
 
     /**
+     * @param theActionListener
+     * @throws Exception
+     */
+    void createIndexAsync(@Nonnull(when = NEVER) ActionListener<CreateIndexResponse> theActionListener) throws Exception;
+
+    /**
      * @return {@link Boolean}
      * @throws Exception
      */
     Boolean deleteIndex() throws Exception;
 
     /**
+     * @param theActionListener
+     * @throws Exception
+     */
+    void deleteIndexAsync(@Nonnull(when = NEVER) ActionListener<AcknowledgedResponse> theActionListener) throws Exception;
+
+    /**
      * @return {@link Boolean}
      * @throws Exception
      */
     Boolean existIndex() throws Exception;
-
-    /**
-     * @param theXContentBuilder
-     * @return {@link Boolean}
-     * @throws Exception
-     */
-    Boolean putMapping(@Nonnull(when = NEVER) XContentBuilder theXContentBuilder) throws Exception;
-
-    /**
-     * @param theXContentBuilder
-     * @param theActionListener
-     * @throws Exception
-     */
-    void putMappingAsync(@Nonnull(when = NEVER) XContentBuilder theXContentBuilder, @Nonnull(when = NEVER) ActionListener<AcknowledgedResponse> theActionListener) throws Exception;
-
-    /**
-     * @return {@link PutMappingRequest}
-     * @throws Exception
-     */
-    default PutMappingRequest createPutMappingRequest(@Nonnull(when = NEVER) XContentBuilder theXContentBuilder) throws Exception {
-        checkArgument(theXContentBuilder != null, "The Parameter xContentBuilder must not be null.");
-        return new PutMappingRequest(this.getIndexName()) {
-            {
-                this.source(theXContentBuilder);
-            }
-        };
-    }
-
-    /**
-     * @return {@link GetMappingsRequest}
-     * @throws Exception
-     */
-    default GetMappingsRequest createGetMappingRequest() throws Exception {
-        return new GetMappingsRequest().indices(this.getIndexName());
-    }
 }

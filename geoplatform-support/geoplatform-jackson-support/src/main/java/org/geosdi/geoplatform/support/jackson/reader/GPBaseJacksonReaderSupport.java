@@ -44,6 +44,7 @@ import java.io.StringReader;
 import java.net.URL;
 import java.nio.file.Path;
 import java.util.Collection;
+import java.util.Objects;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.nio.file.Files.list;
@@ -63,8 +64,7 @@ public class GPBaseJacksonReaderSupport<T extends Object> implements GPJacksonRe
      * @param theJacksonSupport
      * @param theEntityClass
      */
-    public GPBaseJacksonReaderSupport(@Nonnull(when = NEVER) JacksonSupport theJacksonSupport,
-            @Nonnull(when = NEVER) Class<T> theEntityClass) {
+    public GPBaseJacksonReaderSupport(@Nonnull(when = NEVER) JacksonSupport theJacksonSupport, @Nonnull(when = NEVER) Class<T> theEntityClass) {
         checkArgument(theJacksonSupport != null, "The Parameter JacksonSupport must not be null.");
         checkArgument(theEntityClass != null, "The Parameter EntityClass must not be null.");
         this.jacksonSupport = theJacksonSupport;
@@ -122,8 +122,7 @@ public class GPBaseJacksonReaderSupport<T extends Object> implements GPJacksonRe
      */
     @Override
     public T read(@Nonnull(when = NEVER) String entityAsString) throws Exception {
-        checkArgument((entityAsString != null) && !(entityAsString.trim()
-                .isEmpty()), "The Parameter EntityAsString must not be null or Empty.");
+        checkArgument((entityAsString != null) && !(entityAsString.trim().isEmpty()), "The Parameter EntityAsString must not be null or Empty.");
         return this.read(new StringReader(entityAsString));
     }
 
@@ -134,10 +133,8 @@ public class GPBaseJacksonReaderSupport<T extends Object> implements GPJacksonRe
      * @throws Exception
      */
     @Override
-    public <V extends Object> V read(@Nonnull(when = NEVER) String entityAsString,
-            @Nonnull(when = NEVER) Class<V> classe) throws Exception {
-        checkArgument((entityAsString != null) && !(entityAsString.trim()
-                .isEmpty()), "The Parameter EntityAsString must not be null or Empty.");
+    public <V extends Object> V read(@Nonnull(when = NEVER) String entityAsString, @Nonnull(when = NEVER) Class<V> classe) throws Exception {
+        checkArgument((entityAsString != null) && !(entityAsString.trim().isEmpty()), "The Parameter EntityAsString must not be null or Empty.");
         checkArgument(classe != null, "The Parameter classe must not be null.");
         return this.read(new StringReader(entityAsString), classe);
     }
@@ -149,8 +146,7 @@ public class GPBaseJacksonReaderSupport<T extends Object> implements GPJacksonRe
      * @throws Exception
      */
     @Override
-    public <V extends Object> V read(@Nonnull(when = NEVER) Reader reader,
-            @Nonnull(when = NEVER) Class<V> classe) throws Exception {
+    public <V extends Object> V read(@Nonnull(when = NEVER) Reader reader, @Nonnull(when = NEVER) Class<V> classe) throws Exception {
         checkArgument(reader != null, "The Parameter Reader must not be null.");
         checkArgument(classe != null, "The Parameter classe must not be null.");
         return this.jacksonSupport.getDefaultMapper().readValue(reader, classe);
@@ -163,10 +159,12 @@ public class GPBaseJacksonReaderSupport<T extends Object> implements GPJacksonRe
      */
     @Override
     public Collection<T> readFromDirectory(@Nonnull(when = NEVER) Path path) throws Exception {
-        checkArgument((path != null && path.toFile()
-                .isDirectory()), "The Parameter Path must not be null and must be a Directory");
-        return list(path).filter(p -> !(p.toFile().isDirectory()) && (p.toFile().getName().endsWith(".json")))
-                .map(p -> this.read(p)).filter(d -> d != null).collect(toList());
+        checkArgument((path != null && path.toFile().isDirectory()), "The Parameter Path must not be null and must be a Directory");
+        return list(path)
+                .filter(p -> !(p.toFile().isDirectory()) && (p.toFile().getName().endsWith(".json")))
+                .map(this::read)
+                .filter(Objects::nonNull)
+                .collect(toList());
     }
 
     /**

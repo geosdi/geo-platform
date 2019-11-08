@@ -40,15 +40,16 @@ import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.introspect.AnnotationIntrospectorPair;
 import com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector;
-import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.fasterxml.jackson.module.jaxb.JaxbAnnotationIntrospector;
 import org.geosdi.geoplatform.support.jackson.property.JacksonSupportConfigFeature;
 
 import java.text.DateFormat;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.TimeZone;
-import java.util.stream.Stream;
 
+import static com.fasterxml.jackson.databind.type.TypeFactory.defaultInstance;
+import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 
 /**
@@ -76,13 +77,10 @@ public class GPJacksonSupport implements JacksonSupport {
      */
     public GPJacksonSupport(JacksonSupportConfigFeature... features) {
         mapper = new ObjectMapper();
-        Stream.of(features).filter(f -> f != null).forEach(f -> f.configureMapper(mapper));
-        AnnotationIntrospector primary = new JaxbAnnotationIntrospector(
-                TypeFactory.defaultInstance());
+        of(features).filter(Objects::nonNull).forEach(f -> f.configureMapper(mapper));
+        AnnotationIntrospector primary = new JaxbAnnotationIntrospector(defaultInstance());
         AnnotationIntrospector secondary = new JacksonAnnotationIntrospector();
-
-        mapper.setAnnotationIntrospector(new AnnotationIntrospectorPair(
-                primary, secondary));
+        mapper.setAnnotationIntrospector(new AnnotationIntrospectorPair(primary, secondary));
     }
 
     /**
@@ -163,6 +161,9 @@ public class GPJacksonSupport implements JacksonSupport {
         return this;
     }
 
+    /**
+     * @return {@link JacksonSupportConfigFeature[]}
+     */
     public static JacksonSupportConfigFeature[] defaultProp() {
         return new JacksonSupportConfigFeature[]{UNWRAP_ROOT_VALUE_ENABLE,
                 FAIL_ON_UNKNOW_PROPERTIES_DISABLE,

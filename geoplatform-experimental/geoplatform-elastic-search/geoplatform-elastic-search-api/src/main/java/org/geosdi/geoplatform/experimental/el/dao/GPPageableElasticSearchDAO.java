@@ -43,6 +43,7 @@ import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.search.aggregations.AbstractAggregationBuilder;
+import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.sort.SortOrder;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
 import org.geosdi.geoplatform.experimental.el.dao.store.IPageStore;
@@ -53,12 +54,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nonnull;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Function;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Stream.of;
 import static javax.annotation.meta.When.NEVER;
@@ -68,7 +69,7 @@ import static org.elasticsearch.index.query.QueryBuilders.boolQuery;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPPageableElasticSearchDAO<D extends Document> extends GPPageableAsyncElasticSearchDAO<D> {
+public interface GPPageableElasticSearchDAO<D extends Document> {
 
     /**
      * @param <P>
@@ -76,7 +77,7 @@ public interface GPPageableElasticSearchDAO<D extends Document> extends GPPageab
      * @return {@link IPageResult<D>}
      * @throws Exception
      */
-    <P extends Page> IPageResult<D> find(P page) throws Exception;
+    <P extends Page> IPageResult<D> find(@Nonnull(when = NEVER) P page) throws Exception;
 
     /**
      * @param page
@@ -86,7 +87,7 @@ public interface GPPageableElasticSearchDAO<D extends Document> extends GPPageab
      * @return {@link IPageResult<V>}
      * @throws Exception
      */
-    <P extends Page, V extends D> IPageResult<V> find(P page, Class<V> subType) throws Exception;
+    <P extends Page, V extends D> IPageResult<V> find(@Nonnull(when = NEVER) P page, @Nonnull(when = NEVER) Class<V> subType) throws Exception;
 
     /**
      * @param page
@@ -96,7 +97,7 @@ public interface GPPageableElasticSearchDAO<D extends Document> extends GPPageab
      * @return {@link IPageResult<V>}
      * @throws Exception
      */
-    <P extends Page, V extends Document> IPageResult<V> findAndMappingWith(P page, Class<V> classe) throws Exception;
+    <P extends Page, V extends Document> IPageResult<V> findAndMappingWith(@Nonnull(when = NEVER) P page, @Nonnull(when = NEVER) Class<V> classe) throws Exception;
 
     /**
      * @param page
@@ -106,7 +107,7 @@ public interface GPPageableElasticSearchDAO<D extends Document> extends GPPageab
      * @return {@link IPageResult <D>}
      * @throws Exception
      */
-    <P extends Page> IPageResult<D> find(P page, String[] includeFields, String[] excludeFields) throws Exception;
+    <P extends Page> IPageResult<D> find(@Nonnull(when = NEVER) P page, String[] includeFields, String[] excludeFields) throws Exception;
 
     /**
      * @param page
@@ -118,7 +119,8 @@ public interface GPPageableElasticSearchDAO<D extends Document> extends GPPageab
      * @return {@link IPageResult<V>}
      * @throws Exception
      */
-    <P extends Page, V extends Document> IPageResult<V> find(P page, String[] includeFields, String[] excludeFields, Class<V> classe) throws Exception;
+    <P extends Page, V extends Document> IPageResult<V> find(@Nonnull(when = NEVER) P page, String[] includeFields, String[] excludeFields,
+            @Nonnull(when = NEVER) Class<V> classe) throws Exception;
 
     /**
      * @param page
@@ -128,7 +130,7 @@ public interface GPPageableElasticSearchDAO<D extends Document> extends GPPageab
      * @return {@link IPageResult <D>}
      * @throws Exception
      */
-    <P extends Page> IPageResult<D> find(P page, String includeField, String excludeField) throws Exception;
+    <P extends Page> IPageResult<D> find(@Nonnull(when = NEVER) P page, String includeField, String excludeField) throws Exception;
 
     /**
      * @param page
@@ -137,7 +139,7 @@ public interface GPPageableElasticSearchDAO<D extends Document> extends GPPageab
      * @return {@link SearchResponse}
      * @throws Exception
      */
-    <P extends Page> SearchResponse find(P page, AbstractAggregationBuilder aggregationBuilder) throws Exception;
+    <P extends Page> SearchResponse find(@Nonnull(when = NEVER) P page, @Nonnull(when = NEVER) AbstractAggregationBuilder aggregationBuilder) throws Exception;
 
     /**
      * @param page
@@ -193,6 +195,15 @@ public interface GPPageableElasticSearchDAO<D extends Document> extends GPPageab
          * @throws Exception
          */
         <Builder extends SearchRequestBuilder> Builder buildPage(@Nonnull(when = NEVER) Builder builder) throws Exception;
+
+        /**
+         *
+         * @param builder
+         * @param <Builder>
+         * @return {@link Builder}
+         * @throws Exception
+         */
+        <Builder extends SearchSourceBuilder> Builder buildPage(@Nonnull(when = NEVER) Builder builder) throws Exception;
     }
 
     interface MultiFieldPageBuilder extends PageBuilder {
@@ -211,7 +222,8 @@ public interface GPPageableElasticSearchDAO<D extends Document> extends GPPageab
          * @param search
          * @param <Search>
          */
-        default <Search extends IBooleanSearch> void buildQuery(Search search) {
+        default <Search extends IBooleanSearch> void buildQuery(@Nonnull(when = NEVER) Search search) {
+            checkArgument(search != null, "The Parameter search must not be null.");
             switch (search.getType()) {
                 case SHOULD:
                     boolQueryBuilder().should(search.buildQuery());
@@ -260,8 +272,7 @@ public interface GPPageableElasticSearchDAO<D extends Document> extends GPPageab
          */
         private <Builder extends SearchRequestBuilder> Builder internalBuildPage(Builder builder) throws Exception {
             logger.trace("####################Called {} #internalBuildPage with parameters from : {} - size : {}\n\n", getClass().getSimpleName(), from, size);
-            return (Builder) ((this.from >= 0) ? builder.setFrom(this.from)
-                    .setSize(this.size) : builder.setSize(this.size));
+            return (Builder) ((this.from >= 0) ? builder.setFrom(this.from).setSize(this.size) : builder.setSize(this.size));
         }
 
         /**
@@ -272,6 +283,28 @@ public interface GPPageableElasticSearchDAO<D extends Document> extends GPPageab
          */
         @Override
         public <Builder extends SearchRequestBuilder> Builder buildPage(@Nonnull(when = NEVER) Builder builder) throws Exception {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            return (canBuildPage() ? this.internalBuildPage(builder) : builder);
+        }
+
+        /**
+         * @param builder
+         * @param <Builder>
+         * @return {@link Builder}
+         * @throws Exception
+         */
+        private <Builder extends SearchSourceBuilder> Builder internalBuildPage(Builder builder) throws Exception {
+            logger.trace("####################Called {} #internalBuildPage with parameters from : {} - size : {}\n\n", getClass().getSimpleName(), from, size);
+            return (Builder) ((this.from >= 0) ? builder.from(this.from).size(this.size) : builder.size(this.size));
+        }
+
+        /**
+         * @param builder
+         * @return {@link Builder}
+         * @throws Exception
+         */
+        @Override
+        public <Builder extends SearchSourceBuilder> Builder buildPage(@Nonnull(when = NEVER) Builder builder) throws Exception {
             checkArgument(builder != null, "The Parameter builder must not be null.");
             return (canBuildPage() ? this.internalBuildPage(builder) : builder);
         }
@@ -335,6 +368,28 @@ public interface GPPageableElasticSearchDAO<D extends Document> extends GPPageab
          */
         @Override
         public <Builder extends SearchRequestBuilder> Builder buildPage(@Nonnull(when = NEVER) Builder builder) throws Exception {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            return (canBuildPage() ? internalBuildPage(super.buildPage(builder)) : super.buildPage(builder));
+        }
+
+        /**
+         * @param builder
+         * @param <Builder>
+         * @return {@link Builder}
+         * @throws Exception
+         */
+        private <Builder extends SearchSourceBuilder> Builder internalBuildPage(Builder builder) throws Exception {
+            logger.trace("####################Called {} #internalBuildPage with parameters field : {} - sortOrder : {}\n\n", getClass().getSimpleName(), field, sortOrder);
+            return (Builder) builder.sort(this.field, this.sortOrder);
+        }
+
+        /**
+         * @param builder
+         * @return {@link Builder}
+         * @throws Exception
+         */
+        @Override
+        public <Builder extends SearchSourceBuilder> Builder buildPage(@Nonnull(when = NEVER) Builder builder) throws Exception {
             checkArgument(builder != null, "The Parameter builder must not be null.");
             return (canBuildPage() ? internalBuildPage(super.buildPage(builder)) : super.buildPage(builder));
         }
@@ -413,6 +468,28 @@ public interface GPPageableElasticSearchDAO<D extends Document> extends GPPageab
             checkArgument(builder != null, "The Parameter builder must not be null.");
             return (canBuildPage() ? internalBuildPage(super.buildPage(builder)) : super.buildPage(builder));
         }
+
+        /**
+         * @param builder
+         * @param <Builder>
+         * @return {@link Builder}
+         * @throws Exception
+         */
+        private <Builder extends SearchSourceBuilder> Builder internalBuildPage(Builder builder) throws Exception {
+            logger.trace("####################Called {} #internalBuildPage with parameters query : {}\n\n", getClass().getSimpleName(), query);
+            return (Builder) builder.query(this.query);
+        }
+
+        /**
+         * @param builder
+         * @return {@link Builder}
+         * @throws Exception
+         */
+        @Override
+        public <Builder extends SearchSourceBuilder> Builder buildPage(@Nonnull(when = NEVER) Builder builder) throws Exception {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            return (canBuildPage() ? internalBuildPage(super.buildPage(builder)) : super.buildPage(builder));
+        }
     }
 
     @ToString(callSuper = true)
@@ -484,9 +561,9 @@ public interface GPPageableElasticSearchDAO<D extends Document> extends GPPageab
         private <Builder extends SearchRequestBuilder> Builder internalBuildPage(Builder builder) throws Exception {
             this.queryBuilder = boolQuery();
             logger.trace("####################Called {} #internalBuildPage with parameters dateQuerySearch : {} \n\n", getClass().getSimpleName(), this.dateQuerySearch);
-            Arrays.stream(this.dateQuerySearch)
-                    .filter(q -> q != null)
-                    .forEach(q -> buildQuery(q));
+            stream(this.dateQuerySearch)
+                    .filter(Objects::nonNull)
+                    .forEach(this::buildQuery);
             builder.setQuery(queryBuilder);
             logger.trace("####################{} Query Created: \n{} \n\n", getClass().getSimpleName(), builder);
             return builder;
@@ -505,14 +582,42 @@ public interface GPPageableElasticSearchDAO<D extends Document> extends GPPageab
         }
 
         /**
+         * @param builder
+         * @param <Builder>
+         * @return {@link Builder}
+         * @throws Exception
+         */
+        private <Builder extends SearchSourceBuilder> Builder internalBuildPage(Builder builder) throws Exception {
+            this.queryBuilder = boolQuery();
+            logger.trace("####################Called {} #internalBuildPage with parameters dateQuerySearch : {} \n\n", getClass().getSimpleName(), this.dateQuerySearch);
+            stream(this.dateQuerySearch)
+                    .filter(Objects::nonNull)
+                    .forEach(this::buildQuery);
+            builder.query(queryBuilder);
+            logger.trace("####################{} Query Created: \n{} \n\n", getClass().getSimpleName(), builder);
+            return builder;
+        }
+
+        /**
+         * @param builder
+         * @return {@link Builder}
+         * @throws Exception
+         */
+        @Override
+        public <Builder extends SearchSourceBuilder> Builder buildPage(@Nonnull(when = NEVER) Builder builder) throws Exception {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            return (canBuildPage() ? internalBuildPage(super.buildPage(builder)) : super.buildPage(builder));
+        }
+
+        /**
          * @return {@link String}
          */
         @Override
         public String printQueryAsJson() {
             this.queryBuilder = boolQuery();
-            Arrays.stream(this.dateQuerySearch)
-                    .filter(q -> q != null)
-                    .forEach(q -> buildQuery(q));
+            stream(this.dateQuerySearch)
+                    .filter(Objects::nonNull)
+                    .forEach(this::buildQuery);
             return this.queryBuilder.toString();
         }
     }
@@ -526,10 +631,10 @@ public interface GPPageableElasticSearchDAO<D extends Document> extends GPPageab
         private BoolQueryBuilder queryBuilder;
 
         /**
-         * @param queryList
+         * @param theQueryList
          */
-        public MultiFieldsSearch(IBooleanSearch... queryList) {
-            this(null, null, 0, 0, queryList);
+        public MultiFieldsSearch(IBooleanSearch... theQueryList) {
+            this(null, null, 0, 0, theQueryList);
         }
 
         /**
@@ -544,10 +649,10 @@ public interface GPPageableElasticSearchDAO<D extends Document> extends GPPageab
         /**
          * @param field
          * @param sortOrder
-         * @param queryList
+         * @param theQueryList
          */
-        public MultiFieldsSearch(String field, SortOrder sortOrder, IBooleanSearch... queryList) {
-            this(field, sortOrder, 0, 0, queryList);
+        public MultiFieldsSearch(String field, SortOrder sortOrder, IBooleanSearch... theQueryList) {
+            this(field, sortOrder, 0, 0, theQueryList);
         }
 
         /**
@@ -555,18 +660,18 @@ public interface GPPageableElasticSearchDAO<D extends Document> extends GPPageab
          * @param sortOrder
          * @param from
          * @param size
-         * @param queryList
+         * @param theQueryList
          */
-        public MultiFieldsSearch(String field, SortOrder sortOrder, int from, int size, IBooleanSearch... queryList) {
+        public MultiFieldsSearch(String field, SortOrder sortOrder, int from, int size, IBooleanSearch... theQueryList) {
             super(field, sortOrder, from, size);
-            this.queryList = queryList;
+            this.queryList = theQueryList;
         }
 
         /**
          * @return {@link Boolean}
          */
         private Boolean canBuildPage() {
-            return this.queryList != null && (this.queryList.length > 0);
+            return ((this.queryList != null) && (this.queryList.length > 0));
         }
 
         /**
@@ -578,8 +683,9 @@ public interface GPPageableElasticSearchDAO<D extends Document> extends GPPageab
         private <Builder extends SearchRequestBuilder> Builder internalBuildPage(Builder builder) throws Exception {
             this.queryBuilder = boolQuery();
             logger.trace("####################Called {} #internalBuildPage with parameters queryList : {} \n\n", getClass().getSimpleName(), this.queryList);
-            of(this.queryList).filter(q -> q != null)
-                    .forEach(q -> buildQuery(q));
+            of(this.queryList)
+                    .filter(Objects::nonNull)
+                    .forEach(this::buildQuery);
             logger.trace("####################{} - Create Query: \n{} \n\n", getClass().getSimpleName(), this.queryBuilder.toString());
             return (Builder) builder.setQuery(queryBuilder);
         }
@@ -592,6 +698,34 @@ public interface GPPageableElasticSearchDAO<D extends Document> extends GPPageab
          */
         @Override
         public <Builder extends SearchRequestBuilder> Builder buildPage(Builder builder) throws Exception {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            return (canBuildPage() ? internalBuildPage(super.buildPage(builder)) : super.buildPage(builder));
+        }
+
+        /**
+         * @param builder
+         * @param <Builder>
+         * @return {@link Builder}
+         * @throws Exception
+         */
+        private <Builder extends SearchSourceBuilder> Builder internalBuildPage(Builder builder) throws Exception {
+            this.queryBuilder = boolQuery();
+            logger.trace("####################Called {} #internalBuildPage with parameters queryList : {} \n\n", getClass().getSimpleName(), this.queryList);
+            of(this.queryList)
+                    .filter(Objects::nonNull)
+                    .forEach(this::buildQuery);
+            logger.trace("####################{} - Create Query: \n{} \n\n", getClass().getSimpleName(), this.queryBuilder.toString());
+            return (Builder) builder.query(queryBuilder);
+        }
+
+        /**
+         * @param builder
+         * @return {@link Builder}
+         * @throws Exception
+         */
+        @Override
+        public <Builder extends SearchSourceBuilder> Builder buildPage(@Nonnull(when = NEVER) Builder builder) throws Exception {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
             return (canBuildPage() ? internalBuildPage(super.buildPage(builder)) : super.buildPage(builder));
         }
 
@@ -601,8 +735,9 @@ public interface GPPageableElasticSearchDAO<D extends Document> extends GPPageab
         @Override
         public String printQueryAsJson() {
             this.queryBuilder = boolQuery();
-            of(this.queryList).filter(q -> q != null)
-                    .forEach(q -> buildQuery(q));
+            of(this.queryList)
+                    .filter(Objects::nonNull)
+                    .forEach(this::buildQuery);
             return boolQueryBuilder().toString();
         }
 

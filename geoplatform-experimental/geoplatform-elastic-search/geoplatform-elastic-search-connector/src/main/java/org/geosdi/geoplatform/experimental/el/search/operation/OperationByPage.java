@@ -40,7 +40,7 @@ import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.common.unit.TimeValue;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
 import org.geosdi.geoplatform.experimental.el.dao.GPElasticSearchUpdateHandler;
-import org.geosdi.geoplatform.experimental.el.dao.GPPageableElasticSearchDAO;
+import org.geosdi.geoplatform.experimental.el.dao.GPPageableAsyncElasticSearchDAO;
 import org.geosdi.geoplatform.experimental.el.search.strategy.IGPOperationAsyncType.OperationAsyncType;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -57,8 +57,7 @@ public interface OperationByPage extends GPOperationByPage<Document> {
      * @return
      * @throws Exception
      */
-    <Builder extends SearchRequestBuilder> Builder buildPage(Builder builder)
-            throws Exception;
+    <Builder extends SearchRequestBuilder> Builder buildPage(Builder builder) throws Exception;
 
     /**
      * @return {@link Integer}
@@ -84,7 +83,7 @@ public interface OperationByPage extends GPOperationByPage<Document> {
      * @param <P>
      * @return {@link P}
      */
-    <P extends GPPageableElasticSearchDAO.PageAsync> P getPage();
+    <P extends GPPageableAsyncElasticSearchDAO.PageAsync> P getPage();
 
     /**
      *
@@ -110,12 +109,12 @@ public interface OperationByPage extends GPOperationByPage<Document> {
     @Immutable
     class OperationByPageSearch implements OperationByPage {
 
-        private final GPPageableElasticSearchDAO.PageAsync page;
+        private final GPPageableAsyncElasticSearchDAO.PageAsync page;
 
         /**
          * @param thePage
          */
-        public OperationByPageSearch(GPPageableElasticSearchDAO.PageAsync thePage) {
+        public OperationByPageSearch(GPPageableAsyncElasticSearchDAO.PageAsync thePage) {
             checkNotNull(thePage, "The Parameter Page must not be null.");
             this.page = thePage;
         }
@@ -175,7 +174,7 @@ public interface OperationByPage extends GPOperationByPage<Document> {
          * @return {@link P}
          */
         @Override
-        public <P extends GPPageableElasticSearchDAO.PageAsync> P getPage() {
+        public <P extends GPPageableAsyncElasticSearchDAO.PageAsync> P getPage() {
             return (P) this.page;
         }
     }
@@ -188,7 +187,7 @@ public interface OperationByPage extends GPOperationByPage<Document> {
 
         private final Long size;
 
-        public OperationByPageSearchDecorator(GPPageableElasticSearchDAO.PageAsync thePage, Long size) {
+        public OperationByPageSearchDecorator(GPPageableAsyncElasticSearchDAO.PageAsync thePage, Long size) {
             super(thePage);
             this.size = size;
         }

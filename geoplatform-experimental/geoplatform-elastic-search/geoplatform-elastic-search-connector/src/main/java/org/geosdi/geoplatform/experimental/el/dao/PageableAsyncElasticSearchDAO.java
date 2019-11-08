@@ -50,7 +50,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class PageableAsyncElasticSearchDAO<D extends Document> extends GPBaseElasticSearchDAO<D> {
+public abstract class PageableAsyncElasticSearchDAO<D extends Document> extends PageableElasticSearchDAO<D> {
 
     @Resource(name = "operationHandlerManager")
     private IGPOperationHandlerManager operationHandlerManager;

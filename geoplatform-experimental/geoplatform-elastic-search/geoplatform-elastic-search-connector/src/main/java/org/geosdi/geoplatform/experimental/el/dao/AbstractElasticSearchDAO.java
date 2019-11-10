@@ -49,10 +49,11 @@ import org.geosdi.geoplatform.experimental.el.api.mapper.GPBaseMapper;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
 import org.geosdi.geoplatform.experimental.el.condition.PredicateCondition;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
@@ -60,8 +61,11 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 import static java.util.Arrays.stream;
+import static java.util.stream.Collectors.toList;
+import static javax.annotation.meta.When.NEVER;
 import static org.elasticsearch.action.DocWriteResponse.Result.DELETED;
 import static org.elasticsearch.common.xcontent.XContentType.JSON;
+import static org.geosdi.geoplatform.experimental.el.condition.PredicateCondition.EMPTY_PREDICATE;
 
 /**
  * @param <D>
@@ -114,8 +118,8 @@ public abstract class AbstractElasticSearchDAO<D extends Document> extends Pagea
      * @throws Exception
      */
     @Override
-    public List<D> findByIDS(Iterable<String> ids) throws Exception {
-        return findByIDS(ids, new PredicateCondition.EmptyPredicateCondition<D>());
+    public List<D> findByIDS(@Nonnull(when = NEVER) Iterable<String> ids) throws Exception {
+        return findByIDS(ids, EMPTY_PREDICATE);
     }
 
     /**
@@ -124,16 +128,17 @@ public abstract class AbstractElasticSearchDAO<D extends Document> extends Pagea
      * @throws Exception
      */
     @Override
-    public List<D> findByIDS(Iterable<String> ids, PredicateCondition<D> condition) throws Exception {
+    public List<D> findByIDS(@Nonnull(when = NEVER) Iterable<String> ids, @Nullable PredicateCondition<D> condition) throws Exception {
         checkArgument((ids != null) && (Iterables.size(ids) > 0));
         MultiGetResponse multiGetResponses = this.elastichSearchClient.prepareMultiGet()
                 .setRealtime(TRUE)
                 .add(getIndexName(), getIndexType(), ids)
                 .get();
-        return stream(multiGetResponses.getResponses()).filter(response -> !response.isFailed())
+        return stream(multiGetResponses.getResponses())
+                .filter(response -> !response.isFailed())
                 .map(r -> readGetResponse(r.getResponse()))
                 .filter(d -> ((condition != null) ? ((d != null) && (condition.test(d))) : d != null))
-                .collect(Collectors.toList());
+                .collect(toList());
     }
 
     /**
@@ -193,7 +198,7 @@ public abstract class AbstractElasticSearchDAO<D extends Document> extends Pagea
                         .endsWith(".json"))
                 .map(path -> super.readDocument(path))
                 .filter(d -> d != null)
-                .collect(Collectors.toList()));
+                .collect(toList()));
     }
 
     @Override

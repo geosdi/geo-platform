@@ -45,12 +45,14 @@ import org.geosdi.geoplatform.experimental.el.index.GPIndexCreator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Resource;
 import java.nio.file.Path;
 import java.util.concurrent.ExecutorService;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
+import static javax.annotation.meta.When.NEVER;
 import static org.elasticsearch.index.reindex.UpdateByQueryAction.INSTANCE;
 
 /**
@@ -74,7 +76,7 @@ abstract class GPBaseElasticSearchDAO<D extends Document> implements GPElasticSe
      * @throws Exception
      */
     @Override
-    public String writeDocumentAsString(D document) throws Exception {
+    public String writeDocumentAsString(@Nonnull(when = NEVER) D document) throws Exception {
         checkNotNull(document, "The Document must not be null.");
         return this.mapper.writeAsString(document);
     }
@@ -85,8 +87,8 @@ abstract class GPBaseElasticSearchDAO<D extends Document> implements GPElasticSe
      * @throws Exception
      */
     @Override
-    public D readDocument(String documentAsString) throws Exception {
-        checkArgument(((documentAsString != null) && !(documentAsString.isEmpty()) && !(documentAsString.equalsIgnoreCase(EMPTY_JSON))), "The String to Wrap must not be null or Empty");
+    public D readDocument(@Nonnull(when = NEVER) String documentAsString) throws Exception {
+        checkArgument(((documentAsString != null) && !(documentAsString.trim().isEmpty()) && !(documentAsString.equalsIgnoreCase(EMPTY_JSON))), "The String to Wrap must not be null or Empty");
         return mapper.read(documentAsString);
     }
 
@@ -97,8 +99,8 @@ abstract class GPBaseElasticSearchDAO<D extends Document> implements GPElasticSe
      * @throws Exception
      */
     @Override
-    public <V extends Document> V readDocument(String documentAsString, Class<V> classe) throws Exception {
-        checkArgument(((documentAsString != null) && !(documentAsString.isEmpty()) && !(documentAsString.equalsIgnoreCase(EMPTY_JSON))), "The String to Wrap must not be null or Empty");
+    public <V extends Document> V readDocument(@Nonnull(when = NEVER) String documentAsString, @Nonnull(when = NEVER) Class<V> classe) throws Exception {
+        checkArgument(((documentAsString != null) && !(documentAsString.trim().isEmpty()) && !(documentAsString.equalsIgnoreCase(EMPTY_JSON))), "The String to Wrap must not be null or Empty");
         checkArgument(classe != null, "The Parameter classe must not be null.");
         return mapper.read(documentAsString, classe);
     }
@@ -109,7 +111,7 @@ abstract class GPBaseElasticSearchDAO<D extends Document> implements GPElasticSe
      * @throws Exception
      */
     @Override
-    public D readDocument(Path thePath) {
+    public D readDocument(@Nonnull(when = NEVER) Path thePath) {
         checkArgument((thePath != null) && (thePath.toFile().exists()), "The Parameter thePath must not be null and the File must exist.");
         try {
             return this.mapper.read(thePath.toFile());

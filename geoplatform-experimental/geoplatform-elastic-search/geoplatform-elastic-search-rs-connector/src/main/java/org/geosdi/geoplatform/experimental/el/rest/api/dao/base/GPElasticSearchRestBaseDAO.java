@@ -38,6 +38,7 @@ import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
 import org.geosdi.geoplatform.experimental.el.rest.api.index.settings.GPElasticSearchRestIndexSettings;
+import org.geosdi.geoplatform.experimental.el.rest.api.mapper.GPElasticSearchRestMapper;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -61,8 +62,13 @@ public interface GPElasticSearchRestBaseDAO<D extends Document> {
     /**
      * @return {@link String}
      */
-    default String getIndexName() throws Exception {
-        return getSettings().getIndexName();
+    default String getIndexName() {
+        try {
+            return getSettings().getIndexName();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new IllegalStateException(ex);
+        }
     }
 
     /**
@@ -72,6 +78,11 @@ public interface GPElasticSearchRestBaseDAO<D extends Document> {
     default Boolean isCreateMapping() throws Exception {
         return getSettings().isCreateMapping();
     }
+
+    /**
+     * @return {@link GPElasticSearchRestMapper<D>}
+     */
+    GPElasticSearchRestMapper<D> mapper();
 
     /**
      * @return {@link RestHighLevelClient}

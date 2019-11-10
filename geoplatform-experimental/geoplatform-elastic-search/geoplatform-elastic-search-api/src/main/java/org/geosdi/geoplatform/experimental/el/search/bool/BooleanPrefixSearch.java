@@ -37,7 +37,11 @@ package org.geosdi.geoplatform.experimental.el.search.bool;
 
 import net.jcip.annotations.Immutable;
 import org.elasticsearch.index.query.QueryBuilder;
-import org.elasticsearch.index.query.QueryBuilders;
+
+import javax.annotation.Nonnull;
+
+import static javax.annotation.meta.When.NEVER;
+import static org.elasticsearch.index.query.QueryBuilders.prefixQuery;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -51,7 +55,7 @@ public class BooleanPrefixSearch extends IBooleanSearch.AbstractBooleanSearch {
      * @param theValue
      * @param theType
      */
-    public BooleanPrefixSearch(String theField, Object theValue, BooleanQueryType theType) {
+    public BooleanPrefixSearch(@Nonnull(when = NEVER) String theField, @Nonnull(when = NEVER) Object theValue, @Nonnull(when = NEVER) BooleanQueryType theType) {
         super(theField, theValue, theType);
     }
 
@@ -60,6 +64,6 @@ public class BooleanPrefixSearch extends IBooleanSearch.AbstractBooleanSearch {
      */
     @Override
     public QueryBuilder buildQuery() {
-        return QueryBuilders.prefixQuery(field, value.toString());
+        return prefixQuery(field, value.toString());
     }
 }

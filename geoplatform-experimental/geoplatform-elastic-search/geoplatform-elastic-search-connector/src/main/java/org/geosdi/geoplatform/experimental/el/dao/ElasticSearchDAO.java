@@ -44,11 +44,13 @@ import org.geosdi.geoplatform.experimental.el.api.model.Document;
 import org.geosdi.geoplatform.experimental.el.index.GPBaseIndexCreator.GPIndexSettings;
 import org.geosdi.geoplatform.experimental.el.index.GPIndexCreator;
 
+import javax.annotation.Nonnull;
 import java.nio.file.Path;
 import java.util.concurrent.ExecutorService;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
+import static javax.annotation.meta.When.NEVER;
 import static org.elasticsearch.common.xcontent.XContentType.JSON;
 
 /**
@@ -90,14 +92,14 @@ public interface ElasticSearchDAO<D extends Document> extends GPPageableAsyncEla
      * @return {@link String}
      * @throws Exception
      */
-    String writeDocumentAsString(D document) throws Exception;
+    String writeDocumentAsString(@Nonnull(when = NEVER) D document) throws Exception;
 
     /**
      * @param documentAsString
      * @return {@link D}
      * @throws Exception
      */
-    D readDocument(String documentAsString) throws Exception;
+    D readDocument(@Nonnull(when = NEVER) String documentAsString) throws Exception;
 
     /**
      * @param documentAsString
@@ -106,14 +108,14 @@ public interface ElasticSearchDAO<D extends Document> extends GPPageableAsyncEla
      * @return {@link V}
      * @throws Exception
      */
-    <V extends Document> V readDocument(String documentAsString, Class<V> classe) throws Exception;
+    <V extends Document> V readDocument(@Nonnull(when = NEVER) String documentAsString, @Nonnull(when = NEVER) Class<V> classe) throws Exception;
 
     /**
      * @param searchHit
      * @return {@link D}
      * @throws Exception
      */
-    default D readDocument(SearchHit searchHit) {
+    default D readDocument(@Nonnull(when = NEVER) SearchHit searchHit) {
         try {
             checkNotNull(searchHit, "The SearchHit must not be null.");
             D document = readDocument(searchHit.getSourceAsString());
@@ -132,7 +134,7 @@ public interface ElasticSearchDAO<D extends Document> extends GPPageableAsyncEla
      * @param <V>
      * @return {@link V}
      */
-    default <V extends Document> V readDocument(SearchHit searchHit, Class<V> classe) {
+    default <V extends Document> V readDocument(@Nonnull(when = NEVER) SearchHit searchHit, @Nonnull(when = NEVER) Class<V> classe) {
         try {
             checkNotNull(searchHit, "The SearchHit must not be null.");
             checkNotNull(classe, "The Parameter classe must not be null.");
@@ -151,13 +153,13 @@ public interface ElasticSearchDAO<D extends Document> extends GPPageableAsyncEla
      * @return {}
      * @throws Exception
      */
-    D readDocument(Path thePath);
+    D readDocument(@Nonnull(when = NEVER) Path thePath);
 
     /**
      * @param response
      * @return {@link D}
      */
-    default D readGetResponse(GetResponse response) {
+    default D readGetResponse(@Nonnull(when = NEVER) GetResponse response) {
         try {
             checkNotNull(response, "The GetResponse must not be null.");
             D document = readDocument(response.getSourceAsString());

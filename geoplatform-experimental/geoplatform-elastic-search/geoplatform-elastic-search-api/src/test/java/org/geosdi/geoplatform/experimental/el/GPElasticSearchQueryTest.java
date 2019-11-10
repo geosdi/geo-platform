@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.experimental.el;
 import org.elasticsearch.common.geo.GeoPoint;
 import org.geosdi.geoplatform.experimental.el.dao.GPPageableElasticSearchDAO.MultiFieldsSearch;
 import org.geosdi.geoplatform.experimental.el.search.bool.BooleanAllMatchSearch;
-import org.geosdi.geoplatform.experimental.el.search.date.IGPDateQuerySearch;
+import org.geosdi.geoplatform.experimental.el.search.date.IGPDateQuerySearch.GPDateQuerySearch;
 import org.geosdi.geoplatform.experimental.el.search.geodistance.IGPGeodistanceQuerySearch.GPGeodistanceQuerySearch;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -70,8 +70,8 @@ public class GPElasticSearchQueryTest {
     @Test
     public void b_geoDistanceAndDateQueryTest() throws Exception {
         GPGeodistanceQuerySearch geodistanceQuerySearch = new GPGeodistanceQuerySearch("location", new GeoPoint(40, 15), 34d, METERS, null);
-        MultiFieldsSearch multiFieldsSearch = new MultiFieldsSearch(new IGPDateQuerySearch.GPDateQuerySearch("date",
-                MUST, now().minusDays(4), now()), geodistanceQuerySearch);
+        MultiFieldsSearch multiFieldsSearch = new MultiFieldsSearch(new GPDateQuerySearch("date", MUST,
+                now().minusDays(4), now()), geodistanceQuerySearch);
         multiFieldsSearch.printQueryAsJson();
         logger.info("@@@@@@@@@@@@@@@@@@GEO_DISTANCE_DATE_QUERY : \n{}\n", multiFieldsSearch.printQueryAsJson());
     }

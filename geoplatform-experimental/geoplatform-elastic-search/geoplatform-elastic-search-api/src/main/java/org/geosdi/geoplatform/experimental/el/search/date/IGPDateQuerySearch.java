@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.experimental.el.search.date;
 import jdk.nashorn.internal.ir.annotations.Immutable;
 import lombok.Getter;
 import org.elasticsearch.index.query.QueryBuilder;
-import org.elasticsearch.index.query.QueryBuilders;
 import org.geosdi.geoplatform.experimental.el.search.bool.IBooleanSearch;
 import org.joda.time.DateTime;
 
@@ -45,6 +44,7 @@ import javax.annotation.Nonnull;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static javax.annotation.meta.When.NEVER;
+import static org.elasticsearch.index.query.QueryBuilders.rangeQuery;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -90,7 +90,7 @@ public interface IGPDateQuerySearch extends IBooleanSearch {
          */
         @Override
         public QueryBuilder buildQuery() {
-            return QueryBuilders.rangeQuery(field).gte(dateFrom).lte(dateTo);
+            return rangeQuery(field).gte(dateFrom).lte(dateTo);
         }
     }
 }

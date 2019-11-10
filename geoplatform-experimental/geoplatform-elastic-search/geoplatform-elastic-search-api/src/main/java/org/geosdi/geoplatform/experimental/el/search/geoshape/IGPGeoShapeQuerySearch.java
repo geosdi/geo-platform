@@ -35,15 +35,18 @@
 package org.geosdi.geoplatform.experimental.el.search.geoshape;
 
 import jdk.nashorn.internal.ir.annotations.Immutable;
+import lombok.Getter;
 import org.elasticsearch.common.geo.builders.ShapeBuilder;
 import org.elasticsearch.index.query.GeoShapeQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.geosdi.geoplatform.experimental.el.search.bool.IBooleanSearch;
 
+import javax.annotation.Nonnull;
 import java.io.IOException;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -68,9 +71,7 @@ public interface IGPGeoShapeQuerySearch extends IBooleanSearch {
         INTERSECTS, DISJOINT, WITHIN, CONTAINS;
     }
 
-    /**
-     *
-     */
+    @Getter
     @Immutable
     class GPGeoShapeQuerySearch extends AbstractBooleanSearch implements IGPGeoShapeQuerySearch {
 
@@ -83,28 +84,13 @@ public interface IGPGeoShapeQuerySearch extends IBooleanSearch {
          * @param theShapeRelation
          * @param theShapeBuilder
          */
-        public GPGeoShapeQuerySearch(String theField, BooleanQueryType theType, GPShapeRelation theShapeRelation, ShapeBuilder theShapeBuilder) {
+        public GPGeoShapeQuerySearch(@Nonnull(when = NEVER) String theField, @Nonnull(when = NEVER) BooleanQueryType theType,
+                @Nonnull(when = NEVER) GPShapeRelation theShapeRelation, @Nonnull(when = NEVER) ShapeBuilder theShapeBuilder) {
             super(theField, theType);
             checkArgument((theShapeRelation != null), "The Parameter ShapeRelations must not be null.");
             checkArgument((theShapeBuilder != null), "The Parameter ShapeBuilder must not be null.");
             this.shapeRelation = theShapeRelation;
             this.shapeBuilder = theShapeBuilder;
-        }
-
-        /**
-         * @return {@link GPShapeRelation}
-         */
-        @Override
-        public GPShapeRelation getShapeRelation() {
-            return this.shapeRelation;
-        }
-
-        /**
-         * @return {@link ShapeBuilder}
-         */
-        @Override
-        public ShapeBuilder getShapeBuilder() {
-            return this.shapeBuilder;
         }
 
         /**
@@ -125,13 +111,13 @@ public interface IGPGeoShapeQuerySearch extends IBooleanSearch {
         protected final GeoShapeQueryBuilder buildGeoShapeQueryBuilder() throws IOException {
             switch (this.shapeRelation) {
                 case INTERSECTS:
-                    return QueryBuilders.geoIntersectionQuery(this.field, this.shapeBuilder);
+                    return QueryBuilders.geoIntersectionQuery(this.field, this.shapeBuilder.buildGeometry());
                 case DISJOINT:
-                    return QueryBuilders.geoDisjointQuery(this.field, this.shapeBuilder);
+                    return QueryBuilders.geoDisjointQuery(this.field, this.shapeBuilder.buildGeometry());
                 case WITHIN:
-                    return QueryBuilders.geoWithinQuery(this.field, this.shapeBuilder);
+                    return QueryBuilders.geoWithinQuery(this.field, this.shapeBuilder.buildGeometry());
                 case CONTAINS:
-                    return QueryBuilders.geoShapeQuery(this.field, getShapeBuilder());
+                    return QueryBuilders.geoShapeQuery(this.field, this.shapeBuilder.buildGeometry());
             }
             return null;
         }

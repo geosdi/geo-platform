@@ -32,16 +32,21 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.experimental.el.dao;
+package org.geosdi.geoplatform.experimental.el.rest.api.dao.page;
 
-import org.elasticsearch.action.search.SearchRequestBuilder;
+import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
-import org.elasticsearch.rest.RestStatus;
+import org.elasticsearch.client.core.CountRequest;
+import org.elasticsearch.client.core.CountResponse;
 import org.elasticsearch.search.aggregations.AbstractAggregationBuilder;
+import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
+import org.geosdi.geoplatform.experimental.el.dao.PageResult;
+import org.geosdi.geoplatform.experimental.el.rest.api.dao.index.ElasticSearchRestIndexDAO;
+import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 
 import javax.annotation.Nonnull;
-
+import javax.annotation.Nullable;
 import java.util.Objects;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -49,27 +54,37 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Stream.of;
 import static javax.annotation.meta.When.NEVER;
+import static org.elasticsearch.client.RequestOptions.DEFAULT;
+import static org.elasticsearch.rest.RestStatus.OK;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class PageableElasticSearchDAO<D extends Document> extends GPBaseElasticSearchDAO<D> {
+public abstract class PageableElasticSearchRestDAO<D extends Document> extends ElasticSearchRestIndexDAO<D> implements GPPageableElasticSearchRestDAO<D> {
+
+    /**
+     * @param theEntityClass
+     * @param theJacksonSupport
+     */
+    protected PageableElasticSearchRestDAO(@Nonnull(when = NEVER) Class<D> theEntityClass, @Nullable GPJacksonSupport theJacksonSupport) {
+        super(theEntityClass, theJacksonSupport);
+    }
 
     /**
      * @param page
-     * @param <P>
-     * @return {@link org.geosdi.geoplatform.experimental.el.dao.GPPageableElasticSearchDAO.IPageResult<D>}
+     * @return {@link IPageResult<D>}
      * @throws Exception
      */
     @Override
     public <P extends Page> IPageResult<D> find(@Nonnull(when = NEVER) P page) throws Exception {
         checkArgument((page != null), "Page must not be null.");
-        super.refreshIndex();
-        SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient.prepareSearch(getIndexName()).setTypes(getIndexType()));
-        logger.trace("#########################Builder : {}\n\n", builder.toString());
-        SearchResponse searchResponse = builder.get();
-        if (searchResponse.status() != RestStatus.OK) {
+        SearchRequest searchRequest = this.prepareSearchRequest();
+        SearchSourceBuilder searchSourceBuilder = page.buildPage(new SearchSourceBuilder());
+        searchRequest.source(searchSourceBuilder);
+        logger.trace("@@@@@@@@@@@@@@@@@@@@@@@@@@@@SEARCH_SOURCE_BUILDER : {}\n\n", searchSourceBuilder.toString());
+        SearchResponse searchResponse = this.elasticSearchRestHighLevelClient.search(searchRequest, DEFAULT);
+        if (searchResponse.status() != OK) {
             throw new IllegalStateException("Problem in Search : " + searchResponse.status());
         }
         Long total = searchResponse.getHits().getTotalHits().value;
@@ -83,6 +98,7 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends GPBas
 
     /**
      * @param page
+     * @param subType
      * @return {@link IPageResult<V>}
      * @throws Exception
      */
@@ -90,11 +106,12 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends GPBas
     public <P extends Page, V extends D> IPageResult<V> find(@Nonnull(when = NEVER) P page, @Nonnull(when = NEVER) Class<V> subType) throws Exception {
         checkArgument((page != null), "Page must not be null.");
         checkArgument(subType != null, "The Parameter subType must not be null.");
-        super.refreshIndex();
-        SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient.prepareSearch(getIndexName()).setTypes(getIndexType()));
-        logger.trace("#########################Builder : {}\n\n", builder.toString());
-        SearchResponse searchResponse = builder.get();
-        if (searchResponse.status() != RestStatus.OK) {
+        SearchRequest searchRequest = this.prepareSearchRequest();
+        SearchSourceBuilder searchSourceBuilder = page.buildPage(new SearchSourceBuilder());
+        searchRequest.source(searchSourceBuilder);
+        logger.trace("@@@@@@@@@@@@@@@@@@@@@@@@@@@@SEARCH_SOURCE_BUILDER : {}\n\n", searchSourceBuilder.toString());
+        SearchResponse searchResponse = this.elasticSearchRestHighLevelClient.search(searchRequest, DEFAULT);
+        if (searchResponse.status() != OK) {
             throw new IllegalStateException("Problem in Search : " + searchResponse.status());
         }
         Long total = searchResponse.getHits().getTotalHits().value;
@@ -119,11 +136,12 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends GPBas
         checkArgument((page != null), "Page must not be null.");
         checkArgument(classe != null, "The Parameter subType must not be null.");
         checkNotNull(classe, "The Parameter classe must not be null.");
-        super.refreshIndex();
-        SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient.prepareSearch(getIndexName()).setTypes(getIndexType()));
-        logger.trace("#########################Builder : {}\n\n", builder.toString());
-        SearchResponse searchResponse = builder.get();
-        if (searchResponse.status() != RestStatus.OK) {
+        SearchRequest searchRequest = this.prepareSearchRequest();
+        SearchSourceBuilder searchSourceBuilder = page.buildPage(new SearchSourceBuilder());
+        searchRequest.source(searchSourceBuilder);
+        logger.trace("@@@@@@@@@@@@@@@@@@@@@@@@@@@@SEARCH_SOURCE_BUILDER : {}\n\n", searchSourceBuilder.toString());
+        SearchResponse searchResponse = this.elasticSearchRestHighLevelClient.search(searchRequest, DEFAULT);
+        if (searchResponse.status() != OK) {
             throw new IllegalStateException("Problem in Search : " + searchResponse.status());
         }
         Long total = searchResponse.getHits().getTotalHits().value;
@@ -139,18 +157,18 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends GPBas
      * @param page
      * @param includeFields
      * @param excludeFields
-     * @return {@link IPageResult<D>}
+     * @return {@link IPageResult <D>}
      * @throws Exception
      */
     @Override
     public <P extends Page> IPageResult<D> find(@Nonnull(when = NEVER) P page, String[] includeFields, String[] excludeFields) throws Exception {
         checkArgument((page != null), "Page must not be null.");
-        super.refreshIndex();
-        SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient.prepareSearch(getIndexName()).setTypes(getIndexType()));
-        builder.setFetchSource(includeFields, excludeFields);
-        logger.trace("#########################Builder : {}\n\n", builder.toString());
-        SearchResponse searchResponse = builder.get();
-        if (searchResponse.status() != RestStatus.OK) {
+        SearchRequest searchRequest = this.prepareSearchRequest();
+        SearchSourceBuilder searchSourceBuilder = page.buildPage(new SearchSourceBuilder()).fetchSource(includeFields, excludeFields);
+        searchRequest.source(searchSourceBuilder);
+        logger.trace("#########################Builder : {}\n\n", searchSourceBuilder.toString());
+        SearchResponse searchResponse = this.elasticSearchRestHighLevelClient.search(searchRequest, DEFAULT);
+        if (searchResponse.status() != OK) {
             throw new IllegalStateException("Problem in Search : " + searchResponse.status());
         }
         Long total = searchResponse.getHits().getTotalHits().value;
@@ -171,17 +189,18 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends GPBas
      * @throws Exception
      */
     @Override
-    public <P extends Page, V extends Document> IPageResult<V> find(@Nonnull(when = NEVER) P page, String[] includeFields, String[] excludeFields,
-            @Nonnull(when = NEVER) Class<V> classe) throws Exception {
+    public <P extends Page, V extends Document> IPageResult<V> find(@Nonnull(when = NEVER) P page, String[] includeFields,
+            String[] excludeFields, @Nonnull(when = NEVER) Class<V> classe) throws Exception {
         checkArgument((page != null), "Page must not be null.");
         checkArgument(classe != null, "The Parameter subType must not be null.");
         checkNotNull(classe, "The Parameter classe must not be null.");
-        super.refreshIndex();
-        SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient.prepareSearch(getIndexName()).setTypes(getIndexType()));
-        builder.setFetchSource(includeFields, excludeFields);
-        logger.trace("#########################Builder : {}\n\n", builder.toString());
-        SearchResponse searchResponse = builder.get();
-        if (searchResponse.status() != RestStatus.OK) {
+        SearchRequest searchRequest = this.prepareSearchRequest();
+        SearchSourceBuilder searchSourceBuilder = page.buildPage(new SearchSourceBuilder());
+        searchSourceBuilder.fetchSource(includeFields, excludeFields);
+        searchRequest.source(searchSourceBuilder);
+        logger.trace("#########################Builder : {}\n\n", searchSourceBuilder.toString());
+        SearchResponse searchResponse = this.elasticSearchRestHighLevelClient.search(searchRequest, DEFAULT);
+        if (searchResponse.status() != OK) {
             throw new IllegalStateException("Problem in Search : " + searchResponse.status());
         }
         Long total = searchResponse.getHits().getTotalHits().value;
@@ -197,18 +216,19 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends GPBas
      * @param page
      * @param includeField
      * @param excludeField
-     * @return {@link IPageResult<D>}
+     * @return {@link IPageResult <D>}
      * @throws Exception
      */
     @Override
     public <P extends Page> IPageResult<D> find(@Nonnull(when = NEVER) P page, String includeField, String excludeField) throws Exception {
         checkArgument((page != null), "Page must not be null.");
-        super.refreshIndex();
-        SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient.prepareSearch(getIndexName()).setTypes(getIndexType()));
-        builder.setFetchSource(includeField, excludeField);
-        logger.trace("#########################Builder : {}\n\n", builder.toString());
-        SearchResponse searchResponse = builder.get();
-        if (searchResponse.status() != RestStatus.OK) {
+        SearchRequest searchRequest = this.prepareSearchRequest();
+        SearchSourceBuilder searchSourceBuilder = page.buildPage(new SearchSourceBuilder());
+        searchSourceBuilder.fetchSource(includeField, excludeField);
+        searchRequest.source(searchSourceBuilder);
+        logger.trace("#########################Builder : {}\n\n", searchSourceBuilder.toString());
+        SearchResponse searchResponse = this.elasticSearchRestHighLevelClient.search(searchRequest, DEFAULT);
+        if (searchResponse.status() != OK) {
             throw new IllegalStateException("Problem in Search : " + searchResponse.status());
         }
         Long total = searchResponse.getHits().getTotalHits().value;
@@ -230,11 +250,12 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends GPBas
     public <P extends Page> SearchResponse find(@Nonnull(when = NEVER) P page, @Nonnull(when = NEVER) AbstractAggregationBuilder aggregationBuilder) throws Exception {
         checkArgument((page != null), "Page must not be null.");
         checkArgument((aggregationBuilder != null), "AggregationBuilder must not be null.");
-        super.refreshIndex();
-        SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient.prepareSearch(getIndexName()).setTypes(getIndexType())).addAggregation(aggregationBuilder);
-        logger.trace("#########################Builder : {}\n\n", builder.toString());
-        SearchResponse searchResponse = builder.get();
-        if (searchResponse.status() != RestStatus.OK) {
+        SearchRequest searchRequest = this.prepareSearchRequest();
+        SearchSourceBuilder searchSourceBuilder = page.buildPage(new SearchSourceBuilder()).aggregation(aggregationBuilder);
+        searchRequest.source(searchSourceBuilder);
+        logger.trace("#########################Builder : {}\n\n", searchSourceBuilder.toString());
+        SearchResponse searchResponse = this.elasticSearchRestHighLevelClient.search(searchRequest, DEFAULT);
+        if (searchResponse.status() != OK) {
             throw new IllegalStateException("Problem in Search : " + searchResponse.status());
         }
         return searchResponse;
@@ -248,13 +269,14 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends GPBas
     @Override
     public <P extends Page> Long count(@Nonnull(when = NEVER) P page) throws Exception {
         checkArgument((page != null), "Page must not be null.");
-        super.refreshIndex();
-        SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient.prepareSearch(getIndexName()).setTypes(getIndexType()));
-        logger.trace("#########################Builder : {}\n\n", builder.toString());
-        SearchResponse searchResponse = builder.get();
-        if (searchResponse.status() != RestStatus.OK) {
-            throw new IllegalStateException("Problem in Search : " + searchResponse.status());
+        CountRequest countRequest = new CountRequest(this.getIndexName());
+        SearchSourceBuilder searchSourceBuilder = page.buildPage(new SearchSourceBuilder());
+        countRequest.source(searchSourceBuilder);
+        logger.trace("#########################Builder : {}\n\n", searchSourceBuilder.toString());
+        CountResponse countResponse = this.elasticSearchRestHighLevelClient.count(countRequest, DEFAULT);
+        if (countResponse.status() != OK) {
+            throw new IllegalStateException("Problem in Search : " + countResponse.status());
         }
-        return searchResponse.getHits().getTotalHits().value;
+        return countResponse.getCount();
     }
 }

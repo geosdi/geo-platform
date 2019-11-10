@@ -73,7 +73,7 @@ public interface IBooleanSearch extends IGPQuerySearch {
          * @param theField
          * @param theType
          */
-        public AbstractBooleanSearch(@Nonnull(when = NEVER) String theField, @Nonnull(when = NEVER) BooleanQueryType theType) {
+        protected AbstractBooleanSearch(@Nonnull(when = NEVER) String theField, @Nonnull(when = NEVER) BooleanQueryType theType) {
             checkArgument(((theField != null) && !(theField.trim().isEmpty())), "The Parameter Field must not be null or an Empty String.");
             checkArgument((theType != null), "The Parameter Type must not be null.");
             this.field = theField;
@@ -85,7 +85,7 @@ public interface IBooleanSearch extends IGPQuerySearch {
          * @param theValue
          * @param theType
          */
-        public AbstractBooleanSearch(@Nonnull(when = NEVER) String theField, @Nonnull(when = NEVER) Object theValue, @Nonnull(when = NEVER) BooleanQueryType theType) {
+        protected AbstractBooleanSearch(@Nonnull(when = NEVER) String theField, @Nonnull(when = NEVER) Object theValue, @Nonnull(when = NEVER) BooleanQueryType theType) {
             checkArgument(((theField != null) && !(theField.trim().isEmpty())), "The Parameter Field must not be null or an Empty String.");
             checkArgument(((theValue != null)), "The Parameter Value must not be null.");
             checkArgument((theType != null), "The Parameter Type must not be null.");
@@ -99,7 +99,7 @@ public interface IBooleanSearch extends IGPQuerySearch {
          * @param theType
          * @param theOperator
          */
-        public AbstractBooleanSearch(@Nonnull(when = NEVER) Object theValue, @Nonnull(when = NEVER) BooleanQueryType theType, @Nonnull(when = NEVER) Operator theOperator) {
+        protected AbstractBooleanSearch(@Nonnull(when = NEVER) Object theValue, @Nonnull(when = NEVER) BooleanQueryType theType, @Nonnull(when = NEVER) Operator theOperator) {
             checkArgument(((theValue != null)), "The Parameter Value must not be null.");
             checkArgument((theType != null), "The Parameter Type must not be null.");
             checkArgument((theOperator != null), "The Parameter Operator must not be null.");
@@ -114,7 +114,7 @@ public interface IBooleanSearch extends IGPQuerySearch {
          * @param theType
          * @param theOperator
          */
-        public AbstractBooleanSearch(@Nonnull(when = NEVER) Object theValue, @Nonnull(when = NEVER) String theField,
+        protected AbstractBooleanSearch(@Nonnull(when = NEVER) Object theValue, @Nonnull(when = NEVER) String theField,
                 @Nonnull(when = NEVER) BooleanQueryType theType, @Nonnull(when = NEVER) Operator theOperator) {
             checkArgument(((theValue != null)), "The Parameter Value must not be null.");
             checkArgument((theType != null), "The Parameter Type must not be null.");

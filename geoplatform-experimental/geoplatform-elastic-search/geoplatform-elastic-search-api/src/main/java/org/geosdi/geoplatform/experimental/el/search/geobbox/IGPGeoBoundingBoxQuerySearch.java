@@ -42,7 +42,10 @@ import org.elasticsearch.index.query.QueryBuilder;
 import org.geosdi.geoplatform.experimental.el.search.bool.IBooleanSearch;
 import org.locationtech.jts.geom.Envelope;
 
+import javax.annotation.Nonnull;
+
 import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
 import static org.elasticsearch.index.query.QueryBuilders.geoBoundingBoxQuery;
 
 /**
@@ -56,9 +59,6 @@ public interface IGPGeoBoundingBoxQuerySearch extends IBooleanSearch {
      */
     Envelope getEnvelope();
 
-    /**
-     *
-     */
     @Immutable
     @Getter
     class GPGeoBoundingBoxQuerySearch extends AbstractBooleanSearch implements IGPGeoBoundingBoxQuerySearch {
@@ -70,7 +70,8 @@ public interface IGPGeoBoundingBoxQuerySearch extends IBooleanSearch {
          * @param theType
          * @param theEnvelope
          */
-        public GPGeoBoundingBoxQuerySearch(String theField, BooleanQueryType theType, Envelope theEnvelope) {
+        public GPGeoBoundingBoxQuerySearch(@Nonnull(when = NEVER) String theField, @Nonnull(when = NEVER) BooleanQueryType theType,
+                @Nonnull(when = NEVER) Envelope theEnvelope) {
             super(theField, theType);
             checkArgument(theEnvelope != null, "The Parameter Envelope must not be null.");
             this.envelope = theEnvelope;
@@ -88,8 +89,7 @@ public interface IGPGeoBoundingBoxQuerySearch extends IBooleanSearch {
          * @return {@link GeoBoundingBoxQueryBuilder}
          */
         protected final GeoBoundingBoxQueryBuilder buildGeoBoundingBoxQueryBuilder() {
-            return geoBoundingBoxQuery(this.field)
-                    .setCorners(new GeoPoint(this.envelope.getMaxY(), this.envelope.getMinX()),
+            return geoBoundingBoxQuery(this.field).setCorners(new GeoPoint(this.envelope.getMaxY(), this.envelope.getMinX()),
                             new GeoPoint(this.envelope.getMinY(), this.envelope.getMaxX()));
         }
     }

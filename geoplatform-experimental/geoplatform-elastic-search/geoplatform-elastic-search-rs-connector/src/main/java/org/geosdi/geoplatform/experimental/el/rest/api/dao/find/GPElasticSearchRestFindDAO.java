@@ -32,14 +32,49 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.experimental.el.rest.api.dao;
+package org.geosdi.geoplatform.experimental.el.rest.api.dao.find;
 
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
-import org.geosdi.geoplatform.experimental.el.rest.api.dao.find.GPElasticSearchRestFindDAO;
+import org.geosdi.geoplatform.experimental.el.condition.PredicateCondition;
+import org.geosdi.geoplatform.experimental.el.rest.api.dao.page.GPPageableElasticSearchRestDAO;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.meta.When;
+import java.util.List;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPElasticSearchRestDAO<D extends Document> extends GPElasticSearchRestFindDAO<D> {
+public interface GPElasticSearchRestFindDAO<D extends Document> extends GPPageableElasticSearchRestDAO<D> {
+
+    /**
+     * @param theDocumentID
+     * @return {@link D}
+     * @throws Exception
+     */
+    D findByID(@Nonnull(when = When.NEVER) String theDocumentID) throws Exception;
+
+    /**
+     * @return {@link List<D>}
+     * @throws Exception
+     */
+    List<D> findLasts() throws Exception;
+
+    /**
+     * @param ids
+     * @return {@link List<D>}
+     * @throws Exception
+     */
+    List<D> findByIDS(@Nonnull(when = NEVER) Iterable<String> ids, @Nullable PredicateCondition<D> condition) throws Exception;
+
+    /**
+     * @param ids
+     * @return {@link List<D>}
+     * @throws Exception
+     */
+    List<D> findByIDS(@Nonnull(when = NEVER) Iterable<String> ids) throws Exception;
 }

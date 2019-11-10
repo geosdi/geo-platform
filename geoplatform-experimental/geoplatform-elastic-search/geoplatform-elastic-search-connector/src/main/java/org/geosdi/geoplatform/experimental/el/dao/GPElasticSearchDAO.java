@@ -41,10 +41,13 @@ import org.geosdi.geoplatform.experimental.el.api.model.Document;
 import org.geosdi.geoplatform.experimental.el.condition.PredicateCondition;
 import org.springframework.beans.factory.InitializingBean;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.nio.file.Path;
 import java.util.List;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @param <D> Entity to Persist in ElasticSearch
@@ -105,14 +108,14 @@ public interface GPElasticSearchDAO<D extends Document> extends ElasticSearchDAO
      * @return {@link List<D>}
      * @throws Exception
      */
-    List<D> findByIDS(Iterable<String> ids, PredicateCondition<D> condition) throws Exception;
+    List<D> findByIDS(@Nonnull(when = NEVER) Iterable<String> ids, @Nullable PredicateCondition<D> condition) throws Exception;
 
     /**
      * @param ids
      * @return {@link List<D>}
      * @throws Exception
      */
-    List<D> findByIDS(Iterable<String> ids) throws Exception;
+    List<D> findByIDS(@Nonnull(when = NEVER) Iterable<String> ids) throws Exception;
 
     /**
      * @param <D>

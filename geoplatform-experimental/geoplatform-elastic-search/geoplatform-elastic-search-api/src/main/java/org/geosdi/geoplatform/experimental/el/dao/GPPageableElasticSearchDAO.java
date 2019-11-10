@@ -147,7 +147,7 @@ public interface GPPageableElasticSearchDAO<D extends Document> {
      * @return {@link Long}
      * @throws Exception
      */
-    <P extends Page> Long count(P page) throws Exception;
+    <P extends Page> Long count(@Nonnull(when = NEVER) P page) throws Exception;
 
     interface IPageResult<D> {
 

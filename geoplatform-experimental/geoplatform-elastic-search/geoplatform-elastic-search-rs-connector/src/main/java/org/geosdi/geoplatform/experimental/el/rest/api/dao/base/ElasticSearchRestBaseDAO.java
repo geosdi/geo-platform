@@ -34,7 +34,9 @@
  */
 package org.geosdi.geoplatform.experimental.el.rest.api.dao.base;
 
+import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.search.SearchHit;
 import org.geosdi.geoplatform.experimental.el.api.function.GPElasticSearchCheck;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
 import org.geosdi.geoplatform.experimental.el.rest.api.index.settings.GPElasticSearchRestIndexSettings;
@@ -46,6 +48,7 @@ import org.slf4j.LoggerFactory;
 import javax.annotation.*;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 import static javax.annotation.meta.When.NEVER;
 import static org.elasticsearch.client.RequestOptions.DEFAULT;
 
@@ -56,6 +59,8 @@ import static org.elasticsearch.client.RequestOptions.DEFAULT;
 public abstract class ElasticSearchRestBaseDAO<D extends Document> implements GPElasticSearchRestBaseDAO<D> {
 
     protected static final Logger logger = LoggerFactory.getLogger(ElasticSearchRestBaseDAO.class.getSimpleName());
+    //
+    protected static final String EMPTY_JSON = "{}";
     //
     private final GPElasticSearchCheck<GPElasticSearchRestIndexSettings, Class<D>, Exception> settingsCheck;
     private GPElasticSearchRestIndexSettings settings;
@@ -100,8 +105,7 @@ public abstract class ElasticSearchRestBaseDAO<D extends Document> implements GP
      */
     @Override
     public GPElasticSearchRestIndexSettings getSettings() throws Exception {
-        return this.settings = ((this.settings != null) ? this.settings :
-                this.settingsCheck.apply(this.elasticSearchRestMapper.getEntityClass()));
+        return this.settings = ((this.settings != null) ? this.settings : this.settingsCheck.apply(this.elasticSearchRestMapper.getEntityClass()));
     }
 
     /**
@@ -110,6 +114,103 @@ public abstract class ElasticSearchRestBaseDAO<D extends Document> implements GP
     @Override
     public RestHighLevelClient highLevelClient() {
         return this.elasticSearchRestHighLevelClient;
+    }
+
+    /**
+     * @return {@link GPElasticSearchRestMapper<D>}
+     */
+    @Override
+    public GPElasticSearchRestMapper<D> mapper() {
+        return this.elasticSearchRestMapper;
+    }
+
+    /**
+     * @param documentAsString
+     * @return {@link D}
+     * @throws Exception
+     */
+    protected D readDocument(@Nonnull(when = NEVER) String documentAsString) throws Exception {
+        checkArgument(((documentAsString != null) && !(documentAsString.trim().isEmpty()) && !(documentAsString.equalsIgnoreCase(EMPTY_JSON))), "The String to Wrap must not be null or Empty");
+        return this.elasticSearchRestMapper.read(documentAsString);
+    }
+
+    /**
+     * @param searchHit
+     * @return {@link D}
+     */
+    protected D readDocument(@Nonnull(when = NEVER) SearchHit searchHit) {
+        try {
+            checkNotNull(searchHit, "The SearchHit must not be null.");
+            D document = readDocument(searchHit.getSourceAsString());
+            if (!document.isIdSetted()) {
+                document.setId(searchHit.getId());
+            }
+            return document;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * @param searchHit
+     * @param classe
+     * @param <V>
+     * @return {@link V}
+     */
+    protected <V extends Document> V readDocument(@Nonnull(when = NEVER) SearchHit searchHit, @Nonnull(when = NEVER) Class<V> classe) {
+        try {
+            checkNotNull(searchHit, "The SearchHit must not be null.");
+            checkNotNull(classe, "The Parameter classe must not be null.");
+            V subClass = this.readDocument(searchHit.getSourceAsString(), classe);
+            if (!subClass.isIdSetted()) {
+                subClass.setId(searchHit.getId());
+            }
+            return subClass;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * @param documentAsString
+     * @param classe
+     * @return {@link V}
+     * @throws Exception
+     */
+    protected <V extends Document> V readDocument(@Nonnull(when = NEVER) String documentAsString, @Nonnull(when = NEVER) Class<V> classe) throws Exception {
+        checkArgument(((documentAsString != null) && !(documentAsString.trim().isEmpty()) && !(documentAsString.equalsIgnoreCase(EMPTY_JSON))), "The String to Wrap must not be null or Empty");
+        checkArgument(classe != null, "The Parameter classe must not be null.");
+        return this.elasticSearchRestMapper.read(documentAsString, classe);
+    }
+
+    /**
+     * @param document
+     * @return {@link String}
+     * @throws Exception
+     */
+    protected String writeDocumentAsString(@Nonnull(when = NEVER) D document) throws Exception {
+        checkNotNull(document, "The Document must not be null.");
+        return this.elasticSearchRestMapper.writeAsString(document);
+    }
+
+    /**
+     * @param response
+     * @return {@link D}
+     */
+    protected D readGetResponse(@Nonnull(when = NEVER) GetResponse response) {
+        try {
+            checkNotNull(response, "The GetResponse must not be null.");
+            D document = readDocument(response.getSourceAsString());
+            if (!document.isIdSetted()) {
+                document.setId(response.getId());
+            }
+            return document;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
     }
 
     /**

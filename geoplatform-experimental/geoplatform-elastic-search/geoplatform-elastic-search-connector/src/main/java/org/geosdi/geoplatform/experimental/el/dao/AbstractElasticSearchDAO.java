@@ -51,7 +51,6 @@ import org.geosdi.geoplatform.experimental.el.condition.PredicateCondition;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Stream;
@@ -60,6 +59,7 @@ import java.util.stream.StreamSupport;
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
+import static java.nio.file.Files.list;
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toList;
 import static javax.annotation.meta.When.NEVER;
@@ -80,7 +80,8 @@ public abstract class AbstractElasticSearchDAO<D extends Document> extends Pagea
      * @throws Exception
      */
     @Override
-    public D persist(D document) throws Exception {
+    public D persist(@Nonnull(when = NEVER) D document) throws Exception {
+        checkArgument(document != null, "The Parameter document must not be null.");
         logger.debug("#################Try to insert {}\n\n", document);
         IndexResponse response;
         if (document.isIdSetted()) {
@@ -103,9 +104,9 @@ public abstract class AbstractElasticSearchDAO<D extends Document> extends Pagea
      * @throws Exception
      */
     @Override
-    public void update(D document) throws Exception {
-        checkArgument(((document != null) && ((document.getId() != null) && !(document.getId()
-                .isEmpty()))), "The {} to Update must  not be null or ID must not be null or Empty.", this.mapper.getDocumentClassName());
+    public void update(@Nonnull(when = NEVER) D document) throws Exception {
+        checkArgument(((document != null) && ((document.getId() != null) && !(document.getId().trim().isEmpty()))),
+                "The {} to Update must  not be null or ID must not be null or Empty.", this.mapper.getDocumentClassName());
         logger.debug("################Try to Update : {}\n\n", document);
         this.elastichSearchClient.prepareUpdate(getIndexName(), getIndexType(), document.getId())
                 .setDoc(this.mapper.writeAsString(document), JSON)
@@ -147,7 +148,7 @@ public abstract class AbstractElasticSearchDAO<D extends Document> extends Pagea
      * @throws Exception
      */
     @Override
-    public BulkResponse persist(Iterable<D> documents) throws Exception {
+    public BulkResponse persist(@Nonnull(when = NEVER) Iterable<D> documents) throws Exception {
         checkArgument(((documents != null)), "The Documents to save, must not be null.");
         BulkRequestBuilder bulkRequest = this.elastichSearchClient.prepareBulk();
         StreamSupport.stream(documents.spliterator(), FALSE)
@@ -167,7 +168,7 @@ public abstract class AbstractElasticSearchDAO<D extends Document> extends Pagea
      * @throws Exception
      */
     @Override
-    public BulkResponse update(Iterable<D> documents) throws Exception {
+    public BulkResponse update(@Nonnull(when = NEVER) Iterable<D> documents) throws Exception {
         checkArgument(((documents != null)), "The Documents to update, must not be null.");
         BulkRequestBuilder bulkRequest = this.elastichSearchClient.prepareBulk();
         StreamSupport.stream(documents.spliterator(), FALSE)
@@ -189,10 +190,9 @@ public abstract class AbstractElasticSearchDAO<D extends Document> extends Pagea
      * @throws Exception
      */
     @Override
-    public BulkResponse persist(Path direrctory) throws Exception {
-        checkArgument((direrctory != null) && (direrctory.toFile()
-                .isDirectory()), "The Parameter Directory must not be null and must be a Directory.");
-        return this.persist(Files.list(direrctory)
+    public BulkResponse persist(@Nonnull(when = NEVER) Path direrctory) throws Exception {
+        checkArgument((direrctory != null) && (direrctory.toFile().isDirectory()), "The Parameter Directory must not be null and must be a Directory.");
+        return this.persist(list(direrctory)
                 .filter(path -> path.toFile()
                         .getName()
                         .endsWith(".json"))
@@ -202,9 +202,8 @@ public abstract class AbstractElasticSearchDAO<D extends Document> extends Pagea
     }
 
     @Override
-    public void delete(String id) {
-        checkArgument(((id != null) && !(id.trim()
-                .isEmpty())), "The ID must not be null or an Empty String");
+    public void delete(@Nonnull(when = NEVER) String id) {
+        checkArgument(((id != null) && !(id.trim().isEmpty())), "The ID must not be null or an Empty String");
         DeleteResponse response = elastichSearchClient.prepareDelete(getIndexName(), getIndexType(), id)
                 .execute()
                 .actionGet();
@@ -240,7 +239,8 @@ public abstract class AbstractElasticSearchDAO<D extends Document> extends Pagea
      * @throws Exception
      */
     @Override
-    public Long count(QueryBuilder queryBuilder) throws Exception {
+    public Long count(@Nonnull(when = NEVER) QueryBuilder queryBuilder) throws Exception {
+        checkArgument(queryBuilder != null, "The Parameter queryBuilder must not be null.");
         return this.elastichSearchClient.prepareSearch(getIndexName())
                 .setQuery(queryBuilder)
                 .setTypes(getIndexType())

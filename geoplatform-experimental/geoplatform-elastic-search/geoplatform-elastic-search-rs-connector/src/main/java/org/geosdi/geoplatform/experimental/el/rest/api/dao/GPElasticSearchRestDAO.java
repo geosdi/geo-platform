@@ -34,12 +34,81 @@
  */
 package org.geosdi.geoplatform.experimental.el.rest.api.dao;
 
+import org.elasticsearch.action.ActionListener;
+import org.elasticsearch.action.bulk.BulkResponse;
+import org.elasticsearch.action.index.IndexResponse;
+import org.elasticsearch.client.core.CountResponse;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
 import org.geosdi.geoplatform.experimental.el.rest.api.dao.find.GPElasticSearchRestFindDAO;
+
+import javax.annotation.Nonnull;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 public interface GPElasticSearchRestDAO<D extends Document> extends GPElasticSearchRestFindDAO<D> {
+
+    /**
+     * @param document
+     * @return D
+     * @throws Exception
+     */
+    D persist(@Nonnull(when = NEVER) D document) throws Exception;
+
+    /**
+     * @param document
+     * @param listener
+     * @throws Exception
+     */
+    void persistAsync(@Nonnull(when = NEVER) D document, @Nonnull(when = NEVER) ActionListener<IndexResponse> listener)
+            throws Exception;
+
+    /**
+     * @param documents
+     * @return {@link BulkResponse}
+     * @throws Exception
+     */
+    BulkResponse persist(@Nonnull(when = NEVER) Iterable<D> documents) throws Exception;
+
+    /**
+     * @param document
+     * @return {@link Boolean}
+     * @throws Exception
+     */
+    Boolean update(@Nonnull(when = NEVER) D document) throws Exception;
+
+    /**
+     * @param documents
+     * @return {@link BulkResponse}
+     * @throws Exception
+     */
+    BulkResponse update(@Nonnull(when = NEVER) Iterable<D> documents) throws Exception;
+
+    /**
+     * <p>
+     * Delete Document by ElasticSearch ID</p>
+     *
+     * @param theID
+     * @return {@link Boolean}
+     * @throws java.lang.Exception
+     */
+    Boolean delete(@Nonnull(when = NEVER) String theID) throws Exception;
+
+    /**
+     * <p>
+     * Return the number of Documents</p>
+     *
+     * @return {@link Long}
+     * @throws java.lang.Exception
+     */
+    Long count() throws Exception;
+
+    /**
+     * @param theListener
+     * @throws Exception
+     */
+    void countAsync(@Nonnull(when = NEVER) ActionListener<CountResponse> theListener) throws Exception;
 }

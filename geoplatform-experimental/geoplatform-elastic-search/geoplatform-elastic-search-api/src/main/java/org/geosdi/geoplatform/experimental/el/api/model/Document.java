@@ -58,5 +58,7 @@ public interface Document extends Serializable {
      * @return {@link Boolean}
      */
     @JsonIgnore
-    Boolean isIdSetted();
+    default Boolean isIdSetted() {
+        return (getId() != null) && !(getId().trim().isEmpty());
+    }
 }

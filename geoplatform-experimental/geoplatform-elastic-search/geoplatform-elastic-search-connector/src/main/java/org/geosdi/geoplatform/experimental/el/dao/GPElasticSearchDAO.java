@@ -61,21 +61,21 @@ public interface GPElasticSearchDAO<D extends Document> extends ElasticSearchDAO
      * @return D
      * @throws Exception
      */
-    D persist(D document) throws Exception;
+    D persist(@Nonnull(when = NEVER) D document) throws Exception;
 
     /**
      * @param documents
      * @return {@link BulkResponse}
      * @throws Exception
      */
-    BulkResponse persist(Iterable<D> documents) throws Exception;
+    BulkResponse persist(@Nonnull(when = NEVER) Iterable<D> documents) throws Exception;
 
     /**
      * @param documents
      * @return {@link BulkResponse}
      * @throws Exception
      */
-    BulkResponse update(Iterable<D> documents) throws Exception;
+    BulkResponse update(@Nonnull(when = NEVER) Iterable<D> documents) throws Exception;
 
     /**
      * <p>Persist all Files json in a Directory. This method in not recursive for the Directory.</p>
@@ -84,13 +84,13 @@ public interface GPElasticSearchDAO<D extends Document> extends ElasticSearchDAO
      * @return {@link}
      * @throws Exception
      */
-    BulkResponse persist(Path direrctory) throws Exception;
+    BulkResponse persist(@Nonnull(when = NEVER) Path direrctory) throws Exception;
 
     /**
      * @param document
      * @throws Exception
      */
-    void update(D document) throws Exception;
+    void update(@Nonnull(when = NEVER) D document) throws Exception;
 
     /**
      * @throws Exception
@@ -129,7 +129,7 @@ public interface GPElasticSearchDAO<D extends Document> extends ElasticSearchDAO
          * @param id
          * @throws java.lang.Exception
          */
-        void delete(String id) throws Exception;
+        void delete(@Nonnull(when = NEVER) String id) throws Exception;
 
         /**
          * <p>
@@ -140,7 +140,7 @@ public interface GPElasticSearchDAO<D extends Document> extends ElasticSearchDAO
          * @return D the Document Found
          * @throws Exception
          */
-        D find(String id) throws Exception;
+        D find(@Nonnull(when = NEVER) String id) throws Exception;
 
         /**
          * <p>
@@ -156,7 +156,7 @@ public interface GPElasticSearchDAO<D extends Document> extends ElasticSearchDAO
          * @return {@link Long}
          * @throws Exception
          */
-        Long count(QueryBuilder queryBuilder) throws Exception;
+        Long count(@Nonnull(when = NEVER) QueryBuilder queryBuilder) throws Exception;
 
         /**
          * @param builder

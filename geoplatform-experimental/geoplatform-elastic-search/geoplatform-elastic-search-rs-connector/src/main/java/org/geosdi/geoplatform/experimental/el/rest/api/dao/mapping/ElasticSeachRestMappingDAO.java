@@ -62,8 +62,7 @@ public abstract class ElasticSeachRestMappingDAO<D extends Document> extends Ela
      * @param theEntityClass
      * @param theJacksonSupport
      */
-    protected ElasticSeachRestMappingDAO(@Nonnull(when = NEVER) Class<D> theEntityClass,
-            @Nullable GPJacksonSupport theJacksonSupport) {
+    protected ElasticSeachRestMappingDAO(@Nonnull(when = NEVER) Class<D> theEntityClass, @Nullable GPJacksonSupport theJacksonSupport) {
         super(theEntityClass, theJacksonSupport);
     }
 

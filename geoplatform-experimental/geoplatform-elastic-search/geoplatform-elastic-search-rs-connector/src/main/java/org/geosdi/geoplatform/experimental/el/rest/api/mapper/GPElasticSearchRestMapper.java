@@ -78,7 +78,7 @@ public abstract class GPElasticSearchRestMapper<D extends Document> extends GPBa
     protected String createMapperName(String theElasticSearchDAOName) {
         return this.getClass()
                 .getSimpleName() + "{\n"
-                + "elasticSearchRestDAO = " + theElasticSearchDAOName + "\n"
+                + "  elasticSearchRestDAO = " + theElasticSearchDAOName + "\n"
                 + ", documentClass = " + this.getDocumentClassName() + "\n"
                 + "}";
     }

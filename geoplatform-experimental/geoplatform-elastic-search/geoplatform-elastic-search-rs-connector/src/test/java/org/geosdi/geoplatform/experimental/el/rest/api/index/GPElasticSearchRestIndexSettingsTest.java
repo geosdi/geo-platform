@@ -82,14 +82,6 @@ public class GPElasticSearchRestIndexSettingsTest {
         private static final long serialVersionUID = 1700741526871605523L;
         //
         private String id;
-
-        /**
-         * @return {@link Boolean}
-         */
-        @Override
-        public Boolean isIdSetted() {
-            return (this.id != null) && !(this.id.trim().isEmpty());
-        }
     }
 
     @Getter
@@ -100,13 +92,5 @@ public class GPElasticSearchRestIndexSettingsTest {
         private static final long serialVersionUID = 1700741526871605523L;
         //
         private String id;
-
-        /**
-         * @return {@link Boolean}
-         */
-        @Override
-        public Boolean isIdSetted() {
-            return (this.id != null) && !(this.id.trim().isEmpty());
-        }
     }
 }

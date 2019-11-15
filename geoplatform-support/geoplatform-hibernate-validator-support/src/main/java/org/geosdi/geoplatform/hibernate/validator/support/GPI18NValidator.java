@@ -41,6 +41,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.validation.Configuration;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -79,7 +80,8 @@ public abstract class GPI18NValidator<P extends Object, MESSAGE extends Object> 
      * @return {@link MESSAGE}
      */
     @Override
-    public MESSAGE validate(P thePojo, Locale locale) {
+    public MESSAGE validate(@Nonnull(when = NEVER) P thePojo, @Nullable Locale locale) {
+        checkArgument(thePojo != null, "The Parameter pojo must not be null.");
         logger.trace("################################ {} - Validating........ {} , with Locale : {}\n",
                 getValidatorName(), thePojo, locale);
         this.messageInterpolator.setDefaultLocale(locale);
@@ -96,7 +98,9 @@ public abstract class GPI18NValidator<P extends Object, MESSAGE extends Object> 
      * @return {@link MESSAGE}
      */
     @Override
-    public MESSAGE validate(P thePojo, Locale locale, Class<?>... groups) {
+    public MESSAGE validate(@Nonnull(when = NEVER) P thePojo, @Nullable Locale locale, @Nonnull(when = NEVER) Class<?>... groups) {
+        checkArgument(thePojo != null, "The Parameter pojo must not be null.");
+        checkArgument(groups != null, "The Parameter groups must not be null.");
         logger.trace("################################ {} - Validating........ {} , with Locale : {}, " +
                 "with Groups : {}\n", getValidatorName(), thePojo, locale, groups);
         this.messageInterpolator.setDefaultLocale(locale);

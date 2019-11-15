@@ -35,9 +35,11 @@
  */
 package org.geosdi.geoplatform.experimental.mongodb.configuration.properties;
 
+import com.mongodb.MongoCredential;
 import org.geosdi.geoplatform.experimental.mongodb.configuration.auth.MongoAuth;
-import org.springframework.data.authentication.UserCredentials;
 import org.springframework.util.StringUtils;
+
+import static com.mongodb.MongoCredential.createCredential;
 
 /**
  *
@@ -50,7 +52,7 @@ public class GPMongoProperties implements MongoBaseProperties {
     private Integer mongoPort;
     private String mongoDatabaseName;
     private MongoAuth mongoAuth;
-    private UserCredentials userCredentials;
+    private MongoCredential userCredentials;
 
     @Override
     public void setMongoHost(String theMongoHost) {
@@ -93,11 +95,11 @@ public class GPMongoProperties implements MongoBaseProperties {
     }
 
     @Override
-    public UserCredentials getUserCredential() {
+    public MongoCredential getUserCredential() {
         return this.userCredentials = ((this.mongoAuth != null)
                 && (this.mongoAuth.isMongoAuthEnabled()))
-                ? new UserCredentials(mongoAuth.getMongoUserName(),
-                        mongoAuth.getMongoPassword()) : null;
+                ? createCredential(mongoAuth.getMongoUserName(), this.mongoDatabaseName,
+                        mongoAuth.getMongoPassword().toCharArray()) : null;
     }
 
     @Override

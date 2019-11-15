@@ -35,16 +35,17 @@
  */
 package org.geosdi.geoplatform.experimental.mongodb.spring.configuration.properties;
 
-import javax.annotation.Resource;
-import javax.inject.Named;
+import com.mongodb.MongoCredential;
 import net.jcip.annotations.Immutable;
 import org.geosdi.geoplatform.experimental.mongodb.configuration.auth.MongoAuth;
-import org.geosdi.geoplatform.experimental.mongodb.configuration.properties.MongoPropertiesEnum;
 import org.geosdi.geoplatform.experimental.mongodb.configuration.properties.MongoProperties;
+import org.geosdi.geoplatform.experimental.mongodb.configuration.properties.MongoPropertiesEnum;
 import org.geosdi.geoplatform.experimental.mongodb.spring.annotation.GPMongoProp;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.authentication.UserCredentials;
 import org.springframework.util.StringUtils;
+
+import javax.annotation.Resource;
+import javax.inject.Named;
 
 /**
  *
@@ -64,7 +65,7 @@ public class GPSpringMongoProperties implements MongoProperties {
     private String mongoDatabaseName;
     @Resource(name = "gpSpringMongoAuth")
     private MongoAuth mongoAuth;
-    private UserCredentials userCredentials;
+    private MongoCredential userCredentials;
 
     @Override
     public String getMongoHost() {
@@ -91,15 +92,15 @@ public class GPSpringMongoProperties implements MongoProperties {
     }
 
     @Override
-    public UserCredentials getUserCredential() {
+    public MongoCredential getUserCredential() {
         return this.userCredentials;
     }
 
     @Override
     public void afterPropertiesSet() throws Exception {
         this.userCredentials = this.mongoAuth.isMongoAuthEnabled()
-                ? new UserCredentials(mongoAuth.getMongoUserName(),
-                        mongoAuth.getMongoPassword()) : UserCredentials.NO_CREDENTIALS;
+                ? MongoCredential.createCredential(mongoAuth.getMongoUserName(), this.mongoDatabaseName,
+                        mongoAuth.getMongoPassword().toCharArray()) : null;
     }
 
     @Override

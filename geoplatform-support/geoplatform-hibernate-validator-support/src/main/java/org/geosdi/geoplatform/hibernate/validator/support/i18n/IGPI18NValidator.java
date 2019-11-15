@@ -35,7 +35,11 @@
  */
 package org.geosdi.geoplatform.hibernate.validator.support.i18n;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.Locale;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -51,7 +55,7 @@ public interface IGPI18NValidator<P extends Object, MESSAGE extends Object> {
      * @param locale
      * @return {@link MESSAGE}
      */
-    MESSAGE validate(P thePojo, Locale locale);
+    MESSAGE validate(@Nonnull(when = NEVER) P thePojo, @Nullable Locale locale);
 
     /**
      * <p>Return Null, if there are no errors.</p>
@@ -61,7 +65,7 @@ public interface IGPI18NValidator<P extends Object, MESSAGE extends Object> {
      * @param groups
      * @return {@link MESSAGE}
      */
-    MESSAGE validate(P thePojo, Locale locale, Class<?>... groups);
+    MESSAGE validate(@Nonnull(when = NEVER) P thePojo, @Nullable Locale locale, @Nonnull(when = NEVER) Class<?>... groups);
 
     /**
      * @return {@link String}

@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.hibernate.validator.support.interpoletor;
 
+import javax.annotation.Nullable;
 import javax.validation.MessageInterpolator;
 import java.util.Locale;
 
@@ -47,5 +48,5 @@ public interface IGPI18NMessageInterpolator extends MessageInterpolator {
     /**
      * @param theDefaultLocale
      */
-    void setDefaultLocale(Locale theDefaultLocale);
+    void setDefaultLocale(@Nullable Locale theDefaultLocale);
 }

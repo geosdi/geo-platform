@@ -93,11 +93,6 @@
             <version>1.0</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-        </dependency>
-
         <!-- =========================================================== -->
         <!-- ============= ELASTIC SEARCH REST HIGH LEVEL CLIENT ======= -->
         <!-- =========================================================== -->

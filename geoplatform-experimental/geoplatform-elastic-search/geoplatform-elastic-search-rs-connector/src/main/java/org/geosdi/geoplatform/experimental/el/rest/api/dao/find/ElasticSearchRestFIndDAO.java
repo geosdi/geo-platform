@@ -64,13 +64,13 @@ import static org.geosdi.geoplatform.experimental.el.condition.PredicateConditio
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class ElasticSearchRestFIndDAO<D extends Document> extends PageableElasticSearchRestDAO<D> implements GPElasticSearchRestFindDAO<D> {
+public abstract class ElasticSearchRestFindDAO<D extends Document> extends PageableElasticSearchRestDAO<D> implements GPElasticSearchRestFindDAO<D> {
 
     /**
      * @param theEntityClass
      * @param theJacksonSupport
      */
-    protected ElasticSearchRestFIndDAO(@Nonnull(when = NEVER) Class<D> theEntityClass, @Nullable GPJacksonSupport theJacksonSupport) {
+    protected ElasticSearchRestFindDAO(@Nonnull(when = NEVER) Class<D> theEntityClass, @Nullable GPJacksonSupport theJacksonSupport) {
         super(theEntityClass, theJacksonSupport);
     }
 

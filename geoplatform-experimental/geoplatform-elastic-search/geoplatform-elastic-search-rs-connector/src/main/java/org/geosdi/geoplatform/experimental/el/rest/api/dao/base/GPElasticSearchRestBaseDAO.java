@@ -37,52 +37,19 @@ package org.geosdi.geoplatform.experimental.el.rest.api.dao.base;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
-import org.geosdi.geoplatform.experimental.el.rest.api.index.settings.GPElasticSearchRestIndexSettings;
-import org.geosdi.geoplatform.experimental.el.rest.api.mapper.GPElasticSearchRestMapper;
+import org.geosdi.geoplatform.experimental.el.rest.api.dao.support.GPElasticSearchRestSupportDAO;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPElasticSearchRestBaseDAO<D extends Document> {
+public interface GPElasticSearchRestBaseDAO<D extends Document> extends GPElasticSearchRestSupportDAO<D> {
 
     /**
      * @return {@link Boolean}
      * @throws Exception
      */
     Boolean isUpElasticSearchCluster() throws Exception;
-
-    /**
-     * @param <Settings>
-     * @return {@link Settings}
-     * @throws Exception
-     */
-    <Settings extends GPElasticSearchRestIndexSettings> Settings getSettings() throws Exception;
-
-    /**
-     * @return {@link String}
-     */
-    default String getIndexName() {
-        try {
-            return getSettings().getIndexName();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            throw new IllegalStateException(ex);
-        }
-    }
-
-    /**
-     * @return {@link Boolean}
-     * @throws Exception
-     */
-    default Boolean isCreateMapping() throws Exception {
-        return getSettings().isCreateMapping();
-    }
-
-    /**
-     * @return {@link GPElasticSearchRestMapper<D>}
-     */
-    GPElasticSearchRestMapper<D> mapper();
 
     /**
      * @return {@link RestHighLevelClient}

@@ -35,6 +35,8 @@
 package org.geosdi.geoplatform.experimental.el.search.bool;
 
 import org.elasticsearch.index.query.Operator;
+import org.geosdi.geoplatform.experimental.el.dao.GPPageableElasticSearchDAO;
+import org.geosdi.geoplatform.experimental.el.dao.GPPageableElasticSearchDAO.Page;
 import org.geosdi.geoplatform.experimental.el.search.IGPQuerySearch;
 
 import javax.annotation.Nonnull;
@@ -52,6 +54,14 @@ public interface IBooleanSearch extends IGPQuerySearch {
      * @return {@link BooleanQueryType}
      */
     BooleanQueryType getType();
+
+    /**
+     * @param <P>
+     * @return {@link P}
+     */
+    default <P extends Page> P toPage() {
+        return (P) new GPPageableElasticSearchDAO.QueriableSortablePage(this.buildQuery());
+    }
 
     /**
      *

@@ -47,9 +47,9 @@ import org.elasticsearch.action.update.UpdateRequest;
 import org.elasticsearch.action.update.UpdateResponse;
 import org.elasticsearch.client.core.CountRequest;
 import org.elasticsearch.client.core.CountResponse;
-import org.elasticsearch.rest.RestStatus;
+import org.geosdi.geoplatform.experimental.el.api.function.GPElasticSearchCheck;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
-import org.geosdi.geoplatform.experimental.el.rest.api.dao.find.ElasticSearchRestFIndDAO;
+import org.geosdi.geoplatform.experimental.el.rest.api.dao.find.ElasticSearchRestFindDAO;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 
 import javax.annotation.Nonnull;
@@ -61,17 +61,17 @@ import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 import static java.util.stream.StreamSupport.stream;
 import static javax.annotation.meta.When.NEVER;
-import static org.elasticsearch.action.DocWriteRequest.OpType.CREATE;
 import static org.elasticsearch.action.DocWriteResponse.Result.CREATED;
 import static org.elasticsearch.action.DocWriteResponse.Result.DELETED;
 import static org.elasticsearch.client.RequestOptions.DEFAULT;
 import static org.elasticsearch.common.xcontent.XContentType.JSON;
+import static org.elasticsearch.rest.RestStatus.OK;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class ElasticSearchRestDAO<D extends Document> extends ElasticSearchRestFIndDAO<D> implements GPElasticSearchRestDAO<D> {
+public abstract class ElasticSearchRestDAO<D extends Document> extends ElasticSearchRestFindDAO<D> implements GPElasticSearchRestDAO<D> {
 
     /**
      * @param theEntityClass
@@ -90,30 +90,37 @@ public abstract class ElasticSearchRestDAO<D extends Document> extends ElasticSe
     public D persist(@Nonnull(when = NEVER) D document) throws Exception {
         checkArgument(document != null, "The Parameter document must not be null.");
         logger.debug("############################Try to insert {}\n", document);
-        IndexRequest indexRequest = new IndexRequest(this.getIndexName());
-        IndexResponse response = this.elasticSearchRestHighLevelClient.index((document.isIdSetted() ?
-                indexRequest.id(document.getId()).source(this.writeDocumentAsString(document), JSON).opType(CREATE) :
-                indexRequest.source(this.writeDocumentAsString(document), JSON).opType(CREATE)), DEFAULT);
-        if (response.getResult() != CREATED) {
-            throw new IllegalStateException("Problem to persist document, status : " + response.status());
-        }
-        logger.debug("##############{} Created : {}\n\n", this.elasticSearchRestMapper.getDocumentClassName(), response.getResult());
-        return document;
+        GPElasticSearchCheck<D, D, Exception> check = this::index;
+        return check.apply(document);
     }
 
     /**
      * @param document
-     * @param listener
      * @throws Exception
      */
     @Override
-    public void persistAsync(@Nonnull(when = NEVER) D document, @Nonnull(when = NEVER) ActionListener<IndexResponse> listener) throws Exception {
+    public void persistAsync(@Nonnull(when = NEVER) D document) throws Exception {
         checkArgument(document != null, "The Parameter document must not be null.");
-        checkArgument(listener != null, "The Parameter listener must not be null.");
         IndexRequest indexRequest = new IndexRequest(this.getIndexName());
         this.elasticSearchRestHighLevelClient.indexAsync((document.isIdSetted() ?
                 indexRequest.id(document.getId()).source(this.writeDocumentAsString(document), JSON) :
-                indexRequest.source(this.writeDocumentAsString(document), JSON)), DEFAULT, listener);
+                indexRequest.source(this.writeDocumentAsString(document), JSON)), DEFAULT, new ActionListener<IndexResponse>() {
+
+            @Override
+            public void onResponse(IndexResponse indexResponse) {
+                if (indexResponse.getResult() != CREATED) {
+                    throw new IllegalStateException("Problem to persistAsync document, status : " + indexResponse.status());
+                }
+                document.setId(indexResponse.getId());
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                e.printStackTrace();
+                logger.error("#######################persistAsync error : {}\n", e.getMessage());
+                throw new IllegalStateException(e);
+            }
+        });
     }
 
     /**
@@ -124,7 +131,7 @@ public abstract class ElasticSearchRestDAO<D extends Document> extends ElasticSe
     @Override
     public BulkResponse persist(@Nonnull(when = NEVER) Iterable<D> documents) throws Exception {
         checkArgument((documents != null) && (Iterables.size(documents) > 0));
-        BulkRequest bulkRequest = new BulkRequest(this.getIndexName());
+        BulkRequest bulkRequest = new BulkRequest();
         stream(documents.spliterator(), FALSE)
                 .filter(Objects::nonNull)
                 .map(this::prepareIndexRequest)
@@ -144,8 +151,7 @@ public abstract class ElasticSearchRestDAO<D extends Document> extends ElasticSe
      */
     @Override
     public Boolean update(@Nonnull(when = NEVER) D document) throws Exception {
-        checkArgument(((document != null) && ((document.getId() != null) && !(document.getId().trim().isEmpty()))),
-                "The {} to Update must  not be null or ID must not be null or Empty.", this.elasticSearchRestMapper.getDocumentClassName());
+        checkArgument(((document != null) && ((document.getId() != null) && !(document.getId().trim().isEmpty()))), "The {} to Update must  not be null or ID must not be null or Empty.", this.elasticSearchRestMapper.getDocumentClassName());
         UpdateRequest updateRequest = new UpdateRequest(this.getIndexName(), document.getId())
                 .doc(this.writeDocumentAsString(document), JSON);
         logger.debug("##################################Try to Update : {}\n\n", document);
@@ -200,7 +206,8 @@ public abstract class ElasticSearchRestDAO<D extends Document> extends ElasticSe
 
     /**
      * <p>
-     * Return the number of Documents</p>
+     *      Return the number of Documents.
+     * </p>
      *
      * @return {@link Long}
      * @throws Exception
@@ -208,7 +215,7 @@ public abstract class ElasticSearchRestDAO<D extends Document> extends ElasticSe
     @Override
     public Long count() throws Exception {
         CountResponse countResponse = this.elasticSearchRestHighLevelClient.count(new CountRequest(getIndexName()), DEFAULT);
-        if (countResponse.status() != RestStatus.OK) {
+        if (countResponse.status() != OK) {
             throw new IllegalStateException("Problem to count document, status : " + countResponse.status());
         }
         return countResponse.getCount();

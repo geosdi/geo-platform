@@ -36,7 +36,6 @@ package org.geosdi.geoplatform.experimental.el.rest.api.dao;
 
 import org.elasticsearch.action.ActionListener;
 import org.elasticsearch.action.bulk.BulkResponse;
-import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.client.core.CountResponse;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
 import org.geosdi.geoplatform.experimental.el.rest.api.dao.find.GPElasticSearchRestFindDAO;
@@ -60,11 +59,9 @@ public interface GPElasticSearchRestDAO<D extends Document> extends GPElasticSea
 
     /**
      * @param document
-     * @param listener
      * @throws Exception
      */
-    void persistAsync(@Nonnull(when = NEVER) D document, @Nonnull(when = NEVER) ActionListener<IndexResponse> listener)
-            throws Exception;
+    void persistAsync(@Nonnull(when = NEVER) D document) throws Exception;
 
     /**
      * @param documents

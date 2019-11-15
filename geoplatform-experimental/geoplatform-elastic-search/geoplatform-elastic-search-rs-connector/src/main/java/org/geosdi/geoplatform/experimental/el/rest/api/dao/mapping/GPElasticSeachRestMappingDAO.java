@@ -107,6 +107,6 @@ public interface GPElasticSeachRestMappingDAO<D extends Document> extends GPElas
      * @throws Exception
      */
     default String loadMappingAsString() throws Exception {
-        return getMapping().mappings().get(this.getIndexName()).source().string();
+        return getMapping().mappings().get(this.getIndexName()).source().toString();
     }
 }

@@ -43,8 +43,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import static io.reactivex.Flowable.fromArray;
-import static io.reactivex.schedulers.Schedulers.computation;
 import static java.util.Collections.sort;
 import static org.springframework.core.annotation.AnnotationAwareOrderComparator.INSTANCE;
 
@@ -66,10 +64,20 @@ public class GPBaseIndexConfigurator implements GPIndexConfigurator {
     @Override
     public final void configure() throws Exception {
         if (configured.compareAndSet(false, true)) {
-            fromArray(this.indexCreators.stream().toArray(GPIndexCreator[]::new))
+            this.indexCreators.stream()
                     .filter(Objects::nonNull)
-                    .observeOn(computation())
-                    .subscribe(ic -> ic.createIndex(), ex -> logger.error("###################{}\n", ex.getMessage()));
+                    .forEach(ic -> {
+                        try {
+                            ic.createIndex();
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                            logger.error("#################INDEX_CREATION_ERROR : {}\n", ex.getMessage());
+                        }
+                    });
+//            fromArray(this.indexCreators.stream().toArray(GPIndexCreator[]::new))
+//                    .filter(Objects::nonNull)
+//                    .observeOn(computation())
+//                    .subscribe(ic -> ic.createIndex(), ex -> logger.error("###################{}\n", ex.getMessage()));
         }
     }
 

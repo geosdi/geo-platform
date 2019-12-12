@@ -44,6 +44,7 @@ import org.geosdi.geoplatform.experimental.openam.api.model.validate.IOpenAMVali
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Priority;
 import javax.ws.rs.Priorities;
 import javax.ws.rs.container.ContainerRequestContext;
@@ -51,6 +52,8 @@ import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 import java.io.IOException;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -112,7 +115,7 @@ public class OpenAMAuthenticator extends BaseOpenAmAuthenticator {
      * @throws Exception
      */
     @Override
-    protected void validateToken(String token) throws Exception {
+    protected void validateToken(@Nonnull(when = NEVER) String token) throws Exception {
         IOpenAMValidateToken validateTokenResponse = this.openAMConnector.validateToken(token);
         if (!validateTokenResponse.isValid()) {
             throw new ServerInternalFault("Token is not valid");

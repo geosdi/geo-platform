@@ -451,8 +451,7 @@ public class AttributeCustomFieldsMap {
         return operatorTypeList;
     }
 
-    private static Validator attributeValuesValidator(final String dataType,
-                                                      final TypeValidator validator) {
+    private static Validator attributeValuesValidator(final String dataType, final TypeValidator validator) {
         return new Validator() {
 
             @Override
@@ -473,5 +472,4 @@ public class AttributeCustomFieldsMap {
 
         };
     }
-
 }

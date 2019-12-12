@@ -38,6 +38,9 @@ package org.geosdi.geoplatform.experimental.openam.api.authenticator.filter;
 import org.geosdi.geoplatform.experimental.rs.security.authenticator.GPAuthenticatorType;
 import org.geosdi.geoplatform.experimental.rs.security.authenticator.filter.GPAuthenticatorFilter;
 
+import javax.annotation.Nonnull;
+
+import static javax.annotation.meta.When.NEVER;
 import static org.geosdi.geoplatform.experimental.openam.api.authenticator.OpenAMAuthenticatorType.OPENAM;
 
 /**
@@ -74,5 +77,5 @@ public abstract class BaseOpenAmAuthenticator implements GPAuthenticatorFilter {
      * @param token
      * @throws Exception
      */
-    protected abstract void validateToken(String token) throws Exception;
+    protected abstract void validateToken(@Nonnull(when = NEVER) String token) throws Exception;
 }

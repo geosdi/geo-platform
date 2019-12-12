@@ -40,6 +40,10 @@ import org.geosdi.geoplatform.experimental.openam.api.connector.search.IOpenAMSe
 import org.geosdi.geoplatform.experimental.openam.api.model.serverinfo.IOpenAMServerInfo;
 import org.geosdi.geoplatform.experimental.openam.api.model.validate.IOpenAMValidateToken;
 
+import javax.annotation.Nonnull;
+
+import static javax.annotation.meta.When.NEVER;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -51,7 +55,7 @@ public interface GPOpenAMConnector extends IOpenAMSearchConnector {
      * @return {@link IOpenAMValidateToken}
      * @throws Exception
      */
-    IOpenAMValidateToken validateToken(String token) throws Exception;
+    IOpenAMValidateToken validateToken(@Nonnull(when = NEVER) String token) throws Exception;
 
     /**
      * @return {@link IOpenAMServerInfo}

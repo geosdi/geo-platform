@@ -35,6 +35,7 @@
 package org.geosdi.geoplatform.experimental.el.rest.api.dao.index;
 
 import org.elasticsearch.action.ActionListener;
+import org.elasticsearch.action.admin.indices.refresh.RefreshResponse;
 import org.elasticsearch.action.support.master.AcknowledgedResponse;
 import org.elasticsearch.client.indices.CreateIndexResponse;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
@@ -79,4 +80,15 @@ public interface GPElasticSearchRestIndexDAO<D extends Document> extends GPElast
      * @throws Exception
      */
     Boolean existIndex() throws Exception;
+
+    /**
+     * @throws Exception
+     */
+    void refreshIndex() throws Exception;
+
+    /**
+     * @param theActionListener
+     * @throws Exception
+     */
+    void refreshIndexAsync(@Nonnull(when = NEVER) ActionListener<RefreshResponse> theActionListener) throws Exception;
 }

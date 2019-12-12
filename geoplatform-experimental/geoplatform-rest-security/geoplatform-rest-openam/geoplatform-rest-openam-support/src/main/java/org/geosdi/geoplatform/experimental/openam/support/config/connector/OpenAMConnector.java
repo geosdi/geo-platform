@@ -47,10 +47,12 @@ import org.geosdi.geoplatform.experimental.openam.support.connector.request.serv
 import org.geosdi.geoplatform.experimental.openam.support.connector.request.validate.ValidateTokenRequest;
 import org.geosdi.geoplatform.experimental.rs.security.connector.settings.GPConnectorSettings;
 
+import javax.annotation.Nonnull;
 import java.net.URI;
 import java.net.URLDecoder;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
 import static org.geosdi.geoplatform.experimental.openam.api.connector.request.parameter.RequestParameter.RequestParameterType.ACTION_VALIDATE;
 import static org.geosdi.geoplatform.experimental.openam.support.connector.request.BaseOpenAMRequest.OpenAMRequestType.SERVER_INFO;
 import static org.geosdi.geoplatform.experimental.openam.support.connector.request.BaseOpenAMRequest.OpenAMRequestType.VALIDATE_TOKEN;
@@ -71,8 +73,8 @@ class OpenAMConnector extends OpenAMSearchConnector {
      * @throws Exception
      */
     @Override
-    public IOpenAMValidateToken validateToken(String token) throws Exception {
-        checkArgument((token != null) && !(token.isEmpty()), "The Token to validate must not be null or an Empty String.");
+    public IOpenAMValidateToken validateToken(@Nonnull(when = NEVER) String token) throws Exception {
+        checkArgument((token != null) && !(token.trim().isEmpty()), "The Token to validate must not be null or an Empty String.");
         logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@TRYING TO VALIDATE_TOKEN WITH " + "OPENAM_CONNECTOR_SETTINGS : {}\n",
                 this.openAMConnectorSettings);
         ValidateTokenRequest validateTokenRequest = this.openAMRequestMediator.getRequest(VALIDATE_TOKEN);

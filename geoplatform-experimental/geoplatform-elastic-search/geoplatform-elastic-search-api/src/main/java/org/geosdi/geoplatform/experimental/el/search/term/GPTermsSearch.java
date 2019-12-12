@@ -32,40 +32,56 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.experimental.el.rest.api.index.settings;
+package org.geosdi.geoplatform.experimental.el.search.term;
 
-import org.geosdi.geoplatform.experimental.el.api.model.Document;
-import org.geosdi.geoplatform.experimental.el.api.model.GPElasticSearchIndex;
-import org.geosdi.geoplatform.experimental.el.index.GPBaseIndexCreator;
+import net.jcip.annotations.Immutable;
+import org.elasticsearch.index.query.QueryBuilder;
+import org.geosdi.geoplatform.experimental.el.search.bool.IBooleanSearch;
 
 import javax.annotation.Nonnull;
-import javax.annotation.meta.When;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static java.lang.Boolean.TRUE;
-import static org.springframework.core.annotation.AnnotationUtils.findAnnotation;
+import static javax.annotation.meta.When.NEVER;
+import static org.elasticsearch.index.query.QueryBuilders.termsQuery;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPElasticSearchRestIndexSettings extends GPBaseIndexCreator.GPBaseIndexSettings {
+@Immutable
+public class GPTermsSearch implements IBooleanSearch {
+
+    private final String field;
+    private final Object[] value;
+    private final BooleanQueryType type;
 
     /**
-     * @return {@link Boolean}
+     * @param theField
+     * @param theValue
+     * @param theType
      */
-    boolean isCreateMapping();
+    public GPTermsSearch(@Nonnull(when = NEVER) String theField, @Nonnull(when = NEVER) BooleanQueryType theType, @Nonnull(when = NEVER) Object... theValue) {
+        checkArgument(((theField != null) && !(theField.trim().isEmpty())), "The Parameter Field must not be null or an Empty String.");
+        checkArgument(((theValue != null)), "The Parameter Value must not be null.");
+        checkArgument((theType != null), "The Parameter Type must not be null.");
+        this.field = theField;
+        this.value = theValue;
+        this.type = theType;
+    }
 
     /**
-     * @param theDocumentClass
-     * @return {@link GPElasticSearchRestIndexSettings}
-     * @throws Exception
+     * @return {@link BooleanQueryType}
      */
-    static <D extends Document> GPElasticSearchRestIndexSettings of(@Nonnull(when = When.NEVER) Class<D> theDocumentClass) throws Exception {
-        checkArgument(theDocumentClass != null, "The Parameter documentClass must not be null.");
-        GPElasticSearchIndex value = findAnnotation(theDocumentClass, GPElasticSearchIndex.class);
-        return ((value != null) ? new ElasticSearchRestIndexSettings((value.name().trim().isEmpty() ?
-                theDocumentClass.getSimpleName().toLowerCase().concat("_index") : value.name()), value.createMapping())
-                : new ElasticSearchRestIndexSettings(theDocumentClass.getSimpleName().toLowerCase().concat("_index"), TRUE));
+    @Override
+    public BooleanQueryType getType() {
+        return this.type;
+    }
+
+    /**
+     * @return {@link QueryBuilder}
+     */
+    @Override
+    public QueryBuilder buildQuery() {
+        return termsQuery(this.field, this.value);
     }
 }

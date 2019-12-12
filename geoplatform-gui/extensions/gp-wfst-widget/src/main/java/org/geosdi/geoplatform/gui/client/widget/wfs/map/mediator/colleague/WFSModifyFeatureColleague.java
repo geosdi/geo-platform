@@ -61,8 +61,7 @@ public class WFSModifyFeatureColleague implements IWFSModifyFeatureColleague {
     @Override
     public void activateColleague() {
         if (!addedControlToMap) {
-            this.mapWidget.getMap().addControl(
-                    wfsModifyFeatureControl.getControl());
+            this.mapWidget.getMap().addControl(wfsModifyFeatureControl.getControl());
             addedControlToMap = true;
         }
         this.wfsModifyFeatureControl.activateControl();

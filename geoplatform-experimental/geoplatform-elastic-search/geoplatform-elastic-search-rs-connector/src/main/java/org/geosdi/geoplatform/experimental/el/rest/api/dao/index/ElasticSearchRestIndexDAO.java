@@ -36,6 +36,8 @@ package org.geosdi.geoplatform.experimental.el.rest.api.dao.index;
 
 import org.elasticsearch.action.ActionListener;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
+import org.elasticsearch.action.admin.indices.refresh.RefreshRequest;
+import org.elasticsearch.action.admin.indices.refresh.RefreshResponse;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.support.master.AcknowledgedResponse;
@@ -149,6 +151,23 @@ public abstract class ElasticSearchRestIndexDAO<D extends Document> extends Elas
     @Override
     public Boolean existIndex() throws Exception {
         return this.elasticSearchRestHighLevelClient.indices().exists(new GetIndexRequest(this.getIndexName()).humanReadable(TRUE), DEFAULT);
+    }
+
+    /**
+     * @throws Exception
+     */
+    @Override
+    public void refreshIndex() throws Exception {
+        this.elasticSearchRestHighLevelClient.indices().refresh(new RefreshRequest(this.getIndexName()), DEFAULT);
+    }
+
+    /**
+     * @param theActionListener
+     * @throws Exception
+     */
+    @Override
+    public void refreshIndexAsync(@Nonnull(when = NEVER) ActionListener<RefreshResponse> theActionListener) throws Exception {
+
     }
 
     /**

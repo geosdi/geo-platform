@@ -34,6 +34,12 @@
  */
 package org.geosdi.geoplatform.jasypt.support;
 
+import org.jasypt.digest.config.StringDigesterConfig;
+
+import javax.annotation.Nonnull;
+
+import static javax.annotation.meta.When.NEVER;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -44,12 +50,17 @@ public interface GPDigesterConfigurator {
      * @param plainText
      * @return {@link String}
      */
-    String digest(String plainText);
+    String digest(@Nonnull(when = NEVER) String plainText);
 
     /**
      * @param encryptedText
      * @param plainText
      * @return {@link Boolean}
      */
-    boolean matches(String encryptedText, String plainText);
+    boolean matches(@Nonnull(when = NEVER) String encryptedText, @Nonnull(when = NEVER) String plainText);
+
+    /**
+     * @param config
+     */
+    void setConfig(@Nonnull(when = NEVER) StringDigesterConfig config);
 }

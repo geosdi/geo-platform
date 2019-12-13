@@ -63,6 +63,7 @@ import static org.elasticsearch.action.DocWriteRequest.OpType.INDEX;
 import static org.elasticsearch.action.DocWriteResponse.Result.CREATED;
 import static org.elasticsearch.client.RequestOptions.DEFAULT;
 import static org.elasticsearch.common.xcontent.XContentType.JSON;
+import static org.springframework.core.env.Profiles.of;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -252,29 +253,30 @@ public abstract class ElasticSearchRestIndexDAO<D extends Document> extends Elas
     @Override
     protected void onStartUp() throws Exception {
         super.onStartUp();
-        if (this.isUpElasticSearchCluster()) {
-            if ((!createIndex()) && (this.isCreateMapping())) {
-                logger.debug("#######################Trying to create mapping for {}\n",
-                        this.elasticSearchRestMapper.getDocumentClassName());
-                XContentBuilder builder = this.preparePutMapping();
-                if (builder != null) {
-                    AcknowledgedResponse putMappingResponse = this.putMapping(builder, this::createPutMappingRequest);
-                    logger.debug("########################## {}\n",
-                            ((putMappingResponse.isAcknowledged()) ? "PUT_MAPPING_STATUS IS OK." :
-                                    "PUT_MAPPING NOT CREATED."));
-                    logger.debug("::::::::::::::::::::::GET_MAPPING_AS_STRING:::::::::::::: : {}\n",
-                            this.loadMappingAsString());
+        if(this.env.acceptsProfiles(of("prod"))) {
+            if (this.isUpElasticSearchCluster()) {
+                if ((!createIndex()) && (this.isCreateMapping())) {
+                    logger.debug("#######################Trying to create mapping for {}\n", this.elasticSearchRestMapper.getDocumentClassName());
+                    XContentBuilder builder = this.preparePutMapping();
+                    if (builder != null) {
+                        AcknowledgedResponse putMappingResponse = this.putMapping(builder, this::createPutMappingRequest);
+                        logger.debug("########################## {}\n",
+                                ((putMappingResponse.isAcknowledged()) ? "PUT_MAPPING_STATUS IS OK." :
+                                        "PUT_MAPPING NOT CREATED."));
+                        logger.debug("::::::::::::::::::::::GET_MAPPING_AS_STRING:::::::::::::: : {}\n", this.loadMappingAsString());
+                    } else {
+                        logger.debug(
+                                "#########################There is no XContentBuilder defined so skip PutMapping.\n");
+                    }
                 } else {
-                    logger.debug("#########################There is no XContentBuilder defined so skip PutMapping.\n");
+                    logger.debug("@@@@@@@@@@@@@@@@@@@@@@@MAPPING_ALREADY_UP.");
+                    logger.debug("::::::::::::::::::::::GET_MAPPING_AS_STRING:::::::::::::: : {}\n", this.loadMappingAsString());
                 }
             } else {
-                logger.debug("@@@@@@@@@@@@@@@@@@@@@@@MAPPING_ALREADY_UP.");
-                logger.debug("::::::::::::::::::::::GET_MAPPING_AS_STRING:::::::::::::: : {}\n",
-                        this.loadMappingAsString());
+                logger.debug("####################Can't putMapping for : {}, because ElasticSearch is down.\n", this.elasticSearchRestMapper.getDocumentClassName());
             }
         } else {
-            logger.debug("####################Can't putMapping for : {}, because ElasticSearch is down.\n",
-                    this.elasticSearchRestMapper.getDocumentClassName());
+            logger.warn("#######################Profile prod is not active so i will not perform Index Creation Request.");
         }
     }
 }

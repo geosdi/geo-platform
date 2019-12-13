@@ -40,6 +40,8 @@ import org.geosdi.geoplatform.experimental.el.rest.api.dao.support.ElasticSearch
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 
 import javax.annotation.*;
 
@@ -57,6 +59,8 @@ public abstract class ElasticSearchRestBaseDAO<D extends Document> extends Elast
     //
     @Resource(name = "elasticSearchRestHighLevelClient")
     protected RestHighLevelClient elasticSearchRestHighLevelClient;
+    @Autowired
+    protected Environment env;
 
     /**
      * @param theEntityClass

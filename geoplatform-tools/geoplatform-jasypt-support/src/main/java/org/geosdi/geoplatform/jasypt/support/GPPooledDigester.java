@@ -39,6 +39,11 @@ import org.jasypt.digest.PooledStringDigester;
 import org.jasypt.digest.config.StringDigesterConfig;
 import org.springframework.beans.factory.InitializingBean;
 
+import javax.annotation.Nonnull;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -53,20 +58,33 @@ public class GPPooledDigester implements GPDigesterConfigurator, InitializingBea
         this.digester = new PooledStringDigester();
     }
 
+    /**
+     * @param plainText
+     * @return {@link String}
+     */
     @Override
-    public String digest(String plainText) {
-        return this.digester.digest(plainText).toLowerCase();
+    public String digest(@Nonnull(when = NEVER) String plainText) {
+        checkArgument(((plainText != null) && !(plainText.trim().isEmpty())), "The Parameter plainText must not be null or an empty string");
+        return this.digester.digest(plainText);
     }
 
+    /**
+     * @param encryptedText
+     * @param plainText
+     * @return {@link Boolean}
+     */
     @Override
-    public boolean matches(String encryptedText, String plainText) {
+    public boolean matches(@Nonnull(when = NEVER) String encryptedText, @Nonnull(when = NEVER) String plainText) {
+        checkArgument(((plainText != null) && !(plainText.trim().isEmpty())), "The Parameter plainText must not be null or an empty string");
+        checkArgument(((encryptedText != null) && !(encryptedText.trim().isEmpty())), "The Parameter encryptedText must not be null or an empty string");
         return this.digester.matches(plainText, encryptedText);
     }
 
     /**
      * @param config the config to set
      */
-    public void setConfig(StringDigesterConfig config) {
+    public void setConfig(@Nonnull(when = NEVER) StringDigesterConfig config) {
+        checkArgument(config != null, "The Parameter config must not be null.");
         this.config = config;
     }
 

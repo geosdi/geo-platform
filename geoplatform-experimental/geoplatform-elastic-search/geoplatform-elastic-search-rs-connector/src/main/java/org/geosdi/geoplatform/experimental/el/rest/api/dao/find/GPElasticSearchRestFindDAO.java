@@ -34,6 +34,7 @@
  */
 package org.geosdi.geoplatform.experimental.el.rest.api.dao.find;
 
+import org.elasticsearch.search.sort.SortOrder;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
 import org.geosdi.geoplatform.experimental.el.condition.PredicateCondition;
 import org.geosdi.geoplatform.experimental.el.rest.api.dao.page.GPPageableElasticSearchRestDAO;
@@ -77,4 +78,22 @@ public interface GPElasticSearchRestFindDAO<D extends Document> extends GPPageab
      * @throws Exception
      */
     List<D> findByIDS(@Nonnull(when = NEVER) Iterable<String> ids) throws Exception;
+
+    /**
+     * @param from
+     * @param size
+     * @return {@link org.geosdi.geoplatform.experimental.el.dao.GPPageableElasticSearchDAO.IPageResult<D>}
+     * @throws Exception
+     */
+    IPageResult<D> find(Integer from, Integer size) throws Exception;
+
+    /**
+     * @param from
+     * @param size
+     * @param sortField
+     * @param sortOrder
+     * @return {@link org.geosdi.geoplatform.experimental.el.dao.GPPageableElasticSearchDAO.IPageResult<D>}
+     * @throws Exception
+     */
+    IPageResult<D> find(Integer from, Integer size, @Nonnull(when = NEVER) String sortField, @Nullable SortOrder sortOrder) throws Exception;
 }

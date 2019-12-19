@@ -39,6 +39,7 @@ import org.elasticsearch.action.get.*;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
+import org.elasticsearch.search.sort.SortOrder;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
 import org.geosdi.geoplatform.experimental.el.condition.PredicateCondition;
 import org.geosdi.geoplatform.experimental.el.rest.api.dao.page.PageableElasticSearchRestDAO;
@@ -58,6 +59,7 @@ import static java.util.stream.Stream.of;
 import static javax.annotation.meta.When.NEVER;
 import static org.elasticsearch.client.RequestOptions.DEFAULT;
 import static org.elasticsearch.rest.RestStatus.OK;
+import static org.elasticsearch.search.sort.SortOrder.DESC;
 import static org.geosdi.geoplatform.experimental.el.condition.PredicateCondition.EMPTY_PREDICATE;
 
 /**
@@ -141,5 +143,30 @@ public abstract class ElasticSearchRestFindDAO<D extends Document> extends Pagea
                 .map(this::readGetResponse)
                 .filter(d -> ((condition != null) ? ((d != null) && (condition.test(d))) : d != null))
                 .collect(toList());
+    }
+
+    /**
+     * @param from
+     * @param size
+     * @return {@link IPageResult<D>}
+     * @throws Exception
+     */
+    @Override
+    public IPageResult<D> find(Integer from, Integer size) throws Exception {
+        return super.find(new MultiFieldsSearch(from, size));
+    }
+
+    /**
+     * @param from
+     * @param size
+     * @param sortField
+     * @param sortOrder
+     * @return {@link IPageResult<D>}
+     * @throws Exception
+     */
+    @Override
+    public IPageResult<D> find(Integer from, Integer size, @Nonnull(when = NEVER) String sortField, @Nullable SortOrder sortOrder) throws Exception {
+        checkArgument(((sortField != null) && !(sortField.trim().isEmpty())), "The Parameter sortField must not be null.");
+        return super.find(new MultiFieldsSearch(super.getJsonRootName().concat(sortField), ((sortOrder != null) ? sortOrder : DESC), from, size));
     }
 }

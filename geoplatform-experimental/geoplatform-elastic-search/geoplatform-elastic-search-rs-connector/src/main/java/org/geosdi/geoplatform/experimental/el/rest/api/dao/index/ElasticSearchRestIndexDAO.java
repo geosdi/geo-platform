@@ -63,7 +63,6 @@ import static org.elasticsearch.action.DocWriteRequest.OpType.INDEX;
 import static org.elasticsearch.action.DocWriteResponse.Result.CREATED;
 import static org.elasticsearch.client.RequestOptions.DEFAULT;
 import static org.elasticsearch.common.xcontent.XContentType.JSON;
-import static org.springframework.core.env.Profiles.of;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -253,7 +252,7 @@ public abstract class ElasticSearchRestIndexDAO<D extends Document> extends Elas
     @Override
     protected void onStartUp() throws Exception {
         super.onStartUp();
-        if(this.env.acceptsProfiles(of("prod"))) {
+        if(this.env.acceptsProfiles("prod")) {
             if (this.isUpElasticSearchCluster()) {
                 if ((!createIndex()) && (this.isCreateMapping())) {
                     logger.debug("#######################Trying to create mapping for {}\n", this.elasticSearchRestMapper.getDocumentClassName());

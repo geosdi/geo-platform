@@ -45,8 +45,11 @@ import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.update.UpdateRequest;
 import org.elasticsearch.action.update.UpdateResponse;
+import org.elasticsearch.client.Cancellable;
 import org.elasticsearch.client.core.CountRequest;
 import org.elasticsearch.client.core.CountResponse;
+import org.elasticsearch.index.reindex.BulkByScrollResponse;
+import org.elasticsearch.index.reindex.UpdateByQueryRequest;
 import org.geosdi.geoplatform.experimental.el.api.function.GPElasticSearchCheck;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
 import org.geosdi.geoplatform.experimental.el.rest.api.dao.find.ElasticSearchRestFindDAO;
@@ -99,10 +102,10 @@ public abstract class ElasticSearchRestDAO<D extends Document> extends ElasticSe
      * @throws Exception
      */
     @Override
-    public void persistAsync(@Nonnull(when = NEVER) D document) throws Exception {
+    public Cancellable persistAsync(@Nonnull(when = NEVER) D document) throws Exception {
         checkArgument(document != null, "The Parameter document must not be null.");
         IndexRequest indexRequest = new IndexRequest(this.getIndexName());
-        this.elasticSearchRestHighLevelClient.indexAsync((document.isIdSetted() ?
+        return this.elasticSearchRestHighLevelClient.indexAsync((document.isIdSetted() ?
                 indexRequest.id(document.getId()).source(this.writeDocumentAsString(document), JSON) :
                 indexRequest.source(this.writeDocumentAsString(document), JSON)), DEFAULT, new ActionListener<IndexResponse>() {
 
@@ -185,6 +188,59 @@ public abstract class ElasticSearchRestDAO<D extends Document> extends ElasticSe
     }
 
     /**
+     * @param theValue
+     * @param theCheck
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public <R extends UpdateByQueryRequest, V> BulkByScrollResponse updateByQuery(@Nonnull(when = NEVER) V theValue, @Nonnull(when = NEVER) GPElasticSearchCheck<R, V, Exception> theCheck) throws Exception {
+        checkArgument(theValue != null, "The Parameter value must not be null.");
+        checkArgument(theCheck != null, "The Parameter checkFunction must not be null.");
+        return this.elasticSearchRestHighLevelClient.updateByQuery(theCheck.apply(theValue), DEFAULT);
+    }
+
+    /**
+     * @param theValue
+     * @param theCheck
+     * @return {@link Cancellable}
+     * @throws Exception
+     */
+    @Override
+    public <R extends UpdateByQueryRequest, V> Cancellable updateByQueryAsync(@Nonnull(when = NEVER) V theValue, @Nonnull(when = NEVER) GPElasticSearchCheck<R, V, Exception> theCheck) throws Exception {
+        checkArgument(theValue != null, "The Parameter value must not be null.");
+        checkArgument(theCheck != null, "The Parameter checkFunction must not be null.");
+        return this.updateByQueryAsync(theValue, theCheck, new ActionListener<BulkByScrollResponse>() {
+
+            @Override
+            public void onResponse(BulkByScrollResponse bulkByScrollResponse) {
+                logger.trace("############################BulkByScrollResponse : {}\n", bulkByScrollResponse);
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                logger.error("####################Failed {}#updateByQueryAsync , Reason : {}\n", ElasticSearchRestDAO.this.getClass().getSimpleName(), e.getMessage());
+                e.printStackTrace();
+            }
+        });
+    }
+
+    /**
+     * @param theValue
+     * @param theCheck
+     * @param theActionListener
+     * @return {@link Cancellable}
+     * @throws Exception
+     */
+    @Override
+    public <R extends UpdateByQueryRequest, V> Cancellable updateByQueryAsync(@Nonnull(when = NEVER) V theValue, @Nonnull(when = NEVER) GPElasticSearchCheck<R, V, Exception> theCheck, @Nonnull(when = NEVER) ActionListener<BulkByScrollResponse> theActionListener) throws Exception {
+        checkArgument(theValue != null, "The Parameter value must not be null.");
+        checkArgument(theCheck != null, "The Parameter checkFunction must not be null.");
+        checkArgument(theActionListener != null, "The Parameter actionListener must not be null.");
+        return this.elasticSearchRestHighLevelClient.updateByQueryAsync(theCheck.apply(theValue), DEFAULT, theActionListener);
+    }
+
+    /**
      * <p>
      *      Delete Document by ElasticSearch ID
      * </p>
@@ -223,11 +279,12 @@ public abstract class ElasticSearchRestDAO<D extends Document> extends ElasticSe
 
     /**
      * @param theListener
+     * @return {@link Cancellable}
      * @throws Exception
      */
     @Override
-    public void countAsync(@Nonnull(when = NEVER) ActionListener<CountResponse> theListener) throws Exception {
+    public Cancellable countAsync(@Nonnull(when = NEVER) ActionListener<CountResponse> theListener) throws Exception {
         checkArgument(theListener != null, "The Parameter listener must not be null.");
-        this.elasticSearchRestHighLevelClient.countAsync(new CountRequest(getIndexName()), DEFAULT, theListener);
+        return this.elasticSearchRestHighLevelClient.countAsync(new CountRequest(getIndexName()), DEFAULT, theListener);
     }
 }

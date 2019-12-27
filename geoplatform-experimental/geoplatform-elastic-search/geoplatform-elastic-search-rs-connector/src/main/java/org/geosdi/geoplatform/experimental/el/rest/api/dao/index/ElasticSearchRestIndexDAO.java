@@ -42,6 +42,7 @@ import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.support.master.AcknowledgedResponse;
 import org.elasticsearch.action.update.UpdateRequest;
+import org.elasticsearch.client.Cancellable;
 import org.elasticsearch.client.indices.CreateIndexRequest;
 import org.elasticsearch.client.indices.CreateIndexResponse;
 import org.elasticsearch.client.indices.GetIndexRequest;
@@ -106,8 +107,7 @@ public abstract class ElasticSearchRestIndexDAO<D extends Document> extends Elas
      * @throws Exception
      */
     @Override
-    public void createIndexAsync(@Nonnull(when = NEVER) ActionListener<CreateIndexResponse> theActionListener)
-            throws Exception {
+    public void createIndexAsync(@Nonnull(when = NEVER) ActionListener<CreateIndexResponse> theActionListener) throws Exception {
         checkArgument(theActionListener != null, "The Parameter actionListener must not be null.");
         if (!existIndex()) {
             logger.debug("###############################Called {}#createIndexAsync with Param : {}\n",
@@ -136,13 +136,14 @@ public abstract class ElasticSearchRestIndexDAO<D extends Document> extends Elas
 
     /**
      * @param theActionListener
+     * @return {@link Cancellable}
      * @throws Exception
      */
     @Override
-    public void deleteIndexAsync(@Nonnull(when = NEVER) ActionListener<AcknowledgedResponse> theActionListener) throws Exception {
+    public Cancellable deleteIndexAsync(@Nonnull(when = NEVER) ActionListener<AcknowledgedResponse> theActionListener) throws Exception {
         checkArgument(theActionListener != null, "The Parameter actionListener must not be null.");
         logger.debug("###############################Called {}#deleteIndexAsync with Param : {}\n", this.getClass().getSimpleName(), getIndexName());
-        this.elasticSearchRestHighLevelClient.indices().deleteAsync(new DeleteIndexRequest(this.getIndexName()), DEFAULT, theActionListener);
+        return this.elasticSearchRestHighLevelClient.indices().deleteAsync(new DeleteIndexRequest(this.getIndexName()), DEFAULT, theActionListener);
     }
 
     /**
@@ -164,11 +165,13 @@ public abstract class ElasticSearchRestIndexDAO<D extends Document> extends Elas
 
     /**
      * @param theActionListener
+     * @return
      * @throws Exception
      */
     @Override
-    public void refreshIndexAsync(@Nonnull(when = NEVER) ActionListener<RefreshResponse> theActionListener) throws Exception {
-
+    public Cancellable refreshIndexAsync(@Nonnull(when = NEVER) ActionListener<RefreshResponse> theActionListener) throws Exception {
+        checkArgument(theActionListener != null, "The Parameter listener must not be null.");
+        return this.elasticSearchRestHighLevelClient.indices().refreshAsync(new RefreshRequest(this.getIndexName()), DEFAULT, theActionListener);
     }
 
     /**

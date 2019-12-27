@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.experimental.el.rest.api.dao.index;
 import org.elasticsearch.action.ActionListener;
 import org.elasticsearch.action.admin.indices.refresh.RefreshResponse;
 import org.elasticsearch.action.support.master.AcknowledgedResponse;
+import org.elasticsearch.client.Cancellable;
 import org.elasticsearch.client.indices.CreateIndexResponse;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
 import org.geosdi.geoplatform.experimental.el.rest.api.dao.mapping.GPElasticSeachRestMappingDAO;
@@ -71,9 +72,10 @@ public interface GPElasticSearchRestIndexDAO<D extends Document> extends GPElast
 
     /**
      * @param theActionListener
+     * @return {@link Cancellable}
      * @throws Exception
      */
-    void deleteIndexAsync(@Nonnull(when = NEVER) ActionListener<AcknowledgedResponse> theActionListener) throws Exception;
+    Cancellable deleteIndexAsync(@Nonnull(when = NEVER) ActionListener<AcknowledgedResponse> theActionListener) throws Exception;
 
     /**
      * @return {@link Boolean}
@@ -88,7 +90,8 @@ public interface GPElasticSearchRestIndexDAO<D extends Document> extends GPElast
 
     /**
      * @param theActionListener
+     * @return {@link Cancellable}
      * @throws Exception
      */
-    void refreshIndexAsync(@Nonnull(when = NEVER) ActionListener<RefreshResponse> theActionListener) throws Exception;
+    Cancellable refreshIndexAsync(@Nonnull(when = NEVER) ActionListener<RefreshResponse> theActionListener) throws Exception;
 }

@@ -36,7 +36,11 @@ package org.geosdi.geoplatform.experimental.el.rest.api.dao;
 
 import org.elasticsearch.action.ActionListener;
 import org.elasticsearch.action.bulk.BulkResponse;
+import org.elasticsearch.client.Cancellable;
 import org.elasticsearch.client.core.CountResponse;
+import org.elasticsearch.index.reindex.BulkByScrollResponse;
+import org.elasticsearch.index.reindex.UpdateByQueryRequest;
+import org.geosdi.geoplatform.experimental.el.api.function.GPElasticSearchCheck;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
 import org.geosdi.geoplatform.experimental.el.rest.api.dao.find.GPElasticSearchRestFindDAO;
 
@@ -59,9 +63,10 @@ public interface GPElasticSearchRestDAO<D extends Document> extends GPElasticSea
 
     /**
      * @param document
+     * @return {@link Cancellable}
      * @throws Exception
      */
-    void persistAsync(@Nonnull(when = NEVER) D document) throws Exception;
+    Cancellable persistAsync(@Nonnull(when = NEVER) D document) throws Exception;
 
     /**
      * @param documents
@@ -85,6 +90,37 @@ public interface GPElasticSearchRestDAO<D extends Document> extends GPElasticSea
     BulkResponse update(@Nonnull(when = NEVER) Iterable<D> documents) throws Exception;
 
     /**
+     * @param theValue
+     * @param theCheck
+     * @param <R>
+     * @param <V>
+     * @return
+     * @throws Exception
+     */
+    <R extends UpdateByQueryRequest, V extends Object> BulkByScrollResponse updateByQuery(@Nonnull(when = NEVER) V theValue, @Nonnull(when = NEVER) GPElasticSearchCheck<R, V, Exception> theCheck) throws Exception;
+
+    /**
+     * @param theValue
+     * @param theCheck
+     * @param <R>
+     * @param <V>
+     * @return {@link Cancellable}
+     * @throws Exception
+     */
+    <R extends UpdateByQueryRequest, V extends Object> Cancellable updateByQueryAsync(@Nonnull(when = NEVER) V theValue, @Nonnull(when = NEVER) GPElasticSearchCheck<R, V, Exception> theCheck) throws Exception;
+
+    /**
+     * @param theValue
+     * @param theCheck
+     * @param theActionListener
+     * @param <R>
+     * @param <V>
+     * @return {@link Cancellable}
+     * @throws Exception
+     */
+    <R extends UpdateByQueryRequest, V extends Object> Cancellable updateByQueryAsync(@Nonnull(when = NEVER) V theValue, @Nonnull(when = NEVER) GPElasticSearchCheck<R, V, Exception> theCheck, @Nonnull(when = NEVER) ActionListener<BulkByScrollResponse> theActionListener) throws Exception;
+
+    /**
      * <p>
      * Delete Document by ElasticSearch ID</p>
      *
@@ -105,7 +141,8 @@ public interface GPElasticSearchRestDAO<D extends Document> extends GPElasticSea
 
     /**
      * @param theListener
+     * @return {@link Cancellable}
      * @throws Exception
      */
-    void countAsync(@Nonnull(when = NEVER) ActionListener<CountResponse> theListener) throws Exception;
+    Cancellable countAsync(@Nonnull(when = NEVER) ActionListener<CountResponse> theListener) throws Exception;
 }

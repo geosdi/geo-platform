@@ -36,6 +36,7 @@ package org.geosdi.geoplatform.experimental.el.rest.api.dao.mapping;
 
 import org.elasticsearch.action.ActionListener;
 import org.elasticsearch.action.support.master.AcknowledgedResponse;
+import org.elasticsearch.client.Cancellable;
 import org.elasticsearch.client.indices.GetMappingsResponse;
 import org.elasticsearch.client.indices.PutMappingRequest;
 import org.elasticsearch.common.xcontent.XContentBuilder;
@@ -65,9 +66,10 @@ public interface GPElasticSeachRestMappingDAO<D extends Document> extends GPElas
     /**
      * @param theXContentBuilder
      * @param theActionListener
+     * @return {@link Cancellable}
      * @throws Exception
      */
-    void putMappingAsync(@Nonnull(when = NEVER) XContentBuilder theXContentBuilder, @Nonnull(when = NEVER) ActionListener<AcknowledgedResponse> theActionListener) throws Exception;
+    Cancellable putMappingAsync(@Nonnull(when = NEVER) XContentBuilder theXContentBuilder, @Nonnull(when = NEVER) ActionListener<AcknowledgedResponse> theActionListener) throws Exception;
 
     /**
      * @return {@link GetMappingsResponse}
@@ -77,9 +79,10 @@ public interface GPElasticSeachRestMappingDAO<D extends Document> extends GPElas
 
     /**
      * @param theActionListener
+     * @return {@link Cancellable}
      * @throws Exception
      */
-    void getMappingAsync(@Nonnull(when = NEVER) ActionListener<GetMappingsResponse> theActionListener) throws Exception;
+    Cancellable getMappingAsync(@Nonnull(when = NEVER) ActionListener<GetMappingsResponse> theActionListener) throws Exception;
 
     /**
      * @return {@link PutMappingRequest}

@@ -36,6 +36,7 @@ package org.geosdi.geoplatform.experimental.el.rest.api.dao.mapping;
 
 import org.elasticsearch.action.ActionListener;
 import org.elasticsearch.action.support.master.AcknowledgedResponse;
+import org.elasticsearch.client.Cancellable;
 import org.elasticsearch.client.indices.GetMappingsRequest;
 import org.elasticsearch.client.indices.GetMappingsResponse;
 import org.elasticsearch.client.indices.PutMappingRequest;
@@ -79,13 +80,14 @@ public abstract class ElasticSeachRestMappingDAO<D extends Document> extends Ela
     /**
      * @param theXContentBuilder
      * @param theActionListener
+     * @return {@link Cancellable}
      * @throws Exception
      */
     @Override
-    public void putMappingAsync(@Nonnull(when = NEVER) XContentBuilder theXContentBuilder, @Nonnull(when = NEVER) ActionListener<AcknowledgedResponse> theActionListener) throws Exception {
+    public Cancellable putMappingAsync(@Nonnull(when = NEVER) XContentBuilder theXContentBuilder, @Nonnull(when = NEVER) ActionListener<AcknowledgedResponse> theActionListener) throws Exception {
         checkArgument(theActionListener != null, "The Parameter actionListener must not be null.");
         GPElasticSearchCheck<PutMappingRequest, XContentBuilder, Exception> putMappingCheck = this::createPutMappingRequest;
-        this.elasticSearchRestHighLevelClient.indices().putMappingAsync(putMappingCheck.apply(theXContentBuilder), DEFAULT, theActionListener);
+        return this.elasticSearchRestHighLevelClient.indices().putMappingAsync(putMappingCheck.apply(theXContentBuilder), DEFAULT, theActionListener);
     }
 
     /**
@@ -99,12 +101,13 @@ public abstract class ElasticSeachRestMappingDAO<D extends Document> extends Ela
 
     /**
      * @param theActionListener
+     * @return {@link Cancellable}
      * @throws Exception
      */
     @Override
-    public void getMappingAsync(@Nonnull(when = NEVER) ActionListener<GetMappingsResponse> theActionListener) throws Exception {
+    public Cancellable getMappingAsync(@Nonnull(when = NEVER) ActionListener<GetMappingsResponse> theActionListener) throws Exception {
         checkArgument(theActionListener != null, "The Parameter actionListener must not be null.");
-        this.elasticSearchRestHighLevelClient.indices().getMappingAsync(new GetMappingsRequest().indices(this.getIndexName()), DEFAULT, theActionListener);
+        return this.elasticSearchRestHighLevelClient.indices().getMappingAsync(new GetMappingsRequest().indices(this.getIndexName()), DEFAULT, theActionListener);
     }
 
     /**

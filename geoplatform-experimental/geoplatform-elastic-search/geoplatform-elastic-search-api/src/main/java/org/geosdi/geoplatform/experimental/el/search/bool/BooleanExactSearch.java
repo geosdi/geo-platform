@@ -37,11 +37,11 @@ package org.geosdi.geoplatform.experimental.el.search.bool;
 import net.jcip.annotations.Immutable;
 import org.elasticsearch.index.query.Operator;
 import org.elasticsearch.index.query.QueryBuilder;
-import org.elasticsearch.index.query.QueryBuilders;
 
 import javax.annotation.Nonnull;
 
 import static javax.annotation.meta.When.NEVER;
+import static org.elasticsearch.index.query.QueryBuilders.matchQuery;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -66,6 +66,6 @@ public class BooleanExactSearch extends IBooleanSearch.AbstractBooleanSearch {
      */
     @Override
     public QueryBuilder buildQuery() {
-        return QueryBuilders.matchQuery(field, value).operator(operator);
+        return matchQuery(field, value).operator(operator);
     }
 }

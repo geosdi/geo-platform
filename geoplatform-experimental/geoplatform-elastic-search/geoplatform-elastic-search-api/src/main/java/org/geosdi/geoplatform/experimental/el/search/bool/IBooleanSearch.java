@@ -60,7 +60,7 @@ public interface IBooleanSearch extends IGPQuerySearch {
      * @return {@link P}
      */
     default <P extends Page> P toPage() {
-        return (P) new GPPageableElasticSearchDAO.QueriableSortablePage(this.buildQuery());
+        return (P) new GPPageableElasticSearchDAO.MultiFieldsSearch(this);
     }
 
     /**

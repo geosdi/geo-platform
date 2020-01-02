@@ -47,6 +47,7 @@ public interface Document extends Serializable {
     /**
      * @return {@link String} ElasticSearch ID
      */
+    @JsonIgnore
     String getId();
 
     /**

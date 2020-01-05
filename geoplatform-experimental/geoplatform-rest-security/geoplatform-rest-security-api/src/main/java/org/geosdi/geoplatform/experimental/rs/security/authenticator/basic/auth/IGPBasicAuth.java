@@ -33,49 +33,44 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.experimental.openam.api.authenticator.filter;
-
-import org.geosdi.geoplatform.experimental.rs.security.authenticator.GPAuthenticatorType;
-import org.geosdi.geoplatform.experimental.rs.security.authenticator.filter.GPAuthenticatorVersionFilter;
+package org.geosdi.geoplatform.experimental.rs.security.authenticator.basic.auth;
 
 import javax.annotation.Nonnull;
+import java.io.Serializable;
 
 import static javax.annotation.meta.When.NEVER;
-import static org.geosdi.geoplatform.experimental.openam.api.authenticator.OpenAMAuthenticatorType.OPENAM;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class BaseOpenAmAuthenticator implements GPAuthenticatorVersionFilter {
+public interface IGPBasicAuth extends Serializable {
 
     /**
      * @return {@link String}
      */
-    @Override
-    public String getAuthenticatorName() {
-        return getClass().getSimpleName();
-    }
-
-    /**
-     * @return {@link GPAuthenticatorType}
-     */
-    @Override
-    public GPAuthenticatorType getAuthenticatorType() {
-        return OPENAM;
-    }
+    String getUsername();
 
     /**
      * @return {@link String}
      */
-    @Override
-    public String getAuthenticatorVersion() {
-        return "OpenAM-v13";
-    }
+    String getPassword();
 
     /**
-     * @param token
+     * @param theUsername
+     * @param thePassword
+     * @return
      * @throws Exception
      */
-    protected abstract void validateToken(@Nonnull(when = NEVER) String token) throws Exception;
+    Boolean match(@Nonnull(when = NEVER) String theUsername, @Nonnull(when = NEVER) String thePassword) throws Exception;
+
+    /**
+     * @param theUsername
+     * @param thePassword
+     * @return {@link IGPBasicAuth}
+     * @throws Exception
+     */
+    static IGPBasicAuth of(@Nonnull(when = NEVER) String theUsername, @Nonnull(when = NEVER) String thePassword) throws Exception {
+        return new GPBasicAuth(theUsername, thePassword);
+    }
 }

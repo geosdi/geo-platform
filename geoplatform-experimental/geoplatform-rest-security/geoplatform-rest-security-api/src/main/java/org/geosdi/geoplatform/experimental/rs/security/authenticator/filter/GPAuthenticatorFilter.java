@@ -54,9 +54,4 @@ public interface GPAuthenticatorFilter extends ContainerRequestFilter {
      * @return {@link String}
      */
     String getAuthenticatorName();
-
-    /**
-     * @return {@link String}
-     */
-    String getAuthenticatorVersion();
 }

@@ -33,49 +33,52 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.experimental.openam.api.authenticator.filter;
+package org.geosdi.geoplatform.experimental.rs.security.authenticator.basic.auth;
 
-import org.geosdi.geoplatform.experimental.rs.security.authenticator.GPAuthenticatorType;
-import org.geosdi.geoplatform.experimental.rs.security.authenticator.filter.GPAuthenticatorVersionFilter;
+import lombok.Getter;
+import lombok.ToString;
+import net.jcip.annotations.Immutable;
 
 import javax.annotation.Nonnull;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static javax.annotation.meta.When.NEVER;
-import static org.geosdi.geoplatform.experimental.openam.api.authenticator.OpenAMAuthenticatorType.OPENAM;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class BaseOpenAmAuthenticator implements GPAuthenticatorVersionFilter {
+@Immutable
+@Getter
+@ToString
+public class GPBasicAuth implements IGPBasicAuth {
+
+    private static final long serialVersionUID = 3396558488196710833L;
+    //
+    private final String username;
+    private final String password;
 
     /**
-     * @return {@link String}
+     * @param theUsername
+     * @param thePassword
      */
-    @Override
-    public String getAuthenticatorName() {
-        return getClass().getSimpleName();
+    GPBasicAuth(@Nonnull(when = NEVER) String theUsername, @Nonnull(when = NEVER) String thePassword) {
+        checkArgument(((theUsername != null) && !(theUsername.trim().isEmpty())), "The Parameter username must not be null or an empty string.");
+        checkArgument(((thePassword != null) && !(thePassword.trim().isEmpty())), "The Parameter password must not be null or an empty string.");
+        this.username = theUsername;
+        this.password = thePassword;
     }
 
     /**
-     * @return {@link GPAuthenticatorType}
-     */
-    @Override
-    public GPAuthenticatorType getAuthenticatorType() {
-        return OPENAM;
-    }
-
-    /**
-     * @return {@link String}
-     */
-    @Override
-    public String getAuthenticatorVersion() {
-        return "OpenAM-v13";
-    }
-
-    /**
-     * @param token
+     * @param theUsername
+     * @param thePassword
+     * @return
      * @throws Exception
      */
-    protected abstract void validateToken(@Nonnull(when = NEVER) String token) throws Exception;
+    @Override
+    public Boolean match(@Nonnull(when = NEVER) String theUsername, @Nonnull(when = NEVER) String thePassword) throws Exception {
+        checkArgument(((theUsername != null) && !(theUsername.trim().isEmpty())), "The Parameter username to match must not be null or an empty string.");
+        checkArgument(((thePassword != null) && !(thePassword.trim().isEmpty())), "The Parameter password to match must not be null or an empty string.");
+        return ((this.username.equals(theUsername)) && (this.password.equals(thePassword)));
+    }
 }

@@ -63,8 +63,7 @@ public class SimpleBeanJacksonReaderTest {
     private static final GPJacksonReaderSupport<SimpleBean> JACKSON_READER_SUPPORT = new GPBaseJacksonReaderSupport<>(new GPJacksonSupport(UNWRAP_ROOT_VALUE_DISABLE,
             FAIL_ON_UNKNOW_PROPERTIES_DISABLE, ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE, WRAP_ROOT_VALUE_DISABLE, INDENT_OUTPUT_ENABLE)
             .configure(WRITE_DATES_AS_TIMESTAMPS_DISABLE)
-            .configure(GPJsonIncludeFeature.NON_NULL),
-            SimpleBean.class);
+            .configure(GPJsonIncludeFeature.NON_NULL), SimpleBean.class);
 
     @Test
     public void readJsonFromURLTest() throws Exception {

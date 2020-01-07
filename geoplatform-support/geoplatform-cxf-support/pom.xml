@@ -33,6 +33,7 @@
         <module>geoplatform-cxf-server-support</module>
         <module>geoplatform-cxf-rs-provider-support</module>
         <module>geoplatform-cxf-rs-geocoding-support</module>
+        <module>geoplatform-cxf-rs-support</module>
     </modules>
 
 </project>

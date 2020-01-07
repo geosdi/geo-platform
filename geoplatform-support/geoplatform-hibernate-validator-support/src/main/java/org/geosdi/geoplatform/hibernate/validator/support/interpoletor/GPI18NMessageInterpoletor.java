@@ -45,8 +45,7 @@ import java.util.Locale;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPI18NMessageInterpoletor extends ResourceBundleMessageInterpolator
-        implements IGPI18NMessageInterpolator {
+public class GPI18NMessageInterpoletor extends ResourceBundleMessageInterpolator implements IGPI18NMessageInterpolator {
 
     private ThreadLocal<Locale> defaultLocale = ThreadLocal.withInitial(() -> Locale.ENGLISH);
 
@@ -64,8 +63,7 @@ public class GPI18NMessageInterpoletor extends ResourceBundleMessageInterpolator
      * @param userResourceBundleLocator
      * @param contributorResourceBundleLocator
      */
-    public GPI18NMessageInterpoletor(ResourceBundleLocator userResourceBundleLocator,
-            ResourceBundleLocator contributorResourceBundleLocator) {
+    public GPI18NMessageInterpoletor(ResourceBundleLocator userResourceBundleLocator, ResourceBundleLocator contributorResourceBundleLocator) {
         super(userResourceBundleLocator, contributorResourceBundleLocator);
     }
 

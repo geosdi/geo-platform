@@ -38,13 +38,17 @@ import org.elasticsearch.action.ActionListener;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.client.Cancellable;
 import org.elasticsearch.client.core.CountResponse;
+import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.index.reindex.BulkByScrollResponse;
 import org.elasticsearch.index.reindex.UpdateByQueryRequest;
 import org.geosdi.geoplatform.experimental.el.api.function.GPElasticSearchCheck;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
+import org.geosdi.geoplatform.experimental.el.api.response.IGPUpdateResponse;
 import org.geosdi.geoplatform.experimental.el.rest.api.dao.find.GPElasticSearchRestFindDAO;
 
 import javax.annotation.Nonnull;
+
+import java.util.Map;
 
 import static javax.annotation.meta.When.NEVER;
 
@@ -77,10 +81,26 @@ public interface GPElasticSearchRestDAO<D extends Document> extends GPElasticSea
 
     /**
      * @param document
-     * @return {@link Boolean}
+     * @return {@link IGPUpdateResponse}
      * @throws Exception
      */
-    Boolean update(@Nonnull(when = NEVER) D document) throws Exception;
+    IGPUpdateResponse update(@Nonnull(when = NEVER) D document) throws Exception;
+
+    /**
+     * @param theID
+     * @param theProperties
+     * @return {@link IGPUpdateResponse}
+     * @throws Exception
+     */
+    IGPUpdateResponse update(@Nonnull(when = NEVER) String theID, @Nonnull(when = NEVER) Map<String, Object> theProperties) throws Exception;
+
+    /**
+     * @param theID
+     * @param theXcontetBuilder
+     * @return {@link IGPUpdateResponse}
+     * @throws Exception
+     */
+    IGPUpdateResponse update(@Nonnull(when = NEVER) String theID, @Nonnull(when = NEVER) XContentBuilder theXcontetBuilder) throws Exception;
 
     /**
      * @param documents

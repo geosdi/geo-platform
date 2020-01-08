@@ -48,15 +48,18 @@ import org.elasticsearch.action.update.UpdateResponse;
 import org.elasticsearch.client.Cancellable;
 import org.elasticsearch.client.core.CountRequest;
 import org.elasticsearch.client.core.CountResponse;
+import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.index.reindex.BulkByScrollResponse;
 import org.elasticsearch.index.reindex.UpdateByQueryRequest;
 import org.geosdi.geoplatform.experimental.el.api.function.GPElasticSearchCheck;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
+import org.geosdi.geoplatform.experimental.el.api.response.IGPUpdateResponse;
 import org.geosdi.geoplatform.experimental.el.rest.api.dao.find.ElasticSearchRestFindDAO;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Map;
 import java.util.Objects;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -69,6 +72,7 @@ import static org.elasticsearch.action.DocWriteResponse.Result.DELETED;
 import static org.elasticsearch.client.RequestOptions.DEFAULT;
 import static org.elasticsearch.common.xcontent.XContentType.JSON;
 import static org.elasticsearch.rest.RestStatus.OK;
+import static org.geosdi.geoplatform.experimental.el.api.response.IGPUpdateResponse.of;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -149,11 +153,11 @@ public abstract class ElasticSearchRestDAO<D extends Document> extends ElasticSe
 
     /**
      * @param document
-     * @return {@link Boolean}
+     * @return {@link IGPUpdateResponse}
      * @throws Exception
      */
     @Override
-    public Boolean update(@Nonnull(when = NEVER) D document) throws Exception {
+    public IGPUpdateResponse update(@Nonnull(when = NEVER) D document) throws Exception {
         checkArgument(((document != null) && ((document.getId() != null) && !(document.getId().trim().isEmpty()))), "The {} to Update must  not be null or ID must not be null or Empty.", this.elasticSearchRestMapper.getDocumentClassName());
         UpdateRequest updateRequest = new UpdateRequest(this.getIndexName(), document.getId())
                 .doc(this.writeDocumentAsString(document), JSON);
@@ -162,8 +166,51 @@ public abstract class ElasticSearchRestDAO<D extends Document> extends ElasticSe
         if (updateResponse.getResult() != DocWriteResponse.Result.UPDATED) {
             throw new IllegalStateException("Problem to update document, status : " + updateResponse.status());
         }
-        logger.debug("#######################Document updated successfully, version : {}\n", updateResponse.getVersion());
-        return TRUE;
+        IGPUpdateResponse value = of(TRUE, updateResponse.getVersion());
+        logger.debug("#######################Document updated successfully, Response : {}\n", value);
+        return value;
+    }
+
+    /**
+     * @param theID
+     * @param theProperties
+     * @return {@link }
+     * @throws Exception
+     */
+    @Override
+    public IGPUpdateResponse update(@Nonnull(when = NEVER) String theID, @Nonnull(when = NEVER) Map<String, Object> theProperties) throws Exception {
+        checkArgument((theID != null) && !(theID.trim().isEmpty()), "The Parameter id must not be null or an empty string.");
+        checkArgument((theProperties != null) && (!theProperties.isEmpty()), "The Parameter properties must not be null or an empty map");
+        UpdateRequest updateRequest = new UpdateRequest(this.getIndexName(), theID).doc(theProperties);
+        logger.debug("##################################Try to Update Document with ID : {}\n\n", theID);
+        UpdateResponse updateResponse = this.elasticSearchRestHighLevelClient.update(updateRequest, DEFAULT);
+        if (updateResponse.getResult() != DocWriteResponse.Result.UPDATED) {
+            throw new IllegalStateException("Problem to update document, status : " + updateResponse.status());
+        }
+        IGPUpdateResponse value = of(TRUE, updateResponse.getVersion());
+        logger.debug("#######################Document updated successfully, Response : {}\n", value);
+        return value;
+    }
+
+    /**
+     * @param theID
+     * @param theXcontetBuilder
+     * @return {@link IGPUpdateResponse}
+     * @throws Exception
+     */
+    @Override
+    public IGPUpdateResponse update(@Nonnull(when = NEVER) String theID, @Nonnull(when = NEVER) XContentBuilder theXcontetBuilder) throws Exception {
+        checkArgument((theID != null) && !(theID.trim().isEmpty()), "The Parameter id must not be null or an empty string.");
+        checkArgument(theXcontetBuilder != null, "The Parameter xContenBuilder must not be null.");
+        UpdateRequest updateRequest = new UpdateRequest(this.getIndexName(), theID).doc(theXcontetBuilder);
+        logger.debug("##################################Try to Update Document with ID : {}\n\n", theID);
+        UpdateResponse updateResponse = this.elasticSearchRestHighLevelClient.update(updateRequest, DEFAULT);
+        if (updateResponse.getResult() != DocWriteResponse.Result.UPDATED) {
+            throw new IllegalStateException("Problem to update document, status : " + updateResponse.status());
+        }
+        IGPUpdateResponse value = of(TRUE, updateResponse.getVersion());
+        logger.debug("#######################Document updated successfully, Response : {}\n", value);
+        return value;
     }
 
     /**

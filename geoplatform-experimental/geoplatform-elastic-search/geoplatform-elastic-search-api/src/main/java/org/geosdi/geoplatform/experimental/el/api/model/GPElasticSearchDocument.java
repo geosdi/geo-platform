@@ -34,7 +34,6 @@
  */
 package org.geosdi.geoplatform.experimental.el.api.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -50,6 +49,5 @@ public abstract class GPElasticSearchDocument implements Document {
 
     private static final long serialVersionUID = 3295273925910743927L;
     //
-    @JsonIgnore
     private String id;
 }

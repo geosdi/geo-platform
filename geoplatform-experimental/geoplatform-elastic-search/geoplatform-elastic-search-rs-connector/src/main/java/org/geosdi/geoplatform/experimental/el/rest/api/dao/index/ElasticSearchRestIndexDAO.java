@@ -213,7 +213,7 @@ public abstract class ElasticSearchRestIndexDAO<D extends Document> extends Elas
         checkArgument(document != null, "The Document to index must not be null.");
         GPElasticSearchCheck<IndexResponse, D, Exception> responseCheck = (document.isIdSetted() ? this::indexDocumentWithID : this::indexDocument);
         IndexResponse response = responseCheck.apply(document);
-        logger.debug("##############{} Created : {}\n\n", this.elasticSearchRestMapper.getDocumentClassName(), response.getResult());
+        logger.debug("##############{} Created Document with ID : {}\n\n", this.elasticSearchRestMapper.getDocumentClassName(), response.getId());
         return document;
     }
 

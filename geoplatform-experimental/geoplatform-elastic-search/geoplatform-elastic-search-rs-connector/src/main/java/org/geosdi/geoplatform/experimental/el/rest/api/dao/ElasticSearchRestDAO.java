@@ -182,9 +182,9 @@ public abstract class ElasticSearchRestDAO<D extends Document> extends ElasticSe
         checkArgument((theID != null) && !(theID.trim().isEmpty()), "The Parameter id must not be null or an empty string.");
         checkArgument((theProperties != null) && (!theProperties.isEmpty()), "The Parameter properties must not be null or an empty map");
         UpdateRequest updateRequest = new UpdateRequest(this.getIndexName(), theID).doc(theProperties);
-        logger.debug("##################################Try to Update Document with ID : {}\n\n", theID);
+        logger.debug("###a###############################Try to Update Document with ID : {}\n\n", theID);
         UpdateResponse updateResponse = this.elasticSearchRestHighLevelClient.update(updateRequest, DEFAULT);
-        if (updateResponse.getResult() != DocWriteResponse.Result.UPDATED) {
+        if (updateResponse.status() != OK) {
             throw new IllegalStateException("Problem to update document, status : " + updateResponse.status());
         }
         IGPUpdateResponse value = of(TRUE, updateResponse.getVersion());

@@ -39,6 +39,7 @@ import org.elasticsearch.action.get.*;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
+import org.elasticsearch.search.fetch.subphase.FetchSourceContext;
 import org.elasticsearch.search.sort.SortOrder;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
 import org.geosdi.geoplatform.experimental.el.condition.PredicateCondition;
@@ -86,6 +87,21 @@ public abstract class ElasticSearchRestFindDAO<D extends Document> extends Pagea
         checkArgument((theDocumentID != null) && !(theDocumentID.trim().isEmpty()), "The Parameter documentID must not be null or an empty string.");
         GetResponse response = this.elasticSearchRestHighLevelClient.get(new GetRequest(this.getIndexName())
                 .realtime(TRUE).refresh(TRUE).id(theDocumentID), DEFAULT);
+        return (response.isExists()) ? this.readGetResponse(response) : null;
+    }
+
+    /**
+     * @param theDocumentID
+     * @param includeFields
+     * @param excludeFields
+     * @return {@link D}
+     * @throws Exception
+     */
+    @Override
+    public D findByID(@Nonnull(when = NEVER) String theDocumentID, @Nullable String[] includeFields, @Nullable String[] excludeFields) throws Exception {
+        checkArgument((theDocumentID != null) && !(theDocumentID.trim().isEmpty()), "The Parameter documentID must not be null or an empty string.");
+        GetResponse response = this.elasticSearchRestHighLevelClient.get(new GetRequest(this.getIndexName())
+                .realtime(TRUE).refresh(TRUE).fetchSourceContext(new FetchSourceContext(TRUE, includeFields, excludeFields)).id(theDocumentID), DEFAULT);
         return (response.isExists()) ? this.readGetResponse(response) : null;
     }
 

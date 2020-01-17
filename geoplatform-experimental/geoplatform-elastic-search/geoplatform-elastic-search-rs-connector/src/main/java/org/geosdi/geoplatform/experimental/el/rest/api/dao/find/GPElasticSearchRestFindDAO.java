@@ -60,6 +60,15 @@ public interface GPElasticSearchRestFindDAO<D extends Document> extends GPPageab
     D findByID(@Nonnull(when = When.NEVER) String theDocumentID) throws Exception;
 
     /**
+     * @param theDocumentID
+     * @param includeFields
+     * @param excludeFields
+     * @return {@link D}
+     * @throws Exception
+     */
+    D findByID(@Nonnull(when = NEVER) String theDocumentID, @Nullable String[] includeFields, @Nullable String[] excludeFields) throws Exception;
+
+    /**
      * @return {@link List<D>}
      * @throws Exception
      */

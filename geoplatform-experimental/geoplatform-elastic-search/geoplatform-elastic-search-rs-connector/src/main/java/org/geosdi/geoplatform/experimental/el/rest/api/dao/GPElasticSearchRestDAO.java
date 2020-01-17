@@ -36,6 +36,7 @@ package org.geosdi.geoplatform.experimental.el.rest.api.dao;
 
 import org.elasticsearch.action.ActionListener;
 import org.elasticsearch.action.bulk.BulkResponse;
+import org.elasticsearch.action.update.UpdateResponse;
 import org.elasticsearch.client.Cancellable;
 import org.elasticsearch.client.core.CountResponse;
 import org.elasticsearch.common.xcontent.XContentBuilder;
@@ -87,6 +88,21 @@ public interface GPElasticSearchRestDAO<D extends Document> extends GPElasticSea
     IGPUpdateResponse update(@Nonnull(when = NEVER) D document) throws Exception;
 
     /**
+     * @param document
+     * @return {@link Cancellable}
+     * @throws Exception
+     */
+    Cancellable updateAsync(@Nonnull(when = NEVER) D document) throws Exception;
+
+    /**
+     * @param document
+     * @param theListener
+     * @return {@link Cancellable}
+     * @throws Exception
+     */
+    Cancellable updateAsync(@Nonnull(when = NEVER) D document, @Nonnull(when = NEVER) ActionListener<UpdateResponse> theListener) throws Exception;
+
+    /**
      * @param theID
      * @param theProperties
      * @return {@link IGPUpdateResponse}
@@ -96,11 +112,45 @@ public interface GPElasticSearchRestDAO<D extends Document> extends GPElasticSea
 
     /**
      * @param theID
+     * @param theProperties
+     * @return {@link Cancellable}
+     * @throws Exception
+     */
+    Cancellable updateAsync(@Nonnull(when = NEVER) String theID, @Nonnull(when = NEVER) Map<String, Object> theProperties) throws Exception;
+
+    /**
+     * @param theID
+     * @param theProperties
+     * @param theListener
+     * @return {@link Cancellable}
+     * @throws Exception
+     */
+    Cancellable updateAsync(@Nonnull(when = NEVER) String theID, @Nonnull(when = NEVER) Map<String, Object> theProperties, @Nonnull(when = NEVER) ActionListener<UpdateResponse> theListener) throws Exception;
+
+    /**
+     * @param theID
      * @param theXcontetBuilder
      * @return {@link IGPUpdateResponse}
      * @throws Exception
      */
     IGPUpdateResponse update(@Nonnull(when = NEVER) String theID, @Nonnull(when = NEVER) XContentBuilder theXcontetBuilder) throws Exception;
+
+    /**
+     * @param theID
+     * @param theXcontetBuilder
+     * @return {@link Cancellable}
+     * @throws Exception
+     */
+    Cancellable updateAsync(@Nonnull(when = NEVER) String theID, @Nonnull(when = NEVER) XContentBuilder theXcontetBuilder) throws Exception;
+
+    /**
+     * @param theID
+     * @param theXcontetBuilder
+     * @param theListener
+     * @return {@link Cancellable}
+     * @throws Exception
+     */
+    Cancellable updateAsync(@Nonnull(when = NEVER) String theID, @Nonnull(when = NEVER) XContentBuilder theXcontetBuilder, @Nonnull(when = NEVER) ActionListener<UpdateResponse> theListener) throws Exception;
 
     /**
      * @param documents

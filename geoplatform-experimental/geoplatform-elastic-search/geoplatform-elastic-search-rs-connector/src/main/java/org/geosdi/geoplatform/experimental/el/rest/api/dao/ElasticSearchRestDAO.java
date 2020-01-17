@@ -172,6 +172,58 @@ public abstract class ElasticSearchRestDAO<D extends Document> extends ElasticSe
     }
 
     /**
+     * @param document
+     * @return {@link Cancellable}
+     * @throws Exception
+     */
+    @Override
+    public Cancellable updateAsync(@Nonnull(when = NEVER) D document) throws Exception {
+        checkArgument(((document != null) && ((document.getId() != null) && !(document.getId().trim().isEmpty()))), "The {} to Update must  not be null or ID must not be null or Empty.", this.elasticSearchRestMapper.getDocumentClassName());
+        UpdateRequest updateRequest = new UpdateRequest(this.getIndexName(), document.getId())
+                .doc(this.writeDocumentAsString(document), JSON);
+        logger.debug("##################################Try to Update : {}\n\n", document);
+        return this.elasticSearchRestHighLevelClient.updateAsync(updateRequest, DEFAULT, new ActionListener<UpdateResponse>() {
+
+            @Override
+            public void onResponse(UpdateResponse updateResponse) {
+                if (updateResponse.getResult() != DocWriteResponse.Result.UPDATED) {
+                    throw new IllegalStateException("Problem to update document, status : " + updateResponse.status());
+                }
+                try {
+                    IGPUpdateResponse value = of(TRUE, updateResponse.getVersion());
+                    logger.debug("#######################Document updated successfully, Response : {}\n", value);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    logger.error("#######################updateAsync error : {}\n", ex.getMessage());
+                }
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                e.printStackTrace();
+                logger.error("#######################updateAsync error : {}\n", e.getMessage());
+                throw new IllegalStateException(e);
+            }
+        });
+    }
+
+    /**
+     * @param document
+     * @param theListener
+     * @return {@link Cancellable}
+     * @throws Exception
+     */
+    @Override
+    public Cancellable updateAsync(@Nonnull(when = NEVER) D document, @Nonnull(when = NEVER) ActionListener<UpdateResponse> theListener) throws Exception {
+        checkArgument(((document != null) && ((document.getId() != null) && !(document.getId().trim().isEmpty()))), "The {} to Update must  not be null or ID must not be null or Empty.", this.elasticSearchRestMapper.getDocumentClassName());
+        checkArgument(theListener != null, "The Parameter ActionListener<UpdateResponse> must not be null.");
+        UpdateRequest updateRequest = new UpdateRequest(this.getIndexName(), document.getId())
+                .doc(this.writeDocumentAsString(document), JSON);
+        logger.debug("##################################Try to Update : {}\n\n", document);
+        return this.elasticSearchRestHighLevelClient.updateAsync(updateRequest, DEFAULT, theListener);
+    }
+
+    /**
      * @param theID
      * @param theProperties
      * @return {@link }
@@ -194,6 +246,59 @@ public abstract class ElasticSearchRestDAO<D extends Document> extends ElasticSe
 
     /**
      * @param theID
+     * @param theProperties
+     * @return {@link Cancellable}
+     * @throws Exception
+     */
+    @Override
+    public Cancellable updateAsync(@Nonnull(when = NEVER) String theID, @Nonnull(when = NEVER) Map<String, Object> theProperties) throws Exception {
+        checkArgument((theID != null) && !(theID.trim().isEmpty()), "The Parameter id must not be null or an empty string.");
+        checkArgument((theProperties != null) && (!theProperties.isEmpty()), "The Parameter properties must not be null or an empty map");
+        UpdateRequest updateRequest = new UpdateRequest(this.getIndexName(), theID).doc(theProperties);
+        logger.debug("###a###############################Try to Update Document with ID : {}\n\n", theID);
+        return this.elasticSearchRestHighLevelClient.updateAsync(updateRequest, DEFAULT, new ActionListener<UpdateResponse>() {
+
+            @Override
+            public void onResponse(UpdateResponse updateResponse) {
+                if (updateResponse.status() != OK) {
+                    throw new IllegalStateException("Problem to update document, status : " + updateResponse.status());
+                }
+                try {
+                    IGPUpdateResponse value = of(TRUE, updateResponse.getVersion());
+                    logger.debug("#######################Document updated successfully, Response : {}\n", value);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    logger.error("#######################updateAsync error : {}\n", ex.getMessage());
+                }
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                e.printStackTrace();
+                logger.error("#######################updateAsync error : {}\n", e.getMessage());
+            }
+        });
+    }
+
+    /**
+     * @param theID
+     * @param theProperties
+     * @param theListener
+     * @return {@link Cancellable}
+     * @throws Exception
+     */
+    @Override
+    public Cancellable updateAsync(@Nonnull(when = NEVER) String theID, @Nonnull(when = NEVER) Map<String, Object> theProperties, @Nonnull(when = NEVER) ActionListener<UpdateResponse> theListener) throws Exception {
+        checkArgument((theID != null) && !(theID.trim().isEmpty()), "The Parameter id must not be null or an empty string.");
+        checkArgument((theProperties != null) && (!theProperties.isEmpty()), "The Parameter properties must not be null or an empty map");
+        checkArgument(theListener != null, "The Parameter ActionListener<UpdateResponse> must not be null.");
+        UpdateRequest updateRequest = new UpdateRequest(this.getIndexName(), theID).doc(theProperties);
+        logger.debug("###a###############################Try to Update Document with ID : {}\n\n", theID);
+        return this.elasticSearchRestHighLevelClient.updateAsync(updateRequest, DEFAULT, theListener);
+    }
+
+    /**
+     * @param theID
      * @param theXcontetBuilder
      * @return {@link IGPUpdateResponse}
      * @throws Exception
@@ -205,12 +310,64 @@ public abstract class ElasticSearchRestDAO<D extends Document> extends ElasticSe
         UpdateRequest updateRequest = new UpdateRequest(this.getIndexName(), theID).doc(theXcontetBuilder);
         logger.debug("##################################Try to Update Document with ID : {}\n\n", theID);
         UpdateResponse updateResponse = this.elasticSearchRestHighLevelClient.update(updateRequest, DEFAULT);
-        if (updateResponse.getResult() != DocWriteResponse.Result.UPDATED) {
+        if (updateResponse.status() != OK) {
             throw new IllegalStateException("Problem to update document, status : " + updateResponse.status());
         }
         IGPUpdateResponse value = of(TRUE, updateResponse.getVersion());
         logger.debug("#######################Document updated successfully, Response : {}\n", value);
         return value;
+    }
+
+    /**
+     * @param theID
+     * @param theXcontetBuilder
+     * @return {@link Cancellable}
+     * @throws Exception
+     */
+    @Override
+    public Cancellable updateAsync(@Nonnull(when = NEVER) String theID, @Nonnull(when = NEVER) XContentBuilder theXcontetBuilder) throws Exception {
+        checkArgument((theID != null) && !(theID.trim().isEmpty()), "The Parameter id must not be null or an empty string.");
+        checkArgument(theXcontetBuilder != null, "The Parameter xContenBuilder must not be null.");
+        UpdateRequest updateRequest = new UpdateRequest(this.getIndexName(), theID).doc(theXcontetBuilder);
+        logger.debug("##################################Try to Update Document with ID : {}\n\n", theID);
+        return this.elasticSearchRestHighLevelClient.updateAsync(updateRequest, DEFAULT, new ActionListener<UpdateResponse>() {
+
+            @Override
+            public void onResponse(UpdateResponse updateResponse) {
+                if (updateResponse.status() != OK) {
+                    throw new IllegalStateException("Problem to update document, status : " + updateResponse.status());
+                }
+                try {
+                    IGPUpdateResponse value = of(TRUE, updateResponse.getVersion());
+                    logger.debug("#######################Document updated successfully, Response : {}\n", value);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    logger.error("#######################updateAsync error : {}\n", ex.getMessage());
+                }
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                e.printStackTrace();
+                logger.error("#######################updateAsync error : {}\n", e.getMessage());
+            }
+        });
+    }
+
+    /**
+     * @param theID
+     * @param theXcontetBuilder
+     * @param theListener
+     * @return {@link Cancellable}
+     * @throws Exception
+     */
+    @Override
+    public Cancellable updateAsync(@Nonnull(when = NEVER) String theID, @Nonnull(when = NEVER) XContentBuilder theXcontetBuilder, @Nonnull(when = NEVER) ActionListener<UpdateResponse> theListener) throws Exception {
+        checkArgument((theID != null) && !(theID.trim().isEmpty()), "The Parameter id must not be null or an empty string.");
+        checkArgument(theXcontetBuilder != null, "The Parameter xContenBuilder must not be null.");
+        checkArgument(theListener != null, "The Parameter ActionListener<UpdateResponse> must not be null.");
+        UpdateRequest updateRequest = new UpdateRequest(this.getIndexName(), theID).doc(theXcontetBuilder);
+        return this.elasticSearchRestHighLevelClient.updateAsync(updateRequest, DEFAULT, theListener);
     }
 
     /**

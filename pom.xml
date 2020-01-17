@@ -76,7 +76,7 @@
         </repository>
 
         <!-- Spring -->
-        <repository>
+        <!--repository>
             <id>repository.spring.release</id>
             <name>Spring GA Repository</name>
             <url>http://repo.spring.io/release</url>
@@ -85,7 +85,7 @@
             <id>repository.spring.snapshot</id>
             <name>Spring Snapshot Repository</name>
             <url>http://repo.spring.io/snapshot</url>
-        </repository>
+        </repository-->
         
         <repository>
             <id>sonatype-oss-public</id>

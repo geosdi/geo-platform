@@ -268,8 +268,7 @@ public abstract class ElasticSearchRestIndexDAO<D extends Document> extends Elas
                                         "PUT_MAPPING NOT CREATED."));
                         logger.debug("::::::::::::::::::::::GET_MAPPING_AS_STRING:::::::::::::: : {}\n", this.loadMappingAsString());
                     } else {
-                        logger.debug(
-                                "#########################There is no XContentBuilder defined so skip PutMapping.\n");
+                        logger.debug("#########################There is no XContentBuilder defined so skip PutMapping.\n");
                     }
                 } else {
                     logger.debug("@@@@@@@@@@@@@@@@@@@@@@@MAPPING_ALREADY_UP.");

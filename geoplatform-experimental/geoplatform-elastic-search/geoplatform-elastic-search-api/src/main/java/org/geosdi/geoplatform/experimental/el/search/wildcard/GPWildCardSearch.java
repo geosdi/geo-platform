@@ -33,7 +33,7 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.experimental.el.search.string;
+package org.geosdi.geoplatform.experimental.el.search.wildcard;
 
 import org.elasticsearch.index.query.QueryBuilder;
 import org.geosdi.geoplatform.experimental.el.search.bool.IBooleanSearch;
@@ -41,20 +41,20 @@ import org.geosdi.geoplatform.experimental.el.search.bool.IBooleanSearch;
 import javax.annotation.Nonnull;
 
 import static javax.annotation.meta.When.NEVER;
-import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
+import static org.elasticsearch.index.query.QueryBuilders.wildcardQuery;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPQueryStringSearch extends IBooleanSearch.AbstractBooleanSearch {
+public class GPWildCardSearch extends IBooleanSearch.AbstractBooleanSearch {
 
     /**
      * @param theField
      * @param theValue
      * @param theType
      */
-    public GPQueryStringSearch(@Nonnull(when = NEVER) String theField, @Nonnull(when = NEVER) Object theValue, @Nonnull(when = NEVER) BooleanQueryType theType) {
+    public GPWildCardSearch(@Nonnull(when = NEVER) String theField, @Nonnull(when = NEVER) Object theValue, @Nonnull(when = NEVER) BooleanQueryType theType) {
         super(theField, theValue, theType);
     }
 
@@ -63,6 +63,6 @@ public class GPQueryStringSearch extends IBooleanSearch.AbstractBooleanSearch {
      */
     @Override
     public QueryBuilder buildQuery() {
-        return queryStringQuery(this.value.toString()).field(this.field);
+        return wildcardQuery(this.field, this.value.toString());
     }
 }

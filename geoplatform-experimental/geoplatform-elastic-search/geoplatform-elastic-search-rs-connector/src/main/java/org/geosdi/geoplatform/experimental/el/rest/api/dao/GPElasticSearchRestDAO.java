@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.experimental.el.rest.api.dao;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.index.reindex.BulkByScrollResponse;
+import org.elasticsearch.index.reindex.DeleteByQueryRequest;
 import org.elasticsearch.index.reindex.UpdateByQueryRequest;
 import org.geosdi.geoplatform.experimental.el.api.function.GPElasticSearchCheck;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
@@ -118,6 +119,16 @@ public interface GPElasticSearchRestDAO<D extends Document> extends GPElasticSea
      * @throws java.lang.Exception
      */
     Boolean delete(@Nonnull(when = NEVER) String theID) throws Exception;
+
+    /**
+     * @param theValue
+     * @param theCheck
+     * @param <R>
+     * @param <V>
+     * @return {@link BulkByScrollResponse}
+     * @throws Exception
+     */
+    <R extends DeleteByQueryRequest, V extends Object> BulkByScrollResponse deleteByQuery(@Nonnull(when = NEVER) V theValue, @Nonnull(when = NEVER) GPElasticSearchCheck<R, V, Exception> theCheck) throws Exception;
 
     /**
      * <p>

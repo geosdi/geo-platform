@@ -47,6 +47,7 @@ import org.elasticsearch.client.core.CountRequest;
 import org.elasticsearch.client.core.CountResponse;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.index.reindex.BulkByScrollResponse;
+import org.elasticsearch.index.reindex.DeleteByQueryRequest;
 import org.elasticsearch.index.reindex.UpdateByQueryRequest;
 import org.geosdi.geoplatform.experimental.el.api.function.GPElasticSearchCheck;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
@@ -232,6 +233,19 @@ public abstract class ElasticSearchRestDAO<D extends Document> extends ElasticSe
             throw new IllegalStateException("Problem to delete document , status : " + deleteResponse.status());
         }
         return TRUE;
+    }
+
+    /**
+     * @param theValue
+     * @param theCheck
+     * @return {@link BulkByScrollResponse}
+     * @throws Exception
+     */
+    @Override
+    public <R extends DeleteByQueryRequest, V> BulkByScrollResponse deleteByQuery(@Nonnull(when = NEVER) V theValue, @Nonnull(when = NEVER) GPElasticSearchCheck<R, V, Exception> theCheck) throws Exception {
+        checkArgument(theValue != null, "The Parameter value must not be null.");
+        checkArgument(theCheck != null, "The Parameter checkFunction must not be null.");
+        return this.elasticSearchRestHighLevelClient.deleteByQuery(theCheck.apply(theValue), DEFAULT);
     }
 
     /**

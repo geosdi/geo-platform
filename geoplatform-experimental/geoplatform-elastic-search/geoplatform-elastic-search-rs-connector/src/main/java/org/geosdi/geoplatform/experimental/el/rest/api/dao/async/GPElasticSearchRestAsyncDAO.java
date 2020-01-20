@@ -6,6 +6,7 @@ import org.elasticsearch.client.Cancellable;
 import org.elasticsearch.client.core.CountResponse;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.index.reindex.BulkByScrollResponse;
+import org.elasticsearch.index.reindex.DeleteByQueryRequest;
 import org.elasticsearch.index.reindex.UpdateByQueryRequest;
 import org.geosdi.geoplatform.experimental.el.api.function.GPElasticSearchCheck;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
@@ -98,6 +99,27 @@ public interface GPElasticSearchRestAsyncDAO<D extends Document> extends GPElast
      * @throws Exception
      */
     <R extends UpdateByQueryRequest, V extends Object> Cancellable updateByQueryAsync(@Nonnull(when = NEVER) V theValue, @Nonnull(when = NEVER) GPElasticSearchCheck<R, V, Exception> theCheck, @Nonnull(when = NEVER) ActionListener<BulkByScrollResponse> theActionListener) throws Exception;
+
+    /**
+     * @param theValue
+     * @param theCheck
+     * @param <R>
+     * @param <V>
+     * @return {@link Cancellable}
+     * @throws Exception
+     */
+    <R extends DeleteByQueryRequest, V extends Object> Cancellable deleteByQueryAsync(@Nonnull(when = NEVER) V theValue, @Nonnull(when = NEVER) GPElasticSearchCheck<R, V, Exception> theCheck) throws Exception;
+
+    /**
+     * @param theValue
+     * @param theCheck
+     * @param theActionListener
+     * @param <R>
+     * @param <V>
+     * @return {@link Cancellable}
+     * @throws Exception
+     */
+    <R extends DeleteByQueryRequest, V extends Object> Cancellable deleteByQueryAsync(@Nonnull(when = NEVER) V theValue, @Nonnull(when = NEVER) GPElasticSearchCheck<R, V, Exception> theCheck, @Nonnull(when = NEVER) ActionListener<BulkByScrollResponse> theActionListener) throws Exception;
 
     /**
      * @param theListener

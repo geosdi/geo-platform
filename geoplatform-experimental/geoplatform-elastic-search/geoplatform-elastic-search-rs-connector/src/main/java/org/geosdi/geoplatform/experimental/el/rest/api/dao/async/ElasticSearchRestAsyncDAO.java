@@ -11,11 +11,11 @@ import org.elasticsearch.client.core.CountRequest;
 import org.elasticsearch.client.core.CountResponse;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.index.reindex.BulkByScrollResponse;
+import org.elasticsearch.index.reindex.DeleteByQueryRequest;
 import org.elasticsearch.index.reindex.UpdateByQueryRequest;
 import org.geosdi.geoplatform.experimental.el.api.function.GPElasticSearchCheck;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
 import org.geosdi.geoplatform.experimental.el.api.response.IGPUpdateResponse;
-import org.geosdi.geoplatform.experimental.el.rest.api.dao.ElasticSearchRestDAO;
 import org.geosdi.geoplatform.experimental.el.rest.api.dao.find.ElasticSearchRestFindDAO;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 
@@ -270,6 +270,46 @@ public abstract class ElasticSearchRestAsyncDAO<D extends Document> extends Elas
         checkArgument(theCheck != null, "The Parameter checkFunction must not be null.");
         checkArgument(theActionListener != null, "The Parameter actionListener must not be null.");
         return this.elasticSearchRestHighLevelClient.updateByQueryAsync(theCheck.apply(theValue), DEFAULT, theActionListener);
+    }
+
+    /**
+     * @param theValue
+     * @param theCheck
+     * @return {@link Cancellable}
+     * @throws Exception
+     */
+    @Override
+    public <R extends DeleteByQueryRequest, V> Cancellable deleteByQueryAsync(@Nonnull(when = NEVER) V theValue, @Nonnull(when = NEVER) GPElasticSearchCheck<R, V, Exception> theCheck) throws Exception {
+        checkArgument(theValue != null, "The Parameter value must not be null.");
+        checkArgument(theCheck != null, "The Parameter checkFunction must not be null.");
+        return this.deleteByQueryAsync(theValue, theCheck, new ActionListener<BulkByScrollResponse>() {
+
+            @Override
+            public void onResponse(BulkByScrollResponse bulkByScrollResponse) {
+                logger.trace("############################BulkByScrollResponse : {}\n", bulkByScrollResponse);
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                logger.error("####################Failed {}#deleteByQueryAsync , Reason : {}\n", ElasticSearchRestAsyncDAO.this.getClass().getSimpleName(), e.getMessage());
+                e.printStackTrace();
+            }
+        });
+    }
+
+    /**
+     * @param theValue
+     * @param theCheck
+     * @param theActionListener
+     * @return {@link Cancellable}
+     * @throws Exception
+     */
+    @Override
+    public <R extends DeleteByQueryRequest, V> Cancellable deleteByQueryAsync(@Nonnull(when = NEVER) V theValue, @Nonnull(when = NEVER) GPElasticSearchCheck<R, V, Exception> theCheck, @Nonnull(when = NEVER) ActionListener<BulkByScrollResponse> theActionListener) throws Exception {
+        checkArgument(theValue != null, "The Parameter value must not be null.");
+        checkArgument(theCheck != null, "The Parameter checkFunction must not be null.");
+        checkArgument(theActionListener != null, "The Parameter actionListener must not be null.");
+        return this.elasticSearchRestHighLevelClient.deleteByQueryAsync(theCheck.apply(theValue), DEFAULT, theActionListener);
     }
 
     /**

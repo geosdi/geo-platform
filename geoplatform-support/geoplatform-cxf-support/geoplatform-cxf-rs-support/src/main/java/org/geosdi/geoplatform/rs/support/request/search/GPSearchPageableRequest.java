@@ -33,36 +33,31 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.experimental.el.search.string;
+package org.geosdi.geoplatform.rs.support.request.search;
 
-import org.elasticsearch.index.query.QueryBuilder;
-import org.geosdi.geoplatform.experimental.el.search.bool.IBooleanSearch;
+import lombok.*;
+import org.geosdi.geoplatform.rs.support.request.GPPageableRequest;
 
-import javax.annotation.Nonnull;
-
-import static javax.annotation.meta.When.NEVER;
-import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPQueryStringSearch extends IBooleanSearch.AbstractBooleanSearch {
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+@Getter
+@Setter
+@XmlAccessorType(XmlAccessType.FIELD)
+public class GPSearchPageableRequest extends GPPageableRequest {
 
-    /**
-     * @param theField
-     * @param theValue
-     * @param theType
-     */
-    public GPQueryStringSearch(@Nonnull(when = NEVER) String theField, @Nonnull(when = NEVER) Object theValue, @Nonnull(when = NEVER) BooleanQueryType theType) {
-        super(theField, theValue, theType);
-    }
-
-    /**
-     * @return {@link QueryBuilder}
-     */
-    @Override
-    public QueryBuilder buildQuery() {
-        return queryStringQuery(this.value.toString()).field(this.field);
-    }
+    private static final long serialVersionUID = -751507870084241669L;
+    //
+    @NotNull(message = "{gp.search_pageable_param_not_null.message}")
+    @NotEmpty(message = "{gp.search_pageable_param_not_empty.message}")
+    private String param;
 }

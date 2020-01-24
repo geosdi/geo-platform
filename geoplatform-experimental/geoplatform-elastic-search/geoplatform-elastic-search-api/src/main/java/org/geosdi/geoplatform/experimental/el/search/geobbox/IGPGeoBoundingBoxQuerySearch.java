@@ -48,6 +48,7 @@ import javax.annotation.Nonnull;
 import static com.google.common.base.Preconditions.checkArgument;
 import static javax.annotation.meta.When.NEVER;
 import static org.elasticsearch.index.query.QueryBuilders.geoBoundingBoxQuery;
+import static org.geosdi.geoplatform.experimental.el.search.bool.IBooleanSearch.BooleanQueryType.FILTER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -68,12 +69,10 @@ public interface IGPGeoBoundingBoxQuerySearch extends IBooleanSearch {
 
         /**
          * @param theField
-         * @param theType
          * @param theEnvelope
          */
-        public GPGeoBoundingBoxQuerySearch(@Nonnull(when = NEVER) String theField, @Nonnull(when = NEVER) BooleanQueryType theType,
-                @Nonnull(when = NEVER) Envelope theEnvelope) {
-            super(theField, theType);
+        public GPGeoBoundingBoxQuerySearch(@Nonnull(when = NEVER) String theField, @Nonnull(when = NEVER) Envelope theEnvelope) {
+            super(theField, FILTER);
             checkArgument(theEnvelope != null, "The Parameter Envelope must not be null.");
             this.envelope = theEnvelope;
         }

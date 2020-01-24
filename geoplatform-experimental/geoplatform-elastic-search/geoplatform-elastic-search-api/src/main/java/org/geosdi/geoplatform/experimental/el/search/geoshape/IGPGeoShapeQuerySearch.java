@@ -40,14 +40,15 @@ import lombok.Getter;
 import org.elasticsearch.common.geo.builders.ShapeBuilder;
 import org.elasticsearch.index.query.GeoShapeQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
-import org.elasticsearch.index.query.QueryBuilders;
 import org.geosdi.geoplatform.experimental.el.search.bool.IBooleanSearch;
 
 import javax.annotation.Nonnull;
-import java.io.IOException;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static javax.annotation.meta.When.NEVER;
+import static org.elasticsearch.common.geo.ShapeRelation.CONTAINS;
+import static org.elasticsearch.index.query.QueryBuilders.*;
+import static org.geosdi.geoplatform.experimental.el.search.bool.IBooleanSearch.BooleanQueryType.FILTER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -81,13 +82,12 @@ public interface IGPGeoShapeQuerySearch extends IBooleanSearch {
 
         /**
          * @param theField
-         * @param theType
          * @param theShapeRelation
          * @param theShapeBuilder
          */
-        public GPGeoShapeQuerySearch(@Nonnull(when = NEVER) String theField, @Nonnull(when = NEVER) BooleanQueryType theType,
-                @Nonnull(when = NEVER) GPShapeRelation theShapeRelation, @Nonnull(when = NEVER) ShapeBuilder theShapeBuilder) {
-            super(theField, theType);
+        public GPGeoShapeQuerySearch(@Nonnull(when = NEVER) String theField, @Nonnull(when = NEVER) GPShapeRelation theShapeRelation,
+                @Nonnull(when = NEVER) ShapeBuilder theShapeBuilder) {
+            super(theField, FILTER);
             checkArgument((theShapeRelation != null), "The Parameter ShapeRelations must not be null.");
             checkArgument((theShapeBuilder != null), "The Parameter ShapeBuilder must not be null.");
             this.shapeRelation = theShapeRelation;
@@ -109,18 +109,19 @@ public interface IGPGeoShapeQuerySearch extends IBooleanSearch {
         /**
          * @return {@link GeoShapeQueryBuilder}
          */
-        protected final GeoShapeQueryBuilder buildGeoShapeQueryBuilder() throws IOException {
+        protected final GeoShapeQueryBuilder buildGeoShapeQueryBuilder() throws Exception {
             switch (this.shapeRelation) {
                 case INTERSECTS:
-                    return QueryBuilders.geoIntersectionQuery(this.field, this.shapeBuilder.buildGeometry());
+                    return geoIntersectionQuery(this.field, this.shapeBuilder.buildGeometry());
                 case DISJOINT:
-                    return QueryBuilders.geoDisjointQuery(this.field, this.shapeBuilder.buildGeometry());
+                    return geoDisjointQuery(this.field, this.shapeBuilder.buildGeometry());
                 case WITHIN:
-                    return QueryBuilders.geoWithinQuery(this.field, this.shapeBuilder.buildGeometry());
+                    return geoWithinQuery(this.field, this.shapeBuilder.buildGeometry());
                 case CONTAINS:
-                    return QueryBuilders.geoShapeQuery(this.field, this.shapeBuilder.buildGeometry());
+                    return geoShapeQuery(this.field, this.shapeBuilder.buildGeometry()).relation(CONTAINS);
+                default:
+                    throw new IllegalStateException("ShapeRelation not valid. Supported values are : INTERSECTS, DISJOINT, WITHIN, CONTAINS");
             }
-            return null;
         }
     }
 }

@@ -10,16 +10,16 @@
     </appender>
 
     <root>
-        <level value="info" />
-        <appender-ref ref="STDOUT" />
+        <level value="info"/>
+        <appender-ref ref="STDOUT"/>
     </root>
-    
-    
+
+
     <logger name="org.springframework" level="info" additivity="false">
-        <appender-ref ref="STDOUT" />
+        <appender-ref ref="STDOUT"/>
     </logger>
-    
+
     <logger name="org.geosdi.geoplatform.support.google.spring.services.context" level="debug"/>
-    <logger name="org.geosdi.geoplatform.cxf.rs.support.geocoding.delegate.GPCXFGeocodingDelegate" level="debug"/>
+    <logger name="org.geosdi.geoplatform.cxf.rs.support.geocoding.delegate.GPGoogleGeocodingDelegate" level="debug"/>
 
 </configuration>

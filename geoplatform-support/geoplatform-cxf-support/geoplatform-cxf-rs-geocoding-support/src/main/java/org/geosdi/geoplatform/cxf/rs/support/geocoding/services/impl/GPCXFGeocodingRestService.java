@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.cxf.rs.support.geocoding.services.impl;
 
+import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
 import org.apache.cxf.rs.security.cors.LocalPreflight;
 import org.geosdi.geoplatform.cxf.rs.support.geocoding.delegate.IGPCXFGeocodingDelegate;
 import org.geosdi.geoplatform.cxf.rs.support.geocoding.services.api.IGPCXFGeocodingRestService;
@@ -45,15 +46,31 @@ import javax.ws.rs.OPTIONS;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
+import static javax.ws.rs.core.Response.ok;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@CrossOriginResourceSharing(
+        allowAllOrigins = true,
+        allowCredentials = true,
+        maxAge = 1,
+        allowHeaders = {
+                "authorization", "content-type", "X-HTTP-Method-Override"
+        },
+        exposeHeaders = {
+                "authorization", "content-type", "X-HTTP-Method-Override"
+        }
+)
 @Service(value = "gpCXFGeocodingRestService")
 public class GPCXFGeocodingRestService implements IGPCXFGeocodingRestService {
 
     @Resource(name = "gpCXFGeocodingDelegate")
     private IGPCXFGeocodingDelegate gpCXFGeocodingDelegate;
+
+    GPCXFGeocodingRestService() {
+    }
 
     /**
      * @param address
@@ -63,14 +80,17 @@ public class GPCXFGeocodingRestService implements IGPCXFGeocodingRestService {
      */
     @Override
     public Response searchAddress(String address, String lang) throws Exception {
-        return Response.ok(this.gpCXFGeocodingDelegate.searchAddress(address, lang)).build();
+        return ok(this.gpCXFGeocodingDelegate.searchAddress(address, lang)).build();
     }
 
+    /**
+     * @return {@link Response}
+     */
     @OPTIONS
     @Path("{path : .*}")
     @LocalPreflight
     public Response options() {
-        return Response.ok("")
+        return ok("")
                 .header("Access-Control-Allow-Origin", "*")
                 .header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, X-HTTP-Method-Override")
                 .header("Access-Control-Allow-Credentials", "true")

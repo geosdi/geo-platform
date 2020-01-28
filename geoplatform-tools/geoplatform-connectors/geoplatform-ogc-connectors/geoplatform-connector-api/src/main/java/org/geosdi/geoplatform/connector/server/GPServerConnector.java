@@ -89,7 +89,7 @@ public interface GPServerConnector {
 
     /**
      * @param <V>
-     * @return
+     * @return {@link V}
      */
     <V extends GPServerConnectorVersion> V getVersion();
 

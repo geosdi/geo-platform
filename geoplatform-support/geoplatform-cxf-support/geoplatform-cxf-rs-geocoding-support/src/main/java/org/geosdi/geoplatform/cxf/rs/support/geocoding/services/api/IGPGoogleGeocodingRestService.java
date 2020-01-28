@@ -49,7 +49,7 @@ import static org.geosdi.geoplatform.geocoding.rest.path.GPGeocodingRestPathConf
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Path(value = GEOCODING_RS_SERVICE_PATH)
+@Path(value = GOOGLE_RS_SERVICE_PATH)
 @Consumes(value = {MediaType.APPLICATION_JSON})
 @Produces(value = {MediaType.APPLICATION_JSON})
 public interface IGPGoogleGeocodingRestService extends GPGeocodingTemplateService {
@@ -59,8 +59,8 @@ public interface IGPGoogleGeocodingRestService extends GPGeocodingTemplateServic
      * @return {@link Response}
      * @throws Exception
      */
-    @GET
-    @Path(value = GOOGLE_RS_SERVICE_PATH)
+    @POST
+    @Path(value = GEOCODING_SEARCH_ADDRESS_PATH)
     @Consumes(MediaType.APPLICATION_JSON)
     @Override
     Response searchAddress(GPGeocodingAddressRequest request) throws Exception;

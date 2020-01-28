@@ -63,7 +63,7 @@ public class GPElasticSearchQueryTest {
     @Test
     public void a_geoDistanceQueryTest() throws Exception {
         GPGeodistanceQuerySearch geodistanceQuerySearch = new GPGeodistanceQuerySearch("location", new GeoPoint(40, 15), 34d, METERS, null);
-        MultiFieldsSearch multiFieldsSearch = new MultiFieldsSearch(new BooleanAllMatchSearch(MUST), geodistanceQuerySearch);
+        MultiFieldsSearch multiFieldsSearch = new MultiFieldsSearch(new BooleanAllMatchSearch(), geodistanceQuerySearch);
         multiFieldsSearch.printQueryAsJson();
         logger.info("###################GEO_DISTANCE_QUERY : \n{}\n", multiFieldsSearch.printQueryAsJson());
     }

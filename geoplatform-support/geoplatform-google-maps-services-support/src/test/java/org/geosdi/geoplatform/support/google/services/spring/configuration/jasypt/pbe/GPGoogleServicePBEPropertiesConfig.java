@@ -48,10 +48,10 @@ import org.springframework.context.annotation.Configuration;
 class GPGoogleServicePBEPropertiesConfig {
 
     /**
-     * @return {@link GPPBESystemEnvProperties}
+     * @return {@link GPGoogleServicePBEProperties}
      */
     @Bean
-    public GPPBESystemEnvProperties gpGoogleServicePBEProperties() {
+    public GPGoogleServicePBEProperties gpGoogleServicePBEProperties() {
         return new GPGoogleServicePBEProperties("GP_GOOGLE_SERVICE_PBE_KEY");
     }
 }

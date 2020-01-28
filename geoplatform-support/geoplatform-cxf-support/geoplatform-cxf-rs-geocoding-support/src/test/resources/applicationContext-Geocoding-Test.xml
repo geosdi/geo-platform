@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
             http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
             http://www.springframework.org/schema/context
@@ -14,6 +14,7 @@
                                           org.geosdi.geoplatform.support.google.spring.configuration,
                                           org.geosdi.geoplatform.support.google.spring.services.context,
                                           org.geosdi.geoplatform.support.google.spring.services.geocoding,
-                                          org.geosdi.geoplatform.cxf.rs.support.geocoding"/>
+                                          org.geosdi.geoplatform.cxf.rs.support.geocoding,
+                                          org.geosdi.geoplatform.geocoding.rest.config.i18n"/>
 
 </beans>

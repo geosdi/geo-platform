@@ -47,8 +47,8 @@ import org.geosdi.geoplatform.support.google.spring.services.geocoding.GPGeocodi
 import org.slf4j.Logger;
 
 import javax.annotation.Resource;
-import java.util.Arrays;
 
+import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toList;
 
 /**
@@ -70,14 +70,14 @@ class GPCXFGeocodingDelegate implements IGPCXFGeocodingDelegate {
      */
     @Override
     public IGPGeocodingResult searchAddress(String address, String lang) throws Exception {
-        if ((address == null) || (address.isEmpty())) {
+        if ((address == null) || (address.trim().isEmpty())) {
             throw new IllegalParameterFault("The Parameter address must not be null or an empty string.");
         }
         logger.debug("#####################TRYING To find Address : {} with lang : {}\n", address, lang);
         GeocodingResult[] geocodingResults = this.gpGeocodingService.newRequest()
                 .address(address).language(lang).await();
         return new GPGeocodingResult(new Long(geocodingResults.length),
-                Arrays.stream(geocodingResults)
+                stream(geocodingResults)
                         .filter(geocodingResult -> (geocodingResult != null) && (geocodingResult.geometry != null))
                         .map(geocodingResult -> new GPGeocodingLocality(geocodingResult.formattedAddress,
                                 new Point(new LngLatAlt(geocodingResult.geometry.location.lng,

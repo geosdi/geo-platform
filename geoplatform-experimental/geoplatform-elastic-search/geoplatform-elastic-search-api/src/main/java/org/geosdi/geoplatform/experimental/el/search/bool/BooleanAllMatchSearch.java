@@ -39,11 +39,8 @@ import lombok.Getter;
 import net.jcip.annotations.Immutable;
 import org.elasticsearch.index.query.QueryBuilder;
 
-import javax.annotation.Nonnull;
-
-import static com.google.common.base.Preconditions.checkArgument;
-import static javax.annotation.meta.When.NEVER;
 import static org.elasticsearch.index.query.QueryBuilders.matchAllQuery;
+import static org.geosdi.geoplatform.experimental.el.search.bool.IBooleanSearch.BooleanQueryType.MUST;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -53,15 +50,7 @@ import static org.elasticsearch.index.query.QueryBuilders.matchAllQuery;
 @Getter
 public class BooleanAllMatchSearch implements IBooleanSearch {
 
-    private final BooleanQueryType type;
-
-    /**
-     * @param theType
-     */
-    public BooleanAllMatchSearch(@Nonnull(when = NEVER) BooleanQueryType theType) {
-        checkArgument((theType != null), "The Parameter Type must not be null.");
-        this.type = theType;
-    }
+    private final BooleanQueryType type = MUST;
 
     /**
      * @return {@link QueryBuilder}
@@ -71,4 +60,3 @@ public class BooleanAllMatchSearch implements IBooleanSearch {
         return matchAllQuery();
     }
 }
-

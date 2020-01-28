@@ -47,10 +47,10 @@ import org.springframework.context.annotation.Configuration;
 class GPCXFGeocodingPBEPropertiesConfig {
 
     /**
-     * @return {@link GPPBESystemEnvProperties}
+     * @return {@link GPGoogleServicePBEProperties}
      */
     @Bean
-    public GPPBESystemEnvProperties cxfGeocofingPBEProperties() {
+    public GPGoogleServicePBEProperties cxfGeocofingPBEProperties() {
         return new GPGoogleServicePBEProperties("GP_GOOGLE_SERVICE_PBE_KEY");
     }
 }

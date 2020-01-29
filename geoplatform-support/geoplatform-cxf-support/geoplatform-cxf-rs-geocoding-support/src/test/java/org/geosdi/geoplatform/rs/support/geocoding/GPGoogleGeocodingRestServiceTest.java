@@ -32,34 +32,57 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.cxf.rs.support.geocoding.delegate;
+package org.geosdi.geoplatform.rs.support.geocoding;
 
-import org.geosdi.geoplatform.cxf.rs.support.geocoding.response.IGPGeocodingResult;
-import org.geosdi.geoplatform.geocoding.rest.request.GPGeocodingAddressRequest;
-import org.geosdi.geoplatform.geocoding.rest.request.GPRevertGeocodingRequest;
+import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
+import org.geosdi.geoplatform.rs.support.geocoding.services.api.IGPGoogleGeocodingRestService;
+import org.geosdi.geoplatform.rs.support.request.GPGeocodingAddressRequest;
+import org.junit.*;
+import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.annotation.Nonnull;
-import javax.ws.rs.core.Response;
+import javax.annotation.Resource;
 
-import static javax.annotation.meta.When.NEVER;
+import static java.lang.System.clearProperty;
+import static java.lang.System.setProperty;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGPGoogleGeocodingDelegate {
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:applicationContext-Geocoding-Test.xml"})
+public class GPGoogleGeocodingRestServiceTest {
 
-    /**
-     * @param request
-     * @return {@link IGPGeocodingResult}
-     * @throws Exception
-     */
-    IGPGeocodingResult searchAddress(@Nonnull(when = NEVER) GPGeocodingAddressRequest request) throws Exception;
+    @GeoPlatformLog
+    private static Logger logger;
+    //
+    private static final String GP_GOOGLE_SERVICES_FILE_KEY = "GP_GOOGLE_SERVICES_FILE_PROP";
+    //
+    @Resource(name = "googleGeocodingRestService")
+    private IGPGoogleGeocodingRestService googleGeocodingRestService;
 
-    /**
-     * @param request
-     * @return {@link Response}
-     * @throws Exception
-     */
-    Response searchAddress(@Nonnull(when = NEVER) GPRevertGeocodingRequest request) throws Exception;
+    @BeforeClass
+    public static void beforeClass() {
+        setProperty(GP_GOOGLE_SERVICES_FILE_KEY, "gp-googleservices-test.prop");
+    }
+
+    @AfterClass
+    public static void afterClass() {
+        clearProperty(GP_GOOGLE_SERVICES_FILE_KEY);
+    }
+
+    @Before
+    public void setUp() {
+        assertNotNull(googleGeocodingRestService);
+    }
+
+    @Test
+    public void searchAddressTest() throws Exception {
+        logger.info("################################FOUND : {}\n", this.googleGeocodingRestService
+                .searchAddress(new GPGeocodingAddressRequest("via provinciale 169 Marsicovetere")).getEntity());
+    }
 }

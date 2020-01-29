@@ -32,47 +32,20 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.cxf.rs.support.geocoding.services.api;
+package org.geosdi.geoplatform.rs.support.geocoding.delegate;
 
-import org.geosdi.geoplatform.geocoding.rest.path.GPGeocodingRestPathConfig;
-import org.geosdi.geoplatform.geocoding.rest.request.GPGeocodingAddressRequest;
-import org.geosdi.geoplatform.geocoding.rest.request.GPRevertGeocodingRequest;
-import org.geosdi.geoplatform.geocoding.rest.service.template.GPGeocodingTemplateService;
-
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-
-import static org.geosdi.geoplatform.geocoding.rest.path.GPGeocodingRestPathConfig.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Path(value = GOOGLE_RS_SERVICE_PATH)
-@Consumes(value = {MediaType.APPLICATION_JSON})
-@Produces(value = {MediaType.APPLICATION_JSON})
-public interface IGPGoogleGeocodingRestService extends GPGeocodingTemplateService {
+@Configuration
+class GPGoogleGeocodingDelegateConfig {
 
-    /**
-     * @param request
-     * @return {@link Response}
-     * @throws Exception
-     */
-    @POST
-    @Path(value = GEOCODING_SEARCH_ADDRESS_PATH)
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Override
-    Response searchAddress(GPGeocodingAddressRequest request) throws Exception;
-
-    /**
-     * @param request
-     * @return {@link Response}
-     * @throws Exception
-     */
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Path(value = GOOGLE_GEOCODING_SEARCH_ADDRESS_BY_LON_LAT_PATH)
-    @Override
-    Response searchAddress(GPRevertGeocodingRequest request) throws Exception;
+    @Bean
+    public IGPGoogleGeocodingDelegate googleGeocodingDelegate() {
+        return new GPGoogleGeocodingDelegate();
+    }
 }

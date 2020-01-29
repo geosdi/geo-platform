@@ -32,14 +32,14 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.cxf.rs.support.geocoding.services.impl;
+package org.geosdi.geoplatform.rs.support.geocoding.services.impl;
 
 import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
 import org.apache.cxf.rs.security.cors.LocalPreflight;
-import org.geosdi.geoplatform.cxf.rs.support.geocoding.delegate.IGPGoogleGeocodingDelegate;
-import org.geosdi.geoplatform.cxf.rs.support.geocoding.services.api.IGPGoogleGeocodingRestService;
-import org.geosdi.geoplatform.geocoding.rest.request.GPGeocodingAddressRequest;
-import org.geosdi.geoplatform.geocoding.rest.request.GPRevertGeocodingRequest;
+import org.geosdi.geoplatform.rs.support.geocoding.delegate.IGPGoogleGeocodingDelegate;
+import org.geosdi.geoplatform.rs.support.geocoding.services.api.IGPGoogleGeocodingRestService;
+import org.geosdi.geoplatform.rs.support.request.GPGeocodingAddressRequest;
+import org.geosdi.geoplatform.rs.support.request.GPRevertGeocodingRequest;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -83,6 +83,11 @@ public class GPGoogleGeocodingRestService implements IGPGoogleGeocodingRestServi
         return ok(this.googleGeocodingDelegate.searchAddress(request)).build();
     }
 
+    /**
+     * @param request
+     * @return {@link Response}
+     * @throws Exception
+     */
     @Override
     public Response searchAddress(GPRevertGeocodingRequest request) throws Exception {
         return ok(this.googleGeocodingDelegate.searchAddress(request)).build();

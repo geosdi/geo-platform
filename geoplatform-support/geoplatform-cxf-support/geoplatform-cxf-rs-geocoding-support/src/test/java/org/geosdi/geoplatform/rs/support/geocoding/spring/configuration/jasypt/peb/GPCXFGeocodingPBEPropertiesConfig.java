@@ -32,7 +32,7 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.cxf.rs.support.geocoding.spring.configuration.jasypt.peb;
+package org.geosdi.geoplatform.rs.support.geocoding.spring.configuration.jasypt.peb;
 
 import org.geosdi.geoplatform.jasypt.support.env.GPPBESystemEnvProperties;
 import org.geosdi.geoplatform.support.google.spring.configuration.jasypt.pbe.GPGoogleServicePBEProperties;

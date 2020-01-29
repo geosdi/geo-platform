@@ -20,6 +20,6 @@
     </logger>
 
     <logger name="org.geosdi.geoplatform.support.google.spring.services.context" level="debug"/>
-    <logger name="org.geosdi.geoplatform.cxf.rs.support.geocoding.delegate.GPGoogleGeocodingDelegate" level="debug"/>
+    <logger name="GPGoogleGeocodingDelegate" level="debug"/>
 
 </configuration>

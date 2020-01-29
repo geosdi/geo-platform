@@ -32,18 +32,18 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.cxf.rs.support.geocoding.delegate;
+package org.geosdi.geoplatform.rs.support.geocoding.delegate;
 
 import com.google.maps.model.GeocodingResult;
 import org.geojson.LngLatAlt;
 import org.geojson.Point;
-import org.geosdi.geoplatform.cxf.rs.support.geocoding.response.GPGeocodingLocality;
-import org.geosdi.geoplatform.cxf.rs.support.geocoding.response.GPGeocodingResult;
-import org.geosdi.geoplatform.cxf.rs.support.geocoding.response.IGPGeocodingResult;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
-import org.geosdi.geoplatform.geocoding.rest.request.GPGeocodingAddressRequest;
-import org.geosdi.geoplatform.geocoding.rest.request.GPRevertGeocodingRequest;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
+import org.geosdi.geoplatform.rs.support.geocoding.response.GPGeocodingLocality;
+import org.geosdi.geoplatform.rs.support.geocoding.response.GPGeocodingResult;
+import org.geosdi.geoplatform.rs.support.geocoding.response.IGPGeocodingResult;
+import org.geosdi.geoplatform.rs.support.request.GPGeocodingAddressRequest;
+import org.geosdi.geoplatform.rs.support.request.GPRevertGeocodingRequest;
 import org.geosdi.geoplatform.support.google.spring.services.geocoding.GPGeocodingService;
 import org.slf4j.Logger;
 import org.springframework.context.MessageSource;

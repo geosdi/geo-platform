@@ -64,13 +64,13 @@ import static org.springframework.core.annotation.AnnotationUtils.findAnnotation
  */
 public class GPBaseRestServiceManager implements GPRestServiceManager {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    protected final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     @Autowired
-    private ApplicationContext appContext;
-    private List<Object> serviceBeans;
-    private AtomicBoolean configured = new AtomicBoolean(FALSE);
-    private final String restServiceManagerName;
+    protected ApplicationContext appContext;
+    protected List<?> serviceBeans;
+    protected AtomicBoolean configured = new AtomicBoolean(FALSE);
+    protected final String restServiceManagerName;
     private final boolean sort;
 
     /**
@@ -84,10 +84,10 @@ public class GPBaseRestServiceManager implements GPRestServiceManager {
     }
 
     /**
-     * @return {@link List <Object>}
+     * @return {@link List<?>}
      */
     @Override
-    public List<Object> getServiceBeans() {
+    public List<?> getServiceBeans() {
         return this.serviceBeans;
     }
 
@@ -105,7 +105,7 @@ public class GPBaseRestServiceManager implements GPRestServiceManager {
                     .filter(Objects::nonNull)
                     .sorted(comparing(this::internalOrder))
                     .collect(toList());
-            logger.debug("#############################{}_REST_RESOURCES : {}\n", this.restServiceManagerName, this.serviceBeans);
+            logger.debug("#############################{}_REST_RESOURCES : {}\n", this.restServiceManagerName.toUpperCase(), this.serviceBeans);
         } else {
             logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@{}_REST_RESOURCES already configured.", this.restServiceManagerName.toUpperCase());
         }
@@ -115,7 +115,7 @@ public class GPBaseRestServiceManager implements GPRestServiceManager {
      * @param value
      * @return {@link Integer}
      */
-    int internalOrder(@Nullable Object value) {
+    protected int internalOrder(@Nullable Object value) {
         return ((this.sort) && (value != null)) ? this.order(value) : this.unOrder(value);
     }
 
@@ -149,6 +149,17 @@ public class GPBaseRestServiceManager implements GPRestServiceManager {
     @Override
     public void afterPropertiesSet() throws Exception {
         checkArgument(this.appContext != null, "The Parameter appContext must not be null.");
+    }
+
+    /**
+     * Invoked by the containing {@code BeanFactory} on destruction of a bean.
+     *
+     * @throws Exception in case of shutdown errors. Exceptions will get logged
+     *                   but not rethrown to allow other beans to release their resources as well.
+     */
+    @Override
+    public void destroy() throws Exception {
+        logger.trace("#############################Called {}#dispose.", this.restServiceManagerName);
     }
 
     @Override

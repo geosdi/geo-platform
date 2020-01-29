@@ -41,14 +41,13 @@ import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverLoa
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.GeoserverCreateWorkspaceBody;
 import org.geosdi.geoplatform.connector.geoserver.request.about.GPGeoserverAboutStatusRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.about.GPGeoserverAboutVersionRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.layers.GPGeoserverLoadLayerRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.layers.GPGeoserverLayersRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.layers.GPGeoserverLoadLayerRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GPGeoserverNamespaceRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GPGeoserverNamespacesRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.styles.GPGeoserverStylesRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverStyleRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.*;
-import org.geosdi.geoplatform.connector.server.exception.ResourceNotFoundException;
 import org.geosdi.geoplatform.connector.store.task.GeoserverLayerTask;
 import org.geosdi.geoplatform.connector.store.task.GeoserverNamespaceTask;
 import org.geosdi.geoplatform.connector.store.task.GeoserverStyleTask;
@@ -120,7 +119,7 @@ public class GPGeoserverConnectorStoreTest extends GPBaseGeoserverConnectorStore
         logger.info("#################STYLES_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", stylesRequest.getResponseAsString());
     }
 
-    @Test(expected = ResourceNotFoundException.class)
+    @Test//(expected = ResourceNotFoundException.class)
     public void i_styleGeoserverConnectorTest() throws Exception {
         GeoserverStyleRequest styleRequest = geoserverConnectorStore.loadStyleRequest();
         styleRequest.withStyleName("Frank");

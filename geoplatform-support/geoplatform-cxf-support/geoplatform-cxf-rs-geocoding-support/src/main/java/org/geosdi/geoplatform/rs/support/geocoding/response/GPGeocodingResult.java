@@ -32,24 +32,36 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.cxf.rs.support.geocoding.response;
+package org.geosdi.geoplatform.rs.support.geocoding.response;
 
-import java.io.Serializable;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import lombok.Getter;
+import lombok.ToString;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import java.util.List;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGPGeocodingResult extends Serializable {
+@Getter
+@ToString
+@XmlAccessorType(XmlAccessType.FIELD)
+public class GPGeocodingResult implements IGPGeocodingResult {
 
-    /**
-     * @return {@link Long}
-     */
-    Long getTotal();
+    private static final long serialVersionUID = 6265730582246682432L;
+    //
+    private final Long total;
+    @JsonDeserialize(contentAs = GPGeocodingLocality.class)
+    private final List<IGPGeocodingLocality> localities;
 
-    /**
-     * @return {@link List<IGPGeocodingLocality>}
-     */
-    List<IGPGeocodingLocality> getLocalities();
+    @JsonCreator
+    public GPGeocodingResult(@JsonProperty(value = "total") Long theTotal, @JsonProperty(value = "localities") List<IGPGeocodingLocality> theLocalities) {
+        this.total = theTotal;
+        this.localities = theLocalities;
+    }
 }

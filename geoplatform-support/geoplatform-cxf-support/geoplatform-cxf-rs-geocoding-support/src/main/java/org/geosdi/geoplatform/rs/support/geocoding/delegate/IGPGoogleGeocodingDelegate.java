@@ -32,36 +32,34 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.cxf.rs.support.geocoding.response;
+package org.geosdi.geoplatform.rs.support.geocoding.delegate;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
-import lombok.ToString;
-import org.geojson.Point;
+import org.geosdi.geoplatform.rs.support.geocoding.response.IGPGeocodingResult;
+import org.geosdi.geoplatform.rs.support.request.GPGeocodingAddressRequest;
+import org.geosdi.geoplatform.rs.support.request.GPRevertGeocodingRequest;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import javax.annotation.Nonnull;
+import javax.ws.rs.core.Response;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Getter
-@ToString
-@XmlAccessorType(XmlAccessType.FIELD)
-public class GPGeocodingLocality implements IGPGeocodingLocality {
+public interface IGPGoogleGeocodingDelegate {
 
-    private static final long serialVersionUID = 5316612556746642706L;
-    //
-    //
-    private final String formattedAddress;
-    private final Point location;
+    /**
+     * @param request
+     * @return {@link IGPGeocodingResult}
+     * @throws Exception
+     */
+    IGPGeocodingResult searchAddress(@Nonnull(when = NEVER) GPGeocodingAddressRequest request) throws Exception;
 
-    @JsonCreator
-    public GPGeocodingLocality(@JsonProperty(value = "formattedAddress") String theFormattedAddress,
-                               @JsonProperty(value = "location") Point theGeometry) {
-        this.formattedAddress = theFormattedAddress;
-        this.location = theGeometry;
-    }
+    /**
+     * @param request
+     * @return {@link Response}
+     * @throws Exception
+     */
+    Response searchAddress(@Nonnull(when = NEVER) GPRevertGeocodingRequest request) throws Exception;
 }

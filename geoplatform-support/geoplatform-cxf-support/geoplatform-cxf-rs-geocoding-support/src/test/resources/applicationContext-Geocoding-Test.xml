@@ -9,12 +9,12 @@
        default-autowire="byName">
 
     <context:component-scan base-package="org.geosdi.geoplatform.logger.support.spring.config,
-                                          org.geosdi.geoplatform.cxf.rs.support.geocoding.spring.configuration.jasypt.peb,
+                                          org.geosdi.geoplatform.rs.support.geocoding.spring.configuration.jasypt.peb,
                                           org.geosdi.geoplatform.support.google.spring.jasypt,
                                           org.geosdi.geoplatform.support.google.spring.configuration,
                                           org.geosdi.geoplatform.support.google.spring.services.context,
                                           org.geosdi.geoplatform.support.google.spring.services.geocoding,
-                                          org.geosdi.geoplatform.cxf.rs.support.geocoding,
-                                          org.geosdi.geoplatform.geocoding.rest.config.i18n"/>
+                                          org.geosdi.geoplatform.rs.support.geocoding,
+                                          org.geosdi.geoplatform.rs.support.geocoding.config.i18n"/>
 
 </beans>

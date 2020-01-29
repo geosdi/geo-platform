@@ -35,12 +35,6 @@
             <version>${project.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>gp-geocoding-rs-api</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
         <!-- =========================================================== -->
         <!-- ======================== LOMBOK =========================== -->
         <!-- =========================================================== -->
@@ -61,6 +55,12 @@
         <dependency>
             <groupId>de.grundid.opendatalab</groupId>
             <artifactId>geojson-jackson</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-cxf-rs-support</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>

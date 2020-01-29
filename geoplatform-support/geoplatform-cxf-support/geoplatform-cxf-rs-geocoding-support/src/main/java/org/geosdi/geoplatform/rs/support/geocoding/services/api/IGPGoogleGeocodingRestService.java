@@ -32,52 +32,49 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.cxf.rs.support.geocoding;
+package org.geosdi.geoplatform.rs.support.geocoding.services.api;
 
-import org.geosdi.geoplatform.cxf.rs.support.geocoding.services.api.IGPGoogleGeocodingRestService;
-import org.geosdi.geoplatform.geocoding.rest.request.GPGeocodingAddressRequest;
-import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
-import org.junit.*;
-import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.geosdi.geoplatform.rs.support.request.GPGeocodingAddressRequest;
+import org.geosdi.geoplatform.rs.support.request.GPRevertGeocodingRequest;
+import org.geosdi.geoplatform.rs.support.service.template.GPGeocodingTemplateService;
 
-import javax.annotation.Resource;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
+import static org.geosdi.geoplatform.rs.support.geocoding.path.GPGoogleGeocodingRestPathConfig.*;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:applicationContext-Geocoding-Test.xml"})
-public class GPGoogleGeocodingRestServiceTest {
+@Path(value = GOOGLE_RS_SERVICE_PATH)
+@Consumes(value = {MediaType.APPLICATION_JSON})
+@Produces(value = {MediaType.APPLICATION_JSON})
+public interface IGPGoogleGeocodingRestService extends GPGeocodingTemplateService {
 
-    @GeoPlatformLog
-    private static Logger logger;
-    //
-    private static final String GP_GOOGLE_SERVICES_FILE_KEY = "GP_GOOGLE_SERVICES_FILE_PROP";
-    @Resource(name = "googleGeocodingRestService")
-    private IGPGoogleGeocodingRestService googleGeocodingRestService;
+    /**
+     * @param request
+     * @return {@link Response}
+     * @throws Exception
+     */
+    @POST
+    @Path(value = GOOGLE_GEOCODING_SEARCH_ADDRESS_PATH)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Override
+    Response searchAddress(GPGeocodingAddressRequest request) throws Exception;
 
-    @BeforeClass
-    public static void beforeClass() {
-        System.setProperty(GP_GOOGLE_SERVICES_FILE_KEY, "gp-googleservices-test.prop");
-    }
-
-    @AfterClass
-    public static void afterClass() {
-        System.clearProperty(GP_GOOGLE_SERVICES_FILE_KEY);
-    }
-
-    @Before
-    public void setUp() {
-        Assert.assertNotNull(googleGeocodingRestService);
-    }
-
-    @Test
-    public void searchAddressTest() throws Exception {
-        logger.info("################################FOUND : {}\n", this.googleGeocodingRestService
-                .searchAddress(new GPGeocodingAddressRequest("via provinciale 169 Marsicovetere")).getEntity());
-    }
+    /**
+     * @param request
+     * @return {@link Response}
+     * @throws Exception
+     */
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path(value = GOOGLE_GEOCODING_SEARCH_ADDRESS_BY_LON_LAT_PATH)
+    @Override
+    Response searchAddress(GPRevertGeocodingRequest request) throws Exception;
 }

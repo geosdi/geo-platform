@@ -42,13 +42,15 @@ import java.io.InputStream;
 import java.net.URI;
 import java.nio.charset.Charset;
 
+import static java.nio.charset.Charset.forName;
+
 /**
- * @author giuseppe.lascaleia@geosdi.org
+ * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public interface GPConnectorRequest<T> {
 
-    Charset UTF_8_CHARSERT = Charset.forName("UTF-8");
+    Charset UTF_8_CHARSERT = forName("UTF-8");
     String INCORRECT_RESPONSE_MESSAGE = "Connector Server Error: Incorrect Response.";
     String CONNECTION_PROBLEM_MESSAGE = "Connector Server Error: Connection Problem.";
     String UNAUTHORIZED_MESSAGE = "Unauthorized : This request requires HTTP authentication.";

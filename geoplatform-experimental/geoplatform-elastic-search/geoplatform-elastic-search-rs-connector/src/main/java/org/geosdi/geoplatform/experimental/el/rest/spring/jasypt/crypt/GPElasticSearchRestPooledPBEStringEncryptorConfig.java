@@ -54,8 +54,7 @@ class GPElasticSearchRestPooledPBEStringEncryptorConfig {
      * @return {@link PooledPBEStringEncryptor}
      */
     @Bean
-    public PooledPBEStringEncryptor elasticSearchRestPooledPBEStringEncryptor(
-            @Qualifier(value = "elasticSearchRestPBEConfig") PBEConfig elasticSearchRestPBEConfig) {
+    public PooledPBEStringEncryptor elasticSearchRestPooledPBEStringEncryptor(@Qualifier(value = "elasticSearchRestPBEConfig") PBEConfig elasticSearchRestPBEConfig) {
         return new BasePooledPBEStringEncryptorDecorator() {
             {
                 super.setPbeConfig(elasticSearchRestPBEConfig);

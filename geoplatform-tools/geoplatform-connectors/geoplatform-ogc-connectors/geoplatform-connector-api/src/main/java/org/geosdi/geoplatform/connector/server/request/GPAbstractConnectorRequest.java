@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.connector.server.request;
 
 import org.apache.http.client.CredentialsProvider;
-import org.apache.http.client.config.CookieSpecs;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
@@ -51,6 +50,7 @@ import java.net.URI;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static javax.annotation.meta.When.NEVER;
+import static org.apache.http.client.config.CookieSpecs.DEFAULT;
 import static org.geosdi.geoplatform.connector.server.security.GPSecurityConnector.MOCK_SECURITY;
 
 /**
@@ -113,7 +113,7 @@ public abstract class GPAbstractConnectorRequest<T> implements GPConnectorReques
      */
     protected RequestConfig createRequestConfig() {
         return RequestConfig.custom()
-                .setCookieSpec(CookieSpecs.DEFAULT)
+                .setCookieSpec(DEFAULT)
                 .setSocketTimeout(8000)
                 .setConnectTimeout(8000)
                 .setConnectionRequestTimeout(8000).build();

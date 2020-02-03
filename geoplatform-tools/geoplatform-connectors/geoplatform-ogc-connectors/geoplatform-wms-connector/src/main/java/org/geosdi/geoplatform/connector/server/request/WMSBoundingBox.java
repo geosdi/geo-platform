@@ -40,7 +40,6 @@ import lombok.ToString;
 import net.jcip.annotations.Immutable;
 
 import javax.annotation.Nonnull;
-import java.util.stream.Collectors;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.util.stream.Collectors.joining;
@@ -89,8 +88,12 @@ public class WMSBoundingBox implements GPWMSBoundingBox {
         return this.boundingBoxKeyValuePair = ((this.boundingBoxKeyValuePair != null) ? this.boundingBoxKeyValuePair : this.toInternalWMSKeyValuePair());
     }
 
+    /**
+     * @return {@link String}
+     */
     String toInternalWMSKeyValuePair() {
-        return of("BBOX", of(this.minx.toString(), this.miny.toString(), this.maxx.toString(), this.maxy.toString()).collect(joining(",")))
-                .collect(Collectors.joining("="));
+        return of("BBOX", of(this.minx.toString(), this.miny.toString(), this.maxx.toString(), this.maxy.toString())
+                .collect(joining(",")))
+                .collect(joining("="));
     }
 }

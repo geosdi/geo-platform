@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.experimental.el.rest.api.dao;
 
 import com.google.common.collect.Iterables;
-import org.elasticsearch.action.DocWriteResponse;
 import org.elasticsearch.action.bulk.BulkRequest;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.delete.DeleteRequest;
@@ -131,7 +130,7 @@ public abstract class ElasticSearchRestDAO<D extends Document> extends ElasticSe
                 .doc(this.writeDocumentAsString(document), JSON);
         logger.debug("##################################Try to Update : {}\n\n", document);
         UpdateResponse updateResponse = this.elasticSearchRestHighLevelClient.update(updateRequest, DEFAULT);
-        if (updateResponse.getResult() != DocWriteResponse.Result.UPDATED) {
+        if (updateResponse.status() != OK) {
             throw new IllegalStateException("Problem to update document, status : " + updateResponse.status());
         }
         IGPUpdateResponse value = of(TRUE, updateResponse.getVersion());

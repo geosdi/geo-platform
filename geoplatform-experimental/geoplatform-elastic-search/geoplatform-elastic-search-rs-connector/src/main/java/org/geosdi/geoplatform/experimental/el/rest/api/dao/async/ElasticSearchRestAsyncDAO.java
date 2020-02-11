@@ -21,6 +21,7 @@ import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.HashMap;
 import java.util.Map;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -321,5 +322,18 @@ public abstract class ElasticSearchRestAsyncDAO<D extends Document> extends Elas
     public Cancellable countAsync(@Nonnull(when = NEVER) ActionListener<CountResponse> theListener) throws Exception {
         checkArgument(theListener != null, "The Parameter listener must not be null.");
         return this.elasticSearchRestHighLevelClient.countAsync(new CountRequest(getIndexName()), DEFAULT, theListener);
+    }
+
+    /**
+     * @param theDocument
+     * @throws Exception
+     */
+    @Override
+    protected final void updateDocumentIDAsync(@Nonnull(when = NEVER) D theDocument) throws Exception {
+        checkArgument(theDocument != null, "The Parameter document must not be null.");
+        checkArgument(theDocument.isIdSetted(), "The Document id must not be null or an empty string.");
+        Map<String, Object> properties = new HashMap<>();
+        properties.put(super.getJsonRootName().concat("id"), theDocument.getId());
+        this.updateAsync(theDocument.getId(), properties);
     }
 }

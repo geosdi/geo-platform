@@ -33,7 +33,7 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.experimental.rs.security.authenticator.basic.authenticator.filter;
+package org.geosdi.geoplatform.experimental.rs.security.authenticator.basic.filter;
 
 import org.geosdi.geoplatform.exception.NotAuthorizedFault;
 import org.geosdi.geoplatform.experimental.rs.security.authenticator.GPAuthenticatorType;
@@ -56,7 +56,7 @@ import static javax.annotation.meta.When.NEVER;
 import static javax.ws.rs.core.HttpHeaders.AUTHORIZATION;
 import static javax.ws.rs.core.Response.Status.UNAUTHORIZED;
 import static javax.ws.rs.core.Response.status;
-import static org.geosdi.geoplatform.experimental.rs.security.authenticator.basic.authenticator.GPBasicAuthenticatorType.GP_BASIC_AUTH;
+import static org.geosdi.geoplatform.experimental.rs.security.authenticator.basic.GPBasicAuthenticatorType.GP_BASIC_AUTH;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -109,7 +109,7 @@ public class GPBasicAuthenticator implements GPAuthenticatorFilter {
             throw new NotAuthorizedFault("Authorization header must be provided");
         }
         String basicAuthValue = authorizationHeader.substring("Basic".length()).trim();
-        String decodedValue = null;
+        String decodedValue;
         try {
             decodedValue = new String(Base64.getDecoder().decode(basicAuthValue));
         } catch (Exception ex) {

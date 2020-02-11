@@ -65,6 +65,8 @@ import static org.elasticsearch.action.DocWriteRequest.OpType.INDEX;
 import static org.elasticsearch.action.DocWriteResponse.Result.CREATED;
 import static org.elasticsearch.client.RequestOptions.DEFAULT;
 import static org.elasticsearch.common.xcontent.XContentType.JSON;
+import static org.elasticsearch.rest.RestStatus.OK;
+import static org.springframework.core.env.Profiles.of;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -195,8 +197,7 @@ public abstract class ElasticSearchRestIndexDAO<D extends Document> extends Elas
      * @return {@link UpdateRequest}
      */
     protected UpdateRequest prepareUpdateRequest(@Nonnull(when = NEVER) D theDocument) {
-        checkArgument((theDocument != null) && (theDocument.isIdSetted()),
-                "The Parameter document must not be null, its id must not be null or an empty string.");
+        checkArgument((theDocument != null) && (theDocument.isIdSetted()), "The Parameter document must not be null, its id must not be null or an empty string.");
         try {
             return new UpdateRequest(getIndexName(), theDocument.getId()).doc(super.writeDocumentAsString(theDocument), JSON);
         } catch (Exception ex) {
@@ -227,7 +228,7 @@ public abstract class ElasticSearchRestIndexDAO<D extends Document> extends Elas
         checkArgument((theDocument != null) && (theDocument.isIdSetted()), "The Parameter document must not be null and its id must not be null or an empty string.");
         IndexResponse response = this.elasticSearchRestHighLevelClient.index(new IndexRequest(this.getIndexName()).id(theDocument.getId())
                         .source(this.writeDocumentAsString(theDocument), JSON).opType(INDEX), DEFAULT);
-        if (response.getResult() != CREATED) {
+        if ((response.getResult() != CREATED) || (response.status() != OK)) {
             throw new IllegalStateException("Problem to persist document, status : " + response.status());
         }
         return response;
@@ -242,11 +243,15 @@ public abstract class ElasticSearchRestIndexDAO<D extends Document> extends Elas
         checkArgument(theDocument != null, "The Parameter document must not be null.");
         IndexResponse response = this.elasticSearchRestHighLevelClient.index(new IndexRequest(this.getIndexName())
                 .source(this.writeDocumentAsString(theDocument), JSON).opType(INDEX), DEFAULT);
-        if (response.getResult() != CREATED) {
+        if ((response.getResult() != CREATED) || (response.status() != OK)) {
             throw new IllegalStateException("Problem to persist document, status : " + response.status());
         }
-        theDocument.setId(response.getId());
-        return response;
+        try {
+            theDocument.setId(response.getId());
+            return response;
+        } finally {
+            this.updateDocumentIDAsync(theDocument);
+        }
     }
 
 
@@ -263,9 +268,7 @@ public abstract class ElasticSearchRestIndexDAO<D extends Document> extends Elas
                     XContentBuilder builder = this.preparePutMapping();
                     if (builder != null) {
                         AcknowledgedResponse putMappingResponse = this.putMapping(builder, this::createPutMappingRequest);
-                        logger.debug("########################## {}\n",
-                                ((putMappingResponse.isAcknowledged()) ? "PUT_MAPPING_STATUS IS OK." :
-                                        "PUT_MAPPING NOT CREATED."));
+                        logger.debug("########################## {}\n", ((putMappingResponse.isAcknowledged()) ? "PUT_MAPPING_STATUS IS OK." : "PUT_MAPPING NOT CREATED."));
                         logger.debug("::::::::::::::::::::::GET_MAPPING_AS_STRING:::::::::::::: : {}\n", this.loadMappingAsString());
                     } else {
                         logger.debug("#########################There is no XContentBuilder defined so skip PutMapping.\n");
@@ -281,4 +284,10 @@ public abstract class ElasticSearchRestIndexDAO<D extends Document> extends Elas
             logger.warn("#######################Profile prod is not active so i will not perform Index Creation Request.");
         }
     }
+
+    /**
+     * @param theDocument
+     * @throws Exception
+     */
+    protected abstract void updateDocumentIDAsync(@Nonnull(when = NEVER) D theDocument) throws Exception;
 }

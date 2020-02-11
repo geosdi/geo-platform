@@ -141,7 +141,7 @@ public abstract class ElasticSearchRestDAO<D extends Document> extends ElasticSe
     /**
      * @param theID
      * @param theProperties
-     * @return {@link }
+     * @return {@link IGPUpdateResponse}
      * @throws Exception
      */
     @Override

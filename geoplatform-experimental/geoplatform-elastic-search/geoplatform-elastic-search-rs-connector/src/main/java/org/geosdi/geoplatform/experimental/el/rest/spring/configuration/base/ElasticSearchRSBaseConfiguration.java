@@ -163,13 +163,11 @@ class ElasticSearchRSBaseConfiguration implements GPElasticSearchRSBaseConfigura
      */
     @Override
     public void afterPropertiesSet() throws Exception {
-        checkArgument((this.httpHost != null) && !(this.httpHost.trim()
-                .isEmpty()), "The Parameter httpHost must not be null or an empty string.");
+        checkArgument((this.httpHost != null) && !(this.httpHost.trim().isEmpty()), "The Parameter httpHost must not be null or an empty string.");
         checkArgument(this.authConfig != null, "The Parameter authConfig must not be null.");
         checkArgument(this.sslConfig != null, "The Parameter sslConfig must not be null.");
         if (this.sslConfig.isSetSecureSocketLayer()) {
-            checkArgument(((this.sslConfig.getKeyStorePassword() != null) && !(this.sslConfig.getKeyStorePassword()
-                    .trim().isEmpty())), "The KeyStorePassword Parameter must not be null or an empty value.");
+            checkArgument(((this.sslConfig.getKeyStorePassword() != null) && !(this.sslConfig.getKeyStorePassword().trim().isEmpty())), "The KeyStorePassword Parameter must not be null or an empty value.");
         }
     }
 }

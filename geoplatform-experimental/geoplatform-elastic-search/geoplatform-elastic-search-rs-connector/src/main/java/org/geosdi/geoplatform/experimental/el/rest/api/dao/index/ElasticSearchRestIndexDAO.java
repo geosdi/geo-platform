@@ -65,7 +65,6 @@ import static org.elasticsearch.action.DocWriteRequest.OpType.INDEX;
 import static org.elasticsearch.action.DocWriteResponse.Result.CREATED;
 import static org.elasticsearch.client.RequestOptions.DEFAULT;
 import static org.elasticsearch.common.xcontent.XContentType.JSON;
-import static org.elasticsearch.rest.RestStatus.OK;
 import static org.springframework.core.env.Profiles.of;
 
 /**
@@ -228,8 +227,8 @@ public abstract class ElasticSearchRestIndexDAO<D extends Document> extends Elas
         checkArgument((theDocument != null) && (theDocument.isIdSetted()), "The Parameter document must not be null and its id must not be null or an empty string.");
         IndexResponse response = this.elasticSearchRestHighLevelClient.index(new IndexRequest(this.getIndexName()).id(theDocument.getId())
                         .source(this.writeDocumentAsString(theDocument), JSON).opType(INDEX), DEFAULT);
-        if ((response.getResult() != CREATED) || (response.status() != OK)) {
-            throw new IllegalStateException("Problem to persist document, status : " + response.status());
+        if (response.getResult() != CREATED) {
+            throw new IllegalStateException("Problem to persist document, status : " + response.getResult());
         }
         return response;
     }
@@ -243,7 +242,7 @@ public abstract class ElasticSearchRestIndexDAO<D extends Document> extends Elas
         checkArgument(theDocument != null, "The Parameter document must not be null.");
         IndexResponse response = this.elasticSearchRestHighLevelClient.index(new IndexRequest(this.getIndexName())
                 .source(this.writeDocumentAsString(theDocument), JSON).opType(INDEX), DEFAULT);
-        if ((response.getResult() != CREATED) || (response.status() != OK)) {
+        if (response.getResult() != CREATED) {
             throw new IllegalStateException("Problem to persist document, status : " + response.status());
         }
         try {

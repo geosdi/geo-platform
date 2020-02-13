@@ -46,7 +46,9 @@ import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.search.aggregations.AbstractAggregationBuilder;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.sort.SortOrder;
+import org.geosdi.geoplatform.experimental.el.api.function.GPElasticSearchCheck;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
+import org.geosdi.geoplatform.experimental.el.dao.store.IPageMapStore;
 import org.geosdi.geoplatform.experimental.el.dao.store.IPageStore;
 import org.geosdi.geoplatform.experimental.el.dao.store.PageStore;
 import org.geosdi.geoplatform.experimental.el.search.bool.IBooleanSearch;
@@ -56,6 +58,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nonnull;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
 
@@ -65,6 +68,7 @@ import static java.util.stream.Collectors.toList;
 import static java.util.stream.Stream.of;
 import static javax.annotation.meta.When.NEVER;
 import static org.elasticsearch.index.query.QueryBuilders.boolQuery;
+import static org.geosdi.geoplatform.experimental.el.dao.store.IPageMapStore.of;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -184,6 +188,18 @@ public interface GPPageableElasticSearchDAO<D extends Document> {
                     .filter(Objects::nonNull)
                     .map(theFunction)
                     .collect(toList()));
+        }
+
+        /**
+         * @param theCheck
+         * @param <K>
+         * @return {@link IPageMapStore<K, D>}
+         * @throws Exception
+         */
+        @JsonIgnore
+        default <K> IPageMapStore<K, D> toMapStore(@Nonnull(when = NEVER) GPElasticSearchCheck<Map<K, List<D>>, IPageResult<D>, Exception> theCheck) throws Exception {
+            checkArgument(theCheck != null, "The Parameter check must not be null.");
+            return of(theCheck.apply(this));
         }
     }
 

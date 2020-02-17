@@ -88,8 +88,7 @@ public abstract class ElasticSearchRestIndexDAO<D extends Document> extends Elas
     @Override
     public Boolean createIndex() throws Exception {
         if (!existIndex()) {
-            logger.debug("###############################Called {}#createIndex with Param : {}\n",
-                    this.getClass().getSimpleName(), getIndexName());
+            logger.debug("###############################Called {}#createIndex with Param : {}\n", this.getClass().getSimpleName(), getIndexName());
             CreateIndexRequest createIndexRequest = new CreateIndexRequest(this.getIndexName());
             XContentBuilder xContentBuilder = this.preparePutMapping();
             if ((this.isCreateMapping()) && (xContentBuilder != null)) {
@@ -273,7 +272,7 @@ public abstract class ElasticSearchRestIndexDAO<D extends Document> extends Elas
                         logger.debug("#########################There is no XContentBuilder defined so skip PutMapping.\n");
                     }
                 } else {
-                    logger.debug("@@@@@@@@@@@@@@@@@@@@@@@MAPPING_ALREADY_UP.");
+                    logger.debug("@@@@@@@@@@@@@@@@@@@@@@@MAPPING_ALREADY_UP OR SKIPPING BECAUSE on {}, createMapping is set to {}.\n", this.elasticSearchRestMapper.getDocumentClassName(), this.isCreateMapping());
                     logger.debug("::::::::::::::::::::::GET_MAPPING_AS_STRING:::::::::::::: : {}\n", this.loadMappingAsString());
                 }
             } else {

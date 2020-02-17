@@ -346,7 +346,7 @@
             
             <dependency>
                 <groupId>org.geosdi</groupId>
-                <artifactId>geoplatform-rx2java-dependency</artifactId>
+                <artifactId>geoplatform-rxjava-dependency</artifactId>
                 <type>pom</type>
                 <scope>import</scope>
                 <version>${project.version}</version>

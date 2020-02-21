@@ -100,4 +100,39 @@ public class GPBaseJacksonMapper<T extends Object> extends GPBaseJacksonReaderSu
         checkArgument(writer != null, "The Parameter Writer must not be null.");
         this.jacksonSupport.getDefaultMapper().writeValue(writer, entity);
     }
+
+    /**
+     * @param theValue
+     * @return {@link String}
+     * @throws Exception
+     */
+    @Override
+    public <V> String writeValue(@Nonnull(when = NEVER) V theValue) throws Exception {
+        checkArgument(theValue != null, "The Parameter value must not be null.");
+        return this.jacksonSupport.getDefaultMapper().writeValueAsString(theValue);
+    }
+
+    /**
+     * @param file
+     * @param theValue
+     * @throws Exception
+     */
+    @Override
+    public <V> void writeValue(@Nonnull(when = NEVER) File file, @Nonnull(when = NEVER) V theValue) throws Exception {
+        checkArgument(theValue != null, "The Parameter value must not be null.");
+        checkArgument(file != null, "The Parameter File must not be null.");
+        this.jacksonSupport.getDefaultMapper().writeValue(file, theValue);
+    }
+
+    /**
+     * @param writer
+     * @param theValue
+     * @throws Exception
+     */
+    @Override
+    public <V> void writeValue(@Nonnull(when = NEVER) Writer writer, @Nonnull(when = NEVER) V theValue) throws Exception {
+        checkArgument(theValue != null, "The Parameter value must not be null.");
+        checkArgument(writer != null, "The Parameter Writer must not be null.");
+        this.jacksonSupport.getDefaultMapper().writeValue(writer, theValue);
+    }
 }

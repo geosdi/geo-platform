@@ -43,6 +43,7 @@ import javax.annotation.Nonnull;
 import java.io.File;
 import java.io.InputStream;
 import java.io.Reader;
+import java.io.Writer;
 import java.net.URL;
 import java.nio.file.Path;
 import java.util.Collection;
@@ -125,6 +126,28 @@ public interface GPElasticSearchMapper<D extends Document> extends GPJacksonMapp
     String writeAsString(@Nonnull(when = NEVER) GPJacksonCheck<D> theCheck) throws Exception;
 
     /**
+     * @param theValue
+     * @param <V>
+     * @return {@link String}
+     * @throws Exception
+     */
+    <V extends Object> String writeValue(@Nonnull(when = NEVER) V theValue) throws Exception;
+
+    /**
+     * @param file
+     * @param theValue
+     * @throws Exception
+     */
+    <V extends Object> void writeValue(@Nonnull(when = NEVER) File file, @Nonnull(when = NEVER) V theValue) throws Exception;
+
+    /**
+     * @param writer
+     * @param theValue
+     * @throws Exception
+     */
+    <V extends Object> void writeValue(@Nonnull(when = NEVER) Writer writer, @Nonnull(when = NEVER) V theValue) throws Exception;
+
+    /**
      * @return {@link String} Name of Document Class
      */
     String getDocumentClassName();
@@ -134,7 +157,7 @@ public interface GPElasticSearchMapper<D extends Document> extends GPJacksonMapp
      * @param document
      * @throws Exception
      */
-    void write(@Nonnull(when = NEVER)File file, @Nonnull(when = NEVER) D document) throws Exception;
+    void write(@Nonnull(when = NEVER) File file, @Nonnull(when = NEVER) D document) throws Exception;
 
     /**
      * @param direrctory

@@ -90,6 +90,25 @@ public interface GPElasticSearchRestFindDAO<D extends Document> extends GPPageab
     List<D> findByIDS(@Nonnull(when = NEVER) Iterable<String> ids) throws Exception;
 
     /**
+     * @param ids
+     * @param condition
+     * @param includeFields
+     * @param excludeFields
+     * @return {@link List<D>}
+     * @throws Exception
+     */
+    List<D> findByIDS(@Nonnull(when = NEVER) Iterable<String> ids, @Nullable PredicateCondition<D> condition, @Nullable String[] includeFields, @Nullable String[] excludeFields) throws Exception;
+
+    /**
+     * @param ids
+     * @param includeFields
+     * @param excludeFields
+     * @return {@link List<D>}
+     * @throws Exception
+     */
+    List<D> findByIDS(@Nonnull(when = NEVER) Iterable<String> ids, @Nullable String[] includeFields, @Nullable String[] excludeFields) throws Exception;
+
+    /**
      * @param from
      * @param size
      * @return {@link org.geosdi.geoplatform.experimental.el.dao.GPPageableElasticSearchDAO.IPageResult<D>}

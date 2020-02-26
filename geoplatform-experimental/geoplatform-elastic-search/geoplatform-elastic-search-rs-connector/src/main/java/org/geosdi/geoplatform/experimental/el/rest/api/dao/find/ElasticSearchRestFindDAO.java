@@ -163,6 +163,48 @@ public abstract class ElasticSearchRestFindDAO<D extends Document> extends Pagea
     }
 
     /**
+     * @param ids
+     * @param condition
+     * @param includeFields
+     * @param excludeFields
+     * @return {@link List<D>}
+     * @throws Exception
+     */
+    @Override
+    public List<D> findByIDS(@Nonnull(when = NEVER) Iterable<String> ids, @Nullable PredicateCondition<D> condition, @Nullable String[] includeFields, @Nullable String[] excludeFields) throws Exception {
+        checkArgument((ids != null) && (Iterables.size(ids) > 0), "The Parameter ids must not be null and not empty.");
+        List<String> result = StreamSupport.stream(ids.spliterator(), false)
+                .filter(Objects::nonNull)
+                .filter(id -> !(id.trim().isEmpty()))
+                .collect(toList());
+        checkArgument(!result.isEmpty(), "The Parameter ids must not contains null values or empty strings.");
+        MultiGetRequest multiGetRequest = new MultiGetRequest().realtime(TRUE);
+        result.stream()
+                .map(v -> new MultiGetRequest.Item(this.getIndexName(), v))
+                .map(item -> item.fetchSourceContext(new FetchSourceContext(TRUE, includeFields, excludeFields)))
+                .forEach(item -> multiGetRequest.add(item));
+        MultiGetResponse multiGetResponses = this.elasticSearchRestHighLevelClient.mget(multiGetRequest, DEFAULT);
+        return stream(multiGetResponses.getResponses())
+                .filter(itemResponse -> !(itemResponse.isFailed()))
+                .map(MultiGetItemResponse::getResponse)
+                .map(this::readGetResponse)
+                .filter(d -> ((condition != null) ? ((d != null) && (condition.test(d))) : d != null))
+                .collect(toList());
+    }
+
+    /**
+     * @param ids
+     * @param includeFields
+     * @param excludeFields
+     * @return {@link List<D>}
+     * @throws Exception
+     */
+    @Override
+    public List<D> findByIDS(@Nonnull(when = NEVER) Iterable<String> ids, @Nullable String[] includeFields, @Nullable String[] excludeFields) throws Exception {
+        return findByIDS(ids, EMPTY_PREDICATE, includeFields, excludeFields);
+    }
+
+    /**
      * @param from
      * @param size
      * @return {@link IPageResult<D>}

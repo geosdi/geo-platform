@@ -1,7 +1,6 @@
 package org.geosdi.geoplatform.experimental.el.rest.api.dao.async;
 
 import org.elasticsearch.action.ActionListener;
-import org.elasticsearch.action.DocWriteResponse;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.update.UpdateRequest;
@@ -91,7 +90,7 @@ public abstract class ElasticSearchRestAsyncDAO<D extends Document> extends Elas
 
             @Override
             public void onResponse(UpdateResponse updateResponse) {
-                if (updateResponse.getResult() != DocWriteResponse.Result.UPDATED) {
+                if (updateResponse.status() != OK) {
                     throw new IllegalStateException("Problem to update document, status : " + updateResponse.status());
                 }
                 try {

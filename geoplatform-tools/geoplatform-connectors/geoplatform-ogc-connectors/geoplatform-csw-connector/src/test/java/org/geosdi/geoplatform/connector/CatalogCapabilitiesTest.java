@@ -89,13 +89,8 @@ public class CatalogCapabilitiesTest {
     @Ignore(value = "Server is DOWN")
     public void testCapabilitiesV201WithoutVersionControl() {
         try {
-            CatalogCapabilities catalogGetCapabilities = catalogCapabilitiesBean.bindUrlWithoutVersionControl(
-                    "http://catalogocentrale.nsdi.it/geonetwork/srv/en/csw?SERVICE");
-
-            logger.info(
-                    "@@@@@@@@@@@@@@@ CATALOG CAPABILITIES BEAN V_2.0.1 WITHOUT VERSION CONTROL"
-                            + "@@@@@@@@@@@@@@@@@@@@@@@ " + catalogGetCapabilities);
-
+            CatalogCapabilities catalogGetCapabilities = catalogCapabilitiesBean.bindUrlWithoutVersionControl("http://catalogocentrale.nsdi.it/geonetwork/srv/eng/csw?SERVICE");
+            logger.info("@@@@@@@@@@@@@@@ CATALOG CAPABILITIES BEAN V_2.0.1 WITHOUT VERSION CONTROL@@@@@@@@@@@@@@@@@@@@@@@ " + catalogGetCapabilities);
         } catch (MalformedURLException ex) {
             logger.error("MalformedURLException @@@@@@@@@@@@@@ " + ex);
         } catch (IOException es) {
@@ -107,13 +102,8 @@ public class CatalogCapabilitiesTest {
     @Ignore(value = "Server is DOWN")
     public void testCapabilitiesV201() {
         try {
-            CatalogCapabilities catalogGetCapabilities = catalogCapabilitiesBean.bindUrl(
-                    "http://catalogocentrale.nsdi.it/geonetwork/srv/en/csw");
-
-            logger.info(
-                    "@@@@@@@@@@@@@@@ CATALOG CAPABILITIES BEAN V_2.0.1"
-                            + "@@@@@@@@@@@@@@@@@@@@@@@ " + catalogGetCapabilities);
-
+            CatalogCapabilities catalogGetCapabilities = catalogCapabilitiesBean.bindUrl("http://catalogocentrale.nsdi.it/geonetwork/srv/en/csw");
+            logger.info("@@@@@@@@@@@@@@@ CATALOG CAPABILITIES BEAN V_2.0.1@@@@@@@@@@@@@@@@@@@@@@@ " + catalogGetCapabilities);
         } catch (MalformedURLException ex) {
             logger.error("MalformedURLException @@@@@@@@@@@@@@ " + ex);
         } catch (IOException es) {
@@ -128,13 +118,8 @@ public class CatalogCapabilitiesTest {
     public void testCapabilitiesV202() throws Exception {
         try {
 
-            CatalogCapabilities catalogGetCapabilities = catalogCapabilitiesBean.bindUrl(
-                    "http://rsdi.regione.basilicata.it/Catalogo/srv/en/csw");
-
-            logger.info(
-                    "CATALOG CAPABILITIES BEAN V_2.0.2 @@@@@@@@@@@"
-                            + "@@@@@@@@@@@@@@@@@@@@@@@ " + catalogGetCapabilities);
-
+            CatalogCapabilities catalogGetCapabilities = catalogCapabilitiesBean.bindUrl("http://rsdi.regione.basilicata.it/Catalogo/srv/en/csw");
+            logger.info("CATALOG CAPABILITIES BEAN V_2.0.2 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ " + catalogGetCapabilities);
         } catch (MalformedURLException ex) {
             logger.error("MalformedURLException @@@@@@@@@@@@@@ " + ex);
         } catch (IOException es) {
@@ -148,10 +133,8 @@ public class CatalogCapabilitiesTest {
     @Ignore(value = "There some problems.")
     public void testCSW_ESRI() {
         try {
-            CatalogCapabilities catalogGetCapabilities = catalogCapabilitiesBean.bindUrl(
-                    "https://snipc.protezionecivile.it/geoportal/csw/discovery");
-            logger.info("CATALOG CAPABILITIES ESRI @@@@@@@@@@@"
-                    + "@@@@@@@@@@@@@@@@@@@@@@@ " + catalogGetCapabilities);
+            CatalogCapabilities catalogGetCapabilities = catalogCapabilitiesBean.bindUrl("https://snipc.protezionecivile.it/geoportal/csw/discovery");
+            logger.info("CATALOG CAPABILITIES ESRI @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ " + catalogGetCapabilities);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -159,7 +142,7 @@ public class CatalogCapabilitiesTest {
 
     @Test
     public void testGetCapabilitiesWithConnector() throws Exception {
-        URL url = new URL("http://catalog.geosdi.org/geonetwork/srv/en/csw");
+        URL url = new URL("http://catalog.geosdi.org/geonetwork/srv/eng/csw");
         GPCatalogConnectorStore serverConnector = newConnector().
                 withServerUrl(url).build();
 

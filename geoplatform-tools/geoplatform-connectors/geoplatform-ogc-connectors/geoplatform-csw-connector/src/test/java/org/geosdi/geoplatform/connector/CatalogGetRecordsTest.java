@@ -43,7 +43,6 @@ import org.geosdi.geoplatform.xml.csw.ConstraintLanguageVersion;
 import org.geosdi.geoplatform.xml.csw.OutputSchema;
 import org.geosdi.geoplatform.xml.csw.TypeName;
 import org.geosdi.geoplatform.xml.csw.v202.*;
-import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -60,6 +59,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+
+import static org.geosdi.geoplatform.connector.GPCSWConnectorBuilder.newConnector;
+import static org.junit.Assert.assertEquals;
 
 /**
  *
@@ -90,26 +92,17 @@ public class CatalogGetRecordsTest {
     @Test
     public void testSummaryRecord() throws Exception {
         CatalogGetRecordsRequest<GetRecordsResponseType> request = serverConnector.createGetRecordsRequest();
-
         request.setTypeName(TypeName.METADATA);
-
         request.setOutputSchema(OutputSchema.CSW_V202);
         request.setElementSetName(ElementSetType.SUMMARY.toString());
         request.setResultType(ResultType.RESULTS.toString());
-
         request.setStartPosition(BigInteger.ONE);
         request.setMaxRecords(BigInteger.valueOf(25));
-
         GetRecordsResponseType response = request.getResponse();
-
         SearchResultsType result = response.getSearchResults();
-        logger.info("RECORD MATCHES @@@@@@@@@@@@@@@@@@@@@ {}",
-                result.getNumberOfRecordsMatched());
-        logger.info("RECORDS FOUND @@@@@@@@@@@@@@@@@@@@@@ {}",
-                result.getNumberOfRecordsReturned());
-        logger.info("NEXT RECORD @@@@@@@@@@@@@@@@@@@@@@ {}",
-                result.getNextRecord());
-
+        logger.info("RECORD MATCHES @@@@@@@@@@@@@@@@@@@@@ {}", result.getNumberOfRecordsMatched());
+        logger.info("RECORDS FOUND @@@@@@@@@@@@@@@@@@@@@@ {}", result.getNumberOfRecordsReturned());
+        logger.info("NEXT RECORD @@@@@@@@@@@@@@@@@@@@@@ {}", result.getNextRecord());
         List<JAXBElement<? extends AbstractRecordType>> metadata = result.getAbstractRecord();
         if (!metadata.isEmpty()) {
             logger.info("FIRST FULL METADATA @@@@@@@@@@@@@@@@@@@@@ {}",
@@ -120,123 +113,80 @@ public class CatalogGetRecordsTest {
     @Test
     public void testFullRecord() throws Exception {
         CatalogGetRecordsRequest<GetRecordsResponseType> request = serverConnector.createGetRecordsRequest();
-
         request.setTypeName(TypeName.METADATA);
-
         request.setOutputSchema(OutputSchema.CSW_V202);
         request.setElementSetName(ElementSetType.FULL.toString());
         request.setResultType(ResultType.RESULTS.toString());
-
         request.setStartPosition(BigInteger.ONE);
         request.setMaxRecords(BigInteger.valueOf(25));
-
         GetRecordsResponseType response = request.getResponse();
-
         SearchResultsType result = response.getSearchResults();
         List<JAXBElement<? extends AbstractRecordType>> metadata = result.getAbstractRecord();
-
-        Assert.assertEquals("The Result not contains 25 elements", 25,
-                metadata.size());
-
+        assertEquals("The Result not contains 25 elements", 25, metadata.size());
         for (JAXBElement<? extends AbstractRecordType> element : metadata) {
-            logger.debug("FULL RECORD @@@@@@@@@@@@@@@@@@@@@@@@@ {}\n\n",
-                    element.getValue());
+            logger.debug("FULL RECORD @@@@@@@@@@@@@@@@@@@@@@@@@ {}\n\n", element.getValue());
         }
     }
 
     @Ignore("Catalog is down")
     @Test
     public void testCQLTemporalFilterGeomatys() throws Exception {
-        URL url = new URL(
-                "http://demo.geomatys.com/mdweb-cnes-labs/WS/csw/default");
-        GPCatalogConnectorStore sc = GPCSWConnectorBuilder.newConnector().
+        URL url = new URL("http://demo.geomatys.com/mdweb-cnes-labs/WS/csw/default");
+        GPCatalogConnectorStore sc = newConnector().
                 withServerUrl(url).build();
-
         CatalogGetRecordsRequest<GetRecordsResponseType> request = sc.createGetRecordsRequest();
-
         request.setTypeName(TypeName.RECORD_V202);
-
         request.setConstraintLanguage(ConstraintLanguage.CQL_TEXT);
         request.setConstraintLanguageVersion(ConstraintLanguageVersion.V110);
-
         // Text filter
         StringBuilder str = new StringBuilder();
         str.append("AnyText LIKE '%%'");
-
         // Time filter
         Calendar startCalendar = new GregorianCalendar(2000, Calendar.JANUARY, 1);
         Calendar endCalendar = new GregorianCalendar(2012, Calendar.JANUARY, 1);
-
-        SimpleDateFormat formatter = new SimpleDateFormat(
-                "yyyy-MM-dd'T'HH:mm:ss'Z'");
-
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
         str.append(" AND ");
-        str.append("TempExtent_begin AFTER ").append(
-                formatter.format(startCalendar.getTime()));
+        str.append("TempExtent_begin AFTER ").append(formatter.format(startCalendar.getTime()));
         str.append(" AND ");
-        str.append("TempExtent_end BEFORE ").append(
-                formatter.format(endCalendar.getTime()));
-
+        str.append("TempExtent_end BEFORE ").append(formatter.format(endCalendar.getTime()));
         request.setConstraint(str.toString());
-        logger.debug("\n@@@@@@@@@@@@@@@@ Geomatys ### Constraint: {}",
-                request.getConstraint());
-
+        logger.debug("\n@@@@@@@@@@@@@@@@ Geomatys ### Constraint: {}", request.getConstraint());
         GetRecordsResponseType response = request.getResponse();
-
         SearchResultsType searchResult = response.getSearchResults();
-
-        logger.info("\n@@@@@@@@@@@@@@@@ Geomatys ### RECORD MATCHES {} ###",
-                searchResult.getNumberOfRecordsMatched());
+        logger.info("\n@@@@@@@@@@@@@@@@ Geomatys ### RECORD MATCHES {} ###", searchResult.getNumberOfRecordsMatched());
     }
 
     @Ignore("Require to add the SNIPC certificate into default keystore")
     @Test
     public void testSecureGetRecords() throws Exception {
-        GPCatalogConnectorStore snipcServerConnector = GPCSWConnectorBuilder
-                .newConnector()
+        GPCatalogConnectorStore snipcServerConnector = newConnector()
                 .withServerUrl(new URL(snipcUrl))
-                .withClientSecurity(
-                        new BasicPreemptiveSecurityConnector(
-                                snipcUsername, snipcPassword))
+                .withClientSecurity(new BasicPreemptiveSecurityConnector(snipcUsername, snipcPassword))
                 .build();
-
         CatalogGetRecordsRequest<GetRecordsResponseType> request = snipcServerConnector.createGetRecordsRequest();
-
         request.setTypeName(TypeName.RECORD_V202);
-
         request.setOutputSchema(OutputSchema.CSW_V202);
         request.setElementSetName(ElementSetType.FULL.toString());
         request.setResultType(ResultType.RESULTS.toString());
-
         request.setStartPosition(BigInteger.ONE);
         request.setMaxRecords(BigInteger.valueOf(25));
-
         GetRecordsResponseType response = request.getResponse();
-
         SearchResultsType result = response.getSearchResults();
-        logger.info("RECORD MATCHES @@@@@@@@@@@@@@@@@@@@@ {}",
-                result.getNumberOfRecordsMatched());
-        logger.info("RECORDS FOUND @@@@@@@@@@@@@@@@@@@@@@ {}",
-                result.getNumberOfRecordsReturned());
-        logger.info("NEXT RECORD @@@@@@@@@@@@@@@@@@@@@@ {}",
-                result.getNextRecord());
-
+        logger.info("RECORD MATCHES @@@@@@@@@@@@@@@@@@@@@ {}", result.getNumberOfRecordsMatched());
+        logger.info("RECORDS FOUND @@@@@@@@@@@@@@@@@@@@@@ {}", result.getNumberOfRecordsReturned());
+        logger.info("NEXT RECORD @@@@@@@@@@@@@@@@@@@@@@ {}", result.getNextRecord());
         List<JAXBElement<? extends AbstractRecordType>> metadata = result.getAbstractRecord();
-
         if (!metadata.isEmpty()) {
-            logger.info("FIRST SECURE METADATA @@@@@@@@@@@@@@@@@@@@@ {}",
-                    (RecordType) (metadata.get(0).getValue()));
+            logger.info("FIRST SECURE METADATA @@@@@@@@@@@@@@@@@@@@@ {}", (RecordType) (metadata.get(0).getValue()));
         }
     }
 
     @Ignore(value = "Catalog is Down")
     @Test
     public void testGetRecordsRNDTWithConnector() throws Exception {
-        GPCatalogConnectorStore rndtServerConnector = GPCSWConnectorBuilder
-                .newConnector()
+        GPCatalogConnectorStore rndtServerConnector = newConnector()
                 .withServerUrl(new URL("http://www.rndt.gov.it/RNDT/CSW"))
                 .build();
-
         CatalogGetRecordsRequest<GetRecordsResponseType> request = rndtServerConnector.createGetRecordsRequest();
         request.setTypeName(TypeName.RECORD_V202);
         request.setOutputSchema(OutputSchema.CSW_V202);
@@ -244,19 +194,12 @@ public class CatalogGetRecordsTest {
         request.setResultType(ResultType.RESULTS.toString());
         request.setStartPosition(BigInteger.ONE);
         request.setMaxRecords(BigInteger.valueOf(25));
-
         GetRecordsResponseType response = request.getResponse();
-
         SearchResultsType result = response.getSearchResults();
-        logger.info("RECORD MATCHES @@@@@@@@@@@@@@@@@@@@@ {}",
-                result.getNumberOfRecordsMatched());
-        logger.info("RECORDS FOUND @@@@@@@@@@@@@@@@@@@@@@ {}",
-                result.getNumberOfRecordsReturned());
-        logger.info("NEXT RECORD @@@@@@@@@@@@@@@@@@@@@@ {}",
-                result.getNextRecord());
-
+        logger.info("RECORD MATCHES @@@@@@@@@@@@@@@@@@@@@ {}", result.getNumberOfRecordsMatched());
+        logger.info("RECORDS FOUND @@@@@@@@@@@@@@@@@@@@@@ {}", result.getNumberOfRecordsReturned());
+        logger.info("NEXT RECORD @@@@@@@@@@@@@@@@@@@@@@ {}", result.getNextRecord());
         List<JAXBElement<? extends AbstractRecordType>> metadata = result.getAbstractRecord();
-
         if (!metadata.isEmpty()) {
             logger.info("FIRST SECURE METADATA @@@@@@@@@@@@@@@@@@@@@ {}",
                     (RecordType) (metadata.get(0).getValue()));

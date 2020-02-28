@@ -59,6 +59,8 @@ import java.io.FileOutputStream;
 import java.net.URL;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -91,46 +93,32 @@ public class CatalogGetRecordByIdTest {
      */
     private static final String ISPRA_URL = "http://sgi.isprambiente.it/geoportal/csw/discovery";
 
+    @Ignore(value = "ID REQUEST DOESN'T EXIST")
     @Test
     public void testTypeSummary() throws Exception {
-        CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request
-                = serverConnector.createGetRecordByIdRequest();
-
+        CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request = serverConnector.createGetRecordByIdRequest();
         request.setId("7e418dac-3764-4290-b8ac-47c9ac2a12af");
-
         GetRecordByIdResponseType response = request.getResponse();
-
-        Assert.assertEquals(true, response.isSetAbstractRecord());
-        Assert.assertEquals(false, response.isSetAny());
-
+        assertEquals(true, response.isSetAbstractRecord());
+        assertEquals(false, response.isSetAny());
         List<JAXBElement<? extends AbstractRecordType>> abstractRecord = response.getAbstractRecord();
-
-        Assert.assertEquals(1, abstractRecord.size());
-
+        assertEquals(1, abstractRecord.size());
         SummaryRecordType record = (SummaryRecordType) abstractRecord.get(0).getValue();
-
         logger.info("SUMMARY RESULT @@@@@@@@@@@@@@@@@@ " + record);
     }
 
+    @Ignore(value = "ID REQUEST DOESN'T EXIST")
     @Test
     public void testTypeFull() throws Exception {
-        CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request
-                = serverConnector.createGetRecordByIdRequest();
-
+        CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request = serverConnector.createGetRecordByIdRequest();
         request.setId("7e418dac-3764-4290-b8ac-47c9ac2a12af");
-
         request.setOutputSchema(OutputSchema.GMD);
         request.setElementSetType(ElementSetType.FULL.value());
-
         GetRecordByIdResponseType response = request.getResponse();
-
-        Assert.assertEquals(false, response.isSetAbstractRecord());
-        Assert.assertEquals(true, response.isSetAny());
-
+        assertEquals(false, response.isSetAbstractRecord());
+        assertEquals(true, response.isSetAny());
         List<Object> any = response.getAny();
-
-        logger.info("FULL METADATA @@@@@@@@@@@@@@@@@@@@@@@@@@@ {}",
-                ((JAXBElement) any.get(0)).getValue());
+        logger.info("FULL METADATA @@@@@@@@@@@@@@@@@@@@@@@@@@@ {}", ((JAXBElement) any.get(0)).getValue());
     }
 
     @Ignore(value = "Server has Problem")
@@ -141,65 +129,44 @@ public class CatalogGetRecordByIdTest {
                 .withServerUrl(new URL("http://www.geoportale.isprambiente.it/"
                         + "geoportale/csw/discovery"))
                 .build();
-        CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request
-                = ispraServerConnector.createGetRecordByIdRequest();
-
+        CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request = ispraServerConnector.createGetRecordByIdRequest();
         request.setId("ispra_rm:20150521:185000");
-
         request.setOutputSchema(OutputSchema.GMD);
         request.setElementSetType(ElementSetType.FULL.value());
-
         GetRecordByIdResponseType response = request.getResponse();
-
-        Assert.assertEquals(false, response.isSetAbstractRecord());
-        Assert.assertEquals(true, response.isSetAny());
-
+        assertEquals(false, response.isSetAbstractRecord());
+        assertEquals(true, response.isSetAny());
         List<Object> any = response.getAny();
-
-        logger.info("FULL METADATA @@@@@@@@@@@@@@@@@@@@@@@@@@@ {}",
-                ((JAXBElement) any.get(0)).getValue());
+        logger.info("FULL METADATA @@@@@@@@@@@@@@@@@@@@@@@@@@@ {}", ((JAXBElement) any.get(0)).getValue());
     }
 
+    @Ignore(value = "ID REQUEST DOESN'T EXIST")
     @Test
     public void testDoubleRequest() throws Exception {
-        CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request
-                = serverConnector.createGetRecordByIdRequest();
-
-        request.setId("7e418dac-3764-4290-b8ac-47c9ac2a12af",
-                "r_friuli:m8726-cc-i1286");
-
+        CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request = serverConnector.createGetRecordByIdRequest();
+        request.setId("7e418dac-3764-4290-b8ac-47c9ac2a12af", "r_friuli:m8726-cc-i1286");
         GetRecordByIdResponseType response = request.getResponse();
-
-        Assert.assertEquals(true, response.isSetAbstractRecord());
-        Assert.assertEquals(false, response.isSetAny());
-
+        assertEquals(true, response.isSetAbstractRecord());
+        assertEquals(false, response.isSetAny());
         List<JAXBElement<? extends AbstractRecordType>> abstractRecord = response.getAbstractRecord();
-
-        Assert.assertEquals(2, abstractRecord.size());
-
+        assertEquals(2, abstractRecord.size());
         for (JAXBElement element : abstractRecord) {
-            logger.info("SUMMARY RECORD @@@@@@@@@@@@@@@@@@ {}\n",
-                    element.getValue());
+            logger.info("SUMMARY RECORD @@@@@@@@@@@@@@@@@@ {}\n", element.getValue());
         }
     }
 
+    @Ignore(value = "ID REQUEST DOESN'T EXIST")
     @Test
     public void testOutputGmd() throws Exception {
-        CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request
-                = serverConnector.createGetRecordByIdRequest();
-
+        CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request = serverConnector.createGetRecordByIdRequest();
         request.setId("7e418dac-3764-4290-b8ac-47c9ac2a12af");
         request.setElementSetType(ElementSetType.FULL.value());
         request.setOutputSchema(OutputSchema.GMD);
-
         GetRecordByIdResponseType response = request.getResponse();
-
-        Assert.assertEquals(false, response.isSetAbstractRecord());
-        Assert.assertEquals(true, response.isSetAny());
-
+        assertEquals(false, response.isSetAbstractRecord());
+        assertEquals(true, response.isSetAny());
         List<Object> any = response.getAny();
-        Assert.assertEquals(1, any.size());
-
+        assertEquals(1, any.size());
         JAXBElement element = ((JAXBElement) any.get(0));
         MDMetadataType metadata = (MDMetadataType) element.getValue();
         Assert.assertNotNull(metadata);
@@ -212,22 +179,15 @@ public class CatalogGetRecordByIdTest {
         URL url = new URL(ISPRA_URL);
         GPCatalogConnectorStore connector = GPCSWConnectorBuilder.newConnector().
                 withServerUrl(url).build();
-
-        CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request
-                = connector.createGetRecordByIdRequest();
-
+        CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request = connector.createGetRecordByIdRequest();
         request.setId("{D499D5B8-13A5-43B2-B4FA-9FD2AA519F90}");
         request.setElementSetType(ElementSetType.FULL.value());
         request.setOutputSchema(OutputSchema.GMD);
-
         GetRecordByIdResponseType response = request.getResponse();
-
-        Assert.assertEquals(false, response.isSetAbstractRecord());
-        Assert.assertEquals(true, response.isSetAny());
-
+        assertEquals(false, response.isSetAbstractRecord());
+        assertEquals(true, response.isSetAny());
         List<Object> any = response.getAny();
-        Assert.assertEquals(1, any.size());
-
+        assertEquals(1, any.size());
         JAXBElement element = ((JAXBElement) any.get(0));
         MDMetadataType metadata = (MDMetadataType) element.getValue();
         Assert.assertNotNull(metadata);
@@ -240,14 +200,10 @@ public class CatalogGetRecordByIdTest {
         URL url = new URL(ISPRA_URL);
         GPCatalogConnectorStore connector = GPCSWConnectorBuilder.newConnector().
                 withServerUrl(url).build();
-
-        CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request
-                = connector.createGetRecordByIdRequest();
-
+        CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request = connector.createGetRecordByIdRequest();
         request.setId("{D499D5B8-13A5-43B2-B4FA-9FD2AA519F90}");
         request.setElementSetType(ElementSetType.FULL.value());
         request.setOutputSchema(OutputSchema.ORIGINAL);
-
         Object o = request.getResponse();
         MDMetadataType metadata = (MDMetadataType) o;
         Assert.assertNotNull(metadata);
@@ -264,25 +220,16 @@ public class CatalogGetRecordByIdTest {
                 withServerUrl(url).
                 withClientSecurity(securityConnector).
                 build();
-
-        CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request
-                = snipcConnector.createGetRecordByIdRequest();
-
+        CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request = snipcConnector.createGetRecordByIdRequest();
         request.setId("PCM:901:20101021:112931");
         request.setElementSetType(ElementSetType.FULL.toString());
 //        request.setOutputSchema(OutputSchema.CSW_V202);
-
         GetRecordByIdResponseType response = request.getResponse();
-
-        Assert.assertEquals(true, response.isSetAbstractRecord());
-        Assert.assertEquals(false, response.isSetAny());
-
+        assertEquals(true, response.isSetAbstractRecord());
+        assertEquals(false, response.isSetAny());
         List<JAXBElement<? extends AbstractRecordType>> abstractRecord = response.getAbstractRecord();
-
-        Assert.assertEquals(1, abstractRecord.size());
-
-        logger.info("RECORD @@@@@@@@@@@@@@@@@@ {}",
-                abstractRecord.get(0).getValue());
+        assertEquals(1, abstractRecord.size());
+        logger.info("RECORD @@@@@@@@@@@@@@@@@@ {}", abstractRecord.get(0).getValue());
     }
 
     /**
@@ -304,14 +251,10 @@ public class CatalogGetRecordByIdTest {
                 withClientSecurity(securityConnector).
                 build();
 
-        CatalogGetCapabilitiesRequest<CapabilitiesType> requestGetCap
-                = snipcConnector.createGetCapabilitiesRequest();
+        CatalogGetCapabilitiesRequest<CapabilitiesType> requestGetCap = snipcConnector.createGetCapabilitiesRequest();
+        logger.info("GetCapabilities SNIPC @@@@@@@@@@@@@@@@@@@@@@@@ {}\n", requestGetCap.getResponse());
 
-        logger.info("GetCapabilities SNIPC @@@@@@@@@@@@@@@@@@@"
-                + "@@@@@ " + requestGetCap.getResponse());
-
-        CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request
-                = snipcConnector.createGetRecordByIdRequest();
+        CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request = snipcConnector.createGetRecordByIdRequest();
 
         request.setId("{3DEE88CB-A0DB-4794-941A-FD8119621A2F}");
         request.setElementSetType(ElementSetType.FULL.toString());
@@ -320,13 +263,9 @@ public class CatalogGetRecordByIdTest {
         Object o = request.getResponse();
 //        MDMetadataType metadata = (MDMetadataType) o;
 //        Assert.assertNotNull(metadata);
-        logger.info("FULL METADATA @@@@@@@@@@@@@@@@@@@@@@@@@@@ {}",
-                request.getResponseAsString());
-
+        logger.info("FULL METADATA @@@@@@@@@@@@@@@@@@@@@@@@@@@ {}", request.getResponseAsString());
         String snipcGetRecordById = "target/snipcGetRecordById.xml";
-
         FileOutputStream fos = null;
-
         try {
             fos = new FileOutputStream(snipcGetRecordById);
             request.getMarshaller().marshal(o, fos);
@@ -336,5 +275,4 @@ public class CatalogGetRecordByIdTest {
             }
         }
     }
-
 }

@@ -69,11 +69,8 @@ public class CSWPooledCapabilitiesTest {
                 .withServerUrl(new URL("http://www.geoportale.isprambiente.it"
                                 + "/geoportale/csw?request=GetCapabilities"
                                 + "&service=CSW&version=2.0.2")).build();
-
         CatalogGetCapabilitiesRequest<CapabilitiesType> request = serverConnector.createGetCapabilitiesRequest();
-
-        logger.info("\n\n#######################CSW_GET_CAP_RESPONSE_AS_STRING "
-                + ": {}\n\n", request.getResponseAsString());
+        logger.info("\n\n#######################CSW_GET_CAP_RESPONSE_AS_STRING : {}\n\n", request.getResponseAsString());
     }
 
     @Test
@@ -81,13 +78,9 @@ public class CSWPooledCapabilitiesTest {
         GPCatalogConnectorStore serverConnector = GPCSWConnectorBuilderPool
                 .newConnector()
                 .withServerUrl(new URL("http://catalog.geosdi.org/geonetwork/"
-                                + "srv/en/csw?request=GetCapabilities&service=CSW"
+                                + "srv/eng/csw?request=GetCapabilities&service=CSW"
                                 + "&version=2.0.2")).build();
-
         CatalogGetCapabilitiesRequest<CapabilitiesType> request = serverConnector.createGetCapabilitiesRequest();
-
-        logger.info("\n\n#######################CSW_GET_CAP_RESPONSE_AS_STRING "
-                + ": {}\n\n", request.getResponseAsString());
+        logger.info("\n\n#######################CSW_GET_CAP_RESPONSE_AS_STRING : {}\n\n", request.getResponseAsString());
     }
-
 }

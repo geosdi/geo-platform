@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.connector.geosdi;
 
 import org.geosdi.geoplatform.connector.GPCSWConnectorBuilder;
 import org.geosdi.geoplatform.connector.GPCatalogConnectorStore;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -53,10 +52,13 @@ import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorCo
 @Configuration
 class GeoSDIServerConnectorConfig {
 
+    /**
+     * @param geosdiUrl
+     * @return {@link GPCatalogConnectorStore}
+     * @throws Exception
+     */
     @Bean
-    @Required
-    public static GPCatalogConnectorStore geoSDIServerConnectorStore(
-            @Value("configurator{geosdi_catalog_url}") String geosdiUrl) throws Exception {
+    public static GPCatalogConnectorStore geoSDIServerConnectorStore(@Value("configurator{geosdi_catalog_url}") String geosdiUrl) throws Exception {
         return GPCSWConnectorBuilder.newConnector().
                 withServerUrl(new URL(geosdiUrl))
                 .withPooledConnectorConfig(pooledConnectorConfigBuilder()

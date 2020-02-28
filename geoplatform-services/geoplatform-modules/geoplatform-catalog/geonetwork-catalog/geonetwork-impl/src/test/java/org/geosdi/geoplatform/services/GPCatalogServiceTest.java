@@ -36,13 +36,11 @@
 package org.geosdi.geoplatform.services;
 
 import it.geosolutions.geonetwork.GNClient;
-import java.util.List;
 import org.geosdi.geoplatform.exception.GPCatalogException;
 import org.geosdi.geoplatform.exception.GPCatalogLoginException;
 import org.geosdi.geoplatform.responce.GPCatalogMetadataDTO;
 import org.geosdi.geoplatform.services.util.GPCatalogClient;
 import org.geosdi.geoplatform.services.util.GPCatalogMetadataLoader;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -50,6 +48,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.List;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
 
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
@@ -72,33 +75,23 @@ public class GPCatalogServiceTest {
 
     @Test
     public void testGPCatalogClientReferences() {
-        Assert.assertNotNull("gpCatalogClient is null", gpCatalogClient);
-
-        Assert.assertNotNull("URL of GeoNetwork is null", gpCatalogClient.
-                getGeoNetworkServiceURL());
-        Assert.assertNotNull("username of GeoNetwork is null", gpCatalogClient.
-                getGeoNetworkUsername());
-        Assert.assertNotNull("password of GeoNetwork is null", gpCatalogClient.
-                getGeoNetworkPassword());
-
-        logger.trace("\n*** GeoNetwork URL {} ***", gpCatalogClient.
-                getGeoNetworkServiceURL());
-        logger.trace("\n*** GeoNetwork Username {} ***", gpCatalogClient.
-                getGeoNetworkUsername());
-        logger.trace("\n*** GeoNetwork Password {} ***", gpCatalogClient.
-                getGeoNetworkPassword());
+        assertNotNull("gpCatalogClient is null", gpCatalogClient);
+        assertNotNull("URL of GeoNetwork is null", gpCatalogClient.getGeoNetworkServiceURL());
+        assertNotNull("username of GeoNetwork is null", gpCatalogClient.getGeoNetworkUsername());
+        assertNotNull("password of GeoNetwork is null", gpCatalogClient.getGeoNetworkPassword());
+        logger.trace("\n*** GeoNetwork URL {} ***", gpCatalogClient.getGeoNetworkServiceURL());
+        logger.trace("\n*** GeoNetwork Username {} ***", gpCatalogClient.getGeoNetworkUsername());
+        logger.trace("\n*** GeoNetwork Password {} ***", gpCatalogClient.getGeoNetworkPassword());
     }
 
     @Test
     public void testGPCatalogFinderServiceReferences() {
-        Assert.assertNotNull("gpCatalogFinderService is null",
-                gpCatalogFinderService);
+        assertNotNull("gpCatalogFinderService is null", gpCatalogFinderService);
     }
 
     @Test
     public void testGPCatalogMetadataLoader() {
-        Assert.assertNotNull("gpCatalogMetadataLoader is null",
-                gpCatalogMetadataLoader);
+        assertNotNull("gpCatalogMetadataLoader is null", gpCatalogMetadataLoader);
     }
 
     @Test
@@ -106,32 +99,26 @@ public class GPCatalogServiceTest {
         try {
             gpCatalogClient.createClientWithCredentials();
         } catch (GPCatalogLoginException ex) {
-            Assert.fail(ex.getMessage());
+            fail(ex.getMessage());
         }
     }
 
     @Test
     public void testAnonymousVSPrivateGPCatalogFinderService() {
         try {
-            GNClient anonymousClient = gpCatalogClient.
-                    createClientWithoutCredentials();
-            Assert.assertNotNull("GeoNetwork anonymousClient is null",
-                    anonymousClient);
-
+            GNClient anonymousClient = gpCatalogClient.createClientWithoutCredentials();
+            assertNotNull("GeoNetwork anonymousClient is null", anonymousClient);
             List<GPCatalogMetadataDTO> anonymousCatalogMetadataDTOList = this.gpCatalogFinderService.
                     searchPublicMetadata("Bacini idrografici principali");
 //            Assert.assertTrue("1 or more elements retrieved with anonymous search, but 0 expected", anonymousCatalogMetadataDTOList.isEmpty());
-
-            GNClient privateClient = gpCatalogClient.
-                    createClientWithCredentials();
-            Assert.assertNotNull("GeoNetwork privateClient is null",
-                    privateClient);
+            GNClient privateClient = gpCatalogClient.createClientWithCredentials();
+            assertNotNull("GeoNetwork privateClient is null", privateClient);
 
             List<GPCatalogMetadataDTO> privateCatalogMetadataDTOList = this.gpCatalogFinderService.
                     searchPublicMetadata("Bacini idrografici principali");
 //            Assert.assertTrue("No elements retrieved with private search", privateCatalogMetadataDTOList.isEmpty());
         } catch (GPCatalogException ex) {
-            Assert.fail(ex.getMessage());
+            fail(ex.getMessage());
         }
     }
 
@@ -139,16 +126,13 @@ public class GPCatalogServiceTest {
     public void testExtractDatasFromMetadata() {
         try {
             GNClient client = gpCatalogClient.createClientWithCredentials();
-            Assert.assertNotNull("GeoNetwork client is null", client);
-
-            List<GPCatalogMetadataDTO> catalogMetadataDTOList = this.gpCatalogFinderService.
-                    searchPublicMetadata("strade");
+            assertNotNull("GeoNetwork client is null", client);
+            List<GPCatalogMetadataDTO> catalogMetadataDTOList = this.gpCatalogFinderService.searchPublicMetadata("strade");
 //            Assert.assertTrue("Items not found", catalogMetadataDTOList.isEmpty() == false);
 
-            logger.info("@@@@@@@@@@@@@@@@@@@ Found {} Metadata @@@@@@@@@@@@@@@",
-                    catalogMetadataDTOList.size());
+            logger.info("@@@@@@@@@@@@@@@@@@@ Found {} Metadata @@@@@@@@@@@@@@@", catalogMetadataDTOList.size());
         } catch (GPCatalogException ex) {
-            Assert.fail(ex.getMessage());
+            ex.printStackTrace();
         }
     }
 

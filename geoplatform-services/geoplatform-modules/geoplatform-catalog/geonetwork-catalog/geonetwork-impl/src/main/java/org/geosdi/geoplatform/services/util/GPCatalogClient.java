@@ -56,22 +56,18 @@ public class GPCatalogClient {
     public GNClient createClientWithoutCredentials() {
         // Create a GeoNetwork client pointing to the GeoNetwork service
         GNClient client = new GNClient(geoNetworkServiceURL);
-
         return client;
     }
 
     public GNClient createClientWithCredentials() throws GPCatalogLoginException {
         // Create a GeoNetwork client pointing to the GeoNetwork service
         GNClient client = new GNClient(geoNetworkServiceURL);
-
         // Perform a login into GN
         boolean logged = client.login(geoNetworkUsername, geoNetworkPassword);
-
         if (!logged) {
             logger.error("Could not login to GeoNetwork service");
             throw new GPCatalogLoginException("Could not login to GeoNetwork service");
         }
-
         return client;
     }
 

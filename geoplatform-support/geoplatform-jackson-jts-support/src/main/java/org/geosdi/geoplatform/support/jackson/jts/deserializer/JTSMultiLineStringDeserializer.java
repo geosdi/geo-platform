@@ -52,8 +52,7 @@ public class JTSMultiLineStringDeserializer extends GPJTSDeserializer<MultiLineS
     @Override
     public MultiLineString parseGeometry(GeoJsonObject geoJsonObject) {
         try {
-            return super.getJTSGeometryImplementorWriter(geoJsonObject)
-                    .buildJTSGeometry((org.geojson.MultiLineString) geoJsonObject);
+            return super.getJTSGeometryImplementorWriter(geoJsonObject).buildJTSGeometry((org.geojson.MultiLineString) geoJsonObject);
         } catch (Exception ex) {
             logger.error(":::::::::::::::::::::{} - Error : {}", super.getDeserializerName(), ex.getMessage());
             ex.printStackTrace();

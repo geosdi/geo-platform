@@ -42,6 +42,7 @@ import javax.annotation.Nonnull;
 
 import static java.lang.Boolean.TRUE;
 import static javax.annotation.meta.When.NEVER;
+import static org.elasticsearch.index.query.Operator.AND;
 import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
 /**
@@ -64,6 +65,6 @@ public class GPQueryStringSearch extends IBooleanSearch.AbstractBooleanSearch {
      */
     @Override
     public QueryBuilder buildQuery() {
-        return queryStringQuery(this.value.toString()).allowLeadingWildcard(TRUE).field(this.field);
+        return queryStringQuery(this.value.toString()).allowLeadingWildcard(TRUE).defaultOperator(AND).field(this.field);
     }
 }

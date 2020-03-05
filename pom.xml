@@ -1121,7 +1121,7 @@
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-core</artifactId>
-                <version>3.1.0</version>
+                <version>3.3.2</version>
                 <scope>test</scope>
             </dependency>
             
@@ -1376,7 +1376,7 @@
             <plugin>
                 <groupId>pl.project13.maven</groupId>
                 <artifactId>git-commit-id-plugin</artifactId>
-                <version>3.0.1</version>
+                <version>4.0.0</version>
                 <executions>
                     <execution>
                         <goals>
@@ -1549,7 +1549,7 @@
 
         <aspectj-version>1.8.9</aspectj-version>
         <ubl-version>2.0</ubl-version>
-        <jetty-version>9.4.26.v20200117</jetty-version>
+        <jetty-version>9.4.27.v20200227</jetty-version>
 
         <postgresql-version>9.4-1200-jdbc41</postgresql-version>
         <postgis-jdbc-version>1.5.2</postgis-jdbc-version>

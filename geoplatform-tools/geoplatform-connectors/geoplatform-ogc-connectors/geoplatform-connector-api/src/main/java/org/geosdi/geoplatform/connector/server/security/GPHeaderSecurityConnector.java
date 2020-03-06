@@ -36,8 +36,8 @@
 package org.geosdi.geoplatform.connector.server.security;
 
 import net.jcip.annotations.Immutable;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.hc.client5.http.classic.methods.HttpUriRequest;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
 import org.geosdi.geoplatform.connector.server.request.GPConnectorRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -77,12 +77,10 @@ public class GPHeaderSecurityConnector implements GPSecurityConnector {
      * @throws {@link IOException}
      */
     @Override
-    public <C extends GPConnectorRequest, H extends HttpUriRequest> CloseableHttpResponse secure(@Nonnull(when = NEVER) C connectorRequest,
-            @Nonnull(when = NEVER) H httpRequest) throws IOException {
+    public <C extends GPConnectorRequest, H extends HttpUriRequest> CloseableHttpResponse secure(@Nonnull(when = NEVER) C connectorRequest, @Nonnull(when = NEVER) H httpRequest) throws IOException {
         checkArgument(connectorRequest != null, "The Parameter connectorRequest must not be null.");
         checkArgument(httpRequest != null, "The Parameter httpRequest must not be null.");
-        logger.debug("#########################{} is injecting values {} in Header Request.\n",
-                this.getClass().getSimpleName(), this.headerParams);
+        logger.debug("#########################{} is injecting values {} in Header Request.\n", this.getClass().getSimpleName(), this.headerParams);
         this.headerParams.entrySet()
                 .stream()
                 .forEach(entry -> httpRequest.addHeader(entry.getKey(), entry.getValue()));

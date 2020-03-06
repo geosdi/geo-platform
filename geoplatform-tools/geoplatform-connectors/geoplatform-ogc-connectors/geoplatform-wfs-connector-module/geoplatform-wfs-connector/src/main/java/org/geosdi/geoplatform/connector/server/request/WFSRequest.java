@@ -35,8 +35,8 @@
  */
 package org.geosdi.geoplatform.connector.server.request;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.entity.StringEntity;
+import org.apache.hc.core5.http.HttpEntity;
+import org.apache.hc.core5.http.io.entity.StringEntity;
 import org.geosdi.geoplatform.connector.jaxb.repository.JAXBContextConnectorRepository;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.jaxb.GPBaseJAXBContext;
@@ -45,7 +45,7 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.StringWriter;
 
-import static org.apache.http.entity.ContentType.APPLICATION_XML;
+import static org.apache.hc.core5.http.ContentType.APPLICATION_XML;
 import static org.geosdi.geoplatform.connector.jaxb.repository.WFSConnectorJAXBContext.WFS_CONTEXT_KEY;
 
 /**
@@ -64,6 +64,10 @@ public abstract class WFSRequest<T, Request> extends GPPostConnectorRequest<T, R
         super(server);
     }
 
+    /**
+     * @return {@link HttpEntity}
+     * @throws Exception
+     */
     @Override
     protected HttpEntity preparePostEntity() throws Exception {
         Marshaller marshaller = this.getMarshaller();
@@ -73,16 +77,30 @@ public abstract class WFSRequest<T, Request> extends GPPostConnectorRequest<T, R
         return new StringEntity(writer.toString(), APPLICATION_XML);
     }
 
+    /**
+     * @return Marshaller
+     * @throws Exception
+     */
     @Override
     public Marshaller getMarshaller() throws Exception {
         return wfsContext.acquireMarshaller();
     }
 
+    /**
+     * @return Unmarshaller
+     * @throws Exception
+     */
     @Override
     public Unmarshaller getUnmarshaller() throws Exception {
         return wfsContext.acquireUnmarshaller();
     }
 
+    /**
+     * Show the XML Object created for the Request to send to Server
+     *
+     * @return Request as a String
+     * @throws Exception
+     */
     @Override
     public String showRequestAsString() throws Exception {
         StringWriter writer = new StringWriter();

@@ -35,9 +35,9 @@
  */
 package org.geosdi.geoplatform.connector.server.request;
 
-import org.apache.http.client.CredentialsProvider;
-import org.apache.http.client.config.RequestConfig;
-import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.hc.client5.http.auth.CredentialsStore;
+import org.apache.hc.client5.http.config.RequestConfig;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.exception.ResourceNotFoundException;
 import org.geosdi.geoplatform.connector.server.exception.UnauthorizedException;
@@ -49,8 +49,8 @@ import javax.annotation.Nonnull;
 import java.net.URI;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static java.util.concurrent.TimeUnit.SECONDS;
 import static javax.annotation.meta.When.NEVER;
-import static org.apache.http.client.config.CookieSpecs.DEFAULT;
 import static org.geosdi.geoplatform.connector.server.security.GPSecurityConnector.MOCK_SECURITY;
 
 /**
@@ -65,7 +65,7 @@ public abstract class GPAbstractConnectorRequest<T> implements GPConnectorReques
     protected final URI serverURI;
     protected final GPSecurityConnector securityConnector;
     protected final CloseableHttpClient clientConnection;
-    private final CredentialsProvider credentialProvider;
+    private final CredentialsStore credentialStore;
     private RequestConfig requestConfig;
 
     /**
@@ -73,19 +73,19 @@ public abstract class GPAbstractConnectorRequest<T> implements GPConnectorReques
      */
     protected GPAbstractConnectorRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector) {
         checkArgument(theServerConnector != null, "The Parameter GPServerConnector must not be null.");
-        checkArgument(theServerConnector.getCredentialsProvider() != null, "The Parameter CredentialProvider must not be null.");
+        checkArgument(theServerConnector.getCredentialsStore() != null, "The Parameter CredentialProvider must not be null.");
         checkArgument(theServerConnector.getURI() != null, "The Parameter Server URI must not be null.");
         checkArgument(theServerConnector.getClientConnection() != null, "The Parameter Client Connection  must not be null.");
         this.serverConnector = theServerConnector;
         this.clientConnection = this.serverConnector.getClientConnection();
         this.serverURI = this.serverConnector.getURI();
-        this.credentialProvider = this.serverConnector.getCredentialsProvider();
+        this.credentialStore = this.serverConnector.getCredentialsStore();
         this.securityConnector = (this.serverConnector.getSecurityConnector() == null ? MOCK_SECURITY : this.serverConnector.getSecurityConnector());
     }
 
     /**
      * <p>
-     * Setting basic configuration for HttpParams
+     *   Setting basic configuration for HttpParams
      * </p>
      *
      * @return RequestConfig
@@ -113,10 +113,10 @@ public abstract class GPAbstractConnectorRequest<T> implements GPConnectorReques
      */
     protected RequestConfig createRequestConfig() {
         return RequestConfig.custom()
-                .setCookieSpec(DEFAULT)
-                .setSocketTimeout(8000)
-                .setConnectTimeout(8000)
-                .setConnectionRequestTimeout(8000).build();
+                .setCookieSpec("default")
+//                .setSocketTimeout(8000)
+                .setConnectTimeout(8, SECONDS)
+                .setConnectionRequestTimeout(8, SECONDS).build();
     }
 
     /**
@@ -136,11 +136,11 @@ public abstract class GPAbstractConnectorRequest<T> implements GPConnectorReques
     }
 
     /**
-     * @return {@link CredentialsProvider}
+     * @return {@link CredentialsStore}
      */
     @Override
-    public CredentialsProvider getCredentialsProvider() {
-        return this.credentialProvider;
+    public CredentialsStore getCredentialsStore() {
+        return this.credentialStore;
     }
 
     /**
@@ -148,6 +148,6 @@ public abstract class GPAbstractConnectorRequest<T> implements GPConnectorReques
      */
     @Override
     public void shutdown() throws Exception {
-        this.clientConnection.close();
+        this.serverConnector.dispose();
     }
 }

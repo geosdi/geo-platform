@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.server.request;
 
-import org.apache.http.client.methods.HttpGet;
+import org.apache.hc.client5.http.classic.methods.HttpGet;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 
 import javax.annotation.Nonnull;

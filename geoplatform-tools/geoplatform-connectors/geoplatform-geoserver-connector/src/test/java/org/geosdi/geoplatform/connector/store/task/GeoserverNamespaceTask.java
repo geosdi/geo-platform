@@ -64,8 +64,7 @@ public class GeoserverNamespaceTask extends Thread {
      */
     public GeoserverNamespaceTask(GPGeoserverNamespaceRequest theNamespaceRequest, String thePrefix) {
         checkArgument(theNamespaceRequest != null, "The Parameter NameSpaceRequest must not be null.");
-        checkArgument(((thePrefix != null) && !(thePrefix.isEmpty())),
-                "The Parameter prefix must not be null or an Empty String.");
+        checkArgument(((thePrefix != null) && !(thePrefix.isEmpty())), "The Parameter prefix must not be null or an Empty String.");
         this.namespaceRequest = theNamespaceRequest;
         this.prefix = thePrefix;
     }

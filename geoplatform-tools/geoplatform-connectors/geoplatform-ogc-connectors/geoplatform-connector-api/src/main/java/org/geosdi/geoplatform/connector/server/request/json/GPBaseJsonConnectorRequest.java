@@ -36,22 +36,25 @@
 package org.geosdi.geoplatform.connector.server.request.json;
 
 import com.google.common.io.CharStreams;
-import org.apache.commons.io.IOUtils;
-import org.apache.http.HttpEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.hc.client5.http.classic.methods.HttpUriRequest;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
+import org.apache.hc.core5.http.HttpEntity;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.exception.IncorrectResponseException;
 import org.geosdi.geoplatform.connector.server.request.GPAbstractConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 import static com.google.common.base.Charsets.UTF_8;
 import static com.google.common.base.Preconditions.checkArgument;
 import static javax.annotation.meta.When.NEVER;
-import static org.apache.http.util.EntityUtils.consume;
+import static org.apache.commons.io.IOUtils.toByteArray;
+import static org.apache.hc.core5.http.io.entity.EntityUtils.consume;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -80,9 +83,9 @@ abstract class GPBaseJsonConnectorRequest<T, H extends HttpUriRequest> extends G
     public T getResponse() throws Exception {
         HttpUriRequest httpMethod = this.prepareHttpMethod();
         httpMethod.addHeader("Content-Type", "application/json");
-        logger.debug("#############################Executing -------------> {}\n", httpMethod.getURI().toString());
+        logger.debug("#############################Executing -------------> {}\n", httpMethod.getUri().toString());
         CloseableHttpResponse httpResponse = super.securityConnector.secure(this, httpMethod);
-        int statusCode = httpResponse.getStatusLine().getStatusCode();
+        int statusCode = httpResponse.getCode();
         logger.debug("###############################STATUS_CODE : {} for Request : {}\n", statusCode, this.getClass().getSimpleName());
         this.checkHttpResponseStatus(statusCode);
         HttpEntity responseEntity = httpResponse.getEntity();
@@ -108,9 +111,9 @@ abstract class GPBaseJsonConnectorRequest<T, H extends HttpUriRequest> extends G
     public String getResponseAsString() throws Exception {
         HttpUriRequest httpMethod = this.prepareHttpMethod();
         httpMethod.addHeader("Content-Type", "application/json");
-        logger.debug("#############################Executing -------------> {}\n", httpMethod.getURI().toString());
+        logger.debug("#############################Executing -------------> {}\n", httpMethod.getUri().toString());
         CloseableHttpResponse httpResponse = super.securityConnector.secure(this, httpMethod);
-        int statusCode = httpResponse.getStatusLine().getStatusCode();
+        int statusCode = httpResponse.getCode();
         logger.debug("###############################STATUS_CODE : {} for Request : {}\n", statusCode, this.getClass().getSimpleName());
         this.checkHttpResponseStatus(statusCode);
         HttpEntity responseEntity = httpResponse.getEntity();
@@ -138,16 +141,16 @@ abstract class GPBaseJsonConnectorRequest<T, H extends HttpUriRequest> extends G
     public InputStream getResponseAsStream() throws Exception {
         HttpUriRequest httpMethod = this.prepareHttpMethod();
         httpMethod.addHeader("Content-Type", "application/json");
-        logger.debug("#############################Executing -------------> {}\n", httpMethod.getURI().toString());
+        logger.debug("#############################Executing -------------> {}\n", httpMethod.getUri().toString());
         CloseableHttpResponse httpResponse = super.securityConnector.secure(this, httpMethod);
-        int statusCode = httpResponse.getStatusLine().getStatusCode();
+        int statusCode = httpResponse.getCode();
         logger.debug("###############################STATUS_CODE : {} for Request : {}\n", statusCode, this.getClass().getSimpleName());
         this.checkHttpResponseStatus(statusCode);
         HttpEntity responseEntity = httpResponse.getEntity();
         try {
             if (responseEntity != null) {
                 InputStream inputStream = responseEntity.getContent();
-                return new ByteArrayInputStream(IOUtils.toByteArray(inputStream));
+                return new ByteArrayInputStream(toByteArray(inputStream));
             } else {
                 throw new IncorrectResponseException(CONNECTION_PROBLEM_MESSAGE);
             }

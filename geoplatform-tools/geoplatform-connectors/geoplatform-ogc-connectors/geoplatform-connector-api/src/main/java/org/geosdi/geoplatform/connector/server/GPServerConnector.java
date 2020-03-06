@@ -35,14 +35,17 @@
  */
 package org.geosdi.geoplatform.connector.server;
 
-import org.apache.http.client.CredentialsProvider;
-import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.hc.client5.http.auth.CredentialsStore;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.core5.util.TimeValue;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 
 import java.net.URI;
 import java.net.URL;
 
+import static java.util.concurrent.TimeUnit.MINUTES;
+import static org.apache.hc.core5.util.Timeout.of;
 import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
 
 /**
@@ -55,7 +58,10 @@ public interface GPServerConnector {
             .withMaxTotalConnections(80)
             .withDefaultMaxPerRoute(30)
             .withMaxRedirect(20)
-            .withConnectionTimeout(3).build();
+            .withConnectionTimeout(of(3l, MINUTES))
+            .withRequestConnectionTimeout(of(3l, MINUTES))
+            .withConnectionKeepAlive(TimeValue.of(1l, MINUTES))
+            .build();
 
     /**
      * @return {@link URL}
@@ -68,9 +74,9 @@ public interface GPServerConnector {
     URI getURI();
 
     /**
-     * @return {@link CredentialsProvider}
+     * @return {@link CredentialsStore}
      */
-    CredentialsProvider getCredentialsProvider();
+    CredentialsStore getCredentialsStore();
 
     /**
      * @return {@link CloseableHttpClient}

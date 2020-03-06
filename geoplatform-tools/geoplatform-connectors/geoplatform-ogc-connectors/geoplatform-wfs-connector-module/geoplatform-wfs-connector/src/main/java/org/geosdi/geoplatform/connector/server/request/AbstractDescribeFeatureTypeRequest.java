@@ -45,8 +45,7 @@ import java.util.List;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class AbstractDescribeFeatureTypeRequest<T, Request> extends WFSRequest<T, Request>
-        implements WFSDescribeFeatureTypeRequest<T> {
+public abstract class AbstractDescribeFeatureTypeRequest<T, Request> extends WFSRequest<T, Request> implements WFSDescribeFeatureTypeRequest<T> {
 
     protected List<QName> typeName;
     protected String outputFormat;

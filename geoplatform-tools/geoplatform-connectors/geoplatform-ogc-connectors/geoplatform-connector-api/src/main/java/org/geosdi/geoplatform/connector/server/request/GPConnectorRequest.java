@@ -35,8 +35,8 @@
  */
 package org.geosdi.geoplatform.connector.server.request;
 
-import org.apache.http.client.CredentialsProvider;
-import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.hc.client5.http.auth.CredentialsStore;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
 
 import java.io.InputStream;
 import java.net.URI;
@@ -68,9 +68,9 @@ public interface GPConnectorRequest<T> {
     T getResponse() throws Exception;
 
     /**
-     * @return {@link CredentialsProvider}
+     * @return {@link CredentialsStore}
      */
-    CredentialsProvider getCredentialsProvider();
+    CredentialsStore getCredentialsStore();
 
     /**
      * @return {@link CloseableHttpClient}

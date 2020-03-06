@@ -35,8 +35,8 @@
  */
 package org.geosdi.geoplatform.connector.server.request;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.entity.StringEntity;
+import org.apache.hc.core5.http.HttpEntity;
+import org.apache.hc.core5.http.io.entity.StringEntity;
 import org.geosdi.geoplatform.connector.jaxb.repository.JAXBContextConnectorRepository;
 import org.geosdi.geoplatform.connector.jaxb.repository.WPSConnectorJAXBContext;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
@@ -46,7 +46,7 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.StringWriter;
 
-import static org.apache.http.entity.ContentType.APPLICATION_XML;
+import static org.apache.hc.core5.http.ContentType.APPLICATION_XML;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

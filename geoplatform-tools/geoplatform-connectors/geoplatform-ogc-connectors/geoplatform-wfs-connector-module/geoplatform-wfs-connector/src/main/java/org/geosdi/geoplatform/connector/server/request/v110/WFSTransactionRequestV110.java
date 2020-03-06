@@ -35,9 +35,9 @@
  */
 package org.geosdi.geoplatform.connector.server.request.v110;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.entity.ContentType;
-import org.apache.http.entity.StringEntity;
+import org.apache.hc.core5.http.ContentType;
+import org.apache.hc.core5.http.HttpEntity;
+import org.apache.hc.core5.http.io.entity.StringEntity;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.AbstractTransactionRequest;
 import org.geosdi.geoplatform.connector.server.request.ITransactionOperationStrategy;

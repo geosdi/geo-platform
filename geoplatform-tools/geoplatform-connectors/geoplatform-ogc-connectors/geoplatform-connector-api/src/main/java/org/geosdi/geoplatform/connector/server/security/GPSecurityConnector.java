@@ -35,12 +35,11 @@
  */
 package org.geosdi.geoplatform.connector.server.security;
 
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.hc.client5.http.classic.methods.HttpUriRequest;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
 import org.geosdi.geoplatform.connector.server.request.GPConnectorRequest;
 
 import javax.annotation.Nonnull;
-import java.io.IOException;
 
 import static javax.annotation.meta.When.NEVER;
 
@@ -58,9 +57,7 @@ public interface GPSecurityConnector {
      * @param <C> an instance of {@link GPConnectorRequest} class
      * @param <H> an instance of {@link HttpUriRequest} class (HttpPost or HttpGet)
      * @return CloseableHttpResponse
-     * @throws {@link IOException}
+     * @throws {@link Exception}
      */
-    <C extends GPConnectorRequest, H extends HttpUriRequest> CloseableHttpResponse secure(@Nonnull(when = NEVER) C connectorRequest,
-            @Nonnull(when = NEVER) H httpRequest) throws IOException;
-
+    <C extends GPConnectorRequest, H extends HttpUriRequest> CloseableHttpResponse secure(@Nonnull(when = NEVER) C connectorRequest, @Nonnull(when = NEVER) H httpRequest) throws Exception;
 }

@@ -56,8 +56,7 @@ public class GPGeoserverConnectorStore extends GeoserverSettingsConnectorStore i
      * @param theJacksonSupport
      * @param theVersion
      */
-    GPGeoserverConnectorStore(URL server, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport,
-            GeoserverVersion theVersion) {
+    GPGeoserverConnectorStore(URL server, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, GeoserverVersion theVersion) {
         this(server, null, securityConnector, theJacksonSupport, theVersion);
     }
 
@@ -68,8 +67,7 @@ public class GPGeoserverConnectorStore extends GeoserverSettingsConnectorStore i
      * @param theJacksonSupport
      * @param theVersion
      */
-    GPGeoserverConnectorStore(URL server, GPPooledConnectorConfig pooledConnectorConfig,
-            GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, GeoserverVersion theVersion) {
+    GPGeoserverConnectorStore(URL server, GPPooledConnectorConfig pooledConnectorConfig, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, GeoserverVersion theVersion) {
         super(new GPGeoserverConnector(server, pooledConnectorConfig, securityConnector, theJacksonSupport, theVersion));
     }
 

@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.server.request.json;
 
-import org.apache.http.client.methods.HttpDelete;
+import org.apache.hc.client5.http.classic.methods.HttpDelete;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 

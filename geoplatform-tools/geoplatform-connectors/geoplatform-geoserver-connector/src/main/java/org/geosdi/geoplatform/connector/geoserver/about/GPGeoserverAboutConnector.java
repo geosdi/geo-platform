@@ -114,8 +114,7 @@ public abstract class GPGeoserverAboutConnector extends GPAbstractServerConnecto
      * @param securityConnector
      * @param theVersion
      */
-    protected GPGeoserverAboutConnector(URL server, GPPooledConnectorConfig pooledConnectorConfig,
-            GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, GeoserverVersion theVersion) {
+    protected GPGeoserverAboutConnector(URL server, GPPooledConnectorConfig pooledConnectorConfig, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, GeoserverVersion theVersion) {
         super(analyzesServerURL(server), securityConnector, pooledConnectorConfig);
         checkArgument(theJacksonSupport != null, "The Parameter JacksonSupport mut not be null.");
         this.version = theVersion;

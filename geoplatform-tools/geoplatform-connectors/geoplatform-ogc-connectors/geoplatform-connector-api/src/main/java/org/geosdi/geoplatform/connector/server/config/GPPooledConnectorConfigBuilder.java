@@ -35,6 +35,9 @@
  */
 package org.geosdi.geoplatform.connector.server.config;
 
+import org.apache.hc.core5.util.TimeValue;
+import org.apache.hc.core5.util.Timeout;
+
 import static com.google.common.base.Preconditions.checkArgument;
 
 /**
@@ -59,7 +62,19 @@ public interface GPPooledConnectorConfigBuilder {
      * @param theConnectionTimeout
      * @return {@link GPPooledConnectorConfigBuilder}
      */
-    GPPooledConnectorConfigBuilder withConnectionTimeout(Integer theConnectionTimeout);
+    GPPooledConnectorConfigBuilder withConnectionTimeout(Timeout theConnectionTimeout);
+
+    /**
+     * @param theRequestConnectionTimeout
+     * @return {@link GPPooledConnectorConfigBuilder}
+     */
+    GPPooledConnectorConfigBuilder withRequestConnectionTimeout(Timeout theRequestConnectionTimeout);
+
+    /**
+     * @param theConnectionKeepAlive
+     * @return {@link GPPooledConnectorConfigBuilder}
+     */
+    GPPooledConnectorConfigBuilder withConnectionKeepAlive(TimeValue theConnectionKeepAlive);
 
     /**
      * @param theMaxRedirect
@@ -76,7 +91,9 @@ public interface GPPooledConnectorConfigBuilder {
 
         private Integer maxTotalConnections;
         private Integer defaultMaxPerRoute;
-        private Integer connectionTimeout;
+        private Timeout connectionTimeout;
+        private Timeout requestConnectionTimeout;
+        private TimeValue connectionKeepAlive;
         private Integer maxRedirect;
 
         private PooledConnectorConfigBuilder() {
@@ -110,8 +127,28 @@ public interface GPPooledConnectorConfigBuilder {
         }
 
         @Override
-        public GPPooledConnectorConfigBuilder withConnectionTimeout(Integer theConnectionTimeout) {
+        public GPPooledConnectorConfigBuilder withConnectionTimeout(Timeout theConnectionTimeout) {
             this.connectionTimeout = theConnectionTimeout;
+            return self();
+        }
+
+        /**
+         * @param theRequestConnectionTimeout
+         * @return {@link GPPooledConnectorConfigBuilder}
+         */
+        @Override
+        public GPPooledConnectorConfigBuilder withRequestConnectionTimeout(Timeout theRequestConnectionTimeout) {
+            this.requestConnectionTimeout = theRequestConnectionTimeout;
+            return self();
+        }
+
+        /**
+         * @param theConnectionKeepAlive
+         * @return {@link GPPooledConnectorConfig}
+         */
+        @Override
+        public GPPooledConnectorConfigBuilder withConnectionKeepAlive(TimeValue theConnectionKeepAlive) {
+            this.connectionKeepAlive = theConnectionKeepAlive;
             return self();
         }
 
@@ -133,8 +170,7 @@ public interface GPPooledConnectorConfigBuilder {
             checkArgument((maxTotalConnections > 0), "The Parameter MaxTotalConnections must be greater than zero.");
             checkArgument((defaultMaxPerRoute > 0), "The Parameter MaxTotalPerRoute must be greater than zero.");
             checkArgument(maxRedirect > 0, "The Parameter MaxRedirect must be greater than 0.");
-            return new BasePooledConnectorConfig(this.maxTotalConnections, this.defaultMaxPerRoute,
-                    this.connectionTimeout, this.maxRedirect);
+            return new BasePooledConnectorConfig(this.maxTotalConnections, this.defaultMaxPerRoute, this.connectionTimeout, this.requestConnectionTimeout, this.connectionKeepAlive, this.maxRedirect);
         }
 
         /**

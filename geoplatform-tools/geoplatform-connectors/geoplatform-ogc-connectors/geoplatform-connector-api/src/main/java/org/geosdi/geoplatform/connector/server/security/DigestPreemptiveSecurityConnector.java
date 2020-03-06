@@ -35,8 +35,15 @@
  */
 package org.geosdi.geoplatform.connector.server.security;
 
-import org.apache.http.impl.auth.AuthSchemeBase;
-import org.apache.http.impl.auth.DigestScheme;
+import org.apache.hc.client5.http.auth.AuthScope;
+import org.apache.hc.client5.http.impl.auth.BasicCredentialsProvider;
+import org.apache.hc.client5.http.impl.auth.DigestScheme;
+import org.apache.hc.core5.http.HttpHost;
+
+import javax.annotation.Nonnull;
+import java.net.URI;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -48,12 +55,25 @@ public class DigestPreemptiveSecurityConnector extends PreemptiveSecurityConnect
      * @param theUserName
      * @param thePassword
      */
-    public DigestPreemptiveSecurityConnector(String theUserName, String thePassword) {
+    public DigestPreemptiveSecurityConnector(@Nonnull(when = NEVER) String theUserName, @Nonnull(when = NEVER) String thePassword) {
         super(theUserName, thePassword);
     }
 
     @Override
-    protected AuthSchemeBase createScheme() {
+    protected DigestScheme createScheme() {
         return new DigestScheme();
+    }
+
+    /**
+     * @param targetHost
+     * @param targetURI
+     * @throws Exception
+     */
+    @Override
+    protected void bindCredentials(@Nonnull(when = NEVER) HttpHost targetHost, @Nonnull(when = NEVER) URI targetURI) throws Exception {
+        super.bindCredentials(targetHost, targetURI);
+        BasicCredentialsProvider credentialsProvider = new BasicCredentialsProvider();
+        credentialsProvider.setCredentials(new AuthScope(targetHost), this.usernamePasswordCredentials);
+        localContext.setCredentialsProvider(credentialsProvider);
     }
 }

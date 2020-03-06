@@ -53,8 +53,7 @@ import java.net.URL;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPCatalogServerConnector extends GPAbstractServerConnector
-        implements GPCatalogConnector {
+public class GPCatalogServerConnector extends GPAbstractServerConnector implements GPCatalogConnector {
 
     private final GPCatalogVersion version;
 
@@ -67,8 +66,7 @@ public class GPCatalogServerConnector extends GPAbstractServerConnector
      * @param urlServer the String that represent CSW server Url
      * @param version   the value of CSW version. Must be 2.0.2
      */
-    public GPCatalogServerConnector(String urlServer,
-            String version) {
+    public GPCatalogServerConnector(String urlServer, String version) {
         this(urlServer, null, null, version);
     }
 
@@ -83,8 +81,7 @@ public class GPCatalogServerConnector extends GPAbstractServerConnector
      * @param version           the value of CSW version. Must be 2.0.2
      */
     public GPCatalogServerConnector(String urlServer, GPSecurityConnector securityConnector, String version) {
-        this(analyzesServerURL(urlServer), securityConnector, toCSWVersion(
-                version));
+        this(analyzesServerURL(urlServer), securityConnector, toCSWVersion(version));
     }
 
     /**
@@ -93,8 +90,7 @@ public class GPCatalogServerConnector extends GPAbstractServerConnector
      * @param version
      */
     public GPCatalogServerConnector(String urlServer, GPPooledConnectorConfig pooledConnectorConfig, String version) {
-        this(analyzesServerURL(urlServer), pooledConnectorConfig,
-                toCSWVersion(version));
+        this(analyzesServerURL(urlServer), pooledConnectorConfig, toCSWVersion(version));
     }
 
     /**
@@ -103,8 +99,7 @@ public class GPCatalogServerConnector extends GPAbstractServerConnector
      * @param pooledConnectorConfig
      * @param version
      */
-    public GPCatalogServerConnector(String urlServer, GPSecurityConnector securityConnector,
-            GPPooledConnectorConfig pooledConnectorConfig, String version) {
+    public GPCatalogServerConnector(String urlServer, GPSecurityConnector securityConnector, GPPooledConnectorConfig pooledConnectorConfig, String version) {
         this(analyzesServerURL(urlServer), securityConnector, pooledConnectorConfig, toCSWVersion(version));
     }
 
@@ -114,8 +109,7 @@ public class GPCatalogServerConnector extends GPAbstractServerConnector
      * @param pooledConnectorConfig
      * @param theVersion
      */
-    public GPCatalogServerConnector(URL server, GPSecurityConnector securityConnector,
-            GPPooledConnectorConfig pooledConnectorConfig, GPCatalogVersion theVersion) {
+    public GPCatalogServerConnector(URL server, GPSecurityConnector securityConnector, GPPooledConnectorConfig pooledConnectorConfig, GPCatalogVersion theVersion) {
         super(server, pooledConnectorConfig);
         this.version = theVersion;
     }

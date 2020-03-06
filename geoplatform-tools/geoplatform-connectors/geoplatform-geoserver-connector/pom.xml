@@ -50,10 +50,10 @@
         </dependency>
 
         <!-- =========================================================== -->
-        <!-- ========================== RX2Java ======================== -->
+        <!-- ========================== RX3Java ======================== -->
         <!-- =========================================================== -->
         <dependency>
-            <groupId>io.reactivex.rxjava2</groupId>
+            <groupId>io.reactivex.rxjava3</groupId>
             <artifactId>rxjava</artifactId>
         </dependency>
 
@@ -61,13 +61,13 @@
         <!-- ================== APACHE HTTPCOMPONENTS ================== -->
         <!-- =========================================================== -->
         <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
+            <groupId>org.apache.httpcomponents.client5</groupId>
+            <artifactId>httpclient5</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpcore</artifactId>
+            <groupId>org.apache.httpcomponents.core5</groupId>
+            <artifactId>httpcore5</artifactId>
         </dependency>
 
         <!-- logging dependencies, delegate all to slf4j and use logback -->

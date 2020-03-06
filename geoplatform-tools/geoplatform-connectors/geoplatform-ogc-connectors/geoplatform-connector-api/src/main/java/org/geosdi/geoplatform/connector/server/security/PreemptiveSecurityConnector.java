@@ -35,21 +35,20 @@
  */
 package org.geosdi.geoplatform.connector.server.security;
 
-import org.apache.http.HttpHost;
-import org.apache.http.client.AuthCache;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpUriRequest;
-import org.apache.http.client.protocol.HttpClientContext;
-import org.apache.http.impl.auth.AuthSchemeBase;
-import org.apache.http.impl.client.BasicAuthCache;
+import org.apache.hc.client5.http.auth.AuthCache;
+import org.apache.hc.client5.http.auth.AuthScheme;
+import org.apache.hc.client5.http.classic.methods.HttpUriRequest;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
+import org.apache.hc.client5.http.protocol.HttpClientContext;
+import org.apache.hc.core5.http.HttpHost;
 import org.geosdi.geoplatform.connector.server.request.GPConnectorRequest;
 
 import javax.annotation.Nonnull;
-import java.io.IOException;
 import java.net.URI;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static javax.annotation.meta.When.NEVER;
+import static org.apache.hc.client5.http.protocol.HttpClientContext.create;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -59,13 +58,13 @@ public abstract class PreemptiveSecurityConnector extends AbstractSecurityConnec
 
     private HttpHost httpHost;
     protected AuthCache authCache;
-    protected HttpClientContext localcontext = HttpClientContext.create();
+    protected HttpClientContext localContext;
 
     /**
      * @param theUserName
      * @param thePassword
      */
-    protected PreemptiveSecurityConnector(@Nonnull(when = NEVER) String theUserName, @Nonnull(when = NEVER) String thePassword) {
+    PreemptiveSecurityConnector(@Nonnull(when = NEVER) String theUserName, @Nonnull(when = NEVER) String thePassword) {
         super(theUserName, thePassword);
     }
 
@@ -75,47 +74,36 @@ public abstract class PreemptiveSecurityConnector extends AbstractSecurityConnec
      * @param <C>
      * @param <H>
      * @return {@link CloseableHttpResponse}
-     * @throws IOException
+     * @throws Exception
      */
     @Override
-    public <C extends GPConnectorRequest, H extends HttpUriRequest> CloseableHttpResponse secure(@Nonnull(when = NEVER) C connectorRequest,
-            @Nonnull(when = NEVER) H httpRequest) throws IOException {
+    public <C extends GPConnectorRequest, H extends HttpUriRequest> CloseableHttpResponse secure(@Nonnull(when = NEVER) C connectorRequest, @Nonnull(when = NEVER) H httpRequest) throws Exception {
         checkArgument(connectorRequest != null, "The Parameter connectorRequest must not be null.");
         checkArgument(httpRequest != null, "The Parameter httpRequest must not be null.");
-        super.bindCredentials(connectorRequest.getCredentialsProvider(), connectorRequest.getURI());
+        this.localContext = create();
         HttpHost targetHost = this.extractHost(connectorRequest.getURI());
-        this.preparePreemptiveParameters(targetHost);
-        return connectorRequest.getClientConnection().execute(targetHost, httpRequest, localcontext);
-    }
-
-    /**
-     * @param targetHost
-     */
-    protected void preparePreemptiveParameters(HttpHost targetHost) {
-        if (this.authCache == null) {
-            this.authCache = new BasicAuthCache();
-            this.authCache.put(targetHost, createScheme());
-            this.localcontext.setAuthCache(authCache);
-        }
+        this.bindCredentials(httpHost, connectorRequest.getURI());
+        return connectorRequest.getClientConnection().execute(targetHost, httpRequest, localContext);
     }
 
     /**
      * @param uri
      * @return
      */
-    protected HttpHost extractHost(URI uri) {
+    protected HttpHost extractHost(@Nonnull(when = NEVER) URI uri) {
+        checkArgument(uri != null, "The Parameter uri must not be null.");
         if (this.httpHost == null) {
-            this.httpHost = new HttpHost(uri.getHost(), this.retrieveNoSetPort(uri), uri.getScheme());
+            this.httpHost = new HttpHost(uri.getScheme(), uri.getHost(), this.retrieveNoSetPort(uri));
         }
         return this.httpHost;
     }
 
     /**
-     * Create an instance for {@link AuthSchemeBase} Class
+     * Create an instance for {@link Scheme} Class
      *
-     * @return AuthSchemeBase
+     * @return AuthScheme
      */
-    protected abstract AuthSchemeBase createScheme();
+    protected abstract <Scheme extends AuthScheme> Scheme createScheme();
 
     /**
      * If the URI don't have e port, retrieve the standard port wrt scheme

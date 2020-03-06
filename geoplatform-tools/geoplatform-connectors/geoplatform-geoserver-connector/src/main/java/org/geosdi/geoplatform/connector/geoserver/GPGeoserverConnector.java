@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.connector.geoserver;
 
 import org.geosdi.geoplatform.connector.GeoserverVersion;
-import org.geosdi.geoplatform.connector.geoserver.security.GPGeoserverSecurityConnector;
 import org.geosdi.geoplatform.connector.geoserver.settings.GPGeoserverSettingsConnector;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
@@ -65,8 +64,7 @@ public class GPGeoserverConnector extends GPGeoserverSettingsConnector implement
      * @param theJacksonSupport
      * @param version
      */
-    public GPGeoserverConnector(String urlServer, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport,
-            String version) {
+    public GPGeoserverConnector(String urlServer, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, String version) {
         super(urlServer, securityConnector, theJacksonSupport, version);
     }
 
@@ -77,8 +75,7 @@ public class GPGeoserverConnector extends GPGeoserverSettingsConnector implement
      * @param theJacksonSupport
      * @param version
      */
-    public GPGeoserverConnector(String urlServer, GPPooledConnectorConfig pooledConnectorConfig,
-            GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, String version) {
+    public GPGeoserverConnector(String urlServer, GPPooledConnectorConfig pooledConnectorConfig, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, String version) {
         super(urlServer, pooledConnectorConfig, securityConnector, theJacksonSupport, version);
     }
 
@@ -88,8 +85,7 @@ public class GPGeoserverConnector extends GPGeoserverSettingsConnector implement
      * @param theJacksonSupport
      * @param theVersion
      */
-    public GPGeoserverConnector(URL server, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport,
-            GeoserverVersion theVersion) {
+    public GPGeoserverConnector(URL server, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, GeoserverVersion theVersion) {
         super(server, securityConnector, theJacksonSupport, theVersion);
     }
 
@@ -100,8 +96,7 @@ public class GPGeoserverConnector extends GPGeoserverSettingsConnector implement
      * @param theJacksonSupport
      * @param theVersion
      */
-    public GPGeoserverConnector(URL server, GPPooledConnectorConfig pooledConnectorConfig,
-            GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, GeoserverVersion theVersion) {
+    public GPGeoserverConnector(URL server, GPPooledConnectorConfig pooledConnectorConfig, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, GeoserverVersion theVersion) {
         super(server, pooledConnectorConfig, securityConnector, theJacksonSupport, theVersion);
     }
 }

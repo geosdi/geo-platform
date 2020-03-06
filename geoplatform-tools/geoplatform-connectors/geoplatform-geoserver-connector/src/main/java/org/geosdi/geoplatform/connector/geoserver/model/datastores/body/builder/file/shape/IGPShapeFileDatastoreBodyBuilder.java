@@ -46,7 +46,7 @@ import java.util.List;
 import java.util.Objects;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static io.reactivex.Flowable.fromArray;
+import static io.reactivex.rxjava3.core.Flowable.fromArray;
 import static javax.annotation.meta.When.NEVER;
 import static org.geosdi.geoplatform.connector.geoserver.model.connection.key.file.shape.GPGeoserverConnectionShapeFileValues.URL;
 import static org.geosdi.geoplatform.connector.geoserver.model.datastores.GeoserverDatastoreType.SHAPEFILE;

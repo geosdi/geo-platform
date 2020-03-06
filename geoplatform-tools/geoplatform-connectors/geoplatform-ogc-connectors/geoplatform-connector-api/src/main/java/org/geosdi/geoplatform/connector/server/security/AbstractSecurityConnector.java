@@ -35,9 +35,10 @@
  */
 package org.geosdi.geoplatform.connector.server.security;
 
-import org.apache.http.auth.AuthScope;
-import org.apache.http.auth.UsernamePasswordCredentials;
-import org.apache.http.client.CredentialsProvider;
+import org.apache.hc.client5.http.auth.AuthScope;
+import org.apache.hc.client5.http.auth.CredentialsStore;
+import org.apache.hc.client5.http.auth.UsernamePasswordCredentials;
+import org.apache.hc.core5.http.HttpHost;
 
 import javax.annotation.Nonnull;
 import java.net.URI;
@@ -54,32 +55,42 @@ public abstract class AbstractSecurityConnector implements GPSecurityConnector {
     private final String username;
     private final String password;
     private AuthScope authScope;
+    protected final UsernamePasswordCredentials usernamePasswordCredentials;
 
     /**
      * @param theUserName
      * @param thePassword
      */
     public AbstractSecurityConnector(@Nonnull(when = NEVER) String theUserName, @Nonnull(when = NEVER) String thePassword) {
-        checkArgument((theUserName != null) && !(theUserName.trim().isEmpty()),
-                "The Parameter username must not be null or an Empty String.");
-        checkArgument((thePassword != null) && !(thePassword.trim().isEmpty()),
-                "The Parameter password must not be null or an Empty String.");
+        checkArgument((theUserName != null) && !(theUserName.trim().isEmpty()), "The Parameter username must not be null or an Empty String.");
+        checkArgument((thePassword != null) && !(thePassword.trim().isEmpty()), "The Parameter password must not be null or an Empty String.");
         this.username = theUserName;
         this.password = thePassword;
+        this.usernamePasswordCredentials = new UsernamePasswordCredentials(this.username, this.password.toCharArray());
     }
 
     /**
-     * Bind Credentials for {@link CredentialsProvider} class
+     * Bind Credentials for {@link CredentialsStore} class
      *
-     * @param credentialsProvider
+     * @param credentialsStore
      * @param targetURI
      */
-    protected void bindCredentials(@Nonnull(when = NEVER) CredentialsProvider credentialsProvider, @Nonnull(when = NEVER) URI targetURI) {
-        checkArgument(credentialsProvider != null, "The Parameter credentialsProvider must not be null.");
+    protected void bindCredentials(@Nonnull(when = NEVER) CredentialsStore credentialsStore, @Nonnull(when = NEVER) URI targetURI) {
+        checkArgument(credentialsStore != null, "The Parameter credentialsProvider must not be null.");
         checkArgument(targetURI != null, "The Parameter targetURI must not be null.");
         if (this.authScope == null) {
             this.authScope = new AuthScope(targetURI.getHost(), targetURI.getPort());
         }
-        credentialsProvider.setCredentials(authScope, new UsernamePasswordCredentials(username, password));
+        credentialsStore.setCredentials(authScope, this.usernamePasswordCredentials);
+    }
+
+    /**
+     * @param targetHost
+     * @param targetURI
+     * @throws Exception
+     */
+    protected void bindCredentials(@Nonnull(when = NEVER) HttpHost targetHost, @Nonnull(when = NEVER) URI targetURI) throws Exception {
+        checkArgument(targetHost != null, "The Parameter targetHost must not be null.");
+        checkArgument(targetURI != null, "The Parameter targetURI must not be null.");
     }
 }

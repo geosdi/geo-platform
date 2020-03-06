@@ -37,8 +37,8 @@ package org.geosdi.geoplatform.connector.geoserver.request.settings;
 
 import com.google.common.io.CharStreams;
 import net.jcip.annotations.ThreadSafe;
-import org.apache.http.HttpEntity;
-import org.apache.http.entity.StringEntity;
+import org.apache.hc.core5.http.HttpEntity;
+import org.apache.hc.core5.http.io.entity.StringEntity;
 import org.geosdi.geoplatform.connector.geoserver.model.settings.GPGeoserverGlobalSettings;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonPutConnectorRequest;
@@ -52,7 +52,7 @@ import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
-import static org.apache.http.entity.ContentType.APPLICATION_JSON;
+import static org.apache.hc.core5.http.ContentType.APPLICATION_JSON;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

@@ -35,8 +35,8 @@
  */
 package org.geosdi.geoplatform.connector.server.request.json;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.client.methods.HttpPut;
+import org.apache.hc.client5.http.classic.methods.HttpPut;
+import org.apache.hc.core5.http.HttpEntity;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 

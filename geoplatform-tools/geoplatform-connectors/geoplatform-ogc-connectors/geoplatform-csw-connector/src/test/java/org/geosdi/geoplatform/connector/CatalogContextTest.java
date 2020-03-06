@@ -34,16 +34,15 @@
  */
 package org.geosdi.geoplatform.connector;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.utils.URIUtils;
-import org.apache.http.client.utils.URLEncodedUtils;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
+import org.apache.hc.client5.http.ClientProtocolException;
+import org.apache.hc.client5.http.classic.methods.HttpGet;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
+import org.apache.hc.client5.http.impl.classic.HttpClients;
+import org.apache.hc.core5.http.HttpEntity;
+import org.apache.hc.core5.http.NameValuePair;
+import org.apache.hc.core5.http.message.BasicNameValuePair;
+import org.apache.hc.core5.net.URIBuilder;
 import org.geosdi.geoplatform.connector.jaxb.repository.CSWConnectorJAXBContext;
 import org.geosdi.geoplatform.connector.jaxb.repository.JAXBContextConnectorRepository;
 import org.geosdi.geoplatform.jaxb.GPBaseJAXBContext;
@@ -91,21 +90,15 @@ public class CatalogContextTest {
     @Before
     public void setUp() throws Exception {
         try {
-            HttpClient client = new DefaultHttpClient();
-
+            CloseableHttpClient client = HttpClients.createDefault();
             List<NameValuePair> qparams = new ArrayList<NameValuePair>();
             qparams.add(new BasicNameValuePair("SERVICE", "CSW"));
             qparams.add(new BasicNameValuePair("REQUEST", "GetCapabilities"));
-
-            URI uri = URIUtils
-                    .createURI("http", CSW_HOST, -1, CSW_PATH, URLEncodedUtils.format(qparams, "UTF-8"), null);
-
+            URI uri = new URIBuilder().setScheme("http").setHost(CSW_HOST).setPath(CSW_PATH)
+                    .addParameters(qparams).build();
             HttpGet get = new HttpGet(uri);
-
-            HttpResponse response = client.execute(get);
-
+            CloseableHttpResponse response = client.execute(get);
             this.entity = response.getEntity();
-
         } catch (URISyntaxException ex) {
             logger.error("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ " + ex.getMessage());
         } catch (ClientProtocolException ex) {
@@ -120,7 +113,6 @@ public class CatalogContextTest {
         assertNotNull(cswContext);
         Unmarshaller m = cswContext.acquireUnmarshaller();
         try {
-
             if (entity != null) {
                 InputStream content = entity.getContent();
                 CapabilitiesType cap = ((JAXBElement<CapabilitiesType>) m.unmarshal(content)).getValue();
@@ -128,14 +120,8 @@ public class CatalogContextTest {
                 logger.info("CSW SERVICE IDENTIFICATION @@@@@@@@@@ " + cap.getServiceIdentification());
                 String cswFile = "target/csw.xml";
                 Marshaller ma = cswContext.acquireMarshaller();
-                FileOutputStream fos = null;
-                try {
-                    fos = new FileOutputStream(cswFile);
+                try(FileOutputStream fos = new FileOutputStream(cswFile)) {
                     ma.marshal(cap, fos);
-                } finally {
-                    if (fos != null) {
-                        fos.close();
-                    }
                 }
             }
         } catch (IOException ex) {

@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.connector.api.pool;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 import net.jcip.annotations.Immutable;
@@ -57,7 +56,6 @@ import static javax.annotation.meta.When.NEVER;
  */
 @Immutable
 @Getter
-@EqualsAndHashCode(of = {"serverUrl"})
 @ToString
 public class GPPoolConnectorKey implements Serializable {
 
@@ -96,5 +94,27 @@ public class GPPoolConnectorKey implements Serializable {
         this.securityConnector = theSecurityConnector;
         this.proxyConfiguration = theProxyConfiguration;
         this.version = theVersion;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        GPPoolConnectorKey that = (GPPoolConnectorKey) o;
+        if (!serverUrl.equals(that.serverUrl)) {
+            return false;
+        }
+        return version.equals(that.version);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = serverUrl.hashCode();
+        result = 31 * result + version.hashCode();
+        return result;
     }
 }

@@ -37,6 +37,8 @@ package org.geosdi.geoplatform.connector.api.pool;
 
 import org.apache.commons.pool2.impl.GenericKeyedObjectPoolConfig;
 
+import static java.lang.Boolean.FALSE;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -48,7 +50,7 @@ public class GPPoolConnectorConfig extends GenericKeyedObjectPoolConfig {
         super.setMaxIdlePerKey(10);
         super.setMaxTotal(10);
         super.setMinIdlePerKey(1);
-        super.setJmxEnabled(Boolean.FALSE);
+        super.setJmxEnabled(FALSE);
         super.setTimeBetweenEvictionRunsMillis(1000L * 60L * 10L);
         super.setNumTestsPerEvictionRun(25);
         super.setMinEvictableIdleTimeMillis(1000L * 60L * 5L);

@@ -121,7 +121,7 @@
             </snapshots>
             <id>boundless</id>
             <name>Boundless Maven Repository</name>
-            <url>http://repo.boundlessgeo.com/main</url>
+            <url>https://repo.boundlessgeo.com/main</url>
         </repository>
         
         <!-- GWTQUERY-UI PLUGIN -->
@@ -135,7 +135,7 @@
         
         <!-- CENTRAL REPO -->
         <repository>
-            <id>apache-central-repository</id>
+            <id>central-repository</id>
             <url>https://repo.maven.apache.org/maven2/</url>
             <snapshots>
                 <enabled>false</enabled>

@@ -43,7 +43,11 @@ import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.net.URL;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -63,8 +67,8 @@ public class GPPoolGeoserverConnectorKey extends GPPoolConnectorKey {
      * @param version
      * @param jacksonSupport
      */
-    public GPPoolGeoserverConnectorKey(URL serverUrl, GPPooledConnectorConfig pooledConnectorConfig,
-            GPSecurityConnector securityConnector, String version, JacksonSupport jacksonSupport) {
+    public GPPoolGeoserverConnectorKey(@Nonnull(when = NEVER) URL serverUrl, @Nullable GPPooledConnectorConfig pooledConnectorConfig,
+            @Nullable GPSecurityConnector securityConnector, String version, JacksonSupport jacksonSupport) {
         super(serverUrl, pooledConnectorConfig, securityConnector, version);
         this.jacksonSupport = jacksonSupport;
     }

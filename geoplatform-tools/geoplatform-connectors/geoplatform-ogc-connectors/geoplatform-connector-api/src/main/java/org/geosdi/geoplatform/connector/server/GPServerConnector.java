@@ -99,11 +99,11 @@ public interface GPServerConnector {
      */
     <V extends GPServerConnectorVersion> V getVersion();
 
-    /**
-     *
-     */
     interface GPServerConnectorVersion {
 
+        /**
+         * @return {@link String}
+         */
         String getVersion();
     }
 }

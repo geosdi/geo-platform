@@ -37,6 +37,11 @@ package org.geosdi.geoplatform.connector;
 
 import org.geosdi.geoplatform.connector.server.GPServerConnector.GPServerConnectorVersion;
 
+import java.util.Optional;
+
+import static java.lang.Boolean.FALSE;
+import static java.util.Arrays.stream;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -66,13 +71,10 @@ public enum GPCatalogVersion implements GPServerConnectorVersion {
      * @return {@link GPCatalogVersion}
      */
     public static GPCatalogVersion fromString(String version) {
-        if ((version != null) && (!version.equals(""))) {
-            for (GPCatalogVersion v : GPCatalogVersion.values()) {
-                if (v.version.equalsIgnoreCase(version)) {
-                    return v;
-                }
-            }
-        }
-        return GPCatalogVersion.V202;
+        Optional<GPCatalogVersion> optional = stream(GPCatalogVersion.values())
+                .filter(v -> ((version != null) && !(version.trim().isEmpty()))
+                        ? v.getVersion().equalsIgnoreCase(version) : FALSE)
+                .findFirst();
+        return ((optional != null) && !(optional.equals(Optional.empty()))) ? optional.get() : GPCatalogVersion.V202;
     }
 }

@@ -127,32 +127,21 @@ public class CSWGetRecordsEsriTest {
 
     @Test
     public void testFullRecordGeoSDI() throws Exception {
-        URL url = new URL("http://catalog.geosdi.org:80/geonetwork/srv/en/csw");
+        URL url = new URL("http://catalog.geosdi.org:80/geonetwork/srv/eng/csw");
         GPCatalogConnectorStore serverConnector = GPCSWConnectorBuilder
                 .newConnector().withServerUrl(url).build();
-
         CatalogGetRecordsRequest<GetRecordsResponseType> request = serverConnector.createGetRecordsRequest();
-
         request.setTypeName(TypeName.METADATA);
-
         request.setOutputSchema(OutputSchema.CSW_V202);
         request.setElementSetName(ElementSetType.FULL.toString());
         request.setResultType(ResultType.RESULTS.toString());
-
         request.setStartPosition(BigInteger.ONE);
         request.setMaxRecords(BigInteger.valueOf(25));
-
-        logger.debug("\n\n#####################RESPONSE AS STRING : {}\n\n",
-                request.getResponseAsString());
-
+        logger.debug("\n\n#####################RESPONSE AS STRING : {}\n\n", request.getResponseAsString());
         GetRecordsResponseType response = request.getResponse();
-
         SearchResultsType result = response.getSearchResults();
         List<JAXBElement<? extends AbstractRecordType>> metadata = result.getAbstractRecord();
-
-        Assert.assertEquals("The Result not contains 25 elements", 25,
-                metadata.size());
-
+        Assert.assertEquals("The Result not contains 25 elements", 25, metadata.size());
         processFirstResult((RecordType) metadata.get(0).getValue());
     }
 

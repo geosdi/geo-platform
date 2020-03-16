@@ -10,20 +10,17 @@
     </appender>
 
     <root>
-        <level value="info" />
-        <appender-ref ref="STDOUT" />
+        <level value="info"/>
+        <appender-ref ref="STDOUT"/>
     </root>
-    
-    <logger name="org.geosdi.geoplatform.connector.CatalogGetRecordsTest"
-            level="debug" /><!-- TODO info -->
-    <logger name="org.geosdi.geoplatform.connector.CatalogRequestTest"
-            level="debug" /><!-- TODO info -->
-    <logger name="org.geosdi.geoplatform.connector.CatalogGetRecordByIdTest"
-            level="trace" /><!-- TODO info -->
-            
-    <logger name="org.geosdi.geoplatform.connector.schema.GPCSWOutputSchemaFinder"
-                    level="debug" />
-    <logger name="org.geosdi.geoplatform.connector.jaxb.comparison.CSWContextComparisonTest"
-            level="debug" />
+
+    <logger name="org.geosdi.geoplatform.connector.CatalogGetRecordsTest" level="debug"/><!-- TODO info -->
+    <logger name="org.geosdi.geoplatform.connector.CatalogRequestTest" level="debug"/><!-- TODO info -->
+    <logger name="org.geosdi.geoplatform.connector.CatalogGetRecordByIdTest" level="trace"/><!-- TODO info -->
+
+    <logger name="org.geosdi.geoplatform.connector.schema.GPCSWOutputSchemaFinder" level="debug"/>
+    <logger name="org.geosdi.geoplatform.connector.jaxb.comparison.CSWContextComparisonTest" level="debug"/>
+    <logger name="org.geosdi.geoplatform.connector.server.request.v202.CatalogGetRecordsV202" level="trace"/>
+    <logger name="org.geosdi.geoplatform.connector.server.request.v202.filter.TextSearchRequestFilter" level="debug"/>
 
 </configuration>

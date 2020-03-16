@@ -41,6 +41,7 @@ import org.geosdi.geoplatform.exception.GPCatalogLoginException;
 import org.geosdi.geoplatform.responce.GPCatalogMetadataDTO;
 import org.geosdi.geoplatform.services.util.GPCatalogClient;
 import org.geosdi.geoplatform.services.util.GPCatalogMetadataLoader;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -94,6 +95,7 @@ public class GPCatalogServiceTest {
         assertNotNull("gpCatalogMetadataLoader is null", gpCatalogMetadataLoader);
     }
 
+    @Ignore
     @Test
     public void testGPCatalogClient() {
         try {
@@ -103,6 +105,7 @@ public class GPCatalogServiceTest {
         }
     }
 
+    @Ignore
     @Test
     public void testAnonymousVSPrivateGPCatalogFinderService() {
         try {
@@ -122,6 +125,7 @@ public class GPCatalogServiceTest {
         }
     }
 
+    @Ignore
     @Test
     public void testExtractDatasFromMetadata() {
         try {

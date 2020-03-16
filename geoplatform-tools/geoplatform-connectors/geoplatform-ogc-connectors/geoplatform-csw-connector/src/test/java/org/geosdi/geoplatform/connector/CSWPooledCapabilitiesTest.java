@@ -79,7 +79,8 @@ public class CSWPooledCapabilitiesTest {
                 .newConnector()
                 .withServerUrl(new URL("http://catalog.geosdi.org/geonetwork/"
                                 + "srv/eng/csw?request=GetCapabilities&service=CSW"
-                                + "&version=2.0.2")).build();
+                                + "&version=2.0.2"))
+                .build();
         CatalogGetCapabilitiesRequest<CapabilitiesType> request = serverConnector.createGetCapabilitiesRequest();
         logger.info("\n\n#######################CSW_GET_CAP_RESPONSE_AS_STRING : {}\n\n", request.getResponseAsString());
     }

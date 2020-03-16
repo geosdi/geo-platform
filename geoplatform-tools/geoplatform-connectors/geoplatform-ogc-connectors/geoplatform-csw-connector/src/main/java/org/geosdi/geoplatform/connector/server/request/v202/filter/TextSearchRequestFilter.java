@@ -35,21 +35,21 @@
  */
 package org.geosdi.geoplatform.connector.server.request.v202.filter;
 
+import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequest;
+import org.geosdi.geoplatform.connector.server.request.v202.responsibility.handler.GPGetRecordsHandlerType;
+import org.geosdi.geoplatform.exception.IllegalParameterFault;
+import org.geosdi.geoplatform.gui.responce.TextInfo;
+import org.geosdi.geoplatform.xml.filter.v110.*;
+
+import javax.xml.bind.JAXBElement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import javax.xml.bind.JAXBElement;
-import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequest;
-import org.geosdi.geoplatform.exception.IllegalParameterFault;
-import org.geosdi.geoplatform.gui.responce.TextInfo;
-import org.geosdi.geoplatform.xml.filter.v110.BinaryComparisonOpType;
-import org.geosdi.geoplatform.xml.filter.v110.FilterType;
-import org.geosdi.geoplatform.xml.filter.v110.LiteralType;
-import org.geosdi.geoplatform.xml.filter.v110.PropertyIsLikeType;
-import org.geosdi.geoplatform.xml.filter.v110.PropertyNameType;
+
+import static org.geosdi.geoplatform.connector.server.request.v202.responsibility.handler.GetRecordsHandlerType.TEXT;
 
 /**
- *
+ * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class TextSearchRequestFilter extends GetRecordsRequestHandlerFilter {
@@ -59,12 +59,16 @@ public class TextSearchRequestFilter extends GetRecordsRequestHandlerFilter {
     private final static String ABSTRACT = "dc:abstract";
     private final static String SUBJECT = "dc:subject";
 
+    /**
+     * @param theRequest
+     * @param theFilterType
+     * @param theFilterPredicates
+     * @throws IllegalParameterFault
+     */
     @Override
-    protected void processGetRecordsRequest(CatalogGetRecordsRequest request,
-            FilterType filterType) throws IllegalParameterFault {
-        logger.debug("Process...");
-
-        TextInfo textInfo = request.getCatalogFinder().getTextInfo();
+    protected void processGetRecordsRequest(CatalogGetRecordsRequest theRequest, FilterType theFilterType, List<JAXBElement<?>> theFilterPredicates) throws IllegalParameterFault {
+        logger.debug("#####################Called {}#processGetRecordsRequest", this);
+        TextInfo textInfo = theRequest.getCatalogFinder().getTextInfo();
         if (textInfo != null) {
             String searchText = textInfo.getText();
             boolean searchTitle = textInfo.isSearchTitle();
@@ -72,78 +76,70 @@ public class TextSearchRequestFilter extends GetRecordsRequestHandlerFilter {
             boolean searchSubjects = textInfo.isSearchSubjects();
             if (searchText != null) {
                 if (!searchTitle && !searchAbstract && !searchSubjects) {
-                    throw new IllegalParameterFault(
-                            "You need to specify where to search \"" + searchText + "\" text");
+                    throw new IllegalParameterFault("You need to specify where to search \"" + searchText + "\" text");
                 }
-
-                logger.debug("\n+++ Search text: \"{}\" +++", searchText);
-
-                List<JAXBElement<?>> textPredicate
-                        = this.createFilterTextPredicate(searchText,
-                                searchTitle, searchAbstract, searchSubjects);
-
-                logger.trace("\n+++ Text filter: \"{}\" +++", textPredicate);
-                super.addFilterConstraint(request, filterType, textPredicate);
+                logger.debug("######################## Search text: \"{}\"\n", searchText);
+                List<JAXBElement<?>> textPredicate = this.createFilterTextPredicate(searchText, searchTitle, searchAbstract, searchSubjects);
+                logger.trace("########################## Text filter: \"{}\"\n", textPredicate);
+                theFilterPredicates.addAll(textPredicate);
             }
         }
     }
 
-    private List<JAXBElement<?>> createFilterTextPredicate(String searchText,
-            boolean searchTitle, boolean searchAbstract, boolean searchSubjects) {
+    /**
+     * @return {@link GPGetRecordsHandlerType}
+     */
+    @Override
+    public GPGetRecordsHandlerType getType() {
+        return TEXT;
+    }
 
+    /**
+     * @param searchText
+     * @param searchTitle
+     * @param searchAbstract
+     * @param searchSubjects
+     * @return {@link List<JAXBElement<?>}
+     */
+    private List<JAXBElement<?>> createFilterTextPredicate(String searchText, boolean searchTitle, boolean searchAbstract, boolean searchSubjects) {
         List<JAXBElement<?>> textPredicate = new ArrayList<>(3);
-
         String searchTextLike = "%" + searchText + "%";
-
         if (searchTitle & searchAbstract & searchSubjects) {
-            PropertyIsLikeType anytextIsLikeType = this.createPropertyIsLikeType(
-                    ANYTEXT, searchTextLike);
-
+            PropertyIsLikeType anytextIsLikeType = this.createPropertyIsLikeType(ANYTEXT, searchTextLike);
             textPredicate.add(filterFactory.createPropertyIsLike(anytextIsLikeType));
-
         } else {
             if (searchTitle) {
-                PropertyIsLikeType titleIsLikeType = this.createPropertyIsLikeType(
-                        TITLE, searchTextLike);
-
+                PropertyIsLikeType titleIsLikeType = this.createPropertyIsLikeType(TITLE, searchTextLike);
                 textPredicate.add(filterFactory.createPropertyIsLike(titleIsLikeType));
             }
-
             if (searchAbstract) {
-                PropertyIsLikeType abstractIsLikeType = this.createPropertyIsLikeType(
-                        ABSTRACT, searchTextLike);
-
+                PropertyIsLikeType abstractIsLikeType = this.createPropertyIsLikeType(ABSTRACT, searchTextLike);
                 textPredicate.add(filterFactory.createPropertyIsLike(abstractIsLikeType));
             }
-
             if (searchSubjects) {
-                BinaryComparisonOpType subjectIsEqualTo = this.createBinaryComparisonOpType(
-                        SUBJECT, searchText);
-
+                BinaryComparisonOpType subjectIsEqualTo = this.createBinaryComparisonOpType(SUBJECT, searchText);
                 textPredicate.add(filterFactory.createPropertyIsEqualTo(subjectIsEqualTo));
             }
         }
-
         return textPredicate;
     }
 
-    private PropertyIsLikeType createPropertyIsLikeType(String propertyName,
-            String literal) {
-
+    /**
+     * @param propertyName
+     * @param literal
+     * @return {@link PropertyIsLikeType}
+     */
+    private PropertyIsLikeType createPropertyIsLikeType(String propertyName, String literal) {
         PropertyIsLikeType propertyIsLikeType = new PropertyIsLikeType();
         propertyIsLikeType.setWildCard("%");
         propertyIsLikeType.setSingleChar(".");
         propertyIsLikeType.setEscapeChar("\\");
-
         PropertyNameType propertyNameType = new PropertyNameType();
         propertyNameType.setContent(Arrays.<Object>asList(propertyName));
         propertyIsLikeType.setPropertyName(propertyNameType);
-
         LiteralType literalType = new LiteralType();
         literalType.setContent(Arrays.<Object>asList(literal));
         propertyIsLikeType.setLiteral(literalType);
-
         return propertyIsLikeType;
     }
-
 }

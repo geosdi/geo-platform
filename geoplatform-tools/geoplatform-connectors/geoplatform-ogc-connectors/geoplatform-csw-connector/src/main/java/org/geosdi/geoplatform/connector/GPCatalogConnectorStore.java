@@ -73,8 +73,7 @@ public class GPCatalogConnectorStore extends GPConnectorStore<GPCatalogServerCon
      * @param security
      * @param theVersion
      */
-    public GPCatalogConnectorStore(URL serverURL, GPPooledConnectorConfig pooledConnectorConfig,
-            GPSecurityConnector security, GPCatalogVersion theVersion) {
+    public GPCatalogConnectorStore(URL serverURL, GPPooledConnectorConfig pooledConnectorConfig, GPSecurityConnector security, GPCatalogVersion theVersion) {
         super(new GPCatalogServerConnector(serverURL, security, pooledConnectorConfig, theVersion));
     }
 
@@ -85,26 +84,37 @@ public class GPCatalogConnectorStore extends GPConnectorStore<GPCatalogServerCon
      * @param proxyConfiguration
      * @param theVersion
      */
-    public GPCatalogConnectorStore(URL serverURL, GPPooledConnectorConfig pooledConnectorConfig,
-            GPSecurityConnector security, HttpClientProxyConfiguration proxyConfiguration, GPCatalogVersion theVersion) {
+    public GPCatalogConnectorStore(URL serverURL, GPPooledConnectorConfig pooledConnectorConfig, GPSecurityConnector security, HttpClientProxyConfiguration proxyConfiguration, GPCatalogVersion theVersion) {
         super(new GPCatalogServerConnector(serverURL, security, pooledConnectorConfig, proxyConfiguration, theVersion));
     }
 
+    /**
+     * @return {@link GPCatalogVersion}
+     */
     @Override
     public GPCatalogVersion getVersion() {
         return server.getVersion();
     }
 
+    /**
+     * @return {@link CatalogGetCapabilitiesRequest}
+     */
     @Override
     public CatalogGetCapabilitiesRequest createGetCapabilitiesRequest() {
         return server.createGetCapabilitiesRequest();
     }
 
+    /**
+     * @return {@link CatalogGetRecordsRequest}
+     */
     @Override
     public CatalogGetRecordsRequest createGetRecordsRequest() {
         return server.createGetRecordsRequest();
     }
 
+    /**
+     * @return {@link CatalogGetRecordByIdRequest}
+     */
     @Override
     public CatalogGetRecordByIdRequest createGetRecordByIdRequest() {
         return server.createGetRecordByIdRequest();

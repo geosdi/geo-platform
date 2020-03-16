@@ -36,11 +36,18 @@
 package org.geosdi.geoplatform.connector.server.request.v202.cql;
 
 import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequest;
+import org.geosdi.geoplatform.connector.server.request.v202.responsibility.handler.GPGetRecordsHandlerType;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.gui.responce.TextInfo;
 
+import javax.annotation.Nonnull;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
+import static org.geosdi.geoplatform.connector.server.request.v202.responsibility.handler.GetRecordsHandlerType.TEXT;
+
 /**
- *
+ * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class TextSearchRequestCQL extends GetRecordsRequestHandlerCQL {
@@ -50,12 +57,14 @@ public class TextSearchRequestCQL extends GetRecordsRequestHandlerCQL {
     private final static String ABSTRACT = "dc:abstract";
     private final static String SUBJECT = "dc:subject";
 
+    /**
+     * @param request
+     * @throws IllegalParameterFault
+     */
     @Override
-    protected void processGetRecordsRequest(CatalogGetRecordsRequest request)
-            throws IllegalParameterFault {
-        logger.debug("#####################{} Process...",
-                getClass().getSimpleName());
-
+    protected void processGetRecordsRequest(@Nonnull(when = NEVER) CatalogGetRecordsRequest request) throws Exception {
+        checkArgument(request != null, "The Parameter request must not be null.");
+        logger.debug("##########################Called {}#processGetRecordsRequest\n", this);
         TextInfo textInfo = request.getCatalogFinder().getTextInfo();
         if (textInfo != null) {
             String searchText = textInfo.getText();
@@ -64,35 +73,39 @@ public class TextSearchRequestCQL extends GetRecordsRequestHandlerCQL {
             boolean searchSubjects = textInfo.isSearchSubjects();
             if (searchText != null) {
                 if (!searchTitle && !searchAbstract && !searchSubjects) {
-                    throw new IllegalParameterFault(
-                            "You need to specify where to search \"" + searchText + "\" text");
+                    throw new IllegalParameterFault("You need to specify where to search \"" + searchText + "\" text");
                 }
-
-                logger.debug("\n+++ Search text: \"{}\" +++", searchText);
-
-                String constraint = this.createCQLTextPredicate(searchText,
-                        searchTitle, searchAbstract, searchSubjects);
-
-                logger.trace("\n+++ Text CQL constraint: \"{}\" +++",
-                        request.getConstraint());
+                logger.debug("######################## Search text: \"{}\"\n", searchText);
+                String constraint = this.createCQLTextPredicate(searchText, searchTitle, searchAbstract, searchSubjects);
+                logger.trace("######################## Text CQL constraint: \"{}\"\n", request.getConstraint());
                 super.addCQLConstraint(request, constraint);
             }
         }
     }
 
-    private String createCQLTextPredicate(String searchText,
-            boolean searchTitle, boolean searchAbstract, boolean searchSubjects) {
+    /**
+     * @return {@link GPGetRecordsHandlerType}
+     */
+    @Override
+    public GPGetRecordsHandlerType getType() {
+        return TEXT;
+    }
 
+    /**
+     * @param searchText
+     * @param searchTitle
+     * @param searchAbstract
+     * @param searchSubjects
+     * @return {@link String}
+     */
+    private String createCQLTextPredicate(String searchText, boolean searchTitle, boolean searchAbstract, boolean searchSubjects) {
         StringBuilder constraint = new StringBuilder();
-
         if (searchTitle & searchAbstract & searchSubjects) {
             constraint.append(ANYTEXT);
-
         } else {
             if (searchTitle) {
                 constraint.append(TITLE);
             }
-
             if (searchAbstract) {
                 if (constraint.length() > 0) {
                     constraint.append(" OR ");
@@ -107,12 +120,9 @@ public class TextSearchRequestCQL extends GetRecordsRequestHandlerCQL {
                 constraint.append(SUBJECT);
             }
         }
-
         if (constraint.length() > 0) {
             constraint.append(" LIKE '%").append(searchText).append("%'");
         }
-
         return constraint.toString();
     }
-
 }

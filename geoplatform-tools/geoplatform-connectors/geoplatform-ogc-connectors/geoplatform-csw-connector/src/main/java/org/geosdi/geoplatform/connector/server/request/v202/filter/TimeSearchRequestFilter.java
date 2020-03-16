@@ -35,19 +35,23 @@
  */
 package org.geosdi.geoplatform.connector.server.request.v202.filter;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import javax.xml.bind.JAXBElement;
 import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequest;
+import org.geosdi.geoplatform.connector.server.request.v202.responsibility.handler.GPGetRecordsHandlerType;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.gui.responce.TimeInfo;
 import org.geosdi.geoplatform.xml.filter.v110.BinaryComparisonOpType;
 import org.geosdi.geoplatform.xml.filter.v110.FilterType;
 
+import javax.xml.bind.JAXBElement;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import static org.geosdi.geoplatform.connector.server.request.v202.responsibility.handler.GetRecordsHandlerType.TIME;
+
 /**
- *
+ * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class TimeSearchRequestFilter extends GetRecordsRequestHandlerFilter {
@@ -56,35 +60,45 @@ public class TimeSearchRequestFilter extends GetRecordsRequestHandlerFilter {
     private final static String TEMP_END = "TempExtent_end";
     private final SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 
+    /**
+     * @param theRequest
+     * @param theFilterType
+     * @param theFilterPredicates
+     * @throws IllegalParameterFault
+     */
     @Override
-    protected void processGetRecordsRequest(CatalogGetRecordsRequest request, FilterType filterType)
-            throws IllegalParameterFault {
-        logger.debug("Process...");
-
-        TimeInfo timeInfo = request.getCatalogFinder().getTimeInfo();
+    protected void processGetRecordsRequest(CatalogGetRecordsRequest theRequest, FilterType theFilterType, List<JAXBElement<?>> theFilterPredicates) throws IllegalParameterFault {
+        logger.debug("##############################Called {}#processGetRecordsRequest.\n", this);
+        TimeInfo timeInfo = theRequest.getCatalogFinder().getTimeInfo();
         if (timeInfo != null && timeInfo.isActive()) {
             Date startDate = timeInfo.getStartDate();
             Date endDate = timeInfo.getEndDate();
-            logger.debug("\n+++ From: {} - To: {} +++", startDate, endDate);
-
-            List<JAXBElement<?>> timePredicate = this.createFilterTimePredicate(
-                    startDate, endDate);
-
-            logger.trace("\n+++ Time filter: \"{}\" +++", timePredicate);
-            super.addFilterConstraint(request, filterType, timePredicate);
+            logger.debug("\n######################### From: {} - To: {}.\n", startDate, endDate);
+            List<JAXBElement<?>> timePredicate = this.createFilterTimePredicate(startDate, endDate);
+            logger.trace("\n######################### Time filter: \"{}\".\n", timePredicate);
+            theFilterPredicates.addAll(timePredicate);
         }
     }
 
-    private List<JAXBElement<?>> createFilterTimePredicate(Date startDate, Date endDate) {
-        BinaryComparisonOpType begin = this.createBinaryComparisonOpType(
-                "TempExtent_begin", formatter.format(startDate));
-        BinaryComparisonOpType end = this.createBinaryComparisonOpType(
-                "TempExtent_end", formatter.format(endDate));
+    /**
+     * @return {@link GPGetRecordsHandlerType}
+     */
+    @Override
+    public GPGetRecordsHandlerType getType() {
+        return TIME;
+    }
 
-        List<JAXBElement<?>> timePredicate = new ArrayList<JAXBElement<?>>(2);
+    /**
+     * @param startDate
+     * @param endDate
+     * @return {@link List<JAXBElement<?>}
+     */
+    private List<JAXBElement<?>> createFilterTimePredicate(Date startDate, Date endDate) {
+        BinaryComparisonOpType begin = this.createBinaryComparisonOpType(TEMP_BEGIN, formatter.format(startDate));
+        BinaryComparisonOpType end = this.createBinaryComparisonOpType(TEMP_END, formatter.format(endDate));
+        List<JAXBElement<?>> timePredicate = new ArrayList(2);
         timePredicate.add(filterFactory.createPropertyIsGreaterThanOrEqualTo(begin));
         timePredicate.add(filterFactory.createPropertyIsLessThanOrEqualTo(end));
-
         return timePredicate;
     }
 }

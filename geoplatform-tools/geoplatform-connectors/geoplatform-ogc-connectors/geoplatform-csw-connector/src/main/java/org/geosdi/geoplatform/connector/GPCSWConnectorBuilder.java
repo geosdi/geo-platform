@@ -35,8 +35,10 @@
  */
 package org.geosdi.geoplatform.connector;
 
-import com.google.common.base.Preconditions;
 import org.geosdi.geoplatform.connector.api.AbstractConnectorBuilder;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static org.geosdi.geoplatform.connector.GPCatalogVersion.fromString;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -57,11 +59,14 @@ public class GPCSWConnectorBuilder extends AbstractConnectorBuilder<GPCSWConnect
         return new GPCSWConnectorBuilder();
     }
 
+    /**
+     * @return {@link GPCatalogConnectorStore}
+     * @throws Exception
+     */
     @Override
     public GPCatalogConnectorStore build() throws Exception {
-        Preconditions.checkArgument(this.serverUrl != null,
-                "Error on CSW Server Connector build: Server URL cannot be null.");
-        GPCatalogVersion v = GPCatalogVersion.fromString(version);
+        checkArgument(this.serverUrl != null, "Error on CSW Server Connector build: Server URL cannot be null.");
+        GPCatalogVersion v = fromString(version);
         GPCatalogConnectorStore cswConnector = super.proxyConfiguration != null
                 ? new GPCatalogConnectorStore(serverUrl, pooledConnectorConfig, securityConnector, proxyConfiguration, v)
                 : new GPCatalogConnectorStore(serverUrl, pooledConnectorConfig, securityConnector, v);

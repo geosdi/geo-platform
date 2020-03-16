@@ -44,56 +44,44 @@ import org.geosdi.geoplatform.connector.server.request.v202.filter.AreaSearchReq
 import org.geosdi.geoplatform.connector.server.request.v202.filter.GetRecordsRequestHandlerFilter;
 import org.geosdi.geoplatform.connector.server.request.v202.filter.TextSearchRequestFilter;
 import org.geosdi.geoplatform.connector.server.request.v202.filter.TimeSearchRequestFilter;
-import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.xml.filter.v110.FilterType;
 
+import javax.annotation.Nonnull;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.collect.Lists.newArrayList;
+import static javax.annotation.meta.When.NEVER;
+
 /**
- *
+ * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class GetRecordsRequestManager {
+public class GetRecordsRequestManager implements GPGetRecordsRequestManager {
 
-    private GetRecordsRequestHandlerFilter textSearchRequestFilter; // The first ring of the chain Filter
-    private GetRecordsRequestHandlerCQL textSearchRequestCQL; // The first ring of the chain CQL
+    private static final GetRecordsRequestHandlerFilter textSearchRequestFilter = new TextSearchRequestFilter(); // The first ring of the chain Filter
+    private static final GetRecordsRequestHandlerCQL textSearchRequestCQL = new TextSearchRequestCQL(); // The first ring of the chain CQL
 
-    public GetRecordsRequestManager() {
-        this.createChainFilter();
-        this.createChainCQL();
+    static {
+        createChainFilter();
+        createChainCQL();
     }
 
-    private void createChainFilter() {
-        textSearchRequestFilter = new TextSearchRequestFilter();
-        GetRecordsRequestHandlerFilter areaSearchRequest = new AreaSearchRequestFilter();
-        GetRecordsRequestHandlerFilter timeSearchRequest = new TimeSearchRequestFilter();
-
-        textSearchRequestFilter.setSuccessor(areaSearchRequest);
-        areaSearchRequest.setSuccessor(timeSearchRequest);
-    }
-
-    private void createChainCQL() {
-        textSearchRequestCQL = new TextSearchRequestCQL();
-        GetRecordsRequestHandlerCQL areaSearchRequest = new AreaSearchRequestCQL();
-        GetRecordsRequestHandlerCQL timeSearchRequest = new TimeSearchRequestCQL();
-
-        textSearchRequestCQL.setSuccessor(areaSearchRequest);
-        areaSearchRequest.setSuccessor(timeSearchRequest);
-    }
-
-    public void filterGetRecordsRequest(CatalogGetRecordsRequest request, FilterType filterType)
-            throws IllegalParameterFault {
-        assert (request != null);
-        assert (filterType != null);
-
-        // Filter request iff there is a catalog finder setted
+    /**
+     * @param request
+     * @param filterType
+     * @throws Exception
+     */
+    public void filterGetRecordsRequest(@Nonnull(when = NEVER) CatalogGetRecordsRequest request, @Nonnull(when = NEVER) FilterType filterType) throws Exception {
+        checkArgument(request != null, "The Parameter CatalogGetRecordsRequest must not be null.");
+        checkArgument(filterType != null, "The Parameter filterType must not be null.");
+        // Filter request if there is a catalog finder setted
         if (request.getCatalogFinder() == null) {
             return;
         }
-
-
-        if (request.getCatalogFinder() != null) {
+        if (request.getConstraintLanguage() != null) {
             switch (request.getConstraintLanguage()) {
                 case FILTER:
-                    textSearchRequestFilter.forwardGetRecordsRequest(request, filterType);
+                    textSearchRequestFilter.forwardGetRecordsRequest(request, filterType, newArrayList());
                     break;
                 case CQL_TEXT:
                     textSearchRequestCQL.forwardGetRecordsRequest(request);
@@ -101,5 +89,19 @@ public class GetRecordsRequestManager {
                 default:
             }
         }
+    }
+
+    private static void createChainFilter() {
+        GetRecordsRequestHandlerFilter areaSearchRequest = new AreaSearchRequestFilter();
+        GetRecordsRequestHandlerFilter timeSearchRequest = new TimeSearchRequestFilter();
+        textSearchRequestFilter.setSuccessor(areaSearchRequest);
+        areaSearchRequest.setSuccessor(timeSearchRequest);
+    }
+
+    private static void createChainCQL() {
+        GetRecordsRequestHandlerCQL areaSearchRequest = new AreaSearchRequestCQL();
+        GetRecordsRequestHandlerCQL timeSearchRequest = new TimeSearchRequestCQL();
+        textSearchRequestCQL.setSuccessor(areaSearchRequest);
+        areaSearchRequest.setSuccessor(timeSearchRequest);
     }
 }

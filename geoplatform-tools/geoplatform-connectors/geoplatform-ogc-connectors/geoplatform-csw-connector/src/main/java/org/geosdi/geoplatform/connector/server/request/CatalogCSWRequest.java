@@ -36,7 +36,6 @@ package org.geosdi.geoplatform.connector.server.request;
 
 import org.apache.hc.core5.http.HttpEntity;
 import org.apache.hc.core5.http.io.entity.StringEntity;
-import org.geosdi.geoplatform.connector.jaxb.repository.CSWConnectorJAXBContext;
 import org.geosdi.geoplatform.connector.jaxb.repository.JAXBContextConnectorRepository;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.jaxb.GPBaseJAXBContext;
@@ -46,16 +45,16 @@ import javax.xml.bind.Unmarshaller;
 import java.io.StringWriter;
 
 import static org.apache.hc.core5.http.ContentType.APPLICATION_XML;
+import static org.geosdi.geoplatform.connector.jaxb.repository.CSWConnectorJAXBContext.CSW_CONTEXT_KEY;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
- * @email giuseppe.lascaleia@geosdi.org
  */
 public abstract class CatalogCSWRequest<T, Request> extends GPPostConnectorRequest<T, Request> {
 
     static {
-        cswContext = JAXBContextConnectorRepository.getProvider(CSWConnectorJAXBContext.CSW_CONTEXT_KEY);
+        cswContext = JAXBContextConnectorRepository.getProvider(CSW_CONTEXT_KEY);
     }
 
     //

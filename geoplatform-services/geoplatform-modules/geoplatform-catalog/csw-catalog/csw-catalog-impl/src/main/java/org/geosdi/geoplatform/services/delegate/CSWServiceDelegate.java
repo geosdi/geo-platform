@@ -332,27 +332,19 @@ class CSWServiceDelegate implements CSWDelegate {
     }
 
     @Override
-    public int getRecordsCount(CatalogFinderBean catalogFinder)
-            throws Exception {
+    public int getRecordsCount(CatalogFinderBean catalogFinder) throws Exception {
         logger.trace("\n*** getRecordsCount ***\n{}", catalogFinder);
-
-        GeoPlatformServer server = this.getCSWServerByID(
-                catalogFinder.getServerID());
-
-        CatalogGetRecordsRequest<GetRecordsResponseType> request
-                = this.createGetRecordsRequest(server.getServerUrl());
-
+        GeoPlatformServer server = this.getCSWServerByID(catalogFinder.getServerID());
+        CatalogGetRecordsRequest<GetRecordsResponseType> request = this.createGetRecordsRequest(server.getServerUrl());
         request.setTypeName(TypeName.RECORD_V202);
         request.setOutputSchema(OutputSchema.CSW_V202);
         request.setElementSetName(ElementSetType.BRIEF.value());
         request.setResultType(ResultType.HITS.value());
-
         request.setConstraintLanguage(ConstraintLanguage.FILTER);
         request.setConstraintLanguageVersion(ConstraintLanguageVersion.V110);
         request.setCatalogFinder(catalogFinder);
-
         GetRecordsResponseType response = this.createGetRecordsResponse(request);
-
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@RESPONSE : {}\n\n\n", request);
         return response.getSearchResults().getNumberOfRecordsMatched().intValue();
     }
 
@@ -520,15 +512,13 @@ class CSWServiceDelegate implements CSWDelegate {
         return dto;
     }
 
-    private CatalogGetRecordsRequest<GetRecordsResponseType> createGetRecordsRequest(
-            String serverUrl) throws Exception {
-
+    private CatalogGetRecordsRequest<GetRecordsResponseType> createGetRecordsRequest(String serverUrl) throws Exception {
         GPCatalogConnectorStore serverConnector = null;
         try {
             URL url = new URL(serverUrl);
-
-            GPCSWConnectorBuilder builder = GPCSWConnectorBuilder.newConnector().withServerUrl(
-                    url).withProxyConfiguration(cswProxyConfiguration);
+            GPCSWConnectorBuilder builder = GPCSWConnectorBuilder.newConnector()
+                    .withServerUrl(url)
+                    .withProxyConfiguration(cswProxyConfiguration);
 
             if (serverUrl.contains("snipc.protezionecivile.it")) {
                 GPSecurityConnector securityConnector = new BasicPreemptiveSecurityConnector(
@@ -543,16 +533,12 @@ class CSWServiceDelegate implements CSWDelegate {
             logger.error("### MalformedURLException: {}", ex.getMessage());
             throw new IllegalParameterFault("Malformed URL");
         }
-        CatalogGetRecordsRequest<GetRecordsResponseType> request
-                = serverConnector.createGetRecordsRequest();
+        CatalogGetRecordsRequest<GetRecordsResponseType> request = serverConnector.createGetRecordsRequest();
 
         return request;
     }
 
-    private GetRecordsResponseType createGetRecordsResponse(
-            CatalogGetRecordsRequest<GetRecordsResponseType> request)
-            throws Exception {
-
+    private GetRecordsResponseType createGetRecordsResponse(CatalogGetRecordsRequest<GetRecordsResponseType> request) throws Exception {
         GetRecordsResponseType response = null;
         try {
             response = request.getResponse();

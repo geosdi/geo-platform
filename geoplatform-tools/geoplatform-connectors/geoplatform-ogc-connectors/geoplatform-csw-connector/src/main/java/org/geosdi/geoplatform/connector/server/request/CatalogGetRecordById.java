@@ -35,60 +35,52 @@
  */
 package org.geosdi.geoplatform.connector.server.request;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.xml.csw.OutputSchema;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@Getter
 public abstract class CatalogGetRecordById<T, Request> extends CatalogCSWRequest<T, Request> implements CatalogGetRecordByIdRequest<T> {
 
     protected List<String> id;
+    @Setter
     protected OutputSchema outputSchema;
+    @Setter
     protected String elementSetType;
 
     public CatalogGetRecordById(GPServerConnector server) {
         super(server);
     }
 
-    @Override
-    public List<String> getId() {
-        return this.id;
-    }
-
+    /**
+     * @param theId
+     */
     @Override
     public void setId(String... theId) {
-        this.id = Arrays.asList(theId);
-    }
-
-    @Override
-    public OutputSchema getOutputSchema() {
-        return this.outputSchema;
-    }
-
-    @Override
-    public void setOutputSchema(OutputSchema outputSchema) {
-        this.outputSchema = outputSchema;
-    }
-
-    @Override
-    public String getElementSetType() {
-        return this.elementSetType;
-    }
-
-    @Override
-    public void setElementSetType(String value) {
-        this.elementSetType = value;
+        this.id = Arrays.stream(theId)
+                .filter(Objects::nonNull)
+                .filter(id -> !id.trim().isEmpty())
+                .collect(toList());
     }
 
     @Override
     public String toString() {
-        return "CatalogGetRecordById{" + "id = " + id + ", outputSchema = "
-                + outputSchema + ", elementSetType = " + elementSetType + '}';
+        return getClass().getSimpleName() + " {\n"
+                + "id = " + id +
+                ", outputSchema = " + outputSchema +
+                ", elementSetType = " + elementSetType +
+                "\n}";
     }
 }

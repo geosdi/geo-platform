@@ -38,99 +38,82 @@ package org.geosdi.geoplatform.connector.server.request.v202;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.CatalogGetRecords;
 import org.geosdi.geoplatform.connector.server.request.v202.responsibility.GetRecordsRequestManager;
-import org.geosdi.geoplatform.exception.IllegalParameterFault;
-import org.geosdi.geoplatform.xml.csw.OutputSchema;
 import org.geosdi.geoplatform.xml.csw.TypeName;
 import org.geosdi.geoplatform.xml.csw.v202.*;
 import org.geosdi.geoplatform.xml.filter.v110.FilterType;
 
 import javax.xml.namespace.QName;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static org.geosdi.geoplatform.xml.csw.OutputSchema.CSW_V202;
+import static org.geosdi.geoplatform.xml.csw.v202.ElementSetType.SUMMARY;
+import static org.geosdi.geoplatform.xml.csw.v202.ResultType.HITS;
+import static org.geosdi.geoplatform.xml.csw.v202.ResultType.fromValue;
 
 /**
  * GetRecords CSW_202 request 2.0.2 version
  * 
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class CatalogGetRecordsV202 extends CatalogGetRecords<GetRecordsResponseType, GetRecordsType> {
 
-    private GetRecordsRequestManager catalogRequestManager = new GetRecordsRequestManager();
+    private static final GetRecordsRequestManager catalogRequestManager = new GetRecordsRequestManager();
 
     public CatalogGetRecordsV202(GPServerConnector server) {
         super(server);
     }
 
+    /**
+     * @return {@link GetRecordsType}
+     * @throws Exception
+     */
     @Override
-    protected GetRecordsType createRequest() throws IllegalParameterFault {
+    protected GetRecordsType createRequest() throws Exception {
         GetRecordsType request = new GetRecordsType();
-
-        request.setResultType(resultType != null
-                ? ResultType.fromValue(resultType) : ResultType.HITS);
-
-        request.setOutputSchema(outputSchema != null
-                ? outputSchema.toString() : OutputSchema.CSW_V202.toString());
-
+        request.setResultType(resultType != null ? fromValue(resultType) : HITS);
+        request.setOutputSchema(outputSchema != null ? outputSchema.toString() : CSW_V202.toString());
         // The default 'output format' is the MIME type "application/xml"
         request.setOutputFormat("application/xml");
-
         QueryType query = new QueryType();
         request.setAbstractQuery(query);
-
         List<QName> typNameList = new ArrayList<>();
-        typNameList.add(typeName != null
-                ? typeName.getQName() : TypeName.RECORD_V202.getQName());
+        typNameList.add(typeName != null ? typeName.getQName() : TypeName.RECORD_V202.getQName());
         query.setTypeNames(typNameList);
-
         ElementSetNameType elementSetNameType = new ElementSetNameType();
-        elementSetNameType.setValue(elementSetName != null
-                ? ElementSetType.fromValue(elementSetName) : ElementSetType.SUMMARY);
+        elementSetNameType.setValue(elementSetName != null ? ElementSetType.fromValue(elementSetName) : SUMMARY);
         query.setElementSetName(elementSetNameType);
-
         FilterType filterType = new FilterType();
         catalogRequestManager.filterGetRecordsRequest(this, filterType);
-
-        logger.debug("\n*** {} ***", filterType);
-
-        if (filterType.isSetLogicOps()
-                || filterType.isSetComparisonOps() || filterType.isSetSpatialOps()
-                || constraint != null) {
-            if (constraintLanguage == null) {
-                throw new IllegalArgumentException(
-                        "If there is at least one filter criteria, "
-                        + "'Constraint Language' must not be null.");
-            }
-            if (constraintLanguageVersion == null) {
-                throw new IllegalArgumentException(
-                        "'Constraint Language Version' must not be null.");
-            }
-
+        if (logger.isTraceEnabled()) {
+            StringWriter writer = new StringWriter();
+            this.getMarshaller().marshal(filterType, writer);
+            logger.trace("@@@@@@@@@@@@@@@@@@@@@@@FILTER_TYPE CREATED :  \n{}\n", writer.toString());
+        }
+        if (filterType.isSetLogicOps() || filterType.isSetComparisonOps() || filterType.isSetSpatialOps() || constraint != null) {
+            checkArgument(this.constraintLanguage != null, "If there is at least one filter criteria, 'Constraint Language' must not be null.");
+            checkArgument(this.constraintLanguageVersion != null, "'Constraint Language Version' must not be null.");
             QueryConstraintType queryConstraintType = new QueryConstraintType();
             queryConstraintType.setVersion(constraintLanguageVersion.getVersion());
-
             switch (constraintLanguage) {
                 case FILTER:
                     queryConstraintType.setFilter(filterType);
                     break;
-
                 case CQL_TEXT:
                     queryConstraintType.setCqlText(constraint);
                     break;
             }
-
             query.setConstraint(queryConstraintType);
         }
-
         if (startPosition != null) {
             request.setStartPosition(startPosition);
         }
-
         if (maxRecords != null) {
             request.setMaxRecords(maxRecords);
         }
-
         return request;
     }
 }

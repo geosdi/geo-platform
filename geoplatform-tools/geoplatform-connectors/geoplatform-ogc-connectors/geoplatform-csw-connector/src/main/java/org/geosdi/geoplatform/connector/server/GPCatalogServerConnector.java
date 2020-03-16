@@ -141,9 +141,7 @@ public class GPCatalogServerConnector extends GPAbstractServerConnector
      * @param securityConnector {@link GPSecurityConnector}
      * @param theVersion        {@link GPCatalogVersion} CSW version. Must be 2.0.2
      */
-    public GPCatalogServerConnector(URL server,
-            GPSecurityConnector securityConnector,
-            GPCatalogVersion theVersion) {
+    public GPCatalogServerConnector(URL server, GPSecurityConnector securityConnector, GPCatalogVersion theVersion) {
         super(server, securityConnector);
         this.version = theVersion;
     }
@@ -154,8 +152,7 @@ public class GPCatalogServerConnector extends GPAbstractServerConnector
      * @param proxyConfiguration
      * @param theVersion
      */
-    public GPCatalogServerConnector(URL server, GPSecurityConnector securityConnector,
-            HttpClientProxyConfiguration proxyConfiguration, GPCatalogVersion theVersion) {
+    public GPCatalogServerConnector(URL server, GPSecurityConnector securityConnector, HttpClientProxyConfiguration proxyConfiguration, GPCatalogVersion theVersion) {
         super(server, securityConnector, proxyConfiguration);
         this.version = theVersion;
     }
@@ -167,11 +164,8 @@ public class GPCatalogServerConnector extends GPAbstractServerConnector
      * @param proxyConfiguration
      * @param theVersion
      */
-    public GPCatalogServerConnector(URL server, GPSecurityConnector securityConnector,
-            GPPooledConnectorConfig pooledConnectorConfig, HttpClientProxyConfiguration proxyConfiguration,
-            GPCatalogVersion theVersion) {
-        super(server, securityConnector, pooledConnectorConfig,
-                proxyConfiguration);
+    public GPCatalogServerConnector(URL server, GPSecurityConnector securityConnector, GPPooledConnectorConfig pooledConnectorConfig, HttpClientProxyConfiguration proxyConfiguration, GPCatalogVersion theVersion) {
+        super(server, securityConnector, pooledConnectorConfig, proxyConfiguration);
         this.version = theVersion;
     }
 
@@ -188,8 +182,7 @@ public class GPCatalogServerConnector extends GPAbstractServerConnector
             case V202:
                 return new CatalogGetCapabilitiesV202(this);
             default:
-                throw new CatalogVersionException(
-                        "The Version for CSW must be 2.0.2");
+                throw new CatalogVersionException("The Version for CSW must be 2.0.2");
         }
     }
 
@@ -206,8 +199,7 @@ public class GPCatalogServerConnector extends GPAbstractServerConnector
             case V202:
                 return new CatalogGetRecordsV202(this);
             default:
-                throw new CatalogVersionException(
-                        "The Version for CSW must be 2.0.2");
+                throw new CatalogVersionException("The Version for CSW must be 2.0.2");
         }
     }
 

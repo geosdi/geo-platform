@@ -35,13 +35,15 @@
  */
 package org.geosdi.geoplatform.connector.pool.builder;
 
-import com.google.common.base.Preconditions;
 import org.apache.commons.pool2.impl.GenericKeyedObjectPool;
 import org.geosdi.geoplatform.connector.GPCatalogConnectorStore;
 import org.geosdi.geoplatform.connector.api.AbstractConnectorBuilder;
 import org.geosdi.geoplatform.connector.api.pool.GPPoolConnectorConfig;
 import org.geosdi.geoplatform.connector.api.pool.GPPoolConnectorKey;
 import org.geosdi.geoplatform.connector.pool.factory.GPCSWConnectorFactory;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+import static org.geosdi.geoplatform.connector.GPCatalogVersion.fromString;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -66,13 +68,10 @@ public class GPCSWConnectorBuilderPool extends AbstractConnectorBuilder<GPCSWCon
 
     @Override
     public GPCatalogConnectorStore build() throws Exception {
-        Preconditions.checkNotNull(serverUrl, "CSW Server URL must not be null.");
+        checkNotNull(serverUrl, "CSW Server URL must not be null.");
         GPPoolConnectorKey keyConnector = super.proxyConfiguration != null
-                ? new GPPoolConnectorKey(
-                serverUrl, pooledConnectorConfig,
-                securityConnector, proxyConfiguration, version)
-                : new GPPoolConnectorKey(
-                serverUrl, pooledConnectorConfig, securityConnector, version);
+                ? new GPPoolConnectorKey(serverUrl, pooledConnectorConfig, securityConnector, proxyConfiguration, fromString(version).getVersion())
+                : new GPPoolConnectorKey(serverUrl, pooledConnectorConfig, securityConnector, fromString(version).getVersion());
         GPCatalogConnectorStore catalogStore = catalogConnectoPool.borrowObject(keyConnector);
         catalogConnectoPool.returnObject(keyConnector, catalogStore);
         return catalogStore;

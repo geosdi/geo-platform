@@ -37,12 +37,14 @@ package org.geosdi.geoplatform.connector;
 
 import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequest;
 import org.geosdi.geoplatform.connector.server.security.BasicPreemptiveSecurityConnector;
+import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
+import org.geosdi.geoplatform.gui.responce.TextInfo;
+import org.geosdi.geoplatform.gui.responce.TimeInfo;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
 import org.geosdi.geoplatform.xml.csw.ConstraintLanguage;
-import org.geosdi.geoplatform.xml.csw.ConstraintLanguageVersion;
-import org.geosdi.geoplatform.xml.csw.OutputSchema;
 import org.geosdi.geoplatform.xml.csw.TypeName;
 import org.geosdi.geoplatform.xml.csw.v202.*;
+import org.joda.time.DateTime;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -60,7 +62,12 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import static java.lang.Boolean.TRUE;
 import static org.geosdi.geoplatform.connector.GPCSWConnectorBuilder.newConnector;
+import static org.geosdi.geoplatform.xml.csw.ConstraintLanguage.FILTER;
+import static org.geosdi.geoplatform.xml.csw.ConstraintLanguageVersion.V110;
+import static org.geosdi.geoplatform.xml.csw.OutputSchema.CSW_V202;
+import static org.geosdi.geoplatform.xml.csw.TypeName.RECORD_V202;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -93,7 +100,7 @@ public class CatalogGetRecordsTest {
     public void testSummaryRecord() throws Exception {
         CatalogGetRecordsRequest<GetRecordsResponseType> request = serverConnector.createGetRecordsRequest();
         request.setTypeName(TypeName.METADATA);
-        request.setOutputSchema(OutputSchema.CSW_V202);
+        request.setOutputSchema(CSW_V202);
         request.setElementSetName(ElementSetType.SUMMARY.toString());
         request.setResultType(ResultType.RESULTS.toString());
         request.setStartPosition(BigInteger.ONE);
@@ -114,7 +121,7 @@ public class CatalogGetRecordsTest {
     public void testFullRecord() throws Exception {
         CatalogGetRecordsRequest<GetRecordsResponseType> request = serverConnector.createGetRecordsRequest();
         request.setTypeName(TypeName.METADATA);
-        request.setOutputSchema(OutputSchema.CSW_V202);
+        request.setOutputSchema(CSW_V202);
         request.setElementSetName(ElementSetType.FULL.toString());
         request.setResultType(ResultType.RESULTS.toString());
         request.setStartPosition(BigInteger.ONE);
@@ -135,9 +142,9 @@ public class CatalogGetRecordsTest {
         GPCatalogConnectorStore sc = newConnector().
                 withServerUrl(url).build();
         CatalogGetRecordsRequest<GetRecordsResponseType> request = sc.createGetRecordsRequest();
-        request.setTypeName(TypeName.RECORD_V202);
+        request.setTypeName(RECORD_V202);
         request.setConstraintLanguage(ConstraintLanguage.CQL_TEXT);
-        request.setConstraintLanguageVersion(ConstraintLanguageVersion.V110);
+        request.setConstraintLanguageVersion(V110);
         // Text filter
         StringBuilder str = new StringBuilder();
         str.append("AnyText LIKE '%%'");
@@ -164,8 +171,8 @@ public class CatalogGetRecordsTest {
                 .withClientSecurity(new BasicPreemptiveSecurityConnector(snipcUsername, snipcPassword))
                 .build();
         CatalogGetRecordsRequest<GetRecordsResponseType> request = snipcServerConnector.createGetRecordsRequest();
-        request.setTypeName(TypeName.RECORD_V202);
-        request.setOutputSchema(OutputSchema.CSW_V202);
+        request.setTypeName(RECORD_V202);
+        request.setOutputSchema(CSW_V202);
         request.setElementSetName(ElementSetType.FULL.toString());
         request.setResultType(ResultType.RESULTS.toString());
         request.setStartPosition(BigInteger.ONE);
@@ -188,8 +195,8 @@ public class CatalogGetRecordsTest {
                 .withServerUrl(new URL("http://www.rndt.gov.it/RNDT/CSW"))
                 .build();
         CatalogGetRecordsRequest<GetRecordsResponseType> request = rndtServerConnector.createGetRecordsRequest();
-        request.setTypeName(TypeName.RECORD_V202);
-        request.setOutputSchema(OutputSchema.CSW_V202);
+        request.setTypeName(RECORD_V202);
+        request.setOutputSchema(CSW_V202);
         request.setElementSetName(ElementSetType.FULL.toString());
         request.setResultType(ResultType.RESULTS.toString());
         request.setStartPosition(BigInteger.ONE);
@@ -201,8 +208,35 @@ public class CatalogGetRecordsTest {
         logger.info("NEXT RECORD @@@@@@@@@@@@@@@@@@@@@@ {}", result.getNextRecord());
         List<JAXBElement<? extends AbstractRecordType>> metadata = result.getAbstractRecord();
         if (!metadata.isEmpty()) {
-            logger.info("FIRST SECURE METADATA @@@@@@@@@@@@@@@@@@@@@ {}",
-                    (RecordType) (metadata.get(0).getValue()));
+            logger.info("FIRST SECURE METADATA @@@@@@@@@@@@@@@@@@@@@ {}", (metadata.get(0).getValue()));
         }
+    }
+
+    @Test
+    public void testInternalGetRecordsTest() throws Exception {
+        GPCatalogConnectorStore internalServer = newConnector()
+                .withServerUrl(new URL("http://catalog.geosdi.org:80/geonetwork/srv/eng/csw"))
+                .build();
+        CatalogFinderBean catalogFinder = new CatalogFinderBean();
+        TextInfo textInfo = new TextInfo();
+        textInfo.setSearchAbstract(TRUE);
+        textInfo.setSearchSubjects(TRUE);
+        textInfo.setSearchTitle(TRUE);
+        textInfo.setText("limiti");
+        TimeInfo timeInfo = new TimeInfo();
+        timeInfo.setActive(TRUE);
+        timeInfo.setStartDate(DateTime.now().minusYears(10).toDate());
+        timeInfo.setEndDate(DateTime.now().toDate());
+        catalogFinder.setTextInfo(textInfo);
+        catalogFinder.setTimeInfo(timeInfo);
+        CatalogGetRecordsRequest<GetRecordsResponseType> request = internalServer.createGetRecordsRequest();
+        request.setTypeName(RECORD_V202);
+        request.setOutputSchema(CSW_V202);
+        request.setElementSetName(ElementSetType.BRIEF.value());
+        request.setResultType(ResultType.HITS.value());
+        request.setConstraintLanguage(FILTER);
+        request.setConstraintLanguageVersion(V110);
+        request.setCatalogFinder(catalogFinder);
+        logger.info("###########################RESPONSE : {}\n", request.getResponse());
     }
 }

@@ -35,11 +35,8 @@
  */
 package org.geosdi.geoplatform.connector.server.request.v202.filter;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import javax.xml.bind.JAXBElement;
 import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequest;
+import org.geosdi.geoplatform.connector.server.request.v202.responsibility.handler.GPGetRecordsHandlerType;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.gui.responce.AreaInfo;
 import org.geosdi.geoplatform.gui.responce.AreaInfo.AreaSearchType;
@@ -51,86 +48,97 @@ import org.geosdi.geoplatform.xml.filter.v110.UnaryLogicOpType;
 import org.geosdi.geoplatform.xml.gml.v311.DirectPositionType;
 import org.geosdi.geoplatform.xml.gml.v311.EnvelopeType;
 
+import javax.xml.bind.JAXBElement;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.geosdi.geoplatform.connector.server.request.v202.responsibility.handler.GetRecordsHandlerType.SPATIAL;
+
 /**
+ * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class AreaSearchRequestFilter extends GetRecordsRequestHandlerFilter {
 
     private final static String BOUNDING_BOX = "ows:BoundingBox";
 
+    /**
+     * @param theRequest
+     * @param theFilterType
+     * @param theFilterPredicates
+     * @throws IllegalParameterFault
+     */
     @Override
-    protected void processGetRecordsRequest(CatalogGetRecordsRequest request, FilterType filterType)
-            throws IllegalParameterFault {
-        logger.debug("Process...");
-
-        AreaInfo areaInfo = request.getCatalogFinder().getAreaInfo();
+    protected void processGetRecordsRequest(CatalogGetRecordsRequest theRequest, FilterType theFilterType, List<JAXBElement<?>> theFilterPredicates) throws IllegalParameterFault {
+        logger.debug("#####################Called {}#processGetRecordsRequest", this);
+        AreaInfo areaInfo = theRequest.getCatalogFinder().getAreaInfo();
         if (areaInfo != null && areaInfo.isActive()) {
             AreaSearchType areaSearchType = areaInfo.getAreaSearchType();
-            BBox bBox = areaInfo.getBBox();
-            logger.debug("\n+++ Search Type: {} +++", areaSearchType);
-            logger.debug("\n+++ {} +++", bBox);
-
-            List<JAXBElement<?>> areaPredicate = this.createFilterAreaPredicate(
-                    areaSearchType, bBox);
-
-            logger.trace("\n+++ Time filter: \"{}\" +++", areaPredicate);
-            super.addFilterConstraint(request, filterType, areaPredicate);
+            BBox bbox = areaInfo.getBBox();
+            logger.debug("############################ Search Type: {}.\n", areaSearchType);
+            logger.debug("############################ Bbox : {}.\n", bbox);
+            List<JAXBElement<?>> areaPredicate = this.createFilterAreaPredicate(areaSearchType, bbox);
+            logger.trace("\n############################ Time filter: \"{}\"\n.", areaPredicate);
+            theFilterPredicates.addAll(areaPredicate);
         }
     }
 
-    private List<JAXBElement<?>> createFilterAreaPredicate(
-            AreaSearchType areaSearchType, BBox bBox) {
+    /**
+     * @return {@link GPGetRecordsHandlerType}
+     */
+    @Override
+    public GPGetRecordsHandlerType getType() {
+        return SPATIAL;
+    }
 
-        List<JAXBElement<?>> areaPredicate = new ArrayList<JAXBElement<?>>(2);
-
+    /**
+     * @param areaSearchType
+     * @param bBox
+     * @return {@link List<JAXBElement<?>}
+     */
+    private List<JAXBElement<?>> createFilterAreaPredicate(AreaSearchType areaSearchType, BBox bBox) {
+        List<JAXBElement<?>> areaPredicate = new ArrayList(2);
         BinarySpatialOpType binarySpatial = new BinarySpatialOpType();
-
         PropertyNameType propertyNameType = new PropertyNameType();
         propertyNameType.setContent(Arrays.<Object>asList(BOUNDING_BOX));
         binarySpatial.setPropertyName(propertyNameType);
-
         EnvelopeType envelope = this.createEnvelope(bBox);
         binarySpatial.setEnvelope(gmlFactory.createEnvelope(envelope));
-
         switch (areaSearchType) {
             case ENCLOSES:
                 areaPredicate.add(filterFactory.createContains(binarySpatial));
                 break;
-
             case IS:
                 areaPredicate.add(filterFactory.createEquals(binarySpatial));
                 break;
-
             case OUTSIDE:
                 // Workaround for GeoNetwork bug: DISJOINT = NOT(INTERSECTS)
                 UnaryLogicOpType unary = new UnaryLogicOpType();
                 unary.setSpatialOps(filterFactory.createIntersects(binarySpatial));
-
                 areaPredicate.add(filterFactory.createNot(unary));
-
                 // TODO Use DISJOINT spatial operator
 //                areaPredicate.add(filterFactory.createDisjoint(binarySpatial));
                 break;
-
             case OVERLAP:
                 areaPredicate.add(filterFactory.createIntersects(binarySpatial));
                 break;
         }
-
         return areaPredicate;
     }
 
+    /**
+     * @param bBox
+     * @return {@link EnvelopeType}
+     */
     private EnvelopeType createEnvelope(BBox bBox) {
         EnvelopeType envelope = new EnvelopeType();
-
         DirectPositionType lower = new DirectPositionType();
         lower.setValue(Arrays.asList(bBox.getMinX(), bBox.getMinY()));
         envelope.setLowerCorner(lower);
-
         DirectPositionType upper = new DirectPositionType();
         upper.setValue(Arrays.asList(bBox.getMaxX(), bBox.getMaxY()));
         envelope.setUpperCorner(upper);
-
         return envelope;
     }
 }

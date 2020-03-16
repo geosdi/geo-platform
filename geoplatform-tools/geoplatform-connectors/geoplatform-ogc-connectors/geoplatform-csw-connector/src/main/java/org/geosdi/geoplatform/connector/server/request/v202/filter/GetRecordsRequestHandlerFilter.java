@@ -35,92 +35,110 @@
  */
 package org.geosdi.geoplatform.connector.server.request.v202.filter;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import javax.xml.bind.JAXBElement;
 import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequest;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
-import org.geosdi.geoplatform.xml.csw.ConstraintLanguage;
-import org.geosdi.geoplatform.xml.filter.v110.BinaryComparisonOpType;
-import org.geosdi.geoplatform.xml.filter.v110.BinaryLogicOpType;
-import org.geosdi.geoplatform.xml.filter.v110.FilterType;
-import org.geosdi.geoplatform.xml.filter.v110.LiteralType;
-import org.geosdi.geoplatform.xml.filter.v110.PropertyNameType;
+import org.geosdi.geoplatform.xml.filter.v110.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.Nonnull;
+import javax.xml.bind.JAXBElement;
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static java.util.Arrays.asList;
+import static javax.annotation.meta.When.NEVER;
+import static org.geosdi.geoplatform.xml.csw.ConstraintLanguage.FILTER;
+
 /**
- *
+ * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public abstract class GetRecordsRequestHandlerFilter {
+public abstract class GetRecordsRequestHandlerFilter implements GPGetRecordsRequestHandlerFilter {
 
-    final protected Logger logger = LoggerFactory.getLogger(this.getClass());
-    protected org.geosdi.geoplatform.xml.filter.v110.ObjectFactory filterFactory;
-    protected org.geosdi.geoplatform.xml.gml.v311.ObjectFactory gmlFactory;
+    protected final Logger logger = LoggerFactory.getLogger(this.getClass());
+    protected static final org.geosdi.geoplatform.xml.filter.v110.ObjectFactory filterFactory = new org.geosdi.geoplatform.xml.filter.v110.ObjectFactory();
+    protected static final org.geosdi.geoplatform.xml.gml.v311.ObjectFactory gmlFactory = new org.geosdi.geoplatform.xml.gml.v311.ObjectFactory();
     //
     private GetRecordsRequestHandlerFilter successor;
 
-    public GetRecordsRequestHandlerFilter() {
-        filterFactory = new org.geosdi.geoplatform.xml.filter.v110.ObjectFactory();
-        gmlFactory = new org.geosdi.geoplatform.xml.gml.v311.ObjectFactory();
+    GetRecordsRequestHandlerFilter() {
     }
 
+    /**
+     * @param theRequest
+     * @param theFilterType
+     * @param theFilterPredicates
+     * @throws IllegalParameterFault
+     */
+    public void forwardGetRecordsRequest(@Nonnull(when = NEVER) CatalogGetRecordsRequest theRequest, @Nonnull(when = NEVER) FilterType theFilterType, @Nonnull(when = NEVER) List<JAXBElement<?>> theFilterPredicates) throws IllegalParameterFault {
+        checkArgument(theRequest != null, "The Parameter request must not be null.");
+        checkArgument(theFilterType != null, "The Parameter filterType must not be null.");
+        checkArgument(theFilterPredicates != null);
+        this.processGetRecordsRequest(theRequest, theFilterType, theFilterPredicates);
+        if (successor != null) {
+            successor.forwardGetRecordsRequest(theRequest, theFilterType, theFilterPredicates);
+        } else {
+            this.addFilterConstraint(theRequest, theFilterType, theFilterPredicates);
+        }
+    }
+
+    /**
+     *
+     * @param theSuccessor
+     */
     public void setSuccessor(GetRecordsRequestHandlerFilter theSuccessor) {
         successor = theSuccessor;
     }
 
-    public void forwardGetRecordsRequest(
-            CatalogGetRecordsRequest request, FilterType filterType)
-            throws IllegalParameterFault {
+    protected abstract void processGetRecordsRequest(CatalogGetRecordsRequest theRequest, FilterType theFilterType, List<JAXBElement<?>> theFilterPredicates) throws IllegalParameterFault;
 
-        this.processGetRecordsRequest(request, filterType);
-        if (successor != null) {
-            successor.forwardGetRecordsRequest(request, filterType);
-        }
-    }
-
-    protected abstract void processGetRecordsRequest(
-            CatalogGetRecordsRequest request, FilterType filterType)
-            throws IllegalParameterFault;
-
-    protected void addFilterConstraint(CatalogGetRecordsRequest request,
-            FilterType filterType, List<JAXBElement<?>> filterPredicates) {
-
-        if (request.getConstraintLanguage() != ConstraintLanguage.FILTER) {
-            throw new IllegalArgumentException("Constraint Language must be FILTER.");
-        }
-
-        // Add all predicats always in OR (even if there is one)
-        if (!filterType.isSetLogicOps()) {
-            BinaryLogicOpType binary = new BinaryLogicOpType();
-            binary.setComparisonOpsOrSpatialOpsOrLogicOps(filterPredicates);
-
-            filterType.setLogicOps(filterFactory.createOr(binary));
-        } else {
-            BinaryLogicOpType binary = (BinaryLogicOpType) filterType.getLogicOps().getValue();
-            List<JAXBElement<?>> orCriteria = binary.getComparisonOpsOrSpatialOpsOrLogicOps();
-
-            orCriteria.addAll(filterPredicates);
-        }
-    }
-
+    /**
+     * @param propertyName
+     * @param literal
+     * @return {@link BinaryComparisonOpType}
+     */
     protected BinaryComparisonOpType createBinaryComparisonOpType(String propertyName, String literal) {
-
         BinaryComparisonOpType binaryComparison = new BinaryComparisonOpType();
-
         PropertyNameType propertyNameType = new PropertyNameType();
-        propertyNameType.setContent(Arrays.<Object>asList(propertyName));
-
+        propertyNameType.setContent(asList(propertyName));
         LiteralType literalType = new LiteralType();
-        literalType.setContent(Arrays.<Object>asList(literal));
-
-        List<JAXBElement<?>> expressionList = new ArrayList<JAXBElement<?>>(2);
+        literalType.setContent(asList(literal));
+        List<JAXBElement<?>> expressionList = new ArrayList(2);
         expressionList.add(filterFactory.createPropertyName(propertyNameType));
         expressionList.add(filterFactory.createLiteral(literalType));
         binaryComparison.setExpression(expressionList);
-
         return binaryComparison;
+    }
+
+    /**
+     * @param request
+     * @param filterType
+     * @param filterPredicates
+     */
+    private void addFilterConstraint(CatalogGetRecordsRequest request, FilterType filterType, List<JAXBElement<?>> filterPredicates) {
+        checkArgument(request.getConstraintLanguage() == FILTER, "Constraint Language must be FILTER.");
+        if (filterPredicates.size() == 1) {
+            Object value = filterPredicates.get(0).getValue();
+            if(value instanceof ComparisonOpsType) {
+                filterType.setComparisonOps((JAXBElement<ComparisonOpsType>) filterPredicates.get(0));
+            } else if(value instanceof LogicOpsType) {
+                filterType.setLogicOps((JAXBElement<LogicOpsType>) filterPredicates.get(0));
+            } else if(value instanceof SpatialOpsType) {
+                filterType.setSpatialOps((JAXBElement<SpatialOpsType>) filterPredicates.get(0));
+            }
+        } else {
+            BinaryLogicOpType binary = new BinaryLogicOpType();
+            binary.setComparisonOpsOrSpatialOpsOrLogicOps(filterPredicates);
+            filterType.setLogicOps(filterFactory.createOr(binary));
+        }
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "{ \n" +
+                "handlerType = " + this.getType() +
+                "\n}";
     }
 }

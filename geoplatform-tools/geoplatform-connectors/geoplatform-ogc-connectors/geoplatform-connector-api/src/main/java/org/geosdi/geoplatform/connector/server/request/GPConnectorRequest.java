@@ -104,4 +104,12 @@ public interface GPConnectorRequest<T> {
      * @throws java.lang.Exception
      */
     void shutdown() throws Exception;
+
+    /**
+     * Show the XML Object created for the Request to send to Server
+     *
+     * @return Request as a String
+     * @throws Exception
+     */
+    String showRequestAsString() throws Exception;
 }

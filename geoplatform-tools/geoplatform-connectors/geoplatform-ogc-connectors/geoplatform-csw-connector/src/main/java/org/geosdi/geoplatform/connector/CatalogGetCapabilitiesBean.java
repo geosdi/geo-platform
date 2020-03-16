@@ -54,8 +54,7 @@ import java.net.URL;
  */
 public class CatalogGetCapabilitiesBean implements InitializingBean {
 
-    private static final String CSW_CABABILITIES_REQUEST = "?SERVICE=CSW"
-            + "&REQUEST=GetCapabilities";
+    private static final String CSW_CABABILITIES_REQUEST = "?SERVICE=CSW&REQUEST=GetCapabilities";
     /**
      * SNIPC Catalog.
      */

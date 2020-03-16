@@ -67,4 +67,15 @@ public abstract class GPJsonDeleteConnectorRequest<T> extends GPBaseJsonConnecto
         httpDelete.setConfig(super.prepareRequestConfig());
         return httpDelete;
     }
+
+    /**
+     * Show the XML Object created for the Request to send to Server
+     *
+     * @return Request as a String
+     * @throws Exception
+     */
+    @Override
+    public String showRequestAsString() throws Exception {
+        return this.createUriPath();
+    }
 }

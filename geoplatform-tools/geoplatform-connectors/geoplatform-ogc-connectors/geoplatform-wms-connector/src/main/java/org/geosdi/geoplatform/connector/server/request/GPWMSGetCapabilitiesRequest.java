@@ -74,4 +74,15 @@ public interface GPWMSGetCapabilitiesRequest<T> extends GPConnectorRequest<T> {
         checkArgument(this.getVersion() != null, "The Parameter WMSVersion must not be null.");
         return this.getVersion().toString();
     }
+
+    /**
+     * Show the XML Object created for the Request to send to Server
+     *
+     * @return Request as a String
+     * @throws Exception
+     */
+    @Override
+    default String showRequestAsString() throws Exception {
+        return this.buildGetCapabilitiesURL(this.getURI().toString());
+    }
 }

@@ -80,4 +80,15 @@ abstract class GPWMSBaseGetRequest<T> extends GPGetConnectorRequest<T> {
     public Unmarshaller getUnmarshaller() throws Exception {
         return this.wmsJAXBContext.acquireUnmarshaller();
     }
+
+    /**
+     * Show the XML Object created for the Request to send to Server
+     *
+     * @return Request as a String
+     * @throws Exception
+     */
+    @Override
+    public String showRequestAsString() throws Exception {
+        return this.createUriPath();
+    }
 }

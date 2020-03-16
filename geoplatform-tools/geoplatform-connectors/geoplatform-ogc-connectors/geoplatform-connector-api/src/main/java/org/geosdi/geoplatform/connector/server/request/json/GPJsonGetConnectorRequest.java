@@ -67,4 +67,15 @@ public abstract class GPJsonGetConnectorRequest<T> extends GPBaseJsonConnectorRe
         httpGet.setConfig(this.prepareRequestConfig());
         return httpGet;
     }
+
+    /**
+     * Show the XML Object created for the Request to send to Server
+     *
+     * @return Request as a String
+     * @throws Exception
+     */
+    @Override
+    public String showRequestAsString() throws Exception {
+        return this.createUriPath();
+    }
 }

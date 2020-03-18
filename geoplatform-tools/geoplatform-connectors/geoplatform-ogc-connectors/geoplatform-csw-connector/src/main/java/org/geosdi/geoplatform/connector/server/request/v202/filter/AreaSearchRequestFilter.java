@@ -128,16 +128,16 @@ public class AreaSearchRequestFilter extends GetRecordsRequestHandlerFilter {
     }
 
     /**
-     * @param bBox
+     * @param bbox
      * @return {@link EnvelopeType}
      */
-    private EnvelopeType createEnvelope(BBox bBox) {
+    private EnvelopeType createEnvelope(BBox bbox) {
         EnvelopeType envelope = new EnvelopeType();
         DirectPositionType lower = new DirectPositionType();
-        lower.setValue(Arrays.asList(bBox.getMinX(), bBox.getMinY()));
+        lower.setValue(Arrays.asList(bbox.getMinX(), bbox.getMinY()));
         envelope.setLowerCorner(lower);
         DirectPositionType upper = new DirectPositionType();
-        upper.setValue(Arrays.asList(bBox.getMaxX(), bBox.getMaxY()));
+        upper.setValue(Arrays.asList(bbox.getMaxX(), bbox.getMaxY()));
         envelope.setUpperCorner(upper);
         return envelope;
     }

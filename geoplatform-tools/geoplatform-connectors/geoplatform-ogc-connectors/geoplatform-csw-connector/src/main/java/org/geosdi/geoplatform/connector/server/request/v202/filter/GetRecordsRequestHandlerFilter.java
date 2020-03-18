@@ -79,7 +79,7 @@ public abstract class GetRecordsRequestHandlerFilter implements GPGetRecordsRequ
         this.processGetRecordsRequest(theRequest, theFilterType, theFilterPredicates);
         if (successor != null) {
             successor.forwardGetRecordsRequest(theRequest, theFilterType, theFilterPredicates);
-        } else {
+        } else if (theFilterPredicates.size() > 0) {
             this.addFilterConstraint(theRequest, theFilterType, theFilterPredicates);
         }
     }

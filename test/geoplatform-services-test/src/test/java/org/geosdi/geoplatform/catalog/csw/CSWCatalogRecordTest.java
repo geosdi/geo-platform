@@ -188,7 +188,7 @@ public class CSWCatalogRecordTest extends CSWCatalogTest {
     @Test
     public void testGetRecordsOurCountAreaItaly() throws Exception {
         int tot = cswService.getRecordsCount(catalogFinder);
-        assertEquals(563, tot);
+        assertEquals(559, tot);
         AreaInfo areaInfo = catalogFinder.getAreaInfo();
         areaInfo.setActive(true);
         BBox bBoxItaly = new BBox(6.624, 36.6492, 18.5144, 47.0946);

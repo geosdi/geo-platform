@@ -65,7 +65,7 @@ public abstract class GPConnectorStore<T extends GPServerConnector> implements G
     /**
      * @param theServer
      */
-    public GPConnectorStore(@Nonnull(when = NEVER) T theServer) {
+    protected GPConnectorStore(@Nonnull(when = NEVER) T theServer) {
         checkArgument(theServer != null, "The Parameter server must not be null.");
         this.server = theServer;
     }

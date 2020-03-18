@@ -5,7 +5,7 @@
  *    http://geo-platform.org
  *   ====================================================================
  *
- *   Copyright (C) 2008-2019 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ *   Copyright (C) 2008-2020 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  *   This program is free software: you can redistribute it and/or modify it
  *   under the terms of the GNU General Public License as published by
@@ -39,7 +39,7 @@ import org.geosdi.geoplatform.connector.geoserver.model.security.catalog.GPGeose
 import org.geosdi.geoplatform.connector.geoserver.request.security.GPGeoserverGetMasterPasswordRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.security.GPGeoserverUpdateCatalogRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.security.catalog.GPGeoserverGetCatalogRequest;
-import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreTest;
+import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV215xTest;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 
@@ -53,17 +53,17 @@ import static org.junit.runners.MethodSorters.NAME_ASCENDING;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @FixMethodOrder(NAME_ASCENDING)
-public class GPGeoserverSecurityConnectorStoreTest extends GPBaseGeoserverConnectorStoreTest {
+public class GPGeoserverSecurityConnectorStoreV215xTest extends GPBaseGeoserverConnectorStoreV215xTest {
 
     @Test
     public void a_loadGeoserverMasterPasswordTest() throws Exception {
-        GPGeoserverGetMasterPasswordRequest geoserverGetMasterPasswordRequest = geoserverConnectorStoreV2_16_2.loadMasterPasswordRequest();
+        GPGeoserverGetMasterPasswordRequest geoserverGetMasterPasswordRequest = geoserverConnectorStoreV2_15_5.loadMasterPasswordRequest();
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@GEOSERVER_LOAD_MASTER_PASSWORD_RESPONSE : {}\n", geoserverGetMasterPasswordRequest.getResponse());
     }
 
     @Test
     public void b_loadGeoserverCatalogRequestTest() throws Exception {
-        GPGeoserverGetCatalogRequest geoserverGetCatalogRequest = geoserverConnectorStoreV2_16_2.loadCatalogRequest();
+        GPGeoserverGetCatalogRequest geoserverGetCatalogRequest = geoserverConnectorStoreV2_15_5.loadCatalogRequest();
         GPGeoserverCatalog geoserverCatalog = geoserverGetCatalogRequest.getResponse();
         assertTrue(geoserverCatalog.getCatalogMode() == HIDE);
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@GEOSERVER_LOAD_CATALOG_RESPONSE : {}\n", geoserverCatalog);
@@ -71,10 +71,10 @@ public class GPGeoserverSecurityConnectorStoreTest extends GPBaseGeoserverConnec
 
     @Test
     public void c_updateGeoserverCatalogRequestTest() throws Exception {
-        GPGeoserverUpdateCatalogRequest updateCatalogRequest = geoserverConnectorStoreV2_16_2.updateCatalogRequest();
+        GPGeoserverUpdateCatalogRequest updateCatalogRequest = geoserverConnectorStoreV2_15_5.updateCatalogRequest();
         updateCatalogRequest.withCatalogMode(MIXED);
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@GEOSERVER_UPDATE_CATALOG_RESPONSE : {}\n", updateCatalogRequest.getResponse());
-        GPGeoserverGetCatalogRequest geoserverGetCatalogRequest = geoserverConnectorStoreV2_16_2.loadCatalogRequest();
+        GPGeoserverGetCatalogRequest geoserverGetCatalogRequest = geoserverConnectorStoreV2_15_5.loadCatalogRequest();
         GPGeoserverCatalog geoserverCatalog = geoserverGetCatalogRequest.getResponse();
         assertTrue(geoserverCatalog.getCatalogMode() == MIXED);
         updateCatalogRequest.withCatalogMode(HIDE);

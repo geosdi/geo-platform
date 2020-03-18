@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.connector.store.coverages;
 
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoverageRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoveragesRequest;
-import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreTest;
+import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV215xTest;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 
@@ -48,25 +48,25 @@ import static org.junit.runners.MethodSorters.NAME_ASCENDING;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @FixMethodOrder(NAME_ASCENDING)
-public class GPGeoserverCoveragesConnectorStoreTest extends GPBaseGeoserverConnectorStoreTest {
+public class GPGeoserverCoveragesConnectorStoreV215xTest extends GPBaseGeoserverConnectorStoreV215xTest {
 
     @Test
     public void a_loadWorkspaceCoveragesTest() throws Exception {
-        GeoserverLoadCoveragesRequest loadCoveragesRequest = geoserverConnectorStoreV2_16_2.loadWorkspaceCoveragesRequest();
+        GeoserverLoadCoveragesRequest loadCoveragesRequest = geoserverConnectorStoreV2_15_5.loadWorkspaceCoveragesRequest();
         loadCoveragesRequest.withWorkspace("topp");
         logger.info("########################WORKSPACE_COVERAGES_RESPONSE : {}\n", loadCoveragesRequest.getResponse());
     }
 
     @Test
     public void b_loadAllCoveragesTest() throws Exception {
-        GeoserverLoadCoveragesRequest loadCoveragesRequest = geoserverConnectorStoreV2_16_2.loadWorkspaceCoveragesRequest();
+        GeoserverLoadCoveragesRequest loadCoveragesRequest = geoserverConnectorStoreV2_15_5.loadWorkspaceCoveragesRequest();
         loadCoveragesRequest.withWorkspace("topp").withQueryList("ALL");
         logger.info("########################ALL_COVERAGES_RESPONSE : {}\n", loadCoveragesRequest.getResponse());
     }
 
     @Test
     public void c_loadCoverageTest() throws Exception {
-        GeoserverLoadCoverageRequest loadCoverageRequest = geoserverConnectorStoreV2_16_2.loadWorkspaceCoverageRequest();
+        GeoserverLoadCoverageRequest loadCoverageRequest = geoserverConnectorStoreV2_15_5.loadWorkspaceCoverageRequest();
         loadCoverageRequest.withWorkspace("sf").withCoverage("sfdem");
         logger.info("#######################LOAD_WORKSPACE_COVERAGE_RESPONSE : {}\n", loadCoverageRequest.getResponse());
     }

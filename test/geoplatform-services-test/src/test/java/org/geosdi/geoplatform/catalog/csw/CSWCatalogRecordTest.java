@@ -94,7 +94,7 @@ public class CSWCatalogRecordTest extends CSWCatalogTest {
         assertEquals(1, records.size());
         FullRecordDTO record = records.get(0);
         assertEquals(title, record.getTitle());
-        assertEquals("9f934a9ad3bdc52f04cd8e5033a51cef9101face", record.getIdentifier());
+        assertEquals("d759996e6da0dee66a515e9f236da6c575cb1d83", record.getIdentifier());
         assertEquals("service", record.getType());
         assertTrue(record.getAbstractText().contains("WMS Server del Dipartimento della Protezione Civile Nazionale"));
         assertNotNull(record.getSubjects());
@@ -195,7 +195,7 @@ public class CSWCatalogRecordTest extends CSWCatalogTest {
         areaInfo.setBBox(bBoxItaly);
         areaInfo.setAreaSearchType(AreaInfo.AreaSearchType.ENCLOSES);
         int countEncloses = cswService.getRecordsCount(catalogFinder);
-        assertEquals(25, countEncloses);
+        assertEquals(24, countEncloses);
         areaInfo.setAreaSearchType(AreaInfo.AreaSearchType.IS);
         int countIs = cswService.getRecordsCount(catalogFinder);
         assertEquals(0, countIs);

@@ -333,7 +333,7 @@ class CSWServiceDelegate implements CSWDelegate {
 
     @Override
     public int getRecordsCount(CatalogFinderBean catalogFinder) throws Exception {
-        logger.trace("\n*** getRecordsCount ***\n{}", catalogFinder);
+        logger.trace("########################## getRecordsCount {}\n", catalogFinder);
         GeoPlatformServer server = this.getCSWServerByID(catalogFinder.getServerID());
         CatalogGetRecordsRequest<GetRecordsResponseType> request = this.createGetRecordsRequest(server.getServerUrl());
         request.setTypeName(TypeName.RECORD_V202);

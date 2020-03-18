@@ -185,36 +185,27 @@ public class CSWCatalogRecordTest extends CSWCatalogTest {
         assertEquals(0, cswService.getRecordsCount(catalogFinder));
     }
 
-    @Ignore("problem with this type of Search investigate")
     @Test
     public void testGetRecordsOurCountAreaItaly() throws Exception {
         int tot = cswService.getRecordsCount(catalogFinder);
-//        Assert.assertEquals(2932, tot);
-
+        assertEquals(563, tot);
         AreaInfo areaInfo = catalogFinder.getAreaInfo();
         areaInfo.setActive(true);
         BBox bBoxItaly = new BBox(6.624, 36.6492, 18.5144, 47.0946);
         areaInfo.setBBox(bBoxItaly);
-
         areaInfo.setAreaSearchType(AreaInfo.AreaSearchType.ENCLOSES);
         int countEncloses = cswService.getRecordsCount(catalogFinder);
-//        Assert.assertEquals(44, countEncloses);
-
+        assertEquals(25, countEncloses);
         areaInfo.setAreaSearchType(AreaInfo.AreaSearchType.IS);
         int countIs = cswService.getRecordsCount(catalogFinder);
-//        Assert.assertEquals(0, countIs);
-
+        assertEquals(0, countIs);
         areaInfo.setAreaSearchType(AreaInfo.AreaSearchType.OUTSIDE);
         int countOutside = cswService.getRecordsCount(catalogFinder);
-//        Assert.assertEquals(45, countOutside);
-
+        assertEquals(39, countOutside);
         areaInfo.setAreaSearchType(AreaInfo.AreaSearchType.OVERLAP);
         int countOverlap = cswService.getRecordsCount(catalogFinder);
-//        Assert.assertEquals(2887, countOverlap);
-
-        logger.info(
-                "\n### TOT: {}\nENCLOSES: {}\nIS: {}\nOUTSIDE {}\nOVERLAP {}",
-                tot, countEncloses, countIs, countOutside, countOverlap);
+        assertEquals(520, countOverlap);
+        logger.info("################ TOT: {}\nENCLOSES: {}\nIS: {}\nOUTSIDE {}\nOVERLAP {}", tot, countEncloses, countIs, countOutside, countOverlap);
     }
 
     @Ignore("Catalog is down")

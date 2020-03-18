@@ -37,9 +37,11 @@ package org.geosdi.geoplatform.connector;
 
 import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequest;
 import org.geosdi.geoplatform.connector.server.security.BasicPreemptiveSecurityConnector;
+import org.geosdi.geoplatform.gui.responce.AreaInfo;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
 import org.geosdi.geoplatform.gui.responce.TextInfo;
 import org.geosdi.geoplatform.gui.responce.TimeInfo;
+import org.geosdi.geoplatform.gui.shared.bean.BBox;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
 import org.geosdi.geoplatform.xml.csw.ConstraintLanguage;
 import org.geosdi.geoplatform.xml.csw.TypeName;
@@ -64,6 +66,7 @@ import java.util.List;
 
 import static java.lang.Boolean.TRUE;
 import static org.geosdi.geoplatform.connector.GPCSWConnectorBuilder.newConnector;
+import static org.geosdi.geoplatform.gui.responce.AreaInfo.AreaSearchType.OVERLAP;
 import static org.geosdi.geoplatform.xml.csw.ConstraintLanguage.FILTER;
 import static org.geosdi.geoplatform.xml.csw.ConstraintLanguageVersion.V110;
 import static org.geosdi.geoplatform.xml.csw.OutputSchema.CSW_V202;
@@ -71,14 +74,11 @@ import static org.geosdi.geoplatform.xml.csw.TypeName.RECORD_V202;
 import static org.junit.Assert.assertEquals;
 
 /**
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:applicationContext-geoSDI.xml",
-        "classpath:applicationContext-Logger.xml"})
+@ContextConfiguration(locations = {"classpath:applicationContext-geoSDI.xml", "classpath:applicationContext-Logger.xml"})
 public class CatalogGetRecordsTest {
 
     @GeoPlatformLog
@@ -238,5 +238,28 @@ public class CatalogGetRecordsTest {
         request.setConstraintLanguageVersion(V110);
         request.setCatalogFinder(catalogFinder);
         logger.info("###########################RESPONSE : {}\n", request.getResponse());
+    }
+
+    @Test
+    public void testGetRecordsOurCountAreaItaly() throws Exception {
+        GPCatalogConnectorStore internalServer = newConnector()
+                .withServerUrl(new URL("http://catalog.geosdi.org:80/geonetwork/srv/eng/csw"))
+                .build();
+        CatalogFinderBean catalogFinder = new CatalogFinderBean();
+        AreaInfo areaInfo = new AreaInfo();
+        areaInfo.setActive(true);
+        BBox bBoxItaly = new BBox(6.624, 36.6492, 18.5144, 47.0946);
+        areaInfo.setBBox(bBoxItaly);
+        areaInfo.setAreaSearchType(OVERLAP);
+        catalogFinder.setAreaInfo(areaInfo);
+        CatalogGetRecordsRequest<GetRecordsResponseType> request = internalServer.createGetRecordsRequest();
+        request.setTypeName(RECORD_V202);
+        request.setOutputSchema(CSW_V202);
+        request.setElementSetName(ElementSetType.BRIEF.value());
+        request.setResultType(ResultType.HITS.value());
+        request.setConstraintLanguage(FILTER);
+        request.setConstraintLanguageVersion(V110);
+        request.setCatalogFinder(catalogFinder);
+        logger.info("###########################RESPONSE : \n{}\n", request.getResponseAsString());
     }
 }

@@ -35,10 +35,9 @@
  */
 package org.geosdi.geoplatform.connector.server.request;
 
-
-import org.apache.hc.core5.http.ContentType;
-import org.apache.hc.core5.http.HttpEntity;
-import org.apache.hc.core5.http.io.entity.StringEntity;
+import org.apache.http.HttpEntity;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.StringEntity;
 import org.geosdi.geoplatform.connector.jaxb.repository.JAXBContextConnectorRepository;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.jaxb.GPBaseJAXBContext;
@@ -46,6 +45,8 @@ import org.geosdi.geoplatform.jaxb.GPBaseJAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.StringWriter;
+
+import static org.geosdi.geoplatform.connector.jaxb.repository.CSWConnectorJAXBContext.CSW_CONTEXT_KEY;
 
 /**
  * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
@@ -89,7 +90,6 @@ public abstract class CatalogCSWRequest<T, Request> extends GPPostConnectorReque
     public String showRequestAsString() throws Exception {
         StringWriter writer = new StringWriter();
         cswContext.acquireMarshaller().marshal(createRequest(), writer);
-
         return writer.toString();
     }
 }

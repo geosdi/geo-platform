@@ -36,9 +36,7 @@
 package org.geosdi.geoplatform.connector.server.request.v110;
 
 import org.apache.http.HttpEntity;
-import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
-
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.AbstractTransactionRequest;
 import org.geosdi.geoplatform.connector.server.request.ITransactionOperationStrategy;
@@ -54,7 +52,7 @@ import java.io.StringWriter;
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.util.Arrays.asList;
 import static javax.annotation.meta.When.NEVER;
-import static org.apache.hc.core5.http.ContentType.APPLICATION_XML;
+import static org.apache.http.entity.ContentType.APPLICATION_XML;
 import static org.geosdi.geoplatform.gui.shared.wfs.TransactionOperation.INSERT;
 
 /**

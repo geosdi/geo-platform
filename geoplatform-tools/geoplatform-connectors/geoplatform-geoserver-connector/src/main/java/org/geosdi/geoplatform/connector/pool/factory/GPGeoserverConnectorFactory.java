@@ -39,7 +39,10 @@ import org.geosdi.geoplatform.connector.api.pool.GPPoolConnectorFactory;
 import org.geosdi.geoplatform.connector.pool.key.GPPoolGeoserverConnectorKey;
 import org.geosdi.geoplatform.connector.store.GPGeoserverConnectorStore;
 
+import javax.annotation.Nonnull;
+
 import static com.google.common.base.Preconditions.checkNotNull;
+import static javax.annotation.meta.When.NEVER;
 import static org.geosdi.geoplatform.connector.store.GPGeoserverConnectorStoreBuilder.geoserverConnectorBuilder;
 
 /**
@@ -54,7 +57,7 @@ public class GPGeoserverConnectorFactory extends GPPoolConnectorFactory<GPPoolGe
      * @throws Exception
      */
     @Override
-    public GPGeoserverConnectorStore create(GPPoolGeoserverConnectorKey key) throws Exception {
+    public GPGeoserverConnectorStore create(@Nonnull(when = NEVER) GPPoolGeoserverConnectorKey key) throws Exception {
         checkNotNull(key, "The GPPoolGeoserverConnectorKey must not be null");
         return geoserverConnectorBuilder()
                 .withServerUrl(key.getServerUrl())

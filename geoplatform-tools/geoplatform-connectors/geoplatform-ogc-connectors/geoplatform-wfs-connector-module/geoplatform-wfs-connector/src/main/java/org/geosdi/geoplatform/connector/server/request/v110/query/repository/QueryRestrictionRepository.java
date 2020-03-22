@@ -45,10 +45,10 @@ import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nonnull;
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.util.function.Function.identity;
+import static java.util.stream.Collectors.toMap;
 import static javax.annotation.meta.When.NEVER;
 
 /**
@@ -66,7 +66,7 @@ public final class QueryRestrictionRepository implements WFSQueryRestrictionRepo
     static {
         queryRestrictionStrategies = finder.getValidImplementors()
                 .stream()
-                .collect(Collectors.toMap(k -> k.getKey().getImplementorKey(), identity(), (v1, v2) -> v1, () -> new EnumMap<>(OperatorType.class)));
+                .collect(toMap(k -> k.getKey().getImplementorKey(), identity(), (v1, v2) -> v1, () -> new EnumMap<>(OperatorType.class)));
         logger.debug("@@@@@@@@@@@@@@@@@@@@@@{} up with {} values.\n\n", QueryRestrictionRepository.class.getSimpleName(),
                 queryRestrictionStrategies.size());
     }

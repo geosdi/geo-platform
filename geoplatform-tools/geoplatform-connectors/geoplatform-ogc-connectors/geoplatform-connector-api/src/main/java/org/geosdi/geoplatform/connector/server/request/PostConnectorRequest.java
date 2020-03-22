@@ -39,6 +39,10 @@ import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 
+import javax.annotation.Nonnull;
+
+import static javax.annotation.meta.When.NEVER;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -48,7 +52,7 @@ abstract class PostConnectorRequest<T> extends GPBaseConnectorRequest<T, HttpPos
     /**
      * @param server
      */
-    protected PostConnectorRequest(GPServerConnector server) {
+    protected PostConnectorRequest(@Nonnull(when = NEVER) GPServerConnector server) {
         super(server);
     }
 

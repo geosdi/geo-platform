@@ -40,27 +40,32 @@ import org.geosdi.geoplatform.connector.server.request.AbstractDescribeFeatureTy
 import org.geosdi.geoplatform.xml.wfs.v110.DescribeFeatureTypeType;
 import org.geosdi.geoplatform.xml.xsd.v2001.Schema;
 
+import javax.annotation.Nonnull;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
+
 /**
- *
+ * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
  */
 public class WFSDescribeFeatureTypeRequestV110 extends AbstractDescribeFeatureTypeRequest<Schema, DescribeFeatureTypeType> {
 
-    public WFSDescribeFeatureTypeRequestV110(GPServerConnector server) {
+    /**
+     * @param server
+     */
+    public WFSDescribeFeatureTypeRequestV110(@Nonnull(when = NEVER) GPServerConnector server) {
         super(server);
     }
 
+    /**
+     * @return
+     * @throws IllegalArgumentException
+     */
     @Override
     protected DescribeFeatureTypeType createRequest() throws IllegalArgumentException {
+        checkArgument(((this.typeName != null) && !(this.typeName.isEmpty())), "The Parameter typeName must not be null or empty.");
         DescribeFeatureTypeType request = new DescribeFeatureTypeType();
-
-        if ((typeName == null) || (typeName.isEmpty())) {
-            throw new IllegalArgumentException(
-                    "Parameter TypeName must not be empty.");
-        }
         request.setTypeName(typeName);
         request.setOutputFormat(outputFormat != null ? outputFormat : "text/xml; subtype=gml/3.1.1");
         return request;

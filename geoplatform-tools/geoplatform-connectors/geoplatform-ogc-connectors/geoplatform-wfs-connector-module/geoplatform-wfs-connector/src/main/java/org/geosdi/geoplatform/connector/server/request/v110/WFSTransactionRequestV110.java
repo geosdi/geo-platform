@@ -38,48 +38,68 @@ package org.geosdi.geoplatform.connector.server.request.v110;
 import org.apache.http.HttpEntity;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
+
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.AbstractTransactionRequest;
 import org.geosdi.geoplatform.connector.server.request.ITransactionOperationStrategy;
 import org.geosdi.geoplatform.connector.server.request.v110.transaction.GPTransactionMediator;
 import org.geosdi.geoplatform.connector.server.request.v110.transaction.stax.FeatureStreamWriter;
-import org.geosdi.geoplatform.gui.shared.wfs.TransactionOperation;
 import org.geosdi.geoplatform.xml.wfs.v110.TransactionResponseType;
 import org.geosdi.geoplatform.xml.wfs.v110.TransactionType;
 
+import javax.annotation.Nonnull;
 import java.io.ByteArrayOutputStream;
 import java.io.StringWriter;
-import java.util.Arrays;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static java.util.Arrays.asList;
+import static javax.annotation.meta.When.NEVER;
+import static org.apache.hc.core5.http.ContentType.APPLICATION_XML;
+import static org.geosdi.geoplatform.gui.shared.wfs.TransactionOperation.INSERT;
 
 /**
+ * @author Giuseppe La Scaleia - <giuseppe.lascaleia@geosdi.org>
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class WFSTransactionRequestV110 extends AbstractTransactionRequest<TransactionResponseType, TransactionType> {
 
-    public WFSTransactionRequestV110(GPServerConnector server) {
+    /**
+     * @param server
+     */
+    public WFSTransactionRequestV110(@Nonnull(when = NEVER) GPServerConnector server) {
         super(server);
     }
 
+    /**
+     * @return {@link HttpEntity}
+     * @throws Exception
+     */
     @Override
     protected HttpEntity preparePostEntity() throws Exception {
-        return (operation == TransactionOperation.INSERT) ? preparePostEntityWithStax() : super.preparePostEntity();
+        return ((operation == INSERT) ? preparePostEntityWithStax() : super.preparePostEntity());
     }
 
+    /**
+     * @return {@link TransactionType}
+     * @throws Exception
+     */
     @Override
     protected TransactionType createRequest() throws Exception {
-        if (operation == null) {
-            throw new IllegalArgumentException("Transaction Operation " + "must not be null.");
-        }
+        checkArgument(this.operation != null, "The Parameter Transaction Operation must not be null.");
         ITransactionOperationStrategy operationStrategy = GPTransactionMediator.getStrategy(operation);
         Object elementType = operationStrategy.getOperation(this);
         TransactionType request = new TransactionType();
-        request.setInsertOrUpdateOrDelete(Arrays.asList(elementType));
+        request.setInsertOrUpdateOrDelete(asList(elementType));
         return request;
     }
 
+    /**
+     * @return {@link String}
+     * @throws Exception
+     */
     @Override
     public String showRequestAsString() throws Exception {
-        return (operation == TransactionOperation.INSERT) ? showRequestWithStax() : super.showRequestAsString();
+        return ((operation == INSERT) ? showRequestWithStax() : super.showRequestAsString());
     }
 
     /**
@@ -102,7 +122,7 @@ public class WFSTransactionRequestV110 extends AbstractTransactionRequest<Transa
         FeatureStreamWriter streamWriter = new FeatureStreamWriter();
         streamWriter.write(this, outputStream);
         String request = outputStream.toString("UTF-8");
-        logger.debug("\n*** Request TRANSACTION INSERT ***\n{}\n\n", request);
-        return new StringEntity(request, ContentType.APPLICATION_XML);
+        logger.debug("########################### Request TRANSACTION INSERT \n{}\n\n", request);
+        return new StringEntity(request, APPLICATION_XML);
     }
 }

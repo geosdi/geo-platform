@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.connector;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -88,11 +89,10 @@ public enum GeoserverVersion implements GPServerConnector.GPServerConnectorVersi
      * @param version
      * @return {@link GeoserverVersion}
      */
-    public static GeoserverVersion fromString(String version) {
+    public static GeoserverVersion fromString(@Nullable String version) {
         Optional<GeoserverVersion> optional = stream(GeoserverVersion.values())
                 .filter(Objects::nonNull)
-                .filter(v -> ((version != null) && !(version.trim().isEmpty()))
-                        ? v.getVersion().equalsIgnoreCase(version) : FALSE)
+                .filter(v -> ((version != null) && !(version.trim().isEmpty())) ? v.getVersion().equalsIgnoreCase(version) : FALSE)
                 .findFirst();
         return ((optional != null) && (optional.isPresent()) ? optional.get() : GeoserverVersion.V216x);
     }

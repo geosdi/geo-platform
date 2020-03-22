@@ -39,7 +39,6 @@ import org.apache.cxf.jaxws.EndpointImpl;
 import org.geosdi.geoplatform.connectors.ws.wfs.GPWFSClientTestConnector;
 import org.geosdi.geoplatform.cxf.bus.GPSpringBusConfigurator;
 import org.geosdi.geoplatform.services.GPWFSService;
-import org.junit.Assert;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -47,6 +46,8 @@ import org.springframework.test.context.TestContext;
 import org.springframework.test.context.TestExecutionListener;
 
 import javax.xml.ws.Endpoint;
+
+import static org.junit.Assert.assertNotNull;
 
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
@@ -65,18 +66,16 @@ public class WFSListenerServices implements TestExecutionListener {
 
         ApplicationContext appContext = testContext.getApplicationContext();
 
-        GPWFSClientTestConnector wfsClientConnector = appContext.getBean(
-                "wfsClient", GPWFSClientTestConnector.class);
-        Assert.assertNotNull("wfsClient is NULL", wfsClientConnector);
+        GPWFSClientTestConnector wfsClientConnector = appContext.getBean("wfsClient", GPWFSClientTestConnector.class);
+        assertNotNull("wfsClient is NULL", wfsClientConnector);
         wfsService = wfsClientConnector.getEndpointService();
-        Assert.assertNotNull("wfsService is NULL", wfsService);
+        assertNotNull("wfsService is NULL", wfsService);
 
         addressDatastore = appContext.getBean("addressDatastore", String.class);
-        Assert.assertNotNull("addressDatastore is NULL", addressDatastore);
+        assertNotNull("addressDatastore is NULL", addressDatastore);
 
-        GPWFSService geoPlatformWFSService = appContext.getBean(
-                "wfsService", GPWFSService.class);
-        Assert.assertNotNull("wfsService is NULL", geoPlatformWFSService);
+        GPWFSService geoPlatformWFSService = appContext.getBean("wfsService", GPWFSService.class);
+        assertNotNull("wfsService is NULL", geoPlatformWFSService);
 
         appContext.getBean(GPSpringBusConfigurator.class).createBus();
 

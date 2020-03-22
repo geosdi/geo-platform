@@ -35,10 +35,11 @@
  */
 package org.geosdi.geoplatform.connector.server.request;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.wfs.response.QueryDTO;
 import org.geosdi.geoplatform.gui.shared.bean.BBox;
-import org.geosdi.geoplatform.xml.wfs.v110.QueryType;
 
 import javax.xml.namespace.QName;
 import java.math.BigInteger;
@@ -51,39 +52,36 @@ public abstract class AbstractGetFeatureRequest<T, Request> extends WFSRequest<T
 
     private static final String NAME_GEOMETRY = "the_geom"; // TODO name property geometry is always "the_geom"?
     //
+    @Getter
+    @Setter
     protected QName typeName;
+    @Getter
+    @Setter
     protected List<String> featureIDs;
+    @Getter
+    @Setter
     protected List<String> propertyNames;
+    @Getter
+    @Setter
     protected BBox bBox;
     protected String srs;
+    @Getter
+    @Setter
     protected String resultType;
+    @Getter
+    @Setter
     protected String outputFormat;
+    @Getter
+    @Setter
     protected BigInteger maxFeatures;
+    @Getter
+    @Setter
     protected QueryDTO queryDTO;
+    @Setter
     private String geometryName;
 
     public AbstractGetFeatureRequest(GPServerConnector server) {
         super(server);
-    }
-
-    @Override
-    public QName getTypeName() {
-        return typeName;
-    }
-
-    @Override
-    public void setTypeName(QName typeName) {
-        this.typeName = typeName;
-    }
-
-    @Override
-    public List<String> getFeatureIDs() {
-        return featureIDs;
-    }
-
-    @Override
-    public void setFeatureIDs(List<String> featureIDs) {
-        this.featureIDs = featureIDs;
     }
 
     /**
@@ -95,24 +93,6 @@ public abstract class AbstractGetFeatureRequest<T, Request> extends WFSRequest<T
     }
 
     /**
-     * <p>The Property Names to retrieve in {@link QueryType} query</p>
-     *
-     * @param propertyNames
-     */
-    @Override
-    public void setPropertyNames(List<String> propertyNames) {
-        this.propertyNames = propertyNames;
-    }
-
-    /**
-     * @return {@link List<String>} Property Names
-     */
-    @Override
-    public List<String> getPropertyNames() {
-        return this.propertyNames;
-    }
-
-    /**
      * @return {@link Boolean}
      */
     @Override
@@ -120,14 +100,24 @@ public abstract class AbstractGetFeatureRequest<T, Request> extends WFSRequest<T
         return ((this.propertyNames != null) && !(this.propertyNames.isEmpty()));
     }
 
+    /**
+     * Sets the value of the SRS query property.
+     *
+     * @param srs
+     */
     @Override
-    public BBox getBBox() {
-        return bBox;
+    public void setSRS(String srs) {
+        this.srs = srs;
     }
 
+    /**
+     * Gets the value of the SRS query property.
+     *
+     * @return srs
+     */
     @Override
-    public void setBBox(BBox bBox) {
-        this.bBox = bBox;
+    public String getSRS() {
+        return this.srs;
     }
 
     /**
@@ -139,77 +129,11 @@ public abstract class AbstractGetFeatureRequest<T, Request> extends WFSRequest<T
     }
 
     /**
-     * @param theGeometryName
-     */
-    @Override
-    public void setGeometryName(String theGeometryName) {
-        this.geometryName = theGeometryName;
-    }
-
-    /**
      * @return {@link Boolean}
      */
     @Override
     public Boolean isSetGeometryName() {
         return ((this.geometryName != null) && !(this.geometryName.trim().isEmpty()));
-    }
-
-    @Override
-    public String getSRS() {
-        return srs;
-    }
-
-    @Override
-    public void setSRS(String srs) {
-        this.srs = srs;
-    }
-
-    @Override
-    public String getResultType() {
-        return resultType;
-    }
-
-    @Override
-    public void setResultType(String resultType) {
-        this.resultType = resultType;
-    }
-
-    @Override
-    public String getOutputFormat() {
-        return outputFormat;
-    }
-
-    @Override
-    public void setOutputFormat(String outputFormat) {
-        this.outputFormat = outputFormat;
-    }
-
-    @Override
-    public BigInteger getMaxFeatures() {
-        return maxFeatures;
-    }
-
-    @Override
-    public void setMaxFeatures(BigInteger maxFeatures) {
-        this.maxFeatures = maxFeatures;
-    }
-
-    /**
-     * <p>{@link QueryDTO} class contains all Restrictions for Attributes</p>
-     *
-     * @param queryDTO
-     */
-    @Override
-    public void setQueryDTO(QueryDTO queryDTO) {
-        this.queryDTO = queryDTO;
-    }
-
-    /**
-     * @return {@link QueryDTO}
-     */
-    @Override
-    public QueryDTO getQueryDTO() {
-        return this.queryDTO;
     }
 
     /**

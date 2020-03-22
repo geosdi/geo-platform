@@ -97,6 +97,10 @@ public abstract class AbstractFeatureStreamWriter<T extends Object> extends Abst
      */
     protected abstract void writeGeometryAttribute(GeometryAttributeDTO geometry, QName typeName) throws XMLStreamException, Exception;
 
+    /**
+     * @param typeName
+     * @throws XMLStreamException
+     */
     private void writeStartDocument(QName typeName) throws XMLStreamException {
         writer.writeStartDocument("UTF-8", "1.0");
 //        writer.setDefaultNamespace(FeaturesNamespace.WFS.NAMESPACE());
@@ -108,6 +112,12 @@ public abstract class AbstractFeatureStreamWriter<T extends Object> extends Abst
         writer.setPrefix(typeName.getPrefix(), typeName.getNamespaceURI());
     }
 
+    /**
+     * @param request
+     * @param <T>
+     * @throws XMLStreamException
+     * @throws Exception
+     */
     private <T extends WFSTransactionRequest> void writeTransactionRequest(T request) throws XMLStreamException, Exception {
         writer.writeStartElement(WFS.PREFIX(), TransactionParameters.getParam(TRANSACTION), WFS.NAMESPACE());
         writer.writeAttribute("service", this.getService());
@@ -116,10 +126,14 @@ public abstract class AbstractFeatureStreamWriter<T extends Object> extends Abst
         writer.writeEndElement();
     }
 
+    /**
+     * @param request
+     * @throws XMLStreamException
+     * @throws Exception
+     */
     private void writeTransactionInsert(WFSTransactionRequest request) throws XMLStreamException, Exception {
         writer.writeStartElement(WFS.PREFIX(), TransactionParameters.getParam(TRANSACTION_INSERT), WFS.NAMESPACE());
         TransactionIdGen idGen = request.getTransactionIdGen();
-
         if (idGen != null) {
             writer.writeAttribute(WFS.PREFIX(), WFS.NAMESPACE(), TransactionParameters.getParam(ID_GEN), idGen.value());
         }
@@ -127,18 +141,19 @@ public abstract class AbstractFeatureStreamWriter<T extends Object> extends Abst
         if (inputFormat != null) {
             writer.writeAttribute(WFS.PREFIX(), WFS.NAMESPACE(), TransactionParameters.getParam(INPUT_FORMAT), inputFormat);
         }
-
         String srsName = request.getSRS();
-
         if (srsName != null) {
             writer.writeAttribute(WFS.PREFIX(), WFS.NAMESPACE(), TransactionParameters.getParam(SRS_NAME), srsName);
         }
-
         this.writeFeature(request);
-
         writer.writeEndElement();
     }
 
+    /**
+     * @param request
+     * @throws XMLStreamException
+     * @throws Exception
+     */
     private void writeFeature(WFSTransactionRequest request) throws XMLStreamException, Exception {
         QName typeName = request.getTypeName();
         writer.writeStartElement(typeName.getLocalPart());
@@ -153,6 +168,11 @@ public abstract class AbstractFeatureStreamWriter<T extends Object> extends Abst
         writer.writeEndElement();
     }
 
+    /**
+     * @param attribute
+     * @param typeName
+     * @throws XMLStreamException
+     */
     private void writeAttribute(AttributeDTO attribute, QName typeName) throws XMLStreamException {
         super.writeElement(typeName.getPrefix() + ":" + attribute.getName(), attribute.getValue());
     }

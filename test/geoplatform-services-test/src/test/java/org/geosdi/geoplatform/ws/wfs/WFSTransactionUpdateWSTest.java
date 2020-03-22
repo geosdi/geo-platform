@@ -48,6 +48,8 @@ import java.util.Arrays;
 import java.util.Map;
 
 import static java.util.Collections.EMPTY_MAP;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
@@ -68,17 +70,17 @@ public class WFSTransactionUpdateWSTest extends WFSAbstractTest {
                 att2 = attribute;
             }
         }
-        Assert.assertNotNull(att1);
-        Assert.assertNotNull(att2);
+        assertNotNull(att1);
+        assertNotNull(att2);
 
         BBox bbox = new BBox(-75.102613, 40.212597, -75.361859, 40.512517);
         FeatureCollectionDTO featureCollection = wfsService.getFeatureByBBoxDirect(addressDatastore, typeName, bbox, EMPTY_MAP);
-        Assert.assertEquals(1, featureCollection.getNumberOfFeatures());
-        Assert.assertNotNull(featureCollection.getFeatures());
+        assertEquals(1, featureCollection.getNumberOfFeatures());
+        assertNotNull(featureCollection.getFeatures());
 
         FeatureDTO feature = featureCollection.getFeatures().get(0);
-        Assert.assertNotNull(feature);
-        Assert.assertNotNull(feature.getFID());
+        assertNotNull(feature);
+        assertNotNull(feature.getFID());
 
         Map<String, String> attributesMap = feature.getAttributes().getAttributesMap();
         String val1 = attributesMap.get(att1.getName());
@@ -95,12 +97,12 @@ public class WFSTransactionUpdateWSTest extends WFSAbstractTest {
         Assert.assertTrue(updated);
 
         feature = wfsService.getFeatureByFIDDirect(addressDatastore, typeName, feature.getFID(), EMPTY_MAP);
-        Assert.assertNotNull(feature);
-        Assert.assertNotNull(feature.getFID());
+        assertNotNull(feature);
+        assertNotNull(feature.getFID());
         attributesMap = feature.getAttributes().getAttributesMap();
         val1 = attributesMap.get(att1.getName());
-        Assert.assertEquals(Double.toString(d1), val1);
+        assertEquals(Double.toString(d1), val1);
         val2 = attributesMap.get(att2.getName());
-        Assert.assertEquals(Double.toString(d2), val2);
+        assertEquals(Double.toString(d2), val2);
     }
 }

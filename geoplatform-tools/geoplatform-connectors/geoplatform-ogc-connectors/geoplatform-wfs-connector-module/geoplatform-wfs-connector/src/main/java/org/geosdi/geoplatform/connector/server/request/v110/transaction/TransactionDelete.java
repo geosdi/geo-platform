@@ -37,23 +37,21 @@ package org.geosdi.geoplatform.connector.server.request.v110.transaction;
 
 import org.geosdi.geoplatform.connector.server.request.ITransactionOperationStrategy;
 import org.geosdi.geoplatform.connector.server.request.WFSTransactionRequest;
-import org.geosdi.geoplatform.xml.filter.v110.AbstractIdType;
 import org.geosdi.geoplatform.xml.filter.v110.FilterType;
 import org.geosdi.geoplatform.xml.filter.v110.GmlObjectIdType;
 import org.geosdi.geoplatform.xml.wfs.v110.DeleteElementType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.xml.bind.JAXBElement;
+import javax.annotation.Nonnull;
 import java.util.Arrays;
 
+import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
+
 /**
- *
+ * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- *
  */
 public class TransactionDelete implements ITransactionOperationStrategy {
 
@@ -61,38 +59,30 @@ public class TransactionDelete implements ITransactionOperationStrategy {
         filterFactory = new org.geosdi.geoplatform.xml.filter.v110.ObjectFactory();
     }
 
-    static final org.geosdi.geoplatform.xml.filter.v110.ObjectFactory filterFactory;
-    //
-    private static final Logger logger = LoggerFactory.getLogger(
-            TransactionDelete.class);
+    private static final Logger logger = LoggerFactory.getLogger(TransactionDelete.class);
+    private static final org.geosdi.geoplatform.xml.filter.v110.ObjectFactory filterFactory;
 
-    @Override
-    public Object getOperation(WFSTransactionRequest request)
-            throws Exception {
-        logger.debug("\n\n###################Called getOperation for WFS "
-                + "Transaction Delete Operation with Param : {}", request);
-
-        assert (request.getTypeName() != null) : "Feature Type Name must "
-                + "not be null.";
-
-        assert (request.getFID() != null) : "Feature FID must not be null.";
-
-        DeleteElementType elementType = new DeleteElementType();
-        elementType.setTypeName(request.getTypeName());
-
-        GmlObjectIdType fid = new GmlObjectIdType();
-        fid.setId(request.getFID());
-
-        JAXBElement<GmlObjectIdType> fidElement = filterFactory.createGmlObjectId(
-                fid);
-
-        FilterType filter = new FilterType();
-        filter.setId(Arrays.<JAXBElement<? extends AbstractIdType>>asList(
-                fidElement));
-
-        elementType.setFilter(filter);
-
-        return elementType;
+    TransactionDelete() {
     }
 
+    /**
+     * @param request
+     * @return {@link Object}
+     * @throws Exception
+     */
+    @Override
+    public Object getOperation(@Nonnull(when = NEVER) WFSTransactionRequest request) throws Exception {
+        checkArgument(request != null, "The Parameter request must not be null.");
+        checkArgument(request.getTypeName() != null, "The Parameter typeName must not be null.");
+        checkArgument(((request.getFID() != null) && !(request.getFID().trim().isEmpty())), "The Parameter fid must not be null or an empty string.");
+        logger.debug("##################Called getOperation for WFS Transaction Delete Operation with Param : {}", request);
+        DeleteElementType elementType = new DeleteElementType();
+        elementType.setTypeName(request.getTypeName());
+        GmlObjectIdType fid = new GmlObjectIdType();
+        fid.setId(request.getFID());
+        FilterType filter = new FilterType();
+        filter.setId(Arrays.asList(filterFactory.createGmlObjectId(fid)));
+        elementType.setFilter(filter);
+        return elementType;
+    }
 }

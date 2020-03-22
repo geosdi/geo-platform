@@ -56,6 +56,9 @@ abstract class BaseBinaryStrategy implements QueryRestrictionStrategy<BinaryComp
 
     private static final IDateFormatStrategyFinder dateFormatStrategyFinder = new DateFormatStrategyPatter();
 
+    protected BaseBinaryStrategy() {
+    }
+
     /**
      * @param queryRestrictionDTO
      * @return {@link BinaryComparisonOpType}

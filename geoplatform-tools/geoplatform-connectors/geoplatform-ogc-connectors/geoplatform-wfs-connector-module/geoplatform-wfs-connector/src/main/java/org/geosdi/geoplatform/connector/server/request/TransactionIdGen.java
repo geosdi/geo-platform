@@ -35,34 +35,52 @@
  */
 package org.geosdi.geoplatform.connector.server.request;
 
+import javax.annotation.Nonnull;
+
+import java.util.Optional;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.Boolean.FALSE;
+import static java.util.Arrays.stream;
+import static java.util.Optional.empty;
+import static javax.annotation.meta.When.NEVER;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public enum TransactionIdGen {
+public enum TransactionIdGen implements GPTransactionIdGen {
 
     GENERATE_NEW("GenerateNew"),
     USE_EXISTING("UseExisting"),
     REPLACE_DUPLICATE("ReplaceDuplicate");
-    //
+
     private final String value;
 
-    private TransactionIdGen(String theValue) {
+    /**
+     * @param theValue
+     */
+    TransactionIdGen(@Nonnull(when = NEVER) String theValue) {
+        checkArgument(((theValue != null) && !(theValue.trim().isEmpty())), "The Parameter value must not be null or an empty string.");
         this.value = theValue;
     }
 
+    /**
+     * @return {@link String}
+     */
     public String value() {
         return value;
     }
 
+    /**
+     * @param theValue
+     * @return {@link TransactionIdGen}
+     */
     public static TransactionIdGen fromValue(String theValue) {
-        for (TransactionIdGen idGen : TransactionIdGen.values()) {
-            if (idGen.value.equalsIgnoreCase(theValue)) {
-                return idGen;
-            }
-        }
-        throw new IllegalArgumentException("No TransactionIdGen found "
-                + "for value " + theValue);
+        Optional<TransactionIdGen> optional = stream(TransactionIdGen.values())
+                .filter(v -> ((theValue != null)) ? v.value().equals(theValue) : FALSE)
+                .findFirst();
+        return (((optional != null) && !(optional.equals(empty()))) ? optional.get() : GENERATE_NEW);
     }
 }

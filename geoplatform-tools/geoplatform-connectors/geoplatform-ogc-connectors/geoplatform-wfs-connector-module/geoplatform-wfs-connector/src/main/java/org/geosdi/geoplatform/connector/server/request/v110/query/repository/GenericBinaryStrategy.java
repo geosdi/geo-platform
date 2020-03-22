@@ -42,6 +42,7 @@ import org.geosdi.geoplatform.xml.filter.v110.BinaryComparisonOpType;
 import javax.xml.bind.JAXBElement;
 
 import static java.lang.Boolean.TRUE;
+import static org.geosdi.geoplatform.connector.server.request.v110.query.repository.QueryRestrictionStrategyKey.forStrategy;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -51,8 +52,8 @@ public abstract class GenericBinaryStrategy extends BaseBinaryStrategy {
 
     private final QueryRestrictionStrategyKey key;
 
-    protected GenericBinaryStrategy() {
-        this.key = QueryRestrictionStrategyKey.forStrategy(this);
+    GenericBinaryStrategy() {
+        this.key = forStrategy(this);
     }
 
     /**

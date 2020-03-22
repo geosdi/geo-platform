@@ -42,7 +42,6 @@ import org.geosdi.geoplatform.connector.wfs.response.GeometryAttributeDTO;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.gml.api.AbstractGeometry;
 import org.geosdi.geoplatform.gml.api.parser.jts.geometry.sextante.JTSSextanteParser;
-import org.geosdi.geoplatform.gml.impl.v311.jts.parameter.JTSParametersRepo;
 import org.geosdi.geoplatform.xml.wfs.v110.PropertyType;
 import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.geom.GeometryFactory;
@@ -50,8 +49,13 @@ import org.locationtech.jts.io.WKTReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.Nonnull;
 import javax.xml.namespace.QName;
 import java.util.List;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
+import static org.geosdi.geoplatform.gml.impl.v311.jts.parameter.JTSParametersRepo.getDefaultSextanteParser;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -61,63 +65,49 @@ public abstract class AbstractTranctionUpdate implements ITransactionOperationSt
 
     protected static final Logger logger = LoggerFactory.getLogger(AbstractTranctionUpdate.class);
     //
-    private static final JTSSextanteParser jtsSextanteParser = JTSParametersRepo.getDefaultSextanteParser();
+    private static final JTSSextanteParser jtsSextanteParser = getDefaultSextanteParser();
     //
     private final WKTReader wktReader;
 
-    public AbstractTranctionUpdate() {
+    AbstractTranctionUpdate() {
         this.wktReader = new WKTReader(new GeometryFactory());
     }
 
-    final List<PropertyType> getPropertyToUpdate(List<AttributeDTO> attributes)
-            throws IllegalParameterFault, Exception {
-        assert (attributes != null && attributes.size() > 0);
-
-        List<PropertyType> properties = Lists.<PropertyType>newArrayListWithCapacity(
-                attributes.size());
+    /**
+     * @param attributes
+     * @return {@link List<PropertyType>}
+     * @throws Exception
+     */
+    final List<PropertyType> getPropertyToUpdate(@Nonnull(when = NEVER) List<AttributeDTO> attributes) throws Exception {
+        checkArgument((attributes != null) && !(attributes.isEmpty()), "The Parameter attributes must not be null or empty.");
+        List<PropertyType> properties = Lists.newArrayListWithCapacity(attributes.size());
         for (AttributeDTO attribute : attributes) {
             if (!attribute.isNillable() && attribute.getValue() == null) {
-                throw new IllegalParameterFault(
-                        "Property '" + attribute.getName() + "' cannot be null.");
+                throw new IllegalParameterFault("Property '" + attribute.getName() + "' cannot be null.");
             }
-
             PropertyType property = new PropertyType();
             QName qName = new QName(attribute.getName());
             property.setName(qName);
-
-            property.setValue((attribute instanceof GeometryAttributeDTO)
-                    ? createGeometry((GeometryAttributeDTO) attribute)
-                    : attribute.getValue());
-
+            property.setValue(((attribute instanceof GeometryAttributeDTO) ? createGeometry((GeometryAttributeDTO) attribute) : attribute.getValue()));
             properties.add(property);
         }
-
         return properties;
     }
 
-    final Object createGeometry(GeometryAttributeDTO geometry)
-            throws Exception {
-
+    /**
+     * @param geometry
+     * @return {@link Object}
+     * @throws Exception
+     */
+    final Object createGeometry(GeometryAttributeDTO geometry) throws Exception {
         String wktGeometry = geometry.getValue();
-
-        if (wktGeometry.equals("")) {
-            throw new IllegalArgumentException("Geometry WKT must not be "
-                    + "an empty String.");
-        }
-
+        checkArgument(((wktGeometry != null) && !(wktGeometry.trim().isEmpty())), "The Parameter wktGeometry must not be null or an empty string.");
         Geometry jtsGeometry = this.wktReader.read(wktGeometry);
-
         if (geometry.getSrid() != null) {
             jtsGeometry.setSRID(geometry.getSrid());
         }
-
-        AbstractGeometry gmlGeometry = jtsSextanteParser.parseGeometry(
-                jtsGeometry);
-
-        logger.debug("####################HERE GML GEOMETRY GENERATED : {}",
-                gmlGeometry);
-
+        AbstractGeometry gmlGeometry = jtsSextanteParser.parseGeometry(jtsGeometry);
+        logger.debug("####################HERE GML GEOMETRY GENERATED : {}", gmlGeometry);
         return gmlGeometry;
     }
-
 }

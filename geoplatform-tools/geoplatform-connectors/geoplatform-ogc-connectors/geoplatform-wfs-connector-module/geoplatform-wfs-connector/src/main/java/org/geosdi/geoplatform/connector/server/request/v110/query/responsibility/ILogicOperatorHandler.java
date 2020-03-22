@@ -149,8 +149,7 @@ public interface ILogicOperatorHandler {
         @Override
         public FilterType build() throws Exception {
             checkArgument(this.queryDTO != null, "The Parameter queryDTO must not be null.");
-            orOperator.buildLogicFilterOperator(this.queryDTO, (this.filterType = (this.filterType == null
-                    ? new FilterType() : this.filterType)));
+            orOperator.buildLogicFilterOperator(this.queryDTO, (this.filterType = ((this.filterType == null) ? new FilterType() : this.filterType)));
             if (logger.isTraceEnabled()) {
                 StringWriter writer = new StringWriter();
                 jaxbContextBuilder.marshal(this.filterType, writer);

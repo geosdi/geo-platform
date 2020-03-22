@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.connector.server.request;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.wfs.response.AttributeDTO;
 import org.geosdi.geoplatform.gui.shared.wfs.TransactionOperation;
@@ -42,32 +44,35 @@ import org.geosdi.geoplatform.gui.shared.wfs.TransactionOperation;
 import javax.xml.namespace.QName;
 import java.util.List;
 
+import static org.geosdi.geoplatform.connector.server.request.TransactionIdGen.GENERATE_NEW;
+
 /**
+ * @author Giuseppe La Scaleia - <giuseppe.lascaleia@geosdi.org>
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  * @TODO : Change Attributes type from AttributeDTO to GPFeatureDescriptor
  */
 public abstract class AbstractTransactionRequest<T, Response> extends WFSRequest<T, Response> implements WFSTransactionRequest<T> {
 
+    private static final String DEFAULT_INPUT_FORMAT = "text/xml; subtype=gml/3.1.1";
+    //
+    @Getter
+    @Setter
     protected TransactionOperation operation;
+    @Setter
     private TransactionIdGen transactionIdGen;
+    @Getter
+    @Setter
     protected QName typeName;
     protected String srs;
+    @Setter
     protected String inputFormat;
     protected String fid;
+    @Getter
+    @Setter
     protected List<? extends AttributeDTO> attributes;
 
     public AbstractTransactionRequest(GPServerConnector server) {
         super(server);
-    }
-
-    @Override
-    public TransactionOperation getOperation() {
-        return operation;
-    }
-
-    @Override
-    public void setOperation(TransactionOperation operation) {
-        this.operation = operation;
     }
 
     /**
@@ -75,26 +80,7 @@ public abstract class AbstractTransactionRequest<T, Response> extends WFSRequest
      */
     @Override
     public TransactionIdGen getTransactionIdGen() {
-        return transactionIdGen != null ? transactionIdGen
-                : TransactionIdGen.GENERATE_NEW;
-    }
-
-    /**
-     * @param transactionIdGen the transactionIdGen to set
-     */
-    @Override
-    public void setTransactionIdGen(TransactionIdGen transactionIdGen) {
-        this.transactionIdGen = transactionIdGen;
-    }
-
-    @Override
-    public QName getTypeName() {
-        return typeName;
-    }
-
-    @Override
-    public void setTypeName(QName typeName) {
-        this.typeName = typeName;
+        return ((transactionIdGen != null) ? transactionIdGen : GENERATE_NEW);
     }
 
     @Override
@@ -109,33 +95,25 @@ public abstract class AbstractTransactionRequest<T, Response> extends WFSRequest
 
     @Override
     public String getInputFormat() {
-        return ((inputFormat != null) && !(inputFormat.isEmpty())) ? inputFormat
-                : "text/xml; subtype=gml/3.1.1";
+        return ((inputFormat != null) && !(inputFormat.isEmpty()) ? inputFormat : DEFAULT_INPUT_FORMAT);
     }
 
-    @Override
-    public void setInputFormat(String inputFormat) {
-        this.inputFormat = inputFormat;
-    }
-
+    /**
+     * Gets the value of the feature ID property.
+     */
     @Override
     public String getFID() {
-        return fid;
+        return this.fid;
     }
 
+    /**
+     * Sets the value of the feature ID property.
+     *
+     * @param fid
+     */
     @Override
     public void setFID(String fid) {
         this.fid = fid;
-    }
-
-    @Override
-    public List<? extends AttributeDTO> getAttributes() {
-        return attributes;
-    }
-
-    @Override
-    public void setAttributes(List<? extends AttributeDTO> attributes) {
-        this.attributes = attributes;
     }
 
     @Override

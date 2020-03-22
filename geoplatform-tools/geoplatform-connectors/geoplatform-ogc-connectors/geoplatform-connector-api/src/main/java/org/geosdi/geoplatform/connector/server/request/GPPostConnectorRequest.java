@@ -37,6 +37,10 @@ package org.geosdi.geoplatform.connector.server.request;
 
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 
+import javax.annotation.Nonnull;
+
+import static javax.annotation.meta.When.NEVER;
+
 /**
  * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
@@ -46,7 +50,7 @@ public abstract class GPPostConnectorRequest<T, Request> extends PostConnectorRe
     /**
      * @param server
      */
-    protected GPPostConnectorRequest(GPServerConnector server) {
+    protected GPPostConnectorRequest(@Nonnull(when = NEVER) GPServerConnector server) {
         super(server);
     }
 

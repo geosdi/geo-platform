@@ -108,13 +108,13 @@ public class GPPoolConnectorKey implements Serializable {
         if (!serverUrl.equals(that.serverUrl)) {
             return false;
         }
-        return version.equals(that.version);
+        return version != null ? version.equals(that.version) : that.version == null;
     }
 
     @Override
     public int hashCode() {
         int result = serverUrl.hashCode();
-        result = 31 * result + version.hashCode();
+        result = 31 * result + (version != null ? version.hashCode() : 0);
         return result;
     }
 }

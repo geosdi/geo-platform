@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.connector;
 import org.geosdi.geoplatform.connector.api.AbstractConnectorBuilder;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static org.geosdi.geoplatform.connector.WFSVersion.fromString;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -64,9 +65,8 @@ public class WFSConnectorBuilder extends AbstractConnectorBuilder<WFSConnectorBu
      */
     @Override
     public GPWFSConnectorStore build() throws Exception {
-        checkArgument(this.serverUrl != null,
-                "Error on WFS_110 Server Connector build: Server URL must not be null");
-        WFSVersion v = WFSVersion.fromString(version);
+        checkArgument(this.serverUrl != null, "Error on WFS_110 Server Connector build: Server URL must not be null");
+        WFSVersion v = fromString(version);
         return new GPWFSConnectorStore(serverUrl, pooledConnectorConfig, securityConnector, v);
     }
 }

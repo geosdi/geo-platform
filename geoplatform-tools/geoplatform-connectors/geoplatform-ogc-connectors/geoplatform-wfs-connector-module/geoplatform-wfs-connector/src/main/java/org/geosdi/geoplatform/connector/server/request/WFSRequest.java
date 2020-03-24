@@ -36,7 +36,6 @@ package org.geosdi.geoplatform.connector.server.request;
 
 import org.apache.hc.core5.http.HttpEntity;
 import org.apache.hc.core5.http.io.entity.StringEntity;
-import org.geosdi.geoplatform.connector.jaxb.repository.JAXBContextConnectorRepository;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.jaxb.GPBaseJAXBContext;
 
@@ -47,18 +46,19 @@ import java.io.StringWriter;
 
 import static javax.annotation.meta.When.NEVER;
 import static org.apache.hc.core5.http.ContentType.APPLICATION_XML;
+import static org.geosdi.geoplatform.connector.jaxb.repository.JAXBContextConnectorRepository.getProvider;
 import static org.geosdi.geoplatform.connector.jaxb.repository.WFSConnectorJAXBContext.WFS_CONTEXT_KEY;
 
 /**
+ * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public abstract class WFSRequest<T, Request> extends GPPostConnectorRequest<T, Request> {
 
     static {
-        wfsContext = JAXBContextConnectorRepository.getProvider(WFS_CONTEXT_KEY);
+        wfsContext = getProvider(WFS_CONTEXT_KEY);
     }
 
-    //
     private static final GPBaseJAXBContext wfsContext;
 
     /**

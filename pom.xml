@@ -119,7 +119,7 @@
             </snapshots>
         </repository>
         
-        <repository>
+        <!--repository>
             <id>boundlessgeo</id>
             <name>Open Source Geospatial Foundation Repository</name>
             <url>https://repo.boundlessgeo.com/release/</url>
@@ -132,7 +132,7 @@
             <id>boundless</id>
             <name>Boundless Maven Repository</name>
             <url>https://repo.boundlessgeo.com/main</url>
-        </repository>
+        </repository-->
         
         <!-- GWTQUERY-UI PLUGIN -->
         <repository>

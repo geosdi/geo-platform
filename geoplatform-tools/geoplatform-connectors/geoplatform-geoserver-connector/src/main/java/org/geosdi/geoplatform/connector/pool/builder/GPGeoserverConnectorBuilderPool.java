@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.connector.pool.builder;
 
 import org.apache.commons.pool2.impl.GenericKeyedObjectPool;
+import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.api.AbstractConnectorBuilder;
 import org.geosdi.geoplatform.connector.api.pool.GPPoolConnectorConfig;
 import org.geosdi.geoplatform.connector.pool.factory.GPGeoserverConnectorFactory;
@@ -45,6 +46,7 @@ import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static org.geosdi.geoplatform.connector.GeoserverVersion.fromString;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -66,7 +68,7 @@ public class GPGeoserverConnectorBuilderPool extends AbstractConnectorBuilder<GP
     /**
      * @return {@link GPGeoserverConnectorBuilderPool}
      */
-    public static GPGeoserverConnectorBuilderPool builderPool() {
+    public static GPGeoserverConnectorBuilderPool geoserverConnectorBuilderPool() {
         return new GPGeoserverConnectorBuilderPool();
     }
 
@@ -86,8 +88,9 @@ public class GPGeoserverConnectorBuilderPool extends AbstractConnectorBuilder<GP
     @Override
     public GPGeoserverConnectorStore build() throws Exception {
         checkNotNull(serverUrl, "Geoserver Connector Server URL must not be null.");
+        GeoserverVersion v = fromString(this.version);
         GPPoolGeoserverConnectorKey key = new GPPoolGeoserverConnectorKey(serverUrl, pooledConnectorConfig,
-                securityConnector, version, ((this.jacksonSupport != null) ? this.jacksonSupport : new GPJacksonSupport()));
+                securityConnector, v.getVersion(), ((this.jacksonSupport != null) ? this.jacksonSupport : new GPJacksonSupport()));
         GPGeoserverConnectorStore geoserverConnectorStore = geoserverConnectorPool.borrowObject(key);
         return geoserverConnectorStore;
     }

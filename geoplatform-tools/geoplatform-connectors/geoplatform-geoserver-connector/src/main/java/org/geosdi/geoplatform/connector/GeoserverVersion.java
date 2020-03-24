@@ -94,6 +94,6 @@ public enum GeoserverVersion implements GPServerConnector.GPServerConnectorVersi
                 .filter(Objects::nonNull)
                 .filter(v -> ((version != null) && !(version.trim().isEmpty())) ? v.getVersion().equalsIgnoreCase(version) : FALSE)
                 .findFirst();
-        return ((optional != null) && (optional.isPresent()) ? optional.get() : GeoserverVersion.V216x);
+        return (((optional != null) && (optional.isPresent())) ? optional.get() : GeoserverVersion.V216x);
     }
 }

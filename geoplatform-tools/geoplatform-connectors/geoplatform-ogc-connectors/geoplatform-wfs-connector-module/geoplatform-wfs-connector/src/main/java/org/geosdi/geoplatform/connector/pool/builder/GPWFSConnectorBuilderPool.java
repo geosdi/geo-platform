@@ -37,12 +37,14 @@ package org.geosdi.geoplatform.connector.pool.builder;
 
 import org.apache.commons.pool2.impl.GenericKeyedObjectPool;
 import org.geosdi.geoplatform.connector.GPWFSConnectorStore;
+import org.geosdi.geoplatform.connector.WFSVersion;
 import org.geosdi.geoplatform.connector.api.AbstractConnectorBuilder;
 import org.geosdi.geoplatform.connector.api.pool.GPPoolConnectorConfig;
 import org.geosdi.geoplatform.connector.api.pool.GPPoolConnectorKey;
 import org.geosdi.geoplatform.connector.pool.factory.GPWFSConnectorFactory;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static org.geosdi.geoplatform.connector.WFSVersion.fromString;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -56,10 +58,10 @@ public class GPWFSConnectorBuilderPool extends AbstractConnectorBuilder<GPWFSCon
 
     private static final GenericKeyedObjectPool<GPPoolConnectorKey, GPWFSConnectorStore> wfsConnectorPool;
 
-    protected GPWFSConnectorBuilderPool() {
+    private GPWFSConnectorBuilderPool() {
     }
 
-    public static GPWFSConnectorBuilderPool newInstance() {
+    public static GPWFSConnectorBuilderPool wfsConnectorBuilderPool() {
         return new GPWFSConnectorBuilderPool();
     }
 
@@ -70,7 +72,8 @@ public class GPWFSConnectorBuilderPool extends AbstractConnectorBuilder<GPWFSCon
     @Override
     public GPWFSConnectorStore build() throws Exception {
         checkNotNull(serverUrl, "WFS_110 Server URL must not be null.");
-        GPPoolConnectorKey keyConnector = new GPPoolConnectorKey(serverUrl, pooledConnectorConfig, securityConnector, version);
+        WFSVersion v = fromString(this.version);
+        GPPoolConnectorKey keyConnector = new GPPoolConnectorKey(serverUrl, pooledConnectorConfig, securityConnector, v.getVersion());
         GPWFSConnectorStore wfsStore = wfsConnectorPool.borrowObject(keyConnector);
         wfsConnectorPool.returnObject(keyConnector, wfsStore);
         return wfsStore;

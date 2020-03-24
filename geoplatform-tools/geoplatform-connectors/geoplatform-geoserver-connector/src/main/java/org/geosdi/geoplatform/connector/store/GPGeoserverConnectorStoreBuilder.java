@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.store;
 
+import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.api.AbstractConnectorBuilder;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
@@ -86,7 +87,8 @@ public final class GPGeoserverConnectorStoreBuilder extends AbstractConnectorBui
     @Override
     public GPGeoserverConnectorStore build() throws Exception {
         checkArgument(this.serverUrl != null, "Server URL must not be null");
+        GeoserverVersion v = fromString(this.version);
         return new GPGeoserverConnectorStore(this.serverUrl, this.pooledConnectorConfig, this.securityConnector,
-                ((this.jacksonSupport != null) ? this.jacksonSupport : new GPJacksonSupport().configure(NON_NULL)), fromString(this.version));
+                ((this.jacksonSupport != null) ? this.jacksonSupport : new GPJacksonSupport().configure(NON_NULL)), v);
     }
 }

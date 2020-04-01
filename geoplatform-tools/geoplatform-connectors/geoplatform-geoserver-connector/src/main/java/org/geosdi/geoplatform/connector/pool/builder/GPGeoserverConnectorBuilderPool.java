@@ -35,18 +35,20 @@
  */
 package org.geosdi.geoplatform.connector.pool.builder;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.pool2.impl.GenericKeyedObjectPool;
 import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.api.AbstractConnectorBuilder;
 import org.geosdi.geoplatform.connector.api.pool.GPPoolConnectorConfig;
 import org.geosdi.geoplatform.connector.pool.factory.GPGeoserverConnectorFactory;
-import org.geosdi.geoplatform.connector.pool.key.GPPoolGeoserverConnectorKey;
+import org.geosdi.geoplatform.connector.pool.key.IGPPoolGeoserverConnectorKey;
 import org.geosdi.geoplatform.connector.store.GPGeoserverConnectorStore;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static org.geosdi.geoplatform.connector.GeoserverVersion.fromString;
+import static org.geosdi.geoplatform.connector.pool.key.IGPPoolGeoserverConnectorKey.of;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -58,7 +60,7 @@ public class GPGeoserverConnectorBuilderPool extends AbstractConnectorBuilder<GP
         geoserverConnectorPool = new GenericKeyedObjectPool<>(new GPGeoserverConnectorFactory(), new GPPoolConnectorConfig());
     }
 
-    private static final GenericKeyedObjectPool<GPPoolGeoserverConnectorKey, GPGeoserverConnectorStore> geoserverConnectorPool;
+    private static final GenericKeyedObjectPool<IGPPoolGeoserverConnectorKey, GPGeoserverConnectorStore> geoserverConnectorPool;
     //
     private JacksonSupport jacksonSupport;
 
@@ -89,9 +91,15 @@ public class GPGeoserverConnectorBuilderPool extends AbstractConnectorBuilder<GP
     public GPGeoserverConnectorStore build() throws Exception {
         checkNotNull(serverUrl, "Geoserver Connector Server URL must not be null.");
         GeoserverVersion v = fromString(this.version);
-        GPPoolGeoserverConnectorKey key = new GPPoolGeoserverConnectorKey(serverUrl, pooledConnectorConfig,
-                securityConnector, v.getVersion(), ((this.jacksonSupport != null) ? this.jacksonSupport : new GPJacksonSupport()));
+        IGPPoolGeoserverConnectorKey key = of(serverUrl, pooledConnectorConfig, securityConnector, v.getVersion(), this::toJacksonSupport);
         GPGeoserverConnectorStore geoserverConnectorStore = geoserverConnectorPool.borrowObject(key);
         return geoserverConnectorStore;
+    }
+
+    /**
+     * @return {@link JacksonSupport}
+     */
+    ObjectMapper toJacksonSupport() {
+        return ((this.jacksonSupport != null) ? this.jacksonSupport.getDefaultMapper() : new GPJacksonSupport().getDefaultMapper());
     }
 }

@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.store;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.api.AbstractConnectorBuilder;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
@@ -88,7 +89,13 @@ public final class GPGeoserverConnectorStoreBuilder extends AbstractConnectorBui
     public GPGeoserverConnectorStore build() throws Exception {
         checkArgument(this.serverUrl != null, "Server URL must not be null");
         GeoserverVersion v = fromString(this.version);
-        return new GPGeoserverConnectorStore(this.serverUrl, this.pooledConnectorConfig, this.securityConnector,
-                ((this.jacksonSupport != null) ? this.jacksonSupport : new GPJacksonSupport().configure(NON_NULL)), v);
+        return new GPGeoserverConnectorStore(this.serverUrl, this.pooledConnectorConfig, this.securityConnector, this::toJacksonSupport, v);
+    }
+
+    /**
+     * @return {@link ObjectMapper}
+     */
+    ObjectMapper toJacksonSupport() {
+        return ((this.jacksonSupport != null) ? this.jacksonSupport.getDefaultMapper() : new GPJacksonSupport().configure(NON_NULL).getDefaultMapper());
     }
 }

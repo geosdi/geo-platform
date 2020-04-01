@@ -32,6 +32,14 @@
     </dependencyManagement>
 
     <dependencies>
+        <!-- =========================================================== -->
+        <!-- ========================== RX3Java ======================== -->
+        <!-- =========================================================== -->
+        <dependency>
+            <groupId>io.reactivex.rxjava3</groupId>
+            <artifactId>rxjava</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>

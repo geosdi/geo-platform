@@ -94,8 +94,7 @@ public interface GPJacksonReaderSupport<T extends Object> {
      * @return {@link V}
      * @throws Exception
      */
-    <V extends Object> V read(@Nonnull(when = NEVER) String entityAsString,
-            @Nonnull(when = NEVER) Class<V> classe) throws Exception;
+    <V extends Object> V read(@Nonnull(when = NEVER) String entityAsString, @Nonnull(when = NEVER) Class<V> classe) throws Exception;
 
     /**
      * @param reader
@@ -104,8 +103,7 @@ public interface GPJacksonReaderSupport<T extends Object> {
      * @return {@link V}
      * @throws Exception
      */
-    <V extends Object> V read(@Nonnull(when = NEVER) Reader reader,
-            @Nonnull(when = NEVER) Class<V> classe) throws Exception;
+    <V extends Object> V read(@Nonnull(when = NEVER) Reader reader, @Nonnull(when = NEVER) Class<V> classe) throws Exception;
 
     /**
      * @param direrctory
@@ -124,8 +122,7 @@ public interface GPJacksonReaderSupport<T extends Object> {
      * @return {@link T}
      */
     default T read(@Nonnull(when = NEVER) Path thePath) {
-        checkArgument((thePath != null) && (thePath.toFile()
-                .exists()), "The Parameter Path must not be null and the Associated File must exist.");
+        checkArgument((thePath != null) && !(thePath.toFile().isDirectory()) && (thePath.toFile().exists()), "The Parameter Path must not be null and the Associated File must exist.");
         try {
             return this.read(thePath.toFile());
         } catch (Exception ex) {

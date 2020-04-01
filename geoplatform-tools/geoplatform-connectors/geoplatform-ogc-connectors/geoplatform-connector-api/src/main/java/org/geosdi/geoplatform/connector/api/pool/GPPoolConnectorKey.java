@@ -45,7 +45,6 @@ import org.geosdi.geoplatform.support.httpclient.proxy.HttpClientProxyConfigurat
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.io.Serializable;
 import java.net.URL;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -59,7 +58,7 @@ import static javax.annotation.meta.When.NEVER;
 @Getter
 @EqualsAndHashCode(of = {"serverUrl"})
 @ToString
-public class GPPoolConnectorKey implements Serializable {
+public class GPPoolConnectorKey implements IGPPoolConnectorKey {
 
     private static final long serialVersionUID = -8061531021403355124L;
     //

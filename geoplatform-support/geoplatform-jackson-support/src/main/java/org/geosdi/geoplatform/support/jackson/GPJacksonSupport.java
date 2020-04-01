@@ -42,14 +42,19 @@ import com.fasterxml.jackson.databind.introspect.AnnotationIntrospectorPair;
 import com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector;
 import com.fasterxml.jackson.module.jaxb.JaxbAnnotationIntrospector;
 import org.geosdi.geoplatform.support.jackson.property.JacksonSupportConfigFeature;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import javax.annotation.Nonnull;
 import java.text.DateFormat;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.TimeZone;
 
 import static com.fasterxml.jackson.databind.type.TypeFactory.defaultInstance;
-import static java.util.stream.Stream.of;
+import static com.google.common.base.Preconditions.checkArgument;
+import static io.reactivex.rxjava3.core.Observable.fromArray;
+import static javax.annotation.meta.When.NEVER;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 
 /**
@@ -58,6 +63,8 @@ import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEn
  */
 public class GPJacksonSupport implements JacksonSupport {
 
+    private static final Logger logger = LoggerFactory.getLogger(GPJacksonSupport.class);
+    //
     private final ObjectMapper mapper;
 
     public GPJacksonSupport() {
@@ -67,7 +74,7 @@ public class GPJacksonSupport implements JacksonSupport {
     /**
      * @param format
      */
-    public GPJacksonSupport(DateFormat format) {
+    public GPJacksonSupport(@Nonnull(when = NEVER) DateFormat format) {
         this();
         this.mapper.setDateFormat(format);
     }
@@ -75,12 +82,16 @@ public class GPJacksonSupport implements JacksonSupport {
     /**
      * @param features
      */
-    public GPJacksonSupport(JacksonSupportConfigFeature... features) {
-        mapper = new ObjectMapper();
-        of(features).filter(Objects::nonNull).forEach(f -> f.configureMapper(mapper));
+    public GPJacksonSupport(@Nonnull(when = NEVER) JacksonSupportConfigFeature... features) {
+        checkArgument(features != null, "The Parameter features must not be null.");
+        this.mapper = new ObjectMapper();
+        fromArray(features)
+                .filter(Objects::nonNull)
+                .doOnComplete(() -> logger.info("##############{} configure all Features.", this.getProviderName()))
+                .subscribe(f -> f.configureMapper(this.getDefaultMapper()), e -> e.printStackTrace());
         AnnotationIntrospector primary = new JaxbAnnotationIntrospector(defaultInstance());
         AnnotationIntrospector secondary = new JacksonAnnotationIntrospector();
-        mapper.setAnnotationIntrospector(new AnnotationIntrospectorPair(primary, secondary));
+        this.mapper.setAnnotationIntrospector(new AnnotationIntrospectorPair(primary, secondary));
     }
 
     /**
@@ -88,7 +99,8 @@ public class GPJacksonSupport implements JacksonSupport {
      * @return {@link JacksonSupport}
      */
     @Override
-    public JacksonSupport setDateFormat(DateFormat format) {
+    public JacksonSupport setDateFormat(@Nonnull(when = NEVER) DateFormat format) {
+        checkArgument(format != null, "The Parameter format must not be null.");
         this.mapper.setDateFormat(format);
         return this;
     }
@@ -124,7 +136,8 @@ public class GPJacksonSupport implements JacksonSupport {
      * @return {@link GPJacksonSupport}
      */
     @Override
-    public GPJacksonSupport configure(JacksonSupportConfigFeature feature) {
+    public GPJacksonSupport configure(@Nonnull(when = NEVER) JacksonSupportConfigFeature feature) {
+        checkArgument(feature != null, "The Parameter feature must not be null.");
         feature.configureMapper(mapper);
         return this;
     }
@@ -134,10 +147,12 @@ public class GPJacksonSupport implements JacksonSupport {
      * @return {@link GPJacksonSupport}
      */
     @Override
-    public GPJacksonSupport configure(JacksonSupportConfigFeature... features) {
-        for (JacksonSupportConfigFeature feature : features) {
-            feature.configureMapper(mapper);
-        }
+    public GPJacksonSupport configure(@Nonnull(when = NEVER) JacksonSupportConfigFeature... features) {
+        checkArgument(features != null, "The Parameter features must not be null.");
+        fromArray(features)
+                .filter(Objects::nonNull)
+                .doOnComplete(() -> logger.info("##############{} configure all Features.", this.getProviderName()))
+                .subscribe(f -> f.configureMapper(this.getDefaultMapper()), e -> e.printStackTrace());
         return this;
     }
 
@@ -146,7 +161,8 @@ public class GPJacksonSupport implements JacksonSupport {
      * @return {@link GPJacksonSupport}
      */
     @Override
-    public GPJacksonSupport setLocale(Locale locale) {
+    public GPJacksonSupport setLocale(@Nonnull(when = NEVER) Locale locale) {
+        checkArgument(locale != null, "The Parameter locale must not be null.");
         this.mapper.setLocale(locale);
         return this;
     }
@@ -156,7 +172,8 @@ public class GPJacksonSupport implements JacksonSupport {
      * @return {@link GPJacksonSupport}
      */
     @Override
-    public GPJacksonSupport setTimeZone(TimeZone timeZone) {
+    public GPJacksonSupport setTimeZone(@Nonnull(when = NEVER) TimeZone timeZone) {
+        checkArgument(timeZone != null, "The Parameter timeZone must not be null.");
         this.mapper.setTimeZone(timeZone);
         return this;
     }

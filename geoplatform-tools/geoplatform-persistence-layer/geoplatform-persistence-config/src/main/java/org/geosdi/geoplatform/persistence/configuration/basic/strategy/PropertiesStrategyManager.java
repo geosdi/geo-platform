@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.persistence.configuration.basic.strategy;
 
-import java.util.Properties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -43,14 +42,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import java.util.Properties;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Component(value = "hibPropStrategyManager")
-public class PropertiesStrategyManager
-        implements InitializingBean {
+public class PropertiesStrategyManager implements InitializingBean {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
@@ -65,27 +65,40 @@ public class PropertiesStrategyManager
      * 
      * @return Properties Configuration
      */
-    public Properties getProperties() {
-        return luceneHibProp != null ? luceneHibProp.hibernateProperties()
-               : hibernateProperties;
+    public Properties getProperties() throws Exception {
+        return luceneHibProp != null ? luceneHibProp.hibernateProperties() : hibernateProperties;
     }
 
+    /**
+     * Invoked by the containing {@code BeanFactory} after it has set all bean properties
+     * and satisfied {@link org.springframework.beans.factory.BeanFactoryAware  StringBuilder builder = new StringBuilder();
+     *         builder.append("PropertiesStrategyManager Configuration ###################");
+     *         builder.append("\n\n");
+     *         builder.append("Strategy Used : ");
+     *         builder.append(printStrategy());
+     *         builder.append("\n\n");
+     *         logger.info(builder.toString());}, {@code ApplicationContextAware} etc.
+     * <p>This method allows the bean instance to perform validation of its overall
+     * configuration and final initialization when all bean properties have been set.
+     *
+     * @throws Exception in the event of misconfiguration (such as failure to set an
+     *                   essential property) or if initialization fails for any other reason
+     */
     @Override
     public void afterPropertiesSet() throws Exception {
         StringBuilder builder = new StringBuilder();
-        builder.append("PropertiesStrategyManager Configuration ############"
-                + "#######");
+        builder.append("PropertiesStrategyManager Configuration ###################");
         builder.append("\n\n");
         builder.append("Strategy Used : ");
         builder.append(printStrategy());
         builder.append("\n\n");
-
         logger.info(builder.toString());
     }
 
+    /**
+     * @return {@link String}
+     */
     private String printStrategy() {
-        return luceneHibProp != null
-               ? "Hibernate annd Lucene Configuration : " + luceneHibProp
-               : "Basic Hibernate Configuration. ";
+        return ((luceneHibProp != null) ? "Hibernate annd Lucene Configuration : " + luceneHibProp : "Basic Hibernate Configuration.");
     }
 }

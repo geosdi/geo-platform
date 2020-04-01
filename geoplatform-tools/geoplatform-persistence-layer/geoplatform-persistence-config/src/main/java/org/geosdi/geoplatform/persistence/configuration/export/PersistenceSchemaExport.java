@@ -47,6 +47,8 @@ import javax.annotation.Resource;
 import java.io.File;
 import java.util.EnumSet;
 
+import static java.io.File.separator;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -76,19 +78,15 @@ public abstract class PersistenceSchemaExport implements InitializingBean {
     protected final void exportSchema(Metadata metadata) {
         switch (this.gpTargetType) {
             case SCRIPT:
-                String schemaExportDirPath = this.userHome + File.separator + SCHEMA_EXPORT_DIR_NAME;
+                String schemaExportDirPath = this.userHome + separator + SCHEMA_EXPORT_DIR_NAME;
                 File dirPath = new File(schemaExportDirPath);
-
                 if (!dirPath.exists()) {
                     boolean success = dirPath.mkdirs();
-
                     if (!success) {
-                        throw new SecurityException(
-                                "It was not possible to create " + "the schema.sql in the User Home Directory.");
+                        throw new SecurityException("It was not possible to create the schema.sql in the User Home Directory.");
                     }
                 }
-
-                String schemaExportFilePath = schemaExportDirPath + File.separator
+                String schemaExportFilePath = schemaExportDirPath + separator
                         + ((getSchemaFileName() != null) && !(getSchemaFileName().isEmpty()) ? getSchemaFileName() : "schema.sql");
                 File schemaFile = new File(schemaExportFilePath);
                 if (schemaFile.exists()) {
@@ -98,7 +96,6 @@ public abstract class PersistenceSchemaExport implements InitializingBean {
                 logger.info("@@@@@@@@@@@@@@@@@@@@@@GeoPlatform-PersistenceLayer: schema database generated at path {}\n",
                         schemaExportFilePath);
         }
-
         schema.setFormat(true);
         schema.setDelimiter(";");
         schema.create(EnumSet.of(this.gpTargetType), metadata);

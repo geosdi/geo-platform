@@ -51,6 +51,8 @@ import org.springframework.stereotype.Component;
 import java.util.Properties;
 import java.util.Set;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -68,13 +70,11 @@ public class GPHibernateSchemaExport extends PersistenceSchemaExport {
 
     @Override
     protected void createSchema() {
-        if ((this.generateSchema != null) && (this.generateSchema.equalsIgnoreCase("generate"))) {
+        checkArgument(this.reflectionsSchemaExport != null, "The Parameter reflectionsSchemaExport must not be null.");
+        checkArgument(this.hibernateProperties != null, "The Parameter hibernateProperties must not be null.");
+        if ((this.generateSchema != null) && !(this.generateSchema.trim().isEmpty()) && (this.generateSchema.equalsIgnoreCase("generate"))) {
             Set<Class<?>> annotatedClasses = reflectionsSchemaExport.getAnnotatedClasses();
-
-            if (annotatedClasses.isEmpty()) {
-                throw new IllegalStateException("There are no Classes Annotated with" + " @Entity Annotations.");
-            }
-
+            checkArgument(!annotatedClasses.isEmpty(), "There are no Classes Annotated with @Entity Annotations.");
             ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                     .applySettings(hibernateProperties)
                     .build();

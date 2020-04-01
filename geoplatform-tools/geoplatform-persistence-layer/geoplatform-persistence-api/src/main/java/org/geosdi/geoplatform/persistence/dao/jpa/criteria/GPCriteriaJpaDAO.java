@@ -35,17 +35,22 @@
  */
 package org.geosdi.geoplatform.persistence.dao.jpa.criteria;
 
-import com.google.common.base.Preconditions;
 import org.geosdi.geoplatform.persistence.dao.GPAbstractBaseDAO;
 import org.geosdi.geoplatform.persistence.dao.exception.GPDAOException;
-import org.hibernate.*;
+import org.hibernate.Cache;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
+import javax.annotation.Nonnull;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.*;
 import java.io.Serializable;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -149,8 +154,8 @@ public abstract class GPCriteriaJpaDAO<T extends Object, ID extends Serializable
      */
     @PersistenceContext
     @Override
-    public void setEm(EntityManager theEntityManager) {
-        Preconditions.checkNotNull(theEntityManager);
+    public void setEm(@Nonnull(when = NEVER) EntityManager theEntityManager) {
+        checkNotNull(theEntityManager);
         this.entityManager = theEntityManager;
     }
 

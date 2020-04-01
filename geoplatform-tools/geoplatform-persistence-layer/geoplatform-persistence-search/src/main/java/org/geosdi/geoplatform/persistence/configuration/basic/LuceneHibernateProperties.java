@@ -44,6 +44,8 @@ import javax.annotation.Resource;
 import java.util.Map;
 import java.util.Properties;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -58,8 +60,14 @@ public class LuceneHibernateProperties implements PersistenceHibernateStrategy {
     @Resource(name = "persistenceSearchProperties")
     private Map<String, String> persistenceSearchProperties;
 
+    /**
+     * @return {@link Properties}
+     * @throws Exception
+     */
     @Override
-    public Properties hibernateProperties() {
+    public Properties hibernateProperties() throws Exception {
+        checkArgument(this.hibernateProperties != null, "The Parameter hibernateProperties must not be null.");
+        checkArgument(this.persistenceSearchProperties != null, "The Parameter persistenceSearchProperties must not be null.");
         hibernateProperties.putAll(this.persistenceSearchProperties);
         return hibernateProperties;
     }

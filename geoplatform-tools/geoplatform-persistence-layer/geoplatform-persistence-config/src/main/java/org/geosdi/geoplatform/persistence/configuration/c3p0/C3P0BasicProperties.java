@@ -65,57 +65,49 @@ class C3P0BasicProperties implements GPC3P0Config {
      * @return the acquireIncrement
      */
     public Integer getAcquireIncrement() {
-        return acquireIncrement = (acquireIncrement == null)
-                ? this.defaultAcquireIncrement() : acquireIncrement;
+        return acquireIncrement = ((acquireIncrement == null) ? this.defaultAcquireIncrement() : acquireIncrement);
     }
 
     /**
      * @return the acquireRetryAttempts
      */
     public Integer getAcquireRetryAttempts() {
-        return acquireRetryAttempts = (acquireRetryAttempts == null)
-                ? this.defaultAcquireRetryAttempts() : acquireRetryAttempts;
+        return (acquireRetryAttempts = (acquireRetryAttempts == null) ? this.defaultAcquireRetryAttempts() : acquireRetryAttempts);
     }
 
     /**
      * @return the minPoolSize
      */
     public Integer getMinPoolSize() {
-        return minPoolSize = (minPoolSize == null) ? this.defaultMinPoolSize()
-                : minPoolSize;
+        return minPoolSize = ((minPoolSize == null) ? this.defaultMinPoolSize() : minPoolSize);
     }
 
     /**
      * @return the maxPoolSize
      */
     public Integer getMaxPoolSize() {
-        return maxPoolSize = (maxPoolSize == null) ? this.defaultMaxPoolSize()
-                : maxPoolSize;
+        return maxPoolSize = ((maxPoolSize == null) ? this.defaultMaxPoolSize() : maxPoolSize);
     }
 
     /**
      * @return the maxIdleTime
      */
     public Integer getMaxIdleTime() {
-        return maxIdleTime = (maxIdleTime == null) ? this.defaultMaxIdleTime()
-                : maxIdleTime;
+        return maxIdleTime = ((maxIdleTime == null) ? this.defaultMaxIdleTime() : maxIdleTime);
     }
 
     /**
      * @return the maxConnectionAge
      */
     public Integer getMaxConnectionAge() {
-        return maxConnectionAge = (maxConnectionAge == null) ? this.defaultMaxConnectionAge()
-                : maxConnectionAge;
+        return maxConnectionAge = ((maxConnectionAge == null) ? this.defaultMaxConnectionAge() : maxConnectionAge);
     }
 
     /**
      * @return the connectionCustomizerClassName
      */
     public String getConnectionCustomizerClassName() {
-        return connectionCustomizerClassName = (connectionCustomizerClassName == null)
-                ? CONNECTION_CUSTOMIZER_CLASS
-                : connectionCustomizerClassName;
+        return connectionCustomizerClassName = ((connectionCustomizerClassName == null) ? CONNECTION_CUSTOMIZER_CLASS : connectionCustomizerClassName);
     }
 
     @Override

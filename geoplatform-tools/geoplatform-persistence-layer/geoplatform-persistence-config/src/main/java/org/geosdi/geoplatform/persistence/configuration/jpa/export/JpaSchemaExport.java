@@ -68,7 +68,7 @@ public class JpaSchemaExport extends PersistenceSchemaExport {
 
     @Override
     protected void createSchema() {
-        if ((this.generateSchema != null) && (this.generateSchema.equalsIgnoreCase("generate"))) {
+        if ((this.generateSchema != null) && !(this.generateSchema.trim().isEmpty()) && (this.generateSchema.equalsIgnoreCase("generate"))) {
             Set<Class<?>> annotatedClasses = reflectionsSchemaExport.getAnnotatedClasses();
 
             if (annotatedClasses.isEmpty()) {

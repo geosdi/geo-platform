@@ -80,24 +80,21 @@ public class GPPersistenceHibProperties {
      * @return the hibGenerateDdl
      */
     public Boolean isHibGenerateDdl() {
-        return this.hibGenerateDdl = ((hibGenerateDdl == null) ? FALSE
-                : hibGenerateDdl);
+        return this.hibGenerateDdl = ((hibGenerateDdl == null) ? FALSE : hibGenerateDdl);
     }
 
     /**
      * @return the hibHbm2ddlAuto
      */
     public String getHibHbm2ddlAuto() {
-        return this.hibHbm2ddlAuto = ((hibHbm2ddlAuto != null)
-                ? this.hibHbm2ddlAuto : "validate");
+        return this.hibHbm2ddlAuto = ((hibHbm2ddlAuto != null) ? this.hibHbm2ddlAuto : "validate");
     }
 
     /**
      * @return the hibGenerateStatistics
      */
     public Boolean isHibGenerateStatistics() {
-        return this.hibGenerateStatistics = ((hibGenerateStatistics == null)
-                ? FALSE : hibGenerateStatistics);
+        return this.hibGenerateStatistics = ((hibGenerateStatistics == null) ? FALSE : hibGenerateStatistics);
     }
 
     /**

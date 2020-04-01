@@ -47,6 +47,8 @@ import org.springframework.context.annotation.Configuration;
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -62,18 +64,23 @@ class PersistenceDataSourceConfig {
     @Resource(name = "c3p0BasicProperties")
     private GPC3P0Config c3p0BasicProperties;
 
+    /**
+     * @return {@link DataSource}
+     * @throws Exception
+     */
     @Bean
     public DataSource persitenceDataSource() throws Exception {
+        checkArgument(this.gpPersistenceConnector != null, "The Parameter gpPersistenceConnector must not be null.");
+        checkArgument(this.c3p0BasicProperties != null, "The Parameter c3p0BasicProperties must not be null.");
         ComboPooledDataSource dataSource = new ComboPooledDataSource();
         dataSource.setDriverClass(this.gpPersistenceConnector.getDriverClassName());
         dataSource.setJdbcUrl(this.gpPersistenceConnector.getUrl());
         dataSource.setUser(this.gpPersistenceConnector.getUsername());
         dataSource.setPassword(this.gpPersistenceConnector.getPassword());
-
         /**
          * ************************ Poll Settings ****************************
          */
-        logger.debug("\n\n C3P0 POOL SETTINGS @@@@@@@@@@@@@@@ {}\n\n", c3p0BasicProperties);
+        logger.debug("\n\n################# C3P0 POOL SETTINGS @@@@@@@@@@@@@@@ {}\n\n", c3p0BasicProperties);
         dataSource.setAcquireIncrement(c3p0BasicProperties.getAcquireIncrement());
         dataSource.setAcquireRetryAttempts(c3p0BasicProperties.getAcquireRetryAttempts());
         dataSource.setInitialPoolSize(c3p0BasicProperties.getMinPoolSize());

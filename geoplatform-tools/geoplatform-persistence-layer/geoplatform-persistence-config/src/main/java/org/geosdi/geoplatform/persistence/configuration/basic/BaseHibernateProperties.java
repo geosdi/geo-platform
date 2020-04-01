@@ -46,6 +46,7 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.Properties;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.FALSE;
 
 /**
@@ -53,9 +54,9 @@ import static java.lang.Boolean.FALSE;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Configuration
-public class BaseHibernateProperties implements PersistenceHibernateStrategy {
+class BaseHibernateProperties implements PersistenceHibernateStrategy {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private static final Logger logger = LoggerFactory.getLogger(BaseHibernateProperties.class);
     //
     @Autowired
     private GPPersistenceHibProperties gpHibernateProperties;
@@ -63,41 +64,33 @@ public class BaseHibernateProperties implements PersistenceHibernateStrategy {
     @Autowired(required = false)
     private GPHibernateCacheProvider gpCacheProviderSupport;
 
+    /**
+     * @return {@link Properties}
+     * @throws Exception
+     */
     @Bean
     @Override
-    public Properties hibernateProperties() {
+    public Properties hibernateProperties() throws Exception {
+        checkArgument(gpHibernateProperties != null, "The Persistence Hibernate Properties obj must not be null");
+        checkArgument((gpHibernateProperties.getHibDatabasePlatform() != null) && !(gpHibernateProperties.getHibDatabasePlatform().trim().isEmpty()), "Database Dialect must not be null");
         return new Properties() {
 
             private static final long serialVersionUID = 3109256773218160485L;
 
             {
-                if (gpHibernateProperties == null) {
-                    throw new IllegalArgumentException("The Persistence Hibernate Properties obj must not be null");
-                }
-
-                logger.debug("Hibernate Properties " + gpHibernateProperties);
-
-                if (gpHibernateProperties.getHibDatabasePlatform() == null) {
-                    throw new IllegalStateException("Database Dialect must not be null.");
-                }
-
+                logger.debug("################### Hibernate Properties : {}\n", gpHibernateProperties);
                 this.put("hibernate.dialect", gpHibernateProperties.getHibDatabasePlatform());
-
                 this.put("hibernate.hbm2ddl.auto", gpHibernateProperties.getHibHbm2ddlAuto());
                 this.put("hibernate.show_sql", gpHibernateProperties.isHibShowSql());
                 this.put("hibernate.generate_statistics", gpHibernateProperties.isHibGenerateStatistics());
                 this.put("hibernate.temp.use_jdbc_metadata_defaults", FALSE);
-
-                if (gpHibernateProperties.getHibDefaultSchema() != null) {
+                if ((gpHibernateProperties.getHibDefaultSchema() != null) && !(gpHibernateProperties.getHibDefaultSchema().trim().isEmpty())) {
                     this.put("hibernate.default_schema", gpHibernateProperties.getHibDefaultSchema());
                 }
-
                 if (gpCacheProviderSupport != null) {
                     this.putAll(gpCacheProviderSupport.getCacheProviderProperties());
                 }
             }
-
         };
     }
-
 }

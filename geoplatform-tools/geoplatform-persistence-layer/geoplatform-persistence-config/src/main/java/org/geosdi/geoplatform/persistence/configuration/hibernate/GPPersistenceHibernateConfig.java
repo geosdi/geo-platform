@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.persistence.configuration.hibernate;
 
 import org.geosdi.geoplatform.persistence.configuration.basic.strategy.PropertiesStrategyManager;
 import org.geosdi.geoplatform.persistence.configuration.properties.GPPersistenceConnector;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -46,8 +46,11 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import javax.annotation.Resource;
+import javax.annotation.Nonnull;
 import javax.sql.DataSource;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -58,17 +61,32 @@ import javax.sql.DataSource;
 @EnableTransactionManagement
 class GPPersistenceHibernateConfig {
 
-    @Autowired
-    private GPPersistenceConnector gpPersistenceConnector;
-    //
-    @Resource(name = "persitenceDataSource")
-    private DataSource persitenceDataSource;
-    //
-    @Autowired
-    private PropertiesStrategyManager hibPropStrategyManager;
+    private final GPPersistenceConnector gpPersistenceConnector;
+    private final DataSource persitenceDataSource;
+    private final PropertiesStrategyManager hibPropStrategyManager;
 
+    /**
+     * @param theGPPersistenceConnector
+     * @param thePersitenceDataSource
+     * @param theHibPropStrategyManager
+     */
+    GPPersistenceHibernateConfig(@Nonnull(when = NEVER) GPPersistenceConnector theGPPersistenceConnector,
+            @Nonnull(when = NEVER) @Qualifier(value = "persitenceDataSource") DataSource thePersitenceDataSource,
+            @Nonnull(when = NEVER) PropertiesStrategyManager theHibPropStrategyManager) {
+        checkArgument(theGPPersistenceConnector != null, "The Parameter gpPersistenceConnector must not be null.");
+        checkArgument(thePersitenceDataSource != null, "The Parameter persitenceDataSource must not be null.");
+        checkArgument(theHibPropStrategyManager != null, "The Parameter hibPropStrategyManager must not be null.");
+        this.gpPersistenceConnector = theGPPersistenceConnector;
+        this.persitenceDataSource = thePersitenceDataSource;
+        this.hibPropStrategyManager = theHibPropStrategyManager;
+    }
+
+    /**
+     * @return {@link LocalSessionFactoryBean}
+     * @throws Exception
+     */
     @Bean
-    public LocalSessionFactoryBean gpSessionFactoryBean() {
+    public LocalSessionFactoryBean gpSessionFactoryBean() throws Exception {
         LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
         factoryBean.setDataSource(this.persitenceDataSource);
         factoryBean.setPackagesToScan(this.gpPersistenceConnector.getPackagesToScan());
@@ -76,13 +94,20 @@ class GPPersistenceHibernateConfig {
         return factoryBean;
     }
 
+    /**
+     * @return {@link HibernateTransactionManager}
+     * @throws Exception
+     */
     @Bean
-    public HibernateTransactionManager transactionManager() {
+    public HibernateTransactionManager transactionManager() throws Exception {
         HibernateTransactionManager txManager = new HibernateTransactionManager();
         txManager.setSessionFactory(this.gpSessionFactoryBean().getObject());
         return txManager;
     }
 
+    /**
+     * @return {@link PersistenceExceptionTranslationPostProcessor}
+     */
     @Bean
     public PersistenceExceptionTranslationPostProcessor sessionExceptionTranslationPostProcessor() {
         return new PersistenceExceptionTranslationPostProcessor();

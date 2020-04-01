@@ -40,7 +40,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.EnumSet;
+import java.util.Optional;
+
+import static java.lang.Boolean.FALSE;
+import static java.util.Arrays.stream;
+import static java.util.Optional.empty;
+import static org.hibernate.tool.schema.TargetType.SCRIPT;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -50,16 +55,18 @@ import java.util.EnumSet;
 class GPTargetTypeConfig {
 
     @Bean
-    public static EnumSet<TargetType> gpTargetType(@Value("persistence{schema_export_target_type:@null}") String targetType) {
-        return ((targetType != null) && !(targetType.isEmpty()) ? EnumSet.of(buildTargetType(targetType)) : EnumSet.of(TargetType.SCRIPT));
+    public static TargetType gpTargetType(@Value("persistence{schema_export_target_type:@null}") String targetType) {
+        return ((targetType != null) && !(targetType.trim().isEmpty()) ? buildTargetType(targetType) : SCRIPT);
     }
 
-    static TargetType buildTargetType(String source) {
-        for (TargetType targetType : TargetType.values()) {
-            if (targetType.name().equalsIgnoreCase(source)) {
-                return targetType;
-            }
-        }
-        return TargetType.SCRIPT;
+    /**
+     * @param theSource
+     * @return {@link TargetType}
+     */
+    static TargetType buildTargetType(String theSource) {
+        Optional<TargetType> optional = stream(TargetType.values())
+                .filter(s -> ((theSource != null) && !(theSource.trim().isEmpty())) ? s.name().equals(theSource) : FALSE)
+                .findFirst();
+        return ((optional != null) && !(optional.equals(empty()))) ? optional.get() : SCRIPT;
     }
 }

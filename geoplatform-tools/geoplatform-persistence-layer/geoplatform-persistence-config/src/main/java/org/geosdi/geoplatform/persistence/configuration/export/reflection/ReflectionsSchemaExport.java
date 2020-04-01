@@ -45,6 +45,8 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -59,7 +61,7 @@ public class ReflectionsSchemaExport implements GPReflectionsSchemaExport {
 
     @Override
     public void scanPackages() {
-        this.annotatedClasses = new HashSet<Class<?>>();
+        this.annotatedClasses = new HashSet();
         Reflections ref = new Reflections(ConfigurationBuilder.build(reflectionsConf));
         this.annotatedClasses.addAll(ref.getTypesAnnotatedWith(Entity.class));
     }
@@ -72,8 +74,18 @@ public class ReflectionsSchemaExport implements GPReflectionsSchemaExport {
         return Collections.unmodifiableSet(annotatedClasses);
     }
 
+    /**
+     * Invoked by the containing {@code BeanFactory} after it has set all bean properties
+     * and satisfied {@link org.springframework.beans.factory.BeanFactoryAware}, {@code ApplicationContextAware} etc.
+     * <p>This method allows the bean instance to perform validation of its overall
+     * configuration and final initialization when all bean properties have been set.
+     *
+     * @throws Exception in the event of misconfiguration (such as failure to set an
+     *                   essential property) or if initialization fails for any other reason
+     */
     @Override
     public void afterPropertiesSet() throws Exception {
+        checkArgument(this.gpPersistenceConnector != null, "The Parameter gpPersistenceConnector must not be null.");
         this.reflectionsConf = gpPersistenceConnector.getPackagesToScan();
     }
 }

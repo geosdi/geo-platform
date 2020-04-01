@@ -36,12 +36,16 @@
 package org.geosdi.geoplatform.persistence.configuration.jpa;
 
 import org.geosdi.geoplatform.persistence.configuration.properties.GPPersistenceHibProperties;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+
+import javax.annotation.Nonnull;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -51,9 +55,19 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 @Profile(value = "jpa")
 public class JpaVendorAdapterConfig {
 
-    @Autowired
-    private GPPersistenceHibProperties gpHibernateProperties;
+    private final GPPersistenceHibProperties gpHibernateProperties;
 
+    /**
+     * @param theGPHibernateProperties
+     */
+    JpaVendorAdapterConfig(@Nonnull(when = NEVER) GPPersistenceHibProperties theGPHibernateProperties) {
+        checkArgument(theGPHibernateProperties != null, "The Parameter gpHibernateProperties must not be null.");
+        this.gpHibernateProperties = theGPHibernateProperties;
+    }
+
+    /**
+     * @return {@link JpaVendorAdapter}
+     */
     @Bean
     public JpaVendorAdapter jpaVendorAdapter() {
         JpaVendorAdapter gpVendorAdapter = new HibernateJpaVendorAdapter() {

@@ -37,6 +37,8 @@ package org.geosdi.geoplatform.persistence.configuration.export;
 
 import org.hibernate.boot.Metadata;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
+import org.hibernate.tool.hbm2ddl.Target;
+import org.hibernate.tool.schema.TargetType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -45,6 +47,8 @@ import org.springframework.beans.factory.annotation.Value;
 import javax.annotation.Resource;
 import java.io.File;
 import java.util.EnumSet;
+
+import static java.io.File.separator;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -61,7 +65,7 @@ public abstract class PersistenceSchemaExport implements InitializingBean {
     @Value(value = "#{systemProperties['gpSchemaExport']}")
     protected String generateSchema;
     @Resource(name = "gpTargetType")
-    private EnumSet gpTargetType;
+    private TargetType gpTargetType;
     protected SchemaExport schema;
 
     @Override
@@ -70,31 +74,29 @@ public abstract class PersistenceSchemaExport implements InitializingBean {
     }
 
     protected final void exportSchema(Metadata metadata) {
-        String schemaExportDirPath = this.userHome + File.separator + SCHEMA_EXPORT_DIR_NAME;
-        File dirPath = new File(schemaExportDirPath);
-
-        if (!dirPath.exists()) {
-            boolean success = dirPath.mkdirs();
-
-            if (!success) {
-                throw new SecurityException(
-                        "It was not possible to create " + "the schema.sql in the User Home Directory.");
-            }
+        switch (this.gpTargetType) {
+            case SCRIPT:
+                String schemaExportDirPath = this.userHome + separator + SCHEMA_EXPORT_DIR_NAME;
+                File dirPath = new File(schemaExportDirPath);
+                if (!dirPath.exists()) {
+                    boolean success = dirPath.mkdirs();
+                    if (!success) {
+                        throw new SecurityException("It was not possible to create the schema.sql in the User Home Directory.");
+                    }
+                }
+                String schemaExportFilePath = schemaExportDirPath + separator
+                        + ((getSchemaFileName() != null) && !(getSchemaFileName().isEmpty()) ? getSchemaFileName() : "schema.sql");
+                File schemaFile = new File(schemaExportFilePath);
+                if (schemaFile.exists()) {
+                    schemaFile.delete();
+                }
+                schema.setOutputFile(schemaExportFilePath);
+                logger.info("@@@@@@@@@@@@@@@@@@@@@@GeoPlatform-PersistenceLayer: schema database generated at path {}\n",
+                        schemaExportFilePath);
         }
-
-        String schemaExportFilePath = schemaExportDirPath + File.separator
-                + ((getSchemaFileName() != null) && !(getSchemaFileName().isEmpty()) ? getSchemaFileName() : "schema.sql");
-        File schemaFile = new File(schemaExportFilePath);
-        if (schemaFile.exists()) {
-            schemaFile.delete();
-        }
-        schema.setOutputFile(schemaExportFilePath);
-        logger.info("@@@@@@@@@@@@@@@@@@@@@@GeoPlatform-PersistenceLayer: schema database generated at path {}\n",
-                schemaExportFilePath);
-
         schema.setFormat(true);
         schema.setDelimiter(";");
-        schema.create(this.gpTargetType, metadata);
+        schema.create(EnumSet.of(this.gpTargetType), metadata);
     }
 
     protected abstract void createSchema();

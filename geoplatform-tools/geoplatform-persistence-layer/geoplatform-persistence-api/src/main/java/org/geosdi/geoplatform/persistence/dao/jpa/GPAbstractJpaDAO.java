@@ -60,8 +60,7 @@ import static java.util.stream.StreamSupport.stream;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Transactional(transactionManager = "gpTransactionManager")
-public abstract class GPAbstractJpaDAO<T extends Object, ID extends Serializable> extends GPCriteriaJpaDAO<T, ID>
-        implements GPBaseJpaDAO<T, ID> {
+public abstract class GPAbstractJpaDAO<T extends Object, ID extends Serializable> extends GPCriteriaJpaDAO<T, ID> implements GPBaseJpaDAO<T, ID> {
 
     public GPAbstractJpaDAO(Class<T> thePersistentClass) {
         super(thePersistentClass);

@@ -130,9 +130,7 @@ public class GPPersistenceConnector implements InitializingBean {
      */
     @Override
     public void afterPropertiesSet() throws Exception {
-        checkArgument((this.url != null) && !(this.url.trim().isEmpty()),
-                "Parameter DB URL cannot be Null or an Empty String.");
-        checkArgument((this.packageToScan != null) && !(this.packageToScan.trim().isEmpty()),
-                "Parameter Package To Scan cannot be Null or an Empty String");
+        checkArgument((this.url != null) && !(this.url.trim().isEmpty()), "Parameter DB URL cannot be Null or an Empty String.");
+        checkArgument((this.packageToScan != null) && !(this.packageToScan.trim().isEmpty()), "Parameter Package To Scan cannot be Null or an Empty String");
     }
 }

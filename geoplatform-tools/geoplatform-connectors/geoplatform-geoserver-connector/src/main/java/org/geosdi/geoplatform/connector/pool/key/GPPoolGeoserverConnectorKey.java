@@ -56,7 +56,7 @@ import static javax.annotation.meta.When.NEVER;
 @Immutable
 @Getter
 @ToString(callSuper = true)
-public class GPPoolGeoserverConnectorKey extends GPPoolConnectorKey {
+public class GPPoolGeoserverConnectorKey extends GPPoolConnectorKey implements IGPPoolGeoserverConnectorKey  {
 
     private final JacksonSupport jacksonSupport;
 
@@ -67,7 +67,7 @@ public class GPPoolGeoserverConnectorKey extends GPPoolConnectorKey {
      * @param version
      * @param jacksonSupport
      */
-    public GPPoolGeoserverConnectorKey(@Nonnull(when = NEVER) URL serverUrl, @Nullable GPPooledConnectorConfig pooledConnectorConfig,
+     GPPoolGeoserverConnectorKey(@Nonnull(when = NEVER) URL serverUrl, @Nullable GPPooledConnectorConfig pooledConnectorConfig,
             @Nullable GPSecurityConnector securityConnector, String version, JacksonSupport jacksonSupport) {
         super(serverUrl, pooledConnectorConfig, securityConnector, version);
         this.jacksonSupport = jacksonSupport;

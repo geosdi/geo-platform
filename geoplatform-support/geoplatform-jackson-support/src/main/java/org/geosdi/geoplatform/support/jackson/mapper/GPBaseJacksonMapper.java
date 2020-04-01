@@ -56,7 +56,7 @@ public class GPBaseJacksonMapper<T extends Object> extends GPBaseJacksonReaderSu
      * @param theEntityClass
      * @param theJacksonSupport
      */
-    public GPBaseJacksonMapper(Class<T> theEntityClass, JacksonSupport theJacksonSupport) {
+    public GPBaseJacksonMapper(@Nonnull(when = NEVER) Class<T> theEntityClass, JacksonSupport theJacksonSupport) {
         super(((theJacksonSupport != null) ? theJacksonSupport : DEFAULT_MAPPER), theEntityClass);
     }
 

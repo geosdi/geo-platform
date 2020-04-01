@@ -79,7 +79,7 @@ public enum TransactionIdGen implements GPTransactionIdGen {
      */
     public static TransactionIdGen fromValue(String theValue) {
         Optional<TransactionIdGen> optional = stream(TransactionIdGen.values())
-                .filter(v -> ((theValue != null)) ? v.value().equals(theValue) : FALSE)
+                .filter(v -> ((theValue != null) && !(theValue.trim().isEmpty())) ? v.value().equals(theValue) : FALSE)
                 .findFirst();
         return (((optional != null) && !(optional.equals(empty()))) ? optional.get() : GENERATE_NEW);
     }

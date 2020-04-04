@@ -48,20 +48,15 @@ import java.net.MalformedURLException;
  */
 class GoogleServicesResourcesLoader {
 
-    protected Resource[] loadResources(String gpConfigDataDir,
-            String gpGoogleServicesFileProp) throws MalformedURLException {
+    GoogleServicesResourcesLoader() {
+    }
 
+    protected Resource[] loadResources(String gpConfigDataDir, String gpGoogleServicesFileProp) throws MalformedURLException {
         String fileToSearch = ((gpGoogleServicesFileProp != null)
                 && (!gpGoogleServicesFileProp.isEmpty())) ? ((gpGoogleServicesFileProp.contains("."))
                 && (gpGoogleServicesFileProp.endsWith(".properties"))) ? gpGoogleServicesFileProp
                 : (gpGoogleServicesFileProp.contains(".")) ? gpGoogleServicesFileProp.substring(0, gpGoogleServicesFileProp.indexOf(".")) + ".properties"
                 : gpGoogleServicesFileProp + ".properties" : "gp-googleservices.properties";
-
-        Resource[] resources = new Resource[]{new ClassPathResource(fileToSearch),
-            new UrlResource("file:" + gpConfigDataDir
-            + "/" + fileToSearch)};
-
-        return resources;
+        return new Resource[]{new ClassPathResource(fileToSearch), new UrlResource("file:" + gpConfigDataDir + "/" + fileToSearch)};
     }
-
 }

@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.support.google.spring.configuration;
 
+import lombok.Getter;
 import net.jcip.annotations.Immutable;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -47,9 +48,10 @@ import static com.google.common.base.Preconditions.checkArgument;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Immutable
-@Component(value = "gpGeoApiContextConfig")
-public class GPGeoApiContextConfig implements GeoApiContextConfig {
+@Component(value = "gpGeoApiContextConfiguration")
+class GPGeoApiContextConfiguration implements GeoApiContextConfiguration {
 
+    @Getter
     @Value(value = "gpGoogleServicesConfigurator{gp.googleservices.apiKey:@null}")
     private String apiKey;
     @Value(value = "gpGoogleServicesConfigurator{gp.googleservices.connection.timeout:@null}")
@@ -63,40 +65,61 @@ public class GPGeoApiContextConfig implements GeoApiContextConfig {
     @Value(value = "gpGoogleServicesConfigurator{gp.googleservices.query.rate.limit:@null}")
     private Integer queryRateLimit;
 
-    @Override
-    public String getApiKey() {
-        return this.apiKey;
+    GPGeoApiContextConfiguration() {
     }
 
+    /**
+     * @return {@link Long}
+     */
     @Override
     public Long getConnectionTimeout() {
         return this.connectionTimeout = ((this.connectionTimeout != null) ? this.connectionTimeout : 10);
     }
 
+    /**
+     * @return {@link Long}
+     */
     @Override
     public Long getReadTimeout() {
         return this.readTimeout = ((this.readTimeout != null) ? this.readTimeout : 10);
     }
 
+    /**
+     * @return {@link Long}
+     */
     @Override
     public Long getWriteTimeout() {
         return this.writeTimeout = ((this.writeTimeout != null) ? this.writeTimeout : 0);
     }
 
+    /**
+     * @return {@link Long}
+     */
     @Override
     public Long getRetryTimeout() {
         return this.retryTimeout = ((this.retryTimeout != null) ? this.retryTimeout : 60);
     }
 
+    /**
+     * @return {@link Long}
+     */
     @Override
     public Integer getQueryRateLimit() {
         return this.queryRateLimit = ((this.queryRateLimit != null) ? this.queryRateLimit : 10);
     }
 
+    /**
+     * Invoked by the containing {@code BeanFactory} after it has set all bean properties
+     * and satisfied {@link org.springframework.beans.factory.BeanFactoryAware}, {@code ApplicationContextAware} etc.
+     * <p>This method allows the bean instance to perform validation of its overall
+     * configuration and final initialization when all bean properties have been set.
+     *
+     * @throws Exception in the event of misconfiguration (such as failure to set an
+     *                   essential property) or if initialization fails for any other reason
+     */
     @Override
     public void afterPropertiesSet() throws Exception {
-        checkArgument((this.apiKey != null) || !(this.apiKey.trim().isEmpty()), "The Parameter ApiKey must not be "
-                + "null or an Empty String");
+        checkArgument((this.apiKey != null) && !(this.apiKey.trim().isEmpty()), "The Parameter ApiKey must not be null or an Empty String");
     }
 
     @Override

@@ -37,14 +37,13 @@ package org.geosdi.geoplatform.support.google.spring.services.context;
 
 import com.google.maps.GeoApiContext;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
-import org.geosdi.geoplatform.support.google.spring.configuration.GeoApiContextConfig;
+import org.geosdi.geoplatform.support.google.spring.configuration.GeoApiContextConfiguration;
 import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.concurrent.TimeUnit;
+import static java.util.concurrent.TimeUnit.SECONDS;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -56,20 +55,18 @@ class GPGeoApiContextConfig {
     @GeoPlatformLog
     static Logger logger;
 
+    /**
+     * @param gpGeoApiContextConfig
+     * @return {@link GeoApiContext}
+     */
     @Bean
-    @Autowired
-    public GeoApiContext gpGeoApiContext(@Qualifier(value = "gpGeoApiContextConfig") GeoApiContextConfig gpGeoApiContextConfig) {
-        logger.debug("@@@@@@@@@@@@@@@@@@@@INITIALIZING GP_GEO_API_CONTEXT with "
-                + ": {}\n\n", gpGeoApiContextConfig);
-
-        return new GeoApiContext.Builder().apiKey(gpGeoApiContextConfig.getApiKey()).connectTimeout(
-                gpGeoApiContextConfig.getConnectionTimeout(), TimeUnit.SECONDS)
-                .readTimeout(gpGeoApiContextConfig.getReadTimeout(),
-                        TimeUnit.SECONDS)
-                .retryTimeout(gpGeoApiContextConfig.getRetryTimeout(),
-                        TimeUnit.SECONDS)
-                .writeTimeout(gpGeoApiContextConfig.getWriteTimeout(),
-                        TimeUnit.SECONDS)
+    public GeoApiContext gpGeoApiContext(@Qualifier(value = "gpGeoApiContextConfiguration") GeoApiContextConfiguration gpGeoApiContextConfig) {
+        logger.debug("@@@@@@@@@@@@@@@@@@@@INITIALIZING GP_GEO_API_CONTEXT with : {}\n\n", gpGeoApiContextConfig);
+        return new GeoApiContext.Builder().apiKey(gpGeoApiContextConfig.getApiKey())
+                .connectTimeout(gpGeoApiContextConfig.getConnectionTimeout(), SECONDS)
+                .readTimeout(gpGeoApiContextConfig.getReadTimeout(), SECONDS)
+                .retryTimeout(gpGeoApiContextConfig.getRetryTimeout(), SECONDS)
+                .writeTimeout(gpGeoApiContextConfig.getWriteTimeout(), SECONDS)
                 .queryRateLimit(gpGeoApiContextConfig.getQueryRateLimit())
                 .build();
     }

@@ -57,17 +57,21 @@ class GoogleServicesPlaceholderConfig {
 
     private static final GoogleServicesResourcesLoader googleServicesResourcesLoader = new GoogleServicesResourcesLoader();
 
+    /**
+     * @param googleServicePooledPBEStringEncryptor
+     * @param gpConfigDataDir
+     * @param gpGoogleServicesFileProp
+     * @return {@link PropertySourcesPlaceholderConfigurer}
+     * @throws MalformedURLException
+     */
     @Bean(name = "gpGoogleServicesPropertyConfigurer")
-    public static PropertySourcesPlaceholderConfigurer gpGoogleServicesPropertyConfigurer(
-            @Qualifier(value = "googleServicePooledPBEStringEncryptor") PooledPBEStringEncryptor googleServicePooledPBEStringEncryptor,
+    public static PropertySourcesPlaceholderConfigurer gpGoogleServicesPropertyConfigurer(@Qualifier(value = "googleServicePooledPBEStringEncryptor") PooledPBEStringEncryptor googleServicePooledPBEStringEncryptor,
             @Value("#{systemProperties['GP_DATA_DIR']}") String gpConfigDataDir,
             @Value("#{systemProperties['GP_GOOGLE_SERVICES_FILE_PROP']}") String gpGoogleServicesFileProp) throws MalformedURLException {
-
         EncryptablePropertySourcesPlaceholderConfigurer gpGSPC = new EncryptablePropertySourcesPlaceholderConfigurer(googleServicePooledPBEStringEncryptor);
         gpGSPC.setPlaceholderPrefix("gpGoogleServicesConfigurator{");
         gpGSPC.setPlaceholderSuffix("}");
         gpGSPC.setNullValue("@null");
-
         gpGSPC.setLocations(googleServicesResourcesLoader.loadResources(gpConfigDataDir, gpGoogleServicesFileProp));
         gpGSPC.setIgnoreResourceNotFound(TRUE);
         gpGSPC.setIgnoreUnresolvablePlaceholders(TRUE);

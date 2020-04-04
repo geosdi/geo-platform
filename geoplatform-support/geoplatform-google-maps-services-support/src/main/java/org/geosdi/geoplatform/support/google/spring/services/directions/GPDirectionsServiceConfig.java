@@ -38,10 +38,14 @@ package org.geosdi.geoplatform.support.google.spring.services.directions;
 import com.google.maps.DirectionsApi;
 import com.google.maps.DirectionsApiRequest;
 import com.google.maps.GeoApiContext;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import javax.annotation.Nonnull;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -50,10 +54,12 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 class GPDirectionsServiceConfig {
 
+    /**
+     * @param gpGeoApiContext
+     * @return {@link GPDirectionsService}
+     */
     @Bean
-    @Autowired
-    public GPDirectionsService gpDirectionsService(@Qualifier(
-            value = "gpGeoApiContext") GeoApiContext gpGeoApiContext) {
+    public GPDirectionsService gpDirectionsService(@Qualifier(value = "gpGeoApiContext") GeoApiContext gpGeoApiContext) {
         return new BasicDirectionsService(gpGeoApiContext);
     }
 
@@ -61,20 +67,30 @@ class GPDirectionsServiceConfig {
 
         private final GeoApiContext geoApiContext;
 
-        public BasicDirectionsService(GeoApiContext geoApiContext) {
-            this.geoApiContext = geoApiContext;
+        /**
+         * @param theGeoApiContext
+         */
+        BasicDirectionsService(@Nonnull(when = NEVER) GeoApiContext theGeoApiContext) {
+            checkArgument(theGeoApiContext != null, "The Parameter geoApiContext must not be null.");
+            this.geoApiContext = theGeoApiContext;
         }
 
+        /**
+         * @return {@link DirectionsApiRequest}
+         */
         @Override
         public DirectionsApiRequest newRequest() {
             return DirectionsApi.newRequest(geoApiContext);
         }
 
+        /**
+         * @param origin
+         * @param destination
+         * @return {@link DirectionsApiRequest}
+         */
         @Override
-        public DirectionsApiRequest getDirections(String origin,
-                String destination) {
-            return DirectionsApi.getDirections(geoApiContext, origin,
-                    destination);
+        public DirectionsApiRequest getDirections(String origin, String destination) {
+            return DirectionsApi.getDirections(geoApiContext, origin, destination);
         }
 
         @Override

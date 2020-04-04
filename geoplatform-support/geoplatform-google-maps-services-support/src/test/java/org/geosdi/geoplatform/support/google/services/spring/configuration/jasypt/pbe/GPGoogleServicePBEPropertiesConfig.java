@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.support.google.services.spring.configuration.jasypt.pbe;
 
-import org.geosdi.geoplatform.jasypt.support.env.GPPBESystemEnvProperties;
 import org.geosdi.geoplatform.support.google.spring.configuration.jasypt.pbe.GPGoogleServicePBEProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

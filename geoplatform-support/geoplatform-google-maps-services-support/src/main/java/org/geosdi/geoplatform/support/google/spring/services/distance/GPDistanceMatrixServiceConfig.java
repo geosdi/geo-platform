@@ -38,10 +38,16 @@ package org.geosdi.geoplatform.support.google.spring.services.distance;
 import com.google.maps.DistanceMatrixApi;
 import com.google.maps.DistanceMatrixApiRequest;
 import com.google.maps.GeoApiContext;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import javax.annotation.Nonnull;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.Math.cos;
+import static java.lang.Math.sin;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -50,10 +56,12 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 class GPDistanceMatrixServiceConfig {
 
+    /**
+     * @param gpGeoApiContext
+     * @return {@link GPDistanceMatrixService}
+     */
     @Bean
-    @Autowired
-    public GPDistanceMatrixService gpDistanceMatrixService(@Qualifier(
-            value = "gpGeoApiContext") GeoApiContext gpGeoApiContext) {
+    public GPDistanceMatrixService gpDistanceMatrixService(@Qualifier(value = "gpGeoApiContext") GeoApiContext gpGeoApiContext) {
         return new BasicDistanceMatrixService(gpGeoApiContext);
     }
 
@@ -64,8 +72,12 @@ class GPDistanceMatrixServiceConfig {
 
         private final GeoApiContext geoApiContext;
 
-        public BasicDistanceMatrixService(GeoApiContext geoApiContext) {
-            this.geoApiContext = geoApiContext;
+        /**
+         * @param theGeoApiContext
+         */
+        BasicDistanceMatrixService(@Nonnull(when = NEVER) GeoApiContext theGeoApiContext) {
+            checkArgument(theGeoApiContext != null, "The Parameter geoApiContext must not be null.");
+            this.geoApiContext = theGeoApiContext;
         }
 
         /**
@@ -99,8 +111,7 @@ class GPDistanceMatrixServiceConfig {
         @Override
         public Double distance(double lat1, double lon1, double lat2, double lon2, Unit unit) {
             double theta = lon1 - lon2;
-            double distance = Math.sin(deg2rad(lat1)) * Math.sin(deg2rad(lat2))
-                    + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.cos(deg2rad(theta));
+            double distance = sin(deg2rad(lat1)) * sin(deg2rad(lat2)) + cos(deg2rad(lat1)) * cos(deg2rad(lat2)) * cos(deg2rad(theta));
             distance = Math.acos(distance);
             distance = rad2deg(distance);
             distance = distance * 60 * 1.1515;

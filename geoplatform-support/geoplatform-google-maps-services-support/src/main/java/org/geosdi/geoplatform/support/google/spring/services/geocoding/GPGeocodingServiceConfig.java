@@ -39,10 +39,14 @@ import com.google.maps.GeoApiContext;
 import com.google.maps.GeocodingApi;
 import com.google.maps.GeocodingApiRequest;
 import com.google.maps.model.LatLng;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import javax.annotation.Nonnull;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  *
@@ -52,10 +56,12 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 class GPGeocodingServiceConfig {
 
+    /**
+     * @param gpGeoApiContext
+     * @return {@link GPGeocodingService}
+     */
     @Bean
-    @Autowired
-    public GPGeocodingService gpGeocodingService(@Qualifier(
-            value = "gpGeoApiContext") GeoApiContext gpGeoApiContext) {
+    public GPGeocodingService gpGeocodingService(@Qualifier(value = "gpGeoApiContext") GeoApiContext gpGeoApiContext) {
         return new BaseGeocodingService(gpGeoApiContext);
     }
 
@@ -63,20 +69,35 @@ class GPGeocodingServiceConfig {
 
         private final GeoApiContext geoApiContext;
 
-        public BaseGeocodingService(GeoApiContext geoApiContext) {
-            this.geoApiContext = geoApiContext;
+        /**
+         * @param theGeoApiContext
+         */
+        BaseGeocodingService(@Nonnull(when = NEVER) GeoApiContext theGeoApiContext) {
+            checkArgument(theGeoApiContext != null, "The Parameter geoApiContext must not be null.");
+            this.geoApiContext = theGeoApiContext;
         }
 
+        /**
+         * @return {@link GeocodingApiRequest}
+         */
         @Override
         public GeocodingApiRequest newRequest() {
             return GeocodingApi.newRequest(geoApiContext);
         }
 
+        /**
+         * @param address
+         * @return {@link GeocodingApiRequest}
+         */
         @Override
         public GeocodingApiRequest geocode(String address) {
             return GeocodingApi.geocode(geoApiContext, address);
         }
 
+        /**
+         * @param location
+         * @return {@link GeocodingApiRequest}
+         */
         @Override
         public GeocodingApiRequest reverseGeocode(LatLng location) {
             return GeocodingApi.reverseGeocode(geoApiContext, location);
@@ -88,5 +109,4 @@ class GPGeocodingServiceConfig {
                     + " {" + "geoApiContext = " + geoApiContext + '}';
         }
     }
-
 }

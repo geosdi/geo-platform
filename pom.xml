@@ -128,16 +128,9 @@
         <repository>
             <id>boundlessgeo</id>
             <name>Open Source Geospatial Foundation Repository</name>
-            <url>https://repo.boundlessgeo.com/release/</url>
-        </repository>
-        
-        <repository>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <id>boundless</id>
-            <name>Boundless Maven Repository</name>
-            <url>https://repo.boundlessgeo.com/main</url>
+            <url>https://repo.osgeo.org/repository/release/</url>
+            <snapshots><enabled>false</enabled></snapshots>
+            <releases><enabled>true</enabled></releases>
         </repository>
         
         <!-- TERRACOTTA -->

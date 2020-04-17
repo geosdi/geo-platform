@@ -133,6 +133,15 @@
             <artifactId>spring-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <!-- =========================================================== -->
+        <!-- ======================== MOKITO =========================== -->
+        <!-- =========================================================== -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <scope>test</scope>
+        </dependency>
         
         <dependency>
             <groupId>junit</groupId>

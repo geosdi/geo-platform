@@ -46,6 +46,7 @@ import org.geosdi.geoplatform.support.wfs.feature.reader.WFSBaseGetFeatureStaxRe
 import org.geosdi.geoplatform.xml.gml.v311.AbstractGeometryType;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.events.XMLEvent;
 import java.util.ArrayList;
@@ -152,10 +153,13 @@ public class WFSGetFeatureGeoJsonStaxReader extends WFSBaseGetFeatureStaxReader<
      * @return {@link FeatureAttributesMap}
      * @throws Exception
      */
-    protected void readAttributes(Feature feature, String featureName, List<String> attributeNames, Boolean nextTag,
-            String prefix, String geometryName) throws Exception {
+    protected void readAttributes(@Nonnull(when = NEVER) Feature feature, @Nonnull(when = NEVER) String featureName, @Nullable List<String> attributeNames,
+            @Nonnull(when = NEVER) Boolean nextTag, @Nonnull(when = NEVER) String prefix, @Nonnull(when = NEVER) String geometryName) throws Exception {
         checkArgument(feature != null, "The Parameter Feature must not be null.");
-
+        checkArgument(((featureName != null) && !(featureName.trim().isEmpty())), "The Parameter featureName must not be null or an empty string.");
+        checkArgument(nextTag != null, "The Parameter nextTag must not be null.");
+        checkArgument(((prefix != null) && !(prefix.trim().isEmpty())), "The Parameter prefix must not be null or an empty string.");
+        checkArgument(((geometryName != null) && !(geometryName.trim().isEmpty())), "The Parameter geometryName must not be null or an empty string.");
         if (attributeNames == null) {
             attributeNames = new ArrayList<>();
         }
@@ -171,7 +175,6 @@ public class WFSGetFeatureGeoJsonStaxReader extends WFSBaseGetFeatureStaxReader<
                     break;
                 }
             }
-
             if (eventType == XMLEvent.START_ELEMENT) {
                 if (super.isTagName(prefix, geometryName)) {
                     feature.setGeometry(this.readGeometry());
@@ -179,7 +182,6 @@ public class WFSGetFeatureGeoJsonStaxReader extends WFSBaseGetFeatureStaxReader<
                 } else {
                     String localName = xmlStreamReader().getLocalName();
                     logger.trace("################LOCAL_NAME : {}\n", localName);
-
                     eventType = xmlStreamReader().next();
                     if (eventType == XMLEvent.CHARACTERS) {
                         String attributeValue = xmlStreamReader().getText();

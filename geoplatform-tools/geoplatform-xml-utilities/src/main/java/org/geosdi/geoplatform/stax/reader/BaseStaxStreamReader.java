@@ -58,6 +58,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
+import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
 
 /**
@@ -68,9 +69,9 @@ abstract class BaseStaxStreamReader implements GeoPlatformStaxReader {
 
     protected final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
-    private ThreadLocal<XMLStreamReader> xmlStreamReader = new ThreadLocal<>();
+    private ThreadLocal<XMLStreamReader> xmlStreamReader = withInitial(() -> null);
     private StreamReaderBuildHandler streamBuilder = new InputStreamBuildHandler();
-    private ThreadLocal<InputStream> stream = new ThreadLocal<>();
+    private ThreadLocal<InputStream> stream = withInitial(() -> null);
     private final GPXmlStreamReaderBuilder xmlStreamBuilder;
 
     /**
@@ -100,10 +101,10 @@ abstract class BaseStaxStreamReader implements GeoPlatformStaxReader {
      */
     @Override
     public XMLStreamReader acquireReader(@Nonnull(when = NEVER) Object o) throws Exception {
-        this.reset();
         checkNotNull(o, "The Object passed to acquire Reader must not be null.");
+        this.reset();
         this.stream.set(streamBuilder.buildStream(o));
-        this.xmlStreamReader.set((this.stream.get() != null) ? xmlStreamBuilder.build(stream.get()) : xmlStreamBuilder.build(o));
+        this.xmlStreamReader.set(((this.stream.get() != null) ? xmlStreamBuilder.build(stream.get()) : xmlStreamBuilder.build(o)));
         return this.xmlStreamReader.get();
     }
 

@@ -84,7 +84,7 @@ public class JTSSextanteParserTest extends AbstractGMLParserTest {
         lineString.setSRID(4326);
         StringWriter writer = new StringWriter();
         jaxbContext.acquireMarshaller().marshal(lineString, writer);
-        logger.info("GML V311 LineString : \n\n" + writer);
+        logger.info("GML V311 LineString : {}\n\n", writer);
     }
 
     @Test

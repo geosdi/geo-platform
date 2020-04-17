@@ -45,9 +45,12 @@ import static javax.annotation.meta.When.NEVER;
 import static org.geosdi.geoplatform.xml.wfs.v110.IdentifierGenerationOptionType.GENERATE_NEW;
 
 /**
+ * @author Giuseppe La Scaleia - <giuseppe.lascaleia@geosdi.org>
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class TransactionInsert implements ITransactionOperationStrategy {
+
+    private static final String INPUT_FORMAT = "text/xml; subtype=gml/3.1.1";
 
     TransactionInsert() {
     }
@@ -65,7 +68,7 @@ public class TransactionInsert implements ITransactionOperationStrategy {
         if (request.getSRS() != null) {
             elementType.setSrsName(request.getSRS());
         }
-        elementType.setInputFormat(request.getInputFormat() != null ? request.getInputFormat() : "text/xml; subtype=gml/3.1.1");
+        elementType.setInputFormat(((request.getInputFormat() != null) ? request.getInputFormat() : INPUT_FORMAT));
         return elementType;
     }
 }

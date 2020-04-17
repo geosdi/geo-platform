@@ -1474,7 +1474,7 @@
         <jasypt-version>1.9.3</jasypt-version>
         
         <guava-gwt-version>23.6-jre</guava-gwt-version>
-        <guava-version>28.2-jre</guava-version>
+        <guava-version>29.0-jre</guava-version>
         <guice-version>3.0</guice-version>
         
         <ehcache-version>2.10.6</ehcache-version>

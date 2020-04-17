@@ -34,14 +34,17 @@
  */
 package org.geosdi.geoplatform.connector.server.request.v110.transaction.stax;
 
-import com.google.common.collect.Maps;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nonnull;
-import java.util.EnumMap;
+import java.util.Map;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static io.reactivex.rxjava3.core.Observable.fromArray;
+import static java.util.function.Function.identity;
+import static java.util.stream.Collectors.toMap;
 import static javax.annotation.meta.When.NEVER;
-import static org.geosdi.geoplatform.connector.server.request.v110.transaction.stax.WFSTransactionParam.*;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -49,17 +52,11 @@ import static org.geosdi.geoplatform.connector.server.request.v110.transaction.s
  */
 public class TransactionParameters {
 
-    private static final EnumMap<WFSTransactionParam, String> parameters = Maps.newEnumMap(WFSTransactionParam.class);
-
-    static {
-        parameters.put(TRANSACTION, "Transaction");
-        parameters.put(TRANSACTION_INSERT, "Insert");
-        parameters.put(ID_GEN, "idgen");
-        parameters.put(INPUT_FORMAT, "inputFormat");
-        parameters.put(SRS_NAME, "srsName");
-        parameters.put(LOCKID, "LockId");
-        parameters.put(RELEASE_ACTION, "releaseAction");
-    }
+    private static final Logger logger = LoggerFactory.getLogger(TransactionParameters.class);
+    //
+    private static final Map<WFSTransactionParam, String> parameters = fromArray(WFSTransactionParam.values())
+            .doOnComplete(() -> logger.debug("##########################Adding all Values."))
+            .collect(toMap(identity(), t -> t.getTransactionParam())).blockingGet();
 
     private TransactionParameters() {
     }

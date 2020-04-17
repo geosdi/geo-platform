@@ -104,9 +104,14 @@ public class WFSTransactionRequestV110 extends AbstractTransactionRequest<Transa
      * @throws Exception
      */
     protected final String showRequestWithStax() throws Exception {
+//        Transformer t = TransformerFactory.newInstance().newTransformer();
+//        t.setOutputProperty(INDENT, "yes");
+//        t.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
         StringWriter stringWriter = new StringWriter();
         FeatureStreamWriter streamWriter = new FeatureStreamWriter();
         streamWriter.write(this, stringWriter);
+//        Writer out = new StringWriter();
+//        t.transform(new StreamSource(new StringReader(stringWriter.toString())), new StreamResult(out));
         return stringWriter.toString();
     }
 

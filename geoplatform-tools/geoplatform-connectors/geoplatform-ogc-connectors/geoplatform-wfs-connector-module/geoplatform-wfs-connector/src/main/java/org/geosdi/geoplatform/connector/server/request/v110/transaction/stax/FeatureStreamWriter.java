@@ -41,10 +41,14 @@ import org.geosdi.geoplatform.gml.api.jaxb.context.GMLJAXBContext;
 import org.geosdi.geoplatform.gml.api.jaxb.context.GMLMarshaller;
 import org.locationtech.jts.geom.Geometry;
 
+import javax.annotation.Nonnull;
+import javax.annotation.concurrent.ThreadSafe;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.TRUE;
+import static javax.annotation.meta.When.NEVER;
 import static javax.xml.bind.Marshaller.JAXB_FRAGMENT;
 import static org.geosdi.geoplatform.gml.impl.v311.jaxb.context.factory.GMLContextFactoryV311.createJAXBContext;
 import static org.geosdi.geoplatform.gml.impl.v311.jaxb.context.factory.GMLContextType.POOLED;
@@ -53,12 +57,12 @@ import static org.geosdi.geoplatform.gml.impl.v311.jaxb.context.factory.GMLConte
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@ThreadSafe
 public class FeatureStreamWriter extends AbstractFeatureStreamWriter<WFSTransactionRequest> {
 
     static {
         gmlContext = createJAXBContext(POOLED);
     }
-
 
     private static final GMLJAXBContext gmlContext;
 
@@ -66,10 +70,20 @@ public class FeatureStreamWriter extends AbstractFeatureStreamWriter<WFSTransact
         super("1.1.0", "3.1.1");
     }
 
+    /**
+     * @param target
+     * @param output
+     * @throws Exception
+     */
     @Override
-    public void write(WFSTransactionRequest target, Object output) throws Exception {
-        super.acquireWriter(output);
-        super.writeDocument(target);
+    public void write(@Nonnull(when = NEVER) WFSTransactionRequest target, @Nonnull(when = NEVER) Object output) throws Exception {
+        checkArgument(target != null, "The Parameter target must not be null.");
+        try {
+            super.acquireWriter(output);
+            super.writeDocument(target);
+        } finally {
+            this.reset();
+        }
     }
 
     /**
@@ -79,8 +93,11 @@ public class FeatureStreamWriter extends AbstractFeatureStreamWriter<WFSTransact
      * @throws Exception
      */
     @Override
-    protected final void writeGeometryAttribute(GeometryAttributeDTO geometry, QName typeName) throws XMLStreamException, Exception {
-        writer.writeStartElement(typeName.getPrefix() + ":" + geometry.getName());
+    protected final void writeGeometryAttribute(@Nonnull(when = NEVER) GeometryAttributeDTO geometry, @Nonnull(when = NEVER) QName typeName) throws XMLStreamException, Exception {
+        checkArgument(typeName != null, "The Parameter typeName must not be null.");
+        checkArgument(typeName.getPrefix() != null, "The Parameter prefix must not be null.");
+        checkArgument(geometry != null, "The Parameter geometryAttributeDTO must not be null.");
+        writer().writeStartElement(typeName.getPrefix() + ":" + geometry.getName());
         String wktGeometry = geometry.getValue();
         Geometry jtsGeometry = this.wktReader.read(wktGeometry);
         if (geometry.getSrid() != null) {
@@ -88,7 +105,7 @@ public class FeatureStreamWriter extends AbstractFeatureStreamWriter<WFSTransact
         }
         GMLMarshaller marshaller = gmlContext.acquireMarshaller();
         marshaller.setProperty(JAXB_FRAGMENT, TRUE);
-        marshaller.marshal(jtsGeometry, writer);
-        writer.writeEndElement();
+        marshaller.marshal(jtsGeometry, writer());
+        writer().writeEndElement();
     }
 }

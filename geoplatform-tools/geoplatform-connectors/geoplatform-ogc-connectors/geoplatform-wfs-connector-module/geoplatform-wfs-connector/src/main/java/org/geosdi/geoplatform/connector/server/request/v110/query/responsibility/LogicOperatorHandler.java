@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.connector.server.request.v110.query.responsibility;
 
-import com.google.common.collect.Lists;
 import org.geosdi.geoplatform.connector.server.request.v110.query.repository.QueryRestrictionStrategy;
 import org.geosdi.geoplatform.connector.wfs.response.QueryDTO;
 import org.geosdi.geoplatform.connector.wfs.response.QueryRestrictionDTO;
@@ -52,6 +51,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
+import static com.google.common.collect.Lists.newArrayList;
 import static java.util.stream.Collectors.toList;
 
 /**
@@ -111,9 +111,9 @@ public abstract class LogicOperatorHandler implements ILogicOperatorHandler {
         return (theQueryRestrictions != null ? theQueryRestrictions.stream()
                 .filter(Objects::nonNull)
                 .filter(r -> r.getOperator() != null)
-                .filter(r -> (r.getAttribute() != null) && (r.getAttribute().getName() != null))
-                .filter(r -> r.getRestriction() != null)
-                .collect(toList()) : Lists.newArrayList());
+                .filter(r -> ((r.getAttribute() != null) && (r.getAttribute().getName() != null) && !(r.getAttribute().getName().trim().isEmpty())))
+                .filter(r -> ((r.getRestriction() != null) && !(r.getRestriction().trim().isEmpty())))
+                .collect(toList()) : newArrayList());
     }
 
 

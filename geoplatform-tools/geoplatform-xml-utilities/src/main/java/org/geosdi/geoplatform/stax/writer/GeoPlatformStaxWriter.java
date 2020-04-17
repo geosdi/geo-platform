@@ -35,21 +35,24 @@
  */
 package org.geosdi.geoplatform.stax.writer;
 
+import javax.annotation.Nonnull;
 import javax.xml.stream.XMLStreamException;
 import java.io.IOException;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoPlatformStaxWriter {
+public interface GeoPlatformStaxWriter<T extends Object> {
 
     /**
-     * @param o
-     * @throws XMLStreamException
-     * @throws IOException
+     * @param target
+     * @param output
+     * @throws Exception
      */
-    void acquireWriter(Object o) throws XMLStreamException, IOException;
+    void write(@Nonnull(when = NEVER) T target, @Nonnull(when = NEVER) Object output) throws Exception;
 
     /**
      * @throws XMLStreamException

@@ -41,6 +41,7 @@ import org.geosdi.geoplatform.stax.reader.AbstractStaxStreamReader;
 import org.geosdi.geoplatform.stax.reader.builder.GPXmlStreamReaderBuilder;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.xml.stream.XMLStreamReader;
 import java.util.List;
 
@@ -110,6 +111,6 @@ public abstract class WFSBaseGetFeatureStaxReader<F, G, R> extends AbstractStaxS
      * @param geometryName
      * @throws Exception
      */
-    protected abstract void readAttributes(F feature, String featureName, List<String> attributeNames, Boolean nextTag,
-            String prefix, String geometryName) throws Exception;
+    protected abstract void readAttributes(@Nonnull(when = NEVER) F feature, @Nonnull(when = NEVER) String featureName, @Nullable List<String> attributeNames,
+            @Nonnull(when = NEVER) Boolean nextTag, @Nonnull(when = NEVER) String prefix, @Nonnull(when = NEVER) String geometryName) throws Exception;
 }

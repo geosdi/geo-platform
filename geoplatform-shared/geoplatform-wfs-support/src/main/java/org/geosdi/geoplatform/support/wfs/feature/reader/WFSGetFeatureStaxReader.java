@@ -45,6 +45,7 @@ import org.geosdi.geoplatform.xml.gml.v311.AbstractGeometryType;
 import org.locationtech.jts.io.WKTWriter;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.xml.bind.DatatypeConverter;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.events.XMLEvent;
@@ -88,7 +89,7 @@ public class WFSGetFeatureStaxReader extends WFSBaseGetFeatureStaxReader<Feature
         String name = typeName.substring(typeName.indexOf(":") + 1);
         checkArgument((prefix != null) && !(prefix.trim().isEmpty()), "The Parameter Prefix must not be null or an empty string.");
         checkArgument((name != null) && !(name.trim().isEmpty()), "The Parameter Name must not be null or an empty string.");
-        logger.trace("\n@@@@@@ Read feature {}:{} @@@@@@", prefix, name);
+        logger.trace("@@@@@@@@@@@@@@@@@@@ Read feature {}:{} @@@@@@", prefix, name);
         FeatureCollectionDTO fc = new FeatureCollectionDTO();
         FeatureDTO feature = null;
         try {
@@ -112,7 +113,7 @@ public class WFSGetFeatureStaxReader extends WFSBaseGetFeatureStaxReader<Feature
             }
             return fc;
         } finally {
-            super.dispose();
+            this.dispose();
         }
     }
 
@@ -146,7 +147,6 @@ public class WFSGetFeatureStaxReader extends WFSBaseGetFeatureStaxReader<Feature
      */
     protected String readGeometry() throws Exception {
         String geometryWKT = null;
-
         int eventType = xmlStreamReader().nextTag();
         if (eventType == XMLEvent.START_ELEMENT) {
             AbstractGeometry geometry = jaxbContextBuilder.unmarshal(xmlStreamReader(), AbstractGeometryType.class);
@@ -175,10 +175,13 @@ public class WFSGetFeatureStaxReader extends WFSBaseGetFeatureStaxReader<Feature
      * @return {@link FeatureAttributesMap}
      * @throws Exception
      */
-    protected void readAttributes(FeatureDTO feature, String featureName, List<String> attributeNames, Boolean nextTag,
-            String prefix, String geometryName) throws Exception {
+    protected void readAttributes(@Nonnull(when = NEVER) FeatureDTO feature, @Nonnull(when = NEVER) String featureName, @Nullable List<String> attributeNames,
+            @Nonnull(when = NEVER) Boolean nextTag, @Nonnull(when = NEVER) String prefix, @Nonnull(when = NEVER) String geometryName) throws Exception {
         checkArgument(feature != null, "The Parameter Feature must not be null.");
-
+        checkArgument(((featureName != null) && !(featureName.trim().isEmpty())), "The Parameter featureName must not be null or an empty string.");
+        checkArgument(nextTag != null, "The Parameter nextTag must not be null.");
+        checkArgument(((prefix != null) && !(prefix.trim().isEmpty())), "The Parameter prefix must not be null or an empty string.");
+        checkArgument(((geometryName != null) && !(geometryName.trim().isEmpty())), "The Parameter geometryName must not be null or an empty string.");
         if (attributeNames == null) {
             attributeNames = new ArrayList<>();
         }
@@ -188,7 +191,6 @@ public class WFSGetFeatureStaxReader extends WFSBaseGetFeatureStaxReader<Feature
         }
         FeatureAttributesMap fMap = new FeatureAttributesMap();
         fMap.setAttributesMap(map);
-
         int eventType = ((nextTag) ? xmlStreamReader().nextTag() : xmlStreamReader().getEventType());
         while (xmlStreamReader().hasNext()) {
             if (eventType == XMLEvent.END_ELEMENT) {
@@ -197,7 +199,6 @@ public class WFSGetFeatureStaxReader extends WFSBaseGetFeatureStaxReader<Feature
                     break;
                 }
             }
-
             if (eventType == XMLEvent.START_ELEMENT) {
                 if (super.isTagName(prefix, geometryName)) {
                     feature.setGeometry(this.readGeometry());
@@ -205,7 +206,6 @@ public class WFSGetFeatureStaxReader extends WFSBaseGetFeatureStaxReader<Feature
                 } else {
                     String localName = xmlStreamReader().getLocalName();
                     logger.trace("################LOCAL_NAME : {}\n", localName);
-
                     eventType = xmlStreamReader().next();
                     if (eventType == XMLEvent.CHARACTERS) {
                         String attributeValue = xmlStreamReader().getText();

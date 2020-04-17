@@ -40,13 +40,69 @@ package org.geosdi.geoplatform.connector.server.request.v110.transaction.stax;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public enum WFSTransactionParam {
+public enum WFSTransactionParam implements GPWFSTransactionParam {
 
-    TRANSACTION,
-    TRANSACTION_INSERT,
-    ID_GEN,
-    INPUT_FORMAT,
-    SRS_NAME,
-    LOCKID,
-    RELEASE_ACTION;
+    TRANSACTION {
+        /**
+         * @return {@link String}
+         */
+        @Override
+        public String getTransactionParam() {
+            return "Transaction";
+        }
+    },
+    TRANSACTION_INSERT {
+        /**
+         * @return {@link String}
+         */
+        @Override
+        public String getTransactionParam() {
+            return "Insert";
+        }
+    },
+    ID_GEN {
+        /**
+         * @return {@link String}
+         */
+        @Override
+        public String getTransactionParam() {
+            return "idgen";
+        }
+    },
+    INPUT_FORMAT {
+        /**
+         * @return {@link String}
+         */
+        @Override
+        public String getTransactionParam() {
+            return "inputFormat";
+        }
+    },
+    SRS_NAME {
+        /**
+         * @return {@link String}
+         */
+        @Override
+        public String getTransactionParam() {
+            return "srsName";
+        }
+    },
+    LOCKID {
+        /**
+         * @return {@link String}
+         */
+        @Override
+        public String getTransactionParam() {
+            return "LockId";
+        }
+    },
+    RELEASE_ACTION {
+        /**
+         * @return {@link String}
+         */
+        @Override
+        public String getTransactionParam() {
+            return "releaseAction";
+        }
+    };
 }

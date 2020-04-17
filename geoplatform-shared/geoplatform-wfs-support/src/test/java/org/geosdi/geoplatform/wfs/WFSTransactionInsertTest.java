@@ -36,21 +36,18 @@
 package org.geosdi.geoplatform.wfs;
 
 import org.geosdi.geoplatform.connector.GPWFSConnectorStore;
-import org.geosdi.geoplatform.connector.WFSConnectorBuilder;
 import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequest;
 import org.geosdi.geoplatform.connector.server.request.WFSTransactionRequest;
 import org.geosdi.geoplatform.connector.wfs.response.AttributeDTO;
 import org.geosdi.geoplatform.connector.wfs.response.FeatureCollectionDTO;
 import org.geosdi.geoplatform.connector.wfs.response.GeometryAttributeDTO;
 import org.geosdi.geoplatform.connector.wfs.response.LayerSchemaDTO;
-import org.geosdi.geoplatform.gui.shared.wfs.TransactionOperation;
 import org.geosdi.geoplatform.support.wfs.feature.reader.FeatureSchemaReader;
 import org.geosdi.geoplatform.support.wfs.feature.reader.GPFeatureSchemaReader;
 import org.geosdi.geoplatform.support.wfs.feature.reader.WFSGetFeatureStaxReader;
 import org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType;
 import org.geosdi.geoplatform.xml.wfs.v110.TransactionResponseType;
 import org.geosdi.geoplatform.xml.wfs.v110.TransactionSummaryType;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -63,6 +60,12 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 
+import static java.lang.Integer.valueOf;
+import static org.geosdi.geoplatform.connector.WFSConnectorBuilder.newConnector;
+import static org.geosdi.geoplatform.gui.shared.wfs.TransactionOperation.INSERT;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -73,68 +76,55 @@ public class WFSTransactionInsertTest {
     private static final Logger logger = LoggerFactory.getLogger(WFSTransactionInsertTest.class);
     private final static QName TASMANIA_ROADS = new QName("http://www.openplans.org/topp",
             "topp:tasmania_roads", "topp");
-    //
+
     private final String wfsURL = "http://localhost:8080/geoserver/wfs";
     GPWFSConnectorStore serverConnector;
     FeatureSchemaReader featureReaderXSD = new GPFeatureSchemaReader();
 
     @Before
     public void setUp() throws Exception {
-        this.serverConnector = WFSConnectorBuilder.newConnector().withServerUrl(
-                new URL(wfsURL)).build();
+        this.serverConnector = newConnector().withServerUrl(new URL(wfsURL)).build();
     }
 
     @Test
-    @Ignore(value = "To Enable this test there will be a Geoserver local "
-            + "which runs")
+    @Ignore(value = "To Enable this test there will be a Geoserver local to run.")
     public void tasmaniaRoads() throws Exception {
         WFSTransactionRequest<TransactionResponseType> request = serverConnector.createTransactionRequest();
-
-        request.setOperation(TransactionOperation.INSERT);
+        request.setOperation(INSERT);
         request.setTypeName(TASMANIA_ROADS);
-
         AttributeDTO att = new AttributeDTO();
         att.setName("TYPE");
         att.setValue("ecco");
-
         GeometryAttributeDTO geometry = new GeometryAttributeDTO();
         geometry.setName("the_geom");
-        geometry.setSrid(new Integer(4326));
-        geometry.setValue("MULTILINESTRING ((10 10, 20 20, 10 40), "
-                + "(40 40, 30 30, 40 20, 30 10))");
-
+        geometry.setSrid(valueOf(4326));
+        geometry.setValue("MULTILINESTRING ((10 10, 20 20, 10 40), (40 40, 30 30, 40 20, 30 10))");
         request.setAttributes(Arrays.asList(att, geometry));
-
-        logger.info("\n*** Request TRANSACTION INSERT ***\n{}\n\n", request.showRequestAsString());
-
+        logger.info("***************** Request TRANSACTION INSERT ******\n{}\n\n", request.showRequestAsString());
         TransactionResponseType response = request.getResponse();
         logger.info("\n*** {}", response.getTransactionResults());
-
         TransactionSummaryType transactionSummary = response.getTransactionSummary();
-        Assert.assertEquals(0, transactionSummary.getTotalDeleted().intValue());
-        Assert.assertEquals(0, transactionSummary.getTotalUpdated().intValue());
-        Assert.assertEquals(1, transactionSummary.getTotalInserted().intValue());
-        Assert.assertEquals("1.1.0", response.getVersion());
-
-        logger.info("\n@@@@@@@@@InsertResults {}", response.getInsertResults());
+        assertEquals(0, transactionSummary.getTotalDeleted().intValue());
+        assertEquals(0, transactionSummary.getTotalUpdated().intValue());
+        assertEquals(1, transactionSummary.getTotalInserted().intValue());
+        assertEquals("1.1.0", response.getVersion());
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@InsertResults {}", response.getInsertResults());
         List<LayerSchemaDTO> schemas = featureReaderXSD.read(new URL(wfsURL
                 + "?service=wfs"
                 + "&version=1.1.0"
                 + "&request=DescribeFeatureType"
                 + "&typeName=topp:tasmania_roads").openStream());
-        Assert.assertNotNull(schemas);
-        Assert.assertEquals(1, schemas.size());
+        assertNotNull(schemas);
+        assertEquals(1, schemas.size());
         LayerSchemaDTO layerSchema = schemas.get(0);
-        logger.info("\n\n#####################Layer Schema : {}", layerSchema);
+        logger.info("###############################Layer Schema : {}", layerSchema);
         QName name = new QName("topp:tasmania_roads");
         WFSGetFeatureRequest getRequest = serverConnector.createGetFeatureRequest();
-
         getRequest.setTypeName(name);
         getRequest.setResultType(ResultTypeType.RESULTS.value());
         InputStream is = getRequest.getResponseAsStream();
         WFSGetFeatureStaxReader featureReaderStAX = new WFSGetFeatureStaxReader(layerSchema);
         FeatureCollectionDTO featureCollection = featureReaderStAX.read(is);
-        logger.info("\n\n@@@@@@@@@@@@@@@@@@@ {}", featureCollection);
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}", featureCollection);
     }
-
 }

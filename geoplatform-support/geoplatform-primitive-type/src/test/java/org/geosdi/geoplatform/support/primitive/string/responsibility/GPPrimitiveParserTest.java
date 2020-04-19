@@ -137,4 +137,10 @@ public class GPPrimitiveParserTest {
         logger.info("###########################PARSE_VALUE : {}\n", className);
         assertTrue(className.equalsIgnoreCase(Integer[].class.getSimpleName()));
     }
+
+    @Test
+    public void o_parseValueTest() throws Exception {
+        String className = primitiveParserHandlerManager.parseValue("2977").getSimpleName();
+        logger.info("###########################PARSE_VALUE : {}\n", className);
+    }
 }

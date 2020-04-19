@@ -188,14 +188,14 @@ public class CSWCatalogRecordTest extends CSWCatalogTest {
     @Test
     public void testGetRecordsOurCountAreaItaly() throws Exception {
         int tot = cswService.getRecordsCount(catalogFinder);
-        assertEquals(559, tot);
+        assertEquals(6078, tot);
         AreaInfo areaInfo = catalogFinder.getAreaInfo();
         areaInfo.setActive(true);
         BBox bBoxItaly = new BBox(6.624, 36.6492, 18.5144, 47.0946);
         areaInfo.setBBox(bBoxItaly);
         areaInfo.setAreaSearchType(AreaInfo.AreaSearchType.ENCLOSES);
         int countEncloses = cswService.getRecordsCount(catalogFinder);
-        assertEquals(24, countEncloses);
+        assertEquals(26, countEncloses);
         areaInfo.setAreaSearchType(AreaInfo.AreaSearchType.IS);
         int countIs = cswService.getRecordsCount(catalogFinder);
         assertEquals(0, countIs);
@@ -204,7 +204,7 @@ public class CSWCatalogRecordTest extends CSWCatalogTest {
         assertEquals(39, countOutside);
         areaInfo.setAreaSearchType(AreaInfo.AreaSearchType.OVERLAP);
         int countOverlap = cswService.getRecordsCount(catalogFinder);
-        assertEquals(520, countOverlap);
+        assertEquals(2031, countOverlap);
         logger.info("################ TOT: {}\nENCLOSES: {}\nIS: {}\nOUTSIDE {}\nOVERLAP {}", tot, countEncloses, countIs, countOutside, countOverlap);
     }
 

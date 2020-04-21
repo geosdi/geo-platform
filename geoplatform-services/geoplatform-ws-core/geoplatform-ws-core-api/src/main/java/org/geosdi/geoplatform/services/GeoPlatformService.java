@@ -939,8 +939,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
      * @param project the Project to save
      * @return the Project ID
      * @throws IllegalParameterFault if the Project is not valid
-     * @see #saveProject(java.lang.String,
-     * org.geosdi.geoplatform.core.model.GPProject, boolean)
+     * @see #saveProject(SaveProjectRequest)
      * @deprecated only for test purpose
      */
     @Post
@@ -1122,9 +1121,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
      * @return the Folder ID
      * @throws ResourceNotFoundFault if Project not found
      * @throws IllegalParameterFault if Folder is not valid
-     * @see #saveAddedFolderAndTreeModifications(java.lang.Long, java.lang.Long,
-     * org.geosdi.geoplatform.core.model.GPFolder,
-     * org.geosdi.geoplatform.responce.collection.GPWebServiceMapData)
+     * @see #saveAddedFolderAndTreeModifications(WSAddFolderAndTreeModificationsRequest)
      * @deprecated only for test purpose
      */
     @Post
@@ -1161,8 +1158,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
      * @param folderID the Folder ID
      * @return true if the Folder was deleted
      * @throws ResourceNotFoundFault if Folder not found
-     * @see #saveDeletedFolderAndTreeModifications(java.lang.Long,
-     * org.geosdi.geoplatform.responce.collection.GPWebServiceMapData)
+     * @see #saveDeletedFolderAndTreeModifications(WSDeleteFolderAndTreeModifications)
      * @deprecated only for test purpose
      */
     @Delete
@@ -1469,7 +1465,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
      * @return the Layer ID
      * @throws ResourceNotFoundFault if Layer not found
      * @throws IllegalParameterFault if the Layer is not valid
-     * @see #saveLayerProperties(org.geosdi.geoplatform.responce.RasterPropertiesDTO)
+     * @see #saveLayerProperties(RasterPropertiesDTO)
      * @deprecated only for test purpose
      */
     @Put
@@ -1503,8 +1499,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
      * @param layerID the Layer ID
      * @return true if the Layer was deleted
      * @throws ResourceNotFoundFault if Layer not found
-     * @see #saveDeletedLayerAndTreeModifications(java.lang.Long,
-     * org.geosdi.geoplatform.responce.collection.GPWebServiceMapData)
+     * @see #saveDeletedLayerAndTreeModifications(WSDeleteLayerAndTreeModificationsRequest)
      * @deprecated only for test purpose
      */
     @Delete

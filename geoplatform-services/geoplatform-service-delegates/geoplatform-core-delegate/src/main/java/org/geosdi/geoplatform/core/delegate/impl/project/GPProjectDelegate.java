@@ -148,8 +148,7 @@ public class GPProjectDelegate implements ProjectDelegate {
     }
 
     @Override
-    public Long updateProject(GPProject project) throws ResourceNotFoundFault,
-            IllegalParameterFault {
+    public Long updateProject(GPProject project) throws ResourceNotFoundFault, IllegalParameterFault {
         EntityCorrectness.checkProject(project); // TODO assert
 
         GPProject origProject = this.getProjectByID(project.getId());
@@ -159,6 +158,8 @@ public class GPProjectDelegate implements ProjectDelegate {
         origProject.setName(project.getName());
         origProject.setNumberOfElements(project.getNumberOfElements());
         origProject.setShared(project.isShared());
+        origProject.setExternalPublic(project.isExternalPublic());
+        origProject.setInternalPublic(project.isInternalPublic());
         projectDao.update(origProject);
         return origProject.getId();
     }
@@ -195,7 +196,7 @@ public class GPProjectDelegate implements ProjectDelegate {
     @Override
     public ShortProjectDTO getShortProject(Long projectID) throws ResourceNotFoundFault {
         GPProject project = this.getProjectDetail(projectID);
-        return new ShortProjectDTO(project.getVersion(), project.getNumberOfElements());
+        return new ShortProjectDTO(project.getVersion(), project.getNumberOfElements(), project.isInternalPublic(), project.isExternalPublic());
     }
 
     @Override
@@ -686,7 +687,6 @@ public class GPProjectDelegate implements ProjectDelegate {
             gpAccountProject.setDefaultProject(false);
             projectDao.persist(projectCloned);
             accountProjectDao.persist(gpAccountProject);
-
             Map<Long, GPFolder> folderMap = IntStream.iterate(0, n -> n + 1).limit(rootFolders.size()).boxed()
                     .collect(Collectors.toMap(i -> rootFolders.get(i).getId(),
                             i -> new GPFolderFunction(projectCloned, folderDao, null).apply(rootFolders.get(i))));

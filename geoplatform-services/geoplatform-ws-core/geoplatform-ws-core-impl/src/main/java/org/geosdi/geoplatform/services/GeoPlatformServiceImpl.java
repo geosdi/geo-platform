@@ -360,9 +360,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public List<ProjectDTO> searchAccountProjects(Long accountID,
-            PaginatedSearchRequest request)
-            throws ResourceNotFoundFault {
+    public List<ProjectDTO> searchAccountProjects(Long accountID, PaginatedSearchRequest request) throws ResourceNotFoundFault {
         return gpProjectDelegate.searchAccountProjects(accountID, request);
     }
 

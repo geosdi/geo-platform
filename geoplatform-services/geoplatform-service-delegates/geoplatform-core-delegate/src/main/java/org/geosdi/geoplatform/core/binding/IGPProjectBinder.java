@@ -35,11 +35,12 @@
  */
 package org.geosdi.geoplatform.core.binding;
 
-import com.google.common.base.Preconditions;
 import org.geosdi.geoplatform.core.model.GPProject;
 
 import java.util.Date;
 import java.util.function.Function;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -71,7 +72,7 @@ public interface IGPProjectBinder<TO extends GPProject, FROM extends GPProject, 
         @Override
         public GPProject bind() throws Exception {
             super.checkArguments();
-            Preconditions.checkNotNull(projectName, "The Project Name Parameter must not be null.");
+            checkNotNull(projectName, "The Project Name Parameter must not be null.");
             return new GPProjectFunction().apply(from);
         }
 
@@ -103,6 +104,8 @@ public interface IGPProjectBinder<TO extends GPProject, FROM extends GPProject, 
                 gpProjectCloned.setNumberOfElements(gpProject.getNumberOfElements());
                 gpProjectCloned.setShared(gpProject.isShared());
                 gpProjectCloned.setVersion(gpProject.getVersion());
+                gpProjectCloned.setInternalPublic(gpProject.isInternalPublic());
+                gpProjectCloned.setExternalPublic(gpProject.isExternalPublic());
                 return gpProjectCloned;
             }
         }

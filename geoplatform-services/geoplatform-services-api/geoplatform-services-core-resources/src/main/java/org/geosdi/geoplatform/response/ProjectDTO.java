@@ -71,6 +71,8 @@ public class ProjectDTO implements GPProjectDTO {
     private boolean shared;
     private String description;
     private String imagePath;
+    private boolean internalPublic;
+    private boolean externalPublic;
     private Date creationDate;
     //
     private boolean defaultProject;
@@ -99,6 +101,8 @@ public class ProjectDTO implements GPProjectDTO {
         this.shared = project.isShared();
         this.description = project.getDescription();
         this.imagePath = project.getImagePath();
+        this.internalPublic = project.isInternalPublic();
+        this.externalPublic = project.isExternalPublic();
         this.creationDate = project.getCreationDate();
     }
 
@@ -153,6 +157,8 @@ public class ProjectDTO implements GPProjectDTO {
         if (projectDTO.getImagePath() != null) {
             project.setImagePath(projectDTO.getImagePath());
         }
+        project.setInternalPublic(project.isInternalPublic());
+        project.setExternalPublic(project.isExternalPublic());
         return project;
     }
 

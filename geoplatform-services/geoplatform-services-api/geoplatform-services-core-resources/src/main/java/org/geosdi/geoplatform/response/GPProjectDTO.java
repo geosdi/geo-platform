@@ -116,6 +116,26 @@ public interface GPProjectDTO extends Serializable {
     void setImagePath(String theImagePath);
 
     /**
+     * @return {@link Boolean}
+     */
+    boolean isInternalPublic();
+
+    /**
+     * @param internalPublic
+     */
+    void setInternalPublic(boolean internalPublic);
+
+    /**
+     * @return {@link Boolean}
+     */
+    boolean isExternalPublic();
+
+    /**
+     * @param externalPublic
+     */
+    void setExternalPublic(boolean externalPublic);
+
+    /**
      * @return {@link Date}
      */
     Date getCreationDate();

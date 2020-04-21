@@ -51,13 +51,18 @@ public class ShortProjectDTO implements Serializable {
     //
     private Integer version;
     private Integer numberOfElements;
+    private boolean internalPublic;
+    private boolean externalPublic;
 
     public ShortProjectDTO() {
     }
 
-    public ShortProjectDTO(Integer theVersion, Integer theNumberOfElements) {
+    public ShortProjectDTO(Integer theVersion, Integer theNumberOfElements, boolean theInternalPublic,
+            boolean theExternalPublic) {
         this.version = theVersion;
         this.numberOfElements = theNumberOfElements;
+        this.internalPublic = theInternalPublic;
+        this.externalPublic = theExternalPublic;
     }
 
     /**
@@ -88,11 +93,41 @@ public class ShortProjectDTO implements Serializable {
         this.numberOfElements = numberOfElements;
     }
 
+    /**
+     * @return {@link Boolean}
+     */
+    public boolean isInternalPublic() {
+        return internalPublic;
+    }
+
+    /**
+     * @param internalPublic
+     */
+    public void setInternalPublic(boolean internalPublic) {
+        this.internalPublic = internalPublic;
+    }
+
+    /**
+     * @return {@link Boolean}
+     */
+    public boolean isExternalPublic() {
+        return externalPublic;
+    }
+
+    /**
+     * @param externalPublic
+     */
+    public void setExternalPublic(boolean externalPublic) {
+        this.externalPublic = externalPublic;
+    }
+
     @Override
     public String toString() {
-        return getClass().getName() + "{" +
-                " version = " + version +
-                ", numberOfElements = " + numberOfElements +
-                '}';
+        return getClass().getName() + "{"
+                + " version = " + version
+                + ", numberOfElements = " + numberOfElements +
+                ", internalPublic = " + internalPublic +
+                ", externalPublic = " + externalPublic
+                + '}';
     }
 }

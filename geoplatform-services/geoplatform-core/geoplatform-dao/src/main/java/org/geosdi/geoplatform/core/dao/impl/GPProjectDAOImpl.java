@@ -37,18 +37,20 @@ package org.geosdi.geoplatform.core.dao.impl;
 
 import com.googlecode.genericdao.search.ISearch;
 import com.googlecode.genericdao.search.Search;
-import java.util.List;
 import org.geosdi.geoplatform.core.dao.GPProjectDAO;
 import org.geosdi.geoplatform.core.model.GPProject;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+
+import static java.lang.Boolean.TRUE;
 
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  * 
  */
 @Transactional
-public class GPProjectDAOImpl extends BaseDAO<GPProject, Long>
-        implements GPProjectDAO {
+public class GPProjectDAOImpl extends BaseDAO<GPProject, Long> implements GPProjectDAO {
 
     @Override
     public List<GPProject> findAll() {
@@ -101,5 +103,19 @@ public class GPProjectDAOImpl extends BaseDAO<GPProject, Long>
         Search search = new Search();
         search.addFilterEqual("name", projectName);
         return searchUnique(search);
+    }
+
+    @Override
+    public List<GPProject> findInternalPublic() {
+        Search search = new Search();
+        search.addFilterEqual("internalPublic", TRUE);
+        return search(search);
+    }
+
+    @Override
+    public List<GPProject> findExternalPublic() {
+        Search search = new Search();
+        search.addFilterEqual("externalPublic", TRUE);
+        return search(search);
     }
 }

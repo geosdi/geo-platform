@@ -112,8 +112,7 @@ public class CatalogGetRecordsTest {
         logger.info("NEXT RECORD @@@@@@@@@@@@@@@@@@@@@@ {}", result.getNextRecord());
         List<JAXBElement<? extends AbstractRecordType>> metadata = result.getAbstractRecord();
         if (!metadata.isEmpty()) {
-            logger.info("FIRST FULL METADATA @@@@@@@@@@@@@@@@@@@@@ {}",
-                    (SummaryRecordType) (metadata.get(0).getValue()));
+            logger.info("FIRST FULL METADATA @@@@@@@@@@@@@@@@@@@@@ {}", (metadata.get(0).getValue()));
         }
     }
 

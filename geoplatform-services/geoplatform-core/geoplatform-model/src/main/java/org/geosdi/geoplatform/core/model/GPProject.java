@@ -36,7 +36,6 @@ package org.geosdi.geoplatform.core.model;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.Index;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -49,7 +48,9 @@ import java.util.Date;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity(name = "Project")
-@Table(name = "gp_project")
+@Table(name = "gp_project", indexes = {
+        @Index(columnList = "name", name = "PROJECT_NAME_INDEX")
+})
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "project")
 public class GPProject implements Serializable {
 
@@ -64,7 +65,6 @@ public class GPProject implements Serializable {
     private Long id;
     //
     @Column(nullable = false)
-    @Index(name = "PROJECT_NAME_INDEX")
     private String name;
     //
     @Column(name = "number_of_elements")

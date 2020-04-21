@@ -81,8 +81,7 @@ class GPProjectDAOImpl extends GPAbstractJpaDAO<GPProject, Long> implements GPPr
      */
     @Override
     public GPProject findByProjectName(String projectName) throws GPDAOException {
-        checkArgument((projectName != null) && !(projectName.isEmpty()),
-                "The Parameter projectName must not be null or an empty string.");
+        checkArgument((projectName != null) && !(projectName.trim().isEmpty()), "The Parameter projectName must not be null or an empty string.");
         try {
             CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<GPProject> criteriaQuery = super.createCriteriaQuery();
@@ -91,6 +90,42 @@ class GPProjectDAOImpl extends GPAbstractJpaDAO<GPProject, Long> implements GPPr
             criteriaQuery.where(builder.equal(root.get("name"), projectName));
             List<GPProject> projects = this.entityManager.createQuery(criteriaQuery).getResultList();
             return ((projects != null) && !(projects.isEmpty()) ? projects.get(0) : null);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new GPDAOException(ex);
+        }
+    }
+
+    /**
+     * @return {@link List<GPProject>}
+     */
+    @Override
+    public List<GPProject> findInternalPublic() {
+        try {
+            CriteriaBuilder builder = super.criteriaBuilder();
+            CriteriaQuery<GPProject> criteriaQuery = super.createCriteriaQuery();
+            Root<GPProject> root = criteriaQuery.from(this.persistentClass);
+            criteriaQuery.select(root);
+            criteriaQuery.where(builder.equal(root.get("internalPublic"), TRUE));
+            return this.entityManager.createQuery(criteriaQuery).getResultList();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new GPDAOException(ex);
+        }
+    }
+
+    /**
+     * @return {@link List<GPProject>}
+     */
+    @Override
+    public List<GPProject> findExternalPublic() {
+        try {
+            CriteriaBuilder builder = super.criteriaBuilder();
+            CriteriaQuery<GPProject> criteriaQuery = super.createCriteriaQuery();
+            Root<GPProject> root = criteriaQuery.from(this.persistentClass);
+            criteriaQuery.select(root);
+            criteriaQuery.where(builder.equal(root.get("externalPublic"), TRUE));
+            return this.entityManager.createQuery(criteriaQuery).getResultList();
         } catch (Exception ex) {
             ex.printStackTrace();
             throw new GPDAOException(ex);

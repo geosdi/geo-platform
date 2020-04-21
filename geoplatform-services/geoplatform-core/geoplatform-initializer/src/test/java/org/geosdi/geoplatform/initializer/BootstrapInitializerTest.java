@@ -35,58 +35,71 @@
  */
 package org.geosdi.geoplatform.initializer;
 
-import org.junit.Assert;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
+
+import static org.junit.Assert.*;
 
 /**
  * @author giuseppe
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
+@FixMethodOrder(value = MethodSorters.NAME_ASCENDING)
 public class BootstrapInitializerTest extends BaseInitializerTest {
 
     /**
      * Put the DB into a substantial state.
      */
     @Test
-    public void testBootstrap() {
+    public void a_testBootstrap() {
         logger.trace("\n\t@@@ testBootstrap @@@");
 
-        Assert.assertNotNull("accountDAO is NULL", accountDAO);
-        Assert.assertNotNull("authorityDAO is NULL", authorityDAO);
-        Assert.assertNotNull("projectDAO is NULL", projectDAO);
-        Assert.assertNotNull("userProjectsDAO is NULL", accountProjectDAO);
-        Assert.assertNotNull("folderDAO is NULL", folderDAO);
-        Assert.assertNotNull("layerDAO is NULL", layerDAO);
+        assertNotNull("accountDAO is NULL", accountDAO);
+        assertNotNull("authorityDAO is NULL", authorityDAO);
+        assertNotNull("projectDAO is NULL", projectDAO);
+        assertNotNull("userProjectsDAO is NULL", accountProjectDAO);
+        assertNotNull("folderDAO is NULL", folderDAO);
+        assertNotNull("layerDAO is NULL", layerDAO);
 //        Assert.assertNotNull("styleDAO is NULL", styleDAO);
-        Assert.assertNotNull("serverDAO is NULL", serverDAO);
-        Assert.assertNotNull("organizationDAO is NULL", organizationDAO);
-        Assert.assertNotNull("messageDAO is NULL", messageDAO);
+        assertNotNull("serverDAO is NULL", serverDAO);
+        assertNotNull("organizationDAO is NULL", organizationDAO);
+        assertNotNull("messageDAO is NULL", messageDAO);
         // ACL
-        Assert.assertNotNull("classDAO is NULL", classDAO);
-        Assert.assertNotNull("sidDAO is NULL", sidDAO);
-        Assert.assertNotNull("objectIdentityDAO is NULL", objectIdentityDAO);
-        Assert.assertNotNull("entryDAO is NULL", entryDAO);
-        Assert.assertNotNull("guiComponentDAO is NULL", guiComponentDAO);
+        assertNotNull("classDAO is NULL", classDAO);
+        assertNotNull("sidDAO is NULL", sidDAO);
+        assertNotNull("objectIdentityDAO is NULL", objectIdentityDAO);
+        assertNotNull("entryDAO is NULL", entryDAO);
+        assertNotNull("guiComponentDAO is NULL", guiComponentDAO);
 
         super.removeAll();
 
 //        Assert.assertEquals("All Styles doesn't REMOVED", 0, styleDAO.findAll().size());
-        Assert.assertEquals("All projectDAO doesn't REMOVED", 0, projectDAO.findAll().size());
-        Assert.assertEquals("All AccountProject doesn't REMOVED", 0, accountProjectDAO.findAll().size());
-        Assert.assertEquals("All Layers doesn't REMOVED", 0, layerDAO.findAll().size());
-        Assert.assertEquals("All Folders doesn't REMOVED", 0, folderDAO.findAll().size());
-        Assert.assertEquals("All Authorities doesn't REMOVED", 0, authorityDAO.findAll().size());
-        Assert.assertEquals("All Accounts doesn't REMOVED", 0, accountDAO.findAll().size());
-        Assert.assertEquals("All Servers doesn't REMOVED", 0, serverDAO.findAll().size());
-        Assert.assertEquals("All Organizations doesn't REMOVED", 0, organizationDAO.findAll().size());
-        Assert.assertEquals("All Messages doesn't REMOVED", 0, messageDAO.findAll().size());
+        assertEquals("All projectDAO doesn't REMOVED", 0, projectDAO.findAll().size());
+        assertEquals("All AccountProject doesn't REMOVED", 0, accountProjectDAO.findAll().size());
+        assertEquals("All Layers doesn't REMOVED", 0, layerDAO.findAll().size());
+        assertEquals("All Folders doesn't REMOVED", 0, folderDAO.findAll().size());
+        assertEquals("All Authorities doesn't REMOVED", 0, authorityDAO.findAll().size());
+        assertEquals("All Accounts doesn't REMOVED", 0, accountDAO.findAll().size());
+        assertEquals("All Servers doesn't REMOVED", 0, serverDAO.findAll().size());
+        assertEquals("All Organizations doesn't REMOVED", 0, organizationDAO.findAll().size());
+        assertEquals("All Messages doesn't REMOVED", 0, messageDAO.findAll().size());
         // ACL
-        Assert.assertEquals("All Classes doesn't REMOVED", 0, classDAO.findAll().size());
-        Assert.assertEquals("All Sids doesn't REMOVED", 0, sidDAO.findAll().size());
-        Assert.assertEquals("All ObjectIdentities doesn't REMOVED", 0, objectIdentityDAO.findAll().size());
-        Assert.assertEquals("All Entries doesn't REMOVED", 0, entryDAO.findAll().size());
-        Assert.assertEquals("All GuiComponents doesn't REMOVED", 0, guiComponentDAO.findAll().size());
-
+        assertEquals("All Classes doesn't REMOVED", 0, classDAO.findAll().size());
+        assertEquals("All Sids doesn't REMOVED", 0, sidDAO.findAll().size());
+        assertEquals("All ObjectIdentities doesn't REMOVED", 0, objectIdentityDAO.findAll().size());
+        assertEquals("All Entries doesn't REMOVED", 0, entryDAO.findAll().size());
+        assertEquals("All GuiComponents doesn't REMOVED", 0, guiComponentDAO.findAll().size());
         super.insertData();
+    }
+
+    @Test
+    public void b_findInternalPublicProjectTest() throws Exception {
+        assertTrue(this.projectDAO.findInternalPublic().size() == 0);
+    }
+
+    @Test
+    public void c_findExternalPublicProjectTest() throws Exception {
+        assertTrue(this.projectDAO.findExternalPublic().size() == 0);
     }
 }

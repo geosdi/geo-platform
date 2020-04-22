@@ -65,7 +65,7 @@ public interface GPProjectDAO {
 
     GPProject findByProjectName(String projectName);
 
-    List<GPProject> findInternalPublic();
+    List<GPProject> findInternalPublic(int num, int page);
 
-    List<GPProject> findExternalPublic();
+    List<GPProject> findExternalPublic(int num , int page);
 }

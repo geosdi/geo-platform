@@ -106,16 +106,20 @@ public class GPProjectDAOImpl extends BaseDAO<GPProject, Long> implements GPProj
     }
 
     @Override
-    public List<GPProject> findInternalPublic() {
+    public List<GPProject> findInternalPublic(int num, int page) {
         Search search = new Search();
         search.addFilterEqual("internalPublic", TRUE);
+        search.setMaxResults(num);
+        search.setPage(page);
         return search(search);
     }
 
     @Override
-    public List<GPProject> findExternalPublic() {
+    public List<GPProject> findExternalPublic(int num, int page) {
         Search search = new Search();
         search.addFilterEqual("externalPublic", TRUE);
+        search.setMaxResults(num);
+        search.setPage(page);
         return search(search);
     }
 }

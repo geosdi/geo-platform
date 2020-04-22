@@ -127,8 +127,7 @@ class GPServerDAOImpl extends GPAbstractJpaDAO<GeoPlatformServer, Long> implemen
      */
     @Override
     public List<GeoPlatformServer> findByServerName(String serverName) throws GPDAOException {
-        checkArgument(((serverName != null) && !(serverName.isEmpty())),
-                "The Parameter serveName must not be null or an empty string.");
+        checkArgument(((serverName != null) && !(serverName.isEmpty())), "The Parameter serveName must not be null or an empty string.");
         try {
             CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<GeoPlatformServer> criteriaQuery = super.createCriteriaQuery();

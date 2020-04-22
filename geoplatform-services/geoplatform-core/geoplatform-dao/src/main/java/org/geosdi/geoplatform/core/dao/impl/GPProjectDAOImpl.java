@@ -42,10 +42,10 @@ import org.geosdi.geoplatform.persistence.dao.jpa.GPAbstractJpaDAO;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-
 import java.util.List;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -97,17 +97,24 @@ class GPProjectDAOImpl extends GPAbstractJpaDAO<GPProject, Long> implements GPPr
     }
 
     /**
+     * @param size
+     * @param page
      * @return {@link List<GPProject>}
+     * @throws GPDAOException
      */
     @Override
-    public List<GPProject> findInternalPublic() {
+    public List<GPProject> findInternalPublic(int size, int page) throws GPDAOException {
         try {
             CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<GPProject> criteriaQuery = super.createCriteriaQuery();
             Root<GPProject> root = criteriaQuery.from(this.persistentClass);
             criteriaQuery.select(root);
             criteriaQuery.where(builder.equal(root.get("internalPublic"), TRUE));
-            return this.entityManager.createQuery(criteriaQuery).getResultList();
+            TypedQuery<GPProject> typedQuery = this.entityManager.createQuery(criteriaQuery);
+            Integer firstResult = (page == 0) ? 0 : ((page * size));
+            typedQuery.setFirstResult(firstResult);
+            typedQuery.setMaxResults(size);
+            return typedQuery.getResultList();
         } catch (Exception ex) {
             ex.printStackTrace();
             throw new GPDAOException(ex);
@@ -115,17 +122,24 @@ class GPProjectDAOImpl extends GPAbstractJpaDAO<GPProject, Long> implements GPPr
     }
 
     /**
+     * @param size
+     * @param page
      * @return {@link List<GPProject>}
+     * @throws GPDAOException
      */
     @Override
-    public List<GPProject> findExternalPublic() {
+    public List<GPProject> findExternalPublic(int size, int page) throws GPDAOException {
         try {
             CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<GPProject> criteriaQuery = super.createCriteriaQuery();
             Root<GPProject> root = criteriaQuery.from(this.persistentClass);
             criteriaQuery.select(root);
             criteriaQuery.where(builder.equal(root.get("externalPublic"), TRUE));
-            return this.entityManager.createQuery(criteriaQuery).getResultList();
+            TypedQuery<GPProject> typedQuery = this.entityManager.createQuery(criteriaQuery);
+            Integer firstResult = (page == 0) ? 0 : ((page * size));
+            typedQuery.setFirstResult(firstResult);
+            typedQuery.setMaxResults(size);
+            return typedQuery.getResultList();
         } catch (Exception ex) {
             ex.printStackTrace();
             throw new GPDAOException(ex);

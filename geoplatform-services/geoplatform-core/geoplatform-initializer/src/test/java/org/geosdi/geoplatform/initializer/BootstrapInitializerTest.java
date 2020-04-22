@@ -95,11 +95,11 @@ public class BootstrapInitializerTest extends BaseInitializerTest {
 
     @Test
     public void b_findInternalPublicProjectTest() throws Exception {
-        assertTrue(this.projectDAO.findInternalPublic().size() == 0);
+        assertTrue(this.projectDAO.findInternalPublic(10, 0).size() == 0);
     }
 
     @Test
     public void c_findExternalPublicProjectTest() throws Exception {
-        assertTrue(this.projectDAO.findExternalPublic().size() == 0);
+        assertTrue(this.projectDAO.findExternalPublic(10, 0).size() == 0);
     }
 }

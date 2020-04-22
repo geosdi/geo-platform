@@ -74,6 +74,22 @@ public interface ProjectDelegate extends GPProjectResource,
     @Override
     Long cloneProject(CloneProjectRequest cloneProjectRequest) throws Exception;
 
+    /**
+     * @param request
+     * @return {@link ProjectDTOContainer}
+     * @throws Exception
+     */
+    @Override
+     ProjectDTOContainer findInternalPublicProjects(PaginatedSearchRequest request) throws Exception;
+
+    /**
+     * @param request
+     * @return {@link ProjectDTOContainer}
+     * @throws Exception
+     */
+    @Override
+    ProjectDTOContainer findExternalPublicProjects(PaginatedSearchRequest request) throws Exception;
+
     @Override
     Long updateProject(GPProject project)
             throws ResourceNotFoundFault, IllegalParameterFault;

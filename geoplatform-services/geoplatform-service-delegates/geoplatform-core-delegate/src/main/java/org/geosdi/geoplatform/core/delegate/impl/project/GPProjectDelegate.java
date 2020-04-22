@@ -67,6 +67,7 @@ import static org.geosdi.geoplatform.response.FolderDTO.convertToGPFolder;
 import static org.geosdi.geoplatform.response.RasterLayerDTO.convertToGPRasterLayer;
 import static org.geosdi.geoplatform.response.VectorLayerDTO.convertToGPVectorLayer;
 import static org.geosdi.geoplatform.response.factory.AccountDTOFactory.buildShortAccountDTOList;
+import static org.geosdi.geoplatform.response.ProjectDTO.convertToProjectDTOList;
 
 /**
  * <p>Project service delegate.</p>
@@ -711,6 +712,34 @@ public class GPProjectDelegate implements ProjectDelegate {
         } catch (IllegalParameterFault e) {
             throw new IllegalParameterFault(e.getMessage());
         }
+    }
+
+    /**
+     * @param request
+     * @return {@link ProjectDTOContainer}
+     * @throws Exception
+     */
+    @Override
+    public ProjectDTOContainer findInternalPublicProjects(PaginatedSearchRequest request) throws Exception {
+        if(request == null) {
+            throw new IllegalParameterFault("The Parameter PaginatedSearchRequest must not be null.");
+        }
+        logger.trace("#######################Called {}#findInternalPublicProjects with request : {}\n", this, request);
+        return new ProjectDTOContainer(convertToProjectDTOList(this.projectDao.findInternalPublic(request.getNum(), request.getPage())));
+    }
+
+    /**
+     * @param request
+     * @return {@link ProjectDTOContainer}
+     * @throws Exception
+     */
+    @Override
+    public ProjectDTOContainer findExternalPublicProjects(PaginatedSearchRequest request) throws Exception {
+        if(request == null) {
+            throw new IllegalParameterFault("The Parameter PaginatedSearchRequest must not be null.");
+        }
+        logger.trace("#######################Called {}#findExternalPublicProjects with request : {}\n", this, request);
+        return new ProjectDTOContainer(convertToProjectDTOList(this.projectDao.findExternalPublic(request.getNum(), request.getPage())));
     }
 
     @Override

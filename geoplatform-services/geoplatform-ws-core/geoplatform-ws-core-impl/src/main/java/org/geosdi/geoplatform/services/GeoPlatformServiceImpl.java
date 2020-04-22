@@ -448,6 +448,26 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
         return gpProjectDelegate.cloneProject(cloneProjectRequest);
     }
 
+    /**
+     * @param request
+     * @return {@link ProjectDTOContainer}
+     * @throws Exception
+     */
+    @Override
+    public ProjectDTOContainer findInternalPublicProjects(PaginatedSearchRequest request) throws Exception {
+        return this.gpProjectDelegate.findInternalPublicProjects(request);
+    }
+
+    /**
+     * @param request
+     * @return {@link ProjectDTOContainer}
+     * @throws Exception
+     */
+    @Override
+    public ProjectDTOContainer findExternalPublicProjects(PaginatedSearchRequest request) throws Exception {
+        return this.gpProjectDelegate.findExternalPublicProjects(request);
+    }
+
     @Override
     public Long insertProject(GPProject project) throws IllegalParameterFault {
         return gpProjectDelegate.insertProject(project);

@@ -150,6 +150,8 @@ public final class GPServiceRSPathConfig {
             + "cloneProject";
     public static final String SET_PROJECT_SHARED_PATH = PROJECTS_PATH
             + "setProjectShared";
+    public static final String FIND_INTERNAL_PUBLIC_PROJECTS = PROJECTS_PATH + "findInternalPublicProjects";
+    public static final String FIND_EXTERNAL_PUBLIC_PROJECTS = PROJECTS_PATH + "findExternalPublicProjects";
 
     /**
      * ACCOUNT PROJECTS PATH *

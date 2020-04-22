@@ -934,6 +934,24 @@ public interface GeoPlatformService extends GPCoreServiceApi {
             throws Exception;
 
     /**
+     * @param request
+     * @return {@link ProjectDTOContainer}
+     * @throws Exception
+     */
+    @POST
+    @Path(value = GPServiceRSPathConfig.FIND_INTERNAL_PUBLIC_PROJECTS)
+    ProjectDTOContainer findInternalPublicProjects(PaginatedSearchRequest request) throws Exception;
+
+    /**
+     * @param request
+     * @return {@link ProjectDTOContainer}
+     * @throws Exception
+     */
+    @POST
+    @Path(value = GPServiceRSPathConfig.FIND_EXTERNAL_PUBLIC_PROJECTS)
+    ProjectDTOContainer findExternalPublicProjects(PaginatedSearchRequest request) throws Exception;
+
+    /**
      * Save a Project.
      *
      * @param project the Project to save

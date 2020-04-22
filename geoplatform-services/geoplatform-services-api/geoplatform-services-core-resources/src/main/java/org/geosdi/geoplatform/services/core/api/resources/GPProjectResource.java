@@ -37,8 +37,10 @@ package org.geosdi.geoplatform.services.core.api.resources;
 
 import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
+import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.project.CloneProjectRequest;
 import org.geosdi.geoplatform.request.project.SaveProjectRequest;
+import org.geosdi.geoplatform.response.ProjectDTOContainer;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -79,6 +81,20 @@ public interface GPProjectResource {
      * @throws Exception
      */
     Long cloneProject(CloneProjectRequest cloneProjectRequest) throws Exception;
+
+    /**
+     * @param request
+     * @return {@link ProjectDTOContainer}
+     * @throws Exception
+     */
+    ProjectDTOContainer findInternalPublicProjects(PaginatedSearchRequest request) throws Exception;
+
+    /**
+     * @param request
+     * @return {@link ProjectDTOContainer}
+     * @throws Exception
+     */
+    ProjectDTOContainer findExternalPublicProjects(PaginatedSearchRequest request) throws Exception;
 
     /**
      * Update a Project.

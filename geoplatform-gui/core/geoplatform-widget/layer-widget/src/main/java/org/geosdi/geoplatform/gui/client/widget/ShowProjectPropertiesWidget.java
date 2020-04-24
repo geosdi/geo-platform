@@ -109,8 +109,7 @@ public class ShowProjectPropertiesWidget extends GeoPlatformWindow {
 
     @Override
     public void setWindowProperties() {
-        setHeadingHtml(
-                LayerModuleConstants.INSTANCE.ProjectPropertiesWidget_headingText());
+        setHeadingHtml(LayerModuleConstants.INSTANCE.ProjectPropertiesWidget_headingText());
         setModal(true);
         setResizable(false);
         setLayout(new FlowLayout());

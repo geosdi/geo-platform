@@ -4,7 +4,7 @@
  * http://geo-platform.org
  * ====================================================================
  * <p>
- * Copyright (C) 2008-2019 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2020 geoSDI Group (CNR IMAA - Potenza - ITALY).
  * <p>
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by
@@ -32,39 +32,43 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.client.action.projects;
+package org.geosdi.geoplatform.gui.model.project;
 
-import com.extjs.gxt.ui.client.event.ButtonEvent;
-import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
-import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
-import org.geosdi.geoplatform.gui.client.widget.form.projects.ProjectBindingWidget;
-import org.geosdi.geoplatform.gui.client.widget.grid.pagination.listview.GPListViewSearchPanel;
-import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformSecureAction;
-import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
+import java.io.Serializable;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPProjectAction extends GeoPlatformSecureAction<ButtonEvent> {
-
-    private ProjectBindingWidget bindingProject;
+public interface GPProjectProperties extends Serializable {
 
     /**
-     * @param trustedLevel
-     * @param searchWidget
+     * @param projectsShared
      */
-    public GPProjectAction(GPTrustedLevel trustedLevel, GPListViewSearchPanel<GPClientProject> searchWidget) {
-        super(trustedLevel);
-        this.bindingProject = new ProjectBindingWidget(searchWidget);
-    }
+    void setProjectShared(boolean projectsShared);
 
-    @Override
-    public void componentSelected(ButtonEvent ce) {
-        if (ce.getButton().getHtml().equalsIgnoreCase(ButtonsConstants.INSTANCE.addText())) {
-            this.bindingProject.showForm(Boolean.TRUE);
-        } else {
-            this.bindingProject.showForm(Boolean.FALSE);
-        }
-    }
+    /**
+     * @return {@link Boolean}
+     */
+    Boolean isProjectShared();
+
+    /**
+     * @param theInternalPublic
+     */
+    void setInternalPublic(boolean theInternalPublic);
+
+    /**
+     * @return {@link Boolean}
+     */
+    boolean isInternalPublic();
+
+    /**
+     * @param theExternalPublic
+     */
+    void setExternalPublic(boolean theExternalPublic);
+
+    /**
+     * @return {@link Boolean}
+     */
+    boolean isExternalPublic();
 }

@@ -65,15 +65,13 @@ public class SearchProjectsCommand implements
     private ILayerService layerService;
 
     @Override
-    public SearchProjectsResponse execute(SearchProjectsRequest request,
-            HttpServletRequest httpServletRequest) {
+    public SearchProjectsResponse execute(SearchProjectsRequest request, HttpServletRequest httpServletRequest) {
         logger.debug("##################### Executing {} Command", this.getClass().getSimpleName());
         logger.debug("Search Text: " + request.getSearchText());
         logger.trace("Image URL: " + request.getImageURL());
         logger.trace("Config: " + request.getConfig());
-        BasePagingLoadResult<GPClientProject> result = this.layerService.searchProjects(
-                request.getConfig(), request.getSearchText(), request.getImageURL(),
-                httpServletRequest);
+        BasePagingLoadResult<GPClientProject> result = this.layerService.searchProjects(request.getConfig(),
+                request.getSearchText(), request.getImageURL(), httpServletRequest);
         logger.trace("#################### Found {} ", result.getData());
         return new SearchProjectsResponse(result);
     }

@@ -149,18 +149,16 @@ public class LayerService implements ILayerService {
     }
 
     /**
-     * @param geoPlatformPublisherClient the geoPlatformPublisherClient to set
+     * @param geoPlatformPublishClient
      */
     @Autowired
-    public void setGeoPlatformPublishClient(
-            @Qualifier("geoPlatformPublishClient") GPPublisherService geoPlatformPublishClient) {
+    public void setGeoPlatformPublishClient(@Qualifier("geoPlatformPublishClient") GPPublisherService geoPlatformPublishClient) {
         this.geoPlatformPublishClient = geoPlatformPublishClient;
     }
 
     @Override
-    public GPClientProject loadDefaultProjectElements(
-            HttpServletRequest httpServletRequest) throws GeoPlatformException {
-        Long projectId = null;
+    public GPClientProject loadDefaultProjectElements(HttpServletRequest httpServletRequest) throws GeoPlatformException {
+        Long projectId;
         GPAccount account;
         try {
             account = this.sessionUtility.getLoggedAccount(httpServletRequest);
@@ -171,14 +169,11 @@ public class LayerService implements ILayerService {
         }
         ProjectDTO projectDTO = null;
         try {
-            GPProject project = this.geoPlatformServiceClient.getProjectDetail(
-                    projectId);
+            GPProject project = this.geoPlatformServiceClient.getProjectDetail(projectId);
             if (account.isLoadExpandedFolders() || project.isShared()) {
-                projectDTO = this.geoPlatformServiceClient.getProjectWithExpandedFolders(
-                        projectId, account.getId());
+                projectDTO = this.geoPlatformServiceClient.getProjectWithExpandedFolders(projectId, account.getId());
             } else {
-                projectDTO = geoPlatformServiceClient.
-                        getProjectWithRootFolders(projectId, account.getId());
+                projectDTO = geoPlatformServiceClient.getProjectWithRootFolders(projectId, account.getId());
             }
         } catch (ResourceNotFoundFault rnf) {
             logger.error("Returning no elements: " + rnf);
@@ -187,11 +182,11 @@ public class LayerService implements ILayerService {
     }
 
     @Override
-    public GPShortClientProject loadRootElements(Long projectID, HttpServletRequest httpServletRequest)
-            throws GeoPlatformException {
+    public GPShortClientProject loadRootElements(Long projectID, HttpServletRequest httpServletRequest) throws GeoPlatformException {
         try {
             ShortProjectDTO shortProjectDTO = this.geoPlatformServiceClient.getShortProject(projectID);
-            return new GPShortClientProject(shortProjectDTO.getVersion(), shortProjectDTO.getNumberOfElements());
+            return new GPShortClientProject(shortProjectDTO.getVersion(), shortProjectDTO.getNumberOfElements(),
+                    shortProjectDTO.isInternalPublic(), shortProjectDTO.isExternalPublic());
         } catch (ResourceNotFoundFault ex) {
             ex.printStackTrace();
             throw new GeoPlatformException(ex.getMessage());
@@ -630,7 +625,7 @@ public class LayerService implements ILayerService {
     public BasePagingLoadResult<GPClientProject> searchProjects(PagingLoadConfig config,
             String searchText, String imageURL, HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
-        GPAccount account = null;
+        GPAccount account;
         try {
             account = this.sessionUtility.getLoggedAccount(httpServletRequest);
         } catch (GPSessionTimeout timeout) {
@@ -648,13 +643,10 @@ public class LayerService implements ILayerService {
             int page = start == 0 ? start : start / config.getLimit();
             PaginatedSearchRequest psr = new PaginatedSearchRequest(searchText, config.getLimit(), page);
             List<ProjectDTO> projectsDTO = this.geoPlatformServiceClient.searchAccountProjects(account.getId(), psr);
-
             if (projectsDTO == null) {
                 throw new GeoPlatformException("There are no results");
             }
-
             ArrayList<GPClientProject> clientProjects = new ArrayList<GPClientProject>();
-
             for (ProjectDTO projectDTO : projectsDTO) {
                 GPClientProject clientProject = this.dtoLayerConverter.convertToGPCLientProject(projectDTO, imageURL);
                 clientProjects.add(clientProject);
@@ -687,25 +679,21 @@ public class LayerService implements ILayerService {
 
     @Override
     public Long saveProject(GPClientProject project, HttpServletRequest httpServletRequest) throws GeoPlatformException {
-        Long projectId = null;
+        Long projectId;
         try {
             GPAccount account = this.sessionUtility.getLoggedAccount(httpServletRequest);
             projectId = this.geoPlatformServiceClient.saveProject(new SaveProjectRequest(account.getNaturalID(), this.dtoLayerConverter.convertToGProject(project), project.isDefaultProject()));
             this.sessionUtility.storeLoggedAccountAndDefaultProject(account, projectId, httpServletRequest);
-
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
-
         } catch (ResourceNotFoundFault rnf) {
             this.logger.error("Failed to save project on SecurityService: {}",
                     rnf);
             throw new GeoPlatformException(rnf);
-
         } catch (IllegalParameterFault ilg) {
             logger.error("Error on SecurityService: {}", ilg);
             throw new GeoPlatformException("Parameter incorrect on saveProject");
         }
-
         return projectId;
     }
 
@@ -721,11 +709,10 @@ public class LayerService implements ILayerService {
             logger.error("Failed to update project on SecurityService: " + rnf);
             throw new GeoPlatformException(rnf);
         } catch (IllegalParameterFault ilg) {
-            logger.error(
-                    "Error on SecurityService: " + ilg);
-            throw new GeoPlatformException("Parameter incorrect on saveProject");
+            logger.error("Error on SecurityService: {}", ilg.getMessage());
+            throw new GeoPlatformException("Parameter incorrect on updateProject");
         } catch (GPSessionTimeout timeout) {
-            System.out.println("Session timeout");
+            logger.error("Session timeout");
             throw new GeoPlatformException(timeout);
         }
 
@@ -879,15 +866,11 @@ public class LayerService implements ILayerService {
     }
 
     @Override
-    public GPClientProject loadDefaultProject(
-            HttpServletRequest httpServletRequest)
-            throws GeoPlatformException {
-        ProjectDTO projectDTO = null;
+    public GPClientProject loadDefaultProject(HttpServletRequest httpServletRequest) throws GeoPlatformException {
+        ProjectDTO projectDTO;
         try {
-            GPAccount account = this.sessionUtility.getLoggedAccount(
-                    httpServletRequest);
-            projectDTO = this.geoPlatformServiceClient.getDefaultProjectDTO(
-                    account.getId());
+            GPAccount account = this.sessionUtility.getLoggedAccount(httpServletRequest);
+            projectDTO = this.geoPlatformServiceClient.getDefaultProjectDTO(account.getId());
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         } catch (ResourceNotFoundFault ex) {

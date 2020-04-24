@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.server.command.layer.basic;
 
-import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.command.layer.basic.LoadDefaultProjectElementsRequest;
 import org.geosdi.geoplatform.gui.client.command.layer.basic.LoadDefaultProjectElementsResponse;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
@@ -47,33 +46,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
 @Lazy(true)
 @Component(value = "command.layer.basic.LoadDefaultProjectElementsCommand")
-public class LoadDefaultProjectElementsCommand implements
-        GPCommand<LoadDefaultProjectElementsRequest, LoadDefaultProjectElementsResponse> {
+public class LoadDefaultProjectElementsCommand implements GPCommand<LoadDefaultProjectElementsRequest, LoadDefaultProjectElementsResponse> {
 
-    private static final Logger logger = LoggerFactory.getLogger(
-            LoadDefaultProjectElementsCommand.class);
+    private static final Logger logger = LoggerFactory.getLogger(LoadDefaultProjectElementsCommand.class);
     //
     @Autowired
     private ILayerService layerService;
 
     @Override
-    public LoadDefaultProjectElementsResponse execute(
-            LoadDefaultProjectElementsRequest request,
-            HttpServletRequest httpServletRequest) {
-
-        logger.debug("##################### Executing {} Command", this.
-                getClass().getSimpleName());
-
+    public LoadDefaultProjectElementsResponse execute(LoadDefaultProjectElementsRequest request, HttpServletRequest httpServletRequest) {
+        logger.debug("##################### Executing {} Command", this.getClass().getSimpleName());
         GPClientProject result = this.layerService.loadDefaultProjectElements(httpServletRequest);
-
         logger.debug("#################### Found {} ", result);
-
         return new LoadDefaultProjectElementsResponse(result);
     }
 }

@@ -42,6 +42,8 @@ import org.geosdi.geoplatform.gui.model.project.IGPClientProject;
 
 import java.util.List;
 
+import static java.lang.Boolean.FALSE;
+
 /**
  * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
@@ -103,8 +105,7 @@ public class GPClientProject extends GeoPlatformBeanModel implements IGPClientPr
      */
     @Override
     public int getNumberOfElements() {
-        Integer numberOfElements = (Integer) super.get(
-                GPClientProjectKey.PROJECT_ELEMENTS.toString());
+        Integer numberOfElements = (Integer) super.get(GPClientProjectKey.PROJECT_ELEMENTS.toString());
         return (numberOfElements != null) ? numberOfElements.intValue() : 0;
     }
 
@@ -120,8 +121,7 @@ public class GPClientProject extends GeoPlatformBeanModel implements IGPClientPr
      */
     @Override
     public int getVersion() {
-        Integer version = (Integer) super.get(
-                GPClientProjectKey.PROJECT_VERSION.toString());
+        Integer version = (Integer) super.get(GPClientProjectKey.PROJECT_VERSION.toString());
         return (version != null) ? version.intValue() : 0;
     }
 
@@ -147,6 +147,38 @@ public class GPClientProject extends GeoPlatformBeanModel implements IGPClientPr
         set(GPClientProjectKey.PROJECT_VERSION.toString(), version);
     }
 
+    /**
+     * @param theInternalPublic
+     */
+    @Override
+    public void setInternalPublic(boolean theInternalPublic) {
+        set(GPClientProjectKey.PROJECT_INTERNAL_PUBLIC.toString(), theInternalPublic);
+    }
+
+    /**
+     * @return {@link Boolean}
+     */
+    @Override
+    public boolean isInternalPublic() {
+        return super.get(GPClientProjectKey.PROJECT_INTERNAL_PUBLIC.toString(), FALSE);
+    }
+
+    /**
+     * @param theExternalPublic
+     */
+    @Override
+    public void setExternalPublic(boolean theExternalPublic) {
+        set(GPClientProjectKey.PROJECT_EXTERNAL_PUBLIC.toString(), theExternalPublic);
+    }
+
+    /**
+     * @return {@link Boolean}
+     */
+    @Override
+    public boolean isExternalPublic() {
+        return super.get(GPClientProjectKey.PROJECT_EXTERNAL_PUBLIC.toString(), FALSE);
+    }
+
     @Override
     public IGPUserSimpleDetail getOwner() {
         return this.owner;
@@ -160,7 +192,7 @@ public class GPClientProject extends GeoPlatformBeanModel implements IGPClientPr
      * @return the shared
      */
     @Override
-    public boolean isShared() {
+    public Boolean isProjectShared() {
         return shared;
     }
 
@@ -173,7 +205,7 @@ public class GPClientProject extends GeoPlatformBeanModel implements IGPClientPr
     /**
      * @param shared the shared to set
      */
-    public void setShared(boolean shared) {
+    public void setProjectShared(boolean shared) {
         this.shared = shared;
         set(GPClientProjectKey.PROJECT_SHARED.toString(), this.getSharedLabel());
     }
@@ -282,10 +314,18 @@ public class GPClientProject extends GeoPlatformBeanModel implements IGPClientPr
 
     @Override
     public String toString() {
-        return "GPClientProject{" + "id=" + id + ", name=" + this.getName()
-                + ", image=" + this.getImage() + ", numberOfElements=" + this.getNumberOfElements()
-                + ", version=" + this.getVersion() + ", shared=" + shared
-                + ", defaultProject=" + this.isDefaultProject() + ", message="
-                + message + ", owner=" + owner + ", rootFolders=" + rootFolders + '}';
+        return "GPClientProject {"
+                + "id=" + id
+                + ", name=" + this.getName()
+                + ", image=" + this.getImage()
+                + ", numberOfElements=" + this.getNumberOfElements()
+                + ", version=" + this.getVersion()
+                + ", shared=" + shared
+                + ", defaultProject=" + this.isDefaultProject()
+                + ", message=" + message
+                + ", internalPublic=" + this.isInternalPublic()
+                + ", externalPublic=" + this.isExternalPublic()
+                + ", owner=" + owner
+                + ", rootFolders=" + rootFolders + '}';
     }
 }

@@ -592,8 +592,17 @@ public interface LayerModuleConstants extends Constants {
     @DefaultStringValue("DEFAULT PROJECT")
     String GPClientProject_defaultProjectLabelText();
 
-    @DefaultStringValue("Shared")
+    @DefaultStringValue("Is Shared")
     String GPClientProject_sharedLabelText();
+
+    @DefaultStringValue("Project Visibility")
+    String GPClientProject_checkGroupVisibilityLabelText();
+
+    @DefaultStringValue("Is Internal")
+    String GPClientProject_internalVisibilityLabelText();
+
+    @DefaultStringValue("Is External")
+    String GPClientProject_externalVisibilityLabelText();
 
     /**
      * start RefreshTimeComboBuilder

@@ -68,8 +68,7 @@ public class LoadRootElementsCommand implements GPCommand<LoadRootElementsReques
      */
     @Override
     public LoadRootElementsResponse execute(LoadRootElementsRequest request, HttpServletRequest httpServletRequest) {
-        logger.debug("##################### Executing {} Command with Request : {}",
-                this.getClass().getSimpleName(), request);
+        logger.debug("##################### Executing {} Command with Request : {}", this.getClass().getSimpleName(), request);
         GPShortClientProject gpShortClientProject = this.layerService.loadRootElements(request.getProjectId(), httpServletRequest);
         logger.debug("#################### Found {} ", gpShortClientProject);
         return new LoadRootElementsResponse(gpShortClientProject);

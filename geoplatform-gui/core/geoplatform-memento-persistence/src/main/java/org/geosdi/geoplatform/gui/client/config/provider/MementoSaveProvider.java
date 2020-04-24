@@ -83,19 +83,19 @@ public class MementoSaveProvider implements Provider<IMementoSave> {
 //        }
         logger.log(Level.INFO, "Getting the IMementoSave from Provider");
         if (this.mementoSave == null || clientProject == null || this.projID != clientProject.getId()
-                || this.savedShareStatus != clientProject.isShared()) {
+                || this.savedShareStatus != clientProject.isProjectShared()) {
             if (clientProject == null) {
                 this.mementoSave = new GPMementoSaveCache(observable);
                 logger.log(Level.INFO, "returning GPMementoSaveCache(observable) clientProject is null.");
             } else {
-                this.savedShareStatus = clientProject.isShared();
+                this.savedShareStatus = clientProject.isProjectShared();
                 IGPAccountDetail accountInSession = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
                 if (GPRole.VIEWER.toString().equalsIgnoreCase(accountInSession.getAuthority())
-                        || (clientProject.isShared() && clientProject.getOwner() != null
+                        || (clientProject.isProjectShared() && clientProject.getOwner() != null
                         && !clientProject.getOwner().getId().equals(accountInSession.getId()))) {
                     this.mementoSave = new GPMementoSaveDummy();
                     logger.log(Level.INFO, "Returning GPMementoSaveDummy");
-                } else if (clientProject.isShared()) {
+                } else if (clientProject.isProjectShared()) {
                     this.mementoSave = new GPMementoSaveShared(observable, peekCacheEvent);
                     logger.log(Level.INFO, "returning GPMementoSaveShared");
                 } else {

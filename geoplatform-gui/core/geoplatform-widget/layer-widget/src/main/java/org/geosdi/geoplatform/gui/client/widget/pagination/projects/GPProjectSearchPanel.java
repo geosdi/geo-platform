@@ -113,35 +113,20 @@ public class GPProjectSearchPanel extends GPListViewSearchPanel<GPClientProject>
     @Override
     public void finalizeInitOperations() {
         super.finalizeInitOperations();
-        super.selectButton.setText(
-                LayerModuleConstants.INSTANCE.GPProjectSearchPanel_selectButtonText());
-        super.search.setFieldLabel(
-                LayerModuleConstants.INSTANCE.GPProjectSearchPanel_searchlabelText());
+        super.selectButton.setText(LayerModuleConstants.INSTANCE.GPProjectSearchPanel_selectButtonText());
+        super.search.setFieldLabel(LayerModuleConstants.INSTANCE.GPProjectSearchPanel_searchlabelText());
         GPProjectAction action = new GPProjectAction(GPTrustedLevel.HIGH, this);
-        GPSecureButton addProjectButton = new GPSecureButton(
-                ButtonsConstants.INSTANCE.addText(),
-                create(ICONS.projectAdd()),
-                action);
+        GPSecureButton addProjectButton = new GPSecureButton(ButtonsConstants.INSTANCE.addText(), create(ICONS.projectAdd()), action);
         super.addButton(1, addProjectButton);
         addProjectButton.disable();
-        this.editButton = new GPSecureButton(
-                ButtonsConstants.INSTANCE.editText(),
-                create(BasicWidgetResources.ICONS.edit()),
-                action);
+        this.editButton = new GPSecureButton(ButtonsConstants.INSTANCE.editText(), create(BasicWidgetResources.ICONS.edit()), action);
         this.editButton.disable();
         super.addButton(2, this.editButton);
-        this.deleteButton = new GPSecureButton(
-                ButtonsConstants.INSTANCE.deleteText(),
-                create(ICONS.projectDelete()),
-                new DeleteProjectAction(GPTrustedLevel.FULL, this));
+        this.deleteButton = new GPSecureButton(ButtonsConstants.INSTANCE.deleteText(), create(ICONS.projectDelete()), new DeleteProjectAction(GPTrustedLevel.FULL, this));
         this.deleteButton.disable();
         super.addButton(3, this.deleteButton);
-        ShareProjectAction shareProjectAction = new ShareProjectAction(
-                GPTrustedLevel.HIGH, this);
-        this.shareButton = new GPSecureButton(
-                ButtonsConstants.INSTANCE.shareText(),
-                create(ICONS.arrowRefresh()),
-                shareProjectAction);
+        ShareProjectAction shareProjectAction = new ShareProjectAction(GPTrustedLevel.HIGH, this);
+        this.shareButton = new GPSecureButton(ButtonsConstants.INSTANCE.shareText(), create(ICONS.arrowRefresh()), shareProjectAction);
         this.shareButton.disable();
         super.addButton(4, this.shareButton);
     }
@@ -150,16 +135,13 @@ public class GPProjectSearchPanel extends GPListViewSearchPanel<GPClientProject>
     public void setListViewProperties() {
         StringBuilder sb = new StringBuilder();
         sb.append("<tpl for=\".\">");
-        sb.append(
-                "<div class='project-box' style='padding-top: 4px;border: none'>");
+        sb.append("<div class='project-box' style='padding-top: 4px;border: none'>");
         sb.append("<div class='thumbd'>{image}</div>");
         sb.append("<div>");
-        sb.append(
-                LayerModuleConstants.INSTANCE.GPProjectSearchPanel_listViewNameText());
+        sb.append(LayerModuleConstants.INSTANCE.GPProjectSearchPanel_listViewNameText());
         sb.append(": {name}</div>");
         sb.append("<div>");
-        sb.append(
-                LayerModuleConstants.INSTANCE.GPProjectSearchPanel_listViewPropertiesText());
+        sb.append(LayerModuleConstants.INSTANCE.GPProjectSearchPanel_listViewPropertiesText());
         sb.append(": {numberOfElements} <B>{shared}</B></div>");
 //        sb.append("<div>{message}</div>");
         sb.append("<div>");
@@ -175,8 +157,7 @@ public class GPProjectSearchPanel extends GPListViewSearchPanel<GPClientProject>
     @Override
     public void setPanelProperties() {
         super.setHeaderVisible(Boolean.FALSE);
-        super.setSize(GPProjectManagementWidget.COMPONENT_WIDTH,
-                GPProjectManagementWidget.COMPONENT_HEIGHT);
+        super.setSize(GPProjectManagementWidget.COMPONENT_WIDTH, GPProjectManagementWidget.COMPONENT_HEIGHT);
     }
 
     public void loadData() {
@@ -388,9 +369,7 @@ public class GPProjectSearchPanel extends GPListViewSearchPanel<GPClientProject>
                 @Override
                 public void onSuccess(XsrfToken token) {
                     ((HasRpcToken) layerRemote).setRpcToken(token);
-                    layerRemote.setDefaultProject(
-                            getListView().getSelectionModel().
-                                    getSelectedItem().getId(),
+                    layerRemote.setDefaultProject(getListView().getSelectionModel().getSelectedItem().getId(),
                             new AsyncCallback<Object>() {
 
                                 /**
@@ -398,21 +377,17 @@ public class GPProjectSearchPanel extends GPListViewSearchPanel<GPClientProject>
                                  */
                                 @Override
                                 public void onFailure(Throwable caught) {
-                                    GeoPlatformMessage.errorMessage(
-                                            LayerModuleConstants.INSTANCE.
+                                    GeoPlatformMessage.errorMessage(LayerModuleConstants.INSTANCE.
                                                     GPProjectSearchPanel_settingDefaultProjectErrorTitleText(),
                                             caught.getMessage());
                                 }
 
                                 @Override
                                 public void onSuccess(Object result) {
-                                    setSearchStatus(
-                                            STATUS_SEARCH,
-                                            EnumProjectMessage.DEFAUTL_PROJECT_MESSAGE);
-//                            store.commitChanges();
+                                    setSearchStatus(STATUS_SEARCH, EnumProjectMessage.DEFAUTL_PROJECT_MESSAGE);
+                                    //                            store.commitChanges();
                                     loadData();
-                                    TimeoutHandlerManager.fireEvent(
-                                            defaultProjectEvent);
+                                    TimeoutHandlerManager.fireEvent(defaultProjectEvent);
                                 }
                             });
                 }

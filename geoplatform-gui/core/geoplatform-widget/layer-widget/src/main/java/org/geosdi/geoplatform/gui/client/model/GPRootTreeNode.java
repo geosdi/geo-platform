@@ -48,6 +48,8 @@ import org.geosdi.geoplatform.gui.model.tree.TreeStatusEnum;
 
 import java.util.List;
 
+import static java.lang.Boolean.FALSE;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -171,8 +173,40 @@ public class GPRootTreeNode extends AbstractRootTreeNode {
      * @return {@link Boolean}
      */
     @Override
-    public Boolean isProjectsShared() {
+    public Boolean isProjectShared() {
         return super.get(GPClientProjectKey.PROJECT_SHARED.toString());
+    }
+
+    /**
+     * @param theInternalPublic
+     */
+    @Override
+    public void setInternalPublic(boolean theInternalPublic) {
+        set(GPClientProjectKey.PROJECT_INTERNAL_PUBLIC.toString(), theInternalPublic);
+    }
+
+    /**
+     * @return {@link Boolean}
+     */
+    @Override
+    public boolean isInternalPublic() {
+        return super.get(GPClientProjectKey.PROJECT_INTERNAL_PUBLIC.toString());
+    }
+
+    /**
+     * @param theExternalPublic
+     */
+    @Override
+    public void setExternalPublic(boolean theExternalPublic) {
+        set(GPClientProjectKey.PROJECT_EXTERNAL_PUBLIC.toString(), theExternalPublic);
+    }
+
+    /**
+     * @return {@link Boolean}
+     */
+    @Override
+    public boolean isExternalPublic() {
+        return super.get(GPClientProjectKey.PROJECT_EXTERNAL_PUBLIC.toString());
     }
 
     /**
@@ -189,8 +223,7 @@ public class GPRootTreeNode extends AbstractRootTreeNode {
     @Override
     public void modelConverter(List<GPFolderClientInfo> clientFolders) {
         for (GPFolderClientInfo folder : clientFolders) {
-            FolderTreeNode folderTreeNode = new FolderTreeNode(folder,
-                    Boolean.FALSE);
+            FolderTreeNode folderTreeNode = new FolderTreeNode(folder, FALSE);
             folderTreeNode.setParent(this);
             super.add(folderTreeNode);
         }

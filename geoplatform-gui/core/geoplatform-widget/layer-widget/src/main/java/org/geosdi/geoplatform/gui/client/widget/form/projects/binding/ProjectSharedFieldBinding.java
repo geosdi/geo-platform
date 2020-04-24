@@ -33,38 +33,30 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.client.action.menu.project;
+package org.geosdi.geoplatform.gui.client.widget.form.projects.binding;
 
-import com.extjs.gxt.ui.client.event.MenuEvent;
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
-import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
-import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
-import org.geosdi.geoplatform.gui.client.widget.form.GPProjectManagementWidget;
-
-import javax.inject.Inject;
-import javax.inject.Singleton;
+import com.extjs.gxt.ui.client.store.Record;
+import com.extjs.gxt.ui.client.widget.form.CheckBox;
+import org.geosdi.geoplatform.gui.client.widget.form.binding.GPFieldBinding;
+import org.geosdi.geoplatform.gui.model.project.GPProjectProperties;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Singleton
-public class LoadMenuProjects extends MenuBaseAction {
+public class ProjectSharedFieldBinding extends GPFieldBinding {
 
-    private final GPProjectManagementWidget searchWidget;
-
-    /**
-     * @param searchWidget
-     */
-    @Inject
-    public LoadMenuProjects(GPProjectManagementWidget searchWidget) {
-        super(LayerModuleConstants.INSTANCE.LoadMenuProjects_titleText(), AbstractImagePrototype.create(BasicWidgetResources.ICONS.manageProjects()));
-        this.searchWidget = searchWidget;
+    public ProjectSharedFieldBinding(CheckBox field, String property) {
+        super(field, property);
     }
 
     @Override
-    public void componentSelected(MenuEvent ce) {
-        this.searchWidget.showSearchProjectPanel();
+    public void setModelProperty(Object val) {
+        ((GPProjectProperties) model).setProjectShared((Boolean) val);
+    }
+
+    @Override
+    public void setRecordProperty(Record r, Object val) {
+        r.set(property, (Boolean) val);
     }
 }

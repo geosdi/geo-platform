@@ -51,7 +51,9 @@ public enum GPClientProjectKey {
     PROJECT_SHARED("shared"),
     DEFAULT_PROJECT_KEY_MESSAGE("message"),
     CREATION_DATE("creationDate"),
-    PROJECT_ID("id");
+    PROJECT_ID("id"),
+    PROJECT_INTERNAL_PUBLIC("internalPublic"),
+    PROJECT_EXTERNAL_PUBLIC("externalPublic");
 
     private String value;
 

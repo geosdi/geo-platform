@@ -78,6 +78,8 @@ public class GPLayerTreeRefresher implements GPCompositeRefreshHandler {
                 GPShortClientProject gpShortClientProject = response.getResult();
                 root.setProjectElements(gpShortClientProject.getNumberOfElements());
                 root.setProjectVersion(gpShortClientProject.getVersion());
+                root.setInternalPublic(gpShortClientProject.isInternalPublic());
+                root.setExternalPublic(gpShortClientProject.isExternalPublic());
             }
 
             @Override

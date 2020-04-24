@@ -5,7 +5,7 @@
  *    http://geo-platform.org
  *   ====================================================================
  *
- *   Copyright (C) 2008-2020 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ *   Copyright (C) 2008-2019 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  *   This program is free software: you can redistribute it and/or modify it
  *   under the terms of the GNU General Public License as published by
@@ -33,39 +33,30 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.client.action.menu;
+package org.geosdi.geoplatform.gui.client.widget.form.projects.binding;
 
-import com.extjs.gxt.ui.client.event.MenuEvent;
-import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import org.geosdi.geoplatform.gui.action.menu.MenuBaseSecureAction;
-import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
-import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
-import org.geosdi.geoplatform.gui.client.widget.ShowProjectPropertiesWidget;
-import org.geosdi.geoplatform.gui.model.tree.IGPRootTreeNode;
-import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
+import com.extjs.gxt.ui.client.store.Record;
+import com.extjs.gxt.ui.client.widget.form.CheckBox;
+import org.geosdi.geoplatform.gui.client.widget.form.binding.GPFieldBinding;
+import org.geosdi.geoplatform.gui.model.project.GPProjectProperties;
 
 /**
- * @author Vito Salvia - CNR IMAA geoSDI Group
- * @email vito.salvia@gmail.com
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public class ShowProjectPropertiesMenuAction extends MenuBaseSecureAction {
+public class ProjectSharedFieldBinding extends GPFieldBinding {
 
-    private ShowProjectPropertiesWidget propertiesWidget;
-    private TreePanel treePanel;
-
-    /**
-     * @param treePanel
-     */
-    public ShowProjectPropertiesMenuAction(TreePanel treePanel) {
-        super(GPTrustedLevel.HIGH, LayerModuleConstants.INSTANCE.ShareProjectMenuAction_titleText(), AbstractImagePrototype.create(BasicWidgetResources.ICONS.info()));
-        this.treePanel = treePanel;
-        this.propertiesWidget = new ShowProjectPropertiesWidget();
+    public ProjectSharedFieldBinding(CheckBox field, String property) {
+        super(field, property);
     }
 
     @Override
-    public void componentSelected(MenuEvent e) {
-        IGPRootTreeNode treeNode = (IGPRootTreeNode) this.treePanel.getSelectionModel().getSelectedItem();
-        this.propertiesWidget.showWithBinding(treeNode, this.treePanel.getStore().getAllItems().size() - 1);
+    public void setModelProperty(Object val) {
+        ((GPProjectProperties) model).setProjectShared((Boolean) val);
+    }
+
+    @Override
+    public void setRecordProperty(Record r, Object val) {
+        r.set(property, (Boolean) val);
     }
 }

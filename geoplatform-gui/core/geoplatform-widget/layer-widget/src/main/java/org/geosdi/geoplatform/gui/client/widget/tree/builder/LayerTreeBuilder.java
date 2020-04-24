@@ -162,27 +162,28 @@ public class LayerTreeBuilder implements GPCompositeBuilder {
      * @param clientProject
      */
     protected final void onBuildSuccess(GPClientProject clientProject) {
+        GWT.log("########################onBuildSuccess " + clientProject);
         Registry.register(UserSessionEnum.CURRENT_PROJECT_ON_TREE.name(), clientProject);
         root.setId(clientProject.getId());
         root.setLabel(clientProject.getName());
         root.setCreationDate(clientProject.getCreationDate());
         root.setProjectElements(clientProject.getNumberOfElements());
+        root.setInternalPublic(clientProject.isInternalPublic());
+        root.setExternalPublic(clientProject.isExternalPublic());
         root.setProjectMessage(clientProject.getDefaultProjectLabel());
         root.setProjectName(clientProject.getName());
         root.setProjectVersion(clientProject.getVersion());
-        root.setProjectShared(clientProject.isShared());
+        root.setProjectShared(clientProject.isProjectShared());
         root.modelConverter(clientProject.getRootFolders());
         store.add(root, Boolean.TRUE);
         visitorDisplay.enableCheckedComponent(root);
         initialized = Boolean.TRUE;
         tree.setExpanded(root, Boolean.TRUE);
-        insertElementsOfTheRootFolders(
-                clientProject.getRootFolders());
+        insertElementsOfTheRootFolders(clientProject.getRootFolders());
         LayoutManager.getInstance().getStatusMap().setStatus(
                 LayerModuleConstants.INSTANCE.statusSuccessLoadingTreeElementsText(),
                 SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
-        Registry.register(UserSessionEnum.TREE_LOADED.name(),
-                initialized);
+        Registry.register(UserSessionEnum.TREE_LOADED.name(), initialized);
     }
 
     @Override

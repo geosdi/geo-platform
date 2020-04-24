@@ -42,8 +42,7 @@ import org.geosdi.geoplatform.gui.command.api.GPCommandResponse;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class LoadDefaultProjectElementsResponse implements
-        GPCommandResponse<GPClientProject> {
+public class LoadDefaultProjectElementsResponse implements GPCommandResponse<GPClientProject> {
 
     private static final long serialVersionUID = -6688757707789890908L;
     private GPClientProject result;

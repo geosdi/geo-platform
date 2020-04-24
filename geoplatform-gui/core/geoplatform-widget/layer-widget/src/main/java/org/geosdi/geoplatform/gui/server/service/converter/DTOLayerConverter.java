@@ -282,8 +282,10 @@ public class DTOLayerConverter {
     public GPProject convertToGProject(GPClientProject clientProject) {
         GPProject project = new GPProject();
         project.setName(clientProject.getName());
-        project.setShared(clientProject.isShared());
+        project.setShared(clientProject.isProjectShared());
         project.setDescription(clientProject.getDescription());
+        project.setInternalPublic(clientProject.isInternalPublic());
+        project.setExternalPublic(clientProject.isExternalPublic());
         project.setImagePath(clientProject.getPathImage());
         return project;
     }
@@ -295,7 +297,9 @@ public class DTOLayerConverter {
         dto.setProjectName(project.getName());
         dto.setProjectVersion(project.getVersion());
         dto.setDefaultProject(project.isDefaultProject());
-        dto.setShared(project.isShared());
+        dto.setShared(project.isProjectShared());
+        dto.setInternalPublic(project.isInternalPublic());
+        dto.setExternalPublic(project.isExternalPublic());
         dto.setProjectDescription(project.getDescription());
         dto.setPathImage(project.getPathImage());
         return dto;
@@ -309,9 +313,11 @@ public class DTOLayerConverter {
         clientProject.setNumberOfElements(projectDTO.getNumberOfElements());
         clientProject.setCreationDate(dateFormatter.format(projectDTO.getCreationDate()));
         clientProject.setDefaultProject(projectDTO.isDefaultProject());
-        clientProject.setShared(projectDTO.isShared());
+        clientProject.setProjectShared(projectDTO.isShared());
         clientProject.setDescription(projectDTO.getDescription());
         clientProject.setPathImage(projectDTO.getImagePath());
+        clientProject.setInternalPublic(projectDTO.isInternalPublic());
+        clientProject.setExternalPublic(projectDTO.isExternalPublic());
         ShortAccountDTO owner = projectDTO.getOwner();
         if (owner != null && owner instanceof UserDTO) {
             clientProject.setOwner(this.convertToGPSimpleUser((UserDTO) owner));

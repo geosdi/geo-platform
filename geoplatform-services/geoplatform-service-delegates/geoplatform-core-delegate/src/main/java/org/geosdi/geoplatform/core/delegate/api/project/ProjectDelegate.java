@@ -176,9 +176,7 @@ public interface ProjectDelegate extends GPProjectResource,
             PaginatedSearchRequest request) throws ResourceNotFoundFault;
 
     @Override
-    Boolean saveAccountProjectProperties(
-            AccountProjectPropertiesDTO accountProjectProperties)
-            throws ResourceNotFoundFault, IllegalParameterFault;
+    Boolean saveAccountProjectProperties(AccountProjectPropertiesDTO accountProjectProperties) throws ResourceNotFoundFault, IllegalParameterFault;
 
     @Override
     ShortAccountDTOContainer getAccountsByProjectID(Long projectID)

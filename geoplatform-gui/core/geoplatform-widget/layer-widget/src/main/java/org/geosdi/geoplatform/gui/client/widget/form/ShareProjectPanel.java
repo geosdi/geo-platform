@@ -251,10 +251,10 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
                                                     if (project.isDefaultProject()) {
                                                         GPClientProject projInSession = Registry.get(
                                                                 UserSessionEnum.CURRENT_PROJECT_ON_TREE.name());
-                                                        projInSession.setShared(
+                                                        projInSession.setProjectShared(
                                                                 isShared);
                                                     }
-                                                    project.setShared(isShared);
+                                                    project.setProjectShared(isShared);
                                                     loadData(project);
                                                 }
 

@@ -401,11 +401,8 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public Boolean saveAccountProjectProperties(
-            AccountProjectPropertiesDTO accountProjectProperties)
-            throws ResourceNotFoundFault, IllegalParameterFault {
-        return gpProjectDelegate.saveAccountProjectProperties(
-                accountProjectProperties);
+    public Boolean saveAccountProjectProperties(AccountProjectPropertiesDTO accountProjectProperties) throws ResourceNotFoundFault, IllegalParameterFault {
+        return gpProjectDelegate.saveAccountProjectProperties(accountProjectProperties);
     }
 
     @Override

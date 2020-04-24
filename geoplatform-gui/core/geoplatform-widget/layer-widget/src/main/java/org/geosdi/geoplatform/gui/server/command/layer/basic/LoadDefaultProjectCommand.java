@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.server.command.layer.basic;
 
-import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.command.layer.basic.LoadDefaultProjectRequest;
 import org.geosdi.geoplatform.gui.client.command.layer.basic.LoadDefaultProjectResponse;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
@@ -47,33 +46,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
 @Lazy(true)
 @Component(value = "command.layer.basic.LoadDefaultProjectCommand")
-public class LoadDefaultProjectCommand implements
-        GPCommand<LoadDefaultProjectRequest, LoadDefaultProjectResponse> {
+public class LoadDefaultProjectCommand implements GPCommand<LoadDefaultProjectRequest, LoadDefaultProjectResponse> {
 
-    private static final Logger logger = LoggerFactory.getLogger(
-            LoadDefaultProjectCommand.class);
+    private static final Logger logger = LoggerFactory.getLogger(LoadDefaultProjectCommand.class);
     //
     @Autowired
     private ILayerService layerService;
 
     @Override
-    public LoadDefaultProjectResponse execute(
-            LoadDefaultProjectRequest request,
-            HttpServletRequest httpServletRequest) {
-
-        logger.debug("##################### Executing {} Command", this.
-                getClass().getSimpleName());
-
+    public LoadDefaultProjectResponse execute(LoadDefaultProjectRequest request, HttpServletRequest httpServletRequest) {
+        logger.debug("##################### Executing {} Command", this.getClass().getSimpleName());
         GPClientProject result = this.layerService.loadDefaultProject(httpServletRequest);
-
         logger.debug("#################### Found {} ", result);
-
         return new LoadDefaultProjectResponse(result);
     }
 }

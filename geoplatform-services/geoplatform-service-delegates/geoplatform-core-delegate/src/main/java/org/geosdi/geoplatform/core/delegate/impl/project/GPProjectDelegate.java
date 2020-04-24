@@ -433,11 +433,9 @@ public class GPProjectDelegate implements ProjectDelegate {
     }
 
     @Override
-    public Boolean saveAccountProjectProperties(AccountProjectPropertiesDTO accountProjectProperties)
-            throws ResourceNotFoundFault, IllegalParameterFault {
+    public Boolean saveAccountProjectProperties(AccountProjectPropertiesDTO accountProjectProperties) throws ResourceNotFoundFault, IllegalParameterFault {
         GPProject project = this.getProjectByID(accountProjectProperties.getProjectID());
         EntityCorrectness.checkProjectLog(project); // TODO assert
-
         String projectName = accountProjectProperties.getProjectName();
         EntityCorrectness.ckeckString(projectName, "project name"); // TODO assert
         Integer version = accountProjectProperties.getProjectVersion();
@@ -445,15 +443,15 @@ public class GPProjectDelegate implements ProjectDelegate {
         project.setName(projectName);
         project.setVersion(version);
         project.setShared(accountProjectProperties.isShared());
+        project.setInternalPublic(accountProjectProperties.isInternalPublic());
+        project.setExternalPublic(accountProjectProperties.isExternalPublic());
         project.setDescription(accountProjectProperties.getProjectDescription());
         project.setImagePath(accountProjectProperties.getPathImage());
         projectDao.update(project);
 
         if (accountProjectProperties.isDefaultProject()) {
-            GPAccount account = this.getAccountByID(
-                    accountProjectProperties.getAccountID());
+            GPAccount account = this.getAccountByID(accountProjectProperties.getAccountID());
             EntityCorrectness.checkAccountLog(account); // TODO assert
-
             accountProjectDao.forceAsDefaultProject(account.getId(), project.getId());
         }
         return TRUE;

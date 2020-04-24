@@ -90,7 +90,7 @@ public abstract class DeleteRequestHandler implements ISave<MementoSaveRemove> {
         mementoSave.cleanOperationsRefToDeletedElement(element);
         MementoSaveRemove mementoSaveRemove = null;
         GPClientProject clientProject = (GPClientProject) Registry.get(UserSessionEnum.CURRENT_PROJECT_ON_TREE.name());
-        if (!clientProject.isShared() && precedingMemento != null && precedingMemento instanceof MementoSaveAddedFolder
+        if (!clientProject.isProjectShared() && precedingMemento != null && precedingMemento instanceof MementoSaveAddedFolder
                 && ((MementoSaveAddedFolder) precedingMemento).getAddedFolder().getRefBaseElement().equals(element)) {
             mementoSave.remove(precedingMemento);
             isAllowedNewMemento = false;

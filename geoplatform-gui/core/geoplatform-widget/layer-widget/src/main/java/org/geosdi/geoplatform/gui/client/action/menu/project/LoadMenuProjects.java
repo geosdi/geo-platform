@@ -59,8 +59,7 @@ public class LoadMenuProjects extends MenuBaseAction {
      */
     @Inject
     public LoadMenuProjects(GPProjectManagementWidget searchWidget) {
-        super(LayerModuleConstants.INSTANCE.LoadMenuProjects_titleText(),
-                AbstractImagePrototype.create(BasicWidgetResources.ICONS.manageProjects()));
+        super(LayerModuleConstants.INSTANCE.LoadMenuProjects_titleText(), AbstractImagePrototype.create(BasicWidgetResources.ICONS.manageProjects()));
         this.searchWidget = searchWidget;
     }
 

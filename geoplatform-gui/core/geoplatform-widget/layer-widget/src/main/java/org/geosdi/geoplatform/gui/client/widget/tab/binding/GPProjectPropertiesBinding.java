@@ -35,12 +35,20 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.tab.binding;
 
+import com.extjs.gxt.ui.client.widget.form.CheckBox;
+import com.extjs.gxt.ui.client.widget.form.CheckBoxGroup;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
+import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProjectKey;
 import org.geosdi.geoplatform.gui.client.widget.binding.GeoPlatformBindingWidget;
+import org.geosdi.geoplatform.gui.client.widget.form.projects.binding.ProjectExternalPublicFieldBinding;
+import org.geosdi.geoplatform.gui.client.widget.form.projects.binding.ProjectInternalPublicFieldBinding;
+import org.geosdi.geoplatform.gui.client.widget.form.projects.binding.ProjectSharedFieldBinding;
 import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextField;
 import org.geosdi.geoplatform.gui.model.tree.IGPRootTreeNode;
+
+import static org.geosdi.geoplatform.gui.client.model.projects.GPClientProjectKey.*;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -51,22 +59,26 @@ public class GPProjectPropertiesBinding extends GeoPlatformBindingWidget<IGPRoot
     private GPSecureStringTextField projectNameField;
     private GPSecureStringTextField projectElementsField;
     private GPSecureStringTextField projectVersionField;
-    private GPSecureStringTextField projectMessageField;
     private GPSecureStringTextField creationDateField;
-    private GPSecureStringTextField sharedField;
+    private CheckBox internalPublic;
+    private CheckBox externalPublic;
+    private CheckBox sharedCheck;
 
     @Override
     public FormPanel createFormPanel() {
         FormPanel fp = new FormPanel();
+        FormLayout layout = new FormLayout();
+        layout.setLabelWidth(100);
+        layout.setLabelPad(5);
         fp.setBorders(false);
         fp.setHeaderVisible(false);
         fp.setBodyBorder(false);
+        fp.setLayout(layout);
 
         projectNameField = new GPSecureStringTextField();
         projectNameField.setId(GPClientProjectKey.PROJECT_NAME.toString());
         projectNameField.setName(GPClientProjectKey.PROJECT_NAME.toString());
-        projectNameField.setFieldLabel(LayerModuleConstants.INSTANCE.
-                GPProjectSearchPanel_listViewNameText());
+        projectNameField.setFieldLabel(LayerModuleConstants.INSTANCE.GPProjectSearchPanel_listViewNameText());
         projectNameField.setReadOnly(true);
         fp.add(projectNameField);
 
@@ -81,27 +93,44 @@ public class GPProjectPropertiesBinding extends GeoPlatformBindingWidget<IGPRoot
         projectVersionField = new GPSecureStringTextField();
         projectVersionField.setId(GPClientProjectKey.PROJECT_VERSION.toString());
         projectVersionField.setName(GPClientProjectKey.PROJECT_VERSION.toString());
-        projectVersionField.setFieldLabel(LayerModuleConstants.INSTANCE.
-                GPProjectSearchPanel_listViewVersionText());
+        projectVersionField.setFieldLabel(LayerModuleConstants.INSTANCE.GPProjectSearchPanel_listViewVersionText());
         projectVersionField.setReadOnly(true);
         fp.add(projectVersionField);
 
         creationDateField = new GPSecureStringTextField();
         creationDateField.setId(GPClientProjectKey.CREATION_DATE.toString());
         creationDateField.setName(GPClientProjectKey.CREATION_DATE.toString());
-        creationDateField.setFieldLabel(LayerModuleConstants.INSTANCE.
-                GPProjectSearchPanel_listViewCreationDateText());
+        creationDateField.setFieldLabel(LayerModuleConstants.INSTANCE.GPProjectSearchPanel_listViewCreationDateText());
         creationDateField.setEnabled(true);
         fp.add(creationDateField);
 
-        sharedField = new GPSecureStringTextField();
-        sharedField.setId(GPClientProjectKey.PROJECT_SHARED.toString());
-        sharedField.setName(GPClientProjectKey.PROJECT_SHARED.toString());
-        sharedField.setFieldLabel(LayerModuleConstants.INSTANCE.
-                GPClientProject_sharedLabelText());
-        sharedField.setReadOnly(true);
-        fp.add(sharedField);
+        CheckBoxGroup checkGroupVisibility = new CheckBoxGroup();
+        checkGroupVisibility.setFieldLabel(LayerModuleConstants.INSTANCE.GPClientProject_checkGroupVisibilityLabelText());
 
+        internalPublic = new CheckBox();
+        internalPublic.setId(PROJECT_INTERNAL_PUBLIC.toString());
+        internalPublic.setName(PROJECT_INTERNAL_PUBLIC.toString());
+        internalPublic.setBoxLabel(LayerModuleConstants.INSTANCE.GPClientProject_internalVisibilityLabelText());
+        internalPublic.setReadOnly(true);
+        checkGroupVisibility.add(internalPublic);
+
+        externalPublic = new CheckBox();
+        externalPublic.setId(PROJECT_EXTERNAL_PUBLIC.toString());
+        externalPublic.setName(PROJECT_EXTERNAL_PUBLIC.toString());
+        externalPublic.setBoxLabel(LayerModuleConstants.INSTANCE.GPClientProject_externalVisibilityLabelText());
+        externalPublic.setReadOnly(true);
+        checkGroupVisibility.add(externalPublic);
+        fp.add(checkGroupVisibility);
+
+        sharedCheck = new CheckBox();
+        sharedCheck.setId(PROJECT_SHARED.toString());
+        sharedCheck.setName(PROJECT_SHARED.toString());
+        sharedCheck.setBoxLabel(LayerModuleConstants.INSTANCE.GPClientProject_sharedLabelText());
+        sharedCheck.setReadOnly(true);
+        CheckBoxGroup checkGroup = new CheckBoxGroup();
+        checkGroup.setFieldLabel(LayerModuleConstants.INSTANCE.ProjectBindingWidget_checkBoxGroupLabelText());
+        checkGroup.add(this.sharedCheck);
+        fp.add(checkGroup);
         return fp;
     }
 
@@ -110,5 +139,8 @@ public class GPProjectPropertiesBinding extends GeoPlatformBindingWidget<IGPRoot
      */
     @Override
     public void addFieldsBinding() {
+        this.formBinding.addFieldBinding(new ProjectInternalPublicFieldBinding(internalPublic, PROJECT_INTERNAL_PUBLIC.toString()));
+        this.formBinding.addFieldBinding(new ProjectExternalPublicFieldBinding(externalPublic, PROJECT_EXTERNAL_PUBLIC.toString()));
+        this.formBinding.addFieldBinding(new ProjectSharedFieldBinding(sharedCheck, PROJECT_SHARED.toString()));
     }
 }

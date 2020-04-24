@@ -59,10 +59,7 @@ import org.geosdi.geoplatform.gui.client.model.projects.GPClientProjectKey;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.service.LayerRemoteAsync;
 import org.geosdi.geoplatform.gui.client.widget.form.binding.GPDynamicFormBinding;
-import org.geosdi.geoplatform.gui.client.widget.form.projects.binding.ProjectDefaultFieldBinding;
-import org.geosdi.geoplatform.gui.client.widget.form.projects.binding.ProjectDescriptionFieldBinding;
-import org.geosdi.geoplatform.gui.client.widget.form.projects.binding.ProjectNameFieldBinding;
-import org.geosdi.geoplatform.gui.client.widget.form.projects.binding.ProjectPathImageFieldBinding;
+import org.geosdi.geoplatform.gui.client.widget.form.projects.binding.*;
 import org.geosdi.geoplatform.gui.client.widget.grid.pagination.listview.GPListViewSearchPanel;
 import org.geosdi.geoplatform.gui.client.widget.pagination.projects.GPProjectSearchPanel;
 import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextArea;
@@ -89,11 +86,16 @@ public class ProjectBindingWidget extends GPDynamicFormBinding<GPClientProject> 
     private GPSecureStringTextField projectFieldName;
     private GPSecureStringTextArea projectDescription;
     private GPSecureStringTextField projectPathImage;
+    private CheckBox internalPublic;
+    private CheckBox externalPublic;
     private CheckBox projectDefaultCheck;
     private GPSecureButton save;
     private Button cancel;
     private FormButtonBinding buttonBinding;
 
+    /**
+     * @param theWidget
+     */
     public ProjectBindingWidget(GPListViewSearchPanel<GPClientProject> theWidget) {
         super();
         this.searchWidget = theWidget;
@@ -109,10 +111,12 @@ public class ProjectBindingWidget extends GPDynamicFormBinding<GPClientProject> 
     @Override
     public void addFieldsBinding() {
         this.formBinding.setStore(this.searchWidget.getStore());
-        super.formBinding.addFieldBinding(new ProjectNameFieldBinding(projectFieldName, GPClientProjectKey.PROJECT_NAME.toString()));
-        super.formBinding.addFieldBinding(new ProjectDescriptionFieldBinding(this.projectDescription, GPClientProjectKey.PROJECT_DESCRIPTION.toString()));
-        super.formBinding.addFieldBinding(new ProjectPathImageFieldBinding(this.projectPathImage, GPClientProjectKey.PROJECT_PATH_IMAGE.toString()));
-        super.formBinding.addFieldBinding(new ProjectDefaultFieldBinding(projectDefaultCheck, GPClientProjectKey.DEFAULT_PROJECT.toString()));
+        this.formBinding.addFieldBinding(new ProjectNameFieldBinding(projectFieldName, GPClientProjectKey.PROJECT_NAME.toString()));
+        this.formBinding.addFieldBinding(new ProjectDescriptionFieldBinding(this.projectDescription, GPClientProjectKey.PROJECT_DESCRIPTION.toString()));
+        this.formBinding.addFieldBinding(new ProjectPathImageFieldBinding(this.projectPathImage, GPClientProjectKey.PROJECT_PATH_IMAGE.toString()));
+        this.formBinding.addFieldBinding(new ProjectInternalPublicFieldBinding(internalPublic, GPClientProjectKey.PROJECT_INTERNAL_PUBLIC.toString()));
+        this.formBinding.addFieldBinding(new ProjectExternalPublicFieldBinding(externalPublic, GPClientProjectKey.PROJECT_EXTERNAL_PUBLIC.toString()));
+        this.formBinding.addFieldBinding(new ProjectDefaultFieldBinding(projectDefaultCheck, GPClientProjectKey.DEFAULT_PROJECT.toString()));
     }
 
     @Override
@@ -141,6 +145,17 @@ public class ProjectBindingWidget extends GPDynamicFormBinding<GPClientProject> 
         this.projectPathImage.setName(GPClientProjectKey.PROJECT_PATH_IMAGE.name());
         this.projectPathImage.setFieldLabel(LayerModuleConstants.INSTANCE.ProjectBindingWidget_projectFielPathImageLabelText());
         fieldSet.add(this.projectPathImage);
+        CheckBoxGroup checkGroupVisibility = new CheckBoxGroup();
+        checkGroupVisibility.setFieldLabel(LayerModuleConstants.INSTANCE.GPClientProject_checkGroupVisibilityLabelText());
+        internalPublic = new CheckBox();
+        internalPublic.setName(GPClientProjectKey.PROJECT_INTERNAL_PUBLIC.toString());
+        internalPublic.setBoxLabel(LayerModuleConstants.INSTANCE.GPClientProject_internalVisibilityLabelText());
+        checkGroupVisibility.add(internalPublic);
+        externalPublic = new CheckBox();
+        externalPublic.setName(GPClientProjectKey.PROJECT_EXTERNAL_PUBLIC.toString());
+        externalPublic.setBoxLabel(LayerModuleConstants.INSTANCE.GPClientProject_externalVisibilityLabelText());
+        checkGroupVisibility.add(externalPublic);
+        fieldSet.add(checkGroupVisibility);
         this.projectDefaultCheck = new CheckBox();
         this.projectDefaultCheck.setBoxLabel(LayerModuleConstants.INSTANCE.ProjectBindingWidget_projectDefaultCheckLabelText());
         this.projectDefaultCheck.setName(GPClientProjectKey.DEFAULT_PROJECT.toString());
@@ -155,13 +170,13 @@ public class ProjectBindingWidget extends GPDynamicFormBinding<GPClientProject> 
     @Override
     public void initSize() {
         super.setHeadingHtml(LayerModuleConstants.INSTANCE.ProjectBindingWidget_headingText());
-        setSize(420, 280);
+        setSize(420, 320);
     }
 
     @Override
     public void initSizeFormPanel() {
         super.getFormPanel().setHeaderVisible(FALSE);
-        super.getFormPanel().setSize(420, 280);
+        super.getFormPanel().setSize(420, 320);
     }
 
     @Override
@@ -214,9 +229,7 @@ public class ProjectBindingWidget extends GPDynamicFormBinding<GPClientProject> 
 
     private void addButtons() {
         getFormPanel().setButtonAlign(HorizontalAlignment.RIGHT);
-        this.save = new GPSecureButton(ButtonsConstants.INSTANCE.saveText(),
-                AbstractImagePrototype.create(BasicWidgetResources.ICONS.save()),
-                new AddProjectAction(GPTrustedLevel.HIGH, this));
+        this.save = new GPSecureButton(ButtonsConstants.INSTANCE.saveText(), AbstractImagePrototype.create(BasicWidgetResources.ICONS.save()), new AddProjectAction(GPTrustedLevel.HIGH, this));
         getFormPanel().addButton(save);
         buttonBinding = new FormButtonBinding(getFormPanel());
         buttonBinding.addButton(save);
@@ -272,13 +285,10 @@ public class ProjectBindingWidget extends GPDynamicFormBinding<GPClientProject> 
                             changeDefaultProject();
                         }
                         searchWidget.getStore().commitChanges();
-                        GeoPlatformMessage.infoMessage(
-                                LayerModuleConstants.INSTANCE.ProjectBindingWidget_addProjectSuccessText(),
+                        GeoPlatformMessage.infoMessage(LayerModuleConstants.INSTANCE.ProjectBindingWidget_addProjectSuccessText(),
                                 "<ul><li>" + entity.getName() + "</li></ul>");
                         if (entity.isDefaultProject()) {
-                            TimeoutHandlerManager.fireEvent(
-                                    ((GPProjectSearchPanel) searchWidget).getDefaultProjectEvent());
-
+                            TimeoutHandlerManager.fireEvent(((GPProjectSearchPanel) searchWidget).getDefaultProjectEvent());
                         }
                         hide();
                     }
@@ -327,13 +337,10 @@ public class ProjectBindingWidget extends GPDynamicFormBinding<GPClientProject> 
                                 }
                                 searchWidget.getStore().commitChanges();
 
-                                GeoPlatformMessage.infoMessage(
-                                        LayerModuleConstants.INSTANCE.
-                                                ProjectBindingWidget_updateProjectSuccessText(),
+                                GeoPlatformMessage.infoMessage(LayerModuleConstants.INSTANCE.ProjectBindingWidget_updateProjectSuccessText(),
                                         "<ul><li>" + entity.getName() + "</li></ul>");
                                 if (entity.isDefaultProject()) {
-                                    TimeoutHandlerManager.fireEvent(
-                                            ((GPProjectSearchPanel) searchWidget).getDefaultProjectEvent());
+                                    TimeoutHandlerManager.fireEvent(((GPProjectSearchPanel) searchWidget).getDefaultProjectEvent());
                                 }
 
                                 hide();

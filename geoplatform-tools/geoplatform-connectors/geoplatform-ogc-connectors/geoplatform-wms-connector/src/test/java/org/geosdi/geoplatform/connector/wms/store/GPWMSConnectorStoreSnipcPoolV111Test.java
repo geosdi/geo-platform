@@ -33,41 +33,58 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store.coverages;
+package org.geosdi.geoplatform.connector.wms.store;
 
-import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoverageRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoveragesRequest;
-import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV215xTest;
+import org.geosdi.geoplatform.connector.server.v111.GPWMSDescribeLayerV111Request;
+import org.geosdi.geoplatform.connector.server.v111.IGPWMSConnectorStoreV111;
+import org.geosdi.geoplatform.connector.server.v111.WMSGetCapabilitiesV111Request;
+import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.net.URL;
+
+import static org.geosdi.geoplatform.connector.pool.builder.v111.GPWMSConnectorBuilderPoolV111.wmsConnectorBuilderPoolV111;
+import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@FixMethodOrder(NAME_ASCENDING)
-public class GPGeoserverCoveragesConnectorStoreV215xTest extends GPBaseGeoserverConnectorStoreV215xTest {
+@FixMethodOrder(value = NAME_ASCENDING)
+public class GPWMSConnectorStoreSnipcPoolV111Test {
 
-    @Test
-    public void a_loadWorkspaceCoveragesTest() throws Exception {
-        GeoserverLoadCoveragesRequest loadCoveragesRequest = geoserverConnectorStoreV2_15_5.loadWorkspaceCoveragesRequest();
-        loadCoveragesRequest.withWorkspace("topp");
-        logger.info("########################WORKSPACE_COVERAGES_RESPONSE : {}\n", loadCoveragesRequest.getResponse());
+    private static final Logger logger = LoggerFactory.getLogger(GPWMSConnectorStoreSnipcPoolV111Test.class);
+    //
+    private static IGPWMSConnectorStoreV111 wmsServerConnector;
+
+    @BeforeClass
+    public static void beforeClass() throws Exception {
+        wmsServerConnector = wmsConnectorBuilderPoolV111()
+                .withServerUrl(new URL("https://servizi.protezionecivile.it/geoserver/wms"))
+                .withPooledConnectorConfig(pooledConnectorConfigBuilder()
+                        .withMaxTotalConnections(150)
+                        .withDefaultMaxPerRoute(80)
+                        .withMaxRedirect(20)
+                        .build()).build();
     }
 
+    @Ignore
     @Test
-    public void b_loadAllCoveragesTest() throws Exception {
-        GeoserverLoadCoveragesRequest loadCoveragesRequest = geoserverConnectorStoreV2_15_5.loadWorkspaceCoveragesRequest();
-        loadCoveragesRequest.withWorkspace("topp").withQueryList("ALL");
-        logger.info("########################ALL_COVERAGES_RESPONSE : {}\n", loadCoveragesRequest.getResponse());
+    public void a_wmsGetCapabilitiesV111Test() throws Exception {
+        WMSGetCapabilitiesV111Request wmsGetCapabilitiesRequest = wmsServerConnector.createGetCapabilitiesRequest();
+        logger.info("###############################WMS_GET_CAPABILITIES_V111_RESPONSE : {}\n", wmsGetCapabilitiesRequest.getResponseAsString());
     }
 
+    @Ignore
     @Test
-    public void c_loadCoverageTest() throws Exception {
-        GeoserverLoadCoverageRequest loadCoverageRequest = geoserverConnectorStoreV2_15_5.loadWorkspaceCoverageRequest();
-        loadCoverageRequest.withWorkspace("sf").withCoverage("sfdem");
-        logger.info("#######################LOAD_WORKSPACE_COVERAGE_RESPONSE : {}\n", loadCoverageRequest.getResponse());
+    public void b_wmsDescribeLayerV11Test() throws Exception {
+        GPWMSDescribeLayerV111Request wmsDescribeLayerRequest = wmsServerConnector.createDescribeLayerRequest();
+        logger.info("##########################WMS_DESCRIBE_LAYER_RESPONSE_V111 : {}\n", wmsDescribeLayerRequest
+                .withLayers("istat:ISTAT_2011_ace_propers").getResponse());
     }
 }

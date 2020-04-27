@@ -128,8 +128,8 @@ public abstract class GPGeoserverAboutConnector extends GPAbstractServerConnecto
     @Override
     public GPGeoserverAboutVersionRequest createAboutVersionRequest() {
         switch (version) {
-            case V215x:
             case V216x:
+            case V217x:
                 return new GPGeoserverAboutVersionRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");
@@ -142,8 +142,8 @@ public abstract class GPGeoserverAboutConnector extends GPAbstractServerConnecto
     @Override
     public GPGeoserverAboutStatusRequest createAboutStatusRequest() {
         switch (version) {
-            case V215x:
             case V216x:
+            case V217x:
                 return new GPGeoserverAboutStatusRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");

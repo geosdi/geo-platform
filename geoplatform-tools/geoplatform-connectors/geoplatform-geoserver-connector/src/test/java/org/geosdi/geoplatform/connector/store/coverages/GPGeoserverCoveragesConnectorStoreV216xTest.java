@@ -33,67 +33,41 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector;
+package org.geosdi.geoplatform.connector.store.coverages;
 
-import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoverageRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoveragesRequest;
+import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV216xTest;
+import org.junit.FixMethodOrder;
+import org.junit.Test;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.util.Objects;
-import java.util.Optional;
-
-import static com.google.common.base.Preconditions.checkArgument;
-import static java.lang.Boolean.FALSE;
-import static java.util.Arrays.stream;
-import static javax.annotation.meta.When.NEVER;
+import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public enum GeoserverVersion implements GPServerConnector.GPServerConnectorVersion {
+@FixMethodOrder(NAME_ASCENDING)
+public class GPGeoserverCoveragesConnectorStoreV216xTest extends GPBaseGeoserverConnectorStoreV216xTest {
 
-    /**
-     * <p>Maintenance Version.</p>
-     */
-    V216x("2.16.2"),
-    /**
-     * <p>Stable Version.</p>
-     */
-    V217x("2.17.0");
-
-    private final String version;
-
-    /**
-     * @param theVersion
-     */
-    GeoserverVersion(@Nonnull(when = NEVER) String theVersion) {
-        checkArgument((theVersion != null) && !(theVersion.trim().isEmpty()), "The Parameter version must not be null or an empty string.");
-        this.version = theVersion;
+    @Test
+    public void a_loadWorkspaceCoveragesTest() throws Exception {
+        GeoserverLoadCoveragesRequest loadCoveragesRequest = geoserverConnectorStoreV2_16_x.loadWorkspaceCoveragesRequest();
+        loadCoveragesRequest.withWorkspace("topp");
+        logger.info("########################WORKSPACE_COVERAGES_RESPONSE : {}\n", loadCoveragesRequest.getResponse());
     }
 
-    /**
-     * @return {@link String}
-     */
-    @Override
-    public String getVersion() {
-        return this.version;
+    @Test
+    public void b_loadAllCoveragesTest() throws Exception {
+        GeoserverLoadCoveragesRequest loadCoveragesRequest = geoserverConnectorStoreV2_16_x.loadWorkspaceCoveragesRequest();
+        loadCoveragesRequest.withWorkspace("topp").withQueryList("ALL");
+        logger.info("########################ALL_COVERAGES_RESPONSE : {}\n", loadCoveragesRequest.getResponse());
     }
 
-    @Override
-    public String toString() {
-        return this.version;
-    }
-
-    /**
-     * @param version
-     * @return {@link GeoserverVersion}
-     */
-    public static GeoserverVersion fromString(@Nullable String version) {
-        Optional<GeoserverVersion> optional = stream(GeoserverVersion.values())
-                .filter(Objects::nonNull)
-                .filter(v -> ((version != null) && !(version.trim().isEmpty())) ? v.getVersion().equalsIgnoreCase(version) : FALSE)
-                .findFirst();
-        return (((optional != null) && (optional.isPresent())) ? optional.get() : GeoserverVersion.V217x);
+    @Test
+    public void c_loadCoverageTest() throws Exception {
+        GeoserverLoadCoverageRequest loadCoverageRequest = geoserverConnectorStoreV2_16_x.loadWorkspaceCoverageRequest();
+        loadCoverageRequest.withWorkspace("sf").withCoverage("sfdem");
+        logger.info("#######################LOAD_WORKSPACE_COVERAGE_RESPONSE : {}\n", loadCoverageRequest.getResponse());
     }
 }

@@ -110,8 +110,8 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
     @Override
     public GPGeoserverStylesRequest loadStylesRequest() {
         switch (version) {
-            case V215x:
             case V216x:
+            case V217x:
                 return new GPGeoserverStylesRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");
@@ -124,8 +124,8 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
     @Override
     public GeoserverStyleRequest loadStyleRequest() {
         switch (version) {
-            case V215x:
             case V216x:
+            case V217x:
                 return new GPGeoserverStyleRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");

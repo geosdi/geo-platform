@@ -110,8 +110,8 @@ public abstract class GPGeoserverSecurityConnector extends GPGeoserverFeatureTyp
     @Override
     public GPGeoserverGetMasterPasswordRequest loadMasterPasswordRequest() {
         switch (version) {
-            case V215x:
             case V216x:
+            case V217x:
                 return new GPGeoserverGetMasterPasswordRequest(this, this.emptyJacksonSupport);
             default:
                 throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");
@@ -124,8 +124,8 @@ public abstract class GPGeoserverSecurityConnector extends GPGeoserverFeatureTyp
     @Override
     public GPGeoserverGetCatalogRequest loadCatalogRequest() {
         switch (version) {
-            case V215x:
             case V216x:
+            case V217x:
                 return new GPGeoserverGetCatalogRequest(this, this.emptyJacksonSupport);
             default:
                 throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");
@@ -138,8 +138,8 @@ public abstract class GPGeoserverSecurityConnector extends GPGeoserverFeatureTyp
     @Override
     public GPGeoserverUpdateCatalogRequest updateCatalogRequest() {
         switch (version) {
-            case V215x:
             case V216x:
+            case V217x:
                 return new GPGeoserverUpdateCatalogRequest(this, this.emptyJacksonSupport);
             default:
                 throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");

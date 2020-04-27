@@ -47,7 +47,9 @@ import org.geosdi.geoplatform.connector.geoserver.request.featuretypes.Geoserver
 import org.geosdi.geoplatform.connector.geoserver.request.featuretypes.GeoserverDeleteFeatureTypeRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.featuretypes.GeoserverLoadWorkspaceDatastoreFeatureTypesRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.featuretypes.GeoserverLoadWorkspaceFeatureTypesRequest;
-import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV215xTest;
+import org.geosdi.geoplatform.connector.server.exception.IncorrectResponseException;
+import org.geosdi.geoplatform.connector.server.exception.ResourceNotFoundException;
+import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV216xTest;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 
@@ -61,29 +63,29 @@ import static org.junit.runners.MethodSorters.NAME_ASCENDING;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @FixMethodOrder(NAME_ASCENDING)
-public class GPGeoserverFeatureTypesConnectorV215xTest extends GPBaseGeoserverConnectorStoreV215xTest {
+public class GPGeoserverFeatureTypesConnectorV216xTest extends GPBaseGeoserverConnectorStoreV216xTest {
 
-    @Test
+    @Test(expected = ResourceNotFoundException.class)
     public void a_loadWorkspaceDatastoreFeatureTypesTest() throws Exception {
-        GeoserverLoadWorkspaceDatastoreFeatureTypesRequest workspaceDatastoreFeatureTypesRequest = geoserverConnectorStoreV2_15_5
+        GeoserverLoadWorkspaceDatastoreFeatureTypesRequest workspaceDatastoreFeatureTypesRequest = geoserverConnectorStoreV2_16_x
                 .loadWorkspaceDatastoreFeatureTypesRequest();
         workspaceDatastoreFeatureTypesRequest.withWorkspace("topp");
         workspaceDatastoreFeatureTypesRequest.withStore("com");
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@LOAD_WORKSPACE_DATASTORE_FEATURE_TYPES_RESPONSE : {}\n", workspaceDatastoreFeatureTypesRequest.getResponse().toFeatureType());
     }
 
-    @Test
+    @Test(expected = ResourceNotFoundException.class)
     public void b_loadEmptyWorkspaceDatastoreFeatureTypesTest() throws Exception {
-        GeoserverLoadWorkspaceDatastoreFeatureTypesRequest workspaceDatastoreFeatureTypesRequest = geoserverConnectorStoreV2_15_5
+        GeoserverLoadWorkspaceDatastoreFeatureTypesRequest workspaceDatastoreFeatureTypesRequest = geoserverConnectorStoreV2_16_x
                 .loadWorkspaceDatastoreFeatureTypesRequest();
         workspaceDatastoreFeatureTypesRequest.withWorkspace("topp");
         workspaceDatastoreFeatureTypesRequest.withStore("Test");
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@LOAD_EMPTY_WORKSPACE_DATASTORE_FEATURE_TYPES_RESPONSE : {}\n", workspaceDatastoreFeatureTypesRequest.getResponse().toFeatureType());
     }
 
-    @Test
+    @Test(expected = IncorrectResponseException.class)
     public void c_loadConfiguredWorkspaceDatastoreFeatureTypesTest() throws Exception {
-        GeoserverLoadWorkspaceDatastoreFeatureTypesRequest workspaceDatastoreFeatureTypesRequest = geoserverConnectorStoreV2_15_5
+        GeoserverLoadWorkspaceDatastoreFeatureTypesRequest workspaceDatastoreFeatureTypesRequest = geoserverConnectorStoreV2_16_x
                 .loadWorkspaceDatastoreFeatureTypesRequest();
         workspaceDatastoreFeatureTypesRequest.withWorkspace("topp");
         workspaceDatastoreFeatureTypesRequest.withStore("com");
@@ -91,9 +93,9 @@ public class GPGeoserverFeatureTypesConnectorV215xTest extends GPBaseGeoserverCo
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@LOAD_CONFIGURED_WORKSPACE_DATASTORE_FEATURE_TYPES_RESPONSE : {}\n", workspaceDatastoreFeatureTypesRequest.getResponse().toFeatureType());
     }
 
-    @Test
+    @Test(expected = IncorrectResponseException.class)
     public void d_loadEmptyConfiguredWorkspaceDatastoreFeatureTypesTest() throws Exception {
-        GeoserverLoadWorkspaceDatastoreFeatureTypesRequest workspaceDatastoreFeatureTypesRequest = geoserverConnectorStoreV2_15_5
+        GeoserverLoadWorkspaceDatastoreFeatureTypesRequest workspaceDatastoreFeatureTypesRequest = geoserverConnectorStoreV2_16_x
                 .loadWorkspaceDatastoreFeatureTypesRequest();
         workspaceDatastoreFeatureTypesRequest.withWorkspace("topp");
         workspaceDatastoreFeatureTypesRequest.withStore("Test");
@@ -103,14 +105,14 @@ public class GPGeoserverFeatureTypesConnectorV215xTest extends GPBaseGeoserverCo
 
     @Test
     public void e_loadWorkspaceFeatureTypesTest() throws Exception {
-        GeoserverLoadWorkspaceFeatureTypesRequest workspaceFeatureTypesRequest = geoserverConnectorStoreV2_15_5.loadWorkspaceFeatureTypesRequest();
+        GeoserverLoadWorkspaceFeatureTypesRequest workspaceFeatureTypesRequest = geoserverConnectorStoreV2_16_x.loadWorkspaceFeatureTypesRequest();
         workspaceFeatureTypesRequest.withWorkspace("sf");
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@LOAD_WORKSPACE_FEATURE_TYPES_RESPONSE : {}\n", workspaceFeatureTypesRequest.getResponse().toFeatureType());
     }
 
-    @Test
+    @Test(expected = ResourceNotFoundException.class)
     public void f_createFeatureTypeTest() throws Exception {
-        GeoserverCreateFeatureTypeRequest createFeatureTypeRequest = geoserverConnectorStoreV2_15_5.createFeatureTypeRequest();
+        GeoserverCreateFeatureTypeRequest createFeatureTypeRequest = geoserverConnectorStoreV2_16_x.createFeatureTypeRequest();
         createFeatureTypeRequest.withWorkspace("topp").withStore("Test");
         IGPGeoserverFeatureTypeInfo featureTypeBody = new GPGeoserverFeatureTypeInfo();
         featureTypeBody.setNativeCRS("GEOGCS[&quot;WGS 84&quot;, \n" +
@@ -153,9 +155,9 @@ public class GPGeoserverFeatureTypesConnectorV215xTest extends GPBaseGeoserverCo
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@CREATE_FEATURE_TYPE_RESPONSE : {}\n", createFeatureTypeRequest.getResponse());
     }
 
-    @Test
+    @Test(expected = ResourceNotFoundException.class)
     public void g_deleteFeatureTypeTest() throws Exception {
-        GeoserverDeleteFeatureTypeRequest deleteFeatureTypeRequest = geoserverConnectorStoreV2_15_5.deleteFeatureTypeRequest();
+        GeoserverDeleteFeatureTypeRequest deleteFeatureTypeRequest = geoserverConnectorStoreV2_16_x.deleteFeatureTypeRequest();
         deleteFeatureTypeRequest.withWorkspace("topp").withStore("Test").withFeatureTypeName("test").withRecurse(TRUE);
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@DELETE_FEATURE_TYPE_RESPONSE : {}\n", deleteFeatureTypeRequest.getResponse());
     }

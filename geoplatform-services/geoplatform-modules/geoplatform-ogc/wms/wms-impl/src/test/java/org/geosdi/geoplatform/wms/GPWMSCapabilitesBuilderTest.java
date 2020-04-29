@@ -38,7 +38,9 @@ package org.geosdi.geoplatform.wms;
 import org.geosdi.geoplatform.response.RasterLayerDTO;
 import org.geosdi.geoplatform.services.builder.GPWMSCapabilitesBuilder;
 import org.geosdi.geoplatform.services.builder.IGPWMSCapabilitesBuilder;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -50,6 +52,7 @@ import static com.google.common.base.Preconditions.checkArgument;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@FixMethodOrder(value = MethodSorters.NAME_ASCENDING)
 public class GPWMSCapabilitesBuilderTest {
 
     private static final Logger logger = LoggerFactory.getLogger(GPWMSCapabilitesBuilderTest.class);
@@ -57,11 +60,20 @@ public class GPWMSCapabilitesBuilderTest {
     private static final IGPWMSCapabilitesBuilder wmsCapabilitiesBuilder = new GPWMSCapabilitesBuilder();
     
     @Test
-    public void loadWMSCapabilitiesTest() throws Exception {
+    public void a_loadWMSCapabilitiesTest() throws Exception {
         List<RasterLayerDTO> rasterLayers = wmsCapabilitiesBuilder.loadWMSCapabilities("http://150.145.141.180/geoserver/wms", null, null);
         checkArgument(rasterLayers.size() > 0);
         for (RasterLayerDTO rasterLayerDTO : rasterLayers.get(0).getSubLayerList()) {
             logger.info("######################LAYER_NAME : {} - STYLE_LIST : {}\n", rasterLayerDTO, rasterLayerDTO.getStyleList());
+        }
+    }
+
+    @Test
+    public void b_loadWMSCapabilitiesTest() throws Exception {
+        List<RasterLayerDTO> rasterLayers = wmsCapabilitiesBuilder.loadWMSCapabilitiesAuth("https://servizi.protezionecivile.it/geoserver/wms", null, null, null);
+        checkArgument(rasterLayers.size() > 0);
+        for (RasterLayerDTO rasterLayerDTO : rasterLayers.get(0).getSubLayerList()) {
+            logger.info("######################MAX_SCALE : {} - STYLE_LIST : {}\n", rasterLayerDTO, rasterLayerDTO.getStyleList());
         }
     }
 }

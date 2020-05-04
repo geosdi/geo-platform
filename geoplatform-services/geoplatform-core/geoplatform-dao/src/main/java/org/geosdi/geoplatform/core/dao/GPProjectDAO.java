@@ -68,4 +68,8 @@ public interface GPProjectDAO {
     List<GPProject> findInternalPublic(int num, int page);
 
     List<GPProject> findExternalPublic(int num , int page);
+
+    int getTotalInternalPublic();
+
+    int getTotalExternalPublic();
 }

@@ -102,4 +102,15 @@ public class BootstrapInitializerTest extends BaseInitializerTest {
     public void c_findExternalPublicProjectTest() throws Exception {
         assertTrue(this.projectDAO.findExternalPublic(10, 0).size() == 0);
     }
+
+    @Test
+    public void d_countInternalPublicProjectTest() throws Exception {
+        logger.info("\n\t@@@ Count: {} @@@ ", this.projectDAO.getTotalInternalPublic());
+    }
+
+    @Test
+    public void e_countExternalPublicProjectTest() throws Exception {
+        logger.info("\n\t@@@ Count: {} @@@ ", this.projectDAO.getTotalExternalPublic());
+    }
+
 }

@@ -151,13 +151,13 @@ class GPProjectDAOImpl extends GPAbstractJpaDAO<GPProject, Long> implements GPPr
      * @return {@link int}
      */
     @Override
-    public Long getTotalInternalPublic() {
+    public int getTotalInternalPublic() {
         try {
             CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<Long> criteriaQuery = builder.createQuery(Long.class);
             Root<GPProject> root = criteriaQuery.from(this.persistentClass);
             criteriaQuery.where(builder.equal(root.get("internalPublic"), TRUE));
-            return this.entityManager.createQuery(criteriaQuery).getSingleResult();
+            return this.entityManager.createQuery(criteriaQuery).getSingleResult().intValue();
         } catch (Exception ex) {
             ex.printStackTrace();
             throw new GPDAOException(ex);
@@ -169,13 +169,13 @@ class GPProjectDAOImpl extends GPAbstractJpaDAO<GPProject, Long> implements GPPr
      * @return {@link int}
      */
     @Override
-    public Long getTotalExternalPublic() {
+    public int getTotalExternalPublic() {
         try {
             CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<Long> criteriaQuery = builder.createQuery(Long.class);
             Root<GPProject> root = criteriaQuery.from(this.persistentClass);
             criteriaQuery.where(builder.equal(root.get("externalPublic"), TRUE));
-            return this.entityManager.createQuery(criteriaQuery).getSingleResult();
+            return this.entityManager.createQuery(criteriaQuery).getSingleResult().intValue();
         } catch (Exception ex) {
             ex.printStackTrace();
             throw new GPDAOException(ex);

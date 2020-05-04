@@ -151,7 +151,7 @@ class GPProjectDAOImpl extends GPAbstractJpaDAO<GPProject, Long> implements GPPr
      * @return {@link int}
      */
     @Override
-    public Number getTotalInternalPublic() {
+    public Integer getTotalInternalPublic() {
         try {
             CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<Long> criteriaQuery = builder.createQuery(Long.class);
@@ -170,7 +170,7 @@ class GPProjectDAOImpl extends GPAbstractJpaDAO<GPProject, Long> implements GPPr
      * @return {@link int}
      */
     @Override
-    public Number getTotalExternalPublic() {
+    public Integer getTotalExternalPublic() {
         try {
             CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<Long> criteriaQuery = builder.createQuery(Long.class);

@@ -80,11 +80,11 @@ public interface GPProjectDAO extends BaseCriteriaJpaDAO<GPProject, Long> {
      *
      * @return {@link Number}
      */
-    Number getTotalInternalPublic();
+    Integer getTotalInternalPublic();
 
     /**
      *
      * @return {@link Number}
      */
-    Number getTotalExternalPublic();
+    Integer getTotalExternalPublic();
 }

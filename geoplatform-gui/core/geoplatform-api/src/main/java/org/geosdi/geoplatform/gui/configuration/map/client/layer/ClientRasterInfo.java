@@ -35,9 +35,10 @@
  */
 package org.geosdi.geoplatform.gui.configuration.map.client.layer;
 
-import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
 import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitorClient;
+
+import java.util.ArrayList;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -129,5 +130,4 @@ public class ClientRasterInfo extends GPLayerClientInfo {
                 + ", minScale =  " + getMinScale()
                 + ", getzIndex() = " + getzIndex() + "]";
     }
-
 }

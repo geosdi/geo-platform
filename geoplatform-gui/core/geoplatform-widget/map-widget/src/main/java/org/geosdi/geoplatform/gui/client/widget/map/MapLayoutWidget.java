@@ -121,22 +121,17 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
         this.mapOptions = new MapOptions();
         this.mapOptions.setNumZoomLevels(MapLayoutWidget.NUM_ZOOM_LEVEL);
         this.mapOptions.setDisplayProjection(new Projection(WGS_84.getCode()));
-        IGPAccountDetail accountDetail = Registry.get(
-                UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
+        IGPAccountDetail accountDetail = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
         String baseLayerKey = accountDetail.getBaseLayer();
         GPBaseLayer baseLayer;
         if (baseLayerKey != null) {
-            baseLayer = GPMapBaseLayerFactory.getGPBaseLayer(
-                    BaseLayerValue.valueOf(baseLayerKey));
+            baseLayer = GPMapBaseLayerFactory.getGPBaseLayer(BaseLayerValue.valueOf(baseLayerKey));
         } else {
-            baseLayer = GPMapBaseLayerFactory.getGPBaseLayer(
-                    BaseLayerValue.GOOGLE_SATELLITE);
-            accountDetail.setBaseLayer(
-                    baseLayer.getBaseLayerEnumName().toString());
+            baseLayer = GPMapBaseLayerFactory.getGPBaseLayer(BaseLayerValue.GOOGLE_SATELLITE);
+            accountDetail.setBaseLayer(baseLayer.getBaseLayerEnumName().toString());
 //            Registry.register(GlobalRegistryEnum.BASE_LAYER.getValue(), baseLayer.getBaseLayerEnumName().toString());
         }
-        if (baseLayer.getProjection().getProjectionCode().equals(
-                WGS_84.getCode())) {
+        if (baseLayer.getProjection().getProjectionCode().equals(WGS_84.getCode())) {
             set4326MapOptions();
         } else {
             set3857MapOptions();
@@ -146,15 +141,13 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
 
     private void set4326MapOptions() {
         this.mapOptions.setUnits(MapUnits.DEGREES);
-        this.mapOptions.setMaxExtent(new Bounds(-180, -90,
-                180, 83.623));
+        this.mapOptions.setMaxExtent(new Bounds(-180, -90, 180, 83.623));
         this.mapOptions.setMaxResolution(1.40625F);
     }
 
     private void set3857MapOptions() {
         this.mapOptions.setUnits(MapUnits.METERS);
-        this.mapOptions.setMaxExtent(new Bounds(-20037508, -20037508,
-                20037508, 20037508.34));
+        this.mapOptions.setMaxExtent(new Bounds(-20037508, -20037508, 20037508, 20037508.34));
         this.mapOptions.setMaxResolution(156543.0339F);
     }
 
@@ -167,15 +160,12 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
             private LayerRangeEvent layerRangeEvent;
 
             @Override
-            public void onLayerChanged(
-                    MapLayerChangedListener.MapLayerChangedEvent eventObject) {
-                GPLayerBean layerBean = mapModel.getLayersStore().getLayer(
-                        eventObject.getLayer());
-                layerRangeEvent = new LayerRangeEvent(layerBean,
-                        eventObject.getLayer().isInRange());
+            public void onLayerChanged(MapLayerChangedListener.MapLayerChangedEvent eventObject) {
+                logger.log(Level.INFO, "#################### propertyChanged : " + eventObject.getProperty().getValue());
+                GPLayerBean layerBean = mapModel.getLayersStore().getLayer(eventObject.getLayer());
+                layerRangeEvent = new LayerRangeEvent(layerBean, eventObject.getLayer().isInRange());
                 LayerHandlerManager.fireEvent(layerRangeEvent);
-                logger.log(Level.FINE,
-                        "Called onLayer Changed: " + eventObject.getLayer().getId());
+                logger.log(Level.INFO, "Called onLayer Changed: " + eventObject.getLayer().getId());
             }
 
         });
@@ -188,22 +178,16 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
         this.map.addControl(new MousePosition());
         this.addMeasureControl();
         this.addMeasureAreaControl();
-        IGPAccountDetail accountDetail = Registry.get(
-                UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
+        IGPAccountDetail accountDetail = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
         String baseLayerKey = accountDetail.getBaseLayer();
-        GPBaseLayer baseLayer = GPMapBaseLayerFactory.getGPBaseLayer(
-                BaseLayerValue.valueOf(baseLayerKey));
+        GPBaseLayer baseLayer = GPMapBaseLayerFactory.getGPBaseLayer(BaseLayerValue.valueOf(baseLayerKey));
         if (baseLayer == null) {
-            baseLayer = GPMapBaseLayerFactory.getGPBaseLayer(
-                    BaseLayerValue.GOOGLE_SATELLITE);
+            baseLayer = GPMapBaseLayerFactory.getGPBaseLayer(BaseLayerValue.GOOGLE_SATELLITE);
         }
-
         this.map.addLayer(baseLayer.getGwtOlBaseLayer());
         baseLayer.getGwtOlBaseLayer().setZIndex(-1);
         this.mapControl = new MapControlManager(this.map);
-
         this.initMapScaleSupport();
-
         this.map.setOptions(this.mapOptions);
     }
 

@@ -807,8 +807,7 @@ public class GPProjectDelegate implements ProjectDelegate {
     }
 
     @Override
-    public Long importProject(ImportProjectRequest impRequest) throws
-            IllegalParameterFault, ResourceNotFoundFault {
+    public Long importProject(ImportProjectRequest impRequest) throws Exception {
         if (impRequest == null) {
             throw new IllegalParameterFault("The ImportProjectRequest must "
                     + "not be null.");
@@ -947,8 +946,7 @@ public class GPProjectDelegate implements ProjectDelegate {
         return childs;
     }
 
-    private int persistElementList(GPProject project, GPFolder parent,
-            List<AbstractElementDTO> elementList) throws IllegalParameterFault {
+    private int persistElementList(GPProject project, GPFolder parent, List<AbstractElementDTO> elementList) throws Exception {
         int numberOfDescendants = 0;
 
         for (int i = elementList.size() - 1; i >= 0; i--) {
@@ -1070,8 +1068,7 @@ public class GPProjectDelegate implements ProjectDelegate {
         return owner;
     }
 
-    private ProjectDTO retrieveProjectDTO(Long projectID, Long accountID)
-            throws ResourceNotFoundFault {
+    private ProjectDTO retrieveProjectDTO(Long projectID, Long accountID) throws ResourceNotFoundFault {
         GPProject project = this.getProjectByID(projectID);
         EntityCorrectness.checkProjectLog(project); // TODO assert
         logger.trace("\n*** The project to retrieve is {}", project.getName());

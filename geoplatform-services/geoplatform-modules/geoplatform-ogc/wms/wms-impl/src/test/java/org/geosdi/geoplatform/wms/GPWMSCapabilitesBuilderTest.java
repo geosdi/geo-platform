@@ -61,7 +61,16 @@ public class GPWMSCapabilitesBuilderTest {
         List<RasterLayerDTO> rasterLayers = wmsCapabilitiesBuilder.loadWMSCapabilities("http://150.145.141.180/geoserver/wms", null, null);
         checkArgument(rasterLayers.size() > 0);
         for (RasterLayerDTO rasterLayerDTO : rasterLayers.get(0).getSubLayerList()) {
-            logger.info("######################LAYER_NAME : {} - STYLE_LIST : {}\n", rasterLayerDTO, rasterLayerDTO.getStyleList());
+            logger.info("######################LAYER : {} - STYLE_LIST : {}\n", rasterLayerDTO, rasterLayerDTO.getStyleList());
+        }
+    }
+
+    @Test
+    public void b_loadWMSCapabilitiesTest() throws Exception {
+        List<RasterLayerDTO> rasterLayers = wmsCapabilitiesBuilder.loadWMSCapabilitiesAuth("https://servizi.protezionecivile.it/geoserver/wms", null, null, null);
+        checkArgument(rasterLayers.size() > 0);
+        for (RasterLayerDTO rasterLayerDTO : rasterLayers.get(0).getSubLayerList()) {
+            logger.info("######################LAYER : {} - STYLE_LIST : {}\n", rasterLayerDTO, rasterLayerDTO.getStyleList());
         }
     }
 }

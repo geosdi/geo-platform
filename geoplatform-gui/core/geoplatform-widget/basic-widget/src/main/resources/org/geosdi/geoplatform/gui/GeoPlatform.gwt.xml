@@ -49,8 +49,7 @@
     <!--source path="exception" /-->
     <source path="regex" />
     
-    <servlet path="/GeoPlatformOGCRemote"
-             class="org.geosdi.geoplatform.gui.server.gwt.GeoPlatformOGCRemoteImpl" />
+    <servlet path="/GeoPlatformOGCRemote" class="org.geosdi.geoplatform.gui.server.gwt.GeoPlatformOGCRemoteImpl" />
     
     <!--Logging configuration-->
     <set-property name="gwt.logging.enabled" value="TRUE"/>

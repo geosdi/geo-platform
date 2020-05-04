@@ -101,7 +101,6 @@ public interface GPFolderProjectResource {
      * @throws Exception if Project and its contents is not valid or
      * if Account not found
      */
-    Long importProject(ImportProjectRequest impRequest)
-            throws Exception;
+    Long importProject(ImportProjectRequest impRequest) throws Exception;
     // </editor-fold>
 }

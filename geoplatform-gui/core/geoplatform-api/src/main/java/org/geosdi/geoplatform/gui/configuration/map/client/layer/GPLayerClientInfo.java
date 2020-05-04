@@ -35,17 +35,17 @@
  */
 package org.geosdi.geoplatform.gui.configuration.map.client.layer;
 
-import java.io.Serializable;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
 import org.geosdi.geoplatform.gui.shared.GPLayerType;
+
+import java.io.Serializable;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  *
  */
-public abstract class GPLayerClientInfo implements Serializable,
-        Comparable<IGPFolderElements>, IGPFolderElements {
+public abstract class GPLayerClientInfo implements Serializable, Comparable<IGPFolderElements>, IGPFolderElements {
 
     private static final long serialVersionUID = 2098509654335891064L;
     //

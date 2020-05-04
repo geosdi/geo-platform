@@ -182,8 +182,7 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel implements GPLaye
     @Override
     public final void setAbstractText(String abstractText) {
         this.abstractText = abstractText;
-        super.set(GPLayerKeyValue.ABSTRACT.toString(),
-                this.abstractText != null ? this.abstractText : "");
+        super.set(GPLayerKeyValue.ABSTRACT.toString(), ((this.abstractText != null) ? this.abstractText : ""));
     }
 
     /**
@@ -295,8 +294,7 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel implements GPLaye
 
     @Override
     public String getLabel() {
-        return ((getAlias() != null) && (!getAlias().equals("")))
-                ? getAlias() : super.getLabel();
+        return ((getAlias() != null) && (!getAlias().trim().isEmpty())) ? getAlias() : super.getLabel();
     }
 
     public void setState(IGPLayerTreeState state) {

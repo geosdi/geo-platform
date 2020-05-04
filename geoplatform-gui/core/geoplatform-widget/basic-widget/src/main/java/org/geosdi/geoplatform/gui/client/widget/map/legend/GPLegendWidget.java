@@ -38,7 +38,8 @@ package org.geosdi.geoplatform.gui.client.widget.map.legend;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.Html;
 import com.google.gwt.user.client.ui.Image;
-import org.geosdi.geoplatform.gui.factory.map.GPApplicationMap;
+import org.geosdi.geoplatform.gui.client.widget.map.legend.scale.GPLegendScaleAdapter;
+import org.geosdi.geoplatform.gui.client.widget.map.legend.scale.IGPLegendScaleAdapter;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.utility.GSAuthKeyManager;
 
@@ -48,8 +49,9 @@ import org.geosdi.geoplatform.gui.utility.GSAuthKeyManager;
  */
 public class GPLegendWidget {
 
-    public static final String GET_LEGEND_REQUEST = "?REQUEST=GetLegendGraphic"
-            + "&VERSION=1.0.0&FORMAT=image/png&LAYER=";
+    public static final String GET_LEGEND_REQUEST = "?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&LAYER=";
+    //
+    private final IGPLegendScaleAdapter legendScaleAdapter = new GPLegendScaleAdapter();
     protected ContentPanel legendsStore;
 
     /**
@@ -76,12 +78,9 @@ public class GPLegendWidget {
             cp.setHeaderVisible(false);
             cp.setBorders(false);
             cp.setBodyBorder(false);
-
             cp.add(new Html("<h3>" + layerBean.getLabel() + "</h3>"));
-
             Image image;
             String dataSource;
-
             if (layerBean.getDataSource().contains("gwc/service/wms")) {
                 dataSource = layerBean.getDataSource().replaceAll("gwc/service/wms", "wms");
             } else if (!(layerBean.getDataSource().startsWith("http://ows"))
@@ -91,10 +90,11 @@ public class GPLegendWidget {
                 dataSource = layerBean.getDataSource().replaceAll("/wfs", "/wms");
             }
             StringBuilder imageURL = new StringBuilder();
-            imageURL.append(dataSource).append(!dataSource.contains("?") ? GET_LEGEND_REQUEST : GET_LEGEND_REQUEST.replaceAll("\\?", "&")).append(layerBean.getName())
-                    .append("&scale=").append(
-                    GPApplicationMap.getInstance().getApplicationMap().getMap().getScale()).
-                    append("&service=WMS");
+            imageURL.append(dataSource)
+                    .append(!dataSource.contains("?") ? GET_LEGEND_REQUEST : GET_LEGEND_REQUEST.replaceAll("\\?", "&"))
+                    .append(layerBean.getName())
+                    .append(this.legendScaleAdapter.adaptScale(layerBean))
+                    .append("&service=WMS");
             if (layerBean.getStyles() != null && layerBean.getStyles().size() > 0) {
                 imageURL.append("&STYLE=").append(layerBean.getStyles().get(0).getStyleString());
             }
@@ -117,8 +117,7 @@ public class GPLegendWidget {
      */
     public void hideLegendItem(GPLayerBean layerBean) {
         if (this.legendsStore.getItemByItemId(layerBean.getUUID()) != null) {
-            this.legendsStore.remove(this.legendsStore.getItemByItemId(
-                    layerBean.getUUID()));
+            this.legendsStore.remove(this.legendsStore.getItemByItemId(layerBean.getUUID()));
             this.legendsStore.layout();
         }
     }

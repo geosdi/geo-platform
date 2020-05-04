@@ -145,8 +145,7 @@ public class AddLayerWidget extends GeoPlatformWindow {
 
     @Override
     public void addComponent() {
-        for (IAddLayerPlugin plugin : GPSharedUtils.safeList(
-                AddLayerPluginManager.getWindowPlugins())) {
+        for (IAddLayerPlugin plugin : GPSharedUtils.safeList(AddLayerPluginManager.getWindowPlugins())) {
             plugin.initPlugin(tree);
             this.store.add(plugin);
         }
@@ -167,8 +166,7 @@ public class AddLayerWidget extends GeoPlatformWindow {
     public void show() {
         super.show();
         MediatorToolbarTreeAction.getInstance().setAddLayerVisible(true);
-        MediatorToolbarTreeAction.getInstance().manageAddLayerPluginAction(
-                tree.getSelectionModel().getSelectedItems());
+        MediatorToolbarTreeAction.getInstance().manageAddLayerPluginAction(tree.getSelectionModel().getSelectedItems());
     }
 
     @Override

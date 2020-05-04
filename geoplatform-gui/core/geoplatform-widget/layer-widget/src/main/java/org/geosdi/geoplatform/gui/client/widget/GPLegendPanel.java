@@ -36,20 +36,20 @@
 package org.geosdi.geoplatform.gui.client.widget;
 
 import com.extjs.gxt.ui.client.Style.Scroll;
-import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.widget.map.legend.GPLegendWidget;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.layers.event.LegendLayerHandler;
 
+import javax.inject.Inject;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPLegendPanel extends GeoPlatformContentPanel implements
-        LegendLayerHandler {
+public class GPLegendPanel extends GeoPlatformContentPanel implements LegendLayerHandler {
 
     private GPLegendWidget legendWidget;
 
@@ -61,7 +61,6 @@ public class GPLegendPanel extends GeoPlatformContentPanel implements
     @Override
     public void addComponent() {
         this.legendWidget = new GPLegendWidget();
-
         super.add(this.legendWidget.getLegendsStore());
     }
 
@@ -73,7 +72,6 @@ public class GPLegendPanel extends GeoPlatformContentPanel implements
     public void setPanelProperties() {
         setHeadingHtml(LayerModuleConstants.INSTANCE.GPLegendPanel_headingText());
         setScrollMode(Scroll.AUTOY);
-
         LayerHandlerManager.addHandler(LegendLayerHandler.TYPE, this);
     }
 

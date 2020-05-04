@@ -102,15 +102,12 @@ public class LayersPropertiesWidget extends GeoPlatformWindow implements GPTreeB
             }
 
         });
-
     }
 
     @Override
     public final void show() {
         if (this.model == null) {
-            throw new IllegalArgumentException(
-                    "Don't call this method, but call"
-                            + " bindLayer(GPLayerBean model)");
+            throw new IllegalArgumentException("Don't call this method, but call bindLayer(GPLayerBean model)");
         }
         super.show();
     }

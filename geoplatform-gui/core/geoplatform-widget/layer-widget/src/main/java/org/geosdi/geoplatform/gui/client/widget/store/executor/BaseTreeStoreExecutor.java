@@ -49,6 +49,7 @@ import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.client.widget.tree.store.GPTreeStoreOperations;
 import org.geosdi.geoplatform.gui.client.widget.tree.store.executor.GenericTreeStoreExecutor;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
@@ -88,13 +89,11 @@ public abstract class BaseTreeStoreExecutor extends GenericTreeStoreExecutor<Mem
         }
     }
 
-    protected void manageAddLayerFromSource(List<GPBeanTreeModel> layerList,
-            GPLayerBean layer, GPTreeStoreOperations sourceLayer) {
+    protected void manageAddLayerFromSource(List<GPBeanTreeModel> layerList, GPLayerBean layer, GPTreeStoreOperations sourceLayer) {
         switch (sourceLayer) {
             case LAYERS_FROM_COPY_MENU:
                 layerList.add(this.duplicateRaster(layer));
                 break;
-
             case LAYERS_FROM_WMS_CAPABILITIES:
             case LAYERS_FROM_PUBLISHER:
                 layerList.add(this.generateRasterTreeNode(layer));
@@ -104,6 +103,10 @@ public abstract class BaseTreeStoreExecutor extends GenericTreeStoreExecutor<Mem
         }
     }
 
+    /**
+     * @param layer
+     * @return {@link RasterTreeNode}
+     */
     protected RasterTreeNode generateRasterTreeNode(GPLayerBean layer) {
         RasterTreeNode raster = new RasterTreeNode();
         raster.setChecked(false);
@@ -118,6 +121,10 @@ public abstract class BaseTreeStoreExecutor extends GenericTreeStoreExecutor<Mem
         raster.setLayerType(layer.getLayerType());
         raster.setName(layer.getName());
         raster.setStyles(layer.getStyles());
+        if(layer instanceof GPRasterBean) {
+            raster.setMaxScale(((GPRasterBean) layer).getMaxScale());
+            raster.setMinScale(((GPRasterBean) layer).getMinScale());
+        }
         return raster;
     }
 

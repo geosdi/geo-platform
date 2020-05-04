@@ -689,8 +689,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public Long importProject(ImportProjectRequest impRequest)
-            throws IllegalParameterFault, ResourceNotFoundFault {
+    public Long importProject(ImportProjectRequest impRequest) throws Exception {
         return gpProjectDelegate.importProject(impRequest);
     }
     //</editor-fold>

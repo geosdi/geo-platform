@@ -124,13 +124,10 @@ public class LayerWidgetUI implements EntryPoint {
      *
      */
     private void addTreeToolbarComponents() {
-        TreeToolbarPluginManager.addToolbarPlugin(
-                new AddFolderTreeToolbarPlugin());
-        TreeToolbarPluginManager.addToolbarPlugin(
-                new AddLayerTreeToolbarPlugin());
+        TreeToolbarPluginManager.addToolbarPlugin(new AddFolderTreeToolbarPlugin());
+        TreeToolbarPluginManager.addToolbarPlugin(new AddLayerTreeToolbarPlugin());
 //        TreeToolbarPluginManager.addToolBarPlugin(new AddVectorTreeToolbarPlugin());
-        TreeToolbarPluginManager.addToolbarPlugin(
-                new DeleteElementTreeToolbarPlugin());
+        TreeToolbarPluginManager.addToolbarPlugin(new DeleteElementTreeToolbarPlugin());
         TreeToolbarPluginManager.addToolbarPlugin(new SaveTreeToolbarPlugin());
 //        TreeToolbarPluginManager.addToolBarPlugin(new GetMapTreeToolbarPlugin());
 

@@ -58,8 +58,7 @@ import java.util.ArrayList;
 public class BasicCapabilitiesCommand implements
         GPCommand<BasicCapabilitiesRequest, BasicCapabilitiesResponse> {
 
-    private static final Logger logger = LoggerFactory.getLogger(
-            BasicCapabilitiesCommand.class);
+    private static final Logger logger = LoggerFactory.getLogger(BasicCapabilitiesCommand.class);
     //
     @Autowired
     private IOGCService ogcService;

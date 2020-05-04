@@ -144,6 +144,7 @@ public class GPTreePanel<T extends GPBeanTreeModel> extends TreePanel<T> impleme
      */
     @Override
     public void inRange(GPLayerBean layerBean) {
+        logger.log(Level.FINEST, "inRange: " + layerBean);
         this.changeTextElementStyle(layerBean, "black");
     }
 
@@ -152,6 +153,7 @@ public class GPTreePanel<T extends GPBeanTreeModel> extends TreePanel<T> impleme
      */
     @Override
     public void outRange(GPLayerBean layerBean) {
+        logger.log(Level.FINEST, "outRange: " + layerBean);
         this.changeTextElementStyle(layerBean, "gray");
     }
 
@@ -160,13 +162,11 @@ public class GPTreePanel<T extends GPBeanTreeModel> extends TreePanel<T> impleme
      * @param textColor
      */
     protected void changeTextElementStyle(GPLayerBean layerBean, String textColor) {
-        logger.log(Level.FINEST, "inRange: " + layerBean);
         T layerElement = this.store.findModel((T) layerBean);
         TreeNode node = findNode(layerElement);
         if (node != null && node.getElement() != null) {
             view.getTextElement(node).getStyle().setColor(textColor);
-            logger.log(Level.FINEST,
-                    "Changed Style to layer: " + node.toString());
+            logger.log(Level.FINEST, "Changed Style to layer: " + node.toString());
         }
     }
 
@@ -195,8 +195,7 @@ public class GPTreePanel<T extends GPBeanTreeModel> extends TreePanel<T> impleme
     public List<GPLayerBean> getVisibleLayersOnTree() {
         List<GPLayerBean> visibleLayers = Lists.<GPLayerBean>newArrayList();
         AbstractRootTreeNode root = (AbstractRootTreeNode) this.getStore().getRootItems().get(0);
-        checkArgument(root != null, "GPTreePanel on getVisibleLayers():"
-                + " Impossible to retrieve root element");
+        checkArgument(root != null, "GPTreePanel on getVisibleLayers(): Impossible to retrieve root element");
         return this.getVisibleLayersOnTree(root.getChildren(), visibleLayers);
     }
 
@@ -207,8 +206,7 @@ public class GPTreePanel<T extends GPBeanTreeModel> extends TreePanel<T> impleme
     public <T extends GPLayerBean> List<T> getAllLayersOnTree() {
         List<T> allLayers = Lists.newArrayList();
         AbstractRootTreeNode root = (AbstractRootTreeNode) this.getStore().getRootItems().get(0);
-        checkArgument(root != null, "GPTreePanel on getVisibleLayers() :"
-                + " Impossible to retrieve root element");
+        checkArgument(root != null, "GPTreePanel on getVisibleLayers() : Impossible to retrieve root element");
         return this.getAllLayersOnTree(root.getChildren(), allLayers);
     }
 
@@ -218,11 +216,8 @@ public class GPTreePanel<T extends GPBeanTreeModel> extends TreePanel<T> impleme
     @Override
     public List<GPLayerBean> getAllLayersOnTreeByDataSource(String dataSource) {
         List<GPLayerBean> allLayers = Lists.<GPLayerBean>newArrayList();
-        AbstractRootTreeNode root = (AbstractRootTreeNode) this.getStore().getRootItems().get(
-                0);
-        checkArgument(root != null,
-                "GPTreePanel on getVisibleLayers():"
-                        + " Impossible to retrieve root element");
+        AbstractRootTreeNode root = (AbstractRootTreeNode) this.getStore().getRootItems().get(0);
+        checkArgument(root != null, "GPTreePanel on getVisibleLayers(): Impossible to retrieve root element");
         return this.getAllLayersOnTreeByDataSource(root.getChildren(), allLayers, dataSource);
     }
 
@@ -231,12 +226,10 @@ public class GPTreePanel<T extends GPBeanTreeModel> extends TreePanel<T> impleme
      * @param visibleLayers
      * @return {@link List<GPLayerBean>}
      */
-    protected List<GPLayerBean> getVisibleLayersOnTree(List<ModelData> layers,
-            List<GPLayerBean> visibleLayers) {
+    protected List<GPLayerBean> getVisibleLayersOnTree(List<ModelData> layers, List<GPLayerBean> visibleLayers) {
         for (Iterator<ModelData> it = layers.iterator(); it.hasNext(); ) {
             GPBeanTreeModel element = (GPBeanTreeModel) it.next();
-            if (element instanceof AbstractFolderTreeNode && element.isChecked()
-                    && element.getChildCount() != 0) {
+            if (element instanceof AbstractFolderTreeNode && element.isChecked() && element.getChildCount() != 0) {
                 this.getVisibleLayersOnTree(element.getChildren(), visibleLayers);
             } else if (element.isChecked() && element instanceof GPLayerTreeModel) {
                 visibleLayers.add((GPLayerBean) element);
@@ -267,8 +260,7 @@ public class GPTreePanel<T extends GPBeanTreeModel> extends TreePanel<T> impleme
      * @param allLayers
      * @return {@link List<GPLayerBean>}
      */
-    protected List<GPLayerBean> getAllLayersOnTreeByDataSource(List<ModelData> layers,
-            List<GPLayerBean> allLayers, String dataSource) {
+    protected List<GPLayerBean> getAllLayersOnTreeByDataSource(List<ModelData> layers, List<GPLayerBean> allLayers, String dataSource) {
         for (Iterator<ModelData> it = layers.iterator(); it.hasNext(); ) {
             GPBeanTreeModel element = (GPBeanTreeModel) it.next();
             if (element instanceof AbstractFolderTreeNode && element.getChildCount() != 0) {

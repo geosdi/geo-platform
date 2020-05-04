@@ -61,9 +61,7 @@ public class LegendWindow extends Window {
         setWidth(200);
         setScrollMode(Scroll.AUTOY);
         setPosition(20, 450);
-
         this.legendWidget = new GPLegendWidget();
-
         super.add(this.legendWidget.getLegendsStore());
     }
 

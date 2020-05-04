@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.model.server;
 
-import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
@@ -43,20 +42,22 @@ import org.geosdi.geoplatform.gui.model.UUIDGenerator;
 import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
 import org.geosdi.geoplatform.gui.shared.GPLayerType;
 
+import java.util.ArrayList;
+
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GPLayerGrid extends GeoPlatformBeanModel
-        implements GPLayerBean {
+public abstract class GPLayerGrid extends GeoPlatformBeanModel implements GPLayerBean {
 
     private static final long serialVersionUID = 7746607426284214904L;
 
     public enum GPLayerBeanKeyValue {
 
-        GPLAYER_NAME("name"), GPLAYER_ABSTRACT_TEXT("abstractText"),
+        GPLAYER_NAME("name"),
+        GPLAYER_ABSTRACT_TEXT("abstractText"),
         GPLAYER_LABEL("label");
+
         private String value;
 
         GPLayerBeanKeyValue(String theValue) {
@@ -146,8 +147,7 @@ public abstract class GPLayerGrid extends GeoPlatformBeanModel
     @Override
     public void setLabel(String label) {
         this.label = label;
-        super.set(GPLayerBeanKeyValue.GPLAYER_LABEL.getValue(),
-                this.label);
+        super.set(GPLayerBeanKeyValue.GPLAYER_LABEL.getValue(), this.label);
     }
 
     /**
@@ -180,8 +180,7 @@ public abstract class GPLayerGrid extends GeoPlatformBeanModel
     @Override
     public void setAbstractText(String abstractText) {
         this.abstractText = abstractText;
-        super.set(GPLayerBeanKeyValue.GPLAYER_ABSTRACT_TEXT.getValue(),
-                this.abstractText);
+        super.set(GPLayerBeanKeyValue.GPLAYER_ABSTRACT_TEXT.getValue(), this.abstractText);
     }
 
     /**

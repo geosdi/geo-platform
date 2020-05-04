@@ -57,8 +57,7 @@ import java.util.List;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface ProjectDelegate extends GPProjectResource,
-        GPAccountProjectResource, GPFolderProjectResource {
+public interface ProjectDelegate extends GPProjectResource, GPAccountProjectResource, GPFolderProjectResource {
 
     //<editor-fold defaultstate="collapsed" desc="Project">
     // =========================================================================
@@ -207,7 +206,6 @@ public interface ProjectDelegate extends GPProjectResource,
     ProjectDTO exportProject(Long projectID) throws ResourceNotFoundFault;
 
     @Override
-    Long importProject(ImportProjectRequest impRequest)
-            throws IllegalParameterFault, ResourceNotFoundFault;
+    Long importProject(ImportProjectRequest impRequest) throws Exception;
     //</editor-fold>
 }

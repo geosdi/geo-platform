@@ -32,31 +32,21 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.model.tree;
+package org.geosdi.geoplatform.gui.client.widget.map.legend.scale;
 
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerClientInfo;
-import org.geosdi.geoplatform.gui.model.GPVectorBean;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
+
+import java.io.Serializable;
 
 /**
- * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email nazzareno.sileno@geosdi.org
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class AbstractVectorTreeModel extends GPLayerTreeModel implements GPVectorBean {
-
-    private static final long serialVersionUID = 3262457437208674614L;
-
-    protected AbstractVectorTreeModel() {
-    }
+public interface IGPLegendScaleAdapter extends Serializable {
 
     /**
-     * @param layer
+     * @param theLayerBean
+     * @return {@link String}
      */
-    protected AbstractVectorTreeModel(GPLayerClientInfo layer) {
-        super(layer);
-    }
-
-    @Override
-    public String toString() {
-        return "AbstractVectorTreeModel{" + super.toString() + '}';
-    }
+    String adaptScale(GPLayerBean theLayerBean);
 }

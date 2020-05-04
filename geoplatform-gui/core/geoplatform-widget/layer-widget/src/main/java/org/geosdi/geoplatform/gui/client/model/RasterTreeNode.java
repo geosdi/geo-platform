@@ -50,8 +50,7 @@ import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
  * @email giuseppe.lascaleia@geosdi.org
  *
  */
-public class RasterTreeNode extends AbstractRasterTreeModel implements
-        GPRasterBean {
+public class RasterTreeNode extends AbstractRasterTreeModel implements GPRasterBean {
 
     private static final long serialVersionUID = 8265365333381641340L;
 

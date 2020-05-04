@@ -64,7 +64,11 @@ import org.gwtopenmaps.openlayers.client.layer.WMSOptions;
 import org.gwtopenmaps.openlayers.client.layer.WMSParams;
 
 import java.util.Map.Entry;
+import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -97,15 +101,12 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
 
     @Override
     public GPLayerBean getLayer(Layer value) {
-        GPLayerBean layerToReturn = null;
-        for (Entry<GPLayerBean, Layer> layer : GPSharedUtils.safeCollection(
-                this.layers.entrySet())) {
+        for (Entry<GPLayerBean, Layer> layer : GPSharedUtils.safeCollection(this.layers.entrySet())) {
             if (layer.getValue().getId().equals(value.getId())) {
-                layerToReturn = layer.getKey();
-                break;
+                return layer.getKey();
             }
         }
-        return layerToReturn;
+        return null;
     }
 
     @Override
@@ -166,17 +167,12 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
     }
 
     @Override
-    public void displayRaster(GPRasterBean rasterBean) {
-        IGPAccountDetail accountDetail = Registry.get(
-                UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
-        displayLegendEvent.setLayerBean(rasterBean);
-        LayerHandlerManager.fireEvent(displayLegendEvent);
+    public void displayRaster(final GPRasterBean rasterBean) {
+        IGPAccountDetail accountDetail = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
         final WMS layer;
         if (containsLayer(rasterBean)) {
             layer = (WMS) this.layers.get(rasterBean);
-            if (!layer.isVisible() || Integer.parseInt(
-                    layer.getZIndex().toString())
-                    != rasterBean.getzIndex()) {
+            if (!layer.isVisible() || Integer.parseInt(layer.getZIndex().toString()) != rasterBean.getzIndex()) {
                 layer.setZIndex(rasterBean.getzIndex());
                 Scheduler.get().scheduleDeferred(new Command() {
 
@@ -184,10 +180,16 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
                     public void execute() {
                         layer.setIsVisible(true);
                         layer.redraw(true);
+                        if(layer.isInRange()) {
+                            displayLegendEvent.setLayerBean(rasterBean);
+                            LayerHandlerManager.fireEvent(displayLegendEvent);
+                        } else {
+                            hideLegendEvent.setLayerBean(rasterBean);
+                            LayerHandlerManager.fireEvent(hideLegendEvent);
+                        }
                     }
                 });
-                History.newItem("#" + accountDetail.getUsername() + "-"
-                        + rasterBean.getName() + "-VISIBLE");
+                History.newItem("#" + accountDetail.getUsername() + "-" + rasterBean.getName() + "-VISIBLE");
             }
         } else {
             layer = (WMS) this.layerBuilder.buildLayer(rasterBean);
@@ -195,8 +197,14 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
             this.mapWidget.getMap().addLayer(layer);
             layer.setZIndex(rasterBean.getzIndex());
             layer.redraw(true);
-            History.newItem("#" + accountDetail.getUsername() + "-"
-                    + rasterBean.getName() + "-ADDED");
+            if(layer.isInRange()) {
+                displayLegendEvent.setLayerBean(rasterBean);
+                LayerHandlerManager.fireEvent(displayLegendEvent);
+            } else {
+                hideLegendEvent.setLayerBean(rasterBean);
+                LayerHandlerManager.fireEvent(hideLegendEvent);
+            }
+            History.newItem("#" + accountDetail.getUsername() + "-" + rasterBean.getName() + "-ADDED");
         }
         featureInfoAddLayer.setLayer(layer);
         MapHandlerManager.fireEvent(featureInfoAddLayer);
@@ -204,8 +212,7 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
 
     @Override
     public void hideLayer(GPLayerBean layerBean) {
-        IGPAccountDetail accountDetail = Registry.get(
-                UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
+        IGPAccountDetail accountDetail = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
         final Layer layer = getLayer(layerBean);
         if (layer != null) {
             Scheduler.get().scheduleDeferred(new Command() {
@@ -215,8 +222,7 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
                     layer.setIsVisible(false);
                 }
             });
-            History.newItem("#" + accountDetail.getUsername() + "-"
-                    + layerBean.getName() + "-NOT-VISIBLE");
+            History.newItem("#" + accountDetail.getUsername() + "-" + layerBean.getName() + "-NOT-VISIBLE");
             featureInfoRemoveLayer.setLayer(layer);
             MapHandlerManager.fireEvent(featureInfoRemoveLayer);
         }
@@ -233,13 +239,11 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
      */
     @Override
     public void removeLayer(GPLayerBean layerBean) {
-        IGPAccountDetail accountDetail = Registry.get(
-                UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
+        IGPAccountDetail accountDetail = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
         Layer layer = getLayer(layerBean);
         if (layer != null) {
             this.mapWidget.getMap().removeLayer(layer);
-            History.newItem("#" + accountDetail.getUsername() + "-"
-                    + layerBean.getName() + "-REMOVED");
+            History.newItem("#" + accountDetail.getUsername() + "-" + layerBean.getName() + "-REMOVED");
             featureInfoRemoveLayer.setLayer(layer);
             MapHandlerManager.fireEvent(featureInfoRemoveLayer);
         }
@@ -249,8 +253,7 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
     }
 
     @Override
-    public void onChangeStyle(GPRasterBean layerBean,
-            String newStyle) {
+    public void onChangeStyle(GPRasterBean layerBean, String newStyle) {
         WMS layer = (WMS) this.layers.get(layerBean);
         if ((layer != null) && (layer.isVisible())) {
             WMSParams params = new WMSParams();
@@ -262,8 +265,7 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
     }
 
     @Override
-    public void onChangeSingleTileRequest(GPRasterBean layerBean,
-            boolean singleTileRequest) {
+    public void onChangeSingleTileRequest(GPRasterBean layerBean, boolean singleTileRequest) {
         WMS layer = (WMS) this.layers.get(layerBean);
         if (layer != null && layer.isSingleTile() != singleTileRequest) {
             boolean isVisible = layer.isVisible();
@@ -280,8 +282,7 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
         WMS layer = (WMS) this.layers.get(layerBean);
         if ((layer != null) && (layer.isVisible())) {
             WMSParams params;
-            if (layerBean.getCqlFilter() == null || layerBean.getCqlFilter().trim().equals(
-                    "")) {
+            if (layerBean.getCqlFilter() == null || layerBean.getCqlFilter().trim().equals("")) {
                 params = layer.getParams();
                 params.removeCQLFilter();
             } else {
@@ -297,8 +298,7 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
         WMS layer = (WMS) this.layers.get(layerBean);
         if ((layer != null) && (layer.isVisible())) {
             WMSParams params;
-            if (layerBean.getTimeFilter() == null || layerBean.getTimeFilter().trim().equals(
-                    "")) {
+            if (layerBean.getTimeFilter() == null || layerBean.getTimeFilter().trim().equals("")) {
                 params = layer.getParams();
                 params.removeTimeFilter();
             } else {
@@ -324,7 +324,7 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
     @Override
     public void changeMaxScale(GPRasterBean layerBean, Float maxScale) {
         WMS layer = (WMS) this.layers.get(layerBean);
-        if ((layer != null) && (layer.isVisible())) {
+        if (layer != null) {
             WMSOptions options = layer.getOptions();
             if (maxScale == null) {
                 options.unsetMaxScale();
@@ -333,22 +333,29 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
             }
             layer.addOptions(options);
             layer.calculateInRange();
-            layer.redraw(true);
-            this.reloadLegendEvent.setLayerBean(layerBean);
-            LayerHandlerManager.fireEvent(this.reloadLegendEvent);
-            this.updateLayerLabel(layerBean, layer.isInRange());
+            layer.redraw(TRUE);
+            if (!(layer.isInRange())) {
+                layer.setIsVisible(FALSE);
+                layer.redraw(TRUE);
+                this.hideLegendEvent.setLayerBean(layerBean);
+                LayerHandlerManager.fireEvent(this.hideLegendEvent);
+            } else if((layer.isInRange())) {
+                layer.setIsVisible(TRUE);
+                layer.redraw(TRUE);
+                this.displayLegendEvent.setLayerBean(layerBean);
+                LayerHandlerManager.fireEvent(this.displayLegendEvent);
+            }
+            logger.log(Level.FINEST, "#################maxScale : " + layer.isInRange());
+//            this.reloadLegendEvent.setLayerBean(layerBean);
+//            LayerHandlerManager.fireEvent(this.reloadLegendEvent);
+//            this.updateLayerLabel(layerBean, layer.isInRange());
         }
-    }
-
-    private void updateLayerLabel(GPLayerBean layerBean, boolean inRange) {
-        LayerRangeEvent layerRangeEvent = new LayerRangeEvent(layerBean, inRange);
-        LayerHandlerManager.fireEvent(layerRangeEvent);
     }
 
     @Override
     public void changeMinScale(GPRasterBean layerBean, Float minScale) {
         WMS layer = (WMS) this.layers.get(layerBean);
-        if ((layer != null) && (layer.isVisible())) {
+        if (layer != null) {
             WMSOptions options = layer.getOptions();
             if (minScale == null) {
                 options.unsetMinScale();
@@ -357,11 +364,33 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
             }
             layer.addOptions(options);
             layer.calculateInRange();
-            layer.redraw(true);
-            this.reloadLegendEvent.setLayerBean(layerBean);
-            LayerHandlerManager.fireEvent(this.reloadLegendEvent);
-            this.updateLayerLabel(layerBean, layer.isInRange());
+            layer.redraw(TRUE);
+            if (!(layer.isInRange())) {
+                layer.setIsVisible(FALSE);
+                layer.redraw(TRUE);
+                this.hideLegendEvent.setLayerBean(layerBean);
+                LayerHandlerManager.fireEvent(this.hideLegendEvent);
+            } else if((layer.isInRange())) {
+                layer.setIsVisible(TRUE);
+                layer.redraw(TRUE);
+                this.displayLegendEvent.setLayerBean(layerBean);
+                LayerHandlerManager.fireEvent(this.displayLegendEvent);
+            }
+            logger.log(Level.FINEST, "#################maxScale : " + layer.isInRange());
+//            this.reloadLegendEvent.setLayerBean(layerBean);
+//            LayerHandlerManager.fireEvent(this.reloadLegendEvent);
+//            this.updateLayerLabel(layerBean, layer.isInRange());
         }
+    }
+
+    /**
+     * @param layerBean
+     * @param inRange
+     */
+    private void updateLayerLabel(GPLayerBean layerBean, boolean inRange) {
+        logger.log(Level.FINEST, "####################Called updateLayerLabel with Value : " + inRange);
+        LayerRangeEvent layerRangeEvent = new LayerRangeEvent(layerBean, inRange);
+        LayerHandlerManager.fireEvent(layerRangeEvent);
     }
 
     @Override
@@ -370,7 +399,6 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
             this.mapWidget.getMap().removeLayer(layer);
         }
         this.layers.clear();
-
         LayerHandlerManager.fireEvent(cleanLegend);
     }
 
@@ -385,5 +413,4 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
             this.layerBuilder.generateBoundsTransformationFromMap(layer);
         }
     }
-
 }

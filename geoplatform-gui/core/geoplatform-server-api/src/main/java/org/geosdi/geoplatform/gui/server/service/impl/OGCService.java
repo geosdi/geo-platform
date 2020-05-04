@@ -152,8 +152,7 @@ public class OGCService implements IOGCService {
     }
 
     @Override
-    public ArrayList<? extends GPLayerGrid> getCapabilitiesAuth(String serverUrl, HttpServletRequest httpServletRequest,
-            Long idServer) throws GeoPlatformException {
+    public ArrayList<? extends GPLayerGrid> getCapabilitiesAuth(String serverUrl, HttpServletRequest httpServletRequest, Long idServer) throws GeoPlatformException {
         try {
             HttpSession session = httpServletRequest.getSession();
             String token = (String) session.getAttribute("GOOGLE_TOKEN");

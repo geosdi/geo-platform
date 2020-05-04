@@ -101,8 +101,7 @@ public abstract class LayerTreeStoreExecutor extends BaseTreeStoreExecutor {
 
         List<GPBeanTreeModel> layerList = Lists.<GPBeanTreeModel>newArrayList();
         StringBuilder existingLayers = new StringBuilder();
-        List<AbstractMementoOriginalProperties> duplicatedMementoList
-                = Lists.<AbstractMementoOriginalProperties>newArrayList();
+        List<AbstractMementoOriginalProperties> duplicatedMementoList = Lists.<AbstractMementoOriginalProperties>newArrayList();
         for (GPLayerBean layer : layers) {
             boolean duplicatedLayer = this.checkDuplicatedLayer(layer, parentDestination);
             if (duplicatedLayer) {
@@ -123,10 +122,8 @@ public abstract class LayerTreeStoreExecutor extends BaseTreeStoreExecutor {
 
     protected void createAlertMessage(StringBuilder existingLayers) {
         if (existingLayers.length() != 0) {
-            GeoPlatformMessage.alertMessage(
-                    LayerModuleConstants.INSTANCE.GPTreeStoreWidget_renameAlertTitleText(),
-                    LayerModuleMessages.INSTANCE.GPTreeStoreWidget_renameAlertBodyMessage(
-                            existingLayers.toString()));
+            GeoPlatformMessage.alertMessage(LayerModuleConstants.INSTANCE.GPTreeStoreWidget_renameAlertTitleText(),
+                    LayerModuleMessages.INSTANCE.GPTreeStoreWidget_renameAlertBodyMessage(existingLayers.toString()));
         }
     }
 

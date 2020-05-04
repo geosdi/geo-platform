@@ -152,11 +152,12 @@ public class DTOServerConverter {
         raster.setLayerType(GPLayerType.WMS);
         raster.setDataSource(layer.getUrlServer());
         if (layer.getBbox() != null) {
-            raster.setBbox(new BBoxClientInfo(layer.getBbox().getMinX(),
-                    layer.getBbox().getMinY(), layer.getBbox().getMaxX(),
+            raster.setBbox(new BBoxClientInfo(layer.getBbox().getMinX(), layer.getBbox().getMinY(), layer.getBbox().getMaxX(),
                     layer.getBbox().getMaxY()));
             raster.setCrs(layer.getSrs());
         }
+        raster.setMaxScale(layer.getMaxScale());
+        raster.setMinScale(layer.getMinScale());
 
         ArrayList<GPStyleStringBeanModel> styles = new ArrayList<GPStyleStringBeanModel>();
         for (String styleString : layer.getStyleList()) {

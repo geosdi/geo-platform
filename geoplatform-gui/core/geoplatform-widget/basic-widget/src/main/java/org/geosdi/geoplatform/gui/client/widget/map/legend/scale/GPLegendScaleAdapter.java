@@ -32,31 +32,47 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.model.tree;
+package org.geosdi.geoplatform.gui.client.widget.map.legend.scale;
 
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerClientInfo;
-import org.geosdi.geoplatform.gui.model.GPVectorBean;
+import com.google.gwt.core.client.GWT;
+import org.geosdi.geoplatform.gui.factory.map.GPApplicationMap;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.geosdi.geoplatform.gui.model.GPRasterBean;
 
 /**
- * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email nazzareno.sileno@geosdi.org
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class AbstractVectorTreeModel extends GPLayerTreeModel implements GPVectorBean {
+public class GPLegendScaleAdapter implements IGPLegendScaleAdapter {
 
-    private static final long serialVersionUID = 3262457437208674614L;
+    private static final long serialVersionUID = -6967113904158257268L;
 
-    protected AbstractVectorTreeModel() {
+    /**
+     * @param theLayerBean
+     * @return {@link String}
+     */
+    @Override
+    public String adaptScale(GPLayerBean theLayerBean) {
+        if (theLayerBean == null) {
+            throw new IllegalStateException("The Parameter layerBean must not be null");
+        }
+        return (theLayerBean instanceof GPRasterBean) ? this.internalAdaptScale((GPRasterBean) theLayerBean) : "";
     }
 
     /**
-     * @param layer
+     * @param theRasterBean
+     * @return {@link String}
      */
-    protected AbstractVectorTreeModel(GPLayerClientInfo layer) {
-        super(layer);
+    protected String internalAdaptScale(GPRasterBean theRasterBean) {
+        if (theRasterBean == null) {
+            throw new IllegalStateException("The Parameter rasterBean must not be null");
+        }
+        return ((theRasterBean.getMaxScale() != null) && (theRasterBean.getMinScale() != null)) ? calculateScale(theRasterBean) : "";
     }
 
-    @Override
-    public String toString() {
-        return "AbstractVectorTreeModel{" + super.toString() + '}';
+    String calculateScale(GPRasterBean theRasterBean) {
+        int mapScale = Double.valueOf(GPApplicationMap.getInstance().getApplicationMap().getMap().getScale()).intValue();
+        GWT.log("######################MAP_SCALE : " + mapScale);
+        return (((theRasterBean.getMinScale().intValue() <= mapScale) && (mapScale <= theRasterBean.getMaxScale().intValue())) ? "&scale=" + mapScale : "");
     }
 }

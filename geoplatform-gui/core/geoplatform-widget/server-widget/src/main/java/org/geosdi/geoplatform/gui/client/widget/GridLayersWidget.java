@@ -72,8 +72,7 @@ import java.util.List;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidget<L>
-        implements DeselectGridElementHandler {
+public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidget<L> implements DeselectGridElementHandler {
 
     private FormPanel formPanel;
     private final TreePanel tree;
@@ -105,22 +104,15 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
         this.formPanel.setHeaderVisible(false);
         this.formPanel.setFrame(true);
         this.formPanel.setLayout(new FlowLayout());
-
         this.formPanel.setTopComponent(this.displayServerWidget.getToolbar());
-
         this.formPanel.add(this.grid);
-
         StoreFilterField<L> filter = this.createFilter();
         filter.setToolTip(ServerModuleConstants.INSTANCE.GridLayersWidget_filterTooltipText());
         filter.bind(super.store);
-
         this.formPanel.setButtonAlign(HorizontalAlignment.LEFT);
         this.formPanel.getButtonBar().add(filter);
         this.formPanel.getButtonBar().add(new FillToolItem());
-
-        this.done = new Button(ButtonsConstants.INSTANCE.doneText(),
-                AbstractImagePrototype.create(BasicWidgetResources.ICONS.done()));
-
+        this.done = new Button(ButtonsConstants.INSTANCE.doneText(), AbstractImagePrototype.create(BasicWidgetResources.ICONS.done()));
         this.done.addSelectionListener(new SelectionListener<ButtonEvent>() {
 
             @Override
@@ -129,9 +121,7 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
             }
 
         });
-
         this.done.disable();
-
         this.formPanel.getButtonBar().add(this.done);
     }
 
@@ -139,14 +129,10 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
     public void setGridProperties() {
         grid.setAutoExpandColumn(GPLayerBeanKeyValue.GPLAYER_NAME.getValue());
         grid.setBorders(false);
-
         grid.getView().setForceFit(true);
         grid.setLoadMask(true);
-
         grid.addPlugin(this.rowExpander);
-
         grid.getSelectionModel().setSelectionMode(SelectionMode.MULTI);
-
         grid.addListener(Events.CellClick, new Listener<BaseEvent>() {
             @Override
             public void handleEvent(BaseEvent be) {
@@ -159,14 +145,9 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
     @Override
     public ColumnModel prepareColumnModel() {
         List<ColumnConfig> configs = Lists.<ColumnConfig>newArrayList();
-
-        XTemplate tpl = XTemplate.create(
-                "<p><b>Abstract:</b> {abstractText}</p>");
-
+        XTemplate tpl = XTemplate.create("<p><b>Abstract:</b> {abstractText}</p>");
         rowExpander = new RowExpander(tpl);
-
         configs.add(rowExpander);
-
         ColumnConfig name = new ColumnConfig();
         name.setId(GPLayerBeanKeyValue.GPLAYER_NAME.getValue());
         name.setHeaderHtml(ServerModuleConstants.INSTANCE.GridLayersWidget_layerNameHeaderText());

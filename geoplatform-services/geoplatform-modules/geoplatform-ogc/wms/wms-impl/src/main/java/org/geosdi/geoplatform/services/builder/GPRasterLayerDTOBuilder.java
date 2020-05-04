@@ -171,8 +171,8 @@ public interface GPRasterLayerDTOBuilder extends Serializable {
             }
             raster.setLayerInfo(layerInfo);
             logger.debug("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@MAX_SCALE : {} - MIN_SCAKE : {}\n\n", layer.getScaleDenominatorMax(), layer.getScaleDenominatorMin());
-            raster.setMaxScale((isNaN(layer.getScaleDenominatorMax())) ? (100 * 1_000000) : valueOf(layer.getScaleDenominatorMax()).floatValue());
-            raster.setMinScale((isNaN(layer.getScaleDenominatorMin())) ? 0 : valueOf(layer.getScaleDenominatorMin()).floatValue());
+            raster.setMaxScale((isNaN(layer.getScaleDenominatorMax())) ? (10 * 1_000000) : valueOf(layer.getScaleDenominatorMax()).floatValue());
+            raster.setMinScale((isNaN(layer.getScaleDenominatorMin())) ? 0 : ((layer.getScaleDenominatorMin() == 1) ? 0 : valueOf(layer.getScaleDenominatorMin()).floatValue()));
             // Set Styles of Raster Ith
             List<StyleImpl> stylesImpl = layer.getStyles();
             logger.debug("@@@@@@@@@@@@@@@ Layer \"{}\" has {} SubLayers and {} StyleImpl @@@@@@@@", layer.getTitle(),

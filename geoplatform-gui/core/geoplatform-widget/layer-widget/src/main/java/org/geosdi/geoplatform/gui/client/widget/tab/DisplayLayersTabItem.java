@@ -41,6 +41,8 @@ import org.geosdi.geoplatform.gui.client.widget.tab.layers.GenericTabItem;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;
 
+import static java.lang.Boolean.TRUE;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -49,8 +51,7 @@ import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerMana
 public class DisplayLayersTabItem extends GenericTabItem<GPLayerBean> {
 
     public DisplayLayersTabItem() {
-        super(LayerModuleConstants.INSTANCE.DisplayLayersTabItem_titleText(),
-                Boolean.TRUE);
+        super(LayerModuleConstants.INSTANCE.DisplayLayersTabItem_titleText(), TRUE);
     }
 
     @Override

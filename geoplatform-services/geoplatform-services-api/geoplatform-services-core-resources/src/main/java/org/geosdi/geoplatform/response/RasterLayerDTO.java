@@ -36,16 +36,17 @@
 package org.geosdi.geoplatform.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayerInfo;
 import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.core.model.GPRasterLayer;
+
+import javax.annotation.Nonnull;
+import javax.xml.bind.annotation.*;
+import java.util.List;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
@@ -181,18 +182,24 @@ public class RasterLayerDTO extends ShortLayerDTO {
     }
     //</editor-fold>
 
-    public static GPRasterLayer convertToGPRasterLayer(GPProject project,
-            GPFolder parent, RasterLayerDTO rasterDTO) {
-        
+    /**
+     * @param project
+     * @param parent
+     * @param rasterDTO
+     * @return {@link GPRasterLayer}
+     */
+    public static GPRasterLayer convertToGPRasterLayer(@Nonnull(when = NEVER) GPProject project, @Nonnull(when = NEVER) GPFolder parent,
+            @Nonnull(when = NEVER) RasterLayerDTO rasterDTO) throws Exception {
+        checkArgument(project != null, "The Parameter project must not be null.");
+        checkArgument(parent != null, "The Parameter parent must not be null.");
+        checkArgument(rasterDTO != null, "The Parameter rasterDTO must not be null.");
         GPRasterLayer raster = new GPRasterLayer();
         ShortLayerDTO.convertToGPLayer(project, parent, raster, rasterDTO);
-        
         raster.setLayerInfo(rasterDTO.getLayerInfo());
         raster.setOpacity(rasterDTO.getOpacity());
         raster.setStyles(rasterDTO.getStyleList());
         raster.setMaxScale(rasterDTO.getMaxScale());
         raster.setMinScale(rasterDTO.getMinScale());
-        
         return raster;
     }
 
@@ -211,5 +218,4 @@ public class RasterLayerDTO extends ShortLayerDTO {
                 + ", styleList = " + styleList
                 + ", subLayerList = " + subLayerList + "]";
     }
-    
 }

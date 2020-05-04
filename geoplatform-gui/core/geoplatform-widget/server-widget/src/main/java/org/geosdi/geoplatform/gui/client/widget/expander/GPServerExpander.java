@@ -82,8 +82,7 @@ public class GPServerExpander extends GPTreeExpanderNotifier<AbstractFolderTreeN
     }
 
     public void executeActionRequest() {
-        if ((this.tree != null) && (this.tree.getSelectionModel()
-                .getSelectedItem() instanceof AbstractFolderTreeNode)) {
+        if ((this.tree != null) && (this.tree.getSelectionModel().getSelectedItem() instanceof AbstractFolderTreeNode)) {
             super.checkNodeState();
         } else {
             GeoPlatformMessage.alertMessage(WindowsConstants.INSTANCE.warningTitleText(),

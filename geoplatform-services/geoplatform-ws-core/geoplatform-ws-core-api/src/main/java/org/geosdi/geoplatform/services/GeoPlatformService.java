@@ -1452,9 +1452,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @POST
     @Path(value = GPServiceRSPathConfig.IMPORT_PROJECT_PATH)
     @Override
-    Long importProject(
-            @WebParam(name = "impRequest") ImportProjectRequest impRequest)
-            throws IllegalParameterFault, ResourceNotFoundFault;
+    Long importProject(@WebParam(name = "impRequest") ImportProjectRequest impRequest) throws Exception;
 
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Layer (Raster and Vector)">

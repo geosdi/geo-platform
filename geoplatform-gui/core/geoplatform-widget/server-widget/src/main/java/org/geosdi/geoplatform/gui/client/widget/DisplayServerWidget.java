@@ -115,8 +115,7 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
      * @Constructor @param theGridWidget
      */
     public DisplayServerWidget(GridLayersWidget theGridWidget) {
-        TimeoutHandlerManager.addHandler(IDisplayGetCapabilitiesHandler.TYPE,
-                this);
+        TimeoutHandlerManager.addHandler(IDisplayGetCapabilitiesHandler.TYPE, this);
         init();
         this.gridWidget = theGridWidget;
         this.manageServersWidget = new ManageServerWidget(this, true);
@@ -157,16 +156,14 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
         comboServer.setTypeAhead(true);
         comboServer.setTriggerAction(TriggerAction.ALL);
 
-        this.comboServer.addSelectionChangedListener(
-                new SelectionChangedListener<GPServerBeanModel>() {
+        this.comboServer.addSelectionChangedListener(new SelectionChangedListener<GPServerBeanModel>() {
 
-                    @Override
-                    public void selectionChanged(
-                            SelectionChangedEvent<GPServerBeanModel> se) {
-                        changeSelection(se.getSelectedItem());
-                    }
+            @Override
+            public void selectionChanged(SelectionChangedEvent<GPServerBeanModel> se) {
+                changeSelection(se.getSelectedItem());
+            }
 
-                });
+        });
 
         this.manageServersButton = new Button(ServerModuleConstants.INSTANCE.
                 DisplayServerWidget_manageServerButtonText(),

@@ -75,4 +75,16 @@ public interface GPProjectDAO extends BaseCriteriaJpaDAO<GPProject, Long> {
      * @throws GPDAOException
      */
     List<GPProject> findExternalPublic(int size, int page) throws GPDAOException;
+
+    /**
+     *
+     * @return {@link int}
+     */
+    Long getTotalInternalPublic();
+
+    /**
+     *
+     * @return {@link int}
+     */
+    Long getTotalExternalPublic();
 }

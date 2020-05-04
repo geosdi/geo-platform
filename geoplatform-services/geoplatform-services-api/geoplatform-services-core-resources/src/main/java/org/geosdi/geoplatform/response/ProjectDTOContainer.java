@@ -51,6 +51,7 @@ public class ProjectDTOContainer implements Serializable {
     private static final long serialVersionUID = 4792688516831098620L;
     //
     private List<ProjectDTO> projects;
+    private int totals;
 
     public ProjectDTOContainer() {
     }
@@ -58,8 +59,9 @@ public class ProjectDTOContainer implements Serializable {
     /**
      * @param projects
      */
-    public ProjectDTOContainer(List<ProjectDTO> projects) {
+    public ProjectDTOContainer(List<ProjectDTO> projects, int totals) {
         this.projects = projects;
+        this.totals = totals;
     }
 
     /**
@@ -76,8 +78,27 @@ public class ProjectDTOContainer implements Serializable {
         this.projects = projects;
     }
 
+    /**
+     *
+     * @return {@link int}
+     */
+    public int getTotals() {
+        return totals;
+    }
+
+    /**
+     *
+     * @param totals
+     */
+    public void setTotals(int totals) {
+        this.totals = totals;
+    }
+
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "{\n" + "projects = " + projects + "\n}";
+        return "ProjectDTOContainer{" +
+                "projects=" + projects +
+                ", totals=" + totals +
+                '}';
     }
 }

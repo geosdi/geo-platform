@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.core.delegate.impl.project;
 
+import com.google.common.collect.Lists;
 import com.googlecode.genericdao.search.Search;
 import org.geosdi.geoplatform.core.dao.*;
 import org.geosdi.geoplatform.core.delegate.api.project.ProjectDelegate;
@@ -784,7 +785,9 @@ public class GPProjectDelegate implements ProjectDelegate {
             throw new IllegalParameterFault("The Parameter PaginatedSearchRequest must not be null.");
         }
         logger.trace("#######################Called {}#findInternalPublicProjects with request : {}\n", this, request);
-        return new ProjectDTOContainer(convertToProjectDTOList(this.projectDao.findInternalPublic(request.getNum(), request.getPage())));
+        int total = this.projectDao.getTotalInternalPublic();
+        return new ProjectDTOContainer(total > 0 ? convertToProjectDTOList(this.projectDao.findInternalPublic(request.getNum(), request.getPage())) :
+                Lists.newArrayList(), total);
     }
 
     /**
@@ -798,7 +801,9 @@ public class GPProjectDelegate implements ProjectDelegate {
             throw new IllegalParameterFault("The Parameter PaginatedSearchRequest must not be null.");
         }
         logger.trace("#######################Called {}#findExternalPublicProjects with request : {}\n", this, request);
-        return new ProjectDTOContainer(convertToProjectDTOList(this.projectDao.findExternalPublic(request.getNum(), request.getPage())));
+        int total = this.projectDao.getTotalExternalPublic();
+        return new ProjectDTOContainer(total > 0 ? convertToProjectDTOList(this.projectDao.findExternalPublic(request.getNum(), request.getPage())) :
+                Lists.newArrayList(), total);
     }
 
     @Override

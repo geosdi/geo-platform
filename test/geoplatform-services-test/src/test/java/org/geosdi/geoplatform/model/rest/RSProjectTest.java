@@ -35,7 +35,6 @@
 package org.geosdi.geoplatform.model.rest;
 
 import org.geosdi.geoplatform.core.model.*;
-import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.shared.GPRole;
 import org.geosdi.geoplatform.request.PutAccountsProjectRequest;
@@ -266,7 +265,7 @@ public class RSProjectTest extends BasicRestServiceTest {
     }
 
     @Test
-    public void testImportProjectRest() throws IllegalParameterFault, ResourceNotFoundFault {
+    public void testImportProjectRest() throws Exception {
         // Create ProjectDTO to import
         ProjectDTO projectDTO = new ProjectDTO(super.projectTest);
 

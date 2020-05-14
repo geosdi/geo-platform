@@ -28,6 +28,14 @@
     </dependencyManagement>
 
     <dependencies>
+        <!-- =========================================================== -->
+        <!-- ======================== LOMBOK =========================== -->
+        <!-- =========================================================== -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-sharing</artifactId>

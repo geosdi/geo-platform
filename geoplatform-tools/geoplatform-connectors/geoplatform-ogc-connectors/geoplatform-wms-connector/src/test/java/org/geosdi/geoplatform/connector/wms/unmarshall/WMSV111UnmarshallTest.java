@@ -40,7 +40,6 @@ import org.geosdi.geoplatform.connector.jaxb.repository.JAXBContextConnectorRepo
 import org.geosdi.geoplatform.jaxb.GPBaseJAXBContext;
 import org.geosdi.geoplatform.wms.v111.WMSDescribeLayerResponse;
 import org.geosdi.geoplatform.wms.v111.WMTMSCapabilities;
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -61,6 +60,8 @@ import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.connector.WMSVersion.V111;
 import static org.geosdi.geoplatform.connector.jaxb.repository.WMSConnectorJAXBContextV111.WMS_CONTEXT_KEY_V111;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
@@ -90,12 +91,14 @@ public class WMSV111UnmarshallTest {
     private static File wmsGetCapabilitiesIspraCoste;
     private static File wmsGetCapabilitiesIspra;
     private static File wmsGetCapabilitiesIspraNatura;
+    private static File wmsServiziProtezioneCivile;
+    private static File wmsGetCapabilitiesProsit;
 
     @BeforeClass
     public static void beforeClass() throws Exception {
-        Assert.assertNotNull(wmsContext);
-        Assert.assertTrue(wmsContext instanceof WMSJAXBContext);
-        Assert.assertTrue(((WMSJAXBContext) wmsContext).getVersion() == V111);
+        assertNotNull(wmsContext);
+        assertTrue(wmsContext instanceof WMSJAXBContext);
+        assertTrue(((WMSJAXBContext) wmsContext).getVersion() == V111);
         String basePath = of(new File(".").getCanonicalPath(), "src", "test", "resources")
                 .collect(joining(separator, "", separator));
         wmsGetCapabilitiesFile = new File(basePath.concat("getcapabilities_1.1.1.xml"));
@@ -109,6 +112,8 @@ public class WMSV111UnmarshallTest {
         wmsGetCapabilitiesIspraCoste = new File(basePath.concat("WMSIspraCoste.xml"));
         wmsGetCapabilitiesIspra = new File(basePath.concat("WMSIspraGetCapabilities.xml"));
         wmsGetCapabilitiesIspraNatura = new File(basePath.concat("WMSIspraNatura.xml"));
+        wmsServiziProtezioneCivile = new File(basePath.concat("serviziProtezioneCivileGetCapV1.1.1.xml"));
+        wmsGetCapabilitiesProsit = new File(basePath.concat("WMSPrositGetCapabilities.xml"));
         spf.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", FALSE);
         spf.setFeature("http://xml.org/sax/features/validation", FALSE);
     }
@@ -243,5 +248,29 @@ public class WMSV111UnmarshallTest {
         StringWriter writer = new StringWriter();
         wmsContext.acquireMarshaller().marshal(wmsCapabilities, writer);
         logger.info("######################WMSGetCapabilitiesV111_ISPRA_NATURA-String : \n{}\n", writer);
+    }
+
+    @Test
+    public void n_unmarshallWMSGetCapabilitiesV111Test() throws Exception {
+        XMLReader xmlReader = spf.newSAXParser().getXMLReader();
+        InputSource inputSource = new InputSource(new FileReader(wmsServiziProtezioneCivile));
+        SAXSource source = new SAXSource(xmlReader, inputSource);
+        WMTMSCapabilities wmsCapabilities = (WMTMSCapabilities) wmsContext.acquireUnmarshaller().unmarshal(source);
+        logger.debug("#######################WMSGetCapabilitiesV111_SERVIZI_PROTEZIONE_CIVILE : {}\n", wmsCapabilities);
+        StringWriter writer = new StringWriter();
+        wmsContext.acquireMarshaller().marshal(wmsCapabilities, writer);
+        logger.info("######################WMSGetCapabilitiesV111_PROTEZIONE_CIVILE-String : \n{}\n", writer);
+    }
+
+    @Test
+    public void o_unmarshallWMSGetCapabilitiesV111Test() throws Exception {
+        XMLReader xmlReader = spf.newSAXParser().getXMLReader();
+        InputSource inputSource = new InputSource(new FileReader(wmsGetCapabilitiesProsit));
+        SAXSource source = new SAXSource(xmlReader, inputSource);
+        WMTMSCapabilities wmsCapabilities = (WMTMSCapabilities) wmsContext.acquireUnmarshaller().unmarshal(source);
+        logger.debug("#######################WMSGetCapabilitiesV111_PROSIT : {}\n", wmsCapabilities);
+        StringWriter writer = new StringWriter();
+        wmsContext.acquireMarshaller().marshal(wmsCapabilities, writer);
+        logger.info("######################WMSGetCapabilitiesV111_PROSIT-String : \n{}\n", writer);
     }
 }

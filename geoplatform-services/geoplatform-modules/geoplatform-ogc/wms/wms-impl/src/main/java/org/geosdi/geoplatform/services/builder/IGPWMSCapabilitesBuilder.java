@@ -69,6 +69,5 @@ public interface IGPWMSCapabilitesBuilder extends Serializable {
      * @return {@link List<RasterLayerDTO>}
      * @throws ResourceNotFoundFault
      */
-    List<RasterLayerDTO> loadWMSCapabilitiesAuth(@Nonnull(when = NEVER) String serverUrl, @Nullable String token,
-            @Nullable String authkey, @Nullable List<WMSHeaderParam> headers) throws ResourceNotFoundFault;
+    List<RasterLayerDTO> loadWMSCapabilitiesAuth(@Nonnull(when = NEVER) String serverUrl, @Nullable String token, @Nullable String authkey, @Nullable List<WMSHeaderParam> headers) throws ResourceNotFoundFault;
 }

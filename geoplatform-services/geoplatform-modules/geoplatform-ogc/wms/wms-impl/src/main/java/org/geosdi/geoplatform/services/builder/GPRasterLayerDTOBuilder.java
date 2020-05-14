@@ -37,6 +37,9 @@ package org.geosdi.geoplatform.services.builder;
 import com.google.common.collect.Lists;
 import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPLayerInfo;
+import org.geosdi.geoplatform.core.model.temporal.GPTemporalLayer;
+import org.geosdi.geoplatform.core.model.temporal.dimension.GPTemporalDimension;
+import org.geosdi.geoplatform.core.model.temporal.extent.GPTemporalExtent;
 import org.geosdi.geoplatform.response.RasterLayerDTO;
 import org.geotools.ows.wms.CRSEnvelope;
 import org.geotools.ows.wms.Layer;
@@ -55,6 +58,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Double.isNaN;
 import static java.lang.Double.valueOf;
 import static java.util.stream.Collectors.toList;
+import static java.util.stream.Stream.of;
 import static javax.annotation.meta.When.NEVER;
 
 /**
@@ -78,6 +82,8 @@ public interface GPRasterLayerDTOBuilder extends Serializable {
         private final static String EPSG_4326 = "EPSG:4326";
         private final static String EPSG_3857 = "EPSG:3857";
         private final static String EPSG_GOOGLE = "EPSG:900913";
+        private static final Float DEFAULT_MAX_SCALE = (10f * 1_000000);
+        private static final Float DEDAULT_MIN_SCALE = 0f;
         protected static final String GEB = "earthbuilder.google.com";
 
         /**
@@ -170,9 +176,26 @@ public interface GPRasterLayerDTOBuilder extends Serializable {
                 }
             }
             raster.setLayerInfo(layerInfo);
-            logger.debug("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@MAX_SCALE : {} - MIN_SCAKE : {}\n\n", layer.getScaleDenominatorMax(), layer.getScaleDenominatorMin());
-            raster.setMaxScale((isNaN(layer.getScaleDenominatorMax())) ? (10 * 1_000000) : valueOf(layer.getScaleDenominatorMax()).floatValue());
-            raster.setMinScale((isNaN(layer.getScaleDenominatorMin())) ? 0 : ((layer.getScaleDenominatorMin() == 1) ? 0 : valueOf(layer.getScaleDenominatorMin()).floatValue()));
+            logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@MAX_SCALE : {} - MIN_SCAKE : {}\n\n", layer.getScaleDenominatorMax(), layer.getScaleDenominatorMin());
+            raster.setMaxScale((isNaN(layer.getScaleDenominatorMax())) ? DEFAULT_MAX_SCALE : valueOf(layer.getScaleDenominatorMax()).floatValue());
+            raster.setMinScale((isNaN(layer.getScaleDenominatorMin())) ? DEDAULT_MIN_SCALE : ((layer.getScaleDenominatorMin() == 1) ? DEDAULT_MIN_SCALE : valueOf(layer.getScaleDenominatorMin()).floatValue()));
+            logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@Trying to determinate if Layer : {} is Temporal.", raster.getName());
+            if (((layer.getLayerDimensions() != null) && !(layer.getLayerDimensions().isEmpty())) && ((layer.getExtents() != null) && !(layer.getExtents().isEmpty()))) {
+                GPTemporalDimension dimension = layer.getLayerDimensions().stream()
+                        .filter(Objects::nonNull)
+                        .filter(d -> d.getUnits().equals("ISO8601"))
+                        .findFirst()
+                        .filter(Objects::nonNull)
+                        .map(d -> new GPTemporalDimension(d.getName(), d.getUnits()))
+                        .get();
+                GPTemporalExtent extent = of(layer.getExtent(dimension.getName()))
+                        .filter(Objects::nonNull)
+                        .map(e -> new GPTemporalExtent(e.getName(), e.getDefaultValue(), e.getValue()))
+                        .findFirst().get();
+                GPTemporalLayer temporalLayer = new GPTemporalLayer(dimension, extent);
+                logger.debug("########################Build GPTemporalLayer : {}\n", temporalLayer);
+                raster.setTemporalLayer(temporalLayer);
+            }
             // Set Styles of Raster Ith
             List<StyleImpl> stylesImpl = layer.getStyles();
             logger.debug("@@@@@@@@@@@@@@@ Layer \"{}\" has {} SubLayers and {} StyleImpl @@@@@@@@", layer.getTitle(),

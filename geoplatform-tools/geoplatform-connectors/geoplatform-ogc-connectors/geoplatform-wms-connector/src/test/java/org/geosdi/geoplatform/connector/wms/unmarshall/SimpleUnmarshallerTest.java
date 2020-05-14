@@ -53,6 +53,7 @@ import java.io.Serializable;
 import static java.io.File.separator;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
+import static org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder.newInstance;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -62,7 +63,7 @@ public class SimpleUnmarshallerTest {
 
     private static final Logger logger = LoggerFactory.getLogger(SimpleUnmarshallerTest.class);
     //
-    private static final GPJAXBContextBuilder jaxbContextBuilder = GPJAXBContextBuilder.newInstance();
+    private static final GPJAXBContextBuilder jaxbContextBuilder = newInstance();
 
     @Test
     public void simpleTest() throws Exception {

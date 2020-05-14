@@ -73,4 +73,13 @@ public class GPWMSCapabilitesBuilderTest {
             logger.info("######################LAYER : {} - STYLE_LIST : {}\n", rasterLayerDTO, rasterLayerDTO.getStyleList());
         }
     }
+
+    @Test
+    public void c_loadWMSCapabilitiesTest() throws Exception {
+        List<RasterLayerDTO> rasterLayers = wmsCapabilitiesBuilder.loadWMSCapabilitiesAuth("https://prosit.geosdi.org/geoserver/wms", null, null, null);
+        checkArgument(rasterLayers.size() > 0);
+        for (RasterLayerDTO rasterLayerDTO : rasterLayers.get(0).getSubLayerList()) {
+            logger.info("######################LAYER : {} \n", rasterLayerDTO);
+        }
+    }
 }

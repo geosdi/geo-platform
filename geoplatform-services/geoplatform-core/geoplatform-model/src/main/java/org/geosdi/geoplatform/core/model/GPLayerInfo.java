@@ -41,8 +41,9 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+
+import static java.util.Arrays.asList;
 
 /**
  * @author Francesco Izzi - geoSDI
@@ -82,10 +83,7 @@ public class GPLayerInfo implements Serializable {
      * @return the keywords
      */
     public List<String> getKeywords() {
-        if (keywords == null) {
-            return new ArrayList<String>(0);
-        }
-        return Arrays.asList(keywords.split(";"));
+        return ((this.keywords == null) ? new ArrayList<>(0) : asList(keywords.split(";")));
     }
 
     /**

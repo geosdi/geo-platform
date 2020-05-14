@@ -1,4 +1,5 @@
 /**
+<<<<<<< HEAD
  *
  *    geo-platform
  *    Rich webgis framework
@@ -35,21 +36,23 @@
  */
 package org.geosdi.geoplatform.core.model;
 
+import org.geosdi.geoplatform.core.model.temporal.GPTemporalLayer;
 import org.geosdi.geoplatform.gui.shared.GPLayerType;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.*;
-
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.joining;
 import static javax.xml.bind.annotation.XmlAccessType.FIELD;
+import static org.geosdi.geoplatform.gui.shared.GPLayerType.WMS;
 
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI
@@ -81,6 +84,8 @@ public class GPRasterLayer extends GPLayer {
     //
     @Column(name = "min_scale")
     private Float minScale;
+    @Embedded
+    private GPTemporalLayer temporalLayer;
     //
     @ManyToOne(optional = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -92,7 +97,7 @@ public class GPRasterLayer extends GPLayer {
     private GPProject project;
 
     public GPRasterLayer() {
-        super.setLayerType(GPLayerType.WMS);
+        super.setLayerType(WMS);
     }
 
     /**
@@ -170,6 +175,28 @@ public class GPRasterLayer extends GPLayer {
     }
 
     /**
+     * @return {@link GPTemporalLayer}
+     */
+    public GPTemporalLayer getTemporalLayer() {
+        return temporalLayer;
+    }
+
+    /**
+     * @param theTemporalLayer
+     */
+    public void setTemporalLayer(GPTemporalLayer theTemporalLayer) {
+        this.temporalLayer = theTemporalLayer;
+    }
+
+    /**
+     * @return {@link Boolean}
+     */
+    @XmlTransient
+    public boolean isTemporalLayer() {
+        return ((this.temporalLayer != null) && (this.temporalLayer.isTemporalLayer()));
+    }
+
+    /**
      * @return the folder
      */
     @Override
@@ -203,15 +230,14 @@ public class GPRasterLayer extends GPLayer {
 
     @Override
     public String toString() {
-        StringBuilder str = new StringBuilder(this.getClass().getSimpleName()).append(
-                " {");
+        StringBuilder str = new StringBuilder(this.getClass().getSimpleName()).append(" {");
         str.append(super.toString());
         str.append(", opacity = ").append(opacity);
         str.append(", styles = ").append(styles);
         str.append(", layerInfo = ").append(layerInfo);
         str.append(", maxScale = ").append(maxScale);
         str.append(", minScale = ").append(minScale);
+        str.append(", isTemporal = ").append((this.isTemporalLayer() ? "YES" : "NO"));
         return str.append("}").toString();
     }
-
 }

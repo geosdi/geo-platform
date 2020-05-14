@@ -65,9 +65,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
+import static java.util.stream.Stream.of;
+import static org.springframework.security.acls.domain.BasePermission.ADMINISTRATION;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -355,7 +356,7 @@ public abstract class BaseInitializerTest {
         // WMS
         GeoPlatformServer server1WMS = createServer1WMS();
         GeoPlatformServer server2WMS = createServer2WMS();
-        serverDAO.persist(Stream.of(server1WMS, server2WMS).collect(toList()));
+        serverDAO.persist(of(server1WMS, server2WMS).collect(toList()));
         logger.debug("\n*** SAVED WMS Server:\n{}\n***", server1WMS);
         logger.debug("\n*** SAVED WMS Server:\n{}\n***", server2WMS);
         // CSW
@@ -443,20 +444,20 @@ public abstract class BaseInitializerTest {
                 new Date(System.currentTimeMillis() - TimeUnit.HOURS.toMillis(1)));
         this.gsUserProject = this.createProject("gp_user_project", false, 0,
                 new Date(System.currentTimeMillis() - TimeUnit.HOURS.toMillis(3)));
-        projectDAO.persist(Stream.of(adminProject, userProject, viewerProject, gsUserProject).collect(toList()));
+        projectDAO.persist(of(adminProject, userProject, viewerProject, gsUserProject).collect(toList()));
         //
         this.insertBindingUserProject(adminTest, adminProject,
-                BasePermission.ADMINISTRATION.getMask(), true);
+                ADMINISTRATION.getMask(), true);
         this.insertBindingUserProject(userTest, adminProject,
                 BasePermission.READ.getMask(), false);
         this.insertBindingUserProject(userTest, userProject,
-                BasePermission.ADMINISTRATION.getMask(), true);
+                ADMINISTRATION.getMask(), true);
         this.insertBindingUserProject(viewerTest, viewerProject,
-                BasePermission.ADMINISTRATION.getMask(), true);
+                ADMINISTRATION.getMask(), true);
         this.insertBindingUserProject(gsUserTest, gsUserProject,
-                BasePermission.ADMINISTRATION.getMask(), true);
+                ADMINISTRATION.getMask(), true);
         //
-        accountDAO.update(Stream.of(adminTest, userTest, viewerTest, gsUserTest).collect(toList()));
+        accountDAO.update(of(adminTest, userTest, viewerTest, gsUserTest).collect(toList()));
     }
 
     private void insertMessages() {
@@ -479,8 +480,7 @@ public abstract class BaseInitializerTest {
             GPProject projectIth = this.createProject("project_admin_k_" + i, false,
                     i, new Date(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(i)));
             projectDAO.persist(projectIth);
-            this.insertBindingUserProject(adminTest, projectIth,
-                    BasePermission.ADMINISTRATION.getMask(), false);
+            this.insertBindingUserProject(adminTest, projectIth, ADMINISTRATION.getMask(), false);
         }
 
         // Project of user -> root folder: "server layer"
@@ -512,8 +512,8 @@ public abstract class BaseInitializerTest {
         //
         onlyFolders.setNumberOfDescendants(2);
         layerFolder.setNumberOfDescendants(2);
-        folderDAO.persist(Stream.of(onlyFolders, emptySubFolderA, emptySubFolderB, layerFolder).collect(toList()));
-        layerDAO.persist(Stream.of(rasterLayer, vectorLayer).collect(toList()));
+        folderDAO.persist(of(onlyFolders, emptySubFolderA, emptySubFolderB, layerFolder).collect(toList()));
+        layerDAO.persist(of(rasterLayer, vectorLayer).collect(toList()));
 //        styleDAO.persist(rasterLayerStyle1, rasterLayerStyle2);
         //
         viewerProject.setNumberOfElements(6);
@@ -681,8 +681,7 @@ public abstract class BaseInitializerTest {
         accountProjectDAO.persist(userProjects);
     }
 
-    protected GPRasterLayer createRasterLayer(GPFolder folder, GPProject project,
-            int position) {
+    protected GPRasterLayer createRasterLayer(GPFolder folder, GPProject project, int position) {
         String name = "deagostini_ita_250mila";
         // GPRasterLayer
         GPRasterLayer raster = new GPRasterLayer();
@@ -698,7 +697,7 @@ public abstract class BaseInitializerTest {
         raster.setLayerType(GPLayerType.WMS);
         // GPLayerInfo
         GPLayerInfo info = new GPLayerInfo();
-        List<String> keywords = Lists.<String>newArrayList();
+        List<String> keywords = Lists.newArrayList();
         keywords.add("IGM");
         info.setKeywords(keywords);
         info.setQueryable(true);
@@ -738,10 +737,8 @@ public abstract class BaseInitializerTest {
         return vector;
     }
 
-    private List<GPRasterLayer> loadRasterLayer(List<Layer> layers,
-            GPFolder folder, GPProject project, int position) {
-        List<GPRasterLayer> rasterLayers = Lists.<GPRasterLayer>newArrayListWithCapacity(layers.size());
-
+    private List<GPRasterLayer> loadRasterLayer(List<Layer> layers, GPFolder folder, GPProject project, int position) {
+        List<GPRasterLayer> rasterLayers = Lists.newArrayListWithCapacity(layers.size());
         for (int i = 0; i < layers.size(); i++) {
             Layer layer = layers.get(i);
 
@@ -809,7 +806,7 @@ public abstract class BaseInitializerTest {
         logger.debug("\n*** AclSid to INSERT:\n{}\n***", user);
         logger.debug("\n*** AclSid to INSERT:\n{}\n***", viewer);
         //
-        sidDAO.persist(Stream.of(superUser, admin, user, viewer).collect(toList()));
+        sidDAO.persist(of(superUser, admin, user, viewer).collect(toList()));
     }
 
     private Map<String, GuiComponent> createGuiComponents() {

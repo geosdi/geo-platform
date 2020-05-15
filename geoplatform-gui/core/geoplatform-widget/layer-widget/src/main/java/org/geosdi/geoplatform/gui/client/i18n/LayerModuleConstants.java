@@ -175,6 +175,27 @@ public interface LayerModuleConstants extends Constants {
     @DefaultStringValue("TIME FILTER EDITOR")
     String LayerTimeFilterWidget_timeFilderHeadingText();
 
+    @DefaultStringValue("Time Filter")
+    String LayerTimeFilterWidget_timeFilterTabHeadingText();
+
+    @DefaultStringValue("Time Dimension")
+    String LayerTimeFilterWidget_timeDimensioneTabHeadingText();
+
+    @DefaultStringValue("From:&nbsp;")
+    String LayerTimeFilterWidget_multidatesFromText();
+
+    @DefaultStringValue("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To:&nbsp;")
+    String LayerTimeFilterWidget_multidatesToText();
+
+    @DefaultStringValue("End date")
+    String LayerTimeFilterWidget_endDateTooltipText();
+
+    @DefaultStringValue("Start date")
+    String LayerTimeFilterWidget_startDateTooltipText();
+
+    @DefaultStringValue("Enable to date")
+    String LayerTimeFilterWidget_enableToDate();
+
     /**
      * start StylesLayerTabItem
      */

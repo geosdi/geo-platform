@@ -80,7 +80,8 @@ public class RemoveTimeFilterAction extends MenuBaseAction {
         IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
         AbstractMementoOriginalProperties memento = mementoSave.copyOriginalProperties(
                 layerSelected);
-        layerSelected.setTimeFilter("");
+        layerSelected.setTimeFilter(null);
+        layerSelected.setVariableTimeFilter(null);
         String layerName;
         if (layerSelected.getAlias() != null
                 && layerSelected.getAlias().indexOf(

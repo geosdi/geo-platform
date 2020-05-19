@@ -9,6 +9,10 @@ import org.geosdi.geoplatform.gui.client.puregwt.filter.event.GPHideFilterWidget
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
 import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;
 
+/**
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
+ */
 public class TimeDimensionPanel extends GeoPlatformContentPanel {
 
     private FormPanel panel;

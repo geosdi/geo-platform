@@ -12,6 +12,10 @@ import com.google.gwt.i18n.client.DateTimeFormat;
 
 import java.util.Date;
 
+/**
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
+ */
 public abstract class TimeDimensionDateMultifield extends MultiField {
 
     private DateField dateField;

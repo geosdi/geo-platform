@@ -127,6 +127,9 @@ public interface ButtonsConstants extends Constants {
     @DefaultStringValue("Play")
     String playText();
 
+    @DefaultStringValue("Play Reverse")
+    String playReverseText();
+
     @DefaultStringValue("Pause")
     String pauseText();
 

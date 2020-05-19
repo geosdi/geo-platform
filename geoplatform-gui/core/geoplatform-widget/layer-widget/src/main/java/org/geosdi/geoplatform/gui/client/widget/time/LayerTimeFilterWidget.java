@@ -36,11 +36,11 @@
 package org.geosdi.geoplatform.gui.client.widget.time;
 
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
+import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.puregwt.filter.IGPFilterWidgetHandler;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
 import org.geosdi.geoplatform.gui.client.widget.time.panel.TimeDimensionPanel;
-import org.geosdi.geoplatform.gui.client.widget.time.panel.TimeFilterPanel;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;
@@ -65,7 +65,7 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow implements IGPFilte
     @Override
     public void addComponent() {
 //        super.add(new TimeFilterPanel(this.treePanel));
-        super.add(new TimeDimensionPanel());
+        super.add(new TimeDimensionPanel(LayerModuleInjector.MainInjector.getInstance().getTimeDimensionFormPanel()));
     }
 
     @Override

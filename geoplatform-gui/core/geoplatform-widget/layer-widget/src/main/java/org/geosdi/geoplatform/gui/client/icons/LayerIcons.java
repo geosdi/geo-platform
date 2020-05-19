@@ -44,6 +44,21 @@ import com.google.gwt.resources.client.ImageResource;
  */
 public interface LayerIcons extends ClientBundle {
 
+    @Source("forward.png")
+    ImageResource forwardTimeDimension();
+
+    @Source("backward.png")
+    ImageResource backwardTimeDimension();
+
+    @Source("play_td.png")
+    ImageResource playTimeDimension();
+
+    @Source("pause_td.png")
+    ImageResource pauseTimeDimension();
+
+    @Source("play_reverse.png")
+    ImageResource playReverseTimeDimension();
+
     @Source("skip_forward.png")
     ImageResource forwardTime();
 

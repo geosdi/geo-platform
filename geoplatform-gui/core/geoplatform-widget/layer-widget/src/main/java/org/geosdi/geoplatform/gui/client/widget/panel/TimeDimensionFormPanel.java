@@ -43,6 +43,7 @@ public class TimeDimensionFormPanel extends FormPanel {
     private Button forwardPlayButton = new Button(null,
             AbstractImagePrototype.create(LayerResources.ICONS.forwardTimeDimension()));
     private SelectionListener<ButtonEvent> playSelectioListener;
+    private SelectionListener<ButtonEvent> playReverseSelectioListener;
 
     @Inject
     public TimeDimensionFormPanel(StartDateMultifield startDateMultifield, final EndDateMultifield endDateMultifield) {
@@ -53,6 +54,7 @@ public class TimeDimensionFormPanel extends FormPanel {
             protected void onAttach() {
                 super.onAttach();
 //                playButton.enable();
+
             }
 
             @Override
@@ -123,6 +125,7 @@ public class TimeDimensionFormPanel extends FormPanel {
 //                GWT.log("Play button status: "+playButton.isPressed());
                 if (!playButton.isPressed()) {
                     playButton.setToolTip(ButtonsConstants.INSTANCE.playText());
+                    enableButtonsOnPlay();
                     playButton.setIcon(AbstractImagePrototype.create(
                             LayerResources.ICONS.playTimeDimension()));
 
@@ -133,6 +136,7 @@ public class TimeDimensionFormPanel extends FormPanel {
                                 LayerModuleMessages.INSTANCE.
                                         LayerTimeFilterWidget_rangeDateErrorMessage());
                     } else if (isValid() && validateForm()) {
+                        disableButtonsOnPlay(Boolean.FALSE);
                         playButton.setIcon(AbstractImagePrototype.create(
                                 LayerResources.ICONS.pauseTimeDimension()));
                     }
@@ -160,5 +164,19 @@ public class TimeDimensionFormPanel extends FormPanel {
         return this.startDateMultifield.getDate().before(this.endDateMultifield.getDate());
     }
 
+    private void disableButtonsOnPlay(boolean reverse) {
+        this.backwardButton.disable();
+        this.forwardPlayButton.disable();
+        if (reverse)
+            this.playButton.disable();
+        else
+            this.reversePlayButton.disable();
+    }
 
+    private void enableButtonsOnPlay() {
+        this.backwardButton.enable();
+        this.forwardPlayButton.enable();
+        this.reversePlayButton.enable();
+        this.playButton.enable();
+    }
 }

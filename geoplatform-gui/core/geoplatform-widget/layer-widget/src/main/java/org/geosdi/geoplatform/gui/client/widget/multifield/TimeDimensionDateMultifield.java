@@ -80,4 +80,11 @@ public abstract class TimeDimensionDateMultifield extends MultiField {
         return this.date;
     }
 
+    public void initComponents() {
+        this.date = null;
+        this.dateField.reset();
+        this.hourField.reset();
+        this.minuteField.reset();
+    }
+
 }

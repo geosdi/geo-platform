@@ -27,6 +27,10 @@ import javax.inject.Inject;
 
 import static org.geosdi.geoplatform.gui.client.widget.time.LayerTimeFilterWidget.WIDGET_HEIGHT;
 
+/**
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
+ */
 public class TimeDimensionFormPanel extends FormPanel {
 
     private final LayoutContainer sliderContainer;

@@ -2,6 +2,10 @@ package org.geosdi.geoplatform.gui.client.widget.multifield;
 
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 
+/**
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
+ */
 public class StartDateMultifield extends TimeDimensionDateMultifield {
 
     public StartDateMultifield() {

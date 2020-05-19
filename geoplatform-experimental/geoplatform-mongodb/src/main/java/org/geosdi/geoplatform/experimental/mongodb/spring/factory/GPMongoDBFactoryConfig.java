@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.experimental.mongodb.spring.factory;
 
-import com.mongodb.MongoClient;
+import com.mongodb.client.MongoClient;
 import org.geosdi.geoplatform.experimental.mongodb.configuration.properties.MongoProperties;
 import org.geosdi.geoplatform.experimental.mongodb.spring.annotation.GPMongoConfig;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
@@ -43,8 +43,8 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.mongodb.MongoDbFactory;
-import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
+import org.springframework.data.mongodb.MongoDatabaseFactory;
+import org.springframework.data.mongodb.core.SimpleMongoClientDatabaseFactory;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -58,9 +58,9 @@ class GPMongoDBFactoryConfig {
     static Logger logger;
 
     @Bean(name = "gpSpringMongoDBFactory")
-    public MongoDbFactory gpMongoDBFactory(@Qualifier(value = "gpSpringMongoClient") MongoClient gpSpringMongoClient,
+    public MongoDatabaseFactory gpMongoDBFactory(@Qualifier(value = "gpSpringMongoClient") MongoClient gpSpringMongoClient,
             @Qualifier(value = "gpSpringMongoProp") MongoProperties gpSpringMongoProp) {
         logger.debug("###################### GeoPlatform Experimental ::== Building MongoDBFactory.\n");
-        return new SimpleMongoDbFactory(gpSpringMongoClient, gpSpringMongoProp.getMongoDatabaseName());
+        return new SimpleMongoClientDatabaseFactory(gpSpringMongoClient, gpSpringMongoProp.getMongoDatabaseName());
     }
 }

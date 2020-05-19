@@ -17,6 +17,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <mongodb.version>4.0.3</mongodb.version>
         <spring-data-mongodb-version>3.0.0.RELEASE</spring-data-mongodb-version>
     </properties>
 
@@ -33,6 +34,12 @@
     </dependencyManagement>
 
     <dependencies>
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongodb-driver-sync</artifactId>
+            <version>${mongodb.version}</version>
+        </dependency>
+
         <!-- =========================================================== -->
         <!-- =========================== SPRING ======================== -->
         <!-- =========================================================== -->

@@ -81,8 +81,7 @@ public class SaveAddedLayersAndTreeModificationsCommand implements
     private GeoPlatformService geoPlatformServiceClient;
 
     @Override
-    public SaveAddedLayersAndTreeModificationsResponse execute(SaveAddedLayersAndTreeModificationsRequest request,
-            HttpServletRequest httpServletRequest) {
+    public SaveAddedLayersAndTreeModificationsResponse execute(SaveAddedLayersAndTreeModificationsRequest request, HttpServletRequest httpServletRequest) {
         logger.info("##################### Executing {} Command", this.getClass().getSimpleName());
 
         try {

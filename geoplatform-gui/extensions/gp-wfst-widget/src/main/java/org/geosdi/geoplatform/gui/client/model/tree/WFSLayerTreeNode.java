@@ -38,6 +38,8 @@ package org.geosdi.geoplatform.gui.client.model.tree;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.client.widget.wfs.tree.visitor.GPWFSCompositeVisitor;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
+import org.geosdi.geoplatform.gui.model.temporal.dimension.GPTemporalDimensionBean;
+import org.geosdi.geoplatform.gui.model.temporal.extent.GPTemporalExtentBean;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.TreeStatusEnum;
 import org.geosdi.geoplatform.gui.model.tree.state.IGPLayerTreeState;
@@ -53,6 +55,8 @@ public class WFSLayerTreeNode extends GPLayerTreeModel implements GPWFSLayerTree
     private Float maxScale;
     private Float minScale;
     private float opacity;
+    private GPTemporalDimensionBean dimension;
+    private GPTemporalExtentBean extent;
 
     /**
      * @param theModel
@@ -80,6 +84,8 @@ public class WFSLayerTreeNode extends GPLayerTreeModel implements GPWFSLayerTree
             this.minScale = ((GPRasterBean) theModel).getMinScale();
             this.maxScale = ((GPRasterBean) theModel).getMaxScale();
             this.opacity = ((GPRasterBean) theModel).getOpacity();
+            this.dimension = ((GPRasterBean) theModel).getDimension();
+            this.extent = ((GPRasterBean) theModel).getExtent();
         }
     }
 
@@ -152,5 +158,45 @@ public class WFSLayerTreeNode extends GPLayerTreeModel implements GPWFSLayerTree
     @Override
     public void setMinScale(Float minScale) {
 
+    }
+
+    /**
+     * @return {@link GPTemporalDimensionBean}
+     */
+    @Override
+    public GPTemporalDimensionBean getDimension() {
+        return this.dimension;
+    }
+
+    /**
+     * @param theDimension
+     */
+    @Override
+    public void setDimension(GPTemporalDimensionBean theDimension) {
+
+    }
+
+    /**
+     * @return {@link GPTemporalExtentBean}
+     */
+    @Override
+    public GPTemporalExtentBean getExtent() {
+        return this.extent;
+    }
+
+    /**
+     * @param theTemporalExtent
+     */
+    @Override
+    public void setExtent(GPTemporalExtentBean theTemporalExtent) {
+
+    }
+
+    /**
+     * @return {@link Boolean}
+     */
+    @Override
+    public boolean isTemporalLayer() {
+        return ((this.extent != null) && (this.extent.isTemporal()));
     }
 }

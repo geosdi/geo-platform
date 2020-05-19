@@ -35,19 +35,19 @@
  */
 package org.geosdi.geoplatform.gui.configuration.map.client.layer;
 
+import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitorClient;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitorClient;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  *
  */
-public class GPFolderClientInfo implements Serializable,
-        Comparable<IGPFolderElements>, IGPFolderElements, IGPParentElement {
+public class GPFolderClientInfo implements Serializable, Comparable<IGPFolderElements>, IGPFolderElements, IGPParentElement {
 
     /**
      *

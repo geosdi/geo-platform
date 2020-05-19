@@ -35,9 +35,10 @@
  */
 package org.geosdi.geoplatform.gui.client.model.memento.save.bean;
 
+import org.geosdi.geoplatform.gui.action.ISave;
+
 import java.util.Iterator;
 import java.util.List;
-import org.geosdi.geoplatform.gui.action.ISave;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -76,6 +77,4 @@ public class MementoSaveAddedLayers extends AbstractMementoSave {
     public void setAddedLayers(List<AbstractMementoLayer> addedLayers) {
         this.addedLayers = addedLayers;
     }
-    
-
 }

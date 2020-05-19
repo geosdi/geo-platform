@@ -62,26 +62,18 @@ public abstract class LayerTreeStoreExecutor extends BaseTreeStoreExecutor {
     }
 
     @Override
-    protected String buildAlias(String originalName,
-            GPBeanTreeModel parentDestination) {
-        final String COPY_STRING = " - "
-                + LayerModuleConstants.INSTANCE.GPTreeStoreWidget_copyStringText() + " (";
+    protected String buildAlias(String originalName, GPBeanTreeModel parentDestination) {
+        final String COPY_STRING = " - " + LayerModuleConstants.INSTANCE.GPTreeStoreWidget_copyStringText() + " (";
         int suffix = 1;
         int copyIndex = originalName.indexOf(COPY_STRING);
         String modifiedName;
-        if (copyIndex != -1) {
-            String intValue = originalName.substring(
-                    copyIndex + COPY_STRING.length(), originalName.lastIndexOf(
-                            ')'));
+        if (copyIndex != -1) { String intValue = originalName.substring(copyIndex + COPY_STRING.length(), originalName.lastIndexOf(')'));
             suffix = Integer.parseInt(intValue) + 1;
-            modifiedName = originalName.substring(0, originalName.lastIndexOf(
-                    '(') + 1)
-                    + suffix + ')';
+            modifiedName = originalName.substring(0, originalName.lastIndexOf('(') + 1) + suffix + ')';
         } else {
             modifiedName = originalName + COPY_STRING + suffix + ")";
         }
-        return this.recursivelySearchAlias(parentDestination.getChildren(),
-                modifiedName, suffix);
+        return this.recursivelySearchAlias(parentDestination.getChildren(), modifiedName, suffix);
     }
 
     @Override

@@ -66,11 +66,8 @@ public class SingleSelectionHandler extends SelectionChainHandler {
     }
 
     @Override
-    public Menu buildMenu(TreeMenuStrategyManager strategyManager,
-            List<GPBeanTreeModel> selections) {
-        return (selections.size() == 1) ? bindStrategy(strategyManager,
-                selections)
-                : super.forwardBuildMenu(strategyManager, selections);
+    public Menu buildMenu(TreeMenuStrategyManager strategyManager, List<GPBeanTreeModel> selections) {
+        return (selections.size() == 1) ? bindStrategy(strategyManager, selections) : super.forwardBuildMenu(strategyManager, selections);
     }
 
     @Override

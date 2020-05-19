@@ -275,5 +275,4 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
 
         };
     }
-
 }

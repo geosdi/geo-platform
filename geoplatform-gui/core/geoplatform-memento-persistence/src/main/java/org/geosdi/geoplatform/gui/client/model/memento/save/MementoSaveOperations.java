@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.gui.client.model.memento.save;
 
 import com.google.gwt.core.client.GWT;
-import java.util.List;
 import org.geosdi.geoplatform.gui.client.command.memento.basic.SaveAddedLayersAndTreeModificationsRequest;
 import org.geosdi.geoplatform.gui.client.command.memento.basic.SaveAddedLayersAndTreeModificationsResponse;
 import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
@@ -55,6 +54,8 @@ import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayersProgressBarEvent;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 
+import java.util.List;
+
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
@@ -63,50 +64,44 @@ public class MementoSaveOperations {
 
     private static PeekCacheEvent peekCacheEvent = new PeekCacheEvent();
 
-    public static void mementoSaveAddedLayer(final MementoSaveAddedLayers memento,
-            final String messageOk, final String messageFail) {
+    public static void mementoSaveAddedLayer(final MementoSaveAddedLayers memento, final String messageOk, final String messageFail) {
         //Warning: The following conversion is absolutely necessary!
         memento.convertMementoToWs();
-
-        final SaveAddedLayersAndTreeModificationsRequest saveAddedLayersAndTreeModificationsRequest =
-                GWT.<SaveAddedLayersAndTreeModificationsRequest>create(SaveAddedLayersAndTreeModificationsRequest.class);
-
+        final SaveAddedLayersAndTreeModificationsRequest saveAddedLayersAndTreeModificationsRequest = GWT.<SaveAddedLayersAndTreeModificationsRequest>create(SaveAddedLayersAndTreeModificationsRequest.class);
         saveAddedLayersAndTreeModificationsRequest.setMementoSaveAddedLayers(memento);
+        ClientCommandDispatcher.getInstance()
+                .execute(new GPClientCommand<SaveAddedLayersAndTreeModificationsResponse>() {
+                    private static final long serialVersionUID = 2964764575887864168L;
 
-        ClientCommandDispatcher.getInstance().execute(
-                new GPClientCommand<SaveAddedLayersAndTreeModificationsResponse>() {
-            private static final long serialVersionUID = 2964764575887864168L;
+                    {
+                        super.setCommandRequest(saveAddedLayersAndTreeModificationsRequest);
+                    }
 
-            {
-                super.setCommandRequest(saveAddedLayersAndTreeModificationsRequest);
-            }
+                    @Override
+                    public void onCommandSuccess(SaveAddedLayersAndTreeModificationsResponse response) {
+                        IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
+                        mementoSave.remove(memento);
+                        LayoutManager.getInstance().getStatusMap()
+                                .setStatus(messageOk, EnumSearchStatus.STATUS_SEARCH.toString());
+                        List<AbstractMementoLayer> listMementoLayers = memento.getAddedLayers();
+                        for (int i = 0; i < listMementoLayers.size(); i++) {
+                            listMementoLayers.get(i).getRefBaseElement().setId(response.getResult().get(i));
+                        }
+                        LayerHandlerManager.fireEvent(peekCacheEvent);
+                    }
 
-            @Override
-            public void onCommandSuccess(
-                    SaveAddedLayersAndTreeModificationsResponse response) {
-                IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
-                mementoSave.remove(memento);
-                LayoutManager.getInstance().getStatusMap().setStatus(messageOk,
-                        EnumSearchStatus.STATUS_SEARCH.toString());
-                List<AbstractMementoLayer> listMementoLayers = memento.getAddedLayers();
-                for (int i = 0; i < listMementoLayers.size(); i++) {
-                    listMementoLayers.get(i).getRefBaseElement().setId(response.getResult().get(i));
-                }
-                LayerHandlerManager.fireEvent(peekCacheEvent);
-            }
-
-            @Override
-            public void onCommandFailure(Throwable exception) {
-                if (exception.getCause() instanceof GPSessionTimeout) {
-                    GPHandlerManager.fireEvent(new GPLoginEvent(peekCacheEvent));
-                } else {
-                    LayerHandlerManager.fireEvent(new DisplayLayersProgressBarEvent(false));
-//                            setStatus(EnumSaveStatus.STATUS_SAVE_ERROR.getValue(),
-//                                    EnumSaveStatus.STATUS_MESSAGE_SAVE_ERROR.getValue());
-                    GeoPlatformMessage.errorMessage(MementoPersistenceConstants.INSTANCE.MementoSaveOperations_errorSavingfLayersTitleText(),
-                            messageFail);
-                }
-            }
-        });
+                    @Override
+                    public void onCommandFailure(Throwable exception) {
+                        if (exception.getCause() instanceof GPSessionTimeout) {
+                            GPHandlerManager.fireEvent(new GPLoginEvent(peekCacheEvent));
+                        } else {
+                            LayerHandlerManager.fireEvent(new DisplayLayersProgressBarEvent(false));
+                            //                            setStatus(EnumSaveStatus.STATUS_SAVE_ERROR.getValue(),
+                            //                                    EnumSaveStatus.STATUS_MESSAGE_SAVE_ERROR.getValue());
+                            GeoPlatformMessage.errorMessage(MementoPersistenceConstants.INSTANCE
+                                    .MementoSaveOperations_errorSavingfLayersTitleText(), messageFail);
+                        }
+                    }
+                });
     }
 }

@@ -32,50 +32,61 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.core.model.temporal.extent;
+package org.geosdi.geoplatform.gui.model.temporal.dimension;
 
-import java.io.Serializable;
+import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
+
+import static org.geosdi.geoplatform.gui.model.temporal.dimension.IGPTemporalDimensionBean.GPTemporalDimensionKeyValue.TEMPORAL_DIMENSION_NAME;
+import static org.geosdi.geoplatform.gui.model.temporal.dimension.IGPTemporalDimensionBean.GPTemporalDimensionKeyValue.TEMPORAL_DIMENSION_UNITS;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGPTemporalExtent extends Serializable {
+public class GPTemporalDimensionBean extends GeoPlatformBeanModel implements IGPTemporalDimensionBean {
+
+    private static final long serialVersionUID = -3802842573992847397L;
+
+    public GPTemporalDimensionBean() {
+    }
 
     /**
      * @return {@link String}
      */
-    String getName();
+    @Override
+    public String getName() {
+        return super.get(TEMPORAL_DIMENSION_NAME.toString(), "");
+    }
 
     /**
      * @param theName
      */
-    void setName(String theName);
+    @Override
+    public void setName(String theName) {
+        super.set(TEMPORAL_DIMENSION_NAME.toString(), theName);
+    }
 
     /**
      * @return {@link String}
      */
-    String getDefaultExtent();
+    @Override
+    public String getUnits() {
+        return super.get(TEMPORAL_DIMENSION_UNITS.toString(), "");
+    }
 
     /**
-     * @param theDefaultExtent
+     * @param theUnits
      */
-    void setDefaultExtent(String theDefaultExtent);
+    @Override
+    public void setUnits(String theUnits) {
+        super.set(TEMPORAL_DIMENSION_UNITS.toString(), theUnits);
+    }
 
-    /**
-     * @return {@link String}
-     */
-    String getValue();
-
-    /**
-     * @param theValue
-     */
-    void setValue(String theValue);
-
-    /**
-     * @return {@link Boolean}
-     */
-    default boolean isTemporal() {
-        return ((this.getName() != null) && !(this.getName().trim().isEmpty())) && ((this.getValue() != null) && !(this.getValue().trim().isEmpty()));
+    @Override
+    public String toString() {
+        return "GPTemporalDimensionBean {" +
+                "dimensionName = " + this.getName() +
+                ", dimensionUnits = " + this.getUnits() +
+                "}";
     }
 }

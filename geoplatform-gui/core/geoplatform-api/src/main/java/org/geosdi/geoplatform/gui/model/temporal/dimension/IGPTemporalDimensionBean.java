@@ -32,7 +32,7 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.core.model.temporal.extent;
+package org.geosdi.geoplatform.gui.model.temporal.dimension;
 
 import java.io.Serializable;
 
@@ -40,7 +40,26 @@ import java.io.Serializable;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGPTemporalExtent extends Serializable {
+public interface IGPTemporalDimensionBean extends Serializable {
+
+    enum GPTemporalDimensionKeyValue {
+        TEMPORAL_DIMENSION_NAME("dimensionName"),
+        TEMPORAL_DIMENSION_UNITS("dimensionUnits");
+
+        private final String value;
+
+        /**
+         * @param theValue
+         */
+        GPTemporalDimensionKeyValue(String theValue) {
+            this.value = theValue;
+        }
+
+        @Override
+        public String toString() {
+            return this.value;
+        }
+    }
 
     /**
      * @return {@link String}
@@ -55,27 +74,10 @@ public interface IGPTemporalExtent extends Serializable {
     /**
      * @return {@link String}
      */
-    String getDefaultExtent();
+    String getUnits();
 
     /**
-     * @param theDefaultExtent
+     * @param theUnits
      */
-    void setDefaultExtent(String theDefaultExtent);
-
-    /**
-     * @return {@link String}
-     */
-    String getValue();
-
-    /**
-     * @param theValue
-     */
-    void setValue(String theValue);
-
-    /**
-     * @return {@link Boolean}
-     */
-    default boolean isTemporal() {
-        return ((this.getName() != null) && !(this.getName().trim().isEmpty())) && ((this.getValue() != null) && !(this.getValue().trim().isEmpty()));
-    }
+    void setUnits(String theUnits);
 }

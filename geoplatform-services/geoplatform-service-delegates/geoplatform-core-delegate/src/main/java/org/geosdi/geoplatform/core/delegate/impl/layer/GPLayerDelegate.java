@@ -5,7 +5,7 @@
  *    http://geo-platform.org
  *   ====================================================================
  *
- *   Copyright (C) 2008-2019 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ *   Copyright (C) 2008-2020 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  *   This program is free software: you can redistribute it and/or modify it
  *   under the terms of the GNU General Public License as published by
@@ -190,7 +190,7 @@ public class GPLayerDelegate implements LayerDelegate {
         if (parent == null) {
             throw new ResourceNotFoundFault("Parent folder not found", parentID);
         }
-        EntityCorrectness.checkFolderLog(parent); // TODO assert   
+        EntityCorrectness.checkFolderLog(parent); // TODO assert
 
         if (layers == null || layers.isEmpty()) {
             throw new IllegalParameterFault("List of layers is null or empty");

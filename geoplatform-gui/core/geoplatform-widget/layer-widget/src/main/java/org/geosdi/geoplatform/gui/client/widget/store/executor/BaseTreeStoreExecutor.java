@@ -68,6 +68,9 @@ public abstract class BaseTreeStoreExecutor extends GenericTreeStoreExecutor<Mem
         super(thetree);
     }
 
+    /**
+     * @param memento
+     */
     @Override
     public void executeSave(MementoSaveAddedLayers memento) {
         MementoSaveOperations.mementoSaveAddedLayer(memento,
@@ -76,8 +79,7 @@ public abstract class BaseTreeStoreExecutor extends GenericTreeStoreExecutor<Mem
     }
 
     @Override
-    public void manageLayersInsertion(List<GPBeanTreeModel> layerList,
-            GPBeanTreeModel parentDestination, String urlServer) {
+    public void manageLayersInsertion(List<GPBeanTreeModel> layerList, GPBeanTreeModel parentDestination, String urlServer) {
         if (layerList.size() > 0) {
             this.tree.getStore().insert(parentDestination, layerList, 0, true);
             this.visitorAdd.insertLayerElements(layerList, parentDestination);
@@ -124,6 +126,10 @@ public abstract class BaseTreeStoreExecutor extends GenericTreeStoreExecutor<Mem
         if(layer instanceof GPRasterBean) {
             raster.setMaxScale(((GPRasterBean) layer).getMaxScale());
             raster.setMinScale(((GPRasterBean) layer).getMinScale());
+            if (((GPRasterBean) layer).isTemporalLayer()) {
+                raster.setDimension(((GPRasterBean) layer).getDimension());
+                raster.setExtent(((GPRasterBean) layer).getExtent());
+            }
         }
         return raster;
     }
@@ -138,26 +144,18 @@ public abstract class BaseTreeStoreExecutor extends GenericTreeStoreExecutor<Mem
         raster.setTitle(layer.getTitle());
         raster.setBbox(layer.getBbox());
         raster.setLayerType(layer.getLayerType());
-        raster.setStyles(Lists.<GPStyleStringBeanModel>newArrayList(
-                layer.getStyles()));
+        raster.setStyles(Lists.<GPStyleStringBeanModel>newArrayList(layer.getStyles()));
         return raster;
     }
 
-    protected String recursivelySearchAlias(List<ModelData> elements,
-            String modifiedName, int suffix) {
+    protected String recursivelySearchAlias(List<ModelData> elements, String modifiedName, int suffix) {
         for (ModelData element : elements) {
-            if (element != null && element instanceof GPLayerTreeModel
-                    && ((GPLayerTreeModel) element).getAlias() != null
-                    && ((GPLayerTreeModel) element).getAlias().equals(
+            if (element != null && element instanceof GPLayerTreeModel && ((GPLayerTreeModel) element).getAlias() != null && ((GPLayerTreeModel) element).getAlias().equals(
                     modifiedName)) {
-                modifiedName = modifiedName.substring(0,
-                        modifiedName.lastIndexOf('(') + 1)
-                        + ++suffix + ')';
-                return this.recursivelySearchAlias(elements, modifiedName,
-                        suffix);
+                modifiedName = modifiedName.substring(0, modifiedName.lastIndexOf('(') + 1) + ++suffix + ')';
+                return this.recursivelySearchAlias(elements, modifiedName, suffix);
             }
         }
         return modifiedName;
     }
-
 }

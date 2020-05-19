@@ -32,90 +32,82 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.client.model.memento.save.bean;
+package org.geosdi.geoplatform.gui.model.temporal.extent;
 
-import org.geosdi.geoplatform.gui.action.ISave;
-import org.geosdi.geoplatform.gui.model.temporal.dimension.GPTemporalDimensionBean;
-import org.geosdi.geoplatform.gui.model.temporal.extent.GPTemporalExtentBean;
-import org.geosdi.geoplatform.gui.model.tree.AbstractRasterTreeModel;
-import org.geosdi.geoplatform.gui.observable.Observable;
-import org.geosdi.geoplatform.gui.observable.Observer;
+import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 
-import java.util.List;
+import static org.geosdi.geoplatform.gui.model.temporal.extent.IGPTemporalExtentBean.GPTemporalExtensionKeyValue.*;
 
 /**
- * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email nazzareno.sileno@geosdi.org
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public class MementoRaster extends AbstractMementoLayer<AbstractRasterTreeModel> implements Observer {
+public class GPTemporalExtentBean extends GeoPlatformBeanModel implements IGPTemporalExtentBean {
 
-    private static final long serialVersionUID = 4343601977419367986L;
-    //
-    private GPTemporalDimensionBean dimension;
-    private GPTemporalExtentBean extent;
-    private List<String> styles;
+    private static final long serialVersionUID = 5502106936262045758L;
 
-    public MementoRaster() {
-    }
-
-    //TODO: How to provide the GPLayerInfo?
-    //private GPLayerInfo layerInfo;
-    //
-    public MementoRaster(ISave saveAction) {
-        super(saveAction);
+    /**
+     * @return {@link String}
+     */
+    @Override
+    public String getName() {
+        return super.get(TEMPORAL_EXTENT_NAME.toString(), "");
     }
 
     /**
-     * @return {@link GPTemporalDimensionBean}
+     * @param theName
      */
-    public GPTemporalDimensionBean getDimension() {
-        return dimension;
+    @Override
+    public void setName(String theName) {
+        super.set(TEMPORAL_EXTENT_NAME.toString(), theName);
     }
 
     /**
-     * @param theDimension
+     * @return {@link String}
      */
-    public void setDimension(GPTemporalDimensionBean theDimension) {
-        this.dimension = theDimension;
+    @Override
+    public String getDefaultExtent() {
+        return super.get(TEMPORAL_DEFAULT_EXTENT.toString(), "");
     }
 
     /**
-     * @return {@link GPTemporalExtentBean}
+     * @param theDefaultExtent
      */
-    public GPTemporalExtentBean getExtent() {
-        return extent;
+    @Override
+    public void setDefaultExtent(String theDefaultExtent) {
+        super.set(TEMPORAL_DEFAULT_EXTENT.toString(), theDefaultExtent);
     }
 
     /**
-     * @param theExtent
+     * @return {@link String}
      */
-    public void setExtent(GPTemporalExtentBean theExtent) {
-        this.extent = theExtent;
+    @Override
+    public String getValue() {
+        return super.get(TEMPORAL_EXTENT_VALUE.toString(), "");
     }
 
     /**
-     * @return the styles
+     * @param theValue
      */
-    public List<String> getStyles() {
-        return styles;
-    }
-
-    /**
-     * @param styles the styles to set
-     */
-    public void setStyles(List<String> styles) {
-        this.styles = styles;
+    @Override
+    public void setValue(String theValue) {
+        super.set(TEMPORAL_EXTENT_VALUE.toString(), theValue);
     }
 
     /**
      * @return {@link Boolean}
      */
-    public boolean isTemporalLayer() {
-        return ((this.extent != null) && (this.extent.isTemporal()));
+    @Override
+    public boolean isTemporal() {
+        return ((this.getName() != null) && !(this.getName().trim().isEmpty())) && ((this.getValue() != null) && !(this.getValue().trim().isEmpty()));
     }
 
     @Override
-    public void update(Observable o, Object arg) {
-        super.setIdBaseElement((Long) arg);
+    public String toString() {
+        return this.getClass().getSimpleName() + "{" +
+                "extentName = " + this.getName() +
+                ", defaultExtent = " + this.getDefaultExtent() +
+                ", extentValue = " + this.getValue() +
+                "}";
     }
 }

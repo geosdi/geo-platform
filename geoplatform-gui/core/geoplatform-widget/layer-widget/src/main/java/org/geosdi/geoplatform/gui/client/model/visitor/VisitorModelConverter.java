@@ -50,8 +50,6 @@ import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitorClient;
  */
 public class VisitorModelConverter implements IVisitorClient {
 
-    private VisitorModelConverter() {
-    }
     private FolderTreeNode folder;
 
     public VisitorModelConverter(FolderTreeNode folder) {

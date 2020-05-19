@@ -150,8 +150,7 @@ public class TreeMenuActionFactory {
 
             @Override
             public MenuAction createAction(TreePanel treePanel) {
-                return new GetLegendGraphicsBox(
-                        treePanel);
+                return new GetLegendGraphicsBox(treePanel);
             }
 
         });
@@ -250,8 +249,7 @@ public class TreeMenuActionFactory {
 
             @Override
             public MenuAction createAction(TreePanel treePanel) {
-                return new AddModifyTimeFilterAction(
-                        (GPTreePanel<GPBeanTreeModel>) treePanel);
+                return new AddModifyTimeFilterAction((GPTreePanel<GPBeanTreeModel>) treePanel);
             }
 
         });
@@ -260,8 +258,7 @@ public class TreeMenuActionFactory {
 
             @Override
             public MenuAction createAction(TreePanel treePanel) {
-                return new RemoveTimeFilterAction(
-                        (GPTreePanel<GPBeanTreeModel>) treePanel);
+                return new RemoveTimeFilterAction((GPTreePanel<GPBeanTreeModel>) treePanel);
             }
 
         });

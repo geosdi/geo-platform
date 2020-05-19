@@ -181,44 +181,40 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
 
     @Override
     public void activateManageServersButton() {
-        GPClientCommandExecutor.executeCommand(
-                new GPClientCommand<GetUserAuthoritiesResponse>() {
+        GPClientCommandExecutor.executeCommand(new GPClientCommand<GetUserAuthoritiesResponse>() {
 
-                    private static final long serialVersionUID = -2316524074209342256L;
+            private static final long serialVersionUID = -2316524074209342256L;
 
-                    {
-                        super.setCommandRequest(getAuthoritiesRequest);
+            {
+                super.setCommandRequest(getAuthoritiesRequest);
+            }
+
+            @Override
+            public void onCommandSuccess(GetUserAuthoritiesResponse response) {
+                manageServersButton.disable();
+                for (String role : response.getResult()) {
+                    System.out.println("Role: " + role);
+                    if (role.equals(GPRole.ADMIN.getRole())) { // TODO SecureButton
+                        manageServersButton.enable();
+                        return;
                     }
+                }
+            }
 
-                    @Override
-                    public void onCommandSuccess(
-                            GetUserAuthoritiesResponse response) {
-                        manageServersButton.disable();
-                        for (String role : response.getResult()) {
-                            System.out.println("Role: " + role);
-                            if (role.equals(GPRole.ADMIN.getRole())) { // TODO SecureButton
-                                manageServersButton.enable();
-                                return;
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onCommandFailure(Throwable caught) {
-                        if (caught.getCause() instanceof GPSessionTimeout) {
-                            GPHandlerManager.fireEvent(new GPLoginEvent(
-                                    new DisplayGetCapabilitiesEvent()));
-                        } else {
-                            manageServersButton.setEnabled(false);
-                            GeoPlatformMessage.errorMessage(
-                                    WindowsConstants.INSTANCE.errorTitleText(),
-                                    WindowsConstants.INSTANCE.errorMakingConnectionBodyText());
-                            LayoutManager.getInstance().getStatusMap().setStatus(
-                                    ServerModuleConstants.INSTANCE.DisplayServerWidget_statusErrorOpeningWindowText(),
-                                    EnumSearchStatus.STATUS_NO_SEARCH.toString());
-                        }
-                    }
-                });
+            @Override
+            public void onCommandFailure(Throwable caught) {
+                if (caught.getCause() instanceof GPSessionTimeout) {
+                    GPHandlerManager.fireEvent(new GPLoginEvent(new DisplayGetCapabilitiesEvent()));
+                } else {
+                    manageServersButton.setEnabled(false);
+                    GeoPlatformMessage.errorMessage(WindowsConstants.INSTANCE.errorTitleText(),
+                            WindowsConstants.INSTANCE.errorMakingConnectionBodyText());
+                    LayoutManager.getInstance().getStatusMap().setStatus(
+                            ServerModuleConstants.INSTANCE.DisplayServerWidget_statusErrorOpeningWindowText(),
+                            EnumSearchStatus.STATUS_NO_SEARCH.toString());
+                }
+            }
+        });
     }
 
     private void createToolBar() {
@@ -274,17 +270,14 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
             @Override
             public void onSuccess(XsrfToken token) {
                 ((HasRpcToken) geoPlatformOGCRemote).setRpcToken(token);
-                geoPlatformOGCRemote.loadServers(
-                        GPAccountLogged.getInstance().getOrganization(),
+                geoPlatformOGCRemote.loadServers(GPAccountLogged.getInstance().getOrganization(),
                         new AsyncCallback<ArrayList<GPServerBeanModel>>() {
 
                             @Override
                             public void onFailure(Throwable caught) {
-                                setSearchStatus(
-                                        EnumSearchStatus.STATUS_SEARCH_ERROR,
+                                setSearchStatus(EnumSearchStatus.STATUS_SEARCH_ERROR,
                                         SearchStatusConstants.INSTANCE.STATUS_MESSAGE_SEARCH_ERROR());
-                                GeoPlatformMessage.errorMessage(
-                                        ServerModuleConstants.INSTANCE.
+                                GeoPlatformMessage.errorMessage(ServerModuleConstants.INSTANCE.
                                                 serverServiceText(),
                                         ServerModuleConstants.INSTANCE.errorLoadingServerBodyText());
                             }
@@ -292,22 +285,16 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
                             @Override
                             public void onSuccess(ArrayList<GPServerBeanModel> result) {
                                 if (result.isEmpty()) {
-                                    setSearchStatus(
-                                            EnumSearchStatus.STATUS_NO_SEARCH,
+                                    setSearchStatus(EnumSearchStatus.STATUS_NO_SEARCH,
                                             SearchStatusConstants.INSTANCE.STATUS_MESSAGE_NOT_SEARCH());
-                                    GeoPlatformMessage.alertMessage(
-                                            ServerModuleConstants.INSTANCE.
-                                                    serverServiceText(),
-                                            ServerModuleConstants.INSTANCE.
-                                                    DisplayServerWidget_alerThereAreNoServerText());
+                                    GeoPlatformMessage.alertMessage(ServerModuleConstants.INSTANCE.serverServiceText(),
+                                            ServerModuleConstants.INSTANCE
+                                                    .DisplayServerWidget_alerThereAreNoServerText());
                                 } else {
-                                    setSearchStatus(
-                                            EnumSearchStatus.STATUS_SEARCH,
+                                    setSearchStatus(EnumSearchStatus.STATUS_SEARCH,
                                             EnumSearchServer.STATUS_MESSAGE_LOAD.toString());
                                     store.add(result);
-                                    store.sort(
-                                            GPServerKeyValue.ALIAS.getValue(),
-                                            Style.SortDir.ASC);
+                                    store.sort(GPServerKeyValue.ALIAS.getValue(), Style.SortDir.ASC);
                                 }
                             }
 

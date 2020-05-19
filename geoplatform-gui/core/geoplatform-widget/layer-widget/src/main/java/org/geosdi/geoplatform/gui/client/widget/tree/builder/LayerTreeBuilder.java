@@ -198,8 +198,7 @@ public class LayerTreeBuilder implements GPCompositeBuilder {
         this.buildTree();
     }
 
-    public void insertElementsOnTree(FolderTreeNode parentFolder,
-            List<IGPFolderElements> folderElements) {
+    public void insertElementsOnTree(FolderTreeNode parentFolder, List<IGPFolderElements> folderElements) {
         final VisitorPosition visitorPosition = new VisitorPosition();
         parentFolder.modelConverter(folderElements);
         List<GPBeanTreeModel> childrenList = Lists.<GPBeanTreeModel>newArrayList();
@@ -218,30 +217,24 @@ public class LayerTreeBuilder implements GPCompositeBuilder {
         tree.fireEvent(GeoPlatformEvents.GP_NODE_EXPANDED);
     }
 
-    private void insertElementsOfTheRootFolders(
-            List<GPFolderClientInfo> folderClientList) {
+    private void insertElementsOfTheRootFolders(List<GPFolderClientInfo> folderClientList) {
         int i = 0;
         for (GPFolderClientInfo folderElement : GPSharedUtils.safeList(folderClientList)) {
-            this.insertElementsOnTree((FolderTreeNode) this.root.getChild(i),
-                    folderElement);
+            this.insertElementsOnTree((FolderTreeNode) this.root.getChild(i), folderElement);
             i++;
         }
     }
 
-    private void insertElementsOnTree(FolderTreeNode parentFolder,
-            GPFolderClientInfo folderClientInfo) {
+    private void insertElementsOnTree(FolderTreeNode parentFolder, GPFolderClientInfo folderClientInfo) {
         if (!folderClientInfo.getFolderElements().isEmpty()) {
-            this.insertElementsOnTree(parentFolder,
-                    folderClientInfo.getFolderElements());
+            this.insertElementsOnTree(parentFolder, folderClientInfo.getFolderElements());
             if (parentFolder.isExpanded()) {
                 tree.setExpanded(parentFolder, Boolean.TRUE);
             }
             int i = 0;
             for (IGPFolderElements folderElement : GPSharedUtils.safeList(folderClientInfo.getFolderElements())) {
                 if (folderElement instanceof GPFolderClientInfo) {
-                    this.insertElementsOnTree(
-                            (FolderTreeNode) parentFolder.getChild(i),
-                            ((GPFolderClientInfo) folderElement));
+                    this.insertElementsOnTree((FolderTreeNode) parentFolder.getChild(i), ((GPFolderClientInfo) folderElement));
                 }
                 i++;
             }

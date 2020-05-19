@@ -38,12 +38,16 @@ package org.geosdi.geoplatform.gui.client.widget.tab;
 import org.geosdi.geoplatform.gui.client.widget.tab.layers.GenericCompositeTabWidget;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 
+import java.util.logging.Logger;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class LayersTabWidget extends GenericCompositeTabWidget<GPLayerBean> {
 
+    private static final Logger logger = Logger.getLogger("LayersTabWidget");
+    //
     private DisplayLayersTabItem displayItem;
     private LayersInfoTabItem infoItem;
     private StylesLayerTabItem stylesItem;
@@ -82,5 +86,6 @@ public class LayersTabWidget extends GenericCompositeTabWidget<GPLayerBean> {
         this.infoItem.bindModel(model);
         this.displayItem.bindModel(model);
         this.stylesItem.bindModel(model);
+        logger.info("#######################VALUE_SELECTED : " + model);
     }
 }

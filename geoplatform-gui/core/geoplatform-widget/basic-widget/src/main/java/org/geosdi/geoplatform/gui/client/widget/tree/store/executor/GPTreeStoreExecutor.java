@@ -52,7 +52,5 @@ public interface GPTreeStoreExecutor<T extends IMemento> extends ISave<T> {
      * @param parentDestination
      * @param urlServer
      */
-    void manageLayersInsertion(List<GPBeanTreeModel> layerList,
-            GPBeanTreeModel parentDestination, String urlServer);
-
+    void manageLayersInsertion(List<GPBeanTreeModel> layerList, GPBeanTreeModel parentDestination, String urlServer);
 }

@@ -97,6 +97,8 @@ public class RasterTreeNode extends AbstractRasterTreeModel implements GPRasterB
         this.setMaxScale(layer.getMaxScale());
         this.setMinScale(layer.getMinScale());
         this.setSingleTileRequest(layer.isSingleTileRequest());
+        this.setDimension(layer.getDimension());
+        this.setExtent(layer.getExtent());
     }
 
     /**
@@ -177,8 +179,7 @@ public class RasterTreeNode extends AbstractRasterTreeModel implements GPRasterB
 
     @Override
     public IGPLayerTreeState getState() {
-        return super.state = (super.state == null)
-                ? LayerStateEnum.RASTER_NO_OP.getValue() : super.state;
+        return super.state = (super.state == null) ? LayerStateEnum.RASTER_NO_OP.getValue() : super.state;
     }
 
     @Override
@@ -221,5 +222,4 @@ public class RasterTreeNode extends AbstractRasterTreeModel implements GPRasterB
                 + ", maxScale = " + maxScale
                 + ", minScale = " + minScale + "}";
     }
-
 }

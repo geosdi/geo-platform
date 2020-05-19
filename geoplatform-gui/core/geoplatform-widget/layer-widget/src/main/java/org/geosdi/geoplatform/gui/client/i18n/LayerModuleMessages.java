@@ -69,8 +69,10 @@ public interface LayerModuleMessages extends Messages {
     String GPTreeStoreWidget_renameAlertBodyMessage(String existingLayers);
 
     String GPFolderNameFieldBinding_folderInfoHTMLMessage(int numberOfDescendants);
-    
+
     String LayerTimeFilterWidget_dimensionSizeHTMLMessage(int dimensionSize);
-    
+
     String LayerTimeFilterWidget_layerStatusShowedMessage(String timeFilter);
+
+    String LayerTimeFilterWidget_rangeDateErrorMessage();
 }

@@ -44,6 +44,7 @@ import org.geosdi.geoplatform.gui.client.action.menu.ShareProjectMenuAction;
 import org.geosdi.geoplatform.gui.client.action.menu.project.LoadMenuProjects;
 import org.geosdi.geoplatform.gui.client.widget.LayerManagementWidget;
 import org.geosdi.geoplatform.gui.client.widget.LayerTreePanel;
+import org.geosdi.geoplatform.gui.client.widget.panel.TimeDimensionFormPanel;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -53,7 +54,7 @@ import org.geosdi.geoplatform.gui.client.widget.LayerTreePanel;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @GinModules(value = {LayerModuleGinConfigurator.class,
-        LayerTreeGinConfigurator.class, LayerTreeGinProviderConfigurator.class})
+        LayerTreeGinConfigurator.class, LayerTreeGinProviderConfigurator.class, TimeDimensionConfigurator.class})
 public interface LayerModuleInjector extends Ginjector {
 
     class MainInjector {
@@ -98,4 +99,9 @@ public interface LayerModuleInjector extends Ginjector {
      * @return {@link CopyLayerAction}
      */
     CopyLayerAction getCopyLayerAction();
+
+    /**
+     * @return {@link LoadMenuProjects}
+     */
+    TimeDimensionFormPanel getTimeDimensionFormPanel();
 }

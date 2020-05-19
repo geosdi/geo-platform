@@ -79,6 +79,10 @@ public class MementoSaveBuilder {
             if (beanModel instanceof AbstractRasterTreeModel) {
                 layer = ((AbstractRasterTreeModel) beanModel);
                 memento = new MementoRaster();
+                if(((AbstractRasterTreeModel) beanModel).isTemporalLayer()) {
+                    ((MementoRaster) memento).setDimension(((AbstractRasterTreeModel) beanModel).getDimension());
+                    ((MementoRaster) memento).setExtent(((AbstractRasterTreeModel) beanModel).getExtent());
+                }
                 List<String> stringList = convertStyles(((AbstractRasterTreeModel) beanModel).getStyles());
                 ((MementoRaster) memento).setStyles(stringList);
             } else if (beanModel instanceof AbstractVectorTreeModel) {

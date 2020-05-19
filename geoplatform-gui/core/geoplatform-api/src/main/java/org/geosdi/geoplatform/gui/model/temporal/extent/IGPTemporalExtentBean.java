@@ -32,90 +32,65 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.client.model.memento.save.bean;
+package org.geosdi.geoplatform.gui.model.temporal.extent;
 
-import org.geosdi.geoplatform.gui.action.ISave;
-import org.geosdi.geoplatform.gui.model.temporal.dimension.GPTemporalDimensionBean;
-import org.geosdi.geoplatform.gui.model.temporal.extent.GPTemporalExtentBean;
-import org.geosdi.geoplatform.gui.model.tree.AbstractRasterTreeModel;
-import org.geosdi.geoplatform.gui.observable.Observable;
-import org.geosdi.geoplatform.gui.observable.Observer;
-
-import java.util.List;
+import java.io.Serializable;
 
 /**
- * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email nazzareno.sileno@geosdi.org
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public class MementoRaster extends AbstractMementoLayer<AbstractRasterTreeModel> implements Observer {
+public interface IGPTemporalExtentBean extends Serializable {
 
-    private static final long serialVersionUID = 4343601977419367986L;
-    //
-    private GPTemporalDimensionBean dimension;
-    private GPTemporalExtentBean extent;
-    private List<String> styles;
+    enum GPTemporalExtensionKeyValue {
+        TEMPORAL_EXTENT_NAME("extentName"),
+        TEMPORAL_DEFAULT_EXTENT("defaultExtent"),
+        TEMPORAL_EXTENT_VALUE("extentValue");
 
-    public MementoRaster() {
-    }
+        private final String value;
 
-    //TODO: How to provide the GPLayerInfo?
-    //private GPLayerInfo layerInfo;
-    //
-    public MementoRaster(ISave saveAction) {
-        super(saveAction);
-    }
+        GPTemporalExtensionKeyValue(String theValue) {
+            this.value = theValue;
+        }
 
-    /**
-     * @return {@link GPTemporalDimensionBean}
-     */
-    public GPTemporalDimensionBean getDimension() {
-        return dimension;
+        @Override
+        public String toString() {
+            return this.value;
+        }
     }
 
     /**
-     * @param theDimension
+     * @return {@link String}
      */
-    public void setDimension(GPTemporalDimensionBean theDimension) {
-        this.dimension = theDimension;
-    }
+    String getName();
 
     /**
-     * @return {@link GPTemporalExtentBean}
+     * @param theName
      */
-    public GPTemporalExtentBean getExtent() {
-        return extent;
-    }
+    void setName(String theName);
 
     /**
-     * @param theExtent
+     * @return {@link String}
      */
-    public void setExtent(GPTemporalExtentBean theExtent) {
-        this.extent = theExtent;
-    }
+    String getDefaultExtent();
 
     /**
-     * @return the styles
+     * @param theDefaultExtent
      */
-    public List<String> getStyles() {
-        return styles;
-    }
+    void setDefaultExtent(String theDefaultExtent);
 
     /**
-     * @param styles the styles to set
+     * @return {@link String}
      */
-    public void setStyles(List<String> styles) {
-        this.styles = styles;
-    }
+    String getValue();
+
+    /**
+     * @param theValue
+     */
+    void setValue(String theValue);
 
     /**
      * @return {@link Boolean}
      */
-    public boolean isTemporalLayer() {
-        return ((this.extent != null) && (this.extent.isTemporal()));
-    }
-
-    @Override
-    public void update(Observable o, Object arg) {
-        super.setIdBaseElement((Long) arg);
-    }
+    boolean isTemporal();
 }

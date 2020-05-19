@@ -62,10 +62,10 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Lazy(true)
 @Component(value = "command.memento.basic.SaveLayerPropertiesCommand")
-public class SaveLayerPropertiesCommand implements
-        GPCommand<SaveLayerPropertiesRequest, SaveLayerPropertiesResponse> {
+public class SaveLayerPropertiesCommand implements GPCommand<SaveLayerPropertiesRequest, SaveLayerPropertiesResponse> {
 
     private static final Logger logger = LoggerFactory.getLogger(SaveLayerPropertiesCommand.class);
+    //
     @Autowired
     private SessionUtility sessionUtility;
     //

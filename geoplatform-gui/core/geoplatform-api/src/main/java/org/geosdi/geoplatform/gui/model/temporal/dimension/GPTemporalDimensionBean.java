@@ -32,30 +32,61 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.model.tree.visitor;
+package org.geosdi.geoplatform.gui.model.temporal.dimension;
 
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo;
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo;
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
+import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
+
+import static org.geosdi.geoplatform.gui.model.temporal.dimension.IGPTemporalDimensionBean.GPTemporalDimensionKeyValue.TEMPORAL_DIMENSION_NAME;
+import static org.geosdi.geoplatform.gui.model.temporal.dimension.IGPTemporalDimensionBean.GPTemporalDimensionKeyValue.TEMPORAL_DIMENSION_UNITS;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IVisitorClient {
+public class GPTemporalDimensionBean extends GeoPlatformBeanModel implements IGPTemporalDimensionBean {
+
+    private static final long serialVersionUID = -3802842573992847397L;
+
+    public GPTemporalDimensionBean() {
+    }
 
     /**
-     * @param clientFolder
+     * @return {@link String}
      */
-    void visitFolder(GPFolderClientInfo clientFolder);
+    @Override
+    public String getName() {
+        return super.get(TEMPORAL_DIMENSION_NAME.toString(), "");
+    }
 
     /**
-     * @param clientVector
+     * @param theName
      */
-    void visitVector(ClientVectorInfo clientVector);
+    @Override
+    public void setName(String theName) {
+        super.set(TEMPORAL_DIMENSION_NAME.toString(), theName);
+    }
 
     /**
-     * @param clientRaster
+     * @return {@link String}
      */
-    void visitRaster(ClientRasterInfo clientRaster);
+    @Override
+    public String getUnits() {
+        return super.get(TEMPORAL_DIMENSION_UNITS.toString(), "");
+    }
+
+    /**
+     * @param theUnits
+     */
+    @Override
+    public void setUnits(String theUnits) {
+        super.set(TEMPORAL_DIMENSION_UNITS.toString(), theUnits);
+    }
+
+    @Override
+    public String toString() {
+        return "GPTemporalDimensionBean {" +
+                "dimensionName = " + this.getName() +
+                ", dimensionUnits = " + this.getUnits() +
+                "}";
+    }
 }

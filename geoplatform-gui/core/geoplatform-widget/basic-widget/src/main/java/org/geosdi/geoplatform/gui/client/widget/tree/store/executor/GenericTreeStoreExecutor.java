@@ -49,8 +49,7 @@ import java.util.List;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GenericTreeStoreExecutor<T extends IMemento> implements
-        GPTreeStoreExecutor<T> {
+public abstract class GenericTreeStoreExecutor<T extends IMemento> implements GPTreeStoreExecutor<T> {
 
     protected final GPTreePanel<GPBeanTreeModel> tree;
 
@@ -96,14 +95,11 @@ public abstract class GenericTreeStoreExecutor<T extends IMemento> implements
      * @param parentDestination
      * @return {@link String}
      */
-    protected abstract String buildAlias(String originalName,
-            GPBeanTreeModel parentDestination);
+    protected abstract String buildAlias(String originalName, GPBeanTreeModel parentDestination);
 
     /**
      * @param layers
      * @param sourceLayer
      */
-    protected abstract void addRasterLayers(List<? extends GPLayerBean> layers,
-            GPTreeStoreOperations sourceLayer);
-
+    protected abstract void addRasterLayers(List<? extends GPLayerBean> layers, GPTreeStoreOperations sourceLayer);
 }

@@ -37,12 +37,16 @@ package org.geosdi.geoplatform.gui.server.converter;
 
 import com.google.common.collect.Lists;
 import org.geosdi.geoplatform.core.model.*;
+import org.geosdi.geoplatform.core.model.temporal.GPTemporalLayer;
+import org.geosdi.geoplatform.core.model.temporal.dimension.GPTemporalDimension;
+import org.geosdi.geoplatform.core.model.temporal.extent.GPTemporalExtent;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.AbstractMementoLayer;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoRaster;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoVector;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoLayerOriginalProperties;
+import org.geosdi.geoplatform.gui.model.temporal.dimension.GPTemporalDimensionBean;
+import org.geosdi.geoplatform.gui.model.temporal.extent.GPTemporalExtentBean;
 import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
-import org.geosdi.geoplatform.gui.shared.GPLayerType;
 import org.geosdi.geoplatform.response.RasterPropertiesDTO;
 import org.geosdi.geoplatform.response.collection.GPWebServiceMapData;
 import org.slf4j.Logger;
@@ -51,6 +55,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Map;
+
+import static org.geosdi.geoplatform.gui.shared.GPLayerType.WMS;
 
 /**
  * Simple Class to convert Web-Services beans model in DTO beans Client.
@@ -71,8 +77,13 @@ public class DTOMementoConverter {
             if (memento instanceof MementoRaster) {
 //                MementoRaster mementoRaster = (MementoRaster) memento;
                 layer = new GPRasterLayer();
-                layer.setLayerType(GPLayerType.WMS);
-                List<String> styles = ((MementoRaster) memento).getStyles();
+                layer.setLayerType(WMS);
+                if (((MementoRaster) memento).isTemporalLayer()) {
+                    GPTemporalDimensionBean dimension = ((MementoRaster) memento).getDimension();
+                    GPTemporalExtentBean extent = ((MementoRaster) memento).getExtent();
+                    ((GPRasterLayer) layer).setTemporalLayer(new GPTemporalLayer((dimension != null) ? new GPTemporalDimension(dimension.getName(), dimension.getUnits()) : null,
+                            (extent != null) ? new GPTemporalExtent(extent.getName(), extent.getDefaultExtent(), extent.getValue()) : null));
+                }
                 ((GPRasterLayer) layer).setStyles(((MementoRaster) memento).getStyles());
                 // layer.setLayerInfo();???
             } else if (memento instanceof MementoVector) {

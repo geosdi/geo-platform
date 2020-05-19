@@ -47,7 +47,7 @@ import java.util.logging.Logger;
  */
 public abstract class GeoPlatformBindingWidget<M extends ModelData> {
 
-    protected final static Logger logger = Logger.getLogger("");
+    protected final static Logger logger = Logger.getLogger("GeoPlatformBindingWidget");
     private FormPanel formPanel;
     protected FormBinding formBinding;
     private M model;

@@ -32,30 +32,52 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.model.tree.visitor;
+package org.geosdi.geoplatform.gui.model.temporal.dimension;
 
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo;
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo;
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
+import java.io.Serializable;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IVisitorClient {
+public interface IGPTemporalDimensionBean extends Serializable {
+
+    enum GPTemporalDimensionKeyValue {
+        TEMPORAL_DIMENSION_NAME("dimensionName"),
+        TEMPORAL_DIMENSION_UNITS("dimensionUnits");
+
+        private final String value;
+
+        /**
+         * @param theValue
+         */
+        GPTemporalDimensionKeyValue(String theValue) {
+            this.value = theValue;
+        }
+
+        @Override
+        public String toString() {
+            return this.value;
+        }
+    }
 
     /**
-     * @param clientFolder
+     * @return {@link String}
      */
-    void visitFolder(GPFolderClientInfo clientFolder);
+    String getName();
 
     /**
-     * @param clientVector
+     * @param theName
      */
-    void visitVector(ClientVectorInfo clientVector);
+    void setName(String theName);
 
     /**
-     * @param clientRaster
+     * @return {@link String}
      */
-    void visitRaster(ClientRasterInfo clientRaster);
+    String getUnits();
+
+    /**
+     * @param theUnits
+     */
+    void setUnits(String theUnits);
 }

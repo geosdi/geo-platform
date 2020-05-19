@@ -40,11 +40,15 @@ import it.geosolutions.geoserver.rest.GeoServerRESTReader;
 import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPProject;
+import org.geosdi.geoplatform.core.model.temporal.dimension.GPTemporalDimension;
+import org.geosdi.geoplatform.core.model.temporal.extent.GPTemporalExtent;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoFolder;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.client.widget.time.LayerTimeFilterWidget;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.*;
+import org.geosdi.geoplatform.gui.model.temporal.dimension.GPTemporalDimensionBean;
+import org.geosdi.geoplatform.gui.model.temporal.extent.GPTemporalExtentBean;
 import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
 import org.geosdi.geoplatform.gui.model.user.GPSimpleUser;
 import org.geosdi.geoplatform.gui.shared.GPLayerType;
@@ -95,8 +99,7 @@ public class DTOLayerConverter {
         return foldersClient;
     }
 
-    private List<IGPFolderElements> convertFolderElements(
-            List<AbstractElementDTO> folderElements) {
+    private List<IGPFolderElements> convertFolderElements(List<AbstractElementDTO> folderElements) {
         List<IGPFolderElements> clientFolderElements = Lists.<IGPFolderElements>newArrayList();
         Iterator<AbstractElementDTO> iterator = folderElements.iterator();
         while (iterator.hasNext()) {
@@ -137,6 +140,23 @@ public class DTOLayerConverter {
         raster.setOpacity(rasterDTO.getOpacity());
         raster.setMaxScale(rasterDTO.getMaxScale());
         raster.setMinScale(rasterDTO.getMinScale());
+        if(rasterDTO.isTemporalLayer()) {
+            GPTemporalDimension dimension = rasterDTO.getTemporalLayer().getDimension();
+            if (dimension != null) {
+                GPTemporalDimensionBean dimensionBean = new GPTemporalDimensionBean();
+                dimensionBean.setName(dimension.getName());
+                dimensionBean.setUnits(dimension.getUnits());
+                raster.setDimension(dimensionBean);
+            }
+            GPTemporalExtent extent = rasterDTO.getTemporalLayer().getExtent();
+            if (extent != null) {
+                GPTemporalExtentBean extentBean = new GPTemporalExtentBean();
+                extentBean.setName(extent.getName());
+                extentBean.setDefaultExtent(extent.getDefaultExtent());
+                extentBean.setValue(extent.getValue());
+                raster.setExtent(extentBean);
+            }
+        }
         ArrayList<GPStyleStringBeanModel> styles = Lists.<GPStyleStringBeanModel>newArrayList();
         GPStyleStringBeanModel style;
         for (String styleString : rasterDTO.getStyleList()) {
@@ -156,8 +176,7 @@ public class DTOLayerConverter {
         return vector;
     }
 
-    private void convertToLayerElementFromLayerDTO(GPLayerClientInfo layer,
-            ShortLayerDTO layerDTO) {
+    private void convertToLayerElementFromLayerDTO(GPLayerClientInfo layer, ShortLayerDTO layerDTO) {
         layer.setAbstractText(layerDTO.getAbstractText());
         layer.setBbox(this.convertBbox(layerDTO.getBbox()));
         layer.setChecked(layerDTO.isChecked());
@@ -169,37 +188,25 @@ public class DTOLayerConverter {
         layer.setAlias(layerDTO.getAlias());
         layer.setCqlFilter(layerDTO.getCqlFilter());
         layer.setSingleTileRequest(layerDTO.isSingleTileRequest());
-        if ((layerDTO.getTimeFilter() != null) && !(layerDTO.getTimeFilter().equals(
-                ""))) {
+        if ((layerDTO.getTimeFilter() != null) && !(layerDTO.getTimeFilter().equals(""))) {
             layer.setTimeFilter(layerDTO.getTimeFilter());
             try {
-                String dimension = this.sharedRestReader.getDimensions(
-                        layerDTO.getTitle());
+                String dimension = this.sharedRestReader.getDimensions(layerDTO.getTitle());
                 if ((dimension != null) && (!dimension.contains("<h2>"))) {
-                    List<String> dimensionList = Lists.<String>newArrayList(
-                            dimension.split(","));
+                    List<String> dimensionList = Lists.<String>newArrayList(dimension.split(","));
 
-                    String[] timeFilterSplitted = layerDTO.getTimeFilter().split(
-                            "/");
-                    int startDimensionPosition = Integer.parseInt(
-                            timeFilterSplitted[0]);
+                    String[] timeFilterSplitted = layerDTO.getTimeFilter().split("/");
+                    int startDimensionPosition = Integer.parseInt(timeFilterSplitted[0]);
 
-                    String variableTimeFilter = dimensionList.get(
-                            dimensionList.size() - startDimensionPosition - 1);
+                    String variableTimeFilter = dimensionList.get(dimensionList.size() - startDimensionPosition - 1);
                     if (timeFilterSplitted.length > 1) {
-                        int endDimensionPosition = Integer.parseInt(
-                                timeFilterSplitted[1]);
-                        variableTimeFilter += "/" + dimensionList.get(
-                                dimensionList.size() - endDimensionPosition - 1);
+                        int endDimensionPosition = Integer.parseInt(timeFilterSplitted[1]);
+                        variableTimeFilter += "/" + dimensionList.get(dimensionList.size() - endDimensionPosition - 1);
                     }
                     layer.setVariableTimeFilter(variableTimeFilter);
                     String layerAlias;
-                    if (layerDTO.getAlias() != null
-                            && layerDTO.getAlias().indexOf(
-                            LayerTimeFilterWidget.LAYER_TIME_DELIMITER) != -1) {
-                        layerAlias = layerDTO.getAlias().substring(0,
-                                layerDTO.getAlias().indexOf(
-                                        LayerTimeFilterWidget.LAYER_TIME_DELIMITER));
+                    if (layerDTO.getAlias() != null && layerDTO.getAlias().indexOf(LayerTimeFilterWidget.LAYER_TIME_DELIMITER) != -1) {
+                        layerAlias = layerDTO.getAlias().substring(0, layerDTO.getAlias().indexOf(LayerTimeFilterWidget.LAYER_TIME_DELIMITER));
                     } else {
                         layerAlias = layerDTO.getTitle();
                     }
@@ -225,8 +232,7 @@ public class DTOLayerConverter {
         folder.setNumberOfDescendants(folderDTO.getNumberOfDescendants());
         folder.setChecked(folderDTO.isChecked());
         folder.setExpanded(folderDTO.isExpanded());
-        folder.setFolderElements(this.convertFolderElements(
-                folderDTO.getElementList()));
+        folder.setFolderElements(this.convertFolderElements(folderDTO.getElementList()));
         return folder;
     }
 
@@ -326,20 +332,17 @@ public class DTOLayerConverter {
         return clientProject;
     }
 
-    public GPClientProject convertToGPCLientProject(ProjectDTO projectDTO,
-            String imageURL) {
+    public GPClientProject convertToGPCLientProject(ProjectDTO projectDTO, String imageURL) {
         GPClientProject clientProject = this.convertToGPClientProject(projectDTO);
         clientProject.setImage(imageURL);
         return clientProject;
     }
 
-    public List<GPSimpleUser> convertToGPSimpleUser(
-            List<ShortAccountDTO> shortAccountList) {
+    public List<GPSimpleUser> convertToGPSimpleUser(List<ShortAccountDTO> shortAccountList) {
         List<GPSimpleUser> listSimpleUser = Lists.<GPSimpleUser>newArrayList();
         for (ShortAccountDTO shortAccont : shortAccountList) {
             if (shortAccont instanceof UserDTO) {
-                listSimpleUser.add(this.convertToGPSimpleUser(
-                        (UserDTO) shortAccont));
+                listSimpleUser.add(this.convertToGPSimpleUser((UserDTO) shortAccont));
             }
         }
         return listSimpleUser;
@@ -354,5 +357,4 @@ public class DTOLayerConverter {
         user.setEmail(userDTO.getEmailAddress());
         return user;
     }
-
 }

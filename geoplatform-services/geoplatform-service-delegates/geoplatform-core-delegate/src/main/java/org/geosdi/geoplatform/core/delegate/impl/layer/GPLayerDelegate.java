@@ -371,6 +371,7 @@ class GPLayerDelegate implements LayerDelegate {
             throw new ResourceNotFoundFault("Layer not found", layerID);
         }
         EntityCorrectness.checkLayerLog(layer); // TODO assert
+        logger.info("###############################\n\nLAYER : {}\n", layer);
         return layer;
     }
 

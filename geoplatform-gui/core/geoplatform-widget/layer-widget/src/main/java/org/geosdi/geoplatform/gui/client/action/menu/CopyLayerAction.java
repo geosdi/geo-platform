@@ -39,8 +39,6 @@ import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.common.collect.Lists;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import java.util.List;
-import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
@@ -48,6 +46,9 @@ import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.widget.tree.panel.GinTreePanel;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
+
+import javax.inject.Inject;
+import java.util.List;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -59,8 +60,7 @@ public class CopyLayerAction extends MenuBaseAction {
 
     @Inject
     public CopyLayerAction(GinTreePanel ginTreePanel) {
-        super("CopyLayer", AbstractImagePrototype.create(
-                LayerResources.ICONS.copy()));
+        super("CopyLayer", AbstractImagePrototype.create(LayerResources.ICONS.copy()));
         this.tree = ginTreePanel.get();
     }
 

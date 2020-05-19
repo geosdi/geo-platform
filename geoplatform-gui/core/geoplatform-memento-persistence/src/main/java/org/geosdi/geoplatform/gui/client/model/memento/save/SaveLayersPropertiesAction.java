@@ -66,10 +66,8 @@ public class SaveLayersPropertiesAction implements ISave<MementoLayerOriginalPro
     public void executeSave(final MementoLayerOriginalProperties memento) {
         //Warning: the conversion update the memento fields on the last refBean properties
         memento.convertMementoToWs();
-
         final SaveLayerPropertiesRequest saveLayerPropertiesRequest = GWT.<SaveLayerPropertiesRequest>create(SaveLayerPropertiesRequest.class);
         saveLayerPropertiesRequest.setMementoLayerOriginalProperties(memento);
-
         ClientCommandDispatcher.getInstance().execute(new GPClientCommand<SaveLayerPropertiesResponse>() {
             private static final long serialVersionUID = 7052499099859652678L;
 
@@ -81,8 +79,7 @@ public class SaveLayersPropertiesAction implements ISave<MementoLayerOriginalPro
             public void onCommandSuccess(SaveLayerPropertiesResponse response) {
                 IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
                 mementoSave.remove(memento);
-                LayoutManager.getInstance().getStatusMap().setStatus(MementoPersistenceConstants.INSTANCE.
-                                SaveLayersPropertiesAction_statusSaveLayerSuccessText(),
+                LayoutManager.getInstance().getStatusMap().setStatus(MementoPersistenceConstants.INSTANCE.SaveLayersPropertiesAction_statusSaveLayerSuccessText(),
                         EnumSearchStatus.STATUS_SEARCH.toString());
                 LayerHandlerManager.fireEvent(peekCacheEvent);
             }

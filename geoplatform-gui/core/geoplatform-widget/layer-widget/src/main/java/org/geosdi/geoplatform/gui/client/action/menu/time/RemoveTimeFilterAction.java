@@ -44,7 +44,6 @@ import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.AbstractMementoOriginalProperties;
 import org.geosdi.geoplatform.gui.client.puregwt.decorator.event.TreeChangeLabelEvent;
-import org.geosdi.geoplatform.gui.client.widget.time.LayerTimeFilterWidget;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.impl.map.event.TimeFilterLayerMapEvent;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
@@ -52,6 +51,8 @@ import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.layers.decorator.event.GPTreeLabelEvent;
 import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;
+
+import static org.geosdi.geoplatform.gui.client.widget.time.LayerTimeFilterWidget.LAYER_TIME_DELIMITER;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -78,17 +79,12 @@ public class RemoveTimeFilterAction extends MenuBaseAction {
         }
         GPLayerTreeModel layerSelected = (GPLayerTreeModel) treePanel.getSelectionModel().getSelectedItem();
         IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
-        AbstractMementoOriginalProperties memento = mementoSave.copyOriginalProperties(
-                layerSelected);
+        AbstractMementoOriginalProperties memento = mementoSave.copyOriginalProperties(layerSelected);
         layerSelected.setTimeFilter(null);
         layerSelected.setVariableTimeFilter(null);
         String layerName;
-        if (layerSelected.getAlias() != null
-                && layerSelected.getAlias().indexOf(
-                LayerTimeFilterWidget.LAYER_TIME_DELIMITER) != -1) {
-            layerName = layerSelected.getAlias().substring(0,
-                    layerSelected.getAlias().indexOf(
-                    LayerTimeFilterWidget.LAYER_TIME_DELIMITER));
+        if (layerSelected.getAlias() != null && layerSelected.getAlias().indexOf(LAYER_TIME_DELIMITER) != -1) {
+            layerName = layerSelected.getAlias().substring(0, layerSelected.getAlias().indexOf(LAYER_TIME_DELIMITER));
         } else {
             layerName = layerSelected.getLabel();
         }

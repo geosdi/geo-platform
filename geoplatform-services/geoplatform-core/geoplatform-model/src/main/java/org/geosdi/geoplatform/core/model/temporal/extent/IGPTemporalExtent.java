@@ -71,4 +71,11 @@ public interface IGPTemporalExtent extends Serializable {
      * @param theValue
      */
     void setValue(String theValue);
+
+    /**
+     * @return {@link Boolean}
+     */
+    default boolean isTemporal() {
+        return ((this.getName() != null) && !(this.getName().trim().isEmpty())) && ((this.getValue() != null) && !(this.getValue().trim().isEmpty()));
+    }
 }

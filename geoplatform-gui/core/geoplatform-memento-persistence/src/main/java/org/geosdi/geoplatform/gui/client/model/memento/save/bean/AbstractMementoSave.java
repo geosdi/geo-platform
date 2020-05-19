@@ -36,9 +36,6 @@
 package org.geosdi.geoplatform.gui.client.model.memento.save.bean;
 
 import com.google.common.collect.Maps;
-import java.io.Serializable;
-import java.util.Iterator;
-import java.util.Map;
 import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.model.memento.IMemento;
 import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
@@ -46,20 +43,22 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.observable.Observable;
 import org.geosdi.geoplatform.gui.observable.Observer;
 
+import java.io.Serializable;
+import java.util.Iterator;
+import java.util.Map;
+
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public abstract class AbstractMementoSave<T extends GPBeanTreeModel>
-        implements IMemento<ISave>, Serializable, Observer {
+public abstract class AbstractMementoSave<T extends GPBeanTreeModel> implements IMemento<ISave>, Serializable, Observer {
 
     private static final long serialVersionUID = 3466894382316001150L;
     //
     private transient ISave saveAction;
     private transient T refBaseElement;
     private Long idBaseElement;
-    private transient Map<AbstractFolderTreeNode, Integer> descendantMap =
-            Maps.<AbstractFolderTreeNode, Integer>newHashMap();
+    private transient Map<AbstractFolderTreeNode, Integer> descendantMap = Maps.<AbstractFolderTreeNode, Integer>newHashMap();
     private Map<Long, Integer> wsDescendantMap = Maps.<Long, Integer>newHashMap();
 
     public AbstractMementoSave() {
@@ -153,6 +152,11 @@ public abstract class AbstractMementoSave<T extends GPBeanTreeModel>
 
     @Override
     public String toString() {
-        return "AbstractMementoSave{" + "saveAction=" + saveAction + ", refBaseElement=" + refBaseElement + ", idBaseElement=" + idBaseElement + ", descendantMap=" + descendantMap + ", wsDescendantMap=" + wsDescendantMap + '}';
+        return "AbstractMementoSave{"
+                + "saveAction=" + saveAction
+                + ", refBaseElement=" + refBaseElement
+                + ", idBaseElement=" + idBaseElement
+                + ", descendantMap=" + descendantMap
+                + ", wsDescendantMap=" + wsDescendantMap + '}';
     }
 }

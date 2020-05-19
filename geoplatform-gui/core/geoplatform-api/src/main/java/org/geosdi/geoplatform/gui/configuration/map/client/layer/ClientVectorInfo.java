@@ -44,10 +44,8 @@ import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitorClient;
  */
 public class ClientVectorInfo extends GPLayerClientInfo {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = -4276234033316787251L;
+    //
     private String featureType;
     private String featureNameSpace;
 
@@ -93,10 +91,14 @@ public class ClientVectorInfo extends GPLayerClientInfo {
      */
     @Override
     public String toString() {
-        return "ClientVectorInfo [featureType=" + featureType
+        return "ClientVectorInfo " +
+                "{featureType=" + featureType
                 + ", featureNameSpace=" + featureNameSpace
-                + ", getDataSource()=" + getDataSource() + ", getCrs()="
-                + getCrs() + ", getBbox()=" + getBbox() + ", getLayerType()="
-                + getLayerType() + ", getzIndex()=" + getzIndex() + "]";
+                + ", dataSource()=" + getDataSource()
+                + ", crs()=" + getCrs()
+                + ", bbox()=" + getBbox()
+                + ", layerType()=" + getLayerType()
+                + ", zIndex()=" + getzIndex()
+                + "}";
     }
 }

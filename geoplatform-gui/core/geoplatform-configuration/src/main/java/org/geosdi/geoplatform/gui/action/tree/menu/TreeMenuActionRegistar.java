@@ -44,8 +44,7 @@ import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformActionRegistar
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public final class TreeMenuActionRegistar
-        extends GeoPlatformActionRegistar<TreeMenuActionCreator> {
+public final class TreeMenuActionRegistar extends GeoPlatformActionRegistar<TreeMenuActionCreator> {
 
     /**
      *
@@ -69,14 +68,11 @@ public final class TreeMenuActionRegistar
         TreeMenuActionCreator toolActionCreator = super.registry.get(key);
 
         if (toolActionCreator == null) {
-            throw new IllegalStateException("Unable to find TreeMenuActionCreator "
-                    + "for Key : " + key);
+            throw new IllegalStateException("Unable to find TreeMenuActionCreator for Key : " + key);
         }
 
         MenuAction action = toolActionCreator.createAction(treePanel);
         action.setId(key);
-
         return action;
     }
-
 }

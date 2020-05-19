@@ -89,7 +89,6 @@ public class GPCapabilitiesWidget extends GeoPlatformWindow {
     @Override
     public void setWindowProperties() {
         super.setResizable(false);
-
         super.addWindowListener(new WindowListener() {
 
             @Override
@@ -98,7 +97,6 @@ public class GPCapabilitiesWidget extends GeoPlatformWindow {
             }
 
         });
-
         super.addWidgetListener(new WidgetListener() {
 
             @Override
@@ -107,7 +105,6 @@ public class GPCapabilitiesWidget extends GeoPlatformWindow {
             }
 
         });
-
         super.setLayout(new FitLayout());
         super.setModal(false);
         super.setCollapsible(true);

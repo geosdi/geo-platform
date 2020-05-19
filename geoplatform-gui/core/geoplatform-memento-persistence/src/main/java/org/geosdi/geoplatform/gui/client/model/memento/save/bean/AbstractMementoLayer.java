@@ -44,8 +44,7 @@ import org.geosdi.geoplatform.gui.shared.GPLayerType;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public abstract class AbstractMementoLayer<T extends GPLayerTreeModel>
-        extends AbstractMementoSave<T> {
+public abstract class AbstractMementoLayer<T extends GPLayerTreeModel> extends AbstractMementoSave<T> {
 
     private static final long serialVersionUID = -3151230290345781610L;
     //

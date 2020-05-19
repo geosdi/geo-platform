@@ -37,9 +37,6 @@ package org.geosdi.geoplatform.gui.client.model.visitor;
 
 import com.extjs.gxt.ui.client.data.ModelData;
 import com.google.common.collect.Maps;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
@@ -49,6 +46,9 @@ import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
 import org.geosdi.geoplatform.gui.model.tree.AbstractRootTreeNode;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -85,8 +85,7 @@ public class VisitorAddElement extends AbstractVisitTree implements IVisitor {
         this.updateNumberOfDescendants(parentDestination);
     }
 
-    public void insertLayerElements(List<? extends GPBeanTreeModel> listNewElements,
-            GPBeanTreeModel parentDestination) {
+    public void insertLayerElements(List<? extends GPBeanTreeModel> listNewElements, GPBeanTreeModel parentDestination) {
         GPBeanTreeModel gPLayerBean = null;
         for (int i = 0; i < listNewElements.size(); i++) {
             gPLayerBean = (GPBeanTreeModel) listNewElements.get(i);

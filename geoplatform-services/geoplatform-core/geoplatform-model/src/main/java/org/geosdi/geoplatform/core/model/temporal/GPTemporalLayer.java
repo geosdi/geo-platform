@@ -39,6 +39,7 @@ import org.geosdi.geoplatform.core.model.temporal.dimension.GPTemporalDimension;
 import org.geosdi.geoplatform.core.model.temporal.extent.GPTemporalExtent;
 
 import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 
@@ -57,6 +58,8 @@ public class GPTemporalLayer implements IGPTemporalLayer {
 
     private static final long serialVersionUID = 4045762262072835884L;
     //
+    @Embedded
     private GPTemporalDimension dimension;
+    @Embedded
     private GPTemporalExtent extent;
 }

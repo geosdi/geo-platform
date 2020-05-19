@@ -69,6 +69,6 @@ public interface IGPTemporalLayer extends Serializable {
      * @return {@link Boolean}
      */
     default boolean isTemporalLayer() {
-        return ((this.getDimension() != null) && (this.getExtent() != null));
+        return ((this.getExtent() != null) && (this.getExtent().isTemporal()));
     }
 }

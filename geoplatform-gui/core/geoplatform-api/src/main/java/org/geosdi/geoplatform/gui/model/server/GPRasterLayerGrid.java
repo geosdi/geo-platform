@@ -35,6 +35,8 @@
 package org.geosdi.geoplatform.gui.model.server;
 
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
+import org.geosdi.geoplatform.gui.model.temporal.dimension.GPTemporalDimensionBean;
+import org.geosdi.geoplatform.gui.model.temporal.extent.GPTemporalExtentBean;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -48,6 +50,8 @@ public class GPRasterLayerGrid extends GPLayerGrid implements GPRasterBean {
     private Float minScale;
     private Float maxScale;
     private float opacity = 1.0f;
+    private GPTemporalDimensionBean dimension;
+    private GPTemporalExtentBean extent;
 
     /**
      * @return the opacity
@@ -113,13 +117,55 @@ public class GPRasterLayerGrid extends GPLayerGrid implements GPRasterBean {
         this.singleTileRequest = singleTileRequest;
     }
 
+    /**
+     * @return {@link GPTemporalDimensionBean}
+     */
+    @Override
+    public GPTemporalDimensionBean getDimension() {
+        return this.dimension;
+    }
+
+    /**
+     * @param theDimension
+     */
+    @Override
+    public void setDimension(GPTemporalDimensionBean theDimension) {
+        this.dimension = theDimension;
+    }
+
+    /**
+     * @return {@link GPTemporalExtentBean}
+     */
+    @Override
+    public GPTemporalExtentBean getExtent() {
+        return this.extent;
+    }
+
+    /**
+     * @param theTemporalExtent
+     */
+    @Override
+    public void setExtent(GPTemporalExtentBean theTemporalExtent) {
+        this.extent = theTemporalExtent;
+    }
+
+    /**
+     * @return {@link Boolean}
+     */
+    @Override
+    public boolean isTemporalLayer() {
+        return ((this.extent != null) && (this.extent.isTemporal()));
+    }
+
     @Override
     public String toString() {
         return "GPRasterLayerGrid{" + super.toString()
-                + " singleTileRequest=" + singleTileRequest
-                + ", minScale=" + minScale
-                + ", maxScale=" + maxScale
-                + ", opacity=" + opacity
+                + " singleTileRequest = " + singleTileRequest
+                + ", minScale = " + minScale
+                + ", maxScale = " + maxScale
+                + ", opacity = " + opacity
+                + ", dimension = " + this.dimension
+                + ", extent = " + this.extent
                 + '}';
     }
 }

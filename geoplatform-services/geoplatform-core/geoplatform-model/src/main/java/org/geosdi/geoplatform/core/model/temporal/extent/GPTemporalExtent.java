@@ -60,6 +60,6 @@ public class GPTemporalExtent implements IGPTemporalExtent {
     private String name;
     @Column(name = "default_extent")
     private String defaultExtent;
-    @Column(name = "extent_value")
+    @Column(name = "extent_value", columnDefinition = "TEXT")
     private String value;
 }

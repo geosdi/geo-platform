@@ -73,7 +73,6 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel implements GPLaye
 
     }
 
-    //
     private String title;
     private String name;
     private String alias;
@@ -297,6 +296,9 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel implements GPLaye
         return ((getAlias() != null) && (!getAlias().trim().isEmpty())) ? getAlias() : super.getLabel();
     }
 
+    /**
+     * @param state
+     */
     public void setState(IGPLayerTreeState state) {
         this.state = state;
     }

@@ -36,6 +36,8 @@ package org.geosdi.geoplatform.gui.model.tree;
 
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerClientInfo;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
+import org.geosdi.geoplatform.gui.model.temporal.dimension.GPTemporalDimensionBean;
+import org.geosdi.geoplatform.gui.model.temporal.extent.GPTemporalExtentBean;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -44,6 +46,9 @@ import org.geosdi.geoplatform.gui.model.GPRasterBean;
 public abstract class AbstractRasterTreeModel extends GPLayerTreeModel implements GPRasterBean {
 
     private static final long serialVersionUID = -2542877101963530059L;
+    //
+    private GPTemporalDimensionBean dimension;
+    private GPTemporalExtentBean extent;
 
     protected AbstractRasterTreeModel() {
     }
@@ -55,8 +60,52 @@ public abstract class AbstractRasterTreeModel extends GPLayerTreeModel implement
         super(layer);
     }
 
+    /**
+     * @return {@link GPTemporalDimensionBean}
+     */
+    @Override
+    public GPTemporalDimensionBean getDimension() {
+        return this.dimension;
+    }
+
+    /**
+     * @param theDimension
+     */
+    @Override
+    public void setDimension(GPTemporalDimensionBean theDimension) {
+        this.dimension = theDimension;
+    }
+
+    /**
+     * @return {@link GPTemporalExtentBean}
+     */
+    @Override
+    public GPTemporalExtentBean getExtent() {
+        return this.extent;
+    }
+
+    /**
+     * @param theTemporalExtent
+     */
+    @Override
+    public void setExtent(GPTemporalExtentBean theTemporalExtent) {
+        this.extent = theTemporalExtent;
+    }
+
+    /**
+     * @return {@link Boolean}
+     */
+    @Override
+    public boolean isTemporalLayer() {
+        return ((this.extent != null) && (this.extent.isTemporal()));
+    }
+
     @Override
     public String toString() {
-        return "AbstractRasterTreeModel{" + super.toString() + '}';
+        return "AbstractRasterTreeModel{"
+                + super.toString()
+                + ", dimension = " + this.dimension
+                + ", extent = " + this.extent
+                + '}';
     }
 }

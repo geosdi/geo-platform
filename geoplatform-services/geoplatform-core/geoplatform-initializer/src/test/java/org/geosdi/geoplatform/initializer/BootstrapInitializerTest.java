@@ -112,5 +112,4 @@ public class BootstrapInitializerTest extends BaseInitializerTest {
     public void e_countExternalPublicProjectTest() throws Exception {
         logger.trace("\n\t@@@ Count: {} @@@", this.projectDAO.getTotalExternalPublic());
     }
-
 }

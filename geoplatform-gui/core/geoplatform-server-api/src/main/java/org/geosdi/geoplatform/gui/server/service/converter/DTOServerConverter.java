@@ -36,10 +36,14 @@
 package org.geosdi.geoplatform.gui.server.service.converter;
 
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
+import org.geosdi.geoplatform.core.model.temporal.dimension.GPTemporalDimension;
+import org.geosdi.geoplatform.core.model.temporal.extent.GPTemporalExtent;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
 import org.geosdi.geoplatform.gui.model.server.GPLayerGrid;
 import org.geosdi.geoplatform.gui.model.server.GPRasterLayerGrid;
 import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
+import org.geosdi.geoplatform.gui.model.temporal.dimension.GPTemporalDimensionBean;
+import org.geosdi.geoplatform.gui.model.temporal.extent.GPTemporalExtentBean;
 import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
 import org.geosdi.geoplatform.gui.shared.GPLayerType;
 import org.geosdi.geoplatform.response.RasterLayerDTO;
@@ -158,7 +162,24 @@ public class DTOServerConverter {
         }
         raster.setMaxScale(layer.getMaxScale());
         raster.setMinScale(layer.getMinScale());
-
+        if(layer.isTemporalLayer()) {
+            logger.debug("##############Trying to read Temporal Information.");
+            GPTemporalDimension dimension = layer.getTemporalLayer().getDimension();
+            if (dimension != null) {
+                GPTemporalDimensionBean dimensionBean = new GPTemporalDimensionBean();
+                dimensionBean.setName(dimension.getName());
+                dimensionBean.setUnits(dimension.getUnits());
+                raster.setDimension(dimensionBean);
+            }
+            GPTemporalExtent extent = layer.getTemporalLayer().getExtent();
+            if (extent != null) {
+                GPTemporalExtentBean extentBean = new GPTemporalExtentBean();
+                extentBean.setName(extent.getName());
+                extentBean.setDefaultExtent(extent.getDefaultExtent());
+                extentBean.setValue(extent.getValue());
+                raster.setExtent(extentBean);
+            }
+        }
         ArrayList<GPStyleStringBeanModel> styles = new ArrayList<GPStyleStringBeanModel>();
         for (String styleString : layer.getStyleList()) {
             GPStyleStringBeanModel style = new GPStyleStringBeanModel();

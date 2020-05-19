@@ -599,8 +599,7 @@ public class GPProjectDelegate implements ProjectDelegate {
         List<GPFolder> rootFolders = folderDao.searchRootFolders(projectID);
         logger.debug("\n*** rootFolders:\n{}", rootFolders);
 
-        List<FolderDTO> rootFoldersDTO = FolderDTO.convertToFolderDTOList(
-                rootFolders);
+        List<FolderDTO> rootFoldersDTO = FolderDTO.convertToFolderDTOList(rootFolders);
         projectDTO.setRootFolders(rootFoldersDTO);
 
         this.fillProjectExpandedFolders(projectID, rootFoldersDTO);

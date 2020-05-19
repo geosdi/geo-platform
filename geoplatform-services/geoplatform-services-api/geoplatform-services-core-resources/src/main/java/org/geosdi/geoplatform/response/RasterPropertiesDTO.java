@@ -35,10 +35,11 @@
  */
 package org.geosdi.geoplatform.response;
 
-import java.util.List;
+import org.geosdi.geoplatform.core.model.GPRasterLayer;
+
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
-import org.geosdi.geoplatform.core.model.GPRasterLayer;
+import java.util.List;
 
 /**
  *
@@ -81,8 +82,7 @@ public class RasterPropertiesDTO extends ShortLayerPropertiesDTO {
      */
     public void setOpacity(float opacity) {
         if (opacity < 0.0f || opacity > 1.0f) {
-            throw new IllegalArgumentException(
-                    "The opacity must be between 0.0 and 1.0");
+            throw new IllegalArgumentException("The opacity must be between 0.0 and 1.0");
         }
         this.opacity = opacity;
     }
@@ -142,5 +142,4 @@ public class RasterPropertiesDTO extends ShortLayerPropertiesDTO {
                 + ", minScale = " + minScale
                 + ", styles = " + styleList + "}";
     }
-
 }

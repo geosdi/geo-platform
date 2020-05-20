@@ -66,14 +66,14 @@ public class TimeDimensionFormPanel extends FormPanel {
         super.setBorders(Boolean.FALSE);
         super.setHeight(WIDGET_HEIGHT - 60);
         super.add(this.startDateMultifield, new FlowData(5));
-
         this.endDateCheckBox = new CheckBox();
         this.endDateCheckBox.setValue(true);
         this.endDateCheckBox.setBoxLabel(LayerModuleConstants.INSTANCE.LayerTimeFilterWidget_enableToDate());
         this.endDateCheckBox.addListener(Events.Change, new Listener<BaseEvent>() {
             @Override
             public void handleEvent(BaseEvent be) {
-                endDateMultifield.setVisible(endDateCheckBox.getValue());
+                endDateMultifield.setEnabled(endDateCheckBox.getValue());
+                endDateMultifield.clearInvalid();
             }
         });
         LayoutContainer container = new LayoutContainer();
@@ -91,6 +91,7 @@ public class TimeDimensionFormPanel extends FormPanel {
             public void setValue(int value) {
                 super.setValue(value);
                 currentValue = value;
+//                GWT.log("@@@@@@@@@@@@@@@@@@@@@@"+isValid());
                 enableOnPlaying();
             }
         };
@@ -150,12 +151,15 @@ public class TimeDimensionFormPanel extends FormPanel {
             @Override
             public void componentSelected(ButtonEvent ce) {
                 slider.setValue(slider.getValue() - 1);
+                labelCurrenteTime.setValue(slider.getValue());
             }
         });
         this.forwardPlayButton.addSelectionListener(new SelectionListener<ButtonEvent>() {
             @Override
             public void componentSelected(ButtonEvent ce) {
                 slider.setValue(slider.getValue() + 1);
+                labelCurrenteTime.setValue(slider.getValue());
+
             }
         });
     }
@@ -188,7 +192,7 @@ public class TimeDimensionFormPanel extends FormPanel {
         if (!isValid()) {
             this.playButton.toggle(Boolean.FALSE);
             return Boolean.FALSE;
-        } else if (!this.startDateMultifield.getDate().before(this.endDateMultifield.getDate())) {
+        } else if (this.endDateMultifield.isEnabled() && !this.startDateMultifield.getDate().before(this.endDateMultifield.getDate())) {
             GeoPlatformMessage.errorMessage(LayerModuleConstants.INSTANCE.
                             LayerTimeFilterWidget_timeFilterWarningTitleText(),
                     LayerModuleMessages.INSTANCE.
@@ -205,8 +209,6 @@ public class TimeDimensionFormPanel extends FormPanel {
         this.playButton.toggle(Boolean.FALSE);
         this.slider.disable();
         this.reversePlayButton.toggle(Boolean.FALSE);
-        this.startDateMultifield.initComponents();
-        this.endDateMultifield.initComponents();
         this.slider.setValue(0);
         this.endDateCheckBox.setValue(true);
         this.endDateMultifield.setVisible(Boolean.TRUE);

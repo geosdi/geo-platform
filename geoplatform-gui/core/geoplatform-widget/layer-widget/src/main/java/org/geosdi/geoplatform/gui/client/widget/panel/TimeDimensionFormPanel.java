@@ -19,6 +19,7 @@ import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleMessages;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
+import org.geosdi.geoplatform.gui.client.resources.LayerWidgetResourcesConfigurator;
 import org.geosdi.geoplatform.gui.client.widget.multifield.EndDateMultifield;
 import org.geosdi.geoplatform.gui.client.widget.multifield.StartDateMultifield;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
@@ -53,9 +54,11 @@ public class TimeDimensionFormPanel extends FormPanel {
     private int currentValue;
 
     @Inject
-    public TimeDimensionFormPanel(StartDateMultifield theStartDateMultifield, final EndDateMultifield theEndDateMultifield) {
+    public TimeDimensionFormPanel(StartDateMultifield theStartDateMultifield, final EndDateMultifield theEndDateMultifield,
+                                  LayerWidgetResourcesConfigurator layerWidgetResourcesConfigurator) {
         this.startDateMultifield = theStartDateMultifield;
         this.endDateMultifield = theEndDateMultifield;
+        layerWidgetResourcesConfigurator.configure();
         this.sliderContainer = new LayoutContainer(new FormLayout());
         this.addComponents();
     }
@@ -65,6 +68,7 @@ public class TimeDimensionFormPanel extends FormPanel {
         super.setFrame(Boolean.TRUE);
         super.setBorders(Boolean.FALSE);
         super.setHeight(WIDGET_HEIGHT - 60);
+        super.setAutoWidth(Boolean.TRUE);
         super.add(this.startDateMultifield, new FlowData(5));
         this.endDateCheckBox = new CheckBox();
         this.endDateCheckBox.setValue(true);
@@ -74,6 +78,7 @@ public class TimeDimensionFormPanel extends FormPanel {
             public void handleEvent(BaseEvent be) {
                 endDateMultifield.setEnabled(endDateCheckBox.getValue());
                 endDateMultifield.clearInvalid();
+                endDateMultifield.clearErrors();
             }
         });
         LayoutContainer container = new LayoutContainer();
@@ -85,6 +90,8 @@ public class TimeDimensionFormPanel extends FormPanel {
 
     private void buildTimeTimension() {
         HorizontalPanel buttonsContainer = new HorizontalPanel();
+
+
         buttonsContainer.setSpacing(2);
         this.slider = new Slider() {
             @Override

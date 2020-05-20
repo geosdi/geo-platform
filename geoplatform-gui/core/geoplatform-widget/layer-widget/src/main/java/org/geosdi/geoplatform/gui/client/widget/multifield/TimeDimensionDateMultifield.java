@@ -5,9 +5,7 @@ import com.extjs.gxt.ui.client.event.DatePickerEvent;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.widget.DatePicker;
-import com.extjs.gxt.ui.client.widget.form.DateField;
-import com.extjs.gxt.ui.client.widget.form.MultiField;
-import com.extjs.gxt.ui.client.widget.form.SpinnerField;
+import com.extjs.gxt.ui.client.widget.form.*;
 import com.google.gwt.i18n.client.DateTimeFormat;
 
 import java.util.Date;
@@ -30,6 +28,7 @@ public abstract class TimeDimensionDateMultifield extends MultiField {
     }
 
     private void addComponents() {
+        super.setSpacing(20);
         this.dtFormat = DateTimeFormat.getFormat("dd-MM-yyyy");
         this.dateField = new DateField();
         this.dateField.setToolTip(dateTooltip());
@@ -58,12 +57,27 @@ public abstract class TimeDimensionDateMultifield extends MultiField {
         this.minuteField.setMaxValue(59);
         this.minuteField.setAllowBlank(Boolean.FALSE);
 
-        super.setSpacing(20);
         super.setFieldLabel(fieldLabel());
         super.setOrientation(Style.Orientation.HORIZONTAL);
         super.add(this.dateField);
         super.add(this.hourField);
         super.add(minuteField);
+        super.addStyleName("dateMultifield");
+//        super.setAutoWidth(Boolean.FALSE);
+//        super.addListener(Events.Update, new Listener<BaseEvent>() {
+//            @Override
+//            public void handleEvent(BaseEvent be) {
+//                GWT.log("@@"+be);
+//            }
+//        });
+        super.setValidator(new Validator() {
+            @Override
+            public String validate(Field<?> field, String value) {
+//                GWT.log(  "" +getElement().getChild(1).getChild(0));
+//                ((El)field.getElement().getParentElement().getChildNodes().getItem(2)).setStyleAttribute("display", "none");
+                return "ERROR";
+            }
+        });
     }
 
 
@@ -84,11 +98,23 @@ public abstract class TimeDimensionDateMultifield extends MultiField {
         return this.date;
     }
 
-    public void initComponents() {
+    @Override
+    protected void onAttach() {
+        super.onAttach();
+        initComponents();
+    }
+
+    private void initComponents() {
         this.date = null;
         this.dateField.reset();
         this.hourField.reset();
         this.minuteField.reset();
+    }
+
+    public void clearErrors() {
+        this.hourField.clearInvalid();
+        this.minuteField.clearInvalid();
+        this.dateField.clearInvalid();
     }
 
 }

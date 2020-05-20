@@ -1,6 +1,9 @@
 package org.geosdi.geoplatform.gui.client.widget.multifield;
 
+import com.extjs.gxt.ui.client.widget.form.Field;
+import com.extjs.gxt.ui.client.widget.form.Validator;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
+import org.geosdi.geoplatform.gui.client.i18n.LayerModuleMessages;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -10,6 +13,16 @@ public class EndDateMultifield extends TimeDimensionDateMultifield {
 
     public EndDateMultifield() {
         super();
+    }
+
+    @Override
+    protected Validator addValidator() {
+        return new Validator() {
+            @Override
+            public String validate(Field<?> field, String value) {
+                return validateDate() && getDate().after(limitDate) ? LayerModuleMessages.INSTANCE.LayerTimeFilterWidget_upperLimitDate(limitDate.toString()) : null;
+            }
+        };
     }
 
 

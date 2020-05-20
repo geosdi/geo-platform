@@ -43,8 +43,10 @@ import org.junit.*;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.geo.*;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.index.GeospatialIndex;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
@@ -57,6 +59,9 @@ import java.util.concurrent.*;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.springframework.data.mongodb.core.index.GeoSpatialIndexType.GEO_2D;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -91,10 +96,8 @@ public class GPMongoConfigTest {
 
     @Before
     public void setUp() {
-        Assert.assertNotNull("GPSpringMongo Template must not NULL",
-                mongoTemplate);
-        Assert.assertNotNull("Address Repo must not be NULL",
-                addressRepo);
+        assertNotNull("GPSpringMongo Template must not NULL", mongoTemplate);
+        assertNotNull("Address Repo must not be NULL", addressRepo);
 
         addressRepo.saveAll(Stream.of(new Address("A", 0.001, -0.002),
                 new Address("B", 1, 1), new Address("C", 0.5, 0.5),
@@ -102,53 +105,42 @@ public class GPMongoConfigTest {
                 new Address("Cologne", 6.921272, 50.960157),
                 new Address("Dusseldorf", 6.810036, 51.224088))
                 .collect(toList()));
+        logger.info("{}\n", mongoTemplate.indexOps(Address.class).ensureIndex(new GeospatialIndex("location").typed(GEO_2D)));
     }
 
     @Test
     public void shouldFindSelf() {
-        List<Address> addresses = addressRepo.findByLocationNear(DUS, new Distance(1,
-                Metrics.KILOMETERS));
-
-        Assert.assertEquals(1, addresses.size());
-
-        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ shouldFindSelf Found "
-                + ": {}\n\n", addresses);
+        GeoPage<Address> addresses = addressRepo.findByLocationNear(DUS, new Distance(1, Metrics.KILOMETERS), PageRequest.of(0, 10));
+        assertEquals(1, addresses.getNumberOfElements());
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ shouldFindSelf Found : {}\n\n", addresses.getContent());
     }
 
     @Test
     public void shouldFindAroundOrigin() {
         List<Address> addresses = addressRepo.findByLocationWithin(new Circle(0, 0, 0.75));
-        Assert.assertEquals(3, addresses.size());
+        assertEquals(3, addresses.size());
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ shouldFindAroundOrigin() Found : {}\n\n", addresses);
     }
 
     @Test
     public void shouldFindWithinBox() {
-        List<Address> addresses = addressRepo.findByLocationWithin(new Box(new Point(0.25, 0.25),
-                new Point(1, 1)));
-        Assert.assertEquals(2, addresses.size());
-        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ shouldFindWithinBox() Found "
-                + ": {}\n\n", addresses);
+        List<Address> addresses = addressRepo.findByLocationWithin(new Box(new Point(0.25, 0.25), new Point(1, 1)));
+        assertEquals(2, addresses.size());
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ shouldFindWithinBox() Found : {}\n\n", addresses);
     }
 
     @Test
     @Ignore(value = "MASSIVE TEST")
     public void insertMassiveAddressTest() throws Exception {
         long time = 0;
-
         ExecutorService executor = Executors.newFixedThreadPool(100);
-
         List<Callable<Long>> tasks = new ArrayList<Callable<Long>>(100);
-
         for (int i = 0; i < 100; i++) {
             tasks.add(new MongoInsertMassiveAddress());
         }
-
         List<Future<Long>> results = executor.invokeAll(tasks);
         executor.shutdown();
-
         boolean flag = executor.awaitTermination(10, TimeUnit.MINUTES);
-
         if (flag) {
             for (Future<Long> future : results) {
                 time += future.get();

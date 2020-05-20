@@ -65,7 +65,6 @@ public class TimeDimensionFormPanel extends FormPanel {
         super.setFrame(Boolean.TRUE);
         super.setBorders(Boolean.FALSE);
         super.setHeight(WIDGET_HEIGHT - 60);
-        super.setStyleAttribute("background-color", "white");
         super.add(this.startDateMultifield, new FlowData(5));
 
         this.endDateCheckBox = new CheckBox();
@@ -101,7 +100,7 @@ public class TimeDimensionFormPanel extends FormPanel {
         this.forwardPlayButton.setToolTip(ButtonsConstants.INSTANCE.nextText());
         this.backwardButton.setToolTip(ButtonsConstants.INSTANCE.prevText());
         this.addListener();
-        this.playButton.addSelectionListener(playSelectioListener);
+        this.playButton.addSelectionListener(this.playSelectioListener);
         buttonsContainer.add((this.backwardButton));
         buttonsContainer.add((this.reversePlayButton));
         buttonsContainer.add((this.playButton));
@@ -137,6 +136,7 @@ public class TimeDimensionFormPanel extends FormPanel {
                     enableOnPlaying();
                 } else {
                     if (validateForm()) {
+                        slider.enable();
                         playButton.setToolTip(ButtonsConstants.INSTANCE.pauseText());
                         playButton.setIcon(AbstractImagePrototype.create(
                                 LayerResources.ICONS.pauseTimeDimension()));
@@ -178,32 +178,32 @@ public class TimeDimensionFormPanel extends FormPanel {
     private void stopPlayer() {
         if (this.playButton.isPressed()) {
             this.playButton.toggle(Boolean.FALSE);
-            playSelectioListener.componentSelected(null);
+            this.playSelectioListener.componentSelected(null);
             this.reversePlayButton.enable();
             this.backwardButton.enable();
         }
     }
 
     public boolean validateForm() {
-        boolean check = isValid();
-        if (!check) {
+        if (!isValid()) {
             this.playButton.toggle(Boolean.FALSE);
-            return check;
+            return Boolean.FALSE;
         } else if (!this.startDateMultifield.getDate().before(this.endDateMultifield.getDate())) {
             GeoPlatformMessage.errorMessage(LayerModuleConstants.INSTANCE.
                             LayerTimeFilterWidget_timeFilterWarningTitleText(),
                     LayerModuleMessages.INSTANCE.
                             LayerTimeFilterWidget_rangeDateErrorMessage());
             this.playButton.toggle(Boolean.FALSE);
-            return false;
+            return Boolean.FALSE;
         }
-        return true;
+        return Boolean.TRUE;
     }
 
     private void initComponents() {
         this.backwardButton.disable();
         this.forwardPlayButton.enable();
         this.playButton.toggle(Boolean.FALSE);
+        this.slider.disable();
         this.reversePlayButton.toggle(Boolean.FALSE);
         this.startDateMultifield.initComponents();
         this.endDateMultifield.initComponents();

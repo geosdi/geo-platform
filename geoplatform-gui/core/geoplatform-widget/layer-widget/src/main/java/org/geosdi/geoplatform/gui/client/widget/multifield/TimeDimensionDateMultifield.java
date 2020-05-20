@@ -5,7 +5,10 @@ import com.extjs.gxt.ui.client.event.DatePickerEvent;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.widget.DatePicker;
-import com.extjs.gxt.ui.client.widget.form.*;
+import com.extjs.gxt.ui.client.widget.form.DateField;
+import com.extjs.gxt.ui.client.widget.form.MultiField;
+import com.extjs.gxt.ui.client.widget.form.SpinnerField;
+import com.extjs.gxt.ui.client.widget.form.Validator;
 import com.google.gwt.i18n.client.DateTimeFormat;
 
 import java.util.Date;
@@ -19,8 +22,10 @@ public abstract class TimeDimensionDateMultifield extends MultiField {
     private DateField dateField;
     private SpinnerField hourField;
     private SpinnerField minuteField;
-    private Date date;
+    protected Date date;
     private DateTimeFormat dtFormat;
+    //TODO
+    protected Date limitDate = new Date();
 
     public TimeDimensionDateMultifield() {
         super();
@@ -63,22 +68,10 @@ public abstract class TimeDimensionDateMultifield extends MultiField {
         super.add(this.hourField);
         super.add(minuteField);
         super.addStyleName("dateMultifield");
-//        super.setAutoWidth(Boolean.FALSE);
-//        super.addListener(Events.Update, new Listener<BaseEvent>() {
-//            @Override
-//            public void handleEvent(BaseEvent be) {
-//                GWT.log("@@"+be);
-//            }
-//        });
-        super.setValidator(new Validator() {
-            @Override
-            public String validate(Field<?> field, String value) {
-//                GWT.log(  "" +getElement().getChild(1).getChild(0));
-//                ((El)field.getElement().getParentElement().getChildNodes().getItem(2)).setStyleAttribute("display", "none");
-                return "ERROR";
-            }
-        });
+        super.setValidator(addValidator());
     }
+
+    protected abstract Validator addValidator();
 
 
     protected abstract String dateTooltip();
@@ -93,15 +86,22 @@ public abstract class TimeDimensionDateMultifield extends MultiField {
      * @return {@link Date}
      */
     public Date getDate() {
-        this.date.setHours(this.hourField.getValue().intValue());
-        this.date.setMinutes(this.minuteField.getValue().intValue());
+        if (this.hourField.getValue() != null)
+            this.date.setHours(this.hourField.getValue().intValue());
+        if (this.minuteField.getValue() != null)
+            this.date.setMinutes(this.minuteField.getValue().intValue());
         return this.date;
+    }
+
+    protected boolean validateDate() {
+        return this.date != null && this.hourField.isValid() && this.minuteField.isValid();
     }
 
     @Override
     protected void onAttach() {
         super.onAttach();
         initComponents();
+        clearInvalid();
     }
 
     private void initComponents() {

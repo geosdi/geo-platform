@@ -25,7 +25,7 @@ public class EndDateMultifield extends TimeDimensionDateMultifield {
 
     @Override
     protected String minuteTooltip() {
-        return LayerModuleConstants.INSTANCE.LayerTimeFilterWidget_multidatesToText();
+        return LayerModuleConstants.INSTANCE.LayerTimeFilterWidget_endMinuteTooltipText();
     }
 
     @Override

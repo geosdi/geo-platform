@@ -78,7 +78,6 @@ public class TimeDimensionFormPanel extends FormPanel {
             public void handleEvent(BaseEvent be) {
                 endDateMultifield.setEnabled(endDateCheckBox.getValue());
                 endDateMultifield.clearInvalid();
-                endDateMultifield.clearErrors();
             }
         });
         LayoutContainer container = new LayoutContainer();

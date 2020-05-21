@@ -101,7 +101,6 @@ public abstract class TimeDimensionDateMultifield extends MultiField {
     protected void onAttach() {
         super.onAttach();
         initComponents();
-        clearInvalid();
     }
 
     private void initComponents() {
@@ -109,12 +108,7 @@ public abstract class TimeDimensionDateMultifield extends MultiField {
         this.dateField.reset();
         this.hourField.reset();
         this.minuteField.reset();
-    }
-
-    public void clearErrors() {
-        this.hourField.clearInvalid();
-        this.minuteField.clearInvalid();
-        this.dateField.clearInvalid();
+        super.reset();
     }
 
 }

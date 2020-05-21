@@ -32,53 +32,68 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.action.menu;
+package org.geosdi.geoplatform.gui.puregwt.tree;
 
-import com.extjs.gxt.ui.client.Registry;
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
-import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
-import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
-
-import static java.lang.Boolean.FALSE;
+import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.event.shared.HandlerRegistration;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBusImpl;
 
 /**
- * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email nazzareno.sileno@geosdi.org
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class MenuBaseSecureAction extends MenuBaseAction {
+public class GPTreeMenuActionHandlerManager {
 
-    private GPTrustedLevel trustedLevel;
+    private static GPTreeMenuActionHandlerManager instance = new GPTreeMenuActionHandlerManager();
+    //
+    private GPEventBus eventBus;
 
-    /**
-     * @param theTrustedLevel
-     * @param theTitle
-     * @param theImage
-     */
-    public MenuBaseSecureAction(GPTrustedLevel theTrustedLevel, String theTitle, AbstractImagePrototype theImage) {
-        super(theTitle, theImage);
-        this.trustedLevel = theTrustedLevel;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        IGPAccountDetail accountDetail = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
-        // Application has neither an authority nor a trusted level
-        GPTrustedLevel accountTrustedLevel = accountDetail.getTrustedLevel();
-        return ((accountTrustedLevel == null) ? FALSE : accountTrustedLevel.ordinal() >= this.trustedLevel.ordinal());
+    private GPTreeMenuActionHandlerManager() {
+        this.eventBus = new GPEventBusImpl();
     }
 
     /**
-     * @param enabled the enabled to set
+     * @return {@link GPTreeMenuActionHandlerManager}
      */
-    @Override
-    public void setEnabled(boolean enabled) {
-        if (this.isEnabled()) {
-            super.setEnabled(enabled);
-        } else {
-            super.setEnabled(FALSE);
-        }
+    private static GPTreeMenuActionHandlerManager getInstance() {
+        return instance;
+    }
+
+    /**
+     * @param type
+     * @param handler
+     * @param <T>
+     * @return {@link HandlerRegistration}
+     */
+    public static <T extends EventHandler> HandlerRegistration addHandler(GwtEvent.Type<T> type, T handler) {
+        return getInstance().eventBus.addHandler(type, handler);
+    }
+
+    /**
+     * @param type
+     * @param source
+     * @param handler
+     * @param <T>
+     * @return {@link HandlerRegistration}
+     */
+    public static <T extends EventHandler> HandlerRegistration addHandlerToSource(GwtEvent.Type<T> type, Object source, T handler) {
+        return getInstance().eventBus.addHandlerToSource(type, source, handler);
+    }
+
+    /**
+     * @param event
+     */
+    public static void fireEvent(GwtEvent<?> event) {
+        getInstance().eventBus.fireEvent(event);
+    }
+
+    /**
+     * @param event
+     * @param source
+     */
+    public static void fireEventFromSource(GwtEvent<?> event, Object source) {
+        getInstance().eventBus.fireEventFromSource(event, source);
     }
 }

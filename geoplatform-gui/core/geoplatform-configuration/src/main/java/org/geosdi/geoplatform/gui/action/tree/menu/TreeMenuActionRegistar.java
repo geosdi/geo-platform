@@ -66,11 +66,9 @@ public final class TreeMenuActionRegistar extends GeoPlatformActionRegistar<Tree
      */
     public MenuAction get(String key, TreePanel treePanel) {
         TreeMenuActionCreator toolActionCreator = super.registry.get(key);
-
         if (toolActionCreator == null) {
             throw new IllegalStateException("Unable to find TreeMenuActionCreator for Key : " + key);
         }
-
         MenuAction action = toolActionCreator.createAction(treePanel);
         action.setId(key);
         return action;

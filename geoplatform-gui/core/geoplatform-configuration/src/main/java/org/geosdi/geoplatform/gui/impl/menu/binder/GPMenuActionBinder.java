@@ -45,11 +45,14 @@ import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.action.menu.MenuCheckAction;
 import org.geosdi.geoplatform.gui.action.menu.event.MenuActionChangeCheckEvent;
 import org.geosdi.geoplatform.gui.action.menu.handler.MenuActionChangeCheckHandler;
+import org.geosdi.geoplatform.gui.action.menu.tree.TreeMenuCompositeAction;
 import org.geosdi.geoplatform.gui.configuration.*;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableEvent;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableHandler;
+import org.geosdi.geoplatform.gui.impl.tree.menu.strategy.AbstractTreeMenuStrategy;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -57,6 +60,8 @@ import java.util.List;
  */
 public class GPMenuActionBinder implements MenuActionBinder {
 
+    private static final Logger logger = Logger.getLogger("GPMenuActionBinder");
+    //
     private final GeoPlatformMenuCreator menuCreator;
 
     /**
@@ -94,6 +99,9 @@ public class GPMenuActionBinder implements MenuActionBinder {
             item.addSelectionListener(action);
             this.addMenuActionEnableHandler(action, item);
             action.setEnabled((action.isMustBeEnabled()) ? action.isMustBeEnabled() : tool.isEnabled());
+            if((action instanceof TreeMenuCompositeAction) && (this.menuCreator instanceof AbstractTreeMenuStrategy)) {
+                ((TreeMenuCompositeAction) action).addTreeMenuSelectionHandler();
+            }
         }
         menu.add(item);
     }
@@ -118,6 +126,9 @@ public class GPMenuActionBinder implements MenuActionBinder {
             });
             action.setChecked(tool.isChecked());
             action.setEnabled(tool.isEnabled());
+            if((action instanceof TreeMenuCompositeAction) && (this.menuCreator instanceof AbstractTreeMenuStrategy)) {
+                ((TreeMenuCompositeAction) action).addTreeMenuSelectionHandler();
+            }
         }
     }
 

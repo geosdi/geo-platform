@@ -36,8 +36,6 @@
 package org.geosdi.geoplatform.gui;
 
 import org.geosdi.geoplatform.gui.configuration.GPMenuGenericTool;
-import org.geosdi.geoplatform.gui.configuration.composite.GPTreeCompositeType;
-import org.geosdi.geoplatform.gui.configuration.composite.menu.MultiSelectionElementType;
 import org.geosdi.geoplatform.gui.configuration.composite.menu.store.MultiSelectionCompositeKey;
 import org.geosdi.geoplatform.gui.configuration.composite.menu.store.SingleSelectionCompositeKey;
 import org.geosdi.geoplatform.gui.impl.tree.menu.store.TreeMenuStore;
@@ -52,6 +50,11 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
+
+import static org.geosdi.geoplatform.gui.configuration.composite.GPTreeCompositeType.*;
+import static org.geosdi.geoplatform.gui.configuration.composite.menu.MultiSelectionElementType.ALL;
+import static org.geosdi.geoplatform.gui.configuration.composite.menu.MultiSelectionElementType.ONLY_LEAF;
+import static org.junit.Assert.assertEquals;
 
 /**
  *
@@ -75,58 +78,36 @@ public class GPTreeMenuTest {
 
     @Test
     public void treeMenuRoot() {
-        List<? extends GPMenuGenericTool> tools = gpTreeMenuStore.getTools(
-                new SingleSelectionCompositeKey(GPTreeCompositeType.ROOT));
-
-        Assert.assertEquals(2, tools.size());
-
-        logger.info("ROOT TREE MENU @@@@@@@@@@@@@@@@@@@@@@@@@@ \n\n {} \n",
-                tools);
+        List<? extends GPMenuGenericTool> tools = gpTreeMenuStore.getTools(new SingleSelectionCompositeKey(ROOT));
+        assertEquals(2, tools.size());
+        logger.info("ROOT TREE MENU @@@@@@@@@@@@@@@@@@@@@@@@@@ \n\n {} \n", tools);
     }
 
     @Test
     public void treeMenuComposite() {
-        List<? extends GPMenuGenericTool> tools = gpTreeMenuStore.getTools(
-                new SingleSelectionCompositeKey(GPTreeCompositeType.COMPOSITE));
-
-        Assert.assertEquals(3, tools.size());
-
-        logger.info("COMPOSITE TREE MENU @@@@@@@@@@@@@@@@@@@@@@@@@@ \n\n {} \n",
-                tools);
+        List<? extends GPMenuGenericTool> tools = gpTreeMenuStore.getTools(new SingleSelectionCompositeKey(COMPOSITE));
+        assertEquals(3, tools.size());
+        logger.info("COMPOSITE TREE MENU @@@@@@@@@@@@@@@@@@@@@@@@@@ \n\n {} \n", tools);
     }
 
     @Test
     public void treeMenuLeaf() {
-        List<? extends GPMenuGenericTool> tools = gpTreeMenuStore.getTools(
-                new SingleSelectionCompositeKey(GPTreeCompositeType.LEAF));
-
-        Assert.assertEquals(12, tools.size());
-
-        logger.info("LEAF TREE MENU @@@@@@@@@@@@@@@@@@@@@@@@@@ \n\n {} \n",
-                tools);
+        List<? extends GPMenuGenericTool> tools = gpTreeMenuStore.getTools(new SingleSelectionCompositeKey(LEAF));
+        assertEquals(12, tools.size());
+        logger.info("LEAF TREE MENU @@@@@@@@@@@@@@@@@@@@@@@@@@ \n\n {} \n", tools);
     }
 
     @Test
     public void treeMenuAllElements() {
-        List<? extends GPMenuGenericTool> tools = gpTreeMenuStore.getTools(
-                new MultiSelectionCompositeKey(
-                MultiSelectionElementType.ALL));
-
-        Assert.assertEquals(1, tools.size());
-
-        logger.info("ALL ELEMENTS TREE MENU @@@@@@@@@@@@@@@@@@@ \n\n {} \n",
-                tools);
+        List<? extends GPMenuGenericTool> tools = gpTreeMenuStore.getTools(new MultiSelectionCompositeKey(ALL));
+        assertEquals(1, tools.size());
+        logger.info("ALL ELEMENTS TREE MENU @@@@@@@@@@@@@@@@@@@ \n\n {} \n", tools);
     }
 
     @Test
     public void treeMenuLeafs() {
-        List<? extends GPMenuGenericTool> tools = gpTreeMenuStore.getTools(
-                new MultiSelectionCompositeKey(
-                MultiSelectionElementType.ONLY_LEAF));
-
-        Assert.assertEquals(2, tools.size());
-
-        logger.info("LEAFS TREE MENU @@@@@@@@@@@@@@@@@@@@@@@@@@ \n\n {} \n",
-                tools);
+        List<? extends GPMenuGenericTool> tools = gpTreeMenuStore.getTools(new MultiSelectionCompositeKey(ONLY_LEAF));
+        assertEquals(2, tools.size());
+        logger.info("LEAFS TREE MENU @@@@@@@@@@@@@@@@@@@@@@@@@@ \n\n {} \n", tools);
     }
 }

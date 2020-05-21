@@ -35,9 +35,9 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.time;
 
-import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
+import org.geosdi.geoplatform.gui.client.puregwt.binding.event.GPBeanTreeMoldeBindingEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.filter.IGPFilterWidgetHandler;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
 import org.geosdi.geoplatform.gui.client.widget.time.panel.TimeDimensionPanel;
@@ -58,14 +58,21 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow implements IGPFilte
 
     public LayerTimeFilterWidget(boolean lazy, GPTreePanel<GPBeanTreeModel> treePanel)  {
         super(lazy);
+        super.setResizable(Boolean.FALSE);
         this.treePanel = treePanel;
         WidgetPropertiesHandlerManager.addHandler(IGPFilterWidgetHandler.TYPE, this);
     }
 
     @Override
     public void addComponent() {
+
+        GPBeanTreeModel itemSelected = this.treePanel.getSelectionModel().getSelectedItem();
+        //TODO
+        //((RasterTreeNode)itemSelected).getExtent().isTemporal();
 //        super.add(new TimeFilterPanel(this.treePanel));
+//        GWT.log("@@@@@@@@@@@@@@@@@@@@@@@ "+(GPLayerTreeModel) itemSelected);
         super.add(new TimeDimensionPanel(LayerModuleInjector.MainInjector.getInstance().getTimeDimensionFormPanel()));
+        WidgetPropertiesHandlerManager.fireEvent(new GPBeanTreeMoldeBindingEvent(itemSelected));
     }
 
     @Override
@@ -77,7 +84,7 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow implements IGPFilte
     @Override
     public void setWindowProperties() {
         super.setHeadingHtml(LayerModuleConstants.INSTANCE.LayerTimeFilterWidget_timeFilderHeadingText());
-        super.setLayout(new FormLayout());
+//        super.setLayout(new FormLayout());
         super.setModal(Boolean.TRUE);
     }
 }

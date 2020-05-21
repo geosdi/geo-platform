@@ -12,6 +12,8 @@ import com.extjs.gxt.ui.client.widget.layout.ColumnData;
 import com.extjs.gxt.ui.client.widget.layout.ColumnLayout;
 import com.extjs.gxt.ui.client.widget.layout.FlowData;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -19,12 +21,18 @@ import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleMessages;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
+import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
+import org.geosdi.geoplatform.gui.client.puregwt.binding.GPDateBindingHandler;
 import org.geosdi.geoplatform.gui.client.resources.LayerWidgetResourcesConfigurator;
 import org.geosdi.geoplatform.gui.client.widget.multifield.EndDateMultifield;
 import org.geosdi.geoplatform.gui.client.widget.multifield.StartDateMultifield;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;
 
 import javax.inject.Inject;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.geosdi.geoplatform.gui.client.widget.time.LayerTimeFilterWidget.WIDGET_HEIGHT;
 
@@ -32,8 +40,8 @@ import static org.geosdi.geoplatform.gui.client.widget.time.LayerTimeFilterWidge
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class TimeDimensionFormPanel extends FormPanel {
-
+public class TimeDimensionFormPanel extends FormPanel implements GPDateBindingHandler {
+    DateTimeFormat parseDateFormat = DateTimeFormat.getFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
     private final LayoutContainer sliderContainer;
     private final StartDateMultifield startDateMultifield;
     private final EndDateMultifield endDateMultifield;
@@ -52,6 +60,8 @@ public class TimeDimensionFormPanel extends FormPanel {
     private SelectionListener<ButtonEvent> playReverseSelectioListener;
     private Timer animationTimer;
     private int currentValue;
+    private GPBeanTreeModel itemSelected;
+    private List<String> store;
 
     @Inject
     public TimeDimensionFormPanel(StartDateMultifield theStartDateMultifield, final EndDateMultifield theEndDateMultifield,
@@ -61,6 +71,7 @@ public class TimeDimensionFormPanel extends FormPanel {
         layerWidgetResourcesConfigurator.configure();
         this.sliderContainer = new LayoutContainer(new FormLayout());
         this.addComponents();
+        WidgetPropertiesHandlerManager.addHandler(GPDateBindingHandler.TYPE, this);
     }
 
     private void addComponents() {
@@ -230,5 +241,16 @@ public class TimeDimensionFormPanel extends FormPanel {
     protected void onDetach() {
         super.onDetach();
         this.stopPlayer();
+    }
+
+    @Override
+    public void bindTreeModel(GPBeanTreeModel gpTreePanel) {
+        this.itemSelected = gpTreePanel;
+        this.store = Arrays.asList(((RasterTreeNode) gpTreePanel).getExtent().getValue().split(","));
+        this.endDateMultifield.bindDate(this.parseDateFormat.parse(this.store.get(this.store.size() - 1).replace("Z", "")));
+        this.startDateMultifield.bindDate(this.parseDateFormat.parse(this.store.get(0).replace("Z", "")));
+        GWT.log("@@@@@@@@@@@" + this.itemSelected);
+//        GWT.log("@@@@@@@@@@@@@@@" + ((RasterTreeNode) gpTreePanel));
+
     }
 }

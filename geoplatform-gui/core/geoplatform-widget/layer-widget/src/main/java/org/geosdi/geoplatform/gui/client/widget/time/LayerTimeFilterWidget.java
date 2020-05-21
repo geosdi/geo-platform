@@ -37,10 +37,12 @@ package org.geosdi.geoplatform.gui.client.widget.time;
 
 import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
+import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
 import org.geosdi.geoplatform.gui.client.puregwt.binding.event.GPBeanTreeMoldeBindingEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.filter.IGPFilterWidgetHandler;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
 import org.geosdi.geoplatform.gui.client.widget.time.panel.TimeDimensionPanel;
+import org.geosdi.geoplatform.gui.client.widget.time.panel.TimeFilterPanel;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;
@@ -65,13 +67,11 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow implements IGPFilte
 
     @Override
     public void addComponent() {
-
         GPBeanTreeModel itemSelected = this.treePanel.getSelectionModel().getSelectedItem();
-        //TODO
-        //((RasterTreeNode)itemSelected).getExtent().isTemporal();
-//        super.add(new TimeFilterPanel(this.treePanel));
-//        GWT.log("@@@@@@@@@@@@@@@@@@@@@@@ "+(GPLayerTreeModel) itemSelected);
-        super.add(new TimeDimensionPanel(LayerModuleInjector.MainInjector.getInstance().getTimeDimensionFormPanel()));
+        super.add(
+                ((RasterTreeNode) itemSelected).getExtent().isTemporal() ?
+                        new TimeDimensionPanel(LayerModuleInjector.MainInjector.getInstance().getTimeDimensionFormPanel()) :
+                        new TimeFilterPanel(this.treePanel));
         WidgetPropertiesHandlerManager.fireEvent(new GPBeanTreeMoldeBindingEvent(itemSelected));
     }
 

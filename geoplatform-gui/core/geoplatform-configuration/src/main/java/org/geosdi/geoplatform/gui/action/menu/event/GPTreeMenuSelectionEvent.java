@@ -32,48 +32,47 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.client.action.menu;
+package org.geosdi.geoplatform.gui.action.menu.event;
 
-import com.extjs.gxt.ui.client.event.MenuEvent;
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import org.geosdi.geoplatform.gui.client.LayerResources;
-import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
-import org.geosdi.geoplatform.gui.client.widget.tree.panel.GinTreePanel;
-import org.geosdi.geoplatform.gui.client.widget.tree.store.puregwt.event.AddLayersFromCopyMenuEvent;
-import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
-import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
+import com.extjs.gxt.ui.client.data.ModelData;
+import com.google.gwt.event.shared.GwtEvent;
+import org.geosdi.geoplatform.gui.action.menu.handler.GPTreeMenuSelectionHandler;
 
-import javax.inject.Inject;
+import java.util.List;
+
+import static org.geosdi.geoplatform.gui.action.menu.handler.GPTreeMenuSelectionHandler.TYPE;
 
 /**
- * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email nazzareno.sileno@geosdi.org
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public class PasteLayerAction extends PasteLayerBaseAction {
+public class GPTreeMenuSelectionEvent<M extends ModelData> extends GwtEvent<GPTreeMenuSelectionHandler> {
+
+    private final List<M> selection;
 
     /**
-     * @param ginTreePanel
+     * @param theSelection
      */
-    @Inject
-    public PasteLayerAction(GinTreePanel ginTreePanel) {
-        super("PasteLayers", AbstractImagePrototype.create(LayerResources.ICONS.paste()), ginTreePanel.get());
+    public GPTreeMenuSelectionEvent(List<M> theSelection) {
+        this.selection = theSelection;
     }
 
+    /**
+     * @return {@link Type<GPTreeMenuSelectionHandler>}
+     */
     @Override
-    public void componentSelected(MenuEvent ce) {
-        GPBeanTreeModel itemSelected = this.tree.getSelectionModel().getSelectedItem();
-        if ((!(itemSelected instanceof FolderTreeNode)) || this.layersToCopy == null) {
-            throw new IllegalArgumentException("It is possible to past only copied layers into a Folder");
-        }
-        if (!this.tree.isExpanded(itemSelected)) {
-            this.folderExpander.checkNodeState();
-        } else {
-            this.executePaste();
-        }
+    public Type<GPTreeMenuSelectionHandler> getAssociatedType() {
+        return TYPE;
     }
 
+    /**
+     * Should only be called by {@link com.google.gwt.event.shared.HandlerManager}. In other words, do not use
+     * or call.
+     *
+     * @param handler handler
+     */
     @Override
-    protected void executePaste() {
-        LayerHandlerManager.fireEvent(new AddLayersFromCopyMenuEvent(layersToCopy));
+    protected void dispatch(GPTreeMenuSelectionHandler handler) {
+        handler.manageTreeSelection(this.selection);
     }
 }

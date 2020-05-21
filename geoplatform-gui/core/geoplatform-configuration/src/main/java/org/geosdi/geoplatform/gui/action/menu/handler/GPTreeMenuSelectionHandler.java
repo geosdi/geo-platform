@@ -32,48 +32,24 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.client.action.menu;
+package org.geosdi.geoplatform.gui.action.menu.handler;
 
-import com.extjs.gxt.ui.client.event.MenuEvent;
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import org.geosdi.geoplatform.gui.client.LayerResources;
-import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
-import org.geosdi.geoplatform.gui.client.widget.tree.panel.GinTreePanel;
-import org.geosdi.geoplatform.gui.client.widget.tree.store.puregwt.event.AddLayersFromCopyMenuEvent;
-import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
-import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
+import com.extjs.gxt.ui.client.data.ModelData;
+import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent;
 
-import javax.inject.Inject;
+import java.util.List;
 
 /**
- * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email nazzareno.sileno@geosdi.org
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public class PasteLayerAction extends PasteLayerBaseAction {
+public interface GPTreeMenuSelectionHandler<M extends ModelData> extends EventHandler {
+
+    GwtEvent.Type<GPTreeMenuSelectionHandler> TYPE = new GwtEvent.Type<GPTreeMenuSelectionHandler>();
 
     /**
-     * @param ginTreePanel
+     * @param selection
      */
-    @Inject
-    public PasteLayerAction(GinTreePanel ginTreePanel) {
-        super("PasteLayers", AbstractImagePrototype.create(LayerResources.ICONS.paste()), ginTreePanel.get());
-    }
-
-    @Override
-    public void componentSelected(MenuEvent ce) {
-        GPBeanTreeModel itemSelected = this.tree.getSelectionModel().getSelectedItem();
-        if ((!(itemSelected instanceof FolderTreeNode)) || this.layersToCopy == null) {
-            throw new IllegalArgumentException("It is possible to past only copied layers into a Folder");
-        }
-        if (!this.tree.isExpanded(itemSelected)) {
-            this.folderExpander.checkNodeState();
-        } else {
-            this.executePaste();
-        }
-    }
-
-    @Override
-    protected void executePaste() {
-        LayerHandlerManager.fireEvent(new AddLayersFromCopyMenuEvent(layersToCopy));
-    }
+    void manageTreeSelection(List<M> selection);
 }

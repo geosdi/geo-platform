@@ -48,8 +48,6 @@ import org.geosdi.geoplatform.response.*;
 import org.geosdi.geoplatform.response.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.response.collection.LongListStore;
 import org.geosdi.geoplatform.services.development.EntityCorrectness;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -69,8 +67,6 @@ import static org.geosdi.geoplatform.services.development.EntityCorrectness.chec
 @Component(value = "gpLayerDelegate")
 class GPLayerDelegate implements LayerDelegate {
 
-    private static final Logger logger = LoggerFactory.getLogger(GPLayerDelegate.class);
-    //
     @Autowired
     private GPProjectDAO projectDao;
     @Autowired
@@ -371,7 +367,6 @@ class GPLayerDelegate implements LayerDelegate {
             throw new ResourceNotFoundFault("Layer not found", layerID);
         }
         EntityCorrectness.checkLayerLog(layer); // TODO assert
-        logger.info("###############################\n\nLAYER : {}\n", layer);
         return layer;
     }
 

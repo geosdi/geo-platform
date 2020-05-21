@@ -54,7 +54,11 @@ import java.io.File;
 import java.io.Serializable;
 import java.io.StringReader;
 import java.lang.Exception;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import static java.io.File.separator;
@@ -286,6 +290,14 @@ public class SimpleUnmarshallerTest {
                 + "        </DCPType>\n"
                 + "      </GetStyles>"), GetStyles.class);
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@GET_STYLES : {}\n", getStyles);
+    }
+
+    @Test
+    public void m_dateTimeTest() throws Exception {
+        LocalDate nowDate = LocalDate.now().minusDays(7);
+        Instant instant = nowDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
+        Date res = Date.from(instant);
+        logger.info("{}\n", res);
     }
 
     @Getter

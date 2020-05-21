@@ -54,8 +54,7 @@ import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerMana
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class FolderPropertiesWidget extends GeoPlatformWindow
-        implements GPTreeBindingFolderHandler, GPWidgetSizeHandler {
+public class FolderPropertiesWidget extends GeoPlatformWindow implements GPTreeBindingFolderHandler, GPWidgetSizeHandler {
 
     private FolderTabWidget foldersTabWidget;
     private final VerticalPanel vp = new VerticalPanel();
@@ -68,12 +67,9 @@ public class FolderPropertiesWidget extends GeoPlatformWindow
     @Override
     public void addComponent() {
         vp.setSpacing(10);
-
         this.foldersTabWidget = new FolderTabWidget();
         this.vp.add(this.foldersTabWidget);
-
         super.add(this.vp);
-
         Button close = new Button(ButtonsConstants.INSTANCE.closeText(),
                 new SelectionListener<ButtonEvent>() {
 
@@ -82,7 +78,6 @@ public class FolderPropertiesWidget extends GeoPlatformWindow
                         hide();
                     }
                 });
-
         super.addButton(close);
     }
 
@@ -94,14 +89,11 @@ public class FolderPropertiesWidget extends GeoPlatformWindow
 
     @Override
     public void setWindowProperties() {
-        setHeadingHtml(
-                LayerModuleConstants.INSTANCE.FolderPropertiesWidget_headingText());
+        setHeadingHtml(LayerModuleConstants.INSTANCE.FolderPropertiesWidget_headingText());
         setModal(true);
         setResizable(false);
         setLayout(new FlowLayout());
-
         setCollapsible(true);
-
         addWindowListener(new WindowListener() {
 
             @Override
@@ -129,9 +121,7 @@ public class FolderPropertiesWidget extends GeoPlatformWindow
      *
      */
     public void addHandlers() {
-        WidgetPropertiesHandlerManager.addHandler(
-                GPTreeBindingFolderHandler.TYPE, this);
-        WidgetPropertiesHandlerManager.addHandlerToSource(GPWidgetSizeHandler.TYPE,
-                this.vp, this);
+        WidgetPropertiesHandlerManager.addHandler(GPTreeBindingFolderHandler.TYPE, this);
+        WidgetPropertiesHandlerManager.addHandlerToSource(GPWidgetSizeHandler.TYPE, this.vp, this);
     }
 }

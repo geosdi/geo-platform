@@ -51,7 +51,6 @@ import java.util.logging.Logger;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-//@Singleton
 public class GPLayerTreeRefresher implements GPCompositeRefreshHandler {
 
     private static final Logger logger = Logger.getLogger("GPLayerTreeRefresher");

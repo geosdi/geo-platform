@@ -40,15 +40,18 @@ import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.google.gwt.event.shared.HandlerRegistration;
+import org.geosdi.geoplatform.gui.action.menu.event.GPTreeMenuSelectionEvent;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.client.widget.tree.menu.strategy.chain.SelectionChainManager;
 import org.geosdi.geoplatform.gui.client.widget.tree.panel.GinTreePanel;
 import org.geosdi.geoplatform.gui.client.widget.tree.properties.basic.menu.LayerTreeBasicMenu;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
+import org.geosdi.geoplatform.gui.puregwt.tree.GPTreeMenuActionHandlerManager;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.util.List;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -88,8 +91,10 @@ public class GPTreeMenuActivator implements TreeMenuActivator {
 
             @Override
             public void handleEvent(BaseEvent be) {
-                Menu menu = selectionManager.bindSelection(tree.getSelectionModel().getSelectedItems());
+                List<GPBeanTreeModel> selection = tree.getSelectionModel().getSelectedItems();
+                Menu menu = selectionManager.bindSelection(selection);
                 tree.setContextMenu((menu != null) ? menu : treeBasicMenu.getBasicMenu());
+                GPTreeMenuActionHandlerManager.fireEvent(new GPTreeMenuSelectionEvent<GPBeanTreeModel>(selection));
             }
 
         });

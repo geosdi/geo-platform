@@ -45,9 +45,10 @@ import com.google.gwt.event.shared.HandlerRegistration;
  * @email michele.santomauro@geosdi.org
  */
 public class GPToolbarActionHandlerManager {
-    
-    private GPEventBus eventBus;
+
     private static GPToolbarActionHandlerManager instance = new GPToolbarActionHandlerManager();
+    //
+    private GPEventBus eventBus;
     
     private GPToolbarActionHandlerManager() {
         this.eventBus = new GPEventBusImpl();

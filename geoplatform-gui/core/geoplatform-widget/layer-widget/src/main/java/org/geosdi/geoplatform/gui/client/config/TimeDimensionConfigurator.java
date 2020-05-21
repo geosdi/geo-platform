@@ -50,6 +50,5 @@ public class TimeDimensionConfigurator extends AbstractGinModule {
     protected void configure() {
         bind(StartDateMultifield.class).in(Singleton.class);
         bind(EndDateMultifield.class).in(Singleton.class);
-
     }
 }

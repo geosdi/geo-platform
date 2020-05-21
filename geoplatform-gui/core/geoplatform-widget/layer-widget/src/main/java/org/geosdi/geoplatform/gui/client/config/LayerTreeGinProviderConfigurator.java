@@ -60,15 +60,11 @@ public class LayerTreeGinProviderConfigurator extends AbstractGinModule {
 
     @Override
     protected void configure() {
-        bind(WmsCapabilitiesExecutor.class).toProvider(WmsCapabilitiesExecutorProvider.class)
-                .in(Singleton.class);
-
+        bind(WmsCapabilitiesExecutor.class).toProvider(WmsCapabilitiesExecutorProvider.class).in(Singleton.class);
         bind(CatalogExecutor.class).toProvider(CatalogExecutorProvider.class).in(Singleton.class);
         bind(WmsGetMapExecutor.class).toProvider(WmsGetMapExecutorProvider.class).in(Singleton.class);
         bind(LayerMenuExecutor.class).toProvider(LayerMenuExecutorProvider.class).in(Singleton.class);
-
         bind(PublisherExecutor.class).toProvider(PublisherExecutorProvider.class).in(Singleton.class);
-
         bind(GPLayerTreeDecorator.class).toProvider(GPLayerTreeDecoratorProvider.class).in(Singleton.class);
         bind(GPRootTreeNode.class).toProvider(GPRootTreeNodeProvider.class).in(Singleton.class);
         bind(GPTreePanelDropTarget.class).toProvider(DropTargetProvider.class).in(Singleton.class);

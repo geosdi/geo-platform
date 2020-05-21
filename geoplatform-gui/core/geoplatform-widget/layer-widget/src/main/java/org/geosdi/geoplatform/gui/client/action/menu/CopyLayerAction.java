@@ -50,6 +50,8 @@ import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import javax.inject.Inject;
 import java.util.List;
 
+import static java.lang.Boolean.TRUE;
+
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
@@ -79,7 +81,7 @@ public class CopyLayerAction extends MenuBaseAction {
         PasteLayerAction pasteLayerAction = LayerModuleInjector.MainInjector.getInstance().getPasteLayerAction();
         pasteLayerAction.layersToCopy.clear();
         pasteLayerAction.layersToCopy.addAll(selectedLayers);
-        pasteLayerAction.setMustBeEnabled(Boolean.TRUE);
-        pasteLayerAction.setEnabled(Boolean.TRUE);
+        pasteLayerAction.setMustBeEnabled(TRUE);
+        pasteLayerAction.setEnabled(TRUE);
     }
 }

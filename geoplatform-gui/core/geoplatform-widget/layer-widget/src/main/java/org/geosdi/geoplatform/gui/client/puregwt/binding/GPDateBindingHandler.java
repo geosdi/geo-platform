@@ -47,5 +47,5 @@ public interface GPDateBindingHandler extends EventHandler {
 
     Type<GPDateBindingHandler> TYPE = new Type<GPDateBindingHandler>();
 
-    void bindDate(GPBeanTreeModel gpTreePanel);
+    void bindTreeModel(GPBeanTreeModel gpTreePanel);
 }

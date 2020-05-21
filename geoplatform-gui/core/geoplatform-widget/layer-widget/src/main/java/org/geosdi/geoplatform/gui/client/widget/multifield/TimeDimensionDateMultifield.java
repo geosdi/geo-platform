@@ -10,7 +10,6 @@ import com.extjs.gxt.ui.client.widget.form.MultiField;
 import com.extjs.gxt.ui.client.widget.form.SpinnerField;
 import com.extjs.gxt.ui.client.widget.form.Validator;
 import com.google.gwt.i18n.client.DateTimeFormat;
-import org.geosdi.geoplatform.gui.client.puregwt.binding.GPDateBindingHandler;
 
 import java.util.Date;
 
@@ -18,7 +17,7 @@ import java.util.Date;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public abstract class TimeDimensionDateMultifield extends MultiField implements GPDateBindingHandler {
+public abstract class TimeDimensionDateMultifield extends MultiField {
 
     protected DateField dateField;
     private SpinnerField hourField;
@@ -26,7 +25,6 @@ public abstract class TimeDimensionDateMultifield extends MultiField implements 
     protected Date date;
     private DateTimeFormat dtFormat;
     protected Date limitDate;
-    DateTimeFormat parseDateFormat = DateTimeFormat.getFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
 
     public TimeDimensionDateMultifield() {
         super();
@@ -117,6 +115,8 @@ public abstract class TimeDimensionDateMultifield extends MultiField implements 
         this.hourField.setValue(this.limitDate.getHours());
         this.minuteField.setValue(this.limitDate.getMinutes());
     }
+
+    public abstract void bindDate(Date date);
 
 
 }

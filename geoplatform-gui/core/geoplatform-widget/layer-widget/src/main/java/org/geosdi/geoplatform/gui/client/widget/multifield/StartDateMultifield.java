@@ -4,10 +4,8 @@ import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.Validator;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleMessages;
-import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
-import org.geosdi.geoplatform.gui.client.puregwt.binding.GPDateBindingHandler;
-import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
-import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;
+
+import java.util.Date;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -17,7 +15,6 @@ public class StartDateMultifield extends TimeDimensionDateMultifield {
 
     public StartDateMultifield() {
         super();
-        WidgetPropertiesHandlerManager.addHandler(GPDateBindingHandler.TYPE, this);
     }
 
     @Override
@@ -51,9 +48,8 @@ public class StartDateMultifield extends TimeDimensionDateMultifield {
     }
 
     @Override
-    public void bindDate(GPBeanTreeModel gpTreePanel) {
-        String dates[] = ((RasterTreeNode) gpTreePanel).getExtent().getValue().split(",");
-        this.limitDate = this.parseDateFormat.parse(dates[0].replace("Z", ""));
+    public void bindDate(Date date) {
+        this.limitDate = date;
         super.buildDateField();
         super.dateField.setMinValue(this.limitDate);
     }

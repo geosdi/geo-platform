@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.time;
 
-import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
@@ -60,8 +59,8 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow implements IGPFilte
     //
     private GPTreePanel<GPBeanTreeModel> treePanel;
 
-    public LayerTimeFilterWidget(boolean lazy, GPTreePanel<GPBeanTreeModel> treePanel)  {
-        super(lazy);
+    public LayerTimeFilterWidget(GPTreePanel<GPBeanTreeModel> treePanel) {
+        super(Boolean.TRUE);
         super.setResizable(Boolean.FALSE);
         this.treePanel = treePanel;
         WidgetPropertiesHandlerManager.addHandler(IGPFilterWidgetHandler.TYPE, this);

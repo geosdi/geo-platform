@@ -64,6 +64,7 @@ import static org.geosdi.geoplatform.gui.client.widget.time.LayerTimeFilterWidge
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @author Vito Salvia <vito.salvia@gmail.com>
  * @email nazzareno.sileno@geosdi.org
  */
 public class RemoveTimeFilterAction extends MenuBaseAction implements TreeMenuCompositeAction<GPBeanTreeModel> {

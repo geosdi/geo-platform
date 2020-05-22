@@ -13,11 +13,11 @@ import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerMana
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class TimeDimensionPanel extends GeoPlatformContentPanel {
+public class TimePeriodPanel extends GeoPlatformContentPanel {
 
     private FormPanel panel;
 
-    public TimeDimensionPanel(FormPanel panel) {
+    public TimePeriodPanel(FormPanel panel) {
         super(Boolean.TRUE);
         this.panel = panel;
     }

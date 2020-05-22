@@ -42,11 +42,11 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class GPBeanTreeMoldeBindingEvent extends GwtEvent<GPDateBindingHandler> {
+public class GPBeanTreeModelBindingEvent extends GwtEvent<GPDateBindingHandler> {
 
     private GPBeanTreeModel gpTreePanel;
 
-    public GPBeanTreeMoldeBindingEvent(GPBeanTreeModel gpTreePanel) {
+    public GPBeanTreeModelBindingEvent(GPBeanTreeModel gpTreePanel) {
         this.gpTreePanel = gpTreePanel;
     }
 

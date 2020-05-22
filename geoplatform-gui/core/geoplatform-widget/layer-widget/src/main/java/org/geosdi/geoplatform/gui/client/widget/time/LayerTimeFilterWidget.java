@@ -35,15 +35,12 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.time;
 
-import com.google.gwt.core.client.GWT;
 import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
-import org.geosdi.geoplatform.gui.client.puregwt.binding.event.GPBeanTreeMoldeBindingEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.filter.IGPFilterWidgetHandler;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
-import org.geosdi.geoplatform.gui.client.widget.time.panel.TimeDimensionPanel;
-import org.geosdi.geoplatform.gui.client.widget.time.panel.TimeFilterPanel;
+import org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.IStrategyPanel;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;
@@ -73,7 +70,6 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow implements IGPFilte
         super.onShow();
         super.removeAll();
         GPBeanTreeModel itemSelected = this.treePanel.getSelectionModel().getSelectedItem();
-        GWT.log("@@@@@@@@@@@@@@@@@@@@@@@@@" + ((RasterTreeNode) itemSelected).getExtent().getValue());
         IStrategyPanel.StrategyPanel s = LayerModuleInjector.MainInjector.getInstance().getStrategyPanel();
         super.add(s.getPanel(((RasterTreeNode) itemSelected).getExtent().getValue().contains("/P"), this.treePanel));
     }

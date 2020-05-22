@@ -17,7 +17,7 @@ import java.util.Date;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public abstract class TimeDimensionDateMultifield extends MultiField {
+public abstract class TimePeriodDateMultifield extends MultiField {
 
     protected DateField dateField;
     private SpinnerField hourField;
@@ -26,7 +26,7 @@ public abstract class TimeDimensionDateMultifield extends MultiField {
     private DateTimeFormat dtFormat;
     protected Date limitDate;
 
-    public TimeDimensionDateMultifield() {
+    public TimePeriodDateMultifield() {
         super();
         this.addComponents();
     }

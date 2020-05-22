@@ -37,6 +37,8 @@ package org.geosdi.geoplatform.gui.client.config;
 import com.google.gwt.inject.client.AbstractGinModule;
 import org.geosdi.geoplatform.gui.client.widget.multifield.EndDateMultifield;
 import org.geosdi.geoplatform.gui.client.widget.multifield.StartDateMultifield;
+import org.geosdi.geoplatform.gui.client.widget.panel.TimePeriodFormPanel;
+import org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.IStrategyPanel;
 
 import javax.inject.Singleton;
 
@@ -50,5 +52,8 @@ public class TimeDimensionConfigurator extends AbstractGinModule {
     protected void configure() {
         bind(StartDateMultifield.class).in(Singleton.class);
         bind(EndDateMultifield.class).in(Singleton.class);
+        bind(TimePeriodFormPanel.class).in(Singleton.class);
+        bind(TimePeriodFormPanel.class).in(Singleton.class);
+        bind(IStrategyPanel.class).to(IStrategyPanel.StrategyPanel.class).in(Singleton.class);
     }
 }

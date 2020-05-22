@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.time;
 
-import com.extjs.gxt.ui.client.widget.layout.FormLayout;
+import com.google.gwt.core.client.GWT;
 import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
@@ -48,10 +48,9 @@ import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;
 
-import static java.lang.Boolean.TRUE;
-
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @author Vito Salvia <vito.salvia@gmail.com>
  * @email nazzareno.sileno@geosdi.org
  */
 public class LayerTimeFilterWidget extends GeoPlatformWindow implements IGPFilterWidgetHandler {
@@ -70,19 +69,24 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow implements IGPFilte
     }
 
     @Override
-    public void addComponent() {
+    protected void onShow() {
+        super.onShow();
+        super.removeAll();
         GPBeanTreeModel itemSelected = this.treePanel.getSelectionModel().getSelectedItem();
-        super.add(
-                ((RasterTreeNode) itemSelected).getExtent().getValue().contains("/P") ?
-                        new TimeDimensionPanel(LayerModuleInjector.MainInjector.getInstance().getTimeDimensionFormPanel()) :
-                        new TimeFilterPanel(this.treePanel));
-        WidgetPropertiesHandlerManager.fireEvent(new GPBeanTreeMoldeBindingEvent(itemSelected));
+        GWT.log("@@@@@@@@@@@@@@@@@@@@@@@@@" + ((RasterTreeNode) itemSelected).getExtent().getValue());
+        IStrategyPanel.StrategyPanel s = LayerModuleInjector.MainInjector.getInstance().getStrategyPanel();
+        super.add(s.getPanel(((RasterTreeNode) itemSelected).getExtent().getValue().contains("/P"), this.treePanel));
+    }
+
+    @Override
+    public void addComponent() {
+
     }
 
     @Override
     public void initSize() {
         super.setWidth(WIDGET_WIDTH);
-        super.setAutoHeight(TRUE);
+        super.setAutoHeight(Boolean.TRUE);
     }
 
     @Override

@@ -11,7 +11,7 @@ import java.util.Date;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class StartDateMultifield extends TimeDimensionDateMultifield {
+public class StartDateMultifield extends TimePeriodDateMultifield {
 
     public StartDateMultifield() {
         super();

@@ -18,11 +18,11 @@ import com.google.common.collect.Lists;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.client.LayerResources;
+import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
 import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleMessages;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
-import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
 import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.AbstractMementoOriginalProperties;
 import org.geosdi.geoplatform.gui.client.puregwt.decorator.event.TreeChangeLabelEvent;
@@ -431,7 +431,7 @@ public class TimeFilterPanel extends GeoPlatformContentPanel {
 
     private void loadDataToDisplay() {
         GPLayerTreeModel layerSelected = (GPLayerTreeModel) treePanel.getSelectionModel().getSelectedItem();
-        List<String> dimensionList = Lists.<String>newArrayList(((RasterTreeNode) this.treePanel.getSelectionModel().getSelectedItem()).getExtent().getValue().split(","));
+        List<String> dimensionList = Lists.newArrayList(LayerModuleInjector.MainInjector.getInstance().getStrategyPanel().getExtentValues(Boolean.FALSE).toString().split(","));
         dimensionSizeLabel.setHtml(LayerModuleMessages.INSTANCE.
                 LayerTimeFilterWidget_dimensionSizeHTMLMessage(dimensionList.size()));
         dimensionSizeLabel.setStyleAttribute("font-size", "1.3em");

@@ -181,6 +181,12 @@ public interface LayerModuleConstants extends Constants {
     @DefaultStringValue("Time Dimension")
     String LayerTimeFilterWidget_timeDimensioneTabHeadingText();
 
+    @DefaultStringValue("Range")
+    String LayerTimeFilterWidget_rangeLabelText();
+
+    @DefaultStringValue("Period")
+    String LayerTimeFilterWidget_periodLabelText();
+
     @DefaultStringValue("From&nbsp;")
     String LayerTimeFilterWidget_multidatesFromText();
 

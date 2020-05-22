@@ -21,27 +21,30 @@ import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleMessages;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
-import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
 import org.geosdi.geoplatform.gui.client.puregwt.binding.GPDateBindingHandler;
 import org.geosdi.geoplatform.gui.client.resources.LayerWidgetResourcesConfigurator;
 import org.geosdi.geoplatform.gui.client.widget.multifield.EndDateMultifield;
 import org.geosdi.geoplatform.gui.client.widget.multifield.StartDateMultifield;
+import org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.IStrategyPanel;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;
 
 import javax.inject.Inject;
-import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import static org.geosdi.geoplatform.gui.client.widget.time.LayerTimeFilterWidget.WIDGET_HEIGHT;
+import static org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.TypeValueEnum.*;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class TimeDimensionFormPanel extends FormPanel implements GPDateBindingHandler {
-    DateTimeFormat parseDateFormat = DateTimeFormat.getFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
+public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandler {
+
+    DateTimeFormat fmt = DateTimeFormat.getFormat("dd-MM-yyyy, HH:mm");
+
     private final LayoutContainer sliderContainer;
     private final StartDateMultifield startDateMultifield;
     private final EndDateMultifield endDateMultifield;
@@ -62,10 +65,14 @@ public class TimeDimensionFormPanel extends FormPanel implements GPDateBindingHa
     private int currentValue;
     private GPBeanTreeModel itemSelected;
     private List<String> store;
+    private LabelField labelRange;
+    private LabelField labelPeriod;
+    @Inject
+    private IStrategyPanel iStrategyPanel;
 
     @Inject
-    public TimeDimensionFormPanel(StartDateMultifield theStartDateMultifield, final EndDateMultifield theEndDateMultifield,
-                                  LayerWidgetResourcesConfigurator layerWidgetResourcesConfigurator) {
+    public TimePeriodFormPanel(StartDateMultifield theStartDateMultifield, final EndDateMultifield theEndDateMultifield,
+                               LayerWidgetResourcesConfigurator layerWidgetResourcesConfigurator) {
         this.startDateMultifield = theStartDateMultifield;
         this.endDateMultifield = theEndDateMultifield;
         layerWidgetResourcesConfigurator.configure();
@@ -78,8 +85,16 @@ public class TimeDimensionFormPanel extends FormPanel implements GPDateBindingHa
         super.setHeaderVisible(Boolean.FALSE);
         super.setFrame(Boolean.TRUE);
         super.setBorders(Boolean.FALSE);
-        super.setHeight(WIDGET_HEIGHT - 60);
+        super.setHeight(WIDGET_HEIGHT - 30);
         super.setAutoWidth(Boolean.TRUE);
+        this.labelRange = new LabelField();
+        this.labelPeriod = new LabelField();
+        this.labelRange.setFieldLabel(LayerModuleConstants.INSTANCE.LayerTimeFilterWidget_rangeLabelText());
+        this.labelPeriod.setFieldLabel(LayerModuleConstants.INSTANCE.LayerTimeFilterWidget_periodLabelText());
+        this.labelPeriod.setLabelSeparator(":");
+        this.labelRange.setLabelSeparator(":");
+        super.add(labelRange, new FlowData(5));
+        super.add(labelPeriod, new FlowData(5));
         super.add(this.startDateMultifield, new FlowData(5));
         this.endDateCheckBox = new CheckBox();
         this.endDateCheckBox.setValue(true);
@@ -95,6 +110,10 @@ public class TimeDimensionFormPanel extends FormPanel implements GPDateBindingHa
         container.add(this.endDateCheckBox);
         super.add(container, new FlowData(5));
         super.add(this.endDateMultifield, new FlowData(5));
+        this.labelCurrenteTime = new LabelField();
+        this.labelCurrenteTime.setFieldLabel(LayerModuleConstants.INSTANCE.LayerTimeFilterWidget_currentDateTooltipText());
+        this.labelCurrenteTime.setLabelSeparator(":");
+        super.add(this.labelCurrenteTime, new FlowData(5));
         this.buildTimeTimension();
     }
 
@@ -104,15 +123,38 @@ public class TimeDimensionFormPanel extends FormPanel implements GPDateBindingHa
 
         buttonsContainer.setSpacing(2);
         this.slider = new Slider() {
+
+//            @Override
+//            public void setMinValue(int minValue) {
+//                super.setMinValue(1);
+//            }
+
             @Override
             public void setValue(int value) {
-                super.setValue(value);
-                currentValue = value;
+                //TODO  && value < store.size()
+                if (value >= 0) {
+                    super.setValue(value);
+                    currentValue = value;
+                    GWT.log("@@@" + value);
+//                    labelCurrenteTime.setValue(store.get(currentValue ));
 //                GWT.log("@@@@@@@@@@@@@@@@@@@@@@"+isValid());
-                enableOnPlaying();
+                    enableOnPlaying();
+                }
             }
         };
+        this.slider.addListener(Events.Change, new Listener<BaseEvent>() {
+            @Override
+            public void handleEvent(BaseEvent be) {
+//                currentValue = slider.getValue();
+////                GWT.log(currentValue);
+//                labelCurrenteTime.setValue(store.get(currentValue -1 ));
+////                GWT.log("@@@@@@@@@@@@@@@@@@@@@@"+isValid());
+//                enableOnPlaying();
+            }
+        });
         this.slider.setIncrement(1);
+//        this.slider.setMinValue(1);
+        this.slider.setUseTip(Boolean.TRUE);
         this.playButton.setToolTip(ButtonsConstants.INSTANCE.playText());
         this.reversePlayButton.setToolTip(ButtonsConstants.INSTANCE.playReverseText());
         this.forwardPlayButton.setToolTip(ButtonsConstants.INSTANCE.nextText());
@@ -128,10 +170,7 @@ public class TimeDimensionFormPanel extends FormPanel implements GPDateBindingHa
         this.sliderContainer.add(this.slider, new ColumnData(.7));
         this.slider.setAutoWidth(Boolean.TRUE);
         super.add(this.sliderContainer);
-        this.labelCurrenteTime = new LabelField();
-        this.labelCurrenteTime.setFieldLabel(LayerModuleConstants.INSTANCE.LayerTimeFilterWidget_currentDateTooltipText());
-        this.labelCurrenteTime.setLabelSeparator(":");
-        super.add(this.labelCurrenteTime, new FlowData(5));
+
     }
 
     private void enableOnPlaying() {
@@ -187,7 +226,6 @@ public class TimeDimensionFormPanel extends FormPanel implements GPDateBindingHa
             public void run() {
                 if (currentValue < slider.getMaxValue()) {
                     slider.setValue(++currentValue);
-                    labelCurrenteTime.setValue(currentValue);
                 } else {
                     stopPlayer();
                 }
@@ -246,11 +284,13 @@ public class TimeDimensionFormPanel extends FormPanel implements GPDateBindingHa
     @Override
     public void bindTreeModel(GPBeanTreeModel gpTreePanel) {
         this.itemSelected = gpTreePanel;
-        this.store = Arrays.asList(((RasterTreeNode) gpTreePanel).getExtent().getValue().split(","));
-        this.endDateMultifield.bindDate(this.parseDateFormat.parse(this.store.get(this.store.size() - 1).replace("Z", "")));
-        this.startDateMultifield.bindDate(this.parseDateFormat.parse(this.store.get(0).replace("Z", "")));
-        GWT.log("@@@@@@@@@@@" + this.itemSelected);
-//        GWT.log("@@@@@@@@@@@@@@@" + ((RasterTreeNode) gpTreePanel));
+        labelRange.setValue(fmt.format((Date) this.iStrategyPanel.getExtentValues(Boolean.TRUE).get(DATE_FROM)).concat(" / ")
+                .concat(fmt.format((Date) this.iStrategyPanel.getExtentValues(Boolean.TRUE).get(DATE_TO))));
+        labelPeriod.setValue(this.iStrategyPanel.getExtentValues(Boolean.TRUE).get(PERIOD));
+
+    }
+
+    private void calculateStep() {
 
     }
 }

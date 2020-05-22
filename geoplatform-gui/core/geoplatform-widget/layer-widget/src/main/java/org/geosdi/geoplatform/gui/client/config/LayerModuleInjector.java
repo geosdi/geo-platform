@@ -44,7 +44,8 @@ import org.geosdi.geoplatform.gui.client.action.menu.ShareProjectMenuAction;
 import org.geosdi.geoplatform.gui.client.action.menu.project.LoadMenuProjects;
 import org.geosdi.geoplatform.gui.client.widget.LayerManagementWidget;
 import org.geosdi.geoplatform.gui.client.widget.LayerTreePanel;
-import org.geosdi.geoplatform.gui.client.widget.panel.TimeDimensionFormPanel;
+import org.geosdi.geoplatform.gui.client.widget.panel.TimePeriodFormPanel;
+import org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.IStrategyPanel;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -103,5 +104,10 @@ public interface LayerModuleInjector extends Ginjector {
     /**
      * @return {@link LoadMenuProjects}
      */
-    TimeDimensionFormPanel getTimeDimensionFormPanel();
+    TimePeriodFormPanel getTimeDimensionFormPanel();
+
+    /**
+     * @return {@link IStrategyPanel.StrategyPanel}
+     */
+    IStrategyPanel.StrategyPanel getStrategyPanel();
 }

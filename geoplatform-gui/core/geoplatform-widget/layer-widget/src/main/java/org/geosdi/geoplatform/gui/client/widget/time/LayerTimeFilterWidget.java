@@ -62,12 +62,8 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow implements IGPFilte
     //
     private GPTreePanel<GPBeanTreeModel> treePanel;
 
-    /**
-     * @param lazy
-     * @param treePanel
-     */
-    public LayerTimeFilterWidget(boolean lazy, GPTreePanel<GPBeanTreeModel> treePanel) {
-        super(lazy);
+    public LayerTimeFilterWidget(GPTreePanel<GPBeanTreeModel> treePanel) {
+        super(Boolean.TRUE);
         super.setResizable(Boolean.FALSE);
         this.treePanel = treePanel;
         WidgetPropertiesHandlerManager.addHandler(IGPFilterWidgetHandler.TYPE, this);

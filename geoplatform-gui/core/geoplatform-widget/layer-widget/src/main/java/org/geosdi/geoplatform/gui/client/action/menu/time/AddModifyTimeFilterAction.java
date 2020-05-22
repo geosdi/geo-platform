@@ -72,7 +72,7 @@ public class AddModifyTimeFilterAction extends MenuBaseAction implements TreeMen
     public AddModifyTimeFilterAction(GPTreePanel<GPBeanTreeModel> theTreePanel) {
         super("AddModifyCQLFilter", AbstractImagePrototype.create(LayerResources.ICONS.cqlFilter()));
         this.treePanel = theTreePanel;
-        this.timeFilterWidget = new LayerTimeFilterWidget(TRUE, theTreePanel);
+        this.timeFilterWidget = new LayerTimeFilterWidget(theTreePanel);
     }
 
     @Override

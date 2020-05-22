@@ -1,6 +1,7 @@
 package org.geosdi.geoplatform.gui.client.widget.time.panel.strategy;
 
 import com.google.common.collect.Maps;
+import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
@@ -15,23 +16,21 @@ import java.util.Map;
 public interface IStrategyPanel {
 
     /**
-     * @param value
      * @param treePanel
      * @return
      */
-    GeoPlatformContentPanel getPanel(Boolean value, GPTreePanel<GPBeanTreeModel> treePanel);
+    GeoPlatformContentPanel getPanel(GPTreePanel<GPBeanTreeModel> treePanel);
 
     /**
-     * @param value
      * @return
      */
-    Map<TypeValueEnum, Object> getExtentValues(Boolean value);
+    Map<TypeValueEnum, Object> getExtentValues();
 
-    /**
-     * @param value
-     * @return
-     */
-    ITypePanelStrategy getStrategy(Boolean value);
+//    /**
+//     * @param value
+//     * @return
+//     */
+//    ITypePanelStrategy getStrategy(Boolean value);
 
 
     interface ITypePanelStrategy {
@@ -68,6 +67,7 @@ public interface IStrategyPanel {
     class StrategyPanel implements IStrategyPanel {
 
         final Map<Boolean, ITypePanelStrategy> panelMap = Maps.newHashMap();
+        private Boolean currentStrategy;
 
         public StrategyPanel() {
             this.panelMap.put(Boolean.TRUE, new PeriodPanelStrategy());
@@ -75,28 +75,28 @@ public interface IStrategyPanel {
         }
 
         /**
-         * @param value
          * @param treePanel
          * @return
          */
         @Override
-        public GeoPlatformContentPanel getPanel(Boolean value, GPTreePanel<GPBeanTreeModel> treePanel) {
-            return this.panelMap.get(value).buildPanel(treePanel);
+        public GeoPlatformContentPanel getPanel(GPTreePanel<GPBeanTreeModel> treePanel) {
+            this.currentStrategy = ((RasterTreeNode) treePanel.getSelectionModel().getSelectedItem()).getExtent().getValue().contains("/P");
+            return this.panelMap.get(this.currentStrategy).buildPanel(treePanel);
         }
 
         @Override
-        public Map<TypeValueEnum, Object> getExtentValues(Boolean value) {
-            return this.panelMap.get(value).getValuesMap();
+        public Map<TypeValueEnum, Object> getExtentValues() {
+            return this.panelMap.get(this.currentStrategy).getValuesMap();
         }
 
-        /**
-         * @param value
-         * @return
-         */
-        @Override
-        public ITypePanelStrategy getStrategy(Boolean value) {
-            return this.panelMap.get(value);
-        }
+//        /**
+//         * @param value
+//         * @return
+//         */
+//        @Override
+//        public ITypePanelStrategy getStrategy(Boolean value) {
+//            return this.panelMap.get(this.currentStrategy);
+//        }
     }
 
 }

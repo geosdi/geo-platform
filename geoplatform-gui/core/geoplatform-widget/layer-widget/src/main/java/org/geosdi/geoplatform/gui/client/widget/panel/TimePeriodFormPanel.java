@@ -26,6 +26,7 @@ import org.geosdi.geoplatform.gui.client.resources.LayerWidgetResourcesConfigura
 import org.geosdi.geoplatform.gui.client.widget.multifield.EndDateMultifield;
 import org.geosdi.geoplatform.gui.client.widget.multifield.StartDateMultifield;
 import org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.IStrategyPanel;
+import org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.TypeValueEnum;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;
@@ -33,6 +34,7 @@ import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerMana
 import javax.inject.Inject;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import static org.geosdi.geoplatform.gui.client.widget.time.LayerTimeFilterWidget.WIDGET_HEIGHT;
 import static org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.TypeValueEnum.*;
@@ -115,6 +117,8 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
         this.labelCurrenteTime.setLabelSeparator(":");
         super.add(this.labelCurrenteTime, new FlowData(5));
         this.buildTimeTimension();
+        Button apply = new Button(ButtonsConstants.INSTANCE.applyText());
+        super.addButton(apply);
     }
 
     private void buildTimeTimension() {
@@ -260,8 +264,9 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
 
     private void initComponents() {
         this.backwardButton.disable();
-        this.forwardPlayButton.enable();
         this.playButton.toggle(Boolean.FALSE);
+        this.playButton.disable();
+        this.forwardPlayButton.disable();
         this.slider.disable();
         this.reversePlayButton.toggle(Boolean.FALSE);
         this.slider.setValue(0);
@@ -284,10 +289,10 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
     @Override
     public void bindTreeModel(GPBeanTreeModel gpTreePanel) {
         this.itemSelected = gpTreePanel;
-        labelRange.setValue(fmt.format((Date) this.iStrategyPanel.getExtentValues(Boolean.TRUE).get(DATE_FROM)).concat(" / ")
-                .concat(fmt.format((Date) this.iStrategyPanel.getExtentValues(Boolean.TRUE).get(DATE_TO))));
-        labelPeriod.setValue(this.iStrategyPanel.getExtentValues(Boolean.TRUE).get(PERIOD));
-
+        Map<TypeValueEnum, Object> m = this.iStrategyPanel.getExtentValues();
+        labelRange.setValue(fmt.format((Date) m.get(DATE_FROM)).concat(" / ")
+                .concat(fmt.format((Date) m.get(DATE_TO))));
+        labelPeriod.setValue(m.get(PERIOD));
     }
 
     private void calculateStep() {

@@ -15,37 +15,28 @@ import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.google.common.collect.Lists;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.client.LayerResources;
-import org.geosdi.geoplatform.gui.client.command.layer.basic.GetLayerDimensionRequest;
-import org.geosdi.geoplatform.gui.client.command.layer.basic.GetLayerDimensionResponse;
 import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleMessages;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
-import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
+import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
 import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.AbstractMementoOriginalProperties;
 import org.geosdi.geoplatform.gui.client.puregwt.decorator.event.TreeChangeLabelEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.filter.event.GPHideFilterWidgetEvent;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
-import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.time.DimensionData;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
-import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
-import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
-import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
 import org.geosdi.geoplatform.gui.impl.map.event.TimeFilterLayerMapEvent;
-import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.layers.decorator.event.GPTreeLabelEvent;
 import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;
 import org.geosdi.geoplatform.gui.shared.util.GPSharedUtils;
-import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 
 import java.util.List;
 
@@ -439,68 +430,34 @@ public class TimeFilterPanel extends GeoPlatformContentPanel {
     }
 
     private void loadDataToDisplay() {
-        final GetLayerDimensionRequest getLayerDimensionRequest = GWT.
-                <GetLayerDimensionRequest>create(GetLayerDimensionRequest.class);
-
-        final GPLayerTreeModel layerSelected = (GPLayerTreeModel) treePanel.getSelectionModel().getSelectedItem();
-        getLayerDimensionRequest.setLayerName(layerSelected.getName());
-
-        ClientCommandDispatcher.getInstance().execute(
-                new GPClientCommand<GetLayerDimensionResponse>() {
-                    private static final long serialVersionUID = 4372276287420606744L;
-
-                    {
-                        super.setCommandRequest(getLayerDimensionRequest);
-                    }
-
-                    @Override
-                    public void onCommandSuccess(GetLayerDimensionResponse response) {
-                        List<String> dimensionList = Lists.<String>newArrayList(response.getResult().split(","));
-                        dimensionSizeLabel.setHtml(LayerModuleMessages.INSTANCE.
-                                LayerTimeFilterWidget_dimensionSizeHTMLMessage(dimensionList.size()));
-                        dimensionSizeLabel.setStyleAttribute("font-size", "1.3em");
-                        dimensionSizeLabel.setStyleAttribute("text-align", "right");
-                        startStore.removeAll();
-                        endStore.removeAll();
-                        for (String dimension : GPSharedUtils.safeList(dimensionList)) {
-                            startStore.add(new DimensionData(dimension));
-                        }
-                        if (!dimensionList.isEmpty()) {
-                            slider.setMaxValue(dimensionList.size());
-                            slider.setMinValue(0);
-                            endFilterNumberField.setValue(0);
-                            if (layerSelected.getTimeFilter() != null) {
-                                String[] timeFilterSplitted = layerSelected.getTimeFilter().split("/");
-                                int startDimensionPosition = Integer.parseInt(timeFilterSplitted[0]);
-                                slider.setValue(startStore.getModels().size() - startDimensionPosition - 1);
-                                startFilterNumberField.setValue(startDimensionPosition);
-                                if (timeFilterSplitted.length > 1) {
-                                    int endDimensionPosition = Integer.parseInt(timeFilterSplitted[1]);
-                                    endFilterNumberField.setValue(endDimensionPosition);
-                                }
-                            } else {
-                                startFilterNumberField.setValue(dimensionList.size() - 1);
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onCommandFailure(Throwable exception) {
-                        if (exception.getCause() instanceof GPSessionTimeout) {
-                            GPHandlerManager.fireEvent(new GPLoginEvent(null));
-                        } else {
-                            GWT.log("ERROR: "+exception);
-                            GeoPlatformMessage.errorMessage(LayerModuleConstants.INSTANCE.
-                                            LayerTimeFilterWidget_timeFilterErrorTitleText(),
-                                    WindowsConstants.INSTANCE.errorMakingConnectionBodyText());
-                            LayoutManager.getInstance().getStatusMap().setStatus(
-                                    LayerModuleConstants.INSTANCE.LayerTimeFilterWidget_statusTimeFilterErrorLoadingText(),
-                                    SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
-                            System.out.println("Error Loading Time Filter: " + exception.toString()
-                                    + " data: " + exception.getMessage());
-                        }
-                    }
-                });
+        GPLayerTreeModel layerSelected = (GPLayerTreeModel) treePanel.getSelectionModel().getSelectedItem();
+        List<String> dimensionList = Lists.<String>newArrayList(((RasterTreeNode) this.treePanel.getSelectionModel().getSelectedItem()).getExtent().getValue().split(","));
+        dimensionSizeLabel.setHtml(LayerModuleMessages.INSTANCE.
+                LayerTimeFilterWidget_dimensionSizeHTMLMessage(dimensionList.size()));
+        dimensionSizeLabel.setStyleAttribute("font-size", "1.3em");
+        dimensionSizeLabel.setStyleAttribute("text-align", "right");
+        startStore.removeAll();
+        endStore.removeAll();
+        for (String dimension : GPSharedUtils.safeList(dimensionList)) {
+            startStore.add(new DimensionData(dimension));
+        }
+        if (!dimensionList.isEmpty()) {
+            slider.setMaxValue(dimensionList.size());
+            slider.setMinValue(0);
+            endFilterNumberField.setValue(0);
+            if (layerSelected.getTimeFilter() != null) {
+                String[] timeFilterSplitted = layerSelected.getTimeFilter().split("/");
+                int startDimensionPosition = Integer.parseInt(timeFilterSplitted[0]);
+                slider.setValue(startStore.getModels().size() - startDimensionPosition - 1);
+                startFilterNumberField.setValue(startDimensionPosition);
+                if (timeFilterSplitted.length > 1) {
+                    int endDimensionPosition = Integer.parseInt(timeFilterSplitted[1]);
+                    endFilterNumberField.setValue(endDimensionPosition);
+                }
+            } else {
+                startFilterNumberField.setValue(dimensionList.size() - 1);
+            }
+        }
     }
 
     private void playTimeFilter() {

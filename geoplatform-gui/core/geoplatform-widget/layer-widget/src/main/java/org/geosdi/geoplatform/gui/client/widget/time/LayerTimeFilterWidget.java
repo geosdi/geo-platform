@@ -73,7 +73,7 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow implements IGPFilte
     public void addComponent() {
         GPBeanTreeModel itemSelected = this.treePanel.getSelectionModel().getSelectedItem();
         super.add(
-                ((RasterTreeNode) itemSelected).getExtent().isTemporal() ?
+                ((RasterTreeNode) itemSelected).getExtent().getValue().contains("/P") ?
                         new TimeDimensionPanel(LayerModuleInjector.MainInjector.getInstance().getTimeDimensionFormPanel()) :
                         new TimeFilterPanel(this.treePanel));
         WidgetPropertiesHandlerManager.fireEvent(new GPBeanTreeMoldeBindingEvent(itemSelected));

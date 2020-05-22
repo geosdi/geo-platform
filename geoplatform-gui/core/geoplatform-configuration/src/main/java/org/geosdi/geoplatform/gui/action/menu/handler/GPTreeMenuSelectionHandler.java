@@ -32,53 +32,24 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.action.menu;
+package org.geosdi.geoplatform.gui.action.menu.handler;
 
-import com.extjs.gxt.ui.client.Registry;
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
-import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
-import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
+import com.extjs.gxt.ui.client.data.ModelData;
+import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent;
 
-import static java.lang.Boolean.FALSE;
+import java.util.List;
 
 /**
- * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email nazzareno.sileno@geosdi.org
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class MenuBaseSecureAction extends MenuBaseAction {
+public interface GPTreeMenuSelectionHandler<M extends ModelData> extends EventHandler {
 
-    private GPTrustedLevel trustedLevel;
-
-    /**
-     * @param theTrustedLevel
-     * @param theTitle
-     * @param theImage
-     */
-    public MenuBaseSecureAction(GPTrustedLevel theTrustedLevel, String theTitle, AbstractImagePrototype theImage) {
-        super(theTitle, theImage);
-        this.trustedLevel = theTrustedLevel;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        IGPAccountDetail accountDetail = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
-        // Application has neither an authority nor a trusted level
-        GPTrustedLevel accountTrustedLevel = accountDetail.getTrustedLevel();
-        return ((accountTrustedLevel == null) ? FALSE : accountTrustedLevel.ordinal() >= this.trustedLevel.ordinal());
-    }
+    GwtEvent.Type<GPTreeMenuSelectionHandler> TYPE = new GwtEvent.Type<GPTreeMenuSelectionHandler>();
 
     /**
-     * @param enabled the enabled to set
+     * @param selection
      */
-    @Override
-    public void setEnabled(boolean enabled) {
-        if (this.isEnabled()) {
-            super.setEnabled(enabled);
-        } else {
-            super.setEnabled(FALSE);
-        }
-    }
+    void manageTreeSelection(List<M> selection);
 }

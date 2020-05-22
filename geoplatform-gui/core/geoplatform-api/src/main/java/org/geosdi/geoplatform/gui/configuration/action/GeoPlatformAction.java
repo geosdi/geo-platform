@@ -40,19 +40,19 @@ import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.rpc.XsrfTokenServiceAsync;
-import java.util.logging.Logger;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableEvent;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableHandler;
 import org.geosdi.geoplatform.gui.configuration.action.event.HasActionEnableHandler;
 import org.geosdi.geoplatform.gui.service.gwt.xsrf.GPXsrfTokenService;
+
+import java.util.logging.Logger;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GeoPlatformAction<X extends ComponentEvent>
-        extends SelectionListener<X> implements HasActionEnableHandler {
+public abstract class GeoPlatformAction<X extends ComponentEvent> extends SelectionListener<X> implements HasActionEnableHandler {
     
     static {
         xsrf = GPXsrfTokenService.Util.getInstance();
@@ -95,10 +95,8 @@ public abstract class GeoPlatformAction<X extends ComponentEvent>
     }
 
     @Override
-    public HandlerRegistration addActionEnableHandler(
-            ActionEnableHandler actionHandler) {
-        return this.handlerManager.addHandler(ActionEnableEvent.TYPE,
-                actionHandler);
+    public HandlerRegistration addActionEnableHandler(ActionEnableHandler actionHandler) {
+        return this.handlerManager.addHandler(ActionEnableEvent.TYPE, actionHandler);
     }
 
     /**
@@ -109,5 +107,4 @@ public abstract class GeoPlatformAction<X extends ComponentEvent>
      */
     @Override
     public abstract void componentSelected(X e);
-
 }

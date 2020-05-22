@@ -37,50 +37,55 @@ package org.geosdi.geoplatform.gui.client.action.menu.time;
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
+import org.geosdi.geoplatform.gui.action.menu.tree.TreeMenuCompositeAction;
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.command.datasource.CheckDataSourceRequest;
 import org.geosdi.geoplatform.gui.client.command.datasource.CheckDataSourceResponse;
 import org.geosdi.geoplatform.gui.client.i18n.BasicWidgetModuleMessages;
-import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
+import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
 import org.geosdi.geoplatform.gui.client.widget.time.LayerTimeFilterWidget;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
 import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
+import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableEvent;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
+import org.geosdi.geoplatform.gui.puregwt.tree.GPTreeMenuActionHandlerManager;
+
+import java.util.List;
+import java.util.logging.Logger;
 
 import static java.lang.Boolean.TRUE;
 
 /**
- * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email nazzareno.sileno@geosdi.org
+ * @author Nazzareno Sileno <nazzareno.sileno@geosdi.org>
+ * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
  */
-public class AddModifyTimeFilterAction extends MenuBaseAction {
+public class AddModifyTimeFilterAction extends MenuBaseAction implements TreeMenuCompositeAction<GPBeanTreeModel> {
 
+    private static final Logger logger = Logger.getLogger("AddModifyTimeFilterAction");
+    //
     private GPTreePanel<GPBeanTreeModel> treePanel;
     private LayerTimeFilterWidget timeFilterWidget;
     private final CheckDataSourceRequest checkDataSourceRequest = GWT.<CheckDataSourceRequest>create(CheckDataSourceRequest.class);
 
     /**
-     * @param treePanel
+     * @param theTreePanel
      */
-    public AddModifyTimeFilterAction(GPTreePanel<GPBeanTreeModel> treePanel) {
+    public AddModifyTimeFilterAction(GPTreePanel<GPBeanTreeModel> theTreePanel) {
         super("AddModifyCQLFilter", AbstractImagePrototype.create(LayerResources.ICONS.cqlFilter()));
-        this.treePanel = treePanel;
-        this.timeFilterWidget = new LayerTimeFilterWidget(TRUE, treePanel);
+        this.treePanel = theTreePanel;
+        this.timeFilterWidget = new LayerTimeFilterWidget(TRUE, theTreePanel);
     }
 
     @Override
     public void componentSelected(MenuEvent ce) {
         final Menu parentMenu = ce.getMenu().getParentItem().getParentMenu();
         GPBeanTreeModel itemSelected = this.treePanel.getSelectionModel().getSelectedItem();
-        if (itemSelected instanceof FolderTreeNode) {
-            throw new IllegalArgumentException("The TIME Filter can't be applied to a folder");
-        }
-
         this.checkDataSourceRequest.setDatasource(((GPLayerTreeModel) itemSelected).getDataSource());
         ClientCommandDispatcher.getInstance().execute(new GPClientCommand<CheckDataSourceResponse>() {
             {
@@ -104,7 +109,30 @@ public class AddModifyTimeFilterAction extends MenuBaseAction {
                         .errorMessage(BasicWidgetModuleMessages.INSTANCE.errorDataSource(), exception.getMessage());
             }
         });
+    }
 
+    /**
+     * @return {@link HandlerRegistration}
+     */
+    @Override
+    public HandlerRegistration addTreeMenuSelectionHandler() {
+        return GPTreeMenuActionHandlerManager.addHandler(TYPE, this);
+    }
 
+    /**
+     * @param selection
+     */
+    @Override
+    public void manageTreeSelection(List<GPBeanTreeModel> selection) {
+        boolean selectionEnabled = ((selection != null) && (selection.size() == 1) ? this.manageTreeInternalSelection(selection.get(0)) : TRUE);
+        this.handlerManager.fireEvent(new ActionEnableEvent((this.isEnabled() ? selectionEnabled : this.isEnabled())));
+    }
+
+    /**
+     * @param theModel
+     * @return {@link Boolean}
+     */
+    boolean manageTreeInternalSelection(GPBeanTreeModel theModel) {
+        return (((theModel != null) && (theModel instanceof RasterTreeNode)) ? ((RasterTreeNode) theModel).isTemporalLayer() : TRUE);
     }
 }

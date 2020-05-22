@@ -35,8 +35,9 @@
  */
 package org.geosdi.geoplatform.gui.client.config.provider;
 
-import javax.inject.Provider;
 import org.geosdi.geoplatform.gui.client.widget.tree.properties.basic.menu.LayerTreeBasicMenu;
+
+import javax.inject.Provider;
 
 /**
  *
@@ -49,7 +50,6 @@ public class LayerTreeBasicMenuProvider implements Provider<LayerTreeBasicMenu> 
 
     @Override
     public LayerTreeBasicMenu get() {
-        return this.treeBasicMenu = (this.treeBasicMenu == null)
-                ? new LayerTreeBasicMenu() : treeBasicMenu;
+        return this.treeBasicMenu = (this.treeBasicMenu == null) ? new LayerTreeBasicMenu() : treeBasicMenu;
     }
 }

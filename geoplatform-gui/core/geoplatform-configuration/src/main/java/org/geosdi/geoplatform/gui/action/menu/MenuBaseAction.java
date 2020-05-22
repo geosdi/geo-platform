@@ -48,9 +48,13 @@ public abstract class MenuBaseAction extends MenuAction implements HasMenuAction
 
     private AbstractImagePrototype image;
 
-    public MenuBaseAction(String title, AbstractImagePrototype image) {
-        super(title);
-        this.image = image;
+    /**
+     * @param theTitle
+     * @param theImage
+     */
+    public MenuBaseAction(String theTitle, AbstractImagePrototype theImage) {
+        super(theTitle);
+        this.image = theImage;
     }
 
     /**

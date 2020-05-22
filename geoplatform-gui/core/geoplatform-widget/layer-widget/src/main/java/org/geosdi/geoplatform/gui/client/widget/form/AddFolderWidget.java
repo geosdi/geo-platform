@@ -1,37 +1,36 @@
 /**
- *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
- *
- *   Copyright (C) 2008-2019 geoSDI Group (CNR IMAA - Potenza - ITALY).
- *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
- *
- *   ====================================================================
- *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
- *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
+ * geo-platform
+ * Rich webgis framework
+ * http://geo-platform.org
+ * ====================================================================
+ * <p>
+ * Copyright (C) 2008-2020 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * <p>
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version. This program is distributed in the
+ * hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License
+ * for more details. You should have received a copy of the GNU General
+ * Public License along with this program. If not, see http://www.gnu.org/licenses/
+ * <p>
+ * ====================================================================
+ * <p>
+ * Linking this library statically or dynamically with other modules is
+ * making a combined work based on this library. Thus, the terms and
+ * conditions of the GNU General Public License cover the whole combination.
+ * <p>
+ * As a special exception, the copyright holders of this library give you permission
+ * to link this library with independent modules to produce an executable, regardless
+ * of the license terms of these independent modules, and to copy and distribute
+ * the resulting executable under terms of your choice, provided that you also meet,
+ * for each linked independent module, the terms and conditions of the license of
+ * that module. An independent module is a module which is not derived from or
+ * based on this library. If you modify this library, you may extend this exception
+ * to your version of the library, but you are not obligated to do so. If you do not
+ * wish to do so, delete this exception statement from your version.
  */
 package org.geosdi.geoplatform.gui.client.widget.form;
 
@@ -81,12 +80,10 @@ import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayersProgressBarEvent;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
-        implements ISave<MementoSaveAddedFolder> {
+public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode> implements ISave<MementoSaveAddedFolder> {
 
     private GPSecureStringTextField folderText;
     private Button save;
@@ -99,7 +96,6 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
 
     /**
      * @param theTree
-     *
      */
     public AddFolderWidget(TreePanel<GPBeanTreeModel> theTree) {
         super(theTree, true);
@@ -126,8 +122,7 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
             @Override
             public void componentKeyUp(ComponentEvent event) {
                 if (folderText.getValue() == null) {
-                    if ((event.getKeyCode() == KeyCodes.KEY_BACKSPACE)
-                            || (event.getKeyCode() == KeyCodes.KEY_DELETE)) {
+                    if ((event.getKeyCode() == KeyCodes.KEY_BACKSPACE) || (event.getKeyCode() == KeyCodes.KEY_DELETE)) {
                         reset();
                     }
                 } else {
@@ -141,9 +136,8 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
 
             @Override
             public void componentKeyPress(ComponentEvent event) {
-                if ((event.getKeyCode() == KeyCodes.KEY_ENTER)
-                        && (folderText.getValue() != null)
-                        && (folderText.getValue().length() > 0)) {
+                if ((event.getKeyCode() == KeyCodes.KEY_ENTER) && (folderText.getValue() != null) && (folderText
+                        .getValue().length() > 0)) {
                     execute();
                 }
             }
@@ -162,15 +156,14 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
         getFormPanel().setButtonAlign(HorizontalAlignment.RIGHT);
 
         save = new Button(ButtonsConstants.INSTANCE.createText(),
-                AbstractImagePrototype.create(LayerResources.ICONS.addFolder()),
-                new SelectionListener<ButtonEvent>() {
+                AbstractImagePrototype.create(LayerResources.ICONS.addFolder()), new SelectionListener<ButtonEvent>() {
 
-                    @Override
-                    public void componentSelected(ButtonEvent ce) {
-                        execute();
-                    }
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                execute();
+            }
 
-                });
+        });
 
         save.setEnabled(false);
 
@@ -194,8 +187,7 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
 
     @Override
     public void initSize() {
-        setHeadingHtml(
-                LayerModuleConstants.INSTANCE.AddFolderWidget_headingText());
+        setHeadingHtml(LayerModuleConstants.INSTANCE.AddFolderWidget_headingText());
         setSize(330, 170);
     }
 
@@ -210,7 +202,7 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
         this.saveStatus.setBusy(LayerModuleConstants.INSTANCE.
                 AddFolderWidget_statusAddingFolderText());
         this.parentDestination = this.getTree().getSelectionModel().getSelectedItem();
-//        assert (this.getTree().isExpanded(parentDestination)) : "AddFolderWidget on execute: the parent folder must be expanded before the add operation";
+        //        assert (this.getTree().isExpanded(parentDestination)) : "AddFolderWidget on execute: the parent folder must be expanded before the add operation";
         this.entity = new FolderTreeNode(this.folderText.getValue());
         this.entity.setLoaded(true);
         this.getTree().getStore().insert(parentDestination, this.entity, 0, true);
@@ -218,17 +210,16 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
         this.addVisitor.insertElement(this.entity, parentDestination, 0);
 
         MementoSaveAddedFolder mementoSaveAdd = new MementoSaveAddedFolder(this);
-        mementoSaveAdd.setAddedFolder(MementoSaveBuilder.buildSaveFolderMemento(
-                this.entity));
+        mementoSaveAdd.setAddedFolder(MementoSaveBuilder.buildSaveFolderMemento(this.entity));
         mementoSaveAdd.setDescendantMap(this.addVisitor.getFolderDescendantMap());
 
         IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
         mementoSave.add(mementoSaveAdd);
 
         clearComponents();
-        LayoutManager.getInstance().getStatusMap().setStatus(
-                LayerModuleConstants.INSTANCE.AddFolderWidget_statusAddedFolderSuccessText(),
-                EnumSearchStatus.STATUS_SEARCH.toString());
+        LayoutManager.getInstance().getStatusMap()
+                .setStatus(LayerModuleConstants.INSTANCE.AddFolderWidget_statusAddedFolderSuccessText(),
+                        EnumSearchStatus.STATUS_SEARCH.toString());
     }
 
     @Override
@@ -261,50 +252,42 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
 
         this.request.setMemento(memento);
 
-        GPClientCommandExecutor.executeCommand(
-                new GPClientCommand<SaveAddedFolderAndTreeModificationsResponse>() {
+        GPClientCommandExecutor.executeCommand(new GPClientCommand<SaveAddedFolderAndTreeModificationsResponse>() {
 
-                    private static final long serialVersionUID = -2132391639495165283L;
+            private static final long serialVersionUID = -2132391639495165283L;
 
-                    {
-                        super.setCommandRequest(request);
-                    }
+            {
+                super.setCommandRequest(request);
+            }
 
-                    @Override
-                    public void onCommandSuccess(
-                            SaveAddedFolderAndTreeModificationsResponse response) {
-                                IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
-                                mementoSave.remove(memento);
-                                LayoutManager.getInstance().getStatusMap().setStatus(
-                                        LayerModuleConstants.INSTANCE.AddFolderWidget_statusSaveFolderSuccessText(),
-                                        EnumSearchStatus.STATUS_SEARCH.toString());
-                                MementoFolder mementoAdded = memento.getAddedFolder();
-                                mementoAdded.getRefBaseElement().setId(
-                                        response.getResult());
-                                mementoAdded.getRefBaseElement().setLoaded(true);
-                                LayerHandlerManager.fireEvent(peekCacheEvent);
-                            }
+            @Override
+            public void onCommandSuccess(SaveAddedFolderAndTreeModificationsResponse response) {
+                IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
+                mementoSave.remove(memento);
+                LayoutManager.getInstance().getStatusMap()
+                        .setStatus(LayerModuleConstants.INSTANCE.AddFolderWidget_statusSaveFolderSuccessText(),
+                                EnumSearchStatus.STATUS_SEARCH.toString());
+                MementoFolder mementoAdded = memento.getAddedFolder();
+                mementoAdded.getRefBaseElement().setId(response.getResult());
+                mementoAdded.getRefBaseElement().setLoaded(true);
+                LayerHandlerManager.fireEvent(peekCacheEvent);
+            }
 
-                            @Override
-                            public void onCommandFailure(Throwable exception) {
-                                if (exception.getCause() instanceof GPSessionTimeout) {
-                                    GPHandlerManager.fireEvent(new GPLoginEvent(
-                                                    peekCacheEvent));
-                                } else {
-                                    LayerHandlerManager.fireEvent(
-                                            new DisplayLayersProgressBarEvent(
-                                                    false));
-                                    setStatus(
-                                            EnumSaveStatus.STATUS_SAVE_ERROR.getValue(),
-                                            SaveStatusConstants.INSTANCE.STATUS_MESSAGE_SAVE_ERROR().toString());
-                                    GeoPlatformMessage.errorMessage(
-                                            LayerModuleConstants.INSTANCE.
-                                            AddFolderWidget_saveFolderErrorTitleText(),
-                                            LayerModuleConstants.INSTANCE.AddFolderWidget_saveFolderErrorBodyText());
-                                }
-                            }
+            @Override
+            public void onCommandFailure(Throwable exception) {
+                if (exception.getCause() instanceof GPSessionTimeout) {
+                    GPHandlerManager.fireEvent(new GPLoginEvent(peekCacheEvent));
+                } else {
+                    LayerHandlerManager.fireEvent(new DisplayLayersProgressBarEvent(false));
+                    setStatus(EnumSaveStatus.STATUS_SAVE_ERROR.getValue(),
+                            SaveStatusConstants.INSTANCE.STATUS_MESSAGE_SAVE_ERROR().toString());
+                    GeoPlatformMessage.errorMessage(LayerModuleConstants.INSTANCE.
+                                    AddFolderWidget_saveFolderErrorTitleText(),
+                            LayerModuleConstants.INSTANCE.AddFolderWidget_saveFolderErrorBodyText());
+                }
+            }
 
-                });
+        });
     }
 
 }

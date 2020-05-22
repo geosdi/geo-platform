@@ -36,29 +36,37 @@
 package org.geosdi.geoplatform.gui.client.action.menu.time;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
+import org.geosdi.geoplatform.gui.action.menu.tree.TreeMenuCompositeAction;
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
+import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
 import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.AbstractMementoOriginalProperties;
 import org.geosdi.geoplatform.gui.client.puregwt.decorator.event.TreeChangeLabelEvent;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
+import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableEvent;
 import org.geosdi.geoplatform.gui.impl.map.event.TimeFilterLayerMapEvent;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.layers.decorator.event.GPTreeLabelEvent;
 import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.tree.GPTreeMenuActionHandlerManager;
 
+import java.util.List;
+
+import static java.lang.Boolean.TRUE;
 import static org.geosdi.geoplatform.gui.client.widget.time.LayerTimeFilterWidget.LAYER_TIME_DELIMITER;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class RemoveTimeFilterAction extends MenuBaseAction {
+public class RemoveTimeFilterAction extends MenuBaseAction implements TreeMenuCompositeAction<GPBeanTreeModel> {
 
     private GPTreePanel<GPBeanTreeModel> treePanel;
     private final TimeFilterLayerMapEvent timeFilterLayerMapEvent = new TimeFilterLayerMapEvent();
@@ -94,5 +102,28 @@ public class RemoveTimeFilterAction extends MenuBaseAction {
         timeFilterLayerMapEvent.setLayerBean(layerSelected);
         GPHandlerManager.fireEvent(timeFilterLayerMapEvent);
         treePanel.refresh(layerSelected);
+    }
+
+    @Override
+    public HandlerRegistration addTreeMenuSelectionHandler() {
+        return GPTreeMenuActionHandlerManager.addHandler(TYPE, this);
+    }
+
+    /**
+     * @param selection
+     */
+    @Override
+    public void manageTreeSelection(List<GPBeanTreeModel> selection) {
+        boolean selectionEnabled = ((selection != null) && (selection.size() == 1) ? this.manageTreeInternalSelection(selection.get(0)) : TRUE);
+        this.handlerManager.fireEvent(new ActionEnableEvent((this.isEnabled() ? selectionEnabled : this.isEnabled())));
+    }
+
+    /**
+     * @param theModel
+     * @return {@link Boolean}
+     */
+    boolean manageTreeInternalSelection(GPBeanTreeModel theModel) {
+        return (((theModel != null) && (theModel instanceof RasterTreeNode)) ? ((RasterTreeNode) theModel).isTemporalLayer() &&
+                ((RasterTreeNode) theModel).getTimeFilter() != null : TRUE);
     }
 }

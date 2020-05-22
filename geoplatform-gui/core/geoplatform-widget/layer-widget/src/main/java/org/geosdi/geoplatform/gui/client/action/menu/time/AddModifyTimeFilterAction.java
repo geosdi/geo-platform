@@ -41,7 +41,6 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.action.menu.tree.TreeMenuCompositeAction;
 import org.geosdi.geoplatform.gui.client.LayerResources;
-import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
 import org.geosdi.geoplatform.gui.client.widget.time.LayerTimeFilterWidget;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
@@ -77,16 +76,9 @@ public class AddModifyTimeFilterAction extends MenuBaseAction implements TreeMen
 
     @Override
     public void componentSelected(MenuEvent ce) {
-
-
         GPBeanTreeModel itemSelected = this.treePanel.getSelectionModel().getSelectedItem();
-        if (itemSelected instanceof FolderTreeNode) {
-            throw new IllegalArgumentException(
-                    "The TIME Filter can't be applied to a folder");
-        }
         Menu parentMenu = ce.getMenu().getParentItem().getParentMenu();
         timeFilterWidget.setPagePosition(parentMenu.getPosition(true).x, parentMenu.getPosition(true).y);
-
         timeFilterWidget.show();
     }
 

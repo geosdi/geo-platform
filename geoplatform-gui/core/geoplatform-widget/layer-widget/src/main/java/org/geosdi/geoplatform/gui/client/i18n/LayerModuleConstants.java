@@ -187,6 +187,9 @@ public interface LayerModuleConstants extends Constants {
     @DefaultStringValue("Period")
     String LayerTimeFilterWidget_periodLabelText();
 
+    @DefaultStringValue("Dates Availables")
+    String LayerTimeFilterWidget_datesAvailablesLabelText();
+
     @DefaultStringValue("From&nbsp;")
     String LayerTimeFilterWidget_multidatesFromText();
 

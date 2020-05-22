@@ -431,7 +431,7 @@ public class TimeFilterPanel extends GeoPlatformContentPanel {
 
     private void loadDataToDisplay() {
         GPLayerTreeModel layerSelected = (GPLayerTreeModel) treePanel.getSelectionModel().getSelectedItem();
-        List<String> dimensionList = Lists.newArrayList(LayerModuleInjector.MainInjector.getInstance().getStrategyPanel().getExtentValues(Boolean.FALSE).toString().split(","));
+        List<String> dimensionList = Lists.newArrayList(LayerModuleInjector.MainInjector.getInstance().getStrategyPanel().getExtentValues().toString().split(","));
         dimensionSizeLabel.setHtml(LayerModuleMessages.INSTANCE.
                 LayerTimeFilterWidget_dimensionSizeHTMLMessage(dimensionList.size()));
         dimensionSizeLabel.setStyleAttribute("font-size", "1.3em");

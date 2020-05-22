@@ -36,24 +36,17 @@ package org.geosdi.geoplatform.gui.client.action.menu.time;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.action.menu.tree.TreeMenuCompositeAction;
 import org.geosdi.geoplatform.gui.client.LayerResources;
-import org.geosdi.geoplatform.gui.client.command.datasource.CheckDataSourceRequest;
-import org.geosdi.geoplatform.gui.client.command.datasource.CheckDataSourceResponse;
-import org.geosdi.geoplatform.gui.client.i18n.BasicWidgetModuleMessages;
+import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
 import org.geosdi.geoplatform.gui.client.widget.time.LayerTimeFilterWidget;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
-import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
-import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableEvent;
-import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
-import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.tree.GPTreeMenuActionHandlerManager;
 
 import java.util.List;
@@ -64,6 +57,7 @@ import static java.lang.Boolean.TRUE;
 /**
  * @author Nazzareno Sileno <nazzareno.sileno@geosdi.org>
  * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
+ * @author Vito Salvia <vito.salvia@gmail.com>
  */
 public class AddModifyTimeFilterAction extends MenuBaseAction implements TreeMenuCompositeAction<GPBeanTreeModel> {
 
@@ -71,7 +65,6 @@ public class AddModifyTimeFilterAction extends MenuBaseAction implements TreeMen
     //
     private GPTreePanel<GPBeanTreeModel> treePanel;
     private LayerTimeFilterWidget timeFilterWidget;
-    private final CheckDataSourceRequest checkDataSourceRequest = GWT.<CheckDataSourceRequest>create(CheckDataSourceRequest.class);
 
     /**
      * @param theTreePanel
@@ -84,31 +77,17 @@ public class AddModifyTimeFilterAction extends MenuBaseAction implements TreeMen
 
     @Override
     public void componentSelected(MenuEvent ce) {
-        final Menu parentMenu = ce.getMenu().getParentItem().getParentMenu();
+
+
         GPBeanTreeModel itemSelected = this.treePanel.getSelectionModel().getSelectedItem();
-        this.checkDataSourceRequest.setDatasource(((GPLayerTreeModel) itemSelected).getDataSource());
-        ClientCommandDispatcher.getInstance().execute(new GPClientCommand<CheckDataSourceResponse>() {
-            {
-                super.setCommandRequest(checkDataSourceRequest);
-            }
+        if (itemSelected instanceof FolderTreeNode) {
+            throw new IllegalArgumentException(
+                    "The TIME Filter can't be applied to a folder");
+        }
+        Menu parentMenu = ce.getMenu().getParentItem().getParentMenu();
+        timeFilterWidget.setPagePosition(parentMenu.getPosition(true).x, parentMenu.getPosition(true).y);
 
-            @Override
-            public void onCommandSuccess(final CheckDataSourceResponse response) {
-                if (response.getResult()) {
-                    timeFilterWidget.setPagePosition(parentMenu.getPosition(true).x, parentMenu.getPosition(true).y);
-                    timeFilterWidget.show();
-                } else {
-                    GeoPlatformMessage.errorMessage(BasicWidgetModuleMessages.INSTANCE.errorDataSource(),
-                            BasicWidgetModuleMessages.INSTANCE.datasourceNotMatches());
-                }
-            }
-
-            @Override
-            public void onCommandFailure(Throwable exception) {
-                GeoPlatformMessage
-                        .errorMessage(BasicWidgetModuleMessages.INSTANCE.errorDataSource(), exception.getMessage());
-            }
-        });
+        timeFilterWidget.show();
     }
 
     /**

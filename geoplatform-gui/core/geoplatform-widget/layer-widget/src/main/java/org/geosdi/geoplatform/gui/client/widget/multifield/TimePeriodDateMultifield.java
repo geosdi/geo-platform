@@ -65,7 +65,7 @@ public abstract class TimePeriodDateMultifield extends MultiField {
         super.setOrientation(Style.Orientation.HORIZONTAL);
         super.add(this.dateField);
         super.add(this.hourField);
-        super.add(minuteField);
+        super.add(this.minuteField);
         super.addStyleName("dateMultifield");
         super.setValidator(addValidator());
     }

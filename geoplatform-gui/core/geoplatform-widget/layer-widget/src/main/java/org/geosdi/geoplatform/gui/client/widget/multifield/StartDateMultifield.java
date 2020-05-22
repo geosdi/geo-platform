@@ -44,7 +44,7 @@ public class StartDateMultifield extends TimePeriodDateMultifield {
 
     @Override
     protected String fieldLabel() {
-        return LayerModuleConstants.INSTANCE.LayerTimeFilterWidget_multidatesFromText();
+        return LayerModuleConstants.INSTANCE.LayerTimeFilterWidget_multidatesToText();
     }
 
     @Override

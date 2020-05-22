@@ -5,13 +5,12 @@ import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.Slider;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.button.ToggleButton;
-import com.extjs.gxt.ui.client.widget.form.CheckBox;
-import com.extjs.gxt.ui.client.widget.form.FormPanel;
-import com.extjs.gxt.ui.client.widget.form.LabelField;
+import com.extjs.gxt.ui.client.widget.form.*;
 import com.extjs.gxt.ui.client.widget.layout.ColumnData;
 import com.extjs.gxt.ui.client.widget.layout.ColumnLayout;
 import com.extjs.gxt.ui.client.widget.layout.FlowData;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
+import com.google.common.collect.Lists;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.Timer;
@@ -66,11 +65,13 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
     private Timer animationTimer;
     private int currentValue;
     private GPBeanTreeModel itemSelected;
-    private List<String> store;
+    private List<String> store = Lists.newArrayList();
     private LabelField labelRange;
     private LabelField labelPeriod;
     @Inject
     private IStrategyPanel iStrategyPanel;
+    private SimpleComboBox<String> startRange;
+    private SimpleComboBox<String> endRange;
 
     @Inject
     public TimePeriodFormPanel(StartDateMultifield theStartDateMultifield, final EndDateMultifield theEndDateMultifield,
@@ -87,7 +88,7 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
         super.setHeaderVisible(Boolean.FALSE);
         super.setFrame(Boolean.TRUE);
         super.setBorders(Boolean.FALSE);
-        super.setHeight(WIDGET_HEIGHT - 30);
+        super.setHeight(WIDGET_HEIGHT);
         super.setAutoWidth(Boolean.TRUE);
         this.labelRange = new LabelField();
         this.labelPeriod = new LabelField();
@@ -108,10 +109,13 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
                 endDateMultifield.clearInvalid();
             }
         });
+
+
         LayoutContainer container = new LayoutContainer();
         container.add(this.endDateCheckBox);
         super.add(container, new FlowData(5));
         super.add(this.endDateMultifield, new FlowData(5));
+        buildDatesAvailables();
         this.labelCurrenteTime = new LabelField();
         this.labelCurrenteTime.setFieldLabel(LayerModuleConstants.INSTANCE.LayerTimeFilterWidget_currentDateTooltipText());
         this.labelCurrenteTime.setLabelSeparator(":");
@@ -119,6 +123,19 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
         this.buildTimeTimension();
         Button apply = new Button(ButtonsConstants.INSTANCE.applyText());
         super.addButton(apply);
+    }
+
+    private void buildDatesAvailables() {
+        MultiField datesAvailables = new MultiField();
+        datesAvailables.setSpacing(20);
+        datesAvailables.setFieldLabel(LayerModuleConstants.INSTANCE.LayerTimeFilterWidget_datesAvailablesLabelText());
+        this.startRange = new SimpleComboBox<>();
+        this.startRange.setWidth("100px");
+        this.endRange = new SimpleComboBox<>();
+        this.endRange.setWidth("100px");
+        datesAvailables.add(this.startRange);
+        datesAvailables.add(this.endRange);
+        super.add(datesAvailables, new FlowData(5));
     }
 
     private void buildTimeTimension() {
@@ -136,7 +153,7 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
             @Override
             public void setValue(int value) {
                 //TODO  && value < store.size()
-                if (value >= 0) {
+                if (value >= 0 && !store.isEmpty()) {
                     super.setValue(value);
                     currentValue = value;
                     GWT.log("@@@" + value);
@@ -146,18 +163,7 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
                 }
             }
         };
-        this.slider.addListener(Events.Change, new Listener<BaseEvent>() {
-            @Override
-            public void handleEvent(BaseEvent be) {
-//                currentValue = slider.getValue();
-////                GWT.log(currentValue);
-//                labelCurrenteTime.setValue(store.get(currentValue -1 ));
-////                GWT.log("@@@@@@@@@@@@@@@@@@@@@@"+isValid());
-//                enableOnPlaying();
-            }
-        });
         this.slider.setIncrement(1);
-//        this.slider.setMinValue(1);
         this.slider.setUseTip(Boolean.TRUE);
         this.playButton.setToolTip(ButtonsConstants.INSTANCE.playText());
         this.reversePlayButton.setToolTip(ButtonsConstants.INSTANCE.playReverseText());
@@ -264,11 +270,12 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
 
     private void initComponents() {
         this.backwardButton.disable();
-        this.playButton.toggle(Boolean.FALSE);
-        this.playButton.disable();
         this.forwardPlayButton.disable();
-        this.slider.disable();
+        this.playButton.toggle(Boolean.FALSE);
         this.reversePlayButton.toggle(Boolean.FALSE);
+        this.playButton.disable();
+        this.reversePlayButton.disable();
+        this.slider.disable();
         this.slider.setValue(0);
         this.endDateCheckBox.setValue(true);
         this.endDateMultifield.setVisible(Boolean.TRUE);
@@ -290,9 +297,11 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
     public void bindTreeModel(GPBeanTreeModel gpTreePanel) {
         this.itemSelected = gpTreePanel;
         Map<TypeValueEnum, Object> m = this.iStrategyPanel.getExtentValues();
-        labelRange.setValue(fmt.format((Date) m.get(DATE_FROM)).concat(" / ")
+        this.labelRange.setValue(fmt.format((Date) m.get(DATE_FROM)).concat(" / ")
                 .concat(fmt.format((Date) m.get(DATE_TO))));
-        labelPeriod.setValue(m.get(PERIOD));
+        this.labelPeriod.setValue(m.get(PERIOD));
+        this.endDateMultifield.bindDate((Date) m.get(DATE_TO));
+        this.startDateMultifield.bindDate((Date) m.get(DATE_FROM));
     }
 
     private void calculateStep() {

@@ -76,7 +76,6 @@ public class AddModifyTimeFilterAction extends MenuBaseAction implements TreeMen
 
     @Override
     public void componentSelected(MenuEvent ce) {
-        GPBeanTreeModel itemSelected = this.treePanel.getSelectionModel().getSelectedItem();
         Menu parentMenu = ce.getMenu().getParentItem().getParentMenu();
         timeFilterWidget.setPagePosition(parentMenu.getPosition(true).x, parentMenu.getPosition(true).y);
         timeFilterWidget.show();

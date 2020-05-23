@@ -70,7 +70,7 @@ public interface IStrategyPanel {
         private Boolean currentStrategy;
 
         public StrategyPanel() {
-            this.panelMap.put(Boolean.TRUE, new PeriodPanelStrategy());
+            this.panelMap.put(Boolean.TRUE, new IPeriodPanelStrategy.PeriodPanelStrategy());
             this.panelMap.put(Boolean.FALSE, new FilterPanelStrategy());
         }
 

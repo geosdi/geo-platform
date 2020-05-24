@@ -38,6 +38,8 @@ import com.google.gwt.inject.client.AbstractGinModule;
 import org.geosdi.geoplatform.gui.client.widget.multifield.EndDateMultifield;
 import org.geosdi.geoplatform.gui.client.widget.multifield.StartDateMultifield;
 import org.geosdi.geoplatform.gui.client.widget.panel.TimePeriodFormPanel;
+import org.geosdi.geoplatform.gui.client.widget.time.panel.mediator.IParseMediator;
+import org.geosdi.geoplatform.gui.client.widget.time.panel.mediator.colleague.IParseColleague;
 import org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.IStrategyPanel;
 
 import javax.inject.Singleton;
@@ -55,5 +57,13 @@ public class TimeDimensionConfigurator extends AbstractGinModule {
         bind(TimePeriodFormPanel.class).in(Singleton.class);
         bind(TimePeriodFormPanel.class).in(Singleton.class);
         bind(IStrategyPanel.class).to(IStrategyPanel.StrategyPanel.class).in(Singleton.class);
+        bind(IParseColleague.YearColleague.class).asEagerSingleton();
+        bind(IParseColleague.MonthColleague.class).asEagerSingleton();
+        bind(IParseColleague.WeekColleague.class).asEagerSingleton();
+        bind(IParseColleague.DayColleague.class).asEagerSingleton();
+        bind(IParseColleague.HourColleague.class).asEagerSingleton();
+        bind(IParseColleague.MinuteColleague.class).asEagerSingleton();
+        bind(IParseColleague.SecondColleague.class).asEagerSingleton();
+        bind(IParseMediator.class).to(IParseMediator.ParseMediator.class).in(Singleton.class);
     }
 }

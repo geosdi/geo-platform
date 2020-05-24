@@ -33,40 +33,15 @@ public interface IParseColleague {
             Long p = 0l;
 
             if (period.contains(getKey().getTimeLabel())) {
-                p += Integer.parseInt(period.substring(getStartIndex(), period.indexOf(getKey().getTimeLabel()))) * getKey().getValue();
-                internalExecute(period);
+                p += Integer.parseInt(period.substring(0, period.indexOf(getKey().getTimeLabel()))) * getKey().getValue();
+                this.mediator.setPeriodValue(period.substring(period.indexOf(getKey().getTimeLabel()) + 1));
             }
             return p;
         }
 
-        protected void internalExecute(String period) {
-            this.mediator.setPeriodValue(period.substring(period.indexOf(getKey().getTimeLabel()) + 1));
-        }
-
-        protected int getStartIndex() {
-            return 0;
-        }
 
     }
 
-    abstract class AbstractTimeColleague extends AbstractColleague {
-
-
-        public AbstractTimeColleague(IParseMediator parseMediator) {
-            super(parseMediator);
-        }
-
-
-        protected void internalExecute(String period) {
-            //T1H1M1S
-            this.mediator.setPeriodValue("T" + period.substring(period.indexOf(getKey().getTimeLabel()) + 1));
-        }
-
-        protected int getStartIndex() {
-            return 1;
-        }
-
-    }
 
     class YearColleague extends AbstractColleague {
 
@@ -102,11 +77,8 @@ public interface IParseColleague {
 
         @Override
         public Long execute(String period) {
-            if (!period.contains("T")) {
+            if (!this.mediator.isInitTime())
                 return super.execute(period);
-            } else if (period.contains("T") && period.indexOf("T") > period.indexOf("M")) {
-                return super.execute(period);
-            }
             return 0l;
         }
     }
@@ -145,7 +117,7 @@ public interface IParseColleague {
 
     }
 
-    class HourColleague extends AbstractTimeColleague {
+    class HourColleague extends AbstractColleague {
 
 
         @Inject
@@ -164,7 +136,7 @@ public interface IParseColleague {
 
     }
 
-    class MinuteColleague extends AbstractTimeColleague {
+    class MinuteColleague extends AbstractColleague {
 
         @Inject
         public MinuteColleague(IParseMediator parseMediator) {
@@ -181,16 +153,15 @@ public interface IParseColleague {
 
         @Override
         public Long execute(String period) {
-            if (period.contains("T") && period.indexOf("T") < period.lastIndexOf("M")) {
+            if (this.mediator.isInitTime())
                 return super.execute(period);
-            }
             return 0l;
         }
 
 
     }
 
-    class SecondColleague extends AbstractTimeColleague {
+    class SecondColleague extends AbstractColleague {
 
         @Inject
         public SecondColleague(IParseMediator parseMediator) {

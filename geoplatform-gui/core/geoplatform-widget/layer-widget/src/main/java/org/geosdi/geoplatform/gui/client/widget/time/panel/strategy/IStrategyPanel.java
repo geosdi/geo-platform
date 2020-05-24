@@ -3,9 +3,11 @@ package org.geosdi.geoplatform.gui.client.widget.time.panel.strategy;
 import com.google.common.collect.Maps;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
+import org.geosdi.geoplatform.gui.client.widget.time.panel.mediator.IParseMediator;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
+import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.util.Map;
 
@@ -26,11 +28,10 @@ public interface IStrategyPanel {
      */
     Map<TypeValueEnum, Object> getExtentValues();
 
-//    /**
-//     * @param value
-//     * @return
-//     */
-//    ITypePanelStrategy getStrategy(Boolean value);
+    /**
+     * @return
+     */
+    ITypePanelStrategy getStrategy();
 
 
     interface ITypePanelStrategy {
@@ -69,8 +70,9 @@ public interface IStrategyPanel {
         final Map<Boolean, ITypePanelStrategy> panelMap = Maps.newHashMap();
         private Boolean currentStrategy;
 
-        public StrategyPanel() {
-            this.panelMap.put(Boolean.TRUE, new IPeriodPanelStrategy.PeriodPanelStrategy());
+        @Inject
+        public StrategyPanel(IParseMediator.ParseMediator parseMediator) {
+            this.panelMap.put(Boolean.TRUE, new IPeriodPanelStrategy.PeriodPanelStrategy(parseMediator));
             this.panelMap.put(Boolean.FALSE, new FilterPanelStrategy());
         }
 
@@ -89,14 +91,13 @@ public interface IStrategyPanel {
             return this.panelMap.get(this.currentStrategy).getValuesMap();
         }
 
-//        /**
-//         * @param value
-//         * @return
-//         */
-//        @Override
-//        public ITypePanelStrategy getStrategy(Boolean value) {
-//            return this.panelMap.get(this.currentStrategy);
-//        }
+        /**
+         * @return
+         */
+        @Override
+        public ITypePanelStrategy getStrategy() {
+            return this.panelMap.get(this.currentStrategy);
+        }
     }
 
 }

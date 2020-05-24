@@ -24,12 +24,26 @@ public interface IParseMediator {
      */
     void setPeriodValue(String periodValue);
 
+    /**
+     * @return {@link Boolean}
+     */
+    boolean isInitTime();
+
     @Singleton
     class ParseMediator implements IParseMediator {
 
 
         private Map<IParseColleagueKey, IParseColleague> colleagueMap = Maps.newLinkedHashMap();
         private String periodValue;
+
+        private boolean initTime;
+
+        /**
+         * @return {@link Boolean}
+         */
+        public boolean isInitTime() {
+            return initTime;
+        }
 
         @Override
         public void registerColleague(IParseColleague colleague) {
@@ -43,7 +57,12 @@ public interface IParseMediator {
             Long period = 0l;
             for (IParseColleague p : this.colleagueMap.values()) {
                 period += p.execute(this.periodValue);
+                if (this.periodValue.charAt(0) == 'T') {
+                    this.initTime = Boolean.TRUE;
+                    this.periodValue = this.periodValue.replace("T", "");
+                }
             }
+
             return period;
         }
 

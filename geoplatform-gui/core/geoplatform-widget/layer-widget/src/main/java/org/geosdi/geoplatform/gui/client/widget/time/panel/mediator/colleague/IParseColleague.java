@@ -20,7 +20,7 @@ public interface IParseColleague {
 
     abstract class AbstractColleague implements IParseColleague {
 
-        private IParseMediator mediator;
+        protected IParseMediator mediator;
 
         public AbstractColleague(IParseMediator parseMediator) {
             parseMediator.registerColleague(this);
@@ -31,15 +31,39 @@ public interface IParseColleague {
         public Long execute(String period) {
             //3Y1M1W1DT1H1M1S
             Long p = 0l;
+
             if (period.contains(getKey().getTimeLabel())) {
                 p += Integer.parseInt(period.substring(getStartIndex(), period.indexOf(getKey().getTimeLabel()))) * getKey().getValue();
-                this.mediator.setPeriodValue(period.substring(period.indexOf(getKey().getTimeLabel()) + getStartIndex() + 1));
+                internalExecute(period);
             }
             return p;
         }
 
+        protected void internalExecute(String period) {
+            this.mediator.setPeriodValue(period.substring(period.indexOf(getKey().getTimeLabel()) + 1));
+        }
+
         protected int getStartIndex() {
             return 0;
+        }
+
+    }
+
+    abstract class AbstractTimeColleague extends AbstractColleague {
+
+
+        public AbstractTimeColleague(IParseMediator parseMediator) {
+            super(parseMediator);
+        }
+
+
+        protected void internalExecute(String period) {
+            //T1H1M1S
+            this.mediator.setPeriodValue("T" + period.substring(period.indexOf(getKey().getTimeLabel()) + 1));
+        }
+
+        protected int getStartIndex() {
+            return 1;
         }
 
     }
@@ -121,7 +145,7 @@ public interface IParseColleague {
 
     }
 
-    class HourColleague extends AbstractColleague {
+    class HourColleague extends AbstractTimeColleague {
 
 
         @Inject
@@ -137,13 +161,10 @@ public interface IParseColleague {
             return IParseColleagueKey.HOUR;
         }
 
-        protected int getStartIndex() {
-            return 1;
-        }
 
     }
 
-    class MinuteColleague extends AbstractColleague {
+    class MinuteColleague extends AbstractTimeColleague {
 
         @Inject
         public MinuteColleague(IParseMediator parseMediator) {
@@ -166,13 +187,10 @@ public interface IParseColleague {
             return 0l;
         }
 
-        protected int getStartIndex() {
-            return 1;
-        }
 
     }
 
-    class SecondColleague extends AbstractColleague {
+    class SecondColleague extends AbstractTimeColleague {
 
         @Inject
         public SecondColleague(IParseMediator parseMediator) {
@@ -187,9 +205,6 @@ public interface IParseColleague {
             return IParseColleagueKey.SECOND;
         }
 
-        protected int getStartIndex() {
-            return 1;
-        }
 
     }
 

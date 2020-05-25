@@ -6,6 +6,10 @@ import org.geosdi.geoplatform.gui.client.widget.time.panel.mediator.colleague.IP
 import javax.inject.Singleton;
 import java.util.Map;
 
+/**
+ * @author Vito Salvia- CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
+ */
 public interface IParseMediator {
 
     /**
@@ -56,11 +60,11 @@ public interface IParseMediator {
             this.periodValue = s.replace("P", "");
             Long period = 0l;
             for (IParseColleague p : this.colleagueMap.values()) {
-                period += p.execute(this.periodValue);
                 if (this.periodValue.charAt(0) == 'T') {
                     this.initTime = Boolean.TRUE;
                     this.periodValue = this.periodValue.replace("T", "");
                 }
+                period += p.execute(this.periodValue);
             }
 
             return period;

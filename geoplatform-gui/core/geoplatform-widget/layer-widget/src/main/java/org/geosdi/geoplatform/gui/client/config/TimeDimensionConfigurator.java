@@ -57,6 +57,7 @@ public class TimeDimensionConfigurator extends AbstractGinModule {
         bind(TimePeriodFormPanel.class).in(Singleton.class);
         bind(TimePeriodFormPanel.class).in(Singleton.class);
         bind(IStrategyPanel.class).to(IStrategyPanel.StrategyPanel.class).in(Singleton.class);
+        //ORDER IS IMPORTANT
         bind(IParseColleague.YearColleague.class).asEagerSingleton();
         bind(IParseColleague.MonthColleague.class).asEagerSingleton();
         bind(IParseColleague.WeekColleague.class).asEagerSingleton();
@@ -64,6 +65,7 @@ public class TimeDimensionConfigurator extends AbstractGinModule {
         bind(IParseColleague.HourColleague.class).asEagerSingleton();
         bind(IParseColleague.MinuteColleague.class).asEagerSingleton();
         bind(IParseColleague.SecondColleague.class).asEagerSingleton();
+        //
         bind(IParseMediator.class).to(IParseMediator.ParseMediator.class).in(Singleton.class);
     }
 }

@@ -3,7 +3,6 @@ package org.geosdi.geoplatform.gui.client.widget.time.panel.strategy;
 import com.google.common.collect.Maps;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
-import org.geosdi.geoplatform.gui.client.widget.time.panel.mediator.IParseMediator;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
@@ -71,8 +70,8 @@ public interface IStrategyPanel {
         private Boolean currentStrategy;
 
         @Inject
-        public StrategyPanel(IParseMediator.ParseMediator parseMediator) {
-            this.panelMap.put(Boolean.TRUE, new IPeriodPanelStrategy.PeriodPanelStrategy(parseMediator));
+        public StrategyPanel() {
+            this.panelMap.put(Boolean.TRUE, new PeriodPanelStrategy());
             this.panelMap.put(Boolean.FALSE, new FilterPanelStrategy());
         }
 

@@ -10,6 +10,8 @@ import com.extjs.gxt.ui.client.widget.form.MultiField;
 import com.extjs.gxt.ui.client.widget.form.SpinnerField;
 import com.extjs.gxt.ui.client.widget.form.Validator;
 import com.google.gwt.i18n.client.DateTimeFormat;
+import org.geosdi.geoplatform.gui.client.puregwt.reset.GPResetComponentHandler;
+import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;
 
 import java.util.Date;
 
@@ -17,7 +19,7 @@ import java.util.Date;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public abstract class TimePeriodDateMultifield extends MultiField {
+public abstract class TimePeriodDateMultifield extends MultiField implements GPResetComponentHandler {
 
     protected DateField dateField;
     private SpinnerField hourField;
@@ -29,6 +31,7 @@ public abstract class TimePeriodDateMultifield extends MultiField {
     public TimePeriodDateMultifield() {
         super();
         this.addComponents();
+        WidgetPropertiesHandlerManager.addHandler(GPResetComponentHandler.TYPE, this);
     }
 
     private void addComponents() {
@@ -99,7 +102,7 @@ public abstract class TimePeriodDateMultifield extends MultiField {
     @Override
     protected void onAttach() {
         super.onAttach();
-        initComponents();
+//        initComponents();
     }
 
     private void initComponents() {
@@ -116,7 +119,17 @@ public abstract class TimePeriodDateMultifield extends MultiField {
         this.minuteField.setValue(this.limitDate.getMinutes());
     }
 
-    public abstract void bindDate(Date date);
+    /**
+     * @param dateFrom
+     * @param dateTo
+     */
+    public void bindDate(Date dateFrom, Date dateTo) {
+        dateField.setMaxValue(dateTo);
+        dateField.setMinValue(dateFrom);
+    }
 
-
+    @Override
+    public void removeFilterTime() {
+        initComponents();
+    }
 }

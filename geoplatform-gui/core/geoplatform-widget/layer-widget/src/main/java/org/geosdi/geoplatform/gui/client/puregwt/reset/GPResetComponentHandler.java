@@ -4,7 +4,7 @@
  * http://geo-platform.org
  * ====================================================================
  * <p>
- * Copyright (C) 2008-2019 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2020 geoSDI Group (CNR IMAA - Potenza - ITALY).
  * <p>
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by
@@ -32,20 +32,21 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.client.puregwt.binding;
+package org.geosdi.geoplatform.gui.client.puregwt.reset;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
-import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 
 /**
- *
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface GPDateBindingHandler extends EventHandler {
+public interface GPResetComponentHandler extends EventHandler {
 
-    Type<GPDateBindingHandler> TYPE = new Type<GPDateBindingHandler>();
+    Type<GPResetComponentHandler> TYPE = new Type<GPResetComponentHandler>();
 
-    void bindTreeModel(GPTreePanel gpTreePanel);
+    /**
+     *
+     */
+    void removeFilterTime();
 }

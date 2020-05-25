@@ -44,6 +44,7 @@ import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
 import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.AbstractMementoOriginalProperties;
 import org.geosdi.geoplatform.gui.client.puregwt.decorator.event.TreeChangeLabelEvent;
+import org.geosdi.geoplatform.gui.client.puregwt.reset.event.GPResetComponentsEvent;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableEvent;
 import org.geosdi.geoplatform.gui.impl.map.event.TimeFilterLayerMapEvent;
@@ -100,6 +101,7 @@ public class RemoveTimeFilterAction extends MenuBaseAction implements TreeMenuCo
         layerSelected.setAlias(layerName);
         mementoSave.putOriginalPropertiesInCache(memento);
         WidgetPropertiesHandlerManager.fireEvent(labelEvent);
+        WidgetPropertiesHandlerManager.fireEvent(new GPResetComponentsEvent());
         timeFilterLayerMapEvent.setLayerBean(layerSelected);
         GPHandlerManager.fireEvent(timeFilterLayerMapEvent);
         treePanel.refresh(layerSelected);

@@ -38,6 +38,8 @@ package org.geosdi.geoplatform.gui.action.menu;
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformAction;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -48,10 +50,11 @@ public abstract class MenuAction extends GeoPlatformAction<MenuEvent> {
     private boolean mustBeEnabled;
 
     /**
-     * @param title
+     * @param theTitle
      */
-    public MenuAction(String title) {
-        this.title = title;
+    public MenuAction(String theTitle) {
+        checkArgument(((theTitle != null) && !(theTitle.trim().isEmpty())), "The Parameter title must not be null or an empty string.");
+        this.title = theTitle;
     }
 
     /**

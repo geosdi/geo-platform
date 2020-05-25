@@ -56,6 +56,8 @@ import org.geosdi.geoplatform.gui.impl.tree.menu.config.TreeMenuGinInjector;
 import java.util.List;
 import java.util.Map;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -76,6 +78,7 @@ public abstract class AbstractTreeMenuStrategy implements GPTreeMenuStrategy {
      * @param theTreePanel
      */
     public AbstractTreeMenuStrategy(TreePanel theTreePanel) {
+        checkArgument(theTreePanel != null, "The Parameter treePanel must not be null.");
         this.treePanel = theTreePanel;
         this.menuActionBinder = new GPMenuActionBinder(this);
     }
@@ -96,6 +99,7 @@ public abstract class AbstractTreeMenuStrategy implements GPTreeMenuStrategy {
      * @return {@link Menu}
      */
     protected final Menu buildMenu(StoreCompositeKey key, List<? extends GPMenuGenericTool> tools) {
+        checkArgument(key != null, "The Parameter key must not be null.");
         if (this.menuRegistar.get(key) != null) {
             return this.menuRegistar.get(key);
         }
@@ -108,6 +112,7 @@ public abstract class AbstractTreeMenuStrategy implements GPTreeMenuStrategy {
      */
     @Override
     public void addMenuItem(GPMenuItem tool, Menu menu) {
+        checkArgument(tool != null, "The Parameter tool must not be null.");
         MenuAction action = (MenuAction) registar.get(tool.getId(), treePanel);
         this.menuActionBinder.bindMenuBaseAction(action, tool, menu);
     }
@@ -118,6 +123,7 @@ public abstract class AbstractTreeMenuStrategy implements GPTreeMenuStrategy {
      */
     @Override
     public void addCheckMenuItem(GPCheckMenuItem tool, final Menu menu) {
+        checkArgument(tool != null, "The Parameter tool must not be null.");
         MenuCheckAction action = (MenuCheckAction) registar.get(tool.getId(), treePanel);
         this.menuActionBinder.bindMenuCheckAction(action, tool, menu);
     }
@@ -148,6 +154,8 @@ public abstract class AbstractTreeMenuStrategy implements GPTreeMenuStrategy {
      */
     @Override
     public void addWidget(Widget widget, Menu menu) {
+        checkArgument(widget != null, "The Parameter widget must not be null.");
+        checkArgument(menu != null, "The Parameter menu must not be null.");
         menu.add(new AdapterMenuItem(widget));
     }
 
@@ -157,6 +165,7 @@ public abstract class AbstractTreeMenuStrategy implements GPTreeMenuStrategy {
      */
     @Override
     public Menu bindMenu(StoreCompositeKey key) {
+        checkArgument(key != null, "The Parameter key must not be null.");
         Menu menu = new Menu();
         this.menuRegistar.put(key, menu);
         return menu;

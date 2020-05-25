@@ -1,4 +1,4 @@
-package org.geosdi.geoplatform.gui.client.widget.time.panel.strategy;
+package org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.panel;
 
 import com.google.gwt.i18n.client.DateTimeFormat;
 import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;

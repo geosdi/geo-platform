@@ -32,7 +32,9 @@ import org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.IStrategyPan
 import org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.TypeValueEnum;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.impl.map.event.TimeFilterLayerMapEvent;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
+import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;
 
 import javax.inject.Inject;
@@ -82,6 +84,7 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
     private IParseMediator.ParseMediator parseMediator;
     private Long period = null;
     private Button apply;
+    private final static TimeFilterLayerMapEvent TIME_FILTER_LAYER_MAP_EVENT = new TimeFilterLayerMapEvent();
 
     @Inject
     public TimePeriodFormPanel(StartDateMultifield theStartDateMultifield, final EndDateMultifield theEndDateMultifield,
@@ -175,11 +178,6 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
         buttonsContainer.setSpacing(2);
         this.periodSlider = new Slider() {
 
-//            @Override
-//            public void setMinValue(int minValue) {
-//                super.setMinValue(1);
-//            }
-
             @Override
             public void setValue(int value) {
                 if (value >= 0 && !partialStore.isEmpty()) {
@@ -196,6 +194,8 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
                     layerSelected.setTimeFilter(store.get(currentValue).toString());
                     layerSelected.setAlias(null);
                     layerSelected.setAlias(layerSelected.getLabel() + LAYER_TIME_DELIMITER + timeFilter + "]");
+                    TIME_FILTER_LAYER_MAP_EVENT.setLayerBean(layerSelected);
+                    GPHandlerManager.fireEvent(TIME_FILTER_LAYER_MAP_EVENT);
                     treePanel.refresh(layerSelected);
                     enableOnPlaying();
                 }

@@ -28,8 +28,8 @@ import org.geosdi.geoplatform.gui.client.resources.LayerWidgetResourcesConfigura
 import org.geosdi.geoplatform.gui.client.widget.multifield.EndDateMultifield;
 import org.geosdi.geoplatform.gui.client.widget.multifield.StartDateMultifield;
 import org.geosdi.geoplatform.gui.client.widget.time.panel.mediator.IParseMediator;
-import org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.IStrategyPanel;
-import org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.TypeValueEnum;
+import org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.panel.IStrategyPanel;
+import org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.panel.TypeValueEnum;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.map.event.TimeFilterLayerMapEvent;
@@ -44,7 +44,7 @@ import java.util.Map;
 
 import static org.geosdi.geoplatform.gui.client.widget.time.LayerTimeFilterWidget.LAYER_TIME_DELIMITER;
 import static org.geosdi.geoplatform.gui.client.widget.time.LayerTimeFilterWidget.WIDGET_HEIGHT;
-import static org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.TypeValueEnum.*;
+import static org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.panel.TypeValueEnum.*;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -70,7 +70,6 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
             AbstractImagePrototype.create(LayerResources.ICONS.forwardTimeDimension()));
     private SelectionListener<ButtonEvent> periodPlaySelectioListener;
     private SelectionListener<ButtonEvent> periodReversePlaySelectioListener;
-    private SelectionListener<ButtonEvent> playReverseSelectioListener;
     private Timer animationTimer;
     private int currentValue;
     private GPTreePanel treePanel;

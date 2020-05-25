@@ -21,6 +21,7 @@ import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleMessages;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
+import org.geosdi.geoplatform.gui.client.puregwt.action.GPActionHandler;
 import org.geosdi.geoplatform.gui.client.puregwt.binding.GPDateBindingHandler;
 import org.geosdi.geoplatform.gui.client.puregwt.filter.event.GPHideFilterWidgetEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.reset.GPResetComponentHandler;
@@ -28,6 +29,7 @@ import org.geosdi.geoplatform.gui.client.resources.LayerWidgetResourcesConfigura
 import org.geosdi.geoplatform.gui.client.widget.multifield.EndDateMultifield;
 import org.geosdi.geoplatform.gui.client.widget.multifield.StartDateMultifield;
 import org.geosdi.geoplatform.gui.client.widget.time.panel.mediator.IParseMediator;
+import org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.operation.IStrategyOperation;
 import org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.panel.IStrategyPanel;
 import org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.panel.TypeValueEnum;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
@@ -50,7 +52,7 @@ import static org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.panel
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandler, GPResetComponentHandler {
+public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandler, GPResetComponentHandler, GPActionHandler {
 
     DateTimeFormat fmt = DateTimeFormat.getFormat("dd-MM-yyyy, HH:mm");
 
@@ -80,6 +82,8 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
     @Inject
     private IStrategyPanel iStrategyPanel;
     @Inject
+    private IStrategyOperation iStrategyOperation;
+    @Inject
     private IParseMediator.ParseMediator parseMediator;
     private Long period = null;
     private Button apply;
@@ -95,6 +99,7 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
         this.addComponents();
         WidgetPropertiesHandlerManager.addHandler(GPDateBindingHandler.TYPE, this);
         WidgetPropertiesHandlerManager.addHandler(GPResetComponentHandler.TYPE, this);
+        WidgetPropertiesHandlerManager.addHandler(GPActionHandler.TYPE, this);
     }
 
     private void addComponents() {
@@ -138,9 +143,7 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
         this.apply.addSelectionListener(new SelectionListener<ButtonEvent>() {
             @Override
             public void componentSelected(ButtonEvent ce) {
-                if (validateForm()) {
-                    enableOnPlaying();
-                }
+                validateForm();
             }
         });
         super.addButton(this.apply);
@@ -182,15 +185,15 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
                 if (value >= 0 && !partialStore.isEmpty()) {
                     super.setValue(value);
                     currentValue = value;
-                    labelCurrenteTime.setValue(store.get(currentValue));
-                    super.setMessage("" + store.get(currentValue));
-                    String timeFilter = store.get(currentValue).toString();
+                    labelCurrenteTime.setValue(partialStore.get(currentValue));
+                    super.setMessage("" + partialStore.get(currentValue));
+                    String timeFilter = partialStore.get(currentValue).toString();
                     GPLayerTreeModel layerSelected = (GPLayerTreeModel) treePanel.getSelectionModel().getSelectedItem();
 //                    GWT.log(layerSelected.getLabel()+layerSelected.getLabel() + LAYER_TIME_DELIMITER + timeFilter+ "]");
 
 //                    GeoPlatformMessage.infoMessage(LayerModuleConstants.INSTANCE.LayerTimeFilterWidget_timeFilterMessageTitleText(),
 //                            LayerModuleMessages.INSTANCE.LayerTimeFilterWidget_layerStatusShowedMessage(timeFilter));
-                    layerSelected.setTimeFilter(store.get(currentValue).toString());
+                    layerSelected.setTimeFilter(partialStore.get(currentValue).toString());
                     layerSelected.setAlias(null);
                     layerSelected.setAlias(layerSelected.getLabel() + LAYER_TIME_DELIMITER + timeFilter + "]");
                     TIME_FILTER_LAYER_MAP_EVENT.setLayerBean(layerSelected);
@@ -222,9 +225,9 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
     }
 
     private void enableOnPlaying() {
-        this.backwardButton.setEnabled(!this.playButton.isPressed() && this.currentValue > this.periodSlider.getMinValue());
+        this.backwardButton.setEnabled(!this.playButton.isPressed() && !this.reversePlayButton.isPressed() && this.currentValue > this.periodSlider.getMinValue());
         this.reversePlayButton.setEnabled(!this.playButton.isPressed() && this.currentValue > this.periodSlider.getMinValue());
-        this.forwardPlayButton.setEnabled(!this.playButton.isPressed() && this.currentValue < this.periodSlider.getMaxValue());
+        this.forwardPlayButton.setEnabled(!this.playButton.isPressed() && !this.reversePlayButton.isPressed() && this.currentValue < this.periodSlider.getMaxValue());
         this.playButton.setEnabled(!this.reversePlayButton.isPressed() && this.currentValue < this.periodSlider.getMaxValue());
     }
 
@@ -316,12 +319,15 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
         if (this.playButton.isPressed()) {
             this.playButton.toggle(Boolean.FALSE);
             this.periodPlaySelectioListener.componentSelected(null);
-            this.reversePlayButton.enable();
-            this.backwardButton.enable();
         }
+        if (this.reversePlayButton.isPressed()) {
+            this.reversePlayButton.toggle(Boolean.FALSE);
+            this.periodReversePlaySelectioListener.componentSelected(null);
+        }
+        enableOnPlaying();
     }
 
-    public boolean validateForm() {
+    private boolean validateForm() {
         if (this.period == null)
             this.period = this.parseMediator.calculatePeriod(this.iStrategyPanel.getExtentValues().get(PERIOD).toString());
         if (!isValid()) {
@@ -394,19 +400,20 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
                 this.store.add(dateFrom);
             }
         }
-        this.partialStore.clear();
-        for (Date d : this.store) {
-            if (d.getTime() >= this.startDateMultifield.getDate().getTime()
-                    && (d.getTime() <= this.endDateMultifield.getDate().getTime())) {
-                this.partialStore.add(d);
-            }
-        }
-        this.periodSlider.setMaxValue(this.partialStore.size());
-
+        this.iStrategyOperation.getStrategy(this.endDateCheckBox.getValue()).getApplyOperation(this.store, this.startDateMultifield.getDate(),
+                this.endDateMultifield.getDate());
     }
 
     @Override
     public void removeFilterTime() {
         initComponents();
+    }
+
+    @Override
+    public void periodWithRangeOperation(List<Date> partialStore) {
+        this.partialStore = partialStore;
+        this.periodSlider.setValue(0);
+        enableOnPlaying();
+        this.periodSlider.setMaxValue(this.partialStore.size() - 1);
     }
 }

@@ -16,6 +16,7 @@
     
     <!-- ADDING GOOGLE-GUAVA MODULE -->
     <inherits name="com.google.common.collect.Collect"/>
+    <inherits name="com.google.common.base.Base"/>
     
     <!-- ADDING GIN MODULE -->
     <inherits name="com.google.gwt.inject.Inject"/>

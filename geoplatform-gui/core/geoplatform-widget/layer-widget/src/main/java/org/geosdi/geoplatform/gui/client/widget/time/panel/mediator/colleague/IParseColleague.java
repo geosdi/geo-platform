@@ -5,6 +5,10 @@ import org.geosdi.geoplatform.gui.client.widget.time.panel.mediator.IParseMediat
 
 import javax.inject.Inject;
 
+/**
+ * @author Vito Salvia- CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
+ */
 public interface IParseColleague {
 
     /**

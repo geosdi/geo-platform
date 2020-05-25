@@ -1,5 +1,9 @@
 package org.geosdi.geoplatform.gui.client.widget.time.panel.mediator;
 
+/**
+ * @author Vito Salvia- CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
+ */
 public enum IParseColleagueKey {
 
     YEAR("Y", 31536000000l), MONT("M", 2592000000l), WEEK("W", 604800000l), DAY("D", 86400000l),

@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.client.widget.time;
 import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.puregwt.filter.IGPFilterWidgetHandler;
+import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
 import org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.IStrategyPanel;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
@@ -56,6 +57,7 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow implements IGPFilte
     public final static short WIDGET_WIDTH = 400;
     //
     private GPTreePanel<GPBeanTreeModel> treePanel;
+    private GeoPlatformContentPanel currentPanel;
 
     public LayerTimeFilterWidget(GPTreePanel<GPBeanTreeModel> treePanel) {
         super(Boolean.TRUE);
@@ -70,12 +72,19 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow implements IGPFilte
         super.onAttach();
         super.removeAll();
         IStrategyPanel.StrategyPanel s = LayerModuleInjector.MainInjector.getInstance().getStrategyPanel();
-        super.add(s.getPanel(this.treePanel));
+        this.currentPanel = s.getPanel(this.treePanel);
+        super.add(this.currentPanel);
     }
 
     @Override
     public void addComponent() {
 
+    }
+
+    @Override
+    protected void onDetach() {
+        super.onDetach();
+        this.currentPanel.removeFromParent();
     }
 
     @Override

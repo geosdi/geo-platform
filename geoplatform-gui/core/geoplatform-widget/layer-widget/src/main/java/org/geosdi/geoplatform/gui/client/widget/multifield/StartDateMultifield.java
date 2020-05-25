@@ -44,14 +44,13 @@ public class StartDateMultifield extends TimePeriodDateMultifield {
 
     @Override
     protected String fieldLabel() {
-        return LayerModuleConstants.INSTANCE.LayerTimeFilterWidget_multidatesToText();
+        return LayerModuleConstants.INSTANCE.LayerTimeFilterWidget_multidatesFromText();
     }
 
     @Override
-    public void bindDate(Date date) {
-        this.limitDate = date;
-        super.buildDateField();
-        super.dateField.setMinValue(this.limitDate);
+    public void bindDate(Date dateFrom, Date dateTo) {
+        super.bindDate(dateFrom, dateTo);
+        this.limitDate = dateFrom;
     }
 
 }

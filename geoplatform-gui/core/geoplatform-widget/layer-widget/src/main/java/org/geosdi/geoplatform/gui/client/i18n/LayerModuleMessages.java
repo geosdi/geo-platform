@@ -76,6 +76,8 @@ public interface LayerModuleMessages extends Messages {
 
     String LayerTimeFilterWidget_rangeDateErrorMessage();
 
+    String LayerTimeFilterWidget_periodDateErrorMessage();
+
     String LayerTimeFilterWidget_upperLimitDate(String timeFilter);
 
     String LayerTimeFilterWidget_lowerLimitDate(String timeFilter);

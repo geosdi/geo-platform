@@ -36,7 +36,7 @@ package org.geosdi.geoplatform.gui.client.puregwt.binding.event;
 
 import com.google.gwt.event.shared.GwtEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.binding.GPDateBindingHandler;
-import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -44,9 +44,9 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
  */
 public class GPBeanTreeModelBindingEvent extends GwtEvent<GPDateBindingHandler> {
 
-    private GPBeanTreeModel gpTreePanel;
+    private GPTreePanel gpTreePanel;
 
-    public GPBeanTreeModelBindingEvent(GPBeanTreeModel gpTreePanel) {
+    public GPBeanTreeModelBindingEvent(GPTreePanel gpTreePanel) {
         this.gpTreePanel = gpTreePanel;
     }
 

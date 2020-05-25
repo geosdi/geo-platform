@@ -32,20 +32,24 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.client.puregwt.binding;
+package org.geosdi.geoplatform.gui.client.puregwt.reset.event;
 
-import com.google.gwt.event.shared.EventHandler;
-import com.google.gwt.event.shared.GwtEvent.Type;
-import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
+import com.google.gwt.event.shared.GwtEvent;
+import org.geosdi.geoplatform.gui.client.puregwt.reset.GPResetComponentHandler;
 
 /**
- *
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface GPDateBindingHandler extends EventHandler {
+public class GPResetComponentsEvent extends GwtEvent<GPResetComponentHandler> {
 
-    Type<GPDateBindingHandler> TYPE = new Type<GPDateBindingHandler>();
+    @Override
+    public Type<GPResetComponentHandler> getAssociatedType() {
+        return GPResetComponentHandler.TYPE;
+    }
 
-    void bindTreeModel(GPTreePanel gpTreePanel);
+    @Override
+    protected void dispatch(GPResetComponentHandler handler) {
+        handler.removeFilterTime();
+    }
 }

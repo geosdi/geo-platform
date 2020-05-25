@@ -64,9 +64,10 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow implements IGPFilte
         WidgetPropertiesHandlerManager.addHandler(IGPFilterWidgetHandler.TYPE, this);
     }
 
+
     @Override
-    protected void onShow() {
-        super.onShow();
+    protected void onAttach() {
+        super.onAttach();
         super.removeAll();
         IStrategyPanel.StrategyPanel s = LayerModuleInjector.MainInjector.getInstance().getStrategyPanel();
         super.add(s.getPanel(this.treePanel));

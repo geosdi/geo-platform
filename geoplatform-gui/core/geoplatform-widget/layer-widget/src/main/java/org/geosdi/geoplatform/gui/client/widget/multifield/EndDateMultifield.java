@@ -73,4 +73,10 @@ public class EndDateMultifield extends TimePeriodDateMultifield {
 
     }
 
+    @Override
+    protected void setMaxMinValue() {
+        this.hourField.setMinValue(0);
+        this.minuteField.setMinValue(0);
+    }
+
 }

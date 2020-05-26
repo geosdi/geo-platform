@@ -4,7 +4,7 @@
  * http://geo-platform.org
  * ====================================================================
  * <p>
- * Copyright (C) 2008-2020 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2019 geoSDI Group (CNR IMAA - Potenza - ITALY).
  * <p>
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by
@@ -32,35 +32,34 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.client.puregwt.action;
+package org.geosdi.geoplatform.gui.client.puregwt.action.event;
 
-import com.google.gwt.event.shared.EventHandler;
-import com.google.gwt.event.shared.GwtEvent.Type;
+import com.google.gwt.event.shared.GwtEvent;
+import org.geosdi.geoplatform.gui.client.puregwt.action.GPActionHandler;
 
 import java.util.Date;
-import java.util.List;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface GPActionHandler extends EventHandler {
+public class GPPeriodNoDateEvent extends GwtEvent<GPActionHandler> {
 
-    Type<GPActionHandler> TYPE = new Type<GPActionHandler>();
+    private final Date date1;
+    private final Date date2;
 
-    /**
-     * @param partialStore
-     */
-    void periodWithRangeOperation(List<Date> partialStore);
+    public GPPeriodNoDateEvent(Date date1, Date date2) {
+        this.date1 = date1;
+        this.date2 = date2;
+    }
 
-    /**
-     * @param date1
-     * @param date2
-     */
-    void noDate(Date date1, Date date2);
+    @Override
+    public Type<GPActionHandler> getAssociatedType() {
+        return GPActionHandler.TYPE;
+    }
 
-    /**
-     * @param index
-     */
-    void periodWithSingleDate(int index);
+    @Override
+    protected void dispatch(GPActionHandler handler) {
+        handler.noDate(this.date1, this.date2);
+    }
 }

@@ -14,7 +14,6 @@ import com.extjs.gxt.ui.client.widget.layout.CenterLayout;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.client.LayerResources;
@@ -366,8 +365,6 @@ public class TimeFilterPanel extends GeoPlatformContentPanel {
                             variableTimeFilter += "/" + (String) startStore.getModels().get(
                                     toFilter).get(DimensionData.DIMENSION_KEY);
                         }
-                        GWT.log("@@@@@@@@@@@@@@@@@@@TIME FILTER: " + timeFilter);
-                        GWT.log("@@@@@@@@@@@@@@@@@@@VAR TIME FILTER: " + variableTimeFilter);
                         layerSelected.setTimeFilter(timeFilter);
                         layerSelected.setVariableTimeFilter(variableTimeFilter);
                         layerSelected.setAlias(layerName + LAYER_TIME_DELIMITER + layerSelected.getVariableTimeFilter() + "]");

@@ -21,7 +21,7 @@ public class PeriodSingleDateOperation implements IStrategyOperation.ITypeOperat
     @Override
     public void getApplyOperation(List<Date> store, Date from, Date to) {
         for (int i = 0; i < store.size(); i++) {
-            if (i > 0 && i < store.size() && store.get(i).getTime() > from.getTime()) {
+            if (store.get(i).getTime() > from.getTime()) {
                 WidgetPropertiesHandlerManager.fireEvent(new GPPeriodNoDateEvent(store.get(i - 1), store.get(i)));
                 break;
             } else if (store.get(i).getTime() == from.getTime()) {

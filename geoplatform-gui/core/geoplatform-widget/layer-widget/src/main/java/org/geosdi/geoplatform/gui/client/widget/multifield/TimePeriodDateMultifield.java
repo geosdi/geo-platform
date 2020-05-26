@@ -87,6 +87,7 @@ public abstract class TimePeriodDateMultifield extends MultiField implements GPR
         super.add(this.minuteField);
         super.addStyleName("dateMultifield");
         super.setValidator(addValidator());
+        setMaxMinValue();
     }
 
 
@@ -94,6 +95,7 @@ public abstract class TimePeriodDateMultifield extends MultiField implements GPR
 
     protected abstract void buildMinutes(Date dateWithZeroTime, Date time);
 
+    protected abstract void setMaxMinValue();
 
     protected abstract Validator addValidator();
 

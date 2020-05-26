@@ -72,4 +72,10 @@ public class StartDateMultifield extends TimePeriodDateMultifield {
 
     }
 
+    @Override
+    protected void setMaxMinValue() {
+        this.hourField.setMaxValue(23);
+        this.minuteField.setMaxValue(59);
+    }
+
 }

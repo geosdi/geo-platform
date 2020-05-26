@@ -54,6 +54,8 @@ import org.geosdi.geoplatform.gui.impl.tree.menu.strategy.AbstractTreeMenuStrate
 import java.util.List;
 import java.util.logging.Logger;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -68,6 +70,7 @@ public class GPMenuActionBinder implements MenuActionBinder {
      * @param theMenuCreator
      */
     public GPMenuActionBinder(GeoPlatformMenuCreator theMenuCreator) {
+        checkArgument(theMenuCreator != null, "The Parameter menuCreator must not be null.");
         this.menuCreator = theMenuCreator;
     }
 
@@ -77,6 +80,7 @@ public class GPMenuActionBinder implements MenuActionBinder {
      */
     @Override
     public void bindTools(Menu menu, List<? extends GPMenuGenericTool> tools) {
+        checkArgument(tools != null, "The Parameter tools must not be null.");
         for (GPMenuGenericTool tool : tools) {
             tool.buildTool(menuCreator, menu);
         }
@@ -89,6 +93,8 @@ public class GPMenuActionBinder implements MenuActionBinder {
      */
     @Override
     public void bindMenuBaseAction(MenuAction action, GPMenuItem tool, final Menu menu) {
+        checkArgument(tool != null, "The Parameter tool must not be null.");
+        checkArgument(menu != null, "The Parameter menu must not be null.");
         final MenuItem item = new MenuItem(tool.getText());
         item.setItemId(tool.getId());
         if (action != null) {
@@ -108,6 +114,8 @@ public class GPMenuActionBinder implements MenuActionBinder {
 
     @Override
     public void bindMenuCheckAction(MenuCheckAction action, GPCheckMenuItem tool, final Menu menu) {
+        checkArgument(tool != null, "The Parameter tool must not be null.");
+        checkArgument(menu != null, "The Parameter menu must not be null.");
         final CheckMenuItem item = new CheckMenuItem(tool.getText());
         item.setItemId(tool.getId());
         menu.add(item);
@@ -138,6 +146,8 @@ public class GPMenuActionBinder implements MenuActionBinder {
      */
     @Override
     public void bindGroupMenuItem(GPGroupMenuItem tool, Menu menu) {
+        checkArgument(tool != null, "The Parameter tool must not be null.");
+        checkArgument(menu != null, "The Parameter menu must not be null.");
         MenuItem item = new MenuItem(tool.getText());
         menu.add(item);
         Menu subMenu = new Menu();
@@ -151,6 +161,8 @@ public class GPMenuActionBinder implements MenuActionBinder {
      */
     @Override
     public void addMenuActionEnableHandler(MenuAction action, final MenuItem item) {
+        checkArgument(action != null, "The Parameter action must not be null.");
+        checkArgument(item != null, "The Parameter item must not be null.");
         action.addActionEnableHandler(new ActionEnableHandler() {
 
             @Override

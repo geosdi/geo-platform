@@ -1,5 +1,6 @@
 package org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.panel;
 
+import com.google.common.collect.Lists;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
 import org.geosdi.geoplatform.gui.client.widget.time.panel.TimeFilterPanel;
@@ -20,6 +21,7 @@ public class FilterPanelStrategy extends IStrategyPanel.AbstractPanelStrategy {
 
     @Override
     protected void parseExtentValue(GPTreePanel<GPBeanTreeModel> treePanel) {
-        this.valuesMap.put(TypeValueEnum.RANGE, ((RasterTreeNode) treePanel.getSelectionModel().getSelectedItem()).getExtent().getValue().split(","));
+        this.valuesMap.put(TypeValueEnum.RANGE, Lists.newArrayList(((RasterTreeNode) treePanel.getSelectionModel().getSelectedItem()).getExtent().getValue().split(",")));
+//        this.valuesMap.put(TypeValueEnum.RANGE, ((RasterTreeNode) treePanel.getSelectionModel().getSelectedItem()).getExtent().getValue().split(","));
     }
 }

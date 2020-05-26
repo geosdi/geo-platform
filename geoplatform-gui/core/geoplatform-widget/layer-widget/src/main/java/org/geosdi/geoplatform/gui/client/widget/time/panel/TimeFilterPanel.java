@@ -14,7 +14,7 @@ import com.extjs.gxt.ui.client.widget.layout.CenterLayout;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
-import com.google.common.collect.Lists;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.client.LayerResources;
@@ -42,6 +42,7 @@ import java.util.List;
 
 import static org.geosdi.geoplatform.gui.client.widget.time.LayerTimeFilterWidget.LAYER_TIME_DELIMITER;
 import static org.geosdi.geoplatform.gui.client.widget.time.LayerTimeFilterWidget.WIDGET_HEIGHT;
+import static org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.panel.TypeValueEnum.RANGE;
 
 /**
  * @author Vito Salvia- CNR IMAA geoSDI Group
@@ -365,6 +366,8 @@ public class TimeFilterPanel extends GeoPlatformContentPanel {
                             variableTimeFilter += "/" + (String) startStore.getModels().get(
                                     toFilter).get(DimensionData.DIMENSION_KEY);
                         }
+                        GWT.log("@@@@@@@@@@@@@@@@@@@TIME FILTER: " + timeFilter);
+                        GWT.log("@@@@@@@@@@@@@@@@@@@VAR TIME FILTER: " + variableTimeFilter);
                         layerSelected.setTimeFilter(timeFilter);
                         layerSelected.setVariableTimeFilter(variableTimeFilter);
                         layerSelected.setAlias(layerName + LAYER_TIME_DELIMITER + layerSelected.getVariableTimeFilter() + "]");
@@ -430,8 +433,8 @@ public class TimeFilterPanel extends GeoPlatformContentPanel {
     }
 
     private void loadDataToDisplay() {
-        GPLayerTreeModel layerSelected = (GPLayerTreeModel) treePanel.getSelectionModel().getSelectedItem();
-        List<String> dimensionList = Lists.newArrayList(LayerModuleInjector.MainInjector.getInstance().getStrategyPanel().getExtentValues().toString().split(","));
+        final GPLayerTreeModel layerSelected = (GPLayerTreeModel) treePanel.getSelectionModel().getSelectedItem();
+        List<String> dimensionList = (List<String>) LayerModuleInjector.MainInjector.getInstance().getStrategyPanel().getExtentValues().get(RANGE);
         dimensionSizeLabel.setHtml(LayerModuleMessages.INSTANCE.
                 LayerTimeFilterWidget_dimensionSizeHTMLMessage(dimensionList.size()));
         dimensionSizeLabel.setStyleAttribute("font-size", "1.3em");

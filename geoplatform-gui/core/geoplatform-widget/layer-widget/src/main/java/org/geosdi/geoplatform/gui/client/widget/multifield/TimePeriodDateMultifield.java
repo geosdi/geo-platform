@@ -1,6 +1,7 @@
 package org.geosdi.geoplatform.gui.client.widget.multifield;
 
 import com.extjs.gxt.ui.client.Style;
+import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.DatePickerEvent;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
@@ -22,11 +23,13 @@ import java.util.Date;
 public abstract class TimePeriodDateMultifield extends MultiField implements GPResetComponentHandler {
 
     protected DateField dateField;
-    private SpinnerField hourField;
-    private SpinnerField minuteField;
+    private final static DateTimeFormat FORMATTER_DATE = DateTimeFormat.getFormat("dd/MM/yyyy");
+    private final static DateTimeFormat FORMATTER_TIME = DateTimeFormat.getFormat("HH:mm");
     protected Date date;
     private DateTimeFormat dtFormat;
     protected Date limitDate;
+    protected SpinnerField hourField;
+    protected SpinnerField minuteField;
 
     public TimePeriodDateMultifield() {
         super();
@@ -48,20 +51,33 @@ public abstract class TimePeriodDateMultifield extends MultiField implements GPR
             @Override
             public void handleEvent(DatePickerEvent dpe) {
                 date = dpe.getDate();
+                hourField.clear();
+                hourField.enable();
+                Date dateWithZeroTime = FORMATTER_DATE.parse(FORMATTER_DATE.format(limitDate));
+                buildHours(dateWithZeroTime);
             }
         });
+
         this.hourField = new SpinnerField();
+        this.hourField.addListener(Events.Change, new Listener<BaseEvent>() {
+            @Override
+            public void handleEvent(BaseEvent be) {
+                minuteField.clear();
+                minuteField.enable();
+                Date time = FORMATTER_TIME.parse(FORMATTER_TIME.format(limitDate));
+                Date dateWithZeroTime = FORMATTER_DATE.parse(FORMATTER_DATE.format(limitDate));
+                buildMinutes(dateWithZeroTime, time);
+            }
+        });
         this.hourField.setToolTip(hourTooltip());
         this.hourField.setWidth(50);
-        this.hourField.setMinValue(0);
-        this.hourField.setMaxValue(23);
+        this.hourField.disable();
         this.hourField.setAllowBlank(Boolean.FALSE);
 
         this.minuteField = new SpinnerField();
         this.minuteField.setToolTip(minuteTooltip());
+        this.minuteField.disable();
         this.minuteField.setWidth(50);
-        this.minuteField.setMinValue(0);
-        this.minuteField.setMaxValue(59);
         this.minuteField.setAllowBlank(Boolean.FALSE);
 
         super.setFieldLabel(fieldLabel());
@@ -73,8 +89,13 @@ public abstract class TimePeriodDateMultifield extends MultiField implements GPR
         super.setValidator(addValidator());
     }
 
-    protected abstract Validator addValidator();
 
+    protected abstract void buildHours(Date dateWithZeroTime);
+
+    protected abstract void buildMinutes(Date dateWithZeroTime, Date time);
+
+
+    protected abstract Validator addValidator();
 
     protected abstract String dateTooltip();
 

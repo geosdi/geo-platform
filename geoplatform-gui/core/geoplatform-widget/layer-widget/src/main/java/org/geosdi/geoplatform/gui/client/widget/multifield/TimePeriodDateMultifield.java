@@ -53,8 +53,9 @@ public abstract class TimePeriodDateMultifield extends MultiField implements GPR
                 date = dpe.getDate();
                 hourField.clear();
                 hourField.enable();
+                minuteField.setEnabled(Boolean.TRUE);
                 Date dateWithZeroTime = FORMATTER_DATE.parse(FORMATTER_DATE.format(limitDate));
-                buildHours(dateWithZeroTime);
+                afterDateSelected(dateWithZeroTime);
             }
         });
 
@@ -66,7 +67,7 @@ public abstract class TimePeriodDateMultifield extends MultiField implements GPR
                 minuteField.enable();
                 Date time = FORMATTER_TIME.parse(FORMATTER_TIME.format(limitDate));
                 Date dateWithZeroTime = FORMATTER_DATE.parse(FORMATTER_DATE.format(limitDate));
-                buildMinutes(dateWithZeroTime, time);
+                afterHourSelected(dateWithZeroTime, time);
             }
         });
         this.hourField.setToolTip(hourTooltip());
@@ -91,9 +92,9 @@ public abstract class TimePeriodDateMultifield extends MultiField implements GPR
     }
 
 
-    protected abstract void buildHours(Date dateWithZeroTime);
+    protected abstract void afterDateSelected(Date dateWithZeroTime);
 
-    protected abstract void buildMinutes(Date dateWithZeroTime, Date time);
+    protected abstract void afterHourSelected(Date dateWithZeroTime, Date time);
 
     protected abstract void setMaxMinValue();
 

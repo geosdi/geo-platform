@@ -54,17 +54,21 @@ public class EndDateMultifield extends TimePeriodDateMultifield {
         this.limitDate = dateTo;
     }
 
-    protected void buildHours(Date dateWithZeroTime) {
+    protected void afterDateSelected(Date dateWithZeroTime) {
         if (date.getTime() == dateWithZeroTime.getTime()) {
             this.hourField.setMaxValue(this.limitDate.getHours());
+            this.minuteField.setValue(this.limitDate.getMinutes());
+            this.hourField.setValue(this.limitDate.getHours());
         }
         if (this.date.getTime() != dateWithZeroTime.getTime()) {
             this.hourField.setMaxValue(23);
             this.minuteField.setMaxValue(23);
+            this.minuteField.setValue(0);
+            this.hourField.setValue(0);
         }
     }
 
-    protected void buildMinutes(Date dateWithZeroTime, Date time) {
+    protected void afterHourSelected(Date dateWithZeroTime, Date time) {
         if (date.getTime() == dateWithZeroTime.getTime() && limitDate.getHours() == time.getHours()) {
             this.minuteField.setMaxValue(limitDate.getMinutes());
         } else {

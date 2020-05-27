@@ -11,7 +11,7 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class FilterPanelStrategy extends IStrategyPanel.AbstractPanelStrategy {
+public class FilterViewStrategy extends IStrategyView.AbstractPanelStrategy {
 
     @Override
     public GeoPlatformContentPanel buildPanel(GPTreePanel<GPBeanTreeModel> treePanel) {

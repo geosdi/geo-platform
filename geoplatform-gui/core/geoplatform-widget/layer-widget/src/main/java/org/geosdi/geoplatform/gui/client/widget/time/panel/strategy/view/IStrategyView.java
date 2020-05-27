@@ -14,7 +14,7 @@ import java.util.Map;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface IStrategyPanel {
+public interface IStrategyView {
 
     /**
      * @param treePanel
@@ -64,15 +64,15 @@ public interface IStrategyPanel {
     }
 
     @Singleton
-    class StrategyPanel implements IStrategyPanel {
+    class StrategyView implements IStrategyView {
 
         final Map<Boolean, ITypePanelStrategy> panelMap = Maps.newHashMap();
         private Boolean currentStrategy;
 
         @Inject
-        public StrategyPanel() {
-            this.panelMap.put(Boolean.TRUE, new PeriodPanelStrategy());
-            this.panelMap.put(Boolean.FALSE, new FilterPanelStrategy());
+        public StrategyView() {
+            this.panelMap.put(Boolean.TRUE, new PeriodViewStrategy());
+            this.panelMap.put(Boolean.FALSE, new FilterViewStrategy());
         }
 
         /**

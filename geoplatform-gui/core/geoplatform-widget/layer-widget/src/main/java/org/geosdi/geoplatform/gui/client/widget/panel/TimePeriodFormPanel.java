@@ -32,7 +32,7 @@ import org.geosdi.geoplatform.gui.client.widget.multifield.EndDateMultifield;
 import org.geosdi.geoplatform.gui.client.widget.multifield.StartDateMultifield;
 import org.geosdi.geoplatform.gui.client.widget.time.panel.mediator.IParseMediator;
 import org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.operation.IStrategyOperation;
-import org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.view.IStrategyPanel;
+import org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.view.IStrategyView;
 import org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.view.TypeValueEnum;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
@@ -83,7 +83,7 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
     private LabelField labelRange;
     private LabelField labelPeriod;
     @Inject
-    private IStrategyPanel iStrategyPanel;
+    private IStrategyView iStrategyView;
     @Inject
     private IStrategyOperation iStrategyOperation;
     @Inject
@@ -344,7 +344,7 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
 
     private boolean validateForm() {
         if (this.period == null)
-            this.period = this.parseMediator.calculatePeriod(this.iStrategyPanel.getExtentValues().get(PERIOD).toString());
+            this.period = this.parseMediator.calculatePeriod(this.iStrategyView.getExtentValues().get(PERIOD).toString());
         if (!isValid()) {
             this.playButton.toggle(Boolean.FALSE);
             return Boolean.FALSE;
@@ -404,7 +404,7 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
     @Override
     public void bindTreeModel(GPTreePanel gpTreePanel) {
         this.treePanel = gpTreePanel;
-        Map<TypeValueEnum, Object> m = this.iStrategyPanel.getExtentValues();
+        Map<TypeValueEnum, Object> m = this.iStrategyView.getExtentValues();
         this.labelRange.setValue(fmt.format((Date) m.get(DATE_FROM)).concat(" / ")
                 .concat(fmt.format((Date) m.get(DATE_TO))));
         this.endDateMultifield.bindDate((Date) m.get(DATE_FROM), (Date) m.get(DATE_TO));
@@ -412,8 +412,8 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
     }
 
     private void calculateStep() {
-        Date dateTo = (Date) this.iStrategyPanel.getExtentValues().get(DATE_TO);
-        Date dateFrom = (Date) this.iStrategyPanel.getExtentValues().get(DATE_FROM);
+        Date dateTo = (Date) this.iStrategyView.getExtentValues().get(DATE_TO);
+        Date dateFrom = (Date) this.iStrategyView.getExtentValues().get(DATE_FROM);
         if (this.store.isEmpty()) {
             this.store.add(dateFrom);
             while (dateFrom.equals(dateTo) || dateFrom.before(dateTo)) {

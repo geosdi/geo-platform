@@ -39,7 +39,7 @@ import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.puregwt.filter.IGPFilterWidgetHandler;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
-import org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.view.IStrategyPanel;
+import org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.view.IStrategyView;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;
@@ -76,7 +76,7 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow implements IGPFilte
     protected void onAttach() {
         super.onAttach();
         super.removeAll();
-        IStrategyPanel.StrategyPanel s = LayerModuleInjector.MainInjector.getInstance().getStrategyPanel();
+        IStrategyView.StrategyView s = LayerModuleInjector.MainInjector.getInstance().getStrategyPanel();
         this.currentPanel = s.getPanel(this.treePanel);
         super.add(this.currentPanel);
     }

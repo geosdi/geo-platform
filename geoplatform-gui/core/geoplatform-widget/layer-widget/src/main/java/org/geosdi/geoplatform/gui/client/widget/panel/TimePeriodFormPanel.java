@@ -63,6 +63,7 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
     private CheckBox endDateCheckBox;
     private Slider periodSlider;
     private LabelField labelCurrenteTime;
+    private LabelField labelStep;
     private ToggleButton playButton = new ToggleButton(null,
             AbstractImagePrototype.create(LayerResources.ICONS.playTimeDimension()));
     private ToggleButton reversePlayButton = new ToggleButton(null,
@@ -143,6 +144,14 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
         this.labelCurrenteTime.setLabelSeparator(":");
         this.buildTimeTimension();
         super.add(this.labelCurrenteTime, new FlowData(5));
+
+
+        this.labelStep = new LabelField();
+        this.labelStep.setFieldLabel(LayerModuleConstants.INSTANCE.LayerTimeFilterWidget_stepTooltipText());
+        this.labelStep.setLabelSeparator(":");
+        super.add(this.labelStep, new FlowData(5));
+
+
         this.apply = new Button(ButtonsConstants.INSTANCE.applyText());
         this.apply.addSelectionListener(new SelectionListener<ButtonEvent>() {
             @Override
@@ -362,6 +371,7 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
         this.labelCurrenteTime.setValue(null);
         this.store.clear();
         this.partialStore.clear();
+        this.labelStep.setValue(null);
     }
 
     @Override
@@ -371,10 +381,10 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
 
     @Override
     protected void onDetach() {
-        super.onDetach();
+        WidgetPropertiesHandlerManager.fireEvent(new GPResetComponentsEvent());
         this.stopPlayer();
-//        if (!this.saveStatus)
-            WidgetPropertiesHandlerManager.fireEvent(new GPResetComponentsEvent());
+        super.onDetach();
+
     }
 
     @Override
@@ -399,6 +409,7 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
         }
         this.iStrategyOperation.getStrategy(this.endDateCheckBox.getValue()).getApplyOperation(this.store, this.startDateMultifield.getDate(),
                 this.endDateMultifield.getDate());
+        this.labelStep.setValue(this.partialStore.size());
     }
 
     @Override

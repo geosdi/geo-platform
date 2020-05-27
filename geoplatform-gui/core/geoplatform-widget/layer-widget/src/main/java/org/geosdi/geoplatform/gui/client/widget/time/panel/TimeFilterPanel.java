@@ -41,7 +41,7 @@ import java.util.List;
 
 import static org.geosdi.geoplatform.gui.client.widget.time.LayerTimeFilterWidget.LAYER_TIME_DELIMITER;
 import static org.geosdi.geoplatform.gui.client.widget.time.LayerTimeFilterWidget.WIDGET_HEIGHT;
-import static org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.panel.TypeValueEnum.RANGE;
+import static org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.view.TypeValueEnum.RANGE;
 
 /**
  * @author Vito Salvia- CNR IMAA geoSDI Group

@@ -25,13 +25,14 @@ import org.geosdi.geoplatform.gui.client.puregwt.action.GPActionHandler;
 import org.geosdi.geoplatform.gui.client.puregwt.binding.GPDateBindingHandler;
 import org.geosdi.geoplatform.gui.client.puregwt.filter.event.GPHideFilterWidgetEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.reset.GPResetComponentHandler;
+import org.geosdi.geoplatform.gui.client.puregwt.reset.event.GPResetComponentsEvent;
 import org.geosdi.geoplatform.gui.client.resources.LayerWidgetResourcesConfigurator;
 import org.geosdi.geoplatform.gui.client.widget.multifield.EndDateMultifield;
 import org.geosdi.geoplatform.gui.client.widget.multifield.StartDateMultifield;
 import org.geosdi.geoplatform.gui.client.widget.time.panel.mediator.IParseMediator;
 import org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.operation.IStrategyOperation;
-import org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.panel.IStrategyPanel;
-import org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.panel.TypeValueEnum;
+import org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.view.IStrategyPanel;
+import org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.view.TypeValueEnum;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.map.event.TimeFilterLayerMapEvent;
@@ -46,7 +47,7 @@ import java.util.Map;
 
 import static org.geosdi.geoplatform.gui.client.widget.time.LayerTimeFilterWidget.LAYER_TIME_DELIMITER;
 import static org.geosdi.geoplatform.gui.client.widget.time.LayerTimeFilterWidget.WIDGET_HEIGHT;
-import static org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.panel.TypeValueEnum.*;
+import static org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.view.TypeValueEnum.*;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -89,6 +90,7 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
     private Button apply;
     private final static TimeFilterLayerMapEvent TIME_FILTER_LAYER_MAP_EVENT = new TimeFilterLayerMapEvent();
     private final DateTimeFormat sdf = DateTimeFormat.getFormat("yyyy-MM-dd'T'HH:mm:ss");
+    private boolean saveStatus;
 
     @Inject
     public TimePeriodFormPanel(StartDateMultifield theStartDateMultifield, final EndDateMultifield theEndDateMultifield,
@@ -320,6 +322,7 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
             this.period = this.parseMediator.calculatePeriod(this.iStrategyPanel.getExtentValues().get(PERIOD).toString());
         if (!isValid()) {
             this.playButton.toggle(Boolean.FALSE);
+            this.saveStatus = Boolean.FALSE;
             return Boolean.FALSE;
         } else if (this.endDateMultifield.isEnabled() && !this.startDateMultifield.getDate().before(this.endDateMultifield.getDate())) {
             GeoPlatformMessage.errorMessage(LayerModuleConstants.INSTANCE.
@@ -334,9 +337,11 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
                             LayerTimeFilterWidget_timeFilterWarningTitleText(),
                     LayerModuleMessages.INSTANCE.
                             LayerTimeFilterWidget_periodDateErrorMessage());
+            this.saveStatus = Boolean.FALSE;
             return Boolean.FALSE;
         }
         this.calculateStep();
+        this.saveStatus = Boolean.TRUE;
         return Boolean.TRUE;
     }
 
@@ -366,6 +371,8 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
     protected void onDetach() {
         super.onDetach();
         this.stopPlayer();
+        if (!this.saveStatus)
+            WidgetPropertiesHandlerManager.fireEvent(new GPResetComponentsEvent());
     }
 
     @Override

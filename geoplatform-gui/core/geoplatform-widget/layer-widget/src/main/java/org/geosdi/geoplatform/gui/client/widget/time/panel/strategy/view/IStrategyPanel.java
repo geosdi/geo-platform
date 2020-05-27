@@ -1,4 +1,4 @@
-package org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.panel;
+package org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.view;
 
 import com.google.common.collect.Maps;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;

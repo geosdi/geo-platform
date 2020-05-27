@@ -41,7 +41,7 @@ import org.geosdi.geoplatform.gui.client.widget.panel.TimePeriodFormPanel;
 import org.geosdi.geoplatform.gui.client.widget.time.panel.mediator.IParseMediator;
 import org.geosdi.geoplatform.gui.client.widget.time.panel.mediator.colleague.IParseColleague;
 import org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.operation.IStrategyOperation;
-import org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.panel.IStrategyPanel;
+import org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.view.IStrategyPanel;
 
 import javax.inject.Singleton;
 

@@ -1,4 +1,4 @@
-package org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.panel;
+package org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.view;
 
 import com.google.gwt.i18n.client.DateTimeFormat;
 import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
@@ -34,6 +34,7 @@ public class PeriodPanelStrategy extends IStrategyPanel.AbstractPanelStrategy {
             this.valuesMap.put(TypeValueEnum.DATE_TO, this.parseDateFormat.parse(values[1].replace("Z", "")));
             this.valuesMap.put(TypeValueEnum.PERIOD, values[2]);
         }
+
 
 }
 

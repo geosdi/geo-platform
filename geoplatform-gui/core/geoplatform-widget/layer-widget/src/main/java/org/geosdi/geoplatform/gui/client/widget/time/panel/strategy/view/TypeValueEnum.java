@@ -1,4 +1,4 @@
-package org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.panel;
+package org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.view;
 
 /**
  * @author Vito Salvia- CNR IMAA geoSDI Group

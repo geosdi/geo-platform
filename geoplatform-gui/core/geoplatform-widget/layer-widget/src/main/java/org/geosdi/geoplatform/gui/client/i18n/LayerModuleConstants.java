@@ -238,9 +238,11 @@ public interface LayerModuleConstants extends Constants {
     @DefaultStringValue("Current date")
     String LayerTimeFilterWidget_currentDateTooltipText();
 
-    @DefaultStringValue("Step")
+    @DefaultStringValue("Tot. Steps")
     String LayerTimeFilterWidget_stepTooltipText();
 
+    @DefaultStringValue("Refresh (s)")
+    String LayerTimeFilterWidget_refreshTooltipText();
 
     @DefaultStringValue("Enable to date")
     String LayerTimeFilterWidget_enableToDate();

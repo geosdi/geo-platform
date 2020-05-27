@@ -35,7 +35,15 @@
  */
 /** Add css rules here for your application. */
 
-.dateMultifield{
+.dateMultifield {
     width: 250px !important;
+}
+
+.label_period {
+    width: auto !important;
+}
+
+.label_animation input{
+    width: 76px !important;
 }
 

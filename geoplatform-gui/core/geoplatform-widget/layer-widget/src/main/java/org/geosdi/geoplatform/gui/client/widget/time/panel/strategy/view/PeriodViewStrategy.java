@@ -11,11 +11,13 @@ import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;
 
+import java.util.Date;
+
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class PeriodPanelStrategy extends IStrategyPanel.AbstractPanelStrategy {
+public class PeriodViewStrategy extends IStrategyView.AbstractPanelStrategy {
 
     static DateTimeFormat parseDateFormat = DateTimeFormat.getFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
 
@@ -29,9 +31,17 @@ public class PeriodPanelStrategy extends IStrategyPanel.AbstractPanelStrategy {
 
         protected void parseExtentValue(GPTreePanel<GPBeanTreeModel> treePanel) {
             String[] values = (((RasterTreeNode) treePanel.getSelectionModel().getSelectedItem()).getExtent().getValue().split("/"));
-//            GWT.log("@@@@"+values);
+            Date dateTo;
+            if (values.length == 1 || values[1] == null || values[1].isEmpty()) {
+                dateTo = new Date();
+                int minutesDiff = dateTo.getMinutes() % 5 - 5;
+                dateTo.setMinutes(minutesDiff);
+                dateTo.setSeconds(0);
+            } else {
+                dateTo = this.parseDateFormat.parse(values[1].replace("Z", ""));
+            }
             this.valuesMap.put(TypeValueEnum.DATE_FROM, this.parseDateFormat.parse(values[0].replace("Z", "")));
-            this.valuesMap.put(TypeValueEnum.DATE_TO, this.parseDateFormat.parse(values[1].replace("Z", "")));
+            this.valuesMap.put(TypeValueEnum.DATE_TO, dateTo);
             this.valuesMap.put(TypeValueEnum.PERIOD, values[2]);
         }
 

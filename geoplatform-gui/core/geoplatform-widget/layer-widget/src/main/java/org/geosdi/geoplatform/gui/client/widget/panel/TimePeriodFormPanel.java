@@ -14,6 +14,7 @@ import com.extjs.gxt.ui.client.widget.layout.ColumnLayout;
 import com.extjs.gxt.ui.client.widget.layout.FlowData;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.google.common.collect.Lists;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
@@ -384,7 +385,6 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
         this.partialStore.clear();
         this.periodSlider.setValue(0);
         this.labelCurrenteTime.setValue(null);
-        this.store.clear();
         this.partialStore.clear();
         this.labelStep.setValue(null);
         this.timerAnimation.setValue(1);
@@ -416,11 +416,11 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
     private void calculateStep() {
         Date dateTo = (Date) this.iStrategyView.getExtentValues().get(DATE_TO);
         Date dateFrom = (Date) this.iStrategyView.getExtentValues().get(DATE_FROM);
+        Date d = new Date(dateFrom.getTime());
         if (this.store.isEmpty()) {
-            this.store.add(dateFrom);
-            while (dateFrom.equals(dateTo) || dateFrom.before(dateTo)) {
-                dateFrom = new Date(dateFrom.getTime() + this.period);
-                this.store.add(dateFrom);
+            while (d.getTime() >= dateFrom.getTime() && d.getTime() <= dateTo.getTime()) {
+                this.store.add(d);
+                d = new Date(d.getTime() + this.period);
             }
         }
         this.iStrategyOperation.getStrategy(this.endDateCheckBox.getValue()).getApplyOperation(this.store, this.startDateMultifield.getDate(),
@@ -451,6 +451,7 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
 
     @Override
     public void periodWithSingleDate(int index) {
+        GWT.log("@@@@@@@@@@@@@@@@@@ " + this.store);
         this.partialStore.clear();
         this.partialStore.addAll(this.store);
         this.periodSlider.setMaxValue(this.partialStore.size() - 1);

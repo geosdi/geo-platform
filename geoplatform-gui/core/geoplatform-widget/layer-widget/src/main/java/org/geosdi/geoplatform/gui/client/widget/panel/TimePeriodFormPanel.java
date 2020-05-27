@@ -174,7 +174,7 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
                 if (value >= 0 && !partialStore.isEmpty()) {
                     super.setValue(value);
                     currentValue = value;
-                    labelCurrenteTime.setValue(partialStore.get(currentValue));
+                    labelCurrenteTime.setValue(fmt.format(partialStore.get(currentValue)));
                     super.setMessage("" + partialStore.get(currentValue));
                     GPLayerTreeModel layerSelected = (GPLayerTreeModel) treePanel.getSelectionModel().getSelectedItem();
 //                    GWT.log(layerSelected.getLabel()+layerSelected.getLabel() + LAYER_TIME_DELIMITER + timeFilter+ "]");
@@ -342,6 +342,7 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
         }
         this.calculateStep();
         this.saveStatus = Boolean.TRUE;
+        this.labelPeriod.setValue(this.parseMediator.getParsedPeriod());
         return Boolean.TRUE;
     }
 
@@ -359,19 +360,20 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
         this.partialStore.clear();
         this.periodSlider.setValue(0);
         this.labelCurrenteTime.setValue(null);
+        this.store.clear();
+        this.partialStore.clear();
     }
 
     @Override
     protected void onAttach() {
         super.onAttach();
-//        initComponents();
     }
 
     @Override
     protected void onDetach() {
         super.onDetach();
         this.stopPlayer();
-        if (!this.saveStatus)
+//        if (!this.saveStatus)
             WidgetPropertiesHandlerManager.fireEvent(new GPResetComponentsEvent());
     }
 
@@ -381,7 +383,6 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
         Map<TypeValueEnum, Object> m = this.iStrategyPanel.getExtentValues();
         this.labelRange.setValue(fmt.format((Date) m.get(DATE_FROM)).concat(" / ")
                 .concat(fmt.format((Date) m.get(DATE_TO))));
-        this.labelPeriod.setValue(m.get(PERIOD));
         this.endDateMultifield.bindDate((Date) m.get(DATE_FROM), (Date) m.get(DATE_TO));
         this.startDateMultifield.bindDate((Date) m.get(DATE_FROM), (Date) m.get(DATE_TO));
     }

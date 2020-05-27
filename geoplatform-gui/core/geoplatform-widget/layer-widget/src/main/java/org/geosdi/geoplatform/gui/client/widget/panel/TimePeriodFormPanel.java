@@ -200,7 +200,7 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
                     super.setValue(value);
                     currentValue = value;
                     labelCurrenteTime.setValue(fmt.format(partialStore.get(currentValue)));
-                    super.setMessage("" + partialStore.get(currentValue));
+                    super.setMessage("" + fmt.format(partialStore.get(currentValue)));
                     GPLayerTreeModel layerSelected = (GPLayerTreeModel) treePanel.getSelectionModel().getSelectedItem();
 //                    GWT.log(layerSelected.getLabel()+layerSelected.getLabel() + LAYER_TIME_DELIMITER + timeFilter+ "]");
 //                    GeoPlatformMessage.infoMessage(LayerModuleConstants.INSTANCE.LayerTimeFilterWidget_timeFilterMessageTitleText(),
@@ -216,10 +216,12 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
                     treePanel.refresh(layerSelected);
                     enableOnPlaying();
                 }
+
             }
         };
         this.periodSlider.setIncrement(1);
         this.periodSlider.setUseTip(Boolean.TRUE);
+        this.periodSlider.setDraggable(Boolean.FALSE);
         this.playButton.setToolTip(ButtonsConstants.INSTANCE.playText());
         this.reversePlayButton.setToolTip(ButtonsConstants.INSTANCE.playReverseText());
         this.forwardPlayButton.setToolTip(ButtonsConstants.INSTANCE.nextText());

@@ -37,8 +37,10 @@ public interface IParseColleague {
             Long p = 0l;
 
             if (period.contains(getKey().getTimeLabel())) {
-                p += Integer.parseInt(period.substring(0, period.indexOf(getKey().getTimeLabel()))) * getKey().getValue();
+                String v = period.substring(0, period.indexOf(getKey().getTimeLabel()));
+                p += Integer.parseInt(v) * getKey().getValue();
                 this.mediator.setPeriodValue(period.substring(period.indexOf(getKey().getTimeLabel()) + 1));
+                this.mediator.setParsedPeriod(v + " " + getKey().getLabel());
             }
             return p;
         }

@@ -33,13 +33,23 @@ public interface IParseMediator {
      */
     boolean isInitTime();
 
+    /**
+     * @return
+     */
+    String getParsedPeriod();
+
+    /**
+     * @param parsedPeriod
+     */
+    void setParsedPeriod(String parsedPeriod);
+
     @Singleton
     class ParseMediator implements IParseMediator {
 
 
         private Map<IParseColleagueKey, IParseColleague> colleagueMap = Maps.newLinkedHashMap();
         private String periodValue;
-
+        private String parsedPeriod = "";
         private boolean initTime;
 
         /**
@@ -70,9 +80,28 @@ public interface IParseMediator {
             return period;
         }
 
+        /**
+         * @param periodValue
+         */
         public void setPeriodValue(String periodValue) {
             this.periodValue = periodValue;
         }
+
+        /**
+         * @return
+         */
+        public String getParsedPeriod() {
+            return this.parsedPeriod;
+        }
+
+        /**
+         * @param parsedPeriod
+         */
+        public void setParsedPeriod(String parsedPeriod) {
+            this.parsedPeriod = this.parsedPeriod.concat(" ").concat(parsedPeriod).concat(" - ");
+            this.parsedPeriod = this.parsedPeriod.substring(0, this.parsedPeriod.lastIndexOf("-"));
+        }
+
 
     }
 

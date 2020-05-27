@@ -46,8 +46,8 @@ public abstract class TimePeriodDateMultifield extends MultiField implements GPR
         this.dateField.setWidth(100);
         this.dateField.setEditable(false);
         this.dateField.setAllowBlank(Boolean.FALSE);
-        DatePicker fromDatePicker = this.dateField.getDatePicker();
-        fromDatePicker.addListener(Events.Select, new Listener<DatePickerEvent>() {
+        DatePicker datePicker = this.dateField.getDatePicker();
+        datePicker.addListener(Events.Select, new Listener<DatePickerEvent>() {
             @Override
             public void handleEvent(DatePickerEvent dpe) {
                 date = dpe.getDate();

@@ -57,7 +57,8 @@ public class StartDateMultifield extends TimePeriodDateMultifield {
         if (date.getTime() == dateWithZeroTime.getTime()) {
             this.hourField.setMinValue(this.limitDate.getHours());
             this.hourField.setValue(this.limitDate.getHours());
-            this.minuteField.setValue(limitDate.getMinutes());
+            this.minuteField.setValue(this.limitDate.getMinutes());
+            this.minuteField.setMinValue(this.limitDate.getMinutes());
         }
         if (this.date.getTime() != dateWithZeroTime.getTime()) {
             this.hourField.setMinValue(0);

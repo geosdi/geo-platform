@@ -47,7 +47,7 @@ import static org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.view.
  * @author Vito Salvia- CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class TimeFilterPanel extends GeoPlatformContentPanel {
+public class TimeRangePanel extends GeoPlatformContentPanel {
 
     private Label endTimeLabel;
     private Label startTimeLabel;
@@ -74,7 +74,7 @@ public class TimeFilterPanel extends GeoPlatformContentPanel {
     private final TimeFilterLayerMapEvent timeFilterLayerMapEvent = new TimeFilterLayerMapEvent();
     private GPTreePanel treePanel;
 
-    public TimeFilterPanel(GPTreePanel tree) {
+    public TimeRangePanel(GPTreePanel tree) {
         super(Boolean.TRUE);
         this.treePanel = tree;
         this.variableDimensionContainer = new LayoutContainer(new FormLayout()) {

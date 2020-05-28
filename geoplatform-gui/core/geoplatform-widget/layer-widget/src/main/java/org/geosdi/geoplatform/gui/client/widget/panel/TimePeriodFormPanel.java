@@ -20,9 +20,12 @@ import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import org.geosdi.geoplatform.gui.client.LayerResources;
+import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleMessages;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
+import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
+import org.geosdi.geoplatform.gui.client.model.memento.save.storage.AbstractMementoOriginalProperties;
 import org.geosdi.geoplatform.gui.client.puregwt.action.GPActionHandler;
 import org.geosdi.geoplatform.gui.client.puregwt.binding.GPDateBindingHandler;
 import org.geosdi.geoplatform.gui.client.puregwt.filter.event.GPHideFilterWidgetEvent;
@@ -199,21 +202,19 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
             public void setValue(int value) {
                 if (value >= 0 && !partialStore.isEmpty()) {
                     super.setValue(value);
-                    currentValue = value;
-                    labelCurrenteTime.setValue(fmt.format(partialStore.get(currentValue)));
                     super.setMessage("" + fmt.format(partialStore.get(currentValue)));
                     GPLayerTreeModel layerSelected = (GPLayerTreeModel) treePanel.getSelectionModel().getSelectedItem();
-//                    GWT.log(layerSelected.getLabel()+layerSelected.getLabel() + LAYER_TIME_DELIMITER + timeFilter+ "]");
-//                    GeoPlatformMessage.infoMessage(LayerModuleConstants.INSTANCE.LayerTimeFilterWidget_timeFilterMessageTitleText(),
-//                            LayerModuleMessages.INSTANCE.LayerTimeFilterWidget_layerStatusShowedMessage(timeFilter));
-                    //1985-01-01T23:00:00.000Z
-//                    GWT.log("@@@@@@@@@@@"+partialStore.get(currentValue));
+                    IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
+                    AbstractMementoOriginalProperties memento = mementoSave.copyOriginalProperties(layerSelected);
+                    currentValue = value;
+                    labelCurrenteTime.setValue(fmt.format(partialStore.get(currentValue)));
                     String f = sdf.format(partialStore.get(currentValue)).concat(".000Z");
                     layerSelected.setTimeFilter(f);
                     layerSelected.setAlias(null);
                     layerSelected.setAlias(layerSelected.getLabel() + LAYER_TIME_DELIMITER + f + "]");
                     TIME_FILTER_LAYER_MAP_EVENT.setLayerBean(layerSelected);
                     GPHandlerManager.fireEvent(TIME_FILTER_LAYER_MAP_EVENT);
+                    mementoSave.putOriginalPropertiesInCache(memento);
                     treePanel.refresh(layerSelected);
                     enableOnPlaying();
                 }

@@ -72,7 +72,7 @@ public interface IStrategyView {
         @Inject
         public StrategyView() {
             this.panelMap.put(Boolean.FALSE, new PeriodViewStrategy());
-            this.panelMap.put(Boolean.TRUE, new FilterViewStrategy());
+            this.panelMap.put(Boolean.TRUE, new RangeViewStrategy());
         }
 
         /**

@@ -45,6 +45,8 @@ import static org.geosdi.geoplatform.gui.model.temporal.extent.IGPTemporalExtent
 public class GPTemporalExtentBean extends GeoPlatformBeanModel implements IGPTemporalExtentBean {
 
     private static final long serialVersionUID = 5502106936262045758L;
+    //
+    private Boolean range;
 
     /**
      * @return {@link String}
@@ -102,12 +104,31 @@ public class GPTemporalExtentBean extends GeoPlatformBeanModel implements IGPTem
         return ((this.getName() != null) && !(this.getName().trim().isEmpty())) && ((this.getValue() != null) && !(this.getValue().trim().isEmpty()));
     }
 
+    /**
+     *
+     * @return {@link Boolean}
+     */
+    public Boolean isRange() {
+        return range;
+    }
+
+    /**
+     *
+     * @param range
+     */
+    @Override
+    public void setRange(Boolean range) {
+        this.range = range;
+    }
+
     @Override
     public String toString() {
         return this.getClass().getSimpleName() + "{" +
                 "extentName = " + this.getName() +
                 ", defaultExtent = " + this.getDefaultExtent() +
                 ", extentValue = " + this.getValue() +
+                ", isRange = " + this.isRange().toString() +
                 "}";
     }
+
 }

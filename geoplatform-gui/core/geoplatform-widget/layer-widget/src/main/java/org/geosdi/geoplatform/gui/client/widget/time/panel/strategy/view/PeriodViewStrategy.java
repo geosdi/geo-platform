@@ -32,10 +32,11 @@ public class PeriodViewStrategy extends IStrategyView.AbstractPanelStrategy {
         protected void parseExtentValue(GPTreePanel<GPBeanTreeModel> treePanel) {
             String[] values = (((RasterTreeNode) treePanel.getSelectionModel().getSelectedItem()).getExtent().getValue().split("/"));
             Date dateTo;
-            if (values.length == 1 || values[1] == null || values[1].isEmpty()) {
+            if (values[2] == "PT5M") {
                 dateTo = new Date();
-                int minutesDiff = dateTo.getMinutes() % 5 - 5;
-                dateTo.setMinutes(minutesDiff);
+                int minutes = dateTo.getMinutes();
+                int minutesDiff = minutes % 5 + 10;
+                dateTo.setMinutes(minutes - minutesDiff);
                 dateTo.setSeconds(0);
             } else {
                 dateTo = this.parseDateFormat.parse(values[1].replace("Z", ""));

@@ -70,7 +70,7 @@ public class StartDateMultifield extends TimePeriodDateMultifield {
 
     protected void afterHourSelected(Date dateWithZeroTime, Date time) {
         if (date.getTime() == dateWithZeroTime.getTime() && limitDate.getHours() == time.getHours()) {
-            this.minuteField.setMinValue(limitDate.getMinutes());
+            this.minuteField.setMinValue(this.limitDate.getMinutes());
         } else {
             this.minuteField.setMinValue(0);
         }

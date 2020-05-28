@@ -82,6 +82,8 @@ public interface IStrategyView {
         @Override
         public GeoPlatformContentPanel getPanel(GPTreePanel<GPBeanTreeModel> treePanel) {
             this.currentStrategy = ((RasterTreeNode) treePanel.getSelectionModel().getSelectedItem()).getExtent().isRange();
+            if (this.currentStrategy == null)
+                this.currentStrategy = !((RasterTreeNode) treePanel.getSelectionModel().getSelectedItem()).getExtent().getValue().contains("/P");
             return this.panelMap.get(this.currentStrategy).buildPanel(treePanel);
         }
 

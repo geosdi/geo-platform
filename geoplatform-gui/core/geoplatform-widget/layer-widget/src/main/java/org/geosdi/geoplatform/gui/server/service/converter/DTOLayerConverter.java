@@ -217,7 +217,8 @@ public class DTOLayerConverter {
                 extentBean.setValue(extent.getValue());
                 extentBean.setRange(!extent.getValue().contains("/P"));
                 raster.setExtent(extentBean);
-                convertTimeLayerDTO(raster, rasterDTO);
+                if (rasterDTO.getTimeFilter() != null)
+                    convertTimeLayerDTO(raster, rasterDTO);
             }
         }
         ArrayList<GPStyleStringBeanModel> styles = Lists.<GPStyleStringBeanModel>newArrayList();
@@ -254,8 +255,9 @@ public class DTOLayerConverter {
                     layerAlias + LayerTimeFilterWidget.LAYER_TIME_DELIMITER
                             + raster.getVariableTimeFilter() + "]");
         }
-        //TODO for PERIOD
         else {
+            raster.setTimeFilter(layerDTO.getTimeFilter());
+            raster.setAlias(layerDTO.getAlias());
 
         }
     }

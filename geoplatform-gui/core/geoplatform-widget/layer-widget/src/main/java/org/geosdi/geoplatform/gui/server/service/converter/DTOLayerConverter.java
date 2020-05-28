@@ -233,8 +233,8 @@ public class DTOLayerConverter {
     }
 
     private void convertTimeLayerDTO(ClientRasterInfo raster, RasterLayerDTO layerDTO) {
+        raster.setTimeFilter(layerDTO.getTimeFilter());
         if (raster.getExtent().isRange()) {
-            raster.setTimeFilter(layerDTO.getTimeFilter());
             List<String> dimensionList = Lists.<String>newArrayList(raster.getExtent().getValue().split(","));
             String[] timeFilterSplitted = layerDTO.getTimeFilter().split("/");
             int startDimensionPosition = Integer.parseInt(timeFilterSplitted[0]);
@@ -256,9 +256,7 @@ public class DTOLayerConverter {
                             + raster.getVariableTimeFilter() + "]");
         }
         else {
-            raster.setTimeFilter(layerDTO.getTimeFilter());
             raster.setAlias(layerDTO.getAlias());
-
         }
     }
 

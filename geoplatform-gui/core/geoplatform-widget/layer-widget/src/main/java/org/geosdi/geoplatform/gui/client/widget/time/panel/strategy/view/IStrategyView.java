@@ -71,8 +71,8 @@ public interface IStrategyView {
 
         @Inject
         public StrategyView() {
-            this.panelMap.put(Boolean.TRUE, new PeriodViewStrategy());
-            this.panelMap.put(Boolean.FALSE, new FilterViewStrategy());
+            this.panelMap.put(Boolean.FALSE, new PeriodViewStrategy());
+            this.panelMap.put(Boolean.TRUE, new FilterViewStrategy());
         }
 
         /**
@@ -81,7 +81,7 @@ public interface IStrategyView {
          */
         @Override
         public GeoPlatformContentPanel getPanel(GPTreePanel<GPBeanTreeModel> treePanel) {
-            this.currentStrategy = ((RasterTreeNode) treePanel.getSelectionModel().getSelectedItem()).getExtent().getValue().contains("/P");
+            this.currentStrategy = ((RasterTreeNode) treePanel.getSelectionModel().getSelectedItem()).getExtent().isRange();
             return this.panelMap.get(this.currentStrategy).buildPanel(treePanel);
         }
 

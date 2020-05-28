@@ -93,4 +93,15 @@ public interface IGPTemporalExtentBean extends Serializable {
      * @return {@link Boolean}
      */
     boolean isTemporal();
+
+    /**
+     * @return {@link Boolean}
+     */
+    Boolean isRange();
+
+    /**
+     *
+     * @param range
+     */
+    void setRange(Boolean range);
 }

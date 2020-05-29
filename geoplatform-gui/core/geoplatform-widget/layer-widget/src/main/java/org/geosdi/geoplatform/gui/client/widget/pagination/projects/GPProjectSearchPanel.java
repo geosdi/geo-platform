@@ -5,7 +5,7 @@
  *    http://geo-platform.org
  *   ====================================================================
  *
- *   Copyright (C) 2008-2020 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ *   Copyright (C) 2008-2019 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  *   This program is free software: you can redistribute it and/or modify it
  *   under the terms of the GNU General Public License as published by
@@ -97,12 +97,12 @@ public class GPProjectSearchPanel extends GPListViewSearchPanel<GPClientProject>
     //
     private final GPDefaultProjectTreeEvent defaultProjectEvent = new GPDefaultProjectTreeEvent();
     private final GPDefaultProjectSelector selector;
+    //
+    private final GPProjectManagementWidget projectManagementWidget;
     //Protect this
     private GPSecureButton deleteButton;
     private GPSecureButton editButton;
     private GPSecureButton shareButton;
-    //
-    private final GPProjectManagementWidget projectManagementWidget;
 
     public GPProjectSearchPanel(GPProjectManagementWidget projectManagementWidget) {
         super(true, 12);
@@ -242,9 +242,8 @@ public class GPProjectSearchPanel extends GPListViewSearchPanel<GPClientProject>
                                 PeekCacheEvent peekCacheEvent = new PeekCacheEvent();
                                 LayerHandlerManager.fireEvent(peekCacheEvent);
                             } else {
-                                GeoPlatformMessage.errorMessage(
-                                        LayerModuleConstants.INSTANCE.ShareProjectPanel_shareVerifySaveOperationsTitleText(),
-                                        LayerModuleConstants.INSTANCE.ShareProjectPanel_shareVerifySaveOperationsMessageText());
+                                MementoModuleInjector.MainInjector.getInstance().getMementoSave().clear();
+                                selector.selectDefaultProject();
                             }
                         }
                     });

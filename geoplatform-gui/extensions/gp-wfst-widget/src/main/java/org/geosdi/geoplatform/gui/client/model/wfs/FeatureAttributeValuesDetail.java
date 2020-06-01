@@ -52,7 +52,7 @@ public abstract class FeatureAttributeValuesDetail extends GeoPlatformBeanModel 
     public FeatureAttributeValuesDetail(Map<String, String> attributes) {
         assert (attributes != null) : "attributes must not be null.";
         for (Map.Entry<String, String> att : attributes.entrySet()) {
-            this.set(att.getKey(), att.getValue());
+            this.set(att.getKey(), ((att.getValue() != null) ? att.getValue() : ""));
         }
         this.attributes = attributes;
     }

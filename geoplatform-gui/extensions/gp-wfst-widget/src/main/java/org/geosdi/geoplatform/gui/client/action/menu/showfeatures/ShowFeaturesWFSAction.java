@@ -40,7 +40,6 @@ import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.LayerTypeHandlerManager;
@@ -54,7 +53,6 @@ import org.geosdi.geoplatform.gui.client.widget.wfs.ShowFeaturesWidget;
 import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
 import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
-import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
@@ -62,7 +60,7 @@ import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
 import java.util.logging.Logger;
 
-import static org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetMessages.INSTANCE;
+import static com.google.gwt.user.client.ui.AbstractImagePrototype.create;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -78,11 +76,12 @@ public class ShowFeaturesWFSAction extends MenuBaseAction {
     private final CheckDataSourceRequest checkDataSourceRequest;
     final static Logger logger = Logger.getLogger("ShowFeaturesWFSAction");
 
-
-    public ShowFeaturesWFSAction(TreePanel<GPBeanTreeModel> treePanel) {
-        super(WFSTWidgetConstants.INSTANCE.showFeaturesTitleText(),
-                AbstractImagePrototype.create(BasicWidgetResources.ICONS.vector()));
-        this.treePanel = treePanel;
+    /**
+     * @param theTreePanel
+     */
+    public ShowFeaturesWFSAction(TreePanel<GPBeanTreeModel> theTreePanel) {
+        super(WFSTWidgetConstants.INSTANCE.showFeaturesTitleText(), create(BasicWidgetResources.ICONS.vector()));
+        this.treePanel = theTreePanel;
         this.bus = FeatureInjector.MainInjector.getInstance().getEventBus();
         this.showFeaturesWidget = FeatureInjector.MainInjector.getInstance().getShowElementsWidget();
         this.layerTypeHandlerManager = FeatureInjector.MainInjector.getInstance().getLayerTypeHandlerManager();

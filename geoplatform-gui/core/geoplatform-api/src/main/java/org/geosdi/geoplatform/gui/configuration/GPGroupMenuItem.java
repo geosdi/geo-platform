@@ -38,13 +38,18 @@ package org.geosdi.geoplatform.gui.configuration;
 import java.util.List;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 public interface GPGroupMenuItem extends GPMenuItem {
 
-    void setTools(List<? extends GPMenuGenericTool> tools);
+    /**
+     * @param theTools
+     */
+    void setTools(List<? extends GPMenuGenericTool> theTools);
 
+    /**
+     * @return {@link List<GPMenuGenericTool>}
+     */
     List<? extends GPMenuGenericTool> getTools();
 }

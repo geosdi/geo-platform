@@ -51,6 +51,7 @@ import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerAttributes;
 import org.geosdi.geoplatform.gui.model.user.GPSimpleUser;
 import org.geosdi.geoplatform.request.project.CloneProjectRequest;
+import org.springframework.beans.factory.InitializingBean;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -60,7 +61,7 @@ import java.util.List;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public interface ILayerService {
+public interface ILayerService extends InitializingBean {
 
     GPClientProject loadDefaultProject(HttpServletRequest httpServletRequest) throws GeoPlatformException;
 
@@ -72,85 +73,51 @@ public interface ILayerService {
 
     ArrayList<GPSimpleUser> getAccountsFromSharedProject(long idSharedProject, HttpServletRequest httpServletRequest) throws GeoPlatformException;
 
-    ArrayList<GPFolderClientInfo> loadProject(long projectId, HttpServletRequest httpServletRequest)
-            throws GeoPlatformException;
+    ArrayList<GPFolderClientInfo> loadProject(long projectId, HttpServletRequest httpServletRequest) throws GeoPlatformException;
 
-    GPClientProject loadDefaultProjectElements(HttpServletRequest httpServletRequest)
-            throws GeoPlatformException;
+    GPClientProject loadDefaultProjectElements(HttpServletRequest httpServletRequest) throws GeoPlatformException;
 
-    ArrayList<IGPFolderElements> loadFolderElements(Long folderID,
-            HttpServletRequest httpServletRequest)
-            throws GeoPlatformException;
+    ArrayList<IGPFolderElements> loadFolderElements(Long folderID, HttpServletRequest httpServletRequest) throws GeoPlatformException;
 
-    Long saveAddedFolderAndTreeModifications(MementoSaveAddedFolder memento,
-            HttpServletRequest httpServletRequest)
-            throws GeoPlatformException;
+    Long saveAddedFolderAndTreeModifications(MementoSaveAddedFolder memento, HttpServletRequest httpServletRequest) throws GeoPlatformException;
 
-    boolean saveDeletedFolderAndTreeModifications(MementoSaveRemove memento,
-            HttpServletRequest httpServletRequest)
-            throws GeoPlatformException;
+    boolean saveDeletedFolderAndTreeModifications(MementoSaveRemove memento, HttpServletRequest httpServletRequest) throws GeoPlatformException;
 
-    boolean saveDeletedLayerAndTreeModifications(MementoSaveRemove memento,
-            HttpServletRequest httpServletRequest)
-            throws GeoPlatformException;
+    boolean saveDeletedLayerAndTreeModifications(MementoSaveRemove memento, HttpServletRequest httpServletRequest) throws GeoPlatformException;
 
-    boolean saveDragAndDropLayerAndTreeModifications(MementoSaveDragDrop memento,
-            HttpServletRequest httpServletRequest)
-            throws GeoPlatformException;
+    boolean saveDragAndDropLayerAndTreeModifications(MementoSaveDragDrop memento, HttpServletRequest httpServletRequest) throws GeoPlatformException;
 
-    boolean saveDragAndDropFolderAndTreeModifications(MementoSaveDragDrop memento,
-            HttpServletRequest httpServletRequest)
-            throws GeoPlatformException;
+    boolean saveDragAndDropFolderAndTreeModifications(MementoSaveDragDrop memento, HttpServletRequest httpServletRequest) throws GeoPlatformException;
 
-    boolean saveCheckStatusFolderAndTreeModifications(MementoSaveCheck memento,
-            HttpServletRequest httpServletRequest)
-            throws GeoPlatformException;
+    boolean saveCheckStatusFolderAndTreeModifications(MementoSaveCheck memento, HttpServletRequest httpServletRequest) throws GeoPlatformException;
 
-    boolean saveCheckStatusLayerAndTreeModifications(MementoSaveCheck memento,
-            HttpServletRequest httpServletRequest)
-            throws GeoPlatformException;
+    boolean saveCheckStatusLayerAndTreeModifications(MementoSaveCheck memento, HttpServletRequest httpServletRequest) throws GeoPlatformException;
 
-    boolean saveLayerProperties(MementoLayerOriginalProperties memento,
-            HttpServletRequest httpServletRequest)
-            throws GeoPlatformException;
+    boolean saveLayerProperties(MementoLayerOriginalProperties memento, HttpServletRequest httpServletRequest) throws GeoPlatformException;
 
-    Long saveFolderForUser(String folderName, int position, int numberOfDescendants,
-            boolean isChecked, HttpServletRequest httpServletRequest)
-            throws GeoPlatformException;
+    Long saveFolderForUser(String folderName, int position, int numberOfDescendants, boolean isChecked, HttpServletRequest httpServletRequest) throws GeoPlatformException;
 
-    Long saveFolder(Long idParentFolder, String folderName, int position,
-            int numberOfDescendants, boolean isChecked, HttpServletRequest httpServletRequest)
-            throws GeoPlatformException;
+    Long saveFolder(Long idParentFolder, String folderName, int position, int numberOfDescendants, boolean isChecked, HttpServletRequest httpServletRequest) throws GeoPlatformException;
 
-    void deleteElement(Long id, TreeElement elementType,
-            HttpServletRequest httpServletRequest) throws GeoPlatformException;
+    void deleteElement(Long id, TreeElement elementType, HttpServletRequest httpServletRequest) throws GeoPlatformException;
 
     boolean checkWmsGetMapUrl(String url) throws GeoPlatformException;
 
     boolean checkKmlUrl(String url) throws GeoPlatformException;
 
-    BasePagingLoadResult<GPClientProject> searchProjects(PagingLoadConfig config,
-            String searchText, String imageURL,
-            HttpServletRequest httpServletRequest)
-            throws GeoPlatformException;
+    BasePagingLoadResult<GPClientProject> searchProjects(PagingLoadConfig config, String searchText, String imageURL, HttpServletRequest httpServletRequest) throws GeoPlatformException;
 
-    void setDefaultProject(Long projectID, HttpServletRequest httpServletRequest)
-            throws GeoPlatformException;
+    void setDefaultProject(Long projectID, HttpServletRequest httpServletRequest) throws GeoPlatformException;
 
-    Long saveProject(GPClientProject project, HttpServletRequest httpServletRequest)
-            throws GeoPlatformException;
+    Long saveProject(GPClientProject project, HttpServletRequest httpServletRequest) throws GeoPlatformException;
 
-    void updateProject(GPClientProject project,
-            HttpServletRequest httpServletRequest) throws GeoPlatformException;
+    void updateProject(GPClientProject project, HttpServletRequest httpServletRequest) throws GeoPlatformException;
 
-    void deleteProject(Long projectID,
-            HttpServletRequest httpServletRequest) throws GeoPlatformException;
+    void deleteProject(Long projectID, HttpServletRequest httpServletRequest) throws GeoPlatformException;
 
-    void setLayerRefreshTime(String emiteResource, String layerUUID, int secondToRefresh,
-            HttpServletRequest httpServletRequest) throws GeoPlatformException;
+    void setLayerRefreshTime(String emiteResource, String layerUUID, int secondToRefresh, HttpServletRequest httpServletRequest) throws GeoPlatformException;
 
-    String getLayerDimension(String layerName,
-            HttpServletRequest httpServletRequest) throws GeoPlatformException;
+    String getLayerDimension(String layerName, HttpServletRequest httpServletRequest) throws GeoPlatformException;
 
     List<GPLayerAttributes> describeFeatureType(String layerName) throws GeoPlatformException;
 

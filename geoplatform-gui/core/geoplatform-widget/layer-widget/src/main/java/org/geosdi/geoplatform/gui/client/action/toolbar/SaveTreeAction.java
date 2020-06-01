@@ -66,22 +66,23 @@ import static org.geosdi.geoplatform.gui.client.puregwt.refresh.GPCompositeRefre
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class SaveTreeAction extends ToolbarLayerTreeAction
-        implements GPPeekCacheEventHandler, Observer {
+public class SaveTreeAction extends ToolbarLayerTreeAction implements GPPeekCacheEventHandler, Observer {
 
     private DisplayLayersProgressBarEvent displayEvent = new DisplayLayersProgressBarEvent(true);
     private boolean visibiltyProgressBar;
     private GwtEvent eventAfterAllSaveOperations;
     private SaveTreeToolbarPlugin savePlugin;
 
+    /**
+     * @param theTree
+     * @param savePlugin
+     */
     public SaveTreeAction(TreePanel theTree, SaveTreeToolbarPlugin savePlugin) {
-        super(theTree, 
-                AbstractImagePrototype.create(BasicWidgetResources.ICONS.save()),
+        super(theTree, AbstractImagePrototype.create(BasicWidgetResources.ICONS.save()),
                 LayerModuleConstants.INSTANCE.SaveTreeAction_tooltipText());
         displayEvent.setMessage(LayerModuleConstants.INSTANCE.savingOperationsText());
         TimeoutHandlerManager.addHandler(GPPeekCacheEventHandler.TYPE, this);
         LayerHandlerManager.addHandler(GPPeekCacheEventHandler.TYPE, this);
-
         this.savePlugin = savePlugin;
         Boolean permission = GPAccountLogged.getInstance().hasComponentPermission(savePlugin.getId());
         if (permission) { // Observ only if the pemission is true

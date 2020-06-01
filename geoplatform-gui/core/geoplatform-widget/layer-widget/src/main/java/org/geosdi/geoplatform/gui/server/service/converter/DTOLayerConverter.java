@@ -43,7 +43,6 @@ import org.geosdi.geoplatform.core.model.temporal.dimension.GPTemporalDimension;
 import org.geosdi.geoplatform.core.model.temporal.extent.GPTemporalExtent;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoFolder;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
-import org.geosdi.geoplatform.gui.client.widget.time.LayerTimeFilterWidget;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.*;
 import org.geosdi.geoplatform.gui.model.temporal.dimension.GPTemporalDimensionBean;
@@ -53,15 +52,23 @@ import org.geosdi.geoplatform.gui.model.user.GPSimpleUser;
 import org.geosdi.geoplatform.gui.shared.GPLayerType;
 import org.geosdi.geoplatform.response.*;
 import org.geosdi.geoplatform.response.collection.TreeFolderElements;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.collect.Lists.newArrayList;
+import static java.util.stream.Collectors.toCollection;
+import static javax.annotation.meta.When.NEVER;
+import static org.geosdi.geoplatform.gui.client.widget.time.LayerTimeFilterWidget.LAYER_TIME_DELIMITER;
+import static org.geosdi.geoplatform.gui.shared.GPLayerType.WMS;
 
 /**
  * Simple Class to convert Web-Services beans model in DTO beans Client.
@@ -70,46 +77,43 @@ import java.util.List;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Component(value = "dtoLayerConverter")
-public class DTOLayerConverter {
+public class DTOLayerConverter implements GPDTOLayerConverter {
 
-    private static SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
-    //
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
-    public ArrayList<GPFolderClientInfo> convertOnlyFolders(
-            Collection<FolderDTO> folders) {
-        ArrayList<GPFolderClientInfo> foldersClient = Lists.<GPFolderClientInfo>newArrayList();
-        if (folders != null) {
-            for (Iterator<FolderDTO> it = folders.iterator(); it.hasNext(); ) {
-                GPFolderClientInfo folder = this.convertFolderElement(it.next());
-                foldersClient.add(folder);
-            }
-        }
-        return foldersClient;
+    /**
+     * @param folders
+     * @return {@link ArrayList<GPFolderClientInfo>}
+     */
+    public ArrayList<GPFolderClientInfo> convertOnlyFolders(Collection<FolderDTO> folders) {
+        return ((folders != null) ? folders.stream()
+                .filter(Objects::nonNull)
+                .map(this::convertFolderElement)
+                .collect(toCollection(ArrayList::new)) : newArrayList());
     }
 
-    public ArrayList<IGPFolderElements> convertFolderElements(
-            TreeFolderElements folderElements) {
-        ArrayList<IGPFolderElements> clientFolderElements = Lists.<IGPFolderElements>newArrayList();
-        Iterator<AbstractElementDTO> iterator = folderElements.iterator();
-        while (iterator.hasNext()) {
-            IElementDTO elementDTO = iterator.next();
-            logger.debug("@@@@@@@@@@@@@@@@@@ Element in HashSet {}", elementDTO);
-            clientFolderElements.add(this.convertElement(elementDTO));
-        }
-        return clientFolderElements;
+    /**
+     * @param folderElements
+     * @return {@link ArrayList<IGPFolderElements>}
+     * @throws Exception
+     */
+    public ArrayList<IGPFolderElements> convertFolderElements(@Nonnull(when = NEVER) TreeFolderElements folderElements) throws Exception{
+        checkArgument(folderElements != null, "The Parameter folderElements must not be null.");
+        return folderElements.stream()
+                .filter(Objects::nonNull)
+                .map(this::convertElement)
+                .collect(toCollection(ArrayList::new));
     }
 
-    public GPFolder convertMementoFolder(MementoFolder memento) {
+    /**
+     * @param memento
+     * @return {@link GPFolder}
+     * @throws Exception
+     */
+    public GPFolder convertMementoFolder(@Nonnull(when = NEVER) MementoFolder memento) throws Exception {
+        checkArgument(memento != null, "The Parameter memento must not be null.");
         GPFolder gpFolder = new GPFolder();
         gpFolder.setId(memento.getIdBaseElement());
         gpFolder.setName(memento.getFolderName());
         gpFolder.setNumberOfDescendants(memento.getNumberOfDescendants());
-//        if (memento.getIdParent() != null) {
-//            GPFolder parent = new GPFolder();
-//            parent.setId(memento.getIdParent());
-//            gpFolder.setParent(parent);
-//        }
         gpFolder.setPosition(memento.getzIndex());
         /*
          * TODO: Once implemented shared function you must set this property
@@ -118,7 +122,13 @@ public class DTOLayerConverter {
         return gpFolder;
     }
 
-    public GPProject convertToGProject(GPClientProject clientProject) {
+    /**
+     * @param clientProject
+     * @return {@link GPProject}
+     * @throws Exception
+     */
+    public GPProject convertToGProject(@Nonnull(when = NEVER) GPClientProject clientProject) throws Exception {
+        checkArgument(clientProject != null, "The Parameter clientProject must not be null.");
         GPProject project = new GPProject();
         project.setName(clientProject.getName());
         project.setShared(clientProject.isProjectShared());
@@ -129,7 +139,15 @@ public class DTOLayerConverter {
         return project;
     }
 
-    public AccountProjectPropertiesDTO convertToAccountProjectPropertiesDTO(Long accountID, GPClientProject project) {
+    /**
+     * @param accountID
+     * @param project
+     * @return {@link AccountProjectPropertiesDTO}
+     * @throws Exception
+     */
+    public AccountProjectPropertiesDTO convertToAccountProjectPropertiesDTO(@Nonnull(when = NEVER) Long accountID, @Nonnull(when = NEVER) GPClientProject project) throws Exception {
+        checkArgument(accountID != null, "The Parameter accountID must not be null.");
+        checkArgument(project != null, "The Parameter project must not be null.");
         AccountProjectPropertiesDTO dto = new AccountProjectPropertiesDTO();
         dto.setAccountID(accountID);
         dto.setProjectID(project.getId());
@@ -144,12 +162,19 @@ public class DTOLayerConverter {
         return dto;
     }
 
-    public GPClientProject convertToGPClientProject(ProjectDTO projectDTO) {
+    /**
+     * @param projectDTO
+     * @return {@link GPClientProject}
+     * @throws Exception
+     */
+    public GPClientProject convertToGPClientProject(@Nonnull(when = NEVER) ProjectDTO projectDTO) throws Exception {
+        checkArgument(projectDTO != null, "The Parameter projectDTO must not be null.");
         GPClientProject clientProject = new GPClientProject();
         clientProject.setId(projectDTO.getId());
         clientProject.setName(projectDTO.getName());
         clientProject.setVersion(projectDTO.getVersion());
         clientProject.setNumberOfElements(projectDTO.getNumberOfElements());
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
         clientProject.setCreationDate(dateFormatter.format(projectDTO.getCreationDate()));
         clientProject.setDefaultProject(projectDTO.isDefaultProject());
         clientProject.setProjectShared(projectDTO.isShared());
@@ -165,39 +190,57 @@ public class DTOLayerConverter {
         return clientProject;
     }
 
-    public GPClientProject convertToGPCLientProject(ProjectDTO projectDTO, String imageURL) {
+    /**
+     * @param projectDTO
+     * @param imageURL
+     * @return {@link GPClientProject}
+     * @throws Exception
+     */
+    public GPClientProject convertToGPCLientProject(@Nonnull(when = NEVER) ProjectDTO projectDTO, @Nullable String imageURL) throws Exception {
         GPClientProject clientProject = this.convertToGPClientProject(projectDTO);
         clientProject.setImage(imageURL);
         return clientProject;
     }
 
-    public List<GPSimpleUser> convertToGPSimpleUser(List<ShortAccountDTO> shortAccountList) {
-        List<GPSimpleUser> listSimpleUser = Lists.<GPSimpleUser>newArrayList();
-        for (ShortAccountDTO shortAccont : shortAccountList) {
-            if (shortAccont instanceof UserDTO) {
-                listSimpleUser.add(this.convertToGPSimpleUser((UserDTO) shortAccont));
-            }
-        }
-        return listSimpleUser;
+    /**
+     * @param shortAccountList
+     * @return {@link List<GPSimpleUser>}
+     * @throws Exception
+     */
+    public List<GPSimpleUser> convertToGPSimpleUser(@Nonnull(when = NEVER) List<ShortAccountDTO> shortAccountList) throws Exception {
+        checkArgument(shortAccountList != null, "The Parameter shortAccountList must not be null.");
+        return shortAccountList.stream()
+                .filter(Objects::nonNull)
+                .filter(v -> v instanceof UserDTO)
+                .map(v -> (UserDTO) v)
+                .map(this::convertToGPSimpleUser)
+                .collect(Collectors.toList());
     }
 
+    /**
+     * @param element
+     * @return {@link IGPFolderElements}
+     */
     private IGPFolderElements convertElement(IElementDTO element) {
         IGPFolderElements folderElement = null;
         if (element instanceof RasterLayerDTO) {
             folderElement = this.convertRasterElement((RasterLayerDTO) element);
         } else if (element instanceof VectorLayerDTO) {
-            folderElement = this.convertVectorElement(
-                    (VectorLayerDTO) element);
+            folderElement = this.convertVectorElement((VectorLayerDTO) element);
         } else if (element instanceof FolderDTO) {
             folderElement = this.convertFolderElement((FolderDTO) element);
         }
         return folderElement;
     }
 
+    /**
+     * @param rasterDTO
+     * @return {@link ClientRasterInfo}
+     */
     private ClientRasterInfo convertRasterElement(RasterLayerDTO rasterDTO) {
         ClientRasterInfo raster = new ClientRasterInfo();
         this.convertToLayerElementFromLayerDTO(raster, rasterDTO);
-        raster.setLayerType(GPLayerType.WMS);
+        raster.setLayerType(WMS);
         raster.setOpacity(rasterDTO.getOpacity());
         raster.setMaxScale(rasterDTO.getMaxScale());
         raster.setMinScale(rasterDTO.getMinScale());
@@ -232,6 +275,10 @@ public class DTOLayerConverter {
         return raster;
     }
 
+    /**
+     * @param raster
+     * @param layerDTO
+     */
     private void convertTimeLayerDTO(ClientRasterInfo raster, RasterLayerDTO layerDTO) {
         raster.setTimeFilter(layerDTO.getTimeFilter());
         if (raster.getExtent().isRange()) {
@@ -246,20 +293,22 @@ public class DTOLayerConverter {
             }
             raster.setVariableTimeFilter(variableTimeFilter);
             String layerAlias;
-            if (layerDTO.getAlias() != null && layerDTO.getAlias().indexOf(LayerTimeFilterWidget.LAYER_TIME_DELIMITER) != -1) {
-                layerAlias = layerDTO.getAlias().substring(0, layerDTO.getAlias().indexOf(LayerTimeFilterWidget.LAYER_TIME_DELIMITER));
+            if (layerDTO.getAlias() != null && layerDTO.getAlias().indexOf(LAYER_TIME_DELIMITER) != -1) {
+                layerAlias = layerDTO.getAlias().substring(0, layerDTO.getAlias().indexOf(LAYER_TIME_DELIMITER));
             } else {
                 layerAlias = layerDTO.getTitle();
             }
-            raster.setAlias(
-                    layerAlias + LayerTimeFilterWidget.LAYER_TIME_DELIMITER
-                            + raster.getVariableTimeFilter() + "]");
+            raster.setAlias(layerAlias + LAYER_TIME_DELIMITER + raster.getVariableTimeFilter() + "]");
         }
         else {
             raster.setAlias(layerDTO.getAlias());
         }
     }
 
+    /**
+     * @param vectorDTO
+     * @return {@link ClientVectorInfo}
+     */
     private ClientVectorInfo convertVectorElement(VectorLayerDTO vectorDTO) {
         ClientVectorInfo vector = new ClientVectorInfo();
         this.convertToLayerElementFromLayerDTO(vector, vectorDTO);
@@ -268,6 +317,10 @@ public class DTOLayerConverter {
         return vector;
     }
 
+    /**
+     * @param layer
+     * @param layerDTO
+     */
     private void convertToLayerElementFromLayerDTO(GPLayerClientInfo layer, ShortLayerDTO layerDTO) {
         layer.setAbstractText(layerDTO.getAbstractText());
         layer.setBbox(this.convertBbox(layerDTO.getBbox()));
@@ -282,6 +335,10 @@ public class DTOLayerConverter {
         layer.setSingleTileRequest(layerDTO.isSingleTileRequest());
     }
 
+    /**
+     * @param folderDTO
+     * @return {@link GPFolderClientInfo}
+     */
     private GPFolderClientInfo convertFolderElement(FolderDTO folderDTO) {
         GPFolderClientInfo folder = new GPFolderClientInfo();
         folder.setLabel(folderDTO.getName());
@@ -294,13 +351,19 @@ public class DTOLayerConverter {
         return folder;
     }
 
+    /**
+     * @param gpBbox
+     * @return {@link BBoxClientInfo}
+     */
     private BBoxClientInfo convertBbox(GPBBox gpBbox) {
-        return new BBoxClientInfo(gpBbox.getMinX(), gpBbox.getMinY(),
-                gpBbox.getMaxX(), gpBbox.getMaxY());
+        return new BBoxClientInfo(gpBbox.getMinX(), gpBbox.getMinY(), gpBbox.getMaxX(), gpBbox.getMaxY());
     }
 
-    private void setVectorLayerType(ClientVectorInfo vector,
-            GPLayerType layerType) {
+    /**
+     * @param vector
+     * @param layerType
+     */
+    private void setVectorLayerType(ClientVectorInfo vector, GPLayerType layerType) {
         switch (layerType) {
             case POINT:
                 vector.setLayerType(GPLayerType.POINT);
@@ -325,15 +388,21 @@ public class DTOLayerConverter {
         }
     }
 
+    /**
+     * @param folderElements
+     * @return {@link List<IGPFolderElements>}
+     */
     private List<IGPFolderElements> convertFolderElements(List<AbstractElementDTO> folderElements) {
-        List<IGPFolderElements> clientFolderElements = Lists.<IGPFolderElements>newArrayList();
-        Iterator<AbstractElementDTO> iterator = folderElements.iterator();
-        while (iterator.hasNext()) {
-            clientFolderElements.add(this.convertElement(iterator.next()));
-        }
-        return clientFolderElements;
+        return ((folderElements != null) ? folderElements.stream()
+                .filter(Objects::nonNull)
+                .map(this::convertElement)
+                .collect(Collectors.toList()) : Lists.newArrayList());
     }
 
+    /**
+     * @param userDTO
+     * @return {@link GPSimpleUser}
+     */
     private GPSimpleUser convertToGPSimpleUser(UserDTO userDTO) {
         GPSimpleUser user = new GPSimpleUser();
         user.setId(userDTO.getId());

@@ -70,16 +70,17 @@ import javax.inject.Inject;
 import java.util.List;
 import java.util.Map;
 
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
+
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class ShowFeaturesWidget extends GeoPlatformWindow
-        implements IFeatureWidget, ShowFeatureAttributesHandler {
+public class ShowFeaturesWidget extends GeoPlatformWindow implements IFeatureWidget, ShowFeatureAttributesHandler {
 
     private final GPEventBus bus;
-    private final GetAllFeatureRequest getAllFeatureRequest = GWT.<GetAllFeatureRequest>create(
-            GetAllFeatureRequest.class);
+    private final GetAllFeatureRequest getAllFeatureRequest = GWT.<GetAllFeatureRequest>create(GetAllFeatureRequest.class);
     @Inject
     private FeatureStatusBar statusBar;
     @Inject
@@ -109,26 +110,23 @@ public class ShowFeaturesWidget extends GeoPlatformWindow
     @Override
     public void initSize() {
         super.setSize(1000, 400);
-        super.setPosition(super.getParent().getOffsetWidth()-1000,
-                super.getParent().getOffsetHeight()- 400);
-
+        super.setPosition(super.getParent().getOffsetWidth()-1000, super.getParent().getOffsetHeight()- 400);
         super.setHeadingHtml(i18n.labelShowFeature(size));
         super.setIcon(AbstractImagePrototype.create(BasicWidgetResources.ICONS.vector()));
     }
 
     @Override
     public void setWindowProperties() {
-        super.setCollapsible(Boolean.FALSE);
-        super.setResizable(Boolean.TRUE);
-        super.setMaximizable(Boolean.TRUE);
-        super.setModal(Boolean.FALSE);
-        super.setPlain(Boolean.TRUE);
+        super.setCollapsible(FALSE);
+        super.setResizable(TRUE);
+        super.setMaximizable(TRUE);
+        super.setModal(FALSE);
+        super.setPlain(TRUE);
         super.setLayout(new BorderLayout());
     }
 
     private void addAttributesWidget() {
-        BorderLayoutData layoutData = new BorderLayoutData(LayoutRegion.CENTER,
-                150);
+        BorderLayoutData layoutData = new BorderLayoutData(LayoutRegion.CENTER, 150);
         layoutData.setMargins(new Margins(5, 5, 5, 5));
         layoutData.setCollapsible(true);
         layoutData.setSplit(true);
@@ -147,10 +145,8 @@ public class ShowFeaturesWidget extends GeoPlatformWindow
 
     @Override
     public void show() {
-        if ((this.layerSchemaBinder.getSelectedLayer() == null)
-                || (this.layerSchemaBinder.getLayerSchemaDTO() == null)) {
-            throw new IllegalArgumentException(
-                    "Both SchemaDTO and GPLayerBean must not be null");
+        if ((this.layerSchemaBinder.getSelectedLayer() == null) || (this.layerSchemaBinder.getLayerSchemaDTO() == null)) {
+            throw new IllegalArgumentException("Both SchemaDTO and GPLayerBean must not be null");
         }
         this.size = 50;
         super.show();
@@ -205,16 +201,10 @@ public class ShowFeaturesWidget extends GeoPlatformWindow
             public void onCommandSuccess(GetAllFeatureResponse response) {
                 if (!response.getResult().isFeaturesLoaded()) {
                     String errorMessage = "Error on WFS GetFeature request";
-
-                    GeoPlatformMessage.errorMessage("GetFeture Service Error",
-                            errorMessage + " - " + response.getResult().getErrorMessage());
-
-                    LayoutManager.getInstance().getStatusMap().setStatus(
-                            errorMessage + " for " + layerSchemaBinder.getLayerSchemaDTO().getTypeName() +
-                                    " layer.", SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
+                    GeoPlatformMessage.errorMessage("GetFeture Service Error", errorMessage + " - " + response.getResult().getErrorMessage());
+                    LayoutManager.getInstance().getStatusMap().setStatus(errorMessage + " for " + layerSchemaBinder.getLayerSchemaDTO().getTypeName() + " layer.", SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
                 } else {
-                    List<FeatureDetail> instances = Lists.<FeatureDetail>newArrayListWithCapacity(
-                            response.getResult().getFeatures().size());
+                    List<FeatureDetail> instances = Lists.<FeatureDetail>newArrayListWithCapacity(response.getResult().getFeatures().size());
                     for (FeatureDTO feature : GPSharedUtils.safeList(response.getResult().getFeatures())) {
                         Map<String, String> attributes = feature.getAttributes().getAttributesMap();
                         FeatureDetail featureDetail = new FeatureDetail(attributes, feature);

@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.gui.client.widget.wfs;
 
 import com.extjs.gxt.ui.client.Registry;
-import com.extjs.gxt.ui.client.Style;
+import com.extjs.gxt.ui.client.Style.SelectionMode;
 import com.extjs.gxt.ui.client.data.ModelKeyProvider;
 import com.extjs.gxt.ui.client.event.*;
 import com.extjs.gxt.ui.client.store.ListStore;
@@ -44,7 +44,6 @@ import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.google.common.collect.Lists;
-import com.google.gwt.core.client.GWT;
 import org.geosdi.geoplatform.connector.wfs.response.AttributeDTO;
 import org.geosdi.geoplatform.gui.client.MapRegistryEnum;
 import org.geosdi.geoplatform.gui.client.model.binder.ILayerSchemaBinder;
@@ -53,14 +52,15 @@ import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureStatusBarEvent
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
 import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
 import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar.FeatureStatusBarType;
-import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
-import org.geosdi.geoplatform.gui.puregwt.geocoding.GPGeocodingHandlerManager;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.Boolean.TRUE;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -86,9 +86,9 @@ public class ShowFeatureAttributesWidget extends GeoPlatformContentPanel {
 
     @Inject
     public ShowFeatureAttributesWidget(GPEventBus bus) {
-        super(Boolean.TRUE);
+        super(TRUE);
         this.bus = bus;
-        super.setMonitorWindowResize(Boolean.TRUE);
+        super.setMonitorWindowResize(TRUE);
         addWidgetListener(new WidgetListener() {
 
             @Override
@@ -100,8 +100,7 @@ public class ShowFeatureAttributesWidget extends GeoPlatformContentPanel {
             }
 
         });
-        this.mapLayoutWidget = Registry.get(
-                MapRegistryEnum.MAP_LAYOUT_WIDGET.toString());
+        this.mapLayoutWidget = Registry.get(MapRegistryEnum.MAP_LAYOUT_WIDGET.toString());
     }
 
     public void reconfigureEditorGrid() {
@@ -160,12 +159,12 @@ public class ShowFeatureAttributesWidget extends GeoPlatformContentPanel {
 
     private void createGrid() {
         this.grid = new Grid<FeatureDetail>(store, mockColumnModel);
-        this.grid.setBorders(Boolean.TRUE);
-        this.grid.setStripeRows(Boolean.TRUE);
-        this.grid.setColumnLines(Boolean.TRUE);
-        this.grid.setColumnResize(Boolean.TRUE);
+        this.grid.setBorders(TRUE);
+        this.grid.setStripeRows(TRUE);
+        this.grid.setColumnLines(TRUE);
+        this.grid.setColumnResize(TRUE);
         this.grid.setHeight(295);
-        this.grid.getSelectionModel().setSelectionMode(Style.SelectionMode.SINGLE);
+        this.grid.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
 
         grid.addListener(Events.CellClick, new Listener<BaseEvent>() {
@@ -199,12 +198,11 @@ public class ShowFeatureAttributesWidget extends GeoPlatformContentPanel {
     }
 
     public void postInstances(List<FeatureDetail> instaces) {
-        assert (instaces != null) : "Feature instances must not be null.";
+        checkArgument(instaces != null, "The Parameter instances must not be null.");
         int numFeature = instaces.size();
         this.populateStore(instaces);
         grid.unmask();
-        bus.fireEvent(new FeatureStatusBarEvent("Features Loaded " + numFeature,
-                FeatureStatusBarType.STATUS_OK));
+        bus.fireEvent(new FeatureStatusBarEvent("Features Loaded " + numFeature, FeatureStatusBarType.STATUS_OK));
     }
 
     private void populateStore(List<FeatureDetail> attValues) {
@@ -223,5 +221,4 @@ public class ShowFeatureAttributesWidget extends GeoPlatformContentPanel {
             this.grid.unmask();
         }
     }
-
 }

@@ -32,19 +32,13 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.configuration.action.event;
+package org.geosdi.geoplatform.gui.configuration.composite.menu.tools;
 
-import com.google.gwt.event.shared.HandlerRegistration;
+import org.geosdi.geoplatform.gui.configuration.GPGroupMenuItem;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface HasActionEnableHandler {
-
-    /**
-     * @param actionHandler
-     * @return {@link HandlerRegistration}
-     */
-    HandlerRegistration addActionEnableHandler(ActionEnableHandler actionHandler);
+public interface GPTreeMenuGroupItem extends GPGroupMenuItem {
 }

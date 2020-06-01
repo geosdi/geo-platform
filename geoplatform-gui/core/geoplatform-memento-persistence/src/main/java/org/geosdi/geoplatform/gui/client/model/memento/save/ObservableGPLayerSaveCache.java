@@ -35,9 +35,10 @@
  */
 package org.geosdi.geoplatform.gui.client.model.memento.save;
 
-import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.model.tree.LayerEvents;
 import org.geosdi.geoplatform.gui.observable.Observable;
+
+import javax.inject.Singleton;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group

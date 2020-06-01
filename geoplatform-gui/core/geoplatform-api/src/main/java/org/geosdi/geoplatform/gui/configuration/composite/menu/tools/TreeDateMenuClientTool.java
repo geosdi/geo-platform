@@ -44,14 +44,12 @@ import org.geosdi.geoplatform.gui.configuration.composite.menu.strategy.GPTreeMe
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class TreeDateMenuClientTool extends TreeMenuClientTool implements
-        GPDateMenuItem {
+public class TreeDateMenuClientTool extends TreeMenuClientTool implements GPDateMenuItem {
 
     private static final long serialVersionUID = 2641886555318541195L;
 
     @Override
-    protected void create(GPTreeMenuStrategy menuCreator,
-            Menu menu) {
+    protected void create(GPTreeMenuStrategy menuCreator, Menu menu) {
         menuCreator.addDateMenu(this, menu);
     }
 

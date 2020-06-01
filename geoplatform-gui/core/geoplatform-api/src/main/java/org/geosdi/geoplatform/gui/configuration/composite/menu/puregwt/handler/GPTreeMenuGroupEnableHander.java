@@ -32,19 +32,18 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.configuration.action.event;
+package org.geosdi.geoplatform.gui.configuration.composite.menu.puregwt.handler;
 
-import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface HasActionEnableHandler {
+public interface GPTreeMenuGroupEnableHander extends EventHandler {
 
-    /**
-     * @param actionHandler
-     * @return {@link HandlerRegistration}
-     */
-    HandlerRegistration addActionEnableHandler(ActionEnableHandler actionHandler);
+    GwtEvent.Type<GPTreeMenuGroupEnableHander> TYPE = new GwtEvent.Type<GPTreeMenuGroupEnableHander>();
+
+    void onEnableTreeMenuGroupItem();
 }

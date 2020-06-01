@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.impl.menu.binder;
 
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.MenuEvent;
+import com.extjs.gxt.ui.client.widget.Component;
 import com.extjs.gxt.ui.client.widget.menu.CheckMenuItem;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.extjs.gxt.ui.client.widget.menu.MenuItem;
@@ -49,12 +50,19 @@ import org.geosdi.geoplatform.gui.action.menu.tree.TreeMenuCompositeAction;
 import org.geosdi.geoplatform.gui.configuration.*;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableEvent;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableHandler;
+import org.geosdi.geoplatform.gui.configuration.composite.menu.puregwt.event.GPTreeMenuGroupEnableEvent;
+import org.geosdi.geoplatform.gui.configuration.composite.menu.puregwt.handler.GPTreeMenuGroupEnableHander;
+import org.geosdi.geoplatform.gui.configuration.composite.menu.tools.GPTreeMenuGroupItem;
 import org.geosdi.geoplatform.gui.impl.tree.menu.strategy.AbstractTreeMenuStrategy;
+import org.geosdi.geoplatform.gui.puregwt.GPMenuActionHandlerManager;
 
 import java.util.List;
 import java.util.logging.Logger;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
+import static org.geosdi.geoplatform.gui.configuration.composite.menu.puregwt.handler.GPTreeMenuGroupEnableHander.TYPE;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -148,11 +156,26 @@ public class GPMenuActionBinder implements MenuActionBinder {
     public void bindGroupMenuItem(GPGroupMenuItem tool, Menu menu) {
         checkArgument(tool != null, "The Parameter tool must not be null.");
         checkArgument(menu != null, "The Parameter menu must not be null.");
-        MenuItem item = new MenuItem(tool.getText());
+        final MenuItem item = new MenuItem(tool.getText());
         menu.add(item);
-        Menu subMenu = new Menu();
+        final Menu subMenu = new Menu();
         this.bindTools(subMenu, tool.getTools());
         item.setSubMenu(subMenu);
+        if ((tool instanceof GPTreeMenuGroupItem) && (this.menuCreator instanceof AbstractTreeMenuStrategy)) {
+            GPMenuActionHandlerManager.addHandlerToSource(TYPE, subMenu.getId(), new GPTreeMenuGroupEnableHander() {
+
+                @Override
+                public void onEnableTreeMenuGroupItem() {
+                    int menuItemsNoEnabled = 0;
+                    for(Component component : subMenu.getItems()) {
+                        if (!component.isEnabled()) {
+                            ++menuItemsNoEnabled;
+                        }
+                    }
+                    item.setEnabled((menuItemsNoEnabled == subMenu.getItemCount()) ? FALSE : TRUE);
+                }
+            });
+        }
     }
 
     /**
@@ -168,6 +191,12 @@ public class GPMenuActionBinder implements MenuActionBinder {
             @Override
             public void onActionEnabled(ActionEnableEvent event) {
                 item.setEnabled(event.isEnabled());
+                if( (menuCreator instanceof AbstractTreeMenuStrategy) && (item.getParentMenu() != null)
+                        && (item.getParentMenu().getParentItem() != null) && (item.getParentMenu().getParentItem() instanceof MenuItem)
+                        && ((MenuItem) (item.getParentMenu().getParentItem())).getSubMenu() != null) {
+                    Menu menu = item.getParentMenu();
+                    GPMenuActionHandlerManager.fireEventFromSource(new GPTreeMenuGroupEnableEvent(), menu.getId());
+                }
             }
 
         });

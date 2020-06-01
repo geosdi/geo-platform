@@ -35,8 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.server.command.memento.toolbar;
 
-import com.google.common.base.Preconditions;
-import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
@@ -59,19 +57,20 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpServletRequest;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Lazy(true)
-@Component(value = "command.memento.toolbar."
-        + "SaveAddedFolderAndTreeModificationsCommand")
-public class SaveAddedFolderAndTreeModificationsCommand implements
-        GPCommand<SaveAddedFolderAndTreeModificationsRequest, SaveAddedFolderAndTreeModificationsResponse> {
+@Component(value = "command.memento.toolbar.SaveAddedFolderAndTreeModificationsCommand")
+public class SaveAddedFolderAndTreeModificationsCommand implements GPCommand<SaveAddedFolderAndTreeModificationsRequest, SaveAddedFolderAndTreeModificationsResponse> {
 
-    private static final Logger logger = LoggerFactory.getLogger(
-            SaveAddedFolderAndTreeModificationsCommand.class);
+    private static final Logger logger = LoggerFactory.getLogger(SaveAddedFolderAndTreeModificationsCommand.class);
     //
     @Autowired
     private SessionUtility sessionUtility;
@@ -85,50 +84,29 @@ public class SaveAddedFolderAndTreeModificationsCommand implements
     private GeoPlatformService geoPlatformServiceClient;
 
     @Override
-    public SaveAddedFolderAndTreeModificationsResponse execute(
-            SaveAddedFolderAndTreeModificationsRequest request,
-            HttpServletRequest httpServletRequest) {
-
-        logger.debug("##################### Executing {} Command", this.
-                getClass().getSimpleName());
-
+    public SaveAddedFolderAndTreeModificationsResponse execute(SaveAddedFolderAndTreeModificationsRequest request, HttpServletRequest httpServletRequest) {
+        logger.debug("##################### Executing {} Command", this.getClass().getSimpleName());
         MementoSaveAddedFolder memento = request.getMemento();
-
-        Preconditions.checkNotNull(memento, "MementoSaveAddedFolder must not be"
-                + "null.");
-
+        checkNotNull(memento, "MementoSaveAddedFolder must not be null.");
         try {
             this.sessionUtility.getLoggedAccount(httpServletRequest);
-        } catch (GPSessionTimeout timeout) {
-            throw new GeoPlatformException(timeout);
-        }
-        GPFolder gpFolder = this.dtoLayerConverter.convertMementoFolder(
-                memento.getAddedFolder());
-
-        GPWebServiceMapData map = this.dtoMementoConverter.convertDescendantMap(
-                memento.getWsDescendantMap());
-
-        try {
-            Long projectId = this.sessionUtility.getDefaultProject(
-                    httpServletRequest);
-            Long idSavedFolder = this.geoPlatformServiceClient.saveAddedFolderAndTreeModifications(new WSAddFolderAndTreeModificationsRequest(
-                            projectId,
-                            memento.getAddedFolder().getIdParent(), gpFolder,
-                            map));
-
-            logger.debug("\n\n@@@@@@@@@@@@@@@@"
-                    + "SaveAddedFolderAndTreeModificationsCommand Fo");
-
+            GPFolder gpFolder = this.dtoLayerConverter.convertMementoFolder(memento.getAddedFolder());
+            GPWebServiceMapData map = this.dtoMementoConverter.convertDescendantMap(memento.getWsDescendantMap());
+            Long projectId = this.sessionUtility.getDefaultProject(httpServletRequest);
+            Long idSavedFolder = this.geoPlatformServiceClient.saveAddedFolderAndTreeModifications(new WSAddFolderAndTreeModificationsRequest(projectId, memento.getAddedFolder().getIdParent(), gpFolder, map));
+            logger.debug("\n\n@@@@@@@@@@@@@@@@SaveAddedFolderAndTreeModificationsCommand");
             return new SaveAddedFolderAndTreeModificationsResponse(idSavedFolder);
         } catch (ResourceNotFoundFault ex) {
             logger.error("Failed to save folder on LayerService: " + ex);
             throw new GeoPlatformException(ex);
         } catch (IllegalParameterFault ilg) {
             logger.error("Error on LayerService: " + ilg);
-            throw new GeoPlatformException("Parameter incorrect on "
-                    + "saveAddedFolderAndTreeModifications");
+            throw new GeoPlatformException("Parameter incorrect on saveAddedFolderAndTreeModifications");
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new GeoPlatformException(ex.getMessage());
         }
     }
 
@@ -136,9 +114,7 @@ public class SaveAddedFolderAndTreeModificationsCommand implements
      * @param geoPlatformServiceClient the geoPlatformServiceClient to set
      */
     @Autowired
-    public void setGeoPlatformServiceClient(
-            @Qualifier("geoPlatformServiceClient") GeoPlatformService geoPlatformServiceClient) {
+    public void setGeoPlatformServiceClient(@Qualifier("geoPlatformServiceClient") GeoPlatformService geoPlatformServiceClient) {
         this.geoPlatformServiceClient = geoPlatformServiceClient;
     }
-
 }

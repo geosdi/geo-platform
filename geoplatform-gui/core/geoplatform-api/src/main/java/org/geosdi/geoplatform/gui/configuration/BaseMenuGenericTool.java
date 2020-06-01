@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.configuration;
 
-import org.geosdi.geoplatform.gui.client.i18n.BaseMenuGenericToolConstants;
+import static org.geosdi.geoplatform.gui.client.i18n.BaseMenuGenericToolConstants.INSTANCE;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -53,9 +53,7 @@ public abstract class BaseMenuGenericTool<M extends GeoPlatformMenuCreator> exte
      */
     @Override
     public String getText() {
-        return ((this.text == null) && (this.textKey != null))
-                ? BaseMenuGenericToolConstants.INSTANCE.getString(this.textKey)
-                : text;
+        return ((this.text == null) && (this.textKey != null)) ? INSTANCE.getString(this.textKey) : text;
     }
 
     /**
@@ -90,5 +88,4 @@ public abstract class BaseMenuGenericTool<M extends GeoPlatformMenuCreator> exte
                 + ", text = " + text
                 + ", textKey = " + textKey + '}';
     }
-
 }

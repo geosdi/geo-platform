@@ -14,7 +14,6 @@ import com.extjs.gxt.ui.client.widget.layout.ColumnLayout;
 import com.extjs.gxt.ui.client.widget.layout.FlowData;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.google.common.collect.Lists;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
@@ -60,11 +59,13 @@ import static org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.view.
  */
 public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandler, GPResetComponentHandler, GPActionHandler {
 
-    protected SpinnerField timerAnimation;
-
+    private final static TimeFilterLayerMapEvent TIME_FILTER_LAYER_MAP_EVENT = new TimeFilterLayerMapEvent();
     private final LayoutContainer periodSliderContainer;
     private final StartDateMultifield startDateMultifield;
     private final EndDateMultifield endDateMultifield;
+    private final DateTimeFormat sdf = DateTimeFormat.getFormat("yyyy-MM-dd'T'HH:mm:ss");
+    protected SpinnerField timerAnimation;
+    DateTimeFormat fmt = DateTimeFormat.getFormat("dd-MM-yyyy, HH:mm:ss");
     private CheckBox endDateCheckBox;
     private Slider periodSlider;
     private LabelField labelCurrenteTime;
@@ -94,9 +95,6 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
     private IParseMediator.ParseMediator parseMediator;
     private Long period = null;
     private Button apply;
-    private final static TimeFilterLayerMapEvent TIME_FILTER_LAYER_MAP_EVENT = new TimeFilterLayerMapEvent();
-    private final DateTimeFormat sdf = DateTimeFormat.getFormat("yyyy-MM-dd'T'HH:mm:ss");
-    DateTimeFormat fmt = DateTimeFormat.getFormat("dd-MM-yyyy, HH:mm:ss");
 
 
     @Inject
@@ -140,8 +138,6 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
                 endDateMultifield.clearInvalid();
             }
         });
-
-
         LayoutContainer container = new LayoutContainer();
         container.add(this.endDateCheckBox);
         super.add(container, new FlowData(5));
@@ -150,8 +146,6 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
         this.labelCurrenteTime = new LabelField();
         this.labelCurrenteTime.setFieldLabel(LayerModuleConstants.INSTANCE.LayerTimeFilterWidget_currentDateTooltipText());
         this.labelCurrenteTime.setLabelSeparator(":");
-
-
         this.timerAnimation = new SpinnerField();
         this.timerAnimation.setFieldLabel(LayerModuleConstants.INSTANCE.LayerTimeFilterWidget_refreshTooltipText());
 //        this.timerAnimation.setWidth("76px");
@@ -160,18 +154,12 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
         this.timerAnimation.setValue(1);
         this.timerAnimation.setAllowBlank(Boolean.FALSE);
         super.add(this.timerAnimation, new FlowData(5));
-
-
         this.buildTimeTimension();
         super.add(this.labelCurrenteTime, new FlowData(5));
-
-
         this.labelStep = new LabelField();
         this.labelStep.setFieldLabel(LayerModuleConstants.INSTANCE.LayerTimeFilterWidget_stepTooltipText());
         this.labelStep.setLabelSeparator(":");
         super.add(this.labelStep, new FlowData(5));
-
-
         this.apply = new Button(ButtonsConstants.INSTANCE.applyText());
         this.apply.addSelectionListener(new SelectionListener<ButtonEvent>() {
             @Override
@@ -452,7 +440,6 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
 
     @Override
     public void periodWithSingleDate(int index) {
-        GWT.log("@@@@@@@@@@@@@@@@@@ " + this.store);
         this.partialStore.clear();
         this.partialStore.addAll(this.store);
         this.periodSlider.setMaxValue(this.partialStore.size() - 1);

@@ -109,11 +109,6 @@
             <version>${project.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>javax.annotation</groupId>
-            <artifactId>javax.annotation-api</artifactId>
-        </dependency>
-
         <!-- GeoPlatform Server Module -->
         <dependency>
             <groupId>org.geosdi</groupId>

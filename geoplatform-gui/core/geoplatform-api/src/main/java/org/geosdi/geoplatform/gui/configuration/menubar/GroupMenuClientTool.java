@@ -41,6 +41,8 @@ import org.geosdi.geoplatform.gui.configuration.GPMenuGenericTool;
 import java.util.Collections;
 import java.util.List;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -60,12 +62,13 @@ public class GroupMenuClientTool extends MenuBarClientTool implements GPGroupMen
     }
 
     /**
-     * @param tools the tools to set
+     * @param theTools the tools to set
      */
     @Override
-    public void setTools(List<? extends GPMenuGenericTool> tools) {
-        Collections.sort(tools);
-        this.tools = tools;
+    public void setTools(List<? extends GPMenuGenericTool> theTools) {
+        checkArgument(theTools != null, "The Parameter tools must not be null.");
+        Collections.sort(theTools);
+        this.tools = theTools;
     }
 
     /**

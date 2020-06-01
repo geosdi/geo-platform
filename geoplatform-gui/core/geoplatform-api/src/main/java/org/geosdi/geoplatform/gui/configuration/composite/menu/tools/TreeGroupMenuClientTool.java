@@ -35,18 +35,19 @@
 package org.geosdi.geoplatform.gui.configuration.composite.menu.tools;
 
 import com.extjs.gxt.ui.client.widget.menu.Menu;
-import org.geosdi.geoplatform.gui.configuration.GPGroupMenuItem;
 import org.geosdi.geoplatform.gui.configuration.GPMenuGenericTool;
 import org.geosdi.geoplatform.gui.configuration.composite.menu.strategy.GPTreeMenuStrategy;
 
 import java.util.Collections;
 import java.util.List;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class TreeGroupMenuClientTool extends TreeMenuClientTool implements GPGroupMenuItem {
+public class TreeGroupMenuClientTool extends TreeMenuClientTool implements GPTreeMenuGroupItem {
 
     private static final long serialVersionUID = -3908500305689981106L;
     //
@@ -61,12 +62,13 @@ public class TreeGroupMenuClientTool extends TreeMenuClientTool implements GPGro
     }
 
     /**
-     * @param tools the tools to set
+     * @param theTools the tools to set
      */
     @Override
-    public void setTools(List<? extends GPMenuGenericTool> tools) {
-        Collections.sort(tools);
-        this.tools = tools;
+    public void setTools(List<? extends GPMenuGenericTool> theTools) {
+        checkArgument(theTools != null, "The Parameter tools must not be null.");
+        Collections.sort(theTools);
+        this.tools = theTools;
     }
 
     /**

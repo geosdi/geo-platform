@@ -32,19 +32,35 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.configuration.action.event;
+package org.geosdi.geoplatform.gui.configuration.composite.menu.puregwt.event;
 
-import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.event.shared.GwtEvent;
+import org.geosdi.geoplatform.gui.configuration.composite.menu.puregwt.handler.GPTreeMenuGroupEnableHander;
+
+import static org.geosdi.geoplatform.gui.configuration.composite.menu.puregwt.handler.GPTreeMenuGroupEnableHander.TYPE;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface HasActionEnableHandler {
+public class GPTreeMenuGroupEnableEvent extends GwtEvent<GPTreeMenuGroupEnableHander> {
 
     /**
-     * @param actionHandler
-     * @return {@link HandlerRegistration}
+     * @return {@link com.google.gwt.event.shared.GwtEvent.Type<GPTreeMenuGroupEnableHander>}
      */
-    HandlerRegistration addActionEnableHandler(ActionEnableHandler actionHandler);
+    @Override
+    public Type<GPTreeMenuGroupEnableHander> getAssociatedType() {
+        return TYPE;
+    }
+
+    /**
+     * Should only be called by {@link com.google.gwt.event.shared.HandlerManager}. In other words, do not use
+     * or call.
+     *
+     * @param handler handler
+     */
+    @Override
+    protected void dispatch(GPTreeMenuGroupEnableHander handler) {
+        handler.onEnableTreeMenuGroupItem();
+    }
 }

@@ -107,7 +107,7 @@ public class TimeRangePanel extends GeoPlatformContentPanel {
     }
 
     private void buildComponents() {
-                this.dimensionRadioGroup = new RadioGroup();
+        this.dimensionRadioGroup = new RadioGroup();
         this.dimensionRadioGroup.setFieldLabel(LayerModuleConstants.INSTANCE.
                 LayerTimeFilterWidget_dimensionRadioLabelText());
         fixedDimensionRadio.setBoxLabel(LayerModuleConstants.INSTANCE.
@@ -121,6 +121,7 @@ public class TimeRangePanel extends GeoPlatformContentPanel {
         this.fixedDimensionContainer.setVisible(Boolean.FALSE);
         this.variableDimensionContainer.setVisible(Boolean.FALSE);
         this.fixedDimensionRadio.addListener(Events.Change, new Listener<FieldEvent>() {
+
             @Override
             public void handleEvent(FieldEvent fe) {
                 if (fixedDimensionRadio.getValue()) {
@@ -130,6 +131,7 @@ public class TimeRangePanel extends GeoPlatformContentPanel {
             }
         });
         this.variableDimensionRadio.addListener(Events.Change, new Listener<FieldEvent>() {
+
             @Override
             public void handleEvent(FieldEvent fe) {
                 if (variableDimensionRadio.getValue()) {
@@ -182,6 +184,7 @@ public class TimeRangePanel extends GeoPlatformContentPanel {
         this.startFilterNumberField = new NumberField();
         this.startFilterNumberField.setFireChangeEventOnSetValue(Boolean.TRUE);
         this.startFilterNumberField.addListener(Events.Change, new Listener<BaseEvent>() {
+
             @Override
             public void handleEvent(BaseEvent be) {
                 if (checkStartFieldValue()) {
@@ -208,6 +211,7 @@ public class TimeRangePanel extends GeoPlatformContentPanel {
         endTimeLabel = new Label();
         endTimeLabel.setStyleAttribute("font-size", "1.3em");
         this.endFilterNumberField.addListener(Events.Change, new Listener<BaseEvent>() {
+
             @Override
             public void handleEvent(BaseEvent be) {
                 if (checkEndFieldValue()) {
@@ -264,6 +268,7 @@ public class TimeRangePanel extends GeoPlatformContentPanel {
         this.variableDimensionContainer.add(portal, new FormData("99%"));
         //
         this.slider = new Slider() {
+
             @Override
             public void setValue(int value) {
                 super.setValue(value);
@@ -279,6 +284,7 @@ public class TimeRangePanel extends GeoPlatformContentPanel {
         panel.add(this.variableDimensionContainer, new FormData("100%"));
         super.add(panel);
         this.playSelectioListener = new SelectionListener<ButtonEvent>() {
+
             @Override
             public void componentSelected(ButtonEvent ce) {
 //                System.out.println("Play button status: ");
@@ -310,16 +316,15 @@ public class TimeRangePanel extends GeoPlatformContentPanel {
 
         Button apply = new Button(ButtonsConstants.INSTANCE.applyText());
         this.applyFilterSelectionListener = new SelectionListener<ButtonEvent>() {
+
             @Override
             public void componentSelected(ButtonEvent ce) {
                 GPLayerTreeModel layerSelected = (GPLayerTreeModel)treePanel.getSelectionModel().getSelectedItem();
                 IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
                 AbstractMementoOriginalProperties memento = mementoSave.copyOriginalProperties(layerSelected);
                 String layerName;
-                if (layerSelected.getAlias() != null
-                        && layerSelected.getAlias().indexOf(LAYER_TIME_DELIMITER) != -1) {
-                    layerName = layerSelected.getAlias().substring(0,
-                            layerSelected.getAlias().indexOf(LAYER_TIME_DELIMITER));
+                if (layerSelected.getAlias() != null && layerSelected.getAlias().indexOf(LAYER_TIME_DELIMITER) != -1) {
+                    layerName = layerSelected.getAlias().substring(0, layerSelected.getAlias().indexOf(LAYER_TIME_DELIMITER));
                 } else {
                     layerName = layerSelected.getLabel();
                 }
@@ -333,16 +338,14 @@ public class TimeRangePanel extends GeoPlatformContentPanel {
                     layerSelected.setAlias(layerName + LAYER_TIME_DELIMITER + layerSelected.getTimeFilter() + "]");
                     WidgetPropertiesHandlerManager.fireEvent(labelEvent);
                 } else {
-                    if ((rangeCheckBox.getValue() && !checkEndFieldValue())
-                            || !checkStartFieldValue()) {
+                    if ((rangeCheckBox.getValue() && !checkEndFieldValue()) || !checkStartFieldValue()) {
                         GeoPlatformMessage.errorMessage(LayerModuleConstants.INSTANCE.LayerTimeFilterWidget_timeFilterErrorTitleText(),
                                 LayerModuleConstants.INSTANCE.LayerTimeFilterWidget_timeFilterErrorBodyText());
                         return;
                     } else {
                         int fromFilter = slider.getValue();
                         String timeFilter = "" + (startStore.getModels().size() - fromFilter - 1);
-                        String variableTimeFilter = (String) startStore.getModels().get(
-                                fromFilter).get(DimensionData.DIMENSION_KEY);
+                        String variableTimeFilter = (String) startStore.getModels().get(fromFilter).get(DimensionData.DIMENSION_KEY);
                         if (rangeCheckBox.getValue() && playButton.isPressed()) {
                             fromFilter = startStore.getModels().size() - startFilterNumberField.getValue().intValue() - 1;
                             timeFilter = "" + startFilterNumberField.getValue().intValue();
@@ -384,18 +387,17 @@ public class TimeRangePanel extends GeoPlatformContentPanel {
         apply.addSelectionListener(applyFilterSelectionListener);
 
         panel.addButton(apply);
-        Button close = new Button(ButtonsConstants.INSTANCE.closeText(),
-                new SelectionListener<ButtonEvent>() {
-                    @Override
-                    public void componentSelected(ButtonEvent ce) {
-                        startFilterNumberField.clear();
-                        startTimeLabel.setHtml("");
-                        endTimeLabel.setHtml("");
-                        endFilterNumberField.clear();
-                        WidgetPropertiesHandlerManager.fireEvent(new GPHideFilterWidgetEvent());
-                    }
-                });
+        Button close = new Button(ButtonsConstants.INSTANCE.closeText(), new SelectionListener<ButtonEvent>() {
 
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                startFilterNumberField.clear();
+                startTimeLabel.setHtml("");
+                endTimeLabel.setHtml("");
+                endFilterNumberField.clear();
+                WidgetPropertiesHandlerManager.fireEvent(new GPHideFilterWidgetEvent());
+            }
+        });
         panel.addButton(close);
     }
 
@@ -529,6 +531,5 @@ public class TimeRangePanel extends GeoPlatformContentPanel {
 
     @Override
     public void setPanelProperties() {
-
     }
 }

@@ -130,5 +130,4 @@ public class GPTemporalExtentBean extends GeoPlatformBeanModel implements IGPTem
                 ", isRange = " + this.isRange().toString() +
                 "}";
     }
-
 }

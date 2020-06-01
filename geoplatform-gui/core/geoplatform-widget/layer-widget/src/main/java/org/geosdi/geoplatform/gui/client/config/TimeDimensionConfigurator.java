@@ -56,7 +56,6 @@ public class TimeDimensionConfigurator extends AbstractGinModule {
         bind(StartDateMultifield.class).in(Singleton.class);
         bind(EndDateMultifield.class).in(Singleton.class);
         bind(TimePeriodFormPanel.class).in(Singleton.class);
-        bind(TimePeriodFormPanel.class).in(Singleton.class);
         bind(IStrategyView.class).to(IStrategyView.StrategyView.class).in(Singleton.class);
         bind(IStrategyOperation.class).to(IStrategyOperation.StrategyOperation.class).in(Singleton.class);
         //ORDER IS IMPORTANT

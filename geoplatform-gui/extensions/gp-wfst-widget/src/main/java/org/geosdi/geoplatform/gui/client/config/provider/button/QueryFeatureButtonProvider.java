@@ -68,6 +68,9 @@ import javax.inject.Provider;
 import java.util.List;
 import java.util.Map;
 
+import static com.google.common.base.Preconditions.checkArgument;
+import static org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.FeatureSelectionWidgetHandler.ENABLE_QUERY_BUTTON_EVENT;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -80,14 +83,23 @@ public class QueryFeatureButtonProvider implements Provider<Button> {
     private final SimpleComboBox<String> matchComboField;
     private final List<FeatureAttributeConditionField> attributeConditions;
 
+    /**
+     * @param theBus
+     * @param theLayerSchemaBinder
+     * @param theMatchComboField
+     * @param theAttributeConditions
+     */
     @Inject
     public QueryFeatureButtonProvider(GPEventBus theBus, ILayerSchemaBinder theLayerSchemaBinder,
-                                      @MatchComboField SimpleComboBox matchComboField,
-                                      @FeatureAttributeConditionFieldList List attributeConditions) {
+            @MatchComboField SimpleComboBox theMatchComboField, @FeatureAttributeConditionFieldList List theAttributeConditions) {
+        checkArgument(theBus != null, "The Parameter bus must not be null.");
+        checkArgument(theLayerSchemaBinder != null, "The Parameter layerSchemaBinder must not be null.");
+        checkArgument(theMatchComboField != null, "The Parameter matchComboField must not be null.");
+        checkArgument(theAttributeConditions != null, "The Parameter attributeConditions must not be null.");
         this.bus = theBus;
         this.layerSchemaBinder = theLayerSchemaBinder;
-        this.matchComboField = matchComboField;
-        this.attributeConditions = attributeConditions;
+        this.matchComboField = theMatchComboField;
+        this.attributeConditions = theAttributeConditions;
     }
 
     @Override
@@ -104,8 +116,7 @@ public class QueryFeatureButtonProvider implements Provider<Button> {
 
                 QueryDTO queryDTO = new QueryDTO();
                 queryDTO.setMatchOperator(matchComboField.getValue().getValue());
-                List<QueryRestrictionDTO> queryRestrictions = Lists.<QueryRestrictionDTO>newArrayListWithExpectedSize(
-                        attributeConditions.size());
+                List<QueryRestrictionDTO> queryRestrictions = Lists.<QueryRestrictionDTO>newArrayListWithExpectedSize(attributeConditions.size());
                 for (FeatureAttributeConditionField conditionField : GPSharedUtils.safeList(attributeConditions)) {
                     QueryRestrictionDTO queryRestriction = conditionField.getQueryRestriction();
                     if (queryRestriction != null) {
@@ -136,22 +147,19 @@ public class QueryFeatureButtonProvider implements Provider<Button> {
                                 FeatureDetail featureDetail = new FeatureDetail(attributes, feature);
                                 instances.add(featureDetail);
                             }
-
                             FeatureInstancesEvent e = new FeatureInstancesEvent();
                             e.setInstances(instances);
                             bus.fireEvent(e);
                         }
-                        bus.fireEvent(FeatureSelectionWidgetHandler.ENABLE_QUERY_BUTTON_EVENT);
+                        bus.fireEvent(ENABLE_QUERY_BUTTON_EVENT);
                     }
 
                     @Override
                     public void onCommandFailure(Throwable exception) {
                         String errorMessage = "Error on WFS GetFeature request";
-
                         GeoPlatformMessage.errorMessage("GetFeture Service Error",
                                 errorMessage + " - " + exception.getMessage());
-                        bus.fireEvent(FeatureSelectionWidgetHandler.ENABLE_QUERY_BUTTON_EVENT);
-
+                        bus.fireEvent(ENABLE_QUERY_BUTTON_EVENT);
                         LayoutManager.getInstance().getStatusMap().setStatus(
                                 errorMessage + " for " + layerSchemaBinder.getLayerSchemaDTO().getTypeName() +
                                         " layer.", SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString());

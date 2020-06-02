@@ -90,15 +90,21 @@ public class ShowFeaturesWidget extends GeoPlatformWindow implements IFeatureWid
     private WFSTWidgetMessages i18n;
     private Button getAllFeatureButton;
 
+    /**
+     * @param theBus
+     * @param theI18n
+     * @param theLayerSchemaBinder
+     * @param theGetAllFeatureButton
+     */
     @Inject
-    public ShowFeaturesWidget(GPEventBus theBus, WFSTWidgetMessages i18n, ILayerSchemaBinder layerSchemaBinder,
-            @GetAllFeaturesButton Button getAllFeatureButton) {
+    public ShowFeaturesWidget(GPEventBus theBus, WFSTWidgetMessages theI18n, ILayerSchemaBinder theLayerSchemaBinder,
+            @GetAllFeaturesButton Button theGetAllFeatureButton) {
         super(true);
-        this.i18n = i18n;
-        this.layerSchemaBinder = layerSchemaBinder;
-        this.getAllFeatureButton = getAllFeatureButton;
+        this.i18n = theI18n;
+        this.layerSchemaBinder = theLayerSchemaBinder;
+        this.getAllFeatureButton = theGetAllFeatureButton;
         this.bus = theBus;
-        this.bus.addHandler(ShowFeatureAttributesHandler.TYPE, this);
+        this.bus.addHandler(TYPE, this);
     }
 
     @Override

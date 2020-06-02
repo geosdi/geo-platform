@@ -35,8 +35,9 @@
  */
 package org.geosdi.geoplatform.gui.client.config.composite.menu.tools;
 
-import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetConstants;
 import org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeMenuClientTool;
+
+import static org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetConstants.INSTANCE;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -48,9 +49,6 @@ public class WFSWidgetTreeMenuClientTool extends TreeMenuClientTool {
 
     @Override
     public String getText() {
-        return ((this.text == null) && (super.getTextKey() != null))
-                ? WFSTWidgetConstants.INSTANCE.getString(super.getTextKey())
-                : text;
+        return ((this.text == null) && (super.getTextKey() != null) ? INSTANCE.getString(super.getTextKey()) : text);
     }
-
 }

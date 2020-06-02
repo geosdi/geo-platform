@@ -36,12 +36,15 @@
 package org.geosdi.geoplatform.gui.client.model.wfs;
 
 import org.geosdi.geoplatform.connector.wfs.response.FeatureDTO;
-import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
 import org.gwtopenmaps.openlayers.client.Projection;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 import org.gwtopenmaps.openlayers.client.geometry.Geometry;
 
 import java.util.Map;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem.GOOGLE_MERCATOR;
+import static org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem.WGS_84;
 
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
@@ -55,30 +58,41 @@ public class FeatureDetail extends FeatureAttributeValuesDetail {
     private String geometry;
     private String featureID;
 
-    public FeatureDetail(Map<String, String> attributes, FeatureDTO featureDTO) {
-        super(attributes);
-        this.geometry = featureDTO.getGeometry();
-        this.featureID = featureDTO.getFID();
+    /**
+     * @param theAttributes
+     * @param theFeatureDTO
+     */
+    public FeatureDetail(Map<String, String> theAttributes, FeatureDTO theFeatureDTO) {
+        super(theAttributes);
+        checkArgument(theFeatureDTO != null, "The Parameter featureDTO must not be null.");
+        this.geometry = theFeatureDTO.getGeometry();
+        this.featureID = theFeatureDTO.getFID();
     }
 
+    /**
+     * @param theFeature
+     * @param theAttributes
+     */
     public FeatureDetail(VectorFeature theFeature, Map<String, String> theAttributes) {
         super(theAttributes);
+        checkArgument(theFeature != null, "The Parameter feature must not be null.");
         this.vectorFeature = theFeature;
         this.featureID = this.vectorFeature.getFID();
     }
 
+    /**
+     * @return {@link VectorFeature}
+     */
     public VectorFeature getVectorFeature() {
         return vectorFeature = ((this.vectorFeature != null) ? this.vectorFeature : this.buildFeature());
     }
 
     @Override
     protected final VectorFeature buildFeature() {
-        assert ((this.geometry != null) && !(this.geometry.isEmpty()));
-        assert ((this.featureID != null) && !(this.featureID.isEmpty()));
-
+        checkArgument(this.geometry != null, "The Parameter geometry must not be null.");
+        checkArgument(((this.featureID != null) && !(this.featureID.trim().isEmpty())), "The Parameter featureID must not be null or an empty string.");
         Geometry theGeom = Geometry.fromWKT(this.geometry);
-        theGeom.transform(new Projection(GPCoordinateReferenceSystem.WGS_84.getCode()),
-                new Projection(GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode()));
+        theGeom.transform(new Projection(WGS_84.getCode()), new Projection(GOOGLE_MERCATOR.getCode()));
         VectorFeature vectorFeature = new VectorFeature(theGeom);
         vectorFeature.setFID(this.featureID);
         return vectorFeature;

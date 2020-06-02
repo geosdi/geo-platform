@@ -40,6 +40,8 @@ import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 
 import java.util.Map;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
@@ -49,29 +51,47 @@ public abstract class FeatureAttributeValuesDetail extends GeoPlatformBeanModel 
     //
     private Map<String, String> attributes;
 
-    public FeatureAttributeValuesDetail(Map<String, String> attributes) {
-        assert (attributes != null) : "attributes must not be null.";
-        for (Map.Entry<String, String> att : attributes.entrySet()) {
+    /**
+     * @param theAttributes
+     */
+    public FeatureAttributeValuesDetail(Map<String, String> theAttributes) {
+        checkArgument(theAttributes != null, "The Parameter attributes must not be null.");
+        for (Map.Entry<String, String> att : theAttributes.entrySet()) {
             this.set(att.getKey(), ((att.getValue() != null) ? att.getValue() : ""));
         }
-        this.attributes = attributes;
+        this.attributes = theAttributes;
     }
 
-    public String getValue(String attributeName) {
-        assert (attributeName != null) : "attributeName must not be null.";
-        return super.get(attributeName);
+    /**
+     * @param theAttributeName
+     * @return {@link String}
+     */
+    public String getValue(String theAttributeName) {
+        checkArgument(theAttributeName != null, "The Parameter attributeName must not be null.");
+        return super.get(theAttributeName);
     }
 
-    public String setValue(String attributeName, String attributeValue) {
-        assert (attributeName != null) : "attributeName must not be null.";
-        assert (attributeValue != null) : "attributeValue must not be null.";
-        return super.set(attributeName, attributeValue);
+    /**
+     * @param theAttributeName
+     * @param theAttributeValue
+     * @return
+     */
+    public String setValue(String theAttributeName, String theAttributeValue) {
+        checkArgument(theAttributeName != null, "The Parameter attributeName must not be null.");
+        checkArgument(theAttributeValue != null, "The Parameter attributeValue must not be null.");
+        return super.set(theAttributeName, theAttributeValue);
     }
 
+    /**
+     * @return {@link Map<String, String>}
+     */
     public Map<String, String> getAttributes() {
         return attributes;
     }
 
+    /**
+     * @return {@link VectorFeature}
+     */
     protected abstract VectorFeature buildFeature();
 
     @Override

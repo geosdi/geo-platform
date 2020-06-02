@@ -58,45 +58,20 @@ public class FeatureInjectorButtonProvider extends AbstractGinModule {
     @Override
     protected void configure() {
         bind(Button.class).annotatedWith(ResetButton.class).toProvider(ResetButtonProvider.class);
-
         bind(Button.class).annotatedWith(SaveButton.class).toProvider(SaveButtonProvider.class);
-
-        bind(ToggleButton.class).annotatedWith(DragFeatureToggleButton.class).toProvider(
-                DragFeatureToggleButtonProvider.class).in(Singleton.class);
-
-        bind(ToggleButton.class).annotatedWith(EditFeatureToggleButton.class).toProvider(
-                EditFeatureToggleButtonProvider.class).in(Singleton.class);
-
-        bind(ToggleButton.class).annotatedWith(GetFeatureToggleButton.class).toProvider(
-                GetFeatureToggleButtonProvider.class).in(Singleton.class);
-
-        bind(ToggleButton.class).annotatedWith(ReshapeFeatureToggleButton.class).toProvider(
-                ReshapeFeatureToggleButtonProvider.class).in(Singleton.class);
-
-        bind(ToggleButton.class).annotatedWith(ResizeFeatureToggleButton.class).toProvider(
-                ResizeFeatureToggleButtonProvider.class).in(Singleton.class);
-
-        bind(ToggleButton.class).annotatedWith(RotateFeatureToggleButton.class).toProvider(
-                RotateFeatureToggleButtonProvider.class).in(Singleton.class);
-
-        bind(ToggleButton.class).annotatedWith(EraseFeatureToggleButton.class).toProvider(
-                EraseFeatureToggleButtonProvider.class).in(Singleton.class);
-
-        bind(Button.class).annotatedWith(WFSGotoXYButton.class).toProvider(WFSGotoXYButtonProvider.class)
-                .in(Singleton.class);
-
+        bind(ToggleButton.class).annotatedWith(DragFeatureToggleButton.class).toProvider(DragFeatureToggleButtonProvider.class).in(Singleton.class);
+        bind(ToggleButton.class).annotatedWith(EditFeatureToggleButton.class).toProvider(EditFeatureToggleButtonProvider.class).in(Singleton.class);
+        bind(ToggleButton.class).annotatedWith(GetFeatureToggleButton.class).toProvider(GetFeatureToggleButtonProvider.class).in(Singleton.class);
+        bind(ToggleButton.class).annotatedWith(ReshapeFeatureToggleButton.class).toProvider(ReshapeFeatureToggleButtonProvider.class).in(Singleton.class);
+        bind(ToggleButton.class).annotatedWith(ResizeFeatureToggleButton.class).toProvider(ResizeFeatureToggleButtonProvider.class).in(Singleton.class);
+        bind(ToggleButton.class).annotatedWith(RotateFeatureToggleButton.class).toProvider(RotateFeatureToggleButtonProvider.class).in(Singleton.class);
+        bind(ToggleButton.class).annotatedWith(EraseFeatureToggleButton.class).toProvider(EraseFeatureToggleButtonProvider.class).in(Singleton.class);
+        bind(Button.class).annotatedWith(WFSGotoXYButton.class).toProvider(WFSGotoXYButtonProvider.class).in(Singleton.class);
         bind(WFSUndoRedoMediator.class).to(BaseUndoRedoMediator.class).in(Singleton.class);
-
-        bind(Button.class).annotatedWith(WFSUndoButton.class).toProvider(WFSUndoButtonProvider.class)
-                .in(Singleton.class);
-        bind(Button.class).annotatedWith(WFSRedoButton.class).toProvider(WFSRedoButtonProvider.class)
-                .in(Singleton.class);
-
-        bind(Button.class).annotatedWith(SelectFeaturesButton.class).toProvider(SelectFeatureButtonProvider.class).in(
-                Singleton.class);
-        bind(Button.class).annotatedWith(QueryFeatureButton.class).toProvider(QueryFeatureButtonProvider.class).in(
-                Singleton.class);
-        bind(Button.class).annotatedWith(GetAllFeaturesButton.class).toProvider(GetAllFeaturesButtonProvider.class).in(
-                Singleton.class);
+        bind(Button.class).annotatedWith(WFSUndoButton.class).toProvider(WFSUndoButtonProvider.class).in(Singleton.class);
+        bind(Button.class).annotatedWith(WFSRedoButton.class).toProvider(WFSRedoButtonProvider.class).in(Singleton.class);
+        bind(Button.class).annotatedWith(SelectFeaturesButton.class).toProvider(SelectFeatureButtonProvider.class).in(Singleton.class);
+        bind(Button.class).annotatedWith(QueryFeatureButton.class).toProvider(QueryFeatureButtonProvider.class).in(Singleton.class);
+        bind(Button.class).annotatedWith(GetAllFeaturesButton.class).toProvider(GetAllFeaturesButtonProvider.class).in(Singleton.class);
     }
 }

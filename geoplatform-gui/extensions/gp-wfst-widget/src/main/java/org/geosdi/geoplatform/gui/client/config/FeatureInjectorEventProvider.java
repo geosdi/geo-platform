@@ -51,11 +51,7 @@ public class FeatureInjectorEventProvider extends AbstractGinModule {
 
     @Override
     protected void configure() {
-        bind(ShowAttributesWindowEvent.class).toProvider(
-                ShowAttributesWindowEventProvider.class).in(Singleton.class);
-
-        bind(CloseAttributesWindowEvent.class).toProvider(
-                CloseAttributesWindowEventProvider.class).in(Singleton.class);
+        bind(ShowAttributesWindowEvent.class).toProvider(ShowAttributesWindowEventProvider.class).in(Singleton.class);
+        bind(CloseAttributesWindowEvent.class).toProvider(CloseAttributesWindowEventProvider.class).in(Singleton.class);
     }
-
 }

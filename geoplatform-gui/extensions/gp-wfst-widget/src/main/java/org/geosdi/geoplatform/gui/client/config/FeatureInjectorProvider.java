@@ -99,60 +99,34 @@ public class FeatureInjectorProvider extends AbstractGinModule {
     @Override
     protected void configure() {
         bind(MapWidget.class).toProvider(MapWidgetProvider.class).in(Singleton.class);
-
         bind(LayerTypeHandlerManager.class).toProvider(LayerTypeHandlerManagerProvider.class).in(Singleton.class);
-
         bind(DescribeFeatureTypeHandler.class).toProvider(DescribeFeatureTypeHandlerProvider.class).in(Singleton.class);
-
         bind(RasterTypeHandler.class).toProvider(RasterTypeHandlerProvider.class).in(Singleton.class);
-
         bind(DescribeFeatureDispatcher.class).to(GPDescribeFeatureDispatcher.class).in(Singleton.class);
-
         bind(LayerSchemaParserHandler.class).to(ConcreteLayerSchemaHandler.class).in(Singleton.class);
-
         bind(LayerSchemaHandlerManager.class).toProvider(LayerSchemaHandlerManagerProvider.class).in(Singleton.class);
-
         bind(Style.class).toProvider(VectorStyleProvider.class).in(Singleton.class);
         bind(Vector.class).toProvider(VectorLayerProvider.class).in(Singleton.class);
-
         bind(FeatureSelectListener.class).toProvider(FeatureSelectListenerProvider.class).in(Singleton.class);
-
         bind(FeatureUnSelectListener.class).toProvider(FeatureUnSelectListenerProvider.class).in(Singleton.class);
-
         bind(LonLat.class).toProvider(FeatureLonLatItalyProvider.class).in(Singleton.class);
-
         bind(BorderLayout.class).toProvider(BorderLayoutProvider.class).in(Singleton.class);
-
         bind(WFSDispatcherProgressBar.class).toProvider(WFSDispatcherProgressBarProvider.class).in(Singleton.class);
-
-        bind(UpdateFeatureGeometryRequest.class).toProvider(UpdateFeatureGeometryRequestProvider.class).in(
-                Singleton.class);
-
+        bind(UpdateFeatureGeometryRequest.class).toProvider(UpdateFeatureGeometryRequestProvider.class).in(Singleton.class);
         bind(InsertFeatureRequest.class).toProvider(InsertFeatureRequestProvider.class).in(Singleton.class);
-
         bind(EraseFeatureRequest.class).toProvider(EraseFeatureRequestProvider.class).in(Singleton.class);
-
         bind(WFSProtocolCRUDOptions.class).toProvider(FeatureProtocolCRUDOptionsProvider.class).in(Singleton.class);
-
         bind(GotoXYWidget.class).toProvider(WFSGotoXYWigetProvider.class).in(Singleton.class);
         bind(GPTreePanel.class).annotatedWith(WFSLayerTree.class).toProvider(LayerTreePanelProvider.class).in(Singleton.class);
         bind(GPTreeStore.class).annotatedWith(WFSLayerTreeStore.class).toProvider(LayerTreeStoreProvider.class).in(Singleton.class);
         bind(WFSRootLayerTreeNode.class).toProvider(WFSRootLayerTreeNodeProvider.class).in(Singleton.class);
-
         bind(ButtonBar.class).toProvider(FeatureWidgetBar.class).in(Singleton.class);
-
-        bind(List.class).annotatedWith(FeatureAttributeConditionFieldList.class).toProvider(
-                FeatureAttributeConditionFieldListProvider.class).in(Singleton.class);
-        bind(SimpleComboBox.class).annotatedWith(MatchComboField.class).
-                toProvider(MatchComboFieldProvider.class).in(Singleton.class);
-
+        bind(List.class).annotatedWith(FeatureAttributeConditionFieldList.class).toProvider(FeatureAttributeConditionFieldListProvider.class).in(Singleton.class);
+        bind(SimpleComboBox.class).annotatedWith(MatchComboField.class).toProvider(MatchComboFieldProvider.class).in(Singleton.class);
         bind(Menu.class).annotatedWith(WFSTreeLeafMenu.class).toProvider(WFSTreeLeafMenuProvider.class).in(Singleton.class);
         bind(GPSecureStringTextField.class).annotatedWith(WFSGeocodingTextField.class).toProvider(GeocodingTextFieldProvider.class).in(Singleton.class);
         bind(FieldSet.class).annotatedWith(WFSGeocodingFieldSet.class).toProvider(GeocodingFieldsetProvider.class).in(Singleton.class);
         bind(FormPanel.class).annotatedWith(WFSGeocodingFormPanel.class).toProvider(GeocodingFormPanelProvider.class).in(Singleton.class);
         bind(FieldSet.class).annotatedWith(WFSLocationFieldSet.class).toProvider(LocationFieldsetProvider.class).in(Singleton.class);
-
-
     }
-
 }

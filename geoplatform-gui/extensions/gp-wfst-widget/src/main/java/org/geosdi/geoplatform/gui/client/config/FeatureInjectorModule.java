@@ -82,29 +82,19 @@ public class FeatureInjectorModule extends AbstractGinModule {
         bind(ShowFeaturesWidget.class).in(Singleton.class);
         bind(WFSTWidgetMessages.class).asEagerSingleton();
         bind(WFSTWidgetConstants.class).asEagerSingleton();
-        bind(IFeatureMapWidget.class).to(FeatureMapWidget.class).in(
-                Singleton.class);
+        bind(IFeatureMapWidget.class).to(FeatureMapWidget.class).in(Singleton.class);
         bind(IActionStrategy.class).to(IActionStrategy.ActionStrategy.class).in(Singleton.class);
-
         bind(IFeatureMapInitializer.class).to(FeatureMapInitializer.class).in(Singleton.class);
-
         bind(FeatureSelectionLayoutHandler.class).in(Singleton.class);
         bind(FeatureAttributesLayoutHandler.class).in(Singleton.class);
-
-        bind(ILayerSchemaBinder.class).to(LayerSchemaBinder.class).in(
-                Singleton.class);
-
-        bind(IFeatureIdBinder.class).to(FeatureIdBinder.class).in(
-                Singleton.class);
-
+        bind(ILayerSchemaBinder.class).to(LayerSchemaBinder.class).in(Singleton.class);
+        bind(IFeatureIdBinder.class).to(FeatureIdBinder.class).in(Singleton.class);
         bind(FeatureAttributesWindowBuilder.class).asEagerSingleton();
         bind(WFSUndoRedoMediatorHandlerSupport.class).asEagerSingleton();
         bind(WFSFeatureGridBinding.class).asEagerSingleton();
         bind(WFSLayerTreeWidget.class).in(Singleton.class);
         bind(WFSZoomToLayerExtentAction.class).in(Singleton.class);
         bind(IWFSGeocodingDelegate.class).to(WFSGeocodingDelegate.class).asEagerSingleton();
-
         requestStaticInjection(AttributeCustomFieldsMap.class);
     }
-
 }

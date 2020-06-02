@@ -62,6 +62,8 @@ import org.geosdi.geoplatform.gui.shared.wfs.OperatorType;
 
 import java.util.List;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
@@ -75,11 +77,16 @@ public class FeatureAttributeConditionField extends MultiField implements IFeatu
     private TimeInputWidget timeInputWidget;
     private HandlerRegistration clickHandlerRegistration;
 
-    public FeatureAttributeConditionField(GPEventBus bus, List<AttributeDetail> attributes) {
-        assert (attributes != null) : "attributes must not be null.";
-        this.attributes = attributes;
-        this.bus = bus;
-        this.timeInputWidget = new TimeInputWidget(bus);
+    /**
+     * @param theBus
+     * @param theAttributes
+     */
+    public FeatureAttributeConditionField(GPEventBus theBus, List<AttributeDetail> theAttributes) {
+        checkArgument(theBus != null, "The Parameter bus must not be null.");
+        checkArgument(theAttributes != null, "The Parameter attributes must not be null.");
+        this.attributes = theAttributes;
+        this.bus = theBus;
+        this.timeInputWidget = new TimeInputWidget(theBus);
         this.bus.addHandlerToSource(IDateSelectedHandler.TYPE, timeInputWidget, this);
         this.createComponents();
     }
@@ -90,8 +97,7 @@ public class FeatureAttributeConditionField extends MultiField implements IFeatu
         AttributeDetail attributeDetail = this.nameAttributeCombo.getValue();
         String operator = this.operatorCombo.getValue().getValue();
         String restriction = this.conditionAttributeField.getValue();
-        if ((attributeDetail != null) && (operator != null) && (this.conditionAttributeField.isValid()) &&
-                (restriction != null)) {
+        if ((attributeDetail != null) && (operator != null) && (this.conditionAttributeField.isValid()) && (restriction != null)) {
             AttributeDTO attributeDTO = FeatureConverter.convert(attributeDetail);
             queryRestriction = new QueryRestrictionDTO(attributeDTO, OperatorType.fromSymbol(operator), restriction);
         }
@@ -197,7 +203,6 @@ public class FeatureAttributeConditionField extends MultiField implements IFeatu
         button.setToolTip("Delete Condition");
         button.setIcon(AbstractImagePrototype.create(BasicWidgetResources.ICONS.delete()));
         button.setAutoWidth(true);
-
         return button;
     }
 }

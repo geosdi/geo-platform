@@ -65,11 +65,11 @@ public abstract class MenuBaseAction extends MenuAction implements HasMenuAction
     }
 
     /**
-     * @param image the image to set
+     * @param theImage the image to set
      */
-    public void setImage(AbstractImagePrototype image) {
-        this.image = image;
-        this.handlerManager.fireEvent(new MenuActionChangeIconEvent(image));
+    public void setImage(AbstractImagePrototype theImage) {
+        this.image = theImage;
+        this.handlerManager.fireEvent(new MenuActionChangeIconEvent(theImage));
     }
 
     @Override

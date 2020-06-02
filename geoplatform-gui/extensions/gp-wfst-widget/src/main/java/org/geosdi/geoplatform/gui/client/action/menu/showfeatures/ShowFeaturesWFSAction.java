@@ -41,14 +41,13 @@ import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.core.client.GWT;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
-import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.LayerTypeHandlerManager;
 import org.geosdi.geoplatform.gui.client.action.menu.strategy.IActionStrategy;
+import org.geosdi.geoplatform.gui.client.action.menu.strategy.IActionStrategy.WidgetType;
 import org.geosdi.geoplatform.gui.client.command.datasource.CheckDataSourceRequest;
 import org.geosdi.geoplatform.gui.client.command.datasource.CheckDataSourceResponse;
 import org.geosdi.geoplatform.gui.client.config.FeatureInjector;
 import org.geosdi.geoplatform.gui.client.i18n.BasicWidgetModuleMessages;
-import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetConstants;
 import org.geosdi.geoplatform.gui.client.widget.wfs.ShowFeaturesWidget;
 import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
 import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
@@ -58,9 +57,10 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
-import java.util.logging.Logger;
-
+import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.gwt.user.client.ui.AbstractImagePrototype.create;
+import static org.geosdi.geoplatform.gui.client.BasicWidgetResources.ICONS;
+import static org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetConstants.INSTANCE;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -74,13 +74,13 @@ public class ShowFeaturesWFSAction extends MenuBaseAction {
     private IActionStrategy actionStrategy;
     private ShowFeaturesWidget showFeaturesWidget;
     private final CheckDataSourceRequest checkDataSourceRequest;
-    final static Logger logger = Logger.getLogger("ShowFeaturesWFSAction");
 
     /**
      * @param theTreePanel
      */
     public ShowFeaturesWFSAction(TreePanel<GPBeanTreeModel> theTreePanel) {
-        super(WFSTWidgetConstants.INSTANCE.showFeaturesTitleText(), create(BasicWidgetResources.ICONS.vector()));
+        super(INSTANCE.showFeaturesTitleText(), create(ICONS.vector()));
+        checkArgument(theTreePanel != null, "The Parameter theTreePanel must not be null.");
         this.treePanel = theTreePanel;
         this.bus = FeatureInjector.MainInjector.getInstance().getEventBus();
         this.showFeaturesWidget = FeatureInjector.MainInjector.getInstance().getShowElementsWidget();
@@ -107,7 +107,7 @@ public class ShowFeaturesWFSAction extends MenuBaseAction {
             @Override
             public void onCommandSuccess(final CheckDataSourceResponse response) {
                 if (response.getResult()) {
-                    actionStrategy.setWidgetType(IActionStrategy.WidgetType.SHOW_FEATURES);
+                    actionStrategy.setWidgetType(WidgetType.SHOW_FEATURES);
                     final GPLayerBean layer = (GPLayerBean) treePanel.getSelectionModel().getSelectedItem();
                     layerTypeHandlerManager.forwardLayerType(layer);
                 } else
@@ -120,10 +120,5 @@ public class ShowFeaturesWFSAction extends MenuBaseAction {
                 GeoPlatformMessage.errorMessage(BasicWidgetModuleMessages.INSTANCE.errorDataSource(), exception.getMessage());
             }
         });
-
-
-
     }
-
-
 }

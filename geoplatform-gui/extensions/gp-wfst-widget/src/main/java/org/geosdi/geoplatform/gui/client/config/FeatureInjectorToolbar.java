@@ -71,46 +71,26 @@ public class FeatureInjectorToolbar extends AbstractGinModule {
     @Override
     protected void configure() {
         bind(EditingToolBarDialog.class).in(Singleton.class);
-
-        bind(WFSToolbarObserver.class).to(EditToolbarBaseObserver.class).in(
-                Singleton.class);
-
+        bind(WFSToolbarObserver.class).to(EditToolbarBaseObserver.class).in(Singleton.class);
         bind(WFSBaseMapMediator.class).in(Singleton.class);
-
         bind(WFSEditFeatureColleague.class).asEagerSingleton();
-
         bind(WFSPointFeatureControl.class).asEagerSingleton();
         bind(WFSLineFeatureControl.class).asEagerSingleton();
         bind(WFSPolygonFeatureControl.class).asEagerSingleton();
-
         bind(WFSGetFeatureColleague.class).asEagerSingleton();
         bind(WFSGetFeatureControl.class).in(Singleton.class);
-
         bind(WFSModifyFeatureColleague.class).asEagerSingleton();
         bind(WFSModifyFeatureControl.class).in(Singleton.class);
-
         bind(WFSEraseFeatureColleague.class).asEagerSingleton();
         bind(WFSEraseFeatureControl.class).in(Singleton.class);
-
         bind(WFSEditFeatureRepository.class).to(SimpleEditFeatureRepository.class).in(Singleton.class);
-
         bind(EditFeatureAction.class).in(Singleton.class);
         bind(GetFeatureAction.class).in(Singleton.class);
         bind(EraseFeatureAction.class).in(Singleton.class);
-
         bind(InjectGetFeatureModelEvent.class).in(Singleton.class);
-
         bind(FeatureDispatcher.class).to(WFSFeatureDispatcher.class).asEagerSingleton();
-
-        bind(IWFSUpdateGeometryExecutor.class).to(
-                WFSUpdateGeometryExecutor.class).in(
-                Singleton.class);
-
-        bind(IWFSEraseFeatureExecutor.class).to(WFSEraseFeatureExecutor.class).in(
-                Singleton.class);
-
-        bind(IWFSInsertFeatureExecutor.class).to(WFSInsertFeatureExecutor.class).in(
-                Singleton.class);
+        bind(IWFSUpdateGeometryExecutor.class).to(WFSUpdateGeometryExecutor.class).in(Singleton.class);
+        bind(IWFSEraseFeatureExecutor.class).to(WFSEraseFeatureExecutor.class).in(Singleton.class);
+        bind(IWFSInsertFeatureExecutor.class).to(WFSInsertFeatureExecutor.class).in(Singleton.class);
     }
-
 }

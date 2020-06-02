@@ -49,7 +49,7 @@ import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.DateSelectedEvent;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
-import javax.inject.Inject;
+import static java.lang.Boolean.TRUE;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -61,29 +61,20 @@ public class TimeInputWidget extends GeoPlatformWindow {
     private final static String TIME_KEY_VALUE = "Time";
     private FormData formData;
     private LayoutContainer timeContainer;
-    @Inject
     private GPEventBus bus;
-    @Inject
     private DateSelectedEvent dateSelectedEvent;
 
-    public TimeInputWidget() {
-        super(Boolean.TRUE);
-    }
-
     public TimeInputWidget(GPEventBus bus) {
-        super(Boolean.TRUE);
+        super(TRUE);
         this.bus = bus;
         this.dateSelectedEvent = new DateSelectedEvent();
     }
 
-    private void addDateAndTimeToContainer(LayoutContainer layoutContainer,
-                                           String dataLabel,
-                                           String timeLabel) {
+    private void addDateAndTimeToContainer(LayoutContainer layoutContainer, String dataLabel, String timeLabel) {
         final DateField dateField = new DateField();
         dateField.setFieldLabel(dataLabel);
         dateField.setData("text", "Enter the date");
         layoutContainer.setData(dataLabel, dateField);
-
         final TimeField timeField = new TimeField();
         timeField.setFieldLabel(timeLabel);
         timeField.setData("text", "Enter the time");

@@ -49,6 +49,8 @@ import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.DateSelectedEvent;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
+import javax.inject.Inject;
+
 import static java.lang.Boolean.TRUE;
 
 /**
@@ -63,6 +65,10 @@ public class TimeInputWidget extends GeoPlatformWindow {
     private LayoutContainer timeContainer;
     private GPEventBus bus;
     private DateSelectedEvent dateSelectedEvent;
+
+    public TimeInputWidget() {
+        super(Boolean.TRUE);
+    }
 
     public TimeInputWidget(GPEventBus bus) {
         super(TRUE);

@@ -66,10 +66,6 @@ public class TimeInputWidget extends GeoPlatformWindow {
     private GPEventBus bus;
     private DateSelectedEvent dateSelectedEvent;
 
-    public TimeInputWidget() {
-        super(Boolean.TRUE);
-    }
-
     public TimeInputWidget(GPEventBus bus) {
         super(TRUE);
         this.bus = bus;
@@ -139,5 +135,7 @@ public class TimeInputWidget extends GeoPlatformWindow {
         super.setLayout(new FormLayout());
         super.setModal(true);
     }
+
+
 
 }

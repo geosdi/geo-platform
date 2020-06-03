@@ -177,8 +177,8 @@ public interface GPRasterLayerDTOBuilder extends Serializable {
             }
             raster.setLayerInfo(layerInfo);
             logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@MAX_SCALE : {} - MIN_SCAKE : {}\n\n", layer.getScaleDenominatorMax(), layer.getScaleDenominatorMin());
-            raster.setMaxScale((isNaN(layer.getScaleDenominatorMax())) ? DEFAULT_MAX_SCALE : valueOf(layer.getScaleDenominatorMax()).floatValue());
-            raster.setMinScale((isNaN(layer.getScaleDenominatorMin())) ? DEDAULT_MIN_SCALE : ((layer.getScaleDenominatorMin() == 1) ? DEDAULT_MIN_SCALE : valueOf(layer.getScaleDenominatorMin()).floatValue()));
+            raster.setMaxScale((isNaN(layer.getScaleDenominatorMin())) ? DEDAULT_MIN_SCALE : valueOf(layer.getScaleDenominatorMin()).floatValue());
+            raster.setMinScale((isNaN(layer.getScaleDenominatorMax())) ? DEFAULT_MAX_SCALE : (valueOf(layer.getScaleDenominatorMax()).floatValue()));
             logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@Trying to determinate if Layer : {} is Temporal.", raster.getName());
             if (((layer.getLayerDimensions() != null) && !(layer.getLayerDimensions().isEmpty())) && ((layer.getExtents() != null) && !(layer.getExtents().isEmpty()))) {
                 GPTemporalDimension dimension = layer.getLayerDimensions().stream()

@@ -112,11 +112,11 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel implements 
     private String dataAttributeName;
 
     @Inject
-    public FeatureAttributesWidget(GPEventBus bus, TimeInputWidget timeInputWidget, GetFeatureControlBuilder featureControlBuilder,
+    public FeatureAttributesWidget(GPEventBus bus, GetFeatureControlBuilder featureControlBuilder,
             WFSProtocolCRUDOptions featureCRUDProtocol) {
         super(TRUE);
         this.bus = bus;
-        this.timeInputWidget = timeInputWidget;
+        this.timeInputWidget = new TimeInputWidget(bus);
         this.bus.addHandlerToSource(IDateSelectedHandler.TYPE, timeInputWidget, this);
         this.bus.addHandler(FeatureAttributesHandler.TYPE, this);
         this.featureControlBuilder = featureControlBuilder;

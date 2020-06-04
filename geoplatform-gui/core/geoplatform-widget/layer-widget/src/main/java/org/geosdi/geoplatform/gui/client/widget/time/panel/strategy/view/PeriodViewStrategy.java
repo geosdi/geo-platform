@@ -1,6 +1,7 @@
 package org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.view;
 
-import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.i18n.shared.DateTimeFormat;
 import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
 import org.geosdi.geoplatform.gui.client.puregwt.binding.event.GPBeanTreeModelBindingEvent;
@@ -19,7 +20,7 @@ import java.util.Date;
  */
 public class PeriodViewStrategy extends IStrategyView.AbstractPanelStrategy {
 
-    static DateTimeFormat parseDateFormat = DateTimeFormat.getFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
+    static DateTimeFormat parseDateFormat = DateTimeFormat.getFormat(DateTimeFormat.PredefinedFormat.ISO_8601);
 
     @Override
     public GeoPlatformContentPanel buildPanel(GPTreePanel<GPBeanTreeModel> treePanel) {
@@ -39,9 +40,10 @@ public class PeriodViewStrategy extends IStrategyView.AbstractPanelStrategy {
                 dateTo.setMinutes(minutes - minutesDiff);
                 dateTo.setSeconds(0);
             } else {
-                dateTo = this.parseDateFormat.parse(values[1].replace("Z", ""));
+                dateTo = this.parseDateFormat.parse(values[1]);
             }
-            this.valuesMap.put(TypeValueEnum.DATE_FROM, this.parseDateFormat.parse(values[0].replace("Z", "")));
+            this.valuesMap.put(TypeValueEnum.DATE_FROM, this.parseDateFormat.parse(values[0]));
+            GWT.log(""+this.valuesMap);
             this.valuesMap.put(TypeValueEnum.DATE_TO, dateTo);
             this.valuesMap.put(TypeValueEnum.PERIOD, values[2]);
         }

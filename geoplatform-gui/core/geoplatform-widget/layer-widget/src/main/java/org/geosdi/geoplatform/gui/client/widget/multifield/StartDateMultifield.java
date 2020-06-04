@@ -2,6 +2,7 @@ package org.geosdi.geoplatform.gui.client.widget.multifield;
 
 import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.Validator;
+import com.google.gwt.core.client.GWT;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleMessages;
 
@@ -71,8 +72,10 @@ public class StartDateMultifield extends TimePeriodDateMultifield {
     protected void afterHourSelected(Date dateWithZeroTime, Date time) {
         if (date.getTime() == dateWithZeroTime.getTime() && limitDate.getHours() == time.getHours()) {
             this.minuteField.setMinValue(this.limitDate.getMinutes());
+            this.minuteField.setValue(this.limitDate.getMinutes());
         } else {
             this.minuteField.setMinValue(0);
+            this.minuteField.setValue(0);
         }
 
     }

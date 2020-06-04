@@ -124,6 +124,14 @@ public abstract class TimePeriodDateMultifield extends MultiField implements GPR
     }
 
     @Override
+    protected void onDetach() {
+        super.onDetach();
+        this.minuteField.reset();
+        this.minuteField.reset();
+        this.dateField.reset();
+    }
+
+    @Override
     protected void onAttach() {
         super.onAttach();
 //        initComponents();

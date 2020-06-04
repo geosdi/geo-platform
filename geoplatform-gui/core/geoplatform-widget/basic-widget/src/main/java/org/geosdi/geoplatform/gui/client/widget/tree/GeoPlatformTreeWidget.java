@@ -38,6 +38,8 @@ package org.geosdi.geoplatform.gui.client.widget.tree;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel.CheckCascade;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -52,6 +54,8 @@ public abstract class GeoPlatformTreeWidget<T extends GPBeanTreeModel> {
      * @param theTree
      */
     public GeoPlatformTreeWidget(GPTreeStore<T> theStore, GPTreePanel<T> theTree) {
+        checkArgument(theStore != null, "The Parameter store must not be null.");
+        checkArgument(theTree != null, "The Parameter tree must not be null.");
         this.store = theStore;
         this.tree = theTree;
         registerTree();

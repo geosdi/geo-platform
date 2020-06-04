@@ -58,6 +58,7 @@ import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import javax.inject.Inject;
 import java.util.List;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.TRUE;
 
 /**
@@ -88,6 +89,11 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel implements I
             @QueryFeatureButton Button theQueryFeatureButton, @FeatureAttributeConditionFieldList List theAttributeConditions,
             @MatchComboField SimpleComboBox theMatchComboField) {
         super(TRUE);
+        checkArgument(theBus != null, "The Parameter bus must not be null.");
+        checkArgument(theSelectFeaturesButton != null, "The Parameter selectFeaturesButton must not be null.");
+        checkArgument(theQueryFeatureButton != null, "The Parameter queryFeatureButton must not be null.");
+        checkArgument(theAttributeConditions != null, "The Parameter attributeConditions must not be null.");
+        checkArgument(theMatchComboField != null, "The Parameter matchComboField must not be null.");
         this.bus = theBus;
         this.selectFeaturesButton = theSelectFeaturesButton;
         this.queryFeatureButton = theQueryFeatureButton;
@@ -145,7 +151,6 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel implements I
         formPanel.setBorders(false);
         formPanel.setBodyBorder(false);
         formPanel.setLayout(new FlowLayout());
-
         super.add(formPanel);
     }
 
@@ -154,12 +159,10 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel implements I
         matchResultSet.setHeadingHtml("Select by condition");
         matchResultSet.setCheckboxToggle(true);
         matchResultSet.setExpanded(true);
-
         MultiField multiMatchField = new MultiField();
         multiMatchField.add(new LabelField("Match" + "&nbsp;"));
         multiMatchField.add(matchComboField);
         matchResultSet.add(multiMatchField, new VBoxLayoutData(0, 0, 5, 0));
-
         matchResultSet.addListener(Events.Collapse, new Listener<FieldSetEvent>() {
 
             @Override
@@ -176,13 +179,11 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel implements I
             }
 
         });
-
         formPanel.add(matchResultSet);
     }
 
     private void createSelectionButtons() {
         formPanel.setButtonAlign(Style.HorizontalAlignment.LEFT);
-
         this.addConditionButton = new Button("Add Condition",
                 AbstractImagePrototype.create(BasicWidgetResources.ICONS.done()), new SelectionListener<ButtonEvent>() {
 
@@ -200,9 +201,7 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel implements I
 
         });
         formPanel.addButton(addConditionButton);
-
-        this.resetConditionsButton = new Button("Reset Conditions",
-                AbstractImagePrototype.create(BasicWidgetResources.ICONS.delete()),
+        this.resetConditionsButton = new Button("Reset Conditions", AbstractImagePrototype.create(BasicWidgetResources.ICONS.delete()),
                 new SelectionListener<ButtonEvent>() {
 
                     @Override
@@ -219,7 +218,6 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel implements I
 
     private void createQueryButtons() {
         super.setButtonAlign(Style.HorizontalAlignment.RIGHT);
-
         super.addButton(this.selectFeaturesButton);
         super.addButton(queryFeatureButton);
     }

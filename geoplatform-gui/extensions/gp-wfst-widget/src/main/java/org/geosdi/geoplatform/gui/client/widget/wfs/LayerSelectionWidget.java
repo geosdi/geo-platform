@@ -47,6 +47,7 @@ import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.TRUE;
 
 /**
@@ -64,9 +65,15 @@ public class LayerSelectionWidget extends GeoPlatformContentPanel {
     private final FeatureMapWidthEvent increaseWidthEvent = new IncreaseWidthEvent();
     private final EditingToolbarPaddingEvent decreasePaddingEvent = new DecreasePaddingEvent();
 
+    /**
+     * @param theBus
+     * @param theWFSLayerTreeWidget
+     */
     @Inject
     public LayerSelectionWidget(GPEventBus theBus, WFSLayerTreeWidget theWFSLayerTreeWidget) {
         super(TRUE);
+        checkArgument(theBus != null, "The Parameter bus must not be null.");
+        checkArgument(theWFSLayerTreeWidget != null, "The Parameter wfsLayerTreeWidget must not be null.");
         this.bus = theBus;
         this.wfsLayerTreeWidget = theWFSLayerTreeWidget;
     }

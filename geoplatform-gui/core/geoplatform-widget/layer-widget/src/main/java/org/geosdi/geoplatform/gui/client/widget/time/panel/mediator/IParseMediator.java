@@ -43,6 +43,11 @@ public interface IParseMediator {
      */
     void setParsedPeriod(String parsedPeriod);
 
+    /**
+     *
+     */
+    void reset();
+
     @Singleton
     class ParseMediator implements IParseMediator {
 
@@ -100,6 +105,16 @@ public interface IParseMediator {
         public void setParsedPeriod(String parsedPeriod) {
             this.parsedPeriod = this.parsedPeriod.concat(" ").concat(parsedPeriod).concat(" - ");
             this.parsedPeriod = this.parsedPeriod.substring(0, this.parsedPeriod.lastIndexOf("-"));
+        }
+
+        /**
+         *
+         */
+        @Override
+        public void reset() {
+            this.initTime = false;
+            this.periodValue = null;
+            this.parsedPeriod = "";
         }
 
 

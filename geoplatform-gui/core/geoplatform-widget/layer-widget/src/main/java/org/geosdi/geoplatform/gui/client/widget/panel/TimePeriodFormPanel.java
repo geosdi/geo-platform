@@ -335,8 +335,6 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
     }
 
     private boolean validateForm() {
-        if (this.period == null)
-            this.period = this.parseMediator.calculatePeriod(this.iStrategyView.getExtentValues().get(PERIOD).toString());
         if (!isValid()) {
             this.playButton.toggle(Boolean.FALSE);
             return Boolean.FALSE;
@@ -356,7 +354,7 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
             return Boolean.FALSE;
         }
         this.calculateStep();
-        this.labelPeriod.setValue(this.parseMediator.getParsedPeriod());
+
         return Boolean.TRUE;
     }
 
@@ -382,6 +380,8 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
     @Override
     protected void onAttach() {
         super.onAttach();
+        this.period = this.parseMediator.calculatePeriod(this.iStrategyView.getExtentValues().get(PERIOD).toString());
+        this.labelPeriod.setValue(this.parseMediator.getParsedPeriod());
     }
 
     @Override
@@ -389,7 +389,7 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
         WidgetPropertiesHandlerManager.fireEvent(new GPResetComponentsEvent());
         this.stopPlayer();
         super.onDetach();
-
+        this.parseMediator.reset();
     }
 
     @Override

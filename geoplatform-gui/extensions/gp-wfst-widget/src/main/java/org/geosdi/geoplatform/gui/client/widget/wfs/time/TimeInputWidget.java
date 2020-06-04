@@ -49,8 +49,7 @@ import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.DateSelectedEvent;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
-import javax.inject.Inject;
-
+import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.TRUE;
 
 /**
@@ -61,65 +60,46 @@ public class TimeInputWidget extends GeoPlatformWindow {
 
     private final static String DATE_KEY_VALUE = "Date";
     private final static String TIME_KEY_VALUE = "Time";
+    //
     private FormData formData;
     private LayoutContainer timeContainer;
     private GPEventBus bus;
     private DateSelectedEvent dateSelectedEvent;
 
-    public TimeInputWidget(GPEventBus bus) {
+    /**
+     * @param theBus
+     */
+    public TimeInputWidget(GPEventBus theBus) {
         super(TRUE);
-        this.bus = bus;
+        checkArgument(theBus != null, "The Parameter bus must not be null.");
+        this.bus = theBus;
         this.dateSelectedEvent = new DateSelectedEvent();
-    }
-
-    private void addDateAndTimeToContainer(LayoutContainer layoutContainer, String dataLabel, String timeLabel) {
-        final DateField dateField = new DateField();
-        dateField.setFieldLabel(dataLabel);
-        dateField.setData("text", "Enter the date");
-        layoutContainer.setData(dataLabel, dateField);
-        final TimeField timeField = new TimeField();
-        timeField.setFieldLabel(timeLabel);
-        timeField.setData("text", "Enter the time");
-        layoutContainer.setData(timeLabel, timeField);
-
-        layoutContainer.add(dateField);
-        layoutContainer.add(timeField);
     }
 
     @Override
     public void addComponent() {
-        final Button insertButton = new Button("Insert",
-                new SelectionListener<ButtonEvent>() {
+        final Button insertButton = new Button("Insert", new SelectionListener<ButtonEvent>() {
 
-                    @Override
-                    public void componentSelected(ButtonEvent be) {
-                        StringBuilder timeBuilder = new StringBuilder();
-                        if (timeContainer.isVisible()) {
-                            DateField dateField = timeContainer.getData(DATE_KEY_VALUE);
-//                    System.out.println("Data: " + DateTimeFormat.getFormat("yyyy-MM-dd").format(dateField.getValue()));
-                            TimeField timeField = timeContainer.getData(TIME_KEY_VALUE);
-//                    System.out.println("Time: " + timeField.getValue().getText());
-                            timeBuilder.append(
-                                    DateTimeFormat.getFormat("yyyy-MM-dd").format(
-                                            dateField.getValue()));
-                            timeBuilder.append("T");
-                            timeBuilder.append(timeField.getValue().getText());
-                            timeBuilder.append(":00Z");
-                        }
-                        dateSelectedEvent.setDate(timeBuilder.toString());
-                        bus.fireEventFromSource(dateSelectedEvent, TimeInputWidget.this);
-                        TimeInputWidget.super.hide();
-                    }
-
-                });
-
+            @Override
+            public void componentSelected(ButtonEvent be) {
+                StringBuilder timeBuilder = new StringBuilder();
+                if (timeContainer.isVisible()) {
+                    DateField dateField = timeContainer.getData(DATE_KEY_VALUE);
+                    TimeField timeField = timeContainer.getData(TIME_KEY_VALUE);
+                    timeBuilder.append(DateTimeFormat.getFormat("yyyy-MM-dd").format(dateField.getValue()));
+                    timeBuilder.append("T");
+                    timeBuilder.append(timeField.getValue().getText());
+                    timeBuilder.append(":00Z");
+                }
+                dateSelectedEvent.setDate(timeBuilder.toString());
+                bus.fireEventFromSource(dateSelectedEvent, TimeInputWidget.this);
+                TimeInputWidget.super.hide();
+            }
+        });
         addButton(insertButton);
-
         formData = new FormData("98%");
-
         timeContainer = new LayoutContainer(new FormLayout());
-        this.addDateAndTimeToContainer(timeContainer, DATE_KEY_VALUE,
-                TIME_KEY_VALUE);
+        this.addDateAndTimeToContainer(timeContainer, DATE_KEY_VALUE, TIME_KEY_VALUE);
         add(new Label("Please, select the required parameters."));
         add(timeContainer, formData);
     }
@@ -136,6 +116,16 @@ public class TimeInputWidget extends GeoPlatformWindow {
         super.setModal(true);
     }
 
-
-
+    private void addDateAndTimeToContainer(LayoutContainer layoutContainer, String dataLabel, String timeLabel) {
+        final DateField dateField = new DateField();
+        dateField.setFieldLabel(dataLabel);
+        dateField.setData("text", "Enter the date");
+        layoutContainer.setData(dataLabel, dateField);
+        final TimeField timeField = new TimeField();
+        timeField.setFieldLabel(timeLabel);
+        timeField.setData("text", "Enter the time");
+        layoutContainer.setData(timeLabel, timeField);
+        layoutContainer.add(dateField);
+        layoutContainer.add(timeField);
+    }
 }

@@ -49,6 +49,8 @@ import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import javax.inject.Inject;
 import java.util.List;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 /**
  * @author Vito Salvia <vito.salvia@gmail.com>
  * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
@@ -60,7 +62,6 @@ public class WFSLayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> i
     @Inject
     private WFSLayerTreeBuilder treeBuilder;
 
-
     /**
      * @param theStore
      * @param theTree
@@ -70,10 +71,12 @@ public class WFSLayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> i
     public WFSLayerTreeWidget(GPEventBus theBus, @WFSLayerTreeStore GPTreeStore theStore,
             @WFSLayerTree GPTreePanel theTree, WFSTreeBasicProperties theTreeProperties) {
         super(theStore, theTree);
+        checkArgument(theBus != null, "The Parameter bus must not be null.");
+        checkArgument(theTreeProperties != null, "The Parameter treeProperties must not be null.");
         this.bus = theBus;
         this.treeProperties = theTreeProperties;
         super.afterPropertiesSet();
-        this.bus.addHandler(LayerTreeHandler.TYPE, this);
+        this.bus.addHandler(TYPE, this);
     }
 
     /**

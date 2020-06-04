@@ -35,12 +35,10 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.wfs;
 
-import com.google.gwt.core.client.GWT;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.GWFSPMapToolsHandler;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
 import org.geosdi.geoplatform.gui.client.widget.wfs.initializer.IFeatureMapInitializer;
 import org.geosdi.geoplatform.gui.client.widget.wfs.viewport.WFSViewportUtility;
-import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.gwtopenmaps.openlayers.client.Bounds;
@@ -49,7 +47,10 @@ import org.gwtopenmaps.openlayers.client.Projection;
 
 import javax.inject.Inject;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.TRUE;
+import static org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem.EPSG_GOOGLE;
+import static org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem.GOOGLE_MERCATOR;
 
 /**
  * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
@@ -69,6 +70,7 @@ public class FeatureMapWidget extends GeoPlatformContentPanel implements IFeatur
     @Inject
     public FeatureMapWidget(GPEventBus theBus) {
         super(TRUE);
+        checkArgument(theBus != null, "The Parameter bus must not be null.");
         this.bus = theBus;
         this.bus.addHandler(IFeatureMapWidget.TYPE, this);
         this.bus.addHandler(GWFSPMapToolsHandler.TYPE, this);
@@ -140,11 +142,8 @@ public class FeatureMapWidget extends GeoPlatformContentPanel implements IFeatur
     public void onZoomToMaxExtend(BBoxClientInfo bbox, String crs) {
         Bounds bounds = WFSViewportUtility.generateBoundsFromBBOX(bbox);
         if (!this.mapWidget.getMap().getProjection().equals(crs)) {
-            if (this.mapWidget.getMap().getProjection().equals(
-                    GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode())) {
-                bounds.transform(new Projection(crs),
-                        new Projection(
-                                GPCoordinateReferenceSystem.EPSG_GOOGLE.getCode()));
+            if (this.mapWidget.getMap().getProjection().equals(GOOGLE_MERCATOR.getCode())) {
+                bounds.transform(new Projection(crs), new Projection(EPSG_GOOGLE.getCode()));
             }
         }
         this.mapWidget.getMap().zoomToExtent(bounds);
@@ -160,5 +159,4 @@ public class FeatureMapWidget extends GeoPlatformContentPanel implements IFeatur
         updateSize();
         super.layout();
     }
-
 }

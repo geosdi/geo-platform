@@ -71,6 +71,7 @@ import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
 import javax.inject.Inject;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 import static org.geosdi.geoplatform.gui.client.widget.wfs.builder.feature.FeatureAttributesWindowBuilder.RECONFIGURE_STATE;
@@ -115,6 +116,9 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget, 
     @Inject
     public FeatureWidget(GPEventBus theBus, @ResetButton Button theResetButton, @SaveButton Button theSaveButton) {
         super(TRUE);
+        checkArgument(theBus != null, "The Parameter bus must not be null.");
+        checkArgument(theResetButton != null, "The Parameter resetButton must not be null.");
+        checkArgument(theSaveButton != null, "The Parameter saveButton must not be null.");
         this.bus = theBus;
         this.resetButton = theResetButton;
         this.saveButton = theSaveButton;

@@ -82,7 +82,7 @@ public interface GPRasterLayerDTOBuilder extends Serializable {
         private final static String EPSG_4326 = "EPSG:4326";
         private final static String EPSG_3857 = "EPSG:3857";
         private final static String EPSG_GOOGLE = "EPSG:900913";
-        private static final Float DEFAULT_MAX_SCALE = (10f * 1_000000);
+        private static final Float DEFAULT_MAX_SCALE = (20f * 1_000000);
         private static final Float DEDAULT_MIN_SCALE = 0f;
         protected static final String GEB = "earthbuilder.google.com";
 

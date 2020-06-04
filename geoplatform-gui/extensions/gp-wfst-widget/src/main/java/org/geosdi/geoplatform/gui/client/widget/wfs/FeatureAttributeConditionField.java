@@ -167,7 +167,6 @@ public class FeatureAttributeConditionField extends MultiField implements IFeatu
         nameAttributeStore.add(attributes);
         nameAttributeCombo.setStore(nameAttributeStore);
         nameAttributeCombo.setDisplayField(AttributeDetail.AttributeDetailKeyValue.NAME.name());
-
         return nameAttributeCombo;
     }
 
@@ -177,11 +176,9 @@ public class FeatureAttributeConditionField extends MultiField implements IFeatu
         operatorCombo.setTypeAhead(true);
         operatorCombo.setTriggerAction(ComboBox.TriggerAction.ALL);
         operatorCombo.setWidth(50);
-
         for (OperatorType operator : OperatorType.values()) {
             operatorCombo.add(operator.getSymbol());
         }
-
         operatorCombo.disable();
         return operatorCombo;
     }

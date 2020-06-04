@@ -64,7 +64,6 @@ import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.WFSFeatureBindingHa
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
 import org.geosdi.geoplatform.gui.client.widget.wfs.builder.AttributeCustomFieldsMap;
 import org.geosdi.geoplatform.gui.client.widget.wfs.builder.GetFeatureControlBuilder;
-import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar;
 import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar.FeatureStatusBarType;
 import org.geosdi.geoplatform.gui.client.widget.wfs.time.TimeInputWidget;
 import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextField;
@@ -77,14 +76,15 @@ import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.TRUE;
+import static org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar.FeatureStatusBarType.STATUS_OK;
 
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
  */
-public class FeatureAttributesWidget extends GeoPlatformContentPanel implements FeatureAttributesHandler,
-        IDateSelectedHandler {
+public class FeatureAttributesWidget extends GeoPlatformContentPanel implements FeatureAttributesHandler, IDateSelectedHandler {
 
     public static final String ID = WFSWidgetNames.FEATURE_ATTRIBUTES.name();
     private static final ColumnModel mockColumnModel;
@@ -100,8 +100,7 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel implements 
     //
     private final GetFeatureControlBuilder featureControlBuilder;
     private final WFSProtocolCRUDOptions featureCRUDProtocol;
-    private final FeatureStatusBarEvent successStatusBarEvent = new FeatureStatusBarEvent("",
-            FeatureStatusBarType.STATUS_OK);
+    private final FeatureStatusBarEvent successStatusBarEvent = new FeatureStatusBarEvent("", STATUS_OK);
     ResetStatusBarEvent resetStatusBarEvent = new ResetStatusBarEvent();
     //
     @Inject
@@ -112,15 +111,18 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel implements 
     private String dataAttributeName;
 
     @Inject
-    public FeatureAttributesWidget(GPEventBus bus, GetFeatureControlBuilder featureControlBuilder,
-            WFSProtocolCRUDOptions featureCRUDProtocol) {
+    public FeatureAttributesWidget(GPEventBus theBus, GetFeatureControlBuilder theFeatureControlBuilder,
+            WFSProtocolCRUDOptions theFeatureCRUDProtocol) {
         super(TRUE);
-        this.bus = bus;
-        this.timeInputWidget = new TimeInputWidget(bus);
+        checkArgument(theBus != null, "The Parameter bus must not be null.");
+        checkArgument(theFeatureControlBuilder != null, "The Parameter featureControlBuilder must not be null.");
+        checkArgument(theFeatureCRUDProtocol != null, "The Parameter featureCRUDProtocol must not be null.");
+        this.bus = theBus;
+        this.featureControlBuilder = theFeatureControlBuilder;
+        this.featureCRUDProtocol = theFeatureCRUDProtocol;
+        this.timeInputWidget = new TimeInputWidget(theBus);
         this.bus.addHandlerToSource(IDateSelectedHandler.TYPE, timeInputWidget, this);
         this.bus.addHandler(FeatureAttributesHandler.TYPE, this);
-        this.featureControlBuilder = featureControlBuilder;
-        this.featureCRUDProtocol = featureCRUDProtocol;
         super.setMonitorWindowResize(TRUE);
         addWidgetListener(new WidgetListener() {
 
@@ -131,7 +133,6 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel implements 
                     grid.setWidth(getWidth());
                 }
             }
-
         });
     }
 
@@ -220,15 +221,12 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel implements 
 
     private void createEditorGrid() {
         grid = new EditorGrid<FeatureDetail>(store, mockColumnModel);
-
         grid.setBorders(TRUE);
         grid.setStripeRows(TRUE);
         grid.setColumnLines(TRUE);
         grid.setColumnResize(TRUE);
         grid.setHeight(125);
-
         grid.addStyleName("grid-style");
-
         grid.setClicksToEdit(EditorGrid.ClicksToEdit.TWO);
         grid.getSelectionModel().setSelectionMode(Style.SelectionMode.SIMPLE);
         grid.addListener(Events.CellClick, new Listener<BaseEvent>() {
@@ -240,14 +238,12 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel implements 
             }
 
         });
-
         super.add(grid);
     }
 
     private ColumnModel prepareColumnModel() {
         List<AttributeDTO> attributesDTO = this.layerSchemaBinder.getLayerSchemaDTO().getAttributes();
         List<ColumnConfig> configs = Lists.<ColumnConfig>newArrayListWithCapacity(attributesDTO.size());
-
         for (final AttributeDTO att : attributesDTO) {
             final GPSecureStringTextField valueTextField = new GPSecureStringTextField();
             valueTextField.setValidator(AttributeCustomFieldsMap.getValidatorForAttributeType(att.getType()));
@@ -262,10 +258,8 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel implements 
                     }
 
                 };
-
                 valueTextField.addHandler(focusHandler, FocusEvent.getType());
             }
-
             ColumnConfig valueColumn = new ColumnConfig();
             String name = att.getName();
             valueColumn.setId(name);
@@ -275,7 +269,6 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel implements 
             valueColumn.setToolTip("Datatype: " + att.getType());
             configs.add(valueColumn);
         }
-
         return new ColumnModel(configs);
     }
 
@@ -285,7 +278,6 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel implements 
         for (Record record : store.getModifiedRecords()) {
             ModelData model = record.getModel();
             FeatureDetail attribute = (FeatureDetail) model;
-
             for (String name : attribute.getProperties().keySet()) {
                 if ((name != null) && !(name.isEmpty())) {
                     attribute.getVectorFeature().getAttributes().setAttribute(name, attribute.getValue(name));
@@ -294,9 +286,7 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel implements 
             attribute.getVectorFeature().toState(VectorFeature.State.Update);
             features.add(attribute.getVectorFeature());
         }
-
         this.bus.fireEvent(new FeatureStatusBarEvent("Transaction in Progress", FeatureStatusBarType.STATUS_LOADING));
-
         Timer t = new Timer() {
 
             @Override
@@ -305,9 +295,7 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel implements 
                 featureControlBuilder.getWfsProtocol().commit(features.toArray(new VectorFeature[features.size()]),
                         featureCRUDProtocol);
             }
-
         };
-
         t.schedule(2000);
     }
 
@@ -320,23 +308,15 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel implements 
 
     @Override
     public void postInstances(List<FeatureDetail> instaces) {
-        assert (instaces != null) : "Feature instances must not be null.";
+        checkArgument(instaces != null, "The Parameter instances must not be null.");
         int numFeature = instaces.size();
-
         for (FeatureDetail featureDetail : instaces) {
             logger.fine("##################################FID : " + featureDetail.getFeatureID());
         }
-
         grid.mask("Retrieve " + numFeature + " feature instance attributes");
         this.populateStore(instaces);
         grid.unmask();
-        bus.fireEvent(new FeatureStatusBarEvent("Features Loaded " + numFeature,
-                FeatureStatusBar.FeatureStatusBarType.STATUS_OK));
-    }
-
-    private void populateStore(List<FeatureDetail> attValues) {
-        store.removeAll();
-        store.add(attValues);
+        bus.fireEvent(new FeatureStatusBarEvent("Features Loaded " + numFeature, STATUS_OK));
     }
 
     @Override
@@ -351,13 +331,13 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel implements 
             store.remove(featureDetail);
             grid.stopEditing(TRUE);
         }
-        this.bus.fireEvent(new FeatureStatusBarEvent("Feature Successfully Deleted", FeatureStatusBarType.STATUS_OK));
+        this.bus.fireEvent(new FeatureStatusBarEvent("Feature Successfully Deleted", STATUS_OK));
         this.bus.fireEvent(new ActionEnableEvent(Boolean.FALSE));
     }
 
     @Override
     public void successfulTransaction() {
-        this.bus.fireEvent(new FeatureStatusBarEvent("Successful Transaction", FeatureStatusBarType.STATUS_OK));
+        this.bus.fireEvent(new FeatureStatusBarEvent("Successful Transaction", STATUS_OK));
         store.commitChanges();
         bus.fireEvent(new ActionEnableEvent(Boolean.FALSE));
     }
@@ -400,4 +380,8 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel implements 
         return valueEditor;
     }
 
+    private void populateStore(List<FeatureDetail> attValues) {
+        store.removeAll();
+        store.add(attValues);
+    }
 }

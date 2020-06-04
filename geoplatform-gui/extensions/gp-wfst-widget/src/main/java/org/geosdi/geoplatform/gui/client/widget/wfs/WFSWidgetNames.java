@@ -46,7 +46,7 @@ public enum WFSWidgetNames {
     LAYER_SELECTION("WFST-LayerSelectionWidget"),
     SHOW_FEATURES("WFST-ShowFeatures");
     //
-    private String value;
+    private final String value;
 
     WFSWidgetNames(String value) {
         this.value = value;

@@ -14,7 +14,9 @@ import com.extjs.gxt.ui.client.widget.layout.ColumnLayout;
 import com.extjs.gxt.ui.client.widget.layout.FlowData;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.google.common.collect.Lists;
-import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.i18n.client.TimeZone;
+import com.google.gwt.i18n.shared.DateTimeFormat;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -65,7 +67,7 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
     private final EndDateMultifield endDateMultifield;
     private final DateTimeFormat sdf = DateTimeFormat.getFormat("yyyy-MM-dd'T'HH:mm:ss");
     protected SpinnerField timerAnimation;
-    DateTimeFormat fmt = DateTimeFormat.getFormat("dd-MM-yyyy, HH:mm:ss");
+    private DateTimeFormat fmt = DateTimeFormat.getFormat("dd-MM-yyyy, HH:mm:ss");
     private CheckBox endDateCheckBox;
     private Slider periodSlider;
     private LabelField labelCurrenteTime;
@@ -190,13 +192,13 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
             public void setValue(int value) {
                 if (value >= 0 && !partialStore.isEmpty()) {
                     super.setValue(value);
+                    currentValue = value;
                     super.setMessage("" + fmt.format(partialStore.get(currentValue)));
                     GPLayerTreeModel layerSelected = (GPLayerTreeModel) treePanel.getSelectionModel().getSelectedItem();
                     IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
                     AbstractMementoOriginalProperties memento = mementoSave.copyOriginalProperties(layerSelected);
-                    currentValue = value;
                     labelCurrenteTime.setValue(fmt.format(partialStore.get(currentValue)));
-                    String f = sdf.format(partialStore.get(currentValue)).concat(".000Z");
+                    String f = sdf.format(partialStore.get(currentValue), TimeZone.createTimeZone(0)).concat(".000Z");
                     layerSelected.setTimeFilter(f);
                     layerSelected.setAlias(null);
                     layerSelected.setAlias(layerSelected.getLabel() + LAYER_TIME_DELIMITER + f + "]");
@@ -372,9 +374,9 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
         this.partialStore.clear();
         this.periodSlider.setValue(0);
         this.labelCurrenteTime.setValue(null);
-        this.partialStore.clear();
         this.labelStep.setValue(null);
         this.timerAnimation.setValue(1);
+//        this.currentValue = 0;
     }
 
     @Override
@@ -403,10 +405,10 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
     }
 
     private void calculateStep() {
-        Date dateTo = (Date) this.iStrategyView.getExtentValues().get(DATE_TO);
-        Date dateFrom = (Date) this.iStrategyView.getExtentValues().get(DATE_FROM);
-        Date d = new Date(dateFrom.getTime());
         if (this.store.isEmpty()) {
+            Date dateTo = (Date) this.iStrategyView.getExtentValues().get(DATE_TO);
+            Date dateFrom = (Date) this.iStrategyView.getExtentValues().get(DATE_FROM);
+            Date d = new Date(dateFrom.getTime());
             while (d.getTime() >= dateFrom.getTime() && d.getTime() <= dateTo.getTime()) {
                 this.store.add(d);
                 d = new Date(d.getTime() + this.period);

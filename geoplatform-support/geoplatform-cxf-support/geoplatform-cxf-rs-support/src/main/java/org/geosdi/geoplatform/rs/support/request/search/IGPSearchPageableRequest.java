@@ -32,47 +32,23 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.rs.support.request;
+package org.geosdi.geoplatform.rs.support.request.search;
 
-import lombok.Setter;
-import lombok.ToString;
-import org.geosdi.geoplatform.rs.support.request.annotation.GPPageableFrom;
-
-import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlTransient;
+import org.geosdi.geoplatform.rs.support.request.IGPPageableRequest;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Setter
-@ToString(callSuper = true)
-@XmlTransient
-public abstract class GPBasePageableRequest extends GPI18NRequest implements IGPPageableRequest {
-
-    private static final long serialVersionUID = 4970917243979535507L;
-    //
-    private Integer from;
-    protected Integer size;
-
-    public GPBasePageableRequest() {
-    }
+public interface IGPSearchPageableRequest<Search> extends IGPPageableRequest {
 
     /**
-     * @param theFrom
-     * @param theSize
+     * @return {@link Search}
      */
-    public GPBasePageableRequest(Integer theFrom, Integer theSize) {
-        this.from = theFrom;
-        this.size = theSize;
-    }
+    Search getParam();
 
     /**
-     * @return {@link Integer}
+     * @param theParam
      */
-    @NotNull(message = "{gp.pageable_from_not_null.message}")
-    @GPPageableFrom
-    public Integer getFrom() {
-        return from;
-    }
+    void setParam(Search theParam);
 }

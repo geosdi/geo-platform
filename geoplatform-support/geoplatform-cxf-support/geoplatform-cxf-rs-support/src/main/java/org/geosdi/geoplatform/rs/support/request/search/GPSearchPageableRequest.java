@@ -38,7 +38,7 @@ package org.geosdi.geoplatform.rs.support.request.search;
 import lombok.*;
 import org.geosdi.geoplatform.rs.support.request.GPPageableRequest;
 
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -53,11 +53,11 @@ import javax.xml.bind.annotation.XmlAccessorType;
 @Getter
 @Setter
 @XmlAccessorType(XmlAccessType.FIELD)
-public class GPSearchPageableRequest extends GPPageableRequest {
+public class GPSearchPageableRequest extends GPPageableRequest implements IGPSearchPageableRequest<String> {
 
     private static final long serialVersionUID = -751507870084241669L;
     //
     @NotNull(message = "{gp.search_pageable_param_not_null.message}")
-    @NotEmpty(message = "{gp.search_pageable_param_not_empty.message}")
+    @NotBlank(message = "{gp.search_pageable_param_not_empty.message}")
     private String param;
 }

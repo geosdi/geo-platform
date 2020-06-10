@@ -34,42 +34,31 @@
  */
 package org.geosdi.geoplatform.rs.support.request;
 
-import lombok.Setter;
-import lombok.ToString;
-import org.geosdi.geoplatform.rs.support.request.annotation.GPPageableSize;
-
-import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import org.geosdi.geoplatform.hibernate.validator.support.request.GPI18NRequestValidator;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Setter
-@ToString
-@XmlAccessorType(XmlAccessType.FIELD)
-public class GPPageableRequest extends GPBasePageableRequest {
-
-    private static final long serialVersionUID = -635571665699739878L;
-
-    public GPPageableRequest() {
-    }
-
-    /**
-     * @param theFrom
-     * @param theSize
-     */
-    public GPPageableRequest(Integer theFrom, Integer theSize) {
-        super(theFrom, theSize);
-    }
+public interface IGPPageableRequest extends GPI18NRequestValidator {
 
     /**
      * @return {@link Integer}
      */
-    @NotNull(message = "{gp.pageable_size_not_null.message}")
-    @GPPageableSize
-    public Integer getSize() {
-        return size;
-    }
+    Integer getFrom();
+
+    /**
+     * @param theFrom
+     */
+    void setFrom(Integer theFrom);
+
+    /**
+     * @return {@link Integer}
+     */
+    Integer getSize();
+
+    /**
+     * @param theSize
+     */
+    void setSize(Integer theSize);
 }

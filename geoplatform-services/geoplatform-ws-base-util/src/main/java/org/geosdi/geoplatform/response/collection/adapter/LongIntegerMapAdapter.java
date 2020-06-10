@@ -35,26 +35,24 @@
  */
 package org.geosdi.geoplatform.response.collection.adapter;
 
-import java.util.Map;
 import org.geosdi.geoplatform.response.collection.GenericMapAdapter;
 import org.geosdi.geoplatform.response.collection.GenericMapType;
 
+import java.util.Map;
+
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class LongIntegerMapAdapter extends GenericMapAdapter<Long, Integer> {
 
     @Override
-    public GenericMapType<Long, Integer> marshal(Map<Long, Integer> v) throws
-            Exception {
+    public GenericMapType<Long, Integer> marshal(Map<Long, Integer> v) throws Exception {
         return super.marshal(v);
     }
 
     @Override
-    public Map<Long, Integer> unmarshal(GenericMapType<Long, Integer> genericMapType) throws
-            Exception {
+    public Map<Long, Integer> unmarshal(GenericMapType<Long, Integer> genericMapType) throws Exception {
         return super.unmarshal(genericMapType);
     }
 }

@@ -35,41 +35,42 @@
 package org.geosdi.geoplatform.rs.support.request;
 
 import lombok.Setter;
-import lombok.ToString;
-import org.geosdi.geoplatform.rs.support.request.annotation.GPPageableSize;
+import org.geosdi.geoplatform.rs.support.request.annotation.GPPageableFrom;
 
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Setter
-@ToString
-@XmlAccessorType(XmlAccessType.FIELD)
-public class GPPageableRequest extends GPBasePageableRequest {
+@XmlTransient
+public abstract class GPBasePageableRequest extends GPI18NRequest implements IGPPageableRequest {
 
-    private static final long serialVersionUID = -635571665699739878L;
+    private static final long serialVersionUID = 4970917243979535507L;
+    //
+    private Integer from;
+    protected Integer size;
 
-    public GPPageableRequest() {
+    public GPBasePageableRequest() {
     }
 
     /**
      * @param theFrom
      * @param theSize
      */
-    public GPPageableRequest(Integer theFrom, Integer theSize) {
-        super(theFrom, theSize);
+    public GPBasePageableRequest(Integer theFrom, Integer theSize) {
+        this.from = theFrom;
+        this.size = theSize;
     }
 
     /**
      * @return {@link Integer}
      */
-    @NotNull(message = "{gp.pageable_size_not_null.message}")
-    @GPPageableSize
-    public Integer getSize() {
-        return size;
+    @NotNull(message = "{gp.pageable_from_not_null.message}")
+    @GPPageableFrom
+    public Integer getFrom() {
+        return from;
     }
 }

@@ -50,7 +50,7 @@ import static java.lang.Boolean.TRUE;
  */
 @Documented
 @Constraint(validatedBy = GPPageableSize.GPPageableSizeValidator.class)
-@Target({ElementType.FIELD})
+@Target({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface GPPageableSize {
 

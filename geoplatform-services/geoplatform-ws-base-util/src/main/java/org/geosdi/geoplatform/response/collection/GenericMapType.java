@@ -42,7 +42,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -66,6 +67,6 @@ public class GenericMapType<K, V> implements Serializable {
         this.entry = map.entrySet()
                 .stream()
                 .map(entry -> new GenericEntryType<>(entry))
-                .collect(Collectors.toList());
+                .collect(toList());
     }
 }

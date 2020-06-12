@@ -82,8 +82,6 @@ public interface GPRasterLayerDTOBuilder extends Serializable {
         private final static String EPSG_4326 = "EPSG:4326";
         private final static String EPSG_3857 = "EPSG:3857";
         private final static String EPSG_GOOGLE = "EPSG:900913";
-        private static final Float DEFAULT_MAX_SCALE = (20f * 1_000000);
-        private static final Float DEDAULT_MIN_SCALE = 0f;
         protected static final String GEB = "earthbuilder.google.com";
 
         /**
@@ -177,8 +175,8 @@ public interface GPRasterLayerDTOBuilder extends Serializable {
             }
             raster.setLayerInfo(layerInfo);
             logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@MAX_SCALE : {} - MIN_SCAKE : {}\n\n", layer.getScaleDenominatorMax(), layer.getScaleDenominatorMin());
-            raster.setMaxScale((isNaN(layer.getScaleDenominatorMin())) ? DEDAULT_MIN_SCALE : valueOf(layer.getScaleDenominatorMin()).floatValue());
-            raster.setMinScale((isNaN(layer.getScaleDenominatorMax())) ? DEFAULT_MAX_SCALE : (valueOf(layer.getScaleDenominatorMax()).floatValue()));
+            raster.setMaxScale((isNaN(layer.getScaleDenominatorMin())) ? null : valueOf(layer.getScaleDenominatorMin()).floatValue());
+            raster.setMinScale((isNaN(layer.getScaleDenominatorMax())) ? null : (valueOf(layer.getScaleDenominatorMax()).floatValue()));
             logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@Trying to determinate if Layer : {} is Temporal.", raster.getName());
             if (((layer.getLayerDimensions() != null) && !(layer.getLayerDimensions().isEmpty())) && ((layer.getExtents() != null) && !(layer.getExtents().isEmpty()))) {
                 GPTemporalDimension dimension = layer.getLayerDimensions().stream()

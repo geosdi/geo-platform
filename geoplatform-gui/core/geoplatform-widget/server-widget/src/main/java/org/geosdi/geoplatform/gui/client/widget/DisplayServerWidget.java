@@ -371,8 +371,7 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
         private GPServerBeanModel selectedServer;
 
         public PerformGetcapabilities() {
-            OAuth2HandlerManager.addHandler(IGPOAuth2CapabilitiesHandler.TYPE,
-                    this);
+            OAuth2HandlerManager.addHandler(IGPOAuth2CapabilitiesHandler.TYPE, this);
         }
 
         private void checkSelectedServer(GPServerBeanModel selected) {
@@ -392,42 +391,41 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
             capabilitiesRequest.setIdServer(selectedServer.getId());
             capabilitiesRequest.setServerUrl(selectedServer.getUrlServer());
 
-            ClientCommandDispatcher.getInstance().execute(
-                    new GPClientCommand<BasicCapabilitiesResponse>() {
+            ClientCommandDispatcher.getInstance().execute(new GPClientCommand<BasicCapabilitiesResponse>() {
 
-                        private static final long serialVersionUID = -5938478884870425893L;
+                private static final long serialVersionUID = -5938478884870425893L;
 
-                        {
-                            super.setCommandRequest(capabilitiesRequest);
-                        }
+                {
+                    super.setCommandRequest(capabilitiesRequest);
+                }
 
-                        @Override
-                        public void onCommandSuccess(BasicCapabilitiesResponse response) {
-                            selectedServer.setLayers(response.getResult());
-                            fillGrid(response.getResult());
-                        }
+                @Override
+                public void onCommandSuccess(BasicCapabilitiesResponse response) {
+                    selectedServer.setLayers(response.getResult());
+                    fillGrid(response.getResult());
+                }
 
-                        @Override
-                        public void onCommandFailure(Throwable exception) {
-                            gridWidget.unMaskGrid();
-                            LayoutManager.getInstance().getStatusMap().clearStatus("");
+                @Override
+                public void onCommandFailure(Throwable exception) {
+                    gridWidget.unMaskGrid();
+                    LayoutManager.getInstance().getStatusMap().clearStatus("");
 
-                            if (selectedServer.getUrlServer().contains(EnumOAuth2.GEB_STRING.getValue())) {
-                                GeoPlatformMessage.infoMessage(ServerModuleConstants.INSTANCE.
-                                                googleSignOnRequiredTitleText(),
-                                        ServerModuleConstants.INSTANCE.
-                                                googleSignOnRequiredBodyText());
-                                OAuth2HandlerManager.fireEvent(new GPOAuth2GEBLoginEvent(
-                                        EnumOAuth2.LOAD_CAPABILITIES.getValue()));
-                            } else {
-                                GeoPlatformMessage.errorMessage(ServerModuleConstants.INSTANCE.
-                                        serverServiceText(), exception.getMessage());
-                                LayoutManager.getInstance().getStatusMap().setStatus(ServerModuleMessages.INSTANCE.DisplayServerWidget_serverErrorMessage(
-                                        exception.getMessage()), EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
-                            }
-                        }
+                    if (selectedServer.getUrlServer().contains(EnumOAuth2.GEB_STRING.getValue())) {
+                        GeoPlatformMessage.infoMessage(ServerModuleConstants.INSTANCE.
+                                googleSignOnRequiredTitleText(), ServerModuleConstants.INSTANCE.
+                                googleSignOnRequiredBodyText());
+                        OAuth2HandlerManager
+                                .fireEvent(new GPOAuth2GEBLoginEvent(EnumOAuth2.LOAD_CAPABILITIES.getValue()));
+                    } else {
+                        GeoPlatformMessage.errorMessage(ServerModuleConstants.INSTANCE.
+                                serverServiceText(), exception.getMessage());
+                        LayoutManager.getInstance().getStatusMap().setStatus(ServerModuleMessages.INSTANCE
+                                        .DisplayServerWidget_serverErrorMessage(exception.getMessage()),
+                                EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
+                    }
+                }
 
-                    });
+            });
         }
 
     }
@@ -435,5 +433,4 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
     public ListStore<GPServerBeanModel> getStore() {
         return this.store;
     }
-
 }

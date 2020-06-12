@@ -59,8 +59,7 @@ public class GPServerExpander extends GPTreeExpanderNotifier<AbstractFolderTreeN
     public GPServerExpander(GridLayersWidget theWidget) {
         super(theWidget.getTree());
         this.gridLayers = theWidget;
-        this.showProgressBar.setMessage(ServerModuleConstants.INSTANCE.
-                GPServerExpander_progressBarSearchLayersText());
+        this.showProgressBar.setMessage(ServerModuleConstants.INSTANCE.GPServerExpander_progressBarSearchLayersText());
     }
 
     @Override
@@ -89,5 +88,4 @@ public class GPServerExpander extends GPTreeExpanderNotifier<AbstractFolderTreeN
                     WindowsConstants.INSTANCE.warningLayerInToFolderText());
         }
     }
-
 }

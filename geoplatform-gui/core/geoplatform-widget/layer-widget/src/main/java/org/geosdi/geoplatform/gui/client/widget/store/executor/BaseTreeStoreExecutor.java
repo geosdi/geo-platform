@@ -146,6 +146,15 @@ public abstract class BaseTreeStoreExecutor extends GenericTreeStoreExecutor<Mem
         raster.setBbox(layer.getBbox());
         raster.setLayerType(layer.getLayerType());
         raster.setStyles(Lists.<GPStyleStringBeanModel>newArrayList(layer.getStyles()));
+        if(layer instanceof GPRasterBean) {
+            raster.setMaxScale(((GPRasterBean) layer).getMaxScale());
+            raster.setMinScale(((GPRasterBean) layer).getMinScale());
+            if (((GPRasterBean) layer).isTemporalLayer()) {
+                raster.setDimension(((GPRasterBean) layer).getDimension());
+                raster.setExtent(((GPRasterBean) layer).getExtent());
+                raster.getExtent().setRange(!((GPRasterBean) layer).getExtent().getValue().contains("/P"));
+            }
+        }
         return raster;
     }
 

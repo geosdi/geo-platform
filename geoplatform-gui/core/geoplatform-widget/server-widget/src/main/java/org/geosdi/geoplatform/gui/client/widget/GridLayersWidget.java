@@ -134,6 +134,7 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
         grid.addPlugin(this.rowExpander);
         grid.getSelectionModel().setSelectionMode(SelectionMode.MULTI);
         grid.addListener(Events.CellClick, new Listener<BaseEvent>() {
+
             @Override
             public void handleEvent(BaseEvent be) {
                 done.enable();
@@ -153,13 +154,11 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
         name.setHeaderHtml(ServerModuleConstants.INSTANCE.GridLayersWidget_layerNameHeaderText());
         name.setWidth(200);
         configs.add(name);
-
         ColumnConfig title = new ColumnConfig();
         title.setId(GPLayerBeanKeyValue.GPLAYER_LABEL.getValue());
         title.setHeaderHtml(ServerModuleConstants.INSTANCE.GridLayersWidget_titleHeaderText());
         title.setWidth(150);
         configs.add(title);
-
         return new ColumnModel(configs);
     }
 

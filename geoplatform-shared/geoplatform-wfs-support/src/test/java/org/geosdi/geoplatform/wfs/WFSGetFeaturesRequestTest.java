@@ -44,7 +44,9 @@ import org.geosdi.geoplatform.connector.GPWFSConnectorStore;
 import org.geosdi.geoplatform.connector.WFSConnectorBuilder;
 import org.geosdi.geoplatform.connector.server.request.WFSDescribeFeatureTypeRequest;
 import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequest;
+import org.geosdi.geoplatform.connector.server.security.BasicPreemptiveSecurityConnector;
 import org.geosdi.geoplatform.connector.wfs.response.FeatureCollectionDTO;
+import org.geosdi.geoplatform.connector.wfs.response.FeatureDTO;
 import org.geosdi.geoplatform.connector.wfs.response.LayerSchemaDTO;
 import org.geosdi.geoplatform.gui.shared.bean.BBox;
 import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
@@ -54,12 +56,13 @@ import org.geosdi.geoplatform.support.wfs.feature.reader.FeatureSchemaReader;
 import org.geosdi.geoplatform.support.wfs.feature.reader.GPFeatureSchemaReader;
 import org.geosdi.geoplatform.support.wfs.feature.reader.WFSGetFeatureStaxReader;
 import org.geosdi.geoplatform.xml.wfs.v110.GetFeatureType;
-import org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType;
 import org.geosdi.geoplatform.xml.xsd.v2001.Schema;
 import org.geotools.geometry.jts.JTS;
 import org.geotools.referencing.CRS;
+import org.junit.FixMethodOrder;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
 import org.opengis.referencing.operation.MathTransform;
 import org.slf4j.Logger;
@@ -67,14 +70,20 @@ import org.slf4j.LoggerFactory;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
-import java.io.*;
-import java.math.BigInteger;
+import javax.xml.transform.stream.StreamSource;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.InputStream;
+import java.io.StringReader;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
+import static java.io.File.separator;
 import static java.math.BigInteger.valueOf;
+import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
 import static org.geosdi.geoplatform.wfs.WFSDescribeFeatureTest.gpJAXBContextBuilder;
@@ -84,6 +93,7 @@ import static org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType.RESULTS;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@FixMethodOrder(value = MethodSorters.NAME_ASCENDING)
 public class WFSGetFeaturesRequestTest {
 
     private static final Logger logger = LoggerFactory.getLogger(WFSGetFeaturesRequestTest.class);
@@ -104,14 +114,10 @@ public class WFSGetFeaturesRequestTest {
             ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
             WRAP_ROOT_VALUE_DISABLE,
             INDENT_OUTPUT_ENABLE, NON_NULL);
-    private static char[] hex_table = {
-            '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-            'a', 'b', 'c', 'd', 'e', 'f'
-    };
 
     @Ignore(value = "Geoserver is Down")
     @Test
-    public void getAllFeaturesTest() throws Exception {
+    public void a_getAllFeaturesTest() throws Exception {
         String wfsURL = "http://geoserver.wfppal.org/geoserver/wfs";
         GPWFSConnectorStore serverConnector = WFSConnectorBuilder.newConnector().withServerUrl(new URL(wfsURL)).build();
         WFSDescribeFeatureTypeRequest<Schema> request = serverConnector.createDescribeFeatureTypeRequest();
@@ -143,7 +149,7 @@ public class WFSGetFeaturesRequestTest {
 
     //@Ignore(value = "FIX PROBLEM TO RETRIEVE ATTRIBUTES WITHOUT GEOMETRY")
     @Test
-    public void statesTest() throws Exception {
+    public void b_statesTest() throws Exception {
         String wfsURL = "http://150.145.141.92/geoserver/wfs";
         GPWFSConnectorStore serverConnector = WFSConnectorBuilder
                 .newConnector()
@@ -177,7 +183,7 @@ public class WFSGetFeaturesRequestTest {
     }
 
     @Test
-    public void tigerRoadsTest() throws Exception {
+    public void c_tigerRoadsTest() throws Exception {
         String wfsURL = "http://150.145.141.92/geoserver/wfs";
         GPWFSConnectorStore serverConnector = WFSConnectorBuilder
                 .newConnector()
@@ -211,7 +217,7 @@ public class WFSGetFeaturesRequestTest {
 
     @Ignore(value = "Geoserver is Down")
     @Test
-    public void siteTrTest() throws Exception {
+    public void d_siteTrTest() throws Exception {
         String wfsURL = "http://150.145.141.241/geoserver/wfs";
         QName siteTRCom = new QName("cite:tr_com");
         GPWFSConnectorStore serverConnector = WFSConnectorBuilder
@@ -264,7 +270,7 @@ public class WFSGetFeaturesRequestTest {
 
     @Ignore(value = "Test to Prepare XML Files")
     @Test
-    public void generateXMLFilesTest() throws Exception {
+    public void e_generateXMLFilesTest() throws Exception {
         String wfsURL = "http://150.145.141.92/geoserver/wfs";
         QName layerQName = new QName("sf:restricted");
         GPWFSConnectorStore serverConnector = WFSConnectorBuilder.newConnector().withServerUrl(new URL(wfsURL)).build();
@@ -295,7 +301,7 @@ public class WFSGetFeaturesRequestTest {
     }
 
     @Test
-    public void getFeatureMappingTest() throws Exception {
+    public void f_getFeatureMappingTest() throws Exception {
         GetFeatureType getFeatureType = GPJAXBContextBuilder.newInstance().unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                         "<wfs:GetFeature xmlns:wfs=\"http://www.opengis.net/wfs\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" service=\"WFS\" version=\"1.1.0\" maxFeatures=\"10\" xsi:schemaLocation=\"http://www.opengis.net/wfs http://schemas.opengis.net/wfs/1.1.0/wfs.xsd\">\n" +
                         "   <wfs:Query xmlns:cite=\"http://www.opengeospatial.net/cite\" typeName=\"cite:tr_com\" srsName=\"EPSG:3857\">\n" +
@@ -315,7 +321,7 @@ public class WFSGetFeaturesRequestTest {
     }
 
     @Test
-    public void convertJTSPointFrom3857To4326Test() throws Exception {
+    public void g_convertJTSPointFrom3857To4326Test() throws Exception {
         CoordinateReferenceSystem sourceCRS = CRS.decode("EPSG:3857");
         CoordinateReferenceSystem targetCRS = CRS.decode("EPSG:4326");
         MathTransform transform = CRS.findMathTransform(sourceCRS, targetCRS, false);
@@ -329,7 +335,7 @@ public class WFSGetFeaturesRequestTest {
     }
 
     @Test
-    public void toppTasmaniaRoadsTest() throws Exception {
+    public void h_toppTasmaniaRoadsTest() throws Exception {
         String wfsURL = "http://150.145.141.92/geoserver/wfs";
         QName TASMANIA_ROADS = new QName("http://www.openplans.org/topp",
                 "tasmania_roads", "topp");
@@ -365,7 +371,7 @@ public class WFSGetFeaturesRequestTest {
     }
 
     @Test
-    public void statesFeatureAsJsonTest() throws Exception {
+    public void i_statesFeatureAsJsonTest() throws Exception {
         String wfsURL = "http://150.145.141.92/geoserver/wfs";
         GPWFSConnectorStore serverConnector = WFSConnectorBuilder
                 .newConnector()
@@ -385,7 +391,7 @@ public class WFSGetFeaturesRequestTest {
     }
 
     @Test
-    public void percorsiNavetteTest() throws Exception {
+    public void l_percorsiNavetteTest() throws Exception {
         String wfsURL = "http://mappe-dpc.protezionecivile.it/gssitdpc/wfs";
         GPWFSConnectorStore serverConnector = WFSConnectorBuilder
                 .newConnector()
@@ -425,5 +431,67 @@ public class WFSGetFeaturesRequestTest {
         FeatureCollection featureCollectionJson = JACKSON_SUPPORT
                 .getDefaultMapper().readValue(isJson, FeatureCollection.class);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File("./target/PercorsiNavette.json"), featureCollectionJson);
+    }
+
+    @Test
+    public void m_ospedaliTest() throws Exception {
+        String wfsURL = "https://servizi.protezionecivile.it/geoserver/wfs";
+        GPWFSConnectorStore serverConnector = WFSConnectorBuilder
+                .newConnector()
+                .withClientSecurity(new BasicPreemptiveSecurityConnector("mdonato", "mdonato"))
+                .withServerUrl(new URL(wfsURL))
+                .build();
+        QName ospedali = new QName("PNSRS:CAL_4_6_ospedali");
+        String localPart = ospedali.getLocalPart();
+        String name = localPart.substring(localPart.indexOf(":") + 1);
+        WFSDescribeFeatureTypeRequest<Schema> request = serverConnector.createDescribeFeatureTypeRequest();
+        request.setTypeName(Arrays.asList(ospedali));
+        Schema response = request.getResponse();
+        logger.info("#################SCHEMA : {}\n", response);
+
+        LayerSchemaDTO layerSchema = featureReaderXSD.getFeature(response, name);
+        if(layerSchema == null) {
+            throw new IllegalStateException("The Layer Schema is null.");
+        }
+        layerSchema.setScope(wfsURL);
+        logger.debug("\n\t##################################LAYER_SCHEMA : {}", layerSchema);
+        WFSGetFeatureRequest getFeatureRequest = serverConnector.createGetFeatureRequest();
+        getFeatureRequest.setTypeName(new QName(layerSchema.getTypeName()));
+        getFeatureRequest.setSRS("EPSG:4326");
+        getFeatureRequest.setResultType(RESULTS.value());
+        getFeatureRequest.setMaxFeatures(valueOf(2));
+        logger.debug("@@@@@@@@@@@@@@@@@@RESPONSE_AS_STRING : \n{}\n", getFeatureRequest.showRequestAsString());
+        InputStream is = getFeatureRequest.getResponseAsStream();
+        WFSGetFeatureStaxReader featureReaderStAX = new WFSGetFeatureStaxReader(layerSchema);
+        FeatureCollectionDTO featureCollection = featureReaderStAX.read(is);
+
+        if(!featureCollection.isFeaturesLoaded()) {
+            featureCollection.setErrorMessage(getFeatureRequest.getResponseAsString());
+        }
+        JAXBElement<FeatureCollectionDTO> root = new JAXBElement<>(ospedali, FeatureCollectionDTO.class, featureCollection);
+        gpJAXBContextBuilder.marshal(root, new File("./target/Ospedali.xml"));
+        getFeatureRequest.setOutputFormat("json");
+        InputStream isJson = getFeatureRequest.getResponseAsStream();
+        FeatureCollection featureCollectionJson = JACKSON_SUPPORT
+                .getDefaultMapper().readValue(isJson, FeatureCollection.class);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File("./target/Ospedali.json"), featureCollectionJson);
+    }
+
+    @Test
+    public void n_unmarshallOspedaliTest() throws Exception {
+        String ospedaliBasePath = of(new File(".").getCanonicalPath(), "src", "test", "resources", "reader", "Ospedali.xml")
+                .collect(Collectors.joining(separator));
+        FeatureCollectionDTO featureCollectionDTO = gpJAXBContextBuilder.unmarshal(new StreamSource(ospedaliBasePath), FeatureCollectionDTO.class);
+        logger.info("#####################OSPEDALI : {}\n", featureCollectionDTO);
+    }
+
+    @Test
+    public void o_unmarshallOspedaliTest() throws Exception {
+        String ospedaliBasePath = of(new File(".").getCanonicalPath(), "src", "test", "resources", "reader", "OspedaliWithEntryNull.xml")
+                .collect(Collectors.joining(separator));
+        FeatureCollectionDTO featureCollectionDTO = gpJAXBContextBuilder.unmarshal(new StreamSource(ospedaliBasePath), FeatureCollectionDTO.class);
+        for (FeatureDTO featureDTO : featureCollectionDTO.getFeatures()) {
+            logger.info("@@@@@@@@@@@@@@@@FeatureID : {} - attributes : {}\n", featureDTO.getFID(), featureDTO.getAttributes());
+        }
     }
 }

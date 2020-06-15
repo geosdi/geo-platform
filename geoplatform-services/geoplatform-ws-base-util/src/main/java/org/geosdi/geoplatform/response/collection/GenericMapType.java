@@ -37,13 +37,16 @@ package org.geosdi.geoplatform.response.collection;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
+import javax.xml.bind.annotation.XmlAccessorType;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import static java.util.stream.Collectors.toList;
+import static javax.xml.bind.annotation.XmlAccessType.FIELD;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -51,6 +54,8 @@ import static java.util.stream.Collectors.toList;
  */
 @Getter
 @Setter
+@XmlAccessorType(value = FIELD)
+@ToString
 public class GenericMapType<K, V> implements Serializable {
 
     private static final long serialVersionUID = -2758242591885647805L;
@@ -63,7 +68,7 @@ public class GenericMapType<K, V> implements Serializable {
     /**
      * @param map
      */
-    public GenericMapType(Map<K, V> map) {
+    protected GenericMapType(Map<K, V> map) {
         this.entry = map.entrySet()
                 .stream()
                 .map(entry -> new GenericEntryType<>(entry))

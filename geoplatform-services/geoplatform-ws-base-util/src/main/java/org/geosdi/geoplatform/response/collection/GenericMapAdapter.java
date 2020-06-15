@@ -36,9 +36,8 @@
 package org.geosdi.geoplatform.response.collection;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
+import java.util.LinkedHashMap;
 import java.util.Map;
-
-import static java.util.stream.Collectors.toMap;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -54,7 +53,7 @@ public class GenericMapAdapter<K, V> extends XmlAdapter<GenericMapType<K, V>, Ma
     @Override
     public Map<K, V> unmarshal(GenericMapType<K, V> genericMapType) throws Exception {
         return genericMapType.getEntry().stream()
-                .collect(toMap(k -> k.getKey(), v -> v.getValue()));
+                .collect(LinkedHashMap::new, (m, v) -> m.put(v.getKey(), v.getValue()), LinkedHashMap::putAll);
     }
 
     /**

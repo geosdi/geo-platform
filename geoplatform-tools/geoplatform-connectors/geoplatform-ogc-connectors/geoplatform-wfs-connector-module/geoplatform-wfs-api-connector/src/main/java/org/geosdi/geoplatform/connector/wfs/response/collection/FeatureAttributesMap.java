@@ -35,10 +35,11 @@
  */
 package org.geosdi.geoplatform.connector.wfs.response.collection;
 
+import org.geosdi.geoplatform.response.collection.adapter.StringStringMapAdapter;
+
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.util.Map;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import org.geosdi.geoplatform.response.collection.adapter.StringStringMapAdapter;
 
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
@@ -46,6 +47,8 @@ import org.geosdi.geoplatform.response.collection.adapter.StringStringMapAdapter
 public class FeatureAttributesMap implements Serializable {
 
     private static final long serialVersionUID = 1750989553209626148L;
+    //
+    @XmlJavaTypeAdapter(StringStringMapAdapter.class)
     private Map<String, String> map;
 
     public FeatureAttributesMap() {
@@ -55,7 +58,6 @@ public class FeatureAttributesMap implements Serializable {
         this.map = map;
     }
 
-    @XmlJavaTypeAdapter(StringStringMapAdapter.class)
     public Map<String, String> getAttributesMap() {
         return map;
     }
@@ -66,9 +68,6 @@ public class FeatureAttributesMap implements Serializable {
 
     @Override
     public String toString() {
-        if (map == null) {
-            return "null";
-        }
-        return map.toString();
+        return  (map == null) ? "null" : map.toString();
     }
 }

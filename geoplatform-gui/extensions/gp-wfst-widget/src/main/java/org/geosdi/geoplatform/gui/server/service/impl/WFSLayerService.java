@@ -90,8 +90,7 @@ public class WFSLayerService implements IWFSLayerService {
      * @throws GeoPlatformException
      */
     @Override
-    public FeatureCollectionDTO getAllFeature(String serverUrl, String typeName, int maxFeatures,
-                                              Map<String, String> headerParams) throws GeoPlatformException {
+    public FeatureCollectionDTO getAllFeature(String serverUrl, String typeName, int maxFeatures, Map<String, String> headerParams) throws GeoPlatformException {
         logger.info("#####################################EXECUTING : getAllFeature");
         try {
             return geoPlatformWFSClient.getAllFeatureDirect(serverUrl, typeName, maxFeatures, headerParams);

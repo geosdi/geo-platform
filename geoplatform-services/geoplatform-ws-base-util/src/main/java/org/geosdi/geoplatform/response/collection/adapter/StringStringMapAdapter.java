@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.response.collection.adapter;
 import org.geosdi.geoplatform.response.collection.GenericMapAdapter;
 
 /**
- *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class StringStringMapAdapter extends GenericMapAdapter<String, String> {

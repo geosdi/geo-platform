@@ -14,7 +14,6 @@ import com.extjs.gxt.ui.client.widget.layout.ColumnLayout;
 import com.extjs.gxt.ui.client.widget.layout.FlowData;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.google.common.collect.Lists;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.TimeZone;
 import com.google.gwt.i18n.shared.DateTimeFormat;
 import com.google.gwt.user.client.Timer;
@@ -27,16 +26,18 @@ import org.geosdi.geoplatform.gui.client.i18n.LayerModuleMessages;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.AbstractMementoOriginalProperties;
-import org.geosdi.geoplatform.gui.client.puregwt.action.GPActionHandler;
 import org.geosdi.geoplatform.gui.client.puregwt.binding.GPDateBindingHandler;
 import org.geosdi.geoplatform.gui.client.puregwt.filter.event.GPHideFilterWidgetEvent;
+import org.geosdi.geoplatform.gui.client.puregwt.layer.GPLayerHandler;
+import org.geosdi.geoplatform.gui.client.puregwt.period.GPPeriodHandler;
 import org.geosdi.geoplatform.gui.client.puregwt.reset.GPResetComponentHandler;
 import org.geosdi.geoplatform.gui.client.puregwt.reset.event.GPResetComponentsEvent;
 import org.geosdi.geoplatform.gui.client.resources.LayerWidgetResourcesConfigurator;
 import org.geosdi.geoplatform.gui.client.widget.multifield.EndDateMultifield;
 import org.geosdi.geoplatform.gui.client.widget.multifield.StartDateMultifield;
 import org.geosdi.geoplatform.gui.client.widget.time.panel.mediator.IParseMediator;
-import org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.operation.IStrategyOperation;
+import org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.operation.IStrategyDateOperation;
+import org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.time.IStrategyLayerOperation;
 import org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.view.IStrategyView;
 import org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.view.TypeValueEnum;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
@@ -59,7 +60,8 @@ import static org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.view.
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandler, GPResetComponentHandler, GPActionHandler {
+public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandler, GPResetComponentHandler, GPPeriodHandler,
+        GPLayerHandler {
 
     private final static TimeFilterLayerMapEvent TIME_FILTER_LAYER_MAP_EVENT = new TimeFilterLayerMapEvent();
     private final LayoutContainer periodSliderContainer;
@@ -69,6 +71,7 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
     protected SpinnerField timerAnimation;
     private DateTimeFormat fmt = DateTimeFormat.getFormat("dd-MM-yyyy, HH:mm:ss");
     private CheckBox endDateCheckBox;
+    private CheckBox showAllCheckBox;
     private Slider periodSlider;
     private LabelField labelCurrenteTime;
     private LabelField labelStep;
@@ -92,12 +95,13 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
     @Inject
     private IStrategyView iStrategyView;
     @Inject
-    private IStrategyOperation iStrategyOperation;
+    private IStrategyDateOperation iStrategyDateOperation;
+    @Inject
+    private IStrategyLayerOperation iStrategyLayerOperation;
     @Inject
     private IParseMediator.ParseMediator parseMediator;
     private Long period = null;
     private Button apply;
-
 
     @Inject
     public TimePeriodFormPanel(StartDateMultifield theStartDateMultifield, final EndDateMultifield theEndDateMultifield,
@@ -109,9 +113,156 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
         this.addComponents();
         WidgetPropertiesHandlerManager.addHandler(GPDateBindingHandler.TYPE, this);
         WidgetPropertiesHandlerManager.addHandler(GPResetComponentHandler.TYPE, this);
-        WidgetPropertiesHandlerManager.addHandler(GPActionHandler.TYPE, this);
+        WidgetPropertiesHandlerManager.addHandler(GPPeriodHandler.TYPE, this);
+        WidgetPropertiesHandlerManager.addHandler(GPLayerHandler.TYPE, this);
     }
 
+
+    /**
+     * @param gpTreePanel
+     */
+    @Override
+    public void bindTreeModel(GPTreePanel gpTreePanel) {
+        this.treePanel = gpTreePanel;
+        Map<TypeValueEnum, Object> m = this.iStrategyView.getExtentValues();
+        this.labelRange.setValue(fmt.format((Date) m.get(DATE_FROM)).concat(" / ")
+                .concat(fmt.format((Date) m.get(DATE_TO))));
+        this.endDateMultifield.bindDate((Date) m.get(DATE_FROM), (Date) m.get(DATE_TO));
+        this.startDateMultifield.bindDate((Date) m.get(DATE_FROM), (Date) m.get(DATE_TO));
+    }
+
+
+    /**
+     *
+     */
+    @Override
+    public void removeFilterTime() {
+        initComponents();
+    }
+
+    /**
+     * @param partialStore
+     */
+    @Override
+    public void periodWithRangeOperation(List<Date> partialStore) {
+        this.partialStore = partialStore;
+        this.periodSlider.setValue(0);
+        this.periodSlider.setMaxValue(this.partialStore.size() - 1);
+    }
+
+    /**
+     * @param date1
+     * @param date2
+     */
+    @Override
+    public void noDate(Date date1, Date date2) {
+        GeoPlatformMessage.errorMessage(
+                LayerModuleConstants.INSTANCE.
+                        LayerTimeFilterWidget_timeFilterWarningTitleText(),
+                LayerModuleMessages.INSTANCE.
+                        LayerTimeFilterWidget_noDateFound(date1.toString(), date2.toString()));
+    }
+
+    /**
+     * @param index
+     */
+    @Override
+    public void periodWithSingleDate(int index) {
+        this.partialStore.clear();
+        this.partialStore.addAll(this.store);
+        this.periodSlider.setMaxValue(this.partialStore.size() - 1);
+        this.periodSlider.setValue(index);
+    }
+
+    /**
+     * @param from
+     */
+    @Override
+    public void refreshDateFrom(Date from) {
+        String[] dates = this.showAllCheckBox.getBoxLabel().split("/");
+        String s = fmt.format(from).concat("/").concat(dates.length == 2 ? this.showAllCheckBox.getBoxLabel()
+                .substring(this.showAllCheckBox.getBoxLabel().indexOf("/") + 1) : "");
+        this.showAllCheckBox.setBoxLabel(s);
+    }
+
+    /**
+     * @param to
+     */
+    @Override
+    public void refreshDateTo(Date to) {
+        this.showAllCheckBox.setBoxLabel(this.showAllCheckBox.getBoxLabel().substring(0, this.showAllCheckBox.getBoxLabel().indexOf("/") + 1)
+                .concat(fmt.format(to)));
+
+    }
+
+    /**
+     *
+     */
+    @Override
+    public void singleLayer() {
+        this.calculateStep();
+    }
+
+    /**
+     *
+     */
+    @Override
+    public void multipleLayer() {
+        this.periodSlider.setValue(0);
+        this.labelStep.setValue(null);
+        this.labelCurrenteTime.setValue(null);
+        this.playButton.toggle(Boolean.FALSE);
+        this.playButton.disable();
+        this.reversePlayButton.toggle(Boolean.FALSE);
+        this.reversePlayButton.disable();
+        this.backwardButton.disable();
+        this.forwardPlayButton.disable();
+        Date to = this.endDateCheckBox.getValue() ? this.endDateMultifield.getDate() : (Date) this.iStrategyView.getExtentValues().get(DATE_TO);
+        String f = sdf.format(this.startDateMultifield.getDate(), TimeZone.createTimeZone(0)).concat(".000Z").concat("/")
+                .concat(sdf.format(to
+                        , TimeZone.createTimeZone(0)).concat(".000Z"));
+        this.saveLayer(f);
+
+    }
+
+    /**
+     * @param timeFilter
+     */
+    private void saveLayer(String timeFilter) {
+        GPLayerTreeModel layerSelected = (GPLayerTreeModel) treePanel.getSelectionModel().getSelectedItem();
+        IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
+        AbstractMementoOriginalProperties memento = mementoSave.copyOriginalProperties(layerSelected);
+        layerSelected.setTimeFilter(timeFilter);
+        layerSelected.setAlias(null);
+        layerSelected.setAlias(layerSelected.getLabel() + LAYER_TIME_DELIMITER + timeFilter + "]");
+        TIME_FILTER_LAYER_MAP_EVENT.setLayerBean(layerSelected);
+        GPHandlerManager.fireEvent(TIME_FILTER_LAYER_MAP_EVENT);
+        mementoSave.putOriginalPropertiesInCache(memento);
+        treePanel.refresh(layerSelected);
+    }
+
+
+    /**
+     *
+     */
+    private void calculateStep() {
+        if (this.store.isEmpty()) {
+            Date dateTo = (Date) this.iStrategyView.getExtentValues().get(DATE_TO);
+            Date dateFrom = (Date) this.iStrategyView.getExtentValues().get(DATE_FROM);
+            Date d = new Date(dateFrom.getTime());
+            while (d.getTime() >= dateFrom.getTime() && d.getTime() <= dateTo.getTime()) {
+                this.store.add(d);
+                d = new Date(d.getTime() + this.period);
+            }
+        }
+        this.iStrategyDateOperation.getStrategy(this.endDateCheckBox.getValue()).getApplyOperation(this.store, this.startDateMultifield.getDate(),
+                this.endDateMultifield.getDate());
+        this.labelStep.setValue(this.partialStore.size());
+    }
+
+    /**
+     *
+     */
     private void addComponents() {
         super.setHeaderVisible(Boolean.FALSE);
         super.setFrame(Boolean.TRUE);
@@ -138,12 +289,28 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
                 endDateMultifield.setEnabled(endDateCheckBox.getValue());
                 endDateMultifield.reset();
                 endDateMultifield.clearInvalid();
+                refreshDateTo(((Date) iStrategyView.getExtentValues().get(DATE_TO)));
             }
         });
+
         LayoutContainer container = new LayoutContainer();
         container.add(this.endDateCheckBox);
         super.add(container, new FlowData(5));
         super.add(this.endDateMultifield, new FlowData(5));
+
+        this.showAllCheckBox = new CheckBox();
+        this.showAllCheckBox.setValue(false);
+        this.showAllCheckBox.addListener(Events.Change, new Listener<BaseEvent>() {
+            @Override
+            public void handleEvent(BaseEvent be) {
+                timerAnimation.setEnabled(!showAllCheckBox.getValue());
+                periodSlider.setEnabled(!showAllCheckBox.getValue());
+            }
+        });
+        LayoutContainer containerShow = new LayoutContainer();
+        containerShow.add(this.showAllCheckBox);
+        super.add(containerShow, new FlowData(5));
+
 //        buildDatesAvailables();
         this.labelCurrenteTime = new LabelField();
         this.labelCurrenteTime.setFieldLabel(LayerModuleConstants.INSTANCE.LayerTimeFilterWidget_currentDateTooltipText());
@@ -183,6 +350,9 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
         initComponents();
     }
 
+    /**
+     *
+     */
     private void buildTimeTimension() {
         HorizontalPanel buttonsContainer = new HorizontalPanel();
         buttonsContainer.setSpacing(2);
@@ -194,18 +364,7 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
                     super.setValue(value);
                     currentValue = value;
                     super.setMessage("" + fmt.format(partialStore.get(currentValue)));
-                    GPLayerTreeModel layerSelected = (GPLayerTreeModel) treePanel.getSelectionModel().getSelectedItem();
-                    IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
-                    AbstractMementoOriginalProperties memento = mementoSave.copyOriginalProperties(layerSelected);
-                    labelCurrenteTime.setValue(fmt.format(partialStore.get(currentValue)));
-                    String f = sdf.format(partialStore.get(currentValue), TimeZone.createTimeZone(0)).concat(".000Z");
-                    layerSelected.setTimeFilter(f);
-                    layerSelected.setAlias(null);
-                    layerSelected.setAlias(layerSelected.getLabel() + LAYER_TIME_DELIMITER + f + "]");
-                    TIME_FILTER_LAYER_MAP_EVENT.setLayerBean(layerSelected);
-                    GPHandlerManager.fireEvent(TIME_FILTER_LAYER_MAP_EVENT);
-                    mementoSave.putOriginalPropertiesInCache(memento);
-                    treePanel.refresh(layerSelected);
+                    saveLayer(sdf.format(partialStore.get(currentValue), TimeZone.createTimeZone(0)).concat(".000Z"));
                     enableOnPlaying();
                 }
 
@@ -233,6 +392,9 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
 
     }
 
+    /**
+     *
+     */
     private void enableOnPlaying() {
         this.backwardButton.setEnabled(!this.playButton.isPressed() && !this.reversePlayButton.isPressed() && this.currentValue > this.periodSlider.getMinValue());
         this.reversePlayButton.setEnabled(!this.playButton.isPressed() && this.currentValue > this.periodSlider.getMinValue());
@@ -240,6 +402,9 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
         this.playButton.setEnabled(!this.reversePlayButton.isPressed() && this.currentValue < this.periodSlider.getMaxValue());
     }
 
+    /**
+     *
+     */
     private void addListener() {
         this.periodPlaySelectioListener = new SelectionListener<ButtonEvent>() {
             @Override
@@ -296,6 +461,9 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
         });
     }
 
+    /**
+     *
+     */
     private void playTimeFilter() {
         animationTimer = new Timer() {
             @Override
@@ -310,6 +478,9 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
         animationTimer.scheduleRepeating(this.timerAnimation.getValue().intValue() * 1000);
     }
 
+    /**
+     *
+     */
     private void reversePlayTimeFilter() {
         animationTimer = new Timer() {
             @Override
@@ -324,6 +495,9 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
         animationTimer.scheduleRepeating(this.timerAnimation.getValue().intValue() * 1000);
     }
 
+    /**
+     *
+     */
     private void stopPlayer() {
         if (this.playButton.isPressed()) {
             this.playButton.toggle(Boolean.FALSE);
@@ -336,6 +510,9 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
         enableOnPlaying();
     }
 
+    /**
+     * @return
+     */
     private boolean validateForm() {
         if (!isValid()) {
             this.playButton.toggle(Boolean.FALSE);
@@ -355,11 +532,13 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
                             LayerTimeFilterWidget_periodDateErrorMessage());
             return Boolean.FALSE;
         }
-        this.calculateStep();
-
+        this.iStrategyLayerOperation.getStrategy(this.showAllCheckBox.getValue()).getApplyOperation();
         return Boolean.TRUE;
     }
 
+    /**
+     *
+     */
     private void initComponents() {
         this.backwardButton.disable();
         this.forwardPlayButton.disable();
@@ -376,8 +555,10 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
         this.labelCurrenteTime.setValue(null);
         this.labelStep.setValue(null);
         this.timerAnimation.setValue(1);
-//        this.currentValue = 0;
+        this.showAllCheckBox.setValue(false);
+        this.showAllCheckBox.setBoxLabel("/");
     }
+
 
     @Override
     protected void onAttach() {
@@ -394,57 +575,4 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
         this.parseMediator.reset();
     }
 
-    @Override
-    public void bindTreeModel(GPTreePanel gpTreePanel) {
-        this.treePanel = gpTreePanel;
-        Map<TypeValueEnum, Object> m = this.iStrategyView.getExtentValues();
-        this.labelRange.setValue(fmt.format((Date) m.get(DATE_FROM)).concat(" / ")
-                .concat(fmt.format((Date) m.get(DATE_TO))));
-        this.endDateMultifield.bindDate((Date) m.get(DATE_FROM), (Date) m.get(DATE_TO));
-        this.startDateMultifield.bindDate((Date) m.get(DATE_FROM), (Date) m.get(DATE_TO));
-    }
-
-    private void calculateStep() {
-        if (this.store.isEmpty()) {
-            Date dateTo = (Date) this.iStrategyView.getExtentValues().get(DATE_TO);
-            Date dateFrom = (Date) this.iStrategyView.getExtentValues().get(DATE_FROM);
-            Date d = new Date(dateFrom.getTime());
-            while (d.getTime() >= dateFrom.getTime() && d.getTime() <= dateTo.getTime()) {
-                this.store.add(d);
-                d = new Date(d.getTime() + this.period);
-            }
-        }
-        this.iStrategyOperation.getStrategy(this.endDateCheckBox.getValue()).getApplyOperation(this.store, this.startDateMultifield.getDate(),
-                this.endDateMultifield.getDate());
-        this.labelStep.setValue(this.partialStore.size());
-    }
-
-    @Override
-    public void removeFilterTime() {
-        initComponents();
-    }
-
-    @Override
-    public void periodWithRangeOperation(List<Date> partialStore) {
-        this.partialStore = partialStore;
-        this.periodSlider.setValue(0);
-        this.periodSlider.setMaxValue(this.partialStore.size() - 1);
-    }
-
-    @Override
-    public void noDate(Date date1, Date date2) {
-        GeoPlatformMessage.errorMessage(
-                LayerModuleConstants.INSTANCE.
-                        LayerTimeFilterWidget_timeFilterWarningTitleText(),
-                LayerModuleMessages.INSTANCE.
-                        LayerTimeFilterWidget_noDateFound(date1.toString(), date2.toString()));
-    }
-
-    @Override
-    public void periodWithSingleDate(int index) {
-        this.partialStore.clear();
-        this.partialStore.addAll(this.store);
-        this.periodSlider.setMaxValue(this.partialStore.size() - 1);
-        this.periodSlider.setValue(index);
-    }
 }

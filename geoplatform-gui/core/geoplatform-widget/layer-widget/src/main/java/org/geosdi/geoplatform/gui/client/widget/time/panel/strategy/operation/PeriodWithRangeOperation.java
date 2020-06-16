@@ -1,7 +1,7 @@
 package org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.operation;
 
 import com.google.common.collect.Lists;
-import org.geosdi.geoplatform.gui.client.puregwt.action.event.GPPeriodWithRangeOperationEvent;
+import org.geosdi.geoplatform.gui.client.puregwt.period.event.GPPeriodWithRangeOperationEvent;
 import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;
 
 import java.util.Date;
@@ -11,7 +11,7 @@ import java.util.List;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class PeriodWithRangeOperation implements IStrategyOperation.ITypeOperationStrategy {
+public class PeriodWithRangeOperation implements IStrategyDateOperation.ITypeOperationStrategy {
 
     /**
      * @param store

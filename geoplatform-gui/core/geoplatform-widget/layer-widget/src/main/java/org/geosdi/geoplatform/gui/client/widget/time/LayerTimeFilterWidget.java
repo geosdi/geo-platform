@@ -55,7 +55,7 @@ import static java.lang.Boolean.TRUE;
 public class LayerTimeFilterWidget extends GeoPlatformWindow implements IGPFilterWidgetHandler {
 
     public final static String LAYER_TIME_DELIMITER = " - [";
-    public final static short WIDGET_HEIGHT = 340;
+    public final static short WIDGET_HEIGHT = 350;
     public final static short WIDGET_WIDTH = 400;
     //
     private GPTreePanel<GPBeanTreeModel> treePanel;

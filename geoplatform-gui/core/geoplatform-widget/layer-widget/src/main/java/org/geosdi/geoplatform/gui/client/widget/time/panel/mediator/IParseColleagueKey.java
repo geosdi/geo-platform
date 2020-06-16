@@ -9,7 +9,7 @@ import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 public enum IParseColleagueKey {
 
     YEAR("Y", 31536000000l, LayerModuleConstants.INSTANCE.LayerTimeFilterWidget_yearTitleText()),
-    MONT("M", 2592000000l, LayerModuleConstants.INSTANCE.LayerTimeFilterWidget_monthTitleText()),
+    MONTH("M", 2592000000l, LayerModuleConstants.INSTANCE.LayerTimeFilterWidget_monthTitleText()),
     WEEK("W", 604800000l, LayerModuleConstants.INSTANCE.LayerTimeFilterWidget_weekTitleText()),
     DAY("D", 86400000l, LayerModuleConstants.INSTANCE.LayerTimeFilterWidget_dayTitleText()),
     HOUR("H", 3600000l, LayerModuleConstants.INSTANCE.LayerTimeFilterWidget_hourTitleText()),

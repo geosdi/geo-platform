@@ -40,7 +40,8 @@ import org.geosdi.geoplatform.gui.client.widget.multifield.StartDateMultifield;
 import org.geosdi.geoplatform.gui.client.widget.panel.TimePeriodFormPanel;
 import org.geosdi.geoplatform.gui.client.widget.time.panel.mediator.IParseMediator;
 import org.geosdi.geoplatform.gui.client.widget.time.panel.mediator.colleague.IParseColleague;
-import org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.operation.IStrategyOperation;
+import org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.operation.IStrategyDateOperation;
+import org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.time.IStrategyLayerOperation;
 import org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.view.IStrategyView;
 
 import javax.inject.Singleton;
@@ -57,7 +58,8 @@ public class TimeDimensionConfigurator extends AbstractGinModule {
         bind(EndDateMultifield.class).in(Singleton.class);
         bind(TimePeriodFormPanel.class).in(Singleton.class);
         bind(IStrategyView.class).to(IStrategyView.StrategyView.class).in(Singleton.class);
-        bind(IStrategyOperation.class).to(IStrategyOperation.StrategyOperation.class).in(Singleton.class);
+        bind(IStrategyDateOperation.class).to(IStrategyDateOperation.StrategyDateOperation.class).in(Singleton.class);
+        bind(IStrategyLayerOperation.class).to(IStrategyLayerOperation.StrategyLayerOperationOperation.class).in(Singleton.class);
         //ORDER IS IMPORTANT
         bind(IParseColleague.YearColleague.class).asEagerSingleton();
         bind(IParseColleague.MonthColleague.class).asEagerSingleton();

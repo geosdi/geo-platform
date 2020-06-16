@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.wfs;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.geojson.FeatureCollection;
 import org.geosdi.geoplatform.connector.GPWFSConnectorStore;
 import org.geosdi.geoplatform.connector.WFSConnectorBuilder;
@@ -69,20 +71,21 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.xml.bind.JAXBElement;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.namespace.QName;
 import javax.xml.transform.stream.StreamSource;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.InputStream;
-import java.io.StringReader;
+import java.io.*;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
-import java.util.stream.Collectors;
 
 import static java.io.File.separator;
 import static java.math.BigInteger.valueOf;
+import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
@@ -472,26 +475,37 @@ public class WFSGetFeaturesRequestTest {
         gpJAXBContextBuilder.marshal(root, new File("./target/Ospedali.xml"));
         getFeatureRequest.setOutputFormat("json");
         InputStream isJson = getFeatureRequest.getResponseAsStream();
-        FeatureCollection featureCollectionJson = JACKSON_SUPPORT
-                .getDefaultMapper().readValue(isJson, FeatureCollection.class);
+        FeatureCollection featureCollectionJson = JACKSON_SUPPORT.getDefaultMapper().readValue(isJson, FeatureCollection.class);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File("./target/Ospedali.json"), featureCollectionJson);
     }
 
     @Test
     public void n_unmarshallOspedaliTest() throws Exception {
         String ospedaliBasePath = of(new File(".").getCanonicalPath(), "src", "test", "resources", "reader", "Ospedali.xml")
-                .collect(Collectors.joining(separator));
-        FeatureCollectionDTO featureCollectionDTO = gpJAXBContextBuilder.unmarshal(new StreamSource(ospedaliBasePath), FeatureCollectionDTO.class);
-        logger.info("#####################OSPEDALI : {}\n", featureCollectionDTO);
+                .collect(joining(separator));
+        FeatureCollectionDTOWrapper featureCollectionDTOWrapper = gpJAXBContextBuilder.unmarshal(new StreamSource(ospedaliBasePath), FeatureCollectionDTOWrapper.class);
+        logger.info("#####################OSPEDALI : {}\n", featureCollectionDTOWrapper.getFeatureCollectionDTO());
     }
 
     @Test
     public void o_unmarshallOspedaliTest() throws Exception {
         String ospedaliBasePath = of(new File(".").getCanonicalPath(), "src", "test", "resources", "reader", "OspedaliWithEntryNull.xml")
-                .collect(Collectors.joining(separator));
-        FeatureCollectionDTO featureCollectionDTO = gpJAXBContextBuilder.unmarshal(new StreamSource(ospedaliBasePath), FeatureCollectionDTO.class);
-        for (FeatureDTO featureDTO : featureCollectionDTO.getFeatures()) {
+                .collect(joining(separator));
+        FeatureCollectionDTOWrapper featureCollectionDTOWrapper = gpJAXBContextBuilder.unmarshal(new StreamSource(ospedaliBasePath), FeatureCollectionDTOWrapper.class);
+        for (FeatureDTO featureDTO : featureCollectionDTOWrapper.getFeatureCollectionDTO().getFeatures()) {
             logger.info("@@@@@@@@@@@@@@@@FeatureID : {} - attributes : {}\n", featureDTO.getFID(), featureDTO.getAttributes());
         }
+    }
+
+    @Getter
+    @Setter
+    @XmlRootElement(name = "FeatureCollectionDTOWrapper")
+    @XmlAccessorType(XmlAccessType.FIELD)
+    static class FeatureCollectionDTOWrapper implements Serializable {
+
+        private static final long serialVersionUID = 4057175498085166638L;
+        //
+        @XmlElement(name = "FeatureCollectionDTO")
+        private FeatureCollectionDTO featureCollectionDTO;
     }
 }

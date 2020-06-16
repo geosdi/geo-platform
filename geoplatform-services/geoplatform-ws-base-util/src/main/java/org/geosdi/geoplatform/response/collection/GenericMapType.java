@@ -39,13 +39,16 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlAccessorType;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static java.util.stream.Collectors.toList;
+import static javax.annotation.meta.When.NEVER;
 import static javax.xml.bind.annotation.XmlAccessType.FIELD;
 
 /**
@@ -68,7 +71,8 @@ public class GenericMapType<K, V> implements Serializable {
     /**
      * @param map
      */
-    protected GenericMapType(Map<K, V> map) {
+    protected GenericMapType(@Nonnull(when = NEVER) Map<K, V> map) {
+        checkArgument(map != null, "The Parameter map must not be null.");
         this.entry = map.entrySet()
                 .stream()
                 .map(entry -> new GenericEntryType<>(entry))

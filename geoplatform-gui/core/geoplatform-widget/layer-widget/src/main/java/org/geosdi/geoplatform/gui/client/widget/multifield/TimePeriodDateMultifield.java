@@ -56,6 +56,7 @@ public abstract class TimePeriodDateMultifield extends MultiField implements GPR
                 minuteField.setEnabled(Boolean.TRUE);
                 Date dateWithZeroTime = FORMATTER_DATE.parse(FORMATTER_DATE.format(limitDate));
                 afterDateSelected(dateWithZeroTime);
+                refreshDate();
             }
         });
 
@@ -68,8 +69,10 @@ public abstract class TimePeriodDateMultifield extends MultiField implements GPR
                 Date time = FORMATTER_TIME.parse(FORMATTER_TIME.format(limitDate));
                 Date dateWithZeroTime = FORMATTER_DATE.parse(FORMATTER_DATE.format(limitDate));
                 afterHourSelected(dateWithZeroTime, time);
+                refreshDate();
             }
         });
+
         this.hourField.setToolTip(hourTooltip());
         this.hourField.setWidth(50);
         this.hourField.disable();
@@ -81,6 +84,13 @@ public abstract class TimePeriodDateMultifield extends MultiField implements GPR
         this.minuteField.setWidth(50);
         this.minuteField.setAllowBlank(Boolean.FALSE);
 
+        this.minuteField.addListener(Events.Change, new Listener<BaseEvent>() {
+            @Override
+            public void handleEvent(BaseEvent be) {
+                refreshDate();
+            }
+        });
+
         super.setFieldLabel(fieldLabel());
         super.setOrientation(Style.Orientation.HORIZONTAL);
         super.add(this.dateField);
@@ -91,21 +101,50 @@ public abstract class TimePeriodDateMultifield extends MultiField implements GPR
         setMaxMinValue();
     }
 
+    /**
+     *
+     */
+    protected abstract void refreshDate();
 
+    /**
+     * @param dateWithZeroTime
+     */
     protected abstract void afterDateSelected(Date dateWithZeroTime);
 
+    /**
+     * @param dateWithZeroTime
+     * @param time
+     */
     protected abstract void afterHourSelected(Date dateWithZeroTime, Date time);
 
+    /**
+     *
+     */
     protected abstract void setMaxMinValue();
 
+    /**
+     * @return {@link Validator}
+     */
     protected abstract Validator addValidator();
 
+    /**
+     * @return {@link String}
+     */
     protected abstract String dateTooltip();
 
+    /**
+     * @return {@link String}
+     */
     protected abstract String hourTooltip();
 
+    /**
+     * @return {@link String}
+     */
     protected abstract String minuteTooltip();
 
+    /**
+     * @return {@link String}
+     */
     protected abstract String fieldLabel();
 
     /**

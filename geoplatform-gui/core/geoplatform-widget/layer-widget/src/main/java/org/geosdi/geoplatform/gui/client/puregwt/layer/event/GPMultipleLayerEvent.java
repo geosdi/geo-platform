@@ -32,33 +32,25 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.client.puregwt.action.event;
+package org.geosdi.geoplatform.gui.client.puregwt.layer.event;
 
 import com.google.gwt.event.shared.GwtEvent;
-import org.geosdi.geoplatform.gui.client.puregwt.action.GPActionHandler;
-
-import java.util.Date;
-import java.util.List;
+import org.geosdi.geoplatform.gui.client.puregwt.layer.GPLayerHandler;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class GPPeriodWithRangeOperationEvent extends GwtEvent<GPActionHandler> {
+public class GPMultipleLayerEvent extends GwtEvent<GPLayerHandler> {
 
-    private final List<Date> partialStore;
 
-    public GPPeriodWithRangeOperationEvent(List<Date> partialStore) {
-        this.partialStore = partialStore;
+    @Override
+    public Type<GPLayerHandler> getAssociatedType() {
+        return GPLayerHandler.TYPE;
     }
 
     @Override
-    public Type<GPActionHandler> getAssociatedType() {
-        return GPActionHandler.TYPE;
-    }
-
-    @Override
-    protected void dispatch(GPActionHandler handler) {
-        handler.periodWithRangeOperation(this.partialStore);
+    protected void dispatch(GPLayerHandler handler) {
+        handler.multipleLayer();
     }
 }

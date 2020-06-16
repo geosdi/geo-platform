@@ -12,7 +12,7 @@ import java.util.Map;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface IStrategyOperation {
+public interface IStrategyDateOperation {
 
 
     /**
@@ -34,12 +34,12 @@ public interface IStrategyOperation {
 
 
     @Singleton
-    class StrategyOperation implements IStrategyOperation {
+    class StrategyDateOperation implements IStrategyDateOperation {
 
         final Map<Boolean, ITypeOperationStrategy> operationMap = Maps.newHashMap();
 
         @Inject
-        public StrategyOperation() {
+        public StrategyDateOperation() {
             this.operationMap.put(Boolean.FALSE, new PeriodSingleDateOperation());
             this.operationMap.put(Boolean.TRUE, new PeriodWithRangeOperation());
         }

@@ -32,16 +32,16 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.client.puregwt.action.event;
+package org.geosdi.geoplatform.gui.client.puregwt.period.event;
 
 import com.google.gwt.event.shared.GwtEvent;
-import org.geosdi.geoplatform.gui.client.puregwt.action.GPActionHandler;
+import org.geosdi.geoplatform.gui.client.puregwt.period.GPPeriodHandler;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class GPPeriodWithSingleDateEvent extends GwtEvent<GPActionHandler> {
+public class GPPeriodWithSingleDateEvent extends GwtEvent<GPPeriodHandler> {
 
     private final int index;
 
@@ -50,12 +50,12 @@ public class GPPeriodWithSingleDateEvent extends GwtEvent<GPActionHandler> {
     }
 
     @Override
-    public Type<GPActionHandler> getAssociatedType() {
-        return GPActionHandler.TYPE;
+    public Type<GPPeriodHandler> getAssociatedType() {
+        return GPPeriodHandler.TYPE;
     }
 
     @Override
-    protected void dispatch(GPActionHandler handler) {
+    protected void dispatch(GPPeriodHandler handler) {
         handler.periodWithSingleDate(this.index);
     }
 }

@@ -2,9 +2,10 @@ package org.geosdi.geoplatform.gui.client.widget.multifield;
 
 import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.Validator;
-import com.google.gwt.core.client.GWT;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleMessages;
+import org.geosdi.geoplatform.gui.client.puregwt.period.event.GPRefreshDateToEvent;
+import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;
 
 import java.util.Date;
 
@@ -18,6 +19,17 @@ public class EndDateMultifield extends TimePeriodDateMultifield {
         super();
     }
 
+    /**
+     *
+     */
+    @Override
+    protected void refreshDate() {
+        WidgetPropertiesHandlerManager.fireEvent(new GPRefreshDateToEvent(this.getDate()));
+    }
+
+    /**
+     * @return {@link Validator}
+     */
     @Override
     protected Validator addValidator() {
         return new Validator() {
@@ -28,33 +40,51 @@ public class EndDateMultifield extends TimePeriodDateMultifield {
         };
     }
 
-
+    /**
+     * @return {@link String}
+     */
     @Override
     protected String dateTooltip() {
         return LayerModuleConstants.INSTANCE.LayerTimeFilterWidget_endDateTooltipText();
     }
 
+    /**
+     * @return {@link String}
+     */
     @Override
     protected String hourTooltip() {
         return LayerModuleConstants.INSTANCE.LayerTimeFilterWidget_endHourTooltipText();
     }
 
+    /**
+     * @return {@link String}
+     */
     @Override
     protected String minuteTooltip() {
         return LayerModuleConstants.INSTANCE.LayerTimeFilterWidget_endMinuteTooltipText();
     }
 
+    /**
+     * @return {@link String}
+     */
     @Override
     protected String fieldLabel() {
         return LayerModuleConstants.INSTANCE.LayerTimeFilterWidget_multidatesToText();
     }
 
+    /**
+     * @param dateFrom
+     * @param dateTo
+     */
     @Override
     public void bindDate(Date dateFrom, Date dateTo) {
         super.bindDate(dateFrom, dateTo);
         this.limitDate = dateTo;
     }
 
+    /**
+     * @param dateWithZeroTime
+     */
     protected void afterDateSelected(Date dateWithZeroTime) {
         if (date.getTime() == dateWithZeroTime.getTime()) {
             this.hourField.setMaxValue(this.limitDate.getHours());
@@ -70,6 +100,10 @@ public class EndDateMultifield extends TimePeriodDateMultifield {
         }
     }
 
+    /**
+     * @param dateWithZeroTime
+     * @param time
+     */
     protected void afterHourSelected(Date dateWithZeroTime, Date time) {
         if (date.getTime() == dateWithZeroTime.getTime() && limitDate.getHours() == time.getHours()) {
             this.minuteField.setMaxValue(this.limitDate.getMinutes());
@@ -81,6 +115,9 @@ public class EndDateMultifield extends TimePeriodDateMultifield {
 
     }
 
+    /**
+     *
+     */
     @Override
     protected void setMaxMinValue() {
         this.hourField.setMinValue(0);

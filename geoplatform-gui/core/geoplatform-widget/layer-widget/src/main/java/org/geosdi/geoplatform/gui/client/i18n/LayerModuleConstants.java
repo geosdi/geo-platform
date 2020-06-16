@@ -247,6 +247,9 @@ public interface LayerModuleConstants extends Constants {
     @DefaultStringValue("Enable to date")
     String LayerTimeFilterWidget_enableToDate();
 
+    @DefaultStringValue("Show all")
+    String LayerTimeFilterWidget_showAllTimeLayers();
+
     /**
      * start StylesLayerTabItem
      */

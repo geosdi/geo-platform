@@ -1,6 +1,5 @@
 package org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.view;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.shared.DateTimeFormat;
 import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
@@ -43,7 +42,6 @@ public class PeriodViewStrategy extends IStrategyView.AbstractPanelStrategy {
                 dateTo = this.parseDateFormat.parse(values[1]);
             }
             this.valuesMap.put(TypeValueEnum.DATE_FROM, this.parseDateFormat.parse(values[0]));
-            GWT.log(""+this.valuesMap);
             this.valuesMap.put(TypeValueEnum.DATE_TO, dateTo);
             this.valuesMap.put(TypeValueEnum.PERIOD, values[2]);
         }

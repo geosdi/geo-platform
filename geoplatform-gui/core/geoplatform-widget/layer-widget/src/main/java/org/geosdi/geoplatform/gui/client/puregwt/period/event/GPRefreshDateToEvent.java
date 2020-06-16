@@ -32,10 +32,10 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.client.puregwt.action.event;
+package org.geosdi.geoplatform.gui.client.puregwt.period.event;
 
 import com.google.gwt.event.shared.GwtEvent;
-import org.geosdi.geoplatform.gui.client.puregwt.action.GPActionHandler;
+import org.geosdi.geoplatform.gui.client.puregwt.period.GPPeriodHandler;
 
 import java.util.Date;
 
@@ -43,23 +43,21 @@ import java.util.Date;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class GPPeriodNoDateEvent extends GwtEvent<GPActionHandler> {
+public class GPRefreshDateToEvent extends GwtEvent<GPPeriodHandler> {
 
-    private final Date date1;
-    private final Date date2;
+    private final Date date;
 
-    public GPPeriodNoDateEvent(Date date1, Date date2) {
-        this.date1 = date1;
-        this.date2 = date2;
+    public GPRefreshDateToEvent(Date date) {
+        this.date = date;
     }
 
     @Override
-    public Type<GPActionHandler> getAssociatedType() {
-        return GPActionHandler.TYPE;
+    public Type<GPPeriodHandler> getAssociatedType() {
+        return GPPeriodHandler.TYPE;
     }
 
     @Override
-    protected void dispatch(GPActionHandler handler) {
-        handler.noDate(this.date1, this.date2);
+    protected void dispatch(GPPeriodHandler handler) {
+        handler.refreshDateTo(this.date);
     }
 }

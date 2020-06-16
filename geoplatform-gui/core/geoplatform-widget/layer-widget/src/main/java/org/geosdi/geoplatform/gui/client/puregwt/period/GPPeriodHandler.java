@@ -32,7 +32,7 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.client.puregwt.action;
+package org.geosdi.geoplatform.gui.client.puregwt.period;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
@@ -44,9 +44,9 @@ import java.util.List;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface GPActionHandler extends EventHandler {
+public interface GPPeriodHandler extends EventHandler {
 
-    Type<GPActionHandler> TYPE = new Type<GPActionHandler>();
+    Type<GPPeriodHandler> TYPE = new Type<GPPeriodHandler>();
 
     /**
      * @param partialStore
@@ -63,4 +63,14 @@ public interface GPActionHandler extends EventHandler {
      * @param index
      */
     void periodWithSingleDate(int index);
+
+    /**
+     * @param from
+     */
+    void refreshDateFrom(Date from);
+
+    /**
+     * @param from
+     */
+    void refreshDateTo(Date from);
 }

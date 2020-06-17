@@ -1,9 +1,12 @@
 package org.geosdi.geoplatform.gui.client.widget.time.panel.mediator;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.geosdi.geoplatform.gui.client.widget.time.panel.mediator.colleague.IParseColleague;
 
 import javax.inject.Singleton;
+import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -48,6 +51,17 @@ public interface IParseMediator {
      */
     void reset();
 
+    /**
+     * @param dateOperation
+     */
+    void addOperator(IDateOperation dateOperation);
+
+    /**
+     * @param date1
+     * @return {@link Date}
+     */
+    Date getNextDate(Date date1);
+
     @Singleton
     class ParseMediator implements IParseMediator {
 
@@ -56,6 +70,7 @@ public interface IParseMediator {
         private String periodValue;
         private String parsedPeriod = "";
         private boolean initTime;
+        private List<IDateOperation> operationList = Lists.newArrayList();
 
         /**
          * @return {@link Boolean}
@@ -64,6 +79,9 @@ public interface IParseMediator {
             return initTime;
         }
 
+        /**
+         * @param colleague
+         */
         @Override
         public void registerColleague(IParseColleague colleague) {
             if (!this.colleagueMap.containsKey(colleague.getKey())) {
@@ -71,6 +89,10 @@ public interface IParseMediator {
             }
         }
 
+        /**
+         * @param s
+         * @return
+         */
         public Long calculatePeriod(String s) {
             this.periodValue = s.replace("P", "");
             Long period = 0l;
@@ -115,8 +137,27 @@ public interface IParseMediator {
             this.initTime = false;
             this.periodValue = null;
             this.parsedPeriod = "";
+            this.operationList.clear();
         }
 
+        /**
+         * @param dateOperation
+         */
+        public void addOperator(IDateOperation dateOperation) {
+            this.operationList.add(dateOperation);
+        }
+
+        /**
+         * @param date1
+         * @return {@link Date}
+         */
+        public Date getNextDate(Date date1) {
+            Date tmp = null;
+            for (IDateOperation operation : this.operationList) {
+                tmp = operation.addDate(date1);
+            }
+            return tmp;
+        }
 
     }
 

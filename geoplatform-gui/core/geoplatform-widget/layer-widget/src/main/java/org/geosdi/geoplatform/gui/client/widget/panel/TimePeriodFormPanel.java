@@ -251,10 +251,19 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
             Date dateTo = (Date) this.iStrategyView.getExtentValues().get(DATE_TO);
             Date dateFrom = (Date) this.iStrategyView.getExtentValues().get(DATE_FROM);
             Date d = new Date(dateFrom.getTime());
+            this.store.add(d);
+            while (d.getTime() >= dateFrom.getTime() && d.getTime() <= dateTo.getTime()) {
+                Date tmp = this.parseMediator.getNextDate(d);
+                this.store.add(tmp);
+                d = tmp;
+            }
+/*            Date dateTo = (Date) this.iStrategyView.getExtentValues().get(DATE_TO);
+            Date dateFrom = (Date) this.iStrategyView.getExtentValues().get(DATE_FROM);
+            Date d = new Date(dateFrom.getTime());
             while (d.getTime() >= dateFrom.getTime() && d.getTime() <= dateTo.getTime()) {
                 this.store.add(d);
                 d = new Date(d.getTime() + this.period);
-            }
+            }*/
         }
         this.iStrategyDateOperation.getStrategy(this.endDateCheckBox.getValue()).getApplyOperation(this.store, this.startDateMultifield.getDate(),
                 this.endDateMultifield.getDate());
@@ -365,6 +374,7 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
                     super.setValue(value);
                     currentValue = value;
                     super.setMessage("" + fmt.format(partialStore.get(currentValue)));
+                    labelCurrenteTime.setValue(fmt.format(partialStore.get(currentValue)));
                     saveLayer(sdf.format(partialStore.get(currentValue), TimeZone.createTimeZone(0)).concat(".000Z"));
                     enableOnPlaying();
                 }

@@ -64,6 +64,7 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
         GPLayerHandler {
 
     private final static TimeFilterLayerMapEvent TIME_FILTER_LAYER_MAP_EVENT = new TimeFilterLayerMapEvent();
+    private final static String DATE_SEPARATOR = " / ";
     private final LayoutContainer periodSliderContainer;
     private final StartDateMultifield startDateMultifield;
     private final EndDateMultifield endDateMultifield;
@@ -125,7 +126,7 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
     public void bindTreeModel(GPTreePanel gpTreePanel) {
         this.treePanel = gpTreePanel;
         Map<TypeValueEnum, Object> m = this.iStrategyView.getExtentValues();
-        this.labelRange.setValue(fmt.format((Date) m.get(DATE_FROM)).concat(" / ")
+        this.labelRange.setValue(fmt.format((Date) m.get(DATE_FROM)).concat(DATE_SEPARATOR)
                 .concat(fmt.format((Date) m.get(DATE_TO))));
         this.endDateMultifield.bindDate((Date) m.get(DATE_FROM), (Date) m.get(DATE_TO));
         this.startDateMultifield.bindDate((Date) m.get(DATE_FROM), (Date) m.get(DATE_TO));
@@ -179,9 +180,9 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
      */
     @Override
     public void refreshDateFrom(Date from) {
-        String[] dates = this.showAllCheckBox.getBoxLabel().split("/");
-        String s = fmt.format(from).concat("/").concat(dates.length == 2 ? this.showAllCheckBox.getBoxLabel()
-                .substring(this.showAllCheckBox.getBoxLabel().indexOf("/") + 1) : "");
+        String[] dates = this.showAllCheckBox.getBoxLabel().split(DATE_SEPARATOR);
+        String s = fmt.format(from).concat(DATE_SEPARATOR).concat(dates.length == 2 ? this.showAllCheckBox.getBoxLabel()
+                .substring(this.showAllCheckBox.getBoxLabel().indexOf(DATE_SEPARATOR) + 3) : "");
         this.showAllCheckBox.setBoxLabel(s);
     }
 
@@ -190,8 +191,8 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
      */
     @Override
     public void refreshDateTo(Date to) {
-        this.showAllCheckBox.setBoxLabel(this.showAllCheckBox.getBoxLabel().substring(0, this.showAllCheckBox.getBoxLabel().indexOf("/") + 1)
-                .concat(fmt.format(to)));
+        this.showAllCheckBox.setBoxLabel(this.showAllCheckBox.getBoxLabel().substring(0, this.showAllCheckBox.getBoxLabel().indexOf(DATE_SEPARATOR) + 3)
+                .concat(to != null ? fmt.format(to) : ""));
 
     }
 
@@ -289,7 +290,7 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
                 endDateMultifield.setEnabled(endDateCheckBox.getValue());
                 endDateMultifield.reset();
                 endDateMultifield.clearInvalid();
-                refreshDateTo(((Date) iStrategyView.getExtentValues().get(DATE_TO)));
+                refreshDateTo(!endDateCheckBox.getValue() ? ((Date) iStrategyView.getExtentValues().get(DATE_TO)) : null);
             }
         });
 
@@ -556,7 +557,7 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
         this.labelStep.setValue(null);
         this.timerAnimation.setValue(1);
         this.showAllCheckBox.setValue(false);
-        this.showAllCheckBox.setBoxLabel("/");
+        this.showAllCheckBox.setBoxLabel(DATE_SEPARATOR);
     }
 
 

@@ -1,6 +1,7 @@
 package org.geosdi.geoplatform.gui.client.widget.panel;
 
 import com.extjs.gxt.ui.client.event.*;
+import com.extjs.gxt.ui.client.widget.Label;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.Slider;
 import com.extjs.gxt.ui.client.widget.button.Button;
@@ -71,6 +72,7 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
     private final DateTimeFormat sdf = DateTimeFormat.getFormat("yyyy-MM-dd'T'HH:mm:ss");
     protected SpinnerField timerAnimation;
     private DateTimeFormat fmt = DateTimeFormat.getFormat("dd-MM-yyyy, HH:mm:ss");
+    private DateTimeFormat fmt_noseconds = DateTimeFormat.getFormat("dd-MM-yyyy, HH:mm");
     private CheckBox endDateCheckBox;
     private CheckBox showAllCheckBox;
     private Slider periodSlider;
@@ -103,6 +105,7 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
     private IParseMediator.ParseMediator parseMediator;
     private Long period = null;
     private Button apply;
+    private Label labelDates;
 
     @Inject
     public TimePeriodFormPanel(StartDateMultifield theStartDateMultifield, final EndDateMultifield theEndDateMultifield,
@@ -180,10 +183,10 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
      */
     @Override
     public void refreshDateFrom(Date from) {
-        String[] dates = this.showAllCheckBox.getBoxLabel().split(DATE_SEPARATOR);
-        String s = fmt.format(from).concat(DATE_SEPARATOR).concat(dates.length == 2 ? this.showAllCheckBox.getBoxLabel()
-                .substring(this.showAllCheckBox.getBoxLabel().indexOf(DATE_SEPARATOR) + 3) : "");
-        this.showAllCheckBox.setBoxLabel(s);
+        String[] dates = this.labelDates.getHtml().split(DATE_SEPARATOR);
+        String s = fmt_noseconds.format(from).concat(DATE_SEPARATOR).concat(dates.length == 2 ? this.labelDates.getHtml()
+                .substring(this.labelDates.getHtml().indexOf(DATE_SEPARATOR) + 3) : "");
+        this.labelDates.setHtml(s);
     }
 
     /**
@@ -191,8 +194,8 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
      */
     @Override
     public void refreshDateTo(Date to) {
-        this.showAllCheckBox.setBoxLabel(this.showAllCheckBox.getBoxLabel().substring(0, this.showAllCheckBox.getBoxLabel().indexOf(DATE_SEPARATOR) + 3)
-                .concat(to != null ? fmt.format(to) : ""));
+        this.labelDates.setHtml(this.labelDates.getHtml().substring(0, this.labelDates.getHtml().indexOf(DATE_SEPARATOR) + 3)
+                .concat(to != null ? fmt_noseconds.format(to) : ""));
 
     }
 
@@ -251,19 +254,10 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
             Date dateTo = (Date) this.iStrategyView.getExtentValues().get(DATE_TO);
             Date dateFrom = (Date) this.iStrategyView.getExtentValues().get(DATE_FROM);
             Date d = new Date(dateFrom.getTime());
-            this.store.add(d);
-            while (d.getTime() >= dateFrom.getTime() && d.getTime() <= dateTo.getTime()) {
-                Date tmp = this.parseMediator.getNextDate(d);
-                this.store.add(tmp);
-                d = tmp;
-            }
-/*            Date dateTo = (Date) this.iStrategyView.getExtentValues().get(DATE_TO);
-            Date dateFrom = (Date) this.iStrategyView.getExtentValues().get(DATE_FROM);
-            Date d = new Date(dateFrom.getTime());
             while (d.getTime() >= dateFrom.getTime() && d.getTime() <= dateTo.getTime()) {
                 this.store.add(d);
-                d = new Date(d.getTime() + this.period);
-            }*/
+                d = this.parseMediator.getNextDate(d);
+            }
         }
         this.iStrategyDateOperation.getStrategy(this.endDateCheckBox.getValue()).getApplyOperation(this.store, this.startDateMultifield.getDate(),
                 this.endDateMultifield.getDate());
@@ -304,12 +298,16 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
         });
 
         LayoutContainer container = new LayoutContainer();
+
+        container.setLayout(new ColumnLayout());
+
         container.add(this.endDateCheckBox);
         super.add(container, new FlowData(5));
         super.add(this.endDateMultifield, new FlowData(5));
 
         this.showAllCheckBox = new CheckBox();
         this.showAllCheckBox.setValue(false);
+        this.showAllCheckBox.setBoxLabel(LayerModuleConstants.INSTANCE.LayerTimeFilterWidget_showAllTimeLayers());
         this.showAllCheckBox.addListener(Events.Change, new Listener<BaseEvent>() {
             @Override
             public void handleEvent(BaseEvent be) {
@@ -317,8 +315,14 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
                 periodSlider.setEnabled(!showAllCheckBox.getValue());
             }
         });
+
         LayoutContainer containerShow = new LayoutContainer();
-        containerShow.add(this.showAllCheckBox);
+        containerShow.setLayout(new ColumnLayout());
+        containerShow.add(this.showAllCheckBox, new ColumnData(.3));
+        this.labelDates = new Label(DATE_SEPARATOR);
+        this.labelDates.setStyleAttribute("margin-top", "5px");
+
+        containerShow.add(this.labelDates, new ColumnData(.7));
         super.add(containerShow, new FlowData(5));
 
 //        buildDatesAvailables();
@@ -567,7 +571,6 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
         this.labelStep.setValue(null);
         this.timerAnimation.setValue(1);
         this.showAllCheckBox.setValue(false);
-        this.showAllCheckBox.setBoxLabel(DATE_SEPARATOR);
     }
 
 

@@ -103,7 +103,6 @@ public interface IParseMediator {
                 }
                 period += p.execute(this.periodValue);
             }
-
             return period;
         }
 
@@ -152,11 +151,10 @@ public interface IParseMediator {
          * @return {@link Date}
          */
         public Date getNextDate(Date date1) {
-            Date tmp = null;
             for (IDateOperation operation : this.operationList) {
-                tmp = operation.addDate(date1);
+                date1 = operation.addDate(date1);
             }
-            return tmp;
+            return date1;
         }
 
     }

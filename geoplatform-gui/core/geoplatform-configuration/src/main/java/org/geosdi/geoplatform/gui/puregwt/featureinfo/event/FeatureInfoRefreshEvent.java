@@ -5,7 +5,7 @@
  *    http://geo-platform.org
  *   ====================================================================
  *
- *   Copyright (C) 2008-2020 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ *   Copyright (C) 2008-2019 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  *   This program is free software: you can redistribute it and/or modify it
  *   under the terms of the GNU General Public License as published by
@@ -33,22 +33,27 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.featureinfo.cache;
+package org.geosdi.geoplatform.gui.puregwt.featureinfo.event;
 
-import com.extjs.gxt.ui.client.widget.ContentPanel;
-import org.gwtopenmaps.openlayers.client.control.WMSGetFeatureInfo;
+import org.geosdi.geoplatform.gui.puregwt.featureinfo.GPFeatureInfoHandler;
+import org.gwtopenmaps.openlayers.client.layer.Layer;
 
 /**
  *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
  */
-public interface IGPFeatureInfoElement {
-    
-     WMSGetFeatureInfo getElementControl();
-    
-     ContentPanel getElementPanel();
-    
-     boolean isActive();
+public class FeatureInfoRefreshEvent extends GPFeatureInfoEvent {
+
+    private final Layer layer;
+
+    public FeatureInfoRefreshEvent(Layer layer) {
+        this.layer = layer;
+    }
+
+    @Override
+    protected void dispatch(GPFeatureInfoHandler handler) {
+            handler.refreshFeatures(this.layer);
+    }
 
 }

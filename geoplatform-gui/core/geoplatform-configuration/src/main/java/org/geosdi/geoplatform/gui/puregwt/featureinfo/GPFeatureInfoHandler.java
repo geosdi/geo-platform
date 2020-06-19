@@ -57,4 +57,6 @@ public interface GPFeatureInfoHandler extends EventHandler {
     void addLayer(Layer layer);
 
     void removeLayer(Layer layer);
+
+    void refreshFeatures(Layer layer);
 }

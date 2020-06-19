@@ -77,7 +77,8 @@ public class GPFeatureInfoWidget extends GeoPlatformWindow implements
 
     @Override
     public void initSize() {
-        super.setHeight(600);
+        super.setMinHeight(200);
+        super.setAutoHeight(Boolean.TRUE);
         super.setWidth(400);
     }
 
@@ -100,6 +101,17 @@ public class GPFeatureInfoWidget extends GeoPlatformWindow implements
             featureInfoElement.getElementControl().deactivate();
             map.removeControl(featureInfoElement.getElementControl());
             FeatureInfoFlyWeight.getInstance().remove(layer);
+        }
+    }
+
+    @Override
+    public void refreshFeatures(Layer layer) {
+        FeatureInfoFlyWeight.getInstance().refreshFeatures(layer);
+        IGPFeatureInfoElement element = FeatureInfoFlyWeight.getInstance().get(layer);
+        Map map = this.mapWidget.getMap();
+        map.addControl(element.getElementControl());
+        if (this.featureCaller.isActivated()) {
+            element.getElementControl().activate();
         }
     }
 

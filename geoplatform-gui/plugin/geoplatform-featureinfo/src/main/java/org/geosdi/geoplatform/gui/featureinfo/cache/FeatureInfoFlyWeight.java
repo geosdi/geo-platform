@@ -113,6 +113,21 @@ public class FeatureInfoFlyWeight implements GPFeatureInfoFlyWeight {
         return this.cache.containsKey(layer.getId());
     }
 
+    /**
+     *
+     * @param layer
+     */
+    public void refreshFeatures(Layer layer){
+        IGPFeatureInfoElement oldElement = this.cache.get(layer.getId());
+        oldElement.getElementControl().deactivate();
+        this.cache.remove(layer.getId());
+        IGPFeatureInfoElement element = new GPFeatureInfoElement(layer);
+/*        if(oldElement.isActive()){
+            element.getElementControl().activate();
+        }*/
+        this.cache.put(layer.getId(), element);
+    }
+
     private class GPFeatureInfoElement implements IGPFeatureInfoElement {
 
         private final Layer layer;

@@ -49,6 +49,7 @@ import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.GPVectorBean;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.featureinfo.event.FeatureInfoAddLayer;
+import org.geosdi.geoplatform.gui.puregwt.featureinfo.event.FeatureInfoRefreshEvent;
 import org.geosdi.geoplatform.gui.puregwt.featureinfo.event.FeatureInfoRemoveLayer;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.layers.event.CleanLegendEvent;
@@ -310,6 +311,7 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
                 }
             }
             layer.mergeNewParams(params);
+            MapHandlerManager.fireEvent(new FeatureInfoRefreshEvent(layer));
         }
     }
 

@@ -78,6 +78,7 @@ public class GPFeatureInfoWidget extends GeoPlatformWindow implements
     @Override
     public void initSize() {
         super.setMinHeight(200);
+        super.setHeight(600);
         super.setAutoHeight(Boolean.TRUE);
         super.setWidth(400);
     }

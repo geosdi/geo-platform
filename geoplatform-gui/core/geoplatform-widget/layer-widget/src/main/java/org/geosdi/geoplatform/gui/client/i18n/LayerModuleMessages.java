@@ -83,4 +83,6 @@ public interface LayerModuleMessages extends Messages {
     String LayerTimeFilterWidget_lowerLimitDate(String timeFilter);
 
     String LayerTimeFilterWidget_noDateFound(String date1, String date2);
+
+    String LayerTimeFilterWidget_dateInFuture();
 }

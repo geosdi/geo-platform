@@ -156,4 +156,10 @@ public class EndDateMultifield extends TimePeriodDateMultifield {
         this.minuteField.setMinValue(0);
     }
 
+    @Override
+    protected void onDetach() {
+        super.onDetach();
+        this.enableFutureDateCheckBox.setValue(Boolean.FALSE);
+    }
+
 }

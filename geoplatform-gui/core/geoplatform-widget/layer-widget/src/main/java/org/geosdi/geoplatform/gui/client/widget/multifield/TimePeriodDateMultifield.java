@@ -37,13 +37,13 @@ public abstract class TimePeriodDateMultifield extends MultiField implements GPR
         WidgetPropertiesHandlerManager.addHandler(GPResetComponentHandler.TYPE, this);
     }
 
-    private void addComponents() {
+    protected void addComponents() {
         super.setSpacing(20);
         this.dtFormat = DateTimeFormat.getFormat("dd-MM-yyyy");
         this.dateField = new DateField();
         this.dateField.setToolTip(dateTooltip());
         this.dateField.getPropertyEditor().setFormat(dtFormat);
-        this.dateField.setWidth(100);
+        this.dateField.setWidth(90);
         this.dateField.setEditable(false);
         this.dateField.setAllowBlank(Boolean.FALSE);
         DatePicker datePicker = this.dateField.getDatePicker();
@@ -74,14 +74,14 @@ public abstract class TimePeriodDateMultifield extends MultiField implements GPR
         });
 
         this.hourField.setToolTip(hourTooltip());
-        this.hourField.setWidth(50);
+        this.hourField.setWidth(40);
         this.hourField.disable();
         this.hourField.setAllowBlank(Boolean.FALSE);
 
         this.minuteField = new SpinnerField();
         this.minuteField.setToolTip(minuteTooltip());
         this.minuteField.disable();
-        this.minuteField.setWidth(50);
+        this.minuteField.setWidth(40);
         this.minuteField.setAllowBlank(Boolean.FALSE);
 
         this.minuteField.addListener(Events.Change, new Listener<BaseEvent>() {

@@ -1,10 +1,15 @@
 package org.geosdi.geoplatform.gui.client.widget.multifield;
 
+import com.extjs.gxt.ui.client.event.BaseEvent;
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.widget.form.CheckBox;
 import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.Validator;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleMessages;
 import org.geosdi.geoplatform.gui.client.puregwt.period.event.GPRefreshDateToEvent;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;
 
 import java.util.Date;
@@ -14,6 +19,8 @@ import java.util.Date;
  * @email vito.salvia@gmail.com
  */
 public class EndDateMultifield extends TimePeriodDateMultifield {
+
+    private CheckBox enableFutureDateCheckBox;
 
     public EndDateMultifield() {
         super();
@@ -46,6 +53,30 @@ public class EndDateMultifield extends TimePeriodDateMultifield {
     @Override
     protected String dateTooltip() {
         return LayerModuleConstants.INSTANCE.LayerTimeFilterWidget_endDateTooltipText();
+    }
+
+    @Override
+    protected void addComponents() {
+        super.addComponents();
+        this.enableFutureDateCheckBox = new CheckBox();
+        this.enableFutureDateCheckBox.setBoxLabel(LayerModuleConstants.INSTANCE.LayerTimeFilterWidget_timeNoLimitsTitleText());
+        this.enableFutureDateCheckBox.addStyleName("future-date-ck");
+        this.enableFutureDateCheckBox.addListener(Events.Change, new Listener<BaseEvent>() {
+            @Override
+            public void handleEvent(BaseEvent be) {
+                if (enableFutureDateCheckBox.getValue()) {
+                    GeoPlatformMessage.alertMessage(
+                            LayerModuleConstants.INSTANCE.
+                                    LayerTimeFilterWidget_timeFilterWarningTitleText(),
+                            LayerModuleMessages.INSTANCE.
+                                    LayerTimeFilterWidget_dateInFuture());
+                    dateField.setMaxValue(null);
+                } else {
+                    dateField.setMaxValue(limitDate);
+                }
+            }
+        });
+        super.add(this.enableFutureDateCheckBox);
     }
 
     /**
@@ -99,6 +130,7 @@ public class EndDateMultifield extends TimePeriodDateMultifield {
             this.hourField.setValue(0);
         }
     }
+
 
     /**
      * @param dateWithZeroTime

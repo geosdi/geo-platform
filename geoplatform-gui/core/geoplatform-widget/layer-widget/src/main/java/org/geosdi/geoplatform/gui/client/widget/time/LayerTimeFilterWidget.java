@@ -56,7 +56,7 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow implements IGPFilte
 
     public final static String LAYER_TIME_DELIMITER = " - [";
     public final static short WIDGET_HEIGHT = 350;
-    public final static short WIDGET_WIDTH = 400;
+    public final static short WIDGET_WIDTH = 430;
     //
     private GPTreePanel<GPBeanTreeModel> treePanel;
     private GeoPlatformContentPanel currentPanel;

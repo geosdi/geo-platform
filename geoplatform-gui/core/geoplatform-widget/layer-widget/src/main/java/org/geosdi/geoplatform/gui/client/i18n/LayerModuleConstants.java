@@ -151,6 +151,9 @@ public interface LayerModuleConstants extends Constants {
     @DefaultStringValue("Dimension Warning")
     String LayerTimeFilterWidget_dimensionWarningTitleText();
 
+    @DefaultStringValue("No Limits")
+    String LayerTimeFilterWidget_timeNoLimitsTitleText();
+
     @DefaultStringValue("T1")
     String LayerTimeFilterWidget_startFieldLabelText();
 

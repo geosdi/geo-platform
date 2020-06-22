@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.featureinfo.widget;
 
 import com.extjs.gxt.ui.client.Style.Scroll;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
+import com.google.gwt.core.client.GWT;
 import org.geosdi.geoplatform.gui.client.i18n.FeatureInfoModuleConstants;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
@@ -77,9 +78,7 @@ public class GPFeatureInfoWidget extends GeoPlatformWindow implements
 
     @Override
     public void initSize() {
-        super.setMinHeight(200);
-        super.setHeight(600);
-        super.setAutoHeight(Boolean.TRUE);
+        super.setMinHeight(400);
         super.setWidth(400);
     }
 
@@ -87,7 +86,7 @@ public class GPFeatureInfoWidget extends GeoPlatformWindow implements
     public void setWindowProperties() {
         super.setClosable(true);
         super.setScrollMode(Scroll.AUTO);
-        super.setResizable(true);
+        super.setResizable(Boolean.TRUE);
         super.setPlain(true);
         super.setModal(true);
         super.setPosition(240,60);
@@ -165,6 +164,7 @@ public class GPFeatureInfoWidget extends GeoPlatformWindow implements
         }
         if (this.mainPanel.getItemCount() > 0) {
             super.show();
+            super.setHeight(this.mainPanel.getHeight() < 600 ? this.mainPanel.getHeight() +50 : 600);
         } else {
             GeoPlatformMessage.alertMessage(FeatureInfoModuleConstants.INSTANCE.
                     GPFeatureInfoWidget_alertNoLayerTitleText(),

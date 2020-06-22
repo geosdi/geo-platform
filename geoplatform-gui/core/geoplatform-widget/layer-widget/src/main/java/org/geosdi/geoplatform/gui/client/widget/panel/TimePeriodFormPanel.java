@@ -128,11 +128,6 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
     @Override
     public void bindTreeModel(GPTreePanel gpTreePanel) {
         this.treePanel = gpTreePanel;
-        Map<TypeValueEnum, Object> m = this.iStrategyView.getExtentValues();
-        this.labelRange.setValue(fmt.format((Date) m.get(DATE_FROM)).concat(DATE_SEPARATOR)
-                .concat(fmt.format((Date) m.get(DATE_TO))));
-        this.endDateMultifield.bindDate((Date) m.get(DATE_FROM), (Date) m.get(DATE_TO));
-        this.startDateMultifield.bindDate((Date) m.get(DATE_FROM), (Date) m.get(DATE_TO));
     }
 
 
@@ -361,7 +356,6 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
                     }
                 });
         this.addButton(close);
-        initComponents();
     }
 
     /**
@@ -566,7 +560,7 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
         this.endDateMultifield.setVisible(Boolean.TRUE);
         this.store.clear();
         this.partialStore.clear();
-        this.periodSlider.setValue(0);
+        this.periodSlider.setValue(0, Boolean.TRUE);
         this.labelCurrenteTime.setValue(null);
         this.labelStep.setValue(null);
         this.timerAnimation.setValue(1);
@@ -579,6 +573,11 @@ public class TimePeriodFormPanel extends FormPanel implements GPDateBindingHandl
         super.onAttach();
         this.period = this.parseMediator.calculatePeriod(this.iStrategyView.getExtentValues().get(PERIOD).toString());
         this.labelPeriod.setValue(this.parseMediator.getParsedPeriod());
+        Map<TypeValueEnum, Object> m = this.iStrategyView.getExtentValues();
+        this.labelRange.setValue(fmt.format((Date) m.get(DATE_FROM)).concat(DATE_SEPARATOR)
+                .concat(fmt.format((Date) m.get(DATE_TO))));
+        this.endDateMultifield.bindDate((Date) m.get(DATE_FROM), this.parseMediator.getNextDate((Date) m.get(DATE_TO)));
+        this.startDateMultifield.bindDate((Date) m.get(DATE_FROM), this.parseMediator.getNextDate((Date) m.get(DATE_TO)));
     }
 
     @Override

@@ -21,9 +21,12 @@ public class PeriodWithRangeOperation implements IStrategyDateOperation.ITypeOpe
     @Override
     public void getApplyOperation(List<Date> store, Date from, Date to) {
         List<Date> partialStore = Lists.newArrayList();
-        for (Date d : store) {
-            if (d.getTime() >= from.getTime()
+        for (int i = 0; i < store.size(); i++) {
+            Date d = store.get(i);
+            if (d.getTime() > from.getTime()
                     && (d.getTime() <= to.getTime())) {
+                if (partialStore.isEmpty())
+                    partialStore.add(store.get(i - 1));
                 partialStore.add(d);
             }
         }

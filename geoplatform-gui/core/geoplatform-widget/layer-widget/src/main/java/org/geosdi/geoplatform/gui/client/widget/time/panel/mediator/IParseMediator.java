@@ -94,6 +94,8 @@ public interface IParseMediator {
          * @return
          */
         public Long calculatePeriod(String s) {
+            //s = "P3Y1M1W1DT1H1M1S";
+            //s = "P1Y1M1W1DT1H30M1S";
             this.periodValue = s.replace("P", "");
             Long period = 0l;
             for (IParseColleague p : this.colleagueMap.values()) {
@@ -147,14 +149,14 @@ public interface IParseMediator {
         }
 
         /**
-         * @param date1
+         * @param date
          * @return {@link Date}
          */
-        public Date getNextDate(Date date1) {
+        public Date getNextDate(Date date) {
             for (IDateOperation operation : this.operationList) {
-                date1 = operation.addDate(date1);
+                date = operation.changeDate(date);
             }
-            return date1;
+            return date;
         }
 
     }

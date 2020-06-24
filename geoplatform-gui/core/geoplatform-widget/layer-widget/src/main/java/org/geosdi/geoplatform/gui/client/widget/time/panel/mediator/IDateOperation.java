@@ -12,6 +12,6 @@ public interface IDateOperation {
      * @param data
      * @return
      */
-    Date addDate(Date data);
+    Date changeDate(Date data);
 
 }

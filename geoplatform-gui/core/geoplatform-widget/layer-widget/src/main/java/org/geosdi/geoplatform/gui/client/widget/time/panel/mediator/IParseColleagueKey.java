@@ -1,10 +1,8 @@
 package org.geosdi.geoplatform.gui.client.widget.time.panel.mediator;
 
-import com.google.gwt.i18n.shared.DateTimeFormat;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
+import org.gwttime.time.LocalDateTime;
 
-import java.time.LocalDateTime;
-import java.time.MonthDay;
 import java.util.Date;
 
 /**
@@ -19,12 +17,11 @@ public enum IParseColleagueKey {
         public IDateOperation getOperatorInstance(final int value) {
             return new IDateOperation() {
                 @Override
-                public Date addDate(Date data) {
-                    DateTimeFormat fmt = DateTimeFormat.getFormat("--MM-dd");
-                    MonthDay monthDay = MonthDay.parse(fmt.format(data));
-                    LocalDateTime l = (LocalDateTime.of(data.getYear(), data.getMonth() + 1, monthDay.getDayOfMonth(), data.getHours(), data.getMinutes())
+                public Date changeDate(Date data) {
+                    LocalDateTime l = (LocalDateTime.fromDateFields(data)
                             .plusYears(value));
-                    return new Date(l.getYear(), l.getMonthValue() - 1, l.getDayOfMonth(), l.getHour(), l.getMinute());
+
+                    return new Date(l.getYear() - 1900, l.getMonthOfYear() - 1, l.getDayOfMonth(), l.getHourOfDay(), l.getMinuteOfHour(), l.getSecondOfMinute());
                 }
             };
         }
@@ -34,12 +31,10 @@ public enum IParseColleagueKey {
         public IDateOperation getOperatorInstance(final int value) {
             return new IDateOperation() {
                 @Override
-                public Date addDate(Date data) {
-                    DateTimeFormat fmt = DateTimeFormat.getFormat("--MM-dd");
-                    MonthDay monthDay = MonthDay.parse(fmt.format(data));
-                    LocalDateTime l = (LocalDateTime.of(data.getYear(), data.getMonth() + 1, monthDay.getDayOfMonth(), data.getHours(), data.getMinutes())
+                public Date changeDate(Date data) {
+                    LocalDateTime l = (LocalDateTime.fromDateFields(data)
                             .plusMonths(value));
-                    return new Date(l.getYear(), l.getMonthValue() - 1, l.getDayOfMonth(), l.getHour(), l.getMinute());
+                    return new Date(l.getYear() - 1900, l.getMonthOfYear() - 1, l.getDayOfMonth(), l.getHourOfDay(), l.getMinuteOfHour(), l.getSecondOfMinute());
                 }
             };
         }
@@ -49,12 +44,10 @@ public enum IParseColleagueKey {
         public IDateOperation getOperatorInstance(final int value) {
             return new IDateOperation() {
                 @Override
-                public Date addDate(Date data) {
-                    DateTimeFormat fmt = DateTimeFormat.getFormat("--MM-dd");
-                    MonthDay monthDay = MonthDay.parse(fmt.format(data));
-                    LocalDateTime l = (LocalDateTime.of(data.getYear(), data.getMonth() + 1, monthDay.getDayOfMonth(), data.getHours(), data.getMinutes())
+                public Date changeDate(Date data) {
+                    LocalDateTime l = (LocalDateTime.fromDateFields(data)
                             .plusWeeks(value));
-                    return new Date(l.getYear(), l.getMonthValue() - 1, l.getDayOfMonth(), l.getHour(), l.getMinute());
+                    return new Date(l.getYear() - 1900, l.getMonthOfYear() - 1, l.getDayOfMonth(), l.getHourOfDay(), l.getMinuteOfHour(), l.getSecondOfMinute());
                 }
             };
         }
@@ -64,12 +57,11 @@ public enum IParseColleagueKey {
         public IDateOperation getOperatorInstance(final int value) {
             return new IDateOperation() {
                 @Override
-                public Date addDate(Date data) {
-                    DateTimeFormat fmt = DateTimeFormat.getFormat("--MM-dd");
-                    MonthDay monthDay = MonthDay.parse(fmt.format(data));
-                    LocalDateTime l = (LocalDateTime.of(data.getYear(), data.getMonth() + 1, monthDay.getDayOfMonth(), data.getHours(), data.getMinutes())
+                public Date changeDate(Date data) {
+                    LocalDateTime l = (LocalDateTime.fromDateFields(data)
                             .plusDays(value));
-                    return new Date(l.getYear(), l.getMonthValue() - 1, l.getDayOfMonth(), l.getHour(), l.getMinute());
+                    return new Date(l.getYear() - 1900, l.getMonthOfYear() - 1, l.getDayOfMonth(), l.getHourOfDay(), l.getMinuteOfHour(), l.getSecondOfMinute());
+
                 }
             };
         }
@@ -79,12 +71,10 @@ public enum IParseColleagueKey {
         public IDateOperation getOperatorInstance(final int value) {
             return new IDateOperation() {
                 @Override
-                public Date addDate(Date data) {
-                    DateTimeFormat fmt = DateTimeFormat.getFormat("--MM-dd");
-                    MonthDay monthDay = MonthDay.parse(fmt.format(data));
-                    LocalDateTime l = (LocalDateTime.of(data.getYear(), data.getMonth() + 1, monthDay.getDayOfMonth(), data.getHours(), data.getMinutes())
+                public Date changeDate(Date data) {
+                    LocalDateTime l = (LocalDateTime.fromDateFields(data)
                             .plusHours(value));
-                    return new Date(l.getYear(), l.getMonthValue() - 1, l.getDayOfMonth(), l.getHour(), l.getMinute());
+                    return new Date(l.getYear() - 1900, l.getMonthOfYear() - 1, l.getDayOfMonth(), l.getHourOfDay(), l.getMinuteOfHour(), l.getSecondOfMinute());
                 }
             };
         }
@@ -94,12 +84,11 @@ public enum IParseColleagueKey {
         public IDateOperation getOperatorInstance(final int value) {
             return new IDateOperation() {
                 @Override
-                public Date addDate(Date data) {
-                    DateTimeFormat fmt = DateTimeFormat.getFormat("--MM-dd");
-                    MonthDay monthDay = MonthDay.parse(fmt.format(data));
-                    LocalDateTime l = (LocalDateTime.of(data.getYear(), data.getMonth() + 1, monthDay.getDayOfMonth(), data.getHours(), data.getMinutes())
+                public Date changeDate(Date data) {
+                    LocalDateTime l = (LocalDateTime.fromDateFields(data)
                             .plusMinutes(value));
-                    return new Date(l.getYear(), l.getMonthValue() - 1, l.getDayOfMonth(), l.getHour(), l.getMinute());
+                    return new Date(l.getYear() - 1900, l.getMonthOfYear() - 1, l.getDayOfMonth(), l.getHourOfDay(), l.getMinuteOfHour(), l.getSecondOfMinute());
+
                 }
             };
         }
@@ -109,12 +98,10 @@ public enum IParseColleagueKey {
         public IDateOperation getOperatorInstance(final int value) {
             return new IDateOperation() {
                 @Override
-                public Date addDate(Date data) {
-                    DateTimeFormat fmt = DateTimeFormat.getFormat("--MM-dd");
-                    MonthDay monthDay = MonthDay.parse(fmt.format(data));
-                    LocalDateTime l = (LocalDateTime.of(data.getYear(), data.getMonth() + 1, monthDay.getDayOfMonth(), data.getHours(), data.getMinutes())
+                public Date changeDate(Date data) {
+                    LocalDateTime l = (LocalDateTime.fromDateFields(data)
                             .plusSeconds(value));
-                    return new Date(l.getYear(), l.getMonthValue() - 1, l.getDayOfMonth(), l.getHour(), l.getMinute());
+                    return new Date(l.getYear() - 1900, l.getMonthOfYear() - 1, l.getDayOfMonth(), l.getHourOfDay(), l.getMinuteOfHour(), l.getSecondOfMinute());
                 }
             };
         }

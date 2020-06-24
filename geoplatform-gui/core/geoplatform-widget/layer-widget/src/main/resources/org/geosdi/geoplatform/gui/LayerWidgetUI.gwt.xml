@@ -3,6 +3,7 @@
 <!-- Inherit the core Web Toolkit stuff. -->
 <module>
     <inherits name="com.google.gwt.inject.Inject"/>
+    <inherits name='org.gwttime.Time'/>
     <inherits name='org.geosdi.geoplatform.gui.MementoEntryPoint' />
     <inherits name="org.geosdi.geoplatform.gui.LayerFiltersWidgetUI" />
     

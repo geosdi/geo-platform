@@ -1,0 +1,746 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfs:FeatureCollection xmlns="http://www.opengis.net/wfs" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:gml="http://www.opengis.net/gml" xmlns:PNSRS="http://servizi.protezionecivile.it/PNSRS/"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xsi:schemaLocation="http://servizi.protezionecivile.it/PNSRS/ https://servizi.protezionecivile.it/geoserver/PNSRS/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=PNSRS%3AABR_2_2_9_valanghe1957_2008 http://www.opengis.net/wfs https://servizi.protezionecivile.it/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd">
+    <gml:boundedBy>
+        <gml:null>unknown</gml:null>
+    </gml:boundedBy>
+    <gml:featureMember>
+        <PNSRS:ABR_2_2_9_valanghe1957_2008 fid="ABR_2_2_9_valanghe1957_2008.2">
+            <PNSRS:geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:4326">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        13.48643978,42.44914766 13.48558688,42.44619163 13.49043276,42.45604442
+                                        13.49636572,42.45560911 13.48558642,42.44419243 13.48294356,42.43681807
+                                        13.48089876,42.43942957 13.48472165,42.45080896 13.48681799,42.45162013
+                                        13.48643978,42.44914766
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </PNSRS:geom>
+            <PNSRS:ordine>35</PNSRS:ordine>
+            <PNSRS:cod_area>066049_1957-58_002</PNSRS:cod_area>
+            <PNSRS:cod_csv>2</PNSRS:cod_csv>
+            <PNSRS:inverno>1957-58</PNSRS:inverno>
+            <PNSRS:comune>L'AQUILA</PNSRS:comune>
+            <PNSRS:localita_>MALECOSTE</PNSRS:localita_>
+            <PNSRS:data_event>14.1.1958</PNSRS:data_event>
+            <PNSRS:f_a_in_att>NC</PNSRS:f_a_in_att>
+            <PNSRS:f_a_temp>NC</PNSRS:f_a_temp>
+            <PNSRS:f_a_prec>NC</PNSRS:f_a_prec>
+            <PNSRS:frequenza>NC</PNSRS:frequenza>
+            <PNSRS:tipo_val>NC</PNSRS:tipo_val>
+            <PNSRS:tipo_neve>NC</PNSRS:tipo_neve>
+            <PNSRS:cause_v_01>NC</PNSRS:cause_v_01>
+            <PNSRS:cause_v_02>NC</PNSRS:cause_v_02>
+            <PNSRS:zd_quota>2100</PNSRS:zd_quota>
+            <PNSRS:zd_esposiz>SUD</PNSRS:zd_esposiz>
+            <PNSRS:zd_pendenz>NC</PNSRS:zd_pendenz>
+            <PNSRS:zd_h_neve>NC</PNSRS:zd_h_neve>
+            <PNSRS:zd_prof_fr>NC</PNSRS:zd_prof_fr>
+            <PNSRS:zd_pendio>NC</PNSRS:zd_pendio>
+            <PNSRS:zd_opere_v>NC</PNSRS:zd_opere_v>
+            <PNSRS:zd_vegetaz>NC</PNSRS:zd_vegetaz>
+            <PNSRS:zp_larghez>NC</PNSRS:zp_larghez>
+            <PNSRS:zp_lunghez>NC</PNSRS:zp_lunghez>
+            <PNSRS:zp_pen_med>NC</PNSRS:zp_pen_med>
+            <PNSRS:zp_tipo_zo>NC</PNSRS:zp_tipo_zo>
+            <PNSRS:zp_tipo_su>NC</PNSRS:zp_tipo_su>
+            <PNSRS:zp_abitazi>0</PNSRS:zp_abitazi>
+            <PNSRS:zp_opere_v>NC</PNSRS:zp_opere_v>
+            <PNSRS:zp_vegetaz>NC</PNSRS:zp_vegetaz>
+            <PNSRS:za_quota>1035</PNSRS:za_quota>
+            <PNSRS:za_lunghez>2400</PNSRS:za_lunghez>
+            <PNSRS:za_h_media>NC</PNSRS:za_h_media>
+            <PNSRS:za_volume>NC</PNSRS:za_volume>
+            <PNSRS:za_pendenz>NC</PNSRS:za_pendenz>
+            <PNSRS:za_opere_v>NC</PNSRS:za_opere_v>
+            <PNSRS:za_vegetaz>NC</PNSRS:za_vegetaz>
+            <PNSRS:travolti>0</PNSRS:travolti>
+            <PNSRS:danni_pers>0</PNSRS:danni_pers>
+            <PNSRS:danni_cose>0</PNSRS:danni_cose>
+            <PNSRS:s_ora_all>0</PNSRS:s_ora_all>
+            <PNSRS:s_iniz_ric>0</PNSRS:s_iniz_ric>
+            <PNSRS:s_fine>0</PNSRS:s_fine>
+            <PNSRS:elicottero>0</PNSRS:elicottero>
+            <PNSRS:codice>9999</PNSRS:codice>
+            <PNSRS:cod_area_1>066049_1957-58_002</PNSRS:cod_area_1>
+            <PNSRS:zd_pendio_>66.0</PNSRS:zd_pendio_>
+            <PNSRS:zd_pendio1>Aree a pascolo naturale e praterie d'alta quota</PNSRS:zd_pendio1>
+            <PNSRS:zd_pendi_1>14.0</PNSRS:zd_pendi_1>
+            <PNSRS:zd_pendi_2>Aree con vegetazione rada</PNSRS:zd_pendi_2>
+            <PNSRS:zd_pendi_3>11.0</PNSRS:zd_pendi_3>
+            <PNSRS:zd_pendi_4>Aree a ricolonizzazione naturale</PNSRS:zd_pendi_4>
+            <PNSRS:anni_1957_>066049_1957-58_002</PNSRS:anni_1957_>
+            <PNSRS:zd_veget_1>94.0</PNSRS:zd_veget_1>
+            <PNSRS:zd_veget_2>Arbusteto a prevalenza di ginepri nella fascia montana e sub</PNSRS:zd_veget_2>
+            <PNSRS:zd_veget_3>6.0</PNSRS:zd_veget_3>
+            <PNSRS:zd_veget_4>Rimboschimento di conifere nella fascia montana</PNSRS:zd_veget_4>
+            <PNSRS:zd_veget_5>0.0</PNSRS:zd_veget_5>
+            <PNSRS:anni_19571>066049_1957-58_002</PNSRS:anni_19571>
+            <PNSRS:da_0pc_a_8>0.0</PNSRS:da_0pc_a_8>
+            <PNSRS:da_8pc_a_1>0.0</PNSRS:da_8pc_a_1>
+            <PNSRS:da_10pc_a_>8.81906563</PNSRS:da_10pc_a_>
+            <PNSRS:da_15pc_a_>7.49555452</PNSRS:da_15pc_a_>
+            <PNSRS:maggiore_d>83.68537985</PNSRS:maggiore_d>
+            <PNSRS:v_danni_p>0</PNSRS:v_danni_p>
+            <PNSRS:v_danni_c>0</PNSRS:v_danni_c>
+            <PNSRS:shape_area>674056.253384</PNSRS:shape_area>
+            <PNSRS:shape_len>6758.24275006</PNSRS:shape_len>
+            <PNSRS:da_15_pc_a>0.0</PNSRS:da_15_pc_a>
+        </PNSRS:ABR_2_2_9_valanghe1957_2008>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:ABR_2_2_9_valanghe1957_2008 fid="ABR_2_2_9_valanghe1957_2008.3">
+            <PNSRS:geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:4326">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        13.49580731,42.44896482 13.48931109,42.44099064 13.48893911,42.4382571
+                                        13.49556381,42.44796202 13.49740268,42.44835537 13.48945762,42.43843504
+                                        13.48882127,42.43506763 13.48697898,42.43584481 13.48777837,42.43748534
+                                        13.48544461,42.43645492 13.49679289,42.45402076 13.49867552,42.45411749
+                                        13.49580731,42.44896482
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </PNSRS:geom>
+            <PNSRS:ordine>38</PNSRS:ordine>
+            <PNSRS:cod_area>066049_1959-60_006</PNSRS:cod_area>
+            <PNSRS:cod_csv>6</PNSRS:cod_csv>
+            <PNSRS:inverno>1959-60</PNSRS:inverno>
+            <PNSRS:comune>L'AQUILA</PNSRS:comune>
+            <PNSRS:localita_>MALECOSTE</PNSRS:localita_>
+            <PNSRS:data_event>17.1.1960</PNSRS:data_event>
+            <PNSRS:f_a_in_att>NC</PNSRS:f_a_in_att>
+            <PNSRS:f_a_temp>NC</PNSRS:f_a_temp>
+            <PNSRS:f_a_prec>NC</PNSRS:f_a_prec>
+            <PNSRS:frequenza>NC</PNSRS:frequenza>
+            <PNSRS:tipo_val>NC</PNSRS:tipo_val>
+            <PNSRS:tipo_neve>NC</PNSRS:tipo_neve>
+            <PNSRS:cause_v_01>NC</PNSRS:cause_v_01>
+            <PNSRS:cause_v_02>NC</PNSRS:cause_v_02>
+            <PNSRS:zd_quota>1950</PNSRS:zd_quota>
+            <PNSRS:zd_esposiz>SUD</PNSRS:zd_esposiz>
+            <PNSRS:zd_pendenz>NC</PNSRS:zd_pendenz>
+            <PNSRS:zd_h_neve>NC</PNSRS:zd_h_neve>
+            <PNSRS:zd_prof_fr>NC</PNSRS:zd_prof_fr>
+            <PNSRS:zd_pendio>NC</PNSRS:zd_pendio>
+            <PNSRS:zd_opere_v>NC</PNSRS:zd_opere_v>
+            <PNSRS:zd_vegetaz>NC</PNSRS:zd_vegetaz>
+            <PNSRS:zp_larghez>NC</PNSRS:zp_larghez>
+            <PNSRS:zp_lunghez>NC</PNSRS:zp_lunghez>
+            <PNSRS:zp_pen_med>NC</PNSRS:zp_pen_med>
+            <PNSRS:zp_tipo_zo>NC</PNSRS:zp_tipo_zo>
+            <PNSRS:zp_tipo_su>NC</PNSRS:zp_tipo_su>
+            <PNSRS:zp_abitazi>0</PNSRS:zp_abitazi>
+            <PNSRS:zp_opere_v>NC</PNSRS:zp_opere_v>
+            <PNSRS:zp_vegetaz>NC</PNSRS:zp_vegetaz>
+            <PNSRS:za_quota>1050</PNSRS:za_quota>
+            <PNSRS:za_lunghez>2000</PNSRS:za_lunghez>
+            <PNSRS:za_h_media>NC</PNSRS:za_h_media>
+            <PNSRS:za_volume>NC</PNSRS:za_volume>
+            <PNSRS:za_pendenz>NC</PNSRS:za_pendenz>
+            <PNSRS:za_opere_v>NC</PNSRS:za_opere_v>
+            <PNSRS:za_vegetaz>NC</PNSRS:za_vegetaz>
+            <PNSRS:travolti>0</PNSRS:travolti>
+            <PNSRS:danni_pers>0</PNSRS:danni_pers>
+            <PNSRS:danni_cose>0</PNSRS:danni_cose>
+            <PNSRS:s_ora_all>0</PNSRS:s_ora_all>
+            <PNSRS:s_iniz_ric>0</PNSRS:s_iniz_ric>
+            <PNSRS:s_fine>0</PNSRS:s_fine>
+            <PNSRS:elicottero>0</PNSRS:elicottero>
+            <PNSRS:codice>9999</PNSRS:codice>
+            <PNSRS:cod_area_1>066049_1959-60_006</PNSRS:cod_area_1>
+            <PNSRS:zd_pendio_>72.0</PNSRS:zd_pendio_>
+            <PNSRS:zd_pendio1>Aree a pascolo naturale e praterie d'alta quota</PNSRS:zd_pendio1>
+            <PNSRS:zd_pendi_1>16.0</PNSRS:zd_pendi_1>
+            <PNSRS:zd_pendi_2>Rocce nude, falesie, rupi, affioramenti</PNSRS:zd_pendi_2>
+            <PNSRS:zd_pendi_3>12.0</PNSRS:zd_pendi_3>
+            <PNSRS:zd_pendi_4>Aree a ricolonizzazione naturale</PNSRS:zd_pendi_4>
+            <PNSRS:anni_1957_>066049_1959-60_006</PNSRS:anni_1957_>
+            <PNSRS:zd_veget_1>90.0</PNSRS:zd_veget_1>
+            <PNSRS:zd_veget_2>Arbusteto a prevalenza di ginepri nella fascia montana e sub</PNSRS:zd_veget_2>
+            <PNSRS:zd_veget_3>10.0</PNSRS:zd_veget_3>
+            <PNSRS:zd_veget_4>Rimboschimento di conifere nella fascia montana</PNSRS:zd_veget_4>
+            <PNSRS:zd_veget_5>0.0</PNSRS:zd_veget_5>
+            <PNSRS:anni_19571>066049_1959-60_006</PNSRS:anni_19571>
+            <PNSRS:da_0pc_a_8>0.0</PNSRS:da_0pc_a_8>
+            <PNSRS:da_8pc_a_1>0.0</PNSRS:da_8pc_a_1>
+            <PNSRS:da_10pc_a_>5.49828714</PNSRS:da_10pc_a_>
+            <PNSRS:da_15pc_a_>17.69699709</PNSRS:da_15pc_a_>
+            <PNSRS:maggiore_d>76.80471578</PNSRS:maggiore_d>
+            <PNSRS:v_danni_p>0</PNSRS:v_danni_p>
+            <PNSRS:v_danni_c>0</PNSRS:v_danni_c>
+            <PNSRS:shape_area>383371.714855</PNSRS:shape_area>
+            <PNSRS:shape_len>8282.90779078</PNSRS:shape_len>
+            <PNSRS:da_15_pc_a>0.0</PNSRS:da_15_pc_a>
+        </PNSRS:ABR_2_2_9_valanghe1957_2008>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:ABR_2_2_9_valanghe1957_2008 fid="ABR_2_2_9_valanghe1957_2008.4">
+            <PNSRS:geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:4326">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        13.49796842,42.44757931 13.49930342,42.44870447 13.50045143,42.44747675
+                                        13.49393606,42.44079036 13.49145601,42.4336885 13.49141723,42.43631756
+                                        13.48971369,42.43536757 13.49796842,42.44757931
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </PNSRS:geom>
+            <PNSRS:ordine>55</PNSRS:ordine>
+            <PNSRS:cod_area>066049_1957-58_093</PNSRS:cod_area>
+            <PNSRS:cod_csv>93</PNSRS:cod_csv>
+            <PNSRS:inverno>1957-58</PNSRS:inverno>
+            <PNSRS:comune>L'AQUILA</PNSRS:comune>
+            <PNSRS:localita_>MALECOSTE</PNSRS:localita_>
+            <PNSRS:data_event>14.1.1958</PNSRS:data_event>
+            <PNSRS:f_a_in_att>NC</PNSRS:f_a_in_att>
+            <PNSRS:f_a_temp>NC</PNSRS:f_a_temp>
+            <PNSRS:f_a_prec>NC</PNSRS:f_a_prec>
+            <PNSRS:frequenza>NC</PNSRS:frequenza>
+            <PNSRS:tipo_val>NC</PNSRS:tipo_val>
+            <PNSRS:tipo_neve>NC</PNSRS:tipo_neve>
+            <PNSRS:cause_v_01>NC</PNSRS:cause_v_01>
+            <PNSRS:cause_v_02>NC</PNSRS:cause_v_02>
+            <PNSRS:zd_quota>1950</PNSRS:zd_quota>
+            <PNSRS:zd_esposiz>SUD</PNSRS:zd_esposiz>
+            <PNSRS:zd_pendenz>NC</PNSRS:zd_pendenz>
+            <PNSRS:zd_h_neve>NC</PNSRS:zd_h_neve>
+            <PNSRS:zd_prof_fr>NC</PNSRS:zd_prof_fr>
+            <PNSRS:zd_pendio>NC</PNSRS:zd_pendio>
+            <PNSRS:zd_opere_v>NC</PNSRS:zd_opere_v>
+            <PNSRS:zd_vegetaz>NC</PNSRS:zd_vegetaz>
+            <PNSRS:zp_larghez>NC</PNSRS:zp_larghez>
+            <PNSRS:zp_lunghez>NC</PNSRS:zp_lunghez>
+            <PNSRS:zp_pen_med>NC</PNSRS:zp_pen_med>
+            <PNSRS:zp_tipo_zo>NC</PNSRS:zp_tipo_zo>
+            <PNSRS:zp_tipo_su>NC</PNSRS:zp_tipo_su>
+            <PNSRS:zp_abitazi>0</PNSRS:zp_abitazi>
+            <PNSRS:zp_opere_v>NC</PNSRS:zp_opere_v>
+            <PNSRS:zp_vegetaz>NC</PNSRS:zp_vegetaz>
+            <PNSRS:za_quota>1100</PNSRS:za_quota>
+            <PNSRS:za_lunghez>1900</PNSRS:za_lunghez>
+            <PNSRS:za_h_media>NC</PNSRS:za_h_media>
+            <PNSRS:za_volume>NC</PNSRS:za_volume>
+            <PNSRS:za_pendenz>NC</PNSRS:za_pendenz>
+            <PNSRS:za_opere_v>NC</PNSRS:za_opere_v>
+            <PNSRS:za_vegetaz>NC</PNSRS:za_vegetaz>
+            <PNSRS:travolti>0</PNSRS:travolti>
+            <PNSRS:danni_pers>0</PNSRS:danni_pers>
+            <PNSRS:danni_cose>0</PNSRS:danni_cose>
+            <PNSRS:s_ora_all>0</PNSRS:s_ora_all>
+            <PNSRS:s_iniz_ric>0</PNSRS:s_iniz_ric>
+            <PNSRS:s_fine>0</PNSRS:s_fine>
+            <PNSRS:elicottero>0</PNSRS:elicottero>
+            <PNSRS:codice>9999</PNSRS:codice>
+            <PNSRS:cod_area_1>066049_1957-58_093</PNSRS:cod_area_1>
+            <PNSRS:zd_pendio_>56.0</PNSRS:zd_pendio_>
+            <PNSRS:zd_pendio1>Aree a pascolo naturale e praterie d'alta quota</PNSRS:zd_pendio1>
+            <PNSRS:zd_pendi_1>24.0</PNSRS:zd_pendi_1>
+            <PNSRS:zd_pendi_2>Rocce nude, falesie, rupi, affioramenti</PNSRS:zd_pendi_2>
+            <PNSRS:zd_pendi_3>17.0</PNSRS:zd_pendi_3>
+            <PNSRS:zd_pendi_4>Aree a ricolonizzazione naturale</PNSRS:zd_pendi_4>
+            <PNSRS:anni_1957_>066049_1957-58_093</PNSRS:anni_1957_>
+            <PNSRS:zd_veget_1>79.0</PNSRS:zd_veget_1>
+            <PNSRS:zd_veget_2>Arbusteto a prevalenza di ginepri nella fascia montana e sub</PNSRS:zd_veget_2>
+            <PNSRS:zd_veget_3>21.0</PNSRS:zd_veget_3>
+            <PNSRS:zd_veget_4>Rimboschimento di conifere nella fascia montana</PNSRS:zd_veget_4>
+            <PNSRS:zd_veget_5>0.0</PNSRS:zd_veget_5>
+            <PNSRS:anni_19571>066049_1957-58_093</PNSRS:anni_19571>
+            <PNSRS:da_0pc_a_8>0.0</PNSRS:da_0pc_a_8>
+            <PNSRS:da_8pc_a_1>0.0</PNSRS:da_8pc_a_1>
+            <PNSRS:da_10pc_a_>2.9058087</PNSRS:da_10pc_a_>
+            <PNSRS:da_15pc_a_>31.69683724</PNSRS:da_15pc_a_>
+            <PNSRS:maggiore_d>65.39735407</PNSRS:maggiore_d>
+            <PNSRS:v_danni_p>0</PNSRS:v_danni_p>
+            <PNSRS:v_danni_c>0</PNSRS:v_danni_c>
+            <PNSRS:shape_area>171938.725787</PNSRS:shape_area>
+            <PNSRS:shape_len>4368.41370401</PNSRS:shape_len>
+            <PNSRS:da_15_pc_a>0.0</PNSRS:da_15_pc_a>
+        </PNSRS:ABR_2_2_9_valanghe1957_2008>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:ABR_2_2_9_valanghe1957_2008 fid="ABR_2_2_9_valanghe1957_2008.236">
+            <PNSRS:geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:4326">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        13.49121393,42.44677907 13.49151987,42.44645793 13.49072685,42.44567444
+                                        13.49121393,42.44677907
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </PNSRS:geom>
+            <PNSRS:ordine>76</PNSRS:ordine>
+            <PNSRS:cod_area>066049_1994-95_004A</PNSRS:cod_area>
+            <PNSRS:cod_csv>04A</PNSRS:cod_csv>
+            <PNSRS:inverno>1994-95</PNSRS:inverno>
+            <PNSRS:comune>L'AQUILA</PNSRS:comune>
+            <PNSRS:localita_>CRESTA DELLE MALECOSTE</PNSRS:localita_>
+            <PNSRS:data_event>17.4.1995</PNSRS:data_event>
+            <PNSRS:f_a_in_att>SERENO</PNSRS:f_a_in_att>
+            <PNSRS:f_a_temp>NC</PNSRS:f_a_temp>
+            <PNSRS:f_a_prec>NEI GIORNI PRECEDENTI SI SONO VERIFICATE BUFERE DI NEVE</PNSRS:f_a_prec>
+            <PNSRS:frequenza>ECCEZIONALE</PNSRS:frequenza>
+            <PNSRS:tipo_val>DI FONDO A DEBOLE COESIONE</PNSRS:tipo_val>
+            <PNSRS:tipo_neve>BAGNATA</PNSRS:tipo_neve>
+            <PNSRS:cause_v_01>PRESUNTE</PNSRS:cause_v_01>
+            <PNSRS:cause_v_02>SOVRACCARICO DI NEVE E AUMENTO TERMICO</PNSRS:cause_v_02>
+            <PNSRS:zd_esposiz>SUD</PNSRS:zd_esposiz>
+            <PNSRS:zd_pendenz>150</PNSRS:zd_pendenz>
+            <PNSRS:zd_h_neve>NC</PNSRS:zd_h_neve>
+            <PNSRS:zd_prof_fr>NC</PNSRS:zd_prof_fr>
+            <PNSRS:zd_pendio>ROCCIA</PNSRS:zd_pendio>
+            <PNSRS:zd_opere_v>ASSENTE</PNSRS:zd_opere_v>
+            <PNSRS:zd_vegetaz>ASSENTE</PNSRS:zd_vegetaz>
+            <PNSRS:zp_larghez>NC</PNSRS:zp_larghez>
+            <PNSRS:zp_lunghez>NC</PNSRS:zp_lunghez>
+            <PNSRS:zp_pen_med>NC</PNSRS:zp_pen_med>
+            <PNSRS:zp_tipo_zo>CANALONE</PNSRS:zp_tipo_zo>
+            <PNSRS:zp_tipo_su>CESPUGLIOSO</PNSRS:zp_tipo_su>
+            <PNSRS:zp_abitazi>0</PNSRS:zp_abitazi>
+            <PNSRS:zp_opere_v>ASSENTE</PNSRS:zp_opere_v>
+            <PNSRS:za_quota>NC</PNSRS:za_quota>
+            <PNSRS:za_larghez>NC</PNSRS:za_larghez>
+            <PNSRS:za_lunghez>NC</PNSRS:za_lunghez>
+            <PNSRS:za_h_media>NC</PNSRS:za_h_media>
+            <PNSRS:za_volume>NC</PNSRS:za_volume>
+            <PNSRS:za_pendenz>NC</PNSRS:za_pendenz>
+            <PNSRS:za_opere_v>ASSENTE</PNSRS:za_opere_v>
+            <PNSRS:za_vegetaz>QUALCHE ALBERO E CESPUGLI</PNSRS:za_vegetaz>
+            <PNSRS:travolti>0</PNSRS:travolti>
+            <PNSRS:danni_pers>0</PNSRS:danni_pers>
+            <PNSRS:danni_cose>0</PNSRS:danni_cose>
+            <PNSRS:s_ora_all>0</PNSRS:s_ora_all>
+            <PNSRS:s_iniz_ric>0</PNSRS:s_iniz_ric>
+            <PNSRS:s_fine>0</PNSRS:s_fine>
+            <PNSRS:elicottero>0</PNSRS:elicottero>
+            <PNSRS:note_1>LA VALANGA OGGETTO DI OSSERVAZIONE E' CONTENUTA NELLA SCHEDA CON CODICE 066049_1994-95_004C ED
+                I DATI NUMERICI SONO STATI DEDOTTI DALLA CARTOGRAFIA ALLEGATA ALLA STESSA.
+            </PNSRS:note_1>
+            <PNSRS:codice>9999</PNSRS:codice>
+            <PNSRS:cod_area_1>066049_1994-95_004A</PNSRS:cod_area_1>
+            <PNSRS:zd_pendio_>100.0</PNSRS:zd_pendio_>
+            <PNSRS:zd_pendio1>Aree a pascolo naturale e praterie d'alta quota</PNSRS:zd_pendio1>
+            <PNSRS:zd_pendi_1>0.0</PNSRS:zd_pendi_1>
+            <PNSRS:zd_pendi_3>0.0</PNSRS:zd_pendi_3>
+            <PNSRS:zd_veget_1>100.0</PNSRS:zd_veget_1>
+            <PNSRS:zd_veget_2>Arbusteto a prevalenza di ginepri nella fascia montana e sub</PNSRS:zd_veget_2>
+            <PNSRS:zd_veget_3>0.0</PNSRS:zd_veget_3>
+            <PNSRS:zd_veget_5>0.0</PNSRS:zd_veget_5>
+            <PNSRS:da_0pc_a_8>0.0</PNSRS:da_0pc_a_8>
+            <PNSRS:da_8pc_a_1>0.0</PNSRS:da_8pc_a_1>
+            <PNSRS:da_10pc_a_>0.0</PNSRS:da_10pc_a_>
+            <PNSRS:da_15pc_a_>0.0</PNSRS:da_15pc_a_>
+            <PNSRS:maggiore_d>100.0</PNSRS:maggiore_d>
+            <PNSRS:v_danni_p>0</PNSRS:v_danni_p>
+            <PNSRS:v_danni_c>0</PNSRS:v_danni_c>
+            <PNSRS:shape_area>4136.09596777</PNSRS:shape_area>
+            <PNSRS:shape_len>318.395768548</PNSRS:shape_len>
+            <PNSRS:cod_area_2>066049_1994-95_004A</PNSRS:cod_area_2>
+            <PNSRS:cod_area_3>066049_1994-95_004A</PNSRS:cod_area_3>
+            <PNSRS:da_15_pc_a>0.0</PNSRS:da_15_pc_a>
+        </PNSRS:ABR_2_2_9_valanghe1957_2008>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:ABR_2_2_9_valanghe1957_2008 fid="ABR_2_2_9_valanghe1957_2008.238">
+            <PNSRS:geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:4326">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        13.49267452,42.44652312 13.49327893,42.44626293 13.48850627,42.44034135
+                                        13.49267452,42.44652312
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </PNSRS:geom>
+            <PNSRS:ordine>94</PNSRS:ordine>
+            <PNSRS:cod_area>066049_1994-95_004B</PNSRS:cod_area>
+            <PNSRS:cod_csv>04B</PNSRS:cod_csv>
+            <PNSRS:inverno>1994-95</PNSRS:inverno>
+            <PNSRS:comune>L'AQUILA</PNSRS:comune>
+            <PNSRS:localita_>CRESTA DELLE MALECOSTE</PNSRS:localita_>
+            <PNSRS:data_event>17.4.1995</PNSRS:data_event>
+            <PNSRS:f_a_in_att>SERENO</PNSRS:f_a_in_att>
+            <PNSRS:f_a_temp>NC</PNSRS:f_a_temp>
+            <PNSRS:f_a_prec>NEI GIORNI PRECEDENTI SI SONO VERIFICATE BUFERE DI NEVE</PNSRS:f_a_prec>
+            <PNSRS:frequenza>ECCEZIONALE</PNSRS:frequenza>
+            <PNSRS:tipo_val>DI FONDO A DEBOLE COESIONE</PNSRS:tipo_val>
+            <PNSRS:tipo_neve>BAGNATA</PNSRS:tipo_neve>
+            <PNSRS:cause_v_01>PRESUNTE</PNSRS:cause_v_01>
+            <PNSRS:cause_v_02>SOVRACCARICO DI NEVE E AUMENTO TERMICO</PNSRS:cause_v_02>
+            <PNSRS:zd_esposiz>SUD</PNSRS:zd_esposiz>
+            <PNSRS:zd_pendenz>150</PNSRS:zd_pendenz>
+            <PNSRS:zd_h_neve>NC</PNSRS:zd_h_neve>
+            <PNSRS:zd_prof_fr>NC</PNSRS:zd_prof_fr>
+            <PNSRS:zd_pendio>ROCCIA</PNSRS:zd_pendio>
+            <PNSRS:zd_opere_v>ASSENTE</PNSRS:zd_opere_v>
+            <PNSRS:zd_vegetaz>ASSENTE</PNSRS:zd_vegetaz>
+            <PNSRS:zp_larghez>NC</PNSRS:zp_larghez>
+            <PNSRS:zp_lunghez>NC</PNSRS:zp_lunghez>
+            <PNSRS:zp_pen_med>NC</PNSRS:zp_pen_med>
+            <PNSRS:zp_tipo_zo>CANALONE</PNSRS:zp_tipo_zo>
+            <PNSRS:zp_tipo_su>CESPUGLIOSO</PNSRS:zp_tipo_su>
+            <PNSRS:zp_abitazi>0</PNSRS:zp_abitazi>
+            <PNSRS:zp_opere_v>ASSENTE</PNSRS:zp_opere_v>
+            <PNSRS:za_quota>NC</PNSRS:za_quota>
+            <PNSRS:za_larghez>NC</PNSRS:za_larghez>
+            <PNSRS:za_lunghez>NC</PNSRS:za_lunghez>
+            <PNSRS:za_h_media>NC</PNSRS:za_h_media>
+            <PNSRS:za_volume>NC</PNSRS:za_volume>
+            <PNSRS:za_pendenz>NC</PNSRS:za_pendenz>
+            <PNSRS:za_opere_v>ASSENTE</PNSRS:za_opere_v>
+            <PNSRS:za_vegetaz>QUALCHE ALBERO E CESPUGLI</PNSRS:za_vegetaz>
+            <PNSRS:travolti>0</PNSRS:travolti>
+            <PNSRS:danni_pers>0</PNSRS:danni_pers>
+            <PNSRS:danni_cose>0</PNSRS:danni_cose>
+            <PNSRS:s_ora_all>0</PNSRS:s_ora_all>
+            <PNSRS:s_iniz_ric>0</PNSRS:s_iniz_ric>
+            <PNSRS:s_fine>0</PNSRS:s_fine>
+            <PNSRS:elicottero>0</PNSRS:elicottero>
+            <PNSRS:note_1>LA VALANGA OGGETTO DI OSSERVAZIONE E' CONTENUTA NELLA SCHEDA CON CODICE 066049_1994-95_004C ED
+                I DATI NUMERICI SONO STATI DEDOTTI DALLA CARTOGRAFIA ALLEGATA ALLA STESSA.
+            </PNSRS:note_1>
+            <PNSRS:codice>9999</PNSRS:codice>
+            <PNSRS:cod_area_1>066049_1994-95_004B</PNSRS:cod_area_1>
+            <PNSRS:zd_pendio_>100.0</PNSRS:zd_pendio_>
+            <PNSRS:zd_pendio1>Aree a pascolo naturale e praterie d'alta quota</PNSRS:zd_pendio1>
+            <PNSRS:zd_pendi_1>0.0</PNSRS:zd_pendi_1>
+            <PNSRS:zd_pendi_3>0.0</PNSRS:zd_pendi_3>
+            <PNSRS:zd_veget_1>100.0</PNSRS:zd_veget_1>
+            <PNSRS:zd_veget_2>Arbusteto a prevalenza di ginepri nella fascia montana e sub</PNSRS:zd_veget_2>
+            <PNSRS:zd_veget_3>0.0</PNSRS:zd_veget_3>
+            <PNSRS:zd_veget_5>0.0</PNSRS:zd_veget_5>
+            <PNSRS:da_0pc_a_8>0.0</PNSRS:da_0pc_a_8>
+            <PNSRS:da_8pc_a_1>0.0</PNSRS:da_8pc_a_1>
+            <PNSRS:da_10pc_a_>0.0</PNSRS:da_10pc_a_>
+            <PNSRS:da_15pc_a_>9.46319863</PNSRS:da_15pc_a_>
+            <PNSRS:maggiore_d>90.53680137</PNSRS:maggiore_d>
+            <PNSRS:v_danni_p>0</PNSRS:v_danni_p>
+            <PNSRS:v_danni_c>0</PNSRS:v_danni_c>
+            <PNSRS:shape_area>31619.9651927</PNSRS:shape_area>
+            <PNSRS:shape_len>1677.16055007</PNSRS:shape_len>
+            <PNSRS:cod_area_2>066049_1994-95_004B</PNSRS:cod_area_2>
+            <PNSRS:cod_area_3>066049_1994-95_004B</PNSRS:cod_area_3>
+            <PNSRS:da_15_pc_a>0.0</PNSRS:da_15_pc_a>
+        </PNSRS:ABR_2_2_9_valanghe1957_2008>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:ABR_2_2_9_valanghe1957_2008 fid="ABR_2_2_9_valanghe1957_2008.243">
+            <PNSRS:geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:4326">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        13.4956194,42.44684288 13.48906438,42.43584656 13.48790336,42.43595384
+                                        13.4956194,42.44684288
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </PNSRS:geom>
+            <PNSRS:ordine>111</PNSRS:ordine>
+            <PNSRS:cod_area>066049_1994-95_004C</PNSRS:cod_area>
+            <PNSRS:cod_csv>04C</PNSRS:cod_csv>
+            <PNSRS:inverno>1994-95</PNSRS:inverno>
+            <PNSRS:comune>L'AQUILA</PNSRS:comune>
+            <PNSRS:localita_>CRESTA DELLE MALECOSTE</PNSRS:localita_>
+            <PNSRS:data_event>17.4.1995</PNSRS:data_event>
+            <PNSRS:f_a_in_att>SERENO</PNSRS:f_a_in_att>
+            <PNSRS:f_a_temp>NC</PNSRS:f_a_temp>
+            <PNSRS:f_a_prec>NEI GIORNI PRECEDENTI SI SONO VERIFICATE BUFERE DI NEVE</PNSRS:f_a_prec>
+            <PNSRS:frequenza>ECCEZIONALE</PNSRS:frequenza>
+            <PNSRS:tipo_val>DI FONDO A DEBOLE COESIONE</PNSRS:tipo_val>
+            <PNSRS:tipo_neve>BAGNATA</PNSRS:tipo_neve>
+            <PNSRS:cause_v_01>PRESUNTE</PNSRS:cause_v_01>
+            <PNSRS:cause_v_02>SOVRACCARICO DI NEVE E AUMENTO TERMICO</PNSRS:cause_v_02>
+            <PNSRS:zd_quota>2000</PNSRS:zd_quota>
+            <PNSRS:zd_esposiz>SUD</PNSRS:zd_esposiz>
+            <PNSRS:zd_pendenz>150</PNSRS:zd_pendenz>
+            <PNSRS:zd_h_neve>NC</PNSRS:zd_h_neve>
+            <PNSRS:zd_prof_fr>NC</PNSRS:zd_prof_fr>
+            <PNSRS:zd_pendio>ROCCIA</PNSRS:zd_pendio>
+            <PNSRS:zd_opere_v>ASSENTE</PNSRS:zd_opere_v>
+            <PNSRS:zd_vegetaz>ASSENTE</PNSRS:zd_vegetaz>
+            <PNSRS:zp_larghez>20</PNSRS:zp_larghez>
+            <PNSRS:zp_lunghez>300</PNSRS:zp_lunghez>
+            <PNSRS:zp_pen_med>100</PNSRS:zp_pen_med>
+            <PNSRS:zp_tipo_zo>CANALONE</PNSRS:zp_tipo_zo>
+            <PNSRS:zp_tipo_su>CESPUGLIOSO</PNSRS:zp_tipo_su>
+            <PNSRS:zp_abitazi>0</PNSRS:zp_abitazi>
+            <PNSRS:zp_opere_v>ASSENTE</PNSRS:zp_opere_v>
+            <PNSRS:zp_vegetaz>RIMBOSCHIMENTO DI PINI AI LATI DEL LETTO DELLA VALANGA</PNSRS:zp_vegetaz>
+            <PNSRS:za_quota>1300</PNSRS:za_quota>
+            <PNSRS:za_larghez>10</PNSRS:za_larghez>
+            <PNSRS:za_lunghez>NC</PNSRS:za_lunghez>
+            <PNSRS:za_h_media>4</PNSRS:za_h_media>
+            <PNSRS:za_volume>NC</PNSRS:za_volume>
+            <PNSRS:za_pendenz>10</PNSRS:za_pendenz>
+            <PNSRS:za_opere_v>ASSENTE</PNSRS:za_opere_v>
+            <PNSRS:za_vegetaz>QUALCHE ALBERO E CESPUGLI</PNSRS:za_vegetaz>
+            <PNSRS:travolti>0</PNSRS:travolti>
+            <PNSRS:danni_pers>0</PNSRS:danni_pers>
+            <PNSRS:danni_cose>0</PNSRS:danni_cose>
+            <PNSRS:s_ora_all>0</PNSRS:s_ora_all>
+            <PNSRS:s_iniz_ric>0</PNSRS:s_iniz_ric>
+            <PNSRS:s_fine>0</PNSRS:s_fine>
+            <PNSRS:elicottero>0</PNSRS:elicottero>
+            <PNSRS:note_1>VALANGA DI GRANDI DIMENSIONI CADUTA NEI PRESSI DI UNO DEI CANALI INCIDENTI IL VERSANTE SUD
+                DELLA CRESTA DELLE MALECOSTE; IN REALTA' TUTTI I CANALI DEL VERSANTE PRESENTANO SCARICHE VALANGHIVE MA
+                LA VALANGA OGGETTO D'INDAGINE E' DA RITENERSI QUELLA DI
+            </PNSRS:note_1>
+            <PNSRS:note_2>MAGGIORE DIMENSIONE. LE PRECIPITAZIONI DEI GIORNI PRECEDENTI HANNO DETERMINATO UN SOVRACCARICO
+                DEL PENDIO E FAVORITO LO SLITTAMENTO DEL MANTO NEVOSO. NON SI SONO VERIFICATI DANNI A PERSONE, ANIMALI E
+                COSE.
+            </PNSRS:note_2>
+            <PNSRS:osserv_01>LE QUOTE, LE PENDENZE E LE LUNGHEZZE RIPORTATE SUL RAPPORTO DEL CFS SONO STATE CORRETTE IN
+                QUANTO PRESENTANO DELLE DISCORDANZE CON LA RAPPRESENTAZIONE GRAFICA FORNITA IN ALLEGATO.
+            </PNSRS:osserv_01>
+            <PNSRS:codice>8888</PNSRS:codice>
+            <PNSRS:cod_area_1>066049_1994-95_004C</PNSRS:cod_area_1>
+            <PNSRS:zd_pendio_>66.0</PNSRS:zd_pendio_>
+            <PNSRS:zd_pendio1>Aree a pascolo naturale e praterie d'alta quota</PNSRS:zd_pendio1>
+            <PNSRS:zd_pendi_1>34.0</PNSRS:zd_pendi_1>
+            <PNSRS:zd_pendi_2>Aree a ricolonizzazione naturale</PNSRS:zd_pendi_2>
+            <PNSRS:zd_pendi_3>0.0</PNSRS:zd_pendi_3>
+            <PNSRS:zd_veget_1>81.0</PNSRS:zd_veget_1>
+            <PNSRS:zd_veget_2>Arbusteto a prevalenza di ginepri nella fascia montana e sub</PNSRS:zd_veget_2>
+            <PNSRS:zd_veget_3>19.0</PNSRS:zd_veget_3>
+            <PNSRS:zd_veget_4>Rimboschimento di conifere nella fascia montana</PNSRS:zd_veget_4>
+            <PNSRS:zd_veget_5>0.0</PNSRS:zd_veget_5>
+            <PNSRS:da_0pc_a_8>0.0</PNSRS:da_0pc_a_8>
+            <PNSRS:da_8pc_a_1>0.0</PNSRS:da_8pc_a_1>
+            <PNSRS:da_10pc_a_>7.17116476</PNSRS:da_10pc_a_>
+            <PNSRS:da_15pc_a_>41.92814851</PNSRS:da_15pc_a_>
+            <PNSRS:maggiore_d>50.90068673</PNSRS:maggiore_d>
+            <PNSRS:v_danni_p>0</PNSRS:v_danni_p>
+            <PNSRS:v_danni_c>0</PNSRS:v_danni_c>
+            <PNSRS:shape_area>48742.4600906</PNSRS:shape_area>
+            <PNSRS:shape_len>2919.94712462</PNSRS:shape_len>
+            <PNSRS:cod_area_2>066049_1994-95_004C</PNSRS:cod_area_2>
+            <PNSRS:cod_area_3>066049_1994-95_004C</PNSRS:cod_area_3>
+            <PNSRS:da_15_pc_a>0.0</PNSRS:da_15_pc_a>
+        </PNSRS:ABR_2_2_9_valanghe1957_2008>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:ABR_2_2_9_valanghe1957_2008 fid="ABR_2_2_9_valanghe1957_2008.347">
+            <PNSRS:geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:4326">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        13.49757249,42.44904053 13.49104101,42.43940236 13.48984677,42.43901383
+                                        13.49757249,42.44904053
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </PNSRS:geom>
+            <PNSRS:ordine>538</PNSRS:ordine>
+            <PNSRS:cod_area>066049_1998-99_002B</PNSRS:cod_area>
+            <PNSRS:cod_csv>0</PNSRS:cod_csv>
+            <PNSRS:inverno>1998-99</PNSRS:inverno>
+            <PNSRS:comune>L'AQUILA</PNSRS:comune>
+            <PNSRS:localita_>MALECOSTE</PNSRS:localita_>
+            <PNSRS:data_event>10.4.1999</PNSRS:data_event>
+            <PNSRS:f_a_in_att>PIOGGIA</PNSRS:f_a_in_att>
+            <PNSRS:f_a_temp>0</PNSRS:f_a_temp>
+            <PNSRS:f_a_prec>NEVICATA</PNSRS:f_a_prec>
+            <PNSRS:frequenza>ECCEZIONALE</PNSRS:frequenza>
+            <PNSRS:tipo_val>SUPERFICIALE</PNSRS:tipo_val>
+            <PNSRS:tipo_neve>BAGNATA</PNSRS:tipo_neve>
+            <PNSRS:cause_v_01>NOTE</PNSRS:cause_v_01>
+            <PNSRS:cause_v_02>SOVRACCARICO NEVE, AUMENTO TERMICO</PNSRS:cause_v_02>
+            <PNSRS:zd_quota>1800</PNSRS:zd_quota>
+            <PNSRS:zd_esposiz>SUD - SUD - OVEST</PNSRS:zd_esposiz>
+            <PNSRS:zd_pendenz>100%</PNSRS:zd_pendenz>
+            <PNSRS:zd_h_neve>NC</PNSRS:zd_h_neve>
+            <PNSRS:zd_prof_fr>NC</PNSRS:zd_prof_fr>
+            <PNSRS:zd_pendio>PASCOLO NUDO</PNSRS:zd_pendio>
+            <PNSRS:zd_opere_v>ASSENTE</PNSRS:zd_opere_v>
+            <PNSRS:zd_vegetaz>ASSENTE</PNSRS:zd_vegetaz>
+            <PNSRS:zp_larghez>30</PNSRS:zp_larghez>
+            <PNSRS:zp_lunghez>1100</PNSRS:zp_lunghez>
+            <PNSRS:zp_pen_med>60%</PNSRS:zp_pen_med>
+            <PNSRS:zp_tipo_zo>CANALONE</PNSRS:zp_tipo_zo>
+            <PNSRS:zp_tipo_su>NUDO</PNSRS:zp_tipo_su>
+            <PNSRS:zp_abitazi>0</PNSRS:zp_abitazi>
+            <PNSRS:zp_opere_v>ASSENTE</PNSRS:zp_opere_v>
+            <PNSRS:zp_vegetaz>RIMBOSCHIMENTO DI PINI IN FONDO AL PERCORSO</PNSRS:zp_vegetaz>
+            <PNSRS:za_quota>1200</PNSRS:za_quota>
+            <PNSRS:za_larghez>95</PNSRS:za_larghez>
+            <PNSRS:za_lunghez>130</PNSRS:za_lunghez>
+            <PNSRS:za_h_media>NC</PNSRS:za_h_media>
+            <PNSRS:za_volume>NC</PNSRS:za_volume>
+            <PNSRS:za_pendenz>20%</PNSRS:za_pendenz>
+            <PNSRS:za_opere_v>ASSENTE</PNSRS:za_opere_v>
+            <PNSRS:za_vegetaz>ALCUNI ALBERI DI PINO</PNSRS:za_vegetaz>
+            <PNSRS:travolti>0</PNSRS:travolti>
+            <PNSRS:danni_pers>0</PNSRS:danni_pers>
+            <PNSRS:danni_cose>VIE COMUNICAZIONI</PNSRS:danni_cose>
+            <PNSRS:s_ora_all>0</PNSRS:s_ora_all>
+            <PNSRS:s_iniz_ric>0</PNSRS:s_iniz_ric>
+            <PNSRS:s_fine>0</PNSRS:s_fine>
+            <PNSRS:elicottero>0</PNSRS:elicottero>
+            <PNSRS:codice>9999</PNSRS:codice>
+            <PNSRS:cod_area_1>066049_1998-99_002B</PNSRS:cod_area_1>
+            <PNSRS:zd_pendio_>52.0</PNSRS:zd_pendio_>
+            <PNSRS:zd_pendio1>Aree a pascolo naturale e praterie d'alta quota</PNSRS:zd_pendio1>
+            <PNSRS:zd_pendi_1>31.0</PNSRS:zd_pendi_1>
+            <PNSRS:zd_pendi_2>Aree a ricolonizzazione naturale</PNSRS:zd_pendi_2>
+            <PNSRS:zd_pendi_3>17.0</PNSRS:zd_pendi_3>
+            <PNSRS:zd_pendi_4>Rocce nude, falesie, rupi, affioramenti</PNSRS:zd_pendi_4>
+            <PNSRS:zd_veget_1>61.0</PNSRS:zd_veget_1>
+            <PNSRS:zd_veget_2>Rimboschimento di conifere nella fascia montana</PNSRS:zd_veget_2>
+            <PNSRS:zd_veget_3>39.0</PNSRS:zd_veget_3>
+            <PNSRS:zd_veget_4>Arbusteto a prevalenza di ginepri nella fascia montana e sub</PNSRS:zd_veget_4>
+            <PNSRS:zd_veget_5>0.0</PNSRS:zd_veget_5>
+            <PNSRS:da_0pc_a_8>0.0</PNSRS:da_0pc_a_8>
+            <PNSRS:da_8pc_a_1>0.0</PNSRS:da_8pc_a_1>
+            <PNSRS:da_10pc_a_>0.0</PNSRS:da_10pc_a_>
+            <PNSRS:da_15pc_a_>31.04013068</PNSRS:da_15pc_a_>
+            <PNSRS:maggiore_d>68.95986932</PNSRS:maggiore_d>
+            <PNSRS:v_danni_p>0</PNSRS:v_danni_p>
+            <PNSRS:v_danni_c>1</PNSRS:v_danni_c>
+            <PNSRS:shape_area>51600.9479397</PNSRS:shape_area>
+            <PNSRS:shape_len>2678.92506975</PNSRS:shape_len>
+            <PNSRS:cod_area_2>066049_1998-99_002B</PNSRS:cod_area_2>
+            <PNSRS:cod_area_3>066049_1998-99_002B</PNSRS:cod_area_3>
+            <PNSRS:da_15_pc_a>0.0</PNSRS:da_15_pc_a>
+        </PNSRS:ABR_2_2_9_valanghe1957_2008>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:ABR_2_2_9_valanghe1957_2008 fid="ABR_2_2_9_valanghe1957_2008.361">
+            <PNSRS:geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:4326">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        13.50113835,42.45644868 13.5018267,42.45512046 13.48742572,42.4382282
+                                        13.50113835,42.45644868
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </PNSRS:geom>
+            <PNSRS:ordine>537</PNSRS:ordine>
+            <PNSRS:cod_area>066049_1998-99_002A</PNSRS:cod_area>
+            <PNSRS:cod_csv>0</PNSRS:cod_csv>
+            <PNSRS:inverno>1998-99</PNSRS:inverno>
+            <PNSRS:comune>L'AQUILA</PNSRS:comune>
+            <PNSRS:localita_>MALECOSTE</PNSRS:localita_>
+            <PNSRS:data_event>10.4.1999</PNSRS:data_event>
+            <PNSRS:f_a_in_att>PIOGGIA</PNSRS:f_a_in_att>
+            <PNSRS:f_a_temp>0</PNSRS:f_a_temp>
+            <PNSRS:f_a_prec>NEVICATA</PNSRS:f_a_prec>
+            <PNSRS:frequenza>ECCEZIONALE</PNSRS:frequenza>
+            <PNSRS:tipo_val>SUPERFICIALE</PNSRS:tipo_val>
+            <PNSRS:tipo_neve>BAGNATA</PNSRS:tipo_neve>
+            <PNSRS:cause_v_01>NOTE</PNSRS:cause_v_01>
+            <PNSRS:cause_v_02>SOVRACCARICO NEVE, AUMENTO TERMICO</PNSRS:cause_v_02>
+            <PNSRS:zd_quota>2400</PNSRS:zd_quota>
+            <PNSRS:zd_esposiz>SUD - SUD - OVEST</PNSRS:zd_esposiz>
+            <PNSRS:zd_pendenz>100%</PNSRS:zd_pendenz>
+            <PNSRS:zd_h_neve>NC</PNSRS:zd_h_neve>
+            <PNSRS:zd_prof_fr>NC</PNSRS:zd_prof_fr>
+            <PNSRS:zd_pendio>PASCOLO NUDO</PNSRS:zd_pendio>
+            <PNSRS:zd_opere_v>ASSENTE</PNSRS:zd_opere_v>
+            <PNSRS:zd_vegetaz>ASSENTE</PNSRS:zd_vegetaz>
+            <PNSRS:zp_larghez>25</PNSRS:zp_larghez>
+            <PNSRS:zp_lunghez>2300</PNSRS:zp_lunghez>
+            <PNSRS:zp_pen_med>60%</PNSRS:zp_pen_med>
+            <PNSRS:zp_tipo_zo>CANALONE</PNSRS:zp_tipo_zo>
+            <PNSRS:zp_tipo_su>NUDO</PNSRS:zp_tipo_su>
+            <PNSRS:zp_abitazi>0</PNSRS:zp_abitazi>
+            <PNSRS:zp_opere_v>ASSENTE</PNSRS:zp_opere_v>
+            <PNSRS:zp_vegetaz>RIMBOSCHIMENTO DI PINI IN FONDO AL PERCORSO</PNSRS:zp_vegetaz>
+            <PNSRS:za_quota>1100</PNSRS:za_quota>
+            <PNSRS:za_larghez>90</PNSRS:za_larghez>
+            <PNSRS:za_lunghez>90</PNSRS:za_lunghez>
+            <PNSRS:za_h_media>4.00</PNSRS:za_h_media>
+            <PNSRS:za_volume>32400</PNSRS:za_volume>
+            <PNSRS:za_pendenz>20%</PNSRS:za_pendenz>
+            <PNSRS:za_opere_v>ASSENTE</PNSRS:za_opere_v>
+            <PNSRS:za_vegetaz>ALCUNI ALBERI DI PINO</PNSRS:za_vegetaz>
+            <PNSRS:travolti>0</PNSRS:travolti>
+            <PNSRS:danni_pers>0</PNSRS:danni_pers>
+            <PNSRS:danni_cose>VIE COMUNICAZIONI</PNSRS:danni_cose>
+            <PNSRS:s_ora_all>0</PNSRS:s_ora_all>
+            <PNSRS:s_iniz_ric>0</PNSRS:s_iniz_ric>
+            <PNSRS:s_fine>0</PNSRS:s_fine>
+            <PNSRS:elicottero>0</PNSRS:elicottero>
+            <PNSRS:codice>9999</PNSRS:codice>
+            <PNSRS:cod_area_1>066049_1998-99_002A</PNSRS:cod_area_1>
+            <PNSRS:zd_pendio_>82.0</PNSRS:zd_pendio_>
+            <PNSRS:zd_pendio1>Aree a pascolo naturale e praterie d'alta quota</PNSRS:zd_pendio1>
+            <PNSRS:zd_pendi_1>11.0</PNSRS:zd_pendi_1>
+            <PNSRS:zd_pendi_2>Rocce nude, falesie, rupi, affioramenti</PNSRS:zd_pendi_2>
+            <PNSRS:zd_pendi_3>6.0</PNSRS:zd_pendi_3>
+            <PNSRS:zd_pendi_4>Aree a ricolonizzazione naturale</PNSRS:zd_pendi_4>
+            <PNSRS:zd_veget_1>77.0</PNSRS:zd_veget_1>
+            <PNSRS:zd_veget_2>Arbusteto a prevalenza di ginepri nella fascia montana e sub</PNSRS:zd_veget_2>
+            <PNSRS:zd_veget_3>23.0</PNSRS:zd_veget_3>
+            <PNSRS:zd_veget_4>Rimboschimento di conifere nella fascia montana</PNSRS:zd_veget_4>
+            <PNSRS:zd_veget_5>0.0</PNSRS:zd_veget_5>
+            <PNSRS:da_0pc_a_8>0.0</PNSRS:da_0pc_a_8>
+            <PNSRS:da_8pc_a_1>0.0</PNSRS:da_8pc_a_1>
+            <PNSRS:da_10pc_a_>1.98477771</PNSRS:da_10pc_a_>
+            <PNSRS:da_15pc_a_>18.29690762</PNSRS:da_15pc_a_>
+            <PNSRS:maggiore_d>79.71831467</PNSRS:maggiore_d>
+            <PNSRS:v_danni_p>0</PNSRS:v_danni_p>
+            <PNSRS:v_danni_c>1</PNSRS:v_danni_c>
+            <PNSRS:shape_area>135687.367134</PNSRS:shape_area>
+            <PNSRS:shape_len>4908.14631657</PNSRS:shape_len>
+            <PNSRS:cod_area_2>066049_1998-99_002A</PNSRS:cod_area_2>
+            <PNSRS:cod_area_3>066049_1998-99_002A</PNSRS:cod_area_3>
+            <PNSRS:da_15_pc_a>0.0</PNSRS:da_15_pc_a>
+        </PNSRS:ABR_2_2_9_valanghe1957_2008>
+    </gml:featureMember>
+</wfs:FeatureCollection>

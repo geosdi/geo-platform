@@ -40,7 +40,6 @@ import org.geojson.FeatureCollection;
 import org.geosdi.geoplatform.stax.reader.builder.GPXmlStreamReaderBuilder;
 
 import javax.annotation.Nonnull;
-import javax.annotation.meta.When;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.events.XMLEvent;
 

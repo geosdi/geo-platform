@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfs:FeatureCollection xmlns="http://www.opengis.net/wfs" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:gml="http://www.opengis.net/gml" xmlns:PNSRS="http://servizi.protezionecivile.it/PNSRS/"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xsi:schemaLocation="http://servizi.protezionecivile.it/PNSRS/ https://servizi.protezionecivile.it/geoserver/PNSRS/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=PNSRS%3AABR_4_5_comuni_aff_COM http://www.opengis.net/wfs https://servizi.protezionecivile.it/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd">
+    <gml:boundedBy>
+        <gml:null>unknown</gml:null>
+    </gml:boundedBy>
+    <gml:featureMember>
+        <PNSRS:ABR_4_5_comuni_aff_COM fid="ABR_4_5_comuni_aff_COM.fid--3f6f8701_172c6569902_-2636">
+            <PNSRS:comune>Gissi</PNSRS:comune>
+            <PNSRS:COD_ISTAT>69041</PNSRS:COD_ISTAT>
+            <PNSRS:SIGLA_COM>CHCOM13</PNSRS:SIGLA_COM>
+            <PNSRS:geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:4326">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        14.56472588,42.08993597 14.56057482,42.07473063 14.57305409,42.06344683
+                                        14.58327184,42.06070259 14.59965147,42.07583125 14.6150768,42.06778345
+                                        14.61582099,42.06222864 14.60095339,42.05089471 14.5924034,42.05235272
+                                        14.59451363,42.0567371 14.59206689,42.05734734 14.58673557,42.05008654
+                                        14.58190628,42.05131249 14.57720628,42.04764828 14.57462536,42.04352506
+                                        14.58070918,42.02584535 14.57134445,42.02275938 14.57252356,42.01265106
+                                        14.56690968,42.00173915 14.53613655,41.9975742 14.52552219,42.00553205
+                                        14.52689472,42.02248446 14.52311416,42.02726263 14.53050512,42.0301982
+                                        14.52805878,42.03525413 14.53524622,42.04339798 14.53286052,42.0473123
+                                        14.53837236,42.05200584 14.53089938,42.05801622 14.53087854,42.06235629
+                                        14.5412182,42.06646059 14.54030886,42.07487217 14.55220688,42.0765909
+                                        14.55013429,42.08771464 14.56472588,42.08993597
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </PNSRS:geom>
+        </PNSRS:ABR_4_5_comuni_aff_COM>
+    </gml:featureMember>
+</wfs:FeatureCollection>

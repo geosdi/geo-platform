@@ -94,6 +94,7 @@ public class WMSGetFeatureInfoResponseBuilder implements GPWMSGetFeatureInfoResp
     @Override
     public WMSGetFeatureInfoResponse build() throws Exception {
         checkArgument(this.request != null, "The Parameter request must not be null.");
+        logger.debug("############################Called {}#build for Request : {}\n", this, this.request);
         WMSGetFeatureInfoResponse wmsGetFeatureInfoResponse = new WMSGetFeatureInfoResponse();
         WMSGetFeatureInfoResponseFormat format = request.getFormat();
         GPWMSGetFeatureInfoReponseErrorStrategy wmsErrorStrategy = ((format != null)
@@ -116,8 +117,7 @@ public class WMSGetFeatureInfoResponseBuilder implements GPWMSGetFeatureInfoResp
                         .withQueryLayers(wmsGetFeatureInfoElement.toLayers())
                         .withX(request.getPoint().getX())
                         .withY(request.getPoint().getY())
-                        .withInfoFormat((format != null) ? format.toWMSFeatureInfoFormat() : GML)
-                        .getResponse();
+                        .withInfoFormat((format != null) ? format.toWMSFeatureInfoFormat() : GML).getResponse();
                 logger.trace("########################FOUND : {}\n", response);
                 wmsGetFeatureInfoResponse.addFeature(response);
             } catch (Exception ex) {
@@ -133,5 +133,10 @@ public class WMSGetFeatureInfoResponseBuilder implements GPWMSGetFeatureInfoResp
      */
     protected GPWMSGetFeatureInfoResponseBuilder self() {
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName();
     }
 }

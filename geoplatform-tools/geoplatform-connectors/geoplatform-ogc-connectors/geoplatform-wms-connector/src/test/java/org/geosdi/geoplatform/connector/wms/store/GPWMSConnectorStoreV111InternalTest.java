@@ -51,6 +51,8 @@ import java.net.URL;
 import static java.util.stream.Collectors.toSet;
 import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
+import static org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat.GML;
+import static org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat.GML_AS_STRING;
 import static org.geosdi.geoplatform.connector.server.store.GPWMSConnectorBuilder.WMSConnectorBuilder.wmsConnectorBuilder;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
@@ -99,7 +101,7 @@ public class GPWMSConnectorStoreV111InternalTest {
         logger.info("##################################WMS_GET_FEATURE_INFO_V111_RESPONSE : {}\n", wmsGetFeatureInfoRequest.withQueryLayers("topp:states", "topp:states")
                 .withWMSGetMapRequest(wmsGetMapBaseRequest)
                 .withFeatureCount(2)
-                .withInfoFormat(WMSFeatureInfoFormat.GML_AS_STRING).withX(170).withY(160).getResponse());
+                .withInfoFormat(GML_AS_STRING).withX(170).withY(160).getResponse());
     }
 
     @Test
@@ -111,6 +113,6 @@ public class GPWMSConnectorStoreV111InternalTest {
         logger.info("##################################WMS_GET_FEATURE_INFO_V111_RESPONSE : {}\n", wmsGetFeatureInfoRequest.withQueryLayers("tiger:tiger_roads")
                 .withWMSGetMapRequest(wmsGetMapBaseRequest)
                 .withFeatureCount(12)
-                .withInfoFormat(WMSFeatureInfoFormat.GML).withX(50).withY(50).getResponse());
+                .withInfoFormat(GML).withX(50).withY(50).getResponse());
     }
 }

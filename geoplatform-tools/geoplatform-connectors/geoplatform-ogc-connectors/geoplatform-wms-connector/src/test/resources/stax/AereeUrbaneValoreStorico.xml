@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfs:FeatureCollection xmlns="http://www.opengis.net/wfs" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:gml="http://www.opengis.net/gml" xmlns:PNSRS="http://servizi.protezionecivile.it/PNSRS/"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xsi:schemaLocation="http://servizi.protezionecivile.it/PNSRS/ https://servizi.protezionecivile.it/geoserver/PNSRS/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=PNSRS%3AABR_1_4_1_aree_urb_val_storico http://www.opengis.net/wfs https://servizi.protezionecivile.it/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd">
+    <gml:boundedBy>
+        <gml:null>unknown</gml:null>
+    </gml:boundedBy>
+    <gml:featureMember>
+        <PNSRS:ABR_1_4_1_aree_urb_val_storico fid="ABR_1_4_1_aree_urb_val_storico.1141">
+            <PNSRS:geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:4326">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        13.63536403,42.20313368 13.6360665,42.20440286 13.63701131,42.2041214
+                                        13.63536403,42.20313368
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </PNSRS:geom>
+            <PNSRS:objectid>1141</PNSRS:objectid>
+            <PNSRS:provincia>066</PNSRS:provincia>
+            <PNSRS:comune>100</PNSRS:comune>
+            <PNSRS:cod_istat>13066100</PNSRS:cod_istat>
+            <PNSRS:nome>Tione degli Abruzzi</PNSRS:nome>
+            <PNSRS:shape_leng>0.00560382957276</PNSRS:shape_leng>
+            <PNSRS:shape_area>1.17263536808E-6</PNSRS:shape_area>
+        </PNSRS:ABR_1_4_1_aree_urb_val_storico>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:ABR_1_4_1_aree_urb_val_storico fid="ABR_1_4_1_aree_urb_val_storico.1142">
+            <PNSRS:geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:4326">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        13.634406,42.20374818 13.63377422,42.20425849 13.63409843,42.2048117
+                                        13.634406,42.20374818
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </PNSRS:geom>
+            <PNSRS:objectid>1142</PNSRS:objectid>
+            <PNSRS:provincia>066</PNSRS:provincia>
+            <PNSRS:comune>100</PNSRS:comune>
+            <PNSRS:cod_istat>13066100</PNSRS:cod_istat>
+            <PNSRS:nome>Tione degli Abruzzi</PNSRS:nome>
+            <PNSRS:shape_leng>0.00543723937913</PNSRS:shape_leng>
+            <PNSRS:shape_area>1.08321943074E-6</PNSRS:shape_area>
+        </PNSRS:ABR_1_4_1_aree_urb_val_storico>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:ABR_1_4_1_aree_urb_val_storico fid="ABR_1_4_1_aree_urb_val_storico.1143">
+            <PNSRS:geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:4326">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        13.63792001,42.20453296 13.63740822,42.2042522 13.63693761,42.20430965
+                                        13.63792001,42.20453296
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </PNSRS:geom>
+            <PNSRS:objectid>1143</PNSRS:objectid>
+            <PNSRS:provincia>066</PNSRS:provincia>
+            <PNSRS:comune>100</PNSRS:comune>
+            <PNSRS:cod_istat>13066100</PNSRS:cod_istat>
+            <PNSRS:nome>Tione degli Abruzzi</PNSRS:nome>
+            <PNSRS:shape_leng>0.00348969632486</PNSRS:shape_leng>
+            <PNSRS:shape_area>2.90532996086E-7</PNSRS:shape_area>
+        </PNSRS:ABR_1_4_1_aree_urb_val_storico>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:ABR_1_4_1_aree_urb_val_storico fid="ABR_1_4_1_aree_urb_val_storico.1144">
+            <PNSRS:geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:4326">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        13.64370324,42.20824438 13.64417262,42.20923607 13.64500717,42.20887219
+                                        13.64370324,42.20824438
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </PNSRS:geom>
+            <PNSRS:objectid>1144</PNSRS:objectid>
+            <PNSRS:provincia>066</PNSRS:provincia>
+            <PNSRS:comune>100</PNSRS:comune>
+            <PNSRS:cod_istat>13066100</PNSRS:cod_istat>
+            <PNSRS:nome>Tione degli Abruzzi</PNSRS:nome>
+            <PNSRS:shape_leng>0.00473790315758</PNSRS:shape_leng>
+            <PNSRS:shape_area>1.01403090895E-6</PNSRS:shape_area>
+        </PNSRS:ABR_1_4_1_aree_urb_val_storico>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:ABR_1_4_1_aree_urb_val_storico fid="ABR_1_4_1_aree_urb_val_storico.1161">
+            <PNSRS:geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:4326">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        13.6673871,42.20254676 13.66753733,42.20260254 13.66773345,42.20234815
+                                        13.6673871,42.20254676
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </PNSRS:geom>
+            <PNSRS:objectid>1161</PNSRS:objectid>
+            <PNSRS:provincia>066</PNSRS:provincia>
+            <PNSRS:comune>001</PNSRS:comune>
+            <PNSRS:cod_istat>13066001</PNSRS:cod_istat>
+            <PNSRS:nome>Acciano</PNSRS:nome>
+            <PNSRS:shape_leng>9.6724651288E-4</PNSRS:shape_leng>
+            <PNSRS:shape_area>5.03841503839E-8</PNSRS:shape_area>
+        </PNSRS:ABR_1_4_1_aree_urb_val_storico>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:ABR_1_4_1_aree_urb_val_storico fid="ABR_1_4_1_aree_urb_val_storico.1162">
+            <PNSRS:geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:4326">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        13.66758236,42.20262107 13.66862331,42.20207931 13.6688144,42.20134305
+                                        13.66758236,42.20262107
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </PNSRS:geom>
+            <PNSRS:objectid>1162</PNSRS:objectid>
+            <PNSRS:provincia>066</PNSRS:provincia>
+            <PNSRS:comune>001</PNSRS:comune>
+            <PNSRS:cod_istat>13066001</PNSRS:cod_istat>
+            <PNSRS:nome>Acciano</PNSRS:nome>
+            <PNSRS:shape_leng>0.00434936095461</PNSRS:shape_leng>
+            <PNSRS:shape_area>5.86108461823E-7</PNSRS:shape_area>
+        </PNSRS:ABR_1_4_1_aree_urb_val_storico>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:ABR_1_4_1_aree_urb_val_storico fid="ABR_1_4_1_aree_urb_val_storico.1163">
+            <PNSRS:geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:4326">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        13.66695588,42.20274888 13.66623998,42.20324037 13.66621367,42.20348322
+                                        13.66695588,42.20274888
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </PNSRS:geom>
+            <PNSRS:objectid>1163</PNSRS:objectid>
+            <PNSRS:provincia>066</PNSRS:provincia>
+            <PNSRS:comune>001</PNSRS:comune>
+            <PNSRS:cod_istat>13066001</PNSRS:cod_istat>
+            <PNSRS:nome>Acciano</PNSRS:nome>
+            <PNSRS:shape_leng>0.00399990373661</PNSRS:shape_leng>
+            <PNSRS:shape_area>4.33894178252E-7</PNSRS:shape_area>
+        </PNSRS:ABR_1_4_1_aree_urb_val_storico>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:ABR_1_4_1_aree_urb_val_storico fid="ABR_1_4_1_aree_urb_val_storico.1164">
+            <PNSRS:geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:4326">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        13.65646021,42.20603957 13.65619263,42.20566269 13.65550754,42.20669483
+                                        13.65646021,42.20603957
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </PNSRS:geom>
+            <PNSRS:objectid>1164</PNSRS:objectid>
+            <PNSRS:provincia>066</PNSRS:provincia>
+            <PNSRS:comune>001</PNSRS:comune>
+            <PNSRS:cod_istat>13066001</PNSRS:cod_istat>
+            <PNSRS:nome>Acciano</PNSRS:nome>
+            <PNSRS:shape_leng>0.00470438530245</PNSRS:shape_leng>
+            <PNSRS:shape_area>1.02975841939E-6</PNSRS:shape_area>
+        </PNSRS:ABR_1_4_1_aree_urb_val_storico>
+    </gml:featureMember>
+</wfs:FeatureCollection>

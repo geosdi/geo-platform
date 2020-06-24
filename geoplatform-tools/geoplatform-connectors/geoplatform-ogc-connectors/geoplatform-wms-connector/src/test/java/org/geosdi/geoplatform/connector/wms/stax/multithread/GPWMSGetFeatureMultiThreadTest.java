@@ -68,7 +68,9 @@ public abstract class GPWMSGetFeatureMultiThreadTest {
                 "corine-GetFeatureInfo.xml", "airports.xml", "geologia.xml", "livelloEdifici.xml", "volumetria.xml",
                 "livelloEdifici1.xml", "masw.xml", "PianoCampiFlegrei.xml",
                 "CF_zonepianificazione_mappeinterattive.xml", "aziende.xml", "centri_abitati.xml", "EneaClipFilled.xml",
-                "MixedFeatures.xml", "ParchiBasilicata.xml", "rsdi_alt_300_a_400.xml").map(v -> basePath.concat(v))
+                "MixedFeatures.xml", "ParchiBasilicata.xml", "rsdi_alt_300_a_400.xml", "ABR_Comuni.xml",
+                "AereeUrbaneValoreStorico.xml", "PNSRS_Valanghe.xml")
+                .map(v -> basePath.concat(v))
                 .collect(toCollection(LinkedList::new));
     }
 }

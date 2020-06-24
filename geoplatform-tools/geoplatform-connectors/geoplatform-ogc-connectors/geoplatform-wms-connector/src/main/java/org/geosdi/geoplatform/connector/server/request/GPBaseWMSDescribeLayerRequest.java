@@ -89,6 +89,7 @@ public abstract class GPBaseWMSDescribeLayerRequest<T> extends GPWMSBaseGetReque
         String layersKVP = stream(layers)
                 .filter(Objects::nonNull)
                 .filter(layer -> !(layer.trim().isEmpty()))
+                .map(layer -> layer.trim())
                 .collect(joining(","));
         checkArgument((layersKVP != null) && !(layersKVP.trim().isEmpty()), "The Parameter layersKVP must not be null");
         String baseURI = this.serverURI.toString();

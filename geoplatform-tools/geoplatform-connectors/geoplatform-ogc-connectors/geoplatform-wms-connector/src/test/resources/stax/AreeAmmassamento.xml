@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfs:FeatureCollection xmlns="http://www.opengis.net/wfs" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:gml="http://www.opengis.net/gml" xmlns:PNSRS="http://servizi.protezionecivile.it/PNSRS/"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xsi:schemaLocation="http://servizi.protezionecivile.it/PNSRS/ https://servizi.protezionecivile.it/geoserver/PNSRS/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=PNSRS%3ACAL_4_4_1_aree_ammassamento http://www.opengis.net/wfs https://servizi.protezionecivile.it/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd">
+    <gml:boundedBy>
+        <gml:null>unknown</gml:null>
+    </gml:boundedBy>
+    <gml:featureMember>
+        <PNSRS:CAL_4_4_1_aree_ammassamento fid="CAL_4_4_1_aree_ammassamento.10">
+            <PNSRS:geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:4326">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        16.53123888,38.71849852 16.53262289,38.71800733 16.53227814,38.71604642
+                                        16.53123888,38.71849852
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </PNSRS:geom>
+            <PNSRS:nome>Centro Commerciale Le Vele</PNSRS:nome>
+            <PNSRS:comune>Montepaone</PNSRS:comune>
+            <PNSRS:prov>CZ</PNSRS:prov>
+            <PNSRS:regione>Calabria</PNSRS:regione>
+            <PNSRS:proprieta>Privata</PNSRS:proprieta>
+            <PNSRS:accessibil>SS106 - E90</PNSRS:accessibil>
+            <PNSRS:superf_mq>11</PNSRS:superf_mq>
+            <PNSRS:n_soccorr>330</PNSRS:n_soccorr>
+            <PNSRS:tipo_pavim>Asfalto</PNSRS:tipo_pavim>
+            <PNSRS:rete_idr>SI</PNSRS:rete_idr>
+            <PNSRS:rete_elett>SI</PNSRS:rete_elett>
+            <PNSRS:rete_fogna>SI</PNSRS:rete_fogna>
+            <PNSRS:rete_gas>SI</PNSRS:rete_gas>
+            <PNSRS:serv_igien>0</PNSRS:serv_igien>
+            <PNSRS:note>superfici coperte utilizzabili: SI</PNSRS:note>
+        </PNSRS:CAL_4_4_1_aree_ammassamento>
+    </gml:featureMember>
+</wfs:FeatureCollection>

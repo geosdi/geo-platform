@@ -20,5 +20,8 @@
 
     <logger name="org.geosdi.geoplatform.services.builder.GPWMSCapabilitesBuilder" level="debug"/>
     <logger name="org.geosdi.geoplatform.services.builder.GPRasterLayerDTOBuilder" level="debug"/>
+    <logger name="org.geosdi.geoplatform.connector.reader.stax.GPWMSGetFeatureInfoStaxReader" level="trace"/>
+    <logger name="org.geosdi.geoplatform.connector.server.v111.WMSGetFeatureInfoV111Request" level="trace"/>
+    <logger name="org.geosdi.geoplatform.services.builder.WMSGetFeatureInfoResponseBuilder" level="debug"/>
 
 </configuration>

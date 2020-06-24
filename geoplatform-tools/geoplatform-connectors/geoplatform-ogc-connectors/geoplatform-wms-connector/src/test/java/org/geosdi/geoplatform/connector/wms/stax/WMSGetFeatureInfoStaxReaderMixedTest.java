@@ -35,7 +35,10 @@
  */
 package org.geosdi.geoplatform.connector.wms.stax;
 
+import org.geojson.FeatureCollection;
+import org.geosdi.geoplatform.connector.reader.stax.GPWMSFeatureStore;
 import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,11 +50,13 @@ import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.connector.wms.stax.GPWMSGetFeatureInfoStaxReaderTest.JACKSON_SUPPORT;
 import static org.geosdi.geoplatform.connector.wms.stax.WMSGetFeatureInfoStaxReaderTest.wmsGetFeatureInfoStaxReader;
+import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@FixMethodOrder(value = NAME_ASCENDING)
 public class WMSGetFeatureInfoStaxReaderMixedTest {
 
     private static final Logger logger = LoggerFactory.getLogger(WMSGetFeatureInfoStaxReaderMixedTest.class);
@@ -66,8 +71,16 @@ public class WMSGetFeatureInfoStaxReaderMixedTest {
     }
 
     @Test
-    public void wmsGetFeatureInfoStaxReaderTest() throws Exception {
-        logger.info("#######################FEATURE_COLLECTION_test : {}\n", JACKSON_SUPPORT.getDefaultMapper()
-                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(file)));
+    public void a_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        FeatureCollection featureCollection = wmsGetFeatureInfoStaxReader.read(file);
+        logger.info("#######################FEATURE_COLLECTION_test : {}\n", featureCollection);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File("./target/FeatureCollectionMIXED.json"), featureCollection);
+    }
+
+    @Test
+    public void b_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxReader.readAsStore(file);
+        logger.info("#######################FEATURE_STORE_MIXED_FEATURES : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File("./target/StoreMIXED_FEATURES.json"), wmsFeatureStore);
     }
 }

@@ -32,30 +32,55 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.services.builder;
+package org.geosdi.geoplatform.wms;
 
+import org.geosdi.geoplatform.services.request.GPWMSGetFeatureInfoElement;
 import org.geosdi.geoplatform.services.request.GPWMSGetFeatureInfoRequest;
-import org.geosdi.geoplatform.services.response.WMSGetFeatureInfoResponse;
+import org.geosdi.geoplatform.services.request.WMSGetFeatureInfoBoundingBox;
+import org.geosdi.geoplatform.services.request.WMSGetFeatureInfoPoint;
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import javax.annotation.Nonnull;
-
-import static javax.annotation.meta.When.NEVER;
+import static java.util.Arrays.asList;
+import static org.geosdi.geoplatform.services.builder.WMSGetFeatureInfoResponseBuilder.wmsGetFeatureInfoResponseBuilder;
+import static org.geosdi.geoplatform.services.request.WMSGetFeatureInfoResponseFormat.FEATURE_STORE;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPWMSGetFeatureInfoResponseBuilder {
+public class WMSGetFeatureInfoResponseBuilderTest {
 
-    /**
-     * @param theRequest
-     * @return {@link GPWMSGetFeatureInfoResponseBuilder}
-     */
-    GPWMSGetFeatureInfoResponseBuilder withRequest(@Nonnull(when = NEVER) GPWMSGetFeatureInfoRequest theRequest);
+    private static final Logger logger = LoggerFactory.getLogger(WMSGetFeatureInfoResponseBuilderTest.class);
 
-    /**
-     * @return {@link WMSGetFeatureInfoResponse}
-     * @throws Exception
-     */
-    WMSGetFeatureInfoResponse build() throws Exception;
+    @Test
+    public void loadWMSGetFeatureInfoResponseBuilderTest() throws Exception {
+        GPWMSGetFeatureInfoRequest request = new GPWMSGetFeatureInfoRequest();
+        request.setCrs("EPSG:4326");
+        request.setWidth("101");
+        request.setHeight("101");
+        request.setBoundingBox(new WMSGetFeatureInfoBoundingBox() {
+            {
+                super.setMinx(14.403741359710693);
+                super.setMiny(41.891523599624634);
+                super.setMaxx(14.681146144866943);
+                super.setMaxy(42.168928384780884);
+            }
+        });
+        request.setPoint(new WMSGetFeatureInfoPoint() {
+            {
+                super.setX(50);
+                super.setY(50);
+            }
+        });
+        request.setFormat(FEATURE_STORE);
+        GPWMSGetFeatureInfoElement featureInfoElement = new GPWMSGetFeatureInfoElement();
+        featureInfoElement.setLayers(asList("PNSRS:ABR_4_5_comuni_aff_COM"));
+        featureInfoElement.setWmsServerURL("https://servizi.protezionecivile.it/geoserver/PNSRS/wms");
+        request.setWmsFeatureInfoElements(asList(featureInfoElement));
+        logger.info("#####################{}\n", wmsGetFeatureInfoResponseBuilder()
+                .withRequest(request)
+                .build());
+    }
 }

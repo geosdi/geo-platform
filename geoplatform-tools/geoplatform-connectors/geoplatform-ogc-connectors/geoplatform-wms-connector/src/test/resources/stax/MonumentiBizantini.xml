@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfs:FeatureCollection xmlns="http://www.opengis.net/wfs" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:gml="http://www.opengis.net/gml" xmlns:PNSRS="http://servizi.protezionecivile.it/PNSRS/"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xsi:schemaLocation="http://servizi.protezionecivile.it/PNSRS/ https://servizi.protezionecivile.it/geoserver/PNSRS/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=PNSRS%3ACAL_1_4_1_monumenti_bizantini http://www.opengis.net/wfs https://servizi.protezionecivile.it/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd">
+    <gml:boundedBy>
+        <gml:null>unknown</gml:null>
+    </gml:boundedBy>
+    <gml:featureMember>
+        <PNSRS:CAL_1_4_1_monumenti_bizantini fid="CAL_1_4_1_monumenti_bizantini.22">
+            <PNSRS:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.70927777,38.02777777
+                    </gml:coordinates>
+                </gml:Point>
+            </PNSRS:geom>
+            <PNSRS:data_creaz>2004-01-22</PNSRS:data_creaz>
+            <PNSRS:denom_corr>BAGALADI - Chiesa anonima accanto alla SS. Annunziata di S. Niceto</PNSRS:denom_corr>
+            <PNSRS:ente>A544</PNSRS:ente>
+            <PNSRS:id_reg_ben>462</PNSRS:id_reg_ben>
+            <PNSRS:rifer_legg>LR 12/04/1990 N. 42</PNSRS:rifer_legg>
+            <PNSRS:tipo_bene>Monumenti Bizantini</PNSRS:tipo_bene>
+            <PNSRS:se_sdo_row>462</PNSRS:se_sdo_row>
+        </PNSRS:CAL_1_4_1_monumenti_bizantini>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:CAL_1_4_1_monumenti_bizantini fid="CAL_1_4_1_monumenti_bizantini.23">
+            <PNSRS:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.70927777,38.02777777
+                    </gml:coordinates>
+                </gml:Point>
+            </PNSRS:geom>
+            <PNSRS:data_creaz>2004-01-22</PNSRS:data_creaz>
+            <PNSRS:denom_corr>BAGALADI - S. Maria Annunziata di S. Niceto</PNSRS:denom_corr>
+            <PNSRS:ente>A544</PNSRS:ente>
+            <PNSRS:id_reg_ben>461</PNSRS:id_reg_ben>
+            <PNSRS:rifer_legg>LR 12/04/1990 N. 42</PNSRS:rifer_legg>
+            <PNSRS:tipo_bene>Monumenti Bizantini</PNSRS:tipo_bene>
+            <PNSRS:se_sdo_row>461</PNSRS:se_sdo_row>
+        </PNSRS:CAL_1_4_1_monumenti_bizantini>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:CAL_1_4_1_monumenti_bizantini fid="CAL_1_4_1_monumenti_bizantini.25">
+            <PNSRS:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.71483333,38.00555555
+                    </gml:coordinates>
+                </gml:Point>
+            </PNSRS:geom>
+            <PNSRS:data_creaz>2004-01-22</PNSRS:data_creaz>
+            <PNSRS:denom_corr>BAGALADI - S. Nicola in contrada Zurgonà di Motta S. Giovanni</PNSRS:denom_corr>
+            <PNSRS:ente>A544</PNSRS:ente>
+            <PNSRS:id_reg_ben>464</PNSRS:id_reg_ben>
+            <PNSRS:rifer_legg>LR 12/04/1990 N. 42</PNSRS:rifer_legg>
+            <PNSRS:tipo_bene>Monumenti Bizantini</PNSRS:tipo_bene>
+            <PNSRS:se_sdo_row>464</PNSRS:se_sdo_row>
+        </PNSRS:CAL_1_4_1_monumenti_bizantini>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:CAL_1_4_1_monumenti_bizantini fid="CAL_1_4_1_monumenti_bizantini.26">
+            <PNSRS:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.70677778,38.02555555
+                    </gml:coordinates>
+                </gml:Point>
+            </PNSRS:geom>
+            <PNSRS:data_creaz>2004-01-22</PNSRS:data_creaz>
+            <PNSRS:denom_corr>BAGALADI - S. Antonio di S. Niceto</PNSRS:denom_corr>
+            <PNSRS:ente>A544</PNSRS:ente>
+            <PNSRS:id_reg_ben>463</PNSRS:id_reg_ben>
+            <PNSRS:rifer_legg>LR 12/04/1990 N. 42</PNSRS:rifer_legg>
+            <PNSRS:tipo_bene>Monumenti Bizantini</PNSRS:tipo_bene>
+            <PNSRS:se_sdo_row>463</PNSRS:se_sdo_row>
+        </PNSRS:CAL_1_4_1_monumenti_bizantini>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:CAL_1_4_1_monumenti_bizantini fid="CAL_1_4_1_monumenti_bizantini.27">
+            <PNSRS:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.71372222,38.00444445
+                    </gml:coordinates>
+                </gml:Point>
+            </PNSRS:geom>
+            <PNSRS:data_creaz>2004-01-22</PNSRS:data_creaz>
+            <PNSRS:denom_corr>BAGALADI - S. Angelo in contrada Tendi di Motta S. Giovanni</PNSRS:denom_corr>
+            <PNSRS:ente>A544</PNSRS:ente>
+            <PNSRS:id_reg_ben>468</PNSRS:id_reg_ben>
+            <PNSRS:rifer_legg>LR 12/04/1990 N. 42</PNSRS:rifer_legg>
+            <PNSRS:tipo_bene>Monumenti Bizantini</PNSRS:tipo_bene>
+            <PNSRS:se_sdo_row>468</PNSRS:se_sdo_row>
+        </PNSRS:CAL_1_4_1_monumenti_bizantini>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:CAL_1_4_1_monumenti_bizantini fid="CAL_1_4_1_monumenti_bizantini.28">
+            <PNSRS:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.72177778,38.00277778
+                    </gml:coordinates>
+                </gml:Point>
+            </PNSRS:geom>
+            <PNSRS:data_creaz>2004-01-22</PNSRS:data_creaz>
+            <PNSRS:denom_corr>BAGALADI - S. Maria delle Grazie in contrada Sarti di Motta S. Giovanni</PNSRS:denom_corr>
+            <PNSRS:ente>A544</PNSRS:ente>
+            <PNSRS:id_reg_ben>466</PNSRS:id_reg_ben>
+            <PNSRS:rifer_legg>LR 12/04/1990 N. 42</PNSRS:rifer_legg>
+            <PNSRS:tipo_bene>Monumenti Bizantini</PNSRS:tipo_bene>
+            <PNSRS:se_sdo_row>466</PNSRS:se_sdo_row>
+        </PNSRS:CAL_1_4_1_monumenti_bizantini>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:CAL_1_4_1_monumenti_bizantini fid="CAL_1_4_1_monumenti_bizantini.29">
+            <PNSRS:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.71511111,38.005
+                    </gml:coordinates>
+                </gml:Point>
+            </PNSRS:geom>
+            <PNSRS:data_creaz>2004-01-22</PNSRS:data_creaz>
+            <PNSRS:denom_corr>BAGALADI - Palmento fra Zurgonà e Sarti di Motta S. Giovanni</PNSRS:denom_corr>
+            <PNSRS:ente>A544</PNSRS:ente>
+            <PNSRS:id_reg_ben>465</PNSRS:id_reg_ben>
+            <PNSRS:rifer_legg>LR 12/04/1990 N. 42</PNSRS:rifer_legg>
+            <PNSRS:tipo_bene>Monumenti Bizantini</PNSRS:tipo_bene>
+            <PNSRS:se_sdo_row>465</PNSRS:se_sdo_row>
+        </PNSRS:CAL_1_4_1_monumenti_bizantini>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:CAL_1_4_1_monumenti_bizantini fid="CAL_1_4_1_monumenti_bizantini.30">
+            <PNSRS:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.72455556,38.00527778
+                    </gml:coordinates>
+                </gml:Point>
+            </PNSRS:geom>
+            <PNSRS:data_creaz>2004-01-22</PNSRS:data_creaz>
+            <PNSRS:denom_corr>BAGALADI - S. Pietro in contrada Sarti di Motta S. Giovanni</PNSRS:denom_corr>
+            <PNSRS:ente>A544</PNSRS:ente>
+            <PNSRS:id_reg_ben>467</PNSRS:id_reg_ben>
+            <PNSRS:rifer_legg>LR 12/04/1990 N. 42</PNSRS:rifer_legg>
+            <PNSRS:tipo_bene>Monumenti Bizantini</PNSRS:tipo_bene>
+            <PNSRS:se_sdo_row>467</PNSRS:se_sdo_row>
+        </PNSRS:CAL_1_4_1_monumenti_bizantini>
+    </gml:featureMember>
+</wfs:FeatureCollection>

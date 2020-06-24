@@ -87,4 +87,12 @@ public class GPWMSConnectorStoreSnipcPoolV111Test {
         logger.info("##########################WMS_DESCRIBE_LAYER_RESPONSE_V111 : {}\n", wmsDescribeLayerRequest
                 .withLayers("istat:ISTAT_2011_ace_propers").getResponse());
     }
+
+    @Ignore
+    @Test
+    public void c_wmsDescribeLayerV11Test() throws Exception {
+        GPWMSDescribeLayerV111Request wmsDescribeLayerRequest = wmsServerConnector.createDescribeLayerRequest();
+        logger.info("##########################WMS_DESCRIBE_LAYER_RESPONSE_V111 : {}\n", wmsDescribeLayerRequest
+                .withLayers("\tPNSRS:IT_sedi_ASL_2020").getResponse());
+    }
 }

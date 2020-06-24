@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfs:FeatureCollection xmlns="http://www.opengis.net/wfs" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:TRASPORTI="http://TRASPORTI" xmlns:gml="http://www.opengis.net/gml"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xsi:schemaLocation="http://www.opengis.net/wfs https://servizi.protezionecivile.it/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd http://TRASPORTI https://servizi.protezionecivile.it/geoserver/TRASPORTI/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=TRASPORTI%3AIT_staz_ferrov_RFI2000">
+    <gml:boundedBy>
+        <gml:null>unknown</gml:null>
+    </gml:boundedBy>
+    <gml:featureMember>
+        <TRASPORTI:IT_staz_ferrov_RFI2000 fid="IT_staz_ferrov_RFI2000.367">
+            <TRASPORTI:layer>Unknown Point Feature</TRASPORTI:layer>
+            <TRASPORTI:or_id>LO2927</TRASPORTI:or_id>
+            <TRASPORTI:lo_descriz>TRINITA` BENE VAGIENNA</TRASPORTI:lo_descriz>
+            <TRASPORTI:lo_dismess>0.000000</TRASPORTI:lo_dismess>
+            <TRASPORTI:lo_datacre>14/09/2001</TRASPORTI:lo_datacre>
+            <TRASPORTI:lo_fonte>CARTOGRAFIA FS 1990-BINARIO SINISTRO</TRASPORTI:lo_fonte>
+            <TRASPORTI:lo_autore>RFI</TRASPORTI:lo_autore>
+            <TRASPORTI:lo_stato>VALIDATO</TRASPORTI:lo_stato>
+            <TRASPORTI:provincid>39004</TRASPORTI:provincid>
+            <TRASPORTI:comuneid>39004232</TRASPORTI:comuneid>
+            <TRASPORTI:lo_statosa>ESER</TRASPORTI:lo_statosa>
+            <TRASPORTI:gmrotation>-0.000010000</TRASPORTI:gmrotation>
+            <TRASPORTI:lo_indexfi>1291</TRASPORTI:lo_indexfi>
+            <TRASPORTI:lo_regione>1</TRASPORTI:lo_regione>
+            <TRASPORTI:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                7.75265682,44.5046648
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </TRASPORTI:geom>
+        </TRASPORTI:IT_staz_ferrov_RFI2000>
+    </gml:featureMember>
+    <gml:featureMember>
+        <TRASPORTI:IT_staz_ferrov_RFI2000 fid="IT_staz_ferrov_RFI2000.543">
+            <TRASPORTI:layer>Unknown Point Feature</TRASPORTI:layer>
+            <TRASPORTI:or_id>LO2664</TRASPORTI:or_id>
+            <TRASPORTI:lo_descriz>SAVIGLIANO</TRASPORTI:lo_descriz>
+            <TRASPORTI:lo_dismess>0.000000</TRASPORTI:lo_dismess>
+            <TRASPORTI:lo_datacre>14/09/2001</TRASPORTI:lo_datacre>
+            <TRASPORTI:lo_fonte>CARTOGRAFIA FS 1990-BINARIO SINISTRO</TRASPORTI:lo_fonte>
+            <TRASPORTI:lo_autore>RFI</TRASPORTI:lo_autore>
+            <TRASPORTI:lo_stato>VALIDATO</TRASPORTI:lo_stato>
+            <TRASPORTI:provincid>39004</TRASPORTI:provincid>
+            <TRASPORTI:comuneid>39004215</TRASPORTI:comuneid>
+            <TRASPORTI:lo_statosa>ESER</TRASPORTI:lo_statosa>
+            <TRASPORTI:gmrotation>-0.000010000</TRASPORTI:gmrotation>
+            <TRASPORTI:lo_indexfi>102</TRASPORTI:lo_indexfi>
+            <TRASPORTI:lo_regione>1</TRASPORTI:lo_regione>
+            <TRASPORTI:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                7.66375977,44.65133977
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </TRASPORTI:geom>
+        </TRASPORTI:IT_staz_ferrov_RFI2000>
+    </gml:featureMember>
+    <gml:featureMember>
+        <TRASPORTI:IT_staz_ferrov_RFI2000 fid="IT_staz_ferrov_RFI2000.1225">
+            <TRASPORTI:layer>Unknown Point Feature</TRASPORTI:layer>
+            <TRASPORTI:or_id>LO1614</TRASPORTI:or_id>
+            <TRASPORTI:lo_descriz>MADONNA DEL PILONE</TRASPORTI:lo_descriz>
+            <TRASPORTI:lo_dismess>0.000000</TRASPORTI:lo_dismess>
+            <TRASPORTI:lo_datacre>14/09/2001</TRASPORTI:lo_datacre>
+            <TRASPORTI:lo_fonte>CARTOGRAFIA FS 1990-BINARIO SINISTRO</TRASPORTI:lo_fonte>
+            <TRASPORTI:lo_autore>RFI</TRASPORTI:lo_autore>
+            <TRASPORTI:lo_stato>VALIDATO</TRASPORTI:lo_stato>
+            <TRASPORTI:provincid>39004</TRASPORTI:provincid>
+            <TRASPORTI:comuneid>39004059</TRASPORTI:comuneid>
+            <TRASPORTI:lo_statosa>ESER</TRASPORTI:lo_statosa>
+            <TRASPORTI:gmrotation>-0.000010000</TRASPORTI:gmrotation>
+            <TRASPORTI:lo_indexfi>2781</TRASPORTI:lo_indexfi>
+            <TRASPORTI:lo_regione>1</TRASPORTI:lo_regione>
+            <TRASPORTI:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                7.74828248,44.69521716
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </TRASPORTI:geom>
+        </TRASPORTI:IT_staz_ferrov_RFI2000>
+    </gml:featureMember>
+    <gml:featureMember>
+        <TRASPORTI:IT_staz_ferrov_RFI2000 fid="IT_staz_ferrov_RFI2000.1235">
+            <TRASPORTI:layer>Unknown Point Feature</TRASPORTI:layer>
+            <TRASPORTI:or_id>LO1524</TRASPORTI:or_id>
+            <TRASPORTI:lo_descriz>LAGNASCO</TRASPORTI:lo_descriz>
+            <TRASPORTI:lo_dismess>0.000000</TRASPORTI:lo_dismess>
+            <TRASPORTI:lo_datacre>14/09/2001</TRASPORTI:lo_datacre>
+            <TRASPORTI:lo_fonte>TELEATLAS</TRASPORTI:lo_fonte>
+            <TRASPORTI:lo_autore>RFI</TRASPORTI:lo_autore>
+            <TRASPORTI:lo_stato>VALIDATO</TRASPORTI:lo_stato>
+            <TRASPORTI:provincid>39004</TRASPORTI:provincid>
+            <TRASPORTI:comuneid>39004104</TRASPORTI:comuneid>
+            <TRASPORTI:lo_statosa>ESER</TRASPORTI:lo_statosa>
+            <TRASPORTI:gmrotation>-0.000010000</TRASPORTI:gmrotation>
+            <TRASPORTI:lo_indexfi>2796</TRASPORTI:lo_indexfi>
+            <TRASPORTI:lo_regione>1</TRASPORTI:lo_regione>
+            <TRASPORTI:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                7.58384153,44.64134764
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </TRASPORTI:geom>
+        </TRASPORTI:IT_staz_ferrov_RFI2000>
+    </gml:featureMember>
+    <gml:featureMember>
+        <TRASPORTI:IT_staz_ferrov_RFI2000 fid="IT_staz_ferrov_RFI2000.1306">
+            <TRASPORTI:layer>Unknown Point Feature</TRASPORTI:layer>
+            <TRASPORTI:or_id>LO1422</TRASPORTI:or_id>
+            <TRASPORTI:lo_descriz>GENOLA</TRASPORTI:lo_descriz>
+            <TRASPORTI:lo_dismess>0.000000</TRASPORTI:lo_dismess>
+            <TRASPORTI:lo_datacre>14/09/2001</TRASPORTI:lo_datacre>
+            <TRASPORTI:lo_fonte>CARTOGRAFIA FS 1990-BINARIO SINISTRO</TRASPORTI:lo_fonte>
+            <TRASPORTI:lo_autore>RFI</TRASPORTI:lo_autore>
+            <TRASPORTI:lo_stato>VALIDATO</TRASPORTI:lo_stato>
+            <TRASPORTI:provincid>39004</TRASPORTI:provincid>
+            <TRASPORTI:comuneid>39004096</TRASPORTI:comuneid>
+            <TRASPORTI:lo_statosa>ESER</TRASPORTI:lo_statosa>
+            <TRASPORTI:gmrotation>-0.000010000</TRASPORTI:gmrotation>
+            <TRASPORTI:lo_indexfi>104</TRASPORTI:lo_indexfi>
+            <TRASPORTI:lo_regione>1</TRASPORTI:lo_regione>
+            <TRASPORTI:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                7.69272388,44.59603288
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </TRASPORTI:geom>
+        </TRASPORTI:IT_staz_ferrov_RFI2000>
+    </gml:featureMember>
+    <gml:featureMember>
+        <TRASPORTI:IT_staz_ferrov_RFI2000 fid="IT_staz_ferrov_RFI2000.1557">
+            <TRASPORTI:layer>Unknown Point Feature</TRASPORTI:layer>
+            <TRASPORTI:or_id>LO1057</TRASPORTI:or_id>
+            <TRASPORTI:lo_descriz>CENTALLO</TRASPORTI:lo_descriz>
+            <TRASPORTI:lo_dismess>0.000000</TRASPORTI:lo_dismess>
+            <TRASPORTI:lo_datacre>14/09/2001</TRASPORTI:lo_datacre>
+            <TRASPORTI:lo_fonte>CARTOGRAFIA FS 1990-BINARIO SINISTRO</TRASPORTI:lo_fonte>
+            <TRASPORTI:lo_autore>RFI</TRASPORTI:lo_autore>
+            <TRASPORTI:lo_stato>VALIDATO</TRASPORTI:lo_stato>
+            <TRASPORTI:provincid>39004</TRASPORTI:provincid>
+            <TRASPORTI:comuneid>39004061</TRASPORTI:comuneid>
+            <TRASPORTI:lo_statosa>ESER</TRASPORTI:lo_statosa>
+            <TRASPORTI:gmrotation>-0.000010000</TRASPORTI:gmrotation>
+            <TRASPORTI:lo_indexfi>110</TRASPORTI:lo_indexfi>
+            <TRASPORTI:lo_regione>1</TRASPORTI:lo_regione>
+            <TRASPORTI:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                7.59103696,44.49622352
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </TRASPORTI:geom>
+        </TRASPORTI:IT_staz_ferrov_RFI2000>
+    </gml:featureMember>
+    <gml:featureMember>
+        <TRASPORTI:IT_staz_ferrov_RFI2000 fid="IT_staz_ferrov_RFI2000.2784">
+            <TRASPORTI:layer>Unknown Point Feature</TRASPORTI:layer>
+            <TRASPORTI:or_id>LO1362</TRASPORTI:or_id>
+            <TRASPORTI:lo_descriz>FOSSANO</TRASPORTI:lo_descriz>
+            <TRASPORTI:lo_dismess>0.000000</TRASPORTI:lo_dismess>
+            <TRASPORTI:lo_datacre>14/09/2001</TRASPORTI:lo_datacre>
+            <TRASPORTI:lo_fonte>CARTOGRAFIA FS 1990-BINARIO SINISTRO</TRASPORTI:lo_fonte>
+            <TRASPORTI:lo_autore>RFI</TRASPORTI:lo_autore>
+            <TRASPORTI:lo_stato>VALIDATO</TRASPORTI:lo_stato>
+            <TRASPORTI:provincid>39004</TRASPORTI:provincid>
+            <TRASPORTI:comuneid>39004089</TRASPORTI:comuneid>
+            <TRASPORTI:lo_statosa>ESER</TRASPORTI:lo_statosa>
+            <TRASPORTI:gmrotation>-0.000010000</TRASPORTI:gmrotation>
+            <TRASPORTI:lo_indexfi>109</TRASPORTI:lo_indexfi>
+            <TRASPORTI:lo_regione>1</TRASPORTI:lo_regione>
+            <TRASPORTI:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                7.71797393,44.55023817
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </TRASPORTI:geom>
+        </TRASPORTI:IT_staz_ferrov_RFI2000>
+    </gml:featureMember>
+    <gml:featureMember>
+        <TRASPORTI:IT_staz_ferrov_RFI2000 fid="IT_staz_ferrov_RFI2000.2863">
+            <TRASPORTI:layer>Unknown Point Feature</TRASPORTI:layer>
+            <TRASPORTI:or_id>LO1607</TRASPORTI:or_id>
+            <TRASPORTI:lo_descriz>MADDALENE</TRASPORTI:lo_descriz>
+            <TRASPORTI:lo_dismess>0.000000</TRASPORTI:lo_dismess>
+            <TRASPORTI:lo_datacre>14/09/2001</TRASPORTI:lo_datacre>
+            <TRASPORTI:lo_fonte>CARTOGRAFIA FS 1990-BINARIO SINISTRO</TRASPORTI:lo_fonte>
+            <TRASPORTI:lo_autore>RFI</TRASPORTI:lo_autore>
+            <TRASPORTI:lo_stato>VALIDATO</TRASPORTI:lo_stato>
+            <TRASPORTI:provincid>39004</TRASPORTI:provincid>
+            <TRASPORTI:comuneid>39004089</TRASPORTI:comuneid>
+            <TRASPORTI:lo_statosa>ESER</TRASPORTI:lo_statosa>
+            <TRASPORTI:gmrotation>-0.000010000</TRASPORTI:gmrotation>
+            <TRASPORTI:lo_indexfi>105</TRASPORTI:lo_indexfi>
+            <TRASPORTI:lo_regione>1</TRASPORTI:lo_regione>
+            <TRASPORTI:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                7.64802537,44.51873869
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </TRASPORTI:geom>
+        </TRASPORTI:IT_staz_ferrov_RFI2000>
+    </gml:featureMember>
+</wfs:FeatureCollection>

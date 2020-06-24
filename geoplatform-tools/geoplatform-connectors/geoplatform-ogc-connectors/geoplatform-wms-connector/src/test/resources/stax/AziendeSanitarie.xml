@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfs:FeatureCollection xmlns="http://www.opengis.net/wfs" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:gml="http://www.opengis.net/gml" xmlns:PNSRS="http://servizi.protezionecivile.it/PNSRS/"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xsi:schemaLocation="http://servizi.protezionecivile.it/PNSRS/ https://servizi.protezionecivile.it/geoserver/PNSRS/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=PNSRS%3AIT_sedi_ASL_2020 http://www.opengis.net/wfs https://servizi.protezionecivile.it/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd">
+    <gml:boundedBy>
+        <gml:null>unknown</gml:null>
+    </gml:boundedBy>
+    <gml:featureMember>
+        <PNSRS:IT_sedi_ASL_2020 fid="IT_sedi_ASL_2020.83">
+            <PNSRS:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.8089059,40.6370906
+                    </gml:coordinates>
+                </gml:Point>
+            </PNSRS:geom>
+            <PNSRS:anno>2020</PNSRS:anno>
+            <PNSRS:codice reg>170</PNSRS:codice reg>
+            <PNSRS:denominazi>BASILICATA</PNSRS:denominazi>
+            <PNSRS:codice azi>201</PNSRS:codice azi>
+            <PNSRS:denomina_1>AZIENDA SANITARIA LOCALE DI POTENZA ASP</PNSRS:denomina_1>
+            <PNSRS:indirizzo>VIA TORRACA 2</PNSRS:indirizzo>
+            <PNSRS:cap>85100</PNSRS:cap>
+            <PNSRS:comune>POTENZA</PNSRS:comune>
+            <PNSRS:stato>ITALIA</PNSRS:stato>
+            <PNSRS:sigla prov>PZ</PNSRS:sigla prov>
+            <PNSRS:telefono>0971/310278</PNSRS:telefono>
+            <PNSRS:fax>0971/310265</PNSRS:fax>
+            <PNSRS:e-mail>info@asl2.potenza.it</PNSRS:e-mail>
+            <PNSRS:sito web>www.asl2.potenza.it</PNSRS:sito web>
+            <PNSRS:partita iv>1722360763</PNSRS:partita iv>
+            <PNSRS:lon>15.8089059</PNSRS:lon>
+            <PNSRS:lat>40.6370906</PNSRS:lat>
+        </PNSRS:IT_sedi_ASL_2020>
+    </gml:featureMember>
+</wfs:FeatureCollection>

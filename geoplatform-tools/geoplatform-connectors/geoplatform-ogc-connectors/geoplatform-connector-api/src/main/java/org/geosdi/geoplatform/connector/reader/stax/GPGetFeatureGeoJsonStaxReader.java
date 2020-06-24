@@ -126,7 +126,7 @@ public abstract class GPGetFeatureGeoJsonStaxReader extends AbstractStaxStreamRe
             if (index != -1) {
                 String typeName = schemaLocation.substring(index + TYPE_NAME_KEY.length());
                 index = typeName.indexOf(" ");
-                this.typeNames.set((index != -1) ? featureTypeReader.read(typeName.substring(0, index)) : featureTypeReader.read(typeName));
+                this.typeNames.set((index != -1) ? featureTypeReader.read(typeName.substring(0, index).replaceAll(TYPE_NAME_KEY, "")) : featureTypeReader.read(typeName.replaceAll(TYPE_NAME_KEY, "")));
                 logger.trace("########################TYPES_NAME : {}", this.typeNames.get());
             } else {
                 logger.debug("#####################TYPE_NAME NOT FOUND.\n");
@@ -199,23 +199,26 @@ public abstract class GPGetFeatureGeoJsonStaxReader extends AbstractStaxStreamRe
                 if ((featureType != null) && (super.isTagPrefix(featureType.getPrefix()))) {
                     eventType = xmlStreamReader().next();
                     if (eventType == XMLEvent.CHARACTERS) {
-                        this.previousGeometry.set(localName);
                         String attributeValue = xmlStreamReader().getText();
                         featureProperties.put(localName, attributeValue);
+                        if ((attributeValue != null) && (attributeValue.trim().isEmpty()))
+                            this.previousGeometry.set(localName);
                         logger.trace("##########################ATTRIBUTE_NAME : {} - ATTRIBUTE_VALUE : {}\n", localName, attributeValue);
                     } else if (eventType == XMLEvent.END_ELEMENT) {
                         featureProperties.put(localName, null);
                     } else if (super.isTagPrefix(GML_PREFIX)) {
-                        if (super.isTagName(GML_PREFIX, BOUNDING_BY_PREFIX))
+                        if (super.isTagName(GML_PREFIX, BOUNDING_BY_PREFIX)) {
                             super.goToEndTag(BOUNDING_BY_PREFIX);
-                        else
+                        } else {
                             this.readGeometry(feature, featureProperties);
+                        }
                     }
                 } else if (super.isTagPrefix(GML_PREFIX)) {
-                    if (super.isTagName(GML_PREFIX, BOUNDING_BY_PREFIX))
+                    if (super.isTagName(GML_PREFIX, BOUNDING_BY_PREFIX)) {
                         super.goToEndTag(BOUNDING_BY_PREFIX);
-                    else
+                    } else {
                         this.readGeometry(feature, featureProperties);
+                    }
                 }
             }
             eventType = xmlStreamReader().next();
@@ -229,7 +232,7 @@ public abstract class GPGetFeatureGeoJsonStaxReader extends AbstractStaxStreamRe
      */
     final void readGeometry(Feature feature, Map<String, Object> featureProperties) throws Exception {
         String localName = xmlStreamReader().getLocalName();
-        logger.trace("@@@@@@@@@@@@@@@@@@@@FOUND GEOMETRY : {} \n", localName);
+        logger.trace("@@@@@@@@@@@@@@@@@@@@FOUND GEOMETRY : {} - Properties : {}\n", localName, featureProperties);
         feature.setGeometry(this.internalReadGeometry(xmlStreamReader()));
         if (featureProperties.containsKey(this.previousGeometry.get())) {
             featureProperties.remove(this.previousGeometry.get());

@@ -69,7 +69,7 @@ public class GPWMSFeatureStoreMultiThreadStaxReaderTest extends GPWMSGetFeatureM
                 .forEach(Thread::start);
         startSignal.countDown();
         doneSignal.await();
-        assertTrue(counter.get() == 33);
+        assertTrue(counter.get() == 36);
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@{} process {} files", this.getClass().getSimpleName(), counter.get());
     }
 
@@ -87,11 +87,9 @@ public class GPWMSFeatureStoreMultiThreadStaxReaderTest extends GPWMSGetFeatureM
          * @param theStartSignal
          * @param theDoneSignal
          */
-        WMSFeatureStoreStaxReaderTask(@Nonnull(when = NEVER) String theFileName,
-                @Nonnull(when = NEVER) CountDownLatch theStartSignal,
+        WMSFeatureStoreStaxReaderTask(@Nonnull(when = NEVER) String theFileName, @Nonnull(when = NEVER) CountDownLatch theStartSignal,
                 @Nonnull(when = NEVER) CountDownLatch theDoneSignal, @Nonnull(when = NEVER) AtomicInteger theCounter) {
-            checkArgument((theFileName != null) && !(theFileName.trim().isEmpty()),
-                    "The Parameter fileName must not be null or an empty string.");
+            checkArgument((theFileName != null) && !(theFileName.trim().isEmpty()), "The Parameter fileName must not be null or an empty string.");
             checkArgument(theStartSignal != null, "The Parameter startSignal must not be null.");
             checkArgument(theDoneSignal != null, "The Parameter doneSignal must not be null.");
             checkArgument(theCounter != null, "The Parameter counter must not be null.");

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfs:FeatureCollection xmlns="http://www.opengis.net/wfs" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:gml="http://www.opengis.net/gml" xmlns:PNSRS="http://servizi.protezionecivile.it/PNSRS/"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xsi:schemaLocation="http://servizi.protezionecivile.it/PNSRS/ https://servizi.protezionecivile.it/geoserver/PNSRS/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=PNSRS%3ACAL_3_3_Comuni_gestGAS http://www.opengis.net/wfs https://servizi.protezionecivile.it/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd">
+    <gml:boundedBy>
+        <gml:null>unknown</gml:null>
+    </gml:boundedBy>
+    <gml:featureMember>
+        <PNSRS:CAL_3_3_Comuni_gestGAS fid="CAL_3_3_Comuni_gestGAS.fid--3f6f8701_172c6569902_-23e9">
+            <PNSRS:comune>Serrastretta</PNSRS:comune>
+            <PNSRS:COD_ISTAT>79129</PNSRS:COD_ISTAT>
+            <PNSRS:TRASP_GAS>Snam Rete Gas</PNSRS:TRASP_GAS>
+            <PNSRS:DISTR_GAS>Italgas Reti Spa</PNSRS:DISTR_GAS>
+            <PNSRS:geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:4326">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        16.42584505,39.01578526 16.43443561,39.01864094 16.4313164,39.01022509
+                                        16.44177337,39.00368064 16.42940395,38.99037282 16.44062628,38.98764774
+                                        16.44607094,38.96577171 16.43513933,38.93648639 16.42191427,38.92306299
+                                        16.42168401,38.93115405 16.39331965,38.93676032 16.41851248,38.94876777
+                                        16.40833131,38.95714088 16.42035653,38.97583904 16.41516812,38.98072943
+                                        16.41151106,38.97142084 16.40451301,38.98018339 16.39009187,38.97486031
+                                        16.38064785,38.9853781 16.3749808,38.97000136 16.36506652,38.96947952
+                                        16.35776031,38.97603323 16.36795506,38.99277543 16.35578128,38.99316999
+                                        16.35615724,39.00684244 16.36566852,39.01561664 16.38708398,39.00976608
+                                        16.41896491,39.01983536 16.42584505,39.01578526
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </PNSRS:geom>
+        </PNSRS:CAL_3_3_Comuni_gestGAS>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:CAL_3_3_Comuni_gestGAS fid="CAL_3_3_Comuni_gestGAS.fid--3f6f8701_172c6569902_-23e5">
+            <PNSRS:comune>Decollatura</PNSRS:comune>
+            <PNSRS:COD_ISTAT>79043</PNSRS:COD_ISTAT>
+            <PNSRS:TRASP_GAS>Snam Rete Gas</PNSRS:TRASP_GAS>
+            <PNSRS:DISTR_GAS>Italgas Reti Spa</PNSRS:DISTR_GAS>
+            <PNSRS:geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:4326">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        16.36117658,39.09512464 16.37840373,39.05695301 16.42313113,39.03348962
+                                        16.42900588,39.03600561 16.42757743,39.02764116 16.43739378,39.01950533
+                                        16.38708398,39.00976608 16.35123064,39.01561031 16.31996236,39.03038955
+                                        16.31436762,39.04330927 16.33197146,39.06579011 16.32821246,39.08476659
+                                        16.3405489,39.08720241 16.34951227,39.10315588 16.36117658,39.09512464
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </PNSRS:geom>
+        </PNSRS:CAL_3_3_Comuni_gestGAS>
+    </gml:featureMember>
+</wfs:FeatureCollection>

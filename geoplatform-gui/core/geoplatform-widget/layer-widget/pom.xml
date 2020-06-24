@@ -18,9 +18,9 @@
     <dependencies>
 
         <dependency>
-            <groupId>com.google.gwt</groupId>
-            <artifactId>gwt-time</artifactId>
-            <version>2.8.2</version>
+            <groupId>org.gwttime</groupId>
+            <artifactId>gwttime</artifactId>
+            <version>1.0.2</version>
         </dependency>
 
         <dependency>

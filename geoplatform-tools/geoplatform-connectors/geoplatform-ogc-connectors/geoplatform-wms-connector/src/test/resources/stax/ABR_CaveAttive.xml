@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfs:FeatureCollection xmlns="http://www.opengis.net/wfs" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:gml="http://www.opengis.net/gml" xmlns:PNSRS="http://servizi.protezionecivile.it/PNSRS/"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xsi:schemaLocation="http://servizi.protezionecivile.it/PNSRS/ https://servizi.protezionecivile.it/geoserver/PNSRS/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=PNSRS%3AABR_3_3_cave_attive http://www.opengis.net/wfs https://servizi.protezionecivile.it/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd">
+    <gml:boundedBy>
+        <gml:null>unknown</gml:null>
+    </gml:boundedBy>
+    <gml:featureMember>
+        <PNSRS:ABR_3_3_cave_attive fid="ABR_3_3_cave_attive.173">
+            <PNSRS:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        13.982161,42.397352
+                    </gml:coordinates>
+                </gml:Point>
+            </PNSRS:geom>
+            <PNSRS:name>68021C_A173</PNSRS:name>
+        </PNSRS:ABR_3_3_cave_attive>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:ABR_3_3_cave_attive fid="ABR_3_3_cave_attive.174">
+            <PNSRS:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        13.987138,42.405186
+                    </gml:coordinates>
+                </gml:Point>
+            </PNSRS:geom>
+            <PNSRS:name>68021C_A169</PNSRS:name>
+        </PNSRS:ABR_3_3_cave_attive>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:ABR_3_3_cave_attive fid="ABR_3_3_cave_attive.175">
+            <PNSRS:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        13.963405,42.418483
+                    </gml:coordinates>
+                </gml:Point>
+            </PNSRS:geom>
+            <PNSRS:name>68021C_G130</PNSRS:name>
+        </PNSRS:ABR_3_3_cave_attive>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:ABR_3_3_cave_attive fid="ABR_3_3_cave_attive.176">
+            <PNSRS:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        13.971287,42.420346
+                    </gml:coordinates>
+                </gml:Point>
+            </PNSRS:geom>
+            <PNSRS:name>68021C_G156</PNSRS:name>
+        </PNSRS:ABR_3_3_cave_attive>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:ABR_3_3_cave_attive fid="ABR_3_3_cave_attive.178">
+            <PNSRS:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        13.974256,42.405945
+                    </gml:coordinates>
+                </gml:Point>
+            </PNSRS:geom>
+            <PNSRS:name>68021C_GS170</PNSRS:name>
+        </PNSRS:ABR_3_3_cave_attive>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:ABR_3_3_cave_attive fid="ABR_3_3_cave_attive.243">
+            <PNSRS:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        13.992831,42.411036
+                    </gml:coordinates>
+                </gml:Point>
+            </PNSRS:geom>
+            <PNSRS:name>68021C_G247</PNSRS:name>
+        </PNSRS:ABR_3_3_cave_attive>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:ABR_3_3_cave_attive fid="ABR_3_3_cave_attive.256">
+            <PNSRS:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        13.962987,42.405762
+                    </gml:coordinates>
+                </gml:Point>
+            </PNSRS:geom>
+            <PNSRS:name>68021C_G261</PNSRS:name>
+        </PNSRS:ABR_3_3_cave_attive>
+    </gml:featureMember>
+</wfs:FeatureCollection>

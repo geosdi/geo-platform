@@ -69,7 +69,9 @@ public abstract class GPWMSGetFeatureMultiThreadTest {
                 "livelloEdifici1.xml", "masw.xml", "PianoCampiFlegrei.xml",
                 "CF_zonepianificazione_mappeinterattive.xml", "aziende.xml", "centri_abitati.xml", "EneaClipFilled.xml",
                 "MixedFeatures.xml", "ParchiBasilicata.xml", "rsdi_alt_300_a_400.xml", "ABR_Comuni.xml",
-                "AereeUrbaneValoreStorico.xml", "PNSRS_Valanghe.xml")
+                "AereeUrbaneValoreStorico.xml", "PNSRS_Valanghe.xml", "AreeAmmassamento.xml", "Ferrovie.xml",
+                "MonumentiBizantini.xml", "ReteGas.xml", "ABR_CaveAttive.xml", "AreeUrbaneValoreStorico.xml",
+                "BaciniIdrogeografici.xml")
                 .map(v -> basePath.concat(v))
                 .collect(toCollection(LinkedList::new));
     }

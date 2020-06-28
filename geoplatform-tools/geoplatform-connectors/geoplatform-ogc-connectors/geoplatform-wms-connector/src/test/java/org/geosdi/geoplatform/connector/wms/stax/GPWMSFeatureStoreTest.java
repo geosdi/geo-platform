@@ -379,4 +379,25 @@ public class GPWMSFeatureStoreTest extends WMSGetFeatureInfoStaxReaderTest {
         logger.info("#######################FEATURE_STORE_RETE_GAS : {}\n", wmsFeatureStore);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File("./target/StoreReteGas.json"), wmsFeatureStore);
     }
+
+    @Test
+    public void b_x_wmsFeatureStoreReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxReader.readAsStore(storage.find("ABR_CaveAttive.xml"));
+        logger.info("#######################FEATURE_STORE_ABR_CAVE_ATTIVE : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File("./target/StoreABR_CaveAttive.json"), wmsFeatureStore);
+    }
+
+    @Test
+    public void c_a_wmsFeatureStoreReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxReader.readAsStore(storage.find("AreeUrbaneValoreStorico.xml"));
+        logger.info("#######################FEATURE_STORE_AREE_URBANE_VALORE_STORICO : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File("./target/StoreAreeUrbaneValoreStorico.json"), wmsFeatureStore);
+    }
+
+    @Test
+    public void c_b_wmsFeatureStoreReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxReader.readAsStore(storage.find("BaciniIdrogeografici.xml"));
+        logger.info("#######################FEATURE_STORE_BACINI_IDROGEOGRAFICI : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File("./target/StoreBaciniIdrogeografici.json"), wmsFeatureStore);
+    }
 }

@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.wms.stax;
 
+import org.geojson.Feature;
 import org.geojson.FeatureCollection;
 import org.geosdi.geoplatform.connector.reader.stax.GPWMSFeatureStore;
 import org.junit.BeforeClass;
@@ -44,12 +45,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.util.List;
 
+import static io.reactivex.rxjava3.core.Flowable.fromIterable;
 import static java.io.File.separator;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.connector.wms.stax.GPWMSGetFeatureInfoStaxReaderTest.JACKSON_SUPPORT;
 import static org.geosdi.geoplatform.connector.wms.stax.WMSGetFeatureInfoStaxReaderTest.wmsGetFeatureInfoStaxReader;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
@@ -80,7 +85,23 @@ public class WMSGetFeatureInfoStaxReaderMixedTest {
     @Test
     public void b_wmsGetFeatureInfoStaxReaderTest() throws Exception {
         GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxReader.readAsStore(file);
-        logger.info("#######################FEATURE_STORE_MIXED_FEATURES : {}\n", wmsFeatureStore);
+        List<Feature> alt300A400Features = wmsFeatureStore.getFeaturesByKey("alt_300_a_400");
+        assertNotNull(alt300A400Features);
+        assertTrue(alt300A400Features.size() == 2);
+        List<Feature> cfZonaRossa = wmsFeatureStore.getFeaturesByKey("CF_zonarossa_mappeinterattive");
+        assertNotNull(cfZonaRossa);
+        assertTrue(cfZonaRossa.size() == 1);
+        List<Feature> areaUrbValoreStorico = wmsFeatureStore.getFeaturesByKey("ABR_1_4_1_aree_urb_val_storico");
+        assertNotNull(areaUrbValoreStorico);
+        assertTrue(areaUrbValoreStorico.size() == 35);
+        List<Feature> comuniAffCom = wmsFeatureStore.getFeaturesByKey("ABR_4_5_comuni_aff_COM");
+        assertNotNull(comuniAffCom);
+        assertTrue(comuniAffCom.size() == 1);
+        List<Feature> zonaPianificazione = wmsFeatureStore.getFeaturesByKey("CF_zonepianificazione_mappeinterattive");
+        assertNotNull(zonaPianificazione);
+        assertTrue(zonaPianificazione.size() == 1);
+        fromIterable(wmsFeatureStore.getStore().entrySet())
+                .subscribe(k -> logger.info("###############{} - size : {}\n", k.getKey(), k.getValue().size()));
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File("./target/StoreMIXED_FEATURES.json"), wmsFeatureStore);
     }
 }

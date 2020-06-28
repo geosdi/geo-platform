@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfs:FeatureCollection xmlns="http://www.opengis.net/wfs" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:IDROGEOLOGICO="http://IDROGEOLOGICO" xmlns:gml="http://www.opengis.net/gml"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xsi:schemaLocation="http://www.opengis.net/wfs https://servizi.protezionecivile.it/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd http://IDROGEOLOGICO https://servizi.protezionecivile.it/geoserver/IDROGEOLOGICO/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=IDROGEOLOGICO%3AIT_bacini_idrogr_princip_ISPRA">
+    <gml:boundedBy>
+        <gml:null>unknown</gml:null>
+    </gml:boundedBy>
+    <gml:featureMember>
+        <IDROGEOLOGICO:IT_bacini_idrogr_princip_ISPRA fid="IT_bacini_idrogr_princip_ISPRA.117">
+            <IDROGEOLOGICO:geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#32632">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:32632">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        845512.05316315,4189866.1750024 854402.00133143,4190926.20546739
+                                        854575.17611559,4197886.56080187 857650.81541445,4198312.92368227
+                                        858701.88178343,4202888.10039053 865251.76262153,4200899.87331668
+                                        878630.76909799,4218134.21112473 882164.45178928,4203954.46736752
+                                        886495.44955332,4198924.36432284 881940.82862108,4185766.01755858
+                                        874239.5826619,4180914.12328206 858465.80677521,4177656.79361503
+                                        853271.42341038,4181206.91355434 840944.6117509,4166365.41798851
+                                        839725.34109376,4173220.8829549 845512.05316315,4189866.1750024
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </IDROGEOLOGICO:geom>
+            <IDROGEOLOGICO:dgc_codice>55.0</IDROGEOLOGICO:dgc_codice>
+            <IDROGEOLOGICO:id_bacino>0</IDROGEOLOGICO:id_bacino>
+            <IDROGEOLOGICO:nome_bac>BELICE</IDROGEOLOGICO:nome_bac>
+            <IDROGEOLOGICO:nome_corso>FIUME BELICE</IDROGEOLOGICO:nome_corso>
+            <IDROGEOLOGICO:foglio_igm>ALCAMO</IDROGEOLOGICO:foglio_igm>
+            <IDROGEOLOGICO:ordine>1</IDROGEOLOGICO:ordine>
+            <IDROGEOLOGICO:autorita>REGIONE SICILIA</IDROGEOLOGICO:autorita>
+        </IDROGEOLOGICO:IT_bacini_idrogr_princip_ISPRA>
+    </gml:featureMember>
+    <gml:featureMember>
+        <IDROGEOLOGICO:IT_bacini_idrogr_princip_ISPRA fid="IT_bacini_idrogr_princip_ISPRA.126">
+            <IDROGEOLOGICO:geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#32632">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:32632">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        865857.7351021,4167390.21261347 866720.4632949,4171291.6034651
+                                        871265.80064313,4171962.72896973 870425.12326635,4181606.79169871
+                                        890642.70280518,4187854.57615253 892962.55432734,4180922.27432207
+                                        898034.60450806,4180621.87163379 897538.0259476,4175047.3159806
+                                        887720.67784246,4177116.23630253 882081.98292521,4172945.35322664
+                                        882288.8944134,4162282.06233671 875332.18451892,4155957.37548282
+                                        871227.2613791,4155395.3244103 872153.47757196,4166917.27821303
+                                        865857.7351021,4167390.21261347
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </IDROGEOLOGICO:geom>
+            <IDROGEOLOGICO:dgc_codice>107.0</IDROGEOLOGICO:dgc_codice>
+            <IDROGEOLOGICO:id_bacino>0</IDROGEOLOGICO:id_bacino>
+            <IDROGEOLOGICO:nome_bac>VERDURA</IDROGEOLOGICO:nome_bac>
+            <IDROGEOLOGICO:nome_corso>FIUME VERDURA</IDROGEOLOGICO:nome_corso>
+            <IDROGEOLOGICO:foglio_igm>ALCAMO</IDROGEOLOGICO:foglio_igm>
+            <IDROGEOLOGICO:ordine>1</IDROGEOLOGICO:ordine>
+            <IDROGEOLOGICO:autorita>REGIONE SICILIA</IDROGEOLOGICO:autorita>
+        </IDROGEOLOGICO:IT_bacini_idrogr_princip_ISPRA>
+    </gml:featureMember>
+    <gml:featureMember>
+        <IDROGEOLOGICO:IT_bacini_idrogr_princip_ISPRA fid="IT_bacini_idrogr_princip_ISPRA.127">
+            <IDROGEOLOGICO:geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#32632">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:32632">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        851680.50424089,4177152.79105456 853271.42341038,4181206.91355434
+                                        857404.86904623,4177530.58151891 869034.95315306,4180284.13595348
+                                        871265.80064313,4171962.72896973 854871.06091587,4164433.62355471
+                                        854145.10021119,4160619.21126316 852553.08126571,4164685.67296295
+                                        855945.64037287,4173000.45057069 851680.50424089,4177152.79105456
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </IDROGEOLOGICO:geom>
+            <IDROGEOLOGICO:dgc_codice>57.0</IDROGEOLOGICO:dgc_codice>
+            <IDROGEOLOGICO:id_bacino>0</IDROGEOLOGICO:id_bacino>
+            <IDROGEOLOGICO:nome_bac>CARBOJ</IDROGEOLOGICO:nome_bac>
+            <IDROGEOLOGICO:nome_corso>FIUME CARBOJ</IDROGEOLOGICO:nome_corso>
+            <IDROGEOLOGICO:foglio_igm>ALCAMO</IDROGEOLOGICO:foglio_igm>
+            <IDROGEOLOGICO:ordine>1</IDROGEOLOGICO:ordine>
+            <IDROGEOLOGICO:autorita>REGIONE SICILIA</IDROGEOLOGICO:autorita>
+        </IDROGEOLOGICO:IT_bacini_idrogr_princip_ISPRA>
+    </gml:featureMember>
+</wfs:FeatureCollection>

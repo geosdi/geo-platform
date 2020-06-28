@@ -53,11 +53,11 @@ import static javax.annotation.meta.When.NEVER;
 public interface IGPWMSSAXSourceBuilder {
 
     /**
-     * @param inputStream
+     * @param theInputStream
      * @return {@link SAXSource}
      * @throws Exception
      */
-    SAXSource buildSource(@Nonnull(when = NEVER) InputStream inputStream) throws Exception;
+    SAXSource buildSource(@Nonnull(when = NEVER) InputStream theInputStream) throws Exception;
 
     class GPWMSSAXSourceBuilder implements IGPWMSSAXSourceBuilder {
 
@@ -79,14 +79,14 @@ public interface IGPWMSSAXSourceBuilder {
         }
 
         /**
-         * @param inputStream
+         * @param theInputStream
          * @return {@link SAXSource}
          * @throws Exception
          */
         @Override
-        public SAXSource buildSource(@Nonnull(when = NEVER) InputStream inputStream) throws Exception {
-            checkArgument(inputStream != null, "The Parameter inputSource must not be null.");
-            return new SAXSource(spf.newSAXParser().getXMLReader(), new InputSource(inputStream));
+        public SAXSource buildSource(@Nonnull(when = NEVER) InputStream theInputStream) throws Exception {
+            checkArgument(theInputStream != null, "The Parameter inputSource must not be null.");
+            return new SAXSource(spf.newSAXParser().getXMLReader(), new InputSource(theInputStream));
         }
     }
 }

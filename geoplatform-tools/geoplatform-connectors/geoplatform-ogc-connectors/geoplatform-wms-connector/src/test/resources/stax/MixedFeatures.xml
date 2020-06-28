@@ -4,7 +4,7 @@
                        xmlns:gml="http://www.opengis.net/gml" xmlns:rsdi="http://www.opengeospatial.net/rsdi"
                        xmlns:PNSRS="http://servizi.protezionecivile.it/PNSRS/"
                        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                       xsi:schemaLocation="http://www.opengeospatial.net/rsdi http://rsdi.regione.basilicata.it:80/geoserver/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=rsdi:alt_300_a_400,typeName=PianoCampiFlegrei%3ACF_zonarossa_mappeinterattive,typeName=PNSRS%3AABR_1_4_1_aree_urb_val_storico,typeName=PNSRS%3AABR_4_5_comuni_aff_COM http://www.opengis.net/wfs http://rsdi.regione.basilicata.it:80/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd">
+                       xsi:schemaLocation="http://www.opengeospatial.net/rsdi http://rsdi.regione.basilicata.it:80/geoserver/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=rsdi:alt_300_a_400,typeName=PianoCampiFlegrei%3ACF_zonarossa_mappeinterattive,typeName=PNSRS%3AABR_1_4_1_aree_urb_val_storico,typeName=PNSRS%3AABR_4_5_comuni_aff_COM,typeName=PNSRS%3AABR_1_4_1_aree_urb_val_storico http://www.opengis.net/wfs http://rsdi.regione.basilicata.it:80/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd">
     <gml:boundedBy>
         <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
             <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
@@ -2759,5 +2759,734 @@
                 </gml:MultiPolygon>
             </PNSRS:geom>
         </PNSRS:ABR_4_5_comuni_aff_COM>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:ABR_1_4_1_aree_urb_val_storico fid="ABR_1_4_1_aree_urb_val_storico.1228">
+            <PNSRS:geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:4326">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        13.99740278,42.19670829 13.99668313,42.19607159 13.99621484,42.19696357
+                                        13.99740278,42.19670829
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </PNSRS:geom>
+            <PNSRS:objectid>1228</PNSRS:objectid>
+            <PNSRS:provincia>068</PNSRS:provincia>
+            <PNSRS:comune>007</PNSRS:comune>
+            <PNSRS:cod_istat>13068007</PNSRS:cod_istat>
+            <PNSRS:nome>Caramanico Terme</PNSRS:nome>
+            <PNSRS:shape_leng>0.00342529144731</PNSRS:shape_leng>
+            <PNSRS:shape_area>7.29373213228E-7</PNSRS:shape_area>
+        </PNSRS:ABR_1_4_1_aree_urb_val_storico>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:ABR_1_4_1_aree_urb_val_storico fid="ABR_1_4_1_aree_urb_val_storico.1229">
+            <PNSRS:geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:4326">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        13.9798343,42.19544103 13.97935594,42.19581501 13.97997948,42.19620331
+                                        13.9798343,42.19544103
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </PNSRS:geom>
+            <PNSRS:objectid>1229</PNSRS:objectid>
+            <PNSRS:provincia>068</PNSRS:provincia>
+            <PNSRS:comune>007</PNSRS:comune>
+            <PNSRS:cod_istat>13068007</PNSRS:cod_istat>
+            <PNSRS:nome>Caramanico Terme</PNSRS:nome>
+            <PNSRS:shape_leng>0.00224655299241</PNSRS:shape_leng>
+            <PNSRS:shape_area>2.99320383082E-7</PNSRS:shape_area>
+        </PNSRS:ABR_1_4_1_aree_urb_val_storico>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:ABR_1_4_1_aree_urb_val_storico fid="ABR_1_4_1_aree_urb_val_storico.1230">
+            <PNSRS:geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:4326">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        13.99005332,42.19599984 13.99103189,42.19596343 13.99145221,42.19542678
+                                        13.99005332,42.19599984
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </PNSRS:geom>
+            <PNSRS:objectid>1230</PNSRS:objectid>
+            <PNSRS:provincia>068</PNSRS:provincia>
+            <PNSRS:comune>007</PNSRS:comune>
+            <PNSRS:cod_istat>13068007</PNSRS:cod_istat>
+            <PNSRS:nome>Caramanico Terme</PNSRS:nome>
+            <PNSRS:shape_leng>0.00399584483976</PNSRS:shape_leng>
+            <PNSRS:shape_area>9.45059771155E-7</PNSRS:shape_area>
+        </PNSRS:ABR_1_4_1_aree_urb_val_storico>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:ABR_1_4_1_aree_urb_val_storico fid="ABR_1_4_1_aree_urb_val_storico.1231">
+            <PNSRS:geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:4326">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        13.99627764,42.19548265 13.99601639,42.19572803 13.99637056,42.19592475
+                                        13.99627764,42.19548265
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </PNSRS:geom>
+            <PNSRS:objectid>1231</PNSRS:objectid>
+            <PNSRS:provincia>068</PNSRS:provincia>
+            <PNSRS:comune>007</PNSRS:comune>
+            <PNSRS:cod_istat>13068007</PNSRS:cod_istat>
+            <PNSRS:nome>Caramanico Terme</PNSRS:nome>
+            <PNSRS:shape_leng>0.00142572503934</PNSRS:shape_leng>
+            <PNSRS:shape_area>1.22239642925E-7</PNSRS:shape_area>
+        </PNSRS:ABR_1_4_1_aree_urb_val_storico>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:ABR_1_4_1_aree_urb_val_storico fid="ABR_1_4_1_aree_urb_val_storico.1232">
+            <PNSRS:geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:4326">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        13.99715274,42.19567043 13.99739732,42.1957131 13.99783073,42.19568537
+                                        13.99715274,42.19567043
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </PNSRS:geom>
+            <PNSRS:objectid>1232</PNSRS:objectid>
+            <PNSRS:provincia>068</PNSRS:provincia>
+            <PNSRS:comune>007</PNSRS:comune>
+            <PNSRS:cod_istat>13068007</PNSRS:cod_istat>
+            <PNSRS:nome>Caramanico Terme</PNSRS:nome>
+            <PNSRS:shape_leng>0.00150276226566</PNSRS:shape_leng>
+            <PNSRS:shape_area>1.01164540307E-7</PNSRS:shape_area>
+        </PNSRS:ABR_1_4_1_aree_urb_val_storico>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:ABR_1_4_1_aree_urb_val_storico fid="ABR_1_4_1_aree_urb_val_storico.1233">
+            <PNSRS:geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:4326">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        13.98169486,42.19478213 13.98137366,42.19517554 13.98209711,42.19556471
+                                        13.98169486,42.19478213
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </PNSRS:geom>
+            <PNSRS:objectid>1233</PNSRS:objectid>
+            <PNSRS:provincia>068</PNSRS:provincia>
+            <PNSRS:comune>007</PNSRS:comune>
+            <PNSRS:cod_istat>13068007</PNSRS:cod_istat>
+            <PNSRS:nome>Caramanico Terme</PNSRS:nome>
+            <PNSRS:shape_leng>0.0024272496757</PNSRS:shape_leng>
+            <PNSRS:shape_area>3.48992732069E-7</PNSRS:shape_area>
+        </PNSRS:ABR_1_4_1_aree_urb_val_storico>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:ABR_1_4_1_aree_urb_val_storico fid="ABR_1_4_1_aree_urb_val_storico.1234">
+            <PNSRS:geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:4326">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        13.98582383,42.1927564 13.98510911,42.19314633 13.98559349,42.19371799
+                                        13.98582383,42.1927564
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </PNSRS:geom>
+            <PNSRS:objectid>1234</PNSRS:objectid>
+            <PNSRS:provincia>068</PNSRS:provincia>
+            <PNSRS:comune>007</PNSRS:comune>
+            <PNSRS:cod_istat>13068007</PNSRS:cod_istat>
+            <PNSRS:nome>Caramanico Terme</PNSRS:nome>
+            <PNSRS:shape_leng>0.00318146196655</PNSRS:shape_leng>
+            <PNSRS:shape_area>6.13503510247E-7</PNSRS:shape_area>
+        </PNSRS:ABR_1_4_1_aree_urb_val_storico>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:ABR_1_4_1_aree_urb_val_storico fid="ABR_1_4_1_aree_urb_val_storico.1235">
+            <PNSRS:geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:4326">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        13.99667629,42.19267631 13.99573157,42.19268155 13.99585297,42.19361922
+                                        13.99667629,42.19267631
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </PNSRS:geom>
+            <PNSRS:objectid>1235</PNSRS:objectid>
+            <PNSRS:provincia>068</PNSRS:provincia>
+            <PNSRS:comune>007</PNSRS:comune>
+            <PNSRS:cod_istat>13068007</PNSRS:cod_istat>
+            <PNSRS:nome>Caramanico Terme</PNSRS:nome>
+            <PNSRS:shape_leng>0.00365467733594</PNSRS:shape_leng>
+            <PNSRS:shape_area>8.32326196235E-7</PNSRS:shape_area>
+        </PNSRS:ABR_1_4_1_aree_urb_val_storico>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:ABR_1_4_1_aree_urb_val_storico fid="ABR_1_4_1_aree_urb_val_storico.1236">
+            <PNSRS:geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:4326">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        13.98624914,42.19209823 13.9860451,42.19255123 13.98708461,42.19286662
+                                        13.98624914,42.19209823
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </PNSRS:geom>
+            <PNSRS:objectid>1236</PNSRS:objectid>
+            <PNSRS:provincia>068</PNSRS:provincia>
+            <PNSRS:comune>007</PNSRS:comune>
+            <PNSRS:cod_istat>13068007</PNSRS:cod_istat>
+            <PNSRS:nome>Caramanico Terme</PNSRS:nome>
+            <PNSRS:shape_leng>0.003036763245</PNSRS:shape_leng>
+            <PNSRS:shape_area>5.14988882258E-7</PNSRS:shape_area>
+        </PNSRS:ABR_1_4_1_aree_urb_val_storico>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:ABR_1_4_1_aree_urb_val_storico fid="ABR_1_4_1_aree_urb_val_storico.1237">
+            <PNSRS:geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:4326">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        13.97984436,42.18992052 13.97934739,42.19013674 13.97971313,42.19073888
+                                        13.97984436,42.18992052
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </PNSRS:geom>
+            <PNSRS:objectid>1237</PNSRS:objectid>
+            <PNSRS:provincia>068</PNSRS:provincia>
+            <PNSRS:comune>007</PNSRS:comune>
+            <PNSRS:cod_istat>13068007</PNSRS:cod_istat>
+            <PNSRS:nome>Caramanico Terme</PNSRS:nome>
+            <PNSRS:shape_leng>0.00265665926651</PNSRS:shape_leng>
+            <PNSRS:shape_area>4.15894390757E-7</PNSRS:shape_area>
+        </PNSRS:ABR_1_4_1_aree_urb_val_storico>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:ABR_1_4_1_aree_urb_val_storico fid="ABR_1_4_1_aree_urb_val_storico.1109">
+            <PNSRS:geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:4326">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        13.96058228,42.21805281 13.96138789,42.22046017 13.96223337,42.22043631
+                                        13.96058228,42.21805281
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </PNSRS:geom>
+            <PNSRS:objectid>1109</PNSRS:objectid>
+            <PNSRS:provincia>068</PNSRS:provincia>
+            <PNSRS:comune>003</PNSRS:comune>
+            <PNSRS:cod_istat>13068003</PNSRS:cod_istat>
+            <PNSRS:nome>Bolognano</PNSRS:nome>
+            <PNSRS:shape_leng>0.0107739656381</PNSRS:shape_leng>
+            <PNSRS:shape_area>3.01076812784E-6</PNSRS:shape_area>
+        </PNSRS:ABR_1_4_1_aree_urb_val_storico>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:ABR_1_4_1_aree_urb_val_storico fid="ABR_1_4_1_aree_urb_val_storico.1110">
+            <PNSRS:geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:4326">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        13.96058228,42.21805281 13.95981041,42.21765406 13.95938449,42.21869036
+                                        13.96058228,42.21805281
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </PNSRS:geom>
+            <PNSRS:objectid>1110</PNSRS:objectid>
+            <PNSRS:provincia>068</PNSRS:provincia>
+            <PNSRS:comune>003</PNSRS:comune>
+            <PNSRS:cod_istat>13068003</PNSRS:cod_istat>
+            <PNSRS:nome>Bolognano</PNSRS:nome>
+            <PNSRS:shape_leng>0.0040328865184</PNSRS:shape_leng>
+            <PNSRS:shape_area>6.64070602143E-7</PNSRS:shape_area>
+        </PNSRS:ABR_1_4_1_aree_urb_val_storico>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:ABR_1_4_1_aree_urb_val_storico fid="ABR_1_4_1_aree_urb_val_storico.1111">
+            <PNSRS:geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:4326">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        13.96110154,42.21778735 13.96034872,42.21641163 13.95922823,42.21640146
+                                        13.96110154,42.21778735
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </PNSRS:geom>
+            <PNSRS:objectid>1111</PNSRS:objectid>
+            <PNSRS:provincia>068</PNSRS:provincia>
+            <PNSRS:comune>003</PNSRS:comune>
+            <PNSRS:cod_istat>13068003</PNSRS:cod_istat>
+            <PNSRS:nome>Bolognano</PNSRS:nome>
+            <PNSRS:shape_leng>0.00821939039006</PNSRS:shape_leng>
+            <PNSRS:shape_area>1.12935513541E-6</PNSRS:shape_area>
+        </PNSRS:ABR_1_4_1_aree_urb_val_storico>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:ABR_1_4_1_aree_urb_val_storico fid="ABR_1_4_1_aree_urb_val_storico.1112">
+            <PNSRS:geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:4326">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        13.95830724,42.21641561 13.95932675,42.21704177 13.95964326,42.21695008
+                                        13.95830724,42.21641561
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </PNSRS:geom>
+            <PNSRS:objectid>1112</PNSRS:objectid>
+            <PNSRS:provincia>068</PNSRS:provincia>
+            <PNSRS:comune>003</PNSRS:comune>
+            <PNSRS:cod_istat>13068003</PNSRS:cod_istat>
+            <PNSRS:nome>Bolognano</PNSRS:nome>
+            <PNSRS:shape_leng>0.00314284413153</PNSRS:shape_leng>
+            <PNSRS:shape_area>3.1114920935E-7</PNSRS:shape_area>
+        </PNSRS:ABR_1_4_1_aree_urb_val_storico>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:ABR_1_4_1_aree_urb_val_storico fid="ABR_1_4_1_aree_urb_val_storico.1113">
+            <PNSRS:geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:4326">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        13.95882169,42.2164428 13.95914108,42.21599091 13.95763446,42.21570254
+                                        13.95882169,42.2164428
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </PNSRS:geom>
+            <PNSRS:objectid>1113</PNSRS:objectid>
+            <PNSRS:provincia>068</PNSRS:provincia>
+            <PNSRS:comune>003</PNSRS:comune>
+            <PNSRS:cod_istat>13068003</PNSRS:cod_istat>
+            <PNSRS:nome>Bolognano</PNSRS:nome>
+            <PNSRS:shape_leng>0.00512919302302</PNSRS:shape_leng>
+            <PNSRS:shape_area>7.77121638206E-7</PNSRS:shape_area>
+        </PNSRS:ABR_1_4_1_aree_urb_val_storico>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:ABR_1_4_1_aree_urb_val_storico fid="ABR_1_4_1_aree_urb_val_storico.1135">
+            <PNSRS:geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:4326">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        13.9961739,42.21752806 13.99668785,42.21739748 13.99619408,42.21701941
+                                        13.9961739,42.21752806
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </PNSRS:geom>
+            <PNSRS:objectid>1135</PNSRS:objectid>
+            <PNSRS:provincia>068</PNSRS:provincia>
+            <PNSRS:comune>001</PNSRS:comune>
+            <PNSRS:cod_istat>13068001</PNSRS:cod_istat>
+            <PNSRS:nome>Abbateggio</PNSRS:nome>
+            <PNSRS:shape_leng>0.00190299797424</PNSRS:shape_leng>
+            <PNSRS:shape_area>1.92823915382E-7</PNSRS:shape_area>
+        </PNSRS:ABR_1_4_1_aree_urb_val_storico>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:ABR_1_4_1_aree_urb_val_storico fid="ABR_1_4_1_aree_urb_val_storico.1137">
+            <PNSRS:geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:4326">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        13.99703216,42.21707628 13.99714368,42.21653691 13.99646151,42.21658047
+                                        13.99703216,42.21707628
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </PNSRS:geom>
+            <PNSRS:objectid>1137</PNSRS:objectid>
+            <PNSRS:provincia>068</PNSRS:provincia>
+            <PNSRS:comune>001</PNSRS:comune>
+            <PNSRS:cod_istat>13068001</PNSRS:cod_istat>
+            <PNSRS:nome>Abbateggio</PNSRS:nome>
+            <PNSRS:shape_leng>0.00224218424274</PNSRS:shape_leng>
+            <PNSRS:shape_area>3.06517639638E-7</PNSRS:shape_area>
+        </PNSRS:ABR_1_4_1_aree_urb_val_storico>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:ABR_1_4_1_aree_urb_val_storico fid="ABR_1_4_1_aree_urb_val_storico.1224">
+            <PNSRS:geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:4326">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        13.9865209,42.20275457 13.98684681,42.202825 13.98781741,42.20120802
+                                        13.9865209,42.20275457
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </PNSRS:geom>
+            <PNSRS:objectid>1224</PNSRS:objectid>
+            <PNSRS:provincia>068</PNSRS:provincia>
+            <PNSRS:comune>007</PNSRS:comune>
+            <PNSRS:cod_istat>13068007</PNSRS:cod_istat>
+            <PNSRS:nome>Caramanico Terme</PNSRS:nome>
+            <PNSRS:shape_leng>0.00445911297519</PNSRS:shape_leng>
+            <PNSRS:shape_area>5.55244867222E-7</PNSRS:shape_area>
+        </PNSRS:ABR_1_4_1_aree_urb_val_storico>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:ABR_1_4_1_aree_urb_val_storico fid="ABR_1_4_1_aree_urb_val_storico.1225">
+            <PNSRS:geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:4326">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        13.9872794,42.20057736 13.98725348,42.19954596 13.98682804,42.19964126
+                                        13.9872794,42.20057736
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </PNSRS:geom>
+            <PNSRS:objectid>1225</PNSRS:objectid>
+            <PNSRS:provincia>068</PNSRS:provincia>
+            <PNSRS:comune>007</PNSRS:comune>
+            <PNSRS:cod_istat>13068007</PNSRS:cod_istat>
+            <PNSRS:nome>Caramanico Terme</PNSRS:nome>
+            <PNSRS:shape_leng>0.00289027134123</PNSRS:shape_leng>
+            <PNSRS:shape_area>4.20839200505E-7</PNSRS:shape_area>
+        </PNSRS:ABR_1_4_1_aree_urb_val_storico>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:ABR_1_4_1_aree_urb_val_storico fid="ABR_1_4_1_aree_urb_val_storico.1226">
+            <PNSRS:geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:4326">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        13.98820059,42.20053596 13.98915728,42.19997704 13.98796608,42.19891284
+                                        13.98820059,42.20053596
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </PNSRS:geom>
+            <PNSRS:objectid>1226</PNSRS:objectid>
+            <PNSRS:provincia>068</PNSRS:provincia>
+            <PNSRS:comune>007</PNSRS:comune>
+            <PNSRS:cod_istat>13068007</PNSRS:cod_istat>
+            <PNSRS:nome>Caramanico Terme</PNSRS:nome>
+            <PNSRS:shape_leng>0.00548944058923</PNSRS:shape_leng>
+            <PNSRS:shape_area>1.07212147093E-6</PNSRS:shape_area>
+        </PNSRS:ABR_1_4_1_aree_urb_val_storico>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:ABR_1_4_1_aree_urb_val_storico fid="ABR_1_4_1_aree_urb_val_storico.1227">
+            <PNSRS:geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:4326">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        13.99512077,42.19645415 13.99387373,42.19680795 13.99386602,42.1972942
+                                        13.99512077,42.19645415
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </PNSRS:geom>
+            <PNSRS:objectid>1227</PNSRS:objectid>
+            <PNSRS:provincia>068</PNSRS:provincia>
+            <PNSRS:comune>007</PNSRS:comune>
+            <PNSRS:cod_istat>13068007</PNSRS:cod_istat>
+            <PNSRS:nome>Caramanico Terme</PNSRS:nome>
+            <PNSRS:shape_leng>0.00539761614842</PNSRS:shape_leng>
+            <PNSRS:shape_area>8.06180789575E-7</PNSRS:shape_area>
+        </PNSRS:ABR_1_4_1_aree_urb_val_storico>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:ABR_1_4_1_aree_urb_val_storico fid="ABR_1_4_1_aree_urb_val_storico.1223">
+            <PNSRS:geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:4326">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        13.98574054,42.20288726 13.98547469,42.20360537 13.9860039,42.20365058
+                                        13.98574054,42.20288726
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </PNSRS:geom>
+            <PNSRS:objectid>1223</PNSRS:objectid>
+            <PNSRS:provincia>068</PNSRS:provincia>
+            <PNSRS:comune>007</PNSRS:comune>
+            <PNSRS:cod_istat>13068007</PNSRS:cod_istat>
+            <PNSRS:nome>Caramanico Terme</PNSRS:nome>
+            <PNSRS:shape_leng>0.00267381026622</PNSRS:shape_leng>
+            <PNSRS:shape_area>4.38651267912E-7</PNSRS:shape_area>
+        </PNSRS:ABR_1_4_1_aree_urb_val_storico>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:ABR_1_4_1_aree_urb_val_storico fid="ABR_1_4_1_aree_urb_val_storico.1238">
+            <PNSRS:geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:4326">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        13.97206869,42.18829753 13.97252427,42.18783331 13.97261676,42.18698308
+                                        13.97206869,42.18829753
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </PNSRS:geom>
+            <PNSRS:objectid>1238</PNSRS:objectid>
+            <PNSRS:provincia>068</PNSRS:provincia>
+            <PNSRS:comune>007</PNSRS:comune>
+            <PNSRS:cod_istat>13068007</PNSRS:cod_istat>
+            <PNSRS:nome>Caramanico Terme</PNSRS:nome>
+            <PNSRS:shape_leng>0.00532449482701</PNSRS:shape_leng>
+            <PNSRS:shape_area>1.13031204157E-6</PNSRS:shape_area>
+        </PNSRS:ABR_1_4_1_aree_urb_val_storico>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:ABR_1_4_1_aree_urb_val_storico fid="ABR_1_4_1_aree_urb_val_storico.1239">
+            <PNSRS:geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:4326">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        13.97029739,42.18756566 13.97032297,42.18598986 13.96961425,42.18563677
+                                        13.97029739,42.18756566
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </PNSRS:geom>
+            <PNSRS:objectid>1239</PNSRS:objectid>
+            <PNSRS:provincia>068</PNSRS:provincia>
+            <PNSRS:comune>007</PNSRS:comune>
+            <PNSRS:cod_istat>13068007</PNSRS:cod_istat>
+            <PNSRS:nome>Caramanico Terme</PNSRS:nome>
+            <PNSRS:shape_leng>0.00537146161055</PNSRS:shape_leng>
+            <PNSRS:shape_area>1.66812206961E-6</PNSRS:shape_area>
+        </PNSRS:ABR_1_4_1_aree_urb_val_storico>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:ABR_1_4_1_aree_urb_val_storico fid="ABR_1_4_1_aree_urb_val_storico.1240">
+            <PNSRS:geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:4326">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        13.97305586,42.18510479 13.97307147,42.18563628 13.97376025,42.18553888
+                                        13.97305586,42.18510479
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </PNSRS:geom>
+            <PNSRS:objectid>1240</PNSRS:objectid>
+            <PNSRS:provincia>068</PNSRS:provincia>
+            <PNSRS:comune>007</PNSRS:comune>
+            <PNSRS:cod_istat>13068007</PNSRS:cod_istat>
+            <PNSRS:nome>Caramanico Terme</PNSRS:nome>
+            <PNSRS:shape_leng>0.00261809513581</PNSRS:shape_leng>
+            <PNSRS:shape_area>4.27753151386E-7</PNSRS:shape_area>
+        </PNSRS:ABR_1_4_1_aree_urb_val_storico>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:ABR_1_4_1_aree_urb_val_storico fid="ABR_1_4_1_aree_urb_val_storico.1241">
+            <PNSRS:geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:4326">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        13.98997749,42.17394828 13.98945221,42.17405172 13.98940029,42.17446103
+                                        13.98997749,42.17394828
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </PNSRS:geom>
+            <PNSRS:objectid>1241</PNSRS:objectid>
+            <PNSRS:provincia>068</PNSRS:provincia>
+            <PNSRS:comune>007</PNSRS:comune>
+            <PNSRS:cod_istat>13068007</PNSRS:cod_istat>
+            <PNSRS:nome>Caramanico Terme</PNSRS:nome>
+            <PNSRS:shape_leng>0.00253104017085</PNSRS:shape_leng>
+            <PNSRS:shape_area>3.92249600049E-7</PNSRS:shape_area>
+        </PNSRS:ABR_1_4_1_aree_urb_val_storico>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:ABR_1_4_1_aree_urb_val_storico fid="ABR_1_4_1_aree_urb_val_storico.1242">
+            <PNSRS:geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:4326">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        13.99093837,42.1740513 13.99048103,42.17406979 13.99063275,42.17442686
+                                        13.99093837,42.1740513
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </PNSRS:geom>
+            <PNSRS:objectid></PNSRS:objectid>
+            <PNSRS:provincia></PNSRS:provincia>
+            <PNSRS:comune></PNSRS:comune>
+            <PNSRS:cod_istat>13068007</PNSRS:cod_istat>
+            <PNSRS:nome></PNSRS:nome>
+            <PNSRS:shape_leng>0.00163192426652</PNSRS:shape_leng>
+            <PNSRS:shape_area>1.58032160971E-7</PNSRS:shape_area>
+        </PNSRS:ABR_1_4_1_aree_urb_val_storico>
     </gml:featureMember>
 </wfs:FeatureCollection>

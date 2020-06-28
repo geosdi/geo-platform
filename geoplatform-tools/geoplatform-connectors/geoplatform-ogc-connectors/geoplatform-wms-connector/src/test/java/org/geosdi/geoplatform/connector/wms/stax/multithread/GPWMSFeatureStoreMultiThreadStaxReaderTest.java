@@ -47,6 +47,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static io.reactivex.rxjava3.core.Flowable.fromIterable;
 import static javax.annotation.meta.When.NEVER;
 import static org.junit.Assert.assertTrue;
 
@@ -65,11 +66,12 @@ public class GPWMSFeatureStoreMultiThreadStaxReaderTest extends GPWMSGetFeatureM
         CountDownLatch startSignal = new CountDownLatch(1);
         CountDownLatch doneSignal = new CountDownLatch(files.size());
         AtomicInteger counter = new AtomicInteger(0);
-        files.stream().map(v -> new Thread(new WMSFeatureStoreStaxReaderTask(v, startSignal, doneSignal, counter)))
-                .forEach(Thread::start);
+        fromIterable(files)
+                .map(f -> new Thread(new WMSFeatureStoreStaxReaderTask(f, startSignal, doneSignal, counter)))
+                .subscribe(Thread::start);
         startSignal.countDown();
         doneSignal.await();
-        assertTrue(counter.get() == 36);
+        assertTrue(counter.get() == 43);
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@{} process {} files", this.getClass().getSimpleName(), counter.get());
     }
 

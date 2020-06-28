@@ -74,7 +74,8 @@ public class WMSGetFeatureInfoReaderFileLoaderTest {
                 "EneaClipFilled.xml", "test.xml", "ParchiBasilicata.xml", "centri_abitati.xml", "mobileBeni.xml",
                 "PercorsiNavette.xml", "aggregatiStrutturali.xml", "aggregati_zrvesuvioflegrei.xml",
                 "exeflegrei_esiti_c_danni.xml", "ABR_Comuni.xml", "AereeUrbaneValoreStorico.xml", "PNSRS_Valanghe.xml",
-                "AreeAmmassamento.xml", "Ferrovie.xml", "MonumentiBizantini.xml", "ReteGas.xml", "AziendeSanitarie.xml")
+                "AreeAmmassamento.xml", "Ferrovie.xml", "MonumentiBizantini.xml", "ReteGas.xml", "AziendeSanitarie.xml",
+                "ABR_CaveAttive.xml", "AreeUrbaneValoreStorico.xml", "BaciniIdrogeografici.xml")
                 .map(value -> new GPConnectorFile(value, new File(basePath.concat(value))))
                 .collect(toMap(IGPConnectorFile::getKey, identity(), (v1, v2) -> v1, LinkedHashMap::new)));
     }

@@ -45,6 +45,7 @@ import javax.annotation.meta.When;
 import java.util.Objects;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.ThreadLocal.withInitial;
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.joining;
 import static javax.annotation.meta.When.NEVER;
@@ -66,7 +67,7 @@ public abstract class GPBaseWMSDescribeLayerRequest<T> extends GPWMSBaseGetReque
     protected GPBaseWMSDescribeLayerRequest(@Nonnull(when = NEVER) GPWMSServerConnector server, @Nonnull(when = NEVER) GPBaseJAXBContext theWmsJAXBContext) {
         super(server, theWmsJAXBContext);
         this.version = server.getVersion();
-        this.layers = ThreadLocal.withInitial(() -> null);
+        this.layers = withInitial(() -> null);
     }
 
     /**

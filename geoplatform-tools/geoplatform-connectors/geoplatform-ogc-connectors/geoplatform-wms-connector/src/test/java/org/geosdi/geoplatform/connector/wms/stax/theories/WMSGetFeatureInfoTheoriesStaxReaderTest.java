@@ -35,11 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.wms.stax.theories;
 
-import org.geosdi.geoplatform.connector.reader.stax.GPWMSGetFeatureInfoStaxReader;
-import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
-import org.geosdi.geoplatform.support.jackson.JacksonSupport;
-import org.junit.BeforeClass;
-import org.junit.experimental.theories.DataPoints;
+import org.geosdi.geoplatform.connector.wms.WMSGetFeatureInfoTheoriesTest;
 import org.junit.experimental.theories.Theories;
 import org.junit.experimental.theories.Theory;
 import org.junit.runner.RunWith;
@@ -49,47 +45,17 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static java.io.File.separator;
-import static java.util.stream.Collectors.joining;
-import static java.util.stream.Stream.of;
-import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
-import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
+import static org.geosdi.geoplatform.connector.wms.WMSGetFeatureInfoReaderFileLoaderTest.JACKSON_SUPPORT;
+import static org.geosdi.geoplatform.connector.wms.stax.WMSGetFeatureInfoStaxReaderTest.wmsGetFeatureInfoStaxReader;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @RunWith(Theories.class)
-public class WMSGetFeatureInfoTheoriesStaxReaderTest {
+public class WMSGetFeatureInfoTheoriesStaxReaderTest extends WMSGetFeatureInfoTheoriesTest {
 
     private static final Logger logger = LoggerFactory.getLogger(WMSGetFeatureInfoTheoriesStaxReaderTest.class);
-    //
-    private static String dirFiles;
-    private static final JacksonSupport JACKSON_SUPPORT = new GPJacksonSupport(UNWRAP_ROOT_VALUE_DISABLE,
-            FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
-            ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
-            WRAP_ROOT_VALUE_DISABLE,
-            INDENT_OUTPUT_ENABLE, NON_NULL);
-    private static final GPWMSGetFeatureInfoStaxReader wmsGetFeatureInfoStaxReader = new GPWMSGetFeatureInfoStaxReader();
-
-    @BeforeClass
-    public static void buildDirFiles() throws Exception {
-        dirFiles = of(new File(".").getCanonicalPath(), "src", "test", "resources", "stax")
-                .collect(joining(separator, "", separator));
-    }
-
-    @DataPoints
-    public static String[] data() {
-        return new String[]{"geoserver-Vigneti-GetFeatureInfo.xml", "geoserver-GetFeatureInfo.xml", "geoserver-GetFeatureInfo1.xml",
-                "geoserver-GetFeatureInfo-Point.xml", "geoserver-GetFeatureInfo-MultiLineString.xml",
-                "spearfish-GetFeatureInfo.xml", "tasmaniaRoads-GetFeatureInfo.xml", "tasmaniaStates-GetFeatureInfo.xml",
-                "tiger_ny-GetFeatureInfo.xml", "sfdem-GetFeatureInfo.xml", "nurcAPk50095-GetFeatureInfo.xml",
-                "nurcArcSample-GetFeatureInfo.xml", "comuni-GetFeatureInfo.xml", "parchiNaturali-GetFeatureInfo.xml",
-                "retiRiserve-GetFeatureInfo.xml", "linee-GetFeatureInfo.xml", "azioniPunto-GetFeatureInfo.xml",
-                "comuniBasilicata-GetFeatureInfo.xml", "corine-GetFeatureInfo.xml", "airports.xml",
-                "geologia.xml", "livelloEdifici.xml", "volumetria.xml", "livelloEdifici1.xml", "masw.xml",
-                "CF_zonepianificazione_mappeinterattive.xml", "PianoCampiFlegrei.xml"};
-    }
 
     /**
      * @param fileName

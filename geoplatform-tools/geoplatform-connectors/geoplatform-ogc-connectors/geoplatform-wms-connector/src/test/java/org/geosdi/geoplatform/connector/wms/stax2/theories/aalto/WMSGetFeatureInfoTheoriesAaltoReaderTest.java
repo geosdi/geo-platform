@@ -33,70 +33,39 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.server.request;
+package org.geosdi.geoplatform.connector.wms.stax2.theories.aalto;
 
-import lombok.Getter;
-import lombok.ToString;
-import net.jcip.annotations.Immutable;
+import org.geosdi.geoplatform.connector.wms.WMSGetFeatureInfoTheoriesTest;
+import org.junit.experimental.theories.Theories;
+import org.junit.experimental.theories.Theory;
+import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import javax.annotation.Nonnull;
+import java.io.File;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static java.util.stream.Collectors.joining;
-import static java.util.stream.Stream.of;
-import static javax.annotation.meta.When.NEVER;
-import static lombok.AccessLevel.NONE;
-import static org.geosdi.geoplatform.connector.server.request.WMSRequestKey.BBOX;
+import static org.geosdi.geoplatform.connector.wms.WMSGetFeatureInfoReaderFileLoaderTest.JACKSON_SUPPORT;
+import static org.geosdi.geoplatform.connector.wms.stax2.WMSGetFeatureInfoAaltoReaderTest.wmsGetFeatureInfoAaltoReader;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Getter
-@ToString
-@Immutable
-public class WMSBoundingBox implements GPWMSBoundingBox {
+@RunWith(Theories.class)
+public class WMSGetFeatureInfoTheoriesAaltoReaderTest extends WMSGetFeatureInfoTheoriesTest {
 
-    private static final long serialVersionUID = 6490150131133508326L;
-    //
-    private final Double minx;
-    private final Double miny;
-    private final Double maxx;
-    private final Double maxy;
-    @Getter(NONE)
-    private String boundingBoxKeyValuePair;
+    private static final Logger logger = LoggerFactory.getLogger(WMSGetFeatureInfoTheoriesAaltoReaderTest.class);
 
     /**
-     * @param theMinx
-     * @param theMiny
-     * @param theMaxx
-     * @param theMaxy
+     * @param fileName
+     * @throws Exception
      */
-    public WMSBoundingBox(@Nonnull(when = NEVER) Double theMinx, @Nonnull(when = NEVER) Double theMiny, @Nonnull(when = NEVER) Double theMaxx, @Nonnull(when = NEVER) Double theMaxy) {
-        checkArgument(theMinx != null, "The Parameter minx must not be null.");
-        checkArgument(theMiny != null, "The Parameter miny must not be null.");
-        checkArgument(theMaxx != null, "The Parameter maxx must not be null.");
-        checkArgument(theMaxy != null, "The Parameter maxy must not be null.");
-        this.minx = theMinx;
-        this.miny = theMiny;
-        this.maxx = theMaxx;
-        this.maxy = theMaxy;
-    }
-
-    /**
-     * @return {@link String}
-     */
-    @Override
-    public String toWMSKeyValuePair() {
-        return this.boundingBoxKeyValuePair = ((this.boundingBoxKeyValuePair != null) ? this.boundingBoxKeyValuePair : this.toInternalWMSKeyValuePair());
-    }
-
-    /**
-     * @return {@link String}
-     */
-    String toInternalWMSKeyValuePair() {
-        return of(BBOX.toKey(), of(this.minx.toString(), this.miny.toString(), this.maxx.toString(), this.maxy.toString())
-                .collect(joining(",")))
-                .collect(joining("="));
+    @Theory
+    public void wmsGetFeatureInfoAaltoFeatureReaderTest(String fileName) throws Exception {
+        checkArgument((fileName != null) && !(fileName.trim().isEmpty()), "The Parameter fileName must not be null or an empty string.");
+        File file = new File(dirFiles.concat(fileName));
+        logger.info("#######################FEATURE_COLLECTION : \n{}\n for File : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(file)), fileName);
     }
 }

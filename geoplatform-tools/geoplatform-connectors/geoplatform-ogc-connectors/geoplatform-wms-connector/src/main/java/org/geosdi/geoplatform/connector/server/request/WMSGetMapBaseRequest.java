@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.connector.server.request;
 
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.ToString;
 import net.jcip.annotations.Immutable;
@@ -51,6 +50,7 @@ import static java.util.stream.Collectors.toList;
 import static java.util.stream.Stream.of;
 import static javax.annotation.meta.When.NEVER;
 import static lombok.AccessLevel.NONE;
+import static org.geosdi.geoplatform.connector.server.request.WMSRequestKey.*;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -87,10 +87,10 @@ public class WMSGetMapBaseRequest implements GPWMSGetMapBaseRequest {
         checkArgument((theHeight != null) && !(theHeight.trim().isEmpty()), "The Parameter height must not be null or an empty string.");
         List<String> layersWithNonNullAndEmptyValues = theLayers.stream()
                 .filter(Objects::nonNull)
-                .filter(value -> !value.trim().isEmpty())
+                .filter(v -> !(v.trim().isEmpty()))
                 .distinct()
                 .collect(toList());
-        checkArgument(!(layersWithNonNullAndEmptyValues.isEmpty()), "The Parameter layers must not contains null values or empty values.");
+        checkArgument(!(layersWithNonNullAndEmptyValues.isEmpty()), "The Parameter layers must not contains null or empty values.");
         this.boundingBox = theBoundingBox;
         this.layers = layersWithNonNullAndEmptyValues;
         this.srs = theSrs;
@@ -110,11 +110,14 @@ public class WMSGetMapBaseRequest implements GPWMSGetMapBaseRequest {
      * @return {@link String}
      */
     String toInternalWMSKeyValuePair() {
-        return of(this.layers.stream()
+        return of(of(LAYERS.toKey(), this.layers.stream()
                         .filter(Objects::nonNull)
-                        .filter(value -> !value.trim().isEmpty())
-                        .collect(joining(",", "LAYERS=", "")), of("SRS", this.srs).collect(joining("=")),
-                this.boundingBox.toWMSKeyValuePair(), of("WIDTH", this.width).collect(joining("=")), of("HEIGHT", this.height).collect(joining("=")))
-                .collect(joining("&"));
+                        .filter(value -> !(value.trim().isEmpty()))
+                        .collect(joining("," )))
+                .collect(joining("=")), of(SRS.toKey(), this.srs)
+                .collect(joining("=")), this.boundingBox.toWMSKeyValuePair(), of(WIDTH.toKey(), this.width)
+                .collect(joining("=")), of(HEIGHT.toKey(), this.height)
+                .collect(joining("=")))
+                .collect(joining(CHAIN.toKey()));
     }
 }

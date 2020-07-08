@@ -82,7 +82,16 @@ public interface GPCoupleMultiFieldSearch extends GPPageableElasticSearchDAO.Pag
          * @param theMultiFieldPageBuilders
          */
         public CoupleMultiFieldSearch(@Nonnull(when = NEVER) List<GPCoupleMultiFieldPageBuilder> theMultiFieldPageBuilders) {
-            super(0, 0);
+            this(0, 0, theMultiFieldPageBuilders);
+        }
+
+        /**
+         * @param theFrom
+         * @param theSize
+         * @param theMultiFieldPageBuilders
+         */
+        public CoupleMultiFieldSearch(int theFrom, int theSize, @Nonnull(when = NEVER) List<GPCoupleMultiFieldPageBuilder> theMultiFieldPageBuilders) {
+            super(theFrom, theSize);
             checkArgument((theMultiFieldPageBuilders != null) && !(theMultiFieldPageBuilders.isEmpty()), "The Parameter multiFieldPageBuilders must not be null or empty");
             this.multiFieldPageBuilders = theMultiFieldPageBuilders.stream()
                     .filter(Objects::nonNull)
@@ -103,7 +112,7 @@ public interface GPCoupleMultiFieldSearch extends GPPageableElasticSearchDAO.Pag
                     .filter(Objects::nonNull)
                     .doOnComplete(() ->  logger.trace("####################{} - Create Query: \n{} \n\n", getClass().getSimpleName(), this.queryBuilder.toString()))
                     .subscribe(value -> this.internalBuildPage(value, builder));
-            return (Builder) builder.setQuery(this.queryBuilder);
+            return (Builder) super.buildPage(builder.setQuery(this.queryBuilder));
         }
 
         /**
@@ -119,7 +128,7 @@ public interface GPCoupleMultiFieldSearch extends GPPageableElasticSearchDAO.Pag
                     .filter(Objects::nonNull)
                     .doOnComplete(() ->  logger.trace("####################{} - Create Query: \n{} \n\n", getClass().getSimpleName(), this.queryBuilder.toString()))
                     .subscribe(value -> this.internalBuildPage(value, builder));
-            return (Builder) builder.query(this.queryBuilder);
+            return (Builder) super.buildPage(builder.query(this.queryBuilder));
         }
 
         /**

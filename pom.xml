@@ -1109,7 +1109,7 @@
                         <tagNameFormat>v@{project.version}</tagNameFormat>
                         <autoVersionSubmodules>true</autoVersionSubmodules>
                         <releaseProfiles>release</releaseProfiles>
-                        <arguments>-Dmaven.test.skipTests=true -Dmaven.test.skip=true</arguments>
+                        <arguments>-Pdeveolop</arguments>
                     </configuration>
                     <executions>
                         <execution>

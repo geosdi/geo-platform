@@ -1174,6 +1174,12 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-release-plugin</artifactId>
                     <version>2.5.3</version>
+                    <configuration>
+                        <tagNameFormat>v@{project.version}</tagNameFormat>
+                        <autoVersionSubmodules>true</autoVersionSubmodules>
+                        <releaseProfiles>release</releaseProfiles>
+                        <arguments>-Dmaven.test.skipTests=true -Dmaven.test.skip=true</arguments>
+                    </configuration>
                     <executions>
                         <execution>
                             <id>default</id>

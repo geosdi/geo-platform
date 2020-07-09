@@ -5,12 +5,12 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>plugin</artifactId>
-        <version>1.9.3</version>
+        <version>1.9-SNAPSHOT</version>
     </parent>
 
     <groupId>org.geosdi</groupId>
     <artifactId>geoplatform-print</artifactId>
-    <version>1.9.3</version>
+    <version>1.9-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Geo-Platform :: == Print Module</name>

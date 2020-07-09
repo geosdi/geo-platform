@@ -5,12 +5,12 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>geoplatform-cxf-support</artifactId>
-        <version>1.9.3</version>
+        <version>1.9-SNAPSHOT</version>
     </parent>
 
     <groupId>org.geosdi</groupId>
     <artifactId>geoplatform-cxf-rs-support</artifactId>
-    <version>1.9.3</version>
+    <version>1.9-SNAPSHOT</version>
 
     <name>Geo-Platform :: == CXF Rest Module Support</name>
     <!-- FIXME change it to the project's website -->

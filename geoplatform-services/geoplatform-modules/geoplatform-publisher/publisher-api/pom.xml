@@ -5,12 +5,12 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>geoplatform-publisher</artifactId>
-        <version>1.9.3</version>
+        <version>1.9-SNAPSHOT</version>
     </parent>
 
     <groupId>org.geosdi</groupId>
     <artifactId>geoplatform-publisher-api</artifactId>
-    <version>1.9.3</version>
+    <version>1.9-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Geo-Platform :: == Publish Module Api</name>

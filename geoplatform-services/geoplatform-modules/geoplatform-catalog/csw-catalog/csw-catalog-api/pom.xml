@@ -5,12 +5,12 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>csw-catalog</artifactId>
-        <version>1.9.3</version>
+        <version>1.9-SNAPSHOT</version>
     </parent>
 
     <groupId>org.geosdi</groupId>
     <artifactId>csw-catalog-api</artifactId>
-    <version>1.9.3</version>
+    <version>1.9-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Geo-Platform :: == CSW Catalog Module Api</name>

@@ -5,12 +5,12 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>geoplatform-services</artifactId>
-        <version>1.9.3</version>
+        <version>1.9-SNAPSHOT</version>
     </parent>
   
     <groupId>org.geosdi</groupId>
     <artifactId>gp-shared-beans</artifactId>
-    <version>1.9.3</version>
+    <version>1.9-SNAPSHOT</version>
     
     <name>Geo-Platform :: == Shared Beans</name>
 

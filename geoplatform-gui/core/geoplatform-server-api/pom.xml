@@ -5,12 +5,12 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>core</artifactId>
-        <version>1.9.3</version>
+        <version>1.9-SNAPSHOT</version>
     </parent>
 
     <groupId>org.geosdi</groupId>
     <artifactId>geoplatform-server-api</artifactId>
-    <version>1.9.3</version>
+    <version>1.9-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Geo-Platform :: == Server Api Module</name>

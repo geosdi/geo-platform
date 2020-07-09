@@ -4,12 +4,12 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>geoplatform-services</artifactId>
-        <version>1.9.3</version>
+        <version>1.9-SNAPSHOT</version>
     </parent>
 
     <groupId>org.geosdi</groupId>
     <artifactId>geoplatform-modules</artifactId>
-    <version>1.9.3</version>
+    <version>1.9-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Geo-Platform :: == WS Modules</name>

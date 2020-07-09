@@ -4,12 +4,12 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>geoplatform-filter-binding</artifactId>
-        <version>1.9.3</version>
+        <version>1.9-SNAPSHOT</version>
     </parent>
 
     <groupId>org.geosdi</groupId>
     <artifactId>filter-1.0.0</artifactId>
-    <version>1.9.3</version>
+    <version>1.9-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Geo-Platform :: == Binding Filter 1.0.0 XML Module</name>

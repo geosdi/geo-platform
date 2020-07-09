@@ -1111,6 +1111,7 @@
                         <autoVersionSubmodules>true</autoVersionSubmodules>
                         <releaseProfiles>release</releaseProfiles>
                         <releaseProfiles>experimental</releaseProfiles>
+                        <arguments>-Dmaven.javadoc.skip=true</arguments>
                     </configuration>
                     <executions>
                         <execution>

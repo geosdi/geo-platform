@@ -69,7 +69,6 @@ import static org.springframework.data.mongodb.core.index.GeoSpatialIndexType.GE
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {GPMongoConfigLoader.class}, loader = AnnotationConfigContextLoader.class)
-@Ignore
 public class GPMongoConfigTest {
 
     @GeoPlatformLog

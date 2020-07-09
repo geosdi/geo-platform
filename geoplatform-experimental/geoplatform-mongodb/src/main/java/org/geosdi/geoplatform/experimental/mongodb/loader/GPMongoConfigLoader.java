@@ -45,9 +45,7 @@ import org.springframework.context.annotation.ImportResource;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Configuration
-@ComponentScan(value = {"org.geosdi.geoplatform.logger.support.spring.config",
-    "org.geosdi.geoplatform.experimental.mongodb.spring"})
-@ImportResource(value = {"classpath:mongoRepositories.xml",
-    "classpath*:mongoRepositories.xml"})
+@ComponentScan(value = {"org.geosdi.geoplatform.logger.support.spring.config", "org.geosdi.geoplatform.experimental.mongodb.spring"})
+@ImportResource(value = {"classpath:mongoRepositories.xml", "classpath*:mongoRepositories.xml"})
 public class GPMongoConfigLoader {
 }

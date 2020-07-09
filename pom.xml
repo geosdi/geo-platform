@@ -1109,7 +1109,7 @@
                         <tagNameFormat>v@{project.version}</tagNameFormat>
                         <autoVersionSubmodules>true</autoVersionSubmodules>
                         <releaseProfiles>release</releaseProfiles>
-                        <releaseProfiles>develop,experimental</releaseProfiles>
+                        <releaseProfiles>experimental</releaseProfiles>
                     </configuration>
                     <executions>
                         <execution>

@@ -68,8 +68,8 @@ import static org.springframework.data.mongodb.core.index.GeoSpatialIndexType.GE
  * @email giuseppe.lascaleia@geosdi.org
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {GPMongoConfigLoader.class},
-        loader = AnnotationConfigContextLoader.class)
+@ContextConfiguration(classes = {GPMongoConfigLoader.class}, loader = AnnotationConfigContextLoader.class)
+@Ignore
 public class GPMongoConfigTest {
 
     @GeoPlatformLog
@@ -98,7 +98,6 @@ public class GPMongoConfigTest {
     public void setUp() {
         assertNotNull("GPSpringMongo Template must not NULL", mongoTemplate);
         assertNotNull("Address Repo must not be NULL", addressRepo);
-
         addressRepo.saveAll(Stream.of(new Address("A", 0.001, -0.002),
                 new Address("B", 1, 1), new Address("C", 0.5, 0.5),
                 new Address("D", -0.5, -0.5), new Address("Berlin", 13.405838, 52.531261),

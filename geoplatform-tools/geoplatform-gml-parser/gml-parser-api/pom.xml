@@ -4,12 +4,12 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>geoplatform-gml-parser</artifactId>
-        <version>1.9-SNAPSHOT</version>
+        <version>1.9.3</version>
     </parent>
 
     <groupId>org.geosdi</groupId>
     <artifactId>gml-parser-api</artifactId>
-    <version>1.9-SNAPSHOT</version>
+    <version>1.9.3</version>
     <packaging>jar</packaging>
 
     <name>Geo-Platform :: == GML Parser Api Module</name>

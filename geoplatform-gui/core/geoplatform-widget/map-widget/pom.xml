@@ -5,12 +5,12 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>geoplatform-widget</artifactId>
-        <version>1.9-SNAPSHOT</version>
+        <version>1.9.3</version>
     </parent>
 
     <groupId>org.geosdi</groupId>
     <artifactId>map-widget</artifactId>
-    <version>1.9-SNAPSHOT</version>
+    <version>1.9.3</version>
     <packaging>jar</packaging>
 
     <name>Geo-Platform :: == Map Module</name>

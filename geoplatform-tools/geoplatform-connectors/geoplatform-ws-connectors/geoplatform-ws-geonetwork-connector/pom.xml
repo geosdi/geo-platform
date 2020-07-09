@@ -4,12 +4,12 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>geoplatform-ws-connectors</artifactId>
-        <version>1.9-SNAPSHOT</version>
+        <version>1.9.3</version>
     </parent>
 
     <groupId>org.geosdi</groupId>
     <artifactId>geoplatform-ws-geonetwork-connector</artifactId>
-    <version>1.9-SNAPSHOT</version>
+    <version>1.9.3</version>
     <packaging>jar</packaging>
 
     <name>Geo-Platform :: == WS Geonetwork Connector Module</name>

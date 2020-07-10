@@ -39,6 +39,7 @@ import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.search.aggregations.AbstractAggregationBuilder;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
+import org.geosdi.geoplatform.experimental.el.condition.PredicateCondition;
 import org.geosdi.geoplatform.experimental.el.dao.GPPageableElasticSearchDAO;
 import org.geosdi.geoplatform.experimental.el.rest.api.dao.index.GPElasticSearchRestIndexDAO;
 
@@ -59,6 +60,15 @@ public interface GPPageableElasticSearchRestDAO<D extends Document> extends GPPa
      */
     @Override
     <P extends Page> IPageResult<D> find(@Nonnull(when = NEVER) P page) throws Exception;
+
+    /**
+     * @param page
+     * @param thePredicate
+     * @return {@link IPageResult<D>}
+     * @throws Exception
+     */
+    @Override
+    <P extends Page> IPageResult<D> find(@Nonnull(when = NEVER) P page, @Nonnull(when = NEVER) PredicateCondition<D> thePredicate) throws Exception;
 
     /**
      * @param page

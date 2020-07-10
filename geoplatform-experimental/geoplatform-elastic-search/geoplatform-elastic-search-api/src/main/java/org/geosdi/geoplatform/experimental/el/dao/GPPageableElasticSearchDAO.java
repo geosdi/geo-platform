@@ -48,6 +48,7 @@ import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.sort.SortOrder;
 import org.geosdi.geoplatform.experimental.el.api.function.GPElasticSearchCheck;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
+import org.geosdi.geoplatform.experimental.el.condition.PredicateCondition;
 import org.geosdi.geoplatform.experimental.el.dao.store.IPageMapStore;
 import org.geosdi.geoplatform.experimental.el.dao.store.IPageStore;
 import org.geosdi.geoplatform.experimental.el.dao.store.PageStore;
@@ -84,6 +85,15 @@ public interface GPPageableElasticSearchDAO<D extends Document> {
      * @throws Exception
      */
     <P extends Page> IPageResult<D> find(@Nonnull(when = NEVER) P page) throws Exception;
+
+    /**
+     * @param page
+     * @param thePredicate
+     * @param <P>
+     * @return {@link IPageResult<D>}
+     * @throws Exception
+     */
+    <P extends Page> IPageResult<D> find(@Nonnull(when = NEVER) P page, @Nonnull(when = NEVER) PredicateCondition<D> thePredicate) throws Exception;
 
     /**
      * @param page

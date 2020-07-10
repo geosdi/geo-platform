@@ -40,9 +40,9 @@ import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.rest.RestStatus;
 import org.elasticsearch.search.aggregations.AbstractAggregationBuilder;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
+import org.geosdi.geoplatform.experimental.el.condition.PredicateCondition;
 
 import javax.annotation.Nonnull;
-
 import java.util.Objects;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -79,6 +79,33 @@ public abstract class PageableElasticSearchDAO<D extends Document> extends GPBas
                 .filter(Objects::nonNull)
                 .map(this::readDocument)
                 .filter(Objects::nonNull)
+                .collect(toList()));
+    }
+
+    /**
+     * @param page
+     * @param thePredicate
+     * @return {@link IPageResult<D>}
+     * @throws Exception
+     */
+    @Override
+    public <P extends Page> IPageResult<D> find(@Nonnull(when = NEVER) P page, @Nonnull(when = NEVER) PredicateCondition<D> thePredicate) throws Exception {
+        checkArgument((page != null), "Page must not be null.");
+        checkArgument((thePredicate != null), "Predicate must not be null.");
+        super.refreshIndex();
+        SearchRequestBuilder builder = page.buildPage(this.elastichSearchClient.prepareSearch(getIndexName()).setTypes(getIndexType()));
+        logger.trace("#########################Builder : {}\n\n", builder.toString());
+        SearchResponse searchResponse = builder.get();
+        if (searchResponse.status() != RestStatus.OK) {
+            throw new IllegalStateException("Problem in Search : " + searchResponse.status());
+        }
+        Long total = searchResponse.getHits().getTotalHits().value;
+        logger.debug("###################TOTAL HITS FOUND : {} .\n\n", total);
+        return new PageResult<D>(total, of(searchResponse.getHits().getHits())
+                .filter(Objects::nonNull)
+                .map(this::readDocument)
+                .filter(Objects::nonNull)
+                .filter(thePredicate)
                 .collect(toList()));
     }
 

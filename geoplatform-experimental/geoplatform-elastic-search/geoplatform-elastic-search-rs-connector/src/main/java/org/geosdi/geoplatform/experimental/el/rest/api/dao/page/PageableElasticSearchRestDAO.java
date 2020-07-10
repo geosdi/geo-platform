@@ -42,6 +42,7 @@ import org.elasticsearch.client.core.CountResponse;
 import org.elasticsearch.search.aggregations.AbstractAggregationBuilder;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
+import org.geosdi.geoplatform.experimental.el.condition.PredicateCondition;
 import org.geosdi.geoplatform.experimental.el.dao.PageResult;
 import org.geosdi.geoplatform.experimental.el.rest.api.dao.index.ElasticSearchRestIndexDAO;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
@@ -94,6 +95,34 @@ public abstract class PageableElasticSearchRestDAO<D extends Document> extends E
                 .filter(Objects::nonNull)
                 .map(this::readDocument)
                 .filter(Objects::nonNull)
+                .collect(toList()));
+    }
+
+    /**
+     * @param page
+     * @param thePredicate
+     * @return {@link IPageResult<D>}
+     * @throws Exception
+     */
+    @Override
+    public <P extends Page> IPageResult<D> find(@Nonnull(when = NEVER) P page, @Nonnull(when = NEVER) PredicateCondition<D> thePredicate) throws Exception {
+        checkArgument((page != null), "Page must not be null.");
+        checkArgument((thePredicate != null), "Predicate must not be null.");
+        SearchRequest searchRequest = this.prepareSearchRequest();
+        SearchSourceBuilder searchSourceBuilder = page.buildPage(new SearchSourceBuilder());
+        searchRequest.source(searchSourceBuilder);
+        logger.trace("@@@@@@@@@@@@@@@@@@@@@@@@@@@@SEARCH_SOURCE_BUILDER : {}\n\n", searchSourceBuilder.toString());
+        SearchResponse searchResponse = this.elasticSearchRestHighLevelClient.search(searchRequest, DEFAULT);
+        if (searchResponse.status() != OK) {
+            throw new IllegalStateException("Problem in Search : " + searchResponse.status());
+        }
+        Long total = searchResponse.getHits().getTotalHits().value;
+        logger.debug("###################TOTAL HITS FOUND : {} .\n\n", total);
+        return new PageResult<D>(total, of(searchResponse.getHits().getHits())
+                .filter(Objects::nonNull)
+                .map(this::readDocument)
+                .filter(Objects::nonNull)
+                .filter(thePredicate)
                 .collect(toList()));
     }
 

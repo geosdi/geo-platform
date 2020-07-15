@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.experimental.el.dao;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.common.collect.Lists;
 import lombok.Getter;
 import lombok.ToString;
 import net.jcip.annotations.Immutable;
@@ -166,6 +167,8 @@ public interface GPPageableElasticSearchDAO<D extends Document> {
     <P extends Page> Long count(@Nonnull(when = NEVER) P page) throws Exception;
 
     interface IPageResult<D>  extends Serializable {
+
+        IPageResult EMPTY_PAGE_RESULT = new PageResult(0l, Lists.newArrayList());
 
         /**
          * <p>The Total Results Number</p>
@@ -774,7 +777,7 @@ public interface GPPageableElasticSearchDAO<D extends Document> {
          */
         @Override
         public BoolQueryBuilder boolQueryBuilder() {
-            return this.queryBuilder;
+            return this.queryBuilder = ((this.queryBuilder != null) ? this.queryBuilder : boolQuery());
         }
     }
 }

@@ -80,6 +80,7 @@ public interface GPCoupleMultiFieldPageBuilder extends GPPageableElasticSearchDA
         private final MultiFieldsSearch multiFieldPageBuilder;
         @Getter
         private final BooleanQueryType type;
+        private BooleanQueryType containerQueryType;
 
         /**
          * @param theMultiFieldPageBuilder

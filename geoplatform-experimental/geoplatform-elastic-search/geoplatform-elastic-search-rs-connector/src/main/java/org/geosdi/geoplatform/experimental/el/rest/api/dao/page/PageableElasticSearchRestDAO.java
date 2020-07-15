@@ -301,7 +301,7 @@ public abstract class PageableElasticSearchRestDAO<D extends Document> extends E
         checkArgument((page != null), "Page must not be null.");
         CountRequest countRequest = new CountRequest(this.getIndexName());
         SearchSourceBuilder searchSourceBuilder = page.buildPage(new SearchSourceBuilder());
-        countRequest.source(searchSourceBuilder);
+        countRequest.query(searchSourceBuilder.query());
         logger.trace("#########################Builder : {}\n\n", searchSourceBuilder.toString());
         CountResponse countResponse = this.elasticSearchRestHighLevelClient.count(countRequest, DEFAULT);
         if (countResponse.status() != OK) {

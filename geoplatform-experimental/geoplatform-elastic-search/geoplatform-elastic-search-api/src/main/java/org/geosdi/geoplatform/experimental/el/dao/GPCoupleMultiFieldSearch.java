@@ -106,6 +106,7 @@ public interface GPCoupleMultiFieldSearch extends GPPageableElasticSearchDAO.Pag
          */
         @Override
         public <Builder extends SearchRequestBuilder> Builder buildPage(@Nonnull(when = NEVER) Builder builder) throws Exception {
+            checkArgument(builder != null, "The Parameter SearchRequestBuilder must not be null.");
             this.queryBuilder = boolQuery();
             logger.trace("####################Called {} #buildPage with parameters multiFieldPageBuilders : {} \n\n", getClass().getSimpleName(), this.multiFieldPageBuilders);
             fromIterable(this.multiFieldPageBuilders)
@@ -122,11 +123,12 @@ public interface GPCoupleMultiFieldSearch extends GPPageableElasticSearchDAO.Pag
          */
         @Override
         public <Builder extends SearchSourceBuilder> Builder buildPage(@Nonnull(when = NEVER) Builder builder) throws Exception {
+            checkArgument(builder != null, "The Parameter SearchSourceBuilder must not be null.");
             this.queryBuilder = boolQuery();
             logger.trace("####################Called {} #buildPage with parameters multiFieldPageBuilders : {} \n\n", getClass().getSimpleName(), this.multiFieldPageBuilders);
             fromIterable(this.multiFieldPageBuilders)
                     .filter(Objects::nonNull)
-                    .doOnComplete(() ->  logger.trace("####################{} - Create Query: \n{} \n\n", getClass().getSimpleName(), this.queryBuilder.toString()))
+                    .doOnComplete(() ->  logger.trace("####################{} - RX COMPLETE Create Query: \n{} \n\n", getClass().getSimpleName(), this.queryBuilder.toString()))
                     .subscribe(value -> this.internalBuildPage(value, builder));
             return (Builder) super.buildPage(builder.query(this.queryBuilder));
         }
@@ -136,7 +138,7 @@ public interface GPCoupleMultiFieldSearch extends GPPageableElasticSearchDAO.Pag
          */
         @Override
         public BoolQueryBuilder boolQueryBuilder() {
-            return this.queryBuilder;
+            return this.queryBuilder = ((this.queryBuilder != null) ? this.queryBuilder : boolQuery());
         }
 
         /**

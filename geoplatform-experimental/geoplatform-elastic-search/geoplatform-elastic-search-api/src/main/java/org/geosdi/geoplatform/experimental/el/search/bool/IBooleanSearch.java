@@ -57,11 +57,10 @@ public interface IBooleanSearch extends IGPQuerySearch {
     BooleanQueryType getType();
 
     /**
-     * @param <P>
-     * @return {@link P}
+     * @return {@link Page}
      */
-    default <P extends Page> P toPage() {
-        return (P) new GPPageableElasticSearchDAO.MultiFieldsSearch(this);
+    default Page toPage() {
+        return new GPPageableElasticSearchDAO.MultiFieldsSearch(this);
     }
 
     /**

@@ -45,6 +45,7 @@ import org.elasticsearch.action.update.UpdateResponse;
 import org.elasticsearch.client.core.CountRequest;
 import org.elasticsearch.client.core.CountResponse;
 import org.elasticsearch.common.xcontent.XContentBuilder;
+import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.reindex.BulkByScrollResponse;
 import org.elasticsearch.index.reindex.DeleteByQueryRequest;
 import org.elasticsearch.index.reindex.UpdateByQueryRequest;
@@ -260,6 +261,24 @@ public abstract class ElasticSearchRestDAO<D extends Document> extends ElasticSe
         CountResponse countResponse = this.elasticSearchRestHighLevelClient.count(new CountRequest(getIndexName()), DEFAULT);
         if (countResponse.status() != OK) {
             throw new IllegalStateException("Problem to count document, status : " + countResponse.status());
+        }
+        return countResponse.getCount();
+    }
+
+    /**
+     * @param theQueryBuilder
+     * @return {@link Long}
+     * @throws Exception
+     */
+    @Override
+    public Long count(@Nonnull(when = NEVER) QueryBuilder theQueryBuilder) throws Exception {
+        checkArgument(theQueryBuilder != null, "The Parameter queryBuilder must not be null.");
+        CountRequest countRequest = new CountRequest(this.getIndexName());
+        countRequest.query(theQueryBuilder);
+        logger.trace("#########################QueryBuilder : \n{}\n\n", theQueryBuilder.toString());
+        CountResponse countResponse = this.elasticSearchRestHighLevelClient.count(countRequest, DEFAULT);
+        if (countResponse.status() != OK) {
+            throw new IllegalStateException("Problem in Search : " + countResponse.status());
         }
         return countResponse.getCount();
     }

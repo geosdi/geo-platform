@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.experimental.el.rest.api.dao;
 
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.common.xcontent.XContentBuilder;
+import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.reindex.BulkByScrollResponse;
 import org.elasticsearch.index.reindex.DeleteByQueryRequest;
 import org.elasticsearch.index.reindex.UpdateByQueryRequest;
@@ -138,4 +139,11 @@ public interface GPElasticSearchRestDAO<D extends Document> extends GPElasticSea
      * @throws java.lang.Exception
      */
     Long count() throws Exception;
+
+    /**
+     * @param theQueryBuilder
+     * @return {@link Long}
+     * @throws Exception
+     */
+    Long count(@Nonnull(when = NEVER) QueryBuilder theQueryBuilder) throws Exception;
 }

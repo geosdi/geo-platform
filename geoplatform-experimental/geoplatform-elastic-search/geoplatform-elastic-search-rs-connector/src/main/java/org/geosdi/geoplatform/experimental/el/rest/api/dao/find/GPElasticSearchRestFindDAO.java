@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.experimental.el.rest.api.dao.find;
 
+import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.sort.SortOrder;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
@@ -133,4 +134,11 @@ public interface GPElasticSearchRestFindDAO<D extends Document> extends GPPageab
      * @throws Exception
      */
     IPageResult<D> find(@Nonnull(when = NEVER) SearchSourceBuilder theSearchSourceBuilder) throws Exception;
+
+    /**
+     * @param theQueryBuilder
+     * @return {@link org.geosdi.geoplatform.experimental.el.dao.GPPageableElasticSearchDAO.IPageResult<D>}
+     * @throws Exception
+     */
+    IPageResult<D> find(@Nonnull(when = NEVER) QueryBuilder theQueryBuilder) throws Exception;
 }

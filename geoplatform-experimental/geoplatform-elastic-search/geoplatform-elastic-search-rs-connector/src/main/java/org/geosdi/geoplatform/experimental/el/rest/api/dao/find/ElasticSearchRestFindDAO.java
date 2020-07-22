@@ -39,6 +39,7 @@ import com.google.common.collect.Iterables;
 import org.elasticsearch.action.get.*;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.fetch.subphase.FetchSourceContext;
 import org.elasticsearch.search.sort.SortOrder;
@@ -252,5 +253,16 @@ public abstract class ElasticSearchRestFindDAO<D extends Document> extends Pagea
                 .map(this::readDocument)
                 .filter(Objects::nonNull)
                 .collect(toList()));
+    }
+
+    /**
+     * @param theQueryBuilder
+     * @return {@link IPageResult<D>}
+     * @throws Exception
+     */
+    @Override
+    public IPageResult<D> find(@Nonnull(when = NEVER) QueryBuilder theQueryBuilder) throws Exception {
+        checkArgument(theQueryBuilder != null, "The Parameter queryBuilder must not be null.");
+        return this.find(new SearchSourceBuilder().query(theQueryBuilder));
     }
 }

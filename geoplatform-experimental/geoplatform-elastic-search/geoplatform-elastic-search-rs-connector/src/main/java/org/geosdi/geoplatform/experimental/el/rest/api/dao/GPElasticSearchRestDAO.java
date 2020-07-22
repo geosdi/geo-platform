@@ -146,4 +146,14 @@ public interface GPElasticSearchRestDAO<D extends Document> extends GPElasticSea
      * @throws Exception
      */
     Long count(@Nonnull(when = NEVER) QueryBuilder theQueryBuilder) throws Exception;
+
+    /**
+     * @param theValue
+     * @param theCheck
+     * @param <R>
+     * @param <V>
+     * @return {@link Long}
+     * @throws Exception
+     */
+    <R extends QueryBuilder, V> Long count(@Nonnull(when = NEVER) V theValue ,@Nonnull(when = NEVER) GPElasticSearchCheck<R, V, Exception> theCheck) throws Exception;
 }

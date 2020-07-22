@@ -282,4 +282,17 @@ public abstract class ElasticSearchRestDAO<D extends Document> extends ElasticSe
         }
         return countResponse.getCount();
     }
+
+    /**
+     * @param theValue
+     * @param theCheck
+     * @return {@link Long}
+     * @throws Exception
+     */
+    @Override
+    public <R extends QueryBuilder, V> Long count(@Nonnull(when = NEVER) V theValue, @Nonnull(when = NEVER) GPElasticSearchCheck<R, V, Exception> theCheck) throws Exception {
+        checkArgument(theValue != null, "The Parameter value must not be null.");
+        checkArgument(theCheck != null, "The Parameter checkFunction must not be null.");
+        return this.count(theCheck.apply(theValue));
+    }
 }

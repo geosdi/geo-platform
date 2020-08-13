@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.connector.server.request;
 
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.ToString;
 import net.jcip.annotations.Immutable;
@@ -87,16 +86,9 @@ public class WMSGetMapBaseRequest implements GPWMSGetMapBaseRequest {
         checkArgument((theHeight != null) && !(theHeight.trim().isEmpty()), "The Parameter height must not be null or an empty string.");
         Set<String> layersWithNonNullAndEmptyValues = theLayers.stream()
                 .filter(Objects::nonNull)
-<<<<<<< HEAD
-                .filter(value -> !value.trim().isEmpty())
-                .distinct()
-                .collect(toList());
-        checkArgument(!(layersWithNonNullAndEmptyValues.isEmpty()), "The Parameter layers must not contains null values or empty values.");
-=======
                 .filter(v -> !(v.trim().isEmpty()))
                 .collect(toSet());
         checkArgument(!(layersWithNonNullAndEmptyValues.isEmpty()), "The Parameter layers must not contains null or empty values.");
->>>>>>> 8bcc7b792... Improvements
         this.boundingBox = theBoundingBox;
         this.layers = layersWithNonNullAndEmptyValues;
         this.srs = theSrs;

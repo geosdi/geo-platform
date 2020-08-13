@@ -51,7 +51,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Getter
-@ToString
+@ToString(exclude = {"boundingBoxKeyValuePair"})
 @Immutable
 public class WMSBoundingBox implements GPWMSBoundingBox {
 

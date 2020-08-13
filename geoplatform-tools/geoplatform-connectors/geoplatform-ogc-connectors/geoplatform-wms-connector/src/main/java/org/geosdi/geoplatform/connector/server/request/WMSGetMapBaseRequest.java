@@ -42,12 +42,12 @@ import net.jcip.annotations.Immutable;
 
 import javax.annotation.Nonnull;
 import java.util.Collection;
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.util.stream.Collectors.joining;
-import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toSet;
 import static java.util.stream.Stream.of;
 import static javax.annotation.meta.When.NEVER;
 import static lombok.AccessLevel.NONE;
@@ -57,7 +57,7 @@ import static lombok.AccessLevel.NONE;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Getter
-@ToString
+@ToString(exclude = {"wmsGetMapKeyValuePair"})
 @Immutable
 public class WMSGetMapBaseRequest implements GPWMSGetMapBaseRequest {
 
@@ -85,12 +85,18 @@ public class WMSGetMapBaseRequest implements GPWMSGetMapBaseRequest {
         checkArgument((theSrs != null) && !(theSrs.trim().isEmpty()), "The Parameter srs must not be null or an empty string.");
         checkArgument((theWitdth != null) && !(theWitdth.trim().isEmpty()), " The Parameter width must non be null or an empty string.");
         checkArgument((theHeight != null) && !(theHeight.trim().isEmpty()), "The Parameter height must not be null or an empty string.");
-        List<String> layersWithNonNullAndEmptyValues = theLayers.stream()
+        Set<String> layersWithNonNullAndEmptyValues = theLayers.stream()
                 .filter(Objects::nonNull)
+<<<<<<< HEAD
                 .filter(value -> !value.trim().isEmpty())
                 .distinct()
                 .collect(toList());
         checkArgument(!(layersWithNonNullAndEmptyValues.isEmpty()), "The Parameter layers must not contains null values or empty values.");
+=======
+                .filter(v -> !(v.trim().isEmpty()))
+                .collect(toSet());
+        checkArgument(!(layersWithNonNullAndEmptyValues.isEmpty()), "The Parameter layers must not contains null or empty values.");
+>>>>>>> 8bcc7b792... Improvements
         this.boundingBox = theBoundingBox;
         this.layers = layersWithNonNullAndEmptyValues;
         this.srs = theSrs;

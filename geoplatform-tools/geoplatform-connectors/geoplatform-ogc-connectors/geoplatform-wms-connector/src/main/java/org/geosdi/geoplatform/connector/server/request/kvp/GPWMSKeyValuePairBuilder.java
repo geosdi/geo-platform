@@ -35,6 +35,7 @@
 package org.geosdi.geoplatform.connector.server.request.kvp;
 
 import org.geosdi.geoplatform.connector.server.request.GPWMSKeyValuePair;
+import org.geosdi.geoplatform.connector.server.request.kvp.GPWMSRequestKvpReader.WMSRequestKvpReader;
 
 import javax.annotation.Nonnull;
 
@@ -62,7 +63,9 @@ public interface GPWMSKeyValuePairBuilder<R> extends GPWMSKeyValuePair {
 
     abstract class GPWMSBaseKeyValuePairBuilder<R> implements GPWMSKeyValuePairBuilder<R> {
 
-        protected String keyValuePair;
+        protected static final GPWMSRequestKvpReader wmsRequestKvpReader = new WMSRequestKvpReader();
+        //
+        protected ThreadLocal<String> keyValuePair = ThreadLocal.withInitial(() -> null);
 
         protected GPWMSBaseKeyValuePairBuilder() {
         }
@@ -73,7 +76,7 @@ public interface GPWMSKeyValuePairBuilder<R> extends GPWMSKeyValuePair {
          */
         @Override
         public <KVPBuilder extends GPWMSKeyValuePairBuilder> KVPBuilder withKeyValuePair(@Nonnull(when = NEVER) String theKeyValuePair) {
-            this.keyValuePair = theKeyValuePair;
+            this.keyValuePair.set(theKeyValuePair);
             return self();
         }
 
@@ -83,7 +86,7 @@ public interface GPWMSKeyValuePairBuilder<R> extends GPWMSKeyValuePair {
          */
         @Override
         public final R build() throws Exception {
-            checkArgument((this.keyValuePair != null) && !(this.keyValuePair.trim().isEmpty()), "The Parameter keyValuePair must not be null or an empty string.");
+            checkArgument((this.keyValuePair.get() != null) && !(this.keyValuePair.get().trim().isEmpty()), "The Parameter keyValuePair must not be null or an empty string.");
             return this.internalBuild();
         }
 
@@ -99,8 +102,8 @@ public interface GPWMSKeyValuePairBuilder<R> extends GPWMSKeyValuePair {
          * @return {@link String}
          */
         @Override
-        public String toWMSKeyValuePair() {
-            return this.keyValuePair;
+        public final String toWMSKeyValuePair() {
+            return this.keyValuePair.get();
         }
 
         @Override

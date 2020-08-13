@@ -34,17 +34,22 @@
  */
 package org.geosdi.geoplatform.connector.server.request;
 
+import net.jcip.annotations.ThreadSafe;
 import org.geosdi.geoplatform.connector.server.request.kvp.GPWMSKeyValuePairBuilder.GPWMSBaseKeyValuePairBuilder;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.geosdi.geoplatform.connector.server.request.kvp.GPWMSRequestKeyValuePair;
+
+import java.util.Collection;
+import java.util.Map;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static org.geosdi.geoplatform.connector.server.request.WMSRequestKey.*;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@ThreadSafe
 public class GPWMSGetMapBaseRequestBuilder extends GPWMSBaseKeyValuePairBuilder<GPWMSGetMapBaseRequest> {
-
-    private static final Logger logger = LoggerFactory.getLogger(GPWMSGetMapBaseRequestBuilder.class);
 
     GPWMSGetMapBaseRequestBuilder() {
     }
@@ -57,23 +62,22 @@ public class GPWMSGetMapBaseRequestBuilder extends GPWMSBaseKeyValuePairBuilder<
     }
 
     /**
-     * @return
+     * @return {@link GPWMSGetMapBaseRequest}
      * @throws Exception
      */
     @Override
     protected GPWMSGetMapBaseRequest internalBuild() throws Exception {
-        String value = this.toWMSKeyValuePair();
-        value = (value.startsWith("?") ? value.replace("?", "") : value);
-        logger.debug("#########################{} trying to build GPWMSGetMapBaseRequest from Value : {}\n", this, value);
-
-        return null;
-    }
-
-    /**
-     * @return {@link String}
-     */
-    @Override
-    public String toWMSKeyValuePair() {
-        return this.keyValuePair;
+        Map<String, GPWMSRequestKeyValuePair> values = wmsRequestKvpReader.read(this.keyValuePair.get());
+        GPWMSRequestKeyValuePair<Collection<String>> layers = values.get(LAYERS.toKey());
+        GPWMSRequestKeyValuePair<String> srs = values.get(SRS.toKey());
+        GPWMSRequestKeyValuePair<String> width = values.get(WIDTH.toKey());
+        GPWMSRequestKeyValuePair<String> height = values.get(HEIGHT.toKey());
+        GPWMSRequestKeyValuePair<GPWMSBoundingBox> bbox = values.get(BBOX.toKey());
+        checkArgument(layers != null, "The Parameter layers must not be null.");
+        checkArgument(srs != null, "The Parameter srs must not be null.");
+        checkArgument(width != null, "The Parameter width must not be null.");
+        checkArgument(height != null, "The Parameter height must not be null.");
+        checkArgument(bbox != null, "The Parameter bbox must not be null.");
+        return new WMSGetMapBaseRequest(bbox.toValue(), layers.toValue(), srs.toValue(), width.toValue(), height.toValue());
     }
 }

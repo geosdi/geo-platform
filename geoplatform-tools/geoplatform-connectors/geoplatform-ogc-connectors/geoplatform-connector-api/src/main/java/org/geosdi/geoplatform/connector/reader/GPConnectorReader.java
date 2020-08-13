@@ -32,61 +32,23 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.server.request;
+package org.geosdi.geoplatform.connector.reader;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import java.util.Optional;
-
-import static com.google.common.base.Preconditions.checkArgument;
-import static java.lang.Boolean.FALSE;
-import static java.util.Arrays.stream;
-import static java.util.Optional.empty;
-import static javax.annotation.meta.When.NEVER;
+import javax.annotation.meta.When;
+import java.io.Serializable;
+import java.util.Map;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public enum WMSRequestKey implements GPWMSRequestKey {
-
-    LAYERS("LAYERS"),
-    SRS("SRS"),
-    WIDTH("WIDTH"),
-    HEIGHT("HEIGHT"),
-    BBOX("BBOX"),
-    CHAIN("&"),
-    KVP_SEPARATOR("="),
-    URL_DELIMITER("?"),
-    COMMA_SEPARATOR(",");
-
-    private final String key;
+public interface GPConnectorReader<R, V, Key> extends Serializable {
 
     /**
-     * @param theKey
+     * @param theValue
+     * @return {@link Map<Key, R>}
+     * @throws Exception
      */
-    WMSRequestKey(@Nonnull(when = NEVER) String theKey) {
-        checkArgument((theKey != null) && !(theKey.trim().isEmpty()), "The Parameter key must not be null or an empty string.");
-        this.key = theKey;
-    }
-
-    /**
-     * @return {@link String}
-     */
-    @Override
-    public String toKey() {
-        return this.key;
-    }
-
-    /**
-     * @param theKey
-     * @return {@link GPWMSRequestKey}
-     */
-    public static GPWMSRequestKey forKey(@Nullable String theKey) {
-        Optional<GPWMSRequestKey> optional = stream(WMSRequestKey.values())
-                .map(v -> (GPWMSRequestKey) v)
-                .filter(k -> ((theKey != null)) ? k.toKey().equalsIgnoreCase(theKey) : FALSE).findFirst();
-        return ((optional != null) && !(optional.equals(empty()))) ? optional.get() : null;
-    }
+    Map<Key, R> read(@Nonnull(when = When.NEVER) V theValue) throws Exception;
 }

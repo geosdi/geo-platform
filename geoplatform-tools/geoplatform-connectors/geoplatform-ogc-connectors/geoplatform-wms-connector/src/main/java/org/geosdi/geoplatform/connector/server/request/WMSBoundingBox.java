@@ -53,7 +53,7 @@ import static org.geosdi.geoplatform.connector.server.request.WMSRequestKey.BBOX
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Getter
-@ToString
+@ToString(exclude = {"boundingBoxKeyValuePair"})
 @Immutable
 public class WMSBoundingBox implements GPWMSBoundingBox {
 

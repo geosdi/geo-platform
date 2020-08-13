@@ -34,8 +34,6 @@
  */
 package org.geosdi.geoplatform.connector.server.request.kvp;
 
-import lombok.ToString;
-
 import javax.annotation.Nonnull;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -45,8 +43,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@ToString
-public abstract class WMSGetMapBaseRequestKeyValuePair implements GPWMSRequestKeyValuePair {
+public abstract class WMSGetMapBaseRequestKeyValuePair<V> implements GPWMSRequestKeyValuePair<V> {
 
     private static final long serialVersionUID = 2531861710995929420L;
     //
@@ -66,5 +63,13 @@ public abstract class WMSGetMapBaseRequestKeyValuePair implements GPWMSRequestKe
     @Override
     public final String toKey() {
         return this.key;
+    }
+
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName() + "{" +
+                "key = " + this.toKey() +
+                ", value = " + ((this.toValue() != null) ? this.toValue() : "") +
+                "}";
     }
 }

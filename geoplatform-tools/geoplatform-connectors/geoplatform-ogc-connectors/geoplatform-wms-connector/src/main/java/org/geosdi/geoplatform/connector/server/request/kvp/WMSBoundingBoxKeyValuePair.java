@@ -32,61 +32,53 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.server.request;
+package org.geosdi.geoplatform.connector.server.request.kvp;
+
+import net.jcip.annotations.Immutable;
+import org.geosdi.geoplatform.connector.server.request.GPWMSBoundingBox;
+import org.geosdi.geoplatform.connector.server.request.WMSBoundingBox;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import java.util.Optional;
+import java.util.Objects;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static java.lang.Boolean.FALSE;
-import static java.util.Arrays.stream;
-import static java.util.Optional.empty;
+import static java.lang.Double.valueOf;
+import static java.util.regex.Pattern.compile;
 import static javax.annotation.meta.When.NEVER;
+import static org.geosdi.geoplatform.connector.server.request.WMSRequestKey.BBOX;
+import static org.geosdi.geoplatform.connector.server.request.WMSRequestKey.COMMA_SEPARATOR;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public enum WMSRequestKey implements GPWMSRequestKey {
+@Immutable
+public class WMSBoundingBoxKeyValuePair extends WMSGetMapBaseRequestKeyValuePair<GPWMSBoundingBox> {
 
-    LAYERS("LAYERS"),
-    SRS("SRS"),
-    WIDTH("WIDTH"),
-    HEIGHT("HEIGHT"),
-    BBOX("BBOX"),
-    CHAIN("&"),
-    KVP_SEPARATOR("="),
-    URL_DELIMITER("?"),
-    COMMA_SEPARATOR(",");
-
-    private final String key;
+    private static final long serialVersionUID = 147472336825716237L;
+    //
+    private final GPWMSBoundingBox wmsBoundingBox;
 
     /**
-     * @param theKey
+     * @param theValue
      */
-    WMSRequestKey(@Nonnull(when = NEVER) String theKey) {
-        checkArgument((theKey != null) && !(theKey.trim().isEmpty()), "The Parameter key must not be null or an empty string.");
-        this.key = theKey;
+    WMSBoundingBoxKeyValuePair(@Nonnull(when = NEVER) String theValue) {
+        super(BBOX.toKey());
+        checkArgument((theValue != null) && !(theValue.trim().isEmpty()), "The Parameter value must not be null or an empty string.");
+        Double[] boundingBoxValues = compile(COMMA_SEPARATOR.toKey()).splitAsStream(theValue)
+                .filter(Objects::nonNull)
+                .filter(v -> !v.trim().isEmpty())
+                .map(v -> valueOf(v))
+                .toArray(Double[]::new);
+        checkArgument((boundingBoxValues != null) && (boundingBoxValues.length == 4), "The Parameter boundingBoxValues must not be null and must contains 4 elements.");
+        this.wmsBoundingBox = new WMSBoundingBox(boundingBoxValues[0], boundingBoxValues[1], boundingBoxValues[2], boundingBoxValues[3]);
     }
 
     /**
-     * @return {@link String}
+     * @return {@link GPWMSBoundingBox}
      */
     @Override
-    public String toKey() {
-        return this.key;
-    }
-
-    /**
-     * @param theKey
-     * @return {@link GPWMSRequestKey}
-     */
-    public static GPWMSRequestKey forKey(@Nullable String theKey) {
-        Optional<GPWMSRequestKey> optional = stream(WMSRequestKey.values())
-                .map(v -> (GPWMSRequestKey) v)
-                .filter(k -> ((theKey != null)) ? k.toKey().equalsIgnoreCase(theKey) : FALSE).findFirst();
-        return ((optional != null) && !(optional.equals(empty()))) ? optional.get() : null;
+    public GPWMSBoundingBox toValue() {
+        return this.wmsBoundingBox;
     }
 }

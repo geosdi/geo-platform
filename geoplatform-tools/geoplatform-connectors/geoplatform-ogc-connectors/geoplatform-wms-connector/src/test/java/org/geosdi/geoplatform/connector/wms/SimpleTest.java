@@ -35,23 +35,39 @@
  */
 package org.geosdi.geoplatform.connector.wms;
 
+import org.geosdi.geoplatform.connector.server.request.kvp.GPWMSRequestKeyValuePair;
+import org.geosdi.geoplatform.connector.server.request.kvp.GPWMSRequestKvpReader;
+import org.geosdi.geoplatform.connector.server.request.kvp.GPWMSRequestKvpReader.WMSRequestKvpReader;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Map;
+
 import static java.lang.Boolean.TRUE;
 import static org.geotools.referencing.CRS.decode;
+import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@FixMethodOrder(value = NAME_ASCENDING)
 public class SimpleTest {
 
     private static final Logger logger = LoggerFactory.getLogger(SimpleTest.class);
 
     @Test
-    public void simpleTest() throws Exception {
+    public void a_simpleTest() throws Exception {
         logger.info("################## {}", decode("EPSG:32632", TRUE));
+    }
+
+    @Test
+    public void b_simpleTest() throws Exception {
+        String value = "http://150.145.141.180/geoserver/topp/wms?service=WMS&version=1.1.0&request=GetMap&layers=topp%3Atasmania_roads&bbox=145.19754%2C-43.423512%2C148.27298000000002%2C-40.852802&width=768&height=641&srs=EPSG%3A4326&format=application/openlayers";
+        GPWMSRequestKvpReader wmsRequestKvpReader = new WMSRequestKvpReader();
+        Map<String, GPWMSRequestKeyValuePair> values = wmsRequestKvpReader.read(value);
+        values.entrySet().forEach(e -> logger.info("##########ENTRY : {} - VALUE : {}\n", e.getKey(), e.getValue()));
     }
 }

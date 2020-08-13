@@ -34,13 +34,18 @@
  */
 package org.geosdi.geoplatform.connector.server.request.kvp;
 
-import lombok.ToString;
 import net.jcip.annotations.Immutable;
 
 import javax.annotation.Nonnull;
+import java.util.Collection;
+import java.util.LinkedHashSet;
+import java.util.Objects;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static java.util.stream.Collectors.toCollection;
+import static java.util.stream.Stream.of;
 import static javax.annotation.meta.When.NEVER;
+import static org.geosdi.geoplatform.connector.server.request.WMSRequestKey.COMMA_SEPARATOR;
 import static org.geosdi.geoplatform.connector.server.request.WMSRequestKey.LAYERS;
 
 /**
@@ -48,12 +53,11 @@ import static org.geosdi.geoplatform.connector.server.request.WMSRequestKey.LAYE
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Immutable
-@ToString(callSuper = true)
-public class WMSLayersKeyValuePair extends WMSGetMapBaseRequestKeyValuePair {
+public class WMSLayersKeyValuePair extends WMSGetMapBaseRequestKeyValuePair<Collection<String>> {
 
     private static final long serialVersionUID = 4376314577324930255L;
     //
-    private final String value;
+    private Collection<String> layers;
 
     /**
      * @param theValue
@@ -61,14 +65,17 @@ public class WMSLayersKeyValuePair extends WMSGetMapBaseRequestKeyValuePair {
     WMSLayersKeyValuePair(@Nonnull(when = NEVER) String theValue) {
         super(LAYERS.toKey());
         checkArgument((theValue != null) && !(theValue.trim().isEmpty()), "The Parameter value must not be null or an empty string.");
-        this.value = theValue;
+        this.layers = of(theValue.split(COMMA_SEPARATOR.toKey()))
+                .filter(Objects::nonNull)
+                .filter(v -> !(v.trim().isEmpty()))
+                .collect(toCollection(LinkedHashSet::new));
     }
 
     /**
-     * @return {@link String}
+     * @return {@link Collection<String>}
      */
     @Override
-    public String toValue() {
-        return this.value;
+    public Collection<String> toValue() {
+        return this.layers;
     }
 }

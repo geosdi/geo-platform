@@ -32,61 +32,38 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.server.request;
+package org.geosdi.geoplatform.connector.server.request.kvp;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import java.util.Optional;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static java.lang.Boolean.FALSE;
-import static java.util.Arrays.stream;
-import static java.util.Optional.empty;
 import static javax.annotation.meta.When.NEVER;
+import static org.geosdi.geoplatform.connector.server.request.WMSRequestKey.WIDTH;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public enum WMSRequestKey implements GPWMSRequestKey {
+public class WMSWidthKeyValuePair extends WMSGetMapBaseRequestKeyValuePair<String> {
 
-    LAYERS("LAYERS"),
-    SRS("SRS"),
-    WIDTH("WIDTH"),
-    HEIGHT("HEIGHT"),
-    BBOX("BBOX"),
-    CHAIN("&"),
-    KVP_SEPARATOR("="),
-    URL_DELIMITER("?"),
-    COMMA_SEPARATOR(",");
-
-    private final String key;
+    private static final long serialVersionUID = -6599369142784984394L;
+    //
+    private final String width;
 
     /**
-     * @param theKey
+     * @param theValue
      */
-    WMSRequestKey(@Nonnull(when = NEVER) String theKey) {
-        checkArgument((theKey != null) && !(theKey.trim().isEmpty()), "The Parameter key must not be null or an empty string.");
-        this.key = theKey;
+    WMSWidthKeyValuePair(@Nonnull(when = NEVER) String theValue) {
+        super(WIDTH.toKey());
+        checkArgument((theValue != null) && !(theValue.trim().isEmpty()), "The Parameter value must not be null or an empty string.");
+        this.width = theValue;
     }
 
     /**
      * @return {@link String}
      */
     @Override
-    public String toKey() {
-        return this.key;
-    }
-
-    /**
-     * @param theKey
-     * @return {@link GPWMSRequestKey}
-     */
-    public static GPWMSRequestKey forKey(@Nullable String theKey) {
-        Optional<GPWMSRequestKey> optional = stream(WMSRequestKey.values())
-                .map(v -> (GPWMSRequestKey) v)
-                .filter(k -> ((theKey != null)) ? k.toKey().equalsIgnoreCase(theKey) : FALSE).findFirst();
-        return ((optional != null) && !(optional.equals(empty()))) ? optional.get() : null;
+    public String toValue() {
+        return this.width;
     }
 }

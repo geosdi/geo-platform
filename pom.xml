@@ -618,7 +618,7 @@
             <dependency>
                 <groupId>com.thoughtworks.xstream</groupId>
                 <artifactId>xstream</artifactId>
-                <version>1.4.11.1</version>
+                <version>1.4.12</version>
             </dependency>
             
             <dependency>
@@ -1558,7 +1558,7 @@
         <gwtOpenlayersVersion>1.1.0</gwtOpenlayersVersion>
         
         <cas-version>3.2.1</cas-version>
-        <bcel.version>6.4.1</bcel.version>
+        <bcel.version>6.5.0</bcel.version>
         
         <jasypt-version>1.9.3</jasypt-version>
         

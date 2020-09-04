@@ -42,7 +42,10 @@ import lombok.ToString;
 import org.geosdi.geoplatform.connector.geoserver.model.crs.GPGeoserverCRS;
 import org.geosdi.geoplatform.connector.geoserver.model.crs.GPGeoserverCRSDeserializer;
 
+import javax.annotation.Nullable;
+
 import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.Boolean.TRUE;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -61,8 +64,8 @@ public class GPGeoserverNativeBoundingBox extends GPGeoserverBoundingBox<Object>
     /**
      * @param theCrs
      */
-    public void setCrs(Object theCrs) {
-        checkArgument((theCrs instanceof String) || (theCrs instanceof GPGeoserverCRS), "The Parameter crs must be an instance of Stirng or GPGeoserverCRS.");
+    public void setCrs(@Nullable Object theCrs) {
+        checkArgument(((theCrs != null) ? (theCrs instanceof String) || (theCrs instanceof GPGeoserverCRS) : TRUE), "The Parameter crs must be an instance of String or GPGeoserverCRS.");
         this.crs = theCrs;
     }
 }

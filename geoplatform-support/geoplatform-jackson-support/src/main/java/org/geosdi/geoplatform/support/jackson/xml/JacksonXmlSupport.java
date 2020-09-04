@@ -32,26 +32,21 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.crs;
+package org.geosdi.geoplatform.support.jackson.xml;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-
-import java.io.Serializable;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@JsonDeserialize(as = GPGeoserverCRS.class)
-public interface IGPGeoserverCRS extends Serializable {
+@FunctionalInterface
+public interface JacksonXmlSupport extends JacksonSupport {
 
     /**
-     * @return {@link String}
+     * @return {@link XmlMapper}
      */
-    String getValue();
-
-    /**
-     * @return {@link String}
-     */
-    String getType();
+    @Override
+    XmlMapper getDefaultMapper();
 }

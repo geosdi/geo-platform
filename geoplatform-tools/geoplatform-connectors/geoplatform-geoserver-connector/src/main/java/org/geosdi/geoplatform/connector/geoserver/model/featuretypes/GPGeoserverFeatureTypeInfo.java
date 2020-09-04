@@ -47,12 +47,14 @@ import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.attribute.I
 import org.geosdi.geoplatform.connector.geoserver.model.metadata.link.IGPGeoserverMetadataLink;
 import org.geosdi.geoplatform.connector.geoserver.model.projection.GPProjectionPolicy;
 
+import javax.annotation.Nullable;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import java.util.List;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.Boolean.TRUE;
 import static javax.xml.bind.annotation.XmlAccessType.FIELD;
 
 /**
@@ -89,8 +91,8 @@ public class GPGeoserverFeatureTypeInfo extends GPGeoserverResourceInfo<GPGeoser
     /**
      * @param theNativeCRS
      */
-    public void setNativeCRS(Object theNativeCRS) {
-        checkArgument(((theNativeCRS instanceof String) || (theNativeCRS instanceof GPGeoserverCRS)), "The Parameter nativeCRS must be an Instance of Stirng or GPGeoserverCRS.");
+    public void setNativeCRS(@Nullable Object theNativeCRS) {
+        checkArgument(((theNativeCRS != null) ? (theNativeCRS instanceof String) || (theNativeCRS instanceof GPGeoserverCRS) : TRUE), "The Parameter nativeCRS must be an Instance of String or GPGeoserverCRS.");
         this.nativeCRS = theNativeCRS;
     }
 }

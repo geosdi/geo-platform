@@ -69,6 +69,8 @@ public interface GPJacksonMapper<T extends Object> extends GPJacksonReaderSuppor
      */
     String writeAsString(@Nonnull(when = NEVER) GPJacksonCheck<T> theCheck) throws Exception;
 
+    void write(@Nonnull(when = NEVER) File theFile, @Nonnull(when = NEVER) GPJacksonCheck<T> theCheck) throws Exception;
+
     /**
      * @param theValue
      * @param <V>

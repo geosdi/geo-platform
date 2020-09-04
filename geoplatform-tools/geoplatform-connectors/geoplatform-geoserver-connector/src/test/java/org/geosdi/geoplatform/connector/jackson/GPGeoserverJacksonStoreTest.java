@@ -35,18 +35,23 @@
  */
 package org.geosdi.geoplatform.connector.jackson;
 
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import org.geosdi.geoplatform.connector.geoserver.model.store.coverage.GPGeoserverCoverageStore;
 import org.geosdi.geoplatform.connector.geoserver.model.store.coverage.GPGeoserverCoverageStoreBody;
 import org.geosdi.geoplatform.connector.geoserver.model.store.coverage.GPGeoserverCoverageStores;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
+import org.geosdi.geoplatform.support.jackson.xml.GPJacksonXmlSupport;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.StringReader;
+import java.io.StringWriter;
+import java.io.Writer;
 
+import static com.fasterxml.jackson.databind.SerializationFeature.INDENT_OUTPUT;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
@@ -64,10 +69,11 @@ public class GPGeoserverJacksonStoreTest {
             ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
             WRAP_ROOT_VALUE_ENABLE,
             INDENT_OUTPUT_ENABLE);
+    private static final GPJacksonXmlSupport jacksonXmlSupport = new GPJacksonXmlSupport();
 
     @Test
     public void a_unmarshallCoverageStoresTest() throws Exception {
-        logger.info("########################GEOSERVER_COVERAGE_STORES : {}\n", jacksonSupport
+        GPGeoserverCoverageStores coverageStores = jacksonSupport
                 .getDefaultMapper().readValue(new StringReader("{\n" +
                         "  \"coverageStores\": {\n" +
                         "    \"coverageStore\": [\n" +
@@ -81,12 +87,16 @@ public class GPGeoserverJacksonStoreTest {
                         "      }\n" +
                         "    ]\n" +
                         "  }\n" +
-                        "}"), GPGeoserverCoverageStores.class));
+                        "}"), GPGeoserverCoverageStores.class);
+        logger.info("########################GEOSERVER_COVERAGE_STORES : {}\n", coverageStores);
+        Writer writer = new StringWriter();
+        jacksonXmlSupport.getDefaultMapper().writeValue(writer, coverageStores);
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@GEOSERVER_COVERAGE_STORES_XML : \n{}\n", writer);
     }
 
     @Test
     public void b_unmarshallCoverageStoreTest() throws Exception {
-        logger.info("########################GEOSERVER_COVERAGE_STORE : {}\n", jacksonSupport
+        GPGeoserverCoverageStore coverageStores = jacksonSupport
                 .getDefaultMapper().readValue(new StringReader("{\n" +
                         "  \"coverageStore\": {\n" +
                         "    \"name\": \"arcGridSample\",\n" +
@@ -101,7 +111,12 @@ public class GPGeoserverJacksonStoreTest {
                         "    \"url\": \"file:coverages/arc_sample/precip30min.asc\",\n" +
                         "    \"coverages\": \"http://localhost:8080/geoserver/restng/workspaces/nurc/coveragestores/arcGridSample/coverages.json\"\n" +
                         "  }\n" +
-                        "}"), GPGeoserverCoverageStore.class));
+                        "}"), GPGeoserverCoverageStore.class);
+        logger.info("########################GEOSERVER_COVERAGE_STORE : {}\n", coverageStores);
+        Writer writer = new StringWriter();
+        jacksonXmlSupport.getDefaultMapper().writeValue(writer, coverageStores);
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@GEOSERVER_COVERAGE_STORE_XML : \n{}\n", writer);
+        logger.info("\n{}\n", jacksonSupport.getDefaultMapper().writeValueAsString(coverageStores));
     }
 
     @Test
@@ -113,5 +128,25 @@ public class GPGeoserverJacksonStoreTest {
                         "    \"url\": \"file:/path/to/file.tiff\"\n" +
                         "  }\n" +
                         "}\n"), GPGeoserverCoverageStoreBody.class));
+    }
+
+    @Test
+    public void d_unmarshallCoverageStoreXmlTest() throws Exception {
+        XmlMapper xmlMapper = new XmlMapper();
+        GPGeoserverCoverageStore coverageStores = xmlMapper.readValue(new StringReader("<GPGeoserverCoverageStore>\n"
+                + "  <name>arcGridSample</name>\n"
+                + "  <description>Sample ASCII GRID coverage of Global rainfall.</description>\n"
+                + "  <type>ArcGrid</type>\n"
+                + "  <enabled>true</enabled>\n"
+                + "  <workspace>\n"
+                + "    <workspaceName>nurc</workspaceName>\n"
+                + "    <workspaceHref>http://localhost:8080/geoserver/restng/workspaces/nurc.json</workspaceHref>\n"
+                + "  </workspace>\n"
+                + "  <_default>false</_default>\n"
+                + "  <url>file:coverages/arc_sample/precip30min.asc</url>\n"
+                + "  <coverages>http://localhost:8080/geoserver/restng/workspaces/nurc/coveragestores/arcGridSample/coverages.json</coverages>\n"
+                + "  <_default>true</_default>\n"
+                + "</GPGeoserverCoverageStore>"), GPGeoserverCoverageStore.class);
+        logger.info("########################GEOSERVER_COVERAGE_STORE : {}\n", coverageStores);
     }
 }

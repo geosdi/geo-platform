@@ -55,6 +55,7 @@ import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverWor
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGeoserverCoverageInfo;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
+import org.geosdi.geoplatform.support.jackson.xml.GPJacksonXmlSupport;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -62,6 +63,8 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.StringReader;
+import java.io.StringWriter;
+import java.io.Writer;
 
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
@@ -85,6 +88,7 @@ public class GPGeoserverJacksonTest {
             ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
             WRAP_ROOT_VALUE_DISABLE,
             INDENT_OUTPUT_ENABLE);
+    private static final GPJacksonXmlSupport jacksonXmlSupport = new GPJacksonXmlSupport();
 
     @Test
     public void a_unmarshallGeoserverAboutVersionTest() throws Exception {
@@ -1038,5 +1042,8 @@ public class GPGeoserverJacksonTest {
                         "}"), GPGeoserverFeatureTypeInfo.class);
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@GEOSERVER_FEATURE_TYPE_INFO : {}\n", featureTypeInfo);
         jacksonSupport.getDefaultMapper().writeValue(new File("./target/FeatureType.json"), featureTypeInfo);
+        Writer writer = new StringWriter();
+        jacksonXmlSupport.getDefaultMapper().writeValue(writer, featureTypeInfo);
+        logger.info("\n{}\n", writer);
     }
 }

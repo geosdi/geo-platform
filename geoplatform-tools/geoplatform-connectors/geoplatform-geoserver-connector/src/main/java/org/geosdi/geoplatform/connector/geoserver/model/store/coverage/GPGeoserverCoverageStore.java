@@ -44,6 +44,8 @@ import org.geosdi.geoplatform.connector.geoserver.model.workspace.IGPGeoserverWo
 
 import javax.xml.bind.annotation.*;
 
+import static javax.xml.bind.annotation.XmlAccessType.FIELD;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -52,7 +54,7 @@ import javax.xml.bind.annotation.*;
 @AllArgsConstructor
 @ToString
 @XmlRootElement(name = "coverageStore")
-@XmlAccessorType(XmlAccessType.FIELD)
+@XmlAccessorType(FIELD)
 @XmlType(propOrder = {"name", "description", "type", "workspace", "enabled", "_default", "url", "coverages"})
 public class GPGeoserverCoverageStore implements IGPGeoserverCoverageStore {
 
@@ -63,7 +65,7 @@ public class GPGeoserverCoverageStore implements IGPGeoserverCoverageStore {
     private GPCoverageStoreType type;
     private boolean enabled;
     private IGPGeoserverWorkspace workspace;
-    @XmlElement(name = "_default")
+    @JsonProperty(value = "_default")
     private boolean isDefault;
     private String url;
     private String coverages;

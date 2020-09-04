@@ -78,6 +78,18 @@ public class GPBaseJacksonMapper<T extends Object> extends GPBaseJacksonReaderSu
     }
 
     /**
+     * @param theFile
+     * @param theCheck
+     * @throws Exception
+     */
+    @Override
+    public void write(@Nonnull(when = NEVER) File theFile, @Nonnull(when = NEVER) GPJacksonCheck<T> theCheck) throws Exception {
+        checkArgument(theFile != null, "The Parameter file must not be null.");
+        checkArgument(theCheck != null, "The Parameter theCheck must not be null.");
+        this.write(theFile, theCheck.apply());
+    }
+
+    /**
      * @param file
      * @param entity
      * @throws Exception

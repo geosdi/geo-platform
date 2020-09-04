@@ -32,26 +32,40 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.crs;
+package org.geosdi.geoplatform.support.jackson.model;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 import java.io.Serializable;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@JsonDeserialize(as = GPGeoserverCRS.class)
-public interface IGPGeoserverCRS extends Serializable {
+@Getter
+@Setter
+@XmlRootElement(name = "CD")
+@XmlType(propOrder = {"TITLE", "ARTIST", "COUNTRY", "COMPANY", "PRICE", "YEAR"})
+@ToString
+public class Cd implements Serializable {
 
-    /**
-     * @return {@link String}
-     */
-    String getValue();
-
-    /**
-     * @return {@link String}
-     */
-    String getType();
+    private static final long serialVersionUID = 42652068378637087L;
+    //
+    @XmlElement(name = "TITLE")
+    private String title;
+    @XmlElement(name = "ARTIST")
+    private String artist;
+    @XmlElement(name = "COUNTRY")
+    private String country;
+    @XmlElement(name = "COMPANY")
+    private String company;
+    @XmlElement(name = "PRICE")
+    private Double price;
+    @XmlElement(name = "YEAR")
+    private Integer year;
 }

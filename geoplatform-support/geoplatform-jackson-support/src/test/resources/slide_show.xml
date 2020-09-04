@@ -1,0 +1,10 @@
+<SlideShow title="TITLE_TEST" date="DATE_TEST" author="Test">
+    <slide type="ALL">
+        <title>Wake up to WonderWidgets!</title>
+    </slide>
+    <slide type="ALL">
+        <item>pippo</item>
+        <item>pluto</item>
+        <title>Overview</title>
+    </slide>
+</SlideShow>

@@ -1,0 +1,13 @@
+{
+  "slide" : [ {
+    "type" : "ALL",
+    "title" : "Wake up to WonderWidgets!"
+  }, {
+    "item" : [ "pippo", "pluto" ],
+    "type" : "ALL",
+    "title" : "Overview"
+  } ],
+  "title" : "TITLE_TEST",
+  "date" : "DATE_TEST",
+  "author" : "Test"
+}

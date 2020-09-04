@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.support.jackson.reader;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.model.SimpleBean;
 import org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,11 +52,13 @@ import static java.util.stream.Collectors.joining;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@FixMethodOrder(value = NAME_ASCENDING)
 public class SimpleBeanJacksonReaderTest {
 
     private static final Logger logger = LoggerFactory.getLogger(SimpleBeanJacksonReaderTest.class);
@@ -66,7 +69,7 @@ public class SimpleBeanJacksonReaderTest {
             .configure(GPJsonIncludeFeature.NON_NULL), SimpleBean.class);
 
     @Test
-    public void readJsonFromURLTest() throws Exception {
+    public void a_readJsonFromURLTest() throws Exception {
         SimpleBean simpleBean = JACKSON_READER_SUPPORT.read(new URL("https://httpbin.org/get?color=red&shape=square"));
         logger.info("#######################HEADERS_SIZE : {}", simpleBean.getHeaders().size());
         assertNotNull(simpleBean);
@@ -76,7 +79,7 @@ public class SimpleBeanJacksonReaderTest {
     }
 
     @Test
-    public void readJsonFromStringTest() throws Exception {
+    public void b_readJsonFromStringTest() throws Exception {
         SimpleBean simpleBean = JACKSON_READER_SUPPORT.read("{\n" +
                 "  \"args\": {\n" +
                 "    \"color\": \"red\", \n" +
@@ -97,7 +100,7 @@ public class SimpleBeanJacksonReaderTest {
     }
 
     @Test
-    public void readJsonFromFileTest() throws Exception {
+    public void c_readJsonFromFileTest() throws Exception {
         SimpleBean simpleBean = JACKSON_READER_SUPPORT.read(new File(Stream
                 .of(new File(".").getAbsolutePath(), "src", "test", "resources", "simple_bean.json")
                 .collect(joining(separator))));

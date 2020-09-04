@@ -32,26 +32,30 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.crs;
+package org.geosdi.geoplatform.support.jackson.model;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@JsonDeserialize(as = GPGeoserverCRS.class)
-public interface IGPGeoserverCRS extends Serializable {
+@Getter
+@Setter
+@ToString
+@XmlRootElement(name = "CATALOG")
+public class Catalog implements Serializable {
 
-    /**
-     * @return {@link String}
-     */
-    String getValue();
-
-    /**
-     * @return {@link String}
-     */
-    String getType();
+    private static final long serialVersionUID = -4441811146261378605L;
+    //
+    @XmlElement(name = "CD")
+    private List<Cd> cd = new ArrayList<>();
 }

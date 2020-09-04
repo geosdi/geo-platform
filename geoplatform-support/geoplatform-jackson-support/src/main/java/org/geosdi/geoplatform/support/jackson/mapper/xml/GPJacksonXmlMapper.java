@@ -32,26 +32,81 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.crs;
+package org.geosdi.geoplatform.support.jackson.mapper.xml;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import org.geosdi.geoplatform.support.jackson.function.GPJacksonCheck;
+import org.geosdi.geoplatform.support.jackson.reader.GPJacksonReaderSupport;
+import org.geosdi.geoplatform.support.jackson.xml.GPJacksonXmlSupport;
+import org.geosdi.geoplatform.support.jackson.xml.JacksonXmlSupport;
 
-import java.io.Serializable;
+import javax.annotation.Nonnull;
+import java.io.File;
+import java.io.Writer;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@JsonDeserialize(as = GPGeoserverCRS.class)
-public interface IGPGeoserverCRS extends Serializable {
+public interface GPJacksonXmlMapper<T extends Object> extends GPJacksonReaderSupport<T> {
+
+    JacksonXmlSupport DEFAULT_XML_MAPPER = new GPJacksonXmlSupport();
 
     /**
-     * @return {@link String}
+     * @param entity
+     * @return
+     * @throws Exception
      */
-    String getValue();
+    String writeAsString(@Nonnull(when = NEVER) T entity) throws Exception;
 
     /**
+     * @param theCheck
      * @return {@link String}
+     * @throws Exception
      */
-    String getType();
+    String writeAsString(@Nonnull(when = NEVER) GPJacksonCheck<T> theCheck) throws Exception;
+
+    /**
+     * @param theValue
+     * @param <V>
+     * @return {@link String}
+     * @throws Exception
+     */
+    <V extends Object> String writeValue(@Nonnull(when = NEVER) V theValue) throws Exception;
+
+    /**
+     * @param file
+     * @param entity
+     * @throws Exception
+     */
+    void write(@Nonnull(when = NEVER) File file, @Nonnull(when = NEVER) T entity) throws Exception;
+
+    /**
+     * @param file
+     * @param theCheck
+     * @throws Exception
+     */
+    void write(@Nonnull(when = NEVER) File file, @Nonnull(when = NEVER) GPJacksonCheck<T> theCheck) throws Exception;
+
+    /**
+     * @param writer
+     * @param entity
+     * @throws Exception
+     */
+    void write(@Nonnull(when = NEVER) Writer writer, @Nonnull(when = NEVER) T entity) throws Exception;
+
+    /**
+     * @param file
+     * @param theValue
+     * @throws Exception
+     */
+    <V extends Object> void writeValue(@Nonnull(when = NEVER) File file, @Nonnull(when = NEVER) V theValue) throws Exception;
+
+    /**
+     * @param writer
+     * @param theValue
+     * @throws Exception
+     */
+    <V extends Object> void writeValue(@Nonnull(when = NEVER) Writer writer, @Nonnull(when = NEVER) V theValue) throws Exception;
 }

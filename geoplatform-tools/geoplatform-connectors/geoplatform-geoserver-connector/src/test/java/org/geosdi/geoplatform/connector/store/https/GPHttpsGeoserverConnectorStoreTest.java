@@ -40,10 +40,7 @@ import org.geosdi.geoplatform.connector.geoserver.request.about.GPGeoserverAbout
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GPGeoserverLoadWorkspacesRequest;
 import org.geosdi.geoplatform.connector.server.exception.UnauthorizedException;
 import org.geosdi.geoplatform.connector.store.GPGeoserverConnectorStore;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.FixMethodOrder;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runners.MethodSorters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -78,18 +75,21 @@ public class GPHttpsGeoserverConnectorStoreTest {
                 .build();
     }
 
+    @Ignore
     @Test(expected = UnauthorizedException.class)
     public void a_aboutHttpsVersionGeoserverConnectorTest() throws Exception {
         GPGeoserverAboutVersionRequest aboutRequest = httpsGeoserverConnectorStore.createAboutVersionRequest();
         logger.info("#####################ABOUT_VERSION_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", aboutRequest.getResponseAsString());
     }
 
+    @Ignore
     @Test(expected = UnauthorizedException.class)
     public void b_aboutHttpsStatusGeoserverConnectorTest() throws Exception {
         GPGeoserverAboutStatusRequest aboutStatusRequest = httpsGeoserverConnectorStore.createAboutStatusRequest();
         logger.info("#####################ABOUT_STATUS_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", aboutStatusRequest.getResponseAsString());
     }
 
+    @Ignore
     @Test(expected = UnauthorizedException.class)
     public void c_workspacesHttpsGeoserverConnectorTest() throws Exception {
         GPGeoserverLoadWorkspacesRequest workspacesRequest = httpsGeoserverConnectorStore.loadWorkspacesRequest();

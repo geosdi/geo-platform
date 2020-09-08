@@ -1318,7 +1318,6 @@
                     <reportFormat>plain</reportFormat>
                     <argLine>-Xms512m -Xmx1024m</argLine>
                 </configuration>
-<<<<<<< HEAD
             </plugin>
 
             <!-- code coverage -->

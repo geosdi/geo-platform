@@ -75,21 +75,18 @@ public class GPHttpsGeoserverConnectorStoreTest {
                 .build();
     }
 
-    @Ignore
     @Test(expected = UnauthorizedException.class)
     public void a_aboutHttpsVersionGeoserverConnectorTest() throws Exception {
         GPGeoserverAboutVersionRequest aboutRequest = httpsGeoserverConnectorStore.createAboutVersionRequest();
         logger.info("#####################ABOUT_VERSION_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", aboutRequest.getResponseAsString());
     }
 
-    @Ignore
     @Test(expected = UnauthorizedException.class)
     public void b_aboutHttpsStatusGeoserverConnectorTest() throws Exception {
         GPGeoserverAboutStatusRequest aboutStatusRequest = httpsGeoserverConnectorStore.createAboutStatusRequest();
         logger.info("#####################ABOUT_STATUS_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", aboutStatusRequest.getResponseAsString());
     }
 
-    @Ignore
     @Test(expected = UnauthorizedException.class)
     public void c_workspacesHttpsGeoserverConnectorTest() throws Exception {
         GPGeoserverLoadWorkspacesRequest workspacesRequest = httpsGeoserverConnectorStore.loadWorkspacesRequest();

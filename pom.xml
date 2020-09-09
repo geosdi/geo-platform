@@ -59,7 +59,7 @@
         </snapshotRepository>
     </distributionManagement>
     
-    <pluginRepositories>
+    <!--pluginRepositories>
         <pluginRepository>
             <id>apache-central-repository</id>
             <url>https://repo.maven.apache.org/maven2/</url>
@@ -67,7 +67,7 @@
                 <enabled>false</enabled>
             </snapshots>
         </pluginRepository>
-    </pluginRepositories>
+    </pluginRepositories-->
  
     <repositories>
         <!-- geoSDI -->
@@ -138,13 +138,13 @@
             </snapshots>
         </repository>
         
-        <repository>
+        <!--repository>
             <id>apache-central-repository</id>
             <url>https://repo.maven.apache.org/maven2/</url>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
-        </repository>
+        </repository-->
     </repositories>
 
     <modules>

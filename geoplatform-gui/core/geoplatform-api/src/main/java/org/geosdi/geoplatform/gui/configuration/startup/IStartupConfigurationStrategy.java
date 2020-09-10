@@ -44,5 +44,4 @@ import java.io.Serializable;
 public interface IStartupConfigurationStrategy extends Serializable{
     
     public void initGeoPlatformConfiguration();
-    
 }

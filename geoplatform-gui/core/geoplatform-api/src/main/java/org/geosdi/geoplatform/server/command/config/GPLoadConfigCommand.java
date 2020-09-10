@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.server.command.config;
 
-import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.command.config.GPLoadConfigRequest;
 import org.geosdi.geoplatform.gui.command.config.GPLoadConfigResponse;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;
@@ -47,6 +46,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -54,28 +55,18 @@ import org.springframework.stereotype.Component;
  */
 @Lazy
 @Component(value = "command.config.GPLoadConfigCommand")
-public class GPLoadConfigCommand implements
-        GPCommand<GPLoadConfigRequest, GPLoadConfigResponse> {
+public class GPLoadConfigCommand implements GPCommand<GPLoadConfigRequest, GPLoadConfigResponse> {
 
-    private static final Logger logger = LoggerFactory.getLogger(
-            GPLoadConfigCommand.class);
+    private static final Logger logger = LoggerFactory.getLogger(GPLoadConfigCommand.class);
     //
     @Autowired
     private IStartupService startupService;
 
     @Override
-    public GPLoadConfigResponse execute(GPLoadConfigRequest request,
-            HttpServletRequest httpServletRequest) {
-
-        logger.debug("##################### Executing {} Command", this.
-                getClass().getSimpleName());
-
-        IGeoPlatformGlobal result = this.startupService
-                .initGeoPlatformConfiguration();
-
+    public GPLoadConfigResponse execute(GPLoadConfigRequest request, HttpServletRequest httpServletRequest) {
+        logger.debug("##################### Executing {} Command", this.getClass().getSimpleName());
+        IGeoPlatformGlobal result = this.startupService.initGeoPlatformConfiguration();
         logger.debug("#################### Found {} ", result);
-
         return new GPLoadConfigResponse(result);
     }
-
 }

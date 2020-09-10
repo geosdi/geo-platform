@@ -51,8 +51,7 @@ public class CASLoginHandler extends AbstractLoginHandler {
 
     @Override
     public void doLogin() {
-        ClientCommandDispatcher.getInstance().execute(
-                new GPClientCommand<CASLoginResponse>() {
+        ClientCommandDispatcher.getInstance().execute(new GPClientCommand<CASLoginResponse>() {
 
             private static final long serialVersionUID = 2625510244813075313L;
 

@@ -36,8 +36,6 @@
 package org.geosdi.geoplatform.gui.client.handler;
 
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.geosdi.geoplatform.gui.client.GPXMPPClient;
 import org.geosdi.geoplatform.gui.client.command.login.sso.SSOLoginRequest;
 import org.geosdi.geoplatform.gui.client.command.login.sso.SSOLoginResponse;
@@ -53,6 +51,9 @@ import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
@@ -63,8 +64,7 @@ public class SSOLoginHandler extends AbstractLoginHandler {
 
     @Override
     public void doLogin() {
-        ClientCommandDispatcher.getInstance().execute(
-                new GPClientCommand<SSOLoginResponse>() {
+        ClientCommandDispatcher.getInstance().execute(new GPClientCommand<SSOLoginResponse>() {
 
                     private static final long serialVersionUID = -1447466115597300972L;
 
@@ -76,21 +76,14 @@ public class SSOLoginHandler extends AbstractLoginHandler {
                     public void onCommandSuccess(SSOLoginResponse response) {
                         if ((response != null) && (response.getResult() != null)) {
                             //executeXMPPLogin();
-                            SecurityGinInjector.MainInjector.getInstance().
-                            getPostLoginOperations().
-                            executeLoginOperations(response.getResult());
-
-                            BasicGinInjector.MainInjector.getInstance().
-                            getLoginAccessManager().
-                            hideProgressBar(Boolean.TRUE);
+                            SecurityGinInjector.MainInjector.getInstance().getPostLoginOperations().executeLoginOperations(response.getResult());
+                            BasicGinInjector.MainInjector.getInstance().getLoginAccessManager().hideProgressBar(Boolean.TRUE);
                         } else if (SSOLoginHandler.super.nextHandler != null) {
                             SSOLoginHandler.super.nextHandler.doLogin();
                         } else {
                             BasicGinInjector.MainInjector.getInstance().
-                            getLoginAccessManager().hideProgressBar(
-                                    Boolean.FALSE);
-                            Dispatcher.forwardEvent(
-                                    GeoPlatformEvents.APPLICATION_FIRST_LOGIN);
+                            getLoginAccessManager().hideProgressBar(Boolean.FALSE);
+                            Dispatcher.forwardEvent(GeoPlatformEvents.APPLICATION_FIRST_LOGIN);
                         }
                     }
 
@@ -125,14 +118,10 @@ public class SSOLoginHandler extends AbstractLoginHandler {
 
                     @Override
                     public void onCommandFailure(Throwable exception) {
-                        GeoPlatformMessage.infoMessage(
-                                SecurityModuleConstants.INSTANCE.XMPPConnectionErrorTitleText(),
-                                SecurityModuleConstants.INSTANCE.XMPPConnectionErrorBodyText()
-                                + exception.getMessage());
-                        logger.log(Level.WARNING, "Error login on XMPP for IVUser: " + exception.
-                                getMessage());
+                        GeoPlatformMessage.infoMessage(SecurityModuleConstants.INSTANCE.XMPPConnectionErrorTitleText(),
+                                SecurityModuleConstants.INSTANCE.XMPPConnectionErrorBodyText() + exception.getMessage());
+                        logger.log(Level.WARNING, "Error login on XMPP for IVUser: " + exception.getMessage());
                     }
                 });
     }
-
 }

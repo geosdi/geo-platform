@@ -58,5 +58,4 @@ public class GPLoadConfigRequest implements GPCommandRequest {
     public String toString() {
         return getClass().getName();
     }
-
 }

@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.gui.client.i18n;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.Constants;
-import com.google.gwt.i18n.client.Constants.DefaultStringValue;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -45,8 +44,7 @@ import com.google.gwt.i18n.client.Constants.DefaultStringValue;
  */
 public interface SecurityModuleConstants extends Constants {
 
-    public static final SecurityModuleConstants INSTANCE
-            = GWT.create(SecurityModuleConstants.class);
+    public static final SecurityModuleConstants INSTANCE = GWT.create(SecurityModuleConstants.class);
 
     @DefaultStringValue("XMPP Connection Error")
     String XMPPConnectionErrorTitleText();

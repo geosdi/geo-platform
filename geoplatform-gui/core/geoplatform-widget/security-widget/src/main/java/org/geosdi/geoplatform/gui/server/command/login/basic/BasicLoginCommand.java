@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.server.command.login.basic;
 
-import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.command.login.basic.BasicLoginRequest;
 import org.geosdi.geoplatform.gui.client.command.login.basic.BasicLoginResponse;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;
@@ -47,34 +46,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
 @Lazy(true)
 @Component(value = "command.login.BasicLoginCommand")
-public class BasicLoginCommand implements
-        GPCommand<BasicLoginRequest, BasicLoginResponse> {
+public class BasicLoginCommand implements GPCommand<BasicLoginRequest, BasicLoginResponse> {
 
-    private static final Logger logger = LoggerFactory.getLogger(
-            BasicLoginCommand.class);
+    private static final Logger logger = LoggerFactory.getLogger(BasicLoginCommand.class);
     //
     @Autowired
     private ISecurityService securityService;
 
     @Override
-    public BasicLoginResponse execute(BasicLoginRequest request,
-            HttpServletRequest httpServletRequest) {
+    public BasicLoginResponse execute(BasicLoginRequest request, HttpServletRequest httpServletRequest) {
+        logger.debug("##################### Executing {} Command", this.getClass().getSimpleName());
 
-        logger.debug("##################### Executing {} Command", this.
-                getClass().getSimpleName());
-
-        IGPAccountDetail accountDetail = this.securityService.userLogin(request.
-                getUserName(), request.getPassword(), request.getProjectID(), httpServletRequest);
-
+        IGPAccountDetail accountDetail = this.securityService.userLogin(request.getUserName(), request.getPassword(), request.getProjectID(), httpServletRequest);
         logger.debug("#################### Found {} ", accountDetail);
-
         return new BasicLoginResponse(accountDetail);
     }
-
 }

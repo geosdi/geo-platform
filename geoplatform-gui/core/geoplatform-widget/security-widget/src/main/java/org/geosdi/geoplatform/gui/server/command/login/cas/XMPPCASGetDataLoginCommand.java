@@ -35,9 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.server.command.login.cas;
 
-import com.google.common.base.Preconditions;
-import javax.annotation.PostConstruct;
-import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.command.login.cas.XMPPCASGetDataLoginRequest;
 import org.geosdi.geoplatform.gui.client.command.login.xmpp.XMPPGetDataLoginResponse;
 import org.geosdi.geoplatform.gui.client.model.security.XMPPLoginDetails;
@@ -52,6 +49,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -69,30 +71,20 @@ public class XMPPCASGetDataLoginCommand implements
     private ISecurityService securityService;
 
     @Override
-    public XMPPGetDataLoginResponse execute(XMPPCASGetDataLoginRequest request,
-            HttpServletRequest httpServletRequest) {
-
+    public XMPPGetDataLoginResponse execute(XMPPCASGetDataLoginRequest request, HttpServletRequest httpServletRequest) {
         Assertion assertion = (AssertionImpl) httpServletRequest.getSession().getAttribute(AbstractCasFilter.CONST_CAS_ASSERTION);
         if (assertion == null) {
             logger.error("Cas assertion is null");
         }
-
         String userName = assertion.getPrincipal().getName();
-
         logger.info("Username retrieved: " + userName);
-        XMPPLoginDetails xMPPLoginDetails = this.securityService.xmppGetDataLogin(
-                userName, httpServletRequest);
-
+        XMPPLoginDetails xMPPLoginDetails = this.securityService.xmppGetDataLogin(userName, httpServletRequest);
         logger.info(xMPPLoginDetails.toString());
-
         return new XMPPGetDataLoginResponse(xMPPLoginDetails);
-
-
     }
 
     @PostConstruct
     public void postConstruct() {
-        Preconditions.checkNotNull(securityService, "The SecurityService must "
-                + "not be null.");
+        checkNotNull(securityService, "The SecurityService must not be null.");
     }
 }

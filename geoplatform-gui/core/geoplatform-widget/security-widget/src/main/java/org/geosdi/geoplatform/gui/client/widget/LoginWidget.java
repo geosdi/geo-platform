@@ -63,8 +63,7 @@ import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class LoginWidget extends GPAdvancedSecurityWidget implements
-        ILoginManager {
+public class LoginWidget extends GPAdvancedSecurityWidget implements ILoginManager {
     
     private LoginStatus status;
     private EventType eventOnSuccess;

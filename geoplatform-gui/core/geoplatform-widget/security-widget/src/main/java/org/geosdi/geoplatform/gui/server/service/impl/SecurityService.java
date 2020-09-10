@@ -137,56 +137,39 @@ public class SecurityService implements ISecurityService {
     }
 
     @Override
-    public XMPPLoginDetails xmppGetDataLogin(String userName,
-            HttpServletRequest httpServletRequest)
-            throws GeoPlatformException {
+    public XMPPLoginDetails xmppGetDataLogin(String userName, HttpServletRequest httpServletRequest) throws GeoPlatformException {
         XMPPLoginDetails xMPPLoginDetails = null;
         if (userName != null) {
             GPUser user;
             try {
-                user = geoPlatformServiceClient.getUserDetailByUsername(
-                        new SearchRequest(userName,
-                                LikePatternType.CONTENT_EQUALS));
+                user = geoPlatformServiceClient.getUserDetailByUsername(new SearchRequest(userName, LikePatternType.CONTENT_EQUALS));
                 xMPPLoginDetails = new XMPPLoginDetails();
                 xMPPLoginDetails.setUsername(user.getUsername());
                 xMPPLoginDetails.setPassword(user.getPassword());
                 xMPPLoginDetails.setHostXmppServer(this.hostXmppServer);
             } catch (ResourceNotFoundFault ex) {
-                logger.error("SecurityService",
-                        "Unable to find user with username: "
-                                + userName + " Error: " + ex);
-                throw new GeoPlatformException(
-                        "Unable to find user with username: "
-                                + userName);
+                logger.error("SecurityService", "Unable to find user with username: " + userName + " Error: " + ex);
+                throw new GeoPlatformException("Unable to find user with username: " + userName);
             }
         }
         return xMPPLoginDetails;
     }
 
     @Override
-    public IGPAccountDetail ssoLogin(HttpServletRequest httpServletRequest)
-            throws GeoPlatformException {
+    public IGPAccountDetail ssoLogin(HttpServletRequest httpServletRequest) throws GeoPlatformException {
         IGPAccountDetail accountDetail = null;
         String ivUser = httpServletRequest.getHeader("http_userid");
         logger.info("**SecurityService** http_userid found in header: " + ivUser);
         if (ivUser != null) {
             GPUser user;
             try {
-                user = geoPlatformServiceClient.getUserDetailByUsername(
-                        new SearchRequest(ivUser, LikePatternType.CONTENT_EQUALS));
-                accountDetail = this.executeLoginOnGPAccount(user,
-                        geoPlatformServiceClient.getAccountPermission(
-                                user.getId()), null, httpServletRequest);
+                user = geoPlatformServiceClient.getUserDetailByUsername(new SearchRequest(ivUser, LikePatternType.CONTENT_EQUALS));
+                accountDetail = this.executeLoginOnGPAccount(user, geoPlatformServiceClient.getAccountPermission(user.getId()), null, httpServletRequest);
             } catch (ResourceNotFoundFault ex) {
-                logger.error("SecurityService",
-                        "Unable to find user with username or email: " + ivUser
-                                + " Error: " + ex);
-                throw new GeoPlatformException(
-                        "Unable to find user with username or email: "
-                                + ivUser);
+                logger.error("SecurityService", "Unable to find user with username or email: " + ivUser + " Error: " + ex);
+                throw new GeoPlatformException("Unable to find user with username or email: " + ivUser);
             } catch (SOAPFaultException ex) {
-                logger.error(
-                        "Error on SecurityService: " + ex + " password incorrect");
+                logger.error("Error on SecurityService: " + ex + " password incorrect");
                 throw new GeoPlatformException("Password incorrect");
             }
         }

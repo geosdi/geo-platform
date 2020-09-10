@@ -36,8 +36,6 @@
 package org.geosdi.geoplatform.gui.server.command.login.sso;
 
 import com.google.common.base.Preconditions;
-import javax.annotation.PostConstruct;
-import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.command.login.sso.SSOLoginRequest;
 import org.geosdi.geoplatform.gui.client.command.login.sso.SSOLoginResponse;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;
@@ -49,6 +47,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -56,8 +57,7 @@ import org.springframework.stereotype.Component;
  */
 @Lazy(true)
 @Component(value = "command.login.SSOLoginCommand")
-public class SSOLoginCommand implements
-        GPCommand<SSOLoginRequest, SSOLoginResponse> {
+public class SSOLoginCommand implements GPCommand<SSOLoginRequest, SSOLoginResponse> {
 
     private static final Logger logger = LoggerFactory.getLogger(
             SSOLoginCommand.class);
@@ -66,12 +66,8 @@ public class SSOLoginCommand implements
     private ISecurityService securityService;
 
     @Override
-    public SSOLoginResponse execute(SSOLoginRequest request,
-            HttpServletRequest httpServletRequest) {
-
-        IGPAccountDetail accountDetail = this.securityService.ssoLogin(
-                httpServletRequest);
-
+    public SSOLoginResponse execute(SSOLoginRequest request, HttpServletRequest httpServletRequest) {
+        IGPAccountDetail accountDetail = this.securityService.ssoLogin(httpServletRequest);
         return new SSOLoginResponse(accountDetail);
     }
 

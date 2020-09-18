@@ -58,16 +58,6 @@
             <url>https://repo.geosdi.org/artifactory/libs-snapshot-local</url>
         </snapshotRepository>
     </distributionManagement>
-    
-    <!--pluginRepositories>
-        <pluginRepository>
-            <id>apache-central-repository</id>
-            <url>https://repo.maven.apache.org/maven2/</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </pluginRepository>
-    </pluginRepositories-->
  
     <repositories>
         <!-- geoSDI -->
@@ -137,14 +127,6 @@
                 <enabled>false</enabled>
             </snapshots>
         </repository>
-        
-        <!--repository>
-            <id>apache-central-repository</id>
-            <url>https://repo.maven.apache.org/maven2/</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository-->
     </repositories>
 
     <modules>

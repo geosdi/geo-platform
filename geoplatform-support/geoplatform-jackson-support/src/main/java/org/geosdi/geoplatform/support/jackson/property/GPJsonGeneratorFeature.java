@@ -36,21 +36,25 @@
 package org.geosdi.geoplatform.support.jackson.property;
 
 import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.json.JsonWriteFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import static com.fasterxml.jackson.core.json.JsonWriteFeature.*;
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public enum GPJsonGeneratorFeature implements
-        JacksonSupportConfigFeature<JsonGenerator.Feature> {
+public enum GPJsonGeneratorFeature implements JacksonSupportConfigFeature<JsonGenerator.Feature> {
 
     AUTO_CLOSE_TARGET_ENABLE() {
 
                 @Override
                 public Boolean getValue() {
-                    return Boolean.TRUE;
+                    return TRUE;
                 }
 
                 @Override
@@ -68,7 +72,7 @@ public enum GPJsonGeneratorFeature implements
 
                 @Override
                 public Boolean getValue() {
-                    return Boolean.FALSE;
+                    return FALSE;
                 }
 
                 @Override
@@ -86,7 +90,7 @@ public enum GPJsonGeneratorFeature implements
 
                 @Override
                 public Boolean getValue() {
-                    return Boolean.TRUE;
+                    return TRUE;
                 }
 
                 @Override
@@ -104,7 +108,7 @@ public enum GPJsonGeneratorFeature implements
 
                 @Override
                 public Boolean getValue() {
-                    return Boolean.FALSE;
+                    return FALSE;
                 }
 
                 @Override
@@ -122,12 +126,12 @@ public enum GPJsonGeneratorFeature implements
 
                 @Override
                 public Boolean getValue() {
-                    return Boolean.TRUE;
+                    return TRUE;
                 }
 
                 @Override
                 public JsonGenerator.Feature getFeature() {
-                    return JsonGenerator.Feature.QUOTE_FIELD_NAMES;
+                    return QUOTE_FIELD_NAMES.mappedFeature();
                 }
 
                 @Override
@@ -139,12 +143,12 @@ public enum GPJsonGeneratorFeature implements
 
                 @Override
                 public Boolean getValue() {
-                    return Boolean.FALSE;
+                    return FALSE;
                 }
 
                 @Override
                 public JsonGenerator.Feature getFeature() {
-                    return JsonGenerator.Feature.QUOTE_FIELD_NAMES;
+                    return JsonWriteFeature.QUOTE_FIELD_NAMES.mappedFeature();
                 }
 
                 @Override
@@ -156,12 +160,12 @@ public enum GPJsonGeneratorFeature implements
 
                 @Override
                 public Boolean getValue() {
-                    return Boolean.TRUE;
+                    return TRUE;
                 }
 
                 @Override
                 public JsonGenerator.Feature getFeature() {
-                    return JsonGenerator.Feature.QUOTE_NON_NUMERIC_NUMBERS;
+                    return WRITE_NAN_AS_STRINGS.mappedFeature();
                 }
 
                 @Override
@@ -174,12 +178,12 @@ public enum GPJsonGeneratorFeature implements
 
                 @Override
                 public Boolean getValue() {
-                    return Boolean.FALSE;
+                    return FALSE;
                 }
 
                 @Override
                 public JsonGenerator.Feature getFeature() {
-                    return JsonGenerator.Feature.QUOTE_NON_NUMERIC_NUMBERS;
+                    return WRITE_NAN_AS_STRINGS.mappedFeature();
                 }
 
                 @Override
@@ -192,12 +196,12 @@ public enum GPJsonGeneratorFeature implements
 
                 @Override
                 public Boolean getValue() {
-                    return Boolean.TRUE;
+                    return TRUE;
                 }
 
                 @Override
                 public JsonGenerator.Feature getFeature() {
-                    return JsonGenerator.Feature.WRITE_NUMBERS_AS_STRINGS;
+                    return WRITE_NUMBERS_AS_STRINGS.mappedFeature();
                 }
 
                 @Override
@@ -210,12 +214,12 @@ public enum GPJsonGeneratorFeature implements
 
                 @Override
                 public Boolean getValue() {
-                    return Boolean.FALSE;
+                    return FALSE;
                 }
 
                 @Override
                 public JsonGenerator.Feature getFeature() {
-                    return JsonGenerator.Feature.WRITE_NUMBERS_AS_STRINGS;
+                    return WRITE_NUMBERS_AS_STRINGS.mappedFeature();
                 }
 
                 @Override
@@ -228,7 +232,7 @@ public enum GPJsonGeneratorFeature implements
 
                 @Override
                 public Boolean getValue() {
-                    return Boolean.TRUE;
+                    return TRUE;
                 }
 
                 @Override
@@ -246,7 +250,7 @@ public enum GPJsonGeneratorFeature implements
 
                 @Override
                 public Boolean getValue() {
-                    return Boolean.FALSE;
+                    return FALSE;
                 }
 
                 @Override
@@ -264,7 +268,7 @@ public enum GPJsonGeneratorFeature implements
 
                 @Override
                 public Boolean getValue() {
-                    return Boolean.TRUE;
+                    return TRUE;
                 }
 
                 @Override
@@ -282,7 +286,7 @@ public enum GPJsonGeneratorFeature implements
 
                 @Override
                 public Boolean getValue() {
-                    return Boolean.FALSE;
+                    return FALSE;
                 }
 
                 @Override
@@ -300,12 +304,12 @@ public enum GPJsonGeneratorFeature implements
 
                 @Override
                 public Boolean getValue() {
-                    return Boolean.TRUE;
+                    return TRUE;
                 }
 
                 @Override
                 public JsonGenerator.Feature getFeature() {
-                    return JsonGenerator.Feature.ESCAPE_NON_ASCII;
+                    return ESCAPE_NON_ASCII.mappedFeature();
                 }
 
                 @Override
@@ -318,12 +322,12 @@ public enum GPJsonGeneratorFeature implements
 
                 @Override
                 public Boolean getValue() {
-                    return Boolean.FALSE;
+                    return FALSE;
                 }
 
                 @Override
                 public JsonGenerator.Feature getFeature() {
-                    return JsonGenerator.Feature.ESCAPE_NON_ASCII;
+                    return ESCAPE_NON_ASCII.mappedFeature();
                 }
 
                 @Override
@@ -336,7 +340,7 @@ public enum GPJsonGeneratorFeature implements
 
                 @Override
                 public Boolean getValue() {
-                    return Boolean.TRUE;
+                    return TRUE;
                 }
 
                 @Override
@@ -354,7 +358,7 @@ public enum GPJsonGeneratorFeature implements
 
                 @Override
                 public Boolean getValue() {
-                    return Boolean.FALSE;
+                    return FALSE;
                 }
 
                 @Override
@@ -372,7 +376,7 @@ public enum GPJsonGeneratorFeature implements
 
                 @Override
                 public Boolean getValue() {
-                    return Boolean.TRUE;
+                    return TRUE;
                 }
 
                 @Override
@@ -390,7 +394,7 @@ public enum GPJsonGeneratorFeature implements
 
                 @Override
                 public Boolean getValue() {
-                    return Boolean.FALSE;
+                    return FALSE;
                 }
 
                 @Override
@@ -404,5 +408,4 @@ public enum GPJsonGeneratorFeature implements
                 }
 
             }
-
 }

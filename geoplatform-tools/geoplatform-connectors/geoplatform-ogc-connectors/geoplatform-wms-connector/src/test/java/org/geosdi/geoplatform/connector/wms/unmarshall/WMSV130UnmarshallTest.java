@@ -39,7 +39,6 @@ import org.geosdi.geoplatform.connector.jaxb.context.WMSJAXBContext;
 import org.geosdi.geoplatform.connector.jaxb.repository.JAXBContextConnectorRepository;
 import org.geosdi.geoplatform.jaxb.GPBaseJAXBContext;
 import org.geosdi.geoplatform.wms.v130.WMSCapabilities;
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -54,6 +53,8 @@ import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.connector.WMSVersion.V130;
 import static org.geosdi.geoplatform.connector.jaxb.repository.WMSConnectorJAXBContextV130.WMS_CONTEXT_KEY_V130;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
@@ -77,9 +78,9 @@ public class WMSV130UnmarshallTest {
 
     @BeforeClass
     public static void beforeClass() throws Exception {
-        Assert.assertNotNull(wmsContext);
-        Assert.assertTrue(wmsContext instanceof WMSJAXBContext);
-        Assert.assertTrue(((WMSJAXBContext) wmsContext).getVersion() == V130);
+        assertNotNull(wmsContext);
+        assertTrue(wmsContext instanceof WMSJAXBContext);
+        assertTrue(((WMSJAXBContext) wmsContext).getVersion() == V130);
         String basePath = of(new File(".").getCanonicalPath(), "src", "test", "resources")
                 .collect(joining(separator, "", separator));
         wmsGetCapabilitiesFile = new File(basePath.concat("getcapabilities_1.3.0.xml"));

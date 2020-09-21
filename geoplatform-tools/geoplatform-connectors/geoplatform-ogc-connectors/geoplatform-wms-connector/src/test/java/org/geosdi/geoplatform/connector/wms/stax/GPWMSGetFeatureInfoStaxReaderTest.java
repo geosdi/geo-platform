@@ -358,4 +358,10 @@ public class GPWMSGetFeatureInfoStaxReaderTest extends WMSGetFeatureInfoStaxRead
         logger.info("#######################FEATURE_COLLECTION_BACINI_IDROGEOGRAFICI : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoStaxReader.read(storage.find("BaciniIdrogeografici.xml"))));
     }
+
+    @Test
+    public void c_h_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_BUILDING_RESONANCE : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(storage.find("geoserver-building_resonance_level.xml"))));
+    }
 }

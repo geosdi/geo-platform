@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfs:FeatureCollection xmlns="http://www.opengis.net/wfs" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:gml="http://www.opengis.net/gml" xmlns:admin="http://www.geosdi.org/:/admin"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xsi:schemaLocation="http://www.geosdi.org/:/admin https://smartcities-matera-clara.imaa.cnr.it/geoserver/admin/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=admin%3Aadmin_shp_building_resonance_level http://www.opengis.net/wfs https://smartcities-matera-clara.imaa.cnr.it/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd">
+    <gml:boundedBy>
+        <gml:null>unknown</gml:null>
+    </gml:boundedBy>
+    <gml:featureMember>
+        <admin:admin_shp_building_resonance_level fid="admin_shp_building_resonance_level.625">
+            <admin:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:32633">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        634991.10656514,4503938.55508398 634970.78199906,4503910.96511479
+                                        634959.83599906,4503915.9691148 634979.34999906,4503955.4211148
+                                        634995.93099906,4503946.8371148 634991.10656514,4503938.55508398
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </admin:the_geom>
+            <admin:Age>[3]_1961_1970</admin:Age>
+            <admin:Type>Reinforced Concrete</admin:Type>
+            <admin:Use>Residential</admin:Use>
+            <admin:Geology>Gravina calcarenite (tuff)</admin:Geology>
+            <admin:f0_s_w>4.006</admin:f0_s_w>
+            <admin:Danger>100 % - 628 - 15.53 %</admin:Danger>
+            <admin:Height>15.84</admin:Height>
+            <admin:f0_s>4.01</admin:f0_s>
+            <admin:f0_b>3.77</admin:f0_b>
+            <admin:Build_Name/>
+        </admin:admin_shp_building_resonance_level>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_building_resonance_level fid="admin_shp_building_resonance_level.2237">
+            <admin:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:32633">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        634992.01828,4503974.50451226 634981.95099906,4503980.2281148
+                                        634997.23899906,4504003.2091148 635006.55199906,4503994.4851148
+                                        634992.01828,4503974.50451226
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </admin:the_geom>
+            <admin:Age>[2]_1946_1960</admin:Age>
+            <admin:Type>Masonry</admin:Type>
+            <admin:Use>Residential</admin:Use>
+            <admin:Geology>Gravina calcarenite (tuff)</admin:Geology>
+            <admin:f0_s_w>3.803</admin:f0_s_w>
+            <admin:Danger>75 - 100 % - 216 - 5.34 %</admin:Danger>
+            <admin:Height>14.9</admin:Height>
+            <admin:f0_s>3.8</admin:f0_s>
+            <admin:f0_b>4.01</admin:f0_b>
+            <admin:Build_Name/>
+        </admin:admin_shp_building_resonance_level>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_building_resonance_level fid="admin_shp_building_resonance_level.2553">
+            <admin:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:32633">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        635004.88299906,4503925.0771148 634995.09699906,4503927.4601148
+                                        635006.87499906,4503939.9431148 635004.88299906,4503925.0771148
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </admin:the_geom>
+            <admin:Age>[2]_1946_1960</admin:Age>
+            <admin:Type>Masonry</admin:Type>
+            <admin:Use>Residential</admin:Use>
+            <admin:Geology>Gravina calcarenite (tuff)</admin:Geology>
+            <admin:f0_s_w>4.268</admin:f0_s_w>
+            <admin:Danger>100 % - 628 - 15.53 %</admin:Danger>
+            <admin:Height>16.56</admin:Height>
+            <admin:f0_s>4.27</admin:f0_s>
+            <admin:f0_b>3.61</admin:f0_b>
+            <admin:Build_Name/>
+        </admin:admin_shp_building_resonance_level>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_building_resonance_level fid="admin_shp_building_resonance_level.3233">
+            <admin:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:32633">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        634957.87499906,4503955.6841148 634967.52499906,4503964.7621148
+                                        634959.20999906,4503982.5101148 634979.61299906,4503970.3581148
+                                        634961.18899906,4503938.9541148 634957.87499906,4503955.6841148
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </admin:the_geom>
+            <admin:Age>[2]_1946_1960</admin:Age>
+            <admin:Type>Reinforced Concrete</admin:Type>
+            <admin:Use>Residential</admin:Use>
+            <admin:Geology>Gravina calcarenite (tuff)</admin:Geology>
+            <admin:f0_s_w>3.82</admin:f0_s_w>
+            <admin:Danger>100 % - 628 - 15.53 %</admin:Danger>
+            <admin:Height>16.4</admin:Height>
+            <admin:f0_s>3.82</admin:f0_s>
+            <admin:f0_b>3.64</admin:f0_b>
+            <admin:Build_Name/>
+        </admin:admin_shp_building_resonance_level>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_building_resonance_level fid="admin_shp_building_resonance_level.3657">
+            <admin:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:32633">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        634995.97699906,4503922.0541148 635008.96799906,4503943.5091148
+                                        635019.24399906,4503937.47611479 635000.50599906,4503907.2691148
+                                        634995.97699906,4503922.0541148
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </admin:the_geom>
+            <admin:Age>[2]_1946_1960</admin:Age>
+            <admin:Type>Masonry</admin:Type>
+            <admin:Use>Residential</admin:Use>
+            <admin:Geology>Gravina calcarenite (tuff)</admin:Geology>
+            <admin:f0_s_w>4.241</admin:f0_s_w>
+            <admin:Danger>100 % - 628 - 15.53 %</admin:Danger>
+            <admin:Height>15.4</admin:Height>
+            <admin:f0_s>4.24</admin:f0_s>
+            <admin:f0_b>3.88</admin:f0_b>
+            <admin:Build_Name/>
+        </admin:admin_shp_building_resonance_level>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_building_resonance_level fid="admin_shp_building_resonance_level.3898">
+            <admin:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:32633">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        634992.01828,4503956.4920044 635008.68399906,4503984.2411148
+                                        635024.96199906,4503972.9191148 634992.01828,4503956.4920044
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </admin:the_geom>
+            <admin:Age>[2]_1946_1960</admin:Age>
+            <admin:Type>Masonry</admin:Type>
+            <admin:Use>Residential</admin:Use>
+            <admin:Geology>Gravina calcarenite (tuff)</admin:Geology>
+            <admin:f0_s_w>3.945</admin:f0_s_w>
+            <admin:Danger>75 - 100 % - 216 - 5.34 %</admin:Danger>
+            <admin:Height>14.0</admin:Height>
+            <admin:f0_s>3.95</admin:f0_s>
+            <admin:f0_b>4.27</admin:f0_b>
+            <admin:Build_Name/>
+        </admin:admin_shp_building_resonance_level>
+    </gml:featureMember>
+</wfs:FeatureCollection>
